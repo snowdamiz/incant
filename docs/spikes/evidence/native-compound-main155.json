@@ -1,0 +1,2501 @@
+{
+  "at": "2026-10-12T18:29:22.690556+00:00",
+  "scope": "Reviewed compound animation state fades integrated with actual main155; local CPU/actual Wasm host checks and a fresh ordinary source-free shipping package with checkpoint continuation.",
+  "tested_head": "ca08565e961700bb0b6884fad1dce927c36ac329",
+  "tested_tree": "540bc2147d0e2f30eb24baedc889e1bac7bbd7e1",
+  "main": "fca5d5fe714748215fc285d24b998d33f6655fc1",
+  "producer": "44cd390f6ebd1972d21b3de1530c0cf287991dae",
+  "frozen_inputs": 1754,
+  "checks": [
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_render",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 91.33633766599996,
+      "sha256": "030305f54412fc2491d7d149380df602571ec0ba6c7fcf9ec1d74e96838f278b"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 37.931830999999875,
+      "sha256": "fbc7313fb8ec841b4505a5b1e17216c0f7767500ecd09a2ce17283a484c6a7ee"
+    },
+    {
+      "name": "wasm",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 6.568301749999591,
+      "sha256": "0f8aa0c6737f713558e26cfbdc1d456191a0fd3979ddb37e0f4616596a93a593"
+    },
+    {
+      "name": "graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_render",
+        "incant_wasm_runtime",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/static-module,incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 1.1232203340005071,
+      "sha256": "b935d78d242ef12f3a814a42da0b0cc101a042a17bb95b46437e8bf6ce8d3a30"
+    },
+    {
+      "name": "generated",
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.31355933300073957,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "sdk",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.07786200000009558,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.14364570900033868,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "typescript",
+      "command": [
+        "/Users/andreyyurlov/Documents/dev/incant/node_modules/.bin/tsc",
+        "--noEmit",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.7262427080004272,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.4199719579992234,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.06584691599891812,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tools",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "exit": 0,
+      "seconds": 30.364204540999708,
+      "sha256": "c6ba770a3573f7981b140dda16416ced6106e98645e1afa810e16d53542b1370"
+    },
+    {
+      "name": "conformance",
+      "command": [
+        "python3",
+        "tools/probes/shipping-wasm2c.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance",
+        "--rustup",
+        "/opt/homebrew/bin/rustup",
+        "--profile",
+        "ci",
+        "--conformance-only"
+      ],
+      "exit": 0,
+      "seconds": 480.54187566700057,
+      "sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--features",
+        "wasmtime-host"
+      ],
+      "exit": 0,
+      "seconds": 84.0122817499996,
+      "sha256": "18480453430159185d06719408249b6ba87de087d2a2c093d634ed549e80618b"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.036877124999591615,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "public-export",
+      "command": [
+        "python3",
+        "tools/probes/native-compound-animation-export.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 418.49178333300006,
+      "sha256": "f9ebdd7965bb0e4862442d42dd41126d738a70fb5c8c7a18b2f0cb41a8a35d45"
+    }
+  ],
+  "verified_results": {
+    "at": "2026-10-12T18:29:14.115961+00:00",
+    "frozen_head": "ca08565e961700bb0b6884fad1dce927c36ac329",
+    "main": "fca5d5fe714748215fc285d24b998d33f6655fc1",
+    "inputs": 1754,
+    "zero_exit_top_level_commands": 15,
+    "cpu_tests": {
+      "passed": 766,
+      "failed": 0,
+      "ignored": 82,
+      "groups": 115
+    },
+    "actual_host_tests": {
+      "passed": 420,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 74
+    },
+    "fresh_full_processes": 3,
+    "continuation_pairs": 10,
+    "typed_refusals": 2,
+    "source_comparison": {
+      "crates/incant_assets/tests/skeletal.rs": {
+        "accepted_sha256": "2309c31ff9b2ababccb73040fa91a5aa1a1cf7dafb52159352ad262e5d910833",
+        "integrated_sha256": "2309c31ff9b2ababccb73040fa91a5aa1a1cf7dafb52159352ad262e5d910833",
+        "identical": true
+      },
+      "crates/incant_assets/tests/skeletal/blending.rs": {
+        "accepted_sha256": "02285e886865716e620cae7c7bd7077908e8b68c2eadfa1c334469edd08b6d11",
+        "integrated_sha256": "02285e886865716e620cae7c7bd7077908e8b68c2eadfa1c334469edd08b6d11",
+        "identical": true
+      },
+      "crates/incant_assets/tests/skeletal/grouped.rs": {
+        "accepted_sha256": "5b22df5c2a6752e0201c3f3f0acbce852466dba031d365b523df155946caff77",
+        "integrated_sha256": "5b22df5c2a6752e0201c3f3f0acbce852466dba031d365b523df155946caff77",
+        "identical": true
+      },
+      "crates/incant_assets/tests/skeletal/ik.rs": {
+        "accepted_sha256": "282a60187b9bcd4b4d8deef5b1684ce65dd5e136de71027ff8fe5c198009cf26",
+        "integrated_sha256": "282a60187b9bcd4b4d8deef5b1684ce65dd5e136de71027ff8fe5c198009cf26",
+        "identical": true
+      },
+      "crates/incant_assets_runtime/src/animation/grouped.rs": {
+        "accepted_sha256": "2f526dba4be905c2fa17471044b3a1dd19a5a7dfd9ab2b9225b6103fc485f369",
+        "integrated_sha256": "2f526dba4be905c2fa17471044b3a1dd19a5a7dfd9ab2b9225b6103fc485f369",
+        "identical": true
+      },
+      "crates/incant_assets_runtime/src/animation/ik.rs": {
+        "accepted_sha256": "dfbc670f73663f4a3cda4a114f78ae3617125e5f451e6a7193d763ad3fbe4b6b",
+        "integrated_sha256": "dfbc670f73663f4a3cda4a114f78ae3617125e5f451e6a7193d763ad3fbe4b6b",
+        "identical": true
+      },
+      "crates/incant_assets_runtime/src/animation/mod.rs": {
+        "accepted_sha256": "7f32fb54096df9699d3275c56c443209a62fb09d0e5e29270e02d8a5bdbeda34",
+        "integrated_sha256": "322fbef0d5c6f18c2bb4c5fe735237923fd25dcb8c31201aed6982311e163b79",
+        "identical": false
+      },
+      "crates/incant_assets_runtime/src/animation/pipeline.rs": {
+        "accepted_sha256": "35af23ceea2fb32890abb0b058bcb235e9d98d665f8a53d4ef63d695bb608739",
+        "integrated_sha256": "35af23ceea2fb32890abb0b058bcb235e9d98d665f8a53d4ef63d695bb608739",
+        "identical": true
+      },
+      "crates/incant_assets_runtime/src/animation/player.rs": {
+        "accepted_sha256": "b06ca3fcc1b8cf510cdf0f447a234bd57dfe9df05f13e6deb722af0137260cf3",
+        "integrated_sha256": "b06ca3fcc1b8cf510cdf0f447a234bd57dfe9df05f13e6deb722af0137260cf3",
+        "identical": true
+      },
+      "crates/incant_assets_runtime/src/animation/weighted.rs": {
+        "accepted_sha256": "2cd759c1430bbe5c5e2e2cc24aaee8eddf6e7b27e82fd02ab1042667ba7cf324",
+        "integrated_sha256": "2cd759c1430bbe5c5e2e2cc24aaee8eddf6e7b27e82fd02ab1042667ba7cf324",
+        "identical": true
+      },
+      "crates/incant_cmd/tests/animation.rs": {
+        "accepted_sha256": "9a6c74f2be45dbb298ec418c5a4ab51bdeb2f36afe0d604808b1b0ffb95c47ef",
+        "integrated_sha256": "9a6c74f2be45dbb298ec418c5a4ab51bdeb2f36afe0d604808b1b0ffb95c47ef",
+        "identical": true
+      },
+      "crates/incant_cook/src/animation.rs": {
+        "accepted_sha256": "077fa16658e062f94e76a2baed8757e9561aad970be28562e7628ea6abc080c4",
+        "integrated_sha256": "077fa16658e062f94e76a2baed8757e9561aad970be28562e7628ea6abc080c4",
+        "identical": true
+      },
+      "crates/incant_cook/src/animation_ik.rs": {
+        "accepted_sha256": "9b8e9f8b6b2549d9c4a876755a6d7ec09def248153a7ea0d1df764a580c4a543",
+        "integrated_sha256": "9b8e9f8b6b2549d9c4a876755a6d7ec09def248153a7ea0d1df764a580c4a543",
+        "identical": true
+      },
+      "crates/incant_cook/src/scene.rs": {
+        "accepted_sha256": "81086cc1264617065556088a9d58700576191cf51899a8848f1a41ba24cb2d1d",
+        "integrated_sha256": "81086cc1264617065556088a9d58700576191cf51899a8848f1a41ba24cb2d1d",
+        "identical": true
+      },
+      "crates/incant_cook/src/spatial.rs": {
+        "accepted_sha256": "fa9281c50770b42f204f11b98ad796629a72f36748ad661825a55965a4bcfcfe",
+        "integrated_sha256": "fa9281c50770b42f204f11b98ad796629a72f36748ad661825a55965a4bcfcfe",
+        "identical": true
+      },
+      "crates/incant_cook/tests/animation.rs": {
+        "accepted_sha256": "1503614c41328d60bb9a53437de61579e384528a9f19f201b001de8045a0f8ec",
+        "integrated_sha256": "1503614c41328d60bb9a53437de61579e384528a9f19f201b001de8045a0f8ec",
+        "identical": true
+      },
+      "crates/incant_cook/tests/animation/ik.rs": {
+        "accepted_sha256": "aa649d07d465d23f795fa4f89b73f5324f3aa93197d968ca388424b8f6199138",
+        "integrated_sha256": "aa649d07d465d23f795fa4f89b73f5324f3aa93197d968ca388424b8f6199138",
+        "identical": true
+      },
+      "crates/incant_doc/src/lib.rs": {
+        "accepted_sha256": "3396dcea898971b2c15fab9d9109ac0af3c09bf4f09133dc6fcb41925d9c2057",
+        "integrated_sha256": "3396dcea898971b2c15fab9d9109ac0af3c09bf4f09133dc6fcb41925d9c2057",
+        "identical": true
+      },
+      "crates/incant_render/src/animation_grouped_tests.rs": {
+        "accepted_sha256": "8191fe4d783ec6e8f50dc8bd4b5f3be24ec75a5318dcb7f2e5025be862c3e9fc",
+        "integrated_sha256": "8191fe4d783ec6e8f50dc8bd4b5f3be24ec75a5318dcb7f2e5025be862c3e9fc",
+        "identical": true
+      },
+      "crates/incant_render/src/animation_ik_tests.rs": {
+        "accepted_sha256": "db0384fe2a18bfc996a3182a2ad11e8c2850639bc6c0568dc598f754fa7da8c2",
+        "integrated_sha256": "db0384fe2a18bfc996a3182a2ad11e8c2850639bc6c0568dc598f754fa7da8c2",
+        "identical": true
+      },
+      "crates/incant_render/src/animation_tests.rs": {
+        "accepted_sha256": "c886085fe58af937eae97a9ab661d9f673a7b5c18866762e3e9f142b422bc3ad",
+        "integrated_sha256": "c886085fe58af937eae97a9ab661d9f673a7b5c18866762e3e9f142b422bc3ad",
+        "identical": true
+      },
+      "crates/incant_render/src/flipbook_tests.rs": {
+        "accepted_sha256": "abe64e9c87b590314f58ce03e9b46f3a358a8c3deb31e808665447ee0d17fba0",
+        "integrated_sha256": "abe64e9c87b590314f58ce03e9b46f3a358a8c3deb31e808665447ee0d17fba0",
+        "identical": true
+      },
+      "crates/incant_render/src/models/animation.rs": {
+        "accepted_sha256": "36cba5fea9fae1096b727689234a16481908d8d05e89f25569ab67f499992ef3",
+        "integrated_sha256": "36cba5fea9fae1096b727689234a16481908d8d05e89f25569ab67f499992ef3",
+        "identical": true
+      },
+      "crates/incant_render/src/retained.rs": {
+        "accepted_sha256": "b857ef9c87c1678b81d8dcc444646dcd6d1b35bc8d342c84cdaab53edf46ba62",
+        "integrated_sha256": "b857ef9c87c1678b81d8dcc444646dcd6d1b35bc8d342c84cdaab53edf46ba62",
+        "identical": true
+      },
+      "crates/incant_render/src/retained_tilemap_tests.rs": {
+        "accepted_sha256": "8ebb07fc1cac5e0dc46ff8149241b07f82708d2399522a13bbc37fd78dce4bff",
+        "integrated_sha256": "8ebb07fc1cac5e0dc46ff8149241b07f82708d2399522a13bbc37fd78dce4bff",
+        "identical": true
+      },
+      "crates/incant_render/src/scene.rs": {
+        "accepted_sha256": "88de893bbd852b7b59ac70b4552f02eaee2355b78f37f5640faffa421c1f23e0",
+        "integrated_sha256": "88de893bbd852b7b59ac70b4552f02eaee2355b78f37f5640faffa421c1f23e0",
+        "identical": true
+      },
+      "crates/incant_render/src/version_tests.rs": {
+        "accepted_sha256": "c93f222c66a18348fb7d583fb9a861859934885ba357909584e1abc24a970b1a",
+        "integrated_sha256": "c93f222c66a18348fb7d583fb9a861859934885ba357909584e1abc24a970b1a",
+        "identical": true
+      },
+      "crates/incant_render_authoring/src/lib.rs": {
+        "accepted_sha256": "2dc6d4fb8498fcef06d33df67554c04ba164898d8efc9415314ba0e5b5e56196",
+        "integrated_sha256": "2dc6d4fb8498fcef06d33df67554c04ba164898d8efc9415314ba0e5b5e56196",
+        "identical": true
+      },
+      "crates/incant_render_data/src/lib.rs": {
+        "accepted_sha256": "ad4b8d616ac781887c216f7ae87e030055212ee10484224f882425d01bd48553",
+        "integrated_sha256": "ad4b8d616ac781887c216f7ae87e030055212ee10484224f882425d01bd48553",
+        "identical": true
+      },
+      "crates/incant_render_native/src/animation.rs": {
+        "accepted_sha256": "00c675a24fd09fea67951229109749dc05fcd0b45e78a05e233f2f53a9691eef",
+        "integrated_sha256": "00c675a24fd09fea67951229109749dc05fcd0b45e78a05e233f2f53a9691eef",
+        "identical": true
+      },
+      "crates/incant_render_native/src/binding.rs": {
+        "accepted_sha256": "7b1d1e41776cf5860536be255c4761149efbaae74df76d6c2cb1a876016e85d7",
+        "integrated_sha256": "7b1d1e41776cf5860536be255c4761149efbaae74df76d6c2cb1a876016e85d7",
+        "identical": true
+      },
+      "crates/incant_render_native/src/lib.rs": {
+        "accepted_sha256": "87f2f2a42baa8ecb872795eb3a7ff63316ffe4bf2dd63dcc260c7798c8590cf7",
+        "integrated_sha256": "87f2f2a42baa8ecb872795eb3a7ff63316ffe4bf2dd63dcc260c7798c8590cf7",
+        "identical": true
+      },
+      "crates/incant_render_native/src/update.rs": {
+        "accepted_sha256": "80a3670837eff27ac51d339eedb1549c0a34a437d78adfe9058f65aeaaeb2dd3",
+        "integrated_sha256": "80a3670837eff27ac51d339eedb1549c0a34a437d78adfe9058f65aeaaeb2dd3",
+        "identical": true
+      },
+      "crates/incant_render_native/tests/animation.rs": {
+        "accepted_sha256": "0454950148f57e4693b6cbd7c9444a1260178ff21fb45e839d16041be2f6f50f",
+        "integrated_sha256": "0454950148f57e4693b6cbd7c9444a1260178ff21fb45e839d16041be2f6f50f",
+        "identical": true
+      },
+      "crates/incant_render_native/tests/animation/ik.rs": {
+        "accepted_sha256": "3d6a019b8b2a6a241b7c33f4f4c52cdc131e4135bdcb058bd79077f720bb42cc",
+        "integrated_sha256": "3d6a019b8b2a6a241b7c33f4f4c52cdc131e4135bdcb058bd79077f720bb42cc",
+        "identical": true
+      },
+      "crates/incant_runtime/src/animation.rs": {
+        "accepted_sha256": "fccbd5c1d0448b2ac0c323269bc8a96f5f0b14bbbec85da3d5f7ffaea89b2e46",
+        "integrated_sha256": "fccbd5c1d0448b2ac0c323269bc8a96f5f0b14bbbec85da3d5f7ffaea89b2e46",
+        "identical": true
+      },
+      "crates/incant_runtime/src/animation_graph/binary.rs": {
+        "accepted_sha256": "76f687fcbc6e19125cddac73cd524566dcdb0515621a99b0411d4645a73ea32c",
+        "integrated_sha256": "76f687fcbc6e19125cddac73cd524566dcdb0515621a99b0411d4645a73ea32c",
+        "identical": true
+      },
+      "crates/incant_runtime/src/animation_graph/definition.rs": {
+        "accepted_sha256": "f8286729b3798be33b71935a159c79e0104b226bfab49041172f5acaa8558220",
+        "integrated_sha256": "f8286729b3798be33b71935a159c79e0104b226bfab49041172f5acaa8558220",
+        "identical": true
+      },
+      "crates/incant_runtime/src/animation_graph/fade.rs": {
+        "accepted_sha256": "909ef41eb31f864c1074cc167bc3cbe7bdbc0acb4b82d2a2af4796f0a52c03f0",
+        "integrated_sha256": "909ef41eb31f864c1074cc167bc3cbe7bdbc0acb4b82d2a2af4796f0a52c03f0",
+        "identical": true
+      },
+      "crates/incant_runtime/src/animation_graph/mod.rs": {
+        "accepted_sha256": "3cfc3f1530276aa82e42e09d645e6ff969251328e178952b6d849f879b5a99b0",
+        "integrated_sha256": "3cfc3f1530276aa82e42e09d645e6ff969251328e178952b6d849f879b5a99b0",
+        "identical": true
+      },
+      "crates/incant_runtime/src/animation_graph/motion.rs": {
+        "accepted_sha256": "724e294490628dcb7c838dfbc20b71f9102654eca36b3e687ecd52e6941f6d7d",
+        "integrated_sha256": "724e294490628dcb7c838dfbc20b71f9102654eca36b3e687ecd52e6941f6d7d",
+        "identical": true
+      },
+      "crates/incant_runtime/src/animation_graph/playback.rs": {
+        "accepted_sha256": "4524447b229d41171551c2b5b609f90ee1aef567f8094804d2e379686f076dbc",
+        "integrated_sha256": "4524447b229d41171551c2b5b609f90ee1aef567f8094804d2e379686f076dbc",
+        "identical": true
+      },
+      "crates/incant_runtime/src/binary.rs": {
+        "accepted_sha256": "204cd7e3eae8fbf7e7cf309900ea137f6d1d1a06c2f4d6d2dfcb66eb58caea75",
+        "integrated_sha256": "204cd7e3eae8fbf7e7cf309900ea137f6d1d1a06c2f4d6d2dfcb66eb58caea75",
+        "identical": true
+      },
+      "crates/incant_runtime/src/commands.rs": {
+        "accepted_sha256": "d1fcad13818cfdf6661e618cc08aa04d1ee181d3b151b7201005120976b09d53",
+        "integrated_sha256": "d1fcad13818cfdf6661e618cc08aa04d1ee181d3b151b7201005120976b09d53",
+        "identical": true
+      },
+      "crates/incant_runtime/src/ik.rs": {
+        "accepted_sha256": "24ca204889d8179e832d7d250afb27a871f3dfe8d2e9101c3a1bce72e148818b",
+        "integrated_sha256": "24ca204889d8179e832d7d250afb27a871f3dfe8d2e9101c3a1bce72e148818b",
+        "identical": true
+      },
+      "crates/incant_runtime/src/ik_binary.rs": {
+        "accepted_sha256": "8a7a5e2560066d25c1dc75f6b019fd7c8c6296b978c8b3fb061aa12f8f6547c8",
+        "integrated_sha256": "8a7a5e2560066d25c1dc75f6b019fd7c8c6296b978c8b3fb061aa12f8f6547c8",
+        "identical": true
+      },
+      "crates/incant_runtime/src/lib.rs": {
+        "accepted_sha256": "eb845d6f0d24ec4386f7cb1cad73dc80f8c90c0fbc2a7ba9acf77867f30a1f78",
+        "integrated_sha256": "eb845d6f0d24ec4386f7cb1cad73dc80f8c90c0fbc2a7ba9acf77867f30a1f78",
+        "identical": true
+      },
+      "crates/incant_runtime/src/save.rs": {
+        "accepted_sha256": "cc8aa55e3923466d1a1eb8e28b43ddaa5e47385159998da5b261262a3d9aa3c0",
+        "integrated_sha256": "cc8aa55e3923466d1a1eb8e28b43ddaa5e47385159998da5b261262a3d9aa3c0",
+        "identical": true
+      },
+      "crates/incant_runtime/src/save/codec.rs": {
+        "accepted_sha256": "94082c1e4eea47660c6240f80b8d2b4eb7cb43c9c0df0286e586e3227ae70e53",
+        "integrated_sha256": "94082c1e4eea47660c6240f80b8d2b4eb7cb43c9c0df0286e586e3227ae70e53",
+        "identical": true
+      },
+      "crates/incant_runtime/src/save/graph_fade.rs": {
+        "accepted_sha256": "0c67745f57bbf271c8cd55c55d8142013abd9ac2f918b057ad6038459cdbd01e",
+        "integrated_sha256": "0c67745f57bbf271c8cd55c55d8142013abd9ac2f918b057ad6038459cdbd01e",
+        "identical": true
+      },
+      "crates/incant_runtime/src/save/ik.rs": {
+        "accepted_sha256": "02c6b934b02800179177580da1b8a88cb43a75e49645b2e5fee567066d285cc6",
+        "integrated_sha256": "02c6b934b02800179177580da1b8a88cb43a75e49645b2e5fee567066d285cc6",
+        "identical": true
+      },
+      "crates/incant_runtime/src/scene.rs": {
+        "accepted_sha256": "d7c97cd7fb2b3186140a211c5a277d06901a28906d370d82fdb25ef291f1af76",
+        "integrated_sha256": "d7c97cd7fb2b3186140a211c5a277d06901a28906d370d82fdb25ef291f1af76",
+        "identical": true
+      },
+      "crates/incant_runtime/src/spatial.rs": {
+        "accepted_sha256": "d808a8a9f86842cf52f8fdb8d684cca292e0c49cb5e237766f703968ad5ee076",
+        "integrated_sha256": "d808a8a9f86842cf52f8fdb8d684cca292e0c49cb5e237766f703968ad5ee076",
+        "identical": true
+      },
+      "crates/incant_runtime/src/spatial_binary.rs": {
+        "accepted_sha256": "0254a27808e996f98c0edbe6b64b95a6ea55be83acf2f2df468a8d6fc583ef98",
+        "integrated_sha256": "0254a27808e996f98c0edbe6b64b95a6ea55be83acf2f2df468a8d6fc583ef98",
+        "identical": true
+      },
+      "crates/incant_runtime/src/spatial_view.rs": {
+        "accepted_sha256": "4fde15dc41e961d2a953bc6f5af223438f8e453a5482c86c2551da0407d9e9bf",
+        "integrated_sha256": "4fde15dc41e961d2a953bc6f5af223438f8e453a5482c86c2551da0407d9e9bf",
+        "identical": true
+      },
+      "crates/incant_runtime/src/world.rs": {
+        "accepted_sha256": "aff382f257cff12c4bee5c3aecf9e697daf6dccee3a23d8076c58f3868c31e43",
+        "integrated_sha256": "aff382f257cff12c4bee5c3aecf9e697daf6dccee3a23d8076c58f3868c31e43",
+        "identical": true
+      },
+      "crates/incant_runtime/tests/animation.rs": {
+        "accepted_sha256": "9215cbaca5979b56b3e7dee6387833d70f124275e4941beb3ae8f66ce1524516",
+        "integrated_sha256": "9215cbaca5979b56b3e7dee6387833d70f124275e4941beb3ae8f66ce1524516",
+        "identical": true
+      },
+      "crates/incant_runtime/tests/animation_graph.rs": {
+        "accepted_sha256": "48a59bcb784746a3790cbec7e00ecd908579f3a8cc46082bde80702e194e0abb",
+        "integrated_sha256": "48a59bcb784746a3790cbec7e00ecd908579f3a8cc46082bde80702e194e0abb",
+        "identical": true
+      },
+      "crates/incant_runtime/tests/animation_graph/fades.rs": {
+        "accepted_sha256": "dd6ee1bf944dca0f00e7b27c03d521ef2787d3a482b47c4365ccb15820d7fac9",
+        "integrated_sha256": "dd6ee1bf944dca0f00e7b27c03d521ef2787d3a482b47c4365ccb15820d7fac9",
+        "identical": true
+      },
+      "crates/incant_runtime/tests/ik.rs": {
+        "accepted_sha256": "6d342bc8f0d146a71fc7acc28f4d79ea9ff09c2d651f5453f0cc08a8c99a2e17",
+        "integrated_sha256": "6d342bc8f0d146a71fc7acc28f4d79ea9ff09c2d651f5453f0cc08a8c99a2e17",
+        "identical": true
+      },
+      "crates/incant_runtime/tests/ik/alloc.rs": {
+        "accepted_sha256": "21ebc74c2efa260ff90ce029b006924dc910bc31813b8ee6528d684c8e70f1f2",
+        "integrated_sha256": "21ebc74c2efa260ff90ce029b006924dc910bc31813b8ee6528d684c8e70f1f2",
+        "identical": true
+      },
+      "crates/incant_script/build.rs": {
+        "accepted_sha256": "24de4f8a03a7e237249c4c41398097d1c23065268697c9228a26009ec4482f49",
+        "integrated_sha256": "24de4f8a03a7e237249c4c41398097d1c23065268697c9228a26009ec4482f49",
+        "identical": true
+      },
+      "crates/incant_script/src/animation_graphs.rs": {
+        "accepted_sha256": "d17cc2720ea491eeee42cb348c25946312704d20d0c214d1095635eed145110c",
+        "integrated_sha256": "d17cc2720ea491eeee42cb348c25946312704d20d0c214d1095635eed145110c",
+        "identical": true
+      },
+      "crates/incant_script/src/animation_ik.rs": {
+        "accepted_sha256": "99018222a4b5d1344fb05c9e7e2b97ffa9903f3e410d45b30cff0b1f6b65cfb9",
+        "integrated_sha256": "99018222a4b5d1344fb05c9e7e2b97ffa9903f3e410d45b30cff0b1f6b65cfb9",
+        "identical": true
+      },
+      "crates/incant_script/src/animations.rs": {
+        "accepted_sha256": "afd472a1157d1b4fd225e14f009380c210e59c1ac1b058608cb5568490ad2356",
+        "integrated_sha256": "afd472a1157d1b4fd225e14f009380c210e59c1ac1b058608cb5568490ad2356",
+        "identical": true
+      },
+      "crates/incant_script/src/checkpoint/pending.rs": {
+        "accepted_sha256": "c35c9940084ae64945ffcb0e492997c3335abe9d4ff01c7b3f2da49371a4983a",
+        "integrated_sha256": "efcd62372ec3cafd8033ce378da6a4374e14f21058126865f9d46e4e80eca0d5",
+        "identical": false
+      },
+      "crates/incant_script/src/checkpoint/tests/animation.rs": {
+        "accepted_sha256": "b929defa3423e5009bf7abe9fb7ccd062b9c0eacd5ffe1219a5ea216a9e44e78",
+        "integrated_sha256": "e58812275861e559c22a243d8cbf65d584e19024ed1ec6f3c5c77b052d5b941a",
+        "identical": false
+      },
+      "crates/incant_script/src/commands.rs": {
+        "accepted_sha256": "217f7f91969cfea83821397f262a3ef67ce68b1ef45fc319ab02c5de38bf8b3a",
+        "integrated_sha256": "217f7f91969cfea83821397f262a3ef67ce68b1ef45fc319ab02c5de38bf8b3a",
+        "identical": true
+      },
+      "crates/incant_script/src/lib.rs": {
+        "accepted_sha256": "abf0cde3a314f858e15b80175b0510148a513396d68b862ad56779adf226db56",
+        "integrated_sha256": "abf0cde3a314f858e15b80175b0510148a513396d68b862ad56779adf226db56",
+        "identical": true
+      },
+      "crates/incant_script/tests/animations.rs": {
+        "accepted_sha256": "6628489a8a6f57693291e08e01c003d5bc7f62f99fa802bf49c06b2a93b2caac",
+        "integrated_sha256": "6628489a8a6f57693291e08e01c003d5bc7f62f99fa802bf49c06b2a93b2caac",
+        "identical": true
+      },
+      "crates/incant_script/tests/animations/graph.rs": {
+        "accepted_sha256": "5eb0d3de81c0ad98bd619eb84b8d5609549db9d94c4507af4b18d0b033b2979e",
+        "integrated_sha256": "5eb0d3de81c0ad98bd619eb84b8d5609549db9d94c4507af4b18d0b033b2979e",
+        "identical": true
+      },
+      "crates/incant_script/tests/animations/ik.rs": {
+        "accepted_sha256": "d7d7982643d2745814f6015f7435a8b274b39c185297976ddcd6875b6876bd61",
+        "integrated_sha256": "d7d7982643d2745814f6015f7435a8b274b39c185297976ddcd6875b6876bd61",
+        "identical": true
+      },
+      "crates/incant_types/src/animation_graph.rs": {
+        "accepted_sha256": "1c0f2f1dde550cfb7dc3a1bb77754e3b831d153a7dfd08c8459e52398d1734b7",
+        "integrated_sha256": "1c0f2f1dde550cfb7dc3a1bb77754e3b831d153a7dfd08c8459e52398d1734b7",
+        "identical": true
+      },
+      "crates/incant_types/src/animation_ik.rs": {
+        "accepted_sha256": "544f79d56077781ba72440f19757ce1d411e3d2bf3a9da20406280ace0734f7c",
+        "integrated_sha256": "544f79d56077781ba72440f19757ce1d411e3d2bf3a9da20406280ace0734f7c",
+        "identical": true
+      },
+      "crates/incant_types/src/animation_pose.rs": {
+        "accepted_sha256": "ec156ea7c597051ee361e1aea612e49451904e7fd9c7465981927480ecd13f37",
+        "integrated_sha256": "ec156ea7c597051ee361e1aea612e49451904e7fd9c7465981927480ecd13f37",
+        "identical": true
+      },
+      "crates/incant_types/src/animation_pose/grouped.rs": {
+        "accepted_sha256": "dfcc415cc270e268b63b3b545f278cb192197e8cd650e97eb441e88b5fc208ae",
+        "integrated_sha256": "dfcc415cc270e268b63b3b545f278cb192197e8cd650e97eb441e88b5fc208ae",
+        "identical": true
+      },
+      "crates/incant_types/src/lib.rs": {
+        "accepted_sha256": "63da935cc7741ad07e4adab5ea8d143522784272122a2d123700aecd10ba1e56",
+        "integrated_sha256": "63da935cc7741ad07e4adab5ea8d143522784272122a2d123700aecd10ba1e56",
+        "identical": true
+      },
+      "crates/incant_wasm_runtime/src/animation_poses.rs": {
+        "accepted_sha256": "8429b5f12484eeadb073b67db8f9b04aa066aefbd97f8a0cc0d2b45178f6a543",
+        "integrated_sha256": "8429b5f12484eeadb073b67db8f9b04aa066aefbd97f8a0cc0d2b45178f6a543",
+        "identical": true
+      },
+      "crates/incant_wasm_runtime/src/capability.rs": {
+        "accepted_sha256": "35b942c39929a4b4d2f2ac4afe0f61ed6a6f914cbfaa646842ce53b852551b76",
+        "integrated_sha256": "ca033c5b71ea34423ad1bfdf623ea4eb7ae01d82d3a8d086c5b10bdd7f38f090",
+        "identical": false
+      },
+      "crates/incant_wasm_runtime/tests/animations.rs": {
+        "accepted_sha256": "c1ffe62a658c4181b8120d7f3a43a036d50f697c13f841a7ec90c5b1d44d4f32",
+        "integrated_sha256": "c1ffe62a658c4181b8120d7f3a43a036d50f697c13f841a7ec90c5b1d44d4f32",
+        "identical": true
+      },
+      "crates/incant_wasm_runtime/tests/animations/grouped.rs": {
+        "accepted_sha256": "4f79dbe06a9cfb9e6d9bf86b3678098dab608b9a571ecd5b814caf5920ef0442",
+        "integrated_sha256": "9424fb4a16480e4824b23abf306afa615c9708bbb64858dd7be01d25e9532e89",
+        "identical": false
+      },
+      "crates/incant_wasm_runtime/tests/animations/ik.rs": {
+        "accepted_sha256": "54f7aa77e91eb5707bc81c6a397cb92aaca42f336d4e23051501747d76137d61",
+        "integrated_sha256": "7a6c5756438f19bc1960e596e1a859b8f8c9e54c498f65d83d1fd580ae2961f7",
+        "identical": false
+      },
+      "sdk/ts/src/generated.d.ts": {
+        "accepted_sha256": "9a9f34641e9e992c546955f937b4e2ca8405000e599960a49b9a85257c9d720d",
+        "integrated_sha256": "9a9f34641e9e992c546955f937b4e2ca8405000e599960a49b9a85257c9d720d",
+        "identical": true
+      },
+      "sdk/ts/src/native.d.ts": {
+        "accepted_sha256": "c07475c3fdb48d484d9eecc6d4aa9f5dbd0949213299ac4ae1ea24b58a96a942",
+        "integrated_sha256": "c07475c3fdb48d484d9eecc6d4aa9f5dbd0949213299ac4ae1ea24b58a96a942",
+        "identical": true
+      },
+      "tools/probes/native-animation-ik-export.py": {
+        "accepted_sha256": "fe95748fcfee430fd9713a2658fa32591606f4bda3dba9eadbcc431c30fe3715",
+        "integrated_sha256": "fe95748fcfee430fd9713a2658fa32591606f4bda3dba9eadbcc431c30fe3715",
+        "identical": true
+      },
+      "tools/probes/native-animation-ik-export/behavior.ts": {
+        "accepted_sha256": "d976fefd9aa3e79a6c502d8366402e7289fe8658766de73ceaa64c3b508515aa",
+        "integrated_sha256": "d976fefd9aa3e79a6c502d8366402e7289fe8658766de73ceaa64c3b508515aa",
+        "identical": true
+      },
+      "tools/probes/native-compound-animation-export.py": {
+        "accepted_sha256": "d2ceddf70347cd4c7c9d7d35b9070c88174e7cb84c6c521bab003dbe26172aff",
+        "integrated_sha256": "d2ceddf70347cd4c7c9d7d35b9070c88174e7cb84c6c521bab003dbe26172aff",
+        "identical": true
+      },
+      "tools/probes/native-compound-animation-export/behavior.ts": {
+        "accepted_sha256": "09a11a4eecc65a314c09cc611a38106ed912b490cb7051d8dc9e88282bf1ec05",
+        "integrated_sha256": "09a11a4eecc65a314c09cc611a38106ed912b490cb7051d8dc9e88282bf1ec05",
+        "identical": true
+      }
+    },
+    "runtime_file_count": 7,
+    "public_package_result_sha256": "1450fe20b3d4e1da9f6bffaff99f92bf954b25dda97dee4d3e19a2af608bda7b",
+    "limits": [
+      "CPU and ordinary shipping evidence only; GPU/window/device tests not run.",
+      "Legacy Wasm protocols retain explicit compound refusal; new compound ABI is a separate future intake.",
+      "Historical source diagnostics and cross-checkout stale wasm cache failures are retained; wasm recovery used scoped package cleanup on a private clone."
+    ]
+  },
+  "evidence_directory": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003",
+  "artifacts": {
+    "audit-correction.json": {
+      "sha256": "323a5c7163c584c75e4c2ddf309b9f1952958a7895c6d3678d3ca20894b634c5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/audit-correction.json"
+    },
+    "audit-initial.log.gz": {
+      "sha256": "4354cf773b0d67b42e18a7cb2ce18c11a541e8522983e2092572b67214d42a7c",
+      "uncompressed_sha256": "0aac719450b96709b94d4e8342cff2e7e45b25e0f59917acb9ffcbe28581b37a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/audit-initial.log"
+    },
+    "bridge.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/bridge.log"
+    },
+    "conformance.log.gz": {
+      "sha256": "1da3ae640d1d5b56e48252081c725236b9535bafb8259d62cba4a2f1bb27d33a",
+      "uncompressed_sha256": "574af3621e3ea33f4f833844525fcf843cf3d6fd0f8b4c4cda3bea2cebb4805b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance.log"
+    },
+    "continuation.json": {
+      "sha256": "1f88f7237cc4467cb000b1bafedfc7e33c86dd0b8d4b2907a93057b7216182fc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/continuation.json"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conventions.log"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/diff.log"
+    },
+    "fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/fmt.log"
+    },
+    "freeze.json": {
+      "sha256": "ce29ba7b5163a591cc74625ca9f9e9f1d8293caf3811c2e2f560ca86d3e48cba",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/freeze.json"
+    },
+    "generated.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/generated.log"
+    },
+    "graph.log.gz": {
+      "sha256": "68699dde7b579856b29ee8b263b31032c5e4110dd2027fafecdd755a0ff8c733",
+      "uncompressed_sha256": "b935d78d242ef12f3a814a42da0b0cc101a042a17bb95b46437e8bf6ce8d3a30",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/graph.log"
+    },
+    "headless.json": {
+      "sha256": "52f9221eea0e0b41563c12690ceaea11d89fa8d104bbff65107ec5e2d170142a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/headless.json"
+    },
+    "headless.log.gz": {
+      "sha256": "e7949c2258885ffc274b023668673bde110e6091b601dead98358035e4322f65",
+      "uncompressed_sha256": "18480453430159185d06719408249b6ba87de087d2a2c093d634ed549e80618b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/headless.log"
+    },
+    "integration-source-comparison.json": {
+      "sha256": "e2df59f042a3b7c09def25a9ffc3a4c2bad69447193b156346549501ca5e3054",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/integration-source-comparison.json"
+    },
+    "proof-verification.json": {
+      "sha256": "b7f96375381d5427e144099fcebbeb1712e656e1cb61d95de7d157698dd8c04d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/proof-verification.json"
+    },
+    "public-export.log.gz": {
+      "sha256": "f5014f3e03d57002fcc346ad4bbb60eff95c04a74befe1395a9788e2a4360765",
+      "uncompressed_sha256": "f9ebdd7965bb0e4862442d42dd41126d738a70fb5c8c7a18b2f0cb41a8a35d45",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export.log"
+    },
+    "results.json": {
+      "sha256": "ab12a37bb8e13e285fbc469a37c3ed6312978b1b372cd2e5bcc2fe8139c8171c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/results.json"
+    },
+    "sdk.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/sdk.log"
+    },
+    "tools.log.gz": {
+      "sha256": "80907163b70c6b5842d291993f6c2dcceb92784bc606380133250568e0428506",
+      "uncompressed_sha256": "c6ba770a3573f7981b140dda16416ced6106e98645e1afa810e16d53542b1370",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/tools.log"
+    },
+    "typescript.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/typescript.log"
+    },
+    "wasm-rebuild-dependencies.json": {
+      "sha256": "40a362279263b7efbaf9f7f9a3f190549df4d148de6aaa61ad5cb4910e20fa87",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/wasm-rebuild-dependencies.json"
+    },
+    "wasm.log.gz": {
+      "sha256": "d05852039d0afa2da4c1cec9fe6f056adb4ad763f1402a29402af46112c4c27a",
+      "uncompressed_sha256": "0f8aa0c6737f713558e26cfbdc1d456191a0fd3979ddb37e0f4616596a93a593",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/wasm.log"
+    },
+    "conformance/conformance-0.log.gz": {
+      "sha256": "ea074fe02c8ffbdc89a7b6ee3499406d35dff7a1d65ed3581de295060cecfdc3",
+      "uncompressed_sha256": "0148f602dc5bcec6d8cd909021d2a3919785610e1e9610dac2141d4ed471a1f9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/conformance-0.log"
+    },
+    "conformance/conformance-1.log.gz": {
+      "sha256": "7ff863753c61d0c7180bbba63ee61560b82357cb928c65ebfaaa4c16df1d97b3",
+      "uncompressed_sha256": "7f78f444d509748ec40c016a51c405ea5b3279e2ff752b3edd1ccbc938b2f8d4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/conformance-1.log"
+    },
+    "conformance/conformance-2.log.gz": {
+      "sha256": "80c223f775f33cdce4a1ae0948890049a0e9184aec3c3c8b79b117bd9afe15f2",
+      "uncompressed_sha256": "5c013936dd4dc81d87fbb7657151592df74e939c3021417dad86fce364f719bc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/conformance-2.log"
+    },
+    "conformance/conformance-result.json": {
+      "sha256": "90a7ae2c8eb401a0169a78ce7b3d251007e09118f4a68f6ccf4bd6ee93e01052",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/conformance-result.json"
+    },
+    "conformance/cook-build.log.gz": {
+      "sha256": "9b4409f5f622c5013b9f590b23c0699a5fa53b899d3187fbcf88c60ddde687f7",
+      "uncompressed_sha256": "083bcaa24ee2a12de07988d11938b7023c4007ffe32363b067b96f9f51f79892",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/cook-build.log"
+    },
+    "conformance/live-bundle-verification.json": {
+      "sha256": "42a6f2ff7ed8d3389fbaeb59cc0a86ee8a5b3392321db13abeb96b1f7d63145e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/live-bundle-verification.json"
+    },
+    "conformance/prepared-manifest.json": {
+      "sha256": "7d28baa615b8454ca9bccede069d6b1eeaf84c09957a355c8fcdf26ab5e8255c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/prepared-manifest.json"
+    },
+    "conformance/rust-sdk.json": {
+      "sha256": "c28bf5e862834e361f6d1d3351e5e8ff80643fd2f061eef39be647fd4af57b40",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/rust-sdk.json"
+    },
+    "conformance/development/result.json": {
+      "sha256": "5c013936dd4dc81d87fbb7657151592df74e939c3021417dad86fce364f719bc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/development/result.json"
+    },
+    "conformance/animation-pose-guests/animation-ik.wat": {
+      "sha256": "bf66df2279efc7caa9b281be54817e2778a31058d0a2b2a760f820f0f0245be9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/animation-ik.wat"
+    },
+    "conformance/animation-pose-guests/animation-poses.wat": {
+      "sha256": "b2eb5ca87b550aea8b78b8387e391bca8bcbda71a19f656283a1dc5c253a0ea4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/animation-poses.wat"
+    },
+    "conformance/animation-pose-guests/animation_ik.rs": {
+      "sha256": "1091b3430e5bb694812317846e473200143554d8b4ed21ff73e6195ef4860af0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/animation_ik.rs"
+    },
+    "conformance/animation-pose-guests/animation_ik_failure.rs": {
+      "sha256": "8be1708a7a1566be7a1dae534396ede4f2ec35c73e8c8d5f2e6b54966b711dd1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/animation_ik_failure.rs"
+    },
+    "conformance/animation-pose-guests/animation_poses.rs": {
+      "sha256": "2ddc93843e7bb6cf5cc0053333b6b926667cc730c46ad5776c84c96516bc5286",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/animation_poses.rs"
+    },
+    "conformance/animation-pose-guests/animation_poses_failure.rs": {
+      "sha256": "6fb74d598219ff665f1d1bde05133193ac7bf550204f03bd535d011e1e5dbf25",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/animation_poses_failure.rs"
+    },
+    "conformance/animation-pose-guests/m100-facade.c.gz": {
+      "sha256": "8b39a003a07e659417c1c68e7a6f3e67938508e0e17aca901aa85c2567a9f675",
+      "uncompressed_sha256": "02fa152de4da109a70d068c3685442ab35954ca75c7a2f13930bbf50c75c24b9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m100-facade.c"
+    },
+    "conformance/animation-pose-guests/m100.c.gz": {
+      "sha256": "ae4f54783f06d7f926663f13a4971e143e3d5f9f142861fbaf7fa9891d31d399",
+      "uncompressed_sha256": "08bdbf78455918992a0118e2efb7c2469a4d07a478a846b79db28d32e22fd393",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m100.c"
+    },
+    "conformance/animation-pose-guests/m100.h.gz": {
+      "sha256": "3f27f9d61b3bdea6db500eb3fae4204c7c909afdf54a7935a1ab87a1bee9ad92",
+      "uncompressed_sha256": "dccafcfe2759518a0e377f3fa908d3374e8879918fbceff44812482cbfcb8f14",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m100.h"
+    },
+    "conformance/animation-pose-guests/m100.original.wasm.gz": {
+      "sha256": "877daa730e6297a66ef4cadaf35f8f7720b927c20c6902c15c787ef455be0b3b",
+      "uncompressed_sha256": "3369df0ed2a13a3082c136e12000b4cbb2d61dd46a3321f0fa697773616b13bd",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m100.original.wasm"
+    },
+    "conformance/animation-pose-guests/m100.wasm.gz": {
+      "sha256": "2c601736ed297684c56f7970d7f67ddb1a5c99ed033e0459433398c39f4bf41b",
+      "uncompressed_sha256": "693582f58bf2303c0cc49cd0db3f98ba82dac24e820e725f88f279e31cbf8f90",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m100.wasm"
+    },
+    "conformance/animation-pose-guests/m101-facade.c.gz": {
+      "sha256": "d1136bd70b7bc303f48481fda294c2b5dc00669562a46d78548227e0a9537b88",
+      "uncompressed_sha256": "d5733cb6d5ac055791b48f7bd21de3a14fa7b8f2e0411343e4debd80c8d744db",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m101-facade.c"
+    },
+    "conformance/animation-pose-guests/m101.c.gz": {
+      "sha256": "459e2831a8243aeab6805795493bc98352ab519187ae8a9aa39407e83cfd9a10",
+      "uncompressed_sha256": "6b52b7a05b834f0f7e0e584ce21957f76b9bf2b783a0741cd62ab622d87c2025",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m101.c"
+    },
+    "conformance/animation-pose-guests/m101.h.gz": {
+      "sha256": "eb8b9ed1a314b4f54de5496867485fb882de96cbb058f485db9f338170d0d608",
+      "uncompressed_sha256": "a45168818f28a0a5620c40a7eeb7c749450f036f2fdacaa8be8c6064e0d46768",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m101.h"
+    },
+    "conformance/animation-pose-guests/m101.original.wasm.gz": {
+      "sha256": "a34616c775c6589d05df855281e5324122fb5474ec139f6749d706aeb54e893e",
+      "uncompressed_sha256": "335a4aa6c2b1e2b1e2dbc9b093295daf85bb07de9ac5fc5c5b7d25c23a8125b7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m101.original.wasm"
+    },
+    "conformance/animation-pose-guests/m101.wasm.gz": {
+      "sha256": "6ef824685941487d21382bf37781019cf6cd00826981fc8f5ed5837103acf66f",
+      "uncompressed_sha256": "86cb61cd819729306d3aa38984e14ad0d92906c3acc44cf1099cf9b18d7f645c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m101.wasm"
+    },
+    "conformance/animation-pose-guests/m102-facade.c.gz": {
+      "sha256": "083605949d6725017ce1968dc0d67aaaa432d3a9d562774b64494acd38b7970d",
+      "uncompressed_sha256": "5ac5d925a1ef6d30146ed7b13a9843a38c5a61c5aad82456b011683db193631d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m102-facade.c"
+    },
+    "conformance/animation-pose-guests/m102.c.gz": {
+      "sha256": "18ad7d4c5253019474ee0f3307543b25976c46f79e9dbc29cff55c5b09657da2",
+      "uncompressed_sha256": "422d7dbfd54446931e76df433c69f9c3e898d4c85bc7bf9d25dfdd8ab5c2ef5b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m102.c"
+    },
+    "conformance/animation-pose-guests/m102.h.gz": {
+      "sha256": "90c80d43958c1edd75444f1741c230c20881c8b1bc1562f6b17cedd4fd7e536b",
+      "uncompressed_sha256": "58ab84691a6f0fd6f8725d237f5746a9d3169b91a0d56a93c59b018f79d38dec",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m102.h"
+    },
+    "conformance/animation-pose-guests/m102.original.wasm.gz": {
+      "sha256": "4a4d3db99596a424691028a8ee6c38c3f43c163f635534a42e64c450b4214f06",
+      "uncompressed_sha256": "51e11b56d4f18a7988b3eba6035c05acc2903b4cab9ec89ca3b8619a70817bf6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m102.original.wasm"
+    },
+    "conformance/animation-pose-guests/m102.wasm.gz": {
+      "sha256": "56212200db7c214640b83766a40d451d81d18b1f1fa21a471ed5d2ce826d439a",
+      "uncompressed_sha256": "2c19e40c5b2de9c55b497976127c433f74b365317529eb7585f82017ab5c295c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m102.wasm"
+    },
+    "conformance/animation-pose-guests/m103-facade.c.gz": {
+      "sha256": "0d851d50c929d64dc037271c3e8f33fd170fa3e09b4e640fccb1bbd01f5dd669",
+      "uncompressed_sha256": "9a8b0a2cb4fd4625201ec1bb22c7c3870efddf481f32bf1fd09c3e6d7e89a6bf",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m103-facade.c"
+    },
+    "conformance/animation-pose-guests/m103.c.gz": {
+      "sha256": "9d35250076da8dc51d797d2670212aadb3498bbc9dad496d6c258aad64747ced",
+      "uncompressed_sha256": "ab832a764ee9244783764e917c9027662dc7ddb3d86bf01c181d054fa859dd80",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m103.c"
+    },
+    "conformance/animation-pose-guests/m103.h.gz": {
+      "sha256": "1f9ef1803756d63f96cd50299e0e183b92f383c3c42ae063de4ace210927a757",
+      "uncompressed_sha256": "8c76f5c561dfb1f7a9cb175b0efa7f1a435ec766050f6c4111f433fb1c155895",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m103.h"
+    },
+    "conformance/animation-pose-guests/m103.original.wasm.gz": {
+      "sha256": "373ec46c7bd4a28912b3f02130bcf66be0fcd39a43704fe6bae5d58e0588648a",
+      "uncompressed_sha256": "edde846ddf25bd977881604699943587c994ee5e1010e0d80d5665d7f102055e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m103.original.wasm"
+    },
+    "conformance/animation-pose-guests/m103.wasm.gz": {
+      "sha256": "ca0d950dd25e689a55c05d828205e3388e90cef828668bb19a8c6d184e96fbfe",
+      "uncompressed_sha256": "854bb090264cdf45d0194b5b44d6d269e262e861759af4aca2b807a2be9cd6eb",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m103.wasm"
+    },
+    "conformance/animation-pose-guests/m104-facade.c.gz": {
+      "sha256": "a409582ec36133fe9d341533e3781a33aa9c024084e35b68110e2c09d7876146",
+      "uncompressed_sha256": "5fe64d34cd7d8c8cd7776b9d6121f459e49e0b879b18a84c52892c3d38393e1e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m104-facade.c"
+    },
+    "conformance/animation-pose-guests/m104.c.gz": {
+      "sha256": "a036e6370c32b7a11941a56cd8c27bc4bf95bf0b9984aa268fa6ef743862f505",
+      "uncompressed_sha256": "32133d1af784724f7009cef2c33ca8d675dc8c94790892633b00e52257403e78",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m104.c"
+    },
+    "conformance/animation-pose-guests/m104.h.gz": {
+      "sha256": "c5528d9cad4c8455bc9f908f885cfdef1c77b340b6cd90e51f65802f2a0ef398",
+      "uncompressed_sha256": "1be7e65ba1092b9613712cb37c24485e7e06e850350a900e7477dcab96c7bd8a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m104.h"
+    },
+    "conformance/animation-pose-guests/m104.original.wasm.gz": {
+      "sha256": "dbae7705927a71aa504f58f084cb66630c8c02aca29c1a7bb7b68b597d45ee7d",
+      "uncompressed_sha256": "0b1e84fb930922c39208e3b7c337ce52aa294146aa06fa542a1e25fc1a669f86",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m104.original.wasm"
+    },
+    "conformance/animation-pose-guests/m104.wasm.gz": {
+      "sha256": "2069722344592bd9d938a70d67b3ad0d1163dab333651eaee1b513f5b5aad8d0",
+      "uncompressed_sha256": "97465a1ce332529d7a1776d65537688acdad30945c2d0524a93e58d540aa796f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m104.wasm"
+    },
+    "conformance/animation-pose-guests/m105-facade.c.gz": {
+      "sha256": "ba09c41be3a1a5adbc5594b8ccf30812718e70e419051a849e4464cc4f67430d",
+      "uncompressed_sha256": "90b77dd170d5eded18d54f0233b55977740dcd6c461a50118f08f35a033fc51d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m105-facade.c"
+    },
+    "conformance/animation-pose-guests/m105.c.gz": {
+      "sha256": "1c1f5dce62e4b715b3b799a564c5510e10aa9c2124ec02d274cb09b5d6485d14",
+      "uncompressed_sha256": "292ace23183e263033ca76ca077421d189ea968ff3c7e98a15788c133d7e1af5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m105.c"
+    },
+    "conformance/animation-pose-guests/m105.h.gz": {
+      "sha256": "8689b87b111db2c63f3d8deddddbb951f73cf756bd139a50ec710c13abb262d0",
+      "uncompressed_sha256": "5549d7689dd6740406c9f21c2a48c977c2cd27fd857844afb888c292543d681e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m105.h"
+    },
+    "conformance/animation-pose-guests/m105.original.wasm.gz": {
+      "sha256": "c9097c21e1b64bfde1255e1c1ab71e46fdadb279bfd471cfd02440e507c5151a",
+      "uncompressed_sha256": "3832999d04b481d1ccaa5b6acdd46d748ed6772bfc42e130ade7e01550491bd0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m105.original.wasm"
+    },
+    "conformance/animation-pose-guests/m105.wasm.gz": {
+      "sha256": "3e7c59338d601d6c2c62d5c358aa07743f10ca57fe90021320b93f3242992a18",
+      "uncompressed_sha256": "c920746b025743838454210a613addfe20c403112be0a1ec3d2a2add327d559a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m105.wasm"
+    },
+    "conformance/animation-pose-guests/m106-facade.c.gz": {
+      "sha256": "5fd151cea053d7896d53003cf48876d9ae3ac695bd5bcb9bcc63903860ddc848",
+      "uncompressed_sha256": "58f335fc420607a05a10f9143e0b48c413afd0c9896e95eb279ca5f301b7ed18",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m106-facade.c"
+    },
+    "conformance/animation-pose-guests/m106.c.gz": {
+      "sha256": "87f9e4979c9413f1859d0a09dff54ab572955f97690712ef62295782cc251d84",
+      "uncompressed_sha256": "f5239a427a1ed2888c873dadb9e89e5c6b62663e67b34c24b95ff3a3bfa6025f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m106.c"
+    },
+    "conformance/animation-pose-guests/m106.h.gz": {
+      "sha256": "62e002933f5d7ca219c2a22c5284495505b7b6c77fb49c7e136f5b3114ede59e",
+      "uncompressed_sha256": "434c4ec550757163f86508833a943012d6e1b273212ea0731a92fec315bc934a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m106.h"
+    },
+    "conformance/animation-pose-guests/m106.original.wasm.gz": {
+      "sha256": "dfe59906ce46ac3c71d1c51d1f79a0f2c6affcfb9a935fd11de6c709c69f9119",
+      "uncompressed_sha256": "838a43143c588f704a1dd700f5223810ada9ecbca2f54f7faa34fea712416477",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m106.original.wasm"
+    },
+    "conformance/animation-pose-guests/m106.wasm.gz": {
+      "sha256": "421160709eaa5377cfb444d55175d9a1c5e6bb364b4a0147feef08f047da3fb5",
+      "uncompressed_sha256": "5dc2a34a1445e4da53e8ec05ffb30746cd1f55afc5447534dd9c4a3813289c4e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m106.wasm"
+    },
+    "conformance/animation-pose-guests/m107-facade.c.gz": {
+      "sha256": "a25c5e25ffcfe22143da3fcd8b2768b9674189b33e5ec508e2d058781695ccff",
+      "uncompressed_sha256": "ac33c4dcfce0a7aa2356ab3a970fdd473c4e9cbc18897c21e23cd901851af76b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m107-facade.c"
+    },
+    "conformance/animation-pose-guests/m107.c.gz": {
+      "sha256": "afdd9e2cb7e2f2990571ff79f3f6f077262f54d351aaf950ce2999cca173e6b2",
+      "uncompressed_sha256": "af872351e1eaf6c4facadbbe617e1f00c60948e557bdb7d57a495c10597a8739",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m107.c"
+    },
+    "conformance/animation-pose-guests/m107.h.gz": {
+      "sha256": "b3a5e2830833f1f241cf9a0278997df28e3b2cc789093e5c93789cfcb449d749",
+      "uncompressed_sha256": "d51eab666998504f51ed2554aa05491a9e20b38360cb3253cc089968e8944849",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m107.h"
+    },
+    "conformance/animation-pose-guests/m107.original.wasm.gz": {
+      "sha256": "2df5bc4d1afa51e870075a3e15dfaeefa9f695bec7966c0c90246c56767edf17",
+      "uncompressed_sha256": "02195bb24537e36fc5edb94d873a32a12e31f2395cc620bb9fdcddd8f1c34c43",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m107.original.wasm"
+    },
+    "conformance/animation-pose-guests/m107.wasm.gz": {
+      "sha256": "13f1caf5b5b74b8d01f57ea9bef681a541b783f8d77a3b876d091feaa45637d9",
+      "uncompressed_sha256": "478f7f5b3a578d972e2cde39cfb02d08541888112e23f74dc20a245549e3c671",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m107.wasm"
+    },
+    "conformance/animation-pose-guests/m108-facade.c.gz": {
+      "sha256": "d1e7971fa145c30bc83d522f581b0b5b0048e2fb6ae41bb6d61c3dafea47a6d5",
+      "uncompressed_sha256": "c5fc1f4b94fcb86b51202ba4e3e5f5e19c91f27a35d638a958012ea9420e3bc7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m108-facade.c"
+    },
+    "conformance/animation-pose-guests/m108.c.gz": {
+      "sha256": "002fc9e0aab2edf0ac854de0f0f968b7986cde77be5ddd63efb15636f8d9398c",
+      "uncompressed_sha256": "1abda7373192cc8a0ad5e7c0bf42eaa7e551aabfd4c7af797f4f765128b0d8b8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m108.c"
+    },
+    "conformance/animation-pose-guests/m108.h.gz": {
+      "sha256": "f0640b66f16b24099090c79de7e941a909361283621ac4bb02dfafc469cb56dd",
+      "uncompressed_sha256": "3ed7a42fa2acf794e6154d8fc08b3892b7124c353ee41c57a2035596f6b10d86",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m108.h"
+    },
+    "conformance/animation-pose-guests/m108.original.wasm.gz": {
+      "sha256": "9c591586f254f3118b3155ee490e281702c27d4bc16f239eb0c73a3331f70a1a",
+      "uncompressed_sha256": "7c6dba012e4db96f0252dead875925570fcaa842dfccdb1370e1533bd5e1f7d1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m108.original.wasm"
+    },
+    "conformance/animation-pose-guests/m108.wasm.gz": {
+      "sha256": "eca3a0ff8930dec92856367d2c8349678c79645c3f1c4db3cc0f4b9992bb36b6",
+      "uncompressed_sha256": "563e31dd01a69238820c7c8399fdecab561268f10d37b313fd70bc98770875b5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m108.wasm"
+    },
+    "conformance/animation-pose-guests/m109-facade.c.gz": {
+      "sha256": "0088b55ca29eafb33638b4d52661624032344987636799599d87ba0875d14cd8",
+      "uncompressed_sha256": "893abfa76d8d783e896142bd27fc9738ee492495fc72aee413485cdbfe21370e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m109-facade.c"
+    },
+    "conformance/animation-pose-guests/m109.c.gz": {
+      "sha256": "6f49b684c830088e4d4e4bef04da499b279f737d4234d1e9d94fe77283995937",
+      "uncompressed_sha256": "ad7a603b1497b223a0332a09512ebe6d339b9200e4f0e1f3eaf959fe47d7f0cc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m109.c"
+    },
+    "conformance/animation-pose-guests/m109.h.gz": {
+      "sha256": "95817452164d252ca9ba2b1f22885348247191e7943bc46527c5a3de17de9e37",
+      "uncompressed_sha256": "5ed41b6b9659ae855b8dd63c4de8dcb5a33a76a43cf6acd532435dd4475d76bb",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m109.h"
+    },
+    "conformance/animation-pose-guests/m109.original.wasm.gz": {
+      "sha256": "ad2872606e11bc54869b7f48ac7fd2998302dc8dff2745034ccf4536bb4ce39e",
+      "uncompressed_sha256": "228ffc60ee6fcab2e698d16cece98119a3cf955472cbf956e1fd68943dc56b47",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m109.original.wasm"
+    },
+    "conformance/animation-pose-guests/m109.wasm.gz": {
+      "sha256": "2012108a59deda6d494727c086243f4bd48b841bad935c4718e2ffbf0faebf78",
+      "uncompressed_sha256": "468b995a955bfeb85795d994e3c260c59d3c77f4dc883eb4923073e0afe4863d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m109.wasm"
+    },
+    "conformance/animation-pose-guests/m110-facade.c.gz": {
+      "sha256": "75a9224e2e8b9ea0e6f8827654dde8cfe0b78073da5c6b22605022a993debdd1",
+      "uncompressed_sha256": "176a1b9b9800b087b5e5178d06d0a860e52b935b9bba23646b4bd18679b68ba1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m110-facade.c"
+    },
+    "conformance/animation-pose-guests/m110.c.gz": {
+      "sha256": "36aa15bd16adc375a0b4ee9d28a336877be23c86f8eabbcac16894e7524b1598",
+      "uncompressed_sha256": "0ffa2ad3c16799c4518419d0aa29b52f3a08676de44b20475f97c97cb5789663",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m110.c"
+    },
+    "conformance/animation-pose-guests/m110.h.gz": {
+      "sha256": "18ad02c273f636d371422b6211129871be5b379ca15df2a7e9818a37b19904e5",
+      "uncompressed_sha256": "fb8c4fae3b1f712effff25a6337c8a7a0b8c6bd881990b60eedb0364f19505b5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m110.h"
+    },
+    "conformance/animation-pose-guests/m110.original.wasm.gz": {
+      "sha256": "e32c0aceca82e979898e905291919578d9abe06758f32c239f7d01aac0f0c518",
+      "uncompressed_sha256": "56526c59ccca36f821f3e838267d762930174682bea266560d8de4853768a164",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m110.original.wasm"
+    },
+    "conformance/animation-pose-guests/m110.wasm.gz": {
+      "sha256": "3ddffb4a92fa26bd8d2417d125401454cfa0c93daeedb5285871f6c17a9d9e46",
+      "uncompressed_sha256": "d82f42b7e5bd040bc006c6c977fd0c8b2a21fef5f67304c0e2e2ea4c5a77f654",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m110.wasm"
+    },
+    "conformance/animation-pose-guests/m111-facade.c.gz": {
+      "sha256": "66c2f8becaf526a59f5a92561d65a5ff1327d4cb3eabafdbef7d564b7cc9f9bf",
+      "uncompressed_sha256": "61c7cf744ddf6c8953457656978df17c8733ee229e197d4f2c65f820ef142604",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m111-facade.c"
+    },
+    "conformance/animation-pose-guests/m111.c.gz": {
+      "sha256": "4d9b3711585c432af896a8116bdbb958fb294b20ca7fbedb16b880a45a82699b",
+      "uncompressed_sha256": "e07326b22c05428ca0164b53f2bd5d35eaa88da93c7d44e3ca106bb9259adea5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m111.c"
+    },
+    "conformance/animation-pose-guests/m111.h.gz": {
+      "sha256": "56dead72c7b9f5e889722b7b39a71f51c1778dfc76051e2654a3a23649edc1e3",
+      "uncompressed_sha256": "adfb811ad74d447069e4ee660107ab19d383c8da2d35922501a060456012eb23",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m111.h"
+    },
+    "conformance/animation-pose-guests/m111.original.wasm.gz": {
+      "sha256": "6714f81219f5322a8cd2895329dc8777f0df292551c06c15c4f61c5353d3de4a",
+      "uncompressed_sha256": "870f0fb21c9b952ce6940b1e4910ce7ffba0b9c9822b1010af138f3929d0f955",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m111.original.wasm"
+    },
+    "conformance/animation-pose-guests/m111.wasm.gz": {
+      "sha256": "197665630e46d9bbdfb5f5944a87d7bb5fec9ac02472c92cb560e39f7423da93",
+      "uncompressed_sha256": "0c37b4480fbdf90b8019150894beff18a701128d6cf24a79dc811db583419337",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m111.wasm"
+    },
+    "conformance/animation-pose-guests/m112-facade.c.gz": {
+      "sha256": "05e163b69a6021a12227ecd8c553e072b6debe1507a2748d5942151e25d8601a",
+      "uncompressed_sha256": "73148ade9ae968e861f2b1c8454a9e9605732bed3677ed8ba71c1f4eda2c0e3c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m112-facade.c"
+    },
+    "conformance/animation-pose-guests/m112.c.gz": {
+      "sha256": "c932a980afbccdd6b33713d084c3f56dcfbf0bfe64833ccccd397f6786c63770",
+      "uncompressed_sha256": "7767f7d3714dea0568d91de2fded6bd4ef8a86d770c17f06091d1c1d6ab53bcc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m112.c"
+    },
+    "conformance/animation-pose-guests/m112.h.gz": {
+      "sha256": "4b966306640e7ade4e360e44ed62e1fef212b20f2d0855e79722af6b60dcad07",
+      "uncompressed_sha256": "71f53911caa011f5fda6c48216cbf1c0d12b4b0f674eaaa4a207cfe98755b4b6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m112.h"
+    },
+    "conformance/animation-pose-guests/m112.original.wasm.gz": {
+      "sha256": "cb939b7c513005b8c264bbeea3ad4add9001fbd0bf6a60c029dfcda2d208faf2",
+      "uncompressed_sha256": "5469feb6a072712bcaf8f814766734eec0586f41ab9ff6d4ae5a510613f4c8c2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m112.original.wasm"
+    },
+    "conformance/animation-pose-guests/m112.wasm.gz": {
+      "sha256": "68c63546e67b2457a329d02a0f1e4f267c91f63f82b6d6930e74b7f52ed13a94",
+      "uncompressed_sha256": "8f7d210a68bb4f6dba6aa6dc8184b1c1227db04c12f8563cfc7ad14a30cb9cd2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m112.wasm"
+    },
+    "conformance/animation-pose-guests/m113-facade.c.gz": {
+      "sha256": "622ef62cf2dc6ab291b4664248a066c399cedd2f595940b5b8d73ef6f649b31f",
+      "uncompressed_sha256": "40c5cf174be5eebe35e162b25c29955cd77997812007e7260aea385c10e78334",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m113-facade.c"
+    },
+    "conformance/animation-pose-guests/m113.c.gz": {
+      "sha256": "1705285dfc84d82e6c408c87eb6cacab7319912f8e175ffa3d5cf09a06c95c8a",
+      "uncompressed_sha256": "4bfa32873b758b9c3468ecb635dd60da2ad5e41ccc9c9b2629fe96189f9896ed",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m113.c"
+    },
+    "conformance/animation-pose-guests/m113.h.gz": {
+      "sha256": "5d1cc7b9fb97a7f959d40554780d5d00d7691cc59334383d9b5a522cedeb048e",
+      "uncompressed_sha256": "0cc22ca3fda2569298d8bce6ee2cd83b71cb1307eda2d991c1f677ab38bda8d6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m113.h"
+    },
+    "conformance/animation-pose-guests/m113.original.wasm.gz": {
+      "sha256": "df523c63c061ff28925192993e91abd1b71e60f329e93729979412a6f93bffa4",
+      "uncompressed_sha256": "eabefca75352c0c23349cd22321119313dadb11e85db4fa60877928a061c2272",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m113.original.wasm"
+    },
+    "conformance/animation-pose-guests/m113.wasm.gz": {
+      "sha256": "98bb8026210830117caafc76ad950f7f787cb1d0c71a73ff0678070fc64449c0",
+      "uncompressed_sha256": "190f97035c3d807a61d919ef0924cc91d44a93839236a13e1e0ddd3d324a5845",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m113.wasm"
+    },
+    "conformance/animation-pose-guests/m114-facade.c.gz": {
+      "sha256": "0ffba4dc2a009e353cb95e09a804ccf6081162bb70acfbe9ce58a33547bda6ca",
+      "uncompressed_sha256": "744ee4dcab5346d52c18c2ee5b2c19430753f06a3dbe8391f0c7e10f27491a17",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m114-facade.c"
+    },
+    "conformance/animation-pose-guests/m114.c.gz": {
+      "sha256": "37973b2bd424b24c42bb8f59027861c54044a7490a6e74c47486c7ef3292d7fa",
+      "uncompressed_sha256": "bdf0686db2fa02b1b968e49f2949118dd7c39c3ec6f6bbe5decfcaccd36d08d0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m114.c"
+    },
+    "conformance/animation-pose-guests/m114.h.gz": {
+      "sha256": "f68998b2f41cdc8a16bccbfc3cb501b685063f91452bb5a355758fa6debf0265",
+      "uncompressed_sha256": "82a1a3382d144c760b29a5a4f6cca074363b76e81ae984b0f8d0af862e6c4d08",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m114.h"
+    },
+    "conformance/animation-pose-guests/m114.original.wasm.gz": {
+      "sha256": "3d4234363eec7923c1dee6707a147c5acd8badb966c4e4b350d956700f80b97e",
+      "uncompressed_sha256": "3faad0e5e84f5a8e019ad231ee601e6efa738febb34b3976ac7429e43b6739da",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m114.original.wasm"
+    },
+    "conformance/animation-pose-guests/m114.wasm.gz": {
+      "sha256": "d72d3d464a781ed1c181c60a4c6d40ea6b5df3232a09dc05fff5eb100dea7d29",
+      "uncompressed_sha256": "fec6458bb553742fcc42a645b6d9a02c9af80e10c0ef6597f6d773c13684bc3b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m114.wasm"
+    },
+    "conformance/animation-pose-guests/m115-facade.c.gz": {
+      "sha256": "80f3930e80786d76aa2c5306713e74dbc75ad88c684207a356cbba24634192c8",
+      "uncompressed_sha256": "755144478712400acfb05e34a7965a137cab5a44598ae5539cd2092135d22867",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m115-facade.c"
+    },
+    "conformance/animation-pose-guests/m115.c.gz": {
+      "sha256": "12db86325c0bc6b080256ede86c1a1d6f2ffa29e4d945e556065a378465cc0ca",
+      "uncompressed_sha256": "23d224eda07cc4377462763b5a0b1f8a1bd021f9f152ee6b0ee774bc24c50dd0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m115.c"
+    },
+    "conformance/animation-pose-guests/m115.h.gz": {
+      "sha256": "563d8d86f2a227f96dfd02c5bd00e9fbe1e3877faea04af12cfc739ecbb52ad6",
+      "uncompressed_sha256": "fb488ca89afd10101c5491f0145b425f67de47dc1b33aeaa1da376a476192533",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m115.h"
+    },
+    "conformance/animation-pose-guests/m115.original.wasm.gz": {
+      "sha256": "bada20d499bbbf94efd128202684bf696a814ef3c033b52d16fcc19c3be1337a",
+      "uncompressed_sha256": "116139bcfddb0dbdb845bcd74421e45bb24c21615da3b8971e3b21fdef8b24a6",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m115.original.wasm"
+    },
+    "conformance/animation-pose-guests/m115.wasm.gz": {
+      "sha256": "3a121c30edd3c23f3fcdecba196a8c10d8f69cd498d4af44008762ddbe0ea23a",
+      "uncompressed_sha256": "74651308adb8f6da6e602ef997e98d663eb1cdc552b7c6f68f4715ae82f214a2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m115.wasm"
+    },
+    "conformance/animation-pose-guests/m116-facade.c.gz": {
+      "sha256": "7e641d4c76dd2b22dc0b2a80d5f74fdc7dfb0dde8ecfb54d64aa08b3e05b9676",
+      "uncompressed_sha256": "0f39344d7b3b13f8e6f417069df7b7310f629205890378ddfbc8f23215368296",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m116-facade.c"
+    },
+    "conformance/animation-pose-guests/m116.c.gz": {
+      "sha256": "a25ef0711d58fa8df0cd475be47c7077ccd60a42deed82a7501b7f6b0954a81b",
+      "uncompressed_sha256": "245966a12339b064158bb1341c2d93f9a7d7e2dae253a9b32fd48a414798ef80",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m116.c"
+    },
+    "conformance/animation-pose-guests/m116.h.gz": {
+      "sha256": "054ee4f8f7399c895fe2ce5e5038f41789a7bf8ea41536dc5a5791df6bb9b10e",
+      "uncompressed_sha256": "724af315aed146fe07330e11e4635f7fc23c165a2c6c7099e5b61cab9a90765f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m116.h"
+    },
+    "conformance/animation-pose-guests/m116.original.wasm.gz": {
+      "sha256": "380e6235d9857e94a563870a9e9ae6df61bed1d2ccb39813c326158d30c737ce",
+      "uncompressed_sha256": "bba11c553b1010243febcc2191888a0c758cd059a21baeb19b64bf60c1b621fc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m116.original.wasm"
+    },
+    "conformance/animation-pose-guests/m116.wasm.gz": {
+      "sha256": "b94dfd3f51c0b4a2055cd3ca9527c8b4e234463f3ca249b4a58217cbf62c4bd4",
+      "uncompressed_sha256": "b79472295b8c06889cbda9efac066606f378cac0b0a3ac4ee5c6fea9ee9235ec",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m116.wasm"
+    },
+    "conformance/animation-pose-guests/m117-facade.c.gz": {
+      "sha256": "3b1a3a775e2cead8f41684bce587a095232e03ff29bd6df70c9ce6c4bf75adb2",
+      "uncompressed_sha256": "239e99e794de511c07e256a4e9fc928d1534c9c7a8763c6ef676a2ebd001e205",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m117-facade.c"
+    },
+    "conformance/animation-pose-guests/m117.c.gz": {
+      "sha256": "54daa95e8121bc443aa9be9ef76c042ff724035c1533406a98eeaab9090ca1cc",
+      "uncompressed_sha256": "6c51dc1135d40e0fd92495083cc47c905b693a23d54ee98635a9a2f9a92dfa3b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m117.c"
+    },
+    "conformance/animation-pose-guests/m117.h.gz": {
+      "sha256": "b16a657d18f3d01f7b41bbafef02f635b74f6f2b5057012125e90fbff9a82735",
+      "uncompressed_sha256": "9a2698b6d054e0d9cb938d65a1bc4899b574e2851ea92110021e37960b34a0ac",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m117.h"
+    },
+    "conformance/animation-pose-guests/m117.original.wasm.gz": {
+      "sha256": "221836fe3b75609ba4317797676a4251fbc6f0a401a259d50531bab25d0777e4",
+      "uncompressed_sha256": "4026834d85545c0d7c8d7dfb022b3fdc5a4f2eeb886331ffb1045a4c13e913ee",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m117.original.wasm"
+    },
+    "conformance/animation-pose-guests/m117.wasm.gz": {
+      "sha256": "26db8a416fa9c9cdeac4efbdab1147f8b7d85f9d1c5c1c230bae18eb2413706b",
+      "uncompressed_sha256": "d603a0a7cdd65fb447b31a4f4eb6de0ac1ab2b605284e39178bf216b063ce8cb",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m117.wasm"
+    },
+    "conformance/animation-pose-guests/m2-facade.c.gz": {
+      "sha256": "70b8171bd88cc2ff56ea6a987d5c4c2dca71524c2a1c3c12fa687206314217e7",
+      "uncompressed_sha256": "32b29d41ccc17c576a4feaff059d1495ce42126d6fc7441b7021982a5e266025",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m2-facade.c"
+    },
+    "conformance/animation-pose-guests/m2.c.gz": {
+      "sha256": "18570ff07bdb79485a57f0091a38aa869e96b75e1e13fb4aacfdf5f188ee0419",
+      "uncompressed_sha256": "161e0c2e35c854641c1a1af0eb82197c8a414b8306d535cfe9f3cadbadea31f4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m2.c"
+    },
+    "conformance/animation-pose-guests/m2.h.gz": {
+      "sha256": "8affa37cf99ef318b8bd357fd01e2a7381a0afd825d85d817dd3920f0f9191e7",
+      "uncompressed_sha256": "5382841e3a6e655edda4224faeb29a2af2fedc5937090c257a1faac5e351a5ea",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m2.h"
+    },
+    "conformance/animation-pose-guests/m2.original.wasm.gz": {
+      "sha256": "63c4d934866d61f90ea21fc46e4463c53ef9b882ab3b018c6a5c1d9296baddf4",
+      "uncompressed_sha256": "4bc9ba85ca9d760ced4f9a22bb7f472f4d8e58e818f008b022972634209cd8a5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m2.original.wasm"
+    },
+    "conformance/animation-pose-guests/m2.wasm.gz": {
+      "sha256": "780a3f5c49e7b87cd6ba8fbc904a378801563ca7080078cc116a19f228443b7c",
+      "uncompressed_sha256": "88f184b8a2eb6e65387826c864708be6cfd087152936921767e9f7f44c047f6f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m2.wasm"
+    },
+    "conformance/animation-pose-guests/m3-facade.c.gz": {
+      "sha256": "c2eb5987bb88e693140959574c9beed68a62722d3b7f2f1bf7f4b3fbfa94021d",
+      "uncompressed_sha256": "cf4bd374b99a0695fdbacc982347e3e635c385bbb193c3dacc9119dccea270af",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m3-facade.c"
+    },
+    "conformance/animation-pose-guests/m3.c.gz": {
+      "sha256": "156c99bb254fd3f3ab07a2142803a58d2340698c7749749ca6a422fa9a5ab83e",
+      "uncompressed_sha256": "a4578e384e6b7d4d7cb5e56fd3001601d250c4630cabc8d15db458f6c5f8cceb",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m3.c"
+    },
+    "conformance/animation-pose-guests/m3.h.gz": {
+      "sha256": "83884431787c4c889d69093f9ae8f5848d5c5a9efe7d4ad65d6a72804d3fffab",
+      "uncompressed_sha256": "543754990ef42bbe60d7f11f0b121dc1a8c4be6cd759be559b59310fd6405e20",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m3.h"
+    },
+    "conformance/animation-pose-guests/m3.original.wasm.gz": {
+      "sha256": "cf88878dc30cbf210b71a03ad9aeae987ea50b6ba7934b36503d578089a57dc4",
+      "uncompressed_sha256": "d73b9dcd7fa7062ee2de57db4166d41a6491e52d7e2a2b2716321756d0e995e2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m3.original.wasm"
+    },
+    "conformance/animation-pose-guests/m3.wasm.gz": {
+      "sha256": "13160b6a702fc5f10017f238e8fc59a9979578b782b28e96743cca2d03ae9d20",
+      "uncompressed_sha256": "2fe5117e69d99c4e198fb54cdb8f09c8ede5fa5113c1282c0686a909682276bc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m3.wasm"
+    },
+    "conformance/animation-pose-guests/m92-facade.c.gz": {
+      "sha256": "3bc2b7c8c7ab3afe3910bbf7b25d51e1e79f0dd3afb5f777b71fbc6d2047ffa4",
+      "uncompressed_sha256": "9f0b3118f537f853ad0a129053bdd305cdfa68aa4c9e2f817f5756bea3773bda",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m92-facade.c"
+    },
+    "conformance/animation-pose-guests/m92.c.gz": {
+      "sha256": "015deb96345ecb790c2a1cde59f4cef109d7a9e78fb8c5ed697a2923ab5a2a77",
+      "uncompressed_sha256": "885847e523b2ba10c058bf86850595c3c755259c4b750af293914aa8e56e312e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m92.c"
+    },
+    "conformance/animation-pose-guests/m92.h.gz": {
+      "sha256": "43118e832c8e350df927fa287b945ac69d837899f2d1cebb2f98ccdfabc60557",
+      "uncompressed_sha256": "7c657d08c861c284b7a59d9918b1683cc808411d5346fae9c9a2fdb765cae059",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m92.h"
+    },
+    "conformance/animation-pose-guests/m92.original.wasm.gz": {
+      "sha256": "7140fa580297d00b53c4015ef3a10fb42eb0b9afa0dc00fb4c8bb7e0316d365b",
+      "uncompressed_sha256": "4266c078d906a7b4af0f817e4c0d4f44ff7d4a9047250a5d41ebe6fad2af412b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m92.original.wasm"
+    },
+    "conformance/animation-pose-guests/m92.wasm.gz": {
+      "sha256": "e7de47bc1ae4abcce66223c1e5d8b50709bca53b98371086fe67acbf65b5b3aa",
+      "uncompressed_sha256": "c1ce983b8f500c630c099810db50cc109dafd1f784c5980a9ca44ee9fb9fb162",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m92.wasm"
+    },
+    "conformance/animation-pose-guests/m93-facade.c.gz": {
+      "sha256": "73ab0cf9f1604fbf3bc13dc44d9239fd22b6686be77c164c2b08f8f75e814867",
+      "uncompressed_sha256": "b278efef572c775af50a5a557f04c32a2a5d6f9f2ad47775c72afc24a041138c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m93-facade.c"
+    },
+    "conformance/animation-pose-guests/m93.c.gz": {
+      "sha256": "2183f896404dcc876049523411c1e2dce15f23996bc96c510002c6f072ffeded",
+      "uncompressed_sha256": "2053dcecb4ea7e29beeef47b722f6b2361c192026083f8ecdd595ea2308567fc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m93.c"
+    },
+    "conformance/animation-pose-guests/m93.h.gz": {
+      "sha256": "6de05f1e04d90ec38b7177d4ed6f94768fc7649b50291f08b355f01fce66b020",
+      "uncompressed_sha256": "c263c8d35d87314a7f3c3fbee4a069338aad092029ba09d12ecd7e3177322e5b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m93.h"
+    },
+    "conformance/animation-pose-guests/m93.original.wasm.gz": {
+      "sha256": "ed4dc3b0baf8621340973a522cab938193f3e40e61e9e81478ade05fd5dab0cb",
+      "uncompressed_sha256": "45dcde293c97e90df1f3e02840f2509d2075a22f94fed6aaa092b68c6189fcda",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m93.original.wasm"
+    },
+    "conformance/animation-pose-guests/m93.wasm.gz": {
+      "sha256": "c8398be0221f1b6a6f581085eecd19901c864e5e0cf71acce06293ace9a0581c",
+      "uncompressed_sha256": "a6be3461ef07ba03d68fc702de1c538c71d4c4c79d523fd4ea41e1bfcdec9346",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m93.wasm"
+    },
+    "conformance/animation-pose-guests/m94-facade.c.gz": {
+      "sha256": "2ec6be3d9d9d591c608a233a04b15d8a7a0dfe4ee6b839c95159e6e8c5ed8061",
+      "uncompressed_sha256": "379cb29c6c313098e90580d7557b0e6eb308ee6ec4f6963e7e07f200216a9b27",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m94-facade.c"
+    },
+    "conformance/animation-pose-guests/m94.c.gz": {
+      "sha256": "1633cea0864b5cc6c17bf4a65c5b5d3ef8fa1d5d9a933d22599c9f49c22b9d44",
+      "uncompressed_sha256": "6667108063399da426e9caa7ec54122ba24c9c337fee102ecec54f2e0d45010b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m94.c"
+    },
+    "conformance/animation-pose-guests/m94.h.gz": {
+      "sha256": "fb869525f5e8589ad940b081b539cc6f2c7dc41d7040517f624bde69a4cf4a3f",
+      "uncompressed_sha256": "c3d0c510968647a34d2402d1ffd5781c09e2173bb5e9a54d561edf205c63bb02",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m94.h"
+    },
+    "conformance/animation-pose-guests/m94.original.wasm.gz": {
+      "sha256": "8b674c59f58d4f37b9d4f9c374380fb3f54f3e731be6f23e9dcee6901222bc28",
+      "uncompressed_sha256": "f0ee8819f0e6864e99d329f3cdcdc775b9ab3085f2c7399ef4127a98b3792fd2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m94.original.wasm"
+    },
+    "conformance/animation-pose-guests/m94.wasm.gz": {
+      "sha256": "8be87087301e00ac5113cbfd9aa54953dce9a5573ee1c208e7392b074f1705ef",
+      "uncompressed_sha256": "656653fe7a3fbcf63c7531e86e0c60d002b00b5727c38ddbb06a0ddee418c0a4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m94.wasm"
+    },
+    "conformance/animation-pose-guests/m95-facade.c.gz": {
+      "sha256": "673b16148fea4f5d9f88b7a774fcaf4281a5186ac14ad056448c2c0b616644dc",
+      "uncompressed_sha256": "e5a7588350b4100727d5373fd3fa1b9e24563bc1fe702a029b7a5570e861ec96",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m95-facade.c"
+    },
+    "conformance/animation-pose-guests/m95.c.gz": {
+      "sha256": "2a4133f06f7d8b20a3bd3c4b3452da883b7ba0c4d1532643d8e40535166a0b16",
+      "uncompressed_sha256": "fea0034ce50312afd1466a3ddd6bbb9f1bac21c6836aca6547055b1a52c955ed",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m95.c"
+    },
+    "conformance/animation-pose-guests/m95.h.gz": {
+      "sha256": "671d108ca20fc3fa8d04c6df1356a0633d4ceae83b590d69d24a9b919a761069",
+      "uncompressed_sha256": "e44887def551d4c037c5e6fe5f1701c8d61a9e7ba23b22f81b654e2966059682",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m95.h"
+    },
+    "conformance/animation-pose-guests/m95.original.wasm.gz": {
+      "sha256": "38f8ae557e044632dd3ecb3820307512a2fe646eac90ad6c86402f4178b4602f",
+      "uncompressed_sha256": "fa5a6664eee35e75e2723884eabd14f5c3bd69f676cf355e4b3e83edc9cc4f15",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m95.original.wasm"
+    },
+    "conformance/animation-pose-guests/m95.wasm.gz": {
+      "sha256": "4839be6bc7a56d422c38e2fc8e51aed7b8038f5dbb628efb6ce35e3c7463f401",
+      "uncompressed_sha256": "4d66e51a619c2f3c68a152dcb566283516de40ad81d916a7db64118d99839fae",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m95.wasm"
+    },
+    "conformance/animation-pose-guests/m96-facade.c.gz": {
+      "sha256": "ce34fcdc944e3d8618a1331da9cc02b80200436a3bb0a832c226fd351f30ae78",
+      "uncompressed_sha256": "543198283b941fbf0822b3ae01f030cb444f413d8e3ce9f1bc2b6b45cffaf359",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m96-facade.c"
+    },
+    "conformance/animation-pose-guests/m96.c.gz": {
+      "sha256": "f6168fdc7daed0b128f6801dc781ba13634c6680c4541fb953c7105a623202a4",
+      "uncompressed_sha256": "2d47bcf6a05437b907aa88fd1697afe00981fc728ea74d3f904400b4bd1448c4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m96.c"
+    },
+    "conformance/animation-pose-guests/m96.h.gz": {
+      "sha256": "88f43f8adca928c953562844f21f5064917ea92b7ed0f1e0f308433afc52932d",
+      "uncompressed_sha256": "4dfc96b619393233d1dc51fb6675539f87dbafa6af7f650240719405e567c1fc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m96.h"
+    },
+    "conformance/animation-pose-guests/m96.original.wasm.gz": {
+      "sha256": "ffe5acfd471631af9d1e028a29f7974c24cf35c4d6aab868220d748d5de57513",
+      "uncompressed_sha256": "b1f30807613ccc990dca54e71072a74e8a3e22d7728f30a6fcb09f96779a43dd",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m96.original.wasm"
+    },
+    "conformance/animation-pose-guests/m96.wasm.gz": {
+      "sha256": "a18a7993c82a507eee4fba4bfaf66abfefef77ec887419092a27a8a6ffd406cb",
+      "uncompressed_sha256": "23b8747df108a71f59c2866a3c9829cc234ce582c9fd6d4cfd5830c2e642cefa",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m96.wasm"
+    },
+    "conformance/animation-pose-guests/m97-facade.c.gz": {
+      "sha256": "988834d28d74567f768a14ab30cf22d67c4b24c89976ea2a90a8735ce3b85cde",
+      "uncompressed_sha256": "61b39ea6035d9d595a6099bfc28487d679f158000f6fcfad0c9a613355e3f0bc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m97-facade.c"
+    },
+    "conformance/animation-pose-guests/m97.c.gz": {
+      "sha256": "af47b17e434d437552233d1098e75e1227cd0edb0df6f6cc3b4581819a33a382",
+      "uncompressed_sha256": "7a1f5363a42bed99260ff4f5c32a2fd042ea25d005478ab3638b343ba25e61b2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m97.c"
+    },
+    "conformance/animation-pose-guests/m97.h.gz": {
+      "sha256": "139ca7de8e56e9103e6b0c51b3afc6be88daefde04104f5a1b4626f7d22b04c3",
+      "uncompressed_sha256": "b3db1cdb78203bf5ea06ed2411223e4cb4b152fefe0653f50d9438bba3efa3de",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m97.h"
+    },
+    "conformance/animation-pose-guests/m97.original.wasm.gz": {
+      "sha256": "cc16cc7dfe932f3a39f5dda5c471a4edd23dbf8aa50fc638b0946e26db58a7b4",
+      "uncompressed_sha256": "dd467c977459ce3ccf72f72be0a753038b899c0fb3e31cb47ec1ede412309d4f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m97.original.wasm"
+    },
+    "conformance/animation-pose-guests/m97.wasm.gz": {
+      "sha256": "e03c6885153d9c0e46c9694f6952b10dd3bcfe9ac0c9f2d1f1319312bedd576c",
+      "uncompressed_sha256": "617f451d3255adf95c7d6584a292668f9b15e73a133f1527cf39f8980373042e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m97.wasm"
+    },
+    "conformance/animation-pose-guests/m98-facade.c.gz": {
+      "sha256": "f8fda63fd7b03a0bc6010f3e385fa4f0ec3537b7b754ae889310b20842f07570",
+      "uncompressed_sha256": "5d650e70c505b93550a8dc8a7e5e9fe38cf085390dce52b4add04fecfc6274f8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m98-facade.c"
+    },
+    "conformance/animation-pose-guests/m98.c.gz": {
+      "sha256": "13ae9119ddeea4b3f78d5bc8fd8d0fd22885edca365ce8b691ee974af323fb7f",
+      "uncompressed_sha256": "80f1657d50e6e53062127047008c376a759459f16206b1d0a005a249fd54f6f9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m98.c"
+    },
+    "conformance/animation-pose-guests/m98.h.gz": {
+      "sha256": "ae8135f36844196f2269052e14dadfee987ba4bf13a542b43c04a29d22878a69",
+      "uncompressed_sha256": "cf9a21498dbc52b14450c702c35b8d526bb1910340aed905077440e6a0d952ea",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m98.h"
+    },
+    "conformance/animation-pose-guests/m98.original.wasm.gz": {
+      "sha256": "9e5a15acea138ffc333fc5759a338926885b90e33041063a2dd92d9df19c4a84",
+      "uncompressed_sha256": "ec57553bc8eb541b8bca1b8701febd32bf669b9b9a906d1cb3f53bf8064a857b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m98.original.wasm"
+    },
+    "conformance/animation-pose-guests/m98.wasm.gz": {
+      "sha256": "0126952849dad5e449c825821376351a861c4fa69bb1fa8b6525e030dd0d9d53",
+      "uncompressed_sha256": "c2bd1976f560f2318d19b6353fb67332df6f9724d74212116f316ca0272112f1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m98.wasm"
+    },
+    "conformance/animation-pose-guests/m99-facade.c.gz": {
+      "sha256": "d3fa15fd8b099437a285424c8041a3e8194ed41c629b487a6f080fc8cda9e776",
+      "uncompressed_sha256": "95e62b5823226a3ab881f31fdff6f73560de7465512956897a6d26b2309e8b43",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m99-facade.c"
+    },
+    "conformance/animation-pose-guests/m99.c.gz": {
+      "sha256": "7d242ef9a9c345217ba6017ee89b9ab231ff61c9cb35970db348d54388c10e58",
+      "uncompressed_sha256": "4c81d24c337b413d732110b381ba69990ccbb9f4ec4b7bd74ce0113041a4b9f3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m99.c"
+    },
+    "conformance/animation-pose-guests/m99.h.gz": {
+      "sha256": "218fa91157406c44e5639d6897324e4cee9f258bcad53df1713c2e91ff46e529",
+      "uncompressed_sha256": "98329f1ed781a4b9812937be39fd139f9a959acdad2e472eb333eff003aa0984",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m99.h"
+    },
+    "conformance/animation-pose-guests/m99.original.wasm.gz": {
+      "sha256": "b36c1ec95d0d4f5b09941c40f741bbe45febc1a4b6960296d7c22656b48db2b8",
+      "uncompressed_sha256": "e3ad36e42519b15b200f86c49e0b4ad370ea2550e806370bb101bcd58b343bd3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m99.original.wasm"
+    },
+    "conformance/animation-pose-guests/m99.wasm.gz": {
+      "sha256": "ca7696d4cb4669f73a08e7540370eec8c1d0a8461b8942553b4cf2368884f7d9",
+      "uncompressed_sha256": "90568121250fdb9a22477d5c5b0c6b11dbb85ca27ad3730e416ed38e5bb1b68b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/conformance/animation-pose-guests/m99.wasm"
+    },
+    "prior/compound-main153-001/freeze.json": {
+      "sha256": "2e8bb70f45c3cb7b245ca1e84dd00440d4e4c715306e7a30dc4d7b7e88752a74",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-001/freeze.json"
+    },
+    "prior/compound-main153-001/results.json": {
+      "sha256": "941969b0ca81f1203e5f9bdef2ae66b22b990a574ef02e23a22fae11077fc7f4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-001/results.json"
+    },
+    "prior/compound-main153-001/tests.log.gz": {
+      "sha256": "028e80789d80b3ff1ab182778baea2d5a61b7a1fe66e09ac83b4db947d13dc82",
+      "uncompressed_sha256": "a973389c96650ac081b5be9668158028cb3e9832410ef6494eadf4350b4cccf8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-001/tests.log"
+    },
+    "prior/compound-main154-002/clippy.log.gz": {
+      "sha256": "5d86f3c72045695ce9503ef6af7a7cb7b73d5089f4933b3d09db53895fc77596",
+      "uncompressed_sha256": "fbc7313fb8ec841b4505a5b1e17216c0f7767500ecd09a2ce17283a484c6a7ee",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/clippy.log"
+    },
+    "prior/compound-main154-002/freeze.json": {
+      "sha256": "a1d9cdd5de095799da966b5f44c674078fd5533ae18279e74b12c8ce022e3fc8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/freeze.json"
+    },
+    "prior/compound-main154-002/results.json": {
+      "sha256": "397e57dbfc16fecff437003bcf0abe594a0c3ba0a7398df0c1f4aa7bd069b67b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/results.json"
+    },
+    "prior/compound-main154-002/tests.log.gz": {
+      "sha256": "0c733894030d1c4dd0570fbf10556b2226ee27e5fd690bbb3aa8cc98ed34436e",
+      "uncompressed_sha256": "030305f54412fc2491d7d149380df602571ec0ba6c7fcf9ec1d74e96838f278b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/tests.log"
+    },
+    "prior/compound-main154-002/wasm.log.gz": {
+      "sha256": "b1671381818b5c81f6510119e9976bf002fcb2fdbef98a8f4f7407e618c0843c",
+      "uncompressed_sha256": "d99cf6e5f347361d739f8d83968c48272af34ae7ab058d5c20da93cfcc58feaa",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/wasm.log"
+    },
+    "prior/stale-wasm/cleanup.json": {
+      "sha256": "c778d662aeb6ce005854f5d97ac86d23e9ee9dce3d13f8d0881afac6a8fb64c2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/stale-wasm/cleanup.json"
+    },
+    "prior/stale-wasm/cleanup.log.gz": {
+      "sha256": "17e9404cbb5832910268c3aa93648281a973c4c54be04ee2570bac87b2e005cc",
+      "uncompressed_sha256": "5892b87c9f0caefce8894fca1a116057d9fd2babdf8d3fa15ca534f8564ca971",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/stale-wasm/cleanup.log"
+    },
+    "prior/stale-wasm/manifest.json": {
+      "sha256": "ab7792a08379fb7020acc16da93c1cd0edf3aa969a4031d858ba2590df198ac4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-002/stale-wasm/manifest.json"
+    },
+    "integration/accepted-source-comparison.json": {
+      "sha256": "06effa38f93ded8c3562121286f21ab551580ad0cf6b072844b1e95cf9f9dde8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-preparation/accepted-source-comparison.json"
+    },
+    "integration/integration-seams-v2.json": {
+      "sha256": "80ead4131e8b412159d6ffbd52d3f2715a8bab9159f38698ced7e2a2cd87f773",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-preparation/integration-seams-v2.json"
+    },
+    "integration/integration-seams-v2.patch.gz": {
+      "sha256": "c5a13b32e6a680378eee19c7edf1645126da5794986b8a735f87d09af912bbc7",
+      "uncompressed_sha256": "34a2305a44a54ee6370577a825c35b30fe264d4a854779118c6a2f4854eacbcb",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-preparation/integration-seams-v2.patch"
+    },
+    "integration/integration-seams.json": {
+      "sha256": "d195b3777692d0c8e4f3698987400e88898e78ef6f3610edb374bbe0c7f3e53a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-preparation/integration-seams.json"
+    },
+    "integration/integration-seams.patch.gz": {
+      "sha256": "ca804b9b6611d308e55763eda2f8b495653b45a6569652f7ec88f06c43c0b062",
+      "uncompressed_sha256": "4553900d83c20b352f9fb820116b69a15422f83449cac8dd670b2b778cd3e5e5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-preparation/integration-seams.patch"
+    },
+    "launchers/compound-main153-run.py": {
+      "sha256": "217f7adadfc446dbefbe0efecd207e96bf3633f6bcc6c95d5ab6907d63653ec3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main153-run.py"
+    },
+    "launchers/compound-main154-run.py": {
+      "sha256": "36a6e3e4f73208403eff5ae264fbed1a211a0ed5bac7301c7d3a2d7fdc982d3b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main154-run.py"
+    },
+    "launchers/compound-main155-run.py": {
+      "sha256": "0a28651b9e966d4bbdabedc7499ae90b08489544113ca0effaf9a5bc49624506",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-run.py"
+    },
+    "launchers/verify-compound-main155.py": {
+      "sha256": "3248bca9f192f54caddb790a87e09d672f961271ac0315fca5dc7ccbcaf17c1f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/verify-compound-main155.py"
+    },
+    "reviews/native-compound-main155-seams-20261012.json": {
+      "sha256": "d72fffc168404e578f005aa238ea3aa415b18a1f8fef5ee6531b4fbf16bd66ad",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-reviews/native-compound-main155-seams-20261012.json"
+    },
+    "public-export/authoring.json": {
+      "sha256": "b4511acc020c91945bf95da796ff194fb4e02c03a71d8342b40278f84134be62",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/authoring.json"
+    },
+    "public-export/baseline-observe.json": {
+      "sha256": "1e12fdaa308e1525d27d85973c6f794c3c486db45a8ad029dae21af39990bcca",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/baseline-observe.json"
+    },
+    "public-export/baseline.json": {
+      "sha256": "717d3cdee6f8625439e2fc9e991a08575a6f491db0742c80190f8cfbcf5d0369",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/baseline.json"
+    },
+    "public-export/baseline.pcm.gz": {
+      "sha256": "25e5db378f4bd6634a1f78305e4f8e38d3a7d56a98ba3299ba04ac91a6738423",
+      "uncompressed_sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/baseline.pcm"
+    },
+    "public-export/baseline.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/baseline.save"
+    },
+    "public-export/clip-to-weighted-continued-observe.json": {
+      "sha256": "8082d16237c9b7a7620a9ca93ecdad548cc667f34d1eaf3bd6435faf4c1d504f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-continued-observe.json"
+    },
+    "public-export/clip-to-weighted-continued.json": {
+      "sha256": "6b8d386a4adce9f8b94ec13f765d40407cb306f3de1796c4b9635d6a8e782589",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-continued.json"
+    },
+    "public-export/clip-to-weighted-continued.pcm.gz": {
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "uncompressed_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-continued.pcm"
+    },
+    "public-export/clip-to-weighted-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-continued.save"
+    },
+    "public-export/clip-to-weighted-observe.json": {
+      "sha256": "a735d3e1445fd81b4bac85fd5f8126d94a05ed0e27ef7af6cb60bb210e1ce68d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted-observe.json"
+    },
+    "public-export/clip-to-weighted.json": {
+      "sha256": "6cbe8ea404a711cfe6bf05851d4a55e4eaf920da8de686e2842067497d504dd1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted.json"
+    },
+    "public-export/clip-to-weighted.pcm.gz": {
+      "sha256": "a0c6f2b9d901283ad48a5b3d26513e29dba204a6d8b3090dad8a32e12a5d658d",
+      "uncompressed_sha256": "815b3648e8b1c5030ed541773df4ec443138b1f9815b3b31d4a069ca669ce1b1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted.pcm"
+    },
+    "public-export/clip-to-weighted.save.gz": {
+      "sha256": "7f883fb6ae645c145e236d8979f3d4f38bc8812f203e618fc9b20802ae2c1ce6",
+      "uncompressed_sha256": "0cf3d2e0bd523defea15d2af8438e362010f1ba1ed7c079ea390e2e7570dbbc0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/clip-to-weighted.save"
+    },
+    "public-export/command-000-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-000-stderr.txt"
+    },
+    "public-export/command-000-stdout.txt.gz": {
+      "sha256": "8f6e6ccab3e68748a7d8b9768146f11ff2a67b8ba97839272e17a853c0a882c6",
+      "uncompressed_sha256": "8abacd18946c31c343a724e2806b3cfe27df380a1378eee758152f7f96c244be",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-000-stdout.txt"
+    },
+    "public-export/command-001-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-001-stderr.txt"
+    },
+    "public-export/command-001-stdout.txt.gz": {
+      "sha256": "da2c73c0365a59f88fa91ab022ffe2e1e0e332ca08dd6c360908ec55d9b87ad3",
+      "uncompressed_sha256": "db8bad3415670a61e93172eab7fb1eaeb34829403e318d523bd398e479fadc73",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-001-stdout.txt"
+    },
+    "public-export/command-002-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-002-stderr.txt"
+    },
+    "public-export/command-002-stdout.txt.gz": {
+      "sha256": "26e3860aaf450c399882013e8cc9678d00b947966a9f5a5f959d0d2270dbbf77",
+      "uncompressed_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-002-stdout.txt"
+    },
+    "public-export/command-003-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-003-stderr.txt"
+    },
+    "public-export/command-003-stdout.txt.gz": {
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "uncompressed_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-003-stdout.txt"
+    },
+    "public-export/command-004-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-004-stderr.txt"
+    },
+    "public-export/command-004-stdout.txt.gz": {
+      "sha256": "4fa3c5a9212d8409cafb854a9147e39ff7fbe781b19748df6de4f50c6582fe15",
+      "uncompressed_sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-004-stdout.txt"
+    },
+    "public-export/command-005-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-005-stderr.txt"
+    },
+    "public-export/command-005-stdout.txt.gz": {
+      "sha256": "bd2a6bbee46fbcbecc3995cff3caf94f179b4694da85081f30021cbe3c356b72",
+      "uncompressed_sha256": "2e5dcdb4da623c963aa3d5f9ed4e47f00e319c89b1ca91c127fc86333504d85b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-005-stdout.txt"
+    },
+    "public-export/command-007-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-007-stderr.txt"
+    },
+    "public-export/command-007-stdout.txt.gz": {
+      "sha256": "66d723b07ec6e4c3409fdf10e06e3a77690790f4416480c5bd19aaacc16561c8",
+      "uncompressed_sha256": "0a353b4ceec73b33fc22a9af743cb4933f056227d52dd40b2fc11195bd1996ef",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-007-stdout.txt"
+    },
+    "public-export/command-008-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-008-stderr.txt"
+    },
+    "public-export/command-008-stdout.txt.gz": {
+      "sha256": "a3349103aa26e133bfdcd9a3f610c519d0cb1972d2fd88ee0be39b6227a549db",
+      "uncompressed_sha256": "773c4038a261139b84faf35030d7a9fc86e26c10ef6adcecdf85f6534efdf2a8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-008-stdout.txt"
+    },
+    "public-export/command-009-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-009-stderr.txt"
+    },
+    "public-export/command-009-stdout.txt.gz": {
+      "sha256": "54d587f4df2c80bcf74aaa08014ff4a7df65f456f6af8c5d308fb82d1d1a68fb",
+      "uncompressed_sha256": "5678523b7c63830a8a8b0f7193f9f1439194cfd70998b03f2925c9723f6ee218",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-009-stdout.txt"
+    },
+    "public-export/command-010-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-010-stderr.txt"
+    },
+    "public-export/command-010-stdout.txt.gz": {
+      "sha256": "54d587f4df2c80bcf74aaa08014ff4a7df65f456f6af8c5d308fb82d1d1a68fb",
+      "uncompressed_sha256": "5678523b7c63830a8a8b0f7193f9f1439194cfd70998b03f2925c9723f6ee218",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-010-stdout.txt"
+    },
+    "public-export/command-011-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-011-stderr.txt"
+    },
+    "public-export/command-011-stdout.txt.gz": {
+      "sha256": "54d587f4df2c80bcf74aaa08014ff4a7df65f456f6af8c5d308fb82d1d1a68fb",
+      "uncompressed_sha256": "5678523b7c63830a8a8b0f7193f9f1439194cfd70998b03f2925c9723f6ee218",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-011-stdout.txt"
+    },
+    "public-export/command-012-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-012-stderr.txt"
+    },
+    "public-export/command-012-stdout.txt.gz": {
+      "sha256": "bc6fc796be880c8908dbc2224847a23a8a3564ff7ccb19ba1aa4ad139dfe3739",
+      "uncompressed_sha256": "2e54f263ff56ac9c74d81d32c63f54a6ad3bf5f25b6fe18320e71bdb35c071cd",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-012-stdout.txt"
+    },
+    "public-export/command-013-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-013-stderr.txt"
+    },
+    "public-export/command-013-stdout.txt.gz": {
+      "sha256": "c353e1ea2af778fafb27afc0894b2f7e66b5eae0cce40045974ae8f36393e909",
+      "uncompressed_sha256": "85eeb5bbfe7e123276f988246333fcad74ed481e86efea3347a9ea3123c822e3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-013-stdout.txt"
+    },
+    "public-export/command-014-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-014-stderr.txt"
+    },
+    "public-export/command-014-stdout.txt.gz": {
+      "sha256": "696a70102b88f2868593706c770a0d6bddea56b034faaf1de2bc5538dee287fe",
+      "uncompressed_sha256": "2cc7b2fd490e524740e6e9667fae2f5e199ddb427bbcb7eb22b45d90658f4729",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-014-stdout.txt"
+    },
+    "public-export/command-015-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-015-stderr.txt"
+    },
+    "public-export/command-015-stdout.txt.gz": {
+      "sha256": "e4678b3a229f52f903569b3a5d3135ab92a8dda2d40b1c310b096a5e65709aeb",
+      "uncompressed_sha256": "8370aaa82eb9f986cc3b263f233abae4ed0d38451c0b9efdc4e35b250ab65e80",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-015-stdout.txt"
+    },
+    "public-export/command-016-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-016-stderr.txt"
+    },
+    "public-export/command-016-stdout.txt.gz": {
+      "sha256": "3a341e16b519449e4a449a32148ef427e85d9ee7e1aa00be2168c2024df63ca3",
+      "uncompressed_sha256": "3bbc774697308f85da8a1d084991bc7ac69c00e76c06d005d5ff37224bd7d0d1",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-016-stdout.txt"
+    },
+    "public-export/command-017-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-017-stderr.txt"
+    },
+    "public-export/command-017-stdout.txt.gz": {
+      "sha256": "882e4229aeef9908aa86d0cf3336f589f252624fd5344ed54695b1845f9c5dd6",
+      "uncompressed_sha256": "baefcd28d40d6345fd3b769d43fa0e3653d5134b9e9f0cfb63c5f6192d85cf5f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-017-stdout.txt"
+    },
+    "public-export/command-018-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-018-stderr.txt"
+    },
+    "public-export/command-018-stdout.txt.gz": {
+      "sha256": "9d45cbc18c01c1e2a494c16ce927ec679c26d8abaa8933bf9eb0846405ed309c",
+      "uncompressed_sha256": "f11f9d75944a64596409d5c4b36b94d370ca7df9889c7dd8d0e33fcc38c81854",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-018-stdout.txt"
+    },
+    "public-export/command-019-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-019-stderr.txt"
+    },
+    "public-export/command-019-stdout.txt.gz": {
+      "sha256": "d8f8553ba9012055fc2654cd4ba72655c044e3e5f576106fa6c8c0ae39485f8a",
+      "uncompressed_sha256": "83b3c9bd2b0d6f287c9e3e3269f3fe9aa6affbe3aa7daf2a13e2191655df7b44",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-019-stdout.txt"
+    },
+    "public-export/command-020-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-020-stderr.txt"
+    },
+    "public-export/command-020-stdout.txt.gz": {
+      "sha256": "14ca798b1bf33dc422ca422b2f5e13e1ae4faba2ec829dfcf3ff3339a97bead3",
+      "uncompressed_sha256": "e85523582c2a163d716a2b8c1570182fd55c5399b1faf044350507075b3fc296",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-020-stdout.txt"
+    },
+    "public-export/command-021-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-021-stderr.txt"
+    },
+    "public-export/command-021-stdout.txt.gz": {
+      "sha256": "929a0290ffc5bf5964c0f29601088c071fa31f0f4bf12a4ee4bbdde42347b755",
+      "uncompressed_sha256": "c1aa3c04676b40ce10b1b54bcf2f4d546a185d157f625394c6e836699f2b67d7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-021-stdout.txt"
+    },
+    "public-export/command-022-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-022-stderr.txt"
+    },
+    "public-export/command-022-stdout.txt.gz": {
+      "sha256": "57f67149d7dcb155859ea955aa7118d3f8453d1d65812e316ce20661f58abb94",
+      "uncompressed_sha256": "cc16699e8dc22dc59dae40ced36c0bb16e0aca3905f088bc639bfb81427e4989",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-022-stdout.txt"
+    },
+    "public-export/command-023-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-023-stderr.txt"
+    },
+    "public-export/command-023-stdout.txt.gz": {
+      "sha256": "844f8bcb10ccc467f8266916a9c04b3110bc490a78b36f2895a97bf93c5f8671",
+      "uncompressed_sha256": "a99aaaaca2d6b617b02691e9c0687dd627c7da4355a94082cee8815ab4031179",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-023-stdout.txt"
+    },
+    "public-export/command-024-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-024-stderr.txt"
+    },
+    "public-export/command-024-stdout.txt.gz": {
+      "sha256": "8e421b1e9e4a6510dd21398aeea580d64a16d87a1385b7192ccf08f15a1bf53b",
+      "uncompressed_sha256": "58411babdcd5487e5f7120834475da53bf46f6a6484fca4fdb6b6a9b31a48b9f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-024-stdout.txt"
+    },
+    "public-export/command-025-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-025-stderr.txt"
+    },
+    "public-export/command-025-stdout.txt.gz": {
+      "sha256": "89ba9c4cf1daeb17a5f94d1f36972020df365309b5085161f4dcf42a8b54939b",
+      "uncompressed_sha256": "55c971e3efcb0f7891a0fd4c8201a7b66f9f3cefe081313b861db772483aa0a0",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-025-stdout.txt"
+    },
+    "public-export/command-026-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-026-stderr.txt"
+    },
+    "public-export/command-026-stdout.txt.gz": {
+      "sha256": "8aaaf7e5ac939e5c1a9ce7886932196213a5023f84527bcff482d754c38b1fc2",
+      "uncompressed_sha256": "fb375b5d4a4c929ffd6a538f7bdb1e0c019a05ff6075e0d451c6da5878ea16ea",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-026-stdout.txt"
+    },
+    "public-export/command-027-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-027-stderr.txt"
+    },
+    "public-export/command-027-stdout.txt.gz": {
+      "sha256": "376156c83218dd6118eaf33b725a31a05ecd6d86cf6bc295b1f8992d6992c699",
+      "uncompressed_sha256": "2be32293b14458ebfae77329abcf40dd3aedefaf8309781257a03d8ccd81f178",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-027-stdout.txt"
+    },
+    "public-export/command-028-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-028-stderr.txt"
+    },
+    "public-export/command-028-stdout.txt.gz": {
+      "sha256": "e51fe6c1505897883f2f407755dc5be46070ba2cfc21636f03bad864aa650544",
+      "uncompressed_sha256": "9a44092aab8b41d984ade22308c47cdaa21d120b3f5d6e356f9187963fbce65f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-028-stdout.txt"
+    },
+    "public-export/command-029-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-029-stderr.txt"
+    },
+    "public-export/command-029-stdout.txt.gz": {
+      "sha256": "cda71d9e7c3f831343af099d5e1c930aa534b11c4ead8ece365261c682738e7b",
+      "uncompressed_sha256": "df59557fb20627a839db674f387482727ff19bd2c5235b4d231fba09c0a0fa3d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-029-stdout.txt"
+    },
+    "public-export/command-030-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-030-stderr.txt"
+    },
+    "public-export/command-030-stdout.txt.gz": {
+      "sha256": "0d234cda328f0828ec7657bdf035648f7803426def150d0d2eec6e7fbbf2596d",
+      "uncompressed_sha256": "73739ae162b86afb752b195b7474bcb949140955724b77b7cc2e145efeeec318",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-030-stdout.txt"
+    },
+    "public-export/command-031-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-031-stderr.txt"
+    },
+    "public-export/command-031-stdout.txt.gz": {
+      "sha256": "d35306693367fff4255fa04bb17bc28d191864b3d69e7e21f4ca01a17b067a19",
+      "uncompressed_sha256": "b2de0d210632dc94aad0f6cb3c7ca596f81ff3084ab6fbdee57aee750c1a1f87",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-031-stdout.txt"
+    },
+    "public-export/command-032-stderr.txt.gz": {
+      "sha256": "08d7c2b257c0386a0aa8e61e5a974bc5ae7b1787fa9f1fe40a7fa4bf451a5738",
+      "uncompressed_sha256": "0f8649dba037ac2235d7b2e5e7d408388e0b5d58d9120a33dba0847cb18e8212",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-032-stderr.txt"
+    },
+    "public-export/command-032-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-032-stdout.txt"
+    },
+    "public-export/command-033-stderr.txt.gz": {
+      "sha256": "1735d5f6d6a8147101c2b6fd607cf4145d6f6d7b51aca7d34c7ff96b71596a57",
+      "uncompressed_sha256": "ce997e587c1fc5e235c094e21f03ccada4c19ab929e504f2b0263e3e5969e038",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-033-stderr.txt"
+    },
+    "public-export/command-033-stdout.txt.gz": {
+      "sha256": "142ca98adb94c45aef55fa23c6e8d4e39682ccd10a36bf202a64c5b752e4b2cb",
+      "uncompressed_sha256": "a6d0306ed12bb855aa4653ae3fc8ffad2be92d3976c486fe9cde656158330483",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/command-033-stdout.txt"
+    },
+    "public-export/commands.json": {
+      "sha256": "e0cd8df6e28e09a6f5b12e6ea4eacb2b9f8a987422d95875fe3c7b25fe47eebc",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/commands.json"
+    },
+    "public-export/completed-incoming-continued-observe.json": {
+      "sha256": "90d332e7f95668d6b4a6df52779eca6b2f85f42483ba85a33502ae029f5cedc8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-continued-observe.json"
+    },
+    "public-export/completed-incoming-continued.json": {
+      "sha256": "001b258b13da1efbd1be15235ac59430830dd25c564cb7fce46c041d6c6d3142",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-continued.json"
+    },
+    "public-export/completed-incoming-continued.pcm.gz": {
+      "sha256": "39c7abb93ca8760aff56725e50a53e8c10f2f8d5e01da8b55e599ea4b34c30a1",
+      "uncompressed_sha256": "8eafc7bd411c1f02b9e972a83d2b0a4164eefc5ef51e6b63ad7acc78be4ad44f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-continued.pcm"
+    },
+    "public-export/completed-incoming-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-continued.save"
+    },
+    "public-export/completed-incoming-observe.json": {
+      "sha256": "a11d3aee08a883e7f1cc3b1412b99846408756644c134e9e9713a20ee725608d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming-observe.json"
+    },
+    "public-export/completed-incoming.json": {
+      "sha256": "4ab900ade91b519f136f788b3e1c7d2b59a3a59d5b0d0ae17ad4f6a020acaf75",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming.json"
+    },
+    "public-export/completed-incoming.pcm.gz": {
+      "sha256": "69dd426b1da25ec0317ecbfce01b33639f83fb78b5775638ace6f863efd32ec5",
+      "uncompressed_sha256": "0c5cc90b079d0d9c1ded1376357d23a9782a704a83e01731f50ccd162e246492",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming.pcm"
+    },
+    "public-export/completed-incoming.save.gz": {
+      "sha256": "08b756535dfebc1177159a9d00727f4c87f3dd5f7794ad5d282cd6b85da3482a",
+      "uncompressed_sha256": "5e7d316e06314102663050bcc80cc9c914dff6c0955c2995fd50a3fc8bf239bf",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-incoming.save"
+    },
+    "public-export/completed-outgoing-continued-observe.json": {
+      "sha256": "be8573d0e2e296d8c7a4ef94a05c3d38b1fd5d79b384ed28c52957aada21a802",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-continued-observe.json"
+    },
+    "public-export/completed-outgoing-continued.json": {
+      "sha256": "d3176dae51f4ef1d298de71f573f1d632d477a8709fd6c6fcca2de1f74a67121",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-continued.json"
+    },
+    "public-export/completed-outgoing-continued.pcm.gz": {
+      "sha256": "ab8061bca3b4fcbc7819db2b0c1568a5cb2d88d3e02e124b8d5c44f0103c8990",
+      "uncompressed_sha256": "c4527252a0b06fcda9139288af35098246c319087447a40400a9cc6c200dbf10",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-continued.pcm"
+    },
+    "public-export/completed-outgoing-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-continued.save"
+    },
+    "public-export/completed-outgoing-observe.json": {
+      "sha256": "cd40e8f2ccff65176a55d7646820d947f7ace350bb643f62ea596ddbcc858e9a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing-observe.json"
+    },
+    "public-export/completed-outgoing.json": {
+      "sha256": "0dc9c3428d855c14c83788c2378d3c702d598f4ce09b828e9e3f4cd4e9681ab9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing.json"
+    },
+    "public-export/completed-outgoing.pcm.gz": {
+      "sha256": "4e08b54069ff1ca7b3e3327abc11389e640d841cfbcfd7d704e377afe569bb32",
+      "uncompressed_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing.pcm"
+    },
+    "public-export/completed-outgoing.save.gz": {
+      "sha256": "96c776914a9964a4552958acb7a5c339fb238986df8ab6480491aa0c35b3f4f9",
+      "uncompressed_sha256": "4a7e8c00c46488991eb849d79d16461906ac01ee051204a76b584a8564367180",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/completed-outgoing.save"
+    },
+    "public-export/corrupt-input.save.gz": {
+      "sha256": "5a7dba06059eaaf3b6a789563da17b32651f79b4dcacddd25d1401bea90262ec",
+      "uncompressed_sha256": "e01984a1b5352afa67537fbd50a6930fe0b21c2d7859e9cd07af9946885c6e77",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/corrupt-input.save"
+    },
+    "public-export/corrupt-observe.json": {
+      "sha256": "a867ee1382a000296811bb543f45a7cc3a7eedadecc7955533053b2fb8778029",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/corrupt-observe.json"
+    },
+    "public-export/independent-oracle.json": {
+      "sha256": "db59a60c4374abb628af6ad789b41f134932ef8e9bed3c5d3156fb026385d393",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/independent-oracle.json"
+    },
+    "public-export/manual-cancel-continued-observe.json": {
+      "sha256": "8064a3d76cba37f46c91cac2e2786ab418c603453b2cb47e8660994f9cbb1672",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-continued-observe.json"
+    },
+    "public-export/manual-cancel-continued.json": {
+      "sha256": "7d88eead8bf5a7655a7e50754f64a7feef2852241e82a363c31af3e61383bab4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-continued.json"
+    },
+    "public-export/manual-cancel-continued.pcm.gz": {
+      "sha256": "89e852882cc29b7c037ba521dca5b44608c3506cd90887fb69a44e30e3afeb7f",
+      "uncompressed_sha256": "b9ce164d30e4101b009fe4be765a070593cfbdd48f897853de159a8c177fabe8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-continued.pcm"
+    },
+    "public-export/manual-cancel-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-continued.save"
+    },
+    "public-export/manual-cancel-observe.json": {
+      "sha256": "4e581b5351978132e93e5c447425674c09b17de332d68cb7d5c395409b9fe4da",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel-observe.json"
+    },
+    "public-export/manual-cancel.json": {
+      "sha256": "6ba0b64416e2d581a8600ca08554856517ec2a02e4341acc1f78be1bc98ed275",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel.json"
+    },
+    "public-export/manual-cancel.pcm.gz": {
+      "sha256": "544ef06946dc708fd4f219130b5f2582b878644cb7f289caaf890587d4aaa4fa",
+      "uncompressed_sha256": "a515959304caf9651b7d2b8b22368d869e2a763eb6061b4ff4b2493711a06129",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel.pcm"
+    },
+    "public-export/manual-cancel.save.gz": {
+      "sha256": "6d9f95829f6009ca11f47686173d447a10de22e59a6ead0cb8c1925e6b5a274f",
+      "uncompressed_sha256": "e165cd2b19948b1d87f355ed4a2d2d8b02780ef46022886824fb4e921d07a3b4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/manual-cancel.save"
+    },
+    "public-export/pair-to-clip-continued-observe.json": {
+      "sha256": "19abc1c032eec5b52bad1312ae8073b3f272437426eda76f328b8eaec1e19ff2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-continued-observe.json"
+    },
+    "public-export/pair-to-clip-continued.json": {
+      "sha256": "28e79db3b13007ff266e5b2a6e1e0fc7d0972c5955f6d1fefeec298be904da12",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-continued.json"
+    },
+    "public-export/pair-to-clip-continued.pcm.gz": {
+      "sha256": "ce4d84db58738faad29f3b75e2915a0d1053a616cf818076f852e58cbfa39c48",
+      "uncompressed_sha256": "53853188f83a941e2f45ec1383293ae935106c5721918079000dcb2254fc550b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-continued.pcm"
+    },
+    "public-export/pair-to-clip-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-continued.save"
+    },
+    "public-export/pair-to-clip-observe.json": {
+      "sha256": "992f44d996b66b6ef27f9a3c75db4ab63be92371e98b50f89ebea7ba93396d96",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip-observe.json"
+    },
+    "public-export/pair-to-clip.json": {
+      "sha256": "e3a18c3f7188a69745f1a4d4347f484fdc5cb35f5f31d404d2df2b8e82631c1c",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip.json"
+    },
+    "public-export/pair-to-clip.pcm.gz": {
+      "sha256": "5211cb32576b205ff513ca067789374e406859bdfd79c34f796d776f3140fe52",
+      "uncompressed_sha256": "d7e96550cf1a6060d91593fdc68a2292c92d4270aa9f7eb6b44cece8f1bd7e5d",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip.pcm"
+    },
+    "public-export/pair-to-clip.save.gz": {
+      "sha256": "de9a009de534262f39ad86dfa30ac7e3ebab4b20bea1e12354cb0b165abc7554",
+      "uncompressed_sha256": "6f6ecd5147a7dbcd5e78aba2641303d3ce09d7faa1c414283f6bc3a53b11a28e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/pair-to-clip.save"
+    },
+    "public-export/paused-continued-observe.json": {
+      "sha256": "f7ae98ab4ad577852ba3657daa0f8df9511559ad4911bdc2f81289562e4e62c3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-continued-observe.json"
+    },
+    "public-export/paused-continued.json": {
+      "sha256": "a2d13ca285cbf6b03b340c3046026180678ddf0ac68e48c7e41a7f7edd66306e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-continued.json"
+    },
+    "public-export/paused-continued.pcm.gz": {
+      "sha256": "f45d39eafee95323525527aa428c50f312ddbf4e081859041327deb3d8660ca7",
+      "uncompressed_sha256": "6fc524968f109b653a79e0aa6a05b8a35535cc5e074708c9d9ad9e5e1c2064d2",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-continued.pcm"
+    },
+    "public-export/paused-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-continued.save"
+    },
+    "public-export/paused-observe.json": {
+      "sha256": "558c24d2b6f4a52a352279237248fd9228d0a6b24841f5976a5f80512391e6b4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused-observe.json"
+    },
+    "public-export/paused.json": {
+      "sha256": "85af297416708273c1ce59d2b0882301cad3241321e839074dc151c54a3460c5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused.json"
+    },
+    "public-export/paused.pcm.gz": {
+      "sha256": "bd3004837711db54c41278676b20d71839917dc3b0fea567ab4e49916d6f0b38",
+      "uncompressed_sha256": "c72274a22cba2dcef62e0f62834446ee39b0cd95ad0faa27a89b3b49f48aa390",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused.pcm"
+    },
+    "public-export/paused.save.gz": {
+      "sha256": "58f132b168d109fb3c1a3778374feee870988e80292545794987cecbd246c18a",
+      "uncompressed_sha256": "11723372b8834621c2ed5ff94e81afcfd5f7f13ae77d1d0e29f30b5d4596acc8",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/paused.save"
+    },
+    "public-export/public-commands.json": {
+      "sha256": "c6eba659da3387a05d80212faebeaa0ef5c0921429fdc785a37caa2f5e982cf9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/public-commands.json"
+    },
+    "public-export/repeat-0-observe.json": {
+      "sha256": "1e12fdaa308e1525d27d85973c6f794c3c486db45a8ad029dae21af39990bcca",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-0-observe.json"
+    },
+    "public-export/repeat-0.json": {
+      "sha256": "717d3cdee6f8625439e2fc9e991a08575a6f491db0742c80190f8cfbcf5d0369",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-0.json"
+    },
+    "public-export/repeat-0.pcm.gz": {
+      "sha256": "25e5db378f4bd6634a1f78305e4f8e38d3a7d56a98ba3299ba04ac91a6738423",
+      "uncompressed_sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-0.pcm"
+    },
+    "public-export/repeat-0.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-0.save"
+    },
+    "public-export/repeat-1-observe.json": {
+      "sha256": "1e12fdaa308e1525d27d85973c6f794c3c486db45a8ad029dae21af39990bcca",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-1-observe.json"
+    },
+    "public-export/repeat-1.json": {
+      "sha256": "717d3cdee6f8625439e2fc9e991a08575a6f491db0742c80190f8cfbcf5d0369",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-1.json"
+    },
+    "public-export/repeat-1.pcm.gz": {
+      "sha256": "25e5db378f4bd6634a1f78305e4f8e38d3a7d56a98ba3299ba04ac91a6738423",
+      "uncompressed_sha256": "11001dd97006a44b5bccaaafeb04f0a089ad1a7b3781f58362cb62cc814de4ce",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-1.pcm"
+    },
+    "public-export/repeat-1.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/repeat-1.save"
+    },
+    "public-export/restarted-fade-continued-observe.json": {
+      "sha256": "b08e87ce925c876609bea94bd6d7bf8039033eaf6f6d7a0723eea673d6db4a1b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-continued-observe.json"
+    },
+    "public-export/restarted-fade-continued.json": {
+      "sha256": "89ad8bd09320d12d9b281594803e9e2fa165d8cd2b760cac9d23b4af7447c6a5",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-continued.json"
+    },
+    "public-export/restarted-fade-continued.pcm.gz": {
+      "sha256": "d78ec17bb5ffc91dd66307b5f83cadd4a79e15e03790926abe9440ba1e679c49",
+      "uncompressed_sha256": "d8b443032200e143b1c49820b6d78c32d519553a3f63a38f48e8bc31da084f0a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-continued.pcm"
+    },
+    "public-export/restarted-fade-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-continued.save"
+    },
+    "public-export/restarted-fade-observe.json": {
+      "sha256": "22315046dfb1c99d65444c087f5ba857631a3a52fd7b6d20511049b303db0ecb",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade-observe.json"
+    },
+    "public-export/restarted-fade.json": {
+      "sha256": "d9bc8a035e096e9139993a6aec9298aeecdc646a5486d5a4358448ffc0e732ca",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade.json"
+    },
+    "public-export/restarted-fade.pcm.gz": {
+      "sha256": "ff9b58484293e26f0187fa84599102f11066634d52a1266a8acdf50c16b6e0a0",
+      "uncompressed_sha256": "25923682ec8aa0d1d9eec7cb1333fcdf0b84da443cb5da427f1f0b639e18e3f9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade.pcm"
+    },
+    "public-export/restarted-fade.save.gz": {
+      "sha256": "8e3ef984b0bf0bb0c534e3904223285148b18524a0b3741c6b8cc3a1c02fa81b",
+      "uncompressed_sha256": "ac5f4444061add556975164f1b48cc21c142dc870ddf4c909a69facaa8a91a0f",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/restarted-fade.save"
+    },
+    "public-export/result.json": {
+      "sha256": "1450fe20b3d4e1da9f6bffaff99f92bf954b25dda97dee4d3e19a2af608bda7b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/result.json"
+    },
+    "public-export/reverse-continued-observe.json": {
+      "sha256": "3021b02f969e622a8181745b90555df18963d8585f66bf730232ca5ff8ad5603",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-continued-observe.json"
+    },
+    "public-export/reverse-continued.json": {
+      "sha256": "7c7bba955c0f2b38a5ff1ea1102ed13eacf673a4829d6f35a8149aab04909987",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-continued.json"
+    },
+    "public-export/reverse-continued.pcm.gz": {
+      "sha256": "fedac61a98b1a60a748ef0fd242392b5e8c990827ac3a5370fad4d3ab7199647",
+      "uncompressed_sha256": "acced81ec89b296e3d496b748507fe7d9352e41d49f1507c14d435afa95323cd",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-continued.pcm"
+    },
+    "public-export/reverse-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-continued.save"
+    },
+    "public-export/reverse-observe.json": {
+      "sha256": "d27608abeac46cc4d5a334def5da3b363f1ceed76d0bde65c2e979547ac47b1a",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse-observe.json"
+    },
+    "public-export/reverse.json": {
+      "sha256": "cb9b49abdccaea97e993d20191586cf8cc6d0b2833a591b873ae4d783bb93d9e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse.json"
+    },
+    "public-export/reverse.pcm.gz": {
+      "sha256": "0c8316f041218a52bd71aeb1db08ab8c4722cf75829af258b488e8f9f39e5723",
+      "uncompressed_sha256": "9b54dfbc92b4baf804aa3b0360cbc32e4d9ebe32c974c5131c52e3f375d3e25e",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse.pcm"
+    },
+    "public-export/reverse.save.gz": {
+      "sha256": "01cbf58ee1d717c984f1c26aa84aac58b91de8609b230fd0c7eccac73b91ab7d",
+      "uncompressed_sha256": "24da67e9576683d0778ced44148ecb857ad5e6e23b039e1c4a2c1437a452d717",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/reverse.save"
+    },
+    "public-export/weighted-to-pair-continued-observe.json": {
+      "sha256": "8508c6aa650d1c795f42ecb93afde67ca58eec259d5cfe20800a69375b51a752",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-continued-observe.json"
+    },
+    "public-export/weighted-to-pair-continued.json": {
+      "sha256": "c4e66c7b0b41bdb967bd045ad2d1ce251700bd3aa3f607d17422c7cc9e7fd911",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-continued.json"
+    },
+    "public-export/weighted-to-pair-continued.pcm.gz": {
+      "sha256": "97cadd34ddb566fb0bd6306f4f203b22d119a74f27d505eb8331bd05c677f7c3",
+      "uncompressed_sha256": "ed9524f9e8318c1bf1be6ad5f519f95513194dc348d68bf08fb5f966fc565be3",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-continued.pcm"
+    },
+    "public-export/weighted-to-pair-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-continued.save"
+    },
+    "public-export/weighted-to-pair-observe.json": {
+      "sha256": "30f2ae3dbf35ec240e6c032871ef9acc456e58e17da7d5b61fea9962c9610bca",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair-observe.json"
+    },
+    "public-export/weighted-to-pair.json": {
+      "sha256": "86b45430e359cc404f7ca691dd1c76042edeac189b29427682e90da84e143464",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair.json"
+    },
+    "public-export/weighted-to-pair.pcm.gz": {
+      "sha256": "b39a750b7ecc3569903ffe4bd5937416945c5a004967be81d7be75abe19e0797",
+      "uncompressed_sha256": "ac8f5613c4b176d380009fa1306c49a027644dba38b9703ed102634c60f8d5ff",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair.pcm"
+    },
+    "public-export/weighted-to-pair.save.gz": {
+      "sha256": "5bc3880132a476a323cc71816d425d5da652da94a73651e04271df28438f98e6",
+      "uncompressed_sha256": "092ed569917539bda1365d31f5dd591d717146dd66d8822dd967717f91eea0f7",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/weighted-to-pair.save"
+    },
+    "public-export/wrong-observation-observe.json": {
+      "sha256": "e8aec86cf48fa8d1d6afbfcef637b84517363b04a6bb270fa1fb9cc4be645036",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/wrong-observation-observe.json"
+    },
+    "public-export/zero-weight-continued-observe.json": {
+      "sha256": "8e53736ea0d42c4f37dc3b6ab4b0c69d6bda1347d5a7be6e336d64a2882d76ee",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-continued-observe.json"
+    },
+    "public-export/zero-weight-continued.json": {
+      "sha256": "d36fa68bbddf582e7cd4a8b6b2a61be7bd2aca9c23fca48ba12fcf0d1fac5ed4",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-continued.json"
+    },
+    "public-export/zero-weight-continued.pcm.gz": {
+      "sha256": "f86e04e9b173eae923322dbf0bfa52d0145b557d5783d940dee5b5bdb44b44e1",
+      "uncompressed_sha256": "76f6b79828f76acb810744448ea8c0acd41f5743775c7ae6139ebbe7f0a0b53b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-continued.pcm"
+    },
+    "public-export/zero-weight-continued.save.gz": {
+      "sha256": "7cfe11c2c4ac30fdfa48207ed1470abb7bc72457ea75f379d8b8c30dc8afaa8b",
+      "uncompressed_sha256": "d415b0bdf3860f942883aac65bf4f2933435b06c5feb9185883faf0950d05d54",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-continued.save"
+    },
+    "public-export/zero-weight-observe.json": {
+      "sha256": "b3fb1c4e80913c8bb9ec2dcd59c7a945e93d1b58bb2041f942f3df010504c173",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight-observe.json"
+    },
+    "public-export/zero-weight.json": {
+      "sha256": "aade4cbbf0572ce52c93c6c66d654382f10eab51193e3a4871c90281165294b9",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight.json"
+    },
+    "public-export/zero-weight.pcm.gz": {
+      "sha256": "9f649b8b69f97823d2f2b7fc5400c0fd32676ea84aa567952a85d87c7d529bbe",
+      "uncompressed_sha256": "0c92bddb4e96f3ea9ec9f0f64a668255a6c15527ac09f6f119cafde60c7c4a39",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight.pcm"
+    },
+    "public-export/zero-weight.save.gz": {
+      "sha256": "1b12e1e7ad3d15ba793ac97dfe19901f84e3faa6395aa52ebf7220e46a071298",
+      "uncompressed_sha256": "57c15f0b6b8094fad2597af934308e8c539e3f3c7a99350a27fba93fdcdb412b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/zero-weight.save"
+    },
+    "public-export/package/export.json": {
+      "sha256": "2075f6af1e20f7b1dab592485a8230fa56a5aff4674250da6e25006652d43b1b",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/export.json"
+    },
+    "public-export/package/project-build.json": {
+      "sha256": "74646b882d23f2e7a4c0f15de4fa5888e27976dfd182b001f19f1cdd14a48038",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/project-build.json"
+    },
+    "public-export/package/build.log.gz": {
+      "sha256": "17ae442e15ca4ffb4eca1d4947ee4f44c50f68bc0b3cee354633ea154111eda4",
+      "uncompressed_sha256": "a7dea17fae76f897fccfdda43f3372cca8eb6e796145768e36a0776e59142736",
+      "producer_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/compound-main155-003/public-export/package/build.log"
+    }
+  },
+  "prior_failures": [
+    "Initial integrated checkpoint test kept four obsolete v3-v9 diagnostic assertions after admission extended to world v10. Corrected exact expected diagnostic only; original refusal and atomicity assertions retained.",
+    "Unchanged wasm source initially reused cross-checkout stale incant_types/assets metadata without new grouped/pipeline dependencies. Original50 cache files retained outside repository; manifests and dependency records retained here. A private APFS target clone, scoped three-package wasm cleanup and unchanged-source rebuild passed. Prior766 CPU tests and all-target Clippy remain separate successful evidence; fresh shipping uses disposable build storage.",
+    "Metadata-only verification initially expected absolute checkout source paths and the wrong grouped subdirectory. Cargo dep records use checkout-relative paths; corrected metadata assertion without modifying engine source.",
+    "Initial closure verifier included the exporter startup smoke in its25 checkpoint process count. Corrected metadata partition independently verifies1successful startup +23successful proof processes +2expected refusals; preserved audit failure, no engine/probe edits or process reruns."
+  ],
+  "limitations": [
+    "CPU and shipping-profile package correctness only; renderer GPU tests remained ignored. No new window, appearance, device, performance or phase acceptance.",
+    "Existing Wasm v1-v4 and IK-v1 cannot represent compound poses and explicitly refuse them. New complete compound ABI is a separate later intake.",
+    "Module checkpoint state and connected root-motion gameplay remain unsupported.",
+    "Checkpoint13 independently evaluates frozen main155; later compound merge does not change its selected tree."
+  ],
+  "review": {
+    "decision": "accepted",
+    "receipt": "native-compound-main155-final-review.json",
+    "sha256": "5ecd59d14670fc1cc7743825c7d5e3e7ba898fa7039637edd62e36a9811b1a1c",
+    "reviewed_manifest_sha256": "7c99385beaee4a05813131b9186c4424a94add47f1a40d69241f746b2c9d760c"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "at": "2026-10-12T17:17:29.161385+00:00",
+  "result": "passed",
+  "scope": "Exact admission versus observation-failure output contract on unchanged player; no recook",
+  "original_result_sha256": "1ace1373554b7c0d8ee0eede8ec76fe5361534e4bfaf33b01645b3227813c12d",
+  "original_helper_sha256": "ccec79b56236acf9910ef9d1c156d29a26540d75deb260f17a59f7d73867b60d",
+  "final_helper_sha256": "d2ceddf70347cd4c7c9d7d35b9070c88174e7cb84c6c521bab003dbe26172aff",
+  "player_sha256": "041bbf3452a6b322adc463b773cd3cfe249be827ba5db3f460e5981b61d4f1cb",
+  "runs": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/incant_game_player",
+        "--package",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/data",
+        "--ticks",
+        "1",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt.pcm",
+        "--observe",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/corrupt-observe.json",
+        "--save-checkpoint",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt.save",
+        "--load-checkpoint",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/corrupt-input.save"
+      ],
+      "returncode": 1,
+      "seconds": 0.016014917000575224,
+      "diagnostic": "Error: Checkpoint(Integrity)",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt-stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/corrupt-stderr.txt",
+        "sha256": "0f8649dba037ac2235d7b2e5e7d408388e0b5d58d9120a33dba0847cb18e8212"
+      },
+      "stdout_contract": "empty admission refusal",
+      "output_files_absent": true
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/incant_game_player",
+        "--package",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/package/player/data",
+        "--ticks",
+        "1",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation.pcm",
+        "--observe",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/wrong-observation-observe.json",
+        "--save-checkpoint",
+        "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation.save"
+      ],
+      "returncode": 1,
+      "seconds": 0.01378354199914611,
+      "diagnostic": "Error: \"checkpoint withheld: native observation assertions failed\"",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation-stdout.txt",
+        "sha256": "a6d0306ed12bb855aa4653ae3fc8ffad2be92d3976c486fe9cde656158330483"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/compound-export-001/negative-output-followup-002/wrong-observation-stderr.txt",
+        "sha256": "ce997e587c1fc5e235c094e21f03ccada4c19ab929e504f2b0263e3e5969e038"
+      },
+      "stdout_contract": "complete failed-observation diagnostic report",
+      "output_files_absent": true
+    }
+  ],
+  "historical_attempt": "First follow-up assumed all failures have empty stdout. Admission control passed; observation control failed that assumption because the documented player emits a complete failed-observation report. That production behavior is preserved; original raw output is retained as command033 in the full proof. No production change."
+}

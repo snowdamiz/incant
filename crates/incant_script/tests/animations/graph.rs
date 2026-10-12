@@ -277,3 +277,61 @@ fn weighted_tree_columns_are_complete_owned_and_match_committed_graph_control() 
         3
     );
 }
+
+#[test]
+fn compound_fade_sdk_copies_groups_and_independent_source_clock_without_flattening() {
+    let base = graph_scene();
+    let mut nodes = base.spatial().to_vec();
+    for node in &mut nodes {
+        let animation = Arc::make_mut(node.animation.as_mut().unwrap());
+        let old = animation.graph.as_ref().unwrap();
+        animation.graph = Some(Arc::new(
+            NativeAnimationGraph::new(
+                0,
+                old.parameters().to_vec(),
+                old.states().to_vec(),
+                vec![NativeAnimationGraphTransition {
+                    id: id(30),
+                    from: 0,
+                    to: 1,
+                    priority: 0,
+                    fade_seconds: 0.5,
+                    after_seconds: None,
+                    conditions: Arc::from([NativeAnimationCondition {
+                        parameter: 0,
+                        comparison: incant_types::AnimationComparison::GreaterEqual,
+                        value: 0.5,
+                    }]),
+                }],
+                &[2.0, 4.0],
+            )
+            .unwrap(),
+        ));
+    }
+    let initial = base
+        .clone()
+        .with_spatial(base.visual_assets().to_vec(), nodes)
+        .unwrap();
+    let mut world = NativeWorld::new(initial);
+    let mut host = host(&format!(
+        r#"let n=0,old;exports.default={{update({{animations:a,commands}}){{
+        const g=a.graphs,i=a.ids.indexOf('{ONE}'),j=g.ids.indexOf('{ONE}');
+        if(n===0){{if(a.poseKinds[2*i]!==255||a.poseSplits[i]!==0||g.fadeStates[j]!==null||g.fadeFlags[j]!==0)throw Error('inactive');commands.setAnimationParameter('{ONE}','{PARAMETER}',0.5);}}
+        else{{let o=a.poseOffsets[i];if(a.poseOffsets[i+1]-o!==3||a.poseKinds[2*i]!==0||a.poseKinds[2*i+1]!==1||a.poseSplits[i]!==1||a.poseWeights[o]!==1||a.poseWeights[o+1]!==0.5||a.poseWeights[o+2]!==0.5)throw Error('groups');if(g.fadeStates[j]!=='0000000000000000000000000M'||g.fadeFlags[j]!==3||g.fadeSpeeds[j]!==1||g.fadeDuration[j]!==0.5||g.blending[j]!==0||g.weighted[j]!==0)throw Error('source');if(a.poseOuterWeights[i]!==g.fadeElapsed[j]/g.fadeDuration[j])throw Error('outer');if(n===1){{old=a;a.poseKinds[2*i]=99;a.poseWeights[o]=99;g.fadeSeconds[j]=99;}}else{{if(old.poseKinds[2*i]!==99||a.poseKinds[2*i]!==0||g.fadeSeconds[j]===99)throw Error('ownership');}}}}
+        n++;
+    }}}};"#
+    ));
+    for _ in 0..3 {
+        host.tick(&mut world, 0.125).unwrap();
+        world.step().unwrap();
+    }
+    assert_eq!(
+        world
+            .animation_graph_state(id(1))
+            .unwrap()
+            .fade
+            .unwrap()
+            .speed,
+        1.0
+    );
+}

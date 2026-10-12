@@ -266,10 +266,16 @@ pub(crate) struct Playback {
 }
 impl Playback {
     pub(crate) fn pose_sample(&self) -> Option<incant_types::AnimationPoseSamples> {
-        self.definition.graph.as_ref()?.pose(self.graph.as_ref()?)
+        self.definition
+            .graph
+            .as_ref()?
+            .pose(self.graph.as_ref()?, &self.definition)
     }
     pub(crate) fn blend_sample(&self) -> Option<AnimationBlendSample> {
         if let (Some(definition), Some(graph)) = (&self.definition.graph, &self.graph) {
+            if graph.fade.is_some() {
+                return None;
+            }
             definition
                 .sample(graph, &self.definition)
                 .1

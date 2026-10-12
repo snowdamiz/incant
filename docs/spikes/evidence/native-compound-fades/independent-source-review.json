@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-12T17:00:47.829058+00:00",
+  "reviewer": "astra",
+  "base": "0461f16e75a2c65bac4eb3fa7c4fb5b82b72658e",
+  "commit": "389481c76e1ac915b49d5d8f9eda1c648a86b462",
+  "result": "accepted bounded source scope; no correctness blocker",
+  "sources": {
+    "STATUS.md": "f8c652b93ac23596f2444066e03c64bb6a65677ec019d13bf7d4591cf4292ba5",
+    "crates/incant_assets/tests/skeletal/ik.rs": "282a60187b9bcd4b4d8deef5b1684ce65dd5e136de71027ff8fe5c198009cf26",
+    "crates/incant_assets_runtime/src/animation/grouped.rs": "2f526dba4be905c2fa17471044b3a1dd19a5a7dfd9ab2b9225b6103fc485f369",
+    "crates/incant_assets_runtime/src/animation/ik.rs": "dfbc670f73663f4a3cda4a114f78ae3617125e5f451e6a7193d763ad3fbe4b6b",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "7f32fb54096df9699d3275c56c443209a62fb09d0e5e29270e02d8a5bdbeda34",
+    "crates/incant_assets_runtime/src/animation/pipeline.rs": "35af23ceea2fb32890abb0b058bcb235e9d98d665f8a53d4ef63d695bb608739",
+    "crates/incant_assets_runtime/src/animation/player.rs": "b06ca3fcc1b8cf510cdf0f447a234bd57dfe9df05f13e6deb722af0137260cf3",
+    "crates/incant_render/src/animation_grouped_tests.rs": "8191fe4d783ec6e8f50dc8bd4b5f3be24ec75a5318dcb7f2e5025be862c3e9fc",
+    "crates/incant_render/src/animation_tests.rs": "c886085fe58af937eae97a9ab661d9f673a7b5c18866762e3e9f142b422bc3ad",
+    "crates/incant_render/src/models/animation.rs": "36cba5fea9fae1096b727689234a16481908d8d05e89f25569ab67f499992ef3",
+    "crates/incant_runtime/src/animation.rs": "fccbd5c1d0448b2ac0c323269bc8a96f5f0b14bbbec85da3d5f7ffaea89b2e46",
+    "crates/incant_runtime/src/animation_graph/binary.rs": "76f687fcbc6e19125cddac73cd524566dcdb0515621a99b0411d4645a73ea32c",
+    "crates/incant_runtime/src/animation_graph/definition.rs": "f8286729b3798be33b71935a159c79e0104b226bfab49041172f5acaa8558220",
+    "crates/incant_runtime/src/animation_graph/fade.rs": "909ef41eb31f864c1074cc167bc3cbe7bdbc0acb4b82d2a2af4796f0a52c03f0",
+    "crates/incant_runtime/src/animation_graph/mod.rs": "3cfc3f1530276aa82e42e09d645e6ff969251328e178952b6d849f879b5a99b0",
+    "crates/incant_runtime/src/animation_graph/motion.rs": "724e294490628dcb7c838dfbc20b71f9102654eca36b3e687ecd52e6941f6d7d",
+    "crates/incant_runtime/src/animation_graph/playback.rs": "4524447b229d41171551c2b5b609f90ee1aef567f8094804d2e379686f076dbc",
+    "crates/incant_runtime/src/binary.rs": "204cd7e3eae8fbf7e7cf309900ea137f6d1d1a06c2f4d6d2dfcb66eb58caea75",
+    "crates/incant_runtime/src/ik_binary.rs": "8a7a5e2560066d25c1dc75f6b019fd7c8c6296b978c8b3fb061aa12f8f6547c8",
+    "crates/incant_runtime/src/save.rs": "cc8aa55e3923466d1a1eb8e28b43ddaa5e47385159998da5b261262a3d9aa3c0",
+    "crates/incant_runtime/src/save/codec.rs": "94082c1e4eea47660c6240f80b8d2b4eb7cb43c9c0df0286e586e3227ae70e53",
+    "crates/incant_runtime/src/save/graph_fade.rs": "0c67745f57bbf271c8cd55c55d8142013abd9ac2f918b057ad6038459cdbd01e",
+    "crates/incant_runtime/src/scene.rs": "d7c97cd7fb2b3186140a211c5a277d06901a28906d370d82fdb25ef291f1af76",
+    "crates/incant_runtime/tests/animation.rs": "9215cbaca5979b56b3e7dee6387833d70f124275e4941beb3ae8f66ce1524516",
+    "crates/incant_runtime/tests/animation_graph.rs": "48a59bcb784746a3790cbec7e00ecd908579f3a8cc46082bde80702e194e0abb",
+    "crates/incant_runtime/tests/animation_graph/fades.rs": "dd6ee1bf944dca0f00e7b27c03d521ef2787d3a482b47c4365ccb15820d7fac9",
+    "crates/incant_script/src/animation_graphs.rs": "d17cc2720ea491eeee42cb348c25946312704d20d0c214d1095635eed145110c",
+    "crates/incant_script/src/animations.rs": "afd472a1157d1b4fd225e14f009380c210e59c1ac1b058608cb5568490ad2356",
+    "crates/incant_script/src/checkpoint/pending.rs": "c35c9940084ae64945ffcb0e492997c3335abe9d4ff01c7b3f2da49371a4983a",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "b929defa3423e5009bf7abe9fb7ccd062b9c0eacd5ffe1219a5ea216a9e44e78",
+    "crates/incant_script/tests/animations/graph.rs": "5eb0d3de81c0ad98bd619eb84b8d5609549db9d94c4507af4b18d0b033b2979e",
+    "crates/incant_types/src/animation_graph.rs": "1c0f2f1dde550cfb7dc3a1bb77754e3b831d153a7dfd08c8459e52398d1734b7",
+    "crates/incant_types/src/animation_pose/grouped.rs": "dfcc415cc270e268b63b3b545f278cb192197e8cd650e97eb441e88b5fc208ae",
+    "crates/incant_wasm_runtime/src/animation_poses.rs": "8429b5f12484eeadb073b67db8f9b04aa066aefbd97f8a0cc0d2b45178f6a543",
+    "crates/incant_wasm_runtime/src/capability.rs": "35b942c39929a4b4d2f2ac4afe0f61ed6a6f914cbfaa646842ce53b852551b76",
+    "crates/incant_wasm_runtime/tests/animations.rs": "c1ffe62a658c4181b8120d7f3a43a036d50f697c13f841a7ec90c5b1d44d4f32",
+    "crates/incant_wasm_runtime/tests/animations/grouped.rs": "4f79dbe06a9cfb9e6d9bf86b3678098dab608b9a571ecd5b814caf5920ef0442",
+    "docs/spikes/native-compound-animation-fades.md": "21baf21c0d3db1115b52fc38a3ee6de557407174bc4e7ee8340df0694aa71e69",
+    "sdk/ts/src/native.d.ts": "c07475c3fdb48d484d9eecc6d4aa9f5dbd0949213299ac4ae1ea24b58a96a942"
+  },
+  "reviewed": [
+    "Independent outgoing graph clock, pause/natural completion/reverse/cancel and suppressed reentry until prior fade completes",
+    "Bounded two-group descriptor preserves pair SLERP versus weighted quaternion mean and inactive endpoints",
+    "Cooked v18 reserved-root framing and legacy writer choice; save v10 exact 40-byte optional fade rows, final-state validation and atomic restore",
+    "Sample, optional root stripping and ordered IK share one live publication boundary; invalid later stage preserves prior pose",
+    "Owned TypeScript snapshot and explicit legacy Wasm refusals, including private v4 encoder used by forthcoming IK-v1",
+    "Targeted tests for rollback, pause, restore, malformed numeric/flags, full 8+8 groups and retained allocation-free pose application"
+  ],
+  "notes": [
+    {
+      "severity": "minor diagnostic wording",
+      "path": "crates/incant_script/src/checkpoint/pending.rs",
+      "detail": "Guard admits world save 3 through 10 while error text still says v3-v9; update the fixed diagnostic when convenient."
+    }
+  ],
+  "limitations": [
+    "No builds, malformed execution, GPU or appearance review performed by reviewer. Root owns final execution evidence.",
+    "Future IK-v1 union must preserve private v4 compound-pose refusal and exercise that integration.",
+    "Root has a separate test-only incant_cmd adjustment after this source commit; it is not part of this receipt."
+  ]
+}

@@ -38,6 +38,117 @@ fn snapshot(p: &AnimationPlayer) -> (Vec<DMat4>, Vec<DMat4>, Vec<DMat4>) {
         p.joint_palette(0).unwrap().to_vec(),
     )
 }
+#[test]
+fn composed_sampling_root_removal_and_ik_publish_once_without_allocations() {
+    use incant_assets_runtime::animation::{AnimationPoseError, PoseSource};
+    let m = model(|_| {});
+    let mut player = AnimationPlayer::new(&m).unwrap();
+    let mut baseline = AnimationPlayer::new(&m).unwrap();
+    let from = PoseSource::Clip(ClipSample::REST);
+    let to = PoseSource::Clip(ClipSample {
+        clip: Some(0),
+        seconds: 1.,
+    });
+    // Restoring the animated root before solving must equal IK on rest here:
+    // this clip changes only root translation.
+    baseline.apply_two_bone_ik(&[constraint()]).unwrap();
+    player
+        .sample_pose_pipeline(from, to, 1., Some(1), &[constraint()])
+        .unwrap();
+    assert_eq!(snapshot(&player), snapshot(&baseline));
+    for weight in [0., 0.25, 1.] {
+        baseline.sample_pose_crossfade(from, to, weight).unwrap();
+        baseline.apply_two_bone_ik(&[constraint()]).unwrap();
+        player
+            .sample_pose_pipeline(from, to, weight, None, &[constraint()])
+            .unwrap();
+        assert_eq!(snapshot(&player), snapshot(&baseline));
+    }
+    let before = snapshot(&player);
+    // Valid inputs can fail during a later numeric solve, after sampling and
+    // an earlier solve have changed all the staging buffers.
+    let later = TwoBoneIk {
+        target: [f64::MAX; 3],
+        ..constraint()
+    };
+    assert!(matches!(
+        player.sample_pose_pipeline(from, to, 0.5, Some(1), &[constraint(), later]),
+        Err(AnimationPoseError::Ik(_))
+    ));
+    assert_eq!(snapshot(&player), before);
+    assert!(matches!(
+        player.sample_pose_pipeline(from, to, 0.5, Some(u16::MAX), &[]),
+        Err(AnimationPoseError::Root)
+    ));
+    assert_eq!(snapshot(&player), before);
+    let (_, allocations) = alloc::measured(|| {
+        for _ in 0..128 {
+            player
+                .sample_pose_pipeline(from, to, 0.5, Some(1), &[constraint()])
+                .unwrap();
+        }
+    });
+    assert_eq!(allocations, 0);
+    assert_eq!(snapshot(&player), {
+        baseline.sample(None, 0.).unwrap();
+        baseline.apply_two_bone_ik(&[constraint()]).unwrap();
+        snapshot(&baseline)
+    });
+}
+
+#[test]
+fn root_removal_preserves_sampled_scale_and_other_nodes() {
+    use incant_assets_runtime::animation::PoseSource;
+    let m = model(|d| {
+        d["nodes"][0]["scale"] = serde_json::json!([2., 3., 4.]);
+    });
+    let mut player = AnimationPlayer::new(&m).unwrap();
+    let rest = snapshot(&player);
+    let clip = PoseSource::Clip(ClipSample {
+        clip: Some(0),
+        seconds: 1.,
+    });
+    player
+        .sample_pose_pipeline(clip, clip, 0., Some(1), &[])
+        .unwrap();
+    assert_eq!(snapshot(&player), rest);
+    let scale = PoseSource::Clip(ClipSample {
+        clip: Some(2),
+        seconds: 2.,
+    });
+    player
+        .sample_pose_pipeline(scale, scale, 0., Some(1), &[])
+        .unwrap();
+    near(
+        player.locals()[1].x_axis.truncate().to_array(),
+        [-1., 0., 0.],
+    );
+    near(
+        player.locals()[1].y_axis.truncate().to_array(),
+        [0., 2., 0.],
+    );
+    assert_eq!(player.locals()[1].w_axis, rest.0[1].w_axis);
+    // Root rotation is restored too, while the incoming pose still affects
+    // unrelated nodes when a different root is stripped.
+    let turn = PoseSource::Clip(ClipSample {
+        clip: Some(1),
+        seconds: 2.,
+    });
+    player
+        .sample_pose_pipeline(turn, turn, 0., Some(2), &[])
+        .unwrap();
+    assert_eq!(snapshot(&player), rest);
+    let mut matrix_model = m;
+    matrix_model.animation.as_mut().unwrap().rest[0] = None;
+    let mut fixed = AnimationPlayer::new(&matrix_model).unwrap();
+    let before = snapshot(&fixed);
+    assert!(
+        fixed
+            .sample_pose_pipeline(clip, clip, 0., Some(0), &[])
+            .is_err()
+    );
+    assert_eq!(snapshot(&fixed), before);
+}
 fn lengths(p: &AnimationPlayer) -> [f64; 2] {
     [
         (DVec3::from_array(pos(p, 1)) - DVec3::from_array(pos(p, 0))).length(),

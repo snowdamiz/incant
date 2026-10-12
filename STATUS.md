@@ -17,7 +17,22 @@ capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
 
-## UI fixed-point blend reference — main154 integration verified
+
+## Compound animation transitions — current-main integration verified
+
+Reviewed grouped-pose transitions now integrate with actual main155, retaining
+independent clocks/interpolation, staged sampling/IK publication and exact
+world-save continuation. The current union passes 766 CPU tests (82 GPU ignored)
+and 420 real Wasmtime/wasm2c tests, all-target Clippy, wasm32, generated contracts
+and 238 Python cases (4 existing skips); suite counts overlap and remain separate.
+A fresh current-lock shipping package passes 3 complete runs and 10 save/resume
+pairs after authoring/build/debug-map deletion, with 112 full pose rows and 224
+vector checks per full run and exact save/PCM/log continuation. Two precise
+negative controls refuse without checkpoint/PCM publication. Final independent integrated review is accepted; publication awaits the exact
+fast check. Complete compound Wasm ABI is a separate queued slice. Root-motion gameplay and device/appearance/phase gates remain open.
+[Integration and preserved failures](docs/spikes/native-compound-main155.md).
+
+## UI fixed-point blend reference — merged main155; checkpoint13 pending
 
 The independent reference now admits bounded 8-bit fixed-point UNORM blending
 while retaining exact geometry, clip, opacity and untouched-pixel controls.

@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T15:59:28.339063+00:00",
+  "head": "3dad39b3701253bd6fd2cbe98481276f484f3064",
+  "sources": {
+    "crates/incant_assets/tests/skeletal.rs": "f3044e48fc49a1658ac15b57e0a4f612550d4fbfd12ea4ed201d90d43af37fa2",
+    "crates/incant_assets/tests/skeletal/blending.rs": "02285e886865716e620cae7c7bd7077908e8b68c2eadfa1c334469edd08b6d11",
+    "crates/incant_assets/tests/skeletal/grouped.rs": "5b22df5c2a6752e0201c3f3f0acbce852466dba031d365b523df155946caff77",
+    "crates/incant_assets_runtime/src/animation/grouped.rs": "aa8fef85a4ef9924e20d2cd6c254aae9b9376c5029b3afcf038e339ef2a1c884",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "8ddd9bf2bb0b033434867d9c4dc408396592ae0a4cb6e8f5de6b4b5acb3e6955",
+    "crates/incant_assets_runtime/src/animation/player.rs": "7603393ad376055abc0bdbc64cdf3d695cf496c9679c223eaaf493c1c4da08c7",
+    "crates/incant_assets_runtime/src/animation/weighted.rs": "2cd759c1430bbe5c5e2e2cc24aaee8eddf6e7b27e82fd02ab1042667ba7cf324"
+  },
+  "logs": {
+    "grouped-pose-tests-001.log": "d3fd9f935bfaea0be827fe8598439e311ab8e11211c60808c2ecf65ca498e34c",
+    "grouped-pose-tests-002.log": "ae3bf4257bbaede59bf0d75450ab86fbb50d648c7e784f190984eaebdd10dea8",
+    "grouped-pose-tests-003.log": "429ebb7a7531a556b238cdd8d42714fd2172791cff46ff456b4f6adcbd921be7",
+    "grouped-pose-clippy-001.log": "fffd19986b45938f527eab3b134efc4089a9da2532030c37c625087c8ec10fd3",
+    "grouped-pose-wasm-001.log": "efdfd67c3e3a98c9700c82d3a1564001a3961ba16338481cbfad265e3f7031b4",
+    "grouped-pose-deps-001.log": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+  },
+  "tests": {
+    "passed": 113,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 18
+  },
+  "checks": "full assets/runtime allfeatures, Clippyalltargets, wasm32visual, dependencies,fmt/diff passed; allhandlesreaped",
+  "historical_failure": "001 allocation test included1024 invalid(String) diagnostic allocations. API already uses allocated asset error; narrowed explicit zero-allocation contract and measurement to accepted samples, retained full atomic refusal coverage separately. No algorithm behavior changed to mask a numerical failure."
+}

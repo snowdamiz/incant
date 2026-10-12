@@ -1,0 +1,87 @@
+{
+  "scope": "Retained grouped CPU animation sampling only",
+  "base": "3dad39b3701253bd6fd2cbe98481276f484f3064",
+  "sources": {
+    "crates/incant_assets/tests/skeletal.rs": "f3044e48fc49a1658ac15b57e0a4f612550d4fbfd12ea4ed201d90d43af37fa2",
+    "crates/incant_assets/tests/skeletal/blending.rs": "02285e886865716e620cae7c7bd7077908e8b68c2eadfa1c334469edd08b6d11",
+    "crates/incant_assets/tests/skeletal/grouped.rs": "5b22df5c2a6752e0201c3f3f0acbce852466dba031d365b523df155946caff77",
+    "crates/incant_assets_runtime/src/animation/grouped.rs": "aa8fef85a4ef9924e20d2cd6c254aae9b9376c5029b3afcf038e339ef2a1c884",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "8ddd9bf2bb0b033434867d9c4dc408396592ae0a4cb6e8f5de6b4b5acb3e6955",
+    "crates/incant_assets_runtime/src/animation/player.rs": "7603393ad376055abc0bdbc64cdf3d695cf496c9679c223eaaf493c1c4da08c7",
+    "crates/incant_assets_runtime/src/animation/weighted.rs": "2cd759c1430bbe5c5e2e2cc24aaee8eddf6e7b27e82fd02ab1042667ba7cf324"
+  },
+  "checks": "full assets/runtime allfeatures, Clippyalltargets, wasm32visual, dependencies,fmt/diff passed; allhandlesreaped",
+  "tests": {
+    "passed": 113,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 18
+  },
+  "review": "Accepted independent source and recorded check audit; no fresh independent compilation",
+  "artifacts": {
+    "docs/spikes/evidence/grouped-animation-pose/grouped-pose-tests-001.log.gz": {
+      "sha256": "fdd48a8e5564e1f6620df04e0759d6c20c09004619bd1d84c0b7a781bed77168",
+      "uncompressed_sha256": "d3fd9f935bfaea0be827fe8598439e311ab8e11211c60808c2ecf65ca498e34c"
+    },
+    "docs/spikes/evidence/grouped-animation-pose/grouped-pose-tests-002.log.gz": {
+      "sha256": "50ec6cf54155fb50eb1c4f314d280e1a8787cb094a9cc37803def9ecb3659b48",
+      "uncompressed_sha256": "ae3bf4257bbaede59bf0d75450ab86fbb50d648c7e784f190984eaebdd10dea8"
+    },
+    "docs/spikes/evidence/grouped-animation-pose/grouped-pose-tests-003.log.gz": {
+      "sha256": "6f673be7579dbe13ac5e3c76034efa50fc0b2730596a9a1ace244903fbc53659",
+      "uncompressed_sha256": "429ebb7a7531a556b238cdd8d42714fd2172791cff46ff456b4f6adcbd921be7"
+    },
+    "docs/spikes/evidence/grouped-animation-pose/grouped-pose-clippy-001.log.gz": {
+      "sha256": "d187801b05c2507cbe1ed615b573b9538de9270f9d270296742f9ac71c290857",
+      "uncompressed_sha256": "fffd19986b45938f527eab3b134efc4089a9da2532030c37c625087c8ec10fd3"
+    },
+    "docs/spikes/evidence/grouped-animation-pose/grouped-pose-wasm-001.log.gz": {
+      "sha256": "152949dec45bc167fdf78bebef0b6ec9131482fe36c84c625280bcc11539f23a",
+      "uncompressed_sha256": "efdfd67c3e3a98c9700c82d3a1564001a3961ba16338481cbfad265e3f7031b4"
+    },
+    "docs/spikes/evidence/grouped-animation-pose/grouped-pose-deps-001.log.gz": {
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499"
+    },
+    "docs/spikes/evidence/grouped-animation-pose/freeze.json": {
+      "sha256": "6abcbb33a9dad412c666b28f36a3679998566673fe06a07753821380141276b7"
+    },
+    "docs/spikes/evidence/grouped-animation-pose/review.json": {
+      "sha256": "0cf3b3efe2acbee82436d0509d5ad82629c28b287db6284c6b467a9ce9b5adf7"
+    }
+  },
+  "historical_failure": "001 allocation test included1024 invalid(String) diagnostic allocations. API already uses allocated asset error; narrowed explicit zero-allocation contract and measurement to accepted samples, retained full atomic refusal coverage separately. No algorithm behavior changed to mask a numerical failure.",
+  "limits": [
+    "Not graph fade, cooked scene, save, SDK or renderer integration",
+    "At most16samples per source; graph layer must impose8each/16combined",
+    "Accepted sampling measured allocation-free; refused input diagnostic may allocate",
+    "No GPU, native visual, device or performance gate"
+  ],
+  "local_union": {
+    "commit": "fe01513517dbfd6d7255ce8000145b03a83d2c43",
+    "inputs": "accepted grouped41539545 plus publisher private4487c5ae on actual main147",
+    "resolved_source_seams": "Additive grouped+IK module declarations/reexports only; all numerical implementations unchanged",
+    "tests": {
+      "passed": 123,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 18
+    },
+    "clippy": "all-targets all-features passed",
+    "limits": "Publisher full union proof still running; no final union/PR/render/device claim",
+    "artifacts": {
+      "docs/spikes/evidence/grouped-animation-pose/main147-00.log.gz": {
+        "sha256": "8ec8bc438ab15e3122ab0b75f9fb251c393ec26be29f9914a45780e6e5f231dd",
+        "uncompressed_sha256": "4f390bb8510006ff2db6162d9191472b33a3ec1dc933a35474010b6d4e2118f5"
+      },
+      "docs/spikes/evidence/grouped-animation-pose/main147-01.log.gz": {
+        "sha256": "70c493c170932bfaa0b8c3af44826c2b5d1a663777cb8bb6352c6c2a7c3e69ea",
+        "uncompressed_sha256": "14ef4a708939cccfc4250d02d15ed40ea1953d558b66073813ce0be25dfd86fc"
+      },
+      "docs/spikes/evidence/grouped-animation-pose/main147-commands.json": {
+        "sha256": "e31dc321135cdeaf08e2270946ef3f5bd51073e07ca7e9467bc066e9a6ce4c95",
+        "uncompressed_sha256": "e31dc321135cdeaf08e2270946ef3f5bd51073e07ca7e9467bc066e9a6ce4c95"
+      }
+    }
+  }
+}

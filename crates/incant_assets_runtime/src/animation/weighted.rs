@@ -39,6 +39,13 @@ impl AnimationPlayer {
     /// all published matrices and palettes. The existing unpublished local-pose
     /// buffer supplies scratch memory; no additional retained storage is needed.
     pub fn sample_weighted(&mut self, samples: &[WeightedClipSample]) -> Result<()> {
+        self.sample_weighted_trs(samples)?;
+        self.publish()
+    }
+    pub(super) fn validate_weighted(
+        &self,
+        samples: &[WeightedClipSample],
+    ) -> Result<(usize, usize)> {
         if !(1..=MAX_POSE_SAMPLES).contains(&samples.len()) {
             return Err(AssetError::Limit("pose sample count"));
         }
@@ -68,9 +75,14 @@ impl AnimationPlayer {
             }
         }
         let anchor = anchor.ok_or_else(|| invalid("pose weights are all zero"))?;
+        Ok((anchor, active))
+    }
+    pub(super) fn sample_weighted_trs(&mut self, samples: &[WeightedClipSample]) -> Result<()> {
+        let (anchor, active) = self.validate_weighted(samples)?;
         let reference = samples[anchor];
         if active == 1 {
-            return self.sample(reference.sample.clip, reference.sample.seconds);
+            sampling::sample(&self.data, reference.sample, &mut self.trs);
+            return Ok(());
         }
         // Scale before summing: even MAX weights and subnormal-only sets are
         // valid relative weights. The sum is bounded by MAX_POSE_SAMPLES.
@@ -116,6 +128,6 @@ impl AnimationPlayer {
             }
             trs.rotation = q.to_array().map(|v| v as f32);
         }
-        self.publish()
+        Ok(())
     }
 }

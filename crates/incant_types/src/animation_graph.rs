@@ -190,12 +190,10 @@ impl AnimationGraph {
             }
         }
         for transition in self.transitions.values() {
-            let from = self
-                .states
+            self.states
                 .get(&transition.from)
                 .ok_or("animation transition source")?;
-            let to = self
-                .states
+            self.states
                 .get(&transition.to)
                 .ok_or("animation transition destination")?;
             if transition.from == transition.to
@@ -207,12 +205,6 @@ impl AnimationGraph {
                 || transition.conditions.len() > MAX_ANIMATION_GRAPH_CONDITIONS
             {
                 return Err("animation transition duration, conditions or self edge");
-            }
-            if transition.fade_seconds != 0.0
-                && (!matches!(from.motion, AnimationMotion::Clip { .. })
-                    || !matches!(to.motion, AnimationMotion::Clip { .. }))
-            {
-                return Err("fades involving blend-tree states are unsupported");
             }
             for condition in &transition.conditions {
                 let parameter = self
