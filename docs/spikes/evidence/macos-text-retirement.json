@@ -1,0 +1,122 @@
+{
+  "at": "2026-10-12T16:12:00.831109+00:00",
+  "base": "bbe95b237e430d0657402c0bb9c83aa0516e2368",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "source_hashes": {
+    "third_party/tao/src/platform_impl/macos/text_input.rs": "84135a47c8767ac4a7d3bb295d80f896d50e0861eb4fcf105ad804a84e1e623c",
+    "crates/incant_game_player/examples/macos_text_retirement.rs": "f6d852fef8dda530af062446ac53645a421bb8fdc70fd339bbb8e36133c6be15",
+    ".github/workflows/ci.yml": "933b3f10cc03606476cf973484f6a493f9d0762a004e33fcb915bcbd4f7911c2"
+  },
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0.1\nBuildVersion:\t\t26A434",
+  "baseline": "Actual hidden AppKit probe aborted -6 with original NSView superclass; four prior composed-window blur failures retained in Claude0057",
+  "fixed": {
+    "actual_native_contexts": 768,
+    "cycles": 256,
+    "stale_refusals": 256,
+    "active_window_destroyed": true,
+    "exit_code": 0,
+    "visible": false,
+    "gpu": false,
+    "injected_input": false
+  },
+  "checks": {
+    "tests": 126,
+    "groups": 20,
+    "failed": 0,
+    "ignored": 0,
+    "all_target_clippy": true,
+    "native_probe": true,
+    "dependency_guard": true,
+    "format": true,
+    "conventions": true,
+    "diff": true
+  },
+  "review": "Independent source and baseline/fixed receipts accepted; aggregate command outcomes directly audited by root",
+  "artifacts": {
+    "docs/spikes/evidence/macos-text-retirement/001-baseline-build.json": {
+      "sha256": "fa169cb2d2bfe6777a7d6e43bdbd3f8fe23a7180da3333189b5d341d6f7967e6",
+      "uncompressed_sha256": "fa169cb2d2bfe6777a7d6e43bdbd3f8fe23a7180da3333189b5d341d6f7967e6"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-baseline-build.log.gz": {
+      "sha256": "3084d73f50e9da3b1229b547e890cf6c7fa9574c278ff02cb201f409b1b8cbf4",
+      "uncompressed_sha256": "b2ac75e8d756e4e0d933e68bff0a1188165df145f35992dfc824acb3b1182812"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-baseline-run.json": {
+      "sha256": "dec157bdf0989de48ebfa825b035cf4423c69397e9fc708d41e95312ff66de3c",
+      "uncompressed_sha256": "dec157bdf0989de48ebfa825b035cf4423c69397e9fc708d41e95312ff66de3c"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-baseline-stderr.txt.gz": {
+      "sha256": "04881bc7f334c46aca65b7e860dc5eee2062ad42fb4f9f966215392c2181e548",
+      "uncompressed_sha256": "ed62be10f9317c5e186061e14340562f05174301521cc127d559ed589434c573"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-baseline-stdout.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-fixed-build.json": {
+      "sha256": "fa169cb2d2bfe6777a7d6e43bdbd3f8fe23a7180da3333189b5d341d6f7967e6",
+      "uncompressed_sha256": "fa169cb2d2bfe6777a7d6e43bdbd3f8fe23a7180da3333189b5d341d6f7967e6"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-fixed-build.log.gz": {
+      "sha256": "3e60ad6d35f6c9ecf2df0a16eb46fe8e287b9251849278804e544ddaa528e531",
+      "uncompressed_sha256": "31f05c97a4836ecfca9a9b31cfe8423956480e329b6fdfe3af620615c755ea98"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-fixed-run.json": {
+      "sha256": "d4b1d1accbbf9d0f8cd9a40dcbea5fcf1e2e294c54887cf795938e54a52694a1",
+      "uncompressed_sha256": "d4b1d1accbbf9d0f8cd9a40dcbea5fcf1e2e294c54887cf795938e54a52694a1"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-fixed-stderr.txt.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/macos-text-retirement/001-fixed-stdout.txt.gz": {
+      "sha256": "ba89d0fe0fde67121b4e765dccc0513d2dde8c2b9334e704384a768a1ce9f952",
+      "uncompressed_sha256": "9243960c1f526332704663d9256d6e41e48724b9e4001376b2b30f5f8e750e8b"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-00.log.gz": {
+      "sha256": "e91810b447083d34bc55aefa28282f68f9a8bc921a9a5045140e6a73c4f1aa58",
+      "uncompressed_sha256": "b2e71a5740b092d315c5048d13f2db45a98c8a9256cca7272a12b33f5f18253a"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-01.log.gz": {
+      "sha256": "a4b9367685feb3acaf4c7c82ef658c19f744eb3256f7ff95c82c2acc2f6c06d2",
+      "uncompressed_sha256": "66e5d02c4218bbf4866217da2fc3c12695d46a3323c093cccbf0dd381b7831d7"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-02.log.gz": {
+      "sha256": "9d0b759fe5fee5113a40ca3c9c0d92fbaf0b915203288196e89f02e50f14785d",
+      "uncompressed_sha256": "6b9cb01668f9104b904b1a4b4e1400bb91416c7946e1294b2c7082f6716d3b60"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-03.log.gz": {
+      "sha256": "a1453519251971c8187d2004dc510036ddccc25f7b16d4983f14a1f2191913da",
+      "uncompressed_sha256": "07d87a62d54ea4bd4f630d421b90904510f782b795c04820a194e18835a118dc"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-04.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-05.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-06.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-commands.json": {
+      "sha256": "328616bb2f414747d13a52d252c20f1144ca04df54db2e19c092b52228e0cd02",
+      "uncompressed_sha256": "328616bb2f414747d13a52d252c20f1144ca04df54db2e19c092b52228e0cd02"
+    },
+    "docs/spikes/evidence/macos-text-retirement/002-source-freeze.json": {
+      "sha256": "272e2ada1e58832e1ccb9cb7cd3b3e4aeef9d396e07b514a07081f38fadf8ba6",
+      "uncompressed_sha256": "272e2ada1e58832e1ccb9cb7cd3b3e4aeef9d396e07b514a07081f38fadf8ba6"
+    },
+    "docs/spikes/evidence/macos-text-retirement/source-review.json": {
+      "sha256": "c523403372d5ab3313e3851f6f09f70273be92531e4a5748da974c5c7d2cae6e"
+    }
+  },
+  "limits": [
+    "Not a visible player typing/IME regression; that follow-up remains required",
+    "No renderer/appearance change; no GPU/phone or phase gate",
+    "No cross-platform runtime change; macOS only",
+    "Vendored dependency warnings remain, scoped engine Clippy passes"
+  ]
+}

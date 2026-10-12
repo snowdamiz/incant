@@ -16,9 +16,9 @@ use objc2::{
   runtime::{AnyObject, ProtocolObject, Sel},
   DefinedClass, MainThreadOnly,
 };
-use objc2_app_kit::{NSEvent, NSTextInputClient, NSTextInputContext, NSView, NSWindow};
+use objc2_app_kit::{NSEvent, NSTextInputClient, NSTextInputContext, NSWindow};
 use objc2_foundation::{
-  MainThreadMarker, NSArray, NSAttributedString, NSAttributedStringKey, NSObjectProtocol, NSPoint,
+  MainThreadMarker, NSArray, NSAttributedString, NSAttributedStringKey, NSObject, NSObjectProtocol, NSPoint,
   NSRange, NSRangePointer, NSRect, NSSize, NSString, NSUInteger,
 };
 use std::cell::{Cell, RefCell};
@@ -34,8 +34,12 @@ struct ClientState {
 }
 
 define_class!(
-  // SAFETY: NSView permits subclassing; all access stays on the main thread.
-  #[unsafe(super = NSView)]
+  // SAFETY: NSObject permits subclassing; all access stays on the main thread.
+  // This protocol client is not a view and never joins the view hierarchy.
+  // In particular, NSView's dealloc can call -window after objc2 has dropped
+  // our Rust ivars, which would load a destroyed Weak<NSWindow>. NSObject has
+  // no view/focus teardown callbacks into this client's ivars.
+  #[unsafe(super = NSObject)]
   #[thread_kind = MainThreadOnly]
   #[ivars = ClientState]
   struct ManagedClient;
@@ -188,11 +192,9 @@ impl Managed {
       delivered: Cell::new(false),
       command: Cell::new(false),
     });
-    // SAFETY: NSView's designated initializer, initialized Rust ivars; the
+    // SAFETY: NSObject's designated initializer, initialized Rust ivars; the
     // context retains the client, which never retains the context or window.
-    let client: Retained<ManagedClient> = unsafe {
-      msg_send![super(this), initWithFrame: NSRect::new(NSPoint::new(0.,0.), NSSize::new(0.,0.))]
-    };
+    let client: Retained<ManagedClient> = unsafe { msg_send![super(this), init] };
     let context = NSTextInputContext::initWithClient(
       NSTextInputContext::alloc(mtm),
       ProtocolObject::from_ref(&*client),

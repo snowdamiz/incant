@@ -1,0 +1,5 @@
+{
+  "third_party/tao/src/platform_impl/macos/text_input.rs": "84135a47c8767ac4a7d3bb295d80f896d50e0861eb4fcf105ad804a84e1e623c",
+  "crates/incant_game_player/examples/macos_text_retirement.rs": "f6d852fef8dda530af062446ac53645a421bb8fdc70fd339bbb8e36133c6be15",
+  ".github/workflows/ci.yml": "933b3f10cc03606476cf973484f6a493f9d0762a004e33fcb915bcbd4f7911c2"
+}

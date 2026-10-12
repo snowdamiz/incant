@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "./tools/cargo",
+    "build",
+    "--locked",
+    "--profile",
+    "ci",
+    "-j2",
+    "-p",
+    "incant_game_player",
+    "--features",
+    "native-window",
+    "--example",
+    "macos_text_retirement"
+  ],
+  "exit_code": 0
+}

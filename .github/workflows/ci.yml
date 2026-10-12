@@ -92,6 +92,10 @@ jobs:
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
       - run: cargo test -p incant_game_player --features native-window --all-targets --profile ci --locked -j2
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+      - name: Retire actual macOS text contexts without a visible window
+        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+        timeout-minutes: 2
+        run: cargo run -p incant_game_player --example macos_text_retirement --features native-window --profile ci --locked -j2
       - run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings
         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
       # Each GPU test owns a native device; serialize device lifetimes to avoid
