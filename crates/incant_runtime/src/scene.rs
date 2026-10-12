@@ -200,6 +200,17 @@ impl CookedScene {
             .iter()
             .any(|n| n.animation.as_ref().is_some_and(|a| a.graph.is_some()))
     }
+    pub fn has_animation_trees(&self) -> bool {
+        self.spatial
+            .iter()
+            .filter_map(|node| node.animation.as_ref()?.graph.as_ref())
+            .any(|graph| {
+                graph
+                    .states()
+                    .iter()
+                    .any(|state| matches!(state.motion, crate::NativeAnimationMotion::Tree { .. }))
+            })
+    }
     fn text_bytes(&self) -> usize {
         if self.has_text() || self.has_ui() || self.has_animation_graphs() {
             crate::text_binary::size(&self.font_assets, &self.texts)

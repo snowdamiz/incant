@@ -7,6 +7,7 @@ use incant_runtime::{
     NativeAnimationParameter,
 };
 use std::{collections::BTreeMap, sync::Arc};
+mod tree;
 
 pub(crate) fn compile(
     graph: &AnimationGraph,
@@ -48,6 +49,19 @@ pub(crate) fn compile(
                 id: stable_id(id)?,
                 looping: state.looping,
                 motion: match &state.motion {
+                    AnimationMotion::Tree {
+                        cycle_seconds,
+                        tree,
+                    } => NativeAnimationMotion::Tree {
+                        cycle_seconds: *cycle_seconds,
+                        tree: Arc::new(tree::compile(
+                            tree,
+                            graph,
+                            &parameters,
+                            &native_parameters,
+                            durations,
+                        )?),
+                    },
                     AnimationMotion::Clip { clip } => NativeAnimationMotion::Clip(*clip),
                     AnimationMotion::Blend1d {
                         parameter,

@@ -149,6 +149,7 @@ pub fn project_input(project: &Project, assets: Option<&AssetStore>) -> Result<S
                 cast_shadows: binding.cast_shadows,
                 animation,
                 animation_blend: None,
+                animation_pose: None,
             })
         } else {
             None

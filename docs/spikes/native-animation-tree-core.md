@@ -59,12 +59,3 @@ These are local CPU results, not a frame-time benchmark or a reference-phone gat
   world v8/session v3; additional graph state must coordinate a later format version.
 - Obtain Claude rendered acceptance and actual required device measurements; IK,
   root motion and the complete animation/Phase 1 requirements remain open.
-
-## Current-main integration
-
-The combined sampler and tree core passes 310 CPU tests in 48 groups, all-target
-Clippy, wasm32 and both runtime dependency guards. Integration of actual main
-#143 preserves all 1487 tested build inputs and the twelve accepted source/test
-files byte-for-byte. [Retained checks and independent review](evidence/animation-core-main142.json)
-record that boundary; authored/runtime tree wiring and rendered/device acceptance
-remain separate.

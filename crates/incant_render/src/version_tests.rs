@@ -56,6 +56,7 @@ fn input(sources: &[Arc<RuntimeAsset>]) -> SceneInput {
                     cast_shadows: true,
                     animation: None,
                     animation_blend: None,
+                    animation_pose: None,
                 }),
             })
             .collect(),

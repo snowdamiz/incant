@@ -85,7 +85,26 @@ fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Resul
             .animation
             .unwrap_or(incant_types::AnimationSample::REST),
     )?;
-    if let Some(blend) = input.animation_blend {
+    if let Some(pose) = input.animation_pose {
+        if input.animation_blend.is_some() || input.animation != Some(pose.samples()[0].sample) {
+            return Err(SceneError::Input("inconsistent weighted animation binding"));
+        }
+        use incant_assets_runtime::animation::{ClipSample, WeightedClipSample};
+        let mut samples = [WeightedClipSample {
+            sample: ClipSample {
+                clip: None,
+                seconds: 0.0,
+            },
+            weight: 0.0,
+        }; incant_types::MAX_ANIMATION_POSE_SAMPLES];
+        for (out, entry) in samples.iter_mut().zip(pose.samples()) {
+            *out = WeightedClipSample {
+                sample: checked_sample(player, entry.sample)?,
+                weight: entry.weight,
+            };
+        }
+        player.sample_weighted(&samples[..pose.samples().len()])?;
+    } else if let Some(blend) = input.animation_blend {
         // Do not skip invalid outgoing samples at weight one or invalid primary
         // samples at zero. These are complete committed bindings, not hints.
         let outgoing = checked_sample(player, blend.sample)?;

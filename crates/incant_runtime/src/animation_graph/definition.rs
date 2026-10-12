@@ -24,6 +24,10 @@ pub struct NativeAnimationGraphState {
 #[derive(Debug, Clone, PartialEq)]
 pub enum NativeAnimationMotion {
     Clip(Option<u16>),
+    Tree {
+        cycle_seconds: f64,
+        tree: Arc<super::NativeAnimationBlendTree>,
+    },
     Blend1d {
         parameter: u8,
         cycle_seconds: f64,
@@ -144,6 +148,17 @@ impl NativeAnimationGraph {
         }
         for state in self.states.iter() {
             match &state.motion {
+                NativeAnimationMotion::Tree {
+                    cycle_seconds,
+                    tree,
+                } => {
+                    if !cycle_seconds.is_finite()
+                        || !(0.000001..=MAX_ANIMATION_GRAPH_SECONDS).contains(cycle_seconds)
+                        || !tree.matches_context(&self.parameters, clip_durations)
+                    {
+                        return Err(error("animation tree duration or model context"));
+                    }
+                }
                 NativeAnimationMotion::Clip(clip) => {
                     if clip.is_some_and(|clip| !valid_clip(clip)) {
                         return Err(error("animation graph model clip"));
