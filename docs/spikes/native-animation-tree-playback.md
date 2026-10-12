@@ -94,3 +94,10 @@ host registry) are retained alongside the corrected results. No renderer,
 reference-phone, complete SDK, Phase 1 or release gate is claimed.
 
 [Exact sources, checks, independent reviews and retained package evidence](evidence/native-animation-tree-playback.json).
+
+## Current-main integration
+
+The combined source now passes a fresh main #147 integration and ordinary
+shipping rebuild, documented in [the integrated result](native-animation-trees-main147.md).
+The original producer counts, artifacts and limitations above remain historical
+evidence for their exact source/build identities. No new rendered/device gate is implied.

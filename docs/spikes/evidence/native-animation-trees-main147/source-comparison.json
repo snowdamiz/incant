@@ -1,0 +1,616 @@
+[
+  {
+    "path": "crates/incant_cmd/tests/animation_tree.rs",
+    "sha256": "21ade0617d35e85c009590083bd74f372c10de1a7d6c2ee505219a5b4b5f58f7",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_cook/examples/animation_pose_package_oracle.rs",
+    "sha256": "3900b876fd2ebd917d537fa35f041c2a8d79408743773040f386a9df19ae4b65",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_cook/src/animation_graph.rs",
+    "sha256": "4aff302e410f331bc4c1e940fce4b84ed96ae6c770dee68437821b3dd062b593",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_cook/src/animation_graph/tree.rs",
+    "sha256": "24b373e1e63a4ceb5c9841bfff4b2217cea412f4b373ad1d654deace753edbd2",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_cook/tests/animation.rs",
+    "sha256": "efc753512edc2df6c45b42356b3fdb77c6ad40df0d31e40cc10d72f404656463",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_cook/tests/animation/tree.rs",
+    "sha256": "d0c71a6c8cda8a20af1d36d8fcea58b0ceab31c871912970694666d05995905e",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_doc/src/animation_graph.rs",
+    "sha256": "605937bab7f496d501ed5daa3b6d5546c23bf0884c4440653a5dac656124dbe0",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render/src/animation_tests.rs",
+    "sha256": "0fcfc0b28721a9f9da6a6be960ec7b7f2b9039729672225d0e569bf9ad94fa6d",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render/src/flipbook_tests.rs",
+    "sha256": "dc8b3f5eace8dca21302bb0c6bee5b550f19332c1e978b46caf710cda225fa26",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render/src/models/animation.rs",
+    "sha256": "ba9994571e84c3295d1541d5bf7bf82df4ddfce30dcec65ca5a720c738345901",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render/src/retained.rs",
+    "sha256": "d4aefbb6042e2f80e40881c83b871a8b09f346746c9433b1de6093a2420f0184",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render/src/retained_tilemap_tests.rs",
+    "sha256": "d871985e3606b9bb3f966113ac066039ad37eb784e9bcdc73c33f4c8afc7be3a",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render/src/scene.rs",
+    "sha256": "3d120b908cbf2690369884ffebadde3b5e09dd246a0c3299c525bbe30aeaf784",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render/src/version_tests.rs",
+    "sha256": "52b1f7b5f277b8e2e1fa92096f929ca87a79e6e04487fc38a93e287bf36c999a",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render_authoring/src/lib.rs",
+    "sha256": "a32f7f3333439eed83d30aa719dc6aa1a8d43e6520e787dac9cb42e1d18cc697",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render_data/src/lib.rs",
+    "sha256": "847df932152659d2c60beed62da7a0a05d062c75811169d4b0721c5130facf43",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render_native/src/binding.rs",
+    "sha256": "72093e0339f5742ab894619f0074f610c05bca577311c59443a981aa26844a45",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render_native/src/lib.rs",
+    "sha256": "1127f81346f1281b653012422385bb0d7fa9b0be158509c56cb0587a5383e725",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render_native/src/update.rs",
+    "sha256": "d5ff5a6f89b07fa0cb2532fc31e89b5b4e5df0298d83b9e09d825d515d0e0e0f",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_render_native/tests/animation.rs",
+    "sha256": "1dfc4b015c6291721ba81e10ff9e90b07591d36641be6f80fc8ab04cfec301f4",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/animation.rs",
+    "sha256": "26b9248795382021365b13bd0c1e1e7a0b765b767683e96b12eaf6bf82653346",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/animation_graph/binary.rs",
+    "sha256": "ca60cf9e53895c19732f2738fa5cb5cb5747728c710e5b0934c65f17ede399e9",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/animation_graph/definition.rs",
+    "sha256": "8c23554840d7dcdab4618093f3399bfe415eb25155394e51943dbc9d350203bf",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/animation_graph/playback.rs",
+    "sha256": "bc721b26cbd0611c1241fef32f0ec99dc096ebb45854ce6ceffedfcc7d5c6bd4",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/animation_graph/tree/binary.rs",
+    "sha256": "14f540cf7c7136d12f3fb1b7b7d09168dd9953ea29e64fb62338ada48ad24582",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/animation_graph/tree/evaluate.rs",
+    "sha256": "95b14c19dbf043bbdd23eba7685bebb6aadb95bc10665094866a730789c62ab4",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/animation_graph/tree/mod.rs",
+    "sha256": "5ee12bb83e07d9c461040d5b6416fe0768245b82be3faf5fb4f0efd426b86609",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/binary.rs",
+    "sha256": "f6aa8a39c8eded91b0dbfc17e7f3c9f92c50ccf266bb88390b903c83f755e91b",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/scene.rs",
+    "sha256": "0c0a374f525c7d37c1308675a3d1cc1bdc692960a3f7909c9558dd4a208d8b51",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/src/spatial_view.rs",
+    "sha256": "eec3799fa7f39d5be9a119b09ba51261e794f531821c61b60057379ea2c837a4",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/tests/animation_tree_playback.rs",
+    "sha256": "712ef30d2183f230aa8416afa0b8a840704ff2a862c08a29c30988837cab10fe",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/tests/physics.rs",
+    "sha256": "c234f0378e778f521f82d903f4f11fbee3ddee5fb5a964d886256c29ddd11dae",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/tests/physics_2d.rs",
+    "sha256": "8841f291bf8b6bdd9ae3def6871c30f03eef4e1e31e3d690c6ea022929bdac6e",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_runtime/tests/scenes.rs",
+    "sha256": "c2894f64340009ca41f4834e57c0ef2167550e1a54edd09f71964bf58c0d4994",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_script/src/animation_graphs.rs",
+    "sha256": "796f5232c83fadd78cd6dbcf2f38b87cf39b90c2b7f1165e46d10c1aad1a573a",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_script/src/animations.rs",
+    "sha256": "6e2b731384fa7949ee99b72356d3412742ca8ed5456b7aa396693a27698bf580",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_script/tests/animations/graph.rs",
+    "sha256": "e4a920ad076af1a23c882a64b2bd0f6ab0686d6a6e8089b87a051f68cb943f8e",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_types/src/animation_graph.rs",
+    "sha256": "a69d922d178632acadcfaba92c67f60acead90f608e5dca90898d082e32e84c1",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_types/src/animation_pose.rs",
+    "sha256": "cb56b5ec69667dc76432ea53c762b3c07e4308003e90094aa84c1881b87dfbc3",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_types/src/animation_tree.rs",
+    "sha256": "64fed424659b3979e5e7bd21a448550cb950e001790962f019b2c50c97f6164e",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_types/src/lib.rs",
+    "sha256": "974ad0edd11b701ad4dafd60e8ff05b37198b7bd52fcc0f6fcb7d320103afd82",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_abi/src/lib.rs",
+    "sha256": "3300e0e1e130ae30031eeadea78265221ff2381d4c6f83f72994a7c7d25926be",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_dev/src/generated.rs",
+    "sha256": "8511e5774c78c7e3a62afbfd51092c4b60185b9a69c43578fa59a7cae81862fd",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_dev/tests/animation_parity.rs",
+    "sha256": "dbd2e8c9dcbf3332e8e3c9d726a9a410b06fd2cd54cf663ca3101797ef7b7a5e",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_dev/tests/animation_poses_parity.rs",
+    "sha256": "3ef8199a7a58e65c0eee8b16ad9798525f615c188b2632457fae9ba31e17c897",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_dev/tests/crossfade_parity.rs",
+    "sha256": "99288a5a86cf167d8c3b81fe14f1c5819d57889c64832ed40b37808aadef422f",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/c/generated.h",
+    "sha256": "eb14d0b2c047ea652a12cc6a466f0d61cce102bb4aaa12924c9c8b8a8fa66f33",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/c/generated.inc",
+    "sha256": "743b3c7fb3add62923de939e4b14c3dcc7f6a8eb43bac833890e8cb2e38fef92",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/fixtures/animation-poses.wat",
+    "sha256": "b2eb5ca87b550aea8b78b8387e391bca8bcbda71a19f656283a1dc5c253a0ea4",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/src/animation_poses.rs",
+    "sha256": "1a73cb049efc08e7b61b79e75aff2044b4cda5142d6de2b9d08a7ee04a3b75e4",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/src/animations.rs",
+    "sha256": "977293e4def9d4db5a1f58019d1eb9d94e457eed4bee5438577e2776cba908f7",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/src/capability.rs",
+    "sha256": "0c90bc434e699a9a3e039f96fd3ad9eb00dd0f7097e3cc1c7f35a67b020ff5ba",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/src/generated.rs",
+    "sha256": "094577e8ea0cf3848dec9cf8011a2926456ecddb5e47d6338d224916fb90f59f",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/src/input_tags.rs",
+    "sha256": "1748f9c17bc308cdac23971401c911a699dddeebfaa5355e6bb21c6d2e96f2f6",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/src/lib.rs",
+    "sha256": "8100d25e0cd8e53090de35c2606e35b65ba8b0615c01886d552952baa51f517f",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/tests/animation_poses.rs",
+    "sha256": "9475d689f1aa921c3d608096818573cafc7d1902cef0ed17e57e0458d7a769bc",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/tests/animations/graph_sdk.rs",
+    "sha256": "ba627586f1202e0052a468ec77842e6a4f527dc228cb518cf3ff1a85ec45cfda",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "crates/incant_wasm_runtime/tests/support/animation_poses.rs",
+    "sha256": "191671894959cd1e01378367a548fafceac56d23c564902b8fa717bb7fe800b4",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "schemas/AnimationGraph.schema.json",
+    "sha256": "bcae725f851e243543eeff719a842d66dc1a4d20991fc502326d31dd789cdf85",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/abi/native-v1.json",
+    "sha256": "3bc656e792ed9d84e934cd94eddacd91f275ec01e97cb0c74e33c28126874006",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/README.md",
+    "sha256": "242bea7239b474ccb64825793e0240a5321bc40c821004952cdf67b7d96f849f",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/fixtures/animation_poses_failure.rs",
+    "sha256": "6fb74d598219ff665f1d1bde05133193ac7bf550204f03bd535d011e1e5dbf25",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/samples/animation_poses.rs",
+    "sha256": "2ddc93843e7bb6cf5cc0053333b6b926667cc730c46ad5776c84c96516bc5286",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/src/animation.rs",
+    "sha256": "289cae8d4665c2ab66ab0884622393fe594ce0d13116209acecd5e61e3ec5ad2",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/src/animation_pose.rs",
+    "sha256": "f634be6ad26fc8e34f18b5424b66d95716929053f847653f032f8761c4c53206",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/src/lib.rs",
+    "sha256": "4d156d2c9b18091082f850f623c8295e7b70a0359bc03ac8d34257ac8d35e7b6",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/src/raw.rs",
+    "sha256": "e78dfee830db5fc8a41af651333cf72246865ec5244a5561762cdadbf0ebc3da",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/src/tick.rs",
+    "sha256": "47297dfb684c4f0e83bd0f7933ceca2c0e5adcbdc8f3106e6310124d4573d004",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/rust/tests/animation_v4.rs",
+    "sha256": "e81778a0dde4e48adfdfcc7f9e5810a767f2a95173f00c1fd674467fef48ee4a",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/ts/src/generated.d.ts",
+    "sha256": "0b0c01ae0641f0cb20ff304ae9ecd9586fb32fe233be32283c1505b0bb433203",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "sdk/ts/src/native.d.ts",
+    "sha256": "3d5e6f262297aa670e66aa6b7d89504a7cd9c6ac90725dd93e34f1602460d5d7",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/export_native.py",
+    "sha256": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/generate_wasm_sdk.py",
+    "sha256": "d3490d9a7a3af3b10ac5414a22fbdd8c5a4657a86369d7d6164a723b21318fa0",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/probes/native-animation-tree-export.py",
+    "sha256": "9d0f580ea681bfc2775ebf671b8c71b7fe640b43072639289404bdce5c7017a3",
+    "exact_sources": [
+      "root"
+    ]
+  },
+  {
+    "path": "tools/probes/native-animation-tree-export/behavior.ts",
+    "sha256": "5314c1fdb8aa2012a492e1fdf78f521b6da364d1a379413e120b13e1be88dba1",
+    "exact_sources": [
+      "root"
+    ]
+  },
+  {
+    "path": "tools/probes/native-wasm-animation-pose-export.py",
+    "sha256": "7977df9c1cf49323349f8c0395a51e885af6845758f656ccc7ea850ed50401c4",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/probes/native-wasm-animation-pose-export/behavior.rs",
+    "sha256": "9c42af82283c680ecb007786cca0d27dc040c7d7f9206daeadb90034a0317b8b",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/probes/shipping-wasm2c.py",
+    "sha256": "04faec965a20f23555efd80dc3ad11a9ee5b43b471a4836f734f309ad0b667ae",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/tests/test_native_package.py",
+    "sha256": "334a00178d220960fa8a919290367b2d0301e1855d089ee9525480eaaa896728",
+    "exact_sources": [
+      "root",
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/tests/test_wasm_sdk.py",
+    "sha256": "31de55ac3762dada9bf4896a2cca0da56db8a77b1a34e9faeeb56f3460c390be",
+    "exact_sources": [
+      "v4"
+    ]
+  },
+  {
+    "path": "tools/wasm_abi.py",
+    "sha256": "e59174e252c2b0177ef786f30045e3d50e6761534029791e10bf847d944d27bc",
+    "exact_sources": [
+      "v4"
+    ]
+  }
+]

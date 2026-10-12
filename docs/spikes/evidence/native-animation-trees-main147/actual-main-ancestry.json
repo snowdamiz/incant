@@ -1,0 +1,9 @@
+{
+  "main": "bbe95b237e430d0657402c0bb9c83aa0516e2368",
+  "tested_head": "4487c5ae92369c2a69a08dc53a02f25143eefe34",
+  "tested_tree": "5343b55e855dc5fc4ae6d611a2348b66686f9e49",
+  "docs_followup_head": "fd5c99e5054cc11f858803f178b66790a01487f1",
+  "main_is_ancestor": true,
+  "compiled_inputs_changed": [],
+  "scope": "After all18commands and source/build/map-deleted proofs; only producer-acceptance and integration docs/evidence changed."
+}

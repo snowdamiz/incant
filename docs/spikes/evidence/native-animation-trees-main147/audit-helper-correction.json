@@ -1,0 +1,11 @@
+{
+  "scope": "Independent audit helper only, no engine/probe/source/receipt changes",
+  "before_sha256": "5ff76ceaa0f4be0a98b4bec97c9661be6f5d75004711bfffc18133b3e5359632",
+  "after_sha256": "0e8d0c25a60cca9e50af35445aa8c15cafedbda95a312a6db1c1dac0459b0be6",
+  "failure": "KeyError stdout: public exporter redirects its Cargo subprocess to package/build.log; command returned0 and deliberately has no captured stdout/stderr fields.",
+  "correction": "Permit only the exact successful QuickJS cargo build command to use its retained package/build.log; every other command stream remains hash-checked.",
+  "red_log_sha256": "96683d6a47a4e2dece2ecd1b2f9b14989483f5a2cafccc8a92c4ca45cd8c5ddf",
+  "build_log_sha256": "580afeac0c112d1ed20b0f40259a5dad5a75ed4c7fbb979ad417528e59633d37",
+  "additional_count_correction": "Filter final copied-player path when counting the17 proof processes; the public exporter also records its earlier successful one-tick disposable startup process, which remains in the command ledger.",
+  "count_failure_log_sha256": "dc5632abf74311868fd7a6018511f43b0a350b284ed98f0aca1abf690d8dfb1a"
+}
