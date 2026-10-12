@@ -25,7 +25,8 @@ mean. Old observations refuse weighted poses. Published operations 0–41 remain
 unchanged. Actual Wasmtime/wasm2c conformance passes 398 tests/doctests, Clippy and
 three generic development smoke processes; the new guest matches a direct native
 eight-pose oracle over twenty ticks. Source review accepts the frozen boundary.
-Final corrected union checks pass; final evidence review is pending. Synthetic sixteen-sample coverage
+Final corrected union checks and independent evidence review pass; main integration
+remains pending. Synthetic sixteen-sample coverage
 establishes wire capacity only; tree-state fades/composite operands, source-deleted
 ordinary tree-game export, rendered/device gates and complete SDK remain open.
 [Contract and evidence](docs/spikes/native-animation-pose-sdk.md).

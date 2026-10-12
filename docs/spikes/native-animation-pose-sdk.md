@@ -65,7 +65,9 @@ epochs, call/transfer limits and staged transaction rollback. Python checks
 pass 234 cases (four existing skips); 22 Node checks, generated files,
 conventions and authoring-free/static-player dependency checks also pass.
 Independent source review accepted all 28 frozen source/test/probe hashes and
-verified that every published ABI entry remains unchanged. Final evidence acceptance remains pending. The shared native constructor
+verified that every published ABI entry remains unchanged. Final evidence review independently accepted the 33 source/native/test files,
+24 compressed and raw logs, 12 original receipts and all 58 retained guest
+artifacts/source copies. Main integration remains pending. The shared native constructor
 corrections are tracked separately from the unchanged v4 source freeze. The
 first union passes 300 tests in 54 groups. After the tail-only canonical-storage
 fix, the focused constructor/SDK and cooked-tree checks pass 99 cases,

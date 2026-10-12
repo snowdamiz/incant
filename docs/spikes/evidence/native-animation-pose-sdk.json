@@ -470,7 +470,9 @@
     "source": "accepted",
     "receipt": "docs/spikes/evidence/native-animation-pose-sdk/independent-source-review.json",
     "receipt_sha256": "247d074ecfa89a65a33cf964c6b1563bec8ded8795fc871bf3043a1cb58558f8",
-    "final_evidence": "pending"
+    "final_evidence": "accepted",
+    "final_receipt": "docs/spikes/evidence/native-animation-pose-sdk/independent-final-review.json",
+    "final_receipt_sha256": "466418e150b676b538cc80ddf8e0d9b4878327080d745dbcf807a1a14f80ba8c"
   },
   "logs": {
     "docs/spikes/evidence/native-animation-pose-sdk/boundary-clippy.log.gz": {
@@ -582,7 +584,8 @@
     "docs/spikes/evidence/native-animation-pose-sdk/proof001-rust-sdk.json": "c3b4cea7feb36365a0487caa2fa68600412bf279da3d9fca43bb4e5bad846e82",
     "docs/spikes/evidence/native-animation-pose-sdk/independent-source-review.json": "247d074ecfa89a65a33cf964c6b1563bec8ded8795fc871bf3043a1cb58558f8",
     "docs/spikes/evidence/native-animation-pose-sdk/proof001-independent-prepared-verification.json": "3a11458fb60dcd03488ec1c4bea9652ac8eb64e85ec7ee4da19761d6352c3566",
-    "docs/spikes/evidence/native-animation-pose-sdk/union-source-binding.json": "dbea0e7e83e7da7fa5ddabd91d37d70fd44c06abe8a549c0110188e41409a0ff"
+    "docs/spikes/evidence/native-animation-pose-sdk/union-source-binding.json": "dbea0e7e83e7da7fa5ddabd91d37d70fd44c06abe8a549c0110188e41409a0ff",
+    "docs/spikes/evidence/native-animation-pose-sdk/independent-final-review.json": "466418e150b676b538cc80ddf8e0d9b4878327080d745dbcf807a1a14f80ba8c"
   },
   "limitations": [
     "Local CPU actual-host conformance; no ordinary source-deleted weighted-pose shipping package, rendered acceptance or device gate.",
@@ -590,5 +593,6 @@
     "Nonzero tree-state fades and composite SLERP/weighted operands remain unsupported.",
     "Old v1/v2/v3 snapshots explicitly refuse weighted poses; no silent representative-only downgrade.",
     "Full SDK, layered animation, IK, root motion and complete guest checkpoints remain outside this slice."
-  ]
+  ],
+  "reviewed_implementation_commit": "8dd91697c09fd1d58f2bc6f41b60e645cc52e964"
 }
