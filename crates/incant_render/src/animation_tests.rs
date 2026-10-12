@@ -33,6 +33,7 @@ fn source_deleted_independent_instances_deform_full_checked_vertices() {
     let dir = tempfile::tempdir().unwrap();
     let source = source(dir.path());
     let input = SceneInput {
+        text: None,
         nodes: vec![
             node(Arc::clone(&source), "early", 0.),
             node(Arc::clone(&source), "late", 1.),
@@ -101,6 +102,7 @@ fn invalid_samples_refuse_before_publication() {
     let dir = tempfile::tempdir().unwrap();
     let source = source(dir.path());
     let mut input = SceneInput {
+        text: None,
         nodes: vec![node(source, "mesh", f64::NAN)],
         environment: None,
     };
@@ -138,6 +140,7 @@ fn clip_only_model_retains_rigid_node_hierarchy_and_static_models_reject_samples
     let mut n = node(asset, "mesh", 2.);
     n.mesh.as_mut().unwrap().animation.as_mut().unwrap().clip = Some(2);
     let resolved = crate::scene::resolve(&SceneInput {
+        text: None,
         nodes: vec![n],
         environment: None,
     })
@@ -163,6 +166,7 @@ fn clip_only_model_retains_rigid_node_hierarchy_and_static_models_reject_samples
         .unwrap(),
     );
     let input = SceneInput {
+        text: None,
         nodes: vec![node(source, "static", 0.)],
         environment: None,
     };
@@ -252,6 +256,7 @@ fn retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame(
     let dir = tempfile::tempdir().unwrap();
     let source = source(dir.path());
     let mut input = SceneInput {
+        text: None,
         nodes: vec![node(source, "mesh", 0.), camera()],
         environment: None,
     };
@@ -309,6 +314,7 @@ fn retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame(
         let expected = pixels(
             &renderer,
             &SceneInput {
+                text: None,
                 nodes: vec![expected, camera()],
                 environment: None,
             },
@@ -476,6 +482,7 @@ fn single_sided_reflected_skin_and_shadow_match_static_transform_oracle() {
     floor.mesh.as_mut().unwrap().animation = None;
     floor.mesh.as_mut().unwrap().cast_shadows = false;
     let mut input = SceneInput {
+        text: None,
         nodes: vec![node(asset, "skin", 2.), camera(), shadow_light(), floor],
         environment: None,
     };
@@ -527,6 +534,7 @@ fn single_sided_reflected_skin_and_shadow_match_static_transform_oracle() {
         floor.mesh.as_mut().unwrap().animation = None;
         floor.mesh.as_mut().unwrap().cast_shadows = false;
         let mut oracle = SceneInput {
+            text: None,
             nodes: vec![expected, camera(), shadow_light(), floor],
             environment: None,
         };

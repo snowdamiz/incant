@@ -115,7 +115,10 @@ impl PreparedPlay {
                 fallback().map_err(native)?,
             )
         };
-        if camera.is_none() && (!cooked.spatial().is_empty() || !cooked.visual_assets().is_empty())
+        if camera.is_none()
+            && (!cooked.spatial().is_empty()
+                || !cooked.visual_assets().is_empty()
+                || cooked.has_text())
         {
             return Err(invalid(
                 "spatial content requires an explicit --camera and native render host",
@@ -139,6 +142,17 @@ impl PreparedPlay {
                     }
                 };
                 Ok::<_, StartupError>(NativeRenderSettings {
+                    text: if cooked.font_assets().is_empty() {
+                        None
+                    } else {
+                        Some(incant_render_game::TextSettings::new(
+                            incant_assets::project_cache_directory(
+                                root,
+                                incant_assets::CacheKind::Fonts,
+                            )
+                            .map_err(native)?,
+                        ))
+                    },
                     model_cache: path(
                         incant_assets::CacheKind::Models,
                         incant_runtime::VisualAssetKind::Model,

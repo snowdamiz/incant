@@ -1,0 +1,137 @@
+{
+  "reviewed_at_utc": "2026-10-12T02:08:51.063358+00:00",
+  "reviewer": {
+    "role": "astra",
+    "model": "gpt-6.1-sol",
+    "reasoning": "xhigh",
+    "agent": "/root/agent_bridge"
+  },
+  "outcome": "accepted within bounded CPU preparation, rollback, admission and public export scope",
+  "findings": [],
+  "base": "14079e2a6b12641f63134bc645a515f9ee4754b3",
+  "source_root": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "freeze": {
+    "path": "/tmp/incant-text-input-freeze-003.json",
+    "sha256": "76bee4e74b1fc7fbe05c24d6ff2d6cf34717d3428dc6848cece0eb5c05daf368",
+    "file_count": 35
+  },
+  "evidence": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/docs/spikes/evidence/native-text-input.json",
+    "sha256": "8a05494f1d558d7a73f98cd2e87f4d7ba0aee49d596e1cc507fa563a0cc38634"
+  },
+  "process_receipt": {
+    "path": "/tmp/incant-native-text-export-002/result.json",
+    "sha256": "38abd901dee2beea4b518aebd789bb5e063acdb73fc4aff723936028b00aa69e",
+    "durable_copy_byte_identical": true
+  },
+  "verified_sources": {
+    "Cargo.lock": "0a3df3be7c79b7cb536557cd7ce44e31ba20a0ac484633612f0257c08cd1bbe9",
+    "crates/incant_game_player/src/gpu.rs": "33ccce7f5589de0e535099373d2344c31205794375c7de4b2abf19b7621a198f",
+    "crates/incant_game_player/src/package.rs": "df434f60c3a0061b94112cc1355543e7fbe5215c7291b3f4ee0d02d1e292fccc",
+    "crates/incant_game_player/src/session.rs": "084acda62e22e116479a795e483e272ddad0faf956b506fb254acf88223ce511",
+    "crates/incant_game_player/src/window/mod.rs": "40057c17dc07075c4b47885f3c0df1db988585e81b3d2d5b58418186df3c4a52",
+    "crates/incant_play/src/control.rs": "e551bb5585be9d7c2669b9bd3d21fe6b98757abd5c968dd0941643b7ca3bff93",
+    "crates/incant_play/src/lib.rs": "9caf404409df42d8f27a7ee6cb0cf6e43bb10f7c8a34336b6a22ae49e55d0293",
+    "crates/incant_play/tests/control.rs": "77175d16db121e8a161d9a8a9e6ffd4497a3e78a103ba18ef38bc3e5f1252b9e",
+    "crates/incant_render/Cargo.toml": "73ef11481eaa6bd53d558c0139655a2920ceed4a19b3f64ea01ecdb382e716f9",
+    "crates/incant_render/src/animation_tests.rs": "733fc6b5b34583d718aac70791d31c2945b2a12bf9c259361109136d4bdabfe1",
+    "crates/incant_render/src/flipbook_tests.rs": "9c37c95f2d836d3a4ccbac4e7c91677da7d099e1b63574f01ba3a802119fdffd",
+    "crates/incant_render/src/retained.rs": "723556f78fbea548997a2e6308f1751962620bdbc34851deaedc2e89769aa525",
+    "crates/incant_render/src/scene.rs": "92bd754c664d7bb4b0c47cccb3fb21b2b687fc9b02920c9b6da1c4fc9cc3665b",
+    "crates/incant_render/src/typed_scene_tests.rs": "566ad587b3a9b8d78adc56cd2fc907e63593fc5a2dea321a1d4bdc5eaa57b54a",
+    "crates/incant_render/src/version_tests.rs": "3728825d23abd5e5ec28c959930215ffd5135287d7919979e187fbcdcf49cdd2",
+    "crates/incant_render_data/Cargo.toml": "13df30475404a851540fc2bfbc82e100a57a66666a6ad429cf2f3d860cb2b18f",
+    "crates/incant_render_data/src/lib.rs": "74ab1604e7cfbbbd9ff71efef5043db7e1db088feec6e59be746e493922dc369",
+    "crates/incant_render_game/src/lib.rs": "6d38303e8ac52e96a88b3b3a9674ef08fa6a773d3956dd29a38cc10b29be7862",
+    "crates/incant_render_game/tests/hosted.rs": "2745308c5b43b5b986eaede545f698a6e250e92d7eecb5379d0890776701de68",
+    "crates/incant_render_gpu_host/tests/game.rs": "5beba82237384d83e0cbbe8608287d9d8b405848b9bff975934bdcb2d9208f1a",
+    "crates/incant_render_native/Cargo.toml": "cc7926d94ac66a9126a03e313fb4a1b3bb4666e4a7e25851e8dd663d7cf5eefc",
+    "crates/incant_render_native/src/lib.rs": "3ac191d31f6e667919cfe9001312d00ce551812645ed94af25c3954cc80fb24a",
+    "crates/incant_render_native/src/update.rs": "c13d7646e8f4f606eeb60730c30dc42037fd132623e9895cf7a72d4787d8f5be",
+    "crates/incant_render_native/tests/allocations.rs": "b0e70a95558f3be55d8bce25141c07b588c8dd9734cca6136079362958418346",
+    "crates/incant_text/src/atlas.rs": "51e2345fe2ab35e6cecc506be8a94a32ad5275eabf53fd5628816c7acf7e2b45",
+    "crates/incant_text/src/fonts.rs": "dfad32f5ef441707376c651684a2455b84c5ba047bcf5a091368cda3bcb16ef4",
+    "crates/incant_text/src/layout.rs": "1e2bcc253af68e2ff0afeb286e1efcb4af0db1ee3893cc1c3423d48ee53b95b5",
+    "crates/incant_text/src/lib.rs": "aafb19335e83b5d2999625d72eac92db2f582c5cb415e533451aeb484bde2d5a",
+    "crates/incant_text/tests/shaping.rs": "d25dc98ed1c72551c729821382ed731810fbc456807c950559851b35660311c3",
+    "crates/incant_render_data/src/text.rs": "b135691c8cd36564556fa9a5857161cd01d6877b5a7138a20f7c81bea5a26500",
+    "crates/incant_render_native/src/text.rs": "4c1ed3dff46310af81bc9142915943bc1a8b6c8488f947ef9e570cf2f31dc422",
+    "crates/incant_render_native/tests/common/text.rs": "b2c93432438fad8e866ccc1169f22d2ee0e5df38a3bd598ad5bb2704146c4f8e",
+    "crates/incant_render_native/tests/text_input.rs": "96a80695c9ddf5dac6a8773c5634cf3c0545647e91c75b015c06fbc619d9a36c",
+    "tools/probes/native-text-export.py": "3cdda7c56597a3a5b741e39482b324a38019956a06b068e9a3b136fa4fa72a65",
+    "crates/incant_game_player/src/observe.rs": "a6f20985c2bf3e8a24f61748301889082973c8e668a5004d6f37485a0c464811"
+  },
+  "verified_logs": {
+    "/tmp/incant-text-input-tests-005.log": "816305fa8c902d5ada51a91e410a3b1e67771bccd247dd95bd3ca403b17c6863",
+    "/tmp/incant-text-input-clippy-003.log": "06ac6be8ba2a6d3378152f35967f62c2f05072de0b9d52ac77798b3b9ec139ba",
+    "/tmp/incant-text-input-headless-001.log": "5284428e6a05e43c50f7e1631d126e88c8772cdd7873aa7666c95c5ac1dcf3c3",
+    "/tmp/incant-native-text-export-001.log": "55eb384fadc373f747f1f9c03caa9f65a8d009fcfe4a0b456d354a97172a83de",
+    "/tmp/incant-native-text-export-002.log": "eda8c8c5ef1dea07201ac1b92ddf925980c1983a52b96fcbd71225510e021596",
+    "/tmp/incant-text-input-wasm-001.log": "f53b691ff90bc7a4cabfb50a948b96edefa710311c653eba647d2ceced21381e",
+    "/tmp/incant-text-input-fmt-002.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-text-input-graph-002.log": "61af628dd7d30ad78ecc7960053322943a39559dbf71a805f6f559ab568c7167",
+    "/tmp/incant-text-input-conventions-002.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/tmp/incant-text-input-sdk-002.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "shipping_player": {
+    "path": "/tmp/incant-native-text-export-002/package/player/incant_game_player",
+    "sha256": "14ac4564445378dd4ef8887a52850bf6bf4f3bf7a4a1b7eccb29427e89b879b3",
+    "bytes": 8673040,
+    "target": "aarch64-apple-darwin"
+  },
+  "verified_export_files": {
+    "/tmp/incant-native-text-export-002/package/export.json": "0ff67ac84c2a62f6ce2bf92836a26e150fd1a208be99385573c097e188a82d53",
+    "/tmp/incant-native-text-export-002/package/build.log": "026ca5b90113d4656e352e5b1c795579168d93462b5cc8508fd436bb63c24324"
+  },
+  "verified_run_files": {
+    "/tmp/incant-native-text-export-002/run-0.json": "0e66ac91cea6dd7df81d381fd9f997c8a8ee30129cfb3afa8e27a5422093dc97",
+    "/tmp/incant-native-text-export-002/run-0.pcm": "37f0b316b2b5a435470a8294cd8197c1a39b174cb1ad0bf7ae3c5de21802f57c",
+    "/tmp/incant-native-text-export-002/run-1.json": "0e66ac91cea6dd7df81d381fd9f997c8a8ee30129cfb3afa8e27a5422093dc97",
+    "/tmp/incant-native-text-export-002/run-1.pcm": "37f0b316b2b5a435470a8294cd8197c1a39b174cb1ad0bf7ae3c5de21802f57c",
+    "/tmp/incant-native-text-export-002/run-2.json": "0e66ac91cea6dd7df81d381fd9f997c8a8ee30129cfb3afa8e27a5422093dc97",
+    "/tmp/incant-native-text-export-002/run-2.pcm": "37f0b316b2b5a435470a8294cd8197c1a39b174cb1ad0bf7ae3c5de21802f57c"
+  },
+  "supplied_rust_results": {
+    "passed": 120,
+    "failed": 0,
+    "ignored_gpu": 74,
+    "groups": 31,
+    "rerun": false
+  },
+  "source_review": [
+    "Canonical text input shares immutable layouts and atlas with checked world identity and declared font references; no system font discovery or mutable layout escape.",
+    "Shared font byte sources retain concrete ordered face validation without name metadata enumeration or repeated full font copies.",
+    "Layout/glyph/chain, raw font, atlas and retained payload limits are admitted before their relevant raster or publication stages. Documented old/candidate storage coexistence is not represented as a complete process heap bound.",
+    "Generation-changing preparation stages candidate text/spatial input before publication. Motion guard restores both text and spatial transforms on consumer rejection or unwind; accepted tick publication follows successful consumption.",
+    "Empty catalog and non-text paths preserve previous behavior. Actual text remains explicitly rejected by the canonical GPU staging boundary pending drawing integration.",
+    "Observed package arguments admit the exact expanded 16-argument font-cache plus observe shape; parser still rejects malformed, duplicate and unknown shapes.",
+    "Public import/command/save/export proof uses a fresh shipping player after deleting private source/build inputs; three actual CPU runs compare retained text/model motion, glyph/font/atlas observations and PCM. Missing and tampered cooked fonts refuse before output."
+  ],
+  "process_observations": {
+    "fresh_runs": 3,
+    "ticks_each": 20,
+    "glyphs": 8,
+    "fonts_used": 3,
+    "rtl_glyphs": 3,
+    "missing_clusters": 0,
+    "atlas_bytes": 4194304,
+    "atlas_nonzero": 723,
+    "gpu_submitted": false,
+    "authoring_directory_absent": true,
+    "font_refusals": 2
+  },
+  "review_actions": {
+    "production_edits": false,
+    "compilation": false,
+    "process_launches": false,
+    "graphics": false,
+    "test_reruns": false,
+    "symbol_audit_reexecuted": false
+  },
+  "limitations": [
+    "No text GPU drawing, rendered pixel, native window, device performance, IME/widget or complete game UI acceptance.",
+    "Source and log hashes authenticate the inspected frozen packet; supplied test results were parsed, not independently rebuilt or rerun.",
+    "Fresh export proof covers CPU package text preparation and numerical observations only; no compatibility authority, full heap proof or phase gate adoption.",
+    "Prior failed export observation log retained; corrected argv admission was inspected against the actual expanded-package regression."
+  ]
+}

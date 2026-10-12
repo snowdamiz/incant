@@ -207,6 +207,7 @@ impl Session {
             clips,
             rate,
             NativeRenderSettings {
+                text: settings.text,
                 model_cache: settings.model_cache,
                 texture_cache: settings.texture_cache,
                 camera: settings.camera,

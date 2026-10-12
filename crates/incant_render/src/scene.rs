@@ -57,6 +57,9 @@ pub(crate) struct ResolvedScene {
 /// Resolve startup/revision input. Native moving-frame extraction will use a
 /// retained topology/instance path; this entry point does not claim that migration.
 pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
+    if input.text.is_some() {
+        return Err(SceneError::Input("text drawing is not implemented"));
+    }
     if input.nodes.len() > 1_000_000 {
         return Err(SceneError::Input("node limit"));
     }
