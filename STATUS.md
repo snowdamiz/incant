@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native game UI reserved-frame connection — locally verified
+
+Managed native input and Claude's accepted screen-space consumer compose in the
+native player. Reserved-frame sizing now fences old pointer coordinates before
+relayout and preserves text ownership; unchanged frames reuse UI resources.
+Affected CPU tests, Clippy, dependency checks and independent source review pass.
+Actual native-window/IME and pixel review are assigned to fresh Claude0057, so no
+native appearance or complete Game UI claim is made. See
+[the sizing contract](docs/spikes/native-window-ui-reserved.md).
+
 ## Native UI checkpoint state — CPU section locally verified
 
 Committed widget text, grapheme selection and logical focus now have a bounded
