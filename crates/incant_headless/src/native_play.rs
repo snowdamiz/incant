@@ -47,7 +47,7 @@ pub struct Options {
     #[arg(long)]
     pub pcm_output: Option<PathBuf>,
 }
-fn viewport(value: &str) -> std::result::Result<[f32; 2], &'static str> {
+pub(crate) fn viewport(value: &str) -> std::result::Result<[f32; 2], &'static str> {
     let (width, height) = value.split_once('x').ok_or("expected WIDTHxHEIGHT")?;
     let v = [
         width.parse::<f32>().map_err(|_| "invalid UI width")?,

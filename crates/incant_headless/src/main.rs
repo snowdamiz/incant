@@ -6,6 +6,7 @@ mod assets;
 mod eval;
 mod localization;
 mod native_play;
+mod native_worker;
 mod play;
 mod play_assertions;
 mod play_audio;
@@ -124,6 +125,8 @@ enum Cli {
     Play(play::Options),
     /// Run a selected project scene on the native runtime with startup-only cooking.
     NativePlay(native_play::Options),
+    /// Retain a native CPU Play session behind a bounded read/control-only pipe.
+    NativeWorker(native_worker::Options),
     Script {
         project: PathBuf,
         compiled_script: PathBuf,
@@ -621,6 +624,7 @@ fn run() -> Result<()> {
                 return Err("native gameplay assertions failed; see completed report".into());
             }
         }
+        Cli::NativeWorker(options) => native_worker::run(options)?,
         Cli::Play(options) => {
             let report = play::run(options).map_err(|error| error.to_string())?;
             let passed = report.passed;
