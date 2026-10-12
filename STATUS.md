@@ -24,7 +24,7 @@ size and bind the exact compiled kernel before world allocation. Current main172
 passes 353 CPU tests in each mode, Clippy and headless/player/mobile-library/editor
 compilation with actual target feature receipts. Five additive Cargo seams preserve
 current mobile and host capabilities; production Rust source matches the reviewed
-foundation. Final integrated review is pending. Project settings and automatic
+foundation. Independent final integrated review is accepted. Project settings and automatic
 process/export selection remain separate work; physics-save refusal stays closed.
 [Integrated source and checks](docs/spikes/physics-mode-main172.md).
 

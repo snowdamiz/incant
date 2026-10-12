@@ -2022,5 +2022,9 @@
     "Production PhysicsUnsupported remains unchanged. Trusted clone diagnostic does not admit untrusted solver states.",
     "Retained producer checks describe their immutable original source; these integration commands bind the current main172 union."
   ],
-  "review_status": "current-main final independent review pending"
+  "review_status": "accepted current-main172 source and execution",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-mode-main172/final-review.json",
+    "sha256": "308c8fc4b9640addafaf41698d7d1eedd49f3ba0c5f3e277ca4fb5e6bfa3ba40"
+  }
 }
