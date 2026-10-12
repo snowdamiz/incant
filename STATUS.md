@@ -177,6 +177,17 @@ active. Report merged work separately from local checks and unmet exit gates.
 The project is still early relative to the complete Engine 1.0 and Driftwake
 scope; no defensible percentage or completion date follows from the PR count.
 
+## Native Wasm local avoidance — locally verified
+
+The public Rust SDK now has copied bounded steering requests/results backed by
+native avoidance, with generated Wasmtime/wasm2c bindings and atomic rollback.
+Both real hosts pass the final 331-test conformance suite and Clippy. Independent
+review caught an f64-to-f32 admission mismatch; original-value domain checks and
+causal rollback regressions now pass. The strict generated ABI, wasm32 guest
+compile and 228 Python cases (four platform skips) pass. This remains a
+reviewed local candidate awaiting main integration; public shipping steering, remaining navigation bindings and
+reference-device gates are not claimed. [Scope](docs/spikes/native-wasm-steering.md).
+
 ## Native local avoidance — current-main integration checked
 
 The native simulation and TypeScript SDK now expose bounded bulk steering with

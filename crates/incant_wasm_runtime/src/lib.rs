@@ -4,6 +4,7 @@ mod animations;
 mod capability;
 mod flipbooks;
 mod generated;
+mod steering;
 pub use flipbooks::{
     MAGIC as FLIPBOOK_MAGIC, MAX_BYTES as MAX_FLIPBOOK_BYTES, ROW_BYTES as FLIPBOOK_ROW_BYTES,
 };

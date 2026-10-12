@@ -58,6 +58,58 @@ impl<'tick> Tick<'tick> {
     fn ready(&mut self) -> Result<()> {
         self.check(Ok(()))
     }
+    /// Compute sorted local-avoidance proposals using this callback's fixed dt.
+    /// Aggregate work is bounded to 128 agents, 128 obstacle edges and 32 calls
+    /// per update. Returned rows borrow only the caller's result scratch.
+    pub fn steer_agents<'a>(
+        &mut self,
+        request: crate::steering::Request<'_>,
+        request_scratch: &mut [u8],
+        result_scratch: &'a mut [u8],
+    ) -> Result<crate::steering::Velocities<'a>> {
+        self.ready()?;
+        let len = self.check(
+            abi::steering::encode_request(request, request_scratch).map_err(crate::steering::error),
+        )?;
+        // SAFETY: only the initialized, bounded request prefix is copied during
+        // this synchronous import; neither host retains a pointer to the guest.
+        let result = unsafe {
+            raw::incant_navigation_v1_steer(
+                self.epoch,
+                request_scratch.as_ptr() as usize as i32,
+                len as i32,
+            )
+        };
+        let result_len = self.check(
+            usize::try_from(result)
+                .ok()
+                .filter(|&len| len <= abi::STEERING_MAX_RESULT_BYTES)
+                .ok_or(Error::Bounds),
+        )?;
+        self.check(if result_scratch.len() < result_len {
+            Err(Error::Capacity)
+        } else {
+            Ok(())
+        })?;
+        // SAFETY: the initialized mutable destination prefix is exclusively
+        // borrowed for a synchronous copied read. Complete ranges are rechecked.
+        let written = unsafe {
+            raw::incant_navigation_v1_read_steering(
+                self.epoch,
+                result_scratch.as_mut_ptr() as usize as i32,
+                result_len as i32,
+            )
+        };
+        self.check(if usize::try_from(written).ok() == Some(result_len) {
+            Ok(())
+        } else {
+            Err(Error::Malformed)
+        })?;
+        self.check(
+            abi::steering::decode_result(&result_scratch[..result_len])
+                .map_err(crate::steering::error),
+        )
+    }
     fn localization_result<'a>(&mut self, len: i32, scratch: &'a mut [u8]) -> Result<&'a [u8]> {
         let len = self.check(
             usize::try_from(len)
