@@ -1,0 +1,104 @@
+{
+  "source_commit": "7c66106c9afb2c2b2abd3e6b2107e54d74b06c35",
+  "integrated_source": "6d0d59b3a2fe0ed22c3f646393230ebe00ebe16c",
+  "actual_main": "3da7185ecd86917d9f4fa06b0999035b75b964e1",
+  "unchanged_reviewed_files": {
+    "Cargo.lock": "dc4e8a2a17fd1f432fa656452cf2aec26394c9c5d5dbd7b7f3381569b8415f6c",
+    "crates/incant_wasm_abi/src/lib.rs": "db277a14b04d1aaf7985a87b1f3795becbdabf045af833a62fbd8722119d5ec3",
+    "crates/incant_wasm_abi/src/localization.rs": "fca1e7f1f409e1a5cdabb321a071aaa38a2fecda13d3a312f2cd5cf878698af6",
+    "crates/incant_wasm_abi/tests/localization.rs": "87ef10029ce64c13e8975a6d362410fc50587023f68b69063ab88380390bcb0d",
+    "crates/incant_wasm_dev/Cargo.toml": "193e18164bd87b5c1c243ba935bc22d17c49b7ee5634f29d839aacad4c739622",
+    "crates/incant_wasm_dev/src/generated.rs": "3afdd779a2c1ebb5be17419ed99ec04efcb4a8aa0892f3f1f76ba31e0f24858e",
+    "crates/incant_wasm_dev/tests/localization_parity.rs": "7faaf95f75f46942d6d381adac470a7df639ff93905377996fa95ddce306320d",
+    "crates/incant_wasm_runtime/Cargo.toml": "47794ee5bc4054c97ae7599dcaaf915becc87f0a2d1a06ed695dcee5399052b4",
+    "crates/incant_wasm_runtime/c/generated.h": "9aa10c8e6319691a98aa8606c17eb514219d8775bea11413b3d0be8867e6f309",
+    "crates/incant_wasm_runtime/c/generated.inc": "07f40c0b80acee28e7dc3b74f25233a3e0c721198046360f28ceff0313ab61fb",
+    "crates/incant_wasm_runtime/fixtures/localization-start.wat": "682327d844267c7b374378ed0e1810e78f0591bb6d2aa69e73bac87564d04897",
+    "crates/incant_wasm_runtime/fixtures/localization.wat": "df193e8687bc1e87b91674a801b05099bf271d98d9d14d1d0a0a5d15360ab75e",
+    "crates/incant_wasm_runtime/src/capability.rs": "97468c970fc7e09177c48757cdb6e233beb864f655f67759725483f3e51d3f5a",
+    "crates/incant_wasm_runtime/src/generated.rs": "806836ad60350c42ecab12444483ef4ca66ca1689f7dc8c976f4039d73b46820",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "5a4b7f677e132fd05fd17667ef31c5a508a9f1fad1c14853a2ce07663f50ccf1",
+    "crates/incant_wasm_runtime/src/lib.rs": "03b9f9fc32d48797a5b438b2f7619c91cee2161e199aadc9d610e95045f3ba5f",
+    "crates/incant_wasm_runtime/src/localization.rs": "b60530d62872498abd53d324488dc544eb3680acb2f8adfc17ba0e3b5bad5729",
+    "crates/incant_wasm_runtime/tests/localization.rs": "0412fdf131a67c7ce89e6196c13856a17077ab090ff20935745a6e67d98c02fc",
+    "docs/spikes/evidence/native-wasm-localization.json": "804d19a93abe724af91440154230434ccffc9aff75146c9040ae3001a55b1226",
+    "docs/spikes/native-wasm-localization.md": "8d28112855bedc1408d1ba09992211ed0f32206db7d349bcb9095dcd5942afeb",
+    "sdk/abi/native-v1.json": "4865685abd7c25547ea753fe13ab1c595917b4d633154bef0265d56f5c5ff043",
+    "sdk/rust/README.md": "fa2826d9b3e4c0557f2ab21a890e2d8bf63f40bc7b635a399d3a9ebc3fc073d6",
+    "sdk/rust/fixtures/localization_failure.rs": "67bbdf39d73d46364589175d0182dd627763a5aab489d5e666103eb23458dcd5",
+    "sdk/rust/samples/localization.rs": "876987cd07d1ec6080d248df81427d72ac1fe8bd6978cac9f47ab2a3a08e6340",
+    "sdk/rust/src/lib.rs": "cb1771b7f9050991e696552de208daeacf0b49fcb2b5f860015d8d1a8ba864d8",
+    "sdk/rust/src/localization.rs": "e5b835e4611b1b696b2940dd493295fb2c171603b5da40caabe176b78a7fc22a",
+    "sdk/rust/src/raw.rs": "cad9bdf8a905769b9432bcf96da7d29f4a302b224e44316ca1a0cfb8dfdb1f1b",
+    "sdk/rust/src/tick.rs": "e3d6ce21c6ad648ed57a3f0869ff47747edab1861cfd6051fdd42a610406b8b8",
+    "tools/generate_wasm_sdk.py": "5bb566c702b0535005986c912dec3451e58f9314dc64c0441dedf1006b3dfd4c",
+    "tools/probes/shipping-wasm2c.py": "56cc9a76cd1f9ffcf1943785665e5569307323a65e33faf6294291ac8118acb4",
+    "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+    "tools/tests/test_rust_guest.py": "36f3b1a4314969e3e6ffa8d0241e7a1ec937d58f88609bbf64b21d4b7ae5190e",
+    "tools/tests/test_wasm2c_shipping.py": "d057d75a5a271c32d5c069948844daa7171e3f6dcad4472419f17b9c5081ebef",
+    "tools/tests/test_wasm_sdk.py": "9e0f2e762fce7208065b5df6010a8646eb5908bf1f36911d4fbb659eaea75c60",
+    "tools/wasm_abi.py": "f69b6ead8de4706bd31def3bc9153eacb4ded2d71a17c8ce4b4915b214a3415a"
+  },
+  "prepared_artifact_count": 378,
+  "prepared_manifest_sha256": "aedae08e5c65ba3cd91e33c2471c60057c3e9ee2f2730fe749103ca4e857c4fb",
+  "root_review_sha256": "6675f8ed3338e4f7410ece548b2af0f369b0b67e10c5aebab8dab00a65618b18",
+  "merge_conflicts": false,
+  "logs": {
+    "/tmp/incant-wasm-localization-main104-checkpoint-tests.log": {
+      "sha256": "68510deccbb3111b8ef559e9149222c579779e9b3a79bd4a7990e1a4bb0ef216",
+      "bytes": 942
+    },
+    "/tmp/incant-wasm-localization-main104-clippy.log": {
+      "sha256": "396db7692939e0a191d06c75eb3bd71550afaa8fa32343b14fc44611893c4c2b",
+      "bytes": 1908
+    },
+    "/tmp/incant-wasm-localization-main104-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-wasm-localization-main104-diff.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-wasm-localization-main104-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-wasm-localization-main104-generated.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-wasm-localization-main104-graph.log": {
+      "sha256": "83781cd210db9a44948e0960bd2ab7054ce0a257438f487dc18a5e74233432cc",
+      "bytes": 170
+    },
+    "/tmp/incant-wasm-localization-main104-no-compiler.log": {
+      "sha256": "7cb7d6b3a3d2ceda6cb917280fc52259e9b27100f182a0c3b1285456a9d12252",
+      "bytes": 430
+    },
+    "/tmp/incant-wasm-localization-main104-python.log": {
+      "sha256": "3966dd9619816681ab8e4c8cc2e3383d078080100d8a7bb4093ee2ffd0ef5b58",
+      "bytes": 119
+    },
+    "/tmp/incant-wasm-localization-main104-session-tests.log": {
+      "sha256": "96bf5568044abf7df0d1e5592f7efc044b4c4dcec8a22bd40863563d890efeec",
+      "bytes": 11888
+    },
+    "/tmp/incant-wasm-localization-main104-tests.log": {
+      "sha256": "f920ee9cb484b914303a881f75bdb951ba0c662a6e43e71118d0f29f91a5fe11",
+      "bytes": 11764
+    }
+  },
+  "results": {
+    "combined_host_sdk_tests": 74,
+    "script_game_lib_tests": 106,
+    "game_checkpoint_tests": 5,
+    "python_tools": 20,
+    "all_target_clippy": "pass",
+    "compiler_disabled_static": "pass",
+    "runtime_graph": "pass",
+    "generated_wasm_sdk": "pass",
+    "fmt_conventions_diff": "pass"
+  },
+  "scope": "Actual main104 union: no source conflicts; source and prepared guest/C identities unchanged; reran actual development/static module conformance plus ScriptHost/GameSession checkpoint seam tests. No GPU/provider/device or full static checkpoint claim."
+}

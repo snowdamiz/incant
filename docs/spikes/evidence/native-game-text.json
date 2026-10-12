@@ -1,0 +1,90 @@
+{
+  "kind": "packaged-font-game-text-shaping",
+  "recorded_at": "2026-10-11T23:33:42.598819+00:00",
+  "base": "2816ecde29bf4dd0bb058e46212cd836c1bb816c",
+  "author": "astra",
+  "tests": {
+    "passed": 15,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 3
+  },
+  "commands": {
+    "tests": {
+      "command": "./tools/cargo test --locked --profile ci -j2 -p incant_text",
+      "exit_code": 0,
+      "log": "/tmp/incant-game-text-tests-006.log",
+      "log_sha256": "50ac68aa5311c77b27a81a934468780d3dd447ffa5f6608ff86f89d0d1f18ef6"
+    },
+    "clippy": {
+      "command": "./tools/cargo clippy --locked --profile ci -j2 -p incant_text --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "/tmp/incant-game-text-clippy-005.log",
+      "log_sha256": "df699f78760feeb11d4c758a11cf5593834510b52ffb7d82515c17e5cd173834"
+    },
+    "wasm": {
+      "command": "./tools/cargo check --locked --profile ci -j2 -p incant_text --target wasm32-unknown-unknown",
+      "exit_code": 0,
+      "log": "/tmp/incant-game-text-wasm-002.log",
+      "log_sha256": "b56093d551ed22cc4736bb812b5e1b87ca3482a1506e87b3a8c01d8093b5ee0d"
+    },
+    "dependencies": {
+      "command": "python3 tools/check_runtime_dependencies.py incant_text",
+      "exit_code": 0,
+      "log": "/tmp/incant-game-text-dependencies.log",
+      "log_sha256": "031b1e6f05967d0e88a7ed7c078988ceda4129020699fe11b3f2a07a020691b0"
+    },
+    "format": {
+      "command": "./tools/cargo fmt --all --check",
+      "exit_code": 0,
+      "log": "/tmp/incant-game-text-fmt.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conventions": {
+      "command": "python3 tools/generate_conventions.py --check",
+      "exit_code": 0,
+      "log": "/tmp/incant-game-text-conventions.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "lock_preservation": {
+      "command": "./tools/cargo check --locked --profile ci -j2 -p incant_text",
+      "exit_code": 0,
+      "log": "/tmp/incant-game-text-lock-preservation.log",
+      "log_sha256": "871567a3f644a5ee931f86f86985b69028b9ae308749836a4fabb4c7d14f06d7"
+    }
+  },
+  "target_directory": "/tmp/incant-game-text-target",
+  "source_sha256": {
+    "Cargo.lock": "65a00e6772cf1e589d7230d936a16778e400fa2fb6475a52483acd8a69798414",
+    "crates/incant_text/Cargo.toml": "2055516fe9da2d7adedee9bd0f0cfa80f43d96725f8f3a8d3bb4056b8179e92f",
+    "crates/incant_text/src/fonts.rs": "a8eb58ae89a8a331cf81dc35e154b21240b550556c7b35bdcf765713e33b0524",
+    "crates/incant_text/src/layout.rs": "d274cde45aaeb884600712aac38ad1609ed2fc20d3a4f8f25d056b93cddf5263",
+    "crates/incant_text/src/lib.rs": "2343dce9914e9b89b144e99f731b4f678f74da85c7c1fe898cfdf4d1549e8cc8",
+    "crates/incant_text/tests/fonts/LICENSE": "5ec4347054089def6904da61d04f0360968f9ef36634b1fe007a5b6ec2f7aa96",
+    "crates/incant_text/tests/fonts/NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "crates/incant_text/tests/fonts/NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "crates/incant_text/tests/fonts/NotoSansHebrew.ttf": "3d4fef85b449ade4d165de982969374fa30b2a5fe7bc679f5a3f5bfc047fb703",
+    "crates/incant_text/tests/fonts/provenance.json": "dcf7c3810ec80ee28781a413985a1d2f65172fa63a95d5669ca0b1c6bd6bb664",
+    "crates/incant_text/tests/shaping.rs": "52c72e66cea8904b9a11ba8bdb1803b6573223c25d1e02b4b7e017572a4d61a2"
+  },
+  "resolved_existing_packages_unchanged": true,
+  "review": {
+    "initial": "native-game-text-review.json",
+    "final": "native-game-text-review-final.json",
+    "final_sha256": "a0b13905d9940fe2a7cd174a93af0fd0d9bd63cef781e5f2aa91ae28b5f4428d",
+    "all_three_findings_closed": true,
+    "post_review_delta": "Only Cargo.toml disables unnecessary random ULID generation for standalone wasm; Cargo.lock restores an unrelated bindgen itertools edge to its original resolution. Font/layout/test source remains the reviewed bytes."
+  },
+  "historical_failures": [
+    "Original RTL test incorrectly assumed glyph enumeration sorted by x; corrected to check logical cluster direction against coordinates.",
+    "Test-only lint controls corrected before final passing all-target check.",
+    "Initial standalone wasm compile enabled ULID random generation; direct no-default-features ID dependency fixes it without adding a browser randomness dependency.",
+    "Three independently reproduced font-ingress defects are retained in original review receipt, with final fixed private repros."
+  ],
+  "limitations": [
+    "CPU shaping only; no font atlas/draw/widget/IME integration yet",
+    "Latin Arabic Hebrew actual-font numerical tests, not CJK Devanagari emoji rendered golden coverage",
+    "No native/browser live visual or phone shipping-performance gate",
+    "No hard measured internal allocation/time guarantee from input/output caps"
+  ]
+}

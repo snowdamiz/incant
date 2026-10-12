@@ -1,0 +1,45 @@
+{
+  "recorded_at": "2026-10-11T18:41:45.269780+00:00",
+  "parent": "eac6552095782fab4ac1d8175eaefaa4ed656fa6",
+  "sources": [
+    {
+      "path": "crates/incant_agent/src/conversation.rs",
+      "sha256": "4abc8f689f88eb86fc7e42c32261ac0379da4dae9d07c6a99a548c1a79d46747"
+    },
+    {
+      "path": "crates/incant_agent/src/lib.rs",
+      "sha256": "8fdd8bdd269111c7f75134bf18462445f29feb72a8f11b2e8263a139af141db4"
+    },
+    {
+      "path": "crates/incant_agent/tests/shared.rs",
+      "sha256": "f5e7fc1e37af6c21a8229f050bcd9f39c5da861a936634d3b54064aaecac6a49"
+    }
+  ],
+  "logs": [
+    {
+      "path": "/tmp/incant-conversation-tests.log",
+      "sha256": "4a2176f82360610633576a1b9e06e893bf7a6c5e34a303df785b355e7e251abc"
+    },
+    {
+      "path": "/tmp/incant-conversation-clippy.log",
+      "sha256": "2f8a7b42c6f65577e88696380c9d91a8b98f872b2d6a10c8e4496044cf889e29"
+    }
+  ],
+  "review": {
+    "path": "/tmp/incant-conversation-review.md",
+    "sha256": "3565e837586e0c772de5d848bda1de9b6977de2775ba88b14e2fbc7ce7d57768"
+  },
+  "commands": [
+    "./tools/cargo test --locked --profile ci -j2 -p incant_agent",
+    "./tools/cargo clippy --locked --profile ci -j2 -p incant_agent --all-targets -- -D warnings",
+    "./tools/cargo fmt --all --check",
+    "git diff --check"
+  ],
+  "results": {
+    "agent_tests_passed": 53,
+    "clippy": "passed",
+    "independent_review": "accepted"
+  },
+  "live_provider": false,
+  "editor_connected": false
+}

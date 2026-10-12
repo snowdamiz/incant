@@ -1,0 +1,69 @@
+{
+  "recorded_at": "2026-10-11T21:12:01.218946+00:00",
+  "author_commit": "4450c64be0f27e18175dc15b8d45129b27fd64b4",
+  "integrated_commit": "4256a814a3a710737c5123f5c2768ab73346a603",
+  "reviewer": "/root",
+  "source_sha256": {
+    "editor/ui/src/components/Splitter.tsx": "76d1fa85e08bca4867d07b836426b7aba180347727e702f4e0d623c282040a9c",
+    "editor/ui/src/components/Splitter.test.tsx": "71b91f3e95a9fc01317fa94c2502299dd696818e57c65ffcd70837800493cd9a"
+  },
+  "review": "Accepted bounded pointer/keyboard correctness after reading final component/tests and structured browser receipt. No actionable finding; actual WKWebView acceptance remains pending.",
+  "observations": [
+    "Cancel primary mousedown default while preserving the compatibility event for outside-menu listeners; explicit focus restores keyboard resize.",
+    "Only primary non-Control pointer begins dragging. Moves and termination are bound to its ID; a missing primary button also terminates.",
+    "No global user-select change. Axis/invert/bounds and existing keyboard stepping remain.",
+    "Final tests assert an intervening other-pointer move, retained mouse-button end conditions and lost release. Six source mutations each fail corresponding tests."
+  ],
+  "browser": {
+    "label": "BROWSER EVIDENCE: headless Chromium driven by playwright-core with real mouse and keyboard input. Not the native WebKit window.",
+    "browser": "chromium 156.0.8078.4 (headless)",
+    "source": {
+      "base": "dc5e620",
+      "head": "dc5e620",
+      "splitterBeforeSha256": "d96979c2f2197beba54e2df3839c3719901974d7f406db02500f038b58f29153",
+      "splitterAfterSha256": "76d1fa85e08bca4867d07b836426b7aba180347727e702f4e0d623c282040a9c",
+      "afterIsWorkingTree": "uncommitted changes in Splitter.tsx"
+    },
+    "summary": {
+      "afterPassed": 34,
+      "afterFailed": [],
+      "beforeFailed": [
+        "harness vertical: a primary press starts no text selection (no selectstart)",
+        "harness vertical: a secondary-button drag does not resize or capture",
+        "harness vertical: a Control-click drag does not resize or capture, nor start a selection",
+        "harness vertical: losing capture ends the drag",
+        "harness vertical: no selection after capture is lost mid-drag",
+        "harness horizontal: a primary press starts no text selection (no selectstart)",
+        "harness horizontal: a secondary-button drag does not resize or capture",
+        "harness horizontal: a Control-click drag does not resize or capture, nor start a selection",
+        "harness horizontal: losing capture ends the drag",
+        "harness horizontal: no selection after capture is lost mid-drag",
+        "editor: pressing the Inspector separator starts no text selection (no selectstart)",
+        "editor: pressing the output dock separator starts no text selection (no selectstart)"
+      ]
+    },
+    "evidence_sha256": "b8434e81fa89f0b7662400d6f99664fc1993b66019841764ba0c385cbe0782af",
+    "visual_review_by": "Claude Opus5.5 at explicitly ACP-verified Max; root reviews source/structured evidence only"
+  },
+  "checks": {
+    "ui_tests": {
+      "result": "810 tests,41 files passed",
+      "log_sha256": "9fa2d440cc5cd5835f2a482b255262a1a99efa3edc069606abf598a48fbe03e9"
+    },
+    "production_build_and_app_types": {
+      "result": "passed",
+      "log_sha256": "cb7cf42c6ed3b7d54f865e44488cf4d4e3945a0d6a2c1a491e7008d3ccc7e4a2"
+    },
+    "strict_test_types": {
+      "result": "passed",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limitations": [
+    "Actual WKWebView selection/focus and original visible symptom await combined native handoff0048.",
+    "No Windows WebView2, touch/pen hardware or actual pointercancel measurement.",
+    "No account/provider calls, device/performance claim or phase gate."
+  ],
+  "receipt_generation_note": "Initial receipt assertion treated afterFailed as a numeric count; actual schema is an array. Corrected to check emptiness; no source/test change or failed browser check.",
+  "all_build_test_and_0047_handles_reaped": true
+}

@@ -1,0 +1,133 @@
+{
+  "set": "ml1",
+  "generated": "2026-10-11T20:09:20.777Z",
+  "browser": "155.0.8059.40",
+  "data": "deterministic agent fixture (tools/fake-host.js + real native.generated.js); not live, not native WebKit",
+  "captures": [
+    {
+      "file": "model-limit-w1440-s380",
+      "state": "model-limit",
+      "size": "w1440-s380",
+      "width": 1440,
+      "height": 900,
+      "side": 380,
+      "measured": {
+        "window": {
+          "width": 1440,
+          "height": 900,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1440,
+          "scrollHeight": 900
+        },
+        "side": {
+          "x": 1060,
+          "y": 40,
+          "width": 380,
+          "height": 832
+        },
+        "pane": {
+          "x": 1060,
+          "y": 575,
+          "width": 380,
+          "height": 297
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 1060,
+          "y": 611,
+          "width": 380,
+          "height": 159,
+          "scrollHeight": 159,
+          "clientHeight": 159,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 1072,
+          "y": 770,
+          "width": 356,
+          "height": 90
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "composer__model",
+          "name": "Model",
+          "focusVisible": true
+        },
+        "words": 54,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    },
+    {
+      "file": "model-limit-w1000-s280",
+      "state": "model-limit",
+      "size": "w1000-s280",
+      "width": 1000,
+      "height": 650,
+      "side": 280,
+      "measured": {
+        "window": {
+          "width": 1000,
+          "height": 650,
+          "scrollX": 0,
+          "scrollY": 0,
+          "scrollWidth": 1000,
+          "scrollHeight": 650
+        },
+        "side": {
+          "x": 720,
+          "y": 40,
+          "width": 280,
+          "height": 582
+        },
+        "pane": {
+          "x": 720,
+          "y": 362,
+          "width": 280,
+          "height": 260
+        },
+        "status": "Ready",
+        "transcript": {
+          "x": 720,
+          "y": 398,
+          "width": 280,
+          "height": 86,
+          "scrollHeight": 86,
+          "clientHeight": 86,
+          "scrollTop": 0,
+          "tabIndex": null
+        },
+        "composer": {
+          "x": 732,
+          "y": 484,
+          "width": 256,
+          "height": 126
+        },
+        "note": null,
+        "escaping": [],
+        "horizontalScrollers": [],
+        "active": {
+          "tag": "INPUT",
+          "className": "composer__model",
+          "name": "Model",
+          "focusVisible": true
+        },
+        "words": 54,
+        "rawLeak": false
+      },
+      "axe": [],
+      "errors": [],
+      "requests": [],
+      "stepError": null
+    }
+  ],
+  "flows": []
+}

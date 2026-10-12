@@ -8,9 +8,14 @@ publish.workspace = true
 [features]
 # Audio-only players keep their existing dependency graph.
 default = []
-visual = ["dep:incant_2d", "dep:incant_types", "dep:meshopt", "dep:ktx2"]
+font = ["dep:incant_text", "dep:ulid"]
+visual = ["dep:incant_2d", "dep:incant_types", "dep:meshopt", "dep:ktx2", "dep:glam"]
 
 [dependencies]
+glam = { version = "0.32", optional = true }
+incant_text = { workspace = true, optional = true }
+# Runtime IDs come from packaged declarations; no random ID generation.
+ulid = { version = "=1.2.1", default-features = false, optional = true }
 incant_2d = { workspace = true, optional = true }
 incant_types = { workspace = true, optional = true }
 meshopt = { version = "=0.6.2", optional = true }

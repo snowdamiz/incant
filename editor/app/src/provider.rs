@@ -11,28 +11,51 @@ use std::sync::{
     atomic::{AtomicBool, Ordering},
 };
 use tauri::Emitter;
+#[cfg(test)]
+mod tests;
 
 pub struct ProviderRuntime {
+    agent: Arc<super::agent::Service>,
     state: Mutex<Value>,
     busy: AtomicBool,
     cancelled: AtomicBool,
-    browser: Mutex<Option<auth::BrowserAuthorization>>,
+    browser: Mutex<Option<Arc<auth::BrowserAuthorization>>>,
+    browser_reopening: AtomicBool,
 }
 impl ProviderRuntime {
-    pub fn new() -> Self {
+    pub fn new(agent: Arc<super::agent::Service>) -> Self {
         Self {
+            agent,
             state: Mutex::new(json!({"status":"checking","provider":"openai"})),
             busy: AtomicBool::new(false),
             cancelled: AtomicBool::new(false),
             browser: Mutex::new(None),
+            browser_reopening: AtomicBool::new(false),
         }
     }
     pub fn snapshot(&self) -> Value {
         self.state.lock().unwrap().clone()
     }
+    pub(super) fn connection(&self) -> Option<super::agent::Connection> {
+        if self.busy.load(Ordering::Acquire) {
+            return None;
+        }
+        super::agent::Connection::from_public(&self.snapshot())
+    }
     fn publish(&self, app: &tauri::AppHandle, state: Value) {
-        *self.state.lock().unwrap() = state.clone();
-        let _ = app.emit("incant:provider-changed", state);
+        let changed = {
+            let mut previous = self.state.lock().unwrap();
+            let changed = super::agent::Connection::from_public(&previous)
+                != super::agent::Connection::from_public(&state);
+            *previous = state.clone();
+            changed
+        };
+        if changed {
+            self.agent.account_operation(|| ());
+        }
+        // Consumers re-read current state; a delayed hint cannot carry stale
+        // connecting/account data over a newer terminal publication.
+        let _ = app.emit("incant:provider-changed", ());
     }
     pub fn start(
         self: &Arc<Self>,
@@ -56,9 +79,11 @@ impl ProviderRuntime {
             if action == "connect"
                 && account_id.is_none()
                 && !add
-                && let Some(browser) = self.browser.lock().unwrap().as_ref()
+                && let Some(browser) = self.browser.lock().unwrap().clone()
             {
-                return browser.open().map_err(|e| e.to_string());
+                return self.reopen_with(browser, auth::BrowserAuthorization::open, move || {
+                    let _ = app.emit("incant:provider-changed", ());
+                });
             }
             return Err("An account operation is still finishing. Try again shortly.".into());
         }
@@ -68,10 +93,10 @@ impl ProviderRuntime {
             let result = this.perform(&app, &action, account_id.as_deref(), add);
             let state = match result {
                 Ok(state) => state,
-                Err(AgentError::Interrupted) => public_state(false).unwrap_or_else(error_state),
+                Err(AgentError::Interrupted) => public_state().unwrap_or_else(error_state),
                 Err(error) => {
                     let mut state = error_state(error);
-                    if let Ok(saved) = public_state(false) {
+                    if let Ok(saved) = public_state() {
                         state["accounts"] = saved["accounts"].clone();
                         if let Some(id) = saved.get("activeAccount") {
                             state["activeAccount"] = id.clone();
@@ -94,11 +119,13 @@ impl ProviderRuntime {
         add: bool,
     ) -> Result<Value, AgentError> {
         if action == "restore" {
-            return public_state(true);
+            // Startup restores local account presence even offline. The provider
+            // refreshes expired credentials only when an agent request needs them.
+            return public_state();
         }
         if action == "disconnect" {
             let revoked = AccountStore::open()?.disconnect()?;
-            let mut state = public_state(false)?;
+            let mut state = public_state()?;
             if revoked == RemoteRevocation::Unconfirmed {
                 state["message"] = json!(
                     "Signed out on this computer. Remote revocation could not be confirmed; you can also disconnect Incant in ChatGPT Settings."
@@ -111,14 +138,14 @@ impl ProviderRuntime {
                 account_id.ok_or_else(|| AgentError::Provider("Choose a saved account".into()))?,
             )?
         {
-            return public_state(false);
+            return public_state();
         }
         let (attempt, subject) = AccountStore::open()?.prepare_login(add, account_id)?;
-        let mut pending = public_state(false)?;
+        let mut pending = public_state()?;
         pending["status"] = json!("connecting");
         pending["method"] = json!("oauth");
         pending["phase"] = json!("browser");
-        *self.browser.lock().unwrap() = Some(attempt.browser_authorization());
+        *self.browser.lock().unwrap() = Some(Arc::new(attempt.browser_authorization()));
         self.publish(app, pending.clone());
         attempt.open_browser()?;
         let account = attempt.finish_cancellable(
@@ -134,21 +161,69 @@ impl ProviderRuntime {
         // Publication follows durable credential and metadata writes. Closing the
         // app after success does not discard its selected account.
         AccountStore::open()?.activate(account)?;
-        public_state(false)
+        public_state()
+    }
+    /// Reopening an existing browser attempt can block in the OS launcher. Only
+    /// the bounded worker holds it; neither admission nor the browser/state locks
+    /// are held while launching. A stale failure cannot replace a newer attempt.
+    fn reopen_with(
+        self: &Arc<Self>,
+        browser: Arc<auth::BrowserAuthorization>,
+        open: impl FnOnce(&auth::BrowserAuthorization) -> Result<(), AgentError> + Send + 'static,
+        changed: impl FnOnce() + Send + 'static,
+    ) -> Result<(), String> {
+        if self.browser_reopening.swap(true, Ordering::AcqRel) {
+            return Ok(());
+        }
+        let this = self.clone();
+        if std::thread::Builder::new()
+            .name("incant-browser-reopen".into())
+            .spawn(move || {
+                struct Reset<'a>(&'a AtomicBool);
+                impl Drop for Reset<'_> {
+                    fn drop(&mut self) {
+                        self.0.store(false, Ordering::Release);
+                    }
+                }
+                let _reset = Reset(&this.browser_reopening);
+                if open(&browser).is_err() {
+                    let updated = {
+                        let pending = this.browser.lock().unwrap();
+                        let mut state = this.state.lock().unwrap();
+                        if pending
+                            .as_ref()
+                            .is_some_and(|current| Arc::ptr_eq(current, &browser))
+                            && state["status"] == "connecting"
+                        {
+                            state["message"] =
+                                json!("Could not reopen sign-in. Retry Continue with ChatGPT.");
+                            true
+                        } else {
+                            false
+                        }
+                    };
+                    if updated {
+                        changed();
+                    }
+                }
+            })
+            .is_err()
+        {
+            self.browser_reopening.store(false, Ordering::Release);
+            return Err("Could not start the browser opener. Try again shortly.".into());
+        }
+        Ok(())
     }
 }
 fn error_state(error: AgentError) -> Value {
     json!({"status":"error","provider":"openai","error":{"code":"provider.auth","message":error.to_string()}})
 }
-fn public_state(refresh: bool) -> Result<Value, AgentError> {
+fn public_state() -> Result<Value, AgentError> {
     let store = AccountStore::open()?;
     let mut state = json!({"status":"not-connected","provider":"openai","accounts":store.data.accounts.iter().map(|a| json!({"id":a.id,"label":if a.label.is_empty() { format!("ChatGPT · {}", &a.id[a.id.len().saturating_sub(6)..]) } else { a.label.clone() }})).collect::<Vec<_>>()});
     if let Some(account) = store.selected() {
         if CredentialStore::load_optional(&account.id)?.is_none() {
             return Ok(state);
-        }
-        if refresh {
-            auth::access_token(account)?;
         }
         state["status"] = json!("connected");
         state["method"] = json!("oauth");
@@ -177,7 +252,15 @@ pub fn provider_action(
     account_id: Option<String>,
     add: Option<bool>,
 ) -> Result<(), String> {
-    state
-        .provider
-        .start(app, action, account_id, add.unwrap_or(false))
+    if matches!(action.as_str(), "connect" | "disconnect" | "switch") {
+        state.agent.account_operation(|| {
+            state
+                .provider
+                .start(app, action, account_id, add.unwrap_or(false))
+        })
+    } else {
+        state
+            .provider
+            .start(app, action, account_id, add.unwrap_or(false))
+    }
 }

@@ -1,0 +1,6 @@
+2026-10-11T22:59:47Z
+3ff0ded175bc0c39b5a909234665a2ef12509aa8847726b34442873860fc7374  project.json
+2b9ef187acda06a0b00e96615f7fa67d02875d0f5ea63b0da908feda71c865a7  project.journal.jsonl
+      16
+usage record: absent
+sockets:        0

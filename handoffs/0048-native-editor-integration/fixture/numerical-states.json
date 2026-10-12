@@ -1,0 +1,7814 @@
+[
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.004166666666667,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.004166666666667,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 800,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 1,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            2.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            2.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0083333333333337,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0083333333333337,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 1600,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": true,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [
+          "KeyD"
+        ],
+        "pressed": [
+          "KeyD"
+        ],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [
+            "left"
+          ],
+          "pressed": [
+            "left"
+          ],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": [
+          123.25,
+          45.5
+        ],
+        "wheel_lines": [
+          0.0,
+          1.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          2.5
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 2,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0125000000000006,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0125000000000006,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 2400,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": [
+          "KeyD"
+        ]
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": [
+            "left"
+          ]
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 3,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0166666666666675,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0166666666666675,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 3200,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 4,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0208333333333344,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0208333333333344,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 4000,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 5,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0250000000000012,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0250000000000012,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 4800,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 6,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.029166666666668,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.029166666666668,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 5600,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 7,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.033333333333335,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.033333333333335,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 6400,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 8,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.037500000000002,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.037500000000002,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 7200,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 9,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0416666666666687,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0416666666666687,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 8000,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 10,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0458333333333356,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0458333333333356,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 8800,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 11,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0500000000000025,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0500000000000025,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 9600,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 12,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0541666666666694,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0541666666666694,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 10400,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 13,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0583333333333362,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0583333333333362,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 11200,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 14,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.062500000000003,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.062500000000003,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 12000,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 15,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.06666666666667,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.06666666666667,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 12800,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 16,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.070833333333337,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.070833333333337,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 13600,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 17,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0750000000000037,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0750000000000037,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 14400,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 18,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0791666666666706,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0791666666666706,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 15200,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 19,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0833333333333375,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0833333333333375,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 16000,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 20,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0875000000000044,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0875000000000044,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 16800,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 21,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.0916666666666712,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.0916666666666712,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 17600,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 22,
+    "tick_rate": 60
+  },
+  {
+    "cpu_render_input": true,
+    "entities": {
+      "00000000000000000000000021": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            1.0,
+            1.0,
+            3.5
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            1.0,
+            3.5,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000022": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            123.25,
+            45.5,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            123.25,
+            45.5,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000023": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            2.095833333333338,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.095833333333338,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000024": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000031": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            8.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            8.0,
+            1.0
+          ]
+        ]
+      },
+      "00000000000000000000000032": {
+        "parent": null,
+        "transform": {
+          "rotation": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "translation": [
+            0.0,
+            2.0,
+            12.0
+          ]
+        },
+        "velocity": null,
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            2.0,
+            12.0,
+            1.0
+          ]
+        ]
+      }
+    },
+    "entity_count": 7,
+    "frames": 18400,
+    "gpu_submitted": false,
+    "input": {
+      "actions": {},
+      "connected": [],
+      "disconnected": [],
+      "focused": false,
+      "gamepads": {},
+      "gestures": [],
+      "keyboard": {
+        "held": [],
+        "pressed": [],
+        "released": []
+      },
+      "mouse": {
+        "buttons": {
+          "held": [],
+          "pressed": [],
+          "released": []
+        },
+        "motion": [
+          0.0,
+          0.0
+        ],
+        "position": null,
+        "wheel_lines": [
+          0.0,
+          0.0
+        ],
+        "wheel_pixels": [
+          0.0,
+          0.0
+        ]
+      },
+      "touch_changes": [],
+      "touches": {}
+    },
+    "playing": true,
+    "runtime": "native",
+    "scene": "01M4PEJQNPKJKBZRM6FFAP8SXA",
+    "script_source_parsing": true,
+    "script_source_sha256": "52c2967974f1b188ce0111da0fbdabee0d9e7e52c1f749a776677bd1cdc5331d",
+    "started_revision": 4,
+    "tick": 23,
+    "tick_rate": 60
+  }
+]

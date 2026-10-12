@@ -51,6 +51,25 @@ new bus that reuses the same project ID is outside this API's contract.
 Machine-readable source and log identities are in
 [shared-agent-project-access.json](evidence/shared-agent-project-access.json).
 
+## Editor loading container
+
+`Agent::run_shared` also accepts `Mutex<T: ProjectSlot>`. `CommandBus` itself
+implements the slot, retaining existing callers. The editor's `LoadState` returns
+the exact bus in its `Ready` variant and refuses `Loading` and `Failed` states.
+It neither clones the command bus nor creates a second journal or edit path.
+The private shared-access adapter still releases the guard before provider,
+approval and host callbacks, then rechecks cancellation and project identity on
+reentry. The one-project-session-per-mutex contract above is unchanged.
+
+The container regression refuses loading before any provider call, applies a
+real agent transaction, undoes it through the same container, then invalidates
+the container during the next provider response and refuses its pending patch.
+All 48 agent tests and three native editor loading/recovery tests pass, along
+with two-package all-target Clippy and formatting. Independent review accepted
+all four changed source files. [Source and validation identities](evidence/editor-agent-project-slot.json).
+This adapter is preparation for the native chat service; it does not connect the
+chat panel or demonstrate a live editor agent turn.
+
 ## Limits
 
 This is the agent-loop/backend portion of the editor connection. It does not

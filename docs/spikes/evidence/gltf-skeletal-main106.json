@@ -1,0 +1,80 @@
+{
+  "main": "ec6e21cc789da9fb3c4005cc11fd26385932e266",
+  "reviewed_source": "fd6afda85d8cd61a2a8bf38fce202893194edf88",
+  "source_sha256": {
+    "crates/incant_assets/src/animation_cook.rs": "0fe6ded425961b4edd7f1a4ef8024300689f6e092b3c90aec534415fc2e54e9d",
+    "crates/incant_assets/src/cache.rs": "464d7a00f0b95501655e36b5e5d602397527244d02fa362a3ba3808c522f26e8",
+    "crates/incant_assets/src/fbx/mod.rs": "b25e66a52c57c69f3c714c8eb123adee685e48bdeff8da52fbe2daf3e48eaa8d",
+    "crates/incant_assets/src/gltf_animation.rs": "54bf1078e658770186ca938a2322d834fbc74f16f394b98e903994cb7ef3e0d2",
+    "crates/incant_assets/src/gltf_import.rs": "2ddf54702cea88fc764800d8359f45956e5557a687929945659c63470c6ee388",
+    "crates/incant_assets/src/lib.rs": "9281a2212d64469bd2ff7c1594ee0bf9b73200a7a31b0796e91a0bd45d50899f",
+    "crates/incant_assets/src/mesh.rs": "6d0afdb45b6995798b3e159a916ad054f3f2095e34538cdf51f297b62c2afa8e",
+    "crates/incant_assets/src/navigation.rs": "ee2122c7ec4a89ea7345b98bbc9122f36c6d944c913442f8c23644b9509017e3",
+    "crates/incant_assets/tests/navigation.rs": "fa2798a56fad72840077f2419c1dfacc966898754ea8e06d0e9aa785c4668a60",
+    "crates/incant_assets/tests/skeletal.rs": "41d1cf2e9f070de6c3115ddd95a3696d4467029ca6c21bd0c792ec172cc3fbda",
+    "crates/incant_assets/tests/skeletal/alloc.rs": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb",
+    "crates/incant_assets/tests/skeletal/fixture.rs": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+    "crates/incant_assets_runtime/Cargo.toml": "f56622df1f962feae0b2970fe6a1a118fc30a2e3d04d194cf7a238b788405b34",
+    "crates/incant_assets_runtime/src/animation/binary.rs": "2d4cdf6389116ceeac3dd77f2870deed82cec5d85c357b2ac678164e006b9727",
+    "crates/incant_assets_runtime/src/animation/mod.rs": "d448b7a5eb7b6a6042730a4d68f1b04652782dfd972ecce549cce8ae39e7aa6a",
+    "crates/incant_assets_runtime/src/animation/player.rs": "540d5717d07956e58ef3a0acc880cf341564d2ab5cadbf588d5e4efdd1f91b0e",
+    "crates/incant_assets_runtime/src/lib.rs": "a931e6d7a3135d7097c6ba65da0d7a578985a00025cc7ea78f99c2de37847167",
+    "crates/incant_assets_runtime/src/model.rs": "846a1943f44ee7b491f8cf1346f52d05b5ea5c338d0b85e49252910fd933db0e",
+    "crates/incant_assets_runtime/src/version.rs": "7395e20e7ccc72ce709c6443ab018620b1bcb46e8dae67b4a434d36368a20c05"
+  },
+  "source_files_unchanged": 19,
+  "lock_existing_records": 957,
+  "lock_only_change": "incant_assets_runtime gains existing glam 0.32.1 dependency; no resolution movement",
+  "review_receipt_sha256": "597f21d3b75b6a53e1e0c9e0644fd470a0539ab93a9d2b82657c5237561b9939",
+  "integrated_source_commit": "2728d0f566a89e51d48415610a4d2785dc2dc466",
+  "recorded_at": "2026-10-11T23:52:15.850292+00:00",
+  "checks": {
+    "tests": {
+      "path": "/tmp/incant-skeletal-main106-tests.log",
+      "sha256": "5e73547bc95860259516a342955519560aa05b48735f3d65db199115b3afbc46",
+      "exit_code": 0
+    },
+    "clippy": {
+      "path": "/tmp/incant-skeletal-main106-clippy.log",
+      "sha256": "7a4bd3cb45848ffd710032193e124f987f141f0729912156d5265bb8f6151c37",
+      "exit_code": 0
+    },
+    "audio": {
+      "path": "/tmp/incant-skeletal-main106-audio.log",
+      "sha256": "06c488695448b3b4356aa3391384997c392e467eb052d6a9184cf59d19ab7157",
+      "exit_code": 0
+    },
+    "wasm": {
+      "path": "/tmp/incant-skeletal-main106-wasm.log",
+      "sha256": "81c1a072117334635abb4201721622dc78bc013a4926126fda625aad6ccf680b",
+      "exit_code": 0
+    },
+    "graph": {
+      "path": "/tmp/incant-skeletal-main106-graph.log",
+      "sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499",
+      "exit_code": 0
+    },
+    "fmt": {
+      "path": "/tmp/incant-skeletal-main106-fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    },
+    "conventions": {
+      "path": "/tmp/incant-skeletal-main106-conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exit_code": 0
+    }
+  },
+  "tests": {
+    "passed": 90,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 16
+  },
+  "limits": [
+    "CPU import/cooked reader/retained sampler foundation only",
+    "Existing static consumers explicitly refuse animated models",
+    "No native animation, GPU, SDK, visual/device/performance gate claim",
+    "Source-deleted child is a real test executable, not shipping export"
+  ]
+}

@@ -347,13 +347,22 @@ describe('editor shell', () => {
     expect(within(agent).getByRole('button', { name: 'Continue with ChatGPT' })).toBeTruthy();
   });
 
-  it('disables the composer while the agent works on a request and says why', () => {
+  it('keeps the message editable while the agent works on a request, and sends nothing until it finishes', () => {
     const running = { ...fixtureSnapshot('sample'), agent: { status: 'running' as const, conversation: 'sample-conversation' } };
-    renderWith(recordingBridge(['agent.send'], running).bridge);
+    const { bridge } = recordingBridge(['agent.send'], running);
+    const request = vi.fn(bridge.request);
+    renderWith({ ...bridge, request });
     const input = screen.getByLabelText('Message to the agent') as HTMLTextAreaElement;
-    expect(input.disabled).toBe(true);
-    expect(input.getAttribute('aria-describedby')).toBe('agent-reason');
-    expect(document.getElementById('agent-reason')?.textContent).toBe('The agent is working on the current request.');
+    // Focus is not taken away mid-sentence: the next message can be drafted meanwhile.
+    expect(input.disabled).toBe(false);
+    fireEvent.change(input, { target: { value: 'Next change' } });
+    fireEvent.keyDown(input, { key: 'Enter', metaKey: true });
+    // This host reports no session, so there is no turn to stop and no Send yet.
+    const agent = document.querySelector<HTMLElement>('[data-region="agent"]')!;
+    expect(within(agent).getByRole('button', { name: 'Working…' }).getAttribute('aria-disabled')).toBe('true');
+    expect(within(agent).queryByRole('button', { name: 'Send' })).toBeNull();
+    expect(request).not.toHaveBeenCalled();
+    expect(input.value).toBe('Next change');
   });
 
   it('shows no window controls and reserves no inset outside the native host', () => {

@@ -1,0 +1,20 @@
+{
+  "recorded_at": "2026-10-11T22:06:35.013358+00:00",
+  "reviewer": "Astra root",
+  "status": "bounded_source_acceptance",
+  "actionable_findings": [],
+  "source_sha256": {
+    "editor/ui/src/components/AgentPanel.tsx": "513e583bd0bac0a5415ded100d3d5a1447adaaf0fe2e340804d53a83bd70dcb9",
+    "editor/ui/src/components/agent/AgentApprovalReadiness.test.tsx": "a485650bb6dc2c433e67fe305a13acde16bf7940beefce9d24132fdf6d7c3a8c",
+    "editor/ui/src/components/agent/AgentTurn.tsx": "11dea25254933a0d7a0b52126a97e28ee6c04061dc3d128ad4669744fcc068ee",
+    "editor/bridge/native.ts": "fa29995216563796218fcfdbde2dc14d4a3d55daea6859db05363cd8bca17cc3",
+    "editor/bridge/contract.ts": "ddacc748167f137b069f57edc9572501b78739da9d6e160275621ee26e458216",
+    "editor/bridge/native.generated.js": "fd67d6dbc21afb8c881168dcb6aebc226e1f048277008bc822ee9ec7cd8affae"
+  },
+  "reviewed": [
+    "Read the exact AgentPanel consumer and memoized actions dependencies, existing guarded ApprovalCard.choose path and native admission predicate.",
+    "Read all12deferred real-bridge/test-double regressions, including both equal-cap barriers, restored exact decision IPC, Stop, older-host omission and reason precedence.",
+    "Read actual before/after browser report data confirming held real keyboard activation and recovery/cancel calls. Rendered-pixel review belongs to the verified Claude session."
+  ],
+  "scope": "Native readiness P2 source correction; no actual WKWebView/provider acceptance claimed. Auxiliary unverified Claude review is not relied on. Root will run the final combined UI suite/types/build after integration."
+}

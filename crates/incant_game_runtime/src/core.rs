@@ -2,7 +2,9 @@ use crate::{GameError, Result, SceneHost};
 use incant_audio_runtime::{SceneAudio, SourceState};
 use incant_input::{InputActions, InputEvent, InputFrame};
 use incant_runtime::{CookedScene, NativeWorld, StableId};
-use incant_script::{NativeSession, PendingNativeSession, SessionProgram};
+use incant_script::{
+    NativeSession, PendingNativeSession, PendingSessionCheckpoint, SessionProgram,
+};
 use kira::backend::Backend;
 use std::{convert::Infallible, error::Error, fmt::Debug};
 
@@ -56,6 +58,30 @@ where
                 native,
             }),
         })
+    }
+    pub fn from_checkpoint(
+        bytes: &[u8],
+        initial: &CookedScene,
+        program: impl Into<SessionProgram>,
+        actions: InputActions,
+        prepare: impl FnOnce(&NativeWorld) -> Result<H, H::Error>,
+        audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
+    ) -> Result<Self, H::Error> {
+        let pending = PendingSessionCheckpoint::new(bytes, initial, program, actions)?;
+        let host = prepare(pending.world())?;
+        let native = pending.start()?;
+        let audio = audio(native.world()?)?;
+        Ok(Self {
+            suspended: false,
+            live: Some(Live {
+                audio,
+                host,
+                native,
+            }),
+        })
+    }
+    pub fn checkpoint_bytes(&self) -> Result<Vec<u8>, H::Error> {
+        Ok(self.ready()?.native.checkpoint_bytes()?)
     }
     pub fn ready(&self) -> Result<&Live<B, H>, H::Error> {
         self.live.as_ref().ok_or(GameError::Failed)

@@ -33,7 +33,7 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use bindings::{
     MAX_SCRIPT_INSTANCES, MAX_SCRIPT_SOURCES, ScriptBindings, ScriptInstance, ScriptValue,
 };
-pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES};
+pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES, PendingSessionCheckpoint};
 pub use compiled::CompiledScript;
 use incant_runtime::NativeWorld;
 pub use logging::{LogLevel, NativeLog, NativeLogs};

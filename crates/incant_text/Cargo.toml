@@ -1,0 +1,16 @@
+[package]
+name = "incant_text"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[dependencies]
+# Last cosmic-text release using the plan's rustybuzz shaping stack.
+cosmic-text = { version = "=0.14.2", default-features = false, features = ["std"] }
+rustybuzz = { version = "=0.14.1", default-features = false, features = ["std"] }
+unicode-script = "=0.5.8"
+thiserror.workspace = true
+# IDs are supplied by authored assets. This runtime never generates random IDs.
+ulid = { version = "=1.2.1", default-features = false }
+

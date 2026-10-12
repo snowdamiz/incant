@@ -1,0 +1,49 @@
+{
+  "independent_review": {
+    "reviewer": "/root/integrate_runtime_prs",
+    "reviewed_at": "2026-10-11T20:26:14.099955+00:00",
+    "base_head": "bdf86320385b491b4725526917bc2d81c4232f2b",
+    "scope": "Budget bridge bdf8632 plus five-file uncommitted integration follow-up; read-only nonvisual source review, no builds/tests/provider/native/GPU execution.",
+    "verdict": "accepted",
+    "actionable_findings": [],
+    "reviewed_behavior": [
+      "Writes require actual native adapter availability and matching published bounded schema; old hosts do not gain fabricated edit capability. Invalid/non-safe/non-integer caps refuse before IPC.",
+      "Cap edits use set_agent_budget through engine_execute with captured expectedRevision, including offline edits and zero. Undo/Redo recover authoritative cap and retained native ledger usage instead of restoring old consumption.",
+      "Admission/approval remains fenced by pending budget recovery, session-cap agreement, native account verification, and generation invalidation. Cancellation remains possible while a cap write or recovery is pending.",
+      "Reserving pending before synchronous publishAgent prevents subscriber re-entry from starting a second document mutation. The new regression observes one IPC write and exact final cap.",
+      "Shell re-reads dynamic capabilities alongside native metadata and retains CapabilitySet identity when advertised strings are unchanged. Real bridge regression covers delayed support, zero-cap mutation, preserved usage and support removal without IPC.",
+      "Mutation errors retain their receipt; session recovery failures do not rewrite a successful authoring transaction as failure. Unstructured error strings on the new recovery path are suppressed."
+    ],
+    "limits": [
+      "Native Session and command-bus checks remain the authoritative guard under concurrently changed project/account/cap.",
+      "Generated JavaScript was read with its mirrored ordering delta; root owns exact generation checks and current UI/type/build results.",
+      "Project-wide wording and rendered/native budget UI acceptance remain separate pending integration."
+    ],
+    "source_sha256": {
+      "editor/bridge/contract.ts": "c486ded0a06da20e1db8b51a4258bdeac2eef36c496446df51937915415be812",
+      "editor/bridge/native.ts": "6f0573e88801557fe2a42ff61fbadbb69a178f3c6cbe9382a50c0dbdb7e62357",
+      "editor/bridge/native.generated.js": "c74e0f1ef51989407f30b2b9d4686e91693698b8ec48342d6230ab01a1ccb6bb",
+      "editor/bridge/native.budget.test.ts": "51d0c8ad15c5e06a4adfea120ab000a48f785304cb3208fc3c44f03519b96acc",
+      "editor/ui/src/bridge/resolve.ts": "08698dfe1c93f7e23e5cc0bb4c5b970962c337415b5fe44366fe91e7193f4e54",
+      "editor/ui/src/shell/ShellContext.tsx": "20f8b9995e8fca7fd2ecb656dbc909885e5ce97ae07e79329683310a739fd412",
+      "editor/ui/src/shell/ShellContext.test.tsx": "9e53f0caab3f20f8515d58563c6b7609385cd29edfcbe293ec11043311e9824e"
+    }
+  },
+  "validation": {
+    "focused": "51 tests in two files pass",
+    "combined_ui": "777 tests in40files pass at maxWorkers4",
+    "app": "strict TypeScript and production build pass",
+    "test_types": "strict test TypeScript pass",
+    "generated_bridge": "exact generated check pass"
+  },
+  "log_sha256": {
+    "/tmp/incant-budget-shell-tests.log": "8094f263ed94cfd75744e299bba15f16ad149e582dba4f3589156488aac84802",
+    "/tmp/incant-budget-shell-union-tests.log": "3319d2830c44fa55ce33514f96846b29b94e45751ee90f83e9ceaa47b413d7f2",
+    "/tmp/incant-budget-shell-build.log": "ebbcd93938ee30a52206a73ac26786ebcde05e687aeb24e3b972a87ba15de388",
+    "/tmp/incant-budget-shell-test-types.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limits": [
+    "Synthetic bridge behavior only; no new native/provider/pixel acceptance.",
+    "Claude0046 controls and combined native review remain pending."
+  ]
+}

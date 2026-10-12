@@ -1,0 +1,368 @@
+{
+  "kind": "native-wasm-localization-production-slice",
+  "base_commit": "8bd9a96a0b88fda327c7ce5552d75c9a9a2fe461",
+  "author": "astra",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "xhigh",
+  "machine": {
+    "host": "arm64",
+    "os_version": "26.6",
+    "os_build": "25G72",
+    "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n"
+  },
+  "contract": {
+    "namespace": "incant_localization_v1",
+    "opcodes": {
+      "locale": 18,
+      "localize": 19,
+      "read_result": 20,
+      "set_locale": 21
+    },
+    "old_opcodes_0_through_17_unchanged": true,
+    "copied_wire_version": 1,
+    "logical_input_bytes": 65536,
+    "logical_output_bytes": 262144,
+    "wire_request_result_bytes": 66560,
+    "wire_settings_bytes": 2364,
+    "queries_per_callback": 64,
+    "commands_per_callback": 64,
+    "query_units_each": 4,
+    "query_unit_allowance": 1024,
+    "shared_ingress_rejection": "authorized active correct-epoch localization calls reject batch on pre-dispatch CALLS/MEMORY/TRANSFERS failure; unrelated/stale/inactive semantics unchanged",
+    "publication": "existing native numeric/structural transaction; queries see tick-start Arc settings/catalog; no project mutation"
+  },
+  "validation": [
+    {
+      "command": "./tools/cargo test --offline --locked --profile ci -j2 -p incant_wasm_abi -p incant_wasm_runtime -p incant_wasm_dev -p incant-module --features incant_wasm_dev/static-conformance",
+      "environment": {
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-native-target",
+        "INCANT_WASM_BUNDLE": "/tmp/incant-wasm-localization-conformance-002/bundle",
+        "INCANT_RUST_SDK_GUESTS": "/tmp/incant-wasm-localization-conformance-002/sdk-guests",
+        "INCANT_FLIPBOOK_GUEST": "/tmp/incant-wasm-localization-conformance-002/inputs/flipbook-game.wasm"
+      },
+      "result": "passed",
+      "tests": 74,
+      "new_localization_tests": 17,
+      "log": "incant-wasm-localization-conformance-002.log"
+    },
+    {
+      "command": "./tools/cargo clippy --offline --locked --profile ci -j2 -p incant_wasm_abi -p incant_wasm_runtime -p incant_wasm_dev -p incant-module --features incant_wasm_dev/static-conformance --all-targets -- -D warnings",
+      "environment": {
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-native-target",
+        "INCANT_WASM_BUNDLE": "/tmp/incant-wasm-localization-conformance-002/bundle",
+        "INCANT_RUST_SDK_GUESTS": "/tmp/incant-wasm-localization-conformance-002/sdk-guests",
+        "INCANT_FLIPBOOK_GUEST": "/tmp/incant-wasm-localization-conformance-002/inputs/flipbook-game.wasm"
+      },
+      "result": "passed",
+      "log": "incant-wasm-localization-clippy-003.log"
+    },
+    {
+      "command": "./tools/cargo check --offline --locked --profile ci -j2 -p incant_script --no-default-features --features static-module",
+      "environment": {
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-native-target"
+      },
+      "result": "passed",
+      "log": "incant-wasm-localization-compiler-disabled-001.log"
+    },
+    {
+      "command": "python3 -m unittest tools.tests.test_rust_guest tools.tests.test_wasm_sdk tools.tests.test_wasm2c_shipping tools.tests.test_wasm_metadata tools.tests.test_wasm2c_prepare",
+      "result": "passed",
+      "tests": 20,
+      "log": "incant-wasm-localization-python-002.log"
+    },
+    {
+      "command": "python3 tools/generate_wasm_sdk.py --check",
+      "result": "passed",
+      "log": "incant-wasm-localization-generated-001.log"
+    },
+    {
+      "command": "./tools/cargo fmt --all --check",
+      "result": "passed",
+      "log": "incant-wasm-localization-fmt-001.log"
+    },
+    {
+      "command": "python3 tools/check_runtime_dependencies.py incant_runtime incant_script incant_wasm_runtime incant_game_runtime incant_wasm_player --features incant_script/static-module",
+      "result": "passed",
+      "log": "incant-wasm-localization-dependencies-001.log"
+    },
+    {
+      "command": "Existing shipping-wasm2c cargo_metadata traversal over resolved normal edges with incant_script/static-module (exact script in tool-call evidence)",
+      "result": "passed; six shipping roots exclude development compiler/parser/cook edges",
+      "receipt": {
+        "path": "/tmp/incant-wasm-localization-shipping-graphs.json",
+        "sha256": "48f99711f01368e5781d16b16d62bf3fde3f3f2eaa043113bb15bc3662588276",
+        "bytes": 27066
+      }
+    },
+    {
+      "command": "python3 /tmp/incant-wasm-localization-prepare.py",
+      "result": "passed; 52 fixed trusted repository guests prepared; five actual no_std localization guests compiled",
+      "script": {
+        "path": "/tmp/incant-wasm-localization-prepare.py",
+        "sha256": "738f00d017bd6b547d5b1e13fae9ab909971b4505813e29bf32332f2ec34e17a",
+        "bytes": 3619
+      },
+      "log": "incant-wasm-localization-prepare-002.log"
+    }
+  ],
+  "historical_failures": [
+    {
+      "log": "incant-wasm-localization-cache-control-red.log",
+      "result": "expected failure",
+      "source": {
+        "path": "/tmp/incant-rust-guest-cache-baseline.py",
+        "sha256": "d439016fc399725244b85488871a09536416ba6a6ba53496d6c623ecc68e0296",
+        "bytes": 3693
+      },
+      "source_commit": "8bd9a96a0b88fda327c7ce5552d75c9a9a2fe461",
+      "meaning": "Original main102 helper reused dependent SDK rlib when a codec source changed. Same observable mock-compiler test passes after corrected ABI/SDK cache identities; not a provider/device/live gate."
+    },
+    {
+      "log": "incant-wasm-localization-prepare-001.log",
+      "result": "failed before preparing a bundle",
+      "meaning": "Misspelled existing flipbook sample path. Corrected to crates/incant_game_player/fixtures/flipbook.rs; successful fresh artifact directory is conformance-002."
+    },
+    {
+      "log": "incant-wasm-localization-clippy-001.log",
+      "result": "failed",
+      "meaning": "collapsible_if lint in the authorization rejection fence; converted to Rust2024 let-chain, later Clippy and exact source tests pass."
+    },
+    {
+      "log": "incant-wasm-localization-python-001.log",
+      "result": "failed module selection",
+      "meaning": "Nonexistent test_wasm2c module name; corrected to test_wasm2c_prepare. All 20 actual selected tests pass."
+    }
+  ],
+  "logs": {
+    "incant-wasm-localization-cache-control-red.log": {
+      "path": "/tmp/incant-wasm-localization-cache-control-red.log",
+      "sha256": "138ca539bd3a55c5fe5fc89c97fd91269aa41acdcddd961a51d4024151de0fe7",
+      "bytes": 1444
+    },
+    "incant-wasm-localization-clippy-001.log": {
+      "path": "/tmp/incant-wasm-localization-clippy-001.log",
+      "sha256": "76c0010b539a14da5ba2264bdde9f97088e6b481401cfef7e4df3f20afe819df",
+      "bytes": 1772
+    },
+    "incant-wasm-localization-clippy-002.log": {
+      "path": "/tmp/incant-wasm-localization-clippy-002.log",
+      "sha256": "b9a5236652a581442a7ffe18f631c63c47ce970d9b95e76b781d872a0c381c34",
+      "bytes": 442
+    },
+    "incant-wasm-localization-clippy-003.log": {
+      "path": "/tmp/incant-wasm-localization-clippy-003.log",
+      "sha256": "f3f7d7177665fbc1d05419cf1872b5efc036d3b2737acee86f750c6d9bc09a09",
+      "bytes": 446
+    },
+    "incant-wasm-localization-compiler-disabled-001.log": {
+      "path": "/tmp/incant-wasm-localization-compiler-disabled-001.log",
+      "sha256": "b41c74a6cf3dd3d459d8b460d0b133d21c08fdf6c2d0a62b7edcea4f2eb9f818",
+      "bytes": 1464
+    },
+    "incant-wasm-localization-conformance-001.log": {
+      "path": "/tmp/incant-wasm-localization-conformance-001.log",
+      "sha256": "7b6d49324e591cc5c43e3233066cd730957c3ed54e28a6ab2571afad484ecb62",
+      "bytes": 11375
+    },
+    "incant-wasm-localization-conformance-002.log": {
+      "path": "/tmp/incant-wasm-localization-conformance-002.log",
+      "sha256": "3825ce7fc9a7d4858bbbb90dbf25f630ea9d7a72422ed900ee684e16c1b93f8d",
+      "bytes": 11431
+    },
+    "incant-wasm-localization-cook-001.log": {
+      "path": "/tmp/incant-wasm-localization-cook-001.log",
+      "sha256": "30b70f083b5d0e6d248c926f0b504094ae35e2513271602d8c14e7a90b83fc3f",
+      "bytes": 186
+    },
+    "incant-wasm-localization-cpu-001.log": {
+      "path": "/tmp/incant-wasm-localization-cpu-001.log",
+      "sha256": "aa4ebdef9ed6de3662fbeaeda4782a679a2fa53f118a34db920c40b4048856bc",
+      "bytes": 5422
+    },
+    "incant-wasm-localization-dependencies-001.log": {
+      "path": "/tmp/incant-wasm-localization-dependencies-001.log",
+      "sha256": "83781cd210db9a44948e0960bd2ab7054ce0a257438f487dc18a5e74233432cc",
+      "bytes": 170
+    },
+    "incant-wasm-localization-fmt-001.log": {
+      "path": "/tmp/incant-wasm-localization-fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "incant-wasm-localization-generated-001.log": {
+      "path": "/tmp/incant-wasm-localization-generated-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "incant-wasm-localization-prepare-001.log": {
+      "path": "/tmp/incant-wasm-localization-prepare-001.log",
+      "sha256": "a01bd359b1c87a73e4c51f177ada83eb1b6139132c887b06f2f8f65ac63af1da",
+      "bytes": 1115
+    },
+    "incant-wasm-localization-prepare-002.log": {
+      "path": "/tmp/incant-wasm-localization-prepare-002.log",
+      "sha256": "4a976c96a63b6c1217470437be105e8676053c75f111fb6abcd2930b66912e8e",
+      "bytes": 118
+    },
+    "incant-wasm-localization-python-001.log": {
+      "path": "/tmp/incant-wasm-localization-python-001.log",
+      "sha256": "3d651736b3992da32dbcb616fdf1c50064b362d1b5d562e6bb8723e75cb365f1",
+      "bytes": 684
+    },
+    "incant-wasm-localization-python-002.log": {
+      "path": "/tmp/incant-wasm-localization-python-002.log",
+      "sha256": "4dbc1fdafb5f73fe87f0c2d4f4767b47bc3cfba21f8f653f5a909c75bc7d3542",
+      "bytes": 119
+    },
+    "incant-wasm-localization-python-prep-001.log": {
+      "path": "/tmp/incant-wasm-localization-python-prep-001.log",
+      "sha256": "1cd6ff7dc43f6c8481da7559329d9f1abb58212839d8ee25825cd2a7fbfabc70",
+      "bytes": 105
+    }
+  },
+  "source_sha256": {
+    "Cargo.lock": "dc4e8a2a17fd1f432fa656452cf2aec26394c9c5d5dbd7b7f3381569b8415f6c",
+    "STATUS.md": "e8d33cd839eb4e6d0fecc3b28d649f259b64526bc2f480a689cd08b39c6fa7a4",
+    "crates/incant_wasm_abi/src/lib.rs": "db277a14b04d1aaf7985a87b1f3795becbdabf045af833a62fbd8722119d5ec3",
+    "crates/incant_wasm_abi/src/localization.rs": "fca1e7f1f409e1a5cdabb321a071aaa38a2fecda13d3a312f2cd5cf878698af6",
+    "crates/incant_wasm_abi/tests/localization.rs": "87ef10029ce64c13e8975a6d362410fc50587023f68b69063ab88380390bcb0d",
+    "crates/incant_wasm_dev/Cargo.toml": "193e18164bd87b5c1c243ba935bc22d17c49b7ee5634f29d839aacad4c739622",
+    "crates/incant_wasm_dev/src/generated.rs": "3afdd779a2c1ebb5be17419ed99ec04efcb4a8aa0892f3f1f76ba31e0f24858e",
+    "crates/incant_wasm_dev/tests/localization_parity.rs": "7faaf95f75f46942d6d381adac470a7df639ff93905377996fa95ddce306320d",
+    "crates/incant_wasm_runtime/Cargo.toml": "47794ee5bc4054c97ae7599dcaaf915becc87f0a2d1a06ed695dcee5399052b4",
+    "crates/incant_wasm_runtime/c/generated.h": "9aa10c8e6319691a98aa8606c17eb514219d8775bea11413b3d0be8867e6f309",
+    "crates/incant_wasm_runtime/c/generated.inc": "07f40c0b80acee28e7dc3b74f25233a3e0c721198046360f28ceff0313ab61fb",
+    "crates/incant_wasm_runtime/fixtures/localization-start.wat": "682327d844267c7b374378ed0e1810e78f0591bb6d2aa69e73bac87564d04897",
+    "crates/incant_wasm_runtime/fixtures/localization.wat": "df193e8687bc1e87b91674a801b05099bf271d98d9d14d1d0a0a5d15360ab75e",
+    "crates/incant_wasm_runtime/src/capability.rs": "97468c970fc7e09177c48757cdb6e233beb864f655f67759725483f3e51d3f5a",
+    "crates/incant_wasm_runtime/src/generated.rs": "806836ad60350c42ecab12444483ef4ca66ca1689f7dc8c976f4039d73b46820",
+    "crates/incant_wasm_runtime/src/input_tags.rs": "5a4b7f677e132fd05fd17667ef31c5a508a9f1fad1c14853a2ce07663f50ccf1",
+    "crates/incant_wasm_runtime/src/lib.rs": "03b9f9fc32d48797a5b438b2f7619c91cee2161e199aadc9d610e95045f3ba5f",
+    "crates/incant_wasm_runtime/src/localization.rs": "b60530d62872498abd53d324488dc544eb3680acb2f8adfc17ba0e3b5bad5729",
+    "crates/incant_wasm_runtime/tests/localization.rs": "0412fdf131a67c7ce89e6196c13856a17077ab090ff20935745a6e67d98c02fc",
+    "docs/spikes/native-wasm-localization.md": "8d28112855bedc1408d1ba09992211ed0f32206db7d349bcb9095dcd5942afeb",
+    "sdk/abi/native-v1.json": "4865685abd7c25547ea753fe13ab1c595917b4d633154bef0265d56f5c5ff043",
+    "sdk/rust/README.md": "fa2826d9b3e4c0557f2ab21a890e2d8bf63f40bc7b635a399d3a9ebc3fc073d6",
+    "sdk/rust/fixtures/localization_failure.rs": "67bbdf39d73d46364589175d0182dd627763a5aab489d5e666103eb23458dcd5",
+    "sdk/rust/samples/localization.rs": "876987cd07d1ec6080d248df81427d72ac1fe8bd6978cac9f47ab2a3a08e6340",
+    "sdk/rust/src/lib.rs": "cb1771b7f9050991e696552de208daeacf0b49fcb2b5f860015d8d1a8ba864d8",
+    "sdk/rust/src/localization.rs": "e5b835e4611b1b696b2940dd493295fb2c171603b5da40caabe176b78a7fc22a",
+    "sdk/rust/src/raw.rs": "cad9bdf8a905769b9432bcf96da7d29f4a302b224e44316ca1a0cfb8dfdb1f1b",
+    "sdk/rust/src/tick.rs": "e3d6ce21c6ad648ed57a3f0869ff47747edab1861cfd6051fdd42a610406b8b8",
+    "tools/generate_wasm_sdk.py": "5bb566c702b0535005986c912dec3451e58f9314dc64c0441dedf1006b3dfd4c",
+    "tools/probes/shipping-wasm2c.py": "56cc9a76cd1f9ffcf1943785665e5569307323a65e33faf6294291ac8118acb4",
+    "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+    "tools/tests/test_rust_guest.py": "36f3b1a4314969e3e6ffa8d0241e7a1ec937d58f88609bbf64b21d4b7ae5190e",
+    "tools/tests/test_wasm2c_shipping.py": "d057d75a5a271c32d5c069948844daa7171e3f6dcad4472419f17b9c5081ebef",
+    "tools/tests/test_wasm_sdk.py": "9e0f2e762fce7208065b5df6010a8646eb5908bf1f36911d4fbb659eaea75c60",
+    "tools/wasm_abi.py": "f69b6ead8de4706bd31def3bc9153eacb4ded2d71a17c8ce4b4915b214a3415a"
+  },
+  "artifacts": {
+    "directory": "/tmp/incant-wasm-localization-conformance-002",
+    "file_manifest": {
+      "path": "/tmp/incant-wasm-localization-artifacts.json",
+      "sha256": "aedae08e5c65ba3cd91e33c2471c60057c3e9ee2f2730fe749103ca4e857c4fb",
+      "bytes": 35990
+    },
+    "file_count": 378,
+    "prepare": {
+      "path": "/tmp/incant-wasm-localization-conformance-002/prepare.json",
+      "sha256": "4e28c8d98b80aad26b3626c3210cd891443cd9b334bc575486b48758489072de",
+      "bytes": 23391
+    },
+    "prepared_manifest": {
+      "path": "/tmp/incant-wasm-localization-conformance-002/manifest.json",
+      "sha256": "3e0b065d363816e3387103ecb083cd08f2d1c0be666359d381ae465862bc15b8",
+      "bytes": 35185
+    },
+    "wasm_modules": {
+      "bulk": "89f63d69d66329c1f67d6fcde0e4b5fc64606f96dc1519bc8ea9a07df6e88cfa",
+      "rust-sdk": "8f617bc34de90dd9ab9623cece6da2d665e413402decccd57ba1771dce047edf",
+      "flipbook-game": "3d61b507184608ed7d8abbe1b1f5ede507d650e20d82eb2b9adb39b7fd7b923b",
+      "rust-localization": "36b2d9be8ae4a7d562eb7885a441b1c8b710d91c2fc3fd8cdb875ebf794a84ed",
+      "rust-localization-capacity": "e1605ddb4464f0f630db06ba22c85e0169e4344a56e8781e2422b51a8aa30059",
+      "rust-localization-number": "bf366922a2c06be68b6d475f22154d1713cf21dd2bd37af96e5cca1f9b723631",
+      "rust-localization-duplicate": "5735a28fc20f627f721e54f8d8220eb450bc90f37c66d7b1aa81c309bffa4572",
+      "rust-localization-callback": "99c28410a2ebca320d2027bf9394d5fe9cb7f451d7806be8ff7741d2eeaf24ba",
+      "rust-sdk-callback-error": "7a3a7a5db72da041f204340ea12d6497b370e4784bd7815f421a3c07f65cf92e",
+      "rust-sdk-capacity": "5c77fd5c5061555f1effe0812cf1a972380fcf47700fa0c48ddc88ccac6b724d",
+      "rust-sdk-malformed": "a6748bf5005a47039918075a484057449fb286aef1c3bb8e970b97e313af95b9",
+      "rust-sdk-expired": "e7768a928afe47b545d2c6344d2008348026eb601b02d9db32af10438ef911a8",
+      "rust-sdk-log-bounds": "881166b4b857d5b126d46b1b5197e8bba3ce2f6fd3c97afa449b20d3352b88e4",
+      "rust-sdk-log-invalid": "2457a6de224ba56306105f09f8bd8c35d4d75eb2d38747ce78b2443165e76dd8",
+      "bad-version": "1dc1d300141955b68abcc594b6ad29328b6eadc8b8d5eced9bf7da4aecd3f7d7",
+      "calls": "a7174f5723d7dc0227fa1eea1a26e27570e03f3656ba599d8c9a4173c9d4017d",
+      "commands": "a3c836a7e707b5ee92b5ea73c6fe9cdbb1e8884db5c1cad57c73b8c11059a835",
+      "cycle": "fb3873296569b7295646f55f05b1851dca42660970b588bedfed5c791fd79999",
+      "epoch": "569ca286e2bf1e3ae3f65a6d3c820a790d1e54a3916377c452e32ea04a742a72",
+      "flipbooks-invalid": "376278bb41c9ee0fc0b7006c455ffde1dd4b0a15f08432ae015030334ea9b80e",
+      "flipbooks-oob": "a5e50c5eb1def3f520a0db8949bcdaa399b4a85afef20e284ef44d18054bc7a3",
+      "flipbooks-short": "ffac6f913f52c94c321da711d5991403fb0715e0bccd0f2a441a99fd0f75cd8f",
+      "flipbooks-stale": "3363ecc6d8cf2a10b8b2276be976dc5aa2bdcd5a7847475b0294a45f92853b8b",
+      "flipbooks-start": "dad4edb4b81435dc2a025f49f69e2cb88460877fdf443ad91e315c8e335ffb0d",
+      "flipbooks-tag": "df54cdab5b0b6c4320ab33136f1464e4ba48ef4a3473e3ae8893675c568c4209",
+      "flipbooks-trap": "09973763df97fe2605ba8d23b4853e6d3e24aecc636a2f275dbd4a02b4606fbd",
+      "flipbooks": "8840277ed522457c001715bf82943178d2cc2e424dca1c947b5ec4a22d3ced3b",
+      "hierarchy": "0fbbefd819d6073d5782aaefd76f7cd14f11038408c9e7f2491c3fbb2217b28e",
+      "import-oob": "9d423445ddc5af6f902915ce27655d677b68ad9f5d6247832ee7bb0bb567f5b3",
+      "indirect-loop": "71cf45abef62d91d100389bfea2795874897c601444beba154399113268e39d9",
+      "input-oob": "a0216e40b05799ae796a58aecd044b0215faeaab8fa45527b75a6bf2c77fd9c0",
+      "input-short": "3a5395e13b0593b9d4e3af3f16c816351640dea833b15b9186950bda09f6ff2d",
+      "input-stale": "b30a3b8a2fd9b31ffadb1f317e7b137218db938effc975272523d7b358429076",
+      "input-start": "87025e5410fd79a5b867501f35a4ccffbc03f2c774448f3d9bba8a1d12cc7446",
+      "input": "5bb87a11bc065f9aefc32dba34b65150c46e149dbd3d265c60f8f57b2075a693",
+      "localization-start": "9dbda230bae339f58cdb870700f40339be8ffd091d10ea5e98246ecdf7307257",
+      "localization": "518772c43414f5eeedfe230ddc58ee2a73edbc8c45e58260d8a22609ed659c4f",
+      "log-session": "712bd4bf0692a4054e35db6f9caf12768cb1dc13dd2b189a15ab5b24e7850ae5",
+      "log-start": "04c109f7f35b36d097d428ab1ff8515ca12a2a764ad831fb5dd5a5e5f1d0ef59",
+      "logs": "b39207110840923e03783c41d34cfcf5ddc3715d49ba7a26b026832de0d6ed90",
+      "loop": "aecc3a092f1779fc0cfae1a8187d7bdc4819e1ebb126fddb3431c9458ecca026",
+      "nan": "9e0fe18ebba40da5738229387234726e3f48695afb0b4d1c47652083655af413",
+      "oob": "8a06bc1c664ed0d968a2e2eb4fe4f7bf3482080d7fe97497ca8ea07c70bc5518",
+      "quaternion": "a8802e880f84b49d00678b7b9bddbcff8dfe0939bf3e9b3af092ff26e169f328",
+      "rounding": "a0dc438592d3a748bdb5f5ca3031179a36733a074acd12af094d64de825db96b",
+      "scale": "d52d43152e6505b102162a41945357e42adc291b2758eae4c3e0fb666476164b",
+      "sdk-overflow": "a28f1665134de1646730e5e64fd1f64022926fb8b7e3c3b59d3abbfbfdb60372",
+      "sdk-unaligned": "2777f82cd3f004e7d8720fb9e7a67b3072fcb3d1d1adf97c521b71cd3e602486",
+      "stack": "590e87ba92bf37cfab1591858f030705b5c19ed4ae1914be7d2d64693616764b",
+      "start-import": "50f4f4f9d3c74c4d6e29fc137b2a0a9da06848ebe143853e37e51b82de634b60",
+      "start-loop": "82a955272db7bbe9168051d3f62936c3a51275d9b4e7d61dd664b60a80f6e1e7",
+      "trap": "691f3d01b8aedccd2c94f55920eccf00af9f816099df454a7d5d360477165f36"
+    },
+    "wabt_archive_sha256": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240",
+    "wabt_tool_sha256": {
+      "wat2wasm": "69117d2b10c1818cf6da921f96ab4e3c50e45a05a848d6c4c1788375aec4d250",
+      "wasm2c": "4f1ba571063deca36e330ad67cf0414dbbaee944c7d920df7a338a30725570f2"
+    },
+    "cook_sha256": "22de3f5a482294ef4cac360862266af2c1e3aead3a1a978fd9a8c10b340ea49a",
+    "sdk_source_receipt": {
+      "target": "wasm32-unknown-unknown",
+      "edition": "2024",
+      "panic": "abort",
+      "opt_level": 2,
+      "source_sha256": {
+        "sdk/abi/native-v1.json": "4865685abd7c25547ea753fe13ab1c595917b4d633154bef0265d56f5c5ff043",
+        "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+        "crates/incant_wasm_abi/src/lib.rs": "db277a14b04d1aaf7985a87b1f3795becbdabf045af833a62fbd8722119d5ec3",
+        "crates/incant_wasm_abi/src/localization.rs": "fca1e7f1f409e1a5cdabb321a071aaa38a2fecda13d3a312f2cd5cf878698af6",
+        "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+        "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+        "sdk/rust/src/lib.rs": "cb1771b7f9050991e696552de208daeacf0b49fcb2b5f860015d8d1a8ba864d8",
+        "sdk/rust/src/localization.rs": "e5b835e4611b1b696b2940dd493295fb2c171603b5da40caabe176b78a7fc22a",
+        "sdk/rust/src/raw.rs": "cad9bdf8a905769b9432bcf96da7d29f4a302b224e44316ca1a0cfb8dfdb1f1b",
+        "sdk/rust/src/tick.rs": "e3d6ce21c6ad648ed57a3f0869ff47747edab1861cfd6051fdd42a610406b8b8"
+      },
+      "repository_sdk_sources_retained": true,
+      "build_scripts_or_proc_macros": false
+    }
+  },
+  "processes": "All owned Cargo/compiler/preparer handles terminal and reaped. Target idle; no GPU/window/browser/account/provider work.",
+  "limitations": [
+    "local macOS arm64 CPU functional checks only",
+    "fixed trusted repository Rust/WAT fixtures, not untrusted source compilation",
+    "no standalone number/date formatting, report paging or catalog editing imports",
+    "no VM/checkpoint migration or static checkpoint adoption",
+    "no Windows/Linux/browser/device/performance/rendered-pixel or distribution gate claim",
+    "no native runtime facade ABI or executable loader change"
+  ]
+}

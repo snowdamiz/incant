@@ -1,0 +1,158 @@
+{
+  "base": "8bd9a96a0b88fda327c7ce5552d75c9a9a2fe461",
+  "scope": "ordinary-load GameSession and exported offline bytecode player, explicit persistent-data opt-in",
+  "sources": {
+    "crates/incant_game_player/Cargo.toml": "ca0b83f48edc0735fec75481d56a2ab3cd4ab644e5dcac42b02efeb45a519522",
+    "crates/incant_game_player/src/main.rs": "fb91810f935f49ccc23b04a91cbed7f71e01a0166f5567875d903f294c8207bb",
+    "crates/incant_game_player/src/session.rs": "16a56e61f2fed54c28266e872c7915b4147687addb8fd536e49a6284973f1318",
+    "crates/incant_game_runtime/src/core.rs": "0aad2fefc868473503e009ad215a997106c36aac6de95d71e431acda9fbecde4",
+    "crates/incant_game_runtime/src/hosted.rs": "1bda9ead25e6afc482d4a2b0d2eb24f7b98f3ed341e4cf411aa0e8bbf6b3dae7",
+    "crates/incant_game_runtime/src/lib.rs": "5722984028e6f8e7cfced44e07994403cd16970e46163e57a0648da0ab84cd11",
+    "crates/incant_game_runtime/src/offline.rs": "af67d4540ef05a770b2a8d7f4b5bdfa81607ad35e996b3281f1b4447c77094f3",
+    "crates/incant_script/build.rs": "6440efe0852d1199bd5a3348aa14466a1b1bf04c9a04baeac768e958a5188d8c",
+    "crates/incant_script/src/checkpoint/mod.rs": "c24d42025a75c1596190275650e420354594f72b0c2805fddfa3eac5d9ab3609",
+    "crates/incant_script/src/lib.rs": "3ca019aaac9280b897015df9a72f31cfbe0c7b9028a82c68bbe5cc493e0218ad",
+    "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+    "crates/incant_game_runtime/tests/checkpoints.rs": "b0f77daf3577d4e9b6a07e4f432bcd6c6881cb092bde85e4ca49e09ff4656f48",
+    "crates/incant_script/src/checkpoint/pending.rs": "5a6d6601268c2400349ba0ba79b3db73289d1dee9e68e7997381050c75b5cfe6",
+    "tools/probes/game-checkpoint-export.py": "42a03b7f92337793cd35284782ad9511c06c803aabaefe5094e35af75d265805"
+  },
+  "unchanged_inputs": {
+    "Cargo.lock": "7bbd9006ca514936941d72772f8daeda94a48eecd5b22416239a4a191593b49b",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "tools/export_native.py": "834fba307d79efe44fb4d87ff7a12fa1a556784c223d6250b465c80d0fa3d42b",
+    "tools/native_package.py": "a6ce11f1eeb62edc39b74846aa0341ec7f17689018f31114075d720e693f24a5",
+    "tools/native_process.py": "493c6e70e9045bf3b6e128b4392f47b7cac8a475969d715f26cd1eb7d9777ec3",
+    "crates/incant_game_player/build.rs": "394e98899e701b8d00405111b78534276cf37abf5df9a962539d1206efbd4653",
+    "crates/incant_game_player/src/package.rs": "8bc986118821727285e7218cd53a12bdf243a59466312ae7edc5d865d7205d1a",
+    "tools/probes/native-session-checkpoint/src/behavior.ts": "1671cf90827d798301b9209e14cf634ccc94c30ecbdc8758cf3da2a58f269afb"
+  },
+  "checks": {
+    "affected_tests": {
+      "passed": 311,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 37,
+      "new_behavior_tests": 8,
+      "packages": [
+        "incant_runtime",
+        "incant_script",
+        "incant_game_runtime",
+        "incant_game_player"
+      ],
+      "features": [
+        "incant_game_player/render-input"
+      ]
+    },
+    "all_target_clippy": [
+      "incant_script",
+      "incant_game_runtime",
+      "incant_game_player"
+    ],
+    "compiler_disabled_static_module_check": true,
+    "optional_gpu_feature_compile_only": true,
+    "runtime_normal_dependency_guard": true,
+    "fmt": true,
+    "conventions": true,
+    "diff_check": true,
+    "dependency_resolutions_changed": false
+  },
+  "logs": {
+    "/tmp/incant-game-checkpoint-tests-001.log": {
+      "sha256": "dbf8db4408b1a0c09a662396c9a3e62dc395b58ffc0d4681939fe959ba44b579",
+      "bytes": 8589
+    },
+    "/tmp/incant-game-checkpoint-tests-002.log": {
+      "sha256": "1a4f77f2ba3194c5987536e99c23439d87fc85a56e0bfdda93c129a3b05c3cb8",
+      "bytes": 18631
+    },
+    "/tmp/incant-game-checkpoint-tests-003.log": {
+      "sha256": "cb552836c3cc9d68bf8dde7e02cdc73eb4be48d7201612619bea9b7d19db8a76",
+      "bytes": 1120
+    },
+    "/tmp/incant-game-checkpoint-tests-004.log": {
+      "sha256": "2dfcc2878e10984ec072c9bedb46a07c812a66cbd511b9941e6d5202c39e4932",
+      "bytes": 35480
+    },
+    "/tmp/incant-game-checkpoint-clippy-001.log": {
+      "sha256": "e61e4fb7f82e22b8ba62f4b63197d8d13c71b1383829d2bceb60091997138cca",
+      "bytes": 1285
+    },
+    "/tmp/incant-game-checkpoint-author-build-001.log": {
+      "sha256": "1d9dd4c92b79a5a219abef3870218ab803959d7a44fcc0ae75128c28af02745f",
+      "bytes": 2950
+    },
+    "/tmp/incant-game-checkpoint-static.log": {
+      "sha256": "259f98ffe61c55aea64cefcded264d32f0fee6df1b08d8bb8bd53d0ae90406d6",
+      "bytes": 543
+    },
+    "/tmp/incant-game-checkpoint-graph.log": {
+      "sha256": "c8ec11e19c06c33607b5a278df8c065fb3c04541f316f16a39508e5b0f582bfa",
+      "bytes": 137
+    },
+    "/tmp/incant-game-checkpoint-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-checkpoint-conventions.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-checkpoint-diff.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "/tmp/incant-game-checkpoint-gpu-compile-only.log": {
+      "sha256": "17897c89b7cf25cc4506beb18f70f5cc8c7e06bf296306483c4dc7d1fe71a6d6",
+      "bytes": 2194
+    },
+    "/tmp/incant-game-checkpoint-export-001.log": {
+      "sha256": "488bda838e2663724b4056ad3ee1351dbc7cf7dd6dc6df34fdf1245298081e79",
+      "bytes": 221
+    }
+  },
+  "process_proof": {
+    "receipt": "native-game-checkpoints-process.json",
+    "sha256": "e25bfd65b0f16bc95e603ea4bbfd5550cc66458bb1b4bdd91585fbded601e5cf",
+    "successful_runs": 5,
+    "refusal_runs": 9,
+    "export_startup_separate": 1,
+    "player_sha256": "0ad959629a8cc33e75f5af94d5574192341c0bcc30c4b1d1b652bfae44d1b453",
+    "player_bytes": 7581680,
+    "target": "aarch64-apple-darwin",
+    "final_save_sha256": "b4b6ff05a695d9ac22969278e85e1bd701abe5d1b756eb8f83f7b87ac876da65",
+    "final_save_bytes": 815,
+    "source_and_private_build_deleted": true,
+    "all_owned_handles_reaped": true,
+    "actual_gpu_submissions": 0
+  },
+  "prior_failures": [
+    {
+      "log": "/tmp/incant-game-checkpoint-tests-001.log",
+      "kind": "test compile",
+      "detail": "fixture Settings lacked Default; WorldIdentity observer corrected to spatial_view().identity()",
+      "sha256": "dbf8db4408b1a0c09a662396c9a3e62dc395b58ffc0d4681939fe959ba44b579"
+    },
+    {
+      "log": "/tmp/incant-game-checkpoint-tests-003.log",
+      "kind": "test compile",
+      "detail": "fixture removed unwrap from infallible NativeWorld::new",
+      "sha256": "cb552836c3cc9d68bf8dde7e02cdc73eb4be48d7201612619bea9b7d19db8a76"
+    },
+    {
+      "log": "/tmp/incant-game-checkpoint-author-preflight/log.txt",
+      "kind": "author fixture",
+      "detail": "explicit newly named RPC journal starts at revision0 after import; fixture now reads actual revision before its command",
+      "sha256": "064960e581da67d417d6915b3f909727699e3e9c9a68facffad607fc938e15ed"
+    }
+  ],
+  "limitations": [
+    "No retained physics/audio or static/Wasm checkpoint continuation",
+    "No arbitrary VM globals/closures/callback heap snapshot",
+    "Ordinary neutral fresh physical input, not exact replay",
+    "No GPU/window checkpoint route, native device/provider or performance evidence",
+    "Create-only complete-file publication, no universal power-loss durability; hard-link fallback may leave staging link",
+    "PCM and checkpoint are not a multifile atomic transaction",
+    "No production Rapier snapshot adoption; full save feature remains incomplete"
+  ]
+}

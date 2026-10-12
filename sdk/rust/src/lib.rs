@@ -7,6 +7,7 @@
 #![no_std]
 pub mod flipbook;
 pub mod input;
+pub mod localization;
 mod raw;
 mod tick;
 pub use flipbook::{FlipbookSnapshot, Playback};

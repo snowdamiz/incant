@@ -1,0 +1,1099 @@
+{
+  "generated": "2026-10-11T19:14:06.432Z",
+  "baselineDir": "artifacts/0044-native-editor-play/g1",
+  "candidateDir": "artifacts/0044-native-editor-play/g2",
+  "compared": 73,
+  "identical": 68,
+  "results": [
+    {
+      "name": "choose--picker--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--picker--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 193,
+      "box": [
+        524,
+        135,
+        2320,
+        1329
+      ],
+      "clusters": [
+        {
+          "at": "1888,512",
+          "count": 27
+        },
+        {
+          "at": "2208,512",
+          "count": 27
+        },
+        {
+          "at": "1856,512",
+          "count": 17
+        },
+        {
+          "at": "2240,512",
+          "count": 17
+        },
+        {
+          "at": "1952,512",
+          "count": 16
+        },
+        {
+          "at": "2144,512",
+          "count": 16
+        },
+        {
+          "at": "1920,512",
+          "count": 15
+        },
+        {
+          "at": "2176,512",
+          "count": 15
+        },
+        {
+          "at": "1984,512",
+          "count": 11
+        },
+        {
+          "at": "2112,512",
+          "count": 11
+        },
+        {
+          "at": "1824,512",
+          "count": 4
+        },
+        {
+          "at": "2272,512",
+          "count": 4
+        },
+        {
+          "at": "2304,512",
+          "count": 4
+        },
+        {
+          "at": "2080,128",
+          "count": 2
+        },
+        {
+          "at": "512,1312",
+          "count": 2
+        },
+        {
+          "at": "640,1312",
+          "count": 2
+        },
+        {
+          "at": "1824,480",
+          "count": 1
+        },
+        {
+          "at": "2272,480",
+          "count": 1
+        },
+        {
+          "at": "2304,480",
+          "count": 1
+        }
+      ],
+      "mask": "choose--picker--narrow-1440x900-diff.png"
+    },
+    {
+      "name": "choose--picker--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--preparing--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--preparing--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--preparing--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--preparing-polled--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--preparing-polled--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--preparing-polled--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--stopped--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "choose--stopped--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 4,
+      "box": [
+        524,
+        1326,
+        649,
+        1329
+      ],
+      "clusters": [
+        {
+          "at": "512,1312",
+          "count": 2
+        },
+        {
+          "at": "640,1312",
+          "count": 2
+        }
+      ],
+      "mask": "choose--stopped--narrow-1440x900-diff.png"
+    },
+    {
+      "name": "choose--stopped--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "fixture--explained--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "fixture--unsupported--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "game-input--focused--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 45,
+      "box": [
+        24,
+        66,
+        1827,
+        1279
+      ],
+      "clusters": [
+        {
+          "at": "608,96",
+          "count": 16
+        },
+        {
+          "at": "1792,1184",
+          "count": 8
+        },
+        {
+          "at": "1824,1184",
+          "count": 8
+        },
+        {
+          "at": "0,1248",
+          "count": 4
+        },
+        {
+          "at": "32,1248",
+          "count": 4
+        },
+        {
+          "at": "608,960",
+          "count": 2
+        },
+        {
+          "at": "1088,64",
+          "count": 1
+        },
+        {
+          "at": "1152,64",
+          "count": 1
+        },
+        {
+          "at": "1216,64",
+          "count": 1
+        }
+      ],
+      "mask": "game-input--focused--minimum-1000x650-diff.png"
+    },
+    {
+      "name": "game-input--focused--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "game-input--left--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "game-input--left--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "game-input--sent--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "game-input--sent--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--choosing--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--choosing--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--game-view--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--game-view--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--picker-focused--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 35,
+      "box": [
+        24,
+        66,
+        1827,
+        1279
+      ],
+      "clusters": [
+        {
+          "at": "1792,1184",
+          "count": 8
+        },
+        {
+          "at": "1824,1184",
+          "count": 8
+        },
+        {
+          "at": "1056,64",
+          "count": 6
+        },
+        {
+          "at": "0,1248",
+          "count": 4
+        },
+        {
+          "at": "32,1248",
+          "count": 4
+        },
+        {
+          "at": "608,960",
+          "count": 2
+        },
+        {
+          "at": "1088,64",
+          "count": 1
+        },
+        {
+          "at": "1152,64",
+          "count": 1
+        },
+        {
+          "at": "1216,64",
+          "count": 1
+        }
+      ],
+      "mask": "keyboard--picker-focused--minimum-1000x650-diff.png"
+    },
+    {
+      "name": "keyboard--picker-focused--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--play-focused--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--play-focused--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--started--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "keyboard--started--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "missing--absent--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "missing--absent--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "missing--other-scene--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "missing--other-scene--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "older-host--input-explained--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "older-host--labelled--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--paused--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--paused--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--paused--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--resumed--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--resumed--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--resumed--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--stepped--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--stepped--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "pause-step--stepped--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--playing--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--playing--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--playing--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--playing-later--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--playing-later--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--playing-later--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--refreshed--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--refreshed--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "running--refreshed--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "runtime-error--failed--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "runtime-error--failed--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "shortcuts--filtered--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "single--playing--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 95,
+      "box": [
+        24,
+        66,
+        1974,
+        1279
+      ],
+      "clusters": [
+        {
+          "at": "608,96",
+          "count": 16
+        },
+        {
+          "at": "1792,1184",
+          "count": 8
+        },
+        {
+          "at": "1824,1184",
+          "count": 8
+        },
+        {
+          "at": "1536,672",
+          "count": 4
+        },
+        {
+          "at": "1952,672",
+          "count": 4
+        },
+        {
+          "at": "1536,704",
+          "count": 4
+        },
+        {
+          "at": "1952,704",
+          "count": 4
+        },
+        {
+          "at": "1536,800",
+          "count": 4
+        },
+        {
+          "at": "1952,800",
+          "count": 4
+        },
+        {
+          "at": "0,1248",
+          "count": 4
+        },
+        {
+          "at": "32,1248",
+          "count": 4
+        },
+        {
+          "at": "1536,608",
+          "count": 3
+        },
+        {
+          "at": "1952,608",
+          "count": 3
+        },
+        {
+          "at": "1536,448",
+          "count": 2
+        },
+        {
+          "at": "1952,448",
+          "count": 2
+        },
+        {
+          "at": "1536,480",
+          "count": 2
+        },
+        {
+          "at": "1952,480",
+          "count": 2
+        },
+        {
+          "at": "1536,512",
+          "count": 2
+        },
+        {
+          "at": "1952,512",
+          "count": 2
+        },
+        {
+          "at": "480,960",
+          "count": 2
+        },
+        {
+          "at": "608,960",
+          "count": 2
+        },
+        {
+          "at": "1088,64",
+          "count": 1
+        },
+        {
+          "at": "1152,64",
+          "count": 1
+        },
+        {
+          "at": "1216,64",
+          "count": 1
+        }
+      ],
+      "mask": "single--playing--minimum-1000x650-diff.png"
+    },
+    {
+      "name": "single--playing--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "single--stopped--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "single--stopped--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "stop-immediately--stop-queued--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "stop-immediately--stopped--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "stop-preparing--after-cancelled-startup--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "stop-preparing--stopping--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "suspended--suspended--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "transport--unreadable--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "unsaved--dismissed--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "unsaved--dismissed--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "unsaved--dismissed--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "unsaved--refused--minimum-1000x650.png",
+      "sameSize": true,
+      "size": [
+        2000,
+        1300
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "unsaved--refused--narrow-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    },
+    {
+      "name": "unsaved--refused--normal-1440x900.png",
+      "sameSize": true,
+      "size": [
+        2880,
+        1800
+      ],
+      "differing": 0,
+      "box": null,
+      "clusters": []
+    }
+  ]
+}

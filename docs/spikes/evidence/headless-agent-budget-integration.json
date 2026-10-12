@@ -1,0 +1,46 @@
+{
+  "recorded_at": "2026-10-11T20:42:52.793948+00:00",
+  "reviewer": "astra/root",
+  "source_commit": "b2fba510b58bafb3a3ff41dd81561e75c7293511",
+  "integrated_commit": "91615ee7e90056b00c1bbba0cf158d677209ee30",
+  "source_hashes": {
+    "crates/incant_headless/src/main.rs": "ef56460db6909fd839550e108a6ec79acaca5111321314c45f1f5e6575d6bc84",
+    "crates/incant_headless/src/agent_command.rs": "8566b9d675405dbc9f931488b43f6e693d9d7fa3322e45d1d2fa16ca5de6a4a4",
+    "crates/incant_headless/src/agent_command/tests.rs": "c878e5e4be38148a30bcf609a225fb4c0db258f531991a08cb628989807b01ec",
+    "crates/incant_agent/src/session.rs": "d7b1e0946fcbbc64ee47d7b5eac7e691d0a4e410a576a5ef7bbc5bd2e68f8b15",
+    "crates/incant_agent/src/session/durable.rs": "886b6ab3573ff485868b9df110eb9d781fad9422002ab19a0588e3d058053984",
+    "crates/incant_agent/src/ledger.rs": "c54cde4db5d81f77f7b861fe1f7738012dbc8c7d6ea1cb1934bde2fa4742af6e"
+  },
+  "review": {
+    "findings": [],
+    "checked": [
+      "CLI invocation limit cannot raise authored cap or refund cumulative usage",
+      "Exclusive ledger ownership acquired before journal replay, immutable project ULID and recovered cap used",
+      "Durable Session reservation precedes provider/native host construction",
+      "Native host constructed and retained in worker owner thread",
+      "Successful output waits for settlement and worker reap, failed save cannot refund consumption",
+      "Fixed failure text and existing shared command/provenance path preserved",
+      "13 observable budget tests plus three existing tests, synthetic inference clearly scoped"
+    ]
+  },
+  "checks": [
+    {
+      "command": "./tools/cargo test -p incant_headless --bin incant_headless --profile ci --locked -j2",
+      "exit_code": 0,
+      "passed": 16,
+      "log": "/tmp/incant-headless-budget-integrated-tests.log",
+      "sha256": "8f54fa77ba0a1e77a8cea93af36d119bc6cd17e492fe2e151c8381c123798c47"
+    },
+    {
+      "command": "./tools/cargo clippy -p incant_headless --all-targets --profile ci --locked -j2 -- -D warnings",
+      "exit_code": 0,
+      "log": "/tmp/incant-headless-budget-integrated-clippy.log",
+      "sha256": "3c1caa971feb410a213f96dfc17c4aeca66acfa3c6405f6175abd67c470aa21e"
+    }
+  ],
+  "limitations": [
+    "Synthetic provider tests use real temporary ledgers, journals and output files; no headless live-provider or signal-process execution proof",
+    "Actual account-backed native-editor budget proof is separately recorded and does not establish headless UI or CLI live-provider acceptance",
+    "No production phase, device performance or complete product gate is implied"
+  ]
+}
