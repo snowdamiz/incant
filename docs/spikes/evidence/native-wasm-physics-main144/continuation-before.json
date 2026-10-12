@@ -1,0 +1,30 @@
+{
+  "source_sha256": "bfb5d3baa6ffaf02f807c8c432689244307c1ebe86e0656b9b9b0c6b441ade36",
+  "shipping_player_sha256": "339143206187f3a5003856378be759c6fc42429789e43b667592c133c19a735f",
+  "package_files": {
+    "package/build.log": "aaf89be917f886a2b38a777a5299cb99d2f6996d8d6ec791fb68b44884003b72",
+    "package/export.json": "2680e7c4f4a7d78f2187bf2e31e6c458aec41453fb15d3d88e0dfee788959f8c",
+    "package/player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "package/player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "package/player/data/input-actions.json": "6f900cc261940d23e72c440d5e847b3ba7f3ff4570dfcb1aec4852ff4ebe874f",
+    "package/player/data/package.json": "f9effad2c87783812fc53598ddb72068f80446ee53fd49e06a20ae30b71d7fec",
+    "package/player/data/world.scene": "90e10da52c67f467aecbb30188c36e781d46be9415f75d646472f3e672328342",
+    "package/player/incant_game_player": "339143206187f3a5003856378be759c6fc42429789e43b667592c133c19a735f",
+    "package/project-build.json": "c6176ff614beb1813392311d407b03ba1b53bcace96ed2429028dcb68a2943ce",
+    "package/symbols/incant_game_player.dSYM/Contents/Info.plist": "37b5d3d6e393054bcdc632bec0e7926520d78b92c9a80550615df4f9297fb7ce",
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-9d1b5d22c3875eea": "a6778360f30290cf607d5424525fedf79815110af904e7ead2a6104f4ad587cd",
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-9d1b5d22c3875eea.yml": "e23ac5e629e564ce79e7844b6591a78aa135db6f6d7e8586bcbe2958dcd683ae",
+    "package/symbols/script-symbols.json": "1066c321e65b569275fb1011a167a54e668d15f6639d80fac0934815f8355b50"
+  },
+  "initial_commands_sha256": "f13f80a4ce97b1bb5bf1d1874a18a221377ee7c7fbcc57f7d109ebca99ae1262",
+  "original_log_sha256": "0a0450f021de391d15de97cd424427a2b78a07d51f55672ebcc8c6c7d9715a44",
+  "guest_build_absent": true,
+  "original_guest_absent": true,
+  "original_guest_compile_sha256": "2ca3b55f791b1987c93401fec318890efeb4fa2ea09004f36c9d2d81c83466b6",
+  "retained_inputs": [
+    "authoring",
+    "trusted-tools",
+    "private-builds"
+  ],
+  "scope": "Continuation only after optional Wasmtime development feature omission; reuse exact successful fresh shipping export, no repeat authoring or shipping build. Initial failed runner and execution ledger remain preserved separately; final ledger covers resumed phases only."
+}

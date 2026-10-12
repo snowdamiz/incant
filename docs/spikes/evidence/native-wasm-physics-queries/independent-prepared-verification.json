@@ -1,0 +1,8 @@
+{
+  "time": "2026-10-12T13:22:23.822805+00:00",
+  "bundle": "/tmp/incant-wasm-physics-host-proof-003/static-wasm-inputs-qjc3lv86/bundle",
+  "manifest_sha256": "ebe7889da6267a2348adfd75448fcd71eb71f68d1e2c113ab66da97f6be7d8b4",
+  "verified_files": 701,
+  "modules": 140,
+  "result": "every prepared file rehashed against manifest while inputs present; final suite outcome still pending"
+}

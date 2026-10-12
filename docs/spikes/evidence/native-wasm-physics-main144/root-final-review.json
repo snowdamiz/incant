@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-12T15:29:27.476741+00:00",
+  "reviewer": "astra-root",
+  "accepted": true,
+  "evidence_sha256": "4a47cb07e5e1d3dbbed7d77c7ef61d1cf44b845917cec3e9e4073e0a49041fde",
+  "source_files_verified": 1533,
+  "retained_artifacts_verified": 65,
+  "actual_package_files_verified": 13,
+  "source_and_ancestry_tree_unchanged": true,
+  "tests": {
+    "dual-host": {
+      "groups": 67,
+      "passed": 382,
+      "failed": 0,
+      "ignored": 0
+    },
+    "native": {
+      "groups": 30,
+      "passed": 202,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "fresh_shipping_runs": 3,
+  "observations_each": 60,
+  "exact_diagnostic_refusals": 10,
+  "reviewed_continuation": "Previously accepted narrow repair of missing headless wasmtime-host feature; retained successful fresh shipping build unchanged",
+  "limitations": [
+    "local desktop CPU package proof, no GPU or pixel acceptance",
+    "no phone/performance/phase gate",
+    "whole guest and physics checkpoints remain unsupported",
+    "repository engine and SDK source intentionally retained; only private project inputs/build/maps removed",
+    "Package exact terminal/no-output refusals are not an in-memory rollback proof; that boundary is independently covered by actual-host transaction tests.",
+    "Original producer evidence remains historical and independently accepted. This record uses a new current-lock build with all source frozen; no old /tmp proof is claimed recovered.",
+    "Initial runner omitted the optional wasmtime-host feature on its comparison headless executable. Its fresh shipping export succeeded before the development comparison failed. The failed log and command ledger are retained; rebuilding only the development host and resuming reviewed unchanged phases passed against the same 13 package files. No second shipping build was performed.",
+    "The removed_private_files inventory covers continuation cleanup only. Initial guest/build absence and guest compile receipt are separately evidenced; no lost in-memory removal inventory was reconstructed.",
+    "Native oracle outputs three entity-vector observations and weighted query/event checksums per tick, not exhaustive physics determinism or per-field coverage."
+  ]
+}

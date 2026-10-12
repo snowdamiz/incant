@@ -103,6 +103,20 @@ source, raw Wasm or cached native modules at runtime.
   `incant_module::localization`; smaller initialized scratch works when the whole
   frame fits. [samples/localization.rs](samples/localization.rs) is runnable with
   the same trusted compile helper and actual two-host conformance command.
+- `query_physics(queries, request_scratch, result_scratch)` batches up to 64
+  3D/2D rays and character movement queries against the committed native solvers.
+  Typed results retain request order and borrow only caller-owned scratch.
+  `physics_events(dimension, scratch)` observes complete sorted sensor enter/exit
+  events without draining them. Copied event frames retain their scene ID and
+  dimension, exposed by `scene()` and `dimension()`, including empty frames.
+  Pending numeric/structural writes are invisible;
+  apply returned character displacement through the ordinary columns. Types and
+  scratch bounds are in `incant_module::physics`; the
+  [physics sample](samples/physics.rs) exercises both dimensions and character
+  movement. Invalid/caught requests or insufficient scratch reject the callback.
+  The [public package proof](../../docs/spikes/native-wasm-physics-package.md)
+  exercises ordinary authored import/export and fresh source-free shipping
+  players against a direct native physics oracle.
 - `find_path(owner, request, result_scratch)` queries the active scene's committed
   navmesh; `find_grid_path` queries its prepared grid. Both return `None` for a
   valid miss and a borrowed view of the complete copied route on success. Mesh
@@ -160,6 +174,7 @@ Additive `incant_animation_v1` supplies legacy skeletal playback snapshots/contr
 copied locale/message queries and atomic settings. `incant_navigation_v1` adds
 local-avoidance requests/results and committed navmesh/grid path queries. The
 path imports append at opcodes 36–38; all previous operations remain unchanged.
+`incant_physics_v1` appends bounded batch/event/result operations at 39–41.
 Older hosts reject unsupported imports explicitly.
 Existing `incant_v1`, `incant_input_v1`, and `incant_flipbook_v1` layouts remain
 unchanged. Unknown namespaces, signatures and magic/layout versions fail closed.
@@ -200,6 +215,17 @@ query/output quotas, charges no logical input bytes (matching TypeScript), and
 charges its fixed 24-byte request and result copies to transfer limits. See
 [samples/formatting.rs](samples/formatting.rs). Catalog edits and report
 enumeration remain unsupported.
+
+Physics uses the same 1,024 native query units as navigation/localization, one
+unit per batch row or event observation, with at most 128 character queries per
+callback. A batch holds at most 64 queries and 4,096 aggregate returned collision
+IDs. Requests/results are at most 7,184/71,696 bytes. Events preserve the native
+131,072-row bound (5,242,912 bytes); provide smaller scratch for smaller frames.
+The existing native ray and character scalar domains apply before narrowing,
+including the character displacement limit against the actual callback dt.
+Queries preserve masks, optional exclusion, sensors, autostep, ground snap and
+slope settings. Events describe the last committed physics step, not pending
+movement. The SDK provides no solver handle or implicit movement.
 
 Navmesh, grid and local avoidance share 32 requests per callback. Path searches
 also share 65,536 requested expansions, charged even for misses. Mesh requests

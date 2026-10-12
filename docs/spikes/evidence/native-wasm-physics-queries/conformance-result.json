@@ -1,0 +1,269 @@
+{
+  "kind": "native-physics-query-conformance",
+  "wabt": "1.0.42",
+  "module_count": 140,
+  "verified_prepared_files": 701,
+  "selected": [
+    {
+      "name": "physics-queries",
+      "prefix": "m37",
+      "input_sha256": "56108c3222e97b79931a735230a19e240e73f3576800549817203630c9fc2f8d",
+      "prepared_sha256": "c16c3ce3d38318c2cacf4368cac1ef837d3f38c8c1663900cd2221ef0c3d7833"
+    },
+    {
+      "name": "rust-physics",
+      "prefix": "m105",
+      "input_sha256": "0cf8b43a5c541f2b159750e6f9ddb1da1281346bebe2bf3b2e68c2c47c6e1458",
+      "prepared_sha256": "f92f061d068df3bbcddcfe7d58feb8e6fe1120096d73c4ea67b1f58dd8f53274"
+    },
+    {
+      "name": "rust-physics-capacity",
+      "prefix": "m106",
+      "input_sha256": "2920a02b60b66a79691b2a11b5b504974fb42b1cecb5027f7659aec6ebd5304b",
+      "prepared_sha256": "680b197596edc8638dad47c83ab6152f3b6ab7b36d64c5388dad68426a4e9155"
+    },
+    {
+      "name": "rust-physics-request-capacity",
+      "prefix": "m107",
+      "input_sha256": "df9563bd4cd750defaeb6847cc2af6cc4ce4b4860b5f7f636ea730267d30776f",
+      "prepared_sha256": "5cb655f5dfcca1d16f5b98e3fb400785678155ae6e274c680edd18df027c8a37"
+    },
+    {
+      "name": "rust-physics-events-capacity",
+      "prefix": "m108",
+      "input_sha256": "563dc3aa4a367e7ce06bcfe0f7c69744f7bf8fb8730d6228b2e21c1985aeb67f",
+      "prepared_sha256": "b9c9cc2617092af6e7a39957c77a79b9735ce42812a29197cf2274f31e290dfd"
+    },
+    {
+      "name": "rust-physics-nan",
+      "prefix": "m109",
+      "input_sha256": "891883293c067269f96cbda361542532922d2b38aa75dad2ed48569a20f16f13",
+      "prepared_sha256": "b55c9582f9da3c5fc30942dd5fd43ea8ace031d79592613bafff6f2eb10727d7"
+    },
+    {
+      "name": "rust-physics-rounding",
+      "prefix": "m110",
+      "input_sha256": "2e6ae5e70a25a96cc7009272e801a81a0118464f90bb073f97044bcca82d3cf5",
+      "prepared_sha256": "4a3108dfa3782ff567421672af52484b9092969c44a0a3a09df49fef89348338"
+    },
+    {
+      "name": "rust-physics-character-rounding",
+      "prefix": "m111",
+      "input_sha256": "b07e92aec3a3b57eed4a65b8bbf2945afb63f891fa4abdc85cf1a72461df7380",
+      "prepared_sha256": "fd21b986a21431df4ff1f7fa47aec81ddbdbd9378688dc645bee9eb462c5320e"
+    },
+    {
+      "name": "rust-physics-owner",
+      "prefix": "m112",
+      "input_sha256": "0d71266b4da72d187ac31e512d0c216107a5d02948546bfb473d583a65ac9c9e",
+      "prepared_sha256": "5bff532e793a94c182db9999b4d1f06b954c2dffa88771b2725de610450ad4f9"
+    },
+    {
+      "name": "rust-physics-velocity",
+      "prefix": "m113",
+      "input_sha256": "600296e35f9059863c2b54927c2e46046e23b1aa870e771f06a58d9da2dbd86c",
+      "prepared_sha256": "1e4f88234e27c45e3fff69605f028c5ef90f7b3df779d5e258588926a913f1fb"
+    },
+    {
+      "name": "rust-physics-units",
+      "prefix": "m114",
+      "input_sha256": "0548e696a44251732a386d270017ea5650607ef63189bbe35174cb859e965916",
+      "prepared_sha256": "7a6f247f4ee4545caf5db527e07236359214baa9ce43c3c881dc2b0a3514ba4a"
+    },
+    {
+      "name": "rust-physics-character-units",
+      "prefix": "m115",
+      "input_sha256": "5dc5f72848ca761cf9db260e130009a18896a7d16d7c6e644885153fc5f1ef3c",
+      "prepared_sha256": "2868dbf8ecdc8ff60f295faa99000f3af1a6e55ef1f048b5c309ec2d640b593e"
+    },
+    {
+      "name": "rust-physics-late",
+      "prefix": "m116",
+      "input_sha256": "7f7195fc7aa8658826fa990d8ce9553497c5eac6e54072fbdac248a6606987cf",
+      "prepared_sha256": "536dc25c3ffa5628af888e65a4a9384e292c72401e42a811ba3a3052c3be5642"
+    },
+    {
+      "name": "rust-physics-callback",
+      "prefix": "m117",
+      "input_sha256": "1c2ca51544f0331950370ee13386a146dcb773c13c6360221ae4978d9b88e02f",
+      "prepared_sha256": "7b7009b422536bc8f7d8f8ba1a796677505b6bf290da381f1e61293dafca19e5"
+    },
+    {
+      "name": "rust-physics-trap",
+      "prefix": "m118",
+      "input_sha256": "7531733e8ce34a9e5b2e5d27780cac3524a5c8e6c7079fb38757e84f5edc21d0",
+      "prepared_sha256": "c7f35bcbd4936494c264c7d3a6492c30268cd75a5d4151cdf5aefb5e3a31f636"
+    }
+  ],
+  "retained_hashes": {
+    "m105-facade.c": "2687e202bb0798ac9392a67433fd0ab9a5f3314255243af194b2ac17a2fb2378",
+    "m105.c": "725ee2eca363d00bdf8cda053e2cd7ec62f9762cb4cef5de2088707b13ab9b1b",
+    "m105.h": "34cbcc1dabd447f626c8d9a1b15f99203cf0a51e8328bec94a3a0e0dcdfc458b",
+    "m105.original.wasm": "0cf8b43a5c541f2b159750e6f9ddb1da1281346bebe2bf3b2e68c2c47c6e1458",
+    "m105.wasm": "f92f061d068df3bbcddcfe7d58feb8e6fe1120096d73c4ea67b1f58dd8f53274",
+    "m106-facade.c": "80c2f25aff63b736c58859aabc70f8b54d45c9162d6e1af3639b0983bebdf55c",
+    "m106.c": "fb3f74bba113ee5332d9b7ef8abad2f86876eecb8f29b2f05dfea57edc28769a",
+    "m106.h": "0e37285ebeaa59851057788eb70610586b6a3d4f2910cc5e23477cd860eec670",
+    "m106.original.wasm": "2920a02b60b66a79691b2a11b5b504974fb42b1cecb5027f7659aec6ebd5304b",
+    "m106.wasm": "680b197596edc8638dad47c83ab6152f3b6ab7b36d64c5388dad68426a4e9155",
+    "m107-facade.c": "72be89a2d6ad7c0625ec7192f403007eba4b42e8798f2ace63fd6c1f1e9a6720",
+    "m107.c": "30bfc1126f2da51abe2b60f8af8917741a02d020f51fbcaf949d47bca10c8f49",
+    "m107.h": "63c333d8798703e8bcd2aeba1295154b0d4a71e46a62737f5d62d1f2602bff33",
+    "m107.original.wasm": "df9563bd4cd750defaeb6847cc2af6cc4ce4b4860b5f7f636ea730267d30776f",
+    "m107.wasm": "5cb655f5dfcca1d16f5b98e3fb400785678155ae6e274c680edd18df027c8a37",
+    "m108-facade.c": "451a9b55836d7eb62403935e4be44d84b87985dfa302c84fdafe8ae1fe68fb45",
+    "m108.c": "ebb311e0182b616dda8d5013c49f1831e03cb73f14651952231a69d58ab1e3a1",
+    "m108.h": "306d5fb5f52adc341eee59d0404a554c9b2a50b7908013c3e89019ce98c2d6e7",
+    "m108.original.wasm": "563dc3aa4a367e7ce06bcfe0f7c69744f7bf8fb8730d6228b2e21c1985aeb67f",
+    "m108.wasm": "b9c9cc2617092af6e7a39957c77a79b9735ce42812a29197cf2274f31e290dfd",
+    "m109-facade.c": "24dc4be2998ef9fc8c64dbfed76b0077a2b6424116c5102416d9c5f917dc2b1c",
+    "m109.c": "0f9d21aa1790ed9582362a238e3af0759307c17afe13afc683e529f34a063833",
+    "m109.h": "ed95afa0d2b1040005176ec091d976aadb4f2c4c6973fdc19a08c5c66d73b870",
+    "m109.original.wasm": "891883293c067269f96cbda361542532922d2b38aa75dad2ed48569a20f16f13",
+    "m109.wasm": "b55c9582f9da3c5fc30942dd5fd43ea8ace031d79592613bafff6f2eb10727d7",
+    "m110-facade.c": "faddff112a51dc523ed983cba4157403d9aed4a8b6c537ffce53766d11872e5c",
+    "m110.c": "294356de30187eba4140d2c001c90ad09836069eb148f9741111b0849c8cee9a",
+    "m110.h": "a96c9a40347e019a29b2023f373a6d2c8e9b77dd8a4a39ecaee0fbaf7319e363",
+    "m110.original.wasm": "2e6ae5e70a25a96cc7009272e801a81a0118464f90bb073f97044bcca82d3cf5",
+    "m110.wasm": "4a3108dfa3782ff567421672af52484b9092969c44a0a3a09df49fef89348338",
+    "m111-facade.c": "42206b83fd9f83d6c7313dfe3ea1f8312148e1c62044dd483ace594ae9c090c6",
+    "m111.c": "049a51e7997657efad23ef468d27821d1cc72608431715cdb59c6468ca31cd5c",
+    "m111.h": "49afc6dde820e4f406fc5334adacaa509c88d072e8c13e2f78f782f860cacb83",
+    "m111.original.wasm": "b07e92aec3a3b57eed4a65b8bbf2945afb63f891fa4abdc85cf1a72461df7380",
+    "m111.wasm": "fd21b986a21431df4ff1f7fa47aec81ddbdbd9378688dc645bee9eb462c5320e",
+    "m112-facade.c": "b8dd4977b495b4a426fda46ae3e314794dc88f3f6d8bd361e7cd4f362cfb65d0",
+    "m112.c": "779e33fcc0e14485e417e3f34b247aba5f54475fed537f3843ee8e6e8f31a185",
+    "m112.h": "5279bb5afe52d824c32ff81d05cdc23544127867ca57d2f03fccdea64513d653",
+    "m112.original.wasm": "0d71266b4da72d187ac31e512d0c216107a5d02948546bfb473d583a65ac9c9e",
+    "m112.wasm": "5bff532e793a94c182db9999b4d1f06b954c2dffa88771b2725de610450ad4f9",
+    "m113-facade.c": "273d21f569b67cea54eeb1db4f99055871ab2bf308380cde3d4f67dd7f1696dd",
+    "m113.c": "d36acd27c60b7037021ae32166181984b0ff47de9136bcbcfc4a6c8459a4cb8b",
+    "m113.h": "495d8c1a098a77730ef04d6ef7a1ad294bdca7e7af8606bd3f8e7271b86c3c40",
+    "m113.original.wasm": "600296e35f9059863c2b54927c2e46046e23b1aa870e771f06a58d9da2dbd86c",
+    "m113.wasm": "1e4f88234e27c45e3fff69605f028c5ef90f7b3df779d5e258588926a913f1fb",
+    "m114-facade.c": "33258fafb63ed2f4409cca9a2c49152ec506e8a59afff421e5335112217d8723",
+    "m114.c": "5e6f50935ac6b63543aebac85d310f9d95e63b8f013b9ff5760ed2512cbf708d",
+    "m114.h": "653776602424b7aa61c90af76f5ef1d3a0e05782b8666fb12646ee0cbe18d689",
+    "m114.original.wasm": "0548e696a44251732a386d270017ea5650607ef63189bbe35174cb859e965916",
+    "m114.wasm": "7a6f247f4ee4545caf5db527e07236359214baa9ce43c3c881dc2b0a3514ba4a",
+    "m115-facade.c": "87926bbb65fca2ce3b139da934c5e939af6a93173a68aeaef290cf9c45cbc993",
+    "m115.c": "bc55713a67e1e865703e88f1ad55283c0d009bd2e6a77cde0e26ef6470b70c94",
+    "m115.h": "ade8a8e20592b99e71284a577188f2c23b39a6383149853c585e6a5801d40756",
+    "m115.original.wasm": "5dc5f72848ca761cf9db260e130009a18896a7d16d7c6e644885153fc5f1ef3c",
+    "m115.wasm": "2868dbf8ecdc8ff60f295faa99000f3af1a6e55ef1f048b5c309ec2d640b593e",
+    "m116-facade.c": "f601a15a09050125c810ec9ef520c6b21e5913bb0a7efb259eeb9d3fe448f806",
+    "m116.c": "10dc5872341d29b5119636412989414079e08a6322ed235d36f9eb2f39f3d471",
+    "m116.h": "c033fe0623df133cf3e9b36f730c02b6d77fddd5a8938bb027b7ede075e381e5",
+    "m116.original.wasm": "7f7195fc7aa8658826fa990d8ce9553497c5eac6e54072fbdac248a6606987cf",
+    "m116.wasm": "536dc25c3ffa5628af888e65a4a9384e292c72401e42a811ba3a3052c3be5642",
+    "m117-facade.c": "7be793e798d17fc6b87f8bf1b5012da23ab8e9ef51e129ab13b943feab342f73",
+    "m117.c": "09bdf247ea56ff2ec083f7195e8c1bad52dda498db4a7b3e3bf1d16df819f54e",
+    "m117.h": "b0642241342b60dd9ecd0c849972b6d26f9a07e4b243f38820a73a793f39c610",
+    "m117.original.wasm": "1c2ca51544f0331950370ee13386a146dcb773c13c6360221ae4978d9b88e02f",
+    "m117.wasm": "7b7009b422536bc8f7d8f8ba1a796677505b6bf290da381f1e61293dafca19e5",
+    "m118-facade.c": "43359cd2934b585dcd93561f91cb2d78b7797befba1df2424e373a7469f4b339",
+    "m118.c": "f61c5cd5b3063c6b414b9a3d89edb974e49b2b7265a8d47c5a513390b493199d",
+    "m118.h": "c4acfb6267cca4d74f0a0b772be94a9b586c34de9c6a19da7c00ac75953d04c9",
+    "m118.original.wasm": "7531733e8ce34a9e5b2e5d27780cac3524a5c8e6c7079fb38757e84f5edc21d0",
+    "m118.wasm": "c7f35bcbd4936494c264c7d3a6492c30268cd75a5d4151cdf5aefb5e3a31f636",
+    "m37-facade.c": "fc6ed91be9a9b0500a312ec6e95d9724c75c61d0a039c499e10feb4a44d45a02",
+    "m37.c": "0d3786c637d79371d7e0acc2d67c952d9c0dbd23cbcd7e71c4e66eef5861bd24",
+    "m37.h": "c268937c8b93516e253e0a17299ef4cb74fc398d4cb7bc4c9039e322c9dd8d6f",
+    "m37.original.wasm": "56108c3222e97b79931a735230a19e240e73f3576800549817203630c9fc2f8d",
+    "m37.wasm": "c16c3ce3d38318c2cacf4368cac1ef837d3f38c8c1663900cd2221ef0c3d7833"
+  },
+  "guest_source_hashes": {
+    "physics.rs": "17a24fd76fc82df2e78c81431eacdd521e0e6ea9321e89c0ac68bfa51b588bf0",
+    "physics_failure.rs": "6bda16e333cbf4baedf6c98f29528dcc437e9a1369435b57d7efd4420fd89243",
+    "physics-queries.wat": "cafde6270aa0c2e9db38a3857ada7efa93e0e21a18587ca8e432beccf6174571"
+  },
+  "rust_sdk_sha256": "6215fa117d1766546406beb19ddfd089a59b598dbba721304c26d04bfcf32317",
+  "commands": [
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+        "test",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--locked"
+      ],
+      "exit_code": 0,
+      "log": "conformance-0.log",
+      "sha256": "b76d24b391d9bbffe3e24da2d627260ed044def84790b6826a64fc1a0d8c6aff"
+    },
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/cargo",
+        "clippy",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "--features",
+        "incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler",
+        "--all-targets",
+        "--locked",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "conformance-1.log",
+      "sha256": "2a1f429c261cfbb246f0dacab99541db959584e043203a4128fa7bdb461df728"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/tools/probes/development-wasm.py",
+        "/private/tmp/incant-wasm-physics-host-proof-003/development",
+        "--rustup",
+        "/opt/homebrew/bin/rustup",
+        "--static-conformance",
+        "--profile",
+        "ci"
+      ],
+      "exit_code": 0,
+      "log": "conformance-2.log",
+      "sha256": "b81020a7d4dff856a63d3246869c024fc7ae4a0a17c2bd0f9f31fb84bc62e624"
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "local CPU conformance, not a shipping package or device gate",
+    "existing full guest checkpoints remain unsupported"
+  ]
+}

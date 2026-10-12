@@ -16,6 +16,25 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public Wasm physics queries — current-main verified
+
+The Rust SDK now batches native 3D/2D rays and character movement queries and
+copies nondraining sensor enter/exit observations. Callback-scoped native solver
+loans preserve committed-state visibility, exact world/epoch authority and atomic
+rollback. Event frames retain scene identity and dimension. Published operations
+0–38 and old layouts remain unchanged. Integration on main #144 passes 382 actual
+Wasmtime/wasm2c cases, 202 native cases, all-target Clippy, wasm32/tooling and lean
+dependency checks. All 1533 frozen inputs remain unchanged after main integration.
+A fresh ordinary shipping package passes three source/cache/build/map-deleted
+processes, 60 native-oracle assertions per run and ten exact runtime refusals.
+The initial comparison host omitted its optional Wasmtime feature; its successful
+shipping package was preserved byte-for-byte while the host was rebuilt and the
+reviewed remaining proof resumed. The original failure stays recorded. Full SDK,
+physics/guest checkpoints, device measurements and phase gates remain open.
+[Package proof](docs/spikes/native-wasm-physics-package.md) and
+[current integration](docs/spikes/evidence/native-wasm-physics-main144.json).
+[Contract and evidence](docs/spikes/native-wasm-physics-queries.md).
+
 ## Nested animation tree numeric core — current-main verified
 
 The native evaluator now supports bounded nested 1D and rectangular bilinear 2D
@@ -231,6 +250,14 @@ and complete Game UI/IME gates remain open.
 [Evidence](docs/spikes/text-bidi-wrap.md).
 
 ## Current milestone
+
+Main #144 includes the multi-pose sampler and bounded nested/2D animation numeric
+core; authored tree playback and its complete SDK/render route remain separate
+local work. The current public Wasm physics integration adds real query/event
+capabilities and an ordinary source-deleted package proof, as recorded above.
+Offline audio checkpoint continuation is reviewed locally and queued separately.
+Checkpoint 11 remains failed and frozen; its Linux rendering repair is with
+Claude. No release or phase gate advances on these local feature results.
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.

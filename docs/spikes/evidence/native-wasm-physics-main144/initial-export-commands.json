@@ -1,0 +1,84 @@
+[
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "init",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/authoring/project.json",
+      "--entities",
+      "0"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "86852a6cb974f62e59c137718decccafd18625f15bd2da3e153438108b4a571c",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "rustup",
+      "which",
+      "--toolchain",
+      "1.99.0",
+      "rustc"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/rustc",
+      "-vV"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "import",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/authoring/project.json",
+      "behavior.wasm"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "b612d274156f3727e6a6debb94fd0ea439dface169a9e02d27ee510fa3f8a05b",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "validate",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/authoring/project.json"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "92c60b3cd974eb79f5f16a79a32d74057b992eac63f598bc6e554b47a1524da2",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/examples/physics_package_oracle",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/package/player/data/world.scene",
+      "20"
+    ],
+    "exit_code": 0,
+    "stdout_sha256": "bc46a670e9e07047379a195b3ac860ef3f85152f8835b9518aeda1e570412089",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "argv": [
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless",
+      "native-play",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/authoring/project.json",
+      "--ticks",
+      "20",
+      "--input-replay",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/positive-input.json",
+      "--observe",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/observe.json",
+      "--pcm-output",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-main144-001/public-export/development.pcm"
+    ],
+    "exit_code": 1,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "45fb7d2043699fe098eb55bf66ccd79021c17179c27a98b77c58d6be5fae285d"
+  }
+]

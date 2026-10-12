@@ -17,6 +17,8 @@ pub enum ModuleError {
     Engine(#[from] wasmtime::Error),
     #[error(transparent)]
     Runtime(#[from] RuntimeError),
+    #[error(transparent)]
+    Query(#[from] incant_runtime::QueryError),
     #[error("development module failed; construct or reload a new instance")]
     Failed,
 }
@@ -138,7 +140,15 @@ impl DevModuleHost {
     fn run(&mut self, world: &mut NativeWorld, dt: f64, epoch: i64) -> Result<(), ModuleError> {
         let result = (|| {
             self.store.set_fuel(bounds::TICK_FUEL)?;
-            self.update.call(&mut self.store, (epoch, dt))?;
+            world.with_numeric_physics(|_, queries| -> Result<(), ModuleError> {
+                self.store
+                    .data_mut()
+                    .capability
+                    .bind_physics(epoch, queries)?;
+                let result = self.update.call(&mut self.store, (epoch, dt));
+                self.store.data_mut().capability.revoke_physics();
+                result.map_err(Into::into)
+            })??;
             self.store.data_mut().capability.finish(world)?;
             Ok(())
         })();
@@ -155,6 +165,7 @@ impl From<BoundaryError> for ModuleError {
             BoundaryError::Limit(message) => Self::Limit(message),
             BoundaryError::Runtime(error) => Self::Runtime(error),
             BoundaryError::Failed => Self::Failed,
+            BoundaryError::Query(error) => Self::Query(error),
         }
     }
 }

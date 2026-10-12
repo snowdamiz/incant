@@ -34,9 +34,19 @@ pub struct NativeQueries {
     planar: Rc<RefCell<Option<incant_physics_2d_runtime::PhysicsWorld2D>>>,
     navigation: Rc<RefCell<Option<crate::navigation_runtime::NavigationRuntime>>>,
     scene: StableId,
+    identity: crate::WorldIdentity,
     used: bool,
 }
 impl NativeQueries {
+    /// Exact native owner identity; equal scene/entity IDs do not grant authority.
+    pub fn identity(&self) -> &crate::WorldIdentity {
+        &self.identity
+    }
+    /// Only true while the synchronous owning loan is alive.
+    pub fn is_active(&self) -> bool {
+        self.solver.borrow().is_some()
+    }
+
     pub fn localize(
         &self,
         request: &crate::LocalizeRequest,
@@ -232,6 +242,7 @@ impl NativeWorld {
             planar: Rc::new(RefCell::new(None)),
             navigation: Rc::new(RefCell::new(None)),
             scene: self.scene_id(),
+            identity: self.spatial_view()?.identity().clone(),
             used: self.physics_used,
         };
         let guard = Restore {

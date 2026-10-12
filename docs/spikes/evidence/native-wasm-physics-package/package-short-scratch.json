@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/incant_game_player",
+    "--package",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data",
+    "--ticks",
+    "20",
+    "--input-recording",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/short-scratch-input.json",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-short-scratch.pcm"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: Session(Module(Trap(1)))\n",
+  "output_absent": true,
+  "expected_stderr": "Error: Session(Module(Trap(1)))"
+}

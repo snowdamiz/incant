@@ -1,0 +1,294 @@
+{
+  "at": "2026-10-12T15:00:04.556043+00:00",
+  "base": "8a329939d3fc43095001a4bf3cfb5853ec86944b",
+  "branch": "codex/native-wasm-physics-package",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "cargo_lock_sha256": "77809a6a0b2ee2f932a12c62abf242bb109885ed320f1f26d263c5b82c7e72c1",
+  "source_hashes": {
+    "tools/probes/native-wasm-physics-export.py": "bfb5d3baa6ffaf02f807c8c432689244307c1ebe86e0656b9b9b0c6b441ade36",
+    "tools/probes/native-wasm-physics-export/behavior.rs": "bf8374956da896902960634bf80be86b9d6835ff2ca5a6ea07bed669131b0814",
+    "crates/incant_runtime/examples/physics_package_oracle.rs": "92a106f5a20572d8f749c7d1e6a2716cbfc692374c0c80171ed2212f885715f0"
+  },
+  "production_changes": false,
+  "checks": {
+    "public_authoring_journal_undo_redo": true,
+    "captured_only_development": true,
+    "ordinary_static_package_processes": 3,
+    "native_oracle_assertions_per_process": 60,
+    "ticks_per_process": 20,
+    "both_physics_dimensions_enter_exit": [
+      1,
+      1,
+      3,
+      1
+    ],
+    "exact_typed_runtime_refusals": 10,
+    "successful_same_replay_routes": true,
+    "whole_pcm_and_game_state_parity": true,
+    "private_source_cache_build_maps_removed": true,
+    "preflight_private_input_files_removed": 7,
+    "oracle_scoped_clippy": true,
+    "wasm32_guest_compile": true,
+    "python_tests": 233,
+    "python_skips": 4
+  },
+  "player": {
+    "sha256": "868d3f63a6cefd42c70f25c292d4ee865a49d5685ea5716cc4d0bede45fd27b4",
+    "bytes": 9437488,
+    "target": "aarch64-apple-darwin",
+    "program": {
+      "fingerprint": "ffd3ea2d5d1b7e7f0f7407a2fa95476166106c75d6c1ad1353baf52c89527522",
+      "input_sha256": "578632e8c2e1b7e58b555d9a51acc7ee2e50d258867b8fce927f11393d6f6295",
+      "kind": "wasm",
+      "module": "01M4R9P71BDENTN6GP5M6MY0QC",
+      "prepared_sha256": "0fa6d9eb230721cfc8e2046d5011fe779bce7fb16cb19bc6c6cfa7a32758426a",
+      "registry_sha256": "5176cdc3d29c1b8184e1a69f8bd4fdf44caaa8d7d282378596351410fbf25eaf",
+      "translator": "wasm2c-1.0.42"
+    }
+  },
+  "reports": {
+    "development": {
+      "json_sha256": "d66d1860288c4a8668f9db91006070dd169285cd03239b815d92f0bde9d4ef74",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000
+    },
+    "run-0": {
+      "json_sha256": "7d5438f6fa1058fe3eae91cb1c0d745180b94df4c84597751e5acff15b165949",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000
+    },
+    "run-1": {
+      "json_sha256": "7d5438f6fa1058fe3eae91cb1c0d745180b94df4c84597751e5acff15b165949",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000
+    },
+    "run-2": {
+      "json_sha256": "7d5438f6fa1058fe3eae91cb1c0d745180b94df4c84597751e5acff15b165949",
+      "pcm_sha256": "eec19bc6af0b3b6dfb97a08782c65f4bb3c3203e789a015d2008b0d689ad08be",
+      "pcm_bytes": 128000
+    }
+  },
+  "package_files_directly_verified": 13,
+  "removed_private_files_checked": 14,
+  "command_count": 20,
+  "commands_environment": {
+    "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+  },
+  "probe_command": [
+    "python3",
+    "tools/probes/native-wasm-physics-export.py",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002",
+    "--binary",
+    "/tmp/incant-agent-font-target/ci/incant_headless",
+    "--oracle",
+    "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/physics_package_oracle"
+  ],
+  "logs": {
+    "docs/spikes/evidence/native-wasm-physics-package/headless-build-001.log.gz": {
+      "sha256": "8306e6b24c8ccbd8bf0eba09230ac9d11a12e6a7b1a71948a11e76c6eac0463f",
+      "uncompressed_sha256": "996d4d35c3d3ac27a4cc3a5865c4c01b6d4fb329bdf0dd63628358a94f65ffec",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/headless-build-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/oracle-build-001.log.gz": {
+      "sha256": "e85ae2a9bf698d0256fe7c62cec9ca49cd2d2819f5288625ae9ffc917fa09e8f",
+      "uncompressed_sha256": "cc54993291cc759562d8e2069280e25de158483bac6c9dffb96ab4c4ff9ae277",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/oracle-build-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/oracle-clippy-001.log.gz": {
+      "sha256": "5b471bcb875937fc73b2e0c8bc800be4dc6e499bc119e2445365cc378c1e029d",
+      "uncompressed_sha256": "997ac9d05161c08709b134445781a5041d66964b9341ae51811711e431b61b43",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/oracle-clippy-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/tools-001.log.gz": {
+      "sha256": "0597b3a0ed5f973c83a9c851706635e0ff327f968e29dd1d4ba4598854ba30f2",
+      "uncompressed_sha256": "3cb5df4964310a973f8ea2eaaebd152ae1d05cc84a871b700e80be806086c640",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/tools-001.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/tools-002.log.gz": {
+      "sha256": "22c1d8fe3f3f70ccd82fc9560eb5cbe3fb2446377fc87dcc6539f05fe09259f9",
+      "uncompressed_sha256": "7064639be7b5ef46ad3b98ef83950f9ca6147502c0fda9b12bf1917c366ef4cb",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/tools-002.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/final-build.log.gz": {
+      "sha256": "499110d4fef156e1d3b392cbfb72404b5751c7b2c81995594af898a96e02862e",
+      "uncompressed_sha256": "fed369b02e1f4a6b3ce1b7b507e9018c72ea853205156fd44e2f538d963ce241",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/build.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/final-probe.log.gz": {
+      "sha256": "175df989690d2bc581205bc5699604d79c87b9adac38142051d7f4a76edeca37",
+      "uncompressed_sha256": "e910e930bfc18c59a1af602af6bf9468528b1dc7a5fd7828b773a32afcc8d668",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002.log"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/preliminary-probe.log.gz": {
+      "sha256": "b743becab6363d1a35db4c00936377df950eb8085d2633bbcf8f06ed2bb4facd",
+      "uncompressed_sha256": "3e640c79b17232d572d391fd1e55297976c01cbcc890fefea2041be715220db4",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-001.log"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-wasm-physics-package/authoring-receipt.json": {
+      "sha256": "a0d74c4f87db74ee764054b3d93500c779a6699ec3f1b332e1880936c3cdb85c",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/authoring-receipt.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/bad-number-input.json": {
+      "sha256": "83e7db1c62491976ae0c409150e94993944eeddb03cd6c0424e0e1b7b448eb64",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/bad-number-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/bad-owner-input.json": {
+      "sha256": "1ffba5e4203cc1c4ee564633312a59c1d9ec345f9f1699d9daa57698e6fe575b",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/bad-owner-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/checkpoint-refused.json": {
+      "sha256": "dca540021f6da2dd76cc3924b531acfb3228cb6527cccc8f16bca7175c6a87e3",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/checkpoint-refused.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/commands.json": {
+      "sha256": "5d561eb40db7764ce643881d1f48204a6fcccd2d4c17e4de562e4fc84e487d09",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/commands.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/dev-bad-number.json": {
+      "sha256": "b3668d60d34db2c176228380fbcbf51c9fae52ba13e515b87a620330c6e67989",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-bad-number.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/dev-bad-owner.json": {
+      "sha256": "5ea55b39300e0e512f957cfb6cbdd802e48e506e0c427554b0037498e6ae0a2e",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-bad-owner.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/dev-cache-mismatch.json": {
+      "sha256": "2f75163b9b8743ef575dcda4b4efbb949420ae2853dcf37abd1ad854f4a689f5",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-cache-mismatch.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/dev-late-command.json": {
+      "sha256": "2611aa2235ea049b634d3f0cefa7d5c87db2d71e26758cb69a76b0415b08520f",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-late-command.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/dev-short-scratch.json": {
+      "sha256": "579abf3a016019839bf5b3c6626a4105d2c22532debfcc0302587762b6c2717f",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/dev-short-scratch.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/development.json": {
+      "sha256": "d66d1860288c4a8668f9db91006070dd169285cd03239b815d92f0bde9d4ef74",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/development.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/guest-compile.json": {
+      "sha256": "3d7ea1828376dc1b046bdbdf4be08a61422256ffc9dc4d4291f802feb4aacd20",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/guest-compile.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/import.json": {
+      "sha256": "dc8fbf6622d331700ff54bbc8a71e9caaaf2a02280afa5dda4a2dcc69ff75d29",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/import.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/late-command-input.json": {
+      "sha256": "7948ea99e25a29f28c586c8a97fba723e6240f92c837edd9e52e5d44803c5d1a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/late-command-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/observe.json": {
+      "sha256": "131712f270491f21f81bfe65c73d1526aa63ed70a81611f087030ba2607aad88",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/observe.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/oracle.json": {
+      "sha256": "4702c7e1813e3b8daf8c80d59ec3af9144bfa55d66725dce65cd196455df08d8",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/oracle.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/package-bad-number.json": {
+      "sha256": "a360a2fb9b1a412589e488df23f0e74e519b1a44a8014799cafc29f5e8c31a23",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-bad-number.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/package-bad-owner.json": {
+      "sha256": "3574c0539ec82e047c16ee3c76a32e7646d023d874db04f4f0b1a6f9b709ac23",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-bad-owner.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/package-late-command.json": {
+      "sha256": "dc16647a894b414f599961f09a9b883898c8aae074e44a9609de04eed04f8a23",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-late-command.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/package-short-scratch.json": {
+      "sha256": "16a88b8056df5d79e1c88730738e909600cd47ff7925d251fca852cd27252a2a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package-short-scratch.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/positive-input.json": {
+      "sha256": "aaf059115e6a8c06eed070f468774c675e2c177ab2f91e2f2de723b6bca8a2af",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/positive-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/result.json": {
+      "sha256": "218c60dc336b86d7b896d4c0ede6056e7445810c663b7e9a4c134737ef69c8f9",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/result.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/run-0.json": {
+      "sha256": "7d5438f6fa1058fe3eae91cb1c0d745180b94df4c84597751e5acff15b165949",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/run-0.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/run-1.json": {
+      "sha256": "7d5438f6fa1058fe3eae91cb1c0d745180b94df4c84597751e5acff15b165949",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/run-1.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/run-2.json": {
+      "sha256": "7d5438f6fa1058fe3eae91cb1c0d745180b94df4c84597751e5acff15b165949",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/run-2.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/short-scratch-input.json": {
+      "sha256": "81f79b61ebafc63256e5bf9468847cb013796850e6157061b5cb9569fbbf9892",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/short-scratch-input.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/wabt.json": {
+      "sha256": "eb6e2576392cc1f9eb0bc5ed8522926d0838dd1718d7e1dc3eb791648f5c5682",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/wabt.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/export.json": {
+      "sha256": "71625592c86f281da3e59f11b0adfa526121348d093a947f06bdaf644c490d7b",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/export.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/project-build.json": {
+      "sha256": "bf87985e48ef3f6457e7f81a36e585fcb1d26d73c9af77fbb6e63d395ab34081",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/project-build.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/package-manifest.json": {
+      "sha256": "f9effad2c87783812fc53598ddb72068f80446ee53fd49e06a20ae30b71d7fec",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-002/package/player/data/package.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/source-freeze-001.json": {
+      "sha256": "59158acf61c1efb55071d0b45e4ffeff9c278264f24c4f4ee57f4766fa160ffb",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-source-freeze-001/inventory.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/source-freeze-002.json": {
+      "sha256": "3b286d6aba48e8aa021f1d9f72147d8b120fce0cb444e0ad6131254705944144",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-source-freeze-002/inventory.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/preflight-guest-compile.json": {
+      "sha256": "ed691e126cc513808dd2eaa25f8541e3650c15b41413ba885383ccf191ac8b31",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/guest-compile.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/preflight-schema-check.json": {
+      "sha256": "b246b1155242a1ed006fd347ece95ef39def59b9d4f8382efd31928af9b01f18",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/schema-check.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/preflight-oracle-binary.json": {
+      "sha256": "178eecaa0a6b66ed8856ff9120319738ccf7d1779f89917f086ccf694168421a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/oracle-binary.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/preflight-private-preflight-cleanup.json": {
+      "sha256": "67a1864ec10a72593efff66aa8c621cea4d7cc1b05fe56f217929207729a5e7a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-preflight/private-preflight-cleanup.json"
+    },
+    "docs/spikes/evidence/native-wasm-physics-package/preliminary-result.json": {
+      "sha256": "7b2a009e2adf23c8f042a1025407d8bb0ccb207d5de77fe5d38c1cbccfa842c3",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/physics-package-001/result.json"
+    }
+  },
+  "review": "Independent final source and package002 evidence review accepted f410be95 with no findings; current-main integration remains pending. Preliminary ledger/refusal weaknesses were corrected only after run001 terminated.",
+  "limitations": [
+    "local desktop CPU package proof, no GPU or pixel acceptance",
+    "no phone/performance/phase gate",
+    "whole guest and physics checkpoints remain unsupported",
+    "repository engine and SDK source intentionally retained; only private project inputs/build/maps removed",
+    "Package refusal evidence is exact terminal diagnostics/no-output publication; prior actual-host suite separately proves in-memory callback transaction rollback.",
+    "Desktop unsigned host-target export; no current-main or release/device gate inferred."
+  ],
+  "independent_final_review": {
+    "path": "docs/spikes/evidence/native-wasm-physics-package/independent-final-review.json",
+    "sha256": "4a754c0b5fa843504e1ca98eba84c13abef1ce6f89fc08b82ed18830adad321f",
+    "reviewed_evidence_sha256": "f85e39f463eb758081e26042b51b5f5282b63f630d93aa438b27ec0e6610b5e5"
+  }
+}

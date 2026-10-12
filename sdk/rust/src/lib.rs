@@ -11,6 +11,7 @@ pub mod flipbook;
 pub mod input;
 pub mod localization;
 pub mod navigation;
+pub mod physics;
 mod raw;
 pub mod steering;
 mod tick;

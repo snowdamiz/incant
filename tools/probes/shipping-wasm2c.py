@@ -198,6 +198,18 @@ def navigation_path_guests(rustc, inputs, sdk_guests, environment):
     return modules
 
 
+def physics_guests(rustc, inputs, sdk_guests, environment):
+    sample=inputs/'physics.rs';shutil.copy2(ROOT/'sdk/rust/samples/physics.rs',sample)
+    failure=inputs/'physics_failure.rs';shutil.copy2(ROOT/'sdk/rust/fixtures/physics_failure.rs',failure)
+    modules=[]
+    for kind in (None,'capacity','request-capacity','events-capacity','nan','rounding','character-rounding','owner','velocity','units','character-units','late','callback','trap'):
+        name='rust-physics'+('-'+kind if kind else '')
+        module=sdk_guests/(name+'.wasm')
+        rust_guest.compile(rustc,failure if kind else sample,module,env=environment,cfg=['physics_'+kind.replace('-','_')] if kind else ())
+        modules.append((name,module))
+    return modules
+
+
 def formatting_guests(rustc, inputs, sdk_guests, environment):
     """Actual no_std primitive ICU formatting and ignored-error controls."""
     sample = inputs/'formatting.rs'
@@ -297,6 +309,7 @@ def main():
             modules.extend(crossfade_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(animation_graph_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(steering_guests(rustc, inputs, sdk_guests, environment))
             environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)
@@ -322,8 +335,8 @@ def main():
                 [cargo, 'clippy', '--profile', args.profile, '-j2', '-p', 'incant-module', '-p', 'incant_wasm_abi', '-p', 'incant_wasm_runtime', '-p', 'incant_wasm_cook', '-p', 'incant_wasm_dev', '-p', 'incant_wasm_player', '-p', 'incant_game_runtime', '-p', 'incant_script', '--features', 'incant_wasm_dev/static-conformance,incant_wasm_player/fixture,incant_script/compiler', '--all-targets', '--locked', '--', '-D', 'warnings'],
                 [sys.executable, ROOT/'tools/probes/development-wasm.py', out/'development', '--rustup', args.rustup, '--static-conformance', '--profile', args.profile],
             ]
-            retained = out/'navigation-guests';retained.mkdir()
-            selected = [m for m in manifest['modules'] if m['name'].startswith(('rust-navigation-paths','navigation-paths'))]
+            retained = out/'physics-guests';retained.mkdir()
+            selected = [m for m in manifest['modules'] if m['name'].startswith(('rust-physics','physics-queries'))]
             prefixes = tuple(m['prefix']+'.' for m in selected)+tuple(m['prefix']+'-' for m in selected)
             retained_hashes = {}
             for name,digest in manifest['files'].items():
@@ -331,9 +344,9 @@ def main():
                 if name.startswith(prefixes):
                     shutil.copy2(bundle/name,retained/name);retained_hashes[name]=digest
             source_hashes = {}
-            for name in ('navigation_paths.rs','navigation_paths_failure.rs','navigation-paths.wat'):
+            for name in ('physics.rs','physics_failure.rs','physics-queries.wat'):
                 shutil.copy2(inputs/name,retained/name);source_hashes[name]=sha(retained/name)
-            record = {'kind':'native-path-query-conformance','wabt':manifest['wabt'],
+            record = {'kind':'native-physics-query-conformance','wabt':manifest['wabt'],
                       'module_count':len(manifest['modules']),'verified_prepared_files':len(manifest['files']),
                       'selected':selected,'retained_hashes':retained_hashes,'guest_source_hashes':source_hashes,
                       'rust_sdk_sha256':sha(out/'rust-sdk.json'),'commands':[],'passed':False,

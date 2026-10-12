@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "target": "aarch64-apple-darwin",
+  "player_sha256": "868d3f63a6cefd42c70f25c292d4ee865a49d5685ea5716cc4d0bede45fd27b4",
+  "program": {
+    "fingerprint": "ffd3ea2d5d1b7e7f0f7407a2fa95476166106c75d6c1ad1353baf52c89527522",
+    "input_sha256": "578632e8c2e1b7e58b555d9a51acc7ee2e50d258867b8fce927f11393d6f6295",
+    "kind": "wasm",
+    "module": "01M4R9P71BDENTN6GP5M6MY0QC",
+    "prepared_sha256": "0fa6d9eb230721cfc8e2046d5011fe779bce7fb16cb19bc6c6cfa7a32758426a",
+    "registry_sha256": "5176cdc3d29c1b8184e1a69f8bd4fdf44caaa8d7d282378596351410fbf25eaf",
+    "translator": "wasm2c-1.0.42"
+  },
+  "ticks_each": 20,
+  "fresh_ordinary_package_runs": 3,
+  "native_oracle_checks": 60,
+  "successful_same_input_replay_routes": true,
+  "command_receipts_sha256": "5d561eb40db7764ce643881d1f48204a6fcccd2d4c17e4de562e4fc84e487d09",
+  "package_refusal_boundary": "exact runtime diagnostic and no PCM/stdout publication; not a session-step rollback claim",
+  "native_event_enter_exit_counts": [
+    1,
+    1,
+    3,
+    1
+  ],
+  "public_import_atomic_select_undo_redo_journal_reopen": true,
+  "source_deleted_before_development_and_export": true,
+  "authoring_cache_build_maps_deleted_before_three_runs": true,
+  "no_static_module_fixture_flag": true,
+  "refusals": [
+    "dev-bad-owner",
+    "dev-short-scratch",
+    "dev-bad-number",
+    "dev-late-command",
+    "dev-cache-mismatch",
+    "package-bad-owner",
+    "package-short-scratch",
+    "package-bad-number",
+    "package-late-command",
+    "checkpoint"
+  ],
+  "removed_private_files": {
+    "authoring/behavior.wasm": "578632e8c2e1b7e58b555d9a51acc7ee2e50d258867b8fce927f11393d6f6295",
+    "guest-build/behavior.rs": "bf8374956da896902960634bf80be86b9d6835ff2ca5a6ea07bed669131b0814",
+    "guest-build/behavior.wasm": "578632e8c2e1b7e58b555d9a51acc7ee2e50d258867b8fce927f11393d6f6295",
+    "guest-build/rust-sdk-libraries/incant_module.sha256": "863613bbde9e82aca151cd9de5171d5d57b91c047daf0c6940189053b1fe3618",
+    "guest-build/rust-sdk-libraries/incant_wasm_abi.sha256": "3c920700e45e17c810d9b69a631b8ce449946519523433f559dd00d514835441",
+    "guest-build/rust-sdk-libraries/libincant_module.rlib": "5362d36c421d401aa89f70d036532a07533b44713ecac13bba7dc5c618f0b9a9",
+    "guest-build/rust-sdk-libraries/libincant_wasm_abi.rlib": "217803613653dbb4da374359f9fa8072afc9ef2922c8fbde1d297ec9ce5432e7",
+    "authoring/.incant/cache/wasm/ffd3ea2d5d1b7e7f0f7407a2fa95476166106c75d6c1ad1353baf52c89527522.wasm.json": "d0594498eff1ba16cae78dbe6692d0d307b1c543ac2187474079cfef9b704a9e",
+    "authoring/.incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "authoring/project.journal.jsonl": "526350dcbbba4c0df587920785b42eb7c2c0829d9dbecfe6ec16c37747719627",
+    "authoring/project.json": "e2fa59f38d2d0fc5ee55b834fc1c22ec3f1f3f11289ad17f3da07ad4d335466b",
+    "trusted-tools/wabt/bin/wasm2c": "4f1ba571063deca36e330ad67cf0414dbbaee944c7d920df7a338a30725570f2",
+    "trusted-tools/wabt/bin/wat2wasm": "69117d2b10c1818cf6da921f96ab4e3c50e45a05a848d6c4c1788375aec4d250",
+    "trusted-tools/wabt.tar.gz": "3f654779b436c628db3ca4323c51538815f5fbc887a6d5f3bb1c18d36281e240"
+  },
+  "retained_package_hashes": {
+    "package/build.log": "fed369b02e1f4a6b3ce1b7b507e9018c72ea853205156fd44e2f538d963ce241",
+    "package/export.json": "71625592c86f281da3e59f11b0adfa526121348d093a947f06bdaf644c490d7b",
+    "package/player/data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "package/player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "package/player/data/input-actions.json": "6f900cc261940d23e72c440d5e847b3ba7f3ff4570dfcb1aec4852ff4ebe874f",
+    "package/player/data/package.json": "f9effad2c87783812fc53598ddb72068f80446ee53fd49e06a20ae30b71d7fec",
+    "package/player/data/world.scene": "90e10da52c67f467aecbb30188c36e781d46be9415f75d646472f3e672328342",
+    "package/player/incant_game_player": "868d3f63a6cefd42c70f25c292d4ee865a49d5685ea5716cc4d0bede45fd27b4",
+    "package/project-build.json": "bf87985e48ef3f6457e7f81a36e585fcb1d26d73c9af77fbb6e63d395ab34081",
+    "package/symbols/incant_game_player.dSYM/Contents/Info.plist": "11f95ebceb377dfb7de464eeadbd2c1c2e2e54923ffc72f0e9665f0f37368e5b",
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-33593bbc821b87b3": "7b0bd389124e12384530bba76410f54828ad2fdfc43a58258afee5d5100eda83",
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-33593bbc821b87b3.yml": "7979e618cbececcac30b3c0ee72991697ee5a7e84c926481cb5fd69c097d630d",
+    "package/symbols/script-symbols.json": "ae1d22160011a85bbe61a7d01730c07e8b598a87121f1f67266ec8055fb04f6c"
+  },
+  "oracle_binary_sha256": "cd7485618908554d873ad0b6dec21912dc7dacd7f73c75d1eec075dc688c1059",
+  "headless_binary_sha256": "9d64c0287a1ccac9ef5d6524e91653770fe6e8096c677baaf5dbf0bda85924fe",
+  "proof_source_hashes": {
+    "tools/probes/native-wasm-physics-export.py": "bfb5d3baa6ffaf02f807c8c432689244307c1ebe86e0656b9b9b0c6b441ade36",
+    "tools/probes/native-wasm-physics-export/behavior.rs": "bf8374956da896902960634bf80be86b9d6835ff2ca5a6ea07bed669131b0814",
+    "crates/incant_runtime/examples/physics_package_oracle.rs": "92a106f5a20572d8f749c7d1e6a2716cbfc692374c0c80171ed2212f885715f0"
+  },
+  "limits": [
+    "local desktop CPU package proof, no GPU or pixel acceptance",
+    "no phone/performance/phase gate",
+    "whole guest and physics checkpoints remain unsupported",
+    "repository engine and SDK source intentionally retained; only private project inputs/build/maps removed"
+  ]
+}
