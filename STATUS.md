@@ -27,7 +27,7 @@ source and final execution reviews are accepted; publisher integration is pendin
 Native-window/device/appearance acceptance, Wasm/headless restart ownership and
 physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
 
-## Authored iOS project archives — current main177 simulator proof passed
+## Authored iOS project archives — merged in main178
 
 The separate trusted-source iOS exporter cooks public-authored TypeScript imports,
 props and scene bindings into fresh shipping archives plus captured data. The
@@ -37,29 +37,30 @@ physics dependency audits. Six C/Swift simulator processes reproduce 432
 observations, 216 log records and exact nonzero PCM after private source, cache,
 build and maps are removed; fourteen precise refusal controls pass. Device
 archives and unsigned caller links pass, without device execution. Independent
-producer and integration-source reviews are accepted; final integrated evidence
-review and publication are pending. Fast iOS projects, desktop cross-target
+producer, integration-source and final execution reviews are accepted; the
+exact-head fast check passed and PR178 is merged. Fast iOS projects, desktop cross-target
 export, Android and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
-## Native worker owner — local execution and review passed
+## Native worker owner — current main178 CPU integration passed
 
 The trusted developer owner builds the selected kernel, verifies worker identity,
 and enforces request deadlines and complete process-tree cleanup. Actual sessions
 preserve their original kernel while public authoring changes the next mode;
-state matches ordinary native Play after private source removal. Full tools and
-focused lifecycle checks and independent review pass; integration is pending. Editor GPU
-embedding and Windows execution remain separate.
+state matches ordinary native Play after private source removal. Both compiled modes pass all-target tests and Clippy; actual owned-process proofs
+and full tools checks pass on main178. Final integration review/publication is
+pending. Editor GPU embedding and Windows execution remain separate.
 [Contract and evidence](docs/spikes/native-worker-owner.md).
 
-## Retained native CPU worker — local checks and review passed
+## Retained native CPU worker — current main178 checks passed
 
 A native worker drops authoring state after startup and retains only its disposable
-runtime composition. Both matching physics binaries pass 21 headless tests,
+runtime composition. Both matching physics binaries pass 65 all-target headless tests each,
 Clippy and real source-deleted process checks, including duplicate-step fencing,
-strict protocol refusals and disconnect cleanup. Independent review is accepted;
-integration is pending. Automatic editor process selection and GPU viewport
+strict protocol refusals and disconnect cleanup. The three mode-aware test fixtures
+use public commands and preserve explicit foreign-mode refusal. Final review and
+publication are pending; [integrated evidence](docs/spikes/native-worker-main178.md). Automatic editor process selection and GPU viewport
 embedding remain open. [Contract and evidence](docs/spikes/native-play-worker.md).
 
 ## Physics process selection — local execution passed
@@ -860,7 +861,7 @@ macOS C/Swift callers and trusted-source iOS bytecode compatibility are merged.
 Reviewed physics kernel forwarding, cooked/save identity, project selection and
 mode-aware developer/desktop export tools are merged; automatic editor worker
 selection and actual physics saves remain separate. The authored iOS current-main
-simulator proof has passed and is awaiting final review/publication; Android and
+simulator proof and final review have passed and await publication; Android and
 retained CPU worker work are local parallel lanes. Phase 1 and the finished game
 remain incomplete.
 

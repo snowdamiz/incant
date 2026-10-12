@@ -958,5 +958,10 @@
     "Archive retains developer symbols separately; runtime/caller symbols are audited and private authoring/cache/build/maps removed before execution.",
     "No editor process-worker integration or complete mobile runtime host claim."
   ],
-  "review_state": "Independent current-main final review pending; original producer and scoped integration source accepted."
+  "review_state": "Final independent current-main source/execution review accepted; exact-head fast check and merge pending.",
+  "reviewed_manifest_sha256": "b49aa30cd12f21d8055a286485e90c588225fd27f9cbb8c47b03ad9733574e55",
+  "final_review": {
+    "path": "docs/spikes/evidence/authored-ios-main177/final-review.json",
+    "sha256": "d9a58780ca7bfe99e1c4abe553e743dc3220bb1e603e3b9830b9cb1340dc7ee6"
+  }
 }
