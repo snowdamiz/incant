@@ -1,0 +1,17 @@
+{
+  "packet": "0056-native-game-ui-draw",
+  "released_at": "2026-10-12T05:33:55.324386+00:00",
+  "lease_marker": "/tmp/incant0056/lease.json",
+  "released_marker": "/tmp/incant0056/released",
+  "owned_processes_running_at_release": [],
+  "native_windows_launched": 0,
+  "gpu_work": "offscreen headless renderer only (tests, ui_review example); no surface, window or screen capture",
+  "cargo_target_dir": "/tmp/incant-agent-native-target",
+  "target_dir_disposition": "kept as warm cache; nothing deleted",
+  "scratch": "/tmp/incant0056 (fixtures, packages, review frames; kept, not committed except curated copies)",
+  "worktree_node_modules_symlink": "removed",
+  "other_lanes_observed": [
+    "CPU-only exports/tests of other lanes in their own target dirs at start (native-ui-export.py, native-animation-graph-export.py, incant-project-build shipping builds)",
+    "git merge + cargo test -p incant_agent (ci) in /Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant; left alone"
+  ]
+}
