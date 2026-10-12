@@ -16,12 +16,13 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Native game UI reserved-frame connection — locally verified
+## Native game UI reserved-frame connection — current-main verified
 
 Managed native input and Claude's accepted screen-space consumer compose in the
 native player. Reserved-frame sizing now fences old pointer coordinates before
 relayout and preserves text ownership; unchanged frames reuse UI resources.
-Affected CPU tests, Clippy, dependency checks and independent source review pass.
+All 138 affected CPU tests, Clippy, dependency checks and independent source
+review pass again with both production files unchanged on actual main139.
 Actual native-window/IME and pixel review are assigned to fresh Claude0057, so no
 native appearance or complete Game UI claim is made. See
 [the sizing contract](docs/spikes/native-window-ui-reserved.md).
@@ -97,8 +98,8 @@ refusal preserves accepted owner/resources; unchanged frames reuse their UI
 resources. Claude0056 supplied and reviewed the visuals on its frozen offscreen
 Metal build. Current-main CPU/compile checks preserve all renderer/shader source.
 The capability also admits the existing desktop UI startup route; reserved-frame
-correction and actual window/IME acceptance remain separately queued with
-Claude0057. No current-main GPU, phone or complete Game UI gate is claimed.
+correction now has current-main CPU verification; actual window/IME acceptance
+remains with Claude0057. PR #139 passed the fast gate and merged. No current-main GPU, phone or complete Game UI gate is claimed.
 [Contract and evidence](docs/spikes/native-ui-draw.md).
 
 ## Native game UI window delivery — CPU adapter
@@ -212,8 +213,8 @@ Claude0056's reviewed offscreen drawing implementation now has current-main
 CPU/compile validation: 206 cases, Clippy, downstream and wasm32 checks pass;
 89 GPU tests remain ignored in this integration. Its original frozen Metal
 numerical and appearance acceptance stays separately recorded. Managed IME has
-CPU/platform compilation evidence. Actual window interaction, reserved-frame
-geometry, HiDPI glyphs and complete Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
+CPU/platform compilation evidence. Reserved-frame geometry has scoped CPU verification. Actual window interaction,
+HiDPI glyphs and complete Game UI/device gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
 
 Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active
