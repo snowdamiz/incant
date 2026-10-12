@@ -43,6 +43,10 @@ pub enum AnimationMotion {
     Clip {
         clip: Option<u16>,
     },
+    Tree {
+        cycle_seconds: f64,
+        tree: crate::AnimationTree,
+    },
     /// Adjacent threshold clips share one normalized clock. Values outside the
     /// point interval clamp to its endpoints; no extrapolation or hidden child.
     Blend1d {
@@ -141,6 +145,18 @@ impl AnimationGraph {
         }
         for state in self.states.values() {
             match &state.motion {
+                AnimationMotion::Tree {
+                    cycle_seconds,
+                    tree,
+                } => {
+                    if !cycle_seconds.is_finite()
+                        || !(0.000001..=MAX_ANIMATION_GRAPH_SECONDS).contains(cycle_seconds)
+                        || tree.nodes.keys().any(|id| !ids.insert(id))
+                    {
+                        return Err("animation tree duration or duplicate ID");
+                    }
+                    tree.compile_order(&self.parameters)?;
+                }
                 AnimationMotion::Clip { clip } => {
                     if clip.is_some_and(|c| usize::from(c) >= MAX_ANIMATION_CLIPS) {
                         return Err("animation graph clip index");
@@ -217,7 +233,7 @@ impl AnimationGraph {
 fn value(n: f64) -> bool {
     n.is_finite() && n.abs() <= MAX_ANIMATION_GRAPH_VALUE
 }
-fn canonical_id(id: &str) -> bool {
+pub(crate) fn canonical_id(id: &str) -> bool {
     const ALPHABET: &[u8] = b"0123456789ABCDEFGHJKMNPQRSTVWXYZ";
     id.len() == 26 && id.as_bytes()[0] <= b'7' && id.bytes().all(|b| ALPHABET.contains(&b))
 }

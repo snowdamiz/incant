@@ -16,6 +16,7 @@ pub(crate) fn encoded_size(graph: &NativeAnimationGraph) -> usize {
             .map(|state| {
                 18 + match &state.motion {
                     NativeAnimationMotion::Clip(_) => 2,
+                    NativeAnimationMotion::Tree { tree, .. } => 8 + super::tree::binary::size(tree),
                     NativeAnimationMotion::Blend1d { points, .. } => 10 + points.len() * 10,
                 }
             })
@@ -49,6 +50,14 @@ pub(crate) fn write(bytes: &mut Vec<u8>, nodes: &[CookedSpatial]) {
             bytes.extend(state.id.0);
             bytes.push(u8::from(state.looping));
             match &state.motion {
+                NativeAnimationMotion::Tree {
+                    cycle_seconds,
+                    tree,
+                } => {
+                    bytes.push(2);
+                    bytes.extend(cycle_seconds.to_le_bytes());
+                    super::tree::binary::write(bytes, tree);
+                }
                 NativeAnimationMotion::Clip(clip) => {
                     bytes.push(0);
                     bytes.extend(clip.unwrap_or(u16::MAX).to_le_bytes());
@@ -90,7 +99,11 @@ pub(crate) fn write(bytes: &mut Vec<u8>, nodes: &[CookedSpatial]) {
         }
     }
 }
-pub(crate) fn read(reader: &mut Reader<'_>, nodes: &mut [CookedSpatial]) -> Result<(), SceneError> {
+pub(crate) fn read(
+    reader: &mut Reader<'_>,
+    nodes: &mut [CookedSpatial],
+    version: u32,
+) -> Result<(), SceneError> {
     let count = reader.u32()? as usize;
     if count == 0
         || count > MAX_ANIMATION_GRAPH_INSTANCES
@@ -113,13 +126,17 @@ pub(crate) fn read(reader: &mut Reader<'_>, nodes: &mut [CookedSpatial]) -> Resu
             .animation
             .as_mut()
             .ok_or(SceneError::Invalid("animation graph requires playback"))?;
-        let graph = read_graph(reader, &animation.clip_durations)?;
+        let graph = read_graph(reader, &animation.clip_durations, version)?;
         Arc::make_mut(animation).graph = Some(Arc::new(graph));
         animation.validate()?;
     }
     Ok(())
 }
-fn read_graph(r: &mut Reader<'_>, durations: &[f32]) -> Result<NativeAnimationGraph, SceneError> {
+fn read_graph(
+    r: &mut Reader<'_>,
+    durations: &[f32],
+    version: u32,
+) -> Result<NativeAnimationGraph, SceneError> {
     let [initial, np, ns, nt] = r.array()?;
     let (np, ns, nt) = (usize::from(np), usize::from(ns), usize::from(nt));
     if np > MAX_ANIMATION_GRAPH_PARAMETERS
@@ -149,6 +166,13 @@ fn read_graph(r: &mut Reader<'_>, durations: &[f32]) -> Result<NativeAnimationGr
             _ => return Err(SceneError::Invalid("animation graph looping")),
         };
         let motion = match r.byte()? {
+            2 if version >= 15 => {
+                let [cycle_seconds] = r.floats()?;
+                NativeAnimationMotion::Tree {
+                    cycle_seconds,
+                    tree: Arc::new(super::tree::binary::read(r, &parameters, durations)?),
+                }
+            }
             0 => {
                 let clip = u16::from_le_bytes(r.array()?);
                 NativeAnimationMotion::Clip((clip != u16::MAX).then_some(clip))

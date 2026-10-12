@@ -16,6 +16,20 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored nested animation trees — connected implementation under verification
+
+Stable-ID nested 1D and rectangular 2D motions now cook into a bounded v15 node
+table and run on the native graph clock. Complete weighted samples travel through
+native/render snapshots and owned TypeScript columns; legacy Wasm pose snapshots
+explicitly refuse these unrepresentable states. Existing clip/flat-pair encodings
+and SLERP sampling remain unchanged. Focused CPU checks pass 94 cases, including
+command rollback/Undo, source-deleted cooking, eight-leaf clock/parameter behavior,
+completed/rest/paused save continuation, render-adapter rollback and actual
+QuickJS observations. Broader checks and rendered acceptance remain pending.
+Nonzero transitions involving blend states, layering, IK, root motion, the full
+Wasm weighted SDK and public shipped tree-game proof remain in progress; this is
+not animation or Phase 1 completion.
+
 ## Nested animation tree numeric core — locally verified
 
 The native evaluator now supports bounded nested 1D and rectangular bilinear 2D

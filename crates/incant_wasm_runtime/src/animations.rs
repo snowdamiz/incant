@@ -27,7 +27,7 @@ pub(crate) fn encode(
     // which do not request these imports can still use the scene normally.
     if rows
         .iter()
-        .any(|row| row.blend.is_some() && row.state.transition.is_none())
+        .any(|row| row.pose.is_some() || (row.blend.is_some() && row.state.transition.is_none()))
     {
         return Ok(());
     }
@@ -136,6 +136,10 @@ pub(crate) fn command(
 /// allocate a third complete animation byte buffer.
 pub(crate) fn encode_v3(rows: &[AnimationSnapshot], bytes: &mut Vec<u8>) {
     bytes.clear();
+    // The v3 two-pose frame cannot represent a weighted tree.
+    if rows.iter().any(|row| row.pose.is_some()) {
+        return;
+    }
     bytes.extend(
         abi::AnimationHeader {
             magic: *abi::ANIMATION_V3_MAGIC,

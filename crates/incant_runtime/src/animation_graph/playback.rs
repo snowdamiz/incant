@@ -36,6 +36,7 @@ pub struct AnimationGraphSnapshot {
     pub parameter_count: u8,
     pub parameter_ids: [StableId; MAX_ANIMATION_GRAPH_PARAMETERS],
     pub blend: Option<AnimationBlendSample>,
+    pub pose: Option<incant_types::AnimationPoseSamples>,
 }
 impl NativeAnimationGraph {
     pub(crate) fn initial_state(&self, playing: bool) -> AnimationGraphState {
@@ -51,12 +52,35 @@ impl NativeAnimationGraph {
             parameters,
         }
     }
+    pub(crate) fn pose(
+        &self,
+        graph: &AnimationGraphState,
+    ) -> Option<incant_types::AnimationPoseSamples> {
+        let NativeAnimationMotion::Tree {
+            cycle_seconds,
+            tree,
+        } = &self.states[usize::from(graph.current)].motion
+        else {
+            return None;
+        };
+        Some(
+            tree.sample(
+                &graph.parameters[..self.parameters.len()],
+                graph.seconds / cycle_seconds,
+            )
+            .expect("validated graph tree state"),
+        )
+    }
     pub(crate) fn sample(
         &self,
         graph: &AnimationGraphState,
         definition: &NativeAnimation,
     ) -> (AnimationSample, Option<AnimationBlendSample>) {
         match &self.states[usize::from(graph.current)].motion {
+            NativeAnimationMotion::Tree { .. } => (
+                self.pose(graph).expect("tree motion").samples()[0].sample,
+                None,
+            ),
             NativeAnimationMotion::Clip(clip) => (
                 AnimationSample {
                     clip: *clip,
@@ -168,7 +192,8 @@ impl NativeAnimationGraph {
                 crate::animation::advance_state(playback, definition, dt);
                 graph.seconds = playback.sample.seconds;
             }
-            NativeAnimationMotion::Blend1d { cycle_seconds, .. } => {
+            NativeAnimationMotion::Blend1d { cycle_seconds, .. }
+            | NativeAnimationMotion::Tree { cycle_seconds, .. } => {
                 // Identical wrapping/completion rules to the ordinary clip clock;
                 // a normalized blend cycle has its own declared duration.
                 let ended = playback.playing
@@ -227,7 +252,8 @@ impl NativeAnimationGraph {
             NativeAnimationMotion::Clip(clip) => clip.map_or(0.0, |c| {
                 f64::from(definition.clip_durations[usize::from(c)])
             }),
-            NativeAnimationMotion::Blend1d { cycle_seconds, .. } => cycle_seconds,
+            NativeAnimationMotion::Blend1d { cycle_seconds, .. }
+            | NativeAnimationMotion::Tree { cycle_seconds, .. } => cycle_seconds,
         };
         if !graph.seconds.is_finite()
             || graph.seconds < 0.0
@@ -244,6 +270,11 @@ impl NativeAnimationGraph {
             || graph.parameters[self.parameters.len()..]
                 .iter()
                 .any(|n| n.to_bits() != 0)
+            || (playback.completed && matches!(state.motion, NativeAnimationMotion::Clip(None)))
+            || (playback.completed
+                && (playback.playing
+                    || playback.looping
+                    || (graph.seconds != 0.0 && graph.seconds != duration)))
             || (playback.transition.is_some()
                 && !matches!(state.motion, NativeAnimationMotion::Clip(_)))
         {
@@ -288,6 +319,7 @@ impl crate::animation::Playback {
             parameter_count: definition.parameters.len() as u8,
             parameter_ids,
             blend: self.blend_sample(),
+            pose: self.pose_sample(),
         })
     }
 }

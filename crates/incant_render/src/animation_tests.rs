@@ -19,6 +19,7 @@ fn node(source: Arc<RuntimeAsset>, id: &str, seconds: f64) -> SceneNode {
             source,
             cast_shadows: true,
             animation_blend: None,
+            animation_pose: None,
             animation: Some(incant_types::AnimationSample {
                 clip: Some(0),
                 seconds,
@@ -561,3 +562,56 @@ fn single_sided_reflected_skin_and_shadow_match_static_transform_oracle() {
 
 #[path = "animation_crossfade_tests.rs"]
 mod crossfade;
+
+#[test]
+fn weighted_tree_consumer_uses_full_local_pose_and_refuses_inconsistent_bindings() {
+    use incant_types::{AnimationPoseSamples, AnimationSample, WeightedAnimationSample};
+    let dir = tempfile::tempdir().unwrap();
+    let source = source(dir.path());
+    let entries = [
+        WeightedAnimationSample {
+            sample: AnimationSample {
+                clip: Some(0),
+                seconds: 1.0,
+            },
+            weight: 0.25,
+        },
+        WeightedAnimationSample {
+            sample: AnimationSample::REST,
+            weight: 0.75,
+        },
+    ];
+    let pose = AnimationPoseSamples::new(&entries).unwrap();
+    let mut input = SceneInput {
+        text: None,
+        nodes: vec![node(source.clone(), "weighted", 1.0)],
+        environment: None,
+    };
+    input.nodes[0].mesh.as_mut().unwrap().animation_pose = Some(pose);
+    let resolved = crate::scene::resolve(&input).unwrap();
+    let player = &resolved.animations[0].player;
+    // Clip zero translates joint1 by +1 X at t=1. Rest contributes 75%.
+    let v = model(&source).meshes[0].vertices[0];
+    let actual = player.skin_position(3, 0, 0, [v[0], v[1], v[2]]).unwrap();
+    assert!((actual[0] - 11.25).abs() < 1e-6);
+    let mesh = input.nodes[0].mesh.as_mut().unwrap();
+    let mut reusable = AnimationPlayer::new(model(&source)).unwrap();
+    sample(&mut reusable, mesh).unwrap();
+    let allocations = crate::retained_alloc::measured(|| {
+        for _ in 0..64 {
+            sample(&mut reusable, mesh).unwrap();
+        }
+    });
+    assert_eq!(allocations, 0);
+    let before = reusable.globals().to_vec();
+    mesh.animation = Some(AnimationSample::REST);
+    assert!(sample(&mut reusable, mesh).is_err());
+    assert_eq!(reusable.globals(), before);
+    mesh.animation = Some(entries[0].sample);
+    mesh.animation_blend = Some(incant_types::AnimationBlendSample {
+        sample: AnimationSample::REST,
+        weight: 0.5,
+    });
+    assert!(sample(&mut reusable, mesh).is_err());
+    assert_eq!(reusable.globals(), before);
+}

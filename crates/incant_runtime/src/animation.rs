@@ -39,7 +39,8 @@ impl NativeAnimation {
             let entry = &graph.states()[usize::from(graph.initial())];
             let clip = match entry.motion {
                 crate::NativeAnimationMotion::Clip(clip) => clip,
-                crate::NativeAnimationMotion::Blend1d { .. } => None,
+                crate::NativeAnimationMotion::Blend1d { .. }
+                | crate::NativeAnimationMotion::Tree { .. } => None,
             };
             if self.initial.clip != clip
                 || self.initial.seconds != 0.0
@@ -87,7 +88,7 @@ impl NativeAnimation {
                 return Err(SceneError::Invalid("animation transition state"));
             }
         }
-        if state.completed {
+        if state.completed && self.graph.is_none() {
             let clip = state
                 .sample
                 .clip
@@ -254,6 +255,8 @@ pub struct AnimationSnapshot {
     pub state: AnimationState,
     /// Actual second pose, including a graph blend without a timed transition.
     pub blend: Option<AnimationBlendSample>,
+    /// Complete weighted local pose for a nested tree; scalar sample is representative only.
+    pub pose: Option<incant_types::AnimationPoseSamples>,
 }
 #[derive(Component)]
 pub(crate) struct Playback {
@@ -262,6 +265,9 @@ pub(crate) struct Playback {
     pub graph: Option<crate::AnimationGraphState>,
 }
 impl Playback {
+    pub(crate) fn pose_sample(&self) -> Option<incant_types::AnimationPoseSamples> {
+        self.definition.graph.as_ref()?.pose(self.graph.as_ref()?)
+    }
     pub(crate) fn blend_sample(&self) -> Option<AnimationBlendSample> {
         if let (Some(definition), Some(graph)) = (&self.definition.graph, &self.graph) {
             definition
@@ -306,6 +312,7 @@ impl NativeWorld {
                 id: id.0,
                 state: playback.state,
                 blend: playback.blend_sample(),
+                pose: playback.pose_sample(),
             });
         }
         Ok(())
