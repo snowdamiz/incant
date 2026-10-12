@@ -12,7 +12,12 @@
     "tools/export_native.py": "a22f6431bb6db373982970e53a219f1f57633c538e08055bcafacefa887699a1"
   },
   "sdk_implementation": "2153a633",
-  "final_review": "pending independent review",
+  "final_review": {
+    "decision": "accepted",
+    "path": "docs/spikes/evidence/native-root-motion-package-final-review.json",
+    "sha256": "b0e334405aca6001806f906967cbffa237018154b6d7365965b0b835c0eae992",
+    "reviewed_commit": "f17e27ab9f80d2a2fe6921fa901ede319491653a"
+  },
   "result": {
     "passed": true,
     "target": "aarch64-apple-darwin",

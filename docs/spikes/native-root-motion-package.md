@@ -56,7 +56,9 @@ stream receipts. The durable packet retains 147 exact UTF-8 logs/receipts in a
 lossless gzip JSON archive. Failed preliminary runs remain: the initial positive
 CUBICSPLINE fixture, an over-budget guest import set, and insufficient reverse
 wrap coverage each failed before the final successful run. No engine limit was
-relaxed. Independent final package review is pending.
+relaxed. Independent final package source and evidence review is accepted
+without findings; the [retained receipt](evidence/native-root-motion-package-final-review.json)
+records direct verification of the surviving sources, package and observations.
 
 Reproduce with a Wasmtime-enabled `incant_headless` and the cooked oracle example:
 
