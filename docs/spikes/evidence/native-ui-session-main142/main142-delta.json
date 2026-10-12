@@ -1,0 +1,18 @@
+{
+  "changed": {
+    "tools/platforms/render-check.py": {
+      "before": "f069c18e5d73175f259d88e9ee1e07bd1bdb4c4712ba4d9ead6094e5e3526b3d",
+      "after": "331610e8c1ed7e047e4069e681f337c188729a37f21b6f5fc91af273bfb3a8be"
+    },
+    "tools/probes/native-game.py": {
+      "before": "ad7d6e25acdbf9671c272a4226a601d6eb63a8f3dd6a93cce75358d4e9f67bda",
+      "after": "60054a02738652c5956a4c38db985579352f68438a3dd34fae141bf31303655a"
+    }
+  },
+  "added": [
+    "crates/incant_game_player/tests/arguments.rs",
+    "tools/tests/test_render_geometry.py"
+  ],
+  "compiled_and_export_production_unchanged": true,
+  "note": "Post-proof main142 adds strict probe expectation repairs and CLI/Python tests; the exact UI export/compiler/runtime closure is unchanged."
+}

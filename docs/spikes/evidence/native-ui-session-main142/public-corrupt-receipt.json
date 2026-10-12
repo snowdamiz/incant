@@ -1,0 +1,6 @@
+{
+  "name": "corrupt",
+  "returncode": 1,
+  "stdout": "",
+  "stderr": "Error: Checkpoint(Integrity)\n"
+}

@@ -1,0 +1,226 @@
+[
+  {
+    "name": "tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_ui",
+      "--features",
+      "incant_ui/native",
+      "-p",
+      "incant_script",
+      "--features",
+      "incant_script/ui",
+      "-p",
+      "incant_game_runtime",
+      "--features",
+      "incant_game_runtime/ui",
+      "-p",
+      "incant_render_game"
+    ],
+    "exit": 0,
+    "seconds": 170.681427708,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/tests.log",
+    "sha256": "27ea155d056c58d6fb25b103bbe138b713659d03c5de601a7c7147c093edfe13"
+  },
+  {
+    "name": "player",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "render-input"
+    ],
+    "exit": 0,
+    "seconds": 105.79563799999983,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/player.log",
+    "sha256": "62ffcad0c57c5160f7bb07fcba90d551d919514a8162b0f89c78f58fc5f4cbc2"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_ui",
+      "--features",
+      "incant_ui/native",
+      "-p",
+      "incant_script",
+      "--features",
+      "incant_script/ui",
+      "-p",
+      "incant_game_runtime",
+      "--features",
+      "incant_game_runtime/ui",
+      "-p",
+      "incant_render_game",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 34.01567929199996,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/clippy.log",
+    "sha256": "76ece01ccba4a38c0c531d6a6fd26de92b1ba6292b3713893e6fe7b406415e0e"
+  },
+  {
+    "name": "no-ui",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "--no-default-features"
+    ],
+    "exit": 0,
+    "seconds": 9.666294625000091,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/no-ui.log",
+    "sha256": "0af72febffcd6bafc2711577c0af72b35e762522000fd102a72a438ab1ee03a1"
+  },
+  {
+    "name": "modules",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script",
+      "--no-default-features",
+      "--features",
+      "ui,static-module,wasmtime-host"
+    ],
+    "exit": 0,
+    "seconds": 31.156416499999978,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/modules.log",
+    "sha256": "84f3675d200f81cf4f679e2036361b07a7442c2c351af9a217128e70f0c9ca34"
+  },
+  {
+    "name": "wasm",
+    "command": [
+      "./tools/cargo",
+      "check",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_ui",
+      "--features",
+      "native",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "seconds": 23.69988520899983,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/wasm.log",
+    "sha256": "b53a0becb62584faf45770816d5d149e0b667b0bb4e21e128918ff4c5a7139b9"
+  },
+  {
+    "name": "headless",
+    "command": [
+      "./tools/cargo",
+      "build",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_headless"
+    ],
+    "exit": 0,
+    "seconds": 270.880518167,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/headless.log",
+    "sha256": "bd702fb9babd3d74f25347f8831a58841215418202e2ee425b83f78492bb495e"
+  },
+  {
+    "name": "graph",
+    "command": [
+      "python3",
+      "tools/check_runtime_dependencies.py",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/render-input"
+    ],
+    "exit": 0,
+    "seconds": 1.1718611669998609,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/graph.log",
+    "sha256": "068856060220f5725ba0238eec957ef23ee7bf2d4459075db0a9b4421065b241"
+  },
+  {
+    "name": "fmt",
+    "command": [
+      "./tools/cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 1.4437482499997714,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/fmt.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "conventions",
+    "command": [
+      "python3",
+      "tools/generate_conventions.py",
+      "--check"
+    ],
+    "exit": 0,
+    "seconds": 0.03628245899972171,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/conventions.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "export",
+    "command": [
+      "python3",
+      "tools/probes/native-ui-checkpoint-export.py",
+      "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/public-export",
+      "--binary",
+      "/Users/andreyyurlov/.codex/incant-integration-target/ci/incant_headless"
+    ],
+    "exit": 0,
+    "seconds": 329.26055799999995,
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ui-session-main141-002/export.log",
+    "sha256": "7b048492ccb7255273d003b3af93aa18ef57390e8929c4b84a30108712574835"
+  }
+]

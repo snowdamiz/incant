@@ -1,0 +1,47 @@
+[
+  {
+    "name": "main142-arguments",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "render-input",
+      "--test",
+      "arguments"
+    ],
+    "exit": 0,
+    "seconds": 0.818954500000018,
+    "sha256": "be87e23588649f9ff6a3ef0087daba77bca2eb377aac24ac8026a8db0e0ab82c"
+  },
+  {
+    "name": "main142-arguments-clippy",
+    "command": [
+      "./tools/cargo",
+      "clippy",
+      "--locked",
+      "--offline",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "render-input",
+      "--test",
+      "arguments",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "seconds": 22.87834283400025,
+    "sha256": "499ddf6c180974357582ca8e6882381215742d82d3e1d975420d5b0edcdbb987"
+  }
+]
