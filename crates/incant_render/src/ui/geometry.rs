@@ -11,9 +11,9 @@ use std::ops::Range;
 pub const MAX_UI_WIDGETS: usize = 1024;
 pub const MAX_UI_GLYPHS: usize = 65_536;
 const MAX_FIELD_BYTES: usize = incant_text::MAX_TEXT_BYTES;
-/// Every glyph, at most one selection and one composition span per byte of
-/// one focused field, and six surface/caret/ring quads per widget.
-pub const MAX_UI_QUADS: usize = MAX_UI_GLYPHS + 2 * MAX_FIELD_BYTES + 6 * MAX_UI_WIDGETS;
+/// Every glyph plus a label shadow, at most one selection and one composition
+/// span per byte of one focused field, and six surface/caret/ring quads per widget.
+pub const MAX_UI_QUADS: usize = 2 * MAX_UI_GLYPHS + 2 * MAX_FIELD_BYTES + 6 * MAX_UI_WIDGETS;
 const MAX_EXTENT: f32 = 65_536.;
 /// Logical coordinates may extend past the viewport (overflow, nested offsets)
 /// but must stay far inside f32 integer precision after physical scaling.
@@ -149,9 +149,10 @@ fn translate(rect: [f32; 4], origin: [f32; 2]) -> UiRect {
     ]
 }
 
-/// Canonical per-widget layering: surface, selection, glyphs, composition
-/// underline, caret, focus ring. Decorations clip to the visible border box;
-/// glyphs clip to the effective content clip, using their actual bounds.
+/// Canonical per-widget layering: surface, selection, glyphs (a label's
+/// shadow first), composition underline, caret, focus ring. Decorations clip
+/// to the visible border box; glyphs clip to the effective content clip,
+/// using their actual bounds.
 fn build(
     atlas: &GlyphAtlas,
     widget: &UiWidget,
@@ -159,20 +160,9 @@ fn build(
     spans: &mut Vec<Span>,
 ) -> Result<(), SceneError> {
     let disabled = widget.disabled;
-    let surface = |color| {
-        if disabled {
-            theme::alpha(color, theme::DISABLED_SURFACE)
-        } else {
-            color
-        }
-    };
+    let dim = f32::from(theme::TEXT_DISABLED_ALPHA) / 255.;
     let text_color = if disabled {
-        [
-            theme::TEXT[0],
-            theme::TEXT[1],
-            theme::TEXT[2],
-            theme::TEXT_DISABLED_ALPHA,
-        ]
+        theme::alpha(theme::TEXT, dim)
     } else {
         theme::TEXT
     };
@@ -180,10 +170,12 @@ fn build(
     match widget.role {
         UiRole::Label => {}
         UiRole::Button => {
-            let fill = if widget.pressed && !disabled {
+            let fill = if disabled {
+                theme::BUTTON_DISABLED
+            } else if widget.pressed {
                 theme::BUTTON_PRESSED
             } else {
-                surface(theme::BUTTON)
+                theme::BUTTON
             };
             out.quads
                 .push(quad(KIND_FILL, widget.bounds, widget.visible, radius, fill));
@@ -194,7 +186,7 @@ fn build(
                 widget.bounds,
                 widget.visible,
                 radius,
-                surface(theme::FIELD),
+                theme::FIELD,
             ));
             if !widget.focused {
                 out.quads.push(quad(
@@ -202,7 +194,11 @@ fn build(
                     widget.bounds,
                     widget.visible,
                     [theme::RADIUS, theme::BORDER_WIDTH],
-                    surface(theme::FIELD_BORDER),
+                    if disabled {
+                        theme::FIELD_BORDER_DISABLED
+                    } else {
+                        theme::FIELD_BORDER
+                    },
                 ));
             }
         }
@@ -231,38 +227,17 @@ fn build(
             ));
         }
     }
-    for (glyph, handle) in layout.glyphs().iter().zip(widget.glyphs.iter()) {
-        let entry = atlas.get(handle).ok_or(SceneError::UiGlyph(widget.id))?;
-        out.missing += usize::from(entry.missing);
-        let Some(rect) = entry.rect else {
-            continue;
+    if widget.role == UiRole::Label {
+        let shadow = if disabled {
+            theme::alpha(theme::LABEL_SHADOW, dim)
+        } else {
+            theme::LABEL_SHADOW
         };
-        if !glyph.position.iter().all(|v| v.is_finite()) {
-            return Err(SceneError::Input("UI glyph position"));
-        }
-        let [width, height] = atlas.size();
-        // The atlas surrounds each inner rectangle with one zero texel.
-        if rect[0] == 0 || rect[1] == 0 || rect[0] + rect[2] >= width || rect[1] + rect[3] >= height
-        {
-            return Err(SceneError::Input("UI atlas entry bounds"));
-        }
-        let [x, y, w, h] = rect.map(|v| v as f32);
-        let [ox, oy] = entry.origin.map(|v| v as f32);
-        out.quads.push(UiQuad {
-            rect: [ox - 1., oy - 1., ox + w + 1., oy + h + 1.],
-            clip: widget.clip,
-            extra: [x - 1., y - 1., x + w + 1., y + h + 1.],
-            pen: [
-                widget.origin[0] + glyph.position[0],
-                widget.origin[1] + glyph.position[1],
-            ],
-            color: text_color,
-            kind: KIND_GLYPH,
-        });
-        out.extent[0] = out.extent[0].max(rect[0] + rect[2] + 1);
-        out.extent[1] = out.extent[1].max(rect[1] + rect[3] + 1);
-        out.glyphs += 1;
+        glyphs(atlas, widget, shadow, theme::LABEL_SHADOW_OFFSET, out)?;
     }
+    let (drawn, missing) = glyphs(atlas, widget, text_color, [0.; 2], out)?;
+    out.glyphs += drawn;
+    out.missing += missing;
     if let Some(edit) = edit {
         if let Some(preedit) = &edit.preedit {
             underline(widget, preedit.clone(), 1., out, spans);
@@ -299,6 +274,51 @@ fn build(
         ));
     }
     Ok(())
+}
+
+/// One quad per glyph with coverage, at `offset` logical pixels from its pen.
+/// Returns drawn glyphs and `.notdef` placements; refuses foreign handles.
+fn glyphs(
+    atlas: &GlyphAtlas,
+    widget: &UiWidget,
+    color: [u8; 4],
+    offset: [f32; 2],
+    out: &mut UiPlan,
+) -> Result<(usize, usize), SceneError> {
+    let (mut drawn, mut missing) = (0, 0);
+    let [width, height] = atlas.size();
+    for (glyph, handle) in widget.layout.glyphs().iter().zip(widget.glyphs.iter()) {
+        let entry = atlas.get(handle).ok_or(SceneError::UiGlyph(widget.id))?;
+        missing += usize::from(entry.missing);
+        let Some(rect) = entry.rect else {
+            continue;
+        };
+        if !glyph.position.iter().all(|v| v.is_finite()) {
+            return Err(SceneError::Input("UI glyph position"));
+        }
+        // The atlas surrounds each inner rectangle with one zero texel.
+        if rect[0] == 0 || rect[1] == 0 || rect[0] + rect[2] >= width || rect[1] + rect[3] >= height
+        {
+            return Err(SceneError::Input("UI atlas entry bounds"));
+        }
+        let [x, y, w, h] = rect.map(|v| v as f32);
+        let [ox, oy] = entry.origin.map(|v| v as f32);
+        out.quads.push(UiQuad {
+            rect: [ox - 1., oy - 1., ox + w + 1., oy + h + 1.],
+            clip: widget.clip,
+            extra: [x - 1., y - 1., x + w + 1., y + h + 1.],
+            pen: [
+                widget.origin[0] + glyph.position[0] + offset[0],
+                widget.origin[1] + glyph.position[1] + offset[1],
+            ],
+            color,
+            kind: KIND_GLYPH,
+        });
+        out.extent[0] = out.extent[0].max(rect[0] + rect[2] + 1);
+        out.extent[1] = out.extent[1].max(rect[1] + rect[3] + 1);
+        drawn += 1;
+    }
+    Ok((drawn, missing))
 }
 
 fn underline(

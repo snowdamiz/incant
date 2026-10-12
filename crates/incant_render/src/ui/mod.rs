@@ -17,16 +17,18 @@
 //!   negative x is cut at the box edge. Surfaces, selection, caret and focus
 //!   ring use `visible` (ancestor clips ∩ border box).
 //! * Order. One instanced draw in canonical layout preorder. Within a widget:
-//!   surface, selection, glyphs, composition underline, caret, focus ring.
+//!   surface, selection, glyphs (a label's shadow pass first), composition
+//!   underline, caret, focus ring.
 //! * Colour. Theme colours are display-referred sRGB with straight alpha and
 //!   are never tone mapped. sRGB targets decode them and blend premultiplied in
 //!   linear light; UNORM targets blend the encoded values. Glyph texels are
 //!   linear area coverage; minification averages an N×N (N ≤ 4) tap grid
 //!   clamped to the glyph's padded texels, as the world text pass does.
-//! * States. Disabled lowers surface and text alpha; focus adds an inset accent
-//!   ring; a captured pointer press darkens a button. The caret and selection
-//!   draw only in a focused, enabled field, from `UiEdit` byte ranges mapped
-//!   through the shaped clusters; nothing is inferred from text content.
+//! * States. Surfaces are opaque. Disabled uses a flatter surface and muted
+//!   text; focus adds an inset accent ring; a captured pointer press darkens a
+//!   button. Labels sit on the scene and get a hard one-pixel shadow. The caret
+//!   and selection draw only in a focused, enabled field, from `UiEdit` byte
+//!   ranges mapped through the shaped clusters; nothing is inferred from text.
 //!
 //! Retention. A stage reuses the accepted resources when the `Arc<UiInput>` is
 //! identical, and the uploaded atlas prefix when only the atlas Arc is shared.
