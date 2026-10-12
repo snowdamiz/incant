@@ -1,0 +1,409 @@
+{
+  "schema_version": 1,
+  "scope": "Bounded trusted typed clone versus pose reconstruction diagnostic; no persisted solver decoder or production implementation.",
+  "base_commit": "4347bf0faa7e3b305f425ed4bb8bbf02b7c2a07f",
+  "branch": "codex/native-physics-snapshot-boundary",
+  "source_freeze": {
+    "tools/probes/physics-snapshot-boundary/Cargo.toml": "02e7a75a59b7882b4e54d177e6ac562ec8f6a4da139fe9db15b18bf51b0f3364",
+    "tools/probes/physics-snapshot-boundary/Cargo.lock": "56a9ed34419a8a51cc54edd9f4422484d8d19a0916f3a69e70820580cfdfdcb0",
+    "tools/probes/physics-snapshot-boundary/README.md": "e487540790f390919fb6f4b0c823212581de25ad1fbd8f5892e3b61d3b82090c",
+    "tools/probes/physics-snapshot-boundary/src/main.rs": "56cb054477ffae1b7a5fed823063a9e08681ff6dfafd5a70c80beee1bb7293c3",
+    "tools/probes/physics-snapshot-boundary/src/probe.rs": "b2d9f5492e83f9c73f4be4307b9f239d0f46dade393634acb357ebe05f3f85df"
+  },
+  "unchanged_production": {
+    "Cargo.toml": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+    "Cargo.lock": "bb9f6bc5183813d1be0124986e00515864d4a45f45290a537d5b9e91c995a6f3",
+    "crates/incant_physics_runtime/Cargo.toml": "b46d383c71229ebfc5e5293cec8f710865a52bff011da621762ee34c45ca6c97",
+    "crates/incant_physics_2d_runtime/Cargo.toml": "19f80020558bccfa3a890ffb97d0479a82f55a504af6fca689a848a5012b8c0b",
+    "crates/incant_runtime/src/save.rs": "8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754",
+    "crates/incant_runtime/src/save/codec.rs": "89c7b7b3d7254db8542719cd417ac32ed9948eb1899204f4e49b52db89e9bcf9",
+    "crates/incant_physics_runtime/src/lib.rs": "7157c2d9650d3dc1e62840254ec5bc9de2862ae5ce6cb6e2f890b99845ce46a3",
+    "crates/incant_physics_runtime/src/queries.rs": "675914573c124551692b043dca98902c4efef98eda602b1023c1da3d032eafe6",
+    "crates/incant_physics_runtime/src/character_frame.rs": "97252c4b7ecf9b68ba9e33d5b94dd9c9b512069bf223adedca846732d26de98d",
+    "crates/incant_physics_2d_runtime/src/lib.rs": "2f0948f7cc93007327a07e4ffc0debd6ffd9f36052fcf70ca6e5d22d64114b13",
+    "crates/incant_physics_2d_runtime/src/query.rs": "3d0026bca040b22aacec283af9fa923c28ded1c0fdabf40652b5db0540d2a491",
+    "crates/incant_runtime/src/physics.rs": "ba1f98eddeef3becebe82831ea45cf6de4f7462e8e24ca422e4e68f7152a397f",
+    "crates/incant_runtime/src/physics_2d.rs": "3f3563e72e81d05a70d104291dddcc0d9e1355070ea8eb01f67581d319d8c3ac",
+    "crates/incant_runtime/src/world.rs": "730c648cd636306b21059a9fe7c17c432fb1d7761afe98f0e25e9c3896605db6"
+  },
+  "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "numerical_features": [
+    "f32",
+    "enhanced-determinism",
+    "parallel"
+  ],
+  "rayon_threads": 2,
+  "target_dir": "/tmp/incant-font-atlas-target",
+  "executable": {
+    "path": "/tmp/incant-font-atlas-target/release/incant-physics-snapshot-boundary-probe",
+    "sha256": "7b75e0370e40c34a7997bea537054a1b428545ee2f1bc9884ba03ace2295f69a",
+    "bytes": 8050032
+  },
+  "commands": [
+    {
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--offline",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml"
+      ],
+      "handle": 33951,
+      "exit_code": 101,
+      "source_freeze": 1,
+      "stderr": "build-001.log",
+      "stdout": "result-001.json",
+      "qualification": "Compile typo; no runtime evidence."
+    },
+    {
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--offline",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml"
+      ],
+      "handle": 32252,
+      "exit_code": 0,
+      "source_freeze": 2,
+      "stderr": "build-002.log",
+      "stdout": "result-002.json"
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "handle": 97460,
+      "exit_code": 101,
+      "source_freeze": 2,
+      "log": "clippy-001.log",
+      "qualification": "Type complexity lint; corrected after reap."
+    },
+    {
+      "argv": [
+        "cargo",
+        "run",
+        "--locked",
+        "--offline",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml"
+      ],
+      "handle": 41950,
+      "exit_code": 0,
+      "source_freeze": 3,
+      "stderr": "build-003.log",
+      "stdout": "result-003.json"
+    },
+    {
+      "argv": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--release",
+        "-j2",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "handle": 41950,
+      "exit_code": 0,
+      "source_freeze": 3,
+      "log": "clippy-002.log"
+    }
+  ],
+  "checks": [
+    {
+      "name": "fmt",
+      "argv": [
+        "cargo",
+        "fmt",
+        "--manifest-path",
+        "tools/probes/physics-snapshot-boundary/Cargo.toml",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "fmt.log"
+    },
+    {
+      "name": "include-fmt",
+      "argv": [
+        "rustfmt",
+        "--check",
+        "--edition",
+        "2024",
+        "tools/probes/physics-snapshot-boundary/src/probe.rs"
+      ],
+      "exit_code": 0,
+      "log": "include-fmt.log"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "conventions.log"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "diff.log"
+    },
+    {
+      "name": "toolchain",
+      "argv": [
+        "rustc",
+        "-vV"
+      ],
+      "exit_code": 0,
+      "log": "toolchain.log"
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/build-001.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/build-001.log.gz",
+      "raw_sha256": "8e9efc1a36cb07c7a83188f6ef47c05e1b1d6cfc35d4ee98f053b5b4bda2f1c3",
+      "raw_bytes": 3661,
+      "sha256": "0841cc3e0ff593c6a8ba7166856d753f90b23815abde8ad12e609072f7fd450b",
+      "bytes": 1084,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/build-002.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/build-002.log.gz",
+      "raw_sha256": "a64d3392db61f579d85286309478683a1c2c9d6f8b7a83ad03251922ac9f8018",
+      "raw_bytes": 314,
+      "sha256": "c0d1877443c4ba80f19c67f5d60e001af42af6ca6105363748e1476a916cb97d",
+      "bytes": 213,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/build-003.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/build-003.log.gz",
+      "raw_sha256": "97de49d562f021849116e4c85f53bbc6f7ba87e80c16b5291d2a72791d64b9c5",
+      "raw_bytes": 315,
+      "sha256": "12538293b979442c7e7505233b0a0797d94c1e57440c385d4b6dc361f05d0570",
+      "bytes": 211,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/clippy-001.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/clippy-001.log.gz",
+      "raw_sha256": "e03a43d4a32e85e3f80b536290195e4b7680821f4f2ece12315f4c3fe5715458",
+      "raw_bytes": 2725,
+      "sha256": "25b0c9e5e7427e00ebb420f06181d7e17a0cc617e371689ba34f5b8ca7ed5cdd",
+      "bytes": 1018,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/clippy-002.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/clippy-002.log.gz",
+      "raw_sha256": "c563f13f52ee340415d9a9b490e083c6f6ac0e1e392641d98e93c805aa51aeed",
+      "raw_bytes": 222,
+      "sha256": "e6c99b6cbc296bbb1836b36ce6f030196d04c20aed9b0368c62c68a825fe5ff8",
+      "bytes": 179,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/conventions.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/conventions.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/dependency-source-identities.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/dependency-source-identities.json",
+      "raw_sha256": "a123ad0810e56016d1f637b317482f4eeb2698586fba036dad1b790a25e628e7",
+      "raw_bytes": 4263,
+      "sha256": "a123ad0810e56016d1f637b317482f4eeb2698586fba036dad1b790a25e628e7",
+      "bytes": 4263,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/dependency-source-sizes.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/dependency-source-sizes.json",
+      "raw_sha256": "ef214ceabfb847401169e3f379e9f75b2fe4883ea8ecf54642273aea0dff22b0",
+      "raw_bytes": 496,
+      "sha256": "ef214ceabfb847401169e3f379e9f75b2fe4883ea8ecf54642273aea0dff22b0",
+      "bytes": 496,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/diff.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/diff.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/fmt.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/fmt.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/include-fmt.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/include-fmt.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/lock-comparison.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/lock-comparison.json",
+      "raw_sha256": "6e379cfd931d7e1d00a385291f98724978bf4fa5057d8ee6f7072614f3be1cc0",
+      "raw_bytes": 16677,
+      "sha256": "6e379cfd931d7e1d00a385291f98724978bf4fa5057d8ee6f7072614f3be1cc0",
+      "bytes": 16677,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/process-release.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/process-release.json",
+      "raw_sha256": "8e19a5248a9e2e5c259c0bfa3cc06651d6c54f385bba9fb539833d543c6b12d8",
+      "raw_bytes": 152,
+      "sha256": "8e19a5248a9e2e5c259c0bfa3cc06651d6c54f385bba9fb539833d543c6b12d8",
+      "bytes": 152,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/result-001.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/result-001.json",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/result-002.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/result-002.json",
+      "raw_sha256": "d180fac5c965da60a85c92c2cf10d4e8703398f9819acbda97e431ef3411d234",
+      "raw_bytes": 4009,
+      "sha256": "d180fac5c965da60a85c92c2cf10d4e8703398f9819acbda97e431ef3411d234",
+      "bytes": 4009,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/result-003.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/result-003.json",
+      "raw_sha256": "8ad722961ecd210898f4e945ddd6fbe1a97065f4aba512ba60dcd5a97b3d0781",
+      "raw_bytes": 7132,
+      "sha256": "8ad722961ecd210898f4e945ddd6fbe1a97065f4aba512ba60dcd5a97b3d0781",
+      "bytes": 7132,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/source-freeze-001.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/source-freeze-001.json",
+      "raw_sha256": "82d84085fab4c409addb3153e49462366d86b61d65e99e0ff6d4ab723cb3f9dd",
+      "raw_bytes": 498,
+      "sha256": "82d84085fab4c409addb3153e49462366d86b61d65e99e0ff6d4ab723cb3f9dd",
+      "bytes": 498,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/source-freeze-002.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/source-freeze-002.json",
+      "raw_sha256": "76b2f1b4bc944d3ebaa85d97fd6ddf8b9c973698eac1733a9e339b3d22e00f48",
+      "raw_bytes": 620,
+      "sha256": "76b2f1b4bc944d3ebaa85d97fd6ddf8b9c973698eac1733a9e339b3d22e00f48",
+      "bytes": 620,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/source-freeze-003.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/source-freeze-003.json",
+      "raw_sha256": "56dd5ccd7df9fc8e855551e038d05b8cf2b7777a23aeeda34116d9b1e0758ef4",
+      "raw_bytes": 620,
+      "sha256": "56dd5ccd7df9fc8e855551e038d05b8cf2b7777a23aeeda34116d9b1e0758ef4",
+      "bytes": 620,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/toolchain.log",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/toolchain.log.gz",
+      "raw_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "raw_bytes": 192,
+      "sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e",
+      "bytes": 163,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-physics-snapshot-boundary-001/unchanged-production.json",
+      "retained": "docs/spikes/evidence/native-physics-snapshot-boundary/unchanged-production.json",
+      "raw_sha256": "ceb62537fa7d4da125ff5bf0af9e70414da2faf9dd6dac8e80573dcbbf1c8ea1",
+      "raw_bytes": 1547,
+      "sha256": "ceb62537fa7d4da125ff5bf0af9e70414da2faf9dd6dac8e80573dcbbf1c8ea1",
+      "bytes": 1547,
+      "encoding": "identity"
+    }
+  ],
+  "result": {
+    "cases": 8,
+    "continuation_ticks": 960,
+    "exact_trusted_clone": true,
+    "untrusted_bytes_decoded": false,
+    "lossy_first_state_difference_nonzero_boundary": 1,
+    "lossy_first_event_difference_settled_boundary": 10,
+    "maximum_translation_difference": 0.2002873420715332,
+    "maximum_linear_velocity_difference": 1.9619992971420288,
+    "not_rust_test_function_count": true
+  },
+  "review": {
+    "status": "accepted",
+    "scope": "Bounded diagnostic source, evidence and source barrier only; no production physics snapshot adoption.",
+    "receipt": "docs/spikes/evidence/native-physics-snapshot-boundary/review.json",
+    "sha256": "9200be2ff5d0f5fd5e04782c13f04bfe1eba04c756c53c824463c90e314a9620"
+  },
+  "limits": [
+    "Trusted live-state cloning only; serde-skipped caches may be retained by Clone.",
+    "No untrusted data decoded or malformed solver stepped.",
+    "No NativeWorld, packaged save/load, new process restoration, GPU, device or performance gate.",
+    "Tile-box compound shape fixture is not a tilemap cook integration test.",
+    "No production source, dependency, PhysicsUnsupported guard or version framing changed.",
+    "The pinned upstream snapshot_roundtrip source was read, not executed.",
+    "Existing parallel dependency soundness obligations are not closed by this diagnostic."
+  ]
+}
