@@ -128,3 +128,37 @@ build. Claude's real-browser review passes all 34 checks.
 bind the exact component. The browser proves the selection start is prevented;
 the original visible WKWebView symptom and native focus still require handoff0048
 against the newly built combined app.
+
+## Committed script logs in Console
+
+Native Play now forwards the existing accepted `NativeLogs` prefix to the existing
+Console. The render-thread worker publishes only after a successful game operation;
+its cursor copies newly committed rows once, including repeated same-tick messages
+and their original levels. Pause, surface redraw and repeated status reads do not
+copy the earlier prefix or allocate new row identities. Each row has one native ULID.
+No frame reads the project, command bus, source files or provider state.
+
+New hosts add optional `play_read.logs:{count,dropped}`. The bridge requests
+`play_logs_read({generation,afterIndex})` only when a tail or drop counter changed.
+Each response carries at most 64 rows/16 KiB of UTF-8 message bytes, with each message
+at most 1 KiB; JSON escaping and bounded row metadata add wire overhead. The native
+mirror is bounded to the existing 1,024-row/256-KiB prefix. Browser retained Play
+history stays within 1,024 rows/256 KiB across restarts, reserving one warning row
+and 256 bytes for an aggregate truncation warning. Native and retention losses
+increment that stable Console warning; exposed counters saturate at the JS-safe
+integer maximum. Older hosts lacking log metadata make no new IPC calls.
+
+The bridge validates each entire bounded packet before advancing its cursor or
+publishing rows. Project identity and Play generation fence late responses and
+errors. Stop/restart resets the live cursor, and a project change clears retained
+Play history. Already delivered accepted rows remain historical Console entries
+through Stop or terminal failure. Terminal native reads refuse unread live history;
+a failed callback cannot publish its staged logs. Failed/malformed log reads use a
+fixed safe transport error and retry the same cursor on recovery.
+
+Local validation passes 42 CPU editor tests, including an actual OfflineBackend
+PlaySession/QuickJS accepted-and-trapped callback test, plus scoped all-target
+Clippy, 185 bridge tests, strict app/test TypeScript, and generated bridge checks.
+The existing native GPU test remains ignored. Bridge race tests use synthetic IPC;
+there was no native window/GPU launch or rendered Console review in this slice.
+[Exact sources, logs and limitations](evidence/native-play-console-logs.json).
