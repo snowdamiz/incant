@@ -1,0 +1,80 @@
+{
+  "reviewer": "astra",
+  "agent": "/root/runtime_review",
+  "reviewed_at_utc": "2026-10-12T02:33:42.486546+00:00",
+  "outcome": "accepted within bounded logical runtime editing and composition-state scope",
+  "findings": [],
+  "source_root": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+  "base": "934af1b0f9c04d45588873369a4d69295c6380f3",
+  "freeze": {
+    "path": "/tmp/incant-text-edit-source-freeze-001.json",
+    "sha256": "f560682922255cea16b41463197dc833ea2e1b81164b1c7158369491c46201b1"
+  },
+  "source_files": {
+    "Cargo.lock": "6b69761a8e171cd4811bbd2a68f3c03e1a0b0c84132d0f6dd85f3e31e8cb695d",
+    "crates/incant_text/Cargo.toml": "be99373f05f096eba5b457fe7246033922d54d2b8b057613843b1d5511bb2a65",
+    "crates/incant_text/src/lib.rs": "843537f87ec33223f7e331cea7759a3655884308eec1888c6ebdda988cca552a",
+    "crates/incant_text/src/editing.rs": "39ce9e49ffb37b17ceec71056de26af75560b8e7395c9b60dd56501726105e4f",
+    "crates/incant_text/tests/editing.rs": "19a459375bfb75ff0b34dc1dcc8ee5b67fc1d830507daa44dea4f73ef9cc281f"
+  },
+  "source_checks": [
+    "Committed selection creation/replacement preserves extended-grapheme boundaries; forward/backward deletion and directional selection operate in explicitly logical order.",
+    "UTF-8 scalar-only IME cursor ranges are checked before slicing; all private replacement ranges derive from accepted committed selections, and bounded length arithmetic cannot overflow supported usize sizes.",
+    "Repeated preedit replaces the same unchanged committed selection; cancel/empty preedit preserves it, commit replaces it once, and programmatic selection/text or focus loss explicitly cancels composition.",
+    "Byte-length and cursor admission precede candidate allocation/publication. Invalid selections, oversized commit/preedit/text and IME-owned ordinary-key refusals preserve all prior observable fields.",
+    "No implicit normalization, clipping, project mutation, authoring dependencies, system-font discovery or OS calls are introduced.",
+    "The real packaged-font shaping regression exercises CJK substitution/cluster offsets, retained identical preedit storage and shaped-cache identity across commit.",
+    "Compared all958 Cargo lock records against frozen base; resolutions/sources/checksums are identical. Only incant_text adds the already-pinned unicode-segmentation1.13.3 edge."
+  ],
+  "reviewed_tests": {
+    "initial_focused": 12,
+    "full_incant_text": 37,
+    "full_failed": 0,
+    "full_ignored": 0,
+    "full_result_groups": 6,
+    "rerun_by_reviewer": false
+  },
+  "verified_logs": {
+    "tests-001": {
+      "path": "/tmp/incant-text-edit-tests-001.log",
+      "sha256": "493a771e10e3de70d8011f539cce5c5dd50015ae49c6a3dbed50c8ea31cdc83b",
+      "groups": 1,
+      "passed": 12,
+      "failed": 0,
+      "ignored": 0
+    },
+    "tests-002": {
+      "path": "/tmp/incant-text-edit-tests-002.log",
+      "sha256": "ed4da9ba75a20bdac21caa2c04186871b4b9a0130650ec0aa154d64d5a0870bb",
+      "groups": 6,
+      "passed": 37,
+      "failed": 0,
+      "ignored": 0
+    },
+    "clippy-001": {
+      "path": "/tmp/incant-text-edit-clippy-001.log",
+      "sha256": "ae3d91ba5df34637c92a58d7ca1ddad530cc0ccc186e6dc1e2505c73272c541a"
+    },
+    "wasm-001": {
+      "path": "/tmp/incant-text-edit-wasm-001.log",
+      "sha256": "3405ebcfdaeb01f55898f06ccc14f04f2ed3c65b0e49898d4e83ea7754d3a550"
+    },
+    "graph-001": {
+      "path": "/tmp/incant-text-edit-graph-001.log",
+      "sha256": "031b1e6f05967d0e88a7ed7c078988ceda4129020699fe11b3f2a07a020691b0"
+    },
+    "fmt-001": {
+      "path": "/tmp/incant-text-edit-fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "conventions-001": {
+      "path": "/tmp/incant-text-edit-conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limitations": [
+    "No platform IME event delivery, input-generation/focus routing, clipboard, widget ownership, visual bidi cursor movement, hit testing or complete Game UI acceptance. Platform adapters still own stale-event routing across focus sessions.",
+    "16KiB bounds apply separately to committed and composed strings. Candidate replacement can coexist with both, up to three bounded logical string payloads, excluding allocator/shaping/font storage; this is not a whole-process heap claim.",
+    "Review inspected source and parsed supplied completed logs; no independent build, test execution, graphics, screenshot or device run was performed."
+  ]
+}

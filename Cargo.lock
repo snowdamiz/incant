@@ -4496,6 +4496,7 @@ dependencies = [
  "thiserror 2.0.21",
  "ulid",
  "unicode-script",
+ "unicode-segmentation",
  "zeno",
 ]
 
