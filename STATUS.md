@@ -71,9 +71,11 @@ v13 cooking, bounded Taffy layout/focus, retained packaged-font text and ordinar
 composed CPU gameplay. The 226-test composed suite and 279-test affected suite
 (overlapping coverage), strict TypeScript and 11-package all-target Clippy pass.
 Keyboard/gamepad ownership, stale IME/pointer receipts, structural lifetimes and
-script failure publication have observable controls. Final-source public export
-proof is pending; screen-space GPU drawing, platform IME, UI checkpoint state and
-complete Game UI gates remain open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
+script failure publication have observable controls. The final public export
+passed three fresh 12-tick mixed-game runs and five typed refusals; the same
+process controls passed after deleting external debug source maps. Screen-space
+GPU drawing, platform IME, UI checkpoint state and complete Game UI gates remain
+open. [CPU scope and evidence](docs/spikes/native-ui-layout.md).
 
 Native two-input crossfade clocks and controls now retain independent outgoing
 playback, pause both inputs, finish at explicit endpoints and persist active

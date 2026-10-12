@@ -141,8 +141,23 @@ exposed a real `--observe` option-length parser defect. The corrected parser has
 an actual package/UI-option regression. A preliminary source-deleted replay of
 that first executable without observation passed the expected UI notifications,
 value, resize and PCM controls; it predates the final readonly sequence correction.
-The final-source fresh export/replay remains pending at this CPU commit. No
-rendered pixels, OS IME behavior or full end-to-end Game UI acceptance is claimed.
+The CPU commit deliberately preceded the final process proof. Subsequent proof003
+passed three fresh 12-tick runs with exact button/edit/submit notifications,
+native motion, world Text and equal nonzero PCM/atlas results. Five controls
+refused at their intended typed boundaries, including `World(UiUnsupported)` for
+an explicitly persistence-opted-in script. Compiler-disabled module Clippy,
+wasm32, fresh 67-schema equality and the lean dependency guard also pass.
+
+Proof003 initially retained its external debug source map after deleting the
+project/cache/build storage. That map was then hashed and removed, and all three
+positive plus five refusal processes repeated on the same executable with exact
+report/PCM equality. The original receipt is preserved; the strengthened helper
+now removes maps before runs. The coordinator's separate current-main recook will
+exercise that final helper from the beginning. This distinction avoids claiming
+complete external source removal at the original proof003 stage. Exact receipts
+and hashes are in [the final evidence](evidence/native-ui-layout-final.json) and
+[the independent CPU review](evidence/native-ui-layout-root-review.json).
+No rendered pixels, OS IME behavior or complete Game UI acceptance is claimed.
 
 See [the draw-consumer handoff](native-ui-draw-handoff.md) for the exact canonical
 input and transaction seam reserved for Claude's subsequent implementation.
