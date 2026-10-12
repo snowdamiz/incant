@@ -26,7 +26,7 @@ corrected implementation passes 355 actual-host tests/doctests, Clippy and three
 development processes, plus supported wasm32/tooling checks. Independent source
 review closed a forged-rest-destination parser case. The actual main132 union
 repeats all 355 cases and three development processes with the 31 reviewed source
-inputs unchanged; its fast publication gate remains pending. Complete animation/SDK, guest checkpoints, device and
+inputs unchanged; PR #134 passed its fast gate and merged. Complete animation/SDK, guest checkpoints, device and
 phase requirements remain open. [Contract/evidence](docs/spikes/native-animation-graph-sdk.md).
 
 ## Public authored Wasm route — current-main integration verified
