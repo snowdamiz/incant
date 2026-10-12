@@ -1596,3 +1596,16 @@ tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main1
 - Native Rust/Wasm HUD: additive ops56–58 preserve ops0–55/input-v1. 365 ordinary tests, three actual Wasmtime/wasm2c tests, all-target Clippy and scoped generation/wasm/runtime guards pass. Public source/cache/build/map-deleted package passes three fresh shaped-HUD/movement/PCM runs and six exact refusals; source and final evidence reviews accepted, publisher intake pending. Module checkpoints, headless native-play UI routing and native/GPU/device gates remain open. See `docs/spikes/native-wasm-hud.md`.
 
 - Native headless UI routing: explicit bounded viewport now reaches the retained host; CLI and native Play RPC replay the existing UI/resize format through the ordinary player's shared resolver. All 100 affected tests, scoped Clippy, input wasm32 and runtime/generation checks pass, including actual CLI/RPC parity and failure preservation. Independent source and final execution reviews accepted; publisher intake pending. No native-window/GPU/IME/device claim. See `docs/spikes/native-headless-ui.md`.
+- **Native Rust/Wasm audio transport (private execution checkpoint).** Additive
+  ops59–61 preserve all previous imports and expose copied desired declarations,
+  exact u64 transport epochs and atomic ordered controls. Independent source
+  review, ten focused tests, 483 actual-host tests in 87 groups, all-target
+  Clippy and three fresh development processes pass. Full 96-tick declarations
+  and real mixed PCM match the typed native oracle. Independent final host review
+  accepts the retained evidence. The public import/select/Undo/Redo/reopen and
+  captured-only development route passes; three fresh ordinary wasm2c players
+  match every declaration field and exact PCM after private source/cache/build/map
+  deletion, with 13 exact refusals. Independent final package review accepts the
+  retained evidence; publisher integration remains pending. No actual-cursor,
+  arbitrary guest checkpoint, physical-device or phase-gate claim. See
+  [contract and evidence](docs/spikes/native-wasm-audio.md).

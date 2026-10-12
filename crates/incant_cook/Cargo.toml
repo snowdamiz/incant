@@ -34,6 +34,7 @@ sha2 = { workspace = true, optional = true }
 tempfile = { version = "3", optional = true }
 
 [dev-dependencies]
+incant_audio_runtime = { workspace = true, features = ["scene"] }
 sha2.workspace = true
 incant_ui.workspace = true
 incant_cmd.workspace = true

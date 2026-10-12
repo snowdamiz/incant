@@ -1,0 +1,8 @@
+{
+  "scope": "Isolated new parser/type tests only. No audio opcodes installed; not actual-host or final SDK proof. Existing shared files untouched.",
+  "sources": {
+    "crates/incant_wasm_abi/src/audio.rs": "a8710c0f2ffec0901694533a68aef33210b13533af7561d7a298e3f9aebbabef",
+    "sdk/rust/src/audio.rs": "2dd79da0f7e468a64bd7acdb9763c1a1226abc49693f9c9b52ba5019c7118ef2",
+    "sdk/rust/tests/audio.rs": "5353b8435b9d0a49ed7f886eb03554177e28a81d20ee965e9d76ae618763b198"
+  }
+}
