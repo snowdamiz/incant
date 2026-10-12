@@ -107,6 +107,8 @@ identity, stale versus active authority, reentrant/expired loans and unwind
 restoration. Physics world snapshots/checkpoints remain outside this slice;
 rollback evidence compares complete entity snapshots, solver states and events.
 
-These are local CPU capability checks. No fresh ordinary source-deleted shipping
-package, physical-device performance, whole guest/physics checkpoint, full SDK,
-rendered physics-debug acceptance or phase gate is established here.
+These are local CPU capability checks. The separate
+[public physics package proof](native-wasm-physics-package.md) now exercises
+ordinary source/cache/build/map-deleted shipping players against a direct native
+oracle. Physical-device performance, whole guest/physics checkpoint, full SDK,
+rendered physics-debug acceptance and phase gates remain outside these results.

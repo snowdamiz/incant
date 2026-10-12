@@ -114,6 +114,9 @@ source, raw Wasm or cached native modules at runtime.
   scratch bounds are in `incant_module::physics`; the
   [physics sample](samples/physics.rs) exercises both dimensions and character
   movement. Invalid/caught requests or insufficient scratch reject the callback.
+  The [public package proof](../../docs/spikes/native-wasm-physics-package.md)
+  exercises ordinary authored import/export and fresh source-free shipping
+  players against a direct native physics oracle.
 - `find_path(owner, request, result_scratch)` queries the active scene's committed
   navmesh; `find_grid_path` queries its prepared grid. Both return `None` for a
   valid miss and a borrowed view of the complete copied route on success. Mesh
