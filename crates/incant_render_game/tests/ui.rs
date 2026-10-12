@@ -374,3 +374,116 @@ fn unsupported_consumers_refuse_before_prepare_vm_and_audio() {
     ));
     assert_eq!(CALLS.load(Ordering::SeqCst), 0);
 }
+
+/// Each offered UI input: call, logical viewport and focused widgets.
+type Seen = Arc<std::sync::Mutex<Vec<(&'static str, [f32; 2], Vec<StableId>)>>>;
+/// A UI-capable CPU consumer that records the UI input it is offered and can
+/// refuse; the host must publish nothing it refused.
+struct Gate {
+    refuse: Arc<std::sync::atomic::AtomicBool>,
+    seen: Seen,
+}
+#[derive(Debug, thiserror::Error)]
+#[error("UI refused by the test consumer")]
+struct Refused;
+impl Gate {
+    fn observe(&self, call: &'static str, ui: &incant_render_data::UiInput) -> Result<(), Refused> {
+        let focused = ui
+            .widgets
+            .iter()
+            .filter(|w| w.focused)
+            .map(|w| w.id)
+            .collect();
+        self.seen.lock().unwrap().push((call, ui.viewport, focused));
+        if self.refuse.load(Ordering::SeqCst) {
+            Err(Refused)
+        } else {
+            Ok(())
+        }
+    }
+}
+impl RenderInputConsumer for Gate {
+    const SUPPORTS_UI: bool = true;
+    type Settings = Gate;
+    type Error = Refused;
+    fn prepare(
+        _: &incant_render_data::SceneInput,
+        _: &str,
+        ui: Option<&Arc<incant_render_data::UiInput>>,
+        gate: Gate,
+    ) -> Result<Self, Refused> {
+        gate.observe("prepare", ui.expect("UI input at startup"))?;
+        Ok(gate)
+    }
+    fn accept(
+        &mut self,
+        _: &incant_render_data::SceneInput,
+        _: &str,
+        _: UpdateKind,
+        ui: Option<&Arc<incant_render_data::UiInput>>,
+    ) -> Result<(), Refused> {
+        self.observe("accept", ui.expect("UI input every frame"))
+    }
+    fn admit_ui(&mut self, ui: &Arc<incant_render_data::UiInput>) -> Result<(), Refused> {
+        self.observe("admit", ui)
+    }
+}
+#[test]
+fn consumers_see_the_candidate_ui_and_a_refusal_publishes_nothing() {
+    let (_temp, scene, settings) = fixture();
+    let world = NativeWorld::new(scene);
+    let refuse = Arc::new(std::sync::atomic::AtomicBool::new(false));
+    let seen = Arc::new(std::sync::Mutex::new(Vec::new()));
+    let mut host = NativeRenderHost::<Gate>::prepare(
+        &world,
+        NativeRenderSettings {
+            model_cache: settings.model_cache,
+            texture_cache: settings.texture_cache,
+            camera: settings.camera,
+            text: settings.text,
+            ui: settings.ui,
+            consumer: Gate {
+                refuse: Arc::clone(&refuse),
+                seen: Arc::clone(&seen),
+            },
+        },
+    )
+    .unwrap();
+    let accepted = Arc::clone(host.ui_input().unwrap());
+    assert_eq!(seen.lock().unwrap()[0], ("prepare", [320., 200.], vec![]));
+    // A staged focus change reaches the consumer as the candidate's state.
+    refuse.store(true, Ordering::SeqCst);
+    SceneHost::stage_ui(&mut host, &world, &[], &[UiEvent::Focus(id(3))]).unwrap();
+    assert!(matches!(
+        SceneHost::sync(&mut host, &world),
+        Err(RenderHostError::Consumer(Refused))
+    ));
+    assert_eq!(
+        seen.lock().unwrap()[1],
+        ("accept", [320., 200.], vec![id(3)])
+    );
+    assert!(host.ui().unwrap().focus().is_none());
+    assert!(Arc::ptr_eq(&accepted, host.ui_input().unwrap()));
+    refuse.store(false, Ordering::SeqCst);
+    SceneHost::stage_ui(&mut host, &world, &[], &[UiEvent::Focus(id(3))]).unwrap();
+    SceneHost::sync(&mut host, &world).unwrap();
+    assert_eq!(host.ui().unwrap().focus().unwrap().widget(), id(3));
+    let focused = Arc::clone(host.ui_input().unwrap());
+    // An unchanged refresh offers the exact accepted input again.
+    SceneHost::sync(&mut host, &world).unwrap();
+    assert!(Arc::ptr_eq(&focused, host.ui_input().unwrap()));
+    // A viewport relayout is admitted before the owner publishes it.
+    refuse.store(true, Ordering::SeqCst);
+    let layout = Arc::clone(host.ui().unwrap().layout().unwrap());
+    assert!(SceneHost::resize_ui(&mut host, &world, [200., 120.]).is_err());
+    assert_eq!(seen.lock().unwrap().last().unwrap().0, "admit");
+    assert!(Arc::ptr_eq(&layout, host.ui().unwrap().layout().unwrap()));
+    assert!(Arc::ptr_eq(&focused, host.ui_input().unwrap()));
+    refuse.store(false, Ordering::SeqCst);
+    SceneHost::resize_ui(&mut host, &world, [200., 120.]).unwrap();
+    assert_eq!(host.ui_input().unwrap().viewport, [200., 120.]);
+    assert_eq!(
+        seen.lock().unwrap().last().unwrap(),
+        &("admit", [200., 120.], vec![id(3)])
+    );
+}
