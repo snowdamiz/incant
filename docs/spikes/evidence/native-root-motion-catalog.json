@@ -1,0 +1,175 @@
+{
+  "at": "2026-10-12T16:53:07.909191+00:00",
+  "base": "df64fcda7a0da760e95c6127b7d421def8c0f6bb",
+  "branch": "codex/native-root-motion-connected",
+  "scope": "captured root-only numerical catalog and authoring admission foundation; ordinary scene binding not yet implemented",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "source_hashes": {
+    "Cargo.lock": "bf370b9a7008b0fd60dc621e13962303adc86435f2b17a9211bc49e02e8f1c51",
+    "Cargo.toml": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+    "crates/incant_anim/Cargo.toml": "50541fad032635738e705c8c946ce3c7fcdd2ab9f624ce47662943d429fcd58f",
+    "crates/incant_anim/src/binary.rs": "e78b743e97021b946696864a4b2848906be0ad1a10cfa87f7c366cdbede56cf4",
+    "crates/incant_anim/src/catalog.rs": "e89b01460a2b3a80664eea48d7340b1f62017b6d04c2d4e408cdddfacdbb08e3",
+    "crates/incant_anim/src/lib.rs": "ae7e7ec8a256489f8d613dc78bab3798d022f16cc53564f655cfc5ad07dde351",
+    "crates/incant_anim/src/root_motion.rs": "977d725fe11a9c19ecfb4240a7fdaa4e2fcb6bdbc19827711d59ea69b9abf5ef",
+    "crates/incant_anim/src/track.rs": "f43c16ea72898bccb55c5d05b36b9968f0b23a8534fbc1538d3d909121a52960",
+    "crates/incant_anim/tests/root_motion_catalog.rs": "d4ed870080e4cefa5acc812baa0e3ee7b968477e0216442dcb4dba5a2e304817",
+    "crates/incant_assets/tests/root_motion.rs": "cf0c26f94170f29763e78b1df71d076a6636578f69bd0edd878c6e20957f9907",
+    "crates/incant_assets/tests/root_motion/fixture.rs": "28e5e4d86360cf3b63da5102e95f648d8905107a24341f0ca11fa331f0176dc7",
+    "crates/incant_assets/tests/skeletal/alloc.rs": "f58df95c57c6f884684b9a20427701e16e9049e24f287b0a9ea1e3031cb927fb",
+    "crates/incant_assets/tests/skeletal/fixture.rs": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c",
+    "crates/incant_assets_runtime/Cargo.toml": "0e5dea47b7437deacda86f692cf51b97b95b438a274253bd54dfe1b6fab3e898",
+    "crates/incant_assets_runtime/src/animation/root_motion.rs": "ffb192bf1fa8486b93b6f1acf7e231e92f50a0ae1c5a03083277c6de70ff96bf",
+    "crates/incant_assets_runtime/src/animation/sampling.rs": "ef29d103a9c877eab237c539c8dbdf286f612c3430fce91b1e9f55e20e541c23",
+    "crates/incant_cook/Cargo.toml": "47a7a39e3c19e1f7a568cb20aed6b35f11e00d765683420545b2e1c9fea4f665",
+    "crates/incant_cook/src/animation.rs": "467cf7ba3c8a8cb42c80f4231cfd22524a081e1e93fdbccaabeb60596c0072be",
+    "crates/incant_cook/src/lib.rs": "77b582b4e90a8ecb1f49c962ff0a388f4246d927e2cac0201226256ad0650c4b",
+    "crates/incant_cook/src/root_motion.rs": "3bff1eb6c7c735fbf68a456196ea2fe26fb2da5ac2efafccca95f0ce84814721",
+    "crates/incant_cook/src/root_motion/compile.rs": "6eb540df1cd78078e190795f5a107482c61b3770f2c07db6f2329dad9d981c92",
+    "crates/incant_cook/src/scene.rs": "3dd3ecb2bb4b8720c3733b0a3544bdb4a483b83707400fd786b8f68e79287934",
+    "crates/incant_cook/tests/root_motion.rs": "743ec636af407bd02c6999cdfe3e9f38f4f24ea6aba5ba3212d2e4e30c0e3e9e",
+    "crates/incant_doc/src/animation_root_motion.rs": "0632311d49b49f066b4cd0fa622deadf9a736328c8490209cb81998688cc4abc",
+    "crates/incant_doc/src/lib.rs": "6ff1840ee308b95514e34e92081a565f926d5fe9d206777ef0ca92cd049d39e2",
+    "crates/incant_types/src/animation_root_motion.rs": "c6c2269da3daba754b6fa9fe9f0e88436dbe111033ad9b935517d8024676e298",
+    "crates/incant_types/src/lib.rs": "c55f3178da26de7dd0a934a9156007068ca353f2f646728eec5653cee9fa2019",
+    "schemas/AnimationRootMotion.schema.json": "ef5d2b1cd627b6feb101fb3f2231503bb264876a95fd156ba8a70c12b3858b52",
+    "sdk/ts/src/generated.d.ts": "62469ae5ce83d98c74bac7d99e295272c4893f6299af6e1e7944a41c9be89ef3"
+  },
+  "checks": {
+    "asset_numeric_tests": 134,
+    "asset_numeric_groups": 22,
+    "doc_cmd_cook_tests": 98,
+    "doc_cmd_cook_groups": 37,
+    "failed": 0,
+    "ignored": 0,
+    "final_changed_cook_tests": 4,
+    "clippy": true,
+    "wasm32": true,
+    "lean_dependency_guards": true,
+    "generated_typescript_and_typecheck": true,
+    "conventions_fmt_diff": true,
+    "zero_allocation_query_iterations": 4096,
+    "source_and_cache_deleted_catalog_binary_roundtrip": true
+  },
+  "logs": {
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-00.log.gz": {
+      "sha256": "0b6703e2f18d6310c70095c5331453d220f762c3f1e1e3f45f37a6c3c8b2393c",
+      "uncompressed_sha256": "1efd14090ebf1b9b02f5bf8168c078670a33a7abd1a76889fc1c8d847f081e02",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/00.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-01.log.gz": {
+      "sha256": "5d5a3fbb19173d69aa9913750f8aff362b3535b5159c2fed0ed6a1614b2b8112",
+      "uncompressed_sha256": "4275669384218a84a1a5fd6ecd2ccf07c0ace999d7064a54f5699143c5cd4c4a",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/01.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-02.log.gz": {
+      "sha256": "1a8f67ef20b999d5814772f5ee9d2510acd5678f9709d6b3616de53c56e3ed3d",
+      "uncompressed_sha256": "3317bbb5450e08ba5d64b74bb1114fd48ac8a719f47f97910582bedf794aafc3",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/02.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-03.log.gz": {
+      "sha256": "de787db29c911a5540ffda089df00bd7fd59c0ec0606d85b972ccf113647778a",
+      "uncompressed_sha256": "fa89542f4c82fa095a6d2db60c3720a84b60eecf4ed3c4e32417a16588e17e37",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/03.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-04.log.gz": {
+      "sha256": "cd079efb6ab59407bb73f9762598625e766e27be7e0fce3d979192ac60b4bff3",
+      "uncompressed_sha256": "ca327d4a90248f4225f0e3489bd7a8ec1c00c8d5c3f928cd78ba489254520fab",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/04.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-05.log.gz": {
+      "sha256": "33d62087733871c47b5ddc4932b0d9c1e4e600a58f9e3e47903036f191a0a770",
+      "uncompressed_sha256": "b12c6b60a1f0c6075842bd5d2f5f7c3d108baf6e4ec6bdf3241987a00f0c9327",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/05.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-06.log.gz": {
+      "sha256": "c47f7c849e70472779f3b4dae6f07b5e01dd29c7207e905f4fa4e4dcff3ee951",
+      "uncompressed_sha256": "466c27957bec6177e21911180caffd16c9a78482761e9fad8fb9622eb2023499",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/06.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-07.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/07.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-001-08.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/08.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-002-00.log.gz": {
+      "sha256": "ddda3b9b65236fa1fad32a9e5ebc97e69dbeae1002c82afef0da9cb28dc618fd",
+      "uncompressed_sha256": "08e526299db996efdd95b794c341643e3993c0eac6912ec7665a1f2f7023c5a8",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/00.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-002-01.log.gz": {
+      "sha256": "d1a2cb735c00c580fe842d30d6d1f4f08d45ea8ca70603bdc3287148d52199ca",
+      "uncompressed_sha256": "7d5dd8ae456bdf7e6a61def7c9d819b297988d5632808272a3acb1bcfe448817",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/01.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-002-02.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/02.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-002-03.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/03.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-002-04.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/04.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-002-05.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/05.log"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/checks-002-06.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/06.log"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-root-motion-catalog/commands-001.json": {
+      "sha256": "3192d373c438200b5f1a00545896d6a20aa9c27fddb885bc841af4dbf9f073cf",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-001/commands.json"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/commands-002.json": {
+      "sha256": "61b0d118d354688acdfb94a327eb43ba1da8bc04073d0f0f89e4ceed069ec46e",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-layer1-checks-002/commands.json"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/source-freeze-001.json": {
+      "sha256": "418a93ec2a8c31ae9129df7d737386933639615f96e0783371f1cd858b8c5c39",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-001/inventory.json"
+    },
+    "docs/spikes/evidence/native-root-motion-catalog/source-freeze-002.json": {
+      "sha256": "f1f4d0aef6e8e61caae80be51a1e4effee1e377264dc6ad090afa94c64b0d195",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-catalog-freeze-002/inventory.json"
+    }
+  },
+  "command_environment": {
+    "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+  },
+  "source_progression": "Freeze001 broad checks pass; freeze002 changes only the captured-catalog test plus generated component schema/TS. Final four cook tests, focused Clippy, SDK check/typecheck and conventions/fmt/diff pass. Existing accepted root-motion tests are retained.",
+  "review": "Independent source/evidence review pending. This immutable foundation does not complete the connected feature.",
+  "limits": {
+    "clips": 256,
+    "keys_per_catalog": 1000000,
+    "catalog_bytes": 33554432,
+    "scene_unique_catalog_bytes": 67108864,
+    "instances": 1024,
+    "duration_seconds": 86400,
+    "cycle_span": 4294967296
+  },
+  "limitations": [
+    "Ordinary cook_scene explicitly refuses the new component until v17/native binding is wired.",
+    "No animation step, graph interval blend, pose stripping, body movement or checkpoint wiring yet.",
+    "No TS/Wasm gameplay control or ordinary shipped root-motion game proof yet.",
+    "No rendered, device, performance or Phase 1 acceptance."
+  ]
+}

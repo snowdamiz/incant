@@ -3863,6 +3863,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_anim"
+version = "0.0.1"
+dependencies = [
+ "glam 0.32.1",
+ "thiserror 2.0.21",
+]
+
+[[package]]
 name = "incant_assets"
 version = "0.0.1"
 dependencies = [
@@ -3897,6 +3905,7 @@ version = "0.0.1"
 dependencies = [
  "glam 0.32.1",
  "incant_2d",
+ "incant_anim",
  "incant_text",
  "incant_types",
  "ktx2",
@@ -3962,6 +3971,7 @@ dependencies = [
 name = "incant_cook"
 version = "0.0.1"
 dependencies = [
+ "incant_anim",
  "incant_assets",
  "incant_assets_runtime",
  "incant_cmd",

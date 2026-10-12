@@ -1,6 +1,7 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod agent_budget;
 mod animation_graph;
+mod animation_root_motion;
 mod audio;
 mod camera;
 #[cfg(feature = "crdt")]
@@ -21,6 +22,7 @@ pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
 pub use incant_types::UiNode;
+pub use incant_types::{AnimationRootMotion, RootMotionApplication};
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -401,6 +403,9 @@ impl Project {
                 if let Err(message) = animation_graph::validate(entity) {
                     issue(format!("{path}/components/AnimationGraph"), &message);
                 }
+                if let Err(message) = animation_root_motion::validate(entity, self) {
+                    issue(format!("{path}/components/AnimationRootMotion"), &message);
+                }
                 if entity.components.contains_key("Animation")
                     && (!entity.components.contains_key("MeshRenderer")
                         || entity.components.contains_key("SpriteRenderer")
@@ -607,6 +612,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
             let animation: Animation = decode(value)?;
             animation.validate().map_err(str::to_owned)?;
         }
+        "AnimationRootMotion" => {
+            let binding: AnimationRootMotion = decode(value)?;
+            binding.validate().map_err(str::to_owned)?;
+        }
         "SpriteFlipbook" => {
             let flipbook: SpriteFlipbook = decode(value)?;
             flipbook.rate.validate().map_err(|e| e.to_string())?;
@@ -700,6 +709,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         ("Text".into(), json!(schemars::schema_for!(Text))),
         ("UiNode".into(), json!(schemars::schema_for!(UiNode))),
         ("Animation".into(), json!(schemars::schema_for!(Animation))),
+        (
+            "AnimationRootMotion".into(),
+            json!(schemars::schema_for!(AnimationRootMotion)),
+        ),
         (
             "AnimationGraph".into(),
             json!(schemars::schema_for!(AnimationGraph)),

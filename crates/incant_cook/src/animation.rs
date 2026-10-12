@@ -135,7 +135,7 @@ pub fn load_project_animation_resources(
 // The cook crate is a build-time dependency of shipped players. Keep its
 // directory check local rather than importing source importers/ufbx into builds.
 // As with asset project caches, every descended component must be a real folder.
-fn model_cache(root: &Path) -> std::io::Result<PathBuf> {
+pub(crate) fn model_cache(root: &Path) -> std::io::Result<PathBuf> {
     let root = root.canonicalize()?;
     let mut path = root.clone();
     for part in [".incant", "cache", "models"] {

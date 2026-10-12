@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Root-motion captured catalogs — admission foundation verified
+
+A lean `incant_anim` crate now owns checked immutable root tracks and their bounded
+binary payload, sharing the existing full-pose interpolation arithmetic. Typed
+root selection uses normal command transactions, Undo/Redo and journal reopen;
+the captured-model loader validates topology and deduplicates catalogs. All 232
+affected tests, scoped Clippy, wasm32 and dependency checks pass. The catalog
+round-trips and samples after deleting source and cache data. Independent review
+and runtime connection remain pending: ordinary scene cooking explicitly refuses
+the component until v17 binding lands. This is not connected body movement or
+complete root motion. [Admission evidence](docs/spikes/native-root-motion-catalog.md).
+
 ## Cooked root-motion numeric sampler — locally verified
 
 A bounded CPU sampler now reads rigid local translation/rotation deltas from
