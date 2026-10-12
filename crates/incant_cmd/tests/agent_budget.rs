@@ -101,8 +101,17 @@ fn every_nonuser_budget_command_is_refused_without_changing_state_or_journal() {
     let revision = bus.revision();
     let history = bus.history().to_vec();
     let redo: Vec<_> = bus.redo_history().cloned().collect();
-    let crdt = bus.export_crdt().unwrap();
+    let assert_unchanged = |bus: &CommandBus| {
+        assert_eq!(bus.project(), &before);
+        assert_eq!(bus.revision(), revision);
+        assert_eq!(bus.history(), history);
+        assert_eq!(bus.redo_history().cloned().collect::<Vec<_>>(), redo);
+    };
+    // Windows also enforces the owning bus's exclusive journal lock on reads.
+    drop(bus);
     let journal = std::fs::read(&path).unwrap();
+    let mut bus = CommandBus::persistent(&path, before.clone()).unwrap();
+    assert_unchanged(&bus);
     for actor in nonusers() {
         // A no-op and a transient increase followed by restoring the old cap
         // still require user origin; a mixed transaction cannot launder either.
@@ -115,6 +124,7 @@ fn every_nonuser_budget_command_is_refused_without_changing_state_or_journal() {
                 budget(DEFAULT_AGENT_TOKEN_CAP),
             ],
         ] {
+            let crdt = bus.export_crdt().unwrap();
             let error = bus
                 .execute(
                     commands,
@@ -124,12 +134,12 @@ fn every_nonuser_budget_command_is_refused_without_changing_state_or_journal() {
                 )
                 .unwrap_err();
             assert!(matches!(error, CommandError::AgentBudgetUserOnly));
-            assert_eq!(bus.project(), &before);
-            assert_eq!(bus.revision(), revision);
-            assert_eq!(bus.history(), history);
-            assert_eq!(bus.redo_history().cloned().collect::<Vec<_>>(), redo);
+            assert_unchanged(&bus);
             assert_eq!(bus.export_crdt().unwrap(), crdt);
+            drop(bus);
             assert_eq!(std::fs::read(&path).unwrap(), journal);
+            bus = CommandBus::persistent(&path, before.clone()).unwrap();
+            assert_unchanged(&bus);
         }
     }
     bus.redo().unwrap();
@@ -165,7 +175,7 @@ fn whole_projection_merge_cannot_bypass_origin_and_user_merge_is_reversible() {
     let directory = tempfile::tempdir().unwrap();
     let path = directory.path().join("journal.jsonl");
     let initial = Project::empty("Merged allowance");
-    let mut bus = CommandBus::persistent(&path, initial.clone()).unwrap();
+    let bus = CommandBus::persistent(&path, initial.clone()).unwrap();
     let mut peer = CollaborativeDocument::from_export(&bus.export_crdt().unwrap()).unwrap();
     let mut remote = peer.project().unwrap();
     remote.settings.agent_budget.max_tokens = 2_000_000;
@@ -174,19 +184,28 @@ fn whole_projection_merge_cannot_bypass_origin_and_user_merge_is_reversible() {
         .insert("remote".into(), "alongside cap".into());
     peer.replace(&remote).unwrap();
     let bytes = peer.export().unwrap();
-    let crdt = bus.export_crdt().unwrap();
-    let journal = std::fs::read(&path).unwrap();
-    for actor in nonusers() {
-        assert!(matches!(
-            bus.merge(&bytes, actor),
-            Err(CommandError::AgentBudgetUserOnly)
-        ));
+    let assert_unchanged = |bus: &CommandBus| {
         assert_eq!(bus.project(), &initial);
         assert_eq!(bus.revision(), 0);
         assert!(bus.history().is_empty());
         assert!(!bus.can_redo());
+    };
+    drop(bus);
+    let journal = std::fs::read(&path).unwrap();
+    let mut bus = CommandBus::persistent(&path, initial.clone()).unwrap();
+    assert_unchanged(&bus);
+    for actor in nonusers() {
+        let crdt = bus.export_crdt().unwrap();
+        assert!(matches!(
+            bus.merge(&bytes, actor),
+            Err(CommandError::AgentBudgetUserOnly)
+        ));
+        assert_unchanged(&bus);
         assert_eq!(bus.export_crdt().unwrap(), crdt);
+        drop(bus);
         assert_eq!(std::fs::read(&path).unwrap(), journal);
+        bus = CommandBus::persistent(&path, initial.clone()).unwrap();
+        assert_unchanged(&bus);
     }
     let id = bus.merge(&bytes, Actor::user("author")).unwrap().id.clone();
     assert_eq!(bus.project(), &remote);

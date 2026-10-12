@@ -12,7 +12,7 @@ def read(path):
 
 
 def verify_probe(root, manifest):
-    """Check required local edges and inherited source patches, without Cargo."""
+    """Check required dependency names for local packages; Cargo validates resolution."""
     workspace = read(root / 'Cargo.toml')
     probe = read(manifest)
     packages = read(manifest.with_name('Cargo.lock'))['package']
@@ -40,22 +40,29 @@ def verify_probe(root, manifest):
         for section in sections:
             for kind in kinds:
                 for alias, spec in section.get(kind, {}).items():
-                    if not isinstance(spec, dict):
-                        continue
+                    if isinstance(spec, str):
+                        spec = {'version': spec}
                     base = path.parent
                     if spec.get('workspace'):
                         inherited = workspace['workspace']['dependencies'][alias]
-                        if not isinstance(inherited, dict):
-                            continue
+                        if isinstance(inherited, str):
+                            inherited = {'version': inherited}
                         spec = {**inherited, **spec}
                         base = root
-                    if spec.get('optional') or 'path' not in spec:
+                    # Feature selection and version/source resolution remain Cargo's
+                    # responsibility. Every nonoptional edge must at least exist.
+                    if spec.get('optional'):
                         continue
-                    child = (base / spec['path'] / 'Cargo.toml').resolve()
-                    child_name = read(child)['package']['name']
-                    if child_name not in locked_edges:
-                        raise ValueError(f'missing required local edge {name} -> {child_name}')
-                    pending.append((child, False))
+                    if 'path' in spec:
+                        child = (base / spec['path'] / 'Cargo.toml').resolve()
+                        child_name = read(child)['package']['name']
+                        if child_name not in locked_edges:
+                            raise ValueError(f'missing required local edge {name} -> {child_name}')
+                        pending.append((child, False))
+                    else:
+                        dependency = spec.get('package', alias)
+                        if dependency not in locked_edges:
+                            raise ValueError(f'missing required dependency edge {name} -> {dependency}')
     # A path-dependent engine crate does not carry the engine root's patches
     # into an independent workspace. Keep any reachable patched source exact.
     names = {p['name'] for p in packages}
@@ -116,6 +123,47 @@ class ProbeLockTests(unittest.TestCase):
             verify_probe(root, manifest)
         with manifest.with_name('Cargo.lock').open('a') as f:
             f.write('dependencies=["engine_child"]\n[[package]]\nname="engine_child"\nversion="1.0.0"\n')
+        verify_probe(root, manifest)
+
+    def test_required_registry_edge_is_checked_in_transitive_local_package(self):
+        root, manifest = self.fixture()
+        with (root / 'engine/Cargo.toml').open('a') as f:
+            f.write('[dependencies]\nserde="1"\n')
+        with manifest.with_name('Cargo.lock').open('a') as f:
+            f.write('[[package]]\nname="serde"\nversion="1.0.0"\nsource="registry+https://github.com/rust-lang/crates.io-index"\n')
+        with self.assertRaisesRegex(ValueError, 'missing required dependency edge engine -> serde'):
+            verify_probe(root, manifest)
+        lock = manifest.with_name('Cargo.lock')
+        lock.write_text(lock.read_text().replace('name="engine"\nversion="1.0.0"\n',
+                                               'name="engine"\nversion="1.0.0"\ndependencies=["serde"]\n'))
+        verify_probe(root, manifest)
+
+    def test_renamed_inherited_registry_dependency_uses_package_name(self):
+        root, manifest = self.fixture()
+        with (root / 'Cargo.toml').open('a') as f:
+            f.write('codec={package="serde",version="1"}\n')
+        with (root / 'engine/Cargo.toml').open('a') as f:
+            f.write('[target.\'cfg(windows)\'.dependencies]\ncodec.workspace=true\n')
+        with self.assertRaisesRegex(ValueError, 'missing required dependency edge engine -> serde'):
+            verify_probe(root, manifest)
+        lock = manifest.with_name('Cargo.lock')
+        lock.write_text(lock.read_text().replace('name="engine"\nversion="1.0.0"\n',
+                                               'name="engine"\nversion="1.0.0"\ndependencies=["serde 1.0.0"]\n'))
+        verify_probe(root, manifest)
+
+    def test_inherited_registry_version_string_is_checked(self):
+        root, manifest = self.fixture()
+        with (root / 'Cargo.toml').open('a') as f:
+            f.write('serde="1"\n')
+        with (root / 'engine/Cargo.toml').open('a') as f:
+            f.write('[build-dependencies]\nserde.workspace=true\n')
+        with self.assertRaisesRegex(ValueError, 'missing required dependency edge engine -> serde'):
+            verify_probe(root, manifest)
+
+    def test_unselected_optional_registry_dependency_is_not_required(self):
+        root, manifest = self.fixture()
+        with (root / 'engine/Cargo.toml').open('a') as f:
+            f.write('[dependencies]\nserde={version="1",optional=true}\n')
         verify_probe(root, manifest)
 
     def test_registry_substitution_cannot_replace_engine_path_patch(self):
