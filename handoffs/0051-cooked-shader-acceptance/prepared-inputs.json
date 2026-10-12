@@ -1,37 +1,37 @@
 {
-  "status": "prepared; no graphics grant; approved diagnostic draw extension not added yet",
+  "status": "ready for independent preparation review; graphics grant absent; no ACP launch",
   "required_model": "Opus 5.5",
   "required_effort": "max",
   "native_backend_scope": "Metal only",
-  "geometry_source": "a43dce6769477f5b320165831e7f6123711dbd59",
+  "geometry_source": "85e1c5fca86beca95ce33dd8f882d44ed40d7e45",
   "profile": "ci",
   "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
   "geometry_manifest": {
-    "path": "/tmp/incant-geometry-acceptance-binaries-v1/manifest.json",
-    "sha256": "5f2bec61987e4bd10cf285b492029dc004148c1bf39e97e3df38892bc3f8052d"
+    "path": "/tmp/incant-geometry-acceptance-binaries-v2/manifest.json",
+    "sha256": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806"
   },
   "geometry_binaries": {
     "default": {
-      "incant_render": {
-        "path": "/tmp/incant-geometry-acceptance-binaries-v1/default-incant_render",
-        "sha256": "690881805a7fb86a5aa9a809b426f1d10199fc669495671f916ab09f7848494c",
-        "bytes": 25701120
-      },
       "model_gpu": {
-        "path": "/tmp/incant-geometry-acceptance-binaries-v1/default-model_gpu",
-        "sha256": "8e8beb89485ddd142df371e5c93cee644555c8cff7244d3356b7abc30b9fcf47",
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/default-model_gpu",
+        "sha256": "2e0d6d6c826a9b4196acbbcf8e821f8f3c6ce446d80ca801495372b1a6f27b9e",
         "bytes": 15175800
+      },
+      "incant_render": {
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/default-incant_render",
+        "sha256": "7d6b574d80a4fd68d48d1d7638fdee86324494c1fcf6981f5e8a611bd596d94f",
+        "bytes": 25790160
       }
     },
     "cooked-geometry": {
       "incant_render": {
-        "path": "/tmp/incant-geometry-acceptance-binaries-v1/cooked-geometry-incant_render",
-        "sha256": "4bf7ba847bfbc24cf2cc4cd730bd08b823bad341b97bfcaa02283b754d3bf10f",
-        "bytes": 25781360
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/cooked-geometry-incant_render",
+        "sha256": "24af19ad9c832d39f38e523a188b3846cf9361fd6d07d7022cb86b6c166a200a",
+        "bytes": 25884160
       },
       "model_gpu": {
-        "path": "/tmp/incant-geometry-acceptance-binaries-v1/cooked-geometry-model_gpu",
-        "sha256": "27fa070052500e8418c48255252afc5d010429d2e4810c18cd6de3445c8ab4bb",
+        "path": "/tmp/incant-geometry-acceptance-binaries-v2/cooked-geometry-model_gpu",
+        "sha256": "5dfc98bfa6f6cd0b87d4f35445f7e0154d1b32ee520b6cb551c16c9c8f940305",
         "bytes": 15250744
       }
     }
@@ -51,5 +51,17 @@
   },
   "build_only": true,
   "gpu_executed_for_preparation": false,
-  "commands_file": "brief.md"
+  "commands_file": "brief.md",
+  "diagnostic_source": {
+    "path": "crates/incant_render/tests/diagnostic_output/mod.rs",
+    "sha256": "8f863c455bf264e89c85683197eb9d813c06a72879bba058636101dfc208e9d6"
+  },
+  "prior_geometry_pair_preserved": "/tmp/incant-geometry-acceptance-binaries-v1/manifest.json",
+  "expected_raw_cases": {
+    "output": 16,
+    "diagnostic": 12
+  },
+  "capture_limit": 24,
+  "focused_children": 8,
+  "full_suite_children": 4
 }

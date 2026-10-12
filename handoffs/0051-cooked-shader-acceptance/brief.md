@@ -22,7 +22,7 @@ That was numerical only; no images or Claude appearance review were produced.
 Do not describe it as geometry acceptance or Vulkan/DX12 coverage.
 
 The new default/cooked-geometry pair is built from the exact same source
-`a43dce6769477f5b320165831e7f6123711dbd59`, production `c5268ae0`.
+`85e1c5f` (full hash in `prepared-inputs.json`), production `c5268ae0`.
 Only the cooked build enables `cooked-geometry` (and its `cooked-output`
 dependency). The manifests record complete source/build/feature identities.
 Pinned Naga/wgpu are 29.0.4. Geometry adds diagnostic geometry and all eight
@@ -45,11 +45,12 @@ checking the grant and executing/reaping a child. Do not create or restore your
 own grant. Stop immediately if it is withdrawn; a released marker permanently
 closes this interval. Root/Astra must authorize any subsequent capture interval.
 
-An actual diagnostic draw is NOT yet in the supplied full renderer fixtures:
-they create the pipeline but use model/sprite geometry. A small test-only
-readback extension is proposed separately. Until its exact reviewed binary pair
-is added, report diagnostic numerical/appearance acceptance as pending, even if
-pipeline creation succeeds. Do not invent this coverage.
+The new test-only `diagnostic_output` fixture now draws actual diagnostic cubes
+through known typed SceneInput and an explicit camera. It compares empty/base/
+raised poses in all four formats, requires substantial bounded nonbackground
+pixels for both reflected placements and verifies upward projected motion. Its
+CPU compile/Clippy passed; actual GPU assertions and paired equivalence remain
+pending. The earlier v1 geometry binaries do not contain this test; use v2 only.
 
 ## Existing numerical controls, after the separate grant
 
@@ -70,10 +71,12 @@ once, with the unmodified assertions and test lists in the pairing manifest:
 <cooked-geometry-model_gpu> --ignored --test-threads=1 --nocapture
 ```
 
-Set only `INCANT_OUTPUT_NUMERICAL_EVIDENCE=<fresh per-mode directory>` for each
-lib suite. Compare the 16 current default/cooked cases exactly, including raw RGBA,
-case/format/dimensions/source and adapter identity. Existing analytic assertions
-remain unchanged. Full model suites include all eight shadow variant preparation,
+Set `INCANT_OUTPUT_NUMERICAL_EVIDENCE=<fresh per-mode output directory>` and
+`INCANT_GEOMETRY_NUMERICAL_EVIDENCE=<fresh per-mode diagnostic directory>` for
+each lib suite. Compare the 16 current default/cooked cases exactly, including raw RGBA,
+case/format/dimensions/source and adapter identity. Also compare all twelve diagnostic cases (empty/base/raised times four formats)
+exactly, with matching adapter/source/dimensions and nonbackground assertions.
+Existing analytic assertions remain unchanged. Full model suites include all eight shadow variant preparation,
 mask holes/reflection/culling, retained range/offscreen lights, cascades,
 queued atlas resize, geometric normal offset, and pipeline warmup over all four
 output formats. They also retain the existing unrelated material/light/sprite/
@@ -100,7 +103,13 @@ or fixture catalog is needed. Preserve both sides and inspect actual pixels:
   with the same flags and fresh shadow evidence directory. Five 640x480 images
   each: holes, reflected mask, single/double-sided backs and blended noncaster.
 
-This is 20 exported PNGs total and six focused subprocesses, in addition to the
+- New geometry pair: filter
+  `diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats`
+  with the same flags and a fresh `INCANT_HDR_EVIDENCE` directory. Two 160x96
+  captures each, base and raised; the empty control and all four formats are
+  separately covered by numerical records.
+
+This is 24 exported PNGs total and eight focused subprocesses, in addition to the
 four numerical suites. Do not generate further images without coordination.
 Review tone/color, silhouette, shadow contacts/slopes/curves, mask holes,
 reflection and culling. Exact decoded bytes are the first comparison, but actual
@@ -123,8 +132,8 @@ is reaped/absent, then report graphics release before writing the final report.
 Do not make later renderer calls while assembling documentation.
 
 Write `handoffs/0051-cooked-shader-acceptance/result.md` with verified Opus 5.5/Max,
-scoped output and shadow appearance verdicts, numerical evidence references,
-defects/repro, and explicit pending diagnostic (until added), Vulkan/DX12,
+scoped output, diagnostic and shadow appearance verdicts, numerical evidence references,
+defects/repro, and explicit pending unexecuted backend/device gates including Vulkan/DX12,
 phone/performance/default-enablement gates. Only write this packet and ignored
 `artifacts/0051-cooked-shader-acceptance/`. Commit with `Built-by: claude`.
 No push, PR, merge, account access or production changes. If ACP cannot verify

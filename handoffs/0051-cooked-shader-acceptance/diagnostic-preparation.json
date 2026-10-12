@@ -44,5 +44,9 @@
     "Move test module into subdirectory to avoid Cargo integration auto-discovery"
   ],
   "gpu_executed": false,
-  "pair_status": "prior a43 default/cooked pair preserved; new fixture pair not copied yet"
+  "pair_status": "New default/cooked pair copied and rehashed in binaries-v2; ignored listings confirm test presence; no GPU execution",
+  "pair_manifest": {
+    "path": "/tmp/incant-geometry-acceptance-binaries-v2/manifest.json",
+    "sha256": "b063b8b10888725b9f533f189ad665e8ec9fce04e9ef81c20ac1dbdfed5c5806"
+  }
 }
