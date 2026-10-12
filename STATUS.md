@@ -850,6 +850,16 @@ all 250 non-whitespace glyphs with no new defect. Shipping/device/full Unicode
 and complete Game UI/IME gates remain open.
 [Evidence](docs/spikes/text-bidi-wrap.md).
 
+## Integration pause point
+
+At the user’s request, work paused after the unchanged restart integration
+`7f6e41c4` completed its two fresh ordinary shipping proofs (24 processes).
+Local CPU/Clippy/contract checks pass; final independent integration review and
+publication remain pending. Main179 already contains the reviewed native worker
+and owner. Android is parked separately before integration validation. Checkpoint15
+remains frozen and unpromoted; its hosted CI may finish while local work is paused.
+[Exact resume evidence](docs/spikes/native-restart-main178-pause.md).
+
 ## Current milestone
 
 Main #177 includes compound native animation and Wasm snapshots, authored two-bone

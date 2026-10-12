@@ -1,0 +1,329 @@
+{
+  "root": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping",
+  "files": {
+    "gamepad-restart-win-observe.json": {
+      "sha256": "fd22b73d249e298b18ac1fd69145f7f60bbbb87b1cc796ed223644f3cf5e447d",
+      "bytes": 2005
+    },
+    "win-restart-win-input.json": {
+      "sha256": "7652cca4c6adedfae5f4cf08e682cb1d1440286950c8c927a379dc9ae3567504",
+      "bytes": 3886
+    },
+    "repeat-win.json": {
+      "sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "bytes": 8240
+    },
+    "deleted-maps.json": {
+      "sha256": "a31358ffd5c087ce4a5a93b1f2947e99f656cc3571cd284fbbc1553912d6ee40",
+      "bytes": 132
+    },
+    "lose-restart-win.json": {
+      "sha256": "eb78d94d130d3416462fb7e74300f6c2f6548f3eea048211c2aa033509a6d71f",
+      "bytes": 10010
+    },
+    "lose-input.json": {
+      "sha256": "2cbd99ee77f98d9ce4f01501f7decabf04baae615a94f906468711471259e2cd",
+      "bytes": 557
+    },
+    "locked-exit.json": {
+      "sha256": "7e1c277631aaa3c9f1074a45e58ea04224601ee55b568ef420cbd8d86637260a",
+      "bytes": 6775
+    },
+    "repeat-win-input.json": {
+      "sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "bytes": 1877
+    },
+    "result.json": {
+      "sha256": "094fc5e6acf2e549d79be7a48ae0f0f721429de476cd7e150c4fe0c8defe21b9",
+      "bytes": 3292
+    },
+    "command-001.json": {
+      "sha256": "3702b5776fc21cae1f4e1c2421fa546c6f33c61236ca545df1715a9f384ecd34",
+      "bytes": 6570
+    },
+    "lose-restart-win-observe.json": {
+      "sha256": "913b181e5cce6051cc2eae76d2e3743ac9ce855e8912f11bbb0009146a2c19a0",
+      "bytes": 2003
+    },
+    "lose-restart-win-input.json": {
+      "sha256": "7db9258e6a609a6f696345dde0430b781b7301dedac2941e5026cdd0397342dd",
+      "bytes": 2566
+    },
+    "gamepad-restart-win.json": {
+      "sha256": "9972742f1ef3a3052d1338716e87fbb1c101bafd40890a322ff25303d3e92d1d",
+      "bytes": 10014
+    },
+    "idle-observe.json": {
+      "sha256": "ce5aa343424f1bc5ff37647ef9aa35ad9e7420265e0afd1ad76b7e26649b0519",
+      "bytes": 538
+    },
+    "locked-exit-input.json": {
+      "sha256": "15c29da8390f459f3a5afa5918a8499b6bcaf6937b1b7c659ab9e0b125f33b33",
+      "bytes": 1437
+    },
+    "wall-input.json": {
+      "sha256": "29e406638309e4f87c434439d2e838df8b4a67a2e4d234c6c926f1616d3e2bc3",
+      "bytes": 557
+    },
+    "repeat-win.pcm": {
+      "sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "bytes": 1920000
+    },
+    "gamepad-input.json": {
+      "sha256": "d40f93f9a92b9164a460f61a1ba9816187d761ede7bb526c9710b5c38023ea82",
+      "bytes": 1407
+    },
+    "locked-exit.pcm": {
+      "sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "bytes": 1920000
+    },
+    "wall.json": {
+      "sha256": "55443cf8d4e013936639b4117dfd56074b2ae6bd4df40472ff1cb4a8816f1aec",
+      "bytes": 6730
+    },
+    "win-observe.json": {
+      "sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "bytes": 892
+    },
+    "diagonal.pcm": {
+      "sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+      "bytes": 384000
+    },
+    "wall.pcm": {
+      "sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "bytes": 1920000
+    },
+    "command-006.json": {
+      "sha256": "7ce9a37d4d54e019a58abf171f62ae602a2a88286017e1f0c24166d215c55dd0",
+      "bytes": 5070
+    },
+    "command-010.json": {
+      "sha256": "4e13d5fa400595264998608c2a8f192b5d9eec5ec37513dd8bfba19e0791feb1",
+      "bytes": 7777
+    },
+    "command-011.json": {
+      "sha256": "9cab692e30e3efd8c96ab77b04d6d0961554b4f461bef75dbb3bfb00d82fe024",
+      "bytes": 7764
+    },
+    "command-007.json": {
+      "sha256": "72b2e8f5bcebcbfef816dda5852a02e0fd9f3cb3bbb8b49724a90c73cedb0af1",
+      "bytes": 6591
+    },
+    "win-restart-win.json": {
+      "sha256": "9972742f1ef3a3052d1338716e87fbb1c101bafd40890a322ff25303d3e92d1d",
+      "bytes": 10014
+    },
+    "win.json": {
+      "sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "bytes": 8240
+    },
+    "wall-observe.json": {
+      "sha256": "c92d1bbfdc4367a7858724daadd404c409f6af3040f8b9e6f34eee5b80de14c3",
+      "bytes": 611
+    },
+    "gamepad.pcm": {
+      "sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "bytes": 1920000
+    },
+    "held-input-restart-idle-input.json": {
+      "sha256": "1fcc24b3bec4111f54de58bee72b0d379d049a475267ffc75ad5a27c1363d953",
+      "bytes": 2277
+    },
+    "lose.json": {
+      "sha256": "a28ce4fc5a2d3b8b4538bfed95108914ff2b231a2b8fcf4092c8d1b85ebbc949",
+      "bytes": 7143
+    },
+    "gamepad-restart-win-input.json": {
+      "sha256": "c657df180c8489e8cb9bf7c069b6ec7c940e214614ea862cc7c8a54a88c6d59e",
+      "bytes": 2929
+    },
+    "repeat-win-observe.json": {
+      "sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "bytes": 892
+    },
+    "idle.json": {
+      "sha256": "45d2cc210ed9691d2462819d78fdfaf6a4e1af4c71f02c954115ee09f370e343",
+      "bytes": 4230
+    },
+    "win-restart-win.pcm": {
+      "sha256": "81beb57ba94e8afbf61c796a8a2438ff11c5e05c6fc156e7425b391c81369516",
+      "bytes": 3840000
+    },
+    "lose-restart-win.pcm": {
+      "sha256": "81beb57ba94e8afbf61c796a8a2438ff11c5e05c6fc156e7425b391c81369516",
+      "bytes": 3840000
+    },
+    "command-008.json": {
+      "sha256": "5c45343befacb9e66fedc5c2acce9b7e6e990e287c16f9f9afe3be6017521a95",
+      "bytes": 3807
+    },
+    "held-input-restart-idle.json": {
+      "sha256": "a8f2a55daab0abbfff84264972c9c03768e1d182625264d12118461dec49a78b",
+      "bytes": 6899
+    },
+    "command-012.json": {
+      "sha256": "246ae96ebc14de611b3168cd3edfbeaebc434b0c8c057c2e79898cf771d58d93",
+      "bytes": 5537
+    },
+    "command-004.json": {
+      "sha256": "ed65ab572e917ec4e682b39fde54b12d39774374f4bd6da295080337f6d60e94",
+      "bytes": 5300
+    },
+    "lose.pcm": {
+      "sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "bytes": 1920000
+    },
+    "held-input-restart-idle-observe.json": {
+      "sha256": "d21592f94e79acb856b337dc5c2ec57fef960426214030542b9d84673b01fee4",
+      "bytes": 2041
+    },
+    "win-restart-win-observe.json": {
+      "sha256": "fd22b73d249e298b18ac1fd69145f7f60bbbb87b1cc796ed223644f3cf5e447d",
+      "bytes": 2005
+    },
+    "idle-input.json": {
+      "sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "bytes": 116
+    },
+    "command-005.json": {
+      "sha256": "59ec7d6614d572f99608f976ade532afe0e7b8afd2b151e11649137043b3b774",
+      "bytes": 5366
+    },
+    "idle.pcm": {
+      "sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+      "bytes": 192000
+    },
+    "held-input-restart-idle.pcm": {
+      "sha256": "162ed552903f30cc6da0580694c7d28e51caf15beece525e5ab0695e5a7352f0",
+      "bytes": 2112000
+    },
+    "win.pcm": {
+      "sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "bytes": 1920000
+    },
+    "locked-exit-observe.json": {
+      "sha256": "6cee0115833f366486a2badf6e8384089a3f52e15510a2b376da011eeb5eeca8",
+      "bytes": 611
+    },
+    "gamepad-observe.json": {
+      "sha256": "a40abe9b37f6fa3c8836d98b82104c27c4469c2e188b0cf5ed55bdde15e3e356",
+      "bytes": 892
+    },
+    "command-009.json": {
+      "sha256": "3c26d55a576e32c40940cce576e6409261705157631e4463c5281cb564ab6acb",
+      "bytes": 7765
+    },
+    "gamepad.json": {
+      "sha256": "f5d5bc2ab772ad2ae487a50be471c795f7ca54cfe391a3bc289d6f654bcbea26",
+      "bytes": 8240
+    },
+    "diagonal.json": {
+      "sha256": "d6b3d999a40c8783afe6d8364606d2e7dd3d4ecd0214416f28c0c2bf96b3217b",
+      "bytes": 6666
+    },
+    "command-002.json": {
+      "sha256": "c63757066ac4d7e62d73d4bb604f668087505341f20579feee6082734def4c6b",
+      "bytes": 6582
+    },
+    "gamepad-restart-win.pcm": {
+      "sha256": "81beb57ba94e8afbf61c796a8a2438ff11c5e05c6fc156e7425b391c81369516",
+      "bytes": 3840000
+    },
+    "diagonal-input.json": {
+      "sha256": "dab40ff34829f2274d142e6a8b59d2077ebfc3f46e5ca19276c44c101924e564",
+      "bytes": 995
+    },
+    "deleted-authoring.json": {
+      "sha256": "9e3f5404605ef840f2c1acaac6fe93e5b4c57d43c8e714639dac26853b72096e",
+      "bytes": 2739
+    },
+    "win-input.json": {
+      "sha256": "12507f1135e300f8ddb26a9c810cd5d67e18775bc1a88f4d6e2beb596d1491db",
+      "bytes": 1877
+    },
+    "lose-observe.json": {
+      "sha256": "6769fbc32e51cd9721a93d0701d3855ffa7fc85dd2e068b25838ad6b640e5294",
+      "bytes": 890
+    },
+    "diagonal-observe.json": {
+      "sha256": "9a9016f4b7c3cc157253429cb34e41b287a520f36600d95a8cceea50af4ca085",
+      "bytes": 887
+    },
+    "command-003.json": {
+      "sha256": "c6f6bee2c5ff7c8e3d8ba845ee1ee895ca9e41ed3214868718900c8d592f2908",
+      "bytes": 5516
+    },
+    "package/export.json": {
+      "sha256": "d109e096dc7d59cad1493e5fb77a85765623d6b81d059c48f8cb12388c4fb254",
+      "bytes": 11377
+    },
+    "package/project-build.json": {
+      "sha256": "d71cf2429056cbc9e79b5c223df82c0fddebad790c11b2b9144e3847b043431d",
+      "bytes": 3439
+    },
+    "package/normal-dependencies.txt": {
+      "sha256": "b512c759e91ab3fb29d697fd0860ed889a441eb462c4c4f4f49e5dc82f5c7466",
+      "bytes": 29764
+    },
+    "package/build.log": {
+      "sha256": "be568148ef1d81ad3b4878c56c3445ed78aef99885ecfa517ce55c791f5e719e",
+      "bytes": 1358766
+    },
+    "package/symbols/script-symbols.json": {
+      "sha256": "ab9c84cf7a7d3fee2ca7c29f6d3bbbaba7c0f66610344ff0881d0ee2a8f43b27",
+      "bytes": 1359
+    },
+    "package/player/incant_game_player": {
+      "sha256": "6d768989cdc019c3aa9349ccbbbb5312f23499962f2f2eac699e02e2e331ea37",
+      "bytes": 9549776
+    },
+    "package/player/data/empty-input.json": {
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "bytes": 103
+    },
+    "package/player/data/clips.bin": {
+      "sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "bytes": 12
+    },
+    "package/player/data/package.json": {
+      "sha256": "b4ddceb0be4e0ba73672021940551a46164cdc32e0653a04baa57250b1756694",
+      "bytes": 479
+    },
+    "package/player/data/world.scene": {
+      "sha256": "3550f0f7a64510299136e653b462678707481705472d1cd334d69d800364e9a7",
+      "bytes": 5213
+    },
+    "package/player/data/input-actions.json": {
+      "sha256": "769b7d548f12fae2532d9cd8ec632aaab76bb4eea15031f2715871b2f1f360c2",
+      "bytes": 479
+    },
+    "package/player/data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json": {
+      "sha256": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+      "bytes": 674
+    },
+    "package/player/data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2": {
+      "sha256": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f",
+      "bytes": 312
+    },
+    "package/player/data/fonts/27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a.json": {
+      "sha256": "a08043e6d0266c90d90356aafb8c5b4b775f34abb9dbe96ae2e338e438e3f43c",
+      "bytes": 302
+    },
+    "package/player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": {
+      "sha256": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+      "bytes": 556264
+    },
+    "package/symbols/incant_game_player.dSYM/Contents/Info.plist": {
+      "sha256": "a325edef7ee76bf99ea09648956f34dd7c7c86ae26102a78aca991d8b7f9fba1",
+      "bytes": 664
+    },
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-14eb24f8b8fefb33": {
+      "sha256": "a68206df1db62261457ee4bb834456162cbbadc88b79ed9320ec17154406f39b",
+      "bytes": 210662327
+    },
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-14eb24f8b8fefb33.yml": {
+      "sha256": "0095428447043f543fcc45707de8fea10f722f1518954c0df6e531fe36943f1f",
+      "bytes": 3267549
+    }
+  }
+}
