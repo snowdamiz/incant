@@ -45,11 +45,12 @@ def main():
     out.mkdir(parents=True, exist_ok=False)
     authoring = out / 'authoring'
     shutil.copytree(development / 'authoring', authoring)
-    assert digest(authoring / 'gameplay.ts') == reference['gameplay_sha256']
+    assert digest(authoring / 'gameplay.ts') == reference.get('authored_source_sha256', reference['gameplay_sha256'])
     project_sha = digest(authoring / 'planar.json')
     sys.path.insert(0, str(ROOT / 'tools'))
     import export_native
-    exported = export_native.export(authoring / 'planar.json', out / 'package', camera='00000000000000000000000007')
+    exported = export_native.export(authoring / 'planar.json', out / 'package', camera='00000000000000000000000007',
+                                    ui_viewport='640x480' if reference.get('presentation') else None)
     assert exported['project_sha256'] == project_sha
     assert exported['build_storage_removed_before_startup']
     assert exported['startup_source_parsing'] is False
@@ -62,6 +63,8 @@ def main():
     shutil.rmtree(authoring)
     player_root = out / 'package/player'
     player = player_root / ('incant_game_player.exe' if os.name == 'nt' else 'incant_game_player')
+    assert digest(player) == exported['player_sha256']
+    assert not list((out / 'package').rglob('*.map'))
     package_before = inventory(player_root)
     environment = {'PATH': str(player_root), 'TMPDIR': str(out), 'TMP': str(out), 'TEMP': str(out)}
     environment.update({key: os.environ[key] for key in ('SystemRoot', 'SystemDrive', 'WINDIR') if key in os.environ})
@@ -74,6 +77,7 @@ def main():
         pcm = out / f'{name}.pcm'
         argv = [str(player), '--package', str(player_root / 'data'), '--ticks', str(expected['tick']),
                 '--input-recording', str(recording), '--observe', str(observe), '--output', str(pcm)]
+        if reference.get('presentation'): argv.extend(['--ui-viewport', '640x480'])
         result = subprocess.run(argv, cwd=player_root, env=environment, text=True,
                                 capture_output=True, timeout=180)
         write(out / f'{name}-process.json', {'argv': argv, 'exit': result.returncode,
@@ -84,6 +88,13 @@ def main():
         for field in ('frames', 'pcm_sha256', 'logs', 'observations'):
             assert actual[field] == expected[field], (name, field)
         assert digest(pcm) == actual['pcm_sha256']
+        if reference.get('presentation'):
+            binding = runpy.run_path(str(ROOT / 'samples/planar/presentation.py'))
+            ui = actual['render_input']['ui']
+            assert ui['widgets'] == 7 and ui['viewport'] == [640, 480] and ui['glyphs'] > 0
+            assert ui['sources'][binding['HUD']['status']] == reference['presentation'][name]['final_status']
+            assert ui['sources'][binding['HUD']['prompt']] == ''
+            assert ui['focus'] is None
         write(out / f'{name}.json', actual)
         reports[name] = {'report_sha256': digest(out / f'{name}.json'),
                          'pcm_sha256': digest(pcm), 'ticks': actual['tick']}
@@ -93,7 +104,7 @@ def main():
     write(out / 'result.json', {'passed': True, 'runs': reports, 'export': exported,
         'authoring_deleted': True, 'removed_source_maps': removed_maps,
         'package_files': package_before, 'original_development_unchanged': True,
-        'source_sha256': reference['gameplay_sha256'], 'helper_sha256': digest(Path(__file__)),
+        'presentation': reference.get('presentation'), 'source_sha256': reference['gameplay_sha256'], 'helper_sha256': digest(Path(__file__)),
         'limitations': ['Numerical tilemap/sprite room, no finished level or GPU evidence',
                         'Host desktop only, no reference-device or performance gate',
                         'No physics checkpoint continuation claim']})

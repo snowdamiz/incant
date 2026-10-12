@@ -10,11 +10,13 @@ import json
 import math
 from pathlib import Path
 import runpy
+import shutil
 import struct
 import subprocess
 import zlib
 
 ROOT = Path(__file__).resolve().parents[2]
+PRESENTATION = runpy.run_path(str(ROOT / 'samples/planar/presentation.py'))
 ID = lambda n: f'{n:026d}'
 SCRIPT, PLAYER, MAP, EXIT, HAZARD, CONTROLLER, CAMERA, FRAME, ATLAS, LAYER = map(ID, range(1, 11))
 PICKUPS = list(map(ID, (11, 12)))
@@ -130,6 +132,7 @@ def verify_reports(reports):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--presentation', action='store_true', help='Add optional numerical state-frame/HUD roles')
     parser.add_argument('output', type=Path); parser.add_argument('--binary', type=Path, required=True)
     args = parser.parse_args(); out = args.output.resolve(); out.mkdir(parents=True, exist_ok=False)
     inputs = out / 'authoring'; inputs.mkdir(); binary = args.binary.resolve(strict=True); binary_sha = digest(binary)
@@ -147,6 +150,10 @@ def main():
     write(inputs / 'tiles.atlas.json', {'version': 1, 'id': ATLAS, 'maximum_size': [8, 8], 'padding': 1,
                                       'frames': {FRAME: {'name': 'Numerical tile', 'path': 'white.png'}}})
     texture = execute([binary, 'import', project, 'tiles.atlas.json'])['asset']['id']
+    font = None
+    if args.presentation:
+        shutil.copyfile(ROOT / 'crates/incant_text/tests/fonts/NotoSans-Regular.ttf', inputs / 'font.ttf')
+        font = execute([binary, 'import', project, 'font.ttf'])['asset']['id']
     Rpc = runpy.run_path(str(ROOT / 'tools/probes/script-source-transactions.py'))['Rpc']
     rpc = Rpc(binary, project, journal); calls = []
 
@@ -156,14 +163,21 @@ def main():
 
     try:
         before = call('project.read'); scene = next(iter(before['project']['scenes']))
+        entities = room(scene, texture)
+        source = (ROOT / 'samples/planar/gameplay.ts').read_text()
+        if args.presentation:
+            source = PRESENTATION['observed_source'](source)
+            controller = next(c['entity'] for c in entities if c['entity']['id'] == CONTROLLER)
+            controller['components']['Script']['props'].update(PRESENTATION['props'](globals()))
+            entities += PRESENTATION['commands'](scene, font, globals())
         call('command.execute', {'expected_revision': before['revision'], 'description': 'Author numerical 2D sample', 'commands': [
             {'op': 'write_script', 'script_id': SCRIPT, 'expected_source': {'state': 'missing'},
-             'source': (ROOT / 'samples/planar/gameplay.ts').read_text()},
+             'source': source},
             {'op': 'upsert_script', 'script': {'id': SCRIPT, 'name': 'Planar Sample', 'path': 'gameplay.ts'}},
             {'op': 'set_input_actions', 'actions': {'move': {'kind': 'axis2', 'dead_zone': .1, 'bindings': [
                 {'type': 'key', 'code': key, 'scale': value} for key, value in
                 [('KeyD', [1, 0]), ('KeyA', [-1, 0]), ('KeyW', [0, 1]), ('KeyS', [0, -1])]] + [
-                    {'type': 'gamepad_stick', 'id': 0, 'stick': 'left', 'invert_y': True}]}}}, *room(scene, texture)]})
+                    {'type': 'gamepad_stick', 'id': 0, 'stick': 'left', 'invert_y': True}]}}}, *entities]})
         authored = call('project.read'); call('history.undo')
         assert call('project.read')['project'] == before['project'] and not (inputs / 'gameplay.ts').exists()
         call('history.redo'); assert call('project.read')['project'] == authored['project']
@@ -175,15 +189,20 @@ def main():
     hashes = {p.name: digest(p) for p in inputs.iterdir() if p.is_file()}; results = {}
     for name in NAMES:
         timeline = replay(name); replay_path = out / f'{name}-input.json'; write(replay_path, timeline)
-        plan = out / f'{name}-observe.json'; write(plan, observations(name, timeline['ticks']))
+        plan = out / f'{name}-observe.json'; checks = observations(name, timeline['ticks'])
+        if args.presentation: PRESENTATION['extend_observations'](checks)
+        write(plan, checks)
         report = execute([binary, 'native-play', project, '--camera', CAMERA, '--ticks', timeline['ticks'],
-                          '--input-replay', replay_path, '--observe', plan])
+                          '--input-replay', replay_path, '--observe', plan,
+                          *(['--ui-viewport', PRESENTATION['VIEWPORT']] if args.presentation else [])])
         write(out / f'{name}.json', report); results[name] = report
     verify_reports(results)
+    presentation = {name: PRESENTATION['verify_report'](name, report, globals()) for name, report in results.items()} if args.presentation else None
     assert digest(binary) == binary_sha and {p.name: digest(p) for p in inputs.iterdir() if p.is_file()} == hashes
+    refusals = PRESENTATION['refusal_controls'](binary, out, out / 'refusals', globals()) if args.presentation else []
     write(out / 'result.json', {'passed': True, 'binary_sha256': binary_sha,
         'gameplay_sha256': digest(ROOT / 'samples/planar/gameplay.ts'), 'authoring_undo_redo_reopen': True,
-        'authoring_unchanged': True, 'runs': list(results), 'limits': ['Numerical CPU fixture', 'No visual/device/physics save gate']})
+        'authoring_unchanged': True, 'presentation': presentation, 'refusals': [r['name'] for r in refusals], 'authored_source_sha256': digest(inputs / 'gameplay.ts'), 'project_sha256': digest(project), 'runs': list(results), 'limits': ['Numerical CPU fixture', 'No visual/device/physics save gate']})
     print(json.dumps({'passed': True, 'runs': len(results), 'output': str(out)}))
 
 
