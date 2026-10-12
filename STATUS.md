@@ -32,6 +32,16 @@ export, Android and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
+## Native worker owner — local execution and review passed
+
+The trusted developer owner builds the selected kernel, verifies worker identity,
+and enforces request deadlines and complete process-tree cleanup. Actual sessions
+preserve their original kernel while public authoring changes the next mode;
+state matches ordinary native Play after private source removal. Full tools and
+focused lifecycle checks and independent review pass; integration is pending. Editor GPU
+embedding and Windows execution remain separate.
+[Contract and evidence](docs/spikes/native-worker-owner.md).
+
 ## Retained native CPU worker — local checks and review passed
 
 A native worker drops authoring state after startup and retains only its disposable

@@ -9,6 +9,7 @@ flags, tools or executables. This developer launcher uses the existing native
 Play host and its startup-only cook; it is not an editor worker or shipped player.
 """
 import argparse
+from contextlib import contextmanager
 import json
 import os
 from pathlib import Path
@@ -38,7 +39,9 @@ def executable(messages, target_dir, target):
     return path
 
 
-def play(project, target_dir, options, evidence=None):
+@contextmanager
+def prepare(project, target_dir, evidence=None):
+    """Yield one private fixed-mode binary while its trusted caller owns it."""
     project = Path(project).resolve(strict=True)
     payload = read(project, 64 * 1024**2)
     mode = physics_export.project_mode(payload)
@@ -86,23 +89,29 @@ def play(project, target_dir, options, evidence=None):
                 shutil.copy2(built, binary)
                 receipt['binary_sha256'] = sha256(read(binary, 512 * 1024**2))
             require(sha256(read(project, 64 * 1024**2)) == project_hash, 'Project changed during Play build; retry')
-            receipt['play_command'] = [str(binary), 'native-play', str(project), *options]
-            with (private / 'play.stdout').open('w') as stdout, (private / 'play.stderr').open('w') as stderr:
-                result = native_process.run(receipt['play_command'], cwd=ROOT, env=env,
-                                            stdout=stdout, stderr=stderr, timeout=3600)
-            receipt['play_exit_code'] = result.returncode
-            require(result.returncode == 0, 'Native Play failed: ' + (private / 'play.stderr').read_text()[-4000:])
-            report = json.loads((private / 'play.stdout').read_text())
-            require(report['project_sha256'] == project_hash, 'Play loaded a different project snapshot')
-            receipt['passed'] = report['passed']
-            return report
+            yield binary, env, receipt, private
         finally:
             # Managed process cleanup happens before temporary inputs disappear.
             if evidence is not None:
-                for name in ('cargo.jsonl', 'cargo.stderr', 'play.stdout', 'play.stderr'):
+                for name in ('cargo.jsonl', 'cargo.stderr', 'play.stdout', 'play.stderr', 'worker.stderr'):
                     if (private / name).exists():
                         shutil.copy2(private / name, evidence / name)
                 write_json(evidence / 'selection.json', receipt)
+
+
+def play(project, target_dir, options, evidence=None):
+    project = Path(project).resolve(strict=True)
+    with prepare(project, target_dir, evidence) as (binary, env, receipt, private):
+        receipt['play_command'] = [str(binary), 'native-play', str(project), *options]
+        with (private / 'play.stdout').open('w') as stdout, (private / 'play.stderr').open('w') as stderr:
+            result = native_process.run(receipt['play_command'], cwd=ROOT, env=env,
+                                        stdout=stdout, stderr=stderr, timeout=3600)
+        receipt['play_exit_code'] = result.returncode
+        require(result.returncode == 0, 'Native Play failed: ' + (private / 'play.stderr').read_text()[-4000:])
+        report = json.loads((private / 'play.stdout').read_text())
+        require(report['project_sha256'] == receipt['project_sha256'], 'Play loaded a different project snapshot')
+        receipt['passed'] = report['passed']
+        return report
 
 
 def main():
