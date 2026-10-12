@@ -38,6 +38,16 @@ Independent review also corrected interrupted cache publication: private staged
 files now publish without clobber, with partial-write/concurrent/corrupt/symlink
 controls; the original source-free shipping proof remains separately recorded.
 
+## Native game UI window delivery — CPU adapter
+
+The ordinary desktop host now queues bounded opaque pointer/text receipts into
+its composed UI tick, with logical-DPI relayout, exclusive pointer ownership and
+transactional cancellation. The main131 integration passes 72 affected CPU
+tests, scoped Clippy, wasm32 and normal runtime dependency checks. The
+managed native preedit/activation bridge and Claude0056 real screen-space draw
+integration remain pending; no OS/GPU/device acceptance is claimed.
+[Evidence](docs/spikes/native-ui-window-input.md).
+
 ## Durable budget lock release — validated in checkpoint8
 
 Checkpoint7 exposed Busy when reopening a completed ledger. A private lock guard
@@ -202,6 +212,7 @@ causal rollback regressions now pass. The strict generated ABI, wasm32 guest
 compile and 228 Python cases (four platform skips) pass. The reviewed main128 union also passes wasm32, tooling and shipping dependency
 checks after correcting the audit feature selection. Public shipping steering,
 remaining navigation bindings and reference-device gates are not claimed. [Scope](docs/spikes/native-wasm-steering.md).
+
 
 ## Native local avoidance — current-main integration checked
 
