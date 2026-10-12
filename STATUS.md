@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Physics-mode foundation — current main172 verified
+
+The full process graph forwards deterministic, fast and explicit eight-lane
+physics choices without changing defaults. Cooked scenes retain their header
+size and bind the exact compiled kernel before world allocation. Current main172
+passes 353 CPU tests in each mode, Clippy and headless/player/mobile-library/editor
+compilation with actual target feature receipts. Five additive Cargo seams preserve
+current mobile and host capabilities; production Rust source matches the reviewed
+foundation. Final integrated review is pending. Project settings and automatic
+process/export selection remain separate work; physics-save refusal stays closed.
+[Integrated source and checks](docs/spikes/physics-mode-main172.md).
+
 ## Pinned mobile bytecode compatibility — merged main171
 
 Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
