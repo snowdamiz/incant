@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-10-12T04:38:53.912923+00:00",
+  "reviewer": "astra/root",
+  "commit": "02290953416c86220ffe0bf977bec7eab6d5b0ac",
+  "decision": "Accepted scoped CPU implementation plus final copied-player evidence for integration; no remaining source findings in reviewed scope.",
+  "prior_cpu_review_sha256": "2058ac49e0bee1b7d14d67584bbcbac98559d33f4a6da50d75d701fe67ac3328",
+  "verified_committed_sources": 84,
+  "verified_logs": 18,
+  "artifacts": {
+    "docs/spikes/evidence/native-ui-layout-final.json": "828258ac75a6755318cf8bcb02ae38136f92661a60c7c21fee319a9e41d40ad4",
+    "docs/spikes/evidence/native-ui-export-003.json": "14a983925a5ac640c86dc1bee06bb613030b9a5785b7166b9368105c779fad92",
+    "docs/spikes/evidence/native-ui-export-package.json": "93f7cdb159c8d844d518d1d0fa293a3d5906b6214a49417bbe3df2dd999a1707",
+    "docs/spikes/evidence/native-ui-export-map-free.json": "4ae100bd13522ab4ba2d87616d30640030e8eaa6c2d4a2eb5364082dbbddab4e"
+  },
+  "checks": [
+    "Reviewed strengthened proof helper: persistence opt-in and actual typed negative failures, source provenance assertion, scoped safe debug-map removal.",
+    "Verified actual shipping player SHA/size, package shipping codegen and normal dependency list; external debug maps absent.",
+    "Three map-free process reports/PCM match exactly and five specific refusal paths fail with output absent.",
+    "Original receipt reports qualified source-map boundary; subsequent replay uses same executable without claiming a second compilation."
+  ],
+  "limitations": [
+    "Current-main combined source recook remains publisher-owned and required before publication acceptance.",
+    "CPU-only UI, no native window/GPU/platform IME acceptance or phone performance claim.",
+    "UI checkpoints and static/development Wasm UI capabilities remain explicitly unsupported."
+  ]
+}
