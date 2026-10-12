@@ -154,6 +154,22 @@ def animation_guests(rustc, inputs, sdk_guests, environment):
     return modules
 
 
+def formatting_guests(rustc, inputs, sdk_guests, environment):
+    """Actual no_std primitive ICU formatting and ignored-error controls."""
+    sample = inputs/'formatting.rs'
+    shutil.copy2(ROOT/'sdk/rust/samples/formatting.rs', sample)
+    failure = inputs/'formatting-failure.rs'
+    shutil.copy2(ROOT/'sdk/rust/fixtures/formatting_failure.rs', failure)
+    modules = []
+    for kind in (None, 'capacity', 'number', 'range', 'date', 'year', 'quota', 'callback'):
+        name = 'rust-formatting'+('-'+kind if kind else '')
+        module = sdk_guests/(name+'.wasm')
+        rust_guest.compile(rustc, failure if kind else sample, module,
+                           env=environment, cfg=['sdk_format_'+kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -215,6 +231,7 @@ def main():
                 modules.append((name,module_path))
             modules.extend(localization_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(animation_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))
             environment['INCANT_RUST_SDK_GUESTS']=str(sdk_guests)
             flipbook = inputs/'flipbook.rs'; shutil.copy2(ROOT/'crates/incant_game_player/fixtures/flipbook.rs', flipbook)
             flipbook_module = inputs/'flipbook.wasm'

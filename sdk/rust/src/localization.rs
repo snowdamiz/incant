@@ -2,8 +2,8 @@
 //! so it can outlive the callback without retaining a VM or a native pointer.
 //! Missing-string requested/resolved locale are the enclosing result's fields.
 pub use incant_wasm_abi::localization::{
-    Argument, CalendarDate, LocaleSettings, LocaleSnapshot, LocalizeRequest, LocalizedText,
-    MessageArgument, MissingKind, MissingString,
+    Argument, CalendarDate, DateLength, LocaleSettings, LocaleSnapshot, LocalizeRequest,
+    LocalizedText, MessageArgument, MissingKind, MissingString,
 };
 pub use incant_wasm_abi::{
     LOCALIZATION_MAX_REQUEST_BYTES, LOCALIZATION_MAX_RESULT_BYTES, LOCALIZATION_MAX_SETTINGS_BYTES,

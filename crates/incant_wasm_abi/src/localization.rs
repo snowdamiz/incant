@@ -9,11 +9,107 @@ pub enum Error {
 pub type Result<T> = core::result::Result<T, Error>;
 const VERSION: u32 = 1;
 const MAX_NUMBER: f64 = 9_007_199_254_740_991.;
+pub use crate::DateLength;
+/// Fixed-size copied formatting request. Calendar validity is checked by the
+/// shared native formatter; the wire codec validates its primitive domain.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum FormatRequest {
+    Number(f64),
+    Date(CalendarDate, DateLength),
+}
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct CalendarDate {
     pub year: i32,
     pub month: u8,
     pub day: u8,
+}
+fn check_number(value: f64) -> Result<()> {
+    if value.is_finite() && value.abs() <= MAX_NUMBER {
+        Ok(())
+    } else {
+        Err(Error::Malformed)
+    }
+}
+fn check_date(date: CalendarDate) -> Result<()> {
+    if (-9999..=9999).contains(&date.year)
+        && (1..=12).contains(&date.month)
+        && (1..=31).contains(&date.day)
+    {
+        Ok(())
+    } else {
+        Err(Error::Malformed)
+    }
+}
+pub fn encode_format(request: FormatRequest, bytes: &mut [u8]) -> Result<usize> {
+    match request {
+        FormatRequest::Number(value) => check_number(value)?,
+        FormatRequest::Date(date, _) => check_date(date)?,
+    }
+    let bytes = bytes
+        .get_mut(..LOCALIZATION_FORMAT_BYTES)
+        .ok_or(Error::Bounds)?;
+    let mut w = Writer::frame(bytes, LOCALIZATION_FORMAT_MAGIC)?;
+    match request {
+        FormatRequest::Number(value) => {
+            w.u32(0)?;
+            w.put(&value.to_le_bytes())?;
+        }
+        FormatRequest::Date(date, length) => {
+            w.u32(1)?;
+            w.u32(date.year as u32)?;
+            w.put(&[date.month, date.day, length as u8, 0])?;
+        }
+    }
+    Ok(w.used)
+}
+pub fn decode_format(bytes: &[u8]) -> Result<FormatRequest> {
+    let mut r = Reader::frame(bytes, LOCALIZATION_FORMAT_MAGIC, LOCALIZATION_FORMAT_BYTES)?;
+    let request = match r.u32()? {
+        0 => {
+            let value = f64::from_le_bytes(r.take(8)?.try_into().unwrap());
+            check_number(value)?;
+            FormatRequest::Number(value)
+        }
+        1 => {
+            let year = r.u32()? as i32;
+            let fields = r.take(4)?;
+            let date = CalendarDate {
+                year,
+                month: fields[0],
+                day: fields[1],
+            };
+            check_date(date)?;
+            if fields[3] != 0 {
+                return Err(Error::Malformed);
+            }
+            let length = DateLength::from_tag(fields[2]).ok_or(Error::Malformed)?;
+            FormatRequest::Date(date, length)
+        }
+        _ => return Err(Error::Malformed),
+    };
+    r.end()?;
+    Ok(request)
+}
+/// Formatted primitive text uses result kind 2. Older kind-specific readers
+/// explicitly reject it rather than reinterpret it as locale/message metadata.
+pub fn encode_formatted(text: &str, bytes: &mut [u8]) -> Result<usize> {
+    let mut w = Writer::frame(bytes, LOCALIZATION_RESULT_MAGIC)?;
+    w.u32(2)?;
+    w.text(text, LOCALIZATION_MAX_TEXT_BYTES)?;
+    Ok(w.used)
+}
+pub fn decode_formatted(bytes: &[u8]) -> Result<&str> {
+    let mut r = Reader::frame(
+        bytes,
+        LOCALIZATION_RESULT_MAGIC,
+        LOCALIZATION_MAX_RESULT_BYTES,
+    )?;
+    if r.u32()? != 2 {
+        return Err(Error::Malformed);
+    }
+    let text = r.text(LOCALIZATION_MAX_TEXT_BYTES)?;
+    r.end()?;
+    Ok(text)
 }
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub enum MessageArgument<'a> {

@@ -1,0 +1,15 @@
+{
+  "reviewer": "astra",
+  "packet_sha256": "cb7ca156d417a6718f378797315b526396e5bb944f4c347ea77c9765806bc3ff",
+  "source_inputs_verified": 27,
+  "log_receipts_verified": 17,
+  "findings": [],
+  "source_review": "Additive generated opcode25/DateLength, bounded strict copied request/result wire, native ICU/domain parity, committed-locale snapshot, shared quotas, common-ingress sticky rejection and SDK ignored-error rollback reviewed. No source changes after review.",
+  "verified_tests": {
+    "passed": 294,
+    "groups": 52,
+    "failed": 0,
+    "ignored": 0
+  },
+  "scope": "Actual Wasmtime and compiled wasm2c tests. Three separate fresh processes are existing bulk smoke, not a new formatting shipping-export or device-performance gate."
+}

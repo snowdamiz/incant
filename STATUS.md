@@ -800,3 +800,22 @@ package/font controls and actual schema/generated/strict SDK checks.
 [Integration receipt](docs/spikes/evidence/native-text-bindings-main118.json).
 Composed Text startup and drawing remain separate queued work; existing consumers
 explicitly refuse Text in this foundation.
+
+## Native Wasm standalone formatting
+
+Wasm modules now expose standalone ICU number/date formatting through additive
+opcode 25 and the public no_std Rust SDK. The actual committed locale, date
+lengths, Gregorian validation and number domain match TypeScript; queued locale
+changes remain invisible until atomic acceptance and pseudo settings do not wrap
+primitive text. Correct-epoch ingress and ignored SDK errors reject mixed work.
+Frozen local validation passes 294 tests/doctests, actual Wasmtime/wasm2c guests,
+all-target Clippy and default wasm32 compilation. See
+[formatting evidence](docs/spikes/evidence/native-wasm-formatting.json).
+Catalog editing/report paging, complete SDK and device/performance gates remain
+open; existing bulk fresh-process smoke is not a formatting shipping export.
+
+Wasm standalone formatting is integrated on actual main119 with all 23 reviewed
+implementation hashes preserved. Current-source actual Wasmtime/wasm2c validation
+passes 295 tests, all-target Clippy, default wasm32, 19 tooling tests and SDK/graph
+checks; the three fresh bulk processes remain a separate development-only smoke.
+[Receipt](docs/spikes/evidence/native-wasm-formatting-main119.json).

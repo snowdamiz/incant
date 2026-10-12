@@ -35,6 +35,10 @@ pub enum Call {
         ptr: i32,
     },
     Locale,
+    Format {
+        ptr: i32,
+        len: i32,
+    },
     Localize {
         ptr: i32,
         len: i32,
@@ -323,6 +327,7 @@ impl Capability {
             && matches!(
                 call,
                 Call::Locale
+                    | Call::Format { .. }
                     | Call::Localize { .. }
                     | Call::ReadLocalized { .. }
                     | Call::SetLocale { .. }
@@ -367,6 +372,16 @@ impl Capability {
                 self.command(StructuralCommand::ControlAnimation { entity, control })?;
             }
             Call::Locale => return self.locale_state()?.locale(),
+            Call::Format { ptr, len } => {
+                let len =
+                    usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;
+                if len != incant_wasm_abi::LOCALIZATION_FORMAT_BYTES {
+                    return Err(Error::Abi("localization format length"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                return self.locale_state()?.format(&memory[region]);
+            }
             Call::Localize { ptr, len } | Call::SetLocale { ptr, len } => {
                 let len =
                     usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;

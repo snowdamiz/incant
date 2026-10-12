@@ -139,5 +139,14 @@ callback, at most 64 queries and 64 settings commands, with 64 arguments and 16
 fallbacks. Each query costs four of the 1,024 query units. Maximum wire buffers
 include extra lengths/tags; repeated result copies consume the existing transfer
 quota. Correct-epoch active localization ingress failures reject the entire
-batch. Standalone number/date formatting, catalog edits and report enumeration
-are not native Wasm capabilities in this slice.
+batch. `format_number(value, result_scratch)` and
+`format_date(CalendarDate, DateLength, result_scratch)` return copied UTF-8 text in
+the callback's committed locale. `DateLength::{Short, Medium, Long}` uses generated
+registry tags; Medium matches TypeScript's default. Values must be finite within
+the JS-safe integer magnitude; calendar years are -9999..9999 and actual Gregorian
+validity is checked natively. These calls do not pseudo-wrap their results. A
+queued locale change affects only later callbacks. Formatting shares existing
+query/output quotas, charges no logical input bytes (matching TypeScript), and
+charges its fixed 24-byte request and result copies to transfer limits. See
+[samples/formatting.rs](samples/formatting.rs). Catalog edits and report
+enumeration remain unsupported.
