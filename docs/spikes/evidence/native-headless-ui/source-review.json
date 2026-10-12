@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-12T20:01:41.292572+00:00",
+  "decision": "accepted scoped source review",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "base": "67174c3a8a6e05b4966ce8570921fe20f4675dfe",
+  "inventory": "/Users/andreyyurlov/.codex/incant-evidence/native-headless-ui-source-freeze-002/inventory.json",
+  "inventory_sha256": "e3f9e21107b143ffd4a34ba24665045279d47dca0ec7d5de7aaf08673da877a3",
+  "files_rehashed": 19,
+  "delta_from_first_freeze": [
+    "crates/incant_headless/tests/native_ui.rs",
+    "crates/incant_render_game/tests/ui/recorded.rs",
+    "schemas/agent-tools.json"
+  ],
+  "reviewed": [
+    "Explicit finite bounded optional viewport admission requires an authored camera before cook/compiler; absent viewport preserves non-UI startup.",
+    "Prepared settings survive both retained play and agent session construction; disposable native game contains no authoring documents.",
+    "CLI, one-shot RPC, incremental RPC and ordinary player route through one shared typed recorded-UI resolver. Current focus validation precedes resize, then pointer/focus tokens are re-resolved for timeline semantics.",
+    "Direct typed UI records enforce notification count, aggregate text bytes, per-record canonical IDs, finite pointers and UTF-8 cursor boundaries before text cloning/presentation mutation.",
+    "No new recording format or asynchronous platform receipt semantics; physical-only input remains on existing composed tick path.",
+    "Behavior tests cover CLI/run/step log parity, focus/preedit/cancel/commit, Enter filtering, pointer and viewport handling, malformed packets, candidate failure preservation, guest terminal failure and no PCM publication.",
+    "Generated tool schema adds only optional viewport and documents v1/v2 recording; existing gameplay/UI ABI is unchanged."
+  ],
+  "limits": [
+    "Source review plus existing producer-reported focused checks; full affected suite remains active and needs terminal result.",
+    "Viewport resize remains a separate existing presentation transaction; not a claim of rollback on every later physical input or guest failure.",
+    "No native-window, GPU, device-performance or phase-gate evidence."
+  ]
+}
