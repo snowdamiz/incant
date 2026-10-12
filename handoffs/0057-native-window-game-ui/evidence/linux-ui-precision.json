@@ -22,7 +22,6 @@
       }
     ]
   },
-  "ci_device": "GitHub ubuntu-latest x86_64, mesa-vulkan-drivers (lavapipe on llvmpipe) through wgpu Vulkan (.github/workflows/desktop.yml)",
   "ci_measurements_from_log": {
     "scale 1 Rgba8UnormSrgb": {
       "worst": 1,
@@ -57,27 +56,7 @@
     "srgb": "lp_bld_format_srgb.c: decode s<=15 ? s/(12.6*255) : 0.0023+0.0030x+0.6935x^2+0.3012x^3 (documented within +-0.35); encode a*x^0.375+b*x^0.5+c, a=0.675*1.0622*255, b=0.325*1.0622*255, c=-0.062*255, x<=0.0031308 linear 12.92*255, iround (documented +-0.17 before rounding)",
     "read_via": "android.googlesource.com/platform/external/mesa3d/+/refs/heads/main (gitlab.freedesktop.org refused automated access)"
   },
-  "cpu_emulation_of_ci_configuration": {
-    "note": "Model::Llvmpipe composed with the pre-fix shader semantics (zero-coverage fragments still blend), compared with exact arithmetic by the previous metric. rsqrt estimates in llvmpipe's encoder are not emulated.",
-    "scale 1": {
-      "worst": 2,
-      "over_1": 1
-    },
-    "scale 2": {
-      "worst": 7,
-      "over_1": 303
-    },
-    "scale 1.5": {
-      "worst": 6,
-      "over_1": 179
-    },
-    "nested clips": {
-      "worst": 2,
-      "over_1": 2
-    },
-    "log": "checks/oracle-cpu-old-shader-emulation.txt"
-  },
-  "diagnosis": "Reference-test defect: the oracle assumed exact bilinear filtering and exact, unquantized sRGB blending and used a fixed code tolerance. llvmpipe filters the R8 atlas in 8-bit fixed point and converts sRGB with polynomials between blends; near black the sRGB curve magnifies a 1/255 coverage step to 4-8 codes. Geometry, clipping and opacity were not wrong. Secondary rendering issue: zero-coverage fragments still blended, so a non-identity sRGB round trip perturbed uncovered pixels on llvmpipe.",
+  "diagnosis": "Candidate reference limitation: the exact filtering/unquantized sRGB oracle cannot admit the documented llvmpipe arithmetic reproduced by CPU emulation. Near black, a 1/255 coverage step can become 4-8 stored codes. Local Metal and emulated geometry/clip/opacity controls pass, but actual failing Linux adapter identity and corrected Linux execution remain unverified. Zero-coverage fragments previously blended; a non-identity sRGB round trip can perturb uncovered pixels.",
   "source_patch": {
     "commit": "e2551dd273b9eaaf2b6097bd28102ae714d55eef",
     "files": [
@@ -137,8 +116,34 @@
   },
   "limits": [
     "No Linux or lavapipe execution here: Docker Desktop is installed but not running and was not started; no CI run was made.",
-    "The llvmpipe emulation omits the hardware rsqrt estimates of its sRGB encoder, so channel counts differ slightly from CI (303 vs 275 at 2x; 2 vs 1 nested).",
+    "The llvmpipe emulation omits encoder rsqrt estimates. Its counts differ from CI (303 vs275 at2x;2 vs1 nested); similarity is not proof that the failed run used this backend.",
     "The reference covers backends with at least 8 sub-texel bits; Vulkan permits 4.",
     "Root owns tools/probes/render-check.py and the Windows geometry-receipt failure; untouched."
-  ]
+  ],
+  "ci_environment": {
+    "runner": "GitHub ubuntu-latest x86_64",
+    "installed_package": "mesa-vulkan-drivers",
+    "adapter_identity": "Not established by retained failure log; package installation is not selected-adapter evidence",
+    "corrected_linux_execution": "pending"
+  },
+  "cpu_candidate_emulation": {
+    "note": "Model::Llvmpipe composed with the pre-fix shader semantics (zero-coverage fragments still blend), compared with exact arithmetic by the previous metric. rsqrt estimates in llvmpipe's encoder are not emulated. This is a candidate model, not verified execution of the failing CI adapter.",
+    "scale 1": {
+      "worst": 2,
+      "over_1": 1
+    },
+    "scale 2": {
+      "worst": 7,
+      "over_1": 303
+    },
+    "scale 1.5": {
+      "worst": 6,
+      "over_1": 179
+    },
+    "nested clips": {
+      "worst": 2,
+      "over_1": 2
+    },
+    "log": "checks/oracle-cpu-old-shader-emulation.txt"
+  }
 }

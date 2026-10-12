@@ -37,6 +37,14 @@ const TAP: f64 = 1. / 255.;
 const DECODE: f64 = 0.5;
 const ENCODE: f64 = 0.67;
 
+// Existing checkpoint runs use --nocapture; retain the actual selected adapter
+// rather than inferring a backend from installed driver packages.
+fn renderer_with_adapter_receipt() -> Renderer {
+    let renderer = Renderer::headless().unwrap();
+    eprintln!("UI draw selected adapter: {:?}", renderer.adapter.get_info());
+    renderer
+}
+
 /// How a reference composes.
 #[derive(Clone, Copy, Debug, PartialEq)]
 enum Model {
@@ -44,8 +52,8 @@ enum Model {
     Portable,
     /// One candidate image: exact filtering and conversion, nearest storage.
     Exact,
-    /// One candidate image from a conformant backend, Mesa llvmpipe (the Linux
-    /// CI device), emulated from its source: `lp_bld_sample_aos.c` (8-bit
+    /// One candidate image emulated from Mesa llvmpipe source; the failing
+    /// Linux CI adapter has not been identified. `lp_bld_sample_aos.c` (8-bit
     /// fixed-point bilinear), `lp_bld_arit.c` (SSSE3/AVX2 rounded lerp) and
     /// `lp_bld_format_srgb.c` (polynomial sRGB). sRGB targets only.
     Llvmpipe,
@@ -601,7 +609,7 @@ fn panel_canvas(
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = renderer_with_adapter_receipt();
     let input = panel();
     for (scale, format) in [(1., SRGB), (2., SRGB), (1.5, SRGB), (1., UNORM)] {
         let size = [(160. * scale) as u32, (90. * scale) as u32];
@@ -740,7 +748,7 @@ impl Nested {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = renderer_with_adapter_receipt();
     let n = nested();
     let size = Nested::SIZE;
     let open = n.input(vec![n.label.clone()]);
@@ -795,7 +803,7 @@ fn nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow() {
 fn ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels() {
     use crate::text::draw_tests::{pixel_camera, scene};
     use glam::{DMat4, DVec3};
-    let renderer = Renderer::headless().unwrap();
+    let renderer = renderer_with_adapter_receipt();
     let size = [160, 90];
     let world_text = crate::text::tests::input(&[(
         9,
@@ -883,7 +891,7 @@ fn ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = renderer_with_adapter_receipt();
     let size = [160, 90];
     let input = panel();
     let mut layer = renderer.ui_layer();
@@ -940,14 +948,14 @@ fn retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages() {
         (last.atlas_textures, last.quad_buffers)
     );
     // A layer refuses another renderer's stage.
-    let other = Renderer::headless().unwrap();
+    let other = renderer_with_adapter_receipt();
     assert!(other.ui_layer().stage(&renderer, &fresh).is_err());
 }
 
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn editor_viewport_region_offsets_scales_and_bounds_the_ui() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = renderer_with_adapter_receipt();
     let size = [200, 140];
     let region = [20.5, 15., 160., 90.];
     let input = panel();

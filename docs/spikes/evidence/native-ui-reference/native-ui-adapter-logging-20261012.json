@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-12T16:43:11.690411+00:00",
+  "accepted": true,
+  "reviewer": "astra root",
+  "patch_sha256": "e9e22264202f7700d1038869437d0d3aab970f29e56089ce2d2ac44e3fd82bb7",
+  "scope": "Read entire logging-only delta: same headless constructor, stderr adapter identity, same returned renderer. Six test-only substitutions; no resource/shader/reference behavior change.",
+  "pending": "Affected build checks and actual Linux checkpoint result remain required."
+}

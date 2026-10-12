@@ -103,12 +103,15 @@ composition over a finished world frame (with an order-sensitivity check) and
 retention/refusal identity. On Apple Metal every case agrees within 1 code
 value of exact arithmetic. The reference admits, per channel, only the codes
 the backend precision allows: 8-bit fixed-point filtering of glyph taps between
-texel centres and the sRGB read-back and store between blends. Mesa llvmpipe
-(the Linux CI device) is within that precision but up to 7 codes from exact
-near black at 2x, where the sRGB curve magnifies a 1/255 coverage step. A
-CPU test emulates llvmpipe's documented arithmetic and shows that the
-reference admits it, while text placed one pixel off, 90% text opacity and a
-missing ancestor clip are rejected (handoff 0057). A hosted composed game
+texel centres and the sRGB read-back and store between blends. A CPU emulation
+of Mesa llvmpipe produces differences up to 7 codes from exact near black at
+2x, where the sRGB curve magnifies a 1/255 coverage step. This is a candidate
+explanation for the Linux failure: installed Mesa packages do not identify
+the adapter that executed the failed test, and the corrected test has not yet
+run on Linux. The reference admits this emulation while rejecting text placed
+one pixel off, 90% text opacity and a missing ancestor clip (handoff 0057).
+It requires at least 8 sub-texel bits; Vulkan's permitted minimum of 4 remains
+outside this reference. A hosted composed game
 drives routed Tab/Enter, receipts for focus, commit and preedit, refresh and
 relayout through the real consumer. Handoff 0056 records the review fixture,
 offscreen captures and logs.
@@ -160,3 +163,18 @@ records of their exact tested source.
 [Independent integration closure](evidence/native-ui-draw-main138-root-review.json)
 verified all 1,474 frozen inputs, the three additive seams, seven command logs and
 the identical tested/ancestry tree with no actionable finding.
+
+## 0057 integration correction
+
+The original Claude commits are preserved. Their confirmed-Linux-backend wording
+is superseded by the corrected candidate diagnosis above and in the handoff
+result/JSON. Installed driver packages and numerical emulation do not identify
+the adapter used by the failed hosted run. Test-only logging now prints actual
+selected wgpu adapter information during the existing checkpoint tests. No
+reference arithmetic, shader logic or appearance changed in this correction.
+
+[Source review](evidence/native-ui-reference/native-ui-0057-source-20261012.json),
+[provenance correction review](evidence/native-ui-reference/native-ui-0057-provenance-final-20261012.json)
+and [adapter logging review](evidence/native-ui-reference/native-ui-adapter-logging-20261012.json)
+retain the exact reviewed boundaries. Integrated CPU checks and actual Linux
+checkpoint results remain pending.

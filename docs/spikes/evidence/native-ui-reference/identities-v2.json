@@ -1,0 +1,27 @@
+{
+  "changes": [
+    {
+      "path": "crates/incant_render/src/ui_draw_tests.rs",
+      "before": "3f097b8c550f2d06a89127ebec34475c88fc4f1f0ef231cdab0f6d2278b78b21",
+      "after": "c907b8351ae365c00f2a4272378fae8857a3f078e168a4dcb2f932267c731cd4"
+    },
+    {
+      "path": "docs/spikes/native-ui-draw.md",
+      "before": "eff0f0e6c85be9301916bbf0180e09e8452585261dc517b6f5dbdcef2bc69eed",
+      "after": "3e0cf1d90e2820523b7a6b51cf1ceb596efe721b8215f42f9a9f1fa84595d791"
+    },
+    {
+      "path": "handoffs/0057-native-window-game-ui/result.md",
+      "before": "8328ea754e432faf7018be683594ae26cfb06a75b3d0630ce4c4a54630c6130c",
+      "after": "c8735a838cd4955113928e5f68dadd312e113008f0c381205d94f2b5915e6c3e"
+    },
+    {
+      "path": "handoffs/0057-native-window-game-ui/evidence/linux-ui-precision.json",
+      "before": "5bd1910c8349a44811bc88e1c7c50bcc006e0ef30ea025cb8efdd211311808e0",
+      "after": "98a9f78205fcd6c44b8806b559d4e5d6d2198bb63776e774fbd3b67495acd9ca"
+    }
+  ],
+  "scope": "Comments/provenance only; no shader/reference arithmetic or appearance edits. Original commit messages are preserved historically and their confirmed-Linux wording is superseded.",
+  "test_diagnostics": "All six UI test renderer constructions call a wrapper that prints actual wgpu AdapterInfo; no reference math or shader behavior changes.",
+  "patch_sha256": "505fe331d15b2bdf933bb6cba6d56dd7f2eedf20b8906bed78d6c12e2ff90c85"
+}

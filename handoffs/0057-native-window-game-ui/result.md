@@ -4,10 +4,12 @@
 
 Both parts of the packet are done.
 
-**Priority Linux failure: diagnosed and fixed at the source.** Fixing the
-reference showed nothing wrong in the renderer's geometry, clipping or
-opacity. The 0056 reference test assumed exact arithmetic, but the Linux CI
-device (Mesa llvmpipe) filters and blends at its documented 8-bit precision.
+**Priority Linux failure: candidate numerical correction, Linux validation pending.**
+The 0056 reference assumed exact arithmetic. A CPU emulation of Mesa llvmpipe
+reproduces similar precision differences without changing geometry, clipping or
+opacity. The failed CI log records installed Mesa packages, not the selected
+adapter; it does not establish that llvmpipe executed those failing tests.
+Actual Linux adapter identification and the corrected test result remain pending.
 
 - The source patch corrects the reference. The shader now discards fragments
   that add nothing.
@@ -60,8 +62,9 @@ Sources:
   (log SHA-256 `b344c86d…f4ac61`, candidate `82aa2bc3`).
 - Full record: `evidence/linux-ui-precision.json`.
 
-**What failed, and what didn't.** On `ubuntu-latest` with
-`mesa-vulkan-drivers` (lavapipe on llvmpipe):
+**What failed, and what didn't.** The `ubuntu-latest` job installed
+`mesa-vulkan-drivers`. Its actual selected adapter was not captured in the
+retained failure log. These measurements are from that CI run:
 
 | Case | Worst (codes) | Channels over 1 | Result |
 | --- | --- | --- | --- |
@@ -72,8 +75,8 @@ Sources:
 On the same runner, the world-text tests measured bilinear coverage errors up
 to 0.00551 (about 1.4/255), within their alpha-space bound of 0.01.
 
-**Cause.** llvmpipe's arithmetic, read from Mesa source (through the Android
-mirror; freedesktop GitLab refused automated access):
+**Candidate explanation.** llvmpipe's arithmetic, read from Mesa source
+(through the Android mirror; freedesktop GitLab refused automated access):
 
 - **Sampler** (`lp_bld_sample_aos.c`). It filters the R8 atlas in 8-bit fixed
   point: coordinates ×256 rounded, −128, then 8-bit weights.
@@ -85,13 +88,15 @@ mirror; freedesktop GitLab refused automated access):
 
 Near black, the sRGB encoding turns a 1/255 coverage step into 4–8 codes. The
 0056 reference assumed exact filtering and exact, unquantized blending under a
-fixed code tolerance, so it could not express this precision. That was the
-defect. There was a secondary rendering issue: zero-coverage fragments (glyph
+fixed code tolerance, so it could not express this precision. This demonstrates
+a reference limitation; it does not identify the actual failing CI backend.
+There was a secondary rendering issue: zero-coverage fragments (glyph
 padding, outside rounded corners, the ring hole) still blended. On a
 non-identity sRGB round trip this perturbs pixels that nothing covers.
 
-**Emulation check.** A CPU emulation of exactly that arithmetic, run in CI's
-configuration (old shader), compared with exact arithmetic by the old metric:
+**Emulation check.** A CPU candidate using that arithmetic and the old shader
+semantics, compared with exact arithmetic by the old metric. This is not an
+execution of the actual CI adapter:
 
 | Case | Emulation (worst / channels over 1) | CI log |
 | --- | --- | --- |
@@ -99,7 +104,9 @@ configuration (old shader), compared with exact arithmetic by the old metric:
 | Nested | 2 / 2 | 2 / 1 |
 | 1x | 2 / 1 | 1 / 0 |
 
-The emulation omits llvmpipe's hardware rsqrt estimates in the encoder.
+The emulation omits llvmpipe's hardware rsqrt estimates in the encoder. Similar
+magnitudes support this candidate diagnosis; differing channel counts do not
+establish that the CI run used the emulated backend.
 
 **Fix (commit `e2551dd2`).**
 
@@ -413,7 +420,7 @@ blank lines stripped; raw hashes in `raw-sha256.json`).
 | Offscreen GPU | `test -p incant_render` (all, GPU included) | lib 90/90, `model_gpu` 50/50 (`test-render-full.txt`) |
 | Offscreen GPU, hosted game | `test -p incant_render_gpu_host` | game 5/5, ui 2/2 (`test-gpu-host.txt`) |
 | CPU | `ui::tests`, including the caret accessor | 8/8 (`ui-cpu-tests.txt`) |
-| CPU | reference test, final and in CI configuration | pass; numbers above (`oracle-cpu-3.txt`, `oracle-cpu-old-shader-emulation.txt`) |
+| CPU | reference test, final and candidate old-shader emulation | pass; numbers above (`oracle-cpu-3.txt`, `oracle-cpu-old-shader-emulation.txt`) |
 | GPU mutations | `tools/mutate.py` | 8/8 caught; unmutated before and after pass |
 | Lint | `clippy -p incant_render -p incant_render_gpu_host --all-targets -D warnings` | clean |
 | Lint | `fmt --all --check` | clean |
