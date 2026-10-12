@@ -1,0 +1,105 @@
+{
+  "format": "incant-0056-identities",
+  "source": {
+    "head": "0fe9dff97358a04b6ab077e4dc09e173be69d465",
+    "tree": "abe9b80e618decf72c96e2b20ab0454b630f86e5",
+    "base": "6d941d4178ccc1f46100ee5f756b7685259ad62e",
+    "commits": [
+      "0fe9dff97358a04b6ab077e4dc09e173be69d465 Raise the field outline to 3:1 non-text contrast",
+      "0afb2c186160db2746ec279e2229bd4dee20027a Test that UI consumers see the candidate and refusals publish nothing",
+      "1b98ddbff7f92d56c5c08340292e243ef849de70 Refine game UI states after offscreen pixel review",
+      "47ef6463a0d681f36e82b65fa4ecedf7d65eec76 Draw screen-space game UI through the native GPU consumer",
+      "5451cc01fbd6c4e7378358bf039c13699ec90b18 Expose read-only UI visual state for the candidate frame"
+    ],
+    "cargo_lock_sha256": "e3494a906806a976bddd11620b83af14d800ff6eac94afd5f98004164af42577"
+  },
+  "brief_sha256_read": "3984d34b4aa6099d0b32f0f13673b260c1cf3447480d3a6b1fdc6250e488b139",
+  "binaries": {
+    "incant_headless": {
+      "path": "/tmp/incant0056/bin-final/incant_headless",
+      "sha256": "4c6db850649d7585693f03fbc46f94714ba028217e6a08834d2f47a3fa0bc704",
+      "profile": "ci",
+      "built_from": "0fe9dff97358a04b6ab077e4dc09e173be69d465"
+    },
+    "ui_review_example": {
+      "path": "/tmp/incant0056/bin-final/ui_review",
+      "sha256": "a524793f718f811ad0383bd60ee2e893097ad72e1b239e81ceed8f15f2f49181",
+      "profile": "ci",
+      "built_from": "0fe9dff97358a04b6ab077e4dc09e173be69d465"
+    },
+    "incant_game_player_cpu_package": {
+      "sha256": "df31e695b0b266041b97b52dfbc3840bdb823e1a543e7ab96e804414a1fa9678",
+      "bytes": 22049536,
+      "profile": "ci (inherits release, opt-level 1)",
+      "features": "project,render-input",
+      "source_head": "0fe9dff97358a04b6ab077e4dc09e173be69d465"
+    }
+  },
+  "fonts": {
+    "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82"
+  },
+  "fixture": {
+    "project_sha256": "50048d2a61f360056ba767ed51c4d90939939a411dd46cf90f1ad91f07f7aff5",
+    "fixture_record_sha256": "1df87fe5d1f3bf8941bb05d300531f272e561078abf599fa8bd549fc82a8cb18",
+    "authored_by": "tools/fixture.py: init, import, one atomic command.execute, Undo/Redo, journal reopen"
+  },
+  "package": {
+    "scene_id": "01M4Q97G4QSVS83VP2TEKSWFFG",
+    "camera": "00000000000000000000000000000020",
+    "data": {
+      "bytes": 1334624,
+      "files": {
+        "world.scene": "08b4cd10f1895e95535a487d62d955023a7b18e89e1995502d5698ce4df6f44c",
+        "input-actions.json": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+        "models/f33ebd7453f8eb05d87dda6a5b461df1b0df17ed34531f8471dedd67d736b581.incmodel": "35120e0bbce9d1db9292b2924b66e279ff7818607bcb38a6ead83781504382b9",
+        "models/b49e72aa085f4e6c54e6c15a2c83bc0db1f31957498f129a63c8bf60cc3142d8.incmodel": "240fb0a7301bb55ecab3f817ed6da061cf11eb601b468b5a626b771579f3d934",
+        "models/3392abe5a4a27b39d6c0d8379834d254143125a09824187e820f458afbac5dba.incmodel": "27d2e0d8fd444eb98e9c0aac2e173dd65649307dcf64fc00fcb014da150b8c21",
+        "fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+        "fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+        "fonts/6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e.json": "167d0dc13b807552b06d0195e3a90ee24f5074206dd6d6f2106ad59e65b35fde",
+        "fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+        "fonts/1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb.json": "c3fd206832637ec3ad354dee08b4c67012da904d34a3ce9ec9c97e30f70e07f0",
+        "fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+        "clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+        "package.json": "c5e19f478de24f47c283e035fa53f6e123fef6bb7aad9298e97bb2f6ac51f2ea"
+      }
+    }
+  },
+  "gpu": {
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "target_format": "Rgba8UnormSrgb",
+    "host": "macOS 26.6 (25G72), Apple M5 Pro (Mac17,9)"
+  },
+  "screenshots": {
+    "button-states-3x.png": "28da616264442d7a9fb60a0ce9bda46c12c490244b56cc65394fd46bec94aed2",
+    "desktop-1x-cjk-preedit.png": "e889fd3cf6347ec4ad787f59aa364e4a4e2792139ca710bf88bb0b1ad06f5a12",
+    "desktop-1x-field-selection.png": "c9098bb90ffcd2144ddb65a31800f57569b1182b1c2b2e83703613ac06336e2b",
+    "desktop-1x-idle.png": "c066665a4621b01ce928f05615eeb7648d4e30fb23947c320e702035afc21a45",
+    "desktop-2x-cjk-preedit.png": "c11553cf9352a9b2826af333dad9b3c95987bd64c04cf1d35abfc5ee4144b11d",
+    "field-states-3x.png": "ac0ece4df0d91c8dbed3103e7f1802348e157a08b74e04cfa383f122133bd174",
+    "narrow-2x-field-selection.png": "72570caba563c60932c48dc44fa77b19683e3c593443afc6fa8adf06d5062eef"
+  },
+  "review_png_rgba_sha256": {
+    "desktop-1x-01-idle.png": "072702aff7b65784d7bc3a02a60db2f3a1bc49b6698e16d417111d7047f7a8a2",
+    "desktop-1x-02-focus-resume.png": "60f8ffc8a1b9889169d34558291766cfd7ef71df92ebd2adf09a49da0ecf3d88",
+    "desktop-1x-03-pressed-options.png": "37e71590755f42a52a69fcd395108ddd588a86193e8d427888fff3e20e53608a",
+    "desktop-1x-04-field-caret.png": "2a65a893bd1c11a49f02778e2d2b7644032f7356dad61fbdff7698d2888171cd",
+    "desktop-1x-05-field-selection.png": "100ce9c044e15f45352b08148ed8e7a2f1250f0eecebec8372c439680b1e9635",
+    "desktop-1x-06-field-value.png": "44c180ec984e26b70b5dae87ad30b90c2ae7467a2edc961d543f64778b747410",
+    "desktop-1x-07-arabic-caret.png": "aa73420cc6072cd01645dbc29a20be16c64a44f95087ba343ce56e238e805b5c",
+    "desktop-1x-08-cjk-preedit.png": "260aabfbde7ac4b5f283b9944c4e37485cdc3863aeacdbb882ae4f0fbafcc49c",
+    "desktop-1x-09-cjk-commit.png": "fa21aa1fb14063aa1ea6eef68f69aa7f551cca7e9b2fdae63e143b1b836e875c",
+    "desktop-2x-01-idle.png": "fde60dab4aad98f73bab0ccae302f203db2b61deb2829ce889c02d8a1e14ac3d",
+    "desktop-2x-02-focus-resume.png": "7cce413887590464e4c63f4750eecddf9c7a19fa983ff7d1f7cb19bfff705d3f",
+    "desktop-2x-05-field-selection.png": "cca3564bfe58888933a218ac56f133464e79aa8e31310655a7c89b15b6f394b3",
+    "desktop-2x-08-cjk-preedit.png": "910d642fbbd8f7af0e6c26577a27227c2495de6ad0412c41b57725f9d18af7f8",
+    "narrow-2x-01-idle.png": "939c07d0827c23bc40dea18adc398957cd20415cfcc31fc58161cc81ddc75877",
+    "narrow-2x-02-focus-resume.png": "f391b5721962f999139813753d755d91915683f1a4f4a5dc4e8d58832a5c8924",
+    "narrow-2x-05-field-selection.png": "c3e24068879b2a83bd0b9aecb0f3b679a585821e33dced9a0003a3f7ecb0ccac",
+    "narrow-2x-08-cjk-preedit.png": "78a10555863879414cd44fde25a7e21b5a95887a82ede4ad6bd8d005c545e74c"
+  }
+}

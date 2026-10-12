@@ -1,0 +1,16 @@
+{
+  "check-downstream.txt": "9936e2212480366ef61473141dabc011a0d9580143f4a15bbdb81ea6f25ba88b",
+  "check-wasm.txt": "8c9287a48488a937186503a6cad78dd609326a27b24df29ac271f5a784145784",
+  "clippy-player-window.txt": "e044c2dfbcafa0f15af3675071cbf2914d8b2ae24bc01ce3b34aa7c925a64042",
+  "clippy-player.txt": "560f5ca8ee482fc1180451e741ac25d694dd2385fba3db17fe445599dc90a488",
+  "clippy-render.txt": "3ba0510c446fbba4525d30b2af43f149f0ee778f9a84c08884da84beeeaac109",
+  "fmt.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "summary.txt": "8fd66e2249d775b57269cf19be5b19168a722090822996abea62507d8246b79d",
+  "test-gpu-host.txt": "6e4780e6fb145738d3a9b6bfc1356f046bba6b102d992cf218725401e5fccb3c",
+  "test-play.txt": "30f00ed05936501ba11d7b90f15f9f0be2304eb064dd48fd686a4153fd23d1e3",
+  "test-player-window.txt": "a32966f91f8de41d75bf1fa2eead9299a07a79380c68c153adf4fefd3fcbcd32",
+  "test-render-game.txt": "398ad9a626c876a50ba2cdde6a4ce48a4c1e17f99c5741439424249f0f287ac5",
+  "test-render-gpu.txt": "f13b709565f8a6a49ba462a064446847b5be8912af494adc86e107a0807ff2af",
+  "test-ui.txt": "afdcc4dd987ee814a1ef91b3e5edfba26e64fe87e16c6e9ba6459b7e02de9046",
+  "ui-gpu-numeric.txt": "fdade3b836e28353741cc5f3184762948f4a2ff23f1e5b3afb5874e97df8bc6f"
+}

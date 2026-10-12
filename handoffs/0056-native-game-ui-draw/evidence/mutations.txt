@@ -1,0 +1,97 @@
+quads not intersected with their clip: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test result: FAILED. 8 passed; 4 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.94s
+    error: test failed, to rerun pass `-p incant_render --lib`
+glyph pen not snapped to a physical pixel: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test result: FAILED. 8 passed; 4 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.99s
+    error: test failed, to rerun pass `-p incant_render --lib`
+sRGB theme colours not decoded on sRGB targets: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test result: FAILED. 8 passed; 4 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.97s
+    error: test failed, to rerun pass `-p incant_render --lib`
+straight instead of premultiplied output: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test result: FAILED. 8 passed; 4 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.94s
+    error: test failed, to rerun pass `-p incant_render --lib`
+stroke hole ignored (rings become fills): CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test result: FAILED. 9 passed; 3 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.94s
+    error: test failed, to rerun pass `-p incant_render --lib`
+glyphs drawn before the selection: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test ui::tests::glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs ... FAILED
+    test ui::tests::plan_layers_each_widget_in_canonical_order_with_state_colours ... FAILED
+    test result: FAILED. 6 passed; 6 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.92s
+    error: test failed, to rerun pass `-p incant_render --lib`
+RTL caret uses the LTR leading edge: CAUGHT (incant_render --lib ui::)
+    test ui::tests::caret_follows_cluster_edges_bidi_levels_and_downstream_affinity ... FAILED
+    test result: FAILED. 11 passed; 1 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.90s
+    error: test failed, to rerun pass `-p incant_render --lib`
+label shadow drawn at the glyph pen: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test ui::tests::plan_layers_each_widget_in_canonical_order_with_state_colours ... FAILED
+    test result: FAILED. 7 passed; 5 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.97s
+    error: test failed, to rerun pass `-p incant_render --lib`
+glyphs clipped to the border box, not the content clip: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... FAILED
+    test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... FAILED
+    test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... FAILED
+    test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... FAILED
+    test result: FAILED. 8 passed; 4 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.93s
+    error: test failed, to rerun pass `-p incant_render --lib`
+identical input not reused: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages ... FAILED
+    test result: FAILED. 11 passed; 1 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.87s
+    error: test failed, to rerun pass `-p incant_render --lib`
+shared atlas never reused: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages ... FAILED
+    test result: FAILED. 11 passed; 1 failed; 0 ignored; 0 measured; 76 filtered out; finished in 1.88s
+    error: test failed, to rerun pass `-p incant_render --lib`
+stage accepts another renderer: CAUGHT (incant_render --lib ui::)
+    test ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages ... FAILED
+    test result: FAILED. 11 passed; 1 failed; 0 ignored; 0 measured; 76 filtered out; finished in 2.00s
+    error: test failed, to rerun pass `-p incant_render --lib`
+consumer offered the accepted UI, not the candidate: CAUGHT (incant_render_game --test ui)
+    test consumers_see_the_candidate_ui_and_a_refusal_publishes_nothing ... FAILED
+    test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+    error: test failed, to rerun pass `-p incant_render_game --test ui`
+viewport relayout published without admission: CAUGHT (incant_render_game --test ui)
+    test consumers_see_the_candidate_ui_and_a_refusal_publishes_nothing ... FAILED
+    test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+    error: test failed, to rerun pass `-p incant_render_game --test ui`
+unchanged paint reused despite changed widget state: CAUGHT (incant_render_game --test ui)
+    test consumers_see_the_candidate_ui_and_a_refusal_publishes_nothing ... FAILED
+    test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+    error: test failed, to rerun pass `-p incant_render_game --test ui`
+GPU consumer never submits the staged UI: CAUGHT (incant_render_gpu_host --test ui)
+    test composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources ... FAILED
+    test refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game ... FAILED
+    test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.13s
+    error: test failed, to rerun pass `-p incant_render_gpu_host --test ui`
+unmutated incant_render --lib ui::: PASS
+    test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 76 filtered out; finished in 2.02s
+unmutated incant_render_game --test ui: PASS
+    test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+unmutated incant_render_gpu_host --test ui: PASS
+    test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.20s
