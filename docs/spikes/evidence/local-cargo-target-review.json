@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-12T18:40:25.600193+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted",
+  "scope": "Explicit checkout-owned Cargo target selection only",
+  "source_hashes": {
+    "tools/local_cargo_target.py": "4d079347d0f5b49c62d5cfd58ed3b000b0449d7cabfe381c7456c281fa419795",
+    "tools/tests/test_local_cargo_target.py": "79f99a062ba752931c210f2faf477117e8006fa70d2ea540047552914198ac79"
+  },
+  "verification": "Independent six-case unittest replay and staged/unstaged diff checks exit zero; raw/retained log hash verified",
+  "findings": [],
+  "limits": [
+    "Opt-in developer tool, not automatic Cargo freshness or build-lock enforcement",
+    "No default CI/Cargo changes, cache migration or deletion"
+  ]
+}
