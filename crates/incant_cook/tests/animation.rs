@@ -1,4 +1,7 @@
 #![cfg(feature = "scene")]
+#[path = "support/scene_format.rs"]
+mod format;
+use format::scene_format;
 #[path = "../../incant_assets/tests/skeletal/fixture.rs"]
 mod fixture;
 #[path = "animation/graph.rs"]
@@ -34,6 +37,7 @@ fn project(root: &Path, animated: bool) -> (Project, String, String, String) {
     let cooked = incant_assets::cook_gltf(root, Path::new("model.gltf"), &cache).unwrap();
     let asset = new_id();
     let mut p = Project::empty("Cook native animation");
+    p.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     p.assets.insert(
         asset.clone(),
         Asset {
@@ -162,6 +166,7 @@ fn cache_directory_and_entry_symlinks_are_not_animation_capabilities() {
 #[test]
 fn no_animation_needs_no_cache_and_script_binding_uses_the_same_sealed_resources() {
     let mut empty = Project::empty("No assets");
+    empty.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let s = Scene::new("Main");
     let sid = s.id.clone();
     empty.scenes.insert(sid.clone(), s);

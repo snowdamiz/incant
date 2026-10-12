@@ -1,0 +1,274 @@
+[
+  {
+    "checkpoint_tick": 0,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 5,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 0,
+    "initial_warmstart_contacts": 0,
+    "lossy_comparison": {
+      "first_different_event_records": null,
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": null,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 0.0,
+      "max_translation_difference": 0.0
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 30,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 1,
+    "initial_warmstart_contacts": 16,
+    "lossy_comparison": {
+      "first_different_event_records": null,
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 0.03144384175539017,
+      "max_translation_difference": 0.0007913112640380859
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 150,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 12,
+    "initial_warmstart_contacts": 22,
+    "lossy_comparison": {
+      "first_different_event_records": {
+        "pose_reconstructed": [
+          [
+            [
+              14,
+              50
+            ],
+            true
+          ],
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ],
+        "uninterrupted": [
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ]
+      },
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 1.9619992971420288,
+      "max_translation_difference": 0.2002873420715332
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 480,
+    "continued_ticks": 120,
+    "dimension": 2,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 12,
+    "initial_warmstart_contacts": 22,
+    "lossy_comparison": {
+      "first_different_event_records": {
+        "pose_reconstructed": [
+          [
+            [
+              14,
+              50
+            ],
+            true
+          ],
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ],
+        "uninterrupted": [
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ]
+      },
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 1.9619992971420288,
+      "max_translation_difference": 0.2002873420715332
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 0,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 5,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 0,
+    "initial_warmstart_contacts": 0,
+    "lossy_comparison": {
+      "first_different_event_records": null,
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": null,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 0.0,
+      "max_translation_difference": 0.0
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 30,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 1,
+    "initial_warmstart_contacts": 32,
+    "lossy_comparison": {
+      "first_different_event_records": null,
+      "first_subsequent_event_difference": null,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 0.04130282998085022,
+      "max_translation_difference": 0.001332519226707518
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 150,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 12,
+    "initial_warmstart_contacts": 35,
+    "lossy_comparison": {
+      "first_different_event_records": {
+        "pose_reconstructed": [
+          [
+            [
+              14,
+              50
+            ],
+            true
+          ],
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ],
+        "uninterrupted": [
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ]
+      },
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 1.9619992971420288,
+      "max_translation_difference": 0.2002873420715332
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  },
+  {
+    "checkpoint_tick": 480,
+    "continued_ticks": 120,
+    "dimension": 3,
+    "entered": 2,
+    "exited": 2,
+    "full_serialized_state_and_handles_compared_each_tick": true,
+    "initial_sleeping_bodies": 12,
+    "initial_warmstart_contacts": 35,
+    "lossy_comparison": {
+      "first_different_event_records": {
+        "pose_reconstructed": [
+          [
+            [
+              14,
+              50
+            ],
+            true
+          ],
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ],
+        "uninterrupted": [
+          [
+            [
+              40,
+              50
+            ],
+            false
+          ]
+        ]
+      },
+      "first_subsequent_event_difference": 10,
+      "first_subsequent_state_difference": 1,
+      "initial_complete_bytes_equal": false,
+      "initial_states_equal": true,
+      "max_linear_velocity_difference": 1.9619992971420288,
+      "max_translation_difference": 0.2002873420715332
+    },
+    "trusted_clone_exact": true,
+    "untrusted_bytes_decoded": false
+  }
+]

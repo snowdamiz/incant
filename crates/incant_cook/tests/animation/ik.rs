@@ -12,7 +12,7 @@ fn actual_cache_seals_topology_and_source_deleted_binary_keeps_constraint_order(
     attach(&mut p, &sid, &eid, &constraint);
     let resources = load_project_animation_resources(&p, &sid, root.path()).unwrap();
     let bytes = cook_scene_with_resources(&p, &sid, &Default::default(), &resources).unwrap();
-    assert_eq!(&bytes[8..12], &16u32.to_le_bytes());
+    assert_eq!(&bytes[8..12], &scene_format(16).to_le_bytes());
     let before = p.canonical_text().unwrap();
     let parsed = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(

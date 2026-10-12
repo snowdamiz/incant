@@ -1,0 +1,116 @@
+diff --git a/crates/incant_cook/Cargo.toml b/crates/incant_cook/Cargo.toml
+index ee37c975..fb73304d 100644
+--- a/crates/incant_cook/Cargo.toml
++++ b/crates/incant_cook/Cargo.toml
+@@ -15,6 +15,7 @@ typescript = ["scene", "script", "dep:tempfile", "dep:incant_source", "dep:incan
+ # Select one physics kernel for the entire process, including build/test hosts.
+ physics-deterministic = [
+     "incant_assets/physics-deterministic",
++    "incant_audio_runtime/physics-deterministic",
+     "incant_cmd/physics-deterministic",
+     "incant_import/physics-deterministic",
+     "incant_runtime?/physics-deterministic",
+@@ -23,6 +24,7 @@ physics-deterministic = [
+ ]
+ physics-fast-simd8 = [
+     "incant_assets/physics-fast-simd8",
++    "incant_audio_runtime/physics-fast-simd8",
+     "incant_cmd/physics-fast-simd8",
+     "incant_import/physics-fast-simd8",
+     "incant_runtime?/physics-fast-simd8",
+@@ -52,6 +54,7 @@ sha2 = { workspace = true, optional = true }
+ tempfile = { version = "3", optional = true }
+ 
+ [dev-dependencies]
++incant_audio_runtime = { workspace = true, features = ["scene"] }
+ sha2.workspace = true
+ incant_ui.workspace = true
+ incant_cmd.workspace = true
+diff --git a/crates/incant_game_player/Cargo.toml b/crates/incant_game_player/Cargo.toml
+index dab6b494..a5b31ee6 100644
+--- a/crates/incant_game_player/Cargo.toml
++++ b/crates/incant_game_player/Cargo.toml
+@@ -7,6 +7,8 @@ publish.workspace = true
+ 
+ [features]
+ default = ["physics-deterministic"]
++# Thin platform ABI for bounded offline CPU package execution, not a UI host.
++mobile-ffi = ["dep:thiserror"]
+ # Project source is compiled exclusively by the trusted build-time producer.
+ project = ["incant_cook/typescript"]
+ # Trusted build-linked descriptors only; does not enable a compiler or loader.
+diff --git a/crates/incant_headless/Cargo.toml b/crates/incant_headless/Cargo.toml
+index 47354614..f0af6d7f 100644
+--- a/crates/incant_headless/Cargo.toml
++++ b/crates/incant_headless/Cargo.toml
+@@ -88,3 +88,6 @@ thiserror = { workspace = true }
+ 
+ [build-dependencies]
+ incant_cook = { path = "../incant_cook", default-features = false, features = ["script"] }
++
++[dev-dependencies]
++incant_types.workspace = true
+diff --git a/crates/incant_render_game/Cargo.toml b/crates/incant_render_game/Cargo.toml
+index 4306a999..950eb3c1 100644
+--- a/crates/incant_render_game/Cargo.toml
++++ b/crates/incant_render_game/Cargo.toml
+@@ -36,6 +36,7 @@ incant_render_native = { path = "../incant_render_native", default-features = fa
+ incant_render_data.workspace = true
+ incant_runtime.workspace = true
+ thiserror.workspace = true
++ulid.workspace = true
+ 
+ [dev-dependencies]
+ incant_audio_runtime = { workspace = true, features = ["scene"] }
+diff --git a/crates/incant_wasm_dev/Cargo.toml b/crates/incant_wasm_dev/Cargo.toml
+index 47431408..caaef7ed 100644
+--- a/crates/incant_wasm_dev/Cargo.toml
++++ b/crates/incant_wasm_dev/Cargo.toml
+@@ -7,19 +7,31 @@ publish.workspace = true
+ 
+ [features]
+ default = ["physics-deterministic"]
+-static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture", "incant_script/static-module"]
++static-conformance = ["wasmtime-host", "incant_wasm_runtime/embedded-fixture", "incant_script/static-module", "incant_script/wasmtime-host"]
+ # Explicit desktop development dependency; never enabled by shipped players.
+ wasmtime-host = ["dep:incant_input", "dep:wasmtime", "dep:incant_runtime", "dep:incant_types", "dep:thiserror", "dep:wasmparser", "dep:incant_wasm_runtime"]
+ 
+ # Select one physics kernel for the entire process, including build/test hosts.
+ physics-deterministic = [
++    "incant_assets/physics-deterministic",
++    "incant_audio_runtime/physics-deterministic",
++    "incant_game_runtime/physics-deterministic",
++    "incant_render_game/physics-deterministic",
++    "incant_render_native/physics-deterministic",
+     "incant_runtime?/physics-deterministic",
+     "incant_script/physics-deterministic",
++    "incant_ui/physics-deterministic",
+     "incant_wasm_runtime?/physics-deterministic",
+ ]
+ physics-fast-simd8 = [
++    "incant_assets/physics-fast-simd8",
++    "incant_audio_runtime/physics-fast-simd8",
++    "incant_game_runtime/physics-fast-simd8",
++    "incant_render_game/physics-fast-simd8",
++    "incant_render_native/physics-fast-simd8",
+     "incant_runtime?/physics-fast-simd8",
+     "incant_script/physics-fast-simd8",
++    "incant_ui/physics-fast-simd8",
+     "incant_wasm_runtime?/physics-fast-simd8",
+ ]
+ 
+@@ -37,6 +49,14 @@ incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true, defaul
+ incant_wasm_abi = { path = "../incant_wasm_abi" }
+ 
+ [dev-dependencies]
++incant_audio_runtime = { default-features = false, path = "../incant_audio_runtime", features = ["scene"] }
++incant_assets_runtime = { path = "../incant_assets_runtime" }
++incant_game_runtime = { default-features = false, path = "../incant_game_runtime", features = ["ui"] }
++incant_render_game = { default-features = false, path = "../incant_render_game" }
++incant_render_native = { default-features = false, path = "../incant_render_native" }
++incant_ui = { workspace = true, features = ["native"] }
++incant_assets = { default-features = false, path = "../incant_assets" }
++tempfile = "3"
+ incant_anim.workspace = true
+ incant_wasm_cook = { path = "../incant_wasm_cook" }
+ wat = "=1.258.3"

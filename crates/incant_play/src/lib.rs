@@ -98,6 +98,7 @@ impl PreparedPlay {
         id(&scene)?;
         let camera = options.camera.as_deref().map(id).transpose()?;
         document.validate().map_err(native)?;
+        incant_runtime::require_physics_mode(document.settings.physics_mode).map_err(native)?;
         let authored_module = document.scenes.get(&scene).and_then(|s| s.program.as_ref());
         let authored_scripts = document.scenes.get(&scene).is_some_and(|scene| {
             scene

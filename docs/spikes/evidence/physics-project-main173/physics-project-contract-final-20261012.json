@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-12T22:19:56.474566+00:00",
+  "status": "accepted; P2 generated contract gap closed",
+  "source": "530f322f477ec643b3b6907d4799e94cd8fd7d0b",
+  "prior_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-project-setting-source-20261012.json",
+    "sha256": "aae6708c9240e737344e982e7bfda2447beb95d14c7aebcd3bb747e3d5b42e5f"
+  },
+  "manifest_sha256": "7af2a4bf30db01869aa4a8a7d8c00e2f44771c412803d0be3213f4acf0bb2f26",
+  "source_inputs": 7,
+  "retained_raw_artifacts": 31,
+  "headless_freeze": 1411,
+  "headless_sha256": "bfc30895d90cb04122904f347e891beb63258d2b94cfdcb8377ae6e1ee0cc04b",
+  "independent_schema_execution": {
+    "exit": 0,
+    "schemas": 70,
+    "all_exact_committed_bytes": true,
+    "output": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-project-contract-independent-001"
+  },
+  "integrated_totals": {
+    "deterministic-project-tests": {
+      "groups": 25,
+      "passed": 65,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast-project-tests": {
+      "groups": 25,
+      "passed": 65,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast-simd8-project-tests": {
+      "groups": 25,
+      "passed": 65,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "review": [
+    "Actual public schemas and generated TypeScript now expose exactly the two family modes and the set_physics_mode command. Legacy omitted field remains optional.",
+    "The strict consumer test is included by tsconfig; positive commands and legacy settings compile, and unknown modes/SIMD spelling/missing mode are required errors.",
+    "All seven changed contract inputs and31raw/gzip artifacts verified. Fresh frozen headless independently re-emitted70 schemas byte-identical to committed output.",
+    "Existing six current-main cook/Play commands have zero exits;65tests/25groups in each mode. No production Rust source change in this followup."
+  ],
+  "findings": [],
+  "limits": [
+    "Per-project automatic editor process routing and shipped mode selection remain separate work.",
+    "No new GPU, appearance, reference-device or performance acceptance."
+  ]
+}

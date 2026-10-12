@@ -104,6 +104,7 @@ pub fn prepare_script_scene_with_resources(
     animations: &crate::AnimationResources,
 ) -> Result<PreparedScriptScene, ProjectScriptError> {
     let validated = project.validated().map_err(CookError::from)?;
+    incant_runtime::require_physics_mode(project.settings.physics_mode).map_err(CookError::from)?;
     let scene = project
         .scenes
         .get(scene_id)

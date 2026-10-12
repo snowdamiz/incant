@@ -38,7 +38,29 @@ integration remains pending. Desktop cross-target export, Android and mobile sta
 no signing, mobile window/audio host, phone performance or phase gate is claimed.
 [Contract and complete evidence](docs/spikes/authored-ios-project-export.md).
 
-## Pinned mobile bytecode compatibility — independently accepted
+## Project physics selection — current main173 verified
+
+The public command bus atomically selects deterministic or fast physics, with
+legacy deterministic defaults preserved. Cook/Play explicitly refuse a mismatched
+process before assets or source fallback. All 70 schemas and strict TypeScript
+contracts match. Current integration reuses byte-identical three-mode Rust checks
+and reruns schema/generation/guard checks; final independent review is accepted. Automatic editor
+process switching and mode-aware export remain separate follow-on work.
+[Integrated contract and evidence](docs/spikes/physics-project-main173.md).
+
+## Physics-mode foundation — current main172 verified
+
+The full process graph forwards deterministic, fast and explicit eight-lane
+physics choices without changing defaults. Cooked scenes retain their header
+size and bind the exact compiled kernel before world allocation. Current main172
+passes 353 CPU tests in each mode, Clippy and headless/player/mobile-library/editor
+compilation with actual target feature receipts. Five additive Cargo seams preserve
+current mobile and host capabilities; production Rust source matches the reviewed
+foundation. Independent final integrated review is accepted. Project settings and automatic
+process/export selection remain separate work; physics-save refusal stays closed.
+[Integrated source and checks](docs/spikes/physics-mode-main172.md).
+
+## Pinned mobile bytecode compatibility — merged main171
 
 Fresh source cooks bind exact producer/destination and the pinned QuickJS ABI.
 Actual C and Swift callers each pass the same complete numeric/input/failure
@@ -48,16 +70,29 @@ and lean dependency checks pass; independent final source/execution review is ac
 cross-target admission remains denied; the authored iOS route above is a separate
 shipping-profile proof. No
 physical-phone or performance gate is claimed.
-[Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md).
+Current main169 integration passes all 16 checks with new matching archives and
+64 actual C/Swift controls; final integrated audit and exact-head fast CI passed
+before PR171 merged.
+[Contract and evidence](docs/spikes/mobile-bytecode-compatibility.md);
+[current integration](docs/spikes/mobile-bytecode-main169.md).
 
-## Headless UI and reusable player — current integration verified
+## Ordinary desktop exporter — library audit corrected
+
+The player library and thin executable share a crate name. The shipping audit
+now checks both target units independently, preserving required optimization,
+source-compiler exclusion and final executable fat LTO. Six parser regressions
+and 63 scoped tools tests pass; root source review is accepted. The original
+failed export remains retained and corrected fresh packaging is pending in the
+Planar proof. [Evidence](docs/spikes/native-export-player-units.md).
+
+## Headless UI and reusable player — merged main169
 
 The shared recorded UI route and optional mobile C ABI pass all 19 integrated
 checks on the accepted audio ABI union. Real C/Swift callers of the new immutable
 macOS archive pass 32 controls/39 commands, including native held/released movement,
 exact failures and no-clobber output behavior. Producer source bytes and dependency
-versions are unchanged; independent final integration review is accepted and
-exact-head fast CI remains required. iOS/Android compatibility stays separate; no GPU/window/device gate.
+versions are unchanged; independent final integration review and exact-head
+fast CI passed before PR169 merged. iOS/Android compatibility stays separate; no GPU/window/device gate.
 [Integrated commands and actual callers](docs/spikes/headless-ui-mobile-integration.md).
 
 ## Mobile runtime callers — macOS C/Swift CPU proof accepted
@@ -65,9 +100,10 @@ exact-head fast CI remains required. iOS/Android compatibility stays separate; n
 Actual callers of the frozen native runtime archive pass 32 controls / 39
 commands with typed cooked input-driven movement, precise failure reports,
 repeat PCM and create-only outputs. Fixture Clippy and authoring-free graph
-checks pass; source/execution review is accepted. iOS target compatibility and
-simulator/device archives, Android NDK/CI, and physical-phone/render/device gates
-remain pending; the old document smoke is not reused as game execution evidence.
+checks pass; source/execution review is accepted. The later trusted-source
+compatibility route above adds iOS simulator execution and device archive links.
+Android NDK/CI and physical-phone/render/device gates remain pending; the old
+document smoke is not reused as game execution evidence.
 [Source and measured scope](docs/spikes/mobile-runtime-callers.md).
 
 ## Shared cooked-player library
@@ -125,6 +161,16 @@ repeat PCM and terminal silence are verified. Independent integration audit and 
 Authored appearance/device gates remain separate.
 [Current integration evidence](docs/spikes/core-presentation-integration.md).
 
+## Physics build variants — current-main kernel checks passed
+
+The 2D/3D physics crates build separately with deterministic math, hardware math,
+or the opt-in eight-lane candidate; native parallel stepping stays enabled.
+The same ten behavior tests and Clippy pass in each variant on main169, and actual compiler records
+confirm the intended features. Both base variants compile for wasm32 without
+parallel features. Existing callers retain deterministic defaults; per-project
+selection, matching play/export processes, device measurements and exact-replay
+gates remain open. [Evidence](docs/spikes/physics-runtime-variants.md).
+
 ## Core Sample presentation bindings — locally verified
 
 Optional authored role maps connect gameplay to localized health, collection and
@@ -139,6 +185,19 @@ expectation was corrected against the same frozen player; game code was unchange
 This is a numerical fixture, not the finished authored level or device gate.
 Headless recorded UI routing and physics save support remain separate open work.
 [Contract and retained evidence](docs/spikes/core-presentation-bindings.md).
+
+## Native physics saves — checked persistent boundary still open
+
+A bounded Rapier 0.36 diagnostic preserves trusted typed 2D/3D solver state and
+subsequent overlap events across eight cases / 960 continuation ticks. Rebuilding
+only current poses, velocities and sleep state diverges at nonzero checkpoints,
+including changed trigger events. Production `PhysicsUnsupported` remains intact;
+no untrusted solver graph decoder or world-v12 section has been adopted. The
+source audit identifies the private graph families a checked format must cover
+and the storage/load limits of deterministic replay. Independent source/evidence
+review accepted this bounded diagnostic; full physics saves remain open.
+[Diagnostic, source barrier and next options](docs/spikes/native-physics-snapshot-boundary.md).
+[Current-main kernel and diagnostic checks](docs/spikes/physics-boundaries-main169.md) pass; independent final integration review is accepted and fast CI remains required.
 
 ## Native audio transport — merged main163
 
@@ -735,12 +794,19 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #168 includes compound native animation and Wasm snapshots, authored two-bone
+Main #171 includes compound native animation and Wasm snapshots, authored two-bone
 IK, complete native/TypeScript/Wasm root motion, native audio transport and HUD,
 Wasm HUD controls, offline audio/UI checkpoints, public physics queries, and the
 Core/Planar gameplay foundations. Wasm audio transport is merged after current-main
-shipping validation; reviewed headless UI and the reusable player/mobile library
-with actual macOS C/Swift callers are ready for fast publication. Phase 1 and the finished game remain incomplete.
+shipping validation. Headless UI and the reusable player/mobile library with
+actual macOS C/Swift callers are merged. Trusted-source iOS bytecode compatibility
+is merged after current-main CPU/simulator checks, final review and fast CI.
+Reviewed physics kernel features and the trusted-state save diagnostic are next;
+process/project selection and actual physics saves remain separate work.
+The desktop exporter lib/bin audit repair is merged after scoped checks and
+review; fresh Planar packaging is still being verified, and no failed export is
+counted as shipping success. Phase 1 and the finished game
+remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
 required checks and eight push workflows succeeded. Release `2444d81f` has tested
@@ -1678,3 +1744,35 @@ tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main1
   retained evidence; publisher integration remains pending. No actual-cursor,
   arbitrary guest checkpoint, physical-device or phase-gate claim. See
   [contract and evidence](docs/spikes/native-wasm-audio.md).
+
+## Compiled physics selection — locally verified
+
+Native deterministic, fast and optional eight-lane builds now forward their
+kernel choice through 32 affected packages. Cooked scenes and embedded save
+scenes refuse a foreign exact variant before world creation; legacy deterministic
+bytes are preserved. All three builds passed the complete 249-test runtime suite,
+105 consumer tests, five focused admission/save tests, actual headless/player/editor
+all-target checks and applicable Clippy. Independent production source review is
+complete; current-main integration remains separate. Per-project settings,
+automatic matching Play processes and export selection are the next work, and
+physics-world saves, performance/device measurements and eight-lane adoption
+remain open. [Scope and retained evidence](docs/spikes/physics-mode-admission.md).
+
+## Authored physics mode — locally verified
+
+The document now has a strict fast/deterministic setting with preserved legacy
+canonical bytes and a public, undoable `set_physics_mode` command. Cook and Play
+startup refuse a mismatched process before assets or scripts; export producer
+receipts identify the selected family and exact kernel. All three builds passed
+134 document/command/cook/Play tests and Clippy with frozen inputs. Actual matching
+launcher/export execution and editor process switching remain in progress.
+[Contract and evidence](docs/spikes/physics-project-setting.md).
+
+## Physics setting generated contract — locally verified
+
+The public schema registry, agent-tool command schema and generated TypeScript
+API now include the undoable physics mode. All 70 schemas match a fresh matching
+Rust binary; strict consumer checks and the editor build pass. The integrated
+cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
+Mode-aware launch/export and editor process switching remain separate follow-on
+work. [Evidence](docs/spikes/physics-project-setting.md).

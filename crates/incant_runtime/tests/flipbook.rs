@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Transform, Velocity};
 use std::sync::Arc;
@@ -71,7 +73,10 @@ fn control(world: &mut NativeWorld, control: FlipbookControl) {
 fn v8_round_trip_advances_only_on_successful_fixed_ticks_with_retained_binding() {
     let cooked = scene();
     let bytes = cooked.to_bytes();
-    assert_eq!(&bytes[8..12], &8u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(8).to_le_bytes()
+    );
     assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
     let mut world = NativeWorld::from_bytes(&bytes).unwrap();
     let ptr = Arc::as_ptr(
@@ -222,7 +227,10 @@ fn decoder_checks_new_record_branches_after_integrity_and_static_v5_stays_static
     let static_scene = scene()
         .with_spatial(scene().visual_assets().to_vec(), nodes)
         .unwrap();
-    assert_eq!(&static_scene.to_bytes()[8..12], &5u32.to_le_bytes());
+    assert_eq!(
+        &static_scene.to_bytes()[8..12],
+        &crate::scene_format::scene_format(5).to_le_bytes()
+    );
     let mut world = NativeWorld::new(static_scene);
     world.step().unwrap();
     assert_eq!(world.flipbook_state(id(1)), None);

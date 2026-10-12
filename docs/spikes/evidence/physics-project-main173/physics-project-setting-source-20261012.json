@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-12T22:10:34.425418+00:00",
+  "reviewer": "astra independent integration lane",
+  "source": "624ab9562ee98383c23673a9072b555d8468043c",
+  "manifest": {
+    "path": "docs/spikes/evidence/physics-project-setting.json",
+    "sha256": "8e12db43ea52c9ee1394b9c1d498546fb85daab23fec8e1976769a389e37bf7b"
+  },
+  "status": "Rust source and scoped producer CPU evidence accepted; publication held for generated-contract follow-up",
+  "sources_verified": 25,
+  "artifacts_verified": 16,
+  "commands_verified": 6,
+  "totals": {
+    "deterministic-project-tests": {
+      "groups": 49,
+      "passed": 134,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast-project-tests": {
+      "groups": 49,
+      "passed": 134,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast-simd8-project-tests": {
+      "groups": 49,
+      "passed": 134,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "freeze": {
+    "total": 1378,
+    "tracked_equal": 1378,
+    "tracked_differences": [],
+    "nontracked": []
+  },
+  "review": [
+    "Read all seven production changes and focused command/document/cook/startup tests. Standard command transaction preserves provenance, rollback, journal and undo/redo.",
+    "Legacy omitted deterministic field preserves canonical bytes. Fast mode is only a family choice; exact cooked kernel variant remains separately enforced.",
+    "Admission is before cook/source/asset processing and new Play initialization, preserving live processes; trusted build receipt includes authored family and exact variant.",
+    "Test fixture changes select the compiled family explicitly. Existing tests retain their assertions."
+  ],
+  "findings": [
+    {
+      "priority": "P2",
+      "path": "sdk/ts/src/generated.d.ts",
+      "detail": "624ab source does not regenerate the published ProjectSettings.physics_mode and Command.set_physics_mode declarations. Root acknowledged and owns fresh matching-headless schema regeneration and strict consumer test before publication.",
+      "state": "open follow-up"
+    }
+  ],
+  "limits": [
+    "No independent build repeated; all retained commands and counts verified from actual producer outputs.",
+    "Current-main manifest forwarding and actual process/export selection have separate in-progress proofs. No complete editor selector or device claim."
+  ]
+}

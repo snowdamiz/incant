@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Transform, Velocity};
 use std::sync::Arc;
@@ -135,7 +137,10 @@ fn shift(w: &mut NativeWorld, n: u8, p: [f64; 3]) {
 fn source_free_roundtrip_paths_and_unchanged_ticks_retain_generations() {
     let cooked = scene();
     let bytes = cooked.to_bytes();
-    assert_eq!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 9);
+    assert_eq!(
+        u32::from_le_bytes(bytes[8..12].try_into().unwrap()),
+        crate::scene_format::scene_format(9)
+    );
     let loaded = CookedScene::from_bytes(&bytes).unwrap();
     assert_eq!(loaded.to_bytes(), bytes);
     drop(cooked);

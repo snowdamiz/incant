@@ -6,6 +6,7 @@ use serde_json::json;
 
 fn fixture() -> (Project, String, String, String) {
     let mut project = Project::empty("Attached gameplay");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Mover");
     let source = new_id();

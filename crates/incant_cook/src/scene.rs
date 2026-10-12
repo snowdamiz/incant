@@ -106,6 +106,7 @@ pub(crate) fn cook_validated_scene_with_resources(
     animations: &crate::AnimationResources,
 ) -> Result<Vec<u8>, CookError> {
     let project = validated.project();
+    incant_runtime::require_physics_mode(project.settings.physics_mode)?;
     let scene = project
         .scenes
         .get(scene_id)

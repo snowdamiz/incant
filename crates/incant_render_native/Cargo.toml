@@ -5,6 +5,21 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_assets/physics-deterministic",
+    "incant_cook/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_assets/physics-fast-simd8",
+    "incant_cook/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+]
+
 [dependencies]
 incant_runtime.workspace = true
 incant_text.workspace = true
@@ -19,7 +34,7 @@ ulid.workspace = true
 incant_types.workspace = true
 incant_doc.workspace = true
 png = "0.18"
-incant_assets = { path = "../incant_assets" }
+incant_assets = { path = "../incant_assets", default-features = false }
 incant_cook = { path = "../incant_cook", default-features = false, features = ["scene"] }
 serde_json.workspace = true
 tempfile = "3"

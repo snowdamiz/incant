@@ -22,7 +22,9 @@ fn authored_module_runs_from_captured_cache_and_checkpoints_refuse_explicitly() 
     )
     .unwrap();
     std::fs::write(root.path().join("guest.wasm"), bytes).unwrap();
-    let mut bus = CommandBus::new(Project::empty("Wasm Play")).unwrap();
+    let mut project = Project::empty("Wasm Play");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
+    let mut bus = CommandBus::new(project).unwrap();
     let asset = ImportSnapshot::capture(&bus)
         .prepare(
             root.path(),

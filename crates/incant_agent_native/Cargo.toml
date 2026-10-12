@@ -5,22 +5,55 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+default = ["physics-deterministic"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_agent/physics-deterministic",
+    "incant_assets/physics-deterministic",
+    "incant_audio_runtime/physics-deterministic",
+    "incant_cmd/physics-deterministic",
+    "incant_game_runtime/physics-deterministic",
+    "incant_observe/physics-deterministic",
+    "incant_play/physics-deterministic",
+    "incant_render/physics-deterministic",
+    "incant_render_authoring/physics-deterministic",
+    "incant_render_game/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_agent/physics-fast-simd8",
+    "incant_assets/physics-fast-simd8",
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_cmd/physics-fast-simd8",
+    "incant_game_runtime/physics-fast-simd8",
+    "incant_observe/physics-fast-simd8",
+    "incant_play/physics-fast-simd8",
+    "incant_render/physics-fast-simd8",
+    "incant_render_authoring/physics-fast-simd8",
+    "incant_render_game/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+]
+
 [dependencies]
 incant_agent.workspace = true
 incant_cmd.workspace = true
 incant_doc.workspace = true
-incant_play = { path = "../incant_play" }
+incant_play = { path = "../incant_play", default-features = false }
 incant_script.workspace = true
 incant_runtime.workspace = true
-incant_game_runtime = { path = "../incant_game_runtime" }
+incant_game_runtime = { path = "../incant_game_runtime", default-features = false }
 incant_audio_runtime = { workspace = true, features = ["scene"] }
-incant_assets = { path = "../incant_assets" }
-incant_render = { path = "../incant_render" }
+incant_assets = { path = "../incant_assets", default-features = false }
+incant_render = { path = "../incant_render", default-features = false }
 incant_render_authoring.workspace = true
 base64 = "0.22"
-incant_render_game = { path = "../incant_render_game" }
+incant_render_game = { path = "../incant_render_game", default-features = false }
 incant_input.workspace = true
-incant_observe = { path = "../incant_observe" }
+incant_observe = { path = "../incant_observe", default-features = false }
 serde.workspace = true
 serde_json.workspace = true
 thiserror.workspace = true

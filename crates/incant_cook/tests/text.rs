@@ -1,4 +1,7 @@
 #![cfg(feature = "scene")]
+#[path = "support/scene_format.rs"]
+mod format;
+use format::scene_format;
 use incant_cmd::{Actor, Command, CommandBus};
 use incant_doc::{Entity, Project, Scene};
 use incant_import::{ImportRequest, ImportSnapshot};
@@ -10,7 +13,9 @@ const LATIN: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSans-Regu
 const ARABIC: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSansArabic.ttf");
 const CJK: &[u8] = include_bytes!("../../incant_text/tests/fonts/IncantCJKFixture.ttf");
 fn fixture(root: &std::path::Path) -> (CommandBus, String, String) {
-    let mut bus = CommandBus::new(Project::empty("Text")).unwrap();
+    let mut project = Project::empty("Text");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
+    let mut bus = CommandBus::new(project).unwrap();
     let sources = [
         ("latin.ttf", LATIN),
         ("arabic.ttf", ARABIC),
@@ -62,7 +67,10 @@ fn public_import_command_cook_and_source_deleted_font_catalog_produce_real_glyph
     let (mut bus, sid, eid) = fixture(temp.path());
     let authored = bus.project().canonical_text().unwrap();
     let bytes = incant_cook::cook_scene(bus.project(), &sid).unwrap();
-    assert_eq!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 12);
+    assert_eq!(
+        u32::from_le_bytes(bytes[8..12].try_into().unwrap()),
+        scene_format(12)
+    );
     bus.undo().unwrap();
     assert!(bus.project().scenes.is_empty());
     bus.redo().unwrap();
