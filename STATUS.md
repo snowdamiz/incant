@@ -16,6 +16,22 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Ordinary offline audio session checkpoints — local CPU proof passed
+
+World v8/session v3 resume real static and streamed Kira voices alongside existing
+script state/timers and hosted UI. Exact fractional/resampler history, birth order,
+queued/retired voices, nested buses/listener state, tick-zero startup and master
+suspension are covered. The ordinary public exporter/player passed source/build/
+map-deleted continuation with identical saves and PCM; precise negative controls
+were rerun against the same frozen binary. Affected 410 tests, 99 Kira tests,
+scoped Clippy and lean/runtime target checks pass. Independent final source/process review is accepted;
+coordinator intake remains pending.
+
+Physics/module/device-native audio and native-window/GPU checkpoint routes remain
+unsupported; arbitrary VM heap/effects and full save/device gates are not claimed.
+[Contract and evidence](docs/spikes/native-audio-session-checkpoints.md).
+
+
 ## Authored nested animation trees — connected implementation under verification
 
 Stable-ID nested 1D and rectangular 2D motions now cook into a bounded v15 node

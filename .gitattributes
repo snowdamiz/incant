@@ -21,3 +21,6 @@ third_party/cosmic-text/sample/hebrew.txt whitespace=-blank-at-eol
 third_party/cosmic-text/sample/hello.txt whitespace=-blank-at-eol
 # Unified diff context lines intentionally contain their leading space.
 third_party/cosmic-text/INCANT_PATCH.diff whitespace=-blank-at-eol
+
+# Preserve published Kira sources/licenses, including original CRLF whitespace.
+third_party/kira/** -text whitespace=-blank-at-eol,cr-at-eol

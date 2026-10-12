@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-12T15:26:52.017621+00:00",
+  "reviewer": "astra-root",
+  "scope": "Independent final source/evidence audit of ordinary hosted audio/UI session checkpoints; prior production review carried forward through verified source manifest",
+  "evidence_sha256": "42eaaa9363af51471e271c0fb04b08e42413731fa2aaf7871f442c6a8f4c92e0",
+  "source_files_verified": 162,
+  "compressed_logs_verified": 19,
+  "public_receipts_verified": 4,
+  "processes": 13,
+  "package_files_verified": 16,
+  "exact_save_and_pcm_continuation": true,
+  "source_review": "No remaining findings after transport consistency correction; helper004 and Kira scope README reviewed",
+  "limitations": [
+    "ordinary load with opt-in typed script state; module globals/closures ephemeral",
+    "physics/static/development-module and device audio checkpoints remain unsupported",
+    "no GPU/window/native IME/performance/full Phase1 gate claim",
+    "PCM and checkpoint publication are separate files",
+    "unchanged upstream vendor Clippy derivable_impls at two sites explicitly excluded; unchanged device custom_device warning",
+    "original exporter startup used its pre-existing HOME override; strict verifier does not override HOME"
+  ],
+  "accepted": true
+}

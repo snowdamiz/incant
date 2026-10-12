@@ -1,0 +1,47 @@
+[
+  {
+    "path": "Cargo.toml",
+    "upstream_sha256": "8d60d4031a36aa5bedc36f74af2e64ffb60cbc234761db05d2d4325aa22afe0f",
+    "patched_sha256": "7a0eb9aa9cf80166bab2c2800d8e429d0f7502cb92735b308eb7f057f432d77a"
+  },
+  {
+    "path": "src/parameter.rs",
+    "upstream_sha256": "9c1416d9bc01c40379dca4a817dd58424968b3b9f7267b8a9a5290f8f7145740",
+    "patched_sha256": "080e16c45284c2e1885d5efe28c7ce046750344a529938f66b2cb4e6e132902f"
+  },
+  {
+    "path": "src/playback_state_manager.rs",
+    "upstream_sha256": "ac2b00eab73769624bf13a2720b6c0daf48aee20054313eeb25bb31bc5ba9cc3",
+    "patched_sha256": "39436bf9d0503959aa571ea0867aa8fb7ea355f0d5ce7d8c18e733a7e8d8b717"
+  },
+  {
+    "path": "src/sound/static_sound/sound/checkpoint/tests.rs",
+    "upstream_sha256": null,
+    "patched_sha256": "4fd820da25ad6ddb56b06f7ad781300fdb16ef7be00cf9663246e3dbbaac062c"
+  },
+  {
+    "path": "src/sound/static_sound/sound/checkpoint.rs",
+    "upstream_sha256": null,
+    "patched_sha256": "7f9b6039218ea6750818040a3435a747fc519471b7f7117a2a35eeaff7ab60a1"
+  },
+  {
+    "path": "src/sound/static_sound/sound/resampler.rs",
+    "upstream_sha256": "364f1b79f1bccb66690825d5b738b425e40dff7d7bc6463544b91f2c42d42d87",
+    "patched_sha256": "272d1249dfa2b2e56386478916da619be2478f11008779635d66996400402883"
+  },
+  {
+    "path": "src/sound/static_sound/sound.rs",
+    "upstream_sha256": "6f01b8c05983ecbae9d94cdadac15468e5f8f05e56234419f625ad2b141c0517",
+    "patched_sha256": "4e6f203a46f3c6ffcb5d04e057a4b159103d9bd4fbd7e2622a814293627ed0a0"
+  },
+  {
+    "path": "src/sound/static_sound.rs",
+    "upstream_sha256": "df474f06e04e7a55607291a9d1e11edd52c25418246c922993522fefa1843a1b",
+    "patched_sha256": "a6a4ee8c26743652f84bc9d81a1a0f1ab61756b5c01522f85b81f98607888025"
+  },
+  {
+    "path": "src/track/sub/builder.rs",
+    "upstream_sha256": "b4a90a2d4d57014dcd0c6176915f2918920d3e36c5eaaf430e1a519f09a05e4b",
+    "patched_sha256": "f3873daaad504fbd7b8962118c051b5919c251bb9cd3852cbcf526a1bf470980"
+  }
+]
