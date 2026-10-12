@@ -10,7 +10,12 @@
     "tools/probes/script-source-transactions.py": "78cd059dda61456f6a66a48151d3e5ccce7e7c812163b2b269f34ee1b0ca700b"
   },
   "implementation_commit": "b8d9447764f433d2b82d41f9b3a03212df4cf49f",
-  "final_review": "pending independent review",
+  "final_review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/native-wasm-audio/package-final-review.json",
+    "sha256": "881640ab03b007b901f8a771d374c343652959ef39da58aa9b9035a8184317b3",
+    "qualification": "All 110 archived raw records verified; 109 surviving original records rehashed. The author-001.log original mapping was not located; its retained archive is verified."
+  },
   "result": {
     "passed": true,
     "target": "aarch64-apple-darwin",

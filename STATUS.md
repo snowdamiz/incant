@@ -1595,7 +1595,7 @@ tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main1
   accepts the retained evidence. The public import/select/Undo/Redo/reopen and
   captured-only development route passes; three fresh ordinary wasm2c players
   match every declaration field and exact PCM after private source/cache/build/map
-  deletion, with 13 exact refusals. Independent final package review is pending.
-  No actual-cursor,
+  deletion, with 13 exact refusals. Independent final package review accepts the
+  retained evidence; publisher integration remains pending. No actual-cursor,
   arbitrary guest checkpoint, physical-device or phase-gate claim. See
   [contract and evidence](docs/spikes/native-wasm-audio.md).
