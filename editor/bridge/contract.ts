@@ -356,6 +356,22 @@ export interface PlayStatus {
   readonly suspended: boolean;
   readonly preparing: boolean;
   readonly error: string | null;
+  /** Optional on older hosts. Bounded accepted log prefix, never full rows per frame. */
+  readonly logs?: { readonly count: number; readonly dropped: number };
+}
+/** One bounded copied tail. Cursor is local to a native Play generation. */
+export interface PlayLogBatch {
+  readonly generation: number;
+  readonly from: number;
+  readonly next: number;
+  readonly dropped: number;
+  readonly warningId: string;
+  readonly entries: readonly {
+    readonly id: string;
+    readonly tick: number;
+    readonly level: ConsoleLevel;
+    readonly message: string;
+  }[];
 }
 export interface PlayEntity {
   readonly generation: number;

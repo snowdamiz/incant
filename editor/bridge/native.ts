@@ -16,6 +16,8 @@ import type {
   WindowChrome,
   ProviderState,
   PlayStatus,
+  PlayLogBatch,
+  ConsoleEntry,
   PlayEntity,
   PlayRequest,
   AgentState,
@@ -523,9 +525,37 @@ function validProviderState(value: unknown): value is ProviderState {
   if (state.status === 'connecting') return state.method !== undefined;
   return state.status !== 'error' || state.error !== undefined;
 }
+const PLAY_LOG_ROWS = 1024;
+const PLAY_LOG_BYTES = 256 * 1024;
+const PLAY_LOG_BATCH_ROWS = 64;
+const PLAY_LOG_BATCH_BYTES = 16 * 1024;
+const playLogError = (): BridgeError => ({ code: 'play.logs', message: 'Native Play logs are unavailable. Refresh Play to retry.' });
+const consoleId = (value: unknown): value is string => typeof value === 'string' && /^[0-7][0-9A-HJKMNP-TV-Z]{25}$/.test(value);
+function validPlayLogSummary(value: unknown): value is NonNullable<PlayStatus['logs']> {
+  return fields(value, ['count', 'dropped']) && count(value.count) && value.count <= PLAY_LOG_ROWS && count(value.dropped);
+}
+function validPlayLogBatch(value: unknown): value is PlayLogBatch {
+  if (!fields(value, ['generation', 'from', 'next', 'dropped', 'warningId', 'entries'])
+    || !count(value.generation) || value.generation > 0xffff_ffff || !count(value.from) || !count(value.next)
+    || value.next > PLAY_LOG_ROWS || !count(value.dropped) || !consoleId(value.warningId)
+    || !Array.isArray(value.entries) || value.entries.length > PLAY_LOG_BATCH_ROWS
+    || value.next !== value.from + value.entries.length) return false;
+  let total = 0;
+  const ids = new Set<string>();
+  return value.entries.every(entry => {
+    if (!fields(entry, ['id', 'tick', 'level', 'message']) || !consoleId(entry.id) || entry.id === value.warningId
+      || ids.has(entry.id) || !count(entry.tick) || !['debug', 'info', 'warn', 'error'].includes(entry.level as string)
+      || !boundedText(entry.message, 1024)) return false;
+    ids.add(entry.id);
+    total += bytes(entry.message);
+    return total <= PLAY_LOG_BATCH_BYTES;
+  });
+}
 function samePlayStatus(previous: PlayStatus, next: PlayStatus): boolean {
   const keys = Object.keys(previous) as (keyof PlayStatus)[];
-  return keys.length === Object.keys(next).length && keys.every(key => previous[key] === next[key]);
+  return keys.length === Object.keys(next).length && keys.every(key => key === 'logs'
+    ? previous.logs?.count === next.logs?.count && previous.logs?.dropped === next.logs?.dropped
+    : previous[key] === next[key]);
 }
 export class NativeBridge implements EditorBridge {
   readonly protocolVersion = 1;
@@ -562,6 +592,19 @@ export class NativeBridge implements EditorBridge {
   private playError: BridgeError | undefined;
   private playRead: Promise<void> | undefined;
   private playUpdateId = 0;
+  private playLogScope = 0;
+  private playLogGeneration: number | undefined;
+  private playLogOwner: string | undefined;
+  private playLogProject: string | undefined;
+  private playLogIndex = 0;
+  private playLogDropped = 0;
+  private playLogGenerationBytes = 0;
+  private playLogOmitted = 0;
+  private playLogWarningId: string | undefined;
+  private playLogIds = new Set<string>();
+  private playLogRetainedIds = new Set<string>();
+  private playLogRows: ConsoleEntry[] = [];
+  private playLogBytes = 0;
   private listeners = new Set<() => void>();
   private historyListeners = new Set<(action: 'undo' | 'redo') => void>();
   private pending = false;
@@ -611,10 +654,23 @@ export class NativeBridge implements EditorBridge {
     const next = isReady(read) ? freeze(read) : undefined;
     const scopeChanged = budgetScope(this.read) !== budgetScope(next);
     if (scopeChanged) { ++this.agentGeneration; this.agentVerified = false; }
+    if (!next || (this.playLogProject !== undefined && next.project.id !== this.playLogProject)) ++this.playLogScope;
+    if (next && next.project.id !== this.playLogProject) {
+      // A first project read can follow Play bootstrap. Later project switches cannot
+      // attach the old world's log prefix to the new project.
+      if (this.playLogProject === undefined) this.playLogOwner = next.project.id;
+      this.playLogProject = next.project.id;
+      this.playLogRows = [];
+      this.playLogRetainedIds.clear();
+      this.playLogBytes = 0;
+      this.playLogOmitted = 0;
+      this.playLogWarningId = undefined;
+    }
     this.read = next;
     const snapshot = { ...snapshotFromEngine(read), provider: this.provider, ...this.agentFields(), ...(this.play ? { play: this.play } : {}), ...(this.playError ? { playError: this.playError } : {}) };
+    const withConsole = { ...snapshot, console: this.playConsole(snapshot.console) };
     this.snapshot = freeze(
-      this.chrome ? { ...snapshot, window: this.chrome } : snapshot,
+      this.chrome ? { ...withConsole, window: this.chrome } : withConsole,
     );
     this.listeners.forEach((fn) => fn());
     if (scopeChanged && !this.agentBudgetPending && (this.agentSession || this.agentPolling)) void this.refreshAgent();
@@ -882,16 +938,30 @@ export class NativeBridge implements EditorBridge {
     } finally { this.agentCancelling.delete(request.turnId); }
   }
   updatePlay(status: PlayStatus) {
-    if (this.play && (status.generation < this.play.generation || status.sequence < this.play.sequence)) return;
+    if (this.play && (status.generation < this.play.generation || status.sequence < this.play.sequence)) return false;
+    if (status.logs !== undefined && !validPlayLogSummary(status.logs)) {
+      this.failPlayLogs();
+      return false;
+    }
+    if (status.generation !== this.playLogGeneration) {
+      ++this.playLogScope;
+      this.playLogGeneration = status.generation;
+      this.playLogOwner = this.read?.project.id;
+      this.playLogIndex = 0;
+      this.playLogDropped = 0;
+      this.playLogGenerationBytes = 0;
+      this.playLogIds.clear();
+    } else if (status.phase === 'error' && this.play?.phase !== 'error') ++this.playLogScope;
     // An accepted duplicate still fences failures from earlier reads without replacing the snapshot.
     ++this.playUpdateId;
     const retained = this.play && samePlayStatus(this.play, status) ? this.play : undefined;
-    if (retained && !this.playError) return;
+    if (retained && !this.playError) return true;
     this.play = retained ?? freeze(status);
     this.playError = undefined;
     const { playError: _error, ...rest } = this.snapshot;
     this.snapshot = freeze({ ...rest, play: this.play });
     this.listeners.forEach((fn) => fn());
+    return true;
   }
   async refreshPlay() {
     if (this.playRead) return this.playRead;
@@ -900,15 +970,86 @@ export class NativeBridge implements EditorBridge {
   }
   private async readPlay() {
     const published = this.playUpdateId;
-    try { this.updatePlay(await this.invoke<PlayStatus>('play_read')); }
+    const scope = this.playLogScope;
+    const project = this.read?.project.id;
+    try {
+      const status = await this.invoke<PlayStatus>('play_read');
+      if (scope !== this.playLogScope || project !== this.read?.project.id) return;
+      if (this.updatePlay(status)) await this.readPlayLogs();
+    }
     catch (error) {
-      if (this.playUpdateId !== published) return;
+      if (this.playUpdateId !== published || scope !== this.playLogScope || project !== this.read?.project.id) return;
       const result = failure(error);
       if (!result.ok) {
         this.playError = result.error;
         this.snapshot = freeze({ ...this.snapshot, playError: result.error });
         this.listeners.forEach((fn) => fn());
       }
+    }
+  }
+  private playConsole(native: readonly ConsoleEntry[]): readonly ConsoleEntry[] {
+    if (!this.read) return native;
+    const warning: ConsoleEntry[] = this.playLogWarningId && this.playLogOmitted > 0 ? [{
+      id: this.playLogWarningId, level: 'warn', source: 'Play', at: timestamp(this.playLogWarningId),
+      message: `Native Play Console omitted ${this.playLogOmitted.toLocaleString('en-US')} messages because its bounded history is full.`,
+    }] : [];
+    // Only rebuild Console when a project read or a new bounded delta arrives.
+    return [...native, ...this.playLogRows].sort((a, b) => a.at.localeCompare(b.at)).concat(warning);
+  }
+  private failPlayLogs() {
+    // A newer invalid status must fence any earlier tail still in flight.
+    ++this.playLogScope;
+    const error = playLogError();
+    this.playError = error;
+    this.snapshot = freeze({ ...this.snapshot, playError: error });
+    this.listeners.forEach(fn => fn());
+  }
+  private async readPlayLogs() {
+    const status = this.play;
+    if (!status?.logs || !this.read || this.read.project.id !== this.playLogOwner
+      || !['running', 'paused'].includes(status.phase)) return;
+    if (status.logs.count <= this.playLogIndex && status.logs.dropped <= this.playLogDropped) return;
+    const scope = this.playLogScope;
+    const project = this.read.project.id;
+    const from = this.playLogIndex;
+    const current = () => scope === this.playLogScope && project === this.read?.project.id
+      && status.generation === this.play?.generation && ['running', 'paused'].includes(this.play.phase);
+    try {
+      const batch = await this.invoke<unknown>('play_logs_read', { generation: status.generation, afterIndex: from });
+      if (!current()) return;
+      if (!validPlayLogBatch(batch) || batch.generation !== status.generation || batch.from !== from
+        || batch.next < Math.min(status.logs.count, from + 1) || batch.dropped < this.playLogDropped
+        || this.playLogGenerationBytes + batch.entries.reduce((sum, entry) => sum + bytes(entry.message), 0) > PLAY_LOG_BYTES
+        || batch.entries.some(entry => this.playLogIds.has(entry.id) || this.playLogRetainedIds.has(entry.id))
+        || (this.playLogWarningId !== undefined && batch.warningId !== this.playLogWarningId)) {
+        this.failPlayLogs();
+        return;
+      }
+      // Validate the whole batch before any Console publication or cursor movement.
+      this.playLogWarningId = batch.warningId;
+      this.playLogOmitted = Math.min(Number.MAX_SAFE_INTEGER, this.playLogOmitted + batch.dropped - this.playLogDropped);
+      this.playLogDropped = batch.dropped;
+      for (const entry of batch.entries) {
+        this.playLogIds.add(entry.id);
+        this.playLogRetainedIds.add(entry.id);
+        this.playLogRows.push({ id: entry.id, level: entry.level, source: 'Play', message: entry.message, at: timestamp(entry.id) });
+        this.playLogBytes += bytes(entry.message);
+        this.playLogGenerationBytes += bytes(entry.message);
+      }
+      this.playLogIndex = batch.next;
+      // Reserve one warning row and its bounded message, across every restart.
+      while (this.playLogRows.length > PLAY_LOG_ROWS - 1 || this.playLogBytes > PLAY_LOG_BYTES - 256) {
+        const removed = this.playLogRows.shift()!;
+        this.playLogBytes -= bytes(removed.message);
+        this.playLogRetainedIds.delete(removed.id);
+        this.playLogOmitted = Math.min(Number.MAX_SAFE_INTEGER, this.playLogOmitted + 1);
+      }
+      const { playError: _error, ...rest } = this.snapshot;
+      this.playError = undefined;
+      this.snapshot = freeze({ ...rest, console: this.playConsole(this.read.console.map(event => ({ ...event, source: 'native', at: timestamp(event.id) }))) });
+      this.listeners.forEach(fn => fn());
+    } catch {
+      if (current()) this.failPlayLogs();
     }
   }
   /** One metadata read in flight, at most four per second. No engine_read polling. */
