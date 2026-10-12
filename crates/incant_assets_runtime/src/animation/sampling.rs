@@ -32,24 +32,12 @@ pub(super) fn sample(data: &AnimationData, sample: ClipSample, out: &mut [Option
         return;
     };
     for ch in &clip.channels {
-        let upper = ch
-            .times
-            .partition_point(|&t| f64::from(t) <= sample.seconds);
-        let a = upper.saturating_sub(1).min(ch.times.len() - 1);
-        let b = upper.min(ch.times.len() - 1);
-        let alpha = if a == b || ch.interpolation == Interpolation::Step {
-            0.
-        } else {
-            ((sample.seconds - f64::from(ch.times[a])) / f64::from(ch.times[b] - ch.times[a]))
-                .clamp(0., 1.)
-        };
-        let first = ch.values[a];
-        let next = ch.values[b];
         let trs = out[ch.node].as_mut().unwrap();
+        let value = channel(ch, sample.seconds);
         match ch.property {
-            Property::Rotation => trs.rotation = rotation(first, next, alpha),
+            Property::Rotation => trs.rotation = value,
             Property::Translation | Property::Scale => {
-                let value = std::array::from_fn(|i| linear(first[i], next[i], alpha));
+                let value = [value[0], value[1], value[2]];
                 if ch.property == Property::Translation {
                     trs.translation = value;
                 } else {
@@ -59,13 +47,30 @@ pub(super) fn sample(data: &AnimationData, sample: ClipSample, out: &mut [Option
         }
     }
 }
+/// The same checked cooked channel arithmetic used by full-pose and root-track
+/// sampling. Callers validate the retained data and finite time before entry.
+pub(super) fn channel(ch: &Channel, seconds: f64) -> [f32; 4] {
+    use incant_anim::track::{Interpolation as I, Kind};
+    incant_anim::track::sample_channel(
+        &ch.times,
+        &ch.values,
+        match ch.interpolation {
+            Interpolation::Linear => I::Linear,
+            Interpolation::Step => I::Step,
+        },
+        if ch.property == Property::Rotation {
+            Kind::Rotation
+        } else {
+            Kind::Vector
+        },
+        seconds,
+    )
+}
 fn linear(a: f32, b: f32, alpha: f64) -> f32 {
-    (f64::from(a) * (1. - alpha) + f64::from(b) * alpha) as f32
+    incant_anim::track::linear(a, b, alpha)
 }
 fn rotation(a: [f32; 4], b: [f32; 4], alpha: f64) -> [f32; 4] {
-    let a = DQuat::from_array(a.map(f64::from)).normalize();
-    let b = DQuat::from_array(b.map(f64::from)).normalize();
-    a.slerp(b, alpha).normalize().to_array().map(|v| v as f32)
+    incant_anim::track::rotation(a, b, alpha)
 }
 pub(super) fn blend(from: &mut [Option<NodeTrs>], to: &[Option<NodeTrs>], alpha: f64) {
     for (from, to) in from.iter_mut().zip(to) {

@@ -110,9 +110,8 @@ fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Resul
     let constraints = &constraints[..input.animation_ik.as_ref().map_or(0, |ik| ik.len())];
     let pose_error = |error| match error {
         AnimationPoseError::Sample(error) => SceneError::from(error),
-        AnimationPoseError::Ik(_) | AnimationPoseError::Root => {
-            SceneError::Input("unsupported or degenerate sampled IK pose")
-        }
+        AnimationPoseError::Root => SceneError::Input("unsupported sampled root-removal binding"),
+        AnimationPoseError::Ik(_) => SceneError::Input("unsupported or degenerate sampled IK pose"),
     };
     let primary = checked_sample(
         player,
@@ -162,13 +161,13 @@ fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Resul
                     from,
                     to,
                     pose.outer_weight().expect("two pose groups"),
-                    None,
+                    input.animation_root,
                     constraints,
                 )
                 .map_err(pose_error)?;
         } else {
             player
-                .sample_pose_pipeline(from, from, 0.0, None, constraints)
+                .sample_pose_pipeline(from, from, 0.0, input.animation_root, constraints)
                 .map_err(pose_error)?;
         }
     } else if let Some(blend) = input.animation_blend {
@@ -185,7 +184,7 @@ fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Resul
                 PoseSource::Clip(outgoing),
                 PoseSource::Clip(primary),
                 blend.weight,
-                None,
+                input.animation_root,
                 constraints,
             )
             .map_err(pose_error)?;
@@ -195,7 +194,7 @@ fn sample(player: &mut AnimationPlayer, input: &MeshInput) -> std::result::Resul
                 PoseSource::Clip(primary),
                 PoseSource::Clip(primary),
                 0.0,
-                None,
+                input.animation_root,
                 constraints,
             )
             .map_err(pose_error)?;

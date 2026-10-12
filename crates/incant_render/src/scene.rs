@@ -206,6 +206,7 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
             || binding.animation_blend.is_some()
             || binding.animation_pose.is_some()
             || binding.animation_ik.is_some()
+            || binding.animation_root.is_some()
         {
             return Err(SceneError::Input(
                 "animation sample requires animated model",

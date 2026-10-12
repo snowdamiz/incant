@@ -455,3 +455,6 @@ fn tree_pose_sync_retains_complete_weights_and_rolls_back_consumer_rejection() {
 
 #[path = "animation/ik.rs"]
 mod ik;
+
+#[path = "animation/root_motion.rs"]
+mod root_motion;

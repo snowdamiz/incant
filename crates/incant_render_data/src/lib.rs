@@ -126,6 +126,8 @@ pub struct MeshInput {
     pub animation_pose: Option<incant_types::AnimationPoseSamples>,
     /// Ordered model-space IK after the complete animation pose. Immutable across consumers.
     pub animation_ik: Option<Arc<[incant_types::AnimationIkSample]>>,
+    /// Restore root translation/rotation to rest before IK and deformation.
+    pub animation_root: Option<u16>,
 }
 pub struct SpriteInput {
     pub source: Arc<RuntimeAsset>,

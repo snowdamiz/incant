@@ -1,0 +1,27 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_physics_runtime",
+      "-p",
+      "incant_render_native",
+      "-p",
+      "incant_cook",
+      "-p",
+      "incant_assets",
+      "--all-targets"
+    ],
+    "status": 101,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-connected-broad-001/00.log"
+  }
+]

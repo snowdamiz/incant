@@ -16,6 +16,44 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Connected root motion — native/TypeScript CPU checks passed
+
+Cooked17/18 root catalogs now drive independent exact graph/clip clocks,
+interval deltas, bodyless/kinematic/character policies and staged root-strip then
+IK sampling. World11 and QuickJS session continuation preserve active/paused
+reverse fades; owned TypeScript cycles/ticks remain exact BigInt arrays. The
+600-case CPU suite, scoped Clippy, wasm32, dependency and SDK checks pass.
+Independent production source and retained evidence reviews accept the native
+connection. Wasm53–55 and ordinary source-deleted public
+root gameplay export are the next connected work, not yet proved. Physics saves,
+general affine/CUBICSPLINE roots, rendered/device and full Phase1 gates remain
+open. [Contract and measured limits](docs/spikes/native-root-motion-connected.md).
+
+## Root-motion captured catalogs — admission foundation verified
+
+A lean `incant_anim` crate now owns checked immutable root tracks and their bounded
+binary payload, sharing the existing full-pose interpolation arithmetic. Typed
+root selection uses normal command transactions, Undo/Redo and journal reopen;
+the captured-model loader validates topology and deduplicates catalogs. All 232
+affected tests, scoped Clippy, wasm32 and dependency checks pass. The catalog
+round-trips and samples after deleting source and cache data. Independent source
+and evidence review is accepted. The later connected native/TypeScript layer is
+recorded above; this historical admission result alone does not establish complete
+root motion. [Admission evidence](docs/spikes/native-root-motion-catalog.md).
+
+## Cooked root-motion numeric sampler — locally verified
+
+A bounded CPU sampler now reads rigid local translation/rotation deltas from
+immutable cooked tracks. Exact signed cycle cursors support forward/reverse, wrap
+and multiple-cycle motion, with ordered rotation/translation composition. Selected
+scale or matrix-only tracks refuse explicitly. All 128 assets/runtime cases,
+all-target Clippy, wasm32 visual and dependency checks pass; 4096 query iterations
+allocate nothing after admission. Independent source and retained evidence review
+accepts the implementation without findings; publisher integration remains pending.
+Authored root selection, graph/clock integration, pose extraction, body movement,
+save/SDK controls and rendered/device gates remain open; this is not complete
+root motion or Phase 1. [Contract and evidence](docs/spikes/native-root-motion-core.md).
+
 ## Native Rust/Wasm IK — actual hosts and ordinary package passed
 
 Additive operations 44–46 expose the complete pre-command v4 pose plus ordered

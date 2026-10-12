@@ -21,6 +21,7 @@ fn node(source: Arc<RuntimeAsset>, id: &str, seconds: f64) -> SceneNode {
             animation_blend: None,
             animation_pose: None,
             animation_ik: None,
+            animation_root: None,
             animation: Some(incant_types::AnimationSample {
                 clip: Some(0),
                 seconds,
