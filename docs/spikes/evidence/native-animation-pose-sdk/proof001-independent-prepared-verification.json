@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-12T15:23:21.026518+00:00",
+  "manifest_sha256": "67428c01b18328e7defc9f4b0a31bf861539f41d57e2e80fb97b2a8b295ce93f",
+  "modules": 151,
+  "files_verified": 756,
+  "bundle": "/Users/andreyyurlov/.codex/incant-evidence/animation-poses-host-proof-001/static-wasm-inputs-2inwwd3a/bundle",
+  "method": "Separate read-only rehash of every manifest file while prepared inputs still exist; this is producer verification, not independent review."
+}

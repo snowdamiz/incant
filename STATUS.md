@@ -16,6 +16,20 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Public Wasm complete animation poses — local host proof passed
+
+The Rust SDK now reads complete v4 pose frames with stable scene/entity identity,
+exact native contributions and explicit interpolation kinds. Legacy SLERP pairs
+retain their semantics; weighted tree poses use the native normalized quaternion
+mean. Old observations refuse weighted poses. Published operations 0–41 remain
+unchanged. Actual Wasmtime/wasm2c conformance passes 398 tests/doctests, Clippy and
+three generic development smoke processes; the new guest matches a direct native
+eight-pose oracle over twenty ticks. Source review accepts the frozen boundary.
+Final corrected union checks pass; final evidence review is pending. Synthetic sixteen-sample coverage
+establishes wire capacity only; tree-state fades/composite operands, source-deleted
+ordinary tree-game export, rendered/device gates and complete SDK remain open.
+[Contract and evidence](docs/spikes/native-animation-pose-sdk.md).
+
 ## Public Wasm physics queries — locally verified
 
 The Rust SDK now batches native 3D/2D rays and character movement queries and
