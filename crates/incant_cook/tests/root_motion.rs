@@ -245,3 +245,82 @@ fn redirected_root_catalog_cache_and_entries_are_not_capabilities() {
     symlink(&moved, &cache).unwrap();
     assert!(load_project_root_motion_resources(&p, &sid, root.path()).is_err());
 }
+
+#[test]
+fn ordinary_scene_cook_embeds_root_catalog_and_rejects_stale_or_malformed_bindings() {
+    use incant_cook::{cook_scene_with_resources, load_project_animation_resources};
+    use incant_runtime::CookedScene;
+    use sha2::{Digest, Sha256};
+    let root = tempfile::tempdir().unwrap();
+    let (mut p, sid, eid, aid) = project(root.path(), |_| {});
+    let value = binding(&p, &aid, 1);
+    p.scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&eid)
+        .unwrap()
+        .components
+        .insert("AnimationRootMotion".into(), value);
+    let animations = load_project_animation_resources(&p, &sid, root.path()).unwrap();
+    assert!(incant_cook::cook_scene(&p, &sid).is_err()); // Captured resources are required.
+    let bytes = cook_scene_with_resources(&p, &sid, &Default::default(), &animations).unwrap();
+    assert_eq!(&bytes[8..12], &17u32.to_le_bytes());
+    let catalog_size = load_project_root_motion_resources(&p, &sid, root.path())
+        .unwrap()
+        .catalog(stable_id(&eid).unwrap())
+        .unwrap()
+        .to_bytes()
+        .unwrap()
+        .len();
+    let original = p.canonical_text().unwrap();
+    p.scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&eid)
+        .unwrap()
+        .components
+        .get_mut("AnimationRootMotion")
+        .unwrap()["root"] = json!(0);
+    assert!(cook_scene_with_resources(&p, &sid, &Default::default(), &animations).is_err());
+    assert_ne!(p.canonical_text().unwrap(), original);
+    drop(animations);
+    drop(p);
+    root.close().unwrap();
+    let cooked = CookedScene::from_bytes(&bytes).unwrap();
+    assert_eq!(cooked.to_bytes(), bytes);
+    let catalog = &cooked.spatial()[0].root_motion.as_ref().unwrap().catalog;
+    assert_eq!(
+        catalog
+            .sampler(0)
+            .unwrap()
+            .clamped_delta(0.0, 1.0)
+            .unwrap()
+            .translation,
+        [1.0, 0.0, 0.0]
+    );
+    let payload = bytes.windows(8).position(|v| v == b"INCROOT\0").unwrap();
+    let binding = payload + catalog_size + 4;
+    for case in 0..10 {
+        let mut bad = bytes.clone();
+        match case {
+            0 => bad[payload - 8..payload - 4].copy_from_slice(&0u32.to_le_bytes()),
+            1 => bad[payload - 8..payload - 4].copy_from_slice(&1025u32.to_le_bytes()),
+            2 => bad[payload - 4..payload].copy_from_slice(&u32::MAX.to_le_bytes()),
+            3 => bad[payload + 12] ^= 1, // Fingerprint must match the animation.
+            4 => bad[payload + 132..payload + 136].copy_from_slice(&0u32.to_le_bytes()),
+            5 => bad[binding] ^= 1, // Unknown owner.
+            6 => bad[binding + 16..binding + 20].copy_from_slice(&1u32.to_le_bytes()),
+            7 => bad[binding + 20] = 4,
+            8 => bad[binding + 21] = 2,
+            _ => bad[binding + 22] = 1,
+        }
+        let mut hash = Sha256::new();
+        hash.update(&bad[..40]);
+        hash.update(&bad[72..]);
+        bad[40..72].copy_from_slice(&hash.finalize());
+        assert!(CookedScene::from_bytes(&bad).is_err(), "case {case}");
+    }
+    assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
+}

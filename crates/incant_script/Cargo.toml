@@ -33,6 +33,7 @@ sha2.workspace = true
 serde.workspace = true
 
 [dev-dependencies]
+incant_anim.workspace = true
 serde_json.workspace = true
 
 [build-dependencies]

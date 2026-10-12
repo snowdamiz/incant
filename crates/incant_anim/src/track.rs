@@ -116,3 +116,19 @@ pub fn rotation(a: [f32; 4], b: [f32; 4], alpha: f64) -> [f32; 4] {
     let b = DQuat::from_array(b.map(f64::from)).normalize();
     a.slerp(b, alpha).normalize().to_array().map(|v| v as f32)
 }
+
+/// Canonical unit quaternion for already admitted finite, nonzero rotations.
+/// Preserves the weighted pose sampler's sign choice at exact orthogonal ties.
+pub fn canonical_quaternion(value: [f64; 4]) -> [f64; 4] {
+    let mut q = DQuat::from_array(value).normalize().to_array();
+    // q and -q are the same rotation. Canonicalize even the exact orthogonal
+    // case, where a hemisphere dot product alone cannot choose between them.
+    if [3, 0, 1, 2]
+        .into_iter()
+        .find_map(|i| (q[i] != 0.).then_some(q[i] < 0.))
+        .unwrap_or(false)
+    {
+        q = q.map(|v| -v);
+    }
+    q
+}

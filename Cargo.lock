@@ -4442,6 +4442,7 @@ dependencies = [
  "bevy_ecs",
  "glam 0.32.1",
  "incant_2d",
+ "incant_anim",
  "incant_localization",
  "incant_nav",
  "incant_physics_2d_runtime",
@@ -4458,6 +4459,7 @@ name = "incant_script"
 version = "0.0.1"
 dependencies = [
  "cpu-time",
+ "incant_anim",
  "incant_audio_runtime",
  "incant_input",
  "incant_localization",

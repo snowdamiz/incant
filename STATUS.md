@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Connected root motion — native/TypeScript CPU checks passed
+
+Cooked17/18 root catalogs now drive independent exact graph/clip clocks,
+interval deltas, bodyless/kinematic/character policies and staged root-strip then
+IK sampling. World11 and QuickJS session continuation preserve active/paused
+reverse fades; owned TypeScript cycles/ticks remain exact BigInt arrays. The
+600-case CPU suite, scoped Clippy, wasm32, dependency and SDK checks pass.
+Independent production source review accepts the connection; final retained
+evidence review remains pending. Wasm53–55 and ordinary source-deleted public
+root gameplay export are the next connected work, not yet proved. Physics saves,
+general affine/CUBICSPLINE roots, rendered/device and full Phase1 gates remain
+open. [Contract and measured limits](docs/spikes/native-root-motion-connected.md).
+
 ## Root-motion captured catalogs — admission foundation verified
 
 A lean `incant_anim` crate now owns checked immutable root tracks and their bounded
@@ -24,9 +37,9 @@ root selection uses normal command transactions, Undo/Redo and journal reopen;
 the captured-model loader validates topology and deduplicates catalogs. All 232
 affected tests, scoped Clippy, wasm32 and dependency checks pass. The catalog
 round-trips and samples after deleting source and cache data. Independent source
-and evidence review is accepted. Runtime connection remains pending: scene cooking refuses
-the component until v17 binding lands. This is not connected body movement or
-complete root motion. [Admission evidence](docs/spikes/native-root-motion-catalog.md).
+and evidence review is accepted. The later connected native/TypeScript layer is
+recorded above; this historical admission result alone does not establish complete
+root motion. [Admission evidence](docs/spikes/native-root-motion-catalog.md).
 
 ## Cooked root-motion numeric sampler — locally verified
 

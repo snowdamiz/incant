@@ -1,5 +1,4 @@
 //! Startup-only sealed root catalogs extracted from project-owned cooked models.
-mod compile;
 use crate::{CookError, stable_id};
 use incant_anim::{MAX_ROOT_MOTION_INSTANCES, MAX_SCENE_ROOT_MOTION_BYTES, RootMotionCatalog};
 use incant_doc::{AnimationRootMotion, Project};
@@ -80,9 +79,12 @@ pub fn load_project_root_motion_resources(
             *byte = (hex(pair[0]) << 4) | hex(pair[1]);
         }
         for (node, entities) in selections {
-            let catalog = compile::catalog(&model, fingerprint, node).map_err(|reason| {
-                error(ulid::Ulid::from_bytes(entities[0].0).to_string(), reason)
-            })?;
+            let catalog = incant_assets_runtime::animation::compile_root_motion_catalog(
+                &model,
+                fingerprint,
+                node,
+            )
+            .map_err(|reason| error(ulid::Ulid::from_bytes(entities[0].0).to_string(), reason))?;
             out.retained_bytes = out
                 .retained_bytes
                 .checked_add(catalog.retained_bytes())

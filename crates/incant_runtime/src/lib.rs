@@ -3,6 +3,11 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod animation;
 mod animation_binary;
+mod animation_step;
+mod root_motion;
+pub use root_motion::{
+    NativeRootMotion, RootMotionClockSnapshot, RootMotionControl, RootMotionSnapshot,
+};
 mod ik;
 mod ik_binary;
 pub use ik::{

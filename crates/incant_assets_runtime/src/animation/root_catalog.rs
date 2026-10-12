@@ -1,10 +1,11 @@
-use incant_anim::{RootMotionCatalog, RootMotionClip, RootMotionDelta, RootMotionTrack};
-use incant_assets_runtime::{
+//! Cold root-only extraction shared by cooker and retained render binding.
+use crate::{
     CookedModel,
     animation::{Channel, Interpolation, Property},
 };
+use incant_anim::{RootMotionCatalog, RootMotionClip, RootMotionDelta, RootMotionTrack};
 
-pub(super) fn catalog(
+pub fn compile_root_motion_catalog(
     model: &CookedModel,
     fingerprint: [u8; 32],
     selected: u16,

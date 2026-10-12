@@ -21,8 +21,35 @@ struct Resource {
 #[derive(Default)]
 pub struct AnimationResources {
     models: BTreeMap<StableId, Resource>,
+    root_motion: crate::RootMotionResources,
 }
 impl AnimationResources {
+    pub(crate) fn bind_root_motion(
+        &self,
+        asset: &VisualAssetRef,
+        entity: StableId,
+        authored: &incant_doc::AnimationRootMotion,
+        animation: &NativeAnimation,
+    ) -> Result<Arc<incant_runtime::NativeRootMotion>, CookError> {
+        let error = || CookError::RootMotionResource {
+            entity: ulid::Ulid::from_bytes(entity.0).to_string(),
+            reason: "missing or stale captured root catalog",
+        };
+        let catalog = self.root_motion.catalog(entity).ok_or_else(error)?;
+        if stable_id(&authored.model)? != asset.id
+            || catalog.fingerprint() != asset.fingerprint
+            || catalog.root() != authored.root
+        {
+            return Err(error());
+        }
+        let root = incant_runtime::NativeRootMotion {
+            catalog: Arc::clone(catalog),
+            application: authored.application,
+            applying: authored.applying,
+        };
+        root.validate(animation)?;
+        Ok(Arc::new(root))
+    }
     /// Validated cache inputs for build-system invalidation, never source paths.
     pub fn cache_paths(&self) -> impl Iterator<Item = &Path> {
         self.models.values().map(|r| r.path.as_path())
@@ -152,6 +179,7 @@ pub fn load_project_animation_resources(
             },
         );
     }
+    resources.root_motion = crate::load_project_root_motion_resources(project, scene_id, root)?;
     Ok(resources)
 }
 

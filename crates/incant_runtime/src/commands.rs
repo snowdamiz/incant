@@ -58,6 +58,10 @@ pub enum StructuralCommand {
         entity: StableId,
         control: crate::AnimationControl,
     },
+    ControlRootMotion {
+        entity: StableId,
+        control: crate::RootMotionControl,
+    },
     ControlIk {
         entity: StableId,
         control: crate::IkControl,
@@ -177,6 +181,7 @@ impl NativeWorld {
             if let Some(next) = navigation {
                 self.navigation = next;
             }
+            self.prepare_root_query_storage();
             commands.clear();
             return Ok(());
         }
@@ -200,6 +205,7 @@ impl NativeWorld {
                 StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlRootMotion { .. }
                     | StructuralCommand::ControlIk { .. }
             )
         }) {
@@ -219,6 +225,7 @@ impl NativeWorld {
             if let Some(next) = navigation {
                 self.navigation = next;
             }
+            self.prepare_root_query_storage();
             commands.clear();
             return Ok(());
         }
@@ -252,6 +259,7 @@ impl NativeWorld {
             if let Some(next) = navigation {
                 self.navigation = next;
             }
+            self.prepare_root_query_storage();
             commands.clear();
             return Ok(());
         }
@@ -269,6 +277,7 @@ impl NativeWorld {
                     | StructuralCommand::SetAngularVelocity2D { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlRootMotion { .. }
                     | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. }
@@ -306,6 +315,7 @@ impl NativeWorld {
                     | StructuralCommand::SetUi { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlAnimationGraph { .. }
+                    | StructuralCommand::ControlRootMotion { .. }
                     | StructuralCommand::ControlIk { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. } => continue,
@@ -321,6 +331,23 @@ impl NativeWorld {
             for id in touched {
                 let entity = self.world.entity(self.entities[&id]);
                 let binding = entity.get::<Binding>();
+                if let Some(root) = entity
+                    .get::<crate::CookedSpatial>()
+                    .and_then(|n| n.root_motion.as_ref())
+                {
+                    crate::root_motion::policy::validate(
+                        root.application,
+                        self.parents[&id].is_some(),
+                        &entity.get::<Local>().unwrap().0,
+                        velocities
+                            .get(&id)
+                            .map(|v| v.as_ref())
+                            .unwrap_or_else(|| entity.get::<Motion>().map(|m| &m.0)),
+                        binding.and_then(|b| b.body.as_ref()),
+                        binding.map(|b| &b.collider),
+                        entity.get::<Binding2D>().is_some(),
+                    )?;
+                }
                 let body = binding.and_then(|b| b.body.as_ref());
                 if spins.contains_key(&id) && body.is_none() {
                     return Err(SceneError::Component(id).into());
@@ -432,6 +459,7 @@ impl NativeWorld {
             for id in staged.removed {
                 self.audio_ids.remove(&id);
                 self.spatial_ids.remove(&id);
+                self.root_ids.remove(&id);
                 self.tilemap_collision_ids.remove(&id);
                 self.physics.remove(&self.scene_id(), &id);
                 let entity = self.entities.remove(&id).expect("staged entity");
@@ -506,6 +534,7 @@ impl NativeWorld {
         if let Some(localization) = localization {
             self.localization = localization;
         }
+        self.prepare_root_query_storage();
         commands.clear();
         Ok(())
     }
@@ -607,6 +636,7 @@ impl NativeWorld {
                 | StructuralCommand::SetUi { .. }
                 | StructuralCommand::ControlAnimation { .. }
                 | StructuralCommand::ControlAnimationGraph { .. }
+                | StructuralCommand::ControlRootMotion { .. }
                 | StructuralCommand::ControlIk { .. }
                 | StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}
@@ -771,6 +801,63 @@ impl NativeWorld {
             let next_node = changed_map
                 .map(|n| n.as_ref())
                 .unwrap_or_else(|| live.as_ref().and_then(|e| e.get::<crate::CookedSpatial>()));
+            if let Some(root) = next_node.and_then(|n| n.root_motion.as_ref()) {
+                if root.application == incant_types::RootMotionApplication::Character3d {
+                    let count = parents
+                        .keys()
+                        .filter(|id| {
+                            physics.get(id).map_or_else(
+                                || {
+                                    self.entities
+                                        .get(id)
+                                        .is_some_and(|h| self.world.get::<Binding>(*h).is_some())
+                                },
+                                |p| p.is_some(),
+                            )
+                        })
+                        .count();
+                    if count > incant_physics_runtime::MAX_CHARACTER_QUERY_COLLIDERS {
+                        return Err(SceneError::Invalid("character query collider capacity").into());
+                    }
+                }
+
+                let collider = match changed {
+                    Some(Some(p)) => Some(&p.collider),
+                    Some(None) => None,
+                    None => binding.map(|b| &b.collider),
+                };
+                crate::root_motion::policy::validate(
+                    root.application,
+                    parent.is_some(),
+                    transform,
+                    velocity,
+                    body,
+                    collider,
+                    has_planar
+                        || next_node
+                            .and_then(|n| n.tilemap.as_ref())
+                            .is_some_and(|m| m.layers.iter().any(|l| l.solid)),
+                )?;
+                if root.application == incant_types::RootMotionApplication::Transform {
+                    let mut ancestor = *parent;
+                    while let Some(a) = ancestor {
+                        let scale =
+                            spawns
+                                .get(&a)
+                                .map(|e| e.transform.scale)
+                                .unwrap_or_else(|| {
+                                    self.world.get::<Local>(self.entities[&a]).unwrap().0.scale
+                                });
+                        if !crate::root_motion::policy::uniform(scale) {
+                            return Err(SceneError::Invalid(
+                                "root-motion ancestors require positive uniform scale",
+                            )
+                            .into());
+                        }
+                        ancestor = parents[&a];
+                    }
+                }
+            }
             let prepared_map = if changed_map.is_some() {
                 next_node
                     .and_then(|n| n.tilemap.as_ref())

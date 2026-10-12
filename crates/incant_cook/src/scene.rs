@@ -148,6 +148,7 @@ pub(crate) fn cook_validated_scene_with_resources(
                 "Animation",
                 "AnimationGraph",
                 "AnimationIk",
+                "AnimationRootMotion",
                 "SpriteRenderer",
                 "SpriteFlipbook",
                 "Tilemap",

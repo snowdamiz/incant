@@ -1,0 +1,18 @@
+[
+  {
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_runtime",
+      "--lib",
+      "root_motion"
+    ],
+    "status": 101,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/root-motion-ts-tests-004/00.log"
+  }
+]
