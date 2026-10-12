@@ -1,0 +1,106 @@
+{
+  "kind": "independent-planar-source-free-export-review",
+  "reviewer": "astra /root/native_wasm_export",
+  "accepted": true,
+  "findings": [],
+  "source_review_sha256": "f029511f2e2c4e5422005982078bcb28ac94ece36343d6a4cf38c4227b8c82a3",
+  "result": "/Users/andreyyurlov/.codex/incant-evidence/planar-sample-export-001/result.json",
+  "result_sha256": "fdef5d87f0e2cbabac477313ff8cb9cecb9bdcd02f660558f6846d6a76e6f34a",
+  "engine_inputs_rehashed": 1144,
+  "freeze_sha256": "214e6a66c0389991938340dbc6c1a0c9041806d8838e3f42702066d4db93f85d",
+  "terminal_sha256": "0949d43cd863d20b1337481e81fa326616b0f0c4a732c4e553d4cbeaaa655b3f",
+  "export_log_sha256": "166286e3bb5dd7238e90e3c543649b68d8f71b8fe1bea121233ee823aa984614",
+  "package_files_rehashed": {
+    "incant_game_player": "782c2c4fb77f689233db43fed00ab211dc9ff45c645e0961df227b4a5042ffa5",
+    "data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+    "data/clips.bin": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+    "data/package.json": "f0ac2ee5fe20c93ec7f47db6eee9721ac8fd8b64197801865046c8eae7927036",
+    "data/world.scene": "e27f355eba8d73d027e98336b2de6ce458f6221ab7e5ec4bf6bf440bf081e5ec",
+    "data/input-actions.json": "a5b42df51661fd383f72af600c590c78cd2a5c6fab62bd219f3f1305a1254e0c",
+    "data/textures/de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e.json": "f8be1a88e557457b3be4d083f4b7d0a2b336df2fc71483a5f6f519bf62aa3cde",
+    "data/textures/cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f.ktx2": "cf7db76b5fe2aa853a59139d8f4d166947eaa3894b5b1e616e3e9ffdff74f19f"
+  },
+  "public_observation_checks": 19,
+  "reports": {
+    "win": {
+      "report_sha256": "f4e8fff6f3e761e019b69ada9fcab6126b74801b67b17abab850f3ffa64bd42d",
+      "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "position": [
+        10.899900436401367,
+        4.499998092651367,
+        0.0
+      ],
+      "ticks": 300
+    },
+    "gamepad": {
+      "report_sha256": "f4e8fff6f3e761e019b69ada9fcab6126b74801b67b17abab850f3ffa64bd42d",
+      "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "position": [
+        10.899900436401367,
+        4.499998092651367,
+        0.0
+      ],
+      "ticks": 300
+    },
+    "lose": {
+      "report_sha256": "4699a2ce11073bf220c1c03094b2939fca2de33f9f47abf511b707666f4a2f31",
+      "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "position": [
+        2.5,
+        6.899961471557617,
+        0.0
+      ],
+      "ticks": 300
+    },
+    "wall": {
+      "report_sha256": "ece4eeb4d94d3bf38ed41521888a0cc4e25c7547a2ab433daa2b2956096eb02a",
+      "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "position": [
+        5.701130390167236,
+        2.5,
+        0.0
+      ],
+      "ticks": 300
+    },
+    "locked-exit": {
+      "report_sha256": "92d4eed01bab84959294fcaf8f24d8b72252d6cd95d9c847d35e508cd7441f13",
+      "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "position": [
+        11.49989128112793,
+        4.499998092651367,
+        0.0
+      ],
+      "ticks": 300
+    },
+    "diagonal": {
+      "report_sha256": "d44128c2bfbaadfef9181bd20811983410c1858821cb6acd89097bbf8966f8a8",
+      "pcm_sha256": "fec9afb531a8e036eba1d81651896e1b2c1f78b0234dbadc8e7549563f09407b",
+      "position": [
+        3.560667037963867,
+        3.560667037963867,
+        0.0
+      ],
+      "ticks": 60
+    },
+    "repeat-win": {
+      "report_sha256": "f4e8fff6f3e761e019b69ada9fcab6126b74801b67b17abab850f3ffa64bd42d",
+      "pcm_sha256": "124617c1f65e92d3bc895fbd869e4bb16a30754b198f59e6e973949b9aaa1b01",
+      "position": [
+        10.899900436401367,
+        4.499998092651367,
+        0.0
+      ],
+      "ticks": 300
+    }
+  },
+  "authoring_undo_redo_journal_reopen_rechecked": true,
+  "original_project_hash_matches_export": true,
+  "source_cache_maps_absent_now": true,
+  "limits": [
+    "Read-only audit of retained actual process evidence; no independent fresh execution",
+    "Build storage deletion is producer recorded and helper source reviewed; private historical paths are not reconstructed",
+    "PCM is silence in this fixture; equality establishes sample count/clock consistency, not audible behavior",
+    "Simultaneous hazard/exit and optional camera branch are source-reviewed but not fixture-exercised",
+    "Numerical CPU-only sample, no visual/device/performance/physics-checkpoint or Phase 1 acceptance"
+  ]
+}
