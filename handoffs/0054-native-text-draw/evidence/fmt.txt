@@ -1,0 +1,3 @@
+$ ./tools/cargo fmt --all -- --check
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+exit 0

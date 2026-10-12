@@ -18,6 +18,7 @@ enum Pass {
     Shadows,
     Models,
     Sprites,
+    Text,
     Display,
 }
 #[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
@@ -25,6 +26,7 @@ pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
+    pub text: Option<crate::text::TextDraw>,
     pub output: OutputDraw,
 }
 #[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
@@ -74,7 +76,8 @@ fn pass_schedule() -> Schedule {
         Pass::AssignLights.before(Pass::Models),
         Pass::Shadows.before(Pass::Models),
         Pass::Models.before(Pass::Sprites),
-        Pass::Sprites.before(Pass::Display),
+        Pass::Sprites.before(Pass::Text),
+        Pass::Text.before(Pass::Display),
     ));
     schedule
 }
@@ -86,6 +89,7 @@ impl Default for FrameGraph {
             display.in_set(Pass::Display),
             models.in_set(Pass::Models),
             sprites.in_set(Pass::Sprites),
+            text.in_set(Pass::Text),
             shadows.in_set(Pass::Shadows),
             assign_lights.in_set(Pass::AssignLights),
             initialize_scene.in_set(Pass::InitializeScene),
@@ -180,6 +184,12 @@ fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
 
 fn sprites(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.sprites {
+        pass.encode(&mut encoder.0);
+    }
+}
+
+fn text(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+    if let Some(pass) = &frame.text {
         pass.encode(&mut encoder.0);
     }
 }

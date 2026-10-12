@@ -1,0 +1,477 @@
+{
+  "assets": {
+    "01M4Q116YWHF25B03HZ0ZHAXKE": {
+      "id": "01M4Q116YWHF25B03HZ0ZHAXKE",
+      "kind": "font",
+      "name": "NotoSans-Regular",
+      "path": "NotoSans-Regular.ttf",
+      "sha256": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2"
+    },
+    "01M4Q116ZY41XYJRVDSG15FKJS": {
+      "id": "01M4Q116ZY41XYJRVDSG15FKJS",
+      "kind": "font",
+      "name": "NotoSansArabic",
+      "path": "NotoSansArabic.ttf",
+      "sha256": "6864e1444bc7002790e682360d3f93bd45fe51b7045a64ecbf0e76e19e6b758e"
+    },
+    "01M4Q1170SF6CVBTHJBGECRSTC": {
+      "id": "01M4Q1170SF6CVBTHJBGECRSTC",
+      "kind": "font",
+      "name": "IncantCJKFixture",
+      "path": "IncantCJKFixture.ttf",
+      "sha256": "1087d4bb69160e3e5955407294226ca3da11166a3188ada3c1a166ba14e55ceb"
+    },
+    "01M4Q1171E3WWSWHPTMR0ZC839": {
+      "id": "01M4Q1171E3WWSWHPTMR0ZC839",
+      "kind": "model",
+      "name": "cube",
+      "path": "cube.gltf",
+      "sha256": "5c0811487c2bad2045f1fac4e3f7c4651ec25e063012eec08b59d8a9365aafad"
+    },
+    "01M4Q11728PQM1Z9ASBGWDWR7R": {
+      "id": "01M4Q11728PQM1Z9ASBGWDWR7R",
+      "kind": "audio",
+      "name": "silence",
+      "path": "silence.wav",
+      "sha256": "0c3ed4beab5a6210ab03d382b4155502391688749987d52c6db4eda96b00685c"
+    }
+  },
+  "id": "01M4Q116XEKSZWRR1DEWFZRDHD",
+  "memory": {},
+  "name": "Untitled",
+  "scenes": {
+    "01M4Q116XEKT5JBR91X68YQ1CA": {
+      "entities": {
+        "00000000000000000000000010": {
+          "components": {
+            "Camera": {
+              "far": 100,
+              "fov_degrees": 50,
+              "near": 0.1,
+              "projection": {
+                "kind": "perspective"
+              }
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                0,
+                0,
+                6
+              ]
+            }
+          },
+          "id": "00000000000000000000000010",
+          "name": "Camera",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000011": {
+          "components": {
+            "DirectionalLight": {
+              "color": [
+                1,
+                1,
+                1
+              ],
+              "intensity": 2.5,
+              "shadows": null
+            },
+            "Transform": {
+              "rotation": [
+                -0.29357787137382907,
+                0.2064221286261709,
+                0.06508464715365345,
+                0.9311100509380921
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                0,
+                0,
+                0
+              ]
+            }
+          },
+          "id": "00000000000000000000000011",
+          "name": "Key light",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000012": {
+          "components": {
+            "AudioSource": {
+              "clip": "01M4Q11728PQM1Z9ASBGWDWR7R",
+              "gain_db": 0,
+              "looping": true,
+              "pan": 0,
+              "playing": true,
+              "rate": 1,
+              "start_seconds": 0,
+              "streaming": false
+            },
+            "MeshRenderer": {
+              "cast_shadows": false,
+              "materials": [],
+              "mesh": "01M4Q1171E3WWSWHPTMR0ZC839"
+            },
+            "Script": {
+              "props": {
+                "base": [
+                  1.9,
+                  -1.2,
+                  -0.5
+                ],
+                "spin": 0.45,
+                "sway": 0
+              },
+              "source": "00000000000000000000000001"
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                1.9,
+                -1.2,
+                -0.5
+              ]
+            }
+          },
+          "id": "00000000000000000000000012",
+          "name": "Cube",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000020": {
+          "components": {
+            "Text": {
+              "content": "Office affinity fluffy waffle",
+              "font_size": 44,
+              "fonts": [
+                "01M4Q116YWHF25B03HZ0ZHAXKE",
+                "01M4Q116ZY41XYJRVDSG15FKJS",
+                "01M4Q1170SF6CVBTHJBGECRSTC"
+              ],
+              "line_height": 56,
+              "width": 640,
+              "wrap": "word"
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                -3.4,
+                2.55,
+                0
+              ]
+            }
+          },
+          "id": "00000000000000000000000020",
+          "name": "Latin ligatures",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000021": {
+          "components": {
+            "Text": {
+              "content": "مرحبا بالعالم",
+              "font_size": 40,
+              "fonts": [
+                "01M4Q116YWHF25B03HZ0ZHAXKE",
+                "01M4Q116ZY41XYJRVDSG15FKJS",
+                "01M4Q1170SF6CVBTHJBGECRSTC"
+              ],
+              "line_height": 56,
+              "width": 640,
+              "wrap": "word"
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                -3.4,
+                1.75,
+                0
+              ]
+            }
+          },
+          "id": "00000000000000000000000021",
+          "name": "Arabic RTL",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000022": {
+          "components": {
+            "Text": {
+              "content": "中文 日本語",
+              "font_size": 48,
+              "fonts": [
+                "01M4Q116YWHF25B03HZ0ZHAXKE",
+                "01M4Q116ZY41XYJRVDSG15FKJS",
+                "01M4Q1170SF6CVBTHJBGECRSTC"
+              ],
+              "line_height": 64,
+              "width": 640,
+              "wrap": "word"
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                -3.4,
+                1.0,
+                0
+              ]
+            }
+          },
+          "id": "00000000000000000000000022",
+          "name": "CJK fallback",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000023": {
+          "components": {
+            "Script": {
+              "props": {
+                "base": [
+                  -3.4,
+                  0.1,
+                  0
+                ],
+                "spin": 0,
+                "sway": 0.25
+              },
+              "source": "00000000000000000000000001"
+            },
+            "Text": {
+              "content": "Wrapped ffi سلام 中文 ש and spaces",
+              "font_size": 28,
+              "fonts": [
+                "01M4Q116YWHF25B03HZ0ZHAXKE",
+                "01M4Q116ZY41XYJRVDSG15FKJS",
+                "01M4Q1170SF6CVBTHJBGECRSTC"
+              ],
+              "line_height": 36,
+              "width": 300,
+              "wrap": "word"
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                -3.4,
+                0.1,
+                0
+              ]
+            }
+          },
+          "id": "00000000000000000000000023",
+          "name": "Mixed wrapped line",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000024": {
+          "components": {
+            "Text": {
+              "content": "ffi 中文",
+              "font_size": 24,
+              "fonts": [
+                "01M4Q116YWHF25B03HZ0ZHAXKE",
+                "01M4Q116ZY41XYJRVDSG15FKJS",
+                "01M4Q1170SF6CVBTHJBGECRSTC"
+              ],
+              "line_height": 32,
+              "width": 300,
+              "wrap": "none"
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                -0.42,
+                0.25,
+                0.51
+              ]
+            }
+          },
+          "id": "00000000000000000000000024",
+          "name": "Cube label",
+          "parent": "00000000000000000000000012",
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        },
+        "00000000000000000000000025": {
+          "components": {
+            "Text": {
+              "content": "Behind the cube",
+              "font_size": 36,
+              "fonts": [
+                "01M4Q116YWHF25B03HZ0ZHAXKE",
+                "01M4Q116ZY41XYJRVDSG15FKJS",
+                "01M4Q1170SF6CVBTHJBGECRSTC"
+              ],
+              "line_height": 48,
+              "width": 600,
+              "wrap": "none"
+            },
+            "Transform": {
+              "rotation": [
+                0,
+                0,
+                0,
+                1
+              ],
+              "scale": [
+                1,
+                1,
+                1
+              ],
+              "translation": [
+                0.6,
+                -0.8,
+                -1.6
+              ]
+            }
+          },
+          "id": "00000000000000000000000025",
+          "name": "Text behind cube",
+          "parent": null,
+          "provenance": {
+            "actor": "editor",
+            "conversation_id": null,
+            "model": null,
+            "origin": "user",
+            "transaction": "01M4Q1172S04MJEKJJ2K838A2C"
+          }
+        }
+      },
+      "id": "01M4Q116XEKT5JBR91X68YQ1CA",
+      "name": "Main"
+    }
+  },
+  "schema_version": 1,
+  "scripts": {
+    "00000000000000000000000001": {
+      "id": "00000000000000000000000001",
+      "name": "Review motion",
+      "path": "review_motion.ts"
+    }
+  },
+  "settings": {
+    "tick_rate": 60
+  }
+}

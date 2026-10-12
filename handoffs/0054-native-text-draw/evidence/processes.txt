@@ -1,0 +1,6 @@
+2026-10-12T03:10:57Z launched 1795 sha256 a5d6a9bd455f4a79112abad78a1f234cfbe045517a2677233ec419df832fdc85
+2026-10-12T03:11:38Z launch 1795 failed before exec (nohup not on restricted PATH); no player process
+2026-10-12T03:11:39Z launched 2277 sha256 a5d6a9bd455f4a79112abad78a1f234cfbe045517a2677233ec419df832fdc85
+2026-10-12T03:12:24Z launch subshell 2277 started player 2282 (main.pid corrected to 2282)
+2026-10-12T03:12:32Z player 2282 took the front at launch; front restored to 2095 after launch-script exit 4
+2026-10-12T03:19:00Z native/GPU and target cache released

@@ -90,6 +90,11 @@ struct Probe {
     dropped: Arc<AtomicUsize>,
 }
 fn game() -> (Game, Probe) {
+    game_with(false)
+}
+/// Optional text child of the moving model: packaged Latin/Arabic/CJK fonts
+/// are cooked, bound at startup and deleted with every other source file.
+fn game_with(text: bool) -> (Game, Probe) {
     let temp = tempfile::tempdir().unwrap();
     let asset = models::model(temp.path(), 0.);
     let fingerprint =
@@ -113,10 +118,20 @@ fn game() -> (Game, Probe) {
         far: 80.,
         projection: Default::default(),
     });
+    let text_child = CookedEntity {
+        id: id(3),
+        parent: Some(id(1)),
+        transform: Transform {
+            translation: [0., 1.5, 0.],
+            scale: [3.; 3],
+            ..Default::default()
+        },
+        velocity: None,
+    };
     let scene = CookedScene::new(
         id(99),
         64,
-        vec![
+        [
             CookedEntity {
                 id: id(1),
                 parent: None,
@@ -137,7 +152,10 @@ fn game() -> (Game, Probe) {
                 },
                 velocity: None,
             },
-        ],
+        ]
+        .into_iter()
+        .chain(text.then_some(text_child))
+        .collect(),
     )
     .unwrap()
     .with_physics(vec![CookedPhysics {
@@ -170,6 +188,11 @@ fn game() -> (Game, Probe) {
     .unwrap()
     .with_spatial(vec![reference], vec![mesh, camera])
     .unwrap();
+    let scene = if text {
+        with_text(scene, temp.path())
+    } else {
+        scene
+    };
     let scene = CookedScene::from_bytes(&scene.to_bytes()).unwrap();
     let renderer = Arc::new(Renderer::headless().unwrap());
     let texture = renderer.device.create_texture(&wgpu::TextureDescriptor {
@@ -207,7 +230,7 @@ fn game() -> (Game, Probe) {
         vec![clip],
         48000,
         NativeRenderSettings {
-            text: None,
+            text: text.then(|| incant_render_native::TextSettings::new(temp.path().join("fonts"))),
             model_cache: temp.path().join(".incant/cache/models"),
             texture_cache: temp.path().join("textures"),
             camera: id(2),
@@ -229,6 +252,49 @@ fn game() -> (Game, Probe) {
             dropped,
         },
     )
+}
+fn with_text(scene: CookedScene, root: &std::path::Path) -> CookedScene {
+    use incant_runtime::{CookedText, FontAssetRef, NativeText, TextLayout, TextWrap};
+    let mut fonts = Vec::new();
+    for (n, name) in [
+        "NotoSans-Regular.ttf",
+        "NotoSansArabic.ttf",
+        "IncantCJKFixture.ttf",
+    ]
+    .into_iter()
+    .enumerate()
+    {
+        let source = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../incant_text/tests/fonts")
+            .join(name);
+        std::fs::copy(source, root.join(name)).unwrap();
+        let font = incant_assets::cook_font(root, std::path::Path::new(name), &root.join("fonts"))
+            .unwrap();
+        fonts.push(FontAssetRef {
+            id: id(80 + n as u128),
+            fingerprint: std::array::from_fn(|i| {
+                u8::from_str_radix(&font.metadata().fingerprint[2 * i..2 * i + 2], 16).unwrap()
+            }),
+        });
+    }
+    scene
+        .with_text(
+            fonts.clone(),
+            vec![CookedText {
+                entity: id(3),
+                text: Arc::new(NativeText {
+                    content: "ffi سلام 中文".into(),
+                    fonts: fonts.iter().map(|f| f.id).collect(),
+                    layout: TextLayout {
+                        font_size: 20.,
+                        line_height: 28.,
+                        width: 500.,
+                        wrap: TextWrap::WordOrGlyph,
+                    },
+                }),
+            }],
+        )
+        .unwrap()
 }
 fn pixels(probe: &Probe) -> Vec<u8> {
     let stride = 768;
@@ -398,4 +464,48 @@ fn paused_committed_refresh_submits_without_advancing_game_or_audio() {
     assert!(game.refresh_host().is_err());
     assert!(game.is_failed());
     assert_eq!(probe.dropped.load(Ordering::SeqCst), 1);
+}
+
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn hosted_text_child_draws_with_models_script_and_audio_without_motion_uploads() {
+    let (mut plain, plain_probe) = game();
+    let (mut game, probe) = game_with(true);
+    let host = game.host().unwrap();
+    let stats = host.consumer().stats().unwrap();
+    assert_eq!(stats.text_entities, 1);
+    assert!(stats.text_glyph_quads >= 6);
+    assert_eq!(stats.text_missing_glyphs, 0);
+    let bytes = stats.text_gpu_bytes;
+    assert!(bytes > 0);
+    let atlas = Arc::clone(&host.render_input().input().text.as_ref().unwrap().atlas);
+    let uploads = probe.renderer.text_uploads();
+    assert_eq!(uploads.atlas_textures, 1);
+    assert_eq!(uploads.glyph_buffers, 1);
+    let mut previous = None;
+    for tick in 1..=8 {
+        let mut pcm = vec![0.; game.next_output_frames().unwrap() * 2];
+        game.tick(&[], &mut pcm).unwrap();
+        assert!(pcm.iter().any(|v| v.abs() > 0.01));
+        let mut silent = vec![0.; plain.next_output_frames().unwrap() * 2];
+        plain.tick(&[], &mut silent).unwrap();
+        assert_eq!(probe.presents.load(Ordering::SeqCst), tick as usize);
+        let input = game.host().unwrap().render_input().input();
+        assert!(Arc::ptr_eq(&input.text.as_ref().unwrap().atlas, &atlas));
+        assert_eq!(probe.renderer.text_uploads(), uploads, "tick {tick}");
+        let stats = game.host().unwrap().consumer().stats().unwrap();
+        assert_eq!((stats.text_entities, stats.text_gpu_bytes), (1, bytes));
+        let with_text = pixels(&probe);
+        assert_ne!(
+            with_text,
+            pixels(&plain_probe),
+            "text must be visible at tick {tick}"
+        );
+        assert_ne!(
+            Some(&with_text),
+            previous.as_ref(),
+            "the text child moves with its model"
+        );
+        previous = Some(with_text);
+    }
 }

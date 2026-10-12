@@ -1,0 +1,32 @@
+quad shifted by its padding: CAUGHT (text::)
+    test text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs ... FAILED
+    test text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference ... FAILED
+    test text::tests::layout_pixels_map_to_entity_local_units_baselines_and_transforms ... FAILED
+    test text::tests::plan_keeps_shaped_order_bidi_spaces_bearings_and_missing_glyphs ... FAILED
+    test result: FAILED. 1 passed; 4 failed; 0 ignored; 0 measured; 66 filtered out; finished in 0.15s
+layout Y not flipped: CAUGHT (text::)
+    test text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs ... FAILED
+    test text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference ... FAILED
+    test text::tests::layout_pixels_map_to_entity_local_units_baselines_and_transforms ... FAILED
+    test result: FAILED. 2 passed; 3 failed; 0 ignored; 0 measured; 66 filtered out; finished in 0.14s
+motion transforms not staged: CAUGHT (retained::text_tests::retained_motion)
+    test models::retained::text_tests::retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities ... FAILED
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 70 filtered out; finished in 0.12s
+atlas prefix drops right padding column: CAUGHT (text::draw_tests)
+    test text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs ... FAILED
+    test text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference ... FAILED
+    test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 69 filtered out; finished in 0.13s
+single tap when minified: CAUGHT (text::draw_tests::rotated)
+    test text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference ... FAILED
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 70 filtered out; finished in 0.11s
+missing text binding accepted: CAUGHT (retained::text_tests::retained_motion)
+    test models::retained::text_tests::retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities ... FAILED
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 70 filtered out; finished in 0.15s
+no depth test: CAUGHT (retained::text_tests::opaque)
+    test models::retained::text_tests::opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it ... FAILED
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 70 filtered out; finished in 0.45s
+foreign handles not checked: CAUGHT (text::)
+    test text::tests::foreign_reset_mismatched_and_oversized_text_is_refused_before_expansion ... FAILED
+    test result: FAILED. 4 passed; 1 failed; 0 ignored; 0 measured; 66 filtered out; finished in 0.15s
+unmutated: PASS
+    test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.74s

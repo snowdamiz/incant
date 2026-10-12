@@ -34,7 +34,9 @@ pub enum NativeRenderError {
     TextBinding,
     #[error("native text consumer limit: {0}")]
     TextLimit(&'static str),
-    #[error("native text rendering is not implemented")]
+    /// Text needs the composed binding with an explicit checked font catalog;
+    /// the spatial-only adapter and syncs without a text view refuse it.
+    #[error("native text requires the composed text binding with an explicit font catalog")]
     TextUnsupported,
     #[error("spatial input belongs to a different native world")]
     DifferentWorld,

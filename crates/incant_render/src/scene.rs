@@ -52,17 +52,22 @@ pub(crate) struct ResolvedScene {
     pub sprites: Vec<crate::sprites::SpritePlan>,
     pub tilemaps: Vec<crate::sprites::TilemapPlan>,
     pub animations: Vec<crate::models::animation::Plan>,
+    pub text: Option<crate::text::TextPlan>,
 }
 
 /// Resolve startup/revision input. Native moving-frame extraction will use a
 /// retained topology/instance path; this entry point does not claim that migration.
 pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
-    if input.text.is_some() {
-        return Err(SceneError::Input("text drawing is not implemented"));
-    }
     if input.nodes.len() > 1_000_000 {
         return Err(SceneError::Input("node limit"));
     }
+    // Text nodes carry their own transforms; count and check every handle now.
+    let text = input
+        .text
+        .as_ref()
+        .filter(|text| !text.nodes.is_empty())
+        .map(crate::text::plan)
+        .transpose()?;
     let mut result = ResolvedScene {
         diagnostics: Vec::new(),
         models: BTreeMap::new(),
@@ -73,7 +78,14 @@ pub(crate) fn resolve(input: &SceneInput) -> Result<ResolvedScene, SceneError> {
         sprites: Vec::new(),
         tilemaps: Vec::new(),
         animations: Vec::new(),
+        text: None,
     };
+    if let Some(text) = text {
+        result.stats.text_entities = text.nodes.len();
+        result.stats.text_glyph_quads = text.quads;
+        result.stats.text_missing_glyphs = text.missing;
+        result.text = Some(text);
+    }
     if let Some(environment) = &input.environment {
         if !(0.0..=100.).contains(&environment.intensity)
             || !(-360.0..=360.).contains(&environment.rotation_degrees)

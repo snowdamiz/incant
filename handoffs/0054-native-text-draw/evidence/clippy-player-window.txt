@@ -1,0 +1,7 @@
+$ ./tools/cargo clippy --locked --offline --profile ci -j2 -p incant_game_player --features native-window --all-targets -- -D warnings
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render)
+    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render_gpu_host)
+    Checking incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_game_player)
+    Finished `ci` profile [optimized] target(s) in 1.39s
+exit 0

@@ -1,0 +1,1 @@
+{"accepted_frames":4073,"adapter":"Apple M5 Pro","backend":"Metal","dropped_wall_ticks":"0","lifecycle_probe":null,"mode":"native-window","on_screen":true,"presentation_refreshes":0,"surface_reconfigurations":4,"surface_recreations":0,"surface_skipped":1,"tick":4073}

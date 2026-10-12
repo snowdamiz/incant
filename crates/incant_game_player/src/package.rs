@@ -90,6 +90,8 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             path(root, "models")?,
             path(root, "textures")?,
             camera(&manifest)?,
+            "--font-cache".into(),
+            path(root, "fonts")?,
         ];
         if let Some(stop) = options.remove("--stop-after") {
             result.extend(["--stop-after".into(), stop]);
@@ -210,7 +212,9 @@ mod tests {
         ));
         let window = expand(args(dir.path(), &["--window", "--stop-after", "3"])).unwrap();
         assert_eq!(window[0], "--window");
-        assert_eq!(&window[8..], ["--stop-after", "3"]);
+        assert_eq!(window[8], "--font-cache");
+        assert!(window[9].ends_with("fonts"));
+        assert_eq!(&window[10..], ["--stop-after", "3"]);
         assert!(expand(args(dir.path(), &["--window", "--output", "audio.pcm"])).is_err());
         assert!(
             expand(args(

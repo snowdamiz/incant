@@ -1,0 +1,29 @@
+$ ./tools/cargo test --locked --offline --profile ci -j2 -p incant_render_gpu_host -- --include-ignored --test-threads=1
+source 264fd08867c6d0bdf5fe236f37500b5e90b9f00f tree f0a72cd612523abd3702eab5014d79cd7addfa5c
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render)
+   Compiling incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant/.worktrees/0054-native-text-draw/crates/incant_render_gpu_host)
+    Finished `ci` profile [optimized] target(s) in 4.82s
+     Running unittests src/lib.rs (/tmp/incant-agent-native-target/ci/deps/incant_render_gpu_host-fcf77a2152a37792)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/game.rs (/tmp/incant-agent-native-target/ci/deps/game-2b98dc937d60451f)
+
+running 5 tests
+test hosted_text_child_draws_with_models_script_and_audio_without_motion_uploads ... ok
+test observed_device_loss_stops_the_host_before_another_target_is_acquired ... ok
+test paused_committed_refresh_submits_without_advancing_game_or_audio ... ok
+test script_physics_audio_and_submitted_frames_share_the_source_free_native_tick ... ok
+test target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.69s
+
+   Doc-tests incant_render_gpu_host
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit 0

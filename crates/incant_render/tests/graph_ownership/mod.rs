@@ -26,6 +26,9 @@ fn model(frame: NonSend<Frame>, encoder: NonSendMut<Commands>) {
 fn sprite(frame: NonSend<Frame>, encoder: NonSendMut<Commands>) {
     record(Pass::Sprites, frame, encoder);
 }
+fn text(frame: NonSend<Frame>, encoder: NonSendMut<Commands>) {
+    record(Pass::Text, frame, encoder);
+}
 fn output(frame: NonSend<Frame>, encoder: NonSendMut<Commands>) {
     record(Pass::Display, frame, encoder);
 }
@@ -37,6 +40,7 @@ fn non_send_passes_stay_on_owner_thread_and_release_each_frame() {
         output.in_set(Pass::Display),
         model.in_set(Pass::Models),
         sprite.in_set(Pass::Sprites),
+        text.in_set(Pass::Text),
         shadow.in_set(Pass::Shadows),
         lights.in_set(Pass::AssignLights),
         initialize.in_set(Pass::InitializeScene),
@@ -55,7 +59,7 @@ fn non_send_passes_stay_on_owner_thread_and_release_each_frame() {
         drop(encoded);
         assert_eq!(Rc::strong_count(&commands), 1);
         let commands = commands.borrow();
-        assert_eq!(commands.len(), 6);
+        assert_eq!(commands.len(), 7);
         assert!(
             commands
                 .iter()
@@ -71,7 +75,8 @@ fn non_send_passes_stay_on_owner_thread_and_release_each_frame() {
             assert!(index(earlier) < index(Pass::Models));
         }
         assert!(index(Pass::Models) < index(Pass::Sprites));
-        assert!(index(Pass::Sprites) < index(Pass::Display));
+        assert!(index(Pass::Sprites) < index(Pass::Text));
+        assert!(index(Pass::Text) < index(Pass::Display));
     }
 }
 #[cfg(not(target_arch = "wasm32"))]

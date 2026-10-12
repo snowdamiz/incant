@@ -1,0 +1,15 @@
+{
+  "recorded_at": "2026-10-12T02:13:11.517469+00:00",
+  "source": "6144e1e8f7d5b6d6db212b3b7de4df9b5915407e",
+  "purpose": "Implement and numerically/visually review canonical native text drawing",
+  "native_gpu_granted": true,
+  "exclusive_to": "0054-native-text-draw",
+  "builds_allowed": true,
+  "cargo_target_dir": "/tmp/incant-agent-native-target",
+  "cargo_target_exclusive": true,
+  "previous_0053_released": true,
+  "root_acceptance_sha256": "38ec7877dd1fd4b9eff9d44802c267e8b910196e422042e833b16d2d50528144",
+  "provider_turns": false,
+  "account_actions": false,
+  "source_profile_binary_fixture_capture_identities": "Record actual hashes/profiles in result after building this packet; do not reuse0053binary."
+}

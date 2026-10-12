@@ -195,6 +195,8 @@ prerequisite's combined Wasm conformance or pending exact-head hosted checks.
 target/release/incant_game_player --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX
 ```
 
+Scenes with text add `--font-cache FONT_CACHE` after `CAMERA_HEX` (the package
+route passes its `fonts` directory); see [native-text-draw.md](native-text-draw.md).
 `--stop-after TICKS` bounds an interactive run to 1–36,000 ticks. The optional
 final `--lifecycle-probe` runs the numerical 40-tick resize/minimize/recreation
 exercise and prints its bounded report only on exit. The player still requires

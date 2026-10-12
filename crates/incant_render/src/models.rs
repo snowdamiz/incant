@@ -57,6 +57,7 @@ struct Batch {
 pub struct RenderScene {
     pub(crate) diagnostics: Vec<glam::Mat4>,
     pub(crate) sprites: Option<Arc<crate::sprites::SpriteScene>>,
+    pub(crate) text: Option<Arc<crate::text::TextScene>>,
     batches: Vec<Arc<Batch>>,
     animations: Vec<animation::Instance>,
     stats: SceneStats,
@@ -105,6 +106,10 @@ impl Renderer {
         self.upload_scene(crate::scene::resolve(input)?, false)
     }
     fn upload_scene(&self, mut resolved: ResolvedScene, retained: bool) -> Result<RenderScene> {
+        // Counted text bounds precede every GPU allocation for this scene.
+        if let Some(text) = &resolved.text {
+            self.text.preflight(&self.device, text)?;
+        }
         let environment = if resolved.environment.is_some() || !resolved.models.is_empty() {
             Some(self.environments.prepare(
                 &self.device,
@@ -294,9 +299,20 @@ impl Renderer {
             resolved.tilemaps,
             retained,
         )?;
+        let text = match resolved.text.take() {
+            Some(plan) => self
+                .text
+                .upload(&self.device, &self.queue, plan, retained)?,
+            None => None,
+        };
+        // Retained scenes add a second private transform buffer for staging.
+        resolved.stats.text_gpu_bytes = text.as_ref().map_or(0, |t| {
+            t.gpu_bytes() + if retained { t.transform_bytes() } else { 0 }
+        });
         Ok(RenderScene {
             animations,
             sprites,
+            text,
             lights,
             light_selection: crate::LocalLightSelection::Clustered,
             cameras: resolved.cameras,
