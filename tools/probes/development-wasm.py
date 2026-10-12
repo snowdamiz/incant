@@ -40,8 +40,10 @@ def main():
     rustc = Path(run([args.rustup, 'which', '--toolchain', '1.99.0', 'rustc']).strip())
     env = dict(os.environ, PATH=str(rustc.parent) + os.pathsep + os.environ.get('PATH', ''))
     cargo = ROOT / 'tools/cargo' if os.name != 'nt' else rustc.with_name('cargo.exe')
-    metadata = json.loads(run([cargo, 'metadata', '--locked', '--format-version=1',
-                               '--features', 'incant_wasm_dev/' + feature], cwd=ROOT, env=env))
+    # Audit shipping roots without selecting the optional development compiler.
+    # The real development example below explicitly enables its host feature.
+    metadata = json.loads(run([cargo, 'metadata', '--locked', '--format-version=1'],
+                              cwd=ROOT, env=env))
     names = {p['id']: p['name'] for p in metadata['packages']}
     nodes = {n['id']: n for n in metadata['resolve']['nodes']}
     shipping = ['incant_runtime', 'incant_script', 'incant_game_runtime',
