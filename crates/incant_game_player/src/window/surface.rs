@@ -161,6 +161,15 @@ impl SurfaceState {
     pub fn consumed(&self) -> bool {
         self.slot.borrow().is_none()
     }
+    /// Only a live reservation determines the dimensions that will be drawn.
+    /// Never expose stale configuration after timeout, loss or cancellation.
+    pub fn reserved_size(&self) -> Result<[u32; 2], Error> {
+        self.slot
+            .borrow()
+            .as_ref()
+            .map(|frame| [frame.width, frame.height])
+            .ok_or(Error::Reservation)
+    }
 }
 
 // Window constraints are requests: fullscreen, display-scale changes or an OS

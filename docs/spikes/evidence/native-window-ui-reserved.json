@@ -1,0 +1,47 @@
+{
+  "at": "2026-10-12T05:51:17.326290+00:00",
+  "base": "8160b5ac303f7f30bf11bb4fcd95155fe9b9fee9",
+  "source_hashes": {
+    "crates/incant_game_player/src/window/mod.rs": "d4e3a5339241cbcebcb8935d1a18fddf3f9e629e4ad2f4dd459ccf559bd15b07",
+    "crates/incant_game_player/src/window/surface.rs": "42eba11f0c95ea913ec6aac57e13b130a4d9f7a13ca898a9456c67c50eb4b8e6"
+  },
+  "frozen_inputs": 1046,
+  "checks": {
+    "passed": 138,
+    "groups": 23,
+    "failed": 0,
+    "ignored": 0,
+    "clippy": true,
+    "normal_runtime_dependencies": true,
+    "fmt_conventions": true
+  },
+  "logs": {
+    "docs/spikes/evidence/native-window-ui-reserved/tests.log.gz": {
+      "sha256": "c7f8decf7cd93a66ca665189e11fc6afbea1919d28a9408b5b7c662793cbeb6f",
+      "uncompressed_sha256": "470fbb4077b1268d2d00920cdc6a6864a1cbf4edd267318b2d1d8dcccf694364"
+    },
+    "docs/spikes/evidence/native-window-ui-reserved/clippy.log.gz": {
+      "sha256": "64a25c07c38b8cc4d5a196c4498227836875a5e45f1d780c1bc962bbc8d88f64",
+      "uncompressed_sha256": "af11c704eee31b187152197e9f0fda140c43ea6320ef6c9759d351cdad7d5c8c"
+    },
+    "docs/spikes/evidence/native-window-ui-reserved/graph.log.gz": {
+      "sha256": "a1453519251971c8187d2004dc510036ddccc25f7b16d4983f14a1f2191913da",
+      "uncompressed_sha256": "07d87a62d54ea4bd4f630d421b90904510f782b795c04820a194e18835a118dc"
+    },
+    "docs/spikes/evidence/native-window-ui-reserved/fmt.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "docs/spikes/evidence/native-window-ui-reserved/conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "receipts": {
+    "docs/spikes/evidence/native-window-ui-reserved/freeze.json": "3f9e501cb244550b43904435c8ac17c7b21e5fec572fe4b896c4eb305c6a0c9c",
+    "docs/spikes/evidence/native-window-ui-reserved/results.json": "2fe4d9bc10ba4b5d392080bf564c95c6f00ea9a58a23b811ec993858a0dba7fb",
+    "docs/spikes/evidence/native-window-ui-reserved/independent-review.json": "4c8e906233531ed9437fa1f702a83ad93446eea50fb386b3f11760dd64d222d9"
+  },
+  "processes": "Root55248 exit0/reaped; no native/GPU/window launched.",
+  "scope": "Reserved-surface sizing and reports on locally integrated IME+0056 source; actual native-window/pixel/IME acceptance remains pending Claude0057. Reference phone gates and Phase1 remain open."
+}

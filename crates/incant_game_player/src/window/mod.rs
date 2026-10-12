@@ -149,7 +149,16 @@ pub fn run(args: &[String]) -> session::Result<()> {
             .with_maximizable(false)
             .build(&event_loop)?,
     );
-    let ui_settings = has_ui.then(|| UiSettings::new(logical_viewport(&window)));
+    let initial_size = window.inner_size();
+    let ui_settings = has_ui
+        .then(|| {
+            logical_viewport(
+                [initial_size.width, initial_size.height],
+                window.scale_factor(),
+            )
+        })
+        .transpose()?
+        .map(UiSettings::new);
     let mut gamepads = gamepad::Gamepads::new()?;
     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
     let mut game = Game::new(
@@ -191,6 +200,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
     let mut retry = Instant::now();
     let mut redraw_pending = true;
     let mut presentation_refreshes = 0u64;
+    let mut ui_relayouts = 0u64;
     let mut failure: Option<Box<dyn std::error::Error>> = None;
     let mut exit = false;
     let mut last_audio_poll = Instant::now();
@@ -293,8 +303,13 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         // Resize and actual consumption share this callback and
                         // reservation, even when no simulation tick is due.
                         let result = (|| -> session::Result<()> {
-                            game.resize_ui(logical_viewport(&window))?;
-                            ui_input.invalidate_pointer(game.host()?.ui(), &mut input)?;
+                            ui_relayouts += fit_ui(
+                                &mut game,
+                                &surface,
+                                window.scale_factor(),
+                                &mut ui_input,
+                                &mut input,
+                            )?;
                             game.refresh_host()?;
                             Ok(())
                         })();
@@ -333,7 +348,19 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             && presentable
                             && surface.reserve(&renderer)?
                         {
-                            let result = game.refresh_host();
+                            let result = (|| -> session::Result<()> {
+                                if has_ui {
+                                    ui_relayouts += fit_ui(
+                                        &mut game,
+                                        &surface,
+                                        window.scale_factor(),
+                                        &mut ui_input,
+                                        &mut input,
+                                    )?;
+                                }
+                                game.refresh_host()?;
+                                Ok(())
+                            })();
                             let consumed = surface.consumed();
                             surface.cancel();
                             result?;
@@ -363,6 +390,15 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 break;
                             }
                             game.poll_device()?;
+                            if has_ui {
+                                ui_relayouts += fit_ui(
+                                    &mut game,
+                                    &surface,
+                                    window.scale_factor(),
+                                    &mut ui_input,
+                                    &mut input,
+                                )?;
+                            }
                             if suspended {
                                 game.set_suspended(false)?;
                                 suspended = false;
@@ -444,16 +480,60 @@ pub fn run(args: &[String]) -> session::Result<()> {
     if let Some(probe) = &probe {
         probe.validate()?;
     }
-    let report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    if let Some(ui) = game.host()?.ui_input() {
+        let stats = game.host()?.consumer().ui_stats();
+        let uploads = renderer.ui_uploads();
+        report["ui"] = serde_json::json!({
+            "viewport":ui.viewport,"scale_factor":window.scale_factor(),
+            "widgets":ui.widgets.len(),"relayouts":ui_relayouts,
+            "focus":game.host()?.ui().and_then(|ui|ui.focus()).map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),
+            "glyph_quads":stats.map(|s|s.glyph_quads),"quads":stats.map(|s|s.quads),"gpu_bytes":stats.map(|s|s.gpu_bytes),
+            "uploads":{"atlas_textures":uploads.atlas_textures,"atlas_bytes":uploads.atlas_bytes,"quad_buffers":uploads.quad_buffers,"quad_bytes":uploads.quad_bytes,"frame_writes":uploads.frame_writes}
+        });
+    }
     drop(game); // stop device audio before returning/closing the native surface
     println!("{report}");
     Ok(())
 }
 
-/// UI and uncaptured pointer delivery share logical pixels at the current DPI.
-fn logical_viewport(window: &tao::window::Window) -> [f32; 2] {
-    let size = window.inner_size().to_logical::<f64>(window.scale_factor());
-    [size.width as f32, size.height as f32]
+/// Layout uses the dimensions of the reserved frame. Window dimensions can
+/// change before their resize notification reaches this callback.
+fn logical_viewport(size: [u32; 2], scale: f64) -> Result<[f32; 2], Error> {
+    if !scale.is_normal() || scale <= 0. {
+        return Err(Error::InputScale);
+    }
+    let logical = size.map(|n| f64::from(n) / scale);
+    if logical
+        .iter()
+        .any(|n| !n.is_finite() || !(1. ..=65_536.).contains(n))
+    {
+        return Err(Error::InputRange);
+    }
+    Ok(logical.map(|n| n as f32))
+}
+/// Relayout is admitted before simulation or presentation. Pointer receipts
+/// still refer to the previous displayed geometry and must be fenced; text
+/// receipts keep their independent focus token. No unchanged-frame allocation.
+fn fit_ui(
+    game: &mut Game,
+    surface: &SurfaceState,
+    scale: f64,
+    ui_input: &mut ui_input::UiInput,
+    input: &mut input::PendingInput,
+) -> session::Result<u64> {
+    let wanted = logical_viewport(surface.reserved_size()?, scale)?;
+    if game
+        .host()?
+        .ui_input()
+        .is_some_and(|ui| ui.viewport == wanted)
+    {
+        return Ok(0);
+    }
+    ui_input.layout_pending(game.host()?.ui(), input)?;
+    game.resize_ui(wanted)?;
+    ui_input.invalidate_pointer(game.host()?.ui(), input)?;
+    Ok(1)
 }
 
 #[cfg(test)]
@@ -473,6 +553,23 @@ mod tests {
         .chain(tail)
         .map(|s| (*s).to_owned())
         .collect()
+    }
+    #[test]
+    fn physical_surface_and_pointer_coordinates_share_exact_logical_scale() {
+        let position = tao::dpi::PhysicalPosition::new(641., 481.);
+        for scale in [1., 1.5, 2., 3.] {
+            let viewport = super::logical_viewport([641, 481], scale).unwrap();
+            let pointer = super::input::logical_position(position, scale).unwrap();
+            assert_eq!(viewport, pointer.map(|n| n as f32));
+        }
+        // Do not silently stretch a subpixel or overflowed logical viewport:
+        // that would disagree with the independently scaled pointer positions.
+        for (size, scale) in [([0, 480], 1.), ([16, 16], 32.), ([1920, 1080], 0.001)] {
+            assert!(super::logical_viewport(size, scale).is_err());
+        }
+        for scale in [0., -1., f64::NAN, f64::INFINITY, f64::MIN_POSITIVE / 2.] {
+            assert!(super::logical_viewport([640, 480], scale).is_err());
+        }
     }
     #[test]
     fn explicit_font_cache_and_tick_bound_parse_in_fixed_order() {
