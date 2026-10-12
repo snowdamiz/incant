@@ -10,6 +10,8 @@ use thiserror::Error;
 pub use codec::MAX_SAVE_BYTES;
 #[derive(Debug, Error, PartialEq)]
 pub enum SaveError {
+    #[error("text bindings are unsupported in an unbound legacy save")]
+    TextUnsupported,
     #[error("localization is unsupported in a legacy v1/v2 save")]
     LocalizationUnsupported,
     #[error("invalid native world save: {0}")]
@@ -85,6 +87,21 @@ impl NativeWorld {
                     .iter()
                     .map(|n| (**n).clone())
                     .collect(),
+            )?
+            .with_text(
+                self.font_assets.clone(),
+                self.text_ids
+                    .iter()
+                    .map(|&id| crate::CookedText {
+                        entity: id,
+                        text: self
+                            .world
+                            .get::<crate::text::TextComponent>(self.entities[&id])
+                            .expect("text index")
+                            .0
+                            .clone(),
+                    })
+                    .collect(),
             )?;
         // Stable-ID order is independent of ECS table/archetype insertion order.
         let states = self
@@ -127,6 +144,9 @@ impl NativeWorld {
             return Err(SaveError::LocalizationUnsupported);
         }
         if decoded.origin.is_none() {
+            if scene.has_text() {
+                return Err(SaveError::TextUnsupported);
+            }
             if !scene.navigation().is_empty() {
                 return Err(SaveError::NavigationUnsupported);
             }
@@ -214,6 +234,7 @@ impl NativeWorld {
             initial.id(),
             initial.tick_rate(),
             initial.localization(),
+            initial.font_assets(),
         )?;
         Ok(candidate)
     }
@@ -229,6 +250,7 @@ impl NativeWorld {
             self.scene_id(),
             self.tick_rate,
             &self.localization,
+            &self.font_assets,
         )
     }
 
@@ -238,8 +260,10 @@ impl NativeWorld {
         scene: crate::StableId,
         rate: u32,
         localization: &crate::NativeLocalization,
+        font_assets: &[crate::FontAssetRef],
     ) -> Result<(), SaveError> {
-        if self.localization.tables() != localization.tables()
+        if self.font_assets != font_assets
+            || self.localization.tables() != localization.tables()
             || self.scene_id() != scene
             || self.tick_rate != rate
             || origin.is_some_and(|origin| self.source_scene_fingerprint != origin)
@@ -266,6 +290,9 @@ impl NativeWorld {
         // Legacy data has no extended-state/origin contract. Do not let a plain
         // v1 payload silently clear a world's spatial/navigation capability.
         if !codec::is_bound(bytes) {
+            if !self.font_assets.is_empty() || !self.text_ids.is_empty() {
+                return Err(SaveError::TextUnsupported);
+            }
             if self.navigation_used {
                 return Err(SaveError::NavigationUnsupported);
             }
@@ -278,6 +305,7 @@ impl NativeWorld {
             self.scene_id(),
             self.tick_rate,
             &self.localization,
+            &self.font_assets,
         )?;
         // V1 never carried the origin fingerprint. A matching live destination
         // retains its own known origin; the restored data cannot replace it.
@@ -293,6 +321,10 @@ impl NativeWorld {
         candidate
             .navigation
             .invalidate_after_restore(&self.navigation)?;
+        candidate.text_generation = self
+            .text_generation
+            .checked_add(1)
+            .ok_or(SaveError::Invalid("text generation exhausted"))?;
         candidate.identity = self.identity.clone();
         *self = candidate;
         Ok(())

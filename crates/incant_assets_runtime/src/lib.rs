@@ -6,9 +6,13 @@
 pub mod audio;
 #[cfg(feature = "font")]
 pub mod font;
+#[cfg(feature = "font")]
+mod font_catalog;
 pub use audio::{AUDIO_CHUNK_FRAMES, AudioMetadata, CookedAudio, MAX_AUDIO_PCM_BYTES, load_audio};
 #[cfg(feature = "font")]
 pub use font::{CookedFont, FontMetadata, MAX_FONT_BYTES, load_font};
+#[cfg(feature = "font")]
+pub use font_catalog::FontCatalog;
 #[cfg(feature = "visual")]
 mod ktx;
 #[cfg(feature = "visual")]
