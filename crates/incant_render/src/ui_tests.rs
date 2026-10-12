@@ -291,13 +291,26 @@ fn plan_layers_each_widget_in_canonical_order_with_state_colours() {
         part
     };
     let g = |n: usize| vec![KIND_GLYPH; n];
-    // Label: glyphs only, in primary text colour, clipped to the content box.
-    let part = take(glyphs[0]);
-    assert_eq!(kinds(part), g(glyphs[0]));
+    // Label: a one-pixel shadow pass, then the glyphs in the primary text
+    // colour, both clipped to the content box; no surface.
+    let part = take(2 * glyphs[0]);
+    assert_eq!(kinds(part), g(2 * glyphs[0]));
+    let (shadow, text) = part.split_at(glyphs[0]);
     assert!(
-        part.iter()
+        text.iter()
             .all(|q| q.color == theme::TEXT && q.clip == label.clip)
     );
+    for (s, t) in shadow.iter().zip(text) {
+        assert_eq!(s.color, theme::LABEL_SHADOW);
+        assert_eq!(
+            s.pen,
+            [
+                t.pen[0] + theme::LABEL_SHADOW_OFFSET[0],
+                t.pen[1] + theme::LABEL_SHADOW_OFFSET[1]
+            ]
+        );
+        assert_eq!((s.rect, s.extra, s.clip), (t.rect, t.extra, t.clip));
+    }
     // Pressed button: darker surface, then glyphs.
     let part = take(1 + glyphs[1]);
     assert_eq!(part[0].kind, KIND_FILL);
@@ -311,12 +324,10 @@ fn plan_layers_each_widget_in_canonical_order_with_state_colours() {
         (ring.kind, ring.color, ring.extra[1]),
         (KIND_STROKE, theme::ACCENT, theme::FOCUS_WIDTH)
     );
-    // Disabled button: reduced surface and text alpha, never a ring.
+    // Disabled button: an opaque, flatter surface and muted text, never a ring.
     let part = take(1 + glyphs[3]);
-    assert_eq!(
-        part[0].color,
-        theme::alpha(theme::BUTTON, theme::DISABLED_SURFACE)
-    );
+    assert_eq!(part[0].color, theme::BUTTON_DISABLED);
+    assert_eq!(part[0].color[3], 255);
     assert!(
         part[1..]
             .iter()
@@ -461,7 +472,9 @@ fn glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs() {
     );
     let input = f.finish([100., 100.], vec![label.clone()]);
     let plan = plan(&input).unwrap();
-    let mut quads = plan.quads.iter();
+    // The label's shadow pass precedes its glyphs; check the glyph pass.
+    assert_eq!(plan.quads.len(), 2 * plan.glyphs);
+    let mut quads = plan.quads[plan.glyphs..].iter();
     for (glyph, handle) in label.layout.glyphs().iter().zip(label.glyphs.iter()) {
         let entry = input.atlas.get(handle).unwrap();
         let Some([x, y, w, h]) = entry.rect else {
