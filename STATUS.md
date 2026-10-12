@@ -31,6 +31,17 @@ outputs. Final independent execution audit is accepted.
 Wasm HUD parity, native/GPU appearance and complete Game UI remain open.
 [Contract and limits](docs/spikes/native-hud-controls.md).
 
+## Complete root motion — merged main161
+
+The native/TypeScript path and additive Wasm operations 53–55 now pass current-main native
+606-case and separate actual-host 453-case CPU suites, scoped checks and three
+fresh ordinary 32-tick source-deleted shipping processes. Each run matches 22,464
+oracle scalars and 256 selected vectors, exact logs/observations/PCM; 11 precise
+refusals publish no output. All 119 producer inputs remain byte exact. Independent
+current-main review and exact-head fast CI passed; merged main161; device, appearance,
+CUBICSPLINE root import and whole-module checkpoint limits remain explicit.
+[Current-main evidence](docs/spikes/native-root-motion-main160.md).
+
 ## Connected root motion — native/TypeScript CPU checks passed
 
 Cooked17/18 root catalogs now drive independent exact graph/clip clocks,
@@ -556,10 +567,10 @@ and complete Game UI/IME gates remain open.
 
 ## Current milestone
 
-Main #159 includes compound native animation transitions and complete Wasm
+Main #160 includes compound native animation transitions and complete Wasm
 snapshots, authored two-bone IK, offline audio/UI checkpoints, public physics
 queries and the Core Sample gameplay slice. The reviewed complete root-motion
-integration is undergoing current-main CPU and ordinary package validation;
+integration passed current-main CPU and ordinary package validation plus final independent review;
 HUD and audio transport remain separate reviewed producer queues. Phase 1 and
 the finished game remain incomplete.
 
@@ -568,8 +579,9 @@ the general macOS retirement probe failed on a late callback, and Windows deskto
 was cancelled at its one-hour job cap after 53m27s of successful pre-export checks.
 Main158 contains the reviewed probe-only callback repair. The reviewed Windows
 workflow repair allows that job 120 minutes while Linux stays at 60, preserving
-all checks and fresh private shipping builds. It awaits the exact-head fast check;
-checkpoint14 will then freeze the repaired main tree. Release remains at
+all checks and fresh private shipping builds. The repair merged after its exact-head
+fast check passed. Checkpoint14 is frozen at main160 `d1ef35ee`, candidate
+`e9c0b288`; all 23 full checks remain required. Release remains at
 checkpoint8 until all 23 exact-head required checks succeed. Failed checkpoints
 remain historical, and later feature merges do not move an active candidate.
 [Windows timing and repair evidence](docs/spikes/windows-desktop-checkpoint-budget.md).
@@ -587,8 +599,9 @@ save bytes, PCM and logs. Legacy Wasm v1/v2
 snapshots explicitly refuse unrepresentable graph blends. The additive guest
 graph SDK now carries bounded snapshots and atomic controls through both native
 Wasm hosts, with its current-main checks recorded above. The newer nested/2D
-tree route is verified separately above. Timed blended-state fades, layering,
-authored IK, root motion, rendered acceptance and device gates remain open.
+tree route is verified separately above. The later compound transition and authored IK routes are separately verified
+above; layering, connected root-motion publication, rendered acceptance and
+device gates remain open.
 [Scope and evidence](docs/spikes/native-animation-graphs.md).
 
 Connected native UI now composes typed UiNode authoring, v13 cooked scenes,
