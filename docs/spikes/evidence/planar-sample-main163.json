@@ -344,7 +344,12 @@
   },
   "producer_artifacts_verified": 79,
   "shipping_scope": "Original accepted producer shipping proof is based on main160; no fresh main163 shipping export claimed. Current integrated engine was exercised by all seven native scenarios.",
-  "review": "pending independent integration audit",
+  "review": {
+    "accepted": true,
+    "path": "docs/spikes/evidence/planar-sample-main164-review.json",
+    "sha256": "596340dc96acab30d91ceec7db7113d931d8f89ef7514273aa28fee3c91997d6",
+    "reviewed_manifest_sha256": "fada349c42284b20aabf7c44e5e7e22ef12644d36e58299c29d27c4ac5261112"
+  },
   "limitations": [
     "No rendered appearance, native-window, physical gamepad or device performance claim",
     "Silent PCM fixture",

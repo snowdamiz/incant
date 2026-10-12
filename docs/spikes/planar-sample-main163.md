@@ -15,4 +15,4 @@ locked exit, normalized diagonal movement and exact repeat state/log/silent PCM.
 Rendered appearance, device performance and physics checkpoint gates remain open.
 
 [Exact commands, sources, reports and limitations](evidence/planar-sample-main163.json)
-await independent integration review.
+passed independent integration review.

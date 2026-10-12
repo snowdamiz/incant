@@ -16,12 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Core presentation bindings — current-main integration verified
+## Planar gameplay — current-main integration reviewed
+
+All five reviewed sample/workflow inputs remain exact. Seven native gameplay
+scenarios, strict types, 28 policy cases and actionlint pass with a matching engine
+binary. Independent review accepts the source/receipts. Original shipping proof
+remains explicitly based on main160; fast CI/publication are pending. The
+numerical room does not establish authored visuals, device or physics-save gates.
+[Current integration evidence](docs/spikes/planar-sample-main163.md).
+
+## Core presentation bindings — merged main164
 
 The two reviewed sample/helper inputs are unchanged. Strict types, seven native
 scenarios and a fresh ordinary source/map/build-deleted win/loss/repeat proof pass
 on the integrated native HUD/audio engine. Actual text/locale/result parenting,
-repeat PCM and terminal silence are verified. Independent integration audit is accepted; fast CI/publication remain pending.
+repeat PCM and terminal silence are verified. Independent integration audit and exact-head fast CI passed before PR164 merged.
 Authored appearance/device gates remain separate.
 [Current integration evidence](docs/spikes/core-presentation-integration.md).
 
