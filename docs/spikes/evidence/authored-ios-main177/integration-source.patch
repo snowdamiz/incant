@@ -1,0 +1,203 @@
+diff --git a/crates/incant_cook/src/project_build.rs b/crates/incant_cook/src/project_build.rs
+index 207b929b..0560b95e 100644
+--- a/crates/incant_cook/src/project_build.rs
++++ b/crates/incant_cook/src/project_build.rs
+@@ -77,6 +77,7 @@ fn embed(
+         return Err("project text exceeds native export limit".into());
+     }
+     let project = Project::from_text(&text)?;
++    incant_runtime::require_physics_mode(project.settings.physics_mode)?;
+     let scene_id = match selected_scene {
+         Some(id) => id.to_owned(),
+         None if project.scenes.len() == 1 => project.scenes.keys().next().unwrap().clone(),
+@@ -242,6 +243,8 @@ fn embed(
+     let manifest = serde_json::json!({
+         "format": "incant-native-project-build", "version": 1,
+         "project_id": project.id, "scene_id": scene_id, "tick_rate": scene.tick_rate(),
++        "physics_mode": project.settings.physics_mode,
++        "physics_variant": scene.physics_variant(),
+         "target": target, "scene_sha256": hex(&Sha256::digest(&scene_bytes)),
+         "producer_target": incant_script::artifact::TARGET,
+         "producer_kind": if mobile { "ios-archive" } else { "native-desktop" },
+diff --git a/crates/incant_cook/src/project_script.rs b/crates/incant_cook/src/project_script.rs
+index 33f6a257..f3339d25 100644
+--- a/crates/incant_cook/src/project_script.rs
++++ b/crates/incant_cook/src/project_script.rs
+@@ -104,6 +104,7 @@ pub fn prepare_script_scene_with_resources(
+     animations: &crate::AnimationResources,
+ ) -> Result<PreparedScriptScene, ProjectScriptError> {
+     let validated = project.validated().map_err(CookError::from)?;
++    incant_runtime::require_physics_mode(project.settings.physics_mode).map_err(CookError::from)?;
+     let scene = project
+         .scenes
+         .get(scene_id)
+diff --git a/tools/export_ios.py b/tools/export_ios.py
+index a4c34719..82472856 100644
+--- a/tools/export_ios.py
++++ b/tools/export_ios.py
+@@ -16,6 +16,7 @@ import time
+ 
+ import ios_archive
+ import native_process
++from physics_features import selected_graph_errors, validate_artifacts
+ from native_package import data_package, publish, read, require, select_camera, sha256, write_json
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+@@ -69,12 +70,15 @@ def build(project, staging, storage, target, scene, camera):
+     cargo = ROOT / 'tools/cargo'
+     features = ','.join(ios_archive.FEATURES)
+     project_hash = sha256(read(project, 64 * 1024**2))
+-    metadata = json.loads(execute([cargo, 'metadata', '--locked', '--format-version=1', '--filter-platform', target,
+-                                  '--features', ','.join(ios_archive.NAME + '/' + f for f in ios_archive.FEATURES)],
+-                                 env=env).stdout)
+-    graph = ios_archive.normal_dependencies(metadata)
++    selected_graph = execute([cargo, 'tree', '--locked', '--no-default-features', '-p', ios_archive.NAME,
++                              '--features', features, '--target', target, '-e', 'normal',
++                              '--prefix', 'none', '--format', '{p}|{f}'], env=env).stdout
++    graph = ios_archive.normal_dependencies(selected_graph)
++    errors = selected_graph_errors(selected_graph, 'deterministic', target)
++    require(not errors, 'Selected iOS physics graph differs from the fixed kernel: ' + '; '.join(errors))
++    (staging / 'normal-dependencies.txt').write_text(selected_graph, encoding='utf-8')
+     command = [cargo, 'rustc', '--locked', '--profile', 'shipping', '-j2', '-p', ios_archive.NAME,
+-               '--lib', '--features', features, '--crate-type', 'staticlib', '--target', target,
++               '--lib', '--no-default-features', '--features', features, '--crate-type', 'staticlib', '--target', target,
+                '--target-dir', storage / 'target', '--config', 'profile.shipping.split-debuginfo="off"',
+                '--message-format=json', '-vv']
+     command_receipt = {'argv': list(map(str, command)), 'exit_code': None,
+@@ -95,6 +99,8 @@ def build(project, staging, storage, target, scene, camera):
+     flags = ios_archive.verify_codegen(log, target)
+     physics = ios_archive.kernel_provenance(log, target)
+     messages = [json.loads(line) for line in (staging / 'cargo.jsonl').read_text().splitlines() if line.startswith('{')]
++    physics['compiled_target'] = validate_artifacts(messages, 'deterministic', target_dir=storage / 'target',
++                                                    target=target, profile='shipping')
+     artifacts = [m for m in messages if m.get('reason') == 'compiler-artifact'
+                  and m['target']['name'] == ios_archive.NAME and 'staticlib' in m['target']['crate_types']]
+     require(len(artifacts) == 1, 'Missing unique compiled mobile archive')
+diff --git a/tools/ios_archive.py b/tools/ios_archive.py
+index 8859035c..38f4c84c 100644
+--- a/tools/ios_archive.py
++++ b/tools/ios_archive.py
+@@ -7,7 +7,7 @@ from native_package import read, require, sha256
+ from shipping import codegen
+ 
+ TARGETS = {'aarch64-apple-ios-sim': 'iphonesimulator', 'aarch64-apple-ios': 'iphoneos'}
+-FEATURES = ['mobile-ffi', 'project', 'render-input']
++FEATURES = ['mobile-ffi', 'project', 'render-input', 'physics-deterministic']
+ NAME = 'incant_game_player'
+ FORBIDDEN = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
+              'incant_source', 'incant_play', 'incant_play_legacy', 'incant_wasm_cook',
+@@ -26,6 +26,9 @@ def preflight_project(project, scene):
+     import json
+     document = json.loads(read(project, 64 * 1024**2))
+     require(isinstance(document, dict) and isinstance(document.get('scenes'), dict), 'Missing project scenes')
++    settings = document.get('settings', {})
++    require(isinstance(settings, dict) and settings.get('physics_mode', 'deterministic') == 'deterministic',
++            'Authored iOS archive currently requires deterministic project physics')
+     scenes = document['scenes']
+     if scene is None:
+         require(len(scenes) == 1, 'Choose --scene when the project does not contain exactly one scene')
+@@ -49,21 +52,18 @@ def environment(source, rustc, project, scene):
+     return env
+ 
+ 
+-def normal_dependencies(metadata):
+-    names = {p['id']: p['name'] for p in metadata['packages']}
+-    nodes = {n['id']: n for n in metadata['resolve']['nodes']}
+-    pending = [ident for ident, name in names.items() if name == NAME]
+-    require(len(pending) == 1, 'Missing unique mobile player')
+-    seen = set()
+-    while pending:
+-        ident = pending.pop()
+-        if ident in seen:
+-            continue
+-        seen.add(ident)
+-        require(names[ident] not in FORBIDDEN and not names[ident].startswith(('wasmtime', 'cranelift')),
+-                f'Authoring/JIT normal dependency: {names[ident]}')
+-        pending.extend(d['pkg'] for d in nodes[ident]['deps'] if any(k['kind'] is None for k in d['dep_kinds']))
+-    return sorted(names[ident] for ident in seen)
++def normal_dependencies(graph):
++    """Audit only the selected target's normal graph, preserving compiler refusal."""
++    names = []
++    for line in graph.splitlines():
++        match = re.fullmatch(r'([A-Za-z0-9_-]+) v[^|]+\|([^|]*)', line.removesuffix(' (*)'))
++        require(match is not None, 'Malformed selected iOS dependency graph')
++        name = match.group(1)
++        require(name not in FORBIDDEN and not name.startswith(('wasmtime', 'cranelift')),
++                f'Authoring/JIT normal dependency: {name}')
++        names.append(name)
++    require(names and names[0] == NAME, 'Missing selected mobile player root')
++    return sorted(set(names))
+ 
+ 
+ def verify_codegen(stderr, target):
+@@ -113,6 +113,8 @@ def kernel_provenance(stderr, target):
+ def producer_receipt(receipt, target, project_hash):
+     require(receipt.get('format') == 'incant-native-project-build' and receipt.get('version') == 1,
+             'Unsupported authored project producer receipt')
++    require(receipt.get('physics_mode') == 'deterministic' and receipt.get('physics_variant') == 'deterministic',
++            'Authored iOS cook physics differs from the fixed target kernel')
+     require(receipt['target'] == target and receipt['producer_target'] == 'aarch64-apple-darwin'
+             and receipt['producer_kind'] == 'ios-archive' and receipt['project_sha256'] == project_hash
+             and receipt['startup_source_parsing'] is False and receipt['program'] is None,
+diff --git a/tools/tests/test_ios_export.py b/tools/tests/test_ios_export.py
+index e0938ad9..44a70c5c 100644
+--- a/tools/tests/test_ios_export.py
++++ b/tools/tests/test_ios_export.py
+@@ -40,16 +40,32 @@ class IosExport(unittest.TestCase):
+                 export_ios.export(project, root / 'output', TARGET)
+             self.assertEqual((root / 'output' / 'sentinel').read_text(), 'preserved')
+ 
+-    def test_normal_graph_allows_build_cooker_but_refuses_runtime_authoring_or_jit(self):
+-        metadata = {'packages': [{'id': 'player', 'name': 'incant_game_player'}, {'id': 'cook', 'name': 'incant_cook'}],
+-                    'resolve': {'nodes': [{'id': 'player', 'deps': [{'pkg': 'cook', 'dep_kinds': [{'kind': 'build'}]}]},
+-                                          {'id': 'cook', 'deps': []}]}}
+-        self.assertEqual(ios_archive.normal_dependencies(metadata), ['incant_game_player'])
+-        metadata['resolve']['nodes'][0]['deps'][0]['dep_kinds'] = [{'kind': None}]
++    def test_selected_normal_graph_refuses_runtime_authoring_jit_and_malformed_lines(self):
++        graph = 'incant_game_player v0.0.1 (/engine/player)|project\nincant_runtime v0.0.1|\n'
++        self.assertEqual(ios_archive.normal_dependencies(graph), ['incant_game_player', 'incant_runtime'])
++        self.assertEqual(ios_archive.normal_dependencies(graph + 'incant_runtime v0.0.1| (*)\n'),
++                         ['incant_game_player', 'incant_runtime'])
+         for name in ('incant_cook', 'incant_doc', 'wasmtime', 'cranelift_codegen'):
+-            metadata['packages'][1]['name'] = name
+             with self.subTest(name=name), self.assertRaisesRegex(ValueError, 'Authoring/JIT'):
+-                ios_archive.normal_dependencies(metadata)
++                ios_archive.normal_dependencies(graph + name + ' v1.0.0|\n')
++        for invalid in ('', 'incant_runtime v0.0.1|\n', graph + 'unrecognized output\n'):
++            with self.assertRaises(ValueError):
++                ios_archive.normal_dependencies(invalid)
++
++    def test_only_fixed_deterministic_projects_are_admitted_before_build(self):
++        with tempfile.TemporaryDirectory() as directory:
++            root = Path(directory).resolve()
++            project = root / 'project'
++            for settings in ({}, {'physics_mode': 'deterministic'}):
++                project.write_text(json.dumps({'settings': settings, 'scenes': {'scene': {}}}))
++                ios_archive.preflight_project(project, None)
++            for mode in ('fast', 'fast-simd8', None, True, []):
++                project.write_text(json.dumps({'settings': {'physics_mode': mode}, 'scenes': {'scene': {}}}))
++                with self.subTest(mode=mode), patch.object(export_ios, 'build') as build:
++                    with self.assertRaisesRegex(ValueError, 'deterministic project physics'):
++                        export_ios.export(project, root / 'output', TARGET)
++                    build.assert_not_called()
++                    self.assertFalse((root / 'output').exists())
+ 
+     def test_closed_destinations_refuse_before_project_or_output_io(self):
+         for target in ('aarch64-linux-android', 'aarch64-apple-darwin', 'x86_64-apple-ios', TARGET + '\n'):
+@@ -104,6 +120,7 @@ class IosExport(unittest.TestCase):
+ 
+     def test_producer_requires_exact_abi_source_graph_and_binding(self):
+         receipt = {'format': 'incant-native-project-build', 'version': 1, 'target': TARGET,
++                   'physics_mode': 'deterministic', 'physics_variant': 'deterministic',
+                    'producer_target': 'aarch64-apple-darwin', 'producer_kind': 'ios-archive',
+                    'project_sha256': 'p', 'startup_source_parsing': False, 'program': None,
+                    'compiler': {'bundleSha256': 'a' * 64, 'mapSha256': 'm'},
+@@ -117,6 +134,8 @@ class IosExport(unittest.TestCase):
+                               'hardening_sha256': 'd' * 64, 'bindings_sha256': 'e' * 64, 'source_map_sha256': 'm'}}
+         ios_archive.producer_receipt(receipt, TARGET, 'p')
+         for path, value in [(('target',), 'aarch64-apple-darwin'), (('program',), {'kind': 'wasm'}),
++                            (('physics_mode',), 'fast'), (('physics_variant',), 'fast-simd8'),
++                            (('physics_variant',), None),
+                             (('script', 'bindings_sha256'), None), (('script', 'target'), 'aarch64-apple-ios'),
+                             (('script', 'bytecode_abi', 'pointer_bits'), 32), (('compiler', 'bundleSha256'), 'f' * 64),
+                             (('script', 'source_map_sha256'), 'wrong')]:

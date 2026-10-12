@@ -132,3 +132,10 @@ Hash each actual export.json, then pass that hash with `--export-sha256` to
 and a new `--output` directory. Run the simulator with `--remove-authoring` only
 after both exports finish. The device invocation then verifies that the private
 authoring directory remains absent and performs unsigned links only.
+
+## Current-main integration
+
+The separate [main177 integration](authored-ios-main177.md) retains this original
+producer result unchanged and adds fresh current-source archives and simulator
+caller evidence. Its fixed deterministic target uses the selected normal graph
+and actual target compiler artifacts; fast authored projects refuse early.
