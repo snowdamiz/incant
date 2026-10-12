@@ -1,0 +1,149 @@
+{
+  "base": "89c6180b3ba57cc86652f1f3b3e838ee72f21836",
+  "checkpoint": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+  "source_sha256": {
+    "tools/platforms/render-check.py": "331610e8c1ed7e047e4069e681f337c188729a37f21b6f5fc91af273bfb3a8be",
+    "tools/probes/native-game.py": "60054a02738652c5956a4c38db985579352f68438a3dd34fae141bf31303655a",
+    "tools/tests/test_render_geometry.py": "60881d77079da4eceb02b8ca75e0415e7732c1f5588f229fc6591a4d3b6fa5bc",
+    "crates/incant_game_player/tests/arguments.rs": "16aa748b0fce58ae1b1bac4d83992ac3f02a6b1134996f9939e5fe1debb8b32c"
+  },
+  "artifacts": {
+    "before.json": {
+      "sha256": "3086480e1dbb4990ae5bb5cfc8174cd853af0c767b7f24d904fea22498ab24e9",
+      "bytes": 340
+    },
+    "macos-patch.diff": {
+      "sha256": "93fd182201a425b26ae92969826c7801c2db7741e85d873590cd0f0cd4547212",
+      "bytes": 3416
+    },
+    "patch.diff": {
+      "sha256": "c959786d1a46eced48b688d288ace6743e543a3e3976a4c875370552540963dd",
+      "bytes": 3493
+    },
+    "arguments.log.gz": {
+      "sha256": "d0e354cbaa053e98087680f3efae89a7f37bd3fa6800431132b32f8b0599d60e",
+      "uncompressed_sha256": "60e667f6b59ad15a83eaa69a7d5b855fc8768674004ef631ac6dc5fe9fc71fe7",
+      "uncompressed_bytes": 188
+    },
+    "final-results.json": {
+      "sha256": "1963c8b1fd955f75f278ac98101b3528580a553afdc4d026b217354f03caafac",
+      "bytes": 656
+    },
+    "arguments-binary.json": {
+      "sha256": "e7ebf8bfbce4468db97221b38173b1d4905b92203f3e9b567b68ff3dc53dd333",
+      "bytes": 707
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "results.json": {
+      "sha256": "08359c986fa111172f8da0cd5bd984d2b41864e4fd4ecb251d13423ee303470a",
+      "bytes": 1132
+    },
+    "arguments-compile.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "diff-final.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "tools-final.log.gz": {
+      "sha256": "ec0f4970be55e81d571aa194364830916585bcbb41a66a829df0181896429f7e",
+      "uncompressed_sha256": "9dcd7c46953936e0bcc590bbcc9c1ec46db9bc8fa1cdfdd984749e694f43baac",
+      "uncompressed_bytes": 2400
+    },
+    "fmt-final.log.gz": {
+      "sha256": "8f6b7fd0a5657346685ad0bce34478c94ba1147e44a67048b5b6185f938c0745",
+      "uncompressed_sha256": "5bbfcd19b27f01f543e3c97ab1de71b6db4ab93dd04ef53edcc85d0056b2a3d7",
+      "uncompressed_bytes": 204
+    },
+    "corrected-results.json": {
+      "sha256": "ffb2f9fa3725a3af42bbbe90bd32e764b344ff2c5c84dc9163175da6b4eb43c5",
+      "bytes": 510
+    },
+    "tools.log.gz": {
+      "sha256": "f61841d49c52014e74d917e82c15ef3db13adc5b0b29f8383ab285124fe23b9e",
+      "uncompressed_sha256": "eb17c076bd81931936d126d8528455ce6e38920e26a816b711fb2125c74a40f9",
+      "uncompressed_bytes": 2400
+    },
+    "before.log.gz": {
+      "sha256": "1803b69c693a1b61fbd4853007d0fd7f5f85746c0943c9e880640c6af0e46bd8",
+      "uncompressed_sha256": "057b7b204b373bb0e51a32b3e1f802387482e35cb85f96c55cc99eb6ce3e8610",
+      "uncompressed_bytes": 1520
+    },
+    "fmt-corrected.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uncompressed_bytes": 0
+    },
+    "manual-route-baseline.json": {
+      "sha256": "34265c69faadbac3b025c345ff747042e967e2e6632772fde8039ecb13f3bf41",
+      "bytes": 735
+    },
+    "focused.log.gz": {
+      "sha256": "218cb137fac778c520c341e4822c44f3915b3bef2630676788a8bdb573391612",
+      "uncompressed_sha256": "62c8ac9e0fa5cc583ca64c5c5843ed6cb3cd64ec82709c624888ee3ec6b0c06b",
+      "uncompressed_bytes": 985
+    },
+    "checkpoint11-terminal.json": {
+      "sha256": "35e88bb11c8df7c26f16b3acaff643c13e9f864e0d191ce7fccdea2e1938c899",
+      "bytes": 13819
+    },
+    "checkpoint11-failure-intake.json": {
+      "sha256": "341a99b97d1decc279fa136fd846f5b242c1c7ea67361864effa6e5d0b4df1c5",
+      "bytes": 1649
+    },
+    "checkpoint11-full-logs.json": {
+      "sha256": "b6639b8104281272e259ad87ed943e84020cf7c628dc5442ad5d09cb9d8b4cab",
+      "bytes": 656
+    },
+    "checkpoint11-windows-full.log.gz": {
+      "sha256": "8e42aa5ef23706dfbfe8b1df9b3192449195a46e47695939d413804ce65b18b4",
+      "bytes": 133593
+    },
+    "checkpoint11-linux-full.log.gz": {
+      "sha256": "b57bf32ca525787f7191950c3cb5b83378a207be2e784e37c2876616f840beef",
+      "bytes": 134989
+    },
+    "checkpoint11-macos-full.log.gz": {
+      "sha256": "9c75779f4685d5581b63078d93ebaee5b4ef1819ef561aecad16b364f2ff5110",
+      "bytes": 149556
+    },
+    "windows-render-receipt-20261012.json": {
+      "sha256": "895482fb8b47b1bb61f2266218fe438e9cb73572fa31c754963a4ba15d69d800",
+      "bytes": 765
+    },
+    "macos-manual-input-receipt-20261012.json": {
+      "sha256": "de0d3b5d145ae11a80d678c55c44531d573483f61fdcce1a12a2d3120c52261e",
+      "bytes": 844
+    }
+  },
+  "validation": {
+    "python_total": 234,
+    "python_skipped": 4,
+    "actual_cli_cases": 6,
+    "arguments_binary_sha256": "3f0aa604ae3c60f8e9271b897a1926cbb4a753c763bf8a7a20e76555914813ad",
+    "formatting": "corrected explicit pinned toolchain PATH passed",
+    "production_changes": false
+  },
+  "prior_failures": [
+    "Checkpoint11: 20 required SUCCESS and three failures; release unchanged. Windows strict geometry receipt omitted four new zero text counters. macOS manual-input rejection expected removed diagnostic. Linux two UI numeric differences remain with Claude.",
+    "Local old geometry predicate red exit1. Actual unchanged CLI rejects manual input, and its old-message predicate is false.",
+    "Initial final fmt invocation used a bare absolute cargo path without cargo-fmt in PATH and exited101 (no such command fmt). Correct pinned PATH passed without source changes."
+  ],
+  "limits": [
+    "No new GPU/window/appearance execution. Actual Windows/full shared-shipping confirmation awaits repaired successor checkpoint.",
+    "Actual CLI cases used an immutable copy of current UI-integration player after its Cargo test command completed. Main141 and that build have byte-identical parser prefix/program/observe sources. New std-only test was compiled directly with pinned rustc instead of writing to the active Cargo target.",
+    "Checkpoint11 remains failed and frozen. Linux numerical/appearance investigation is independent; no tolerance changed."
+  ]
+}

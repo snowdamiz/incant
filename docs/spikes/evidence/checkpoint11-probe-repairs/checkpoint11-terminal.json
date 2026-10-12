@@ -1,0 +1,362 @@
+{
+  "observed_utc": "2026-10-12T14:43:09.583976+00:00",
+  "candidate": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+  "selected_main": "89c6180b3ba57cc86652f1f3b3e838ee72f21836",
+  "promoted": false,
+  "required_counts": {
+    "SUCCESS": 20,
+    "FAILURE": 3
+  },
+  "pr": {
+    "baseRefOid": "b614679a1d48aba6e4ff5387974351602de5c026",
+    "headRefOid": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T14:05:59Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317631/job/114835215892",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-12T13:32:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:36:13Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256316970/job/114835212443",
+        "name": "storage (macos-latest)",
+        "startedAt": "2026-10-12T13:31:59Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:59:26Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317033/job/114835213158",
+        "name": "conformance (macos-latest)",
+        "startedAt": "2026-10-12T13:32:03Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:32:07Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256316928/job/114835211574",
+        "name": "classify",
+        "startedAt": "2026-10-12T13:31:55Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:33:30Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317064/job/114835213213",
+        "name": "local-service-protocols",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Local service protocols"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:54:08Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317319/job/114835214880",
+        "name": "native (macos-latest)",
+        "startedAt": "2026-10-12T13:36:22Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:44:39Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317161/job/114835213476",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-12T13:32:04Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:33:02Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317050/job/114835212902",
+        "name": "build",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Website \u00b7 check and deploy"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:43:43Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317631/job/114835216050",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:37:56Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256316970/job/114835212012",
+        "name": "storage (windows-latest)",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:49:25Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317033/job/114835213450",
+        "name": "conformance (ubuntu-latest)",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:44:22Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317319/job/114835214765",
+        "name": "native (ubuntu-latest)",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:44:01Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317161/job/114835213301",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "startedAt": "2026-10-12T13:31:55Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:35:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256316970/job/114835212474",
+        "name": "storage (ubuntu-latest)",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T14:10:13Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317033/job/114835213468",
+        "name": "conformance (windows-latest)",
+        "startedAt": "2026-10-12T13:31:57Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:53:17Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317319/job/114835214965",
+        "name": "native (windows-latest)",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:39:39Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317161/job/114835213283",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-12T13:31:55Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T14:40:23Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256316928/job/114835295739",
+        "name": "checks",
+        "startedAt": "2026-10-12T13:37:44Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:33:02Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317050/job/114835665641",
+        "name": "deploy",
+        "startedAt": "2026-10-12T13:33:02Z",
+        "status": "COMPLETED",
+        "workflowName": "Website \u00b7 check and deploy"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:37:37Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317319/job/114835214325",
+        "name": "portability",
+        "startedAt": "2026-10-12T13:32:02Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:37:23Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317161/job/114835213302",
+        "name": "web",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:54:33Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317319/job/114844285680",
+        "name": "compare",
+        "startedAt": "2026-10-12T13:54:11Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:40:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317161/job/114835213232",
+        "name": "ios",
+        "startedAt": "2026-10-12T13:32:04Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-12T13:38:59Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38256317161/job/114835212984",
+        "name": "android",
+        "startedAt": "2026-10-12T13:31:56Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      }
+    ],
+    "url": "https://github.com/snowdamiz/incant/pull/133"
+  },
+  "runs": [
+    {
+      "conclusion": "failure",
+      "databaseId": 38256316928,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Incant checks",
+      "startedAt": "2026-10-12T13:31:53Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T14:40:23Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256316928"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38256316970,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Desktop credential persistence",
+      "startedAt": "2026-10-12T13:31:53Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T13:37:57Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256316970"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38256317033,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Development Wasm conformance",
+      "startedAt": "2026-10-12T13:31:53Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T14:10:14Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256317033"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38256317050,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Website \u00b7 check and deploy",
+      "startedAt": "2026-10-12T13:31:53Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T13:33:03Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256317050"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38256317064,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Local service protocols",
+      "startedAt": "2026-10-12T13:31:53Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T13:33:30Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256317064"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38256317161,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Six platform probes",
+      "startedAt": "2026-10-12T13:31:53Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T13:44:40Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256317161"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38256317319,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Physics candidate feasibility",
+      "startedAt": "2026-10-12T13:31:53Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T13:54:34Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256317319"
+    },
+    {
+      "conclusion": "failure",
+      "databaseId": 38256317631,
+      "event": "push",
+      "headSha": "82aa2bc3de3aa642fb90951d895c35ce9afb51e5",
+      "name": "Desktop editor and engine",
+      "startedAt": "2026-10-12T13:31:54Z",
+      "status": "completed",
+      "updatedAt": "2026-10-12T14:06:00Z",
+      "url": "https://github.com/snowdamiz/incant/actions/runs/38256317631"
+    }
+  ],
+  "logs": {
+    "macos-failure.log": {
+      "sha256": "ebcf9dd640c949498e7938b7f207cb7a9a5a3be4453e0e30516996399f13474f",
+      "bytes": 5833
+    },
+    "desktop-failure.log.gz": {
+      "sha256": "b344c86d4797be9a7a45393f87c11ec5523bacf0aa3a293d92a1fb0a38f4ac61",
+      "bytes": 14869
+    },
+    "macos-failure.log.gz": {
+      "sha256": "bae289678f59cd3bf51fb2840b56cf88ddc9ff4d9dfe08a115a9567c80c06650",
+      "bytes": 1317
+    }
+  }
+}

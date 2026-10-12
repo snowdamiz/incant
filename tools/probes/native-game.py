@@ -332,7 +332,9 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
     bad_command = command(fixtures[0]['path'], record_path, 48000, dest); bad_command[5] = oversized
     reject('oversized-startup-actions', bad_command, dest, 'runtime input size limit')
     dest = out / 'manual-input.pcm'
-    reject('manual-input-route', command(fixtures[0]['path'], record_path, 48000, dest)+['--input', 'KeyD'], dest, 'manual input/source paths are unsupported')
+    manual_boundary = ('unknown or duplicate spatial option' if args.render_input else
+                       'expected SCENE CACHE CLIPS RECORDING ACTIONS TICKS SAMPLE_RATE OUTPUT')
+    reject('manual-input-route', command(fixtures[0]['path'], record_path, 48000, dest)+['--input', 'KeyD'], dest, manual_boundary)
     refusal_dir = out / 'refusal-scenes'; run([fixture_tool, refusal_dir])
     refusal_results = []
     for name in ('camera-only', 'manifest-only'):

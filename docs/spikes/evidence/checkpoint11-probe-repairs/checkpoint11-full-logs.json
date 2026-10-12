@@ -1,0 +1,17 @@
+{
+  "windows-full.log": {
+    "bytes": 1400446,
+    "sha256": "5ae774353d6a8bd677e0d6576389f3909929be54064ea2e49d1904ccade5d41a",
+    "gzip_sha256": "8e42aa5ef23706dfbfe8b1df9b3192449195a46e47695939d413804ce65b18b4"
+  },
+  "macos-full.log": {
+    "bytes": 1418409,
+    "sha256": "5d633aeaf00c56b87af9c37cac30fd864240e5d7f74c75cd6256cb838f81c7c4",
+    "gzip_sha256": "9c75779f4685d5581b63078d93ebaee5b4ef1819ef561aecad16b364f2ff5110"
+  },
+  "linux-full.log": {
+    "bytes": 1317059,
+    "sha256": "75f7b5622ca53e3bae8fdf8aeaa860c1097a842c5a15552a742bdd2decf3fce6",
+    "gzip_sha256": "b57bf32ca525787f7191950c3cb5b83378a207be2e784e37c2876616f840beef"
+  }
+}
