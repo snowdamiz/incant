@@ -1,5 +1,5 @@
 {
-  "status": "ready for independent preparation review; graphics grant absent; no ACP launch",
+  "status": "root granted graphics after verified 0050 release; all four numerical suites passed; Claude appearance pending",
   "required_model": "Opus 5.5",
   "required_effort": "max",
   "native_backend_scope": "Metal only",
@@ -49,8 +49,8 @@
     "path": "/tmp/incant-cooked-geometry-root-review.json",
     "sha256": "3acfacca03b8b331b2c82443fe8aee35d36ac6eed081ffdcd5b329b4a006a718"
   },
-  "build_only": true,
-  "gpu_executed_for_preparation": false,
+  "build_only": false,
+  "gpu_executed_for_preparation": true,
   "commands_file": "brief.md",
   "diagnostic_source": {
     "path": "crates/incant_render/tests/diagnostic_output/mod.rs",
@@ -63,5 +63,12 @@
   },
   "capture_limit": 24,
   "focused_children": 8,
-  "full_suite_children": 4
+  "full_suite_children": 4,
+  "numerical_acceptance": {
+    "path": "numerical-acceptance.json",
+    "sha256": "f5b716093bcc9d6f2744baa96e02b297d214428604a93d1979d41ea9ef95d7d5",
+    "original_receipt_sha256": "2636fc588223b84ff145f8fb6fe1a235eff39f9e4250faa4b45b082b5df325b7",
+    "tests": 138,
+    "exact_raw_pairs": 28
+  }
 }

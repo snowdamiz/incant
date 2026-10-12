@@ -1,9 +1,29 @@
 # 0051 — Cooked output and geometry appearance acceptance
 
-Preparation only. Do not start ACP, native processes, GPU tests or PNG captures
-until root grants this packet exclusive graphics ownership after 0050. Both
-cooked features stay off by default. Use Claude Opus 5.5 through ACP, explicitly
-confirmed Max thinking on every new or resumed session. Do not substitute a model.
+## Activation — exclusive graphics grant, numerical phase complete
+
+Root explicitly granted this frozen-v2 review after 0050 terminal exit and owned
+PID cleanup. Astra ran and reaped the four numerical suites: 19 library + 50 model
+tests in each mode, all 138 passed on Apple M5 Pro/Metal. All 16 output and 12
+actual-diagnostic raw cases are byte-identical with matching source, adapter and
+dimensions. Read `numerical-acceptance.json`; originals and complete raw/log files
+are staged under `artifacts/tools/0051/numerical/`. Do not rerun these four suites.
+No PNGs were produced or inspected during Astra's numerical phase.
+
+Proceed with the eight bounded image-review children only, through
+`python3 handoffs/0051-cooked-shader-acceptance/capture.py <case> <mode>`.
+Cases are `output`, `lookdev`, `masks`, `diagnostic`; modes are `default`, `cooked`.
+Run each pair once, serially. The supplied fixed helper enforces exact binary and
+grant hashes, refuses duplicate calls, records/reaps each child, and automatically
+removes the gate after eight children or any failure. Do not edit/bypass the helper,
+call frozen GPU executables directly, rebuild, or restore a grant. Inspect its
+source before use. Only helper/analysis tests that do not launch GPU children may
+be added. For actual pixel review use existing image tools; do not infer appearance
+from hashes alone. Report release as soon as the helper's RELEASED latch appears,
+then finish CPU-only comparisons, report and evidence. No provider/account turns.
+
+Both cooked features stay off by default. Required model is Claude Opus 5.5,
+explicitly confirmed Max thinking on every new or resumed session.
 
 ## Frozen scope
 
@@ -40,7 +60,7 @@ No Cargo/builds are needed or permitted during the graphics interval.
 
 Before each GPU child require `artifacts/tools/0051/gpu-review-ready.json`
 containing the exact prepared-inputs SHA256 and an explicit current root grant.
-The gate is deliberately absent during preparation. Use one exclusive lock around
+The gate is supplied for this current granted interval only. Use one exclusive lock around
 checking the grant and executing/reaping a child. Do not create or restore your
 own grant. Stop immediately if it is withdrawn; a released marker permanently
 closes this interval. Root/Astra must authorize any subsequent capture interval.
@@ -49,10 +69,9 @@ The new test-only `diagnostic_output` fixture now draws actual diagnostic cubes
 through known typed SceneInput and an explicit camera. It compares empty/base/
 raised poses in all four formats, requires substantial bounded nonbackground
 pixels for both reflected placements and verifies upward projected motion. Its
-CPU compile/Clippy passed; actual GPU assertions and paired equivalence remain
-pending. The earlier v1 geometry binaries do not contain this test; use v2 only.
+CPU compile/Clippy and now actual GPU assertions/paired equivalence passed. The earlier v1 geometry binaries do not contain this test; use v2 only.
 
-## Existing numerical controls, after the separate grant
+## Completed numerical controls (historical commands; do not rerun)
 
 Run serialized with no native windows or provider/account actions. Use a fresh
 output directory for every command; remove inherited `INCANT_*_EVIDENCE` and
@@ -135,6 +154,7 @@ Write `handoffs/0051-cooked-shader-acceptance/result.md` with verified Opus 5.5/
 scoped output, diagnostic and shadow appearance verdicts, numerical evidence references,
 defects/repro, and explicit pending unexecuted backend/device gates including Vulkan/DX12,
 phone/performance/default-enablement gates. Only write this packet and ignored
-`artifacts/0051-cooked-shader-acceptance/`. Commit with `Built-by: claude`.
+`artifacts/0051-cooked-shader-acceptance/`. The supplied helper alone may write its
+lock/grant-removal/RELEASED control files in `artifacts/tools/0051/`. Commit with `Built-by: claude`.
 No push, PR, merge, account access or production changes. If ACP cannot verify
 both settings, preserve this packet for manual Claude execution without fallback.
