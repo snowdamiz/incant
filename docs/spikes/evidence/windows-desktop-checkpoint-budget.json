@@ -1,0 +1,477 @@
+{
+  "scope": "Windows desktop comprehensive-checkpoint time budget only; all steps, triggers, cache policy, job/check names and other timeouts retained.",
+  "source_sha256": "164b758d4386390e3b2a5816cd2933f17a0bd758234d1a2bd2181b7b655b81ff",
+  "patch_sha256": "117dc2ebb2bf713c3211e421eedc1d6746bf285a20e48bbd84c0cd8eef84087f",
+  "candidate": "5a033ace85c43680ceade9212d2fe90e417d3ae8",
+  "run": 38289655686,
+  "job": 114946398302,
+  "failure": "GitHub annotation: The job has exceeded the maximum execution time of 1h0m0s. Cancelled, not a reported test failure.",
+  "before_fresh_export_seconds": 3207,
+  "fresh_export_elapsed_before_cancellation_seconds": 400,
+  "steps": [
+    {
+      "number": 1,
+      "name": "Set up job",
+      "conclusion": "success",
+      "seconds": 2.0
+    },
+    {
+      "number": 2,
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success",
+      "seconds": 14.0
+    },
+    {
+      "number": 3,
+      "name": "Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+      "conclusion": "success",
+      "seconds": 8.0
+    },
+    {
+      "number": 4,
+      "name": "Run ./.github/actions/npm-cache",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 5,
+      "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "conclusion": "success",
+      "seconds": 0.0
+    },
+    {
+      "number": 6,
+      "name": "Run sudo apt-get update",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 7,
+      "name": "Run rustup show",
+      "conclusion": "success",
+      "seconds": 14.0
+    },
+    {
+      "number": 8,
+      "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+      "conclusion": "success",
+      "seconds": 9.0
+    },
+    {
+      "number": 9,
+      "name": "Run cargo clean --profile release",
+      "conclusion": "success",
+      "seconds": 0.0
+    },
+    {
+      "number": 10,
+      "name": "Run npm ci",
+      "conclusion": "success",
+      "seconds": 20.0
+    },
+    {
+      "number": 11,
+      "name": "Run node tools/build_bridge.mjs --check",
+      "conclusion": "success",
+      "seconds": 0.0
+    },
+    {
+      "number": 12,
+      "name": "Run npm run build --workspace editor/ui",
+      "conclusion": "success",
+      "seconds": 13.0
+    },
+    {
+      "number": 13,
+      "name": "Run npm test --workspace editor/ui",
+      "conclusion": "success",
+      "seconds": 116.0
+    },
+    {
+      "number": 14,
+      "name": "Run cargo clippy -p incant_source --all-targets --profile ci --locked -j2 -- -D warnings",
+      "conclusion": "success",
+      "seconds": 22.0
+    },
+    {
+      "number": 15,
+      "name": "Run cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings",
+      "conclusion": "success",
+      "seconds": 1700.0
+    },
+    {
+      "number": 16,
+      "name": "Run cargo check -p incant_audio --features device --locked",
+      "conclusion": "success",
+      "seconds": 113.0
+    },
+    {
+      "number": 17,
+      "name": "Run cargo clippy -p incant_game_player --features native-window --all-targets --profile ci --locked -j2 -- -D warnings",
+      "conclusion": "success",
+      "seconds": 243.0
+    },
+    {
+      "number": 18,
+      "name": "Run cargo test -p incant_game_player --features native-window --all-targets --profile ci --locked -j2",
+      "conclusion": "success",
+      "seconds": 550.0
+    },
+    {
+      "number": 19,
+      "name": "Verify geometry, editor recovery and simulated frame capture",
+      "conclusion": "success",
+      "seconds": 273.0
+    },
+    {
+      "number": 20,
+      "name": "Run cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings",
+      "conclusion": "success",
+      "seconds": 98.0
+    },
+    {
+      "number": 21,
+      "name": "Verify public source edits, native Play and journal recovery",
+      "conclusion": "success",
+      "seconds": 10.0
+    },
+    {
+      "number": 22,
+      "name": "Export committed sources and execute the copied shipping game",
+      "conclusion": "cancelled",
+      "seconds": 400.0
+    },
+    {
+      "number": 23,
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 24,
+      "name": "Build and execute the shipping runtime with matched crash symbols",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 25,
+      "name": "Verify Windows executables do not require redistributable CRT DLLs",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 26,
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 27,
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 28,
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 29,
+      "name": "Verify physics commands, persistence and sandbox playback",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 30,
+      "name": "Verify strict TypeScript character walking and jumping",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 31,
+      "name": "Verify compound authoring, recovery and scripted queries",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 32,
+      "name": "Verify versioned game saves across headless process restarts",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 33,
+      "name": "Verify recorded device input, character control and mid-jump save replay",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 34,
+      "name": "Verify script-driven WAV and Vorbis mixing without an audio device",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 35,
+      "name": "Verify saved timer callbacks across headless process restarts",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 36,
+      "name": "Verify saved runtime rebinding and named input actions",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 37,
+      "name": "Verify locale switching and string tables across process restarts",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 38,
+      "name": "Verify translator exchange, atomic import and shared Undo/Redo",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 39,
+      "name": "Verify runtime navigation and saved character chase",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 40,
+      "name": "Verify weighted grid doors and blocked-route save replay",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 41,
+      "name": "Verify one hundred steering agents and saved replay",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 42,
+      "name": "Verify directed off-mesh traversal and saved replay",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 43,
+      "name": "Verify authored and saved orthographic camera projections",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 44,
+      "name": "Verify pixel-perfect camera saves preserve unsnapped simulation",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 45,
+      "name": "Verify sprite authoring and source-free saved animation",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 46,
+      "name": "Verify atlas repacking and source-free saved frame references",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 47,
+      "name": "Exercise native GPU rendering without a user account",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 48,
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 49,
+      "name": "Preserve Cargo unit timing diagnostics",
+      "conclusion": "success",
+      "seconds": 3.0
+    },
+    {
+      "number": 95,
+      "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 96,
+      "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 97,
+      "name": "Post Run actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020",
+      "conclusion": "skipped",
+      "seconds": 0.0
+    },
+    {
+      "number": 98,
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "conclusion": "success",
+      "seconds": 2.0
+    },
+    {
+      "number": 99,
+      "name": "Complete job",
+      "conclusion": "success",
+      "seconds": 1.0
+    }
+  ],
+  "repair": {
+    "Windows_job_minutes": 120,
+    "Linux_job_minutes": 60,
+    "existing_authored_export_step_minutes": 45,
+    "all_step_content_unchanged": true
+  },
+  "alternatives": "Fresh shipping targets are deliberate evidence and remain uncached/unreused. Splitting the matrix requires a new aggregate/artifact boundary. Workspace/native-window feature graph alignment is a separate measured optimization; this bounded timeout change preserves all current checks first.",
+  "checks": [
+    {
+      "name": "actionlint",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+        ".github/workflows/desktop.yml"
+      ],
+      "exit": 0,
+      "seconds": 0.1885177090007346,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "policy",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_ci_*.py"
+      ],
+      "exit": 0,
+      "seconds": 2.997876458000974,
+      "sha256": "f862044839c44614c1cfc0a100ec237cbe7905f38c512c8e73552eae4a63880c"
+    },
+    {
+      "name": "release",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_release_policy.py"
+      ],
+      "exit": 0,
+      "seconds": 0.055237374999705935,
+      "sha256": "65378dcad145da2497120819bebfc3c46534dce9714ce064b3d809a56654aca2"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.04123158299989882,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.019736041998839937,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "artifacts": {
+    "windows-desktop-cancelled.log.gz": {
+      "sha256": "7b786a364ab19f852c5fb1c3592518f307d69c64441fe1924e0f79b9050bc912",
+      "uncompressed_sha256": "0b8131f19dee8ba764bcd0cd8aafbfa1fe0551f261d525e305da99339fe40f74",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint13/windows-desktop-cancelled.log"
+    },
+    "windows-desktop-job.json.gz": {
+      "sha256": "237a737253340e8597e9227a33351afd1cd048089890bcdda109a1911557fe2b",
+      "uncompressed_sha256": "33227fe98d54c29c9d0c01871e94f377ed26da39c8fc884bf6cdb20e920e9641",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint13/windows-desktop-job.json"
+    },
+    "windows-desktop-annotations.json.gz": {
+      "sha256": "8d488a155eb215e82024530026edf98883a73c3643e4983c08f2edd794b9ca16",
+      "uncompressed_sha256": "1fc64679d543d13ac0e7b97fa6fb2e3eae44d5052a51b72539bf12772ae1406e",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint13/windows-desktop-annotations.json"
+    },
+    "terminal-state.json.gz": {
+      "sha256": "bbb3593750ed8feb5faaaaaf5e61159691a1df2e595358e209e217ad6975a87d",
+      "uncompressed_sha256": "092dc96038982b106415e178afed55b9918aa6a80975e10d899a9bfd2b0ad81d",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint13/terminal-state.json"
+    },
+    "repair.patch.gz": {
+      "sha256": "863c45fc89e20951c7c40a55de3f74022b1a218278b7e4b0c9cafdc29fda4902",
+      "uncompressed_sha256": "117dc2ebb2bf713c3211e421eedc1d6746bf285a20e48bbd84c0cd8eef84087f",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-desktop-budget-001/repair.patch"
+    },
+    "results.json.gz": {
+      "sha256": "c24269910eec38322e0187c8b60106eb05585251c53f9d041db386e5db9198b1",
+      "uncompressed_sha256": "a97b36d9749fdb44281608decfb7976605c51e694e0ef1a6e309307f4d7caf87",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-desktop-budget-001/results.json"
+    },
+    "actionlint.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-desktop-budget-001/actionlint.log"
+    },
+    "conventions.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-desktop-budget-001/conventions.log"
+    },
+    "diff.log.gz": {
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-desktop-budget-001/diff.log"
+    },
+    "policy.log.gz": {
+      "sha256": "46f11f9ed0deb6129f9af97045e6d97b59b1573e44d4ced24ce431ef81427933",
+      "uncompressed_sha256": "f862044839c44614c1cfc0a100ec237cbe7905f38c512c8e73552eae4a63880c",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-desktop-budget-001/policy.log"
+    },
+    "release.log.gz": {
+      "sha256": "afc2806ffad251b2b4edc614ef7612fc3bd1a399d599a33d2cbd588fa7a9cdba",
+      "uncompressed_sha256": "65378dcad145da2497120819bebfc3c46534dce9714ce064b3d809a56654aca2",
+      "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-desktop-budget-001/release.log"
+    }
+  },
+  "limitations": [
+    "The final shipping export and subsequent shipping/symbol/runtime checks did not run to completion on checkpoint13; no result is inferred for them.",
+    "120 minutes is an explicit bounded job allowance, not a measured completion time. Actual hosted successor must pass every required context.",
+    "No main fast-check budget or other platform/job/step timeout is changed."
+  ],
+  "independent_review": {
+    "verdict": "accepted; no findings",
+    "path": "docs/spikes/evidence/windows-desktop-checkpoint-budget-review.json",
+    "sha256": "cbf5a7183c9b34a01244a030829b2a12a29005265183701bdc96c2a2fa252f75"
+  }
+}
