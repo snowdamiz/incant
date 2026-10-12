@@ -61,6 +61,10 @@ impl<'a> SpatialView<'a> {
     pub fn binding_generation(&self) -> u64 {
         self.world.binding_generation
     }
+    /// Consumers without a text pipeline must refuse these declarations.
+    pub fn has_text(&self) -> bool {
+        !self.world.font_assets.is_empty() || !self.world.text_ids.is_empty()
+    }
     pub fn assets(&self) -> &'a [VisualAssetRef] {
         &self.world.visual_assets
     }

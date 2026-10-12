@@ -159,6 +159,9 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
         "target": target, "scene_sha256": hex(&Sha256::digest(&scene_bytes)),
         "project_sha256": hex(&Sha256::digest(text.as_bytes())), "visual_assets": visual,
         "audio_clips": audio, "compiler": compiler_manifest,
+        "font_assets": scene.font_assets().iter().map(|a| serde_json::json!({
+            "id": ulid::Ulid::from_bytes(a.id.0).to_string(), "fingerprint": hex(&a.fingerprint),
+        })).collect::<Vec<_>>(),
         "cameras": scene.spatial().iter().filter(|n| n.camera.is_some())
             .map(|n| ulid::Ulid::from_bytes(n.entity.0).to_string()).collect::<Vec<_>>(),
         "has_spatial_content": !scene.spatial().is_empty() || !scene.visual_assets().is_empty(),

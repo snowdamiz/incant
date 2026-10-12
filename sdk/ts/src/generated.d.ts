@@ -430,6 +430,12 @@ export namespace StringTableSchema {
 }
 export type StringTable = StringTableSchema.Root;
 
+export namespace TextSchema {
+  export type TextWrap = "none" | "word" | "word_or_glyph";
+  export type Root = { "content": string; "font_size": number; "fonts": Array<string>; "line_height": number; "width": number; "wrap": TextWrap };
+}
+export type Text = TextSchema.Root;
+
 export namespace TilemapSchema {
   export type TilemapLayer = { "cells": Array<string | null>; "id": string; "layer"?: number; "order"?: number; "solid"?: boolean };
   export type Root = { "cell_size": [number, number]; "layers": Array<TilemapLayer>; "size": [number, number]; "tileset": string };

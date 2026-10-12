@@ -11,6 +11,8 @@ mod scene;
 #[cfg(feature = "scene")]
 mod spatial;
 #[cfg(feature = "scene")]
+mod text;
+#[cfg(feature = "scene")]
 pub use scene::{
     CookError, cook_scene, cook_scene_with_navigation, cook_scene_with_resources, stable_id,
 };

@@ -24,6 +24,8 @@ pub struct VisualCaches<'a> {
 }
 #[derive(Debug, Error)]
 pub enum NativeRenderError {
+    #[error("native text rendering is not implemented")]
+    TextUnsupported,
     #[error("spatial input belongs to a different native world")]
     DifferentWorld,
     #[error("native animation {entity:?}: {reason}")]
@@ -109,6 +111,9 @@ impl NativeRenderInput {
         caches: VisualCaches<'_>,
         camera: StableId,
     ) -> Result<Self, NativeRenderError> {
+        if view.has_text() {
+            return Err(NativeRenderError::TextUnsupported);
+        }
         let (assets, payload_bytes) = binding::load(view.assets(), caches)?;
         let prepared = binding::prepare(view, &assets, camera)?;
         Ok(Self {

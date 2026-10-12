@@ -777,3 +777,26 @@ and reject mixed numeric/entity/animation/log prefixes on failure. The combined
 [Evidence and limits](docs/spikes/native-wasm-animation.md). Publication/integration
 against actual main117 now repeats all 281 actual-host tests and affected checks. This does not add
 blending/state machines/IK/root motion or satisfy device/complete SDK/Phase1 gates.
+
+## Native text scene and font packaging — reviewed main integration
+
+Typed Text declarations now cook into bounded v12 binary scene data with explicit
+ordered font chains and immutable recipe bindings. Structural edits and
+save/restore retain/check the same font catalog and invalidate retained consumers
+by world identity/generation. Font loading and export data packaging preflight a
+64 MiB aggregate before payload reads. The actual public command/import/cook,
+export producer and data packager feed a fresh source-deleted numerical
+Latin/Arabic/CJK shaping/atlas test. This is not a successful exported game or
+rendered text claim: plain game, legacy Play and canonical render input explicitly
+refuse Text while the composed consumer is absent. No second CLI mode was added.
+The retained composed CPU text input, actual renderer consumption/Claude
+acceptance, widget layout/IME/focus and reference-phone gates remain open.
+Evidence: [native text bindings](docs/spikes/native-text-bindings.md).
+
+
+Typed text foundation integration against actual main118 preserves all reviewed
+implementation inputs and passes 320 scoped Rust tests, Clippy, wasm32, 11 Python
+package/font controls and actual schema/generated/strict SDK checks.
+[Integration receipt](docs/spikes/evidence/native-text-bindings-main118.json).
+Composed Text startup and drawing remain separate queued work; existing consumers
+explicitly refuse Text in this foundation.

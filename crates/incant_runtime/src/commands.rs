@@ -14,6 +14,11 @@ pub const MAX_FRAME_COMMANDS: usize = 65_536;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum StructuralCommand {
+    /// Replace/remove text against the immutable startup font catalog.
+    SetText {
+        entity: StableId,
+        text: Option<std::sync::Arc<crate::NativeText>>,
+    },
     /// Replace committed runtime settings atomically; the catalog stays immutable.
     SetLocale(crate::LocaleSettings),
     /// Replace/remove checked navigation configuration at a committed boundary.
@@ -229,12 +234,14 @@ impl NativeWorld {
             commands.clear();
             return Ok(());
         }
+        let text = self.prepare_text(commands)?;
         // Component-only batches don't copy hierarchy metadata or inspect every
         // entity. In particular, toggling one mover scales with this batch.
         if commands.iter().all(|c| {
             matches!(
                 c,
                 StructuralCommand::SetLocale(_)
+                    | StructuralCommand::SetText { .. }
                     | StructuralCommand::SetVelocity { .. }
                     | StructuralCommand::SetAngularVelocity { .. }
                     | StructuralCommand::SetAngularVelocity2D { .. }
@@ -271,6 +278,7 @@ impl NativeWorld {
                         *entity
                     }
                     StructuralCommand::SetLocale(_)
+                    | StructuralCommand::SetText { .. }
                     | StructuralCommand::ControlAnimation { .. }
                     | StructuralCommand::ControlFlipbook { .. }
                     | StructuralCommand::ControlAudio { .. } => continue,
@@ -461,6 +469,7 @@ impl NativeWorld {
             self.parents = staged.parents;
             self.world.insert_resource(hierarchy);
         }
+        self.publish_text(text);
         if let Some(localization) = localization {
             self.localization = localization;
         }
@@ -530,6 +539,10 @@ impl NativeWorld {
                 StructuralCommand::Spawn(data) => {
                     if data.id == self.scene_id()
                         || self
+                            .font_assets
+                            .binary_search_by_key(&data.id, |a| a.id)
+                            .is_ok()
+                        || self
                             .visual_assets
                             .binary_search_by_key(&data.id, |a| a.id)
                             .is_ok()
@@ -557,6 +570,7 @@ impl NativeWorld {
                     navigation_changes.remove(id);
                 }
                 StructuralCommand::SetLocale(_)
+                | StructuralCommand::SetText { .. }
                 | StructuralCommand::ControlAnimation { .. }
                 | StructuralCommand::ControlFlipbook { .. }
                 | StructuralCommand::ControlAudio { .. } => {}

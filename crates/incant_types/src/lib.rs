@@ -44,3 +44,9 @@ pub use physics_2d::{AngularVelocity2D, Collider2D, ColliderShape2D};
 pub use render::{EnvironmentLight, MeshRenderer, TextureUsage};
 pub use transform::{Transform, Velocity};
 pub use visual_asset::{VisualAssetKind, VisualAssetRef};
+
+mod text;
+pub use text::{
+    FontAssetRef, MAX_SCENE_TEXT_BYTES, MAX_TEXT_BYTES, MAX_TEXT_FONTS, MAX_TEXT_NODES, Text,
+    TextLayout, TextWrap,
+};
