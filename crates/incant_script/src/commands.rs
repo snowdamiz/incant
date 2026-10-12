@@ -35,6 +35,9 @@ impl TickCommands {
             "setAnimationParameter",
             "selectAnimationState",
             "setAudioPlaying",
+            "stopAudio",
+            "restartAudio",
+            "seekAudio",
             "setAudioGain",
             "setAudioBusGain",
         ] {
@@ -129,7 +132,15 @@ fn parse<'js>(
     name: &str,
     args: &[Value<'js>],
 ) -> rquickjs::Result<StructuralCommand> {
-    if matches!(name, "setAudioPlaying" | "setAudioGain" | "setAudioBusGain") {
+    if matches!(
+        name,
+        "setAudioPlaying"
+            | "setAudioGain"
+            | "setAudioBusGain"
+            | "stopAudio"
+            | "restartAudio"
+            | "seekAudio"
+    ) {
         return crate::audio_commands::parse(ctx, name, args);
     }
     if matches!(name, "setAnimationParameter" | "selectAnimationState") {

@@ -50,6 +50,7 @@ fn source(n: u128, streaming: bool, clip: u128) -> CookedAudio {
         bus: None,
         listener: false,
         source: Some(NativeAudioSource {
+            transport_epoch: 0,
             clip: id(clip),
             bus: Some(id(1)),
             gain_db: -4.,

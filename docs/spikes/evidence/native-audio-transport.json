@@ -1,0 +1,496 @@
+{
+  "at": "2026-10-12T19:04:47.810982+00:00",
+  "base": "2c2b22fd18b8f7492b8a8ea8e6502d2e4a37be4d",
+  "source_hashes": {
+    "crates/incant_audio_runtime/src/scene.rs": "82eb26a05c30c9a3c16ee43c22e4674d7f0e6818d7b3692df01a70de7844c59c",
+    "crates/incant_audio_runtime/src/scene/checkpoint.rs": "882b68ee8140452588ec1356265c6bd15ba09c4229ae90613ddff70a4219b6f9",
+    "crates/incant_audio_runtime/src/scene/checkpoint/codec.rs": "f62ddeb443cfc3ed616d3d6d6bd2c1d7e7543d6a9633686661eec58544f6153e",
+    "crates/incant_audio_runtime/tests/checkpoints.rs": "191110ca99f9f4ab92bcdd59695f26b9399050bac29625d9968c88e7c6d31371",
+    "crates/incant_audio_runtime/tests/checkpoints/transport.rs": "3f1d5534b519f25806cc25208c5d47dc124b07e2b02a0c0f20614ce3d52e8197",
+    "crates/incant_audio_runtime/tests/scene.rs": "0f9d3b3f0509095219e2a1b1e58156f1d35427228083df930790c9bf58b3a24b",
+    "crates/incant_audio_runtime/tests/scene/transport.rs": "dd3eccf8aa0023625f264651dca9646b09456ce17cd1c154c6ec212694459bc7",
+    "crates/incant_cook/src/scene.rs": "2d946d3d8d5e1f98f7007323ed58d90a4571fa8863ab6ffd70945b8ebef7f4f5",
+    "crates/incant_game_runtime/tests/audio_checkpoints.rs": "aea4f71ec27d2e3a6891a783a87ef747783fc7b3f316be5aeb11290b64ab854b",
+    "crates/incant_game_runtime/tests/hosting.rs": "797f24284e4a99deaf4db1eb22814621d319dee801abf7c7b3f592ff8b030e62",
+    "crates/incant_game_runtime/tests/session.rs": "fc4fa30922e8addf9e1a7bb250524e8208cb07517e7a48969f46a8aa7566942b",
+    "crates/incant_render_game/tests/hosted.rs": "6f0b61ac4e83d804f6687e6c524ae3ea529d0c57e439a04f6c2fb61d97063310",
+    "crates/incant_render_gpu_host/tests/game.rs": "82ccd9ff8ffb6fae0a3fdacaa31b8b9ac23cf475c9d99b21985bbad03a82b91a",
+    "crates/incant_runtime/src/audio.rs": "554c2cd9c511c4c7a175852a192c65071105d0ab33720f69fa5c361619312eae",
+    "crates/incant_runtime/src/audio_binary.rs": "977fb2e4ce4b8d1824b77cce40e4a176438529ce845fb2bc0729799a45f0ef73",
+    "crates/incant_runtime/src/audio_controls.rs": "1480ca1a9c7722f71012098b9437164edf84d7573d48f17949d7f82314882ea3",
+    "crates/incant_runtime/src/binary.rs": "de05c4f9123cd8425f39b6c33a99098e3dd50984e5bef73db34f7ab8f799f19f",
+    "crates/incant_runtime/tests/audio.rs": "31cfa487165beb2376f4b712dc59341602128ce857ac6e179c57e11e70b534d2",
+    "crates/incant_runtime/tests/audio_controls.rs": "3a2f642c812b500df9ae047f7241c3e4bae34eccb617c1e904789ad6f598a8b9",
+    "crates/incant_runtime/tests/support/audio_controls.rs": "b9d90dce3effd2a7cbe64e5b2a7050fc88d5412836da6e7c68221f791f00f145",
+    "crates/incant_script/src/audio_commands.rs": "b3fe9dc24e81da453ebd3e80d8b82196deb424512c5a351a1aeaba2e37f5610e",
+    "crates/incant_script/src/commands.rs": "46c95361c5b6c087bc0faf4e699000bbbb15d810af0dc8fa07cbf5328011b1a3",
+    "crates/incant_script/tests/audio_controls.rs": "674a23ec8f5ef9ce69a5009842be708c69d453813ff841c4e7066290d6d8280d",
+    "crates/incant_wasm_player/src/lib.rs": "6a17d84ae2505f0141b7bc162cfad490fb68825120563ec6887b9dda1a987466",
+    "sdk/ts/src/native.d.ts": "4bc4a3dd7350e94bee2614cb05a7af315811a7eecd163fc221af81b01e834838",
+    "tools/probes/native-audio-checkpoint-export.py": "11821aedcf0298cc5ee0cf0d168888311bfc1a37e00c93835e6922b94fcdc044"
+  },
+  "source_reviews": [
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-source-20261012.json",
+      "sha256": "f09a8e7a4fc2e899c6c4f99b97c56b1558fda071f1d70f53fac6ae10bb08ae7c"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-source-followup-20261012.json",
+      "sha256": "5035670fd8b8c97714cd53546acc4e4be2871235db73f326f8ee220686acbede"
+    }
+  ],
+  "checks": [
+    {
+      "name": "mixer",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_audio_runtime",
+        "--features",
+        "scene",
+        "--test",
+        "scene",
+        "--test",
+        "checkpoints"
+      ],
+      "exit": 0,
+      "seconds": 2.6306867919993238,
+      "sha256": "503be6b63a51caaa492cf51f47daa6362f6d355346cb98df1b1fead7b83a2263",
+      "evidence_directory": "native-audio-transport-002"
+    },
+    {
+      "name": "script",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--test",
+        "audio_controls"
+      ],
+      "exit": 0,
+      "seconds": 1.5400118329998804,
+      "sha256": "af8426091735a6891e5d0a792ebaeda5e875648f30067b038e65565244fae68c",
+      "evidence_directory": "native-audio-transport-002"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_audio_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_render_game",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 367.86225874999946,
+      "sha256": "7c2456c08700016a0831bb001adeb2049428a3120817454e0b43da6170fa6900",
+      "evidence_directory": "native-audio-transport-002"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_audio_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_render_game",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 55.809786124998936,
+      "sha256": "8703f2a08f4e36f29c92e44a83e282d3db012aee82b5a01e402b7825bd956f3c",
+      "evidence_directory": "native-audio-transport-002"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 425.04349125000226,
+      "sha256": "f63aa12009cc1f68733b4d071ba316703dafc3de43995f4f81bb09ee876c4416",
+      "evidence_directory": "native-audio-transport-002"
+    },
+    {
+      "name": "remaining-adapters",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "-p",
+        "incant_wasm_player",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 40.13257295799849,
+      "sha256": "cdc2e60580e8ff3e0babb7d824b40e8eee86e9d4d6a095e3aaee323bae48e1df",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "lean-script",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--no-default-features",
+        "--features",
+        "static-module,ui,audio"
+      ],
+      "exit": 0,
+      "seconds": 25.376124416001403,
+      "sha256": "e34658ce98fbde15c3f4e35e2c1fc1fcc615b919704f236ca57489431c0ea10e",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "wasm-audio",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_audio_runtime",
+        "--features",
+        "scene",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 50.341810999998415,
+      "sha256": "4315b42e81743d2dfd874f14f31c2f33fda2d303621a0ada63738baab7b9f491",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "sdk-types",
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.8551127500031726,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "sdk-generated",
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.3243246669990185,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "bridge",
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.1492790000011155,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 3.370051332996809,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.1220080000020971,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "dependency-guard",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_runtime",
+        "incant_script",
+        "incant_audio_runtime",
+        "incant_game_runtime",
+        "incant_wasm_player",
+        "--features",
+        "incant_audio_runtime/scene"
+      ],
+      "exit": 0,
+      "seconds": 1.7927128749979602,
+      "sha256": "750e0f224cb6fa670f98b002fd4a19fdfebe0756d9411fe6c40bbe873740a81a",
+      "evidence_directory": "native-audio-transport-checks-003"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0701861249981448,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "evidence_directory": "native-audio-transport-checks-003"
+    }
+  ],
+  "tests": {
+    "passed": 530,
+    "groups": 75,
+    "failed": 0,
+    "ignored": 0,
+    "focused_tests_overlap": true
+  },
+  "artifacts": [
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-001/freeze.json.gz",
+      "sha256": "0bdc0f87de3cbbc53ddeaf2fba1c152eb110f0711022baffc8759d8f13e533c8",
+      "raw_sha256": "dd75a38f5d2bb243332a49d8bbfa8575af09ef6317b4a624bcbfbdfed3b8f9d3",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-001/freeze.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-001/mixer.log.gz",
+      "sha256": "f1b99bbd329a15790f9a037247bbcce0360bd708bba37deeb82ff5c0d90fa546",
+      "raw_sha256": "12fdc784f9b60181a329a76573abfc9bc33709a7e18f977e3755913ffeaefe74",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-001/mixer.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-001/results.json.gz",
+      "sha256": "0664315a9b301857677405d344d745a5d54a36f8a6c0026fe3f16235740b118b",
+      "raw_sha256": "5bf29ed2cf78f32e1e7afaaa17ce567699765d0045de44ec05191d621f73de09",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-001/results.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-001/runtime.log.gz",
+      "sha256": "f92ab539dfbff9e7a12ca0c7581879ecd6a482f10a2e7c0d48a8c1ebb06c320c",
+      "raw_sha256": "de9c1f7039f4d4effc35a141a0bbae6b1fc67c0f87418b06b11cee34e452b4e0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-001/runtime.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-001/script.log.gz",
+      "sha256": "6195f727677f099889e14cdb989ee5b64853b1cb8e409ceb5b63149636477f34",
+      "raw_sha256": "8c70253d661423162f2d10fbb07ec719a48ef5ac9ba53dec4f100443dc1da8ec",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-001/script.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-001/source-inventory.json.gz",
+      "sha256": "45e3a83d8ba64e7b1f9c497e0a3f016f8d173a748665bad6d5d8527510c281ce",
+      "raw_sha256": "621a3b970c8f87ff1932e394ccf327384006541d28c394924617f12e6ebd1fa0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-001/source-inventory.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/clippy.log.gz",
+      "sha256": "ec8a97d5698f5b5a52a762630debbd44e73472450921e6c0682c2a73c403c01f",
+      "raw_sha256": "8703f2a08f4e36f29c92e44a83e282d3db012aee82b5a01e402b7825bd956f3c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/clippy.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/freeze.json.gz",
+      "sha256": "74db3453073abe83646b526cc407921293dacaeeafb1a32640e35ae234f0958d",
+      "raw_sha256": "c2641bcf50a13feaf1d3b150d899157e7fb963d9577ac7db1f0f8ef94d3947d4",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/freeze.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/headless.log.gz",
+      "sha256": "3947b7d5c37624aa9e559f0660f00e06026e9f622940804a6ba0fe649796a760",
+      "raw_sha256": "f63aa12009cc1f68733b4d071ba316703dafc3de43995f4f81bb09ee876c4416",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/headless.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/mixer.log.gz",
+      "sha256": "6a7977d21723ff25deecb5d47592081467ab5e221e5718c7a8e9342bacf6cc48",
+      "raw_sha256": "503be6b63a51caaa492cf51f47daa6362f6d355346cb98df1b1fead7b83a2263",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/mixer.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/results.json.gz",
+      "sha256": "67c209387dd57024da9896b4850a97fc240ac17e5f666bb4e620d8b18a900f92",
+      "raw_sha256": "4f0c305e688b4ca479ef004eb971b2b78dec4205218717b44a63f9065a80d3b7",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/results.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/script.log.gz",
+      "sha256": "b5417e714e6a1ef9b1dad9240aabffbe67383a6ddbdd8037caec4f059bc354b9",
+      "raw_sha256": "af8426091735a6891e5d0a792ebaeda5e875648f30067b038e65565244fae68c",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/script.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/terminal.json.gz",
+      "sha256": "9b0c04630087f655ffccfb0dfb3ceab8ecaf0de5540826622736381d6072b117",
+      "raw_sha256": "cf062b6882900e58a6487b4428d0fad4a19a7c2be1fe37681bebbec379f7e369",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/terminal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/tests.log.gz",
+      "sha256": "db8e3efd70a8f285443e47fc632b2dd0a869ee3011916f5d13f83dfb49db120c",
+      "raw_sha256": "7c2456c08700016a0831bb001adeb2049428a3120817454e0b43da6170fa6900",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-002/tests.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/bridge.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/bridge.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/conventions.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/conventions.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/dependency-guard.log.gz",
+      "sha256": "eb2a99a07961043f4ef3103030df5725b8e6c80aae2191239be60f2e471386fd",
+      "raw_sha256": "750e0f224cb6fa670f98b002fd4a19fdfebe0756d9411fe6c40bbe873740a81a",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/dependency-guard.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/diff.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/diff.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/fmt.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/fmt.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/lean-script.log.gz",
+      "sha256": "0d5058865f43811753b4baa9be45305914bb22563b88d5f060c07874ad5e16a2",
+      "raw_sha256": "e34658ce98fbde15c3f4e35e2c1fc1fcc615b919704f236ca57489431c0ea10e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/lean-script.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/remaining-adapters.log.gz",
+      "sha256": "d2e56115f1fa57b7f0e3838213c737209c6b8c3ce88e5a8c3640a5f22ed9d81a",
+      "raw_sha256": "cdc2e60580e8ff3e0babb7d824b40e8eee86e9d4d6a095e3aaee323bae48e1df",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/remaining-adapters.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/results.json.gz",
+      "sha256": "11a828627bbc9c1c292088cb29615dc58938a1da26515744de2b118a9644a66e",
+      "raw_sha256": "465760ac272b6ef70ed250039c477a93b86a01fff544cdc62bcdaa9345e93589",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/results.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/sdk-generated.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/sdk-generated.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/sdk-types.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/sdk-types.log"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/terminal.json.gz",
+      "sha256": "a38cd4373291b378bd4e85ea6c86716697ee879d0d3128fa51c5886591129e7a",
+      "raw_sha256": "45401595f92ba9dd4097dd83c29dc51e8e6ecab5036422b277801584d8f4f258",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/terminal.json"
+    },
+    {
+      "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-checks-003/wasm-audio.log.gz",
+      "sha256": "4275bb6fac1289d696ff7f460f19f8ee64705ccf07ee197b066660be0f48c1fc",
+      "raw_sha256": "4315b42e81743d2dfd874f14f31c2f33fda2d303621a0ada63738baab7b9f491",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-checks-003/wasm-audio.log"
+    }
+  ],
+  "freeze": {
+    "inputs": 1308,
+    "unchanged": true,
+    "path": "docs/spikes/evidence/native-audio-transport/native-audio-transport-002/freeze.json.gz"
+  },
+  "shipping": {
+    "status": "pending fresh ordinary transport export",
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-shipping-001",
+    "handle": 94140
+  },
+  "limits": [
+    "No physical-device or phone performance gate",
+    "Wasm/audio declaration query parity still follows",
+    "No Core Sample music binding or phase completion"
+  ]
+}

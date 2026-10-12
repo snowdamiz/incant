@@ -51,8 +51,18 @@ export interface NativeCommands {
   /** Desired playing state for an existing source. False pauses its retained
    * cursor; true starts an unstarted source or resumes a paused one. Unchanged
    * true does not replay an ended voice. False then true needs separate sync
-   * points to create a new edge; this API does not expose stop/restart. */
+   * points to create a new edge; use restartAudio for an explicit replay. */
   setAudioPlaying(id: NativeId, playing: boolean): void;
+  /** Explicit ordered transport requests. Stop resets to the beginning without
+   * playback; restart resets and plays, including completed one-shot voices.
+   * Commands publish only after native transaction acceptance. Retired voices
+   * drain before replacements begin; no overlapping playback is introduced. */
+  stopAudio(id: NativeId): void;
+  restartAudio(id: NativeId): void;
+  /** Finite [0,3600] seconds, within the clip duration checked by the audio host.
+   * Preserves desired playing state. Seeking to the same position still resets
+   * the cursor; repeated setAudioPlaying(true) remains a no-op. */
+  seekAudio(id: NativeId, seconds: number): void;
   /** Source gain in finite [-80,24] dB, preserving clip, cursor and routing. */
   setAudioGain(id: NativeId, gainDb: number): void;
   /** Gain for an existing bus in finite [-80,24] dB; preserves bus topology.

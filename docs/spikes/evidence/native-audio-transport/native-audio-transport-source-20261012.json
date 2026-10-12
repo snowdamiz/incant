@@ -1,0 +1,50 @@
+{
+  "decision": "accepted-scoped-source",
+  "reviewer": "astra independent runtime_review",
+  "base": "2c2b22fd18b8f7492b8a8ea8e6502d2e4a37be4d",
+  "inventory": "/Users/andreyyurlov/.codex/incant-evidence/native-audio-transport-001/source-inventory.json",
+  "inventory_sha256": "621a3b970c8f87ff1932e394ccf327384006541d28c394924617f12e6ebd1fa0",
+  "sources": {
+    "crates/incant_audio_runtime/src/scene.rs": "82eb26a05c30c9a3c16ee43c22e4674d7f0e6818d7b3692df01a70de7844c59c",
+    "crates/incant_audio_runtime/src/scene/checkpoint.rs": "882b68ee8140452588ec1356265c6bd15ba09c4229ae90613ddff70a4219b6f9",
+    "crates/incant_audio_runtime/src/scene/checkpoint/codec.rs": "f62ddeb443cfc3ed616d3d6d6bd2c1d7e7543d6a9633686661eec58544f6153e",
+    "crates/incant_audio_runtime/tests/checkpoints.rs": "191110ca99f9f4ab92bcdd59695f26b9399050bac29625d9968c88e7c6d31371",
+    "crates/incant_audio_runtime/tests/checkpoints/transport.rs": "ecad7393de7fea0c0ffef64dce4eeb352bc6ec0b2518698a926fd8a4014a70fa",
+    "crates/incant_audio_runtime/tests/scene.rs": "0f9d3b3f0509095219e2a1b1e58156f1d35427228083df930790c9bf58b3a24b",
+    "crates/incant_audio_runtime/tests/scene/transport.rs": "dd3eccf8aa0023625f264651dca9646b09456ce17cd1c154c6ec212694459bc7",
+    "crates/incant_cook/src/scene.rs": "2d946d3d8d5e1f98f7007323ed58d90a4571fa8863ab6ffd70945b8ebef7f4f5",
+    "crates/incant_game_runtime/tests/audio_checkpoints.rs": "aea4f71ec27d2e3a6891a783a87ef747783fc7b3f316be5aeb11290b64ab854b",
+    "crates/incant_game_runtime/tests/hosting.rs": "797f24284e4a99deaf4db1eb22814621d319dee801abf7c7b3f592ff8b030e62",
+    "crates/incant_game_runtime/tests/session.rs": "fc4fa30922e8addf9e1a7bb250524e8208cb07517e7a48969f46a8aa7566942b",
+    "crates/incant_render_game/tests/hosted.rs": "6f0b61ac4e83d804f6687e6c524ae3ea529d0c57e439a04f6c2fb61d97063310",
+    "crates/incant_render_gpu_host/tests/game.rs": "82ccd9ff8ffb6fae0a3fdacaa31b8b9ac23cf475c9d99b21985bbad03a82b91a",
+    "crates/incant_runtime/src/audio.rs": "554c2cd9c511c4c7a175852a192c65071105d0ab33720f69fa5c361619312eae",
+    "crates/incant_runtime/src/audio_binary.rs": "977fb2e4ce4b8d1824b77cce40e4a176438529ce845fb2bc0729799a45f0ef73",
+    "crates/incant_runtime/src/audio_controls.rs": "1480ca1a9c7722f71012098b9437164edf84d7573d48f17949d7f82314882ea3",
+    "crates/incant_runtime/src/binary.rs": "de05c4f9123cd8425f39b6c33a99098e3dd50984e5bef73db34f7ab8f799f19f",
+    "crates/incant_runtime/tests/audio.rs": "31cfa487165beb2376f4b712dc59341602128ce857ac6e179c57e11e70b534d2",
+    "crates/incant_runtime/tests/audio_controls.rs": "3a2f642c812b500df9ae047f7241c3e4bae34eccb617c1e904789ad6f598a8b9",
+    "crates/incant_runtime/tests/support/audio_controls.rs": "b9d90dce3effd2a7cbe64e5b2a7050fc88d5412836da6e7c68221f791f00f145",
+    "crates/incant_script/src/audio_commands.rs": "b3fe9dc24e81da453ebd3e80d8b82196deb424512c5a351a1aeaba2e37f5610e",
+    "crates/incant_script/src/commands.rs": "46c95361c5b6c087bc0faf4e699000bbbb15d810af0dc8fa07cbf5328011b1a3",
+    "crates/incant_script/tests/audio_controls.rs": "f43f1536d46852c4a10eef0acea3ee8563c42f215688a4c0d5dd655f1be72c9c",
+    "crates/incant_wasm_player/src/lib.rs": "6a17d84ae2505f0141b7bc162cfad490fb68825120563ec6887b9dda1a987466",
+    "sdk/ts/src/native.d.ts": "4bc4a3dd7350e94bee2614cb05a7af315811a7eecd163fc221af81b01e834838",
+    "tools/probes/native-audio-checkpoint-export.py": "11821aedcf0298cc5ee0cf0d168888311bfc1a37e00c93835e6922b94fcdc044"
+  },
+  "findings": [],
+  "reviewed_invariants": [
+    "Ordered stop/restart/seek increments checked u64 identity only in staged final audio declarations; overflow and invalid scalar/role preserve prior world and queue.",
+    "Unchanged SetPlaying preserves old pause/resume behavior; explicit transport epoch forces existing bounded retirement/replacement path without cursor approximation or unacknowledged voice overlap.",
+    "Scene v19 appends epochs only for nonzero transport sources; old writers retain prior versions/bytes. Reader bounds and mandatory capability predicates remain checked.",
+    "Audio checkpoint v2 uses bounded 33-byte source rows and validates consumed epoch against the exact world before restoring mixer; all-zero owners retain v1 encoding.",
+    "Primitive TS args and existing caught-command poisoning preserve whole-tick rejection. No authoring or backend action from command parser.",
+    "Actual source tests cover repeated ended static/stream replay, stopped seek, ordered controls, epoch precision/exhaustion, consumed-world mismatch and PCM continuation."
+  ],
+  "limitations": [
+    "Read-only source review; no tests/build/native output launched by reviewer.",
+    "Broad checks and actual ordinary public package proof still require executed evidence audit.",
+    "Device callback timing, rendering and Wasm transport parity are outside this acceptance.",
+    "Clip-duration admission remains the existing audio-host boundary; a failed composed host sync is terminal and must not be represented as live-world rollback."
+  ]
+}
