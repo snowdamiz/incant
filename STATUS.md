@@ -18,6 +18,15 @@ visual work, and Astra owns correctness and integration.
 
 ## Current milestone
 
+Native two-input crossfade clocks and controls now retain independent outgoing
+playback, pause both inputs, finish at explicit endpoints and persist active
+transitions in world-save v5/session checkpoints. Older v4 animation saves keep
+their encoding. The local core passed 319 runtime/script tests and scoped Clippy;
+independent review accepted the exact sources. Canonical render binding and
+TypeScript/Wasm crossfade APIs remain active follow-ups; this is not full blend
+trees, state machines, IK or root motion. See
+[the crossfade evidence](docs/spikes/native-animation-crossfades.md).
+
 The project is still building the Phase 1 core engine. Native simulation,
 authored scripting, imports, physics, audio, input and source-free exports have
 working, tested paths, but the complete Core Sample and its device gates remain

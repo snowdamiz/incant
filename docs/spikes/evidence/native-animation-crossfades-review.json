@@ -1,0 +1,35 @@
+{
+  "reviewer": "astra",
+  "time": "2026-10-12T02:05:42.027538+00:00",
+  "base": "c4e94f80c52b5dd16bf27138727eb7b4bf2c8f1b",
+  "source": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant",
+  "reviewed_sources": {
+    "crates/incant_types/src/animation.rs": "54b61c80f6dfd1dbf503472d5154081d0d78ff6b2bf232d95e2165af81d634fa",
+    "crates/incant_types/src/lib.rs": "1853d3c28e9590de9132c7146b82753c1fde9e392e3afd84e3f8c5b4939385f5",
+    "crates/incant_runtime/src/animation.rs": "f26eb59d372753bd62c93aab4792c41b7747c602a4ebc7e68c66195ebb85f25b",
+    "crates/incant_runtime/src/lib.rs": "30f31f11dcb63598d4207ca9a869ca81b8257b293d775177beb7e70efad5be26",
+    "crates/incant_runtime/src/save.rs": "fed97f3476dfbc4215512d0d330cd278937e108083a5b768d9dabcbe0890d4ec",
+    "crates/incant_runtime/src/save/codec.rs": "cb96135b247f07abb3ce9facb28469005fb6566b64b3b6e67b74365da8f7ca68",
+    "crates/incant_runtime/tests/animation.rs": "f0e8944745b3150f0c883ab3ab2c065040e1c1e9cd2dc288b06112be1afd7087",
+    "crates/incant_runtime/tests/animation/crossfade.rs": "b064e248c1561628f9c83cd1d838db0901b38106e32bdeb17b9a1cc8c692e9c6",
+    "crates/incant_script/src/animations.rs": "943a16c43d37a33c6ccbab759128bdbfa3a05c6e37952bafca71b2966a1a250b",
+    "crates/incant_script/src/checkpoint/pending.rs": "9be45ce310e52a148e1da030360e1d1d239d8181f0c6adeed2b6db3a9103bccb",
+    "crates/incant_script/src/checkpoint/tests/animation.rs": "92d14e42efb1ba89d991a55fea511c4e98dfefd0b6592a0c512dfa09c1516eb7"
+  },
+  "findings": [],
+  "scope": [
+    "typed transition control and fixed clock advancement",
+    "v5 bound save72byte animation rows, v4 compatibility, mixed row validation",
+    "trusted NativeSession v5 pending admission and ordinary-load replay controls"
+  ],
+  "limitations": [
+    "Read-only source review. Root reports319 scoped tests and Clippy passed; final test-only focused rerun remains root-owned. No tests re-executed by reviewer.",
+    "Native/render extraction, TS control exposure, actual renderer and appearance are subsequent integration work"
+  ],
+  "contract_note": "Captured paused outgoing source is explicit and now tested as actual non-rest clip0.4.",
+  "final_freeze": {
+    "path": "/tmp/incant-native-crossfade-source-freeze-002.json",
+    "sha256": "c702391e3864010d1ba579f8da8a245ae507a9ccb5ef58b77eb21507ab670bde"
+  },
+  "followup": "Reviewed source-derived accumulation-roundoff finish bound at60s/240Hz and observable paused outgoing clip0.4, failed-tick preservation,60/120/216/240Hz endpoint controls. No actionable findings."
+}

@@ -131,11 +131,11 @@ impl NativeWorld {
         )
     }
 
-    /// Load validated data without source/project/asset-cache access. V2–v4 retain
+    /// Load validated data without source/project/asset-cache access. V2–v5 retain
     /// the original cooked-scene fingerprint for later program pairing; it is not
     /// authentication and does not restore a VM. Legacy v1 has no original binding
     /// field: its fingerprint describes only the saved plain scene. V3 adds localized
-    /// scenes and v4 adds animation playback; older saves cannot silently clear
+    /// scenes, v4 adds animation playback, and v5 adds active crossfades; older saves cannot silently clear
     /// an existing locale/catalog.
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
@@ -170,7 +170,9 @@ impl NativeWorld {
             .iter()
             .filter(|n| n.animation.is_some())
             .count();
-        if decoded.animations.len() != expected_animations * codec::ANIMATION_BYTES {
+        if decoded.animations.len()
+            != expected_animations * codec::animation_stride(decoded.version)
+        {
             return Err(SaveError::Invalid("animation membership"));
         }
         let mut world = Self::new(scene);
@@ -191,8 +193,7 @@ impl NativeWorld {
         }
         for row in decoded
             .animations
-            .as_chunks::<{ codec::ANIMATION_BYTES }>()
-            .0
+            .chunks_exact(codec::animation_stride(decoded.version))
         {
             let (id, state) = codec::animation(row)?;
             let entity = *world

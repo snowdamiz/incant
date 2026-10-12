@@ -9,12 +9,20 @@ const HEADER: usize = 64;
 const EXTENSION: usize = 40;
 pub(super) const STATE_BYTES: usize = 28;
 pub(super) const ANIMATION_BYTES: usize = 36;
+const TRANSITION_ANIMATION_BYTES: usize = 72;
+pub(super) fn animation_stride(version: u32) -> usize {
+    if version >= 5 {
+        TRANSITION_ANIMATION_BYTES
+    } else {
+        ANIMATION_BYTES
+    }
+}
 pub const MAX_SAVE_BYTES: usize = HEADER
     + EXTENSION
     + 4
     + crate::binary::MAX_SCENE_BYTES
     + crate::MAX_SPRITE_ENTITIES * STATE_BYTES
-    + crate::MAX_MESH_ENTITIES * ANIMATION_BYTES;
+    + crate::MAX_MESH_ENTITIES * TRANSITION_ANIMATION_BYTES;
 
 pub(super) fn encode(
     tick: u64,
@@ -29,10 +37,21 @@ pub(super) fn encode(
     {
         return Err(SaveError::Invalid("save capacity"));
     }
-    let version = if animations.is_empty() { 3u32 } else { 4 };
-    let extension = EXTENSION + usize::from(version == 4) * 4;
-    let length =
-        extension + scene.len() + states.len() * STATE_BYTES + animations.len() * ANIMATION_BYTES;
+    let version = if animations.is_empty() {
+        3u32
+    } else if animations
+        .iter()
+        .any(|(_, state)| state.transition.is_some())
+    {
+        5
+    } else {
+        4
+    };
+    let extension = EXTENSION + usize::from(version >= 4) * 4;
+    let length = extension
+        + scene.len()
+        + states.len() * STATE_BYTES
+        + animations.len() * animation_stride(version);
     let mut bytes = Vec::with_capacity(HEADER + length);
     bytes.extend(MAGIC);
     bytes.extend(version.to_le_bytes());
@@ -43,7 +62,7 @@ pub(super) fn encode(
     bytes.extend(origin);
     bytes.extend((scene.len() as u32).to_le_bytes());
     bytes.extend((states.len() as u32).to_le_bytes());
-    if version == 4 {
+    if version >= 4 {
         bytes.extend((animations.len() as u32).to_le_bytes());
     }
     bytes.extend(scene);
@@ -63,6 +82,22 @@ pub(super) fn encode(
         bytes.push(0);
         bytes.extend(state.sample.seconds.to_le_bytes());
         bytes.extend(state.speed.to_le_bytes());
+        if version >= 5 {
+            if let Some(transition) = state.transition {
+                bytes.extend(transition.source.clip.unwrap_or(u16::MAX).to_le_bytes());
+                bytes.push(u8::from(transition.playing) | u8::from(transition.looping) << 1 | 4);
+                bytes.push(0);
+                bytes.extend(transition.source.seconds.to_le_bytes());
+                bytes.extend(transition.speed.to_le_bytes());
+                bytes.extend(transition.elapsed.to_le_bytes());
+                bytes.extend(transition.duration.to_le_bytes());
+            } else {
+                bytes.resize(
+                    bytes.len() + TRANSITION_ANIMATION_BYTES - ANIMATION_BYTES,
+                    0,
+                );
+            }
+        }
     }
     let digest = checksum(&bytes);
     bytes[32..HEADER].copy_from_slice(&digest);
@@ -77,7 +112,7 @@ pub(super) struct Decoded<'a> {
     pub animations: &'a [u8],
 }
 pub(super) fn is_bound(bytes: &[u8]) -> bool {
-    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=4)
+    matches!(u32::from_le_bytes(bytes[8..12].try_into().unwrap()), 2..=5)
 }
 pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
     if !(HEADER..=MAX_SAVE_BYTES).contains(&bytes.len()) {
@@ -87,7 +122,7 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         return Err(SaveError::Invalid("magic"));
     }
     let version = u32::from_le_bytes(bytes[8..12].try_into().unwrap());
-    if !(1..=4).contains(&version) {
+    if !(1..=5).contains(&version) {
         return Err(SaveError::Version(version));
     }
     if bytes[12..16] != [0; 4] {
@@ -110,23 +145,23 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
             animations: &[],
         });
     }
-    let extension = EXTENSION + usize::from(version == 4) * 4;
+    let extension = EXTENSION + usize::from(version >= 4) * 4;
     if bytes.len() < HEADER + extension {
         return Err(SaveError::Invalid("bound save header"));
     }
     let origin = bytes[64..96].try_into().unwrap();
     let scene_len = u32::from_le_bytes(bytes[96..100].try_into().unwrap()) as usize;
     let count = u32::from_le_bytes(bytes[100..104].try_into().unwrap()) as usize;
-    let animation_count = if version == 4 {
+    let animation_count = if version >= 4 {
         u32::from_le_bytes(bytes[104..108].try_into().unwrap()) as usize
     } else {
         0
     };
     if animation_count > crate::MAX_MESH_ENTITIES
-        || (version == 4 && animation_count == 0)
+        || (version >= 4 && animation_count == 0)
         || scene_len > crate::binary::MAX_SCENE_BYTES
         || count > crate::MAX_SPRITE_ENTITIES
-        || extension + scene_len + count * STATE_BYTES + animation_count * ANIMATION_BYTES
+        || extension + scene_len + count * STATE_BYTES + animation_count * animation_stride(version)
             != bytes.len() - HEADER
     {
         return Err(SaveError::Invalid("bound section lengths"));
@@ -142,12 +177,17 @@ pub(super) fn decode(bytes: &[u8]) -> Result<Decoded<'_>, SaveError> {
         previous = Some(id);
     }
     let mut previous = None;
-    for row in animations.as_chunks::<ANIMATION_BYTES>().0 {
-        let (id, _) = animation(row)?;
+    let mut has_transition = false;
+    for row in animations.chunks_exact(animation_stride(version)) {
+        let (id, state) = animation(row)?;
+        has_transition |= state.transition.is_some();
         if previous.is_some_and(|p| p >= id) {
             return Err(SaveError::Invalid("animation canonical order"));
         }
         previous = Some(id);
+    }
+    if version >= 5 && !has_transition {
+        return Err(SaveError::Invalid("animation transition membership"));
     }
     Ok(Decoded {
         version,
@@ -172,12 +212,34 @@ pub(super) fn state(row: &[u8; STATE_BYTES]) -> Result<(StableId, FlipbookCheckp
         },
     ))
 }
-pub(super) fn animation(
-    row: &[u8; ANIMATION_BYTES],
-) -> Result<(StableId, crate::AnimationState), SaveError> {
+pub(super) fn animation(row: &[u8]) -> Result<(StableId, crate::AnimationState), SaveError> {
+    if !matches!(row.len(), ANIMATION_BYTES | TRANSITION_ANIMATION_BYTES) {
+        return Err(SaveError::Invalid("animation row size"));
+    }
     if row[18] > 7 || row[19] != 0 {
         return Err(SaveError::Invalid("animation flags"));
     }
+    let transition = if row.len() == TRANSITION_ANIMATION_BYTES && row[38] & 4 != 0 {
+        if row[38] > 7 || row[39] != 0 {
+            return Err(SaveError::Invalid("animation transition flags"));
+        }
+        Some(crate::AnimationTransition {
+            source: crate::animation_binary::sample(
+                u16::from_le_bytes(row[36..38].try_into().unwrap()),
+                f64::from_le_bytes(row[40..48].try_into().unwrap()),
+            ),
+            playing: row[38] & 1 != 0,
+            looping: row[38] & 2 != 0,
+            speed: f64::from_le_bytes(row[48..56].try_into().unwrap()),
+            elapsed: f64::from_le_bytes(row[56..64].try_into().unwrap()),
+            duration: f64::from_le_bytes(row[64..72].try_into().unwrap()),
+        })
+    } else {
+        if row[ANIMATION_BYTES..].iter().any(|byte| *byte != 0) {
+            return Err(SaveError::Invalid("animation absent transition"));
+        }
+        None
+    };
     Ok((
         StableId(row[..16].try_into().unwrap()),
         crate::AnimationState {
@@ -189,6 +251,7 @@ pub(super) fn animation(
             playing: row[18] & 1 != 0,
             looping: row[18] & 2 != 0,
             completed: row[18] & 4 != 0,
+            transition,
         },
     ))
 }
