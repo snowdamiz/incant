@@ -78,6 +78,18 @@ pass; PR #113 merged the fixture correction. Checkpoint7 Windows desktop and
 Wasm conformance both pass.
 [Journal test evidence](docs/spikes/checkpoint6-budget-journal-tests.md).
 
+## Checkpoint9 agent fixture correction
+
+The frozen main132 release run reaches the same pre-provider test assertion in
+Linux/macOS/Windows credential checks and Linux desktop tests: the old fixed
+allowance is smaller than the current generated tool input. Only that fixture
+now derives its allowance from the current catalog, retaining exact redaction,
+conservative full charging and no-mutation assertions. The unchanged baseline
+fails locally; all 108 agent tests and Clippy pass after the correction, with
+independent source/evidence review. Checkpoint9 remains failed and unpromoted;
+actual cross-platform repair validation needs a later frozen batch.
+[Evidence](docs/spikes/checkpoint9-agent-fixture.md).
+
 ## Latest comprehensive release baseline
 
 Checkpoint8 promoted frozen main117 into release at

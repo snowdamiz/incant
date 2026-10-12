@@ -262,7 +262,11 @@ fn unknown_failure_redacts_provider_content_and_reserves_unknown_usage() {
     };
     let mut bus = CommandBus::new(Project::empty("test")).unwrap();
     let mut a = agent();
-    a.budget.max_tokens = 20000;
+    // Leave room for the current tool catalog and this fixed prompt, then let
+    // input admission cap the requested output. A fixed total allowance can
+    // refuse before this provider-failure test reaches its stream fixture.
+    a.budget.max_tokens = serde_json::to_vec(&tools()).unwrap().len() as u64 + 16_384;
+    a.max_output_tokens = a.budget.max_tokens;
     let error = a
         .run(
             &mut provider,
@@ -279,7 +283,9 @@ fn unknown_failure_redacts_provider_content_and_reserves_unknown_usage() {
         error.to_string(),
         "provider: provider reported a failed response"
     );
+    assert!(provider.requested_output >= 64);
     assert!(provider.requested_output < a.max_output_tokens);
+    assert_eq!(a.budget.used_tokens, a.budget.max_tokens);
     assert_eq!(a.budget.remaining(), 0);
     assert_eq!(bus.revision(), 0);
 }
