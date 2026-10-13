@@ -1977,3 +1977,13 @@ seven precise refusals. Owned emulator resources are removed. The earlier comple
 fast shipping proof stays explicitly pre-PCM; no later fast archive rebuild is
 claimed. Final independent review is accepted; publication awaits its fast check. No phone/rendering/performance gate
 is approved. [Scope and evidence](docs/spikes/authored-android-main181.md).
+
+## Authored iOS static Wasm — current-main proof complete
+
+Main185 composition retains Android TypeScript and explicitly refuses Android
+static modules. The frozen current source passes 62 cooker tests and scoped
+checks, two fresh simulator shipping archives, twelve actual C/Swift positives
+and fifty-two exact refusals with full native-oracle/log/PCM parity. Final
+independent integration review is pending. Original device links remain
+producer-scoped; no phone, rendering or phase gate is claimed.
+[Current evidence](docs/spikes/authored-ios-wasm-main185.md).

@@ -1,0 +1,870 @@
+{
+  "at": "2026-10-13T01:59:11.648605+00:00",
+  "tested_head": "4b277d577c6627e98e407b2c25daf274a99fd406",
+  "base_main": "d5702546b34fcc6452a9fe2b22a0e2b23802991a",
+  "review_head": "4b277d577c6627e98e407b2c25daf274a99fd406",
+  "source_freeze": {
+    "path": "docs/spikes/evidence/authored-ios-wasm-main185/freeze.json",
+    "sha256": "d6b75b9f95c2bdb550660737c54b71ecb89d89ee076c8fbc9bc3eef81cf0c6da",
+    "count": 2001
+  },
+  "sources": [
+    {
+      "path": "crates/incant_cook/src/project_build.rs",
+      "sha256": "db7db3ea7d4498f9a84619b7617ea48fee8caef897bd6a3a074d46f18d0c2ed0",
+      "producer_sha256": "beefd01c8840afce7fa2b97878968dae05df1196d7e8ef01c0ccd57ef5ea87cd",
+      "equal": false
+    },
+    {
+      "path": "crates/incant_cook/src/project_build_wasm.rs",
+      "sha256": "6fbae81e5df2c801e4f3bea2b31fa27baaa1e1d7de64c279fca72251450533f7",
+      "producer_sha256": "6fbae81e5df2c801e4f3bea2b31fa27baaa1e1d7de64c279fca72251450533f7",
+      "equal": true
+    },
+    {
+      "path": "crates/incant_cook/tests/mobile_project.rs",
+      "sha256": "50a0a67e7d9627c7051dce8fa66d6af5cec823b0382e71e2715f40beca721060",
+      "producer_sha256": "79d0cc4a85f85ab1103cd4e11cfe5f8f5947a39289a707eaf3fe8a67d0073062",
+      "equal": false
+    },
+    {
+      "path": "tools/export_ios.py",
+      "sha256": "0880ea37aae5e33e9198b40a0892bbfd845d065ee17225304751db210327f08e",
+      "producer_sha256": "0880ea37aae5e33e9198b40a0892bbfd845d065ee17225304751db210327f08e",
+      "equal": true
+    },
+    {
+      "path": "tools/ios_archive.py",
+      "sha256": "a2ef9fb097239c34781d0dd9cbddea826f8d7acc70a0834e65726852ab71dcd7",
+      "producer_sha256": "a2ef9fb097239c34781d0dd9cbddea826f8d7acc70a0834e65726852ab71dcd7",
+      "equal": true
+    },
+    {
+      "path": "tools/ios_wasm.py",
+      "sha256": "4662e6377ca8fca08b1de1df4a5c971c6aace49659d2dd5635b67afe62626105",
+      "producer_sha256": "4662e6377ca8fca08b1de1df4a5c971c6aace49659d2dd5635b67afe62626105",
+      "equal": true
+    },
+    {
+      "path": "tools/native_wasm.py",
+      "sha256": "2a8c07efe96e52d0dd1b2e61dcaca3ba4926e10ed88cecb738b0711def7fbe6a",
+      "producer_sha256": "2a8c07efe96e52d0dd1b2e61dcaca3ba4926e10ed88cecb738b0711def7fbe6a",
+      "equal": true
+    },
+    {
+      "path": "tools/probes/authored-ios-wasm/prepare.py",
+      "sha256": "87e609e3229ea2d294ebbf509d5b4313d81f023dd3975e14ac28ad3fb021269a",
+      "producer_sha256": "87e609e3229ea2d294ebbf509d5b4313d81f023dd3975e14ac28ad3fb021269a",
+      "equal": true
+    },
+    {
+      "path": "tools/probes/authored-ios-wasm/verify.py",
+      "sha256": "f9dd98012d6043be7fa0e00c3addf1fc2d47327c02d858cb95fcd5e97c5c918a",
+      "producer_sha256": "f9dd98012d6043be7fa0e00c3addf1fc2d47327c02d858cb95fcd5e97c5c918a",
+      "equal": true
+    },
+    {
+      "path": "tools/tests/fixtures/ios-wasm-cargo.txt",
+      "sha256": "0e4122134a8f1cdad5408913753d2e15d1a42b90a35b3c3f06a545af78ec439c",
+      "producer_sha256": "0e4122134a8f1cdad5408913753d2e15d1a42b90a35b3c3f06a545af78ec439c",
+      "equal": true
+    },
+    {
+      "path": "tools/tests/test_ios_export.py",
+      "sha256": "034fb2ff33258a30b707e46efb7b0f663f580262913d3252a6792227a1513b79",
+      "producer_sha256": "034fb2ff33258a30b707e46efb7b0f663f580262913d3252a6792227a1513b79",
+      "equal": true
+    },
+    {
+      "path": "tools/tests/test_ios_wasm.py",
+      "sha256": "92816a5d9ac6012aa7676b347df651c2958a1cf30cbfddf78bc3ab3e7d2ef7d7",
+      "producer_sha256": "92816a5d9ac6012aa7676b347df651c2958a1cf30cbfddf78bc3ab3e7d2ef7d7",
+      "equal": true
+    },
+    {
+      "path": "tools/wasm2c.py",
+      "sha256": "82df8e43c53be9d6640005ff1c058d64266b7447ceb902a6faddc554d07a2eff",
+      "producer_sha256": "82df8e43c53be9d6640005ff1c058d64266b7447ceb902a6faddc554d07a2eff",
+      "equal": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "tools-ios_export",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_ios_export.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.14108416700037196,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-ios_export.stdout",
+        "sha256": "af7034f4dbf702a116e52bb9316367f87369d6e5ef2f277ee3f871091a162b90"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-ios_export.stderr",
+        "sha256": "33ac40b793e78c1eab64d067da87008981933240f8fce231ae70f089ecd69f8f"
+      }
+    },
+    {
+      "name": "tools-ios_wasm",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_ios_wasm.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.0893900000010035,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-ios_wasm.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-ios_wasm.stderr",
+        "sha256": "1a74f95959a91756586b997635a827190e8280b776168061d5c3df8b1d37a7df"
+      }
+    },
+    {
+      "name": "tools-android_export",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_android_export.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.08029849999729777,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-android_export.stdout",
+        "sha256": "bebbed0af23d76afbe10ede827a078714b2e9555b250202e67fb78bfd24681df"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-android_export.stderr",
+        "sha256": "b1ad8777ce04fcd0b6dfef372c5204d917c73e4a844485ecec5606c8540d5eae"
+      }
+    },
+    {
+      "name": "tools-wasm2c",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm2c.py",
+        "-v"
+      ],
+      "exit": 5,
+      "seconds": 0.03922229099407559,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm2c.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm2c.stderr",
+        "sha256": "e70fec2825d9bf206d27463a792768195039599cb39bcca66339f47283f84cce"
+      }
+    },
+    {
+      "name": "tools-wasm2c_prepare",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm2c_prepare.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.068173209001543,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm2c_prepare.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm2c_prepare.stderr",
+        "sha256": "e92d4b276fdfd8a42b160ee8b66d6e8f5e91b620631558a8148c158a56cadfa1"
+      }
+    },
+    {
+      "name": "tools-wasm2c_shipping",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm2c_shipping.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.1461196669988567,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm2c_shipping.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm2c_shipping.stderr",
+        "sha256": "cf3b1dbf2d1eb49a9c49a50be8e2e4de1285589be2aac6576a3db909f8906326"
+      }
+    },
+    {
+      "name": "tools-wasm_metadata",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm_metadata.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.11016516700328793,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm_metadata.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm_metadata.stderr",
+        "sha256": "e35a98154e2c616338d3e9e90c8774e70271490027e67d371054b0fd55cc371e"
+      }
+    },
+    {
+      "name": "tools-wasm_sdk",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_wasm_sdk.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.31736716600426007,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm_sdk.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/tools-wasm_sdk.stderr",
+        "sha256": "cf3c6ec00dbc2fbc005a5592b2701b96aa89ff6276e0b8aa7abd7b6439f65903"
+      }
+    },
+    {
+      "name": "cook-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 48.614702540995495,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/cook-tests.stdout",
+        "sha256": "0397149637e1786c2ffb30114065df11607e1db26b050e4f5627dcb54ce7d08a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/cook-tests.stderr",
+        "sha256": "943d57acf996f9fe4026d48c9b753288ca311af1e8b9847520b93bc563869e52"
+      }
+    },
+    {
+      "name": "cook-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 4.6279053750040475,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/cook-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/cook-clippy.stderr",
+        "sha256": "19ac9e84a251dbae6f0e23793433a7a40b7caa504c3c9399b20b1133e37332fb"
+      }
+    },
+    {
+      "name": "runtime-graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/static-module"
+      ],
+      "exit": 0,
+      "seconds": 0.3572478330024751,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/runtime-graph.stdout",
+        "sha256": "3a0ae06375717c17cda906a0a78489c38f1ef5ffdb2fe68801f7bf7c0a70a1b6"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/runtime-graph.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1383859580018907,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.033226125000510365,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.04822954199335072,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "deterministic-host-build",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--no-default-features",
+        "-p",
+        "incant_headless",
+        "-p",
+        "incant_cook",
+        "--bin",
+        "incant_headless",
+        "--example",
+        "audio_package_oracle",
+        "--features",
+        "incant_headless/wasmtime-host,incant_cook/typescript,incant_headless/physics-deterministic,incant_cook/physics-deterministic"
+      ],
+      "exit": 0,
+      "seconds": 85.67686033400241,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-host-build.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-host-build.stderr",
+        "sha256": "489bc4a8e859508170fba5b876e58085e4c6410b8155ba1fd6dedb35b7ee052e"
+      }
+    },
+    {
+      "name": "deterministic-preflight",
+      "command": [
+        "python3",
+        "tools/probes/authored-ios-wasm/prepare.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-prepared",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-binaries/incant_headless",
+        "--play-binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-binaries/incant_headless",
+        "--oracle",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-binaries/audio_package_oracle",
+        "--physics-mode",
+        "deterministic"
+      ],
+      "exit": 0,
+      "seconds": 3.352466000003915,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-preflight.stdout",
+        "sha256": "27828a877d2d3de0f21ba70896bb7538e208bcad4988d5119b8ae6ec1d8c20a7"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fast-host-build",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--no-default-features",
+        "-p",
+        "incant_headless",
+        "-p",
+        "incant_cook",
+        "--bin",
+        "incant_headless",
+        "--example",
+        "audio_package_oracle",
+        "--features",
+        "incant_headless/wasmtime-host,incant_cook/typescript"
+      ],
+      "exit": 0,
+      "seconds": 145.73714437500166,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-host-build.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-host-build.stderr",
+        "sha256": "a9c842b1bf22f388244bb47907a47083242303dcc60841fb2b94ac5392585924"
+      }
+    },
+    {
+      "name": "fast-preflight",
+      "command": [
+        "python3",
+        "tools/probes/authored-ios-wasm/prepare.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-prepared",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-binaries/incant_headless",
+        "--play-binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-binaries/incant_headless",
+        "--oracle",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-binaries/audio_package_oracle",
+        "--physics-mode",
+        "fast"
+      ],
+      "exit": 0,
+      "seconds": 3.154536999994889,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-preflight.stdout",
+        "sha256": "adefd6fe857a5625a3f5135648277925d38b450bfb7279a24bd2a1beb27a6a8e"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-preflight.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "deterministic-simulator-export",
+      "command": [
+        "python3",
+        "tools/export_ios.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-prepared/authoring/game.json",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-export",
+        "--target",
+        "aarch64-apple-ios-sim",
+        "--camera",
+        "0000000000000000000000009C",
+        "--evidence",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-build-evidence",
+        "--wabt",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/trusted-tools/wabt"
+      ],
+      "exit": 0,
+      "seconds": 260.68348283299565,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-export.stdout",
+        "sha256": "d86c6e3063d1b7041871b4795ac39771c84170b4e72a8203b1b60d1551b839e1"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-export.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fast-simulator-export",
+      "command": [
+        "python3",
+        "tools/export_ios.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-prepared/authoring/game.json",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-export",
+        "--target",
+        "aarch64-apple-ios-sim",
+        "--camera",
+        "0000000000000000000000009C",
+        "--evidence",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-build-evidence",
+        "--wabt",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/trusted-tools/wabt"
+      ],
+      "exit": 0,
+      "seconds": 246.8248959160046,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-export.stdout",
+        "sha256": "fadacbae9ea6e38a0ab55cd70571870cc6b1b62630bb0cf34eb8fabb64d0cf68"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-export.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "deterministic-simulator-callers",
+      "command": [
+        "python3",
+        "tools/probes/authored-ios-wasm/verify.py",
+        "--prepared",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-prepared",
+        "--export",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-export",
+        "--export-sha256",
+        "e1ec1ad5667f4492a7d52601d63e27fea7fe3c706bd2e89f3880408a2df69cf8",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-callers",
+        "--remove-authoring",
+        "--foreign-export",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-export",
+        "--foreign-export-sha256",
+        "450470f33e2c55641a0f786651225b8627f9878f98ffe0147ba66dd1ddf2a899"
+      ],
+      "exit": 0,
+      "seconds": 50.03096162500151,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-callers.stdout",
+        "sha256": "b96ecaddd7f5433f5287fd4669464749512d79b63c3fe0de7d12d2c00c72cf7f"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-callers.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fast-simulator-callers",
+      "command": [
+        "python3",
+        "tools/probes/authored-ios-wasm/verify.py",
+        "--prepared",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-prepared",
+        "--export",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-export",
+        "--export-sha256",
+        "450470f33e2c55641a0f786651225b8627f9878f98ffe0147ba66dd1ddf2a899",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-callers",
+        "--remove-authoring",
+        "--foreign-export",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-export",
+        "--foreign-export-sha256",
+        "e1ec1ad5667f4492a7d52601d63e27fea7fe3c706bd2e89f3880408a2df69cf8"
+      ],
+      "exit": 0,
+      "seconds": 41.060938791997614,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-callers.stdout",
+        "sha256": "7557489b6215d71a20fb1fb0d7699fe325365d7e0d6a72cd50f0d65105886bad"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-callers.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "execution": [
+    {
+      "mode": "deterministic",
+      "platform": "simulator",
+      "target": "aarch64-apple-ios-sim",
+      "export_receipt_sha256": "e1ec1ad5667f4492a7d52601d63e27fea7fe3c706bd2e89f3880408a2df69cf8",
+      "caller_receipt_sha256": "fafa99d1428248181f838591660a13de3ae366da5c31db8cf73643d0e457790e",
+      "positive_processes": 6,
+      "exact_refusals": 26,
+      "raw_command_streams_rehashed": 132,
+      "archive_bytes": 15426648,
+      "caller_bytes": {
+        "c": 11694120,
+        "swift": 11707408
+      },
+      "object_platform": {
+        "architecture": "aarch64",
+        "platform": "iossimulator",
+        "object_minimum_versions": [
+          "14.0",
+          "27.0"
+        ],
+        "headers_sha256": "19c2e5a74ac189566743626d564b665642d69f688a77840ed907b8e3782d5748"
+      },
+      "runtime_files": 10
+    },
+    {
+      "mode": "fast",
+      "platform": "simulator",
+      "target": "aarch64-apple-ios-sim",
+      "export_receipt_sha256": "450470f33e2c55641a0f786651225b8627f9878f98ffe0147ba66dd1ddf2a899",
+      "caller_receipt_sha256": "7a9dde99a3a758e30055c148a6d9b932eb4d6400c4a28f47c000756a2d7555b5",
+      "positive_processes": 6,
+      "exact_refusals": 26,
+      "raw_command_streams_rehashed": 132,
+      "archive_bytes": 15422360,
+      "caller_bytes": {
+        "c": 11692856,
+        "swift": 11706112
+      },
+      "object_platform": {
+        "architecture": "aarch64",
+        "platform": "iossimulator",
+        "object_minimum_versions": [
+          "14.0",
+          "27.0"
+        ],
+        "headers_sha256": "1a98334b9cec6b360e39f10b24542109b6e9cbea7c66098dc1aca449de8d910b"
+      },
+      "runtime_files": 10
+    }
+  ],
+  "summary": {
+    "passed": true,
+    "current_simulator_execution": [
+      {
+        "mode": "deterministic",
+        "platform": "simulator",
+        "target": "aarch64-apple-ios-sim",
+        "export_receipt_sha256": "e1ec1ad5667f4492a7d52601d63e27fea7fe3c706bd2e89f3880408a2df69cf8",
+        "caller_receipt_sha256": "fafa99d1428248181f838591660a13de3ae366da5c31db8cf73643d0e457790e",
+        "positive_processes": 6,
+        "exact_refusals": 26,
+        "raw_command_streams_rehashed": 132,
+        "archive_bytes": 15426648,
+        "caller_bytes": {
+          "c": 11694120,
+          "swift": 11707408
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "iossimulator",
+          "object_minimum_versions": [
+            "14.0",
+            "27.0"
+          ],
+          "headers_sha256": "19c2e5a74ac189566743626d564b665642d69f688a77840ed907b8e3782d5748"
+        },
+        "runtime_files": 10
+      },
+      {
+        "mode": "fast",
+        "platform": "simulator",
+        "target": "aarch64-apple-ios-sim",
+        "export_receipt_sha256": "450470f33e2c55641a0f786651225b8627f9878f98ffe0147ba66dd1ddf2a899",
+        "caller_receipt_sha256": "7a9dde99a3a758e30055c148a6d9b932eb4d6400c4a28f47c000756a2d7555b5",
+        "positive_processes": 6,
+        "exact_refusals": 26,
+        "raw_command_streams_rehashed": 132,
+        "archive_bytes": 15422360,
+        "caller_bytes": {
+          "c": 11692856,
+          "swift": 11706112
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "iossimulator",
+          "object_minimum_versions": [
+            "14.0",
+            "27.0"
+          ],
+          "headers_sha256": "1a98334b9cec6b360e39f10b24542109b6e9cbea7c66098dc1aca449de8d910b"
+        },
+        "runtime_files": 10
+      }
+    ],
+    "frozen_inputs": 2001,
+    "producer_sources": 13,
+    "successful_commands": 21,
+    "historical_no_tests_pattern_failure": 1,
+    "cook_cases": 62,
+    "producer_records": 1202,
+    "producer_external_binaries": 24
+  },
+  "archive": {
+    "parts": [
+      {
+        "path": "docs/spikes/evidence/authored-ios-wasm-main185/artifacts.json.gz.part-000",
+        "sha256": "68ae2924617058dde6c1fc00f97d90bc53211d2129366c9c35a02eecad274ada",
+        "bytes": 8195170
+      }
+    ],
+    "sha256": "68ae2924617058dde6c1fc00f97d90bc53211d2129366c9c35a02eecad274ada",
+    "bytes": 8195170,
+    "records": 717,
+    "payloads": 218
+  },
+  "external_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-binaries/audio_package_oracle",
+      "sha256": "695752831ddf9ebb52561f7e2f8bd3367cb248cf032112c81a3a40e70dcec878",
+      "bytes": 16761208
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-binaries/incant_headless",
+      "sha256": "dce0ae6b1486563aebcd1bafbe468287107bf9d3b3cfcbcf9d1da4bbe8c0c1e8",
+      "bytes": 72881584
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-callers/caller-c",
+      "sha256": "9abee4371d323cf1f5248df887e6c8c51ddef5cc429313ea7b936073ca35fc83",
+      "bytes": 11694120
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-callers/caller-swift",
+      "sha256": "3b7a8f1be06892900873b66c4d3c622e108702a3de9fd56c0aa58673cf0181dc",
+      "bytes": 11707408
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-export/runtime/libincant_game_player.a",
+      "sha256": "02049d059920547bf754569f601d2029f03936a297820f00ed440cd0e4fb44ba",
+      "bytes": 15426648
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/deterministic-simulator-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "12e747b049bd936d4b77b77c6c5ff4fed03e1fbe066a751fc509ea2478f7c76f",
+      "bytes": 234470560
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-binaries/audio_package_oracle",
+      "sha256": "b93e65d9e78671c104d2155b39443ff4bc25b7da894b6848175bbdcddf0496a8",
+      "bytes": 16472696
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-binaries/incant_headless",
+      "sha256": "d8c5751222d50313569e5533400370865fa61cc84b3612f546fbd2ae0996b0b8",
+      "bytes": 72470400
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-callers/caller-c",
+      "sha256": "ea696744a1114a7fd3fd4b5a95ca6a73c738eeb8bfa86359b28c780631d27ab6",
+      "bytes": 11692856
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-callers/caller-swift",
+      "sha256": "835a1849965525846377d8cc1d620f0a9a9b70c289e2d4c640c936bd4cf61242",
+      "bytes": 11706112
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-export/runtime/libincant_game_player.a",
+      "sha256": "5b3d1ef3a5094238dc5fe032e97247b19148fe570890679f27925a7af9a2c061",
+      "bytes": 15422360
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/fast-simulator-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "c7e1d2368dfc50de42552af597cb94b691192073661bfdd7b815284a0d2ee805",
+      "bytes": 233079696
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/trusted-tools/wabt/bin/wasm2c",
+      "sha256": "4f1ba571063deca36e330ad67cf0414dbbaee944c7d920df7a338a30725570f2",
+      "bytes": 1692520
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-wasm-main185-001/trusted-tools/wabt/bin/wat2wasm",
+      "sha256": "69117d2b10c1818cf6da921f96ab4e3c50e45a05a848d6c4c1788375aec4d250",
+      "bytes": 1617816
+    }
+  ],
+  "producer_evidence": {
+    "path": "docs/spikes/evidence/authored-ios-wasm/manifest.json",
+    "sha256": "ac029f4cb3adc8c7b629915e5f6395e90c5514ea78b10b265233b642826e9987",
+    "review_path": "docs/spikes/evidence/authored-ios-wasm/final-review.json",
+    "review_sha256": "10ce101feb6c3d9b436eea935b7829308ab2dca9237208f51c7bcd61dff26d41",
+    "records": 1202,
+    "external_binaries": 24
+  },
+  "review_state": "Final current-main independent review pending",
+  "limits": [
+    "Current macOS arm64 host and local iOS27 simulator CPU only; both fixed physics modes.",
+    "Current archives are fresh normal exports. The original a765 device unsigned links and first-archive compiler-recovery qualification remain original producer evidence, not current device execution.",
+    "Initial tools-wasm2c discovery pattern matched no tests and exited5; retained. Corrected actual test names passed without source changes or repeated completed checks.",
+    "Android TypeScript admission preserved; static Wasm admission explicitly iOS-only.",
+    "No physical-device, minimum-OS, performance, rendering, signing or phase approval."
+  ]
+}

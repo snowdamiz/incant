@@ -1,0 +1,135 @@
+diff --git a/crates/incant_cook/src/project_build.rs b/crates/incant_cook/src/project_build.rs
+index ca2e895b..d6f8ac14 100644
+--- a/crates/incant_cook/src/project_build.rs
++++ b/crates/incant_cook/src/project_build.rs
+@@ -26,14 +26,14 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
+     embed(project_path, selected_scene, &target, false)
+ }
+ 
+-/// Explicit unsigned iOS archive producer. The desktop entry point retains its
++/// Explicit unsigned mobile archive producer. The desktop entry point retains its
+ /// host==target guard; this route freshly compiles checked source and bindings.
+ pub fn embed_mobile_project(project_path: &Path, selected_scene: Option<&str>) -> Result<()> {
+     let host = env::var("HOST")?;
+     let target = env::var("TARGET")?;
+     if host != incant_script::artifact::TARGET || !mobile_destination(&host, &target) {
+         return Err(
+-            "authored mobile project requires the reviewed macOS arm64 to iOS bytecode route"
++            "authored mobile project requires the reviewed macOS arm64 mobile bytecode route"
+                 .into(),
+         );
+     }
+@@ -42,7 +42,10 @@ pub fn embed_mobile_project(project_path: &Path, selected_scene: Option<&str>) -
+ 
+ fn mobile_destination(host: &str, target: &str) -> bool {
+     host == "aarch64-apple-darwin"
+-        && matches!(target, "aarch64-apple-ios" | "aarch64-apple-ios-sim")
++        && matches!(
++            target,
++            "aarch64-apple-ios" | "aarch64-apple-ios-sim" | "aarch64-linux-android"
++        )
+         && incant_script::artifact::compatibility::admits(
+             host,
+             target,
+@@ -259,7 +262,7 @@ fn embed(
+         "physics_variant": scene.physics_variant(),
+         "target": target, "scene_sha256": hex(&Sha256::digest(&scene_bytes)),
+         "producer_target": incant_script::artifact::TARGET,
+-        "producer_kind": if mobile { "ios-archive" } else { "native-desktop" },
++        "producer_kind": if !mobile { "native-desktop" } else if target == "aarch64-linux-android" { "android-archive" } else { "ios-archive" },
+         "script": script_manifest,
+         "project_sha256": hex(&Sha256::digest(text.as_bytes())), "visual_assets": visual,
+         "audio_clips": audio, "compiler": compiler_manifest,
+diff --git a/crates/incant_cook/tests/mobile_project.rs b/crates/incant_cook/tests/mobile_project.rs
+index c8e61374..c80d7179 100644
+--- a/crates/incant_cook/tests/mobile_project.rs
++++ b/crates/incant_cook/tests/mobile_project.rs
+@@ -9,7 +9,7 @@ use serde_json::json;
+ use sha2::{Digest, Sha256};
+ 
+ fn project() -> (Project, String, String) {
+-    let mut project = Project::empty("Authored iOS binding");
++    let mut project = Project::empty("Authored mobile binding");
+     let mut scene = Scene::new("Main");
+     let mut entity = Entity::new("Mover");
+     let source = new_id();
+@@ -60,6 +60,7 @@ export default { update({instances,chunks,dt}) {
+         artifact::TARGET,
+         "aarch64-apple-ios-sim",
+         "aarch64-apple-ios",
++        "aarch64-linux-android",
+     ];
+     for target in targets {
+         let prepared = prepare_script_scene(&project, &scene_id).unwrap();
+@@ -161,7 +162,7 @@ fn explicit_mobile_producer_retains_desktop_and_unverified_destination_refusals(
+     let path = root.path().join("game.incant");
+     std::fs::write(&path, project.canonical_text().unwrap()).unwrap();
+     let mobile_error =
+-        "authored mobile project requires the reviewed macOS arm64 to iOS bytecode route";
++        "authored mobile project requires the reviewed macOS arm64 mobile bytecode route";
+     let reviewed = artifact::TARGET == "aarch64-apple-darwin"
+         && artifact::compatibility::admits(
+             artifact::TARGET,
+@@ -174,7 +175,18 @@ fn explicit_mobile_producer_retains_desktop_and_unverified_destination_refusals(
+             "aarch64-apple-ios-sim",
+             Some("authored project export requires native host == target"),
+         ),
+-        ("mobile", "aarch64-linux-android", Some(mobile_error)),
++        (
++            "native",
++            "aarch64-linux-android",
++            Some("authored project export requires native host == target"),
++        ),
++        (
++            "mobile",
++            "aarch64-linux-android",
++            (!reviewed).then_some(mobile_error),
++        ),
++        ("mobile", "x86_64-linux-android", Some(mobile_error)),
++        ("mobile", "armv7-linux-androideabi", Some(mobile_error)),
+         ("mobile", "aarch64-apple-darwin", Some(mobile_error)),
+         (
+             "mobile",
+@@ -218,7 +230,14 @@ fn explicit_mobile_producer_retains_desktop_and_unverified_destination_refusals(
+             let receipt: serde_json::Value =
+                 serde_json::from_slice(&std::fs::read(output.join("project-export.json")).unwrap())
+                     .unwrap();
+-            assert_eq!(receipt["producer_kind"], "ios-archive");
++            assert_eq!(
++                receipt["producer_kind"],
++                if target == "aarch64-linux-android" {
++                    "android-archive"
++                } else {
++                    "ios-archive"
++                }
++            );
+             assert_eq!(receipt["producer_target"], artifact::TARGET);
+             assert_eq!(receipt["script"]["target"], target);
+             let scene = std::fs::read(output.join("world.scene")).unwrap();
+@@ -269,11 +288,12 @@ fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_i
+     std::fs::create_dir(&bundle).unwrap();
+     // Identity-only data deliberately cannot stand in for generated native code.
+     std::fs::write(bundle.join("manifest.json"), "{}").unwrap();
+-    for (index, (feature, has_bundle, wrong_binding, error)) in [
+-        (false, false, false, "authored Wasm export requires the static-module player feature"),
+-        (true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
+-        (true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
+-        (true, true, false, "mobile static bundle captured identity mismatch"),
++    for (index, (target, feature, has_bundle, wrong_binding, error)) in [
++        ("aarch64-apple-ios-sim", false, false, false, "authored Wasm export requires the static-module player feature"),
++        ("aarch64-apple-ios-sim", true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
++        ("aarch64-apple-ios-sim", true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
++        ("aarch64-apple-ios-sim", true, true, false, "mobile static bundle captured identity mismatch"),
++        ("aarch64-linux-android", true, true, false, "authored mobile static Wasm requires an explicit iOS destination"),
+     ].into_iter().enumerate() {
+         let out = root.path().join(format!("refused-{index}"));
+         std::fs::create_dir(&out).unwrap();
+@@ -287,7 +307,7 @@ fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_i
+             .env("INCANT_TEST_PROJECT_PRODUCER", "mobile")
+             .env("INCANT_TEST_PROJECT_PATH", &path)
+             .env("INCANT_TEST_PROJECT_ERROR", error)
+-            .env("HOST", artifact::TARGET).env("TARGET", "aarch64-apple-ios-sim")
++            .env("HOST", artifact::TARGET).env("TARGET", target)
+             .env("OUT_DIR", &out)
+             .env_remove("CARGO_FEATURE_STATIC_MODULE")
+             .env("INCANT_NATIVE_WASM_FINGERPRINT", captured.fingerprint())
