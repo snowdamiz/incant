@@ -1,0 +1,642 @@
+{
+ "format": "incant-0070-execution-summary-v1",
+ "source_head": "fd625299d90fc9b0e359a7bf60baf03795fc9f4f",
+ "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003",
+ "grant": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/gpu-grant.json",
+  "sha256": "76dbd1db78aaf83464f07944ecce185e81dc4193c5066890eb0588eec19126ab",
+  "authorization": "Root grants five corrected numeric cases and one appearance case only; six serial foreground GPU children,89 new frames,16 PNGs. No compilation/retry. Prior exact regression binaries are reused as evidence, not executed again.",
+  "root_build_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/effects0070-corrected-build-root-20261013.json",
+   "sha256": "b08e2b3d968a4c0b3c2719849e9947745681a306a5d6cb07503bd9aefcade5ab"
+  }
+ },
+ "build_record": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/build/build.json",
+  "sha256": "de2f040f55bc0cf3d1e924d64304916428ccdb7083404c9fb85431efdd54ebdc"
+ },
+ "helper_digest": "942e528b30c6224200ee1a2ce6b6e28f1bf7533ba70a18d270e2dbe93b205f55",
+ "plan_sha256": "27ea7b4425100c8ec6786c02cc8da21b41c670ec2ff3824ed6c497d9ccf859cf",
+ "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)",
+ "feature_identity_equal": {
+  "incant_render": true,
+  "incant_render_gpu_host": true
+ },
+ "frozen_binaries": {
+  "effects_gpu": {
+   "sha256": "cd431a216c32124fef9946b7e0b59e7a74326f030df43d103b4b759eb41b2db5",
+   "bytes": 31834848,
+   "same_as_build002": false
+  },
+  "gpu_host-game": {
+   "sha256": "f64e5c95f8c5571a654eeac5de84615303ad2acebd763bc31d02671d3bf50816",
+   "bytes": 31692456,
+   "same_as_build002": true
+  },
+  "gpu_host-ui": {
+   "sha256": "b6a3351461efdd2ad6ec2c894aec341cf0a2b4da410d4f637d7fc3aa2040bf17",
+   "bytes": 31215808,
+   "same_as_build002": true
+  },
+  "lib": {
+   "sha256": "732ac9ed9f5180999d9de005e7ed528a2e1e790718d2d2eadbe37044920dca01",
+   "bytes": 31614976,
+   "same_as_build002": true
+  },
+  "model_gpu": {
+   "sha256": "64edd8aea35337e20966e1a0d46ce68a5576eb0ef4804a8a19e7d4ee803670e7",
+   "bytes": 16452232,
+   "same_as_build002": true
+  }
+ },
+ "backend": {
+  "backend": "Metal",
+  "device": 0,
+  "device_type": "IntegratedGpu",
+  "driver": "",
+  "driver_info": "",
+  "name": "Apple M5 Pro",
+  "vendor": 0
+ },
+ "reused_not_rerun": {
+  "what": "94 ignored GPU regression tests (lib 37, model_gpu 50, gpu_host-game 5, gpu_host-ui 2)",
+  "executed_in": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002 (2026-10-13T07:57-07:58Z)",
+  "binding": "the four regression binaries are byte-identical between build002 and build003"
+ },
+ "new_children": [
+  {
+   "label": "case-ssao_core",
+   "kind": "numeric",
+   "pid": 20021,
+   "kernel_start": [
+    1791882121,
+    994621
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 6.44,
+   "new_frames": 20,
+   "pngs": 0,
+   "success": true,
+   "stdout_sha256": "e12617f1cbf9b3a1f079f171abd729d24eb1f1556125ad70407ffeb6b2a71ea9",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "cd431a216c32124fef9946b7e0b59e7a74326f030df43d103b4b759eb41b2db5",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/bin/effects_gpu",
+    "case",
+    "ssao_core",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-ssao_core"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-ssao_materials",
+   "kind": "numeric",
+   "pid": 20081,
+   "kernel_start": [
+    1791882135,
+    907075
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 3.29,
+   "new_frames": 10,
+   "pngs": 0,
+   "success": true,
+   "stdout_sha256": "bf0e77d42a048891ae19c5f58499acb006569531dbe3a94b74868eb525efa05e",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "cd431a216c32124fef9946b7e0b59e7a74326f030df43d103b4b759eb41b2db5",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/bin/effects_gpu",
+    "case",
+    "ssao_materials",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-ssao_materials"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-ssao_geometry",
+   "kind": "numeric",
+   "pid": 20112,
+   "kernel_start": [
+    1791882139,
+    386976
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 3.97,
+   "new_frames": 17,
+   "pngs": 0,
+   "success": true,
+   "stdout_sha256": "bdf5c7eade0a8d1097394a884fa1a5bf3097b4936ac89ab305728ac246f5546d",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "cd431a216c32124fef9946b7e0b59e7a74326f030df43d103b4b759eb41b2db5",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/bin/effects_gpu",
+    "case",
+    "ssao_geometry",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-ssao_geometry"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-lifecycle_drs",
+   "kind": "numeric",
+   "pid": 20143,
+   "kernel_start": [
+    1791882143,
+    566696
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 2.13,
+   "new_frames": 18,
+   "pngs": 0,
+   "success": true,
+   "stdout_sha256": "f7893d0f842fad4746d2e6305c83a21d218eb42791844c7fdf8a9ba26209b1b0",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "cd431a216c32124fef9946b7e0b59e7a74326f030df43d103b4b759eb41b2db5",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/bin/effects_gpu",
+    "case",
+    "lifecycle_drs",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-lifecycle_drs"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-bloom_numeric",
+   "kind": "numeric",
+   "pid": 20159,
+   "kernel_start": [
+    1791882145,
+    907283
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 2.68,
+   "new_frames": 8,
+   "pngs": 0,
+   "success": true,
+   "stdout_sha256": "065c3e37b2ea710b400976b0295dfda725dafbcea41d78a6aef6e69e678a6277",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "cd431a216c32124fef9946b7e0b59e7a74326f030df43d103b4b759eb41b2db5",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/bin/effects_gpu",
+    "case",
+    "bloom_numeric",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-bloom_numeric"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "appearance",
+   "kind": "appearance",
+   "pid": 20240,
+   "kernel_start": [
+    1791882156,
+    160162
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 1.37,
+   "new_frames": 16,
+   "pngs": 16,
+   "success": true,
+   "stdout_sha256": "99507bf13a8b2bd1a7d6cc9f6e10d27cf309e6f4ea35d1be74c18e52b3776986",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "cd431a216c32124fef9946b7e0b59e7a74326f030df43d103b4b759eb41b2db5",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/bin/effects_gpu",
+    "appearance",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  }
+ ],
+ "numeric_and_appearance": {
+  "ssao_core": {
+   "frames": 20,
+   "declared": 20,
+   "checks": 18,
+   "failures": [],
+   "index_sha256": "4e6f98bab971d6e77625c1a231ad59486541db21a5ad5fc852e2f1362681d681"
+  },
+  "ssao_materials": {
+   "frames": 10,
+   "declared": 10,
+   "checks": 8,
+   "failures": [],
+   "index_sha256": "ae4152ab566c7c290a3b4e7eba0381f58e89d225a0d79537e1af2937d80b8eeb"
+  },
+  "ssao_geometry": {
+   "frames": 17,
+   "declared": 17,
+   "checks": 13,
+   "failures": [],
+   "index_sha256": "f117dfafeecaca2471e08b24b97be926d27671f14a6ecb1855675ea91df6eb4c"
+  },
+  "lifecycle_drs": {
+   "frames": 18,
+   "declared": 18,
+   "checks": 17,
+   "failures": [],
+   "index_sha256": "15283db4671efaeb8f7d0f9736849b4294f78f8d7c56dfff033079f9701e1609"
+  },
+  "bloom_numeric": {
+   "frames": 8,
+   "declared": 8,
+   "checks": 12,
+   "failures": [],
+   "index_sha256": "a14f8dc2bcb15d60a66f6944cf4dacdfbaedba9c337e5c07a1f0ef12981263b9"
+  },
+  "appearance": {
+   "frames": 16,
+   "declared": 16,
+   "checks": 58,
+   "failures": [],
+   "index_sha256": "e5418f6c842d736b07ec2633cc8a04e1790331cd8db5be761312c64595d76b90"
+  }
+ },
+ "appearance_pairs_receipt": [
+  {
+   "baseline": "v1_off.png",
+   "candidate": "v1_ssao.png",
+   "candidate_brighter_pixels": 1,
+   "candidate_darker_pixels": 78558,
+   "identical": false
+  },
+  {
+   "baseline": "v1_off.png",
+   "candidate": "v1_bloom.png",
+   "candidate_brighter_pixels": 88407,
+   "candidate_darker_pixels": 0,
+   "identical": false
+  },
+  {
+   "baseline": "v1_off.png",
+   "candidate": "v1_both.png",
+   "candidate_brighter_pixels": 58902,
+   "candidate_darker_pixels": 71258,
+   "identical": false
+  },
+  {
+   "baseline": "v2_off.png",
+   "candidate": "v2_ssao.png",
+   "candidate_brighter_pixels": 0,
+   "candidate_darker_pixels": 52973,
+   "identical": false
+  },
+  {
+   "baseline": "v2_off.png",
+   "candidate": "v2_bloom.png",
+   "candidate_brighter_pixels": 123992,
+   "candidate_darker_pixels": 0,
+   "identical": false
+  },
+  {
+   "baseline": "v2_off.png",
+   "candidate": "v2_both.png",
+   "candidate_brighter_pixels": 105293,
+   "candidate_darker_pixels": 42746,
+   "identical": false
+  },
+  {
+   "baseline": "v3_off_12.png",
+   "candidate": "v3_both_12.png",
+   "candidate_brighter_pixels": 74534,
+   "candidate_darker_pixels": 70182,
+   "identical": false
+  },
+  {
+   "baseline": "v3_off_8.png",
+   "candidate": "v3_both_8.png",
+   "candidate_brighter_pixels": 114773,
+   "candidate_darker_pixels": 69496,
+   "identical": false
+  },
+  {
+   "baseline": "v4_off.png",
+   "candidate": "v4_ssao.png",
+   "candidate_brighter_pixels": 0,
+   "candidate_darker_pixels": 220530,
+   "identical": false
+  },
+  {
+   "baseline": "v4_off.png",
+   "candidate": "v4_bloom.png",
+   "candidate_brighter_pixels": 86833,
+   "candidate_darker_pixels": 0,
+   "identical": false
+  },
+  {
+   "baseline": "v4_off.png",
+   "candidate": "v4_both.png",
+   "candidate_brighter_pixels": 65775,
+   "candidate_darker_pixels": 209045,
+   "identical": false
+  }
+ ],
+ "appearance_pngs": {
+  "v1_off": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v1_off.png",
+   "png_sha256": "0ced60a82035fb4d8dbd1cf1ba92a805d9acd340e68b505544107d61cd1eb608",
+   "rgba_sha256": "becca3c5ee11b91011b6c639c4d66543717a8f073c1127707e022437979324b1",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v1_ssao": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v1_ssao.png",
+   "png_sha256": "672c71c17d331d827bdedb022adae4618caa9480130a54e8207cd34de83077ff",
+   "rgba_sha256": "a88c26ec6c002113080b1227a36d4d6261e6fa689c18a6d535c61380243e2e35",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v1_bloom": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v1_bloom.png",
+   "png_sha256": "7285564b45abe25e197454faa4997dfb33fa5257f537633ee7a765756b0dd584",
+   "rgba_sha256": "1a40329b7e5967bd6f572d364015a84dfcd6871ca4b43b722892e82e48d3aecd",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v1_both": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v1_both.png",
+   "png_sha256": "85a1262300849808e690d6e5d6edf1c2ffeb464e72d673602e4e4950b33d35b5",
+   "rgba_sha256": "41eea75679b8f5489d7472f7cbc33c9dd0f38ec3bf1ff0bfdb45d0056dfbd0cf",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v2_off": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_off.png",
+   "png_sha256": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8",
+   "rgba_sha256": "e8177d93d32ec44bc9bca146eb3aa5e8e1e76335eca6d4932bb56e963e35ad2c",
+   "size": [
+    960,
+    540
+   ]
+  },
+  "v2_ssao": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_ssao.png",
+   "png_sha256": "e1ee1640d422823a2ffc9ead5702c342d2e81aaf865016dc766979c7e25dcdc4",
+   "rgba_sha256": "a63989cf137263f8c15df1fa751eeca3a00a89f3f9aa4cfed962bb7d25af962e",
+   "size": [
+    960,
+    540
+   ]
+  },
+  "v2_bloom": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_bloom.png",
+   "png_sha256": "0f98b5d62f35ca18782c4b7a55f720a960e5b0ee1cbfdc1c5a2585b324fe330d",
+   "rgba_sha256": "92258f50a2b808a75a5a5ab6a52d7357b8c8b76efca426dff2aa7c9468f722e5",
+   "size": [
+    960,
+    540
+   ]
+  },
+  "v2_both": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_both.png",
+   "png_sha256": "ea0f6428ca377ef6d9ad7981ee03ff75784bb8a88e5d08c696d2098f7af56ef8",
+   "rgba_sha256": "7948acbef87d10f55f333789feed82a521f89f5aa269ef07ae365a62a74e6833",
+   "size": [
+    960,
+    540
+   ]
+  },
+  "v3_off_12": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v3_off_12.png",
+   "png_sha256": "5dc5467640f7ab24f360009c4cd5a0a88151a7498bbd554debe9ea0008aeb289",
+   "rgba_sha256": "991e5e380877aeb32a74ff202b208025682877ffff41142296ccffeb3d11c01b",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v3_both_12": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v3_both_12.png",
+   "png_sha256": "a19db1aa9f83eaf81ffcefdf8d1b4ba2f331faa5bc0f62b8feeffa28e0f486d6",
+   "rgba_sha256": "158112faa1147cb8357808ab0049216f5fb5c6001a743e03d9e9221688c2359a",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v3_off_8": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v3_off_8.png",
+   "png_sha256": "1b0a36010c98c3009d082a9d7f7f050f48e9a251c19ef32363c0d3067ecaef63",
+   "rgba_sha256": "3bb78c6e409e4d9c48ec85fbb431f89c4ab1c7abf5d1cc21490f670eea40fa17",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v3_both_8": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v3_both_8.png",
+   "png_sha256": "47ba54566c9cbc314e060cd7aea96ef5ec48a38cbe6c0af67a7308b52c8fd261",
+   "rgba_sha256": "bb6d3832ce5b8e4bca963ab8fef89746c27f8783c2bb3ba6646c5cb4fc539f2b",
+   "size": [
+    959,
+    539
+   ]
+  },
+  "v4_off": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_off.png",
+   "png_sha256": "445b40250f28e17479101b95dd5a6c33afbcc3a6553b7329c50e6486ef6b5296",
+   "rgba_sha256": "7a40dee357f63d9f3d672479f86176c789bdd8f39ff5d17f692b444688d7277a",
+   "size": [
+    640,
+    480
+   ]
+  },
+  "v4_ssao": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_ssao.png",
+   "png_sha256": "a4452f614a9ea3592c83e726bf8d3721d6e2586ffd17ccd61f73d434e3d87b24",
+   "rgba_sha256": "da08727a8b4a28b45a8a1dc08e5389b2af61f8d53438a124b7b3ea6b9dcf5fcd",
+   "size": [
+    640,
+    480
+   ]
+  },
+  "v4_bloom": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_bloom.png",
+   "png_sha256": "412168f9ff2da646cb75d869757673c2f677e0efa8c5dc4346176c32aa502d61",
+   "rgba_sha256": "703416c153cadf594f4e9f2e605a89a5a91092cdc2f4aaa6f9b35065db2f2199",
+   "size": [
+    640,
+    480
+   ]
+  },
+  "v4_both": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_both.png",
+   "png_sha256": "8b17e242c10892ec9daf9d9c272b86cd445a20ecdb55379793d2669b90dbc082",
+   "rgba_sha256": "a1d6cf73d78b709a543adc608f027991ccf618d6b5032cf94ab46d969f15bb2b",
+   "size": [
+    640,
+    480
+   ]
+  }
+ },
+ "analysis": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/analysis.json",
+  "sha256": "96a76ed26fef3822760f35f2b4bea628a7b35354c7a949b9024125b96ba4ba7b",
+  "format": "incant-0070-analysis-v3",
+  "pass": false,
+  "exit_status": 1,
+  "failed_gates": [
+   "drs_bloom_halo_centroid_on_physical_emitter"
+  ],
+  "passed_gates": [
+   "bloom_constant_field_levels",
+   "bloom_coverage",
+   "bloom_threshold",
+   "determinism_g_ao_white_equals_p_ao_white",
+   "determinism_g_off_white_equals_p_off_white",
+   "determinism_retained_drs_disabled_equals_ordinary",
+   "drs_ssao_nearest_expansion_12",
+   "drs_ssao_nearest_expansion_8",
+   "mixed_blend_pane_scales_receiver_change",
+   "ssao_core_edge_reference",
+   "ssao_core_o_reference",
+   "ssao_core_p_ao_far_identity",
+   "ssao_core_p_ao_flat_identity",
+   "ssao_core_p_ao_radius_0_5_identity",
+   "ssao_core_p_ao_reversed_identity",
+   "ssao_core_p_reference",
+   "ssao_core_strength_0_5_reference",
+   "ssao_geometry_g_ao_backface_reference",
+   "ssao_geometry_g_ao_mask_cutout_reference",
+   "ssao_geometry_g_ao_mask_equal_reference",
+   "ssao_geometry_g_ao_mirrored_reference",
+   "ssao_geometry_g_ao_motion_far_reference",
+   "ssao_geometry_g_ao_motion_near_reference",
+   "ssao_geometry_g_ao_skin_t0_reference",
+   "ssao_geometry_g_ao_skin_t1_reference",
+   "ssao_geometry_g_ao_white_reference"
+  ]
+ },
+ "release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/released.json",
+  "sha256": "e2aedc7e561284508501aa29b2a56b86385308adb1930748e80fde4dfeb19761",
+  "released_at": "2026-10-13T09:02:45.013537+00:00",
+  "children": 6,
+  "new_frames_reserved": 89,
+  "pngs_reserved": 16,
+  "retries": 0,
+  "owned_processes_alive": [],
+  "frozen_processes": [],
+  "latched_failures": {},
+  "ledger_sha256": "c1a500db67321ac6e4b62e8bc2baffcb2fe70a10295f7483dd0134aea86b178c"
+ },
+ "bloom_drs_measurements_cpu_only": {
+  "lifecycle_drs_single_emitter": {
+   "16": {
+    "rms_radius_px": 32.9,
+    "energy": 324.07,
+    "beyond_48px": 0.122,
+    "left_right": [
+     0.499,
+     0.501
+    ],
+    "up_down": [
+     0.51,
+     0.49
+    ]
+   },
+   "12": {
+    "rms_radius_px": 39.2,
+    "energy": 378.3,
+    "beyond_48px": 0.208,
+    "left_right": [
+     0.475,
+     0.525
+    ],
+    "up_down": [
+     0.451,
+     0.549
+    ]
+   },
+   "8": {
+    "rms_radius_px": 46.1,
+    "energy": 424.67,
+    "beyond_48px": 0.266,
+    "left_right": [
+     0.531,
+     0.469
+    ],
+    "up_down": [
+     0.52,
+     0.48
+    ]
+   }
+  },
+  "appearance_v1_v3_both_minus_off": {
+   "100%": {
+    "energy": 2727.9,
+    "rms_spread_px": 90.3
+   },
+   "75%": {
+    "energy": 3006.5,
+    "rms_spread_px": 96.7
+   },
+   "50%": {
+    "energy": 3374.9,
+    "rms_spread_px": 108.2
+   }
+  }
+ }
+}

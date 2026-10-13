@@ -1,0 +1,138 @@
+{
+ "format": "incant-0070-appearance-review-crops-v1",
+ "note": "Review aids derived after GPU release from the retained appearance PNGs (decoded RGBA verified against index.json rgba_sha256). Not new renders and not acceptance evidence. Tool: pngtool.py (decode, nearest crop, signed difference).",
+ "tool_sha256": "8acdc898cd964fc3a47fa5cf8c890996b4e250ebe544b3ed10b404c37400cfa0",
+ "items": {
+  "crop_v4_crate_sphere_off_vs_ssao.png": {
+   "op": "side-by-side crop",
+   "left": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_off.png",
+    "png_sha256": "445b40250f28e17479101b95dd5a6c33afbcc3a6553b7329c50e6486ef6b5296"
+   },
+   "right": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_ssao.png",
+    "png_sha256": "a4452f614a9ea3592c83e726bf8d3721d6e2586ffd17ccd61f73d434e3d87b24"
+   },
+   "rect": [
+    180,
+    120,
+    230,
+    220
+   ],
+   "scale": 2,
+   "sha256": "368bf1bfd093444501475ff6b5ffc08869260430d772a6d9e6d576bf55762440"
+  },
+  "crop_v2_sphere_crate_off_vs_ssao.png": {
+   "op": "side-by-side crop",
+   "left": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_off.png",
+    "png_sha256": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8"
+   },
+   "right": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_ssao.png",
+    "png_sha256": "e1ee1640d422823a2ffc9ead5702c342d2e81aaf865016dc766979c7e25dcdc4"
+   },
+   "rect": [
+    470,
+    260,
+    240,
+    140
+   ],
+   "scale": 2,
+   "sha256": "a6f2d304cd58e1c59ecee3f9c05453a162bbe4beb46134f1da50bff4760f5cc6"
+  },
+  "crop_v2_pillar_stripes_off_vs_ssao.png": {
+   "op": "side-by-side crop",
+   "left": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_off.png",
+    "png_sha256": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8"
+   },
+   "right": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_ssao.png",
+    "png_sha256": "e1ee1640d422823a2ffc9ead5702c342d2e81aaf865016dc766979c7e25dcdc4"
+   },
+   "rect": [
+    185,
+    215,
+    250,
+    180
+   ],
+   "scale": 2,
+   "sha256": "619580d6120d237c36d2c75e45b3874f678dc1d4cb39bce79ccca8d672a5b345"
+  },
+  "crop_v2_panel_off_vs_bloom.png": {
+   "op": "side-by-side crop",
+   "left": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_off.png",
+    "png_sha256": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8"
+   },
+   "right": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_bloom.png",
+    "png_sha256": "0f98b5d62f35ca18782c4b7a55f720a960e5b0ee1cbfdc1c5a2585b324fe330d"
+   },
+   "rect": [
+    140,
+    90,
+    240,
+    200
+   ],
+   "scale": 2,
+   "sha256": "46fb91764df50ada0636a6ab19f35681023ed30639b6c5a95a4618f7648ac32f"
+  },
+  "crop_v4_sphere_edge_off_vs_bloom.png": {
+   "op": "side-by-side crop",
+   "left": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_off.png",
+    "png_sha256": "445b40250f28e17479101b95dd5a6c33afbcc3a6553b7329c50e6486ef6b5296"
+   },
+   "right": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_bloom.png",
+    "png_sha256": "412168f9ff2da646cb75d869757673c2f677e0efa8c5dc4346176c32aa502d61"
+   },
+   "rect": [
+    200,
+    0,
+    160,
+    140
+   ],
+   "scale": 3,
+   "sha256": "a93ba1c2233f6051ac81671b8be9452dd72680dbfa8d03a698ec96e6e96c9df0"
+  },
+  "diff_v4_ssao.png": {
+   "op": "difference, mean RGB code change x12; blue darker, red brighter",
+   "candidate": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_ssao.png",
+    "png_sha256": "a4452f614a9ea3592c83e726bf8d3721d6e2586ffd17ccd61f73d434e3d87b24"
+   },
+   "baseline": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v4_off.png",
+    "png_sha256": "445b40250f28e17479101b95dd5a6c33afbcc3a6553b7329c50e6486ef6b5296"
+   },
+   "sha256": "6a56318db0f8141effe2a980ec2805796c538b1b1920b751a975294603496acd"
+  },
+  "diff_v2_ssao.png": {
+   "op": "difference, mean RGB code change x16; blue darker, red brighter",
+   "candidate": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_ssao.png",
+    "png_sha256": "e1ee1640d422823a2ffc9ead5702c342d2e81aaf865016dc766979c7e25dcdc4"
+   },
+   "baseline": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v2_off.png",
+    "png_sha256": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8"
+   },
+   "sha256": "21d8fdd9b9f94d9350ba0859dfb6b1d6cf57ac1f0f8e2328179fc2e3a9204318"
+  },
+  "diff_v3_both_8.png": {
+   "op": "difference, mean RGB code change x12; blue darker, red brighter",
+   "candidate": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v3_both_8.png",
+    "png_sha256": "47ba54566c9cbc314e060cd7aea96ef5ec48a38cbe6c0af67a7308b52c8fd261"
+   },
+   "baseline": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance/v3_off_8.png",
+    "png_sha256": "1b0a36010c98c3009d082a9d7f7f050f48e9a251c19ef32363c0d3067ecaef63"
+   },
+   "sha256": "9245cbf56e7babd55c612376400e310a4b14f862bb40351d678a68eaa96100b5"
+  }
+ }
+}
