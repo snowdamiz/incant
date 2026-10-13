@@ -2,7 +2,7 @@
  "format": "incant-0070-ssao-filter-plan-v1",
  "packet": "0070-ambient-occlusion",
  "namespace": "0070-ssao-filter-002",
- "engine_commit": null,
+ "engine_commit": "02c71fdb60715a24ca519bf3258ebaf22025d42f",
  "source_binding": {
   "engine_candidate": "C2, selected by root on 2026-10-13: Hammersley tile pairing plus a per-ray Sobol' phase, at most 64 probes; uniform, filter and resource budget unchanged",
   "engine_source_frozen": {
