@@ -1,0 +1,246 @@
+{
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "created_utc": "2026-10-13T07:43:35.118327+00:00",
+  "status": "accepted-scoped-source-no-findings",
+  "source_base": "068ed0aa29d2579713782b2c196f8b948b9f6afd",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/freeze.json",
+  "freeze_sha256": "a96b338c8df7b323ef0a863e9ed3d7186dab39030146299232c4b314466fee34",
+  "reviewed_patch_sha256": "545eed0fcb7415835ca8e4c646654fdd015dfdf5f54fe473aa9c32ba277ca54a",
+  "verified_sources": 24,
+  "verified_unchanged_baselines": 11,
+  "files": [
+    {
+      "path": "crates/incant_render/src/camera.rs",
+      "sha256": "10103d5d48fae7d8adb7ea9962ffb202c34fff46c9b8d25770aa66fcee83cd2d",
+      "bytes": 12971,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "sha256": "48ae7cf4aab818db2c1f54bcee1d6b743ab821e2674c17010ae049702459ad24",
+      "bytes": 14208,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "6e7d5c8fe9cc594780cf3acfb66aebbe91e66e04161e07c5d131626d7dbf3337",
+      "bytes": 21272,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "sha256": "cd364ddc995bdb3d09259248849f88d2330080cb709aad360f7b0d534e0a547b",
+      "bytes": 9406,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/draw.rs",
+      "sha256": "048c974b9338e4c9e2e5d346e58a6e1981f1e1b9fe959c751d1205d25a2cf20d",
+      "bytes": 4186,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/retained.rs",
+      "sha256": "d80dcf7fd5647516f20f449a39a04d061646f1d5184250a60cbaea99ac172d1d",
+      "bytes": 17662,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/shader.wgsl",
+      "sha256": "1ebe19d03890654ad6d232881f97b6fd1d4a0ac3c9bdb29611d1b721a830477b",
+      "bytes": 2113,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/system.rs",
+      "sha256": "e636acf1b53d5c14553905bc09623440233639a48ca45a1209c4610c91c4e5cb",
+      "bytes": 6636,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/motion/tests.rs",
+      "sha256": "e3e66b9cd38ff500cb8285e1dc145f046e48403053f5c6938017c53aa2c6649d",
+      "bytes": 13772,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/drawing.rs",
+      "sha256": "0a146a2ea191bc886cdc3a69a351eeba4011594351f73339525c03b36a79a8f1",
+      "bytes": 3431,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/copy.wgsl",
+      "sha256": "096ee89ecb5c9112deea55935ac2da0bec4fd7f3ba603aa04c875ba48deb248b",
+      "bytes": 1328,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/device_tests.rs",
+      "sha256": "007dca51a7f871d3c767bc89650a7bfe517a01640ab508455ca599578b6bfe5e",
+      "bytes": 12191,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/oracle.rs",
+      "sha256": "0f446195d816fb065e0d94e68315df7a2fc24a7e3d6f0faee8095330bdc03a5a",
+      "bytes": 2418,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/owner.rs",
+      "sha256": "aafc0d329aa5ac85d46b5b728bd0efd8f938f969fdd9e48ded52227a23effe4a",
+      "bytes": 3298,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/resolve.wgsl",
+      "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1",
+      "bytes": 3480,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/system.rs",
+      "sha256": "161eb7afc6f0169b896df99b925ca5bf813c45ba5c42a1e1c77e4839808b588c",
+      "bytes": 10789,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/temporal/tests.rs",
+      "sha256": "7a96bac227826f250cf806fc616f713b3bb0ef96c85661d1fb9bcc88e7580680",
+      "bytes": 11059,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/text/drawing.rs",
+      "sha256": "ed6b5fd4cb3544b1058730232e88ad14e97c18446d4f6e693f274d9dfccefdb2",
+      "bytes": 6619,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/composite.wgsl",
+      "sha256": "fd731718cce5b8dd949859515bf30bc57ee89002080f26b96cd50866057ec60d",
+      "bytes": 965,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/device_tests.rs",
+      "sha256": "e7dd551f3ba2a17c7776a51e1da49684db6ae1b78fa18dae56309390811d4038",
+      "bytes": 10099,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/oracle.rs",
+      "sha256": "71e9bffce8836e0aeb60d2a229164d945099a16f99e2d3a9b7debbb018ff0556",
+      "bytes": 2343,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+      "sha256": "b80563257235fe72fa8afd6bd51d2a8d52bcd2a44ba7e55891388d93fa8d728d",
+      "bytes": 3678,
+      "scope": "sources"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/tests.rs",
+      "sha256": "63a5711891cf3187008660023feeae0c0602ded702c69ac7600e9dc315323331",
+      "bytes": 6336,
+      "scope": "sources"
+    },
+    {
+      "path": "docs/spikes/temporal-edge-correctness.md",
+      "sha256": "84ae0cd4bc933cd10d257007401789ef966fb1de0c991cf779377ee42833facd",
+      "bytes": 4639,
+      "scope": "sources"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e",
+      "bytes": 252964,
+      "scope": "baselines"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+      "bytes": 3584,
+      "scope": "baselines"
+    },
+    {
+      "path": "PLAN.md",
+      "sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+      "bytes": 130811,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "7d3628b6a59dba4f3613b0aa8af6bbe274c692aa721bac4f7c77cc37bf202c7b",
+      "bytes": 2496,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663",
+      "bytes": 5555,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+      "bytes": 4670,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/src/frame.rs",
+      "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+      "bytes": 2700,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37",
+      "bytes": 7872,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/common.wgsl",
+      "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+      "bytes": 1622,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "sha256": "40d5468d18a6f686735d1465b1982d017593ac7996140fee70da36df2288b642",
+      "bytes": 22886,
+      "scope": "baselines"
+    },
+    {
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+      "bytes": 8077,
+      "scope": "baselines"
+    }
+  ],
+  "findings": [],
+  "assessment": [
+    "Fixed and output-resolution history gathers require positive finite derived bilinear support inside prior viewport, covered finite nonnegative color, and compatible depth. Invalid zero-weight or incompatible neighbors no longer discard valid support; empty support remains current-only. Existing clamp/reactivity policies remain.",
+    "Fixed history stays on its jittered grid with original motion/depth. The 64-byte copy uniform presents at p plus current pixel jitter. CPU projection and affine fixture expectations use the matching sign; unjittered overlays and upscale composite omit current jitter.",
+    "Extra depth-only variants share current canonical/skinned geometry, placements, MASK texture/cutoff, mirror/cull state and an unjittered matrix. Only existing disposable scene depth is overwritten after opaque resolve and before current-only overlays; saved motion/depth and history color are untouched.",
+    "Temporal and upscale activation imply an admitted motion draw outside pixel-camera bypass. Overlay work is conditional on actual excluded draws. Models pass counting includes the extra pass; timestamp implementation is unchanged.",
+    "Retained live/staging ownership and history/jitter phase publication remain after queue submission. Extra 144-byte uniform CPU/GPU payload is conservatively charged by doubling fixed Frame allocation charge; enlarged draw/owner headers are included via size_of. No added image allocation or per-frame pipeline compilation.",
+    "Four additional depth pipelines are bounded startup work. Default zero-jitter output, locks, manifests, admission/refusal and web feature contracts remain. Cooked copy binding and depth-entry artifacts plus MetalFX postbuffer union require separate explicit review/recook."
+  ],
+  "validation_scope": {
+    "review_only": true,
+    "tests_run_by_reviewer": false,
+    "builds_run_by_reviewer": false,
+    "gpu_run": false,
+    "images_opened": false,
+    "producer_execution_audit": false
+  },
+  "limits": [
+    "No visual acceptance or claim stationary/subpixel silhouette shimmer is resolved. Original Claude0072 rejection remains historical evidence.",
+    "Ignored GPU fixtures and composed overlay-depth occlusion still require real execution and Claude pixel review; shader/CPU reasoning is not that evidence.",
+    "MetalFX/cooked temporal integration, exact depth/copy artifacts, target ABI validation and explicit recook remain separate root-owned work.",
+    "No device, performance, complete-frame GPU-cost, release or phase-gate approval."
+  ]
+}
