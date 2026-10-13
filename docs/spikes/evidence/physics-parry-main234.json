@@ -11479,5 +11479,25 @@
     "Both current modes use unchanged checked-in deterministic capture bytes. Only decoded island state is installed; no raw whole-frame/body cross-mode equivalence is claimed. Producer variant-specific captures remain separate.",
     "No decoded complete-world install, runtime physics saves, phone or performance claim.",
     "Composed source actually rebuilt in two parallel numerical modes; focused and broad tests overlap."
-  ]
+  ],
+  "main235_join": {
+    "qualification": {
+      "main": "fd290c3bae2c6de5bb1de6f5e7b9005c32f1656e",
+      "tested_source": "09ba77ae74f9c982ebef5c7b313d488d128fea00",
+      "accepted_island_dependency": "114e4ab9104f3f6bdf37bf67f1521cd1874f096b",
+      "incoming_paths": [
+        "docs/spikes/evidence/physics-islands-main231.json",
+        "docs/spikes/evidence/physics-islands-main231/main234-root.json",
+        "docs/spikes/physics-islands-main231.md"
+      ],
+      "collector_sha256": "c0de2127dd9d66e55741cee0382ae89c2cf28b9fd479f74554e99e82c5b65f79",
+      "compiled_inputs_unchanged": true,
+      "new_build_claim": false
+    },
+    "archive": {
+      "path": "docs/spikes/evidence/physics-parry-main234/main235-qualification.json.gz",
+      "sha256": "83f55f6ebfe6b4eb4d97feddee47681efe18a078a30c702983055c1649ab4de4",
+      "records": 3
+    }
+  }
 }
