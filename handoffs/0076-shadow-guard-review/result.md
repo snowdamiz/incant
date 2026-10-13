@@ -1,3 +1,49 @@
+# 0076 result: current status
+
+**Current stage: bounded same-binary determinism diagnosis. See
+[`determinism-addendum.md`](determinism-addendum.md).**
+
+**Model, effort and packet:**
+- **Model:** Claude Opus 5.5 (`claude-opus-5-5`).
+- **Thinking effort:** max, as reported by this session's environment.
+- **Packet:** `brief.md` with root's revision, sha256 `494d730c…84cbe56b`. It is
+  uncommitted and left so.
+
+**Verdicts:**
+- **Original comparison: still FAILED.** It is not exact, and its thresholds are
+  unchanged.
+- **Determinism diagnosis: same-binary variation demonstrated.**
+  - **The run.** Four children under root's grant: baseline-1, candidate-1,
+    baseline-2, candidate-2. Together: 104 of 104 submissions and 8 of 8 PNGs,
+    with every contract check true, no stop, no retry, and the GPU released.
+  - **Baseline.** All 26 frames are identical in all three of its runs (001, -1,
+    -2).
+  - **Candidate.** Its on-06 differed across its runs; in its two repeats it
+    equalled the baseline's.
+  - **The two references.** The temporal-off frames and the final on frame are
+    stable within each binary.
+- **Attribution stays scoped.** It is not proven.
+
+**Corrections.** Two statements in the original text below are corrected in
+addendum §1:
+- §3's claim that the source change "cannot" produce a single-frame difference;
+- the claim that aggregate totals bound the size of that difference.
+
+**Evidence:**
+- **Executed wrapper:** `determinism/run.py`, commit `93ab2d85`.
+- **Published evidence:** `determinism/evidence/`, with a `manifest.json` and the
+  deterministic `analysis/summary.json`.
+- **The run's namespace:** `~/.codex/incant-evidence/0076-shadow-determinism-001`.
+
+**Screenshots:** none new. Every repeat PNG is byte-identical to the committed
+`screenshots/`, and the varying frame has no retained image.
+
+**Limitations:** addendum §6.
+
+The original `6212f3b3` result follows, unchanged.
+
+---
+
 # 0076 result: frozen shadow receiver guard comparison
 
 **Status: EXECUTED. Integrity PASSED. The frozen comparison FAILED because it is
