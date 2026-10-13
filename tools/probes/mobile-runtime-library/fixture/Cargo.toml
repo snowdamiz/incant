@@ -13,6 +13,10 @@ incant_assets_runtime = { path = "../../../../crates/incant_assets_runtime" }
 serde_json = "=1.0.151"
 
 [patch.crates-io]
-# Match the engine's checked navigation dependency even though this fixture has
-# no navigation; a standalone workspace does not inherit its parent's patches.
+# Standalone fixtures do not inherit the engine workspace source patches.
+# Preserve the actual checked physics and navigation implementations.
 rerecast = { path = "../../../../third_party/rerecast" }
+rapier2d = { path = "../../../../third_party/rapier2d" }
+rapier3d = { path = "../../../../third_party/rapier3d" }
+parry2d = { path = "../../../../third_party/parry2d" }
+parry3d = { path = "../../../../third_party/parry3d" }

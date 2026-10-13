@@ -1,0 +1,203 @@
+{
+  "format": "incant-native-game-checkpoint-evidence",
+  "version": 1,
+  "source_commit": "a2e312e6b8d144073603bc4619de57a4977e6a02",
+  "archive": {
+    "path": "records.json.gz",
+    "sha256": "7f8e519a3311c281d1fe8fceb495d2e7c6648503ff2ecbd97e36b69745d26bca",
+    "records": 96
+  },
+  "sources": [
+    {
+      "path": "crates/incant_game_runtime/Cargo.toml",
+      "sha256": "246ac81413f1788f51e3d213b86bcf6ea39e54f8543ffe301f50d3d101081cb6"
+    },
+    {
+      "path": "crates/incant_game_runtime/examples/no_renderer_fixtures.rs",
+      "sha256": "a47c6d9b1d53b5fc66b7e533511a9f37b8e1db6485992da08c7b16ccfe42a9e9"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/core.rs",
+      "sha256": "df4de6db23e13e224492e81aa112df7a60b01614ebaae59f73c01eab2e427fe0"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/hosted.rs",
+      "sha256": "3ffa8419b209df820993904a32a7c978da39d0108f817d96ddbe2d0dc771726e"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/lib.rs",
+      "sha256": "19e04f2ceb6a002029feee39c8db1ab51c4ead176b8de221da0c936f0146b24d"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/native_checkpoint.rs",
+      "sha256": "7e1dc6ca789c3ccb0fa668c717b396f1daede5de37cd5d55964f9e6d1fc17179"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/native_checkpoint/hosted.rs",
+      "sha256": "648e28fb5597eaa5b118a99fe67fba04cd934088457f9d4f223d757fdd3e9ba7"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/native_checkpoint/offline.rs",
+      "sha256": "61c5c4e8fa68b89eab904b18be8393172c686de4ba3db2d000bcfee9aaacfee4"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/offline.rs",
+      "sha256": "55e92a01f1a55759e4f378eaa27ff2e17eb8fe7364f0b0897806818aa8a2f8c2"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/seed.rs",
+      "sha256": "a2ebee27ba7da838d497a63c0dcb9200dbd0c92a8eae416ba17e6eb8bee33b9f"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/audio_checkpoints.rs",
+      "sha256": "aea4f71ec27d2e3a6891a783a87ef747783fc7b3f316be5aeb11290b64ab854b"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/checkpoints.rs",
+      "sha256": "deea43999eb08c0f62336e9836de539f3de6b2fcca87e4c21d223b2dcb3220c5"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/hosting.rs",
+      "sha256": "add1f3ed165df1979355e99f79e07bae4775ea3575f5043e6a16e1784abfaac9"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/native_checkpoints.rs",
+      "sha256": "e5dae0a5651ceaf62932cb97b36cf37f8bdaaf62990c4d27623bcba179f47a1a"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/native_checkpoints/cases.rs",
+      "sha256": "7885a6afb5005506bc31363328068fa67abd4de90385a3f11fe2ca09c955651b"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/native_checkpoints/ui.rs",
+      "sha256": "c3d019053f8aaa01a571c17ab71aa7c4f7316c1f3d87ba3a5f5c0a7268a8d80d"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/restart.rs",
+      "sha256": "f5e061efaa59d2efa3b9aa279ee09673560ef9bc31a2782b57837b5529142bb8"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/script_audio_controls.rs",
+      "sha256": "cdbb1c033af86c41f49283c9b8d3154c489646c2e7a3c7e54f68a6f24c5e16b9"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/session.rs",
+      "sha256": "fc4fa30922e8addf9e1a7bb250524e8208cb07517e7a48969f46a8aa7566942b"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/support/spatial.rs",
+      "sha256": "84674da6e34403873f9410c579f1602752e6d42ab172912744e22d5bf167b1f5"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/text_refusal.rs",
+      "sha256": "39682f7afeaa1c940f0cf9c5e01ff4fbcb57084b066e65e57a96171a03989034"
+    }
+  ],
+  "freeze_sha256": "3b9a70f21bc0ad83dfc8230e6d2311b668096ad33985e5f177c344b5b205abad",
+  "checks": [
+    {
+      "name": "focused-det-001",
+      "receipt_sha256": "dc17f6f676e11aee39f64f2322584c7ba78afd380d9d68bb1b8b71fc36c52cbe",
+      "exit_code": 101,
+      "passed": 0,
+      "executables": 1
+    },
+    {
+      "name": "focused-det-002",
+      "receipt_sha256": "d6cac1a7a96548f0c6c436c73790f8f2f80198c2a488f0b5d3820828b6118536",
+      "exit_code": 0,
+      "passed": 6,
+      "executables": 1
+    },
+    {
+      "name": "ordinary-tests-002",
+      "receipt_sha256": "17825389143e7c05538f2262b42fce34ce742da7b68ea9ed142702d42d130de2",
+      "exit_code": 0,
+      "passed": 33,
+      "executables": 9
+    },
+    {
+      "name": "manifest-003",
+      "receipt_sha256": "c87a069c1a7fe9e4e23cd31eeda2d70d6214bcb9d5a45f33710590308d8c8a37",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "game-det-003",
+      "receipt_sha256": "b6d5b0930a40a8bef6bbadf897364ede204e8a2a193a5e8ea08d9dec0a6408b4",
+      "exit_code": 0,
+      "passed": 39,
+      "executables": 9
+    },
+    {
+      "name": "game-fast8-003",
+      "receipt_sha256": "9101203b2f535f0c0f713fdec1a9af4fb759e5d44af9734a4d99ad739baf7424",
+      "exit_code": 0,
+      "passed": 39,
+      "executables": 9
+    },
+    {
+      "name": "clippy-det-003",
+      "receipt_sha256": "8986b814ed1fba37632775af4be0ecd6ff0c7745647e6dfe503327537f2a2f16",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "clippy-fast8-003",
+      "receipt_sha256": "6d3889aa271b63191418e8f0f33a9fd15f0d60bab18a991cdbed0ad0a06b6a2d",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "clippy-headless-003",
+      "receipt_sha256": "1b92a6a5f1b5725a406db591a47c73987473c083b974de9d9c66c05b80ebc775",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "static-003",
+      "receipt_sha256": "03aad0ed8ad0e6b64388c240d80972f262a4cc505ea3e21522b1ec645b05dd8e",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "wasm-003",
+      "receipt_sha256": "bcc978f6cb084b476544b6cdeab418742ee78f06b5d6400ef32b87a75eaed7a2",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "fmt-003",
+      "receipt_sha256": "3494d9613149b2fd9c4b2e634f4360813bf42705e5f94d9afd39f4e6b107e98b",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "conventions-003",
+      "receipt_sha256": "fde2fc64c05a7cff0fadc58cebf857dbe34b820cd3e0624557fb304d1ad955c0",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    },
+    {
+      "name": "diff-003",
+      "receipt_sha256": "2ae273c45aed4904e87f6fa2d09d90f8f50607320e7b2cba52761af996296d34",
+      "exit_code": 0,
+      "passed": 0,
+      "executables": 0
+    }
+  ],
+  "scope": [
+    "Native in-memory complete-game factories, default-off. No persisted physics byte importer, arbitrary guest heap, Wasm state, device audio restore or phase gate.",
+    "Source001 focused had5pass/1UI-fixture failure; initial layout corrected in002. Source002 focused6 and ordinary33 pass. Source003 retains actual silent audio clock following independentR1 review.",
+    "Final003 complete game tests compare active real static/streamed PCM, both physics dimensions and typed UI. UI uses CPU measurement fixture, not rendered pixels. No GPU/device/shipping-profile performance claim.",
+    "Immediate executed binary copies remain local, their paths/hashes recorded. Archive contains source, command logs and receipts, not executable payloads."
+  ]
+}

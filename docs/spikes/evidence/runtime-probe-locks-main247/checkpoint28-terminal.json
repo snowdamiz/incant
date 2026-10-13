@@ -1,0 +1,13 @@
+{
+  "candidate": "be3422f868915d0a95b76599b4a8dcaad53fcda5",
+  "required_counts": {
+    "SUCCESS": 13,
+    "FAILURE": 9,
+    "SKIPPED": 1
+  },
+  "all_eight_workflows_terminal": true,
+  "archive_sha256": "85cbdaf92380779b888bd41f079cee858ed0528add4a84f710e2c53e0acedb58",
+  "records": 5,
+  "final_windows_elapsed_seconds": 1479,
+  "scope": "Original failures, not repaired hosted execution"
+}

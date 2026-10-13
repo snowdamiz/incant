@@ -1,0 +1,19 @@
+{
+  "source_composition_sha256": "952d83c00ca5a4cd1070169b0f3c7fcdd76148245a91dc84f57c42f6c40a6e1e",
+  "checks": [
+    "producer-verify",
+    "manifest",
+    "graph-det",
+    "graph-fast8",
+    "graph-ordinary",
+    "audit-det",
+    "audit-fast8",
+    "fmt",
+    "conventions",
+    "diff"
+  ],
+  "archive_sha256": "6865aeb490f705a2c8ad0d96fd20f0e1f06618e825c524beed23094dabe4df3e",
+  "records": 20,
+  "source_files": 3656,
+  "scope": "No new compilation/runtime execution. Current read-only graphs equal repaired producer graphs. Broad195/195/186 belongs source004; repaired source005 focused9 each mode. Current implementation/build/tool bytes equal repaired producer exactly."
+}
