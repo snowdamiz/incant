@@ -1,0 +1,10 @@
+{
+  "baseRefOid": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+  "headRefOid": "99ba87ed82b4009680eaaa5089ffbd76f6bedc58",
+  "mergeCommit": {
+    "oid": "065aac69289bf9aab067dbd2148624904a860d5e"
+  },
+  "mergedAt": "2026-10-13T08:06:59Z",
+  "state": "MERGED",
+  "url": "https://github.com/snowdamiz/incant/pull/174"
+}

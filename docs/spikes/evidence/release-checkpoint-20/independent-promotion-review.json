@@ -1,0 +1,275 @@
+{
+  "status": "accepted for exact-candidate prepromotion; no findings",
+  "reviewer": "astra /root/runtime_review",
+  "at": "2026-10-13T08:06:21.639811+00:00",
+  "packet": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint20/prepromotion.json",
+    "sha256": "d3df869a355013181e9e5533c6679abe5c4a18d61b3e47698c7f03750e62e3f3",
+    "verified_artifacts": 22
+  },
+  "candidate": "99ba87ed82b4009680eaaa5089ffbd76f6bedc58",
+  "selected_main": "7bfeecfdfaa4a52ec198d1caee0fcb4ff9399fd9",
+  "tree": "71e55928908092313a4bcaf4d799cc09f976726c",
+  "release_before": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+  "pr": "https://github.com/snowdamiz/incant/pull/174",
+  "policy": [
+    {
+      "path": "docs/adr/0014-ci.md",
+      "sha256": "c283dd3e8cd42d0dc7df6e552a23364a3e5d8dae05e8ca527e22c78a55747a36"
+    },
+    {
+      "path": ".github/release-checks.json",
+      "sha256": "7840814e7f90346667697b9c19bf8e2be90937a06d20eb2ecd974be231bc1ca0"
+    },
+    {
+      "path": ".github/workflows/credentials.yml",
+      "sha256": "b38f7d0819bbd158e55539f57eb669d99a315e6bc982f70b97e81fd142579def"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "334e6425f26381c59fd3d591152d3541f1eb7d2566eef465fc3652561b3c66c2"
+    },
+    {
+      "path": ".github/workflows/website.yml",
+      "sha256": "2d06eba80e2ef2090cc1fd073d4fc479ac423e64ef29f5cc094dca10dada2014"
+    },
+    {
+      "path": ".github/workflows/local-services.yml",
+      "sha256": "5456fbf39e5fdc3d8d6d39e5a8b473284d146e771a878c6bcc133dccb41ebaec"
+    },
+    {
+      "path": ".github/workflows/nightly.yml",
+      "sha256": "8756c2561de02546d7ab28e3baf8d68c417b36006281fe4bba29100036fb41a8"
+    },
+    {
+      "path": ".github/workflows/physics-candidates.yml",
+      "sha256": "63640b513d9eb4ca390466592a78c18adab8f98c283ae2085398e3c7ce15a494"
+    },
+    {
+      "path": ".github/workflows/desktop.yml",
+      "sha256": "453f51314494782d61fc87acc8839a14d3321d0236c9616ceb4fe09a9a800b7b"
+    },
+    {
+      "path": ".github/workflows/development-wasm.yml",
+      "sha256": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b"
+    }
+  ],
+  "result": {
+    "candidate": "99ba87ed82b4009680eaaa5089ffbd76f6bedc58",
+    "selected_main": "7bfeecfdfaa4a52ec198d1caee0fcb4ff9399fd9",
+    "prior_release": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+    "tree": "71e55928908092313a4bcaf4d799cc09f976726c",
+    "required_success": 23,
+    "workflows_success": 8,
+    "jobs_success": 27,
+    "nonrequired_intended_pages_skip": 1,
+    "required_missing": 0,
+    "required_pending": 0,
+    "required_skipped": 0,
+    "required_failure": 0
+  },
+  "findings": [],
+  "assessment": [
+    "Read ADR0014 and frozen release-checks policy. All23 requirements unchanged from release and equal live strict GitHub Actions app15368 branch protection. No force push or requirement removal.",
+    "Exact candidate99ba has selectedmain205 tree71e559 and contains prior release2444, prior candidate2fab and selectedmain205 ancestry. Clean candidate checkout and freeze trailer verified. Later main development is outside this baseline.",
+    "Independent fresh GitHub PR/ref/run/job/check-run queries agree with publisher packet. All23 required contexts are unique completed SUCCESS on exact head and bind to matching job/check URLs. No required pending/skipped/missing/cancelled state accepted.",
+    "All8 exacthead push workflows succeeded, attempt1. All28 jobs are terminal:27successful plus only intentional nonrequired Pages deploy skipped. Classifier actual log runs select --full; Windows aggregate actual log and API show all4underlying child proofs succeeded.",
+    "All22 publisher packet artifacts rehashed; raw jobs/runs/protection/PR data agree with independently queried objects. Diff path/stat inventory equals exact release-to-selected Git diff. Previous checkpoint19 three required failures remain retained; no retroactive replacement."
+  ],
+  "own_evidence": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/assert-live-result.json",
+      "sha256": "dd8086c006a3638e5da1f5ca291c018d09f3829f3a925c1ace7c397514d50d98",
+      "bytes": 456
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/assert-live.py",
+      "sha256": "013e73d2831d75adff6a61c86c99daee301ee07f35e03df9ca17dbc7807cf19a",
+      "bytes": 3771
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/candidate-ref.json",
+      "sha256": "e0873a26e8daefe54a539fbb6c70da65b547b1a8a86b228f145cb05751243543",
+      "bytes": 396
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/candidate-ref.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/checks.json",
+      "sha256": "076387ce9307ae0cc7b559aee0925b4f59148bd15402f5d830ae9bf8a694e741",
+      "bytes": 98151
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/checks.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/classify-log.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/classify-log.txt",
+      "sha256": "6448af154ae021dd5fa1a426341c84158d1d9fec62c02e07dd7de6b6bb96cad1",
+      "bytes": 50818
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955805.json",
+      "sha256": "0b744cfc31d80d3fa64667f4ff06196223f452f7d1e62fada8c2ca0cd2fc370b",
+      "bytes": 23394
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955805.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955807.json",
+      "sha256": "c38ceea88d83e04f11de9e9359a4b351c6b1763787e6c5ee8fea29246166d20d",
+      "bytes": 27988
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955807.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955854.json",
+      "sha256": "b6b7c525071a8f30ca2ed233725acd88b01088875c1d4ebe651a539dda6cb0b6",
+      "bytes": 2454
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955854.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955876.json",
+      "sha256": "fe4b762b7a1ce68bb54254f272f2c1f9e9609f6c64db06a053202d7140b7644d",
+      "bytes": 25530
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955876.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955958.json",
+      "sha256": "a7c1e58e419fd1868263e0c228b1128885fd100fbfa6ab38821cf3d3376c1624",
+      "bytes": 26287
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955958.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955963.json",
+      "sha256": "9c43710b3b67ab95a0803b9b5488dd5ec266f61340767e8f1d59d8e3a0c1946c",
+      "bytes": 4149
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356955963.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356956098.json",
+      "sha256": "779ac20fd6c56fa3138be6d2458226631eef67adc58ca92352051a9ce8a1ff47",
+      "bytes": 12101
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356956098.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356956176.json",
+      "sha256": "9edb7e1ed9f4d680441612cef16a15dc2275ad608568ae7e0e079555b4264048",
+      "bytes": 19192
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/jobs-38356956176.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/log-queries.json",
+      "sha256": "7817ee90ef7729c1329f58249a33220c5f61caf4f57851d6a8094dbaac3019c3",
+      "bytes": 332
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/pr.json",
+      "sha256": "51c6e63ddcbb191f69c0858d255b9ac4e7a78e78b8886d7dc043c7fe512d6b83",
+      "bytes": 8991
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/pr.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/protection.json",
+      "sha256": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+      "bytes": 3015
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/protection.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/queries.json",
+      "sha256": "8c237f76987abba0095c165ccbc080a0a7126bf078300fc83f68f6d7c4d78497",
+      "bytes": 2014
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/read-live.py",
+      "sha256": "c7f6fdbf2bc0b91ef2b21907b09c41b3b2d858d81088b1e85f539548693bbd8c",
+      "bytes": 1939
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/release-ref.json",
+      "sha256": "b34310c626b93555ef2220e45c7217c2d83831553661e28868d37b1830929ae6",
+      "bytes": 340
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/release-ref.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/runs.json",
+      "sha256": "ad717e3c251a41a298efdfc042f6e0c3a5d187b4f4329e1e9d27c076f0378d38",
+      "bytes": 99507
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/runs.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/windows-aggregate-log.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/checkpoint20-audit-20261013/windows-aggregate-log.txt",
+      "sha256": "70b9bb64164644300f7e2dfa873e8d448a4afc91c7589fbdf8c9a6e5e05f058c",
+      "bytes": 40080
+    }
+  ],
+  "promotion_requirements": [
+    "Sole publisher must merge this exact candidate with Built-by: astra trailer and verify resulting release tree equals71e55928908092313a4bcaf4d799cc09f976726c.",
+    "This receipt is prepromotion acceptance, not proof that merge already occurred. Refresh guards if candidate or release changes before merge."
+  ],
+  "limits": [
+    "No branch/ref/release mutation, builds, GPU or images by reviewer.",
+    "This audits the configured comprehensive checkpoint results; it is not a Phase1, reference-phone/performance, signing/store, or full engine release gate approval.",
+    "No claim every uploaded platform artifact or complete job log was reexecuted/reviewed; exact GitHub job outcomes and the targeted classifier/Windows aggregation controls are independently verified."
+  ]
+}

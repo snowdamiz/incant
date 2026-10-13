@@ -1,0 +1,1351 @@
+{
+  "pr": {
+    "baseRefOid": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+    "headRefOid": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:58:14Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941128/job/115136684722",
+        "name": "desktop (windows-latest, Windows, .exe)",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:07:45Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941145/job/115136685612",
+        "name": "storage (macos-latest)",
+        "startedAt": "2026-10-13T05:02:25Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:24:19Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685296",
+        "name": "conformance (macos-latest)",
+        "startedAt": "2026-10-13T04:57:16Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T04:57:33Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941130/job/115136684947",
+        "name": "classify",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T04:59:06Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941129/job/115136684352",
+        "name": "local-service-protocols",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Local service protocols"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:11:15Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941169/job/115136685696",
+        "name": "native (macos-latest)",
+        "startedAt": "2026-10-13T04:57:15Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:10:26Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941157/job/115136685424",
+        "name": "desktop (macos, macos-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-13T04:57:13Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T04:58:50Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941178/job/115136684890",
+        "name": "build",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Website \u00b7 check and deploy"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:18:22Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941128/job/115136684605",
+        "name": "desktop (ubuntu-latest, Linux)",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop editor and engine"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:04:58Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941145/job/115136685223",
+        "name": "storage (windows-latest)",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:21:11Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685347",
+        "name": "conformance (ubuntu-latest)",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:14:08Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941169/job/115136685455",
+        "name": "native (ubuntu-latest)",
+        "startedAt": "2026-10-13T04:59:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:15:51Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941157/job/115136685415",
+        "name": "desktop (windows, windows-latest, incant_platform_smoke.exe)",
+        "startedAt": "2026-10-13T04:57:31Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:00:24Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941145/job/115136685349",
+        "name": "storage (ubuntu-latest)",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Desktop credential persistence"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:15:44Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941169/job/115136685572",
+        "name": "native (windows-latest)",
+        "startedAt": "2026-10-13T04:57:34Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:06:06Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941157/job/115136685486",
+        "name": "desktop (linux, ubuntu-latest, incant_platform_smoke)",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:50:32Z",
+        "conclusion": "FAILURE",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941130/job/115136798310",
+        "name": "checks",
+        "startedAt": "2026-10-13T05:05:57Z",
+        "status": "COMPLETED",
+        "workflowName": "Incant checks"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T04:58:50Z",
+        "conclusion": "SKIPPED",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941178/job/115137121209",
+        "name": "deploy",
+        "startedAt": "2026-10-13T04:58:51Z",
+        "status": "COMPLETED",
+        "workflowName": "Website \u00b7 check and deploy"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:31:12Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685386",
+        "name": "windows-baseline",
+        "startedAt": "2026-10-13T05:00:25Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:02:17Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941169/job/115136685617",
+        "name": "portability",
+        "startedAt": "2026-10-13T04:57:13Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:02:17Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941157/job/115136685387",
+        "name": "web",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T06:27:05Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685208",
+        "name": "windows-optimized",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:16:41Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941169/job/115141528103",
+        "name": "compare",
+        "startedAt": "2026-10-13T05:15:46Z",
+        "status": "COMPLETED",
+        "workflowName": "Physics candidate feasibility"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:05:51Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941157/job/115136685255",
+        "name": "ios",
+        "startedAt": "2026-10-13T04:57:14Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:05:02Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685078",
+        "name": "windows-shipping",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:05:09Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941157/job/115136685563",
+        "name": "android",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Six platform probes"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T05:11:41Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685232",
+        "name": "windows-composed",
+        "startedAt": "2026-10-13T04:57:08Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-13T06:27:55Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115161358232",
+        "name": "conformance (windows-latest)",
+        "startedAt": "2026-10-13T06:27:07Z",
+        "status": "COMPLETED",
+        "workflowName": "Development Wasm conformance"
+      }
+    ],
+    "url": "https://github.com/snowdamiz/incant/pull/174"
+  },
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 38348941157,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Six platform probes"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38348941169,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Physics candidate feasibility"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38348941145,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Desktop credential persistence"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38348941178,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Website \u00b7 check and deploy"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38348941141,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Development Wasm conformance"
+    },
+    {
+      "conclusion": "failure",
+      "databaseId": 38348941128,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Desktop editor and engine"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 38348941129,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Local service protocols"
+    },
+    {
+      "conclusion": "failure",
+      "databaseId": 38348941130,
+      "event": "push",
+      "headSha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+      "status": "completed",
+      "workflowName": "Incant checks"
+    }
+  ],
+  "conformance_jobs": {
+    "total_count": 7,
+    "jobs": [
+      {
+        "id": 115136685078,
+        "run_id": 38348941141,
+        "workflow_name": "Development Wasm conformance",
+        "head_branch": "codex/release-candidate",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38348941141",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAazq5kFg",
+        "head_sha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/115136685078",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685078",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-13T04:57:06Z",
+        "started_at": "2026-10-13T04:57:08Z",
+        "completed_at": "2026-10-13T05:05:02Z",
+        "name": "windows-shipping",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-13T04:57:08Z",
+            "completed_at": "2026-10-13T04:57:10Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-13T04:57:10Z",
+            "completed_at": "2026-10-13T04:57:55Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-13T04:57:55Z",
+            "completed_at": "2026-10-13T04:57:56Z"
+          },
+          {
+            "name": "Run rustup show",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-13T04:57:56Z",
+            "completed_at": "2026-10-13T04:58:08Z"
+          },
+          {
+            "name": "Run rustup target add wasm32-unknown-unknown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-13T04:58:08Z",
+            "completed_at": "2026-10-13T04:58:10Z"
+          },
+          {
+            "name": "Run python tools/generate_wasm_sdk.py --check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-13T04:58:10Z",
+            "completed_at": "2026-10-13T04:58:14Z"
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-13T04:58:14Z",
+            "completed_at": "2026-10-13T04:58:30Z"
+          },
+          {
+            "name": "Fresh MSVC optimized candidate executable and matched PDB",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-13T04:58:30Z",
+            "completed_at": "2026-10-13T05:04:45Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-13T05:04:45Z",
+            "completed_at": "2026-10-13T05:04:48Z"
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-13T05:04:48Z",
+            "completed_at": "2026-10-13T05:04:59Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-13T05:04:59Z",
+            "completed_at": "2026-10-13T05:04:59Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-13T05:04:59Z",
+            "completed_at": "2026-10-13T05:05:01Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-13T05:05:01Z",
+            "completed_at": "2026-10-13T05:05:01Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/115136685078",
+        "labels": [
+          "windows-latest"
+        ],
+        "runner_id": 1000012583,
+        "runner_name": "GitHub Actions 1000012583",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115136685208,
+        "run_id": 38348941141,
+        "workflow_name": "Development Wasm conformance",
+        "head_branch": "codex/release-candidate",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38348941141",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAazq5kmA",
+        "head_sha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/115136685208",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685208",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-13T04:57:06Z",
+        "started_at": "2026-10-13T04:57:08Z",
+        "completed_at": "2026-10-13T06:27:05Z",
+        "name": "windows-optimized",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-13T04:57:09Z",
+            "completed_at": "2026-10-13T04:57:10Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-13T04:57:10Z",
+            "completed_at": "2026-10-13T04:57:59Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-13T04:57:59Z",
+            "completed_at": "2026-10-13T04:58:00Z"
+          },
+          {
+            "name": "Run rustup show",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-13T04:58:00Z",
+            "completed_at": "2026-10-13T04:58:15Z"
+          },
+          {
+            "name": "Run rustup target add wasm32-unknown-unknown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-13T04:58:15Z",
+            "completed_at": "2026-10-13T04:58:18Z"
+          },
+          {
+            "name": "Run python tools/generate_wasm_sdk.py --check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-13T04:58:18Z",
+            "completed_at": "2026-10-13T04:58:20Z"
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-13T04:58:20Z",
+            "completed_at": "2026-10-13T04:58:44Z"
+          },
+          {
+            "name": "MSVC optimized C candidate numerical, fuel and trap controls",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-13T04:58:44Z",
+            "completed_at": "2026-10-13T06:25:57Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-13T06:25:57Z",
+            "completed_at": "2026-10-13T06:25:59Z"
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-13T06:25:59Z",
+            "completed_at": "2026-10-13T06:27:01Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-13T06:27:01Z",
+            "completed_at": "2026-10-13T06:27:01Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-13T06:27:01Z",
+            "completed_at": "2026-10-13T06:27:03Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-13T06:27:03Z",
+            "completed_at": "2026-10-13T06:27:03Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/115136685208",
+        "labels": [
+          "windows-latest"
+        ],
+        "runner_id": 1000012582,
+        "runner_name": "GitHub Actions 1000012582",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115136685232,
+        "run_id": 38348941141,
+        "workflow_name": "Development Wasm conformance",
+        "head_branch": "codex/release-candidate",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38348941141",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAazq5ksA",
+        "head_sha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/115136685232",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685232",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-13T04:57:06Z",
+        "started_at": "2026-10-13T04:57:08Z",
+        "completed_at": "2026-10-13T05:11:41Z",
+        "name": "windows-composed",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-13T04:57:08Z",
+            "completed_at": "2026-10-13T04:57:09Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-13T04:57:09Z",
+            "completed_at": "2026-10-13T04:57:56Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-13T04:57:56Z",
+            "completed_at": "2026-10-13T04:57:56Z"
+          },
+          {
+            "name": "Run rustup show",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-13T04:57:56Z",
+            "completed_at": "2026-10-13T04:58:10Z"
+          },
+          {
+            "name": "Run rustup target add wasm32-unknown-unknown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-13T04:58:10Z",
+            "completed_at": "2026-10-13T04:58:13Z"
+          },
+          {
+            "name": "Run python tools/generate_wasm_sdk.py --check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-13T04:58:13Z",
+            "completed_at": "2026-10-13T04:58:18Z"
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-13T04:58:18Z",
+            "completed_at": "2026-10-13T04:58:38Z"
+          },
+          {
+            "name": "Fresh composed input, physics, module and audio shipping proof",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-13T04:58:38Z",
+            "completed_at": "2026-10-13T05:09:21Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-13T05:09:21Z",
+            "completed_at": "2026-10-13T05:09:27Z"
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 16,
+            "started_at": "2026-10-13T05:09:27Z",
+            "completed_at": "2026-10-13T05:11:37Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 17,
+            "started_at": "2026-10-13T05:11:37Z",
+            "completed_at": "2026-10-13T05:11:37Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 18,
+            "started_at": "2026-10-13T05:11:37Z",
+            "completed_at": "2026-10-13T05:11:40Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 19,
+            "started_at": "2026-10-13T05:11:40Z",
+            "completed_at": "2026-10-13T05:11:40Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/115136685232",
+        "labels": [
+          "windows-latest"
+        ],
+        "runner_id": 1000012584,
+        "runner_name": "GitHub Actions 1000012584",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115136685296,
+        "run_id": 38348941141,
+        "workflow_name": "Development Wasm conformance",
+        "head_branch": "codex/release-candidate",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38348941141",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAazq5k8A",
+        "head_sha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/115136685296",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685296",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-13T04:57:06Z",
+        "started_at": "2026-10-13T04:57:16Z",
+        "completed_at": "2026-10-13T05:24:19Z",
+        "name": "conformance (macos-latest)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-13T04:57:17Z",
+            "completed_at": "2026-10-13T04:57:18Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-13T04:57:18Z",
+            "completed_at": "2026-10-13T04:59:02Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-13T04:59:02Z",
+            "completed_at": "2026-10-13T04:59:03Z"
+          },
+          {
+            "name": "Run rustup show",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-13T04:59:03Z",
+            "completed_at": "2026-10-13T04:59:15Z"
+          },
+          {
+            "name": "Run rustup target add wasm32-unknown-unknown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-13T04:59:15Z",
+            "completed_at": "2026-10-13T04:59:17Z"
+          },
+          {
+            "name": "Run python tools/generate_wasm_sdk.py --check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-13T04:59:17Z",
+            "completed_at": "2026-10-13T04:59:18Z"
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-13T04:59:18Z",
+            "completed_at": "2026-10-13T04:59:24Z"
+          },
+          {
+            "name": "Combined static and development conformance on one development graph",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-13T04:59:24Z",
+            "completed_at": "2026-10-13T05:12:40Z"
+          },
+          {
+            "name": "Fresh compiler-free static shipping executable and matched symbols",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-13T05:12:40Z",
+            "completed_at": "2026-10-13T05:16:56Z"
+          },
+          {
+            "name": "Fresh composed input, physics, module and audio shipping proof",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-13T05:16:56Z",
+            "completed_at": "2026-10-13T05:23:51Z"
+          },
+          {
+            "name": "Run python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-13T05:23:51Z",
+            "completed_at": "2026-10-13T05:23:53Z"
+          },
+          {
+            "name": "Run cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-13T05:23:53Z",
+            "completed_at": "2026-10-13T05:23:55Z"
+          },
+          {
+            "name": "Keep unsupported device targets free of the development host",
+            "status": "completed",
+            "conclusion": "skipped",
+            "number": 13,
+            "started_at": "2026-10-13T05:23:55Z",
+            "completed_at": "2026-10-13T05:23:55Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-13T05:23:55Z",
+            "completed_at": "2026-10-13T05:23:59Z"
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-13T05:23:59Z",
+            "completed_at": "2026-10-13T05:24:13Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-13T05:24:13Z",
+            "completed_at": "2026-10-13T05:24:13Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-13T05:24:13Z",
+            "completed_at": "2026-10-13T05:24:14Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-13T05:24:14Z",
+            "completed_at": "2026-10-13T05:24:18Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/115136685296",
+        "labels": [
+          "macos-latest"
+        ],
+        "runner_id": 1000012592,
+        "runner_name": "GitHub Actions 1000012592",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115136685347,
+        "run_id": 38348941141,
+        "workflow_name": "Development Wasm conformance",
+        "head_branch": "codex/release-candidate",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38348941141",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAazq5lIw",
+        "head_sha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/115136685347",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685347",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-13T04:57:06Z",
+        "started_at": "2026-10-13T04:57:08Z",
+        "completed_at": "2026-10-13T05:21:11Z",
+        "name": "conformance (ubuntu-latest)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-13T04:57:09Z",
+            "completed_at": "2026-10-13T04:57:11Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-13T04:57:11Z",
+            "completed_at": "2026-10-13T04:57:57Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-13T04:57:57Z",
+            "completed_at": "2026-10-13T04:57:57Z"
+          },
+          {
+            "name": "Run rustup show",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-13T04:57:57Z",
+            "completed_at": "2026-10-13T04:58:07Z"
+          },
+          {
+            "name": "Run rustup target add wasm32-unknown-unknown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-13T04:58:07Z",
+            "completed_at": "2026-10-13T04:58:10Z"
+          },
+          {
+            "name": "Run python tools/generate_wasm_sdk.py --check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-13T04:58:10Z",
+            "completed_at": "2026-10-13T04:58:11Z"
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-13T04:58:11Z",
+            "completed_at": "2026-10-13T04:58:15Z"
+          },
+          {
+            "name": "Combined static and development conformance on one development graph",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-13T04:58:15Z",
+            "completed_at": "2026-10-13T05:13:15Z"
+          },
+          {
+            "name": "Fresh compiler-free static shipping executable and matched symbols",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-13T05:13:15Z",
+            "completed_at": "2026-10-13T05:16:42Z"
+          },
+          {
+            "name": "Fresh composed input, physics, module and audio shipping proof",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-13T05:16:42Z",
+            "completed_at": "2026-10-13T05:20:49Z"
+          },
+          {
+            "name": "Run python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-13T05:20:49Z",
+            "completed_at": "2026-10-13T05:20:50Z"
+          },
+          {
+            "name": "Run cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 12,
+            "started_at": "2026-10-13T05:20:50Z",
+            "completed_at": "2026-10-13T05:20:50Z"
+          },
+          {
+            "name": "Keep unsupported device targets free of the development host",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13,
+            "started_at": "2026-10-13T05:20:50Z",
+            "completed_at": "2026-10-13T05:20:56Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14,
+            "started_at": "2026-10-13T05:20:56Z",
+            "completed_at": "2026-10-13T05:20:59Z"
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 26,
+            "started_at": "2026-10-13T05:20:59Z",
+            "completed_at": "2026-10-13T05:21:08Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 27,
+            "started_at": "2026-10-13T05:21:08Z",
+            "completed_at": "2026-10-13T05:21:09Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 28,
+            "started_at": "2026-10-13T05:21:09Z",
+            "completed_at": "2026-10-13T05:21:09Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 29,
+            "started_at": "2026-10-13T05:21:09Z",
+            "completed_at": "2026-10-13T05:21:09Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/115136685347",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000012591,
+        "runner_name": "GitHub Actions 1000012591",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115136685386,
+        "run_id": 38348941141,
+        "workflow_name": "Development Wasm conformance",
+        "head_branch": "codex/release-candidate",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38348941141",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAazq5lSg",
+        "head_sha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/115136685386",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115136685386",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-13T04:57:06Z",
+        "started_at": "2026-10-13T05:00:25Z",
+        "completed_at": "2026-10-13T05:31:12Z",
+        "name": "windows-baseline",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-13T05:00:26Z",
+            "completed_at": "2026-10-13T05:00:29Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-13T05:00:29Z",
+            "completed_at": "2026-10-13T05:01:26Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-13T05:01:26Z",
+            "completed_at": "2026-10-13T05:01:27Z"
+          },
+          {
+            "name": "Run rustup show",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-13T05:01:27Z",
+            "completed_at": "2026-10-13T05:01:40Z"
+          },
+          {
+            "name": "Run rustup target add wasm32-unknown-unknown",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5,
+            "started_at": "2026-10-13T05:01:40Z",
+            "completed_at": "2026-10-13T05:01:42Z"
+          },
+          {
+            "name": "Run python tools/generate_wasm_sdk.py --check",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6,
+            "started_at": "2026-10-13T05:01:43Z",
+            "completed_at": "2026-10-13T05:01:47Z"
+          },
+          {
+            "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-13T05:01:47Z",
+            "completed_at": "2026-10-13T05:02:19Z"
+          },
+          {
+            "name": "Combined static and development conformance on one development graph",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-13T05:02:19Z",
+            "completed_at": "2026-10-13T05:29:50Z"
+          },
+          {
+            "name": "Run python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-13T05:29:50Z",
+            "completed_at": "2026-10-13T05:29:52Z"
+          },
+          {
+            "name": "Run cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 10,
+            "started_at": "2026-10-13T05:29:52Z",
+            "completed_at": "2026-10-13T05:29:54Z"
+          },
+          {
+            "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 11,
+            "started_at": "2026-10-13T05:29:54Z",
+            "completed_at": "2026-10-13T05:29:56Z"
+          },
+          {
+            "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 20,
+            "started_at": "2026-10-13T05:29:56Z",
+            "completed_at": "2026-10-13T05:31:08Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 21,
+            "started_at": "2026-10-13T05:31:08Z",
+            "completed_at": "2026-10-13T05:31:09Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 22,
+            "started_at": "2026-10-13T05:31:09Z",
+            "completed_at": "2026-10-13T05:31:11Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 23,
+            "started_at": "2026-10-13T05:31:11Z",
+            "completed_at": "2026-10-13T05:31:11Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/115136685386",
+        "labels": [
+          "windows-latest"
+        ],
+        "runner_id": 1000012599,
+        "runner_name": "GitHub Actions 1000012599",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      },
+      {
+        "id": 115161358232,
+        "run_id": 38348941141,
+        "workflow_name": "Development Wasm conformance",
+        "head_branch": "codex/release-candidate",
+        "run_url": "https://api.github.com/repos/snowdamiz/incant/actions/runs/38348941141",
+        "run_attempt": 1,
+        "node_id": "CR_kwDOVBtUrs8AAAAa0CbfmA",
+        "head_sha": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+        "url": "https://api.github.com/repos/snowdamiz/incant/actions/jobs/115161358232",
+        "html_url": "https://github.com/snowdamiz/incant/actions/runs/38348941141/job/115161358232",
+        "status": "completed",
+        "conclusion": "success",
+        "created_at": "2026-10-13T06:27:05Z",
+        "started_at": "2026-10-13T06:27:07Z",
+        "completed_at": "2026-10-13T06:27:55Z",
+        "name": "conformance (windows-latest)",
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1,
+            "started_at": "2026-10-13T06:27:08Z",
+            "completed_at": "2026-10-13T06:27:08Z"
+          },
+          {
+            "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2,
+            "started_at": "2026-10-13T06:27:08Z",
+            "completed_at": "2026-10-13T06:27:52Z"
+          },
+          {
+            "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3,
+            "started_at": "2026-10-13T06:27:52Z",
+            "completed_at": "2026-10-13T06:27:52Z"
+          },
+          {
+            "name": "Require every Windows proof to succeed",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4,
+            "started_at": "2026-10-13T06:27:52Z",
+            "completed_at": "2026-10-13T06:27:52Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7,
+            "started_at": "2026-10-13T06:27:52Z",
+            "completed_at": "2026-10-13T06:27:52Z"
+          },
+          {
+            "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 8,
+            "started_at": "2026-10-13T06:27:52Z",
+            "completed_at": "2026-10-13T06:27:53Z"
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 9,
+            "started_at": "2026-10-13T06:27:53Z",
+            "completed_at": "2026-10-13T06:27:53Z"
+          }
+        ],
+        "check_run_url": "https://api.github.com/repos/snowdamiz/incant/check-runs/115161358232",
+        "labels": [
+          "ubuntu-latest"
+        ],
+        "runner_id": 1000012617,
+        "runner_name": "GitHub Actions 1000012617",
+        "runner_group_id": 0,
+        "runner_group_name": "GitHub Actions"
+      }
+    ]
+  },
+  "promoted": false,
+  "failures": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint19/linux-desktop-115136684605.log",
+      "sha256": "403d7ea680a926f9179d9b598472c6a946e8eaa11711770b03a62b71a3a565fc",
+      "bytes": 865356
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint19/checks-115136798310.log",
+      "sha256": "cd9bc9d697c47bec892af0fe73103acbec417dff59c6b65f52288c66101dafd2",
+      "bytes": 915540
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint19/windows-desktop-115136684722.log",
+      "sha256": "d8477647a68528d1244910c60d4a8b1ac6ed7dcdab928771bdad7e4956b978e0",
+      "bytes": 748501
+    }
+  ]
+}

@@ -16,26 +16,27 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main208, 2026-10-13
+## Current overview — main209, 2026-10-13
 
-Development main208 includes the restart quota-test repair (PR188) and the reviewed,
-opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
-(PR189). Default renderer checks remain; the next frozen checkpoint also exercises
-cooked features and asserts the actual native backend. Producer Metal appearance
-reviews remain scoped to their recorded builds; current Vulkan/DX12 execution is pending.
+Development main209 includes the reviewed opt-in cooked renderer families and
+Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
+profiling scopes and inert physics island validation. Each lane retains its own
+execution and acceptance limits below; the complete engine and game remain open.
 
-Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
-terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux and
-Windows conformance failed the quota assertion, and macOS rejected a successful
-player compile because its probe confused library and executable units. The main188
-quota repair preserves production's 50 ms budget, and the reviewed player probe
-correction is merged in PR191. Checkpoint18 retained the exact main191 tree and is closed as described below.
-All 23 requirements must pass before release promotion.
-No release or phase approval follows from a main merge.
-Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
-that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
-is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
-production and backend assertions are unchanged. Checkpoint18 is terminal with 20 required successes and three same-cause failures. Checkpoint19 is terminal and unpromoted at exact main197: 20 required contexts passed and three failed. Its Linux desktop persistence test failed a stale expected pipeline count (30 versus actual31), and macOS and Windows refused vendored Parry compiler package IDs after successful shipping compiles. All Windows conformance children passed. Checkpoint20 is frozen on the same PR174 at exact main205 (`7bfeecfd`, candidate `99ba87ed`), preserving all23 requirements and the prior failures; later main work does not move that candidate. The [Parry audit correction](docs/spikes/physics-artifact-vendor-identity.md) passes actual both-mode target audits and full tooling checks, with independent final acceptance; PR203 is merged after its exact-head fast check. The [test-only correction](docs/spikes/vulkan-cache-catalog-count.md) is merged in PR201 after independent review, local compile/Clippy and the required fast check; actual Vulkan rerun and all23 release successes remain required.
+Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
+promoted through PR174 after all 23 required contexts and eight exact-head workflows
+succeeded and independent review verified the exact tested tree. Release `065aac69`
+exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
+Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
+Later main206–209 changes remain outside that baseline. No device, performance or
+phase gate follows from this promotion.
+
+Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
+exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
+test import repaired in PR193; checkpoint19 exposed the cache count and vendored
+Parry compiler-identity issues repaired in PR201/203. Their original failures remain
+retained. No checkpoint is currently active; the next selection follows ADR0014's
+regular cadence and preserves all23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -93,7 +94,7 @@ contact-link ownership, retaining native ordering, free stacks and deferred
 split scheduling. Actual 2D/3D observations include sleep/wake, empty awake
 containers, fixed-body active history, reorder, removal/reuse and delayed splits.
 115 CPU tests, Clippy, wasm32 and dependency/contract checks pass; independent
-producer review is accepted. The [current-main208 integration](docs/spikes/physics-islands-main208.md) passes eight checks and 115 CPU cases with 2,914 unchanged inputs; final integration review is accepted and publication requires the fast check.
+producer review is accepted. The [current-main208 integration](docs/spikes/physics-islands-main208.md) passes eight checks and 115 CPU cases with 2,914 unchanged inputs; final integration review and the exact-head fast check passed; PR209 is merged.
 Stamp-sensitive scratch, solver masks/buckets, complete collider/owner composition
 and continued live execution remain open; physics saves stay refused.
 [Island contract](docs/spikes/physics-inert-islands.md).
