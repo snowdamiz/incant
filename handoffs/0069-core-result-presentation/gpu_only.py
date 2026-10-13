@@ -62,6 +62,11 @@ def checked_freeze(new=False):
     require(inventory['head'] == SOURCE, 'source inventory head changed')
     for row in inventory['files']:
         p = ROOT / row['path']
+        # Root's execution instructions are not an input to any frozen binary.
+        # Keep all other original files exact; bind this one document to the
+        # fresh authority instead, so scheduling cannot invalidate the build.
+        if p == HERE / 'brief.md':
+            continue
         require(p.is_file() and p.stat().st_size == row['bytes'] and lease.digest(p) == row['sha256'],
                 f'frozen source changed: {row["path"]}')
     # New review/helper files may only be inside this packet, never engine paths.
@@ -120,6 +125,7 @@ def authority(path, evidence):
     expected = {'packet': lease.PACKET, 'phase': PHASE, 'gpu_only': True, 'cpu_only': False,
                 'source_commit': SOURCE, 'freeze_sha256': FREEZE_SHA, 'cpu_manifest_sha256': MANIFEST_SHA,
                 'wrapper_sha256': lease.digest(__file__), 'evidence': str(evidence),
+                'brief_sha256': lease.digest(HERE / 'brief.md'),
                 'target': str(evidence / 'unused-cargo-target'), 'ceilings': lease.CEILINGS,
                 'planned_processes': 18, 'cpu_release_sha256': lease.digest(CPU / 'release.json')}
     for key, wanted in expected.items():

@@ -35,6 +35,7 @@ class GuardTests(unittest.TestCase):
         value = {'packet': gpu.lease.PACKET, 'phase': gpu.PHASE, 'gpu_only': True, 'cpu_only': False,
                  'source_commit': gpu.SOURCE, 'freeze_sha256': gpu.FREEZE_SHA,
                  'cpu_manifest_sha256': gpu.MANIFEST_SHA, 'wrapper_sha256': gpu.lease.digest(gpu.__file__),
+                 'brief_sha256': gpu.lease.digest(gpu.HERE / 'brief.md'),
                  'evidence': str(self.output), 'target': str(self.output / 'unused-cargo-target'),
                  'ceilings': gpu.lease.CEILINGS, 'planned_processes': 18,
                  'cpu_release_sha256': gpu.lease.digest(self.cpu / 'release.json'),
@@ -55,7 +56,8 @@ class GuardTests(unittest.TestCase):
 
     def test_stale_cpu_only_wrong_source_and_bool_alias_authorities_refuse(self):
         for key, value in [('gpu_only', 1), ('cpu_only', True), ('source_commit', 'other'),
-                           ('planned_processes', 19), ('wrapper_sha256', 'other'), ('holder', '')]:
+                           ('planned_processes', 19), ('wrapper_sha256', 'other'),
+                           ('brief_sha256', 'stale instructions'), ('holder', '')]:
             with self.subTest(key=key):
                 body = self.authority()
                 body[key] = value
