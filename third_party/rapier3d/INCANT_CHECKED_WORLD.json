@@ -1,0 +1,164 @@
+{
+  "format": "incant-private-world-construction-layer",
+  "version": 1,
+  "baseline": "333e7f46cf01c32eac5d10b54371d1960a72bf9d",
+  "feature": "incant-checked-restore",
+  "scope": "Private captured primitive-world assembly only; typed joined frame and epoch, cumulative allocation plan. No public installer, runtime or save admission. Supersedes historical pins for listed paths only.",
+  "files": [
+    {
+      "path": "src/data/arena_checkpoint.rs",
+      "baseline_sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc",
+      "sha256": "ae9d41adce78b31bcb6fc7c10a654673799a4aaa426219dd640b1ebb1f4c7fb2"
+    },
+    {
+      "path": "src/data/coarena_checkpoint.rs",
+      "baseline_sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385",
+      "sha256": "af95d2823d12f5ddf1ca390e8278b4a65aa08e6712273a212c2279089eda36e6"
+    },
+    {
+      "path": "src/dynamics/ccd/ccd_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "d00efd985aff42bed2d5c0caa823aed92a3c4ce0c0220bc05dd88cd5610757f2"
+    },
+    {
+      "path": "src/dynamics/ccd/ccd_solver.rs",
+      "baseline_sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47",
+      "sha256": "664d1db5fc0608788121c9e126fe863bea70bf9116086b7877d28402fca88646"
+    },
+    {
+      "path": "src/dynamics/joint/impulse_joint/impulse_joint_set.rs",
+      "baseline_sha256": "b71bf56dcb99d076be39187ab7fb51563303369470d01822157b0f8e41cb66c6",
+      "sha256": "671cbfe773eb73ed845dc28076952164460a5135d59ff234ed005d54151d1e22"
+    },
+    {
+      "path": "src/dynamics/joint/impulse_joint/impulse_joint_set_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "01697fb64f5175e5ba407c9f408935e8cd3fbea09346527fdb9e3a859de70034"
+    },
+    {
+      "path": "src/dynamics/joint/multibody_joint/multibody_joint_set.rs",
+      "baseline_sha256": "81dcd3c58e8e8267fdeae01330a3d492b17e04ed07ac2cbb11d9912c144c59e2",
+      "sha256": "244adc4beca54820373474fba7b31aa406ec7971455693d38182b6eccd01215c"
+    },
+    {
+      "path": "src/dynamics/joint/multibody_joint/multibody_joint_set_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "49d3ef677e1e114ba0398393dd5c74412bc987210859bca02256d3459beec0a1"
+    },
+    {
+      "path": "src/dynamics/soft_body/soft_body_set/soft_body_set.rs",
+      "baseline_sha256": "4be33cac03f2470043f91d6eee86edb7b84a7d3fc69f61af7bac1bb6a16a4911",
+      "sha256": "03802fd786c8f460b20b64fe6a370e89ef355e0809ddf5482454fc2bab69b220"
+    },
+    {
+      "path": "src/dynamics/soft_body/soft_body_set/soft_body_set_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "53e99ac4cc7ffab67aa17f240a29f104fa96e734c26ceab6fe07a98d2e5416c2"
+    },
+    {
+      "path": "src/dynamics/solver/contact_constraint/contact_constraints_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "e660f6785f47c0a2e31b9c57778932a178c3239d486383ecb8ea1458ac92319e"
+    },
+    {
+      "path": "src/dynamics/solver/contact_constraint/contact_constraints_set.rs",
+      "baseline_sha256": "8946c7ac90c7ef1ddada45015992839ae9fd01e611572774e3940e3ceee63cea",
+      "sha256": "5bc8a2586611f01beba595e197d1e08b04313ac245bbc4612408d0a9299ac4b9"
+    },
+    {
+      "path": "src/dynamics/solver/interaction_groups.rs",
+      "baseline_sha256": "d9e114e3e88d8a79f417ff392a0f285b754c4436d2005217e000d70c12c5ccfb",
+      "sha256": "bfcaf8a1cd2a425653da85b4b0f1919d18232f422e6673a0e544826245a35522"
+    },
+    {
+      "path": "src/dynamics/solver/interaction_groups_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "ad068fddde5c99f983ae7e9df750dbc045d216265850e9484408cae18b7d9c5d"
+    },
+    {
+      "path": "src/dynamics/solver/staged_island_solver/checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "61734785ac690804ec6cad995e101b422d471629a6722b81d0c347075fd246aa"
+    },
+    {
+      "path": "src/dynamics/solver/staged_island_solver/mod.rs",
+      "baseline_sha256": "1cbd48daf242c35cd41527b0a286b5fab622e17301ffc73262b8bbb8a5564373",
+      "sha256": "350050a9816bc93ee582e18301dbf646e852cb95dac614f2a5eebf20a83888c8"
+    },
+    {
+      "path": "src/dynamics/solver/staged_island_solver/sync.rs",
+      "baseline_sha256": "c8c2b7551e11051f8cdc04dad0ab810695403c9ff99259e8158b2329780fe7cf",
+      "sha256": "40ed5454d5bd0c56246ae8c5f6229acf39c621298e90f62cf3fb15a2bbf6e55e"
+    },
+    {
+      "path": "src/dynamics/solver/staged_island_solver/sync_checkpoint.rs",
+      "baseline_sha256": null,
+      "sha256": "aef9b3172a6eb036df73e1e1a235971c239eda10348844da8d17945673e46564"
+    },
+    {
+      "path": "src/pipeline/checked_restore/integration.rs",
+      "baseline_sha256": null,
+      "sha256": "d9d3ee140bd6be46de6c484907d34aa795d9285cc94fd53ee59e1eea3ac7c69f"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "baseline_sha256": "1c3f8c7a31e5dcd04846f11a12d2e4557f6c559e02b0b24b1c1095246422ccb4",
+      "sha256": "c87a21975a6b132da70eb8fd55a334303b3e16ade7e62e13c96323976e285c07"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world.rs",
+      "baseline_sha256": null,
+      "sha256": "9e7eacd13b1556feaaceac30ea411f9071af61d8df459c3b1f14dc91ab876979"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/admit.rs",
+      "baseline_sha256": null,
+      "sha256": "3364a698942c93081c39913bf2017c92fc26f6d5fcd21fdf6c4af3e083f1794e"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/ccd_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "00907df452b227061db6516dd0796d0e025117694881012302452160a1b83e45"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/continuation_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "d6f9dc2f619c2d5bf214a7d8856b3b77e0635f3661d437a75d141f17d0ab3a89"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/frame.rs",
+      "baseline_sha256": null,
+      "sha256": "5907b8ad60ed2569df8e8ef46c5462bbb6498e548327b00d845e283094e7bf65"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/refusal_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "34ee58ac8e0e32174a3c3f47fc2851bf60d3d144c04e6ca930c51c9287f54d20"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/test_support.rs",
+      "baseline_sha256": null,
+      "sha256": "e49b58e12b8aee30ec54fda423915e37450e74abd784e0bfb880b429a3519212"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world_cases.rs",
+      "baseline_sha256": null,
+      "sha256": "bcbbbd6e937336f4d320ebd2865a7dc7b754ec4a27324a8b0d12a16bc0efbbec"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "24f8b8ac0f11f53f6262717b5bce7e6a633f75ebed0c4bdcf880537978ee1786"
+    },
+    {
+      "path": "src/pipeline/physics_pipeline/checked_world.rs",
+      "baseline_sha256": null,
+      "sha256": "906699340f24abe3c4a7ebeaf6e6c1305b7115e774c5bc028ba666cbb9be159b"
+    },
+    {
+      "path": "src/pipeline/physics_pipeline/mod.rs",
+      "baseline_sha256": "637afd12bd7e2fb84603da4872e8d115f1d094121a5b1c6a507177284dca030d",
+      "sha256": "a7c328cca1c5c3b27d899219de8080e2b8280f20a297a7c62966d04b9a18ef25"
+    }
+  ]
+}

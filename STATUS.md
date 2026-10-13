@@ -28,6 +28,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private primitive world — source accepted, CPU qualification complete
+
+One checked frame/epoch binding and cumulative allocation permit now compose a
+complete private primitive Rapier candidate, with no trusted physical-owner
+clones. Deterministic and fast8 each pass 138 native and 227 snapshot cases;
+21 focused final controls per mode preserve exact events, generations, CCD
+history and the one explicitly refused wake boundary. Strict scoped Clippy,
+wasm, graph and tooling checks pass. Source002 is accepted; final evidence
+review is pending. Capture provenance is still supplied only by the exclusive
+native test harness. Outer stable-ID/ECS/event owners and public physics-save
+admission remain closed.
+[Scope and evidence](docs/spikes/physics-native-world-construction.md).
+
 ## Consistent shadow receiver fitting — current-main qualification
 
 Shadow cascade fitting now uses the actual render viewport and the same local
