@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """CPU-only controls for analyze.py (handoff 0074 stage B). A complete synthetic
 evidence set that matches the plan must check and publish. Empty evidence, a
-missing case, a false report check, a failed child, a changed PNG or report, an
-orphan debit, and a stale or failed summary must each refuse; check always
-retains its diagnostic summary. Never builds, runs a renderer or touches the real
-evidence directory: every evidence path is redirected to a temporary directory.
+missing case, a false report check (a native-step portable fallback included),
+a failed child, a changed PNG or report, an orphan debit, and a stale or failed
+summary must each refuse; check always retains its diagnostic summary. Never
+builds, runs a renderer or touches the real evidence directory: every evidence
+path is redirected to a temporary directory.
 
   python3 -I -B test_analyze.py [--receipt NEW_PATH]
 """
@@ -170,6 +171,15 @@ class Analyze(unittest.TestCase):
         self.assertTrue(any(p.startswith("viewport: required checks") for p in problems))
         self.publish_refused("incomplete or failed")
         self.record("false_check_refuses", problems)
+
+    def test_scale_fallback_selection_refuses(self):
+        # A portable fallback at a native 12/16 or 8/16 step makes selections_as_planned false.
+        self.complete(false_check="selections_as_planned")
+        problems = self.check_refused()
+        for case in ("transitions", "viewport"):
+            self.assertTrue(any(p.startswith(f"{case}: required checks") for p in problems), case)
+        self.publish_refused("incomplete or failed")
+        self.record("scale_fallback_selection_refuses", problems)
 
     def test_failed_child_refuses(self):
         self.complete(failed_case="motion")

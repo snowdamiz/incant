@@ -389,7 +389,7 @@ class Lifecycle(unittest.TestCase):
         RECORDS.append({"test": "freeze_coverage_is_exact_or_refused", "exact_controls": results})
 
     def test_checkout_refuses_a_freeze_naming_another_commit_before_export(self):
-        commit, tree = "535003d766bcc1386fd2d2f454c83808a0fcc4c8", "e98b24847c28f3491f56e38edb051e018748eff7"
+        commit, tree = "077f7c39c0f4122aae36ea3a88537be006722822", "408c4bb2948983cfde980fa40c31f443b5d78a0c"
         freeze = Path(self.directory.name) / "freeze.json"
         c.write_new_json(freeze, {"commit": "4bc810fe0daf238f219801de76b06f19e4daf826",
                                   "files": [{"path": "Cargo.lock", "sha256": "1" * 64}]})

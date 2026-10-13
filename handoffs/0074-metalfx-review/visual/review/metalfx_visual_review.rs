@@ -10,12 +10,12 @@
 //! opens one renderer with `Renderer::enable_metalfx` at startup and compares
 //! same-source arms through `RetainedScene::submit`: off (no temporal state),
 //! current-only (portable upscaling with history weight 0), portable (`REVIEW`)
-//! and native (`RetainedScene::enable_metalfx`). Native frames must report
-//! `Selection::MetalFx`; planned fractional or device-range fallbacks are
-//! explicit expectations and never count as native. Pixels that the native
-//! composite takes from the current frame (clear, fractional and mixed-depth
-//! footprints) are reported as the engine's current-only boundary, not as
-//! vendor output.
+//! and native (`RetainedScene::enable_metalfx`). Native frames, the integral
+//! 12/16 and 8/16 steps included, must report `Selection::MetalFx`; planned
+//! fractional fallbacks are explicit expectations and never count as native.
+//! Pixels that the native composite takes from the current frame (clear,
+//! fractional and mixed-depth footprints) are reported as the engine's
+//! current-only boundary, not as vendor output.
 //!
 //! Every world-frame submission (references and unkept frames included) and
 //! every UI overlay submission is charged against hard per-case limits before
@@ -582,10 +582,9 @@ fn selected(shots: &[Shot], expected: Option<Selection>) -> bool {
 /// Planned selection of one native-owner step.
 #[derive(Clone, Copy, Debug)]
 enum Expect {
-    /// Integral footprint at content scale 1, admitted on this device class.
+    /// Integral footprint at output/input factor 1, 4/3 or 2, inside the
+    /// measured device range [1, 3]: MetalFX itself, never a portable fallback.
     Native,
-    /// Integral footprint below scale 1: native, or the device range refuses it.
-    NativeOrScale,
     /// Off the pixel grid: the portable path must be selected for this reason.
     Fractional,
 }
@@ -593,10 +592,6 @@ impl Expect {
     fn allows(self, selection: Option<Selection>) -> bool {
         match self {
             Self::Native => selection == Some(Selection::MetalFx),
-            Self::NativeOrScale => matches!(
-                selection,
-                Some(Selection::MetalFx | Selection::Portable(Some(Fallback::Scale)))
-            ),
             Self::Fractional => {
                 selection == Some(Selection::Portable(Some(Fallback::FractionalViewport)))
             }
@@ -2200,8 +2195,8 @@ fn transitions() {
     let steps = [
         (Expect::Native, view_a.as_slice()),
         (Expect::Native, cut.as_slice()),
-        (Expect::NativeOrScale, d12.as_slice()),
-        (Expect::NativeOrScale, d8.as_slice()),
+        (Expect::Native, d12.as_slice()),
+        (Expect::Native, d8.as_slice()),
         (Expect::Fractional, d10.as_slice()),
         (Expect::Native, resumed.as_slice()),
     ];
@@ -2239,8 +2234,8 @@ fn transitions() {
         "steps": [
             {"frames": "a-1..a-4", "sixteenths": 16, "expect": "Native"},
             {"frames": "cut-5, b-6", "sixteenths": 16, "expect": "Native", "cut": true},
-            {"frames": "d12-7..d12-9", "sixteenths": 12, "expect": "NativeOrScale"},
-            {"frames": "d8-10..d8-12", "sixteenths": 8, "expect": "NativeOrScale"},
+            {"frames": "d12-7..d12-9", "sixteenths": 12, "expect": "Native"},
+            {"frames": "d8-10..d8-12", "sixteenths": 8, "expect": "Native"},
             {"frames": "d10-13, d10-14", "sixteenths": 10, "expect": "Fractional"},
             {"frames": "full-15, full-16", "sixteenths": 16, "expect": "Native"},
         ],
@@ -2340,7 +2335,7 @@ fn viewport() {
     report.png("viewport-off.png", &reference.pixels);
     let steps = [
         (Expect::Native, full.as_slice()),
-        (Expect::NativeOrScale, half.as_slice()),
+        (Expect::Native, half.as_slice()),
         (Expect::Fractional, fallback.as_slice()),
     ];
     let checks = [

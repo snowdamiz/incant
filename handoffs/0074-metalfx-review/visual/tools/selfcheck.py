@@ -11,9 +11,10 @@ ac8a48de).
 1. Every stage Python tool parses (ast only; no bytecode is written).
 2. plan.json is internally consistent, within the brief's 128-submission and
    20-PNG budgets, and keeps 0072's review policy unchanged.
-3. An independent model of the frame, upscaling and native plans classifies
-   every planned step exactly as the plan expects (native, native or device
-   Scale fallback, FractionalViewport) and admits every portable footprint.
+3. An independent model of the frame, upscaling and corrected native plans
+   (output/input factors clamped to [1, 4], on root's measured device range)
+   classifies every planned step exactly as the plan expects (native or
+   FractionalViewport) and admits every portable footprint.
 4. The Rust fixture agrees with the plan: test names and order, Report::open
    limits, PNG names and required check names per case, frame size, output
    variable, configs, viewports, preferences, planned internal sizes and the
@@ -23,14 +24,20 @@ ac8a48de).
 6. The grant policy refuses absent, superseded or ill-formed sources (pure).
 7. rustfmt (edition 2024, stdin to stdout, no Cargo or target) leaves the
    fixture byte-identical.
-8. Root's announced source (read-only git objects, no export): the committed
-   build freeze has its announced SHA-256 and the {commit, files} shape
-   build.py accepts, the commit has its tree, the freeze covers the plan's
-   build inputs exactly by path, size and blob SHA-256, and the fixture's
-   jitter copy equals that commit's table.
+8. Root's announced source (read-only git objects, no export): the commit has
+   its tree, descends from the reviewed 535003d7 and changes only the native
+   scale-unit build inputs, and the fixture's jitter copy equals its table. An
+   announced freeze must have its SHA-256, the {commit, files} shape build.py
+   accepts and exact build-input coverage by path, size and blob SHA-256;
+   until root announces one, build.py checkout enforces that at grant time.
 9. With the grant absent, every guarded command refuses with the grant message,
    creates no evidence directory, leaves `git status` unchanged and does not
    touch the global native-gpu.lock.
+10. The integral 12/16 and 8/16 native steps cannot pass through a portable
+   fallback: plan and fixture bind them to MetalFx alone; the superseded
+   535003d7 unit model reproduces the first execution's recorded selections,
+   whose Scale fallbacks the current expectations refuse; and the first
+   execution's fixture fails the same fixture check (negative control).
 """
 
 import ast
@@ -57,11 +64,42 @@ COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "chec
 CASE_ORDER = ["stationary", "motion", "excluded", "transitions", "viewport"]
 PREPARED_SOURCE = "4bc810fe0daf238f219801de76b06f19e4daf826"
 COMBINED_HEAD_AT_PREPARATION = "0c890514f84c09cb98358ba6d7fa9431140b5b7c"
-# Announced in root's helper-acceptance revision; the grant itself comes later.
-ANNOUNCED = {"commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
-             "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
-             "freeze": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
-             "freeze_sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"}
+# Announced in root's scale-correction revision; root freezes it when it builds,
+# and the grant itself comes later.
+ANNOUNCED = {"commit": "077f7c39c0f4122aae36ea3a88537be006722822",
+             "tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
+             "reviewed": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+             "changed_inputs": ["crates/incant_render/src/metalfx/native.rs",
+                                "crates/incant_render/src/metalfx/numerics.rs",
+                                "crates/incant_render/src/metalfx/plan.rs"],
+             "freeze": None, "freeze_sha256": None}
+# Root's capability query on this device: an API query with 0 submissions.
+SCALE_QUERY = {"path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/receipt.json",
+               "sha256": "e5610fe06e38b64f46186cb5ca71d8ac555a3183a4dfbe0e8b71b081d653abc9"}
+# The first execution (2dc2db04): its granted fixture, and its recorded reports
+# (SHA-256 as in visual-evidence/manifest.json) with their selection groups in
+# the order of the plan's native steps.
+FIRST_FIXTURE = "b2c3e14e61ddfb2980ba3063a7148b424fb0d27c:review/metalfx_visual_review.rs"
+FIRST_REPORTS = {
+    "transitions": ("7bcc167971b8ec016cc3077cbdcc7e7e89e88d97582f9b0c85d099a1af930d58",
+                    ["view_a", "cut", "d12", "d8", "d10", "resumed"]),
+    "viewport": ("3cf84253ee4e7122648a0ea91133b46721a463b1e7c4cfe77fea7e348f5cd04f",
+                 ["framed", "framed_8_16", "fractional"]),
+}
+SELECTION = {"native": "MetalFx", "scale": "Portable(Some(Scale))", "aspect": "Portable(Some(Aspect))",
+             "fractional": "Portable(Some(FractionalViewport))"}
+# What the fixture's Expect::allows (checked verbatim against EXPECT_IMPL) accepts.
+ALLOWS = {"native": {SELECTION["native"]}, "fractional": {SELECTION["fractional"]}}
+EXPECT_IMPL = """impl Expect {
+    fn allows(self, selection: Option<Selection>) -> bool {
+        match self {
+            Self::Native => selection == Some(Selection::MetalFx),
+            Self::Fractional => {
+                selection == Some(Selection::Portable(Some(Fallback::FractionalViewport)))
+            }
+        }
+    }
+}"""
 
 
 def git_show(spec):
@@ -139,20 +177,40 @@ def upscale_admits(output, rect, size, source_rect):
                and [math.ceil(v * n / 16) for v in output] == size for n in range(4, 17))
 
 
-def native_class(source_rect, rect):
+def measured_range():
+    """Root's pinned raw [min, max] for this device, or None if it does not verify."""
+    path = Path(SCALE_QUERY["path"])
+    if not path.is_file() or c.sha(path) != SCALE_QUERY["sha256"]:
+        return None
+    query = c.read_json(path)["query"]
+    if not (query.get("supported") is True and query.get("gpu_submissions") == 0):
+        return None
+    return [float(query["raw_min_scale"]), float(query["raw_max_scale"])]
+
+
+def native_class(source_rect, rect, raw, superseded=False):
+    """metalfx::plan::Plan::new on the device's raw range. Corrected (077f7c39):
+    raw output/input factors clamped to [1, 4] bound output/source. Superseded
+    (535003d7): the same values read as content fractions in [0.25, 1] bound
+    source/output, so a [1, 3] device admitted only content scale 1."""
     integral = lambda r: (all(math.isfinite(v) and v >= 0 and v == int(v) and v <= 8192 for v in r)
                           and r[2] != 0 and r[3] != 0)
     if not integral(source_rect) or not integral(rect):
         return "fractional"
     if source_rect[2] * rect[3] != source_rect[3] * rect[2]:
         return "aspect"
-    scale = source_rect[2] / rect[2]
-    if scale > 1:
+    if raw is None:
+        return "unmeasured"
+    if not all(math.isfinite(v) and v > 0 for v in raw) or raw[0] > raw[1]:
         return "scale"
-    return "native" if scale == 1 else "native_or_scale"
+    if superseded:
+        low, high, value = max(raw[0], 0.25), min(raw[1], 1.0), source_rect[2] / rect[2]
+    else:
+        low, high, value = max(raw[0], 1.0), min(raw[1], 4.0), rect[2] / source_rect[2]
+    return "native" if low <= value <= high else "scale"
 
 
-def footprint_checks(p):
+def footprint_checks(p, raw):
     output = p["review"]["size"]
     viewports = {None: [0.0, 0.0, float(output[0]), float(output[1])],
                  "integral": p["viewports"]["integral"], "fractional": p["viewports"]["fractional"]}
@@ -168,14 +226,14 @@ def footprint_checks(p):
                 row["upscale_admitted"] = upscale_admits(output, rect, size, source_rect)
                 ok = ok and row["frame_plan_valid"] and row["upscale_admitted"]
             if step["arm"] == "native":
-                row["native_class"] = native_class(source_rect, rect)
+                row["native_class"] = native_class(source_rect, rect, raw)
                 row["expected"] = step["expect"]
                 ok = ok and row["native_class"] == step["expect"]
-                # RequireMetalFx only where native is certain (scale 1, integral).
+                # RequireMetalFx only on steps that must select MetalFX.
                 ok = ok and (step["preference"] != "RequireMetalFx" or step["expect"] == "native")
             rows.append(row)
     sizes = {(r["sixteenths"], r["viewport"] == viewports[None]): r["internal_size"] for r in rows}
-    return {"steps": rows, "all_classified_as_planned": ok, "internal_sizes": {
+    return {"device_raw_range": raw, "steps": rows, "all_classified_as_planned": ok, "internal_sizes": {
         f"{k[0]}/16{'' if k[1] else ' viewport'}": v for k, v in sorted(sizes.items())}}
 
 
@@ -222,7 +280,7 @@ def helper_checks(p, footprints):
     jitter = {"fixture": c.samples(source),
               "prepared_source_4bc810fe": c.samples(git_show(f"{PREPARED_SOURCE}:{c.JITTER_SOURCE}") or ""),
               "combined_head_0c890514": c.samples(git_show(f"{COMBINED_HEAD_AT_PREPARATION}:{c.JITTER_SOURCE}") or ""),
-              "announced_535003d7": c.samples(git_show(f"{ANNOUNCED['commit']}:{c.JITTER_SOURCE}") or "")}
+              "announced_077f7c39": c.samples(git_show(f"{ANNOUNCED['commit']}:{c.JITTER_SOURCE}") or "")}
     canvas = re.search(r"const VIEWPORT: Viewport = Viewport \{.*?canvas_srgb: \[(\d+), (\d+), (\d+)\]", source, re.S)
     return {
         "cfg_native_metalfx_feature": source.count('#![cfg(feature = "native-metalfx")]') == 1,
@@ -246,7 +304,7 @@ def helper_checks(p, footprints):
         "jitter_copy_equals_prepared_source": jitter["fixture"] is not None
         and jitter["fixture"] == jitter["prepared_source_4bc810fe"],
         "jitter_copy_equals_announced_source": jitter["fixture"] is not None
-        and jitter["fixture"] == jitter["announced_535003d7"],
+        and jitter["fixture"] == jitter["announced_077f7c39"],
         "observed": {"tests": list(tests), "limits": opened, "pngs": pngs, "checks": checks,
                      "preferences": preferences, "review_config": review,
                      "internal_sizes_checked": sizes_used, "jitter": jitter,
@@ -320,10 +378,17 @@ def policy_checks():
     variants = {
         "explicit_uncooked_source_accepted": (good, False),
         "explicit_cooked_source_accepted": ({**good, "features": ["native-metalfx", "cooked-temporal"]}, False),
+        "announced_corrected_source_accepted": ({**good, "source_commit": ANNOUNCED["commit"],
+                                                 "source_tree": ANNOUNCED["tree"]}, False),
+        "core_presentation_target_accepted": (
+            {**good, "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target"}, False),
         "superseded_4bc810fe_refused": ({**good, "source_commit": "4bc810fe0daf238f219801de76b06f19e4daf826"}, True),
         "superseded_a337c86d_refused": ({**good, "source_commit": "a337c86d8d74e819b3e879d4a7db830b74de8862"}, True),
+        "superseded_535003d7_refused": ({**good, "source_commit": ANNOUNCED["reviewed"]}, True),
         "superseded_freeze_refused": ({**good, "source_freeze": {
             "path": "/x/freeze.json", "sha256": "b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b"}}, True),
+        "superseded_535003d7_freeze_refused": ({**good, "source_freeze": {
+            "path": "/x/freeze.json", "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"}}, True),
         "missing_freeze_refused": ({k: v for k, v in good.items() if k != "source_freeze"}, True),
         "relative_freeze_refused": ({**good, "source_freeze": {"path": "freeze.json", "sha256": "4" * 64}}, True),
         "missing_tree_refused": ({k: v for k, v in good.items() if k != "source_tree"}, True),
@@ -359,19 +424,20 @@ def format_check():
 # ------------------------------------------------------------------ announced source
 
 def announced_source_checks(p):
-    """build.py's freeze rule applied read-only to root's announced commit: git
-    objects stand in for the exported files (no export, target or build)."""
-    freeze_path = Path(ANNOUNCED["freeze"])
-    result = {"announced": ANNOUNCED}
-    if not freeze_path.is_file():
-        return {**result, "problem": "the announced freeze is absent", "all_pass": False}
-    result["freeze_sha256_matches"] = c.sha(freeze_path) == ANNOUNCED["freeze_sha256"]
-    rows, problem = build.freeze_rows(c.read_json(freeze_path), ANNOUNCED["commit"])
-    result["freeze_shape_accepted"] = problem is None
-    if problem:
-        return {**result, "problem": problem, "all_pass": False}
-    result["tree_matches"] = c.git("rev-parse", ANNOUNCED["commit"] + "^{tree}").strip() == ANNOUNCED["tree"]
-    listing = subprocess.run(["git", "ls-tree", "-r", "-l", "-z", "--full-tree", ANNOUNCED["commit"]],
+    """Root's announced commit, read-only from git objects (no export, target or
+    build): its tree, its descent from the reviewed source and the build inputs
+    it changes. Once root announces a freeze, build.py's freeze rule is applied
+    the same way, git objects standing in for the exported files."""
+    commit, roots = ANNOUNCED["commit"], p["build_inputs"]
+    descends = subprocess.run(["git", "merge-base", "--is-ancestor", ANNOUNCED["reviewed"], commit],
+                              cwd=c.ROOT, capture_output=True).returncode == 0
+    changed = c.git("diff", "--name-only", "--no-renames", ANNOUNCED["reviewed"], commit).splitlines()
+    result = {"announced": ANNOUNCED,
+              "tree_matches": c.git("rev-parse", commit + "^{tree}").strip() == ANNOUNCED["tree"],
+              "descends_from_reviewed_source": descends,
+              "build_inputs_changed": sorted(path for path in changed if build.under(path, roots))}
+    result["only_scale_unit_inputs_changed"] = result["build_inputs_changed"] == ANNOUNCED["changed_inputs"]
+    listing = subprocess.run(["git", "ls-tree", "-r", "-l", "-z", "--full-tree", commit],
                              cwd=c.ROOT, capture_output=True, check=True).stdout
     blobs = {}
     for record in listing.split(b"\0"):
@@ -380,8 +446,21 @@ def announced_source_checks(p):
             _, kind, blob, size = meta.decode().split()
             if kind == "blob":
                 blobs[path.decode()] = (blob, int(size))
-    roots = p["build_inputs"]
     inputs = {path for path in blobs if build.under(path, roots)}
+    result["build_inputs"] = len(inputs)
+    scope = result["tree_matches"] and descends and result["only_scale_unit_inputs_changed"]
+    if ANNOUNCED["freeze"] is None:
+        return {**result, "freeze": ("not announced; build.py checkout refuses an ill-formed freeze before "
+                                     "export and latches stop unless the exported build inputs match it "
+                                     "exactly"), "all_pass": scope}
+    freeze_path = Path(ANNOUNCED["freeze"])
+    if not freeze_path.is_file():
+        return {**result, "problem": "the announced freeze is absent", "all_pass": False}
+    result["freeze_sha256_matches"] = c.sha(freeze_path) == ANNOUNCED["freeze_sha256"]
+    rows, problem = build.freeze_rows(c.read_json(freeze_path), commit)
+    result["freeze_shape_accepted"] = problem is None
+    if problem:
+        return {**result, "problem": problem, "all_pass": False}
     frozen = {path for path in rows if build.under(path, roots)}
     digests = {}
     reader = subprocess.Popen(["git", "cat-file", "--batch"], cwd=c.ROOT, stdin=subprocess.PIPE,
@@ -400,15 +479,97 @@ def announced_source_checks(p):
                         if digest != rows[path]["sha256"]
                         or rows[path]["bytes"] not in (None, blobs[path][1]))
     result.update({
-        "build_inputs": len(inputs), "freeze_rows": len(rows), "freeze_build_input_rows": len(frozen),
+        "freeze_rows": len(rows), "freeze_build_input_rows": len(frozen),
         "freeze_rows_outside_roots": sorted(set(rows) - frozen),
         "inputs_missing_from_freeze": sorted(inputs - frozen)[:20],
         "freeze_rows_missing_from_commit": sorted(set(rows) - set(blobs))[:20],
         "blob_sha256_compared": len(digests), "mismatched": mismatched[:20],
         "exact": bool(inputs) and inputs == frozen and set(rows) <= set(blobs) and not mismatched})
-    result["all_pass"] = (result["freeze_sha256_matches"] and result["freeze_shape_accepted"]
-                          and result["tree_matches"] and result["exact"])
+    result["all_pass"] = scope and result["freeze_sha256_matches"] and result["exact"]
     return result
+
+
+# ------------------------------------------------------------------ strict native steps
+
+def expectation_checks(source, p):
+    """The fixture binds the plan's native steps to Selection::MetalFx alone."""
+    enum = re.search(r"\nenum Expect \{\n(.*?)\n\}", source, re.S)
+    impl = re.search(r"\nimpl Expect \{\n.*?\n\}\n", source, re.S)
+    tests, bound = bodies(source), {}
+    for name in FIRST_REPORTS:
+        body = tests.get(name, "")
+        start = body.find("let steps = [")
+        block = body[start:body.find("];", start)] if start >= 0 else ""
+        bound[name] = [e.lower() for e in re.findall(r"\(Expect::(\w+), \w+\.as_slice\(\)\)", block)]
+    planned = {name: [s["expect"] for s in p["review"]["cases"][name]["steps"] if s["arm"] == "native"]
+               for name in FIRST_REPORTS}
+    return {
+        "variants_are_native_and_fractional": bool(enum)
+        and re.findall(r"^    (\w+),$", enum[1], re.M) == ["Native", "Fractional"],
+        "native_allows_only_metalfx": bool(impl) and impl[0].split() == EXPECT_IMPL.split(),
+        "no_scale_fallback_accepted": "NativeOrScale" not in source and "Fallback::Scale" not in source,
+        "steps_bound_as_planned": all(bound[n] and bound[n] == planned[n] for n in bound),
+        "selections_checked_against_steps": all(
+            '("selections_as_planned", steps_as_planned(&steps))' in tests.get(n, "") for n in bound),
+    }
+
+
+def strict_native_checks(p, footprints):
+    """The 12/16 and 8/16 native steps cannot pass through a portable fallback.
+    The first execution's recorded selections are replayed against both unit
+    models and against the current expectations (ALLOWS mirrors Expect::allows)."""
+    raw, cases = footprints["device_raw_range"], p["review"]["cases"]
+    reduced = [s for case in cases.values() for s in case["steps"]
+               if s["arm"] == "native" and s["sixteenths"] in (12, 8)]
+    fixture = expectation_checks(c.HELPER_SOURCE.read_text(), p)
+    first_fixture = expectation_checks(git_show(FIRST_FIXTURE) or "", p)
+    replay, recorded_ok = [], True
+    for case, (digest, groups) in FIRST_REPORTS.items():
+        path = c.PACKET_DIR / "visual-evidence" / "reports" / f"{case}.json"
+        if not path.is_file() or c.sha(path) != digest:
+            recorded_ok = False
+            continue
+        report = c.read_json(path)
+        recorded_ok = recorded_ok and report["checks"].get("selections_as_planned") is True
+        rows = [r for r in footprints["steps"] if r["case"] == case and r["arm"] == "native"]
+        steps = [s for s in cases[case]["steps"] if s["arm"] == "native"]
+        if not len(groups) == len(rows) == len(steps):
+            recorded_ok = False
+            continue
+        for group, row, step in zip(groups, rows, steps):
+            shots = report["selections"][group]
+            recorded = sorted({s["metalfx_selection"] for s in shots})
+            replay.append({
+                "case": case, "group": group, "sixteenths": step["sixteenths"], "recorded": recorded,
+                "frames_and_size_as_planned": len(shots) == step["frames"] and all(
+                    s["upscale"]["internal_size"] == row["internal_size"] for s in shots),
+                "superseded_model": SELECTION.get(native_class(row["source_rect"], row["viewport"], raw, True)),
+                "corrected_model": SELECTION.get(row["native_class"]),
+                "expect": step["expect"], "accepted_now": set(recorded) <= ALLOWS.get(step["expect"], set())})
+    lowered = [r for r in replay if r["sixteenths"] in (12, 8)]
+    return {
+        "measured_raw_range": raw,
+        "reduced_steps_expect_native": len(reduced) == 3 and all(s["expect"] == "native" for s in reduced),
+        "expectations_are_native_or_fractional": {s.get("expect") for case in cases.values()
+                                                  for s in case["steps"]} <= {None, "native", "fractional"},
+        "fixture": fixture,
+        "fixture_binds_metalfx": all(fixture.values()),
+        "first_fixture": first_fixture,
+        # Each detector alone refuses the first fixture, which accepted Scale.
+        "first_fixture_refused": not any(first_fixture[k] for k in (
+            "variants_are_native_and_fractional", "native_allows_only_metalfx",
+            "no_scale_fallback_accepted", "steps_bound_as_planned")),
+        "replay": replay,
+        "first_records_verified_and_passed_then": recorded_ok and len(replay) == 9,
+        "replay_frames_and_sizes_as_planned": bool(replay) and all(r["frames_and_size_as_planned"] for r in replay),
+        "superseded_model_reproduces_records": bool(replay)
+        and all(r["recorded"] == [r["superseded_model"]] for r in replay),
+        "corrected_model_selects_metalfx_at_reduced_steps": len(lowered) == 3
+        and all(r["corrected_model"] == SELECTION["native"] for r in lowered),
+        "recorded_scale_fallbacks_now_refused": len(lowered) == 3
+        and all(r["recorded"] == [SELECTION["scale"]] and not r["accepted_now"] for r in lowered),
+        "other_recorded_steps_still_accepted": all(r["accepted_now"] for r in replay if r not in lowered),
+    }
 
 
 # ------------------------------------------------------------------ refusals
@@ -445,15 +606,18 @@ def main():
     for path in sorted(c.TOOLS.glob("*.py")):
         ast.parse(path.read_text(), str(path))
     p = c.plan()
-    footprints = footprint_checks(p)
+    footprints = footprint_checks(p, measured_range())
     result = {"python": sys.version.split()[0], "plan_sha256": c.sha(c.PLAN_PATH),
               "helper_sha256": c.sha(c.HELPER_SOURCE),
               "tools": {path.name: c.sha(path) for path in sorted(c.TOOLS.glob("*.py"))},
               "syntax": "all tools parse", "plan": plan_checks(p), "footprints": footprints,
               "helper": helper_checks(p, footprints), "reuse": reuse_checks(p),
               "grant_policy": policy_checks(), "format": format_check(),
-              "announced_source": announced_source_checks(p), "refusals": refusal_checks()}
+              "announced_source": announced_source_checks(p),
+              "strict_native": strict_native_checks(p, footprints), "refusals": refusal_checks()}
     refusals = result["refusals"]
+    strict = {k: v for k, v in result["strict_native"].items()
+              if k not in ("measured_raw_range", "fixture", "first_fixture", "replay")}
     result["all_pass"] = (all(result["plan"].values())
                           and footprints["all_classified_as_planned"]
                           and all(v for k, v in result["helper"].items() if k != "observed")
@@ -463,6 +627,7 @@ def main():
                           and result["grant_policy"]["all_as_expected"]
                           and result["format"].get("identical", False)
                           and result["announced_source"]["all_pass"]
+                          and all(strict.values())
                           and all(refusals.get(k, False) for k in (
                               "all_refused_for_absent_grant", "evidence_directory_still_absent",
                               "git_status_unchanged", "global_gpu_lock_untouched")))

@@ -760,3 +760,69 @@ session made no source, plan, threshold or helper edits and ran no retries.
   - No memory writes, credentials, accounts, pushes, PRs, desktop capture, native
     window or audio.
   - No active children or background tasks remain.
+
+## Corrected-scale preparation session — second frozen execution (2026-10-13)
+
+**Status: preparation only, complete. Nothing was granted, built or run.** The
+details are in `corrected-scale-preparation.md`, and the focused helper diff is
+`corrected-scale-helper.diff`. All earlier sections of this file and all
+first-execution evidence are unchanged.
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max. Line
+  2 of root's ACP log `claude-0074-scale-preparation-acp.log` reads "Claude session
+  verified: Opus 5.5; thinking: max". No subagents were used.
+- **Root input verified:** acceptance `8708082e…`, scale query `e5610fe0…` (Apple M5
+  Pro, raw [1, 3], 0 submissions), and corrected source `077f7c39` (tree `408c4bb2…`;
+  the only build-input changes from `535003d7` are the three `metalfx` scale-unit
+  files).
+- **Changes:**
+  - New namespace `0074-metalfx-visual-002` and publication `visual-screenshots-002`.
+  - 535003d7 and its freeze `bd8295b0…` are refused as superseded.
+  - The 12/16 and 8/16 native steps (transitions d12/d8, viewport framed-d8) now
+    require `Selection::MetalFx`; `NativeOrScale` is removed.
+  - Cases, 119 submissions, 18 PNGs at 960x540, checks, tolerances, content, crops,
+    sample counts and the grant/freeze protocol are unchanged.
+- **CPU checks:**
+  - `selfcheck-002.json`: `all_pass` true, `5f2b6dff…`. It includes the strict-native
+    replay and the negative control on the first fixture.
+  - `focused-tests-002.json`: 7/7, `91066636…`.
+  - The one-off in-memory mutation controls all detected their mutation.
+  - The full suites were not rerun, and no Cargo or GPU work was done.
+- **Focused test runner,** exactly as run from the worktree root (exit 0). It runs
+  three analyzer tests and four lifecycle tests in one suite, writes the receipt
+  with exclusive create, and exits nonzero on any failure:
+
+  ```
+  /opt/homebrew/bin/python3 -I -B -c '
+  import json, sys, time, unittest
+  sys.dont_write_bytecode = True
+  sys.path.insert(0, sys.argv[1])
+  import test_analyze as a, test_lifecycle as l
+  names = [(a.Analyze, n) for n in ("test_complete_evidence_checks_and_publishes", "test_false_check_refuses",
+                                    "test_scale_fallback_selection_refuses")] + [
+          (l.Lifecycle, n) for n in ("test_superseded_source_refused_before_checkout", "test_ill_formed_sources_refused",
+                                     "test_explicit_source_passes_the_grant_gate",
+                                     "test_checkout_refuses_a_freeze_naming_another_commit_before_export")]
+  started = time.time()
+  result = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(cls(n) for cls, n in names))
+  with open(sys.argv[2], "x") as out:
+      json.dump({"cpu_only": True, "focused": True, "passed": result.wasSuccessful(), "tests_run": result.testsRun,
+                 "tests": [f"{cls.__name__}.{n}" for cls, n in names],
+                 "failed": [str(t) for t, _ in result.failures + result.errors],
+                 "seconds": round(time.time() - started, 2), "python": sys.version.split()[0],
+                 "records": a.RECORDS + l.RECORDS}, out, indent=1)
+      out.write("\n")
+  raise SystemExit(0 if result.wasSuccessful() else 1)
+  ' handoffs/0074-metalfx-review/visual/tools handoffs/0074-metalfx-review/visual/preparation/focused-tests-002.json
+  ```
+- **Open question for root:** 077f7c39 resets native history on every content-size
+  change, so the retained `transition-d12-f7.png` and `transition-d8-f10.png` will
+  be post-reset frames. The 75%/50% appearance verdict will therefore not show
+  converged native quality. Should a later revision retain d12-f9 and d8-f12, or
+  lengthen these steps within the reserve? I left frame retention unchanged, as the
+  brief requires.
+- **Unchanged limitation:** the silhouette-policy defect is still open and is not
+  fixed by the unit correction.
+- **Screenshots:** none in this session.
+- **Process state:** no transient files, background processes, memory writes,
+  publication, push or PR. Root's `brief.md` is left uncommitted.

@@ -8,9 +8,9 @@
   "source_freeze_shape": "absolute path and SHA-256 of root's committed build freeze {commit: <source_commit>, files: [{path, sha256, bytes}]}; its rows must cover the build_inputs of the exported commit exactly, and every row (a probe outside the roots included) must exist in the commit and match its file; no other freeze shape is accepted",
   "holder": "lease.py records the grant's root-assigned holder field and refuses a grant without one",
   "allowed_feature_sets": [["native-metalfx"], ["cooked-temporal", "native-metalfx"]],
-  "denied_source_commits": ["4bc810fe0daf238f219801de76b06f19e4daf826", "a337c86d8d74e819b3e879d4a7db830b74de8862"],
-  "denied_freezes": ["b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b"],
-  "expected_source": "root's corrected temporal edge, unjittered overlay-depth, accepted MetalFX and cooked shader composition on codex/cooked-temporal-metalfx (pins supplied after review; head 0c890514 at preparation is an integration checkpoint, not a grant)",
+  "denied_source_commits": ["4bc810fe0daf238f219801de76b06f19e4daf826", "a337c86d8d74e819b3e879d4a7db830b74de8862", "535003d766bcc1386fd2d2f454c83808a0fcc4c8"],
+  "denied_freezes": ["b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b", "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"],
+  "expected_source": "root's scale-corrected source 077f7c39 (tree 408c4bb2), which differs from the reviewed 535003d7 only in native scale-unit handling (output/input factors clamped to [1, 4]) and its CPU tests; commit, tree, freeze and features are pinned only by root's grant. Evidence namespace 0074-metalfx-visual-002; publication visual-screenshots-002",
   "jitter_table_check": "build.py checkout refuses unless the fixture's SAMPLES equal crates/incant_render/src/temporal/jitter.rs at the granted commit"
  },
  "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
@@ -50,7 +50,7 @@
   "off": "RetainedScene without temporal state",
   "current_only": "RetainedScene::enable_temporal_upscaling(current_only_config): jittered current frame resampled, no history",
   "portable": "RetainedScene::enable_temporal_upscaling(review_config)",
-  "native": "RetainedScene::enable_metalfx(Preference, review_config); RequireMetalFx where scale 1 is certain, PreferMetalFx where a planned fallback must be reported"
+  "native": "RetainedScene::enable_metalfx(Preference, review_config); RequireMetalFx in the output-scale cases, PreferMetalFx for the one-owner cases whose fractional steps must report FractionalViewport; their integral 12/16 and 8/16 steps (factors 4/3 and 2, inside the measured [1, 3]) must still select MetalFx"
  },
  "viewports": {
   "integral": [96.0, 54.0, 768.0, 432.0],
@@ -119,24 +119,24 @@
     "steps": [
      {"arm": "native", "preference": "PreferMetalFx", "frames": 4, "sixteenths": 16, "viewport": null, "expect": "native"},
      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": null, "expect": "native", "cut": true},
-     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 12, "viewport": null, "expect": "native_or_scale"},
-     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": null, "expect": "native_or_scale"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 12, "viewport": null, "expect": "native"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": null, "expect": "native"},
      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 10, "viewport": null, "expect": "fractional"},
      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": null, "expect": "native"},
      {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null},
      {"arm": "off", "frames": 1, "sixteenths": 8, "viewport": null}
     ],
-    "purpose": "One preferring owner: view A, an explicit cut, fixed 12/16 and 8/16 content scales (native, or an explicit Scale fallback if this device's range excludes them), the fractional 10/16 scale (explicit FractionalViewport fallback) and output scale again. Native resets are inferred from existing observables only."},
+    "purpose": "One preferring owner: view A, an explicit cut, fixed 12/16 and 8/16 content scales (MetalFX required: factors 4/3 and 2 inside the measured [1, 3]; a Scale fallback fails selections_as_planned), the fractional 10/16 scale (explicit FractionalViewport fallback) and output scale again. Native resets are inferred from existing observables only."},
    "viewport": {"frames": 12, "ui_submissions": 0,
     "pngs": ["viewport-native-f6.png", "viewport-off.png"],
     "checks": ["selections_as_planned", "framed_run_uninterrupted", "outside_viewport_matches_off", "half_scale_internal_size", "reference_has_no_upscale_state", "frames_match_plan"],
     "steps": [
      {"arm": "native", "preference": "PreferMetalFx", "frames": 6, "sixteenths": 16, "viewport": "integral", "expect": "native"},
-     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": "integral", "expect": "native_or_scale"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": "integral", "expect": "native"},
      {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": "integral"},
      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": "fractional", "expect": "fractional"}
     ],
-    "purpose": "An integral offset viewport at output scale and 8/16 (zero-offset packing, offset readback, canvas outside the viewport byte-identical to off) and the same placement off the pixel grid (explicit FractionalViewport fallback)."}
+    "purpose": "An integral offset viewport at output scale and 8/16 (both MetalFX; zero-offset packing, offset readback, canvas outside the viewport byte-identical to off) and the same placement off the pixel grid (explicit FractionalViewport fallback)."}
   }
  },
  "totals": {

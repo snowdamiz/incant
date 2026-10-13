@@ -1,0 +1,613 @@
+diff --git a/handoffs/0074-metalfx-review/visual/plan.json b/handoffs/0074-metalfx-review/visual/plan.json
+index 1a963a64..1f5f8ec2 100644
+--- a/handoffs/0074-metalfx-review/visual/plan.json
++++ b/handoffs/0074-metalfx-review/visual/plan.json
+@@ -8,9 +8,9 @@
+   "source_freeze_shape": "absolute path and SHA-256 of root's committed build freeze {commit: <source_commit>, files: [{path, sha256, bytes}]}; its rows must cover the build_inputs of the exported commit exactly, and every row (a probe outside the roots included) must exist in the commit and match its file; no other freeze shape is accepted",
+   "holder": "lease.py records the grant's root-assigned holder field and refuses a grant without one",
+   "allowed_feature_sets": [["native-metalfx"], ["cooked-temporal", "native-metalfx"]],
+-  "denied_source_commits": ["4bc810fe0daf238f219801de76b06f19e4daf826", "a337c86d8d74e819b3e879d4a7db830b74de8862"],
+-  "denied_freezes": ["b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b"],
+-  "expected_source": "root's corrected temporal edge, unjittered overlay-depth, accepted MetalFX and cooked shader composition on codex/cooked-temporal-metalfx (pins supplied after review; head 0c890514 at preparation is an integration checkpoint, not a grant)",
++  "denied_source_commits": ["4bc810fe0daf238f219801de76b06f19e4daf826", "a337c86d8d74e819b3e879d4a7db830b74de8862", "535003d766bcc1386fd2d2f454c83808a0fcc4c8"],
++  "denied_freezes": ["b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b", "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"],
++  "expected_source": "root's scale-corrected source 077f7c39 (tree 408c4bb2), which differs from the reviewed 535003d7 only in native scale-unit handling (output/input factors clamped to [1, 4]) and its CPU tests; commit, tree, freeze and features are pinned only by root's grant. Evidence namespace 0074-metalfx-visual-002; publication visual-screenshots-002",
+   "jitter_table_check": "build.py checkout refuses unless the fixture's SAMPLES equal crates/incant_render/src/temporal/jitter.rs at the granted commit"
+  },
+  "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
+@@ -50,7 +50,7 @@
+   "off": "RetainedScene without temporal state",
+   "current_only": "RetainedScene::enable_temporal_upscaling(current_only_config): jittered current frame resampled, no history",
+   "portable": "RetainedScene::enable_temporal_upscaling(review_config)",
+-  "native": "RetainedScene::enable_metalfx(Preference, review_config); RequireMetalFx where scale 1 is certain, PreferMetalFx where a planned fallback must be reported"
++  "native": "RetainedScene::enable_metalfx(Preference, review_config); RequireMetalFx in the output-scale cases, PreferMetalFx for the one-owner cases whose fractional steps must report FractionalViewport; their integral 12/16 and 8/16 steps (factors 4/3 and 2, inside the measured [1, 3]) must still select MetalFx"
+  },
+  "viewports": {
+   "integral": [96.0, 54.0, 768.0, 432.0],
+@@ -119,24 +119,24 @@
+     "steps": [
+      {"arm": "native", "preference": "PreferMetalFx", "frames": 4, "sixteenths": 16, "viewport": null, "expect": "native"},
+      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": null, "expect": "native", "cut": true},
+-     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 12, "viewport": null, "expect": "native_or_scale"},
+-     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": null, "expect": "native_or_scale"},
++     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 12, "viewport": null, "expect": "native"},
++     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": null, "expect": "native"},
+      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 10, "viewport": null, "expect": "fractional"},
+      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": null, "expect": "native"},
+      {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null},
+      {"arm": "off", "frames": 1, "sixteenths": 8, "viewport": null}
+     ],
+-    "purpose": "One preferring owner: view A, an explicit cut, fixed 12/16 and 8/16 content scales (native, or an explicit Scale fallback if this device's range excludes them), the fractional 10/16 scale (explicit FractionalViewport fallback) and output scale again. Native resets are inferred from existing observables only."},
++    "purpose": "One preferring owner: view A, an explicit cut, fixed 12/16 and 8/16 content scales (MetalFX required: factors 4/3 and 2 inside the measured [1, 3]; a Scale fallback fails selections_as_planned), the fractional 10/16 scale (explicit FractionalViewport fallback) and output scale again. Native resets are inferred from existing observables only."},
+    "viewport": {"frames": 12, "ui_submissions": 0,
+     "pngs": ["viewport-native-f6.png", "viewport-off.png"],
+     "checks": ["selections_as_planned", "framed_run_uninterrupted", "outside_viewport_matches_off", "half_scale_internal_size", "reference_has_no_upscale_state", "frames_match_plan"],
+     "steps": [
+      {"arm": "native", "preference": "PreferMetalFx", "frames": 6, "sixteenths": 16, "viewport": "integral", "expect": "native"},
+-     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": "integral", "expect": "native_or_scale"},
++     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": "integral", "expect": "native"},
+      {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": "integral"},
+      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": "fractional", "expect": "fractional"}
+     ],
+-    "purpose": "An integral offset viewport at output scale and 8/16 (zero-offset packing, offset readback, canvas outside the viewport byte-identical to off) and the same placement off the pixel grid (explicit FractionalViewport fallback)."}
++    "purpose": "An integral offset viewport at output scale and 8/16 (both MetalFX; zero-offset packing, offset readback, canvas outside the viewport byte-identical to off) and the same placement off the pixel grid (explicit FractionalViewport fallback)."}
+   }
+  },
+  "totals": {
+diff --git a/handoffs/0074-metalfx-review/visual/review/metalfx_visual_review.rs b/handoffs/0074-metalfx-review/visual/review/metalfx_visual_review.rs
+index b3629e9b..31257a55 100644
+--- a/handoffs/0074-metalfx-review/visual/review/metalfx_visual_review.rs
++++ b/handoffs/0074-metalfx-review/visual/review/metalfx_visual_review.rs
+@@ -10,12 +10,12 @@
+ //! opens one renderer with `Renderer::enable_metalfx` at startup and compares
+ //! same-source arms through `RetainedScene::submit`: off (no temporal state),
+ //! current-only (portable upscaling with history weight 0), portable (`REVIEW`)
+-//! and native (`RetainedScene::enable_metalfx`). Native frames must report
+-//! `Selection::MetalFx`; planned fractional or device-range fallbacks are
+-//! explicit expectations and never count as native. Pixels that the native
+-//! composite takes from the current frame (clear, fractional and mixed-depth
+-//! footprints) are reported as the engine's current-only boundary, not as
+-//! vendor output.
++//! and native (`RetainedScene::enable_metalfx`). Native frames, the integral
++//! 12/16 and 8/16 steps included, must report `Selection::MetalFx`; planned
++//! fractional fallbacks are explicit expectations and never count as native.
++//! Pixels that the native composite takes from the current frame (clear,
++//! fractional and mixed-depth footprints) are reported as the engine's
++//! current-only boundary, not as vendor output.
+ //!
+ //! Every world-frame submission (references and unkept frames included) and
+ //! every UI overlay submission is charged against hard per-case limits before
+@@ -582,10 +582,9 @@ fn selected(shots: &[Shot], expected: Option<Selection>) -> bool {
+ /// Planned selection of one native-owner step.
+ #[derive(Clone, Copy, Debug)]
+ enum Expect {
+-    /// Integral footprint at content scale 1, admitted on this device class.
++    /// Integral footprint at output/input factor 1, 4/3 or 2, inside the
++    /// measured device range [1, 3]: MetalFX itself, never a portable fallback.
+     Native,
+-    /// Integral footprint below scale 1: native, or the device range refuses it.
+-    NativeOrScale,
+     /// Off the pixel grid: the portable path must be selected for this reason.
+     Fractional,
+ }
+@@ -593,10 +592,6 @@ impl Expect {
+     fn allows(self, selection: Option<Selection>) -> bool {
+         match self {
+             Self::Native => selection == Some(Selection::MetalFx),
+-            Self::NativeOrScale => matches!(
+-                selection,
+-                Some(Selection::MetalFx | Selection::Portable(Some(Fallback::Scale)))
+-            ),
+             Self::Fractional => {
+                 selection == Some(Selection::Portable(Some(Fallback::FractionalViewport)))
+             }
+@@ -2200,8 +2195,8 @@ fn transitions() {
+     let steps = [
+         (Expect::Native, view_a.as_slice()),
+         (Expect::Native, cut.as_slice()),
+-        (Expect::NativeOrScale, d12.as_slice()),
+-        (Expect::NativeOrScale, d8.as_slice()),
++        (Expect::Native, d12.as_slice()),
++        (Expect::Native, d8.as_slice()),
+         (Expect::Fractional, d10.as_slice()),
+         (Expect::Native, resumed.as_slice()),
+     ];
+@@ -2239,8 +2234,8 @@ fn transitions() {
+         "steps": [
+             {"frames": "a-1..a-4", "sixteenths": 16, "expect": "Native"},
+             {"frames": "cut-5, b-6", "sixteenths": 16, "expect": "Native", "cut": true},
+-            {"frames": "d12-7..d12-9", "sixteenths": 12, "expect": "NativeOrScale"},
+-            {"frames": "d8-10..d8-12", "sixteenths": 8, "expect": "NativeOrScale"},
++            {"frames": "d12-7..d12-9", "sixteenths": 12, "expect": "Native"},
++            {"frames": "d8-10..d8-12", "sixteenths": 8, "expect": "Native"},
+             {"frames": "d10-13, d10-14", "sixteenths": 10, "expect": "Fractional"},
+             {"frames": "full-15, full-16", "sixteenths": 16, "expect": "Native"},
+         ],
+@@ -2340,7 +2335,7 @@ fn viewport() {
+     report.png("viewport-off.png", &reference.pixels);
+     let steps = [
+         (Expect::Native, full.as_slice()),
+-        (Expect::NativeOrScale, half.as_slice()),
++        (Expect::Native, half.as_slice()),
+         (Expect::Fractional, fallback.as_slice()),
+     ];
+     let checks = [
+diff --git a/handoffs/0074-metalfx-review/visual/tools/common.py b/handoffs/0074-metalfx-review/visual/tools/common.py
+index 93369795..369b9ca7 100644
+--- a/handoffs/0074-metalfx-review/visual/tools/common.py
++++ b/handoffs/0074-metalfx-review/visual/tools/common.py
+@@ -5,9 +5,11 @@ Adapted from handoff 0072's committed visual/tools/common.py (visual tree
+ ac8a48de, read-only reuse), itself adapted from handoff 0068. Stage
+ differences: no source is built until root's grant names an explicit combined
+ source (full commit and tree, a root-reviewed per-file freeze and an
+-allowlisted Cargo feature set); the superseded 4bc810fe/a337c86d sources and
+-the native-metalfx-source-003 freeze are refused by name; there is no
+-regression-suite build or run; budgets are 128 submissions and 20 PNGs.
++allowlisted Cargo feature set); the superseded 4bc810fe/a337c86d/535003d7
++sources and their freezes are refused by name; there is no regression-suite
++build or run; budgets are 128 submissions and 20 PNGs. The second execution
++uses the new 0074-metalfx-visual-002 evidence namespace and publishes to
++visual-screenshots-002, so the first execution's evidence stays intact.
+
+ As in 0072: the grant pins the reviewed visual tree and names the Cargo target
+ (validated, never a forbidden shared one); GPU children run under the global
+@@ -45,7 +47,7 @@ PLAN_PATH = VISUAL / "plan.json"
+ HELPER_SOURCE = VISUAL / "review" / "metalfx_visual_review.rs"
+ HELPER_DEST = "crates/incant_render/tests/metalfx_visual_review.rs"
+ EVIDENCE_ROOT = Path("/Users/andreyyurlov/.codex/incant-evidence")
+-EVIDENCE = EVIDENCE_ROOT / "0074-metalfx-visual"
++EVIDENCE = EVIDENCE_ROOT / "0074-metalfx-visual-002"
+ GRANT = EVIDENCE / "review-ready.json"
+ GPU_LOCK = EVIDENCE_ROOT / "native-gpu.lock"  # global; shared with root's runners
+ PACKET_LOCK = EVIDENCE / "packet.lock"
+@@ -62,7 +64,7 @@ BIN = EVIDENCE / "bin"
+ LOGS = EVIDENCE / "logs"
+ SCRATCH = EVIDENCE / "tmp"
+ CAPTURES = EVIDENCE / "captures"
+-PUBLISHED = PACKET_DIR / "visual-screenshots"
++PUBLISHED = PACKET_DIR / "visual-screenshots-002"
+ RUSTUP_BIN = "/opt/homebrew/opt/rustup/bin"
+ SYSTEM_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
+ TARGET_PARENT = Path("/Users/andreyyurlov/.codex")
+@@ -72,9 +74,11 @@ FORBIDDEN_TARGETS = ("/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+ DENIED_SOURCES = {
+     "4bc810fe0daf238f219801de76b06f19e4daf826": "native MetalFX producer reviewed for 0074's numeric stage only",
+     "a337c86d8d74e819b3e879d4a7db830b74de8862": "temporal upscaling base before the corrected edge and overlay-depth fixes",
++    "535003d766bcc1386fd2d2f454c83808a0fcc4c8": "first execution's source, which read MetalFX factors as content fractions",
+ }
+ DENIED_FREEZES = {
+     "b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b": "native-metalfx-source-003 (the 4bc810fe freeze)",
++    "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0": "temporal-metalfx-union-001 (the 535003d7 freeze)",
+ }
+ # Cargo feature sets root may grant for the review build (sorted). cooked-temporal
+ # is the combined branch's complete cooked native route.
+diff --git a/handoffs/0074-metalfx-review/visual/tools/selfcheck.py b/handoffs/0074-metalfx-review/visual/tools/selfcheck.py
+index b214432e..09c70d01 100644
+--- a/handoffs/0074-metalfx-review/visual/tools/selfcheck.py
++++ b/handoffs/0074-metalfx-review/visual/tools/selfcheck.py
+@@ -11,9 +11,10 @@ ac8a48de).
+ 1. Every stage Python tool parses (ast only; no bytecode is written).
+ 2. plan.json is internally consistent, within the brief's 128-submission and
+    20-PNG budgets, and keeps 0072's review policy unchanged.
+-3. An independent model of the frame, upscaling and native plans classifies
+-   every planned step exactly as the plan expects (native, native or device
+-   Scale fallback, FractionalViewport) and admits every portable footprint.
++3. An independent model of the frame, upscaling and corrected native plans
++   (output/input factors clamped to [1, 4], on root's measured device range)
++   classifies every planned step exactly as the plan expects (native or
++   FractionalViewport) and admits every portable footprint.
+ 4. The Rust fixture agrees with the plan: test names and order, Report::open
+    limits, PNG names and required check names per case, frame size, output
+    variable, configs, viewports, preferences, planned internal sizes and the
+@@ -23,14 +24,20 @@ ac8a48de).
+ 6. The grant policy refuses absent, superseded or ill-formed sources (pure).
+ 7. rustfmt (edition 2024, stdin to stdout, no Cargo or target) leaves the
+    fixture byte-identical.
+-8. Root's announced source (read-only git objects, no export): the committed
+-   build freeze has its announced SHA-256 and the {commit, files} shape
+-   build.py accepts, the commit has its tree, the freeze covers the plan's
+-   build inputs exactly by path, size and blob SHA-256, and the fixture's
+-   jitter copy equals that commit's table.
++8. Root's announced source (read-only git objects, no export): the commit has
++   its tree, descends from the reviewed 535003d7 and changes only the native
++   scale-unit build inputs, and the fixture's jitter copy equals its table. An
++   announced freeze must have its SHA-256, the {commit, files} shape build.py
++   accepts and exact build-input coverage by path, size and blob SHA-256;
++   until root announces one, build.py checkout enforces that at grant time.
+ 9. With the grant absent, every guarded command refuses with the grant message,
+    creates no evidence directory, leaves `git status` unchanged and does not
+    touch the global native-gpu.lock.
++10. The integral 12/16 and 8/16 native steps cannot pass through a portable
++   fallback: plan and fixture bind them to MetalFx alone; the superseded
++   535003d7 unit model reproduces the first execution's recorded selections,
++   whose Scale fallbacks the current expectations refuse; and the first
++   execution's fixture fails the same fixture check (negative control).
+ """
+
+ import ast
+@@ -57,11 +64,42 @@ COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "chec
+ CASE_ORDER = ["stationary", "motion", "excluded", "transitions", "viewport"]
+ PREPARED_SOURCE = "4bc810fe0daf238f219801de76b06f19e4daf826"
+ COMBINED_HEAD_AT_PREPARATION = "0c890514f84c09cb98358ba6d7fa9431140b5b7c"
+-# Announced in root's helper-acceptance revision; the grant itself comes later.
+-ANNOUNCED = {"commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+-             "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+-             "freeze": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+-             "freeze_sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"}
++# Announced in root's scale-correction revision; root freezes it when it builds,
++# and the grant itself comes later.
++ANNOUNCED = {"commit": "077f7c39c0f4122aae36ea3a88537be006722822",
++             "tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
++             "reviewed": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
++             "changed_inputs": ["crates/incant_render/src/metalfx/native.rs",
++                                "crates/incant_render/src/metalfx/numerics.rs",
++                                "crates/incant_render/src/metalfx/plan.rs"],
++             "freeze": None, "freeze_sha256": None}
++# Root's capability query on this device: an API query with 0 submissions.
++SCALE_QUERY = {"path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/receipt.json",
++               "sha256": "e5610fe06e38b64f46186cb5ca71d8ac555a3183a4dfbe0e8b71b081d653abc9"}
++# The first execution (2dc2db04): its granted fixture, and its recorded reports
++# (SHA-256 as in visual-evidence/manifest.json) with their selection groups in
++# the order of the plan's native steps.
++FIRST_FIXTURE = "b2c3e14e61ddfb2980ba3063a7148b424fb0d27c:review/metalfx_visual_review.rs"
++FIRST_REPORTS = {
++    "transitions": ("7bcc167971b8ec016cc3077cbdcc7e7e89e88d97582f9b0c85d099a1af930d58",
++                    ["view_a", "cut", "d12", "d8", "d10", "resumed"]),
++    "viewport": ("3cf84253ee4e7122648a0ea91133b46721a463b1e7c4cfe77fea7e348f5cd04f",
++                 ["framed", "framed_8_16", "fractional"]),
++}
++SELECTION = {"native": "MetalFx", "scale": "Portable(Some(Scale))", "aspect": "Portable(Some(Aspect))",
++             "fractional": "Portable(Some(FractionalViewport))"}
++# What the fixture's Expect::allows (checked verbatim against EXPECT_IMPL) accepts.
++ALLOWS = {"native": {SELECTION["native"]}, "fractional": {SELECTION["fractional"]}}
++EXPECT_IMPL = """impl Expect {
++    fn allows(self, selection: Option<Selection>) -> bool {
++        match self {
++            Self::Native => selection == Some(Selection::MetalFx),
++            Self::Fractional => {
++                selection == Some(Selection::Portable(Some(Fallback::FractionalViewport)))
++            }
++        }
++    }
++}"""
+
+
+ def git_show(spec):
+@@ -139,20 +177,40 @@ def upscale_admits(output, rect, size, source_rect):
+                and [math.ceil(v * n / 16) for v in output] == size for n in range(4, 17))
+
+
+-def native_class(source_rect, rect):
++def measured_range():
++    """Root's pinned raw [min, max] for this device, or None if it does not verify."""
++    path = Path(SCALE_QUERY["path"])
++    if not path.is_file() or c.sha(path) != SCALE_QUERY["sha256"]:
++        return None
++    query = c.read_json(path)["query"]
++    if not (query.get("supported") is True and query.get("gpu_submissions") == 0):
++        return None
++    return [float(query["raw_min_scale"]), float(query["raw_max_scale"])]
++
++
++def native_class(source_rect, rect, raw, superseded=False):
++    """metalfx::plan::Plan::new on the device's raw range. Corrected (077f7c39):
++    raw output/input factors clamped to [1, 4] bound output/source. Superseded
++    (535003d7): the same values read as content fractions in [0.25, 1] bound
++    source/output, so a [1, 3] device admitted only content scale 1."""
+     integral = lambda r: (all(math.isfinite(v) and v >= 0 and v == int(v) and v <= 8192 for v in r)
+                           and r[2] != 0 and r[3] != 0)
+     if not integral(source_rect) or not integral(rect):
+         return "fractional"
+     if source_rect[2] * rect[3] != source_rect[3] * rect[2]:
+         return "aspect"
+-    scale = source_rect[2] / rect[2]
+-    if scale > 1:
++    if raw is None:
++        return "unmeasured"
++    if not all(math.isfinite(v) and v > 0 for v in raw) or raw[0] > raw[1]:
+         return "scale"
+-    return "native" if scale == 1 else "native_or_scale"
++    if superseded:
++        low, high, value = max(raw[0], 0.25), min(raw[1], 1.0), source_rect[2] / rect[2]
++    else:
++        low, high, value = max(raw[0], 1.0), min(raw[1], 4.0), rect[2] / source_rect[2]
++    return "native" if low <= value <= high else "scale"
+
+
+-def footprint_checks(p):
++def footprint_checks(p, raw):
+     output = p["review"]["size"]
+     viewports = {None: [0.0, 0.0, float(output[0]), float(output[1])],
+                  "integral": p["viewports"]["integral"], "fractional": p["viewports"]["fractional"]}
+@@ -168,14 +226,14 @@ def footprint_checks(p):
+                 row["upscale_admitted"] = upscale_admits(output, rect, size, source_rect)
+                 ok = ok and row["frame_plan_valid"] and row["upscale_admitted"]
+             if step["arm"] == "native":
+-                row["native_class"] = native_class(source_rect, rect)
++                row["native_class"] = native_class(source_rect, rect, raw)
+                 row["expected"] = step["expect"]
+                 ok = ok and row["native_class"] == step["expect"]
+-                # RequireMetalFx only where native is certain (scale 1, integral).
++                # RequireMetalFx only on steps that must select MetalFX.
+                 ok = ok and (step["preference"] != "RequireMetalFx" or step["expect"] == "native")
+             rows.append(row)
+     sizes = {(r["sixteenths"], r["viewport"] == viewports[None]): r["internal_size"] for r in rows}
+-    return {"steps": rows, "all_classified_as_planned": ok, "internal_sizes": {
++    return {"device_raw_range": raw, "steps": rows, "all_classified_as_planned": ok, "internal_sizes": {
+         f"{k[0]}/16{'' if k[1] else ' viewport'}": v for k, v in sorted(sizes.items())}}
+
+
+@@ -222,7 +280,7 @@ def helper_checks(p, footprints):
+     jitter = {"fixture": c.samples(source),
+               "prepared_source_4bc810fe": c.samples(git_show(f"{PREPARED_SOURCE}:{c.JITTER_SOURCE}") or ""),
+               "combined_head_0c890514": c.samples(git_show(f"{COMBINED_HEAD_AT_PREPARATION}:{c.JITTER_SOURCE}") or ""),
+-              "announced_535003d7": c.samples(git_show(f"{ANNOUNCED['commit']}:{c.JITTER_SOURCE}") or "")}
++              "announced_077f7c39": c.samples(git_show(f"{ANNOUNCED['commit']}:{c.JITTER_SOURCE}") or "")}
+     canvas = re.search(r"const VIEWPORT: Viewport = Viewport \{.*?canvas_srgb: \[(\d+), (\d+), (\d+)\]", source, re.S)
+     return {
+         "cfg_native_metalfx_feature": source.count('#![cfg(feature = "native-metalfx")]') == 1,
+@@ -246,7 +304,7 @@ def helper_checks(p, footprints):
+         "jitter_copy_equals_prepared_source": jitter["fixture"] is not None
+         and jitter["fixture"] == jitter["prepared_source_4bc810fe"],
+         "jitter_copy_equals_announced_source": jitter["fixture"] is not None
+-        and jitter["fixture"] == jitter["announced_535003d7"],
++        and jitter["fixture"] == jitter["announced_077f7c39"],
+         "observed": {"tests": list(tests), "limits": opened, "pngs": pngs, "checks": checks,
+                      "preferences": preferences, "review_config": review,
+                      "internal_sizes_checked": sizes_used, "jitter": jitter,
+@@ -320,10 +378,17 @@ def policy_checks():
+     variants = {
+         "explicit_uncooked_source_accepted": (good, False),
+         "explicit_cooked_source_accepted": ({**good, "features": ["native-metalfx", "cooked-temporal"]}, False),
++        "announced_corrected_source_accepted": ({**good, "source_commit": ANNOUNCED["commit"],
++                                                 "source_tree": ANNOUNCED["tree"]}, False),
++        "core_presentation_target_accepted": (
++            {**good, "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target"}, False),
+         "superseded_4bc810fe_refused": ({**good, "source_commit": "4bc810fe0daf238f219801de76b06f19e4daf826"}, True),
+         "superseded_a337c86d_refused": ({**good, "source_commit": "a337c86d8d74e819b3e879d4a7db830b74de8862"}, True),
++        "superseded_535003d7_refused": ({**good, "source_commit": ANNOUNCED["reviewed"]}, True),
+         "superseded_freeze_refused": ({**good, "source_freeze": {
+             "path": "/x/freeze.json", "sha256": "b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b"}}, True),
++        "superseded_535003d7_freeze_refused": ({**good, "source_freeze": {
++            "path": "/x/freeze.json", "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"}}, True),
+         "missing_freeze_refused": ({k: v for k, v in good.items() if k != "source_freeze"}, True),
+         "relative_freeze_refused": ({**good, "source_freeze": {"path": "freeze.json", "sha256": "4" * 64}}, True),
+         "missing_tree_refused": ({k: v for k, v in good.items() if k != "source_tree"}, True),
+@@ -359,19 +424,20 @@ def format_check():
+ # ------------------------------------------------------------------ announced source
+
+ def announced_source_checks(p):
+-    """build.py's freeze rule applied read-only to root's announced commit: git
+-    objects stand in for the exported files (no export, target or build)."""
+-    freeze_path = Path(ANNOUNCED["freeze"])
+-    result = {"announced": ANNOUNCED}
+-    if not freeze_path.is_file():
+-        return {**result, "problem": "the announced freeze is absent", "all_pass": False}
+-    result["freeze_sha256_matches"] = c.sha(freeze_path) == ANNOUNCED["freeze_sha256"]
+-    rows, problem = build.freeze_rows(c.read_json(freeze_path), ANNOUNCED["commit"])
+-    result["freeze_shape_accepted"] = problem is None
+-    if problem:
+-        return {**result, "problem": problem, "all_pass": False}
+-    result["tree_matches"] = c.git("rev-parse", ANNOUNCED["commit"] + "^{tree}").strip() == ANNOUNCED["tree"]
+-    listing = subprocess.run(["git", "ls-tree", "-r", "-l", "-z", "--full-tree", ANNOUNCED["commit"]],
++    """Root's announced commit, read-only from git objects (no export, target or
++    build): its tree, its descent from the reviewed source and the build inputs
++    it changes. Once root announces a freeze, build.py's freeze rule is applied
++    the same way, git objects standing in for the exported files."""
++    commit, roots = ANNOUNCED["commit"], p["build_inputs"]
++    descends = subprocess.run(["git", "merge-base", "--is-ancestor", ANNOUNCED["reviewed"], commit],
++                              cwd=c.ROOT, capture_output=True).returncode == 0
++    changed = c.git("diff", "--name-only", "--no-renames", ANNOUNCED["reviewed"], commit).splitlines()
++    result = {"announced": ANNOUNCED,
++              "tree_matches": c.git("rev-parse", commit + "^{tree}").strip() == ANNOUNCED["tree"],
++              "descends_from_reviewed_source": descends,
++              "build_inputs_changed": sorted(path for path in changed if build.under(path, roots))}
++    result["only_scale_unit_inputs_changed"] = result["build_inputs_changed"] == ANNOUNCED["changed_inputs"]
++    listing = subprocess.run(["git", "ls-tree", "-r", "-l", "-z", "--full-tree", commit],
+                              cwd=c.ROOT, capture_output=True, check=True).stdout
+     blobs = {}
+     for record in listing.split(b"\0"):
+@@ -380,8 +446,21 @@ def announced_source_checks(p):
+             _, kind, blob, size = meta.decode().split()
+             if kind == "blob":
+                 blobs[path.decode()] = (blob, int(size))
+-    roots = p["build_inputs"]
+     inputs = {path for path in blobs if build.under(path, roots)}
++    result["build_inputs"] = len(inputs)
++    scope = result["tree_matches"] and descends and result["only_scale_unit_inputs_changed"]
++    if ANNOUNCED["freeze"] is None:
++        return {**result, "freeze": ("not announced; build.py checkout refuses an ill-formed freeze before "
++                                     "export and latches stop unless the exported build inputs match it "
++                                     "exactly"), "all_pass": scope}
++    freeze_path = Path(ANNOUNCED["freeze"])
++    if not freeze_path.is_file():
++        return {**result, "problem": "the announced freeze is absent", "all_pass": False}
++    result["freeze_sha256_matches"] = c.sha(freeze_path) == ANNOUNCED["freeze_sha256"]
++    rows, problem = build.freeze_rows(c.read_json(freeze_path), commit)
++    result["freeze_shape_accepted"] = problem is None
++    if problem:
++        return {**result, "problem": problem, "all_pass": False}
+     frozen = {path for path in rows if build.under(path, roots)}
+     digests = {}
+     reader = subprocess.Popen(["git", "cat-file", "--batch"], cwd=c.ROOT, stdin=subprocess.PIPE,
+@@ -400,17 +479,99 @@ def announced_source_checks(p):
+                         if digest != rows[path]["sha256"]
+                         or rows[path]["bytes"] not in (None, blobs[path][1]))
+     result.update({
+-        "build_inputs": len(inputs), "freeze_rows": len(rows), "freeze_build_input_rows": len(frozen),
++        "freeze_rows": len(rows), "freeze_build_input_rows": len(frozen),
+         "freeze_rows_outside_roots": sorted(set(rows) - frozen),
+         "inputs_missing_from_freeze": sorted(inputs - frozen)[:20],
+         "freeze_rows_missing_from_commit": sorted(set(rows) - set(blobs))[:20],
+         "blob_sha256_compared": len(digests), "mismatched": mismatched[:20],
+         "exact": bool(inputs) and inputs == frozen and set(rows) <= set(blobs) and not mismatched})
+-    result["all_pass"] = (result["freeze_sha256_matches"] and result["freeze_shape_accepted"]
+-                          and result["tree_matches"] and result["exact"])
++    result["all_pass"] = scope and result["freeze_sha256_matches"] and result["exact"]
+     return result
+
+
++# ------------------------------------------------------------------ strict native steps
++
++def expectation_checks(source, p):
++    """The fixture binds the plan's native steps to Selection::MetalFx alone."""
++    enum = re.search(r"\nenum Expect \{\n(.*?)\n\}", source, re.S)
++    impl = re.search(r"\nimpl Expect \{\n.*?\n\}\n", source, re.S)
++    tests, bound = bodies(source), {}
++    for name in FIRST_REPORTS:
++        body = tests.get(name, "")
++        start = body.find("let steps = [")
++        block = body[start:body.find("];", start)] if start >= 0 else ""
++        bound[name] = [e.lower() for e in re.findall(r"\(Expect::(\w+), \w+\.as_slice\(\)\)", block)]
++    planned = {name: [s["expect"] for s in p["review"]["cases"][name]["steps"] if s["arm"] == "native"]
++               for name in FIRST_REPORTS}
++    return {
++        "variants_are_native_and_fractional": bool(enum)
++        and re.findall(r"^    (\w+),$", enum[1], re.M) == ["Native", "Fractional"],
++        "native_allows_only_metalfx": bool(impl) and impl[0].split() == EXPECT_IMPL.split(),
++        "no_scale_fallback_accepted": "NativeOrScale" not in source and "Fallback::Scale" not in source,
++        "steps_bound_as_planned": all(bound[n] and bound[n] == planned[n] for n in bound),
++        "selections_checked_against_steps": all(
++            '("selections_as_planned", steps_as_planned(&steps))' in tests.get(n, "") for n in bound),
++    }
++
++
++def strict_native_checks(p, footprints):
++    """The 12/16 and 8/16 native steps cannot pass through a portable fallback.
++    The first execution's recorded selections are replayed against both unit
++    models and against the current expectations (ALLOWS mirrors Expect::allows)."""
++    raw, cases = footprints["device_raw_range"], p["review"]["cases"]
++    reduced = [s for case in cases.values() for s in case["steps"]
++               if s["arm"] == "native" and s["sixteenths"] in (12, 8)]
++    fixture = expectation_checks(c.HELPER_SOURCE.read_text(), p)
++    first_fixture = expectation_checks(git_show(FIRST_FIXTURE) or "", p)
++    replay, recorded_ok = [], True
++    for case, (digest, groups) in FIRST_REPORTS.items():
++        path = c.PACKET_DIR / "visual-evidence" / "reports" / f"{case}.json"
++        if not path.is_file() or c.sha(path) != digest:
++            recorded_ok = False
++            continue
++        report = c.read_json(path)
++        recorded_ok = recorded_ok and report["checks"].get("selections_as_planned") is True
++        rows = [r for r in footprints["steps"] if r["case"] == case and r["arm"] == "native"]
++        steps = [s for s in cases[case]["steps"] if s["arm"] == "native"]
++        if not len(groups) == len(rows) == len(steps):
++            recorded_ok = False
++            continue
++        for group, row, step in zip(groups, rows, steps):
++            shots = report["selections"][group]
++            recorded = sorted({s["metalfx_selection"] for s in shots})
++            replay.append({
++                "case": case, "group": group, "sixteenths": step["sixteenths"], "recorded": recorded,
++                "frames_and_size_as_planned": len(shots) == step["frames"] and all(
++                    s["upscale"]["internal_size"] == row["internal_size"] for s in shots),
++                "superseded_model": SELECTION.get(native_class(row["source_rect"], row["viewport"], raw, True)),
++                "corrected_model": SELECTION.get(row["native_class"]),
++                "expect": step["expect"], "accepted_now": set(recorded) <= ALLOWS.get(step["expect"], set())})
++    lowered = [r for r in replay if r["sixteenths"] in (12, 8)]
++    return {
++        "measured_raw_range": raw,
++        "reduced_steps_expect_native": len(reduced) == 3 and all(s["expect"] == "native" for s in reduced),
++        "expectations_are_native_or_fractional": {s.get("expect") for case in cases.values()
++                                                  for s in case["steps"]} <= {None, "native", "fractional"},
++        "fixture": fixture,
++        "fixture_binds_metalfx": all(fixture.values()),
++        "first_fixture": first_fixture,
++        # Each detector alone refuses the first fixture, which accepted Scale.
++        "first_fixture_refused": not any(first_fixture[k] for k in (
++            "variants_are_native_and_fractional", "native_allows_only_metalfx",
++            "no_scale_fallback_accepted", "steps_bound_as_planned")),
++        "replay": replay,
++        "first_records_verified_and_passed_then": recorded_ok and len(replay) == 9,
++        "replay_frames_and_sizes_as_planned": bool(replay) and all(r["frames_and_size_as_planned"] for r in replay),
++        "superseded_model_reproduces_records": bool(replay)
++        and all(r["recorded"] == [r["superseded_model"]] for r in replay),
++        "corrected_model_selects_metalfx_at_reduced_steps": len(lowered) == 3
++        and all(r["corrected_model"] == SELECTION["native"] for r in lowered),
++        "recorded_scale_fallbacks_now_refused": len(lowered) == 3
++        and all(r["recorded"] == [SELECTION["scale"]] and not r["accepted_now"] for r in lowered),
++        "other_recorded_steps_still_accepted": all(r["accepted_now"] for r in replay if r not in lowered),
++    }
++
++
+ # ------------------------------------------------------------------ refusals
+
+ def refusal_checks():
+@@ -445,15 +606,18 @@ def main():
+     for path in sorted(c.TOOLS.glob("*.py")):
+         ast.parse(path.read_text(), str(path))
+     p = c.plan()
+-    footprints = footprint_checks(p)
++    footprints = footprint_checks(p, measured_range())
+     result = {"python": sys.version.split()[0], "plan_sha256": c.sha(c.PLAN_PATH),
+               "helper_sha256": c.sha(c.HELPER_SOURCE),
+               "tools": {path.name: c.sha(path) for path in sorted(c.TOOLS.glob("*.py"))},
+               "syntax": "all tools parse", "plan": plan_checks(p), "footprints": footprints,
+               "helper": helper_checks(p, footprints), "reuse": reuse_checks(p),
+               "grant_policy": policy_checks(), "format": format_check(),
+-              "announced_source": announced_source_checks(p), "refusals": refusal_checks()}
++              "announced_source": announced_source_checks(p),
++              "strict_native": strict_native_checks(p, footprints), "refusals": refusal_checks()}
+     refusals = result["refusals"]
++    strict = {k: v for k, v in result["strict_native"].items()
++              if k not in ("measured_raw_range", "fixture", "first_fixture", "replay")}
+     result["all_pass"] = (all(result["plan"].values())
+                           and footprints["all_classified_as_planned"]
+                           and all(v for k, v in result["helper"].items() if k != "observed")
+@@ -463,6 +627,7 @@ def main():
+                           and result["grant_policy"]["all_as_expected"]
+                           and result["format"].get("identical", False)
+                           and result["announced_source"]["all_pass"]
++                          and all(strict.values())
+                           and all(refusals.get(k, False) for k in (
+                               "all_refused_for_absent_grant", "evidence_directory_still_absent",
+                               "git_status_unchanged", "global_gpu_lock_untouched")))
+diff --git a/handoffs/0074-metalfx-review/visual/tools/test_analyze.py b/handoffs/0074-metalfx-review/visual/tools/test_analyze.py
+index 183528d8..f237049d 100644
+--- a/handoffs/0074-metalfx-review/visual/tools/test_analyze.py
++++ b/handoffs/0074-metalfx-review/visual/tools/test_analyze.py
+@@ -1,10 +1,11 @@
+ #!/usr/bin/env python3
+ """CPU-only controls for analyze.py (handoff 0074 stage B). A complete synthetic
+ evidence set that matches the plan must check and publish. Empty evidence, a
+-missing case, a false report check, a failed child, a changed PNG or report, an
+-orphan debit, and a stale or failed summary must each refuse; check always
+-retains its diagnostic summary. Never builds, runs a renderer or touches the real
+-evidence directory: every evidence path is redirected to a temporary directory.
++missing case, a false report check (a native-step portable fallback included),
++a failed child, a changed PNG or report, an orphan debit, and a stale or failed
++summary must each refuse; check always retains its diagnostic summary. Never
++builds, runs a renderer or touches the real evidence directory: every evidence
++path is redirected to a temporary directory.
+
+   python3 -I -B test_analyze.py [--receipt NEW_PATH]
+ """
+@@ -171,6 +172,15 @@ class Analyze(unittest.TestCase):
+         self.publish_refused("incomplete or failed")
+         self.record("false_check_refuses", problems)
+
++    def test_scale_fallback_selection_refuses(self):
++        # A portable fallback at a native 12/16 or 8/16 step makes selections_as_planned false.
++        self.complete(false_check="selections_as_planned")
++        problems = self.check_refused()
++        for case in ("transitions", "viewport"):
++            self.assertTrue(any(p.startswith(f"{case}: required checks") for p in problems), case)
++        self.publish_refused("incomplete or failed")
++        self.record("scale_fallback_selection_refuses", problems)
++
+     def test_failed_child_refuses(self):
+         self.complete(failed_case="motion")
+         problems = self.check_refused()
+diff --git a/handoffs/0074-metalfx-review/visual/tools/test_lifecycle.py b/handoffs/0074-metalfx-review/visual/tools/test_lifecycle.py
+index 8aefd61f..d58f3dd8 100644
+--- a/handoffs/0074-metalfx-review/visual/tools/test_lifecycle.py
++++ b/handoffs/0074-metalfx-review/visual/tools/test_lifecycle.py
+@@ -389,7 +389,7 @@ class Lifecycle(unittest.TestCase):
+         RECORDS.append({"test": "freeze_coverage_is_exact_or_refused", "exact_controls": results})
+
+     def test_checkout_refuses_a_freeze_naming_another_commit_before_export(self):
+-        commit, tree = "535003d766bcc1386fd2d2f454c83808a0fcc4c8", "e98b24847c28f3491f56e38edb051e018748eff7"
++        commit, tree = "077f7c39c0f4122aae36ea3a88537be006722822", "408c4bb2948983cfde980fa40c31f443b5d78a0c"
+         freeze = Path(self.directory.name) / "freeze.json"
+         c.write_new_json(freeze, {"commit": "4bc810fe0daf238f219801de76b06f19e4daf826",
+                                   "files": [{"path": "Cargo.lock", "sha256": "1" * 64}]})

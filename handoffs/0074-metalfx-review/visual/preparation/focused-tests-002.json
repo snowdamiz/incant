@@ -1,0 +1,66 @@
+{
+ "cpu_only": true,
+ "focused": true,
+ "passed": true,
+ "tests_run": 7,
+ "tests": [
+  "Analyze.test_complete_evidence_checks_and_publishes",
+  "Analyze.test_false_check_refuses",
+  "Analyze.test_scale_fallback_selection_refuses",
+  "Lifecycle.test_superseded_source_refused_before_checkout",
+  "Lifecycle.test_ill_formed_sources_refused",
+  "Lifecycle.test_explicit_source_passes_the_grant_gate",
+  "Lifecycle.test_checkout_refuses_a_freeze_naming_another_commit_before_export"
+ ],
+ "failed": [],
+ "seconds": 0.06,
+ "python": "3.14.8",
+ "records": [
+  {
+   "test": "complete_evidence_checks_and_publishes",
+   "pngs": 18,
+   "bound_files": 46
+  },
+  {
+   "test": "false_check_refuses",
+   "problems": 2,
+   "first": [
+    "viewport: required checks are not exactly the plan's, all true (not true: ['outside_viewport_matches_off'])",
+    "viewport: report outcome 'fail' is not this case's pass"
+   ]
+  },
+  {
+   "test": "scale_fallback_selection_refuses",
+   "problems": 4,
+   "first": [
+    "transitions: required checks are not exactly the plan's, all true (not true: ['selections_as_planned'])",
+    "transitions: report outcome 'fail' is not this case's pass",
+    "viewport: required checks are not exactly the plan's, all true (not true: ['selections_as_planned'])"
+   ]
+  },
+  {
+   "test": "superseded_sources_refused_before_checkout",
+   "refusals": [
+    "source 4bc810fe0daf238f219801de76b06f19e4daf826 is superseded (native MetalFX producer reviewed for 0074's numeric stage only); an explicit combined source is required",
+    "source 535003d766bcc1386fd2d2f454c83808a0fcc4c8 is superseded (first execution's source, which read MetalFX factors as content fractions); an explicit combined source is required",
+    "source a337c86d8d74e819b3e879d4a7db830b74de8862 is superseded (temporal upscaling base before the corrected edge and overlay-depth fixes); an explicit combined source is required"
+   ]
+  },
+  {
+   "test": "ill_formed_sources_refused",
+   "refusals": [
+    "freeze native-metalfx-source-003 (the 4bc810fe freeze) is superseded",
+    "features must be exactly one of [['native-metalfx'], ['cooked-temporal', 'native-metalfx']]",
+    "the grant lacks a full source_commit, source_tree or visual_tree",
+    "the grant lacks an absolute source_freeze path and SHA-256"
+   ]
+  },
+  {
+   "test": "explicit_source_passes_the_grant_gate"
+  },
+  {
+   "test": "checkout_refuses_a_freeze_naming_another_commit_before_export",
+   "refusal": "the granted freeze does not name the granted commit"
+  }
+ ]
+}

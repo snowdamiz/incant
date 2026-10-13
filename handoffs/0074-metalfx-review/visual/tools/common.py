@@ -5,9 +5,11 @@ Adapted from handoff 0072's committed visual/tools/common.py (visual tree
 ac8a48de, read-only reuse), itself adapted from handoff 0068. Stage
 differences: no source is built until root's grant names an explicit combined
 source (full commit and tree, a root-reviewed per-file freeze and an
-allowlisted Cargo feature set); the superseded 4bc810fe/a337c86d sources and
-the native-metalfx-source-003 freeze are refused by name; there is no
-regression-suite build or run; budgets are 128 submissions and 20 PNGs.
+allowlisted Cargo feature set); the superseded 4bc810fe/a337c86d/535003d7
+sources and their freezes are refused by name; there is no regression-suite
+build or run; budgets are 128 submissions and 20 PNGs. The second execution
+uses the new 0074-metalfx-visual-002 evidence namespace and publishes to
+visual-screenshots-002, so the first execution's evidence stays intact.
 
 As in 0072: the grant pins the reviewed visual tree and names the Cargo target
 (validated, never a forbidden shared one); GPU children run under the global
@@ -45,7 +47,7 @@ PLAN_PATH = VISUAL / "plan.json"
 HELPER_SOURCE = VISUAL / "review" / "metalfx_visual_review.rs"
 HELPER_DEST = "crates/incant_render/tests/metalfx_visual_review.rs"
 EVIDENCE_ROOT = Path("/Users/andreyyurlov/.codex/incant-evidence")
-EVIDENCE = EVIDENCE_ROOT / "0074-metalfx-visual"
+EVIDENCE = EVIDENCE_ROOT / "0074-metalfx-visual-002"
 GRANT = EVIDENCE / "review-ready.json"
 GPU_LOCK = EVIDENCE_ROOT / "native-gpu.lock"  # global; shared with root's runners
 PACKET_LOCK = EVIDENCE / "packet.lock"
@@ -62,7 +64,7 @@ BIN = EVIDENCE / "bin"
 LOGS = EVIDENCE / "logs"
 SCRATCH = EVIDENCE / "tmp"
 CAPTURES = EVIDENCE / "captures"
-PUBLISHED = PACKET_DIR / "visual-screenshots"
+PUBLISHED = PACKET_DIR / "visual-screenshots-002"
 RUSTUP_BIN = "/opt/homebrew/opt/rustup/bin"
 SYSTEM_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
 TARGET_PARENT = Path("/Users/andreyyurlov/.codex")
@@ -72,9 +74,11 @@ FORBIDDEN_TARGETS = ("/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
 DENIED_SOURCES = {
     "4bc810fe0daf238f219801de76b06f19e4daf826": "native MetalFX producer reviewed for 0074's numeric stage only",
     "a337c86d8d74e819b3e879d4a7db830b74de8862": "temporal upscaling base before the corrected edge and overlay-depth fixes",
+    "535003d766bcc1386fd2d2f454c83808a0fcc4c8": "first execution's source, which read MetalFX factors as content fractions",
 }
 DENIED_FREEZES = {
     "b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b": "native-metalfx-source-003 (the 4bc810fe freeze)",
+    "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0": "temporal-metalfx-union-001 (the 535003d7 freeze)",
 }
 # Cargo feature sets root may grant for the review build (sorted). cooked-temporal
 # is the combined branch's complete cooked native route.
