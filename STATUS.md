@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main202, 2026-10-13
+## Current overview — main203, 2026-10-13
 
 Development main202 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
@@ -35,7 +35,7 @@ No release or phase approval follows from a main merge.
 Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
 that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
 is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
-production and backend assertions are unchanged. Checkpoint18 is terminal with 20 required successes and three same-cause failures. Checkpoint19 is frozen at exact main197. Its Linux desktop persistence test failed a stale expected pipeline count (30 versus actual31), and macOS and Windows later refused vendored Parry compiler package IDs after successful shipping compiles; the Windows optimized conformance child continues. The [Parry audit correction](docs/spikes/physics-artifact-vendor-identity.md) passes actual both-mode target audits and full tooling checks, with independent final acceptance; publication awaits the required fast check. The [test-only correction](docs/spikes/vulkan-cache-catalog-count.md) is merged in PR201 after independent review, local compile/Clippy and the required fast check; actual Vulkan rerun and all23 release successes remain required.
+production and backend assertions are unchanged. Checkpoint18 is terminal with 20 required successes and three same-cause failures. Checkpoint19 is frozen at exact main197. Its Linux desktop persistence test failed a stale expected pipeline count (30 versus actual31), and macOS and Windows later refused vendored Parry compiler package IDs after successful shipping compiles; the Windows optimized conformance child continues. The [Parry audit correction](docs/spikes/physics-artifact-vendor-identity.md) passes actual both-mode target audits and full tooling checks, with independent final acceptance; PR203 is merged after its exact-head fast check. The [test-only correction](docs/spikes/vulkan-cache-catalog-count.md) is merged in PR201 after independent review, local compile/Clippy and the required fast check; actual Vulkan rerun and all23 release successes remain required.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -55,6 +55,16 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Retained opaque motion — current-main CPU integration verified
+
+The opt-in retained motion/depth implementation preserves exact accepted live/staging
+geometry and advances history only after submission. [Current-main203 checks](docs/spikes/retained-motion-main203.md)
+pass 91 CPU cases plus 12 overlapping cooked-refusal cases, Clippy, wasm32, native-window
+compile and dependency checks. The prior two numerical GPU processes remain scoped to
+their recorded producer binary; no current composed GPU or appearance claim is made.
+Final integration review is pending. Default rendering is unchanged; temporal color,
+upscaling and cooked motion remain separate.
+
 ## Exact physics saves — inert manifold ownership verified locally
 
 The std-only inert format now joins contact edges to exact collider generations,
