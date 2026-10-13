@@ -21,7 +21,10 @@ pub use checkpoint::{
 #[cfg(feature = "native-checkpoints")]
 pub use rapier2d::pipeline::checked_restore::WorkBudget as CheckpointWorkBudget;
 mod native_owner;
+mod structural;
 use native_owner::NativeOwner;
+#[cfg(feature = "native-checkpoints")]
+pub use structural::{StructuralAdmission, StructuralChanges};
 mod config;
 mod query;
 pub use config::{PreparedBody, validate_collider, validate_state};
@@ -42,6 +45,9 @@ pub enum PhysicsError {
     InvalidStep,
     #[error("2D solver failed; discard this session")]
     Failed,
+    #[cfg(feature = "native-checkpoints")]
+    #[error("native structural admission refused: {0:?}")]
+    Structural(rapier2d::pipeline::checked_restore::capture::StructuralError),
     #[error("2D collection limit exceeded or duplicate structural ID")]
     Limit,
     #[error("invalid typed 2D component: {0}")]
@@ -131,21 +137,31 @@ impl PhysicsWorld2D {
         &mut self,
         changes: Vec<(StableId, Option<PreparedBody>)>,
     ) -> Result<(), PhysicsError> {
-        self.validate_changes(&changes)?;
-        for (id, config) in changes {
-            if let Some(config) = config {
-                if self.entries.get(&id).is_some_and(|old| {
-                    old.config.body == config.body
-                        && old.config.collider == config.collider
-                        && old.config.geometry == config.geometry
-                }) {
-                    self.update_motion(id, &config.state);
+        #[cfg(feature = "native-checkpoints")]
+        {
+            let changes = self.prepare_structure(changes)?;
+            let mut work = CheckpointWorkBudget::new(64_000_000);
+            let admitted = self.admit_structure(&changes, &mut work)?;
+            self.apply_structure(admitted)?;
+        }
+        #[cfg(not(feature = "native-checkpoints"))]
+        {
+            self.validate_changes(&changes)?;
+            for (id, config) in changes {
+                if let Some(config) = config {
+                    if self.entries.get(&id).is_some_and(|old| {
+                        old.config.body == config.body
+                            && old.config.collider == config.collider
+                            && old.config.geometry == config.geometry
+                    }) {
+                        self.update_motion(id, &config.state);
+                    } else {
+                        self.remove(id);
+                        self.insert(id, config);
+                    }
                 } else {
                     self.remove(id);
-                    self.insert(id, config);
                 }
-            } else {
-                self.remove(id);
             }
         }
         Ok(())
@@ -297,6 +313,7 @@ impl PhysicsWorld2D {
             .body
             .is_some_and(|body| self.world.read().bodies[body].is_sleeping());
     }
+    #[cfg(not(feature = "native-checkpoints"))]
     fn remove(&mut self, id: StableId) {
         if let Some(entry) = self.entries.remove(&id) {
             self.ids.remove(&entry.collider);
@@ -308,6 +325,7 @@ impl PhysicsWorld2D {
             self.query_dirty = true;
         }
     }
+    #[cfg(not(feature = "native-checkpoints"))]
     fn insert(&mut self, id: StableId, mut config: PreparedBody) {
         let shape = ColliderBuilder::new(config.shape())
             .density(config.collider.density as f32)
@@ -369,4 +387,11 @@ fn groups(memberships: u32, filter: u32) -> InteractionGroups {
         Group::from_bits_retain(filter),
         InteractionTestMode::And,
     )
+}
+
+#[cfg(feature = "native-checkpoints")]
+impl From<rapier2d::pipeline::checked_restore::capture::StructuralError> for PhysicsError {
+    fn from(error: rapier2d::pipeline::checked_restore::capture::StructuralError) -> Self {
+        Self::Structural(error)
+    }
 }

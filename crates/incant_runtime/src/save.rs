@@ -10,7 +10,7 @@ use crate::flipbook::Playback;
 use crate::world::{Local, Motion};
 use crate::{CookedEntity, CookedScene, CookedSpatial, NativeWorld, SceneError};
 #[cfg(feature = "native-checkpoints")]
-pub use checkpoint::{WorldCheckpoint, WorldCheckpointError};
+pub use checkpoint::{MAX_PERSISTED_WORLD_BYTES, WorldCheckpoint, WorldCheckpointError};
 use sha2::{Digest, Sha256};
 use thiserror::Error;
 
