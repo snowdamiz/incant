@@ -58,7 +58,7 @@ impl NativeSession {
         if self.world.requires_ui_checkpoint() != ui.is_some() {
             return Err(CheckpointError::Unsupported("hosted UI state is required"));
         }
-        if self.world.requires_audio_checkpoint() != audio.is_some() {
+        if self.world.requires_audio_checkpoint() && audio.is_none() {
             return Err(CheckpointError::Unsupported(
                 "retained audio owner is required",
             ));
