@@ -182,3 +182,6 @@ fn temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase
         color
     );
 }
+
+#[path = "temporal_joined_tests.rs"]
+mod joined;
