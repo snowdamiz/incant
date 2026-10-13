@@ -1,0 +1,33 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_audio_runtime",
+      "--features",
+      "scene",
+      "--test",
+      "scene",
+      "startup_suspended_master",
+      "-j2"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "render-input",
+      "--lib",
+      "restart",
+      "-j2"
+    ],
+    "exit_code": 0
+  }
+]

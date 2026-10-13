@@ -97,6 +97,17 @@ where
             false,
         )
     }
+    /// The private master exists paused before any voice can be attached. This
+    /// avoids a new-then-pause command racing a backend's first callback.
+    pub fn new_suspended(settings: AudioManagerSettings<B>, definitions: &[Bus]) -> Result<Self> {
+        Self::new_at(
+            settings,
+            definitions,
+            ([0.; 3], [0., 0., 0., 1.]),
+            None,
+            true,
+        )
+    }
     fn new_at(
         mut settings: AudioManagerSettings<B>,
         definitions: &[Bus],

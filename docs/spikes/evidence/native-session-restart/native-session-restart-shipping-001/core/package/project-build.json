@@ -1,0 +1,64 @@
+{
+  "audio_clips": {
+    "01M4RS15X31VE6P6R22W8R8JER": "3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0",
+    "01M4RS15YGJMF8MBS9HPKSAGYB": "2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102",
+    "01M4RS160110DE0DBQ2WHVEETG": "395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa",
+    "01M4RS161JPYDSYDNWTEBAQYY8": "a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852",
+    "01M4RS16350Y43TSW8BZPHTBWR": "3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84"
+  },
+  "cameras": [
+    "00000000000000000000000109"
+  ],
+  "compiler": {
+    "bundleBytes": 16693,
+    "bundleSha256": "a52d817137e20f664afbbb946ac07af3bdcc29c166fa00184a72ae9e1c9157dc",
+    "compilers": {
+      "swc": "1.16.13",
+      "typescript": "5.9.3"
+    },
+    "format": "incant-native-typescript-project",
+    "limits": {
+      "bundleBytes": 1000000,
+      "fileBytes": 262144,
+      "mapBytes": 4194304,
+      "modules": 64,
+      "sourceBytes": 1048576
+    },
+    "mapBytes": 30901,
+    "mapSha256": "d6bc76eca8dd52a799115f431a0bf17f6c09439291fa80660f41e7e90189b3cc",
+    "modules": [
+      {
+        "bytes": 15563,
+        "path": "gameplay.ts",
+        "sha256": "6bb5ab1d113fe7e0060155367dd8f5bbff631353b5c5b05758e9725d1d1b45ca"
+      }
+    ],
+    "sourceBytes": 15563,
+    "sources": [
+      {
+        "id": "00000000000000000000000001",
+        "path": "gameplay.ts"
+      }
+    ],
+    "trust": "fresh local source transform; no project code or configuration executed",
+    "version": 1
+  },
+  "font_assets": [
+    {
+      "fingerprint": "9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2",
+      "id": "01M4RS15VRR95PQWQRZN6J576F"
+    }
+  ],
+  "format": "incant-native-project-build",
+  "has_spatial_content": true,
+  "program": null,
+  "project_id": "01M4RRNP60TE7VA8778D543981",
+  "project_sha256": "3e791022909986462c6153e15a26305a3bc8293ee16b731e65edbc45e8964395",
+  "scene_id": "01M4RRNP608GE63DEKJRY2DTBW",
+  "scene_sha256": "80b351226d03bf3176ad741652bae882f3556d3f9e6281069e678dbd1f9ec147",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": []
+}

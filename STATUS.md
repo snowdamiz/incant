@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Whole native session restart — CPU shipping proof accepted
+
+Opted-in native TypeScript hosts now replace the complete world, VM, input/UI and
+mixer from a trusted startup seed. Host-step/output chronology stays monotonic;
+held controls and stale native text/pointer ownership cannot enter the new game.
+343 CPU tests and 24 fresh source/map/build-deleted Core/Planar runs pass, including
+exact fresh-state and concatenated static/streamed PCM comparisons. Independent
+source and final execution reviews are accepted; publisher integration is pending.
+Native-window/device/appearance acceptance, Wasm/headless restart ownership and
+physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
+
 ## Authored iOS project archives — merged in main178
 
 The separate trusted-source iOS exporter cooks public-authored TypeScript imports,

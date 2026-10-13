@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "runtime": "native",
+  "script_source_sha256": "203621123e1ba1c29c64e896db77745642f5b8dac880cc00cc1de2928f6b2582",
+  "script_source_parsing": true,
+  "scene": "01M4RZNBKBG7XYQSXNZAXZQREB",
+  "tick": 30,
+  "tick_rate": 60,
+  "entity_count": 15,
+  "frames": 24000,
+  "pcm_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+  "logs": {
+    "dropped": 0,
+    "entries": [
+      {
+        "level": "info",
+        "message": "fixture.presentation {\"widgets\":[[\"00000000000000000000000101\",\"Pending\"],[\"00000000000000000000000102\",\"Pending\"],[\"00000000000000000000000103\",\"Pending\"],[\"00000000000000000000000104\",\"Pending\"]],\"frames\":[[\"00000000000000000000000004\",0,0],[\"00000000000000000000000002\",0,0]]}",
+        "tick": 1
+      },
+      {
+        "level": "info",
+        "message": "fixture.presentation {\"widgets\":[[\"00000000000000000000000101\",\"Pearls 0 of 2\"],[\"00000000000000000000000102\",\"\"],[\"00000000000000000000000103\",\"Pending\"],[\"00000000000000000000000104\",\"Pending\"]],\"frames\":[[\"00000000000000000000000004\",0,0],[\"00000000000000000000000002\",0,0]]}",
+        "tick": 2
+      }
+    ]
+  },
+  "observations": {
+    "passed": true,
+    "tick": 30,
+    "tick_rate": 60,
+    "checks": [
+      {
+        "name": "fresh-00000000000000000000000011",
+        "tick": 30,
+        "expect": {
+          "type": "exists",
+          "entity": "00000000000000000000000011",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      },
+      {
+        "name": "fresh-00000000000000000000000012",
+        "tick": 30,
+        "expect": {
+          "type": "exists",
+          "entity": "00000000000000000000000012",
+          "value": true
+        },
+        "passed": true,
+        "actual": true
+      }
+    ],
+    "entities": {
+      "00000000000000000000000002": {
+        "parent": null,
+        "translation": [
+          2.5,
+          2.5,
+          0.0
+        ],
+        "rotation": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "scale": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "velocity": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "world_transform": [
+          [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            2.5,
+            2.5,
+            0.0,
+            1.0
+          ]
+        ]
+      }
+    }
+  },
+  "cpu_render_input": true,
+  "gpu_submitted": false,
+  "project_sha256": "09507561641fb87454de8eeb9d8671db5ecdbbf18f0fde5ff9174cbec8cf5698"
+}

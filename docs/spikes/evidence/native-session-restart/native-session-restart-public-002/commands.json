@@ -1,0 +1,28 @@
+[
+  {
+    "argv": [
+      "python3",
+      "tools/probes/native-session-restart.py",
+      "prepare",
+      "planar",
+      "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/authoring",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/planar",
+      "--binary",
+      "/tmp/incant-font-atlas-target/ci/incant_headless"
+    ],
+    "exit_code": 0
+  },
+  {
+    "argv": [
+      "python3",
+      "tools/probes/native-session-restart.py",
+      "prepare",
+      "core",
+      "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-002/authoring",
+      "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-002/core",
+      "--binary",
+      "/tmp/incant-font-atlas-target/ci/incant_headless"
+    ],
+    "exit_code": 0
+  }
+]

@@ -1,0 +1,142 @@
+{
+  "format": "incant-native-observation",
+  "version": 1,
+  "entities": [
+    "00000000000000000000000002",
+    "00000000000000000000000010",
+    "00000000000000000000000011"
+  ],
+  "checks": [
+    {
+      "name": "collected-entities-removed",
+      "tick": 300,
+      "expect": {
+        "type": "entity_count",
+        "value": 22
+      }
+    },
+    {
+      "name": "pickup-00000000000000000000000012",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000012",
+        "value": false
+      }
+    },
+    {
+      "name": "pickup-00000000000000000000000013",
+      "tick": 300,
+      "expect": {
+        "type": "exists",
+        "entity": "00000000000000000000000013",
+        "value": false
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000002-200",
+      "tick": 200,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000010-200",
+      "tick": 200,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000010",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000011-200",
+      "tick": 200,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000011",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000002-300",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000010-300",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000010",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "terminal-stop-00000000000000000000000011-300",
+      "tick": 300,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000011",
+        "property": "velocity",
+        "value": [
+          0,
+          0,
+          0
+        ],
+        "tolerance": 0
+      }
+    },
+    {
+      "name": "jump-clears-ground",
+      "tick": 20,
+      "expect": {
+        "type": "vector",
+        "entity": "00000000000000000000000002",
+        "property": "physics_translation",
+        "value": [
+          -4,
+          2,
+          0
+        ],
+        "tolerance": 0.4
+      }
+    }
+  ]
+}

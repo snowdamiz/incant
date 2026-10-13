@@ -1,0 +1,88 @@
+   Compiling bytemuck v1.25.2
+   Compiling zerocopy-derive v0.8.62
+   Compiling num-complex v0.4.6
+   Compiling serde_json v1.0.151
+   Compiling zerocopy v0.8.62
+   Compiling schemars v1.2.2
+   Compiling wide v1.7.1
+   Compiling ppv-lite86 v0.2.21
+   Compiling rand_chacha v0.9.0
+   Compiling rand v0.9.5
+   Compiling ulid v1.2.1
+   Compiling byteorder v1.5.0
+   Compiling incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_types)
+   Compiling simba v0.10.2
+   Compiling hash32 v0.3.1
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_2d)
+   Compiling rustybuzz v0.14.1
+   Compiling nalgebra v0.35.0
+   Compiling dodgy_2d v0.5.5
+   Compiling heapless v0.8.0
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/cosmic-text)
+   Compiling glamx v0.3.1
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_nav)
+   Compiling rstar v0.13.0
+   Compiling lazy_static v1.5.1
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_text)
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_localization)
+   Compiling parry3d v0.31.1
+   Compiling parry2d v0.31.1
+   Compiling rapier2d v0.36.0
+   Compiling rapier3d v0.36.0
+   Compiling symphonia-core v0.6.1
+   Compiling bevy_ecs v0.19.1
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_assets_runtime)
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_runtime)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_2d_runtime)
+   Compiling regex-lite v0.1.9
+   Compiling symphonia-metadata v0.6.1
+   Compiling incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_input)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_runtime)
+   Compiling paste v1.0.15
+   Compiling pulp v0.22.3
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+   Compiling symphonia-common v0.6.1
+   Compiling pulp-wasm-simd-flag v0.1.1
+   Compiling inflections v1.1.1
+   Compiling reborrow v0.5.5
+   Compiling gltf-derive v1.4.1
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_ui)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_audio_runtime)
+   Compiling zune-inflate v0.2.54
+   Compiling half v2.7.1
+   Compiling ufbx v0.11.5
+   Compiling lebe v0.5.3
+   Compiling extended v0.1.0
+   Compiling pxfm v0.1.30
+   Compiling zune-core v0.5.3
+   Compiling bit_field v0.10.3
+   Compiling exr v1.74.2
+   Compiling moxcms v0.8.1
+   Compiling zune-jpeg v0.5.15
+   Compiling symphonia-format-riff v0.6.1
+   Compiling gltf-json v1.4.1
+   Compiling symphonia-format-ogg v0.6.1
+   Compiling symphonia-codec-vorbis v0.6.1
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_data)
+   Compiling symphonia-codec-pcm v0.6.1
+   Compiling byteorder-lite v0.1.0
+   Compiling glam v0.15.2
+   Compiling image v0.25.10
+   Compiling mikktspace v0.3.0
+   Compiling symphonia v0.6.0
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_native)
+   Compiling gltf v1.4.1
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+   Compiling incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_doc)
+   Compiling percent-encoding v2.3.2
+   Compiling base64 v0.22.1
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_game)
+   Compiling incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_assets)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 33.82s
+     Running tests/ui.rs (/tmp/incant-font-atlas-target/debug/deps/ui-47a1e166a2d9ade1)
+
+running 1 test
+test checkpoints::restart_recreates_actual_ui_host_buffers_focus_router_and_canonical_paint ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 19 filtered out; finished in 0.15s
+
