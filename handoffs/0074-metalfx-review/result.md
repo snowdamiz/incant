@@ -1,5 +1,218 @@
 # 0074 result — bounded native MetalFX ownership execution
 
+## Preparation session — root priority revision (2026-10-13)
+
+**Status: the five-case native visual review is prepared and CPU-checked, but not
+executed.** This session ran no Cargo and used no target, GPU or screenshot. I
+changed nothing outside this packet.
+
+- Nothing can build or run until root grants an explicit combined source (see
+  "Grant root needs to supply" below).
+- The numeric record further down is unchanged. I did not run `numeric.py` again,
+  and its six evidence files still hash exactly as recorded there.
+
+### Model, effort and brief
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max, as
+  configured for this session. No subagents were used.
+- **ACP proof:** line 2 of root's ACP log
+  `~/.codex/incant-evidence/claude-0074-visual-prep-acp.log` reads "Claude session
+  verified: Opus 5.5; thinking: max". Its SHA-256 was `18fe7ca0…` when I read it; the
+  log may still grow.
+- **Brief:** SHA-256 `e8c598ce5d2e589c55b8c7540c7ce747e26cb63b2de1aa6dde1df2dd841d45da`.
+  Root committed its priority revision in `89915700`, and the brief did not change
+  during this session.
+- **Root receipt:** `metalfx-0074-numeric-20261013.json` verified, SHA-256
+  `d5869e4b…`, status `accepted-scoped-native-execution`.
+
+### Root feedback, acknowledged and applied
+
+- **Consumed grant:** not executed again.
+- **Scope:** preparation only. I reused 0072's fixture and accepted helpers and added
+  no execution framework, retry loop or broad suite. 0072's regression suites are
+  removed, not carried over.
+- **Budgets:**
+  - 108 world frames + 11 UI = 119 submissions (limit 128);
+  - 18 PNGs at 960×540 (limit 20);
+  - one serial child per case;
+  - failed attempts are charged and never retried.
+- **Source:** not `4bc810fe` or `a337c86d`.
+  - The tools refuse an absent grant.
+  - They refuse those two commits and the source-003 freeze by name.
+  - They require an explicit commit, its tree, a root-reviewed per-file freeze and
+    one allowlisted feature set.
+  - The combined head at preparation, `0c890514` ("integration checkpoint only"), is
+    neither treated as granted nor assumed to contain the 0072 fixes.
+- **Arms:** portable and native arms come from the same source. Every native frame
+  must report `Selection::MetalFx`, with `RequireMetalFx` wherever content scale 1 is
+  certain. Fractional and device-range fallbacks are explicit per-step expectations.
+- **Current-only boundary:** reported as its own observation, never as vendor output.
+  It is the set of pixels where the native frame equals the same-phase current-only
+  control.
+- **Jitter:** I accept root's correction.
+  - My session-1 concern rested on the first sentence of the header alone.
+  - Apple's WWDC22 session 10103 example pairs sample (0.625, 0.78) with API jitter
+    (−0.125, −0.28). The API jitter is therefore the pixel centre minus the sample
+    position, which is exactly the engine's image shift.
+  - The header's second sentence ("…offset this scaler samples to return to the
+    frame's reference frame") agrees.
+  - I propose no sign change. The static registration observation stays as the
+    numerical check, and I will judge the eventual pixels myself.
+  - I relied on root's citation and did not fetch the video page.
+- **Diagnostics:** I added none.
+  - The native scale range is inferred from selection: a `Portable(Scale)` result
+    would reveal it.
+  - Native resets are inferred from selection changes, `has_previous`, epoch and
+    content size (`inferred_resets`).
+  - No extra observation is strictly necessary for these cases.
+
+### What was prepared (all under `handoffs/0074-metalfx-review/visual/`)
+
+| Path | Role |
+|---|---|
+| `plan.json` | Frozen case plan, budgets, source policy and base-fixture provenance |
+| `review/metalfx_visual_review.rs` | Fixture extension; only `build.py review`, under a grant, copies it into `crates/incant_render/tests/` |
+| `tools/{common,build,gpu,lease,analyze}.py` | 0072's accepted helpers, adapted |
+| `tools/{selfcheck,test_lifecycle}.py` | 0072's CPU checks, extended |
+| `preparation/{selfcheck,lifecycle}.json` | CPU-only receipts |
+
+### Case plan
+
+Cases run in this order, one child each; the first failure latches `stop.json`, so
+the cases that rest on the most assumptions (transitions, viewport) run last.
+
+| # | Case | Arms (frames) | Submissions | PNGs |
+|---|---|---|---|---|
+| 1 | stationary | off 1, current-only 8, portable 8, native (Require) 16 | 33 | 4 |
+| 2 | motion | native 8, portable 8, current-only 8, off at steps 6–8; native pan 6, off 1 | 34 | 5 |
+| 3 | excluded | native 8, portable 2, off 1, each followed by a UI submission | 11 + 11 UI | 3 |
+| 4 | transitions | one Prefer owner: 16/16 ×4, cut ×2, 12/16 ×3, 8/16 ×3, 10/16 ×2, 16/16 ×2; off at 16/16 and 8/16 | 18 | 4 |
+| 5 | viewport | Prefer owner in an integral viewport: 16/16 ×6, 8/16 ×3; off 1; fractional viewport (Prefer) ×2 | 12 | 2 |
+| | **Total** | | **119** (reserve 9) | **18** (reserve 2) |
+
+**Hard checks** (pass/fail):
+
+- **All cases:** native selection on every native frame; no MetalFX owner on the
+  controls; planned frame counts.
+- **stationary, motion, excluded:** uninterrupted runs.
+- **excluded:** the UI rectangle stays within 2 codes of off on every frame, and the
+  scene contains BLEND, sprites and text.
+- **transitions:** each step has the planned selection (`Native`, `NativeOrScale`
+  or `FractionalViewport`); one owner throughout; the cut restarts at phase 0 and
+  advances the epoch; the planned internal sizes.
+- **viewport:** planned selections; pixels outside the viewport (beyond a 1 px band)
+  byte-identical to off; the 8/16 internal size.
+
+**Observations** (measured, never pass/fail):
+
+- **Registration:** a Lucas-Kanade shift against the off frame and its slope on the
+  applied image shift. This is the jitter check.
+- **Current-only boundary band** (stationary and motion).
+- **Disocclusion trail masks** (motion): pixels that changed from off step 7 to 8,
+  and those that changed only since step 6.
+- **Inferred native resets** (transitions).
+- **Unreconstructed 8/16 control** (transitions).
+- **Consecutive change and activity maps.**
+
+### Helper adaptation (line diff against the 0072 blobs)
+
+- **`common.py`** (−29/+86):
+  - new packet, stage and paths;
+  - `source_problem()`, the grant policy described above;
+  - `samples()`, a jitter-table parser;
+  - a fix for 0072's latent crash when the grant lacks a `target`.
+- **`build.py`** (−67/+73):
+  - checkout verifies the granted tree, every file in root's freeze, and the
+    fixture's jitter copy against the granted source;
+  - the review build uses exactly the granted features and rejects a library with a
+    partial cooked feature set;
+  - the regression-suite build is removed.
+- **`gpu.py`** (−57/+32): runs the review binary only (`list review`, the five cases
+  in plan order, `release`); suites removed.
+- **`lease.py`** (−9/+11) and **`analyze.py`** (−3/+4): identity, rules and budgets.
+- **`selfcheck.py`** (−31/+282) and **`test_lifecycle.py`** (−7/+80): the extended
+  checks listed below.
+- **Fixture:**
+  - 63 reused items are byte-identical to 0072's blob `b363f64c…`.
+  - Adapted: the `Report::open` message, `open_renderer` (now `enable_metalfx`),
+    `Output` (viewport), and `Meta`/`Shot`/`shoot`/`same_owner` (upscaling metadata
+    plus selection).
+  - New: the arms, cases and observation helpers.
+  - Removed: the probe, skinned and timing cases, `Rig` and the timing helpers.
+
+### CPU-only checks (no Cargo, target or GPU)
+
+- **`selfcheck.py --write …/preparation/selfcheck.json`:** exit 0, `all_pass: true`.
+  - Plan consistency and budgets.
+  - An independent model of the frame, upscaling and MetalFX plans classifies all 25
+    steps, including the 13 native-owner steps, as planned. Internal sizes:
+    960×540, 720×405, 480×270 and 600×338.
+  - The fixture agrees with the plan: test names and order, limits, PNGs per case,
+    preferences, configs, viewports and internal sizes.
+  - 63 reused items are identical, and every tool descends from its 0072 blob.
+  - All 15 grant-policy cases behave as expected.
+  - rustfmt 1.10.0 (edition 2024, stdin to stdout, calibrated on the 0072 blob)
+    leaves the fixture byte-identical.
+  - With the grant absent, all 12 guarded commands refuse; no evidence directory is
+    created, `git status` is unchanged and the global lock is untouched.
+- **`test_lifecycle.py --receipt …/preparation/lifecycle.json`:** 19/19 pass (14
+  adapted lifecycle tests and 5 source/guard tests), 2.6 s, no leftover children.
+- **Mutation check** (in memory, not committed): each of these was detected:
+  - a changed reused item;
+  - a wrong footprint expectation;
+  - `RequireMetalFx` on an uncertain scale;
+  - a renamed PNG;
+  - a budget change;
+  - a changed jitter table;
+  - a superseded source.
+- **Fixed during preparation:** with stdin input, `rustfmt --check` exits 0 even when
+  it prints a diff, so the format check compares bytes instead.
+
+### Grant root needs to supply
+
+The grant goes in `~/.codex/incant-evidence/0074-metalfx-visual/review-ready.json`
+and must contain:
+
+- `packet: "0074-metalfx-review"` and `stage: "metalfx-visual"`;
+- the full `source_commit` and its `source_tree`;
+- `source_freeze: {path, sha256}`, with an absolute path to a freeze that lists files
+  under `sources` and, optionally, `unchanged_baselines`;
+- `features`: either `["native-metalfx"]` or `["cooked-temporal", "native-metalfx"]`;
+- `visual_tree`: the tree of the committed `visual/` directory;
+- an allowed `target` matching `~/.codex/*-target`;
+- at least one `prior_<name>_path` / `prior_<name>_sha256` release pin, for example
+  this packet's numeric `gpu-released.json` (`55a72bba…`) or a later GPU release.
+
+### Limitations
+
+- **Not compiled:** clippy was not run either; root supervises compilation.
+  - I checked the fixture by inspection against `4bc810fe`'s API (ancestry
+    `e73afe43` → `4bc810fe` → `0c890514`), by rustfmt parsing and by the selfcheck.
+  - The combined source may still change APIs; the build step will show it.
+- **Possible fallbacks:** the 8/16 and 12/16 native frames may legitimately fall back
+  with `Scale` on this device. Such frames are recorded and excluded from the native
+  observations.
+- **No pixels yet:** every appearance judgment, including the jitter registration,
+  remains open.
+
+### Changed paths, transients and screenshots
+
+- **Added:** the 11 files under `handoffs/0074-metalfx-review/visual/`.
+- **Edited:** this `result.md`, with this section only. `brief.md`,
+  `tools/numeric.py` and the numeric record below are unchanged.
+- **Transients:**
+  - `/tmp/0074-selfcheck-dry.json`, a dry-run output, deleted;
+  - Python temporary directories that the lifecycle tests created and removed;
+  - a `.fmt` scratch file inside the packet, moved over the fixture.
+- **Evidence directory:** nothing was written to `~/.codex/incant-evidence`.
+- **Screenshots:** none (preparation only).
+- **Not done:** no memory writes, personal notes, accounts, credentials, pushes or
+  PRs, and no phase approval requested or implied.
+
+---
+
+## Numeric stage record (session 1, unchanged)
+
 ## Status
 
 **Executed once under root's grant and passed. MetalFX was actually admitted and

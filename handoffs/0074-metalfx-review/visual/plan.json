@@ -1,0 +1,158 @@
+{
+ "packet": "0074-metalfx-review",
+ "stage": "metalfx-visual",
+ "status": "prepared only; frozen by the commit whose visual tree root pins in review-ready.json; nothing builds or runs until root grants an explicit combined source",
+ "authorization": "brief.md root priority revision (2026-10-13): at most 128 new submissions including UI, at most 20 PNGs at 960x540, one serial child per case, failed attempts charged the same, no retry loop or broad suite; root supervises compilation",
+ "source_policy": {
+  "required_grant_fields": ["packet", "stage", "source_commit", "source_tree", "source_freeze", "features", "visual_tree", "target", "prior_<name>_path", "prior_<name>_sha256"],
+  "source_freeze_shape": "absolute JSON path and SHA-256; {sources: [{path, sha256}], unchanged_baselines?: [...]}, every listed file must match the exported checkout",
+  "allowed_feature_sets": [["native-metalfx"], ["cooked-temporal", "native-metalfx"]],
+  "denied_source_commits": ["4bc810fe0daf238f219801de76b06f19e4daf826", "a337c86d8d74e819b3e879d4a7db830b74de8862"],
+  "denied_freezes": ["b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b"],
+  "expected_source": "root's corrected temporal edge, unjittered overlay-depth, accepted MetalFX and cooked shader composition on codex/cooked-temporal-metalfx (pins supplied after review; head 0c890514 at preparation is an integration checkpoint, not a grant)",
+  "jitter_table_check": "build.py checkout refuses unless the fixture's SAMPLES equal crates/incant_render/src/temporal/jitter.rs at the granted commit"
+ },
+ "base_fixture": {
+  "packet": "0072-motion-history-numeric",
+  "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
+  "fixture_blob": "b363f64ca23ffc11faeec050be499ed847ffde30",
+  "tool_blobs": {
+   "analyze.py": "3ea7f9ec6f0edc2e81e107f85f6aba62201a690e",
+   "build.py": "da9bce51c553cfc68ad75f5dc4ee5428869684f4",
+   "common.py": "b94343865cf07c9bc1e421f6d20f838ba2376aad",
+   "gpu.py": "037b41fc170a42806a3dbeb8fcdd65db723026c0",
+   "lease.py": "6b3ddbd4572180df023b8ed49ecb0ab52a0297ae",
+   "selfcheck.py": "b9cb5f0dbf32af6956b77d5918c1ffe8da9a2e0e",
+   "test_lifecycle.py": "54e5737313e571559c0ef1a0264a32b19a687a99"
+  },
+  "reused_unchanged": ["FORMAT", "SIZE", "LATIN", "ARABIC", "CJK", "MIXED", "EDGE_THRESHOLD", "CHANGE_THRESHOLD", "CAMERA_AT", "CAMERA_PITCH", "MOVER_START", "MOVER_STEP", "CARD_AT", "CARD_UV", "UI_RECT", "UI_PIXELS", "struct Report", "hex", "config_value", "timestamp_flags", "describe", "stats_value", "plain", "read", "continuous", "max_delta", "edges", "struct Tally", "impl Tally", "split", "consecutive", "activity", "rect_delta", "struct Mesh", "impl Mesh", "lookdev_mesh", "bounds", "write_model", "add_model", "insert", "mesh_entity", "at", "place_fixture_quad", "camera_entity", "sun_rotation", "add_lights", "card_mesh", "grille", "checker", "checker_backdrop", "badge", "add_sprites", "text_engine", "text_input", "ui_input", "struct Stage", "impl Stage", "node", "mover_world", "camera_world", "view_b", "struct Excluded", "impl Excluded"],
+  "adapted": ["impl Report (output variable name)", "open_renderer (enable_metalfx)", "Output (viewport)", "Meta and Shot (UpscaleFrame and MetalFX selection)", "shoot (records selection)", "same_owner (upscale frame)"],
+  "removed": ["probe, skinned and timing cases", "Rig and the skeletal fixture", "timing helpers", "temporal-accumulation owner"]
+ },
+ "expected_backend": "Metal",
+ "review_config": {
+  "history_weight": 0.9,
+  "relative_depth": 0.05,
+  "absolute_depth": 0.02,
+  "reactive_threshold": 4.0,
+  "reactive_strength": 0.5
+ },
+ "current_only_config": {
+  "history_weight": 0.0,
+  "relative_depth": 0.05,
+  "absolute_depth": 0.02,
+  "reactive_threshold": 4.0,
+  "reactive_strength": 0.5
+ },
+ "arms": {
+  "off": "RetainedScene without temporal state",
+  "current_only": "RetainedScene::enable_temporal_upscaling(current_only_config): jittered current frame resampled, no history",
+  "portable": "RetainedScene::enable_temporal_upscaling(review_config)",
+  "native": "RetainedScene::enable_metalfx(Preference, review_config); RequireMetalFx where scale 1 is certain, PreferMetalFx where a planned fallback must be reported"
+ },
+ "viewports": {
+  "integral": [96.0, 54.0, 768.0, 432.0],
+  "fractional": [96.5, 54.5, 767.0, 431.0],
+  "canvas_srgb": [20, 21, 25]
+ },
+ "budgets": {
+  "new_submissions_max": 128,
+  "pngs_max": 20,
+  "frame_max_width": 960,
+  "frame_max_height": 540,
+  "compile_jobs": 2,
+  "build_timeout_s": 2700,
+  "listing_timeout_s": 60,
+  "review_case_timeout_s": 180,
+  "counting": "Every world-frame submission (off references and frames whose PNG is not kept included) and every UI overlay submission is one actual submission. Readback copies are part of their frame's observation. Each case's planned submissions and PNGs are debited, fsynced, under the global GPU lock before launch and never refunded, so failed or interrupted cases stay charged. A failed case latches stop.json; nothing is retried."
+ },
+ "builds": {
+  "review": ["test", "-p", "incant_render", "--test", "metalfx_visual_review", "--no-run"],
+  "lint": ["clippy", "-p", "incant_render", "--test", "metalfx_visual_review"],
+  "common_flags": ["--locked", "--offline", "--profile", "ci", "-j2", "--message-format=json-render-diagnostics"],
+  "features": "appended from the grant: --features <one allowlisted set>"
+ },
+ "review": {
+  "binary": "metalfx_visual_review",
+  "cwd": "crates/incant_render",
+  "output_env": "INCANT_0074_REVIEW_OUT",
+  "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
+  "size": [960, 540],
+  "max_runs_per_case": 1,
+  "cases": {
+   "stationary": {"frames": 33, "ui_submissions": 0,
+    "pngs": ["stationary-off.png", "stationary-portable-f08.png", "stationary-native-f16.png", "stationary-native-activity.png"],
+    "steps": [
+     {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null},
+     {"arm": "current_only", "frames": 8, "sixteenths": 16, "viewport": null},
+     {"arm": "portable", "frames": 8, "sixteenths": 16, "viewport": null},
+     {"arm": "native", "preference": "RequireMetalFx", "frames": 16, "sixteenths": 16, "viewport": null, "expect": "native"}
+    ],
+    "purpose": "0072 look-dev stage at rest (grazing ground, silhouettes, thin post/wall, receding fence posts, one-texel MASK grille). Two full 8-phase cycles of native frames against same-phase current-only and portable controls. Observations: per-frame Lucas-Kanade registration against the unjittered off frame and its slope on the applied image shift (pixel confirmation of the jitter convention, no sign change), the current-only boundary band where native equals the current-only control, convergence and activity."},
+   "motion": {"frames": 34, "ui_submissions": 0,
+    "pngs": ["motion-native-f8.png", "motion-portable-f8.png", "motion-off-f8.png", "motion-pan-native-f6.png", "motion-pan-off-f6.png"],
+    "steps": [
+     {"arm": "native", "preference": "RequireMetalFx", "frames": 8, "sixteenths": 16, "viewport": null, "expect": "native"},
+     {"arm": "portable", "frames": 8, "sixteenths": 16, "viewport": null},
+     {"arm": "current_only", "frames": 8, "sixteenths": 16, "viewport": null},
+     {"arm": "off", "frames": 3, "sixteenths": 16, "viewport": null},
+     {"arm": "native", "preference": "RequireMetalFx", "frames": 6, "sixteenths": 16, "viewport": null, "expect": "native"},
+     {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null}
+    ],
+    "purpose": "The bright mover crossing the thin wall and MASK card (about 21 px per frame) for native, portable and current-only owners over identical steps, off references at steps 6-8 to mask the disocclusion trail and its older part; then a native camera pan with parallax and its off reference."},
+   "excluded": {"frames": 11, "ui_submissions": 11,
+    "pngs": ["excluded-native-f8.png", "excluded-off.png", "excluded-native-activity.png"],
+    "steps": [
+     {"arm": "native", "preference": "RequireMetalFx", "frames": 8, "sixteenths": 16, "viewport": null, "expect": "native"},
+     {"arm": "portable", "frames": 2, "sixteenths": 16, "viewport": null},
+     {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null}
+    ],
+    "purpose": "0072's excluded scene: accumulating opaque checker under a BLEND card, three sprites and world text that never enter MetalFX input, plus a screen-space UI button after every world frame; UI pixels must stay identical across phases, arms and off."},
+   "transitions": {"frames": 18, "ui_submissions": 0,
+    "pngs": ["transition-cut-f5.png", "transition-d12-f7.png", "transition-d8-f10.png", "transition-resume-f15.png"],
+    "steps": [
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 4, "sixteenths": 16, "viewport": null, "expect": "native"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": null, "expect": "native", "cut": true},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 12, "viewport": null, "expect": "native_or_scale"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": null, "expect": "native_or_scale"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 10, "viewport": null, "expect": "fractional"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": null, "expect": "native"},
+     {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null},
+     {"arm": "off", "frames": 1, "sixteenths": 8, "viewport": null}
+    ],
+    "purpose": "One preferring owner: view A, an explicit cut, fixed 12/16 and 8/16 content scales (native, or an explicit Scale fallback if this device's range excludes them), the fractional 10/16 scale (explicit FractionalViewport fallback) and output scale again. Native resets are inferred from existing observables only."},
+   "viewport": {"frames": 12, "ui_submissions": 0,
+    "pngs": ["viewport-native-f6.png", "viewport-off.png"],
+    "steps": [
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 6, "sixteenths": 16, "viewport": "integral", "expect": "native"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": "integral", "expect": "native_or_scale"},
+     {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": "integral"},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": "fractional", "expect": "fractional"}
+    ],
+    "purpose": "An integral offset viewport at output scale and 8/16 (zero-offset packing, offset readback, canvas outside the viewport byte-identical to off) and the same placement off the pixel grid (explicit FractionalViewport fallback)."}
+  }
+ },
+ "totals": {
+  "frames": 108,
+  "ui_submissions": 11,
+  "new_submissions": 119,
+  "pngs": 18,
+  "reserve_submissions": 9,
+  "reserve_pngs": 2
+ },
+ "amendments": [],
+ "order": [
+  "root grants review-ready.json naming the explicit combined source",
+  "lease.py acquire",
+  "build.py checkout",
+  "build.py toolchain",
+  "build.py review (root supervises compilation)",
+  "gpu.py list review",
+  "gpu.py review stationary|motion|excluded|transitions|viewport (this order, one child each)",
+  "analyze.py check, then personal inspection of every retained PNG",
+  "gpu.py release",
+  "build.py lint (optional, CPU only, under the lease)",
+  "lease.py release",
+  "analyze.py publish"
+ ]
+}

@@ -1,0 +1,295 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 19,
+ "seconds": 2.62,
+ "python": "3.14.8",
+ "records": [
+  {
+   "test": "absent_grant_refused_without_files"
+  },
+  {
+   "test": "budget_exhaustion_refused",
+   "raised": "refused: submission budget: {'frames': 0, 'ui_submissions': 0, 'pngs': 0} used, 120 frames + 9 UI requested"
+  },
+  {
+   "test": "build_term",
+   "row": {
+    "pid": 95793,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "Interrupted",
+    "group_empty_after": true,
+    "failed": null,
+    "debit": null
+   },
+   "raised": "Interrupted"
+  },
+  {
+   "test": "build_ok",
+   "row": {
+    "pid": 95795,
+    "exit": 0,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": null,
+    "debit": null
+   },
+   "raised": null
+  },
+  {
+   "test": "build_slow",
+   "row": {
+    "pid": 95796,
+    "exit": -9,
+    "timed_out": true,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": null,
+    "debit": null
+   },
+   "raised": null
+  },
+  {
+   "test": "busy_gpu_lock_refused",
+   "raised": "refused: native-gpu.lock is held by another runner; nothing launched or charged"
+  },
+  {
+   "test": "child_default_mask",
+   "row": {
+    "pid": 95798,
+    "exit": -15,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [
+     "exit -15"
+    ],
+    "debit": {
+     "label": "mask",
+     "item": "mask",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T08:13:33.266681+00:00"
+    }
+   },
+   "raised": "SystemExit"
+  },
+  {
+   "test": "explicit_source_passes_the_grant_gate"
+  },
+  {
+   "test": "feature_freeze_and_jitter_guards",
+   "jitter_table": [
+    [
+     -0.375,
+     -0.125
+    ],
+    [
+     0.125,
+     0.375
+    ],
+    [
+     0.375,
+     -0.375
+    ],
+    [
+     -0.125,
+     0.125
+    ],
+    [
+     0.375,
+     0.125
+    ],
+    [
+     -0.125,
+     -0.375
+    ],
+    [
+     -0.375,
+     0.375
+    ],
+    [
+     0.125,
+     -0.125
+    ]
+   ]
+  },
+  {
+   "test": "gpu_failure_exit",
+   "row": {
+    "pid": 95799,
+    "exit": 1,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [
+     "exit 1"
+    ],
+    "debit": {
+     "label": "false",
+     "item": "false",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T08:13:33.277659+00:00"
+    }
+   },
+   "raised": "SystemExit"
+  },
+  {
+   "test": "sighup",
+   "row": {
+    "pid": 95801,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "Interrupted",
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "wait_error"
+    ],
+    "debit": {
+     "label": "sighup",
+     "item": "sighup",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T08:13:33.285381+00:00"
+    }
+   },
+   "raised": "Interrupted"
+  },
+  {
+   "test": "sigint",
+   "row": {
+    "pid": 95805,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "KeyboardInterrupt",
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "wait_error"
+    ],
+    "debit": {
+     "label": "sigint",
+     "item": "sigint",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T08:13:33.702381+00:00"
+    }
+   },
+   "raised": "KeyboardInterrupt"
+  },
+  {
+   "test": "sigterm",
+   "row": {
+    "pid": 95823,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "Interrupted",
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "wait_error"
+    ],
+    "debit": {
+     "label": "sigterm",
+     "item": "sigterm",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T08:13:34.382508+00:00"
+    }
+   },
+   "raised": "Interrupted"
+  },
+  {
+   "test": "gpu_success",
+   "row": {
+    "pid": 95847,
+    "exit": 0,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [],
+    "debit": {
+     "label": "success",
+     "item": "success",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T08:13:34.800553+00:00"
+    }
+   },
+   "raised": null
+  },
+  {
+   "test": "gpu_timeout",
+   "row": {
+    "pid": 95849,
+    "exit": -9,
+    "timed_out": true,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "timed_out"
+    ],
+    "debit": {
+     "label": "timeout",
+     "item": "timeout",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T08:13:34.806893+00:00"
+    }
+   },
+   "raised": "SystemExit"
+  },
+  {
+   "test": "ill_formed_sources_refused",
+   "refusals": [
+    "freeze native-metalfx-source-003 (the 4bc810fe freeze) is superseded",
+    "features must be exactly one of [['native-metalfx'], ['cooked-temporal', 'native-metalfx']]",
+    "the grant lacks a full source_commit, source_tree or visual_tree",
+    "the grant lacks an absolute source_freeze path and SHA-256"
+   ]
+  },
+  {
+   "test": "non_executable_refused",
+   "raised": "refused: /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0074-lifecycle-0cz95c13/not-executable is not executable (mode 0o644)"
+  },
+  {
+   "test": "stop_latch_blocks_next_child",
+   "refusals": [
+    {
+     "at": "2026-10-13T08:13:35.123158+00:00",
+     "reason": "stop.json latched a failure; only analysis and releases may run",
+     "argv": [
+      "--receipt",
+      "handoffs/0074-metalfx-review/visual/preparation/lifecycle.json"
+     ]
+    }
+   ]
+  },
+  {
+   "test": "superseded_sources_refused_before_checkout",
+   "refusals": [
+    "source 4bc810fe0daf238f219801de76b06f19e4daf826 is superseded (native MetalFX producer reviewed for 0074's numeric stage only); an explicit combined source is required",
+    "source a337c86d8d74e819b3e879d4a7db830b74de8862 is superseded (temporal upscaling base before the corrected edge and overlay-depth fixes); an explicit combined source is required"
+   ]
+  }
+ ]
+}
