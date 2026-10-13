@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Joined physics owner boundary — source and CPU qualification accepted
+
+The [joined inert frame](docs/spikes/physics-world-boundary.md) composes 22
+canonical sections under one aggregate allocation budget and exact borrowed
+witness joins. Its checked decoder invokes a scoped callback only after all
+sections pass; it never constructs a live solver. The separately reviewed
+default-off trusted native adapter preserves the retained CCD verdict while
+replacing scratch. Native Clone owners continue identically for 280 paired
+steps per numerical mode, with warm contacts, sleeping/waking, sensor events,
+removal/reuse and CCD controls. Both 202-case CPU modes, ten parallel controls
+and all ten scoped checks pass. Source and final producer evidence reviews are accepted; current-main
+composition checks are pending. Derived geometry/mass/work admission, authenticated capture and the
+whole native constructor remain required. `PhysicsUnsupported` is unchanged.
+
+
 ## Core result HUD — current-main qualification
 
 The accepted 0069 label halos, localized result/restart presentation and approved
