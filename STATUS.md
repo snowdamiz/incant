@@ -16,13 +16,24 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Typed BVH construction — source accepted, CPU qualification complete
+## Private broad manager — source accepted, CPU qualification complete
+
+Typed broad-phase reconstruction preserves pending BVH storage, pair stamps,
+Coarena generations and native neighbor/update order under the shared allocation
+permit. Actual deterministic IndexMap and fast8 hashbrown allocation requests
+stay within pinned conservative charges. Each mode passes 225 snapshot and 36
+private native tests, including 220 paired broad continuation steps per dimension;
+scoped strict Clippy, wasm/graphs and guards pass. Final evidence review is
+pending. Other owners remain trusted clones, and public physics saves still refuse.
+[Scope and evidence](docs/spikes/physics-native-broad-construction.md).
+
+## Typed BVH construction — scoped source and CPU evidence accepted
 
 The std-only shared cumulative allocation permit now supports default-off Parry
 construction from immutable strict or pending BVH witnesses. Exact storage bits,
 free-stack order and pending bounds are preserved. Both modes pass 225 snapshot
 and 26 private constructor tests; scoped strict Clippy, wasm, lean graphs and
-guards pass. Final evidence review is pending. No complete world installer or
+guards pass. Root final evidence review accepted `c39ad333`. No complete world installer or
 public physics-save admission is enabled.
 [Scope and evidence](docs/spikes/physics-parry-construction.md).
 

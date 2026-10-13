@@ -1,0 +1,44 @@
+{
+  "format": "incant-private-broad-construction-layer",
+  "version": 1,
+  "baseline": "c39ad333eafcffd3f47e5b168f91b811fb727b77",
+  "feature": "incant-checked-restore",
+  "scope": "Private typed exact broad manager and cumulative map allocation charges. Supersedes historical pins only for listed paths; no public installer or save admission.",
+  "files": [
+    {
+      "path": "src/geometry/broad_phase_bvh/mod.rs",
+      "baseline_sha256": "cdc9b6a89a3e521622f9e7181138b7c19cbfdbda7755c780d07e2050794b1259",
+      "sha256": "ee48924e6aabdc5181aed06483b54a2372ba345c7cb1248dcd34d518b4d895f9"
+    },
+    {
+      "path": "src/geometry/broad_phase_bvh/checkpoint/mod.rs",
+      "baseline_sha256": null,
+      "sha256": "7b9cc37dc15fa67434d3abb7317878ff9639b634ee140e0d06c81fed45d75556"
+    },
+    {
+      "path": "src/geometry/broad_phase_bvh/checkpoint/map.rs",
+      "baseline_sha256": null,
+      "sha256": "51cedaaea949714c0871d2a6104241cf990d75634b2b73b98a40004cb76f230e"
+    },
+    {
+      "path": "src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "e9c9b059f7c56f6ca073f6f4fd64dfe4a4f61c163db85b6d4350d1eb6008120b"
+    },
+    {
+      "path": "src/geometry/broad_phase_bvh/checkpoint/tests.rs",
+      "baseline_sha256": null,
+      "sha256": "6a7e5feed92282ece907068922bc3d96b68ae51ed82d48fd3bfc6a9f58bd4359"
+    },
+    {
+      "path": "src/pipeline/checked_restore/broad.rs",
+      "baseline_sha256": null,
+      "sha256": "c355be22f8ef7fac7503dd57c184411b9787463d37bc4d0b88275d4887e47ec4"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "baseline_sha256": "8f5a9ecafa7c4218ff56f9f5ad86f8b67a538b8c79da683f6a3af99ba15a1f23",
+      "sha256": "637e745938e614edaef3d59490dafb5137ffe6ad3402ef2693204f27c990eac3"
+    }
+  ]
+}
