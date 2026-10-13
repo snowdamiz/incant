@@ -30,9 +30,9 @@ compilation or runtime execution occurred in this composition qualification.
 The producer's real static/streaming PCM controls are CPU continuation evidence.
 UI uses deterministic measurement fixtures; this is not appearance, device audio,
 GPU, exported player or physical-phone validation. Arbitrary guest VM state and
-external host side effects remain outside the checkpoint guarantee. Final
-current-main review, actual hosted dependency merge and required fast CI are
-pending; no dependent PR is opened before its parent merges.
+external host side effects remain outside the checkpoint guarantee. Independent final current-main review is accepted. Hosted PR249 merged after
+its required fast check; the actual-main249 ancestry join changes no implementation,
+build or tool input. Game publication still requires its exact-head fast check.
 
 [Manifest](evidence/native-game-main248/manifest.json). Read-only:
 `python3 docs/spikes/evidence/native-game-main248/verify.py --verify-only`.
