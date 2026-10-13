@@ -1,0 +1,13 @@
+{
+  "reviewer": "astra",
+  "at": "2026-10-13T09:44:03.281015+00:00",
+  "status": "accepted",
+  "commit": "418ac784f3c3a4d371122c22cb417b9ca2f6572f",
+  "manifest_sha256": "38281ea212626729040d590cd33c6e697f55b26f6048c73a70b968dda0da0750",
+  "verified_artifacts": 16,
+  "actual_target_streams": 35,
+  "feature_records_replayed": 49,
+  "source_receipt": "a9c0c01df85801c9f0ea05eaa7ba2db85c8e06f919661220fa6a17e16288a98d",
+  "scope": "Fullpacket hash/decompression/originalidentity and actualCargo-tree outputs replayed. Threefinalchecks0. Hostedred retained. No target runtime execution inferred. No crate/lock/CI change.",
+  "findings": []
+}
