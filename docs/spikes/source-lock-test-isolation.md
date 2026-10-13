@@ -34,5 +34,5 @@ The [portable manifest](evidence/source-lock-main250/manifest.json) and
 [assertion-only verifier](evidence/source-lock-main250/verify.py) preserve 151 raw
 records and 79 lossless payloads, including the original hosted failure. Optional
 `--local-originals --local-binaries` verifies local retained copies too.
-Independent source review is accepted; final evidence review and publication are
-pending. No release or repaired hosted-success claim is made.
+Independent source and final evidence reviews are accepted; publication awaits
+the required exact-head fast check. No release or repaired hosted-success claim is made.
