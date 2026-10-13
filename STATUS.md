@@ -62,7 +62,7 @@ A new dependency-free normal crate validates versioned inert BVH/VecMap and
 closed rigid geometry records, with bounded allocation/traversal and exact field
 preservation. Eighteen CPU tests, scoped Clippy, wasm32 compilation and dependency
 checks pass, including trusted pinned Parry observations and malformed graph
-controls. Independent source review is accepted; final evidence review is pending.
+controls. Independent source and final evidence reviews are accepted.
 No live solver constructor or runtime consumer
 exists; `PhysicsUnsupported` remains unchanged. Complete checked solver/native
 owner composition and exact save continuation remain required.
