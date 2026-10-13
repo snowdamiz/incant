@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-13T04:35:46.153157+00:00",
+  "reviewer": "astra/root",
+  "head": "fccc4abdbe5895fe4832b714f6f830a7217ed3a9",
+  "manifest_sha256": "6183297861968f7bc2e941e909858415e00f4b795e2b44f81b38050b8c038e62",
+  "collector_reviewed": true,
+  "collector_verify_only_exit": 0,
+  "independent_archive_records": 19,
+  "independent_archive_payloads": 10,
+  "summary": {
+    "passed": true,
+    "checks": 8,
+    "counts": {
+      "passed": 40,
+      "failed": 0,
+      "ignored": 0,
+      "nonempty_groups": 7
+    },
+    "frozen_inputs": 2849,
+    "producer_inputs": 21,
+    "exact_crate_inputs": 20,
+    "producer_records_rehashed": 70,
+    "pinned_sources": 4,
+    "prior_accepted_inert_inputs_changed": [
+      "crates/incant_physics_snapshot/src/graph.rs",
+      "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "crates/incant_physics_snapshot/src/lib.rs",
+      "crates/incant_physics_snapshot/tests/graphs.rs",
+      "crates/incant_physics_snapshot/tests/trusted_graphs.rs"
+    ],
+    "lock_and_engine_unchanged_after_graph": true,
+    "main_ancestor": "3da8b0ebeab43f715b0531603e30a864e801be11",
+    "live_restore_or_save_admission": false
+  },
+  "decision": "accepted final appended-graph integration",
+  "limits": [
+    "All40 cases include prior30 snapshot/arena cases and10 graph cases; counts are not additive.",
+    "The separately accepted main195 snapshot+arena packet remains immutable; exactly5 graph source/test files change from that accepted union, with no lock/build/engine delta.",
+    "Actual main196 join changes only documentation/review evidence after frozen checks; source and build identities remain byte-exact.",
+    "No live constructor, contact-payload policy, full solver ownership composition, physics-save admission, GPU, shipping, device or performance claim."
+  ]
+}
