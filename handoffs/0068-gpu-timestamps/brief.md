@@ -84,11 +84,19 @@ active target. Use a root-approved isolated child checkout. Evidence belongs in
 
 Run one bounded process group at a time: five minutes per existing GPU suite,
 two minutes per added numeric/capture process. Beyond existing regression frames,
-allow at most 48 new numeric lifecycle submissions and 24 appearance frames,
-each at most 960×540. Freeze case names and bounds first. Offscreen engine frames
+allow at most 48 new numeric lifecycle submissions and 24 total newly rendered
+appearance frames, each at most 960×540. Every comparison/control/dry-run frame
+counts toward that appearance total even when no PNG is retained. Existing
+regression-suite frames are separately counted. Freeze case names and bounds first. Offscreen engine frames
 only; no desktop/browser capture, native window, device audio, accounts or secrets.
 Hash-check source/binary inputs for each child, terminate and reap timed-out
 groups, then explicitly release GPU and target with no owned processes remaining.
+
+For process receipts, record only explicit nonsecret overrides from a documented
+allowlist (for example CARGO_TARGET_DIR and INCANT_NATIVE_PROJECT). Never serialize
+the inherited environment, ACP/session transport values, credentials or account
+metadata. Reuse the safe 0064/0066/0067 logger pattern; do not copy the original
+0065 environment logger. No private receipts or secrets enter Git.
 
 Return result.md, reproducible packet-only helpers, raw numeric receipts, source
 and binary identities, and a small unedited screenshot selection. Keep visual and
