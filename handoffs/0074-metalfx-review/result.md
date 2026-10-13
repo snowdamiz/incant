@@ -554,3 +554,143 @@ inspected.
 
 This session made no memory writes, read no credentials, used no accounts, did not
 push and opened no PR. It also requested or implied no phase approval.
+
+---
+
+## Correction session — helper acceptance before the supervised build (2026-10-13)
+
+**Status: both helper defects are closed. This is still preparation only.** I ran
+no Cargo and used no target, GPU or screenshot. The five cases and the plan of 119
+submissions and 18 PNGs are unchanged. Everything above this section, including
+the prepared result, is preserved; this section is appended.
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max. No
+  subagents were used.
+- **ACP proof:** line 2 of root's ACP log
+  `~/.codex/incant-evidence/claude-0074-helper-repair-acp.log` reads "Claude session
+  verified: Opus 5.5; thinking: max". Its SHA-256 was `2509b46a…` when I read it.
+- **Brief:** SHA-256 `6443f184e0fdafd7…`, revision committed by root in
+  `fe4ff9ca`. It did not change during this session.
+- **Announced source** (read-only): commit `535003d766bcc1386fd2d2f454c83808a0fcc4c8`,
+  tree `e98b24847c28f3491f56e38edb051e018748eff7`; freeze
+  `temporal-metalfx-union-001/committed-build-source.json`, SHA-256 `bd8295b0…`.
+
+### Defect 1 fixed: the analyzer accepted incomplete evidence
+
+`check` and `publish` now share one `validate()`. Evidence counts as complete only
+when all of the following hold:
+
+- `stop.json` is absent, no build, listing or review child failed, and there is no
+  `*.failed.json`;
+- the source is the granted commit with exact freeze coverage;
+- the frozen review binary still has its hash, was built with the granted features,
+  and was listed once with exactly the plan's cases;
+- the five plan cases ran exactly once, in order, bound to that binary and grant;
+- every case has exactly the plan's required checks, all true (the 35 check names
+  are now listed per case in `plan.json`), with the exact planned frames, UI
+  submissions and PNG names, and the Metal backend;
+- logs, reports, events and PNGs match the hashes bound when each child ran;
+- the debits are exactly those five runs' charges, so there is no orphan;
+- the GPU latch and the target lease are cleanly released and bound to the final
+  ledger, budget and grant.
+
+**`check`** always writes a new summary containing the problems and a SHA-256 binding
+of every file a pass depends on, then exits nonzero on any problem.
+
+**`publish`** independently validates again, and also requires the latest summary to
+be a pass with the same grant and an identical binding. 0073's analyzer served only
+as a read-only reference; this one is 256 lines with no framework.
+
+**Controls** (`test_analyze.py`): 10 of 10 pass.
+- Complete synthetic evidence checks and publishes.
+- Each of these refuses: empty evidence, a missing case, a false check, a failed
+  child, a changed PNG, a changed report, an orphan debit, a stale summary, and a
+  failed summary.
+- `check` retains a failing summary each time.
+
+### Defect 2 fixed: lint, lease holder and source pinning
+
+- **`build.py lint`:** on failure it keeps `lint.json`, latches `stop.json` and exits
+  nonzero. Control: a fake `tools/cargo` that exits 101.
+- **`lease.py`:** the lease records the grant's root-assigned `holder` and refuses a
+  grant without one. `holder` is now a required grant field in the plan.
+- **Source pinning (`build.py checkout`):**
+  - It accepts only root's `{commit, files}` freeze, and the freeze must name the
+    granted commit. Rows need unique relative paths, a 64-hex SHA-256 and optional
+    bytes.
+  - Any other freeze shape is refused, and nothing is allowed for older producers.
+  - After export it requires exact coverage of the plan's build-input roots, the
+    same rule as 0073's `freeze_coverage`. The paths must match, every row (the
+    probe included) must exist in the commit, and every SHA-256 and size must match.
+  - Anything else latches stop. `review` also refuses without exact coverage.
+- **Check against root's real pins** (selfcheck, read-only git objects): all pass.
+  - The freeze hash matches, its shape is accepted, and the tree matches.
+  - All 2448 build inputs are covered exactly.
+  - The single row outside the roots is `tools/probes/cooked-temporal-compile.py`,
+    which is in the commit.
+  - All 2449 blob SHA-256 values match.
+
+### Fixture lint items
+
+- **`chunks_exact(4)`:** it is not in this fixture. Clippy flagged it in 0073's own
+  distinct-colour helper (`upscaling_review.rs:493`), which was never copied here,
+  so nothing needed to change.
+- **Unused `mut`:** the only instance in this lineage is the `probe` case's
+  `let mut report` (0072 line 1418, 0073 line 1336), and this fixture removed
+  `probe`.
+  - Apart from those two items, the reused helpers passed both earlier
+    `clippy -D warnings` runs.
+  - I reviewed the new code's `let mut` bindings by inspection.
+- **One defensive change, semantically identical:** `outside()` now reads
+  `!(columns.contains(&x) && rows.contains(&y))`, because clippy's `nonminimal_bool`
+  can flag the `!a || !b` form. No lint was disabled, and no look, policy or
+  observation definition changed.
+- **Against `535003d7`:**
+  - The public API the fixture uses is unchanged, and the jitter table equals the
+    fixture's copy.
+  - The corrected portable history (partial-mass reprojection) and the unjittered
+    overlay composite do not touch the current-only spatial rule, so the
+    current-only boundary observation still holds.
+- **Still not compiled and not clippy-checked:** root's foreground build comes next.
+
+### Verification (all CPU-only)
+
+| Command | Result |
+|---|---|
+| `selfcheck.py --write …/preparation/selfcheck.json` | exit 0, `all_pass`; adds per-case check names, announced-source coverage and the jitter check against `535003d7` |
+| `test_lifecycle.py --receipt …/preparation/lifecycle.json` | 24/24: 19 earlier tests plus 5 new controls (lint, holder, freeze shape, coverage, checkout refusing before export) |
+| `test_analyze.py --receipt …/preparation/analyze.json` | 10/10 |
+| In-memory mutation check (not committed) | 13 of 13 disabled guards were caught by their controls; every control passes unmutated |
+
+The receipts in `preparation/` were regenerated for the corrected files. The
+originals remain in commit `3354cdfd`.
+
+### Changed paths
+
+- **Edited:**
+  - `visual/tools/{analyze,build,lease,selfcheck,test_lifecycle}.py`;
+  - `visual/plan.json` (build inputs, per-case checks, `holder`, freeze shape and
+    run order);
+  - one expression in `visual/review/metalfx_visual_review.rs`;
+  - this appended section.
+- **Added:** `visual/tools/test_analyze.py`.
+- **Regenerated:** `visual/preparation/{selfcheck,lifecycle,analyze}.json`.
+- **Unchanged:** `brief.md` and `tools/numeric.py`.
+- **Transients:** only the Python temporary directories the tests created and
+  removed. No `/tmp` files, and nothing written to `~/.codex/incant-evidence`.
+
+### Next, for root
+
+Run the foreground supervised build, then issue the one-shot grant. It needs:
+- `holder`;
+- `source_commit` `535003d7…` and `source_tree` `e98b2484…`;
+- `source_freeze` `{path, sha256: bd8295b0…}`;
+- `features`;
+- `visual_tree` of the committed `visual/` directory;
+- an allowed target and a prior release pin.
+
+`analyze.py check` now runs after both releases.
+
+This session made no memory writes, read no credentials, used no accounts, did not
+push and opened no PR. It requested or implied no phase approval, and leaves no
+active children or background tasks.

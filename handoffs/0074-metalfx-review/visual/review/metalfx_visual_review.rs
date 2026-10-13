@@ -792,7 +792,7 @@ fn outside(rect: [f32; 4]) -> Vec<bool> {
         .map(|i| {
             let x = (i % width) as f32 + 0.5;
             let y = (i / width) as f32 + 0.5;
-            !columns.contains(&x) || !rows.contains(&y)
+            !(columns.contains(&x) && rows.contains(&y))
         })
         .collect()
 }

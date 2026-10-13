@@ -14,16 +14,19 @@ compilation: no step runs without root's explicit source grant.
 Steps:
   checkout   export the granted commit with `git archive` into the evidence
              directory, verify every file and mode against git, require the
-             granted tree, verify every file root's freeze lists, and require
-             the fixture's jitter copy to equal the source table
+             granted tree, require root's committed build freeze ({commit,
+             files}) to name that commit and cover the plan's build inputs
+             exactly, and require the fixture's jitter copy to equal the source
   toolchain  rustc/cargo versions (no compilation) plus OS and hardware model
   review     copy the committed fixture into the checkout, build it (--no-run)
              with exactly the granted features and freeze it
-  lint       optional, CPU only, also after the GPU latch while the lease is held
+  lint       optional, CPU only, also after the GPU latch while the lease is held;
+             a failing lint keeps its receipt, latches stop.json and exits nonzero
 """
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -83,17 +86,51 @@ def tree_entries(commit):
     return entries
 
 
-def freeze_files(freeze):
-    """Root's reviewed per-file freeze: `sources` plus optional
-    `unchanged_baselines`, each {path, sha256} with a relative path."""
-    if not isinstance(freeze, dict):
-        return None
-    files = [*freeze.get("sources", []), *freeze.get("unchanged_baselines", [])]
-    valid = bool(files) and all(
-        isinstance(f, dict) and isinstance(f.get("path"), str) and isinstance(f.get("sha256"), str)
-        and not Path(f["path"]).is_absolute() and ".." not in Path(f["path"]).parts
-        for f in files)
-    return files if valid else None
+def freeze_rows(freeze, commit):
+    """Root's committed build freeze {"commit": <granted commit>, "files": [{path,
+    sha256, bytes}]} as {path: {sha256, bytes}}, or (None, reason). Paths are
+    relative and unique; no other freeze shape is accepted."""
+    if not isinstance(freeze, dict) or freeze.get("commit") != commit:
+        return None, "the granted freeze does not name the granted commit"
+    rows = {}
+    for row in freeze.get("files") or []:
+        path = row.get("path") if isinstance(row, dict) else None
+        if (not isinstance(path, str) or Path(path).is_absolute() or ".." in Path(path).parts
+                or re.fullmatch(r"[0-9a-f]{64}", str(row.get("sha256", ""))) is None
+                or not (row.get("bytes") is None or isinstance(row.get("bytes"), int))
+                or path in rows):
+            return None, f"malformed or duplicate freeze row: {row!r}"[:300]
+        rows[path] = {"sha256": row["sha256"], "bytes": row.get("bytes")}
+    if not rows:
+        return None, "the granted freeze lists no files"
+    return rows, None
+
+
+def under(path, roots):
+    return any(path == root or path.startswith(root + "/") for root in roots)
+
+
+def freeze_coverage(rows, entries, roots):
+    """Exact build-input coverage, as in handoff 0073's build.py: the freeze and the
+    exported commit name the same paths under every build-input root, every freeze
+    row (a probe outside the roots included) is in the commit, and every row
+    matches its exported file's SHA-256 and size."""
+    exported = {entry["path"] for entry in entries}
+    inputs = {path for path in exported if under(path, roots)}
+    frozen = {path for path in rows if under(path, roots)}
+    mismatched = sorted(
+        path for path, row in rows.items()
+        if path in exported and (c.CHECKOUT / path).is_file()
+        and (c.sha(c.CHECKOUT / path) != row["sha256"]
+             or (row["bytes"] is not None and (c.CHECKOUT / path).stat().st_size != row["bytes"])))
+    result = {"build_input_roots": list(roots), "build_inputs": len(inputs),
+              "freeze_rows": len(rows), "freeze_build_input_rows": len(frozen),
+              "freeze_rows_outside_roots": sorted(set(rows) - frozen)[:20],
+              "inputs_missing_from_freeze": sorted(inputs - frozen)[:20],
+              "freeze_rows_missing_from_commit": sorted(set(rows) - exported)[:20],
+              "mismatched": mismatched[:20], "mismatched_count": len(mismatched)}
+    result["exact"] = bool(inputs) and inputs == frozen and set(rows) <= exported and not mismatched
+    return result
 
 
 def checkout():
@@ -112,9 +149,12 @@ def checkout():
     freeze_path = Path(data["source_freeze"]["path"])
     if not freeze_path.is_file() or c.sha(freeze_path) != data["source_freeze"]["sha256"]:
         c.refuse("root's source freeze is absent or differs from its granted SHA-256")
-    files = freeze_files(c.read_json(freeze_path))
-    if files is None:
-        c.refuse("root's source freeze lists no well-formed relative {path, sha256} files")
+    try:
+        rows, problem = freeze_rows(c.read_json(freeze_path), commit)
+    except ValueError as error:
+        rows, problem = None, f"root's source freeze is not JSON: {error}"
+    if problem:
+        c.refuse(problem)
     shown = subprocess.run(["git", "show", f"{commit}:{c.JITTER_SOURCE}"], cwd=c.ROOT,
                            capture_output=True, text=True)
     jitter = c.samples(shown.stdout) if shown.returncode == 0 else None
@@ -144,20 +184,19 @@ def checkout():
     c.write_new_json(c.BUILD / "checkout.json", {
         "commit": commit, "tree": tree, "files": entries,
         "method": "git archive --format=tar | tarfile data filter", "recorded": c.now()})
-    comparison = [{"path": f["path"], "reviewed_sha256": f["sha256"],
-                   "same": (c.CHECKOUT / f["path"]).is_file()
-                   and c.sha(c.CHECKOUT / f["path"]) == f["sha256"]}
-                  for f in files]
-    if not all(f["same"] for f in comparison):
-        c.refuse("checkout differs from root's reviewed source freeze")
+    coverage = freeze_coverage(rows, entries, c.plan()["build_inputs"])
     c.write_new_json(c.BUILD / "source.json", {
         "grant_sha256": grant_sha, "tools": tools, "source_commit": commit, "tree": tree,
         "files": len(entries), "checkout_manifest_sha256": c.sha(c.BUILD / "checkout.json"),
-        "source_freeze": data["source_freeze"], "freeze_comparison": comparison,
+        "source_freeze": data["source_freeze"], "coverage": coverage,
         "features": c.features(data), "jitter_table": jitter,
         "cargo_lock_sha256": c.sha(c.CHECKOUT / "Cargo.lock"),
         "rust_toolchain": (c.CHECKOUT / "rust-toolchain.toml").read_text(), "recorded": c.now()})
-    print(json.dumps({"commit": commit, "files": len(entries), "freeze_files": len(comparison)}))
+    print(json.dumps({"commit": commit, "files": len(entries), "build_inputs": coverage["build_inputs"],
+                      "freeze_rows": coverage["freeze_rows"], "exact": coverage["exact"]}))
+    if not coverage["exact"]:
+        c.latch_stop("checkout", "root's freeze does not cover the build inputs exactly")
+        raise SystemExit("the exported commit does not match the granted freeze exactly; stop latched")
 
 
 def toolchain():
@@ -261,8 +300,9 @@ def review():
     data, _ = c.gate()
     tools = c.tools_identity(data)
     c.verify_checkout()
-    if not (c.BUILD / "source.json").exists():
-        c.refuse("build.py checkout first")
+    source_record = c.BUILD / "source.json"
+    if not source_record.exists() or not c.read_json(source_record).get("coverage", {}).get("exact"):
+        c.refuse("build.py checkout with exact freeze coverage first")
     destination = c.CHECKOUT / c.HELPER_DEST
     if destination.exists():
         c.refuse("review fixture already copied; the copy is never replaced")
@@ -299,6 +339,11 @@ def lint():
     c.write_new_json(c.BUILD / "lint.json", {"tools": tools, "source": source, **entry,
                                              "recorded": c.now()})
     print(json.dumps({k: entry[k] for k in ("label", "exit", "timed_out")}, indent=1))
+    if entry["exit"] != 0 or entry["timed_out"] or entry["wait_error"] or not entry["group_empty_after"]:
+        # run_group already latched stop.json; the receipt above is retained either way.
+        c.latch_stop("lint", f"lint exit {entry['exit']}, timed_out {entry['timed_out']}")
+        raise SystemExit(f"lint failed (exit {entry['exit']}); receipt {c.BUILD / 'lint.json'}, "
+                         "stop latched")
 
 
 if __name__ == "__main__":

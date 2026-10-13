@@ -9,7 +9,8 @@ common.target_allowed.
   python3 -I -B lease.py acquire   # only after root's review-ready.json grant
   python3 -I -B lease.py release   # after gpu.py release and the last owned build
 
-Acquisition verifies every prior receipt the grant pins as prior_<name>_path /
+Acquisition records the grant's root-assigned `holder` (refusing a grant without
+one), verifies every prior receipt the grant pins as prior_<name>_path /
 prior_<name>_sha256, requires each pinned release body to list no live
 processes, and requires that no cargo/rustc runs on the target or child
 checkout and no binary runs from the target. Release leaves the target as a
@@ -71,6 +72,9 @@ def acquire():
         c.refuse("stage already stopped or released")
     if c.LEASE.exists():
         c.refuse("lease already recorded")
+    holder = grant.get("holder")
+    if not (isinstance(holder, str) and holder.strip()):
+        c.refuse("the grant does not name the root-assigned lease holder")
     tools = c.tools_identity(grant)
     prior, ok = prior_receipts(grant)
     if not ok:
@@ -82,7 +86,7 @@ def acquire():
         c.refuse("processes already use the target: " + json.dumps(running)[:400])
     c.write_new_json(c.LEASE, {
         "packet": c.PACKET, "stage": c.STAGE,
-        "holder": "claude (Opus 5.5, Max thinking) for handoff 0074 stage B",
+        "holder": holder,
         "target_dir": str(target), "assigned_by": "root via review-ready.json",
         "grant_sha256": grant_sha, "grant": grant, "prior_receipts": prior, "tools": tools,
         "brief_sha256": c.sha(c.PACKET_DIR / "brief.md"), "worktree": str(c.ROOT),

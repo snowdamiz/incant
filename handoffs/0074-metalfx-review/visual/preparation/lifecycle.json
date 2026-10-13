@@ -1,8 +1,8 @@
 {
  "cpu_only": true,
  "passed": true,
- "tests_run": 19,
- "seconds": 2.62,
+ "tests_run": 24,
+ "seconds": 2.69,
  "python": "3.14.8",
  "records": [
   {
@@ -15,7 +15,7 @@
   {
    "test": "build_term",
    "row": {
-    "pid": 95793,
+    "pid": 2712,
     "exit": -9,
     "timed_out": false,
     "wait_error": "Interrupted",
@@ -28,7 +28,7 @@
   {
    "test": "build_ok",
    "row": {
-    "pid": 95795,
+    "pid": 2714,
     "exit": 0,
     "timed_out": false,
     "wait_error": null,
@@ -41,7 +41,7 @@
   {
    "test": "build_slow",
    "row": {
-    "pid": 95796,
+    "pid": 2715,
     "exit": -9,
     "timed_out": true,
     "wait_error": null,
@@ -56,9 +56,13 @@
    "raised": "refused: native-gpu.lock is held by another runner; nothing launched or charged"
   },
   {
+   "test": "checkout_refuses_a_freeze_naming_another_commit_before_export",
+   "refusal": "the granted freeze does not name the granted commit"
+  },
+  {
    "test": "child_default_mask",
    "row": {
-    "pid": 95798,
+    "pid": 2720,
     "exit": -15,
     "timed_out": false,
     "wait_error": null,
@@ -73,7 +77,7 @@
      "ui_submissions": 0,
      "pngs": 1,
      "grant_sha256": "cpu-only-grant",
-     "at": "2026-10-13T08:13:33.266681+00:00"
+     "at": "2026-10-13T08:36:21.100398+00:00"
     }
    },
    "raised": "SystemExit"
@@ -82,7 +86,7 @@
    "test": "explicit_source_passes_the_grant_gate"
   },
   {
-   "test": "feature_freeze_and_jitter_guards",
+   "test": "feature_and_jitter_guards",
    "jitter_table": [
     [
      -0.375,
@@ -119,9 +123,32 @@
    ]
   },
   {
+   "test": "freeze_coverage_is_exact_or_refused",
+   "exact_controls": {
+    "missing_input": false,
+    "row_not_in_commit": false,
+    "changed_content": false,
+    "changed_size": false,
+    "changed_probe": false
+   }
+  },
+  {
+   "test": "freeze_rows_accept_only_the_committed_files_shape",
+   "refused": {
+    "other_commit": "the granted freeze does not name the granted commit",
+    "no_commit": "the granted freeze does not name the granted commit",
+    "old_sources_shape": "the granted freeze lists no files",
+    "empty": "the granted freeze lists no files",
+    "absolute_path": "malformed or duplicate freeze row: {'path': '/etc/hosts', 'sha256': '1111111111111111111111111111111111111111111111111111111111111111'}",
+    "parent_path": "malformed or duplicate freeze row: {'path': '../x', 'sha256': '1111111111111111111111111111111111111111111111111111111111111111'}",
+    "short_digest": "malformed or duplicate freeze row: {'path': 'a', 'sha256': '12'}",
+    "duplicate_path": "malformed or duplicate freeze row: {'path': 'Cargo.lock', 'sha256': '1111111111111111111111111111111111111111111111111111111111111111', 'bytes': 3}"
+   }
+  },
+  {
    "test": "gpu_failure_exit",
    "row": {
-    "pid": 95799,
+    "pid": 2722,
     "exit": 1,
     "timed_out": false,
     "wait_error": null,
@@ -136,7 +163,7 @@
      "ui_submissions": 0,
      "pngs": 1,
      "grant_sha256": "cpu-only-grant",
-     "at": "2026-10-13T08:13:33.277659+00:00"
+     "at": "2026-10-13T08:36:21.113400+00:00"
     }
    },
    "raised": "SystemExit"
@@ -144,7 +171,7 @@
   {
    "test": "sighup",
    "row": {
-    "pid": 95801,
+    "pid": 2724,
     "exit": -9,
     "timed_out": false,
     "wait_error": "Interrupted",
@@ -160,7 +187,7 @@
      "ui_submissions": 0,
      "pngs": 1,
      "grant_sha256": "cpu-only-grant",
-     "at": "2026-10-13T08:13:33.285381+00:00"
+     "at": "2026-10-13T08:36:21.120942+00:00"
     }
    },
    "raised": "Interrupted"
@@ -168,7 +195,7 @@
   {
    "test": "sigint",
    "row": {
-    "pid": 95805,
+    "pid": 2727,
     "exit": -9,
     "timed_out": false,
     "wait_error": "KeyboardInterrupt",
@@ -184,7 +211,7 @@
      "ui_submissions": 0,
      "pngs": 1,
      "grant_sha256": "cpu-only-grant",
-     "at": "2026-10-13T08:13:33.702381+00:00"
+     "at": "2026-10-13T08:36:21.539322+00:00"
     }
    },
    "raised": "KeyboardInterrupt"
@@ -192,7 +219,7 @@
   {
    "test": "sigterm",
    "row": {
-    "pid": 95823,
+    "pid": 2733,
     "exit": -9,
     "timed_out": false,
     "wait_error": "Interrupted",
@@ -208,7 +235,7 @@
      "ui_submissions": 0,
      "pngs": 1,
      "grant_sha256": "cpu-only-grant",
-     "at": "2026-10-13T08:13:34.382508+00:00"
+     "at": "2026-10-13T08:36:22.218693+00:00"
     }
    },
    "raised": "Interrupted"
@@ -216,7 +243,7 @@
   {
    "test": "gpu_success",
    "row": {
-    "pid": 95847,
+    "pid": 2736,
     "exit": 0,
     "timed_out": false,
     "wait_error": null,
@@ -229,7 +256,7 @@
      "ui_submissions": 0,
      "pngs": 1,
      "grant_sha256": "cpu-only-grant",
-     "at": "2026-10-13T08:13:34.800553+00:00"
+     "at": "2026-10-13T08:36:22.636217+00:00"
     }
    },
    "raised": null
@@ -237,7 +264,7 @@
   {
    "test": "gpu_timeout",
    "row": {
-    "pid": 95849,
+    "pid": 2737,
     "exit": -9,
     "timed_out": true,
     "wait_error": null,
@@ -253,7 +280,7 @@
      "ui_submissions": 0,
      "pngs": 1,
      "grant_sha256": "cpu-only-grant",
-     "at": "2026-10-13T08:13:34.806893+00:00"
+     "at": "2026-10-13T08:36:22.642039+00:00"
     }
    },
    "raised": "SystemExit"
@@ -268,14 +295,27 @@
    ]
   },
   {
+   "test": "lease_records_root_assigned_holder",
+   "holder": "root (Astra) supervised build for handoff 0074"
+  },
+  {
+   "test": "lint_failure_exits_nonzero_after_receipt_and_stop",
+   "receipt_exit": 101,
+   "stop": {
+    "at": "2026-10-13T08:36:23.007054+00:00",
+    "label": "lint",
+    "reason": "build exit 101, timed_out False, interrupt None, group_empty True"
+   }
+  },
+  {
    "test": "non_executable_refused",
-   "raised": "refused: /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0074-lifecycle-0cz95c13/not-executable is not executable (mode 0o644)"
+   "raised": "refused: /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0074-lifecycle-fe4uc8xk/not-executable is not executable (mode 0o644)"
   },
   {
    "test": "stop_latch_blocks_next_child",
    "refusals": [
     {
-     "at": "2026-10-13T08:13:35.123158+00:00",
+     "at": "2026-10-13T08:36:23.010683+00:00",
      "reason": "stop.json latched a failure; only analysis and releases may run",
      "argv": [
       "--receipt",

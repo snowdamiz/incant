@@ -15,20 +15,27 @@ ac8a48de).
    every planned step exactly as the plan expects (native, native or device
    Scale fallback, FractionalViewport) and admits every portable footprint.
 4. The Rust fixture agrees with the plan: test names and order, Report::open
-   limits, PNG names per case, frame size, output variable, configs, viewports,
-   preferences, planned internal sizes and the jitter table of the source.
+   limits, PNG names and required check names per case, frame size, output
+   variable, configs, viewports, preferences, planned internal sizes and the
+   jitter table of the source.
 5. Every item the plan lists as reused is byte-identical to 0072's reviewed
    fixture blob; the adapted tools descend from 0072's reviewed tool blobs.
 6. The grant policy refuses absent, superseded or ill-formed sources (pure).
 7. rustfmt (edition 2024, stdin to stdout, no Cargo or target) leaves the
    fixture byte-identical.
-8. With the grant absent, every guarded command refuses with the grant message,
+8. Root's announced source (read-only git objects, no export): the committed
+   build freeze has its announced SHA-256 and the {commit, files} shape
+   build.py accepts, the commit has its tree, the freeze covers the plan's
+   build inputs exactly by path, size and blob SHA-256, and the fixture's
+   jitter copy equals that commit's table.
+9. With the grant absent, every guarded command refuses with the grant message,
    creates no evidence directory, leaves `git status` unchanged and does not
    touch the global native-gpu.lock.
 """
 
 import ast
 import difflib
+import hashlib
 import json
 import math
 import os
@@ -39,6 +46,7 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import build  # noqa: E402
 import common as c  # noqa: E402
 
 COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "checkout"],
@@ -49,6 +57,11 @@ COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "chec
 CASE_ORDER = ["stationary", "motion", "excluded", "transitions", "viewport"]
 PREPARED_SOURCE = "4bc810fe0daf238f219801de76b06f19e4daf826"
 COMBINED_HEAD_AT_PREPARATION = "0c890514f84c09cb98358ba6d7fa9431140b5b7c"
+# Announced in root's helper-acceptance revision; the grant itself comes later.
+ANNOUNCED = {"commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+             "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+             "freeze": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+             "freeze_sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"}
 
 
 def git_show(spec):
@@ -95,6 +108,11 @@ def plan_checks(p):
             and set(policy["denied_freezes"]) == set(c.DENIED_FREEZES)
             and [tuple(s) for s in policy["allowed_feature_sets"]] == list(c.FEATURE_SETS)),
         "output_variable_allowlisted": p["review"]["output_env"] in c.OVERRIDES,
+        "build_inputs_declared": p["build_inputs"] == ["crates", "Cargo.toml", "Cargo.lock", "third_party",
+                                                       "tools/cargo", "rust-toolchain.toml"],
+        "checks_declared_per_case": all(case["checks"] and len(set(case["checks"])) == len(case["checks"])
+                                        and "frames_match_plan" in case["checks"] for case in cases.values()),
+        "holder_required": "holder" in policy["required_grant_fields"],
     }
 
 
@@ -187,6 +205,11 @@ def helper_checks(p, footprints):
     opened = {m[0]: (int(m[1]), int(m[2]))
               for m in re.findall(r'Report::open\("(\w+)", (\d+), (\d+)\)', source)}
     pngs = {name: re.findall(r'report\.png\(\s*"([\w-]+\.png)"', body) for name, body in tests.items()}
+    checks = {}
+    for name, body in tests.items():
+        start = body.find("let checks = [")
+        block = body[start:body.find("];", start)] if start >= 0 else ""
+        checks[name] = re.findall(r'\(\s*"(\w+)",', block)
     preferences = {name: sorted(set(re.findall(r"Preference::(\w+)", body))) for name, body in tests.items()}
     planned_preferences = {name: sorted({s["preference"] for s in case["steps"] if s["arm"] == "native"})
                            for name, case in cases.items()}
@@ -198,7 +221,8 @@ def helper_checks(p, footprints):
     planned_sizes = {tuple(v) for v in footprints["internal_sizes"].values()}
     jitter = {"fixture": c.samples(source),
               "prepared_source_4bc810fe": c.samples(git_show(f"{PREPARED_SOURCE}:{c.JITTER_SOURCE}") or ""),
-              "combined_head_0c890514": c.samples(git_show(f"{COMBINED_HEAD_AT_PREPARATION}:{c.JITTER_SOURCE}") or "")}
+              "combined_head_0c890514": c.samples(git_show(f"{COMBINED_HEAD_AT_PREPARATION}:{c.JITTER_SOURCE}") or ""),
+              "announced_535003d7": c.samples(git_show(f"{ANNOUNCED['commit']}:{c.JITTER_SOURCE}") or "")}
     canvas = re.search(r"const VIEWPORT: Viewport = Viewport \{.*?canvas_srgb: \[(\d+), (\d+), (\d+)\]", source, re.S)
     return {
         "cfg_native_metalfx_feature": source.count('#![cfg(feature = "native-metalfx")]') == 1,
@@ -207,6 +231,8 @@ def helper_checks(p, footprints):
                                  for name, case in cases.items()),
         "png_names_match_plan_per_case": all(sorted(pngs.get(name, [])) == sorted(case["pngs"])
                                              for name, case in cases.items()),
+        "check_names_match_plan_per_case": all(checks.get(name) == case["checks"]
+                                               for name, case in cases.items()),
         "preferences_match_plan_per_case": preferences == planned_preferences,
         "size_matches_plan": bool(size) and [int(size[1]), int(size[2])] == p["review"]["size"],
         "output_variable_matches_plan": bool(env) and env[1] == p["review"]["output_env"],
@@ -219,11 +245,11 @@ def helper_checks(p, footprints):
         "internal_sizes_checked_are_planned": bool(sizes_used) and set(sizes_used) <= planned_sizes,
         "jitter_copy_equals_prepared_source": jitter["fixture"] is not None
         and jitter["fixture"] == jitter["prepared_source_4bc810fe"],
-        "observed": {"tests": list(tests), "limits": opened, "pngs": pngs, "preferences": preferences,
-                     "review_config": review, "internal_sizes_checked": sizes_used,
-                     "jitter": jitter,
-                     "jitter_copy_equals_combined_head_at_preparation":
-                         jitter["fixture"] == jitter["combined_head_0c890514"],
+        "jitter_copy_equals_announced_source": jitter["fixture"] is not None
+        and jitter["fixture"] == jitter["announced_535003d7"],
+        "observed": {"tests": list(tests), "limits": opened, "pngs": pngs, "checks": checks,
+                     "preferences": preferences, "review_config": review,
+                     "internal_sizes_checked": sizes_used, "jitter": jitter,
                      "note": "build.py re-checks the jitter table against the granted commit"},
     }
 
@@ -330,6 +356,61 @@ def format_check():
             "method": "stdin to stdout and byte comparison (stdin --check exits 0 even with a diff)"}
 
 
+# ------------------------------------------------------------------ announced source
+
+def announced_source_checks(p):
+    """build.py's freeze rule applied read-only to root's announced commit: git
+    objects stand in for the exported files (no export, target or build)."""
+    freeze_path = Path(ANNOUNCED["freeze"])
+    result = {"announced": ANNOUNCED}
+    if not freeze_path.is_file():
+        return {**result, "problem": "the announced freeze is absent", "all_pass": False}
+    result["freeze_sha256_matches"] = c.sha(freeze_path) == ANNOUNCED["freeze_sha256"]
+    rows, problem = build.freeze_rows(c.read_json(freeze_path), ANNOUNCED["commit"])
+    result["freeze_shape_accepted"] = problem is None
+    if problem:
+        return {**result, "problem": problem, "all_pass": False}
+    result["tree_matches"] = c.git("rev-parse", ANNOUNCED["commit"] + "^{tree}").strip() == ANNOUNCED["tree"]
+    listing = subprocess.run(["git", "ls-tree", "-r", "-l", "-z", "--full-tree", ANNOUNCED["commit"]],
+                             cwd=c.ROOT, capture_output=True, check=True).stdout
+    blobs = {}
+    for record in listing.split(b"\0"):
+        if record:
+            meta, path = record.split(b"\t", 1)
+            _, kind, blob, size = meta.decode().split()
+            if kind == "blob":
+                blobs[path.decode()] = (blob, int(size))
+    roots = p["build_inputs"]
+    inputs = {path for path in blobs if build.under(path, roots)}
+    frozen = {path for path in rows if build.under(path, roots)}
+    digests = {}
+    reader = subprocess.Popen(["git", "cat-file", "--batch"], cwd=c.ROOT, stdin=subprocess.PIPE,
+                              stdout=subprocess.PIPE)
+    try:
+        for path in sorted(set(rows) & set(blobs)):
+            reader.stdin.write(blobs[path][0].encode() + b"\n")
+            reader.stdin.flush()
+            size = int(reader.stdout.readline().split()[2])
+            digests[path] = hashlib.sha256(reader.stdout.read(size)).hexdigest()
+            reader.stdout.read(1)
+    finally:
+        reader.stdin.close()
+        reader.wait()
+    mismatched = sorted(path for path, digest in digests.items()
+                        if digest != rows[path]["sha256"]
+                        or rows[path]["bytes"] not in (None, blobs[path][1]))
+    result.update({
+        "build_inputs": len(inputs), "freeze_rows": len(rows), "freeze_build_input_rows": len(frozen),
+        "freeze_rows_outside_roots": sorted(set(rows) - frozen),
+        "inputs_missing_from_freeze": sorted(inputs - frozen)[:20],
+        "freeze_rows_missing_from_commit": sorted(set(rows) - set(blobs))[:20],
+        "blob_sha256_compared": len(digests), "mismatched": mismatched[:20],
+        "exact": bool(inputs) and inputs == frozen and set(rows) <= set(blobs) and not mismatched})
+    result["all_pass"] = (result["freeze_sha256_matches"] and result["freeze_shape_accepted"]
+                          and result["tree_matches"] and result["exact"])
+    return result
+
+
 # ------------------------------------------------------------------ refusals
 
 def refusal_checks():
@@ -371,7 +452,7 @@ def main():
               "syntax": "all tools parse", "plan": plan_checks(p), "footprints": footprints,
               "helper": helper_checks(p, footprints), "reuse": reuse_checks(p),
               "grant_policy": policy_checks(), "format": format_check(),
-              "refusals": refusal_checks()}
+              "announced_source": announced_source_checks(p), "refusals": refusal_checks()}
     refusals = result["refusals"]
     result["all_pass"] = (all(result["plan"].values())
                           and footprints["all_classified_as_planned"]
@@ -381,6 +462,7 @@ def main():
                           and result["reuse"]["tools_descend_from_0072"]
                           and result["grant_policy"]["all_as_expected"]
                           and result["format"].get("identical", False)
+                          and result["announced_source"]["all_pass"]
                           and all(refusals.get(k, False) for k in (
                               "all_refused_for_absent_grant", "evidence_directory_still_absent",
                               "git_status_unchanged", "global_gpu_lock_untouched")))

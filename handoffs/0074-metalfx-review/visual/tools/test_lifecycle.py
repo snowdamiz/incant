@@ -5,7 +5,10 @@ calls a GPU binary, never touches the real evidence directory or global lock.
 Adapted from handoff 0072's committed visual/tools/test_lifecycle.py (visual
 tree ac8a48de) with 0074's budgets, plus grant-source refusals: an absent,
 superseded or ill-formed source is refused before any checkout, export or
-child, and the build's feature and freeze guards reject partial inputs.
+child, and the build's feature and freeze guards reject partial inputs. Helper
+acceptance controls: a failing lint keeps its receipt, latches stop and exits
+nonzero; the lease records the grant's root-assigned holder; only root's
+{commit, files} freeze is accepted and its build-input coverage must be exact.
 
 Only paths, plan and grant/source lookups are redirected to a temporary
 fixture; the actual supervise/run_child/run_group code runs with /usr/bin/true,
@@ -16,6 +19,7 @@ the main thread's deferred mask is genuinely exercised.
 """
 
 import contextlib
+import hashlib
 import io
 import json
 import os
@@ -33,6 +37,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import build  # noqa: E402
 import common as c  # noqa: E402
 import gpu  # noqa: E402
+import lease  # noqa: E402
 
 RECORDS = []
 PLAN = {"expected_backend": "Metal", "budgets": {"new_submissions_max": 128, "pngs_max": 20}}
@@ -298,24 +303,105 @@ class Lifecycle(unittest.TestCase):
         self.assertFalse(c.REFUSALS.exists())
         RECORDS.append({"test": "explicit_source_passes_the_grant_gate"})
 
-    def test_feature_freeze_and_jitter_guards(self):
+    def test_feature_and_jitter_guards(self):
         admitted = build.features_admitted
         self.assertTrue(admitted(["native-metalfx"], ["native-metalfx", "physics-deterministic"]))
         self.assertFalse(admitted(["native-metalfx"], ["cooked-materials", "native-metalfx"]))
         self.assertTrue(admitted(["cooked-temporal", "native-metalfx"],
                                  ["cooked-materials", "cooked-temporal", "native-metalfx"]))
         self.assertFalse(admitted(["cooked-temporal", "native-metalfx"], ["native-metalfx"]))
-        self.assertIsNone(build.freeze_files({"sources": []}))
-        self.assertIsNone(build.freeze_files({"sources": [{"path": "/abs", "sha256": "x"}]}))
-        self.assertIsNone(build.freeze_files({"sources": [{"path": "../up", "sha256": "x"}]}))
-        self.assertIsNone(build.freeze_files([{"path": "a", "sha256": "x"}]))
-        self.assertEqual(len(build.freeze_files({"sources": [{"path": "a", "sha256": "x"}],
-                                                 "unchanged_baselines": [{"path": "b", "sha256": "y"}]})), 2)
         text = c.HELPER_SOURCE.read_text()
         table = c.samples(text)
         self.assertEqual(len(table), 8)
         self.assertNotEqual(c.samples(text.replace("[0.125, -0.125]", "[-0.125, 0.125]", 1)), table)
-        RECORDS.append({"test": "feature_freeze_and_jitter_guards", "jitter_table": table})
+        RECORDS.append({"test": "feature_and_jitter_guards", "jitter_table": table})
+
+    def test_lint_failure_exits_nonzero_after_receipt_and_stop(self):
+        c.write_new_json(c.GRANT, GRANT)
+        c.write_new_json(c.LEASE, {"grant_sha256": c.sha(c.GRANT)})
+        cargo = c.CHECKOUT / "tools" / "cargo"
+        cargo.parent.mkdir(parents=True)
+        cargo.write_text("#!/bin/sh\necho 'error: simulated clippy failure' >&2\nexit 101\n")
+        cargo.chmod(0o755)
+        with mock.patch.object(c, "plan", return_value=json.loads(c.PLAN_PATH.read_text())), \
+                mock.patch.object(c, "verify_checkout", return_value={"helper_copy_sha256": "copied"}):
+            with self.assertRaisesRegex(SystemExit, "lint failed"):
+                build.lint()
+        receipt = c.read_json(c.BUILD / "lint.json")
+        self.assertEqual((receipt["exit"], lines(c.LEDGER)[0]["exit"]), (101, 101))
+        self.assertTrue(c.STOP.exists())
+        RECORDS.append({"test": "lint_failure_exits_nonzero_after_receipt_and_stop",
+                        "receipt_exit": receipt["exit"], "stop": c.read_json(c.STOP)})
+
+    def test_lease_records_root_assigned_holder(self):
+        release = Path(self.directory.name) / "prior-released.json"
+        c.write_new_json(release, {"owned_processes": [], "ledger_pids_alive": []})
+        pins = {"prior_numeric_release_path": str(release), "prior_numeric_release_sha256": c.sha(release)}
+        c.write_new_json(c.GRANT, {**GRANT, **pins})
+        with self.assertRaisesRegex(SystemExit, "root-assigned lease holder"):
+            lease.acquire()
+        self.assertFalse(c.LEASE.exists())
+        holder = "root (Astra) supervised build for handoff 0074"
+        c.GRANT.unlink()
+        c.write_new_json(c.GRANT, {**GRANT, **pins, "holder": holder})
+        lease.acquire()
+        self.assertEqual(c.read_json(c.LEASE)["holder"], holder)
+        RECORDS.append({"test": "lease_records_root_assigned_holder", "holder": holder})
+
+    def test_freeze_rows_accept_only_the_committed_files_shape(self):
+        commit = "e" * 40
+        good = {"commit": commit, "files": [{"path": "Cargo.lock", "sha256": "1" * 64, "bytes": 3}]}
+        rows, problem = build.freeze_rows(good, commit)
+        self.assertEqual((problem, sorted(rows)), (None, ["Cargo.lock"]))
+        bad = {"other_commit": {**good, "commit": "f" * 40},
+               "no_commit": {"files": good["files"]},
+               "old_sources_shape": {"commit": commit, "sources": good["files"]},
+               "empty": {"commit": commit, "files": []},
+               "absolute_path": {"commit": commit, "files": [{"path": "/etc/hosts", "sha256": "1" * 64}]},
+               "parent_path": {"commit": commit, "files": [{"path": "../x", "sha256": "1" * 64}]},
+               "short_digest": {"commit": commit, "files": [{"path": "a", "sha256": "12"}]},
+               "duplicate_path": {"commit": commit, "files": good["files"] * 2}}
+        reasons = {name: build.freeze_rows(freeze, commit)[1] for name, freeze in bad.items()}
+        self.assertTrue(all(reasons.values()), reasons)
+        RECORDS.append({"test": "freeze_rows_accept_only_the_committed_files_shape", "refused": reasons})
+
+    def test_freeze_coverage_is_exact_or_refused(self):
+        files = {"crates/a.rs": b"fn a() {}\n", "Cargo.lock": b"lock\n",
+                 "tools/probes/probe.py": b"probe\n", "docs/outside.md": b"doc\n"}
+        for path, data in files.items():
+            (c.CHECKOUT / path).parent.mkdir(parents=True, exist_ok=True)
+            (c.CHECKOUT / path).write_bytes(data)
+        entries = [{"path": path} for path in files]
+        row = lambda path: {"sha256": hashlib.sha256(files[path]).hexdigest(), "bytes": len(files[path])}
+        roots = ["crates", "Cargo.lock"]
+        exact = {path: row(path) for path in ("crates/a.rs", "Cargo.lock", "tools/probes/probe.py")}
+        coverage = build.freeze_coverage(exact, entries, roots)
+        self.assertTrue(coverage["exact"])
+        self.assertEqual(coverage["freeze_rows_outside_roots"], ["tools/probes/probe.py"])
+        variants = {"missing_input": {k: v for k, v in exact.items() if k != "Cargo.lock"},
+                    "row_not_in_commit": {**exact, "crates/gone.rs": row("Cargo.lock")},
+                    "changed_content": {**exact, "crates/a.rs": {**row("crates/a.rs"), "sha256": "0" * 64}},
+                    "changed_size": {**exact, "Cargo.lock": {**row("Cargo.lock"), "bytes": 99}},
+                    "changed_probe": {**exact, "tools/probes/probe.py": {**row("tools/probes/probe.py"),
+                                                                         "sha256": "0" * 64}}}
+        results = {name: build.freeze_coverage(rows, entries, roots)["exact"] for name, rows in variants.items()}
+        self.assertFalse(any(results.values()), results)
+        RECORDS.append({"test": "freeze_coverage_is_exact_or_refused", "exact_controls": results})
+
+    def test_checkout_refuses_a_freeze_naming_another_commit_before_export(self):
+        commit, tree = "535003d766bcc1386fd2d2f454c83808a0fcc4c8", "e98b24847c28f3491f56e38edb051e018748eff7"
+        freeze = Path(self.directory.name) / "freeze.json"
+        c.write_new_json(freeze, {"commit": "4bc810fe0daf238f219801de76b06f19e4daf826",
+                                  "files": [{"path": "Cargo.lock", "sha256": "1" * 64}]})
+        c.write_new_json(c.GRANT, {**GRANT, "source_commit": commit, "source_tree": tree,
+                                   "source_freeze": {"path": str(freeze), "sha256": c.sha(freeze)}})
+        c.write_new_json(c.LEASE, {"grant_sha256": c.sha(c.GRANT)})
+        c.CHECKOUT.rmdir()
+        with self.assertRaisesRegex(SystemExit, "does not name the granted commit"):
+            build.checkout()
+        self.assertFalse(c.CHECKOUT.exists())  # nothing was exported
+        RECORDS.append({"test": "checkout_refuses_a_freeze_naming_another_commit_before_export",
+                        "refusal": lines(c.REFUSALS)[-1]["reason"]})
 
 
 if __name__ == "__main__":

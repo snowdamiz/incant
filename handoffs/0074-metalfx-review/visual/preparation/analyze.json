@@ -1,0 +1,80 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 10,
+ "seconds": 0.14,
+ "python": "3.14.8",
+ "records": [
+  {
+   "test": "changed_png_refuses",
+   "problems": 1,
+   "first": [
+    "stationary: stationary-native-f16.png changed since its run"
+   ]
+  },
+  {
+   "test": "changed_report_refuses",
+   "problems": 1,
+   "first": [
+    "excluded: report.json missing or changed since its run"
+   ]
+  },
+  {
+   "test": "complete_evidence_checks_and_publishes",
+   "pngs": 18,
+   "bound_files": 46
+  },
+  {
+   "test": "empty_evidence_refuses",
+   "problems": 14,
+   "first": [
+    "missing /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0074-analyze-n31_c84n/evidence/build/source.json",
+    "the review source is not the granted commit with exact freeze coverage",
+    "missing /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0074-analyze-n31_c84n/evidence/build/checkout.json"
+   ]
+  },
+  {
+   "test": "failed_child_refuses",
+   "problems": 2,
+   "first": [
+    "child review-motion failed: exit 101, failed ['exit 101']",
+    "motion: child failed: exit 101, failed ['exit 101']"
+   ]
+  },
+  {
+   "test": "failed_summary_refuses_publish",
+   "problems": 1,
+   "first": [
+    "the target lease is not cleanly released under this grant"
+   ]
+  },
+  {
+   "test": "false_check_refuses",
+   "problems": 2,
+   "first": [
+    "viewport: required checks are not exactly the plan's, all true (not true: ['outside_viewport_matches_off'])",
+    "viewport: report outcome 'fail' is not this case's pass"
+   ]
+  },
+  {
+   "test": "missing_case_refuses",
+   "problems": 2,
+   "first": [
+    "review cases ran as ['stationary', 'motion', 'excluded', 'transitions'], not ['stationary', 'motion', 'excluded', 'transitions', 'viewport'] once each in order",
+    "charged {'frames': 96, 'ui_submissions': 11, 'pngs': 16}, not the planned totals"
+   ]
+  },
+  {
+   "test": "orphan_debit_refuses",
+   "problems": 2,
+   "first": [
+    "the debits are not exactly the review runs' debits (orphan, missing or changed)",
+    "charged {'frames': 141, 'ui_submissions': 11, 'pngs': 22}, not the planned totals"
+   ]
+  },
+  {
+   "test": "stale_summary_refuses_publish",
+   "republished_after_fresh_check": true
+  }
+ ]
+}

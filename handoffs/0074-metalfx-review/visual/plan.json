@@ -4,14 +4,16 @@
  "status": "prepared only; frozen by the commit whose visual tree root pins in review-ready.json; nothing builds or runs until root grants an explicit combined source",
  "authorization": "brief.md root priority revision (2026-10-13): at most 128 new submissions including UI, at most 20 PNGs at 960x540, one serial child per case, failed attempts charged the same, no retry loop or broad suite; root supervises compilation",
  "source_policy": {
-  "required_grant_fields": ["packet", "stage", "source_commit", "source_tree", "source_freeze", "features", "visual_tree", "target", "prior_<name>_path", "prior_<name>_sha256"],
-  "source_freeze_shape": "absolute JSON path and SHA-256; {sources: [{path, sha256}], unchanged_baselines?: [...]}, every listed file must match the exported checkout",
+  "required_grant_fields": ["packet", "stage", "source_commit", "source_tree", "source_freeze", "features", "visual_tree", "target", "holder", "prior_<name>_path", "prior_<name>_sha256"],
+  "source_freeze_shape": "absolute path and SHA-256 of root's committed build freeze {commit: <source_commit>, files: [{path, sha256, bytes}]}; its rows must cover the build_inputs of the exported commit exactly, and every row (a probe outside the roots included) must exist in the commit and match its file; no other freeze shape is accepted",
+  "holder": "lease.py records the grant's root-assigned holder field and refuses a grant without one",
   "allowed_feature_sets": [["native-metalfx"], ["cooked-temporal", "native-metalfx"]],
   "denied_source_commits": ["4bc810fe0daf238f219801de76b06f19e4daf826", "a337c86d8d74e819b3e879d4a7db830b74de8862"],
   "denied_freezes": ["b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b"],
   "expected_source": "root's corrected temporal edge, unjittered overlay-depth, accepted MetalFX and cooked shader composition on codex/cooked-temporal-metalfx (pins supplied after review; head 0c890514 at preparation is an integration checkpoint, not a grant)",
   "jitter_table_check": "build.py checkout refuses unless the fixture's SAMPLES equal crates/incant_render/src/temporal/jitter.rs at the granted commit"
  },
+ "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
  "base_fixture": {
   "packet": "0072-motion-history-numeric",
   "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
@@ -82,6 +84,7 @@
   "cases": {
    "stationary": {"frames": 33, "ui_submissions": 0,
     "pngs": ["stationary-off.png", "stationary-portable-f08.png", "stationary-native-f16.png", "stationary-native-activity.png"],
+    "checks": ["native_selected_every_frame", "controls_have_no_metalfx_owner", "native_run_uninterrupted_over_two_cycles", "portable_run_uninterrupted", "current_only_run_uninterrupted", "reference_has_no_upscale_state", "frames_match_plan"],
     "steps": [
      {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null},
      {"arm": "current_only", "frames": 8, "sixteenths": 16, "viewport": null},
@@ -91,6 +94,7 @@
     "purpose": "0072 look-dev stage at rest (grazing ground, silhouettes, thin post/wall, receding fence posts, one-texel MASK grille). Two full 8-phase cycles of native frames against same-phase current-only and portable controls. Observations: per-frame Lucas-Kanade registration against the unjittered off frame and its slope on the applied image shift (pixel confirmation of the jitter convention, no sign change), the current-only boundary band where native equals the current-only control, convergence and activity."},
    "motion": {"frames": 34, "ui_submissions": 0,
     "pngs": ["motion-native-f8.png", "motion-portable-f8.png", "motion-off-f8.png", "motion-pan-native-f6.png", "motion-pan-off-f6.png"],
+    "checks": ["native_selected_every_frame", "controls_have_no_metalfx_owner", "object_runs_uninterrupted", "pan_run_uninterrupted", "references_have_no_upscale_state", "frames_match_plan"],
     "steps": [
      {"arm": "native", "preference": "RequireMetalFx", "frames": 8, "sixteenths": 16, "viewport": null, "expect": "native"},
      {"arm": "portable", "frames": 8, "sixteenths": 16, "viewport": null},
@@ -102,6 +106,7 @@
     "purpose": "The bright mover crossing the thin wall and MASK card (about 21 px per frame) for native, portable and current-only owners over identical steps, off references at steps 6-8 to mask the disocclusion trail and its older part; then a native camera pan with parallax and its off reference."},
    "excluded": {"frames": 11, "ui_submissions": 11,
     "pngs": ["excluded-native-f8.png", "excluded-off.png", "excluded-native-activity.png"],
+    "checks": ["native_selected_every_frame", "controls_have_no_metalfx_owner", "native_run_uninterrupted", "portable_run_uninterrupted", "ui_stable_across_jitter_phases_arms_and_off", "scene_has_blend_sprites_and_text", "reference_has_no_upscale_state", "frames_match_plan"],
     "steps": [
      {"arm": "native", "preference": "RequireMetalFx", "frames": 8, "sixteenths": 16, "viewport": null, "expect": "native"},
      {"arm": "portable", "frames": 2, "sixteenths": 16, "viewport": null},
@@ -110,6 +115,7 @@
     "purpose": "0072's excluded scene: accumulating opaque checker under a BLEND card, three sprites and world text that never enter MetalFX input, plus a screen-space UI button after every world frame; UI pixels must stay identical across phases, arms and off."},
    "transitions": {"frames": 18, "ui_submissions": 0,
     "pngs": ["transition-cut-f5.png", "transition-d12-f7.png", "transition-d8-f10.png", "transition-resume-f15.png"],
+    "checks": ["selections_as_planned", "one_owner_through_cut_scales_and_fallback", "view_a_run_uninterrupted", "cut_restarts_history_at_phase_zero", "cut_advances_epoch", "internal_sizes_as_planned", "references_have_no_upscale_state", "frames_match_plan"],
     "steps": [
      {"arm": "native", "preference": "PreferMetalFx", "frames": 4, "sixteenths": 16, "viewport": null, "expect": "native"},
      {"arm": "native", "preference": "PreferMetalFx", "frames": 2, "sixteenths": 16, "viewport": null, "expect": "native", "cut": true},
@@ -123,6 +129,7 @@
     "purpose": "One preferring owner: view A, an explicit cut, fixed 12/16 and 8/16 content scales (native, or an explicit Scale fallback if this device's range excludes them), the fractional 10/16 scale (explicit FractionalViewport fallback) and output scale again. Native resets are inferred from existing observables only."},
    "viewport": {"frames": 12, "ui_submissions": 0,
     "pngs": ["viewport-native-f6.png", "viewport-off.png"],
+    "checks": ["selections_as_planned", "framed_run_uninterrupted", "outside_viewport_matches_off", "half_scale_internal_size", "reference_has_no_upscale_state", "frames_match_plan"],
     "steps": [
      {"arm": "native", "preference": "PreferMetalFx", "frames": 6, "sixteenths": 16, "viewport": "integral", "expect": "native"},
      {"arm": "native", "preference": "PreferMetalFx", "frames": 3, "sixteenths": 8, "viewport": "integral", "expect": "native_or_scale"},
@@ -149,10 +156,11 @@
   "build.py review (root supervises compilation)",
   "gpu.py list review",
   "gpu.py review stationary|motion|excluded|transitions|viewport (this order, one child each)",
-  "analyze.py check, then personal inspection of every retained PNG",
   "gpu.py release",
-  "build.py lint (optional, CPU only, under the lease)",
+  "build.py lint (optional, CPU only, under the lease; a failure exits nonzero and latches stop)",
   "lease.py release",
-  "analyze.py publish"
+  "analyze.py check (requires complete passing evidence and both clean releases; always retains a summary)",
+  "personal inspection of every retained PNG",
+  "analyze.py publish (re-validates; requires the latest summary to be a pass bound to the current evidence)"
  ]
 }
