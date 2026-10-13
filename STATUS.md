@@ -59,8 +59,8 @@ diagnostic failed on hosted Apple Paravirtual Metal after the production timing
 test had correctly completed its unsupported-capability path. The test-only repair
 keeps mandatory backend selection, runs supported timestamp modes, and executes
 checked ordinary compute when queries are absent. Two CPU policy tests and focused
-strict checks pass; independent final review and hosted successor execution remain
-pending. [Failure and repair evidence](docs/spikes/timestamp-diagnostic-capabilities.md).
+strict checks and independent final review pass; required fast checks precede
+merge, and hosted successor execution remains pending. [Failure and repair evidence](docs/spikes/timestamp-diagnostic-capabilities.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -93,7 +93,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–217 changes remain outside that tested baseline. No device, performance or
+Later main206–218 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17

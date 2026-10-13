@@ -314,7 +314,12 @@
     "ignored": 1
   },
   "review": {
-    "source": "Root read and accepted exact patch fa5d3303 in parent message; final evidence review pending"
+    "source": "Root read and accepted exact patch fa5d3303 in parent message; final evidence review pending",
+    "final": {
+      "path": "docs/spikes/evidence/timestamp-diagnostic-capabilities/final-review.json",
+      "sha256": "f083be1fc73bc9ecebd5564a53021f6a6c304db6aef1cc74fe833f0dd18f5dec",
+      "accepted": true
+    }
   },
   "qualification": {
     "gpu": "No new GPU execution. CPU matrix is not actual unsupported-device execution. Successor checkpoint must execute diagnostic on hosted adapter.",

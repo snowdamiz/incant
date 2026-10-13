@@ -31,4 +31,4 @@ or source changed.
 
 [Manifest](evidence/timestamp-diagnostic-capabilities.json),
 [read-only verifier](evidence/timestamp-diagnostic-capabilities/verify.py).
-Final independent evidence review is pending.
+Final independent evidence review is accepted; required fast checks precede merge.

@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-13T11:27:38.390176+00:00",
+  "decision": "Accepted test-only repair; publish after exact required fast check",
+  "head": "1ce508bdff668ccba9a9242d2fbffd436faf4e8c",
+  "manifest_sha256": "d5383d9144d848485ac58827e5edab938f8ecb6c1cb81c32c6eab740b82b2f5d",
+  "patch_sha256": "fa5d3303416728ead36781713cebe1de0b8b5802d1e34004f59a90e1d4b7e029",
+  "source_review": "Read complete patch; optional timestamps gate only relevant query paths; forced backend check remains mandatory; actual integer-work readback in every executed case; absent ticks=null, never fabricatedzero",
+  "independent_verification": "Read full verifier then executed --verify-only successfully:3106sources22records14payloads7commands2CPUcases1GPUignored; exact original hostedParavirtual failure retained",
+  "limits": [
+    "No GPUexecution in this patchqualification",
+    "Existing productionUnsupported+completedordinaryframe is hosted evidence; newdiagnostic unsupportedbranch awaits comprehensiveCI",
+    "No releasecheckremovedorrelaxed; no phaseacceptance"
+  ]
+}
