@@ -3,7 +3,7 @@ use crate::{Renderer, Result};
 
 pub(crate) struct MotionSystem {
     pub(super) globals: wgpu::BindGroupLayout,
-    pipelines: [wgpu::RenderPipeline; 4],
+    pipelines: [wgpu::RenderPipeline; 8],
 }
 const CURRENT: [wgpu::VertexAttribute; 2] = [
     wgpu::VertexAttribute {
@@ -106,13 +106,17 @@ impl MotionSystem {
                 multisample: Default::default(),
                 fragment: Some(wgpu::FragmentState {
                     module: &shader,
-                    entry_point: Some("fragment"),
+                    entry_point: Some(if i < 4 { "fragment" } else { "depth_only" }),
                     compilation_options: Default::default(),
-                    targets: &[Some(wgpu::ColorTargetState {
-                        format: wgpu::TextureFormat::Rgba32Float,
-                        blend: None,
-                        write_mask: wgpu::ColorWrites::ALL,
-                    })],
+                    targets: if i >= 4 {
+                        &[]
+                    } else {
+                        &[Some(wgpu::ColorTargetState {
+                            format: wgpu::TextureFormat::Rgba32Float,
+                            blend: None,
+                            write_mask: wgpu::ColorWrites::ALL,
+                        })]
+                    },
                 }),
                 multiview_mask: None,
                 cache: None,
@@ -120,12 +124,19 @@ impl MotionSystem {
         });
         Self { globals, pipelines }
     }
-    pub(super) fn pipeline(&self, double_sided: bool, mirrored: bool) -> wgpu::RenderPipeline {
-        self.pipelines[usize::from(mirrored) + 2 * usize::from(double_sided)].clone()
+    pub(super) fn pipeline(
+        &self,
+        double_sided: bool,
+        mirrored: bool,
+        depth_only: bool,
+    ) -> wgpu::RenderPipeline {
+        self.pipelines
+            [usize::from(mirrored) + 2 * usize::from(double_sided) + 4 * usize::from(depth_only)]
+        .clone()
     }
 }
 impl Renderer {
-    /// Startup-only opt-in. Creates four fixed pipelines; ordinary draw_scene
+    /// Startup-only opt-in. Creates four motion and four overlay-depth pipelines; ordinary draw_scene
     /// remains stateless. Enable history separately on a retained owner/host.
     pub async fn enable_motion_vectors(&mut self) -> Result<()> {
         super::admission()?;

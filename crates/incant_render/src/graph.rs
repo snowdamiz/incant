@@ -227,6 +227,7 @@ struct ModelsPlan {
     motion: bool,
     opaque: bool,
     temporal: bool,
+    overlay_depth: bool,
     transparent: bool,
     all: bool,
 }
@@ -236,14 +237,20 @@ impl ModelsPlan {
             motion,
             opaque: temporal && opaque,
             temporal,
+            overlay_depth: false,
             transparent: temporal && transparent,
             all: !temporal && models,
         }
+    }
+    fn with_overlay_depth(mut self, active: bool) -> Self {
+        self.overlay_depth = self.temporal && self.motion && active;
+        self
     }
     fn count(&self) -> usize {
         usize::from(self.motion)
             + usize::from(self.opaque)
             + 2 * usize::from(self.temporal)
+            + usize::from(self.overlay_depth)
             + usize::from(self.transparent)
             + usize::from(self.all)
     }
@@ -255,7 +262,8 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         frame.models.is_some(),
         frame.models.as_ref().is_some_and(|m| m.has_opaque()),
         frame.models.as_ref().is_some_and(|m| m.has_transparent()),
-    );
+    )
+    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()));
     if plan.count() == 0 {
         return;
     }
@@ -285,6 +293,13 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
                 .as_ref()
                 .unwrap()
                 .encode(encoder, timestamp(), timestamp());
+        }
+        if plan.overlay_depth {
+            frame
+                .motion
+                .as_ref()
+                .unwrap()
+                .encode_overlay_depth(encoder, timestamp());
         }
         if plan.transparent {
             frame
@@ -374,6 +389,25 @@ fn temporal_models_interval_counts_motion_and_each_real_resolve_overlay_pass() {
                     assert_eq!(operations.into_iter().filter(|b| *b).count(), p.count());
                     assert!(!p.all || (!p.opaque && !p.transparent && !p.temporal));
                 }
+            }
+        }
+    }
+}
+
+#[cfg(test)]
+#[test]
+fn overlay_depth_is_counted_only_when_history_and_actual_overlays_exist() {
+    for motion in [false, true] {
+        for temporal in [false, true] {
+            for overlays in [false, true] {
+                let base = ModelsPlan::new(motion, temporal, true, true, overlays);
+                let before = base.count();
+                let p = base.with_overlay_depth(overlays);
+                assert_eq!(p.overlay_depth, motion && temporal && overlays);
+                assert_eq!(
+                    p.count(),
+                    before + usize::from(motion && temporal && overlays)
+                );
             }
         }
     }

@@ -214,3 +214,100 @@ fn scene_linear_convex_history_clamps_reacts_and_preserves_constant_fields_and_c
     let clipped = blend(current, [2., 2., 2., 1.], lo, hi, c);
     assert_eq!(clipped, [0.75, 0.75, 0.75, 1.]);
 }
+
+#[test]
+fn compatible_positive_history_support_renormalizes_phase_edges_without_aliasing_disocclusion() {
+    use super::oracle::gather;
+    let color = [0.25, 4., 65504., 1.];
+    let good = (color, 10., 1., true);
+    let zero_bad = ([f64::NAN; 4], 1., 0., true);
+    assert_eq!(
+        gather([good, zero_bad, zero_bad, zero_bad], 10.),
+        Some(color)
+    );
+    for old in jitter::SAMPLES {
+        for current in jitter::SAMPLES {
+            let delta = [
+                f64::from(old[0] - current[0]),
+                f64::from(old[1] - current[1]),
+            ];
+            let f = delta.map(|v| v - v.floor());
+            let weights = [
+                (1. - f[0]) * (1. - f[1]),
+                f[0] * (1. - f[1]),
+                (1. - f[0]) * f[1],
+                f[0] * f[1],
+            ];
+            // Every edge orientation and nonempty surviving subset, including thin
+            // one-tap surfaces, preserves a constant finite radiance exactly.
+            for mask in 1..16 {
+                let taps = std::array::from_fn(|i| {
+                    (
+                        color,
+                        if mask & (1 << i) != 0 { 10. } else { 2. },
+                        weights[i],
+                        true,
+                    )
+                });
+                let got = gather(taps, 10.);
+                if (0..4).any(|i| mask & (1 << i) != 0 && weights[i] > 0.) {
+                    for (a, b) in got.unwrap().into_iter().zip(color) {
+                        assert!((a - b).abs() < 1e-9);
+                    }
+                } else {
+                    assert!(got.is_none());
+                }
+            }
+        }
+    }
+    for bad in [
+        ([0.; 4], 10., 1., true),
+        (color, 2., 1., true),
+        (color, 10., 1., false),
+        (color, f64::NAN, 1., true),
+        (color, 10., f64::NAN, true),
+        (color, 10., -0.5, true),
+    ] {
+        assert!(gather([bad; 4], 10.).is_none());
+        assert_eq!(gather([good, bad, zero_bad, zero_bad], 10.), Some(color));
+    }
+}
+#[test]
+fn excluded_camera_and_presented_grid_are_independent_of_all_jitter_phases() {
+    use crate::camera::CameraView;
+    for ortho in [false, true] {
+        let mut camera = CameraView::preview();
+        if ortho {
+            camera.orthographic_half_height = Some(5.);
+        }
+        for rect in [[3.25, 5.5, 65., 33.], [0., 0., 32.5, 16.5]] {
+            let base = camera.matrix(rect[2] / rect[3]).unwrap();
+            for phase in 0..8 {
+                let mut shifted = camera;
+                shifted.jitter = jitter::ndc(phase, rect);
+                shifted.jitter_guard = jitter::guard(rect);
+                let overlay = shifted.unjittered();
+                assert_eq!(overlay.matrix(rect[2] / rect[3]).unwrap(), base);
+                assert_eq!(overlay.jitter_guard, [0.; 2]);
+                for point in [glam::Vec3::ZERO, glam::Vec3::X, glam::Vec3::Y] {
+                    let projected = base.project_point3(point);
+                    let raster = shifted
+                        .matrix(rect[2] / rect[3])
+                        .unwrap()
+                        .project_point3(point);
+                    let jitter = glam::Vec2::from(jitter::SAMPLES[phase as usize]);
+                    let pixel = |v: glam::Vec3| {
+                        glam::Vec2::new(
+                            rect[0] + (v.x * 0.5 + 0.5) * rect[2],
+                            rect[1] + (0.5 - v.y * 0.5) * rect[3],
+                        )
+                    };
+                    // Presentation reads raster(p+j); rasterized surface also
+                    // moves +j. Reversing either sign fails all nonzero phases.
+                    assert!((pixel(projected) + jitter - pixel(raster)).length() < 1e-4);
+                    assert!((raster.z - projected.z).abs() < 1e-6);
+                }
+            }
+        }
+    }
+}

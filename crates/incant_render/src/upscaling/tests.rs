@@ -138,8 +138,11 @@ fn positive_normalized_reconstruction_rejects_outside_history_and_preserves_line
             assert!((got - value).abs() < 1e-10);
         }
     }
-    // Outside history taps must reject; clamping can alias unrelated edge pixels.
-    assert!(taps([1.26, 3.1], rect).is_none());
+    // An outside tap contributes nothing; surviving support can renormalize.
+    // The point itself must remain in the viewport and cannot clamp into it.
+    let partial = taps([1.26, 3.1], rect).unwrap();
+    assert!(partial.iter().any(|(_, w)| *w == 0.));
+    assert!(partial.iter().any(|(_, w)| *w > 0.));
     assert!(taps([-10., 3.1], rect).is_none());
     assert!(taps([f64::NAN, 3.1], rect).is_none());
 }

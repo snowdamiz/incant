@@ -39,15 +39,21 @@ fn compatible(d:f32, expected:f32)->bool {
     let hi=vec2i(ceil(end-vec2f(0.5)))-vec2i(1);
     if any(hi<lo) { return c; }
     let q=old-vec2f(0.5); let base=vec2i(floor(q)); let f=fract(q);
-    var h=vec4f(0.0);
+    var h=vec4f(0.0); var mass=0.0;
     for(var y=0;y<2;y++) { for(var x=0;x<2;x++) {
-        let tap=clamp(base+vec2i(x,y),lo,hi);
+        let wx=select(1.0-f.x,f.x,x==1); let wy=select(1.0-f.y,f.y,y==1);
+        let weight=wx*wy; if !(weight>0.0) {continue;}
+        let tap=base+vec2i(x,y);
+        if any(tap<lo) || any(tap>hi) {continue;}
         let d=textureLoad(previous_depth,tap,0);
         let color=textureLoad(previous_color,tap,0);
-        if !compatible(d,m.z) || !finite4(color) || color.a<1.0 { return c; }
-        let wx=select(1.0-f.x,f.x,x==1); let wy=select(1.0-f.y,f.y,y==1);
-        h+=clean(color)*(wx*wy);
+        if !compatible(d,m.z) || !finite4(color) || any(color<vec4f(0.0)) || color.a!=1.0 {continue;}
+        h+=clean(color)*weight; mass+=weight;
     }}
+    // Reject disocclusion only when no finite, covered, depth-compatible support
+    // survives. Never borrow clamped outside history or divide by zero.
+    if !(mass>0.0) {return c;}
+    h=clean(h/mass);
     var minimum=c; var maximum=c;
     for(var y=-1;y<=1;y++) { for(var x=-1;x<=1;x++) {
         let tap=clamp(pixel+vec2i(x,y),lo,hi);

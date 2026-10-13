@@ -42,16 +42,18 @@ struct Resolved { @location(0) color:vec4f, @location(1) depth:f32 }
     let old=frame.output.xy+(u+frame.jitter.xy+m.xy-frame.jitter.zw)*frame.output.zw;
     if !inside(old,frame.output) {return result;}
     let oldq=old-vec2f(0.5);let oldbase=vec2i(floor(oldq));let oldf=fract(oldq);
-    var history=vec4f(0.0);
+    var history=vec4f(0.0); var mass=0.0;
     for(var y=0;y<2;y++) {for(var x=0;x<2;x++) {
-        let weight=tap_weight(oldf,x,y);if weight<=0.0 {continue;}
+        let weight=tap_weight(oldf,x,y);if !(weight>0.0) {continue;}
         let tap=oldbase+vec2i(x,y);
         // Do not clamp an outside previous tap into plausible edge history.
-        if any(tap<lo(frame.output)) || any(tap>hi(frame.output)) {return result;}
+        if any(tap<lo(frame.output)) || any(tap>hi(frame.output)) {continue;}
         let c=textureLoad(previous_color,tap,0);let z=textureLoad(previous_depth,tap,0).x;
-        if !admitted(c) || c.a<1.0 || !compatible(z,expected) {return result;}
-        history+=clean(c)*weight;
+        if !admitted(c) || c.a<1.0 || !compatible(z,expected) {continue;}
+        history+=clean(c)*weight; mass+=weight;
     }}
+    if !(mass>0.0) {return result;}
+    history=clean(history/mass);
     var minimum=result.color;var maximum=result.color;
     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
         let tap=clamp(anchor+vec2i(x,y),lo(frame.source),hi(frame.source));

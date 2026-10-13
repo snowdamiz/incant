@@ -172,6 +172,13 @@ fn portable_motion_shader_validates_and_uses_canonical_mask_contract() {
     )
     .validate(&module)
     .unwrap();
+    assert_eq!(source.matches("mask(in);").count(), 2);
+    assert!(
+        module
+            .entry_points
+            .iter()
+            .any(|e| e.name == "depth_only" && e.stage == naga::ShaderStage::Fragment)
+    );
     let canonical = include_str!("../model_material.wgsl");
     for line in [
         "struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec4u }",

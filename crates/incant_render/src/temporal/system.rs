@@ -96,7 +96,19 @@ impl TemporalSystem {
         });
         let copy_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Temporal copy"),
-            entries: &[texture(0, false)],
+            entries: &[
+                texture(0, false),
+                wgpu::BindGroupLayoutEntry {
+                    binding: 1,
+                    visibility: wgpu::ShaderStages::FRAGMENT,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Uniform,
+                        has_dynamic_offset: false,
+                        min_binding_size: wgpu::BufferSize::new(64),
+                    },
+                    count: None,
+                },
+            ],
         });
         Self {
             resolve: pipeline(device, &layout, include_str!("resolve.wgsl"), "resolve"),
@@ -119,6 +131,11 @@ impl TemporalSystem {
             .as_ref()
             .expect("admitted temporal motion surfaces");
         let c = pending.config;
+        let jitter = pending
+            .input
+            .frame
+            .jitter_phase()
+            .map_or([0.; 2], |phase| super::jitter::SAMPLES[phase as usize]);
         let uniform = Frame {
             rect: pending.input.rect,
             depth: [
@@ -133,7 +150,7 @@ impl TemporalSystem {
                 c.absolute_depth,
                 c.reactive_threshold,
             ],
-            reactive: [c.reactive_strength, 0., 0., 0.],
+            reactive: [c.reactive_strength, jitter[0], jitter[1], 0.],
         };
         let uniform = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Temporal resolve frame"),
@@ -171,10 +188,16 @@ impl TemporalSystem {
         let copy = device.create_bind_group(&wgpu::BindGroupDescriptor {
             label: Some("Temporal copy frame"),
             layout: &self.copy_layout,
-            entries: &[wgpu::BindGroupEntry {
-                binding: 0,
-                resource: wgpu::BindingResource::TextureView(history),
-            }],
+            entries: &[
+                wgpu::BindGroupEntry {
+                    binding: 0,
+                    resource: wgpu::BindingResource::TextureView(history),
+                },
+                wgpu::BindGroupEntry {
+                    binding: 1,
+                    resource: uniform.as_entire_binding(),
+                },
+            ],
         });
         Some(TemporalDraw {
             resolve,

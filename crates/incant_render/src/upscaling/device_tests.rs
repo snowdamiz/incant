@@ -80,7 +80,7 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
         mapped_at_creation: false,
     });
-    for mode in 0..14 {
+    for mode in 0..19 {
         let mut current = vec![[0.5, 0.5, 0.5, 1.]; 16];
         current[4] = [0., 0., 0., 1.];
         current[1] = [1.; 4];
@@ -99,6 +99,9 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         if mode == 13 {
             current.fill([2., 0.5, 100., 1.]);
         }
+        if mode >= 16 {
+            current.fill([0.5, 0.5, 0.5, 1.]);
+        }
         let old_value = if mode == 6 {
             [20., 20., 20., 1.]
         } else if mode == 10 {
@@ -108,10 +111,16 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         } else {
             [0.25, 0.25, 0.25, 1.]
         };
-        let old = source(&vec![old_value; 64], 8);
+        let mut old_values = vec![old_value; 64];
+        if mode == 14 {
+            old_values[3 * 8 + 4] = [f32::NAN, 0., 0., 1.];
+        }
+        let old = source(&old_values, 8);
         let current = source(&current, 4);
         let movement = if mode == 3 {
             2.
+        } else if mode == 15 {
+            0.5 / 6.
         } else if mode == 11 {
             f32::NAN
         } else {
@@ -123,13 +132,25 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
         } else {
             1. / (0.5 / 0.1 + 0.5 / 100.)
         };
-        let old_depth = source(&vec![[if mode == 2 { 10. } else { z }, 0., 0., 0.]; 64], 8);
+        let mut depths = vec![[if mode == 2 { 10. } else { z }, 0., 0., 0.]; 64];
+        if mode == 15 {
+            depths[3 * 8 + 4][0] = 10.;
+        }
+        let old_depth = source(&depths, 8);
         let over = if mode == 7 {
             [0.1, 0.05, 0., 0.5]
         } else {
             [0.; 4]
         };
-        let overlay = source(&vec![over; 16], 4);
+        let mut over_values = vec![over; 16];
+        if mode >= 16 {
+            for y in 0..4 {
+                for x in 0..4 {
+                    over_values[y * 4 + x] = [0.02 * x as f32 + 0.03 * y as f32, 0., 0., 0.5];
+                }
+            }
+        }
+        let overlay = source(&over_values, 4);
         let frame = Frame {
             source: [0.5, 0.5, 3., 3.],
             output: [1., 1., 6., 6.],
@@ -137,11 +158,17 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                 0.1,
                 100.,
                 f32::from(u8::from(mode == 1)),
-                f32::from(u8::from(mode != 12)),
+                f32::from(u8::from(mode != 12 && mode < 16)),
             ],
             options: [0.5, 0.001, 0.001, 1.],
             reactive: [f32::from(u8::from(mode == 6)), 0., 0., 0.],
-            jitter: [0.; 4],
+            jitter: if mode == 16 {
+                [0.125, -0.125, 0., 0.]
+            } else if mode == 17 {
+                [-0.125, 0.125, 0., 0.]
+            } else {
+                [0.; 4]
+            },
         };
         let uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: None,
@@ -215,12 +242,17 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
             .unwrap();
         let mapped = read.slice(..).get_mapped_range();
         let history = match mode {
-            0 | 1 | 7 => [0.375, 0.375, 0.375, 1.],
+            0 | 1 | 7 | 14 | 15 => [0.375, 0.375, 0.375, 1.],
             4 | 9 => [0.; 4],
             5 => [0.2, 0.1, 0., 0.5],
             8 => [0., 0.5, 0.5, 1.],
             13 => [2., 0.5, 100., 1.],
             _ => [0.5, 0.5, 0.5, 1.],
+        };
+        let over = if mode >= 16 {
+            [0.0625, 0., 0., 0.5]
+        } else {
+            over
         };
         for (index, expected) in [
             history,
