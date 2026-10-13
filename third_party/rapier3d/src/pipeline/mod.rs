@@ -47,3 +47,7 @@ mod user_changes;
 
 #[cfg(all(feature = "debug-render", feature = "alloc"))]
 mod debug_render_pipeline;
+
+/// Experimental checked numeric admission only; no native restore constructor.
+#[cfg(feature = "incant-checked-restore")]
+pub mod checked_restore;

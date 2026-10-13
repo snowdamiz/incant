@@ -16,6 +16,21 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native physics numerical admission — main227 CPU qualification
+
+A default-off pinned-kernel preflight checks primitive mass/pose/extent and
+historical fixed-target CCD AABB coherence without constructing live owners.
+It preserves float bits, applies native force arithmetic, and charges a checked
+cumulative logical work model. Both 214-case deterministic/fast8 suites and
+scoped strict Clippy, wasm, dependency and formatting checks pass. Independent
+source and final producer reviews are accepted. Current main227 rebuilt suites
+also pass 214 cases per mode and all fifteen scoped checks; final integration
+review is independently accepted, with the required fast check still pending. [Current composition](docs/spikes/physics-numerics-main227.md).
+Whole-solver derived
+arithmetic, exact private construction, capture authentication and stable IDs/
+events remain required; `PhysicsUnsupported` is unchanged.
+[Scope and evidence](docs/spikes/physics-native-admission.md).
+
 ## Joined physics owner boundary — source and CPU qualification accepted
 
 The [joined inert frame](docs/spikes/physics-world-boundary.md) composes 22
@@ -29,7 +44,7 @@ removal/reuse and CCD controls. Both 202-case CPU modes, ten parallel controls
 and all ten scoped checks pass. Source and final producer evidence reviews are
 accepted; current-main composition passes 202 CPU cases in each numerical mode, ten
 two-worker controls each and thirteen scoped checks. Final composition review is
-independently accepted; the required fast publication check remains. [Current composition](docs/spikes/physics-world-main225.md).
+independently accepted; PR227 merged after the required fast check. [Current composition](docs/spikes/physics-world-main225.md).
 Derived geometry/mass/work admission, authenticated capture and the
 whole native constructor remain required. `PhysicsUnsupported` is unchanged.
 
@@ -172,11 +187,11 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main226, 2026-10-13
+## Current overview — main227, 2026-10-13
 
-Development main226 includes the reviewed opt-in cooked renderer families and
+Development main227 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
-profiling scopes and inert physics island validation. Each lane retains its own
+profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
 Checkpoint24 is frozen at exact main226 through PR213, candidate `669bd7ae`,
@@ -195,7 +210,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–226 changes remain outside that tested baseline. No device, performance or
+Later main206–227 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
