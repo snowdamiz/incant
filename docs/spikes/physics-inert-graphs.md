@@ -76,7 +76,7 @@ Initial Clippy reported iterator-style lints after all tests passed. That source
 and raw failure are retained; equivalent `find`/head enumeration corrections are
 in freeze002. The final full test run, all-target Clippy, normal wasm32 compile,
 std-only and physics runtime dependency checks, formatting and conventions all
-pass. Independent review is pending. The lockfile and dependencies are
+pass. Independent producer review is accepted. The lockfile and dependencies are
 byte-unchanged. [Evidence](evidence/physics-inert-graphs.json) retains both
 iterations and command outputs.
 

@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main195, 2026-10-13
+## Current overview — main196, 2026-10-13
 
-Development main195 includes the restart quota-test repair (PR188) and the reviewed,
+Development main196 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -44,8 +44,8 @@ admission checks pass; six actual Android callers remain producer-scoped.
 Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
-Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
-their queued GPU/appearance checks remain open. CPU profiling has accepted producer
+Dynamic resolution now has accepted producer Metal evidence; current-main integration
+is queued with cooked clusters. GPU timestamp execution remains pending. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
 independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
@@ -61,7 +61,7 @@ appearance or device acceptance is inferred. See [Core result evidence](docs/spi
 The next inert format preserves node/edge order and validates both linked
 adjacency sides, reciprocal links, complete coverage and dense payload mappings.
 Forty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
-2D/3D native swap-removal order observations. Independent review is pending. Contact/payload/solver ownership
+2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass and final integration review is pending. Contact/payload/solver ownership
 and full native composition remain required; no live restore or physics-save
 admission is enabled. [Graph contract](docs/spikes/physics-inert-graphs.md).
 
@@ -99,7 +99,7 @@ Clippy pass; independent source review is accepted. Additional Miri experiments
 remain unsuccessful due to Crossbeam diagnostics and are recorded separately.
 This does not enable persisted physics saves, complete a dependency soundness
 audit, or establish a performance gain.
-[Producer scope](docs/spikes/parry-parallel-ownership.md). The current-main195 union passes 18 CPU cases in each physics mode, all-target Clippy, browser/script checks and four isolated patched dependency graphs. Actual source-change/restore controls verify runtime identity invalidation for both Parry and the optional profiler. [Integration evidence](docs/spikes/parry-main195.md) has independent final acceptance; publication follows the required fast check. No physics-save admission is enabled.
+[Producer scope](docs/spikes/parry-parallel-ownership.md). The current-main195 union passes 18 CPU cases in each physics mode, all-target Clippy, browser/script checks and four isolated patched dependency graphs. Actual source-change/restore controls verify runtime identity invalidation for both Parry and the optional profiler. [Integration evidence](docs/spikes/parry-main195.md) has independent final acceptance and is merged in PR196 after its exact-head fast check. No physics-save admission is enabled.
 
 ## Cooked renderer integration — CPU checks complete
 
