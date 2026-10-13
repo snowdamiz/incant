@@ -1,3 +1,30 @@
+# Priority revision: retry GPU-only execution after root's admission repair
+
+The preceding attempt was refused before any lease, child or frame because root's
+new brief was included in the old all-file inventory. Preserve gpu-result.md and
+its attempt-001 evidence unchanged. Root corrected only gpu_only.py at f81e1a18:
+all compiled inputs and original tools remain frozen, while this root-owned brief
+is bound to the fresh authority. Seven guard tests and the complete live input
+preflight pass. The authority rejects stale brief bytes explicitly.
+
+This is a fresh authorized attempt. Use Claude Opus 5.5 with explicitly verified
+Max. The sole GPU interval is assigned to 0069. Read the fresh authority at
+/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready-002.json.
+Wrapper SHA256: 0cf379927af6ace42f8ef5d76b5249f455aa759690e0cdffa00911710bd77914. Do not use the previous authority.
+Run exactly once in the foreground:
+
+    python3 -B handoffs/0069-core-result-presentation/gpu_only.py run --evidence /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-002 --authority /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready-002.json
+
+The original eight regressions and ten capture processes, 39 tiny regression
+frames and 22 appearance frames, remain unchanged. No build or source edits.
+After successful execution verify release and inspect every image personally;
+write gpu-result-002.md and a separate provenance manifest with your actual
+appearance verdict. Preserve earlier evidence. If failure occurs, retain and
+report it after cleanup; do not retry or alter gates. Commit only new packet
+results with Built-by: claude. All other prior scoped execution limits apply.
+
+---
+
 # Priority revision: execute the accepted generation-5 GPU-only review
 
 This revision supersedes the earlier preparation-only restrictions for this invocation.
