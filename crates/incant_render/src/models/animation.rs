@@ -524,6 +524,55 @@ pub(super) fn motion_test_vertex(binding: Binding, instances: &[Instance]) -> Op
         .geometry
         .map(|i| instances[binding.instance].geometry[i].vertices[0])
 }
+/// Stable logical animation placement key, shared by the handedness twins.
+pub(super) fn motion_owner_key(binding: Binding) -> [usize; 3] {
+    [
+        binding.instance,
+        binding.model_node,
+        binding.geometry.unwrap_or(usize::MAX),
+    ]
+}
+/// Compare already accepted/staged palettes, not the clip label, time, a hash or
+/// a resample. Skinned vertices are model-space, so their exact joint palette is
+/// the relevant deformation identity. Unknown palette access is conservative.
+pub(super) fn motion_pose_unchanged(
+    binding: Binding,
+    live: &[Instance],
+    staged: &[Instance],
+) -> bool {
+    let (Some(a), Some(b)) = (live.get(binding.instance), staged.get(binding.instance)) else {
+        return false;
+    };
+    if !Arc::ptr_eq(&a.model, &b.model) {
+        return false;
+    }
+    let equal = |a: DMat4, b: DMat4| {
+        a.to_cols_array().map(f64::to_bits) == b.to_cols_array().map(f64::to_bits)
+    };
+    if binding.geometry.is_none() {
+        return equal(
+            a.player.globals()[binding.model_node],
+            b.player.globals()[binding.model_node],
+        );
+    }
+    let Some(skin) = model(&a.model._source)
+        .animation
+        .as_ref()
+        .and_then(|data| data.node_skins[binding.model_node])
+    else {
+        return false;
+    };
+    same_joint_palette(&a.player, &b.player, skin)
+}
+fn same_joint_palette(a: &AnimationPlayer, b: &AnimationPlayer, skin: usize) -> bool {
+    let (Ok(a), Ok(b)) = (a.joint_palette(skin), b.joint_palette(skin)) else {
+        return false;
+    };
+    a.len() == b.len()
+        && a.iter().zip(b).all(|(a, b)| {
+            a.to_cols_array().map(f64::to_bits) == b.to_cols_array().map(f64::to_bits)
+        })
+}
 pub(super) fn motion_node(binding: Binding, instances: &[Instance]) -> usize {
     instances[binding.instance].input_node
 }

@@ -1,0 +1,631 @@
+{
+  "schema": "incant-temporal-owner-main225-v1",
+  "tested_head": "9e9abec425033c59b9691503448d14d190a95780",
+  "source_ancestry": "11ce57b5877e70fe9e839d5fe10795355307d567",
+  "main": "d62976cc5adc740b5b0541abcbfd59d4069b4a45",
+  "producer": "af7efed1a89f51e33bfc2fa75f2da046b428dcf5",
+  "summary": {
+    "frozen_inputs": 3145,
+    "current_source_paths": 8,
+    "checks": 12,
+    "prior_failure_preserved": true,
+    "counts": {
+      "default-cpu": {
+        "passed": 143,
+        "failed": 0,
+        "ignored": 103,
+        "groups": 10,
+        "nonempty_groups": 7
+      },
+      "cooked-cpu": {
+        "passed": 172,
+        "failed": 0,
+        "ignored": 103,
+        "groups": 10,
+        "nonempty_groups": 7
+      }
+    },
+    "cpu_suites_overlap": true,
+    "producer_records": 56,
+    "producer_payloads": 54,
+    "producer_binaries": 8,
+    "current_binaries": 4,
+    "current_gpu_execution": false,
+    "private_ancestry_included": false
+  },
+  "source_map": {
+    "base": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+    "producer": "af7efed1a89f51e33bfc2fa75f2da046b428dcf5",
+    "patch_sha256": "ee4971ccea816c4fb7cb2c111ae8b890a39373b809d33f694691b9f1d16f743d",
+    "files": [
+      {
+        "path": "crates/incant_render/src/animation_tests.rs",
+        "sha256": "395d70f9e20bd7f0813c8346828e728a762ed08fa64cccad15700c064fd12872",
+        "expected_pure_patch": true
+      },
+      {
+        "path": "crates/incant_render/src/models/animation.rs",
+        "sha256": "e81ead690374ffb6c30ae5d973b77d1da36865553e8ef8a605cc396d401f5a17",
+        "expected_pure_patch": true
+      },
+      {
+        "path": "crates/incant_render/src/motion/mod.rs",
+        "sha256": "78d41cee47cc4e16dd12bb48cd9b2a60c1fa10d76ab6686b3ca49f5dc9443acf",
+        "expected_pure_patch": true
+      },
+      {
+        "path": "crates/incant_render/src/motion/provenance.rs",
+        "sha256": "8c9cc56d37593c5f76da2456c79b4f63eea0d9a9bcf4b8f74c6994c9572780e6",
+        "expected_pure_patch": true
+      },
+      {
+        "path": "crates/incant_render/src/motion/provenance_tests.rs",
+        "sha256": "1e250ac47d3da6ebd618203096d8460a4341edd95475d706972df8e8c70d06a1",
+        "expected_pure_patch": true
+      },
+      {
+        "path": "crates/incant_render/src/motion/retained.rs",
+        "sha256": "d0bcbf8030a23a0a90f50a832a5dae51c09bb6cd58eebdb374fc638333a349d1",
+        "expected_pure_patch": true
+      },
+      {
+        "path": "crates/incant_render/src/motion_device_tests.rs",
+        "sha256": "44f86de845d637076ee097e1caf43074d77b8b302f3c0353dc1a7f891510c4c0",
+        "expected_pure_patch": true
+      },
+      {
+        "path": "crates/incant_render/src/retained.rs",
+        "sha256": "bd7a174f0878da2656acccfd1c15d652f8710e2673a49d7836562dd54ea11b55",
+        "expected_pure_patch": true
+      }
+    ],
+    "private_ancestry_included": false
+  },
+  "current_main_exemptions": [
+    {
+      "path": "crates/incant_cmd/src/agent_budget_replay_tests.rs",
+      "tested_sha256": "3cd27afc6691ada417c9997b6acd4cf5909eb6f4a4f581b93e3f3bdc84078a82",
+      "current_sha256": "9493228ccfec0a0181c41ef8ff10c6ceea6fcef8dd2b9dfaa8bddbcfed9760e2"
+    }
+  ],
+  "checks": [
+    {
+      "name": "scoped-halo-dependency-clean",
+      "argv": [
+        "./tools/cargo",
+        "clean",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_text",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_ui"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 60212,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.1616255840053782,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/scoped-halo-dependency-clean.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/scoped-halo-dependency-clean.stderr",
+        "sha256": "b15937d9d77d4702df6d9f6fe4ab755310268380a1f2d95e1e0cbc06e8066cd2"
+      }
+    },
+    {
+      "name": "default-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--message-format=json"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 60218,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 30.64071174999117,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/default-cpu.stdout",
+        "sha256": "29d8d92654337c21d7162fb949dc5cb7017140ed229074f6b9896b518f47144c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/default-cpu.stderr",
+        "sha256": "df0b0295f300a74d67d61c5abf091ba8150a550b251d605d69d742c67ebe5451"
+      }
+    },
+    {
+      "name": "default-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 60495,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 6.435683415998938,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/default-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/default-clippy.stderr",
+        "sha256": "a6ab8b2c08a245e0f5b0fe342e9a6743616961c659e9ceaf62524b33381dd23d"
+      }
+    },
+    {
+      "name": "cooked-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--all-targets",
+        "--message-format=json"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 60589,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 20.761532707998413,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/cooked-cpu.stdout",
+        "sha256": "9c4b9af43460d3702a89ce84d0deda2a6b6953c56fbdae6e2ab500c8aed976de"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/cooked-cpu.stderr",
+        "sha256": "af19c8143ed8f7e1422e0f4e70ac1169b0fefe07194f0d09090db47121ef8b0b"
+      }
+    },
+    {
+      "name": "cooked-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 60846,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 2.913508166995598,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/cooked-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/cooked-clippy.stderr",
+        "sha256": "c5a2c0d86c69c7cca67d4f456b9c082900ece02647c2346708a1f0c92b3e84d3"
+      }
+    },
+    {
+      "name": "wasm",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 60901,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.88795466600277,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/wasm.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/wasm.stderr",
+        "sha256": "2fbc4472312d4b860e254ac5ef3b370b4feaf87670893c5d676593986e8108ae"
+      }
+    },
+    {
+      "name": "native-window-consumer",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--features",
+        "native-window"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 60930,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 26.631065166991903,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/native-window-consumer.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/native-window-consumer.stderr",
+        "sha256": "fe7c9d4d408ab6651b3bacae2829633d515914629b65ee0b13996c86efc198a8"
+      }
+    },
+    {
+      "name": "normal-graph",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--edges",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 61187,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.15092858400021214,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/normal-graph.stdout",
+        "sha256": "b8e3432d76b8a346be13ab30100e84c3db8e0d277a372327a6a7ef735da3c9fe"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/normal-graph.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "runtime-guard",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host",
+        "incant_game_player"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 61191,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.393469083996024,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/runtime-guard.stdout",
+        "sha256": "7284772f7a35ae60ace11db993d3bbb863b95b5c88e368a678400e7efbe09bf8"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/runtime-guard.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 61196,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.295098082991899,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 61202,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.0308547080057906,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+        "HEAD"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 61203,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.013213749989517964,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "initial_attempt": [
+    {
+      "name": "scoped-clean",
+      "argv": [
+        "./tools/cargo",
+        "clean",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 58634,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.46561279200250283,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-001/scoped-clean.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-001/scoped-clean.stderr",
+        "sha256": "4bf4beb6cf8e3f89b90346e6e1bc426a032d0434fce9f4f3d9c60b1d8d513c23"
+      }
+    },
+    {
+      "name": "default-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--message-format=json"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 58642,
+      "exit": 101,
+      "reaped": true,
+      "seconds": 35.016502999991644,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-001/default-cpu.stdout",
+        "sha256": "6d54d990f5e55709999191464fd25c2ba009b0f54800490291abf310d3cbc1bc"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-001/default-cpu.stderr",
+        "sha256": "5c4612e7713beac7d6e3a7271b2806a7ad18ceef6f4c6cd8dc2eaff7229a5a71"
+      }
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/binaries/default-incant_render_gpu_host-a9cdd36a5770c63d",
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render_gpu_host-a9cdd36a5770c63d",
+      "sha256": "6f6b94d684bf49921556a5e11813306764dbb80a465f3a87f6ee0e5e6b16a545",
+      "bytes": 1075272,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/binaries/default-incant_render-22e79461d579ebd9",
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-22e79461d579ebd9",
+      "sha256": "c4ff7ae1c032cb86916751d0fa7aac09fbc01cb2cc749be543f72fb29bd9093a",
+      "bytes": 32036000,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/binaries/cooked-incant_render_gpu_host-285635f9ccb95b1e",
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render_gpu_host-285635f9ccb95b1e",
+      "sha256": "a2d1edb5a6d7581e51f8cde00203fbea319c312ac38fe4061811b2adaa456ecb",
+      "bytes": 1075272,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/temporal-owner-main224-002/binaries/cooked-incant_render-b937fdf83ffb6d22",
+      "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-b937fdf83ffb6d22",
+      "sha256": "627a24546c4c8ba872e7eca7f930646cd469cac5250a8e0a338c6b14deb6c376",
+      "bytes": 32663824,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-owner-main225/records.json.gz",
+    "sha256": "a3dc24f230fd36a88689408b2979d462bc04027f5bdec167cdb72e82af591868",
+    "bytes": 394877,
+    "records": 38,
+    "payloads": 24
+  },
+  "freeze": {
+    "path": "docs/spikes/evidence/temporal-owner-main225/freeze.json",
+    "sha256": "fcb86733ddd1ca01ba3974e788e55cf58226e44f850b71cb4df79c7232e46424"
+  },
+  "producer_manifest": {
+    "path": "docs/spikes/evidence/temporal-owner-provenance.json",
+    "sha256": "ba95b3a89224ef20c1e3a614865e22294d4a0bb6003f973d6542a891d0daba49"
+  },
+  "review_state": "Independent root final review accepted; required fast check pending",
+  "limits": [
+    "CPU foundation only; GPU tests remain ignored and no new GPU/appearance/device/performance result.",
+    "Eight isolated Rust deltas applied to actual main; private upscaling/MetalFX ancestry is absent.",
+    "Current main225 differs from tested source only in the independently accepted journal test within executable scope; no renderer build is claimed on the ancestry child.",
+    "Initial build reused stale incant_text/render_data artifacts lacking current halo APIs. Scoped cleanup of incant_text/render_data/ui recovered unchanged source. Original failure, hashes and logs retained.",
+    "No shader or default/resource-budget changes. Integer shader transport, per-pixel ownership and temporal quality repair remain open."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/temporal-owner-main225/final-review.json",
+    "sha256": "3727a64199d4d6b3972694cd875bd075a359604d668357b36b7c411bbdee9882"
+  }
+}
