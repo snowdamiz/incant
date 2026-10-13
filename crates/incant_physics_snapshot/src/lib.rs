@@ -10,6 +10,7 @@ mod body_state;
 mod coarena;
 mod coarena_codec;
 mod codec;
+mod collider_state;
 mod contact_manifolds;
 mod contact_points;
 mod contact_points_codec;
@@ -18,6 +19,7 @@ mod geometry_codec;
 mod graph;
 mod graph_codec;
 mod island_state;
+mod narrow_owner;
 mod pair_state;
 mod records;
 mod rigid_owner;
@@ -31,6 +33,7 @@ pub use body_state::*;
 pub use coarena::*;
 pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
+pub use collider_state::*;
 pub use contact_manifolds::*;
 pub use contact_points::*;
 pub use contact_points_codec::{decode_contact_points, encode_contact_points};
@@ -39,6 +42,7 @@ pub use geometry_codec::{decode_geometry, encode_geometry};
 pub use graph::*;
 pub use graph_codec::{decode_graph, encode_graph};
 pub use island_state::*;
+pub use narrow_owner::*;
 pub use pair_state::*;
 pub use records::*;
 pub use rigid_owner::*;
@@ -73,6 +77,9 @@ pub enum Error {
     UnsupportedIsland,
     Solver,
     SleepScan,
+    Collider,
+    UnsupportedCollider,
+    Narrow,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

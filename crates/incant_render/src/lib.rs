@@ -31,6 +31,8 @@ mod shader;
 mod shadows;
 mod sprites;
 mod studio;
+pub mod temporal;
+mod temporal_shader;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
@@ -100,6 +102,7 @@ pub struct Renderer {
     output: output::OutputPass,
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
+    temporal: Option<temporal::TemporalSystem>,
 }
 impl Renderer {
     pub async fn new(
@@ -206,6 +209,7 @@ impl Renderer {
             output,
             graph,
             motion: None,
+            temporal: None,
         })
     }
     pub fn headless() -> Result<Self> {
@@ -303,6 +307,7 @@ impl Renderer {
             },
             resolution::ResolutionScale::FULL,
             None,
+            None,
         )
     }
     fn draw_scene_scaled(
@@ -310,7 +315,8 @@ impl Renderer {
         scene: &RenderScene,
         target: RetainedTarget<'_>,
         scale: resolution::ResolutionScale,
-        motion: Option<motion::MotionDraw>,
+        mut motion: Option<motion::MotionDraw>,
+        temporal: Option<&temporal::Pending>,
     ) -> Result<wgpu::CommandBuffer> {
         let RetainedTarget {
             view,
@@ -369,6 +375,20 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
+        let overlays = models.as_ref().is_some_and(|m| m.has_transparent())
+            || sprites.as_ref().is_some_and(|s| s.has_passes())
+            || text.as_ref().is_some_and(|t| t.has_passes());
+        if temporal.is_some_and(|p| p.active()) && overlays {
+            motion
+                .as_mut()
+                .expect("temporal motion draw")
+                .set_overlay_depth(attachments.depth.clone());
+        }
+        let temporal = temporal.and_then(|pending| {
+            self.temporal.as_ref().and_then(|system| {
+                system.prepare(&self.device, pending, &attachments.color, scene.camera)
+            })
+        });
         let output = self.output.prepare(
             &self.device,
             &attachments.color,
@@ -383,6 +403,7 @@ impl Renderer {
                 diagnostics,
                 models,
                 motion,
+                temporal,
                 sprites,
                 text,
                 output,

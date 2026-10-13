@@ -172,6 +172,13 @@ fn portable_motion_shader_validates_and_uses_canonical_mask_contract() {
     )
     .validate(&module)
     .unwrap();
+    assert_eq!(source.matches("mask(in);").count(), 2);
+    assert!(
+        module
+            .entry_points
+            .iter()
+            .any(|e| e.name == "depth_only" && e.stage == naga::ShaderStage::Fragment)
+    );
     let canonical = include_str!("../model_material.wgsl");
     for line in [
         "struct Material { base:vec4f, emissive_roughness:vec4f, factors:vec4f, flags:vec4u }",
@@ -184,7 +191,11 @@ fn portable_motion_shader_validates_and_uses_canonical_mask_contract() {
 }
 #[test]
 fn native_cooked_features_do_not_silently_create_uncooked_motion() {
-    let cooked = cfg!(all(not(target_arch = "wasm32"), feature = "cooked-output"));
+    let cooked = cfg!(all(
+        not(target_arch = "wasm32"),
+        feature = "cooked-output",
+        not(feature = "cooked-temporal")
+    ));
     assert_eq!(
         super::admission(),
         if cooked {
@@ -235,4 +246,58 @@ fn drs_and_offset_viewports_share_exact_internal_coordinates_and_reset_history()
             .frame
             .has_previous()
     );
+}
+
+#[test]
+fn temporal_phase_matrix_and_depth_epoch_commit_together_across_failure_cut_and_resize() {
+    let mut h = History::default();
+    let c = CameraView::preview();
+    let rect = [3., 5., 65., 33.];
+    let e = || Extent::new([80, 48], [80, 48], rect, c);
+    let a = h.prepare_temporal(e(), c, rect).unwrap();
+    assert_eq!(a.frame.jitter_phase(), Some(0));
+    assert!(!a.frame.has_previous());
+    let mut previous = a.matrix;
+    let first = a.matrix;
+    drop(a);
+    assert!(h.frame().is_none());
+    let a = h.prepare_temporal(e(), c, rect).unwrap();
+    assert_eq!(a.matrix, first);
+    h.accept(a);
+    for phase in 1..=16 {
+        let a = h.prepare_temporal(e(), c, rect).unwrap();
+        assert_eq!(a.frame.jitter_phase(), Some(phase % 8));
+        assert!(a.frame.has_previous());
+        assert_eq!(a.previous, previous);
+        // Dropped candidate is not a submitted frame and cannot consume phase.
+        let retry = h.prepare_temporal(e(), c, rect).unwrap();
+        assert_eq!(a.matrix, retry.matrix);
+        previous = retry.matrix;
+        h.accept(retry);
+    }
+    h.invalidate();
+    let mut invalid = c;
+    invalid.view = Mat4::ZERO;
+    assert!(h.prepare_temporal(e(), invalid, rect).is_err());
+    let reset = h.prepare_temporal(e(), c, rect).unwrap();
+    assert_eq!(reset.frame.jitter_phase(), Some(0));
+    assert!(!reset.frame.has_previous());
+    assert_eq!(reset.matrix, reset.previous);
+    h.accept(reset);
+    let resized = h
+        .prepare_temporal(extent([33, 17]), c, [0., 0., 33., 17.])
+        .unwrap();
+    assert_eq!(resized.frame.jitter_phase(), Some(0));
+    assert!(!resized.frame.has_previous());
+    let mut pixel = c;
+    pixel.pixel_resolution = Some([32, 16]);
+    let bypass = h
+        .prepare_temporal(Extent::new([80, 48], [32, 16], rect, pixel), pixel, rect)
+        .unwrap();
+    assert!(bypass.frame.bypassed());
+    assert_eq!(bypass.frame.jitter_phase(), None);
+    h.accept(bypass);
+    let fresh = h.prepare_temporal(e(), c, rect).unwrap();
+    assert!(!fresh.frame.has_previous());
+    assert_eq!(fresh.frame.jitter_phase(), Some(0));
 }

@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T10:44:29.913513+00:00",
+  "verdict": "accepted current-main relevance and retained evidence; ready for normal fastcheck publication",
+  "head": "1e5efb3586739441624aab7fbed900a4ce63879a",
+  "manifest_sha256": "870ea1ecb2c2c45275f9fe4b2a45d118b464846653c39454c12c5d83f47455b3",
+  "verifier_sha256": "88b1a7de9e33f4bf75e9d237a129432bc2802e556c85f00bb7fc28c134f7f2b6",
+  "replayed_verifier": true,
+  "exact_relevant_sources": 1901,
+  "unrelated_implementation_paths": 17,
+  "new_records": 15,
+  "producer_records": 73,
+  "current_checks_zero": 8,
+  "immutable_binary_replay_passed": 34,
+  "producer_cpu_tests_reused": 135,
+  "fresh_compile": false,
+  "live_save_admission": false
+}

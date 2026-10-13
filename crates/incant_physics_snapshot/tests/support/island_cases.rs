@@ -5,6 +5,8 @@ macro_rules! island_cases {
             w: &PhysicsWorld,
             a: &ValidatedAttachments<'_>,
             m: &ValidatedManifolds<'_>,
+            shapes: &[ValidatedGeometry],
+            collider_arena: &ValidatedArena,
         ) -> RigidOwnerRecord {
             let b = ordered_capture::capture(&w.bodies);
             let (_, handles) = layout(&b["bodies"], identity());
@@ -57,34 +59,169 @@ macro_rules! island_cases {
             );
             let cv = ordered_capture::capture(&w.colliders);
             let (_, colliders) = layout(&cv["colliders"], identity());
-            let thresholds: Vec<_> = colliders
-                .iter()
-                .map(|h| {
-                    let co = &w.colliders[ColliderHandle::from_raw_parts(h.slot, h.generation)];
-                    if co
-                        .active_events()
-                        .contains(ActiveEvents::CONTACT_FORCE_EVENTS)
-                    {
-                        co.contact_force_event_threshold()
-                    } else {
-                        f32::MAX
-                    }
-                    .to_bits()
-                })
-                .collect();
+            let table = ColliderStateTable {
+                identity: identity(),
+                colliders: colliders
+                    .iter()
+                    .map(|h| {
+                        collider_capture::collider(
+                            &ordered_capture::capture(
+                                &w.colliders[ColliderHandle::from_raw_parts(h.slot, h.generation)],
+                            ),
+                            identity().dimension,
+                        )
+                    })
+                    .collect(),
+            };
+            let cc = ColliderContext {
+                bodies: &bodies,
+                geometries: shapes,
+                journals: PendingJournals::default(),
+            };
+            let checked = validate_collider_state(table.clone(), cc).unwrap();
+            let encoded = encode_collider_state(&checked, &mut budget()).unwrap();
+            let colliders = decode_collider_state(&encoded, cc, &mut budget()).unwrap();
+            assert_eq!(colliders.record(), &table);
+            for (h, native) in w.colliders.iter() {
+                let h = handle(h.into_raw_parts());
+                let r = colliders.collider(h).unwrap();
+                assert_eq!(r.material.friction, native.friction().to_bits());
+                assert_eq!(r.material.restitution, native.restitution().to_bits());
+                assert_eq!(
+                    r.material.friction_rule as u32,
+                    native.friction_combine_rule() as u32
+                );
+                assert_eq!(
+                    r.material.restitution_rule as u32,
+                    native.restitution_combine_rule() as u32
+                );
+                assert_eq!(r.kind == ColliderKind::Sensor, native.is_sensor());
+                assert_eq!(
+                    r.enabled == incant_physics_snapshot::ColliderEnabled::Enabled,
+                    native.is_enabled()
+                );
+                assert_eq!(r.active_hooks, native.active_hooks().bits());
+                assert_eq!(r.active_events, native.active_events().bits());
+                assert_eq!(
+                    r.active_collision_types,
+                    native.active_collision_types().bits() as u32
+                );
+                assert_eq!(r.contact_skin, native.contact_skin().to_bits());
+                assert_eq!(
+                    r.force_event_threshold,
+                    native.contact_force_event_threshold().to_bits()
+                );
+                let effective = if native
+                    .active_events()
+                    .contains(ActiveEvents::CONTACT_FORCE_EVENTS)
+                {
+                    native.contact_force_event_threshold()
+                } else {
+                    f32::MAX
+                };
+                assert_eq!(
+                    colliders.effective_force_threshold(h),
+                    Some(effective.to_bits())
+                );
+                assert_eq!(
+                    r.user_data,
+                    std::array::from_fn(|i| (native.user_data >> (i * 32)) as u32)
+                );
+                for (g, n) in [
+                    (r.collision_groups, native.collision_groups()),
+                    (r.solver_groups, native.solver_groups()),
+                ] {
+                    assert_eq!(g.memberships, n.memberships.bits());
+                    assert_eq!(g.filter, n.filter.bits());
+                    assert_eq!(g.test as u32, n.test_mode as u32);
+                }
+            }
             let owner_context = RigidOwnerContext {
                 islands: &v,
                 pairs: &pairs,
-                force_thresholds: &thresholds,
+                colliders: &colliders,
                 multibody_epoch: word(
                     &ordered_capture::capture(&w.multibody_joints)["topology_epoch"],
                 ),
             };
+            // Equal bytes from a separately validated owner are not the exact
+            // body/geometry witnesses already bound to this manifold graph.
+            let other_bodies = validate_body_state(
+                bodies.record().clone(),
+                BodyContext {
+                    attachments: a,
+                    journals: PendingJournals::default(),
+                },
+            )
+            .unwrap();
+            let wrong = validate_collider_state(
+                table.clone(),
+                ColliderContext {
+                    bodies: &other_bodies,
+                    ..cc
+                },
+            )
+            .unwrap();
+            assert!(matches!(
+                validate_rigid_owner(
+                    owner.clone(),
+                    RigidOwnerContext {
+                        colliders: &wrong,
+                        ..owner_context
+                    },
+                    &mut budget()
+                ),
+                Err(Error::Identity)
+            ));
+            if !shapes.is_empty() {
+                let other_shapes: Vec<_> = shapes
+                    .iter()
+                    .map(|g| validate_geometry(g.record().clone()).unwrap())
+                    .collect();
+                let wrong = validate_collider_state(
+                    table.clone(),
+                    ColliderContext {
+                        geometries: &other_shapes,
+                        ..cc
+                    },
+                )
+                .unwrap();
+                assert!(matches!(
+                    validate_rigid_owner(
+                        owner.clone(),
+                        RigidOwnerContext {
+                            colliders: &wrong,
+                            ..owner_context
+                        },
+                        &mut budget()
+                    ),
+                    Err(Error::Identity)
+                ));
+            }
+            if owner.force_valid && !owner.force_pairs.is_empty() {
+                let mut changed = table.clone();
+                for c in &mut changed.colliders {
+                    c.active_events = 0;
+                }
+                let wrong = validate_collider_state(changed, cc).unwrap();
+                assert!(matches!(
+                    validate_rigid_owner(
+                        owner.clone(),
+                        RigidOwnerContext {
+                            colliders: &wrong,
+                            ..owner_context
+                        },
+                        &mut budget()
+                    ),
+                    Err(Error::Solver)
+                ));
+            }
             let joined = validate_rigid_owner(owner.clone(), owner_context, &mut budget())
                 .unwrap_or_else(|e| panic!("{e:?} owner={owner:?}"));
             let bytes = encode_rigid_owner(&joined, &mut budget()).unwrap();
             let decoded_owner = decode_rigid_owner(&bytes, owner_context, &mut budget()).unwrap();
             assert_eq!(decoded_owner.record(), &owner);
+            check_narrow(w, &joined, collider_arena);
             check_owner_corruption(owner, owner_context, &bytes);
             let owner = decoded_owner.record().clone();
             let bytes = encode_islands(&v, &mut budget()).unwrap();

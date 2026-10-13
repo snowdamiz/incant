@@ -11,12 +11,16 @@ pub(crate) struct CameraView {
     pub far: f32,
     pub fov: f32,
     pub orthographic_half_height: Option<f32>,
+    pub jitter: [f32; 2],
+    pub jitter_guard: [f32; 2],
     pub pixel_resolution: Option<[u32; 2]>,
 }
 impl CameraView {
     pub fn preview() -> Self {
         let eye = Vec3::from_array(crate::studio::EYE);
         Self {
+            jitter: [0.; 2],
+            jitter_guard: [0.; 2],
             view: Mat4::look_at_rh(eye, Vec3::ZERO, Vec3::Y),
             eye,
             forward: (-eye).normalize(),
@@ -101,6 +105,8 @@ impl CameraView {
             return Err(SceneError::CameraTransform);
         }
         let result = Self {
+            jitter: [0.; 2],
+            jitter_guard: [0.; 2],
             view: Mat4::look_to_rh(eye, forward, up),
             eye,
             forward,
@@ -137,6 +143,12 @@ impl CameraView {
         result.matrix(1.)?;
         Ok(result)
     }
+    /// Current-only overlays and their opaque depth use the same stable grid.
+    pub fn unjittered(mut self) -> Self {
+        self.jitter = [0.; 2];
+        self.jitter_guard = [0.; 2];
+        self
+    }
     pub fn matrix(self, aspect: f32) -> Result<Mat4, SceneError> {
         if !aspect.is_finite() || aspect <= 0. {
             return Err(SceneError::CameraProjection);
@@ -150,7 +162,10 @@ impl CameraView {
         } else {
             Mat4::perspective_rh(self.fov, aspect, self.near, self.far)
         };
-        let matrix = projection * self.view;
+        let mut matrix = projection * self.view;
+        if self.jitter != [0.; 2] {
+            matrix = Mat4::from_translation(Vec3::new(self.jitter[0], self.jitter[1], 0.)) * matrix;
+        }
         if !matrix.is_finite() {
             return Err(SceneError::CameraProjection);
         }

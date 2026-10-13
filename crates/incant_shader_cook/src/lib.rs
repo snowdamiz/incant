@@ -5,6 +5,7 @@ mod contract;
 mod emit;
 pub mod geometry;
 mod manifest;
+pub mod temporal;
 
 pub use manifest::write_bundle;
 use naga::{ShaderStage, back::pipeline_constants, valid};

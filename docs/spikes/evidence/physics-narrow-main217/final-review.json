@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-13T11:11:13.322032+00:00",
+  "verdict": "Accepted current-main217 narrow-owner integration; publication subject to exact-head required fast check",
+  "integration_head": "657c66ae3aa393b23111dbb6ceb84fa50250bb80",
+  "manifest_sha256": "3d9f45cd55b5eee3f45d1bd211dcd54727653bdce6a03a40b573053c1e43f6d8",
+  "verifier_sha256": "269c96ca168ffb009faa35bd7fc9cdf9a81c20b40fd8b61c9501bf281149c006",
+  "independent_actions": [
+    "Read complete read-only verifier and inspected integration scope",
+    "Executed verifier --verify-only successfully",
+    "Confirmed clean integration head, all1954 source files and current selected dependency graph exact to accepted producer",
+    "Verified17 unrelated main renderer/HUD paths preserved,108 producer records and10 integration records lossless",
+    "Retained143 producer CPU cases; current copied executable36 cases including728 trusted continuation steps; no new compile claimed"
+  ],
+  "main": "1da6cab9778913999a745803445f209d4da0f90d",
+  "producer": "e921a308ca73e0331540dac4c0f90bce372b200b",
+  "source_receipt": "f4be0d8225329fcf752919e7773429e372aa50d804130aa7ca533a239c12289d",
+  "producer_final_receipt": "0ece011a0f1f8665ad9204cfb17a8ec9d8ce2d4a17b7deb6040f43cd43442c52",
+  "limits": [
+    "Only inert state validation; live physics save remains refused",
+    "No hostile live construction or complete-owner continuation acceptance",
+    "No performance, GPU, device or phase gate claim"
+  ]
+}

@@ -78,6 +78,9 @@ pub struct ValidatedManifolds<'a> {
     context: ManifoldContext<'a>,
 }
 impl<'a> ValidatedManifolds<'a> {
+    pub(crate) fn graph(&self) -> &'a ValidatedGraph {
+        self.context.graph
+    }
     pub(crate) fn edge_row(&self, edge: u32) -> Option<usize> {
         self.context
             .graph
@@ -87,6 +90,9 @@ impl<'a> ValidatedManifolds<'a> {
             .map(|e| e.row as usize)
     }
 
+    pub(crate) fn geometries(&self) -> &'a [ValidatedGeometry] {
+        self.context.geometries
+    }
     pub(crate) fn attachments(&self) -> &'a ValidatedAttachments<'a> {
         self.context.attachments
     }

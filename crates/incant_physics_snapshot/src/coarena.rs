@@ -27,7 +27,10 @@ pub struct ValidatedCoarena<'a> {
     record: CoarenaRecord,
     arena: &'a ValidatedArena,
 }
-impl ValidatedCoarena<'_> {
+impl<'a> ValidatedCoarena<'a> {
+    pub(crate) fn arena(&self) -> &'a ValidatedArena {
+        self.arena
+    }
     pub fn record(&self) -> &CoarenaRecord {
         &self.record
     }

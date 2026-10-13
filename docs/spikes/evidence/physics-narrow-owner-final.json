@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "scope": "Final accepted inert narrow-phase indices and sensor history; live physics-world save admission remains closed",
+  "audited_packet": {
+    "path": "docs/spikes/evidence/physics-narrow-owner.json",
+    "sha256": "e79ebdfa376e713c5fb5c7b5382cac6ee82926c44f61794bacbdee552820ca7c"
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/physics-narrow-owner-source-review.json",
+    "sha256": "f4be0d8225329fcf752919e7773429e372aa50d804130aa7ca533a239c12289d"
+  },
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-narrow-owner-final-review.json",
+    "sha256": "0ece011a0f1f8665ad9204cfb17a8ec9d8ce2d4a17b7deb6040f43cd43442c52"
+  },
+  "post_review_documentation": [
+    {
+      "path": "STATUS.md",
+      "sha256": "116647a00dc0dea55375e9caaec5db92d8164fa613c519a9875e259fa8abb4aa"
+    },
+    {
+      "path": "docs/spikes/physics-narrow-owner.md",
+      "sha256": "eaa4cd6f7f492c104ef6c673ac10f8f971712e5b19c7bf97bbbe5e54d348c1e7"
+    }
+  ],
+  "production_and_tests": "unchanged source001; documentation-only review closeout",
+  "integration": "pending publisher current-main intake",
+  "live_restore": false,
+  "gpu": false
+}

@@ -26,8 +26,54 @@ tests, four public locale builds, 14 native positive processes and ten fresh
 source-deleted shipping runs pass, including four exact whole-session PCM
 continuations. Original g5/g6 GPU acceptance remains attached to those binaries;
 no new GPU/device/performance claim is made. Final archive review is accepted;
-current-main qualification is independently accepted, with publication awaiting
+current-main qualification is independently accepted and PR216 merged after
 the required fast check. [Scope and evidence](docs/spikes/core0069-main212.md).
+
+## Inert collider properties — main216 integration
+
+Accepted collider records and exact owner joins are composed on main216 with
+unchanged physics source, vendor inputs, lock and selected dependency graph.
+The two retained executable suites pass 34 cases again; the complete 135-case
+producer suite and strict Clippy/wasm checks remain exact-source evidence.
+Current-main integration review and the required fast check passed; PR217 is
+merged. Live physics saves remain refused.
+[Scope and relevance](docs/spikes/physics-collider-main216.md).
+
+## Inert narrow-phase owner — source and CPU evidence accepted
+
+The checked physics boundary now preserves collider graph-index ownership, ordered
+intersection payloads and independent emitted-event history. Eight new native
+2D/3D controls pass, including 128 trusted continuation steps with retired-pair
+reuse, sensor transfers, event-mask toggles and generation reuse. Independent source and final evidence review accepted 143 CPU tests and seven
+scoped checks. The exact-source main217 qualification passes six current checks
+and a 36-case copied-binary rerun with 728 trusted continuation steps; independent
+current-main review is accepted and PR218 merged after the required fast check. `PhysicsUnsupported` and hostile live restore
+admission remain closed; no vendor/world-format changes.
+[Scope and limits](docs/spikes/physics-narrow-owner.md);
+[current-main qualification](docs/spikes/physics-narrow-main217.md).
+
+## Timestamp backend diagnostic — capability repair
+
+Checkpoint22 remains frozen while its jobs drain. A separate direct timestamp
+diagnostic failed on hosted Apple Paravirtual Metal after the production timing
+test had correctly completed its unsupported-capability path. The test-only repair
+keeps mandatory backend selection, runs supported timestamp modes, and executes
+checked ordinary compute when queries are absent. Two CPU policy tests and focused
+strict checks and independent final review pass; PR219 merged after its required
+fast check, and hosted successor execution remains pending. [Failure and repair evidence](docs/spikes/timestamp-diagnostic-capabilities.md).
+
+## Fixed-resolution temporal accumulation — composed checks passed
+
+The [curated fixed-only integration](docs/spikes/fixed-temporal-main217.md) keeps
+upscaling, MetalFX, bloom and SSAO outside its narrowed four-program native cooker.
+Independent source review, default/cooked CPU checks, strict Clippy, native/browser
+consumer compilation and actual Metal/SPIR-V recook validation pass. Two copied
+current-composition binaries then completed eight bounded Metal frames, checking
+fixed history, overlay depth and timestamp submission together. No new pixel review
+is claimed. Producer acceptance remains opt-in fixed mode only, with softness and
+MASK detail approximately 18% of reference. Final integration evidence review is
+independently accepted; the scoped PR awaits its required fast check. Defaults
+and phase/device gates remain unchanged.
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -39,36 +85,35 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main215, 2026-10-13
+## Current overview — main219, 2026-10-13
 
-Development main215 includes the reviewed opt-in cooked renderer families and
+Development main219 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
-Checkpoint21 remains frozen at exact main212 through PR213 while its jobs finish.
-The pinned vendor-path portability failure is repaired in main214; hosted
-acceptance remains pending. A second hosted failure is the timestamp test
-unconditionally requiring an optional capability on Apple Paravirtual Metal.
-The [test correction](docs/spikes/timestamp-capability.md) checks the exact typed
-refusal and an ordinary completed frame when absent, preserving positive timing
-assertions when supported. Its CPU/compile checks and independent final review
-pass and PR215 merged after the required fast check. Successor hosted execution
-remains pending; both original failures are retained.
+Checkpoint22 is frozen at exact main216 through PR213, candidate `a894b7ca`,
+with all 23 required contexts and eight workflows preserved. Checkpoint21 is
+terminal and unpromoted: 21 contexts succeeded; its pinned vendor-path and
+optional timestamp capability failures are retained and repaired in main214/215.
+The [timestamp correction](docs/spikes/timestamp-capability.md) requires exact
+typed refusal and an ordinary completed frame when the adapter lacks timing,
+while preserving positive lifecycle assertions where supported. Successor hosted
+execution remains pending. Later main changes will not move the frozen candidate.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–215 changes remain outside that tested baseline. No device, performance or
+Later main206–219 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
 exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
 test import repaired in PR193; checkpoint19 exposed the cache count and vendored
 Parry compiler-identity issues repaired in PR201/203. Their original failures remain
-retained. The active checkpoint21 and any reviewed repair successor preserve
+retained. The active checkpoint22 preserves
 ADR0014's exact selected tree and all 23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
@@ -89,6 +134,18 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Checked rigid collider properties — CPU source slice
+
+The private [collider-state slice](docs/spikes/physics-collider-state.md) preserves
+fixed native collider configuration, including mass modes, group-test modes and
+historical enabled tri-state. The joined rigid owner derives force thresholds from
+checked colliders and requires exact body/geometry witnesses. Independent source
+and final evidence reviews accept the scoped result: 135 CPU tests (none ignored),
+Clippy, wasm32, normal graph and repository checks pass. PR217 is merged after
+current-main relevance review and the required fast check.
+Physics world save admission stays closed; manager, derived arithmetic and
+phase/constructor validation remain open. No live restore or device claim.
+
 ## Physics world continuation — trusted native proof, live saves still closed
 
 The [joined rigid owner slice](docs/spikes/physics-world-continuation.md) now checks

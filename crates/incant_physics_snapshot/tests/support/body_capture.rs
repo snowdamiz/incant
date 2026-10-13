@@ -40,7 +40,7 @@ fn velocity(v: &Value, d: Dimension) -> BodyVelocity {
         angular: angular(&v["angvel"], d),
     }
 }
-fn local(v: &Value, d: Dimension) -> LocalMass {
+pub fn local(v: &Value, d: Dimension) -> LocalMass {
     LocalMass {
         center: vector(&v["local_com"], d),
         inverse_mass: float(&v["inv_mass"]),
