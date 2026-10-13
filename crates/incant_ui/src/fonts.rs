@@ -81,6 +81,34 @@ impl UiFonts {
             .map(|i| engine.cache_glyph(layout, i, atlas).map_err(Into::into))
             .collect()
     }
+    /// One prepared halo per shaped glyph, at the radius `rule` gives that
+    /// glyph's font size: dilated once into the atlas here, never per frame.
+    pub(crate) fn raster_halos(
+        &self,
+        widget: &Widget,
+        layout: &ShapedText,
+        atlas: &mut incant_text::GlyphAtlas,
+        rule: incant_text::HaloRule,
+    ) -> Result<Vec<incant_text::GlyphHandle>, UiError> {
+        let text = widget
+            .node
+            .kind
+            .text()
+            .ok_or(UiError::Invalid("widget has no text"))?;
+        let engine = self
+            .engines
+            .get(&text.fonts)
+            .ok_or(UiError::Invalid("unbound font chain"))?;
+        layout
+            .glyphs()
+            .iter()
+            .enumerate()
+            .map(|(i, glyph)| {
+                let radius = rule.radius(glyph.font_size)?;
+                Ok(engine.cache_halo(layout, i, atlas, radius)?)
+            })
+            .collect()
+    }
     pub fn raw_bytes(&self) -> usize {
         self.bytes
     }

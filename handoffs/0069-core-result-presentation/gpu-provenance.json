@@ -1,0 +1,124 @@
+{
+ "format": "incant-0069-gpu-provenance",
+ "packet": "0069-core-result-presentation",
+ "phase": "gpu-only-generation-5",
+ "executor": {
+  "model": "Claude Opus 5.5 (claude-opus-5-5)",
+  "thinking_effort": "max",
+  "acp_record": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/claude-0069-gpu-only-acp.log",
+   "sha256": "3e5663ec6034f621043411ca36d717c5d75814e7b2fa36b8faa6dc611c3334eb",
+   "verification_line": "Claude session verified: Opus 5.5; thinking: max"
+  }
+ },
+ "outcome": "refused at admission before any lock, evidence directory, child process or GPU device",
+ "attempt": {
+  "command": "python3 -B handoffs/0069-core-result-presentation/gpu_only.py run --evidence /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-001 --authority /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready.json",
+  "python": "/opt/homebrew/bin/python3 3.14.8 (equals the generation-5 identity)",
+  "cwd": "worktree root",
+  "invocations": 1,
+  "retries": 0,
+  "files": {
+   "exit-status.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+   "finished-utc.txt": "a1d243dc736d929f5f03db2d3d343be967b2bef032b47851c941b859913a8ba6",
+   "started-utc.txt": "6f98a499ce95edc17f448fc876bea8704778bc0c60fe99784b8be3196aee4dcf",
+   "stderr.txt": "b34106a16b2eeb4956bfa233e8c8f39c3543ea06ded433c226bf14a654a072d2",
+   "stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "exit_status": 1,
+  "refusal": "frozen source changed: handoffs/0069-core-result-presentation/brief.md"
+ },
+ "preflight_before_run": {
+  "command": "python3 -B handoffs/0069-core-result-presentation/gpu_only.py check",
+  "result": "refused with the same message; read-only, no authority or GPU used"
+ },
+ "admission_failure": {
+  "inventory": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/source-final-003.json",
+   "sha256": "ec7c7173494f7c1f9d8eca6e7c36c8ee135460da959b093412a6ec323fd0e5c5",
+   "head": "15a59060c06ea249c66740b5940b92721d032970",
+   "files": 16977,
+   "mismatching_files": 1
+  },
+  "path": "handoffs/0069-core-result-presentation/brief.md",
+  "expected": {
+   "sha256": "100088d86eded553666ef0f6e4f449bd91ab789af2c5b9de881f02eed9538c7e",
+   "bytes": 14158,
+   "same_at": [
+    "15a59060c06ea249c66740b5940b92721d032970",
+    "0351d93e3c851155a5001279651bcecdef1b492d"
+   ]
+  },
+  "actual": {
+   "sha256": "e36dee4a3c6c31956d7d696aa724572870508f6a627bc317d685339af5eca24b",
+   "bytes": 16573,
+   "introduced_by": "399fea51a3c3b71f776b8c55cce14d8728ea59a6 (root: schedule GPU review)"
+  }
+ },
+ "gpu_work": {
+  "children_launched": 0,
+  "regression_frames": 0,
+  "appearance_frames": 0,
+  "images": 0,
+  "global_gpu_lock_taken": false,
+  "packet_lease_acquired": false,
+  "evidence_directory_created": false,
+  "release_needed": false
+ },
+ "after_attempt": {
+  "evidence_path_absent": true,
+  "owned_processes": [],
+  "native_gpu_lock_open_by_any_process": false,
+  "unrelated_process_seen": "a clippy-driver build on /Users/andreyyurlov/.codex/incant-core-presentation-target (0072), not started or owned by 0069"
+ },
+ "inputs_unchanged": {
+  "authority": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready.json",
+   "sha256": "6b8064c83fefc0b0b51e752809603bc012f7f84cfe9680082dab3648b82f987e"
+  },
+  "wrapper": {
+   "path": "handoffs/0069-core-result-presentation/gpu_only.py",
+   "sha256": "e3530e5d51c4a09d6f4b3f803b1c5aaddfd93c2d32f35f5e489c0a6bb464ae71",
+   "commit": "0351d93e3c851155a5001279651bcecdef1b492d"
+  },
+  "root_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/core0069-gpu-wrapper-root-20261013.json",
+   "sha256": "137b6194414e07b22ba36bb3dc90a73da1cd3d4b835cdf0e9b5441c69842880b"
+  },
+  "predecessor_release": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/gpu-released.json",
+   "sha256": "d0998c95b860c574c9e3e7b1c361a7bca9ab65cb23e7d21f65e794d00b29f50e"
+  }
+ },
+ "cpu_packet": {
+  "source_commit": "15a59060c06ea249c66740b5940b92721d032970",
+  "generation_5": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/freeze/generation-5.json",
+   "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+  },
+  "cpu_result": {
+   "path": "handoffs/0069-core-result-presentation/cpu-result.md",
+   "sha256": "be6bad1c2b7367811f5e90e9e2f26aad361b1abdd3b59b31b57adef8954d2656"
+  },
+  "cpu_manifest": {
+   "path": "handoffs/0069-core-result-presentation/cpu-evidence/manifest.json",
+   "sha256": "1d5f8a8922e42a1bdda534c598633f7afce1c093bc6ebc615e8d61e7b70b4d27"
+  },
+  "cpu_review": {
+   "path": "handoffs/0069-core-result-presentation/cpu-review.json",
+   "sha256": "ef978631b061cdbbf37e11b761ba2e5c8a80a34c1fbcaef59eef8bae358ca20b"
+  },
+  "cpu_release": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/release.json",
+   "sha256": "bc2cabe26bae17700e300188e3c7f8e68fa06538cb44c7b4197d000c5862696f"
+  },
+  "cpu_ledger": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/ledger.jsonl",
+   "sha256": "091729c84afba56f289f5a71d7814720f296d2bf5dc70081a6585726c956a0fa"
+  },
+  "gpu_proposal": {
+   "path": "handoffs/0069-core-result-presentation/gpu-proposal.md",
+   "sha256": "032d8875242e11c3794f0487cb9eedda39a65194cd57e81ac152f73c08ba325c"
+  }
+ }
+}

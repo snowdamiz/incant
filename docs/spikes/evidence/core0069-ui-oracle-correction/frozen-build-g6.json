@@ -1,0 +1,70 @@
+{
+  "format": "incant-0069-regression-build",
+  "freeze": {
+    "generation": 6,
+    "sha256": "255c7f15d28268e80c494102fc1a1e5c5dde2105551241a0451e76d57da90793"
+  },
+  "manifest_sha256": "fffb7857e5c9dd3e9c4d21fc9ca0bdc09319ac93fd042db40152f3340a0b01d0",
+  "sources": {
+    "crates/incant_render/src/ui_draw_tests.rs": "9b51e6448f4203902baa6985fc79b7c2b3d8181ee1cab85394c9fdbac795ddf0",
+    "crates/incant_render_gpu_host/tests/ui.rs": "7ebe885a261c7d6e366e1c3095be25494622ff108f67770d82934074e3e6dd54"
+  },
+  "executables": {
+    "render-lib": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/frozen-binaries/generation-6/render-lib",
+      "sha256": "ddf12438b44998808feb2d7f2e2e34ed7bdb18420d355cb44f3db357cf4cdcaf",
+      "bytes": 31427008,
+      "package": "incant_render",
+      "target_path": "/tmp/incant-agent-font-target/ci/deps/incant_render-a4b2ee94e24592b0",
+      "mode": "0o755",
+      "compiler_artifact": {
+        "reason": "compiler-artifact",
+        "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render#0.0.1",
+        "manifest_path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render/Cargo.toml",
+        "target": {
+          "kind": [
+            "lib"
+          ],
+          "crate_types": [
+            "lib"
+          ],
+          "name": "incant_render",
+          "src_path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render/src/lib.rs",
+          "edition": "2024",
+          "doc": true,
+          "doctest": true,
+          "test": true
+        },
+        "profile": {
+          "opt_level": "1",
+          "debuginfo": 0,
+          "debug_assertions": false,
+          "overflow_checks": false,
+          "test": true
+        },
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "filenames": [
+          "/tmp/incant-agent-font-target/ci/deps/incant_render-a4b2ee94e24592b0"
+        ],
+        "executable": "/tmp/incant-agent-font-target/ci/deps/incant_render-a4b2ee94e24592b0",
+        "fresh": false
+      }
+    },
+    "gpu-host-ui": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/frozen-binaries/generation-5/gpu-host-ui",
+      "sha256": "8b85ceb1dca228e6ca04e60c55f5592afd8ce44cc37f727a40932092346d3b6e",
+      "package": "incant_render_gpu_host",
+      "target_path": "/tmp/incant-agent-font-target/ci/deps/ui-1ce0ab6482f0d4a7",
+      "reused_from_generation": 5,
+      "reason": "No source/dependency/features/lock changes in this executable; sole source change is the private cfg(test) incant_render lib UI oracle"
+    }
+  },
+  "profile": "ci",
+  "cargo_target_dir": "/tmp/incant-agent-font-target",
+  "original_g5_build_sha256": "dba7bc052da4f333a51fee3e6409d69507f7dfa1fc58f6d188a42b69c7e6a810",
+  "gpu_grant": null,
+  "gpu_executed": false
+}

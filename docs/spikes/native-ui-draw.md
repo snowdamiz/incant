@@ -43,18 +43,23 @@ Source of truth: `crates/incant_render/src/ui/mod.rs` and `theme.rs`.
 - **Clipping.** Each quad is intersected with its own clip in the vertex stage.
   Glyphs use the effective content clip (ancestors ∩ own content box) on their
   actual padded bounds; surfaces, selection, caret and focus ring use the
-  visible border box (ancestors ∩ border box).
+  visible border box (ancestors ∩ border box). A label halo with an m-texel
+  margin (m = ⌈r⌉ for radius r) may extend m + 1 logical pixels past the text
+  clip but never past the visible border box, and is empty where the text clip
+  is empty; a label with that much padding keeps its whole halo, and a glyph
+  the text clip cuts keeps that much of its hidden part's halo.
 - **Order.** One instanced draw per frame in canonical preorder; per widget:
-  surface, selection, glyphs (label shadow pass first), composition underline,
+  surface, selection, glyphs (label halo pass first), composition underline,
   caret, focus ring.
 - **Colour.** Display-referred sRGB with straight alpha, never tone mapped.
   sRGB targets decode and blend premultiplied in linear light; UNORM targets
   blend the encoded values. Glyph texels are linear area coverage with the
   world-text filter (one bilinear tap up to 1.25 texels, then ≤4×4 taps), at
-  the backend's filtering precision. Blending precision is also the backend's:
-  a UNORM target may blend at its own 8-bit precision. Zero-coverage fragments
-  are discarded, so pixels a quad does not cover keep their stored value on
-  every backend.
+  the backend's filtering precision. A label halo is its own prepared atlas
+  entry (below) drawn through exactly this glyph path; the shader has no halo
+  code. Blending precision is also the backend's: a UNORM target may blend at
+  its own 8-bit precision. Zero-coverage fragments are discarded, so pixels a
+  quad does not cover keep their stored value on every backend.
 - **States.** Surfaces are opaque. Disabled: flatter surface, muted text.
   Focus: 2 px inset accent ring. Captured pointer press: darker button. Caret,
   selection and composition draw only in a focused, enabled field from `UiEdit`
@@ -69,13 +74,71 @@ A restrained dark control family over the game, light text and one accent for
 focus and selection. Text `#ECEEF2`; buttons `#2E323A`, pressed `#1F2228`,
 disabled `#23262C` with 41% text alpha; fields `#15171C` with a 1 px `#646A77`
 outline that marks an editable region; accent `#4C92FF`, selection the accent at
-43%. Corner radius 4 px. Labels sit directly on the scene and get a hard 1 px
-shadow at 59% black: invisible over dark scenes, legible over bright floors
-(found in review). No glow, gradient, decorative edge or animation; the caret
-does not blink (no presentation clock is involved). Measured WCAG contrast:
+43%. Corner radius 4 px. Labels sit directly on the scene, so every label glyph
+first draws an opaque `#0A0C10` halo: its own coverage dilated by 1/16 of its
+font size, between 1 and 2.5 px. It nearly disappears over dark scenes and
+separates every stroke from bright ones; text measures 16.8:1 against it, and
+being opaque, overlapping halos between letters do not darken twice. It
+replaced a hard 1 px shadow at 59% black (found in review) after result titles
+over a bright horizon measured below 3:1 (handoff 0065). No glow, gradient,
+decorative edge or animation; the caret does not blink (no presentation clock
+is involved). Measured WCAG contrast:
 text 11.1:1 on buttons and 15.4:1 on fields, selected text 5.0:1, the accent
 ring 4.2:1 against buttons, and the field outline 3.3:1 against the field and
 3.36:1 against the dark backdrop (raised from 2.75:1 during review).
+
+## Label halo preparation
+
+The halo is prepared with the glyph raster data, never computed while drawing.
+When `UiPaint::prepare` builds a paint it rasterizes every glyph into that
+paint's atlas, as before, and also caches one halo entry per label glyph
+(`TextEngine::cache_halo`): the glyph's coverage dilated on the CPU at the
+radius `incant_text::HaloRule` gives its font size. The game binding passes
+`incant_render_data::UI_LABEL_HALO` (1/16 em within 1–2.5 px), the rule the
+renderer theme re-exports. A halo entry is keyed by the glyph's raster key plus
+the radius bits (`GlyphKey::halo_radius_bits`, zero for ordinary coverage), is
+⌈r⌉ texels larger on every side with its origin moved by that margin (also for
+an empty outline), and leaves the glyph's own entry byte-identical. The
+renderer draws it as one ordinary glyph quad under its glyph, and refuses a
+label without halos, a halo of another glyph or radius, halos on another role,
+or a halo entry passed as a glyph.
+
+Each halo texel is the largest `clamp(r + c − d, 0, 1)` over the glyph texels of
+coverage c > 0 at centre distance d: a straight edge through a half-covered
+texel grows by exactly r, and the halo is never below the glyph's own coverage.
+The arithmetic is bounded, plain f32: at most 81 candidate texels per halo
+texel, square roots of integers up to 32, one division by 255, additions, a
+clamp and a final rounding to 8 bits. The oracles are local. `incant_text` unit
+tests check exact cases (a single texel, a half-covered edge, growth with the
+radius, empty input, repeated preparation in one process), and a renderer CPU
+test recomputes every texel of real Latin, CJK and Arabic halos at 12–40 px
+independently in f64 over all glyph texels, accepting at most one code of
+difference, and finds nothing outside the margin. Whether every platform
+prepares identical bytes has not been verified by execution.
+
+Cost:
+
+- GPU: one more glyph quad per label glyph with the same filter as its glyph
+  (one bilinear tap at 1x, at most 16 when minified). The earlier draft's 25
+  taps per filter tap, up to 400 texture reads per fragment, are gone.
+  `ui.wgsl` is byte-identical to main (SHA-256 `f67e4982…`), so the cooked UI
+  shader, its digest check and the instance layout are unchanged.
+- CPU: only when a paint is rebuilt, never for a reused one. A paint is rebuilt
+  when the layout candidate changes: the first bind, a viewport change, changed
+  text content (such as a HUD binding) or reconciled widgets. In the Core HUD
+  the bindings change on gameplay events (health, samples, objective, result),
+  not per frame. Each halo texel reads at most (2⌈r⌉ + 1)² glyph texels (49 at
+  the 2.5 px maximum, 81 at `MAX_HALO_RADIUS` = 4) and stops at full coverage.
+- Memory: halo entries share the paint's atlas and its existing limits (the
+  game binding's 2048 × 2048 plane, 8,192 entries); the dilation scratch is
+  bounded by the largest glyph plus its margin.
+
+No preparation time or GPU time has been measured; CPU checks and desktop runs
+are not phone evidence. Cooked data and layout are unaffected: cooked UI
+declarations carry no halo field, layout never measures it, and the rule is
+engine code. Core gives its labels 2 px of side and 1 px of vertical padding
+(handoff 0069); where a glyph's ink meets its content box the visible border box
+can cut the outer part of its halo, which the rendered review must check.
 
 ## Retention and resource bounds
 
@@ -89,12 +152,14 @@ ring 4.2:1 against buttons, and the field outline 3.3:1 against the field and
 
 These are GPU additions to the CPU owner's own bounds (two 4 MiB alpha planes,
 1,024 widgets, 65,536 glyphs, 16,384 lines). The quad bound counts every glyph
-plus its label shadow, one selection and one composition span per byte of the
+plus its label halo, one selection and one composition span per byte of the
 focused field, and six surface/caret/ring quads per widget. The review fixture
-measured 240 quads and 37,746 GPU bytes. Unchanged frames upload nothing; a
-focus, press or selection change uploads one instance buffer; a text change
-uploads one atlas prefix because the CPU owner re-rasterizes per paint. Debug
-and `ci` builds are not performance evidence.
+measured 240 quads and 37,746 GPU bytes (with the earlier shadow; a halo is
+one quad per label glyph, as the shadow was, but its atlas entries add to the
+uploaded prefix). Unchanged frames upload nothing; a focus, press or selection
+change uploads one instance buffer; a text change uploads one atlas prefix
+because the CPU owner re-rasterizes per paint. Debug and `ci` builds are not
+performance evidence.
 
 ## Evidence
 
@@ -119,7 +184,11 @@ integer arithmetic do not (handoff 0059). A CPU emulation of llvmpipe's sRGB
 path differs from exact by up to 7 codes near black at 2x, where the sRGB curve
 magnifies a 1/255 coverage step (handoff 0057). The reference admits both
 emulations while rejecting text placed one pixel off, 90% text opacity,
-blending in the other colour space and a missing ancestor clip. It requires at
+blending in the other colour space and a missing ancestor clip, and, for label
+halos, a missing halo, the undilated glyph as its halo, a halo over its text
+and (with a text clip hugging the ink) a halo cut at the text clip. These halo
+checks have not run yet: no build or GPU use was granted for handoff 0069. It
+requires at
 least 8 sub-texel bits and nearest-rounding blends; Vulkan's permitted minimum
 of 4 sub-texel bits and truncating blends remain outside this reference. Hosted
 Linux and Windows runs of the corrected reference are pending. A hosted

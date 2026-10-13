@@ -1,0 +1,97 @@
+{
+  "at": "2026-10-13T05:21:45.161269+00:00",
+  "reviewer": "astra independent integration reviewer",
+  "status": "changes_required_before_execution",
+  "sources": [
+    {
+      "path": "handoffs/0069-core-result-presentation/tools/lease.py",
+      "sha256": "716ac3f9a41f4e57fb4597c1b2d643d1c6e405bb1f91fda902d3f70db62db7a6"
+    },
+    {
+      "path": "handoffs/0069-core-result-presentation/tools/capture.py",
+      "sha256": "ce8dda9efd23863f194187c6b7cb12558235dbc9728ffa4ce6a112d50b566ee6"
+    },
+    {
+      "path": "handoffs/0069-core-result-presentation/tools/build_variant.py",
+      "sha256": "1bb58f4f6c7ad4f1ae85e88dcba89091cf897d14f9cc4cb9b97488b27bd357bc"
+    },
+    {
+      "path": "handoffs/0069-core-result-presentation/tools/result_hud.rs",
+      "sha256": "c44a5fb0c37c96c5aadf28499c9a6d808b4e1e0704f84443befb319b11cdb29d"
+    },
+    {
+      "path": "handoffs/0069-core-result-presentation/tools/routes.py",
+      "sha256": "dba1f4fa352495a4743c71c306fa9fe0011ea362a26b1b878edbde4c43ab1d99"
+    },
+    {
+      "path": "handoffs/0069-core-result-presentation/tools/plans.json",
+      "sha256": "b70ad0b137ad9a8381426908168dc2473be69a5c2f79e62fdcaae26644201b5d"
+    }
+  ],
+  "findings": [
+    {
+      "priority": 1,
+      "path": "lease.py",
+      "lines": [
+        233,
+        257
+      ],
+      "title": "Interrupts release the lock without killing the owned child",
+      "detail": "Popen starts a separate process session, but only TimeoutExpired enters cleanup. KeyboardInterrupt, SystemExit or ledger/file exceptions after spawn reach the outer finally, which only releases group.lock. The child and descendants can continue using GPU/target while another run enters. Mocked KeyboardInterrupt reproduced start-only ledger and zero reap calls. Put process-group termination and bounded wait in a child-owning finally, preserving the original exception; handle normal termination signals too."
+    },
+    {
+      "priority": 2,
+      "path": "lease.py",
+      "lines": [
+        118,
+        121
+      ],
+      "title": "Status stripping omits the first modified source file",
+      "detail": "git() calls stdout.strip(); the first unstaged porcelain row loses its leading status space before line[3:]. Actual current worktree_identity reports amples/core/ui/hud.json:null instead of hashing samples/core/ui/hud.json. Subsequent edits to that HUD file are invisible to freeze. Parse unstripped NUL-delimited status/path output and handle rename/deletion records explicitly."
+    },
+    {
+      "priority": 2,
+      "path": "capture.py",
+      "lines": [
+        45,
+        56
+      ],
+      "title": "Review reuse does not prove matching captured states exist",
+      "detail": "reuse checks only a shared freeze digest and blindly clears frame flags by name. With only review-en-640x480 recorded, final-en-960x540 is accepted and drops won/lost-generation-2 although no matching reports or frames exist. Require immutable per-state evidence bound to variant, route, viewport/scale, host step, source/package identities and frame/report hashes before skipping any frame."
+    },
+    {
+      "priority": 2,
+      "path": "build_variant.py",
+      "lines": [
+        63,
+        85
+      ],
+      "title": "Build identity is not bound to the later capture freeze",
+      "detail": "build invokes guard and adapter-only frozen_source, but not the full lease.freeze before/after compilation. Capture may establish the first full freeze after a build and only compares the binary to its own package manifest. Editing result_hud.rs or source after the build can therefore yield a current freeze beside an older matching package binary, since manifest.adapter_source_sha256 is not compared to the frozen helper and source_head/lock are not matched to that freeze. Bind the build input identity before/after the build and package it; enforce that same source/helper identity plus immutable cooked-data inventory before capture."
+    },
+    {
+      "priority": 2,
+      "path": "lease.py",
+      "lines": [
+        174,
+        186
+      ],
+      "title": "Packet frame debit is outside the exclusive run lock",
+      "detail": "capture.debit performs unlocked read/modify/write before lease.run acquires group.lock. Concurrent invocations can read the same total and overwrite one debit, then run sequentially under the lock, undercounting actual frames and bypassing the packet ceiling. Hold one lock across atomic debit, guarded launch and cleanup, or use an independently serialized monotonic debit ledger with strict nonnegative frame validation."
+    }
+  ],
+  "probe": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/core0069-prep-probes-20261013.json",
+    "sha256": "7020d608a95193d9f3d8aa72dcdc0a40775fa535691279920d02afe650282170"
+  },
+  "positive_findings": [
+    "Rust CPU route creates no renderer for layout-only plans; frame captures create one consumer and check zero frames before one accept and one accepted frame afterward. Plan limits dimensions/ticks/ordered unique capture steps; readback is bounded.",
+    "Restart input fence and CPU game generation/PCM/log reporting are explicit; recordings derive from existing binding_oracle and route hashes must match accepted record inventory.",
+    "Ledger records only explicit ALLOWED_ENV overrides; inherited environment is not serialized. Capture child receives a minimal environment."
+  ],
+  "scope": [
+    "Read source only, plus mocked interruption/reuse and read-only git identity probes in a disposable private directory. No compiler, actual child, GPU, native window or pixel execution.",
+    "No authoring/layout/appearance approval. Producer source not edited.",
+    "No issue found in the single-selected-frame accept accounting itself; findings concern process lifetime, shared budget and evidence identity."
+  ]
+}

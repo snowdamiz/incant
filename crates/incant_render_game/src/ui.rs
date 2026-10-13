@@ -2,7 +2,7 @@
 //! never changes the accepted widget frame, even if spatial consumption refuses.
 use incant_game_runtime::RoutedUiInput;
 use incant_input::InputEvent;
-use incant_render_data::{UiEdit, UiInput, UiRect, UiRole, UiWidget};
+use incant_render_data::{UI_LABEL_HALO, UiEdit, UiInput, UiRect, UiRole, UiWidget};
 use incant_render_native::NativeRenderInput;
 use incant_runtime::{NativeWorld, UiView, WorldIdentity};
 use incant_ui::{
@@ -70,8 +70,14 @@ impl Binding {
             runtime = checkpoint.restore(world, settings.viewport, &mut fonts)?;
         }
         let first = runtime.prepare_refresh(settings.viewport, &mut fonts)?;
-        let paint =
-            incant_ui::UiPaint::prepare(&runtime, &first, &mut fonts, settings.atlas, None)?;
+        let paint = incant_ui::UiPaint::prepare(
+            &runtime,
+            &first,
+            &mut fonts,
+            settings.atlas,
+            UI_LABEL_HALO,
+            None,
+        )?;
         let input = draw_input(&first.visual(&runtime)?, &paint, None)?;
         runtime.commit_for_world(first, world)?;
         Ok(Self {
@@ -169,6 +175,7 @@ impl Binding {
             pending,
             fonts.as_mut().unwrap_or(&mut self.fonts),
             self.atlas,
+            UI_LABEL_HALO,
             Some(&self.paint),
         )?;
         let input = draw_input(
@@ -292,6 +299,7 @@ fn draw_input(
             clip: ltrb(text.clip),
             layout: Arc::clone(&text.layout),
             glyphs: Arc::clone(&text.glyphs),
+            halos: text.halos.clone(),
             edit,
         });
     }

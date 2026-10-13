@@ -1,4 +1,6 @@
-use incant_text::{AtlasConfig, FontSource, GlyphAtlas, TextEngine, TextError, TextStyle, Wrap};
+use incant_text::{
+    AtlasConfig, FontSource, GlyphAtlas, GlyphKey, TextEngine, TextError, TextStyle, Wrap,
+};
 use ulid::Ulid;
 const LATIN: &[u8] = include_bytes!("fonts/NotoSans-Regular.ttf");
 fn engine() -> TextEngine {
@@ -235,5 +237,66 @@ fn atlas_configuration_limits_reject_before_pixels() {
         },
     ] {
         assert!(GlyphAtlas::new(config).is_err());
+    }
+}
+#[test]
+fn halos_are_separate_dilated_entries_that_leave_glyph_coverage_unchanged() {
+    let mut e = engine();
+    let s = e.shape("Ag 中", style(22.)).unwrap();
+    let mut plain = atlas(512, 512, 64);
+    let mut both = atlas(512, 512, 64);
+    let radius = 1.375f32;
+    let mut empty = 0;
+    for i in 0..s.glyphs().len() {
+        let alone = e.cache_glyph(&s, i, &mut plain).unwrap();
+        let glyph = e.cache_glyph(&s, i, &mut both).unwrap();
+        let halo = e.cache_halo(&s, i, &mut both, radius).unwrap();
+        // A second request is a cache hit: same entry, no new revision.
+        let revision = both.revision();
+        let again = e.cache_halo(&s, i, &mut both, radius).unwrap();
+        assert_eq!(both.get(&again), both.get(&halo));
+        assert_eq!(both.revision(), revision);
+        let (a, g, h) = (
+            *plain.get(&alone).unwrap(),
+            *both.get(&glyph).unwrap(),
+            *both.get(&halo).unwrap(),
+        );
+        // The glyph's own entry is exactly what it is without any halo.
+        assert_eq!((g.key, g.origin, g.missing), (a.key, a.origin, a.missing));
+        assert_eq!(g.key.halo_radius_bits, 0);
+        assert_eq!(
+            h.key,
+            GlyphKey {
+                halo_radius_bits: radius.to_bits(),
+                ..g.key
+            }
+        );
+        // ceil(1.375) = 2 texels of margin on every side, empty or not.
+        assert_eq!(h.origin, [g.origin[0] - 2, g.origin[1] - 2]);
+        match (g.rect, h.rect, a.rect) {
+            // The space: an empty outline keeps an empty halo.
+            (None, None, None) => empty += 1,
+            (Some(gr), Some(hr), Some(ar)) => {
+                assert_eq!(coverage(&both, gr), coverage(&plain, ar));
+                assert_eq!([hr[2], hr[3]], [gr[2] + 4, gr[3] + 4]);
+                let (glyph, halo) = (coverage(&both, gr), coverage(&both, hr));
+                for y in 0..gr[3] {
+                    for x in 0..gr[2] {
+                        let over = halo[((y + 2) * hr[2] + x + 2) as usize];
+                        assert!(over >= glyph[(y * gr[2] + x) as usize]);
+                    }
+                }
+                let inked = |v: &[u8]| v.iter().filter(|n| **n > 0).count();
+                assert!(inked(&halo) > inked(&glyph));
+            }
+            other => panic!("glyph and halo entries disagree: {other:?}"),
+        }
+    }
+    assert_eq!(empty, 1);
+    for bad in [0., -1., f32::NAN, f32::INFINITY, 4.5] {
+        assert_eq!(
+            e.cache_halo(&s, 0, &mut both, bad).unwrap_err(),
+            TextError::Invalid("halo radius")
+        );
     }
 }

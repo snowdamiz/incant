@@ -24,9 +24,14 @@
       "zh-Hans": "返回升降台"
     },
     "hud.controls": {
-      "en": "WASD move · Space jump · R play again",
-      "ar": "الحركة WASD · القفز Space · إعادة اللعب R",
-      "zh-Hans": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+      "en": "WASD move · Space jump",
+      "ar": "الحركة WASD · القفز Space",
+      "zh-Hans": "WASD 移动 · 空格键 跳跃"
+    },
+    "hud.prompt": {
+      "en": "Press R or Start to play again",
+      "ar": "اضغط R أو Start لإعادة اللعب",
+      "zh-Hans": "按 R 或 Start 再玩一次"
     },
     "hud.won": {
       "en": "Samples secured",

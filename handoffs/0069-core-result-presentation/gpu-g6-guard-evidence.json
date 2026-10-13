@@ -1,0 +1,72 @@
+{
+  "source_parent": "e193af4df19ca4762441aec5957a9a40357e6437",
+  "files": [
+    {
+      "path": "handoffs/0069-core-result-presentation/gpu_only_g6.py",
+      "sha256": "22d2bf0c8c5d008b5ff9031325be051d477ddc9cc852367ad5d51aae5ec3646d",
+      "bytes": 13956,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/wrapper-source-001/gpu_only_g6.py"
+    },
+    {
+      "path": "handoffs/0069-core-result-presentation/test_gpu_only_g6.py",
+      "sha256": "ac09962eaa05e73ef20c7c2e29c502e801762e6eec38f34e4ccdf41b973ed813",
+      "bytes": 9506,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/wrapper-source-001/test_gpu_only_g6.py"
+    },
+    {
+      "path": "handoffs/0069-core-result-presentation/gpu-proposal-g6.md",
+      "sha256": "ffadc53b3769b7ab8ac2a443d93247d53d486d004576032971e324f797934c69",
+      "bytes": 3802,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/wrapper-source-001/gpu-proposal-g6.md"
+    }
+  ],
+  "logs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/g6-wrapper-tests.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "text": ""
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/g6-wrapper-tests.stderr",
+      "sha256": "e06ea38c2e891f122df210bd1b3624d86b0db2bf781ed83143ebfd8120bc5cf7",
+      "bytes": 106,
+      "text": "........\n----------------------------------------------------------------------\nRan 8 tests in 6.373s\n\nOK\n"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/original-wrapper-tests.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "text": ""
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/original-wrapper-tests.stderr",
+      "sha256": "4190e6532da5d52050bd5ea71ff40310f4ffe0846610b4b159650675a5a9c2b2",
+      "bytes": 105,
+      "text": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.009s\n\nOK\n"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/g6-check.stdout",
+      "sha256": "4fb8498c7dbf2f3ec7184fdcbc3bc1f6e760ed5b6a8a2a5897a244117d60c33e",
+      "bytes": 161,
+      "text": "{\"passed\": true, \"generation\": 6, \"package_generation\": 5, \"gpu_children_launched\": 0, \"planned_children\": 18, \"regression_frames\": 39, \"appearance_frames\": 22}\n"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/g6-check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "text": ""
+    }
+  ],
+  "old_wrapper_sha256": "0cf379927af6ace42f8ef5d76b5249f455aa759690e0cdffa00911710bd77914",
+  "engine_test_sha256": "9b51e6448f4203902baa6985fc79b7c2b3d8181ee1cab85394c9fdbac795ddf0",
+  "gpu_execution": false,
+  "new_gpu_grant_issued": false,
+  "tests": {
+    "new_guards": 8,
+    "original_guards": 7,
+    "failed": 0,
+    "actual_readonly_check": true
+  },
+  "outside_freeze_sha256": "e8354e79e03fc281f65e9cb8de88c90da6f14dc771fda6a7025a64958de2230e"
+}

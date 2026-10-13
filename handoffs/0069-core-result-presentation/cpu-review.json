@@ -1,0 +1,90 @@
+{
+  "status": "accepted_cpu_source_and_evidence_only",
+  "reviewer": "astra independent runtime review",
+  "at": "2026-10-13T08:16:13.357559+00:00",
+  "source_commit": "15a59060c06ea249c66740b5940b92721d032970",
+  "pins": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/cpu-result.md",
+      "sha256": "be6bad1c2b7367811f5e90e9e2f26aad361b1abdd3b59b31b57adef8954d2656",
+      "bytes": 7172
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/handoffs/0069-core-result-presentation/cpu-evidence/manifest.json",
+      "sha256": "1d5f8a8922e42a1bdda534c598633f7afce1c093bc6ebc615e8d61e7b70b4d27",
+      "bytes": 176827
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/source-final-003.json",
+      "sha256": "ec7c7173494f7c1f9d8eca6e7c36c8ee135460da959b093412a6ec323fd0e5c5",
+      "bytes": 3562840
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/freeze/generation-5.json",
+      "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d",
+      "bytes": 1926
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/regression/frozen-build-g5.json",
+      "sha256": "dba7bc052da4f333a51fee3e6409d69507f7dfa1fc58f6d188a42b69c7e6a810",
+      "bytes": 1291
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/release.json",
+      "sha256": "bc2cabe26bae17700e300188e3c7f8e68fa06538cb44c7b4197d000c5862696f",
+      "bytes": 1159
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/ledger.jsonl",
+      "sha256": "091729c84afba56f289f5a71d7814720f296d2bf5dc70081a6585726c956a0fa",
+      "bytes": 67048
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/audit-cpu.py",
+      "sha256": "8bdd7f7f8874df22cb6a3a35cc547d75e59ad4ed7cb66dc69e19f17d2ff9c343",
+      "bytes": 4214
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/core0069-cpu-audit-20261013/assert.py",
+      "sha256": "fece765351e8bbb79f113b2c344cf7b62dca578c25c79b317ab4570ec1378bc2",
+      "bytes": 4244
+    }
+  ],
+  "verified": {
+    "lossless_records": 558,
+    "payloads": 315,
+    "external_files": 564,
+    "frozen_files": 16977,
+    "rust_passed": 133,
+    "nonempty_rust_groups": 17,
+    "python_passed": 63,
+    "shipping_processes": 10,
+    "shipping_commands": 7,
+    "layout_processes": 12,
+    "layout_snapshots": 60,
+    "owned_reaped_groups": 70,
+    "gpu_execution": 0
+  },
+  "source_review": [
+    "Read all eight paths changed since Claude0379; Parry guard and tests byte-identical to acceptedc08c8b67.",
+    "Font recipe/upstream/wheel unchanged; old input reproduces old font; two new outputs byte-identical and include current Chinese prompt.",
+    "CPU-only guard rejects GPU before locks/debit/launch; holder records trusted authority; adapter change only rustfmt; startup omits fabricated HOME.",
+    "Read complete current lease/capture/regression and CPU-layout/shipping adapter/observer paths; historical helper defects are repaired.",
+    "Existing GPU helpers need fresh authority/output namespace and copied executable selection; this is a forthcoming runner seam, not a CPU evidence defect."
+  ],
+  "substance": [
+    "Replayed retained verification and assertion-only shipping/layout audit; no new game/build/GPU process.",
+    "Ten packaged runs match native logical/PCM results and four whole-session restart concatenations; source/build/maps removed from shipping package; test observer not in production.",
+    "Layout reports have exact requested host/simulation generation boundaries,13 widgets, zero missing clusters, and identical fresh postrestart widget/drawn state.",
+    "133 Rust and63 Python pass counts independently parsed; zero-match filters excluded; initial fmt and shipping artifact-audit failure retained and qualified.",
+    "All70 managed groups paired/reaped; release latch matches final immutable ledger; copied test and four adapter binaries have executable mode."
+  ],
+  "findings": [],
+  "limits": [
+    "No appearance, clipping, native-window, device audio, performance or phase-gate acceptance.",
+    "No current-main integration claim; shipping002 ran generation4 source bytes committed in15a, CI adapters/regression binaries were built under generation5.",
+    "CPU layout measurements do not prove the planned visual layout assertions.",
+    "Historical0060 helper identity gap remains; no retroactive proof repair.",
+    "Existing CPU lease is permanently released; this receipt is not a GPU grant."
+  ]
+}
