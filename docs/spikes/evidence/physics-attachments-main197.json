@@ -359,5 +359,9 @@
     "All24 crate source/test/manifest files equal the accepted producer; lock is unchanged from current main.",
     "No live constructor, contact/solver ownership composition, physics-save admission, GPU, shipping, device or performance claim."
   ],
-  "review_state": "Final attachment integration acceptance pending"
+  "review_state": "Original current-main197 source/execution accepted; main198 disjoint source qualification prepared",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-attachments-main197/final-review.json",
+    "sha256": "cb8e6f6e935808eb8eac32cd96012c40df4f1ac077abc78ae659a12b6b0302ed"
+  }
 }
