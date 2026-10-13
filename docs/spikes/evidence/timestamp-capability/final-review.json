@@ -1,0 +1,23 @@
+{
+  "status": "accepted_test_only_repair_cpu_packet",
+  "head": "ee054a39",
+  "manifest_sha256": "50bd6983ae506a05778650b6c28ef7413d7f098def47b8e4d87bee160e4e21c0",
+  "source_review_sha256": "ff5d86e15453fff9550f50fa2b9d7dca081826edbee2ea5b0b2d6f10f6b6a8e9",
+  "replay": {
+    "passed": true,
+    "records": 15,
+    "frozen_inputs": 3065,
+    "checks": 6,
+    "cpu": 94,
+    "gpu_ignored": 36,
+    "actual_new_gpu": false
+  },
+  "accepted_patch_exact": true,
+  "findings": [],
+  "limits": [
+    "No production, shader, feature, workflow or required-context change",
+    "Actual adapter capabilities and both runtime contract branches must execute on the successor hosted checkpoint",
+    "CPU/compile evidence only; no local GPU run or positive hosted timestamp measurement claimed"
+  ],
+  "at": "2026-10-13T10:12:24.861501+00:00"
+}
