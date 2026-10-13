@@ -1,3 +1,18 @@
+# Root revision3: CPU build only, root supervised
+
+The corrected helper lifecycle/lock/latch protocol is accepted for CPU build.
+Decisions: keep precise-retry latch strictness; reconcile may take only packet
+lock because its recorded orphan can hold the inherited global lock; CPU builds
+need only packet lock; keep45-minute wall-clock ceiling and count all four
+listings within16 children. Do not widen scope or add another framework.
+Root will run runner.py build directly through a supervised process using the
+new build-grant.json under ~/.codex/incant-evidence/0070-effects-build. Target
+/tmp/incant-dynamic-resolution-target is exclusively assigned to this build.
+Do not launch any build, GPU child or alter helpers/source while root builds.
+No GPU grant exists. After compilation root will review exact binaries and
+complete fixture checks before sending the execution instruction. Preserve
+Opus5.5 explicitly Max for the next resumed Claude execution and pixel review.
+
 # Root review revision2 — preparation corrections only
 
 No GPU or Cargo target grant yet. Opus5.5 explicitly Max. Preserve previous result
