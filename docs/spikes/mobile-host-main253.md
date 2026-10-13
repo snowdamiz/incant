@@ -32,7 +32,7 @@ The portable verifier checks archive payloads, current and tested source hashes,
 the exact additive composition, Cargo artifact targets/features, matching CLI
 selection, actual test summaries and producer provenance. Optional flags also
 rehash original files and immediate executable copies. Independent current-main
-final review is pending; publication requires the exact-head PR fast gate.
+final review is accepted; publication requires the exact-head PR fast gate.
 
 Concrete platform surfaces, scheduling, touch/IME callbacks, real-time audio and
 physical-device measurements remain separate work. Caller output and external

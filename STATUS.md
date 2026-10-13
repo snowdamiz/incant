@@ -4,7 +4,7 @@ The retained mobile Rust host is composed on actual main253 with its accepted
 producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI
 library cases and 34 native-checkpoint player cases in each numerical mode,
 including matched fresh CLI continuation; all 26 commands pass. Independent
-current-main final review is pending. Platform surface, touch/IME, device audio
+current-main final review is accepted; publication awaits its exact-head fast gate. Platform surface, touch/IME, device audio
 and phone performance remain separate. [Scope](docs/spikes/mobile-host-main253.md).
 
 The default-off persisted native game path has passing joined CPU qualification:
