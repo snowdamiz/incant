@@ -11,6 +11,7 @@ rust-version = "1.99"
 publish = false
 
 [workspace.dependencies]
+incant_profile = { path = "crates/incant_profile", default-features = false }
 incant_render_data = { path = "crates/incant_render_data" }
 incant_render_authoring = { path = "crates/incant_render_authoring", default-features = false }
 serde = { version = "1.0", features = ["derive"] }

@@ -1047,6 +1047,10 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_profile"
+version = "0.0.1"
+
+[[package]]
 name = "incant_runtime"
 version = "0.0.1"
 dependencies = [
@@ -1058,6 +1062,7 @@ dependencies = [
  "incant_nav",
  "incant_physics_2d_runtime",
  "incant_physics_runtime",
+ "incant_profile",
  "incant_types",
  "libm",
  "serde",

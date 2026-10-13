@@ -1,0 +1,283 @@
+{
+  "format": "incant-independent-source-review",
+  "version": 1,
+  "reviewer": "astra /root/native_wasm_export",
+  "reviewed_at_utc": "2026-10-13T02:37:58.125076+00:00",
+  "status": "accepted-scoped-source",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+  "base": "1c5658cf5d7eee8390b272394f38b8d9b49e1628",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-002/freeze.json",
+    "sha256": "77b7f90f5f3a2db561abfb244ab0b0630effdf50edde3edcae794bf6f391dfae"
+  },
+  "verified_sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "73d552b8402fbe3b3fd226fe7f307cdb16c84576fd522d8899331452c13a80b8",
+      "bytes": 252719,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "128e116fd472a924fcd56c3fc9717ec205b077ccc31b07fe6fb16912e32deda2",
+      "bytes": 3452,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "38fd202c44f28c85a4835afb2f0403258cb2d747e468741474abcf0244513431",
+      "bytes": 4200,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "sha256": "9800adbc42317e3c2885f78af1414a73300c3e8f995c4db11710d4cfd24ef446",
+      "bytes": 10047,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_game_player/src/main.rs",
+      "sha256": "b4699db7cad9451e07cf898f29bafb14e37c5cae885f2bc103638ecfe3affe4d",
+      "bytes": 432,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_game_player/src/profile.rs",
+      "sha256": "7d9e1d35550fb83981499083631687292362aa16ad0eb7684b8c3c15b5a34afe",
+      "bytes": 2893,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_game_player/tests/profile.rs",
+      "sha256": "361babbe61002607e406cac1d7305b123bb47a821e85ea7c378746a53ec8606f",
+      "bytes": 4767,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_game_runtime/Cargo.toml",
+      "sha256": "695d83d752c1daefd1981fcb90c986947c92ecdba35a4380e2c3cdb380baeeed",
+      "bytes": 1471,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_game_runtime/src/core.rs",
+      "sha256": "c4f82b583cb23ca8e377adc44306b89e7fd201dc1717e58063139edda5316481",
+      "bytes": 14736,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/Cargo.toml",
+      "sha256": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef",
+      "bytes": 902,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/src/allocation.rs",
+      "sha256": "d5ead34f95e07db61d494a1100c2161dfefb073653df900680dae9a841877b0f",
+      "bytes": 4422,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/src/disabled.rs",
+      "sha256": "7443107f7daaa73b5395e67163d7b25022a8386d8f18667e2d82d8ffcc03fbbf",
+      "bytes": 717,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/src/enabled.rs",
+      "sha256": "8cc10066d6beb252fed4eb9eb351f523b59abb24200356ffe13d9e9864e2c6aa",
+      "bytes": 9323,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/src/lib.rs",
+      "sha256": "b02608c6d683e82f3232b2e9bdcded261b7695bcd88a4daf20b9967359ca00f4",
+      "bytes": 650,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/src/model.rs",
+      "sha256": "5fec6a62be1304381eb05c40df297a0475121e22ea223948aa0aaa1df62673ef",
+      "bytes": 5668,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/src/tracy.rs",
+      "sha256": "f6896a3968c51cecc47c6a5f838d1cc322bb300011a073687a88a65aa0b67ebf",
+      "bytes": 2863,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/tests/allocations.rs",
+      "sha256": "dded0e6d0cc6521c784c5421dc08c9657482781df46b420b1bd391f170bb2a63",
+      "bytes": 4881,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/tests/disabled.rs",
+      "sha256": "89a2e76c94776c39a0769041c925cf976c7081029afbab9c73485a4da050675a",
+      "bytes": 485,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_profile/tests/summary.rs",
+      "sha256": "e30d257216cb69b0b26dcfcabcc969a59f90c38c8e607fe192c37dee9b2ee9b0",
+      "bytes": 4012,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_runtime/Cargo.toml",
+      "sha256": "6f69521b9038242fd278dd732c8d5db577b19efa47a622e4308c9bd515598209",
+      "bytes": 1187,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_runtime/src/animation.rs",
+      "sha256": "17e3d0d6e9a252a2a78433cee1fbb594109bac6b059794b25b3ccdf622a263e2",
+      "bytes": 21956,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_runtime/src/flipbook.rs",
+      "sha256": "04d75989b8f93d1718a849a8a9385a9b3436ece4bbadfa7ebeab207431cf87b1",
+      "bytes": 5704,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "sha256": "8107201ef6e3d33ca36ea19b2b405fa7f17387ed118d8a34bb7c67b0a54a710e",
+      "bytes": 31876,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "sha256": "2dbc844664f84e46f18684c687867d50efb887842946d394aa2288ac4d16a7d1",
+      "bytes": 2632,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "e281df2179a848870c304fe7afce54fe6911f2b0050bd6970d6ecc98646e146f",
+      "bytes": 26272,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_script/src/program.rs",
+      "sha256": "47aaf334d32a3f85d1deb1de4a55cd6b5fa7d01a4a129bd5340d05af2ee3a1c3",
+      "bytes": 6214,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_script/src/session.rs",
+      "sha256": "d3192f395f1b6623d8b6c7ff52b10674c1cbe8a033245fc82d1e71aa7ecd4b25",
+      "bytes": 6417,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "crates/incant_script/tests/profile.rs",
+      "sha256": "0d03a7454cfe9da11456be99a0ad7fa8cc8d8e23a2659aba425f01cd7f6177c2",
+      "bytes": 2867,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    },
+    {
+      "path": "docs/spikes/native-cpu-profiling.md",
+      "sha256": "32250918e36354906039fbc7616c917d3327622ff8a4742e3ba9017bb7e621d2",
+      "bytes": 4819,
+      "live_verified": true,
+      "frozen_copy_verified": true
+    }
+  ],
+  "reviewed_upstream": [
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tracy-client-0.18.5/src/state.rs",
+      "sha256": "71c9472680053226ebaaf39668e8a1b6dbf734af255831265480a64ce20ca300"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tracy-client-sys-0.29.0/build.rs",
+      "sha256": "d9637191d7e30ff6a3ccd799de6eedd51613664a52db7f8152066ead2e04694c"
+    }
+  ],
+  "lock_identity_audit": {
+    "previous_count": 963,
+    "existing_identity_changes": 0,
+    "additions": [
+      [
+        "incant_profile",
+        "0.0.1",
+        null,
+        null
+      ],
+      [
+        "tracy-client",
+        "0.18.5",
+        "registry+https://github.com/rust-lang/crates.io-index",
+        "6131992ff3e2cb96f407eb4eb005427ba15e2687260d99089b90e60e33169ce0"
+      ],
+      [
+        "tracy-client-sys",
+        "0.29.0",
+        "registry+https://github.com/rust-lang/crates.io-index",
+        "ab27f167b093214c68413a2e0bcd318f0591af475597405ff68138ba0a433379"
+      ]
+    ]
+  },
+  "review_scope": [
+    "Default feature hooks are no-ops; profiling and transport remain host-selected and absent from project/gameplay mutation APIs.",
+    "One process capture, mutex-protected fixed 25-phase/64-source aggregates, generation-fenced scope retirement, per-thread CPU ownership, nested inclusive timing, numeric identity bounds and failure/unwind handling.",
+    "CountingAllocator forwards exact pointer/layout/size/null semantics without retaining pointers, locks or reentrant callbacks; failed realloc leaves original allocation/accounting intact; process requested-byte counters and nontransactional observation limits are explicit.",
+    "QuickJS heap metrics occur after JS loans/budget checks and remain separate from Rust requested allocation counters. Actual runtime/script/game/player instrumentation preserves existing mutation and error order.",
+    "Explicit player feature admission prevents transitive summary/Tracy feature unification from accepting a CLI option without its corresponding player report/transport feature.",
+    "Pinned Tracy client manual startup has no implicit transport in a default build; process-owned standalone lifetime, fixed labels, numeric source slots, no unsafe shutdown. Upstream build flags and environment override surface reviewed.",
+    "Observable tests cover stale scopes/workers, nested/failure cleanup, source quotas, same-allocator allocation/reallocation/null/zero/grow/shrink semantics, actual ScriptHost rollback/heap identity and player report/PCM parity."
+  ],
+  "followup_002": {
+    "changed_files": [
+      "crates/incant_game_player/src/profile.rs",
+      "crates/incant_profile/tests/allocations.rs"
+    ],
+    "reviewed": "Both declared corrections are complete; remaining 27 frozen input hashes are unchanged from001."
+  },
+  "findings": [],
+  "review_actions": {
+    "source_and_copy_hashes_verified": 29,
+    "test_runs_by_reviewer": 0,
+    "builds_by_reviewer": 0,
+    "source_edits_by_reviewer": 0,
+    "capture_or_listener_started": false,
+    "gpu_or_visual_execution": false
+  },
+  "limitations": [
+    "Source review only; owner-reported focused tests are not independent execution acceptance. Broad suites, selected default/feature graph checks and actual local Tracy capture/shipping evidence remain separate.",
+    "Transport guarantees apply to the supported selected build. Pinned sys build supports TRACY_CLIENT_LIB/LIB_PATH/STATIC and CXX flag overrides; arbitrary external override/feature-unified builds are not certified by this receipt. Planned exporter evidence must establish the exact linked client/config.",
+    "Summary aggregates are process-wide and inclusive, not simultaneous-world isolation or additive frame time. Tracy C buffers are outside fixed summary storage. Allocations are requested Rust sizes, not RSS, C/GPU heaps, or allocation stacks.",
+    "No phone/device/performance, renderer/GPU timestamp, full-profiler or Phase1 completion claim."
+  ]
+}

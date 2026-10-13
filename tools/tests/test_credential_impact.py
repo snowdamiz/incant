@@ -30,6 +30,29 @@ def fixture(extra='', checksum='a' * 64):
             + package('external', source=SOURCE, checksum=checksum) + extra)
 
 
+def local_manifests(root):
+    """Read actual workspace/patch roots; archived manifests are evidence only."""
+    manifest = tomllib.loads((root / 'Cargo.toml').read_text())
+    paths = {path / 'Cargo.toml'
+             for pattern in manifest['workspace']['members']
+             for path in root.glob(pattern)}
+    for registry in manifest.get('patch', {}).values():
+        paths.update(root / spec['path'] / 'Cargo.toml'
+                     for spec in registry.values() if 'path' in spec)
+    return sorted(paths)
+
+
+def local_directories(root, names):
+    directories = {}
+    for path in local_manifests(root):
+        name = tomllib.loads(path.read_text()).get('package', {}).get('name')
+        if name in names:
+            if name in directories:
+                raise ValueError(f'duplicate local package: {name}')
+            directories[name] = path.parent.relative_to(root).as_posix()
+    return directories
+
+
 class CredentialImpact(unittest.TestCase):
     def classify(self, before, after, paths=('Cargo.lock',)):
         report = impact.classify(paths, before, after)
@@ -105,16 +128,7 @@ class CredentialImpact(unittest.TestCase):
     def test_workflow_covers_every_reachable_local_crate_directory(self):
         # A new local edge cannot silently outgrow the manually listed triggers.
         names = impact.locked_graph((ROOT / 'Cargo.lock').read_text())['local_packages']
-        paths = impact.git(ROOT, 'ls-files', '-z', '*Cargo.toml').split(b'\0')
-        directories = {}
-        for raw in paths:
-            if not raw:
-                continue
-            path = Path(raw.decode())
-            package = tomllib.loads((ROOT / path).read_text()).get('package', {})
-            if package.get('name') in names:
-                self.assertNotIn(package['name'], directories)
-                directories[package['name']] = path.parent.as_posix()
+        directories = local_directories(ROOT, names)
         self.assertEqual(set(directories), set(names))
         workflow = (ROOT / '.github/workflows/credentials.yml').read_text()
         # Every candidate change runs credentials; no path allowlist can omit a new dependency.
@@ -122,6 +136,28 @@ class CredentialImpact(unittest.TestCase):
         self.assertIn('branches: [codex/release-candidate]', triggers)
         self.assertNotIn('paths:', triggers)
         self.assertNotIn('paths-ignore:', triggers)
+
+    def test_archived_manifest_cannot_replace_actual_workspace_or_patch(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / 'Cargo.toml').write_text(
+                '[workspace]\nmembers = ["crates/*"]\n'
+                '[patch.crates-io]\npatched = { path = "third_party/patched" }\n')
+            for directory in ['crates/profile', 'third_party/patched', 'docs/evidence/profile']:
+                path = root / directory / 'Cargo.toml'
+                path.parent.mkdir(parents=True)
+                name = 'patched' if directory == 'third_party/patched' else 'profile'
+                path.write_text(f'[package]\nname = "{name}"\nversion = "0.0.1"\n')
+            names = {'profile', 'patched'}
+            self.assertEqual(local_directories(root, names),
+                             {'profile': 'crates/profile', 'patched': 'third_party/patched'})
+            (root / 'third_party/patched/Cargo.toml').write_text(
+                '[package]\nname = "profile"\nversion = "0.0.1"\n')
+            with self.assertRaisesRegex(ValueError, 'duplicate local package: profile'):
+                local_directories(root, names)
+            (root / 'third_party/patched/Cargo.toml').unlink()
+            with self.assertRaises(FileNotFoundError):
+                local_directories(root, names)
 
 
 class GitInputs(unittest.TestCase):

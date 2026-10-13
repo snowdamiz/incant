@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "commands": 14,
+  "full_runs": 5,
+  "refusals": 5,
+  "compared_pcm_samples": 28800000,
+  "captured_zones": 20,
+  "plot_samples": {
+    "QuickJS used bytes": 3447,
+    "QuickJS allocated bytes": 3447,
+    "Rust requested live bytes": 3447,
+    "Rust allocation calls": 3447
+  }
+}

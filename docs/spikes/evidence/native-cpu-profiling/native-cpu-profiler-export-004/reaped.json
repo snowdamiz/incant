@@ -1,0 +1,240 @@
+[
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-001/commands/csv-version.json",
+    "sha256": "e4f45c04db9377570136bc10b18fdd45839837d4eb525706888d4071bf62045b",
+    "pid": 51581,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-001/commands/init.json",
+    "sha256": "a957088c1ea3a9d956eebde902c65874ab191c598b587f8cb7f7e06b54087b0c",
+    "pid": 51583,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-002/commands/csv-version.json",
+    "sha256": "c5d4531bc662a614cc52695ac6c4b7829de6ff8acc96391677bbc2a7a96e06b4",
+    "pid": 58467,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-002/commands/init.json",
+    "sha256": "45c2d201cf8dd413b0e08eb643c0c57678ae02ca73ed3a632029daf1f3263f6d",
+    "pid": 58468,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/summary-summary.json",
+    "sha256": "eb4a22bd38ce92dd6e9845522ee34739e6728bdf390ba35b76b84c4faf8678d9",
+    "pid": 66517,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/tracy-summary.json",
+    "sha256": "d3989581963ba24ffb155e9f0b78895093fb325ed8d2dbb63361b0b66c2f3c82",
+    "pid": 66631,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/refusal-summary-transport.json",
+    "sha256": "700d06be20b6976d7f23be46056e6c0b6ef057475407d03c6df774fab758cf97",
+    "pid": 66672,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/capture.json",
+    "sha256": "2e75c650a82a9a9634bc03d40f32484279db08d3f9b72331b99604ea909e7c0a",
+    "pid": 66678,
+    "exit": 3,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/refusal-guest-1.json",
+    "sha256": "e9c8c828c8fcb92e4c89c07d2d4e26b298e32377616691bf79a7aef3b5f8da26",
+    "pid": 66675,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/tracy-captured.json",
+    "sha256": "e53f835a99e838bc5701512dcc244203cdafc1e6d3bc55b4b3bb514b8cc7de45",
+    "pid": 66679,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/summary-baseline.json",
+    "sha256": "78cc64ea7000c5c10227252f41c009428015bf996ebcd694ccbd41f94b938fdb",
+    "pid": 66486,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/refusal-duplicate.json",
+    "sha256": "fd2f0bb5a39daf1c278232389dd78499b0aded7ac27cc5ab8fd93aec4f03f150",
+    "pid": 66671,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/csv-version.json",
+    "sha256": "9243a3a40dfd1159a1c286c8a3b771efd93515704e9cf4578f18d4053ae88938",
+    "pid": 58989,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/refusal-guest-0.json",
+    "sha256": "5b5984c4867e56b068de45479da8977704b03d7fa6fc419b2d421ede2c801469",
+    "pid": 66674,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/refusal-unsupported.json",
+    "sha256": "bb312f6c45cdf68f15ca819404d1aeb27a0fb7f37b1a7b0002ad2a0e0c4f4a86",
+    "pid": 66673,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/init.json",
+    "sha256": "2e9e5e51e24d68f4144cf91950931bf1025de82e832481d25e55532c7be92f8f",
+    "pid": 58990,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/commands/tracy-baseline.json",
+    "sha256": "4cacc103d99e38433ee781f9625b7d54936bfe7e68fd5566449644f7ef8302c6",
+    "pid": 66564,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/summary-summary.json",
+    "sha256": "9f173e563c77d72cfe19ccbb06f74f6080bde1ba2de0ef1ab313223a75228763",
+    "pid": 67197,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/tracy-summary.json",
+    "sha256": "5ef334ce046f2394cadc235464dbdba1ded6d3fc6dd856691cf09c003e6eb92c",
+    "pid": 67257,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/trace-zones.json",
+    "sha256": "51c64984065ac4b31489599de57ba8f582666b60aa85ab4b9fcea8e1772a445b",
+    "pid": 67329,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/trace-events-plots.json",
+    "sha256": "78ab52bfe9a1b39e859b1fe2ee874012be3d7124abcdcfb67ec2e990deeb5b6d",
+    "pid": 67330,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/refusal-summary-transport.json",
+    "sha256": "5e39c335d971c902c320178ff9e07bb7ffa60a2f729c72cc3d0ad2e876ce2fcf",
+    "pid": 67287,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/capture.json",
+    "sha256": "c24ccb994bfd712ce7bb26035f71c0398c4ce30f93ba6e8b73892bcc78eacb83",
+    "pid": 67302,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/refusal-guest-1.json",
+    "sha256": "29870b745b925d3a52b1baf8fe3305a02b7cd65e03ce60074e632a098efb5ece",
+    "pid": 67290,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/tracy-captured.json",
+    "sha256": "c4e39fc56088925099e1a5fee32faf5b719011c52173ff0fb752e92284444bcf",
+    "pid": 67293,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/summary-baseline.json",
+    "sha256": "951eb406c2bf6e442c2d63f7544606cb74a04fa01bd44e184c17f7ec9619dab1",
+    "pid": 67164,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/refusal-duplicate.json",
+    "sha256": "b2da2ca443b67fa64b8911fd278c047aa074ddc55281cd6cc2998d761f0040ca",
+    "pid": 67286,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/csv-version.json",
+    "sha256": "0b93385a9097c154494354701ef210a9c8bb4d37da0099eefd07e7fad0969870",
+    "pid": 67163,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/refusal-guest-0.json",
+    "sha256": "eab2935720ccc81284906b2dc754ff2965aae52abed780b2db24411ae855a79d",
+    "pid": 67289,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/refusal-unsupported.json",
+    "sha256": "615a0c3c95dfda4d535d54dd0e0538ec3e7d6b80614a4e17dd336e899df4307d",
+    "pid": 67288,
+    "exit": 1,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-004/commands/tracy-baseline.json",
+    "sha256": "27995e757c29992bb5a917eecbce4b38ba17a3317aefca9bb05727ade4492ee1",
+    "pid": 67228,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-001/authoring-calls.json",
+    "sha256": "6e13ccc83bde920bc7eff1a7f60b89bd083f2b558081b7e33ccb8d08302fc25b",
+    "pid": 51782,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-002/authoring-calls.json",
+    "sha256": "809027f589693591fd4894c398452c130571a73a9e67c05e9ccf4a83e3a56a9f",
+    "pid": 58469,
+    "exit": 0,
+    "absent": true
+  },
+  {
+    "command": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/authoring-calls.json",
+    "sha256": "8f7c23d470b0e4723ee1aa2675c400a23cabdc17098eca2364ec33a82343e11f",
+    "pid": 58991,
+    "exit": 0,
+    "absent": true
+  }
+]

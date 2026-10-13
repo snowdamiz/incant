@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-13T04:09:10.587575+00:00",
+  "reviewer": "astra/root",
+  "accepted_scope": "Current-main194 CPU profiler integration and explicitly producer-scoped reuse",
+  "head": "7dde320e6d978a6e57be3c14acb78f996cf54e6f",
+  "manifest_sha256": "9a408c07aa7723ecfd9e51608487a637b335daa85898a464a763b690fd4cd3d6",
+  "result": "accepted",
+  "verification": {
+    "collector_verify_only_exit": 0,
+    "independent_archive_records": 41,
+    "normal_target_source_inputs": 659,
+    "exact_normalized_target_graphs": 3,
+    "affected_cpu_passed": 495,
+    "default_player_cpu_passed": 19,
+    "all_current_checks": 10,
+    "sole_runtime_source_exception": "cfg(test, compiler) quota-only test excluded from player production",
+    "build_host_review": "Mobile static-Wasm branches do not affect unchanged desktop TypeScript route; codegen AST identical; selected normal target Cargo versions and features match",
+    "raw_evidence_attributes": "Exact nine accepted paths only; original bytes retained"
+  },
+  "limits": [
+    "No new current-main shipping package/process/Tracy capture is claimed. Original two packages, five 3600-tick processes, partial capture and refusals remain producer evidence.",
+    "No GPU appearance, phone, performance-gain or complete profiler/phase gate approval."
+  ],
+  "processes": {
+    "verification_handle": 28737,
+    "terminal_exit": 0,
+    "reaped": true
+  }
+}

@@ -1,0 +1,336 @@
+diff --git a/crates/incant_cook/src/project_build.rs b/crates/incant_cook/src/project_build.rs
+index 08f5643a..d6f8ac14 100644
+--- a/crates/incant_cook/src/project_build.rs
++++ b/crates/incant_cook/src/project_build.rs
+@@ -11,6 +11,8 @@ use sha2::{Digest, Sha256};
+ use std::{env, fs, io::Read, path::Path};
+ 
+ type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
++#[path = "project_build_wasm.rs"]
++mod wasm_bundle;
+ pub const PROJECT_ENV: &str = "INCANT_NATIVE_PROJECT";
+ pub const SCENE_ENV: &str = "INCANT_NATIVE_PROJECT_SCENE";
+ 
+@@ -90,15 +92,8 @@ fn embed(
+         .scenes
+         .get(&scene_id)
+         .ok_or("selected scene is missing")?;
+-    let mobile_platform = if target == "aarch64-linux-android" {
+-        "Android"
+-    } else {
+-        "iOS"
+-    };
+-    if mobile && authored.program.is_some() {
+-        return Err(format!("authored {mobile_platform} archive currently requires TypeScript; static Wasm mobile export is unsupported").into());
+-    }
+     if mobile
++        && authored.program.is_none()
+         && [
+             "INCANT_NATIVE_WASM_FINGERPRINT",
+             "INCANT_NATIVE_WASM_INPUT",
+@@ -109,15 +104,18 @@ fn embed(
+         .iter()
+         .any(|key| env::var_os(key).is_some())
+     {
+-        return Err(format!(
+-            "authored {mobile_platform} archive cannot select a static Wasm build input"
+-        )
+-        .into());
++        return Err("TypeScript mobile project cannot select static Wasm build inputs".into());
+     }
+     let wasm = if let Some(incant_doc::SceneProgram::Wasm { module }) = &authored.program {
++        if mobile {
++            wasm_bundle::destination(target)?;
++        }
+         if env::var_os("CARGO_FEATURE_STATIC_MODULE").is_none() {
+             return Err("authored Wasm export requires the static-module player feature".into());
+         }
++        if mobile && env::var_os("INCANT_WASM_BUNDLE").is_none() {
++            return Err("authored mobile Wasm export requires a trusted static bundle".into());
++        }
+         let asset = &project.assets[module];
+         let cache = incant_wasm_cook::project_cache(root, false)?;
+         changed(&cache.join(format!("{}.wasm.json", asset.sha256)))?;
+@@ -138,6 +136,12 @@ fn embed(
+                 return Err("authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py".into());
+             }
+         }
++        if mobile {
++            let bundle = env::var_os("INCANT_WASM_BUNDLE")
++                .ok_or("authored mobile Wasm export requires a trusted static bundle")?;
++            wasm_bundle::validate(Path::new(&bundle), &captured)?;
++            changed(Path::new(&bundle))?;
++        }
+         println!("cargo:rustc-env=INCANT_AUTHORED_WASM=scene-program");
+         serde_json::json!({"kind":"wasm", "module":module, "fingerprint":captured.fingerprint(), "input_sha256":captured.input_sha256(), "prepared_sha256":captured.prepared_sha256(), "registry_sha256":captured.registry_sha256(), "translator":"wasm2c-1.0.42"})
+     } else {
+diff --git a/crates/incant_cook/src/project_build_wasm.rs b/crates/incant_cook/src/project_build_wasm.rs
+new file mode 100644
+index 00000000..d5aedaab
+--- /dev/null
++++ b/crates/incant_cook/src/project_build_wasm.rs
+@@ -0,0 +1,193 @@
++//! Admit the complete engine-generated static bundle, never native project code.
++//! The external trusted exporter creates it privately from validated Wasm.
++use incant_wasm_cook::CapturedModule;
++use sha2::{Digest, Sha256};
++use std::{collections::BTreeSet, fs, io::Read, path::Path};
++
++type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
++
++pub(super) fn destination(target: &str) -> Result<()> {
++    if !matches!(
++        target,
++        "aarch64-apple-ios" | "aarch64-apple-ios-sim" | "aarch64-linux-android"
++    ) {
++        return Err(
++            "authored mobile static Wasm requires an explicit reviewed arm64 destination".into(),
++        );
++    }
++    Ok(())
++}
++
++pub(super) fn validate(bundle: &Path, captured: &CapturedModule) -> Result<()> {
++    if !fs::symlink_metadata(bundle)?.file_type().is_dir() {
++        return Err("mobile static bundle must be a trusted directory".into());
++    }
++    let manifest: serde_json::Value =
++        serde_json::from_slice(&read(&bundle.join("manifest.json"), 1024 * 1024)?)?;
++    let expected = serde_json::json!([{
++        "name":"scene-program", "prefix":"m0",
++        "input_sha256":captured.input_sha256(),
++        "prepared_sha256":captured.prepared_sha256(),
++    }]);
++    let object = manifest
++        .as_object()
++        .ok_or("static bundle manifest object")?;
++    if object.len() != 3 || manifest["wabt"] != "1.0.42" || manifest["modules"] != expected {
++        return Err("mobile static bundle captured identity mismatch".into());
++    }
++    let files = manifest["files"]
++        .as_object()
++        .ok_or("static bundle manifest files")?;
++    let names = [
++        "m0.original.wasm",
++        "m0.wasm",
++        "m0.c",
++        "m0.h",
++        "m0-facade.c",
++        "linked.rs",
++    ];
++    let expected_names: BTreeSet<_> = names.into_iter().collect();
++    if files.keys().map(String::as_str).collect::<BTreeSet<_>>() != expected_names {
++        return Err("mobile static bundle file set mismatch".into());
++    }
++    let actual_names: BTreeSet<_> = fs::read_dir(bundle)?
++        .map(|entry| entry.map(|entry| entry.file_name()))
++        .collect::<std::io::Result<_>>()?;
++    let complete: BTreeSet<_> = names
++        .into_iter()
++        .chain(["manifest.json"])
++        .map(std::ffi::OsString::from)
++        .collect();
++    if actual_names != complete {
++        return Err("mobile static bundle contains unexpected build inputs".into());
++    }
++    for name in names {
++        let bytes = read(&bundle.join(name), 128 * 1024 * 1024)?;
++        if files[name].as_str() != Some(format!("{:x}", Sha256::digest(&bytes)).as_str()) {
++            return Err("mobile static bundle checksum mismatch".into());
++        }
++        if (name == "m0.original.wasm" && bytes != captured.original())
++            || (name == "m0.wasm" && bytes != captured.prepared())
++        {
++            return Err("mobile static bundle input differs from captured module".into());
++        }
++    }
++    Ok(())
++}
++
++fn read(path: &Path, cap: u64) -> Result<Vec<u8>> {
++    let metadata = fs::symlink_metadata(path)?;
++    if !metadata.file_type().is_file() || metadata.len() > cap {
++        return Err("mobile static bundle requires bounded regular files".into());
++    }
++    let mut bytes = Vec::new();
++    fs::File::open(path)?
++        .take(cap + 1)
++        .read_to_end(&mut bytes)?;
++    if bytes.len() as u64 > cap {
++        return Err("mobile static bundle file exceeds limit".into());
++    }
++    Ok(bytes)
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    #[test]
++    fn only_reviewed_mobile_destinations_admit_captured_static_wasm() {
++        destination("aarch64-apple-ios").unwrap();
++        destination("aarch64-apple-ios-sim").unwrap();
++        destination("aarch64-linux-android").unwrap();
++        for target in [
++            "x86_64-linux-android",
++            "armv7-linux-androideabi",
++            "aarch64-linux-android24",
++            "aarch64-apple-darwin",
++            "x86_64-apple-ios",
++            "wasm32-unknown-unknown",
++        ] {
++            assert_eq!(
++                destination(target).unwrap_err().to_string(),
++                "authored mobile static Wasm requires an explicit reviewed arm64 destination"
++            );
++        }
++    }
++
++    fn fixture() -> (tempfile::TempDir, CapturedModule) {
++        // (module (memory (export "memory") 1)
++        //   (func (export "incant_abi") (result i32) i32.const 1)
++        //   (func (export "update") (param i64 f64)))
++        let bytes = b"\0asm\x01\0\0\0\x01\x0a\x02\x60\0\x01\x7f\x60\x02\x7e\x7c\0\x03\x03\x02\0\x01\x05\x03\x01\0\x01\x07\x20\x03\x06memory\x02\0\x0aincant_abi\0\0\x06update\0\x01\x0a\x09\x02\x04\0\x41\x01\x0b\x02\0\x0b";
++        let captured = CapturedModule::capture(bytes).unwrap();
++        let root = tempfile::tempdir().unwrap();
++        let mut files = serde_json::Map::new();
++        for (name, data) in [
++            ("m0.original.wasm", captured.original()),
++            ("m0.wasm", captured.prepared()),
++            ("m0.c", b"trusted test C".as_slice()),
++            ("m0.h", b"trusted test header".as_slice()),
++            ("m0-facade.c", b"trusted test facade".as_slice()),
++            ("linked.rs", b"trusted test binding".as_slice()),
++        ] {
++            fs::write(root.path().join(name), data).unwrap();
++            files.insert(name.into(), format!("{:x}", Sha256::digest(data)).into());
++        }
++        let manifest = serde_json::json!({"wabt":"1.0.42","modules":[{
++            "name":"scene-program","prefix":"m0","input_sha256":captured.input_sha256(),
++            "prepared_sha256":captured.prepared_sha256()}],"files":files});
++        fs::write(
++            root.path().join("manifest.json"),
++            serde_json::to_vec(&manifest).unwrap(),
++        )
++        .unwrap();
++        (root, captured)
++    }
++
++    #[test]
++    fn complete_manifest_is_required_and_changed_generated_input_is_refused() {
++        let (root, captured) = fixture();
++        validate(root.path(), &captured).unwrap();
++        fs::write(root.path().join("m0.c"), b"replaced native code").unwrap();
++        assert_eq!(
++            validate(root.path(), &captured).unwrap_err().to_string(),
++            "mobile static bundle checksum mismatch"
++        );
++        fs::remove_file(root.path().join("manifest.json")).unwrap();
++        assert!(validate(root.path(), &captured).is_err());
++    }
++
++    #[test]
++    fn valid_hashes_cannot_admit_a_different_module_or_extra_compiler_input() {
++        let (root, captured) = fixture();
++        let path = root.path().join("manifest.json");
++        let mut manifest: serde_json::Value =
++            serde_json::from_slice(&fs::read(&path).unwrap()).unwrap();
++        manifest["modules"][0]["prepared_sha256"] = "0".repeat(64).into();
++        fs::write(&path, serde_json::to_vec(&manifest).unwrap()).unwrap();
++        assert_eq!(
++            validate(root.path(), &captured).unwrap_err().to_string(),
++            "mobile static bundle captured identity mismatch"
++        );
++        let (root, captured) = fixture();
++        fs::write(root.path().join("extra.c"), b"unexpected").unwrap();
++        assert_eq!(
++            validate(root.path(), &captured).unwrap_err().to_string(),
++            "mobile static bundle contains unexpected build inputs"
++        );
++    }
++
++    #[cfg(unix)]
++    #[test]
++    fn symlinked_generated_code_is_refused_even_with_matching_bytes() {
++        let (root, captured) = fixture();
++        let external = tempfile::tempdir().unwrap();
++        let path = root.path().join("m0.c");
++        fs::rename(&path, external.path().join("m0.c")).unwrap();
++        std::os::unix::fs::symlink(external.path().join("m0.c"), &path).unwrap();
++        assert_eq!(
++            validate(root.path(), &captured).unwrap_err().to_string(),
++            "mobile static bundle requires bounded regular files"
++        );
++    }
++}
+diff --git a/tools/native_wasm.py b/tools/native_wasm.py
+index d5546540..64b32d14 100644
+--- a/tools/native_wasm.py
++++ b/tools/native_wasm.py
+@@ -6,7 +6,8 @@ from native_package import read, require, key
+ from wasm2c import prepare
+ 
+ 
+-def capture(project, scene, storage, cargo, env, execute, wabt):
++def selection(project, scene):
++    """Bounded selector admission shared by trusted native exporters."""
+     document = json.loads(read(project, 64 * 1024**2))
+     require(isinstance(document, dict) and isinstance(document.get('scenes'), dict), 'Invalid project scene table')
+     scenes = document['scenes']
+@@ -29,14 +30,23 @@ def capture(project, scene, storage, cargo, env, execute, wabt):
+     asset = assets.get(program['module'])
+     require(isinstance(asset, dict) and isinstance(asset.get('sha256'), str), 'Missing module asset or fingerprint')
+     require(asset.get('kind') == 'wasm', 'Scene module must identify a wasm asset')
+-    fingerprint = key(asset['sha256'])
++    return {'module': program['module'], 'fingerprint': key(asset['sha256'])}
++
++
++def capture(project, scene, storage, cargo, env, execute, wabt, *, audit_translation=False):
++    selected = selection(project, scene)
++    if selected is None:
++        return None
++    fingerprint = selected['fingerprint']
+     require(wabt is not None, 'Wasm export requires --wabt pointing to trusted WABT 1.0.42 tools')
+     execute([cargo, 'build', '--locked', '-j2', '-p', 'incant_wasm_cook', '--target-dir', storage / 'cook-target'], env=env, timeout=600)
+     cooker = storage / 'cook-target/debug' / ('incant_wasm_cook.exe' if os.name == 'nt' else 'incant_wasm_cook')
+     captured = storage / 'captured'
+     identity = json.loads(execute([cooker, '--capture', project.parent, fingerprint, captured], env=env).stdout)
+     bundle = storage / 'wasm-bundle'
+-    report = prepare(bundle, [('scene-program', captured / 'original.wasm')], Path(wabt), cooker, captured / 'prepared.wasm')
++    runner = (lambda args: execute(args, env=env).stdout) if audit_translation else None
++    report = prepare(bundle, [('scene-program', captured / 'original.wasm')], Path(wabt), cooker,
++                     captured / 'prepared.wasm', execute=runner)
+     require(report['modules'][0]['input_sha256'] == identity['input_sha256'] and
+             report['modules'][0]['prepared_sha256'] == identity['prepared_sha256'], 'Captured translation identity mismatch')
+     env.update(INCANT_WASM_BUNDLE=str(bundle), INCANT_NATIVE_WASM_FINGERPRINT=identity['fingerprint'],
+diff --git a/tools/wasm2c.py b/tools/wasm2c.py
+index e39447ae..25016f81 100644
+--- a/tools/wasm2c.py
++++ b/tools/wasm2c.py
+@@ -72,9 +72,10 @@ void incant_{module}_free(void* instance) {{ Instance* p=instance; wasm2c_{modul
+ '''
+ 
+ 
+-def prepare(output, modules, wabt, cook, captured=None):
++def prepare(output, modules, wabt, cook, captured=None, *, execute=None):
++    execute = run if execute is None else execute
+     translator = wabt / ('bin/wasm2c.exe' if os.name == 'nt' else 'bin/wasm2c')
+-    if run([translator, '--version']).strip() != '1.0.42':
++    if execute([translator, '--version']).strip() != '1.0.42':
+         raise ValueError('WABT 1.0.42 required')
+     output.mkdir(parents=True, exist_ok=False)
+     report = []
+@@ -91,11 +92,11 @@ def prepare(output, modules, wabt, cook, captured=None):
+         (output / f'{module}.original.wasm').write_bytes(source.read_bytes())
+         prepared = output / f'{module}.wasm'
+         if captured is None:
+-            run([cook, output / f'{module}.original.wasm', prepared])
++            execute([cook, output / f'{module}.original.wasm', prepared])
+         else:
+             if len(modules) != 1 or name != "scene-program": raise ValueError("Captured export requires one scene program")
+             prepared.write_bytes(captured.read_bytes())
+-        run([translator, prepared, '--module-name', module, '--no-debug-names',
++        execute([translator, prepared, '--module-name', module, '--no-debug-names',
+              '--disable-exceptions', '--disable-tail-call', '--disable-memory64',
+              '--disable-multi-memory', '--disable-simd', '--disable-relaxed-simd',
+              '-o', output / f'{module}.c'])

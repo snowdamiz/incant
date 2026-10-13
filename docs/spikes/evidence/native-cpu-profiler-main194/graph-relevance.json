@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "head": "8cc9a729869b5bf290bdf38641b70ef5b63efb6c",
+  "graphs": [
+    {
+      "mode": "default",
+      "command": [
+        "tools/cargo",
+        "tree",
+        "--locked",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic,project,render-input",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}"
+      ],
+      "exit": 0,
+      "current_stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/graph-default.stdout",
+        "sha256": "b71784538d84a29fee691859afbbe685baac871df142b0f87c3654a6e017df45"
+      },
+      "producer_stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/normal-default.txt",
+        "sha256": "c6c63d9e02a9e6a7d27e352877d4b37f2732058876190b8ce1fa56e3ade88fc9"
+      },
+      "exact_package_versions_and_features_after_only_checkout_path_normalization": true
+    },
+    {
+      "mode": "summary",
+      "command": [
+        "tools/cargo",
+        "tree",
+        "--locked",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic,project,render-input,profile",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}"
+      ],
+      "exit": 0,
+      "current_stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/graph-summary.stdout",
+        "sha256": "47daa905847b78098990e5f0da31fcb34b97e9dc22181b5b0243919dc413e24d"
+      },
+      "producer_stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/normal-summary.txt",
+        "sha256": "cb0b8d512953a6b1f935f04e8ce0e433becc1c85ecca84b26594fb9f3e448da5"
+      },
+      "exact_package_versions_and_features_after_only_checkout_path_normalization": true
+    },
+    {
+      "mode": "tracy",
+      "command": [
+        "tools/cargo",
+        "tree",
+        "--locked",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic,project,render-input,profile-tracy",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}"
+      ],
+      "exit": 0,
+      "current_stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/graph-tracy.stdout",
+        "sha256": "dff4a38a3bef204453ccb7d8159d59d6ad6318f27277c55d37904b1a38f350e4"
+      },
+      "producer_stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/normal-tracy.txt",
+        "sha256": "70774b6e59f95cc113cf0adb25af1128bd541b3da8159952450c1c539c6adf47"
+      },
+      "exact_package_versions_and_features_after_only_checkout_path_normalization": true
+    }
+  ],
+  "lock_change": [
+    {
+      "package": "incant_render",
+      "only_added_dependency": "rustix"
+    }
+  ],
+  "qualification": "Selected desktop target dependency versions/features unchanged; other changed build/tool sources still require explicit source relevance review. This does not claim new current-main shipping/capture execution."
+}

@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "accepted_head": "4c4a519a3d67f74a209cd73df7186b3b19f786d1",
+  "current_head": "ce6325ac06c36c7b830b7ec98a67ea386ad76c7d",
+  "qualified_inputs": [
+    {
+      "path": ".gitattributes",
+      "accepted_sha256": "7a0d2d88d83ac61515c3c6bfcbff57ba8cd0a3b85e8451af929ea61e3f0b87d4",
+      "current_sha256": "c03d544433af2276425c7b052b13eb84a458713d379ff978b63599bfe15aaafa",
+      "frozen_sha256": "21939a40d66befbcd75b7b779c1ca3281dc2fd79510ca024a948dba837379dbf"
+    },
+    {
+      "path": "tools/probes/native-physics/Cargo.lock",
+      "accepted_sha256": "c82b13fdf259f4a77cc59ff5078edf94446a0802fce0d62e9f9db46e22dfd557",
+      "current_sha256": "b51e48863141cfb8e50f5c163d932d6966a1dc027f790ecef05909fcc4772a7c",
+      "frozen_sha256": "c82b13fdf259f4a77cc59ff5078edf94446a0802fce0d62e9f9db46e22dfd557"
+    },
+    {
+      "path": "tools/tests/test_credential_impact.py",
+      "accepted_sha256": "8e23da6baa9d2ee9433fda5fc624f0d2d55738f66c2d40602343426a80a43832",
+      "current_sha256": "2aeb54e0c58745a74b30ffad1ff59a90e1bfd0ae59b3cc07d50f50e5915066c2",
+      "frozen_sha256": "8e23da6baa9d2ee9433fda5fc624f0d2d55738f66c2d40602343426a80a43832"
+    }
+  ],
+  "original_collector_sha256": "d92f6de64dbcc9b139cc486a89dda6da076eb9a33f1d263aed007c83ffebcded",
+  "scope": "Only isolated probe lock, actual-manifest tooling test and exact evidence whitespace metadata changed. Runtime/exporter/root-lock/profiler/selected target inputs unchanged. All original tests and producer process evidence retain their original identities; no new Rust or shipping run claimed."
+}

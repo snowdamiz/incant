@@ -1,0 +1,31 @@
+{
+  "bindings_sha256": "0681dab66c5325b291c6888a64231581bd3b990eaa3905bb130b0bd9b8762fc1",
+  "build_id": "12954ae79cb39e7a347ab198b43a804339d567cabdc109f507312c1fe823f494",
+  "bytecode_abi": {
+    "atom_bytes": 4,
+    "default_c_flags": true,
+    "float_mantissa": 53,
+    "float_max_exponent": 1024,
+    "little_endian": true,
+    "pointer_bits": 64,
+    "value_alignment": 8,
+    "value_bytes": 16,
+    "version": 28,
+    "write_flags": 17
+  },
+  "bytecode_bytes": 6181,
+  "bytecode_sha256": "a85f18b9d85d4495ef53af24a7a20377cea9111f32124541e003374c2292c2da",
+  "debug_line_tables": true,
+  "embedded_source": false,
+  "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+  "format": 3,
+  "hardening_sha256": "971716e2f49f08f91ffd7ab3d3f9701f08c1d20ec46670a906875621e2659708",
+  "producer_target": "aarch64-apple-darwin",
+  "source_map_sha256": "793f04d693dd02e4942c125d49b9064134c145855bd9b86ec0d0657ebc44e93e",
+  "source_name": "incant-project-behaviors",
+  "source_sha256": "1a03ae2d9f50d10a91df54536062232ce7a34ec215dfb00f92cdedfe68074b84",
+  "symbolication": "map CommonJS locations after subtracting wrapper_prefix_lines; automatic runtime stack remapping remains unsupported",
+  "target": "aarch64-apple-darwin",
+  "trust": "fresh compiler output embedded by trusted native build; hashes are not authentication",
+  "wrapper_prefix_lines": 3
+}

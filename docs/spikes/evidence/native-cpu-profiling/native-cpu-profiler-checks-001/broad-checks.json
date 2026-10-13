@@ -1,0 +1,52 @@
+[
+  {
+    "name": "affected",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_profile",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/profile"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/affected.log",
+    "sha256": "40b11a92ee29bc1e97add2ac9d6c4f03739c7a8a96db2d7706fc543826823f77"
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "tools/cargo",
+      "clippy",
+      "--locked",
+      "-p",
+      "incant_profile",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/profile-tracy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 101,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/clippy.log",
+    "sha256": "d578c1a9e766d93b9e5603c9760055940e11c2348ab83173ae5994319bf52e62"
+  }
+]

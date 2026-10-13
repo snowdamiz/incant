@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/native-cpu-profile.py", line 317, in <module>
+    main()
+    ~~~~^^
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/native-cpu-profile.py", line 169, in main
+    require(abs(actual[0] - speed * 20 / rate) < 1e-9, 'Native numerical motion differs')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/native-cpu-profile.py", line 32, in require
+    raise ValueError(message)
+ValueError: Native numerical motion differs

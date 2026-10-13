@@ -1,0 +1,29 @@
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_runtime)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_script)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_audio_runtime)
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_cook)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_player)
+   Compiling incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_observe)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_runtime)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.61s
+     Running unittests src/lib.rs (/tmp/incant-cpu-profiler-target/debug/deps/incant_game_player-f186c85a00587527)
+
+running 1 test
+test profile::tests::default_build_rejects_profile_explicitly ... FAILED
+
+failures:
+
+---- profile::tests::default_build_rejects_profile_explicitly stdout ----
+
+thread 'profile::tests::default_build_rejects_profile_explicitly' (5430330) panicked at crates/incant_game_player/src/profile.rs:67:9:
+assertion failed: matches!(super::split(vec!["--profile".into()], false),
+    Err(incant_profile::Error::Disabled))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    profile::tests::default_build_rejects_profile_explicitly
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 18 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p incant_game_player --lib`
