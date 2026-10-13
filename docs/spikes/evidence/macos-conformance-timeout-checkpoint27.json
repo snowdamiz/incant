@@ -1,0 +1,153 @@
+{
+  "id": 115475693905,
+  "run_id": 38449280152,
+  "run_attempt": 1,
+  "head_sha": "bb46015a1b36c2b57e6b9941d20bd8784ec4bec3",
+  "html_url": "https://github.com/snowdamiz/incant/actions/runs/38449280152/job/115475693905",
+  "conclusion": "cancelled",
+  "started_at": "2026-10-13T18:45:11Z",
+  "completed_at": "2026-10-13T19:25:43Z",
+  "steps": [
+    {
+      "name": "Set up job",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:45:12Z",
+      "completed_at": "2026-10-13T18:45:14Z"
+    },
+    {
+      "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:45:14Z",
+      "completed_at": "2026-10-13T18:46:06Z"
+    },
+    {
+      "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:46:06Z",
+      "completed_at": "2026-10-13T18:46:06Z"
+    },
+    {
+      "name": "Run rustup show",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:46:06Z",
+      "completed_at": "2026-10-13T18:46:16Z"
+    },
+    {
+      "name": "Run rustup target add wasm32-unknown-unknown",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:46:16Z",
+      "completed_at": "2026-10-13T18:46:19Z"
+    },
+    {
+      "name": "Run python tools/generate_wasm_sdk.py --check",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:46:19Z",
+      "completed_at": "2026-10-13T18:46:20Z"
+    },
+    {
+      "name": "Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:46:20Z",
+      "completed_at": "2026-10-13T18:46:29Z"
+    },
+    {
+      "name": "Combined static and development conformance on one development graph",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T18:46:29Z",
+      "completed_at": "2026-10-13T19:18:50Z"
+    },
+    {
+      "name": "Fresh compiler-free static shipping executable and matched symbols",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "started_at": "2026-10-13T19:18:50Z",
+      "completed_at": "2026-10-13T19:25:29Z"
+    },
+    {
+      "name": "Fresh composed input, physics, module and audio shipping proof",
+      "status": "completed",
+      "conclusion": "skipped",
+      "started_at": "2026-10-13T19:25:29Z",
+      "completed_at": "2026-10-13T19:25:29Z"
+    },
+    {
+      "name": "Run python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host",
+      "status": "completed",
+      "conclusion": "skipped",
+      "started_at": "2026-10-13T19:25:29Z",
+      "completed_at": "2026-10-13T19:25:29Z"
+    },
+    {
+      "name": "Run cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked",
+      "status": "completed",
+      "conclusion": "skipped",
+      "started_at": "2026-10-13T19:25:29Z",
+      "completed_at": "2026-10-13T19:25:29Z"
+    },
+    {
+      "name": "Keep unsupported device targets free of the development host",
+      "status": "completed",
+      "conclusion": "skipped",
+      "started_at": "2026-10-13T19:25:29Z",
+      "completed_at": "2026-10-13T19:25:29Z"
+    },
+    {
+      "name": "Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T19:25:29Z",
+      "completed_at": "2026-10-13T19:25:32Z"
+    },
+    {
+      "name": "Post Run Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6",
+      "status": "completed",
+      "conclusion": "skipped",
+      "started_at": "2026-10-13T19:25:32Z",
+      "completed_at": "2026-10-13T19:25:32Z"
+    },
+    {
+      "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+      "status": "completed",
+      "conclusion": "skipped",
+      "started_at": "2026-10-13T19:25:32Z",
+      "completed_at": "2026-10-13T19:25:32Z"
+    },
+    {
+      "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T19:25:32Z",
+      "completed_at": "2026-10-13T19:25:34Z"
+    },
+    {
+      "name": "Complete job",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-10-13T19:25:34Z",
+      "completed_at": "2026-10-13T19:25:40Z"
+    }
+  ],
+  "cause": "GitHub annotation: The job has exceeded the maximum execution time of 40m0s",
+  "repair": "macOS conformance total job budget90minutes;Linux40minutes; all commands/contexts/dependency and fresh-build isolation retained",
+  "local_verification": {
+    "at": "2026-10-13T19:31:45.194556+00:00",
+    "base_main": "2e6f5ead7c09c078d39ed4a24366346ce23dbe5d",
+    "workflow_before_sha256": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b",
+    "workflow_after_sha256": "9603cb7fe976a9e03ca04bddfcf17a17a54857574adaed431af993cd18876433",
+    "only_parsed_change": "jobs.conformance.timeout-minutes: macOS90/Linux40; commands, contexts, checks, target isolation and artifacts identical",
+    "unit_tests_exit": 0,
+    "test_log_sha256": "b1129a8264afc5d9377e7233b7b39afe1dae2e2a6d6b793102e60f61558823dd",
+    "source_job_json": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint27/macos-conformance-cancelled-job.json",
+    "source_job_sha256": "9bf6ab0f2b3fe50326434058ccac9ef96b33e9f39bd807f854fb6c3037010fe9",
+    "annotations_sha256": "745f40bfc75ac020aaa19d505bb876f3da0e7ccb40962cd336979c14e2a3816f"
+  },
+  "limitation": "No rerun or current checkpoint success is implied. Real exact-head hosted success remains required."
+}
