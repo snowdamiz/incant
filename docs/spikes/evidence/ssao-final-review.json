@@ -1,0 +1,39 @@
+{
+  "at": "2026-10-13T03:54:17.254568+00:00",
+  "reviewer": "root",
+  "accepted": "CPU/source packet only; GPU/appearance remains pending",
+  "manifest_sha256": "0cd5379b6dcd417508c973837ca74666ac53c0cd669632a603b426274100c4d8",
+  "verified_sources": 17,
+  "verified_baselines": 10,
+  "artifacts": 30,
+  "binaries": 4,
+  "checks": 8,
+  "test_totals": [
+    73,
+    0,
+    83
+  ],
+  "independent_focused_cpu_runs": [
+    {
+      "binary_sha256": "0b078b2715071738a9dbf8ebca99f94e99f830acbe1b2dfe420ed2efd489fe72",
+      "exit": 0,
+      "stdout": "\nrunning 9 tests\ntest ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output ... ignored, requires GPU; SSAO pending independent Claude/backend acceptance\ntest ambient_occlusion::tests::all_three_actual_wgsl_sources_validate_without_a_device ... ok\ntest ambient_occlusion::tests::analytic_flat_surface_stays_open_and_nearby_foreground_only_occludes_facing_hemisphere ... ok\ntest ambient_occlusion::tests::camera_projection_extraction_preserves_geometry_matrix_and_world_normal_rotation ... ok\ntest ambient_occlusion::tests::forward_variant_changes_only_diffuse_irradiance_and_prepass_reuses_actual_vertex_and_mask ... ok\ntest ambient_occlusion::tests::hemisphere_samples_are_unit_cosine_strata_not_uniform_solid_angle ... ok\ntest ambient_occlusion::tests::invalid_projection_and_outside_background_samples_never_generate_coordinates ... ok\ntest ambient_occlusion::tests::inverse_projection_recovers_perspective_and_orthographic_view_units_at_offset_viewports ... ok\ntest ambient_occlusion::tests::typed_parameters_and_attachment_budget_reject_before_preparation ... ok\n\ntest result: ok. 8 passed; 0 failed; 1 ignored; 0 measured; 96 filtered out; finished in 0.01s\n\n",
+      "stderr": ""
+    },
+    {
+      "binary_sha256": "4282f76bfbf68e0f8bd0bdd8e12b7061965dede60bed104f07cc389cd9d62eac",
+      "exit": 0,
+      "stdout": "\nrunning 9 tests\ntest ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output ... ignored, requires GPU; SSAO pending independent Claude/backend acceptance\ntest ambient_occlusion::tests::all_three_actual_wgsl_sources_validate_without_a_device ... ok\ntest ambient_occlusion::tests::analytic_flat_surface_stays_open_and_nearby_foreground_only_occludes_facing_hemisphere ... ok\ntest ambient_occlusion::tests::camera_projection_extraction_preserves_geometry_matrix_and_world_normal_rotation ... ok\ntest ambient_occlusion::tests::forward_variant_changes_only_diffuse_irradiance_and_prepass_reuses_actual_vertex_and_mask ... ok\ntest ambient_occlusion::tests::hemisphere_samples_are_unit_cosine_strata_not_uniform_solid_angle ... ok\ntest ambient_occlusion::tests::invalid_projection_and_outside_background_samples_never_generate_coordinates ... ok\ntest ambient_occlusion::tests::inverse_projection_recovers_perspective_and_orthographic_view_units_at_offset_viewports ... ok\ntest ambient_occlusion::tests::typed_parameters_and_attachment_budget_reject_before_preparation ... ok\n\ntest result: ok. 8 passed; 0 failed; 1 ignored; 0 measured; 104 filtered out; finished in 0.01s\n\n",
+      "stderr": ""
+    }
+  ],
+  "lock_review": "Exact package identities unchanged; only existing Naga dev edge added.",
+  "limits": [
+    "No GPU executed or screenshots produced",
+    "No efficacy/appearance/device/performance acceptance",
+    "Native cooked-materials explicitly refuses SSAO",
+    "Default shaders/output untouched",
+    "No timestamp/DRS merge claim; actual internal target seam retained",
+    "52 MiB is logical texel payload in one-size idle cache, not GPU RSS/queue peak"
+  ]
+}

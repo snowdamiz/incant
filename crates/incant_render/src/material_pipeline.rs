@@ -5,12 +5,15 @@ pub(crate) fn build(
     device: &wgpu::Device,
     shader: &crate::shader::Stages,
     key: PipelineKey,
-    layouts: [&wgpu::BindGroupLayout; 4],
+    layouts: &[&wgpu::BindGroupLayout],
     cache: Option<&wgpu::PipelineCache>,
 ) -> wgpu::RenderPipeline {
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Material pipeline"),
-        bind_group_layouts: &layouts.map(Some),
+        bind_group_layouts: &layouts
+            .iter()
+            .map(|layout| Some(*layout))
+            .collect::<Vec<_>>(),
         immediate_size: 0,
     });
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {

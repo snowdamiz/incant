@@ -21,6 +21,8 @@ cooked-ui = ["cooked-output"]
 cooked-text = ["cooked-output"]
 cooked-materials = ["cooked-geometry"]
 cooked-clusters = ["cooked-output"]
+# Diagnostic capture only; never enabled by a shipping/default feature.
+ssao-stage-readback = []
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [

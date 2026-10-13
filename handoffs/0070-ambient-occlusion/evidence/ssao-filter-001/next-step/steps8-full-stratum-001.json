@@ -1,0 +1,88 @@
+{
+ "candidate": "8 probes per ray, full-stratum step phase t = (b + 0.5)/16, R1 rotation, R3 filter",
+ "n6_authored_persp_255": {
+  "steps8_full_stratum": 7.0
+ },
+ "n6t_persp_255": {
+  "design": 3.37,
+  "steps8_full_stratum": 3.76,
+  "steps8_upper_half": 5.37
+ },
+ "n7_candidate": {
+  "edge_slab_persp": {
+   "bound": 202.7,
+   "count": 0
+  },
+  "white_slab_ortho": {
+   "bound": 176.7,
+   "count": 0
+  },
+  "white_slab_persp": {
+   "bound": 138.2,
+   "count": 0
+  }
+ },
+ "n8_ortho": {
+  "cols": [
+   150,
+   156
+  ],
+  "roi_row": 110,
+  "rows": {
+   "110": {
+    "design": 0.176,
+    "steps8_full_stratum": 0.075,
+    "steps8_upper_half": 0.125
+   }
+  }
+ },
+ "n8_persp": {
+  "cols": [
+   148,
+   158
+  ],
+  "roi_row": 124,
+  "rows": {
+   "124": {
+    "design": 0.376,
+    "steps8_full_stratum": 0.314,
+    "steps8_upper_half": 0.22
+   },
+   "125": {
+    "design": 0.439,
+    "steps8_full_stratum": 0.345,
+    "steps8_upper_half": 0.282
+   },
+   "126": {
+    "design": 0.502,
+    "steps8_full_stratum": 0.345,
+    "steps8_upper_half": 0.376
+   },
+   "127": {
+    "design": 0.533,
+    "steps8_full_stratum": 0.345,
+    "steps8_upper_half": 0.408
+   },
+   "128": {
+    "design": 0.356,
+    "steps8_full_stratum": 0.188,
+    "steps8_upper_half": 0.293
+   },
+   "129": {
+    "design": 0.335,
+    "steps8_full_stratum": 0.209,
+    "steps8_upper_half": 0.23
+   },
+   "130": {
+    "design": 0.272,
+    "steps8_full_stratum": 0.188,
+    "steps8_upper_half": 0.146
+   }
+  }
+ },
+ "seconds": 11.0,
+ "self_check_rows_match_addendum": {
+  "design": true,
+  "steps8_upper_half": true
+ }
+}
