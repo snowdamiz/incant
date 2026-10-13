@@ -1,0 +1,233 @@
+{
+  "at": "2026-10-13T04:30:20.987942+00:00",
+  "reviewer": "astra/root",
+  "head": "c5e733aea806bb1e79c9b4514fe3ab6d87b0be00",
+  "manifest_sha256": "05d98adf2f68361f14ed096aab2fc7370a0a9a7c1085567c87d5444ec61d8b71",
+  "source_freeze_sha256": "0ae8b3ff580df1dedec6a2ebe2a1e2a45d3b4b12b87ea9cdc611a1df5f2a2fba",
+  "reviewed": "graph.rs, graph_codec.rs, exported error/schema definitions, trusted native graph comparisons and hostile decoding tests",
+  "source_findings": [],
+  "verified_repo_sources": 21,
+  "verified_pinned_sources": 4,
+  "verified_lossless_records": 70,
+  "commands": [
+    {
+      "receipt": "clippy-001.json",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 101,
+      "start_ns": 1791865322075460000,
+      "end_ns": 1791865322401281000,
+      "log_sha256": "49c402eb998a0aa017b8993245e6c5279bda9038bc31f3afabacee81324ddc92"
+    },
+    {
+      "receipt": "clippy-002.json",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865370172032000,
+      "end_ns": 1791865370643929000,
+      "log_sha256": "e5838cab34f56a03aa85ba7ddc6100bd964e884892c753af39fbfef2d8ee445f"
+    },
+    {
+      "receipt": "conventions-002.json",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865373502807000,
+      "end_ns": 1791865373530159000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "diff-002.json",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865373530374000,
+      "end_ns": 1791865373555737000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "fmt-002.json",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865373428488000,
+      "end_ns": 1791865373502515000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "normal-graph-002.json",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865373031930000,
+      "end_ns": 1791865373136520000,
+      "log_sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c"
+    },
+    {
+      "receipt": "runtime-graph-002.json",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865373136919000,
+      "end_ns": 1791865373428083000,
+      "log_sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0"
+    },
+    {
+      "receipt": "tests-001.json",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865287242186000,
+      "end_ns": 1791865289490871000,
+      "log_sha256": "0b34ce9991af8b4c87682adf7679b442cd8769c6935e565d38ef88f21d090d28"
+    },
+    {
+      "receipt": "tests-002.json",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865370644173000,
+      "end_ns": 1791865372811143000,
+      "log_sha256": "3e57d23181f29c9f7832c17579d090a7e8d5cd4e759bfacea0cd792717ecec2f"
+    },
+    {
+      "receipt": "wasm32-002.json",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791865372811398000,
+      "end_ns": 1791865373031720000,
+      "log_sha256": "08ef57fa830d14319e93e501a74cfe4f98c2040c47b3ae8a4967564e0cf0c892"
+    }
+  ],
+  "test_results": {
+    "final_passed": 40,
+    "failed": 0,
+    "ignored": 0,
+    "nonempty_groups": 7,
+    "new_graph_tests": 10
+  },
+  "limits": [
+    "PhysicsUnsupported and world/session versions unchanged",
+    "No live constructor, contact payload validation, save/load runtime route or restored mutation continuation",
+    "Graph cycles/self-loops/parallel edges are structurally valid; contact-owner policy remains a separate validation",
+    "Adjacency ownership is not exclusive solver writable-body ownership",
+    "No enclosing native world/owner authentication or integrity envelope",
+    "Cumulative requested Vec budget excludes RSS/allocator rounding/caller-owned inputs",
+    "No GPU, device, shipping or performance acceptance"
+  ],
+  "decision": "accepted inert graph component only; no runtime or save admission"
+}
