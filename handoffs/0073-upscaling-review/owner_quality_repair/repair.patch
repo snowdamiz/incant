@@ -1,0 +1,379 @@
+diff --git a/crates/incant_render/src/upscaling/common.wgsl b/crates/incant_render/src/upscaling/common.wgsl
+index ce7a31998e92..11d2fc524f8a 100644
+--- a/crates/incant_render/src/upscaling/common.wgsl
++++ b/crates/incant_render/src/upscaling/common.wgsl
+@@ -31,3 +31,21 @@
+ fn tap_weight(f:vec2f,x:i32,y:i32)->f32 {
+     return select(1.0-f.x,f.x,x==1)*select(1.0-f.y,f.y,y==1);
+ }
++// Catmull-Rom kernel at texel distance d. The four taps at offsets -1..2 from
++// floor(q) sum to one and interpolate; callers clamp the result to the central
++// 2x2 (bilinear) range, so it adds no new extrema.
++fn catmull_rom(d:f32)->f32 {
++    let x=abs(d);
++    if x<1.0 {return (1.5*x-2.5)*x*x+1.0;}
++    if x<2.0 {return ((-0.5*x+2.5)*x-4.0)*x+2.0;}
++    return 0.0;
++}
++// History fraction. It never exceeds `limit`, the existing reactive-reduced
++// history weight. reactive.y is the host's expected admitted history evidence in
++// frames of unit evidence; only below h/(1-h), after a cut or a source-scale
++// increase, does it lower the fraction to mass/(mass+1).
++fn history_fraction(limit:f32,reaction:f32)->f32 {
++    let w=clamp(select(0.0,frame.reactive.y,frame.reactive.y>0.0),0.0,1048576.0);
++    let mass=w*(1.0-frame.reactive.x*reaction);
++    return min(limit,mass/(mass+1.0));
++}
+diff --git a/crates/incant_render/src/upscaling/device_tests.rs b/crates/incant_render/src/upscaling/device_tests.rs
+index cfee1fb95bd3..0b142dbc55df 100644
+--- a/crates/incant_render/src/upscaling/device_tests.rs
++++ b/crates/incant_render/src/upscaling/device_tests.rs
+@@ -161,7 +161,8 @@
+                 f32::from(u8::from(mode != 12 && mode < 16)),
+             ],
+             options: [0.5, 0.001, 0.001, 1.],
+-            reactive: [f32::from(u8::from(mode == 6)), 0., 0., 0.],
++            // Steady history evidence h / (1 - h) = 1 keeps the fixed weight 0.5.
++            reactive: [f32::from(u8::from(mode == 6)), 1., 0., 0.],
+             jitter: if mode == 16 {
+                 [0.125, -0.125, 0., 0.]
+             } else if mode == 17 {
+diff --git a/crates/incant_render/src/upscaling/owner.rs b/crates/incant_render/src/upscaling/owner.rs
+index a08155ec1a82..aaf234908861 100644
+--- a/crates/incant_render/src/upscaling/owner.rs
++++ b/crates/incant_render/src/upscaling/owner.rs
+@@ -31,6 +31,10 @@
+     output: Option<Arc<Output>>,
+     overlay: Option<Arc<Overlay>>,
+     last: Option<UpscaleFrame>,
++    /// Expected admitted-history evidence after the accepted frame, in frames of
++    /// unit evidence; the accepted internal source width it was gathered at.
++    mass: f32,
++    source_width: f32,
+ }
+ pub(crate) struct Pending {
+     pub(super) config: UpscaleConfig,
+@@ -39,6 +43,26 @@
+     pub(super) frame: UpscaleFrame,
+     pub(super) output: Option<Arc<Output>>,
+     pub(super) overlay: Option<Arc<Overlay>>,
++    /// This frame's history evidence for the resolve uniform (reactive.y).
++    pub(super) history_mass: f32,
++    source_width: f32,
++}
++/// Expected admitted-history evidence entering a frame, in frames of unit
++/// evidence: 0 after a cut, the accepted evidence otherwise, counted at the old
++/// density, (old / new width)^2, after an internal-scale increase. It never
++/// exceeds h / (1 - h), so the resolve's history fraction
++/// min(h_r, W_r / (W_r + 1)) equals today's h_r in steady state and is lower
++/// only after a cut or a scale increase.
++pub(super) fn frame_mass(h: f32, mass: f32, has_previous: bool, old_width: f32, width: f32) -> f32 {
++    let cap = h / (1. - h);
++    if !has_previous || !cap.is_finite() || cap <= 0. {
++        return 0.;
++    }
++    let mut w = if mass.is_finite() { mass.clamp(0., cap) } else { 0. };
++    if old_width > 0. && width > old_width {
++        w *= (old_width / width) * (old_width / width);
++    }
++    w
+ }
+ impl State {
+     pub fn new(config: UpscaleConfig) -> Result<Self, crate::temporal::TemporalError> {
+@@ -48,6 +72,8 @@
+             output: None,
+             overlay: None,
+             last: None,
++            mass: 0.,
++            source_width: 0.,
+         })
+     }
+     pub fn frame(&self) -> Option<UpscaleFrame> {
+@@ -129,6 +155,14 @@
+             output: size,
+             slot,
+         };
++        let source_width = plan.map_or(0., |p| p.source_rect[2]);
++        let history_mass = frame_mass(
++            self.config.history_weight,
++            self.mass,
++            input.frame.has_previous(),
++            self.source_width,
++            source_width,
++        );
+         Ok(Pending {
+             config: self.config,
+             input,
+@@ -136,9 +170,16 @@
+             frame,
+             output: plan.map(|p| Output::prepare(d, p.output, self.output.as_ref(), owner)),
+             overlay: plan.map(|p| Overlay::prepare(d, p.source, self.overlay.as_ref())),
++            history_mass,
++            source_width,
+         })
+     }
+     pub fn accept(&mut self, p: Pending) {
++        let h = self.config.history_weight;
++        // Each accepted frame adds one unit of expected evidence (the kernel's
++        // cycle-mean mass), never above the h / (1 - h) cap.
++        self.mass = (p.history_mass + 1.).min(h / (1. - h));
++        self.source_width = p.source_width;
+         self.output = p.output;
+         self.overlay = p.overlay;
+         self.last = Some(p.frame);
+diff --git a/crates/incant_render/src/upscaling/owner_device_tests.rs b/crates/incant_render/src/upscaling/owner_device_tests.rs
+index 54a0576fb01b..70824a1e1fde 100644
+--- a/crates/incant_render/src/upscaling/owner_device_tests.rs
++++ b/crates/incant_render/src/upscaling/owner_device_tests.rs
+@@ -80,7 +80,8 @@
+             output: [1., 1., 14., 14.],
+             depth: [0.1, 100., f32::from(u8::from(orthographic)), 1.],
+             options: [0.9, 0.001, 0.001, 1.],
+-            reactive: [0.; 4],
++            // Steady history evidence h / (1 - h) = 9 keeps the fixed weight 0.9.
++            reactive: [0., 9., 0., 0.],
+             jitter: [0.; 4],
+         },
+         current: vec![rgba(0.25); (N * N) as usize],
+diff --git a/crates/incant_render/src/upscaling/resolve.wgsl b/crates/incant_render/src/upscaling/resolve.wgsl
+index 06564d9f3b38..70c33d23ef18 100644
+--- a/crates/incant_render/src/upscaling/resolve.wgsl
++++ b/crates/incant_render/src/upscaling/resolve.wgsl
+@@ -4,6 +4,47 @@
+ @group(0) @binding(4) var previous_color:texture_2d<f32>;
+ @group(0) @binding(5) var previous_depth:texture_2d<f32>;
+ struct Resolved { @location(0) color:vec4f, @location(1) depth:f32 }
++// Interior current estimate: Catmull-Rom over the 4x4 taps around q when every tap
++// with a nonzero weight is admitted, opaque and on the anchor surface, clamped to
++// the central 2x2 (bilinear) range. Otherwise the existing bilinear estimate.
++fn sharp_current(q:vec2f,nearest:f32,bilinear:vec4f)->vec4f {
++    let base=vec2i(floor(q)); let f=fract(q);
++    var sum=vec3f(0.0); var low=vec3f(65504.0); var high=vec3f(0.0); var central=false;
++    for(var y=-1;y<=2;y++) {for(var x=-1;x<=2;x++) {
++        let w=catmull_rom(f32(x)-f.x)*catmull_rom(f32(y)-f.y);
++        if w==0.0 {continue;}
++        let tap=clamp(base+vec2i(x,y),lo(frame.source),hi(frame.source));
++        let c=textureLoad(current,tap,0);
++        if !admitted(c) || c.a<1.0 || !compatible(linear_depth(textureLoad(current_depth,tap,0)),nearest) {
++            return bilinear;
++        }
++        let v=clean(c).rgb;
++        sum+=v*w;
++        if x>=0 && x<=1 && y>=0 && y<=1 {low=min(low,v);high=max(high,v);central=true;}
++    }}
++    if !central {return bilinear;}
++    return clean(vec4f(clamp(sum,low,high),1.0));
++}
++// Reprojected history: Catmull-Rom over the 4x4 previous taps around old when every
++// tap with a nonzero weight is inside and admitted at the expected depth, clamped
++// to the central 2x2 range. Otherwise the bilinear history with per-tap rejection.
++fn sharp_history(old:vec2f,expected:f32,bilinear:vec4f)->vec4f {
++    let oldq=old-vec2f(0.5); let base=vec2i(floor(oldq)); let f=fract(oldq);
++    var sum=vec3f(0.0); var low=vec3f(65504.0); var high=vec3f(0.0); var central=false;
++    for(var y=-1;y<=2;y++) {for(var x=-1;x<=2;x++) {
++        let w=catmull_rom(f32(x)-f.x)*catmull_rom(f32(y)-f.y);
++        if w==0.0 {continue;}
++        let tap=base+vec2i(x,y);
++        if any(tap<lo(frame.output)) || any(tap>hi(frame.output)) {return bilinear;}
++        let c=textureLoad(previous_color,tap,0);let z=textureLoad(previous_depth,tap,0).x;
++        if !admitted(c) || c.a<1.0 || !compatible(z,expected) {return bilinear;}
++        let v=clean(c).rgb;
++        sum+=v*w;
++        if x>=0 && x<=1 && y>=0 && y<=1 {low=min(low,v);high=max(high,v);central=true;}
++    }}
++    if !central {return bilinear;}
++    return clean(vec4f(clamp(sum,low,high),1.0));
++}
+ @fragment fn resolve(@builtin(position) position:vec4f)->Resolved {
+     var result=Resolved(vec4f(0.0),0.0);
+     let p=position.xy;
+@@ -31,7 +72,7 @@
+         same_surface=same_surface && compatible(linear_depth(textureLoad(current_depth,tap,0)),nearest);
+     }}
+     if !same_surface {return result;}
+-    result.color=clean(vec4f(result.color.rgb,1.0));
++    result.color=sharp_current(q,nearest,clean(vec4f(result.color.rgb,1.0)));
+     result.depth=nearest;
+     if frame.depth.w<0.5 {return result;}
+     let m=textureLoad(motion,anchor,0);
+@@ -53,7 +94,7 @@
+         history+=clean(c)*weight; mass+=weight;
+     }}
+     if !(mass>0.0) {return result;}
+-    history=clean(history/mass);
++    history=sharp_history(old,expected,clean(history/mass));
+     var minimum=result.color;var maximum=result.color;
+     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
+         let tap=clamp(anchor+vec2i(x,y),lo(frame.source),hi(frame.source));
+@@ -64,7 +105,7 @@
+     }}
+     let change=abs(history.rgb-result.color.rgb);
+     let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);
+-    let weight=frame.options.x*(1.0-frame.reactive.x*reaction);
++    let weight=history_fraction(frame.options.x*(1.0-frame.reactive.x*reaction),reaction);
+     result.color=clean(mix(result.color,clamp(history,minimum,maximum),weight));
+     return result;
+ }
+diff --git a/crates/incant_render/src/upscaling/resolve_owner.wgsl b/crates/incant_render/src/upscaling/resolve_owner.wgsl
+index ddd733c17de1..94b217799af6 100644
+--- a/crates/incant_render/src/upscaling/resolve_owner.wgsl
++++ b/crates/incant_render/src/upscaling/resolve_owner.wgsl
+@@ -3,6 +3,7 @@
+ // color reached its history since the last drop: x is bit31 present plus the
+ // bits 0-16 anchor ID; y is a second ID or 0, or bit31 plus a class mask (bit ID%31)
+ // that always holds the anchor class. (0,0) is no history. IDs are 1..highest.
++// Catmull-Rom current and history taps join that set exactly like bilinear taps.
+ @group(0) @binding(1) var current:texture_2d<f32>;
+ @group(0) @binding(2) var motion:texture_2d<f32>;
+ @group(0) @binding(3) var current_depth:texture_depth_2d;
+@@ -67,6 +68,63 @@
+ fn record_admissible(r:Stored,support_classes:u32,changed_classes:u32)->bool {
+     if r.over {return ((r.m|support_classes)&changed_classes)==0u;}
+     return r.b==0u || !changed_id(r.b);
++}
++// Interior current estimate (resolve.wgsl sharp_current) with provenance. A tap
++// outside the central 2x2, whose owners are already support, must also carry a
++// valid unchanged owner, which then joins the support set. Any failure keeps the
++// existing bilinear estimate and its 2x2 support.
++struct Sharp { color:vec4f, owners:Owners, classes:u32 }
++fn sharp_current(q:vec2f,nearest:f32,bilinear:vec4f,start:Owners)->Sharp {
++    let fallback=Sharp(bilinear,start,0u);
++    let base=vec2i(floor(q)); let f=fract(q);
++    var sum=vec3f(0.0); var low=vec3f(65504.0); var high=vec3f(0.0); var central=false;
++    var joined=start; var classes=0u;
++    for(var y=-1;y<=2;y++) {for(var x=-1;x<=2;x++) {
++        let w=catmull_rom(f32(x)-f.x)*catmull_rom(f32(y)-f.y);
++        if w==0.0 {continue;}
++        let tap=clamp(base+vec2i(x,y),lo(frame.source),hi(frame.source));
++        let c=textureLoad(current,tap,0);
++        if !admitted(c) || c.a<1.0 || !compatible(linear_depth(textureLoad(current_depth,tap,0)),nearest) {
++            return fallback;
++        }
++        let v=clean(c).rgb;
++        sum+=v*w;
++        if x>=0 && x<=1 && y>=0 && y<=1 {
++            low=min(low,v);high=max(high,v);central=true;
++        } else {
++            let word=textureLoad(owner,tap,0).x; let n=word&~HIGH_BIT;
++            if !valid_id(n) || (word&HIGH_BIT)!=0u || changed_id(n) {return fallback;}
++            joined=with_id(joined,n); classes|=class_of(n);
++        }
++    }}
++    if !central {return fallback;}
++    return Sharp(clean(vec4f(clamp(sum,low,high),1.0)),joined,classes);
++}
++// Reprojected history (resolve.wgsl sharp_history) with provenance. Every tap with
++// a nonzero weight needs the bilinear tap admission, including its own canonical
++// record with the anchor owner; all their records join the set. Any failure keeps
++// the bilinear history and its set.
++struct SharpHistory { color:vec4f, owners:Owners }
++fn sharp_history(old:vec2f,expected:f32,anchor_id:u32,support_classes:u32,changed_classes:u32,
++                 fresh:Owners,bilinear:SharpHistory)->SharpHistory {
++    let oldq=old-vec2f(0.5); let base=vec2i(floor(oldq)); let f=fract(oldq);
++    var sum=vec3f(0.0); var low=vec3f(65504.0); var high=vec3f(0.0); var central=false;
++    var joined=fresh;
++    for(var y=-1;y<=2;y++) {for(var x=-1;x<=2;x++) {
++        let w=catmull_rom(f32(x)-f.x)*catmull_rom(f32(y)-f.y);
++        if w==0.0 {continue;}
++        let tap=base+vec2i(x,y);
++        if any(tap<lo(frame.output)) || any(tap>hi(frame.output)) {return bilinear;}
++        let c=textureLoad(previous_color,tap,0);let z=textureLoad(previous_depth,tap,0).x;
++        if !admitted(c) || c.a<1.0 || !compatible(z,expected) {return bilinear;}
++        let r=stored(textureLoad(previous_record,tap,0).xy);
++        if !r.ok || r.a!=anchor_id || !record_admissible(r,support_classes,changed_classes) {return bilinear;}
++        let v=clean(c).rgb;
++        sum+=v*w; joined=with_record(joined,r);
++        if x>=0 && x<=1 && y>=0 && y<=1 {low=min(low,v);high=max(high,v);central=true;}
++    }}
++    if !central {return bilinear;}
++    return SharpHistory(clean(vec4f(clamp(sum,low,high),1.0)),joined);
+ }
+ @fragment fn resolve(@builtin(position) position:vec4f)->OwnerResolved {
+     var result=OwnerResolved(vec4f(0.0),0.0,vec2u(0u));
+@@ -115,6 +173,9 @@
+     var fresh=owner_set(anchor_id);
+     for(var i=0;i<4;i++) {if support[u32(i)]!=0u {fresh=with_id(fresh,support[u32(i)]);}}
+     fresh.ok=fresh.ok && support_ok;
++    // Catmull-Rom current (sharp_current) joins its outer owners to the support.
++    let sharp=sharp_current(q,nearest,result.color,fresh);
++    result.color=sharp.color; fresh=sharp.owners; support_classes|=sharp.classes;
+     let provable=fresh.ok;
+     result.record=encode(fresh);
+     if frame.depth.w<0.5 {return result;}
+@@ -138,7 +199,7 @@
+         let r=stored(textureLoad(previous_record,own,0).xy);
+         if admitted(c) && c.a>=1.0 && compatible(z,expected) && r.ok
+             && record_unchanged(r,support_classes,changed_classes) {
+-            result.color=clean(mix(result.color,clean(c),frame.options.x));
++            result.color=clean(mix(result.color,clean(c),history_fraction(frame.options.x,0.0)));
+             result.record=encode(with_record(fresh,r));
+             return result;
+         }
+@@ -160,7 +221,9 @@
+         history+=clean(c)*weight; mass+=weight; joined=with_record(joined,r);
+     }}
+     if !(mass>0.0) {return result;}
+-    history=clean(history/mass);
++    let sharp_old=sharp_history(old,expected,anchor_id,support_classes,changed_classes,fresh,
++        SharpHistory(clean(history/mass),joined));
++    history=sharp_old.color; joined=sharp_old.owners;
+     var minimum=result.color;var maximum=result.color;
+     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
+         let tap=clamp(anchor+vec2i(x,y),lo(frame.source),hi(frame.source));
+@@ -173,7 +236,7 @@
+     }}
+     let change=abs(history.rgb-result.color.rgb);
+     let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);
+-    let weight=frame.options.x*(1.0-frame.reactive.x*reaction);
++    let weight=history_fraction(frame.options.x*(1.0-frame.reactive.x*reaction),reaction);
+     result.color=clean(mix(result.color,clamp(history,minimum,maximum),weight));
+     result.record=encode(joined);
+     return result;
+diff --git a/crates/incant_render/src/upscaling/system.rs b/crates/incant_render/src/upscaling/system.rs
+index 05f556df2086..78bf118b2827 100644
+--- a/crates/incant_render/src/upscaling/system.rs
++++ b/crates/incant_render/src/upscaling/system.rs
+@@ -242,7 +242,7 @@
+                 c.absolute_depth,
+                 c.reactive_threshold,
+             ],
+-            reactive: [c.reactive_strength, 0., 0., 0.],
++            reactive: [c.reactive_strength, p.history_mass, 0., 0.],
+             jitter: [
+                 p.input.jitter[0],
+                 p.input.jitter[1],
+diff --git a/crates/incant_render/src/upscaling/tests.rs b/crates/incant_render/src/upscaling/tests.rs
+index 953c373c2eba..fe12836b01a9 100644
+--- a/crates/incant_render/src/upscaling/tests.rs
++++ b/crates/incant_render/src/upscaling/tests.rs
+@@ -14,6 +14,30 @@
+         )
+         .validate(&module)
+         .unwrap();
++    }
++}
++#[test]
++fn frame_mass_resets_attenuates_and_never_exceeds_history_weight() {
++    use super::owner::frame_mass;
++    // h = 0.9: steady evidence h / (1 - h) = 9 gives exactly today's fraction 0.9.
++    let cap = 0.9_f32 / (1. - 0.9);
++    assert_eq!(frame_mass(0.9, 9., false, 120., 120.), 0.);
++    assert_eq!(frame_mass(0.9, 3., true, 120., 120.), 3.);
++    assert_eq!(frame_mass(0.9, 50., true, 120., 120.), cap);
++    assert_eq!(cap / (cap + 1.), 0.9);
++    // 4/16 -> 16/16 counts the old evidence at its density; decreases keep it.
++    assert_eq!(frame_mass(0.9, 4., true, 30., 120.), 4. / 16.);
++    assert_eq!(frame_mass(0.9, 50., true, 30., 120.), cap / 16.);
++    assert_eq!(frame_mass(0.9, 4., true, 120., 60.), 4.);
++    assert_eq!(frame_mass(0., 9., true, 60., 60.), 0.);
++    for h in [0., 0.25, 0.5, 0.9, 0.99] {
++        for mass in [0., 0.5, 1., 99., f32::MAX, f32::INFINITY, f32::NAN, -1.] {
++            for (old, width) in [(60., 60.), (30., 120.), (120., 30.), (0., 60.)] {
++                let w = frame_mass(h, mass, true, old, width);
++                assert!(w.is_finite() && w >= 0., "h={h} mass={mass}: {w}");
++                assert!(w / (w + 1.) <= h, "h={h} mass={mass} widths {old}->{width}: {w}");
++            }
++        }
+     }
+ }
+ #[test]

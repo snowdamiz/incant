@@ -1,0 +1,95 @@
+{
+ "files": [
+  {
+   "added": 18,
+   "changed": true,
+   "fd5_blob": "ce7a31998e92391583be566a76f4fb41e0c68af7",
+   "fd5_sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+   "path": "crates/incant_render/src/upscaling/common.wgsl",
+   "proposed_blob": "11d2fc524f8aff015c28274c8f9d2df94211533a",
+   "proposed_sha256": "e1c2e552e462a3e27ad6632324b3880ef0cb8f96ec2e1c346ec6205e0520c879",
+   "removed": 0
+  },
+  {
+   "added": 2,
+   "changed": true,
+   "fd5_blob": "cfee1fb95bd3c4e2c2914de033b43cced4683980",
+   "fd5_sha256": "d1dc6b85ee8678738924a7925aecbc7fb3e50c94f06484f582d970ea0385f046",
+   "path": "crates/incant_render/src/upscaling/device_tests.rs",
+   "proposed_blob": "0b142dbc55dffe9c2125e768cb103e0637291c0c",
+   "proposed_sha256": "5665df3ad9395fed273e1057c31acef2fe482fdc77edf7ce743804a00c99257e",
+   "removed": 1
+  },
+  {
+   "added": 41,
+   "changed": true,
+   "fd5_blob": "a08155ec1a82b9b0b24904d19c859ec377913181",
+   "fd5_sha256": "ec881190c89b42333adc2f65e090419fa0262fb18d0dcd69bbf65f5dff2d5996",
+   "path": "crates/incant_render/src/upscaling/owner.rs",
+   "proposed_blob": "aaf234908861d48d01ff3bb694e0534d8e765824",
+   "proposed_sha256": "5a726faa275d0a2b8782caaaca872e6bd70c97f66df2215aabf5355b777f2642",
+   "removed": 0
+  },
+  {
+   "added": 2,
+   "changed": true,
+   "fd5_blob": "54a0576fb01ba8e4f1fc79b8d77c9094fbddbb6e",
+   "fd5_sha256": "e6c2028f47ce61c30a0c67c1de69ec0c077ddc260b6f86ba6cd256c5ef2d2ac7",
+   "path": "crates/incant_render/src/upscaling/owner_device_tests.rs",
+   "proposed_blob": "70824a1e1fde3cd0d1b5a73db0462008dbe1d402",
+   "proposed_sha256": "40d3f0465934ca0dd252d57953c7e41457dfbfdbab6c87070ea20af99f9347dc",
+   "removed": 1
+  },
+  {
+   "added": 44,
+   "changed": true,
+   "fd5_blob": "06564d9f3b38cfad631b07b8c8552102e33464bc",
+   "fd5_sha256": "b80563257235fe72fa8afd6bd51d2a8d52bcd2a44ba7e55891388d93fa8d728d",
+   "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+   "proposed_blob": "70c33d23ef18fac6b8c4ac3d7c25e0b18abdc132",
+   "proposed_sha256": "296fe89066865c4feff4d486506d762a4955a8351aa3f83aa0eff72ba375fc03",
+   "removed": 3
+  },
+  {
+   "added": 66,
+   "changed": true,
+   "fd5_blob": "ddd733c17de15351a6cc61034f1cf5ff7266b439",
+   "fd5_sha256": "0618bd7793f2ef53db7d34bc2020ba515bb722b5a3e5729912cf1f5c5c408777",
+   "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl",
+   "proposed_blob": "94b217799af6d03e69ae4e1fe50c821b09c10a5a",
+   "proposed_sha256": "23c094e20e62bba3da35fca373457024cfe5405c2be042802493bbfc1cea4c9f",
+   "removed": 3
+  },
+  {
+   "added": 1,
+   "changed": true,
+   "fd5_blob": "05f556df2086696c6e62fa6ac96107992959cda9",
+   "fd5_sha256": "20b7bcd844fce15b3328da673cdc133405c2aeac1953d8681c5c5fe872e23b3e",
+   "path": "crates/incant_render/src/upscaling/system.rs",
+   "proposed_blob": "78bf118b282722b8a6b9da5c1ee7e517cac5f10a",
+   "proposed_sha256": "00ddce30484539148b2887e778db8203f4bfbec222964978bf6ad9a91fcb5442",
+   "removed": 1
+  },
+  {
+   "added": 24,
+   "changed": true,
+   "fd5_blob": "953c373c2eba91f8a9f604d06ef8c376c8dad38e",
+   "fd5_sha256": "e710d6ef580c302184436c09f146e9818cb4a1c1c1f0c6915419b46df885ff60",
+   "path": "crates/incant_render/src/upscaling/tests.rs",
+   "proposed_blob": "fe12836b01a9a4e0445dd0a8e847d30b16e2432d",
+   "proposed_sha256": "a106ea8c249ab7c9b9c44ce8c3041a6f189e6070d9a8eeec68f0029140b1749f",
+   "removed": 0
+  }
+ ],
+ "git_apply_cached_check_against_fd5": true,
+ "git_apply_stderr": "",
+ "patch": {
+  "bytes": 18676,
+  "files": 8,
+  "path": "repair.patch",
+  "sha256": "7dc2c3303784cbbd5ac6bbe464f9f614ce743691d5664edd088e0a58c9cf29aa"
+ },
+ "production": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+ "python_reapply_reproduces_proposed_files": true,
+ "scope": "patch construction and applicability only; no build, test or GPU"
+}
