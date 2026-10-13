@@ -58,7 +58,11 @@ pub(super) fn frame_mass(h: f32, mass: f32, has_previous: bool, old_width: f32, 
     if !has_previous || !cap.is_finite() || cap <= 0. {
         return 0.;
     }
-    let mut w = if mass.is_finite() { mass.clamp(0., cap) } else { 0. };
+    let mut w = if mass.is_finite() {
+        mass.clamp(0., cap)
+    } else {
+        0.
+    };
     if old_width > 0. && width > old_width {
         w *= (old_width / width) * (old_width / width);
     }

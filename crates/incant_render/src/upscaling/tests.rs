@@ -35,7 +35,10 @@ fn frame_mass_resets_attenuates_and_never_exceeds_history_weight() {
             for (old, width) in [(60., 60.), (30., 120.), (120., 30.), (0., 60.)] {
                 let w = frame_mass(h, mass, true, old, width);
                 assert!(w.is_finite() && w >= 0., "h={h} mass={mass}: {w}");
-                assert!(w / (w + 1.) <= h, "h={h} mass={mass} widths {old}->{width}: {w}");
+                assert!(
+                    w / (w + 1.) <= h,
+                    "h={h} mass={mass} widths {old}->{width}: {w}"
+                );
             }
         }
     }
