@@ -1,0 +1,215 @@
+{
+  "schema": "incant.ssao-integration-pause.v1",
+  "at": "2026-10-13T15:40:18.076345+00:00",
+  "state": "paused at user request before ACP/GPU launch and final integration packet",
+  "tested_source": "c01bed48c3590e33d8e9250aaebfab8cdc2b9e70",
+  "base_main": "4631f07defcc8bdfa63446723ad25026d8f03b50",
+  "cpu": {
+    "commands": 13,
+    "all_exit_zero": true,
+    "all_reaped": true,
+    "default_pass": 168,
+    "cooked_observer_pass": 200,
+    "gpu_ignored_each": 107,
+    "overlap": true,
+    "tool_handle": 92400,
+    "tool_exit": 0
+  },
+  "gpu": {
+    "launched": false,
+    "frames": 0,
+    "acp_launched": false,
+    "grant": "Prior bounded grant is superseded by the user pause. Coordinate a new lease before resuming."
+  },
+  "artifact_identity": "33 previously accepted native shader payloads remain byte exact",
+  "retained_files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/results.json",
+      "sha256": "4758cd80c6fe98a914b2a993f3837d7484577b897d667d8c370489c48ff5327f",
+      "bytes": 11465
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/freeze.json",
+      "sha256": "afaedb06d300dc126de9689e5d041f7679783c56b4abf859f85f8c58b0b43fc2",
+      "bytes": 657422
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/source-freeze.json",
+      "sha256": "69e975cc9f3616bca5db415a74d5c1ee25e03bb47433e738e10fcaac9c0e0ed0",
+      "bytes": 40678
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/artifact-identity.json",
+      "sha256": "b3d6ac1ef39ea7efd1c391c60dbbca3e607b4f18d8efcb04ef5c7b3369a9960b",
+      "bytes": 15521
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/binaries.json",
+      "sha256": "97f5b3687013e50b2a38d02601a8269b691cafdb0cf7c5af0465df37747c2572",
+      "bytes": 3505
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/gpu-binaries.json",
+      "sha256": "3311da1359da471875eb9bb0fc9ab734da5fa586c8a49ac3cbbf547eede638b0",
+      "bytes": 1719
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/gpu-listing.json",
+      "sha256": "923f95fbdaaef8fef33a9ab5db0f2b482084d0553dfbd7a0b1da80f7ca35ed90",
+      "bytes": 1459
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/run.py",
+      "sha256": "2c7ea7093d65fbdf3f522cf284f80958e06f92900aa4c8bf0c98e15ee7765580",
+      "bytes": 4422
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/run-gpu.py",
+      "sha256": "c6cf97ddea9d80243b9a8a357f541ec31e979147574a65f8804f03848b5eb205",
+      "bytes": 4704
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/retain-producer.py",
+      "sha256": "f290036222abafb0bc48d08aa131486b9cefd6e64c349a8705627b509a460f5d",
+      "bytes": 2626
+    }
+  ],
+  "command_streams": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/scoped-renderer-clean.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/scoped-renderer-clean.stderr",
+      "sha256": "6d1807445d2c5bc159e2efb19811f5d9eac502feb20416a1848bd9012775aff8",
+      "bytes": 39
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/default-cpu.stdout",
+      "sha256": "8c74402a0cf9c4fb6797b4f191ea89a81dfac76e621db98721916e680273b2c4",
+      "bytes": 384240
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/default-cpu.stderr",
+      "sha256": "2452f5de05ac9c7821e00542c0716e4bb450a5fbbb710fa0428837fe271ad4b5",
+      "bytes": 9740
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/default-clippy.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/default-clippy.stderr",
+      "sha256": "c2688c0cd252e20dd24d65fe88d2f20ca0bed6d814269ca86c8e0fdd197a3f22",
+      "bytes": 307
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/cooked-observer-cpu.stdout",
+      "sha256": "1d393ccff647158e382899be0710dc150dcd464c2d06e4873c54c5b12d693300",
+      "bytes": 409369
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/cooked-observer-cpu.stderr",
+      "sha256": "d2667783fed4010dbf64c182a47ebc830062eba936d5015a901e68aa71238fa1",
+      "bytes": 9740
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/native-artifact-identity.stdout",
+      "sha256": "14baa9b010f7889459d9b2e569d2d814516efae9d40aff64c77212ea3b9e9365",
+      "bytes": 44
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/native-artifact-identity.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/cooked-observer-clippy.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/cooked-observer-clippy.stderr",
+      "sha256": "7d5b35ab65c067c731079ac1b3c62cabd981927ab295fc771a0007f03864205b",
+      "bytes": 307
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/native-window-consumer.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/native-window-consumer.stderr",
+      "sha256": "f4ae383c9947c6ff01ea90a8d1b0e48f9d45b26ba7eabe60ee48b62585e1073b",
+      "bytes": 7876
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/wasm.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/wasm.stderr",
+      "sha256": "d11f3f08571bbe6b4ee16ea17e065c4eec175f1ad71fd61350823acd8523e2e4",
+      "bytes": 1826
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/normal-graph.stdout",
+      "sha256": "0e84531fe096203875a5175d71e4c314e20a66f592998399855c36c51b14b2ba",
+      "bytes": 21142
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/normal-graph.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/runtime-guard.stdout",
+      "sha256": "7284772f7a35ae60ace11db993d3bbb863b95b5c88e368a678400e7efbe09bf8",
+      "bytes": 96
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/runtime-guard.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/fmt.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/fmt.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/conventions.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/conventions.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/diff.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-main229-001/diff.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "pending": [
+    "Route the reviewed bounded numeric runner through existing Claude0070 with Opus 5.5 and Max verified, after a renewed lease.",
+    "Retain actual numeric outcome and final portable current integration archive/verifier.",
+    "Obtain independent final integration acceptance, then scoped PR and exact required fast check."
+  ],
+  "claims": "No current composed GPU execution, new appearance, phone or performance result."
+}

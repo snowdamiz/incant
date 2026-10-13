@@ -45,6 +45,11 @@ and N8 margins remain 0.79 and 0.97 codes respectively. Original execution001 an
 002 are separate historical evidence; this composition does not retroactively
 pass their failures or claim a new appearance judgment.
 
-Current source review is independently accepted (`97d2f158`); CPU qualification
-and any bounded composed GPU execution are pending. No default enablement, non-Metal appearance, phone, performance,
+Current source review is independently accepted (`97d2f158`). Thirteen CPU and
+compile checks passed at `c01bed48`: 168 default and 200 overlapping cooked
+observer cases, strict Clippy, native-window/browser consumers, dependency rules
+and exact identity of all 33 previous native shader payloads. The user paused
+work before ACP or GPU launch. The copied binaries and raw logs are retained;
+composed numeric GPU execution, final packet audit and publication remain pending.
+See [pause inventory](evidence/ssao-main229/pause.json). No default enablement, non-Metal appearance, phone, performance,
 whole-frame GPU cost or phase-completion claim is made.
