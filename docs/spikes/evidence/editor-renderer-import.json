@@ -1,0 +1,202 @@
+{
+  "at": "2026-10-13T03:40:35.547511+00:00",
+  "base": "7fc413d23cbb65e244ca515ca5d684aec21cfb90",
+  "tested_head": "7fc413d23cbb65e244ca515ca5d684aec21cfb90",
+  "summary": {
+    "passed": true,
+    "frozen_inputs": 2029,
+    "checks": 6,
+    "editor_cpu": {
+      "passed": 1,
+      "ignored_gpu": 1
+    },
+    "renderer_cpu": {
+      "passed": 1,
+      "filtered_out": 95
+    },
+    "failed_hosted_jobs": 2,
+    "production_unchanged": true,
+    "gpu_executed": false
+  },
+  "source": {
+    "path": "editor/app/tests/model_gpu.rs",
+    "sha256": "3111e5fb5d94094c6d0debb473f931786f750d87b34e23686d205e3f20a57b45"
+  },
+  "source_freeze": {
+    "path": "docs/spikes/evidence/editor-renderer-import/freeze.json",
+    "sha256": "c0d8046178775c007bc1bf6e4cdd290beebe0c26a568a054844ff804d816979c"
+  },
+  "patch_sha256": "a7b9542b70171d1aca5ef17ce4b3be6130f34ce2104a92686240b6be39d543d3",
+  "checks": [
+    {
+      "name": "editor-cpu",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_editor",
+        "--test",
+        "model_gpu",
+        "--",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "seconds": 233.46591283299495,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/editor-cpu.stdout",
+        "sha256": "58600bcb290e4a94d471184a9eb845f73a287149e149096d318151e3f1a388b6"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/editor-cpu.stderr",
+        "sha256": "a1d87e8d36246aaa7685c5595ea2eadd2964cc85ac5ba089fa2d9cc18ac1d882"
+      }
+    },
+    {
+      "name": "renderer-backend-contract",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "required_backend_rejects_unknown_and_mismatched_adapters",
+        "--",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "seconds": 18.679444500005047,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/renderer-backend-contract.stdout",
+        "sha256": "1252cebdbbc84c131a797773b7f904db32269c703f96780394c48b352758c2dd"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/renderer-backend-contract.stderr",
+        "sha256": "cdf57e9a798d2cf5d29732bd2743ade837bf8213be0ade7c5c2ff9490f9ee18e"
+      }
+    },
+    {
+      "name": "editor-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_editor",
+        "--test",
+        "model_gpu",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 34.77120995899895,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/editor-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/editor-clippy.stderr",
+        "sha256": "af0fea083760f5c3c5887d294e4e7da301501580b025191b7be5d4c90273ed42"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1294837499954156,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.033458166995842475,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.020792208997590933,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/editor-renderer-import-main192-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "hosted_failures": [
+    {
+      "job": 115113538804,
+      "wrapper_exit": 101,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint18/linux-desktop-115113538804.log",
+      "sha256": "600ed1c582b99159b69accd7bf53db45e7c47c9fb1b508c48e8020d26973be36",
+      "observed": "E0425 shared test helper missing Renderer root alias"
+    },
+    {
+      "job": 115113538960,
+      "wrapper_exit": 1,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint18/windows-desktop-115113538960.log",
+      "sha256": "5fbf895dfab50b39762bb9a38bb32938fbc90a3d9d90cdded571025cefcb641b",
+      "observed": "E0425 shared test helper missing Renderer root alias"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/editor-renderer-import/artifacts.json.gz",
+    "sha256": "f0c1def8835f8076ed7a054b5bcd2bbe908ef8044010ef6413800dd744b9c0b9",
+    "bytes": 233996,
+    "records": 19,
+    "payloads": 13
+  },
+  "limits": [
+    "Test-only current-main repair; backend assertion unchanged and now also applied to the editor GPU renderer",
+    "No local GPU execution or actual hosted repair success claimed; checkpoint18 remains frozen and unpromoted",
+    "Local macOS compilation and CPU tests do not substitute for Linux/Windows full release checks"
+  ],
+  "review_state": "Final independent execution review pending"
+}

@@ -1,0 +1,6 @@
+{
+  "kind": "parent-message source acceptance",
+  "reviewer": "root",
+  "patch_sha256": "a7b9542b70171d1aca5ef17ce4b3be6130f34ce2104a92686240b6be39d543d3",
+  "acceptance": "Read editor-renderer-import.patch a7b9542b: source accepted, two-line test-only correction imports root alias needed by sharedsupport and routes its existing actualheadless renderer through unchangedchecked backend assertion. Await scoped compile/Clippy/regression evidence before finalrepair acceptance; noGPU resultclaim."
+}
