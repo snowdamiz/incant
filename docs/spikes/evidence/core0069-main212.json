@@ -66,12 +66,25 @@
     "integration_qualification": "Exact selected UI/text/sample/shader sources and relevant dependency identities; other main renderer input changes recorded. No fresh GPU run or cross-binary pixel equivalence claim."
   },
   "initial_failure": "Minimal authoring environment omitted installed Node; retained before any export. Only the external wrapper PATH was corrected. All repository sources stayed frozen.",
-  "review_status": "Prior source/CPU/GPU packet accepted; current-main integration final independent review pending",
+  "review_status": "Independent current-main source/execution archive review accepted; main215 test/tool-only qualification follows separately",
   "limits": [
     "No new GPU, window, image inspection, phone, timing/performance or phase gate acceptance",
     "Prior GPU runs remain the g6 regression and g5 capture binary identities",
     "Current 4-locale public authoring/native proof and English source-deleted shipping are new executions",
     "Original dirty brief and three untracked CPU/report paths preserved untouched in Claude checkout",
-    "Main214 disjoint Python helper/docs ancestry intentionally left to publisher; no source rebuild justified solely by that ancestry"
-  ]
+    "Actual main215 joined after proof completion. Only two physics Python paths and one optional GPU test differ; exact source-relevance qualification preserves original execution identities."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/core0069-main212/final-review.json",
+    "sha256": "cd09ae48b128da98d2d4023e2f0fdbe4726a98136213df4af92f8b5dcde6da39"
+  },
+  "current_main_qualification": {
+    "config": "docs/spikes/evidence/core0069-main212/current-main-config.json",
+    "result": "docs/spikes/evidence/core0069-main212/current-main-qualification.json",
+    "script": "docs/spikes/evidence/core0069-main212/qualify-current-main.py"
+  },
+  "qualification_output": {
+    "path": "docs/spikes/evidence/core0069-main212/current-main-audit.stdout",
+    "sha256": "43af33a5703b52c49b06c38bbc9cfee2345de994c3bae4b957d6d86f113508d5"
+  }
 }

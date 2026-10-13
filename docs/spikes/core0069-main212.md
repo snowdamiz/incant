@@ -67,11 +67,16 @@ Astra did not inspect images. Minor Arabic pip ordering and narrow pseudo-locale
 prompt follow-ups remain as stated in Claude's report. New optional renderer
 combinations, devices, performance budgets and phase gates are not accepted here.
 
-Main214's later delta contains only two physics portability Python files and
-related documentation. The publisher may join that ancestry separately without
-rebuilding unchanged runtime inputs. Publication remains the publisher's action.
+The publisher joined actual main215 `09d53653` after the frozen proof finished.
+Only the two reviewed physics portability Python files and the reviewed optional
+timestamp GPU test differ among 3,485 tested inputs. The qualification records
+exact old/new Git hashes and replays all original native/shipping/PCM assertions
+read-only, plus the complete lossless archive verification. Runtime, UI, text,
+sample, shader, dependency and compiler inputs are unchanged. No rebuilt shipping
+binary or fresh GPU execution is claimed for this disjoint ancestry join.
 
 [Machine-readable evidence](evidence/core0069-main212.json) retains the lossless
 artifact map, exact source/binary identities, assertion-only audit and prior root
-reviews. Root independently replayed the current integration assertions; final
-archive review is pending.
+reviews. Independent source and final archive review is accepted under retained
+receipt `cd09ae48…`. The separate [main215 qualification](evidence/core0069-main212/current-main-qualification.json)
+is ready for independent review before publication.

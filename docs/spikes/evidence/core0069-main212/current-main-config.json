@@ -1,0 +1,23 @@
+{
+  "actual_main": "09d53653a1b7b433cd9032166e35fa93d46db080",
+  "allowed": [
+    "tools/probes/physics-parity/features.py",
+    "tools/tests/test_physics_parity.py",
+    "crates/incant_render/src/timing/gpu_tests.rs"
+  ],
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/core0069-main212/final-review.json",
+      "sha256": "cd09ae48b128da98d2d4023e2f0fdbe4726a98136213df4af92f8b5dcde6da39"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-parity-vendor/final-review.json",
+      "sha256": "69ddb387fbb203499e9d997c43852f6884a33af9ff8021bd8de4784348d3a3f6"
+    },
+    {
+      "path": "docs/spikes/evidence/timestamp-capability/final-review.json",
+      "sha256": "27235c72c594d021e949949edd1d06553c40fc5f8188df0f45433740ddfe4113"
+    }
+  ],
+  "scope": "The only executable-scope differences from tested2489325 are the independently accepted physics portability Python helper/test and optional GPU timing test. No runtime implementation, shader, UI/text/sample, dependency, compiler, feature, or lock input differs. The original 221 CPU/20 Python/native/shipping executions remain explicitly on tested2489325; no new execution or GPU inference from ancestry. All original observable assertions replayed read-only with exact old/new Git hashes for only those three paths."
+}
