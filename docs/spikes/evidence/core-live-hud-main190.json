@@ -478,6 +478,10 @@
     "path": "docs/spikes/evidence/core-live-hud-main190/main191-qualification.json",
     "sha256": "e6ede8b0bd6ec4b0db0bf5f1b267b1045f1a123a05698520e7a68f94118fffef",
     "script": "docs/spikes/evidence/core-live-hud-main190/qualify-main191.py",
-    "script_sha256": "2d1be40b12326704a0d8de6f36fe5cf0b7479e864b0b386bbe4d2fa349e53552"
+    "script_sha256": "2d1be40b12326704a0d8de6f36fe5cf0b7479e864b0b386bbe4d2fa349e53552",
+    "review": {
+      "path": "docs/spikes/evidence/core-live-hud-main190/main191-review.json",
+      "source": "Parent independent review message; supplements retained d6e66b0f final receipt"
+    }
   }
 }
