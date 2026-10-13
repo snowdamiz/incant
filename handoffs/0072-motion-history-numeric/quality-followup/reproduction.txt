@@ -1,0 +1,77 @@
+CPU model (not render evidence). Values are sRGB 8-bit after the identity tone map.
+== posts: patch x 418..441, y 44..61, 16 frames (reset + 15)
+  baseline frames 9-16: >=33   7, >=64   0, edge max  45, same-phase changed 0 (max 0), halo 16, detail ratio 0.215
+  a143     frames 9-16: >=33  11, >=64   5, edge max  69, same-phase changed 0 (max 0), halo 0, detail ratio 0.496
+  warmup   frames 9-16: >=33  14, >=64   5, edge max  83, same-phase changed 0 (max 0), halo 0, detail ratio 0.517
+  f16 pixel values (sRGB G) model vs GPU at the GPU's failing pixels; true feature coverage from 8x8 supersampling:
+   (428, 54): ref 183 | coverage of feature 0.25 | model baseline 105 a143 106 warmup 106 | GPU baseline 106 a143 106 warmup 106
+   (428, 56): ref 183 | coverage of feature 0.20 | model baseline 104 a143 106 warmup 106 | GPU baseline 104 a143 107 warmup 107
+   (431, 53): ref 183 | coverage of feature 0.50 | model baseline 118 a143 131 warmup 131 | GPU baseline 118 a143 131 warmup 131
+   (431, 50): ref 183 | coverage of feature 0.50 | model baseline 104 a143 106 warmup 106 | GPU baseline 103 a143 106 warmup 106
+   (434, 49): ref 183 | coverage of feature 0.62 | model baseline 104 a143 106 warmup 106 | GPU baseline 103 a143 106 warmup 106
+   (425, 52): ref  84 | coverage of feature 1.00 | model baseline 113 a143  95 warmup  87 | GPU baseline 113 a143  95 warmup  87
+  warmup resolve path per frame 8-16 at those pixels (path, current, history, output; sRGB G). Paths: X reset, D no valid neighbourhood depth, O outside, R refused (no admitted history tap), A/a admitted unclamped (all/part of the tap mass), C/c clamped (all/part), H held (candidates only)
+   (428, 54): t8 A 183  84 109 | t9 R  84   -  84 | t10A 183  84 106 | t11A 183 106 121 | t12A 183 121 131 | t13A 183 131 139 | t14A 183 139 146 | t15R  84   -  84 | t16A 183  84 106
+   (428, 56): t8 A 183  84 109 | t9 C  84 109  84 | t10A 183  84 106 | t11A 183 106 121 | t12A 183 121 131 | t13A 183 131 139 | t14A 183 139 146 | t15C  84 146  84 | t16A 183  84 106
+   (431, 53): t8 A 183 130 140 | t9 A 183 140 147 | t10A 183 147 152 | t11R  84   -  84 | t12A 183  84 106 | t13R  84   -  84 | t14A 183  84 106 | t15A 183 106 121 | t16A 183 121 131
+   (431, 50): t8 A 183  84 109 | t9 R  84   -  84 | t10A 183  84 106 | t11R  84   -  84 | t12A 183  84 106 | t13R  84   -  84 | t14A 183  84 106 | t15R  84   -  84 | t16A 183  84 106
+   (434, 49): t8 A 183  84 109 | t9 R  84   -  84 | t10A 183  84 106 | t11R  84   -  84 | t12A  84  84  84 | t13A  84  84  84 | t14A  84  84  84 | t15A  84  84  84 | t16A 183  84 106
+   (425, 52): t8 A  84  93  92 | t9 A  84  92  91 | t10A  84  91  90 | t11A  84  90  89 | t12A  84  89  89 | t13A  84  89  88 | t14A  84  88  88 | t15A  84  88  88 | t16A  84  88  87
+  warmup frame-to-frame steps >= 33 on edge pixels, frames 9-16, by path before->after: {'A->R': 9, 'A->C': 6}
+== grille: patch x 532..563, y 230..251, 16 frames (reset + 15)
+  baseline frames 9-16: >=33   5, >=64   0, edge max  41, same-phase changed 0 (max 0), halo 0, detail ratio 0.187
+  a143     frames 9-16: >=33   7, >=64   0, edge max  52, same-phase changed 0 (max 0), halo 0, detail ratio 0.569
+  warmup   frames 9-16: >=33   7, >=64   1, edge max  68, same-phase changed 0 (max 0), halo 0, detail ratio 0.589
+  f16 pixel values (sRGB G) model vs GPU at the GPU's failing pixels; true feature coverage from 8x8 supersampling:
+   (556, 242): ref 163 | coverage of feature 0.88 | model baseline 176 a143 175 warmup 175 | GPU baseline 180 a143 180 warmup 180
+   (542, 242): ref 163 | coverage of feature 0.88 | model baseline 178 a143 169 warmup 170 | GPU baseline 171 a143 166 warmup 166
+   (543, 240): ref 163 | coverage of feature 0.88 | model baseline 177 a143 168 warmup 167 | GPU baseline 175 a143 165 warmup 165
+   (550, 242): ref 163 | coverage of feature 0.94 | model baseline 173 a143 166 warmup 166 | GPU baseline 175 a143 169 warmup 169
+   (545, 240): ref 185 | coverage of feature 0.00 | model baseline 184 a143 185 warmup 185 | GPU baseline 184 a143 184 warmup 184
+  warmup resolve path per frame 8-16 at those pixels (path, current, history, output; sRGB G). Paths: X reset, D no valid neighbourhood depth, O outside, R refused (no admitted history tap), A/a admitted unclamped (all/part of the tap mass), C/c clamped (all/part), H held (candidates only)
+   (556, 242): t8 A 163 173 171 | t9 A 163 171 170 | t10R 185   - 185 | t11A 163 185 182 | t12A 163 182 179 | t13A 163 179 177 | t14A 163 177 175 | t15A 185 175 177 | t16A 163 177 175
+   (542, 242): t8 A 163 171 170 | t9 A 163 170 169 | t10A 185 169 171 | t11A 163 171 170 | t12A 163 170 169 | t13A 163 169 169 | t14A 163 169 168 | t15A 185 168 171 | t16A 163 171 170
+   (543, 240): t8 A 163 168 167 | t9 A 163 167 167 | t10A 163 167 166 | t11A 163 166 166 | t12A 163 166 166 | t13A 185 166 169 | t14A 163 169 168 | t15A 163 168 168 | t16A 163 168 167
+   (550, 242): t8 A 163 166 166 | t9 A 163 166 166 | t10A 185 166 169 | t11A 163 169 168 | t12A 163 168 167 | t13A 163 167 167 | t14A 163 167 167 | t15A 163 167 166 | t16A 163 166 166
+   (545, 240): t8 A 185 185 185 | t9 A 185 185 185 | t10A 185 185 185 | t11A 185 185 185 | t12A 185 185 185 | t13A 185 185 185 | t14A 185 185 185 | t15A 185 185 185 | t16A 185 185 185
+  warmup frame-to-frame steps >= 33 on edge pixels, frames 9-16, by path before->after: {'A->R': 7}
+== posts: collapses (steps >= 33 onto a refused/clamped frame) {'after admitted': 15, 'after collapse': 0, 'previous farther': 11, 'previous nearer': 0, 'previous inside': 4}
+== grille: collapses (steps >= 33 onto a refused/clamped frame) {'after admitted': 7, 'after collapse': 0, 'previous farther': 0, 'previous nearer': 7, 'previous inside': 0}
+== cube (moving geometry): patch x 270..519, y 168..249, frames k = 1..8 (reset at k = 1)
+  baseline trailing -1/-2/-3 [33.33, 3.67, 0.03] inside -27.36 | top -1/-2 [37.0, 0.0] inside -31.0 | excess over top 0.03 | rows 33 columns 45
+  a143     trailing -1/-2/-3 [40.18, 0.55, 0.0] inside -26.03 | top -1/-2 [19.0, 0.0] inside 0.0 | excess over top 21.73 | rows 33 columns 45
+  warmup   trailing -1/-2/-3 [38.73, 0.48, 0.0] inside -23.91 | top -1/-2 [28.0, 0.0] inside 0.0 | excess over top 11.21 | rows 33 columns 45
+  GPU (R-B, sharpness.py cube_bands): baseline 47.73 / 6.03 / 0.09 vs top 44.29 (excess 9.6); a143 54.00 / 0.70 / 0.03 vs top 42.42 (excess 12.3); warmup 51.45 / 0.61 / 0.03 vs top 38.07 (excess 14.0)
+== shadow (moving shadow on static ground): patch x 560..611, y 290..315, k = 1..8
+  baseline off-edge bins at f8 {'3-8': 270, '9-16': 0, '>16': 0, 'max': 8}
+  a143     off-edge bins at f8 {'3-8': 268, '9-16': 0, '>16': 0, 'max': 8}
+  warmup   off-edge bins at f8 {'3-8': 267, '9-16': 0, '>16': 0, 'max': 8}
+  GPU off-edge 9-16 in the shadow cluster (579-600, 304-305): baseline 30, a143 39, warmup 36 (max 10-11)
+== cube trailing band per row (R-B one pixel left of the off reference's first orange pixel)
+  baseline GPU minus model over 33 rows: mean +13.27, min +4, max +25
+  a143     GPU minus model over 33 rows: mean +12.70, min +4, max +23
+  warmup   GPU minus model over 33 rows: mean +11.61, min +3, max +18
+== model fidelity (motion-object f8, temporal-off): trailing-edge first orange pixel equal in 33 of 33 rows; top edge first orange row (GPU, model) [(179, 179)]
+   off (470, 220): GPU (159, 108, 61) model (164, 108, 60)
+   off (470, 190): GPU (218, 152, 87) model (218, 152, 87)
+   off (430, 220): GPU (96, 96, 103) model (96, 97, 103)
+   top control (row 178) with every sample shifted dy -0.2 px: baseline 27.0, a143 0.0, warmup 0.0 (GPU 44.29, 42.42, 38.07)
+   top control (row 178) with every sample shifted dy -0.1 px: baseline 37.0, a143 19.0, warmup 28.0 (GPU 44.29, 42.42, 38.07)
+   top control (row 178) with every sample shifted dy +0.0 px: baseline 37.0, a143 19.0, warmup 28.0 (GPU 44.29, 42.42, 38.07)
+   top control (row 178) with every sample shifted dy +0.1 px: baseline 37.0, a143 19.0, warmup 28.0 (GPU 44.29, 42.42, 38.07)
+   top control (row 178) with every sample shifted dy +0.2 px: baseline 60.0, a143 68.0, warmup 53.0 (GPU 44.29, 42.42, 38.07)
+== halo and same-phase (metric assessment)
+  posts    baseline outputs above / below the current 3x3 sample range: 1235 / 235
+  posts    a143     outputs above / below the current 3x3 sample range: 0 / 0
+  posts    warmup   outputs above / below the current 3x3 sample range: 0 / 0
+  grille   baseline outputs above / below the current 3x3 sample range: 0 / 1183
+  grille   a143     outputs above / below the current 3x3 sample range: 0 / 0
+  grille   warmup   outputs above / below the current 3x3 sample range: 0 / 0
+  penumbra baseline outputs above / below the current 3x3 sample range: 112 / 268
+  penumbra a143     outputs above / below the current 3x3 sample range: 0 / 0
+  penumbra warmup   outputs above / below the current 3x3 sample range: 0 / 0
+  static penumbra (single depth, soft): 920 non-edge interior pixels; same-phase changed (max): warmup resolve 0 (1), plain 8-phase mean of the raw samples 0 (0)
+  unclamped two-valued pixel, samples 130/150 in each of the 254 mixed 8-phase patterns: f8/f16 same-phase step max 1, patterns > 2 steps 0
+  unclamped two-valued pixel, samples 120/160 in each of the 254 mixed 8-phase patterns: f8/f16 same-phase step max 2, patterns > 2 steps 0
+  unclamped two-valued pixel, samples 100/180 in each of the 254 mixed 8-phase patterns: f8/f16 same-phase step max 5, patterns > 2 steps 30
+  periodic EMA weight of a sample k frames old at w = 0.9: 0.1 * 0.9^k / (1 - 0.9^8) = 0.176, 0.158, 0.142, 0.128, 0.115, 0.104, 0.093, 0.084 (plain mean 0.125)
