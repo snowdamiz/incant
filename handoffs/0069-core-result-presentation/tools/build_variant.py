@@ -126,7 +126,7 @@ def build(args):
     check, check_out, check_err = lease.run(
         [tree / 'incant_game_player', '--package', tree / 'data', '--ticks', '1', '--output', scratch / 'startup.pcm',
          '--ui-viewport', '640x480'], label=f'startup-{args.variant}', timeout=120, cwd=scratch,
-        env={'PATH': str(tree), 'HOME': str(scratch / 'absent-home'), 'TMPDIR': str(scratch)})
+        env={'PATH': str(tree), 'TMPDIR': str(scratch)})
     require(check == 0, 'startup check failed: ' + check_err.read_text(encoding='utf-8')[-4000:])
     require(inventory(out) == files, 'the startup check changed a packaged file')
     report = {'format': 'incant-0069-ci-package', 'variant': args.variant,

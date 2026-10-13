@@ -239,6 +239,16 @@ class Lifecycle(unittest.TestCase):
             return []
         return [json.loads(line)['event'] for line in lease.LEDGER.read_text().splitlines()]
 
+    def test_cpu_only_grant_refuses_before_locks_debit_or_launch(self):
+        with self.scratch_lease():
+            with patched(guard=lambda: {'grant': {'cpu_only': True}}):
+                with self.assertRaisesRegex(lease.Refused, 'CPU-only grant forbids GPU'):
+                    lease.run(['/bin/sh', '-c', 'exit 99'], label='forbidden', timeout=1,
+                              env=ENV, gpu=True, debit=('appearance', 'forbidden', 1))
+                self.assertEqual(self.events(), [])
+                for path in (lease.NATIVE_GPU_LOCK, lease.GROUP_LOCK, lease.FRAMES, lease.LOGS):
+                    self.assertFalse(path.exists(), path)
+
     def test_run_records_the_outcome_and_unlocks_only_after_the_group_is_gone(self):
         with self.scratch_lease():
             status, out, err = lease.run(self.argv('exit 3'), label='normal', timeout=10, env=ENV, cwd=self.dir)

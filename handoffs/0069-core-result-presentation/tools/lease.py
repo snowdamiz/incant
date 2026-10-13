@@ -412,7 +412,7 @@ def acquire():
     users = target_users()
     if users:
         raise Refused(f'target in use: {users}')
-    lease = {'packet': PACKET, 'holder': 'claude (Opus 5.5, max thinking) for handoff 0069',
+    lease = {'packet': PACKET, 'holder': value.get('holder', 'claude (Opus 5.5, max thinking) for handoff 0069'),
              'grant': value, 'grant_sha256': digest(GRANT), 'target_dir': str(TARGET),
              'brief_sha256': digest(BRIEF), 'worktree': str(ROOT), 'source': source_identity(),
              'acquired_at': now(), 'processes_on_target_at_acquire': users,
@@ -518,7 +518,9 @@ def run(argv, *, label, timeout, env, overrides=None, cwd=ROOT, debit=None, gpu=
     charges a GPU child's frames under both locks, before the launch. Both locks
     are held until the child's group is gone and its exit is in the ledger.
     """
-    guard()
+    authority = guard()
+    if gpu and authority.get('grant', {}).get('cpu_only', False):
+        raise Refused(f'{label}: CPU-only grant forbids GPU children')
     if not 0 < timeout <= (GPU_TIMEOUT if gpu else CARGO_TIMEOUT):
         raise Refused(f'{label}: timeout outside bounds')
     if debit is not None and not gpu:

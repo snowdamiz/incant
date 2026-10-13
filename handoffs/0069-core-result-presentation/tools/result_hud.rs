@@ -42,8 +42,7 @@ mod review {
     };
     use incant_render::{Renderer, RetainedTarget, wgpu};
     use incant_render_game::{
-        CpuInputObserver, NativeRenderHost, NativeRenderSettings, RenderInputConsumer,
-        UiSettings,
+        CpuInputObserver, NativeRenderHost, NativeRenderSettings, RenderInputConsumer, UiSettings,
     };
     use incant_render_gpu_host::{
         GpuRenderConsumer, GpuRenderSettings, RenderFrame, TargetProvider,
