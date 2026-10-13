@@ -21,7 +21,7 @@ import wave
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
-from shipping import cargo_output, codegen
+from shipping import cargo_output, codegen, player_units
 from shipping_symbols import backend, package, require, run
 from native_observations import verify as verify_observations
 from native_logs import ACTIONS as LOG_ACTIONS, BEHAVIOR as LOG_BEHAVIOR, BASELINE as LOG_BASELINE, verify as verify_logs
@@ -193,17 +193,19 @@ for (const compile of [() => eval('1'), () => (0,eval)('1'),
             extra = ('incant_render_game', 'incant_render_native', 'incant_render_data') if args.render_input else ()
             if args.gpu: extra += ('incant_render_gpu_host', 'incant_render', 'wgpu')
             if args.flipbook_sdk: extra += ('incant_wasm_runtime',)
-            for crate in extra + ('incant_input', 'incant_script', 'incant_runtime', 'incant_physics_runtime', 'rapier3d', 'incant_assets_runtime', 'incant_audio_runtime', 'incant_game_runtime', 'incant_game_player'):
+            for crate in extra + ('incant_input', 'incant_script', 'incant_runtime', 'incant_physics_runtime', 'rapier3d', 'incant_assets_runtime', 'incant_audio_runtime', 'incant_game_runtime'):
                 lines = [line for line in target_lines if re.search(r'--crate-name '+crate+r'\b', line)]
                 require(len(lines) == 1, f'Missing fresh target compile for {crate}')
                 require('feature="compiler"' not in lines[0], f'Compiler feature leaked into {crate}')
                 values = codegen(lines[0]); expected = {'opt-level': '3', 'codegen-units': '1', 'panic': 'abort'}
-                if crate == 'incant_game_player': expected.update(lto='fat', debuginfo='2', **{'split-debuginfo': split})
                 require(all(values.get(k) == v for k, v in expected.items()), f'Codegen mismatch: {values}')
                 require(values.get('target-cpu') != 'native' and '--test' not in lines[0], 'Nonportable/test executable')
                 flags[crate] = {k: values[k] for k in expected}
+            player_features = {'default', 'physics-deterministic', *features}
+            if args.gpu: player_features.add('render-input')
+            flags.update(player_units(audited_commands, target, split, player_features))
             artifacts = [json.loads(line) for line in build.stdout.splitlines() if line.startswith('{')]
-            exe = [a['executable'] for a in artifacts if a.get('reason') == 'compiler-artifact' and a['target']['name'] == 'incant_game_player' and a.get('executable')]
+            exe = [a['executable'] for a in artifacts if a.get('reason') == 'compiler-artifact' and a['target']['name'] == 'incant_game_player' and a['target']['kind'] == ['bin'] and a.get('executable')]
             require(len(exe) == 1, 'Missing game player executable')
             symbols = run([llvm_bin / f'llvm-nm{suffix}', '--defined-only', '--demangle', exe[0]])
             require('JS_ReadObject' in symbols and 'JS_EvalFunction' in symbols, 'Bytecode runtime missing')

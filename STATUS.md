@@ -16,23 +16,25 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main189, 2026-10-13
+## Current overview — main190, 2026-10-13
 
-Development main189 includes the restart quota-test repair (PR188) and the reviewed,
+Development main190 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
 reviews remain scoped to their recorded builds; current Vulkan/DX12 execution is pending.
 
 Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
-held at its exact main186 tree: Linux and Windows conformance failed the same quota
-test assertion, while the remaining macOS general check is still running. The main188
-repair preserves production's 50 ms budget and the exact quota/rollback contract.
+terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux and
+Windows conformance failed the quota assertion, and macOS rejected a successful
+player compile because its probe confused library and executable units. The main188
+quota repair preserves production's 50 ms budget; the probe correction has independent final acceptance and awaits its fast check
+and the next frozen full checkpoint.
 No release or phase approval follows from a main merge.
 
-Android static-Wasm producer evidence is accepted. Current main189 integration has
-passed CPU/public preflights and both-mode target compile/admission checks; its final
-independent source-relevance audit is accepted, with the fast publication check pending. Six actual Android callers remain producer-scoped.
+Android static-Wasm integration is merged in PR190 after independent source-relevance
+review and the fast check. Current CPU/public preflights and both-mode target compile/
+admission checks pass; six actual Android callers remain producer-scoped.
 Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
@@ -1081,6 +1083,10 @@ identity. The original ten source-free shipping processes and four exact reset
 PCM comparisons remain producer-scoped. Final integration review is accepted; the required fast check precedes publication.
 Historical offscreen helper provenance remains qualified; live appearance/device
 acceptance is separate. [Evidence](docs/spikes/core-main182.md).
+
+## Checkpoint17 terminal and shipping probe repair
+
+Checkpoint17 finished with 20 required successes and three failures and was not promoted. Linux/Windows quota controls have the reviewed main188 repair. A separate macOS player library/executable audit correction now passes the exact retained compile-log replay and six regression controls; independent final review is accepted and the fast/full frozen checks remain required. See [probe evidence](docs/spikes/shipping-player-probe-kinds.md).
 
 ## Historical integration snapshots
 
