@@ -3,7 +3,7 @@
 The accepted default-off CPU profiler is composed with actual main194. The current
 union passes 495 affected CPU tests in 62 groups, 19 default-player tests, all-target
 Clippy, default/summary wasm compilation, focused exporter tests, dependency guards,
-formatting and generated conventions. Independent integration review is pending.
+formatting and generated conventions. [Independent integration review](evidence/native-cpu-profiler-main194/root-review.json) accepts this scoped packet.
 
 The tested source is `8cc9a729869b5bf290bdf38641b70ef5b63efb6c`; the ancestry join at
 `5dfbc826324b18e40bdd512402cfcd9344305d7e` retains actual main194
@@ -36,3 +36,14 @@ repeating unchanged shipping builds while making the tested identities explicit.
 [graph relevance](evidence/native-cpu-profiler-main194/graph-relevance.json) retain
 the exact current checks and qualified reuse. The feature remains opt-in; no GUI,
 GPU, native-window, phone, performance gain or full PLAN profiler gate is approved.
+
+The first PR fast check exposed an isolated native-physics probe lock missing the
+new no-op profiler edge and a test scanning archived Cargo manifests as live
+packages. The correction adds only that exact local lock edge and derives actual
+workspace/patch roots while preserving genuine duplicate and missing-file refusal.
+A decoy-evidence regression passes. All 366 Python controls (four existing platform
+skips) and 22 Node controls pass; the failed hosted log and local red/green logs are
+[retained](evidence/native-cpu-profiler-main194/tooling-repair.json). The exact raw
+source-diff whitespace attribute preserves its context bytes. A bounded
+[qualification](evidence/native-cpu-profiler-main194/qualify-tooling.py) replays the
+original collector without rewriting its evidence or claiming another Rust run.

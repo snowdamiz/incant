@@ -47,7 +47,7 @@ Core authored bindings and the corrected locked-exit proof are merged in PR185
 Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
 their queued GPU/appearance checks remain open. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
-independent integration review is pending. These independent lanes do not satisfy
+independent integration review is accepted and publication awaits the fast check. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
 below are historical integration snapshots, not the current queue.
 
