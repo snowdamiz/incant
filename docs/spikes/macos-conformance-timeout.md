@@ -18,3 +18,7 @@ Local verification parsed both YAML files and confirmed that the timeout is the
 only semantic change, and all nine existing workflow/profile guard tests passed.
 The next exact-head hosted checkpoint must still complete every required check
 successfully before promotion. No old cancelled or skipped job counts as a pass.
+
+[Independent source and evidence review](evidence/macos-conformance-timeout-review.json)
+accepted the exact main242 composition and independently reran the nine guards.
+Hosted success remains pending a later exact-head checkpoint.

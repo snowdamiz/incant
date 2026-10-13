@@ -1,5 +1,7 @@
 # Implementation status
 
+Current main is PR242: the private primitive-world composition is merged, while public physics saves and outer runtime admission remain closed. Frozen checkpoint27 still selects main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Remaining checkpoint jobs continue on the original head; release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
+
 Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
 
 Checkpoint26 finished unpromoted with 22 required checks successful and its original Windows Dx12 SSAO filter failure retained. PR241 merged the reviewed full-target postprocess raster and conservative integer scissor, preserving shaders, geometry projection and strict intervals. Exact merged main241 then passed both original strict Dx12 projection contracts (570 R8 and 285 depth values each) and six observation submissions on Microsoft Basic Render Driver. Checkpoint27 now freezes that same reviewed main241 tree on PR232; all 23 required checks remain mandatory. No release promotion or appearance claim. [Portable Dx12 evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
@@ -38,7 +40,7 @@ captures per dimension/mode continue for 156 paired steps, plus 20 CCD steps;
 3D also checks 32 steps under each friction model. The wake-tick-7 refusal stays
 explicit. Current executable copies are retained immediately per mode.
 Producer, current-source and final current-main evidence reviews are accepted;
-publication awaits the required exact-head fast check. Capture provenance is supplied only by the
+PR242 merged after its required exact-head fast check. Capture provenance is supplied only by the
 exclusive native harness. Outer stable-ID/ECS/event owners and public
 physics-save admission remain closed. Historical source002 producer broad
 binaries were not retained; its original logs and four final003 focused binaries
