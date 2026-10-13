@@ -1,0 +1,804 @@
+{
+  "format": "incant-upscaling-kernel-oracle-evidence",
+  "version": 1,
+  "base": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "branch": "codex/upscaling-kernel-oracle",
+  "source": {
+    "freeze": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/upscaling-kernel-oracle-001/source-001/freeze.json",
+      "sha256": "9d44b0d493190f0fbaab54e1b48c893ea28d1bfa434c217064170132cc7dc26d",
+      "bytes": 1183
+    },
+    "files": [
+      {
+        "path": "crates/incant_render/src/upscaling/mod.rs",
+        "sha256": "f2f821de7c985aa32257f34fcd6d1afeebb8d773f13fa72660294308d4bd005a",
+        "bytes": 1177
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/confidence_oracle.rs",
+        "sha256": "888c1a3f213d40007a1c2e285e43f6badb21312a13592598f3dd777cf85ac40a",
+        "bytes": 2325
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/kernel_oracle.rs",
+        "sha256": "499d6492d500bce2e97eb6c55e64e8632b69fdb8308c861a014b9a8cb7c20570",
+        "bytes": 4438
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/kernel_tests.rs",
+        "sha256": "1f6b60b02ea236c4c04253dd733950931464ba85689fb1ba28e6d90a5fdb5398",
+        "bytes": 10075
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/kernel_patterns.rs",
+        "sha256": "8a5cb4afd73bf98e4aaf153df69f8e1f6625ff365c09d1cd58d10083d5958c36",
+        "bytes": 8009
+      }
+    ],
+    "brief_sha256": "c365fdb8520fb792e7fd51a2e25006172e36cf87f4d9b79873102c79502cc4d2"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/upscaling-kernel-oracle-logs.json.gz",
+    "sha256": "67807e85b42bde286ce0792318ddb3b1eb9bb28b30552cecaaa7712821f16ece",
+    "bytes": 122831,
+    "records": 24,
+    "payloads": 17
+  },
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/upscaling-kernel-oracle-001/frozen-binaries/render-tests",
+    "sha256": "de61233d3942d3e11846617d8dfd7a4c327b83b007812a5bfe5b53d59168aa7a",
+    "bytes": 31998736
+  },
+  "commands": [
+    {
+      "name": "tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "upscaling::",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin"
+      },
+      "exit_code": 0,
+      "seconds": 8.994205951690674,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/upscaling-kernel-oracle-001/tests-003.log",
+      "sha256": "8e48be4005a836830a51d6eb2d57d1a390bf50d23eb8a7cad673b600df9980cf"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin"
+      },
+      "exit_code": 0,
+      "seconds": 2.0923991203308105,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/upscaling-kernel-oracle-001/clippy-003.log",
+      "sha256": "e25322fb99b00a03af6ad40ff1ac084e996990588ed14c217e9ddd3a514e3324"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin"
+      },
+      "exit_code": 0,
+      "seconds": 1.3954229354858398,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/upscaling-kernel-oracle-001/fmt-003.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin"
+      },
+      "exit_code": 0,
+      "seconds": 0.03194904327392578,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/upscaling-kernel-oracle-001/conventions-003.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin"
+      },
+      "exit_code": 0,
+      "seconds": 0.020236968994140625,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/upscaling-kernel-oracle-001/diff-003.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "measurements": {
+    "mass": [
+      {
+        "n": 4.0,
+        "min": 7.998344847538,
+        "max": 8.001655128667,
+        "nearest_max": 1.0,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 5.0,
+        "min": 7.994127467827,
+        "max": 8.005874620709,
+        "nearest_max": 0.707106781187,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 6.0,
+        "min": 7.987198596383,
+        "max": 8.012801403589,
+        "nearest_max": 0.527046276695,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 7.0,
+        "min": 7.92739720026,
+        "max": 8.072923967236,
+        "nearest_max": 0.505076272276,
+        "prose_8_plus_minus_007": false
+      },
+      {
+        "n": 8.0,
+        "min": 7.997983797369,
+        "max": 7.997983797369,
+        "nearest_max": 0.353553390593,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 9.0,
+        "min": 7.940103055886,
+        "max": 8.060115366284,
+        "nearest_max": 0.392837100659,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 10.0,
+        "min": 7.991636072288,
+        "max": 8.008363927589,
+        "nearest_max": 0.316227766017,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 11.0,
+        "min": 7.997079380338,
+        "max": 8.002921115719,
+        "nearest_max": 0.321412173267,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 12.0,
+        "min": 7.999397669705,
+        "max": 8.000601360425,
+        "nearest_max": 0.333333333333,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 13.0,
+        "min": 7.99991941064,
+        "max": 8.000074747037,
+        "nearest_max": 0.27196414661,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 14.0,
+        "min": 7.99998102551,
+        "max": 7.999992838447,
+        "nearest_max": 0.225876975726,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 15.0,
+        "min": 7.999900737337,
+        "max": 7.999948361973,
+        "nearest_max": 0.235702260396,
+        "prose_8_plus_minus_007": true
+      },
+      {
+        "n": 16.0,
+        "min": 7.999804421422,
+        "max": 7.999804421422,
+        "nearest_max": 0.176776695297,
+        "prose_8_plus_minus_007": true
+      }
+    ],
+    "patterns": [
+      {
+        "n": 4.0,
+        "texels": 1.0,
+        "contrast": 0.013728638277,
+        "bilinear_control": -0.0,
+        "activity_max": 0.034412549479,
+        "bilinear_activity_max": 0.060968403919,
+        "last_cycle_residual": 0.003229377503
+      },
+      {
+        "n": 4.0,
+        "texels": 2.0,
+        "contrast": 0.084137698407,
+        "bilinear_control": -0.0,
+        "activity_max": 0.029412866735,
+        "bilinear_activity_max": 0.055910083712,
+        "last_cycle_residual": 0.004214766493
+      },
+      {
+        "n": 4.0,
+        "texels": 4.0,
+        "contrast": 0.401850126815,
+        "bilinear_control": 0.140435673172,
+        "activity_max": 0.028925990816,
+        "bilinear_activity_max": 0.046828402712,
+        "last_cycle_residual": 0.004208949121
+      },
+      {
+        "n": 5.0,
+        "texels": 1.0,
+        "contrast": 0.052653680405,
+        "bilinear_control": 0.028125,
+        "activity_max": 0.028378874589,
+        "bilinear_activity_max": 0.040526555544,
+        "last_cycle_residual": 0.003296197008
+      },
+      {
+        "n": 5.0,
+        "texels": 2.0,
+        "contrast": 0.166742356952,
+        "bilinear_control": 0.002053222656,
+        "activity_max": 0.028132572021,
+        "bilinear_activity_max": 0.055306916716,
+        "last_cycle_residual": 0.0048393064
+      },
+      {
+        "n": 5.0,
+        "texels": 4.0,
+        "contrast": 0.502778415777,
+        "bilinear_control": 0.216079711914,
+        "activity_max": 0.022374066303,
+        "bilinear_activity_max": 0.029047214153,
+        "last_cycle_residual": 0.00372854466
+      },
+      {
+        "n": 6.0,
+        "texels": 1.0,
+        "contrast": 0.156659568563,
+        "bilinear_control": 0.03125,
+        "activity_max": 0.02206884311,
+        "bilinear_activity_max": 0.03254116871,
+        "last_cycle_residual": 0.003102873383
+      },
+      {
+        "n": 6.0,
+        "texels": 2.0,
+        "contrast": 0.283202910072,
+        "bilinear_control": 0.016954210069,
+        "activity_max": 0.016042063146,
+        "bilinear_activity_max": 0.028409535902,
+        "last_cycle_residual": 0.003344940641
+      },
+      {
+        "n": 6.0,
+        "texels": 4.0,
+        "contrast": 0.586795260159,
+        "bilinear_control": 0.301927354601,
+        "activity_max": 0.018971438264,
+        "bilinear_activity_max": 0.021727307001,
+        "last_cycle_residual": 0.003197641284
+      },
+      {
+        "n": 7.0,
+        "texels": 1.0,
+        "contrast": 0.303780546615,
+        "bilinear_control": 0.012276785714,
+        "activity_max": 0.026407347238,
+        "bilinear_activity_max": 0.044627342286,
+        "last_cycle_residual": 0.003683680415
+      },
+      {
+        "n": 7.0,
+        "texels": 2.0,
+        "contrast": 0.415538026715,
+        "bilinear_control": 0.057846692144,
+        "activity_max": 0.026536420806,
+        "bilinear_activity_max": 0.0449959375,
+        "last_cycle_residual": 0.004116123358
+      },
+      {
+        "n": 7.0,
+        "texels": 4.0,
+        "contrast": 0.65661283768,
+        "bilinear_control": 0.374746205855,
+        "activity_max": 0.018663927005,
+        "bilinear_activity_max": 0.021135332138,
+        "last_cycle_residual": 0.003258852582
+      },
+      {
+        "n": 8.0,
+        "texels": 1.0,
+        "contrast": 0.382540921309,
+        "bilinear_control": 0.0,
+        "activity_max": 0.005049724284,
+        "bilinear_activity_max": 0.027922853096,
+        "last_cycle_residual": 0.000897495117
+      },
+      {
+        "n": 8.0,
+        "texels": 2.0,
+        "contrast": 0.471988444565,
+        "bilinear_control": 0.097256081931,
+        "activity_max": 0.021631835372,
+        "bilinear_activity_max": 0.024011571667,
+        "last_cycle_residual": 0.002381400755
+      },
+      {
+        "n": 8.0,
+        "texels": 4.0,
+        "contrast": 0.712172674186,
+        "bilinear_control": 0.430538203188,
+        "activity_max": 0.021597531668,
+        "bilinear_activity_max": 0.020982526221,
+        "last_cycle_residual": 0.002375037542
+      },
+      {
+        "n": 9.0,
+        "texels": 1.0,
+        "contrast": 0.438286889738,
+        "bilinear_control": 0.013020833333,
+        "activity_max": 0.02690067089,
+        "bilinear_activity_max": 0.046370826609,
+        "last_cycle_residual": 0.004012720403
+      },
+      {
+        "n": 9.0,
+        "texels": 2.0,
+        "contrast": 0.515530317068,
+        "bilinear_control": 0.164686603311,
+        "activity_max": 0.027252855243,
+        "bilinear_activity_max": 0.028984178397,
+        "last_cycle_residual": 0.004331911358
+      },
+      {
+        "n": 9.0,
+        "texels": 4.0,
+        "contrast": 0.724258677128,
+        "bilinear_control": 0.489514009452,
+        "activity_max": 0.027188566587,
+        "bilinear_activity_max": 0.024590753872,
+        "last_cycle_residual": 0.004314046855
+      },
+      {
+        "n": 10.0,
+        "texels": 1.0,
+        "contrast": 0.432432609714,
+        "bilinear_control": 0.04375,
+        "activity_max": 0.023237793332,
+        "bilinear_activity_max": 0.038774055588,
+        "last_cycle_residual": 0.002963366556
+      },
+      {
+        "n": 10.0,
+        "texels": 2.0,
+        "contrast": 0.512005588167,
+        "bilinear_control": 0.216806640625,
+        "activity_max": 0.030039861559,
+        "bilinear_activity_max": 0.028802639444,
+        "last_cycle_residual": 0.004252419857
+      },
+      {
+        "n": 10.0,
+        "texels": 4.0,
+        "contrast": 0.735821857852,
+        "bilinear_control": 0.537014160156,
+        "activity_max": 0.029942270835,
+        "bilinear_activity_max": 0.027697636416,
+        "last_cycle_residual": 0.003929003215
+      },
+      {
+        "n": 11.0,
+        "texels": 1.0,
+        "contrast": 0.437922900136,
+        "bilinear_control": 0.088778409091,
+        "activity_max": 0.030181484616,
+        "bilinear_activity_max": 0.041955768455,
+        "last_cycle_residual": 0.003133076192
+      },
+      {
+        "n": 11.0,
+        "texels": 2.0,
+        "contrast": 0.515534727885,
+        "bilinear_control": 0.264771642764,
+        "activity_max": 0.030963739003,
+        "bilinear_activity_max": 0.031821709619,
+        "last_cycle_residual": 0.003676723463
+      },
+      {
+        "n": 11.0,
+        "texels": 4.0,
+        "contrast": 0.747017761857,
+        "bilinear_control": 0.580215454102,
+        "activity_max": 0.030925315197,
+        "bilinear_activity_max": 0.03109802474,
+        "last_cycle_residual": 0.003672885562
+      },
+      {
+        "n": 12.0,
+        "texels": 1.0,
+        "contrast": 0.482229969479,
+        "bilinear_control": 0.166666666667,
+        "activity_max": 0.035176983033,
+        "bilinear_activity_max": 0.045282918531,
+        "last_cycle_residual": 0.00250113727
+      },
+      {
+        "n": 12.0,
+        "texels": 2.0,
+        "contrast": 0.548573143305,
+        "bilinear_control": 0.340277777778,
+        "activity_max": 0.029942909011,
+        "bilinear_activity_max": 0.03480017672,
+        "last_cycle_residual": 0.002237725527
+      },
+      {
+        "n": 12.0,
+        "texels": 4.0,
+        "contrast": 0.755875904843,
+        "bilinear_control": 0.626627104755,
+        "activity_max": 0.029906827763,
+        "bilinear_activity_max": 0.03480017672,
+        "last_cycle_residual": 0.00179179276
+      },
+      {
+        "n": 13.0,
+        "texels": 1.0,
+        "contrast": 0.438645524108,
+        "bilinear_control": 0.189302884615,
+        "activity_max": 0.031550429699,
+        "bilinear_activity_max": 0.036624191065,
+        "last_cycle_residual": 0.001944871467
+      },
+      {
+        "n": 13.0,
+        "texels": 2.0,
+        "contrast": 0.515995152676,
+        "bilinear_control": 0.346499200403,
+        "activity_max": 0.029596890804,
+        "bilinear_activity_max": 0.025536877194,
+        "last_cycle_residual": 0.002088948227
+      },
+      {
+        "n": 13.0,
+        "texels": 4.0,
+        "contrast": 0.744184389408,
+        "bilinear_control": 0.636447251901,
+        "activity_max": 0.022003287228,
+        "bilinear_activity_max": 0.026505433067,
+        "last_cycle_residual": 0.001744944793
+      },
+      {
+        "n": 14.0,
+        "texels": 1.0,
+        "contrast": 0.436395451455,
+        "bilinear_control": 0.236607142857,
+        "activity_max": 0.02709646106,
+        "bilinear_activity_max": 0.028111923734,
+        "last_cycle_residual": 0.001372824465
+      },
+      {
+        "n": 14.0,
+        "texels": 2.0,
+        "contrast": 0.51413270725,
+        "bilinear_control": 0.376798668686,
+        "activity_max": 0.019286473906,
+        "bilinear_activity_max": 0.019215850231,
+        "last_cycle_residual": 0.001154105021
+      },
+      {
+        "n": 14.0,
+        "texels": 4.0,
+        "contrast": 0.737084163978,
+        "bilinear_control": 0.651119310029,
+        "activity_max": 0.01880845174,
+        "bilinear_activity_max": 0.019779031874,
+        "last_cycle_residual": 0.00083317882
+      },
+      {
+        "n": 15.0,
+        "texels": 1.0,
+        "contrast": 0.439895672112,
+        "bilinear_control": 0.288020833333,
+        "activity_max": 0.031528939606,
+        "bilinear_activity_max": 0.031062431676,
+        "last_cycle_residual": 0.001011854331
+      },
+      {
+        "n": 15.0,
+        "texels": 2.0,
+        "contrast": 0.517036648978,
+        "bilinear_control": 0.414749416775,
+        "activity_max": 0.02979572286,
+        "bilinear_activity_max": 0.024211708911,
+        "last_cycle_residual": 0.001017794767
+      },
+      {
+        "n": 15.0,
+        "texels": 4.0,
+        "contrast": 0.734177565287,
+        "bilinear_control": 0.668646918403,
+        "activity_max": 0.021787052799,
+        "bilinear_activity_max": 0.014441147628,
+        "last_cycle_residual": 0.000771576767
+      },
+      {
+        "n": 16.0,
+        "texels": 1.0,
+        "contrast": 0.428592026431,
+        "bilinear_control": 0.310007770477,
+        "activity_max": 0.016220229018,
+        "bilinear_activity_max": 0.013332931509,
+        "last_cycle_residual": 0.000401786976
+      },
+      {
+        "n": 16.0,
+        "texels": 2.0,
+        "contrast": 0.508805719517,
+        "bilinear_control": 0.4304553727,
+        "activity_max": 0.022432529985,
+        "bilinear_activity_max": 0.009638353271,
+        "last_cycle_residual": 0.000414902083
+      },
+      {
+        "n": 16.0,
+        "texels": 4.0,
+        "contrast": 0.733916814005,
+        "bilinear_control": 0.685721631645,
+        "activity_max": 0.022562130145,
+        "bilinear_activity_max": 0.009638353271,
+        "last_cycle_residual": 0.000417111921
+      }
+    ],
+    "scales": [
+      {
+        "from": 4,
+        "to": 16,
+        "texels": 1,
+        "contrast": [
+          0.013582744745595388,
+          0.07958588824065983,
+          0.3109723236891088,
+          0.26607236997809175,
+          0.37960521630510735,
+          0.33306751417834485,
+          0.38453566521976373,
+          0.3565534259962003,
+          0.4036510314455547
+        ],
+        "no_density_rescale": [
+          0.013582744745595388,
+          0.016342857286548024,
+          0.08122660053305474,
+          0.08404965098738805,
+          0.15697267289257105,
+          0.1530635220066614,
+          0.20447119344407697,
+          0.19765267911059636,
+          0.2565480422250675
+        ]
+      },
+      {
+        "from": 4,
+        "to": 16,
+        "texels": 2,
+        "contrast": [
+          0.08396659172465966,
+          0.32743338245083603,
+          0.38154899624273947,
+          0.3653337579382172,
+          0.45796606167031567,
+          0.4594973405574818,
+          0.4605671219729902,
+          0.44496913452245535,
+          0.48253592504133047
+        ],
+        "no_density_rescale": [
+          0.08396659172465966,
+          0.09414786047648885,
+          0.13085880904320737,
+          0.14499921436723007,
+          0.21336606646383877,
+          0.23832609860453274,
+          0.260825908757762,
+          0.2647988399347711,
+          0.3183728797403732
+        ]
+      },
+      {
+        "from": 4,
+        "to": 16,
+        "texels": 4,
+        "contrast": [
+          0.4046565757949742,
+          0.6022359210204542,
+          0.646152085141189,
+          0.6370776970554106,
+          0.6941912183879392,
+          0.6979134646678329,
+          0.7005138988066147,
+          0.6907229593968103,
+          0.7132121721093932
+        ],
+        "no_density_rescale": [
+          0.4046565757949742,
+          0.4129189281574915,
+          0.44271077434228207,
+          0.45556432414676523,
+          0.5033552181702133,
+          0.5242330794730974,
+          0.5430530839134953,
+          0.5480567406245904,
+          0.5844267061700392
+        ]
+      },
+      {
+        "from": 12,
+        "to": 4,
+        "texels": 1,
+        "contrast": [
+          0.48211367222723234,
+          0.4543689273827769,
+          0.42975329842471627,
+          0.4076888113716285,
+          0.38801188444910417,
+          0.3702172925613547,
+          0.3542204095575786,
+          0.339488209684092,
+          0.326203326691619
+        ],
+        "no_density_rescale": [
+          0.48211367222723234,
+          0.4543689273827769,
+          0.42975329842471627,
+          0.4076888113716285,
+          0.38801188444910417,
+          0.3702172925613547,
+          0.3542204095575786,
+          0.339488209684092,
+          0.326203326691619
+        ]
+      },
+      {
+        "from": 12,
+        "to": 4,
+        "texels": 2,
+        "contrast": [
+          0.548481224895259,
+          0.5209446345673321,
+          0.49604964004195856,
+          0.47498146373027206,
+          0.45577523534845515,
+          0.43782601754725364,
+          0.42138320207703506,
+          0.40708677464744336,
+          0.39392303599546785
+        ],
+        "no_density_rescale": [
+          0.548481224895259,
+          0.5209446345673321,
+          0.49604964004195856,
+          0.47498146373027206,
+          0.45577523534845515,
+          0.43782601754725364,
+          0.42138320207703506,
+          0.40708677464744336,
+          0.39392303599546785
+        ]
+      },
+      {
+        "from": 12,
+        "to": 4,
+        "texels": 4,
+        "contrast": [
+          0.7607807062264258,
+          0.7362864375569482,
+          0.7146402629870169,
+          0.6897987806509452,
+          0.6891947867750413,
+          0.6730925500464227,
+          0.6586683443905769,
+          0.6399719367198283,
+          0.6421083285010764
+        ],
+        "no_density_rescale": [
+          0.7607807062264258,
+          0.7362864375569482,
+          0.7146402629870169,
+          0.6897987806509452,
+          0.6891947867750413,
+          0.6730925500464227,
+          0.6586683443905769,
+          0.6399719367198283,
+          0.6421083285010764
+        ]
+      }
+    ],
+    "omission": {
+      "actual_lattice_peak_ratio": 1.9563661e-05,
+      "arbitrary_point_bound": 0.000102702565
+    }
+  },
+  "results": {
+    "passed": 16,
+    "failed": 0,
+    "existing_gpu_ignored": 1,
+    "historical_tests001": {
+      "passed": 11,
+      "failed": 1,
+      "ignored": 1,
+      "source_separately_frozen": false
+    },
+    "historical_tests002": {
+      "passed": 14,
+      "failed": 0,
+      "ignored": 1
+    },
+    "overlapping_counts_not_additive": true
+  },
+  "scope": [
+    "cfg(test) f64 oracle only",
+    "production WGSL/resources/config/dependencies unchanged",
+    "all 13 admitted scale numerators and 8 actual jitter phases",
+    "finite clipped/fractional-view support; interior mass/omission bounds do not cover arbitrary fractional alignment",
+    "static confidence only; dynamic admission, material LOD, raster/GPU and appearance remain unproved",
+    "old bilinear negative control is not full former production path"
+  ],
+  "review": "Root read source with no blocking finding; independent final packet review pending."
+}

@@ -2,6 +2,14 @@
 //! history is separate from current-only transparent/sprite/world-text overlays.
 //! No quality preset, sharpening, MetalFX, or device budget claim.
 #[cfg(test)]
+mod confidence_oracle;
+#[cfg(test)]
+mod kernel_oracle;
+#[cfg(test)]
+mod kernel_patterns;
+#[cfg(test)]
+mod kernel_tests;
+#[cfg(test)]
 mod oracle;
 mod owner;
 mod plan;

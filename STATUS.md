@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private reconstruction oracle — 2026-10-13
+
+The [test-only f64 reconstruction oracle](docs/spikes/upscaling-kernel-oracle.md)
+checks jitter-position Gaussian support, premultiplied confidence accumulation,
+static periodic inputs and cut/scale changes across numerators 4–16. Sixteen CPU
+tests and strict Clippy pass; the retained evidence records proposal mass,
+activity and recovery claims that do not hold universally. Production shaders,
+resources and admission are unchanged. Corrected disocclusion design, production
+integration, GPU/raster and appearance evidence remain pending; no gate claim.
+
 ## Private temporal edge correction — 2026-10-13
 
 The [CPU-verified correction](docs/spikes/temporal-edge-correctness-verification.md)
