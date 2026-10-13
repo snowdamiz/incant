@@ -1,0 +1,416 @@
+{
+  "camera_pan_m_per_frame_after_14": 0.05,
+  "case": "motion",
+  "checks": {
+    "controls_plain_and_drs_480x270": true,
+    "frames_nonblank": true,
+    "up_history_survives_object_and_camera_motion": true
+  },
+  "crops": {
+    "mover": [
+      605,
+      237,
+      120,
+      67
+    ],
+    "pan": [
+      379,
+      197,
+      120,
+      67
+    ]
+  },
+  "figures": {
+    "motion-detail.png": "4x4 tiles, 120x67 px at 2x. Row 1 mover crop UP frames 8, 9, 11, 14; row 2 FULL 14, DRS 14, |UP14-FULL14| x4, |DRS14-FULL14| x4; row 3 pan crop UP frames 14, 16, 18, 20; row 4 FULL 20, DRS 20, |UP20-FULL20| x4, |DRS20-FULL20| x4"
+  },
+  "frames": [
+    {
+      "history": false,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-1",
+      "phase": 0,
+      "rgba_sha256": "662f3362d12b4a3418a8545b471afdd1df5eee6203a4e64ad8c50e515264719e",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-2",
+      "phase": 1,
+      "rgba_sha256": "2a7d0dc14dcb8e9d1bdf7b33c89eb5a8581c9096e83eb27f4c0e2d22a8ef55c9",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-3",
+      "phase": 2,
+      "rgba_sha256": "9c31c3aad22b743d046b84c3ef801ce23b645baf183f188f418e70fc40e424ba",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-4",
+      "phase": 3,
+      "rgba_sha256": "1e16a57eb300da584aaefc3ce086c6c88b0ee83731d1166c7e907fd8546e6fb7",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-5",
+      "phase": 4,
+      "rgba_sha256": "cfb50a15e1efbcfce0d7583ce32baa8e8e7bb59357c99a9b68e34199bba74522",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-6",
+      "phase": 5,
+      "rgba_sha256": "8dd786d94556dcd4a43084fc947a1abe0db9e62decdd3269c37d459c2aa80715",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-7",
+      "phase": 6,
+      "rgba_sha256": "5ec8970622a1a54e2bdb3fcdaef1d01384e6805b5d8b192af80453dc8f7033e1",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-8",
+      "phase": 7,
+      "rgba_sha256": "60b2e1a9a5f61d1fba36f41a63c33ab2634b9d2a8aaed8a51411ef911c3cf998",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-9",
+      "phase": 0,
+      "rgba_sha256": "56f1fae92e0da87682e5ae5a99736f0e9860d9f7c08f037206e91d9a0462e54f",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-10",
+      "phase": 1,
+      "rgba_sha256": "283fa7069b76573b155ca783b525f76f789ca5ec9ab4440165023454afe03d0d",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-11",
+      "phase": 2,
+      "rgba_sha256": "c243306047af1e25d3a5be050df6b4672dabd0d86bfc2987eb5909f46eafe428",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-12",
+      "phase": 3,
+      "rgba_sha256": "f1eff76411d6828ab6d138c0636923e8fede72d875e709397fda107a62ae848e",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-13",
+      "phase": 4,
+      "rgba_sha256": "dc42e8a264898b1d18d6da66f3ed59fda15e2290b67f01ba760232a081ef1187",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-14",
+      "phase": 5,
+      "rgba_sha256": "e1d52aa1a4a1c0abf50da378b5fcb099d6c4775fb7724c19c919782fec859b17",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-15",
+      "phase": 6,
+      "rgba_sha256": "4be23f383ad7c0fb52293fc01cfeeb07f50c4756b64bd2a66b4c4195fedd15af",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-16",
+      "phase": 7,
+      "rgba_sha256": "4f04d06ea34aef5d4be05aaa1f5453bb0525ad095c318ae119462b5339e7773c",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-17",
+      "phase": 0,
+      "rgba_sha256": "9cd1a3ba138e582afc33fe106e3b16ab58d2213cf8c547773debe690fa0e7470",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-18",
+      "phase": 1,
+      "rgba_sha256": "d2cb209214ccfb073cabe2bc66cddaa25cef838941c8193884ffb2ce7778014c",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-19",
+      "phase": 2,
+      "rgba_sha256": "bbc20c126e1682d6c9b0af05617d902d830191a547773b9ca58b3c2d1ea06b3c",
+      "variant": "Up"
+    },
+    {
+      "history": true,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "up50-20",
+      "phase": 3,
+      "rgba_sha256": "c111591d2f004873a7370e8b62bf6c6c9b90967c024f4a3c50799a5dff0e395e",
+      "variant": "Up"
+    },
+    {
+      "history": null,
+      "internal": null,
+      "name": "full-14",
+      "phase": null,
+      "rgba_sha256": "ecd603005d511a7635a5718278e2f34632320fcea34d7596f14ec4c0bf14b0ec",
+      "variant": "Full"
+    },
+    {
+      "history": null,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "drs50-14",
+      "phase": null,
+      "rgba_sha256": "650a2e0d12e85c43fc814051b3078ba45ffdced60e4c78805ba7c2f8670b0e1e",
+      "variant": "Drs"
+    },
+    {
+      "history": null,
+      "internal": null,
+      "name": "full-20",
+      "phase": null,
+      "rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05",
+      "variant": "Full"
+    },
+    {
+      "history": null,
+      "internal": [
+        480,
+        270
+      ],
+      "name": "drs50-20",
+      "phase": null,
+      "rgba_sha256": "473530b02f61ed24638714f5b1569ffe7aad39a90adf6a1daefbccd0aec72c5a",
+      "variant": "Drs"
+    }
+  ],
+  "frames_charged": 24,
+  "mover_m_per_frame": 0.12,
+  "observations": {
+    "frame14_object_motion": {
+      "drs50_vs_full": {
+        "edge": {
+          "changed_fraction": 0.6930086753663337,
+          "mean_abs": 31.09038662486883,
+          "p99_max_channel": 169,
+          "pixels": 27434
+        },
+        "interior": {
+          "changed_fraction": 0.04897080449562699,
+          "mean_abs": 0.10189503957504549,
+          "p99_max_channel": 3,
+          "pixels": 490966
+        }
+      },
+      "mover_region": {
+        "drs50": 15.503731343283581,
+        "rect": [
+          605,
+          237,
+          120,
+          67
+        ],
+        "up50": 19.276492537313434
+      },
+      "pan_region": {
+        "drs50": 1.359950248756219,
+        "rect": [
+          379,
+          197,
+          120,
+          67
+        ],
+        "up50": 1.390174129353234
+      },
+      "up50_vs_full": {
+        "edge": {
+          "changed_fraction": 0.9121528030910548,
+          "mean_abs": 35.67163616923067,
+          "p99_max_channel": 169,
+          "pixels": 27434
+        },
+        "interior": {
+          "changed_fraction": 0.06901496233955101,
+          "mean_abs": 0.2645356297584021,
+          "p99_max_channel": 6,
+          "pixels": 490966
+        }
+      }
+    },
+    "frame20_object_and_camera_motion": {
+      "drs50_vs_full": {
+        "edge": {
+          "changed_fraction": 0.7095759136093828,
+          "mean_abs": 31.053994135736044,
+          "p99_max_channel": 169,
+          "pixels": 27966
+        },
+        "interior": {
+          "changed_fraction": 0.04842649571603926,
+          "mean_abs": 0.1016426267346908,
+          "p99_max_channel": 3,
+          "pixels": 490434
+        }
+      },
+      "mover_region": {
+        "drs50": 21.537562189054725,
+        "rect": [
+          605,
+          237,
+          120,
+          67
+        ],
+        "up50": 24.36405472636816
+      },
+      "pan_region": {
+        "drs50": 1.2461442786069652,
+        "rect": [
+          379,
+          197,
+          120,
+          67
+        ],
+        "up50": 1.2794776119402984
+      },
+      "up50_vs_full": {
+        "edge": {
+          "changed_fraction": 0.9005220625044698,
+          "mean_abs": 35.2905671172147,
+          "p99_max_channel": 169,
+          "pixels": 27966
+        },
+        "interior": {
+          "changed_fraction": 0.06664505315699971,
+          "mean_abs": 0.21632744331208964,
+          "p99_max_channel": 5,
+          "pixels": 490434
+        }
+      }
+    }
+  },
+  "outcome": "pass",
+  "pngs": [
+    {
+      "name": "motion-full.png",
+      "rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05",
+      "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52"
+    },
+    {
+      "name": "motion-up50.png",
+      "rgba_sha256": "c111591d2f004873a7370e8b62bf6c6c9b90967c024f4a3c50799a5dff0e395e",
+      "sha256": "fd13d7b902ad8b7bb311a1db5282de2006c9840f3c12b894da38aace626bc073"
+    },
+    {
+      "name": "motion-detail.png",
+      "rgba_sha256": "c1a232e82f7469b4609149e67fde15ccbec5b4fa2b3a0a8a6d4209b1c9a2d037",
+      "sha256": "ae049f346c3ff8a652aff0afc62cc6f6de75edb7bdf6d5ee5e16ed6f0edbba37"
+    }
+  ],
+  "policy": {
+    "absolute_depth": 0.019999999552965164,
+    "history_weight": 0.8999999761581421,
+    "reactive_strength": 0.5,
+    "reactive_threshold": 4.0,
+    "relative_depth": 0.05000000074505806
+  },
+  "scale_sixteenths": 8
+}

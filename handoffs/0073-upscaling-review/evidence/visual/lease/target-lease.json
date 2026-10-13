@@ -1,0 +1,66 @@
+{
+ "packet": "0073-upscaling-review",
+ "stage": "upscaling-build",
+ "holder": "root/astra supervised CPU builds",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+ "assigned_by": "root via build-ready.json",
+ "grant_sha256": "6231fd37f3ae3170894a82dbab72934bc2dbf69df67c458aaf036df8127909bb",
+ "grant": {
+  "packet": "0073-upscaling-review",
+  "stage": "upscaling-build",
+  "holder": "root/astra supervised CPU builds",
+  "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "source_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+   "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"
+  },
+  "visual_tree": "7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae",
+  "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+  "root_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/upscaling0073-repair-source-20261013.json",
+   "sha256": "d0f421bbc9e3f45d6e3aa3f75cd132c0067395caea6cea6a1cd398fecb1574ee"
+  },
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual/target-lease.json",
+  "prior_build_release_sha256": "a9e416fc5f85bfdb07d59b7c954a58b3905e27194fc777916c69c715ce7672aa",
+  "correction": "ce20026a: fixture unused mut/chunks lint only; lint CLI now propagates actual failed result. Previous101 lint is retained; no previous GPU work."
+ },
+ "prior_receipts": {
+  "pins": {
+   "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual/target-lease.json",
+    "expected": "a9e416fc5f85bfdb07d59b7c954a58b3905e27194fc777916c69c715ce7672aa",
+    "sha256": "a9e416fc5f85bfdb07d59b7c954a58b3905e27194fc777916c69c715ce7672aa"
+   }
+  },
+  "release_pins": [
+   "build_release"
+  ],
+  "release_alive_fields": {
+   "build_release": {
+    "processes_on_target_at_release": []
+   }
+  }
+ },
+ "tools": {
+  "head": "ce20026a314bece0b0c5c9a873ae14dbe0a3c80d",
+  "visual_tree": "7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae",
+  "plan_sha256": "b177ee0c1a8dac57e34b7fafea7484f75e70a4ef97c64c891281666a383ee1ca",
+  "helper_sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e"
+ },
+ "brief_sha256": "cd7c45b79b526524599443b49d3389f388a39880650a956cc16210b599dcc0a9",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout",
+ "acquired_at": "2026-10-13T08:18:29.031749+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2, default features",
+  "builds from the git-archive child checkout of the granted commit only",
+  "every build input must equal root's granted source freeze",
+  "one bounded process group at a time under the packet flock",
+  "no GPU child while the lease is held; release it before gpu.py list",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002"
+ ],
+ "released_at": "2026-10-13T08:18:40.035707+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0073 cargo/rustc process or frozen binary remains on the target. Contents left in place as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/bin"
+}

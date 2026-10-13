@@ -1,0 +1,335 @@
+{
+ "published": "2026-10-13T08:28:06.797842+00:00",
+ "analysis": {
+  "path": "summary-2026-10-13T082346.098894+0000.json",
+  "sha256": "2fba8a75e4ff7bcf8d3fa436862f454bf590b088c7bdf76bc8c0b55079f93fb1"
+ },
+ "files": [
+  {
+   "path": "gpu/grant-copy.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/review-ready.json",
+   "source_sha256": "ebf34321918600bbb545bb08e465d9c2db96eff073f703e258ebcc22839b0692",
+   "sha256": "ebf34321918600bbb545bb08e465d9c2db96eff073f703e258ebcc22839b0692",
+   "normalized": false
+  },
+  {
+   "path": "gpu/ledger.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/gpu-ledger.jsonl",
+   "source_sha256": "88b269e85c0d528f844673ecacfab4a41c1e3c08c4f1ce80f91035fc4762152e",
+   "sha256": "88b269e85c0d528f844673ecacfab4a41c1e3c08c4f1ce80f91035fc4762152e",
+   "normalized": false
+  },
+  {
+   "path": "gpu/debits.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/debits.jsonl",
+   "source_sha256": "f0b9aceb57ca9f6ba78526e00baadeba1ca732136b5290eb5c2d8f252b5c7118",
+   "sha256": "f0b9aceb57ca9f6ba78526e00baadeba1ca732136b5290eb5c2d8f252b5c7118",
+   "normalized": false
+  },
+  {
+   "path": "gpu/gpu-released.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/gpu-released.json",
+   "source_sha256": "d0998c95b860c574c9e3e7b1c361a7bca9ab65cb23e7d21f65e794d00b29f50e",
+   "sha256": "d0998c95b860c574c9e3e7b1c361a7bca9ab65cb23e7d21f65e794d00b29f50e",
+   "normalized": false
+  },
+  {
+   "path": "lease/target-lease.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/target-lease.json",
+   "source_sha256": "7502da7f9fd756d0d2b37cd52bf26c48d59d3fd272afb32df8392ece3e2acd32",
+   "sha256": "7502da7f9fd756d0d2b37cd52bf26c48d59d3fd272afb32df8392ece3e2acd32",
+   "normalized": false
+  },
+  {
+   "path": "analysis/summary-2026-10-13T082346.098894+0000.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/analysis/summary-2026-10-13T082346.098894+0000.json",
+   "source_sha256": "2fba8a75e4ff7bcf8d3fa436862f454bf590b088c7bdf76bc8c0b55079f93fb1",
+   "sha256": "2fba8a75e4ff7bcf8d3fa436862f454bf590b088c7bdf76bc8c0b55079f93fb1",
+   "normalized": false
+  },
+  {
+   "path": "build/build-grant-copy.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/build-ready.json",
+   "source_sha256": "6231fd37f3ae3170894a82dbab72934bc2dbf69df67c458aaf036df8127909bb",
+   "sha256": "6231fd37f3ae3170894a82dbab72934bc2dbf69df67c458aaf036df8127909bb",
+   "normalized": false
+  },
+  {
+   "path": "build/source.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/build/source.json",
+   "source_sha256": "40ae57950113db717780ad33b880f38d973be064222b46a180e6f0872f6a9fa0",
+   "sha256": "40ae57950113db717780ad33b880f38d973be064222b46a180e6f0872f6a9fa0",
+   "normalized": false
+  },
+  {
+   "path": "build/toolchain.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/build/toolchain.json",
+   "source_sha256": "c4a14d318b0a0cfaa9dd10a767daf6e99e528a3bbda46471fd8e68022263980f",
+   "sha256": "c4a14d318b0a0cfaa9dd10a767daf6e99e528a3bbda46471fd8e68022263980f",
+   "normalized": false
+  },
+  {
+   "path": "build/review.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/build/review.json",
+   "source_sha256": "b52c6918ff908c693312022b5b439423a78ba4af816cdac67a38bbb1ea35bbde",
+   "sha256": "b52c6918ff908c693312022b5b439423a78ba4af816cdac67a38bbb1ea35bbde",
+   "normalized": false
+  },
+  {
+   "path": "build/lint.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/build/lint.json",
+   "source_sha256": "221e73efca63e29d88f8392d96579479b82f09a905ed16a6b8e079bfd39952f0",
+   "sha256": "221e73efca63e29d88f8392d96579479b82f09a905ed16a6b8e079bfd39952f0",
+   "normalized": false
+  },
+  {
+   "path": "logs/toolchain-cargo.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-cargo.stderr.txt",
+   "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "normalized": true
+  },
+  {
+   "path": "logs/toolchain-rustc.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-rustc.stderr.txt",
+   "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "normalized": true
+  },
+  {
+   "path": "logs/toolchain-sw_vers.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-sw_vers.stderr.txt",
+   "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "normalized": true
+  },
+  {
+   "path": "logs/toolchain-uname.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-uname.stderr.txt",
+   "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "normalized": true
+  },
+  {
+   "path": "logs/toolchain-hw_model.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-hw_model.stderr.txt",
+   "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "normalized": true
+  },
+  {
+   "path": "logs/toolchain-cpu.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-cpu.stderr.txt",
+   "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "normalized": true
+  },
+  {
+   "path": "logs/build-review.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-review.stderr.txt",
+   "source_sha256": "dbc2d40b935f1e72f67a60ccdeea5976a1a553d925c3c52c478fb3ad2de8cffc",
+   "sha256": "dbc2d40b935f1e72f67a60ccdeea5976a1a553d925c3c52c478fb3ad2de8cffc",
+   "normalized": false
+  },
+  {
+   "path": "logs/build-lint.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-lint.stderr.txt",
+   "source_sha256": "3bf9237fd0348b5d212151a0cacaf29dd9a4c38f3831177b0ad9c4c561a7f3da",
+   "sha256": "3bf9237fd0348b5d212151a0cacaf29dd9a4c38f3831177b0ad9c4c561a7f3da",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-list-review.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-list-review.stderr.txt",
+   "source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+   "normalized": true
+  },
+  {
+   "path": "logs/gpu-list-review.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-list-review.stdout.txt",
+   "source_sha256": "a3714fe7e26643c6386d278d8cb384adc1a1496248e8bea531ce6e3f6eec07dc",
+   "sha256": "a3714fe7e26643c6386d278d8cb384adc1a1496248e8bea531ce6e3f6eec07dc",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-probe-r1.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-probe-r1.stderr.txt",
+   "source_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-probe-r1.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-probe-r1.stdout.txt",
+   "source_sha256": "67073f1573b492789e8f484418c833d3c2172a4ef8c6b76668c22073d5b538d5",
+   "sha256": "bb13e69544d4d9aca8f52684930f3b6fd4f5d1a13ee0186a7f09b887f6e0d1e3",
+   "normalized": true
+  },
+  {
+   "path": "captures/probe-r1/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/probe-r1/report.json",
+   "source_sha256": "57db5ca7009b4d1b576d61e542a64fe2b24e699f99926295dea1c44223776ae2",
+   "sha256": "8792fcba18826ccb45dc174951a39d23d1cddce4105f9707cf412b77df5ab7f5",
+   "normalized": true
+  },
+  {
+   "path": "captures/probe-r1/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/probe-r1/events.jsonl",
+   "source_sha256": "ac19506c094443e030bcd244e1867d56088e305ae0710d29f7fa58a26ff7252b",
+   "sha256": "ac19506c094443e030bcd244e1867d56088e305ae0710d29f7fa58a26ff7252b",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-stationary-r1.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-stationary-r1.stderr.txt",
+   "source_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-stationary-r1.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-stationary-r1.stdout.txt",
+   "source_sha256": "cb4c46dc46ceef1d639925f37b1118c9f3299cbec65f2f47caa583f5239c3b66",
+   "sha256": "b81480f2564a8e98b00395055f79871f41b6d495e224a7915396ee7635d41e6c",
+   "normalized": true
+  },
+  {
+   "path": "captures/stationary-r1/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/report.json",
+   "source_sha256": "db39cad66c52e781f933814e9882ba3de047ef9d1ec0c2822235e31608cfd111",
+   "sha256": "764c4e326f4f0ac83cc8565c03b93d6c6175121751e99169d22c9488f7319d54",
+   "normalized": true
+  },
+  {
+   "path": "captures/stationary-r1/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/events.jsonl",
+   "source_sha256": "42c5992cd8ae89a8c1c5c16d65f8acd5e581787ab6a5f621f8123551fbed314a",
+   "sha256": "42c5992cd8ae89a8c1c5c16d65f8acd5e581787ab6a5f621f8123551fbed314a",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-motion-r1.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-motion-r1.stderr.txt",
+   "source_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-motion-r1.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-motion-r1.stdout.txt",
+   "source_sha256": "5abab6a30a55a4d5d49225794996c73cf4b352ab488d755b892331aa8047021f",
+   "sha256": "4e12a0ef1a229289b1518dc60bf1020cb0a504fb3427165016778308882cc0f3",
+   "normalized": true
+  },
+  {
+   "path": "captures/motion-r1/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/report.json",
+   "source_sha256": "e28b854532d9241dc78adc479aac7a63328891b65d1924cf8970fa762477c913",
+   "sha256": "27372028adcd211f3458db67807aea39100ebcff222c1ea2bba7c4781871b491",
+   "normalized": true
+  },
+  {
+   "path": "captures/motion-r1/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/events.jsonl",
+   "source_sha256": "bcb3faa7ba33f9e4d8c16fed7c08c913058a7984ac467c95de46b11f4e69a214",
+   "sha256": "bcb3faa7ba33f9e4d8c16fed7c08c913058a7984ac467c95de46b11f4e69a214",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-transitions-r1.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-transitions-r1.stderr.txt",
+   "source_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "normalized": false
+  },
+  {
+   "path": "logs/gpu-review-transitions-r1.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-transitions-r1.stdout.txt",
+   "source_sha256": "e5e2a2efb7bcec8102bbdca4442705f520f855fbf2ca8945b292fdff3c32cf61",
+   "sha256": "589f00e4a40ab4e58484e36a3ad3354af07131f8d4c02c75cf4de0deac4ed6ce",
+   "normalized": true
+  },
+  {
+   "path": "captures/transitions-r1/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/report.json",
+   "source_sha256": "fce4f8c46e8dde4559f0ccdddb2d10671da28d0d8a9cb285e9d1e825fbf21290",
+   "sha256": "f755d4bc9ec7f743444627624e23508a27ae19be04d79d9ab811e20043614dda",
+   "normalized": true
+  },
+  {
+   "path": "captures/transitions-r1/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/events.jsonl",
+   "source_sha256": "0b8d8c4ae8da7631230d596592ffadb94ea80db8f2440cd5b3d6f2e8910cb44e",
+   "sha256": "0b8d8c4ae8da7631230d596592ffadb94ea80db8f2440cd5b3d6f2e8910cb44e",
+   "normalized": false
+  }
+ ],
+ "screenshots": [
+  {
+   "path": "screenshots/stationary-full.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-full.png",
+   "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9"
+  },
+  {
+   "path": "screenshots/stationary-drs50.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-drs50.png",
+   "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0"
+  },
+  {
+   "path": "screenshots/stationary-up50.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-up50.png",
+   "sha256": "1493c6b514f3b528e6d3426016b54ad3189e9fede336b4db6f14cda4adc314ce"
+  },
+  {
+   "path": "screenshots/stationary-phases.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-phases.png",
+   "sha256": "7927d17a03f2f6da568c28b876a4daedd12ddb4f32eb9079bafa25baff7c6f4a"
+  },
+  {
+   "path": "screenshots/stationary-detail.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-detail.png",
+   "sha256": "698ae2b9959a8c6c564a3a816dd7b51dab6ec1767cb25a423a8c7b89a0a067a4"
+  },
+  {
+   "path": "screenshots/stationary-activity.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-activity.png",
+   "sha256": "f44be9c9659af0bad27d9449e237ee6908d24bc782cc693a7bda7d4a9dd9c5fd"
+  },
+  {
+   "path": "screenshots/motion-full.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/motion-full.png",
+   "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52"
+  },
+  {
+   "path": "screenshots/motion-up50.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/motion-up50.png",
+   "sha256": "fd13d7b902ad8b7bb311a1db5282de2006c9840f3c12b894da38aace626bc073"
+  },
+  {
+   "path": "screenshots/motion-detail.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/motion-detail.png",
+   "sha256": "ae049f346c3ff8a652aff0afc62cc6f6de75edb7bdf6d5ee5e16ed6f0edbba37"
+  },
+  {
+   "path": "screenshots/transitions-full.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-full.png",
+   "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e"
+  },
+  {
+   "path": "screenshots/transitions-up50.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-up50.png",
+   "sha256": "ad445b93da940fc4dfcc319df46fd1b86f55a72239ea704f41da7ff876d32d74"
+  },
+  {
+   "path": "screenshots/transitions-strip.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-strip.png",
+   "sha256": "89c61777160bb86c2624a82b5c47e5144edcab326123061159bab9767b514702"
+  },
+  {
+   "path": "screenshots/transitions-cut.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-cut.png",
+   "sha256": "b184ce1aa212ef1b587f0d6d5abdf8b1a1e9668a5da2c15a7b9eba1f9e1e0146"
+  }
+ ]
+}

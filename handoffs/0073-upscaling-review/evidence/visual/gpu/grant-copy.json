@@ -1,0 +1,11 @@
+{
+  "packet": "0073-upscaling-review",
+  "stage": "upscaling-visual",
+  "visual_tree": "7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae",
+  "build_record_sha256": "b52c6918ff908c693312022b5b439423a78ba4af816cdac67a38bbb1ea35bbde",
+  "prior_effects_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/released.json",
+  "prior_effects_release_sha256": "aa8fd844bfc8722c8548767d88f211d412a1784318d486ca9ccd861b7e044cb9",
+  "root_review_path": "/Users/andreyyurlov/.codex/incant-reviews/upscaling0073-build-final-20261013.json",
+  "root_review_sha256": "6109ca8b2d349094ee1347800eb0b6a7028a3db4a93fe27e8dec00500690bddd",
+  "scope": "One listing then probe,stationary,motion,transitions once,89submissions/13PNGs;96submissions16PNGs hard caps; no retry; stop onfailure; alwaysrelease"
+}

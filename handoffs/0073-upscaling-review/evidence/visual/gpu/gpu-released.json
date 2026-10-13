@@ -1,0 +1,21 @@
+{
+ "packet": "0073-upscaling-review",
+ "stage": "upscaling-visual",
+ "released_at": "2026-10-13T08:23:36.916796+00:00",
+ "children": 13,
+ "gpu_children": 5,
+ "debits": 5,
+ "debits_without_ledger_row": [],
+ "frames_debited": 89,
+ "pngs_debited": 13,
+ "frames_charged_by_helper": 89,
+ "pngs_written": 13,
+ "stop_latched": false,
+ "refusals": 0,
+ "ledger_sha256": "88b269e85c0d528f844673ecacfab4a41c1e3c08c4f1ce80f91035fc4762152e",
+ "debits_sha256": "f0b9aceb57ca9f6ba78526e00baadeba1ca732136b5290eb5c2d8f252b5c7118",
+ "grant_sha256_at_release": "ebf34321918600bbb545bb08e465d9c2db96eff073f703e258ebcc22839b0692",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "GPU released by 0073 for root; review-ready.json left untouched (only root writes it). Run analyze.py check next."
+}

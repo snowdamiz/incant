@@ -1,0 +1,19 @@
+{
+  "packet": "0073-upscaling-review",
+  "stage": "upscaling-build",
+  "holder": "root/astra supervised CPU builds",
+  "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+    "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"
+  },
+  "visual_tree": "7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae",
+  "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+  "root_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/upscaling0073-repair-source-20261013.json",
+    "sha256": "d0f421bbc9e3f45d6e3aa3f75cd132c0067395caea6cea6a1cd398fecb1574ee"
+  },
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual/target-lease.json",
+  "prior_build_release_sha256": "a9e416fc5f85bfdb07d59b7c954a58b3905e27194fc777916c69c715ce7672aa",
+  "correction": "ce20026a: fixture unused mut/chunks lint only; lint CLI now propagates actual failed result. Previous101 lint is retained; no previous GPU work."
+}

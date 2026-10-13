@@ -1,0 +1,62 @@
+{
+ "tools": {
+  "head": "ce20026a314bece0b0c5c9a873ae14dbe0a3c80d",
+  "visual_tree": "7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae",
+  "plan_sha256": "b177ee0c1a8dac57e34b7fafea7484f75e70a4ef97c64c891281666a383ee1ca",
+  "helper_sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e"
+ },
+ "source": {
+  "commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+  "files": 18076,
+  "manifest_sha256": "06defdd0f6b9a5f3662030cd402b2c415aa219a71ef414b4c865f567a777f605",
+  "helper_copy_sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e"
+ },
+ "label": "lint",
+ "kind": "build",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "upscaling_review",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/tmp/lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "started": "2026-10-13T08:18:39.539975+00:00",
+ "ended": "2026-10-13T08:18:39.979647+00:00",
+ "pid": 97413,
+ "exit": 0,
+ "timed_out": false,
+ "interrupted_by": [],
+ "group_empty_after": true,
+ "seconds": 0.439,
+ "timeout_s": 2700,
+ "frames_debited": 0,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-lint.stdout.jsonl",
+ "stdout_sha256": "f4bb5f424623915e0f1eb0075a4eb7158f0a21e10e55658ca85d94d0575295ee",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-lint.stderr.txt",
+ "stderr_sha256": "3bf9237fd0348b5d212151a0cacaf29dd9a4c38f3831177b0ad9c4c561a7f3da",
+ "recorded": "2026-10-13T08:18:39.980111+00:00"
+}

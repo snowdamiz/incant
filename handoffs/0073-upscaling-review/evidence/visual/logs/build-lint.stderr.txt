@@ -1,0 +1,2 @@
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 0.37s

@@ -1,0 +1,58 @@
+{
+  "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "max_texture_dimension_2d": 8192,
+    "name": "Apple M5 Pro",
+    "vendor": 0
+  },
+  "case": "probe",
+  "checks": {
+    "adapter_backend_metal": true,
+    "five_invalid_policies_refused": true,
+    "owner_accepts_review_policy": true,
+    "owner_refused_before_startup_opt_in": true,
+    "owner_refuses_invalid_policies": true,
+    "review_policy_valid": true,
+    "startup_opt_in_idempotent": true,
+    "startup_opt_in_succeeds": true
+  },
+  "frames_charged": 0,
+  "logical_bytes": {
+    "max_upscale_transition_bytes": 671105024,
+    "note": "logical attachment accounting only; not RSS, a phone budget or a measurement",
+    "owner_960x540_at_8_16_targets": 20736000
+  },
+  "outcome": "pass",
+  "pngs": [],
+  "policy": {
+    "absolute_depth": 0.019999999552965164,
+    "history_weight": 0.8999999761581421,
+    "reactive_strength": 0.5,
+    "reactive_threshold": 4.0,
+    "relative_depth": 0.05000000074505806
+  },
+  "results": {
+    "invalid_policies_refused": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "owner_before_opt_in": "upscaling pipelines were not enabled at startup",
+    "owner_invalid_policies_refused": [
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "owner_review_policy": null,
+    "startup_opt_in": null,
+    "startup_opt_in_again": null
+  }
+}

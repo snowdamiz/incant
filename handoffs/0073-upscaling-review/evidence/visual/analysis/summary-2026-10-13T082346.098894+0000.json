@@ -1,0 +1,419 @@
+{
+ "recorded": "2026-10-13T08:23:46.098894+00:00",
+ "verdict": "pass",
+ "complete": true,
+ "problems": [],
+ "cases": {
+  "probe": {
+   "present": true,
+   "report_sha256": "57db5ca7009b4d1b576d61e542a64fe2b24e699f99926295dea1c44223776ae2",
+   "outcome": "pass",
+   "checks": {
+    "adapter_backend_metal": true,
+    "five_invalid_policies_refused": true,
+    "owner_accepts_review_policy": true,
+    "owner_refused_before_startup_opt_in": true,
+    "owner_refuses_invalid_policies": true,
+    "review_policy_valid": true,
+    "startup_opt_in_idempotent": true,
+    "startup_opt_in_succeeds": true
+   },
+   "frames_charged": 0,
+   "pngs": [],
+   "tiles_recut_from_raw": []
+  },
+  "stationary": {
+   "present": true,
+   "report_sha256": "db39cad66c52e781f933814e9882ba3de047ef9d1ec0c2822235e31608cfd111",
+   "outcome": "pass",
+   "checks": {
+    "drs_control_internal_480x270_without_upscaling": true,
+    "frames_nonblank": true,
+    "full_control_has_no_upscale_or_resolution_owner": true,
+    "ui_button_interior_identical_on_all_ten_ui_frames": true,
+    "up_one_owner_phases_history_and_sizes": true
+   },
+   "frames_charged": 36,
+   "pngs": [
+    {
+     "name": "stationary-full.png",
+     "file_sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "stationary-drs50.png",
+     "file_sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "stationary-up50.png",
+     "file_sha256": "1493c6b514f3b528e6d3426016b54ad3189e9fede336b4db6f14cda4adc314ce",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "stationary-phases.png",
+     "file_sha256": "7927d17a03f2f6da568c28b876a4daedd12ddb4f32eb9079bafa25baff7c6f4a",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "stationary-detail.png",
+     "file_sha256": "698ae2b9959a8c6c564a3a816dd7b51dab6ec1767cb25a423a8c7b89a0a067a4",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "stationary-activity.png",
+     "file_sha256": "f44be9c9659af0bad27d9449e237ee6908d24bc782cc693a7bda7d4a9dd9c5fd",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    }
+   ],
+   "tiles_recut_from_raw": [
+    {
+     "figure": "stationary-detail.png",
+     "slot": 0,
+     "raw": "stationary-full.png",
+     "crop": "wires",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 1,
+     "raw": "stationary-drs50.png",
+     "crop": "wires",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 2,
+     "raw": "stationary-up50.png",
+     "crop": "wires",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 4,
+     "raw": "stationary-full.png",
+     "crop": "card_edge",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 5,
+     "raw": "stationary-drs50.png",
+     "crop": "card_edge",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 6,
+     "raw": "stationary-up50.png",
+     "crop": "card_edge",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 8,
+     "raw": "stationary-full.png",
+     "crop": "sign",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 9,
+     "raw": "stationary-drs50.png",
+     "crop": "sign",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 10,
+     "raw": "stationary-up50.png",
+     "crop": "sign",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 12,
+     "raw": "stationary-full.png",
+     "crop": "sprite",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 13,
+     "raw": "stationary-drs50.png",
+     "crop": "sprite",
+     "matches": true
+    },
+    {
+     "figure": "stationary-detail.png",
+     "slot": 14,
+     "raw": "stationary-up50.png",
+     "crop": "sprite",
+     "matches": true
+    },
+    {
+     "figure": "stationary-phases.png",
+     "slot": 7,
+     "raw": "stationary-up50.png",
+     "crop": "wires",
+     "matches": true
+    },
+    {
+     "figure": "stationary-phases.png",
+     "slot": 15,
+     "raw": "stationary-up50.png",
+     "crop": "text",
+     "matches": true
+    }
+   ],
+   "ui_interior_identical_full_drs_up24": true,
+   "drs50_vs_full_statistics_reproduced": true,
+   "up50_frame24_vs_full_statistics_reproduced": true
+  },
+  "motion": {
+   "present": true,
+   "report_sha256": "e28b854532d9241dc78adc479aac7a63328891b65d1924cf8970fa762477c913",
+   "outcome": "pass",
+   "checks": {
+    "controls_plain_and_drs_480x270": true,
+    "frames_nonblank": true,
+    "up_history_survives_object_and_camera_motion": true
+   },
+   "frames_charged": 24,
+   "pngs": [
+    {
+     "name": "motion-full.png",
+     "file_sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "motion-up50.png",
+     "file_sha256": "fd13d7b902ad8b7bb311a1db5282de2006c9840f3c12b894da38aace626bc073",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "motion-detail.png",
+     "file_sha256": "ae049f346c3ff8a652aff0afc62cc6f6de75edb7bdf6d5ee5e16ed6f0edbba37",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    }
+   ],
+   "tiles_recut_from_raw": [
+    {
+     "figure": "motion-detail.png",
+     "slot": 11,
+     "raw": "motion-up50.png",
+     "crop": "pan",
+     "matches": true
+    },
+    {
+     "figure": "motion-detail.png",
+     "slot": 12,
+     "raw": "motion-full.png",
+     "crop": "pan",
+     "matches": true
+    }
+   ]
+  },
+  "transitions": {
+   "present": true,
+   "report_sha256": "fce4f8c46e8dde4559f0ccdddb2d10671da28d0d8a9cb285e9d1e825fbf21290",
+   "outcome": "pass",
+   "checks": {
+    "chrome_outside_viewport_identical": true,
+    "controls_plain_and_drs_480x270": true,
+    "frames_nonblank": true,
+    "internal_scale_changes_keep_owner_and_history_then_cut_resets": true
+   },
+   "frames_charged": 29,
+   "pngs": [
+    {
+     "name": "transitions-full.png",
+     "file_sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "transitions-up50.png",
+     "file_sha256": "ad445b93da940fc4dfcc319df46fd1b86f55a72239ea704f41da7ff876d32d74",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "transitions-strip.png",
+     "file_sha256": "89c61777160bb86c2624a82b5c47e5144edcab326123061159bab9767b514702",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    },
+    {
+     "name": "transitions-cut.png",
+     "file_sha256": "b184ce1aa212ef1b587f0d6d5abdf8b1a1e9668a5da2c15a7b9eba1f9e1e0146",
+     "matches_ledger": true,
+     "matches_report": true,
+     "size": [
+      960,
+      540
+     ],
+     "rgba_matches_report": true
+    }
+   ],
+   "tiles_recut_from_raw": [
+    {
+     "figure": "transitions-strip.png",
+     "slot": 0,
+     "raw": "transitions-up50.png",
+     "crop": "strip",
+     "matches": true
+    },
+    {
+     "figure": "transitions-strip.png",
+     "slot": 9,
+     "raw": "transitions-cut.png",
+     "crop": "strip",
+     "matches": true
+    },
+    {
+     "figure": "transitions-strip.png",
+     "slot": 13,
+     "raw": "transitions-full.png",
+     "crop": "strip",
+     "matches": true
+    }
+   ],
+   "chrome_identical_full_up10_up23": true
+  }
+ },
+ "bindings": {
+  "visual_tree": "7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae",
+  "plan": "b177ee0c1a8dac57e34b7fafea7484f75e70a4ef97c64c891281666a383ee1ca",
+  "grant": "ebf34321918600bbb545bb08e465d9c2db96eff073f703e258ebcc22839b0692",
+  "build_record": "b52c6918ff908c693312022b5b439423a78ba4af816cdac67a38bbb1ea35bbde",
+  "lease": "7502da7f9fd756d0d2b37cd52bf26c48d59d3fd272afb32df8392ece3e2acd32",
+  "ledger": "88b269e85c0d528f844673ecacfab4a41c1e3c08c4f1ce80f91035fc4762152e",
+  "debits": "f0b9aceb57ca9f6ba78526e00baadeba1ca732136b5290eb5c2d8f252b5c7118",
+  "latch": "d0998c95b860c574c9e3e7b1c361a7bca9ab65cb23e7d21f65e794d00b29f50e",
+  "stop": null,
+  "files": {
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-cargo.stdout.txt": "1f88eaf7fe1aaec83184752cf4c944cd22f00184136ff36a3e4c318cc60ef566",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-cargo.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-rustc.stdout.txt": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-rustc.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-sw_vers.stdout.txt": "4ef10a0fc370704ea84699cf3851e51488598c5f1ab35cb572eb6b96278a8e5c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-sw_vers.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-uname.stdout.txt": "6ef6f6fea1e056e352d7b9156f3556edbc3128bc256ce5785b8ce3c69bb3fd27",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-uname.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-hw_model.stdout.txt": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-hw_model.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-cpu.stdout.txt": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/toolchain-cpu.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-review.stdout.jsonl": "77ea5013189fa85c7f752e8c55773eced09479eb57389ab8865592ff7ccc5630",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-review.stderr.txt": "dbc2d40b935f1e72f67a60ccdeea5976a1a553d925c3c52c478fb3ad2de8cffc",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-lint.stdout.jsonl": "f4bb5f424623915e0f1eb0075a4eb7158f0a21e10e55658ca85d94d0575295ee",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-lint.stderr.txt": "3bf9237fd0348b5d212151a0cacaf29dd9a4c38f3831177b0ad9c4c561a7f3da",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-list-review.stdout.txt": "a3714fe7e26643c6386d278d8cb384adc1a1496248e8bea531ce6e3f6eec07dc",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-list-review.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-probe-r1.stdout.txt": "67073f1573b492789e8f484418c833d3c2172a4ef8c6b76668c22073d5b538d5",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-probe-r1.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/probe-r1": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/probe-r1/events.jsonl": "ac19506c094443e030bcd244e1867d56088e305ae0710d29f7fa58a26ff7252b",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/probe-r1/report.json": "57db5ca7009b4d1b576d61e542a64fe2b24e699f99926295dea1c44223776ae2",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-stationary-r1.stdout.txt": "cb4c46dc46ceef1d639925f37b1118c9f3299cbec65f2f47caa583f5239c3b66",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-stationary-r1.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/events.jsonl": "42c5992cd8ae89a8c1c5c16d65f8acd5e581787ab6a5f621f8123551fbed314a",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/report.json": "db39cad66c52e781f933814e9882ba3de047ef9d1ec0c2822235e31608cfd111",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-activity.png": "f44be9c9659af0bad27d9449e237ee6908d24bc782cc693a7bda7d4a9dd9c5fd",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-detail.png": "698ae2b9959a8c6c564a3a816dd7b51dab6ec1767cb25a423a8c7b89a0a067a4",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-drs50.png": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-full.png": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-phases.png": "7927d17a03f2f6da568c28b876a4daedd12ddb4f32eb9079bafa25baff7c6f4a",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/stationary-r1/stationary-up50.png": "1493c6b514f3b528e6d3426016b54ad3189e9fede336b4db6f14cda4adc314ce",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-motion-r1.stdout.txt": "5abab6a30a55a4d5d49225794996c73cf4b352ab488d755b892331aa8047021f",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-motion-r1.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/events.jsonl": "bcb3faa7ba33f9e4d8c16fed7c08c913058a7984ac467c95de46b11f4e69a214",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/motion-detail.png": "ae049f346c3ff8a652aff0afc62cc6f6de75edb7bdf6d5ee5e16ed6f0edbba37",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/motion-full.png": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/motion-up50.png": "fd13d7b902ad8b7bb311a1db5282de2006c9840f3c12b894da38aace626bc073",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/motion-r1/report.json": "e28b854532d9241dc78adc479aac7a63328891b65d1924cf8970fa762477c913",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-transitions-r1.stdout.txt": "e5e2a2efb7bcec8102bbdca4442705f520f855fbf2ca8945b292fdff3c32cf61",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/gpu-review-transitions-r1.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/events.jsonl": "0b8d8c4ae8da7631230d596592ffadb94ea80db8f2440cd5b3d6f2e8910cb44e",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/report.json": "fce4f8c46e8dde4559f0ccdddb2d10671da28d0d8a9cb285e9d1e825fbf21290",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-cut.png": "b184ce1aa212ef1b587f0d6d5abdf8b1a1e9668a5da2c15a7b9eba1f9e1e0146",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-full.png": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-strip.png": "89c61777160bb86c2624a82b5c47e5144edcab326123061159bab9767b514702",
+   "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/captures/transitions-r1/transitions-up50.png": "ad445b93da940fc4dfcc319df46fd1b86f55a72239ea704f41da7ff876d32d74"
+  }
+ },
+ "observations": "report.json observations are reference data; they never decide the verdict"
+}

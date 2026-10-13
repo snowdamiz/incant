@@ -1,6 +1,87 @@
-# 0073 result — output upscaling numeric execution and visual-review preparation
+# 0073 result — output upscaling numeric execution, visual-review preparation and visual execution
 
-## Revision 1 (current): fail-closed analyzer and corrected-source readiness
+## Execution (current): corrected portable visual review
+
+**Status: EXECUTED, and the GPU is released. Hard results PASS; my quality
+verdict is FAIL.** Details are in [`visual-result.md`](visual-result.md).
+- **Contract:** all 20 contract checks pass, and the fail-closed `analyze.py
+  check` passes with no problems.
+- **Quality:** the 8/16 upscaler converges to a stable but soft image.
+  - Accumulation removes texture detail that the current internal frame still
+    has; converged chart contrast is below plain DRS's.
+  - Edges and sub-pixel geometry stay phase-unstable.
+- **What works:** current-only overlays and physical UI are stable; history
+  survives internal-only scale changes; the cut resets exactly; the fractional
+  viewport is clean; there is no motion ghosting.
+- Production is unchanged; the findings go to coordinated repair. This is not a
+  phase completion, performance result or phone result.
+
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+Root's `claude-0073-visual-execute-acp.log` header reads `Claude session
+verified: Opus 5.5; thinking: max`. No subagents.
+
+**Inputs (all hashes verified before the first GPU step):**
+- brief `1fc2219d…` (root's `32d6d6bb`);
+- visual tree `7e6d4b08…`;
+- `review-ready.json` `ebf34321…`;
+- `build/review.json` `b52c6918…`;
+- frozen helper `786adfbb…`;
+- root build receipt `6109ca8b…`;
+- prior 0070 release `aa8fd844…`;
+- engine source `535003d7…`, with freeze `bd8295b0…` exact over 2,448 build
+  inputs.
+
+This is the default portable WGSL path only; it is not cooked and not native
+MetalFX.
+
+**Commands and results.** All ran once, serially, in the foreground. The build
+was root's supervised build: no Cargo, build, source edit, helper edit or target
+access in this session.
+
+| Command (`python3 -I -B …/visual/tools/`) | Result |
+|---|---|
+| `gpu.py list` | Exit 0 |
+| `gpu.py review probe` | Exit 0, 8/8 checks; Apple M5 Pro, Metal |
+| `gpu.py review stationary` | Exit 0, 36 frames, 5/5 checks |
+| `gpu.py review motion` | Exit 0, 24 frames, 3/3 checks |
+| `gpu.py review transitions` | Exit 0, 29 frames, 4/4 checks |
+| `gpu.py release` | 89/96 frames, 13/16 PNGs; no live or owned process, no stop, no refusal |
+| `analyze.py check` | Exit 0, verdict pass, complete |
+| `analyze.py publish` | 37 receipts and 13 PNGs bound to `summary-2026-10-13T082346…` |
+
+**Screenshots:** 13 PNGs at 960×540 in
+`handoffs/0073-upscaling-review/screenshots/`:
+- `stationary-{full,drs50,up50,phases,detail,activity}`;
+- `motion-{full,up50,detail}`;
+- `transitions-{full,up50,strip,cut}`.
+
+**Changed paths:**
+- `handoffs/0073-upscaling-review/visual-result.md`
+- `handoffs/0073-upscaling-review/result.md`
+- `handoffs/0073-upscaling-review/screenshots/` (13 PNGs)
+- `handoffs/0073-upscaling-review/evidence/visual/` (manifest plus 37 files)
+
+Outside the repository I added only the create-only `console/` captures in the
+evidence directory.
+
+**Not run:**
+- retries;
+- cooked-temporal or native MetalFX routes;
+- other backends;
+- regression suites;
+- phones;
+- performance.
+
+**Open questions for root (coordinated repair):**
+1. Should the portable resolve move to output-resolution sample accumulation,
+   with an edge history policy and a texture LOD bias? Should the repaired build
+   then be reviewed with this unchanged fixture, for a like-for-like comparison?
+2. Should a later grant include a longer 16/16 segment, so that the review shows
+   where 16/16 settles? Three frames were too short.
+3. The fixture's physical UI label clips its own text. Should a later fixture
+   revision fix that? It does not affect any contract check.
+
+## Revision 1 (preserved): fail-closed analyzer and corrected-source readiness
 
 **Status: PREPARED, not run.** The root review blocker is fixed, and the stage is
 ready for root's supervised CPU build grant. Details are in

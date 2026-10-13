@@ -1,0 +1,6 @@
+motion: test
+probe: test
+stationary: test
+transitions: test
+
+4 tests, 0 benchmarks

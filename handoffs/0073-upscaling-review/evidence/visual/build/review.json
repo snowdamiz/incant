@@ -1,0 +1,142 @@
+{
+ "build_grant_sha256": "6231fd37f3ae3170894a82dbab72934bc2dbf69df67c458aaf036df8127909bb",
+ "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+ "source_freeze": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+  "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"
+ },
+ "source_record_sha256": "40ae57950113db717780ad33b880f38d973be064222b46a180e6f0872f6a9fa0",
+ "tools": {
+  "head": "ce20026a314bece0b0c5c9a873ae14dbe0a3c80d",
+  "visual_tree": "7e6d4b08d6da34bbb3c660fe448aa6cf318c81ae",
+  "plan_sha256": "b177ee0c1a8dac57e34b7fafea7484f75e70a4ef97c64c891281666a383ee1ca",
+  "helper_sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e"
+ },
+ "source": {
+  "commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+  "files": 18076,
+  "manifest_sha256": "06defdd0f6b9a5f3662030cd402b2c415aa219a71ef414b4c865f567a777f605",
+  "helper_copy_sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e"
+ },
+ "helper_sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e",
+ "helper_copy": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/crates/incant_render/tests/upscaling_review.rs",
+ "frozen": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/bin/upscaling_review",
+  "sha256": "786adfbb10be761a6283af7703145a9d70daba7287a3690dee14686137999723",
+  "bytes": 18120064,
+  "mode": "0o555",
+  "built_from": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/upscaling_review-0c2f8b585d9267b2",
+  "fresh": false,
+  "features": [
+   "default",
+   "physics-deterministic"
+  ],
+  "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/crates/incant_render#0.0.1"
+ },
+ "incant_render_library": {
+  "target": "incant_render",
+  "kind": [
+   "lib"
+  ],
+  "test": false,
+  "fresh": true,
+  "executable": null,
+  "features": [
+   "default",
+   "physics-deterministic"
+  ],
+  "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/crates/incant_render#0.0.1",
+  "filenames": {
+   "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "127a3094896e452792c53fe52f6ef07a2434995b063c4fef99460d6f75b0bc42",
+   "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "a8de859ab09676659c4a742db0e1cb8638d185780ed29e4218d2696b98e6327a"
+  }
+ },
+ "cooked_features": [],
+ "builds": [
+  {
+   "label": "review",
+   "kind": "build",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/tools/cargo",
+    "test",
+    "-p",
+    "incant_render",
+    "--test",
+    "upscaling_review",
+    "--no-run",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout",
+   "env": {
+    "inherited_keys_values_not_recorded": [
+     "HOME"
+    ],
+    "overrides": {
+     "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+     "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/tmp/review",
+     "CARGO_TERM_COLOR": "never",
+     "RUSTUP_AUTO_INSTALL": "0"
+    }
+   },
+   "started": "2026-10-13T08:18:36.837694+00:00",
+   "ended": "2026-10-13T08:18:38.463092+00:00",
+   "pid": 97394,
+   "exit": 0,
+   "timed_out": false,
+   "interrupted_by": [],
+   "group_empty_after": true,
+   "seconds": 1.625,
+   "timeout_s": 2700,
+   "frames_debited": 0,
+   "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-review.stdout.jsonl",
+   "stdout_sha256": "77ea5013189fa85c7f752e8c55773eced09479eb57389ab8865592ff7ccc5630",
+   "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/logs/build-review.stderr.txt",
+   "stderr_sha256": "dbc2d40b935f1e72f67a60ccdeea5976a1a553d925c3c52c478fb3ad2de8cffc",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": true,
+     "executable": null,
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "127a3094896e452792c53fe52f6ef07a2434995b063c4fef99460d6f75b0bc42",
+      "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "a8de859ab09676659c4a742db0e1cb8638d185780ed29e4218d2696b98e6327a"
+     }
+    },
+    {
+     "target": "upscaling_review",
+     "kind": [
+      "test"
+     ],
+     "test": true,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/upscaling_review-0c2f8b585d9267b2",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-visual-002/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/upscaling_review-0c2f8b585d9267b2": "786adfbb10be761a6283af7703145a9d70daba7287a3690dee14686137999723"
+     }
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T08:18:38.492764+00:00"
+}
