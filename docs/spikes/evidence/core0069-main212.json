@@ -90,5 +90,9 @@
   "current_main_review": {
     "path": "docs/spikes/evidence/core0069-main212/current-main-review.json",
     "sha256": "87956407d407015a1b026f7bc34c6208c04f696751a3b3e3f5327d6b40984878"
+  },
+  "packaging_review": {
+    "path": "docs/spikes/evidence/core0069-main212/packaging-review.json",
+    "sha256": "14059fe2782ebf1832055082bc325d49676427b3d7bcb33ae086f58694fea982"
   }
 }
