@@ -38,8 +38,9 @@ remain open.
 The [retained manifest](evidence/temporal-metalfx-composition/manifest.json) binds
 2,450 tested source hashes, the independent source review, 314 lossless records,
 119 unique payloads and fourteen copied test binaries. The original source review
-found that the depth-only vertex stage accidentally inherited fragment visibility
-for its frame uniform. Generation 2 fixes that declaration; independent review
+found that an unconditional motion-frame rule incorrectly required the depth-only
+fragment stage to read the frame uniform. Generation 2 limits that rule to the
+vertex stage; the fragment retains only material, texture and sampler resources. Independent review
 accepted the resulting contracts and actual host binding layouts.
 
 Twenty-nine cooker tests, 145 complete-feature CPU tests, 130 default CPU tests
