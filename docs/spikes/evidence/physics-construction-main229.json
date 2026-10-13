@@ -1378,5 +1378,17 @@
     "Private field/storage constructors only; other native owners are trusted clones.",
     "No decoded complete-world install, runtime physics saves, phone or performance claim.",
     "Composed source actually rebuilt in two parallel numerical modes; focused and broad tests overlap."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-construction-main229/final-root.json",
+    "sha256": "2f90c6ff3920c4b0cb75f603b526f9c66b9a64eb2e0c224875cf51ddf2ffbffb",
+    "decision": "accepted"
+  },
+  "main230_qualification": {
+    "path": "docs/spikes/evidence/physics-construction-main229/main230-qualification.json.gz",
+    "sha256": "b76d59b70fac5508fe54a4462cc946b5349b8ab5b0b26a1f0c14d043c5dc3f5c",
+    "records": 3,
+    "review": "pending",
+    "scope": "27exact main renderer files,9frozen exceptions; all physics inputs unchanged; original verifier replayed"
+  }
 }

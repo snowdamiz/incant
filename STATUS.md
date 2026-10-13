@@ -2630,7 +2630,8 @@ with 144 continuation steps per dimension. Other owners remain trusted clones.
 The separately reviewed observer alias from `d6b53f8b` is included. This private
 main229 composition now has independent source acceptance and21 successful
 current checks:216 snapshot plus22 private native controls per parallel mode,
-with144 continuation steps per dimension. Final integration review is pending;
+with144 continuation steps per dimension. Final integration review is accepted;
+the disjoint main230 renderer join awaits narrow relevance review.
 [composed evidence](docs/spikes/physics-construction-main229.md) is retained. Exact manager construction,
 whole-owner admission and live physics saves remain closed.
 [Producer evidence](docs/spikes/physics-native-construction.md).

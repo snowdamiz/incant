@@ -31,4 +31,9 @@ That collector failure is retained; no source or execution was changed or repeat
 This is private partial native construction, not whole NumericFrame-to-world
 installation. Live physics saves, authenticated capture, other reconstructed
 owners, stable IDs/events, physical-phone and performance claims remain closed.
-Final integration review and required fast-check publication remain pending.
+Independent final integration review is accepted (`2f90c6ff`). The subsequent
+main230 ancestry join imports27 exact renderer source files; nine intersect the
+old broad freeze. Their old/new Git hashes are explicit while all physics, lock,
+manifest and preparation-tool inputs remain byte-identical. The full original
+verifier replays with only those narrow exemptions. This is source relevance,
+not a claim of another build. Qualification review and publication are pending.
