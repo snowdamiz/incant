@@ -46,3 +46,7 @@ accepted. The [main211 qualification](evidence/physics-world-continuation-main21
 retains all651 exact inputs and qualifies the sole disjoint Wasm build-feature change. PhysicsUnsupported remains closed. No live
 restore, complete owner authentication, game shipping, GPU, phone, performance or
 phase acceptance is claimed.
+
+Current-main211 qualification is independently accepted in the retained
+[root review](evidence/physics-world-continuation-main211/root-final-review.json).
+Publication requires the exact-head development check; no deferred gate changes.
