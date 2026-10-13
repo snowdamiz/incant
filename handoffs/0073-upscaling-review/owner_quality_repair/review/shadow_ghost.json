@@ -1,0 +1,247 @@
+{
+ "light_travel_direction": [
+  -0.394,
+  -0.6157,
+  -0.6824
+ ],
+ "model": "0073 repair review: step-20 shadow and temporal-trail luma control (CPU only)",
+ "region_bbox": {
+  "ground_lit_control": [
+   570,
+   230,
+   819,
+   359
+  ],
+  "ground_shadow_now": [
+   613,
+   314,
+   665,
+   329
+  ],
+  "ground_shadow_trail": [
+   609,
+   327,
+   617,
+   329
+  ],
+  "sign_cube_trail": [
+   631,
+   248,
+   673,
+   294
+  ],
+  "sign_lit_control": [
+   603,
+   230,
+   733,
+   310
+  ],
+  "sign_shadow_now": [
+   618,
+   289,
+   655,
+   310
+  ]
+ },
+ "region_pixels": {
+  "ground_lit_control": 16563,
+  "ground_shadow_now": 528,
+  "ground_shadow_trail": 15,
+  "sign_cube_trail": 1425,
+  "sign_lit_control": 2924,
+  "sign_shadow_now": 800
+ },
+ "runs": {
+  "failed_gpu001": {
+   "full": {
+    "png": "motion-full.png",
+    "regions": {
+     "ground_lit_control": {
+      "mean": 181.11,
+      "sd": 0.46
+     },
+     "ground_shadow_now": {
+      "mean": 84.92,
+      "sd": 0.51
+     },
+     "ground_shadow_trail": {
+      "mean": 181.0,
+      "sd": 0.0
+     },
+     "sign_cube_trail": {
+      "mean": 152.48,
+      "sd": 53.72
+     },
+     "sign_lit_control": {
+      "mean": 142.27,
+      "sd": 58.33
+     },
+     "sign_shadow_now": {
+      "mean": 66.7,
+      "sd": 30.68
+     }
+    },
+    "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52"
+   },
+   "own": {
+    "png": "motion-own50.png",
+    "regions": {
+     "ground_lit_control": {
+      "mean": 181.1,
+      "sd": 0.36
+     },
+     "ground_shadow_now": {
+      "mean": 91.26,
+      "sd": 15.21
+     },
+     "ground_shadow_trail": {
+      "mean": 176.4,
+      "sd": 8.62
+     },
+     "sign_cube_trail": {
+      "mean": 162.3,
+      "sd": 18.85
+     },
+     "sign_lit_control": {
+      "mean": 154.73,
+      "sd": 18.01
+     },
+     "sign_shadow_now": {
+      "mean": 87.17,
+      "sd": 17.67
+     }
+    },
+    "sha256": "1c8b673b2b3cb8a757881a1a70407a40b77a875661729ee615407942b3678c53"
+   },
+   "up": {
+    "png": "motion-up50.png",
+    "regions": {
+     "ground_lit_control": {
+      "mean": 181.1,
+      "sd": 0.36
+     },
+     "ground_shadow_now": {
+      "mean": 91.26,
+      "sd": 15.21
+     },
+     "ground_shadow_trail": {
+      "mean": 176.4,
+      "sd": 8.62
+     },
+     "sign_cube_trail": {
+      "mean": 162.3,
+      "sd": 18.85
+     },
+     "sign_lit_control": {
+      "mean": 154.73,
+      "sd": 17.98
+     },
+     "sign_shadow_now": {
+      "mean": 87.17,
+      "sd": 17.67
+     }
+    },
+    "sha256": "fd13d7b902ad8b7bb311a1db5282de2006c9840f3c12b894da38aace626bc073"
+   }
+  },
+  "repair_gpu002": {
+   "full": {
+    "png": "motion-full.png",
+    "regions": {
+     "ground_lit_control": {
+      "mean": 181.11,
+      "sd": 0.46
+     },
+     "ground_shadow_now": {
+      "mean": 84.92,
+      "sd": 0.51
+     },
+     "ground_shadow_trail": {
+      "mean": 181.0,
+      "sd": 0.0
+     },
+     "sign_cube_trail": {
+      "mean": 152.48,
+      "sd": 53.72
+     },
+     "sign_lit_control": {
+      "mean": 142.27,
+      "sd": 58.33
+     },
+     "sign_shadow_now": {
+      "mean": 66.7,
+      "sd": 30.68
+     }
+    },
+    "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52"
+   },
+   "own": {
+    "png": "motion-own50.png",
+    "regions": {
+     "ground_lit_control": {
+      "mean": 181.11,
+      "sd": 0.31
+     },
+     "ground_shadow_now": {
+      "mean": 91.22,
+      "sd": 15.14
+     },
+     "ground_shadow_trail": {
+      "mean": 176.45,
+      "sd": 8.51
+     },
+     "sign_cube_trail": {
+      "mean": 161.94,
+      "sd": 20.74
+     },
+     "sign_lit_control": {
+      "mean": 154.03,
+      "sd": 22.49
+     },
+     "sign_shadow_now": {
+      "mean": 87.07,
+      "sd": 17.63
+     }
+    },
+    "sha256": "f3fdff6c547536c031c71540d14a45c71b8411cf2baef0c8234fdd51cd4cb5c2"
+   },
+   "up": {
+    "png": "motion-up50.png",
+    "regions": {
+     "ground_lit_control": {
+      "mean": 181.11,
+      "sd": 0.31
+     },
+     "ground_shadow_now": {
+      "mean": 91.22,
+      "sd": 15.14
+     },
+     "ground_shadow_trail": {
+      "mean": 176.45,
+      "sd": 8.51
+     },
+     "sign_cube_trail": {
+      "mean": 161.94,
+      "sd": 20.74
+     },
+     "sign_lit_control": {
+      "mean": 154.0,
+      "sd": 22.65
+     },
+     "sign_shadow_now": {
+      "mean": 87.07,
+      "sd": 17.63
+     }
+    },
+    "sha256": "0bc20b65c3bec370dcc0e16255e2f1dc02f24a5ef19ab6a0db6c05680300f2b0"
+   }
+  }
+ },
+ "units": "Rec. 709 luma of 8-bit sRGB codes; mean and standard deviation per region",
+ "window": [
+  540,
+  230,
+  820,
+  360
+ ]
+}

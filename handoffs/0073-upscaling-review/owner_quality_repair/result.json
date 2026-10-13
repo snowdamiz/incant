@@ -1,0 +1,955 @@
+{
+ "schema": "incant-0073-owner-quality-repair-result-v1",
+ "status": "EXECUTED_ONCE_RELEASED; contracts and artifacts complete; appearance REJECTED (partial measurable improvement)",
+ "model": {
+  "id": "claude-opus-5-5",
+  "name": "Claude Opus 5.5",
+  "thinking_effort": "max",
+  "verification": "root configured and verified Opus 5.5 with Max through ACP before prompting; this session runs at reasoning effort max"
+ },
+ "identities": {
+  "candidate_production": "ce6171957eda212d6796335623d8040a0f06b500",
+  "patch_commit": "d4599e9039ea311808d2262a8ac9334ad0c42685",
+  "candidate_composition": "fd5b86d0 + d4599e90 eight-file patch + five cooker hashpins + rustfmt-only hunks (root)",
+  "production_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-repair-build-002/production-freeze.json",
+   "sha256": "eaebaccb63aa7dfce86fc8e32af381fd276b3ed2c761f63dbec7607ba55ccf30"
+  },
+  "build": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-repair-build-002/receipt.json",
+   "sha256": "1974b41c37d5fb9e1e8c3d6c83f8e6d9659d3157fe75af92d196f6d77e4066dc"
+  },
+  "build_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-repair-build-002/source-build-audit.json",
+   "sha256": "53fb3b2373a9a5bf6535c2b5d8a9dc9f430df85b7e6f624a49aaadc96b320167"
+  },
+  "enumeration": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-repair-build-002/listing.log",
+   "sha256": "a0472f0502ae15b73b4b98c8206066562e23f14ec2a949fd37deaf961a26b97d"
+  },
+  "binary": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-repair-build-002/upscaling_owner_review",
+   "sha256": "436856967a0ac23d8764fcee6423e33de3ed867da923df2b2388af130ca5f92c",
+   "bytes": 18341992,
+   "mode": "0555"
+  },
+  "quality_plan": {
+   "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/plan.json",
+   "sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+  },
+  "fixture": {
+   "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/review/upscaling_owner_review.rs",
+   "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+  },
+  "runner": {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/runner.py",
+   "sha256": "10e0cfde16592e624c93552907d8ed5fe823b817355ca2931aa794b8bec4a721",
+   "commit": "6bb00f66cb9d86c72cd91630e2c1a18a4182104f"
+  },
+  "plan": {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/execution/plan.json",
+   "sha256": "11fb0f702be37dbd2631922fe9794a1d7a1daeed0f62e3ff39f78e1be8b39013"
+  },
+  "grant": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/grant.json",
+   "sha256": "0b5a664e1202946dfaaef13eaecb6f077d6704201a229ad9d91159abb10a41b9"
+  },
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "predecessor_release": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/release.json",
+   "sha256": "261e14eb5a611d32b32ce17a7bbfaa1fd4580c806ce4d8c1527f141216f19729"
+  },
+  "brief_sha256": "03151151f827c3932d692e1ba4313a00642d1f3bd33d79ca27a617e775059c74"
+ },
+ "execution": {
+  "command": "python3 handoffs/0073-upscaling-review/owner_quality_repair/execution/runner.py run /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality_repair/execution/plan.json",
+  "cwd": "worktree root",
+  "python": "/opt/homebrew/bin/python3 3.14.8",
+  "started_utc": "2026-10-13T20:16:05Z",
+  "finished_utc": "2026-10-13T20:16:15Z",
+  "exit_code": 0,
+  "runs": 1,
+  "retries": 0,
+  "builds": 0,
+  "extra_gpu": 0,
+  "console_output_equals_release_json": true
+ },
+ "release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/release.json",
+  "sha256": "645cd2f1cba857da1eca5f73729ffe5f8313d0b797c383a8dee29de635f33c78",
+  "released": true,
+  "released_at": "2026-10-13T20:16:15.459465+00:00",
+  "accepted": true,
+  "image_inventory_matches": true,
+  "owned_processes": [],
+  "process_groups_alive": [],
+  "exception": null
+ },
+ "ledger": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/ledger.jsonl",
+  "sha256": "0f56ef7a2ab277ef196fd3bcf76e33ac007f2e61c8d046b2cbfb4d3da9260208"
+ },
+ "debits": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/debits.jsonl",
+  "sha256": "bce14baa8b30e89ae20748a76282d0db95c664d1afe893492e76d096b96f7dd9"
+ },
+ "closure": {
+  "tmp_group_dirs_empty": true,
+  "frozen_binary_processes_after": 0,
+  "global_gpu_lock_holders_after": 0
+ },
+ "adapter": {
+  "backend": "Metal",
+  "device": 0,
+  "device_type": "IntegratedGpu",
+  "driver": "",
+  "driver_info": "",
+  "max_texture_dimension_2d": 8192,
+  "name": "Apple M5 Pro",
+  "vendor": 0
+ },
+ "os": [
+  "Darwin",
+  "Andreys-MBP.lan",
+  "27.0.0",
+  "arm64"
+ ],
+ "counts": {
+  "processes": 5,
+  "scene_submissions": 380,
+  "ui_submissions": 18,
+  "readback_submissions": 380,
+  "readback_maps": 380,
+  "queue_submissions": 778,
+  "rendered_frames": 380,
+  "pngs": 15
+ },
+ "groups": [
+  {
+   "group": "stationary",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 2.304,
+   "report_sha256": "d0f04ada913a22f557fc31a34e93637c010fc97d180a7bb5ca76ad55cc0b8248",
+   "events_sha256": "8ba7ba5862414389f9dd1027c7c8b7e8ed2636aca24e5a1da8358710b2383f8c",
+   "stdout_sha256": "328c53a91c502175454c1dd3cd2a475ccda4e7df48b7e1ccd349a14241524ba3",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "scene_submissions": 50,
+    "ui_submissions": 18,
+    "readback_submissions": 50,
+    "readback_maps": 50,
+    "queue_submissions": 118,
+    "rendered_frames": 50,
+    "pngs": 6
+   },
+   "pngs": [
+    {
+     "name": "stationary-full.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-full.png",
+     "bytes": 84389,
+     "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+     "rgba_sha256": "4c69efe238a452d096301faf24ca013877bf0f0430f83ccf1147502e51da6e01",
+     "rgba_identical_to_failed_ebc7e690_run": true
+    },
+    {
+     "name": "stationary-drs50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-drs50.png",
+     "bytes": 40131,
+     "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+     "rgba_sha256": "6611c41fa62f782b4d96080e6d43f481d41a54c01a8d93e870367b9786d8464e",
+     "rgba_identical_to_failed_ebc7e690_run": true
+    },
+    {
+     "name": "stationary-up50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-up50.png",
+     "bytes": 81441,
+     "sha256": "c47c231b3307aa4f34617fc1cc5ad2ddc935614faef3d61f18417f970d18a3d5",
+     "rgba_sha256": "f01f58f44f7539e404cd6107651e63e1483304b1d5fc7beb63aa5cb6db7f7f67",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    },
+    {
+     "name": "stationary-own50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-own50.png",
+     "bytes": 81888,
+     "sha256": "54132e6c2784be45bd2525f8b8e7d2700b691fb60b9e32c33da1ff5051f7186a",
+     "rgba_sha256": "ba0da6c08d111249b208b00be05015f18607ef02cd3fe2f56c9b9d8a3bb3a495",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    },
+    {
+     "name": "stationary-phases.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-phases.png",
+     "bytes": 11679,
+     "sha256": "5850713d0ccaa211eb6f6e43855109469aee427440bc68f71343fb9c4c83ec7b",
+     "rgba_sha256": "aa7ae0c7e1606f3f0eb8c06beee9d709f917c84b28e560742c54ac119d48bb73",
+     "rgba_identical_to_failed_ebc7e690_run": true
+    },
+    {
+     "name": "stationary-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-detail.png",
+     "bytes": 39182,
+     "sha256": "1798ba89dc9cb2ad793a9c4f5d51535fa147c8b86f270775a9b0167a36b63357",
+     "rgba_sha256": "0253120c2d20dea51dca8e9b9ff43ab086ab35ecfa11a359d805f912d9ca2bb1",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    }
+   ]
+  },
+  {
+   "group": "motion",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 1.278,
+   "report_sha256": "6e9753f7155864ec4eb2db28c476d3bd8d6a0bd8bb78225b93cd758686453c34",
+   "events_sha256": "b74689bc7b4941a290125f6362126db402f008b75d87fa8f2bb8ab5e020f94c3",
+   "stdout_sha256": "95cd006c9be0bec5bafea5a96cdb98a02aa35df78f29370f3a36d35152540901",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "scene_submissions": 44,
+    "ui_submissions": 0,
+    "readback_submissions": 44,
+    "readback_maps": 44,
+    "queue_submissions": 88,
+    "rendered_frames": 44,
+    "pngs": 4
+   },
+   "pngs": [
+    {
+     "name": "motion-full.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-full.png",
+     "bytes": 77464,
+     "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+     "rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05",
+     "rgba_identical_to_failed_ebc7e690_run": true
+    },
+    {
+     "name": "motion-up50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-up50.png",
+     "bytes": 70413,
+     "sha256": "0bc20b65c3bec370dcc0e16255e2f1dc02f24a5ef19ab6a0db6c05680300f2b0",
+     "rgba_sha256": "cb72a28affb7d5793fd2ae2ad55f7dd034866aa5ccba2ecfab5afa7403896694",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    },
+    {
+     "name": "motion-own50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-own50.png",
+     "bytes": 70026,
+     "sha256": "f3fdff6c547536c031c71540d14a45c71b8411cf2baef0c8234fdd51cd4cb5c2",
+     "rgba_sha256": "9d6523967f3bc11a64d1505438c86500738eb9b520b1f80a56dcf87b4c6cf0b1",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    },
+    {
+     "name": "motion-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-detail.png",
+     "bytes": 103758,
+     "sha256": "ca01cedc4fa740292763152596371fed168442031f28de8055a2c53fec0dffd8",
+     "rgba_sha256": "8e8e7a0b848a9b4f1f6b168b6ad13ba2cfd287885b53a6bc099b52af00cdfc3c",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    }
+   ]
+  },
+  {
+   "group": "transitions",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 2.354,
+   "report_sha256": "6f5d50c11fa2936a610b864203e45f335faff11eccb851daade272434cb213bb",
+   "events_sha256": "1a554f199809d9f82971d7ca8a78157124ca8fb43c2f0105aba75b0bb97e139d",
+   "stdout_sha256": "050ffae4ab75a72fc90bbd89f3512bdd77551c2891dc5477b21e96f259a1f383",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "scene_submissions": 106,
+    "ui_submissions": 0,
+    "readback_submissions": 106,
+    "readback_maps": 106,
+    "queue_submissions": 212,
+    "rendered_frames": 106,
+    "pngs": 2
+   },
+   "pngs": [
+    {
+     "name": "transitions-full.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/transitions-full.png",
+     "bytes": 72999,
+     "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+     "rgba_sha256": "49d0f741bc50634f0b15c9ff88d5fbefef146630db83a034bd77581d9964f6bb",
+     "rgba_identical_to_failed_ebc7e690_run": true
+    },
+    {
+     "name": "transitions-strip.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/transitions-strip.png",
+     "bytes": 107615,
+     "sha256": "3231d90e3ec242ae4627e3469b6bef1544ab126f66b7cfdf6078bfa32c04527b",
+     "rgba_sha256": "ba70528be822e73018ec42628f965f54d32a19afe5ecc20b8f65ca45677b02fb",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    }
+   ]
+  },
+  {
+   "group": "c7_disocclusion",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 2.003,
+   "report_sha256": "408d56be5b364d8f30eacb40c6fd8865f1537cf713d485ab06ae115e12c81817",
+   "events_sha256": "c4ae83dbe7f9083380aca41af4c486f9f2b3094d850f49d48b613999811b59a5",
+   "stdout_sha256": "0d7a065b2c15efc9392683d0648ef58a45e6c023791462e06d2468f7f9aa6357",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "scene_submissions": 82,
+    "ui_submissions": 0,
+    "readback_submissions": 82,
+    "readback_maps": 82,
+    "queue_submissions": 164,
+    "rendered_frames": 82,
+    "pngs": 2
+   },
+   "pngs": [
+    {
+     "name": "c7-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-detail.png",
+     "bytes": 68218,
+     "sha256": "667842d540f486ea3728f9ac2042306b20413bafcb4c189188c70951a5164f0d",
+     "rgba_sha256": "d8091973f144a1a30a881dac1d3edafd2d3ef7d856deebb428b01ea3beb834e3",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    },
+    {
+     "name": "c7-own-moving.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-own-moving.png",
+     "bytes": 337545,
+     "sha256": "8a27a72c7b3a3a60f258a2018c4972d4f311287f76b49e42f1e1495755871364",
+     "rgba_sha256": "d1b14ec7ab614dd89539f615ceb1edfe67383e68c0809e104a4aa0be9bbe66da",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    }
+   ]
+  },
+  {
+   "group": "p1_crossing",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 2.152,
+   "report_sha256": "29903b3c46b8e9a20a1f4b8d73dab9d7bf47bb12a2610a6982141a0316cd4c79",
+   "events_sha256": "55ea7543f3127fd39dcfa4a4f68745057546702ce7629c4c59e5a23130a1d14e",
+   "stdout_sha256": "9b3b23f09ea3991dec5a401fd19956d772924a3e14fd67dc0d3a2c67b41737b8",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "scene_submissions": 98,
+    "ui_submissions": 0,
+    "readback_submissions": 98,
+    "readback_maps": 98,
+    "queue_submissions": 196,
+    "rendered_frames": 98,
+    "pngs": 1
+   },
+   "pngs": [
+    {
+     "name": "p1-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/artifacts/p1-detail.png",
+     "bytes": 197976,
+     "sha256": "9c0223081ca5fff3fcc898a4bbc32c1d8ce28c17f1a3e48035daabf597c0e416",
+     "rgba_sha256": "6be2e1f34f82bc8d4d9d29612fd3ba9500adddf52ab921936d034613b36513df",
+     "rgba_identical_to_failed_ebc7e690_run": false
+    }
+   ]
+  }
+ ],
+ "failures": [],
+ "observations_old_failed_to_repair": {
+  "units": "sRGB-code luminance standard deviation (contrast), mean largest-channel code difference (region error), C7/P1 mean RGB code difference / 255; rendered-output observations only",
+  "stationary_chart_contrast_frame24": {
+   "checker_2_texel": {
+    "up": [
+     3.336,
+     4.604
+    ],
+    "own": [
+     4.471,
+     7.025
+    ],
+    "drs50": 25.987,
+    "full": 53.371
+   },
+   "checker_4_texel": {
+    "up": [
+     31.115,
+     43.888
+    ],
+    "own": [
+     31.176,
+     43.544
+    ],
+    "drs50": 61.401,
+    "full": 71.464
+   },
+   "lines_1_texel": {
+    "up": [
+     1.388,
+     1.395
+    ],
+    "own": [
+     0.371,
+     0.288
+    ],
+    "drs50": 2.434,
+    "full": 44.435
+   },
+   "rings": {
+    "up": [
+     14.669,
+     16.26
+    ],
+    "own": [
+     14.92,
+     17.041
+    ],
+    "drs50": 24.571,
+    "full": 50.909
+   }
+  },
+  "stationary_region_error_vs_full": {
+   "card_edge": {
+    "drs50": 1.17,
+    "up": [
+     1.07,
+     1.094
+    ],
+    "own": [
+     1.073,
+     1.095
+    ],
+    "up_last_cycle_activity": [
+     0.452,
+     0.539
+    ]
+   },
+   "sign": {
+    "drs50": 37.344,
+    "up": [
+     38.821,
+     38.264
+    ],
+    "own": [
+     38.378,
+     37.343
+    ],
+    "up_last_cycle_activity": [
+     3.055,
+     3.747
+    ]
+   },
+   "sprite": {
+    "drs50": 5.952,
+    "up": [
+     8.365,
+     8.365
+    ],
+    "own": [
+     8.365,
+     8.365
+    ],
+    "up_last_cycle_activity": [
+     0.0,
+     0.0
+    ]
+   },
+   "text": {
+    "drs50": 2.747,
+    "up": [
+     2.628,
+     2.605
+    ],
+    "own": [
+     2.638,
+     2.617
+    ],
+    "up_last_cycle_activity": [
+     0.155,
+     0.156
+    ]
+   },
+   "wires": {
+    "drs50": 17.597,
+    "up": [
+     17.021,
+     17.021
+    ],
+    "own": [
+     17.021,
+     17.021
+    ],
+    "up_last_cycle_activity": [
+     28.895,
+     28.895
+    ]
+   }
+  },
+  "stationary_wire_presence_identical": true,
+  "motion_mover_region_error_vs_full": {
+   "frame14_object_motion": {
+    "drs50": 15.504,
+    "up": [
+     19.276,
+     17.329
+    ],
+    "own": [
+     19.271,
+     17.483
+    ]
+   },
+   "frame20_object_and_camera_motion": {
+    "drs50": 21.538,
+    "up": [
+     24.364,
+     23.598
+    ],
+    "own": [
+     24.363,
+     23.646
+    ]
+   }
+  },
+  "motion_pan_region_error_vs_full_frame20": {
+   "drs50": 1.246,
+   "up": [
+    1.279,
+    1.275
+   ]
+  },
+  "transitions_c9_ratios_third_fourth_first4": {
+   "up": {
+    "failed": {
+     "lines_1_texel": [
+      0.287,
+      0.473,
+      0.004
+     ],
+     "checker_2_texel": [
+      0.284,
+      0.385,
+      0.017
+     ],
+     "rings": [
+      0.5,
+      0.553,
+      0.743
+     ],
+     "checker_4_texel": [
+      0.599,
+      0.684,
+      0.51
+     ]
+    },
+    "repair": {
+     "lines_1_texel": [
+      0.76,
+      1.017,
+      0.0
+     ],
+     "checker_2_texel": [
+      0.777,
+      0.842,
+      0.009
+     ],
+     "rings": [
+      0.83,
+      0.887,
+      0.665
+     ],
+     "checker_4_texel": [
+      0.83,
+      0.88,
+      0.409
+     ]
+    }
+   },
+   "own": {
+    "failed": {
+     "lines_1_texel": [
+      0.239,
+      0.399,
+      0.004
+     ],
+     "checker_2_texel": [
+      0.255,
+      0.341,
+      0.015
+     ],
+     "rings": [
+      0.471,
+      0.516,
+      0.735
+     ],
+     "checker_4_texel": [
+      0.508,
+      0.544,
+      0.511
+     ]
+    },
+    "repair": {
+     "lines_1_texel": [
+      0.666,
+      0.889,
+      0.0
+     ],
+     "checker_2_texel": [
+      0.782,
+      0.848,
+      0.009
+     ],
+     "rings": [
+      0.813,
+      0.87,
+      0.648
+     ],
+     "checker_4_texel": [
+      0.829,
+      0.871,
+      0.415
+     ]
+    }
+   },
+   "repair_all_region_summaries": {
+    "up": {
+     "third_16": true,
+     "fourth_16": false,
+     "first_4": false
+    },
+    "own": {
+     "third_16": false,
+     "fourth_16": false,
+     "first_4": false
+    }
+   }
+  },
+  "transitions_boundary_change_edge_mean": {
+   "up": [
+    [
+     11,
+     9.863,
+     10.676
+    ],
+    [
+     14,
+     16.919,
+     18.799
+    ],
+    [
+     17,
+     17.423,
+     24.395
+    ],
+    [
+     21,
+     13.829,
+     18.023
+    ],
+    [
+     24,
+     10.878,
+     11.757
+    ]
+   ],
+   "own": [
+    [
+     11,
+     9.859,
+     10.669
+    ],
+    [
+     14,
+     16.997,
+     18.856
+    ],
+    [
+     17,
+     17.331,
+     24.17
+    ],
+    [
+     21,
+     13.638,
+     18.044
+    ],
+    [
+     24,
+     10.865,
+     12.792
+    ]
+   ]
+  },
+  "c7_worst_trailing_column": {
+   "step12": {
+    "up": [
+     0.074,
+     0.081
+    ],
+    "own": [
+     0.099,
+     0.102
+    ]
+   },
+   "step16": {
+    "up": [
+     0.078,
+     0.095
+    ],
+    "own": [
+     0.079,
+     0.095
+    ]
+   },
+   "step20": {
+    "up": [
+     0.0504,
+     0.0623
+    ],
+    "own": [
+     0.0533,
+     0.0654
+    ]
+   }
+  },
+  "c7_board_sharpness_own_step20_x40_320_y40_500": {
+   "luma_sd": [
+    70.21,
+    73.04
+   ],
+   "mean_abs_horizontal_gradient": [
+    8.41,
+    8.81
+   ]
+  },
+  "p1_panel_interior_residual": "0.0 mean and worst at steps 12-24 in both runs; 6 px margin worst 0.2 is the bar itself",
+  "step20_shadow_regions_luma": {
+   "ground_lit_control": {
+    "failed_gpu001": {
+     "full": {
+      "mean": 181.11,
+      "sd": 0.46
+     },
+     "up": {
+      "mean": 181.1,
+      "sd": 0.36
+     },
+     "own": {
+      "mean": 181.1,
+      "sd": 0.36
+     }
+    },
+    "repair_gpu002": {
+     "full": {
+      "mean": 181.11,
+      "sd": 0.46
+     },
+     "up": {
+      "mean": 181.11,
+      "sd": 0.31
+     },
+     "own": {
+      "mean": 181.11,
+      "sd": 0.31
+     }
+    }
+   },
+   "ground_shadow_now": {
+    "failed_gpu001": {
+     "full": {
+      "mean": 84.92,
+      "sd": 0.51
+     },
+     "up": {
+      "mean": 91.26,
+      "sd": 15.21
+     },
+     "own": {
+      "mean": 91.26,
+      "sd": 15.21
+     }
+    },
+    "repair_gpu002": {
+     "full": {
+      "mean": 84.92,
+      "sd": 0.51
+     },
+     "up": {
+      "mean": 91.22,
+      "sd": 15.14
+     },
+     "own": {
+      "mean": 91.22,
+      "sd": 15.14
+     }
+    }
+   },
+   "ground_shadow_trail": {
+    "failed_gpu001": {
+     "full": {
+      "mean": 181.0,
+      "sd": 0.0
+     },
+     "up": {
+      "mean": 176.4,
+      "sd": 8.62
+     },
+     "own": {
+      "mean": 176.4,
+      "sd": 8.62
+     }
+    },
+    "repair_gpu002": {
+     "full": {
+      "mean": 181.0,
+      "sd": 0.0
+     },
+     "up": {
+      "mean": 176.45,
+      "sd": 8.51
+     },
+     "own": {
+      "mean": 176.45,
+      "sd": 8.51
+     }
+    }
+   },
+   "sign_cube_trail": {
+    "failed_gpu001": {
+     "full": {
+      "mean": 152.48,
+      "sd": 53.72
+     },
+     "up": {
+      "mean": 162.3,
+      "sd": 18.85
+     },
+     "own": {
+      "mean": 162.3,
+      "sd": 18.85
+     }
+    },
+    "repair_gpu002": {
+     "full": {
+      "mean": 152.48,
+      "sd": 53.72
+     },
+     "up": {
+      "mean": 161.94,
+      "sd": 20.74
+     },
+     "own": {
+      "mean": 161.94,
+      "sd": 20.74
+     }
+    }
+   },
+   "sign_lit_control": {
+    "failed_gpu001": {
+     "full": {
+      "mean": 142.27,
+      "sd": 58.33
+     },
+     "up": {
+      "mean": 154.73,
+      "sd": 17.98
+     },
+     "own": {
+      "mean": 154.73,
+      "sd": 18.01
+     }
+    },
+    "repair_gpu002": {
+     "full": {
+      "mean": 142.27,
+      "sd": 58.33
+     },
+     "up": {
+      "mean": 154.0,
+      "sd": 22.65
+     },
+     "own": {
+      "mean": 154.03,
+      "sd": 22.49
+     }
+    }
+   },
+   "sign_shadow_now": {
+    "failed_gpu001": {
+     "full": {
+      "mean": 66.7,
+      "sd": 30.68
+     },
+     "up": {
+      "mean": 87.17,
+      "sd": 17.67
+     },
+     "own": {
+      "mean": 87.17,
+      "sd": 17.67
+     }
+    },
+    "repair_gpu002": {
+     "full": {
+      "mean": 66.7,
+      "sd": 30.68
+     },
+     "up": {
+      "mean": 87.07,
+      "sd": 17.63
+     },
+     "own": {
+      "mean": 87.07,
+      "sd": 17.63
+     }
+    }
+   }
+  },
+  "step20_region_pixels": {
+   "ground_lit_control": 16563,
+   "ground_shadow_now": 528,
+   "ground_shadow_trail": 15,
+   "sign_cube_trail": 1425,
+   "sign_lit_control": 2924,
+   "sign_shadow_now": 800
+  }
+ },
+ "review_notes": {
+  "script": {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/review/shadow_ghost.py",
+   "sha256": "463f4952312236c0aab7b287b5736cebd5a15d544a54276dd6ea4198de4ddcf9"
+  },
+  "output": {
+   "path": "handoffs/0073-upscaling-review/owner_quality_repair/review/shadow_ghost.json",
+   "sha256": "84b145eef4ac3fb7bc629f3512902ad2b5ccfe4cf529756300b9bcd2acdd67d7"
+  }
+ },
+ "quality_verdict": {
+  "overall": "REJECTED. The repair is a real but partial improvement: measurably sharper interior textures and a visibly faster 4/16 -> 16/16 recovery, with no ringing or halos seen. It does not reach nearest-DRS texture detail, leaves thin-geometry blinking and sprite/text softness exactly unchanged, and worsens the C7 disocclusion residual numerically. OWN remains visually indistinguishable from ordinary UP.",
+  "accepted_parts": [
+   "visibly faster detail recovery on the third and fourth 16/16 frames after 4/16",
+   "measurably higher interior texture contrast at 8/16 without visible ringing",
+   "no added temporal darkness measured inside or beside the step-20 shadow on the sign"
+  ],
+  "rejected_parts": [
+   "texture detail still far below DRS (2-texel checker 4.6-7.0 vs DRS 26.0 codes)",
+   "thin wires blink exactly as before (deferred mixed-clear history; 4-row jitter lattice)",
+   "sprites and world text unchanged: current-only overlays upsampled bilinearly by composite.wgsl",
+   "C7 worst trailing column up about 24% (UP 0.050 -> 0.062, OWN 0.053 -> 0.065 at step 20)",
+   "larger pops at the 4->16 and 16->8 switches",
+   "OWN falls back to bilinear on changed owners (all owners on a first frame, moving owners), so it gains nothing over UP there"
+  ]
+ },
+ "historical_failures_preserved": [
+  "ebc7e690 owner_quality appearance FAIL (baseline)",
+  "a5ae3179 visual FAIL",
+  "GPU001 owner-history case-3 failure",
+  "C7 linear CPU model 0.0918 vs 0.06: failed",
+  "C9 linear CPU model 0.683/0.869 and 0.741/0.943: failed",
+  "P1 unresolved"
+ ],
+ "historical_closure": "none: tone-mapped sRGB observations and the finite 24-frame matched-cycle reference do not close the differently defined linear-model C7/C9/P1 gates",
+ "limitations": [
+  "One local Apple M5 Pro (Metal) on macOS; no phone, Device Farm, performance or memory claim",
+  "Default portable WGSL path only",
+  "Still frames and fixed figure crops; temporal judgments come from the phase strip and per-frame metrics",
+  "Thin mixed-clear geometry was deferred; global frame mass is not per-pixel confidence",
+  "The step-20 sign shadow trail is geometrically too small to measure (2 px); the ground trail sample is 15 px",
+  "No follow-up production edits are proposed in this turn"
+ ]
+}
