@@ -36,4 +36,5 @@ main230 ancestry join imports27 exact renderer source files; nine intersect the
 old broad freeze. Their old/new Git hashes are explicit while all physics, lock,
 manifest and preparation-tool inputs remain byte-identical. The full original
 verifier replays with only those narrow exemptions. This is source relevance,
-not a claim of another build. Qualification review and publication are pending.
+not a claim of another build. Qualification review is independently accepted (`41e57d4b`); publication follows
+the required fast check.

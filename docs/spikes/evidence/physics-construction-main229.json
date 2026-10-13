@@ -1388,7 +1388,11 @@
     "path": "docs/spikes/evidence/physics-construction-main229/main230-qualification.json.gz",
     "sha256": "b76d59b70fac5508fe54a4462cc946b5349b8ab5b0b26a1f0c14d043c5dc3f5c",
     "records": 3,
-    "review": "pending",
+    "review": {
+      "path": "docs/spikes/evidence/physics-construction-main229/main230-root.json",
+      "sha256": "41e57d4b0059c65f6be60a0ec41ddcfd16dede8485a11bb1fefcd07b025db70a",
+      "decision": "accepted"
+    },
     "scope": "27exact main renderer files,9frozen exceptions; all physics inputs unchanged; original verifier replayed"
   }
 }

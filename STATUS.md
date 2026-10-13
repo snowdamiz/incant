@@ -25,8 +25,8 @@ jittered reconstruction, split model drawing and all four Models timing passes.
 Current source review and thirteen checks pass (168 default and 200 overlapping
 cooked CPU cases). The exact current composition completed eight bounded Metal
 frames under Claude: default SSAO admission and expected cooked refusal both
-passed, with all children reaped. Final integration review is accepted; publication
-awaits the required fast check. Original
+passed, with all children reaped. PR230 merged after independent final review and
+the required exact-head fast check. Original
 appearance acceptance remains producer-scoped.
 Authored N6 remains failed at seven codes; revised N6T/N8 margins are 0.79/0.97
 codes. Cooked SSAO, non-Metal appearance, phone and performance gaps remain open.
