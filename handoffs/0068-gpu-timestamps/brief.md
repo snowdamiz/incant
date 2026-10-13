@@ -1,3 +1,7 @@
+# 0068 priority revision3 — execute the reviewed r2 packet
+
+Root independently reviewed tools1548670f and reran all10 lifecycle controls and selfcheck successfully. The fresh `~/.codex/incant-evidence/0068-r2/review-ready.json` grants the exact f33495b2 source, exclusive core-presentation target, and bounded default-feature GPU execution. Follow prep-result.md sequence. Root answers: no extra per-pass observer is needed; source/CPU descriptor checks plus scoped four-cascade GPU evidence are sufficient for this slice. No cooked appearance variant in this packet; document default-only execution. Do not count it as cooked acceptance. Existing24 appearance-frame/48 numeric-submission caps include failures; all92 regressions one attempt. Stop and release on production failures; fixture-only corrections must be recorded and revalidated before execution. Preserve every historical0068 result. Write final result.md only after inspecting new rendered pixels and completing release receipts. No unrelated work.
+
 # 0068 priority revision — corrected pass timestamps on current-main200
 
 Required Claude Opus5.5 through ACP, explicitly Max. PREPARATION ONLY: no
