@@ -20,8 +20,8 @@ The [integration manifest](evidence/physics-collider-main216.json) and
 [read-only verifier](evidence/physics-collider-main216/verify.py) bind current
 source identity, the 17 disjoint changes, raw/compressed logs and all 73 original
 producer records. Source and final producer receipts are unchanged. The initial
-false enabled-state invariant remains recorded. Independent current-main review
-is pending.
+false enabled-state invariant remains recorded. [Independent current-main review](evidence/physics-collider-main216/final-review.json)
+is accepted; publication requires the exact-head fast check.
 
 This remains an inert boundary: no hostile decoded record is admitted into a
 native world, live physics saves remain refused, and no shipping/GPU/device or

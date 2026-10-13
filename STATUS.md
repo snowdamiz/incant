@@ -35,7 +35,8 @@ Accepted collider records and exact owner joins are composed on main216 with
 unchanged physics source, vendor inputs, lock and selected dependency graph.
 The two retained executable suites pass 34 cases again; the complete 135-case
 producer suite and strict Clippy/wasm checks remain exact-source evidence.
-Current-main integration review is pending. Live physics saves remain refused.
+Current-main integration review is accepted; the required fast check precedes
+publication. Live physics saves remain refused.
 [Scope and relevance](docs/spikes/physics-collider-main216.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
@@ -55,15 +56,14 @@ Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
-Checkpoint21 remains frozen at exact main212 through PR213 while its jobs finish.
-The pinned vendor-path portability failure is repaired in main214; hosted
-acceptance remains pending. A second hosted failure is the timestamp test
-unconditionally requiring an optional capability on Apple Paravirtual Metal.
-The [test correction](docs/spikes/timestamp-capability.md) checks the exact typed
-refusal and an ordinary completed frame when absent, preserving positive timing
-assertions when supported. Its CPU/compile checks and independent final review
-pass and PR215 merged after the required fast check. Successor hosted execution
-remains pending; both original failures are retained.
+Checkpoint22 is frozen at exact main216 through PR213, candidate `a894b7ca`,
+with all 23 required contexts and eight workflows preserved. Checkpoint21 is
+terminal and unpromoted: 21 contexts succeeded; its pinned vendor-path and
+optional timestamp capability failures are retained and repaired in main214/215.
+The [timestamp correction](docs/spikes/timestamp-capability.md) requires exact
+typed refusal and an ordinary completed frame when the adapter lacks timing,
+while preserving positive lifecycle assertions where supported. Successor hosted
+execution remains pending. Later main changes will not move the frozen candidate.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows
@@ -77,7 +77,7 @@ Failed checkpoints15–19 remain historical and unpromoted. In particular, check
 exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
 test import repaired in PR193; checkpoint19 exposed the cache count and vendored
 Parry compiler-identity issues repaired in PR201/203. Their original failures remain
-retained. The active checkpoint21 and any reviewed repair successor preserve
+retained. The active checkpoint22 preserves
 ADR0014's exact selected tree and all 23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
