@@ -1,6 +1,7 @@
 //! Numerical/reference and shader validation only; device efficacy is separate.
 use super::{Bloom, BloomError, Plan, config, output_source};
 mod device;
+mod output_space;
 mod reference;
 use reference::*;
 
@@ -143,9 +144,8 @@ fn normalized_pyramid_spreads_an_emitter_without_creating_negative_light() {
 
 #[test]
 fn offset_fractional_viewport_samples_are_half_open_and_exclude_external_sources() {
-    let plan = Plan::new([9, 7], 4, 8192).unwrap();
     let rect = [2.5, 1.5, 3., 4.];
-    plan.viewport(rect).unwrap();
+    Plan::viewport([9, 7], rect).unwrap();
     let inside = |x: u32, y: u32| {
         let p = [x as f64 + 0.5, y as f64 + 0.5];
         p[0] >= 2.5 && p[0] < 5.5 && p[1] >= 1.5 && p[1] < 5.5
@@ -173,7 +173,7 @@ fn offset_fractional_viewport_samples_are_half_open_and_exclude_external_sources
         [0., 0., 0., 1.],
         [f32::NAN, 0., 1., 1.],
     ] {
-        assert_eq!(plan.viewport(rect), Err(BloomError::Viewport));
+        assert_eq!(Plan::viewport([9, 7], rect), Err(BloomError::Viewport));
     }
 }
 
@@ -221,7 +221,7 @@ fn fixed_wgsl_variants_validate_and_preserve_original_tone_chrome_transfer() {
     assert!(source.contains(include_str!("../tone_map.wgsl")));
     assert!(source.starts_with(&original.replace(
         "var color = mix(display.backdrop.rgb,tone_map(radiance),coverage);",
-        "var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,sample_position); }"
+        "var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,position.xy); }"
     )));
     assert_eq!(std::mem::size_of::<super::Settings>(), 48);
 }

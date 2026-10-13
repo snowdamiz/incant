@@ -27,13 +27,16 @@ fn extract(p: vec2i) -> vec3f {
 
 fn reduce(position: vec2f, extraction: bool) -> vec4f {
     let pixel = floor(position);
-    let ratio = vec2f(settings.sizes.xy) / vec2f(settings.sizes.zw);
+    // First extraction uses the unrounded scene span of the physical output.
+    // Later passes use their complete, center-aligned pyramid extents.
+    let ratio = settings.params.zw / vec2f(settings.sizes.zw);
     let lo = pixel * ratio;
     let hi = (pixel + vec2f(1)) * ratio;
     let first = vec2i(floor(lo));
     var total = vec3f(0);
-    // Each ceil-half destination footprint intersects at most three texels on
-    // each axis, including odd dimensions. Divide by area before accumulation.
+    // Output-anchored ceil-half footprints span <=2 source texels at any
+    // admitted DRS scale (<=1), hence at most three intersections per axis.
+    // This includes fractional final source texels and all later odd levels.
     let area = (hi.x-lo.x)*(hi.y-lo.y);
     for (var y=0; y<3; y++) {
         for (var x=0; x<3; x++) {

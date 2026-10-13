@@ -21,7 +21,7 @@ pub(super) fn output_source() -> String {
         "{}\n{}\n{}",
         original.replace(
             ORIGINAL,
-            "var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,sample_position); }"
+            "var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,position.xy); }"
         ),
         include_str!("../tone_map.wgsl"),
         include_str!("output.wgsl")
@@ -98,15 +98,18 @@ impl BloomSystem {
         &self,
         device: &wgpu::Device,
         source: &wgpu::TextureView,
-        size: [u32; 2],
-        rect: [f32; 4],
+        output: [u32; 2],
+        frame: &crate::resolution::FramePlan,
+        scale: crate::resolution::ResolutionScale,
     ) -> Result<BloomDraw> {
+        let size = frame.size;
+        let rect = frame.rect;
         let plan = Plan::new(
-            size,
+            output,
             self.config.levels,
             device.limits().max_texture_dimension_2d,
         )?;
-        plan.viewport(rect)?;
+        let source_span = plan.source_span(size, rect, scale)?;
         let targets = {
             let mut cache = self.cache.lock().map_err(|_| BloomError::CacheLock)?;
             if cache.as_ref().is_none_or(|old| old.plan != plan) {
@@ -123,7 +126,20 @@ impl BloomSystem {
             let settings = Settings {
                 rect,
                 sizes: [previous_size[0], previous_size[1], size[0], size[1]],
-                params: [self.config.threshold, 0., 0., 0.],
+                params: [
+                    self.config.threshold,
+                    0.,
+                    if i == 0 {
+                        source_span[0]
+                    } else {
+                        previous_size[0] as f32
+                    },
+                    if i == 0 {
+                        source_span[1]
+                    } else {
+                        previous_size[1] as f32
+                    },
+                ],
             };
             stages.push(self.stage(
                 device,
@@ -247,7 +263,7 @@ impl BloomDraw {
 
 impl crate::Renderer {
     /// Prepare the finite bloom pipeline catalog before drawing. Default is off.
-    /// Pixel cameras bypass bloom; footprint is in internal scene texels. This
+    /// Pixel cameras bypass bloom; footprint is in physical output pixels. This
     /// startup configuration does not enable a temporal upscaler or GPU timer.
     pub async fn enable_bloom(&mut self, config: Bloom) -> Result<()> {
         config::admission(

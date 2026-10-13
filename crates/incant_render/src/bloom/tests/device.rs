@@ -40,8 +40,21 @@ fn actual_pyramid_nonzero_halo_resize_and_zero_alpha_control() {
         );
         let view = source.create_view(&Default::default());
         let rect = [0., 0., width as f32, height as f32];
+        let frame = crate::resolution::FramePlan::new(
+            [width, height],
+            rect,
+            None,
+            crate::resolution::ResolutionScale::FULL,
+        )
+        .unwrap();
         let draw = system
-            .prepare(&r.device, &view, [width, height], rect)
+            .prepare(
+                &r.device,
+                &view,
+                [width, height],
+                &frame,
+                crate::resolution::ResolutionScale::FULL,
+            )
             .unwrap();
         let target = texture(&r, wgpu::TextureFormat::Rgba8UnormSrgb, width, height);
         let baseline = texture(&r, wgpu::TextureFormat::Rgba8UnormSrgb, width, height);
@@ -67,7 +80,7 @@ fn actual_pyramid_nonzero_halo_resize_and_zero_alpha_control() {
                 target.format(),
                 None,
                 None,
-                Some((&draw.result, system.config.intensity)),
+                Some((&draw.result, system.config.intensity, [width, height])),
             )
             .unwrap()
             .encode(&mut encoder);
@@ -166,7 +179,7 @@ fn bloom_output_keeps_emitter_position_at_reduced_internal_resolution() {
         let plan =
             crate::resolution::FramePlan::new(output_size, viewport.rect, None, scale).unwrap();
         let source = texture(&r, HDR_FORMAT, plan.size[0], plan.size[1]);
-        let bloom_size = plan.size.map(|v| v.div_ceil(2));
+        let bloom_size = output_size.map(|v| v.div_ceil(2));
         let bloom = texture(&r, HDR_FORMAT, bloom_size[0], bloom_size[1]);
         // Isolate output-coordinate correctness from extraction/filtering: one
         // known HDR texel is placed in a prepared bloom field over empty scene.
@@ -197,7 +210,7 @@ fn bloom_output_keeps_emitter_position_at_reduced_internal_resolution() {
                 target.format(),
                 Some(viewport),
                 plan.output_mapping,
-                Some((&bloom.create_view(&Default::default()), 0.2)),
+                Some((&bloom.create_view(&Default::default()), 0.2, output_size)),
             )
             .unwrap()
             .encode(&mut encoder);
@@ -213,10 +226,9 @@ fn bloom_output_keeps_emitter_position_at_reduced_internal_resolution() {
         assert!(pixel[0] > 80, "the isolated emitter must produce light");
         let observed = [(index % 67) as f32 + 0.5, (index / 67) as f32 + 0.5];
         for axis in 0..2 {
-            // Texel center -> normalized bloom -> internal scene -> physical.
-            let expected = (hot[axis] as f32 + 0.5) / bloom_size[axis] as f32
-                * plan.size[axis] as f32
-                / scale.fraction();
+            // Texel center -> normalized output-anchored bloom -> physical.
+            let expected =
+                (hot[axis] as f32 + 0.5) / bloom_size[axis] as f32 * output_size[axis] as f32;
             assert!(
                 (observed[axis] - expected).abs() <= 1.,
                 "scale {numerator}, axis {axis}: observed {observed:?}, expected {expected}"
