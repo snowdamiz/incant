@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored iOS fixed physics — producer execution passed
+
+Ordinary iOS export now selects the project's deterministic or fast kernel and
+audits the selected normal graph, all five actual target solver artifacts and
+shipping codegen. Four fresh archives pass; twelve source/cache/build/map-deleted
+C/Swift simulator processes reproduce 864 checks, 432 complete log records and
+exact nonzero PCM. Thirty-two precise refusals include checksum-valid opposite-mode
+packages in both directions. Both-mode device archives and unsigned C/Swift links
+pass without device execution. The accepted source/probe is unchanged, and the
+complete execution packet awaits independent final review and main integration.
+No phone, performance, rendered-output, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-ios-physics-modes.md).
+
 ## Authored iOS project archives — current main177 simulator proof passed
 
 The separate trusted-source iOS exporter cooks public-authored TypeScript imports,
@@ -26,9 +39,10 @@ physics dependency audits. Six C/Swift simulator processes reproduce 432
 observations, 216 log records and exact nonzero PCM after private source, cache,
 build and maps are removed; fourteen precise refusal controls pass. Device
 archives and unsigned caller links pass, without device execution. Independent
-producer, integration-source and final execution reviews are accepted; the
-exact-head fast check and publication are pending. Fast iOS projects, desktop cross-target
-export, Android and mobile static Wasm remain denied in this slice. No signing,
+producer, integration-source and final execution reviews are accepted; its
+exact-head fast check passed and it was published as main178. This historical integration was
+deterministic-only; the separate producer proof above adds fast iOS projects.
+Desktop cross-target export, Android and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
