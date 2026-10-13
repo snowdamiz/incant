@@ -1,6 +1,88 @@
-# 0073 result — output upscaling numeric execution, visual-review preparation and visual execution
+# 0073 result — output upscaling numeric execution, visual review and repair brief
 
-## Execution (current): corrected portable visual review
+## Repair brief (current): portable reconstruction quality repair
+
+**Status: BRIEF WRITTEN for Astra.**
+- The design is in [`quality-repair-brief.md`](quality-repair-brief.md).
+- This session did CPU and source analysis only: no GPU, capture, build, target
+  use, source edit, fixture edit or helper edit.
+- Production stays at `535003d7`; root schedules the repair and a new review.
+- The a5ae3179 run, its fixture, thresholds, captures and evidence are unchanged.
+
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+Root's `claude-0073-quality-repair-prep-acp.log` header reads `Claude session
+verified: Opus 5.5; thinking: max`. No subagents, no memory writes.
+
+**Inputs:**
+- brief `d8a99ff9…` (root's `7bb19bcd`), unchanged at commit;
+- engine source `535003d7`, read only from git objects;
+- the retained a5ae3179 evidence and screenshots.
+
+**What the brief specifies:**
+- **Causes, separated by status.** Six are verified against source lines and
+  measurements. One is derived. Three remain hypotheses.
+- **Sample reconstruction.** Jitter-aware kernel accumulation with a per-pixel
+  confidence that maps the existing `history_weight` onto sample density.
+- **Edges and coverage.** Premultiplied accumulation that drops the current-only
+  edge rule.
+- **History admission:**
+  - persistence on static pixels;
+  - a shading-change key from directional shadow visibility;
+  - a removal guard and frame-global suspension;
+  - depth-tested, clipped history on moving pixels.
+- **Mip selection.** A capped bias, `−min(log2 r, 1)`, that may land only with
+  the persistence rule.
+- **Also covered:**
+  - behaviour at each scale;
+  - data paths and a load/byte budget;
+  - risks;
+  - 18 numerical controls (11 CPU oracle, 4 GPU raw, 3 retained), all in
+    existing test files;
+  - my acceptance plan for the next review, with FULL/DRS hash preconditions.
+- **Fixture label.** A separate one-literal correction for the clipped UI label,
+  not applied.
+
+**How the expectations were made.**
+- I used a throwaway CPU model with the real jitter table. It reproduced the
+  measured a5ae3179 chart contrast for `535003d7`: 0.00 / 0.05 / 0.42 vs
+  measured 0.03 / 0.06 / 0.43.
+- I then used it to:
+  - reject two weaker designs (a colour-ratio shading test, and the bias with the
+    existing clamp);
+  - set the kernel width, bias cap, confidence cap and reset values.
+- It was CPU-only scratch in `/tmp`. It is deleted and not committed. Its numbers
+  are expectations, not results.
+
+**Screenshots:** none new. The brief refers to the a5ae3179 screenshots in
+`screenshots/`.
+
+**Changed paths:**
+- `handoffs/0073-upscaling-review/quality-repair-brief.md`
+- `handoffs/0073-upscaling-review/result.md` (this record)
+
+**Not run:**
+- GPU;
+- builds;
+- tests;
+- captures.
+
+The repair's numerical controls are for Astra to implement.
+
+**Open questions for root:**
+1. **Order.** Should one review cover all three landing steps (2.1–2.3, 2.4–2.5,
+   2.6), as the brief recommends, after Astra's controls pass?
+2. **Label.** Apply the label correction in the repaired-source review's tree,
+   or after that review?
+3. **Memory.** Accept the larger logical ceiling (768 MiB + 16 KiB), or allocate
+   the meta pair only for the portable path?
+
+**Limits:**
+- The expectations come from a simplified grey 2D model of one stage. Perspective,
+  sRGB textures and real lighting may shift them.
+- No appearance or performance claim is made.
+- No phase gate is claimed or approved.
+
+## Execution (preserved): corrected portable visual review
 
 **Status: EXECUTED, and the GPU is released. Hard results PASS; my quality
 verdict is FAIL.** Details are in [`visual-result.md`](visual-result.md).
