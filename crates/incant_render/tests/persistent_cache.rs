@@ -103,8 +103,8 @@ fn initialize_catalog(stage: &str) {
     let report = instance
         .generate_report()
         .expect("native allocation report");
-    // 12 materials + 8 shadows + diagnostic + 4 output + sprite + text + 3 UI.
-    assert_eq!(report.hub.render_pipelines.num_allocated, 30);
+    // 12 materials + 8 shadows + diagnostic + 4 output + sprite + text + 4 UI.
+    assert_eq!(report.hub.render_pipelines.num_allocated, 31);
     assert_eq!(report.hub.compute_pipelines.num_allocated, 1);
     renderer.check_device().unwrap();
     let after_poll = instance.generate_report().unwrap();
@@ -115,7 +115,7 @@ fn initialize_catalog(stage: &str) {
     );
     // These are counts and public status only, never serialized cache bytes.
     eprintln!(
-        "Vulkan catalog: 30 render + 1 compute; {:?}",
+        "Vulkan catalog: 31 render + 1 compute; {:?}",
         renderer.pipeline_cache_report
     );
 }
