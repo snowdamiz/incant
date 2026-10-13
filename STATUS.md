@@ -16,6 +16,20 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Core optional result-label binding — CPU proof complete, final review pending
+
+The sample accepts an explicitly authored optional `hud.prompt` label and clears
+the objective on winning. Result parenting and whole-session restart restore the
+expected text/parents while the existing 12-widget HUD stays supported. Twenty
+focused Python tests, strict TypeScript, 28 successful native processes and two
+fresh source/map/build-deleted ordinary packages pass. Twenty shipping processes
+include eight complete R/Start/held-input reset routes with exact fresh-state and
+concatenated PCM comparisons. Nine exact native refusals pass. Independent source
+review is accepted; final execution review and publisher integration are pending.
+The production prompt node/localization/style is still Claude-owned and absent;
+this is not appearance or device/performance acceptance. Prior 0065 evidence stays
+immutable. [Contract/evidence](docs/spikes/core-result-hud.md).
+
 ## Authored Core runtime bindings — CPU proof accepted
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the

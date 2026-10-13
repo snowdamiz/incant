@@ -199,7 +199,7 @@ def world_commands(scene):
             'MeshRenderer': mesh('sample', shadows=False), 'Animation': animation(0.55 * i),
             'PointLight': {'color': [0.3, 0.95, 0.9], 'intensity': 1.5, 'range': 2.8}}))
     props = {'player': E['player'], 'navigation': E['navigation'], 'exit': E['exit'], 'enemies': ENEMIES,
-             'pickups': SAMPLES, 'camera': E['camera'], **SETTINGS, **bindings.roles()}
+             'pickups': SAMPLES, 'camera': E['camera'], **SETTINGS, **bindings.roles(hud.prompt())}
     cmds.append(entity(scene, E['controller'], 'Core Sample gameplay', {
         'Transform': transform((0, 0, 0)), 'Script': {'source': SCRIPT, 'props': props}}))
     return cmds
@@ -355,7 +355,7 @@ def main():
     receipt.update(undo_redo_reopen=True, validation=validation, revision=final['revision'],
                    project_sha256=digest(project), entities=E, enemies=ENEMIES, samples=SAMPLES, script=SCRIPT,
                    scene=SCENE, assets={k: v[0] for k, v in ASSETS.items()}, settings=SETTINGS,
-                   locale=args.locale, state=args.state, audio=AUDIO,
+                   locale=args.locale, state=args.state, audio=AUDIO, hud=bindings.roles(hud.prompt())['hud'],
                    widgets={w['name']: hud.widget(w['index']) for w in hud.DOCUMENT['widgets']},
                    rpc_calls=len(calls))
     write_json(out / 'receipt.json', receipt)
