@@ -114,7 +114,7 @@ impl OutputPass {
         format: wgpu::TextureFormat,
         viewport: Option<Viewport>,
         pixel_grid: Option<[f32; 4]>,
-        bloom: Option<(&wgpu::TextureView, f32)>,
+        bloom: Option<(&wgpu::TextureView, f32, [u32; 2])>,
     ) -> Result<OutputDraw> {
         let pipeline = self
             .0
@@ -147,10 +147,10 @@ impl OutputPass {
             contents: bytemuck::bytes_of(&uniform),
             usage: wgpu::BufferUsages::UNIFORM,
         });
-        let bloom_buffer = bloom.map(|(_, intensity)| {
+        let bloom_buffer = bloom.map(|(_, intensity, output)| {
             device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
                 label: Some("Bloom output gain"),
-                contents: bytemuck::bytes_of(&[intensity, 0f32, 0., 0.]),
+                contents: bytemuck::bytes_of(&[intensity, output[0] as f32, output[1] as f32, 0.]),
                 usage: wgpu::BufferUsages::UNIFORM,
             })
         });

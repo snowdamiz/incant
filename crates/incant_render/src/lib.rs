@@ -344,7 +344,15 @@ impl Renderer {
             .as_ref()
             .filter(|b| scene.camera.pixel_resolution.is_none() && b.config.intensity > 0.);
         let bloom = bloom_system
-            .map(|system| system.prepare(&self.device, &attachments.color, frame_size, scene_rect))
+            .map(|system| {
+                system.prepare(
+                    &self.device,
+                    &attachments.color,
+                    [width, height],
+                    &plan,
+                    scale,
+                )
+            })
             .transpose()?;
         let output = if let Some((draw, system)) = bloom.as_ref().zip(bloom_system) {
             system.output.prepare_optional_bloom(
@@ -354,7 +362,7 @@ impl Renderer {
                 format,
                 viewport,
                 plan.output_mapping,
-                Some((&draw.result, system.config.intensity)),
+                Some((&draw.result, system.config.intensity, [width, height])),
             )?
         } else {
             self.output.prepare(

@@ -47,7 +47,7 @@ pub(super) fn admission(config: Bloom, cooked_output: bool) -> Result<(), BloomE
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(super) struct Plan {
-    pub source: [u32; 2],
+    pub output: [u32; 2],
     pub sizes: Vec<[u32; 2]>,
     pub bytes: u64,
 }
@@ -85,20 +85,36 @@ impl Plan {
             return Err(BloomError::TargetSize);
         }
         Ok(Self {
-            source,
+            output: source,
             sizes: sizes[..count].to_vec(),
             bytes,
         })
     }
 
-    pub fn viewport(&self, rect: [f32; 4]) -> Result<(), BloomError> {
+    /// The first pass maps physical footprints through the exact DRS factor.
+    /// Allocation rounding must not become an extra scale or phase adjustment.
+    pub fn source_span(
+        &self,
+        size: [u32; 2],
+        rect: [f32; 4],
+        scale: crate::resolution::ResolutionScale,
+    ) -> Result<[f32; 2], BloomError> {
+        let span = self.output.map(|v| v as f32 * scale.fraction());
+        if size != span.map(|v| v.ceil() as u32) {
+            return Err(BloomError::TargetSize);
+        }
+        Self::viewport(size, rect)?;
+        Ok(span)
+    }
+
+    pub fn viewport(source: [u32; 2], rect: [f32; 4]) -> Result<(), BloomError> {
         if rect.iter().any(|v| !v.is_finite())
             || rect[0] < 0.0
             || rect[1] < 0.0
             || rect[2] <= 0.0
             || rect[3] <= 0.0
-            || rect[0] + rect[2] > self.source[0] as f32
-            || rect[1] + rect[3] > self.source[1] as f32
+            || rect[0] + rect[2] > source[0] as f32
+            || rect[1] + rect[3] > source[1] as f32
         {
             return Err(BloomError::Viewport);
         }

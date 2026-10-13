@@ -44,17 +44,21 @@ pub struct Field {
 }
 impl Field {
     pub fn reduce(&self) -> Self {
-        let size = self.size.map(|n| n.div_ceil(2));
+        self.resample(self.size.map(|n| n.div_ceil(2)), self.size.map(f64::from))
+    }
+    // Integrate source pixel cells over a caller-specified continuous extent.
+    // Loops cover every overlap, independently of the shader's fixed 3x3 bound.
+    pub fn resample(&self, size: [u32; 2], span: [f64; 2]) -> Self {
         let mut data = Vec::new();
         for y in 0..size[1] {
             for x in 0..size[0] {
                 let lo = [
-                    f64::from(x) * f64::from(self.size[0]) / f64::from(size[0]),
-                    f64::from(y) * f64::from(self.size[1]) / f64::from(size[1]),
+                    f64::from(x) * span[0] / f64::from(size[0]),
+                    f64::from(y) * span[1] / f64::from(size[1]),
                 ];
                 let hi = [
-                    f64::from(x + 1) * f64::from(self.size[0]) / f64::from(size[0]),
-                    f64::from(y + 1) * f64::from(self.size[1]) / f64::from(size[1]),
+                    f64::from(x + 1) * span[0] / f64::from(size[0]),
+                    f64::from(y + 1) * span[1] / f64::from(size[1]),
                 ];
                 let area = (hi[0] - lo[0]) * (hi[1] - lo[1]);
                 let mut value = [0.; 3];
@@ -73,7 +77,7 @@ impl Field {
         }
         Self { size, data }
     }
-    fn sample(&self, uv: [f64; 2]) -> [f64; 3] {
+    pub fn sample(&self, uv: [f64; 2]) -> [f64; 3] {
         let p = [
             uv[0] * f64::from(self.size[0]) - 0.5,
             uv[1] * f64::from(self.size[1]) - 0.5,
@@ -100,6 +104,24 @@ pub fn pyramid(mut input: Field, levels: usize) -> Field {
             break;
         }
     }
+    reconstruct(down)
+}
+pub fn anchored_pyramid(input: &Field, output: [u32; 2], scale: f64, levels: usize) -> Field {
+    let mut current = input.resample(
+        output.map(|v| v.div_ceil(2)),
+        output.map(|v| f64::from(v) * scale),
+    );
+    let mut down = vec![current.clone()];
+    for _ in 1..levels {
+        if current.size == [1, 1] {
+            break;
+        }
+        current = current.reduce();
+        down.push(current.clone());
+    }
+    reconstruct(down)
+}
+fn reconstruct(mut down: Vec<Field>) -> Field {
     let count = down.len();
     let mut result = down.pop().unwrap();
     while let Some(mut fine) = down.pop() {

@@ -3,7 +3,7 @@
 @group(0) @binding(3) var<uniform> bloom_gain: vec4f;
 fn bloom_light(position: vec2f) -> vec3f {
     let size = vec2i(textureDimensions(bloom_texture));
-    let p = position / vec2f(textureDimensions(scene)) * vec2f(size) - vec2f(0.5);
+    let p = position / bloom_gain.yz * vec2f(size) - vec2f(0.5);
     let base = vec2i(floor(p));
     let f = fract(p);
     let a = textureLoad(bloom_texture,clamp(base,vec2i(0),size-vec2i(1)),0).rgb;
