@@ -41,13 +41,26 @@ pass without weakening admission. A later test-only Result callback compile
 failure is retained separately. Six focused native tests pass, and source review
 `56edc9aef6b0961d35385c4f0dd78effb2f4c151eb5c0e506bbc39f4cb75c9d9`
 is accepted. The full deterministic snapshot suite also passes 218 tests (26 groups,
-24 nonempty; 0 failures/ignored). An explicit user pause stopped the orchestrator
-at that completed check boundary before fast8. Fast8, full private checked
-suites, strict Clippy and remaining scoped guards are pending, as is final
-evidence review. The [pause index](evidence/physics-native-islands-pause.json) records retained raw
-evidence identities and the intentional process stop; no new large archive was
-created for the pause. [Resume notes](physics-native-islands-paused.md) list the
-remaining checks. This is an incomplete qualification checkpoint.
+24 nonempty; 0 failures/ignored). The intentional pause completed cleanly before fast8. After explicit resume,
+fresh fast8 captures and both selected native feature graphs were checked. Both
+snapshot suites pass 218 tests each; the complete private checked-constructor
+suites pass 28 tests each, including the six island controls and 156 paired island
+steps per dimension per mode. Fast8 uses its newly captured exact fixture bytes
+only in its isolated native test copy; deterministic repository fixtures stay
+unchanged. Strict native library Clippy passes in both modes, snapshot all-target
+Clippy passes, and wasm, lean/runtime graphs, policy guards, workspace format,
+conventions and diff checks pass. The blanket vendor format check exposes only
+inherited sleep-scan observer formatting. Its raw diagnostic is retained; all
+island-owned vendor modules pass the scoped check, and the parent source differs
+only by its appended module declaration. No blanket vendor format success is
+claimed.
+
+The [final CPU packet](evidence/physics-native-islands-construction.json) retains
+2,204 lossless original records with 501 distinct payloads and four executable
+native binaries. Its collector verifies every retained original byte and exact
+command/log receipts. Source review remains accepted, final evidence review is
+pending. [Historical pause notes](physics-native-islands-paused.md) and the
+[pause index](evidence/physics-native-islands-pause.json) remain unmodified.
 
 Exact broad/narrow/CCD managers, complete global arithmetic/work admission,
 generation fencing, authenticated capture and stable-ID/event composition remain

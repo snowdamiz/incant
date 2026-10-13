@@ -1,0 +1,184 @@
+{
+  "format": "incant-physics-native-islands-construction",
+  "version": 1,
+  "source_commit": "480c267e99a31dc40578c2bb0b77dfba0745b14b",
+  "source_review_sha256": "56edc9aef6b0961d35385c4f0dd78effb2f4c151eb5c0e506bbc39f4cb75c9d9",
+  "status": "source accepted; scoped CPU qualification complete; final evidence review pending",
+  "archive": {
+    "path": "docs/spikes/evidence/physics-native-islands-construction-logs.json.gz",
+    "sha256": "d171d2574ebd0a370dbe43cab5980b7349da641c7a65b86b332a7244ac091ae7",
+    "records": 2204,
+    "payloads": 501
+  },
+  "tests": {
+    "snapshot-tests-det-001": {
+      "tests": 218,
+      "groups": 26
+    },
+    "snapshot-tests-fast8-001": {
+      "tests": 218,
+      "groups": 26
+    },
+    "native-full-det-001": {
+      "tests": 28,
+      "groups": 2
+    },
+    "native-full-fast8-001": {
+      "tests": 28,
+      "groups": 2
+    }
+  },
+  "commands": [
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/capture-001.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/capture-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/clippy-native-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/clippy-native-fast8-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/clippy-snapshot-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/conventions-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/diff-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/fmt-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/guards-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/lean-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/metadata-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/metadata-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/metadata-fast8-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-full-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-full-fast8-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-graph-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-graph-fast8-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-islands-001.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-islands-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/prepare-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/prepare-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/prepare-fast8-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/runtime-graph-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/snapshot-tests-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/snapshot-tests-fast8-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/vendor-fmt-001.json",
+      "exit_code": 1
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/vendor-fmt-owned-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/wasm-001.json",
+      "exit_code": 0
+    }
+  ],
+  "binaries": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-f3b432281b0eb498",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/frozen-binaries/native-full-det-001-rapier2d-f3b432281b0eb498",
+      "sha256": "34f8a72ed0355553d36027882430e27c8d75fe16df8cf77d3f00d8d6ff295d9c",
+      "bytes": 6560896,
+      "mode": "0o755"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-6007796747461f44",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/frozen-binaries/native-full-det-001-rapier3d-6007796747461f44",
+      "sha256": "fa6051e33aad2147c71a88d3b3877490732e7cf7a84481cc41a3746d35dad954",
+      "bytes": 7356960,
+      "mode": "0o755"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-487d7a3d7907792e",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/frozen-binaries/native-full-fast8-001-rapier2d-487d7a3d7907792e",
+      "sha256": "ee25b55e143ff68ce288970b6444c9115ef3cb632103115645afecef034a64f4",
+      "bytes": 6449424,
+      "mode": "0o755"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-0194cf8ad0d4ae0d",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/frozen-binaries/native-full-fast8-001-rapier3d-0194cf8ad0d4ae0d",
+      "sha256": "aa0c017def41927fc2afa23c3c9c737778bc7474613634239b174440b5153d06",
+      "bytes": 7254256,
+      "mode": "0o755"
+    }
+  ],
+  "limits": [
+    "Other native owners remain trusted clones; no complete world installer or live-save admission.",
+    "156 island paired steps per dimension per mode are included in the checked suites; inherited tests overlap prior evidence.",
+    "VecMap precharged reserve is infallible and retains process OOM behavior.",
+    "Fast8 harness alone substitutes exact newly captured fast8 fixture bytes; source fixtures retain deterministic capture.",
+    "Original PendingMutation and callback compile failures, intentional pause exit143, and inherited observer formatting failure retained.",
+    "Scoped owned vendor format passes; no blanket vendor formatting success.",
+    "No GPU, device or performance claim."
+  ]
+}
