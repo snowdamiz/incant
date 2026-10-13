@@ -53,7 +53,7 @@ independent source review is accepted. Native GPU and Claude appearance checks
 remain pending, as do other shader families and device performance requirements.
 [Scope and evidence](docs/spikes/cooked-sprite-shaders.md).
 
-## Authored Core runtime bindings — CPU proof accepted
+## Authored Core runtime bindings — merged in main185
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the
 unchanged current controller, with R/Start whole-session restart. Public atomic
@@ -61,19 +61,22 @@ authoring, Undo/Redo and reopen pass; all art/layout inputs are preserved. The
 full 2,156-tick 48 kHz route, loss, locked exit, four locale readbacks, repeated
 cues and four complete packaged reset routes pass. Fresh-session logs/entities/UI
 and concatenated PCM match exactly after source/map/build deletion. Independent
-final review is accepted; publisher intake is pending. No GPU/window/device gate is claimed;
+final integration review and exact-head fast check passed; PR185 is merged.
+No GPU/window/device gate is claimed;
 historical offscreen provenance and Claude's visible restart hint remain open.
-[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md).
+[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md) and
+[current-main integration proof](docs/spikes/core-main182.md).
 
-## Core authored-level locked-exit proof — locally accepted
+## Core authored-level locked-exit proof — merged in main185
 
 The retained 0060 locked run died before reaching the exit; its old assertion was
 a false positive. A replacement public-input recording reaches the exit alive
 with 3/4 pickups and observes actual positions/inventory for 30 consecutive ticks.
 Three real CPU runs, seven focused oracle tests and independent root review pass;
 original win/loss reports and PCM are unchanged. Controller, art and authoring
-stay untouched. Integration is pending. No visual, device or performance gate
-is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
+stay untouched. PR185 includes this correction and its
+[current-main integration proof](docs/spikes/core-main182.md). No new visual,
+device or performance gate is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
 
 ## Bounded offline PCM streaming — CPU shipping proof accepted
 

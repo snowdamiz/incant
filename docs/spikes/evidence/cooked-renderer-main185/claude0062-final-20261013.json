@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-13T00:39:32.048229+00:00",
+  "reviewed_commit": "59ba048ab52289cdbac75549ccf89e2637f0e254",
+  "decision": "accepted scoped sprite producer and Claude Metal review; current-main integration pending",
+  "manifest_sha256": "2fd300aeb9f596a6c5f9813f7cbe31bdd86c343bc56b6278c6ec82834b1c015e",
+  "files": 132,
+  "hashed_only": 14,
+  "sources": 13,
+  "gpu_commands": 29,
+  "gpu_test_totals": {
+    "baseline": 82,
+    "candidate": 82
+  },
+  "whole_png_pairs_byte_identical": 9,
+  "source_free_report": {
+    "pairs": 9,
+    "pairs_file_identical": 9,
+    "pairs_rgba_identical": 9,
+    "source_free_identical": 4,
+    "source_free_total": 4
+  },
+  "visual_owner": "Claude Opus 5.5 Max, ACP0062",
+  "root_review": "Source/receipt/numeric/log/artifact audit only. No root image inspection. Eight text logs lose only one final blank line; raw copies preserved.",
+  "limits": [
+    "Mac M5 Pro/macOS27.0.1 Metal only",
+    "No Vulkan, DX12, phone or performance acceptance",
+    "33 within-scene controls include an explicitly documented overlap exclusion; full baseline/candidate comparisons remain unmasked."
+  ]
+}
