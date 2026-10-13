@@ -61,7 +61,24 @@ def prepare(project, scene, staging, storage, cargo, env, execute, wabt, sdk, ta
             'bundle': str(bundle)}
 
 
-def compiler_audit(log, target, sdkroot, prepared, root):
+def audit_build(stdout, stderr, target, sdkroot, prepared, root):
+    """Cargo's verbose build-script commands are stdout, alongside JSON records."""
+    messages = [json.loads(line) for line in stdout.splitlines() if line.startswith('{')]
+    packages = {row['package_id'] for row in messages if row.get('reason') == 'compiler-artifact'
+                and row['target']['name'] == 'incant_wasm_runtime'}
+    require(len(packages) == 1, 'Missing unique static runtime target artifact')
+    outputs = [Path(row['out_dir']) for row in messages if row.get('reason') == 'build-script-executed'
+               and row['package_id'] in packages]
+    require(len(outputs) == 1, 'Missing unique static runtime build-script output')
+    directory = outputs[0]
+    require(directory.is_absolute() and directory.name == 'out'
+            and re.fullmatch('incant_wasm_runtime-[0-9a-f]+', directory.parent.name)
+            and directory.parents[1].name == 'build' and directory.parents[2].name == 'shipping'
+            and directory.parents[3].name == target, 'Unexpected static runtime build-script directory')
+    return compiler_audit(stdout + '\n' + stderr, target, sdkroot, prepared, root, directory)
+
+
+def compiler_audit(log, target, sdkroot, prepared, root, probe_dir=None):
     """Audit cc-rs' actual invocations, never an assumed flag configuration."""
     expected_target = {'aarch64-apple-ios': 'arm64-apple-ios',
                        'aarch64-apple-ios-sim': 'arm64-apple-ios-simulator'}
@@ -76,7 +93,7 @@ def compiler_audit(log, target, sdkroot, prepared, root):
                 '-DWASM_RT_USE_MMAP=0', '-DWASM_RT_MEMCHECK_BOUNDS_CHECK=1',
                 '-DWASM_RT_STACK_DEPTH_COUNT=1', '-DWASM_RT_MAX_CALL_STACK_DEPTH=64',
                 '-DWASM_RT_USE_SEGUE=0'}
-    found = {}
+    found, probes = {}, []
     for line in log.splitlines():
         match = re.fullmatch(r'\[incant_wasm_runtime [^\]]+\] running: (.+)', line)
         if match is None:
@@ -86,15 +103,22 @@ def compiler_audit(log, target, sdkroot, prepared, root):
             continue  # Compiler-family probes and archiver commands have no -c.
         require(args.count('-c') == 1 and args.index('-c') + 1 < len(args), 'Invalid target C compile command')
         source = str(Path(args[args.index('-c') + 1]).resolve())
-        require(source in expected_sources and source not in found, 'Unexpected or duplicate target C source')
         executable = next((arg for arg in args if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]*=.*', arg)), None)
         require(executable == prepared['compiler']['path'], 'Target C compiler identity mismatch')
-        require(all(args.count(flag) == 1 for flag in required), 'Static C safety/numerical flags missing')
         require([arg for arg in args if arg.startswith('--target=')] == ['--target=' + expected_target[target]],
                 'Static C destination differs from archive target')
         require(args.count('-isysroot') == 1 and args.index('-isysroot') + 1 < len(args)
                 and args[args.index('-isysroot') + 1] == sdkroot,
                 'Static C SDK identity mismatch')
+        if probe_dir is not None and source == str((probe_dir / 'flag_check.c').resolve()):
+            require(not probes and args.count('-o') == 1 and args.index('-o') + 1 < len(args)
+                    and str(Path(args[args.index('-o') + 1]).resolve()) == str((probe_dir / 'flag_check').resolve())
+                    and [arg for arg in args if re.fullmatch(r'-O.+', arg)] == ['-O0'],
+                    'Unexpected compiler flag probe')
+            probes.append({'kind': 'cc_flag_check', 'argv': args, 'command_sha256': sha256(line.encode())})
+            continue
+        require(source in expected_sources and source not in found, 'Unexpected or duplicate target C source')
+        require(all(args.count(flag) == 1 for flag in required), 'Static C safety/numerical flags missing')
         forbidden = ('-ffast-math', '-Ofast', '-fno-rounding-math', '-funsafe-math-optimizations')
         require(not any(flag in args for flag in forbidden)
                 and not any(arg.startswith('-UWASM_RT_') for arg in args)
@@ -104,4 +128,5 @@ def compiler_audit(log, target, sdkroot, prepared, root):
                 'Static C safety/numerical flags overridden')
         found[source] = {'argv': args, 'command_sha256': sha256(line.encode())}
     require(set(found) == expected_sources, 'Missing actual target static-module C compilation')
-    return {'target': target, 'sdkroot': sdkroot, 'compiler': prepared['compiler'], 'sources': found}
+    return {'target': target, 'sdkroot': sdkroot, 'compiler': prepared['compiler'], 'sources': found,
+            'build_script_output': None if probe_dir is None else str(probe_dir), 'compiler_probes': probes}
