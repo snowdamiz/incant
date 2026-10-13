@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T02:14:45.016880+00:00",
+  "accepted": true,
+  "patch_sha256": "489105e494a0c42d56dc74ec1e47fcc8ff41c3451b980e6aaeabefd7a4b8f791",
+  "review": [
+    "Both existing default GPU suites retained",
+    "Cooked family/cache coverage added rather than replacing default checks",
+    "Actual adapter backend asserted at test constructors; unknown/mismatched names refused",
+    "37 test files change only constructor wrappers; production render math unchanged",
+    "Fresh-process Vulkan corruption/reopen test explicitly Linux-only; ignored in generic cooked GPU suite"
+  ],
+  "limits": [
+    "Local affected compilation still in progress",
+    "No actual new hosted/native backend execution claimed",
+    "No required context removal or performance gate approval"
+  ]
+}

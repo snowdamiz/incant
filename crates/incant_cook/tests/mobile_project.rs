@@ -248,3 +248,81 @@ fn explicit_mobile_producer_retains_desktop_and_unverified_destination_refusals(
         }
     }
 }
+
+#[test]
+fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_identity() {
+    if artifact::TARGET != "aarch64-apple-darwin"
+        || !artifact::compatibility::admits(
+            artifact::TARGET,
+            "aarch64-apple-ios-sim",
+            artifact::BytecodeAbi::current(),
+        )
+    {
+        return; // The separate destination test establishes refusal on other producers.
+    }
+    let root = tempfile::tempdir().unwrap();
+    let bytes = b"\0asm\x01\0\0\0\x01\x0a\x02\x60\0\x01\x7f\x60\x02\x7e\x7c\0\x03\x03\x02\0\x01\x05\x03\x01\0\x01\x07\x20\x03\x06memory\x02\0\x0aincant_abi\0\0\x06update\0\x01\x0a\x09\x02\x04\0\x41\x01\x0b\x02\0\x0b";
+    let captured = incant_wasm_cook::CapturedModule::capture(bytes).unwrap();
+    captured
+        .store(&incant_wasm_cook::project_cache(root.path(), true).unwrap())
+        .unwrap();
+    let mut project = Project::empty("Captured-only mobile module");
+    let mut scene = Scene::new("Main");
+    let id = new_id();
+    scene.program = Some(incant_doc::SceneProgram::Wasm { module: id.clone() });
+    project.assets.insert(
+        id.clone(),
+        incant_doc::Asset {
+            id,
+            name: "Captured module".into(),
+            path: "deleted.wasm".into(),
+            kind: "wasm".into(),
+            sha256: captured.fingerprint(),
+            import_settings: None,
+        },
+    );
+    project.scenes.insert(scene.id.clone(), scene);
+    let path = root.path().join("game.json");
+    std::fs::write(&path, project.canonical_text().unwrap()).unwrap();
+    let bundle = root.path().join("bundle");
+    std::fs::create_dir(&bundle).unwrap();
+    // Identity-only data deliberately cannot stand in for generated native code.
+    std::fs::write(bundle.join("manifest.json"), "{}").unwrap();
+    for (index, (target, feature, has_bundle, wrong_binding, error)) in [
+        ("aarch64-apple-ios-sim", false, false, false, "authored Wasm export requires the static-module player feature"),
+        ("aarch64-apple-ios-sim", true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
+        ("aarch64-apple-ios-sim", true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
+        ("aarch64-apple-ios-sim", true, true, false, "mobile static bundle captured identity mismatch"),
+        ("aarch64-linux-android", false, false, false, "authored Wasm export requires the static-module player feature"),
+        ("aarch64-linux-android", true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
+        ("aarch64-linux-android", true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
+        ("aarch64-linux-android", true, true, false, "mobile static bundle captured identity mismatch"),
+        ("x86_64-linux-android", true, true, false, "authored mobile project requires the reviewed macOS arm64 mobile bytecode route"),
+    ].into_iter().enumerate() {
+        let out = root.path().join(format!("refused-{index}"));
+        std::fs::create_dir(&out).unwrap();
+        let mut command = std::process::Command::new(std::env::current_exe().unwrap());
+        for (key, _) in std::env::vars_os() {
+            if key.to_string_lossy().starts_with("INCANT_NATIVE_") || key == "INCANT_WASM_BUNDLE" {
+                command.env_remove(key);
+            }
+        }
+        command.args(["--exact", "mobile_project_producer_child", "--nocapture"])
+            .env("INCANT_TEST_PROJECT_PRODUCER", "mobile")
+            .env("INCANT_TEST_PROJECT_PATH", &path)
+            .env("INCANT_TEST_PROJECT_ERROR", error)
+            .env("HOST", artifact::TARGET).env("TARGET", target)
+            .env("OUT_DIR", &out)
+            .env_remove("CARGO_FEATURE_STATIC_MODULE")
+            .env("INCANT_NATIVE_WASM_FINGERPRINT", captured.fingerprint())
+            .env("INCANT_NATIVE_WASM_INPUT", captured.input_sha256())
+            .env("INCANT_NATIVE_WASM_PREPARED", captured.prepared_sha256())
+            .env("INCANT_NATIVE_WASM_REGISTRY", captured.registry_sha256());
+        if feature { command.env("CARGO_FEATURE_STATIC_MODULE", "1"); }
+        if has_bundle { command.env("INCANT_WASM_BUNDLE", &bundle); }
+        if wrong_binding { command.env("INCANT_NATIVE_WASM_INPUT", "0".repeat(64)); }
+        let result = command.output().unwrap();
+        assert!(result.status.success(), "{}\n{}", String::from_utf8_lossy(&result.stdout), String::from_utf8_lossy(&result.stderr));
+        assert_eq!(std::fs::read_dir(out).unwrap().count(), 0);
+    }
+}

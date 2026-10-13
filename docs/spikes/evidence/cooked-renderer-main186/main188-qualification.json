@@ -1,0 +1,17 @@
+{
+  "main": "e838546aba193d3ae416f2290056d4ef405bd7b7",
+  "joined_head": "c8986487",
+  "previous_reviewed_head": "ac2bd63e",
+  "only_implementation_change": "crates/incant_script/src/restart_request_tests.rs",
+  "exit": 0,
+  "script": {
+    "path": "docs/spikes/evidence/cooked-renderer-main186/cooked-renderer-main188-qualification.py",
+    "sha256": "cbc7b8a979bc38947cd6929385820a6674ececf8347ecedc70c54be78d650645"
+  },
+  "log": {
+    "path": "docs/spikes/evidence/cooked-renderer-main186/cooked-renderer-main188-qualification.log.gz",
+    "sha256": "7a474611b06169b6c9e68ce5627b3e1c737b8d2b052eb99566e7d7d7c98a1b7a",
+    "raw_sha256": "520ff2c886ef0fd0e4c5d768f0f9aab38c6adc4ba536482c019b93910a09e5d3"
+  },
+  "scope": "Exact accepted unit-test-only quota repair from main188. Runtime/build/renderer/Cargo inputs unchanged. Original1959-input evidence preserved and assertion-only verification replayed after checking eight separately accepted disjoint input changes."
+}

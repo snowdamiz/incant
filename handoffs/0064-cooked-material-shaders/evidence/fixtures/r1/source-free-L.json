@@ -1,0 +1,34 @@
+{
+ "board": "L",
+ "at": "2026-10-13T01:28:20.114481+00:00",
+ "removed": {
+  "L/L.incant.json": "4b5e40b4719fb7b1d4595295d4cb4da53c37449803ec81b3df7afe261dc51fcb",
+  "L/L.incant.journal.jsonl": "716a85eb5a7a64296e95be4a51ec82868c3ce171b7abfdea72f0ea82eaa56417",
+  "L/art/cube-white.gltf": "1e3daab06d4be014befe4a27d525121035d47dfb43ff93f35442d4bddf98d947",
+  "L/art/cube.bin": "3a6bd3b2215e471d816ac8581110ffa3641c25cbfaca59ded181a754690f6797",
+  "L/art/floor-gray.gltf": "7684226ca0c7707d08362edfb79a823d1a7cc54ff489cd8585dcfb46ac3c0601",
+  "L/art/floor.bin": "521350c927ade9f2321c8d056ce0631ec97b0e606da9438d31df1046d4cf398f",
+  "L/art/sky-dim.png": "a66cc91d2a47eec5ad197f4da4cfe73dcb6e1e9a6dce86314a60d467d71701c2",
+  "L/art/sphere-white.gltf": "7e572d90b4a71072c5ffe18518b2a4d578498534c4f0c244116a2d16380f96c6",
+  "L/art/sphere.bin": "ba2b8cbcaf6bccbc80fb358aa7c966b72665d33e0e136a580da9ffa7d8be949d"
+ },
+ "private_copy": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/private-fixture/L",
+ "kept_unchanged": true,
+ "kept": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/L.scene": "55ea8a0ace9f72e18e76044e6a32ebfceb39843a9abadc6b90460e1ee55850f5",
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/models/b1a92c8bdcf711ca275969d5ba05ce7306adab26234075202a53d1345a52d733.incmodel": "e17b9a9f3eaba5f2d0420030333f328ea35e81e7f466ffa5986fedde6a7acb17",
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/models/cc657285cc7f8d2013aee49ca08a05fddb1a74726720600009fecbc14923f99c.incmodel": "1900e40f0b3ef30089732e287b3d2648231ef279acf81b00b8b8da640772f110",
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/models/ee162c6fe156ee7c41657e3554d06425f4b382a9b568d5ba7b48193b4b80d1e0.incmodel": "27d1ea77ee878d613729ad322bcea5a653eda8bb0e58a849fd38e47a6d3c7fad",
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/textures/293c1d76a568196d7c57a459aa514516d9c468cd1bdeffecc03abe5f6cce5a37.json": "cad9e76be7c7e953ca82a541ba9f55fc5899af077ba90b27fb68b9a96b1e2999",
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/textures/8f723e9af55977f66d81c8d694d24b5d670c1566d8d9d7633fe814246dbdc94e.ktx2": "8f723e9af55977f66d81c8d694d24b5d670c1566d8d9d7633fe814246dbdc94e"
+ },
+ "remaining_in_project": [
+  ".incant-source-transactions/lock",
+  ".incant/cache/models/b1a92c8bdcf711ca275969d5ba05ce7306adab26234075202a53d1345a52d733.incmodel",
+  ".incant/cache/models/cc657285cc7f8d2013aee49ca08a05fddb1a74726720600009fecbc14923f99c.incmodel",
+  ".incant/cache/models/ee162c6fe156ee7c41657e3554d06425f4b382a9b568d5ba7b48193b4b80d1e0.incmodel",
+  ".incant/cache/textures/293c1d76a568196d7c57a459aa514516d9c468cd1bdeffecc03abe5f6cce5a37.json",
+  ".incant/cache/textures/8f723e9af55977f66d81c8d694d24b5d670c1566d8d9d7633fe814246dbdc94e.ktx2"
+ ],
+ "no_authoring_or_art_left": false
+}

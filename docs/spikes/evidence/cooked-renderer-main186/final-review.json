@@ -1,0 +1,44 @@
+{
+  "decision": "accepted_for_scoped_integration",
+  "reviewer": "astra /root",
+  "head": "b8b0e78a8491d98733adc84979f9920b3a742be0",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/docs/spikes/evidence/cooked-renderer-main186.json",
+    "sha256": "438481897c0c77e230c4acf1a3398c0c717ff8b63cd6a0f168f866835f5cf1ab"
+  },
+  "archive_records": 14,
+  "archive_payloads": 11,
+  "zero_exit_checks": 10,
+  "scope": "Independent source review and frozen-evidence audit; no independent test rerun or GPU execution.",
+  "qualification": "Read the exact 13-path main187 Git qualification and independently replayed it successfully; seven frozen inputs differ only by accepted iOS main blobs. Renderer/compiler/Cargo/workflows unchanged. Original unqualified audit refusal retained.",
+  "frozen_inputs": 1959,
+  "source_rows": 145,
+  "source_review": "cooked-renderer-backend-ci-source-20261013.json",
+  "summary": {
+    "checks": 10,
+    "frozen_inputs": 1959,
+    "source_rows": 145,
+    "counts": {
+      "default-cpu": {
+        "passed": 87,
+        "failed": 0,
+        "ignored": 89,
+        "groups": 16
+      },
+      "cooked-cpu": {
+        "passed": 113,
+        "failed": 0,
+        "ignored": 89,
+        "groups": 16
+      }
+    },
+    "gpu_executed": false
+  },
+  "limits": [
+    "Current integration executed CPU tests only; 89 GPU tests intentionally ignored in each variant. Counts overlap across default and cooked builds.",
+    "The three preserved Claude receipts approve their immutable producer Metal builds and appearance, not a newly rendered integrated build.",
+    "Cache remains default-off and supports trusted Linux/Android Vulkan storage only; actual Linux fresh-process persistence test remains a release-CI requirement.",
+    "Default GPU tests are retained. Added cooked release tests require exact Metal/Vulkan/Dx12 adapter identity; neither current Linux nor Windows cooked execution is claimed.",
+    "No full-renderer offline adoption, cache hit/performance, physical-device or phase-gate approval."
+  ]
+}

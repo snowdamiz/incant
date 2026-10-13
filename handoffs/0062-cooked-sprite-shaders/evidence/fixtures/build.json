@@ -1,0 +1,290 @@
+{
+ "started": "2026-10-13T00:15:55.195486+00:00",
+ "tools": {
+  "cook_scene": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53",
+  "incant_headless": "e8260ae81a641e1362aed22a1a15e20b374b454757ff0814695ece807805ea50"
+ },
+ "art_manifest_sha256": "6e6355b9cc8dc604a65ac68141cace552f42dae730844d5dbc71b29196b8eee4",
+ "boards": {
+  "A": {
+   "project": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/A/A.incant.json",
+   "scene_id": "01M4S9V9TWPEPR3HD75T9ZRYWW",
+   "imports": {
+    "atlas": {
+     "asset": {
+      "id": "01M4S9V9XG5ZBCF7SZ0M405T7A",
+      "import_settings": {
+       "type": "texture",
+       "usage": "color"
+      },
+      "kind": "texture",
+      "name": "sprites.atlas",
+      "path": "art/sprites.atlas.json",
+      "sha256": "5da298b36ed7056aed94b8104225169a2b99f1e3e0e3747c4633d1f8a53cb971"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 1
+    },
+    "sheet": {
+     "asset": {
+      "id": "01M4S9V9ZW0JHJY5DVCAXZA778",
+      "import_settings": {
+       "type": "texture",
+       "usage": "color"
+      },
+      "kind": "texture",
+      "name": "sheet",
+      "path": "art/sheet.png",
+      "sha256": "2bc5c1eb3de750b096936c1efaa3aee68513e1e94e7364bc53613d7a4bffcbe1"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 2
+    },
+    "occluder": {
+     "asset": {
+      "id": "01M4S9VA21MXJ0QTTFY61ECC66",
+      "kind": "model",
+      "name": "occluder",
+      "path": "art/occluder.gltf",
+      "sha256": "c07fd3d76294428504433addf35c6fcc2ebf577a6990acbfc74b52efd935b35a"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 3
+    }
+   },
+   "entities": 55,
+   "transaction_id": "01M4S9VA5XVGRB4PBCX0BS13VS",
+   "revision": 4,
+   "request_sha256": "15cd6d7b4ba3e51ec9ed95c3616f20360528c19b0704202706819476a849c72c",
+   "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4S9V9TWFKZPM0YHY0CW12J5\",\n  \"schema_version\": 1,\n  \"valid\": true\n}",
+   "cook_stdout": "Cooked 12115 bytes",
+   "cooked": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/cooked/A.scene",
+    "sha256": "87a66d2062a9afa096b2840fa86997ac45aceb136d8fc12f8fd7327df2d0b910",
+    "bytes": 12115,
+    "version": 5
+   },
+   "authored": {
+    "A.incant.json": "873b48ceb386c43d36a46f5efd0e3321527d16057ec0440da2d2af20ce7003a4",
+    "A.incant.journal.jsonl": "b49ec8d0413b7d452d400d7cd29d6dc87bb5cce77e2c466ec740064a083b9219"
+   },
+   "cache": {
+    ".incant/cache/models/c07fd3d76294428504433addf35c6fcc2ebf577a6990acbfc74b52efd935b35a.incmodel": "c8a96a1d9d407d596ad7dab1929f694a7b0b8e7f8711a29314462e6fe7371479",
+    ".incant/cache/textures/2bc5c1eb3de750b096936c1efaa3aee68513e1e94e7364bc53613d7a4bffcbe1.json": "4d932c34e7f8c3ccfc86b9742447cbf789aae83ef16e337a9b71a96345566fcb",
+    ".incant/cache/textures/376a8c7ee1ccdf1724e1cf26ca3e68266006c86d9694f12901085e66be0601e0.ktx2": "376a8c7ee1ccdf1724e1cf26ca3e68266006c86d9694f12901085e66be0601e0",
+    ".incant/cache/textures/5da298b36ed7056aed94b8104225169a2b99f1e3e0e3747c4633d1f8a53cb971.json": "55930d6b2b61f988f6e4d37f8d1cc127298c7d69cf8e6964a359fdc4803a668b",
+    ".incant/cache/textures/b55c0c437e1e203435edab9ec3e59079763a5dc640416a478395803b019b8435.ktx2": "b55c0c437e1e203435edab9ec3e59079763a5dc640416a478395803b019b8435",
+    ".incant/cache/textures/fd8d8cce4394cf009a60b191a51d80653248fff15bbe02b78acff271e290379c.ktx2": "fd8d8cce4394cf009a60b191a51d80653248fff15bbe02b78acff271e290379c"
+   },
+   "cameras": {
+    "camera-pp": "01928c25380000000000000000000001",
+    "camera-ortho": "01928c25380000000000000000000002",
+    "camera-persp": "01928c25380000000000000000000003"
+   }
+  },
+  "W": {
+   "project": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/W/W.incant.json",
+   "scene_id": "01M4S9VABXRSJZEK8NP9W3EXBH",
+   "imports": {
+    "strip-h": {
+     "asset": {
+      "id": "01M4S9VAEMYJP2T7SF2B6FPKC7",
+      "import_settings": {
+       "type": "texture",
+       "usage": "color"
+      },
+      "kind": "texture",
+      "name": "strip-h",
+      "path": "art/strip-h.png",
+      "sha256": "6894c606e5de7963ca858142d4c926fc10ceb2a8ef2a6a4da3d29b3b16a45a41"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 1
+    },
+    "strip-v": {
+     "asset": {
+      "id": "01M4S9VAGZZF8XW2949VD2Y07G",
+      "import_settings": {
+       "type": "texture",
+       "usage": "color"
+      },
+      "kind": "texture",
+      "name": "strip-v",
+      "path": "art/strip-v.png",
+      "sha256": "997b332a68d4e53d5c52d2a09d524b9e220d5388cf89387141e24d749333ece6"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 2
+    }
+   },
+   "entities": 14,
+   "transaction_id": "01M4S9VAMSJRZ7KFCA18PV9EF0",
+   "revision": 3,
+   "request_sha256": "78aa6573db10aa3850e9a4973d33589c9edc125b5e7c40e092be74abce66dc8f",
+   "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4S9VABXGQTMNRJ5HSQDPQCH\",\n  \"schema_version\": 1,\n  \"valid\": true\n}",
+   "cook_stdout": "Cooked 3226 bytes",
+   "cooked": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/cooked/W.scene",
+    "sha256": "47ba75a736683b582a8b93e475a7a8caf538f10327f9a78903279e4d74b98776",
+    "bytes": 3226,
+    "version": 5
+   },
+   "authored": {
+    "W.incant.json": "654aa0e52978b90ed5f9ba0859611091519a7a81f164173399a73e890166d217",
+    "W.incant.journal.jsonl": "d92659994f5f372d724d99cfbf0aedaf070386b9a5a27b9bef85da18379c7691"
+   },
+   "cache": {
+    ".incant/cache/textures/2d8ec845d021d5cced65d6c46f382bbc2ddf709134d14cbdfb9728dc66024f22.ktx2": "2d8ec845d021d5cced65d6c46f382bbc2ddf709134d14cbdfb9728dc66024f22",
+    ".incant/cache/textures/6894c606e5de7963ca858142d4c926fc10ceb2a8ef2a6a4da3d29b3b16a45a41.json": "3e9c376107a4c21b4b3067190f56ef4cb7bed5faa4b5195f94b107de929450ba",
+    ".incant/cache/textures/997b332a68d4e53d5c52d2a09d524b9e220d5388cf89387141e24d749333ece6.json": "eea37eb14f17a452675f09ad695184e91749768cf83e51bedabd204b66a9cbc4",
+    ".incant/cache/textures/a54dfbfdf94afedcfba4165f6b760b8be8898f168f894741d85607f7417e9e05.ktx2": "a54dfbfdf94afedcfba4165f6b760b8be8898f168f894741d85607f7417e9e05"
+   },
+   "cameras": {
+    "camera-pp": "01928c2e380000000000000000000001",
+    "camera-ortho": "01928c2e380000000000000000000002"
+   }
+  },
+  "B": {
+   "project": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/B/B.incant.json",
+   "scene_id": "01M4S9VATGAY00KYQSJ9ASXW63",
+   "imports": {
+    "atlas": {
+     "asset": {
+      "id": "01M4S9VAX3PRTX4EWMJPHNEEKZ",
+      "import_settings": {
+       "type": "texture",
+       "usage": "color"
+      },
+      "kind": "texture",
+      "name": "sprites.atlas",
+      "path": "art/sprites.atlas.json",
+      "sha256": "5da298b36ed7056aed94b8104225169a2b99f1e3e0e3747c4633d1f8a53cb971"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 1
+    },
+    "sheet": {
+     "asset": {
+      "id": "01M4S9VAZG4MQ2NG0CHXPJ6YDW",
+      "import_settings": {
+       "type": "texture",
+       "usage": "color"
+      },
+      "kind": "texture",
+      "name": "sheet",
+      "path": "art/sheet.png",
+      "sha256": "2bc5c1eb3de750b096936c1efaa3aee68513e1e94e7364bc53613d7a4bffcbe1"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 2
+    }
+   },
+   "entities": 73,
+   "transaction_id": "01M4S9VB3A2ZDD11XJB918BYY1",
+   "revision": 3,
+   "request_sha256": "8f451775a23316b3f0b39b55ac52636fbce4076bbf094f035301f85b3c111217",
+   "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4S9VATG44Z6ZRPH60NM29QQ\",\n  \"schema_version\": 1,\n  \"valid\": true\n}",
+   "cook_stdout": "Cooked 18966 bytes",
+   "cooked": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/cooked/B.scene",
+    "sha256": "ee6de868e96a8be1e7853a8a5387c2b35c83f39f7a63a724f4618a9fc69b1210",
+    "bytes": 18966,
+    "version": 8
+   },
+   "authored": {
+    "B.incant.json": "c26c2a787b74c1ed75fe29fb8ea55c630e3b54eda30678949c1cc68c89709ea3",
+    "B.incant.journal.jsonl": "c99dd812901bedb20d7a1c2eabdb39b5d146c1c59a60cfc3e1c51507802aa5ea"
+   },
+   "cache": {
+    ".incant/cache/textures/2bc5c1eb3de750b096936c1efaa3aee68513e1e94e7364bc53613d7a4bffcbe1.json": "4d932c34e7f8c3ccfc86b9742447cbf789aae83ef16e337a9b71a96345566fcb",
+    ".incant/cache/textures/376a8c7ee1ccdf1724e1cf26ca3e68266006c86d9694f12901085e66be0601e0.ktx2": "376a8c7ee1ccdf1724e1cf26ca3e68266006c86d9694f12901085e66be0601e0",
+    ".incant/cache/textures/5da298b36ed7056aed94b8104225169a2b99f1e3e0e3747c4633d1f8a53cb971.json": "55930d6b2b61f988f6e4d37f8d1cc127298c7d69cf8e6964a359fdc4803a668b",
+    ".incant/cache/textures/b55c0c437e1e203435edab9ec3e59079763a5dc640416a478395803b019b8435.ktx2": "b55c0c437e1e203435edab9ec3e59079763a5dc640416a478395803b019b8435",
+    ".incant/cache/textures/fd8d8cce4394cf009a60b191a51d80653248fff15bbe02b78acff271e290379c.ktx2": "fd8d8cce4394cf009a60b191a51d80653248fff15bbe02b78acff271e290379c"
+   },
+   "cameras": {
+    "camera-pp": "01928c25b80000000000000000000001",
+    "camera-ortho": "01928c25b80000000000000000000002"
+   }
+  }
+ },
+ "cases": {
+  "A-pp": {
+   "board": "A",
+   "camera": "camera-pp",
+   "ticks": [
+    0
+   ],
+   "camera_hex": "01928c25380000000000000000000001",
+   "request_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301"
+  },
+  "A-ortho": {
+   "board": "A",
+   "camera": "camera-ortho",
+   "ticks": [
+    0
+   ],
+   "camera_hex": "01928c25380000000000000000000002",
+   "request_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301"
+  },
+  "A-persp": {
+   "board": "A",
+   "camera": "camera-persp",
+   "ticks": [
+    0
+   ],
+   "camera_hex": "01928c25380000000000000000000003",
+   "request_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301"
+  },
+  "W-pp": {
+   "board": "W",
+   "camera": "camera-pp",
+   "ticks": [
+    0
+   ],
+   "camera_hex": "01928c2e380000000000000000000001",
+   "request_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301"
+  },
+  "W-ortho": {
+   "board": "W",
+   "camera": "camera-ortho",
+   "ticks": [
+    0
+   ],
+   "camera_hex": "01928c2e380000000000000000000002",
+   "request_sha256": "824e45e525499ec3263a51d137b0c08a84e78f3cd4d7a83fe6a20df7e91cf301"
+  },
+  "B-pp": {
+   "board": "B",
+   "camera": "camera-pp",
+   "ticks": [
+    0,
+    48
+   ],
+   "camera_hex": "01928c25b80000000000000000000001",
+   "request_sha256": "02e9fb1061d69565803f1fc4e3eef4f2c85976bb758655e0b82e55368b12a248"
+  },
+  "B-ortho": {
+   "board": "B",
+   "camera": "camera-ortho",
+   "ticks": [
+    0,
+    48
+   ],
+   "camera_hex": "01928c25b80000000000000000000002",
+   "request_sha256": "02e9fb1061d69565803f1fc4e3eef4f2c85976bb758655e0b82e55368b12a248"
+  }
+ },
+ "tools_end": {
+  "cook_scene": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53",
+  "incant_headless": "e8260ae81a641e1362aed22a1a15e20b374b454757ff0814695ece807805ea50"
+ },
+ "finished": "2026-10-13T00:15:56.713434+00:00"
+}

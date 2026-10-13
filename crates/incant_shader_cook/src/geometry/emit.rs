@@ -7,7 +7,7 @@ use naga::{
     valid::ModuleInfo,
 };
 
-fn bounds() -> BoundsCheckPolicies {
+pub(super) fn bounds() -> BoundsCheckPolicies {
     BoundsCheckPolicies {
         index: BoundsCheckPolicy::Restrict,
         buffer: BoundsCheckPolicy::Restrict,
@@ -31,7 +31,7 @@ fn one(mut names: impl Iterator<Item = Result<String>>) -> Result<String> {
     Ok(name)
 }
 
-fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
+pub(super) fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
     use msl::{
         AttributeMapping as A, VertexBufferMapping as B, VertexBufferStepMode as S,
         VertexFormat as F,
@@ -51,7 +51,7 @@ fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
                 attribute(1, 16, F::Float32x3),
             ],
         }],
-        Kind::Shadow => vec![
+        Kind::Shadow | Kind::Material => vec![
             B {
                 id: 15,
                 stride: 48,
@@ -72,6 +72,48 @@ fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
                     .collect(),
             },
         ],
+        Kind::Text => vec![B {
+            id: 15,
+            stride: 32,
+            step_mode: S::ByInstance,
+            attributes: vec![
+                attribute(0, 0, F::Float32x4),
+                attribute(1, 16, F::Float32x4),
+            ],
+        }],
+        Kind::Ui => vec![B {
+            id: 15,
+            stride: 64,
+            step_mode: S::ByInstance,
+            attributes: vec![
+                attribute(0, 0, F::Float32x4),
+                attribute(1, 16, F::Float32x4),
+                attribute(2, 32, F::Float32x4),
+                attribute(3, 48, F::Float32x2),
+                attribute(4, 56, F::Unorm8x4),
+                attribute(5, 60, F::Uint32),
+            ],
+        }],
+        Kind::Sprite => vec![
+            B {
+                id: 15,
+                stride: 12,
+                step_mode: S::ByVertex,
+                attributes: vec![attribute(0, 0, F::Float32x3)],
+            },
+            B {
+                id: 14,
+                stride: 52,
+                step_mode: S::ByVertex,
+                attributes: vec![
+                    attribute(1, 0, F::Float32x2),
+                    attribute(2, 8, F::Float32x4),
+                    attribute(3, 24, F::Float32x4),
+                    attribute(4, 40, F::Float32x2),
+                    attribute(5, 48, F::Uint32),
+                ],
+            },
+        ],
     }
 }
 
@@ -84,14 +126,29 @@ pub(super) fn emit(
     entry: &str,
     backend: Backend,
 ) -> Result<(Vec<u8>, String)> {
+    if kind == Kind::Material {
+        return super::material_emit::emit(m, info, full, stage, entry, backend);
+    }
     let shadow = kind == Kind::Shadow;
+    let textured = kind != Kind::Diagnostic;
+    let world_text = kind == Kind::Text;
+    let atlas_group = if world_text { 2 } else { 1 };
     match backend {
         Backend::Metal => {
             let mut resources = msl::EntryPointResources::default();
             if stage == ShaderStage::Vertex {
                 // hal29 reserves one vertex lengths buffer after ordinary buffers.
-                resources.sizes_buffer = Some(u8::from(shadow));
-                if shadow {
+                resources.sizes_buffer = Some(if world_text { 2 } else { u8::from(textured) });
+                if world_text {
+                    resources.resources.insert(
+                        resource(1, 0),
+                        msl::BindTarget {
+                            buffer: Some(1),
+                            ..Default::default()
+                        },
+                    );
+                }
+                if textured {
                     resources.resources.insert(
                         resource(0, 0),
                         msl::BindTarget {
@@ -100,23 +157,34 @@ pub(super) fn emit(
                         },
                     );
                 }
-            } else if shadow {
+            } else if textured {
+                if matches!(kind, Kind::Ui | Kind::Text) {
+                    resources.resources.insert(
+                        resource(0, 0),
+                        msl::BindTarget {
+                            buffer: Some(0),
+                            ..Default::default()
+                        },
+                    );
+                }
+                if shadow {
+                    resources.resources.insert(
+                        resource(1, 0),
+                        msl::BindTarget {
+                            buffer: Some(0),
+                            ..Default::default()
+                        },
+                    );
+                }
                 resources.resources.insert(
-                    resource(1, 0),
-                    msl::BindTarget {
-                        buffer: Some(0),
-                        ..Default::default()
-                    },
-                );
-                resources.resources.insert(
-                    resource(1, 1),
+                    resource(atlas_group, u32::from(shadow)),
                     msl::BindTarget {
                         texture: Some(0),
                         ..Default::default()
                     },
                 );
                 resources.resources.insert(
-                    resource(1, 2),
+                    resource(atlas_group, 1 + u32::from(shadow)),
                     msl::BindTarget {
                         sampler: Some(msl::BindSamplerTarget::Resource(0)),
                         ..Default::default()
@@ -156,24 +224,40 @@ pub(super) fn emit(
                 lang_version: (1, 0),
                 flags: spv::WriterFlags::FORCE_POINT_SIZE,
                 fake_missing_bindings: false,
-                binding_map: if shadow {
-                    [(0, 0), (1, 0), (1, 1), (1, 2)]
-                        .into_iter()
-                        .map(|(group, binding)| {
-                            (
-                                resource(group, binding),
-                                spv::BindingInfo {
-                                    descriptor_set: group,
-                                    binding,
-                                    binding_array_size: None,
-                                },
-                            )
-                        })
-                        .collect()
+                binding_map: if textured {
+                    [
+                        (0, 0),
+                        (atlas_group, 0),
+                        (atlas_group, 1),
+                        (1, if world_text { 0 } else { 2 }),
+                    ]
+                    .into_iter()
+                    .filter(|pair| shadow || world_text || *pair != (1, 2))
+                    .map(|(group, binding)| {
+                        (
+                            resource(group, binding),
+                            spv::BindingInfo {
+                                descriptor_set: group,
+                                binding,
+                                binding_array_size: None,
+                            },
+                        )
+                    })
+                    .collect()
                 } else {
                     Default::default()
                 },
-                capabilities: Some([spv::Capability::Shader].into_iter().collect()),
+                // Nearest sprites use textureLoad; restricting its coordinates
+                // needs image extent queries, a core Vulkan shader capability.
+                capabilities: Some(
+                    [spv::Capability::Shader, spv::Capability::ImageQuery]
+                        .into_iter()
+                        .filter(|c| {
+                            matches!(kind, Kind::Sprite | Kind::Ui | Kind::Text)
+                                || *c == spv::Capability::Shader
+                        })
+                        .collect(),
+                ),
                 bounds_check_policies: bounds(),
                 force_loop_bounding: true,
                 ..Default::default()
@@ -203,7 +287,12 @@ pub(super) fn emit(
             let mut options = hlsl::Options {
                 shader_model: hlsl::ShaderModel::V6_0,
                 fake_missing_bindings: false,
-                special_constants_binding: Some(binding(if shadow { 2 } else { 0 })),
+                special_constants_binding: Some(binding(match kind {
+                    Kind::Shadow | Kind::Text => 2,
+                    Kind::Sprite | Kind::Ui => 1,
+                    Kind::Diagnostic => 0,
+                    Kind::Material => unreachable!("material emitter is separate"),
+                })),
                 restrict_indexing: true,
                 force_loop_bounding: true,
                 ..Default::default()
@@ -228,6 +317,31 @@ pub(super) fn emit(
                 options
                     .sampler_buffer_binding_map
                     .insert(hlsl::SamplerIndexBufferKey { group: 1 }, binding(5));
+                options.sampler_heap_target = hlsl::SamplerHeapBindTargets {
+                    standard_samplers: binding(0),
+                    comparison_samplers: binding(2048),
+                };
+            } else if matches!(kind, Kind::Sprite | Kind::Ui | Kind::Text) {
+                options.binding_map = [
+                    (resource(0, 0), binding(0)),
+                    (resource(atlas_group, 0), binding(0)),
+                    (
+                        resource(atlas_group, 1),
+                        hlsl::BindTarget {
+                            space: 255,
+                            register: 0,
+                            ..Default::default()
+                        },
+                    ),
+                ]
+                .into();
+                if world_text {
+                    options.binding_map.insert(resource(1, 0), binding(1));
+                }
+                options.sampler_buffer_binding_map.insert(
+                    hlsl::SamplerIndexBufferKey { group: atlas_group },
+                    binding(1),
+                );
                 options.sampler_heap_target = hlsl::SamplerHeapBindTargets {
                     standard_samplers: binding(0),
                     comparison_samplers: binding(2048),

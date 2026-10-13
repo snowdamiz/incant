@@ -17,7 +17,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
-from shipping import cargo_output, codegen
+from shipping import cargo_output, codegen, player_units
 from shipping_symbols import backend, package, require, run
 
 
@@ -64,15 +64,16 @@ for (const compile of [() => eval('1'), () => Function('return 1'),
         forbidden = ('incant_doc','incant_cmd','incant_agent','incant_editor','incant_assets','incant_audio','incant_core','incant_cook','incant_play_legacy','incant_render_authoring','loro')
         require(not any(re.search(r'--crate-name ('+'|'.join(forbidden)+r')\b', line) for line in lines), 'Authoring target dependency leaked')
         flags = {}
-        for crate in ('incant_game_player','incant_game_runtime','incant_render_game','incant_render_gpu_host','incant_render_native','incant_render','incant_render_data','incant_runtime','incant_script','incant_input','incant_audio_runtime','incant_assets_runtime','incant_physics_runtime','rapier3d','wgpu','tao','kira','cpal'):
+        for crate in ('incant_game_runtime','incant_render_game','incant_render_gpu_host','incant_render_native','incant_render','incant_render_data','incant_runtime','incant_script','incant_input','incant_audio_runtime','incant_assets_runtime','incant_physics_runtime','rapier3d','wgpu','tao','kira','cpal'):
             found = [line for line in lines if re.search(r'--crate-name '+crate+r'\b', line)]
             require(len(found) == 1 and 'feature="compiler"' not in found[0], f'Missing/duplicate/compiling source in target {crate}')
             values = codegen(found[0]); expected = {'opt-level':'3','codegen-units':'1','panic':'abort'}
-            if crate == 'incant_game_player': expected.update(lto='fat',debuginfo='2',**{'split-debuginfo':split})
             require(all(values.get(k)==v for k,v in expected.items()) and values.get('target-cpu')!='native', f'Nonshipping flags: {crate}')
             flags[crate] = {k:values[k] for k in expected}
+        flags.update(player_units(build.stderr, target, split,
+            {'default', 'physics-deterministic', 'native-window', 'render-gpu', 'render-input'}))
         artifacts = [json.loads(line) for line in build.stdout.splitlines() if line.startswith('{')]
-        executables = [a['executable'] for a in artifacts if a.get('reason')=='compiler-artifact' and a['target']['name']=='incant_game_player' and a.get('executable')]
+        executables = [a['executable'] for a in artifacts if a.get('reason')=='compiler-artifact' and a['target']['name']=='incant_game_player' and a['target']['kind']==['bin'] and a.get('executable')]
         require(len(executables)==1, 'Missing unique player')
         executable = Path(executables[0])
         symbols = run([llvm/'llvm-nm','--defined-only','--demangle',executable])

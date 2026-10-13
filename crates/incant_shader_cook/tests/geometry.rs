@@ -6,11 +6,28 @@ fn source(kind: Kind) -> &'static str {
     match kind {
         Kind::Diagnostic => include_str!("../../incant_render/src/fixture.wgsl"),
         Kind::Shadow => include_str!("../../incant_render/src/shadows/caster.wgsl"),
+        Kind::Text => include_str!("../../incant_render/src/text/text.wgsl"),
+        Kind::Ui => include_str!("../../incant_render/src/ui/ui.wgsl"),
+        Kind::Sprite => include_str!("../../incant_render/src/sprites/sprite.wgsl"),
+        Kind::Material => concat!(
+            include_str!("../../incant_render/src/shadows/shade.wgsl"),
+            "\n",
+            include_str!("../../incant_render/src/lighting/shade.wgsl"),
+            "\n",
+            include_str!("../../incant_render/src/model_material.wgsl")
+        ),
     }
 }
 #[test]
 fn fixed_geometry_artifacts_are_deterministic_and_spirv_interfaces_validate() {
-    for kind in [Kind::Diagnostic, Kind::Shadow] {
+    for kind in [
+        Kind::Diagnostic,
+        Kind::Shadow,
+        Kind::Sprite,
+        Kind::Ui,
+        Kind::Text,
+        Kind::Material,
+    ] {
         let a = cook(kind, source(kind)).unwrap();
         assert_eq!(a, cook(kind, source(kind)).unwrap());
         assert_eq!(a.artifacts.len(), 6);
@@ -59,6 +76,17 @@ fn fixed_geometry_artifacts_are_deterministic_and_spirv_interfaces_validate() {
                     (Kind::Diagnostic, _) => vec![],
                     (Kind::Shadow, Stage::Vertex) => vec![(0, 0)],
                     (Kind::Shadow, Stage::Fragment) => vec![(1, 0), (1, 1), (1, 2)],
+                    (Kind::Sprite | Kind::Ui, Stage::Vertex) => vec![(0, 0)],
+                    (Kind::Sprite, Stage::Fragment) => vec![(1, 0), (1, 1)],
+                    (Kind::Ui, Stage::Fragment) => vec![(0, 0), (1, 0), (1, 1)],
+                    (Kind::Text, Stage::Vertex) => vec![(0, 0), (1, 0)],
+                    (Kind::Text, Stage::Fragment) => vec![(0, 0), (2, 0), (2, 1)],
+                    (Kind::Material, Stage::Vertex) => vec![(0, 0)],
+                    (Kind::Material, Stage::Fragment) => std::iter::once((0, 0))
+                        .chain((0..=10).map(|b| (1, b)))
+                        .chain((0..=3).map(|b| (2, b)))
+                        .chain((0..=6).map(|b| (3, b)))
+                        .collect(),
                 }
             );
         }
@@ -66,7 +94,14 @@ fn fixed_geometry_artifacts_are_deterministic_and_spirv_interfaces_validate() {
 }
 #[test]
 fn geometry_contract_rejects_changed_bindings_io_storage_and_stage_usage() {
-    for kind in [Kind::Diagnostic, Kind::Shadow] {
+    for kind in [
+        Kind::Diagnostic,
+        Kind::Shadow,
+        Kind::Sprite,
+        Kind::Ui,
+        Kind::Text,
+        Kind::Material,
+    ] {
         for changed in [
             source(kind).replace("@location(0)", "@location(11)"),
             source(kind).replace("fn vertex(", "fn other("),
@@ -172,4 +207,73 @@ fn shader_math_and_family_are_in_artifact_identity() {
     assert_ne!(a.source_hash, b.source_hash);
     assert_ne!(a.artifacts, b.artifacts);
     assert_ne!(Kind::Diagnostic.contract(), Kind::Shadow.contract());
+}
+
+#[test]
+fn sprite_contract_refuses_sampling_interpolation_and_resource_changes() {
+    for changed in [
+        source(Kind::Sprite)
+            .replace("sampling:u32", "sampling:i32")
+            .replace("==0u", "==0"),
+        source(Kind::Sprite).replace("@interpolate(flat) uv_bounds", "uv_bounds"),
+        source(Kind::Sprite).replace("@interpolate(flat) texel_base", "texel_base"),
+        source(Kind::Sprite).replace("@binding(1) var filtering", "@binding(2) var filtering"),
+        source(Kind::Sprite).replace(
+            "var<uniform> camera: mat4x4f",
+            "var<storage,read> camera: mat4x4f",
+        ),
+        source(Kind::Sprite).replace(
+            "out.tint=input.tint",
+            "out.tint=input.tint*textureLoad(image,vec2i(0),0)",
+        ),
+    ] {
+        assert_ne!(changed, source(Kind::Sprite));
+        assert!(cook(Kind::Sprite, &changed).is_err());
+    }
+    assert!(cook(Kind::Sprite, source(Kind::Shadow)).is_err());
+    assert!(cook(Kind::Shadow, source(Kind::Sprite)).is_err());
+}
+
+#[test]
+fn sprite_native_outputs_preserve_both_vertex_bounds_and_sampler_heap_contract() {
+    let bundle = cook(Kind::Sprite, source(Kind::Sprite)).unwrap();
+    for artifact in &bundle.artifacts {
+        if artifact.backend == Backend::Vulkan {
+            continue;
+        }
+        let text = std::str::from_utf8(&artifact.bytes).unwrap();
+        let required: &[&str] = match (artifact.backend, artifact.stage) {
+            (Backend::Metal, Stage::Vertex) => &[
+                "[[buffer(0)]]",
+                "[[buffer(1)]]",
+                "[[buffer(15)]]",
+                "[[buffer(14)]]",
+                "buffer_size15 / 12",
+                "buffer_size14 / 52",
+                "[[vertex_id]]",
+            ],
+            (Backend::Metal, Stage::Fragment) => &[
+                "[[texture(0)]]",
+                "[[sampler(0)]]",
+                "get_width",
+                "get_height",
+            ],
+            (Backend::Dx12, Stage::Vertex) => &["register(b0)", "nointerpolation"],
+            (Backend::Dx12, Stage::Fragment) => &[
+                "register(t0)",
+                "register(t1, space0)",
+                "register(s0, space0)",
+                "image.Load(",
+                "nointerpolation",
+            ],
+            _ => unreachable!(),
+        };
+        for token in required {
+            assert!(text.contains(token), "{token}\n{text}");
+        }
+        if artifact.backend == Backend::Metal && artifact.stage == Stage::Vertex {
+            assert!(!text.contains("[[instance_id]]"));
+            assert!(!text.contains("[[stage_in]]"));
+        }
+    }
 }

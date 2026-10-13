@@ -1,0 +1,229 @@
+{
+ "started": "2026-10-13T00:49:52.125089+00:00",
+ "tools": {
+  "incant_headless": "ba50e683e0df74b35c8ea8bdaf44fbe64fb263bd0218cddd3ea6553cc80d40ae",
+  "cook_scene": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53"
+ },
+ "boards": {
+  "W": {
+   "project": "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/W/W.incant.json",
+   "scene_id": "01M4SBSFE884QZSX6MGMW4P4GR",
+   "imports": {
+    "NotoSans-Regular.ttf": "01M4SBSFH3GAYYEZ6NGGRFVRR2",
+    "NotoSansArabic.ttf": "01M4SBSFKSNQEWRHZCX5S27V8Q",
+    "IncantCJKFixture.ttf": "01M4SBSFP8P8RMFEZ1K6BY96EM",
+    "slate.gltf": "01M4SBSFRMH3D4NXSDN07VZ0SA",
+    "amber.gltf": "01M4SBSFV1QCAJ9BBK7CYMWJBQ",
+    "teal.gltf": "01M4SBSFXEF7MAP74H85QH84J9",
+    "floor.gltf": "01M4SBSFZV2GVXTPH1W5JH2M8N"
+   },
+   "commands": 26,
+   "transaction_id": "01M4SBSG45V0MG6SQY1B493JE7",
+   "revision": 8,
+   "request_sha256": "17f61eebd6ea3e038b49e273c0041b81d296833567eced7c2f3c14012c185083",
+   "undo_redo_restored": true,
+   "journal_reopened": true,
+   "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4SBSFE8YFPQZND3PSVR8NFT\",\n  \"schema_version\": 1,\n  \"valid\": true\n}",
+   "cook_stdout": "Cooked 5500 bytes",
+   "cooked": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/cooked/W.scene",
+    "sha256": "871671f565e3e29e760f648873d8b5ed8045169e5059565798e7d960f155fe2f",
+    "bytes": 5500
+   },
+   "authored": {
+    "W.incant.json": "85e88f8742b007a3cf0a3cd03be7282c512a1f03833557e09b296aedf2d743b8",
+    "W.incant.journal.jsonl": "ed90bec98984ccda351bf2cf3b464aab29d3d68c3b389f166ee10e134b36e003"
+   },
+   "art": {
+    "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+    "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "amber.gltf": "2af2a2df03a8b782361c5adeae1fade9130a282eb984578f819a771c25572c44",
+    "floor.gltf": "361ffa3c089931d3f034b456d3fcd8bf79d11adc55a0286e6d340e0fed49b8e2",
+    "slate.gltf": "abac29d061f7fa551eff14393caafc37c37411c6df379837ae91db914c81d7aa",
+    "teal.gltf": "5776303485047f4048422cc74d65929b8187a09a341dfbfb504ed0831d4a1b87"
+   },
+   "cache": {
+    ".incant/cache/fonts/10629e892a9c2294b0b886f9c8776ccba5358d5f678a6c5f6bb8ebcb361b3b1d.json": "2e4fbdb3b4f808e2188e96f5abb8cb7418afcb8f974d19fac83980165dd10a91",
+    ".incant/cache/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    ".incant/cache/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    ".incant/cache/fonts/8a086d1a4d5925c8b6b54d6e5ea68c6cc82840b313b3a0328bda1eef09a32298.json": "b5b291a7bcf6e29b384c7cb01c37812856f0ff6d868e56fc30d2175ac85a024c",
+    ".incant/cache/fonts/e1bf83d3ae6380b9fc5266f14c05c39b11aa3cdc9ce5c9369cb7ed6c2987d802.json": "4d495b5de5233530baa56ed954bd76458e9ad50e394dc4dbdf7c42f6e91f515b",
+    ".incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    ".incant/cache/models/8299ce0821b82a503386742bc6018c08b01f2bfa576226cfcd6739ea0e43ab78.incmodel": "ba9411d273aa3d9ef93155b05594e4e33db27583709d82f3b7e480e2aecd46e4",
+    ".incant/cache/models/ced3b7aaab93f8ef65e51ea414aac82ee0052bec0797c7d09bdd6a025df3e998.incmodel": "e958f40d1e0207d4a48de07c2834db2625cff4a761f79cdfe0e7ce5cde80dc80",
+    ".incant/cache/models/dbab9dc053726860400f294ed5f4997ea837fe9195ebf5c87b99c1f8b52f0dbd.incmodel": "70bb4d9b78e5f9ad314eb89db14320908a49d4c0abc1c806e6191d61b61744eb",
+    ".incant/cache/models/f7086cc618c9c1f59d7ff333e2fedd03e690225af6c4ee0fb15281601a2b8ca2.incmodel": "b0d9fbd6b0a1f23398d3aa2bb3eac893345289c64eb9927eaa0678ef8c18c7b6"
+   },
+   "ids": {
+    "cam_ortho": "00000000000000000000006310",
+    "cam_persp": "00000000000000000000006311",
+    "light": "00000000000000000000006312",
+    "wall": "00000000000000000000006313",
+    "panel": "00000000000000000000006314",
+    "crate": "00000000000000000000006315",
+    "mirror_parent": "00000000000000000000006316",
+    "w_latin": "00000000000000000000006320",
+    "w_arabic": "00000000000000000000006321",
+    "w_cjk": "00000000000000000000006322",
+    "w_mag": "00000000000000000000006323",
+    "w_rot": "00000000000000000000006324",
+    "w_bidi": "00000000000000000000006325",
+    "w_mirror": "00000000000000000000006326",
+    "w_child": "00000000000000000000006327",
+    "w_back": "00000000000000000000006328",
+    "w_min50": "00000000000000000000006329",
+    "w_min25": "0000000000000000000000632A",
+    "w_min12": "0000000000000000000000632B",
+    "w_yaw": "0000000000000000000000632C",
+    "w_behind": "0000000000000000000000632D",
+    "w_front": "0000000000000000000000632E",
+    "w_wrap": "0000000000000000000000632F",
+    "w_overlap_a": "00000000000000000000006330",
+    "w_overlap_b": "00000000000000000000006331",
+    "w_moving": "00000000000000000000006332"
+   }
+  },
+  "U": {
+   "project": "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/U/U.incant.json",
+   "scene_id": "01M4SBSGFDSNX2HYVMJHKB2C0F",
+   "imports": {
+    "NotoSans-Regular.ttf": "01M4SBSGJ2C8MBSJ216HXT5D1N",
+    "NotoSansArabic.ttf": "01M4SBSGMPE1XFWPE5CAM42ZPP",
+    "IncantCJKFixture.ttf": "01M4SBSGQ614HP9TW438TN32T6",
+    "slate.gltf": "01M4SBSGSJDQBYYQVBJYTV32WP",
+    "amber.gltf": "01M4SBSGVX9NH10JQN6GQ0FZ52",
+    "teal.gltf": "01M4SBSGY78YXCJSH6TT4SM0DS",
+    "floor.gltf": "01M4SBSH0RWVH9E8ZT0H2WR6DY"
+   },
+   "commands": 31,
+   "transaction_id": "01M4SBSH53Q5CESXWFX9DVFWTQ",
+   "revision": 8,
+   "request_sha256": "4e8a1a40890c447f3eb1d338f5626a5ffffe45b381e34de30c3d8c4810daa273",
+   "undo_redo_restored": true,
+   "journal_reopened": true,
+   "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4SBSGFD99969NQK8BF17VGF\",\n  \"schema_version\": 1,\n  \"valid\": true\n}",
+   "cook_stdout": "Cooked 7681 bytes",
+   "cooked": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0063/fixtures/r1/cooked/U.scene",
+    "sha256": "b785d872e8d5d6fd4fe9d9ca1e5e8166b6dca81a8f4c9ef26049d6a2e8815868",
+    "bytes": 7681
+   },
+   "authored": {
+    "U.incant.json": "772ecd398e1e2338eb8bba02f19edbaaa1c2e7a10353e09ea7d4f1aebd2fe2ca",
+    "U.incant.journal.jsonl": "b4cc9e66966091c21dc49c7808267e420d3afedd2a36048ac52cec4a0560fa3f"
+   },
+   "art": {
+    "IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+    "NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+    "NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "amber.gltf": "2af2a2df03a8b782361c5adeae1fade9130a282eb984578f819a771c25572c44",
+    "floor.gltf": "361ffa3c089931d3f034b456d3fcd8bf79d11adc55a0286e6d340e0fed49b8e2",
+    "slate.gltf": "abac29d061f7fa551eff14393caafc37c37411c6df379837ae91db914c81d7aa",
+    "teal.gltf": "5776303485047f4048422cc74d65929b8187a09a341dfbfb504ed0831d4a1b87"
+   },
+   "cache": {
+    ".incant/cache/fonts/10629e892a9c2294b0b886f9c8776ccba5358d5f678a6c5f6bb8ebcb361b3b1d.json": "2e4fbdb3b4f808e2188e96f5abb8cb7418afcb8f974d19fac83980165dd10a91",
+    ".incant/cache/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+    ".incant/cache/fonts/3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82.ifont": "49e09202aadc1c7463502004f791b596480a92d22e04b9948fabf8648a004814",
+    ".incant/cache/fonts/8a086d1a4d5925c8b6b54d6e5ea68c6cc82840b313b3a0328bda1eef09a32298.json": "b5b291a7bcf6e29b384c7cb01c37812856f0ff6d868e56fc30d2175ac85a024c",
+    ".incant/cache/fonts/e1bf83d3ae6380b9fc5266f14c05c39b11aa3cdc9ce5c9369cb7ed6c2987d802.json": "4d495b5de5233530baa56ed954bd76458e9ad50e394dc4dbdf7c42f6e91f515b",
+    ".incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+    ".incant/cache/models/8299ce0821b82a503386742bc6018c08b01f2bfa576226cfcd6739ea0e43ab78.incmodel": "ba9411d273aa3d9ef93155b05594e4e33db27583709d82f3b7e480e2aecd46e4",
+    ".incant/cache/models/ced3b7aaab93f8ef65e51ea414aac82ee0052bec0797c7d09bdd6a025df3e998.incmodel": "e958f40d1e0207d4a48de07c2834db2625cff4a761f79cdfe0e7ce5cde80dc80",
+    ".incant/cache/models/dbab9dc053726860400f294ed5f4997ea837fe9195ebf5c87b99c1f8b52f0dbd.incmodel": "70bb4d9b78e5f9ad314eb89db14320908a49d4c0abc1c806e6191d61b61744eb",
+    ".incant/cache/models/f7086cc618c9c1f59d7ff333e2fedd03e690225af6c4ee0fb15281601a2b8ca2.incmodel": "b0d9fbd6b0a1f23398d3aa2bb3eac893345289c64eb9927eaa0678ef8c18c7b6"
+   },
+   "ids": {
+    "camera": "00000000000000000000006340",
+    "light": "00000000000000000000006341",
+    "floor": "00000000000000000000006342",
+    "crate": "00000000000000000000006343",
+    "pillar": "00000000000000000000006344",
+    "sign": "00000000000000000000006345",
+    "root": "00000000000000000000006350",
+    "title": "00000000000000000000006351",
+    "body": "00000000000000000000006352",
+    "actions": "00000000000000000000006353",
+    "resume": "00000000000000000000006354",
+    "options": "00000000000000000000006355",
+    "online": "00000000000000000000006356",
+    "continue": "00000000000000000000006357",
+    "clip": "00000000000000000000006358",
+    "clip_a": "00000000000000000000006359",
+    "clip_b": "0000000000000000000000635A",
+    "clip_c": "0000000000000000000000635B",
+    "fields": "0000000000000000000000635C",
+    "name_group": "0000000000000000000000635D",
+    "name_label": "0000000000000000000000635E",
+    "name": "0000000000000000000000635F",
+    "long_group": "00000000000000000000006360",
+    "long_label": "00000000000000000000006361",
+    "long": "00000000000000000000006362",
+    "arabic_group": "00000000000000000000006363",
+    "arabic_label": "00000000000000000000006364",
+    "arabic": "00000000000000000000006365",
+    "cjk_group": "00000000000000000000006366",
+    "cjk_label": "00000000000000000000006367",
+    "cjk": "00000000000000000000006368"
+   }
+  }
+ },
+ "cases": {
+  "U-1x": {
+   "board": "U",
+   "camera": "camera",
+   "request_sha256": "ebca14ae405fc8d28da7d25457777214537e52b33db15ea650a412603281f2fe",
+   "captures": [
+    "idle",
+    "select"
+   ]
+  },
+  "U-15x": {
+   "board": "U",
+   "camera": "camera",
+   "request_sha256": "1b2c081203ba409199424181829a9ccbfd2a19217bc952b73f5b5690c1766083",
+   "captures": [
+    "preedit"
+   ]
+  },
+  "U-2x": {
+   "board": "U",
+   "camera": "camera",
+   "request_sha256": "4c27646cdb7e12b47aee3cafa3f5400ae838fe50f99ded1f22b8e2b55714d226",
+   "captures": [
+    "focus"
+   ]
+  },
+  "U-1x-unorm": {
+   "board": "U",
+   "camera": "camera",
+   "request_sha256": "be7f0c954156d6e08f2efb55572c98647d4d1d0d6633c1faeadf855bda410dc6",
+   "captures": [
+    "idle"
+   ]
+  },
+  "W-ortho": {
+   "board": "W",
+   "camera": "cam_ortho",
+   "request_sha256": "9b02a331636cf11065c64a7b7c51e4fbf90b473b08191f48fb3e09a725224c68",
+   "captures": [
+    "t1"
+   ]
+  },
+  "W-persp": {
+   "board": "W",
+   "camera": "cam_persp",
+   "request_sha256": "266ba090f3694c5181bff37fbbe710c558f630606087add74c199771237d4117",
+   "captures": [
+    "t1",
+    "t61"
+   ]
+  }
+ },
+ "tools_end": {
+  "incant_headless": "ba50e683e0df74b35c8ea8bdaf44fbe64fb263bd0218cddd3ea6553cc80d40ae",
+  "cook_scene": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53"
+ },
+ "finished": "2026-10-13T00:49:54.649372+00:00"
+}

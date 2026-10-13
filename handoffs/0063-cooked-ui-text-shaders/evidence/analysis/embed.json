@@ -1,0 +1,252 @@
+{
+ "needles": {
+  "ui.wgsl": {
+   "bytes": 5172,
+   "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39"
+  },
+  "text.wgsl": {
+   "bytes": 2392,
+   "sha256": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00"
+  },
+  "ui:Dx12-Fragment.shader": {
+   "bytes": 5523,
+   "sha256": "0213acf7f14f2337c5d0007bb79846ea24d040d3726bfe0d4d8b051959f46d43"
+  },
+  "ui:Dx12-Vertex.shader": {
+   "bytes": 3941,
+   "sha256": "d7bb2ed8d4664b4273a28473e407669c971793c5e1830cd651b88bcc02c0ecad"
+  },
+  "ui:Metal-Fragment.shader": {
+   "bytes": 5641,
+   "sha256": "eac6bb07ed249abd2dc3e9a04da6008ca27e8e77342f4169b6c76cb5828e8ea7"
+  },
+  "ui:Metal-Vertex.shader": {
+   "bytes": 7079,
+   "sha256": "12b8e29f1d86a07dcd51f4f537b4da0ccae89e42600707c01968f20f32dfc93c"
+  },
+  "ui:Vulkan-Fragment.shader": {
+   "bytes": 6464,
+   "sha256": "e9d8c3036792948d27676b8eb69aac55015b5154fa674c39bee3b26cb0321231"
+  },
+  "ui:Vulkan-Vertex.shader": {
+   "bytes": 5424,
+   "sha256": "928c7feed700898cbbdcac9419bc5a87749c55dd5973e0fe40cefc0fc6a78fc4"
+  },
+  "text:Dx12-Fragment.shader": {
+   "bytes": 3341,
+   "sha256": "abccfe866c0b43f12193aa565309e9bb9964ecac95d004cbcb124bf9b8790392"
+  },
+  "text:Dx12-Vertex.shader": {
+   "bytes": 1698,
+   "sha256": "5a134501054f4578307429a36ef2ad2957133c5cc7217de1dd132ba84b8fb52c"
+  },
+  "text:Metal-Fragment.shader": {
+   "bytes": 3252,
+   "sha256": "544de5a743845d270f3f019fc911cb4a2475b807d564e428101ec2956909b471"
+  },
+  "text:Metal-Vertex.shader": {
+   "bytes": 3011,
+   "sha256": "7d9061de9b1b525c438d2f6f84e17a10331435311a5a88b118cd5bbc1e20741d"
+  },
+  "text:Vulkan-Fragment.shader": {
+   "bytes": 3572,
+   "sha256": "12e2566c89fad670f774ee7a248739df5d99fa7195df3610f20864ca70427262"
+  },
+  "text:Vulkan-Vertex.shader": {
+   "bytes": 2256,
+   "sha256": "223f6485185e88e68946052dc537af82fa3ce6e23f6120b54b5e9d771db8c79f"
+  }
+ },
+ "binaries": {
+  "baseline/incant_render-lib-tests": {
+   "sha256": "7db28f4a37bf3589512af3d9596b2d8d52b954f2c81302b6ea6c946ecd8fa8b1",
+   "counts": {
+    "ui.wgsl": 1,
+    "text.wgsl": 1,
+    "ui:Dx12-Fragment.shader": 0,
+    "ui:Dx12-Vertex.shader": 0,
+    "ui:Metal-Fragment.shader": 0,
+    "ui:Metal-Vertex.shader": 0,
+    "ui:Vulkan-Fragment.shader": 0,
+    "ui:Vulkan-Vertex.shader": 0,
+    "text:Dx12-Fragment.shader": 0,
+    "text:Dx12-Vertex.shader": 0,
+    "text:Metal-Fragment.shader": 0,
+    "text:Metal-Vertex.shader": 0,
+    "text:Vulkan-Fragment.shader": 0,
+    "text:Vulkan-Vertex.shader": 0
+   }
+  },
+  "baseline/model_gpu": {
+   "sha256": "f88b756c9b08e13e505ffb991d86473224b729d8e7a3c1de3ae3cf345348f48b",
+   "counts": {
+    "ui.wgsl": 1,
+    "text.wgsl": 1,
+    "ui:Dx12-Fragment.shader": 0,
+    "ui:Dx12-Vertex.shader": 0,
+    "ui:Metal-Fragment.shader": 0,
+    "ui:Metal-Vertex.shader": 0,
+    "ui:Vulkan-Fragment.shader": 0,
+    "ui:Vulkan-Vertex.shader": 0,
+    "text:Dx12-Fragment.shader": 0,
+    "text:Dx12-Vertex.shader": 0,
+    "text:Metal-Fragment.shader": 0,
+    "text:Metal-Vertex.shader": 0,
+    "text:Vulkan-Fragment.shader": 0,
+    "text:Vulkan-Vertex.shader": 0
+   }
+  },
+  "baseline/gpu_host-ui": {
+   "sha256": "2ddea6d0c9feea0132eb62c96010ac20b179df8e7bc120c0713a9afec4045ba7",
+   "counts": {
+    "ui.wgsl": 1,
+    "text.wgsl": 1,
+    "ui:Dx12-Fragment.shader": 0,
+    "ui:Dx12-Vertex.shader": 0,
+    "ui:Metal-Fragment.shader": 0,
+    "ui:Metal-Vertex.shader": 0,
+    "ui:Vulkan-Fragment.shader": 0,
+    "ui:Vulkan-Vertex.shader": 0,
+    "text:Dx12-Fragment.shader": 0,
+    "text:Dx12-Vertex.shader": 0,
+    "text:Metal-Fragment.shader": 0,
+    "text:Metal-Vertex.shader": 0,
+    "text:Vulkan-Fragment.shader": 0,
+    "text:Vulkan-Vertex.shader": 0
+   }
+  },
+  "baseline/gpu_host-game": {
+   "sha256": "9ad9f5af3fdd4abd45bfe7e9d79ee79abdd0f147a19d3c0e6cbb73058c8c9e94",
+   "counts": {
+    "ui.wgsl": 1,
+    "text.wgsl": 1,
+    "ui:Dx12-Fragment.shader": 0,
+    "ui:Dx12-Vertex.shader": 0,
+    "ui:Metal-Fragment.shader": 0,
+    "ui:Metal-Vertex.shader": 0,
+    "ui:Vulkan-Fragment.shader": 0,
+    "ui:Vulkan-Vertex.shader": 0,
+    "text:Dx12-Fragment.shader": 0,
+    "text:Dx12-Vertex.shader": 0,
+    "text:Metal-Fragment.shader": 0,
+    "text:Metal-Vertex.shader": 0,
+    "text:Vulkan-Fragment.shader": 0,
+    "text:Vulkan-Vertex.shader": 0
+   }
+  },
+  "baseline/ui_text_review": {
+   "sha256": "bc380a6b8992a6b421434f48e41fa3ba91384eacb31d1118e68ebd7eedb01721",
+   "counts": {
+    "ui.wgsl": 1,
+    "text.wgsl": 1,
+    "ui:Dx12-Fragment.shader": 0,
+    "ui:Dx12-Vertex.shader": 0,
+    "ui:Metal-Fragment.shader": 0,
+    "ui:Metal-Vertex.shader": 0,
+    "ui:Vulkan-Fragment.shader": 0,
+    "ui:Vulkan-Vertex.shader": 0,
+    "text:Dx12-Fragment.shader": 0,
+    "text:Dx12-Vertex.shader": 0,
+    "text:Metal-Fragment.shader": 0,
+    "text:Metal-Vertex.shader": 0,
+    "text:Vulkan-Fragment.shader": 0,
+    "text:Vulkan-Vertex.shader": 0
+   }
+  },
+  "candidate/incant_render-lib-tests": {
+   "sha256": "79c0316736862bbd408bcb236d19645b258e38cc4314f882ca8a73302ebe937c",
+   "counts": {
+    "ui.wgsl": 1,
+    "text.wgsl": 1,
+    "ui:Dx12-Fragment.shader": 2,
+    "ui:Dx12-Vertex.shader": 2,
+    "ui:Metal-Fragment.shader": 2,
+    "ui:Metal-Vertex.shader": 2,
+    "ui:Vulkan-Fragment.shader": 2,
+    "ui:Vulkan-Vertex.shader": 2,
+    "text:Dx12-Fragment.shader": 2,
+    "text:Dx12-Vertex.shader": 2,
+    "text:Metal-Fragment.shader": 2,
+    "text:Metal-Vertex.shader": 2,
+    "text:Vulkan-Fragment.shader": 2,
+    "text:Vulkan-Vertex.shader": 2
+   }
+  },
+  "candidate/model_gpu": {
+   "sha256": "9c24b655bd5a1325dc8644680a4a0b16571ca2cd30a918b209e1bd611b2773cb",
+   "counts": {
+    "ui.wgsl": 0,
+    "text.wgsl": 0,
+    "ui:Dx12-Fragment.shader": 1,
+    "ui:Dx12-Vertex.shader": 1,
+    "ui:Metal-Fragment.shader": 1,
+    "ui:Metal-Vertex.shader": 1,
+    "ui:Vulkan-Fragment.shader": 1,
+    "ui:Vulkan-Vertex.shader": 1,
+    "text:Dx12-Fragment.shader": 1,
+    "text:Dx12-Vertex.shader": 1,
+    "text:Metal-Fragment.shader": 1,
+    "text:Metal-Vertex.shader": 1,
+    "text:Vulkan-Fragment.shader": 1,
+    "text:Vulkan-Vertex.shader": 1
+   }
+  },
+  "candidate/gpu_host-ui": {
+   "sha256": "7a29c04d6cd16dd3a6252a515ca4f1973aaf6ce7f0fc50a5abdce4bebe2b098a",
+   "counts": {
+    "ui.wgsl": 0,
+    "text.wgsl": 0,
+    "ui:Dx12-Fragment.shader": 1,
+    "ui:Dx12-Vertex.shader": 1,
+    "ui:Metal-Fragment.shader": 1,
+    "ui:Metal-Vertex.shader": 1,
+    "ui:Vulkan-Fragment.shader": 1,
+    "ui:Vulkan-Vertex.shader": 1,
+    "text:Dx12-Fragment.shader": 1,
+    "text:Dx12-Vertex.shader": 1,
+    "text:Metal-Fragment.shader": 1,
+    "text:Metal-Vertex.shader": 1,
+    "text:Vulkan-Fragment.shader": 1,
+    "text:Vulkan-Vertex.shader": 1
+   }
+  },
+  "candidate/gpu_host-game": {
+   "sha256": "62d432b3c4b5a1b5e604f5405d222383ba29d171957face7cb90914fbe458fe8",
+   "counts": {
+    "ui.wgsl": 0,
+    "text.wgsl": 0,
+    "ui:Dx12-Fragment.shader": 1,
+    "ui:Dx12-Vertex.shader": 1,
+    "ui:Metal-Fragment.shader": 1,
+    "ui:Metal-Vertex.shader": 1,
+    "ui:Vulkan-Fragment.shader": 1,
+    "ui:Vulkan-Vertex.shader": 1,
+    "text:Dx12-Fragment.shader": 1,
+    "text:Dx12-Vertex.shader": 1,
+    "text:Metal-Fragment.shader": 1,
+    "text:Metal-Vertex.shader": 1,
+    "text:Vulkan-Fragment.shader": 1,
+    "text:Vulkan-Vertex.shader": 1
+   }
+  },
+  "candidate/ui_text_review": {
+   "sha256": "be25c2760c8cc23a885caaeb106a890da088a9859fd022629e9151b6be813780",
+   "counts": {
+    "ui.wgsl": 0,
+    "text.wgsl": 0,
+    "ui:Dx12-Fragment.shader": 1,
+    "ui:Dx12-Vertex.shader": 1,
+    "ui:Metal-Fragment.shader": 1,
+    "ui:Metal-Vertex.shader": 1,
+    "ui:Vulkan-Fragment.shader": 1,
+    "ui:Vulkan-Vertex.shader": 1,
+    "text:Dx12-Fragment.shader": 1,
+    "text:Dx12-Vertex.shader": 1,
+    "text:Metal-Fragment.shader": 1,
+    "text:Metal-Vertex.shader": 1,
+    "text:Vulkan-Fragment.shader": 1,
+    "text:Vulkan-Vertex.shader": 1
+   }
+  }
+ }
+}

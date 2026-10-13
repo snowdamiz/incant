@@ -9,7 +9,7 @@ fn projection(size: f64, near: f64, far: f64) -> serde_json::Value {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn orthographic_size_clipping_and_retained_projection_match_authored_world_units() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(emissive([1., 0., 0.], 1., "OPAQUE"));
     let id = camera(
         &mut f,
@@ -60,7 +60,7 @@ fn orthographic_size_clipping_and_retained_projection_match_authored_world_units
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f =
         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":1,"roughnessFactor":0.25}}));
     f.environment(
@@ -102,7 +102,7 @@ fn orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f =
         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.6}}));
     f.environment(

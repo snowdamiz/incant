@@ -59,7 +59,7 @@ pub(super) fn sphere(fixture: &mut Fixture) {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn studio_environment_renders_metal_and_dielectric_across_roughness() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
     sphere(&mut fixture);
     let mut outputs = Vec::new();
@@ -110,7 +110,7 @@ fn metal() -> Fixture {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn authored_environments_preserve_color_space_versions_and_source_free_loading() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = metal();
     let id = fixture.environment(&[128, 64, 32, 255].repeat(2), 2, 1, TextureUsage::Color);
     let original_document = fixture.project.clone();
@@ -167,7 +167,7 @@ fn authored_environments_preserve_color_space_versions_and_source_free_loading()
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn environment_intensity_rotation_and_roughness_change_real_reflections() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = metal();
     // Source +Z hemisphere is red, -Z blue; no downloaded artwork.
     let pixels: Vec<u8> = (0..32)
@@ -231,7 +231,7 @@ fn environment_intensity_rotation_and_roughness_change_real_reflections() {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn malformed_environment_cannot_replace_a_retained_scene() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = metal();
     fixture.environment(&[80, 80, 80, 255].repeat(2), 2, 1, TextureUsage::Color);
     let valid = fixture.scene(&renderer);

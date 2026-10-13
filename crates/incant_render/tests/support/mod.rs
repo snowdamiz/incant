@@ -66,3 +66,43 @@ pub fn fixture(root: &Path) -> (Project, AssetStore, String) {
     assets.sync(&project, &root.join(".incant/cache")).unwrap();
     (project, assets, id)
 }
+
+// Only GPU tests read this variable; production construction stays unchanged.
+pub fn checked(renderer: crate::Renderer) -> crate::Renderer {
+    match std::env::var("INCANT_EXPECT_GPU_BACKEND") {
+        Ok(expected) => {
+            let info = renderer.adapter.get_info();
+            require_backend(&expected, &format!("{:?}", info.backend)).unwrap();
+            eprintln!("Incant required GPU backend: {expected}; actual adapter: {info:?}");
+        }
+        Err(std::env::VarError::NotPresent) => {}
+        Err(error) => panic!("invalid expected backend: {error}"),
+    }
+    renderer
+}
+
+fn require_backend(expected: &str, actual: &str) -> Result<(), &'static str> {
+    if !matches!(expected, "Metal" | "Vulkan" | "Dx12") {
+        return Err("unknown required native GPU backend");
+    }
+    if actual != expected {
+        return Err("actual GPU backend does not match required backend");
+    }
+    Ok(())
+}
+
+#[test]
+fn required_backend_rejects_unknown_and_mismatched_adapters() {
+    for expected in ["Metal", "Vulkan", "Dx12"] {
+        assert_eq!(require_backend(expected, expected), Ok(()));
+        for actual in ["Metal", "Vulkan", "Dx12", "Gl", "BrowserWebGpu", "Noop"] {
+            assert_eq!(
+                require_backend(expected, actual).is_ok(),
+                expected == actual
+            );
+        }
+    }
+    for invalid in ["", "metal", "all", "Gl", "Vulkan,Dx12"] {
+        assert!(require_backend(invalid, invalid).is_err());
+    }
+}

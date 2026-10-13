@@ -28,7 +28,7 @@ fn oracle(f: &mut Fixture, r: &Renderer, name: &str) {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn distinct_colored_lights_preserve_energy_across_mask_words() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     for z in 0..3 {
         for y in 0..4 {
@@ -61,7 +61,7 @@ fn distinct_colored_lights_preserve_energy_across_mask_words() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn visible_depth_boundary_patches_match_all_light_oracle() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     let view = glam::Mat4::look_at_rh(glam::Vec3::new(6., 5., 9.), glam::Vec3::ZERO, glam::Vec3::Y)
         .inverse();
@@ -134,7 +134,7 @@ fn visible_depth_boundary_patches_match_all_light_oracle() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn local_range_edges_and_hdr_specular_materials_render_repeatably() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     let id = light(
         &mut f,

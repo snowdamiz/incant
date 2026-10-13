@@ -1,0 +1,108 @@
+{
+ "png_budget": 1,
+ "steps": [
+  {
+   "label": "M-wide",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/M.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/textures",
+   "camera": "01928c4a280000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": false,
+     "png": "M-wide-source-free.png"
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "M-close",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/M.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/textures",
+   "camera": "01928c4a280000000000000000000002",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": false
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "L-persp",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/L.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/textures",
+   "camera": "01928c49f40000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": false
+    },
+    {
+     "tick": 90,
+     "width": 960,
+     "height": 540,
+     "controls": false
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "Z1",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/Z1.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/Z1/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4fb80000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 480,
+     "height": 270,
+     "controls": false
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "R-v1",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/R-v1.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/R/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4c380000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 480,
+     "height": 270,
+     "controls": false
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "R-v2",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/R-v2.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/R/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4c380000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 480,
+     "height": 270,
+     "controls": false
+    }
+   ],
+   "despawn": []
+  }
+ ]
+}

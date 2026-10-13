@@ -1,0 +1,47 @@
+{
+ "board": "B",
+ "at": "2026-10-13T00:21:39.440479+00:00",
+ "removed": {
+  "B/B.incant.json": "c26c2a787b74c1ed75fe29fb8ea55c630e3b54eda30678949c1cc68c89709ea3",
+  "B/B.incant.journal.jsonl": "c99dd812901bedb20d7a1c2eabdb39b5d146c1c59a60cfc3e1c51507802aa5ea",
+  "B/art/alpha.png": "c84d4fe5cc544fbaf82daf91bfb734a0cb996915d93853fc4629ad6b05d4508e",
+  "B/art/arrow.png": "45d78b8ca6205babeb927f2670093dceaf826127d7f29ce6bc38349ca267a7c1",
+  "B/art/checker.png": "c8fb2dcb71fd835e3d18d6fa0f58fa532340c90cbfefd8d140786027c8987a74",
+  "B/art/f0.png": "4c38475a95e62bd61c1e4fce7d8cbd2712fa585854151181f02d6d7d24be804e",
+  "B/art/f1.png": "bbe138eaf6de2f4e6d34a3b8509ae9a8aaac83ea76aea3657528535089433d06",
+  "B/art/f2.png": "115afac28c0b8322fd00f9667d6378474a9094f4cc2325b2c3f5fbc93976b2de",
+  "B/art/f3.png": "c2876bda6f8a2b2723cd092260377aacf9faad49b40752a9cd1a30de3d612b6c",
+  "B/art/f4.png": "a8cffd73b33562435b527dd4feb0af84ef400ac5a5fee97f4f4c816cc8fd4364",
+  "B/art/nine.png": "3a5a3836e1c67bf138944301b1acb4e3c72a53fd44f33748b7c3344fa26a1fbf",
+  "B/art/occluder.bin": "81db260ef7944c9a80c2ea25b588fc4aedf78556914da6c58091b42e38c18abd",
+  "B/art/occluder.gltf": "8190e0654732a19c80c7d94db05f9d3aac67594e32e5925376a9c91e20eebebb",
+  "B/art/ring.png": "d9ccb1299fa680de6e6a663307a30738797c3990c25e708b09cae4e011c3a94b",
+  "B/art/sheet.png": "e034cd0f452a94550885f8ff9f7082c3dcbeac750470656c975830cd1c510d31",
+  "B/art/sprites.atlas.json": "3e86d3dea05cbf90d989b53e017d8329281ad34215bb0234e49cdc5f543dcfbc",
+  "B/art/strip-h.png": "38fdd61e06e6cdfd2b4ea2ede2b6b116c253ae3c80f3ce8fe4207f6c51cfb222",
+  "B/art/strip-v.png": "cf2b733a0cf5deadb87ac46b0f5f08d0714e38a9308d9f04b82f2be770367cd1",
+  "B/art/t0.png": "4af617fb27d15b7271fc185884d4c6c9f0255e380950769bd6b57d2d5cbe09c8",
+  "B/art/t1.png": "e86a924dc7e926017b7327ce417a5d0acb2525459cf701cd1c32b986bce1471b",
+  "B/art/t2.png": "948bce42ae756373395bbd4d89593cc962e8e14b7281ebd22b2ef95e2112e054",
+  "B/art/t3.png": "6d9b51bf53fd68796108c25c0e32a66e98a358850593f78adaa72419e1c63dbc"
+ },
+ "private_copy": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/private-fixture/B",
+ "kept_unchanged": true,
+ "kept": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/cooked/B.scene": "ee6de868e96a8be1e7853a8a5387c2b35c83f39f7a63a724f4618a9fc69b1210",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/B/.incant/cache/textures/2bc5c1eb3de750b096936c1efaa3aee68513e1e94e7364bc53613d7a4bffcbe1.json": "4d932c34e7f8c3ccfc86b9742447cbf789aae83ef16e337a9b71a96345566fcb",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/B/.incant/cache/textures/376a8c7ee1ccdf1724e1cf26ca3e68266006c86d9694f12901085e66be0601e0.ktx2": "376a8c7ee1ccdf1724e1cf26ca3e68266006c86d9694f12901085e66be0601e0",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/B/.incant/cache/textures/5da298b36ed7056aed94b8104225169a2b99f1e3e0e3747c4633d1f8a53cb971.json": "55930d6b2b61f988f6e4d37f8d1cc127298c7d69cf8e6964a359fdc4803a668b",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/B/.incant/cache/textures/b55c0c437e1e203435edab9ec3e59079763a5dc640416a478395803b019b8435.ktx2": "b55c0c437e1e203435edab9ec3e59079763a5dc640416a478395803b019b8435",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/B/.incant/cache/textures/fd8d8cce4394cf009a60b191a51d80653248fff15bbe02b78acff271e290379c.ktx2": "fd8d8cce4394cf009a60b191a51d80653248fff15bbe02b78acff271e290379c"
+ },
+ "remaining_in_project": [
+  ".incant-source-transactions/lock",
+  ".incant/cache/textures/2bc5c1eb3de750b096936c1efaa3aee68513e1e94e7364bc53613d7a4bffcbe1.json",
+  ".incant/cache/textures/376a8c7ee1ccdf1724e1cf26ca3e68266006c86d9694f12901085e66be0601e0.ktx2",
+  ".incant/cache/textures/5da298b36ed7056aed94b8104225169a2b99f1e3e0e3747c4633d1f8a53cb971.json",
+  ".incant/cache/textures/b55c0c437e1e203435edab9ec3e59079763a5dc640416a478395803b019b8435.ktx2",
+  ".incant/cache/textures/fd8d8cce4394cf009a60b191a51d80653248fff15bbe02b78acff271e290379c.ktx2"
+ ],
+ "no_authoring_or_art_left": false
+}

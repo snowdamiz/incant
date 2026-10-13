@@ -27,6 +27,7 @@
 //! Motion writes one 256-byte transform slot per node and nothing else.
 mod drawing;
 mod geometry;
+mod shader;
 use crate::{ResourceError, Result, SceneError};
 pub(crate) use drawing::TextDraw;
 pub use geometry::{
@@ -191,50 +192,72 @@ pub(crate) struct TextSystem {
     atlas_uploads: AtomicU64,
     glyph_uploads: AtomicU64,
 }
-impl TextSystem {
-    pub fn new(device: &wgpu::Device) -> Self {
-        let uniform = |visibility, dynamic, size: u64| wgpu::BindGroupLayoutEntry {
+fn uniform_entry(
+    visibility: wgpu::ShaderStages,
+    dynamic: bool,
+    size: u64,
+) -> wgpu::BindGroupLayoutEntry {
+    wgpu::BindGroupLayoutEntry {
+        binding: 0,
+        visibility,
+        ty: wgpu::BindingType::Buffer {
+            ty: wgpu::BufferBindingType::Uniform,
+            has_dynamic_offset: dynamic,
+            min_binding_size: std::num::NonZeroU64::new(size),
+        },
+        count: None,
+    }
+}
+
+fn frame_entry() -> wgpu::BindGroupLayoutEntry {
+    uniform_entry(
+        wgpu::ShaderStages::VERTEX_FRAGMENT,
+        false,
+        size_of::<drawing::FrameUniform>() as u64,
+    )
+}
+
+fn node_entry() -> wgpu::BindGroupLayoutEntry {
+    uniform_entry(wgpu::ShaderStages::VERTEX, true, 64)
+}
+
+fn atlas_entries() -> [wgpu::BindGroupLayoutEntry; 2] {
+    [
+        wgpu::BindGroupLayoutEntry {
             binding: 0,
-            visibility,
-            ty: wgpu::BindingType::Buffer {
-                ty: wgpu::BufferBindingType::Uniform,
-                has_dynamic_offset: dynamic,
-                min_binding_size: std::num::NonZeroU64::new(size),
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Texture {
+                sample_type: wgpu::TextureSampleType::Float { filterable: true },
+                view_dimension: wgpu::TextureViewDimension::D2,
+                multisampled: false,
             },
             count: None,
-        };
+        },
+        wgpu::BindGroupLayoutEntry {
+            binding: 1,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+            count: None,
+        },
+    ]
+}
+impl TextSystem {
+    pub fn new(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let frame = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Text frame camera and color"),
-            entries: &[uniform(
-                wgpu::ShaderStages::VERTEX_FRAGMENT,
-                false,
-                size_of::<drawing::FrameUniform>() as u64,
-            )],
+            entries: &[frame_entry()],
         });
         let nodes = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Text node transform slot"),
-            entries: &[uniform(wgpu::ShaderStages::VERTEX, true, 64)],
+            entries: &[node_entry()],
         });
         let atlas = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Text coverage atlas"),
-            entries: &[
-                wgpu::BindGroupLayoutEntry {
-                    binding: 0,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Texture {
-                        sample_type: wgpu::TextureSampleType::Float { filterable: true },
-                        view_dimension: wgpu::TextureViewDimension::D2,
-                        multisampled: false,
-                    },
-                    count: None,
-                },
-                wgpu::BindGroupLayoutEntry {
-                    binding: 1,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
-                    count: None,
-                },
-            ],
+            entries: &atlas_entries(),
         });
         let sampler = device.create_sampler(&wgpu::SamplerDescriptor {
             label: Some("Text coverage bilinear"),
@@ -242,8 +265,8 @@ impl TextSystem {
             min_filter: wgpu::FilterMode::Linear,
             ..Default::default()
         });
-        let pipeline = drawing::pipeline(device, [&frame, &nodes, &atlas]);
-        Self {
+        let pipeline = drawing::pipeline(device, [&frame, &nodes, &atlas], backend, cache)?;
+        Ok(Self {
             frame,
             nodes,
             atlas,
@@ -252,7 +275,7 @@ impl TextSystem {
             cache: Mutex::default(),
             atlas_uploads: AtomicU64::new(0),
             glyph_uploads: AtomicU64::new(0),
-        }
+        })
     }
     pub fn uploads(&self) -> TextUploads {
         TextUploads {

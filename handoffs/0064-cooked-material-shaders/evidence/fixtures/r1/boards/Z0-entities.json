@@ -1,0 +1,35 @@
+[
+ {
+  "id": "01JA64ZE100000000000000001",
+  "name": "camera",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     3.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 45.0,
+    "near": 0.1,
+    "far": 20.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  }
+ }
+]

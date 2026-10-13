@@ -153,7 +153,7 @@ fn is_blue(p: [u8; 4]) -> bool {
 #[test]
 #[ignore = "requires a native GPU; desktop workflows execute this"]
 fn sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(
         &[
             255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255, 255, 255, 255, 255,
@@ -242,7 +242,7 @@ fn sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels() {
 #[test]
 #[ignore = "requires a native GPU; desktop workflows execute this"]
 fn sprite_layers_order_and_alpha_follow_painter_semantics() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(&[255; 4], 1, 1);
     f.edit("tint", json!([1, 0, 0, 1]));
     let mut top = f.project.scenes[&f.scene].entities[&f.sprite].clone();
@@ -274,7 +274,7 @@ fn sprite_layers_order_and_alpha_follow_painter_semantics() {
 #[test]
 #[ignore = "requires a native GPU; desktop workflows execute this"]
 fn nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut pixels = Vec::new();
     for y in 0..3 {
         for x in 0..3 {
@@ -316,7 +316,7 @@ fn nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fr
 #[test]
 #[ignore = "requires a native GPU; desktop workflows execute this"]
 fn inherited_sprite_transforms_and_queued_reimports_survive_scene_drop() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(&[255, 0, 0, 255], 1, 1);
     let baseline = f.pixels(&r);
     let mut parent = Entity::new("Parent");

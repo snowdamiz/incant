@@ -195,7 +195,7 @@ fn game_with(text: bool) -> (Game, Probe) {
         scene
     };
     let scene = CookedScene::from_bytes(&scene.to_bytes()).unwrap();
-    let renderer = Arc::new(Renderer::headless().unwrap());
+    let renderer = Arc::new(models::checked(Renderer::headless().unwrap()));
     let texture = renderer.device.create_texture(&wgpu::TextureDescriptor {
         label: Some("Native hosted game probe"),
         size: wgpu::Extent3d {

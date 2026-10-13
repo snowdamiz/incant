@@ -1,0 +1,417 @@
+//! Handoff 0063 bounded offscreen review helper (packet-local, adapted from the
+//! repository's `incant_render_gpu_host` `ui_review` example). One cooked scene
+//! with its model, texture and font caches runs through the composed game
+//! (HostedOfflineGameSession, NativeRenderHost, GpuRenderConsumer) into one
+//! offscreen target of at most 960x540. A JSON plan gives one tick per step,
+//! optional routed keys or explicit UI receipts, and the steps to capture. Each
+//! capture is the frame the consumer submitted for that tick. No window, OS
+//! input/IME, presentation or performance claim; output I/O is not atomic.
+use incant_game_runtime::HostedOfflineGameSession;
+use incant_input::{InputEvent, KeyCode};
+use incant_render::{Renderer, RetainedTarget, wgpu};
+use incant_render_game::{NativeRenderHost, NativeRenderSettings, UiSettings};
+use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings, RenderFrame, TargetProvider};
+use incant_runtime::{CookedScene, StableId};
+use incant_script::CompiledScript;
+use incant_ui::UiEvent;
+use serde::Deserialize;
+use serde_json::json;
+use std::{error::Error, path::Path, sync::Arc, time::Duration};
+
+type Result<T> = std::result::Result<T, Box<dyn Error>>;
+type Game = HostedOfflineGameSession<NativeRenderHost<GpuRenderConsumer<Targets>>>;
+const MAX_SIZE: [u32; 2] = [960, 540];
+const MAX_CAPTURES: usize = 8;
+const MAX_STEPS: usize = 600;
+
+#[derive(Debug, thiserror::Error)]
+#[error("review target unavailable")]
+struct TargetError;
+struct Targets(wgpu::Texture, wgpu::TextureFormat);
+struct Frame(wgpu::TextureView, [u32; 2], wgpu::TextureFormat);
+impl TargetProvider for Targets {
+    type Error = TargetError;
+    type Frame = Frame;
+    fn acquire(&mut self, _: &Renderer) -> std::result::Result<Frame, TargetError> {
+        Ok(Frame(
+            self.0.create_view(&Default::default()),
+            [self.0.width(), self.0.height()],
+            self.1,
+        ))
+    }
+}
+impl RenderFrame for Frame {
+    type Error = TargetError;
+    fn target(&self) -> RetainedTarget<'_> {
+        RetainedTarget {
+            view: &self.0,
+            format: self.2,
+            width: self.1[0],
+            height: self.1[1],
+            viewport: None,
+        }
+    }
+    fn present(self) -> std::result::Result<(), TargetError> {
+        Ok(())
+    }
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Request {
+    /// Authored camera entity, 32 hexadecimal digits.
+    camera: String,
+    /// "rgba8unorm-srgb" or "rgba8unorm".
+    format: String,
+    /// Physical target size.
+    size: [u32; 2],
+    /// Logical UI viewport; absent means no screen-space UI host.
+    #[serde(default)]
+    ui_viewport: Option<[f32; 2]>,
+    steps: Vec<Step>,
+}
+/// One fixed tick. At most one UI receipt kind per step.
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct Step {
+    #[serde(default)]
+    keys: Vec<(KeyCode, bool)>,
+    #[serde(default)]
+    focus: Option<String>,
+    #[serde(default)]
+    pointer: Option<(String, bool)>,
+    #[serde(default)]
+    commit: Option<String>,
+    #[serde(default)]
+    preedit: Option<(String, Option<[usize; 2]>)>,
+    #[serde(default)]
+    capture: Option<String>,
+}
+
+/// Crockford base32 ULID text to its 128-bit stable ID.
+fn ulid(text: &str) -> Result<StableId> {
+    const DIGITS: &[u8] = b"0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+    if text.len() != 26 {
+        return Err("ULID length".into());
+    }
+    let value = text.bytes().try_fold(0u128, |n, c| {
+        let digit = DIGITS.iter().position(|d| *d == c).ok_or("ULID digit")?;
+        n.checked_mul(32)
+            .map(|n| n + digit as u128)
+            .ok_or("ULID range")
+    })?;
+    Ok(StableId(value.to_be_bytes()))
+}
+fn ulid_text(id: StableId) -> String {
+    const DIGITS: &[u8] = b"0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+    let value = u128::from_be_bytes(id.0);
+    (0..26)
+        .rev()
+        .map(|i| DIGITS[((value >> (5 * i)) & 31) as usize] as char)
+        .collect()
+}
+fn hex_id(text: &str) -> Result<StableId> {
+    if text.len() != 32 || !text.bytes().all(|c| c.is_ascii_hexdigit()) {
+        return Err("camera must be 32 hexadecimal digits".into());
+    }
+    let mut id = [0u8; 16];
+    for (i, byte) in id.iter_mut().enumerate() {
+        *byte = u8::from_str_radix(&text[i * 2..i * 2 + 2], 16)?;
+    }
+    Ok(StableId(id))
+}
+fn read(path: &Path, limit: u64) -> Result<Vec<u8>> {
+    use std::io::Read;
+    let mut bytes = Vec::new();
+    std::fs::File::open(path)?
+        .take(limit + 1)
+        .read_to_end(&mut bytes)?;
+    if bytes.len() as u64 > limit {
+        return Err(format!("{} exceeds {limit} bytes", path.display()).into());
+    }
+    Ok(bytes)
+}
+
+fn pixels(renderer: &Renderer, texture: &wgpu::Texture) -> Result<Vec<u8>> {
+    let [w, h] = [texture.width(), texture.height()];
+    let stride = (w * 4).div_ceil(256) * 256;
+    let buffer = renderer.device.create_buffer(&wgpu::BufferDescriptor {
+        label: Some("0063 review readback"),
+        size: u64::from(stride) * u64::from(h),
+        usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
+        mapped_at_creation: false,
+    });
+    let mut encoder = renderer.device.create_command_encoder(&Default::default());
+    encoder.copy_texture_to_buffer(
+        texture.as_image_copy(),
+        wgpu::TexelCopyBufferInfo {
+            buffer: &buffer,
+            layout: wgpu::TexelCopyBufferLayout {
+                offset: 0,
+                bytes_per_row: Some(stride),
+                rows_per_image: Some(h),
+            },
+        },
+        texture.size(),
+    );
+    renderer.queue.submit([encoder.finish()]);
+    let (tx, rx) = std::sync::mpsc::channel();
+    buffer
+        .slice(..)
+        .map_async(wgpu::MapMode::Read, move |r| drop(tx.send(r)));
+    renderer.device.poll(wgpu::PollType::Wait {
+        submission_index: None,
+        timeout: Some(Duration::from_secs(10)),
+    })?;
+    rx.recv_timeout(Duration::from_secs(10))??;
+    let mapped = buffer.slice(..).get_mapped_range();
+    let bytes = mapped
+        .chunks(stride as usize)
+        .flat_map(|row| row[..w as usize * 4].iter().copied())
+        .collect();
+    drop(mapped);
+    buffer.unmap();
+    Ok(bytes)
+}
+fn write_png(path: &Path, rgba: &[u8], size: [u32; 2]) -> Result<()> {
+    let file = std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(path)?;
+    let mut encoder = png::Encoder::new(file, size[0], size[1]);
+    encoder.set_color(png::ColorType::Rgba);
+    encoder.set_depth(png::BitDepth::Eight);
+    encoder.write_header()?.write_image_data(rgba)?;
+    Ok(())
+}
+
+fn receipts(game: &Game, step: &Step) -> Result<(Vec<UiEvent>, Option<serde_json::Value>)> {
+    let kinds = [
+        step.focus.is_some(),
+        step.pointer.is_some(),
+        step.commit.is_some(),
+        step.preedit.is_some(),
+    ];
+    if kinds.iter().filter(|k| **k).count() > 1 {
+        return Err("one UI receipt kind per step".into());
+    }
+    if !kinds.iter().any(|k| *k) {
+        return Ok((vec![], None));
+    }
+    let host = game.host().map_err(|e| e.to_string())?;
+    let ui = host.ui().ok_or("UI receipt without a UI host")?;
+    if let Some(id) = &step.focus {
+        return Ok((vec![UiEvent::Focus(ulid(id)?)], None));
+    }
+    if let Some((id, pressed)) = &step.pointer {
+        let input = host.ui_input().ok_or("UI input")?;
+        let target = ulid(id)?;
+        let widget = input
+            .widgets
+            .iter()
+            .find(|w| w.id == target)
+            .ok_or("pointer widget")?;
+        let [l, t, r, b] = widget.visible;
+        let position = [(l + r) / 2., (t + b) / 2.];
+        let pointer = json!({"widget": id, "position": position, "pressed": pressed});
+        return Ok((
+            vec![UiEvent::Pointer {
+                position,
+                pressed: *pressed,
+                target: ui.pointer_token().ok_or("pointer token")?,
+            }],
+            Some(pointer),
+        ));
+    }
+    let target = ui.focus().ok_or("text receipt without focus")?;
+    if let Some(text) = &step.commit {
+        return Ok((
+            vec![UiEvent::Commit {
+                target,
+                text: text.clone(),
+            }],
+            None,
+        ));
+    }
+    let (text, cursor) = step.preedit.as_ref().ok_or("receipt kind")?;
+    Ok((
+        vec![UiEvent::Preedit {
+            target,
+            text: text.clone(),
+            cursor: cursor.map(|[a, b]| a..b),
+        }],
+        None,
+    ))
+}
+
+fn ui_state(game: &Game) -> Result<serde_json::Value> {
+    let host = game.host().map_err(|e| e.to_string())?;
+    let Some(ui) = host.ui() else {
+        return Ok(serde_json::Value::Null);
+    };
+    let fields: serde_json::Map<_, _> = ui
+        .widgets()
+        .iter()
+        .filter_map(|w| {
+            ui.text(w.id).map(|b| {
+                (
+                    ulid_text(w.id),
+                    json!({"text": b.text(), "display": b.display_text(),
+                        "selection": b.display_selection().map(|s| [s.anchor, s.focus]),
+                        "preedit": b.preedit().map(|p| [p.display_range.start, p.display_range.end])}),
+                )
+            })
+        })
+        .collect();
+    let stats = host.consumer().ui_stats();
+    let input = host.ui_input();
+    Ok(json!({
+        "focus": ui.focus().map(|f| ulid_text(f.widget())),
+        "fields": fields,
+        "stats": stats.map(|s| json!({"widgets": s.widgets, "glyph_quads": s.glyph_quads,
+            "quads": s.quads, "missing_glyphs": s.missing_glyphs, "gpu_bytes": s.gpu_bytes})),
+        "widgets": input.map(|i| i.widgets.iter().map(|w| json!({
+            "id": ulid_text(w.id), "bounds": w.bounds, "visible": w.visible, "clip": w.clip,
+        })).collect::<Vec<_>>()),
+    }))
+}
+
+fn main() -> Result<()> {
+    let args: Vec<_> = std::env::args().skip(1).collect();
+    let [scene, models, textures, fonts, request, out] = &args[..] else {
+        return Err("usage: ui_text_review <cooked-scene> <model-cache> <texture-cache> <font-cache> <request-json> <new-output-directory>".into());
+    };
+    let request: Request = serde_json::from_slice(&read(Path::new(request), 64 * 1024)?)?;
+    let format = match request.format.as_str() {
+        "rgba8unorm-srgb" => wgpu::TextureFormat::Rgba8UnormSrgb,
+        "rgba8unorm" => wgpu::TextureFormat::Rgba8Unorm,
+        _ => return Err("format must be rgba8unorm-srgb or rgba8unorm".into()),
+    };
+    let size = request.size;
+    if size.iter().zip(MAX_SIZE).any(|(n, max)| *n == 0 || *n > max) {
+        return Err("target exceeds 960x540".into());
+    }
+    let captures = request.steps.iter().filter(|s| s.capture.is_some()).count();
+    if request.steps.is_empty() || request.steps.len() > MAX_STEPS || captures > MAX_CAPTURES {
+        return Err("step or capture budget".into());
+    }
+    if let Some(viewport) = request.ui_viewport
+        && viewport.iter().any(|n| !n.is_finite() || *n < 1.)
+    {
+        return Err("UI viewport".into());
+    }
+    let camera = hex_id(&request.camera)?;
+    let scene = CookedScene::from_bytes(&read(Path::new(scene), 128 * 1024 * 1024)?)?;
+    let out = Path::new(out);
+    std::fs::create_dir(out)?;
+    let renderer = Arc::new(Renderer::headless().map_err(|e| e.to_string())?);
+    let adapter = renderer.adapter.get_info();
+    let texture = renderer.device.create_texture(&wgpu::TextureDescriptor {
+        label: Some("0063 review target"),
+        size: wgpu::Extent3d {
+            width: size[0],
+            height: size[1],
+            depth_or_array_layers: 1,
+        },
+        mip_level_count: 1,
+        sample_count: 1,
+        dimension: wgpu::TextureDimension::D2,
+        format,
+        usage: wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::COPY_SRC,
+        view_formats: &[],
+    });
+    let guest = CompiledScript::compile(
+        "exports.default={update({input,log}){for(const e of input.ui.events)log(e.kind+' '+e.entity_id+('value' in e?' '+e.value:''));}};",
+    )?;
+    let mut game = Game::new(
+        scene,
+        guest,
+        Default::default(),
+        vec![],
+        48000,
+        NativeRenderSettings {
+            ui: request.ui_viewport.map(UiSettings::new),
+            text: Some(incant_render_native::TextSettings::new(fonts.into())),
+            model_cache: models.into(),
+            texture_cache: textures.into(),
+            camera,
+            consumer: GpuRenderSettings {
+                renderer: Arc::clone(&renderer),
+                targets: Targets(texture.clone(), format),
+            },
+        },
+    )
+    .map_err(|e| e.to_string())?;
+    let startup = (renderer.ui_uploads(), renderer.text_uploads());
+    let mut records = Vec::new();
+    for (index, step) in request.steps.iter().enumerate() {
+        let physical: Vec<_> = step
+            .keys
+            .iter()
+            .map(|&(code, down)| InputEvent::Key { code, down })
+            .collect();
+        let (ui_events, pointer) = receipts(&game, step)?;
+        let mut pcm = vec![0.; game.next_output_frames().map_err(|e| e.to_string())? * 2];
+        if request.ui_viewport.is_some() {
+            game.tick_with_ui(&physical, &ui_events, &mut pcm)
+                .map_err(|e| e.to_string())?;
+        } else {
+            if !ui_events.is_empty() {
+                return Err("UI receipts need a UI viewport".into());
+            }
+            game.tick(&physical, &mut pcm).map_err(|e| e.to_string())?;
+        }
+        let Some(name) = &step.capture else { continue };
+        let rgba = pixels(&renderer, &texture)?;
+        let file = format!("{name}.png");
+        write_png(&out.join(&file), &rgba, size)?;
+        let host = game.host().map_err(|e| e.to_string())?;
+        let (ui_uploads, text_uploads) = (renderer.ui_uploads(), renderer.text_uploads());
+        records.push(json!({
+            "step": index, "capture": name, "png": file,
+            "rgba_sha256": incant_assets_runtime::sha256(&rgba),
+            "tick": game.world().map_err(|e| e.to_string())?.tick(),
+            "accepted_frames": host.consumer().accepted_frames(),
+            "scene_stats": host.consumer().stats(),
+            "ui": ui_state(&game)?,
+            "pointer": pointer,
+            "uploads_since_startup": {
+                "ui_atlas_textures": ui_uploads.atlas_textures - startup.0.atlas_textures,
+                "ui_quad_buffers": ui_uploads.quad_buffers - startup.0.quad_buffers,
+                "ui_frame_writes": ui_uploads.frame_writes - startup.0.frame_writes,
+                "text_atlas_textures": text_uploads.atlas_textures - startup.1.atlas_textures,
+                "text_glyph_buffers": text_uploads.glyph_buffers - startup.1.glyph_buffers,
+            },
+            "startup_uploads": {
+                "ui_atlas_textures": startup.0.atlas_textures, "ui_quad_buffers": startup.0.quad_buffers,
+                "text_atlas_textures": startup.1.atlas_textures, "text_glyph_buffers": startup.1.glyph_buffers,
+            },
+        }));
+    }
+    renderer.check_device().map_err(|e| e.to_string())?;
+    let logs: Vec<_> = game
+        .logs()
+        .map_err(|e| e.to_string())?
+        .entries()
+        .iter()
+        .map(|e| json!({"tick": e.tick, "message": e.message}))
+        .collect();
+    let report = json!({
+        "format": "incant-0063-ui-text-review",
+        "adapter": {"name": adapter.name, "backend": format!("{:?}", adapter.backend),
+            "device_type": format!("{:?}", adapter.device_type), "driver": adapter.driver,
+            "driver_info": adapter.driver_info},
+        "target_format": format!("{format:?}"), "size": size, "ui_viewport": request.ui_viewport,
+        "steps": request.steps.len(), "final_tick": game.world().map_err(|e| e.to_string())?.tick(),
+        "failed": game.is_failed(), "guest_logs": logs, "captures": records,
+        "scope": "composed-game offscreen frames from one cooked scene and its caches; no window, OS input or presentation",
+    });
+    let text = serde_json::to_string_pretty(&report)? + "\n";
+    std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(out.join("report.json"))
+        .and_then(|mut f| std::io::Write::write_all(&mut f, text.as_bytes()))?;
+    println!("{}", out.join("report.json").display());
+    Ok(())
+}

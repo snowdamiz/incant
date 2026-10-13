@@ -16,7 +16,7 @@ fn decode(png: &[u8]) -> Vec<u8> {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn opposing_normal_maps_preserve_the_geometric_shadow_boundary() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, camera, caster, light) = fixture();
     set(
         &mut f,

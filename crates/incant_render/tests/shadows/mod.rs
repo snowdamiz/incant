@@ -140,7 +140,7 @@ fn pixel(png: &[u8], world: [f32; 2]) -> [u8; 4] {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, camera, caster, light) = fixture();
     let prepared = f.scene(&r).with_camera(&camera).unwrap();
     let shadow = capture(&f, &r, &camera, "shadow-enabled");
@@ -259,7 +259,7 @@ fn directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn offscreen_casters_and_multiple_directional_shadow_slots_remain_visible() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, camera, caster, light) = fixture();
     // Caster is outside the camera frustum, but its ray reaches receiver origin.
     set(
@@ -371,7 +371,7 @@ fn separate_receiver_asset(f: &mut Fixture) {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, camera, caster, _light) = fixture();
     separate_receiver_asset(&mut f);
     // Left half opaque, right half transparent; magnification is nearest.

@@ -57,7 +57,7 @@ fn read(r: &Renderer, target: &wgpu::Texture) -> Vec<u8> {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let (mut f, camera, caster, light) = fixture();
     let mut extra = Entity::new("Second queued sun");
     extra.components.insert(

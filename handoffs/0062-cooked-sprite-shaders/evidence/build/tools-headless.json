@@ -1,0 +1,61 @@
+{
+ "step": "headless",
+ "head": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+ "frozen": {
+  "incant_headless": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/tools/incant_headless",
+   "sha256": "e8260ae81a641e1362aed22a1a15e20b374b454757ff0814695ece807805ea50",
+   "bytes": 60493472,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/incant_headless",
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "fresh": false
+  }
+ },
+ "builds": [
+  {
+   "label": "incant-headless",
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0062-cooked-sprite-shaders/tools/cargo",
+    "build",
+    "-p",
+    "incant_headless",
+    "--bin",
+    "incant_headless",
+    "--locked",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0062-cooked-sprite-shaders",
+   "env": {
+    "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target"
+   },
+   "started": "2026-10-12T23:35:15.091619+00:00",
+   "ended": "2026-10-12T23:36:12.851082+00:00",
+   "exit": 0,
+   "stdout_sha256": "62309a600c08183f505269fc44b80f46f99cc3f21d0d212facb81ce417367ed9",
+   "stderr_sha256": "3f230e68b2f280c8a183c500c0287a05334e9ed623df829f61e229e54655fc8d",
+   "artifacts": [
+    {
+     "target": "incant_headless",
+     "kind": [
+      "bin"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/incant_headless",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0062-cooked-sprite-shaders/crates/incant_headless#0.0.1"
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-12T23:36:12.943549+00:00"
+}

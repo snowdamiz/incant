@@ -1,0 +1,10 @@
+{
+  "packet": "0064-cooked-material-shaders",
+  "granted_at": "2026-10-13T01:01:42.909472+00:00",
+  "owner": "Claude Opus5.5 Max via ACP",
+  "prior_gpu_release_sha256": "a327d4706169d3d19d26061cebeaccd7426928a0cb043049c588f50fbe49dc29",
+  "prior_target_lease_sha256": "8269967a26f83152d39001c12d64d49fdb081591e2558d007f5ef87adfa50c36",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "restrictions": "Serial offscreen only;24frames max960x540; bounded children; no native windows or desktop capture;0063 may not reacquire.",
+  "owned_prior_processes": []
+}
