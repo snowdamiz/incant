@@ -60,5 +60,5 @@ This default-off API coordinates opaque in-memory ECS and primitive physics
 owners. It does not enable persisted physics, caller-supplied byte restoration,
 script/host/session checkpointing, GPU or device gates. Budget limits and retained
 native refusals remain as documented in the
-[producer contract](native-world-checkpoints.md). Final repaired evidence review
-and a new exact-head required fast gate precede publication.
+[producer contract](native-world-checkpoints.md). Final independent repaired evidence review is accepted (`03f84b12`), with its
+receipt retained. A new exact-head required fast gate precedes publication.
