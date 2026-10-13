@@ -1,5 +1,13 @@
 # Implementation status
 
+The private retained mobile Rust host now passes seven focused lifecycle controls
+and all 28 player library tests, three strict Clippy configurations, the runtime
+dependency/manifest guards and iOS library compilation. It reuses one cooked native
+game/render-input/mixer owner across callbacks and retires stale deliveries. This
+is CPU and compilation evidence; real mobile surface, input/IME and device-audio
+adapters remain unfinished. Producer final independent review and integration
+are pending. [Scope](docs/spikes/mobile-retained-host.md).
+
 The default-off persisted native game path has passing joined CPU qualification:
 267 script/game/player cases in each numerical mode, including separate-process
 save/resume with real fractional PCM timing. Thirteen current checks pass;
