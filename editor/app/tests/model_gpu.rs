@@ -4,12 +4,14 @@ mod render_scene;
 #[path = "../../../crates/incant_render/tests/support/mod.rs"]
 mod support;
 
+use incant_render::Renderer;
+
 #[test]
 #[ignore = "requires a native GPU; run by desktop and macOS workflows"]
 fn editor_publishes_complete_revisions_and_recovers_after_failed_replacements() {
     let temp = tempfile::tempdir().unwrap();
     let (mut project, _, id) = support::fixture(temp.path());
-    let renderer = incant_render::Renderer::headless().unwrap();
+    let renderer = support::checked(Renderer::headless().unwrap());
     let mut runtime = render_scene::SceneRuntime::new(&renderer).unwrap();
     assert!(runtime.needs_update(0));
     runtime
