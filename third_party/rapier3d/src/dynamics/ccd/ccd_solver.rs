@@ -42,6 +42,19 @@ impl CCDSolver {
         Self::default()
     }
 
+    /// Borrows the exact persistent CCD cache for trusted same-owner observation.
+    ///
+    /// Outer `None` is uninitialized/invalidated. Inner `None` is the full-BVH
+    /// fallback; an empty slice is a populated empty cache. Prediction bits and
+    /// list order are unchanged. No validation, allocation or mutation occurs.
+    /// This default-off adapter does not authorize hostile saves or restoration.
+    #[cfg(feature = "incant-checkpoint")]
+    pub fn checkpoint_fixed_targets(&self) -> Option<(Real, Option<&[(ColliderHandle, Aabb)]>)> {
+        self.fixed_targets_cache
+            .as_ref()
+            .map(|(prediction, targets)| (*prediction, targets.as_deref()))
+    }
+
     /// Discards the cached fixed-target list used by the non-bullet continuous pass.
     /// This must be called any time the fixed targets change. If using the physics pipeline,
     /// it is called for you. If not, it must be called manually.
