@@ -16,6 +16,25 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored iOS static Wasm — producer execution passed
+
+Ordinary iOS export now accepts one public captured Wasm scene module through
+pinned wasm2c and the existing native bulk runtime. Complete captured/bundle,
+explicit iOS destination, selected physics graph, five actual solver artifacts,
+shipping Rust codegen and target C commands are checked. Both physics families
+have simulator/device archives; twelve fresh C/Swift simulator processes match
+17,856 full-field scalars and 614,400 PCM bytes each after private source/cache/
+build/maps removal, and fifty-two exact refusals pass. Both device archives link
+unsigned with C/Swift; no device execution is claimed. The first simulator
+compiler output was reused after a reviewed observer-only correction, explicitly
+qualified rather than called a new build. A separate simulator teardown failure
+is retained; the complete retry passed without source/archive changes.
+Source/probe reviews are accepted; final execution review and current-main
+integration remain pending. Android static Wasm, mixed per-entity TypeScript and
+static guest checkpoints remain refused. No phone, minimum-OS, performance,
+rendering, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-ios-wasm.md).
+
 ## Bounded offline PCM streaming — CPU shipping proof accepted
 
 The ordinary player now stages PCM with one tick buffer and an 8 KiB encoder,
