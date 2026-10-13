@@ -32,7 +32,7 @@ fn grid_readback(r: &Renderer, plan: LightPlan) -> (Vec<u32>, Vec<u32>) {
             &shadows,
         )
         .unwrap();
-    frame.compute.as_ref().unwrap().encode(&mut encoder);
+    frame.compute.as_ref().unwrap().encode(&mut encoder, None);
     let grid = r
         .lighting
         .buffers(&r.device, [5, 3], lights.local.div_ceil(32).max(1))

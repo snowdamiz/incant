@@ -3,7 +3,7 @@ use super::{
     *,
 };
 use std::sync::Arc;
-const QUERIES: u32 = 2 + 2 * GPU_PASS_COUNT as u32;
+const QUERIES: u32 = 2 * GPU_PASS_COUNT as u32;
 const BYTES: u64 = QUERIES as u64 * 8;
 struct Buffers {
     queries: wgpu::QuerySet,
@@ -14,6 +14,8 @@ pub(crate) struct Profiler {
     buffers: [Arc<Buffers>; GPU_TIMING_CAPACITY],
     pool: Pool,
     period: f32,
+    device: wgpu::Device,
+    queue: wgpu::Queue,
 }
 pub(crate) struct Capture {
     buffers: Arc<Buffers>,
@@ -21,6 +23,8 @@ pub(crate) struct Capture {
     period: f32,
     pairs: [Option<u32>; GPU_PASS_COUNT],
     count: u32,
+    device: wgpu::Device,
+    queue: wgpu::Queue,
 }
 impl Profiler {
     pub fn new(device: &wgpu::Device, queue: &wgpu::Queue) -> Result<Self, GpuTimingError> {
@@ -52,23 +56,23 @@ impl Profiler {
             buffers,
             pool: Pool::default(),
             period,
+            device: device.clone(),
+            queue: queue.clone(),
         })
     }
-    pub fn begin(
-        &self,
-        encoder: &mut wgpu::CommandEncoder,
-    ) -> Result<Option<Capture>, GpuTimingError> {
+    pub fn begin(&self) -> Result<Option<Capture>, GpuTimingError> {
         let Some(lease) = self.pool.reserve()? else {
             return Ok(None);
         };
         let buffers = Arc::clone(&self.buffers[lease.index]);
-        encoder.write_timestamp(&buffers.queries, 0);
         Ok(Some(Capture {
             buffers,
             lease,
             period: self.period,
             pairs: [None; GPU_PASS_COUNT],
-            count: 2,
+            count: 0,
+            device: self.device.clone(),
+            queue: self.queue.clone(),
         }))
     }
     pub fn take(&self) -> Result<Option<GpuFrameTiming>, GpuTimingError> {
@@ -78,34 +82,71 @@ impl Profiler {
         self.pool.stats()
     }
 }
-impl Capture {
-    pub fn start(&mut self, encoder: &mut wgpu::CommandEncoder, pass: GpuPass) {
-        debug_assert!(self.pairs[pass.index()].is_none());
-        self.pairs[pass.index()] = Some(self.count);
-        encoder.write_timestamp(&self.buffers.queries, self.count);
-        self.count += 2;
+/// One logical group may span several real passes (shadow cascades).
+pub(crate) struct PassQueries {
+    queries: wgpu::QuerySet,
+    start: u32,
+    end: u32,
+}
+impl PassQueries {
+    pub fn render(&self) -> wgpu::RenderPassTimestampWrites<'_> {
+        self.render_range(true, true)
     }
-    pub fn end(&self, encoder: &mut wgpu::CommandEncoder, pass: GpuPass) {
-        if let Some(start) = self.pairs[pass.index()] {
-            encoder.write_timestamp(&self.buffers.queries, start + 1);
+    pub fn render_range(&self, first: bool, last: bool) -> wgpu::RenderPassTimestampWrites<'_> {
+        wgpu::RenderPassTimestampWrites {
+            query_set: &self.queries,
+            beginning_of_pass_write_index: first.then_some(self.start),
+            end_of_pass_write_index: last.then_some(self.end),
         }
     }
+    pub fn compute(&self) -> wgpu::ComputePassTimestampWrites<'_> {
+        wgpu::ComputePassTimestampWrites {
+            query_set: &self.queries,
+            beginning_of_pass_write_index: Some(self.start),
+            end_of_pass_write_index: Some(self.end),
+        }
+    }
+}
+impl Capture {
+    pub fn pass(&mut self, pass: GpuPass) -> PassQueries {
+        debug_assert!(self.pairs[pass.index()].is_none());
+        self.pairs[pass.index()] = Some(self.count);
+        let queries = PassQueries {
+            queries: self.buffers.queries.clone(),
+            start: self.count,
+            end: self.count + 1,
+        };
+        self.count += 2;
+        queries
+    }
+    #[cfg(not(target_arch = "wasm32"))]
     pub fn finish(self, encoder: &mut wgpu::CommandEncoder) {
+        // The frame owns this callback. Abandoning it drops the lease; actual
+        // completion keeps the exact device/query owner alive for deferred resolve.
+        encoder.on_submitted_work_done(move || self.resolve());
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    fn resolve(self) {
         let Self {
             buffers,
             lease,
             period,
             pairs,
             count,
+            device,
+            queue,
         } = self;
-        encoder.write_timestamp(&buffers.queries, 1);
-        encoder.resolve_query_set(&buffers.queries, 0..count, &buffers.resolve, 0);
+        // Metal stage counters become visible after the sampled command buffer
+        // finishes. Encode and submit the resolve from the completion callback,
+        // after query initialization is known to the queue. Never wait in the frame.
+        let mut resolve = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
+            label: Some("Incant completed timestamp resolve"),
+        });
+        resolve.resolve_query_set(&buffers.queries, 0..count, &buffers.resolve, 0);
         let bytes = u64::from(count) * 8;
-        encoder.copy_buffer_to_buffer(&buffers.resolve, 0, &buffers.readback, 0, bytes);
+        resolve.copy_buffer_to_buffer(&buffers.resolve, 0, &buffers.readback, 0, bytes);
         let readback = buffers.readback.clone();
-        // Deferred mapping is owned by the command buffer. Dropping an unsubmitted
-        // command buffer drops the lease and makes its fixed slot reusable.
-        encoder.map_buffer_on_submit(
+        resolve.map_buffer_on_submit(
             &buffers.readback,
             wgpu::MapMode::Read,
             0..bytes,
@@ -122,6 +163,11 @@ impl Capture {
                 lease.complete(sample);
             },
         );
+        queue.submit([resolve.finish()]);
+    }
+    #[cfg(target_arch = "wasm32")]
+    pub fn finish(self, _encoder: &mut wgpu::CommandEncoder) {
+        unreachable!("native GPU timing is refused before construction on WebAssembly");
     }
 }
 pub(super) fn decode(
@@ -147,7 +193,7 @@ pub(super) fn decode(
     let mut passes = [None; GPU_PASS_COUNT];
     for (pass, pair) in passes.iter_mut().zip(pairs) {
         if let Some(index) = pair {
-            if index < 2 || index + 1 >= count {
+            if index + 1 >= count {
                 return Err(GpuTimingError::Payload);
             }
             *pass = Some(span(
@@ -160,7 +206,7 @@ pub(super) fn decode(
     Ok(GpuFrameTiming {
         sequence,
         timestamp_period_ns: period,
-        frame: span(ticks[0], ticks[1], period)?,
+        frame: span(ticks[0], ticks[count as usize - 1], period)?,
         passes,
     })
 }

@@ -129,8 +129,13 @@ pub(crate) struct OutputDraw {
     target: wgpu::TextureView,
 }
 impl OutputDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        queries: Option<&crate::timing::PassQueries>,
+    ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+            timestamp_writes: queries.map(|q| q.render()),
             label: Some("Tone map scene and compose display backdrop"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: &self.target,

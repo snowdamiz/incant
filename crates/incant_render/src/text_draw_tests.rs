@@ -107,7 +107,7 @@ fn hdr_text(renderer: &Renderer, input: &SceneInput, size: [u32; 2]) -> Vec<[f32
         )
         .unwrap()
         .expect("visible text")
-        .encode(&mut encoder);
+        .encode(&mut encoder, None);
     let stride = (size[0] * 8).div_ceil(256) * 256;
     let buffer = renderer.device.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Text HDR readback"),

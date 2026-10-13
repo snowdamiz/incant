@@ -3,8 +3,8 @@
 //! Results are bounded and asynchronous; an unread/full pool skips measurement.
 mod pool;
 mod recorder;
-pub(crate) use recorder::Capture;
 pub(crate) use recorder::Profiler;
+pub(crate) use recorder::{Capture, PassQueries};
 use serde::Serialize;
 
 pub const GPU_TIMING_CAPACITY: usize = 3;
@@ -61,7 +61,7 @@ pub struct GpuTimingStats {
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq, thiserror::Error)]
 pub enum GpuTimingError {
-    #[error("native encoder timestamp queries are unavailable on this adapter")]
+    #[error("native pass timestamp queries are unavailable on this adapter")]
     Unsupported,
     #[error("invalid GPU timestamp period")]
     Period,
@@ -85,8 +85,7 @@ pub(crate) fn required_features(
     if !enabled {
         return Ok(wgpu::Features::empty());
     }
-    let required =
-        wgpu::Features::TIMESTAMP_QUERY | wgpu::Features::TIMESTAMP_QUERY_INSIDE_ENCODERS;
+    let required = wgpu::Features::TIMESTAMP_QUERY;
     if cfg!(target_arch = "wasm32") || !supported.contains(required) {
         return Err(GpuTimingError::Unsupported);
     }

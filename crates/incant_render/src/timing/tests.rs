@@ -6,12 +6,14 @@ fn absent_capability_fails_explicitly_without_changing_defaults() {
         required_features(false, wgpu::Features::empty()).unwrap(),
         wgpu::Features::empty()
     );
-    for supported in [wgpu::Features::empty(), wgpu::Features::TIMESTAMP_QUERY] {
-        assert_eq!(
-            required_features(true, supported),
-            Err(GpuTimingError::Unsupported)
-        );
-    }
+    assert_eq!(
+        required_features(true, wgpu::Features::empty()),
+        Err(GpuTimingError::Unsupported)
+    );
+    assert_eq!(
+        required_features(true, wgpu::Features::TIMESTAMP_QUERY).unwrap(),
+        wgpu::Features::TIMESTAMP_QUERY
+    );
 }
 #[test]
 fn integer_delta_preserves_small_intervals_and_rejects_reversed_clocks() {
@@ -105,7 +107,7 @@ fn delayed_cross_thread_completion_does_not_change_new_owner_or_reuse_pending_sl
 }
 #[test]
 fn decoded_pass_labels_follow_their_query_pairs_not_execution_order() {
-    let raw: Vec<_> = [100u64, 400, 110, 150, 160, 350]
+    let raw: Vec<_> = [100u64, 150, 160, 200, 210, 400]
         .into_iter()
         .flat_map(u64::to_ne_bytes)
         .collect();

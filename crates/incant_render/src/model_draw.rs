@@ -120,7 +120,11 @@ pub(crate) struct ModelDraw {
     draws: Vec<Draw>,
 }
 impl ModelDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        queries: Option<&crate::timing::PassQueries>,
+    ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Imported model geometry"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
@@ -140,7 +144,7 @@ impl ModelDraw {
                 }),
                 stencil_ops: None,
             }),
-            timestamp_writes: None,
+            timestamp_writes: queries.map(|q| q.render()),
             occlusion_query_set: None,
             multiview_mask: None,
         });

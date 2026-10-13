@@ -35,15 +35,10 @@ impl Encoder {
     fn timed(
         &mut self,
         pass: crate::timing::GpuPass,
-        encode: impl FnOnce(&mut wgpu::CommandEncoder),
+        encode: impl FnOnce(&mut wgpu::CommandEncoder, Option<&crate::timing::PassQueries>),
     ) {
-        if let Some(capture) = &mut self.1 {
-            capture.start(&mut self.0, pass);
-        }
-        encode(&mut self.0);
-        if let Some(capture) = &self.1 {
-            capture.end(&mut self.0, pass);
-        }
+        let queries = self.1.as_mut().map(|capture| capture.pass(pass));
+        encode(&mut self.0, queries.as_ref());
     }
 }
 #[cfg(not(target_arch = "wasm32"))]
@@ -191,14 +186,10 @@ impl FrameGraph {
             schedule,
             timings,
         } = &mut *state;
-        let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
+        let encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
             label: Some("Incant frame graph"),
         });
-        let capture = timings
-            .as_ref()
-            .map(|p| p.begin(&mut encoder))
-            .transpose()?
-            .flatten();
+        let capture = timings.as_ref().map(|p| p.begin()).transpose()?.flatten();
         insert_frame(world, frame, Encoder(encoder, capture));
         schedule.run(world);
         // No frame handles remain in the scheduler after encoding. Wgpu retains
@@ -211,8 +202,8 @@ impl FrameGraph {
     }
 }
 fn initialize_scene(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    encoder.timed(crate::timing::GpuPass::InitializeScene, |e| {
-        frame.diagnostics.encode(e)
+    encoder.timed(crate::timing::GpuPass::InitializeScene, |e, q| {
+        frame.diagnostics.encode(e, q)
     });
 }
 fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
@@ -221,33 +212,43 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         .as_ref()
         .and_then(|m| m.lighting.compute.as_ref())
     {
-        encoder.timed(crate::timing::GpuPass::AssignLights, |e| pass.encode(e));
+        encoder.timed(crate::timing::GpuPass::AssignLights, |e, q| {
+            pass.encode(e, q)
+        });
     }
 }
 fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.models {
-        encoder.timed(crate::timing::GpuPass::Models, |e| pass.encode(e));
+        encoder.timed(crate::timing::GpuPass::Models, |e, q| pass.encode(e, q));
     }
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    encoder.timed(crate::timing::GpuPass::Display, |e| frame.output.encode(e));
+    encoder.timed(crate::timing::GpuPass::Display, |e, q| {
+        frame.output.encode(e, q)
+    });
 }
 
 fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    if let Some(pass) = &frame.models {
-        encoder.timed(crate::timing::GpuPass::Shadows, |e| pass.shadows.encode(e));
+    if let Some(pass) = &frame.models
+        && pass.shadows.has_passes()
+    {
+        encoder.timed(crate::timing::GpuPass::Shadows, |e, q| {
+            pass.shadows.encode(e, q)
+        });
     }
 }
 
 fn sprites(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.sprites {
-        encoder.timed(crate::timing::GpuPass::Sprites, |e| pass.encode(e));
+        encoder.timed(crate::timing::GpuPass::Sprites, |e, q| pass.encode(e, q));
     }
 }
 
 fn text(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    if let Some(pass) = &frame.text {
-        encoder.timed(crate::timing::GpuPass::Text, |e| pass.encode(e));
+    if let Some(pass) = &frame.text
+        && pass.has_passes()
+    {
+        encoder.timed(crate::timing::GpuPass::Text, |e, q| pass.encode(e, q));
     }
 }
 #[cfg(test)]
