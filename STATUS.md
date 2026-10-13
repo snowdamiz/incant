@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private physics constructors — scoped source and CPU evidence accepted
+
+Exact private storage/body/collider construction is accepted at `0a96dc0f`.
+The separately reviewed CCD return alias closes its inherited observer Clippy
+failure; 20 focused native controls and strict scoped Clippy pass. Exact manager
+construction, whole-solver admission, authenticated capture and stable IDs/events
+remain open. Public physics saves still refuse.
+[Constructor evidence](docs/spikes/physics-native-construction.md) and
+[observer follow-up](docs/spikes/physics-native-observer-lint.md).
+
 ## Native physics numerical admission — source accepted, CPU qualified
 
 A default-off pinned-kernel preflight checks primitive mass/pose/extent and

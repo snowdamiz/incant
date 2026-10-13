@@ -4,6 +4,6 @@
   "feature": "incant-checkpoint",
   "source": "src/dynamics/ccd/ccd_solver.rs",
   "upstream_sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
-  "sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+  "sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47",
   "scope": "readonly borrowed capture only; no restoration or algorithm change"
 }

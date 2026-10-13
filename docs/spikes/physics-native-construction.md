@@ -69,7 +69,8 @@ Strict snapshot all-target Clippy, constructor-feature native library Clippy,
 wasm32 compilation, 31 dependency/feature policy tests, runtime graph guards,
 formatting and conventions pass. A broader native observer-feature Clippy attempt
 is retained as a failure: the inherited `checkpoint_fixed_targets` return type
-triggers `type_complexity`. That observer source is unchanged. The passing native
+triggers `type_complexity`. That observer source was unchanged in this constructor producer; the separately
+reviewed [alias cleanup](physics-native-observer-lint.md) now closes this lint. The passing native
 library check excludes the separate `incant-checkpoint` observation feature; it
 is not an all-target or all-feature Clippy claim.
 
@@ -78,4 +79,7 @@ reorders two module declarations per rustfmt and updates corresponding pin hashe
 the source001 execution logs and eight executable binaries keep their original
 identity. Source002 received a fresh constructor-library Clippy/compile and format
 check. Source003 is documentation/evidence only. Initial harness, observer-fixture
-and formatting failures remain available. Final execution review is pending.
+and formatting failures remain available. Final execution review is accepted at immutable `0a96dc0f`; the root receipt
+`17f6b3e6c079e73bf5511c4b410b516f23d4ef82ff04988aefbf72f960a06521`
+is retained in the alias follow-up packet. The constructor producer and its
+historical failure logs remain unchanged.
