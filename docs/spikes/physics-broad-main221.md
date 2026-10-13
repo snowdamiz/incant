@@ -42,3 +42,6 @@ matches the tested graph. [Pinned qualification](evidence/physics-broad-main222/
 and [read-only replay](evidence/physics-broad-main222/verify.py) preserve the original
 verifier and all native execution assertions, with four explicit old/new Git
 source exceptions. This is source relevance, not a new compiled run.
+
+Independent main222 source-relevance review is accepted; the original execution
+limits remain. Publication follows the required exact-head fast check.
