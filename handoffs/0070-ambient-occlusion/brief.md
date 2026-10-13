@@ -1,3 +1,36 @@
+# Root review revision2 — preparation corrections only
+
+No GPU or Cargo target grant yet. Opus5.5 explicitly Max. Preserve previous result
+as preparation-result-v1.md; fix these focused runner defects, rerun CPU controls,
+and return final identities. No new broad source survey.
+
+1. `Ledger.locked()` only holds packet runner.lock. Add the shared
+~/.codex/incant-evidence/native-gpu.lock, acquired nonblocking BEFORE packet lock
+and held through preflight/reservation/launch/kill+wait/completion/release. Never
+allow separate packets to render concurrently. Add a two-packet control proving
+one refuses before reservation while the other owns the shared lock.
+2. A failed completion currently leaves no unresolved reservation, so gpu_checks
+allows unrelated next GPU children. Latch production/test/validation failures and
+refuse further device work except a separately root-authorized precise retry.
+Do not classify missing tests/verdict/invalid frame receipt as success.
+3. Reconcile must not SIGKILL an arbitrary recycled PGID just because every member
+started AFTER the old reservation. Require retained exact process identity for
+signaling; if ownership cannot be proven, refuse and report for root handling.
+A positive timestamp comparison alone does not establish ownership. Ensure failed
+reconciliation/group survivors cannot unblock subsequent children.
+4. Root expands EXISTING regression budget to8192 frames (combined8320), preserving
+new128/PNGs32/serial16children/45minutes. This admits the actually counted6264-frame
+wide test plus1828 others, so include all94 compiled cases exactly once and remove
+the artificial deferral. Derive totals again; do not shrink the test. No new GPU
+or target permission follows from this budget correction.
+
+Root accepts half-resolution as canonical SSAO treatment; full-res quality can be
+separate later. Oversize refusal can remain CPU-covered. Cargo config key/hash
+inspection is appropriate. Existing prior128 new-frame cap and stop-on-production-
+failure remain. Root reviews the numerical Rust helper separately before grant.
+
+---
+
 # Priority continuation — 2026-10-13
 
 The first preparation session was interrupted only to apply the director's
