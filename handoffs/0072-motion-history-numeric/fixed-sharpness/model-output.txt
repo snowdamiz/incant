@@ -1,0 +1,97 @@
+Steady state over one 8-phase cycle after 88 frames; both jitter axes; values are fractions of the edge contrast (rms, flicker, overshoot), px (width, bias) or ratios to the box ideal (modulation, detail).
+
+== static depth step
+  box ideal (reference)                  10-90% width 1.32 px (0.80-1.60)
+  baseline (e23776df)                    rms 0.071 | flicker max 0.088 | overshoot 0.000 | 10-90% width 2.20 px (1.97-2.34) | bias -0.04 px | phase wobble max 0.27 px | frames 0-3 rms 0.070, edge offset max 0.43 px
+  A: Catmull-Rom history                 rms 0.063 | flicker max 0.091 | overshoot 0.000 | 10-90% width 2.08 px (1.87-2.24) | bias -0.04 px | phase wobble max 0.20 px | frames 0-3 rms 0.068, edge offset max 0.43 px
+  B: Catmull-Rom present                 rms 0.062 | flicker max 0.084 | overshoot 0.000 | 10-90% width 2.06 px (1.85-2.24) | bias -0.04 px | phase wobble max 0.25 px | frames 0-3 rms 0.066, edge offset max 0.38 px
+  A+B                                    rms 0.053 | flicker max 0.097 | overshoot 0.000 | 10-90% width 1.91 px (1.75-2.12) | bias -0.04 px | phase wobble max 0.18 px | frames 0-3 rms 0.063, edge offset max 0.38 px
+  C: unjittered history, identity copy   rms 0.016 | flicker max 0.111 | overshoot 0.000 | 10-90% width 1.36 px (0.80-1.60) | bias -0.04 px | phase wobble max 0.17 px | frames 0-3 rms 0.060, edge offset max 0.70 px
+  C+A: C with Catmull-Rom history        rms 0.016 | flicker max 0.111 | overshoot 0.000 | 10-90% width 1.36 px (0.80-1.60) | bias -0.04 px | phase wobble max 0.17 px | frames 0-3 rms 0.060, edge offset max 0.70 px
+  C-reg: C, registered history-free      rms 0.016 | flicker max 0.111 | overshoot 0.000 | 10-90% width 1.36 px (0.80-1.60) | bias -0.04 px | phase wobble max 0.17 px | frames 0-3 rms 0.051, edge offset max 0.43 px
+  N1: current-only (no history)          rms 0.077 | flicker max 0.625 | overshoot 0.000 | 10-90% width 1.52 px (1.40-1.60) | bias -0.04 px | phase wobble max 0.75 px | frames 0-3 rms 0.077, edge offset max 0.43 px
+  N2: A without 3x3 clamp                rms 0.080 | flicker max 0.083 | overshoot 0.013 | 10-90% width 2.53 px (2.36-2.65) | bias -0.04 px | phase wobble max 0.09 px | frames 0-3 rms 0.069, edge offset max 0.43 px
+  N3: baseline + unsharp 0.8             rms 0.052 | flicker max 0.118 | overshoot 0.098 | 10-90% width 1.68 px (1.62-1.87) | bias -0.04 px | phase wobble max 0.27 px | frames 0-3 rms 0.076, edge offset max 0.43 px
+  N4: A renormalized, no fallback        rms 0.063 | flicker max 0.091 | overshoot 0.000 | 10-90% width 2.08 px (1.87-2.24) | bias -0.04 px | phase wobble max 0.20 px | frames 0-3 rms 0.068, edge offset max 0.43 px
+
+== static clear step
+  box ideal (reference)                  10-90% width 1.32 px (0.80-1.60)
+  baseline (e23776df)                    rms 0.071 | flicker max 0.088 | overshoot 0.000 | 10-90% width 2.19 px (1.96-2.34) | bias -0.04 px | phase wobble max 0.27 px | frames 0-3 rms 0.070, edge offset max 0.43 px
+  A: Catmull-Rom history                 rms 0.062 | flicker max 0.092 | overshoot 0.000 | 10-90% width 2.08 px (1.87-2.24) | bias -0.04 px | phase wobble max 0.20 px | frames 0-3 rms 0.068, edge offset max 0.43 px
+  B: Catmull-Rom present                 rms 0.062 | flicker max 0.085 | overshoot 0.000 | 10-90% width 2.06 px (1.85-2.24) | bias -0.04 px | phase wobble max 0.26 px | frames 0-3 rms 0.065, edge offset max 0.38 px
+  A+B                                    rms 0.053 | flicker max 0.099 | overshoot 0.000 | 10-90% width 1.90 px (1.75-2.12) | bias -0.04 px | phase wobble max 0.18 px | frames 0-3 rms 0.063, edge offset max 0.38 px
+  C: unjittered history, identity copy   rms 0.016 | flicker max 0.115 | overshoot 0.000 | 10-90% width 1.36 px (0.80-1.60) | bias -0.04 px | phase wobble max 0.18 px | frames 0-3 rms 0.059, edge offset max 0.70 px
+  C+A: C with Catmull-Rom history        rms 0.016 | flicker max 0.115 | overshoot 0.000 | 10-90% width 1.36 px (0.80-1.60) | bias -0.04 px | phase wobble max 0.18 px | frames 0-3 rms 0.059, edge offset max 0.70 px
+  C-reg: C, registered history-free      rms 0.016 | flicker max 0.115 | overshoot 0.000 | 10-90% width 1.36 px (0.80-1.60) | bias -0.04 px | phase wobble max 0.18 px | frames 0-3 rms 0.051, edge offset max 0.43 px
+  N1: current-only (no history)          rms 0.077 | flicker max 0.625 | overshoot 0.000 | 10-90% width 1.52 px (1.40-1.60) | bias -0.04 px | phase wobble max 0.75 px | frames 0-3 rms 0.077, edge offset max 0.43 px
+  N2: A without 3x3 clamp                rms 0.086 | flicker max 0.126 | overshoot 0.013 | 10-90% width 2.63 px (2.37-2.94) | bias +0.01 px | phase wobble max 0.24 px | frames 0-3 rms 0.071, edge offset max 0.43 px
+  N3: baseline + unsharp 0.8             rms 0.052 | flicker max 0.117 | overshoot 0.098 | 10-90% width 1.68 px (1.62-1.87) | bias -0.04 px | phase wobble max 0.27 px | frames 0-3 rms 0.076, edge offset max 0.43 px
+  N4: A renormalized, no fallback        rms 0.062 | flicker max 0.092 | overshoot 0.000 | 10-90% width 2.08 px (1.87-2.24) | bias -0.04 px | phase wobble max 0.20 px | frames 0-3 rms 0.068, edge offset max 0.43 px
+
+== 1-px MASK grille, period 4
+  baseline (e23776df)                    rms 0.218 | flicker max 0.126 | overshoot 0.000 | modulation 0.44 | detail 0.38
+  A: Catmull-Rom history                 rms 0.180 | flicker max 0.132 | overshoot 0.000 | modulation 0.57 | detail 0.49
+  B: Catmull-Rom present                 rms 0.202 | flicker max 0.127 | overshoot 0.000 | modulation 0.51 | detail 0.44
+  A+B                                    rms 0.160 | flicker max 0.130 | overshoot 0.000 | modulation 0.65 | detail 0.57
+  C: unjittered history, identity copy   rms 0.039 | flicker max 0.111 | overshoot 0.000 | modulation 0.95 | detail 0.96
+  C+A: C with Catmull-Rom history        rms 0.039 | flicker max 0.111 | overshoot 0.000 | modulation 0.95 | detail 0.96
+  C-reg: C, registered history-free      rms 0.039 | flicker max 0.111 | overshoot 0.000 | modulation 0.95 | detail 0.96
+  N1: current-only (no history)          rms 0.184 | flicker max 0.625 | overshoot 0.000 | modulation 0.88 | detail 0.84
+  N2: A without 3x3 clamp                rms 0.221 | flicker max 0.122 | overshoot 0.000 | modulation 0.42 | detail 0.37
+  N3: baseline + unsharp 0.8             rms 0.171 | flicker max 0.213 | overshoot 0.084 | modulation 0.67 | detail 0.58
+  N4: A renormalized, no fallback        rms 0.180 | flicker max 0.132 | overshoot 0.000 | modulation 0.57 | detail 0.49
+
+== 1-px MASK grille, period 2
+  baseline (e23776df)                    rms 0.244 | flicker max 0.103 | overshoot 0.000 | modulation 0.08 | detail 0.08
+  A: Catmull-Rom history                 rms 0.244 | flicker max 0.103 | overshoot 0.000 | modulation 0.08 | detail 0.08
+  B: Catmull-Rom present                 rms 0.241 | flicker max 0.129 | overshoot 0.000 | modulation 0.10 | detail 0.10
+  A+B                                    rms 0.241 | flicker max 0.129 | overshoot 0.000 | modulation 0.10 | detail 0.10
+  C: unjittered history, identity copy   rms 0.055 | flicker max 0.111 | overshoot 0.000 | modulation 0.69 | detail 0.69
+  C+A: C with Catmull-Rom history        rms 0.055 | flicker max 0.111 | overshoot 0.000 | modulation 0.69 | detail 0.69
+  C-reg: C, registered history-free      rms 0.055 | flicker max 0.111 | overshoot 0.000 | modulation 0.69 | detail 0.69
+  N1: current-only (no history)          rms 0.252 | flicker max 0.500 | overshoot 0.000 | modulation 0.52 | detail 0.52
+  N2: A without 3x3 clamp                rms 0.244 | flicker max 0.103 | overshoot 0.000 | modulation 0.08 | detail 0.08
+  N3: baseline + unsharp 0.8             rms 0.234 | flicker max 0.212 | overshoot 0.000 | modulation 0.16 | detail 0.16
+  N4: A renormalized, no fallback        rms 0.244 | flicker max 0.103 | overshoot 0.000 | modulation 0.08 | detail 0.08
+
+== bar moving 0.25 px/frame
+  baseline (e23776df)                    rms 0.066 | flicker max 0.192 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  A: Catmull-Rom history                 rms 0.059 | flicker max 0.198 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  B: Catmull-Rom present                 rms 0.059 | flicker max 0.177 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  A+B                                    rms 0.052 | flicker max 0.182 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C: unjittered history, identity copy   rms 0.055 | flicker max 0.208 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C+A: C with Catmull-Rom history        rms 0.046 | flicker max 0.196 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C-reg: C, registered history-free      rms 0.055 | flicker max 0.208 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  N1: current-only (no history)          rms 0.058 | flicker max 0.625 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  N2: A without 3x3 clamp                rms 0.076 | flicker max 0.242 | overshoot 0.031 | residue >=2 px behind 0.103, ahead 0.009
+  N3: baseline + unsharp 0.8             rms 0.050 | flicker max 0.205 | overshoot 0.104 | residue >=2 px behind 0.008, ahead 0.012
+  N4: A renormalized, no fallback        rms 0.059 | flicker max 0.198 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+
+== bar moving 0.5 px/frame
+  baseline (e23776df)                    rms 0.070 | flicker max 0.353 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  A: Catmull-Rom history                 rms 0.065 | flicker max 0.332 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  B: Catmull-Rom present                 rms 0.063 | flicker max 0.336 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  A+B                                    rms 0.058 | flicker max 0.312 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C: unjittered history, identity copy   rms 0.068 | flicker max 0.319 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C+A: C with Catmull-Rom history        rms 0.057 | flicker max 0.277 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C-reg: C, registered history-free      rms 0.068 | flicker max 0.319 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  N1: current-only (no history)          rms 0.084 | flicker max 0.750 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  N2: A without 3x3 clamp                rms 0.101 | flicker max 0.456 | overshoot 0.022 | residue >=2 px behind 0.204, ahead 0.002
+  N3: baseline + unsharp 0.8             rms 0.058 | flicker max 0.343 | overshoot 0.094 | residue >=2 px behind 0.009, ahead 0.009
+  N4: A renormalized, no fallback        rms 0.065 | flicker max 0.332 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+
+== bar moving 0.75 px/frame
+  baseline (e23776df)                    rms 0.066 | flicker max 0.429 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  A: Catmull-Rom history                 rms 0.059 | flicker max 0.379 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  B: Catmull-Rom present                 rms 0.059 | flicker max 0.411 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  A+B                                    rms 0.052 | flicker max 0.357 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C: unjittered history, identity copy   rms 0.055 | flicker max 0.432 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C+A: C with Catmull-Rom history        rms 0.046 | flicker max 0.366 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  C-reg: C, registered history-free      rms 0.055 | flicker max 0.432 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  N1: current-only (no history)          rms 0.058 | flicker max 0.375 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+  N2: A without 3x3 clamp                rms 0.100 | flicker max 0.437 | overshoot 0.028 | residue >=2 px behind 0.234, ahead 0.000
+  N3: baseline + unsharp 0.8             rms 0.050 | flicker max 0.367 | overshoot 0.104 | residue >=2 px behind 0.012, ahead 0.008
+  N4: A renormalized, no fallback        rms 0.059 | flicker max 0.379 | overshoot 0.000 | residue >=2 px behind 0.000, ahead 0.000
+
+Box ideal: pixel-area average of the scene; its step width uses the same 10-90% measure (0.80 px only for an edge on a pixel boundary). Grille modulation and detail are ratios to the box ideal (1.00).
+Residue: largest |shown - box ideal| (fraction of contrast) at pixels wholly 2+ px behind or ahead of the moving bar; a stale ghost raises 'behind'.
