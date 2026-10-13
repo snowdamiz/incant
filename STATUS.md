@@ -1998,3 +1998,12 @@ seven precise refusals. Owned emulator resources are removed. The earlier comple
 fast shipping proof stays explicitly pre-PCM; no later fast archive rebuild is
 claimed. Final independent review is accepted; publication awaits its fast check. No phone/rendering/performance gate
 is approved. [Scope and evidence](docs/spikes/authored-android-main181.md).
+
+## Windows checkpoint conformance split
+
+Checkpoint16 remains failed: baseline and optimized Windows conformance each
+passed 484 tests, then the shared job exhausted its 90-minute limit before fresh
+shipping. The reviewed repair separates four unchanged proof commands behind the
+existing success-only required context; all 23 release requirements remain.
+Local policy/tooling checks pass; hosted execution is pending the next frozen
+checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
