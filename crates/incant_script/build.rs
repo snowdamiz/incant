@@ -90,6 +90,7 @@ fn main() {
         Path::new("src/persistence.rs").into(),
         Path::new("src/checkpoint/mod.rs").into(),
         Path::new("src/checkpoint/pending.rs").into(),
+        Path::new("src/checkpoint/native.rs").into(),
         Path::new("src/checkpoint/codec.rs").into(),
         Path::new("src/persistence/value.rs").into(),
         Path::new("src/artifact.rs").into(),

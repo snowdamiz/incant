@@ -150,7 +150,7 @@ fn ordinary_load_neutralizes_physical_controls_without_false_edges() {
     );
 }
 
-fn grouped(second_opted: bool) -> (CookedScene, CompiledScript) {
+pub(super) fn grouped(second_opted: bool) -> (CookedScene, CompiledScript) {
     use crate::{ScriptBindings, ScriptInstance};
     let mut entities = scene().entities().to_vec();
     let mut e = entities[0].clone();

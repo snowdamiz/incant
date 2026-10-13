@@ -40,6 +40,8 @@ pub use artifact::{EmbeddedScript, ScriptMetadata};
 pub use bindings::{
     MAX_SCRIPT_INSTANCES, MAX_SCRIPT_SOURCES, ScriptBindings, ScriptInstance, ScriptValue,
 };
+#[cfg(feature = "native-checkpoints")]
+pub use checkpoint::NativeSessionCheckpoint;
 pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES, PendingSessionCheckpoint};
 pub use compiled::CompiledScript;
 #[cfg(feature = "compiler")]

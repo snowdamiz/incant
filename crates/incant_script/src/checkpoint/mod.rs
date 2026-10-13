@@ -1,6 +1,8 @@
 //! Ordinary game-load checkpoints for explicitly opted-in bytecode behaviors.
 //! Code is supplied by trusted startup; save bytes contain data only.
 mod codec;
+#[cfg(feature = "native-checkpoints")]
+mod native;
 mod pending;
 use crate::{
     CompiledScript, NativeSession, ScriptError, ScriptHost, SessionProgram,
@@ -11,6 +13,8 @@ use crate::{
 pub use codec::MAX_CHECKPOINT_BYTES;
 use incant_input::{InputActions, InputError};
 use incant_runtime::{CookedScene, NativeWorld, SaveError, StableId};
+#[cfg(feature = "native-checkpoints")]
+pub use native::NativeSessionCheckpoint;
 pub use pending::PendingSessionCheckpoint;
 use sha2::{Digest, Sha256};
 use thiserror::Error;
@@ -33,6 +37,9 @@ pub enum CheckpointError {
     Script(#[from] ScriptError),
     #[error(transparent)]
     World(#[from] SaveError),
+    #[cfg(feature = "native-checkpoints")]
+    #[error(transparent)]
+    NativeWorld(#[from] incant_runtime::WorldCheckpointError),
     #[error(transparent)]
     Input(#[from] InputError),
     #[cfg(feature = "ui")]
@@ -167,6 +174,58 @@ fn validate(
     Ok(())
 }
 
+/// Bounded explicit data only. Entries are immutable; copying their Arcs never
+/// retains a guest object, callback or VM. Entity retirement is applied at capture.
+struct ScriptState {
+    active: Vec<StableId>,
+    store: Store,
+    schedule: Schedule,
+}
+fn copy_store(stored: &Store, active: &[StableId]) -> Result<Store> {
+    let mut store = Store::default();
+    for (key, entry) in &stored.entries {
+        if key
+            .entity
+            .is_none_or(|id| active.binary_search(&id).is_ok())
+        {
+            store.cost.add(entry.cost.bytes, entry.cost.nodes)?;
+            store.entries.insert(*key, std::sync::Arc::clone(entry));
+        }
+    }
+    Ok(store)
+}
+fn script_state(session: &NativeSession) -> Result<ScriptState> {
+    let host = host(session)?;
+    if host.session_request.is_some() {
+        return Err(CheckpointError::Unsupported(
+            "pending session restart request",
+        ));
+    }
+    let active = host
+        .project
+        .as_ref()
+        .map(|p| p.active_ids(&session.world))
+        .transpose()?
+        .unwrap_or_default();
+    let store = copy_store(&host.persistent.borrow(), &active)?;
+    validate(host, &active, &store, &host.schedule, &session.world)?;
+    Ok(ScriptState {
+        active,
+        store,
+        schedule: host.schedule.clone(),
+    })
+}
+#[cfg(feature = "native-checkpoints")]
+impl ScriptState {
+    fn copy(&self) -> Result<Self> {
+        Ok(Self {
+            active: self.active.clone(),
+            store: copy_store(&self.store, &self.active)?,
+            schedule: self.schedule.clone(),
+        })
+    }
+}
+
 impl NativeSession {
     /// Save a committed native tick with typed persistent values, live authored
     /// attachments and native timer data. Every active behavior must explicitly
@@ -230,39 +289,15 @@ impl NativeSession {
             ));
         }
         let host = host(self)?;
-        if host.session_request.is_some() {
-            return Err(CheckpointError::Unsupported(
-                "pending session restart request",
-            ));
-        }
-        let active = host
-            .project
-            .as_ref()
-            .map(|p| p.active_ids(&self.world))
-            .transpose()?
-            .unwrap_or_default();
-        let stored = host.persistent.borrow();
-        // Retired instances cannot be reattached by a load, even after stable-ID
-        // reuse. Only this bounded data snapshot is filtered; no gameplay runs.
-        let mut store = Store::default();
-        for (key, entry) in &stored.entries {
-            if key
-                .entity
-                .is_none_or(|id| active.binary_search(&id).is_ok())
-            {
-                store.cost.add(entry.cost.bytes, entry.cost.nodes)?;
-                store.entries.insert(*key, std::sync::Arc::clone(entry));
-            }
-        }
-        validate(host, &active, &store, &host.schedule, &self.world)?;
+        let state = script_state(self)?;
         let world = self.world.save_bytes()?;
         codec::encode(
             identity(&host._compiled),
             self.world.source_scene_fingerprint(),
             &world,
-            &active,
-            &store,
-            &host.schedule,
+            &state.active,
+            &state.store,
+            &state.schedule,
             ui,
             audio,
         )
