@@ -25,3 +25,5 @@ were rehashed against their raw originals and retained gzip bytes. Original
 Metal measurements remain producer-scoped; this composition requires the revised
 Claude numeric/appearance run. No phone, performance, complete-renderer or phase
 acceptance is implied.
+
+Independent current-main source and CPU closure is [accepted](evidence/gpu-timestamps-main200/final-cpu-review.json) at36efd883. This receipt does not lift the revised Claude GPU/appearance hold.
