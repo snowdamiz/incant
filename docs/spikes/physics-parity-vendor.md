@@ -19,5 +19,7 @@ suite passes 373 Python tests (four existing platform skips) and 22 Node tests;
 conventions and diff checks pass. These are resolved graph checks, not target
 execution. The [packet](evidence/physics-parity-vendor.json) retains exact raw bytes
 and the [source review](evidence/physics-parity-vendor/source-review.json).
-The current candidate stays frozen until all jobs finish; a reviewed successor
+[Independent final review](evidence/physics-parity-vendor/final-review.json)
+accepted the source and execution packet. Publication follows the required fast
+check. The current candidate stays frozen until all jobs finish; a reviewed successor
 must pass the actual hosted portability check and every release requirement.
