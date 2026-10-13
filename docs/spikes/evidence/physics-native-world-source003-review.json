@@ -1,0 +1,31 @@
+{
+  "schema": "incant-independent-review-v1",
+  "at": "2026-10-13T18:27:21.939008+00:00",
+  "reviewer": "astra-root",
+  "decision": "accepted_source003_fixture_tightening",
+  "prior_source002_review_sha256": "726689aa1937bb6c23e47af93812c9be6d601f26786311e4be086acf09159084",
+  "source003_freeze_sha256": "ac607b4f026be9f61ed414c6170d366ad2c7f4c2707c1bf85f3423743204a18e",
+  "verified_files": 178,
+  "added_evidence_paths": [
+    "docs/spikes/evidence/physics-native-world-source-review.json",
+    "docs/spikes/evidence/physics-native-world-source002-review.json"
+  ],
+  "changed_paths": [
+    "third_party/rapier2d/INCANT_CHECKED_WORLD.json",
+    "third_party/rapier2d/src/pipeline/checked_restore/world/ccd_tests.rs",
+    "third_party/rapier2d/src/pipeline/checked_restore/world/refusal_tests.rs",
+    "third_party/rapier3d/INCANT_CHECKED_WORLD.json",
+    "third_party/rapier3d/src/pipeline/checked_restore/world/ccd_tests.rs",
+    "third_party/rapier3d/src/pipeline/checked_restore/world/refusal_tests.rs"
+  ],
+  "findings": [
+    "All production bytes equal reviewed source002; only ten assertions across paired CCD/refusal tests plus their vendor pins differ.",
+    "Assertions now require successful capture equality in simple CCD/epoch fixtures; exact known tick7 PendingMutation is still confined to churn continuation fixture.",
+    "Both focused final modes passed 10 dim2 plus 11 dim3 cases; raw logs and result hashes verified."
+  ],
+  "logs": {
+    "focused-final-det-003": "40a9edca01a7ad75291fa8e11dfbcf78e2ff1f677e04db3511a28eeebdf23f83",
+    "focused-final-fast8-003": "22ff00a4f513cfff9acae0955a8674fea145343a66e44d4475c28484a9f4e16e"
+  },
+  "scope": "Private primitive world constructor only. Public PhysicsUnsupported remains unchanged; no runtime install, save gate or phase acceptance."
+}
