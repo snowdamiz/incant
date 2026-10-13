@@ -4269,6 +4269,8 @@ version = "0.0.1"
 dependencies = [
  "parry2d",
  "parry3d",
+ "rapier2d",
+ "rapier3d",
  "serde_json",
 ]
 
@@ -5624,6 +5626,7 @@ dependencies = [
  "num-complex",
  "num-rational",
  "num-traits",
+ "serde",
  "simba",
  "typenum",
 ]
@@ -5760,6 +5763,7 @@ checksum = "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495"
 dependencies = [
  "bytemuck",
  "num-traits",
+ "serde",
 ]
 
 [[package]]

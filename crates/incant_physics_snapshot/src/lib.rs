@@ -2,12 +2,20 @@
 //! A validated BVH is only one future world section, not an exact physics save.
 #![forbid(unsafe_code)]
 
+mod arena;
+mod arena_codec;
+mod coarena;
+mod coarena_codec;
 mod codec;
 mod geometry;
 mod geometry_codec;
 mod records;
 mod validate;
 
+pub use arena::*;
+pub use arena_codec::{decode_arena, encode_arena};
+pub use coarena::*;
+pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
 pub use geometry::*;
 pub use geometry_codec::{decode_geometry, encode_geometry};
@@ -31,6 +39,7 @@ pub enum Error {
     Metadata,
     Depth,
     Geometry,
+    Generation,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

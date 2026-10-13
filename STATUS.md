@@ -56,7 +56,17 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
-## Exact physics saves — inert record validation underway
+## Exact physics saves — inert arena validation underway
+
+The next checked-format component preserves Rapier arena slots/free-chain order,
+generations, dense payload-row mappings and stale/invalidated Coarena rows.
+Thirty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
+pinned 2D/3D one-way observations. Independent source review is accepted; final
+evidence review is pending. There is still no live
+construction or physics-save runtime route; contact/island/payload/native owner
+composition remains required. [Arena contract](docs/spikes/physics-inert-arenas.md).
+
+## Exact physics saves — inert record validation verified
 
 A new dependency-free normal crate validates versioned inert BVH/VecMap and
 closed rigid geometry records, with bounded allocation/traversal and exact field
