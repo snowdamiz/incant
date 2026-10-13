@@ -1,3 +1,34 @@
+# Priority revision: execute the cooked native MetalFX review
+
+Root completed compilation and strict Clippy on source535003d7 with the complete
+cooked-temporal/native-metalfx feature set. All2448 build inputs match the committed
+freeze; all build processes exited0 and were reaped. Read root's build receipt:
+/Users/andreyyurlov/.codex/incant-reviews/metalfx0074-build-root-20261013.json
+SHA256 ba6f2a06ea10b2af49294f937398bb71001285bf61e83c777e30f73c1a397e7e. The build record SHA256 is f88a64e431b07e95fb5ada5807ef07de5b497cc1f6dd047ecbf4443eb78d18cc.
+Review-ready.json is at /Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/review-ready.json
+SHA256 40e64a7b030de29ea4de428579595d1ec19cadc97a89eca7c60058e06403a99c; visual tree b2c3e14e61ddfb2980ba3063a7148b424fb0d27c.
+The target lease intentionally remains held because your stage helpers require it.
+No build or lint needs repeating. After this run release both GPU and target.
+
+You now own the sole GPU interval. 0072 released at08:46:07Z without live children:
+/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/gpu-released.json
+SHA256 3c54be77b90f1d5ef8124ff779a060afcd46c320864782f74acd003b1b40e915. Verify it before any device work. Use Claude Opus5.5
+and explicitly verified Max through ACP. No source, plan, thresholds or helper edits.
+
+Run in foreground, serially and once with python3 -I -B visual/tools/gpu.py:
+list review; then review stationary, motion, excluded, transitions, viewport.
+Stop on failure and always gpu.py release, then lease.py release, including failed
+runs. Maximum119 planned submissions incl11UI,18PNG at960x540; ceilings128/20.
+No retries. Then analyze.py check and personally inspect every retained image;
+publish only if contracts/integrity pass. Record numerical and appearance verdicts
+separately in visual-execution-result.md, including registration, boundary policy,
+actual native/fallback selections and limitations. Compare the same-source arms.
+The portable upscale's known quality failure is retained; don't relabel it.
+Commit new packet results/evidence with Built-by: claude; no push/PR, memory writes,
+desktop capture, native window or device audio. No phone/performance/phase claims.
+
+---
+
 # Priority revision — close helper acceptance before the supervised build
 
 Your prepared3354cdfd fixture is received. Remain PREPARATION ONLY, Opus5.5 Max.
