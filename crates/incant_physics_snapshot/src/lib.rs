@@ -4,6 +4,8 @@
 
 mod arena;
 mod arena_codec;
+mod attachment;
+mod attachment_codec;
 mod coarena;
 mod coarena_codec;
 mod codec;
@@ -16,6 +18,8 @@ mod validate;
 
 pub use arena::*;
 pub use arena_codec::{decode_arena, encode_arena};
+pub use attachment::*;
+pub use attachment_codec::{decode_attachments, encode_attachments};
 pub use coarena::*;
 pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};

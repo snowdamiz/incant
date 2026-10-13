@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Exact physics saves — inert attachment ownership verified locally
+
+The next std-only inert component preserves exact ordered body/collider
+attachments and native local-pose bits against two checked arena layouts.
+Fifty-two CPU tests, Clippy, wasm32 and dependency checks pass, including actual
+2D/3D public attach/detach/reparent/remove/reuse observations and hostile decoding.
+Independent source/evidence review is pending. Enclosing-owner authentication,
+complete body/collider/contact state and exact continuation remain required;
+no live construction or physics-save admission is enabled.
+[Attachment contract](docs/spikes/physics-inert-attachments.md).
+
 ## Exact physics saves — inert graph adjacency validation underway
 
 The next inert format preserves node/edge order and validates both linked
