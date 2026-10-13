@@ -65,6 +65,22 @@ impl State {
             old_motion,
         )
     }
+    pub fn preflight_owner(
+        &self,
+        device: &wgpu::Device,
+        plan: Plan,
+        old_motion: Option<[u32; 2]>,
+    ) -> Result<(), crate::motion::MotionError> {
+        crate::motion::attachment::admit(
+            plan.source,
+            old_motion,
+            Some(plan.output),
+            self.output.as_ref().map(|o| o.size),
+            self.overlay.as_ref().map(|o| o.size),
+            device.limits().max_texture_dimension_2d,
+        )
+        .map(|_| ())
+    }
     pub fn prepare(
         &self,
         d: &wgpu::Device,

@@ -28,7 +28,7 @@ fn one(mut names: impl Iterator<Item = Result<String>>) -> Result<String> {
     }
     Ok(name)
 }
-fn motion_buffers() -> Vec<msl::VertexBufferMapping> {
+fn motion_buffers(owner: bool) -> Vec<msl::VertexBufferMapping> {
     use msl::{
         AttributeMapping as A, VertexBufferMapping as B, VertexBufferStepMode as S,
         VertexFormat as F,
@@ -61,7 +61,14 @@ fn motion_buffers() -> Vec<msl::VertexBufferMapping> {
             id: 12,
             stride: 80,
             step_mode: S::ByInstance,
-            attributes: (7..=11).map(|i| a(i, (i - 7) * 16, F::Float32x4)).collect(),
+            attributes: if owner {
+                (7..=10)
+                    .map(|i| a(i, (i - 7) * 16, F::Float32x4))
+                    .chain([a(11, 64, F::Float32), a(12, 68, F::Uint32)])
+                    .collect()
+            } else {
+                (7..=11).map(|i| a(i, (i - 7) * 16, F::Float32x4)).collect()
+            },
         },
     ]
 }
@@ -74,7 +81,7 @@ pub(super) fn emit(
     entry: &str,
     backend: Backend,
 ) -> Result<(Vec<u8>, String)> {
-    let motion = matches!(kind, Kind::Motion | Kind::Depth);
+    let motion = matches!(kind, Kind::Motion | Kind::Depth | Kind::MotionOwner);
     let copy = kind == Kind::Copy;
     let vertex = stage == ShaderStage::Vertex;
     match backend {
@@ -113,7 +120,7 @@ pub(super) fn emit(
                 entry_point: Some((stage, entry.to_owned())),
                 vertex_pulling_transform: motion,
                 vertex_buffer_mappings: if vertex && motion {
-                    motion_buffers()
+                    motion_buffers(kind == Kind::MotionOwner)
                 } else {
                     vec![]
                 },
@@ -231,5 +238,39 @@ pub(super) fn emit(
                     .map(|r| r.map_err(error)))?,
             ))
         }
+    }
+}
+
+#[cfg(test)]
+mod owner_tests {
+    use super::*;
+    #[test]
+    fn exact_native_owner_pull_keeps_integer_word_and_old_layout() {
+        let old = motion_buffers(false);
+        let owner = motion_buffers(true);
+        assert_eq!(owner.len(), 4);
+        for (a, b) in old[..3].iter().zip(&owner[..3]) {
+            assert_eq!(format!("{a:?}"), format!("{b:?}"));
+        }
+        assert_eq!(owner[3].id, 12);
+        assert_eq!(owner[3].stride, 80);
+        let a = &owner[3].attributes;
+        assert_eq!(a.len(), 6);
+        for (i, a) in a[..4].iter().enumerate() {
+            assert_eq!(
+                (a.shader_location, a.offset, a.format),
+                (7 + i as u32, i as u32 * 16, msl::VertexFormat::Float32x4)
+            );
+        }
+        assert_eq!(
+            (a[4].shader_location, a[4].offset, a[4].format),
+            (11, 64, msl::VertexFormat::Float32)
+        );
+        assert_eq!(
+            (a[5].shader_location, a[5].offset, a[5].format),
+            (12, 68, msl::VertexFormat::Uint32)
+        );
+        assert_eq!(old[3].attributes.len(), 5);
+        assert_eq!(old[3].attributes[4].format, msl::VertexFormat::Float32x4);
     }
 }

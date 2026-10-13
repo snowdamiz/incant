@@ -1,0 +1,99 @@
+{
+  "schema": "incant-temporal-owner-evidence-v1",
+  "source": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/source-003/freeze.json",
+    "sha256": "95e4b8308badb57837d15b2d5759613d5dce1a50a1682a65b0492b8fb31f7365",
+    "bytes": 6017
+  },
+  "base": "af7efed1a89f51e33bfc2fa75f2da046b428dcf5",
+  "root": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001",
+  "source_counts": {
+    "source": 20,
+    "baseline": 10
+  },
+  "review": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/independent-source-review-002.json",
+    "sha256": "9cdd40b772b9908d13ff4e1a52e4d6069de7e2ffeb3de37aea6d61e5d96d4572",
+    "bytes": 1295
+  },
+  "qualification": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/qualification-002.json",
+    "sha256": "c54e50d1188abb68ca244f26a377fc7db0e0b7869da40ee298e3c74f4590d42e",
+    "bytes": 6967
+  },
+  "counts": {
+    "default-cpu": [
+      [
+        143,
+        0,
+        41
+      ]
+    ],
+    "cooked-native-cpu": [
+      [
+        158,
+        0,
+        42
+      ]
+    ]
+  },
+  "cooker_tests": {
+    "source": "source002, unchanged in003",
+    "passed": 11,
+    "qualification": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/qualification-001.json",
+      "sha256": "d885bf248c3e165deac0c8212a4167a934a5506cd6cde1ce07a0ae22baa76fb2",
+      "bytes": 3490
+    }
+  },
+  "offline": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/offline-owner-001/result.json",
+    "sha256": "e6e25e6a97afe1062d86a7bfe235a27867c862b2d8095a45b3db26c7d1939531",
+    "bytes": 10965
+  },
+  "old_native_payloads": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/old-motion-depth-artifact-equality.json",
+    "sha256": "57affaa981d17a5d1011e0ed5c6348110c3e289b2285481f6bd7a53033a80222",
+    "bytes": 6051
+  },
+  "cpu_suites_overlap": true,
+  "gpu_executed": false,
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-owner-attachment-payloads.json.gz",
+    "sha256": "e3e7d5ac8715f9c1e87bab96b83d5d6e96e6839b5b12948b811d6e42baaeaf65",
+    "bytes": 443652,
+    "raw_sha256": "3c6480d80d18f8dfc0a4f37886ea45f2add85c93974590cc2893e3bc9e1d66e3",
+    "records": 213,
+    "payloads": 127
+  },
+  "binaries": [
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/incant_render-bf4961fb357f91a4",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-bf4961fb357f91a4",
+      "sha256": "35316fcd455cdd490c238e872b824e1daeb08556660bff065c582de9e8f96389",
+      "bytes": 32178352,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/incant_render-288759d68012f619",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/binaries/incant_render-288759d68012f619",
+      "sha256": "fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1",
+      "bytes": 33339024,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    }
+  ],
+  "audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-attachment-001/audit.py",
+    "sha256": "b5ff1ed575c7f10f922eff69ff0e220c1ffa66811e52b513d726987e50b7082c",
+    "bytes": 4348
+  },
+  "scope": [
+    "Additive exact R32Uint MotionOwner attachment; owner-only and portable paths admitted under unchanged logical cap.",
+    "Default disabled; prior Motion/Depth WGSL and twelve actual native payloads unchanged. New four pipelines and source-size R32Uint only on opt-in.",
+    "History consumers/meta targets/MetalFX combination remain open; no physical GPU residency bound. Ignored device test compiled only.",
+    "No GPU, appearance, performance or device gate acceptance."
+  ]
+}

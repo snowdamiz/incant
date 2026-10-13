@@ -141,6 +141,9 @@ impl RetainedScene {
         preference: crate::metalfx::Preference,
         config: crate::upscaling::UpscaleConfig,
     ) -> Result<()> {
+        if self.motion_owner_attachment_enabled() {
+            return Err(crate::motion::MotionError::OwnerCombination.into());
+        }
         let support = renderer
             .metalfx_admission
             .ok_or(crate::metalfx::MetalFxError::Disabled)?;
@@ -152,6 +155,37 @@ impl RetainedScene {
     #[cfg(feature = "native-metalfx")]
     pub fn metalfx_selection(&self) -> Option<crate::metalfx::Selection> {
         self.metalfx.as_ref().and_then(|o| o.selection())
+    }
+    /// Explicit owner attachment reset. Toggling creates a fresh motion owner
+    /// and drops fixed/portable/native color histories together. No color consumer
+    /// reads the attachment yet. Enable portable upscaling afterward if needed.
+    pub fn set_motion_owner_attachment(
+        &mut self,
+        renderer: &Renderer,
+        enabled: bool,
+    ) -> Result<()> {
+        let old = self
+            .motion
+            .as_ref()
+            .ok_or(crate::motion::MotionError::Disabled)?;
+        if !Arc::ptr_eq(&self.owner, &renderer.identity) {
+            return Err(crate::motion::MotionError::Owner.into());
+        }
+        if enabled && !renderer.motion.as_ref().is_some_and(|m| m.owner_enabled()) {
+            return Err(crate::motion::MotionError::OwnerDisabled.into());
+        }
+        if old.owner_attachment == enabled {
+            return Ok(());
+        }
+        self.enable_motion_history(renderer)?;
+        self.motion
+            .as_mut()
+            .expect("enabled history")
+            .owner_attachment = enabled;
+        Ok(())
+    }
+    pub fn motion_owner_attachment_enabled(&self) -> bool {
+        self.motion.as_ref().is_some_and(|m| m.owner_attachment)
     }
     /// Pipelines must already be enabled on this renderer. Publication is atomic.
     pub fn enable_motion_history(&mut self, renderer: &Renderer) -> Result<()> {
@@ -203,6 +237,9 @@ impl RetainedScene {
         renderer: &Renderer,
         config: crate::temporal::TemporalConfig,
     ) -> Result<()> {
+        if self.motion_owner_attachment_enabled() {
+            return Err(crate::motion::MotionError::OwnerCombination.into());
+        }
         let temporal = crate::temporal::TemporalState::new(config)?;
         if renderer.temporal.is_none() {
             return Err(crate::temporal::TemporalError::Disabled.into());
@@ -218,11 +255,16 @@ impl RetainedScene {
         renderer: &Renderer,
         config: crate::upscaling::UpscaleConfig,
     ) -> Result<()> {
+        let attachment = self.motion_owner_attachment_enabled();
         let state = crate::upscaling::State::new(config)?;
         if renderer.upscaling.is_none() {
             return Err(crate::upscaling::UpscaleError::Disabled.into());
         }
         self.enable_motion_history(renderer)?;
+        self.motion
+            .as_mut()
+            .expect("enabled history")
+            .owner_attachment = attachment;
         self.upscaling = Some(state);
         Ok(())
     }
@@ -467,14 +509,15 @@ impl RetainedScene {
             owner.preflight(&renderer.device, upscale_plan)?;
         }
         if let (Some(state), Some(p)) = (&self.upscaling, upscale_plan) {
-            state.preflight(
-                &renderer.device,
-                p,
-                self.motion
-                    .as_ref()
-                    .ok_or(crate::upscaling::UpscaleError::History)?
-                    .target_bytes(),
-            )?;
+            let motion = self
+                .motion
+                .as_ref()
+                .ok_or(crate::upscaling::UpscaleError::History)?;
+            if motion.owner_attachment {
+                state.preflight_owner(&renderer.device, p, motion.target_size())?;
+            } else {
+                state.preflight(&renderer.device, p, motion.target_bytes())?;
+            }
         }
         if let Some(temporal) = &self.temporal
             && self.staging.camera.pixel_resolution.is_none()
@@ -653,3 +696,7 @@ mod upscaling_tests;
 #[cfg(all(test, feature = "native-metalfx"))]
 #[path = "metalfx_retained_tests.rs"]
 mod metalfx_tests;
+
+#[cfg(test)]
+#[path = "motion_owner_device_tests.rs"]
+mod motion_owner_tests;

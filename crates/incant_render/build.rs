@@ -9,6 +9,11 @@ fn main() {
             std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"));
         for (kind, paths, name) in [
             (Kind::Motion, vec!["src/motion/shader.wgsl"], "motion"),
+            (
+                Kind::MotionOwner,
+                vec!["src/motion/owner.wgsl"],
+                "motion-owner",
+            ),
             (Kind::Depth, vec!["src/motion/shader.wgsl"], "depth"),
             (Kind::Resolve, vec!["src/temporal/resolve.wgsl"], "resolve"),
             (Kind::Copy, vec!["src/temporal/copy.wgsl"], "copy"),
