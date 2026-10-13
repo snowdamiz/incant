@@ -229,8 +229,11 @@ main226 `079ee1aa` exactly. Independent review verified the tested tree, ancestr
 unchanged protection and all success receipts. The journal replay repair passed
 on actual macOS/Linux/Windows; optional timestamp diagnostics preserve explicit
 Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12.
-No checkpoint is currently active. The next regular selection follows the
-three-hour cadence; later main changes do not alter this tested baseline.
+Checkpoint25 is frozen on reviewed main230 (`56185dab`) in PR232, with all23
+required contexts preserved. One Windows UI test timed out; the original failure
+remains failed while remaining workflows run. Its scoped per-case deadline
+repair passes local focused/full UI checks and is under independent review.
+Later main changes do not alter either frozen checkpoint.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
