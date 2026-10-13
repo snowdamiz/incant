@@ -1,0 +1,20 @@
+{
+  "author": "astra",
+  "original_private_commit": "f517265a568724a5aa09ff1abc939c9368d35afb",
+  "clean_parent": "d58c45b5500267b59bea992b0bbd2f9587f9e8f1",
+  "raw_ledger_sha256": "3058694a7d1cb8ddc8646cc00adf8a6024ff765cd6bcabf59a21115ccd1548c8",
+  "raw_ledger_retained_private": true,
+  "public_ledger_sha256": "7b14b2a5882f6f96edb2ad1e605a7e02ab0806759afcf456c9e121fbf7ee5f54",
+  "omitted_environment_entries": 534,
+  "allowlist": [
+    "CARGO_BUILD_JOBS",
+    "CARGO_BUILD_TARGET",
+    "CARGO_TARGET_DIR",
+    "INCANT_NATIVE_PROJECT",
+    "RUSTFLAGS",
+    "RUST_BACKTRACE"
+  ],
+  "executed_adapter_unchanged": true,
+  "synthetic_allowlist_check": "passed",
+  "publication_instruction": "Publish only the reconstructed clean commit and later descendants; original unpublished packet commit must not enter public ancestry."
+}
