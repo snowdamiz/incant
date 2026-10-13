@@ -13,8 +13,13 @@ default = ["physics-deterministic"]
 physics-deterministic = [
     "incant_physics_2d_runtime/deterministic",
     "incant_physics_runtime/deterministic",
+    "incant_physics_snapshot?/physics-deterministic",
 ]
-physics-fast-simd8 = ["incant_physics_2d_runtime/fast-simd8", "incant_physics_runtime/fast-simd8"]
+physics-fast-simd8 = [
+    "incant_physics_2d_runtime/fast-simd8",
+    "incant_physics_runtime/fast-simd8",
+    "incant_physics_snapshot?/physics-fast-simd8",
+]
 native-checkpoints = [
     "incant_physics_2d_runtime/native-checkpoints",
     "incant_physics_runtime/native-checkpoints",
@@ -29,7 +34,7 @@ incant_nav.workspace = true
 incant_types.workspace = true
 incant_2d.workspace = true
 incant_physics_2d_runtime.workspace = true
-incant_physics_snapshot = { path = "../incant_physics_snapshot", optional = true, features = ["construction"] }
+incant_physics_snapshot = { path = "../incant_physics_snapshot", optional = true, default-features = false, features = ["construction"] }
 incant_physics_runtime = { path = "../incant_physics_runtime", default-features = false }
 bevy_ecs.workspace = true
 thiserror.workspace = true
