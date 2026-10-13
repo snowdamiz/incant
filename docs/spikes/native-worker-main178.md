@@ -38,8 +38,8 @@ assertion layout adjustment is covered by both final full suites.
 
 The [retained packet](evidence/native-worker-main178.json) contains exact sources,
 commands, binary identities, raw lossless evidence, original failures and the
-accepted producer/fixture reviews. Independent final current-main review is
-pending. This is local ci-profile macOS CPU evidence, not shipping, Windows
+accepted producer/fixture reviews. Independent final current-main review is accepted in the
+[final receipt](evidence/native-worker-main178/final-review.json). This is local ci-profile macOS CPU evidence, not shipping, Windows
 execution, rendering, physical-device or performance acceptance. The movement
 fixtures contain no active solver bodies; no backend numerical-equivalence claim
 is made. Startup compiles native TypeScript, worker requests do not expose PCM,

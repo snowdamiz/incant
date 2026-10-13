@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-12T23:29:39.118036+00:00",
+  "reviewer": "astra root",
+  "verdict": "accepted for scoped current-main CPU worker/owner integration",
+  "commit": "e88d8f68f60d30c98476182e82a500459013a060",
+  "manifest_sha256": "9334dcc6347dc8542446c4992e23d37773b337c6e6afbf412c314f67d5541a6b",
+  "tested_head": "cbfcbf29991c6c640006ad49aea67aedebc67f27",
+  "main": "15f31d0375983ac3eac82086cd6a2379ad6adb46",
+  "method": [
+    "Reviewed collector assertion-only prefix; independently executed validations without running or mutating producers",
+    "Rehashed every lossless payload and original artifact, source freeze, fixture patch, producer sources, copied binaries and previous source reviews",
+    "Verified actual protocol lifecycle/error/refusal cases and full native state parity after source deletion",
+    "Verified actual owner selections, five solver target feature sets, private executable removal and caller failure cleanup"
+  ],
+  "counts": {
+    "freeze": 1898,
+    "producer_sources": 11,
+    "lossless_records": 109,
+    "payloads": 74,
+    "checks": 14,
+    "rust_per_mode": {
+      "deterministic": {
+        "passed": 65,
+        "ignored": 2,
+        "groups": 17,
+        "failed": 0
+      },
+      "fast": {
+        "passed": 65,
+        "ignored": 2,
+        "groups": 17,
+        "failed": 0
+      }
+    },
+    "python": 308,
+    "python_skipped_windows": 4,
+    "node": 22,
+    "protocol_cases": 12,
+    "owner_selections": 4
+  },
+  "findings": [],
+  "limits": [
+    "Developer ci-profile CPU execution only; no shipping, GPU, editor viewport, native-window, physical-device or performance acceptance.",
+    "Windows process-tree branch compiles/tests through existing fixtures; actual Windows execution remains pending.",
+    "Movement fixtures have no active solver bodies; this is process/kernel selection and protocol evidence, not numerical backend equivalence or speed.",
+    "Worker drops authoring state after startup but startup compiles native TypeScript. PCM is not exposed by the worker protocol.",
+    "Request/read/write deadlines and encoded response cap do not establish bounded allocator use or an untrusted process sandbox."
+  ]
+}
