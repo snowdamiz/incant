@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-13T03:48:00.205736+00:00",
+  "reviewer": "root",
+  "accepted": "source only, final tests and GPU evidence pending",
+  "freeze_sha256": "b693be24003d9d39dd1c913fda276492411389475073a86e74f27b61a9eba673",
+  "verified_sources": 17,
+  "verified_unchanged_baselines": 10,
+  "reviewed": [
+    "All 17 changed/new source/build inputs read; 10 default shader/graph/frame identities match base",
+    "Preparation validates settings, target budget and projection before cached attachments; complete pipeline catalog constructed on explicit enable",
+    "Atomic enable preserves old system on failure; per-frame immutable groups and resource Arcs survive disable and queued commands",
+    "Prepass uses exact retained vertices, inverse-transpose normals, alpha mask and culling; BLEND retains original shading",
+    "Forward variant changes only diffuse environment multiplier; UI, direct light, emissive and specular remain original code",
+    "Finite fixed 16x4 sampling, viewport-local reconstruct, depth/background checks, perspective and orthographic handling",
+    "No native cooked-material bypass; typed explicit unsupported error"
+  ],
+  "limits": [
+    "No GPU execution or appearance accepted",
+    "Broad CPU/Wasm/Clippy still producer-running",
+    "Nonzero occlusion, unaffected-channel controls and mixed opaque/BLEND actual GPU validation required before final acceptance",
+    "No performance, phone, temporal or full-renderer gate"
+  ]
+}

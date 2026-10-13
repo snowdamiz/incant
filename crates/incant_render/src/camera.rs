@@ -138,6 +138,15 @@ impl CameraView {
         Ok(result)
     }
     pub fn matrix(self, aspect: f32) -> Result<Mat4, SceneError> {
+        let matrix = self.projection(aspect)? * self.view;
+        if !matrix.is_finite() {
+            return Err(SceneError::CameraProjection);
+        }
+        Ok(matrix)
+    }
+    /// Same projection for geometry and view-space screen effects, without a
+    /// lossy round trip through translated world/view matrices.
+    pub fn projection(self, aspect: f32) -> Result<Mat4, SceneError> {
         if !aspect.is_finite() || aspect <= 0. {
             return Err(SceneError::CameraProjection);
         }
@@ -150,11 +159,10 @@ impl CameraView {
         } else {
             Mat4::perspective_rh(self.fov, aspect, self.near, self.far)
         };
-        let matrix = projection * self.view;
-        if !matrix.is_finite() {
+        if !projection.is_finite() {
             return Err(SceneError::CameraProjection);
         }
-        Ok(matrix)
+        Ok(projection)
     }
     /// View-space half height at a forward distance, for fitting shadow receivers.
     pub fn half_height_at(self, depth: f64) -> f64 {

@@ -57,6 +57,20 @@ impl Renderer {
                 resource: camera.as_entire_binding(),
             }],
         });
+        let ambient_occlusion = self
+            .ambient_occlusion
+            .as_ref()
+            .map(|system| {
+                let size = target.color.texture().size();
+                system.prepare(
+                    &self.device,
+                    scene.camera,
+                    target.rect,
+                    [size.width, size.height],
+                    &camera,
+                )
+            })
+            .transpose()?;
         let mut opaque = Vec::new();
         let shadows = self.prepare_shadow_draw(scene, target.rect[2] / target.rect[3])?;
         let lighting = self.lighting.prepare(
@@ -73,12 +87,25 @@ impl Renderer {
         for batch in scene.batches.iter().filter(|batch| batch.count > 0) {
             let material =
                 &batch.model.materials.materials[batch.model.primitives[batch.primitive].material];
-            let pipeline = self.materials.pipeline(PipelineKey {
+            let key = PipelineKey {
                 format: target.format,
                 alpha: material.alpha,
                 double_sided: material.double_sided,
                 mirrored: batch.mirrored,
-            })?;
+            };
+            let (pipeline, prepass) = if let Some(system) = self
+                .ambient_occlusion
+                .as_ref()
+                .filter(|_| material.alpha != incant_assets_runtime::AlphaMode::Blend)
+            {
+                let missing = || crate::ResourceError::UnpreparedPipeline("SSAO material");
+                (
+                    system.shading.get(&key).cloned().ok_or_else(missing)?,
+                    Some(system.prepass.get(&key).cloned().ok_or_else(missing)?),
+                )
+            } else {
+                (self.materials.pipeline(key)?, None)
+            };
             if material.alpha == incant_assets_runtime::AlphaMode::Blend {
                 for (index, center) in batch.centers.iter().enumerate() {
                     transparent.push(Draw {
@@ -86,6 +113,7 @@ impl Renderer {
                         instances: index as u32..index as u32 + 1,
                         pipeline: pipeline.clone(),
                         depth: (center.as_dvec3() - eye).dot(forward),
+                        prepass: None,
                     });
                 }
             } else {
@@ -94,6 +122,7 @@ impl Renderer {
                     instances: 0..batch.count,
                     pipeline,
                     depth: 0.,
+                    prepass,
                 });
             }
         }
@@ -108,14 +137,36 @@ impl Renderer {
             lighting,
             shadows,
             draws: opaque,
+            ambient_occlusion,
         }))
     }
 }
-struct Draw {
+pub(crate) struct Draw {
     batch: Arc<Batch>,
     instances: std::ops::Range<u32>,
     pipeline: wgpu::RenderPipeline,
     depth: f64,
+    pub prepass: Option<wgpu::RenderPipeline>,
+}
+impl Draw {
+    pub(crate) fn encode(&self, pass: &mut wgpu::RenderPass<'_>, pipeline: &wgpu::RenderPipeline) {
+        let batch = &self.batch;
+        let primitive = &batch.model.primitives[batch.primitive];
+        let material = &batch.model.materials.materials[primitive.material];
+        pass.set_pipeline(pipeline);
+        pass.set_bind_group(1, &material.bind_group, &[]);
+        pass.set_vertex_buffer(
+            0,
+            batch
+                .vertices
+                .as_ref()
+                .unwrap_or(&primitive.vertices)
+                .slice(..),
+        );
+        pass.set_vertex_buffer(1, batch.instances.slice(..));
+        pass.set_index_buffer(primitive.indices.slice(..), wgpu::IndexFormat::Uint32);
+        pass.draw_indexed(0..primitive.index_count, 0, self.instances.clone());
+    }
 }
 pub(crate) struct ModelDraw {
     target: ModelTarget,
@@ -124,9 +175,13 @@ pub(crate) struct ModelDraw {
     pub lighting: crate::lighting::PreparedLighting,
     pub shadows: super::ShadowDraw,
     draws: Vec<Draw>,
+    ambient_occlusion: Option<crate::ambient_occlusion::Prepared>,
 }
 impl ModelDraw {
     pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+        if let Some(ao) = &self.ambient_occlusion {
+            ao.encode(encoder, &self.camera, self.target.rect, &self.draws);
+        }
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Imported model geometry"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
@@ -156,22 +211,15 @@ impl ModelDraw {
         let [x, y, w, h] = self.target.rect;
         pass.set_viewport(x, y, w, h, 0., 1.);
         for draw in &self.draws {
-            let batch = &draw.batch;
-            let primitive = &batch.model.primitives[batch.primitive];
-            let material = &batch.model.materials.materials[primitive.material];
-            pass.set_pipeline(&draw.pipeline);
-            pass.set_bind_group(1, &material.bind_group, &[]);
-            pass.set_vertex_buffer(
-                0,
-                batch
-                    .vertices
-                    .as_ref()
-                    .unwrap_or(&primitive.vertices)
-                    .slice(..),
-            );
-            pass.set_vertex_buffer(1, batch.instances.slice(..));
-            pass.set_index_buffer(primitive.indices.slice(..), wgpu::IndexFormat::Uint32);
-            pass.draw_indexed(0..primitive.index_count, 0, draw.instances.clone());
+            if let Some(ao) = &self.ambient_occlusion {
+                let camera = if draw.prepass.is_some() {
+                    &ao.camera
+                } else {
+                    &self.camera
+                };
+                pass.set_bind_group(0, camera, &[]);
+            }
+            draw.encode(&mut pass, &draw.pipeline);
         }
     }
 }

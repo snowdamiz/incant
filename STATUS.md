@@ -2259,3 +2259,9 @@ checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
   cases remain ignored. Actual callback/render execution, Claude visual acceptance,
   temporal reconstruction/MetalFX and reference-device budgets remain open. See
   [contract and evidence](docs/spikes/dynamic-resolution.md).
+
+## Private ambient occlusion composition
+
+Accepted SSAO producer source is being composed with cluster and dynamic-resolution
+work for combined CPU and subsequent Claude GPU/appearance review. No new
+combined acceptance, performance or phase gate is claimed.
