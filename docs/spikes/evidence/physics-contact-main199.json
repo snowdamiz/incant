@@ -1,7 +1,7 @@
 {
-  "at": "2026-10-13T05:17:23.048151+00:00",
+  "at": "2026-10-13T05:18:11.522348+00:00",
   "tested_head": "1c1183847f9108011449c3f19c59cfa08bf2fabb",
-  "review_head": "1c1183847f9108011449c3f19c59cfa08bf2fabb",
+  "review_head": "68b844620586b518debddb5281d92741728106d7",
   "main_ancestor": "d4830ddf125c00b07c82cf828777cc71dfdd72c8",
   "producer": "d369a7d40651ecdc042396074e8c59e5d5b2895e",
   "summary": {
@@ -375,6 +375,10 @@
   "independent_source_review": {
     "path": "docs/spikes/evidence/physics-contact-main199/independent-source-review.json",
     "sha256": "c1519ea92b057764bcb542ef8cfab32e816d7487e60a8906efb01c0e13ff2b34"
+  },
+  "producer_final_review": {
+    "path": "docs/spikes/evidence/physics-contact-main199/producer-final-review.json",
+    "sha256": "2ccfd61e87aa99725f0ac0ccd6f0c4c868f30f0aaa13eaebef547c8cc4a7bf07"
   },
   "limits": [
     "65 cases include prior52 inert cases plus13 contact cases; counts are not additive.",

@@ -111,7 +111,7 @@ panic-catching, save reconstruction or GPU execution is used.
 
 ## Still required for exact restoration
 
-Independent source/final evidence acceptance is pending. This component does not
+Independent source/final producer evidence acceptance is retained in the [main199 integration packet](physics-contact-main199.md). This component does not
 bind points to collider geometry, subshapes, normals, material coefficients or
 body handles. Manifold/pair metadata, dispatcher/recycle workspaces, solver
 clusters and previous cluster state, graph colors/body indices, contact/island
