@@ -16,9 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main210, 2026-10-13
+## Static Wasm C builds — bounded local scheduling verified
 
-Development main210 includes the reviewed opt-in cooked renderer families and
+The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
+A local real-C comparison preserves exact object/archive bytes while respecting
+`-j1`/`-j2`; fresh 221-module conformance passes 492 tests, Clippy and three development
+processes. Compiler flags, locks and module coverage are unchanged. Feature
+unification also affects other cc build consumers in the selected host graph.
+Windows candidate execution and timing remain pending; no Windows speedup or
+performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
+
+## Current overview — main211, 2026-10-13
+
+Development main211 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.

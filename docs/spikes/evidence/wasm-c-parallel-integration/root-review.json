@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-13T09:02:09.433158+00:00",
+  "reviewer": "root/astra",
+  "commit": "58cea6a76b07c9f0168a7ccad4ec5fbfb08d0c7b",
+  "manifest_sha256": "c420656fd1b0e6975cc9d61983eea89f55917a407fb31b466d5668453d26b5e0",
+  "accepted": true,
+  "scope": "One feature dependency cc/parallel on embedded-fixture only. Source reviewed; unchanged lock/build flags/workflow; bounded Cargo jobserver behavior and compile-error failure preserved. Final154 retained records rehashed;148 lossless payloads decoded and verified; source/check/conformance logs verified.492 actual tests plus Clippy/fresh processes pass.",
+  "limits": [
+    "Local Apple clang scheduling sample only; actual Windows performance pending release CI.",
+    "No runtime behavior, phone or phase approval."
+  ]
+}
