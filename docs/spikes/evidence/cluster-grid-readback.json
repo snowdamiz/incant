@@ -1,0 +1,199 @@
+{
+  "format": "incant-cluster-grid-readback-evidence",
+  "version": 1,
+  "base": "96bb23df8eab86e00bef5b22e85525d36dd84972",
+  "sources": [
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/mod.rs",
+      "sha256": "8c33a7800c3241fca4b8c34a9bf207e607aa1580af537f9a090f84b4b6773ba5",
+      "bytes": 9115,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/source-001/crates/incant_render/tests/lighting_gpu/mod.rs"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/readback.rs",
+      "sha256": "a677d06ee3822268141c5e9b67d5dad6d0ea23f9af470bbfc64ee71cede04042",
+      "bytes": 6437,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/source-001/crates/incant_render/tests/lighting_gpu/readback.rs"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/extended.rs",
+      "sha256": "09160167323a5c4954650d133a5c07eb268adba67fa9bac719e638a740d9aa4f",
+      "bytes": 8951,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/source-001/crates/incant_render/tests/lighting_gpu/extended.rs"
+    }
+  ],
+  "source_freeze_sha256": "14e39608c7cfdf1e1ed019d8a8df82eebbb6b35a5db27b585042a503ddb117f7",
+  "scope": "cfg(test) numerical observer only; production sources/manifests/shaders unchanged",
+  "verification": {
+    "cpu_cases": 2,
+    "configurations": [
+      "default",
+      "cooked-clusters"
+    ],
+    "commands": 7,
+    "all_exits": 0,
+    "gpu_executed": false,
+    "planned_gpu_records": 84,
+    "source_review": "pending"
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/clippy-cooked-001.json",
+      "sha256": "e27d36dea80e7274ded4a7826fd406b1f71cf63470f67cede02e05c49ffa8bd1",
+      "bytes": 363,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/e27d36dea80e7274ded4a7826fd406b1f71cf63470f67cede02e05c49ffa8bd1.gz",
+      "retained_sha256": "dc68260646ea690dd3e6e518db1b0e390d6afd8cde19d0e32dfa46d86087e00b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/clippy-cooked-001.log",
+      "sha256": "857d4975fe76ed472bba7a8f776290b32eba152e20e410138178f9e05bea0362",
+      "bytes": 305,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/857d4975fe76ed472bba7a8f776290b32eba152e20e410138178f9e05bea0362.gz",
+      "retained_sha256": "0793e931264ad228847d785f90438105f3faa3d6f3f8fa4bc31b52a1d86ce411"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/clippy-default-001.json",
+      "sha256": "c6b970c2276d490868ca6b5be97f7a67371021edb0c183724041bf28fe27bee7",
+      "bytes": 322,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/c6b970c2276d490868ca6b5be97f7a67371021edb0c183724041bf28fe27bee7.gz",
+      "retained_sha256": "ccd45a6ed92a06bfc1caa7c086dcc87c4fec45199df35c6b1d148c04f45355de"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/clippy-default-001.log",
+      "sha256": "8a8ca1fb3366bb5a0e721971cd77e8d43ddda79ef02e07d47dcb0de43133c152",
+      "bytes": 2893,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/8a8ca1fb3366bb5a0e721971cd77e8d43ddda79ef02e07d47dcb0de43133c152.gz",
+      "retained_sha256": "412e59d027b37db744e53452a4df429561ceac0cdbba748f4b266089596d5677"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/conventions.json",
+      "sha256": "11b3a2c7e60569f960a65b237ffc02a11f4d7646e4824d2b0c97421af3a12c07",
+      "bytes": 167,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/11b3a2c7e60569f960a65b237ffc02a11f4d7646e4824d2b0c97421af3a12c07.gz",
+      "retained_sha256": "0f4543cf4579e4db686df2af5b494aae8e23fc9681f37f20692a661d8fad56f3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/cooked-test-binary.json",
+      "sha256": "146fcfb6bd933362f4f790b096549b7bd659df734153b301a231c665fa3c72b4",
+      "bytes": 247,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/146fcfb6bd933362f4f790b096549b7bd659df734153b301a231c665fa3c72b4.gz",
+      "retained_sha256": "c5041f0a2e11f6abfe1c1870f2455305cf0c53d9fb50410ee1b6492b29fd9f5b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/cpu-cooked-001.json",
+      "sha256": "45ffebc98be5d9fc4e9e32beea432107802236b34b2bba7b0ee69618cb199954",
+      "bytes": 354,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/45ffebc98be5d9fc4e9e32beea432107802236b34b2bba7b0ee69618cb199954.gz",
+      "retained_sha256": "dcf8085078b704b73598a93475451371d5ee7c4d7a0c466da5d43ad2814c4627"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/cpu-cooked-001.log",
+      "sha256": "d5f55f68c4bac37b3a2b7c3286443b07e4e8666ef175b95768ecc85c58ea303d",
+      "bytes": 1139,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/d5f55f68c4bac37b3a2b7c3286443b07e4e8666ef175b95768ecc85c58ea303d.gz",
+      "retained_sha256": "267167f17e636a393396ba52c6c0830d34079f60812e70762006e591dfc14c90"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/cpu-default-001.json",
+      "sha256": "69d4997d153a0ee4596b814cf2c36eb465b8e73a9f49a0757312cd3937e77810",
+      "bytes": 313,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/69d4997d153a0ee4596b814cf2c36eb465b8e73a9f49a0757312cd3937e77810.gz",
+      "retained_sha256": "b54b39fd9fce117663e72c73dd12e015439ec9da58101220f0085885571edd5f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/cpu-default-001.log",
+      "sha256": "bb2a91a4250bdccfb06c93166aea767a9eff6ae5c50a357c536e82695bf7c07b",
+      "bytes": 4091,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/bb2a91a4250bdccfb06c93166aea767a9eff6ae5c50a357c536e82695bf7c07b.gz",
+      "retained_sha256": "ec549aab4b07ec2578ddddbbda15f087de9136bbd2dd0a0c2e36f08c63797b4f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/default-test-binary.json",
+      "sha256": "7c9af3caef8a26049a8aaee198ba49b9c9f6c19d4ad7963e5098fdc8844f68d3",
+      "bytes": 247,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/7c9af3caef8a26049a8aaee198ba49b9c9f6c19d4ad7963e5098fdc8844f68d3.gz",
+      "retained_sha256": "0a6299a35db91bf97cd6d06e4a958b75a8b12c289ced2309530a68bb10999fc0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/diff.json",
+      "sha256": "c0fd327137df77c83141ea0d3845ddeababdf585d8f0cc30f08af95ba64e9da6",
+      "bytes": 138,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/c0fd327137df77c83141ea0d3845ddeababdf585d8f0cc30f08af95ba64e9da6.gz",
+      "retained_sha256": "61b87ed4b058a1fc877f81b3858f3950c75a6f29db04db94241d65a3326ec84f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/fmt.json",
+      "sha256": "aeab93e0c121a3561b69044a09407da5efb6403056e66e742e08a4be91d45d4b",
+      "bytes": 402,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/aeab93e0c121a3561b69044a09407da5efb6403056e66e742e08a4be91d45d4b.gz",
+      "retained_sha256": "8bd17642488a38a070017837681940c875e4259674724f274f3f8c7bee980df1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/source-001/crates/incant_render/tests/lighting_gpu/extended.rs",
+      "sha256": "09160167323a5c4954650d133a5c07eb268adba67fa9bac719e638a740d9aa4f",
+      "bytes": 8951,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/09160167323a5c4954650d133a5c07eb268adba67fa9bac719e638a740d9aa4f.gz",
+      "retained_sha256": "4b488851beb0a772edc55c90cf53cf3acbc286f10704b2957f8aa221abc72aaa"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/source-001/crates/incant_render/tests/lighting_gpu/mod.rs",
+      "sha256": "8c33a7800c3241fca4b8c34a9bf207e607aa1580af537f9a090f84b4b6773ba5",
+      "bytes": 9115,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/8c33a7800c3241fca4b8c34a9bf207e607aa1580af537f9a090f84b4b6773ba5.gz",
+      "retained_sha256": "cb43ce244e30f56628dd51d0bfad24d6fc608f9ae9bd7aa2afb37d92496a01b1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/source-001/crates/incant_render/tests/lighting_gpu/readback.rs",
+      "sha256": "a677d06ee3822268141c5e9b67d5dad6d0ea23f9af470bbfc64ee71cede04042",
+      "bytes": 6437,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/a677d06ee3822268141c5e9b67d5dad6d0ea23f9af470bbfc64ee71cede04042.gz",
+      "retained_sha256": "7bccbb8bf4b2f5b731242b527f85c3890b93719fe8509afa0b36e603992d63c1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-001/source-001/freeze.json",
+      "sha256": "14e39608c7cfdf1e1ed019d8a8df82eebbb6b35a5db27b585042a503ddb117f7",
+      "bytes": 1269,
+      "retained": "docs/spikes/evidence/cluster-grid-readback/14e39608c7cfdf1e1ed019d8a8df82eebbb6b35a5db27b585042a503ddb117f7.gz",
+      "retained_sha256": "ff6f8b16f67a478192f5f7cc0e369ff9f53ef80f1d922cbcb719356179e671dd"
+    }
+  ],
+  "external_binaries": [
+    {
+      "path": "/tmp/incant-agent-font-target/ci/deps/incant_render-970ba566a3c049ad",
+      "sha256": "69c72847b8f96fd813fe0962d453b75829de996e1a19db61df724c84d042d6ee",
+      "bytes": 31429264,
+      "executed": "CPU filter only; GPU test compiled, not run"
+    },
+    {
+      "path": "/tmp/incant-agent-font-target/ci/deps/incant_render-68485dcc31e14a55",
+      "sha256": "c8226533feb3dfd76f3db33f64d822cea99674bf7ee5fc1ba3380a2fb94c619c",
+      "bytes": 31508608,
+      "executed": "CPU filter only; GPU test compiled, not run"
+    }
+  ],
+  "limits": [
+    "Ignored GPU test was compiled, never run. Actual baseline/cooked raw-grid parity and device/backend evidence pending.",
+    "No pixels, appearance or performance claims; historical0066 evidence is not execution of this extension."
+  ]
+}

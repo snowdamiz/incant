@@ -6,77 +6,20 @@ use crate::{
 use incant_doc::{Entity, Transform};
 use incant_render_authoring::RendererAuthoringExt as _;
 use serde_json::json;
-use std::{collections::BTreeMap, time::Duration};
+use std::collections::BTreeMap;
+
+mod extended;
+mod readback;
 
 fn grid_readback(r: &Renderer, plan: LightPlan) -> (Vec<u32>, Vec<u32>) {
     let lights = GpuLights::upload(&r.device, plan);
-    let mut encoder = r.device.create_command_encoder(&Default::default());
-    let shadows = r
-        .shadows
-        .prepare(
-            &r.device,
-            crate::camera::CameraView::preview(),
-            320. / 192.,
-            &[],
-            &[],
-        )
-        .unwrap();
-    let frame = r
-        .lighting
-        .prepare(
-            &r.device,
-            &lights,
-            [0., 0., 320., 192.],
-            LocalLightSelection::Clustered,
-            crate::camera::CameraView::preview(),
-            &shadows,
-        )
-        .unwrap();
-    frame.compute.as_ref().unwrap().encode(&mut encoder);
-    let grid = r
-        .lighting
-        .buffers(&r.device, [5, 3], lights.local.div_ceil(32).max(1))
-        .unwrap();
-    let size = grid.counts.size() + grid.masks.size();
-    let readback = r.device.create_buffer(&wgpu::BufferDescriptor {
-        label: Some("Cluster assignment readback"),
-        size,
-        usage: wgpu::BufferUsages::MAP_READ | wgpu::BufferUsages::COPY_DST,
-        mapped_at_creation: false,
-    });
-    encoder.copy_buffer_to_buffer(&grid.counts, 0, &readback, 0, grid.counts.size());
-    encoder.copy_buffer_to_buffer(
-        &grid.masks,
-        0,
-        &readback,
-        grid.counts.size(),
-        grid.masks.size(),
+    let result = readback::grid_readback_at(
+        r,
+        &lights,
+        [0., 0., 320., 192.],
+        crate::camera::CameraView::preview(),
     );
-    r.queue.submit([encoder.finish()]);
-    let (tx, rx) = std::sync::mpsc::channel();
-    readback
-        .slice(..)
-        .map_async(wgpu::MapMode::Read, move |result| {
-            tx.send(result).unwrap();
-        });
-    r.device
-        .poll(wgpu::PollType::Wait {
-            submission_index: None,
-            timeout: Some(Duration::from_secs(10)),
-        })
-        .unwrap();
-    rx.recv_timeout(Duration::from_secs(10)).unwrap().unwrap();
-    let view = readback.slice(..).get_mapped_range();
-    let mut words: Vec<_> = view
-        .as_chunks::<4>()
-        .0
-        .iter()
-        .map(|v| u32::from_le_bytes(*v))
-        .collect();
-    let masks = words.split_off(grid.counts.size() as usize / 4);
-    drop(view);
-    readback.unmap();
-    (words, masks)
+    (result.counts, result.masks)
 }
 
 #[test]
