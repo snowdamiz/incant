@@ -31,6 +31,7 @@ struct NodeBinding {
 /// not a claim that the complete renderer has reached its shipping budgets.
 pub struct RetainedScene {
     owner: Arc<()>,
+    resolution: Option<crate::resolution::ResolutionOwner>,
     bindings: Vec<NodeBinding>,
     environment: Option<(AssetVersionId, f64, f64)>,
     camera_index: usize,
@@ -89,6 +90,7 @@ impl Renderer {
             .count();
         Ok(RetainedScene {
             owner: Arc::clone(&self.identity),
+            resolution: None,
             bindings: input
                 .nodes
                 .iter()
@@ -122,6 +124,29 @@ impl Renderer {
     }
 }
 impl RetainedScene {
+    /// Explicit opt-in, replacing any previous telemetry ownership. Invalid config
+    /// leaves the existing policy unchanged. None restores output-sized rendering.
+    pub fn set_dynamic_resolution(
+        &mut self,
+        config: Option<crate::resolution::ResolutionConfig>,
+    ) -> std::result::Result<(), crate::resolution::ResolutionError> {
+        self.resolution = config
+            .map(crate::resolution::ResolutionOwner::new)
+            .transpose()?;
+        Ok(())
+    }
+    pub fn resolution_frame(&self) -> Option<crate::resolution::ResolutionFrame> {
+        self.resolution.as_ref().and_then(|r| r.last())
+    }
+    pub fn record_frame_time(
+        &mut self,
+        frame: &crate::resolution::ResolutionFrame,
+        milliseconds: f64,
+    ) -> std::result::Result<bool, crate::resolution::ResolutionError> {
+        self.resolution
+            .as_mut()
+            .map_or(Ok(false), |r| r.observe(frame, milliseconds))
+    }
     pub fn stats(&self) -> &SceneStats {
         &self.live.stats
     }
@@ -281,13 +306,28 @@ impl RetainedScene {
             return Err(SceneError::Input("retained scene belongs to another renderer").into());
         }
         self.stage(input)?;
-        let commands = renderer.draw_scene(
+        let resolution = self
+            .resolution
+            .as_ref()
+            .map(|r| {
+                r.prepare(
+                    [target.width, target.height],
+                    target.viewport.map(|v| v.rect).unwrap_or([
+                        0.,
+                        0.,
+                        target.width as f32,
+                        target.height as f32,
+                    ]),
+                    self.staging.camera.pixel_resolution,
+                )
+            })
+            .transpose()?;
+        let commands = renderer.draw_scene_scaled(
             &self.staging,
-            target.view,
-            target.format,
-            target.width,
-            target.height,
-            target.viewport,
+            target,
+            self.resolution
+                .as_ref()
+                .map_or(crate::resolution::ResolutionScale::FULL, |r| r.scale()),
         )?;
         for batch in &self.staging.batches {
             if !batch.updates.is_empty() {
@@ -310,6 +350,9 @@ impl RetainedScene {
         }
         let submission = renderer.queue.submit([commands]);
         std::mem::swap(&mut self.live, &mut self.staging);
+        if let (Some(owner), Some(frame)) = (&mut self.resolution, resolution) {
+            owner.accept(frame);
+        }
         Ok(submission)
     }
 }

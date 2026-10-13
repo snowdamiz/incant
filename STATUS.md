@@ -1958,3 +1958,19 @@ seven precise refusals. Owned emulator resources are removed. The earlier comple
 fast shipping proof stays explicitly pre-PCM; no later fast archive rebuild is
 claimed. Final independent review is accepted; publication awaits its fast check. No phone/rendering/performance gate
 is approved. [Scope and evidence](docs/spikes/authored-android-main181.md).
+
+### Opt-in retained dynamic resolution (CPU slice)
+
+- Bounded frame-duration control now selects retained scene attachment dimensions
+  without changing output/UI size or authored pixel-camera grids. Default behavior
+  is unchanged; nearest-texel presentation reuses existing WGSL.
+- Native composed hosts can opt into one-slot, nonblocking queue-completion latency
+  feedback. This is not isolated GPU timing or whole-game frame time; the automatic
+  native clock explicitly refuses browser targets, whose controller can still use
+  explicit host measurements.
+- Independent source/evidence review accepts this CPU slice; publisher integration
+  and Claude0067 actual callback/render acceptance remain pending.
+- 73 CPU tests, Clippy, renderer wasm32 and runtime graph checks pass. All 89 GPU
+  cases remain ignored. Actual callback/render execution, Claude visual acceptance,
+  temporal reconstruction/MetalFX and reference-device budgets remain open. See
+  [contract and evidence](docs/spikes/dynamic-resolution.md).
