@@ -1,6 +1,6 @@
 # Implementation status
 
-Private primitive narrow-phase producer333e is independently accepted. Its current-main237 composition is frozen for source review and separate mode qualification. Native world installation and public physics-save admission remain closed.
+Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source review is accepted; final current-main evidence review is pending. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
 
 Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source and final current-main evidence reviews are accepted; PR237 merged after its required exact-head fast check. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
 
