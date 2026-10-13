@@ -89,6 +89,17 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Checked rigid collider properties — CPU source slice
+
+The private [collider-state slice](docs/spikes/physics-collider-state.md) preserves
+fixed native collider configuration, including mass modes, group-test modes and
+historical enabled tri-state. The joined rigid owner derives force thresholds from
+checked colliders and requires exact body/geometry witnesses. Independent source
+and final evidence reviews accept the scoped result: 135 CPU tests (none ignored),
+Clippy, wasm32, normal graph and repository checks pass. Integration is pending.
+Physics world save admission stays closed; manager, derived arithmetic and
+phase/constructor validation remain open. No live restore or device claim.
+
 ## Physics world continuation — trusted native proof, live saves still closed
 
 The [joined rigid owner slice](docs/spikes/physics-world-continuation.md) now checks

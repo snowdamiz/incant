@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "scope": "Final accepted inert collider configuration; live physics-world save admission remains closed",
+  "audited_packet": {
+    "path": "docs/spikes/evidence/physics-collider-state.json",
+    "sha256": "2fed433a3cf7986c49706ca196cc9c31e2ba78d283c59583c0046a8f374ecefd"
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/physics-collider-source-review.json",
+    "sha256": "4773d3bf2fdea3bd5e45f8c9029e0aa1dad912b06618c5b2de1a28381d12352b"
+  },
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-collider-final-review.json",
+    "sha256": "9da78ce6b3e4306feb318a2bd496bb72c69e69626ac614751a599a5bc6386dd1"
+  },
+  "post_review_documentation": [
+    {
+      "path": "STATUS.md",
+      "sha256": "9aa11e054eea5b9518f9f6d4c1d8f7b41ca2bb840286c13a979f8772914d577a"
+    },
+    {
+      "path": "docs/spikes/physics-collider-state.md",
+      "sha256": "5cc666e46a67254c1bf41934647e20f02b93a08e43edba96e01168e3fc4b60b2"
+    }
+  ],
+  "production_and_tests": "unchanged source001; documentation-only review closeout",
+  "integration": "pending publisher current-main intake",
+  "live_restore": false,
+  "gpu": false
+}

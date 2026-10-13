@@ -87,6 +87,9 @@ impl<'a> ValidatedManifolds<'a> {
             .map(|e| e.row as usize)
     }
 
+    pub(crate) fn geometries(&self) -> &'a [ValidatedGeometry] {
+        self.context.geometries
+    }
     pub(crate) fn attachments(&self) -> &'a ValidatedAttachments<'a> {
         self.context.attachments
     }

@@ -3,6 +3,7 @@ mod codec;
 mod validate;
 use crate::{Handle, Identity, LocalPose, PendingJournals, ValidatedAttachments};
 pub use codec::{decode_body_state, encode_body_state};
+pub(crate) use validate::local_mass;
 pub use validate::validate_body_state;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
