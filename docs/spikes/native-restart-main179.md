@@ -30,8 +30,9 @@ the original failed compile and corrected retry, frozen input hashes, source
 comparison, complete process streams and outputs, package bytes and immutable
 binary/symbol identities. `collect.py --verify-only` rechecks saved results without
 starting a build or player. The prior [pause receipt](native-restart-main178-pause.md)
-remains historical; work has resumed. Independent final integration review and
-actual main179 ancestry reconciliation precede publication.
+remains historical; work has resumed. [Independent final review](evidence/native-restart-main179/final-review.json)
+is accepted. Actual main179 ancestry is joined with byte-identical compiled and
+tool inputs; the merge carries only STATUS and worker review documentation.
 
 The proof is ordinary offline CPU execution. Fresh startup reset does not provide
 physics snapshot continuation. Wasm and headless Play request owners still refuse

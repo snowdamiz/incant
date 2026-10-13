@@ -6,7 +6,7 @@ sha=lambda b:hashlib.sha256(b).hexdigest()
 read=lambda p:json.loads(Path(p).read_text())
 git=lambda *a:subprocess.check_output(['git',*a],cwd=r,text=True).strip()
 freeze=read(o/'freeze.json');assert freeze['head']=='7f6e41c4a1a4d799dd115944f26cee51676fd36c';assert all(h(r/p)==v for p,v in freeze['files'].items() if p!='.gitattributes')
-original_attrs=subprocess.check_output(['git','show',freeze['head']+':.gitattributes'],cwd=r);attrs_suffix=b'\n# Preserve raw restart evidence logs, including intentional terminal blank lines.\ndocs/spikes/evidence/native-session-restart/**/*.log -text whitespace=-blank-at-eof\n';assert (r/'.gitattributes').read_bytes()==original_attrs+attrs_suffix
+original_attrs=subprocess.check_output(['git','show',freeze['head']+':.gitattributes'],cwd=r);attrs_suffix=b'\n# Preserve raw restart evidence logs, including intentional terminal blank lines.\ndocs/spikes/evidence/native-session-restart/**/*.log -text whitespace=-blank-at-eof\n';extra_attrs=b'# Preserve the leading space on blank unified-diff context lines.\ndocs/spikes/evidence/native-restart-main179/integration-manifest.patch -text whitespace=-blank-at-eol\n';assert (r/'.gitattributes').read_bytes() in (original_attrs+attrs_suffix,original_attrs+attrs_suffix+extra_attrs)
 metadata_seam={'path':'.gitattributes','tested_sha256':sha(original_attrs),'current_sha256':h(r/'.gitattributes'),'reason':'Preserve producer raw log bytes and exempt only their terminal blank lines; no compiler input or runtime change.'}
 assert read(o/'terminal.json')['exit']==0
 checks=read(o/'results.json');assert len(checks)==24

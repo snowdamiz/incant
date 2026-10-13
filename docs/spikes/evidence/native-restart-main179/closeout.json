@@ -1,0 +1,7 @@
+{
+  "accepted_manifest_sha256": "93511d74606e1b03fe31a437463cd0d24944a30026482ebb8e10eee94f8fa971",
+  "final_review_sha256": "dc78a3470a629b247976101142f1b87e31c2e3bde08ca0c45a0115812d7caba5",
+  "post_review_metadata": "One additional exact evidence-patch attribute preserves unified-diff blank context spaces. Assertion-only collector accepts original or extended attrs suffix. No raw artifact bytes or compiled inputs changed.",
+  "attributes_sha256": "e2859d9bcc0ec7b37156483cc28e7d43415f71814b3d1ae680b2a89068a8a87e",
+  "collector_sha256": "ff2c9c77baaae6ae66e9075f1391e8b0385d33017146bbeca19eb7da89d0fa52"
+}

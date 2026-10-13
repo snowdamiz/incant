@@ -21,9 +21,10 @@ visual work, and Astra owns correctness and integration.
 Opted-in native TypeScript hosts now replace the complete world, VM, input/UI and
 mixer from a trusted startup seed. Host-step/output chronology stays monotonic;
 held controls and stale native text/pointer ownership cannot enter the new game.
-343 CPU tests and 24 fresh source/map/build-deleted Core/Planar runs pass, including
+Current-main integration passes 355 CPU tests and 24 fresh source/map/build-deleted
+Core/Planar runs, including
 exact fresh-state and concatenated static/streamed PCM comparisons. Independent
-source and final execution reviews are accepted; publisher integration is pending.
+source and final execution reviews are accepted; scoped publication is pending.
 Native-window/device/appearance acceptance, Wasm/headless restart ownership and
 physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
 
@@ -49,8 +50,7 @@ The trusted developer owner builds the selected kernel, verifies worker identity
 and enforces request deadlines and complete process-tree cleanup. Actual sessions
 preserve their original kernel while public authoring changes the next mode;
 state matches ordinary native Play after private source removal. Both compiled modes pass all-target tests and Clippy; actual owned-process proofs
-and full tools checks pass on main178. Independent final integration review is accepted; required fast check and
-publication are pending. Editor GPU embedding and Windows execution remain separate.
+and full tools checks pass on main178. Independent final integration review and required fast check passed; PR179 is merged. Editor GPU embedding and Windows execution remain separate.
 [Contract and evidence](docs/spikes/native-worker-owner.md).
 
 ## Retained native CPU worker — current main178 checks passed
@@ -59,8 +59,7 @@ A native worker drops authoring state after startup and retains only its disposa
 runtime composition. Both matching physics binaries pass 65 all-target headless tests each,
 Clippy and real source-deleted process checks, including duplicate-step fencing,
 strict protocol refusals and disconnect cleanup. The three mode-aware test fixtures
-use public commands and preserve explicit foreign-mode refusal. Independent final review is accepted; fast check and
-publication are pending; [integrated evidence](docs/spikes/native-worker-main178.md). Automatic editor process selection and GPU viewport
+use public commands and preserve explicit foreign-mode refusal. Independent final review and fast check passed; PR179 is merged; [integrated evidence](docs/spikes/native-worker-main178.md). Automatic editor process selection and GPU viewport
 embedding remain open. [Contract and evidence](docs/spikes/native-play-worker.md).
 
 ## Physics process selection — local execution passed
@@ -855,8 +854,8 @@ and complete Game UI/IME gates remain open.
 The resumed private integration passes355CPU cases and two fresh ordinary shipping
 exports with24 separate player processes. Core/Planar restart matches fresh state
 and exact concatenated PCM; both matching headless fixtures explicitly refuse
-unsupported restart. Independent final integration review and publication are
-pending. [Current evidence](docs/spikes/native-restart-main179.md) retains the
+unsupported restart. Independent final integration review is accepted; publication awaits the
+exact-head fast check. [Current evidence](docs/spikes/native-restart-main179.md) retains the
 original missing-bundle compile attempt and unchanged-source correction.
 
 ## Current milestone
@@ -871,7 +870,7 @@ Reviewed physics kernel forwarding, cooked/save identity, project selection and
 mode-aware developer/desktop export tools are merged; automatic editor worker
 selection and actual physics saves remain separate. Authored iOS archives are
 merged with actual simulator proof and qualified device-link evidence. The retained
-CPU worker current-main proof and final review pass, awaiting the fast PR check;
+CPU worker and managed owner are merged through main179;
 whole-session restart and authored Android work remain local integration lanes. Phase 1 and the finished game
 remain incomplete.
 

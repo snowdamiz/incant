@@ -27,3 +27,5 @@ third_party/kira/** -text whitespace=-blank-at-eol,cr-at-eol
 
 # Preserve raw restart evidence logs, including intentional terminal blank lines.
 docs/spikes/evidence/native-session-restart/**/*.log -text whitespace=-blank-at-eof
+# Preserve the leading space on blank unified-diff context lines.
+docs/spikes/evidence/native-restart-main179/integration-manifest.patch -text whitespace=-blank-at-eol
