@@ -1,0 +1,252 @@
+{
+ "model": "0073 addendum-3 support witnesses (single pixel, analytic)",
+ "python": "3.14.8",
+ "cases": [
+  {
+   "case": "E1 every positive-weight tap lies within 1.5 source texels of P per axis",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "per_numerator": {
+     "4": {
+      "max_axis_texels": 1.5,
+      "max_radius_texels": 2.121320344,
+      "support_radius_px": 8.5737,
+      "near_radius_px": 4.0
+     },
+     "5": {
+      "max_axis_texels": 1.46875,
+      "max_radius_texels": 2.07712617,
+      "support_radius_px": 6.8589,
+      "near_radius_px": 3.2
+     },
+     "6": {
+      "max_axis_texels": 1.4375,
+      "max_radius_texels": 2.032931996,
+      "support_radius_px": 5.7158,
+      "near_radius_px": 2.6667
+     },
+     "7": {
+      "max_axis_texels": 1.46875,
+      "max_radius_texels": 2.07712617,
+      "support_radius_px": 4.8992,
+      "near_radius_px": 2.2857
+     },
+     "8": {
+      "max_axis_texels": 1.375,
+      "max_radius_texels": 1.944543648,
+      "support_radius_px": 4.2868,
+      "near_radius_px": 2.0
+     },
+     "9": {
+      "max_axis_texels": 1.46875,
+      "max_radius_texels": 2.07712617,
+      "support_radius_px": 3.8105,
+      "near_radius_px": 1.7778
+     },
+     "10": {
+      "max_axis_texels": 1.4375,
+      "max_radius_texels": 2.032931996,
+      "support_radius_px": 3.4295,
+      "near_radius_px": 1.6
+     },
+     "11": {
+      "max_axis_texels": 1.46875,
+      "max_radius_texels": 2.07712617,
+      "support_radius_px": 3.1177,
+      "near_radius_px": 1.4545
+     },
+     "12": {
+      "max_axis_texels": 1.5,
+      "max_radius_texels": 2.121320344,
+      "support_radius_px": 2.8579,
+      "near_radius_px": 1.4
+     },
+     "13": {
+      "max_axis_texels": 1.46875,
+      "max_radius_texels": 2.07712617,
+      "support_radius_px": 2.6381,
+      "near_radius_px": 1.4
+     },
+     "14": {
+      "max_axis_texels": 1.4375,
+      "max_radius_texels": 2.032931996,
+      "support_radius_px": 2.4496,
+      "near_radius_px": 1.4
+     },
+     "15": {
+      "max_axis_texels": 1.46875,
+      "max_radius_texels": 2.07712617,
+      "support_radius_px": 2.2863,
+      "near_radius_px": 1.4
+     },
+     "16": {
+      "max_axis_texels": 1.375,
+      "max_radius_texels": 1.944543648,
+      "support_radius_px": 2.1434,
+      "near_radius_px": 1.4
+     }
+    }
+   }
+  },
+  {
+   "case": "S1 (a2): emitter only in far taps, removed at 505",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "radiance_504": 0.2930896432402765,
+    "radiance_505": 0.2642008418018725,
+    "radiance_512": 0.1263291343794111,
+    "radiance_519": 0.060404993732075994,
+    "drops_at_removal": []
+   }
+  },
+  {
+   "case": "S1 (a3): emitter only in far taps, removed at 505",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "radiance_504": 0.2930896432402765,
+    "radiance_505": 0.0,
+    "radiance_512": 0.0,
+    "radiance_519": 0.0,
+    "drops_at_removal": [
+     505
+    ]
+   }
+  },
+  {
+   "case": "S1 replay equals root's retained values bit for bit",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "root": [
+     0.2930896432402765,
+     0.1263291343794111,
+     0.060404993732075994
+    ],
+    "replay": [
+     0.2930896432402765,
+     0.1263291343794111,
+     0.060404993732075994
+    ]
+   }
+  },
+  {
+   "case": "O1 (a2_full): an overflowed pixel's unrecorded third owner leaves",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "residual_505": 0.26420084180187237,
+    "residual_512": 0.12632913437941096,
+    "residual_519": 0.06040499373207589,
+    "drops_at_removal": []
+   }
+  },
+  {
+   "case": "O1 (a3): an overflowed pixel's unrecorded third owner leaves",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "residual_505": 0.0,
+    "residual_512": 0.0,
+    "residual_519": 0.0,
+    "drops_at_removal": [
+     505
+    ]
+   }
+  },
+  {
+   "case": "O1 cost: a non-contributor drops only on a class collision (reported)",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "colliding_class_owner": 32,
+    "colliding_class_drops": [
+     300
+    ],
+    "free_class_owner": 40,
+    "free_class_drops": []
+   }
+  },
+  {
+   "case": "U1 (a2_full): provenance kept through a clip-in-place frame",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "residual_507": 0.011664589509533252,
+    "residual_512": 0.004509179975882231,
+    "residual_519": 0.002133438310150934,
+    "resets": [
+     505
+    ],
+    "drops": []
+   }
+  },
+  {
+   "case": "U1 (a3): provenance kept through a clip-in-place frame",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "residual_507": 0.0,
+    "residual_512": 0.0,
+    "residual_519": 0.0,
+    "resets": [
+     505
+    ],
+    "drops": [
+     507
+    ]
+   }
+  },
+  {
+   "case": "B1 (a2_near): moving-path history meets a caster rectangle 5 px away",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "grown_half_width_px": 2.525,
+    "hit": false,
+    "excess_first": 0.15000000000000002,
+    "excess_eighth": 0.07174453500000003,
+    "excess_fifteenth": 0.034315188682441516
+   }
+  },
+  {
+   "case": "B1 (a3_bounds_without_flag): moving-path history meets a caster rectangle 5 px away",
+   "expect": "fail",
+   "observed": "fail",
+   "as_expected": true,
+   "values": {
+    "grown_half_width_px": 3.2684,
+    "hit": false,
+    "excess_first": 0.15000000000000002,
+    "excess_eighth": 0.07174453500000003,
+    "excess_fifteenth": 0.034315188682441516
+   }
+  },
+  {
+   "case": "B1 (a3_unbounded_flag): moving-path history meets a caster rectangle 5 px away",
+   "expect": "pass",
+   "observed": "pass",
+   "as_expected": true,
+   "values": {
+    "grown_half_width_px": 3.2684,
+    "hit": true,
+    "excess_first": 0.0,
+    "excess_eighth": 0.0,
+    "excess_fifteenth": 0.0
+   }
+  }
+ ],
+ "unexpected": []
+}

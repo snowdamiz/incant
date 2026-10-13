@@ -1,6 +1,102 @@
 # 0073 result — output upscaling numeric execution, visual review and repair design
 
-## Addendum 2 (current): shading changes, camera ownership and owner identity
+## Addendum 3 (current): bounded provenance support
+
+**Status: BOUNDED CORRECTION WRITTEN for root review, CPU only.**
+- The correction is in
+  [`quality-repair-addendum-3.md`](quality-repair-addendum-3.md).
+- The witnesses are
+  [`repair-model/witness_v3.py`](repair-model/witness_v3.py), with their output
+  in [`repair-model/results-3.json`](repair-model/results-3.json).
+- No renderer source, GPU, Cargo, build, target or capture was used. No subagents,
+  memory writes or pushes.
+- **Byte-exact, checked with `git diff --quiet HEAD`:**
+  - addendum 2 (`4ece422d…`);
+  - `model_v2.py` (`57295562…`) and `results-2.json` (`cb9c256e…`);
+  - addendum 1, `model.py` and `results.json`.
+
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+Root's `claude-0073-provenance-support-acp.log` header reads `Resumed the latest
+ACP session scoped to this handoff worktree.` and `Claude session verified:
+Opus 5.5; thinking: max`.
+
+**Inputs:**
+- the brief's priority revision (`8157b230…`, root's, uncommitted);
+- root's witness `upscaling-full-support-counterexample-20261013.json`
+  (`47cf05d8…`);
+- 0074's `native-coverage-repair-addendum.md` (`ecb7bba3…`), read only;
+- `kernel_oracle.rs` and `common.wgsl` at 2fe23dce.
+
+**Outcome:**
+- **Root's decisions applied:**
+  - footprints, not signatures;
+  - exact provenance;
+  - joint palettes compared when available, otherwise always changed;
+  - C7, C9 and P1 kept explicit.
+- **Root's support counterexample** reproduces bit for bit (0.29309, 0.12633,
+  0.06040). With every positive-weight tap tracked, the emitter's removal drops
+  the history to 0.
+- **Radii separated:**
+  - the kernel stays 3×3, untruncated;
+  - the box, front owner and admission stay at `R`;
+  - provenance covers the full support: owners, changed checks, support depths
+    and footprint extent.
+- **Exact extent:** every tap lies within 1.5 source texels of P per axis.
+  E1 checks this over n = 4–16, fractional origins and all phases (max per-axis
+  offset exactly 1.5 texels, max radius 2.1213). That gives support radii of
+  2.14, 2.86, 4.29 and 8.57 px at 16, 12, 8 and 4/16.
+- **Moving reprojection:** histories admitted along motion carry an unbounded
+  flag. They make no "cannot miss" claim and drop on the first static frame
+  with a caster rectangle. Static frames never read old-view depths (derived in
+  section 6).
+- **Overflow:** a 31-class mask; drop whenever authenticity cannot be shown.
+  O1: 0.264 → 0. A colliding class causes an unnecessary drop (reported cost).
+- **Union provenance:** also required in clip-in-place frames. U1 (an issue
+  found in this pass): 0.0117 → 0.
+- **Controls:** P1 is recorded as unresolved, separately from the new improved
+  controls (S1, O1, U1, B1). C7 and C9 as written stay failed.
+- **Shared substrate with 0074:**
+  - stable per-placement ids;
+  - an R32Uint `id | changed << 31` owner word (R16Uint cannot hold 100,000
+    ids);
+  - the change witness;
+  - the provenance algebra.
+
+  Nothing in MetalFX is redesigned, and no target is authorized.
+- **Mechanics:** meta lane semantics change; `Portable` grows to 912 B; total
+  973,121,760 B (+32 B).
+
+**Commands and results:**
+
+| Command | Result |
+|---|---|
+| `python3 -I -B handoffs/0073-upscaling-review/repair-model/witness_v3.py --out …/results-3.json` | Exit 0; 12 cases, 5 expected failures, none unexpected; about 1 s |
+| Second run, compared with `cmp` | Byte-identical |
+| `/usr/bin/python3` (3.9.6) run | Identical to 3.14.8 apart from the version field |
+| `git diff --quiet HEAD` on the retained files | No changes |
+
+**Not run:** Cargo, the cooker, renderer and GPU tests, and the retained and
+addendum-2 suites. Root asked for no third full-suite run, so their numbers
+describe addendum 2's rules.
+
+**Screenshots:** none. No GPU was used.
+
+**Changed paths:**
+- `handoffs/0073-upscaling-review/quality-repair-addendum-3.md` (new)
+- `handoffs/0073-upscaling-review/repair-model/witness_v3.py` (new)
+- `handoffs/0073-upscaling-review/repair-model/results-3.json` (new)
+- `handoffs/0073-upscaling-review/result.md` (this section)
+
+Root's `brief.md` is left uncommitted.
+
+**Limits:**
+- **Witnesses:** single pixel, 16/16, with B1 as algebra. Slab containment and
+  A1–A5 are derived, not simulated.
+- **Not re-measured:** the costs of exactness (halo, overflow drops, rebase)
+  and the retained and addendum-2 cases under the new rules.
+- **Claims:** no appearance, performance, phone or phase-gate claim.
+
+## Addendum 2 (preserved): shading changes, camera ownership and owner identity
 
 **Status: CORRECTION WRITTEN for root review, CPU only.**
 - The correction is in
