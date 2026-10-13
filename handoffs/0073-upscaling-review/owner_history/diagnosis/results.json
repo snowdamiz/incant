@@ -1,0 +1,2589 @@
+{
+ "arithmetic": {
+  "ieee": {
+   "center_color_f32": 0.0,
+   "center_record": [
+    2147483653,
+    0
+   ],
+   "center_tap_9_8_weight": 0.0,
+   "texels_with_nonzero_fraction": []
+  },
+  "ieee+fma": {
+   "center_color_f32": 0.0,
+   "center_record": [
+    2147483653,
+    0
+   ],
+   "center_tap_9_8_weight": 0.0,
+   "texels_with_nonzero_fraction": []
+  },
+  "quot+1": {
+   "center_color_f32": 0.0,
+   "center_record": [
+    2147483653,
+    0
+   ],
+   "center_tap_9_8_weight": 0.0,
+   "texels_with_nonzero_fraction": [
+    [
+     3,
+     3,
+     2.384185791015625e-07
+    ],
+    [
+     4,
+     4,
+     4.76837158203125e-07
+    ],
+    [
+     5,
+     5,
+     4.76837158203125e-07
+    ],
+    [
+     6,
+     6,
+     4.76837158203125e-07
+    ],
+    [
+     9,
+     9,
+     9.5367431640625e-07
+    ],
+    [
+     11,
+     11,
+     9.5367431640625e-07
+    ],
+    [
+     12,
+     12,
+     9.5367431640625e-07
+    ],
+    [
+     13,
+     13,
+     9.5367431640625e-07
+    ],
+    [
+     14,
+     14,
+     9.5367431640625e-07
+    ]
+   ]
+  },
+  "quot+1+fma": {
+   "center_color_f32": 0.4050000011920929,
+   "center_record": [
+    2147483653,
+    7
+   ],
+   "center_tap_9_8_weight": 9.536734069115482e-07,
+   "texels_with_nonzero_fraction": [
+    [
+     1,
+     1,
+     1.1920928955078125e-07
+    ],
+    [
+     3,
+     3,
+     2.384185791015625e-07
+    ],
+    [
+     4,
+     4,
+     4.76837158203125e-07
+    ],
+    [
+     5,
+     5,
+     4.76837158203125e-07
+    ],
+    [
+     6,
+     6,
+     4.76837158203125e-07
+    ],
+    [
+     8,
+     8,
+     9.5367431640625e-07
+    ],
+    [
+     9,
+     9,
+     9.5367431640625e-07
+    ],
+    [
+     11,
+     11,
+     9.5367431640625e-07
+    ],
+    [
+     12,
+     12,
+     9.5367431640625e-07
+    ],
+    [
+     13,
+     13,
+     9.5367431640625e-07
+    ],
+    [
+     14,
+     14,
+     9.5367431640625e-07
+    ]
+   ]
+  },
+  "quot+2": {
+   "center_color_f32": 0.40500006079673767,
+   "center_record": [
+    2147483653,
+    7
+   ],
+   "center_tap_9_8_weight": 1.907344994833693e-06,
+   "texels_with_nonzero_fraction": [
+    [
+     1,
+     1,
+     1.1920928955078125e-07
+    ],
+    [
+     2,
+     2,
+     2.384185791015625e-07
+    ],
+    [
+     3,
+     3,
+     4.76837158203125e-07
+    ],
+    [
+     4,
+     4,
+     9.5367431640625e-07
+    ],
+    [
+     5,
+     5,
+     9.5367431640625e-07
+    ],
+    [
+     6,
+     6,
+     9.5367431640625e-07
+    ],
+    [
+     7,
+     7,
+     4.76837158203125e-07
+    ],
+    [
+     8,
+     8,
+     1.9073486328125e-06
+    ],
+    [
+     9,
+     9,
+     1.9073486328125e-06
+    ],
+    [
+     10,
+     10,
+     9.5367431640625e-07
+    ],
+    [
+     11,
+     11,
+     1.9073486328125e-06
+    ],
+    [
+     12,
+     12,
+     1.9073486328125e-06
+    ],
+    [
+     13,
+     13,
+     1.9073486328125e-06
+    ],
+    [
+     14,
+     14,
+     1.9073486328125e-06
+    ]
+   ]
+  },
+  "quot+2+fma": {
+   "center_color_f32": 0.40500006079673767,
+   "center_record": [
+    2147483653,
+    7
+   ],
+   "center_tap_9_8_weight": 1.907344994833693e-06,
+   "texels_with_nonzero_fraction": [
+    [
+     1,
+     1,
+     1.1920928955078125e-07
+    ],
+    [
+     2,
+     2,
+     2.384185791015625e-07
+    ],
+    [
+     3,
+     3,
+     4.76837158203125e-07
+    ],
+    [
+     4,
+     4,
+     9.5367431640625e-07
+    ],
+    [
+     5,
+     5,
+     9.5367431640625e-07
+    ],
+    [
+     6,
+     6,
+     9.5367431640625e-07
+    ],
+    [
+     7,
+     7,
+     4.76837158203125e-07
+    ],
+    [
+     8,
+     8,
+     1.9073486328125e-06
+    ],
+    [
+     9,
+     9,
+     1.9073486328125e-06
+    ],
+    [
+     10,
+     10,
+     9.5367431640625e-07
+    ],
+    [
+     11,
+     11,
+     1.9073486328125e-06
+    ],
+    [
+     12,
+     12,
+     1.9073486328125e-06
+    ],
+    [
+     13,
+     13,
+     1.9073486328125e-06
+    ],
+    [
+     14,
+     14,
+     1.9073486328125e-06
+    ]
+   ]
+  },
+  "quot-1": {
+   "center_color_f32": 0.0,
+   "center_record": [
+    2147483653,
+    0
+   ],
+   "center_tap_9_8_weight": 0.0,
+   "texels_with_nonzero_fraction": [
+    [
+     3,
+     2,
+     0.9999997615814209
+    ],
+    [
+     5,
+     4,
+     0.9999995231628418
+    ],
+    [
+     6,
+     5,
+     0.9999995231628418
+    ],
+    [
+     7,
+     6,
+     0.9999995231628418
+    ],
+    [
+     8,
+     7,
+     0.9999990463256836
+    ],
+    [
+     9,
+     8,
+     0.9999990463256836
+    ],
+    [
+     10,
+     9,
+     0.9999990463256836
+    ],
+    [
+     11,
+     10,
+     0.9999990463256836
+    ],
+    [
+     13,
+     12,
+     0.9999990463256836
+    ],
+    [
+     14,
+     13,
+     0.9999990463256836
+    ]
+   ]
+  },
+  "quot-1+fma": {
+   "center_color_f32": 0.0,
+   "center_record": [
+    2147483653,
+    0
+   ],
+   "center_tap_9_8_weight": 0.0,
+   "texels_with_nonzero_fraction": [
+    [
+     3,
+     2,
+     0.9999997615814209
+    ],
+    [
+     5,
+     4,
+     0.9999995231628418
+    ],
+    [
+     6,
+     5,
+     0.9999995231628418
+    ],
+    [
+     7,
+     6,
+     0.9999995231628418
+    ],
+    [
+     8,
+     7,
+     0.9999990463256836
+    ],
+    [
+     9,
+     8,
+     0.9999990463256836
+    ],
+    [
+     10,
+     9,
+     0.9999990463256836
+    ],
+    [
+     11,
+     10,
+     0.9999990463256836
+    ],
+    [
+     13,
+     12,
+     0.9999990463256836
+    ],
+    [
+     14,
+     13,
+     0.9999990463256836
+    ]
+   ]
+  },
+  "recip": {
+   "center_color_f32": 0.0,
+   "center_record": [
+    2147483653,
+    0
+   ],
+   "center_tap_9_8_weight": 0.0,
+   "texels_with_nonzero_fraction": [
+    [
+     5,
+     5,
+     4.76837158203125e-07
+    ],
+    [
+     6,
+     6,
+     4.76837158203125e-07
+    ],
+    [
+     11,
+     11,
+     9.5367431640625e-07
+    ],
+    [
+     13,
+     13,
+     9.5367431640625e-07
+    ]
+   ]
+  },
+  "recip+fma": {
+   "center_color_f32": 0.4050000011920929,
+   "center_record": [
+    2147483653,
+    7
+   ],
+   "center_tap_9_8_weight": 9.536734069115482e-07,
+   "texels_with_nonzero_fraction": [
+    [
+     5,
+     5,
+     4.76837158203125e-07
+    ],
+    [
+     6,
+     6,
+     4.76837158203125e-07
+    ],
+    [
+     8,
+     8,
+     9.5367431640625e-07
+    ],
+    [
+     11,
+     11,
+     9.5367431640625e-07
+    ],
+    [
+     13,
+     13,
+     9.5367431640625e-07
+    ]
+   ]
+  }
+ },
+ "calibration": {
+  "ieee+fma|correct|rn|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee+fma|correct|rn|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee+fma|correct|rn|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee+fma|correct|rz|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee+fma|correct|rz|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee+fma|correct|rz|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee+fma|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee+fma|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee+fma|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee+fma|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee+fma|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee+fma|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee|correct|rn|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee|correct|rn|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee|correct|rn|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee|correct|rz|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee|correct|rz|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee|correct|rz|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "ieee|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "ieee|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1+fma|correct|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1+fma|correct|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1+fma|correct|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1+fma|correct|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1+fma|correct|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1+fma|correct|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1+fma|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1+fma|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1+fma|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1+fma|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1+fma|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1+fma|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1|correct|rn|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1|correct|rn|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1|correct|rn|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1|correct|rz|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1|correct|rz|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1|correct|rz|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+1|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+1|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2+fma|correct|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2+fma|correct|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2+fma|correct|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2+fma|correct|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2+fma|correct|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2+fma|correct|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2+fma|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2+fma|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2+fma|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2+fma|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2+fma|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2+fma|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2|correct|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2|correct|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2|correct|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2|correct|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2|correct|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2|correct|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot+2|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot+2|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1+fma|correct|rn|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1+fma|correct|rn|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1+fma|correct|rn|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1+fma|correct|rz|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1+fma|correct|rz|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1+fma|correct|rz|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1+fma|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1+fma|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1+fma|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1+fma|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1+fma|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1+fma|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1|correct|rn|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1|correct|rn|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1|correct|rn|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1|correct|rz|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1|correct|rz|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1|correct|rz|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "quot-1|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "quot-1|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip+fma|correct|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip+fma|correct|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip+fma|correct|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip+fma|correct|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip+fma|correct|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip+fma|correct|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip+fma|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip+fma|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip+fma|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip+fma|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip+fma|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip+fma|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip|correct|rn|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip|correct|rn|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip|correct|rn|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip|correct|rz|metal_fma": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "recip|correct|rz|metal_sep": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "recip|correct|rz|wgsl": {
+   "case3_center": "[0.0, 0.0, 0.0, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    0
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": true
+  },
+  "recip|zero_table|rn|metal_fma": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip|zero_table|rn|metal_sep": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip|zero_table|rn|wgsl": {
+   "case3_center": "[0.4050293, 0.4050293, 0.4050293, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": false,
+   "cases_1_2_markers_exact": false
+  },
+  "recip|zero_table|rz|metal_fma": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip|zero_table|rz|metal_sep": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  },
+  "recip|zero_table|rz|wgsl": {
+   "case3_center": "[0.40478516, 0.40478516, 0.40478516, 1.0]",
+   "case3_record_unprinted": [
+    2147483653,
+    7
+   ],
+   "case3_reproduced": true,
+   "cases_1_2_markers_exact": true
+  }
+ },
+ "checks": {
+  "controls": true,
+  "exact_arithmetic_center_zero": true,
+  "patch_text_is_the_oracle_rule": true,
+  "raw_markers_read": true,
+  "some_hypothesis_reproduces_all_printed_values": true
+ },
+ "controls": {
+  "H1_current_suite": {
+   "1": {
+    "pass": true
+   },
+   "2": {
+    "pass": true
+   },
+   "3": {
+    "actual": [
+     0.40478515625,
+     1.0
+    ],
+    "failure": "probe [8, 8] color",
+    "pass": false
+   },
+   "4": {
+    "pass": true
+   },
+   "5": {
+    "pass": true
+   },
+   "6": {
+    "pass": true
+   },
+   "7": {
+    "pass": true
+   },
+   "8": {
+    "pass": true
+   },
+   "9": {
+    "pass": true
+   },
+   "10": {
+    "pass": true
+   },
+   "11": {
+    "pass": true
+   },
+   "12": {
+    "pass": true
+   }
+  },
+  "H1_patched_coupled_record": {
+   "1": {
+    "pass": true
+   },
+   "2": {
+    "pass": true
+   },
+   "3": {
+    "pass": true
+   },
+   "4": {
+    "pass": true
+   },
+   "5": {
+    "pass": true
+   },
+   "6": {
+    "pass": true
+   },
+   "7": {
+    "pass": true
+   },
+   "8": {
+    "pass": true
+   },
+   "9": {
+    "pass": true
+   },
+   "10": {
+    "pass": true
+   },
+   "11": {
+    "pass": true
+   },
+   "12": {
+    "pass": true
+   }
+  },
+  "H1_patched_original_test": {
+   "1": {
+    "pass": true
+   },
+   "2": {
+    "pass": true
+   },
+   "3": {
+    "actual": [
+     2147483653,
+     7
+    ],
+    "failure": "probe [8, 8] record",
+    "pass": false
+   },
+   "4": {
+    "pass": true
+   },
+   "5": {
+    "pass": true
+   },
+   "6": {
+    "pass": true
+   },
+   "7": {
+    "pass": true
+   },
+   "8": {
+    "pass": true
+   },
+   "9": {
+    "pass": true
+   },
+   "10": {
+    "pass": true
+   },
+   "11": {
+    "pass": true
+   },
+   "12": {
+    "pass": true
+   }
+  },
+  "T_zero_table_current": {
+   "1": {
+    "pass": true
+   },
+   "2": {
+    "pass": true
+   },
+   "3": {
+    "actual": [
+     0.40478515625,
+     1.0
+    ],
+    "failure": "probe [8, 8] color",
+    "pass": false
+   },
+   "4": {
+    "pass": true
+   },
+   "5": {
+    "pass": true
+   },
+   "6": {
+    "pass": true
+   },
+   "7": {
+    "pass": true
+   },
+   "8": {
+    "pass": true
+   },
+   "9": {
+    "pass": true
+   },
+   "10": {
+    "actual": [
+     0.51953125,
+     1.0
+    ],
+    "failure": "probe [8, 8] color",
+    "pass": false
+   },
+   "11": {
+    "pass": true
+   },
+   "12": {
+    "pass": true
+   }
+  },
+  "T_zero_table_patched_coupled": {
+   "1": {
+    "pass": true
+   },
+   "2": {
+    "pass": true
+   },
+   "3": {
+    "actual": [
+     0.40478515625,
+     1.0
+    ],
+    "failure": "probe [8, 8] color",
+    "pass": false
+   },
+   "4": {
+    "pass": true
+   },
+   "5": {
+    "pass": true
+   },
+   "6": {
+    "pass": true
+   },
+   "7": {
+    "pass": true
+   },
+   "8": {
+    "pass": true
+   },
+   "9": {
+    "pass": true
+   },
+   "10": {
+    "actual": [
+     0.51953125,
+     1.0
+    ],
+    "failure": "probe [8, 8] color",
+    "pass": false
+   },
+   "11": {
+    "pass": true
+   },
+   "12": {
+    "pass": true
+   }
+  },
+  "changed_anchor_reprojects": {
+   "current": [
+    0.40478515625,
+    [
+     2147483653,
+     7
+    ]
+   ],
+   "patched": [
+    0.40478515625,
+    [
+     2147483653,
+     7
+    ]
+   ]
+  },
+  "checks": {
+   "H1_current_fails_only_case3_center_color": true,
+   "H1_patched_coupled_all_pass": true,
+   "H1_patched_original_fails_only_case3_center_record": true,
+   "T_not_repaired_by_patch": true,
+   "changed_anchor_kept_by_both": true,
+   "large_support_current_carries_stale": true,
+   "mutant_detected": true,
+   "oracle_passes_unchanged_test_exact": true,
+   "patch_identical_exact": true,
+   "unchanged_second_owner_same": true
+  },
+  "current_exact_suite": {
+   "1": {
+    "pass": true
+   },
+   "2": {
+    "pass": true
+   },
+   "3": {
+    "pass": true
+   },
+   "4": {
+    "pass": true
+   },
+   "5": {
+    "pass": true
+   },
+   "6": {
+    "pass": true
+   },
+   "7": {
+    "pass": true
+   },
+   "8": {
+    "pass": true
+   },
+   "9": {
+    "pass": true
+   },
+   "10": {
+    "pass": true
+   },
+   "11": {
+    "pass": true
+   },
+   "12": {
+    "pass": true
+   }
+  },
+  "large_support_changed_7": {
+   "current": [
+    0.429931640625,
+    [
+     2147483653,
+     7
+    ]
+   ],
+   "patched": [
+    0.25,
+    [
+     2147483653,
+     7
+    ]
+   ]
+  },
+  "mutant_without_changed_rule_center": 0.40478515625,
+  "patch_identical_on_all_12_fixtures_exact_arithmetic": true,
+  "unchanged_second_owner": {
+   "current": [
+    0.40478515625,
+    [
+     2147483653,
+     7
+    ]
+   ],
+   "patched": [
+    0.40478515625,
+    [
+     2147483653,
+     7
+    ]
+   ]
+  }
+ },
+ "mechanisms": {
+  "H1 arithmetic": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     4.172325134277344e-07,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   }
+  },
+  "I dropped (ieee)": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   }
+  },
+  "I dropped (recip+fma)": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     4.172325134277344e-07,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     4.172325134277344e-07,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   }
+  },
+  "I reversed (ieee)": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   }
+  },
+  "I reversed (recip+fma)": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     4.172325134277344e-07,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   }
+  },
+  "I slot0 (ieee)": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   }
+  },
+  "I slot0 (recip+fma)": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     4.172325134277344e-07,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     4.172325134277344e-07,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.499755859375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   }
+  },
+  "T bit_reversed": {
+   "current": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   }
+  },
+  "T component_reversed": {
+   "current": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   }
+  },
+  "T header_aliased": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   }
+  },
+  "T next_vec4": {
+   "current": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   }
+  },
+  "T zero_table": {
+   "current": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[8, 8]": [
+     0.40478515625,
+     [
+      2147483653,
+      7
+     ]
+    ],
+    "[9, 8]": [
+     0.454833984375,
+     [
+      2147483655,
+      5
+     ]
+    ]
+   }
+  },
+  "exact": {
+   "current": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   },
+   "patched": {
+    "[3, 3]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[8, 8]": [
+     0.0,
+     [
+      2147483653,
+      0
+     ]
+    ],
+    "[9, 8]": [
+     0.5,
+     [
+      2147483655,
+      0
+     ]
+    ]
+   }
+  }
+ },
+ "model": "0073 owner-history case-3 diagnosis oracle",
+ "patch": {
+  "ascii": true,
+  "matches_pinned_patched_sha": true,
+  "patch_sha256": "97029540083930d34399477c9b35268112a38503eb75199df23cbee854f38f46",
+  "patched_shader_sha256": "0618bd7793f2ef53db7d34bc2020ba515bb722b5a3e5729912cf1f5c5c408777",
+  "presence_rule_removed": true,
+  "rule_text_present": true,
+  "support_still_built": true
+ },
+ "pins": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-001/wgsl/stderr.txt": "21c22e6b7f042bfa94944bec374d90aa218832618ed2a54d3033c09a89b70640",
+  "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-001/wgsl/stdout.txt": "bf7e639747a3702f0647a928ab06d3ced68ee501aec89d2306d033620577442c",
+  "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/owner_device_tests.rs": "07b168aa4f9c5db51537beb0f16fbbb80b5cf0e6fae11f29148b40f03068d36e",
+  "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/resolve_owner.wgsl": "df600750ab5cad117ae0cfa1e76fa635e07c96be4a76d8aa9e8470d9954c64ae"
+ },
+ "python": "3.14.8",
+ "raw_case_markers": [
+  "OWNER_HISTORY case=1 center=([0.25, 0.25, 0.25, 1.0], 0.1998002, [2147483653, 0]) probes=1 baseline=false",
+  "OWNER_HISTORY case=2 center=([0.69970703, 0.69970703, 0.69970703, 1.0], 0.1998002, [2147483653, 7]) probes=1 baseline=false"
+ ],
+ "reproducing_hypotheses": [
+  "ieee+fma|zero_table|rz|metal_fma",
+  "ieee+fma|zero_table|rz|metal_sep",
+  "ieee+fma|zero_table|rz|wgsl",
+  "ieee|zero_table|rz|metal_fma",
+  "ieee|zero_table|rz|metal_sep",
+  "ieee|zero_table|rz|wgsl",
+  "quot+1+fma|correct|rz|metal_fma",
+  "quot+1+fma|correct|rz|metal_sep",
+  "quot+1+fma|correct|rz|wgsl",
+  "quot+1+fma|zero_table|rz|metal_fma",
+  "quot+1+fma|zero_table|rz|metal_sep",
+  "quot+1+fma|zero_table|rz|wgsl",
+  "quot+1|zero_table|rz|metal_fma",
+  "quot+1|zero_table|rz|metal_sep",
+  "quot+1|zero_table|rz|wgsl",
+  "quot+2+fma|correct|rz|metal_fma",
+  "quot+2+fma|correct|rz|metal_sep",
+  "quot+2+fma|correct|rz|wgsl",
+  "quot+2+fma|zero_table|rz|metal_fma",
+  "quot+2+fma|zero_table|rz|metal_sep",
+  "quot+2+fma|zero_table|rz|wgsl",
+  "quot+2|correct|rz|metal_fma",
+  "quot+2|correct|rz|metal_sep",
+  "quot+2|correct|rz|wgsl",
+  "quot+2|zero_table|rz|metal_fma",
+  "quot+2|zero_table|rz|metal_sep",
+  "quot+2|zero_table|rz|wgsl",
+  "quot-1+fma|zero_table|rz|metal_fma",
+  "quot-1+fma|zero_table|rz|metal_sep",
+  "quot-1+fma|zero_table|rz|wgsl",
+  "quot-1|zero_table|rz|metal_fma",
+  "quot-1|zero_table|rz|metal_sep",
+  "quot-1|zero_table|rz|wgsl",
+  "recip+fma|correct|rz|metal_fma",
+  "recip+fma|correct|rz|metal_sep",
+  "recip+fma|correct|rz|wgsl",
+  "recip+fma|zero_table|rz|metal_fma",
+  "recip+fma|zero_table|rz|metal_sep",
+  "recip+fma|zero_table|rz|wgsl",
+  "recip|zero_table|rz|metal_fma",
+  "recip|zero_table|rz|metal_sep",
+  "recip|zero_table|rz|wgsl"
+ ]
+}
