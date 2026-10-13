@@ -129,5 +129,10 @@
     "Test-only correction. All persistence lifecycle assertions, exact counts, backend assertion, checksum corruption and resource stability checks remain.",
     "Full harness compiled with cooked features and Clippy on macOS. No Vulkan/Metal/window execution by publisher.",
     "Original Linux failure remains immutable; four fresh Vulkan subprocess stages must pass in a successor checkpoint."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/vulkan-cache-catalog-count/final-review.json",
+    "sha256": "f01a426c0fb226c8c4ea22f26619661acfc91a17640dbb789a2d3ae74479ea8c",
+    "accepted_head": "a5a92ccff3a5b2d5f9a41f0fa6135f8920555171"
+  }
 }

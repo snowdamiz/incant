@@ -27,3 +27,5 @@ only by the previously merged cooked-cluster backend/cache call. An initial
 whole-file comparison of lib.rs was too broad because it also includes DRS;
 the failed collector assertion and precise correction are retained. No source
 or compiled-check result changed during that qualification.
+
+[Independent final source and evidence review](evidence/vulkan-cache-catalog-count/final-review.json) is accepted. Actual Vulkan lifecycle execution remains required in the successor checkpoint.
