@@ -92,7 +92,7 @@ fn record_admissible(r:Stored,support:vec4u,support_classes:u32,changed_classes:
         if z>0.0 && z<nearest {nearest=z;anchor=tap;}
         if z>0.0 {
             let word=textureLoad(owner,tap,0).x; let n=word&~HIGH_BIT;
-            support[y*2+x]=n;
+            support[u32(y*2+x)]=n;
             if !valid_id(n) {support_ok=false;} else {
                 support_classes|=class_of(n);
                 if (word&HIGH_BIT)!=0u || changed_id(n) {support_changed=true;changed_classes|=class_of(n);}
@@ -112,7 +112,7 @@ fn record_admissible(r:Stored,support:vec4u,support_classes:u32,changed_classes:
     // Every later exit keeps this fresh current record, or (0,0) if unprovable.
     let anchor_id=textureLoad(owner,anchor,0).x&~HIGH_BIT;
     var fresh=owner_set(anchor_id);
-    for(var i=0;i<4;i++) {if support[i]!=0u {fresh=with_id(fresh,support[i]);}}
+    for(var i=0;i<4;i++) {if support[u32(i)]!=0u {fresh=with_id(fresh,support[u32(i)]);}}
     fresh.ok=fresh.ok && support_ok;
     let provable=fresh.ok;
     result.record=encode(fresh);
