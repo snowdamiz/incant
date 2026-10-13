@@ -145,3 +145,68 @@ fn both_required_owners_are_checked_against_one_pending_world() {
             .is_ok()
     );
 }
+
+#[test]
+fn silent_owner_clock_survives_a_later_audio_declaration() {
+    use incant_runtime::{FrameCommands, StructuralCommand};
+    let mut live = live(physical_scene());
+    let mut audio = Audio::offline(&live.world, vec![], 44100).unwrap();
+    for _ in 0..13 {
+        tick(&mut live, &mut audio);
+    }
+    assert!(!live.world.requires_audio_checkpoint());
+    let checkpoint = capture(&mut live, &audio).unwrap();
+    let pending = prepare(&checkpoint).unwrap();
+    assert_eq!(pending.audio().unwrap().rendered_frames(), 3981);
+    assert!(pending.start().is_err());
+    #[cfg(feature = "ui")]
+    {
+        let pending = prepare(&checkpoint).unwrap();
+        let ui = incant_ui::UiRuntime::for_world(pending.world()).unwrap();
+        assert!(pending.start_with_ui(&ui).is_err());
+    }
+    let pending = prepare(&checkpoint).unwrap();
+    let mut rebuilt = pending
+        .audio()
+        .unwrap()
+        .restore(pending.world(), vec![], 44100)
+        .unwrap();
+    let mut resumed = pending
+        .start_with_audio(
+            &rebuilt,
+            #[cfg(feature = "ui")]
+            None,
+        )
+        .unwrap();
+    for session in [&mut live, &mut resumed] {
+        let mut commands = FrameCommands::default();
+        commands
+            .push(StructuralCommand::SetAudio {
+                entity: id(1),
+                audio: Some(CookedAudio {
+                    entity: id(1),
+                    bus: None,
+                    source: None,
+                    listener: true,
+                }),
+            })
+            .unwrap();
+        session.world.apply(&mut commands).unwrap();
+        assert!(session.world.requires_audio_checkpoint());
+    }
+    for _ in 0..17 {
+        assert_eq!(
+            tick(&mut live, &mut audio),
+            tick(&mut resumed, &mut rebuilt)
+        );
+        assert_eq!(live.world.snapshot(), resumed.world.snapshot());
+        let a = audio.checkpoint_for_world(&live.world).unwrap();
+        let b = rebuilt.checkpoint_for_world(&resumed.world).unwrap();
+        a.validate_session(&live.world).unwrap();
+        b.validate_session(&resumed.world).unwrap();
+        assert_eq!(a.bytes(), b.bytes());
+        assert_eq!(b.rendered_frames(), live.world.tick() * 44100 / 144);
+    }
+    assert!(capture(&mut live, &audio).is_ok());
+    assert!(capture(&mut resumed, &rebuilt).is_ok());
+}

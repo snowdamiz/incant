@@ -53,14 +53,6 @@ impl NativeSession {
             .map(|ui| ui.bytes());
         #[cfg(not(feature = "ui"))]
         let ui = None;
-        self.capture_native(
-            ui,
-            self.world
-                .requires_audio_checkpoint()
-                .then_some(audio.bytes()),
-            payload,
-            planar_work,
-            spatial_work,
-        )
+        self.capture_native(ui, Some(audio.bytes()), payload, planar_work, spatial_work)
     }
 }

@@ -176,10 +176,17 @@ impl PendingSessionCheckpoint {
     pub fn world(&self) -> &NativeWorld {
         &self.world
     }
+    fn requires_audio_owner(&self) -> bool {
+        #[cfg(feature = "audio")]
+        if self.audio.is_some() {
+            return true;
+        }
+        self.world.requires_audio_checkpoint()
+    }
     /// Run trusted module initialization; globals/closures are explicitly
     /// ephemeral. No tick occurs and the prepared world identity is preserved.
     pub fn start(self) -> Result<NativeSession> {
-        if self.world.requires_audio_checkpoint() {
+        if self.requires_audio_owner() {
             return Err(CheckpointError::Unsupported(
                 "restored audio owner is required",
             ));
@@ -199,7 +206,7 @@ impl PendingSessionCheckpoint {
     /// guest initialization. A same-ID owner from another world cannot pass.
     #[cfg(feature = "ui")]
     pub fn start_with_ui(self, ui: &incant_ui::UiRuntime) -> Result<NativeSession> {
-        if self.world.requires_audio_checkpoint() {
+        if self.requires_audio_owner() {
             return Err(CheckpointError::Unsupported(
                 "restored audio owner is required",
             ));
