@@ -41,3 +41,11 @@ constructors precharge logical allocations and have no public restore entry;
 other owners, authenticated whole-world admission and runtime saves remain closed.
 The primitive allocation tests distinguish charged payload/control blocks from
 allocator overhead and retain stable Box/Arc process-OOM behavior explicitly.
+
+Private exact island construction is layered by `INCANT_CHECKED_MANAGERS.json`.
+It preserves active/persistent slot tails, free order, contact links, pending split
+and exact sleep-scan history. Prior construction/admission inventories describe
+their immutable historical layers. The same allocation permit precharges every
+new owner allocation; the native VecMap API has only infallible reserves, so its
+precharged safe allocation retains ordinary process-OOM behavior. No runtime
+feature, native solver algorithm or public world installer is added.

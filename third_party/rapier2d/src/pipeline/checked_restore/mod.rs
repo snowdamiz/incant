@@ -16,6 +16,8 @@ mod body;
 mod collider;
 pub(crate) mod convert;
 mod derived;
+#[allow(dead_code)]
+mod islands;
 mod work;
 use incant_physics_snapshot::{Identity, WorldBoundary};
 pub use work::{WorkBudget, WorkReport};

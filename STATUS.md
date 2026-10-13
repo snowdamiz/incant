@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Exact island construction — paused after accepted source and partial checks
+
+Private typed island reconstruction preserves exact tables, free order, contacts
+and sleep-scan history. Source review is accepted; six native controls pass with
+156 paired steps per dimension, and 218 deterministic snapshot tests pass. User
+pause stopped before fast8/remaining qualification. No allocation/Parry work
+started; no live-save guard changed.
+[Scope and pause evidence](docs/spikes/physics-native-islands-construction.md).
+
 ## Private physics constructors — scoped source and CPU evidence accepted
 
 Exact private storage/body/collider construction is accepted at `0a96dc0f`.

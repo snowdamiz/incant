@@ -1,0 +1,59 @@
+{
+  "format": "incant-rapier-private-checked-managers",
+  "version": 1,
+  "baseline": "d6b53f8bede48ed42b035b565ff6887978f07f97",
+  "feature": "incant-checked-restore",
+  "scope": "Private exact island fields only, preserving the distinct validated rigid witness. Supersedes historical checked-construction mod.rs pin only; no public world installer or live save.",
+  "files": [
+    {
+      "path": "src/dynamics/island_manager/persistent.rs",
+      "previous_sha256": "f4118406bccc6da9c1965348cc8b4cd3a572d78fa5cdbd544d5da49904ea71ba",
+      "sha256": "a8bfe8e0fa3bf226a7f143b926fe4d0d7484bc59118957b69266c59258668df3"
+    },
+    {
+      "path": "src/dynamics/island_manager/persistent_checkpoint.rs",
+      "previous_sha256": null,
+      "sha256": "bcbe5fd2292e85e63c00532b6a82027ae31f06ed9d466722424c310552236d66"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "previous_sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb",
+      "sha256": "8f5a9ecafa7c4218ff56f9f5ad86f8b67a538b8c79da683f6a3af99ba15a1f23"
+    },
+    {
+      "path": "src/pipeline/checked_restore/islands.rs",
+      "previous_sha256": null,
+      "sha256": "eb6d32813983fcf2bae0aca0cedb5e3f6625c94eac444ae22cdb16df57c30d13"
+    },
+    {
+      "path": "src/pipeline/checked_restore/island_fixture.rs",
+      "previous_sha256": null,
+      "sha256": "2e1477c9f2134ff8fbceaa60b634e2918e23831e2646d051da52202908d3a32f"
+    },
+    {
+      "path": "src/pipeline/checked_restore/island_tests.rs",
+      "previous_sha256": null,
+      "sha256": "74c326921d97c80d0f80101a001837c2447480706d8f21d961c05a3bfd538b91"
+    },
+    {
+      "path": "src/pipeline/checked_restore/island_fixtures/0.bin",
+      "previous_sha256": null,
+      "sha256": "860e178032fe1e46bba6377b30c2b9be4dccfde5930fe28885861fed391789dd"
+    },
+    {
+      "path": "src/pipeline/checked_restore/island_fixtures/16.bin",
+      "previous_sha256": null,
+      "sha256": "c93c1c74d3d72f0c5494e030db858cb0ea2598b3f7f4244d3376136eb003d679"
+    },
+    {
+      "path": "src/pipeline/checked_restore/island_fixtures/32.bin",
+      "previous_sha256": null,
+      "sha256": "69b2e07a2e5da014a6764016ae84c39679bd7b9dcc1fa3935c3f3a29c66338e7"
+    },
+    {
+      "path": "src/pipeline/checked_restore/island_fixtures/48.bin",
+      "previous_sha256": null,
+      "sha256": "1976814b76135720a062262e119e7b40e0f2321bfe9fb26287e327ba0fb1293e"
+    }
+  ]
+}

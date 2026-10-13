@@ -919,3 +919,8 @@ impl PersistentIslands {
         Ok(())
     }
 }
+
+// Incant: private typed construction; no public owner installer.
+#[cfg(feature = "incant-checked-restore")]
+#[path = "persistent_checkpoint.rs"]
+mod checked_checkpoint;

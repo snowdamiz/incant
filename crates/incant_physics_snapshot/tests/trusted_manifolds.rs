@@ -45,6 +45,7 @@ mod world_checks;
 #[macro_use]
 #[path = "support/native_admission_cases.rs"]
 mod native_admission_cases;
+include!("../../../third_party/rapier2d/src/pipeline/checked_restore/island_fixture.rs");
 fn budget() -> Budget {
     Budget::new(MAX_ALLOCATION).unwrap()
 }
@@ -596,6 +597,29 @@ macro_rules! cases {
             narrow_cases!($rapier, $vector, $cuboid);
             broad_cases!($rapier, $vector, $cuboid);
             world_capture!($rapier, $bits, $posebits);
+            manager_fixture!($vector);
+            #[test]
+            fn checked_islands_capture_actual_joined_frames() {
+                let output = std::env::var_os("INCANT_ISLAND_CAPTURE_OUTPUT").map(std::path::PathBuf::from);
+                let mut saved = 0;
+                manager_run(|tick, w, _| {
+                    if [0, 16, 32, 48].contains(&tick) {
+                        eprintln!("ISLAND_CAPTURE attempt dimension={} tick={tick}", identity().dimension as u8);
+                        let bytes = world_bytes(w);
+                        if let Some(root) = &output {
+                            let dir = root.join(format!("rapier{}d", identity().dimension as u8));
+                            std::fs::create_dir_all(&dir).unwrap();
+                            use std::io::Write;
+                            let mut f = std::fs::OpenOptions::new().write(true).create_new(true).open(dir.join(format!("{tick}.bin"))).unwrap();
+                            f.write_all(&bytes).unwrap();
+                        }
+                        saved += 1;
+                    }
+                });
+                assert_eq!(saved, 4);
+                eprintln!("ISLAND_CAPTURE dimension={} actual_steps=64 frames=4", identity().dimension as u8);
+            }
+
             world_cases!($rapier, $vector, $cuboid);
             #[cfg(feature = "native-admission")]
             native_admission_cases!($rapier, $vector, $cuboid);

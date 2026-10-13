@@ -1,0 +1,98 @@
+{
+  "format": "incant-physics-native-islands-pause",
+  "version": 1,
+  "status": "paused-incomplete-qualification",
+  "base": "d6b53f8bede48ed42b035b565ff6887978f07f97",
+  "branch": "codex/physics-native-managers",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001",
+  "source_review": {
+    "path": "docs/spikes/evidence/physics-native-islands-source-review.json",
+    "sha256": "56edc9aef6b0961d35385c4f0dd78effb2f4c151eb5c0e506bbc39f4cb75c9d9"
+  },
+  "retained_raw_records": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/source-001/freeze.json",
+      "sha256": "fc67aa067463d12001ba656a791ea548f22cec288bacf6e40f2e471e983a1747",
+      "bytes": 8068
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/source-002/freeze.json",
+      "sha256": "370d2d9434f3a7ddfc6ae23fc2308ac8ff6814baaba55d875165ad27f0709148",
+      "bytes": 9519
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/capture-001.json",
+      "sha256": "a5d1f354ba44e50b94cb4b4da75530ad95ad04e76d20ec5ea0bcb1457a0c948a",
+      "bytes": 873
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/capture-002.json",
+      "sha256": "c0879b10e47ab85f641f5cd3303bae6bf55398f5424ec60d08606d925fdcf64e",
+      "bytes": 870
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-islands-001.json",
+      "sha256": "05c7c44c0f8d3516810b3e558b9011c17957401cc6084da4610056d2c3554511",
+      "bytes": 1079
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/native-islands-002.json",
+      "sha256": "8cacfcc666936f4b35cfaa7d661b8febd6ad845f58dbe1654673bc9772140364",
+      "bytes": 1079
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/snapshot-tests-det-001.json",
+      "sha256": "ea94fe298d3f9d40e598db596b79f13c8154e8ade570649b2c6d8b95cfb1ba59",
+      "bytes": 659
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/pause-boundary.json",
+      "sha256": "0593b1ce09f14d5628c46c79312a495e1af09161383896190b7e376e92c4848e",
+      "bytes": 588
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/pause-boundary-final.json",
+      "sha256": "41f95d4f2d20e32c37249416ca9a048d82401797bff364aff610fa3fcb444a58",
+      "bytes": 2901
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/binaries.json",
+      "sha256": "67e5a664ed5686764264c485dd1e350c8d9ac828600c128716f1795117ba1c8a",
+      "bytes": 739
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-managers-001/PAUSED.md",
+      "sha256": "b32d69334de275ec19719d4ebdc72032be0f47361be18402298ff6581623b7a2",
+      "bytes": 1661
+    }
+  ],
+  "completed": {
+    "capture_tests": 2,
+    "focused_native_tests": 6,
+    "paired_steps_per_dimension": 156,
+    "deterministic_snapshot_tests": 218,
+    "failed": 0,
+    "ignored": 0
+  },
+  "processes": {
+    "handle": 68269,
+    "orchestrator_exit_code": 143,
+    "reason": "Intentional user pause after current child completed exit 0, before queued fast8 launch. All owned processes and handles reaped.",
+    "target_released": true
+  },
+  "pending": [
+    "fresh fast8 captures and mode-specific fixture binding",
+    "full private checked suites",
+    "strict Clippy, wasm/lean/feature guards, format/conventions qualification",
+    "final source/evidence review"
+  ],
+  "limitations": [
+    "This checkpoint is not final qualification acceptance.",
+    "Existing raw evidence retained outside repository; no new large archive was generated for pause.",
+    "Source002 preserves the source-reviewed compiled inputs; final changes after it are pause documentation only.",
+    "Other native owners remain trusted clones in continuation controls.",
+    "VecMap reserve is precharged but infallible; no recoverable OOM claim.",
+    "No whole-world installer, public live-save admission, GPU or performance claim.",
+    "Allocation utility extraction and Parry constructor work have not started."
+  ]
+}
