@@ -1,0 +1,709 @@
+{
+  "at": "2026-10-13T06:33:57.732800+00:00",
+  "claude_commit": "c4c32bea",
+  "engine_source": "f33495b2211ac37f172cd83e2552b2041df2357f",
+  "model": "Claude Opus 5.5",
+  "effort": "Max; verified in ACP log",
+  "independent_review": "Astra verified64 artifact/source hashes,5 retained screenshot hashes (no pixel review),21 successful/reaped children and92 actual libtest passes; pixel judgments are Claude owned",
+  "counts": {
+    "numeric": 1,
+    "suite-lib": 33,
+    "suite-model_gpu": 50,
+    "suite-timestamp_backend_probe": 1,
+    "suite-game": 5,
+    "suite-ui": 2
+  },
+  "appearance": "Claude inspected10 PNGs;5 retained identical on/off pairs;15 appearance frames,26 numeric submissions,8 fixture samples plus2 exact-test samples",
+  "original_frame_aggregation_finding": [
+    {
+      "group": "drain",
+      "sequence": 2,
+      "reported": {
+        "end_ticks": 56119098263458,
+        "nanoseconds": 601250.0,
+        "start_ticks": 56119097662208
+      },
+      "all_pass_start": 56119097650166,
+      "all_pass_end": 56119098263458
+    },
+    {
+      "group": "drain",
+      "sequence": 3,
+      "reported": {
+        "end_ticks": 56119104894833,
+        "nanoseconds": 628708.0,
+        "start_ticks": 56119104266125
+      },
+      "all_pass_start": 56119104252041,
+      "all_pass_end": 56119104894833
+    },
+    {
+      "group": "reuse",
+      "sequence": 5,
+      "reported": {
+        "end_ticks": 56119115253083,
+        "nanoseconds": 629250.0,
+        "start_ticks": 56119114623833
+      },
+      "all_pass_start": 56119114608791,
+      "all_pass_end": 56119115253083
+    }
+  ],
+  "records": [
+    {
+      "path": "result.md",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/result.md",
+      "sha256": "2880bb900df5910e4a89e203eb5e52ae80e436d177eac890b494f66cf5c773c7",
+      "bytes": 24496,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/2880bb900df5910e4a89e203eb5e52ae80e436d177eac890b494f66cf5c773c7.gz",
+      "retained_sha256": "b50858e2382549e4ee558f90dcd3070b6ad25decb6015b171df90e99412cd744"
+    },
+    {
+      "path": "prep-result.md",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/prep-result.md",
+      "sha256": "b545dd60fa03850f9e1542bb5393763e4cba92f28c130fa8177ec6fac1c72613",
+      "bytes": 19714,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/b545dd60fa03850f9e1542bb5393763e4cba92f28c130fa8177ec6fac1c72613.gz",
+      "retained_sha256": "907f901d30d5d80f5ffd5828fd2a166d81a78ee1d3679351a59c3e62f053e006"
+    },
+    {
+      "path": "previous-result.md",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/previous-result.md",
+      "sha256": "0d94e74cb5c0dce55478bfa2fb880159149df0d71fca6262d8e2b16ed7d9e501",
+      "bytes": 23651,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/0d94e74cb5c0dce55478bfa2fb880159149df0d71fca6262d8e2b16ed7d9e501.gz",
+      "retained_sha256": "6852cabc7df9fea125cd89e974480ccc8d3402a399e83a5fcd418f93bc2847e8"
+    },
+    {
+      "path": "tools/build.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/build.py",
+      "sha256": "9f020a476f7a781e47d5575f653a799c1942aa38a4f80c7031ac03b44d4f8261",
+      "bytes": 18796,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/9f020a476f7a781e47d5575f653a799c1942aa38a4f80c7031ac03b44d4f8261.gz",
+      "retained_sha256": "2be9704c9547fab2bf9970c4da2b1e7c97f5d162d62f2e4a555f5147bc47b3d4"
+    },
+    {
+      "path": "tools/test_lifecycle.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/test_lifecycle.py",
+      "sha256": "69d85c067d8a5f4bc0492dd9672cdc98c2e745d94ca058a0aa1b2c044e3ee0b7",
+      "bytes": 9125,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/69d85c067d8a5f4bc0492dd9672cdc98c2e745d94ca058a0aa1b2c044e3ee0b7.gz",
+      "retained_sha256": "ff08d964860656e7b0276d1abf04b45e244aaed2474048c47abb21969dd3ce26"
+    },
+    {
+      "path": "tools/selfcheck.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/selfcheck.py",
+      "sha256": "a3b1b4b15ae60152aba0d0c4a348c986cafa4199d8ca56d4fa7481bec7582e04",
+      "bytes": 13021,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/a3b1b4b15ae60152aba0d0c4a348c986cafa4199d8ca56d4fa7481bec7582e04.gz",
+      "retained_sha256": "74f8a1aa281cceab6ba8193d3a7fd0ffa18df076433253f7ad0fdffc4fa40f7d"
+    },
+    {
+      "path": "tools/common.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/common.py",
+      "sha256": "04c9b5cf80f2a81c757d423bdb87f46cc06528c288ca73b121b002a88c0ee300",
+      "bytes": 10652,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/04c9b5cf80f2a81c757d423bdb87f46cc06528c288ca73b121b002a88c0ee300.gz",
+      "retained_sha256": "2265aceaa1924dc959ea520347523d8fda33b8fa2bb796fd5a2f3f2d7c66a0a8"
+    },
+    {
+      "path": "tools/gpu.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/gpu.py",
+      "sha256": "852b66fee511392a027323735e36a8f2a9a2c3f0c67062264c4da9a9489d4ab5",
+      "bytes": 19315,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/852b66fee511392a027323735e36a8f2a9a2c3f0c67062264c4da9a9489d4ab5.gz",
+      "retained_sha256": "1619acf3e5cf855cf3c3a8196e06a80f2c00fe6d406fbe354027009b908592f9"
+    },
+    {
+      "path": "tools/lease.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/lease.py",
+      "sha256": "d3332e1ca326a7dc45d8a6c37a362ad6881cf2f95ff47e1c414a90036fcd838c",
+      "bytes": 6482,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/d3332e1ca326a7dc45d8a6c37a362ad6881cf2f95ff47e1c414a90036fcd838c.gz",
+      "retained_sha256": "ec86ad8b91dffcb3cb5c9c57c81b4276775caaa7673a8804b7a8ee12856b6214"
+    },
+    {
+      "path": "tools/analyze.py",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/analyze.py",
+      "sha256": "bd20541ec76f9d4d735e68b7b9998dfcb2312c88bcade7e0479c71dac7158aab",
+      "bytes": 18108,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/bd20541ec76f9d4d735e68b7b9998dfcb2312c88bcade7e0479c71dac7158aab.gz",
+      "retained_sha256": "a026dc1fcdcf3db6e963b621edec8260782c3620c3ed7b14174586834d22f498"
+    },
+    {
+      "path": "tools/review/gpu_timestamp_review.rs",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/tools/review/gpu_timestamp_review.rs",
+      "sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca",
+      "bytes": 53399,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca.gz",
+      "retained_sha256": "3560079b63dd4ebed9d77fe003a6c6fa90da1841e5de2fa17515163d2b829935"
+    },
+    {
+      "path": "evidence-r2/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/manifest.json",
+      "sha256": "7ffe4617c03dad196207551967a00b8f4a01a04dcb6d16f57dc4fef2b7052690",
+      "bytes": 23814,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/7ffe4617c03dad196207551967a00b8f4a01a04dcb6d16f57dc4fef2b7052690.gz",
+      "retained_sha256": "84cb8adc513a2aa7a09a0634c542f1dce3f7371eb8943911cdf0951ddf4ceff9"
+    },
+    {
+      "path": "evidence-r2/gpu/gpu-released.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/gpu/gpu-released.json",
+      "sha256": "c0ed8fe5fcf951e9bc0e998bc6036cc7f0cba57e821b19181a4c498351758bce",
+      "bytes": 763,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/c0ed8fe5fcf951e9bc0e998bc6036cc7f0cba57e821b19181a4c498351758bce.gz",
+      "retained_sha256": "0699cd4e661b8f9d5de0832a57df1aa8b6cbb548a0fb65d5d8087bf1dbc5b145"
+    },
+    {
+      "path": "evidence-r2/gpu/post-release-ledger.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/gpu/post-release-ledger.jsonl",
+      "sha256": "a66dd1a254eb7a122b8eaa27666d1ef015a79931238c65ec8fa7aa7fc1cab314",
+      "bytes": 1336,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/a66dd1a254eb7a122b8eaa27666d1ef015a79931238c65ec8fa7aa7fc1cab314.gz",
+      "retained_sha256": "0232a4315cd3befd0c08c8a73ab76c2226d8ef73034bda510010a9f08e0b472d"
+    },
+    {
+      "path": "evidence-r2/gpu/grant-copy.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/gpu/grant-copy.json",
+      "sha256": "50caea4b417232665a1fc75926ad7e4d9d897cf2f08e5544d7abcd8d3d28ee29",
+      "bytes": 905,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/50caea4b417232665a1fc75926ad7e4d9d897cf2f08e5544d7abcd8d3d28ee29.gz",
+      "retained_sha256": "e2f115a25a6317e16862ccb7558ddaafc9fb3b5173b3bd7a885ed21ca2e4b4f6"
+    },
+    {
+      "path": "evidence-r2/gpu/ledger.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/gpu/ledger.jsonl",
+      "sha256": "00e4e20d80e4898ea665ccc6cb4dbe4ffe33824a015f40eee4bc7fffb72e434e",
+      "bytes": 62527,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/00e4e20d80e4898ea665ccc6cb4dbe4ffe33824a015f40eee4bc7fffb72e434e.gz",
+      "retained_sha256": "46b938e2547d94f814546091e8aa13f0ffb45fb24da709d4c13ff0495b848470"
+    },
+    {
+      "path": "evidence-r2/gpu/refusals.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/gpu/refusals.jsonl",
+      "sha256": "994ceaf1161afabe3d035f2907eb3ccaa1ef9b412b36f65dce8c3cf3090afbb3",
+      "bytes": 376,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/994ceaf1161afabe3d035f2907eb3ccaa1ef9b412b36f65dce8c3cf3090afbb3.gz",
+      "retained_sha256": "66edff773e1e0f9ba64c028923b51adbe5e9d0364078567ae4fcd5992281b776"
+    },
+    {
+      "path": "evidence-r2/analysis/summary-2026-10-13T061404.951153+0000.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/analysis/summary-2026-10-13T061404.951153+0000.json",
+      "sha256": "5ae138f9670086e64b47dd6e6e69a44d6caa2425167def666e6fba5bed7e1f91",
+      "bytes": 15857,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/5ae138f9670086e64b47dd6e6e69a44d6caa2425167def666e6fba5bed7e1f91.gz",
+      "retained_sha256": "6550ccf2e3c4429a06858415233c20ffa8a9328619ecf25b07dc1a481480d3bc"
+    },
+    {
+      "path": "evidence-r2/lease/target-lease.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/lease/target-lease.json",
+      "sha256": "f8d2cf76599f40da87d73203ff5dd0e1d12443032614f1a3bed818d23a9466f9",
+      "bytes": 4057,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/f8d2cf76599f40da87d73203ff5dd0e1d12443032614f1a3bed818d23a9466f9.gz",
+      "retained_sha256": "650c6887b517d680caf97fc0f1626a94b925d0cd614df21d2d0d42f4475dfa60"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-sprites_text-r1.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-sprites_text-r1.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-lib.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-lib.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-numeric.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-numeric.stdout.txt",
+      "sha256": "0b55d06f044aef53d231936508b0d757327bdb3653afa0d71e41fc3907e21aba",
+      "bytes": 209,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/0b55d06f044aef53d231936508b0d757327bdb3653afa0d71e41fc3907e21aba.gz",
+      "retained_sha256": "a13fc5e2e7840a6cb7801ea0b4dc5941b08c516a29f9f772b51477e65c2ca999"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-viewport-r1.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-viewport-r1.stdout.txt",
+      "sha256": "efa3883fe310493c3e46ff940f1c2d47172ddaac64aa678dfd62569233302260",
+      "bytes": 132,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/efa3883fe310493c3e46ff940f1c2d47172ddaac64aa678dfd62569233302260.gz",
+      "retained_sha256": "0b9a28db73c6914c1eea136efd58bcb89154fc7938a4e944e409e54b0ce7432b"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-owner_drop-r1.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-owner_drop-r1.stdout.txt",
+      "sha256": "f7ae1b7d8873fc03de8f947403659bad56bd106ae4185858202e6ab2ab3b5820",
+      "bytes": 134,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/f7ae1b7d8873fc03de8f947403659bad56bd106ae4185858202e6ab2ab3b5820.gz",
+      "retained_sha256": "a629a2eff6474dc726aad94585c47671bddea0a33d0e115937f30a7d27af17f2"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-ui.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-ui.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-cascades-r1.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-cascades-r1.stdout.txt",
+      "sha256": "4364c5b7c8899d96332892de77255e26d084fde7700fb968999509e91acb470f",
+      "bytes": 132,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/4364c5b7c8899d96332892de77255e26d084fde7700fb968999509e91acb470f.gz",
+      "retained_sha256": "6c8ffe57a3b83d9dac12f6afb362e5db01cb9680fa62bbda934743b70b8590cf"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-lib.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-lib.stderr.txt",
+      "sha256": "327f7492572ef7b9c96f3c2140e183ffa35f61770d075303ff07e724a2a1f60d",
+      "bytes": 2523,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/327f7492572ef7b9c96f3c2140e183ffa35f61770d075303ff07e724a2a1f60d.gz",
+      "retained_sha256": "0eff235707b48b4f14b1f50a97806036d2cfd1c86901114bf51fe4f7b5b1817d"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-model_gpu.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-model_gpu.stdout.txt",
+      "sha256": "c5dc612c5f1a90427cab9daf43818104f39bfa0340ef4ac739336ccc71e80efe",
+      "bytes": 4435,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/c5dc612c5f1a90427cab9daf43818104f39bfa0340ef4ac739336ccc71e80efe.gz",
+      "retained_sha256": "c43f87dbaafe4183d167866ee7c185e112cac2ee5f7540ee4bff98975be89969"
+    },
+    {
+      "path": "evidence-r2/logs/build-tests-render.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/build-tests-render.stderr.txt",
+      "sha256": "7b4dc22b44aed2cba505cbe97d3d16b259e6b4af4b28c4f3e1f17f2a0641c7bb",
+      "bytes": 3108,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/7b4dc22b44aed2cba505cbe97d3d16b259e6b4af4b28c4f3e1f17f2a0641c7bb.gz",
+      "retained_sha256": "6d395062360394c410f78c4f34f3b2f69e086b145633faa179adcbe09aa4fd17"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-timestamp_backend_probe.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-timestamp_backend_probe.stdout.txt",
+      "sha256": "4ee568ec6cb80b70822fb003654cd06ae8b6025fb13d298f0dddf6e61869a944",
+      "bytes": 157,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/4ee568ec6cb80b70822fb003654cd06ae8b6025fb13d298f0dddf6e61869a944.gz",
+      "retained_sha256": "6438078e4540ee37b4a5df9dced7a790d4a8a637aa5f93aef525c48706c16971"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-probe-r1.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-probe-r1.stdout.txt",
+      "sha256": "ea4f10ba06f6f24149d88e263888b55862b8d1ce6dc01b5f1f3ed0604c73bbf4",
+      "bytes": 129,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/ea4f10ba06f6f24149d88e263888b55862b8d1ce6dc01b5f1f3ed0604c73bbf4.gz",
+      "retained_sha256": "b57c2b9c3b6a1cacc4fd34c7b3e4032d96cb377b8dc8a81155133e2f693c1aca"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-model_gpu.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-model_gpu.stdout.txt",
+      "sha256": "0ba42653ad9258dd42c8673f34c647ff524aae5823d0de22097b68b80bbfa41f",
+      "bytes": 4826,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/0ba42653ad9258dd42c8673f34c647ff524aae5823d0de22097b68b80bbfa41f.gz",
+      "retained_sha256": "41fb36f4f6c5e8a99f6ca46671968958b773b91e8056bba19b36ca2612235178"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-lit-r1.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-lit-r1.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-review.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-review.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-ui.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-ui.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-game.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-game.stdout.txt",
+      "sha256": "1b12b10ab355b35289ceabfd8518efa58815799f48dc18456afd837db9203da7",
+      "bytes": 419,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/1b12b10ab355b35289ceabfd8518efa58815799f48dc18456afd837db9203da7.gz",
+      "retained_sha256": "91f45c6127afea2a23e7cf51f31f1e659b264edff4f298f3255238cc328d1b1f"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-game.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-game.stderr.txt",
+      "sha256": "b2a377ca670b8bfe98e91868e674e3ee22abfef72d0d7559e471c9a77eaa66ec",
+      "bytes": 2168,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/b2a377ca670b8bfe98e91868e674e3ee22abfef72d0d7559e471c9a77eaa66ec.gz",
+      "retained_sha256": "f7ec73878a4e5894833ef2da80c002e403d5a5ffe8fe46d0305ebaa5b3b3e1af"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-timestamp_backend_probe.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-timestamp_backend_probe.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-viewport-r1.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-viewport-r1.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-sprites_text-r1.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-sprites_text-r1.stdout.txt",
+      "sha256": "d3d58395312aff24d18e8e257cae242c6a8471e7893363689d2085f7cc92cae3",
+      "bytes": 136,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/d3d58395312aff24d18e8e257cae242c6a8471e7893363689d2085f7cc92cae3.gz",
+      "retained_sha256": "a198f4e7916f5b6d7c3edb91a2206aa45447de16b3fd9671adc8152497822b2b"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-numeric.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-numeric.stderr.txt",
+      "sha256": "9a2b85db044f1e9582152668c3b573d48e3e1889df50ec70beeaeac11bbb6ab4",
+      "bytes": 1095,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/9a2b85db044f1e9582152668c3b573d48e3e1889df50ec70beeaeac11bbb6ab4.gz",
+      "retained_sha256": "0ae4a011b4a270615f5ac8cf3edb3028e7c3e82b9e28658aa41f3ea6f2f4be0a"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-lib.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-lib.stdout.txt",
+      "sha256": "12bb9f40da3d78b40917a3ab80bee6dde9d8edaa89f43e9a880cf93ab4e82f5d",
+      "bytes": 3471,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/12bb9f40da3d78b40917a3ab80bee6dde9d8edaa89f43e9a880cf93ab4e82f5d.gz",
+      "retained_sha256": "7bb5f8a97609d03b723962c3ab977b08e3added788fa3049e6129d2854a93c2f"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-lib.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-lib.stdout.txt",
+      "sha256": "338ddf66c00fcd58d27a534ea8b9d90b3f53582a66b8f75f43e40e70d6b7f1ea",
+      "bytes": 22670,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/338ddf66c00fcd58d27a534ea8b9d90b3f53582a66b8f75f43e40e70d6b7f1ea.gz",
+      "retained_sha256": "e4e6ed249066ad3813580e46a509dcc074f7d58a0481cf209540da90ce938fbf"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-cascades-r1.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-cascades-r1.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-model_gpu.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-model_gpu.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-owner_drop-r1.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-owner_drop-r1.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-ui.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-ui.stdout.txt",
+      "sha256": "079644c27688f0f5206a1ff4bdd7f910824e9e813621a73a2b3bd4368aa00afc",
+      "bytes": 179,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/079644c27688f0f5206a1ff4bdd7f910824e9e813621a73a2b3bd4368aa00afc.gz",
+      "retained_sha256": "46c7fcbc4ed7dd8a43cefb37805cb71469c279308445196dbae4b4c3e120deaf"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-lit-r1.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-lit-r1.stdout.txt",
+      "sha256": "788dfffc2a91f11b6579f405146a3f306ee40382dfd99556cca97efd09279592",
+      "bytes": 127,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/788dfffc2a91f11b6579f405146a3f306ee40382dfd99556cca97efd09279592.gz",
+      "retained_sha256": "5f5d6b785e74a1bd8ba1eb2e089f7897c4e08e4d401fbcee5a54546bb6ec6c46"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-model_gpu.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-model_gpu.stderr.txt",
+      "sha256": "8e7b54f616fd0ab75a81d37566b5c1e301536966c8d2161d1d3f20f937713654",
+      "bytes": 598,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/8e7b54f616fd0ab75a81d37566b5c1e301536966c8d2161d1d3f20f937713654.gz",
+      "retained_sha256": "220d5e554c9abd2e9ab13af465c3921873b20f5134c046b8fa2eb94be3d8bdb7"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-timestamp_backend_probe.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-timestamp_backend_probe.stderr.txt",
+      "sha256": "174297c42ee7c4ae298c76395500e28581e36d8b8a70d1495e0004281187ec71",
+      "bytes": 1049,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/174297c42ee7c4ae298c76395500e28581e36d8b8a70d1495e0004281187ec71.gz",
+      "retained_sha256": "c33d8b8a28524fdc5baf6d0547fc5fe72c0fb83ae4ba9be9a37e056259f5eae4"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-review-probe-r1.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-review-probe-r1.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-game.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-game.stderr.txt",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "bytes": 1,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b.gz",
+      "retained_sha256": "74420f89d2d2a4256b5b578f1c2a01dd2b605f9aca4905db839d008cfd29cac0"
+    },
+    {
+      "path": "evidence-r2/logs/build-lint.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/build-lint.stderr.txt",
+      "sha256": "1699bb648b6308b09fb335558b687d285a6aac5d6afa672e2b3e27780c672e97",
+      "bytes": 3107,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/1699bb648b6308b09fb335558b687d285a6aac5d6afa672e2b3e27780c672e97.gz",
+      "retained_sha256": "6bea8999309eef3eb92e7ae4fec0cb2cfc7ded2947ac74291c802a09ea24b48f"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-game.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-game.stdout.txt",
+      "sha256": "cba7652bce72d2a9e30cf0bba97668fa4d6a784b29587167b39ce467e21d122f",
+      "bytes": 538,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/cba7652bce72d2a9e30cf0bba97668fa4d6a784b29587167b39ce467e21d122f.gz",
+      "retained_sha256": "bea4da37de422bcbb9e7e2b5e239aa618d979d34ffb738621f7f064a4b3a9974"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-suite-ui.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-suite-ui.stdout.txt",
+      "sha256": "4e908de54e5296ca9d883b48343bd2631c6c73e19c68fd475a6cee0db3669651",
+      "bytes": 280,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/4e908de54e5296ca9d883b48343bd2631c6c73e19c68fd475a6cee0db3669651.gz",
+      "retained_sha256": "a25a8d7dbb089a2957b1248b9e2a0078203a2900600bfae8efd5a2f68b93db3a"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-timestamp_backend_probe.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-timestamp_backend_probe.stdout.txt",
+      "sha256": "061c650bd53685c9a920d40229b7b48cc0fe25aa80d65e2fcc904e449be702a8",
+      "bytes": 62,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/061c650bd53685c9a920d40229b7b48cc0fe25aa80d65e2fcc904e449be702a8.gz",
+      "retained_sha256": "490a9da4b6b232ad131048ea3886b58eba1e9ab864d415e18bb214760879a52b"
+    },
+    {
+      "path": "evidence-r2/logs/gpu-list-review.stdout.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/gpu-list-review.stdout.txt",
+      "sha256": "680aabe9a8fd6768d37f40f5698f8ebba6e1594589c9a8d7eec4e001d5316525",
+      "bytes": 111,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/680aabe9a8fd6768d37f40f5698f8ebba6e1594589c9a8d7eec4e001d5316525.gz",
+      "retained_sha256": "2981988836d11cab4c42703854358d1e4b752714bd81a44906a42b9fec451e3a"
+    },
+    {
+      "path": "evidence-r2/logs/build-tests-host.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/build-tests-host.stderr.txt",
+      "sha256": "657b9bb238b63b16607290dec5a052129798553b1cf4bf82772d358bb9f424cc",
+      "bytes": 2905,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/657b9bb238b63b16607290dec5a052129798553b1cf4bf82772d358bb9f424cc.gz",
+      "retained_sha256": "7085812c33f612b758f3447576a210842007c89bc3e49600d8fbc7203e076be5"
+    },
+    {
+      "path": "evidence-r2/logs/build-review.stderr.txt",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/logs/build-review.stderr.txt",
+      "sha256": "c7d0ece611d7e1ec1b35e6ce9dae752041afad3dfa733365cfa8a4d18dc3e755",
+      "bytes": 174,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/c7d0ece611d7e1ec1b35e6ce9dae752041afad3dfa733365cfa8a4d18dc3e755.gz",
+      "retained_sha256": "1d808493669f08b7bc6248c05ea9635a9107ec69b84285bd1e3423c0b9231694"
+    },
+    {
+      "path": "evidence-r2/build/tests.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/build/tests.json",
+      "sha256": "a00bceac44fccf498befd577f8447effdeb7bbe0497140185cd8f11db514ae7a",
+      "bytes": 13172,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/a00bceac44fccf498befd577f8447effdeb7bbe0497140185cd8f11db514ae7a.gz",
+      "retained_sha256": "6abcc8c4249d3f2fac7e4232e01fef94a65469d1b3d598382f61e31b95c3902f"
+    },
+    {
+      "path": "evidence-r2/build/source.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/build/source.json",
+      "sha256": "76c383303ceef7ff4c3dbf419b28fe22b5399f9531fd1f9663ee56dee3e5b671",
+      "bytes": 3719,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/76c383303ceef7ff4c3dbf419b28fe22b5399f9531fd1f9663ee56dee3e5b671.gz",
+      "retained_sha256": "53fac5810a8e52fe13cde6d8f6ace9ef4217f1da769a09464f44529f8f39273f"
+    },
+    {
+      "path": "evidence-r2/build/lint.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/build/lint.json",
+      "sha256": "d52e61d2a82764c863bc4cb19d8178324671fcd5ff702c8820770867641f69e0",
+      "bytes": 2038,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/d52e61d2a82764c863bc4cb19d8178324671fcd5ff702c8820770867641f69e0.gz",
+      "retained_sha256": "82815f2266acbbdf5a588110f6a9d1f7774d883f8b907456d2f5915639418ef1"
+    },
+    {
+      "path": "evidence-r2/build/review.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/build/review.json",
+      "sha256": "3d933c827e77cc8ca1d63025ce950651999529c3a88200cb95c95989756e5559",
+      "bytes": 5410,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/3d933c827e77cc8ca1d63025ce950651999529c3a88200cb95c95989756e5559.gz",
+      "retained_sha256": "78293e23b3a7d09d7c8959f499d7bb6990a7cd67a21c2134e390c7906f3e0bc4"
+    },
+    {
+      "path": "evidence-r2/build/toolchain.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/build/toolchain.json",
+      "sha256": "c0a632d40d07a6d29efa3978302fb9c69344cdfc755a15ae1a68728467446a93",
+      "bytes": 1537,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/c0a632d40d07a6d29efa3978302fb9c69344cdfc755a15ae1a68728467446a93.gz",
+      "retained_sha256": "bdbfc68bed2a3d00b2465c905c6fdb861713aebf45a12f0c106cccc7cebcfe86"
+    },
+    {
+      "path": "evidence-r2/captures/cascades-r1/report.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/cascades-r1/report.json",
+      "sha256": "ca9633869b74f88ec3a99d162ac9c142b9b3bcc6d8c92479bf86d41a7e7d3c92",
+      "bytes": 13724,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/ca9633869b74f88ec3a99d162ac9c142b9b3bcc6d8c92479bf86d41a7e7d3c92.gz",
+      "retained_sha256": "a144f32274586c7df90f9de784930d8adce9f2449e995a0258f02f59e05821c9"
+    },
+    {
+      "path": "evidence-r2/captures/cascades-r1/events.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/cascades-r1/events.jsonl",
+      "sha256": "8f356e37d118602234c8dbbb75a6cfe36b18930d08cae7a13a3c6fa60d67d1e6",
+      "bytes": 1608,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/8f356e37d118602234c8dbbb75a6cfe36b18930d08cae7a13a3c6fa60d67d1e6.gz",
+      "retained_sha256": "2180b4a4559a75a7d42eb030b52d3cdb4550d5566e620528657752a9bbc76b4c"
+    },
+    {
+      "path": "evidence-r2/captures/lit-r1/report.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/lit-r1/report.json",
+      "sha256": "53993dbab42c9936e6a6967ad8a15c87a78cf790e31336fde5d104b4eb477496",
+      "bytes": 21064,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/53993dbab42c9936e6a6967ad8a15c87a78cf790e31336fde5d104b4eb477496.gz",
+      "retained_sha256": "e700583750e7187a990fa5e33879b26ff9f35642e2ae77a63f3daae9165c566c"
+    },
+    {
+      "path": "evidence-r2/captures/lit-r1/events.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/lit-r1/events.jsonl",
+      "sha256": "bffae9439bff5572c3fd7e5d9dbcbd5b681c43bd735f69c0b24f876cfdb5ea3d",
+      "bytes": 2941,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/bffae9439bff5572c3fd7e5d9dbcbd5b681c43bd735f69c0b24f876cfdb5ea3d.gz",
+      "retained_sha256": "af3e3532a4d124f1faba970d3eceb4088278bc2828de989bc912307a8ec96399"
+    },
+    {
+      "path": "evidence-r2/captures/sprites_text-r1/report.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/sprites_text-r1/report.json",
+      "sha256": "31113bc2fa8e970449dfa6a2beea74f210fb2d3e5660a8077529f45ad6fe0b0a",
+      "bytes": 7062,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/31113bc2fa8e970449dfa6a2beea74f210fb2d3e5660a8077529f45ad6fe0b0a.gz",
+      "retained_sha256": "5e36838ada4e8f0969222145c2c2d467d008dbdcd0e8e945d0087d786b4d0fab"
+    },
+    {
+      "path": "evidence-r2/captures/sprites_text-r1/events.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/sprites_text-r1/events.jsonl",
+      "sha256": "a56d8cac449de5b7cc48d5770b631c8145b75d21af805e5cda9157e52a3732eb",
+      "bytes": 1082,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/a56d8cac449de5b7cc48d5770b631c8145b75d21af805e5cda9157e52a3732eb.gz",
+      "retained_sha256": "cef223b22295955cae2c825a8075e2ab98638d7f571466fb100ca2d7b3dea696"
+    },
+    {
+      "path": "evidence-r2/captures/probe-r1/report.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/probe-r1/report.json",
+      "sha256": "c23f6da8958b50b5ca11e55fdfd28c79a59fa1734e5b6aafb4f75f94f9a40fae",
+      "bytes": 2420,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/c23f6da8958b50b5ca11e55fdfd28c79a59fa1734e5b6aafb4f75f94f9a40fae.gz",
+      "retained_sha256": "014e70ba98ca024bb2be7a73ed6a3c9d424cf029e3c1f1c3eac5398cb01f27a1"
+    },
+    {
+      "path": "evidence-r2/captures/probe-r1/events.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/probe-r1/events.jsonl",
+      "sha256": "3c97232721f9f712ce57fb8544458cb8041d3d5925951524381836486ef89372",
+      "bytes": 100,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/3c97232721f9f712ce57fb8544458cb8041d3d5925951524381836486ef89372.gz",
+      "retained_sha256": "2d44901fe331cb0b063065b428665288399fe323a16b92693fd7b1951667da0c"
+    },
+    {
+      "path": "evidence-r2/captures/owner_drop-r1/report.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/owner_drop-r1/report.json",
+      "sha256": "ba217375bd3e6409703f51dfea763bd194f4222d90d058b51db2aa59a417e6c9",
+      "bytes": 781,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/ba217375bd3e6409703f51dfea763bd194f4222d90d058b51db2aa59a417e6c9.gz",
+      "retained_sha256": "1f6745a4a22fb0291ae145469d3a6ec870cdaaf642a846220756e1834a730d15"
+    },
+    {
+      "path": "evidence-r2/captures/owner_drop-r1/events.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/owner_drop-r1/events.jsonl",
+      "sha256": "c2c2c119f943f23d419af1d6e024fd38473dd5980693326ecec728e60eadf6ae",
+      "bytes": 131,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/c2c2c119f943f23d419af1d6e024fd38473dd5980693326ecec728e60eadf6ae.gz",
+      "retained_sha256": "37aa8a8ec92bbdf810eb3c49d4ef4a300125e525d4337f41316bd34c34a8bc27"
+    },
+    {
+      "path": "evidence-r2/captures/viewport-r1/report.json",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/viewport-r1/report.json",
+      "sha256": "86759b30421a560a9d859cf154a6867b789e4004019e478a7ba0ab5dbf104690",
+      "bytes": 7595,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/86759b30421a560a9d859cf154a6867b789e4004019e478a7ba0ab5dbf104690.gz",
+      "retained_sha256": "dec5949d316559ea916b89a82d53313d70a9bf2dd4dc90a9d6387d039fcbd16c"
+    },
+    {
+      "path": "evidence-r2/captures/viewport-r1/events.jsonl",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/evidence-r2/captures/viewport-r1/events.jsonl",
+      "sha256": "e6768646ee04b2f2c83f0c19343ba7b22c984bcaa2c398a1e217b85655a7786b",
+      "bytes": 1070,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/e6768646ee04b2f2c83f0c19343ba7b22c984bcaa2c398a1e217b85655a7786b.gz",
+      "retained_sha256": "5bffda99299debf940b68189eeba23ab01c9972c6a8ae081042cf34219fa34a8"
+    },
+    {
+      "path": "screenshots-r2/cascades-r1-cascades-on-unshadowed.png",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/screenshots-r2/cascades-r1-cascades-on-unshadowed.png",
+      "sha256": "2dd1d970bdf9e4ca678180530fb076a0a36e9491847d2c28c2acb82cc9392b13",
+      "bytes": 10579,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/2dd1d970bdf9e4ca678180530fb076a0a36e9491847d2c28c2acb82cc9392b13.gz",
+      "retained_sha256": "e356234c42803e60dc89d2ca3beaf36a172603b2a35a16c5934669b24cda5bc0"
+    },
+    {
+      "path": "screenshots-r2/viewport-r1-viewport-off.png",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/screenshots-r2/viewport-r1-viewport-off.png",
+      "sha256": "d6215b533019fc696f94aafcf3e48b13f2519f35ae2aa4e9e75fca4f744be8b3",
+      "bytes": 40829,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/d6215b533019fc696f94aafcf3e48b13f2519f35ae2aa4e9e75fca4f744be8b3.gz",
+      "retained_sha256": "7f422baa970d6f0c270ebd24ec5cb0f7cc1318a36e9cd95e5b88d589eb215165"
+    },
+    {
+      "path": "screenshots-r2/cascades-r1-cascades-off.png",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/screenshots-r2/cascades-r1-cascades-off.png",
+      "sha256": "7049cf0a3a272d273ca8f1bdf14c9d72bb52d9df3117636ef9b7ae36eff2d989",
+      "bytes": 22037,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/7049cf0a3a272d273ca8f1bdf14c9d72bb52d9df3117636ef9b7ae36eff2d989.gz",
+      "retained_sha256": "5aabbe0e339c5de1ebd89b1f1ba6ecf2a85dd46b31c657d0b9f3ae23b9a1fa96"
+    },
+    {
+      "path": "screenshots-r2/sprites_text-r1-sprites-text-off.png",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/screenshots-r2/sprites_text-r1-sprites-text-off.png",
+      "sha256": "bdadd584ff2e7bba1dda9c6e86a9b7c818bea2344d7600b94cb43a685fd410ff",
+      "bytes": 10076,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/bdadd584ff2e7bba1dda9c6e86a9b7c818bea2344d7600b94cb43a685fd410ff.gz",
+      "retained_sha256": "704f629e42458fe86333d01bbbe15efc714c52c73314eb1f00156cf5c181758f"
+    },
+    {
+      "path": "screenshots-r2/lit-r1-lit-off-1.png",
+      "original": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps/handoffs/0068-gpu-timestamps/screenshots-r2/lit-r1-lit-off-1.png",
+      "sha256": "4f019b64e6593d4fa4d535104560114b074959b7364988abd07274dabd0f95c6",
+      "bytes": 52071,
+      "retained": "docs/spikes/evidence/gpu-timestamps-r2/4f019b64e6593d4fa4d535104560114b074959b7364988abd07274dabd0f95c6.gz",
+      "retained_sha256": "a64ef17822fba21fedc830e7b92ef9bca7047ac8f1e71a14a64e9480af44efcf"
+    }
+  ],
+  "limits": [
+    "Metal on Apple M5 Pro macOS27.0.1 only; not benchmark or reference-phone evidence",
+    "Default shader features only; cooked combination remains pending",
+    "Per-pass timestamps valid; first/last encoded aggregate omitted earlier concurrent work in3 lit samples. CPU-only envelope repair is separately recorded.",
+    "Owner-drop is no-panic/no-hang smoke only; callback-after-drop ordering unproven",
+    "No phase approval"
+  ]
+}

@@ -42,7 +42,7 @@ pub struct ContactPairManifolds {
 
 /// All fixed native ContactManifold / ContactManifoldData fields, plus spans
 /// into shared ordered contact arrays. Only solver color/index/position scalar
-/// domains are checked here; reciprocal solver-graph/island ownership is pending.
+/// domains are checked here; the joined rigid owner checks reciprocal solver state.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct ContactManifoldRecord {
     pub points: RecordSpan,
@@ -77,7 +77,41 @@ pub struct ValidatedManifolds<'a> {
     record: ManifoldTable,
     context: ManifoldContext<'a>,
 }
-impl ValidatedManifolds<'_> {
+impl<'a> ValidatedManifolds<'a> {
+    pub(crate) fn edge_row(&self, edge: u32) -> Option<usize> {
+        self.context
+            .graph
+            .record()
+            .edges
+            .get(edge as usize)
+            .map(|e| e.row as usize)
+    }
+
+    pub(crate) fn attachments(&self) -> &'a ValidatedAttachments<'a> {
+        self.context.attachments
+    }
+    pub fn edge_touching(&self, edge: u32) -> Option<bool> {
+        let p = self.edge_pair(edge)?;
+        let s = if p.clusters.count != 0 {
+            p.clusters
+        } else {
+            p.plain
+        };
+        Some(
+            self.record.manifolds[s.start as usize..(s.start + s.count) as usize]
+                .iter()
+                .any(|m| m.solver.count != 0),
+        )
+    }
+    pub(crate) fn pair_shapes(&self, row: usize) -> Option<[&ValidatedGeometry; 2]> {
+        let p = self.record.pairs.get(row)?;
+        let a = self.context.attachments.collider_row(p.colliders[0])? as usize;
+        let b = self.context.attachments.collider_row(p.colliders[1])? as usize;
+        Some([
+            self.context.geometries.get(a)?,
+            self.context.geometries.get(b)?,
+        ])
+    }
     pub fn record(&self) -> &ManifoldTable {
         &self.record
     }

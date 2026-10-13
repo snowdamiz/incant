@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T06:39:30.794194+00:00",
+  "decision": "accept scoped body-state current-main integration for fast check and merge",
+  "head": "08622dde0f5a7d3ab5cf6e37ae9a2a21694d6c91",
+  "manifest_sha256": "71e664a082457d55a68c2ee810b3ec50dd477e35f4ac773bf19860a8884cf422",
+  "review": [
+    "Read collector; verify-only passed",
+    "Independently decoded/hashed integration archive records and payload lengths",
+    "Accepted44 producer crate inputs unchanged; current main lock unchanged",
+    "Actual8 checks0 and101 CPU tests; normal graph remains dependency-free",
+    "Frozen source and actual main206 ancestry trees match"
+  ],
+  "archive_records": 20,
+  "archive_payloads": 11,
+  "limits": [
+    "101 cases include the prior88 pair-state cases; counts are not additive.",
+    "All44 crate source/test/manifest files equal acceptedc250. Older producer lock predates merged profiling packages/edges and renderer dev naga; current lock equals actualmain206.",
+    "No live constructor, complete owner authentication, reciprocal solver/island ownership, previous-cluster scratch reconstruction, physics-save admission, GPU, shipping, device or performance claim."
+  ]
+}

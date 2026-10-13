@@ -1,0 +1,1645 @@
+{
+  "format": "incant-physics-inert-pair-state-evidence",
+  "version": 1,
+  "scope": "inert rigid pair events, color slots, recycle references and closed composite query workspaces; completed narrow phase only; no live restoration",
+  "base": "7ca4dd872c7d97c66829c60a360218071d187bb1",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/freeze.json",
+    "sha256": "cd4d1ce03a7a540aa7874d3c1fdffae17e7633c758a3ae26a5c1bafcc9b4844a"
+  },
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c",
+      "bytes": 252225,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc",
+      "bytes": 564,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/arena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/arena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "af6cc141ac330a8630dc874c3660e8c60341fc114b479482d6385fb5d4684018",
+      "bytes": 6215,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/attachment.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/attachment_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/coarena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/coarena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c",
+      "bytes": 4100,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_points_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/geometry_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/graph.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/graph_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "1627fa5703b52c124fc30f0e6b98d23db15ac0127ba6db36d1c3a976a42a4976",
+      "bytes": 1910,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/pair_state/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "sha256": "a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22",
+      "bytes": 2537,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/pair_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/pair_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/records.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/adversarial.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+      "bytes": 13804,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/pair_state.rs",
+      "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+      "bytes": 9879,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/pair_state.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+      "bytes": 4776,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "d49f6c2882aacac34722937948841ee102748b9a9388cd660c4b23ecabd05d56",
+      "bytes": 6249,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "70dd4b05a4bc37567b093c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf",
+      "bytes": 33434,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_parry.rs"
+    }
+  ],
+  "pinned": [
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier2d-0.36.0/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier2d-0.36.0/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "sha256": "96d0ad11253b8632b5d4f82967eb823ef667ada8f25b4b4177331b4ec2a0199a",
+      "bytes": 5991
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "sha256": "3b492efd7f2a5289e86177705ea5c4c255d247d5e8877276dfba91203069ee76",
+      "bytes": 7532
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "sha256": "dc3dd4a812e1b08f12ddea2e84557575f25ee1a9f434d30616cbe41f77b3cc74",
+      "bytes": 7747
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/query/contact_manifolds/contact_manifold.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/utils/hashmap.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/utils/hashmap.rs",
+      "sha256": "0166090169c7a69271af7371f4089a14675070076c0ebcef39ff089598217b66",
+      "bytes": 2199
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/shape/compound.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/shape/compound.rs",
+      "sha256": "050a406c295671b2111756a3473a6029affef75755fe56fae5b4a11293d1ec60",
+      "bytes": 80398
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier3d-0.36.0/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier3d-0.36.0/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "sha256": "96d0ad11253b8632b5d4f82967eb823ef667ada8f25b4b4177331b4ec2a0199a",
+      "bytes": 5991
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "sha256": "3b492efd7f2a5289e86177705ea5c4c255d247d5e8877276dfba91203069ee76",
+      "bytes": 7532
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "sha256": "dc3dd4a812e1b08f12ddea2e84557575f25ee1a9f434d30616cbe41f77b3cc74",
+      "bytes": 7747
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/query/contact_manifolds/contact_manifold.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/utils/hashmap.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/utils/hashmap.rs",
+      "sha256": "0166090169c7a69271af7371f4089a14675070076c0ebcef39ff089598217b66",
+      "bytes": 2199
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/shape/compound.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/shape/compound.rs",
+      "sha256": "050a406c295671b2111756a3473a6029affef75755fe56fae5b4a11293d1ec60",
+      "bytes": 80398
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/contact_clustering.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier3d-0.36.0/geometry/contact_clustering.rs",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725
+    }
+  ],
+  "commands": [
+    {
+      "label": "metadata",
+      "argv": [
+        "./tools/cargo",
+        "metadata",
+        "--offline",
+        "--format-version",
+        "1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "exit_code": 0,
+      "start_ns": 1791870734161164000,
+      "end_ns": 1791870734408109000,
+      "stdout": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/metadata.json",
+      "stderr": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/metadata.log",
+      "stdout_sha256": "fed22bbc89d842f771097e97195cae98c037a429245be023034e4c26a5171b34",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "tests-001",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870734475139000,
+      "end_ns": 1791870740470832000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/tests-001.log",
+      "log_sha256": "4eefe96b5b7aa499062a95ddced483da3722caf1bc8170c8e10715d593ec8b61"
+    },
+    {
+      "label": "tests-002",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870843078417000,
+      "end_ns": 1791870844865807000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/tests-002.log",
+      "log_sha256": "8c7b38dad53168aacb250f69d8744b9976b9300da7902db67b1c668b8d40c82f"
+    },
+    {
+      "label": "clippy-001",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870880466373000,
+      "end_ns": 1791870881290979000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/clippy-001.log",
+      "log_sha256": "99619cb7e36e3e80ec37c6760d9cfd53be0204a8414783c2462acd6fa1d1c0b4"
+    },
+    {
+      "label": "wasm32-001",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870881315801000,
+      "end_ns": 1791870881695280000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/wasm32-001.log",
+      "log_sha256": "7e169fc17aa1fce593c3326e45acb1bb7961267d6fe1be62917e24b4081e3174"
+    },
+    {
+      "label": "normal-graph-001",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870881719721000,
+      "end_ns": 1791870881823430000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/normal-graph-001.log",
+      "log_sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c"
+    },
+    {
+      "label": "runtime-graphs-001",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870881847352000,
+      "end_ns": 1791870882159244000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/runtime-graphs-001.log",
+      "log_sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0"
+    },
+    {
+      "label": "fmt-001",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870882183194000,
+      "end_ns": 1791870882275688000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/fmt-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions-001",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870882299493000,
+      "end_ns": 1791870882325834000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/conventions-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "diff-001",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791870882348772000,
+      "end_ns": 1791870882368912000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/diff-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tests": {
+    "passed": 88,
+    "failed": 0,
+    "ignored": 0,
+    "nonempty_groups": 14,
+    "all_groups": 16
+  },
+  "final_commands": 8,
+  "native_observations": [
+    "MANIFOLD_NATIVE dimension=2 compound=true cluster=false transformed=false mixed_children=false warm=true",
+    "PAIR_STATE_NATIVE dimension=2 events=true recycle_reference_reused=true forced_full_changed=true composite_swap=true two_composite=true churn=true both_traversal_sizes=true",
+    "MANIFOLD_NATIVE dimension=2 plain_warm=true removed_reused=true pending_refused=true",
+    "MANIFOLD_NATIVE dimension=3 compound=true cluster=true transformed=true mixed_children=true warm=true",
+    "MANIFOLD_NATIVE dimension=3 plain_warm=true removed_reused=true pending_refused=true",
+    "PAIR_STATE_NATIVE dimension=3 events=true recycle_reference_reused=true forced_full_changed=true composite_swap=true two_composite=true churn=true both_traversal_sizes=true"
+  ],
+  "records": [
+    {
+      "name": "checks.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/checks.py",
+      "sha256": "cb2b8590ba394ac1b8fa3208afc865d6c0c96963d080aa10683a08d59c575a26",
+      "bytes": 884,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/cb2b8590ba394ac1b8fa3208afc865d6c0c96963d080aa10683a08d59c575a26.gz",
+      "retained_sha256": "857d33495c109cfa5c903fbf34032b80cfe8344c02b2e6df90c9ffb95827b316"
+    },
+    {
+      "name": "clippy-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/clippy-001.json",
+      "sha256": "f20eb5e08d144fc078d15525bdd4cfa5a1a4029525e84f6fa84ea788d6250225",
+      "bytes": 697,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/f20eb5e08d144fc078d15525bdd4cfa5a1a4029525e84f6fa84ea788d6250225.gz",
+      "retained_sha256": "a6fcd61724959a6e992507f57d990faa2ce41bd7da35685eb54f860e71ca04c5"
+    },
+    {
+      "name": "clippy-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/clippy-001.log",
+      "sha256": "99619cb7e36e3e80ec37c6760d9cfd53be0204a8414783c2462acd6fa1d1c0b4",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/99619cb7e36e3e80ec37c6760d9cfd53be0204a8414783c2462acd6fa1d1c0b4.gz",
+      "retained_sha256": "0c4ace4e63d63b35ec905f2cc3e8208dadc5bb960ddbf309cd2718be797986ec"
+    },
+    {
+      "name": "conventions-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/conventions-001.json",
+      "sha256": "b07f7ca35af1a74911740a75c4d8e97d314ffd867a186ba1bbc3794c4eb0e880",
+      "bytes": 565,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/b07f7ca35af1a74911740a75c4d8e97d314ffd867a186ba1bbc3794c4eb0e880.gz",
+      "retained_sha256": "ad185e546aed5af7e32b88aabfd65e02d83f7751aee97eabf61efabf361b5fa1"
+    },
+    {
+      "name": "conventions-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "diff-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/diff-001.json",
+      "sha256": "8857906dc53b245a2cc9be37ca921c6d9fa8e4310e61b624868f9701167e4ba6",
+      "bytes": 529,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/8857906dc53b245a2cc9be37ca921c6d9fa8e4310e61b624868f9701167e4ba6.gz",
+      "retained_sha256": "3db947b052c7ea28c3e9afd58ed9d9e292c77345f00ff4f5737d5e108614fe15"
+    },
+    {
+      "name": "diff-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "fmt-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/fmt-001.json",
+      "sha256": "b0613db4c1c81ebb23e8bf757607774adb7d4aa0584c16a826ab6d2aff5007a9",
+      "bytes": 578,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/b0613db4c1c81ebb23e8bf757607774adb7d4aa0584c16a826ab6d2aff5007a9.gz",
+      "retained_sha256": "a21b27f4076007605d90abfb49d568e516d8d698f0bc704aef22956eb4940230"
+    },
+    {
+      "name": "fmt-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "lock-delta.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/lock-delta.patch",
+      "sha256": "1051b7440a7452dd4d770b8f89c0243e38c8f05ccd251659b4690df1ef88f382",
+      "bytes": 215,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/1051b7440a7452dd4d770b8f89c0243e38c8f05ccd251659b4690df1ef88f382.gz",
+      "retained_sha256": "28d320562f9dcf58b3a3b46b5b686e1f55d9dd80d3f69cf3ba491ab6f4176c04"
+    },
+    {
+      "name": "metadata-command.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/metadata-command.json",
+      "sha256": "db1fbbf5ed4e1ecaecada4717bc5469063d98f452965cf58333799f3b28e846d",
+      "bytes": 465,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/db1fbbf5ed4e1ecaecada4717bc5469063d98f452965cf58333799f3b28e846d.gz",
+      "retained_sha256": "1c6bab2c1a6050606f40553d151caaf89c9255ab9ccf7bbe591613cec514bf54"
+    },
+    {
+      "name": "metadata.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/metadata.json",
+      "sha256": "fed22bbc89d842f771097e97195cae98c037a429245be023034e4c26a5171b34",
+      "bytes": 4915168,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/fed22bbc89d842f771097e97195cae98c037a429245be023034e4c26a5171b34.gz",
+      "retained_sha256": "4dc54065f1e95b11db538ea20e8a83ac81bb89cf5762cebcc2aaf04bdd42d827"
+    },
+    {
+      "name": "metadata.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/metadata.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "normal-graph-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/normal-graph-001.json",
+      "sha256": "207d0ca883dbde0fb3b7ba5049c4de4b1580787f1f0b504dafbbfc57c823e28b",
+      "bytes": 658,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/207d0ca883dbde0fb3b7ba5049c4de4b1580787f1f0b504dafbbfc57c823e28b.gz",
+      "retained_sha256": "ce3f3e7e223ce01155487e29ecd943e77629fe37d8e88161759bd71c26133118"
+    },
+    {
+      "name": "normal-graph-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/normal-graph-001.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "bytes": 124,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c.gz",
+      "retained_sha256": "b212649c683b80fc2d54b1aa54497594d1b7f5cb99243c3dad0ee95afaaa6ecd"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifold.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a.gz",
+      "retained_sha256": "a9d4d342066c1789f30636f26f6d827d2dfef548c54be344593ad232b821f4fb"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "sha256": "dc3dd4a812e1b08f12ddea2e84557575f25ee1a9f434d30616cbe41f77b3cc74",
+      "bytes": 7747,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/dc3dd4a812e1b08f12ddea2e84557575f25ee1a9f434d30616cbe41f77b3cc74.gz",
+      "retained_sha256": "bf0881c7a7d77be1542c5d1534ffae8c7fa0523270c023bc3384a76ae61af66e"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "sha256": "3b492efd7f2a5289e86177705ea5c4c255d247d5e8877276dfba91203069ee76",
+      "bytes": 7532,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/3b492efd7f2a5289e86177705ea5c4c255d247d5e8877276dfba91203069ee76.gz",
+      "retained_sha256": "02e1e2b7468aec46617dfe46a60f54c2c5fed6b619068116ff93dd6f9f7252bf"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "sha256": "96d0ad11253b8632b5d4f82967eb823ef667ada8f25b4b4177331b4ec2a0199a",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/96d0ad11253b8632b5d4f82967eb823ef667ada8f25b4b4177331b4ec2a0199a.gz",
+      "retained_sha256": "d294c98f745de0d691e899c4f0fba38bcb55e7a2e3a7e0a36912c15555fd55d7"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/shape/compound.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/shape/compound.rs",
+      "sha256": "050a406c295671b2111756a3473a6029affef75755fe56fae5b4a11293d1ec60",
+      "bytes": 80398,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/050a406c295671b2111756a3473a6029affef75755fe56fae5b4a11293d1ec60.gz",
+      "retained_sha256": "92838f486dd69f36d86ee3da42fcb3afab8566d27485207c1f471d335c32d2df"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/utils/hashmap.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry2d-0.31.1/utils/hashmap.rs",
+      "sha256": "0166090169c7a69271af7371f4089a14675070076c0ebcef39ff089598217b66",
+      "bytes": 2199,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/0166090169c7a69271af7371f4089a14675070076c0ebcef39ff089598217b66.gz",
+      "retained_sha256": "0a0d5ceb504927f47f8f6ba59163682aa8b8206143b82f139a7e05445a8c1a83"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifold.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a.gz",
+      "retained_sha256": "a9d4d342066c1789f30636f26f6d827d2dfef548c54be344593ad232b821f4fb"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "sha256": "dc3dd4a812e1b08f12ddea2e84557575f25ee1a9f434d30616cbe41f77b3cc74",
+      "bytes": 7747,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/dc3dd4a812e1b08f12ddea2e84557575f25ee1a9f434d30616cbe41f77b3cc74.gz",
+      "retained_sha256": "bf0881c7a7d77be1542c5d1534ffae8c7fa0523270c023bc3384a76ae61af66e"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "sha256": "3b492efd7f2a5289e86177705ea5c4c255d247d5e8877276dfba91203069ee76",
+      "bytes": 7532,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/3b492efd7f2a5289e86177705ea5c4c255d247d5e8877276dfba91203069ee76.gz",
+      "retained_sha256": "02e1e2b7468aec46617dfe46a60f54c2c5fed6b619068116ff93dd6f9f7252bf"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/query/contact_manifolds/contact_manifolds_workspace.rs",
+      "sha256": "96d0ad11253b8632b5d4f82967eb823ef667ada8f25b4b4177331b4ec2a0199a",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/96d0ad11253b8632b5d4f82967eb823ef667ada8f25b4b4177331b4ec2a0199a.gz",
+      "retained_sha256": "d294c98f745de0d691e899c4f0fba38bcb55e7a2e3a7e0a36912c15555fd55d7"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/shape/compound.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/shape/compound.rs",
+      "sha256": "050a406c295671b2111756a3473a6029affef75755fe56fae5b4a11293d1ec60",
+      "bytes": 80398,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/050a406c295671b2111756a3473a6029affef75755fe56fae5b4a11293d1ec60.gz",
+      "retained_sha256": "92838f486dd69f36d86ee3da42fcb3afab8566d27485207c1f471d335c32d2df"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/utils/hashmap.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/parry3d-0.31.1/utils/hashmap.rs",
+      "sha256": "0166090169c7a69271af7371f4089a14675070076c0ebcef39ff089598217b66",
+      "bytes": 2199,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/0166090169c7a69271af7371f4089a14675070076c0ebcef39ff089598217b66.gz",
+      "retained_sha256": "0a0d5ceb504927f47f8f6ba59163682aa8b8206143b82f139a7e05445a8c1a83"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/geometry/contact_pair.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier2d-0.36.0/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz",
+      "retained_sha256": "358ed8977db039f94b06c49e49fea4ea23a9c9053df8bf5d09136fcaf76015b1"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/geometry/narrow_phase/pair_update.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier2d-0.36.0/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016.gz",
+      "retained_sha256": "3e0ec3364d7a05057e388061f749aeeed025586ca607acf7f6eefa6d56ed10d3"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/geometry/contact_clustering.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier3d-0.36.0/geometry/contact_clustering.rs",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442.gz",
+      "retained_sha256": "d9c0f952b33bfaf6ee2d683bf48d34929a54f1394812780333422c393ee18ef9"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/geometry/contact_pair.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier3d-0.36.0/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz",
+      "retained_sha256": "358ed8977db039f94b06c49e49fea4ea23a9c9053df8bf5d09136fcaf76015b1"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/geometry/narrow_phase/pair_update.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned/rapier3d-0.36.0/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016.gz",
+      "retained_sha256": "3e0ec3364d7a05057e388061f749aeeed025586ca607acf7f6eefa6d56ed10d3"
+    },
+    {
+      "name": "pinned-sources.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/pinned-sources.json",
+      "sha256": "f3b231cb9a20618bf921d7779659923fd6d4f62ce21072bb1b16072918fb2055",
+      "bytes": 6906,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/f3b231cb9a20618bf921d7779659923fd6d4f62ce21072bb1b16072918fb2055.gz",
+      "retained_sha256": "3a8c3b5e921397bd93849d9f8906943eac29adb9a0a11bd0684ee38683234a44"
+    },
+    {
+      "name": "retain-attempt-001.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/retain-attempt-001.py",
+      "sha256": "d5d974abd1f60473e5476da532059588759682d5da361a7c229d75057be8f0eb",
+      "bytes": 3152,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/d5d974abd1f60473e5476da532059588759682d5da361a7c229d75057be8f0eb.gz",
+      "retained_sha256": "4033a225f55d0a77f2190b570f6f49d5eed33b9c7774714c14f0e178800baa22"
+    },
+    {
+      "name": "retain.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/retain.py",
+      "sha256": "b60fa22615c0dc07ba3a997c468af023e27b6423adf53d87fe6bbac68778bb05",
+      "bytes": 3307,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/b60fa22615c0dc07ba3a997c468af023e27b6423adf53d87fe6bbac68778bb05.gz",
+      "retained_sha256": "cd9c4ff0dd8d166fa5cc9a89dcf5bc08ad6d1762ea00812144bc0c827455c1f3"
+    },
+    {
+      "name": "retention-attempt-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/retention-attempt-001.json",
+      "sha256": "599a05efa278802318bf27bebb6f5e836265fd8c0e08fc2bb2ab22b770139939",
+      "bytes": 331,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/599a05efa278802318bf27bebb6f5e836265fd8c0e08fc2bb2ab22b770139939.gz",
+      "retained_sha256": "4f20026a3f8a8a5e69299069640e0bd31756392821acb44192d871b9fcafa7b5"
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/run.py",
+      "sha256": "92be05d222a66c379ef2798ead1358f399eb317d7098687df3e7b682e0c5d79c",
+      "bytes": 944,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/92be05d222a66c379ef2798ead1358f399eb317d7098687df3e7b682e0c5d79c.gz",
+      "retained_sha256": "91275cd9941ae56c068607550ac3d57425b390ed4f0d0a7a52f80baad9c80ebf"
+    },
+    {
+      "name": "runtime-graphs-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/runtime-graphs-001.json",
+      "sha256": "69eb0e28351bcea90e6a89deb49e3f979a761bd686d55eafabd9e1e3dbe0fd29",
+      "bytes": 653,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/69eb0e28351bcea90e6a89deb49e3f979a761bd686d55eafabd9e1e3dbe0fd29.gz",
+      "retained_sha256": "40e74ef36de9c9d5e0660e0215512f8ad606d6779639faab5ec6a6de88c93664"
+    },
+    {
+      "name": "runtime-graphs-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/runtime-graphs-001.log",
+      "sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0",
+      "bytes": 113,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz",
+      "retained_sha256": "f5bfcbb956f60d69141e44f0fcb4b30b89968e8c3ac6bba75f729ead5bb0db48"
+    },
+    {
+      "name": "source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/Cargo.lock",
+      "sha256": "624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c",
+      "bytes": 252225,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c.gz",
+      "retained_sha256": "c066d640de846f90fc421c505bc7f4ae957216f3dbd6afec3c07419b0208f6b9"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc",
+      "bytes": 564,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc.gz",
+      "retained_sha256": "7ed7a4bcb142ab649f5ac80bae4e60b7e80a28abd3cf57b5a7f85363546b7971"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "af6cc141ac330a8630dc874c3660e8c60341fc114b479482d6385fb5d4684018",
+      "bytes": 6215,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/af6cc141ac330a8630dc874c3660e8c60341fc114b479482d6385fb5d4684018.gz",
+      "retained_sha256": "502ec199737a135f6efc7d1fcb46b35febc74ef1ca3b4f69c900bea280a19707"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz",
+      "retained_sha256": "22fd4278b32061f4a4916fcb42eebf5232e42656f4d8b9f78ca68d99364993e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435.gz",
+      "retained_sha256": "52c6530b76adb7b5df7dddb01957c17c421e97c91094f91a85a92be8c6991925"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz",
+      "retained_sha256": "799de7df2e8e2d2532a546361950d2fcb81f113cdd2194afc7276e7a0609aa51"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c",
+      "bytes": 4100,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c.gz",
+      "retained_sha256": "a5667cefbf4163051ae71af2d50b77beda09fd52ffa098a79d8155c7bccfd144"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz",
+      "retained_sha256": "4daca488999b79813b8d0622153cf7bad0359494de2e3c4366065b0ded177de6"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz",
+      "retained_sha256": "018627ff8c2bad3f01c6f68f90869b1eb796c3ec9e6e22109313350820474447"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz",
+      "retained_sha256": "95692b802416ea70654f479fcc8ad52aa816757c8f1412ed20b21390506735c7"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz",
+      "retained_sha256": "e0efb1a6f3a2801a8f5f8118736e218d164039f714aa8357dfe88f2bb86ac475"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz",
+      "retained_sha256": "51f79ac05ab4a561d9f3c453698de006a3af32e3b54ee67de79e11ef7d1226e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "1627fa5703b52c124fc30f0e6b98d23db15ac0127ba6db36d1c3a976a42a4976",
+      "bytes": 1910,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/1627fa5703b52c124fc30f0e6b98d23db15ac0127ba6db36d1c3a976a42a4976.gz",
+      "retained_sha256": "866afca12875fb6d9f7107bd412302585115a07927f09c140f637fb88467fc53"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc.gz",
+      "retained_sha256": "017a075bfb75e587799124996af94d7e2206fee91da4a64617e8ef1bb44495aa"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "sha256": "a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22",
+      "bytes": 2537,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22.gz",
+      "retained_sha256": "fb78d429b0e58871cfd9dc680cc4d6049c43c5f6bd822cbb7de85707d496f10e"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256.gz",
+      "retained_sha256": "0258ad74f7f31be8e97e9ae2e06e94c72b456f8143a5ca1d0091d14fdefc0ab5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz",
+      "retained_sha256": "f5d1cc08ac86b9a222fdd5365f8b21b1e78d3c8e00e62b685cc6e07b59614b07"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz",
+      "retained_sha256": "1d5d6fdbc3407278563e7b624a70f6667b9fd27ab990c748075eb6d6f0ff3b06"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz",
+      "retained_sha256": "e2174b3374d44cc4e04dff90eed6cbdae38b707a3add41a8a6c416ef8c1c3eae"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+      "bytes": 13804,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9.gz",
+      "retained_sha256": "471dbb5fe5a863f79c04b284504d909cddecffa47dfff776b48fadecd812bb4b"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+      "bytes": 9879,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a.gz",
+      "retained_sha256": "48576ffa835fcdc5f165f1cf859436cd7f4c637db29868fcc767b41dff492d8d"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+      "bytes": 4776,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716.gz",
+      "retained_sha256": "6500077b9b45625a4ab71dd1c6d351a521f9027059f0fe3e47facb2112efa043"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "0719ad59ba450d2e25f8aaaf0165ff1b1de78fb97274f5f38f70ffddc58823b4",
+      "bytes": 5420,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/0719ad59ba450d2e25f8aaaf0165ff1b1de78fb97274f5f38f70ffddc58823b4.gz",
+      "retained_sha256": "d86c860b10fe6e422798731b4768812c55a9e775ef36b3d8b58ce807af0b2ed3"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz",
+      "retained_sha256": "abf5226058381b564373e1497979d6558ea123d4ea69fa32c9ba33bbd174dcdf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz",
+      "retained_sha256": "c83435a4f584fcff511afb55aa2b1f7d0db05041d3efda31c94b687a35fe75cd"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz",
+      "retained_sha256": "6dc0cf3798d24c9c391ef44d7256974ce9fba372867fd09932cfc511f2b58b12"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz",
+      "retained_sha256": "7c1a305ac22b703be8917c876c65eda6a58e55f26ba941b16239c1f5263f880a"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "85654d1a28f758b47824deeb2ee95c5c3853fae582ccfc97a4e742bcbba8f927",
+      "bytes": 29873,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/85654d1a28f758b47824deeb2ee95c5c3853fae582ccfc97a4e742bcbba8f927.gz",
+      "retained_sha256": "2321db146bfd2a8058c1529dc04558bc4bf140436a1a5795d348cd5d86d9debd"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/freeze.json",
+      "sha256": "521d07e0016c12039cdc6a880efe5033dfbbd14a4ed4a3283dc78b5e34f2e031",
+      "bytes": 13890,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/521d07e0016c12039cdc6a880efe5033dfbbd14a4ed4a3283dc78b5e34f2e031.gz",
+      "retained_sha256": "245131fdbb771ed1fd8a3a3548d989d475d4c4270d4b32a4dcdbf1648b29bdec"
+    },
+    {
+      "name": "source-001/tracked.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-001/tracked.patch",
+      "sha256": "8da51f811a5796245f85475603ff0af30570ab8fbad9250159cef2e72b4a4958",
+      "bytes": 18295,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/8da51f811a5796245f85475603ff0af30570ab8fbad9250159cef2e72b4a4958.gz",
+      "retained_sha256": "bbaaea3b748d314eab9373985dd08d54acb55f8ed80af6a5d98fd47cd16caf08"
+    },
+    {
+      "name": "source-002/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/Cargo.lock",
+      "sha256": "624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c",
+      "bytes": 252225,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c.gz",
+      "retained_sha256": "c066d640de846f90fc421c505bc7f4ae957216f3dbd6afec3c07419b0208f6b9"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc",
+      "bytes": 564,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc.gz",
+      "retained_sha256": "7ed7a4bcb142ab649f5ac80bae4e60b7e80a28abd3cf57b5a7f85363546b7971"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "af6cc141ac330a8630dc874c3660e8c60341fc114b479482d6385fb5d4684018",
+      "bytes": 6215,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/af6cc141ac330a8630dc874c3660e8c60341fc114b479482d6385fb5d4684018.gz",
+      "retained_sha256": "502ec199737a135f6efc7d1fcb46b35febc74ef1ca3b4f69c900bea280a19707"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz",
+      "retained_sha256": "22fd4278b32061f4a4916fcb42eebf5232e42656f4d8b9f78ca68d99364993e4"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435.gz",
+      "retained_sha256": "52c6530b76adb7b5df7dddb01957c17c421e97c91094f91a85a92be8c6991925"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz",
+      "retained_sha256": "799de7df2e8e2d2532a546361950d2fcb81f113cdd2194afc7276e7a0609aa51"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c",
+      "bytes": 4100,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c.gz",
+      "retained_sha256": "a5667cefbf4163051ae71af2d50b77beda09fd52ffa098a79d8155c7bccfd144"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz",
+      "retained_sha256": "4daca488999b79813b8d0622153cf7bad0359494de2e3c4366065b0ded177de6"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz",
+      "retained_sha256": "018627ff8c2bad3f01c6f68f90869b1eb796c3ec9e6e22109313350820474447"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz",
+      "retained_sha256": "95692b802416ea70654f479fcc8ad52aa816757c8f1412ed20b21390506735c7"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz",
+      "retained_sha256": "e0efb1a6f3a2801a8f5f8118736e218d164039f714aa8357dfe88f2bb86ac475"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz",
+      "retained_sha256": "51f79ac05ab4a561d9f3c453698de006a3af32e3b54ee67de79e11ef7d1226e4"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "1627fa5703b52c124fc30f0e6b98d23db15ac0127ba6db36d1c3a976a42a4976",
+      "bytes": 1910,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/1627fa5703b52c124fc30f0e6b98d23db15ac0127ba6db36d1c3a976a42a4976.gz",
+      "retained_sha256": "866afca12875fb6d9f7107bd412302585115a07927f09c140f637fb88467fc53"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc.gz",
+      "retained_sha256": "017a075bfb75e587799124996af94d7e2206fee91da4a64617e8ef1bb44495aa"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "sha256": "a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22",
+      "bytes": 2537,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22.gz",
+      "retained_sha256": "fb78d429b0e58871cfd9dc680cc4d6049c43c5f6bd822cbb7de85707d496f10e"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256.gz",
+      "retained_sha256": "0258ad74f7f31be8e97e9ae2e06e94c72b456f8143a5ca1d0091d14fdefc0ab5"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz",
+      "retained_sha256": "f5d1cc08ac86b9a222fdd5365f8b21b1e78d3c8e00e62b685cc6e07b59614b07"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz",
+      "retained_sha256": "1d5d6fdbc3407278563e7b624a70f6667b9fd27ab990c748075eb6d6f0ff3b06"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz",
+      "retained_sha256": "e2174b3374d44cc4e04dff90eed6cbdae38b707a3add41a8a6c416ef8c1c3eae"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+      "bytes": 13804,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9.gz",
+      "retained_sha256": "471dbb5fe5a863f79c04b284504d909cddecffa47dfff776b48fadecd812bb4b"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+      "bytes": 9879,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a.gz",
+      "retained_sha256": "48576ffa835fcdc5f165f1cf859436cd7f4c637db29868fcc767b41dff492d8d"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+      "bytes": 4776,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716.gz",
+      "retained_sha256": "6500077b9b45625a4ab71dd1c6d351a521f9027059f0fe3e47facb2112efa043"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "d49f6c2882aacac34722937948841ee102748b9a9388cd660c4b23ecabd05d56",
+      "bytes": 6249,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/d49f6c2882aacac34722937948841ee102748b9a9388cd660c4b23ecabd05d56.gz",
+      "retained_sha256": "b73faf41551069513594f47df2c592773fec397ea1912b4aa4c2fbabed5ac34f"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz",
+      "retained_sha256": "abf5226058381b564373e1497979d6558ea123d4ea69fa32c9ba33bbd174dcdf"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz",
+      "retained_sha256": "c83435a4f584fcff511afb55aa2b1f7d0db05041d3efda31c94b687a35fe75cd"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz",
+      "retained_sha256": "6dc0cf3798d24c9c391ef44d7256974ce9fba372867fd09932cfc511f2b58b12"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz",
+      "retained_sha256": "7c1a305ac22b703be8917c876c65eda6a58e55f26ba941b16239c1f5263f880a"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "70dd4b05a4bc37567b093c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf",
+      "bytes": 33434,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/70dd4b05a4bc37567b093c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf.gz",
+      "retained_sha256": "7188cf4a4db467a9c0ccc29fd16e95e964656a6d2f2b62aefd8f396988e4a33c"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/freeze.json",
+      "sha256": "cd4d1ce03a7a540aa7874d3c1fdffae17e7633c758a3ae26a5c1bafcc9b4844a",
+      "bytes": 13890,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/cd4d1ce03a7a540aa7874d3c1fdffae17e7633c758a3ae26a5c1bafcc9b4844a.gz",
+      "retained_sha256": "7540998eb1a5e32103fa4475192493aa3a86ac2111801ffbf5d581d5b3b2df5c"
+    },
+    {
+      "name": "source-002/tracked.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/source-002/tracked.patch",
+      "sha256": "866f36a94a1111af1a22d3cfb7ddd230487a65fd35793873a235a6c30c5bb807",
+      "bytes": 22438,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/866f36a94a1111af1a22d3cfb7ddd230487a65fd35793873a235a6c30c5bb807.gz",
+      "retained_sha256": "5e2375eb5f56de8ac917f90c6a4b61a63b0c66fe11d1bd07fafb41bfa2277d5b"
+    },
+    {
+      "name": "terminal-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/terminal-audit.json",
+      "sha256": "3082b47d9444c5f719c8c45ee6a0beab357d23032a7163eabec16a81813673a3",
+      "bytes": 8878,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/3082b47d9444c5f719c8c45ee6a0beab357d23032a7163eabec16a81813673a3.gz",
+      "retained_sha256": "799359f1125c608011661a2c6c0e73bae869b418279a3b9d4f753cd476b99048"
+    },
+    {
+      "name": "tests-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/tests-001.json",
+      "sha256": "44785f5610de8f3525f75c51b8577e3697f3ad61e5bc898d8b261966c800ee84",
+      "bytes": 666,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/44785f5610de8f3525f75c51b8577e3697f3ad61e5bc898d8b261966c800ee84.gz",
+      "retained_sha256": "85a43873cf2fbb6533646e2326a07c5d56f7cac158301dc9a563e9e28b409497"
+    },
+    {
+      "name": "tests-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/tests-001.log",
+      "sha256": "4eefe96b5b7aa499062a95ddced483da3722caf1bc8170c8e10715d593ec8b61",
+      "bytes": 10969,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4eefe96b5b7aa499062a95ddced483da3722caf1bc8170c8e10715d593ec8b61.gz",
+      "retained_sha256": "f0ac3cf0d083b6986209ce832de6b59af55f5097729ba8c806364c6727809705"
+    },
+    {
+      "name": "tests-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/tests-002.json",
+      "sha256": "4933cbcdea29ccdf39469e88ff63e0d2a85ffa0f2daa85fd417bfa64af191688",
+      "bytes": 666,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/4933cbcdea29ccdf39469e88ff63e0d2a85ffa0f2daa85fd417bfa64af191688.gz",
+      "retained_sha256": "17ce949e527c63dd1c3a7ff3fbdb0c3ede709f2fe4ccdbb4b4698ed473a4dbac"
+    },
+    {
+      "name": "tests-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/tests-002.log",
+      "sha256": "8c7b38dad53168aacb250f69d8744b9976b9300da7902db67b1c668b8d40c82f",
+      "bytes": 11104,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/8c7b38dad53168aacb250f69d8744b9976b9300da7902db67b1c668b8d40c82f.gz",
+      "retained_sha256": "6ad5f26928059b66dce9bfb290f84b90cb395bd9234e3be206da90e9a7975634"
+    },
+    {
+      "name": "wasm32-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/wasm32-001.json",
+      "sha256": "0b16eaae760dded3cd5ece4de2ed442141d0f1a144ac77d851fca36d10d873c8",
+      "bytes": 698,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/0b16eaae760dded3cd5ece4de2ed442141d0f1a144ac77d851fca36d10d873c8.gz",
+      "retained_sha256": "8350997f8c827a542b6abb30351b62423d93c800c69d1f1649919e658bf11872"
+    },
+    {
+      "name": "wasm32-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-pair-state-001/wasm32-001.log",
+      "sha256": "7e169fc17aa1fce593c3326e45acb1bb7961267d6fe1be62917e24b4081e3174",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-pair-state/7e169fc17aa1fce593c3326e45acb1bb7961267d6fe1be62917e24b4081e3174.gz",
+      "retained_sha256": "c8b4365420730232f60c3eb43a51e603ed0696ed7780cc4afcdb47e966f750a5"
+    }
+  ],
+  "record_count": 130,
+  "payload_count": 81,
+  "independent_review": "pending",
+  "failures": [],
+  "retention_attempts": [
+    {
+      "record": "retention-attempt-001.json",
+      "status": "corrected pinned-record key in evidence collector; compiled inputs unchanged"
+    }
+  ],
+  "limits": [
+    "The explicit zero mutation-journal witness must later be derived from checked enclosing payloads, not trusted as phase authentication.",
+    "No live constructor, runtime dependency edge, physics-save admission or full-world continuation.",
+    "Shape-specific features and clustered per-point mixed-child provenance remain incomplete.",
+    "Color/body/GraphPos scalar domains do not establish reciprocal solver graph or island ownership.",
+    "Only scalar color/body-mask domains are checked; reciprocal island/mask ownership remains pending.",
+    "Previous-cluster output numeric overwrite was source-audited, but outer subshape option-allocation state may survive clear; omission/reconstruction of arbitrary previous scratch is not proven.",
+    "Unsupported custom/trimesh/heightfield/voxel/soft workspaces are typed refusals; intersection/soft/journal and complete body/collider owner payloads remain pending.",
+    "Finite numeric admission does not prove physical consistency or future arithmetic safety.",
+    "No GPU, shipping, device or performance gate."
+  ]
+}

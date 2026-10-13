@@ -1,0 +1,9 @@
+{
+  "source": "https://github.com/dimforge/rapier/blob/b716d375efc0201003f0cd9ef7168eee0b62c177/LICENSE",
+  "git_commit": "b716d375efc0201003f0cd9ef7168eee0b62c177",
+  "sha256": "ceacfa4d7fa67df64ab09a56fe248c50a3bfc9bc00374d69bd74ad763b14b89c",
+  "size": 11347,
+  "provenance": "Repository license from the published crate VCS commit. The registry source snapshot has dirty=true; this license lookup does not assert that its code is identical to that Git tree.",
+  "notice_search": "The pinned complete recursive Git tree has no root or crates/rapier2d or crates/rapier3d NOTICE file. Notices for unrelated binding/testbed distributions are not part of these two vendored kernel packages.",
+  "tree_sha256": "51702edf7a14ae6999a2a94d9bada9d1fba670e9ec8ba8d414468e4c170d7260"
+}

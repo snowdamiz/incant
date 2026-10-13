@@ -56,10 +56,19 @@ impl Renderer {
     }
 }
 impl ShadowDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
-        for layer in &self.maps.layers {
+    pub fn has_passes(&self) -> bool {
+        !self.maps.layers.is_empty()
+    }
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        queries: Option<&crate::timing::PassQueries>,
+    ) {
+        for (index, layer) in self.maps.layers.iter().enumerate() {
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("Directional shadow cascade"),
+                timestamp_writes: queries
+                    .and_then(|q| q.render_range(index, self.maps.layers.len())),
                 color_attachments: &[],
                 depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
                     view: &layer.view,

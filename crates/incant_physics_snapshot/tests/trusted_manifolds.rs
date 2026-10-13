@@ -1,6 +1,21 @@
-//! Actual completed pinned native worlds, observed one-way. No live deserialize.
+//! Native owner observation plus explicitly trusted continuation diagnostics.
+//! No hostile native deserialization or production live-save admission.
 use incant_physics_snapshot::*;
 use serde_json::Value;
+#[path = "support/body_capture.rs"]
+mod body_capture;
+#[path = "support/island_capture.rs"]
+mod island_capture;
+#[path = "support/rigid_owner_capture.rs"]
+mod rigid_owner_capture;
+#[macro_use]
+#[path = "support/island_cases.rs"]
+mod island_cases;
+#[macro_use]
+#[path = "support/continuation_cases.rs"]
+mod continuation_cases;
+#[path = "support/ordered_capture.rs"]
+mod ordered_capture;
 fn budget() -> Budget {
     Budget::new(MAX_ALLOCATION).unwrap()
 }
@@ -143,6 +158,146 @@ fn graph(v: &Value, identity: Identity) -> ValidatedGraph {
     )
     .unwrap()
 }
+fn float(v: &Value) -> u32 {
+    (v.as_f64().unwrap() as f32).to_bits()
+}
+fn observed_rotation(v: &Value, d: Dimension) -> [u32; 4] {
+    if d == Dimension::Planar {
+        [float(&v["re"]), float(&v["im"]), 0, 0]
+    } else {
+        [float(&v[0]), float(&v[1]), float(&v[2]), float(&v[3])]
+    }
+}
+fn observed_pose(v: &Value, d: Dimension) -> LocalPose {
+    LocalPose {
+        translation: if d == Dimension::Planar {
+            [float(&v["translation"][0]), float(&v["translation"][1]), 0]
+        } else {
+            [
+                float(&v["translation"][0]),
+                float(&v["translation"][1]),
+                float(&v["translation"][2]),
+            ]
+        },
+        rotation: observed_rotation(&v["rotation"], d),
+    }
+}
+fn captured_pair(value: &Value, r: &mut PairStateTable) {
+    let rigid = value["contacts"]
+        .get("Rigid")
+        .expect("only supported rigid native pair");
+    let rec = &rigid["recycle_state"];
+    let recycle = (!rec.is_null()).then(|| RecycleState {
+        relative_pose: observed_pose(&rec["pos12"], r.identity.dimension),
+        rotations: [
+            observed_rotation(&rec["rot1"], r.identity.dimension),
+            observed_rotation(&rec["rot2"], r.identity.dimension),
+        ],
+        max_extent: float(&rec["max_extent"]),
+        max_drift: float(&rec["max_drift"]),
+    });
+    let workspace = &rigid["workspace"];
+    let start = r.detectors.len() as u32;
+    let (kind, timestamp) = if workspace.is_null() {
+        (WorkspaceKind::None, false)
+    } else {
+        let mut entries = workspace.as_object().unwrap().iter();
+        let (tag, work) = entries.next().unwrap();
+        assert!(entries.next().is_none());
+        let kind = match tag.as_str() {
+            "CompositeShapeShapeContactManifoldsWorkspace" => WorkspaceKind::CompositeShape,
+            "CompositeShapeCompositeShapeContactManifoldsWorkspace" => {
+                WorkspaceKind::CompositeComposite
+            }
+            _ => panic!("unsupported native workspace: {tag}"),
+        };
+        for entry in work["sub_detectors"].as_array().unwrap() {
+            let key = if kind == WorkspaceKind::CompositeShape {
+                [word(&entry[0]), 0]
+            } else {
+                [word(&entry[0][0]), word(&entry[0][1])]
+            };
+            r.detectors.push(SubDetector {
+                key,
+                manifold: word(&entry[1]["manifold_id"]),
+                timestamp: entry[1]["timestamp"].as_bool().unwrap(),
+            });
+        }
+        (kind, work["timestamp"].as_bool().unwrap())
+    };
+    r.pairs.push(PairState {
+        event_status: word(&value["event_status"]),
+        solver_color: word(&rigid["solver_color"]),
+        solver_color_bodies: [
+            word(&rigid["solver_color_bodies"][0]),
+            word(&rigid["solver_color_bodies"][1]),
+        ],
+        recycle,
+        workspace: kind,
+        timestamp,
+        detectors: RecordSpan {
+            start,
+            count: r.detectors.len() as u32 - start,
+        },
+    });
+}
+fn check_owner_corruption(r: RigidOwnerRecord, c: RigidOwnerContext<'_>, bytes: &[u8]) {
+    let mut mutations = vec![];
+    let mut bad = r.clone();
+    bad.sleep_scan_stamp = bad.sleep_scan_stamp.wrapping_add(1);
+    mutations.push(bad);
+    let mut bad = r.clone();
+    bad.sleep_scan_touched = 1;
+    mutations.push(bad);
+    let mut bad = r.clone();
+    bad.force_flagged.push(0);
+    mutations.push(bad);
+    if !r.sleep_scan.is_empty() {
+        let mut bad = r.clone();
+        bad.sleep_scan.clear();
+        mutations.push(bad);
+    }
+    if let Some(pair) = c.pairs.record().pairs.iter().find(|p| p.solver_color < 128) {
+        let mut bad = r.clone();
+        bad.body_color_masks[pair.solver_color_bodies[0] as usize] &= !(1u128 << pair.solver_color);
+        mutations.push(bad);
+    }
+    if !r.pair_hints.is_empty() {
+        let mut bad = r.clone();
+        bad.pair_hints[0] = 65536;
+        mutations.push(bad);
+    }
+    if !r.references.is_empty() {
+        let mut bad = r.clone();
+        bad.references[0].edge = u32::MAX;
+        mutations.push(bad);
+    }
+    if !r.force_positions.is_empty() {
+        let mut bad = r.clone();
+        bad.force_positions[0] = if bad.force_positions[0] == u32::MAX {
+            0
+        } else {
+            u32::MAX
+        };
+        mutations.push(bad);
+    }
+    for bad in mutations {
+        assert!(validate_rigid_owner(bad, c, &mut budget()).is_err());
+    }
+    for cut in [0, 1, 43, 99, bytes.len() - 1] {
+        assert!(decode_rigid_owner(&bytes[..cut], c, &mut budget()).is_err());
+    }
+    let mut trailing = bytes.to_vec();
+    trailing.push(0);
+    assert!(decode_rigid_owner(&trailing, c, &mut budget()).is_err());
+    let mut bad = bytes.to_vec();
+    bad[68..72].copy_from_slice(&u32::MAX.to_le_bytes());
+    assert!(decode_rigid_owner(&bad, c, &mut budget()).is_err());
+    assert!(matches!(
+        decode_rigid_owner(bytes, c, &mut Budget::new(0).unwrap()),
+        Err(Error::Limit)
+    ));
+}
 macro_rules! cases {
     ($name:ident,$rapier:ident,$dim:ident,$vector:path,$cuboid:path,$bits:path,$data:path,$posebits:path) => {
         mod $name {
@@ -264,7 +419,21 @@ macro_rules! cases {
                     restitution: d.restitution.to_bits(),
                 });
             }
+            fn pair_states(w: &PhysicsWorld) -> PairStateTable {
+                let mut r = PairStateTable {
+                    identity: identity(),
+                    pairs: vec![],
+                    detectors: vec![],
+                };
+                for edge in w.narrow_phase.contact_graph().raw_graph().raw_edges() {
+                    captured_pair(&ordered_capture::capture(&edge.weight), &mut r);
+                }
+                r
+            }
             fn observe(w: &PhysicsWorld, pending: bool) -> Option<ManifoldTable> {
+                observe_with_owner(w,pending).map(|(m,_)|m)
+            }
+            fn observe_with_owner(w: &PhysicsWorld, pending: bool) -> Option<(ManifoldTable,RigidOwnerRecord)> {
                 let bv = serde_json::to_value(&w.bodies).unwrap();
                 let cv = serde_json::to_value(&w.colliders).unwrap();
                 let (ba, bh) = layout(&bv["bodies"], identity());
@@ -295,7 +464,7 @@ macro_rules! cases {
                 }
                 let a = validate_attachments(a, &ba, &ca, &mut budget()).unwrap();
                 let raw = w.narrow_phase.contact_graph().raw_graph();
-                let g = graph(&serde_json::to_value(raw).unwrap(), identity());
+                let g = graph(&ordered_capture::capture(raw), identity());
                 let journals = PendingJournals {
                     modified_bodies: bv["modified_bodies"][0].as_array().unwrap().len() as u32,
                     modified_colliders: cv["modified_colliders"][0].as_array().unwrap().len() as u32,
@@ -355,6 +524,22 @@ macro_rules! cases {
                 }
                 assert_eq!(journals, PendingJournals::default());
                 let v = validate_manifolds(t.clone(), c, &mut budget()).unwrap();
+                let state = pair_states(w);
+                let checked = validate_pair_state(state.clone(), &v, &mut budget()).unwrap();
+                let encoded = encode_pair_state(&checked, &mut budget()).unwrap();
+                let decoded = decode_pair_state(&encoded, &v, &mut budget()).unwrap();
+                assert_eq!(decoded.record(), &state);
+                assert_eq!(encode_pair_state(&decoded, &mut budget()).unwrap(), encoded);
+                for (row, p) in state.pairs.iter().enumerate() {
+                    for i in 0..p.detectors.count {
+                        let detector = &state.detectors[(p.detectors.start + i) as usize];
+                        assert_eq!(
+                            decoded.detector_manifold(row as u32, i).unwrap(),
+                            &t.manifolds[(t.pairs[row].plain.start + detector.manifold) as usize]
+                        );
+                    }
+                }
+                let owner=check_islands(w, &a, &v);
                 let bytes = encode_manifolds(&v, &mut budget()).unwrap();
                 let loaded = decode_manifolds(&bytes, c, &mut budget()).unwrap();
                 assert_eq!(loaded.record(), &t);
@@ -368,8 +553,10 @@ macro_rules! cases {
                         &t.points[m.points.start as usize..(m.points.start + m.points.count) as usize]
                     );
                 }
-                Some(t)
+                Some((t,owner))
             }
+            island_cases!($rapier, $vector, $cuboid);
+            continuation_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;
@@ -443,6 +630,134 @@ macro_rules! cases {
                 );
             }
             #[test]
+            fn actual_pair_events_recycle_and_workspace_churn() {
+                let (mut w, body, co) = fixture(true);
+                w.colliders[co]
+                    .set_active_events(ActiveEvents::COLLISION_EVENTS | ActiveEvents::CONTACT_FORCE_EVENTS);
+                w.colliders[co].set_contact_force_event_threshold(0.);
+                let mut recycled = false;
+                let mut previous = None;
+                let mut events = false;
+                for _ in 0..40 {
+                    w.step();
+                    observe(&w, false);
+                    let r = pair_states(&w);
+                    events |= r.pairs.iter().any(|p| p.event_status != 0);
+                    let state = r.pairs[0].recycle;
+                    let position = $bits(w.bodies[body].translation());
+                    if let Some((old, old_position)) = previous {
+                        recycled |= state.is_some() && state == old && position != old_position;
+                    }
+                    previous = Some((state, position));
+                }
+                assert!(events && recycled);
+                let old = pair_states(&w);
+                w.bodies[body].set_translation($vector(1.25, 1.49), true);
+                w.step();
+                observe(&w, false);
+                let moved = pair_states(&w);
+                assert_ne!(old.pairs[0].recycle, moved.pairs[0].recycle);
+                let ground = w
+                    .colliders
+                    .iter()
+                    .find(|(_, c)| c.parent().is_none())
+                    .unwrap()
+                    .0;
+                let compound = w.colliders[ground].shared_shape().clone();
+                let primitive = w.colliders[co].shared_shape().clone();
+                // Swap which ordered collider is composite, keeping the same
+                // live handles. Native shape-change invalidates its old workspace.
+                w.colliders[ground].set_shape(primitive);
+                w.colliders[ground].set_translation($vector(1., 0.5));
+                w.colliders[co].set_shape(compound.clone());
+                w.bodies[body].set_translation($vector(0., 0.99), true);
+                observe(&w, true);
+                w.step();
+                observe(&w, false);
+                assert!(
+                    pair_states(&w)
+                        .pairs
+                        .iter()
+                        .any(|p| p.workspace == WorkspaceKind::CompositeShape)
+                );
+                // Both colliders become composite; a different map key arity is
+                // exercised through actual native dispatch, not fabricated rows.
+                w.colliders[ground].set_shape(compound);
+                w.colliders[ground].set_translation($vector(0., 0.));
+                w.bodies[body].set_translation($vector(0., 0.99), true);
+                w.step();
+                observe(&w, false);
+                let both = pair_states(&w);
+                assert!(
+                    both.pairs
+                        .iter()
+                        .any(|p| p.workspace == WorkspaceKind::CompositeComposite)
+                );
+                assert!(!both.detectors.is_empty());
+                // Churn the actual query footprint, preserving native detector
+                // row order and checking its manifold bijection each step.
+                let mut histories = vec![];
+                for x in [0.2, 0.8, 1.4, 0.4, 0.] {
+                    w.bodies[body].set_translation($vector(x, 0.99), true);
+                    w.step();
+                    observe(&w, false);
+                    histories.push(
+                        pair_states(&w)
+                            .detectors
+                            .into_iter()
+                            .map(|d| (d.key, d.manifold))
+                            .collect::<Vec<_>>(),
+                    );
+                }
+                assert!(histories.windows(2).any(|p| p[0] != p[1]));
+                let mut flips = std::collections::BTreeSet::new();
+                for half in [0.3, 3.0] {
+                    let shape = SharedShape::compound(
+                        [0.4, 1.6]
+                            .map(|x| {
+                                let mut p = $rapier::math::Pose::IDENTITY;
+                                p.translation = $vector(x, 0.5);
+                                (p, $cuboid(half, 0.5).build().shared_shape().clone())
+                            })
+                            .to_vec(),
+                    );
+                    w.colliders[co].set_shape(shape);
+                    w.bodies[body].set_translation($vector(0., 0.99), true);
+                    w.step();
+                    observe(&w, false);
+                    let p = w.contact_pairs().next().unwrap();
+                    let a = w.colliders[p.collider1]
+                        .shape()
+                        .as_compound()
+                        .unwrap()
+                        .bvh()
+                        .root_aabb()
+                        .half_extents()
+                        .length_squared();
+                    let b = w.colliders[p.collider2]
+                        .shape()
+                        .as_compound()
+                        .unwrap()
+                        .bvh()
+                        .root_aabb()
+                        .half_extents()
+                        .length_squared();
+                    flips.insert(a < b);
+                }
+                assert_eq!(
+                    flips.len(),
+                    2,
+                    "both pinned composite traversal-size branches"
+                );
+
+                eprintln!(
+                    "PAIR_STATE_NATIVE dimension={} events={} recycle_reference_reused={} forced_full_changed=true composite_swap=true two_composite=true churn=true both_traversal_sizes=true",
+                    Dimension::$dim as u8,
+                    events,
+                    recycled
+                );
+            }
+            #[test]
             fn actual_compound_plain_and_cluster_coordinate_frames() {
                 let (mut w, _, _) = fixture(true);
                 let mut cluster_seen = false;
@@ -457,6 +772,10 @@ macro_rules! cases {
                         assert!(r.manifolds.len() >= 2);
                         for cluster in &r.solver_clusters {
                             cluster_seen = true;
+                            assert!(
+                                cluster.subshape_poses.is_none(),
+                                "ordinary rebuilt clusters have no outer pose allocation"
+                            );
                             assert!(cluster.subshape_pos1().is_none() && cluster.subshape_pos2().is_none());
                             let mut matched_children = std::collections::BTreeSet::new();
                             for p in &cluster.points {

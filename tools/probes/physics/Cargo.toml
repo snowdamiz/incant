@@ -15,4 +15,5 @@ serde_json = "1.0"
 
 # Keep this independent workspace on the engine-owned source correction.
 [patch.crates-io]
+rapier3d = { path = "../../../third_party/rapier3d" }
 parry3d = { path = "../../../third_party/parry3d" }

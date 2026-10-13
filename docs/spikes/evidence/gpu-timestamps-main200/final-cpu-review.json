@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-13T05:31:31.349492+00:00",
+  "decision": "accepted private timestamp source and CPU composition; Claude GPU/appearance still required before publication",
+  "head": "36efd88379ab4bf64df4831e787f95b7535338ba",
+  "source": "ed341fa5a1fab0c8d2dc3e157efffceb370f0125",
+  "manifest_sha256": "feed0f0df11a4ce89b15752bf90a29b1f91265164a1111d6eaa15cf5371c6809",
+  "collector_read_and_verify_only_exit": 0,
+  "independent_rehash": {
+    "sources": 2879,
+    "archived_records": 24,
+    "unique_payloads": 14,
+    "commands": 10
+  },
+  "source_review": "Read remerge conflict delta, complete current Renderer constructors and graph; cache/cooked constructors retained, timing feature union additive, old light observer preserved and untimed explicitNone. Graph and timing files exact accepted producer; dynamic resolution/GPUhost and lock exactmain200. No findings.",
+  "different_from_producer": [
+    "crates/incant_render/src/lib.rs",
+    "crates/incant_render/src/lighting/mod.rs",
+    "crates/incant_render/src/model_draw.rs",
+    "crates/incant_render/src/output.rs",
+    "crates/incant_render/src/text/drawing.rs",
+    "crates/incant_render/src/text_draw_tests.rs",
+    "crates/incant_render/tests/hdr_output/mod.rs",
+    "crates/incant_render/tests/lighting_gpu/mod.rs"
+  ],
+  "limits": [
+    "Private candidate for revised Claude GPU/appearance review; no publication or current GPU execution.",
+    "Default and cooked CPU counts overlap. All92 ignored native GPU cases were not executed.",
+    "Five wasm native-only timing dead-code warnings retained; browser timing admission still fails explicitly.",
+    "Original corrected producer Metal measurements are prior-source evidence; no device or performance gate.",
+    "Exactly original seven timestamp groups; motion, SSAO and bloom are absent."
+  ]
+}

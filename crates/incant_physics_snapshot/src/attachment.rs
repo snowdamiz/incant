@@ -45,6 +45,9 @@ pub struct ValidatedAttachments<'a> {
     colliders: &'a ValidatedArena,
 }
 impl ValidatedAttachments<'_> {
+    pub fn body_row(&self, body: Handle) -> Option<u32> {
+        self.bodies.lookup(body)
+    }
     pub fn collider_row(&self, collider: Handle) -> Option<u32> {
         self.colliders.lookup(collider)
     }
@@ -84,7 +87,7 @@ pub(crate) fn attachment_lengths(
     Ok(())
 }
 
-fn validate_pose(pose: LocalPose, dimension: Dimension) -> Result<()> {
+pub(crate) fn validate_pose(pose: LocalPose, dimension: Dimension) -> Result<()> {
     let planar = dimension == Dimension::Planar;
     if planar && (pose.translation[2] != 0 || pose.rotation[2..] != [0, 0]) {
         return Err(Error::Geometry);

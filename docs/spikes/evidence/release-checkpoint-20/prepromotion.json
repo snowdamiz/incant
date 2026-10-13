@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-13T08:04:53.246176+00:00",
+  "checkpoint": 20,
+  "candidate": "99ba87ed82b4009680eaaa5089ffbd76f6bedc58",
+  "selected_main": "7bfeecfdfaa4a52ec198d1caee0fcb4ff9399fd9",
+  "tree": "71e55928908092313a4bcaf4d799cc09f976726c",
+  "release_before": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+  "main_now": "dbe8e95126260302ef15f56f467972436cefe9dd",
+  "pr": "https://github.com/snowdamiz/incant/pull/174",
+  "required_contexts": 23,
+  "all_required_success": true,
+  "push_workflows": 8,
+  "all_push_workflows_success": true,
+  "jobs": 28,
+  "successful_jobs": 27,
+  "nonrequired_skipped_jobs": [
+    "Website / deploy"
+  ],
+  "candidate_exact_selected_tree": true,
+  "candidate_contains_release_and_selected": true,
+  "protection_unchanged": true,
+  "prior_failed_checkpoints_preserved": true,
+  "candidate_commit": "commit 99ba87ed82b4009680eaaa5089ffbd76f6bedc58\nMerge: 2fab0688 7bfeecfd\nAuthor:     snowdamiz <43323844+snowdamiz@users.noreply.github.com>\nAuthorDate: Tue Oct 13 02:29:07 2026 -0400\nCommit:     snowdamiz <43323844+snowdamiz@users.noreply.github.com>\nCommitDate: Tue Oct 13 02:29:07 2026 -0400\n\n    Freeze reviewed main for release checkpoint20\n    \n    Built-by: astra",
+  "artifacts": {
+    "jobs-38356955805.json": "0b744cfc31d80d3fa64667f4ff06196223f452f7d1e62fada8c2ca0cd2fc370b",
+    "jobs-38356955807.json": "c38ceea88d83e04f11de9e9359a4b351c6b1763787e6c5ee8fea29246166d20d",
+    "jobs-38356955854.json": "b6b7c525071a8f30ca2ed233725acd88b01088875c1d4ebe651a539dda6cb0b6",
+    "jobs-38356955876.json": "fe4b762b7a1ce68bb54254f272f2c1f9e9609f6c64db06a053202d7140b7644d",
+    "jobs-38356955958.json": "a7c1e58e419fd1868263e0c228b1128885fd100fbfa6ab38821cf3d3376c1624",
+    "jobs-38356955963.json": "9c43710b3b67ab95a0803b9b5488dd5ec266f61340767e8f1d59d8e3a0c1946c",
+    "jobs-38356956098.json": "779ac20fd6c56fa3138be6d2458226631eef67adc58ca92352051a9ce8a1ff47",
+    "jobs-38356956176.json": "9edb7e1ed9f4d680441612cef16a15dc2275ad608568ae7e0e079555b4264048",
+    "latest-state.json": "56e641db0eae1e8fdc469431d634b19f7304e941b07793f34f8b1111807247ca",
+    "manifest.json": "38dca14429c7130107fc16d39a461457a6f2eba27218219584fe8d05d11ab8bd",
+    "observations.jsonl": "1744ce16869f986448614b4a244cf03e7afbf7e4acf382b746466b1964cf346f",
+    "pr-body.md": "d4168aacd8d1218a0a239cf00c561f35ee30f60b424d8e0796d9e56a2478d555",
+    "pr-final.json": "1167331ab78238c165ef073c1b2a5c9415c51ae8deb055cfa9eed34f2d433951",
+    "prepare-promotion.py": "083c081601fc4582fcf0af00b0a44547a641a2157f8f337aa8b7a197c901a9ef",
+    "previous-terminal.json": "7a1cab98b1f28ba224965948434ef55e6359e8e4dc2b7d62a150bc79005e3d31",
+    "protection-final.json": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+    "protection.json": "5c904412bdd5bb66a2b99566fb8ee8737be1207963224c1a7b33a8ef08d74057",
+    "release-to-selected.paths": "9fe81396e35f64a8c4cec36acae6fcf15e2fc7e705f579feb06ed8ea8e6de7d8",
+    "release-to-selected.stat": "eaa4d8b48862fd936e88d954a4caee64dd95401bcb0b4e1b6638afd5ac1f2bcb",
+    "required-final.json": "ae6f1a7840efae5dba8e37cdf9090b6f08ab2c812f27beb63701d3e2d27d5a65",
+    "runs-final.json": "ad717e3c251a41a298efdfc042f6e0c3a5d187b4f4329e1e9d27c076f0378d38",
+    "terminal-state.json": "56e641db0eae1e8fdc469431d634b19f7304e941b07793f34f8b1111807247ca"
+  },
+  "limitations": [
+    "Selected main205 only; later main206-209 integrations remain outside this tested release tree.",
+    "Promotion is a tested integration baseline, not a Phase 1 or device/performance gate approval."
+  ]
+}

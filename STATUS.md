@@ -16,26 +16,37 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main204, 2026-10-13
+## Static Wasm C builds — bounded local scheduling verified
 
-Development main202 includes the restart quota-test repair (PR188) and the reviewed,
-opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
-(PR189). Default renderer checks remain; the next frozen checkpoint also exercises
-cooked features and asserts the actual native backend. Producer Metal appearance
-reviews remain scoped to their recorded builds; current Vulkan/DX12 execution is pending.
+The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
+A local real-C comparison preserves exact object/archive bytes while respecting
+`-j1`/`-j2`; fresh 221-module conformance passes 492 tests, Clippy and three development
+processes. Compiler flags, locks and module coverage are unchanged. Feature
+unification also affects other cc build consumers in the selected host graph.
+Windows candidate execution and timing remain pending; no Windows speedup or
+performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
-terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux and
-Windows conformance failed the quota assertion, and macOS rejected a successful
-player compile because its probe confused library and executable units. The main188
-quota repair preserves production's 50 ms budget, and the reviewed player probe
-correction is merged in PR191. Checkpoint18 retained the exact main191 tree and is closed as described below.
-All 23 requirements must pass before release promotion.
-No release or phase approval follows from a main merge.
-Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
-that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
-is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
-production and backend assertions are unchanged. Checkpoint18 is terminal with 20 required successes and three same-cause failures. Checkpoint19 is frozen at exact main197. Its Linux desktop persistence test failed a stale expected pipeline count (30 versus actual31), and macOS and Windows later refused vendored Parry compiler package IDs after successful shipping compiles; the Windows optimized conformance child continues. The [Parry audit correction](docs/spikes/physics-artifact-vendor-identity.md) passes actual both-mode target audits and full tooling checks, with independent final acceptance; PR203 is merged after its exact-head fast check. The [test-only correction](docs/spikes/vulkan-cache-catalog-count.md) is merged in PR201 after independent review, local compile/Clippy and the required fast check; actual Vulkan rerun and all23 release successes remain required.
+## Current overview — main211, 2026-10-13
+
+Development main211 includes the reviewed opt-in cooked renderer families and
+Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
+profiling scopes and inert physics island validation. Each lane retains its own
+execution and acceptance limits below; the complete engine and game remain open.
+
+Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
+promoted through PR174 after all 23 required contexts and eight exact-head workflows
+succeeded and independent review verified the exact tested tree. Release `065aac69`
+exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
+Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
+Later main206–209 runtime changes and main210 documentation remain outside that tested baseline. No device, performance or
+phase gate follows from this promotion.
+
+Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
+exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
+test import repaired in PR193; checkpoint19 exposed the cache count and vendored
+Parry compiler-identity issues repaired in PR201/203. Their original failures remain
+retained. No checkpoint is currently active; the next selection follows ADR0014's
+regular cadence and preserves all23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -45,7 +56,7 @@ Core authored bindings and the corrected locked-exit proof are merged in PR185
 
 Dynamic resolution and cooked clusters have accepted producer Metal evidence; their
 [current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks with independent final packet acceptance; PR198 is merged after the required fast check.
-Current composed GPU execution remains pending. GPU timestamp execution remains pending. CPU profiling has accepted producer
+Current composed GPU execution remains pending. GPU timestamps have scoped producer Metal evidence and passing current-main207 CPU checks, as described below. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
 independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
@@ -55,6 +66,32 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Physics world continuation — trusted native proof, live saves still closed
+
+The [joined rigid owner slice](docs/spikes/physics-world-continuation.md) now checks
+solver buckets, color masks, pair hints, force-event caches and stamp-sensitive
+sleep scans against the existing inert witnesses. Actual trusted native 2D/3D
+reconstruction continues identically through contacts, sleep/wake, removal and
+handle reuse; omitted scan state has a failing near-wrap control. Final default
+121 cases and two overlapping 20-case parallel mode suites pass, along with
+Clippy, runtime/wasm/compiler identity and tooling checks. The default-off pinned
+Rapier adapter stays absent from ordinary runtime compiler features.
+
+[The execution packet](docs/spikes/physics-world-continuation-results.md) has independent source and final evidence acceptance; current-main
+qualification is independently accepted; publication awaits the fast check. No hostile live constructor or engine save admission
+is enabled; complete collider/manager/joint/phase composition remains pending.
+
+## GPU timestamps — device review passed; concurrent interval corrected
+
+Claude's bounded default-feature Metal review passes92 actual GPU/regression cases
+and reports unchanged pixels in all timing-off/on controls. Three lit samples
+exposed concurrent passes outside the former first/last encoding-order interval.
+The CPU decoder now encloses all measured pairs, with explicit malformed/wrap
+refusal; ten timing CPU tests and renderer Clippy pass, with independent source
+review accepted. [Scope and retained evidence](docs/spikes/gpu-frame-envelope.md).
+All ten [current-main207 integration checks](docs/spikes/gpu-timestamps-main207.md) pass: 103 default CPU cases and 130 overlapping cooked cases, with 94 GPU cases ignored in each configuration. Final independent integration review and the exact-head fast check passed; PR208 is merged. Retained motion is explicitly uninstrumented; the envelope spans measured extrema including intervening gaps and does not measure complete-frame GPU cost. Cooked/native-window/phone and complete
+profiler gates remain open.
+
 ## Native-window CPU profiling — current-main checks pass
 
 The desktop player accepts explicit summary/standalone Tracy profiling on its
@@ -62,7 +99,7 @@ window route. Simulation attempts, redraw-only CPU work and restarts have separa
 fixed zones; the final native report uses the existing host callback. Ten producer
 CPU/compile/tooling checks and independent producer review pass. All ten
 [current-main204 checks](docs/spikes/native-window-profile-main204.md) also pass;
-final integration review is accepted. Publication requires its fast check; actual native-window execution and live Tracy capture remain pending.
+final integration review and the exact-head fast check passed, and PR205 is merged. Actual native-window execution and live Tracy capture remain pending.
 [Scope and evidence](docs/spikes/native-window-profile.md).
 
 ## Retained opaque motion — current-main CPU integration verified
@@ -74,6 +111,38 @@ compile and dependency checks. The prior two numerical GPU processes remain scop
 their recorded producer binary; no current composed GPU or appearance claim is made.
 Final integration review and the exact-head fast check passed; PR204 is merged. Default rendering is unchanged; temporal color,
 upscaling and cooked motion remain separate.
+
+## Exact physics saves — inert island ownership verified locally
+
+The inert path now checks reciprocal active/persistent body membership and
+contact-link ownership, retaining native ordering, free stacks and deferred
+split scheduling. Actual 2D/3D observations include sleep/wake, empty awake
+containers, fixed-body active history, reorder, removal/reuse and delayed splits.
+115 CPU tests, Clippy, wasm32 and dependency/contract checks pass; independent
+producer review is accepted. The [current-main208 integration](docs/spikes/physics-islands-main208.md) passes eight checks and 115 CPU cases with 2,914 unchanged inputs; final integration review and the exact-head fast check passed; PR209 is merged.
+Stamp-sensitive scratch, solver masks/buckets, complete collider/owner composition
+and continued live execution remain open; physics saves stay refused.
+[Island contract](docs/spikes/physics-inert-islands.md).
+
+## Exact physics saves — inert regular body state verified locally
+
+The inert path now retains every fixed regular rigid-body field, including
+mass/force/velocity/CCD caches, activation history, exact u128 user data and
+island scalar references, bound to checked body/attachment rows. 101 CPU tests
+and all scoped checks pass; native both-dimension evidence covers force/mass
+changes, sleep/wake, automatic CCD and removal/reuse. Independent producer review is accepted. The [current-main206 integration](docs/spikes/physics-body-main206.md) passes all eight checks and 101 CPU cases with 2,900 unchanged inputs; final integration review and the exact-head fast check passed, and PR207 is merged. Derived mass/island consistency, solver work admission, complete
+collider/owner construction and exact continuation remain required; physics
+saves stay refused. [Body contract](docs/spikes/physics-inert-body-state.md).
+
+## Exact physics saves — inert pair persistence producer accepted
+
+The std-only inert format checks pair event/color/recycle fields and closed
+composite workspace maps against existing manifold/geometry ownership. Native
+tuple keys, detector order/timestamps and manifold bijections are retained;
+unknown workspace kinds refuse explicitly. Producer88 CPU cases, Clippy/wasm32
+and dependency checks have independent acceptance. The [current-main205 integration](docs/spikes/physics-pair-main205.md) also passes all eight checks with 88 CPU cases and 2,895 unchanged inputs; final integration review and the exact-head fast check passed, and PR206 is merged. Previous-cluster scratch reconstruction, complete
+body/island/solver ownership and live/save admission remain open.
+[Pair-state contract](docs/spikes/physics-inert-pair-state.md).
 
 ## Exact physics saves — inert manifold ownership verified locally
 

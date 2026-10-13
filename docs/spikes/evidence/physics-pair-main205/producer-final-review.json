@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-13T06:05:33.084774+00:00",
+  "reviewer": "astra-root",
+  "producer": "77910a658f7badd679d4cddbd8f89cc6dab5aeb6",
+  "manifest_sha256": "193ca3fbe9a7e9f1bfd9f6ec7b32d239f3eb847eda87eac9cbf3df9a12b4f13d",
+  "source_freeze_sha256": "cd4d1ce03a7a540aa7874d3c1fdffae17e7633c758a3ae26a5c1bafcc9b4844a",
+  "source_review": "Accepted complete new pair schema, validator and codec, manifold shape accessor and pose visibility reuse, adversarial tests, ordered trusted observer and actual contact churn tests. Checked pinned solver colors and composite detector timestamp/id updates. No findings within documented inert-only scope.",
+  "evidence_review": {
+    "records": 130,
+    "unique_payloads": 81,
+    "source_inputs": 40,
+    "pinned_sources": 17,
+    "commands": 10,
+    "tests_passed": 88,
+    "all_archived_hashes_sizes_and_command_streams_verified": true
+  },
+  "qualification": "No enclosing-world authentication, live constructor, physics-save admission or arbitrary previous-cluster scratch reconstruction is approved. Existing unsupported boundary must stay closed."
+}

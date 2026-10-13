@@ -1,0 +1,35 @@
+{
+  "macos-checks": {
+    "adapters": [
+      "UI draw selected adapter: AdapterInfo { name: \"Apple Paravirtual device\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }"
+    ],
+    "cache_catalog": [],
+    "retirement": [
+      "2026-10-13T06:49:24.3573900Z {\"active_owner_destroyed\":true,\"cycles\":256,\"gpu_submitted\":false,\"input_injected\":false,\"native_contexts\":768,\"passed\":true,\"stale_sessions_refused\":256,\"visible_window\":false}"
+    ]
+  },
+  "linux-desktop": {
+    "adapters": [
+      "UI draw selected adapter: AdapterInfo { name: \"llvmpipe (LLVM 20.1.2, 256 bits)\", vendor: 65541, device: 0, device_type: Cpu, device_pci_bus_id: \"\", driver: \"llvmpipe\", driver_info: \"Mesa 25.2.8-0ubuntu0.24.04.4 (LLVM 20.1.2)\", backend: Vulkan, subgroup_min_size: 8, subgroup_max_size: 8, transient_saves_memory: false }"
+    ],
+    "cache_catalog": [
+      "2026-10-13T06:57:51.3810150Z Vulkan catalog: 31 render + 1 compute; PipelineCacheReport { read: Missing, write: Stored { bytes: 96 } }",
+      "2026-10-13T06:57:51.8232179Z Vulkan catalog: 31 render + 1 compute; PipelineCacheReport { read: Supplied { bytes: 96 }, write: Stored { bytes: 96 } }",
+      "2026-10-13T06:57:52.2458333Z Vulkan catalog: 31 render + 1 compute; PipelineCacheReport { read: Rejected, write: Stored { bytes: 96 } }",
+      "2026-10-13T06:57:52.6681281Z Vulkan catalog: 31 render + 1 compute; PipelineCacheReport { read: Supplied { bytes: 96 }, write: Stored { bytes: 96 } }"
+    ],
+    "retirement": []
+  },
+  "windows-desktop": {
+    "adapters": [
+      "UI draw selected adapter: AdapterInfo { name: \"Microsoft Basic Render Driver\", vendor: 5140, device: 140, device_type: Cpu, device_pci_bus_id: \"\", driver: \"10.0.26100.33438\", driver_info: \"\", backend: Dx12, subgroup_min_size: 4, subgroup_max_size: 4, transient_saves_memory: false }"
+    ],
+    "cache_catalog": [],
+    "retirement": []
+  },
+  "windows-optimized": {
+    "adapters": [],
+    "cache_catalog": [],
+    "retirement": []
+  }
+}
