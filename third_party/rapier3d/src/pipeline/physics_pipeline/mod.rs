@@ -14,6 +14,11 @@ use crate::geometry::{
 use crate::math::Vector;
 use crate::pipeline::{EventHandler, PhysicsHooks};
 
+#[cfg(feature = "incant-checkpoint")]
+mod checkpoint;
+#[cfg(feature = "incant-checkpoint")]
+pub use checkpoint::{CheckpointPipelineError, CheckpointPipelineObservation};
+
 mod quarantine;
 pub use quarantine::Quarantine;
 mod solve;

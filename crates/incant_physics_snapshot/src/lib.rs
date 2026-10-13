@@ -25,6 +25,7 @@ mod island_state;
 mod narrow_owner;
 mod pair_state;
 mod pending_bvh;
+mod pipeline_state;
 mod records;
 mod rigid_owner;
 mod validate;
@@ -52,6 +53,7 @@ pub use island_state::*;
 pub use narrow_owner::*;
 pub use pair_state::*;
 pub use pending_bvh::*;
+pub use pipeline_state::*;
 pub use records::*;
 pub use rigid_owner::*;
 pub use validate::validate;
@@ -93,6 +95,10 @@ pub enum Error {
     Ccd,
     Broad,
     BroadTree,
+    Pipeline,
+    PipelinePhase,
+    PipelineDeferred,
+    PipelineQuarantine,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
