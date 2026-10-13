@@ -1,0 +1,126 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 13,
+ "records": [
+  {
+   "test": "complete",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "empty_evidence",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the GPU release latch is absent; run gpu.py release first",
+    "expected one passing lib listing, found 0",
+    "expected one passing review listing, found 0"
+   ]
+  },
+  {
+   "test": "failed_child",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case timing: the child failed or exited nonzero"
+   ]
+  },
+  {
+   "test": "false_contract_check",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case transitions: a contract check is false or missing"
+   ]
+  },
+  {
+   "test": "missing_case",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "review children ['probe', 'stationary', 'motion', 'excluded', 'transitions', 'timing'] are not the plan cases once each in order",
+    "case skinned: not exactly one debit of the plan's charge",
+    "case skinned: missing or duplicate review child (0 rows)"
+   ]
+  },
+  {
+   "test": "missing_lib_listing",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "expected one passing lib listing, found 0"
+   ]
+  },
+  {
+   "test": "missing_report",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case motion: output holds ['events.jsonl', 'motion-object-off-f8.png', 'motion-object-on-f8.png', 'motion-pan-off-f6.png', 'motion-pan-on-f6.png'], not ['events.jsonl', 'motion-object-off-f8.png', 'motion-object-on-f8.png', 'motion-pan-off-f6.png', 'motion-pan-on-f6.png', 'report.json']",
+    "case motion: report.json is absent or empty",
+    "case motion: report.json differs from the ledger"
+   ]
+  },
+  {
+   "test": "numeric_not_run",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "expected one numeric child, found 0"
+   ]
+  },
+  {
+   "test": "old_corrected_grants_refused",
+   "old_grants": {
+    "review-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/review-ready.json",
+     "sha256": "4fa5101f64cadaf4e16b402afc3165e9af4080c5c7a214993e57a112f6e2c7c0",
+     "stage": "temporal-corrected-visual"
+    },
+    "build-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/build-ready.json",
+     "sha256": "1a1b226d85730bd69833641cf24a11a8f4d417c5c04e7434fc45017f491882a4",
+     "stage": "temporal-corrected-build"
+    }
+   }
+  },
+  {
+   "test": "old_numeric_identity",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the numeric child did not run the exact test once and pass",
+    "the numeric child was not debited the plan's submissions"
+   ]
+  },
+  {
+   "test": "plan_counts_admitted_and_ceilings_refused",
+   "admitted": 229,
+   "edge_admitted": {
+    "submissions": 256,
+    "pngs": 16
+   },
+   "refused": 3
+  },
+  {
+   "test": "stale_before_change",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "stale_summary_blocks_publication",
+   "publish": "refused"
+  },
+  {
+   "test": "stop_latch",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "stop latched: {\"label\": \"synthetic\", \"reason\": \"control\"}"
+   ]
+  }
+ ]
+}

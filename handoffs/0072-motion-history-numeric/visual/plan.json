@@ -1,9 +1,9 @@
 {
  "packet": "0072-motion-history-numeric",
- "stage": "temporal-corrected-visual",
- "build_stage": "temporal-corrected-build",
- "status": "prepared for root's corrected-source grants; frozen by the commit whose visual tree root pins",
- "evidence_namespace": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001",
+ "stage": "temporal-coverage-visual",
+ "build_stage": "temporal-coverage-build",
+ "status": "prepared for root's fixed-coverage grants; frozen by the commit whose visual tree root pins",
+ "evidence_namespace": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001",
  "history": {
   "original_review": {
    "commit": "9009f088ac230e31185e8ce64183ca93878e9444",
@@ -12,20 +12,38 @@
    "evidence": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual",
    "verdict": "rejected for appearance: depth-edge and current-only overlay shimmer; retained with its failed optional lint",
    "fixture_change": "only line 1418 (unused mut in probe) for strict Clippy; every case, policy and measurement is unchanged"
+  },
+  "corrected_review": {
+   "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+   "helper_commit": "f329e9a61a4f9c3469cc59df60f5aab78016fa2f",
+   "visual_tree": "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e",
+   "result": "handoffs/0072-motion-history-numeric/corrected-visual-result.md",
+   "evidence": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001",
+   "verdict": "numerical pass; appearance fail: silhouettes, thin geometry and the MASK grille kept per-phase single samples (history admitted only from the current sample's own surface)",
+   "fixture_change": "none: the fixture is byte-identical (SHA-256 9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde)"
   }
  },
  "source_pinning": {
-  "expected_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "expected_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+  "base_commit": "077f7c39c0f4122aae36ea3a88537be006722822",
   "expected_freeze": {
-   "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
-   "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/committed-build-source.json",
+   "sha256": "1e9628677f6631476140d7efe75242042721083c4d21966fdfc81755bb193fe0"
+  },
+  "source_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-coverage-source-cpu-final-20261013.json",
+   "sha256": "678e67b083603de9ce5fef5103be4761933b07b1d84f64efe2bf6b71625818cc"
+  },
+  "expected_numeric_binary": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/frozen-binaries/source004/default/render-tests",
+   "sha256": "d900fe08fb2023b42aca223868e6ac367cc5c85b7d8fdaeaa55e2e49c3d19537"
   },
   "rule": "Only root's build-ready.json pins the source: a 40-hex commit object and the freeze by path and SHA-256 (accepted 0073 routine, reused read-only). Every build input of the exported commit must equal the freeze exactly; the expected values above are for review, not trusted by the tools."
  },
  "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
  "grants": {
-  "build-ready.json": "packet, stage temporal-corrected-build, holder, source_commit (40-hex), source_freeze {path, sha256}, visual_tree, target (~/.codex/*-target); optional prior_*_path/_sha256 pins",
-  "review-ready.json": "packet, stage temporal-corrected-visual, holder, visual_tree, build_record_sha256 (SHA-256 of build/review.json), at least one prior_*release*_path/_sha256 pin, optional numeric_binary {path, sha256} for root's frozen same-source default library test binary"
+  "build-ready.json": "packet, stage temporal-coverage-build, holder, source_commit (40-hex), source_freeze {path, sha256}, visual_tree, target (~/.codex/*-target); optional prior_*_path/_sha256 pins",
+  "review-ready.json": "packet, stage temporal-coverage-visual, holder, visual_tree, build_record_sha256 (SHA-256 of build/review.json), at least one prior_*release*_path/_sha256 pin, optional numeric_binary {path, sha256} for root's frozen same-source default library test binary"
  },
  "expected_backend": "Metal",
  "review_config": {
@@ -36,8 +54,8 @@
   "reactive_strength": 0.5
  },
  "budgets": {
-  "submissions_max": 128,
-  "planned_submissions": 93,
+  "submissions_max": 256,
+  "planned_submissions": 229,
   "pngs_max": 16,
   "frame_max_width": 960,
   "frame_max_height": 540,
@@ -46,7 +64,7 @@
   "listing_timeout_s": 60,
   "numeric_timeout_s": 120,
   "review_case_timeout_s": 120,
-  "counting": "Every world-frame submission (temporal-off references and frames whose PNG is not kept included), every UI overlay submission and each of the numeric regression's 14 synthetic submissions is one actual submission. Readback copies are part of their frame's observation. Each charged child is debited, fsynced, under the global GPU lock before launch and never refunded; the 128 ceiling includes failed or interrupted attempts. No whole-suite regression runs under this packet."
+  "counting": "Every world-frame submission (temporal-off references and frames whose PNG is not kept included), every UI overlay submission and each of the numeric regression's 150 tiny resolve submissions (2 projections x 5 cases x 15 ticks) is one actual submission. Readback copies are part of their frame's observation. Each charged child is debited, fsynced, under the global GPU lock before launch and never refunded; the 256 ceiling includes failed or interrupted attempts. No whole-suite regression runs under this packet."
  },
  "builds": {
   "libtests": ["test", "-p", "incant_render", "--lib", "--no-run"],
@@ -58,10 +76,12 @@
  "numeric": {
   "binary": "incant_render-lib-tests",
   "cwd": "crates/incant_render",
-  "test": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
-  "source_mount": "535003d7: lib.rs `pub mod temporal`; temporal/mod.rs:8 `pub(crate) mod system`; temporal/system.rs:316-317 `#[path = \"device_tests.rs\"] mod device_tests`; #[ignore] fn at device_tests.rs:15",
+  "test": "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection",
+  "source_mount": "e23776df: lib.rs:35 `pub mod temporal`; temporal/mod.rs:12 `pub(crate) mod system`; temporal/system.rs:319-321 `#[cfg(test)] #[path = \"coverage_device.rs\"] mod coverage_device`; #[test] #[ignore] fn at coverage_device.rs:5-7",
+  "submission_bound": "coverage_device.rs: for ortho in [false, true] x for case in CASES (5, coverage.rs:23) x for tick in 1..16; the one queue.submit is at line 261, on 12x8 targets",
+  "replaces": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion (14 submissions), which is not run under this plan",
   "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
-  "submissions": 14,
+  "submissions": 150,
   "max_runs": 1,
   "rule": "Run only after `gpu.py list lib` shows this exact name; never broaden the filter. A different name is reported before any grant."
  },
@@ -101,10 +121,10 @@
   "frames": 70,
   "ui_submissions": 9,
   "review_submissions": 79,
-  "numeric_submissions": 14,
-  "submissions": 93,
+  "numeric_submissions": 150,
+  "submissions": 229,
   "pngs": 14,
-  "reserve_submissions": 35,
+  "reserve_submissions": 27,
   "reserve_pngs": 2
  },
  "amendments": [],

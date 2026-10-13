@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Preparation self-check for handoff 0072's corrected-source temporal review.
+"""Preparation self-check for handoff 0072's fixed-coverage temporal review.
 Standard library only; no grant needed. Never compiles, starts a renderer,
 acquires a target or touches the stage evidence directory or the global GPU lock.
 
@@ -7,10 +7,11 @@ acquires a target or touches the stage evidence directory or the global GPU lock
 
 1. Every stage Python tool parses (ast only; no bytecode is written).
 2. plan.json is internally consistent and within the brief's budgets: 79 review
-   + 14 numeric = 93 planned submissions under the 128 ceiling, 14 of 16 PNGs.
+   + 150 numeric = 229 planned submissions under the 256 ceiling, 14 of 16 PNGs.
 3. Comparability with the original rejected review: all seven cases keep their
    frames, UI submissions, PNG names and purposes, and the fixture differs from
-   the original only at line 1418 (the unused mut).
+   the original only at line 1418 (the unused mut). The fixture is byte-identical
+   to the one the corrected-source review ran (visual tree 53fd64b6).
 4. The Rust fixture agrees with the plan: test names in order, Report::open
    limits, PNG names, frame size, output variable, the explicit config and each
    case's exact contract-check names.
@@ -32,6 +33,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as c  # noqa: E402
 
 ORIGINAL = "9009f088ac230e31185e8ce64183ca93878e9444"
+CORRECTED_TREE = "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e"  # visual tree of the corrected-source review
 COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "checkout"],
             ["build.py", "toolchain"], ["build.py", "libtests"], ["build.py", "review"],
             ["build.py", "lint"], ["gpu.py", "list", "lib"], ["gpu.py", "numeric"],
@@ -54,11 +56,13 @@ def plan_checks(p):
         "frames_match_total": frames == totals["frames"] == 70,
         "ui_match_total": ui == totals["ui_submissions"] == 9,
         "review_submissions_79": frames + ui == totals["review_submissions"] == 79,
-        "numeric_submissions_14": numeric == totals["numeric_submissions"] == 14,
-        "planned_93_within_128": (frames + ui + numeric == totals["submissions"] == budgets["planned_submissions"]
-                                  == 93 and budgets["submissions_max"] == 128),
+        "numeric_submissions_150": numeric == totals["numeric_submissions"] == 150,
+        "planned_229_within_256": (frames + ui + numeric == totals["submissions"] == budgets["planned_submissions"]
+                                   == 229 and budgets["submissions_max"] == 256),
         "pngs_14_within_16": len(names) == totals["pngs"] == 14 and budgets["pngs_max"] == 16,
-        "reserves_match": (totals["reserve_submissions"] == 128 - 93 and totals["reserve_pngs"] == 2),
+        "reserves_match": (totals["reserve_submissions"] == 256 - 229 and totals["reserve_pngs"] == 2),
+        "gpu_children_at_most_120_s": all(budgets[k] <= 120 for k in (
+            "listing_timeout_s", "numeric_timeout_s", "review_case_timeout_s")),
         "png_names_unique": len(names) == len(set(names)),
         "size_960x540": spec["size"] == [960, 540] and budgets["frame_max_width"] == 960
         and budgets["frame_max_height"] == 540,
@@ -68,7 +72,7 @@ def plan_checks(p):
         "no_whole_suite": "suites" not in p and "tests-render" not in p["builds"]
         and "tests-host" not in p["builds"],
         "exact_numeric_test": p["numeric"]["test"]
-        == "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
+        == "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection",
         "builds_locked_offline_ci_j2": all(flag in p["builds"]["common_flags"]
                                            for flag in ("--locked", "--offline", "ci", "-j2"))
         and budgets["compile_jobs"] == 2,
@@ -78,7 +82,12 @@ def plan_checks(p):
             and 0 <= config["reactive_strength"] <= 1),
         "expected_backend_metal": p["expected_backend"] == "Metal",
         "new_evidence_namespace": p["evidence_namespace"] == str(c.EVIDENCE)
-        and c.EVIDENCE.name == "0072-temporal-corrected-001",
+        and c.EVIDENCE.name == "0072-temporal-coverage-001" and c.GRANT.parent == c.EVIDENCE
+        and c.BUILD_GRANT.parent == c.EVIDENCE,
+        "new_stages": (p["stage"], p["build_stage"]) == (c.STAGE, c.BUILD_STAGE)
+        == ("temporal-coverage-visual", "temporal-coverage-build"),
+        "new_publication_directories": (c.PUBLISHED.name, c.PUBLISHED_EVIDENCE.name)
+        == ("temporal-coverage-screenshots", "temporal-coverage-evidence"),
     }
 
 
@@ -93,7 +102,11 @@ def comparability_checks(p):
                                                         current_fixture.splitlines()), 1) if a != b]
     diff = [line for line in difflib.unified_diff(original_fixture.splitlines(), current_fixture.splitlines(),
                                                   lineterm="", n=0) if line[:1] in "+-" and line[:3] not in ("+++", "---")]
+    corrected_fixture = subprocess.run(
+        ["git", "cat-file", "blob", f"{CORRECTED_TREE}:review/temporal_visual_review.rs"],
+        cwd=c.ROOT, capture_output=True, check=True).stdout
     return {
+        "fixture_byte_identical_to_corrected_review": corrected_fixture == c.HELPER_SOURCE.read_bytes(),
         "same_case_definitions_as_original": same_cases == {name: True for name in original_plan["review"]["cases"]},
         "same_review_config_as_original": p["review_config"] == original_plan["review_config"],
         "fixture_only_line_1418_changed": (

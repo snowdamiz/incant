@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """CPU-only controls for the fail-closed analyzer (pattern of the accepted 0073
-test_analyze.py, narrowly reused). Synthetic evidence in a temporary directory
-stands in for a complete run; only the visual-tree identity is a test double.
-Never starts a renderer, compiler or GPU child, and touches nothing outside the
-temporary directory.
+test_analyze.py, narrowly reused) and for admission at the fixed-coverage plan's
+counts: the real plan's 229 submissions fit, nothing beyond the 256 ceiling or 16
+PNGs is admitted, and the corrected-source review's old grants are refused.
+Synthetic evidence in a temporary directory stands in for a complete run; only the
+visual-tree identity is a test double. Old grants are read only. Never starts a
+renderer, compiler or GPU child, and writes nothing outside the temporary directory.
 
   python3 -I -B test_analyze.py [--receipt NEW_PATH]
 """
@@ -27,6 +29,9 @@ import common as c  # noqa: E402
 
 RECORDS = []
 TREE = "a" * 40
+OLD_NAMESPACE = c.EVIDENCE_ROOT / "0072-temporal-corrected-001"
+OLD_NUMERIC = "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion"
+REAL = {"EVIDENCE": c.EVIDENCE, "GRANT": c.GRANT, "BUILD_GRANT": c.BUILD_GRANT}  # before any patching
 
 
 def sha(data):
@@ -147,11 +152,73 @@ class Analyzer(unittest.TestCase):
     # ----------------------------------------------------------- controls
 
     def test_complete_current_evidence_passes_and_publishes(self):
+        _, debits = self.rows()
+        self.assertEqual(sum(d["frames"] + d["ui_submissions"] for d in debits), 229)
         code, summary = self.verdict("complete")
         self.assertEqual((code, summary["verdict"], summary["problems"]), (0, "pass", []))
         analyze.publish()
         self.assertEqual(len(list(c.PUBLISHED.glob("*.png"))), 14)
         self.assertTrue((c.PUBLISHED_EVIDENCE / "manifest.json").is_file())
+
+    def test_plan_counts_admitted_and_ceilings_refused(self):
+        c.BUDGET.unlink()
+        c.debit("numeric", "numeric", self.plan["numeric"]["submissions"], 0, 0, "synthetic")
+        for case in self.plan["review"]["order"]:
+            details = self.plan["review"]["cases"][case]
+            c.debit(f"review-{case}", case, details["frames"], details["ui_submissions"],
+                    len(details["pngs"]), "synthetic")
+        used = c.budget_used()
+        self.assertEqual((used["frames"] + used["ui_submissions"], used["pngs"]), (229, 14))
+        with self.assertRaisesRegex(SystemExit, "submission ceiling"):
+            c.debit("over", "over", 28, 0, 0, "synthetic")  # 257 > 256
+        with self.assertRaisesRegex(SystemExit, "PNG budget"):
+            c.debit("over", "over", 0, 0, 3, "synthetic")  # 17 > 16
+        c.debit("edge", "edge", 27, 0, 2, "synthetic")  # exactly 256 and 16
+        with self.assertRaisesRegex(SystemExit, "submission ceiling"):
+            c.debit("after", "after", 1, 0, 0, "synthetic")
+        # 150 numeric + 70 world frames + 27 = 247 frames, plus 9 UI = 256 submissions.
+        self.assertEqual(c.budget_used(), {"frames": 247, "ui_submissions": 9, "pngs": 16})
+        self.assertEqual(len(c.read_lines(c.REFUSALS)), 3)
+        RECORDS.append({"test": "plan_counts_admitted_and_ceilings_refused", "admitted": 229,
+                        "edge_admitted": {"submissions": 256, "pngs": 16}, "refused": 3})
+
+    def test_old_corrected_grants_refused(self):
+        self.assertNotEqual(REAL["EVIDENCE"], OLD_NAMESPACE)
+        self.assertEqual(REAL["GRANT"].parent, REAL["EVIDENCE"])
+        self.assertEqual(REAL["BUILD_GRANT"].parent, REAL["EVIDENCE"])
+        sources = {}
+        for name, call in (("review-ready.json", c.grant), ("build-ready.json", c.build_grant)):
+            old = OLD_NAMESPACE / name
+            body = json.loads(old.read_text()) if old.is_file() else None
+            if body is None:  # a stand-in shaped like the old grants, if they were ever removed
+                body = {"packet": c.PACKET, "holder": "synthetic", "visual_tree": TREE,
+                        "stage": "temporal-corrected-visual" if name == "review-ready.json"
+                        else "temporal-corrected-build"}
+            sources[name] = {"read_only_from": str(old) if old.is_file() else None,
+                             "sha256": c.sha(old) if old.is_file() else None, "stage": body.get("stage")}
+            target = c.GRANT if name == "review-ready.json" else c.BUILD_GRANT
+            target.write_text(json.dumps(body))
+            with self.assertRaisesRegex(SystemExit, "refused: " + name + " does not name this packet"):
+                call()
+        RECORDS.append({"test": "old_corrected_grants_refused", "old_grants": sources})
+
+    def test_old_numeric_identity_fails(self):
+        rows, debits = self.rows()
+        for row in rows:
+            if row["kind"] == "numeric":
+                row["test"], row["debit"] = OLD_NUMERIC, {"frames": 14}
+        for debit in debits:
+            if debit["item"] == "numeric":
+                debit["frames"] = 14
+        self.write_ledger(rows, debits)
+        self.failed("old_numeric_identity", "did not run the exact test once and pass")
+        summary = c.read_json(analyze.latest_summary())
+        self.assertTrue(any("not debited the plan's submissions" in p for p in summary["problems"]))
+
+    def test_missing_lib_listing_fails(self):
+        rows, debits = self.rows()
+        self.write_ledger([r for r in rows if r.get("label") != "list-lib"], debits)
+        self.failed("missing_lib_listing", "expected one passing lib listing")
 
     def test_empty_evidence_fails(self):
         for path in (c.LEDGER, c.BUDGET, c.LATCH):

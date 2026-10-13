@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guarded serial GPU runner for handoff 0072's corrected-source temporal review.
+"""Guarded serial GPU runner for handoff 0072's fixed-coverage temporal review.
 Standard library only.
 
 Adapted from this packet's original gpu.py (from handoff 0068). For every

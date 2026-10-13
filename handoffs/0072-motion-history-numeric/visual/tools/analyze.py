@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""CPU-only, fail-closed analysis and publication for handoff 0072's corrected-source
+"""CPU-only, fail-closed analysis and publication for handoff 0072's fixed-coverage
 temporal review. Standard library only; never starts a renderer, compiler or GPU
 child. The verdict/binding/publication rules follow the accepted 0073 analyzer
 (narrowly reused); appearance is judged only by personal inspection of the PNGs.

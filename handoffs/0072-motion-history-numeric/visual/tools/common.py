@@ -1,4 +1,4 @@
-"""Shared constants and guards for handoff 0072's corrected-source temporal review.
+"""Shared constants and guards for handoff 0072's fixed-coverage temporal review.
 Standard library only. Importing this module has no side effects.
 
 Adapted from this packet's original stage B tools (themselves from handoff 0068),
@@ -14,7 +14,8 @@ tools refuse without creating any file or directory.
   review stage, the actual holder, the visual tree, the SHA-256 of the frozen
   build record, at least one prior release pin and optionally root's frozen
   same-source default library test binary for the one numeric regression.
-Old namespaces (0072-temporal-visual and earlier) are never read or written.
+Old namespaces (0072-temporal-corrected-001, 0072-temporal-visual and earlier) are
+never read or written, and their grants name stages these tools refuse.
 
 GPU children run under the global non-waiting native-gpu.lock; budgets are
 debited before launch, monotonic and never refunded; signals are deferred so
@@ -39,8 +40,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 PACKET = "0072-motion-history-numeric"
-STAGE = "temporal-corrected-visual"
-BUILD_STAGE = "temporal-corrected-build"
+STAGE = "temporal-coverage-visual"
+BUILD_STAGE = "temporal-coverage-build"
 PACKET_DIR = ROOT / "handoffs" / PACKET
 VISUAL_RELATIVE = "handoffs/" + PACKET + "/visual"
 VISUAL = ROOT / VISUAL_RELATIVE
@@ -50,7 +51,7 @@ HELPER_SOURCE = VISUAL / "review" / "temporal_visual_review.rs"
 HELPER_DEST = "crates/incant_render/tests/temporal_visual_review.rs"
 CODEX = Path("/Users/andreyyurlov/.codex")
 EVIDENCE_ROOT = CODEX / "incant-evidence"
-EVIDENCE = EVIDENCE_ROOT / "0072-temporal-corrected-001"
+EVIDENCE = EVIDENCE_ROOT / "0072-temporal-coverage-001"
 GRANT = EVIDENCE / "review-ready.json"
 BUILD_GRANT = EVIDENCE / "build-ready.json"
 GPU_LOCK = EVIDENCE_ROOT / "native-gpu.lock"  # global; shared with root's runners
@@ -69,8 +70,8 @@ LOGS = EVIDENCE / "logs"
 SCRATCH = EVIDENCE / "tmp"
 CAPTURES = EVIDENCE / "captures"
 ANALYSIS = EVIDENCE / "analysis"
-PUBLISHED = PACKET_DIR / "temporal-corrected-screenshots"
-PUBLISHED_EVIDENCE = PACKET_DIR / "temporal-corrected-evidence"
+PUBLISHED = PACKET_DIR / "temporal-coverage-screenshots"
+PUBLISHED_EVIDENCE = PACKET_DIR / "temporal-coverage-evidence"
 RUSTUP_BIN = "/opt/homebrew/opt/rustup/bin"
 SYSTEM_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
 FORBIDDEN_TARGETS = ("/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
