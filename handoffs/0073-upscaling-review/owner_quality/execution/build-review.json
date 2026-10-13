@@ -1,0 +1,111 @@
+{
+  "at": "2026-10-13T18:29:32.711677+00:00",
+  "reviewer": "astra",
+  "verdict": "accepted exact targeted build and raw source/artifact bindings; no GPU or appearance claim",
+  "source": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "checks": [
+    {
+      "name": "build",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "upscaling_owner_review",
+        "--no-run",
+        "--message-format=json-render-diagnostics"
+      ],
+      "exit_code": 0,
+      "seconds": 47.406,
+      "log_sha256": "bf986d3856d8fae459ae26ef393286b10d821b62220d1301aeec32ba7e920d56"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "upscaling_owner_review",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 4.86,
+      "log_sha256": "c76c0dec19de39343510af177b99e0610b02d3f672f3a8a43ef6d1a86416f23e"
+    },
+    {
+      "name": "listing",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/upscaling_owner_review",
+        "--list",
+        "--ignored"
+      ],
+      "exit_code": 0,
+      "seconds": 0.204,
+      "log_sha256": "a0472f0502ae15b73b4b98c8206066562e23f14ec2a949fd37deaf961a26b97d"
+    }
+  ],
+  "production_inputs_rehashed": 2835,
+  "features": [
+    "default",
+    "physics-deterministic"
+  ],
+  "frozen_binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/upscaling_owner_review",
+    "sha256": "9644fc96660204aedafd997836fdef557284d40000a06e111c0aefd90b605199",
+    "bytes": 18344392,
+    "mode": "0555"
+  },
+  "files": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/receipt.json",
+      "sha256": "c3c7446907266f463ccc0b71e2da5ae72676d6d47e730d53cf39ea0b4823b837"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/artifact.json",
+      "sha256": "a09d7c7c009ffc5be241abc08539528df12c9dff9cfee167d84ae50761d61ff4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/build.py",
+      "sha256": "e803d18709e27cff9927c2571ba2f47aee38c25dfe2e946def8ef403a761fe16"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/build.log",
+      "sha256": "bf986d3856d8fae459ae26ef393286b10d821b62220d1301aeec32ba7e920d56"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/clippy.log",
+      "sha256": "c76c0dec19de39343510af177b99e0610b02d3f672f3a8a43ef6d1a86416f23e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/listing.log",
+      "sha256": "a0472f0502ae15b73b4b98c8206066562e23f14ec2a949fd37deaf961a26b97d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/production-freeze.json",
+      "sha256": "4143417b02a286cb9417c75df2791c34801d43fd2cedc7a37cffb9e1ce6d77c5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/fixture.rs",
+      "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-build-001/plan.json",
+      "sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4"
+    }
+  ]
+}

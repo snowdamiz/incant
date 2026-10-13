@@ -1,0 +1,37 @@
+{
+  "schema": "incant-owner-quality-grant-v1",
+  "authority": "root",
+  "holder": "Claude0073 Opus5.5 Max",
+  "issued_at": "<ROOT_UTC_TIME>",
+  "plan_sha256": "f2ffc19ddfd9a616979631e056b4846ad74ba56e0109cb9fe2b1f5ea092f957a",
+  "runner_sha256": "5eacd386161a8bbc669cf00df0a43450c78553bd9e37a3b675895ff00b75d479",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "binary_sha256": "9644fc96660204aedafd997836fdef557284d40000a06e111c0aefd90b605199",
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001",
+  "groups": [
+    "stationary",
+    "motion",
+    "transitions",
+    "c7_disocclusion",
+    "p1_crossing"
+  ],
+  "budget": {
+    "processes": 5,
+    "scene_submissions": 380,
+    "ui_submissions": 18,
+    "readback_submissions": 380,
+    "readback_maps": 380,
+    "queue_submissions": 778,
+    "rendered_frames": 380,
+    "pngs": 15,
+    "maximum_extent": [
+      960,
+      540
+    ],
+    "timeout_seconds_each": 90,
+    "builds": 0,
+    "retries": 0
+  },
+  "predecessor_release_path": "<ROOT_EXACT_RELEASE_PATH>",
+  "predecessor_release_sha256": "<ROOT_EXACT_RELEASE_SHA256>"
+}

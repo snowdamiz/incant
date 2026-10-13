@@ -1,0 +1,1 @@
+{"plan_sha256": "f2ffc19ddfd9a616979631e056b4846ad74ba56e0109cb9fe2b1f5ea092f957a", "runner_sha256": "5eacd386161a8bbc669cf00df0a43450c78553bd9e37a3b675895ff00b75d479", "state": "FROZEN_READY_FOR_ROOT_GRANT", "grant": "absent; no GPU authority"}

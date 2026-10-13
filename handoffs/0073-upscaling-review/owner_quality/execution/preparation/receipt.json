@@ -1,0 +1,34 @@
+{
+  "schema": "incant-owner-quality-runner-cpu-v1",
+  "accepted": true,
+  "runner_sha256": "5eacd386161a8bbc669cf00df0a43450c78553bd9e37a3b675895ff00b75d479",
+  "plan_sha256": "f2ffc19ddfd9a616979631e056b4846ad74ba56e0109cb9fe2b1f5ea092f957a",
+  "test_sha256": "ade74c6a0f091ba001975393a4378f87a01cea7a289ba0011546dd44de3ba991",
+  "build_review_sha256": "7fe3b52b64c92554f921f5e2d4978ffb5cb1b48a02ab91930d348bcad27386a5",
+  "focused": {
+    "tests": 14,
+    "passed": 14,
+    "failed": 0,
+    "seconds": 1.662,
+    "terminal_exit": 0,
+    "session": 61007,
+    "log_sha256": "5271b02566e846fceefbcc9fb62fb5800783b4606d4e4ea2915ef0d5424a5548"
+  },
+  "check": {
+    "exit": 0,
+    "log_sha256": "36315838ccc9aa2875c0b8858cbc0e189ff52ea3a07ab62574c3eb450df4e8ee"
+  },
+  "historical_attempt": {
+    "exit": 1,
+    "tests": 14,
+    "passed": 13,
+    "failed": 1,
+    "cause": "test helper named signal.py shadowed stdlib; no runner delta",
+    "receipt_sha256": "af006ceb33a9ab6c48b9fad04cbcc0fb58676369c5cdf09bacfa6061d515f369"
+  },
+  "renderer_executions": 0,
+  "gpu_submissions": 0,
+  "builds": 0,
+  "grant_exists": false,
+  "scope": "CPU process and artifact guards only; no execution or appearance approval"
+}

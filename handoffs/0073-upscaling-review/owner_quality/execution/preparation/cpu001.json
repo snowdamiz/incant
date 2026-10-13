@@ -1,0 +1,14 @@
+{
+  "schema": "cpu-control-attempt",
+  "session": 18428,
+  "terminal_exit": 1,
+  "tests": 14,
+  "passed": 13,
+  "failed": 1,
+  "seconds": 21.565,
+  "failure": "test_signal_reaps_actual_child: helper signal.py shadowed stdlib signal; sender AttributeError; KeyboardInterrupt not raised",
+  "source_sha256": "1cd2c6890d27d02388edb940851d130961a5c99de5157b8e728dc1110a11f551",
+  "raw_output_location": "Codex exec chunks 7e7dcd, 660c42, 8dad89; this summary is not a raw-log copy",
+  "renderer_executions": 0,
+  "all_children_reaped": true
+}
