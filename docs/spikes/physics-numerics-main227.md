@@ -33,7 +33,8 @@ all succeeded; old producer binaries were not substituted for current builds.
 The [manifest](evidence/physics-numerics-main227.json),
 [read-only verifier](evidence/physics-numerics-main227/verify.py), source inventory,
 lossless raw logs and four retained producer/current executable identities bind
-these claims. Current-main independent final review is pending.
+these claims. [Independent current-main final review](evidence/physics-numerics-main227/final-review.json)
+is accepted; publication still requires the fast check.
 
 This preflight does not establish complete solver arithmetic/work bounds, capture
 phase authentication, compound/hook admission, native construction, decoded field

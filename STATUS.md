@@ -25,7 +25,7 @@ cumulative logical work model. Both 214-case deterministic/fast8 suites and
 scoped strict Clippy, wasm, dependency and formatting checks pass. Independent
 source and final producer reviews are accepted. Current main227 rebuilt suites
 also pass 214 cases per mode and all fifteen scoped checks; final integration
-review is pending. [Current composition](docs/spikes/physics-numerics-main227.md).
+review is independently accepted, with the required fast check still pending. [Current composition](docs/spikes/physics-numerics-main227.md).
 Whole-solver derived
 arithmetic, exact private construction, capture authentication and stable IDs/
 events remain required; `PhysicsUnsupported` is unchanged.

@@ -525,5 +525,9 @@
     "Native numeric observations exercise144 completed primitive steps per mode and exact saved-bit preservation; overlapping CPU counts are not distinct execution cohorts.",
     "This preflight does not construct native owners, install decoded fields, authenticate phase, cover every solver expression or enable PhysicsUnsupported saves."
   ],
-  "final_review": "Current-main integration independent final review pending"
+  "final_review": {
+    "status": "independently accepted scoped current-main source and execution",
+    "path": "docs/spikes/evidence/physics-numerics-main227/final-review.json",
+    "sha256": "fc030f6deab7d52d9796e8ddac2e04eabfcdbae01689dd3ce86ca902fd615aa8"
+  }
 }
