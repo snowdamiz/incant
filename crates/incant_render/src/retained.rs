@@ -152,6 +152,11 @@ impl RetainedScene {
             motion.invalidate();
         }
     }
+    /// Borrow accepted placement changes. Candidate staging and failed frames
+    /// never publish here; IDs are scoped to the returned frame owner/epoch.
+    pub fn motion_changes(&self) -> Option<crate::motion::MotionChanges<'_>> {
+        self.motion.as_ref().and_then(|m| m.changes())
+    }
     pub fn motion_frame(&self) -> Option<crate::motion::MotionFrame> {
         self.motion.as_ref().and_then(|m| m.frame())
     }

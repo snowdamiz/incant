@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Temporal owner foundation — private current-main qualification
+
+The [owner/change provenance foundation](docs/spikes/temporal-owner-provenance-verification.md)
+assigns stable placement IDs across handedness batches and compares actual accepted
+transforms and joint palettes, publishing change membership only after submission.
+Its source and producer CPU evidence are independently accepted. The isolated
+eight-file Rust delta is being qualified against current main without importing
+private upscaling or MetalFX ancestry. Shader bytes, defaults and memory ceilings
+are unchanged; integer shader transport and per-pixel provenance remain open.
+No new GPU, appearance, performance or device result is claimed.
+
 ## Core result HUD — current-main qualification
 
 The accepted 0069 label halos, localized result/restart presentation and approved
