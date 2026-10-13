@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-13T16:52:33.684746+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted narrow current main234 join",
+  "head": "114e4ab9104f3f6bdf37bf67f1521cd1874f096b",
+  "main": "979e85e633d3fae975f15d8ec0f485119f57062f",
+  "qualifier_sha256": "1c400dbbfb5dd94485772085873dac6634f983599f1fa46cdfe201778ccb8b59",
+  "qualification_sha256": "260288da587c7221d000ff8cdd30065e700ead3461026dd311e7f05ae7062938",
+  "manifest_sha256": "dee17fd350bde1964d982353ebdb213635bd121f931cbe274fbafcbf0f0725df",
+  "prior_review": "cb3bc688f89760e8c91f3af3ed5d734d3361ab42f0bbb87427658bc644bb2624",
+  "replay": {
+    "handle": 69425,
+    "exit": 0,
+    "reaped": true
+  },
+  "basis": [
+    "Read complete qualifier and exact exception mechanism. Original accepted collector bytes are bound to lossless archive; only six enumerated renderer hash exceptions substituted after proving exact current-main bytes.",
+    "Seven shadow implementation paths including one new test plus the accepted UI timeout test are exact current main. Physics/vendor/tools/Cargo input trees and all 2010 selected physics closure files unchanged.",
+    "Complete original assertions and accepted 21 command receipts replay successfully; no rebuild or GPU claim."
+  ],
+  "limits": [
+    "Private decoded island state only; other native owners remain trusted clones.",
+    "No complete native world/save installation, device/performance or phase approval."
+  ]
+}
