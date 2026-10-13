@@ -8,7 +8,8 @@ admission and complete script/game-session saves remain separate work.
 ## Ownership and continuation
 
 `incant_runtime/native-checkpoints` exposes `NativeWorld::checkpoint`,
-`WorldCheckpoint::reconstruct` and `NativeWorld::restore_checkpoint`. The opaque
+`WorldCheckpoint::reconstruct`, `WorldCheckpoint::reconstruct_for` and
+`NativeWorld::restore_checkpoint`. The opaque
 checkpoint has no byte constructor, public mutable fields or `Clone` capability.
 It retains the versioned component projection, both completed physics owners,
 their stable IDs and trigger observations, immutable animation catalogs and
@@ -42,6 +43,10 @@ A fresh reconstruction receives a new host identity and ECS incarnation.
 In-place restore keeps its destination host identity while changing ECS/entity
 incarnations and advancing retained-view generations. Navigation caches rebuild;
 old path results and script bindings must not attach to the new incarnation.
+`reconstruct_for` applies the destination compatibility and historical-obligation
+checks to a fresh candidate without publishing it. A session host can then bind
+and validate a fresh VM before replacing both owners together. The runtime
+reexports the four checkpoint budget types for this composition.
 Failed worlds remain terminal. Dirty native owners, unsupported compound/tile
 geometry, retained character query caches and other native admission refusals
 remain explicit.
@@ -63,11 +68,18 @@ Source003 has independent source acceptance after three review corrections:
 avoid duplicate native construction, retain a stepped empty planar owner, and
 separate historical save obligations from restored stepping history. The initial
 test compile error and subsequent legacy-navigation error-precedence regression
-are retained as failed historical runs. Source003 passes 260 runtime tests in
-each of the deterministic and fast8 modes, including ten aggregate checkpoint
-controls, plus 205 default physics/script consumer tests. Strict all-target
+are retained as failed historical runs. Source004 adds the compatible staging
+API and its no-publication control; its independent delta and execution review
+is accepted. It passes 261 runtime tests in each of the deterministic and fast8
+modes, including eleven aggregate checkpoint controls. The 205 default
+physics/script consumer tests passed on source003; the source004 changes are
+feature-only and do not alter that ordinary execution path. Strict all-target
 Clippy passes in both modes; wasm compilation, the authoring-free dependency
 guard, formatting and generated conventions also pass. The compiled test
-executables were copied immediately before target reuse. Final evidence review
-and publication remain pending; local evidence is retained under
-`~/.codex/incant-evidence/native-world-checkpoints-001/`.
+executables were copied immediately before target reuse. The portable
+[manifest](evidence/native-world-checkpoints/manifest.json) retains distinct
+source003/source004 identities and historical failures. Run
+`python3 docs/spikes/evidence/native-world-checkpoints/verify.py` for a read-only
+source and receipt check; `--local-binaries` also hashes the retained executables.
+Current-main composition and publication are reviewed separately. Local binary
+payloads remain under `~/.codex/incant-evidence/native-world-checkpoints-001/`.
