@@ -147,14 +147,44 @@ fn configurations(r: &Renderer) {
     }
 }
 
-fn retained(r: &Renderer, ortho: bool) {
+fn retained_input(ortho: bool) -> SceneInput {
     let mut input = fixture(33, ortho);
+    // The canonical renderer schedules clustered lighting from model geometry.
+    // Lights alone produce no model draw, so observing that frame would read the
+    // previous cache without exercising retained updates at all.
+    let directory = tempfile::tempdir().unwrap();
+    let (project, assets, _) = crate::test_support::fixture(directory.path());
+    let models = incant_render_authoring::project_input(&project, Some(&assets)).unwrap();
+    assert!(models.nodes.iter().any(|node| node.mesh.is_some()));
+    input.nodes.extend(models.nodes);
+    input
+}
+
+#[test]
+fn retained_cluster_fixture_resolves_real_model_geometry_without_source_files() {
+    for ortho in [false, true] {
+        // retained_input has already dropped its temporary source/cache directory.
+        let input = retained_input(ortho);
+        let resolved = crate::scene::resolve(&input).unwrap();
+        assert_eq!(resolved.stats.model_entities, 2);
+        assert!(resolved.stats.primitive_instances > 0);
+        let (lights, directional, _) = plan(&input).finish();
+        assert_eq!(directional, 2);
+        assert_eq!(lights.len(), 35);
+    }
+}
+
+fn retained(r: &Renderer, ortho: bool) {
+    let mut input = retained_input(ortho);
     let mut scene = r.prepare_retained(&input, "camera").unwrap();
+    assert!(scene.stats().primitive_instances > 0);
     let original: Vec<_> = input.nodes.iter().map(|node| node.world).collect();
     let mut previous_grid = None;
     let mut initial_masks = None;
     for step in 0..4 {
-        for (node, world) in input.nodes.iter_mut().zip(&original).skip(3) {
+        for (node, world) in input.nodes.iter_mut().zip(&original).filter(|(node, _)| {
+            matches!(node.light, Some(SceneLight::Point(_) | SceneLight::Spot(_)))
+        }) {
             node.world = DMat4::from_translation(match step {
                 1 | 3 => DVec3::new(4., 2., -1.),
                 2 => DVec3::new(100_000., 0., 0.),
@@ -258,6 +288,7 @@ fn directional_only(r: &Renderer) {
 #[ignore = "requires a native GPU; coordinated baseline/cooked run with --nocapture"]
 fn extended_cluster_readback_cameras_viewports_and_retained_motion() {
     let renderer = Renderer::headless().unwrap();
+    println!("cluster-readback-adapter {:?}", renderer.adapter.get_info());
     configurations(&renderer);
     retained(&renderer, false);
     retained(&renderer, true);

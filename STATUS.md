@@ -131,10 +131,13 @@ A test-only observer now reads the actual submitted cached cluster buffers,
 including retained movement and resize, without creating replacement buffers.
 The ignored extension covers 75 camera/viewport/light-count combinations, eight
 retained frame steps and a directional-only control with raw count/mask hashes.
-Two CPU invariant tests and all-target Clippy pass in default and cooked-cluster
+Three CPU fixture/invariant tests and all-target Clippy pass in default and cooked-cluster
 configurations; no production renderer code changed. Independent source review
 accepted this bounded packet; coordinated baseline/cooked GPU execution remains pending.
-[Scope and evidence](docs/spikes/cluster-grid-readback.md).
+The retained fixture was corrected before GPU execution to include actual cooked
+model geometry; its original model-free version could skip clustered compute.
+All seven updated CPU/compile checks pass, with source-free geometry resolution
+and independently reviewed fixture ownership. [Scope and evidence](docs/spikes/cluster-grid-readback.md).
 
 ## Fixed cluster assignment shaders — CPU/compiler checks passed
 
