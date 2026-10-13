@@ -1,5 +1,7 @@
 # Implementation status
 
+Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source review and both numerical-mode CPU suites, strict Clippy, native consumers and wasm compilation pass; main integration is pending. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
+
 Checkpoint26 remains frozen and failed on the Windows Dx12 SSAO filter interval at pixel (17,1); other checks are still settling. A reviewed test-only diagnostic preserves the strict oracle and compares fractional versus full-target raster coverage. Local CPU qualification passes; actual hosted diagnostic observations and any production repair remain pending. [Diagnostic scope](docs/spikes/ssao-viewport-diagnostic.md).
 
 Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; PR238 merged after its required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
