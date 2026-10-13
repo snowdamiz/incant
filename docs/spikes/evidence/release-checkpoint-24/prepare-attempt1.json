@@ -1,0 +1,46 @@
+{
+  "at": "2026-10-13T14:41:49.044561+00:00",
+  "exit": 1,
+  "reaped_handle": 8874,
+  "kind": "read-only GitHub query failure; no checks rerun or refs changed",
+  "tool_reported_error": "gh: Server Error (HTTP 502)",
+  "request": "repos/snowdamiz/incant/actions/runs/38403667841/jobs?per_page=100",
+  "retained_successful_queries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/runs-final.json",
+      "sha256": "ea80645c001506f67044f584a08c060c71b4c4e36686efad21723125d3b61597"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/pr-final.json",
+      "sha256": "14bb377efa64f1a9b01a3e4d7cf0e8efdda7bf2400f201cc9cf24c008a320dbb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/protection-final.json",
+      "sha256": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/jobs-38403668026.json",
+      "sha256": "6d17ba893b7bc6da81689959545a71fdaba2c95dae29e4d1409af56442fc737a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/jobs-38403667741.json",
+      "sha256": "dad6dec84cdddafa1a7a00d1804f4f1de3a5b16b25e94bb13d2e432163e4840a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/jobs-38403667947.json",
+      "sha256": "6e712f6e77daec7994cede3559fc875308eb20604639c64d0daee544d5a33c78"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/jobs-38403667748.json",
+      "sha256": "1bcbfef902b40fb867e20f1287c36b2209f485ff9bc06b8273c7d5e2092b8839"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/jobs-38403667723.json",
+      "sha256": "eaf9fb76b18f56913eb706cd78dfebf64ef62ce705f2d8c74ab1ea2293db49f4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint24/prepare-attempt1/jobs-38403667575.json",
+      "sha256": "597b2eeeb90a7e683069fcbdad2235f718ecbe3a7cc0c5641e293e8606958f36"
+    }
+  ]
+}

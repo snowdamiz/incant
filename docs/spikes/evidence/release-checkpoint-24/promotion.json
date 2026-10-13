@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-13T14:45:11.835214+00:00",
+  "candidate": "669bd7ae87d7d1603f2c01ac39ff0cd3e8403e1f",
+  "selected_main": "079ee1aa5e77c4bee352cd792cd43ca3869e2b12",
+  "release": "2a9d72eaf804a00b7752015e33ad2dfa087665f4",
+  "release_before": "065aac69289bf9aab067dbd2148624904a860d5e",
+  "tree": "632fc223feceaae69986daccbec91b872361324d",
+  "parents": [
+    "065aac69289bf9aab067dbd2148624904a860d5e",
+    "669bd7ae87d7d1603f2c01ac39ff0cd3e8403e1f"
+  ],
+  "main_now": "b190d826a3df02466df18bf860f127228d375016",
+  "prepromotion_sha256": "fdc8c5705a577235e42d6917193523207717b31589bb8107c4d1051853a0ed63",
+  "independent_review_sha256": "58ad6cb191ac4efafb22e15c2dc95ac8d638d2bfe097195af9ba53953a25196d",
+  "exact_tree": true,
+  "trailer": true,
+  "required_success": 23,
+  "push_workflows_success": 8
+}

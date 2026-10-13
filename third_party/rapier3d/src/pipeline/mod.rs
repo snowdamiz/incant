@@ -17,7 +17,9 @@ pub use physics_hooks::{
 #[cfg(feature = "alloc")]
 pub use physics_pipeline::{PhysicsPipeline, Quarantine};
 #[cfg(feature = "incant-checkpoint")]
-pub use physics_pipeline::{CheckpointPipelineError, CheckpointPipelineObservation};
+pub use physics_pipeline::{
+    CheckpointPipelineError, CheckpointPipelineObservation, CheckpointWorkspaceError,
+};
 #[cfg(feature = "alloc")]
 pub use physics_world::PhysicsWorld;
 #[cfg(feature = "alloc")]
@@ -45,3 +47,7 @@ mod user_changes;
 
 #[cfg(all(feature = "debug-render", feature = "alloc"))]
 mod debug_render_pipeline;
+
+/// Experimental checked numeric admission only; no native restore constructor.
+#[cfg(feature = "incant-checked-restore")]
+pub mod checked_restore;

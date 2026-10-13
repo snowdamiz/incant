@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-13T15:29:00.437936+00:00",
+  "verdict": "accepted source for scoped qualification",
+  "freeze_sha256": "69e975cc9f3616bca5db415a74d5c1ee25e03bb47433e738e10fcaac9c0e0ed0",
+  "changed_files_checked": 27,
+  "exact_producer_files": 17,
+  "old_shader_files_unchanged": 17,
+  "review": "Read curated scope and camera, model draw, SSAO uniforms/prepass/encode and graph timing joins plus new numerical/joined controls. Jittered SSAO reconstruction matches opaque geometry without changing old camera operation order; all four passes included in Models timing once, transparent pass retains stable original path. Producer shaders exact; settings replacement uses existing transactional validation. Ordinary fixed TAA permits setting changes via normal rejection, future unclipped owner consumer must add renderer-effect identity.",
+  "limitations": [
+    "No qualification has completed for this freeze",
+    "Existing accepted producer GPU appearance is not composed GPU evidence",
+    "Native cooked-materials explicitly refuses SSAO",
+    "Authored N6 remains failed; revised CPU-oracle gates separately labeled"
+  ]
+}

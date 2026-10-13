@@ -16,6 +16,69 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Default-off SSAO — curated current-main qualification
+
+The complete diffuse SSAO/R3/C2 producer has independent numerical and Claude
+Metal appearance acceptance (`22ac4dc7`). Current integration preserves its
+sampling/filter shaders, bounds and default-off behavior, and explicitly joins
+jittered reconstruction, split model drawing and all four Models timing passes.
+Current source review and thirteen checks pass (168 default and 200 overlapping
+cooked CPU cases). The exact current composition completed eight bounded Metal
+frames under Claude: default SSAO admission and expected cooked refusal both
+passed, with all children reaped. Final integration review is accepted; publication
+awaits the required fast check. Original
+appearance acceptance remains producer-scoped.
+Authored N6 remains failed at seven codes; revised N6T/N8 margins are 0.79/0.97
+codes. Cooked SSAO, non-Metal appearance, phone and performance gaps remain open.
+[Current composition](docs/spikes/ssao-main229.md).
+
+## Integer motion owner attachment — current-main integration
+
+The reviewed owner/change foundation gains an explicit R32Uint attachment with
+stable integer IDs and change bits at opaque/MASK fragments. The curated source
+uses the existing main renderer, excludes private upscale/MetalFX ancestry, and
+refuses fixed temporal history while attached. Default output and old shader
+sources remain unchanged. Source review is accepted; all seventeen current checks pass with 146 default
+and 175 overlapping cooked CPU cases and exact old/new shader payload identity.
+Final integration and checkpoint 24 documentation review is accepted (`6029ae16`);
+PR229 merged after the required fast check. Original producer numerical Metal evidence covers twelve renders
+plus twelve readback submissions only; no appearance or history-consumption
+claim. [Current integration](docs/spikes/temporal-owner-main228.md).
+
+## Native physics numerical admission — main227 CPU qualification
+
+A default-off pinned-kernel preflight checks primitive mass/pose/extent and
+historical fixed-target CCD AABB coherence without constructing live owners.
+It preserves float bits, applies native force arithmetic, and charges a checked
+cumulative logical work model. Both 214-case deterministic/fast8 suites and
+scoped strict Clippy, wasm, dependency and formatting checks pass. Independent
+source and final producer reviews are accepted. Current main227 rebuilt suites
+also pass 214 cases per mode and all fifteen scoped checks; final integration
+review and the required fast check passed; PR228 merged. [Current composition](docs/spikes/physics-numerics-main227.md).
+Whole-solver derived
+arithmetic, exact private construction, capture authentication and stable IDs/
+events remain required; `PhysicsUnsupported` is unchanged.
+[Scope and evidence](docs/spikes/physics-native-admission.md).
+
+## Joined physics owner boundary — source and CPU qualification accepted
+
+The [joined inert frame](docs/spikes/physics-world-boundary.md) composes 22
+canonical sections under one aggregate allocation budget and exact borrowed
+witness joins. Its checked decoder invokes a scoped callback only after all
+sections pass; it never constructs a live solver. The separately reviewed
+default-off trusted native adapter preserves the retained CCD verdict while
+replacing scratch. Native Clone owners continue identically for 280 paired
+steps per numerical mode, with warm contacts, sleeping/waking, sensor events,
+removal/reuse and CCD controls. Both 202-case CPU modes, ten parallel controls
+and all ten scoped checks pass. Source and final producer evidence reviews are
+accepted; current-main composition passes 202 CPU cases in each numerical mode, ten
+two-worker controls each and thirteen scoped checks. Final composition review is
+independently accepted; PR227 merged after the required fast check. [Current composition](docs/spikes/physics-world-main225.md).
+Derived geometry/mass/work admission, authenticated capture and the
+whole native constructor remain required. `PhysicsUnsupported` is unchanged.
+
+
+
 ## Temporal owner foundation — current-main CPU qualification
 
 The [owner/change provenance foundation](docs/spikes/temporal-owner-provenance-verification.md)
@@ -25,8 +88,9 @@ Its source and producer CPU evidence are independently accepted. The isolated
 eight-file Rust delta passes 143 default and 172 cooked CPU cases and twelve
 current-main checks without importing private upscaling or MetalFX ancestry.
 The disjoint main225 journal-test join preserves renderer source. Final current-main
-review is independently accepted; the required fast publication check remains. Shader bytes, defaults and memory ceilings are unchanged;
-integer shader transport and per-pixel provenance remain open.
+review and the required fast check passed; PR226 merged. Shader bytes, defaults
+and memory ceilings are unchanged;
+integer shader transport subsequently merged in PR229; history consumers remain open.
 [Current composition](docs/spikes/temporal-owner-main225.md).
 No new GPU, appearance, performance or device result is claimed.
 
@@ -152,39 +216,37 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main224, 2026-10-13
+## Current overview — main229, 2026-10-13
 
-Development main224 includes the reviewed opt-in cooked renderer families and
+Development main229 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
-profiling scopes and inert physics island validation. Each lane retains its own
+profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
-Checkpoint23 is frozen at exact main220 through PR213, candidate `3381ccef`,
-with all 23 required contexts and eight workflows preserved. Its macOS journal
-authorization replay test failed; the exact original log is retained and diagnosis
-uses a controlled inherited-lock reproduction and a test-only isolation repair
-independently accepted while the remaining workflows finish. The hosted error was not
-printed, so the exact hosted cause remains inferred.
-[Repair evidence](docs/spikes/journal-replay-test-isolation.md). Checkpoint22 is
-terminal and unpromoted: 22 contexts succeeded; its optional timestamp diagnostic
-failure is retained and repaired in main219. The corrected test keeps forced backend
-selection mandatory and runs only supported timing paths, retaining actual compute
-observations and explicit unsupported records. Hosted successor execution remains
-pending. Later main changes will not move the frozen candidate.
+Checkpoint24 promoted exact main226 through PR213 after all 23 required contexts
+and eight exact-head workflows succeeded. Release `2a9d72ea` matches selected
+main226 `079ee1aa` exactly. Independent review verified the tested tree, ancestry,
+unchanged protection and all success receipts. The journal replay repair passed
+on actual macOS/Linux/Windows; optional timestamp diagnostics preserve explicit
+Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12.
+No checkpoint is currently active. The next regular selection follows the
+three-hour cadence; later main changes do not alter this tested baseline.
+[Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
-Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
-promoted through PR174 after all 23 required contexts and eight exact-head workflows
-succeeded and independent review verified the exact tested tree. Release `065aac69`
-exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
-Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–224 changes remain outside that tested baseline. No device, performance or
-phase gate follows from this promotion.
+Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
+macOS command journal assertion failed. The hosted error was not printed, so the
+inherited-lock cause remains inferred from a controlled local reproduction.
+PR225's test-only isolation preserves production locking and authorization.
+Earlier checkpoint21/22 portability and optional-query failures remain retained.
+Main227–229 work stays outside release; no device, performance or phase gate follows
+from promotion. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
+historical evidence for selected main205.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
 exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
 test import repaired in PR193; checkpoint19 exposed the cache count and vendored
 Parry compiler-identity issues repaired in PR201/203. Their original failures remain
-retained. The subsequent frozen checkpoint23 preserves
+retained. Promoted checkpoint24 preserves
 ADR0014's exact selected tree and all 23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance

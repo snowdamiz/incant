@@ -49,6 +49,9 @@ pub struct ValidatedRigidOwner<'a> {
     context: RigidOwnerContext<'a>,
 }
 impl<'a> ValidatedRigidOwner<'a> {
+    pub(crate) fn multibody_epoch(&self) -> u32 {
+        self.context.multibody_epoch
+    }
     pub(crate) fn colliders(&self) -> &'a ValidatedColliderState<'a> {
         self.context.colliders
     }

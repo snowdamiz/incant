@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-13T16:04:07.066084+00:00",
+  "verdict": "accepted scoped current-main integration for required fast-check publication",
+  "packet": "401a7d989471f3036d96386d5b575982e6af211c",
+  "base": "4631f07defcc8bdfa63446723ad25026d8f03b50",
+  "source": "c01bed48c3590e33d8e9250aaebfab8cdc2b9e70",
+  "manifest_sha256": "da12b230461ee3b651abd58420d90a91b656bccd8324c36d6750c98ce7632e1c",
+  "source_review": "97d2f158b354b83980d31209c33be49a7c811c1db4b6c95de273ea3859561ff0",
+  "verification": {
+    "frozen_inputs": 3563,
+    "curated_source_rows": 27,
+    "checks": 13,
+    "default_cpu": 168,
+    "cooked_cpu": 200,
+    "unchanged_native_payloads": 33,
+    "current_records": 122,
+    "producer_records": 380,
+    "actual_metal_frames": 8,
+    "images": 0
+  },
+  "review": "Independently reverified lossless collector and manifest, exact frozen binaries and runner, actual command receipts and absent process IDs, four positive measured frames per default/cooked route, source-specific previous appearance records and honest original failures. Read composition fixture and evidence boundaries; default SSAO admitted, cooked SSAO correctly refused. No new source delta beyond accepted c01bed48.",
+  "limits": [
+    "Default off and native cooked refusal retained",
+    "Eight-frame current integration is numerical composition, not appearance or performance",
+    "Original authored N6 failure and 0.79/0.97-code margins remain",
+    "No non-Metal/device/phase gate claim"
+  ]
+}

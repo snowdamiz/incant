@@ -1,0 +1,29 @@
+{
+  "format": "incant-rapier-trusted-workspace",
+  "version": 1,
+  "feature": "incant-checkpoint",
+  "scope": "trusted live-to-live fresh scratch with retained verdict and shared execution pool; no phase authentication, external input or live-save admission",
+  "baseline": "706a89a872ac5bc465a52fb9fdebce3ded790bbf",
+  "files": [
+    {
+      "path": "src/pipeline/mod.rs",
+      "previous_sha256": "cf9fa7cdb76f2ef60b3e2266d7149d6d4fde1eeb082a51acd034558bdde1b55e",
+      "sha256": "79266ab550d16699a502411efbc756acf8e18fa52d930e36918523c0415f3d7f"
+    },
+    {
+      "path": "src/pipeline/physics_pipeline/mod.rs",
+      "previous_sha256": "f690a026df3aa92f8772012454a24f04060281fc3afaaf6ac16206da706f64b6",
+      "sha256": "637afd12bd7e2fb84603da4872e8d115f1d094121a5b1c6a507177284dca030d"
+    },
+    {
+      "path": "src/pipeline/physics_pipeline/checkpoint.rs",
+      "previous_sha256": "62cc49a4a27452c0cf05b217f35f01582652684098d939446f928d85b47f1258",
+      "sha256": "62cc49a4a27452c0cf05b217f35f01582652684098d939446f928d85b47f1258"
+    },
+    {
+      "path": "src/pipeline/physics_pipeline/checkpoint_workspace.rs",
+      "previous_sha256": null,
+      "sha256": "4209fd543a43d85e31e0ae05d2a6278d5a1befd45e8a77a3145bd11d58697630"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T13:24:45.608335+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted_scoped_current_main_integration",
+  "head": "7f44f26ab75fe6aaefed148472a52d89aeb78034",
+  "manifest_sha256": "06f9d352b503203131d2355ca9c6eb32827127e38619beb5ddb49b1ebfe1e372",
+  "reviewed": [
+    "complete report",
+    "complete read-only verifier",
+    "source seam and immutable source map",
+    "current-main ancestry exemption",
+    "prior independently accepted producer archive"
+  ],
+  "verification": {
+    "command": "python3 docs/spikes/evidence/physics-world-main225/verify.py --verify-only",
+    "exit": 0,
+    "reaped": true,
+    "current_records": 35,
+    "frozen_inputs": 3428,
+    "physics_inputs": 1595,
+    "checks": 13,
+    "default_cpu": 202,
+    "fast8_cpu": 202,
+    "parallel_each": 10,
+    "paired_steps_each": 280,
+    "producer_records": 608,
+    "binaries": 5
+  },
+  "limitations": [
+    "No decoded native install",
+    "No live save admission",
+    "No GPU, device or performance gate",
+    "Source compiled on main225; exact disjoint renderer main226 join, not a repeat build"
+  ],
+  "publication": "May publish and merge after required exact-head fast SUCCESS; no phase gate approval"
+}

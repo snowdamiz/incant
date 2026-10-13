@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-13T13:41:43.217864+00:00",
+  "decision": "accepted_scoped_current_main_numerical_admission_integration",
+  "head": "42775e23ebfc058331d9b02b0f7b9439a7e999d9",
+  "manifest_sha256": "0541700c01768f95fac5207a30e78b292f2fd42149f5abe875195d6926bb1812",
+  "reviewed": [
+    "complete report",
+    "complete read-only verifier",
+    "producer final independent review fd0cba95",
+    "lock/default-feature isolation and accepted Error order seam"
+  ],
+  "verification": {
+    "command": "python3 docs/spikes/evidence/physics-numerics-main227/verify.py --verify-only",
+    "exit": 0,
+    "reaped": true,
+    "current_records": 48,
+    "producer_records": 270,
+    "frozen_inputs": 3788,
+    "physics_inputs": 1606,
+    "checks": 15,
+    "default_cpu": 214,
+    "fast8_cpu": 214,
+    "primitive_steps_each_mode": 144,
+    "unchanged_locked_package_identities": 968,
+    "normal_graph": "std-only",
+    "binaries": 4
+  },
+  "limits": [
+    "Numerical preflight only",
+    "No complete solver-work admission",
+    "No native constructor or decoded installation",
+    "No live save, phase, device or performance gate"
+  ],
+  "publication": "May publish/merge after exact-head required fast SUCCESS"
+}
