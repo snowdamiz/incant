@@ -1,0 +1,148 @@
+{
+  "base": "b4b0d5e919de8432a6c643d4486e0230ebddbc58",
+  "source": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/editor/ui/src/components/HierarchyMenu.test.tsx",
+    "sha256": "7f0d38de9b894c54d435aafed96c0d6da794c8a3ecdc577e23ac62ac8fa29393"
+  },
+  "freeze": {
+    "checkout": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+    "files": {
+      "editor/ui/src/components/HierarchyMenu.test.tsx": "7f0d38de9b894c54d435aafed96c0d6da794c8a3ecdc577e23ac62ac8fa29393",
+      "editor/ui/vitest.config.ts": "d3c44231f12597c7581bf921d9fee70e5a38965370d2ba915a8054ced2ef9b1e",
+      "editor/ui/src/test/setup.ts": "732408e95a00a7f8efccc5d248528edc8101c8f3cbba72b52a2e3daf161e7866",
+      "package-lock.json": "cbea068b7d9182270271319a7a77d24805b9c9c66ed5e9eb3e188d60e5337c60",
+      "package.json": "5a62d3a987c88b5376dfa3b9931820650d7e630e132d778ab7bc19d2dd832df5",
+      "editor/ui/package.json": "5cc3668910849eeda979f9e6f7a73abfdc3a530952422b4dbba87f24e7687e25"
+    },
+    "base": "b4b0d5e919de8432a6c643d4486e0230ebddbc58"
+  },
+  "checks": [
+    {
+      "name": "focused",
+      "argv": [
+        "npm",
+        "test",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "--run",
+        "src/components/HierarchyMenu.test.tsx",
+        "--reporter=verbose"
+      ],
+      "pid": 22057,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.9110617919941433,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/focused.stdout",
+        "sha256": "d4c4a7efcdd61db63304610638493927fcb94b6e61e867b97ac63d04363dfe8d"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/focused.stderr",
+        "sha256": "bea4d402b62e1c6a0478c814fdabeceb6672c11b69a8df11ef49183b5aca9e58"
+      }
+    },
+    {
+      "name": "full-ui",
+      "argv": [
+        "npm",
+        "test",
+        "--workspace",
+        "editor/ui"
+      ],
+      "pid": 22096,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 8.698004167003091,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/full-ui.stdout",
+        "sha256": "4b895c06e6610e7e29a128fc0f0aa29202f9c36d385823843b285ecbb4c13a74"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/full-ui.stderr",
+        "sha256": "30c87fc22103e396a89c0bc091bc610b0e6ab16074c337d66e281b09bfd51e3c"
+      }
+    },
+    {
+      "name": "ui-build",
+      "argv": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "pid": 22501,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.709255750000011,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/ui-build.stdout",
+        "sha256": "77605f5d625d47114610b9c786867a352f49e6c0bfaf27358c015faea08bac00"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/ui-build.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "pid": 22619,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.03556587499042507,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "pid": 22620,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.06104416699963622,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/hierarchy-menu-timeout-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "focused_tests": 3,
+  "ui_tests": 936,
+  "ui_files": 45,
+  "actual_hosted_failure": {
+    "job": 115406538226,
+    "candidate": "5e9fe37b45cf3fd0323807374b07cf39a3633efd",
+    "5s_failure_preserved": true
+  },
+  "diagnosis": "Full-suite scheduling and full-App axe scan cost are inferred; the original failure was not reproduced locally. Phase timing is local instrumentation only, with source restored before repair.",
+  "scope": "One test gets a bounded20s deadline; all assertions, production, CI and global timeout unchanged; no retries/skips or new Windows pass claim.",
+  "archive": {
+    "path": "docs/spikes/evidence/hierarchy-menu-timeout/records.json.gz",
+    "sha256": "2971f335d78b82fee8de060b7c4b5df7c6147c5d3b359c72e2b298b9d4d403f2",
+    "raw_sha256": "a494932c301c87370784393421b1048e073055f879806f1329912e12dde8166e",
+    "records": 20,
+    "payloads": 16
+  },
+  "verifier_sha256": "d9cade37585d60358fddff016ec0152a46c5da1d316ebfd86b485f066a9a5bea",
+  "final_review": "pending"
+}
