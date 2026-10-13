@@ -227,7 +227,6 @@ where
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         self.core.logs()
     }
-    /// Explicit trusted-owner opt-in for whole-session replacement.
     /// True only for a program with the implemented typed haptic capability.
     pub fn supports_haptics(&self) -> Result<bool, H::Error> {
         self.core.supports_haptics()
@@ -244,6 +243,7 @@ where
         self.core.take_haptics()
     }
 
+    /// Explicit trusted-owner opt-in for whole-session replacement.
     pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
         self.core.enable_restart_requests()
     }
@@ -417,7 +417,6 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         self.inner.core.logs()
     }
-    /// Explicit trusted-owner opt-in for whole-session replacement.
     /// True only for a program with the implemented typed haptic capability.
     pub fn supports_haptics(&self) -> Result<bool, H::Error> {
         self.inner.core.supports_haptics()
@@ -434,6 +433,7 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
         self.inner.core.take_haptics()
     }
 
+    /// Explicit trusted-owner opt-in for whole-session replacement.
     pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
         self.inner.core.enable_restart_requests()
     }

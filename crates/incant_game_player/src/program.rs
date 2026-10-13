@@ -54,4 +54,34 @@ mod tests {
         assert!(split_args(&args[..2]).is_err());
         assert!(load(Some("untrusted.wasm")).is_err());
     }
+    #[test]
+    #[cfg(feature = "static-module")]
+    fn static_haptics_capability_enable_is_explicitly_refused_without_affecting_input() {
+        let scene = incant_runtime::CookedScene::new(
+            incant_runtime::StableId(1u128.to_be_bytes()),
+            60,
+            vec![],
+        )
+        .unwrap();
+        let mut session = incant_script::NativeSession::new(
+            scene,
+            load(Some(
+                option_env!("INCANT_HAPTICS_STATIC_FIXTURE").unwrap_or("bulk"),
+            ))
+            .unwrap(),
+            Default::default(),
+        )
+        .unwrap();
+        assert!(!session.supports_haptics().unwrap());
+        let caps = incant_input::haptics::HapticCapabilities::default()
+            .with_gamepad(0, 1)
+            .unwrap();
+        assert!(matches!(
+            session.set_haptic_capabilities(caps),
+            Err(incant_script::SessionError::HapticsUnsupported)
+        ));
+        session.set_haptic_capabilities(Default::default()).unwrap();
+        session.tick(&[]).unwrap();
+        assert!(session.take_haptics().unwrap().is_empty());
+    }
 }

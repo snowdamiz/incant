@@ -17,9 +17,23 @@ struct Slot<D> {
     attempted: bool,
     device: Option<D>,
 }
+#[derive(Clone, Copy)]
+enum PauseFailure {
+    Backend,
+    Generation,
+}
+impl PauseFailure {
+    fn error(self) -> Error {
+        match self {
+            Self::Backend => Error::HapticBackend,
+            Self::Generation => Error::HapticGeneration,
+        }
+    }
+}
 pub(super) struct Haptics<D: Device> {
     slots: [Slot<D>; MAX_GAMEPADS],
     paused: bool,
+    pause_failure: Option<PauseFailure>,
 }
 impl<D: Device> Default for Haptics<D> {
     fn default() -> Self {
@@ -32,6 +46,7 @@ impl<D: Device> Default for Haptics<D> {
                 device: None,
             }),
             paused: true,
+            pause_failure: None,
         }
     }
 }
@@ -77,6 +92,9 @@ impl<D: Device> Haptics<D> {
         Ok(())
     }
     pub fn resume(&mut self) -> HapticCapabilities {
+        if self.pause_failure.is_some() {
+            return HapticCapabilities::default();
+        }
         self.paused = false;
         self.capabilities()
     }
@@ -95,34 +113,44 @@ impl<D: Device> Haptics<D> {
     }
     pub fn pause(&mut self) -> Result<(), Error> {
         if self.paused {
-            return Ok(());
+            return self
+                .pause_failure
+                .map(PauseFailure::error)
+                .map_or(Ok(()), Err);
         }
         self.paused = true;
-        let mut result = self.stop_all();
+        if self.stop_all().is_err() {
+            self.pause_failure = Some(PauseFailure::Backend);
+        }
         for slot in &mut self.slots {
             if slot.connected && slot.supported {
                 if let Some(next) = slot.generation.checked_add(1) {
                     slot.generation = next;
                 } else {
                     slot.supported = false;
-                    result = Err(Error::HapticGeneration);
+                    self.pause_failure.get_or_insert(PauseFailure::Generation);
                 }
             }
         }
-        result
+        self.pause_failure
+            .map(PauseFailure::error)
+            .map_or(Ok(()), Err)
     }
     fn stop_all(&self) -> Result<(), Error> {
         let mut result = Ok(());
         for slot in &self.slots {
-            if let Some(device) = &slot.device {
-                if let Err(error) = device.stop() {
-                    result = Err(error);
-                }
+            if let Some(device) = &slot.device
+                && let Err(error) = device.stop()
+            {
+                result = Err(error);
             }
         }
         result
     }
     pub fn dispatch(&mut self, requests: &HapticRequests) -> Result<(), Error> {
+        if let Some(failure) = self.pause_failure {
+            return Err(failure.error());
+        }
         let capabilities = self.capabilities();
         let mut desired = [None; MAX_GAMEPADS];
         for request in requests.iter() {

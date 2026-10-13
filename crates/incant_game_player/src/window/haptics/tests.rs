@@ -130,3 +130,39 @@ fn haptics_unavailable_effect_creation_is_not_retried_or_reported_as_supported()
     .unwrap();
     assert!(host.resume().is_empty());
 }
+
+#[test]
+fn haptics_failed_stop_remains_visible_through_repeated_exit_cleanup() {
+    struct FailedStop(Rc<RefCell<usize>>);
+    impl Device for FailedStop {
+        fn rumble(&self, _: f32, _: f32, _: u32) -> Result<(), Error> {
+            Ok(())
+        }
+        fn stop(&self) -> Result<(), Error> {
+            *self.0.borrow_mut() += 1;
+            Err(Error::HapticBackend)
+        }
+    }
+    let calls = Rc::new(RefCell::new(0));
+    let mut host = Haptics::default();
+    host.connect(0, true, || Some(FailedStop(calls.clone())))
+        .unwrap();
+    host.resume();
+    assert!(matches!(host.pause(), Err(Error::HapticBackend)));
+    let count = *calls.borrow();
+    assert!(matches!(host.pause(), Err(Error::HapticBackend)));
+    assert_eq!(*calls.borrow(), count);
+    assert!(host.resume().is_empty());
+    assert!(matches!(
+        host.dispatch(&HapticRequests::default()),
+        Err(Error::HapticBackend)
+    ));
+}
+#[test]
+fn haptics_duration_quantization_matches_pinned_driver_without_device() {
+    use gilrs::ff::Ticks;
+    assert_eq!(Ticks::from_ms(1), Ticks::from_ms(50));
+    assert_eq!(Ticks::from_ms(125), Ticks::from_ms(150));
+    assert_ne!(Ticks::from_ms(125), Ticks::from_ms(100));
+    assert_eq!(Ticks::from_ms(4_999), Ticks::from_ms(5_000));
+}
