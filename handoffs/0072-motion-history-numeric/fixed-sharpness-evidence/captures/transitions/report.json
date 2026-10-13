@@ -1,0 +1,349 @@
+{
+  "case": "transitions",
+  "checks": {
+    "cut_advances_epoch": true,
+    "cut_restarts_history_at_phase_zero": true,
+    "frames_match_plan": true,
+    "half_scale_restarts_history": true,
+    "one_owner_through_cut_and_scale_changes": true,
+    "output_scale_restarts_history": true,
+    "reference_has_no_temporal_state": true,
+    "view_a_run_uninterrupted": true
+  },
+  "frames": [
+    {
+      "name": "a-1",
+      "rgba_sha256": "5bf8f23d340f1e46a56794399737baa9cec5e066caef1cdbd0bc379b92022668",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": false,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 0,
+        "sequence": 1
+      }
+    },
+    {
+      "name": "a-2",
+      "rgba_sha256": "dc6514d550fadcba2a52feb489493b528800491681b65ec6421879ec1dfdce20",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 1,
+        "sequence": 2
+      }
+    },
+    {
+      "name": "a-3",
+      "rgba_sha256": "574418572e5e916e1dcc367098cd9dc44abb2f045fba1596d831aca2a389c720",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 2,
+        "sequence": 3
+      }
+    },
+    {
+      "name": "a-4",
+      "rgba_sha256": "249e67f4683ad0fb601955919f5acd9d55db81f578cdfbbe6cf1545b567373b7",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 3,
+        "sequence": 4
+      }
+    },
+    {
+      "name": "a-5",
+      "rgba_sha256": "895612426cd6df08e0681caf656f81adc537db41707e489a57b18da3a482fe44",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 4,
+        "sequence": 5
+      }
+    },
+    {
+      "name": "a-6",
+      "rgba_sha256": "c85b4b25c1ec7354d144eccd0493014d2b37736bc2d27304fbb433852f05d731",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 5,
+        "sequence": 6
+      }
+    },
+    {
+      "name": "cut-7",
+      "rgba_sha256": "6d1493c1d5da3bd8ee2aedd5cbf34e84a97aa71a0dab342b1629057a3a9b0136",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 2,
+        "has_previous": false,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 0,
+        "sequence": 7
+      }
+    },
+    {
+      "name": "b-8",
+      "rgba_sha256": "644f4a8a07af070bd4d230e05c89cffaed9fe5d8ba71e503e56f6ac52bd0105c",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 2,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 1,
+        "sequence": 8
+      }
+    },
+    {
+      "name": "drs-9",
+      "rgba_sha256": "fbe137378e43ab08c3e7c43d2f9ec3372831d4740a7fc4f8b2aa941aedcd2145",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 3,
+        "has_previous": false,
+        "internal_size": [
+          480,
+          270
+        ],
+        "jitter_phase": 0,
+        "sequence": 9
+      }
+    },
+    {
+      "name": "drs-10",
+      "rgba_sha256": "9f9ba14a4c958c5f69945f01871eb2bb356e94686757d6427b1ddd828a1df796",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 3,
+        "has_previous": true,
+        "internal_size": [
+          480,
+          270
+        ],
+        "jitter_phase": 1,
+        "sequence": 10
+      }
+    },
+    {
+      "name": "drs-11",
+      "rgba_sha256": "d17a0d71a0b7162b8782acabef4ea78dac1141aa94d373c920813d1e3bf118b5",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 3,
+        "has_previous": true,
+        "internal_size": [
+          480,
+          270
+        ],
+        "jitter_phase": 2,
+        "sequence": 11
+      }
+    },
+    {
+      "name": "full-12",
+      "rgba_sha256": "6d1493c1d5da3bd8ee2aedd5cbf34e84a97aa71a0dab342b1629057a3a9b0136",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 4,
+        "has_previous": false,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 0,
+        "sequence": 12
+      }
+    },
+    {
+      "name": "off-b",
+      "rgba_sha256": "4f3f379e6786934d4cb2c2afcd723273c1f780406b62c0055ac4ffba53a73f55",
+      "temporal": null
+    }
+  ],
+  "frames_rendered": 13,
+  "half_scale_internal_size": [
+    480,
+    270
+  ],
+  "observations": {
+    "b8_vs_off_b": {
+      "edge": {
+        "changed_over_threshold": 10963,
+        "max_delta": 151,
+        "mean_delta": 13.449179086497091,
+        "pixels": 29053
+      },
+      "identical": false,
+      "interior": {
+        "changed_over_threshold": 856,
+        "max_delta": 26,
+        "mean_delta": 0.08812151704209896,
+        "pixels": 489347
+      }
+    },
+    "cut_f7_vs_off_b": {
+      "edge": {
+        "changed_over_threshold": 11234,
+        "max_delta": 164,
+        "mean_delta": 14.002719168416343,
+        "pixels": 29053
+      },
+      "identical": false,
+      "interior": {
+        "changed_over_threshold": 862,
+        "max_delta": 49,
+        "mean_delta": 0.06962543961646847,
+        "pixels": 489347
+      }
+    },
+    "drs_consecutive": [
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 12591,
+            "max_delta": 139,
+            "mean_delta": 4.638729219013527,
+            "pixels": 29053
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 309,
+            "max_delta": 67,
+            "mean_delta": 0.057306982570650276,
+            "pixels": 489347
+          }
+        },
+        "from": "drs-9",
+        "to": "drs-10"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 12868,
+            "max_delta": 119,
+            "mean_delta": 4.236429972808316,
+            "pixels": 29053
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 356,
+            "max_delta": 92,
+            "mean_delta": 0.05902355588161366,
+            "pixels": 489347
+          }
+        },
+        "from": "drs-10",
+        "to": "drs-11"
+      }
+    ],
+    "epochs": {
+      "cut": 2,
+      "drs": 3,
+      "restored": 4,
+      "view_a": 1
+    },
+    "restored_f12_vs_off_b": {
+      "edge": {
+        "changed_over_threshold": 11234,
+        "max_delta": 164,
+        "mean_delta": 14.002719168416343,
+        "pixels": 29053
+      },
+      "identical": false,
+      "interior": {
+        "changed_over_threshold": 862,
+        "max_delta": 49,
+        "mean_delta": 0.06962543961646847,
+        "pixels": 489347
+      }
+    }
+  },
+  "outcome": "pass",
+  "pngs": [
+    {
+      "name": "transition-cut-f7.png",
+      "rgba_sha256": "6d1493c1d5da3bd8ee2aedd5cbf34e84a97aa71a0dab342b1629057a3a9b0136",
+      "sha256": "5bc0618bc5a5f44fbbdf96ed1b7fca0ca2d74d836e90fffb061e5f9d25a6046c"
+    },
+    {
+      "name": "transition-drs-f9.png",
+      "rgba_sha256": "fbe137378e43ab08c3e7c43d2f9ec3372831d4740a7fc4f8b2aa941aedcd2145",
+      "sha256": "89097514f9ef2b968bf3d9e3776b4e5a89317b8960179842cf0ca206caf9a6f6"
+    }
+  ],
+  "renderer": {
+    "adapter": {
+      "backend": "Metal",
+      "device": 0,
+      "device_type": "IntegratedGpu",
+      "driver": "",
+      "driver_info": "",
+      "name": "Apple M5 Pro",
+      "vendor": 0
+    },
+    "adapter_timestamp_features": {
+      "TIMESTAMP_QUERY": true,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "device_timestamp_features": {
+      "TIMESTAMP_QUERY": false,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "queue_timestamp_period_ns": 1.0,
+    "timing_stats": {
+      "abandoned": 0,
+      "enabled": false,
+      "pending": 0,
+      "ready": 0,
+      "retired": 0,
+      "skipped": 0
+    }
+  },
+  "review_config": {
+    "absolute_depth": 0.019999999552965164,
+    "history_weight": 0.8999999761581421,
+    "reactive_strength": 0.5,
+    "reactive_threshold": 4.0,
+    "relative_depth": 0.05000000074505806
+  },
+  "ui_submissions": 0
+}

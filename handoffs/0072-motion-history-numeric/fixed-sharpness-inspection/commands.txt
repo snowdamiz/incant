@@ -1,0 +1,81 @@
+# Run from the worktree root; CPU only; reads published PNGs and the frozen fixture constants.
+# python3 is /opt/homebrew/bin/python3 (3.14). B = handoffs/0072-motion-history-numeric/temporal-coverage-screenshots (accepted baseline), C = handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots (C-reg).
+
+# cascade_texels.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/cascade_texels.py
+
+# off_edge_clusters-viewport-pan-creg.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-on-f24.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-off-f24.png 9
+
+# off_edge_clusters-object-baseline.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-object-on-f8.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-off-f8.png 9
+
+# off_edge_clusters-object-creg.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-on-f8.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-off-f8.png 9
+
+# off_edge_clusters-pan-baseline.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png 9
+
+# off_edge_clusters-pan-creg.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png 9
+
+# region_compare-object-shadow.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/region_compare.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-off-f8.png handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-object-on-f8.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-on-f8.png 560,295,640,315
+
+# registration_split-skinned-baseline.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/registration_split.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-off-f6.png 360,180,640,390
+
+# registration_split-skinned-creg.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/registration_split.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-off-f6.png 360,180,640,390
+
+# pixels-skinned-corner.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools window 206 131 8 1 handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-off-f6.png
+
+# pixels-excluded-edge.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools window 357 106 8 1 handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/excluded-on-f8.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/excluded-on-f8.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/excluded-off.png
+
+# pixels-far-posts.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools window 424 48 12 0 handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-off.png handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-on-f16.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-on-f16.png handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-activity.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-activity.png
+
+# pixels-wall-base.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools column 400 236 250 handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-off.png handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-on-f16.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-on-f16.png
+
+# pixels-object-shadow.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools column 590 298 312 handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-off-f8.png handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-object-on-f8.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-on-f8.png
+
+# pixels-pan-post-shadow.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools window 380 54 10 1 handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-on-f6.png
+
+# localize-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/localize.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-off.png baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-on-f16.png,handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-activity.png creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-on-f16.png,handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-activity.png
+
+# activity_bands-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/activity_bands.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-off.png baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-activity.png creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-activity.png
+
+# activity_bands-excluded.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/activity_bands.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/excluded-off.png baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/excluded-activity.png creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/excluded-activity.png
+
+# cube_profile.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/cube_profile.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-off-f8.png baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-object-on-f8.png creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-on-f8.png
+
+# cube_velocity.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/cube_velocity.py
+
+# repair_model.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/repair_model.py
+
+# Viewing aids (all exit 0): magnified side-by-side crops written to a scratch directory
+# outside the worktree (<crops>), not committed. Panels in argument order, magenta separators.
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> vp-shadow:viewport-on-f24.png:viewport-off-f24.png:440,260,700,310:3 handoffs/0067-dynamic-resolution/tools creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> vp-left:viewport-on-f24.png:viewport-off-f24.png:28,130,88,170:6 handoffs/0067-dynamic-resolution/tools creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> vp-right:viewport-on-f24.png:viewport-off-f24.png:880,190,930,230:6 handoffs/0067-dynamic-resolution/tools creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> pan-shadow:motion-pan-on-f6.png:motion-pan-off-f6.png:540,250,840,330:2 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> skinned-a:skinned-on-f6.png:skinned-off-f6.png:460,190,630,370:3 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> cube:motion-object-on-f8.png:motion-object-off-f8.png:410,160,560,250:3 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> objshadow:motion-object-on-f8.png:motion-object-off-f8.png:540,280,660,330:4 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> wallbase:motion-object-on-f8.png:motion-object-off-f8.png:350,232,450,254:5 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> farpost:stationary-on-f16.png:stationary-off.png:400,28,470,70:6 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> farpost-act:stationary-activity.png:stationary-off.png:400,28,470,70:6 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> grille:stationary-on-f16.png:stationary-off.png:560,170,640,230:5 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> rightdiag:stationary-on-f16.png:stationary-off.png:600,40,700,90:4 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> excl:excluded-on-f8.png:excluded-off.png:300,100,420,170:4 handoffs/0067-dynamic-resolution/tools base=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots creg=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots

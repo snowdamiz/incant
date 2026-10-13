@@ -1,0 +1,15 @@
+{
+  "packet": "0072-motion-history-numeric",
+  "stage": "fixed-sharpness-visual",
+  "holder": "Claude Opus 5.5 Max sharpness comparison",
+  "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+  "build_record_sha256": "9719632b0aedec14082541b06349fa48cdeb4f9827f60984c9e824f49ff817fa",
+  "prior_bloom_release_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/bloom-main219-001/gpu/released.json",
+  "prior_bloom_release_sha256": "17d6204920c92d846243e26817e701ae441a9b835b95789ac8a8403ee1214d36",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/target-lease.json",
+  "prior_build_release_sha256": "aaa8f2eba8d87d88ec416a6e4d83c897d949d6eae11a2fb662bf9607d6850d88",
+  "prior_tests_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/build/tests.json",
+  "prior_tests_sha256": "ed6ef37f5d9a99d122be4147e47feacf52c87a68f92c168ffe71ccc0c7ac2d59",
+  "scope": "252 numerical plus105 world/UI submissions,16PNG; fixed plan cap372; no retries or threshold changes",
+  "at": "2026-10-13T11:58:07.237891+00:00"
+}

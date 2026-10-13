@@ -1,0 +1,26 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "fixed-sharpness-visual",
+ "holder": "Claude Opus 5.5 Max sharpness comparison",
+ "released_at": "2026-10-13T12:01:17.481192+00:00",
+ "children": 15,
+ "gpu_children": 12,
+ "stop_latched": false,
+ "stopped": null,
+ "debited": {
+  "frames": 348,
+  "ui_submissions": 9,
+  "pngs": 16
+ },
+ "debits": 10,
+ "debits_without_ledger_row": [],
+ "frames_rendered": 96,
+ "ui_submissions": 9,
+ "pngs_written": 16,
+ "ledger_sha256": "392199064025507d12384b017ecbae16e8db5c3e9c3a94578757f7348bd8b37c",
+ "debits_sha256": "66ac3a4794397b54cb06f22a70e6226bc5aebbb941a79af4b533cf155163c0aa",
+ "grant_sha256_at_release": "d5e500578c426eef0fa6ef365f87178d915d86d8a62aa7d11f229def83dc0db9",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "GPU released for root; review-ready.json untouched."
+}

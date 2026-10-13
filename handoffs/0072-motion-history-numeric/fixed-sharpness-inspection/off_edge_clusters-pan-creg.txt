@@ -1,0 +1,3 @@
+off-edge pixels >= 9 steps: 2
+  cell x384-407 y48-71: 2 px, bbox (385,58)-(386,58), max 10
+worst (385, 58): on (174, 173, 170) off (184, 183, 179)

@@ -1,0 +1,148 @@
+{
+ "holder": "root-supervised sharpness comparison CPU build",
+ "build_grant_sha256": "0907ee4faf48f12d0b17b4f7d5eca666f639be5201b49b7a9274c44c0f5fc2b5",
+ "source_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+ "tools": {
+  "head": "cd4f4cd751df6bdaa8f47a15c51a70e9550b2521",
+  "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+  "plan_sha256": "c874115d80f54d3bf458b12204979dc2732016eef63ea41331b81e4dc703b9c3",
+  "helper_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "source": {
+  "commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+  "tree": "fd3b43e2a73bc0d56071abe659689c0e5594fba2",
+  "files": 18096,
+  "manifest_sha256": "04368be7d6b7f49e46c28f3b0185e427c10eab6bfe1da07d4c9bbc5455b55ea0",
+  "helper_copy_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "source_record_sha256": "a76d80978525463e26c12a159b68b4ead7bf51cae5718c0ba37762251e3f7480",
+ "helper_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338",
+ "helper_copy": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout/crates/incant_render/tests/temporal_visual_review.rs",
+ "frozen": {
+  "temporal_visual_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/bin/review/temporal_visual_review",
+   "sha256": "81cb64692495792989fae28681a76de0e3085cc9a32abc27e3721b1a49d36980",
+   "bytes": 18249272,
+   "mode": "0o555",
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-624aceeb420fb850",
+   "fresh": false,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout/crates/incant_render#0.0.1"
+  }
+ },
+ "incant_render_library": [
+  {
+   "target": "incant_render",
+   "kind": [
+    "lib"
+   ],
+   "test": false,
+   "fresh": true,
+   "executable": null,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout/crates/incant_render#0.0.1",
+   "filenames": {
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "da6c89afedd2494aca3304578231fcb63a9b243717fde6d1cfef92a16024b0d7",
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "f3a8296a2893d7b2b899fad43c227ca2b792af82a732070c5a13564cfc26caa4"
+   }
+  }
+ ],
+ "library_same_as_libtests": null,
+ "library_linkage": {
+  "same_ordinary_library": null,
+  "same_package_features": true,
+  "valid": true,
+  "ordinary_library_emitted_by_unit_build": false
+ },
+ "builds": [
+  {
+   "label": "review",
+   "kind": "build",
+   "holder": "root-supervised sharpness comparison CPU build",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout/tools/cargo",
+    "test",
+    "-p",
+    "incant_render",
+    "--test",
+    "temporal_visual_review",
+    "--no-run",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout",
+   "env": {
+    "inherited_keys_values_not_recorded": [
+     "HOME"
+    ],
+    "overrides": {
+     "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+     "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/tmp/review",
+     "CARGO_TERM_COLOR": "never",
+     "RUSTUP_AUTO_INSTALL": "0"
+    }
+   },
+   "pid": 6082,
+   "started": "2026-10-13T11:52:48.718143+00:00",
+   "ended": "2026-10-13T11:52:50.444725+00:00",
+   "exit": 0,
+   "timed_out": false,
+   "wait_error": null,
+   "timeout_s": 2700,
+   "group_empty_after": true,
+   "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-review.stdout.jsonl",
+   "stdout_sha256": "39e00a834cb79580c8e89ed164433991af97237a11d97fff32288684e3e2cd9b",
+   "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-review.stderr.txt",
+   "stderr_sha256": "703ec783bbd192d53429f0e1032abd24c962353b92a5d472a302ef648b9b2127",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": true,
+     "executable": null,
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "da6c89afedd2494aca3304578231fcb63a9b243717fde6d1cfef92a16024b0d7",
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "f3a8296a2893d7b2b899fad43c227ca2b792af82a732070c5a13564cfc26caa4"
+     }
+    },
+    {
+     "target": "temporal_visual_review",
+     "kind": [
+      "test"
+     ],
+     "test": true,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-624aceeb420fb850",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-624aceeb420fb850": "81cb64692495792989fae28681a76de0e3085cc9a32abc27e3721b1a49d36980"
+     }
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T11:52:50.481971+00:00"
+}

@@ -1,0 +1,54 @@
+40x40 grid; 3 px border excluded where noted; contrast 0.45; colours/depths FG (0.05, 5.0), BG (0.5, 10.0).
+== A/B. static diagonal step (slope 1/2) and thin 45-degree line: last 8 of 32 frames; flicker = largest per-frame change error, fraction of contrast; detail = ratio to the box ideal
+  diagonal step        baseline                flicker 0.069 | detail 0.54
+  diagonal step        creg                    flicker 0.109 | detail 0.94
+  diagonal step        creg+ramp               flicker 0.109 | detail 0.94
+  diagonal step        creg+regblend           flicker 0.042 | detail 0.88
+  diagonal step        creg+depth2x2           flicker 0.109 | detail 0.94
+  diagonal step        creg+regblend+depth2x2  flicker 0.042 | detail 0.88
+  thin 45-degree line  baseline                flicker 0.052 | detail 0.42
+  thin 45-degree line  creg                    flicker 0.130 | detail 1.11
+  thin 45-degree line  creg+ramp               flicker 0.130 | detail 1.11
+  thin 45-degree line  creg+regblend           flicker 0.034 | detail 0.99
+  thin 45-degree line  creg+depth2x2           flicker 0.130 | detail 1.11
+  thin 45-degree line  creg+regblend+depth2x2  flicker 0.034 | detail 0.99
+== C. static dark posts with a 0.7 px gap (column 19) and a 0.5 px gap (column 24) over a far background: last 8 of 32 frames; largest per-frame change at the gap columns (fraction of contrast) and the resolve path at those pixels over frames 2-32
+  gap column 19 baseline                max change 0.301 | mean dark coverage 0.85 (ideal 0.38) | refused 0% | clamp active 10% of accumulations
+  gap column 24 baseline                max change 0.132 | mean dark coverage 0.93 (ideal 0.50) | refused 0% | clamp active 0% of accumulations
+  gap column 19 creg                    max change 0.524 | mean dark coverage 0.76 (ideal 0.38) | refused 26% | clamp active 17% of accumulations
+  gap column 24 creg                    max change 0.151 | mean dark coverage 0.92 (ideal 0.50) | refused 48% | clamp active 25% of accumulations
+  gap column 19 creg+ramp               max change 0.524 | mean dark coverage 0.76 (ideal 0.38) | refused 26% | clamp active 17% of accumulations
+  gap column 24 creg+ramp               max change 0.151 | mean dark coverage 0.92 (ideal 0.50) | refused 48% | clamp active 25% of accumulations
+  gap column 19 creg+regblend           max change 0.392 | mean dark coverage 0.82 (ideal 0.38) | refused 26% | clamp active 17% of accumulations
+  gap column 24 creg+regblend           max change 0.126 | mean dark coverage 0.94 (ideal 0.50) | refused 48% | clamp active 25% of accumulations
+  gap column 19 creg+depth2x2           max change 0.524 | mean dark coverage 0.76 (ideal 0.38) | refused 0% | clamp active 26% of accumulations
+  gap column 24 creg+depth2x2           max change 0.151 | mean dark coverage 0.92 (ideal 0.50) | refused 0% | clamp active 48% of accumulations
+  gap column 19 creg+regblend+depth2x2  max change 0.392 | mean dark coverage 0.82 (ideal 0.38) | refused 0% | clamp active 26% of accumulations
+  gap column 24 creg+regblend+depth2x2  max change 0.126 | mean dark coverage 0.94 (ideal 0.50) | refused 0% | clamp active 48% of accumulations
+== D. pixel-aligned vertical edge after a history reset: edge position bias (px, + = dark side extends right) after 1, 6 and 16 frames
+  baseline                f1 +0.375 | f6 +0.028 | f16 +0.012
+  creg                    f1 +0.375 | f6 +0.204 | f16 +0.066
+  creg+ramp               f1 +0.375 | f6 +0.060 | f16 +0.019
+  creg+regblend           f1 +0.375 | f6 +0.151 | f16 +0.056
+  creg+depth2x2           f1 +0.375 | f6 +0.204 | f16 +0.066
+  creg+regblend+depth2x2  f1 +0.375 | f6 +0.151 | f16 +0.056
+== E. dark box moving right over the far background: darkness beyond the box at the last frame, shown minus box ideal as a fraction of contrast; trailing = mean over rows 14-25 left of the box, top control = mean over the box's columns above it
+  2.3 px/frame baseline                trailing 1 px +0.046, 2 px +0.000, 3 px +0.000 | top 1 px +0.098, 2 px +0.000
+  2.3 px/frame creg                    trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  2.3 px/frame creg+oracle             trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  2.3 px/frame creg+regblend           trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  2.3 px/frame creg+depth2x2           trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  2.3 px/frame creg+regblend+depth2x2  trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  6.3 px/frame baseline                trailing 1 px +0.047, 2 px +0.000, 3 px +0.000 | top 1 px +0.090, 2 px +0.000
+  6.3 px/frame creg                    trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  6.3 px/frame creg+oracle             trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  6.3 px/frame creg+regblend           trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  6.3 px/frame creg+depth2x2           trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+  6.3 px/frame creg+regblend+depth2x2  trailing 1 px +0.000, 2 px +0.000, 3 px +0.000 | top 1 px +0.000, 2 px +0.000
+== F. diagonal bar moving 0.5 px/frame along its normal (model2d's disocclusion case): largest residue wholly 2 px or more behind the bar over the last 8 of 64 frames, fraction of contrast
+  baseline                residue 0.000
+  creg                    residue 0.000
+  creg+ramp               residue 0.000
+  creg+regblend           residue 0.000
+  creg+depth2x2           residue 0.000
+  creg+regblend+depth2x2  residue 0.000

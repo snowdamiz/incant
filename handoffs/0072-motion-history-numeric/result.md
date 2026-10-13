@@ -1,5 +1,25 @@
 # 0072 result: retained motion-data GPU execution
 
+> **Current result: [`sharpness-result.md`](sharpness-result.md).** This is the
+> frozen C-reg (`a143b5c0`) sharpness comparison.
+>
+> - **Integrity:** passed.
+> - **Quality comparison:** **failed**, on 13 of 37 frozen thresholds. C-reg is
+>   much sharper than the accepted baseline, but less stable and misregistered
+>   after resets.
+>
+> **Stage records, in order:**
+> 1. this file and `preflight-result.md`;
+> 2. `temporal-result.md` and `preparation-result.md`;
+> 3. `temporal-visual-result.md`;
+> 4. `corrected-preparation-result.md` and `corrected-visual-result.md`;
+> 5. `coverage-preparation.md` and `temporal-coverage-result.md` (the accepted
+>    baseline);
+> 6. `fixed-sharpness-design.md`, `sharpness-preparation.md`, root's
+>    `sharpness-build-repair.md`, and `sharpness-result.md`.
+>
+> The text below is the original retained motion-data result, unchanged.
+
 **Status: PASSED.** I ran the corrected runner once. Both exact compiled tests
 ran once each and passed, and the GPU was released with no live process. No
 phase or performance gate is claimed.

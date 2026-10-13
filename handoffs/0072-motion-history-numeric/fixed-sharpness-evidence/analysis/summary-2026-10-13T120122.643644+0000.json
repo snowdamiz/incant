@@ -1,0 +1,125 @@
+{
+ "recorded": "2026-10-13T12:01:22.643644+00:00",
+ "verdict": "pass",
+ "complete": true,
+ "problems": [],
+ "cases": {
+  "probe": {
+   "present": true,
+   "problems": []
+  },
+  "stationary": {
+   "present": true,
+   "problems": []
+  },
+  "motion": {
+   "present": true,
+   "problems": []
+  },
+  "excluded": {
+   "present": true,
+   "problems": []
+  },
+  "transitions": {
+   "present": true,
+   "problems": []
+  },
+  "skinned": {
+   "present": true,
+   "problems": []
+  },
+  "timing": {
+   "present": true,
+   "problems": []
+  },
+  "viewport": {
+   "present": true,
+   "problems": []
+  }
+ },
+ "bindings": {
+  "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+  "plan": "c874115d80f54d3bf458b12204979dc2732016eef63ea41331b81e4dc703b9c3",
+  "grant": "d5e500578c426eef0fa6ef365f87178d915d86d8a62aa7d11f229def83dc0db9",
+  "build_grant": "0907ee4faf48f12d0b17b4f7d5eca666f639be5201b49b7a9274c44c0f5fc2b5",
+  "build_record": "9719632b0aedec14082541b06349fa48cdeb4f9827f60984c9e824f49ff817fa",
+  "lease": "aaa8f2eba8d87d88ec416a6e4d83c897d949d6eae11a2fb662bf9607d6850d88",
+  "ledger": "392199064025507d12384b017ecbae16e8db5c3e9c3a94578757f7348bd8b37c",
+  "debits": "66ac3a4794397b54cb06f22a70e6226bc5aebbb941a79af4b533cf155163c0aa",
+  "latch": "0bf2398cd4585e6cc1928e652ff9d6934586dd3db49c81dd1d0ccd57d86f89d0",
+  "stop": null,
+  "files": {
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-libtests.stdout.jsonl": "6d520606fe5486a73a8678846a45bd6f373b8ae55f739d7310a7d2d748a7fb13",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-libtests.stderr.txt": "71129b09f2f3019e50cd43f5a1a78b6f553e9f421604ef63d39646fa0d76cc02",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-review.stdout.jsonl": "39e00a834cb79580c8e89ed164433991af97237a11d97fff32288684e3e2cd9b",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-review.stderr.txt": "703ec783bbd192d53429f0e1032abd24c962353b92a5d472a302ef648b9b2127",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-lint.stdout.jsonl": "013885b8a73b3d5479d4e25dcdaf2449cc51cb733c0b32b9be34ca8d543c88c5",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-lint.stderr.txt": "64d6e5fa0a6cae3a50f63769e5c3cdeb729a75e777a278a0f2975a52e8e30461",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-list-lib.stdout.txt": "dc96937e87290b8aefd839ae3f2758feb58ad2cd482c0bcf16dbfb8f6f2f7782",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-list-lib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-numeric-resolve.stdout.txt": "59762f014320b6b5dbe89adec9003fa9e09cad7efbe3512952ebf4978906f783",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-numeric-resolve.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-numeric-coverage.stdout.txt": "bf25b40c43fe4120fae2ca2a075fafe9005a3347696765407bc225f0355ea53b",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-numeric-coverage.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-list-review.stdout.txt": "b6e02a049df0d8e742f170a9d61fdf3e666521c2b98748bec9951464f4fd3d43",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-list-review.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-probe.stdout.txt": "0a13c61fef3aad1688f1e0d7a503aa2f0aaf936feb82539df52643c95bf54841",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-probe.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/probe": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/probe/events.jsonl": "553b06f0bfa9111071dcd84b780d0df36901401c5c61b9f1dd5b709155cb26a8",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/probe/report.json": "e178aeab40cba8d20607d7c90047df98a425745f8b52ec890e6ef4e63089234f",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-stationary.stdout.txt": "40d360f66414c3fad434d4af003a7e8c2aae36ba1bdd58a62d4948be082d4189",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-stationary.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/stationary": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/stationary/events.jsonl": "48924defad1b35c735c59cd5f992931e381969430c08d72a43c2293fcca57876",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/stationary/report.json": "9b143d47b7099fdd750c15f76fa7baae6837c6d95c51f1bebe072f03c6999c8a",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/stationary/stationary-activity.png": "576979e65df4ff7bf374407844813c35fa7c3da0008200a15248927821cabf4c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/stationary/stationary-off.png": "2485512777e509896851e616d78d01f6742da7bbabd19a97915682650e738d2c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/stationary/stationary-on-f16.png": "8d7b20a90014a50ecbcee710c1c3c21491049feed83573a3f6344e5da28679cd",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-motion.stdout.txt": "871191bb6406137db039993838ecb33038c72455139a2c8d681d2c57992676b2",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-motion.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/motion": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/motion/events.jsonl": "6470a5e4c290fe2ca85c50a945a22f96fa987b2ed2036b7e00f544419e288c46",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/motion/motion-object-off-f8.png": "212ac1a0e0af830729f9113bc797d063b0b5a2fbfd6194d29ae8a4d9281f9757",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/motion/motion-object-on-f8.png": "c39f80b8e8f8233b65eac3bd96ba58f4fd5fccab49f92723e191c494ba2b1ed4",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/motion/motion-pan-off-f6.png": "30aa3e196bca8145b45d28d7da2e85ad52e3926c23bb5ca884a29cae1d00154b",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/motion/motion-pan-on-f6.png": "2f18c032e9a4e383a8b0c92c646206d0ccbac8bda63dbe7afa8cee6183a49f12",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/motion/report.json": "bfc0d2da2b1d91fb54b01e44120edabf4c63bcd99cd100faed452ebdd4f5f81b",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-excluded.stdout.txt": "78db3ee4d42c05bbcb0ceb1cff9b523cb62c8326f7947c7c3c33e03b4da8316e",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-excluded.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/excluded": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/excluded/events.jsonl": "dc937d4ff3eeb1b55bb4c2cdcd9a21047f354e49c91cedfeae169247b1a62dec",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/excluded/excluded-activity.png": "3d29ab09c65fa7bcef39a96361ca7a4d439aa2b55147dbef42c4c1b91653c067",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/excluded/excluded-off.png": "d1592ae5ed1f392e8b3972d61b4660ac74a4a0545b221a8c59115875aa203527",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/excluded/excluded-on-f8.png": "6a4e116cc5261d752c5175fc0fc33319dda5f11663a95f61263f5f234258fc1a",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/excluded/report.json": "f39272d4ab5701188302cdfa38c67702fb28c35318de75a92e62e246e0a56a24",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-transitions.stdout.txt": "8fd37c32c7fe95c44981ffb5d21ca5fbe03b49f727fb4d35b4d5b012f09e1906",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-transitions.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/transitions": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/transitions/events.jsonl": "86e67575edda367d63502b592b6465f5a1fa899969e700106ede22efff9f0a35",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/transitions/report.json": "568c24ae91df75eb699215105218d5f20dbbc9cb91d70cd52bd31293f036cc78",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/transitions/transition-cut-f7.png": "5bc0618bc5a5f44fbbdf96ed1b7fca0ca2d74d836e90fffb061e5f9d25a6046c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/transitions/transition-drs-f9.png": "89097514f9ef2b968bf3d9e3776b4e5a89317b8960179842cf0ca206caf9a6f6",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-skinned.stdout.txt": "79aec2dcd74393a2dc76150d502d5681e36482fb349370ef4e04c48b8dd175af",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-skinned.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/skinned": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/skinned/events.jsonl": "f8ea95e3f2e795aa711f2c067f88a475940a169e635fffa5671311958f03fa20",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/skinned/report.json": "d0d4259762ac8cff3d44276342906c6baddee47c18df606c643cdb447e391830",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/skinned/skinned-off-f6.png": "9dc53d04deebc66b38a873ec680f39e89ce31afcbe59cefaafa0d498ec0b0985",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/skinned/skinned-on-f6.png": "ae4ab390d309314f02a4564eddbdd46063c908d782e31360c10c7ace8fa9b924",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-timing.stdout.txt": "0f97e2c3f3e52f2dc409596f0d24bbbef488b4a3e871ea32d283a846fc76c823",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-timing.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/timing": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/timing/events.jsonl": "3ed49346d979b02eabd407cf1d369386484e9d2fa66ceb178ca4f7755b950f82",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/timing/report.json": "750de83dda8db1545d71484109c8bebc0cf0ff3ce8fa14a7e36d8d65353e5faf",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-viewport.stdout.txt": "6b294485fd7ac99d0e0deaa3337e727577d15ae0a6df239516393f9505f57b7e",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/gpu-review-viewport.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/viewport": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/viewport/events.jsonl": "ad67fc3bdf9d3e1227c8d76508a9747a805055f442df25429ca1c14272edb86c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/viewport/report.json": "c19636a73ff4cb9c12d5058e013a85ba4c96c6e425996aad3e25a55964188d9a",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/viewport/viewport-off-f24.png": "2b762c2041e901a3660eef34ab83fc89bbe66776d58ee545b881870d4ac06798",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/captures/viewport/viewport-on-f24.png": "e120753993f2ad098fdd24f89e3c1258870b22be035a659cadd7c257daea7c4b"
+  }
+ },
+ "observations": "report.json observations are reference data; they never decide the verdict"
+}

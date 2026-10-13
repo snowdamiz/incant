@@ -1,0 +1,61 @@
+{
+ "tools": {
+  "head": "cd4f4cd751df6bdaa8f47a15c51a70e9550b2521",
+  "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+  "plan_sha256": "c874115d80f54d3bf458b12204979dc2732016eef63ea41331b81e4dc703b9c3",
+  "helper_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "source": {
+  "commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+  "tree": "fd3b43e2a73bc0d56071abe659689c0e5594fba2",
+  "files": 18096,
+  "manifest_sha256": "04368be7d6b7f49e46c28f3b0185e427c10eab6bfe1da07d4c9bbc5455b55ea0",
+  "helper_copy_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "label": "lint",
+ "kind": "build",
+ "holder": "root-supervised sharpness comparison CPU build",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "temporal_visual_review",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/checkout",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/tmp/lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "pid": 6606,
+ "started": "2026-10-13T11:52:51.613923+00:00",
+ "ended": "2026-10-13T11:52:57.484540+00:00",
+ "exit": 0,
+ "timed_out": false,
+ "wait_error": null,
+ "timeout_s": 2700,
+ "group_empty_after": true,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-lint.stdout.jsonl",
+ "stdout_sha256": "013885b8a73b3d5479d4e25dcdaf2449cc51cb733c0b32b9be34ca8d543c88c5",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/logs/build-lint.stderr.txt",
+ "stderr_sha256": "64d6e5fa0a6cae3a50f63769e5c3cdeb729a75e777a278a0f2975a52e8e30461",
+ "recorded": "2026-10-13T11:52:57.485125+00:00"
+}

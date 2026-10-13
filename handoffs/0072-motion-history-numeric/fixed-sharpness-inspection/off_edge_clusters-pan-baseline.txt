@@ -1,0 +1,1 @@
+off-edge pixels >= 9 steps: 0

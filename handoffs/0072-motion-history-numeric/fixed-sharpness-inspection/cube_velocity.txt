@@ -1,0 +1,6 @@
+frame 6: y=0.6: near-left edge x 396.308 (row 247.1), far-left x 403.518; y=1.0: near-left edge x 394.874 (row 224.5), far-left x 402.322; y=1.4: near-left edge x 393.391 (row 201.1), far-left x 401.089
+frame 7: y=0.6: near-left edge x 417.231 (row 247.1), far-left x 422.638; y=1.0: near-left edge x 416.156 (row 224.5), far-left x 421.742; y=1.4: near-left edge x 415.043 (row 201.1), far-left x 420.817
+frame 8: y=0.6: near-left edge x 438.154 (row 247.1), far-left x 441.759; y=1.0: near-left edge x 437.437 (row 224.5), far-left x 441.161; y=1.4: near-left edge x 436.695 (row 201.1), far-left x 440.544
+trailing edge velocity f7->f8 at y=0.6: 20.923 px/frame (fraction 0.923)
+trailing edge velocity f7->f8 at y=1.0: 21.281 px/frame (fraction 0.281)
+trailing edge velocity f7->f8 at y=1.4: 21.652 px/frame (fraction 0.652)

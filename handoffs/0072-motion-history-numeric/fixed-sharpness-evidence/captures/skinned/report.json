@@ -1,0 +1,283 @@
+{
+  "animation": {
+    "clip": 1,
+    "seconds": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5
+    ]
+  },
+  "case": "skinned",
+  "checks": {
+    "frames_match_plan": true,
+    "reference_has_no_temporal_state": true,
+    "skinned_run_uninterrupted": true
+  },
+  "frames": [
+    {
+      "name": "on-1",
+      "rgba_sha256": "45c35e2ccd3f5d65fcdea2ac7afa7f6325b0e94ae3ded5d70e62e7200e7f9161",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": false,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 0,
+        "sequence": 1
+      }
+    },
+    {
+      "name": "on-2",
+      "rgba_sha256": "acc70ab14cde9bdd9a968fa856d5849c17d2d9b238ac47bbb19d61a992e83bbe",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 1,
+        "sequence": 2
+      }
+    },
+    {
+      "name": "on-3",
+      "rgba_sha256": "29eeff60d2ca9ded9865d809171738a481f38ce4138ae09dd0d22275cf6f29b3",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 2,
+        "sequence": 3
+      }
+    },
+    {
+      "name": "on-4",
+      "rgba_sha256": "648d3e28836d95eef960f5cb7c7b99342ff42209ab15b965f54a5d7bfc36c489",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 3,
+        "sequence": 4
+      }
+    },
+    {
+      "name": "on-5",
+      "rgba_sha256": "6c6fd0c6e5be8b9fd413a691b70fdb51e6a7803d80f029acffca2be6c90132f2",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 4,
+        "sequence": 5
+      }
+    },
+    {
+      "name": "on-6",
+      "rgba_sha256": "9540d311f14af9d01c5753793ab4f6b8208b9fcfe1157ec0444f123f00d6bf4b",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 5,
+        "sequence": 6
+      }
+    },
+    {
+      "name": "off-6",
+      "rgba_sha256": "f5ab60ef6540a26bfa4996e4be7905c161154b950b069e164a9af4ece3cdaebc",
+      "temporal": null
+    }
+  ],
+  "frames_rendered": 7,
+  "observations": {
+    "consecutive": [
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 110,
+            "max_delta": 36,
+            "mean_delta": 0.45687158620184026,
+            "pixels": 27279
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 6859,
+            "max_delta": 45,
+            "mean_delta": 0.3363672088955675,
+            "pixels": 491121
+          }
+        },
+        "from": "on-1",
+        "to": "on-2"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 1896,
+            "max_delta": 36,
+            "mean_delta": 0.4956193408849298,
+            "pixels": 27279
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 7609,
+            "max_delta": 55,
+            "mean_delta": 0.35084429295428216,
+            "pixels": 491121
+          }
+        },
+        "from": "on-2",
+        "to": "on-3"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 2294,
+            "max_delta": 55,
+            "mean_delta": 0.9374610506250229,
+            "pixels": 27279
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 7586,
+            "max_delta": 36,
+            "mean_delta": 0.38434520209887174,
+            "pixels": 491121
+          }
+        },
+        "from": "on-3",
+        "to": "on-4"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 469,
+            "max_delta": 55,
+            "mean_delta": 0.7555628872026101,
+            "pixels": 27279
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 8127,
+            "max_delta": 36,
+            "mean_delta": 0.4478977685743432,
+            "pixels": 491121
+          }
+        },
+        "from": "on-4",
+        "to": "on-5"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 1417,
+            "max_delta": 50,
+            "mean_delta": 1.5922137908281095,
+            "pixels": 27279
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 7687,
+            "max_delta": 36,
+            "mean_delta": 0.46765053825839253,
+            "pixels": 491121
+          }
+        },
+        "from": "on-5",
+        "to": "on-6"
+      }
+    ],
+    "f1_vs_f6_identical": false,
+    "f6_vs_off": {
+      "edge": {
+        "changed_over_threshold": 7045,
+        "max_delta": 51,
+        "mean_delta": 3.0355584882143773,
+        "pixels": 27279
+      },
+      "identical": false,
+      "interior": {
+        "changed_over_threshold": 289,
+        "max_delta": 20,
+        "mean_delta": 0.0057154957739538725,
+        "pixels": 491121
+      }
+    }
+  },
+  "outcome": "pass",
+  "pngs": [
+    {
+      "name": "skinned-on-f6.png",
+      "rgba_sha256": "9540d311f14af9d01c5753793ab4f6b8208b9fcfe1157ec0444f123f00d6bf4b",
+      "sha256": "ae4ab390d309314f02a4564eddbdd46063c908d782e31360c10c7ace8fa9b924"
+    },
+    {
+      "name": "skinned-off-f6.png",
+      "rgba_sha256": "f5ab60ef6540a26bfa4996e4be7905c161154b950b069e164a9af4ece3cdaebc",
+      "sha256": "9dc53d04deebc66b38a873ec680f39e89ce31afcbe59cefaafa0d498ec0b0985"
+    }
+  ],
+  "renderer": {
+    "adapter": {
+      "backend": "Metal",
+      "device": 0,
+      "device_type": "IntegratedGpu",
+      "driver": "",
+      "driver_info": "",
+      "name": "Apple M5 Pro",
+      "vendor": 0
+    },
+    "adapter_timestamp_features": {
+      "TIMESTAMP_QUERY": true,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "device_timestamp_features": {
+      "TIMESTAMP_QUERY": false,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "queue_timestamp_period_ns": 1.0,
+    "timing_stats": {
+      "abandoned": 0,
+      "enabled": false,
+      "pending": 0,
+      "ready": 0,
+      "retired": 0,
+      "skipped": 0
+    }
+  },
+  "review_config": {
+    "absolute_depth": 0.019999999552965164,
+    "history_weight": 0.8999999761581421,
+    "reactive_strength": 0.5,
+    "reactive_threshold": 4.0,
+    "relative_depth": 0.05000000074505806
+  },
+  "ui_submissions": 0
+}

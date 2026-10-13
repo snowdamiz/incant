@@ -1,0 +1,14 @@
+{
+  "packet": "0072-motion-history-numeric",
+  "stage": "fixed-sharpness-build",
+  "holder": "root-supervised sharpness comparison CPU build",
+  "source_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/source-freeze.json",
+    "sha256": "ffbd73c3eba191d165d7ed9ff3e1e878fda1be96f5735445554f6a6d6923c857"
+  },
+  "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-001/target-lease.json",
+  "prior_build_release_sha256": "4e1c027a2ec88179cb1dd7300781ce634cafd44bc8720597887784dfe0f7b83d"
+}

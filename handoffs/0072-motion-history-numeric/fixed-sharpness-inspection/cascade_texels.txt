@@ -1,0 +1,22 @@
+Cascade boundaries (view depth): 0.100 7.785 16.250 28.574 60.000
+== full 960x540, aspect 1.77778
+  cascade 0 [0.100, 7.785]: radius off 8.3422 -> 8.4078, guarded 8.3504 -> 8.4078; texel off 0.016422 on 0.016422 (+0.000%) same texel
+  cascade 1 [7.016, 16.250]: radius off 16.1306 -> 16.2510, guarded 16.1489 -> 16.2510; texel off 0.031740 on 0.031740 (+0.000%) same texel
+  cascade 2 [15.403, 28.574]: radius off 27.9644 -> 28.1098, guarded 27.9971 -> 28.1098; texel off 0.054902 on 0.054902 (+0.000%) same texel
+  cascade 3 [27.342, 60.000]: radius off 59.3587 -> 59.6078, guarded 59.4265 -> 59.6706; texel off 0.116422 on 0.116544 (+0.105%) texel CHANGES
+== viewport 885x501, aspect 1.76647
+  cascade 0 [0.100, 7.785]: radius off 8.3105 -> 8.3451, guarded 8.3193 -> 8.4078; texel off 0.016299 on 0.016422 (+0.752%) texel CHANGES
+  cascade 1 [7.016, 16.250]: radius off 16.0591 -> 16.1255, guarded 16.0788 -> 16.1882; texel off 0.031495 on 0.031618 (+0.389%) texel CHANGES
+  cascade 2 [15.403, 28.574]: radius off 27.8369 -> 27.9843, guarded 27.8721 -> 27.9843; texel off 0.054657 on 0.054657 (+0.000%) same texel
+  cascade 3 [27.342, 60.000]: radius off 59.0938 -> 59.3569, guarded 59.1669 -> 59.4196; texel off 0.115931 on 0.116054 (+0.106%) texel CHANGES
+sun travel direction (0.6824, -0.6157, 0.394); grille texel 0.015625 world units
+== shadow of the card on the ground (y = 0), still pose
+  ground (+1.566, -0.504): view depth 9.934 (cascade 1 or blend), viewport pixel (542.6, 278.3)
+  ground (+3.783, +0.776): view depth 8.765 (cascade 1 or blend), viewport pixel (686.8, 311.5)
+  ground (+3.566, -0.504): view depth 9.934 (cascade 1 or blend), viewport pixel (650.7, 278.3)
+  ground (+5.783, +0.776): view depth 8.765 (cascade 1 or blend), viewport pixel (809.4, 311.5)
+== shadow of the card on the ground (y = 0), last pan pose (f24)
+  ground (+1.566, -0.504): view depth 9.914 (cascade 1 or blend), viewport pixel (443.9, 278.8)
+  ground (+3.783, +0.776): view depth 8.945 (cascade 1 or blend), viewport pixel (579.9, 305.8)
+  ground (+3.566, -0.504): view depth 10.089 (cascade 1 or blend), viewport pixel (550.5, 274.5)
+  ground (+5.783, +0.776): view depth 9.120 (cascade 1 or blend), viewport pixel (695.2, 300.5)
