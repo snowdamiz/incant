@@ -139,3 +139,23 @@ OS/adapter/backend and verified model/effort. Commit with Built-by: claude; no
 pushes, PRs, main changes or CI edits. New test code is reviewed by Astra before
 integration. This packet does not approve reference-phone frame-time/memory gates,
 Vulkan/DX12 execution, temporal history, MetalFX, browser timing or default enablement.
+
+## Root execution clarification, 2026-10-13
+
+0066 completed its bounded Metal review and explicitly released the GPU and warm
+target. Its extra raw cluster-buffer observer remains separate Astra follow-up;
+this does not prevent the independently accepted DRS source review. Read the
+new grant and independently verify its release and target-lease hashes.
+
+Never persist the inherited environment, credentials or ACP transport variables.
+Child receipts may record only an explicit nonsecret allowlist of build/renderer
+settings. Reuse the environment-safe 0066 or 0064 logger, never the old0065 logger.
+The 24 appearance-frame budget includes every new render in the appearance
+helper, including repeated dry runs and controls, not just saved PNGs. The48
+numerical submissions are a separate hard budget; keep the existing regression
+suite executions separately counted. Prepare the exact case ledger before use.
+
+If any required host observation cannot be expressed through existing public
+contracts, leave a precise request file and continue independent preparation.
+Do not silently relax numeric or lifecycle acceptance. No extra GPU execution
+after the release latch; return missing evidence for a later bounded packet.
