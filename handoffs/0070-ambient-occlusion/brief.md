@@ -267,3 +267,47 @@ ambient build/provider variables; construct a narrow environment as above. Do
 not copy unreviewed old runner failure handling. Include helper Clippy and actual
 CPU process-lifecycle controls in the proposed check list. On completion return
 result.md describing readiness and any blockers, not claiming visual success.
+
+
+## Root priority revision — repair reviewed acceptance defects, 2026-10-13 07:30 UTC
+
+PREPARATION ONLY. Original CPU attempt is now terminal and its build lease released;
+no GPU was launched. Preserve the original evidence at
+`/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build`, including the helper
+compile failure and `build-released.json`. Do not run Cargo or acquire target/GPU
+leases in this session. Keep the current production renderer unchanged.
+
+Read independent source receipt
+`/Users/andreyyurlov/.codex/incant-reviews/effects-0070-fixtures-source-20261013.json`
+(SHA256 `64774dd5978c48069f2c33f5ca72295602a6ead6546b890d31c560137a7733c6`).
+Fix both analyzer acceptance groups with meaningful CPU-only synthetic controls:
+
+1. `infer_k` must reject nonfinite or empty RGB interval intersections. SSAO
+   agreement must require usable covered comparisons and actual occlusion
+   comparisons, never pass when every pixel was skipped/uninferable. Preserve
+   diagnostic counts. Choose explicit justified minimum coverage from the fixed
+   fixture geometry, not a post-hoc result threshold. Make furnace basis uniformity
+   an enforced precondition anywhere shared off/specular bases are reused.
+2. Require every declared numeric case and gate, not whichever case directories
+   happen to exist. Missing evidence fails with useful retained diagnostics.
+   A numeric `pass=false` must write its report and exit nonzero. Preserve distinct
+   numerical invariants versus Claude's later appearance judgment.
+
+Also fix the exact Rust compile error in `tools/effects/src/composed.rs:106`:
+annotate the existing eye/at coordinates with explicit `[f64; 3]` types so sqrt,
+atan2 and asin resolve. Do not alter camera/layout values. Source engine test
+binaries compiled successfully; helper failed on these three ambiguous calls.
+
+Root already made two runner corrections in commits6b06c1c8 and bfecb8d6: per-child
+TMPDIR and resolved Cargo dependency-identity comparison for a pruned helper lock.
+Preserve them. The generated helper Cargo.lock is untracked evidence; do not
+replace root Cargo.lock or change dependency resolutions. Do not modify lifecycle.py;
+its accepted shared implementation is pinned by another completed GPU packet.
+
+Add negative controls for empty inference, conflicting RGB intervals, missing
+cases/gates, inadequate coverage, failed furnace precondition and nonzero CLI
+failure (while report survives). Run the focused synthetic checks, parse/format
+checks and diff review. Do not add a new generic execution framework. Commit only
+your scoped source/test/result changes with Built-by: claude and summarize exact
+changes, evidence and remaining checks. Root will supervise a fresh CPU build
+once this source is reviewed. Finish with no background work or subprocesses.
