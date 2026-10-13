@@ -1,0 +1,45 @@
+{
+  "schema": "incant-repair-quality-closure-v1",
+  "result_commit": "9843a6c301d153a6027c55920900b64eff5818b9",
+  "appearance": "REJECTED by Claude Opus5.5 Max; no integration acceptance",
+  "candidate": "ce6171957eda212d6796335623d8040a0f06b500",
+  "protocol_commit": "6bb00f66cb9d86c72cd91630e2c1a18a4182104f",
+  "supervision": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-supervision-003",
+  "cpu_qualification": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-repair-cpu-001/qualification.json",
+  "cpu_sha256": "b0182d249e9c9651a5296381320c67323b9c533008827b198375202ef026f9fa",
+  "acp_terminal": {
+    "pid": 2218,
+    "pgid": 2218,
+    "exit": 0,
+    "timed_out": false,
+    "interrupted_by": [],
+    "reaped": true,
+    "group_empty_after": true,
+    "seconds": 608.451,
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "tools/handoff/main.py",
+      "run",
+      "0073-upscaling-review",
+      "--permission-mode",
+      "auto"
+    ],
+    "auto_memory_environment": {
+      "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+    },
+    "stdout_sha256": "89e353c302d49847842dba2088a9e8c623b4a8b92d1c26fa596f2cb98e3070fd",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "gpu_release_sha256": "645cd2f1cba857da1eca5f73729ffe5f8313d0b797c383a8dee29de635f33c78",
+  "scope_qualifications": [
+    "14 current PNG Read calls, plus transitions-full pixels already viewed in prior GPU001 and byte-identical in this run. Do not describe15 new image reads.",
+    "Candidate implementation/pins/format applied by this Astra lane under root delegation, not personally by root.",
+    "source-build-audit parent field denotes fd5 source base; immediate parent chain96ba3484\u219251ee32b9\u2192ce617195.",
+    "Shadow note is region-limited: sign trail2pixels unmeasured;15pixel ground trail observed. No universal ghost-absence claim.",
+    "Supervision002 launched staleCPUbrief after missing-grant prep failure due shell sequencing; stopped11s, group reaped, noGPUdebit/sourcechange. Fresh003 preparation used sequential guard then exec."
+  ],
+  "memory_unchanged": true,
+  "all_observed_acp_and_gpu_pids_absent": true,
+  "protected_inputs_unchanged": true,
+  "remaining": "Appearance failed; no furtherGPU grant. Thin geometry and overlay clarity remain unmet."
+}

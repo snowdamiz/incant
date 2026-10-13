@@ -1,0 +1,362 @@
+{
+  "release_sha256": "645cd2f1cba857da1eca5f73729ffe5f8313d0b797c383a8dee29de635f33c78",
+  "grant_sha256": "0b5a664e1202946dfaaef13eaecb6f077d6704201a229ad9d91159abb10a41b9",
+  "runner_sha256": "10e0cfde16592e624c93552907d8ed5fe823b817355ca2931aa794b8bec4a721",
+  "plan_sha256": "11fb0f702be37dbd2631922fe9794a1d7a1daeed0f62e3ff39f78e1be8b39013",
+  "children": 5,
+  "queue_submissions": 778,
+  "maps": 380,
+  "pngs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-full.png",
+      "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+      "bytes": 84389,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "4c69efe238a452d096301faf24ca013877bf0f0430f83ccf1147502e51da6e01"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-drs50.png",
+      "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+      "bytes": 40131,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "6611c41fa62f782b4d96080e6d43f481d41a54c01a8d93e870367b9786d8464e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-up50.png",
+      "sha256": "c47c231b3307aa4f34617fc1cc5ad2ddc935614faef3d61f18417f970d18a3d5",
+      "bytes": 81441,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "f01f58f44f7539e404cd6107651e63e1483304b1d5fc7beb63aa5cb6db7f7f67"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-own50.png",
+      "sha256": "54132e6c2784be45bd2525f8b8e7d2700b691fb60b9e32c33da1ff5051f7186a",
+      "bytes": 81888,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "ba0da6c08d111249b208b00be05015f18607ef02cd3fe2f56c9b9d8a3bb3a495"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-phases.png",
+      "sha256": "5850713d0ccaa211eb6f6e43855109469aee427440bc68f71343fb9c4c83ec7b",
+      "bytes": 11679,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "aa7ae0c7e1606f3f0eb8c06beee9d709f917c84b28e560742c54ac119d48bb73"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-detail.png",
+      "sha256": "1798ba89dc9cb2ad793a9c4f5d51535fa147c8b86f270775a9b0167a36b63357",
+      "bytes": 39182,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "0253120c2d20dea51dca8e9b9ff43ab086ab35ecfa11a359d805f912d9ca2bb1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-full.png",
+      "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+      "bytes": 77464,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-up50.png",
+      "sha256": "0bc20b65c3bec370dcc0e16255e2f1dc02f24a5ef19ab6a0db6c05680300f2b0",
+      "bytes": 70413,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "cb72a28affb7d5793fd2ae2ad55f7dd034866aa5ccba2ecfab5afa7403896694"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-own50.png",
+      "sha256": "f3fdff6c547536c031c71540d14a45c71b8411cf2baef0c8234fdd51cd4cb5c2",
+      "bytes": 70026,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "9d6523967f3bc11a64d1505438c86500738eb9b520b1f80a56dcf87b4c6cf0b1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-detail.png",
+      "sha256": "ca01cedc4fa740292763152596371fed168442031f28de8055a2c53fec0dffd8",
+      "bytes": 103758,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "8e8e7a0b848a9b4f1f6b168b6ad13ba2cfd287885b53a6bc099b52af00cdfc3c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/transitions-full.png",
+      "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+      "bytes": 72999,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "49d0f741bc50634f0b15c9ff88d5fbefef146630db83a034bd77581d9964f6bb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/transitions-strip.png",
+      "sha256": "3231d90e3ec242ae4627e3469b6bef1544ab126f66b7cfdf6078bfa32c04527b",
+      "bytes": 107615,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "ba70528be822e73018ec42628f965f54d32a19afe5ecc20b8f65ca45677b02fb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-detail.png",
+      "sha256": "667842d540f486ea3728f9ac2042306b20413bafcb4c189188c70951a5164f0d",
+      "bytes": 68218,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "d8091973f144a1a30a881dac1d3edafd2d3ef7d856deebb428b01ea3beb834e3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-own-moving.png",
+      "sha256": "8a27a72c7b3a3a60f258a2018c4972d4f311287f76b49e42f1e1495755871364",
+      "bytes": 337545,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "d1b14ec7ab614dd89539f615ceb1edfe67383e68c0809e104a4aa0be9bbe66da"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/artifacts/p1-detail.png",
+      "sha256": "9c0223081ca5fff3fcc898a4bbc32c1d8ce28c17f1a3e48035daabf597c0e416",
+      "bytes": 197976,
+      "width": 960,
+      "height": 540,
+      "reported_rgba_sha256": "6be2e1f34f82bc8d4d9d29612fd3ba9500adddf52ab921936d034613b36513df"
+    }
+  ],
+  "records": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-detail.png",
+      "bytes": 68218,
+      "sha256": "667842d540f486ea3728f9ac2042306b20413bafcb4c189188c70951a5164f0d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-own-moving.png",
+      "bytes": 337545,
+      "sha256": "8a27a72c7b3a3a60f258a2018c4972d4f311287f76b49e42f1e1495755871364"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/events.jsonl",
+      "bytes": 39102,
+      "sha256": "c4ae83dbe7f9083380aca41af4c486f9f2b3094d850f49d48b613999811b59a5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/report.json",
+      "bytes": 34413,
+      "sha256": "408d56be5b364d8f30eacb40c6fd8865f1537cf713d485ab06ae115e12c81817"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/stdout.txt",
+      "bytes": 140,
+      "sha256": "0d7a065b2c15efc9392683d0648ef58a45e6c023791462e06d2468f7f9aa6357"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/debits.jsonl",
+      "bytes": 1742,
+      "sha256": "bce14baa8b30e89ae20748a76282d0db95c664d1afe893492e76d096b96f7dd9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/grant.json",
+      "bytes": 1273,
+      "sha256": "0b5a664e1202946dfaaef13eaecb6f077d6704201a229ad9d91159abb10a41b9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/ledger.jsonl",
+      "bytes": 17695,
+      "sha256": "0f56ef7a2ab277ef196fd3bcf76e33ac007f2e61c8d046b2cbfb4d3da9260208"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/events.jsonl",
+      "bytes": 20818,
+      "sha256": "b74689bc7b4941a290125f6362126db402f008b75d87fa8f2bb8ab5e020f94c3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-detail.png",
+      "bytes": 103758,
+      "sha256": "ca01cedc4fa740292763152596371fed168442031f28de8055a2c53fec0dffd8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-full.png",
+      "bytes": 77464,
+      "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-own50.png",
+      "bytes": 70026,
+      "sha256": "f3fdff6c547536c031c71540d14a45c71b8411cf2baef0c8234fdd51cd4cb5c2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-up50.png",
+      "bytes": 70413,
+      "sha256": "0bc20b65c3bec370dcc0e16255e2f1dc02f24a5ef19ab6a0db6c05680300f2b0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/report.json",
+      "bytes": 19398,
+      "sha256": "6e9753f7155864ec4eb2db28c476d3bd8d6a0bd8bb78225b93cd758686453c34"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/stdout.txt",
+      "bytes": 131,
+      "sha256": "95cd006c9be0bec5bafea5a96cdb98a02aa35df78f29370f3a36d35152540901"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/owner.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/artifacts/events.jsonl",
+      "bytes": 45985,
+      "sha256": "55ea7543f3127fd39dcfa4a4f68745057546702ce7629c4c59e5a23130a1d14e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/artifacts/p1-detail.png",
+      "bytes": 197976,
+      "sha256": "9c0223081ca5fff3fcc898a4bbc32c1d8ce28c17f1a3e48035daabf597c0e416"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/artifacts/report.json",
+      "bytes": 43280,
+      "sha256": "29903b3c46b8e9a20a1f4b8d73dab9d7bf47bb12a2610a6982141a0316cd4c79"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/stdout.txt",
+      "bytes": 136,
+      "sha256": "9b3b23f09ea3991dec5a401fd19956d772924a3e14fd67dc0d3a2c67b41737b8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/release.json",
+      "bytes": 29377,
+      "sha256": "645cd2f1cba857da1eca5f73729ffe5f8313d0b797c383a8dee29de635f33c78"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/events.jsonl",
+      "bytes": 24988,
+      "sha256": "8ba7ba5862414389f9dd1027c7c8b7e8ed2636aca24e5a1da8358710b2383f8c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/report.json",
+      "bytes": 28649,
+      "sha256": "d0f04ada913a22f557fc31a34e93637c010fc97d180a7bb5ca76ad55cc0b8248"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-detail.png",
+      "bytes": 39182,
+      "sha256": "1798ba89dc9cb2ad793a9c4f5d51535fa147c8b86f270775a9b0167a36b63357"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-drs50.png",
+      "bytes": 40131,
+      "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-full.png",
+      "bytes": 84389,
+      "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-own50.png",
+      "bytes": 81888,
+      "sha256": "54132e6c2784be45bd2525f8b8e7d2700b691fb60b9e32c33da1ff5051f7186a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-phases.png",
+      "bytes": 11679,
+      "sha256": "5850713d0ccaa211eb6f6e43855109469aee427440bc68f71343fb9c4c83ec7b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-up50.png",
+      "bytes": 81441,
+      "sha256": "c47c231b3307aa4f34617fc1cc5ad2ddc935614faef3d61f18417f970d18a3d5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/stdout.txt",
+      "bytes": 135,
+      "sha256": "328c53a91c502175454c1dd3cd2a475ccda4e7df48b7e1ccd349a14241524ba3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/events.jsonl",
+      "bytes": 49091,
+      "sha256": "1a554f199809d9f82971d7ca8a78157124ca8fb43c2f0105aba75b0bb97e139d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/report.json",
+      "bytes": 82533,
+      "sha256": "6f5d50c11fa2936a610b864203e45f335faff11eccb851daade272434cb213bb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/transitions-full.png",
+      "bytes": 72999,
+      "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/transitions-strip.png",
+      "bytes": 107615,
+      "sha256": "3231d90e3ec242ae4627e3469b6bef1544ab126f66b7cfdf6078bfa32c04527b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/stderr.txt",
+      "bytes": 282,
+      "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/stdout.txt",
+      "bytes": 136,
+      "sha256": "050ffae4ab75a72fc90bbd89f3512bdd77551c2891dc5477b21e96f259a1f383"
+    }
+  ],
+  "protected_tracked": 200,
+  "memory_baselines_unchanged": true,
+  "reference_byte_comparison": [
+    {
+      "path": "stationary/artifacts/stationary-full.png",
+      "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+      "old_sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+      "exact": true
+    },
+    {
+      "path": "stationary/artifacts/stationary-drs50.png",
+      "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+      "old_sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+      "exact": true
+    },
+    {
+      "path": "motion/artifacts/motion-full.png",
+      "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+      "old_sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+      "exact": true
+    },
+    {
+      "path": "transitions/artifacts/transitions-full.png",
+      "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+      "old_sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+      "exact": true
+    }
+  ],
+  "scope": "Process/artifact integrity only; PNG CRC/dimensions/hash checks without decoding or appearance judgment. ACP may still be reviewing; final closure separate."
+}

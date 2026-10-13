@@ -1,0 +1,40 @@
+[
+  {
+    "pid": 2207,
+    "ppid": 2390,
+    "pgid": 2207,
+    "args": "/opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-supervision-003/supervise.py"
+  },
+  {
+    "pid": 2218,
+    "ppid": 2207,
+    "pgid": 2218,
+    "args": "/opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python tools/handoff/main.py run 0073-upscaling-review --permission-mode auto"
+  },
+  {
+    "pid": 2226,
+    "ppid": 2218,
+    "pgid": 2218,
+    "args": "node /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/node_modules/.bin/claude-agent-acp",
+    "auto_memory_disabled": true
+  },
+  {
+    "pid": 2232,
+    "ppid": 2226,
+    "pgid": 2218,
+    "args": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/node_modules/@anthropic-ai/claude-agent-sdk-darwin-arm64/claude --output-format stream-json --verbose --input-format stream-json --permission-prompt-tool stdio --resume=88296197-2b09-41fa-b481-9f8ae415e266 --disallowedTools AskUserQuestion --tools default --setting-sources=user,project,local --permission-mode auto --allow-dangerously-skip-permissions --include-partial-messages --replay-user-messages",
+    "auto_memory_disabled": true
+  },
+  {
+    "pid": 2254,
+    "ppid": 2232,
+    "pgid": 2218,
+    "args": "/opt/homebrew/bin/uv tool uvx mcp-proxy-for-aws@latest https://aws-mcp.us-east-1.api.aws/mcp --metadata INSTALL_SOURCE=aws-cli"
+  },
+  {
+    "pid": 2294,
+    "ppid": 2254,
+    "pgid": 2218,
+    "args": "/Users/andreyyurlov/.cache/uv/archive-v0/wmvAZQwsfv_s9CTn/bin/python /Users/andreyyurlov/.cache/uv/archive-v0/wmvAZQwsfv_s9CTn/bin/mcp-proxy-for-aws https://aws-mcp.us-east-1.api.aws/mcp --metadata INSTALL_SOURCE=aws-cli"
+  }
+]

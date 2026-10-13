@@ -1,0 +1,31 @@
+{
+  "reason": "Preparation refused missing root grant; shell incorrectly continued. Immediate supervisor stop, no GPU evidence directory.",
+  "source_unchanged": 200,
+  "source_head": "6bb00f66cb9d86c72cd91630e2c1a18a4182104f",
+  "terminal": {
+    "pid": 1382,
+    "pgid": 1382,
+    "exit": -9,
+    "timed_out": false,
+    "interrupted_by": [
+      "SIGTERM"
+    ],
+    "reaped": true,
+    "group_empty_after": true,
+    "seconds": 11.157,
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "tools/handoff/main.py",
+      "run",
+      "0073-upscaling-review",
+      "--permission-mode",
+      "auto"
+    ],
+    "auto_memory_environment": {
+      "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+    },
+    "stdout_sha256": "02d3b2ee398cb2a58f7feb16072d6f11dffe201a663b4aecc0105d0325b9f5af",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "gpu_directory_exists": false
+}

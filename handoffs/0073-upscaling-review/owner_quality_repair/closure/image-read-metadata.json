@@ -1,0 +1,146 @@
+[
+  {
+    "timestamp": "2026-10-13T20:16:36.488Z",
+    "id": "toolu_012K6r5x9DidGfQhc7MQzo28",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-full.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:16:36.490Z",
+    "id": "toolu_01F96imxeorQojiC4n51bM3s",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-drs50.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:16:36.491Z",
+    "id": "toolu_01QcvFfmyaeEEr8hzyos2iMs",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-up50.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:16:36.491Z",
+    "id": "toolu_01SPreLgNk7JUq8Y6jpDiSLb",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-own50.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:16:42.805Z",
+    "id": "toolu_01Usys2o2DusFe8RxcvRZ1wA",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-detail.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:16:42.809Z",
+    "id": "toolu_013fjh3bLk4rvpaJ4Zu42GBp",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-detail.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:17:26.526Z",
+    "id": "toolu_012TVeLzGTCvrH6uWwZ8yjWz",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/stationary/artifacts/stationary-phases.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:17:26.530Z",
+    "id": "toolu_01B4ETXy3fVhn3jDEKz1yfd7",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-detail.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:17:26.531Z",
+    "id": "toolu_01RHskjeRLtuVsA2UHdLXY2Q",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-detail.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:17:34.896Z",
+    "id": "toolu_01VHoZp3WgbSHv6MDYhVBUub",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-full.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:17:34.899Z",
+    "id": "toolu_01Ga9WWMc8McNrXioJKwLwxH",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-up50.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:17:34.900Z",
+    "id": "toolu_01RejqvXXeHRi7tNiR8feRgq",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/motion/artifacts/motion-own50.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:18:20.451Z",
+    "id": "toolu_01CsxAXmwB4ytL6mBLwGjHgs",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/transitions/artifacts/transitions-strip.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:18:20.453Z",
+    "id": "toolu_01Q61CsiPgCAyQ6ds7Rh9hyT",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/transitions/artifacts/transitions-strip.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:18:29.578Z",
+    "id": "toolu_01VFsCtsChx488LEyUA3kba5",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-detail.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:18:29.580Z",
+    "id": "toolu_01JYG7NnhDAadP7AygWABcqZ",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/c7_disocclusion/artifacts/c7-own-moving.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:18:29.582Z",
+    "id": "toolu_01URxQVCU2SZ3u1WGs6QP8QX",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-002/p1_crossing/artifacts/p1-detail.png"
+    }
+  },
+  {
+    "timestamp": "2026-10-13T20:21:28.393Z",
+    "id": "toolu_011Z5GYnxWk816qnpVJKbErx",
+    "name": "Read",
+    "input": {
+      "file_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png"
+    }
+  }
+]
