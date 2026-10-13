@@ -1,0 +1,36 @@
+{
+  "schema": "incant-owner-history-combined-grant-v2",
+  "authority": "root",
+  "holder": "Claude0073 Opus5.5 Max",
+  "issued_at": "<root supplies fresh UTC timestamp>",
+  "plan_sha256": "6a618f250e17e50015621ac9c9aef649dd12338fd23f2ac2f55b801962bdb2e0",
+  "runner_sha256": "d89272e66a039d43911a58a04447056ccab26822a3a005429c5edf5c0221cf13",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "binary_sha256": [
+    "0401132375f7a146d812e1d75dc2f085911a459f570a9cb978299f6a194ad002",
+    "808243663e214ef421acd4234b3a87f31c21d485dae8dacefce65db83588510b"
+  ],
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-002",
+  "predecessor_release_path": "<root supplies actual latest released GPU packet>",
+  "predecessor_release_sha256": "<root supplies verified release SHA256>",
+  "budget": {
+    "child_attempts": 4,
+    "numeric_cases": 24,
+    "numeric_owner_renders": 24,
+    "numeric_current_only_renders": 2,
+    "numeric_baseline_renders": 4,
+    "numeric_depth_clear_passes": 24,
+    "retained_renderer_frames": 24,
+    "retained_readback_submissions": 24,
+    "queue_submissions": 72,
+    "readback_maps": 48,
+    "maximum_extent": [
+      32,
+      32
+    ],
+    "timeout_seconds_each": 90,
+    "images": 0,
+    "builds": 0,
+    "retries": 0
+  }
+}

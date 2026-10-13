@@ -1,0 +1,23 @@
+test_actual_binary_hash_and_mode_refusals (__main__.Controls.test_actual_binary_hash_and_mode_refusals) ... ok
+test_adapter_difference_fails_second (__main__.Controls.test_adapter_difference_fails_second) ... ok
+test_base_exception_after_launch_records_and_reaps (__main__.Controls.test_base_exception_after_launch_records_and_reaps) ... ok
+test_current_only_case_must_be_three (__main__.Controls.test_current_only_case_must_be_three) ... ok
+test_exact_nocapture_output (__main__.Controls.test_exact_nocapture_output) ... ok
+test_failed_first_stops_without_second_debit (__main__.Controls.test_failed_first_stops_without_second_debit) ... ok
+test_failed_second_prevents_all_retained_children (__main__.Controls.test_failed_second_prevents_all_retained_children) ... ok
+test_failed_third_prevents_fourth (__main__.Controls.test_failed_third_prevents_fourth) ... ok
+test_four_children_clean_release (__main__.Controls.test_four_children_clean_release) ... ok
+test_grant_mutations (__main__.Controls.test_grant_mutations) ... ok
+test_interrupt_actual_child_cleanup (__main__.Controls.test_interrupt_actual_child_cleanup) ... ok
+test_live_global_lock_refuses_before_debit (__main__.Controls.test_live_global_lock_refuses_before_debit) ... ok
+test_no_grant_touches_nothing (__main__.Controls.test_no_grant_touches_nothing) ... ok
+test_output_mutations_refused (__main__.Controls.test_output_mutations_refused) ... ok
+test_plan_semantic_mutations (__main__.Controls.test_plan_semantic_mutations) ... ok
+test_retained_adapter_difference_stops_third (__main__.Controls.test_retained_adapter_difference_stops_third) ... ok
+test_retained_marker_is_required (__main__.Controls.test_retained_marker_is_required) ... ok
+test_timeout_actual_child_cleanup (__main__.Controls.test_timeout_actual_child_cleanup) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 3.123s
+
+OK

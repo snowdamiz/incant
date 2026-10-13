@@ -1,0 +1,116 @@
+{
+  "state": "prepared only; root review and fresh grant required",
+  "runner_sha256": "d89272e66a039d43911a58a04447056ccab26822a3a005429c5edf5c0221cf13",
+  "plan_sha256": "6a618f250e17e50015621ac9c9aef649dd12338fd23f2ac2f55b801962bdb2e0",
+  "engine_producer": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "cpu_review_sha256": "51b9270b34969032d18f5bf5b19dc48fec55e634ed70761a140db0ea1f2ac82c",
+  "checks": [
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history_002/test_runner.py"
+      ],
+      "pid": 93165,
+      "exit": 0,
+      "reaped": true,
+      "elapsed_seconds": 3.2235867977142334
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-B",
+        "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history_002/runner.py",
+        "check",
+        "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history_002/plan.json"
+      ],
+      "pid": 93260,
+      "exit": 0,
+      "reaped": true,
+      "elapsed_seconds": 0.07697033882141113
+    }
+  ],
+  "guard_tests": 18,
+  "gpu_children": 0,
+  "acp_launched": false,
+  "historical_guard_failure": "First retained guard run failed only because the no-retry fixture recreated0555 scripts; test reuses same identities now. Original log and exact reconstructed source retained. Runtime runner unchanged.",
+  "before_mode_observation": "Original runner assumed0755; actual new root-frozen binary copies0555 are preserved and pinned.",
+  "preserved_original_inputs": {
+    "brief.md": "e08f6c743a341de824c8bca28225f8524e47f06e8178d2fff49efcab30409cce",
+    "owner-attachment-cpu-enumeration.json": "68c5434e926678071f4291896f6897137b4010b3885ab8043db7d9785136cfba",
+    "owner-attachment-plan.json": "d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512",
+    "owner-attachment-prep.md": "0332bad7a8a627b01b925474e94824cf462bc0c450d8c2718334463872390d9e"
+  },
+  "old_owner_history_tracked_files_exact": true,
+  "files": [
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/brief.md",
+      "sha256": "1f15c55e88329fef3b10b11b13fd48d125871a8cc385d7e3f78b00634595a537"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/check.json",
+      "sha256": "592c4b55e04d97d46ff46bdec40456207e2b6d39423050b53966ce34cf59fa86"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/check.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/check.stdout",
+      "sha256": "ef1533f27a0a4d531a3dec3c5789ea7a21f5c56504569bad75641e1fc1af8622"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/cpu-archive-audit.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/cpu-archive-audit.stdout",
+      "sha256": "53e37a95600e75336ad52b2e2ae8c8e35ed79a3442e3416eddcacf53273d4947"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-001.source.py.txt",
+      "sha256": "8f57d9c9b9ce66ed8ea4441d843c4c19db7cda49e54ae90f30a95a3dc9309081"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-002.json",
+      "sha256": "93c3bfd8d0a5f73ebcfea967c9a20289b054be192de282cb2273771b4ad59758"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-002.stderr",
+      "sha256": "8df17192fe2e7c9ffc84ca3a6cde16a0b72f95f1a8fbf4e011eb5c6abea6fd79"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests-002.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests.json",
+      "sha256": "0847aabab4301f04dcf46b47aafb308fa6fee8129e0ba76d0d5afac850fc1efa"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests.stderr",
+      "sha256": "706cd942a2862097f8f4f246eec77632c1cacd3d1ded1fce14ece40bf5c71ad0"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/cpu/guard-tests.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/grant.template.json",
+      "sha256": "0dbb40089f0d2399e50f558314cd1943dfb902ffa2ec230421c3bd1fb7444680"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/plan.json",
+      "sha256": "6a618f250e17e50015621ac9c9aef649dd12338fd23f2ac2f55b801962bdb2e0"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/runner.py",
+      "sha256": "d89272e66a039d43911a58a04447056ccab26822a3a005429c5edf5c0221cf13"
+    },
+    {
+      "path": "handoffs/0073-upscaling-review/owner_history_002/test_runner.py",
+      "sha256": "9c935d6a388f1ba24f8e6f54a79c3cca0da178b0bda1845d0da74ecccbe7ace8"
+    }
+  ],
+  "limits": "72queue submissions/48maps/four ordered children/max32x32/90s each; noGPU without root grant, no images/build/retry; prior failed numeric and visual evidence unchanged."
+}

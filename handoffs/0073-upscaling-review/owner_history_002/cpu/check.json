@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "-B",
+    "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history_002/runner.py",
+    "check",
+    "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history_002/plan.json"
+  ],
+  "pid": 93260,
+  "exit": 0,
+  "reaped": true,
+  "elapsed_seconds": 0.07697033882141113
+}

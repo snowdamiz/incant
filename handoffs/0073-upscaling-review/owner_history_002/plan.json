@@ -1,0 +1,98 @@
+{
+  "schema": "incant-owner-history-combined-plan-v2",
+  "state": "FROZEN_READY_FOR_ROOT_GRANT",
+  "producer": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-002",
+  "budget": {
+    "child_attempts": 4,
+    "numeric_cases": 24,
+    "numeric_owner_renders": 24,
+    "numeric_current_only_renders": 2,
+    "numeric_baseline_renders": 4,
+    "numeric_depth_clear_passes": 24,
+    "retained_renderer_frames": 24,
+    "retained_readback_submissions": 24,
+    "queue_submissions": 72,
+    "readback_maps": 48,
+    "maximum_extent": [
+      32,
+      32
+    ],
+    "timeout_seconds_each": 90,
+    "images": 0,
+    "builds": 0,
+    "retries": 0
+  },
+  "environment": {
+    "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+    "TMPDIR": "<fresh evidence root>/tmp",
+    "INCANT_EXPECT_GPU_BACKEND": "Metal",
+    "RUST_BACKTRACE": "0"
+  },
+  "identities": {
+    "shader": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/source-final/files/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+      "sha256": "0618bd7793f2ef53db7d34bc2020ba515bb722b5a3e5729912cf1f5c5c408777"
+    },
+    "device_test": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/source-final/files/crates/incant_render/src/upscaling/owner_device_tests.rs",
+      "sha256": "e6c2028f47ce61c30a0c67c1de69ec0c077ddc260b6f86ba6cd256c5ef2d2ac7"
+    },
+    "retained_test": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/source-final/files/crates/incant_render/src/upscaling_owner_retained_tests.rs",
+      "sha256": "8cd2a178688990aeea07d576a1e11b0b5ff82a559fecebce5bab1d8fc037358d"
+    },
+    "common": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-host-source-20261013/source-followup/crates/incant_render/src/upscaling/common.wgsl",
+      "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a"
+    },
+    "source_freeze": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/source-final/freeze.json",
+      "sha256": "608ad3628d1d576ef688eb2548c0a4593e1b28a1946c442e6eb5d7a955bcb6f7"
+    },
+    "cpu_review": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-consumer-corrected-cpu-independent-20261013.json",
+      "sha256": "51b9270b34969032d18f5bf5b19dc48fec55e634ed70761a140db0ea1f2ac82c"
+    },
+    "fixture_review": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-case3-reference-source-independent-20261013.json",
+      "sha256": "8529849c3d3a3e1ae6bc11b65c367a13d624a48334bd0584109bfca9f1b00153"
+    },
+    "retained_review": {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-retained-source-independent-20261013.json",
+      "sha256": "28598ec553703cecff2bc8235f65e2d39213bb462821a4ecdfaa80f349016721"
+    },
+    "wgsl_build": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/qualification-default-cpu-001.json",
+      "sha256": "1576627ec77503489ce78461b93df6a26bc41a661611011b4b9d33279c700c4e"
+    },
+    "cooked-metal_build": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/qualification-cooked-native-cpu-001.json",
+      "sha256": "8b21b3fb3c422753cd643b18c27e2ef3d19f4c56d71fd48de85a33aaea540bbc"
+    },
+    "wgsl_list": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/default-test-list.txt",
+      "sha256": "5532f5d2255681820ae671270ec5e24cc9a6ad41c3e9c2084c287236b5144fa8"
+    },
+    "cooked-metal_list": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/cooked-native-test-list.txt",
+      "sha256": "e4874c37b8bdd5a5e761a56ca214d598f672633b208ee069cad9b9c1718db917"
+    }
+  },
+  "binaries": [
+    {
+      "kind": "wgsl",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/frozen-binaries/default",
+      "sha256": "0401132375f7a146d812e1d75dc2f085911a459f570a9cb978299f6a194ad002",
+      "bytes": 32321424,
+      "mode": "0555"
+    },
+    {
+      "kind": "cooked-metal",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/frozen-binaries/cooked-native",
+      "sha256": "808243663e214ef421acd4234b3a87f31c21d485dae8dacefce65db83588510b",
+      "bytes": 33736992,
+      "mode": "0555"
+    }
+  ]
+}

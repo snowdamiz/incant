@@ -1,0 +1,1 @@
+{"verified": true, "counts": {"cooker": {"passed": 33, "failed": 0, "ignored": 0}, "default-cpu": {"passed": 152, "failed": 0, "ignored": 43}, "cooked-native-cpu": {"passed": 167, "failed": 0, "ignored": 44}}, "checks": 10, "records": 213, "payloads": 119, "gpu": false}
