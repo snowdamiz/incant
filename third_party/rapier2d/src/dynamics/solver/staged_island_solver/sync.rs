@@ -184,3 +184,7 @@ impl StageSync {
         None
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "sync_checkpoint.rs"]
+mod checkpoint;

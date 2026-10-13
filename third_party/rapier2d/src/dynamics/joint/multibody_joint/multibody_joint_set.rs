@@ -477,3 +477,7 @@ impl core::ops::Index<MultibodyIndex> for MultibodyJointSet {
 //         &self.multibodies[index.0]
 //     }
 // }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "multibody_joint_set_checkpoint.rs"]
+mod checkpoint;

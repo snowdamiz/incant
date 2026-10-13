@@ -346,3 +346,6 @@ impl StagedIslandSolver {
         }
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+mod checkpoint;

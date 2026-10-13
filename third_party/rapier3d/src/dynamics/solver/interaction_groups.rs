@@ -359,3 +359,7 @@ impl InteractionGroups {
         );
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "interaction_groups_checkpoint.rs"]
+mod checkpoint;
