@@ -51,6 +51,26 @@ python3 docs/spikes/evidence/runtime-probe-locks-main247/verify.py --verify-only
 ```
 
 Final independent packet review is accepted (`03359ef2`). The original checkpoint stays
-failed and frozen while its remaining jobs finish. Separate feature-off
-NativeOwner Clippy failures are owned by a separately reviewed repair; this lock
-packet does not close those failures or claim successor hosted success.
+failed and frozen while its remaining jobs finish. The separately reviewed feature-off
+NativeOwner repair is composed in the same PR, with its own four strict Clippy
+configurations and exact source/receipt identity. Neither packet claims successor
+hosted success.
+
+
+## Combined checkpoint repair
+
+Immutable Default producer `165b3dd6` joins the four lock/guard paths without
+conflicts. Both mirrored owner wrappers derive ordinary `Default` and preserve
+the checked `for_simulation` constructor. Current root manifests, lockfile, Cargo
+configuration, crates, vendor code and Cargo wrapper equal that producer; only
+the separately checked isolated-probe metadata/guard paths differ. The lock
+packet's 83 metadata inputs remain exact. Independent source and final evidence
+reviews are accepted for both repairs (`03359ef2`, `513da641`, `eed72218`).
+
+```sh
+python3 docs/spikes/evidence/runtime-probe-locks-main247/verify-combined.py --verify-only
+```
+
+This read-only check binds all six edited source paths, both evidence packets,
+the four original hosted Clippy logs and both independent Default reviews.
+No combined rebuild is relabelled or required by the disjoint metadata join.
