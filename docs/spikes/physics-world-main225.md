@@ -42,7 +42,7 @@ acceptance. The first read-only verifier attempt stopped at the reused STATUS.md
 producer checkout. That single archived original is now checked against the
 exact immutable producer Git blob; every other retained original matches directly.
 The initial refusal and the one-path qualification are retained. Current-main
-final review is pending.
+final review is independently accepted; the required fast publication check remains.
 
 This is checked inert composition and trusted native continuation, not hostile
 decoded-to-live restoration. Geometry/mass/work coherence, enclosing families and

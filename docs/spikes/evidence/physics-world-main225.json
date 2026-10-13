@@ -560,5 +560,9 @@
     "Std-only inert normal graph; default-off trusted native workspace adapter accepts only an existing native pipeline.",
     "Typed native Clone continuation is not decoded-to-live installation. PhysicsUnsupported and live-save admission remain closed."
   ],
-  "final_review": "Current composition independent final review pending"
+  "final_review": {
+    "state": "Independently accepted; required fast publication check pending",
+    "path": "docs/spikes/evidence/physics-world-main225/final-review.json",
+    "sha256": "b31c8aacf29398d78bfe6681a94d7c98b8cc24f5470ae12b7d1d4969d1db499f"
+  }
 }

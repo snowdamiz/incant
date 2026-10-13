@@ -29,7 +29,7 @@ removal/reuse and CCD controls. Both 202-case CPU modes, ten parallel controls
 and all ten scoped checks pass. Source and final producer evidence reviews are
 accepted; current-main composition passes 202 CPU cases in each numerical mode, ten
 two-worker controls each and thirteen scoped checks. Final composition review is
-pending. [Current composition](docs/spikes/physics-world-main225.md).
+independently accepted; the required fast publication check remains. [Current composition](docs/spikes/physics-world-main225.md).
 Derived geometry/mass/work admission, authenticated capture and the
 whole native constructor remain required. `PhysicsUnsupported` is unchanged.
 
