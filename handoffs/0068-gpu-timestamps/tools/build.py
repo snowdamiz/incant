@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
-"""CPU-only child checkout, toolchain identity and frozen builds for handoff 0068.
-Standard library only; needs Python 3.12+ for tarfile's data filter.
+"""CPU-only child checkout, toolchain identity and frozen builds for handoff 0068
+revision 2. Standard library only; needs Python 3.12+ for tarfile's data filter.
 
-Adapted from handoff 0066's committed tools/build.py (read-only reuse). It never
-runs a built executable. Every step calls the grant/lease gate first and runs
-one bounded process group under the packet flock.
+Adapted from handoff 0066's committed tools/build.py (read-only reuse) with
+Astra's audited 0068 kill/reap/ledger lifecycle. It never runs a built
+executable. Every step checks the grant first, then runs one bounded process
+group while holding the global native-gpu.lock and the packet lock.
 
   python3 -I -B handoffs/0068-gpu-timestamps/tools/build.py <step>
 
 Steps:
-  checkout   export the granted source commit with `git archive` into the
-             evidence directory, verify every file against its git blob, and
-             record identity, the reviewed freeze comparison and ignore counts
+  checkout   export the granted (plan-bound) source commit with `git archive`
+             into the evidence directory, verify every file against its git
+             blob and every entry of root's 2,879-input main200 build freeze,
+             and record identity, tree, freeze verification and ignore counts
   toolchain  rustc/cargo versions (no compilation) plus OS and hardware model
   tests      tests-render and tests-host from plan.json (--no-run); freeze the
-             incant_render library, model_gpu, game and ui test binaries
+             incant_render library, model_gpu, timestamp_backend_probe, game
+             and ui test binaries
   review     copy the committed review helper into the checkout, build it
              (--no-run) and freeze it; the incant_render library must be the
              same fresh artifact the tests build produced
@@ -22,7 +25,6 @@ Steps:
              lease is held: clippy -D warnings on the review helper target
 """
 
-import fcntl
 import json
 import os
 import re
@@ -37,49 +39,51 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as c  # noqa: E402
 
-IMPLEMENTATION = "99778642585a7b545a9448b9fca4a365ba622985"
 IGNORE = re.compile(r"#\[ignore")
 
 
 def run_group(label, argv, cwd, overrides, timeout, stdout_name, stderr_name):
-    """One bounded process group under the packet flock; never leaves survivors."""
+    """One bounded process group under both flocks; never leaves survivors."""
+    c.grant()  # before any lock or log file can be created
     c.LOGS.mkdir(parents=True, exist_ok=True)
     out_path, err_path = c.LOGS / stdout_name, c.LOGS / stderr_name
-    with open(c.LOCK, "a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    with c.exclusive():
         started = c.now()
-        with open(out_path, "x") as out, open(err_path, "x") as err:
-            child = subprocess.Popen(argv, cwd=cwd, env=c.child_env(overrides), stdout=out,
-                                     stderr=err, start_new_session=True)
-            timed_out = False
-            original_error = None
+        child = None
+        timed_out = False
+        original_error = None
+        code = None
+        with open(out_path, "x") as out, open(err_path, "x") as err, c.terminations_raise():
             try:
+                child = subprocess.Popen(argv, cwd=cwd, env=c.child_env(overrides), stdout=out,
+                                         stderr=err, start_new_session=True)
                 child.wait(timeout=timeout)
             except subprocess.TimeoutExpired:
                 timed_out = True
             except BaseException:
                 # Do not propagate until the child is reaped and its attempt is
-                # durably charged to the ledger, including reserved GPU budgets.
+                # durably recorded in the ledger.
                 original_error = sys.exc_info()
             finally:
-                # A second Ctrl-C must not interrupt kill/reap. SIGKILL of this
-                # runner is inherently outside Python's cleanup guarantee.
-                previous_sigint = signal.signal(signal.SIGINT, signal.SIG_IGN)
-                try:
-                    try:
-                        os.killpg(child.pid, signal.SIGKILL)
-                    except ProcessLookupError:
-                        pass  # also covers exit racing the timeout
-                    code = child.wait()
-                finally:
-                    signal.signal(signal.SIGINT, previous_sigint)
-        try:
-            os.killpg(child.pid, 0)
-            group_empty = False
-        except ProcessLookupError:
-            group_empty = True
+                # Neither a second Ctrl-C nor a termination signal may interrupt
+                # kill/reap. SIGKILL of this runner is outside Python's cleanup.
+                with c.signals_ignored():
+                    if child is not None:
+                        try:
+                            os.killpg(child.pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass  # also covers exit racing the timeout
+                        code = child.wait()
+        group_empty = True
+        if child is not None:
+            try:
+                os.killpg(child.pid, 0)
+                group_empty = False
+            except ProcessLookupError:
+                group_empty = True
         entry = {"label": label, "kind": "build", "argv": [str(a) for a in argv], "cwd": str(cwd),
-                 "env": c.env_receipt(overrides), "pid": child.pid, "started": started,
+                 "env": c.env_receipt(overrides), "pid": child.pid if child is not None else None,
+                 "started": started,
                  "ended": c.now(), "exit": code, "timed_out": timed_out,
                  "wait_error": type(original_error[1]).__name__ if original_error else None, "timeout_s": timeout,
                  "group_empty_after": group_empty, "frames_reserved": 0,
@@ -87,10 +91,7 @@ def run_group(label, argv, cwd, overrides, timeout, stdout_name, stderr_name):
                  "stdout_sha256": c.sha(out_path), "stderr": str(err_path),
                  "stderr_sha256": c.sha(err_path)}
         try:
-            with open(c.POST_RELEASE_LEDGER if c.LATCH.exists() else c.LEDGER, "a") as ledger:
-                ledger.write(json.dumps(entry) + "\n")
-                ledger.flush()
-                os.fsync(ledger.fileno())
+            c.durable_append(c.POST_RELEASE_LEDGER if c.LATCH.exists() else c.LEDGER, entry)
         except BaseException as ledger_error:
             if original_error:
                 raise original_error[1].with_traceback(original_error[2]) from ledger_error
@@ -145,15 +146,17 @@ def checkout():
     tools = c.tools_identity()
     if sys.version_info < (3, 12):
         c.refuse("checkout needs Python 3.12+ for tarfile's data filter")
-    commit = data["source_commit"]
+    pin = c.plan()["source"]
+    commit = data["source_commit"]  # grant() already requires commit == pin["commit"]
     if c.CHECKOUT.exists() or (c.BUILD / "checkout.json").exists():
         c.refuse("child checkout already exists; it is never replaced")
     if subprocess.run(["git", "cat-file", "-e", commit + "^{commit}"], cwd=c.ROOT).returncode:
         c.refuse(f"granted source commit {commit} is not in the local object store")
     tree = c.git("rev-parse", commit + "^{tree}").strip()
+    if tree != pin["tree"]:
+        c.refuse(f"source tree {tree} is not the plan's bound tree {pin['tree']}")
     entries = tree_entries(commit)
-    with open(c.LOCK, "a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    with c.exclusive():
         c.CHECKOUT.mkdir(parents=True)
         archive = subprocess.Popen(["git", "archive", "--format=tar", commit], cwd=c.ROOT,
                                    stdout=subprocess.PIPE)
@@ -176,27 +179,36 @@ def checkout():
     c.write_new_json(c.BUILD / "checkout.json", {"commit": commit, "tree": tree, "files": entries,
                                                  "method": "git archive --format=tar | tarfile data filter",
                                                  "recorded": c.now()})
-    freeze = c.read_json(c.FREEZE)
-    freeze_check = [{"path": f["path"], "reviewed_sha256": f["sha256"],
-                     "checkout_sha256": c.sha(c.CHECKOUT / f["path"]),
-                     "same": c.sha(c.CHECKOUT / f["path"]) == f["sha256"]} for f in freeze["files"]]
-    ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", IMPLEMENTATION, commit],
+    # Root's full build-input freeze, read from the immutable exported source.
+    freeze_path = c.CHECKOUT / c.FREEZE_RELATIVE
+    if c.sha(freeze_path) != pin["freeze_sha256"]:
+        c.refuse("the exported build-input freeze is not the plan's bound freeze")
+    freeze = c.read_json(freeze_path)
+    frozen_files = freeze["files"]
+    if len(frozen_files) != pin["freeze_inputs"]:
+        c.refuse(f"freeze lists {len(frozen_files)} inputs, the plan binds {pin['freeze_inputs']}")
+    differing = [path for path, digest in sorted(frozen_files.items())
+                 if not (c.CHECKOUT / path).is_file() or c.sha(c.CHECKOUT / path) != digest]
+    if differing:
+        c.refuse(f"{len(differing)} frozen build inputs differ in the export: {differing[:5]}")
+    tested = pin["tested_head"]
+    ancestor = subprocess.run(["git", "merge-base", "--is-ancestor", tested, commit],
                               cwd=c.ROOT).returncode == 0
-    changed = c.git("diff", "--stat", IMPLEMENTATION, commit, "--", "crates", "Cargo.toml",
-                    "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml")
+    changed = c.git("diff", "--stat", tested, commit, "--", *pin["build_input_roots"])
     c.write_new_json(c.BUILD / "source.json", {
         "grant_sha256": grant_sha, "tools": tools, "source_commit": commit, "tree": tree,
         "files": len(entries), "checkout_manifest_sha256": c.sha(c.BUILD / "checkout.json"),
-        "reviewed_implementation": IMPLEMENTATION,
-        "implementation_is_ancestor_or_same": ancestor,
-        "build_input_diff_from_implementation": changed,
-        "freeze_file_sha256": c.sha(c.FREEZE), "freeze_comparison": freeze_check,
-        "freeze_all_same": all(f["same"] for f in freeze_check),
+        "freeze": {"path": c.FREEZE_RELATIVE, "sha256": c.sha(freeze_path), "head": freeze.get("head"),
+                   "inputs": len(frozen_files), "verified": len(frozen_files) - len(differing),
+                   "differing": differing},
+        "tested_head": tested, "tested_head_is_ancestor_or_same": ancestor,
+        "build_input_diff_from_tested_head": changed,
         "cargo_lock_sha256": c.sha(c.CHECKOUT / "Cargo.lock"),
         "rust_toolchain": (c.CHECKOUT / "rust-toolchain.toml").read_text(),
         "ignore_attributes": ignore_counts(c.CHECKOUT), "recorded": c.now()})
-    print(json.dumps({"commit": commit, "files": len(entries), "freeze_all_same":
-                      all(f["same"] for f in freeze_check), "ancestor": ancestor}, indent=1))
+    print(json.dumps({"commit": commit, "files": len(entries), "freeze_inputs_verified":
+                      len(frozen_files), "tested_head_ancestor": ancestor,
+                      "build_input_diff": changed or "none"}, indent=1))
 
 
 # ------------------------------------------------------------------ toolchain
@@ -208,20 +220,24 @@ def toolchain():
     overrides = {"PATH": c.RUSTUP_BIN + ":" + c.SYSTEM_PATH, "RUSTUP_AUTO_INSTALL": "0",
                  "TMPDIR": str(c.fresh_dir(c.SCRATCH / "toolchain"))}
     record = {"recorded": c.now(), "env": c.env_receipt(overrides), "commands": {}}
-    lock = open(c.LOCK, "a")
-    fcntl.flock(lock, fcntl.LOCK_EX)
+    with c.exclusive():
+        record["commands"] = probes(overrides)
+    record["python"] = sys.version
+    c.write_new_json(c.BUILD / "toolchain.json", record)
+    print(json.dumps({k: v["stdout"].strip() for k, v in record["commands"].items()}, indent=1))
+
+
+def probes(overrides):
+    commands = {}
     for name, argv in [("cargo", [str(c.CHECKOUT / "tools/cargo"), "-V"]), ("rustc", ["rustc", "-vV"]),
                        ("sw_vers", ["sw_vers"]), ("uname", ["uname", "-srm"]),
                        ("hw_model", ["sysctl", "-n", "hw.model"]),
                        ("cpu", ["sysctl", "-n", "machdep.cpu.brand_string"])]:
         result = subprocess.run(argv, cwd=c.CHECKOUT, env=c.child_env(overrides), capture_output=True,
                                 text=True, timeout=60)
-        record["commands"][name] = {"argv": argv, "exit": result.returncode,
-                                    "stdout": result.stdout, "stderr": result.stderr}
-    lock.close()
-    record["python"] = sys.version
-    c.write_new_json(c.BUILD / "toolchain.json", record)
-    print(json.dumps({k: v["stdout"].strip() for k, v in record["commands"].items()}, indent=1))
+        commands[name] = {"argv": argv, "exit": result.returncode,
+                          "stdout": result.stdout, "stderr": result.stderr}
+    return commands
 
 
 # ------------------------------------------------------------------ builds
@@ -294,7 +310,9 @@ def tests():
     host = cargo("tests-host", p["builds"]["tests-host"])
     frozen = freeze(render, {
         "incant_render-lib-tests": lambda a: a["test"] and a["kind"] == ["lib"] and a["target"] == "incant_render",
-        "model_gpu": lambda a: a["test"] and a["target"] == "model_gpu"}, "tests")
+        "model_gpu": lambda a: a["test"] and a["target"] == "model_gpu",
+        "timestamp_backend_probe": lambda a: a["test"] and a["target"] == "timestamp_backend_probe"},
+        "tests")
     frozen.update(freeze(host, {
         "gpu_host-game": lambda a: a["test"] and a["target"] == "game",
         "gpu_host-ui": lambda a: a["test"] and a["target"] == "ui"}, "tests"))

@@ -1,13 +1,17 @@
-"""Shared constants and guards for handoff 0068 tools. Standard library only.
+"""Shared constants and guards for handoff 0068 revision 2 tools. Standard library only.
 
 Adapted from handoff 0066's committed tools/common.py and lease.py (read-only
 reuse of the 0064/0066 environment-safe logger pattern; nothing from 0065's
 environment logger). Importing this module has no side effects.
 
-Every mutating entry point calls grant() first. Until Astra's review-ready.json
-exists, tools refuse without creating any file or directory. The grant must name
-this packet, the expected target and a full source commit. The packet's GPU
-release latch makes every tool refuse afterwards.
+Revision 2 writes only to the new evidence directory 0068-r2; the historic 0068
+evidence is never opened for writing. Every mutating entry point calls grant()
+first. Until Astra's review-ready.json exists there, tools refuse without
+creating any file or directory. The grant must name this packet, the expected
+target and exactly the source commit plan.json binds. The packet's GPU release
+latch makes every tool refuse afterwards. Every child holds the global
+native-gpu.lock (bounded wait) and then the packet lock; SIGTERM/SIGHUP during a
+child raise into the same audited kill/reap/ledger cleanup as Ctrl-C.
 
 Child environments are constructed from scratch: HOME is passed through
 (its value is never recorded) and every other variable is an explicit override
@@ -16,13 +20,17 @@ or session transport values, credentials and account metadata are never
 serialized.
 """
 
+import contextlib
 import datetime
+import fcntl
 import hashlib
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -32,7 +40,10 @@ TOOLS = PACKET_DIR / "tools"
 PLAN_PATH = PACKET_DIR / "plan.json"
 HELPER_SOURCE = TOOLS / "review" / "gpu_timestamp_review.rs"
 HELPER_DEST = "crates/incant_render/tests/gpu_timestamp_review.rs"
-EVIDENCE = Path("/Users/andreyyurlov/.codex/incant-evidence/0068")
+EVIDENCE = Path("/Users/andreyyurlov/.codex/incant-evidence/0068-r2")
+HISTORIC_EVIDENCE = Path("/Users/andreyyurlov/.codex/incant-evidence/0068")  # read-only
+GLOBAL_LOCK = Path("/Users/andreyyurlov/.codex/incant-evidence/native-gpu.lock")
+GLOBAL_LOCK_WAIT_S = 60
 GRANT = EVIDENCE / "review-ready.json"
 TARGET = Path("/Users/andreyyurlov/.codex/incant-core-presentation-target")
 ROOT_TARGET = Path("/Users/andreyyurlov/.codex/incant-gpu-timestamps-target")
@@ -51,7 +62,8 @@ SCRATCH = EVIDENCE / "tmp"
 CAPTURES = EVIDENCE / "captures"
 RUSTUP_BIN = "/opt/homebrew/opt/rustup/bin"
 SYSTEM_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
-FREEZE = ROOT / "docs/spikes/evidence/gpu-timestamps/freeze.json"
+# Root's 2,879-input build freeze for the main200 composition (path inside the source).
+FREEZE_RELATIVE = "docs/spikes/evidence/gpu-timestamps-main200/freeze.json"
 INHERITED = ("HOME",)
 # The only variables a child receives besides INHERITED, all nonsecret.
 OVERRIDES = {
@@ -111,17 +123,72 @@ def refuse(reason):
 
 
 def grant():
-    """Astra's grant must name this packet, the target and a full source commit."""
+    """Astra's grant must name this packet, the target and the plan's bound source."""
     if not GRANT.is_file():
         raise SystemExit("refused: review-ready.json is absent; preparation only")
     data = read_json(GRANT)
     commit = data.get("source_commit")
-    if (data.get("packet") != PACKET or data.get("target") != str(TARGET)
+    if (data.get("packet") not in (PACKET, PACKET + "-r2") or data.get("target") != str(TARGET)
             or not isinstance(commit, str) or not re.fullmatch(r"[0-9a-f]{40}", commit)):
         refuse("review-ready.json does not name this packet, the target and a source commit")
+    if commit != plan()["source"]["commit"]:
+        refuse("the granted source differs from the immutable source plan.json binds")
     if TARGET == ROOT_TARGET:
         refuse("the granted target is root's own target")
     return data, sha(GRANT)
+
+
+@contextlib.contextmanager
+def exclusive():
+    """The global native-gpu.lock (bounded wait, never indefinite), then the packet
+    lock. Both are exclusive flocks released on exit, including on exceptions."""
+    with open(GLOBAL_LOCK, "a") as shared, open(LOCK, "a") as packet:
+        deadline = time.monotonic() + GLOBAL_LOCK_WAIT_S
+        while True:
+            try:
+                fcntl.flock(shared, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                break
+            except BlockingIOError:
+                if time.monotonic() >= deadline:
+                    refuse("global native-gpu.lock is held by another owner")
+                time.sleep(0.5)
+        fcntl.flock(packet, fcntl.LOCK_EX)
+        yield
+
+
+class Interrupted(BaseException):
+    """SIGTERM/SIGHUP while a child runs; handled exactly like KeyboardInterrupt."""
+
+
+@contextlib.contextmanager
+def terminations_raise():
+    def handler(number, _frame):
+        raise Interrupted(signal.Signals(number).name)
+    previous = {n: signal.signal(n, handler) for n in (signal.SIGTERM, signal.SIGHUP)}
+    try:
+        yield
+    finally:
+        for number, old in previous.items():
+            signal.signal(number, old)
+
+
+@contextlib.contextmanager
+def signals_ignored():
+    """Kill/reap must not be interrupted by a second Ctrl-C or a termination signal."""
+    previous = {n: signal.signal(n, signal.SIG_IGN)
+                for n in (signal.SIGINT, signal.SIGTERM, signal.SIGHUP)}
+    try:
+        yield
+    finally:
+        for number, old in previous.items():
+            signal.signal(number, old)
+
+
+def durable_append(path, row):
+    with open(path, "a") as log:
+        log.write(json.dumps(row) + "\n")
+        log.flush()
+        os.fsync(log.fileno())
 
 
 def gate(after_gpu_release=False):

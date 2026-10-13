@@ -3,6 +3,12 @@
 //! and copied into the granted child checkout as
 //! crates/incant_render/tests/gpu_timestamp_review.rs by tools/build.py.
 //!
+//! Revision 2 (main200 pass timestamps): measured samples must carry nonzero,
+//! finite endpoints for every present group and a positive aggregate interval;
+//! expected Shadows needs a shadowing directional light; a measured frame counts
+//! twice against the numeric budget (the frame plus the renderer's own resolve
+//! submission); `cascades` isolates the four-pass shadow group.
+//!
 //! Appearance cases prepare one SceneInput, then render it through
 //! `Renderer::new` (timing disabled) and `Renderer::new_with_gpu_timing` (timing
 //! enabled) into the same Rgba8UnormSrgb target size and viewport. Every frame
@@ -102,8 +108,8 @@ impl Report {
         writeln!(self.events, "{value}").unwrap();
         self.events.flush().unwrap();
     }
-    fn count_submission(&mut self) {
-        self.submissions += 1;
+    fn count_submissions(&mut self, count: u32) {
+        self.submissions += count;
         assert!(
             self.submissions <= self.submission_limit,
             "numeric submission budget exceeded"
@@ -243,7 +249,8 @@ fn frame(
     );
     let timed = renderer.gpu_timing_stats().is_ok_and(|s| s.enabled);
     if timed {
-        report.count_submission();
+        // A measured frame also triggers the renderer's resolve submission.
+        report.count_submissions(2);
     }
     report.event(json!({"event": "frame", "name": name, "timed": timed, "index": report.frames}));
     let texture = renderer.device.create_texture(&wgpu::TextureDescriptor {
@@ -337,15 +344,27 @@ fn local_lights(input: &SceneInput) -> usize {
         .filter(|node| matches!(node.light, Some(SceneLight::Point(_) | SceneLight::Spot(_))))
         .count()
 }
+/// Directional lights with cascaded shadows; each contributes four cascade passes.
+fn shadow_lights(input: &SceneInput) -> usize {
+    input
+        .nodes
+        .iter()
+        .filter(|node| {
+            matches!(&node.light, Some(SceneLight::Directional(light)) if light.shadows.is_some())
+        })
+        .count()
+}
 /// Groups the frame graph encodes for this content (src/graph.rs systems).
 fn expected_groups(scene: &RenderScene, input: &SceneInput) -> [bool; GPU_PASS_COUNT] {
     let stats = scene.stats();
     let models = stats.model_draw_calls > 0;
     let lights = local_lights(input) > 0;
+    let shadowing = shadow_lights(input) > 0;
     GpuPass::ALL.map(|pass| match pass {
         GpuPass::InitializeScene | GpuPass::Display => true,
         GpuPass::AssignLights => models && lights,
-        GpuPass::Shadows | GpuPass::Models => models,
+        GpuPass::Shadows => models && shadowing,
+        GpuPass::Models => models,
         GpuPass::Sprites => stats.sprite_entities + stats.tilemap_entities > 0,
         GpuPass::Text => stats.text_glyph_quads > 0,
     })
@@ -384,6 +403,16 @@ fn sample_checks(sample: &GpuFrameTiming, expected: [bool; GPU_PASS_COUNT]) -> (
         .chain([&sample.frame])
         .all(|s| s.end_ticks >= s.start_ticks && s.nanoseconds.is_finite() && s.nanoseconds >= 0.);
     let period_valid = sample.timestamp_period_ns.is_finite() && sample.timestamp_period_ns > 0.;
+    // Zero counters are unwritten storage, never a measurement. Equal nonzero
+    // endpoints remain a valid quantized zero interval for an individual group.
+    let endpoints_nonzero = sample
+        .passes
+        .iter()
+        .flatten()
+        .chain([&sample.frame])
+        .all(|s| s.start_ticks > 0 && s.end_ticks > 0);
+    let aggregate_nonzero =
+        sample.frame.end_ticks > sample.frame.start_ticks && sample.frame.nanoseconds > 0.;
     let within_frame = sample.passes.iter().flatten().all(|s| {
         s.start_ticks >= sample.frame.start_ticks && s.end_ticks <= sample.frame.end_ticks
     });
@@ -405,16 +434,18 @@ fn sample_checks(sample: &GpuFrameTiming, expected: [bool; GPU_PASS_COUNT]) -> (
         .map(|(pass, _)| format!("{pass:?}"))
         .collect();
     (
-        labels_match && spans_valid && period_valid,
+        labels_match && spans_valid && period_valid && endpoints_nonzero && aggregate_nonzero,
         json!({
             "sequence": sample.sequence,
             "labels_match_expected": labels_match,
             "present": labels(present),
             "spans_ordered_finite_nonnegative": spans_valid,
             "period_finite_positive": period_valid,
+            "endpoints_nonzero": endpoints_nonzero,
+            "aggregate_nonzero": aggregate_nonzero,
             "observation_groups_within_frame": within_frame,
             "observation_dependency_order_violations": order_violations,
-            "observation_zero_tick_groups": zero,
+            "observation_zero_length_groups": zero,
         }),
     )
 }
@@ -426,7 +457,13 @@ fn compare(a: &[u8], b: &[u8]) -> Value {
     let mut differing = 0usize;
     let mut max_delta = 0u8;
     let mut first = None;
-    for (index, (x, y)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+    for (index, (x, y)) in a
+        .as_chunks::<4>()
+        .0
+        .iter()
+        .zip(b.as_chunks::<4>().0)
+        .enumerate()
+    {
         if x != y {
             differing += 1;
             let delta = x
@@ -447,7 +484,7 @@ fn compare(a: &[u8], b: &[u8]) -> Value {
     })
 }
 fn content(pixels: &[u8]) -> Value {
-    let distinct: HashSet<&[u8]> = pixels.chunks_exact(4).collect();
+    let distinct: HashSet<&[u8; 4]> = pixels.as_chunks::<4>().0.iter().collect();
     let [width, height] = SIZE.map(|v| v as usize);
     let at = |x: usize, y: usize| pixels[(y * width + x) * 4..(y * width + x) * 4 + 4].to_vec();
     json!({
@@ -607,13 +644,17 @@ fn sun_rotation(elevation_degrees: f64, azimuth_degrees: f64) -> [f64; 4] {
         * DQuat::from_rotation_x(-elevation_degrees.to_radians()))
     .to_array()
 }
-/// Look-dev geometry, environment fill, a shadowing sun and two point lights.
+/// Look-dev geometry, environment fill, a sun (optionally shadowing, four cascades)
+/// and optionally two clustered point lights.
 struct Lit {
     f: materials::Fixture,
     camera: String,
 }
 impl Lit {
     fn new() -> Self {
+        Self::with(true, true)
+    }
+    fn with(shadows: bool, local: bool) -> Self {
         let mut f = materials::Fixture::new(json!({}));
         write_lookdev(&mut f);
         f.environment(&[34, 36, 44, 255].repeat(2), 2, 1, TextureUsage::Linear);
@@ -634,10 +675,12 @@ impl Lit {
         let camera_id = camera.id.clone();
         entities.insert(camera_id.clone(), camera);
         let mut sun = Entity::new("Review sun");
-        sun.components.insert(
-            "DirectionalLight".into(),
-            json!({"color":[1,0.96,0.9],"intensity":3.2,"shadows":{"distance":60}}),
-        );
+        let mut directional = json!({"color":[1,0.96,0.9],"intensity":3.2});
+        if shadows {
+            directional["shadows"] = json!({"distance":60});
+        }
+        sun.components
+            .insert("DirectionalLight".into(), directional);
         sun.components.insert(
             "Transform".into(),
             json!(Transform {
@@ -646,10 +689,11 @@ impl Lit {
             }),
         );
         entities.insert(sun.id.clone(), sun);
-        for (name, color, at) in [
+        let points = [
             ("Warm local light", [1.0, 0.62, 0.32], [-1.3, 1.1, 1.7]),
             ("Cool local light", [0.35, 0.6, 1.0], [2.2, 1.0, 0.4]),
-        ] {
+        ];
+        for (name, color, at) in points.into_iter().filter(|_| local) {
             let mut light = Entity::new(name);
             light.components.insert(
                 "PointLight".into(),
@@ -865,6 +909,7 @@ fn scene_json(scene: &RenderScene, input: &SceneInput, viewport: Option<Viewport
     json!({
         "stats": scene.stats(),
         "local_lights": local_lights(input),
+        "shadow_lights": shadow_lights(input),
         "expected_groups": labels(expected_groups(scene, input)),
         "format": "Rgba8UnormSrgb",
         "size": SIZE,
@@ -883,7 +928,7 @@ fn matched_pair(
     viewport: Option<Viewport>,
     names: [&str; 2],
 ) {
-    let mut report = Report::open(case, 2, 1);
+    let mut report = Report::open(case, 2, 2);
     let instance = wgpu::Instance::default();
     let off = open_renderer(&instance, false).expect("default renderer");
     let scene = prepare(&off, input, camera);
@@ -950,7 +995,7 @@ fn matched_pair(
 #[test]
 #[ignore = "handoff 0068 packet review; run only by the guarded packet runner"]
 fn probe() {
-    let mut report = Report::open("probe", 0, 0);
+    let report = Report::open("probe", 0, 0);
     let instance = wgpu::Instance::default();
     let off = open_renderer(&instance, false).expect("default renderer");
     let off_stats = off.gpu_timing_stats().unwrap();
@@ -970,11 +1015,8 @@ fn probe() {
                 [
                     ("timing_constructor_succeeded", true),
                     (
-                        "timing_device_has_encoder_timestamps",
-                        features.contains(
-                            wgpu::Features::TIMESTAMP_QUERY
-                                | wgpu::Features::TIMESTAMP_QUERY_INSIDE_ENCODERS,
-                        ),
+                        "timing_device_has_pass_timestamps",
+                        features.contains(wgpu::Features::TIMESTAMP_QUERY),
                     ),
                     ("timing_stats_empty", stats == timing_stats(0, 0, 0)),
                     ("timing_take_none_before_frames", sample.is_none()),
@@ -986,7 +1028,7 @@ fn probe() {
             json!({"refused": error.to_string()}),
             [
                 ("timing_constructor_succeeded", false),
-                ("timing_device_has_encoder_timestamps", false),
+                ("timing_device_has_pass_timestamps", false),
                 ("timing_stats_empty", false),
                 ("timing_take_none_before_frames", false),
                 ("period_finite_positive", false),
@@ -1019,7 +1061,7 @@ fn probe() {
 #[test]
 #[ignore = "handoff 0068 packet review; run only by the guarded packet runner"]
 fn lit() {
-    let mut report = Report::open("lit", 8, 5);
+    let mut report = Report::open("lit", 8, 10);
     let lit = Lit::new();
     let input = lit.input();
     let instance = wgpu::Instance::default();
@@ -1194,6 +1236,123 @@ fn viewport() {
     );
 }
 
+/// Four-cascade shadow group: the first cascade pass writes the group's beginning,
+/// the last its end, and the two interior passes carry no timestamp descriptor.
+/// Timing off/on compare exact bytes. The same scene with the sun's shadows
+/// removed must report no Shadows group at all and must render differently.
+#[test]
+#[ignore = "handoff 0068 packet review; run only by the guarded packet runner"]
+fn cascades() {
+    let mut report = Report::open("cascades", 3, 4);
+    let shadowed = Lit::with(true, false);
+    let unshadowed = Lit::with(false, false);
+    let shadowed_input = shadowed.input();
+    let unshadowed_input = unshadowed.input();
+    let instance = wgpu::Instance::default();
+    let off = open_renderer(&instance, false).expect("default renderer");
+    let scene = prepare(&off, &shadowed_input, &shadowed.camera);
+    let expected = expected_groups(&scene, &shadowed_input);
+    let shadowed_scene = scene_json(&scene, &shadowed_input, None);
+    let pixels_off = frame(&mut report, &off, &scene, None, "off-shadowed");
+    let renderer_off = describe(&off);
+    drop(scene);
+    drop(off);
+    let on = open_renderer(&instance, true).expect("timing renderer");
+    let scene = prepare(&on, &shadowed_input, &shadowed.camera);
+    let expected_on = expected_groups(&scene, &shadowed_input);
+    let pixels_on = frame(&mut report, &on, &scene, None, "on-shadowed");
+    let (sample, mut first) = take(&on);
+    drop(scene);
+    let scene = prepare(&on, &unshadowed_input, &unshadowed.camera);
+    let expected_unshadowed = expected_groups(&scene, &unshadowed_input);
+    let unshadowed_scene = scene_json(&scene, &unshadowed_input, None);
+    let pixels_unshadowed = frame(&mut report, &on, &scene, None, "on-unshadowed");
+    let (sample_unshadowed, mut second) = take(&on);
+    let (extra, third) = take(&on);
+    let final_stats = on.gpu_timing_stats().unwrap();
+    let renderer_on = describe(&on);
+    drop(scene);
+    drop(on);
+    report.png("cascades-off.png", &pixels_off);
+    report.png("cascades-on.png", &pixels_on);
+    report.png("cascades-on-unshadowed.png", &pixels_unshadowed);
+    first["scene"] = shadowed_scene.clone();
+    second["scene"] = unshadowed_scene.clone();
+    let shadows = GpuPass::ALL
+        .iter()
+        .position(|pass| *pass == GpuPass::Shadows)
+        .unwrap();
+    let (shadowed_ok, shadowed_checks) = sample
+        .as_ref()
+        .map(|s| sample_checks(s, expected))
+        .unwrap_or((false, Value::Null));
+    let (unshadowed_ok, unshadowed_checks) = sample_unshadowed
+        .as_ref()
+        .map(|s| sample_checks(s, expected_unshadowed))
+        .unwrap_or((false, Value::Null));
+    let checks = [
+        ("pixels_identical_timing_off_vs_on", pixels_off == pixels_on),
+        (
+            "unshadowed_control_renders_differently",
+            pixels_unshadowed != pixels_off,
+        ),
+        (
+            "expected_groups_same_on_both_devices",
+            expected == expected_on,
+        ),
+        ("shadowed_content_expects_shadows", expected[shadows]),
+        (
+            "unshadowed_content_expects_no_shadows",
+            !expected_unshadowed[shadows],
+        ),
+        (
+            "shadowed_sample_sequence_1",
+            sample.is_some_and(|s| s.sequence == 1),
+        ),
+        ("shadowed_sample_contract", shadowed_ok),
+        (
+            "shadow_group_both_endpoints_written",
+            sample.is_some_and(|s| {
+                s.passes[shadows].is_some_and(|g| g.start_ticks > 0 && g.end_ticks >= g.start_ticks)
+            }),
+        ),
+        (
+            "unshadowed_sample_sequence_2",
+            sample_unshadowed.is_some_and(|s| s.sequence == 2),
+        ),
+        ("unshadowed_sample_contract", unshadowed_ok),
+        (
+            "no_third_sample",
+            extra.is_none() && third["outcome"] == "none",
+        ),
+        ("stats_final", final_stats == timing_stats(0, 0, 0)),
+    ];
+    let body = json!({
+        "scene": shadowed_scene,
+        "scenes": {"shadowed": shadowed_scene, "unshadowed": unshadowed_scene},
+        "renderers": {"off": renderer_off, "on": renderer_on},
+        "frames": {
+            "off-shadowed": content(&pixels_off),
+            "on-shadowed": content(&pixels_on),
+            "on-unshadowed": content(&pixels_unshadowed),
+        },
+        "comparisons": {
+            "on-shadowed vs off-shadowed": compare(&pixels_off, &pixels_on),
+            "on-unshadowed vs off-shadowed (control, must differ)":
+                compare(&pixels_off, &pixels_unshadowed),
+        },
+        "timing": {
+            "takes": [first, second, third],
+            "stats_final": final_stats,
+            "sample_checks": [shadowed_checks, unshadowed_checks],
+        },
+    });
+    assert!(
+        report.finish(body, &checks),
+        "cascades failed; see report.json"
+    );
+}
+
 /// Requires Astra's review before execution (brief: callback-after-owner-drop).
 /// Observes only that the retained device completes the submission without a
 /// panic or hang after the owner is gone; the orphaned result is unobservable.
@@ -1202,7 +1361,7 @@ fn viewport() {
 #[test]
 #[ignore = "handoff 0068 packet review; run only by the guarded packet runner"]
 fn owner_drop() {
-    let mut report = Report::open("owner_drop", 0, 1);
+    let mut report = Report::open("owner_drop", 0, 2);
     let instance = wgpu::Instance::default();
     let renderer = open_renderer(&instance, true).expect("timing renderer");
     let directory = tempfile::tempdir().unwrap();
@@ -1229,7 +1388,7 @@ fn owner_drop() {
     let before = renderer.gpu_timing_stats().unwrap();
     let device = renderer.device.clone();
     let queue = renderer.queue.clone();
-    report.count_submission();
+    report.count_submissions(2);
     let submission = queue.submit([commands]);
     drop(scene);
     drop(view);
@@ -1244,6 +1403,15 @@ fn owner_drop() {
         Err(error) => json!({"error": error.to_string()}),
     };
     let poll_ok = waited.get("ok").is_some();
+    // The completion callback submits the renderer's resolve; drain that too.
+    let drained = match device.poll(wgpu::PollType::Wait {
+        submission_index: None,
+        timeout: Some(Duration::from_secs(10)),
+    }) {
+        Ok(status) => json!({"ok": format!("{status:?}")}),
+        Err(error) => json!({"error": error.to_string()}),
+    };
+    let drained_ok = drained.get("ok").is_some();
     drop(queue);
     drop(device);
     let fresh = open_renderer(&instance, true).expect("fresh timing renderer");
@@ -1253,6 +1421,7 @@ fn owner_drop() {
     let checks = [
         ("one_pending_before_submit", before == timing_stats(1, 0, 0)),
         ("retained_device_wait_ok_after_owner_drop", poll_ok),
+        ("retained_device_drained_resolve_chain", drained_ok),
         (
             "fresh_owner_starts_empty",
             fresh_stats == timing_stats(0, 0, 0),
@@ -1262,6 +1431,7 @@ fn owner_drop() {
     let body = json!({
         "stats_before_submit": before,
         "retained_device_wait": waited,
+        "retained_device_drain": drained,
         "fresh_stats": fresh_stats,
         "fresh_take": fresh_take,
     });

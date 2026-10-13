@@ -1,22 +1,29 @@
 #!/usr/bin/env python3
-"""CPU-only analysis and evidence publication for handoff 0068. Standard library only.
-Never starts a renderer, compiler or GPU child.
+"""CPU-only analysis and evidence publication for handoff 0068 revision 2.
+Standard library only. Never starts a renderer, compiler or GPU child.
 
   python3 -I -B analyze.py check     summarize the ledger with independent re-checks
   python3 -I -B analyze.py publish   after gpu.py release and lease.py release:
                                      copy receipts and a small screenshot selection
-                                     into the packet directory (create-only)
+                                     into evidence-r2/ and screenshots-r2/ (create-only;
+                                     the historic evidence/ and screenshots/ stay untouched)
 
 Independent of the Rust helper: PNGs are decoded here (8-bit RGBA, all five
 filters) and compared to the helper's RGBA hashes and to each other; expected
-timestamp groups are re-derived from the recorded scene statistics; numeric-test
-samples are parsed from its stderr and checked for sequence, labels, ordering
-and tick-to-nanosecond conversion. Durations are never interpreted as
-performance.
+timestamp groups are re-derived from the recorded scene statistics, local-light
+and shadowing-light counts; numeric-test samples are parsed from its stderr.
+
+A sample is an accepted measurement only if its present groups equal the
+content-derived set (absent groups stay absent), every present frame/group value
+is finite, every present endpoint is a nonzero counter, every span is ordered,
+and the aggregate frame interval is positive. Equal nonzero endpoints are a
+valid quantized zero interval; zero counters, unwritten payloads, typed errors
+and skipped tests are never accepted. Durations are never read as performance.
 """
 
 import hashlib
 import json
+import math
 import shutil
 import struct
 import sys
@@ -30,8 +37,8 @@ import common as c  # noqa: E402
 PASSES = ["InitializeScene", "AssignLights", "Shadows", "Models", "Sprites", "Text", "Display"]
 RANK = dict(zip(PASSES, [0, 0, 0, 1, 2, 3, 4]))
 # Numeric-test fixture (tests/support fixture): two cooked model instances, no
-# lights, sprites or text. The test itself asserts only a subset of this.
-NUMERIC_EXPECTED = {"InitializeScene": True, "AssignLights": False, "Shadows": True,
+# lights, sprites or text, so no shadow layers. The test asserts only a subset.
+NUMERIC_EXPECTED = {"InitializeScene": True, "AssignLights": False, "Shadows": False,
                     "Models": True, "Sprites": False, "Text": False, "Display": True}
 
 
@@ -91,33 +98,53 @@ def diff(a, b, width):
             "first_difference": first}
 
 
-def expected_groups(stats, local_lights):
+def expected_groups(stats, local_lights, shadow_lights):
+    """Groups src/graph.rs encodes for this content: shadows need model draws and at
+    least one shadowing directional light (four cascade layers each)."""
     models = stats["model_draw_calls"] > 0
-    return {"InitializeScene": True, "AssignLights": models and local_lights > 0, "Shadows": models,
-            "Models": models, "Sprites": stats["sprite_entities"] + stats["tilemap_entities"] > 0,
+    return {"InitializeScene": True, "AssignLights": models and local_lights > 0,
+            "Shadows": models and shadow_lights > 0, "Models": models,
+            "Sprites": stats["sprite_entities"] + stats["tilemap_entities"] > 0,
             "Text": stats["text_glyph_quads"] > 0, "Display": True}
 
 
+def finite(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
 def sample_review(spans, frame, period, expected):
-    """spans: {pass: {start_ticks, end_ticks, nanoseconds} | None}."""
+    """spans: {pass: {start_ticks, end_ticks, nanoseconds} | None}; returns the
+    acceptance verdict plus observations that never decide it."""
     present = {name: spans.get(name) is not None for name in PASSES}
-    all_spans = [s for s in spans.values() if s] + [frame]
-    conversion = all(abs(s["nanoseconds"] - (s["end_ticks"] - s["start_ticks"]) * period)
-                     <= 1e-6 * max(1.0, abs(s["nanoseconds"])) for s in all_spans)
+    measured = [s for s in spans.values() if s] + [frame]
+    values_finite = finite(period) and period > 0 and all(
+        finite(s["start_ticks"]) and finite(s["end_ticks"]) and finite(s["nanoseconds"])
+        for s in measured)
+    endpoints_nonzero = all(s["start_ticks"] > 0 and s["end_ticks"] > 0 for s in measured)
+    ordered = all(s["end_ticks"] >= s["start_ticks"] and s["nanoseconds"] >= 0 for s in measured)
+    aggregate_nonzero = frame["end_ticks"] > frame["start_ticks"] and frame["nanoseconds"] > 0
+    conversion = values_finite and all(
+        abs(s["nanoseconds"] - (s["end_ticks"] - s["start_ticks"]) * period)
+        <= 1e-6 * max(1.0, abs(s["nanoseconds"])) for s in measured)
+    labels = present == expected
     order = [f"{a} > {b}" for a in PASSES for b in PASSES
              if spans.get(a) and spans.get(b) and RANK[a] < RANK[b]
              and spans[a]["end_ticks"] > spans[b]["start_ticks"]]
-    return {"labels_match_expected": present == expected,
+    return {"accepted": labels and values_finite and endpoints_nonzero and ordered
+            and aggregate_nonzero and conversion,
+            "labels_match_expected": labels,
             "missing": [n for n in PASSES if expected[n] and not present[n]],
             "unexpected": [n for n in PASSES if present[n] and not expected[n]],
-            "spans_ordered": all(s["end_ticks"] >= s["start_ticks"] for s in all_spans),
+            "values_finite": values_finite, "endpoints_nonzero": endpoints_nonzero,
+            "spans_ordered": ordered, "aggregate_nonzero": aggregate_nonzero,
             "conversion_matches_period": conversion,
             "observation_dependency_order_violations": order,
             "observation_within_frame": all(s["start_ticks"] >= frame["start_ticks"]
                                             and s["end_ticks"] <= frame["end_ticks"]
                                             for s in spans.values() if s),
-            "observation_zero_tick_groups": [n for n in PASSES if spans.get(n)
-                                             and spans[n]["start_ticks"] == spans[n]["end_ticks"]]}
+            "observation_zero_length_groups": [n for n in PASSES if spans.get(n)
+                                               and spans[n]["start_ticks"] == spans[n]["end_ticks"]],
+            "observation_frame_ns": frame["nanoseconds"]}
 
 
 def numeric_review(entry):
@@ -128,9 +155,13 @@ def numeric_review(entry):
         reviews.append({"sequence": sample["sequence"], "period_ns": sample["timestamp_period_ns"],
                         **sample_review(spans, sample["frame"], sample["timestamp_period_ns"],
                                         NUMERIC_EXPECTED)})
-    return {"exit": entry["exit"], "timed_out": entry["timed_out"], "libtest": entry["libtest"],
-            "adapter_lines": entry.get("adapter_lines"),
-            "sequences": sorted(s["sequence"] for s in samples), "samples": reviews}
+    sequences = sorted(s["sequence"] for s in samples)
+    accepted = (bool(entry.get("exactly_one_test_ran")) and bool(entry.get("test_passed"))
+                and sequences == [1, 2] and all(r["accepted"] for r in reviews))
+    return {"accepted": accepted, "exit": entry["exit"], "timed_out": entry["timed_out"],
+            "exactly_one_test_ran": entry.get("exactly_one_test_ran"),
+            "test_passed": entry.get("test_passed"), "libtest": entry["libtest"],
+            "adapter_lines": entry.get("adapter_lines"), "sequences": sequences, "samples": reviews}
 
 
 def review_review(entry):
@@ -138,7 +169,7 @@ def review_review(entry):
     report_path = output / "report.json"
     if not report_path.exists():
         return {"case": entry["case"], "report": None, "exit": entry["exit"],
-                "timed_out": entry["timed_out"]}
+                "timed_out": entry["timed_out"], "accepted": False}
     report = c.read_json(report_path)
     decoded, pngs = {}, []
     for png in report.get("pngs", []):
@@ -151,37 +182,51 @@ def review_review(entry):
     for a, b in c.plan()["totals"]["retained_png_pairs"]:
         if a in decoded and b in decoded:
             pairs.append({"a": a, "b": b, **diff(decoded[a][1], decoded[b][1], decoded[a][0])})
-    samples = []
-    scene = report.get("scene")
     timing = report.get("timing", {})
-    takes = timing.get("drain", []) + timing.get("reuse", []) + timing.get("takes", [])
-    if scene:
-        expected = expected_groups(scene["stats"], scene["local_lights"])
-        for take in takes:
-            if take.get("outcome") == "sample":
-                raw = take["raw"]
-                samples.append({"sequence": raw["sequence"], **sample_review(
-                    take["labeled"], raw["frame"], raw["timestamp_period_ns"], expected)})
+    takes = (timing.get("drain", []) + timing.get("reuse", []) + timing.get("takes", []))
+    samples, errors = [], []
+    for take in takes:
+        scene = take.get("scene") or report.get("scene")
+        if take.get("outcome") == "sample" and scene:
+            raw = take["raw"]
+            expected = expected_groups(scene["stats"], scene["local_lights"], scene["shadow_lights"])
+            samples.append({"sequence": raw["sequence"], **sample_review(
+                take["labeled"], raw["frame"], raw["timestamp_period_ns"], expected)})
+        elif take.get("outcome") == "error":
+            errors.append(take)
     return {"case": entry["case"], "exit": entry["exit"], "timed_out": entry["timed_out"],
             "outcome": report.get("outcome"), "checks": report.get("checks"),
             "frames_rendered": report.get("frames_rendered"),
             "timed_submissions": report.get("timed_submissions"),
-            "take_outcomes": [t.get("outcome") for t in takes], "pngs": pngs,
-            "independent_pairs": pairs, "independent_samples": samples}
+            "take_outcomes": [t.get("outcome") for t in takes], "take_errors": errors,
+            "pngs": pngs, "independent_pairs": pairs, "independent_samples": samples,
+            "accepted": (report.get("outcome") == "pass" and not errors
+                         and all(s["accepted"] for s in samples)
+                         and all(p["equal"] for p in pairs)
+                         and all(p["file_sha256_matches"] and p["decoded_rgba_matches_helper"]
+                                 for p in pngs))}
 
 
 def check():
     c.grant()
-    entries = [json.loads(line) for line in c.LEDGER.read_text().splitlines() if line.strip()]
+    rows = [json.loads(line) for line in c.LEDGER.read_text().splitlines() if line.strip()]
+    debited = [row for row in rows if row["kind"] == "debit"]
+    entries = [row for row in rows if row["kind"] != "debit"]
+    numeric = [numeric_review(e) for e in entries if e["kind"] == "numeric"]
+    reviews = [review_review(e) for e in entries if e["kind"] == "review"]
+    measured = [r for r in reviews if r["independent_samples"] or r["take_errors"]]
     summary = {"recorded": c.now(), "ledger_sha256": c.sha(c.LEDGER), "children": len(entries),
-               "frames_reserved": sum(e.get("frames_reserved", 0) for e in entries),
-               "submissions_reserved": sum(e.get("submissions_reserved", 0) for e in entries),
+               "debited_attempts": len(debited),
+               "attempts_without_result": sorted({d["label"] for d in debited}
+                                                 - {e["label"] for e in entries}),
+               "frames_debited": sum(d["frames"] for d in debited),
+               "submissions_debited": sum(d["submissions"] for d in debited),
                "builds": [{k: e[k] for k in ("label", "exit", "timed_out", "started", "ended")}
                           for e in entries if e["kind"] == "build"],
                "listings": {e["item"]: {"count": e.get("listed_count"),
-                                        "matches_reviewed_base": e.get("matches_reviewed_base")}
+                                        "matches_plan": e.get("matches_plan")}
                             for e in entries if e["kind"] == "list"},
-               "numeric": [numeric_review(e) for e in entries if e["kind"] == "numeric"],
+               "numeric": numeric,
                "suites": {e["item"]: {"exit": e["exit"], "timed_out": e["timed_out"],
                                       "libtest": e["libtest"],
                                       "expected_running": e.get("expected_running"),
@@ -189,15 +234,18 @@ def check():
                                       "skipped_names_absent_from_output":
                                           e.get("skipped_names_absent_from_output")}
                           for e in entries if e["kind"] == "suite"},
-               "reviews": [review_review(e) for e in entries if e["kind"] == "review"],
+               "reviews": reviews,
+               "measurement_accepted": (len(numeric) == 1 and numeric[0]["accepted"]
+                                        and bool(measured) and all(r["accepted"] for r in measured)),
                "all_children_group_empty": all(e.get("group_empty_after", True) for e in entries),
                "binaries_unchanged": all(e.get("binary_sha256_before") == e.get("binary_sha256_after")
                                          for e in entries if e["kind"] != "build")}
     path = c.EVIDENCE / "analysis" / ("summary-" + summary["recorded"].replace(":", "") + ".json")
     c.write_new_json(path, summary)
     print(json.dumps({"summary": str(path), "children": summary["children"],
-                      "frames_reserved": summary["frames_reserved"],
-                      "submissions_reserved": summary["submissions_reserved"]}, indent=1))
+                      "frames_debited": summary["frames_debited"],
+                      "submissions_debited": summary["submissions_debited"],
+                      "measurement_accepted": summary["measurement_accepted"]}, indent=1))
 
 
 def normalized_text(raw):
@@ -212,11 +260,12 @@ def publish():
     lease = c.read_json(c.LEASE)
     if not c.LATCH.exists() or not lease.get("released_at"):
         c.refuse("publish only after gpu.py release and lease.py release")
-    destination = c.PACKET_DIR / "evidence"
-    screenshots = c.PACKET_DIR / "screenshots"
+    destination = c.PACKET_DIR / "evidence-r2"
+    screenshots = c.PACKET_DIR / "screenshots-r2"
     if destination.exists() or screenshots.exists():
-        c.refuse("published evidence already exists; it is never replaced")
-    entries = [json.loads(line) for line in c.LEDGER.read_text().splitlines() if line.strip()]
+        c.refuse("published r2 evidence already exists; it is never replaced")
+    rows = [json.loads(line) for line in c.LEDGER.read_text().splitlines() if line.strip()]
+    entries = [row for row in rows if row["kind"] != "debit"]
     picks = [(c.GRANT, "gpu/grant-copy.json"), (c.LEDGER, "gpu/ledger.jsonl"),
              (c.LATCH, "gpu/gpu-released.json"), (c.LEASE, "lease/target-lease.json")]
     if c.REFUSALS.exists():

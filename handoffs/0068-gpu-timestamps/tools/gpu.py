@@ -1,28 +1,33 @@
 #!/usr/bin/env python3
-"""Guarded serial GPU runner for handoff 0068. Standard library only.
+"""Guarded serial GPU runner for handoff 0068 revision 2. Standard library only.
 
-Adapted from handoff 0066's committed tools/gpu.py (read-only reuse). Before
-every child, under the packet flock, it checks in this order: Astra's grant
-(packet, target, source commit), the packet release latch, the target lease
-(same grant), committed packet tools, every child-checkout file against its git
-blob, and the frozen binary SHA-256 (re-checked after the run). Budgets come
-from plan.json and the ledger: <= 24 new appearance frames, <= 48 new numeric
-submissions, per-item run limits. Each child runs in its own process group with
-a constructed environment (HOME passed through unrecorded; PATH, TMPDIR,
-RUST_BACKTRACE and the review output directory as recorded overrides), so no
-regression test writes optional INCANT_* evidence. Timeouts: listings 60 s,
-existing suites 300 s, the numeric test and review cases 120 s. The group is
-killed and reaped; survivors are never left. Every child goes to the ledger and
-every refusal (after the grant exists) to gpu-refusals.jsonl.
+Adapted from handoff 0066's committed tools/gpu.py (read-only reuse) with
+Astra's audited 0068 wait/kill/reap/ledger lifecycle. Before every child it
+checks the grant first (nothing is created before it exists), then takes the
+global native-gpu.lock (bounded wait) and the packet lock, and checks in order:
+the grant (packet, target, the plan's bound source), the packet release latch,
+the target lease (same grant), committed packet tools, every child-checkout file
+against its git blob, and the frozen binary SHA-256 (re-checked after the run).
 
-  gpu.py list <lib|model_gpu|game|ui|review>
-  gpu.py numeric                 the brief's numeric test, exactly once
-  gpu.py suite <lib|model_gpu|game|ui>   all ignored cases; lib skips the numeric test
-  gpu.py review <probe|lit|sprites_text|viewport|owner_drop>
+Budgets are debited before launch: a fsynced "debit" row reserves the attempt's
+frames and numeric submissions while both locks are held, so the totals are
+serialized and monotonic and an interrupted or killed attempt stays charged.
+Caps come from plan.json: <= 24 new appearance frames and <= 48 new numeric
+submissions, failures included, plus per-item attempt limits. Each child runs in
+its own process group with a constructed environment (HOME passed through
+unrecorded; PATH, TMPDIR, RUST_BACKTRACE and the review output directory as
+recorded overrides), so no regression test writes optional INCANT_* evidence.
+SIGINT, SIGTERM and SIGHUP during a child, and any ledger or parser exception,
+end in the same unconditional kill and wait. Timeouts: listings 60 s, existing
+suites 300 s, the numeric test and review cases 120 s.
+
+  gpu.py list <lib|model_gpu|timestamp_backend_probe|game|ui|review>
+  gpu.py numeric                 the brief's numeric test by full name, exactly one attempt
+  gpu.py suite <lib|model_gpu|timestamp_backend_probe|game|ui>   lib skips the numeric test
+  gpu.py review <probe|lit|sprites_text|viewport|cascades|owner_drop>
   gpu.py release                 after the last child: verify none remain, write the latch
 """
 
-import fcntl
 import json
 import os
 import re
@@ -45,6 +50,19 @@ def ledger():
     if not c.LEDGER.exists():
         return []
     return [json.loads(line) for line in c.LEDGER.read_text().splitlines() if line.strip()]
+
+
+def debits():
+    return [row for row in ledger() if row["kind"] == "debit"]
+
+
+def attempts(kind, item):
+    """Debited attempts, including any whose result row never arrived."""
+    return [row for row in debits() if row["attempt_kind"] == kind and row["item"] == item]
+
+
+def results(kind, item):
+    return [row for row in ledger() if row["kind"] == kind and row.get("item") == item]
 
 
 def frozen(name):
@@ -87,18 +105,18 @@ def libtest_summary(stdout):
 def run_child(label, kind, item, binary_name, args, cwd, timeout, frames=0, submissions=0,
               extra=None, after=None):
     p = c.plan()
+    c.grant()  # before any lock or log file can be created
     c.LOGS.mkdir(parents=True, exist_ok=True)
-    with open(c.LOCK, "a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+    with c.exclusive():
         _, grant_sha = c.gate()
         tools = c.tools_identity()
         source = c.verify_checkout()
         binary, expected = frozen(binary_name)
         if c.sha(binary) != expected:
             c.refuse(f"{binary} does not match its frozen hash")
-        entries = ledger()
-        used_frames = sum(e.get("frames_reserved", 0) for e in entries)
-        used_submissions = sum(e.get("submissions_reserved", 0) for e in entries)
+        charged = debits()
+        used_frames = sum(row["frames"] for row in charged)
+        used_submissions = sum(row["submissions"] for row in charged)
         if used_frames + frames > p["budgets"]["appearance_frames_max"]:
             c.refuse(f"appearance frame budget: {used_frames} used, {frames} requested")
         if used_submissions + submissions > p["budgets"]["numeric_submissions_max"]:
@@ -110,44 +128,52 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, frames=0, subm
         overrides = {"PATH": c.SYSTEM_PATH, "TMPDIR": str(c.fresh_dir(c.SCRATCH / label)),
                      "RUST_BACKTRACE": "1", **(extra or {})}
         argv = [str(binary), *args]
+        # Serialized, monotonic debit: durable before the child can exist.
+        c.durable_append(c.LEDGER, {"kind": "debit", "label": label, "attempt_kind": kind,
+                                    "item": item, "frames": frames, "submissions": submissions,
+                                    "at": c.now(), "grant_sha256": grant_sha,
+                                    "binary_sha256": expected})
         started = c.now()
-        with open(stdout_path, "x") as out, open(stderr_path, "x") as err:
-            child = subprocess.Popen(argv, cwd=c.CHECKOUT / cwd, env=c.child_env(overrides),
-                                     stdout=out, stderr=err, start_new_session=True)
-            timed_out = False
-            original_error = None
+        child = None
+        timed_out = False
+        original_error = None
+        code = None
+        with open(stdout_path, "x") as out, open(stderr_path, "x") as err, c.terminations_raise():
             try:
+                child = subprocess.Popen(argv, cwd=c.CHECKOUT / cwd, env=c.child_env(overrides),
+                                         stdout=out, stderr=err, start_new_session=True)
                 child.wait(timeout=timeout)
             except subprocess.TimeoutExpired:
                 timed_out = True
             except BaseException:
                 # Do not propagate until the child is reaped and its attempt is
-                # durably charged to the ledger, including reserved GPU budgets.
+                # durably recorded; the debit row already charged its budgets.
                 original_error = sys.exc_info()
             finally:
-                # A second Ctrl-C must not interrupt kill/reap. SIGKILL of this
-                # runner is inherently outside Python's cleanup guarantee.
-                previous_sigint = signal.signal(signal.SIGINT, signal.SIG_IGN)
-                try:
-                    try:
-                        os.killpg(child.pid, signal.SIGKILL)
-                    except ProcessLookupError:
-                        pass  # also covers exit racing the timeout
-                    code = child.wait()
-                finally:
-                    signal.signal(signal.SIGINT, previous_sigint)
+                # Neither a second Ctrl-C nor a termination signal may interrupt
+                # kill/reap. SIGKILL of this runner is outside Python's cleanup.
+                with c.signals_ignored():
+                    if child is not None:
+                        try:
+                            os.killpg(child.pid, signal.SIGKILL)
+                        except ProcessLookupError:
+                            pass  # also covers exit racing the timeout
+                        code = child.wait()
         ended = c.now()
-        try:
-            os.killpg(child.pid, 0)
-            group_empty = False
-        except ProcessLookupError:
-            group_empty = True
+        group_empty = True
+        if child is not None:
+            try:
+                os.killpg(child.pid, 0)
+                group_empty = False
+            except ProcessLookupError:
+                group_empty = True
         binary_after = c.sha(binary)
         stdout = stdout_path.read_text(errors="replace")
         entry = {"label": label, "kind": kind, "item": item, "binary": binary_name,
                  "argv": argv, "cwd": str(c.CHECKOUT / cwd), "env": c.env_receipt(overrides),
                  "binary_sha256_before": expected, "binary_sha256_after": binary_after,
-                 "grant_sha256": grant_sha, "tools": tools, "source": source, "pid": child.pid,
+                 "grant_sha256": grant_sha, "tools": tools, "source": source,
+                 "pid": child.pid if child is not None else None,
                  "started": started, "ended": ended, "exit": code, "timed_out": timed_out,
                  "wait_error": type(original_error[1]).__name__ if original_error else None,
                  "timeout_s": timeout, "group_empty_after": group_empty,
@@ -164,10 +190,7 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, frames=0, subm
                 if not isinstance(error, Exception) and original_error is None:
                     original_error = sys.exc_info()
         try:
-            with open(c.LEDGER, "a") as log:
-                log.write(json.dumps(entry) + "\n")
-                log.flush()
-                os.fsync(log.fileno())
+            c.durable_append(c.LEDGER, entry)
         except BaseException as ledger_error:
             if original_error:
                 raise original_error[1].with_traceback(original_error[2]) from ledger_error
@@ -183,26 +206,27 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, frames=0, subm
     return entry
 
 
-def runs(kind, item):
-    return [e for e in ledger() if e["kind"] == kind and e.get("item") == item]
+def target(name):
+    p = c.plan()
+    if name == "review":
+        return p["review"]["binary"], p["review"]["cwd"]
+    return p["suites"][name]["binary"], p["suites"][name]["cwd"]
 
 
 def listing(name):
     p = c.plan()
-    if name == "review":
-        binary, cwd = p["review"]["binary"], p["review"]["cwd"]
-    else:
-        binary, cwd = p["suites"][name]["binary"], p["suites"][name]["cwd"]
-    if runs("list", name):
+    binary, cwd = target(name)
+    if results("list", name) or len(attempts("list", name)) >= 2:
         c.refuse(f"{name} already listed")
 
     def names(stdout):
         found = LISTING.findall(stdout)
-        expected = (sorted(case["test"] for case in p["review"]["cases"].values()) if name == "review"
-                    else p["suites"][name]["expected_ignored_at_reviewed_base"])
-        return {"listed": found, "listed_count": len(found),
-                "matches_reviewed_base": (sorted(found) == expected if name == "review"
-                                          else len(found) == expected)}
+        if name == "review":
+            expected = sorted(case["test"] for case in p["review"]["cases"].values())
+            return {"listed": found, "listed_count": len(found),
+                    "matches_plan": sorted(found) == expected}
+        expected = p["suites"][name]["expected_ignored"]
+        return {"listed": found, "listed_count": len(found), "matches_plan": len(found) == expected}
 
     return run_child(f"list-{name}", "list", name, binary, ["--list", "--ignored"], cwd,
                      p["budgets"]["listing_timeout_s"], after=names)
@@ -211,18 +235,25 @@ def listing(name):
 def numeric():
     p = c.plan()
     spec = p["numeric"]
-    lists = runs("list", "lib")
+    lists = results("list", "lib")
     if not lists or spec["test"] not in lists[-1]["listed"]:
-        c.refuse("list lib first; the numeric test must be in the frozen library binary")
-    if len(runs("numeric", "numeric")) >= spec["max_runs"]:
-        c.refuse("the numeric test already ran; it never runs twice")
+        c.refuse("list lib first; the numeric test's full name must be in the frozen library binary")
+    if attempts("numeric", "numeric"):
+        c.refuse("the numeric test was already attempted; it never runs twice")
 
-    def samples(stdout_unused):
+    def samples(stdout):
         stderr = (c.LOGS / "gpu-numeric.stderr.txt").read_text(errors="replace")
         lines = [line.split("GPU timestamp result: ", 1)[1] for line in stderr.splitlines()
                  if "GPU timestamp result: " in line]
         adapter = [line for line in stderr.splitlines() if line.startswith("Timestamp adapter: ")]
-        return {"samples": [json.loads(line) for line in lines], "adapter_lines": adapter}
+        summary = libtest_summary(stdout)
+        named = re.search(r"^test " + re.escape(spec["test"]) + r" \.\.\. ", stdout, re.M) is not None
+        one = (summary["running"] == [1] and len(summary["results"]) == 1
+               and summary["results"][0]["passed"] + summary["results"][0]["failed"] == 1
+               and summary["results"][0]["ignored"] == 0)
+        return {"exactly_one_test_ran": one and named, "named_test_line": named,
+                "test_passed": one and named and summary["results"][0]["passed"] == 1,
+                "samples": [json.loads(line) for line in lines], "adapter_lines": adapter}
 
     return run_child("numeric", "numeric", "numeric", spec["binary"], [spec["test"], *spec["args"]],
                      spec["cwd"], p["budgets"]["added_process_timeout_s"],
@@ -232,11 +263,11 @@ def numeric():
 def suite(name):
     p = c.plan()
     spec = p["suites"][name]
-    lists = runs("list", name)
+    lists = results("list", name)
     if not lists:
         c.refuse(f"list {name} first")
-    if len(runs("suite", name)) >= spec["max_runs"]:
-        c.refuse(f"suite {name} already ran")
+    if attempts("suite", name):
+        c.refuse(f"suite {name} was already attempted; no uncontrolled retry")
     args = ["--ignored", "--test-threads=1", "--nocapture"]
     for skipped in spec["skip"]:
         args += ["--skip", skipped]
@@ -262,17 +293,19 @@ def review(case):
     data, _ = c.grant()
     if details.get("requires_astra_review") and case not in data.get("approved_extra_cases", []):
         c.refuse(f"{case} needs Astra's review; the grant does not list it in approved_extra_cases")
-    if not runs("list", "review"):
+    if not results("list", "review"):
         c.refuse("list review first")
-    previous = runs("review", case)
-    if len(previous) >= spec["max_runs_per_case"]:
-        c.refuse(f"{case} reached its run limit")
+    tried = attempts("review", case)
+    done = results("review", case)
+    if len(tried) >= spec["max_runs_per_case"]:
+        c.refuse(f"{case} reached its attempt limit")
     amended = [a for a in p.get("amendments", []) if a.get("case") == case and a.get("reason")]
-    if previous and not (previous[-1]["timed_out"] or previous[-1].get("report_sha256") is None
-                         or len(amended) >= len(previous)):
+    infrastructure = len(done) < len(tried) or (done and (done[-1]["timed_out"]
+                                                          or done[-1].get("report_sha256") is None))
+    if tried and not (infrastructure or len(amended) >= len(tried)):
         c.refuse(f"{case} already has a complete run; a rerun needs an infrastructure failure "
                  "or a committed plan amendment with its reason")
-    output = c.CAPTURES / f"{case}-r{len(previous) + 1}"
+    output = c.CAPTURES / f"{case}-r{len(tried) + 1}"
     if output.exists():
         c.refuse(f"{output} exists; captures are never overwritten")
     c.CAPTURES.mkdir(parents=True, exist_ok=True)
@@ -289,7 +322,7 @@ def review(case):
                 "outcome": body.get("outcome"), "frames_rendered": body.get("frames_rendered"),
                 "timed_submissions": body.get("timed_submissions")}
 
-    return run_child(f"review-{case}-r{len(previous) + 1}", "review", case, spec["binary"],
+    return run_child(f"review-{case}-r{len(tried) + 1}", "review", case, spec["binary"],
                      [details["test"], *spec["args"]], spec["cwd"],
                      p["budgets"]["added_process_timeout_s"], frames=details["frames"],
                      submissions=details["submissions"],
@@ -309,37 +342,42 @@ def owned_processes():
 
 
 def release():
-    with open(c.LOCK, "a") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
-        c.grant()
+    c.grant()
+    with c.exclusive():
         if c.LATCH.exists():
             raise SystemExit("already released")
         owned = owned_processes()
         if owned:
             c.refuse("owned processes still running: " + json.dumps(owned)[:400])
-        entries = ledger()
+        rows = ledger()
+        children = [row for row in rows if row["kind"] != "debit"]
         alive = []
-        for entry in entries:
+        for entry in children:
+            if entry.get("pid") is None:
+                continue
             found = subprocess.run(["ps", "-p", str(entry["pid"]), "-o", "args="],
                                    capture_output=True, text=True).stdout.strip()
             if found.startswith((str(c.BIN), str(c.CHECKOUT), str(c.TARGET))):
                 alive.append(entry["pid"])
         if alive:
             c.refuse(f"ledger PIDs still alive: {alive}")
+        charged = [row for row in rows if row["kind"] == "debit"]
+        unresolved = sorted({d["label"] for d in charged} - {e["label"] for e in children})
         refusals = c.REFUSALS.read_text().splitlines() if c.REFUSALS.exists() else []
-        record = {"packet": c.PACKET, "released_at": c.now(), "children": len(entries),
-                  "gpu_children": len([e for e in entries if e["kind"] != "build"]),
+        record = {"packet": c.PACKET + "-r2", "released_at": c.now(), "children": len(children),
+                  "gpu_children": len([e for e in children if e["kind"] != "build"]),
+                  "debited_attempts": len(charged), "attempts_without_result": unresolved,
                   "refusals": len(refusals),
-                  "frames_reserved": sum(e.get("frames_reserved", 0) for e in entries),
-                  "frames_rendered": sum(e.get("frames_rendered") or 0 for e in entries),
-                  "pngs_written": sum(len(e.get("pngs", {})) for e in entries),
-                  "submissions_reserved": sum(e.get("submissions_reserved", 0) for e in entries),
-                  "first_start": entries[0]["started"] if entries else None,
-                  "last_end": entries[-1]["ended"] if entries else None,
+                  "frames_debited": sum(d["frames"] for d in charged),
+                  "frames_rendered": sum(e.get("frames_rendered") or 0 for e in children),
+                  "pngs_written": sum(len(e.get("pngs", {})) for e in children),
+                  "submissions_debited": sum(d["submissions"] for d in charged),
+                  "first_start": children[0]["started"] if children else None,
+                  "last_end": children[-1]["ended"] if children else None,
                   "ledger_sha256": c.sha(c.LEDGER) if c.LEDGER.exists() else None,
                   "grant_sha256_at_release": c.sha(c.GRANT),
                   "owned_processes": owned, "ledger_pids_alive": alive,
-                  "note": "GPU released by 0068 for Astra; review-ready.json left untouched "
+                  "note": "GPU released by 0068-r2 for Astra; review-ready.json left untouched "
                           "(only Astra writes it). Run lease.py release next."}
         c.write_new_json(c.LATCH, record)
     print(json.dumps(record, indent=1))

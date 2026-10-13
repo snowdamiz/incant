@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exclusive Cargo target lease for handoff 0068. Standard library only.
+"""Exclusive Cargo target lease for handoff 0068 revision 2. Standard library only.
 
 Adapted from handoff 0066's committed tools/lease.py (read-only reuse).
 
@@ -10,9 +10,12 @@ Acquisition verifies every prior receipt the grant pins as a
 prior_<name>_path / prior_<name>_sha256 pair (0067's release, lease, ledger),
 requires the prior release body to list no live processes, and requires that no
 cargo/rustc runs on the target or child checkout and no binary runs from the
-target. Release leaves the target in place as a warm cache; nothing is deleted.
+target, and that the global native-gpu.lock is free at that moment (it is taken
+again, with a bounded wait, by every child). Release leaves the target in place
+as a warm cache; nothing is deleted. Only 0068-r2 files are written.
 """
 
+import fcntl
 import json
 import subprocess
 import sys
@@ -64,6 +67,16 @@ def prior_receipts(grant):
             "release_body": body, "release_alive_fields": alive}, ok
 
 
+def global_lock_free():
+    with open(c.GLOBAL_LOCK, "a") as shared:
+        try:
+            fcntl.flock(shared, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            return False
+        fcntl.flock(shared, fcntl.LOCK_UN)
+        return True
+
+
 def acquire():
     grant, grant_sha = c.grant()
     if c.LATCH.exists():
@@ -78,18 +91,20 @@ def acquire():
     running = target_processes()
     if running:
         c.refuse("processes already use the target: " + json.dumps(running)[:400])
+    if not global_lock_free():
+        c.refuse("the global native-gpu.lock is held by another owner")
     c.write_new_json(c.LEASE, {
-        "packet": c.PACKET, "holder": "claude (Opus 5.5, Max thinking) for handoff 0068",
+        "packet": c.PACKET + "-r2", "holder": "claude (Opus 5.5, Max thinking) for handoff 0068 r2",
         "target_dir": str(c.TARGET), "assigned_by": "Astra via review-ready.json",
         "grant_sha256": grant_sha, "grant": grant, "prior_receipts": prior, "tools": tools,
         "brief_sha256": c.sha(c.PACKET_DIR / "brief.md"), "worktree": str(c.ROOT),
         "child_checkout": str(c.CHECKOUT), "acquired_at": c.now(),
-        "processes_on_target_at_acquire": running,
+        "processes_on_target_at_acquire": running, "global_lock_free_at_acquire": True,
         "rules": ["./tools/cargo only, --locked --offline --profile ci -j2",
                   "builds from the git-archive child checkout of the granted commit only",
-                  "one bounded process group at a time under the packet flock",
+                  "one bounded process group at a time under the global native-gpu.lock and the packet flock",
                   "serial offscreen GPU children; no window, desktop/browser capture, audio or accounts",
-                  "<= 24 new appearance frames (<= 960x540), <= 48 new numeric submissions",
+                  "<= 24 new appearance frames (<= 960x540), <= 48 new numeric submissions, debited before launch",
                   "existing suites <= 300 s, added numeric/capture processes <= 120 s",
                   "binaries and evidence only under " + str(c.EVIDENCE),
                   "never root's " + str(c.ROOT_TARGET) + " or another agent's target"]})
@@ -110,7 +125,7 @@ def release():
         c.refuse("processes still use the target: " + json.dumps(remaining)[:400])
     lease["released_at"] = c.now()
     lease["processes_on_target_at_release"] = remaining
-    lease["release_note"] = ("No 0068 cargo/rustc process or frozen binary remains on the target. "
+    lease["release_note"] = ("No 0068-r2 cargo/rustc process or frozen binary remains on the target. "
                              "Contents left in place as warm cache; nothing deleted. Frozen "
                              "binaries live under " + str(c.BIN))
     temporary = c.LEASE.with_suffix(".tmp")
