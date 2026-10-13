@@ -9,6 +9,8 @@ mod coarena_codec;
 mod codec;
 mod geometry;
 mod geometry_codec;
+mod graph;
+mod graph_codec;
 mod records;
 mod validate;
 
@@ -19,6 +21,8 @@ pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
 pub use geometry::*;
 pub use geometry_codec::{decode_geometry, encode_geometry};
+pub use graph::*;
+pub use graph_codec::{decode_graph, encode_graph};
 pub use records::*;
 pub use validate::validate;
 
@@ -40,6 +44,7 @@ pub enum Error {
     Depth,
     Geometry,
     Generation,
+    Adjacency,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

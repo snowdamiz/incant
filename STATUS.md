@@ -56,7 +56,16 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
-## Exact physics saves — inert snapshot and arena integration verified
+## Exact physics saves — inert graph adjacency validation underway
+
+The next inert format preserves node/edge order and validates both linked
+adjacency sides, reciprocal links, complete coverage and dense payload mappings.
+Forty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
+2D/3D native swap-removal order observations. Independent review is pending. Contact/payload/solver ownership
+and full native composition remain required; no live restore or physics-save
+admission is enabled. [Graph contract](docs/spikes/physics-inert-graphs.md).
+
+## Exact physics saves — inert arena validation verified
 
 The next checked-format component preserves Rapier arena slots/free-chain order,
 generations, dense payload-row mappings and stale/invalidated Coarena rows.
