@@ -1,0 +1,65 @@
+{
+  "at": "2026-10-13T06:13:06.623029+00:00",
+  "decision": "accepted",
+  "source_commit": "94a97c6a9ad310bd3ab219016629abb0b5df47c0",
+  "manifest": "docs/spikes/evidence/native-window-profile.json",
+  "manifest_sha256": "8b18740b34743ae3863b9b6a59b13b45d44222f1652ce31ee1ffe8e13da26945",
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "findings": [],
+  "verified": {
+    "frozen_source_files": 54,
+    "production_changed_paths": [
+      "crates/incant_game_player/src/lib.rs",
+      "crates/incant_game_player/src/profile.rs",
+      "crates/incant_game_player/src/window/mod.rs",
+      "crates/incant_profile/src/model.rs",
+      "crates/incant_profile/src/tracy.rs"
+    ],
+    "archive_records": 67,
+    "archive_payloads": 65,
+    "raw_absolute_originals_rehashed": 13,
+    "git_source_payloads_rehashed": 54,
+    "commands": 10,
+    "all_commands_exit_zero": true,
+    "test_counts": {
+      "default-player": {
+        "passed": 20,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 6
+      },
+      "window-profile": {
+        "passed": 69,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1
+      },
+      "profile-cli": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1
+      },
+      "summary": {
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 4
+      }
+    },
+    "counts_overlap": true
+  },
+  "source_review": [
+    "Read all five changed source files and complete entry/profile/window lifetimes, capture retirement, terminal-event cleanup and Tracy phase dispatch.",
+    "Capture starts only with explicit player feature and trusted flag; embedded Tracy and unavailable native routes still refuse before initialization. No dependency/default changes.",
+    "Simulation attempts alone record frame outcomes; three refresh routes have separate presentation zones; restart retains a distinct fixed zone. Existing surface cancellation, terminal typed error and input commit order are preserved.",
+    "Native run now returns its completed report to run_owned; append and caller emission occur only after successful native teardown/audio retirement. Error paths drop capture and emit no report.",
+    "Presentation inventory is additive; fixed Phase::ALL/PHASE_COUNT and Tracy match remain exhaustive. Default no-op hooks retain previous behavior.",
+    "Reviewed tests distinguish success/failure/refresh counts and public native argument-error cleanup without launching a window; actual offline CLI execution is retained."
+  ],
+  "limits": [
+    "Independent read-only source/evidence review; no rebuild or new execution by reviewer.",
+    "Native-window launch, live Tracy client capture, GPU/pixel/appearance, shipping performance and phone gates remain pending.",
+    "Existing process capture includes all instrumented threads; nested CPU zones are inclusive and not GPU timings."
+  ]
+}

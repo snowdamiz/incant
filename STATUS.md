@@ -16,7 +16,7 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main203, 2026-10-13
+## Current overview — main204, 2026-10-13
 
 Development main202 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
@@ -55,6 +55,16 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Native-window CPU profiling — current-main checks pass
+
+The desktop player accepts explicit summary/standalone Tracy profiling on its
+window route. Simulation attempts, redraw-only CPU work and restarts have separate
+fixed zones; the final native report uses the existing host callback. Ten producer
+CPU/compile/tooling checks and independent producer review pass. All ten
+[current-main204 checks](docs/spikes/native-window-profile-main204.md) also pass;
+final integration review is accepted. Publication requires its fast check; actual native-window execution and live Tracy capture remain pending.
+[Scope and evidence](docs/spikes/native-window-profile.md).
+
 ## Retained opaque motion — current-main CPU integration verified
 
 The opt-in retained motion/depth implementation preserves exact accepted live/staging
@@ -62,7 +72,7 @@ geometry and advances history only after submission. [Current-main203 checks](do
 pass 91 CPU cases plus 12 overlapping cooked-refusal cases, Clippy, wasm32, native-window
 compile and dependency checks. The prior two numerical GPU processes remain scoped to
 their recorded producer binary; no current composed GPU or appearance claim is made.
-Final integration review is accepted; publication requires the exact-head fast check. Default rendering is unchanged; temporal color,
+Final integration review and the exact-head fast check passed; PR204 is merged. Default rendering is unchanged; temporal color,
 upscaling and cooked motion remain separate.
 
 ## Exact physics saves — inert manifold ownership verified locally
