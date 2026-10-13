@@ -1,0 +1,184 @@
+{
+  "schema": "incant-physics-failure-isolation-v1",
+  "at": "2026-10-13T18:01:06.281797+00:00",
+  "base": "053ce7bef9c6db99e1d8147b081171bbba542031",
+  "source": "c27b5f2ac953d59ed60ec5b689cd9568a332fe13",
+  "files": [
+    {
+      "path": "crates/incant_physics_runtime/src/lib.rs",
+      "sha256": "1a94fc3a97fc037fcbc18ffb9e502451b7dee61c92bdddb494641e8d470bda4c"
+    },
+    {
+      "path": "crates/incant_physics_runtime/tests/failure_isolation.rs",
+      "sha256": "bca7f8a5febecbe65c40523ba6abc1d74ceca474b43d9a09c823f576146499ba"
+    }
+  ],
+  "source_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-failure-isolation-source-independent-20261013.json",
+    "sha256": "9d59b3c6ce9cd41eca6704f16e4c565aa6d605cbb7c25573a61a8594fcd42d43"
+  },
+  "checks": [
+    {
+      "name": "default all-target tests",
+      "passed": 8,
+      "exit": 0,
+      "session": 94651
+    },
+    {
+      "name": "default strict Clippy",
+      "exit": 0,
+      "session": 76596
+    },
+    {
+      "name": "fast8-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_physics_runtime",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "fast-simd8",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "started": "2026-10-13T17:56:04.565695+00:00",
+      "finished": "2026-10-13T17:56:28.370679+00:00",
+      "exit": 0,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-failure-isolation-001/fast8-tests.log",
+      "sha256": "eca3e5a7412a0654e802b760a9cf0ff7a7f7a33f9b4432cb7c157650c6f7c725"
+    },
+    {
+      "name": "fast8-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "-p",
+        "incant_physics_runtime",
+        "--all-targets",
+        "--no-default-features",
+        "--features",
+        "fast-simd8",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "started": "2026-10-13T17:56:28.371303+00:00",
+      "finished": "2026-10-13T17:56:34.666833+00:00",
+      "exit": 0,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-failure-isolation-001/fast8-clippy.log",
+      "sha256": "acb35e5eeea096419a26a74c4690a95b0e89f5aee7f85e550c34140e7ffedc47"
+    },
+    {
+      "name": "native-consumers",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "-p",
+        "incant_runtime",
+        "--test",
+        "physics",
+        "--test",
+        "physics_variant",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "started": "2026-10-13T17:56:34.667188+00:00",
+      "finished": "2026-10-13T17:57:16.157930+00:00",
+      "exit": 0,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-failure-isolation-001/native-consumers.log",
+      "sha256": "b6981c6224dd7266f12ab8947b0c137b683eb63eadc3803d694861c707e235c0"
+    },
+    {
+      "name": "wasm",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "-p",
+        "incant_physics_runtime",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "started": "2026-10-13T17:57:16.158346+00:00",
+      "finished": "2026-10-13T17:57:22.742874+00:00",
+      "exit": 0,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-failure-isolation-001/wasm.log",
+      "sha256": "3c615d48e517e2f0f578d8aa3fcf81e3d3ecae0515543b6cf465d5a11dafd64b"
+    },
+    {
+      "name": "format",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-failure-isolation-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-failure-isolation-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "whitespace",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-failure-isolation-001/whitespace.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "baseline": {
+    "source": "053ce7bef9c6db99e1d8147b081171bbba542031",
+    "same_new_tests": true,
+    "exit": 101,
+    "passed": 1,
+    "failed": 2,
+    "purpose": "Both late-error and caught-unwind regressions fail before the repair; invalid-dt control passes."
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/physics-failure-isolation-logs.json.gz",
+    "sha256": "cc92f598df8c622c2d9c155e64361e2befa0290458debbf909c6834bc5036dee",
+    "records": 17,
+    "payloads": 14
+  },
+  "limits": [
+    "Standalone 3D runtime terminal-failure isolation, not rollback or structural-transaction panic safety.",
+    "No vendor constructor, restore format, public physics-save admission, GPU or performance change.",
+    "Native consumer checks cover 11 physics and 5 physics-variant tests; wasm is compile-only."
+  ]
+}
