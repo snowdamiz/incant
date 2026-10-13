@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "editor/app", "sdk/rust"]
-exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira", "third_party/parry2d", "third_party/parry3d"]
+exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira", "third_party/parry2d", "third_party/parry3d", "third_party/rapier2d", "third_party/rapier3d"]
 default-members = ["crates/*"]
 
 [workspace.package]
@@ -78,6 +78,8 @@ strip = "none"
 split-debuginfo = "off"
 
 [patch.crates-io]
+rapier2d = { path = "third_party/rapier2d" }
+rapier3d = { path = "third_party/rapier3d" }
 parry2d = { path = "third_party/parry2d" }
 parry3d = { path = "third_party/parry3d" }
 kira = { path = "third_party/kira" }

@@ -5,7 +5,7 @@ macro_rules! island_cases {
             w: &PhysicsWorld,
             a: &ValidatedAttachments<'_>,
             m: &ValidatedManifolds<'_>,
-        ) -> IslandTable {
+        ) -> RigidOwnerRecord {
             let b = ordered_capture::capture(&w.bodies);
             let (_, handles) = layout(&b["bodies"], identity());
             let bodies = handles
@@ -47,6 +47,46 @@ macro_rules! island_cases {
                         .collect::<Vec<_>>()
                 )
             });
+            let pairs = validate_pair_state(pair_states(w), m, &mut budget()).unwrap();
+            let scan = w.islands.checkpoint_sleep_scan().unwrap();
+            let owner = rigid_owner_capture::capture(
+                &ordered_capture::capture(&w.narrow_phase),
+                identity(),
+                scan.stamp,
+                &scan.slots,
+            );
+            let cv = ordered_capture::capture(&w.colliders);
+            let (_, colliders) = layout(&cv["colliders"], identity());
+            let thresholds: Vec<_> = colliders
+                .iter()
+                .map(|h| {
+                    let co = &w.colliders[ColliderHandle::from_raw_parts(h.slot, h.generation)];
+                    if co
+                        .active_events()
+                        .contains(ActiveEvents::CONTACT_FORCE_EVENTS)
+                    {
+                        co.contact_force_event_threshold()
+                    } else {
+                        f32::MAX
+                    }
+                    .to_bits()
+                })
+                .collect();
+            let owner_context = RigidOwnerContext {
+                islands: &v,
+                pairs: &pairs,
+                force_thresholds: &thresholds,
+                multibody_epoch: word(
+                    &ordered_capture::capture(&w.multibody_joints)["topology_epoch"],
+                ),
+            };
+            let joined = validate_rigid_owner(owner.clone(), owner_context, &mut budget())
+                .unwrap_or_else(|e| panic!("{e:?} owner={owner:?}"));
+            let bytes = encode_rigid_owner(&joined, &mut budget()).unwrap();
+            let decoded_owner = decode_rigid_owner(&bytes, owner_context, &mut budget()).unwrap();
+            assert_eq!(decoded_owner.record(), &owner);
+            check_owner_corruption(owner, owner_context, &bytes);
+            let owner = decoded_owner.record().clone();
             let bytes = encode_islands(&v, &mut budget()).unwrap();
             let loaded = decode_islands(&bytes, c, &mut budget()).unwrap();
             assert_eq!(loaded.record(), &r);
@@ -58,7 +98,7 @@ macro_rules! island_cases {
                     native.is_enabled() && !native.is_fixed()
                 );
             }
-            r
+            owner
         }
 
         fn observed_islands(w: &PhysicsWorld) -> IslandTable {

@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-13T08:50:58.938165+00:00",
+  "status": "source review accepted; formal execution evidence review pending",
+  "source_freeze_sha256": "1591325b3ec33a98789f95f6b1c31c68717a7518b5dbf6c311cfa53e8352cdea",
+  "files_verified": 647,
+  "reviewed": [
+    "joined witness identity and bounded codec before allocation",
+    "solver buckets/hints/reciprocal positions and live color masks against pinned Rapier",
+    "stale graph preservation and explicit rebuild predicate",
+    "trusted sleep-scan adapter atomic refusal and default-off dev feature",
+    "continuation comparisons include full native serialized state, scratch and events",
+    "registry-to-path locks plus actual compiler and script runtime build identity"
+  ],
+  "upstream": {
+    "rapier2d": {
+      "upstream_files": 288,
+      "changed_originals": [
+        "Cargo.toml",
+        "Cargo.toml.orig",
+        "src/dynamics/island_manager/mod.rs",
+        "src/dynamics/island_manager/persistent.rs",
+        "src/dynamics/mod.rs"
+      ],
+      "licenses": []
+    },
+    "rapier3d": {
+      "upstream_files": 326,
+      "changed_originals": [
+        "Cargo.toml",
+        "Cargo.toml.orig",
+        "src/dynamics/island_manager/mod.rs",
+        "src/dynamics/island_manager/persistent.rs",
+        "src/dynamics/mod.rs"
+      ],
+      "licenses": []
+    }
+  },
+  "findings": [],
+  "scope_limits": [
+    "no hostile live constructor or save admission",
+    "trusted native serde supplies collider and broad/narrow owner",
+    "no phone or performance claim"
+  ],
+  "validation": "producer implementation20 cases observed; wait frozen suite and default-off/parallel checks before merge"
+}

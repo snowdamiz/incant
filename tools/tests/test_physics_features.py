@@ -215,7 +215,7 @@ incant_runtime.workspace = true
                     flags += ['simd8']
                 if not target.startswith('wasm'):
                     flags += ['parallel']
-                    if name.startswith('parry'):
+                    if name.startswith(('parry', 'rapier')):
                         flags += ['rayon']
             result[name] = sorted(flags)
         return result
@@ -236,13 +236,13 @@ incant_runtime.workspace = true
         rows = self.records(mode, target, host)
         for row in rows:
             name = row['target']['name']
-            if name.startswith('parry'):
+            if name.startswith(('parry', 'rapier')):
                 package = Path(physics.__file__).resolve().parents[1] / 'third_party' / name
                 row['package_id'] = 'path+' + package.as_uri() + '#' + physics.VERSIONS[name]
                 row['manifest_path'] = str(package / 'Cargo.toml')
         return rows
 
-    def test_vendored_parry_name_omitted_ids_preserve_exact_target_features(self):
+    def test_vendored_solver_name_omitted_ids_preserve_exact_target_features(self):
         for mode in physics.MODES:
             for target in (self.target, 'wasm32-unknown-unknown'):
                 with self.subTest(mode=mode, target=target):
@@ -251,18 +251,18 @@ incant_runtime.workspace = true
                     self.assertEqual(result['features'], self.features(mode, target))
                     for row in rows:
                         name = row['target']['name']
-                        if name.startswith('parry'):
+                        if name.startswith(('parry', 'rapier')):
                             row['package_id'] = row['package_id'].replace('#', '#' + name + '@')
                     self.assertEqual(self.validate(rows, mode, target)['features'], result['features'])
 
     def test_vendored_identity_requires_exact_package_path_version_manifest_and_library(self):
         rows = self.vendored_records('fast')
-        for name in ('parry2d', 'parry3d'):
+        for name in ('rapier2d', 'rapier3d', 'parry2d', 'parry3d'):
             row = next(row for row in rows if row['target']['name'] == name)
             package = Path(row['manifest_path']).parent
-            cases = [('package_id', row['package_id'].replace('#0.31.1', '#0.31.2')),
-                     ('package_id', 'path+' + (self.root / name).as_uri() + '#0.31.1'),
-                     ('package_id', 'path+' + package.as_uri() + '#foreign@0.31.1'),
+            cases = [('package_id', row['package_id'].replace('#' + physics.VERSIONS[name], '#999.0.0')),
+                     ('package_id', 'path+' + (self.root / name).as_uri() + '#' + physics.VERSIONS[name]),
+                     ('package_id', 'path+' + package.as_uri() + '#foreign@' + physics.VERSIONS[name]),
                      ('manifest_path', str(self.root / name / 'Cargo.toml')),
                      ('manifest_path', None),
                      ('target', {'name': name, 'kind': ['bin']})]

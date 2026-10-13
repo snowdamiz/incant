@@ -67,7 +67,11 @@ pub struct ValidatedIslands<'a> {
     record: IslandTable,
     context: IslandContext<'a>,
 }
-impl ValidatedIslands<'_> {
+impl<'a> ValidatedIslands<'a> {
+    pub(crate) fn context(&self) -> IslandContext<'a> {
+        self.context
+    }
+
     pub fn record(&self) -> &IslandTable {
         &self.record
     }

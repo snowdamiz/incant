@@ -5,11 +5,17 @@ edition.workspace = true
 rust-version.workspace = true
 publish.workspace = true
 
+[features]
+# Forward numerical selection for native observer dev edges; normal graph is std-only.
+default = ["physics-deterministic"]
+physics-deterministic = ["rapier2d/enhanced-determinism", "rapier3d/enhanced-determinism"]
+physics-fast-simd8 = ["rapier2d/simd8", "rapier3d/simd8"]
+
 # Inert records only. No normal solver, serde, document or runtime dependency.
 [dev-dependencies]
 parry2d = { version = "=0.31.1", features = ["serde-serialize"] }
 parry3d = { version = "=0.31.1", features = ["serde-serialize"] }
-rapier2d = { version = "=0.36.0", features = ["serde-serialize"] }
-rapier3d = { version = "=0.36.0", features = ["serde-serialize"] }
+rapier2d = { version = "=0.36.0", features = ["serde-serialize", "incant-checkpoint"] }
+rapier3d = { version = "=0.36.0", features = ["serde-serialize", "incant-checkpoint"] }
 serde_json.workspace = true
 serde.workspace = true

@@ -87,7 +87,8 @@ pub struct RigidBodyState {
     pub activation: BodyActivation,
     pub ccd: BodyCcd,
     /// Active island, active set, persistent island, persistent island index.
-    /// Only scalar domains are checked, not reciprocal island membership.
+    /// This section checks scalar domains; the joined island/owner witnesses
+    /// check reciprocal membership.
     pub ids: [u32; 4],
     pub changes: u32,
     pub kind: BodyKind,
