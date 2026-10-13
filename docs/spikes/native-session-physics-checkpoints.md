@@ -92,3 +92,19 @@ Immediate copies preserve the executed library test binaries; integration and
 documentation results are retained as exact command logs, without a claim that
 their executables were copied. No ordinary exported package, device, GPU, or
 hosted UI/audio continuation was exercised by this slice.
+
+## Repaired generation and current main246 composition
+
+The preceding failed manifest guard remains historical source004 evidence. The
+three inherited snapshot defaults/weak forwarding omissions were repaired and
+merged in PR246. Accepted repaired producer `7a900ece` passed the guard, both
+selected solver graphs and nine focused checkpoint tests in each mode; the broad
+195/195/186 totals are not relabelled as a repaired-generation rerun.
+
+The curated main246 implementation is byte-identical to that repaired producer
+across all 3,656 tracked implementation/build/tool files. Ten read-only checks
+pass, including exact normalized graph comparisons and ordinary snapshot
+exclusion. No new compile or session execution was necessary. The current
+composition, portable receipts and limitations are bound in
+[native-session-main246.md](native-session-main246.md). Final current-main
+independent review is pending. Hosted UI/audio continuation stays separate.

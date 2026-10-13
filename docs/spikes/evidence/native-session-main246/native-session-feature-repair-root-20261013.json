@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-13T20:35:26.027706+00:00",
+  "reviewer": "astra-root",
+  "decision": "accepted",
+  "manifest_sha256": "c8b9678b1c7aad2cdad972703f83eb87efcdbc85f788d724f99fc238d1aaa191",
+  "scope": "Immutable e9dc5128 follow-up only. Retained source004 accepted; no script code change. Three dependency manifests equal reviewed78fa, conservative guard and actual9focusedtests in both modes pass; 11 retained records and2 immediate binaries verified. Does not extend headless checkpoint into hosts or persisted physics."
+}
