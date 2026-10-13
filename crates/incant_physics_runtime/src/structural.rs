@@ -214,6 +214,27 @@ mod checked {
                     }
                 }
                 if let Some(scene) = self.scenes.get(id) {
+                    let numeric = row
+                        .updates
+                        .iter()
+                        .filter(|(entity, next)| next.is_some() && !row.rebuild.contains(*entity))
+                        .count();
+                    let revisions = row
+                        .removals
+                        .len()
+                        .checked_add(row.insertions.bodies)
+                        .and_then(|n| n.checked_add(row.insertions.colliders))
+                        .and_then(|n| {
+                            numeric
+                                .checked_mul(2)
+                                .and_then(|edits| n.checked_add(edits))
+                        })
+                        .ok_or(PhysicsError::Limit)?;
+                    scene
+                        .world
+                        .inner
+                        .preflight_revision_edits(revisions as u64)
+                        .map_err(StructuralError::Owner)?;
                     plans.insert(
                         id.clone(),
                         scene.world.inner.preflight_structure(

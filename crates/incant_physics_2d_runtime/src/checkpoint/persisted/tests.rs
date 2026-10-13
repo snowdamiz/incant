@@ -15,7 +15,7 @@ fn id(n: u8) -> StableId {
 }
 fn fixture() -> PhysicsWorld2D {
     let mut world = PhysicsWorld2D::default();
-    let body = |dynamic, sensor, y| {
+    let body = |dynamic: bool, sensor: bool, y: f64| {
         PreparedBody::new(
             dynamic.then_some(RigidBody {
                 ccd: false,

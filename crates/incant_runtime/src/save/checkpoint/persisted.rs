@@ -134,7 +134,8 @@ impl WorldCheckpoint {
         let length = checked_sum(&[physics, self.components.len()])?;
         let flags = u32::from(self.physics_used)
             | (u32::from(self.physics_2d_used) << 1)
-            | (u32::from(self.physics_save_required) << 2)
+            | (u32::from(self.physics_save_required || self.physics_used || self.physics_2d_used)
+                << 2)
             | (u32::from(self.spatial_used) << 3)
             | (u32::from(self.navigation_used) << 4)
             | (u32::from(!spatial.is_empty()) << 5)
@@ -265,3 +266,6 @@ impl NativeWorld {
         Ok(candidate)
     }
 }
+
+#[cfg(test)]
+mod tests;
