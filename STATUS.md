@@ -16,7 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Exact physics saves — inert arena validation underway
+## Exact physics saves — inert graph adjacency validation underway
+
+The next inert format preserves node/edge order and validates both linked
+adjacency sides, reciprocal links, complete coverage and dense payload mappings.
+Forty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
+2D/3D native swap-removal order observations. Independent review is pending. Contact/payload/solver ownership
+and full native composition remain required; no live restore or physics-save
+admission is enabled. [Graph contract](docs/spikes/physics-inert-graphs.md).
+
+## Exact physics saves — inert arena validation verified
 
 The next checked-format component preserves Rapier arena slots/free-chain order,
 generations, dense payload-row mappings and stale/invalidated Coarena rows.
