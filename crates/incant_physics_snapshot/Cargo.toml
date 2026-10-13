@@ -1,0 +1,12 @@
+[package]
+name = "incant_physics_snapshot"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+# Inert records only. No normal solver, serde, document or runtime dependency.
+[dev-dependencies]
+parry2d = { version = "=0.31.1", features = ["serde-serialize"] }
+parry3d = { version = "=0.31.1", features = ["serde-serialize"] }
+serde_json.workspace = true

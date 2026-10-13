@@ -56,6 +56,18 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
+## Exact physics saves — inert record validation underway
+
+A new dependency-free normal crate validates versioned inert BVH/VecMap and
+closed rigid geometry records, with bounded allocation/traversal and exact field
+preservation. Eighteen CPU tests, scoped Clippy, wasm32 compilation and dependency
+checks pass, including trusted pinned Parry observations and malformed graph
+controls. Independent source review is accepted; final evidence review is pending.
+No live solver constructor or runtime consumer
+exists; `PhysicsUnsupported` remains unchanged. Complete checked solver/native
+owner composition and exact save continuation remain required.
+[Contract and bounds](docs/spikes/physics-inert-snapshot.md).
+
 ## Parallel physics tree ownership — scoped correction verified
 
 Vendored Parry 0.31.1 fixes overlapping mutable borrows in parallel BVH updates
