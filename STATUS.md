@@ -18,7 +18,7 @@ visual work, and Astra owns correctness and integration.
 
 ## Current overview — main195, 2026-10-13
 
-Development main194 includes the restart quota-test repair (PR188) and the reviewed,
+Development main195 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -56,15 +56,18 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
-## Exact physics saves — inert arena validation underway
+## Exact physics saves — inert snapshot and arena integration verified
 
 The next checked-format component preserves Rapier arena slots/free-chain order,
 generations, dense payload-row mappings and stale/invalidated Coarena rows.
-Thirty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
+Current integration passes thirty CPU cases, Clippy, wasm32 and dependency checks, including actual
 pinned 2D/3D one-way observations. Independent source and final evidence reviews
 are accepted. There is still no live
 construction or physics-save runtime route; contact/island/payload/native owner
 composition remains required. [Arena contract](docs/spikes/physics-inert-arenas.md).
+The [combined current integration](docs/spikes/physics-inert-main195.md) preserves
+all accepted crate source and existing pinned package identities; independent
+final integration review is pending behind the Parry ownership correction.
 
 ## Exact physics saves — inert record validation verified
 

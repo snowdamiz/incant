@@ -1,0 +1,9 @@
+# Inert physics snapshot and arena integration
+
+The independently accepted inert record and arena producers are composed on main195 plus the reviewed Parry ownership union. All sixteen crate inputs are byte-identical to the final producer. The root lock applies exactly the producer's additive dependency changes while preserving all 966 existing package identities, the profiler and local Parry selection. The new `incant_physics_snapshot` crate has no normal or build dependencies; pinned serde_arrays 0.2.0 and serializer features support dev-only observations of trusted 2D/3D solver records.
+
+Eight current commands pass: thirty CPU cases in five nonempty groups, all-target Clippy, wasm32 library compilation, dependency-free normal graph, runtime dependency guard, formatting, conventions and full-base diff. The thirty cases include the earlier eighteen snapshot cases and twelve arena cases; these totals are not additive. The first full-base diff failed on four blank context lines in the retained Parry patch. Lossless gzip packaging corrected that evidence-only issue, and the final diff passed with every frozen implementation/build input unchanged.
+
+The [packet](evidence/physics-inert-main195.json) binds 2,845 frozen inputs, seventeen producer rows, four pinned Rapier source files, 137 retained producer records, the exact lock delta and all current command streams. The [assertion-only collector](evidence/physics-inert-main195/collect.py) verifies these facts without changing receipts. Producer final reviews remain attached. Independent combined integration review and actual main ancestry after Parry publication are pending.
+
+This is inert validation only. No live solver constructor, runtime consumer, world-format adoption, physics save admission, shipping execution, graphics or device/performance result is added.
