@@ -1,0 +1,1142 @@
+{
+  "schema": 1,
+  "scope": "Inert checked narrow-phase graph ownership and sensor event history; physics saves remain unsupported",
+  "base": "9c7f5a446962eac365a746682e6c6e54bc0fb372",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001",
+  "freeze_sha256": "52f25f7b7262a06213c4ce3af74ac55f14670801ecfd8c836e9f383a65e958cf",
+  "sources": [
+    {
+      "path": "STATUS.md",
+      "sha256": "d8890e6c19b1ada29b62e5ff2d43967eb0bff157f7417271f473d1c9123de419",
+      "bytes": 175743,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/STATUS.md"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "e6ea7a9be4a06ceba90974403c9b569f8052e0d969adffff0b9e509d9cb0fb9b",
+      "bytes": 6409,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/attachment.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "b9ca8908016a0f7762c57b9e0e2b363610d193f8fcabb351c720431ec4e9bfc4",
+      "bytes": 3573,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/coarena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998",
+      "bytes": 5025,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e",
+      "bytes": 2267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/codec.rs",
+      "sha256": "c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec",
+      "bytes": 3070,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/narrow_owner/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254",
+      "bytes": 2341,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/narrow_owner/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23",
+      "bytes": 4760,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/narrow_owner/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "sha256": "da31083b67873ab0a0bcca060ec11432799e3c6a3ba797a533bf04a3913996ab",
+      "bytes": 2489,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/rigid_owner/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/island_cases.rs",
+      "sha256": "bffd679b5ffff4f4dc990d3bfd1fd157771bd668496aa030a1f83151a9eb76e4",
+      "bytes": 17548,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/island_cases.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/narrow_cases.rs",
+      "sha256": "fb78289e4cc8159b58fc74f6c3d95f65e640135d937a9d2794af44d0f45954ca",
+      "bytes": 15577,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/narrow_cases.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/narrow_checks.rs",
+      "sha256": "8a8a3270ede58f59fb3920f69cf0b907fde6a37a85a34098ef762bf36a5f2ad8",
+      "bytes": 4799,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/narrow_checks.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "3a4687ff61b0999628f61a4e2bb600d3d26f774d8c48cc1ff2a6bf30884cab36",
+      "bytes": 36552,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs"
+    },
+    {
+      "path": "docs/spikes/physics-narrow-owner.md",
+      "sha256": "e7f01740a157a56f1adc578eb5a6d7985edd5af5ed163cae637814e491bc7d99",
+      "bytes": 6594,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/docs/spikes/physics-narrow-owner.md"
+    },
+    {
+      "path": "docs/spikes/physics-world-continuation.md",
+      "sha256": "37dd866a2bac660023bdb9d279c9a72056c045203eb4a1adcdec4b7e537dfe3c",
+      "bytes": 6214,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/docs/spikes/physics-world-continuation.md"
+    }
+  ],
+  "baselines": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+      "bytes": 3722,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/Cargo.toml"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+      "bytes": 252688,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba",
+      "bytes": 890,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/records.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4",
+      "bytes": 4468,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/collider_state/mod.rs",
+      "sha256": "1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f",
+      "bytes": 3850,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/collider_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/collider_state/validate.rs",
+      "sha256": "8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f",
+      "bytes": 2648,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/collider_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+      "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492",
+      "bytes": 9653,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/rigid_owner/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/continuation_cases.rs",
+      "sha256": "8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e",
+      "bytes": 8569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/continuation_cases.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/save.rs",
+      "sha256": "8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754",
+      "bytes": 20624,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_runtime/src/save.rs"
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/mod.rs",
+      "sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+      "bytes": 12191,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/crates/incant_script/src/checkpoint/mod.rs"
+    }
+  ],
+  "native_pins": [
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/mod.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/queries.rs",
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50",
+      "bytes": 11083,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/queries.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/intersections.rs",
+      "sha256": "325b1cdfd6f8bcdc76d4ad009f1fc804e58248541f213380f3fafb766a2c442d",
+      "bytes": 9328,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/intersections.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/contacts.rs",
+      "sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66",
+      "bytes": 18554,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/contacts.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/solver_graph.rs",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/solver_graph.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/contact_pair.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/geometry/interaction_graph.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/data/coarena.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier2d/src/pipeline/physics_world.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/mod.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/queries.rs",
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50",
+      "bytes": 11083,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/queries.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/intersections.rs",
+      "sha256": "325b1cdfd6f8bcdc76d4ad009f1fc804e58248541f213380f3fafb766a2c442d",
+      "bytes": 9328,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/intersections.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/contacts.rs",
+      "sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66",
+      "bytes": 18554,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/contacts.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/solver_graph.rs",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/solver_graph.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/contact_pair.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/geometry/interaction_graph.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/data/coarena.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/source-001/files/third_party/rapier3d/src/pipeline/physics_world.rs"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/physics-narrow-owner.tar.gz",
+    "sha256": "4d04c1ff330548bc4b8b560b66ea0804d3c54fa22bd043fade384079af4f4862",
+    "bytes": 263415
+  },
+  "records": [
+    {
+      "path": "audit.py",
+      "sha256": "66b5f6f1001bf70a776e111a3eccd7ffd9e11e78b66373691a2b6ac00781575d",
+      "bytes": 2924,
+      "payload": "payload/66b5f6f1001bf70a776e111a3eccd7ffd9e11e78b66373691a2b6ac00781575d"
+    },
+    {
+      "path": "checks-final-001.json",
+      "sha256": "b31b649a36acc46224fc55c5479bc30b53d988f74fc3d296abde1bcbfb887a53",
+      "bytes": 4216,
+      "payload": "payload/b31b649a36acc46224fc55c5479bc30b53d988f74fc3d296abde1bcbfb887a53"
+    },
+    {
+      "path": "final-clippy-001.log",
+      "sha256": "1accfc01357f2cb7fdc339ee4602e33d4f5fa863293ffe8da9e5cce14bfedba1",
+      "bytes": 196,
+      "payload": "payload/1accfc01357f2cb7fdc339ee4602e33d4f5fa863293ffe8da9e5cce14bfedba1"
+    },
+    {
+      "path": "final-conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "payload": "payload/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "final-diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "payload": "payload/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "final-fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "payload": "payload/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "final-runtime-graph-001.log",
+      "sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+      "bytes": 62,
+      "payload": "payload/5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6"
+    },
+    {
+      "path": "final-tests-001.log",
+      "sha256": "92cc51c9a4d49551469d4f787ad1196fe729861d2a3e75f48cda43a8e9854c3e",
+      "bytes": 18427,
+      "payload": "payload/92cc51c9a4d49551469d4f787ad1196fe729861d2a3e75f48cda43a8e9854c3e"
+    },
+    {
+      "path": "final-wasm32-001.log",
+      "sha256": "5fd6eb33dfcccc6cb5907dc51dc85329b241e608384846ab2d508238316e79a5",
+      "bytes": 196,
+      "payload": "payload/5fd6eb33dfcccc6cb5907dc51dc85329b241e608384846ab2d508238316e79a5"
+    },
+    {
+      "path": "focused-001.json",
+      "sha256": "b0ead8c2614ae3551229abd3c555a1d8c1f5476ef9ce2727e0df7f334fa08b24",
+      "bytes": 582,
+      "payload": "payload/b0ead8c2614ae3551229abd3c555a1d8c1f5476ef9ce2727e0df7f334fa08b24"
+    },
+    {
+      "path": "focused-001.log",
+      "sha256": "2aa010805e0cd704eef0abe7021b04f6930eb16267e76cf5bee9ba4a19b1e105",
+      "bytes": 7757,
+      "payload": "payload/2aa010805e0cd704eef0abe7021b04f6930eb16267e76cf5bee9ba4a19b1e105"
+    },
+    {
+      "path": "focused-002.json",
+      "sha256": "840b69bb1a325d5211f50c4814175099bf80f2fde3cb949affdb8d4325522062",
+      "bytes": 579,
+      "payload": "payload/840b69bb1a325d5211f50c4814175099bf80f2fde3cb949affdb8d4325522062"
+    },
+    {
+      "path": "focused-002.log",
+      "sha256": "adbc619ebd8c1d5c927d9d33e25af193790785fd428565f8a1822d597d411691",
+      "bytes": 1537,
+      "payload": "payload/adbc619ebd8c1d5c927d9d33e25af193790785fd428565f8a1822d597d411691"
+    },
+    {
+      "path": "focused-003.json",
+      "sha256": "0f4110b47577e1383b25f5dec3ddb01693d9b04c4ac6b0de2508ed6f2785a86b",
+      "bytes": 578,
+      "payload": "payload/0f4110b47577e1383b25f5dec3ddb01693d9b04c4ac6b0de2508ed6f2785a86b"
+    },
+    {
+      "path": "focused-003.log",
+      "sha256": "a80caa9560737c47e8fabf530160d5cd77dbfa7139724eb560db9ae8bbaf4bde",
+      "bytes": 1914,
+      "payload": "payload/a80caa9560737c47e8fabf530160d5cd77dbfa7139724eb560db9ae8bbaf4bde"
+    },
+    {
+      "path": "focused.py",
+      "sha256": "8697226a4753652c9adea68aa46811ee285cea0ce3aa1d895c4c6eec1eefaeb2",
+      "bytes": 1107,
+      "payload": "payload/8697226a4753652c9adea68aa46811ee285cea0ce3aa1d895c4c6eec1eefaeb2"
+    },
+    {
+      "path": "freeze.py",
+      "sha256": "a3641544ff5ff23ada4d74f03306c23d3ecfc91c6604e872739f30bd096aecb0",
+      "bytes": 2918,
+      "payload": "payload/a3641544ff5ff23ada4d74f03306c23d3ecfc91c6604e872739f30bd096aecb0"
+    },
+    {
+      "path": "narrow_cases-compile-red.rs",
+      "sha256": "ed0d711ae22b31309bed70dfb62fde3fe37ec11a6351e457910ce493b8845ce9",
+      "bytes": 12326,
+      "payload": "payload/ed0d711ae22b31309bed70dfb62fde3fe37ec11a6351e457910ce493b8845ce9"
+    },
+    {
+      "path": "native-004.json",
+      "sha256": "01086bde9904559624b3fe9d0f698ef64ae96cba6ca67540058996b4ece9a34b",
+      "bytes": 564,
+      "payload": "payload/01086bde9904559624b3fe9d0f698ef64ae96cba6ca67540058996b4ece9a34b"
+    },
+    {
+      "path": "native-004.log",
+      "sha256": "8634d2b879929b78a296e3387b36a8dfdbb712dd5819f88d02d58fa6ba2f3186",
+      "bytes": 5771,
+      "payload": "payload/8634d2b879929b78a296e3387b36a8dfdbb712dd5819f88d02d58fa6ba2f3186"
+    },
+    {
+      "path": "retain.py",
+      "sha256": "9717838face8a797eb3ffb98e1c7d9e53ab66f65d1c1bcdcc01abe102cecaa1b",
+      "bytes": 3647,
+      "payload": "payload/9717838face8a797eb3ffb98e1c7d9e53ab66f65d1c1bcdcc01abe102cecaa1b"
+    },
+    {
+      "path": "run-final.py",
+      "sha256": "c0c01b883212cc16558591b132d15343061626f422fe0e78ac90f3c0c63d72c2",
+      "bytes": 2308,
+      "payload": "payload/c0c01b883212cc16558591b132d15343061626f422fe0e78ac90f3c0c63d72c2"
+    },
+    {
+      "path": "source-001/files/Cargo.lock",
+      "sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+      "bytes": 252688,
+      "payload": "payload/37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f"
+    },
+    {
+      "path": "source-001/files/Cargo.toml",
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+      "bytes": 3722,
+      "payload": "payload/9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5"
+    },
+    {
+      "path": "source-001/files/STATUS.md",
+      "sha256": "d8890e6c19b1ada29b62e5ff2d43967eb0bff157f7417271f473d1c9123de419",
+      "bytes": 175743,
+      "payload": "payload/d8890e6c19b1ada29b62e5ff2d43967eb0bff157f7417271f473d1c9123de419"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba",
+      "bytes": 890,
+      "payload": "payload/c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "payload": "payload/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "e6ea7a9be4a06ceba90974403c9b569f8052e0d969adffff0b9e509d9cb0fb9b",
+      "bytes": 6409,
+      "payload": "payload/e6ea7a9be4a06ceba90974403c9b569f8052e0d969adffff0b9e509d9cb0fb9b"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4",
+      "bytes": 4468,
+      "payload": "payload/77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "b9ca8908016a0f7762c57b9e0e2b363610d193f8fcabb351c720431ec4e9bfc4",
+      "bytes": 3573,
+      "payload": "payload/b9ca8908016a0f7762c57b9e0e2b363610d193f8fcabb351c720431ec4e9bfc4"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "payload": "payload/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/collider_state/mod.rs",
+      "sha256": "1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f",
+      "bytes": 3850,
+      "payload": "payload/1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/collider_state/validate.rs",
+      "sha256": "8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f",
+      "bytes": 2648,
+      "payload": "payload/8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998",
+      "bytes": 5025,
+      "payload": "payload/66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "payload": "payload/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "payload": "payload/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "payload": "payload/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e",
+      "bytes": 2267,
+      "payload": "payload/6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/narrow_owner/codec.rs",
+      "sha256": "c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec",
+      "bytes": 3070,
+      "payload": "payload/c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254",
+      "bytes": 2341,
+      "payload": "payload/9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23",
+      "bytes": 4760,
+      "payload": "payload/706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "payload": "payload/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "sha256": "da31083b67873ab0a0bcca060ec11432799e3c6a3ba797a533bf04a3913996ab",
+      "bytes": 2489,
+      "payload": "payload/da31083b67873ab0a0bcca060ec11432799e3c6a3ba797a533bf04a3913996ab"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+      "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492",
+      "bytes": 9653,
+      "payload": "payload/f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/continuation_cases.rs",
+      "sha256": "8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e",
+      "bytes": 8569,
+      "payload": "payload/8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/island_cases.rs",
+      "sha256": "bffd679b5ffff4f4dc990d3bfd1fd157771bd668496aa030a1f83151a9eb76e4",
+      "bytes": 17548,
+      "payload": "payload/bffd679b5ffff4f4dc990d3bfd1fd157771bd668496aa030a1f83151a9eb76e4"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/narrow_cases.rs",
+      "sha256": "fb78289e4cc8159b58fc74f6c3d95f65e640135d937a9d2794af44d0f45954ca",
+      "bytes": 15577,
+      "payload": "payload/fb78289e4cc8159b58fc74f6c3d95f65e640135d937a9d2794af44d0f45954ca"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/narrow_checks.rs",
+      "sha256": "8a8a3270ede58f59fb3920f69cf0b907fde6a37a85a34098ef762bf36a5f2ad8",
+      "bytes": 4799,
+      "payload": "payload/8a8a3270ede58f59fb3920f69cf0b907fde6a37a85a34098ef762bf36a5f2ad8"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "payload": "payload/599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "3a4687ff61b0999628f61a4e2bb600d3d26f774d8c48cc1ff2a6bf30884cab36",
+      "bytes": 36552,
+      "payload": "payload/3a4687ff61b0999628f61a4e2bb600d3d26f774d8c48cc1ff2a6bf30884cab36"
+    },
+    {
+      "path": "source-001/files/crates/incant_runtime/src/save.rs",
+      "sha256": "8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754",
+      "bytes": 20624,
+      "payload": "payload/8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754"
+    },
+    {
+      "path": "source-001/files/crates/incant_script/src/checkpoint/mod.rs",
+      "sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+      "bytes": 12191,
+      "payload": "payload/064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480"
+    },
+    {
+      "path": "source-001/files/docs/spikes/physics-narrow-owner.md",
+      "sha256": "e7f01740a157a56f1adc578eb5a6d7985edd5af5ed163cae637814e491bc7d99",
+      "bytes": 6594,
+      "payload": "payload/e7f01740a157a56f1adc578eb5a6d7985edd5af5ed163cae637814e491bc7d99"
+    },
+    {
+      "path": "source-001/files/docs/spikes/physics-world-continuation.md",
+      "sha256": "37dd866a2bac660023bdb9d279c9a72056c045203eb4a1adcdec4b7e537dfe3c",
+      "bytes": 6214,
+      "payload": "payload/37dd866a2bac660023bdb9d279c9a72056c045203eb4a1adcdec4b7e537dfe3c"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "payload": "payload/ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "payload": "payload/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916,
+      "payload": "payload/072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/contacts.rs",
+      "sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66",
+      "bytes": 18554,
+      "payload": "payload/59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/intersections.rs",
+      "sha256": "325b1cdfd6f8bcdc76d4ad009f1fc804e58248541f213380f3fafb766a2c442d",
+      "bytes": 9328,
+      "payload": "payload/325b1cdfd6f8bcdc76d4ad009f1fc804e58248541f213380f3fafb766a2c442d"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "payload": "payload/df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "payload": "payload/237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/queries.rs",
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50",
+      "bytes": 11083,
+      "payload": "payload/a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/solver_graph.rs",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "payload": "payload/8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "payload": "payload/6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "payload": "payload/ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "payload": "payload/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916,
+      "payload": "payload/072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/contacts.rs",
+      "sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66",
+      "bytes": 18554,
+      "payload": "payload/59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/intersections.rs",
+      "sha256": "325b1cdfd6f8bcdc76d4ad009f1fc804e58248541f213380f3fafb766a2c442d",
+      "bytes": 9328,
+      "payload": "payload/325b1cdfd6f8bcdc76d4ad009f1fc804e58248541f213380f3fafb766a2c442d"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "payload": "payload/df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "payload": "payload/237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/queries.rs",
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50",
+      "bytes": 11083,
+      "payload": "payload/a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/solver_graph.rs",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "payload": "payload/8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "payload": "payload/6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de"
+    },
+    {
+      "path": "source-001/freeze.json",
+      "sha256": "52f25f7b7262a06213c4ce3af74ac55f14670801ecfd8c836e9f383a65e958cf",
+      "bytes": 20790,
+      "payload": "payload/52f25f7b7262a06213c4ce3af74ac55f14670801ecfd8c836e9f383a65e958cf"
+    },
+    {
+      "path": "source-001/source.patch",
+      "sha256": "85614aa874f857a040e22a5cb6ea1dd90a80a35d150c158cf899e930cf7da5a3",
+      "bytes": 48110,
+      "payload": "payload/85614aa874f857a040e22a5cb6ea1dd90a80a35d150c158cf899e930cf7da5a3"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/Cargo.lock",
+      "sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+      "bytes": 252688,
+      "payload": "payload/37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/Cargo.toml",
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+      "bytes": 3722,
+      "payload": "payload/9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/STATUS.md",
+      "sha256": "d8890e6c19b1ada29b62e5ff2d43967eb0bff157f7417271f473d1c9123de419",
+      "bytes": 175743,
+      "payload": "payload/d8890e6c19b1ada29b62e5ff2d43967eb0bff157f7417271f473d1c9123de419"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba",
+      "bytes": 890,
+      "payload": "payload/c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "payload": "payload/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "e6ea7a9be4a06ceba90974403c9b569f8052e0d969adffff0b9e509d9cb0fb9b",
+      "bytes": 6409,
+      "payload": "payload/e6ea7a9be4a06ceba90974403c9b569f8052e0d969adffff0b9e509d9cb0fb9b"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4",
+      "bytes": 4468,
+      "payload": "payload/77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "b9ca8908016a0f7762c57b9e0e2b363610d193f8fcabb351c720431ec4e9bfc4",
+      "bytes": 3573,
+      "payload": "payload/b9ca8908016a0f7762c57b9e0e2b363610d193f8fcabb351c720431ec4e9bfc4"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "payload": "payload/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/collider_state/mod.rs",
+      "sha256": "1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f",
+      "bytes": 3850,
+      "payload": "payload/1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/collider_state/validate.rs",
+      "sha256": "8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f",
+      "bytes": 2648,
+      "payload": "payload/8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998",
+      "bytes": 5025,
+      "payload": "payload/66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "payload": "payload/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "payload": "payload/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "payload": "payload/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e",
+      "bytes": 2267,
+      "payload": "payload/6d8d8c760d6d87b5ccd2a87b520530c0090f126edc6311f50c14f4eb83217f8e"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/narrow_owner/codec.rs",
+      "sha256": "c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec",
+      "bytes": 3070,
+      "payload": "payload/c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254",
+      "bytes": 2341,
+      "payload": "payload/9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23",
+      "bytes": 4760,
+      "payload": "payload/706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "payload": "payload/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "sha256": "da31083b67873ab0a0bcca060ec11432799e3c6a3ba797a533bf04a3913996ab",
+      "bytes": 2489,
+      "payload": "payload/da31083b67873ab0a0bcca060ec11432799e3c6a3ba797a533bf04a3913996ab"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+      "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492",
+      "bytes": 9653,
+      "payload": "payload/f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/tests/support/continuation_cases.rs",
+      "sha256": "8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e",
+      "bytes": 8569,
+      "payload": "payload/8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/tests/support/island_cases.rs",
+      "sha256": "bffd679b5ffff4f4dc990d3bfd1fd157771bd668496aa030a1f83151a9eb76e4",
+      "bytes": 17548,
+      "payload": "payload/bffd679b5ffff4f4dc990d3bfd1fd157771bd668496aa030a1f83151a9eb76e4"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/tests/support/narrow_cases.rs",
+      "sha256": "fb78289e4cc8159b58fc74f6c3d95f65e640135d937a9d2794af44d0f45954ca",
+      "bytes": 15577,
+      "payload": "payload/fb78289e4cc8159b58fc74f6c3d95f65e640135d937a9d2794af44d0f45954ca"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/tests/support/narrow_checks.rs",
+      "sha256": "8a8a3270ede58f59fb3920f69cf0b907fde6a37a85a34098ef762bf36a5f2ad8",
+      "bytes": 4799,
+      "payload": "payload/8a8a3270ede58f59fb3920f69cf0b907fde6a37a85a34098ef762bf36a5f2ad8"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "payload": "payload/599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "3a4687ff61b0999628f61a4e2bb600d3d26f774d8c48cc1ff2a6bf30884cab36",
+      "bytes": 36552,
+      "payload": "payload/3a4687ff61b0999628f61a4e2bb600d3d26f774d8c48cc1ff2a6bf30884cab36"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/crates/incant_runtime/src/save.rs",
+      "sha256": "8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754",
+      "bytes": 20624,
+      "payload": "payload/8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/docs/spikes/physics-narrow-owner.md",
+      "sha256": "e7f01740a157a56f1adc578eb5a6d7985edd5af5ed163cae637814e491bc7d99",
+      "bytes": 6594,
+      "payload": "payload/e7f01740a157a56f1adc578eb5a6d7985edd5af5ed163cae637814e491bc7d99"
+    },
+    {
+      "path": "source-001-incomplete-helper-path/files/docs/spikes/physics-world-continuation.md",
+      "sha256": "37dd866a2bac660023bdb9d279c9a72056c045203eb4a1adcdec4b7e537dfe3c",
+      "bytes": 6214,
+      "payload": "payload/37dd866a2bac660023bdb9d279c9a72056c045203eb4a1adcdec4b7e537dfe3c"
+    },
+    {
+      "path": "source-review.json",
+      "sha256": "f4be0d8225329fcf752919e7773429e372aa50d804130aa7ca533a239c12289d",
+      "bytes": 10722,
+      "payload": "payload/f4be0d8225329fcf752919e7773429e372aa50d804130aa7ca533a239c12289d"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/binaries/trusted_manifolds-81c01168a9839318",
+      "sha256": "11291c648eb5543ab47ccf14722053f68798053cd83bd079e2b0006b97e1dc10",
+      "bytes": 14293504,
+      "mode": "0o755",
+      "original": "/tmp/incant-agent-font-target/ci/deps/trusted_manifolds-81c01168a9839318"
+    }
+  ],
+  "checks": {
+    "freeze_sha256": "52f25f7b7262a06213c4ce3af74ac55f14670801ecfd8c836e9f383a65e958cf",
+    "target": "/tmp/incant-agent-font-target",
+    "jobs": 2,
+    "checks": [
+      {
+        "name": "tests",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_physics_snapshot",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 62760,
+        "exit": 0,
+        "seconds": 6.4668190479278564,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/final-tests-001.log",
+        "sha256": "92cc51c9a4d49551469d4f787ad1196fe729861d2a3e75f48cda43a8e9854c3e",
+        "reaped": true
+      },
+      {
+        "name": "clippy",
+        "argv": [
+          "./tools/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_physics_snapshot",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 62983,
+        "exit": 0,
+        "seconds": 1.3525660037994385,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/final-clippy-001.log",
+        "sha256": "1accfc01357f2cb7fdc339ee4602e33d4f5fa863293ffe8da9e5cce14bfedba1",
+        "reaped": true
+      },
+      {
+        "name": "wasm32",
+        "argv": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_physics_snapshot",
+          "--lib",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 63031,
+        "exit": 0,
+        "seconds": 0.5558710098266602,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/final-wasm32-001.log",
+        "sha256": "5fd6eb33dfcccc6cb5907dc51dc85329b241e608384846ab2d508238316e79a5",
+        "reaped": true
+      },
+      {
+        "name": "runtime-graph",
+        "argv": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_physics_snapshot"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 63040,
+        "exit": 0,
+        "seconds": 0.4607551097869873,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/final-runtime-graph-001.log",
+        "sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+        "reaped": true
+      },
+      {
+        "name": "conventions",
+        "argv": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 63049,
+        "exit": 0,
+        "seconds": 0.03043985366821289,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/final-conventions-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reaped": true
+      },
+      {
+        "name": "fmt",
+        "argv": [
+          "./tools/cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 63050,
+        "exit": 0,
+        "seconds": 1.278198003768921,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/final-fmt-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reaped": true
+      },
+      {
+        "name": "diff",
+        "argv": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 63056,
+        "exit": 0,
+        "seconds": 0.022781848907470703,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-narrow-owner-001/final-diff-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reaped": true
+      }
+    ]
+  },
+  "counts": {
+    "passed": 143,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 20
+  },
+  "historical_failure": "focused-001.log: test compile failed because native CollisionEvent has no PartialEq; corrected only test comparisons, production unchanged",
+  "gpu": false,
+  "live_restore": false,
+  "review": "source accepted; final evidence audit pending",
+  "source_review_sha256": "f4be0d8225329fcf752919e7773429e372aa50d804130aa7ca533a239c12289d"
+}

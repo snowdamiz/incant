@@ -44,7 +44,10 @@ pub struct ValidatedAttachments<'a> {
     bodies: &'a ValidatedArena,
     colliders: &'a ValidatedArena,
 }
-impl ValidatedAttachments<'_> {
+impl<'a> ValidatedAttachments<'a> {
+    pub(crate) fn collider_arena(&self) -> &'a ValidatedArena {
+        self.colliders
+    }
     pub fn body_row(&self, body: Handle) -> Option<u32> {
         self.bodies.lookup(body)
     }
