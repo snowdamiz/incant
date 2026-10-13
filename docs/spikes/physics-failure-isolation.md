@@ -24,3 +24,13 @@ logs are retained in the [evidence record](evidence/physics-failure-isolation.js
 This is terminal isolation, not rollback. Structural transactions and general
 pre-step panic safety are outside this change. Physics saves and complete-world
 restoration remain unsupported; no device or performance gate is claimed.
+
+The repair is composed on main239. All 3,281 frozen build inputs equal the
+reviewed producer except main239's explicit renderer diagnostic test/workflow,
+which are absent from the selected physics test graph. Fresh current-main
+qualification passes all eight default runtime cases, strict Clippy and four
+scoped graph/format/convention/whitespace checks. Fast8, native consumers and
+WebAssembly evidence remain producer-scoped; no duplicate execution is claimed.
+The [current composition](evidence/physics-failure-main239.json) retains the
+six commands and source comparison, alongside the unchanged original archive
+and independent source/final reviews. Only the STATUS conflict needed resolution.

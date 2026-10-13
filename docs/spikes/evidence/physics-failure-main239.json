@@ -1,0 +1,139 @@
+{
+  "schema": "incant-physics-failure-main239-v1",
+  "at": "2026-10-13T18:05:12.643003+00:00",
+  "base": "8bd2afb9af88cf74f586a68f1a051cba4a7fa20a",
+  "source": "0eca8b2792041ecc2d2e47b3eaf5f3151e04431f",
+  "producer": "2989ced7eaf7cf122d2f1f1a9813ec02b0ab9e13",
+  "inputs": 3281,
+  "current_checks": [
+    {
+      "label": "tests",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "incant_physics_runtime",
+        "--all-targets",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2"
+      ],
+      "started": "2026-10-13T18:02:57.185635+00:00",
+      "ended": "2026-10-13T18:03:31.341221+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-failure-main239-001/tests.log",
+      "sha256": "20c014cbaac471166b75a2d3a7b50f294d2e7d8287b5e20141db7f5faf528b6e"
+    },
+    {
+      "label": "clippy",
+      "argv": [
+        "cargo",
+        "clippy",
+        "-p",
+        "incant_physics_runtime",
+        "--all-targets",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "started": "2026-10-13T18:03:31.341567+00:00",
+      "ended": "2026-10-13T18:03:38.236709+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-failure-main239-001/clippy.log",
+      "sha256": "c0819f1e67e315288f7df83932b87cca365f2e927c592a6549fa2b6f3a7c58dd"
+    },
+    {
+      "label": "graph",
+      "argv": [
+        "cargo",
+        "tree",
+        "-p",
+        "incant_physics_runtime",
+        "--locked",
+        "--offline",
+        "-e",
+        "normal,build,dev",
+        "-f",
+        "{p}|{f}"
+      ],
+      "started": "2026-10-13T18:03:38.237156+00:00",
+      "ended": "2026-10-13T18:03:38.419482+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-failure-main239-001/graph.log",
+      "sha256": "b1430d56073bcf15c15757d027c4e1b4add1c5fc39fcf1df8a782bb1e3bf1764"
+    },
+    {
+      "label": "format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "-p",
+        "incant_physics_runtime",
+        "--",
+        "--check"
+      ],
+      "started": "2026-10-13T18:03:38.419914+00:00",
+      "ended": "2026-10-13T18:03:38.550698+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-failure-main239-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "started": "2026-10-13T18:03:38.551084+00:00",
+      "ended": "2026-10-13T18:03:38.591234+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-failure-main239-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main...HEAD"
+      ],
+      "started": "2026-10-13T18:03:38.591560+00:00",
+      "ended": "2026-10-13T18:03:38.610942+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-failure-main239-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "current_default_passed": 8,
+  "source_exceptions": [
+    ".github/workflows/renderer-diagnostic.yml",
+    "crates/incant_render/src/ambient_occlusion/filter_device_tests.rs"
+  ],
+  "producer_archive": {
+    "path": "docs/spikes/evidence/physics-failure-isolation-logs.json.gz",
+    "sha256": "cc92f598df8c622c2d9c155e64361e2befa0290458debbf909c6834bc5036dee",
+    "records": 17,
+    "payloads": 14
+  },
+  "producer_source_git_fallbacks": [],
+  "archive": {
+    "path": "docs/spikes/evidence/physics-failure-main239/records.json.gz",
+    "sha256": "f0750a74b95ef6536c6f91be5cb7e45bb271654e8c161cf5abeb3d1f58396431",
+    "records": 10,
+    "payloads": 8
+  },
+  "limits": [
+    "Fresh default runtime package8cases/strictClippy on current main; fast8,16 native consumers and wasm are exact-source producer evidence, not repeated current executions.",
+    "Main239 changes only renderer diagnostic test/workflow and docs; all3281 frozen source/build inputs equal producer except the two explicitly main-exact diagnostic paths, absent the tested physics graph.",
+    "Failure isolation is terminal refusal, not rollback, general structural panic safety or public physics-save admission."
+  ]
+}
