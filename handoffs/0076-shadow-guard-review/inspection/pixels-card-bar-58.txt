@@ -1,0 +1,12 @@
+y=261 screenshots/baseline-viewport-on-f24.png: 143,177,167 135,175,159 143,177,167
+y=261 screenshots/baseline-viewport-off-f24.png: 173,184,198 173,184,198 173,184,198
+y=261 screenshots/candidate-viewport-on-f24.png: 143,177,167 135,175,159 143,177,167
+y=261 screenshots/candidate-viewport-off-f24.png: 174,184,199 173,184,198 173,184,198
+y=262 screenshots/baseline-viewport-on-f24.png: 145,179,164 134,176,155 152,182,170
+y=262 screenshots/baseline-viewport-off-f24.png: 193,198,204 192,197,204 193,198,204
+y=262 screenshots/candidate-viewport-on-f24.png: 145,179,164 134,176,155 152,182,170
+y=262 screenshots/candidate-viewport-off-f24.png: 193,198,204 192,197,204 193,198,204
+y=263 screenshots/baseline-viewport-on-f24.png: 168,188,183 151,182,168 168,188,183
+y=263 screenshots/baseline-viewport-off-f24.png: 193,199,206 193,199,206 193,199,206
+y=263 screenshots/candidate-viewport-on-f24.png: 168,188,183 151,182,168 168,188,183
+y=263 screenshots/candidate-viewport-off-f24.png: 193,199,206 193,199,206 193,199,206

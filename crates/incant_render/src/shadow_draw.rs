@@ -17,7 +17,7 @@ impl Renderer {
     pub(crate) fn prepare_shadow_draw(
         &self,
         scene: &RenderScene,
-        aspect: f32,
+        rect: [f32; 4],
     ) -> Result<ShadowDraw> {
         let mut casters = Vec::new();
         let mut bounds = Vec::new();
@@ -47,7 +47,7 @@ impl Renderer {
             maps: self.shadows.prepare(
                 &self.device,
                 scene.camera,
-                aspect,
+                rect,
                 &scene.lights.shadows,
                 &bounds,
             )?,

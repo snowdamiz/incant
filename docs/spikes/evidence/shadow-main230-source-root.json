@@ -1,0 +1,10 @@
+{
+  "decision": "accepted current-main source composition for CPU qualification",
+  "source_freeze_sha256": "641e8444bf3984a092c7c26c822ab3ce0ec6f149cc3481eb0281d99cb4a590d0",
+  "head": "070a53593d782a36cf60de0c065602bb2d416186",
+  "base": "56185dabc072f92aa122fb999198b283919446fe",
+  "inputs_verified": 3564,
+  "source_verified": 7,
+  "review": "Six source files exactly match accepted producer. model_draw equals main230 SSAO composition except one typed actual-viewport shadow call. Guard validation and quantization order reviewed with odd/offset/one-pixel and perspective/ortho tests; no shader change.",
+  "limits": "CPU qualification pending. Prior GPU/pixel evidence remains producer scoped; original strict comparison failure retained. No TAA quality, device or phase gate."
+}

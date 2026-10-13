@@ -1,0 +1,18 @@
+{
+  "decision": "accepted scoped current-main CPU composition",
+  "manifest_sha256": "53e26f07e66b6915c5d453a7f4c210bd9064787d0d87390a113e46b6225d353a",
+  "verifier": "independently read and reran --verify-only; no observed failed assertion",
+  "checks": 13,
+  "cpu_passed": {
+    "default": 171,
+    "cooked": 203
+  },
+  "ignored_gpu_per_suite": 107,
+  "source_inputs": 3564,
+  "current_records": 75,
+  "current_payloads": 56,
+  "old_native_shader_payloads_identical": 33,
+  "original_claude_handoff_files": 134,
+  "retained_visual_records": 85,
+  "scope": "Source and CPU composition accepted for reviewed PR and required fast check. No new GPU execution. Exact prior producer and original comparison failure retained; no broad upscaling quality, phone/performance or phase gate."
+}

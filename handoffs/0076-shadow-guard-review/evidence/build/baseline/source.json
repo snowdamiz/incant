@@ -1,0 +1,44 @@
+{
+ "role": "baseline",
+ "build_grant_sha256": "83bb00aace62ffb65b85c39bceae0a1d0b9283a16075185c5c7de9c221c52661",
+ "holder": "root supervised sequential shadow comparison CPU builds",
+ "tools": {
+  "head": "6d447c80d8fa92c41153bd011641e727125e6552",
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "plan_sha256": "a8a0cd6411697f06dbc17e15dfb1013e03222860569e3cfb4c6d3612e4bfcc70",
+  "helper_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "source_commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+ "tree": "9363cf4ffb7c2abe2c47042dfb0e85e98a02da00",
+ "files": 19496,
+ "checkout_manifest_sha256": "0dcb42189f137065e06292298c89a7039e3ecfa8489f96ec1a08fd0f6f85da7b",
+ "source_freeze": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/baseline-source-freeze.json",
+  "sha256": "ab1d341ecd098348b1446f4c6e971001ce5bfb7e7e6bfef7fd76340fe90ee673",
+  "names_commit": {
+   "source_commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a"
+  }
+ },
+ "coverage": {
+  "build_input_roots": [
+   "crates",
+   "Cargo.toml",
+   "Cargo.lock",
+   "third_party",
+   "tools/cargo",
+   "rust-toolchain.toml",
+   ".cargo"
+  ],
+  "build_inputs": 3141,
+  "freeze_rows": 3141,
+  "freeze_build_input_rows": 3141,
+  "inputs_missing_from_freeze": [],
+  "freeze_rows_missing_from_commit": [],
+  "mismatched": [],
+  "mismatched_count": 0,
+  "exact": true
+ },
+ "cargo_lock_sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "recorded": "2026-10-13T14:44:49.570864+00:00"
+}

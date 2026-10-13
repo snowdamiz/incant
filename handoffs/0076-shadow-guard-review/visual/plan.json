@@ -1,0 +1,628 @@
+{
+ "packet": "0076-shadow-guard-review",
+ "stage": "shadow-guard-visual",
+ "build_stage": "shadow-guard-build",
+ "status": "prepared for root's grants; frozen by the commit whose visual tree root pins; nothing has been built or run",
+ "evidence_namespace": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001",
+ "provenance": {
+  "framework": {
+   "commit": "48a688c58f15ce2951292471c5d37cd2cc1fdc9b",
+   "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+   "root_build_fix": "cd4f4cd751df6bdaa8f47a15c51a70e9550b2521",
+   "verbatim_import_commit": "1d60f9368314219677fe19ba3d1207399138ab3c",
+   "rule": "The committed 0072 tools, plan and fixture are imported byte for byte (blob ids equal) and then adapted narrowly; `git diff 1d60f936 -- handoffs/0076-shadow-guard-review/visual` is the whole adaptation. The live 0072 worktree's uncommitted preparation is never read."
+  },
+  "diagnosis": {
+   "result": "48a688c58f15ce2951292471c5d37cd2cc1fdc9b:handoffs/0072-motion-history-numeric/sharpness-result.md (section 5 Viewport, section 6 cascade row, section 10 question 1)",
+   "derivation": "48a688c58f15ce2951292471c5d37cd2cc1fdc9b:handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/cascade_texels.py",
+   "derivation_output": "48a688c58f15ce2951292471c5d37cd2cc1fdc9b:handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/cascade_texels.txt",
+   "summary": "In the 885x501 offset viewport the temporal receiver guard (1/width, 1/height) widened the fitted frustum before 1/16 radius quantization only when temporal accumulation was on, so cascades 0, 1 and 3 used larger texels (+0.752%, +0.389%, +0.106%). The one-texel MASK grille's shadow falls in cascade 1 and aliased differently: solid with temporal on, faintly hatched with it off."
+  },
+  "brief_sha256": "c83c30c845162687e7f039c64a9d80a61ed5cc44631108e5f03a1d227ebe0994"
+ },
+ "sources": {
+  "baseline": {
+   "commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+   "tree": "9363cf4ffb7c2abe2c47042dfb0e85e98a02da00",
+   "label": "main224: merge of PR #224"
+  },
+  "candidate": {
+   "commit": "f636a2d5e595cffae702d078bcee61f34ab35394",
+   "tree": "c4fe457af5acf6b4d2be6e148379b51c23985c17",
+   "parent": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+   "label": "Keep shadow receiver coverage stable across temporal modes"
+  },
+  "rule": "Only root's build-ready.json pins each role's source (a 40-hex commit and root's freeze by path and SHA-256), and the tools refuse a grant whose commits are not exactly these two.",
+  "delta": {
+   "all_paths": [
+    "crates/incant_render/src/model_draw.rs",
+    "crates/incant_render/src/shadow_draw.rs",
+    "crates/incant_render/src/shadows/cascade.rs",
+    "crates/incant_render/src/shadows/mod.rs",
+    "crates/incant_render/src/shadows/receiver_tests.rs",
+    "crates/incant_render/tests/lighting_gpu/extended.rs",
+    "crates/incant_render/tests/lighting_gpu/readback.rs",
+    "docs/spikes/evidence/shadow-receiver-guard-records.json.gz",
+    "docs/spikes/evidence/shadow-receiver-guard.json",
+    "docs/spikes/shadow-receiver-guard.md"
+   ],
+   "in_review_binary": [
+    "crates/incant_render/src/model_draw.rs",
+    "crates/incant_render/src/shadow_draw.rs",
+    "crates/incant_render/src/shadows/cascade.rs",
+    "crates/incant_render/src/shadows/mod.rs"
+   ],
+   "note": "receiver_tests.rs is cfg(test) unit-test code and tests/lighting_gpu is another test target; neither is compiled into temporal_visual_review. No shader, cooker, target, pass or pipeline file changes."
+  }
+ },
+ "fixture": {
+  "path": "handoffs/0076-shadow-guard-review/visual/review/temporal_visual_review.rs",
+  "sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+  "base_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338",
+  "base": "48a688c58f15ce2951292471c5d37cd2cc1fdc9b:handoffs/0072-motion-history-numeric/visual/review/temporal_visual_review.rs",
+  "change": {
+   "inserted_line": 1207,
+   "text": "            halos: None,",
+   "reason": "main224 added the required field UiWidget::halos (c6a7804a); the 0072 fixture's one UI button literal (ui_input, used only by the excluded case) no longer compiles without it. A Button must carry None: incant_render ui/geometry.rs refuses halos on any role but Label. The viewport case and everything it calls are byte-identical."
+  },
+  "same_for_both_roles": true
+ },
+ "build_inputs": [
+  "crates",
+  "Cargo.toml",
+  "Cargo.lock",
+  "third_party",
+  "tools/cargo",
+  "rust-toolchain.toml",
+  ".cargo"
+ ],
+ "grants": {
+  "build-ready.json": "packet, stage shadow-guard-build, holder, sources {baseline, candidate} each {source_commit (the plan's 40-hex commit), source_freeze {path, sha256}}, visual_tree, target (~/.codex/*-target, used for both builds one after the other); optional prior_*_path/_sha256 pins",
+  "review-ready.json": "packet, stage shadow-guard-visual, holder, visual_tree, build_records {baseline, candidate} (SHA-256 of build/<role>/review.json), at least one prior_*release*_path/_sha256 pin"
+ },
+ "expected_backend": "Metal",
+ "review_config": {
+  "history_weight": 0.9,
+  "relative_depth": 0.05,
+  "absolute_depth": 0.02,
+  "reactive_threshold": 4.0,
+  "reactive_strength": 0.5
+ },
+ "budgets": {
+  "submissions_max": 60,
+  "planned_submissions": 52,
+  "pngs_max": 4,
+  "frame_max_width": 960,
+  "frame_max_height": 540,
+  "compile_jobs": 2,
+  "build_timeout_s": 2700,
+  "listing_timeout_s": 60,
+  "review_case_timeout_s": 120,
+  "counting": "Every world-frame submission of the viewport case is one submission, the temporal-off references included: 26 per role (fixture: Report::open(\"viewport\", 26, 0), one off-still, 24 on, one off-pan), no UI submission, 2 PNGs per role. Each charged child is debited, fsynced, under the global GPU lock before launch and never refunded; the 60 ceiling includes failed or interrupted attempts, so no case fits in the 8-submission reserve and there is no retry. Listings submit nothing. No numeric control, shader control or whole-suite run belongs to this packet."
+ },
+ "builds": {
+  "review": [
+   "test",
+   "-p",
+   "incant_render",
+   "--test",
+   "temporal_visual_review",
+   "--no-run"
+  ],
+  "lint": [
+   "clippy",
+   "-p",
+   "incant_render",
+   "--test",
+   "temporal_visual_review"
+  ],
+  "common_flags": [
+   "--locked",
+   "--offline",
+   "--profile",
+   "ci",
+   "-j2",
+   "--message-format=json-render-diagnostics"
+  ],
+  "expected_features": [
+   "default",
+   "physics-deterministic"
+  ],
+  "note": "Both roles use these exact arguments from their own checkout; default features only. No library test build: this slice reruns no numeric control."
+ },
+ "review": {
+  "binary": "temporal_visual_review",
+  "cwd": "crates/incant_render",
+  "output_env": "INCANT_0072_REVIEW_OUT",
+  "args": [
+   "--ignored",
+   "--exact",
+   "--nocapture",
+   "--test-threads=1"
+  ],
+  "size": [
+   960,
+   540
+  ],
+  "max_runs_per_case": 1,
+  "listed_cases": [
+   "probe",
+   "stationary",
+   "motion",
+   "excluded",
+   "transitions",
+   "skinned",
+   "timing",
+   "viewport"
+  ],
+  "order": [
+   "viewport"
+  ],
+  "cases": {
+   "viewport": {
+    "frames": 26,
+    "ui_submissions": 0,
+    "pngs": [
+     "viewport-on-f24.png",
+     "viewport-off-f24.png"
+    ],
+    "checks": [
+     "viewport_run_uninterrupted",
+     "references_have_no_temporal_state",
+     "outside_viewport_matches_reference",
+     "frames_match_plan"
+    ],
+    "purpose": "New for this comparison: the stationary stage in an integer-offset, odd-sized viewport [37, 19, 885, 501] inside the 960x540 output (also the temporal rect at full scale). Temporal-off at the still pose; one owner accumulates 16 still frames (two cycles, activity bands over frames 9-16 recorded in the report), then 8 frames of lateral pan with yaw that carry content across the viewport border; temporal-off at the final pan pose. Outside the viewport every frame must equal the reference surround.",
+    "reuse": "0072's case spec verbatim (48a688c5 plan.json review.cases.viewport); run once per role"
+   }
+  }
+ },
+ "totals": {
+  "frames_per_role": 26,
+  "frames": 52,
+  "ui_submissions": 0,
+  "submissions": 52,
+  "pngs": 4,
+  "reserve_submissions": 8,
+  "reserve_pngs": 0
+ },
+ "order": [
+  "CPU, root-supervised in the foreground under build-ready.json: lease.py acquire; build.py checkout baseline; build.py toolchain baseline; build.py review baseline; build.py lint baseline; build.py checkout candidate; build.py toolchain candidate; build.py review candidate; build.py lint candidate; lease.py release",
+  "GPU under review-ready.json: gpu.py list baseline; gpu.py review baseline viewport; gpu.py list candidate; gpu.py review candidate viewport; gpu.py release",
+  "CPU: analyze.py check (fail-closed integrity); analyze.py compare (exactness, guards, agreement, defect; fails honestly); analyze.py pairs; personal inspection of all 4 PNGs at full size and every pair; analyze.py publish (only from a current passing integrity summary)"
+ ],
+ "amendments": [],
+ "comparison": {
+  "case": "viewport",
+  "on": "viewport-on-f24.png",
+  "off": "viewport-off-f24.png",
+  "pose": "viewport-pan-f24",
+  "viewport_rect": [
+   37.0,
+   19.0,
+   885.0,
+   501.0
+  ],
+  "internal_size": [
+   960,
+   540
+  ],
+  "canvas_srgb": [
+   20,
+   21,
+   25
+  ],
+  "on_frames": [
+   "on-01",
+   "on-02",
+   "on-03",
+   "on-04",
+   "on-05",
+   "on-06",
+   "on-07",
+   "on-08",
+   "on-09",
+   "on-10",
+   "on-11",
+   "on-12",
+   "on-13",
+   "on-14",
+   "on-15",
+   "on-16",
+   "on-17",
+   "on-18",
+   "on-19",
+   "on-20",
+   "on-21",
+   "on-22",
+   "on-23",
+   "on-24"
+  ],
+  "border_band_px": 3,
+  "region": {
+   "shadow_grow_px": 4,
+   "exclude_grow_px": 3,
+   "definition": "regions.region: the grille card's outline carried along the sun to the ground and projected at the final pan pose (0072 cascade_texels.py math, reproduced exactly), grown 4 px, minus the card quad and the analytic sphere each grown 3 px, clipped to the viewport"
+  },
+  "metrics": {
+   "lowpass_sigma_px": 2.0,
+   "blur_sigmas_px": [
+    0,
+    0.25,
+    0.5,
+    0.75,
+    1.0,
+    1.25,
+    1.5,
+    1.75,
+    2.0
+   ],
+   "space": "linear-light luminance (0..1) decoded from the 8-bit sRGB PNGs"
+  },
+  "bars": {
+   "green_min": 60,
+   "green_over_max_rb": 1.3,
+   "min_pixels": 4000,
+   "definition": "grille-bar pixels inside the projected card quad: G >= 60 and G >= 1.3 max(R, B). The card's visible face is not sun-lit (N.L = -0.394), so bar classification does not depend on the shadow fit."
+  },
+  "thresholds": {
+   "agreement": {
+    "mean_gap_max": 0.02,
+    "blur_residual_max": 0.026,
+    "lowpass_max_max": 0.086,
+    "still_interior_max_delta_max": 66
+   },
+   "rule": "calibration.derived: each limit is the geometric mean of the worst consistent-fit control and the best mismatch control, rounded down to two significant figures; selfcheck.py recomputes the controls and refuses any other value"
+  },
+  "calibration": {
+   "source_commit": "48a688c58f15ce2951292471c5d37cd2cc1fdc9b",
+   "synthetic_margin_px": 12,
+   "controls": [
+    {
+     "id": "fixed-coverage-still",
+     "kind": "consistent",
+     "pose": "full-still",
+     "on": "handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-on-f16.png",
+     "off": "handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-off.png",
+     "why": "the accepted fixed-coverage resolve (the one main224 carries) at 960x540, where the guard leaves cascade 1 unchanged"
+    },
+    {
+     "id": "fixed-coverage-pan-f6",
+     "kind": "consistent",
+     "pose": "full-pan-f6",
+     "on": "handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-pan-on-f6.png",
+     "off": "handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-pan-off-f6.png",
+     "why": "the same resolve under the lateral pan with yaw"
+    },
+    {
+     "id": "creg-still",
+     "kind": "consistent",
+     "pose": "full-still",
+     "on": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-on-f16.png",
+     "off": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-off.png",
+     "why": "the sharper C-reg resolve at 960x540 (not in either source here)"
+    },
+    {
+     "id": "creg-pan-f6",
+     "kind": "consistent",
+     "pose": "full-pan-f6",
+     "on": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-on-f6.png",
+     "off": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png",
+     "why": "C-reg under the pan"
+    },
+    {
+     "id": "creg-viewport-pan-f24",
+     "kind": "mismatch",
+     "pose": "viewport-pan-f24",
+     "on": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-on-f24.png",
+     "off": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-off-f24.png",
+     "why": "the diagnosed defect: this exact case and pose with the unguarded temporal-off fit"
+    },
+    {
+     "id": "synthetic-blur-0.9",
+     "kind": "consistent",
+     "pose": "viewport-pan-f24",
+     "off": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-off-f24.png",
+     "synthetic": {
+      "blur_on_sigma_px": 0.9
+     },
+     "why": "pure blur of the hatched reference at the accepted fixed-coverage effective sigma (0.757-0.900 px): a blur alone must not read as a mismatch"
+    },
+    {
+     "id": "synthetic-blur-1.3",
+     "kind": "consistent",
+     "pose": "viewport-pan-f24",
+     "off": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-off-f24.png",
+     "synthetic": {
+      "blur_on_sigma_px": 1.3
+     },
+     "why": "a blurrier resolve than any measured"
+    },
+    {
+     "id": "synthetic-mismatch-blur-0.9",
+     "kind": "mismatch",
+     "pose": "viewport-pan-f24",
+     "on": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-on-f24.png",
+     "off": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-off-f24.png",
+     "synthetic": {
+      "blur_on_sigma_px": 0.9
+     },
+     "why": "the defect seen through a fixed-coverage-like blur: a blur must not hide it"
+    },
+    {
+     "id": "synthetic-mismatch-blur-1.3",
+     "kind": "mismatch",
+     "pose": "viewport-pan-f24",
+     "on": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-on-f24.png",
+     "off": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-off-f24.png",
+     "synthetic": {
+      "blur_on_sigma_px": 1.3
+     },
+     "why": "the defect through a blurrier resolve"
+    }
+   ],
+   "still_controls": [
+    {
+     "id": "fixed-coverage-still-report",
+     "kind": "consistent",
+     "key": "f16_vs_off",
+     "report": "handoffs/0072-motion-history-numeric/temporal-coverage-evidence/captures/stationary/report.json"
+    },
+    {
+     "id": "creg-still-report",
+     "kind": "consistent",
+     "key": "f16_vs_off",
+     "report": "handoffs/0072-motion-history-numeric/fixed-sharpness-evidence/captures/stationary/report.json"
+    },
+    {
+     "id": "creg-viewport-still-report",
+     "kind": "mismatch",
+     "key": "still_f16_vs_off",
+     "report": "handoffs/0072-motion-history-numeric/fixed-sharpness-evidence/captures/viewport/report.json"
+    }
+   ],
+   "values": {
+    "fixed-coverage-still": {
+     "kind": "consistent",
+     "pixels": 6664,
+     "mean_gap": 0.00052,
+     "blur_residual": 0.00414,
+     "lowpass_max": 0.02188,
+     "blur_sigma_px": 1.0,
+     "max_step": 26
+    },
+    "fixed-coverage-pan-f6": {
+     "kind": "consistent",
+     "pixels": 6494,
+     "mean_gap": 0.00091,
+     "blur_residual": 0.00316,
+     "lowpass_max": 0.01357,
+     "blur_sigma_px": 1.0,
+     "max_step": 19
+    },
+    "creg-still": {
+     "kind": "consistent",
+     "pixels": 6664,
+     "mean_gap": 0.00216,
+     "blur_residual": 0.00307,
+     "lowpass_max": 0.00324,
+     "blur_sigma_px": 0.5,
+     "max_step": 7
+    },
+    "creg-pan-f6": {
+     "kind": "consistent",
+     "pixels": 6494,
+     "mean_gap": 0.00063,
+     "blur_residual": 0.0041,
+     "lowpass_max": 0.0135,
+     "blur_sigma_px": 0.75,
+     "max_step": 15
+    },
+    "creg-viewport-pan-f24": {
+     "kind": "mismatch",
+     "pixels": 5700,
+     "mean_gap": 0.19741,
+     "blur_residual": 0.17062,
+     "lowpass_max": 0.32108,
+     "blur_sigma_px": 2.0,
+     "max_step": 95
+    },
+    "synthetic-blur-0.9": {
+     "kind": "consistent",
+     "pixels": 5700,
+     "mean_gap": 9e-05,
+     "blur_residual": 0.00328,
+     "lowpass_max": 0.01231,
+     "blur_sigma_px": 1.0,
+     "max_step": 36
+    },
+    "synthetic-blur-1.3": {
+     "kind": "consistent",
+     "pixels": 5700,
+     "mean_gap": 0.00022,
+     "blur_residual": 0.00189,
+     "lowpass_max": 0.02333,
+     "blur_sigma_px": 1.25,
+     "max_step": 49
+    },
+    "synthetic-mismatch-blur-0.9": {
+     "kind": "mismatch",
+     "pixels": 5700,
+     "mean_gap": 0.19742,
+     "blur_residual": 0.16719,
+     "lowpass_max": 0.32075,
+     "blur_sigma_px": 2.0,
+     "max_step": 95
+    },
+    "synthetic-mismatch-blur-1.3": {
+     "kind": "mismatch",
+     "pixels": 5700,
+     "mean_gap": 0.19757,
+     "blur_residual": 0.16412,
+     "lowpass_max": 0.32023,
+     "blur_sigma_px": 2.0,
+     "max_step": 95
+    },
+    "fixed-coverage-still-report": {
+     "kind": "consistent",
+     "still_interior_max_delta": 24
+    },
+    "creg-still-report": {
+     "kind": "consistent",
+     "still_interior_max_delta": 46
+    },
+    "creg-viewport-still-report": {
+     "kind": "mismatch",
+     "still_interior_max_delta": 96
+    }
+   },
+   "derived": {
+    "mean_gap_max": {
+     "worst_consistent": 0.00216,
+     "best_mismatch": 0.19741,
+     "limit": 0.02
+    },
+    "blur_residual_max": {
+     "worst_consistent": 0.00414,
+     "best_mismatch": 0.16412,
+     "limit": 0.026
+    },
+    "lowpass_max_max": {
+     "worst_consistent": 0.02333,
+     "best_mismatch": 0.32023,
+     "limit": 0.086
+    },
+    "still_interior_max_delta_max": {
+     "worst_consistent": 46,
+     "best_mismatch": 96,
+     "limit": 66
+    }
+   }
+  },
+  "pairs": {
+   "margin_px": 12,
+   "crops": [
+    {
+     "name": "grille-shadow",
+     "box": "grille-shadow",
+     "scale": 4,
+     "panels": [
+      "baseline:on",
+      "baseline:off",
+      "candidate:on",
+      "candidate:off"
+     ]
+    },
+    {
+     "name": "card-off",
+     "box": "card",
+     "scale": 3,
+     "panels": [
+      "baseline:off",
+      "candidate:off"
+     ]
+    },
+    {
+     "name": "card-on",
+     "box": "card",
+     "scale": 3,
+     "panels": [
+      "baseline:on",
+      "candidate:on"
+     ]
+    },
+    {
+     "name": "border-left-ground",
+     "box": "border-left-ground",
+     "scale": 4,
+     "panels": [
+      "baseline:on",
+      "baseline:off",
+      "candidate:on",
+      "candidate:off"
+     ]
+    },
+    {
+     "name": "border-right-ground",
+     "box": "border-right-ground",
+     "scale": 4,
+     "panels": [
+      "baseline:on",
+      "baseline:off",
+      "candidate:on",
+      "candidate:off"
+     ]
+    },
+    {
+     "name": "border-bottom-left",
+     "box": "border-bottom-left",
+     "scale": 4,
+     "panels": [
+      "baseline:on",
+      "baseline:off",
+      "candidate:on",
+      "candidate:off"
+     ]
+    },
+    {
+     "name": "border-bottom-right",
+     "box": "border-bottom-right",
+     "scale": 4,
+     "panels": [
+      "baseline:on",
+      "baseline:off",
+      "candidate:on",
+      "candidate:off"
+     ]
+    }
+   ],
+   "differences": [
+    {
+     "name": "off-before-after-x4",
+     "box": "viewport",
+     "a": "baseline:off",
+     "b": "candidate:off",
+     "gain": 4
+    },
+    {
+     "name": "on-off-baseline-x4",
+     "box": "viewport",
+     "a": "baseline:on",
+     "b": "baseline:off",
+     "gain": 4
+    },
+    {
+     "name": "on-off-candidate-x4",
+     "box": "viewport",
+     "a": "candidate:on",
+     "b": "candidate:off",
+     "gain": 4
+    }
+   ],
+   "border_crop_px": [
+    56,
+    48
+   ],
+   "ground_meets_border_y": {
+    "left": 146,
+    "right": 207,
+    "measured": "first ground row at x = 38 and x = 918 of the retained 0072 viewport-off-f24.png (same fixture and pose); the sky inside the viewport equals the canvas colour, so only the ground can show a border artifact"
+   }
+  },
+  "inherited": {
+   "activity_ge33_max": 318,
+   "saturated_max": 0,
+   "edge_mean_max": 5,
+   "edge_max_max": 50,
+   "interior_changed_max": 100,
+   "same_phase_interior_max": 0,
+   "source": "0072 plan.json comparison.viewport, unchanged; they measure the temporal resolve, which neither source changes, and are recorded as observations only"
+  },
+  "sections": {
+   "exactness": "both runs differ only in source: same fixture, features, arguments, lock, toolchain, host, adapter, review config and viewport, and all 24 temporal-on frames byte-identical (the candidate changes only the temporal-off fit). Failing any one voids the comparison.",
+   "guards": "no outside-viewport change (static within each run, byte-identical across runs, all canvas), no border artifact (candidate border band not above inner; the off before/after change not concentrated in the 3 px band), MASK geometry preserved (identical grille-bar mask in the off references)",
+   "agreement": "candidate temporal on/off agreement in the grille-shadow region (mean gap, blur residual, low-pass max) and at the still pose (interior max delta)",
+   "defect": "the baseline fails every grille-shadow agreement limit, as the calibration's mismatch controls do, and every candidate value (the three region values and the still-pose interior maximum) is below the baseline's; otherwise no fix is demonstrated"
+  }
+ }
+}

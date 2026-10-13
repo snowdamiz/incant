@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-13T15:40:54.062709+00:00",
+  "verdict": "accepted scoped receiver-guard source and visual evidence for later current-main intake",
+  "source": "f636a2d5e595cffae702d078bcee61f34ab35394",
+  "claude_head": "86c1c1469f444e169cd45ac3c0086fbefc2fc357",
+  "claude_effort": "Opus5.5 explicitly Max verified through ACP",
+  "fullframe_report_sha256": "4d7f9efd69602c2f241216f951db55bf8881150bd3e14ed3be03167cfa42897e",
+  "root_verification": "Read final report with corrected lit-ramp pixel finding; previously verified85 retained files/images across three manifests against original bytes, all ledger process IDs absent. Fullframe16on hashes identical, offset shadow consistency improves, Claude no new visible artifact.",
+  "ledgers": [
+    {
+      "namespace": "0076-shadow-guard-review-001",
+      "ledger_sha256": "58b77135607094c578cab1fb3e0c8e0dcbccd595d963daaa5b092e98d1401a47",
+      "rows": 10
+    },
+    {
+      "namespace": "0076-shadow-determinism-001",
+      "ledger_sha256": "da8da449ddb23ece2fbbbc0bb0aae5db91bb96c591ce6ac58b6819e5b9ffa9ad",
+      "rows": 4
+    },
+    {
+      "namespace": "0076-shadow-fullframe-001",
+      "ledger_sha256": "cf9ececa783dcd7faf221e5df0c7df5b62bcf3e41c144bf2941262a894247a3f",
+      "rows": 2
+    }
+  ],
+  "limitations": [
+    "Original strict comparison remains FAILED; one varying frame demonstrated with same binary; cause/rate unknown",
+    "Thin MASK shadow fidelity and temporal quality failures remain open",
+    "One lit ramp pixel changed by one G code with cause not isolated",
+    "No phone/performance/phase gate or current-main composition claim"
+  ],
+  "pause": "No new implementation, GPU execution or publication started; safe resume item is source curation on current main."
+}

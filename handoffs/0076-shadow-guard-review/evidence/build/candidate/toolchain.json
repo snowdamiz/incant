@@ -1,0 +1,73 @@
+{
+ "role": "candidate",
+ "recorded": "2026-10-13T14:45:35.089492+00:00",
+ "holder": "root supervised sequential shadow comparison CPU builds",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "RUSTUP_AUTO_INSTALL": "0",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/tmp/toolchain-candidate"
+  }
+ },
+ "commands": {
+  "cargo": {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/candidate/tools/cargo",
+    "-V"
+   ],
+   "exit": 0,
+   "stdout": "cargo 1.99.0 (5f94df478 2026-08-27)\n",
+   "stderr": ""
+  },
+  "rustc": {
+   "argv": [
+    "rustc",
+    "-vV"
+   ],
+   "exit": 0,
+   "stdout": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+   "stderr": ""
+  },
+  "sw_vers": {
+   "argv": [
+    "sw_vers"
+   ],
+   "exit": 0,
+   "stdout": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0.1\nBuildVersion:\t\t26A434\n",
+   "stderr": ""
+  },
+  "uname": {
+   "argv": [
+    "uname",
+    "-srm"
+   ],
+   "exit": 0,
+   "stdout": "Darwin 27.0.0 arm64\n",
+   "stderr": ""
+  },
+  "hw_model": {
+   "argv": [
+    "sysctl",
+    "-n",
+    "hw.model"
+   ],
+   "exit": 0,
+   "stdout": "Mac17,9\n",
+   "stderr": ""
+  },
+  "cpu": {
+   "argv": [
+    "sysctl",
+    "-n",
+    "machdep.cpu.brand_string"
+   ],
+   "exit": 0,
+   "stdout": "Apple M5 Pro\n",
+   "stderr": ""
+  }
+ },
+ "python": "3.14.8 (main, Sep 30 2026, 17:55:09) [Clang 21.0.0 (clang-2100.3.34.2)]"
+}
