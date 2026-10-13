@@ -120,10 +120,10 @@ mod tests;
 
 // The production caller is the sibling opaque capture module. It cannot receive
 // arbitrary public bytes: NativeFrame fields and its issuance are private.
-pub(super) fn capture_context(world: &PhysicsWorld) -> CaptureContext {
+pub(super) fn capture_context(_world: &PhysicsWorld) -> CaptureContext {
     CaptureContext {
         #[cfg(all(feature = "parallel", not(feature = "unsync-callbacks")))]
-        pool: world.thread_pool(),
+        pool: _world.thread_pool(),
     }
 }
 pub(super) fn capture_envelope(
