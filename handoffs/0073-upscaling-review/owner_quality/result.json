@@ -1,0 +1,930 @@
+{
+ "schema": "incant-0073-owner-quality-result-v1",
+ "status": "EXECUTED_ONCE_RELEASED; contracts and artifacts complete; appearance NOT ACCEPTED",
+ "model": {
+  "id": "claude-opus-5-5",
+  "name": "Claude Opus 5.5",
+  "thinking_effort": "max",
+  "verification": "root configured and verified Opus 5.5 with Max through ACP before prompting (supervisor 0073-owner-quality-supervision-001); this session runs with reasoning effort max"
+ },
+ "authority": {
+  "brief": {
+   "path": "handoffs/0073-upscaling-review/brief.md",
+   "sha256": "612a9d245c0f0067c16a992899626d8ac14bb0ed13e324cba780fb8d03dc2a1e"
+  },
+  "grant": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/grant.json",
+   "sha256": "a47643b32981088bf26f4ae85db41ff6d430ab24191771275f233cdf5901a8d8"
+  },
+  "runner": {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/runner.py",
+   "sha256": "5eacd386161a8bbc669cf00df0a43450c78553bd9e37a3b675895ff00b75d479",
+   "commit": "8bc0e9a5cdf0118fed495cfa241486cf180b9ba5"
+  },
+  "plan": {
+   "path": "handoffs/0073-upscaling-review/owner_quality/execution/plan.json",
+   "sha256": "f2ffc19ddfd9a616979631e056b4846ad74ba56e0109cb9fe2b1f5ea092f957a"
+  },
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "binary_sha256": "9644fc96660204aedafd997836fdef557284d40000a06e111c0aefd90b605199",
+  "production": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "fixture_sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997",
+  "quality_plan_sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4",
+  "predecessor_release": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-002/release.json",
+   "sha256": "c1bdfed0b833a1e6c275170ce9a39a34f265e22ce8d5969e9e5068239e310899"
+  }
+ },
+ "execution": {
+  "command": "python3 -I -B handoffs/0073-upscaling-review/owner_quality/execution/runner.py run /Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality/execution/plan.json",
+  "python": "3.14.8 (/opt/homebrew/bin/python3)",
+  "started_utc": "2026-10-13T18:41:52Z",
+  "finished_utc": "2026-10-13T18:42:02Z",
+  "exit_code": 0,
+  "runs": 1,
+  "retries": 0,
+  "console_output_equals_release_json": true,
+  "other_gpu_work": "none: no Cargo, build, test listing, probe, alternative renderer, screenshot, window or extra image"
+ },
+ "release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/release.json",
+  "sha256": "261e14eb5a611d32b32ce17a7bbfaa1fd4580c806ce4d8c1527f141216f19729",
+  "released": true,
+  "released_at": "2026-10-13T18:42:02.595225+00:00",
+  "accepted": true,
+  "image_inventory_matches": true,
+  "owned_processes": [],
+  "process_groups_alive": [],
+  "exception": null
+ },
+ "ledger": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/ledger.jsonl",
+  "sha256": "b8f39bfe8c0963ba05e7b8af1300df7b7d7b9d39f79a62e5c8185cfe3b622a45"
+ },
+ "debits": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/debits.jsonl",
+  "sha256": "cf5bf53168f060bbfec730413a3ee9fa414ff8a90694801f457644d0b8d1eefd"
+ },
+ "adapter": {
+  "backend": "Metal",
+  "device": 0,
+  "device_type": "IntegratedGpu",
+  "driver": "",
+  "driver_info": "",
+  "max_texture_dimension_2d": 8192,
+  "name": "Apple M5 Pro",
+  "vendor": 0
+ },
+ "os": [
+  "Darwin",
+  "Andreys-MBP.lan",
+  "27.0.0",
+  "arm64"
+ ],
+ "counts": {
+  "processes": 5,
+  "pngs": 15,
+  "queue_submissions": 778,
+  "readback_maps": 380,
+  "readback_submissions": 380,
+  "rendered_frames": 380,
+  "scene_submissions": 380,
+  "ui_submissions": 18
+ },
+ "groups": [
+  {
+   "group": "stationary",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 2.528,
+   "timed_out": false,
+   "report": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/report.json",
+    "sha256": "d2dbdc0efafdb53c500c01c368f2945d159f39350521ff3ad113741e14dda13f",
+    "outcome": "pass"
+   },
+   "events": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/events.jsonl",
+    "sha256": "ea8ef0e0ccb57611824b4b173f4a2f3d682373c971fc835e4f054df5e4900915",
+    "count": 176
+   },
+   "stdout_sha256": "0c4af8d74348bb7a62559b310c76fae03de933e3d09c9b14fcfc2a92d710bc3f",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "pngs": 6,
+    "queue_submissions": 118,
+    "readback_maps": 50,
+    "readback_submissions": 50,
+    "rendered_frames": 50,
+    "scene_submissions": 50,
+    "ui_submissions": 18
+   },
+   "contract_checks_all_true": true,
+   "contract_checks": [
+    "adapter_backend_metal",
+    "attachment_only_on_own",
+    "budget_exactly_consumed",
+    "drs_control_internal_480x270_without_upscaling",
+    "frames_nonblank",
+    "full_control_has_no_upscale_or_resolution_owner",
+    "own_one_owner_phases_history_and_sizes",
+    "ui_button_interior_identical_on_all_eighteen_ui_frames",
+    "up_one_owner_phases_history_and_sizes"
+   ],
+   "pngs": [
+    {
+     "name": "stationary-full.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-full.png",
+     "sha256": "992c5543b4f9bbdf6fd703eb764e143f7649836452df28aaac6f1dfc2debceb9",
+     "bytes": 84389,
+     "rgba_sha256": "4c69efe238a452d096301faf24ca013877bf0f0430f83ccf1147502e51da6e01"
+    },
+    {
+     "name": "stationary-drs50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-drs50.png",
+     "sha256": "724fa644d3561ff00aa2301fd40ab6b49c4111b0376df5469028ef6265cb40e0",
+     "bytes": 40131,
+     "rgba_sha256": "6611c41fa62f782b4d96080e6d43f481d41a54c01a8d93e870367b9786d8464e"
+    },
+    {
+     "name": "stationary-up50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-up50.png",
+     "sha256": "1493c6b514f3b528e6d3426016b54ad3189e9fede336b4db6f14cda4adc314ce",
+     "bytes": 78351,
+     "rgba_sha256": "3e717aeb1e5965caebd72328af4fd5c48bd3cd65e9c46c86568788338c727809"
+    },
+    {
+     "name": "stationary-own50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-own50.png",
+     "sha256": "385b4f424a602a9ffc967c15aff2aedda50c3c51af382368280b9592ee4c192b",
+     "bytes": 78848,
+     "rgba_sha256": "913ee7e52b5a86ce7786dfa777a541d430636dd034324de75c7ee9cc12ee13d5"
+    },
+    {
+     "name": "stationary-phases.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-phases.png",
+     "sha256": "5850713d0ccaa211eb6f6e43855109469aee427440bc68f71343fb9c4c83ec7b",
+     "bytes": 11679,
+     "rgba_sha256": "aa7ae0c7e1606f3f0eb8c06beee9d709f917c84b28e560742c54ac119d48bb73"
+    },
+    {
+     "name": "stationary-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-detail.png",
+     "sha256": "0c32509738d5c4198ce67f69c5b1692a5422b7db3a14a325736e812e6841554d",
+     "bytes": 37846,
+     "rgba_sha256": "a8a6ee69b5fa1c22794baddeacfe162453f4fb66305620c004c9fa93de641ca3"
+    }
+   ]
+  },
+  {
+   "group": "motion",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 1.201,
+   "timed_out": false,
+   "report": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/report.json",
+    "sha256": "a3f10eeae97b998e7f3ae7ddb020878cfe472a001e12fd87894b32ee905f20a5",
+    "outcome": "pass"
+   },
+   "events": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/events.jsonl",
+    "sha256": "5da042010c01b8b102790ce1f4badcdddc7d5bc74baa276e3825273e01834861",
+    "count": 138
+   },
+   "stdout_sha256": "6b89d0fe10e2d7ee9bc0e71767fa2ef6a47e9f8c3c12419a0a776e2e504fba98",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "pngs": 4,
+    "queue_submissions": 88,
+    "readback_maps": 44,
+    "readback_submissions": 44,
+    "rendered_frames": 44,
+    "scene_submissions": 44,
+    "ui_submissions": 0
+   },
+   "contract_checks_all_true": true,
+   "contract_checks": [
+    "adapter_backend_metal",
+    "attachment_only_on_own",
+    "budget_exactly_consumed",
+    "controls_plain_and_drs_480x270",
+    "frames_nonblank",
+    "own_history_survives_object_and_camera_motion",
+    "up_history_survives_object_and_camera_motion"
+   ],
+   "pngs": [
+    {
+     "name": "motion-full.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-full.png",
+     "sha256": "9eeb1222becd6f4d2cec7afa88343ccb528ea9f6e27246cb3410a42bade35b52",
+     "bytes": 77464,
+     "rgba_sha256": "47c3bee7ff948ae7f41fc903cad53d085ed58405e9fc40a44e7e5d3213ebac05"
+    },
+    {
+     "name": "motion-up50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-up50.png",
+     "sha256": "fd13d7b902ad8b7bb311a1db5282de2006c9840f3c12b894da38aace626bc073",
+     "bytes": 68626,
+     "rgba_sha256": "c111591d2f004873a7370e8b62bf6c6c9b90967c024f4a3c50799a5dff0e395e"
+    },
+    {
+     "name": "motion-own50.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-own50.png",
+     "sha256": "1c8b673b2b3cb8a757881a1a70407a40b77a875661729ee615407942b3678c53",
+     "bytes": 68771,
+     "rgba_sha256": "ff0ac392630bc27511c8b4ecf1d0aa4b30f8c91d270db88528425e20c109b794"
+    },
+    {
+     "name": "motion-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-detail.png",
+     "sha256": "2c995ca703370760e77e362826ca5b9b0652581c9771028862c64a56ecc2078f",
+     "bytes": 101782,
+     "rgba_sha256": "be8cc5afeef59a48e0596f7f5c51c98484fa6195891dc786282da59031f1a9e4"
+    }
+   ]
+  },
+  {
+   "group": "transitions",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 2.141,
+   "timed_out": false,
+   "report": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/transitions/artifacts/report.json",
+    "sha256": "51336bd70631ef52265870dc5117a586c179b4de03a91fbaad2d3b0c3d9d9c67",
+    "outcome": "pass"
+   },
+   "events": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/transitions/artifacts/events.jsonl",
+    "sha256": "8af5aae293ff6d2ff0b96c80af26b9c22637a45391817304dbcdbd048930fd58",
+    "count": 322
+   },
+   "stdout_sha256": "517c4ac437af1039ac7fb40d829504b4843ac62f6d61b15b41fc00b1926d0996",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "pngs": 2,
+    "queue_submissions": 212,
+    "readback_maps": 106,
+    "readback_submissions": 106,
+    "rendered_frames": 106,
+    "scene_submissions": 106,
+    "ui_submissions": 0
+   },
+   "contract_checks_all_true": true,
+   "contract_checks": [
+    "adapter_backend_metal",
+    "attachment_only_on_own",
+    "budget_exactly_consumed",
+    "chrome_outside_viewport_identical",
+    "controls_plain_and_drs_480x270",
+    "fixed16_up_and_own_one_owner",
+    "frames_nonblank",
+    "own_scale_changes_keep_owner_and_history_then_cut_resets",
+    "up_scale_changes_keep_owner_and_history_then_cut_resets"
+   ],
+   "pngs": [
+    {
+     "name": "transitions-full.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/transitions/artifacts/transitions-full.png",
+     "sha256": "1be9b9308bb1d404291ec976f0ff1b0c6b3853d3effa0bb2a36fe15270e0f88e",
+     "bytes": 72999,
+     "rgba_sha256": "49d0f741bc50634f0b15c9ff88d5fbefef146630db83a034bd77581d9964f6bb"
+    },
+    {
+     "name": "transitions-strip.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/transitions/artifacts/transitions-strip.png",
+     "sha256": "4c6ba2fc1d77a582164e65dc47cfbda2e2acfc010e14bcc270098942ddf1da78",
+     "bytes": 88790,
+     "rgba_sha256": "768816b29c537dac153edce4929e8ee70c521db4bdf50e5789019e156a51324f"
+    }
+   ]
+  },
+  {
+   "group": "c7_disocclusion",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 1.679,
+   "timed_out": false,
+   "report": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/c7_disocclusion/artifacts/report.json",
+    "sha256": "3fdd291442664243b6b964900e34d84a653404b2887796f5f75aa9d7833232b0",
+    "outcome": "pass"
+   },
+   "events": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/c7_disocclusion/artifacts/events.jsonl",
+    "sha256": "d8882d8cb79fe69adbd3f130742108a9934b184def4963b5fd6de419352280b8",
+    "count": 250
+   },
+   "stdout_sha256": "ecb84f301d1c42db55f32ef3ae618ea27c20407aff4ba967feb8e86da2368022",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "pngs": 2,
+    "queue_submissions": 164,
+    "readback_maps": 82,
+    "readback_submissions": 82,
+    "rendered_frames": 82,
+    "scene_submissions": 82,
+    "ui_submissions": 0
+   },
+   "contract_checks_all_true": true,
+   "contract_checks": [
+    "adapter_backend_metal",
+    "attachment_only_on_own",
+    "budget_exactly_consumed",
+    "frames_nonblank",
+    "full_controls_plain",
+    "own_moving_one_owner_phases_history",
+    "own_reference_one_owner_phases_history",
+    "trailing_region_measurable",
+    "up_moving_one_owner_phases_history",
+    "up_reference_one_owner_phases_history"
+   ],
+   "pngs": [
+    {
+     "name": "c7-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png",
+     "sha256": "a5992bf604f96a25dee3318a8a181c1390179200eec6db9077f4f4e432e3dc7a",
+     "bytes": 61558,
+     "rgba_sha256": "5bbe5cc9b8305b3ab53e00bddf592a693243a35394d05e38ef7f87d04b0914fe"
+    },
+    {
+     "name": "c7-own-moving.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png",
+     "sha256": "187bc0ddf3ac826fe0dd845f97f79005544f4c82a8461cd1a6c3283c9fc70aea",
+     "bytes": 264173,
+     "rgba_sha256": "fe2aced0a054d85449b715faa00b0d580d88b8619b2f65c35642e045a36f85d2"
+    }
+   ]
+  },
+  {
+   "group": "p1_crossing",
+   "accepted": true,
+   "exit": 0,
+   "seconds": 1.882,
+   "timed_out": false,
+   "report": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/p1_crossing/artifacts/report.json",
+    "sha256": "53e84d0004129a77824e1e775b9d16bc91320b8098d01655ca207c0c94b54d85",
+    "outcome": "pass"
+   },
+   "events": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/p1_crossing/artifacts/events.jsonl",
+    "sha256": "f111f98fbd28b06eafe845a2be94d1d3a3412ff1776edfdb5f2623a46740f0ec",
+    "count": 297
+   },
+   "stdout_sha256": "12928e03b4d47bbc67a7fda5928f2e5a35390408b8f53a69b5258175a5ed9800",
+   "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "budget_used": {
+    "pngs": 1,
+    "queue_submissions": 196,
+    "readback_maps": 98,
+    "readback_submissions": 98,
+    "rendered_frames": 98,
+    "scene_submissions": 98,
+    "ui_submissions": 0
+   },
+   "contract_checks_all_true": true,
+   "contract_checks": [
+    "adapter_backend_metal",
+    "attachment_only_on_own",
+    "budget_exactly_consumed",
+    "frames_nonblank",
+    "full_controls_plain",
+    "own_bar_one_owner_phases_history",
+    "own_reference_one_owner_phases_history",
+    "panel_region_measurable",
+    "up_bar_one_owner_phases_history",
+    "up_reference_one_owner_phases_history"
+   ],
+   "pngs": [
+    {
+     "name": "p1-detail.png",
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/p1_crossing/artifacts/p1-detail.png",
+     "sha256": "b2018ef7edf00328af5dac693252f743afb7797820f8aef499ed537a255d7d54",
+     "bytes": 204560,
+     "rgba_sha256": "2c64f5c988d9808d47fe34ef4a1029275b7c1d6d46cd86f8255d62564ca085ee"
+    }
+   ]
+  }
+ ],
+ "failures": [],
+ "quality_verdict": {
+  "overall": "FAIL for appearance. OWN (owner-aware UP) shows no visible improvement over ordinary UP in any retained capture, and neither is acceptable against nearest-neighbour DRS at 8/16: softer, lower-contrast texture and sprites, sub-pixel wire flicker with the 8-phase jitter, total loss of the 0.4 px wire, detail wiped by the 4/16 segment with slow 16/16 recovery, and an unexplained dark block in the step-20 motion frame. The a5ae3179 visual FAIL stands.",
+  "own_vs_up": "visually indistinguishable in all retained pairs; numerically OWN keeps slightly more static 2-texel contrast but recovers more slowly after the 4/16 dip and has equal or slightly higher C7 trailing residual",
+  "acceptable": [
+   "UI overlay identical across variants",
+   "viewport chrome intact and identical",
+   "no strong ghost trail behind the moving cube or the C7 square at step 20",
+   "no bar residual on the P1 panel interior",
+   "smoother silhouettes than DRS and the 1.6 px wire retained where DRS drops it",
+   "the cut cleanly resets history"
+  ],
+  "unacceptable": [
+   "texture and sprite detail below DRS (static 4-texel checker contrast about 31 versus DRS 61 codes)",
+   "0.8 px wire visible in 4 of 8 phases and the 1.6 px wire pulsing between 158 and 62 codes",
+   "0.4 px wire absent in every UP/OWN phase",
+   "4/16 frames flatten the chart and four 16/16 frames recover only about 34-68 percent of the matched-cycle contrast",
+   "dark grey block over the lower ring row beside the cube at motion step 20 (UP and OWN; not in FULL; cause undetermined)",
+   "no visible benefit from the owner attachment"
+  ]
+ },
+ "measured_observations": {
+  "units": {
+   "contrast": "luminance standard deviation, Rec. 709 weights on 8-bit sRGB codes (0-255)",
+   "region_error_and_activity": "mean over the crop of the per-pixel largest RGB channel difference, 8-bit sRGB codes",
+   "split_mean_abs": "mean per-pixel mean RGB absolute difference, 8-bit sRGB codes",
+   "wire_presence": "mean over the wire span of the strongest channel deviation from the backdrop within 3 rows, 8-bit sRGB codes; 0 = absent",
+   "c7_and_p1": "per-pixel mean RGB absolute difference of 8-bit sRGB codes / 255 (C7: per-column means; P1: mean and worst over the rect)"
+  },
+  "stationary": {
+   "chart_contrast": {
+    "full": {
+     "checker_2_texel": 53.3712,
+     "checker_4_texel": 71.4639,
+     "lines_1_texel": 44.435,
+     "rings": 50.9086
+    },
+    "drs50": {
+     "checker_2_texel": 25.9867,
+     "checker_4_texel": 61.4005,
+     "lines_1_texel": 2.4343,
+     "rings": 24.5714
+    },
+    "up50_frame24": {
+     "checker_2_texel": 3.3359,
+     "checker_4_texel": 31.1148,
+     "lines_1_texel": 1.3878,
+     "rings": 14.6692
+    },
+    "own50_frame24": {
+     "checker_2_texel": 4.4713,
+     "checker_4_texel": 31.176,
+     "lines_1_texel": 0.3707,
+     "rings": 14.92
+    },
+    "up50_last_cycle_mean": {
+     "checker_2_texel": 3.2668,
+     "checker_4_texel": 31.1425,
+     "lines_1_texel": 0.4584,
+     "rings": 14.6719
+    },
+    "own50_last_cycle_mean": {
+     "checker_2_texel": 4.4671,
+     "checker_4_texel": 31.2122,
+     "lines_1_texel": 0.4386,
+     "rings": 14.9443
+    }
+   },
+   "wire_presence": [
+    {
+     "thickness_m": 0.032,
+     "full": 169.0,
+     "drs50": 0.0,
+     "up50_phases_0_to_7": [
+      158.0,
+      158.0,
+      158.0,
+      62.0,
+      62.0,
+      158.0,
+      158.0,
+      158.0
+     ],
+     "own50_phases_0_to_7": [
+      158.0,
+      158.0,
+      158.0,
+      62.0,
+      62.0,
+      158.0,
+      158.0,
+      158.0
+     ]
+    },
+    {
+     "thickness_m": 0.016,
+     "full": 169.0,
+     "drs50": 0.0,
+     "up50_phases_0_to_7": [
+      0.0,
+      62.0,
+      158.0,
+      0.0,
+      0.0,
+      158.0,
+      62.0,
+      0.0
+     ],
+     "own50_phases_0_to_7": [
+      0.0,
+      62.0,
+      158.0,
+      0.0,
+      0.0,
+      158.0,
+      62.0,
+      0.0
+     ]
+    },
+    {
+     "thickness_m": 0.008,
+     "full": 169.0,
+     "drs50": 0.0,
+     "up50_phases_0_to_7": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "own50_phases_0_to_7": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ]
+    }
+   ],
+   "region_error_vs_full_frame24": {
+    "card_edge": {
+     "drs50": 1.17,
+     "up50": 1.0703,
+     "own50": 1.0733
+    },
+    "sign": {
+     "drs50": 37.3436,
+     "up50": 38.8208,
+     "own50": 38.3781
+    },
+    "sprite": {
+     "drs50": 5.9522,
+     "up50": 8.365,
+     "own50": 8.365
+    },
+    "text": {
+     "drs50": 2.7472,
+     "up50": 2.6278,
+     "own50": 2.6375
+    },
+    "wires": {
+     "drs50": 17.5967,
+     "up50": 17.0206,
+     "own50": 17.0206
+    }
+   },
+   "own_vs_up_frame24": {
+    "edge": {
+     "changed_fraction": 0.3134,
+     "mean_abs": 0.4119,
+     "p99_max_channel": 5,
+     "pixels": 29590
+    },
+    "interior": {
+     "changed_fraction": 0.0135,
+     "mean_abs": 0.0112,
+     "p99_max_channel": 1,
+     "pixels": 462314
+    }
+   }
+  },
+  "motion": {
+   "mover_region_error_vs_full": {
+    "frame14": {
+     "drs50": 15.5037,
+     "own50": 19.2708,
+     "rect": [
+      605,
+      237,
+      120,
+      67
+     ],
+     "up50": 19.2765
+    },
+    "frame20": {
+     "drs50": 21.5376,
+     "own50": 24.3632,
+     "rect": [
+      605,
+      237,
+      120,
+      67
+     ],
+     "up50": 24.3641
+    }
+   },
+   "pan_region_error_vs_full": {
+    "frame14": {
+     "drs50": 1.36,
+     "own50": 1.3907,
+     "rect": [
+      379,
+      197,
+      120,
+      67
+     ],
+     "up50": 1.3902
+    },
+    "frame20": {
+     "drs50": 1.2461,
+     "own50": 1.2792,
+     "rect": [
+      379,
+      197,
+      120,
+      67
+     ],
+     "up50": 1.2795
+    }
+   }
+  },
+  "transitions": {
+   "c9_rendered_observation": {
+    "up": {
+     "lines_1_texel": {
+      "ratio_third": 0.2866,
+      "ratio_fourth": 0.473,
+      "ratio_first_4": 0.0042,
+      "matched_cycle_reference": 12.0118,
+      "third_16": 3.443,
+      "fourth_16": 5.6816
+     },
+     "checker_2_texel": {
+      "ratio_third": 0.2836,
+      "ratio_fourth": 0.3849,
+      "ratio_first_4": 0.0171,
+      "matched_cycle_reference": 28.0772,
+      "third_16": 7.9626,
+      "fourth_16": 10.8065
+     },
+     "rings": {
+      "ratio_third": 0.5001,
+      "ratio_fourth": 0.5526,
+      "ratio_first_4": 0.7426,
+      "matched_cycle_reference": 27.4219,
+      "third_16": 13.7144,
+      "fourth_16": 15.1525
+     },
+     "checker_4_texel": {
+      "ratio_third": 0.5989,
+      "ratio_fourth": 0.684,
+      "ratio_first_4": 0.5103,
+      "matched_cycle_reference": 55.8566,
+      "third_16": 33.4543,
+      "fourth_16": 38.2071
+     }
+    },
+    "own": {
+     "lines_1_texel": {
+      "ratio_third": 0.2388,
+      "ratio_fourth": 0.3989,
+      "ratio_first_4": 0.0044,
+      "matched_cycle_reference": 12.2953,
+      "third_16": 2.9359,
+      "fourth_16": 4.9047
+     },
+     "checker_2_texel": {
+      "ratio_third": 0.2546,
+      "ratio_fourth": 0.3411,
+      "ratio_first_4": 0.0149,
+      "matched_cycle_reference": 28.5937,
+      "third_16": 7.2807,
+      "fourth_16": 9.7537
+     },
+     "rings": {
+      "ratio_third": 0.4713,
+      "ratio_fourth": 0.5165,
+      "ratio_first_4": 0.7355,
+      "matched_cycle_reference": 27.6633,
+      "third_16": 13.039,
+      "fourth_16": 14.2876
+     },
+     "checker_4_texel": {
+      "ratio_third": 0.5083,
+      "ratio_fourth": 0.5443,
+      "ratio_first_4": 0.5113,
+      "matched_cycle_reference": 55.1016,
+      "third_16": 28.0107,
+      "fourth_16": 29.9913
+     }
+    },
+    "summaries_all_regions_meet": {
+     "up": {
+      "third_16": false,
+      "fourth_16": false,
+      "first_4": false
+     },
+     "own": {
+      "third_16": false,
+      "fourth_16": false,
+      "first_4": false
+     }
+    },
+    "undefined_regions": []
+   },
+   "checker_4_texel_contrast_frames_17_to_20": {
+    "up": [
+     24.3002,
+     31.3214,
+     33.4543,
+     38.2071
+    ],
+    "own": [
+     25.2634,
+     26.5636,
+     28.0107,
+     29.9913
+    ]
+   },
+   "checker_2_texel_contrast_frame10_8_16": {
+    "up": 2.2596,
+    "own": 4.3002,
+    "drs50": 25.8657,
+    "full": 50.6621
+   },
+   "post_cut_frame24_readback_hash_equals_frame1": {
+    "up": true,
+    "own": true,
+    "up_frame1_equals_own_frame1": true
+   }
+  },
+  "c7": {
+   "worst_column": {
+    "step12": {
+     "up": 0.0738,
+     "own": 0.099
+    },
+    "step16": {
+     "up": 0.078,
+     "own": 0.079
+    },
+    "step20": {
+     "up": 0.0504,
+     "own": 0.0533,
+     "full": 0.0
+    }
+   },
+   "historical_limit_value": 0.06
+  },
+  "p1": {
+   "panel_interior_residual": {
+    "step12": {
+     "up": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     },
+     "own": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     }
+    },
+    "step16": {
+     "up": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     },
+     "own": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     }
+    },
+    "step17": {
+     "up": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     },
+     "own": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     }
+    },
+    "step19": {
+     "up": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     },
+     "own": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     }
+    },
+    "step24": {
+     "up": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     },
+     "own": {
+      "mean": 0.0,
+      "rect": [
+       423,
+       216,
+       109,
+       108
+      ],
+      "worst": 0.0
+     }
+    }
+   },
+   "with_6px_margin_worst": {
+    "step12": {
+     "up": 0.0,
+     "own": 0.0
+    },
+    "step16": {
+     "up": 0.2,
+     "own": 0.2
+    },
+    "step17": {
+     "up": 0.2,
+     "own": 0.2
+    },
+    "step19": {
+     "up": 0.2,
+     "own": 0.2
+    },
+    "step24": {
+     "up": 0.0,
+     "own": 0.0013
+    }
+   }
+  }
+ },
+ "historical_failures_preserved": [
+  "a5ae3179 visual quality FAIL",
+  "GPU001 owner-history case-3 failure (0.40478516 vs 0)",
+  "C7 linear CPU model 0.0918 against 0.06: failed",
+  "C9 linear CPU model 0.683 / 0.869 (model long-run reference) and 0.741 / 0.943 (frame 39) against 0.75 / 0.90: failed",
+  "P1 unresolved: CPU model worst residuals 0.349, 0.221, 0.296, 0.063"
+ ],
+ "historical_closure": "none: these tone-mapped sRGB rendered observations are differently defined from the linear-model gates; the 24-frame C9 reference is finite, not demonstrated convergence; P1 has no per-pixel drop replay",
+ "limitations": [
+  "One local Apple M5 Pro (Metal, integrated) on macOS; no phone, Device Farm, performance, memory or phase-gate claim",
+  "Default portable WGSL path only; cooked-temporal and native MetalFX not covered",
+  "Still frames and figure crops only; temporal judgments come from phase strips and per-frame metrics, not real-time viewing",
+  "Most groups at 8/16; C7 and P1 at one scale and setting each",
+  "Jitter phase alignment by identical submission counts; no public phase selection",
+  "No public owner-record or per-pixel decision readback; owner effects are seen only through color",
+  "The 'physical UI 960x540' label appears clipped at its bottom edge identically in every variant including FULL (fixture UI layout, not upscaling)"
+ ]
+}
