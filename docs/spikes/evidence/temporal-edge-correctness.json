@@ -1,0 +1,645 @@
+{
+  "status": "CPU checks and independent source review accepted; corrected GPU execution and appearance acceptance pending",
+  "base": "068ed0aa29d2579713782b2c196f8b948b9f6afd",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/freeze.json",
+    "sha256": "a96b338c8df7b323ef0a863e9ed3d7186dab39030146299232c4b314466fee34",
+    "sources": [
+      {
+        "path": "crates/incant_render/src/camera.rs",
+        "bytes": 12971,
+        "sha256": "10103d5d48fae7d8adb7ea9962ffb202c34fff46c9b8d25770aa66fcee83cd2d",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/camera.rs"
+      },
+      {
+        "path": "crates/incant_render/src/graph.rs",
+        "bytes": 14208,
+        "sha256": "48ae7cf4aab818db2c1f54bcee1d6b743ab821e2674c17010ae049702459ad24",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/graph.rs"
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "bytes": 21272,
+        "sha256": "6e7d5c8fe9cc594780cf3acfb66aebbe91e66e04161e07c5d131626d7dbf3337",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/lib.rs"
+      },
+      {
+        "path": "crates/incant_render/src/model_draw.rs",
+        "bytes": 9406,
+        "sha256": "cd364ddc995bdb3d09259248849f88d2330080cb709aad360f7b0d534e0a547b",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/model_draw.rs"
+      },
+      {
+        "path": "crates/incant_render/src/motion/draw.rs",
+        "bytes": 4186,
+        "sha256": "048c974b9338e4c9e2e5d346e58a6e1981f1e1b9fe959c751d1205d25a2cf20d",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/motion/draw.rs"
+      },
+      {
+        "path": "crates/incant_render/src/motion/retained.rs",
+        "bytes": 17662,
+        "sha256": "d80dcf7fd5647516f20f449a39a04d061646f1d5184250a60cbaea99ac172d1d",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/motion/retained.rs"
+      },
+      {
+        "path": "crates/incant_render/src/motion/shader.wgsl",
+        "bytes": 2113,
+        "sha256": "1ebe19d03890654ad6d232881f97b6fd1d4a0ac3c9bdb29611d1b721a830477b",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/motion/shader.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/motion/system.rs",
+        "bytes": 6636,
+        "sha256": "e636acf1b53d5c14553905bc09623440233639a48ca45a1209c4610c91c4e5cb",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/motion/system.rs"
+      },
+      {
+        "path": "crates/incant_render/src/motion/tests.rs",
+        "bytes": 13772,
+        "sha256": "e3e66b9cd38ff500cb8285e1dc145f046e48403053f5c6938017c53aa2c6649d",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/motion/tests.rs"
+      },
+      {
+        "path": "crates/incant_render/src/sprites/drawing.rs",
+        "bytes": 3431,
+        "sha256": "0a146a2ea191bc886cdc3a69a351eeba4011594351f73339525c03b36a79a8f1",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/sprites/drawing.rs"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/copy.wgsl",
+        "bytes": 1328,
+        "sha256": "096ee89ecb5c9112deea55935ac2da0bec4fd7f3ba603aa04c875ba48deb248b",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/temporal/copy.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/device_tests.rs",
+        "bytes": 12191,
+        "sha256": "007dca51a7f871d3c767bc89650a7bfe517a01640ab508455ca599578b6bfe5e",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/temporal/device_tests.rs"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/oracle.rs",
+        "bytes": 2418,
+        "sha256": "0f446195d816fb065e0d94e68315df7a2fc24a7e3d6f0faee8095330bdc03a5a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/temporal/oracle.rs"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/owner.rs",
+        "bytes": 3298,
+        "sha256": "aafc0d329aa5ac85d46b5b728bd0efd8f938f969fdd9e48ded52227a23effe4a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/temporal/owner.rs"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/resolve.wgsl",
+        "bytes": 3480,
+        "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/temporal/resolve.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/system.rs",
+        "bytes": 10789,
+        "sha256": "161eb7afc6f0169b896df99b925ca5bf813c45ba5c42a1e1c77e4839808b588c",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/temporal/system.rs"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/tests.rs",
+        "bytes": 11059,
+        "sha256": "7a96bac227826f250cf806fc616f713b3bb0ef96c85661d1fb9bcc88e7580680",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/temporal/tests.rs"
+      },
+      {
+        "path": "crates/incant_render/src/text/drawing.rs",
+        "bytes": 6619,
+        "sha256": "ed6b5fd4cb3544b1058730232e88ad14e97c18446d4f6e693f274d9dfccefdb2",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/text/drawing.rs"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/composite.wgsl",
+        "bytes": 965,
+        "sha256": "fd731718cce5b8dd949859515bf30bc57ee89002080f26b96cd50866057ec60d",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/upscaling/composite.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/device_tests.rs",
+        "bytes": 10099,
+        "sha256": "e7dd551f3ba2a17c7776a51e1da49684db6ae1b78fa18dae56309390811d4038",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/upscaling/device_tests.rs"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/oracle.rs",
+        "bytes": 2343,
+        "sha256": "71e9bffce8836e0aeb60d2a229164d945099a16f99e2d3a9b7debbb018ff0556",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/upscaling/oracle.rs"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+        "bytes": 3678,
+        "sha256": "b80563257235fe72fa8afd6bd51d2a8d52bcd2a44ba7e55891388d93fa8d728d",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/upscaling/resolve.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/tests.rs",
+        "bytes": 6336,
+        "sha256": "63a5711891cf3187008660023feeae0c0602ded702c69ac7600e9dc315323331",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/upscaling/tests.rs"
+      },
+      {
+        "path": "docs/spikes/temporal-edge-correctness.md",
+        "bytes": 4639,
+        "sha256": "84ae0cd4bc933cd10d257007401789ef966fb1de0c991cf779377ee42833facd",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/docs/spikes/temporal-edge-correctness.md"
+      }
+    ],
+    "baselines": [
+      {
+        "path": "Cargo.lock",
+        "bytes": 252964,
+        "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/Cargo.lock"
+      },
+      {
+        "path": "Cargo.toml",
+        "bytes": 3584,
+        "sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/Cargo.toml"
+      },
+      {
+        "path": "PLAN.md",
+        "bytes": 130811,
+        "sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/PLAN.md"
+      },
+      {
+        "path": "crates/incant_render/Cargo.toml",
+        "bytes": 2496,
+        "sha256": "7d3628b6a59dba4f3613b0aa8af6bbe274c692aa721bac4f7c77cc37bf202c7b",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/Cargo.toml"
+      },
+      {
+        "path": "crates/incant_render/build.rs",
+        "bytes": 5555,
+        "sha256": "e43a3198ce1a5f03ed54291a7d30e13c77f676941e6b41394a55906530cd8663",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/build.rs"
+      },
+      {
+        "path": "crates/incant_render/src/model_material.wgsl",
+        "bytes": 4670,
+        "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/model_material.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/frame.rs",
+        "bytes": 2700,
+        "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/frame.rs"
+      },
+      {
+        "path": "crates/incant_render/src/output.rs",
+        "bytes": 7872,
+        "sha256": "4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/output.rs"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/common.wgsl",
+        "bytes": 1622,
+        "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/upscaling/common.wgsl"
+      },
+      {
+        "path": "crates/incant_render/src/retained.rs",
+        "bytes": 22886,
+        "sha256": "40d5468d18a6f686735d1465b1982d017593ac7996140fee70da36df2288b642",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/retained.rs"
+      },
+      {
+        "path": "crates/incant_render/src/timing/recorder.rs",
+        "bytes": 8077,
+        "sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/files/crates/incant_render/src/timing/recorder.rs"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/freeze.json",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-source-001--freeze.json.gz",
+      "bytes": 11070,
+      "sha256": "a96b338c8df7b323ef0a863e9ed3d7186dab39030146299232c4b314466fee34",
+      "retained_sha256": "4493291681361379ed1430ba30ea53ea1ceccd56e8134b0ed0c73f522535be15"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-source-001/tracked.patch",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-source-001--tracked.patch.gz",
+      "bytes": 53030,
+      "sha256": "545eed0fcb7415835ca8e4c646654fdd015dfdf5f54fe473aa9c32ba277ca54a",
+      "retained_sha256": "284b156e32a60cea800c967823ce0cd3eec17631ce32f3e28476fc4d8264098e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0072-motion-history-numeric/handoffs/0072-motion-history-numeric/temporal-visual-result.md",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/0072-motion-history-numeric--temporal-visual-result.md.gz",
+      "bytes": 15039,
+      "sha256": "3e61d73ff08f207e68b997da6b21626c02c54c67a2b6ac878a560eb8e74649ab",
+      "retained_sha256": "d780e6637c28aa408789ff6556869d6a631f9f9ba42ef4f3e961c3a35798ab45"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-001/focused.json",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-001--focused.json.gz",
+      "bytes": 381,
+      "sha256": "827e8959ffbd55f00581aba4996bfe531535b475eae3fcd3211c3435bed76af4",
+      "retained_sha256": "1109f94385243881ad15ab3a646b0cb6ccc01ddb119e6ca16a3e5667dd7dfe15"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-001/focused.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-001--focused.log.gz",
+      "bytes": 4915,
+      "sha256": "0c82d4a23e9dd1cdf71b5b3d4b12009fb3775c932d7c8296c5a14395516b2a61",
+      "retained_sha256": "f526789e9452711dad7cb1b6336b43ba0ceae8170c4adc60fc64a6403d6d4a03"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-002/checks.json",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-002--checks.json.gz",
+      "bytes": 420,
+      "sha256": "db77599a6666cad38583d56df782a93a7385336e90a476bf47302ec3eb51d090",
+      "retained_sha256": "b462e0f5a104bdea2411539a2b9e6e5b7ce2c1a13988012506f70db5fd1faab8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-002/failed-source.patch",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-002--failed-source.patch.gz",
+      "bytes": 52332,
+      "sha256": "26035973cc203a1cd6172d9ce17476c18525c28e902384bf0d863b66a53594b2",
+      "retained_sha256": "8012fbc5adf8e48ac08ae18821ab2ea837c12e227565a9a01be6c2c8d93bc9bc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-002/lib.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-002--lib.log.gz",
+      "bytes": 19132,
+      "sha256": "bb5e1dca656129cca7b42f5d780ad8064b1ba44c4c45bd3eabf69870fbde1292",
+      "retained_sha256": "e7883f436d19415685d214c0b126a6432290806ffbce91367d08400b369bb101"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries.json",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--binaries.json.gz",
+      "bytes": 2118,
+      "sha256": "4e92d22e7d710e8cf36b08ffb9ffac7f181e7d8110ce3cef84f861b98409b516",
+      "retained_sha256": "f8515d9e3638a706a77896692f47d6ff462a3fbb4699537c3e142e239e6c22dc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/checks.json",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--checks.json.gz",
+      "bytes": 2543,
+      "sha256": "d60903032ff6768613be17cfcf88f67573a0a738bbf943510cfb264adfcbeef9",
+      "retained_sha256": "625aa3348e503f2ca7d8bc8e9ee12dd3e251e344b1401eedda9d83ab60e241dd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/clippy.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--clippy.log.gz",
+      "bytes": 3972,
+      "sha256": "0a9106530d5a0f02838d577dc169da72e1101efa2cfc6af2ed583cda33ec643f",
+      "retained_sha256": "4b5b9fff6d2d5f3d97e96c97f62f982dad079ba8cb781a28d8ee797ac343df7c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/cooked-refusal.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--cooked-refusal.log.gz",
+      "bytes": 19862,
+      "sha256": "8c7862f2df5b4c8673e03567030afb4b0141f65a1ab278aee1abf9f6b9538380",
+      "retained_sha256": "6646419dbf4710930aa8fca252f1243f7bce5bd1ebcd09c629e39a2cdb5cdff6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/graph.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--graph.log.gz",
+      "bytes": 201,
+      "sha256": "35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f",
+      "retained_sha256": "8c5f61b9c0a5b8b4e8f75f97405a25aeb1e8d175ea069d15bf4bbd8a9d87223d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/native.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--native.log.gz",
+      "bytes": 31589,
+      "sha256": "9af87bd40bbe72aca96c38d845798fd310f0c7aad701989c69025f769f262501",
+      "retained_sha256": "9b01af36a9321b1929d256d03fe08292cf7dce8f5c2cfc0de83fe8743282b62d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/run.py",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--run.py.gz",
+      "bytes": 2375,
+      "sha256": "55e3fc986e7bb952a485895439f14d791eda438119a916ca65b1a6f575c13ae2",
+      "retained_sha256": "7f21b41cd680c46d40deaa1e64de74a5238eddecec16d057856896c07924afe5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/web.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-003--web.log.gz",
+      "bytes": 4891,
+      "sha256": "ebe8b2b51f2265ec5fbb3915b1efbbd3b69590445488e0c74c30a2945272e718",
+      "retained_sha256": "d0dddc9873621af86c282969352e26f33e740ecd88f11114161191bba2491600"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/binaries.json",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-004--binaries.json.gz",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "retained_sha256": "abc129be8d26e8d4afe9ce45f9d5a73c8ed9aa62810ca24ee789fe4581dc4a80"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/checks.json",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-004--checks.json.gz",
+      "bytes": 1220,
+      "sha256": "119d30f0a1ee4a5d483fd8ea32d0fa797a81863c7ad994f874409769048b753d",
+      "retained_sha256": "dc78cc4e15fa1433e89b84782f07fe0b24389e51442fcdb611118202cfff1242"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/conventions.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-004--conventions.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/format.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-004--format.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/graph.log",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-004--graph.log.gz",
+      "bytes": 76,
+      "sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c",
+      "retained_sha256": "5cc48cf24e534b5aef2d26bb0f40dceb92413d38847d6760fb850bdf4244bafc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/run.py",
+      "retained": "docs/spikes/evidence/temporal-edge-correctness/temporal-edge-checks-004--run.py.gz",
+      "bytes": 2060,
+      "sha256": "6d86bf944544c0a4a6f7855ca6c0f39a767b93d237587e3e25e8b9c1071d1085",
+      "retained_sha256": "ec2f37938836da5441ea54012962f87dd8dcd6b02ecde1fe7244eb1e73013ec2"
+    }
+  ],
+  "checks": [
+    {
+      "name": "native",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "pid": 80820,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 60.055214166641235,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/native.log",
+      "sha256": "9af87bd40bbe72aca96c38d845798fd310f0c7aad701989c69025f769f262501"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "pid": 81197,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 7.621401071548462,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/clippy.log",
+      "sha256": "0a9106530d5a0f02838d577dc169da72e1101efa2cfc6af2ed583cda33ec643f"
+    },
+    {
+      "name": "web",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "pid": 81294,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 5.30445122718811,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/web.log",
+      "sha256": "ebe8b2b51f2265ec5fbb3915b1efbbd3b69590445488e0c74c30a2945272e718"
+    },
+    {
+      "name": "cooked-refusal",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-clusters,cooked-materials,cooked-text,cooked-ui,cooked-sprites"
+      ],
+      "pid": 81355,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 9.309960842132568,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/cooked-refusal.log",
+      "sha256": "8c7862f2df5b4c8673e03567030afb4b0141f65a1ab278aee1abf9f6b9538380"
+    },
+    {
+      "name": "graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host"
+      ],
+      "pid": 83778,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.44225215911865234,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/graph.log",
+      "sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c"
+    },
+    {
+      "name": "format",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "pid": 83788,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.2468438148498535,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "pid": 83804,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.03184318542480469,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-004/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "counts": {
+    "native": {
+      "passed": 120,
+      "failed": 0,
+      "ignored": 98,
+      "groups": 9
+    },
+    "cooked_features": {
+      "passed": 125,
+      "failed": 0,
+      "ignored": 40,
+      "groups": 1
+    },
+    "cooked_note": "Overlaps native tests; not additive unique coverage"
+  },
+  "binaries": [
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-incant_render-90f6082e9b891519",
+      "sha256": "9778c8e7f6fb0828ef6dc2c5489feeb3090afd68418ba563308555f93501d3bf",
+      "bytes": 31805152,
+      "mode": "0o755"
+    },
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-model_gpu-ea4ec409a7f81803",
+      "sha256": "8fa992a9d508ae6f561b3b4974e4e084686b7383e0095c7b2911079b030710d9",
+      "bytes": 16549784,
+      "mode": "0o755"
+    },
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-persistent_cache-56a84c8f1d426b30",
+      "sha256": "8bea9987ad5177367977f1cb48cc1915c810b206ac89548ea6454fbdc36f72a6",
+      "bytes": 1027024,
+      "mode": "0o755"
+    },
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-timestamp_backend_probe-f2bd3f8092008568",
+      "sha256": "e956b1ea6263a3afbc9892900fc8f5c197fbe850e17c3625fc4e56ad45859554",
+      "bytes": 6589624,
+      "mode": "0o755"
+    },
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-incant_render_gpu_host-0795fd9ccf521965",
+      "sha256": "c46fa6f9ecd96e41feb501b4ea5da60df30b4d1e65195ab5b82a3209f34f4a8b",
+      "bytes": 1075272,
+      "mode": "0o755"
+    },
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-game-35bb67096a4febdf",
+      "sha256": "3c8cff6ec392ed069be13aa0c2d7444b3dea9b89a0c7a15b53022a26e249c00f",
+      "bytes": 31866024,
+      "mode": "0o755"
+    },
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-ui-a00b00c0f89810d0",
+      "sha256": "a5b2683489fb28abeb99bfc5ed7ffd87cc8fb3e619edc7ba550f72942047dc25",
+      "bytes": 31406160,
+      "mode": "0o755"
+    },
+    {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/cooked-refusal-incant_render-e9c89acbc979e89c",
+      "sha256": "14094eb3f7791cda9d82fa45fd12f4ed30c8c5c7d6a9d73e3e4aacdd6666010b",
+      "bytes": 32217008,
+      "mode": "0o755"
+    }
+  ],
+  "failures": [
+    {
+      "run": "checks002",
+      "exit": 101,
+      "reason": "Canonical MASK literal test required in.uv. Shared helper now preserves exact canonical sampling expression and both fragment entrypoints use it. Original failed patch retained."
+    },
+    {
+      "run": "checks003 graph",
+      "exit": 2,
+      "reason": "Runner omitted explicit roots. Corrected in checks004; no production source changes."
+    }
+  ],
+  "gpu_review": {
+    "executed": false,
+    "binary": {
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-checks-003/binaries/native-incant_render-90f6082e9b891519",
+      "sha256": "9778c8e7f6fb0828ef6dc2c5489feeb3090afd68418ba563308555f93501d3bf",
+      "bytes": 31805152,
+      "mode": "0o755"
+    },
+    "cases": [
+      {
+        "filter": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
+        "submissions": 14,
+        "extent": [
+          8,
+          8
+        ]
+      },
+      {
+        "filter": "upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay",
+        "submissions": 19,
+        "extent": [
+          8,
+          8
+        ]
+      }
+    ],
+    "limits": "Only compile/CPU evidence; no pixel, quality or performance acceptance. Runtime shader validation/readback remain delegated."
+  },
+  "processes": {
+    "recorded_children_reaped": true,
+    "live_owned_target_compilers": [],
+    "target": "/tmp/incant-cpu-profiler-target",
+    "released_at": "2026-10-13T07:42:38.300055+00:00"
+  },
+  "limits": [
+    "No GPU/window/image execution in producer lane.",
+    "No claim stationary shimmer is visually fixed; conservative current coverage can remain phase dependent.",
+    "Root owns explicit MetalFX union and cooked-temporal recook; prior artifact identities remain unchanged.",
+    "No default enablement, style, preset, timing implementation, world serialization, phone budget or phase-gate change."
+  ],
+  "implementation_commit": "b0b4dcf096b738673c4023357a82b67bdb863489",
+  "independent_source_review": {
+    "original": "/Users/andreyyurlov/.codex/incant-reviews/temporal-edge-source-final-20261013.json",
+    "retained": "docs/spikes/evidence/temporal-edge-source-review.json",
+    "sha256": "409e36d45b9f34ce5d03126d5ca139489fc044879aa4af3c994efe26a7c1e769"
+  },
+  "assertion_audit": {
+    "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-edge-final-001/audit.py",
+    "retained": "docs/spikes/evidence/temporal-edge-correctness/audit.py",
+    "sha256": "a470bda014ae396118c9adbdd2f50d2dda9fc1ed8330ac1aa1e278382165d806"
+  }
+}

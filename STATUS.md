@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private temporal edge correction — 2026-10-13
+
+The [CPU-verified correction](docs/spikes/temporal-edge-correctness-verification.md)
+renormalizes valid temporal history support and separates current-only overlay
+projection/depth from jittered opaque history. Seven checks and independent
+source review pass; corrected GPU/appearance acceptance remains pending. No default
+enablement or visual-quality claim follows. MetalFX/cooked-temporal union and
+recooking are separate, explicit follow-ups.
+
 ## Current overview — main196, 2026-10-13
 
 Development main196 includes the restart quota-test repair (PR188) and the reviewed,
