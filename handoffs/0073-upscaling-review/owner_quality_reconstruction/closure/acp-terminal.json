@@ -1,0 +1,23 @@
+{
+ "pid": 11272,
+ "pgid": 11272,
+ "exit": -9,
+ "timed_out": true,
+ "interrupted_by": [],
+ "reaped": true,
+ "group_empty_after": true,
+ "seconds": 3600.06,
+ "argv": [
+  "/opt/homebrew/opt/python@3.14/bin/python3.14",
+  "tools/handoff/main.py",
+  "run",
+  "0073-upscaling-review",
+  "--permission-mode",
+  "auto"
+ ],
+ "auto_memory_environment": {
+  "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+ },
+ "stdout_sha256": "fa77987f2961fe889b6a07e9de7b8eaada5a7e0172016a016bb9280cb260a37d",
+ "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

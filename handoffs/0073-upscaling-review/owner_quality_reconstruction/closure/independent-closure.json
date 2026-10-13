@@ -1,0 +1,251 @@
+{
+  "schema": 1,
+  "outcome": "incomplete source-only preparation; fixed supervisor timeout",
+  "head_before": "6253c6bfa43bfb84d9512b85e98e344f6b1dc1dc",
+  "head_after": "6253c6bfa43bfb84d9512b85e98e344f6b1dc1dc",
+  "session": "88296197-2b09-41fa-b481-9f8ae415e266",
+  "tool_handle": 21665,
+  "tool_terminal_exit": 247,
+  "model": "Opus 5.5",
+  "thinking": "max",
+  "verified_in_acp_log": true,
+  "auto_memory_disabled_verified_in_actual_processes": true,
+  "terminal": {
+    "pid": 11272,
+    "pgid": 11272,
+    "exit": -9,
+    "timed_out": true,
+    "interrupted_by": [],
+    "reaped": true,
+    "group_empty_after": true,
+    "seconds": 3600.06,
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "tools/handoff/main.py",
+      "run",
+      "0073-upscaling-review",
+      "--permission-mode",
+      "auto"
+    ],
+    "auto_memory_environment": {
+      "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1"
+    },
+    "stdout_sha256": "fa77987f2961fe889b6a07e9de7b8eaada5a7e0172016a016bb9280cb260a37d",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "actual_tool_calls": 77,
+  "actual_tool_results": 77,
+  "partial_draft": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_quality_reconstruction/controls/reconstruction_model.py",
+    "sha256": "3a859f23a90142cfb9778fe24f6752f03c01aa01b092e003c6e224cba63621e0",
+    "bytes": 31129,
+    "python_ast_parse": "pass; not executed by reviewer"
+  },
+  "production_patch": null,
+  "completed_cpu_control_report": null,
+  "builds": 0,
+  "gpu_submissions": 0,
+  "new_images": 0,
+  "protected_tracked_unchanged": 213,
+  "protected_memory_hashes_unchanged": [
+    {
+      "path": "/Users/andreyyurlov/.claude/projects/-Users-andreyyurlov-Documents-dev-incant/memory/gpu-capture-slot-protocol.md",
+      "sha256": "1d103be3951d4b7781a68cfa88bc582a88b078f8b8494c7e58ccf916a3c4993c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.claude/projects/-Users-andreyyurlov-Documents-dev-incant/memory/MEMORY.md",
+      "sha256": "6483d4a08fbd74a89e2a2926392a59a839d7523c926b082a5fc998ff3b1fb5d4"
+    }
+  ],
+  "old_untracked_unchanged": {
+    "owner-attachment-cpu-enumeration.json": "68c5434e926678071f4291896f6897137b4010b3885ab8043db7d9785136cfba",
+    "owner-attachment-plan.json": "d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512",
+    "owner-attachment-prep.md": "0332bad7a8a627b01b925474e94824cf462bc0c450d8c2718334463872390d9e"
+  },
+  "live_recorded_processes_or_group": [],
+  "limits": [
+    "No changed shader/source patch, resource accounting or completed control report delivered;25 final source copies are byte-identical baseline only, not implementation.",
+    "Draft model and parameter exploration are not rendered evidence or an actual corrected shader",
+    "No previous quality failures or thresholds are closed",
+    "No new session launched after timeout"
+  ],
+  "retained_external": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/before.json",
+      "sha256": "116c4c9388948fbf3e0fa8ea564491c0e4e0135e5b5edaa179a6e0026b992aca",
+      "bytes": 37807
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/task.txt",
+      "sha256": "180c31a7c30ab70f427b7425946e6d2cac2b8decaecef2cda1210dfc5c5d1805",
+      "bytes": 5939
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/supervise.py",
+      "sha256": "479cacf142c9581a6b289367060ece7dce9b1a518a6856857615d75b51a0c1ba",
+      "bytes": 1623
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/process-verification.json",
+      "sha256": "894cc98fdfee29e19e3d2010fb34a8f8f01762bd2dc4f920d501bc1dc252845a",
+      "bytes": 1878
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/acp.log",
+      "sha256": "fa77987f2961fe889b6a07e9de7b8eaada5a7e0172016a016bb9280cb260a37d",
+      "bytes": 1525
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/acp-stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/acp-terminal.json",
+      "sha256": "397505f60a1d8ee67b408b9827ef66b3de5d8c6abf0313ee0c108e39bf5cbada",
+      "bytes": 563
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/actual-tool-metadata-final.json",
+      "sha256": "0af98340e51476b9d2fb7b29a8166ceca0f851c6ab40fcbba4af060f8cc169bc",
+      "bytes": 113502
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-reconstruction-001/actual-tool-results-final.json",
+      "sha256": "25990cf1c8b0d43d096bb2572a294d69b853cd062dd0424e3287bd944f73c686",
+      "bytes": 490408
+    }
+  ],
+  "unchanged_base_source_copies": {
+    "base": "ce6171957eda212d6796335623d8040a0f06b500",
+    "count": 25,
+    "created_at": "last tool call at21:29:23, immediately before timeout",
+    "rows": [
+      {
+        "path": "crates/incant_render/src/graph/native.rs",
+        "sha256": "599cd44f1e4feb8418ce1e487c50a2eed0ac222be6af2d7ed5122f1a76b31c09",
+        "bytes": 4845
+      },
+      {
+        "path": "crates/incant_render/src/graph.rs",
+        "sha256": "c1e9fb546cb16b30b14bcda5804b18e406a0794d45039fc6f4358595e070945f",
+        "bytes": 14974
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "sha256": "a6e15e55f3a0d425dddc445c98d5bbcd9bb791670903a298683014acc60fdaf3",
+        "bytes": 22934
+      },
+      {
+        "path": "crates/incant_render/src/motion/attachment.rs",
+        "sha256": "949c7f1b3a2263633a6524d398b138b070898ad91411d47d6aeede84528506ed",
+        "bytes": 8741
+      },
+      {
+        "path": "crates/incant_render/src/motion/draw.rs",
+        "sha256": "be21e724375898916e1615c6e96631a9b46c34b4de35a18eb1bc0be854127f59",
+        "bytes": 4839
+      },
+      {
+        "path": "crates/incant_render/src/motion/owner.rs",
+        "sha256": "54f2383d75c9ba9b5952aba8862485eeca0437c4d24824694bedcd9424f35e53",
+        "bytes": 9240
+      },
+      {
+        "path": "crates/incant_render/src/motion/retained.rs",
+        "sha256": "5ebc0ee9fc3c5c37ae2fd6defa94b3956d857b26c7448ccda2f34962e3419b8d",
+        "bytes": 28141
+      },
+      {
+        "path": "crates/incant_render/src/motion/tests.rs",
+        "sha256": "5c123128b7f534267750463ea0e34663cac19f58e05f0f563b563554c9224f81",
+        "bytes": 13836
+      },
+      {
+        "path": "crates/incant_render/src/retained.rs",
+        "sha256": "7b3ddefbef62fb24e93122ce9f8cd52c1b9b7f61d2a48f1a4c5a4a8f8cdffa39",
+        "bytes": 27679
+      },
+      {
+        "path": "crates/incant_render/src/temporal/jitter.rs",
+        "sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd",
+        "bytes": 702
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/common.wgsl",
+        "sha256": "e1c2e552e462a3e27ad6632324b3880ef0cb8f96ec2e1c346ec6205e0520c879",
+        "bytes": 2508
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/confidence_oracle.rs",
+        "sha256": "888c1a3f213d40007a1c2e285e43f6badb21312a13592598f3dd777cf85ac40a",
+        "bytes": 2325
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/device_tests.rs",
+        "sha256": "5665df3ad9395fed273e1057c31acef2fe482fdc77edf7ce743804a00c99257e",
+        "bytes": 10252
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/kernel_oracle.rs",
+        "sha256": "499d6492d500bce2e97eb6c55e64e8632b69fdb8308c861a014b9a8cb7c20570",
+        "bytes": 4438
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/kernel_patterns.rs",
+        "sha256": "8a5cb4afd73bf98e4aaf153df69f8e1f6625ff365c09d1cd58d10083d5958c36",
+        "bytes": 8009
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/kernel_tests.rs",
+        "sha256": "1f6b60b02ea236c4c04253dd733950931464ba85689fb1ba28e6d90a5fdb5398",
+        "bytes": 10075
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/mod.rs",
+        "sha256": "f2f821de7c985aa32257f34fcd6d1afeebb8d773f13fa72660294308d4bd005a",
+        "bytes": 1177
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/owner.rs",
+        "sha256": "dea16cd9362d9ed8839c4f86813554f89296204ac9a996fad05f7c1788d80b80",
+        "bytes": 7756
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/owner_device_tests.rs",
+        "sha256": "40d3f0465934ca0dd252d57953c7e41457dfbfdbab6c87070ea20af99f9347dc",
+        "bytes": 23300
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/plan.rs",
+        "sha256": "a5fe81bce82b19aefbc7507c034ba38a22a29ec776dcb7a9faf2f8457074bbaa",
+        "bytes": 3410
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+        "sha256": "296fe89066865c4feff4d486506d762a4955a8351aa3f83aa0eff72ba375fc03",
+        "bytes": 5983
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl",
+        "sha256": "23c094e20e62bba3da35fca373457024cfe5405c2be042802493bbfc1cea4c9f",
+        "bytes": 13410
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/system.rs",
+        "sha256": "00ddce30484539148b2887e778db8203f4bfbec222964978bf6ad9a91fcb5442",
+        "bytes": 14345
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/targets.rs",
+        "sha256": "d7b6129b9e81cc8f06b4da069fccced8d551bd49098202019d38a915984d730b",
+        "bytes": 3048
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/tests.rs",
+        "sha256": "c0c29e73c5ef10f08994a7c601c9a8a24a46a0142e6db35cbae687a718de52d8",
+        "bytes": 7706
+      }
+    ]
+  }
+}
