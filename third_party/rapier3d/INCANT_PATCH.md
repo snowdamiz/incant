@@ -13,3 +13,8 @@ All solver algorithms, serde formats, default features and version stay unchange
 This adapter is diagnostic infrastructure, not hostile save admission. It requires
 an independently matched completed native owner; shape, manager and journal
 validation is not provided by a sleep-scan stamp check.
+
+The read-only pipeline observer is also gated by `incant-checkpoint`.
+`INCANT_PIPELINE_CAPTURE.json` pins its copied verdict/deferred/quarantine
+metadata and additive exports. It does not authenticate a completed phase, join
+a task, clear poison or install state; all native algorithms remain unchanged.

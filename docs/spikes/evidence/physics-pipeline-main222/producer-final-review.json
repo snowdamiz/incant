@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-13T12:07:11.969246+00:00",
+  "reviewer": "astra root",
+  "head": "706a89a872ac5bc465a52fb9fdebce3ded790bbf",
+  "manifest_sha256": "39af436dceecf51b21b85dbab6c030a867c11c6eee5455b1f57b771d4ed8aabe",
+  "source_reviews": [
+    "7edf2dc3a8bd73dd92e2fb6bbc7c4fe6ae2a7c972a1c3b99349c4e86f334a3cc",
+    "f6c5b601b30e0cf5790c6bfe29412a866247192352a3e0778e91293948a9bb50"
+  ],
+  "verification": "Read full scoped report, independent final source receipt, full collector; --verify-only terminal0 checks500losslessrecords159payloads114sources14successfulcommandreceipts5retainedfailures6exact executable binaries. 176det/176fast,20parallel controls; no ignored cases.",
+  "qualification": "Borrowed observer + inert112B record only; exact retained CCD verdict difference reproduced, no trajectory divergence or phase authentication asserted. Actual quarantined modified journal refusal retained. No live restore/save/device/phase gate.",
+  "findings": []
+}

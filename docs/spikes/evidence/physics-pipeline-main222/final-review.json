@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-13T12:30:56.908313+00:00",
+  "reviewer": "astra root",
+  "head": "64dbb0b259cf64d2c9251fec2be484af7a5ac39e",
+  "manifest_sha256": "83604f7e8cf429bf4fc2ae0a11597bc120b447a79e566f5f502fc74fefd09262",
+  "findings": [],
+  "verification": "Read full verifier, integration report and six-line additive seam; executed --verify-only exit0,45367 reaped. 37 current records26payloads3143freeze1558physics inputs15zero-exit reaped commands;192default+192fast8 in24groups. Explicit two-worker controls20permode actual parallel/determinism/SIMD compiler features. Original default-pool controls and500producer records retained.",
+  "scope": "Inert pipeline composition; no live save/restore or phase/performance acceptance."
+}
