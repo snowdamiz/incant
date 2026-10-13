@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main207, 2026-10-13
+## Current overview — main208, 2026-10-13
 
-Development main207 includes the restart quota-test repair (PR188) and the reviewed,
+Development main208 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -63,7 +63,7 @@ exposed concurrent passes outside the former first/last encoding-order interval.
 The CPU decoder now encloses all measured pairs, with explicit malformed/wrap
 refusal; ten timing CPU tests and renderer Clippy pass, with independent source
 review accepted. [Scope and retained evidence](docs/spikes/gpu-frame-envelope.md).
-All ten [current-main207 integration checks](docs/spikes/gpu-timestamps-main207.md) pass: 103 default CPU cases and 130 overlapping cooked cases, with 94 GPU cases ignored in each configuration. Final independent integration review is accepted; publication requires the exact-head fast check. Retained motion is explicitly uninstrumented; the envelope spans measured extrema including intervening gaps and does not measure complete-frame GPU cost. Cooked/native-window/phone and complete
+All ten [current-main207 integration checks](docs/spikes/gpu-timestamps-main207.md) pass: 103 default CPU cases and 130 overlapping cooked cases, with 94 GPU cases ignored in each configuration. Final independent integration review and the exact-head fast check passed; PR208 is merged. Retained motion is explicitly uninstrumented; the envelope spans measured extrema including intervening gaps and does not measure complete-frame GPU cost. Cooked/native-window/phone and complete
 profiler gates remain open.
 
 ## Native-window CPU profiling — current-main checks pass
@@ -85,6 +85,18 @@ compile and dependency checks. The prior two numerical GPU processes remain scop
 their recorded producer binary; no current composed GPU or appearance claim is made.
 Final integration review and the exact-head fast check passed; PR204 is merged. Default rendering is unchanged; temporal color,
 upscaling and cooked motion remain separate.
+
+## Exact physics saves — inert island ownership verified locally
+
+The inert path now checks reciprocal active/persistent body membership and
+contact-link ownership, retaining native ordering, free stacks and deferred
+split scheduling. Actual 2D/3D observations include sleep/wake, empty awake
+containers, fixed-body active history, reorder, removal/reuse and delayed splits.
+115 CPU tests, Clippy, wasm32 and dependency/contract checks pass; independent
+producer review is accepted; current-main integration checks are pending.
+Stamp-sensitive scratch, solver masks/buckets, complete collider/owner composition
+and continued live execution remain open; physics saves stay refused.
+[Island contract](docs/spikes/physics-inert-islands.md).
 
 ## Exact physics saves — inert regular body state verified locally
 

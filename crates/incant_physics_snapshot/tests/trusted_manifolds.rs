@@ -1,6 +1,13 @@
 //! Actual completed pinned native worlds, observed one-way. No live deserialize.
 use incant_physics_snapshot::*;
 use serde_json::Value;
+#[path = "support/body_capture.rs"]
+mod body_capture;
+#[path = "support/island_capture.rs"]
+mod island_capture;
+#[macro_use]
+#[path = "support/island_cases.rs"]
+mod island_cases;
 #[path = "support/ordered_capture.rs"]
 mod ordered_capture;
 fn budget() -> Budget {
@@ -466,6 +473,7 @@ macro_rules! cases {
                         );
                     }
                 }
+                check_islands(w, &a, &v);
                 let bytes = encode_manifolds(&v, &mut budget()).unwrap();
                 let loaded = decode_manifolds(&bytes, c, &mut budget()).unwrap();
                 assert_eq!(loaded.record(), &t);
@@ -481,6 +489,7 @@ macro_rules! cases {
                 }
                 Some(t)
             }
+            island_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;

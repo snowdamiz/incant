@@ -1,0 +1,1948 @@
+{
+  "format": "incant-physics-inert-islands-evidence",
+  "version": 1,
+  "base": "c250c23eb2bed7acd667b2e97bcb10789217463c",
+  "scope": "completed-step rigid island/body/contact reciprocal ownership; no live constructor or physics-save admission",
+  "source_freeze": "e315598c6a403419f67e48ec22f5c8e3b46ccc63e6b673d790af4d9445632fd9",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c",
+      "bytes": 252225,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc",
+      "bytes": 564,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/arena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd",
+      "bytes": 6312,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/attachment.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/codec.rs",
+      "sha256": "d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a",
+      "bytes": 8261,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/body_state/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "74a9d68f0b27975eb8bfc56d5da3f6017f360d2c4a51b81a4323283ec4a9a71b",
+      "bytes": 4391,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/validate.rs",
+      "sha256": "e6e319d5be06d1a4c2bc51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c",
+      "bytes": 4561,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/body_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/coarena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "8d625c55268136ed64d6f18a3d5aee19db6b302b4346bb441754063cef7151e5",
+      "bytes": 4611,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/island_state/codec.rs",
+      "sha256": "b553e1caba0e4d95710913c700b5e197e090fd55d7b6ffd173bceb7f81e47270",
+      "bytes": 7181,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/island_state/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/island_state/mod.rs",
+      "sha256": "e302d0689f442b3854b90e871f6a7ccbe2f890c726cc4a7c877ef7dbea81d356",
+      "bytes": 3119,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/island_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/island_state/validate.rs",
+      "sha256": "69c4daacf90dc4a4ee9233632289f287549155db4bd555ef2850e53e5c9ed760",
+      "bytes": 9463,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/island_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "2c8f7e641f6fe939d8be9c9746445d890fc66f89834f0913dc912c0b85549d7b",
+      "bytes": 2058,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "sha256": "a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22",
+      "bytes": 2537,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/records.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/body_state.rs",
+      "sha256": "3a6a4e970138b68e4aecf7e48c8eba60159601525df0ba60720db51980b7f135",
+      "bytes": 13389,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/body_state.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/islands.rs",
+      "sha256": "45ed38f17af142353b5fbc829816cfa5576ce504d4de017f545fc00ff1cf95d8",
+      "bytes": 12127,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/islands.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+      "bytes": 13804,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/pair_state.rs",
+      "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+      "bytes": 9879,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/body_capture.rs",
+      "sha256": "d3e23b73c15e486d27d222c2470c2f09e70e444241f400844a7684a28c858571",
+      "bytes": 5584,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/body_capture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/body_fixture.rs",
+      "sha256": "d5d7defe6f604e12dea355c97e42702c8a7dc809c04befedaaec44e0e4c01730",
+      "bytes": 2268,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/body_fixture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/island_capture.rs",
+      "sha256": "051367e268049c2cfe3c855ef1b071409dd1d94ca80d5628a68fc6c4b3a22fd4",
+      "bytes": 3340,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/island_capture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/island_cases.rs",
+      "sha256": "dbb55acfac72a259452e2bd71a0260c20ef91f0ea23f3ff1d4ce2358b8c5308d",
+      "bytes": 9921,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/island_cases.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+      "bytes": 4776,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+      "sha256": "799e2c75c3252b3e53e1826fde731d1c9716fed44dc923722df0eab5f9e254ee",
+      "bytes": 13415,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_bodies.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "35e8c177fb487b9ba17d04167808263b782c9e3a6e0de773af31b777b3b51d30",
+      "bytes": 33709,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs"
+    }
+  ],
+  "pinned": [
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/island_manager/manager.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/manager.rs",
+      "bytes": 19991,
+      "sha256": "28f3d63d290f43b35e51f17a4db3c57ce72f4f6d62430c3db4c25b606ff17a47"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/island_manager/island.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/island.rs",
+      "bytes": 2321,
+      "sha256": "67fa3567bc0c6821a14278921b5ca97672aa3ee59c2196759a63d73200b080f7"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/island_manager/persistent.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/persistent.rs",
+      "bytes": 36312,
+      "sha256": "16c0188cb2465650cf38dcb63b6e646d29e0e857d06a8715d850a45c7df8552b"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/island_manager/sleep.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/sleep.rs",
+      "bytes": 8042,
+      "sha256": "de773aafb5ce538a2f08129821df9e1dccc975a846979c38ce42c9393a556f5d"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/island_manager/local_split.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/local_split.rs",
+      "bytes": 20863,
+      "sha256": "66cc22a589dee90a9246042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/island_manager/global_split.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/global_split.rs",
+      "bytes": 13894,
+      "sha256": "e02e5cbf39251ba943f0342c793a2239096fae760a324200d618d8e099116bb4"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/island_manager/substep_groups.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/substep_groups.rs",
+      "bytes": 11885,
+      "sha256": "c9556aedcc9f4874d56f4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/pipeline/physics_pipeline/solve.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/pipeline/physics_pipeline/solve.rs",
+      "bytes": 18080,
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/narrow_phase/queries.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/geometry/narrow_phase/queries.rs",
+      "bytes": 11083,
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/narrow_phase/solver_graph.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/geometry/narrow_phase/solver_graph.rs",
+      "bytes": 38994,
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/geometry/contact_pair.rs",
+      "bytes": 44365,
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/utils/vec_map.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/parry2d/vec_map.rs",
+      "bytes": 45312,
+      "sha256": "bac667db9df3f5c84e258e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/island_manager/manager.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/manager.rs",
+      "bytes": 19991,
+      "sha256": "28f3d63d290f43b35e51f17a4db3c57ce72f4f6d62430c3db4c25b606ff17a47"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/island_manager/island.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/island.rs",
+      "bytes": 2321,
+      "sha256": "67fa3567bc0c6821a14278921b5ca97672aa3ee59c2196759a63d73200b080f7"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/island_manager/persistent.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/persistent.rs",
+      "bytes": 36312,
+      "sha256": "16c0188cb2465650cf38dcb63b6e646d29e0e857d06a8715d850a45c7df8552b"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/island_manager/sleep.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/sleep.rs",
+      "bytes": 8042,
+      "sha256": "de773aafb5ce538a2f08129821df9e1dccc975a846979c38ce42c9393a556f5d"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/island_manager/local_split.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/local_split.rs",
+      "bytes": 20863,
+      "sha256": "66cc22a589dee90a9246042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/island_manager/global_split.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/global_split.rs",
+      "bytes": 13894,
+      "sha256": "e02e5cbf39251ba943f0342c793a2239096fae760a324200d618d8e099116bb4"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/island_manager/substep_groups.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/substep_groups.rs",
+      "bytes": 11885,
+      "sha256": "c9556aedcc9f4874d56f4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/pipeline/physics_pipeline/solve.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/pipeline/physics_pipeline/solve.rs",
+      "bytes": 18080,
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/narrow_phase/queries.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/geometry/narrow_phase/queries.rs",
+      "bytes": 11083,
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/narrow_phase/solver_graph.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/geometry/narrow_phase/solver_graph.rs",
+      "bytes": 38994,
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc"
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/geometry/contact_pair.rs",
+      "bytes": 44365,
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528"
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/utils/vec_map.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/parry3d/vec_map.rs",
+      "bytes": 45312,
+      "sha256": "bac667db9df3f5c84e258e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00"
+    }
+  ],
+  "commands": [
+    {
+      "name": "clippy-001",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/clippy-001.json",
+      "receipt_sha256": "3cd46cd577299e8040559fa495ddb0b21cf51253c7cb9a5a31095e32b6bf5cfe",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/clippy-001.log",
+      "log_sha256": "6d1c0edddb30cfa12e067b9e5f1a4882891289c28959a9d8bfefce25f178a9ab",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 1.020266056060791
+    },
+    {
+      "name": "conventions-final",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/conventions-final.json",
+      "receipt_sha256": "651ce81141b01d81575e1e1b79300ad9d12f3e34c71a86ad4643bf08956ce1b5",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/conventions-final.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 0.026504993438720703
+    },
+    {
+      "name": "diff-final",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/diff-final.json",
+      "receipt_sha256": "ce16443b13a705aec73853e6c21eb86d2a87400a136842a7ebfe65622780fa7b",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/diff-final.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 0.02049994468688965
+    },
+    {
+      "name": "fmt-final",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/fmt-final.json",
+      "receipt_sha256": "c2390cd651efed330c6f42b24d36eeadfc436015f6a7c641c8b28c2e3db4ae85",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/fmt-final.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 0.10783696174621582
+    },
+    {
+      "name": "focused-003",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/focused-003.json",
+      "receipt_sha256": "5ed05be6f2f1ffe00cecf17d865d01136fe7af83a576c3b735c59174c3b56c78",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/focused-003.log",
+      "log_sha256": "38c52519afc63c454cea6d7e18987d1be55de37a187ce37ae852803c1162ae24",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "--test",
+        "islands",
+        "--test",
+        "body_state"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 3.2618250846862793
+    },
+    {
+      "name": "native-001",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-001.json",
+      "receipt_sha256": "36c3e33ecde62e795d72b9fb317502eb981844e508acaccfbcc17943f64ef6af",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-001.log",
+      "log_sha256": "02ccfac29618ccb13903afd14e9284d97f5ecc6597bed08d8905e0d629800e46",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "--test",
+        "trusted_bodies"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 101,
+      "elapsed": 3.7682549953460693
+    },
+    {
+      "name": "native-002",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-002.json",
+      "receipt_sha256": "27a3747ae05b257045aaac0877a6102f493c5b8c535e7c909d829783e8b66bdc",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-002.log",
+      "log_sha256": "3132d30d0d266e0a00133c45b20086469755d64bb900117b098978e9596ad0f7",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 101,
+      "elapsed": 1.921612024307251
+    },
+    {
+      "name": "native-004",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-004.json",
+      "receipt_sha256": "32f5dcc7d5538a79044167a26ef9880b731477a61d15d8728e36a77175446d45",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-004.log",
+      "log_sha256": "5f37a1628fc5ed48ea3a510554956337c393718006a2747603529fe68f215040",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "actual_islands"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 101,
+      "elapsed": 2.871004819869995
+    },
+    {
+      "name": "native-005",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-005.json",
+      "receipt_sha256": "616e9adb745471812eb3c83db8de09ce699a495206e8d7244246c3d43c4d2bdb",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-005.log",
+      "log_sha256": "16d3a09f43beac0ba82cd3fa33cd2da0da00c9d29c41cb9e7fb2c0d9267599d9",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "actual_islands"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 101,
+      "elapsed": 2.0123281478881836
+    },
+    {
+      "name": "native-006",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-006.json",
+      "receipt_sha256": "1205b009b4622b7839d844f0ee9f0d6090bb597bebf0898009cacc2dafcd1c47",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-006.log",
+      "log_sha256": "4d9a41a9bbb7180a257c1ff99153dcd3ce52992230ddba47516416aa8fbe22f4",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "actual_islands"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 101,
+      "elapsed": 2.7960619926452637
+    },
+    {
+      "name": "native-007",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-007.json",
+      "receipt_sha256": "567a6a590b4c72c20d8706a9d901091609ba8c2c938f099c9036dfbb55c8435d",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-007.log",
+      "log_sha256": "54e71f7b01b255c523232f9050fec0d287eb21e97095bb076c0bd4dc51306d28",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "actual_islands"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 101,
+      "elapsed": 2.0741188526153564
+    },
+    {
+      "name": "native-diagnostic-001",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-diagnostic-001.json",
+      "receipt_sha256": "1e3f3e3cb0d496c2c1549d1bd101c0a1229d3a4f23db282ed2e0b1970f4711cf",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-diagnostic-001.log",
+      "log_sha256": "dadbfa31d4804d397041bd3e1d03e989f6913e43de407a14081f354cc73d3df2",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "planar::actual_plain",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 101,
+      "elapsed": 1.9221138954162598
+    },
+    {
+      "name": "normal-graph-final",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/normal-graph-final.json",
+      "receipt_sha256": "9b965656abdca24168b7361d352e197a80edba2b7755611d55706e5721be8228",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/normal-graph-final.log",
+      "log_sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 0.10235214233398438
+    },
+    {
+      "name": "runtime-graphs-final",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/runtime-graphs-final.json",
+      "receipt_sha256": "4be416429d8d7408aa737d694a357804474bc0bc5d7992153129d9871865f3ed",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/runtime-graphs-final.log",
+      "log_sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 0.28558897972106934
+    },
+    {
+      "name": "tests-008",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-008.json",
+      "receipt_sha256": "d0102631da44efac8a241ddb0d4ba2b852b4fbed89ef2fa848e4bc1364a0aa5b",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-008.log",
+      "log_sha256": "acb8589777da17fa1b139228d517d4234a319476c0d1cc596e1c70b63a04ebef",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 7.546730995178223
+    },
+    {
+      "name": "tests-final",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-final.json",
+      "receipt_sha256": "27e872b233657369c5475e78d93df146baea914afb9e8458f6aac7617794c064",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-final.log",
+      "log_sha256": "bfb491e2af051e3e12ce4baded4aaf8571a3ebcdf6a88b522ce142ddc5f24757",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 0.2923099994659424
+    },
+    {
+      "name": "wasm32-final",
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/wasm32-final.json",
+      "receipt_sha256": "8cf910f39b036f79d148a34d4d16ecf6f76ced750e4a3ad8be030a9f4565e18f",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/wasm32-final.log",
+      "log_sha256": "40a61417decb590b439d066595e0cccdd97f2df205971ff1cd4a8b9ea799a5e2",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target"
+      },
+      "exit_code": 0,
+      "elapsed": 0.31891798973083496
+    }
+  ],
+  "final_commands": [
+    "clippy-001",
+    "tests-final",
+    "wasm32-final",
+    "normal-graph-final",
+    "runtime-graphs-final",
+    "fmt-final",
+    "conventions-final",
+    "diff-final"
+  ],
+  "tests": {
+    "passed": 115,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 19,
+    "nonempty_groups": 17
+  },
+  "native_observations": [
+    "both dimensions, existing actual plain/cluster manifold captures with island composition",
+    "six new both-dimension sleep/wake/empty-awake, reorder/type/disable/generation, merge/deferred-split/candidate tests"
+  ],
+  "records": [
+    {
+      "name": "checks.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/checks.py",
+      "sha256": "292e30c9b43c158b38bca4a7bc7b1784aa912de59c67aac53a4c7ef736c383cf",
+      "bytes": 854,
+      "retained": "docs/spikes/evidence/physics-inert-islands/292e30c9b43c158b38bca4a7bc7b1784aa912de59c67aac53a4c7ef736c383cf.gz",
+      "retained_sha256": "ff1b2ef5a1617269561a74e40e0bd6a8e2e26044d37a9189a113df257541c501"
+    },
+    {
+      "name": "clippy-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/clippy-001.json",
+      "sha256": "3cd46cd577299e8040559fa495ddb0b21cf51253c7cb9a5a31095e32b6bf5cfe",
+      "bytes": 1542,
+      "retained": "docs/spikes/evidence/physics-inert-islands/3cd46cd577299e8040559fa495ddb0b21cf51253c7cb9a5a31095e32b6bf5cfe.gz",
+      "retained_sha256": "2152fb8d20d508806ff06b448e032f07ee5182845d7a4f99e47307036109dce5"
+    },
+    {
+      "name": "clippy-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/clippy-001.log",
+      "sha256": "6d1c0edddb30cfa12e067b9e5f1a4882891289c28959a9d8bfefce25f178a9ab",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-islands/6d1c0edddb30cfa12e067b9e5f1a4882891289c28959a9d8bfefce25f178a9ab.gz",
+      "retained_sha256": "c4ddff0838dfe7118d5f58b499b308fd6a56ad96524d721703180b5783dadb42"
+    },
+    {
+      "name": "conventions-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/conventions-final.json",
+      "sha256": "651ce81141b01d81575e1e1b79300ad9d12f3e34c71a86ad4643bf08956ce1b5",
+      "bytes": 1408,
+      "retained": "docs/spikes/evidence/physics-inert-islands/651ce81141b01d81575e1e1b79300ad9d12f3e34c71a86ad4643bf08956ce1b5.gz",
+      "retained_sha256": "39ff99181c67e6861a843295a6f17e02ae64ec15a70e3eba0672257e991551cb"
+    },
+    {
+      "name": "conventions-final.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/conventions-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "diff-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/diff-final.json",
+      "sha256": "ce16443b13a705aec73853e6c21eb86d2a87400a136842a7ebfe65622780fa7b",
+      "bytes": 1378,
+      "retained": "docs/spikes/evidence/physics-inert-islands/ce16443b13a705aec73853e6c21eb86d2a87400a136842a7ebfe65622780fa7b.gz",
+      "retained_sha256": "e1519bcdab7d02f967e2c8f1bb73703b2cb01b791ceffcb94e2859b76798de8d"
+    },
+    {
+      "name": "diff-final.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/diff-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "fmt-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/fmt-final.json",
+      "sha256": "c2390cd651efed330c6f42b24d36eeadfc436015f6a7c641c8b28c2e3db4ae85",
+      "bytes": 1428,
+      "retained": "docs/spikes/evidence/physics-inert-islands/c2390cd651efed330c6f42b24d36eeadfc436015f6a7c641c8b28c2e3db4ae85.gz",
+      "retained_sha256": "8d568afdb2c8116cc7b0b9118a0b5c7c1a714d488553fb27fbf53f9b63c8edd9"
+    },
+    {
+      "name": "fmt-final.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/fmt-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "focused-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/focused-003.json",
+      "sha256": "5ed05be6f2f1ffe00cecf17d865d01136fe7af83a576c3b735c59174c3b56c78",
+      "bytes": 1584,
+      "retained": "docs/spikes/evidence/physics-inert-islands/5ed05be6f2f1ffe00cecf17d865d01136fe7af83a576c3b735c59174c3b56c78.gz",
+      "retained_sha256": "dad30aab603039a082325b5beda0a8935499b3bf4596a523653ad60d78941895"
+    },
+    {
+      "name": "focused-003.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/focused-003.log",
+      "sha256": "38c52519afc63c454cea6d7e18987d1be55de37a187ce37ae852803c1162ae24",
+      "bytes": 2371,
+      "retained": "docs/spikes/evidence/physics-inert-islands/38c52519afc63c454cea6d7e18987d1be55de37a187ce37ae852803c1162ae24.gz",
+      "retained_sha256": "a5e40951ef8dac4ba849f3d2be8a84974794bcf38591f342a989068a2292b9bc"
+    },
+    {
+      "name": "native-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-001.json",
+      "sha256": "36c3e33ecde62e795d72b9fb317502eb981844e508acaccfbcc17943f64ef6af",
+      "bytes": 1561,
+      "retained": "docs/spikes/evidence/physics-inert-islands/36c3e33ecde62e795d72b9fb317502eb981844e508acaccfbcc17943f64ef6af.gz",
+      "retained_sha256": "2c232c06e6f0243e2f3e0520861f4f838c278a9c6c5d91c0c746bc8642921564"
+    },
+    {
+      "name": "native-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-001.log",
+      "sha256": "02ccfac29618ccb13903afd14e9284d97f5ecc6597bed08d8905e0d629800e46",
+      "bytes": 4043,
+      "retained": "docs/spikes/evidence/physics-inert-islands/02ccfac29618ccb13903afd14e9284d97f5ecc6597bed08d8905e0d629800e46.gz",
+      "retained_sha256": "d04096902ecfb57207c0624e8aec2a519bfc24860d5f25f564597762a75a0e78"
+    },
+    {
+      "name": "native-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-002.json",
+      "sha256": "27a3747ae05b257045aaac0877a6102f493c5b8c535e7c909d829783e8b66bdc",
+      "bytes": 1524,
+      "retained": "docs/spikes/evidence/physics-inert-islands/27a3747ae05b257045aaac0877a6102f493c5b8c535e7c909d829783e8b66bdc.gz",
+      "retained_sha256": "4445a4eebe8b61431ba1716c84922c29f4a972d2c66f29766defdfcb8e35cb59"
+    },
+    {
+      "name": "native-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-002.log",
+      "sha256": "3132d30d0d266e0a00133c45b20086469755d64bb900117b098978e9596ad0f7",
+      "bytes": 1981,
+      "retained": "docs/spikes/evidence/physics-inert-islands/3132d30d0d266e0a00133c45b20086469755d64bb900117b098978e9596ad0f7.gz",
+      "retained_sha256": "2ff3beafe9b0c7543ed853e62acfb5efe76f86e884110d1e50c7a2ebb168c335"
+    },
+    {
+      "name": "native-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-004.json",
+      "sha256": "32f5dcc7d5538a79044167a26ef9880b731477a61d15d8728e36a77175446d45",
+      "bytes": 1546,
+      "retained": "docs/spikes/evidence/physics-inert-islands/32f5dcc7d5538a79044167a26ef9880b731477a61d15d8728e36a77175446d45.gz",
+      "retained_sha256": "04cd26d4ae6ffe84941ec0c326a4d06173612a11f094ebb43e63b4ebba006db0"
+    },
+    {
+      "name": "native-004.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-004.log",
+      "sha256": "5f37a1628fc5ed48ea3a510554956337c393718006a2747603529fe68f215040",
+      "bytes": 2698,
+      "retained": "docs/spikes/evidence/physics-inert-islands/5f37a1628fc5ed48ea3a510554956337c393718006a2747603529fe68f215040.gz",
+      "retained_sha256": "8de3a07762b508ff4c8bc9848842b91d83bdb3e302936c691d17e2accab6cd1e"
+    },
+    {
+      "name": "native-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-005.json",
+      "sha256": "616e9adb745471812eb3c83db8de09ce699a495206e8d7244246c3d43c4d2bdb",
+      "bytes": 1547,
+      "retained": "docs/spikes/evidence/physics-inert-islands/616e9adb745471812eb3c83db8de09ce699a495206e8d7244246c3d43c4d2bdb.gz",
+      "retained_sha256": "47d63bc410650c60631bc8ac1239794558478f068ddc345fe6e7b26fd29ea878"
+    },
+    {
+      "name": "native-005.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-005.log",
+      "sha256": "16d3a09f43beac0ba82cd3fa33cd2da0da00c9d29c41cb9e7fb2c0d9267599d9",
+      "bytes": 5147,
+      "retained": "docs/spikes/evidence/physics-inert-islands/16d3a09f43beac0ba82cd3fa33cd2da0da00c9d29c41cb9e7fb2c0d9267599d9.gz",
+      "retained_sha256": "34767246a3c36e3681627325cd2436d1384f7a5b75b2779d50fc26abf48765b5"
+    },
+    {
+      "name": "native-006.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-006.json",
+      "sha256": "1205b009b4622b7839d844f0ee9f0d6090bb597bebf0898009cacc2dafcd1c47",
+      "bytes": 1547,
+      "retained": "docs/spikes/evidence/physics-inert-islands/1205b009b4622b7839d844f0ee9f0d6090bb597bebf0898009cacc2dafcd1c47.gz",
+      "retained_sha256": "fe99cfda58669a5e531f819ff9aba9932660c89a1c3a57acc8502b36832c2246"
+    },
+    {
+      "name": "native-006.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-006.log",
+      "sha256": "4d9a41a9bbb7180a257c1ff99153dcd3ce52992230ddba47516416aa8fbe22f4",
+      "bytes": 2748,
+      "retained": "docs/spikes/evidence/physics-inert-islands/4d9a41a9bbb7180a257c1ff99153dcd3ce52992230ddba47516416aa8fbe22f4.gz",
+      "retained_sha256": "bf46e93a2966fb826bd04f6e488f710f91445cf48a044162e0e50a9503864791"
+    },
+    {
+      "name": "native-007.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-007.json",
+      "sha256": "567a6a590b4c72c20d8706a9d901091609ba8c2c938f099c9036dfbb55c8435d",
+      "bytes": 1547,
+      "retained": "docs/spikes/evidence/physics-inert-islands/567a6a590b4c72c20d8706a9d901091609ba8c2c938f099c9036dfbb55c8435d.gz",
+      "retained_sha256": "f143ea7f6b96184562a6ed5942574d352278ee9770c3da9ad81945b6e9538699"
+    },
+    {
+      "name": "native-007.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-007.log",
+      "sha256": "54e71f7b01b255c523232f9050fec0d287eb21e97095bb076c0bd4dc51306d28",
+      "bytes": 1947,
+      "retained": "docs/spikes/evidence/physics-inert-islands/54e71f7b01b255c523232f9050fec0d287eb21e97095bb076c0bd4dc51306d28.gz",
+      "retained_sha256": "4f19d141c912a8fca1a51b2642e0bfedaff0a62655112167e46fa2243886d080"
+    },
+    {
+      "name": "native-diagnostic-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-diagnostic-001.json",
+      "sha256": "1e3f3e3cb0d496c2c1549d1bd101c0a1229d3a4f23db282ed2e0b1970f4711cf",
+      "bytes": 1582,
+      "retained": "docs/spikes/evidence/physics-inert-islands/1e3f3e3cb0d496c2c1549d1bd101c0a1229d3a4f23db282ed2e0b1970f4711cf.gz",
+      "retained_sha256": "f2dc44366e80af97498681b9f1524470ee44d9dfafe37b8cedd3a1f8d30d8caf"
+    },
+    {
+      "name": "native-diagnostic-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/native-diagnostic-001.log",
+      "sha256": "dadbfa31d4804d397041bd3e1d03e989f6913e43de407a14081f354cc73d3df2",
+      "bytes": 2510,
+      "retained": "docs/spikes/evidence/physics-inert-islands/dadbfa31d4804d397041bd3e1d03e989f6913e43de407a14081f354cc73d3df2.gz",
+      "retained_sha256": "5090be08965a017318e8586d156e94829f9260b4171a01a0625da551a31dfcc0"
+    },
+    {
+      "name": "normal-graph-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/normal-graph-final.json",
+      "sha256": "9b965656abdca24168b7361d352e197a80edba2b7755611d55706e5721be8228",
+      "bytes": 1499,
+      "retained": "docs/spikes/evidence/physics-inert-islands/9b965656abdca24168b7361d352e197a80edba2b7755611d55706e5721be8228.gz",
+      "retained_sha256": "dc49917a77f6e3adf9b0bd0e0d90e1836d48f11834e3c3e4b881b101041bba9e"
+    },
+    {
+      "name": "normal-graph-final.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/normal-graph-final.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "bytes": 124,
+      "retained": "docs/spikes/evidence/physics-inert-islands/8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c.gz",
+      "retained_sha256": "b212649c683b80fc2d54b1aa54497594d1b7f5cb99243c3dad0ee95afaaa6ecd"
+    },
+    {
+      "name": "physics-inert-body-state-final-20261013.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/physics-inert-body-state-final-20261013.json",
+      "sha256": "dd28c87d1df24b51b563d826ba47880784af08d3ab2cb8755b5b8615d55f7b54",
+      "bytes": 1492,
+      "retained": "docs/spikes/evidence/physics-inert-islands/dd28c87d1df24b51b563d826ba47880784af08d3ab2cb8755b5b8615d55f7b54.gz",
+      "retained_sha256": "e2283e9a5c8bda079896947bafd9722d3538b51ba338a883a4baed11b76dd510"
+    },
+    {
+      "name": "pinned/parry2d/vec_map.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/parry2d/vec_map.rs",
+      "sha256": "bac667db9df3f5c84e258e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00",
+      "bytes": 45312,
+      "retained": "docs/spikes/evidence/physics-inert-islands/bac667db9df3f5c84e258e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00.gz",
+      "retained_sha256": "7d1847092c60d8bdbcc49d518ebd9b6f30df37a5b5e4f4e4eefae9756e3c9bd4"
+    },
+    {
+      "name": "pinned/parry3d/vec_map.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/parry3d/vec_map.rs",
+      "sha256": "bac667db9df3f5c84e258e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00",
+      "bytes": 45312,
+      "retained": "docs/spikes/evidence/physics-inert-islands/bac667db9df3f5c84e258e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00.gz",
+      "retained_sha256": "7d1847092c60d8bdbcc49d518ebd9b6f30df37a5b5e4f4e4eefae9756e3c9bd4"
+    },
+    {
+      "name": "pinned/rapier2d/dynamics/island_manager/global_split.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/global_split.rs",
+      "sha256": "e02e5cbf39251ba943f0342c793a2239096fae760a324200d618d8e099116bb4",
+      "bytes": 13894,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e02e5cbf39251ba943f0342c793a2239096fae760a324200d618d8e099116bb4.gz",
+      "retained_sha256": "45b40f72a483b34e637a64e55481071df2d0b712ae6e4534b21fc1db1d496e0b"
+    },
+    {
+      "name": "pinned/rapier2d/dynamics/island_manager/island.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/island.rs",
+      "sha256": "67fa3567bc0c6821a14278921b5ca97672aa3ee59c2196759a63d73200b080f7",
+      "bytes": 2321,
+      "retained": "docs/spikes/evidence/physics-inert-islands/67fa3567bc0c6821a14278921b5ca97672aa3ee59c2196759a63d73200b080f7.gz",
+      "retained_sha256": "4aa52fe1aad71cf49eb64c17abdc75cdd9ece1297860c6eafee9e7fa84139621"
+    },
+    {
+      "name": "pinned/rapier2d/dynamics/island_manager/local_split.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/local_split.rs",
+      "sha256": "66cc22a589dee90a9246042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5",
+      "bytes": 20863,
+      "retained": "docs/spikes/evidence/physics-inert-islands/66cc22a589dee90a9246042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5.gz",
+      "retained_sha256": "c79145a48a9e33c53f4104450a78b9c368ef179e414da2e6ed9603bc211263f6"
+    },
+    {
+      "name": "pinned/rapier2d/dynamics/island_manager/manager.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/manager.rs",
+      "sha256": "28f3d63d290f43b35e51f17a4db3c57ce72f4f6d62430c3db4c25b606ff17a47",
+      "bytes": 19991,
+      "retained": "docs/spikes/evidence/physics-inert-islands/28f3d63d290f43b35e51f17a4db3c57ce72f4f6d62430c3db4c25b606ff17a47.gz",
+      "retained_sha256": "4b26bbe250ab8740adb4299c012b51874474a96e38423c44b26561a88008930b"
+    },
+    {
+      "name": "pinned/rapier2d/dynamics/island_manager/persistent.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/persistent.rs",
+      "sha256": "16c0188cb2465650cf38dcb63b6e646d29e0e857d06a8715d850a45c7df8552b",
+      "bytes": 36312,
+      "retained": "docs/spikes/evidence/physics-inert-islands/16c0188cb2465650cf38dcb63b6e646d29e0e857d06a8715d850a45c7df8552b.gz",
+      "retained_sha256": "b91f4cd7decbf6fa938577e8400e90664b4397484d72784adb7c8cdc4f55bee0"
+    },
+    {
+      "name": "pinned/rapier2d/dynamics/island_manager/sleep.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/sleep.rs",
+      "sha256": "de773aafb5ce538a2f08129821df9e1dccc975a846979c38ce42c9393a556f5d",
+      "bytes": 8042,
+      "retained": "docs/spikes/evidence/physics-inert-islands/de773aafb5ce538a2f08129821df9e1dccc975a846979c38ce42c9393a556f5d.gz",
+      "retained_sha256": "c72590cfa752f8f3083f129f93d4e1e32750d36f3a7df4cc80cf078b82e2b10e"
+    },
+    {
+      "name": "pinned/rapier2d/dynamics/island_manager/substep_groups.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/dynamics/island_manager/substep_groups.rs",
+      "sha256": "c9556aedcc9f4874d56f4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443",
+      "bytes": 11885,
+      "retained": "docs/spikes/evidence/physics-inert-islands/c9556aedcc9f4874d56f4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443.gz",
+      "retained_sha256": "dc08ffa37d19354da468211019af0c065b52d715c7f1c1513dee39bd1b448874"
+    },
+    {
+      "name": "pinned/rapier2d/geometry/contact_pair.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "retained": "docs/spikes/evidence/physics-inert-islands/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz",
+      "retained_sha256": "358ed8977db039f94b06c49e49fea4ea23a9c9053df8bf5d09136fcaf76015b1"
+    },
+    {
+      "name": "pinned/rapier2d/geometry/narrow_phase/queries.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/geometry/narrow_phase/queries.rs",
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50",
+      "bytes": 11083,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50.gz",
+      "retained_sha256": "203d50061189e6bd6bd34e7a00b4986fa1dde3ec4d7b8b7b1992faa74f2ade9d"
+    },
+    {
+      "name": "pinned/rapier2d/geometry/narrow_phase/solver_graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/geometry/narrow_phase/solver_graph.rs",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "retained": "docs/spikes/evidence/physics-inert-islands/8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc.gz",
+      "retained_sha256": "a90a82faf121134e2afbe526302676dca011b40afc510af4aab5d9a701cd888a"
+    },
+    {
+      "name": "pinned/rapier2d/pipeline/physics_pipeline/solve.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier2d/pipeline/physics_pipeline/solve.rs",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "retained": "docs/spikes/evidence/physics-inert-islands/27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c.gz",
+      "retained_sha256": "36fac0459ee00637d057d7fe44c31d2325887a2e3ec32de3e83dc80360d020ef"
+    },
+    {
+      "name": "pinned/rapier3d/dynamics/island_manager/global_split.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/global_split.rs",
+      "sha256": "e02e5cbf39251ba943f0342c793a2239096fae760a324200d618d8e099116bb4",
+      "bytes": 13894,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e02e5cbf39251ba943f0342c793a2239096fae760a324200d618d8e099116bb4.gz",
+      "retained_sha256": "45b40f72a483b34e637a64e55481071df2d0b712ae6e4534b21fc1db1d496e0b"
+    },
+    {
+      "name": "pinned/rapier3d/dynamics/island_manager/island.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/island.rs",
+      "sha256": "67fa3567bc0c6821a14278921b5ca97672aa3ee59c2196759a63d73200b080f7",
+      "bytes": 2321,
+      "retained": "docs/spikes/evidence/physics-inert-islands/67fa3567bc0c6821a14278921b5ca97672aa3ee59c2196759a63d73200b080f7.gz",
+      "retained_sha256": "4aa52fe1aad71cf49eb64c17abdc75cdd9ece1297860c6eafee9e7fa84139621"
+    },
+    {
+      "name": "pinned/rapier3d/dynamics/island_manager/local_split.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/local_split.rs",
+      "sha256": "66cc22a589dee90a9246042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5",
+      "bytes": 20863,
+      "retained": "docs/spikes/evidence/physics-inert-islands/66cc22a589dee90a9246042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5.gz",
+      "retained_sha256": "c79145a48a9e33c53f4104450a78b9c368ef179e414da2e6ed9603bc211263f6"
+    },
+    {
+      "name": "pinned/rapier3d/dynamics/island_manager/manager.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/manager.rs",
+      "sha256": "28f3d63d290f43b35e51f17a4db3c57ce72f4f6d62430c3db4c25b606ff17a47",
+      "bytes": 19991,
+      "retained": "docs/spikes/evidence/physics-inert-islands/28f3d63d290f43b35e51f17a4db3c57ce72f4f6d62430c3db4c25b606ff17a47.gz",
+      "retained_sha256": "4b26bbe250ab8740adb4299c012b51874474a96e38423c44b26561a88008930b"
+    },
+    {
+      "name": "pinned/rapier3d/dynamics/island_manager/persistent.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/persistent.rs",
+      "sha256": "16c0188cb2465650cf38dcb63b6e646d29e0e857d06a8715d850a45c7df8552b",
+      "bytes": 36312,
+      "retained": "docs/spikes/evidence/physics-inert-islands/16c0188cb2465650cf38dcb63b6e646d29e0e857d06a8715d850a45c7df8552b.gz",
+      "retained_sha256": "b91f4cd7decbf6fa938577e8400e90664b4397484d72784adb7c8cdc4f55bee0"
+    },
+    {
+      "name": "pinned/rapier3d/dynamics/island_manager/sleep.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/sleep.rs",
+      "sha256": "de773aafb5ce538a2f08129821df9e1dccc975a846979c38ce42c9393a556f5d",
+      "bytes": 8042,
+      "retained": "docs/spikes/evidence/physics-inert-islands/de773aafb5ce538a2f08129821df9e1dccc975a846979c38ce42c9393a556f5d.gz",
+      "retained_sha256": "c72590cfa752f8f3083f129f93d4e1e32750d36f3a7df4cc80cf078b82e2b10e"
+    },
+    {
+      "name": "pinned/rapier3d/dynamics/island_manager/substep_groups.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/dynamics/island_manager/substep_groups.rs",
+      "sha256": "c9556aedcc9f4874d56f4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443",
+      "bytes": 11885,
+      "retained": "docs/spikes/evidence/physics-inert-islands/c9556aedcc9f4874d56f4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443.gz",
+      "retained_sha256": "dc08ffa37d19354da468211019af0c065b52d715c7f1c1513dee39bd1b448874"
+    },
+    {
+      "name": "pinned/rapier3d/geometry/contact_pair.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "retained": "docs/spikes/evidence/physics-inert-islands/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz",
+      "retained_sha256": "358ed8977db039f94b06c49e49fea4ea23a9c9053df8bf5d09136fcaf76015b1"
+    },
+    {
+      "name": "pinned/rapier3d/geometry/narrow_phase/queries.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/geometry/narrow_phase/queries.rs",
+      "sha256": "a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50",
+      "bytes": 11083,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a7ced84103efd197d6b7c97f849afd6d4de521e265e1c9dcd2992b37130e2b50.gz",
+      "retained_sha256": "203d50061189e6bd6bd34e7a00b4986fa1dde3ec4d7b8b7b1992faa74f2ade9d"
+    },
+    {
+      "name": "pinned/rapier3d/geometry/narrow_phase/solver_graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/geometry/narrow_phase/solver_graph.rs",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "retained": "docs/spikes/evidence/physics-inert-islands/8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc.gz",
+      "retained_sha256": "a90a82faf121134e2afbe526302676dca011b40afc510af4aab5d9a701cd888a"
+    },
+    {
+      "name": "pinned/rapier3d/pipeline/physics_pipeline/solve.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned/rapier3d/pipeline/physics_pipeline/solve.rs",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "retained": "docs/spikes/evidence/physics-inert-islands/27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c.gz",
+      "retained_sha256": "36fac0459ee00637d057d7fe44c31d2325887a2e3ec32de3e83dc80360d020ef"
+    },
+    {
+      "name": "pinned-dimension-comparison.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned-dimension-comparison.json",
+      "sha256": "2b7323b820ec6e4a4f935ec2dd5d3d5d48cd4f76d777861f6628d65c6e3c88af",
+      "bytes": 2639,
+      "retained": "docs/spikes/evidence/physics-inert-islands/2b7323b820ec6e4a4f935ec2dd5d3d5d48cd4f76d777861f6628d65c6e3c88af.gz",
+      "retained_sha256": "fe291e9465721e9330a8b545c7c9da8c818379830d7880aef243e087a5c57d15"
+    },
+    {
+      "name": "pinned-sources.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/pinned-sources.json",
+      "sha256": "976f4b53944c2473ca6f6fc871b634e1534baabac5453fd082644e8bf309b5f7",
+      "bytes": 9283,
+      "retained": "docs/spikes/evidence/physics-inert-islands/976f4b53944c2473ca6f6fc871b634e1534baabac5453fd082644e8bf309b5f7.gz",
+      "retained_sha256": "e335c1fa85976c09f5e0e5a801d55981c4cee6e4abb9c2965dea0a75037203fd"
+    },
+    {
+      "name": "retain.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/retain.py",
+      "sha256": "9a3597121badd8a2bedceb228ffa61138d3cc3382d586063c665f4d65c6823fe",
+      "bytes": 4195,
+      "retained": "docs/spikes/evidence/physics-inert-islands/9a3597121badd8a2bedceb228ffa61138d3cc3382d586063c665f4d65c6823fe.gz",
+      "retained_sha256": "52c5fa72d4ad08742bde9ed5d51f022492ccc262b25072b96c1b3559295414c8"
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/run.py",
+      "sha256": "febdc7f495ebc878c411d682ed80fdec743d87e38dcc383e2ebbc5d3ca789967",
+      "bytes": 785,
+      "retained": "docs/spikes/evidence/physics-inert-islands/febdc7f495ebc878c411d682ed80fdec743d87e38dcc383e2ebbc5d3ca789967.gz",
+      "retained_sha256": "44cb362fd2d5bd4a8a3d1912fa298b47fb68a642b6844f3dd3d5b040ce29f890"
+    },
+    {
+      "name": "runtime-graphs-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/runtime-graphs-final.json",
+      "sha256": "4be416429d8d7408aa737d694a357804474bc0bc5d7992153129d9871865f3ed",
+      "bytes": 1492,
+      "retained": "docs/spikes/evidence/physics-inert-islands/4be416429d8d7408aa737d694a357804474bc0bc5d7992153129d9871865f3ed.gz",
+      "retained_sha256": "1e9b42319e428db0a19665869cabce34aa0bb54dede9a4bb78b2dcf9f91b9d66"
+    },
+    {
+      "name": "runtime-graphs-final.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/runtime-graphs-final.log",
+      "sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0",
+      "bytes": 113,
+      "retained": "docs/spikes/evidence/physics-inert-islands/603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz",
+      "retained_sha256": "f5bfcbb956f60d69141e44f0fcb4b30b89968e8c3ac6bba75f729ead5bb0db48"
+    },
+    {
+      "name": "source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/Cargo.lock",
+      "sha256": "624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c",
+      "bytes": 252225,
+      "retained": "docs/spikes/evidence/physics-inert-islands/624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c.gz",
+      "retained_sha256": "c066d640de846f90fc421c505bc7f4ae957216f3dbd6afec3c07419b0208f6b9"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc",
+      "bytes": 564,
+      "retained": "docs/spikes/evidence/physics-inert-islands/4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc.gz",
+      "retained_sha256": "7ed7a4bcb142ab649f5ac80bae4e60b7e80a28abd3cf57b5a7f85363546b7971"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-islands/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-islands/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd",
+      "bytes": 6312,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd.gz",
+      "retained_sha256": "2fcdbf041b1d0058ed06008a99cba3866febc7b44ec16a59b7e3758b9bd385b5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz",
+      "retained_sha256": "22fd4278b32061f4a4916fcb42eebf5232e42656f4d8b9f78ca68d99364993e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/body_state/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/body_state/codec.rs",
+      "sha256": "d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a",
+      "bytes": 8261,
+      "retained": "docs/spikes/evidence/physics-inert-islands/d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a.gz",
+      "retained_sha256": "5ea4abb86060dccf76507838d4a0968dc380dae98297bd2c560d451236b258ad"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "74a9d68f0b27975eb8bfc56d5da3f6017f360d2c4a51b81a4323283ec4a9a71b",
+      "bytes": 4391,
+      "retained": "docs/spikes/evidence/physics-inert-islands/74a9d68f0b27975eb8bfc56d5da3f6017f360d2c4a51b81a4323283ec4a9a71b.gz",
+      "retained_sha256": "e52b0aa7f75ed3dffaa99c6ddad6b4b3cca907c5abd7b4cded10d4c093793422"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/body_state/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/body_state/validate.rs",
+      "sha256": "e6e319d5be06d1a4c2bc51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c",
+      "bytes": 4561,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e6e319d5be06d1a4c2bc51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c.gz",
+      "retained_sha256": "8c5100310b5d833b526060d33163e2aefb7a0ea2954da3533a3ef0e4bf06bf4a"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "retained": "docs/spikes/evidence/physics-inert-islands/86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435.gz",
+      "retained_sha256": "52c6530b76adb7b5df7dddb01957c17c421e97c91094f91a85a92be8c6991925"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-islands/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-islands/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "retained": "docs/spikes/evidence/physics-inert-islands/730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz",
+      "retained_sha256": "799de7df2e8e2d2532a546361950d2fcb81f113cdd2194afc7276e7a0609aa51"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "8d625c55268136ed64d6f18a3d5aee19db6b302b4346bb441754063cef7151e5",
+      "bytes": 4611,
+      "retained": "docs/spikes/evidence/physics-inert-islands/8d625c55268136ed64d6f18a3d5aee19db6b302b4346bb441754063cef7151e5.gz",
+      "retained_sha256": "797383bb055bf9b76b889c024f6abdfa547a634dccfd52e4162bd30e61fa9e65"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz",
+      "retained_sha256": "4daca488999b79813b8d0622153cf7bad0359494de2e3c4366065b0ded177de6"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "retained": "docs/spikes/evidence/physics-inert-islands/ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz",
+      "retained_sha256": "018627ff8c2bad3f01c6f68f90869b1eb796c3ec9e6e22109313350820474447"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "retained": "docs/spikes/evidence/physics-inert-islands/771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz",
+      "retained_sha256": "95692b802416ea70654f479fcc8ad52aa816757c8f1412ed20b21390506735c7"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-islands/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "retained": "docs/spikes/evidence/physics-inert-islands/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz",
+      "retained_sha256": "e0efb1a6f3a2801a8f5f8118736e218d164039f714aa8357dfe88f2bb86ac475"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "retained": "docs/spikes/evidence/physics-inert-islands/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz",
+      "retained_sha256": "51f79ac05ab4a561d9f3c453698de006a3af32e3b54ee67de79e11ef7d1226e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/island_state/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/island_state/codec.rs",
+      "sha256": "b553e1caba0e4d95710913c700b5e197e090fd55d7b6ffd173bceb7f81e47270",
+      "bytes": 7181,
+      "retained": "docs/spikes/evidence/physics-inert-islands/b553e1caba0e4d95710913c700b5e197e090fd55d7b6ffd173bceb7f81e47270.gz",
+      "retained_sha256": "7cd606b4185c864823439b06e19ee68b3113aa5d0617e1f2997e42f9caf72718"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/island_state/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/island_state/mod.rs",
+      "sha256": "e302d0689f442b3854b90e871f6a7ccbe2f890c726cc4a7c877ef7dbea81d356",
+      "bytes": 3119,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e302d0689f442b3854b90e871f6a7ccbe2f890c726cc4a7c877ef7dbea81d356.gz",
+      "retained_sha256": "402ce5c656164bd508a4c2b1c681acce110a42e0da9bc8f6235d2585fa14bd55"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/island_state/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/island_state/validate.rs",
+      "sha256": "69c4daacf90dc4a4ee9233632289f287549155db4bd555ef2850e53e5c9ed760",
+      "bytes": 9463,
+      "retained": "docs/spikes/evidence/physics-inert-islands/69c4daacf90dc4a4ee9233632289f287549155db4bd555ef2850e53e5c9ed760.gz",
+      "retained_sha256": "5b0310cc1bd8b96b1c20e6b2531e64ea60323343521f8132e5cca66e1bb1f774"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "2c8f7e641f6fe939d8be9c9746445d890fc66f89834f0913dc912c0b85549d7b",
+      "bytes": 2058,
+      "retained": "docs/spikes/evidence/physics-inert-islands/2c8f7e641f6fe939d8be9c9746445d890fc66f89834f0913dc912c0b85549d7b.gz",
+      "retained_sha256": "5043f78072b4f0e2ecab0e79a7dc409289af04eb365d61b273f2f8af3d2280d3"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "retained": "docs/spikes/evidence/physics-inert-islands/2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc.gz",
+      "retained_sha256": "017a075bfb75e587799124996af94d7e2206fee91da4a64617e8ef1bb44495aa"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "sha256": "a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22",
+      "bytes": 2537,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22.gz",
+      "retained_sha256": "fb78d429b0e58871cfd9dc680cc4d6049c43c5f6bd822cbb7de85707d496f10e"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "retained": "docs/spikes/evidence/physics-inert-islands/fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256.gz",
+      "retained_sha256": "0258ad74f7f31be8e97e9ae2e06e94c72b456f8143a5ca1d0091d14fdefc0ab5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-islands/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-islands/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-islands/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "retained": "docs/spikes/evidence/physics-inert-islands/ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz",
+      "retained_sha256": "f5d1cc08ac86b9a222fdd5365f8b21b1e78d3c8e00e62b685cc6e07b59614b07"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/body_state.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/body_state.rs",
+      "sha256": "3a6a4e970138b68e4aecf7e48c8eba60159601525df0ba60720db51980b7f135",
+      "bytes": 13389,
+      "retained": "docs/spikes/evidence/physics-inert-islands/3a6a4e970138b68e4aecf7e48c8eba60159601525df0ba60720db51980b7f135.gz",
+      "retained_sha256": "c564f74ff369b7155e418db0c35c5587b6a4a7cb5208e1ca86bf03c401606eee"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "retained": "docs/spikes/evidence/physics-inert-islands/79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz",
+      "retained_sha256": "1d5d6fdbc3407278563e7b624a70f6667b9fd27ab990c748075eb6d6f0ff3b06"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-islands/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "retained": "docs/spikes/evidence/physics-inert-islands/163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz",
+      "retained_sha256": "e2174b3374d44cc4e04dff90eed6cbdae38b707a3add41a8a6c416ef8c1c3eae"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/islands.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/islands.rs",
+      "sha256": "45ed38f17af142353b5fbc829816cfa5576ce504d4de017f545fc00ff1cf95d8",
+      "bytes": 12127,
+      "retained": "docs/spikes/evidence/physics-inert-islands/45ed38f17af142353b5fbc829816cfa5576ce504d4de017f545fc00ff1cf95d8.gz",
+      "retained_sha256": "aa21230741c49d3a47e1c93b6015128b9277bc702f631656b7298e445f55b653"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+      "bytes": 13804,
+      "retained": "docs/spikes/evidence/physics-inert-islands/c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9.gz",
+      "retained_sha256": "471dbb5fe5a863f79c04b284504d909cddecffa47dfff776b48fadecd812bb4b"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+      "bytes": 9879,
+      "retained": "docs/spikes/evidence/physics-inert-islands/2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a.gz",
+      "retained_sha256": "48576ffa835fcdc5f165f1cf859436cd7f4c637db29868fcc767b41dff492d8d"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/body_capture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/body_capture.rs",
+      "sha256": "d3e23b73c15e486d27d222c2470c2f09e70e444241f400844a7684a28c858571",
+      "bytes": 5584,
+      "retained": "docs/spikes/evidence/physics-inert-islands/d3e23b73c15e486d27d222c2470c2f09e70e444241f400844a7684a28c858571.gz",
+      "retained_sha256": "38b716a9e52e678823391b01e45fdffe45edb334929027972f8bb02f933a4e8b"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/body_fixture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/body_fixture.rs",
+      "sha256": "d5d7defe6f604e12dea355c97e42702c8a7dc809c04befedaaec44e0e4c01730",
+      "bytes": 2268,
+      "retained": "docs/spikes/evidence/physics-inert-islands/d5d7defe6f604e12dea355c97e42702c8a7dc809c04befedaaec44e0e4c01730.gz",
+      "retained_sha256": "b8aea8ae42a13000928a6345c4433482cf5d42e61b1d62d1fce88bc723ccda7a"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/island_capture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/island_capture.rs",
+      "sha256": "051367e268049c2cfe3c855ef1b071409dd1d94ca80d5628a68fc6c4b3a22fd4",
+      "bytes": 3340,
+      "retained": "docs/spikes/evidence/physics-inert-islands/051367e268049c2cfe3c855ef1b071409dd1d94ca80d5628a68fc6c4b3a22fd4.gz",
+      "retained_sha256": "3480f090ea855fba8c1db0f4a004815e545ab240e4cf238444461c57c931fbed"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/island_cases.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/island_cases.rs",
+      "sha256": "dbb55acfac72a259452e2bd71a0260c20ef91f0ea23f3ff1d4ce2358b8c5308d",
+      "bytes": 9921,
+      "retained": "docs/spikes/evidence/physics-inert-islands/dbb55acfac72a259452e2bd71a0260c20ef91f0ea23f3ff1d4ce2358b8c5308d.gz",
+      "retained_sha256": "dcdd792f5bcd12a6d2913743f3230999bf58a0762df76a71891b798e0419245f"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+      "bytes": 4776,
+      "retained": "docs/spikes/evidence/physics-inert-islands/44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716.gz",
+      "retained_sha256": "6500077b9b45625a4ab71dd1c6d351a521f9027059f0fe3e47facb2112efa043"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "retained": "docs/spikes/evidence/physics-inert-islands/599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d.gz",
+      "retained_sha256": "fcf02dab1d55a908ce7f0f9c299741dbbfad229d1c3ccf57716611d6c787e8f0"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "retained": "docs/spikes/evidence/physics-inert-islands/3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz",
+      "retained_sha256": "abf5226058381b564373e1497979d6558ea123d4ea69fa32c9ba33bbd174dcdf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "retained": "docs/spikes/evidence/physics-inert-islands/509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz",
+      "retained_sha256": "c83435a4f584fcff511afb55aa2b1f7d0db05041d3efda31c94b687a35fe75cd"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+      "sha256": "799e2c75c3252b3e53e1826fde731d1c9716fed44dc923722df0eab5f9e254ee",
+      "bytes": 13415,
+      "retained": "docs/spikes/evidence/physics-inert-islands/799e2c75c3252b3e53e1826fde731d1c9716fed44dc923722df0eab5f9e254ee.gz",
+      "retained_sha256": "ad45048b9bc1eb6c532d0e40c2c6fada891c38d70b82e98b1eb6e8dd4885fdb5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "retained": "docs/spikes/evidence/physics-inert-islands/6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz",
+      "retained_sha256": "6dc0cf3798d24c9c391ef44d7256974ce9fba372867fd09932cfc511f2b58b12"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "retained": "docs/spikes/evidence/physics-inert-islands/5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz",
+      "retained_sha256": "7c1a305ac22b703be8917c876c65eda6a58e55f26ba941b16239c1f5263f880a"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "35e8c177fb487b9ba17d04167808263b782c9e3a6e0de773af31b777b3b51d30",
+      "bytes": 33709,
+      "retained": "docs/spikes/evidence/physics-inert-islands/35e8c177fb487b9ba17d04167808263b782c9e3a6e0de773af31b777b3b51d30.gz",
+      "retained_sha256": "cecb200352d6b7f9abaaf8130bea916481c2cf471329d2d2ab0dc96a2c567059"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-islands/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/freeze.json",
+      "sha256": "e315598c6a403419f67e48ec22f5c8e3b46ccc63e6b673d790af4d9445632fd9",
+      "bytes": 18253,
+      "retained": "docs/spikes/evidence/physics-inert-islands/e315598c6a403419f67e48ec22f5c8e3b46ccc63e6b673d790af4d9445632fd9.gz",
+      "retained_sha256": "a09449c7d129b92c3f74e4a75763a18f48f0772ba75b86febd1e324b4a240888"
+    },
+    {
+      "name": "source-001/tracked.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/source-001/tracked.patch",
+      "sha256": "a64cae2ac3923f62abcf22875a09bffb752ea8ff8c744ee775c55ae5b95a4642",
+      "bytes": 13275,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a64cae2ac3923f62abcf22875a09bffb752ea8ff8c744ee775c55ae5b95a4642.gz",
+      "retained_sha256": "596cb5fd94fcebdbfe69cb49063cd9b5fd033b73bdc3022ef4ea5a547468eae3"
+    },
+    {
+      "name": "terminal-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/terminal-audit.json",
+      "sha256": "a967be58615ca3ef1ee441a9c1af8e4140f3585bd2370367e877a1fd3a0c1f6f",
+      "bytes": 35035,
+      "retained": "docs/spikes/evidence/physics-inert-islands/a967be58615ca3ef1ee441a9c1af8e4140f3585bd2370367e877a1fd3a0c1f6f.gz",
+      "retained_sha256": "932e181d1e5907f8c6e29375a417eb6343ae41d3e790b66b3acb5e9415680451"
+    },
+    {
+      "name": "tests-008.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-008.json",
+      "sha256": "d0102631da44efac8a241ddb0d4ba2b852b4fbed89ef2fa848e4bc1364a0aa5b",
+      "bytes": 1483,
+      "retained": "docs/spikes/evidence/physics-inert-islands/d0102631da44efac8a241ddb0d4ba2b852b4fbed89ef2fa848e4bc1364a0aa5b.gz",
+      "retained_sha256": "3cf47db754b6c7a137504101ad854ef2fbc8971c568b8e37b6a468c0dc8b4526"
+    },
+    {
+      "name": "tests-008.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-008.log",
+      "sha256": "acb8589777da17fa1b139228d517d4234a319476c0d1cc596e1c70b63a04ebef",
+      "bytes": 12836,
+      "retained": "docs/spikes/evidence/physics-inert-islands/acb8589777da17fa1b139228d517d4234a319476c0d1cc596e1c70b63a04ebef.gz",
+      "retained_sha256": "8c3a3158ac073a291e5ebf7e29001658996c817956fa1a5ff6650a4dd13f0f19"
+    },
+    {
+      "name": "tests-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-final.json",
+      "sha256": "27e872b233657369c5475e78d93df146baea914afb9e8458f6aac7617794c064",
+      "bytes": 1484,
+      "retained": "docs/spikes/evidence/physics-inert-islands/27e872b233657369c5475e78d93df146baea914afb9e8458f6aac7617794c064.gz",
+      "retained_sha256": "4eeef70479c3cacd86ef8a2598b4f9a10f00b1132c59ba74c82502f07c0e9ef8"
+    },
+    {
+      "name": "tests-final.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/tests-final.log",
+      "sha256": "bfb491e2af051e3e12ce4baded4aaf8571a3ebcdf6a88b522ce142ddc5f24757",
+      "bytes": 12699,
+      "retained": "docs/spikes/evidence/physics-inert-islands/bfb491e2af051e3e12ce4baded4aaf8571a3ebcdf6a88b522ce142ddc5f24757.gz",
+      "retained_sha256": "cff8572ec6b6d7625f8f074a3bbccd0182755ce9e83621a47a70a206fc1b2316"
+    },
+    {
+      "name": "wasm32-final.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/wasm32-final.json",
+      "sha256": "8cf910f39b036f79d148a34d4d16ecf6f76ced750e4a3ad8be030a9f4565e18f",
+      "bytes": 1545,
+      "retained": "docs/spikes/evidence/physics-inert-islands/8cf910f39b036f79d148a34d4d16ecf6f76ced750e4a3ad8be030a9f4565e18f.gz",
+      "retained_sha256": "9642c0e18b935c93a4050ed3a710402b8170e01b32aaccf0c4b63af5cb95b318"
+    },
+    {
+      "name": "wasm32-final.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-islands-001/wasm32-final.log",
+      "sha256": "40a61417decb590b439d066595e0cccdd97f2df205971ff1cd4a8b9ea799a5e2",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-islands/40a61417decb590b439d066595e0cccdd97f2df205971ff1cd4a8b9ea799a5e2.gz",
+      "retained_sha256": "faec0f18c6587b6de3d0740b618cfbee959f690ee2e73275ff7d4df6cadd1e53"
+    }
+  ],
+  "record_count": 120,
+  "payload_count": 106,
+  "independent_review": "pending",
+  "dependency_review": {
+    "body_final_receipt": "physics-inert-body-state-final-20261013.json",
+    "sha256": "dd28c87d1df24b51b563d826ba47880784af08d3ab2cb8755b5b8615d55f7b54"
+  },
+  "failures": [
+    {
+      "record": "native-001.json",
+      "cause": "Trusted observer incorrectly assumed tuple rather than named Index fields; corrected."
+    },
+    {
+      "record": "native-002.json",
+      "cause": "Initial validator incorrectly required nonempty awake container; real multi-component sleep leaves it empty."
+    },
+    {
+      "record": "native-diagnostic-001.json",
+      "cause": "Same native empty-awake state retained explicitly with body IDs."
+    },
+    {
+      "record": "native-004.json",
+      "cause": "New ball fixture unsupported by existing cuboid-only trusted observer; actual fixture changed to cuboids."
+    },
+    {
+      "record": "native-005.json",
+      "cause": "Real type change leaves Fixed active membership without persistent membership; hot endpoints defer splitting; expectations/validator corrected."
+    },
+    {
+      "record": "native-006.json",
+      "cause": "Two fixture expectation edits had not matched formatted source; remaining view/count assumptions corrected explicitly."
+    },
+    {
+      "record": "native-007.json",
+      "cause": "Final body removal preserves an earlier empty awake container; fixture asserted it disappeared, corrected."
+    }
+  ],
+  "limits": [
+    "Inert only: no Rapier Deserialize input, live construction, engine runtime dependency or PhysicsUnsupported admission change.",
+    "Complete body/collider/solver ownership and continued restored-world proof remain required.",
+    "External domain and completed-journal counts must be derived from the future checked owner, not trusted as labels.",
+    "Fixed bodies can retain active membership while persistent IDs are absent; manually sleeping members can stay in awake components.",
+    "Persistent disconnected components may remain joined with removal counts and pending split scheduling; no immediate-connectivity claim.",
+    "Sleep-scan skipped stamp buffer is not proven resettable at wrap; arithmetic model is supplementary, not native restoration.",
+    "Cooldown/removal counter overflow and executing solver-work admission remain future owner policies.",
+    "Solver buckets/colors/masks/hints/force-event state, complete collider/shape indexes, CCD/integration and retained scratch remain uncomposed.",
+    "No shipping, performance, reference phone, visual, GPU or release-gate claim."
+  ]
+}

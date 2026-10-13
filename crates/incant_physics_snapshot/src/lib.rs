@@ -17,6 +17,7 @@ mod geometry;
 mod geometry_codec;
 mod graph;
 mod graph_codec;
+mod island_state;
 mod pair_state;
 mod records;
 mod validate;
@@ -36,6 +37,7 @@ pub use geometry::*;
 pub use geometry_codec::{decode_geometry, encode_geometry};
 pub use graph::*;
 pub use graph_codec::{decode_graph, encode_graph};
+pub use island_state::*;
 pub use pair_state::*;
 pub use records::*;
 pub use validate::validate;
@@ -65,6 +67,8 @@ pub enum Error {
     Workspace,
     Body,
     UnsupportedBody,
+    Island,
+    UnsupportedIsland,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
