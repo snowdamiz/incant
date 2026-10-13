@@ -131,7 +131,7 @@ impl Renderer {
             Self::pipeline(&device, frame::HDR_FORMAT, adapter.get_info().backend)?;
         let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
         let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend)?;
-        let text = text::TextSystem::new(&device);
+        let text = text::TextSystem::new(&device, adapter.get_info().backend)?;
         let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend)?;
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]

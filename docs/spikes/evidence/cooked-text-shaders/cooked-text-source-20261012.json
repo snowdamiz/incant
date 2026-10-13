@@ -1,0 +1,143 @@
+{
+  "at": "2026-10-13T00:26:40.131817+00:00",
+  "reviewer": "Astra runtime_review",
+  "verdict": "Accepted within source-only fixed cooked world-text scope; no actionable correctness finding",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-text-source-001/freeze.json",
+    "sha256": "11073f52407a8c4dcab716b40934b59d57936fc3bdf6f21498eeae482f297e6e",
+    "base": "972a36f1141c4bad338674ea480a1cdc699d9b8a",
+    "sources": [
+      {
+        "path": "Cargo.lock",
+        "sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+        "bytes": 251963
+      },
+      {
+        "path": "Cargo.toml",
+        "sha256": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+        "bytes": 3374
+      },
+      {
+        "path": "crates/incant_render/Cargo.toml",
+        "sha256": "4fe32ec55351565e3364239065cd9686c85b2fa6be2fa9576f1e8671e1e6ed5f",
+        "bytes": 2197
+      },
+      {
+        "path": "crates/incant_render/build.rs",
+        "sha256": "b38f2652a2a6fdaac0af92cf887ab9ec877958219371cab8416d5b5948257031",
+        "bytes": 3863
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "sha256": "dd131d40086be9f9e4cc22aa03996adf1da4c83d3d1e8b1faa8beee2c0ed6b37",
+        "bytes": 16934
+      },
+      {
+        "path": "crates/incant_render/src/resource_error.rs",
+        "sha256": "734c702f09efb78c34502681a2e882fe580948e9793cc7a718f97b5f2e90630c",
+        "bytes": 2489
+      },
+      {
+        "path": "crates/incant_render/src/shader/native.rs",
+        "sha256": "fdfa44e416827890eead023bd5960bea4a04c203b2a87b7ec0dd48648b5a296f",
+        "bytes": 4815
+      },
+      {
+        "path": "crates/incant_render/src/sprites/sprite.wgsl",
+        "sha256": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+        "bytes": 2405
+      },
+      {
+        "path": "crates/incant_render/src/text/drawing.rs",
+        "sha256": "3051f05468556d4a8de810a13104057ea228ee84332db66ee273ee718a5eb965",
+        "bytes": 6268
+      },
+      {
+        "path": "crates/incant_render/src/text/geometry.rs",
+        "sha256": "6771378d16126429974a8b06925815da39fd9d891d89f198671b07a33649bd0e",
+        "bytes": 7965
+      },
+      {
+        "path": "crates/incant_render/src/text/mod.rs",
+        "sha256": "2765e32f7b0474dc4a5ec4657359b67eaf85585093423b680d6f6e10af9e5652",
+        "bytes": 17575
+      },
+      {
+        "path": "crates/incant_render/src/text/shader.rs",
+        "sha256": "9bf581c552681e05a948b3189d3b89c1faf2ea97752cfe13ca89d8ab9cfe459c",
+        "bytes": 822
+      },
+      {
+        "path": "crates/incant_render/src/text/shader/cooked.rs",
+        "sha256": "ebc9007a83ce347d115d94b03ea57dfd6161d8a15817cd253b6508fbf3ec07c6",
+        "bytes": 4600
+      },
+      {
+        "path": "crates/incant_render/src/text/text.wgsl",
+        "sha256": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+        "bytes": 2392
+      },
+      {
+        "path": "crates/incant_render/src/ui/ui.wgsl",
+        "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+        "bytes": 5172
+      },
+      {
+        "path": "crates/incant_shader_cook/Cargo.toml",
+        "sha256": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+        "bytes": 371
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+        "sha256": "f2f7f2b6a1b877ed71ab76ddd2471a1fcaa4b69b6da09562aa1a42b7429dd2bf",
+        "bytes": 8464
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+        "sha256": "73fe39feeece5f62afff8078a7208509d15634d0b5a08edf577d42d4a1e1c7f5",
+        "bytes": 13317
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+        "sha256": "0cec8937e591b7656b961d5888367899602cb91f615b7a80f90680e1d895c284",
+        "bytes": 4787
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/text.rs",
+        "sha256": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e",
+        "bytes": 5597
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/geometry.rs",
+        "sha256": "70a6a7d240e29944a22c945c51f3dd6b400a9a1a35d25a67794804b6f370e64d",
+        "bytes": 10013
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/text.rs",
+        "sha256": "7f50f4538d521fbeaad0b9a28aac42cce363644da18536b896fbf5ff3922b149",
+        "bytes": 2872
+      }
+    ]
+  },
+  "method": [
+    "Read full renderer pipeline extraction/private selector/host verifier and cook contract/emitter changes, new tests and unchanged WGSL/placement/draw context.",
+    "Rehashed all22 frozen inputs and compared7 unchanged lock/manifest/geometry/WGSL inputs against exact base.",
+    "No source changes, builds, GPU, pixels or native windows executed."
+  ],
+  "findings": [],
+  "checked": [
+    "Default/web WGSL route remains selected unless cooked-text native feature explicitly enabled; additive feature uses existing cooker/passthrough admission.",
+    "Frame80bytes at offset0/64 and glyph32bytes at0/16 verified against actual host types/entries; node64byte uniform retains dynamic offset and original256byte stride.",
+    "Contract requires exact2stages/4resource types and stage visibility, vertex index, two instance vec4 attributes, flattexel varying, uniform/storage distinction.",
+    "Metal instance vertex pulling buffer15/stride32 and length buffer2 follow frame0/node1; fragment frame0/atlas0/sampler0; no change to other family mappings.",
+    "Vulkan descriptors preserve group0frame/group1node/group2atlas and ImageQuery capability; HLSL b0frame/b1node/b2special, t0atlas/t1sampler indices with group2 key, same sampler heap mapping.",
+    "Render error propagates through TextSystem::new and Renderer initialization; no fallback to a partial mismatched stage pair.",
+    "Existing shader math, bounds policies, camera/transform application, premultiplied blending/depth and draw ranges unchanged; private artifacts remain engine-owned.",
+    "Tests cover modified uniform/frame/atlas/stage IO refusal, all-family reflected SPIR-V interfaces, emitted backend binding tokens and current embeddedsource/host agreement."
+  ],
+  "limits": [
+    "This is independent source review, not a rerun or final execution audit of producer CPU checks.",
+    "Actual Metal compiler result and native GPU/Claude appearance acceptance remain separately evidenced by their owners.",
+    "No DX12/Vulkan device, phone performance or completed shader migration claim."
+  ]
+}

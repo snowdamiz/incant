@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Cooked world-space text shaders — CPU and Metal compilation passed
+
+The fixed text shader path passes independent source review, 90 enabled CPU
+tests, Clippy, wasm32 compilation and 63 default library tests. Both generated
+stages compile and link with the actual Apple Metal toolchain. Existing WGSL,
+glyph placement, coverage and depth behavior are unchanged. Native GPU, Claude
+appearance and integration remain pending; this is not a rendering or device
+gate. [Scope and evidence](docs/spikes/cooked-text-shaders.md).
+
 ## Cooked screen-space UI shaders — CPU and Metal compilation passed
 
 The opt-in fixed UI shader family passes independent source review, 87 enabled
