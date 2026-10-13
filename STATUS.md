@@ -26,8 +26,7 @@ remain intact. 75 CPU tests and scoped Clippy/static-module/graph checks pass.
 A fresh source/map/build-deleted Core package completes 2,156 ticks at 48 kHz
 (1,724,800 frames), repeats exactly and matches the prior player for its first
 1,000 ticks. Eight actual process controls cover the old refusal, diagnostic PCM,
-and precise publication errors. Independent source and final execution reviews are accepted; publisher
-integration is pending. No whole-engine memory, native-window,
+and precise publication errors. Independent source and final execution reviews are accepted; PR181 is merged after the exact-head fast check. No whole-engine memory, native-window,
 GPU or device/performance gate is claimed.
 [Contract and evidence](docs/spikes/native-streaming-pcm.md).
 
@@ -37,7 +36,7 @@ The ordinary player stages bounded per-tick PCM and hashes incrementally. Curren
 validation passes 75 CPU tests and all eleven checks. A fresh source/map/build-deleted
 Core export passes eight actual process controls over the complete 2,156-tick route,
 with exact repeat PCM and preserved old prefix/no-clobber/diagnostic behavior.
-Final integration review is accepted; publication awaits the exact-head fast check. Native-window, device,
+Final integration review and the exact-head fast check passed; PR181 is merged. Native-window, device,
 performance and appearance gates remain separate. [Evidence](docs/spikes/native-pcm-main180.md).
 
 ## Whole native session restart — CPU shipping proof accepted
@@ -908,9 +907,10 @@ mode-aware developer/desktop export tools are merged; automatic editor worker
 selection and actual physics saves remain separate. Authored iOS archives are
 merged with actual simulator proof and qualified device-link evidence. The retained
 CPU worker and managed owner are merged through main179;
-whole-session restart is merged in main180. PCM shipping validation passed and PR181
-is pending its fast check. Both authored Android variants pass pre-PCM fresh archive
-and emulator proofs; final composed PCM validation remains pending. Phase 1 and the finished game
+whole-session restart is merged in main180 and bounded PCM in main181. Both authored
+Android variants pass preserved pre-PCM archive/emulator proofs; the final composed
+deterministic archive and both-mode mobile/target checks pass, with independent
+integration review pending. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
@@ -1890,3 +1890,13 @@ Mode-aware launch/export and editor process switching remain separate follow-on
 work. [Evidence](docs/spikes/physics-project-setting.md).
 
 - Authored Android CPU archive route: reviewed fresh-source admission and separate physics-aware exporter pass focused Rust/Python/Clippy checks. Both deterministic and fast ordinary shipping archives pass three source/cache/build/map-deleted ARM Android17/API37 processes each, exact per-field/native/PCM parity and fourteen boundary refusals; owned emulators cleanly removed. Independent final execution review is accepted; publisher integration remains pending. No minimum-OS/phone/performance/platform-host claim. See `docs/spikes/authored-android-project.md`.
+
+## Authored Android — composed main181 execution passed
+
+Seventeen current checks pass, including both-mode mobile tests and fast Android
+target compilation. A fresh deterministic archive passes three actual source-free
+ARM Android17/API37 processes with exact native logs, observations and PCM plus
+seven precise refusals. Owned emulator resources are removed. The earlier complete
+fast shipping proof stays explicitly pre-PCM; no later fast archive rebuild is
+claimed. Final independent review is pending. No phone/rendering/performance gate
+is approved. [Scope and evidence](docs/spikes/authored-android-main181.md).
