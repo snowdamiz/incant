@@ -78,6 +78,25 @@ independent source review is accepted. Claude 0062 accepted the producer Metal G
 GPU execution, other shader families and device performance requirements remain pending.
 [Scope and evidence](docs/spikes/cooked-sprite-shaders.md).
 
+## Authored iOS static Wasm — producer execution passed
+
+Ordinary iOS export now accepts one public captured Wasm scene module through
+pinned wasm2c and the existing native bulk runtime. Complete captured/bundle,
+explicit iOS destination, selected physics graph, five actual solver artifacts,
+shipping Rust codegen and target C commands are checked. Both physics families
+have simulator/device archives; twelve fresh C/Swift simulator processes match
+17,856 full-field scalars and 614,400 PCM bytes each after private source/cache/
+build/maps removal, and fifty-two exact refusals pass. Both device archives link
+unsigned with C/Swift; no device execution is claimed. The first simulator
+compiler output was reused after a reviewed observer-only correction, explicitly
+qualified rather than called a new build. A separate simulator teardown failure
+is retained; the complete retry passed without source/archive changes.
+Source/probe and final execution reviews are accepted; current-main
+integration remains pending. Android static Wasm, mixed per-entity TypeScript and
+static guest checkpoints remain refused. No phone, minimum-OS, performance,
+rendering, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-ios-wasm.md).
+
 ## Authored Core runtime bindings — merged in main185
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the
@@ -2023,6 +2042,16 @@ seven precise refusals. Owned emulator resources are removed. The earlier comple
 fast shipping proof stays explicitly pre-PCM; no later fast archive rebuild is
 claimed. Final independent review is accepted; publication awaits its fast check. No phone/rendering/performance gate
 is approved. [Scope and evidence](docs/spikes/authored-android-main181.md).
+
+## Authored iOS static Wasm — current-main proof complete
+
+Main185 composition retains Android TypeScript and explicitly refuses Android
+static modules. The frozen current source passes 62 cooker tests and scoped
+checks, two fresh simulator shipping archives, twelve actual C/Swift positives
+and fifty-two exact refusals with full native-oracle/log/PCM parity. Final
+independent integration review is accepted; publication awaits its fast check. Original device links remain
+producer-scoped; no phone, rendering or phase gate is claimed.
+[Current evidence](docs/spikes/authored-ios-wasm-main185.md).
 
 ## Windows checkpoint conformance split
 
