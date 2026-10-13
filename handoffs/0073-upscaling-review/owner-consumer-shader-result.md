@@ -2,9 +2,14 @@
 
 **Status: production shader source written. Not compiled, not run.**
 - The production source is `crates/incant_render/src/upscaling/resolve_owner.wgsl`
-  (`45a39859…`, 178 lines, ASCII).
-- It is alone in the isolated commit `f437deaa706e33285bae552a2ca8ea7b71269952`;
-  this document and the check follow in the next commit.
+  (`1744fdff7a3a5433790958c25baaadb50537bfab6753b2c1411d2cfcd51d5d9d`, 179 lines,
+  ASCII).
+- The shader is alone in two isolated commits, to be selected in order:
+  - `f437deaa706e33285bae552a2ca8ea7b71269952` added it (`45a39859…`);
+  - `9f3e6afbf9b96e5d0349593e7307d914218506cc` is the fallback-coordinate
+    correction below.
+
+  The checks and this document follow in separate commits.
 - No Cargo, Rust, build, target, GPU, image, screenshot or visual tuning was
   used, and no host or root source was edited.
 - Root compiles it, adds the host and cooker work, and alone schedules any GPU
@@ -23,6 +28,29 @@
 - Astra's qualifications, `temporal-owner-prescription5-correction-independent-20261013.json`
   (`36c54a78…`).
 
+## Correction after `1bb9ae18`: fallback coordinates
+
+**What the independent review found.** `45a39859` set
+`oldq=select(old,p,still)` before it knew whether persistence applied. So a
+static-camera pixel with motion under 1/256 px fell back to ordinary
+reprojection at texel P, not at its actual old position. That happened when:
+- global was set;
+- an owner had changed;
+- the own-texel record was malformed;
+- the own-texel history was rejected.
+
+Today's `resolve.wgsl` uses the actual old position in all of these.
+
+**Fix.**
+- Only the persistence branch reads `own=vec2i(p)`, with the same proof and the
+  same threshold.
+- Every fallback uses the original `oldq` line verbatim.
+- No other behaviour changed.
+
+**Qualification of earlier agreement.** The d90 reference `resolve()` and the
+`45a39859` transcription made the same snap, and the earlier replay and fuzz held
+no nonzero sub-1/256 displacement. So their agreement never covered this case.
+
 ## Base
 
 The shader extends `ace94f64` `resolve.wgsl` (`b8056325…`, also `613ee59a`), the
@@ -31,9 +59,10 @@ all-or-nothing variant and was not used. `common.wgsl` is identical in all three
 trees.
 
 Against `ace94f64`, the only changed lines are:
-- the three-output struct and signature;
-- `oldq` reading `select(old,p,still)`;
+- the three-output struct, the signature and the result initialiser;
 - the two history-loop lines, which add the record join.
+
+The `oldq` line is the original.
 
 Every other colour and depth line is kept verbatim.
 
@@ -94,8 +123,8 @@ There are no overrides and no other globals.
 
 **Static persistence: a separate branch with no anchor match.**
 - It requires all of:
-  - the camera-static flag and motion under 1/256 px; the pixel then reads only
-    texel P;
+  - the camera-static flag and motion under 1/256 px. Only this branch reads
+    texel P (`vec2i(p)`) directly;
   - no global flag;
   - a provable current support with no changed owner;
   - P inside the output with admitted colour, alpha 1, and depth matching the
@@ -104,7 +133,8 @@ There are no overrides and no other globals.
     table, overflow by class.
 - **Result:** `clean(mix(current, H_P, options.x))` with no clamp or reactive term,
   and record `A ∪ S ∪ R`.
-- **Otherwise** the pixel falls through to ordinary reprojection.
+- **Otherwise** the pixel falls through to ordinary reprojection at the actual
+  old position, using `resolve.wgsl`'s unchanged coordinates.
 
 **Ordinary reprojection.**
 - Each positive-weight tap inside the output that passes today's checks also
@@ -117,23 +147,38 @@ There are no overrides and no other globals.
 - The clamp adds every admitted 3×3 contributor to the record.
 - A malformed clamp contributor makes the record `(0,0)`.
 
-## Check: `repair-model/shader_v5_check.py` (`68c7d4ac…`)
+## Check: `repair-model/shader_v5_check.py` (`ac3e48fd…`)
 
 **Method.**
 - `shader()` is a statement-by-statement scalar transcription of the
   hash-pinned shader.
 - It runs against the hash-pinned d90 reference `resolve()` in
   `correction_v5.py`.
-- The output is `repair-model/results-shader-v5.json` (`c96e65d8…`).
+- Check 5 also uses a scalar transcription of the unchanged `ace94f64`
+  `resolve.wgsl` as its baseline.
+- The output is `repair-model/results-shader-v5.json` (`10e52a44…`).
 
-**Results.** All four checks pass.
+**Results.** All five checks pass.
 
 | Check | Result |
 |---|---|
-| Replay: every corrected-mode pixel of the d90 controls (clamp chain, four-record renormalisation, every exit, untracked, malformed and zero-weight pixels) | 15 pixels, all identical. The reference's static "drop" is the shader's single-tap current-only, with the same output. The d90 controls still pass. |
-| Seeded fuzz, 20,000 pixels | 0 mismatches and 0 non-canonical records. All nine paths are covered, including 712 persist and 1,212 reproject. |
+| Replay: every corrected-mode pixel of the d90 controls (clamp chain, four-record renormalisation, every exit, untracked, malformed and zero-weight pixels) | 15 pixels, all identical, with 0 sub-1/256 displacements. The reference's static "drop" is the shader's single-tap current-only, with the same output. The d90 controls still pass. |
+| Seeded fuzz, 20,000 pixels, with `still` consistent with displacement | 0 mismatches, 0 non-canonical records and 0 sub-1/256 displacements. All nine paths are covered, including 743 persist and 1,205 reproject. |
 | Shader-only conservatism | A texture changed bit alone turns persistence (0.835) into clamped reprojection (0.25). A header `highest` above 100000 still bounds IDs. Persistence proceeds without an anchor match. With global set, the ordinary tap needs one. |
 | Changed-table layout | All 100,000 IDs agree with set membership. |
+| Static-camera fallback coordinates, displacement 3/1024 px, history 0.0 at P and 1.0 at P+x | See the table below. |
+
+**Check 5 colours.** In every non-persisting case, the corrected taps are P with
+weight 1−3/1024 and P+x with weight 3/1024. Both `45a39859` and the d90 reference
+read P alone, with weight 1.
+
+| Case | Baseline `resolve.wgsl` | d90 reference / `45a39859` | Corrected |
+|---|---|---|---|
+| Global set (root's case 7) | 0.0526367 | 0.05 | 0.0526367: same taps, weights and colour as baseline |
+| Changed owner still in support | 0.0526367 | 0.05 | same as baseline |
+| Own-texel depth rejected | 0.95 | 0.5 (current only) | 0.95, same as baseline |
+| Malformed own-texel record | 0.0526… (no records) | 0.5 | 0.95: the same footprint, but P is refused by its record |
+| Complete proof | — | 0.05 (persist) | 0.05 (persist, P only) |
 
 ```
 python3 -I -B handoffs/0073-upscaling-review/repair-model/shader_v5_check.py \

@@ -13,6 +13,13 @@ d90b4aac corrected reference resolve() in correction_v5.py (sha-pinned):
      changed table, which the reference models as one set);
 plus shader-only conservative paths with explicit expectations, and the
 changed-table packing against set membership for every ID.
+
+Qualification: the d90 reference and the superseded shader 45a39859 both moved
+the ordinary fallback of a sub-1/256 px static-camera pixel onto texel P. Checks 1
+and 2 contain no nonzero sub-1/256 displacement (counted below), so their
+agreement says nothing about that case. Check 5 covers it against a scalar
+transcription of the unchanged ace94f64 resolve.wgsl: the fallback must use the
+actual old position, and only the persistence branch reads P directly.
 """
 import argparse
 import hashlib
@@ -27,7 +34,7 @@ sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", "..", ".."))
 SHADER_PATH = os.path.join(ROOT, "crates", "incant_render", "src", "upscaling", "resolve_owner.wgsl")
-SHADER_SHA = "45a39859021f3ad7968d2a134b9c0aca7e222c3fa0c0100c1f22715c0bc6a8c0"
+SHADER_SHA = "1744fdff7a3a5433790958c25baaadb50537bfab6753b2c1411d2cfcd51d5d9d"
 MODEL_PATH = os.path.join(HERE, "correction_v5.py")
 MODEL_SHA = "96464a75ff1ec84b32e400c953e5ab5b5b004f98a4d592a800a3ad5fc93c534f"
 
@@ -58,7 +65,8 @@ def pack(changed):
 
 
 # ----------------------------------------------- transcription of the shader
-def shader(sc, header_z=HIGHEST, header_c=None):
+def shader(sc, header_z=HIGHEST, header_c=None, superseded=False):
+    """superseded=True reproduces only the fallback coordinates of 45a39859."""
     changed = set(sc["changed"])
     words = pack(n for n in changed if 1 <= n <= MAX_OWNER)
     header_x = classes(changed) if header_c is None else header_c
@@ -196,23 +204,24 @@ def shader(sc, header_z=HIGHEST, header_c=None):
         out["path"] = "old_outside"
         return out
     expected = sc.get("expected", nearest)
-    still = (flags & 1) != 0 and sc.get("still", False)
-    if still:
-        oldbase, oldf = tuple(sc["p"]), (0.0, 0.0)
-    else:
-        o = sc["old"]
-        oldbase = (math.floor(o[0]), math.floor(o[1]))
-        oldf = (o[0] - oldbase[0], o[1] - oldbase[1])
-    prev = sc["prev"]
-    if still and (flags & 2) == 0 and provable and not support_changed and oldbase in prev:
-        c, a, z, rec = prev[oldbase]
+    # Scenario coordinates are pixel centres minus 0.5, so |old-p| is unchanged.
+    prev, o, own = sc["prev"], sc["old"], tuple(sc["p"])
+    near = abs(o[0] - own[0]) < 1.0 / 256.0 and abs(o[1] - own[1]) < 1.0 / 256.0
+    if (flags & 1) != 0 and (flags & 2) == 0 and near and provable and not support_changed and own in prev:
+        c, a, z, rec = prev[own]
         r = stored(rec)
         if admitted(c, a) and a >= 1.0 and compatible(z, expected) and r["ok"] \
                 and record_unchanged(r, support_classes, changed_classes):
             out.update(color=clean(mix(current, clean(c, a), OPT["blend"]), 1.0),
                        record=encode(with_record(fresh, r)), path="persist")
             return out
+    if superseded and (flags & 1) != 0 and near:
+        oldbase, oldf = own, (0.0, 0.0)                  # 45a39859 snapped its fallback to P
+    else:
+        oldbase = (math.floor(o[0]), math.floor(o[1]))
+        oldf = (o[0] - oldbase[0], o[1] - oldbase[1])
     history, mass, joined = 0.0, 0.0, fresh
+    out["taps"] = []
     for y in (0, 1):
         for x in (0, 1):
             weight = tap_weight(oldf, x, y)
@@ -223,11 +232,14 @@ def shader(sc, header_z=HIGHEST, header_c=None):
                 continue
             c, a, z, rec = prev[tap]
             if not admitted(c, a) or a < 1.0 or not compatible(z, expected):
+                out["taps"].append([list(tap), weight, "depth_or_color"])
                 continue
             r = stored(rec)
             if not provable or not r["ok"] or r["a"] != anchor_id \
                     or not record_admissible(r, support, support_classes, changed_classes):
+                out["taps"].append([list(tap), weight, "owner"])
                 continue
+            out["taps"].append([list(tap), weight, "accept"])
             history += clean(c, a) * weight
             mass += weight
             joined = with_record(joined, r)
@@ -258,6 +270,13 @@ def canonical(rec):
     return rec == [0, 0] or read(rec) is not None
 
 
+def sub_threshold(sc):
+    """Nonzero displacement under 1/256 px, where snapping to P would differ."""
+    o, p = sc.get("old"), sc["p"]
+    return o is not None and abs(o[0] - p[0]) < 1.0 / 256.0 and abs(o[1] - p[1]) < 1.0 / 256.0 \
+        and (o[0], o[1]) != (float(p[0]), float(p[1]))
+
+
 # ------------------------------------------------ 1. reference scenarios replayed
 def replay():
     seen = []
@@ -267,7 +286,8 @@ def replay():
         if mode == "corrected":
             mine = shader(sc)
             seen.append({"reference_path": ref["path"], "shader_path": mine["path"], "match": same(ref, mine),
-                         "record": mine["record"], "canonical": canonical(mine["record"])})
+                         "record": mine["record"], "canonical": canonical(mine["record"]),
+                         "sub_threshold_displacement": sub_threshold(sc)})
         return ref
 
     G["resolve"] = wrapped
@@ -276,7 +296,9 @@ def replay():
     finally:
         G["resolve"] = REFERENCE
     ok = all(oks.values()) and len(seen) > 0 and all(s["match"] and s["canonical"] for s in seen)
-    return ok, {"reference_controls_ok": oks, "pixels": len(seen), "results": seen}
+    return ok, {"reference_controls_ok": oks, "pixels": len(seen),
+                "sub_threshold_displacements": sum(s["sub_threshold_displacement"] for s in seen),
+                "results": seen}
 
 
 # ------------------------------------------------------------------- 2. fuzz
@@ -318,7 +340,7 @@ def fuzz_scenario(rng):
     return {"size": (4, 4), "src": {(x, y): texel() for y in range(4) for x in range(4)},
             "prev": {(x, y): previous() for y in range(4) for x in range(4)},
             "q": (rng.choice([0.5, 0.75, 1.0, 1.25, 1.5, 2.0]), rng.choice([0.5, 0.75, 1.0, 1.25, 1.5, 2.0])),
-            "p": p, "old": None if rng.random() < 0.03 else old, "still": not moving,
+            "p": p, "old": None if rng.random() < 0.03 else old, "still": old == (float(p[0]), float(p[1])),
             "flags": {"camera_static": rng.random() < 0.7, "global": rng.random() < 0.2},
             "changed": sorted(changed), "history": rng.random() < 0.97, "motion": rng.random() < 0.97,
             "inside": rng.random() >= 0.01}
@@ -326,9 +348,10 @@ def fuzz_scenario(rng):
 
 def fuzz(count=20000, seed=73):
     rng = random.Random(seed)
-    paths, mismatches, noncanonical = {}, [], 0
+    paths, mismatches, noncanonical, sub = {}, [], 0, 0
     for i in range(count):
         sc = fuzz_scenario(rng)
+        sub += sub_threshold(sc)
         ref, mine = REFERENCE(sc, "corrected"), shader(sc)
         paths[mine["path"]] = paths.get(mine["path"], 0) + 1
         # The reference names its static drop "drop"; the shader reaches the same
@@ -343,7 +366,8 @@ def fuzz(count=20000, seed=73):
         "outside", "all_clear", "not_one_surface", "history_disabled", "invalid_motion", "old_outside",
         "current_only", "persist", "reproject"))
     return ok, {"pixels": count, "seed": seed, "paths": dict(sorted(paths.items())),
-                "mismatches": mismatches, "noncanonical_records": noncanonical}
+                "mismatches": mismatches, "noncanonical_records": noncanonical,
+                "sub_threshold_displacements": sub}
 
 
 # --------------------------------------------------- 3. shader-only conservatism
@@ -398,13 +422,143 @@ def table_layout():
                                                 "max_vec4_index": MAX_OWNER >> 7}
 
 
+# ------------------------------------- 5. static-camera fallback coordinates
+def baseline(sc):
+    """ace94f64 resolve.wgsl (Kind::Upscale), unchanged: scalar color and depth."""
+    w_, h_ = sc["size"]
+
+    def clampt(t):
+        return (min(max(t[0], 0), w_ - 1), min(max(t[1], 0), h_ - 1))
+
+    out = {"color": 0.0, "depth": 0.0, "taps": []}
+    if not sc.get("inside", True):
+        return out
+    q = sc["q"]
+    base = (math.floor(q[0]), math.floor(q[1]))
+    f = (q[0] - base[0], q[1] - base[1])
+    anchor, nearest, same_surface, col = clampt(base), FAR + 1.0, True, 0.0
+    for y in (0, 1):
+        for x in (0, 1):
+            weight = tap_weight(f, x, y)
+            if weight <= 0.0:
+                continue
+            c, a, z, _ = sc["src"][clampt((base[0] + x, base[1] + y))]
+            col += clean(c, a) * weight
+            if not admitted(c, a) or a < 1.0 or z <= 0.0:
+                same_surface = False
+            if z > 0.0 and z < nearest:
+                nearest, anchor = z, clampt((base[0] + x, base[1] + y))
+    out["color"] = col
+    if nearest > FAR:
+        return out
+    for y in (0, 1):
+        for x in (0, 1):
+            if tap_weight(f, x, y) > 0.0:
+                same_surface = same_surface and compatible(sc["src"][clampt((base[0] + x, base[1] + y))][2], nearest)
+    if not same_surface:
+        return out
+    current = clean(col, 1.0)
+    out.update(color=current, depth=nearest)
+    if not sc.get("history", True) or not sc.get("motion", True) or sc.get("old") is None:
+        return out
+    expected, o, prev = sc.get("expected", nearest), sc["old"], sc["prev"]
+    oldbase = (math.floor(o[0]), math.floor(o[1]))
+    oldf = (o[0] - oldbase[0], o[1] - oldbase[1])
+    history, mass = 0.0, 0.0
+    for y in (0, 1):
+        for x in (0, 1):
+            weight = tap_weight(oldf, x, y)
+            tap = (oldbase[0] + x, oldbase[1] + y)
+            if not weight > 0.0 or tap not in prev:
+                continue
+            c, a, z, _ = prev[tap]
+            if not admitted(c, a) or a < 1.0 or not compatible(z, expected):
+                out["taps"].append([list(tap), weight, "depth_or_color"])
+                continue
+            out["taps"].append([list(tap), weight, "accept"])
+            history += clean(c, a) * weight
+            mass += weight
+    if not mass > 0.0:
+        return out
+    history = clean(history / mass, 1.0)
+    minimum = maximum = current
+    for y in (-1, 0, 1):
+        for x in (-1, 0, 1):
+            c, a, z, _ = sc["src"][clampt((anchor[0] + x, anchor[1] + y))]
+            if admitted(c, a) and a >= 1.0 and compatible(z, nearest):
+                minimum, maximum = min(minimum, clean(c, a)), max(maximum, clean(c, a))
+    reaction = min(max(abs(history - current) / OPT["scale"], 0.0), 1.0)
+    weight = OPT["blend"] * (1.0 - OPT["reactive"] * reaction)
+    out["color"] = clean(mix(current, min(max(history, minimum), maximum), weight), 1.0)
+    return out
+
+
+def fallback_coordinates():
+    """Static camera, displacement 3/1024 output px (under the 1/256 threshold),
+    contrasting own and neighbour history (0.0 and 1.0), clamp range [0, 1]. When
+    the persistence proof fails, ordinary reprojection must keep the actual old
+    position: bilinear weights 1-3/1024 and 3/1024, as in resolve.wgsl."""
+    d = 3.0 / 1024.0
+    ok, rows = True, {}
+    src = {(x, y): (0.5, 1.0, 10.0, 5) for y in range(4) for x in range(4)}
+    src[(0, 0)] = (0.0, 1.0, 10.0, 5)
+    src[(2, 2)] = (1.0, 1.0, 10.0, 5)
+    moved = {k: (c, a, z, w | HIGH_BIT) for k, (c, a, z, w) in src.items()}   # owner 5 changed
+    canon = G["record"](5, {5})
+    prev = {(x, y): (0.5, 1.0, 10.0, canon) for y in range(4) for x in range(4)}
+    prev[(1, 1)] = (0.0, 1.0, 10.0, canon)              # own texel P
+    prev[(2, 1)] = (1.0, 1.0, 10.0, canon)              # neighbour at +x
+
+    def sc(**k):
+        s = {"size": (4, 4), "src": src, "q": (1.0, 1.0), "p": (1, 1), "old": (1.0 + d, 1.0), "still": True,
+             "flags": {"camera_static": True, "global": False}, "changed": [], "prev": prev}
+        s.update(k)
+        return s
+
+    malformed, deep = dict(prev), dict(prev)
+    malformed[(1, 1)] = (0.0, 1.0, 10.0, [HIGH_BIT, 7])
+    deep[(1, 1)] = (0.0, 1.0, 12.0, canon)
+    lerp = mix(0.5, (1.0 - d) * 0.0 + d * 1.0, 0.9)    # bilinear history, no clamp
+    cases = [
+        ("global set (root case 7)", sc(flags={"camera_static": True, "global": True}), "equal", lerp),
+        ("changed owner still in support", sc(src=moved, changed=[5]), "equal", lerp),
+        ("own texel depth rejected", sc(prev=deep), "equal", mix(0.5, 1.0, 0.9)),
+        ("malformed own-texel record", sc(prev=malformed), "owner_gated", mix(0.5, 1.0, 0.9)),
+        ("complete proof persists from P only", sc(), "persist", mix(0.5, 0.0, 0.9)),
+    ]
+    for name, case, kind, expect in cases:
+        base, ref = baseline(case), REFERENCE(case, "corrected")
+        old, new = shader(case, superseded=True), shader(case)
+        row = {"baseline_resolve": base["color"], "d90_reference": ref["color"], "superseded_45a39859": old["color"],
+               "corrected": new["color"], "corrected_path": new["path"], "corrected_taps": new.get("taps"),
+               "superseded_taps": old.get("taps"), "corrected_record": new["record"]}
+        if kind == "equal":                              # identical to the unchanged resolve
+            good = new["color"] == base["color"] and new["depth"] == base["depth"] and new["taps"] == base["taps"] \
+                and abs(new["color"] - expect) <= 1e-15 and old["color"] == ref["color"] != new["color"]
+        elif kind == "owner_gated":                      # same footprint; P refused by its record
+            good = [t[:2] for t in new["taps"]] == [t[:2] for t in base["taps"]] \
+                and [t[2] for t in new["taps"]] == ["owner", "accept"] and abs(new["color"] - expect) <= 1e-15 \
+                and old["color"] == ref["color"] == 0.5 and old["path"] == "current_only"
+        else:                                            # persistence reads P alone
+            good = new["path"] == old["path"] == ref["path"] == "persist" \
+                and new["color"] == old["color"] == ref["color"] and abs(new["color"] - expect) <= 1e-15
+        if kind != "persist":
+            good = good and [t[:2] for t in new["taps"]] == [[[1, 1], 1.0 - d], [[2, 1], d]] \
+                and [t[:2] for t in old["taps"]] == [[[1, 1], 1.0]] and new["record"] == canon
+        row["ok"] = bool(good)
+        rows[name] = row
+        ok = ok and good
+    return ok, {"displacement_px": d, "threshold_px": 1.0 / 256.0, "cases": rows}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--out")
     args = parser.parse_args()
     checks, details = [], {}
     for name, fn in (("reference scenarios replayed", replay), ("seeded fuzz against reference", fuzz),
-                     ("shader-only conservative paths", conservative), ("changed-table layout", table_layout)):
+                     ("shader-only conservative paths", conservative), ("changed-table layout", table_layout),
+                     ("static-camera fallback coordinates", fallback_coordinates)):
         ok, detail = fn()
         checks.append({"check": name, "ok": bool(ok)})
         details[name] = detail

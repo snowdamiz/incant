@@ -1,7 +1,7 @@
 {
  "model": "0073 resolve_owner.wgsl transcription check",
  "python": "3.14.8",
- "shader_sha256": "45a39859021f3ad7968d2a134b9c0aca7e222c3fa0c0100c1f22715c0bc6a8c0",
+ "shader_sha256": "1744fdff7a3a5433790958c25baaadb50537bfab6753b2c1411d2cfcd51d5d9d",
  "reference_model_sha256": "96464a75ff1ec84b32e400c953e5ab5b5b004f98a4d592a800a3ad5fc93c534f",
  "checks": [
   {
@@ -19,6 +19,10 @@
   {
    "check": "changed-table layout",
    "ok": true
+  },
+  {
+   "check": "static-camera fallback coordinates",
+   "ok": true
   }
  ],
  "details": {
@@ -29,6 +33,7 @@
     "canonical_and_malformed": true
    },
    "pixels": 15,
+   "sub_threshold_displacements": 0,
    "results": [
     {
      "reference_path": "reproject",
@@ -38,7 +43,8 @@
       2147483653,
       7
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "drop",
@@ -48,7 +54,8 @@
       2147483653,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "reproject",
@@ -58,7 +65,8 @@
       2147483653,
       9
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "outside",
@@ -68,7 +76,8 @@
       0,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "all_clear",
@@ -78,7 +87,8 @@
       0,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "not_one_surface",
@@ -88,7 +98,8 @@
       0,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "history_disabled",
@@ -98,7 +109,8 @@
       2147483653,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "invalid_motion",
@@ -108,7 +120,8 @@
       2147483653,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "old_outside",
@@ -118,7 +131,8 @@
       2147483653,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "current_only",
@@ -128,7 +142,8 @@
       2147483653,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "history_disabled",
@@ -138,7 +153,8 @@
       0,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "history_disabled",
@@ -148,7 +164,8 @@
       0,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "history_disabled",
@@ -158,7 +175,8 @@
       0,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "current_only",
@@ -168,7 +186,8 @@
       2147483653,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     },
     {
      "reference_path": "drop",
@@ -178,7 +197,8 @@
       2147483653,
       0
      ],
-     "canonical": true
+     "canonical": true,
+     "sub_threshold_displacement": false
     }
    ]
   },
@@ -187,17 +207,18 @@
    "seed": 73,
    "paths": {
     "all_clear": 45,
-    "current_only": 12263,
+    "current_only": 12239,
     "history_disabled": 470,
     "invalid_motion": 424,
     "not_one_surface": 4223,
     "old_outside": 434,
     "outside": 217,
-    "persist": 712,
-    "reproject": 1212
+    "persist": 743,
+    "reproject": 1205
    },
    "mismatches": [],
-   "noncanonical_records": 0
+   "noncanonical_records": 0,
+   "sub_threshold_displacements": 0
   },
   "shader-only conservative paths": {
    "unchanged static pixel persists": {
@@ -225,7 +246,17 @@
      2147483653,
      0
     ],
-    "path": "reproject"
+    "path": "reproject",
+    "taps": [
+     [
+      [
+       1,
+       1
+      ],
+      1.0,
+      "accept"
+     ]
+    ]
    },
    "header highest above MAX_OWNER still bounds IDs": {
     "color": 0.25,
@@ -252,13 +283,203 @@
      2147483653,
      0
     ],
-    "path": "current_only"
+    "path": "current_only",
+    "taps": [
+     [
+      [
+       1,
+       1
+      ],
+      1.0,
+      "owner"
+     ]
+    ]
    }
   },
   "changed-table layout": {
    "ids_checked": 100000,
    "changed": 305,
    "max_vec4_index": 781
+  },
+  "static-camera fallback coordinates": {
+   "displacement_px": 0.0029296875,
+   "threshold_px": 0.00390625,
+   "cases": {
+    "global set (root case 7)": {
+     "baseline_resolve": 0.05263671874999999,
+     "d90_reference": 0.04999999999999999,
+     "superseded_45a39859": 0.04999999999999999,
+     "corrected": 0.05263671874999999,
+     "corrected_path": "reproject",
+     "corrected_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       0.9970703125,
+       "accept"
+      ],
+      [
+       [
+        2,
+        1
+       ],
+       0.0029296875,
+       "accept"
+      ]
+     ],
+     "superseded_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       1.0,
+       "accept"
+      ]
+     ],
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "changed owner still in support": {
+     "baseline_resolve": 0.05263671874999999,
+     "d90_reference": 0.04999999999999999,
+     "superseded_45a39859": 0.04999999999999999,
+     "corrected": 0.05263671874999999,
+     "corrected_path": "reproject",
+     "corrected_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       0.9970703125,
+       "accept"
+      ],
+      [
+       [
+        2,
+        1
+       ],
+       0.0029296875,
+       "accept"
+      ]
+     ],
+     "superseded_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       1.0,
+       "accept"
+      ]
+     ],
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "own texel depth rejected": {
+     "baseline_resolve": 0.95,
+     "d90_reference": 0.5,
+     "superseded_45a39859": 0.5,
+     "corrected": 0.95,
+     "corrected_path": "reproject",
+     "corrected_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       0.9970703125,
+       "depth_or_color"
+      ],
+      [
+       [
+        2,
+        1
+       ],
+       0.0029296875,
+       "accept"
+      ]
+     ],
+     "superseded_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       1.0,
+       "depth_or_color"
+      ]
+     ],
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "malformed own-texel record": {
+     "baseline_resolve": 0.05263671874999999,
+     "d90_reference": 0.5,
+     "superseded_45a39859": 0.5,
+     "corrected": 0.95,
+     "corrected_path": "reproject",
+     "corrected_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       0.9970703125,
+       "owner"
+      ],
+      [
+       [
+        2,
+        1
+       ],
+       0.0029296875,
+       "accept"
+      ]
+     ],
+     "superseded_taps": [
+      [
+       [
+        1,
+        1
+       ],
+       1.0,
+       "owner"
+      ]
+     ],
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "complete proof persists from P only": {
+     "baseline_resolve": 0.05263671874999999,
+     "d90_reference": 0.04999999999999999,
+     "superseded_45a39859": 0.04999999999999999,
+     "corrected": 0.04999999999999999,
+     "corrected_path": "persist",
+     "corrected_taps": null,
+     "superseded_taps": null,
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    }
+   }
   }
  }
 }
