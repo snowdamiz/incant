@@ -1,0 +1,215 @@
+{
+  "format": "incant-0067-case-ledger",
+  "packet": "0067-dynamic-resolution",
+  "budgets": {
+    "numeric_frame_attempts": 48,
+    "appearance_renders": 24,
+    "max_extent": [
+      960,
+      540
+    ]
+  },
+  "attempt_definition": "One call into the composed GPU consumer's accept (a composed game tick or a direct RenderInputConsumer::accept) or into RetainedScene::submit, including refusals that never reach the queue. Readback copies and the test-owned backlog copy submissions are not frames; they are recorded in the event logs.",
+  "timeouts_s": {
+    "listing": 60,
+    "regression_suite": 300,
+    "case": 120,
+    "appearance": 120
+  },
+  "regression_suites": {
+    "lib": "incant_render library unit tests (includes tests/{hdr_output,diagnostic_output,frame_graph})",
+    "model_gpu": "incant_render tests/model_gpu.rs",
+    "gpu_host-lib": "incant_render_gpu_host library unit tests (CPU mailbox tests; listed, no ignored cases expected)",
+    "gpu_host-game": "incant_render_gpu_host tests/game.rs",
+    "gpu_host-ui": "incant_render_gpu_host tests/ui.rs"
+  },
+  "cases": [
+    {
+      "name": "fixed_scales_ui_offset_viewport",
+      "attempts": 8,
+      "queue_frames": 8,
+      "extents": [
+        [
+          959,
+          539
+        ],
+        [
+          720,
+          405
+        ],
+        [
+          480,
+          270
+        ]
+      ],
+      "route": "composed game with UI (disabled, fixed 16/12/8) plus two disabled RetainedScene references at the internal sizes",
+      "injections": []
+    },
+    {
+      "name": "fixed_scales_reference_recheck",
+      "attempts": 2,
+      "queue_frames": 2,
+      "extents": [
+        [
+          720,
+          405
+        ],
+        [
+          480,
+          270
+        ]
+      ],
+      "route": "two disabled RetainedScene references at the internal sizes, compared with the appearance run's retained PNGs whose RGBA hashes equal run 1's disabled/12/8 receipts; UI boxes in physical pixels",
+      "injections": [],
+      "env": {
+        "INCANT_0067_FRAMES": "captures/appearance",
+        "INCANT_0067_OUT": "captures/recheck"
+      }
+    },
+    {
+      "name": "adaptive_paced_explicit_dispatch",
+      "attempts": 4,
+      "queue_frames": 4,
+      "extents": [
+        [
+          959,
+          539
+        ]
+      ],
+      "route": "composed game with UI, realistic adaptive policy, one explicit blocking poll after every tick",
+      "injections": [
+        "explicit test polls after each tick"
+      ]
+    },
+    {
+      "name": "adaptive_natural_cadence",
+      "attempts": 7,
+      "queue_frames": 7,
+      "extents": [
+        [
+          959,
+          539
+        ]
+      ],
+      "route": "composed game with UI, realistic adaptive policy, back-to-back ticks, host polls only",
+      "injections": []
+    },
+    {
+      "name": "delayed_delivery_resize_and_replacement",
+      "attempts": 7,
+      "queue_frames": 7,
+      "extents": [
+        [
+          960,
+          540
+        ],
+        [
+          800,
+          450
+        ]
+      ],
+      "route": "composed game, stepping policy, viewport resize then script despawn (scene replacement)",
+      "injections": [
+        "queue backlog before frames 1 and 4",
+        "acquire-time blocking poll in ticks 2 and 5",
+        "explicit test polls after ticks 3 and 6"
+      ]
+    },
+    {
+      "name": "drop_and_recreate_host",
+      "attempts": 3,
+      "queue_frames": 3,
+      "extents": [
+        [
+          960,
+          540
+        ]
+      ],
+      "route": "two composed games sharing one renderer; the first dropped with work outstanding",
+      "injections": [
+        "queue backlog before A frame 1",
+        "acquire-time blocking poll in B tick 1",
+        "explicit test poll"
+      ]
+    },
+    {
+      "name": "terminal_failures_and_late_callbacks",
+      "attempts": 4,
+      "queue_frames": 3,
+      "extents": [
+        [
+          960,
+          540
+        ]
+      ],
+      "route": "direct GpuRenderConsumer accept (RenderInputConsumer) with SceneInput from the CPU observer game",
+      "injections": [
+        "queue backlog before each first frame",
+        "acquisition refusal",
+        "presentation refusal",
+        "explicit post-failure poll"
+      ]
+    },
+    {
+      "name": "owner_contract_orthographic_lower_level",
+      "attempts": 10,
+      "queue_frames": 7,
+      "extents": [
+        [
+          959,
+          539
+        ],
+        [
+          720,
+          405
+        ],
+        [
+          800,
+          450
+        ]
+      ],
+      "route": "RetainedScene set_dynamic_resolution/submit/record_frame_time with the test's own completion callbacks",
+      "injections": [
+        "explicit invalid telemetry values (NaN, 0, -1, 10000.1)",
+        "refused staging, planning and encoding",
+        "explicit test polls"
+      ]
+    },
+    {
+      "name": "pixel_camera_bypass",
+      "attempts": 3,
+      "queue_frames": 3,
+      "extents": [
+        [
+          959,
+          539
+        ]
+      ],
+      "route": "composed game, authored pixel-perfect camera, disabled control vs stepping policy at 4/16",
+      "injections": [
+        "explicit test poll"
+      ]
+    }
+  ],
+  "total_attempts": 48,
+  "unallocated_attempts": 0,
+  "amendments": [
+    {
+      "at": "2026-10-13T04:00Z",
+      "ledger_sha256_before": "ef838c6c52bfbc24c49ac3ba284acc785d287b3c9ba42db36bee783e917a98c0",
+      "reason": "fixed_scales_ui_offset_viewport (run 1, 8 attempts, retained) excluded UI widgets and chose opaque control interiors in logical UI coordinates; with a camera viewport the existing UI contract maps the logical UI viewport onto the viewport rect (offset 37.5/21.25, scale 880.25/959 and 495.5/539), so the mapping and interior checks compared UI pixels. Its renderer receipts, 100% byte equality, chrome and UI-state checks are unaffected. The re-check repeats only the 75%/50% frames and references with physical boxes, funded by the 4 unallocated attempts; no other case changes budget.",
+      "added_case": "fixed_scales_mapping_recheck",
+      "attempts": 4
+    },
+    {
+      "at": "2026-10-13T04:06Z",
+      "ledger_sha256_before": "4f263a16edeabecf0ed886ff8c8030ad60c2d097a0ab7729b19bf798379bdd70",
+      "reason": "adaptive_natural_cadence (7 attempts, retained, verdict passed) delivered no completion: over 7 back-to-back ticks (6.3 ms) the host's own non-blocking polls never observed frame 1 complete, so the scale stayed 12/16 without samples. To retain real delivered measurements within the 48-attempt cap: (1) fixed_scales_mapping_recheck (never run) becomes fixed_scales_reference_recheck, 2 attempts, because the appearance run retained the 12/16 and 8/16 frames byte-identically (RGBA hashes equal run 1's receipts); (2) terminal_failures_and_late_callbacks drops its two post-failure accept attempts (no queue work; the regression suite's game.rs already asserts later ticks fail) and keeps 4; (3) adaptive_paced_explicit_dispatch adds 4 attempts with one explicit blocking poll after each tick.",
+      "removed_case": "fixed_scales_mapping_recheck",
+      "added_cases": [
+        "fixed_scales_reference_recheck",
+        "adaptive_paced_explicit_dispatch"
+      ]
+    }
+  ]
+}

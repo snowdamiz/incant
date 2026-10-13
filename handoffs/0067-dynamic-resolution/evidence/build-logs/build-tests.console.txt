@@ -1,0 +1,16 @@
+{
+ "frozen": {
+  "lib": "9730b93dbb8f31cab8f1b44172160a5e4fddc12c0f05b8aa726cf041b82ccc91",
+  "model_gpu": "a848f159845c6a90671c48d8899278f934d723b7ad68b133ef36e5dd5fcd3368",
+  "gpu_host-lib": "8438dfbfe1ddd9e338171cf443f319bdda017b15ca7cfd86b3c8c9ea011195ee",
+  "gpu_host-game": "6c115e14e322015206265251e2a693e9389844a56a79f1aa819a2953f0dce7e2",
+  "gpu_host-ui": "d0655f44b4b0ae3ef8e1a365e9082136bba3227d0986eb28646b9952ba477ca1"
+ },
+ "incant_render": [
+  "default,physics-deterministic"
+ ],
+ "incant_render_gpu_host": [
+  "default,physics-deterministic"
+ ]
+}
+exit 0

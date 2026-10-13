@@ -1,0 +1,244 @@
+{
+ "how": {
+  "argv": [
+   "/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/tools/cargo",
+   "metadata",
+   "--offline",
+   "--format-version",
+   "1",
+   "--manifest-path",
+   "/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/handoffs/0067-dynamic-resolution/tools/drs/Cargo.toml"
+  ],
+  "exit": 0,
+  "stderr": "warning: patch `tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/third_party/tao)` was not used in the crate graph\nhelp: Check that the patched package version and available features are compatible\n      with the dependency requirements. If the patch has a different version from\n      what is locked in the Cargo.lock file, run `cargo update` to use the new\n      version. This may also occur with an optional dependency that is not enabled.\n"
+ },
+ "repository_lock_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d",
+ "helper_lock_sha256": "1f8f3ce5f1a4125249b07f40c7f6d9f00c3f603a01a120646dd81cadc190aa1e",
+ "repository_packages": 963,
+ "helper_packages": 426,
+ "own_entries": [
+  [
+   "incant_0067_drs",
+   "0.0.1",
+   null
+  ]
+ ],
+ "own_dependencies": [
+  "incant_assets 0.0.1",
+  "incant_assets_runtime 0.0.1",
+  "incant_audio_runtime 0.0.1",
+  "incant_cook 0.0.1",
+  "incant_doc 0.0.1",
+  "incant_game_runtime 0.0.1",
+  "incant_input 0.0.1",
+  "incant_render 0.0.1",
+  "incant_render_authoring 0.0.1",
+  "incant_render_data 0.0.1",
+  "incant_render_game 0.0.1",
+  "incant_render_gpu_host 0.0.1",
+  "incant_render_native 0.0.1",
+  "incant_runtime 0.0.1",
+  "incant_script 0.0.1",
+  "incant_types 0.0.1",
+  "incant_ui 0.0.1",
+  "png 0.18.1",
+  "pollster 0.4.0",
+  "serde_json 1.0.151",
+  "sha2 0.10.9",
+  "tempfile 3.27.0",
+  "thiserror 2.0.21"
+ ],
+ "not_in_repository_lock": [],
+ "checksum_mismatches": [],
+ "dependency_edges_added": {},
+ "dependency_edges_dropped": {
+  "bumpalo 3.20.3": [
+   "allocator-api2 0.2.21"
+  ],
+  "cc 1.6.0": [
+   "jobserver 0.1.35",
+   "libc 0.2.190"
+  ],
+  "digest 0.10.7": [
+   "const-oid 0.9.6",
+   "subtle 2.6.1"
+  ],
+  "futures-channel 0.3.34": [
+   "futures-sink 0.3.34"
+  ],
+  "futures-util 0.3.34": [
+   "futures-channel 0.3.34",
+   "futures-io 0.3.34",
+   "futures-macro 0.3.34",
+   "futures-sink 0.3.34",
+   "memchr 2.8.3"
+  ],
+  "generic-array 0.14.7": [
+   "zeroize 1.9.1"
+  ],
+  "getrandom 0.4.3": [
+   "js-sys 0.3.103",
+   "rand_core 0.10.1",
+   "wasm-bindgen 0.2.126"
+  ],
+  "hashbrown 0.17.1": [
+   "serde 1.0.229",
+   "serde_core 1.0.229"
+  ],
+  "incant_assets 0.0.1": [
+   "incant_cmd 0.0.1",
+   "incant_text 0.0.1",
+   "incant_types 0.0.1"
+  ],
+  "incant_assets_runtime 0.0.1": [
+   "tempfile 3.27.0"
+  ],
+  "incant_audio_runtime 0.0.1": [
+   "incant_types 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_cook 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_audio_runtime 0.0.1",
+   "incant_cmd 0.0.1",
+   "incant_import 0.0.1",
+   "incant_source 0.0.1",
+   "incant_text 0.0.1",
+   "incant_ui 0.0.1",
+   "incant_wasm_cook 0.0.1",
+   "sha2 0.10.9",
+   "tempfile 3.27.0"
+  ],
+  "incant_doc 0.0.1": [
+   "automerge 0.12.0",
+   "loro 1.16.2"
+  ],
+  "incant_game_runtime 0.0.1": [
+   "incant_assets_runtime 0.0.1",
+   "incant_types 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_nav 0.0.1": [
+   "serde_json 1.0.151"
+  ],
+  "incant_render 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_cook 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_render_authoring 0.0.1",
+   "incant_render_native 0.0.1",
+   "incant_runtime 0.0.1",
+   "incant_shader_cook 0.0.1",
+   "serde_json 1.0.151",
+   "sha2 0.10.9",
+   "tempfile 3.27.0"
+  ],
+  "incant_render_game 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_assets_runtime 0.0.1",
+   "incant_audio_runtime 0.0.1",
+   "incant_script 0.0.1",
+   "incant_types 0.0.1",
+   "kira 0.12.5",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_render_gpu_host 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_assets_runtime 0.0.1",
+   "incant_audio_runtime 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_game_runtime 0.0.1",
+   "incant_input 0.0.1",
+   "incant_runtime 0.0.1",
+   "incant_script 0.0.1",
+   "incant_types 0.0.1",
+   "incant_ui 0.0.1",
+   "png 0.18.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_render_native 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_cook 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_types 0.0.1",
+   "png 0.18.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_script 0.0.1": [
+   "incant_anim 0.0.1",
+   "serde_json 1.0.151"
+  ],
+  "incant_text 0.0.1": [
+   "incant_assets_runtime 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_ui 0.0.1": [
+   "tempfile 3.27.0"
+  ],
+  "incant_wasm_dev 0.0.1": [
+   "incant_anim 0.0.1",
+   "incant_assets 0.0.1",
+   "incant_assets_runtime 0.0.1",
+   "incant_audio_runtime 0.0.1",
+   "incant_game_runtime 0.0.1",
+   "incant_input 0.0.1",
+   "incant_localization 0.0.1",
+   "incant_render_game 0.0.1",
+   "incant_render_native 0.0.1",
+   "incant_script 0.0.1",
+   "incant_types 0.0.1",
+   "incant_ui 0.0.1",
+   "incant_wasm_cook 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0",
+   "thiserror 2.0.21",
+   "wasmparser 0.258.3",
+   "wasmtime 49.0.2",
+   "wat 1.258.3"
+  ],
+  "incant_wasm_runtime 0.0.1": [
+   "incant-module 0.0.1",
+   "incant_anim 0.0.1"
+  ],
+  "kira 0.12.5": [
+   "cpal 0.18.2"
+  ],
+  "lazy_static 1.5.1": [
+   "spin 0.9.9"
+  ],
+  "naga 29.0.4": [
+   "petgraph 0.8.3"
+  ],
+  "objc2 0.6.5": [
+   "objc2-exception-helper 0.1.1"
+  ],
+  "objc2-core-foundation 0.3.2": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "objc2-foundation 0.3.2": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "semver 1.0.28": [
+   "serde 1.0.229",
+   "serde_core 1.0.229"
+  ],
+  "smallvec 1.16.2": [
+   "serde 1.0.229"
+  ],
+  "tracing 0.1.44": [
+   "tracing-attributes 0.1.31"
+  ],
+  "tracing-core 0.1.36": [
+   "valuable 0.1.1"
+  ]
+ },
+ "recorded": "2026-10-13T03:55:25.801161+00:00"
+}

@@ -1,0 +1,14 @@
+
+thread 'fixed_scales_ui_offset_viewport' (5774771) panicked at src/lib.rs:204:9:
+fixed_scales_ui_offset_viewport: ["F12 opaque UI control interiors equal the control", "F8 opaque UI control interiors equal the control", "12/16 frame equals nearest-texel expansion of its internal-size reference", "8/16 frame equals nearest-texel expansion of its internal-size reference", "focused opaque controls (with the focus ring) equal the control"]
+stack backtrace:
+   0: __rustc::rust_begin_unwind
+             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/std/src/panicking.rs:679:5
+   1: core::panicking::panic_fmt
+             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/panicking.rs:80:14
+   2: <incant_0067_drs::Verdict>::finish
+   3: drs_gpu::fixed_scales_ui_offset_viewport
+   4: <drs_gpu::fixed_scales_ui_offset_viewport::{closure#0} as core::ops::function::FnOnce<()>>::call_once
+   5: <fn() -> core::result::Result<(), alloc::string::String> as core::ops::function::FnOnce<()>>::call_once
+             at /rustc/b940084d7eb6a299eb4bfeb8e34901bc051e7ac4/library/core/src/ops/function.rs:250:5
+note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.

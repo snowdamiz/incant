@@ -1,0 +1,5 @@
+resolution_mailbox::tests::completed_ticket_destruction_cannot_cancel_a_new_callback: test
+resolution_mailbox::tests::cross_thread_completion_is_single_flight_and_consumed_once: test
+resolution_mailbox::tests::dropped_callback_and_retired_owner_do_not_fill_replacement_slot: test
+
+3 tests, 0 benchmarks

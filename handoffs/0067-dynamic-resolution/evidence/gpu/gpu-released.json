@@ -1,0 +1,15 @@
+{
+ "packet": "0067-dynamic-resolution",
+ "released_at": "2026-10-13T04:10:29.517419+00:00",
+ "children": 24,
+ "refusals": 0,
+ "numeric_attempts_reserved": 48,
+ "appearance_renders_reserved": 12,
+ "first_start": "2026-10-13T03:56:21.598266+00:00",
+ "last_end": "2026-10-13T04:09:42.380206+00:00",
+ "ledger_sha256": "cc7ebbecfb37bd0f0bc8930c32e6b7f6dcc67607b073ba603f684b2c414a822f",
+ "grant_sha256_at_release": "c7e00ed284956f48589b841084905a0a7ae9ea6964eb8945a7cd92757cf02df3",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "Release by 0067 for Astra; review-ready.json left untouched (only Astra writes it)."
+}

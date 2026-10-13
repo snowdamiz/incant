@@ -1,0 +1,88 @@
+warning: patch `tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/third_party/tao)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+    Checking libc v0.2.190
+    Checking incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_types)
+    Checking getrandom v0.3.4
+    Checking rand_core v0.9.5
+    Checking rand_chacha v0.9.0
+    Checking rand v0.9.5
+    Checking cpufeatures v0.2.17
+    Checking sha2 v0.10.9
+    Checking downcast-rs v2.0.2
+    Checking ulid v1.2.1
+    Checking dodgy_2d v0.5.5
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_2d)
+    Checking rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/third_party/rerecast)
+    Checking memmap2 v0.9.11
+    Checking fontdb v0.16.2
+    Checking incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_nav)
+    Checking cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/third_party/cosmic-text)
+    Checking incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_localization)
+    Checking parry3d v0.31.1
+    Checking incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_anim)
+    Checking bevy_ecs v0.19.1
+    Checking rapier3d v0.36.0
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_text)
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_physics_runtime)
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_assets_runtime)
+    Checking parry2d v0.31.1
+    Checking incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_input)
+    Checking parking_lot_core v0.9.12
+    Checking parking_lot v0.12.5
+    Checking kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/third_party/kira)
+    Checking rapier2d v0.36.0
+    Checking wgpu-hal v29.0.4
+    Checking incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_doc)
+    Checking incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_render_data)
+    Checking wgpu-core-deps-apple v29.0.4
+    Checking nix v0.31.3
+    Checking dispatch2 v0.3.1
+    Checking cpu-time v1.0.0
+    Checking errno v0.3.14
+    Checking rustix v1.1.5
+    Checking ctrlc v3.5.2
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_physics_2d_runtime)
+    Checking wgpu-core v29.0.4
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_runtime)
+    Checking incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_ui)
+    Checking incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_audio_runtime)
+    Checking incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_script)
+    Checking getrandom v0.4.3
+    Checking bevy_app v0.19.1
+    Checking incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_game_runtime)
+    Checking tempfile v3.27.0
+    Checking wgpu v29.0.4
+    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_render_native)
+    Checking incant_physics v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_physics)
+    Checking incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_assets)
+    Checking incant_core v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_core)
+    Checking incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_render_game)
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_render)
+    Checking incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_render_authoring)
+    Checking incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_cook)
+    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/crates/incant_render_gpu_host)
+    Checking incant_0067_drs v0.0.1 (/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant/.worktrees/0067-dynamic-resolution/handoffs/0067-dynamic-resolution/tools/drs)
+error: usage of `contains_key` followed by `insert` on a `BTreeMap`
+  --> src/bin/drs_appearance.rs:81:9
+   |
+81 | /         if !fixtures.contains_key(&(projection_name, ui)) {
+82 | |             fixtures.insert((projection_name, ui), Fixture::new(projection, ui)?);
+83 | |         }
+   | |_________^
+   |
+   = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#map_entry
+   = note: `-D clippy::map-entry` implied by `-D warnings`
+   = help: to override `-D warnings` add `#[allow(clippy::map_entry)]`
+help: try
+   |
+81 ~         if let std::collections::btree_map::Entry::Vacant(e) = fixtures.entry((projection_name, ui)) {
+82 +             e.insert(Fixture::new(projection, ui)?);
+83 +         }
+   |
+
+error: could not compile `incant_0067_drs` (bin "drs_appearance" test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+clippy exit 101
