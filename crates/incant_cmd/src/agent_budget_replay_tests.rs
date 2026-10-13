@@ -1,6 +1,29 @@
 use super::*;
 use incant_doc::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP};
 
+// Keep journal ownership inside one test child. A sibling process-recovery test
+// can otherwise fork while this thread owns the lock, briefly retaining that
+// descriptor after the bus is dropped and before the child exec closes it.
+fn isolated_replay(case: &str) -> bool {
+    let test = format!("journal::agent_budget_replay_tests::{case}");
+    if std::env::var("INCANT_CMD_REPLAY_TEST").as_deref() == Ok(test.as_str()) {
+        return false;
+    }
+    let output = std::process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", &test, "--test-threads=1", "--nocapture"])
+        .env("INCANT_CMD_REPLAY_TEST", &test)
+        .output()
+        .unwrap();
+    let stdout = String::from_utf8_lossy(&output.stdout);
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(output.status.success(), "{test}: {stdout}\n{stderr}");
+    assert!(
+        stdout.contains("test result: ok. 1 passed; 0 failed;"),
+        "exact replay case did not execute: {stdout}\n{stderr}"
+    );
+    true
+}
+
 /// Re-hash a real journal after changing the recorded authority. This proves
 /// refusal comes from authorization, rather than merely the integrity chain.
 fn rewrite_authority(path: &Path, actor: Actor, strip_commands: bool) {
@@ -33,6 +56,9 @@ fn rewrite_authority(path: &Path, actor: Actor, strip_commands: bool) {
 
 #[test]
 fn replay_refuses_nonuser_cap_changes_even_without_budget_commands() {
+    if isolated_replay("replay_refuses_nonuser_cap_changes_even_without_budget_commands") {
+        return;
+    }
     for actor in [
         Actor::agent("test-model", "journal-test"),
         Actor::import("importer"),
@@ -58,10 +84,11 @@ fn replay_refuses_nonuser_cap_changes_even_without_budget_commands() {
             drop(bus);
             rewrite_authority(&path, actor.clone(), strip_commands);
             let journal = std::fs::read(&path).unwrap();
-            assert!(matches!(
-                CommandBus::persistent(&path, initial),
-                Err(CommandError::AgentBudgetUserOnly)
-            ));
+            let actual = CommandBus::persistent(&path, initial).err();
+            assert!(
+                matches!(actual, Some(CommandError::AgentBudgetUserOnly)),
+                "actual replay error: {actual:?}"
+            );
             assert_eq!(std::fs::read(&path).unwrap(), journal);
         }
     }
@@ -69,6 +96,9 @@ fn replay_refuses_nonuser_cap_changes_even_without_budget_commands() {
 
 #[test]
 fn replay_refuses_nonuser_budget_commands_that_do_not_change_the_projection() {
+    if isolated_replay("replay_refuses_nonuser_budget_commands_that_do_not_change_the_projection") {
+        return;
+    }
     let directory = tempfile::tempdir().unwrap();
     let path = directory.path().join("journal.jsonl");
     let initial = Project::empty("No-op authority");
@@ -86,8 +116,11 @@ fn replay_refuses_nonuser_budget_commands_that_do_not_change_the_projection() {
     .unwrap();
     drop(bus);
     rewrite_authority(&path, Actor::agent("test-model", "journal-test"), false);
-    assert!(matches!(
-        CommandBus::persistent(&path, initial),
-        Err(CommandError::AgentBudgetUserOnly)
-    ));
+    let journal = std::fs::read(&path).unwrap();
+    let actual = CommandBus::persistent(&path, initial).err();
+    assert!(
+        matches!(actual, Some(CommandError::AgentBudgetUserOnly)),
+        "actual replay error: {actual:?}"
+    );
+    assert_eq!(std::fs::read(&path).unwrap(), journal);
 }
