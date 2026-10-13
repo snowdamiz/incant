@@ -1,406 +1,293 @@
-# 0070 result — combined SSAO + bloom: preparation revision 2
+# 0070 result — combined SSAO + bloom: analyzer acceptance repair
 
 ## Status
 
-**The revision 2 runner corrections are ready for root's source review.
-Nothing was executed on a GPU.**
+**The analyzer repair and the helper compile fix are ready for root's source
+review.** Root's supervised CPU build of the helper comes next.
 
-This session was preparation only. Nothing was built with Cargo. No target, GPU
-process, window, render, capture or grant was used. **I make no efficacy,
-appearance or visual-success claim.** No screenshots exist.
+This session was preparation only. I ran no Cargo or rustc, took no target or
+GPU lease, and rendered or captured nothing. **I make no efficacy, appearance
+or visual-success claim.** No screenshots exist.
 
 - **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort
   **max**, as configured and verified by root before this prompt. I cannot
   inspect the effort setting from inside the session.
-- **Previous result preserved:** it is kept verbatim as
-  `preparation-result-v1.md` (commit `767827b4`, byte-identical to `result.md`
-  at `2a6d884b`). It still describes the case plan, appearance set and
-  observation limits, which have not changed.
-- **Scope:** I fixed only root's four defects, and did no new source survey.
-  The Rust helper is unchanged; root reviews it separately.
-- **Blockers:** none for source review. The decisions for root are at the end.
+- **Earlier results:** the revision 2 result is in history at `1cb718f2`, and
+  v1 is still in `preparation-result-v1.md`.
+- **Blockers:** none for source review.
 
-## Root review revision 2: what changed
+## Root's revisions, acknowledged
 
-### 1. Shared native GPU lock
+**Revision 3 decisions.** I made no runner change for these.
 
-All device commands take the shared lock: `list`, `suite`, `case`,
-`appearance`, `retry` and `release`.
+- The precise-retry latch stays strict.
+- Reconcile takes only the packet lock.
+- CPU builds take only the packet lock.
+- The 45-minute ceiling stays wall-clock.
+- The four listings count within the 16 children.
 
-**Order.** Each command:
+**Supervised build outcome.** In root's evidence the engine test binaries
+compiled, and the helper failed with exactly three `E0689` errors at
+`composed.rs:108-110`: ambiguous `{float}` for `sqrt`, `atan2` and `asin`.
 
-1. takes `~/.codex/incant-evidence/native-gpu.lock` with `flock(2)`
-   `LOCK_EX|LOCK_NB`;
-2. then loads the grant;
-3. then takes this packet's `runner.lock`;
-4. holds both through preflight, reservation, launch, kill and wait,
-   completion and unlock (`runner.device_session`).
+- I listed `~/.codex/incant-evidence/0070-effects-build` and read only
+  `logs/build-helper.stderr` and the compiler messages in
+  `logs/build-helper.stdout`.
+- I did not modify that evidence.
 
-A busy lock refuses at once. Nothing is reserved, and the packet lock is never
-opened.
+**Root's runner commits are preserved untouched.**
 
-**Release by close only.** Locks are released by closing the descriptor,
-never by `LOCK_UN`. Every device child inherits the shared-lock descriptor.
+- `6b06c1c8` gives each build child its own scratch `TMPDIR`.
+- `bfecb8d6` resolves pruned-lock dependency edges by package identity.
+- `runner.py` still matches the hash in the review receipt (`a5adf3df…`).
 
-- An orphan that outlives a SIGKILLed runner therefore still holds the lock,
-  so no other packet can render beside it.
-- Verified with real processes: the orphan keeps the lock, and the lock frees
-  once the orphan is gone.
+**Other constraints honoured:**
 
-**Two-packet control.**
+- `lifecycle.py` is unchanged.
+- The generated helper `tools/effects/Cargo.lock` (sha256 `9dcff7a5…`) stays
+  untracked and uncommitted; the root `Cargo.lock` is untouched.
 
-- Packet A's child is running. Packet B's `list` refuses with "shared native
-  GPU lock", and B's evidence directory has no `ledger.jsonl` and no
-  `runner.lock`: it refused before its own lock and before any reservation.
-- After A completes, B runs.
-- A plain process holding the lock, as another tool would, also makes A
-  refuse with no new ledger record.
+**Review receipt.** I read
+`~/.codex/incant-reviews/effects-0070-fixtures-source-20261013.json`; its
+sha256 matches `64774dd5…`. Both of its findings are fixed below. Of the
+twelve files it hashes, only `analyze.py` and `composed.rs` changed.
 
-**The real lock file already exists.** It is 0 bytes, mode 0644, created at
-00:59 by another tool. I only listed it with `ls`; every control uses a
-scratch copy. On scratch files on this Mac, `flock` and POSIX `lockf` exclude
-each other in both directions. So the exclusion holds whichever of the two
-that tool uses.
+## Changes
 
-**Scope.** The lock is held per command. Packets can interleave between
-commands but never render concurrently.
+### 1. Compile fix (`tools/effects/src/composed.rs:106`)
 
-### 2. Failure latch
+`let (eye, at): ([f64; 3], [f64; 3]) = ([1.0, -0.55, 2.6], [1.25, -1.0, 0.4]);`
 
-Every completion now records `success` and `failure_reasons`. Success requires
-all of the following:
+Only the type annotation was added; the camera values are unchanged.
+`rustfmt` accepts it. It removes all three reported errors. rustc reports every
+type error in a crate before borrow checking, so typeck should now be clean.
+Later phases (borrow checking, lints, Clippy `-D warnings`) only run in root's
+supervised build.
 
-- the spawn gate opened;
-- exit 0, with no signal, timeout or interruption;
-- the group verified absent, with no survivors and the leader reaped;
-- no cleanup or recording error;
-- the frozen binary unchanged;
-- a valid verdict for the child's kind.
+### 2. Analyzer finding 1: inference, coverage, occlusion and furnace (`tools/analyze.py`)
 
-**Verdict validity by kind:**
+**`infer_k` now rejects instead of comparing.** It returns
+`(interval, None)` or `(None, reason)`. The reasons are:
 
-| Kind | Valid only when |
+| Reason | Meaning |
 |---|---|
-| `listing` | Exact name set, no duplicates, and the libtest count line equals the plan |
-| `suite` | Every planned test ran exactly once and reported `ok`, with no extras; `running N tests` and a single `test result: ok. N passed; 0 failed; 0 ignored` summary match |
-| helper (`case`, `appearance`) | Well-formed receipts for this case only, with no malformed lines; exactly one budget receipt (declared equals plan, 0 < frames ≤ declared, labels unique and equal to the frame count); exactly one verdict (no failures, a non-empty list of checks, all ok); `index.json` lists exactly the kept files, with matching hashes, byte lengths and PNG count, all within 960×540 |
+| `low_signal` | The diffuse signal is at most 0.02 linear |
+| `nonfinite` | A non-finite bound, or a strength that is not finite and positive |
+| `inverted` | A channel's low end is above its high end |
+| `empty` | The RGB channel intervals do not intersect |
 
-**Effect of a failure.** Any other outcome latches the packet. A child that
-never completed is a failure too. While latched, `gpu_checks` refuses all
-device work except a **precise retry**.
+**SSAO agreement passes only when all of the following hold:**
 
-**A precise retry** needs a root receipt, `incant-0070-retry-v2`, placed
-directly in the evidence directory. The receipt must:
+- every precondition is met;
+- the reference defines, and the readbacks compare, **every viewport-interior
+  pixel**;
+- no `nonfinite`, `inverted` or `empty` rejection occurred;
+- there is no disagreement and nothing is out of range;
+- the gate's declared occlusion is real. Occlusion gates must compare at least
+  1,000 reference-occluded pixels, and all of them. Absence controls
+  (`g_ao_skin_t0`, `g_ao_motion_far`) must have none.
 
-- carry `approved_by: root`, the grant's `source_commit` and a reason;
-- name a latched `original_label`, with the same kind and target as that
-  child;
-- for a suite, list a non-empty, duplicate-free subset of that child's failed
-  or missing tests.
+The old counts are kept: `pixels`, `agree`, `disagree`, `uninferable`,
+`out_of_range`, `reference_ambiguous`, `occluded_reference` and
+`first_disagreements`. These are added: `compared`, the `rejected` counts by
+reason, `occluded_compared`, `coverage_required`, `first_rejections`,
+`problems` and `preconditions`.
 
-**Retry limits:**
+**Minimum coverage is 100% of the interior** (277 × 157 = 43,489 pixels). It
+is fixed from the frozen geometry before any readback exists:
 
-- one retry per latched child;
-- each receipt is usable once;
-- at most 2 retries in total.
+- **The receiver fills the viewport.** It is 16 × 12 at z = −4, and at that
+  depth the visible half-extents are 3.82 × 2.19 in perspective and
+  6.99 × 4.00 in orthographic.
+- **The reference defines every interior pixel** of every declared scene. It
+  finds no background, silhouette or cut-edge ambiguity at any interior texel
+  centre. I computed this from the reference alone.
+- **The diffuse signal is far above the floor.** The white material's diffuse
+  term is about 0.67 linear, roughly 30× the 0.02 inference floor.
 
-**A passing retry does not unlatch** other work; that is decision 1.
+A faithful render therefore leaves no pixel uninferable.
 
-**Exit codes:** 0 for success, 1 when a child failed (latched), 2 when
-refused.
+**The occlusion floor of 1,000 pixels** only guards against a vacuous
+reference. The reference itself, again from geometry alone, marks this many
+pixels occluded:
 
-### 3. Ownership by exact identity
-
-**Spawn gate.**
-
-- The leader first runs this interpreter (`-I -S -B`), blocked on a pipe.
-- While it is alive, the runner reads its exact identity with `libproc`: pid,
-  kernel start time to the microsecond, and uid. `exec` keeps both the pid and
-  the start time.
-- The runner records the identity durably, then sends the exact constructed
-  environment through the pipe.
-- If the runner dies first, the trampoline exits 125 and the program never
-  executes.
-- A control runs `/usr/bin/env` through the gate and checks that it receives
-  exactly the constructed keys and values. A plain inheriting trampoline
-  would have added `__CF_USER_TEXT_ENCODING`; that is why the environment
-  travels through the pipe.
-
-**Live cleanup** never signals after a reap.
-
-- Exit is observed with `waitid(WNOWAIT)`. While the leader stays unreaped,
-  its PID, and therefore the PGID, cannot be reused.
-- Cleanup sends SIGTERM, waits the grace period, sends SIGKILL, waits until
-  no other member remains, records the survivors' exact identities, and only
-  then reaps the leader.
-- Members seen while the group runs are recorded durably as `member` records.
-
-**Reconcile** may signal a group only while a live member matches a retained
-exact identity.
-
-- Retained identities come from `spawned`, `member`, completion and earlier
-  reconcile records.
-- Once a member is proven, the other members belong to the same session
-  lineage and are adopted. A group cannot be recycled while a proven member
-  is alive and in it.
-- Otherwise reconcile signals nothing, records the unproven identities, exits
-  2, and the label stays blocked for root.
-- The old start-time heuristic is gone. So is the old killing of processes by
-  frozen-binary path; `release` still refuses while one runs.
-
-**Blocking.** A label is blocked until its group is verified absent: by a
-completion that is absent with no survivors, or by a reconcile with
-`resolved: true`. Every child, retries included, refuses while anything is
-blocked. A failed reconciliation or remaining survivors therefore never
-unblock anything.
-
-**Controls:**
-
-- **Recycled PGID:** a live, unrelated group whose members all started after
-  the reservation, with a recorded start one microsecond off. Reconcile
-  refuses, the process is still alive afterwards, and `case` and `release`
-  stay refused. After that process is gone, reconcile resolves without any
-  signal, and the latch remains.
-- **Survivors:** a real member left in its reaped leader's group blocks
-  everything. An unproven reconcile signals nothing and still blocks. Once
-  the member's exact identity is recorded, reconcile stops it.
-
-### 4. Budget
-
-The existing-regression ceiling is now **8,192 frames (combined 8,320)**. The
-other limits are unchanged:
-
-- 128 new frames;
-- 32 PNGs;
-- 16 serial children;
-- 45 minutes.
-
-The wide sprite test is back in the plan at its counted 6,264 frames, and the
-deferral mechanism (`DEFERRED` and `allow_deferred_tests`) is removed.
-`make_plan.py` now refuses unless every compiled ignored test runs exactly
-once.
-
-| Suite | Tests run | Existing frames | New frames |
-|---|---|---|---|
-| lib | 37 | 425 | 20 (the four new tests, emitter-position once) |
-| model_gpu | 50 | 7,595 (1,331 + wide 6,264) | 0 |
-| gpu_host-game | 5 | 40 | 0 |
-| gpu_host-ui | 2 | 32 | 0 |
-| **Total** | **94** | **8,092** of 8,192 (100 unallocated) | 20 |
-
-**New frames** total exactly 128:
-
-| Part | Frames |
+| Scene | Occluded pixels |
 |---|---|
-| New tests in the lib suite | 20 |
-| Numeric cases | 73 |
-| Appearance | 16 |
-| Retry reserve | 19 |
+| `white_slab`, perspective | 8,558 |
+| `white_slab`, orthographic | 7,075 |
+| `edge_slab` | 11,025 |
+| `mask_cutout` | 10,853 |
+| far controls | 0 |
 
-**Watchdogs are unchanged** and sum to 2,370 s, inside the 2,700 s limit.
-The `model_gpu` watchdog stays at 300 s. The same 50 ignored `model_gpu`
-tests, wide test included, finished in 49.43 s and 49.05 s under profile
-`ci`. That is about a 6× margin. The measurements come from the
-`evidence/test-render-gpu.txt` logs of handoffs 0054 and 0055. They are a
-calibration reference, not a measurement of this union.
+**Furnace precondition.** Every SSAO reference gate reuses bases. The specular
+basis is always a separately rendered black scene, the edge gate borrows
+`p_off_black`, and all nine geometry gates share `g_off_white` and
+`g_off_black`. So uniformity of both bases is now an enforced precondition of
+each gate, not just an observation, and each gate's result reports the
+uniformity of its bases.
 
-**No new permission:** this budget correction grants no GPU or target access.
+### 3. Analyzer finding 2: fail closed
 
-### Root's other notes, applied
+**Declared cases are required.** The five declared cases come from
+`plan.json` (`case-ssao_core`, `case-ssao_materials`, `case-ssao_geometry`,
+`case-lifecycle_drs`, `case-bloom_numeric`), and all 27 named gates always
+appear in the report.
 
-- **Half resolution:** this is accepted as canonical SSAO; no plan change.
-  `math.rs` gives the AO full-resolution attachments of the *internal* target,
-  so at 50% DRS the AO is half resolution and expands with the frame. That is
-  exactly what `lifecycle_drs` checks against internal-size references. I
-  make no full-resolution AO quality claim.
-- **Oversize refusal:** it stays covered by the CPU tests only.
-- **Cargo config inspection:** unchanged.
-- **New-frame cap and stop-on-failure:** the 128 cap is kept, and the latch
-  implements stop-on-failure.
+**Missing or bad evidence fails the dependent gates** with the reason
+retained, as a `missing` or `error` field and in the report's
+`cases[...].status`. This covers:
 
-## Identities to pin in the grants
+- a missing case directory or `index.json`;
+- an invalid index or a hash or length mismatch, which marks the case
+  `invalid` instead of crashing;
+- a missing frame.
 
-| Item | Value |
+The other gates still run, and their results are kept.
+
+**The overall verdict** passes only when every declared case is loaded and
+every declared gate passes. The report lists `missing_or_invalid_cases` and
+`failed_gates`.
+
+**The CLI always writes `analysis.json`** (create-new, never replaced) and
+prints a summary. Its exit status is:
+
+| Exit | Meaning |
 |---|---|
-| HEAD / tree | `68cfcbc42dc06d961ff20aec7d0951ed8f078a0a` / `214f54b05151e328a6b912982e330e36eb94970c` (this result commit adds only `result.md`, which does not change the helper digest or plan; re-read HEAD before granting) |
-| Engine inputs | Byte-identical to `b633f92d`: `git diff` over `crates Cargo.toml Cargo.lock rust-toolchain.toml .cargo third_party tools/cargo` is empty |
-| Helper digest | `4f6ea9bb8f47ffe3721c333d24fa7461c375748f0169432792d8746e977609e6` (19 files under `tools/`, now including `mutations.py`) |
-| `tools/plan.json` sha256 | `27ea7b4425100c8ec6786c02cc8da21b41c670ec2ff3824ed6c497d9ccf859cf` (format `incant-0070-plan-v2`; reproduced by `make_plan.py --check`) |
-| Repository `.cargo/config.toml` | `0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1` (unchanged) |
-| Toolchain | `rustc` 1.99.0 from `rust-toolchain.toml`; other releases refuse |
+| 0 | The analysis passed |
+| 1 | It failed; the report survives |
+| 2 | Usage error, or the report already exists |
 
-## Checks run this session (CPU only)
+**Numerical invariants stay separate from appearance.** The report states
+`appearance.judged_here = false`. The PNGs await my later appearance review,
+and their in-run invariants remain the helper's own verdict. Retry output
+directories are listed as not analysed.
 
-Commands ran from the worktree root at `68cfcbc4`. `python3` means
-`/opt/homebrew/bin/python3 -I -B` (3.14.8), and `tools/` means
+**Moved code is unchanged.** All 14 numerical helpers and the four constants
+are byte-identical to v1: the sRGB and tone curves, the interior, nearest
+expansion, projection, halo, centroid and identity helpers. The bloom, DRS,
+mixed-pane and identity gate bodies moved into named functions with the same
+arithmetic and thresholds.
+
+## Evidence (CPU only)
+
+Commands ran from the worktree root. `python3` means
+`/opt/homebrew/bin/python3 -I -B`, and `tools/` means
 `handoffs/0070-ambient-occlusion/tools/`.
+
+All of these ran at `c04c51a4`. The next commit, `6e5f2465`, changes only two
+docstring lines in `analyze.py`, and I re-ran the analyzer selftest there
+(exit 0).
 
 | Command | Result |
 |---|---|
-| `python3 tools/listing.py` | lib 127 / 37, model_gpu 51 / 50, gpu_host-game 6 / 5, gpu_host-ui 3 / 2: **94 ignored** |
-| `python3 tools/make_plan.py --check` | `plan.json matches the source-derived plan` |
-| `python3 tools/selftest.py` | **26 of 26 controls pass**, exit 0 (19 unit, 7 end-to-end). It also passed 26 of 26 at `c9ec91b1`; the unit run passed 19 of 19 before that |
-| `python3 tools/mutations.py` | **4 of 4 re-introduced defects caught**, exit 0 (listed below) |
+| `python3 tools/analyze.py --selftest` | Exit 0 in about 33 s. Details below |
+| `python3 tools/selftest.py` | **26 of 26 runner controls pass**, exit 0, with root's runner commits in place |
+| `python3 tools/mutations.py` | 4 of 4 re-introduced runner defects caught, exit 0 |
 | `python3 tools/ssao_reference.py --selftest` | Unchanged: flat [0, 0], near slab [5, 5], reversed normal [0, 0] in both projections |
-| `python3 tools/analyze.py --selftest` | Unchanged: 43,489 pixels agree per projection; 8,558 / 7,075 occluded; 457 disagreements per projection under the +2-ray perturbation |
-| `/opt/homebrew/opt/rustup/bin/rustfmt --edition 2024 --check tools/effects/src/lib.rs tools/effects/src/main.rs` | Exit 0 (no Cargo) |
-| `python3 -m py_compile` on the nine helper scripts | All compile. It wrote a gitignored `tools/__pycache__`, which I deleted |
+| `python3 tools/listing.py` | 94 ignored GPU tests |
+| `python3 tools/make_plan.py --check` | `plan.json matches the source-derived plan` |
+| `rustfmt --edition 2024 --check tools/effects/src/lib.rs tools/effects/src/main.rs` | Exit 0, via `/opt/homebrew/opt/rustup/bin/rustfmt`; no Cargo |
+| AST parse of the ten helper scripts | All parse |
 
-**The 26 controls:**
+**What `analyze.py --selftest` shows:**
 
-- **Unit:**
-  - porcelain parsing;
-  - environment allowlists;
-  - toolchain pin;
-  - the ceilings 8192/128/8320;
-  - blocked and latched state;
-  - packet and shared lock exclusivity;
-  - exact identity, including zombies;
-  - an exact environment through the gate;
-  - timeout;
-  - SIGTERM escalation;
-  - a grandchild killed before the reap;
-  - an `on_spawn` failure: the program never runs;
-  - SIGINT and SIGTERM to the runner;
-  - runner SIGKILL: the orphan is the recorded process and keeps the lock;
-  - runner SIGKILL before the gate: never executes;
-  - grant refusals;
-  - verdict classification: 10 outcome flaws, 5 completion flaws, 7 libtest,
-    4 listing and 14 helper-output variants;
-  - frozen-binary detection.
-- **End-to-end** (real runner commands, stand-in binaries, seven independent
-  evidence directories):
-  - main flow;
-  - two packets;
-  - missing-verdict latch with eight imprecise receipts;
-  - suite retry precision;
-  - runner SIGKILL, then reconcile and release;
-  - recycled PGID;
-  - survivors.
+- **Positive controls:**
+  - Synthetic white-slab readbacks agree on all 43,489 interior pixels: 8,558
+    occluded pixels compared in perspective, 7,075 in orthographic.
+  - A +2-ray perturbation is caught, with 457 disagreements per projection.
+  - Complete synthetic evidence for all five cases passes all 27 gates, and
+    `main` exits 0. That evidence includes:
+    - DRS references with a non-uniform pattern, so the expansion rule is
+      really exercised;
+    - halo rings for the bloom centroid and coverage gates;
+    - a 0.5-α pane;
+    - tone-curve field values.
+- **Negative controls, each failing for the stated reason:**
+  - empty inference (off equals spec): 0 compared, 43,489 `low_signal`;
+  - conflicting RGB: `empty` rejections;
+  - `nonfinite` (NaN and zero strength);
+  - `inverted` (off bytes 69..92 over a black pixel);
+  - below the specular floor: out of range, never agreement;
+  - inadequate coverage: a 600-pixel low-signal block with zero disagreements
+    still fails on coverage;
+  - a vacuous occlusion gate and an absence-control mismatch;
+  - a failed furnace precondition (one off pixel −1 code);
+  - a missing frame: only the edge gate fails, with "p_ao_edge absent";
+  - missing cases: every dependent gate fails, the bloom gates still pass,
+    and all 27 gates are reported;
+  - a tampered file: the case is `invalid`;
+  - the CLI on failing evidence exits 1 with `analysis.json` kept
+    (`pass: false`), and a second run exits 2 with the report byte-identical.
 
-**The four mutations.** Each is injected into the harness process only, and
-each made its control fail:
+**Before and after on the same inputs.** These were throwaway runs of the
+committed v1 analyzer (the HEAD version at the time), in a scratch directory
+I then deleted:
 
-| Mutation | Caught by |
-|---|---|
-| Per-packet lock instead of the shared lock | `e2e_two_packets` |
-| Failures never latch | `e2e_latch` |
-| Ownership by a start time within one second | `e2e_recycled`: "an unrelated group was signalled" |
-| Survivors or a failed reconcile unblock | `e2e_survivors` |
+| Input | v1 analyzer | Repaired analyzer |
+|---|---|---|
+| Every pixel uninferable | `pass: true` with `agree: 0` and `uninferable: 43489` | Fails: "coverage 0 of 43489", "0 of 8558 reference-occluded pixels compared" |
+| Four of five cases missing | `pass: true` on 3 gates; CLI exit 0, writing `pass: true` | Fails; CLI exit 1 with the report kept |
 
 **Hygiene:**
 
-- No process from any control or mutation survived (checked with `ps`).
+- No processes survive (checked with `ps`).
 - All scratch directories were removed.
 - Every write stayed inside the worktree.
-- The probes that informed the design ran on scratch files inside the packet
-  directory, which I deleted. They covered the `libproc` layout, `waitid`
-  WNOWAIT, the gate environment, and `flock` versus `lockf`.
+- `git status` shows only root's untracked generated helper `Cargo.lock`.
 
-## Limitations and residual risks
+## Identities
 
-- **Runner SIGKILL stays uncatchable.** Its effects are bounded:
-  - The orphan keeps the shared lock, its identity is recorded, and
-    everything refuses until reconcile proves and stops it.
-  - A SIGKILL before the gate opens means the program never runs.
-- **Residual races**, documented rather than solved:
-  - **Proof-to-signal window:** reconcile signals in the microseconds after
-    its proof. A recycled number would need the sequential PID allocator to
-    wrap to the same number in that window.
-  - **Escaped processes:** a process that leaves the group with
-    `setpgid`/`setsid` escapes group signalling and the group check. While it
-    keeps the inherited shared-lock descriptor, every device command refuses.
-    If it was observed (membership is polled every 0.5 s), `release` also
-    refuses while it lives. One that was never observed and closes the
-    descriptor is invisible to the runner.
-- **Platform:** macOS only (`libproc` via `ctypes`, `waitid(WNOWAIT)`).
-  Elsewhere it refuses before reserving. The leader starts as Python, so each
-  child pays one short interpreter start; the whole `normal` control,
-  including the gate, took 0.04 s.
-- **The 45-minute ceiling is wall-clock from the first child**, so idle time
-  between commands counts (decision 4).
-- **Retry budget:** a retry must fit the remaining budget.
-  - An existing test fits only if it is at most 100 frames.
-  - `ssao_core` (20 frames) fits within the 19-frame reserve only if some
-    planned child did not run.
-- **Still never executed:**
-  - The runner's `build` path: its Cargo steps, binary freezing, feature
-    extraction and the real Cargo config audit run first under a build
-    grant.
-  - The Rust helper has never been compiled or run through Clippy.
-- **Carried over from v1 unchanged:**
-  - the raw AO attachment is not publicly observable, so it is inferred from
-    readbacks against the f64 reference;
-  - emission is capped at 1;
-  - only Metal is expected, with no phone or performance claim;
-  - temporal upscaling, MetalFX, GPU timestamps, cooked SSAO and bloom,
-    native default exposure, profiling subpass entries, device budgets and
-    complete Phase 1 rendering all stay pending.
+| Item | Value |
+|---|---|
+| HEAD / tree | `6e5f2465d11d0b3b95b2aa0bd5e41e1019f5a0fa` / `162d932c2d1614f7ec3525dc4fe1542ba5c5aee4` (this result commit adds only `result.md`; re-read HEAD before granting) |
+| Engine inputs | Byte-identical to `b633f92d` |
+| Helper digest | `66d18150f62e98ad3a89bf6319663b314324f2d043385ade2867541740174709` (19 files; excludes the generated lock) |
+| `tools/plan.json` | `27ea7b4425100c8ec6786c02cc8da21b41c670ec2ff3824ed6c497d9ccf859cf` (unchanged) |
+| `tools/analyze.py` | `16ec434de72b27163958445b4a694d819b92ffffd7f420714811864c6ec67445` |
+| `tools/effects/src/composed.rs` | `fccb7f0935650039d206db36cd69e6edea415b4591c868c6b76537594d24f139` |
+| `tools/runner.py` (root) | `a5adf3df71793090c03fa94e929e42eaea286ec5890119e189c19413d77c0189` (unchanged since review) |
+| `tools/lifecycle.py` | `574db13f25dc27939b99becb7fdb5272b6b5734bcda694487d1e42b127e764a0` (unchanged) |
 
-## Proposed check list for root
+## Limitations and remaining checks
 
-1. **CPU, no grant:** the commands above, including `selftest.py` and
-   `mutations.py`. Run them only with the helpers committed.
-2. **Under a build grant** (`incant-0070-build-grant-v1`):
-   `runner.py build --grant <evidence>/build-grant.json`. This step includes
-   helper Clippy with `-D warnings`, the toolchain pin, the Cargo config
-   audit and the feature identity. Then run `runner.py release-build`.
-3. **Under a GPU grant** (`incant-0070-gpu-grant-v1`), in this order:
-   1. `list` four times;
-   2. `suite` four times;
-   3. `case` five times;
-   4. `appearance`;
-   5. `release`;
-   6. then `analyze.py <evidence>`, followed by my appearance review.
+- **The helper has still never compiled.** The fix removes the only three
+  errors rustc reported. Borrow checking, lints and Clippy `-D warnings` first
+  run in root's supervised CPU build.
+- **The analyzer controls are synthetic.** They prove the acceptance logic,
+  not any GPU result.
+- **Two deliberate fail-closed choices** await their first real evidence:
+  - **Full coverage:** if a faithful render leaves any interior pixel
+    uninferable, the SSAO gates fail. That would mean the fixture assumptions
+    are wrong, and the counts are retained for review.
+  - **Strict furnace uniformity:** if the off or spec bases are not exactly
+    uniform, for example because of view-dependent specular or dithering,
+    every SSAO reference gate fails at the precondition. The distinct values
+    are reported.
+- **Retry outputs are not analysed.** The analyzer reads the original case
+  labels; after a root-authorized retry, which outputs count needs root's
+  decision.
+- **Still pending:** the GPU run, my appearance judgment, and everything v1
+  and v2 list as pending:
+  - cooked SSAO and bloom;
+  - native default exposure;
+  - profiling subpass entries;
+  - TAA and upscaling;
+  - device budgets;
+  - complete Phase 1 rendering.
+- **Remaining checks for root:**
+  1. source review of `c04c51a4` and `6e5f2465`;
+  2. a fresh supervised CPU build (helper compile and Clippy);
+  3. review of the exact binaries;
+  4. then the GPU grant and instruction.
 
-   Any failure stops the run until root decides. If a run is lost, use
-   `reconcile --grant <grant>`; it accepts the build or the GPU grant.
+## Changed paths and commits
 
-Grant and retry receipt shapes:
+- **`c04c51a4`:** `handoffs/0070-ambient-occlusion/tools/analyze.py`
+  (rewritten acceptance logic and controls) and
+  `handoffs/0070-ambient-occlusion/tools/effects/src/composed.rs` (one type
+  annotation).
+- **`6e5f2465`:** `tools/analyze.py`, a more precise coverage-basis
+  docstring, nothing else.
+- **This result commit:** `handoffs/0070-ambient-occlusion/result.md`.
 
-```json
-{"format": "incant-0070-gpu-grant-v1", "packet": "0070-ambient-occlusion", "kind": "gpu",
- "source_commit": "<HEAD>", "plan_sha256": "27ea7b44…", "helper_digest": "4f6ea9bb…",
- "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0070", "build_record_sha256": "<build.json>",
- "expected_backend": "Metal"}
-{"format": "incant-0070-retry-v2", "packet": "0070-ambient-occlusion", "approved_by": "root",
- "source_commit": "<HEAD>", "original_label": "suite-lib", "kind": "suite", "target": "lib",
- "tests": ["<exact failed test>"], "reason": "<why>"}
-```
-
-## Decisions for root
-
-1. **Latch strictness:** a passing precise retry does not unlatch other
-   children. Continuing after any failure needs a packet revision, because
-   the runner has no resume switch. Confirm, or request a root resume
-   receipt.
-2. **Reconcile lock:** reconcile takes only the packet lock, because its
-   orphan may hold the inherited shared lock. It starts no program. Confirm.
-3. **Build lock:** the build lease does not take the shared GPU lock, since
-   it renders nothing. Confirm.
-4. **Ceiling clock:** the 45-minute ceiling counts wall-clock time from the
-   first child, idle time included. Confirm, or switch to summed child time.
-5. **Child count:** the four `--list` launches count toward the 16 children.
-   This was v1's B2, still unanswered.
-
-## Changed paths
-
-All under `handoffs/0070-ambient-occlusion/`:
-
-- **New:**
-  - `preparation-result-v1.md` (verbatim v1);
-  - `tools/mutations.py`.
-- **Rewritten:**
-  - `result.md`;
-  - `tools/ledger.py`, `tools/lifecycle.py`, `tools/runner.py`,
-    `tools/selftest.py`.
-- **Edited:**
-  - `tools/common.py` (the shared-lock path);
-  - `tools/make_plan.py`;
-  - `tools/plan.json`.
-- **Unchanged:** `listing.py`, `ssao_reference.py`, `analyze.py` and the Rust
-  helper `tools/effects/`.
-
-**Commits:** `767827b4`, `c9ec91b1` and `68cfcbc4`, plus this result, all
-with `Built-by: claude`. Root's brief commit `41135eaa` was not touched. No
-engine, repository manifest or CI file changed. Nothing was pushed or merged.
+All three commits carry `Built-by: claude`. Nothing was pushed or merged.
