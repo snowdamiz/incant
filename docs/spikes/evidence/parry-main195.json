@@ -4886,5 +4886,13 @@
     "Producer Miri experiments remain failed and qualified; this is no clean Miri gate, complete dependency soundness audit, shipping/performance/device claim, or physics-save admission.",
     "Read-only clone reused only external build dependencies after local workspace products were removed. No graphics, native window, or shipping package was executed."
   ],
-  "review_state": "Independent current-main acceptance pending"
+  "review_state": "Independent current-main acceptance pending",
+  "integration_seams": {
+    "path": "docs/spikes/evidence/parry-main195/integration-seams.patch.gz",
+    "encoding": "gzip",
+    "sha256": "f5b7a74244e78ed2a74ae83bdab299454cb0fee3570e6c9acf89fff7a411d8e2",
+    "raw_sha256": "f7866864b071803f189d2c569f56241a9c560eb52685ddde2eae4b2f3a295fce",
+    "raw_bytes": 3232
+  },
+  "packaging_previous_manifest_sha256": "42c943bec0898d0a4ebdc987168a2cbf666c70d332481a87026b4e47fdcf3732"
 }
