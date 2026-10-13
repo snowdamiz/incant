@@ -14,6 +14,7 @@ def load(name):
 
 probe = load('run')
 hosts = load('compare_hosts')
+features = load('features')
 
 
 class PhysicsParity(unittest.TestCase):
@@ -70,6 +71,44 @@ class PhysicsParity(unittest.TestCase):
             hosts.compare_hosts(reports)
         with self.assertRaisesRegex(ValueError, 'each desktop OS'):
             hosts.compare_hosts([reports[1]] * 3)
+
+
+class PhysicsFeatureIdentity(unittest.TestCase):
+    def row(self, solver='rapier3d', flags='enhanced-determinism,parallel', path=None):
+        path = path or features.ROOT / 'third_party' / solver
+        return f'{solver} v0.36.0 ({path})|{flags}'
+
+    def test_exact_local_patches_and_repeated_units_keep_target_policy(self):
+        for solver in ('rapier2d', 'rapier3d'):
+            for target in features.TARGETS:
+                flags = {'enhanced-determinism'}
+                if target != 'wasm32-unknown-unknown':
+                    flags.add('parallel')
+                row = self.row(solver, ','.join(sorted(flags)))
+                self.assertEqual(features.solver_features(row + '\n' + row + ' (*)', solver, target), flags)
+
+    def test_wrong_version_registry_and_same_named_external_path_refused(self):
+        row = self.row()
+        for bad in (row.replace('v0.36.0', 'v0.36.1'),
+                    'rapier3d v0.36.0|enhanced-determinism,parallel',
+                    self.row(path=features.ROOT / 'untrusted' / 'rapier3d')):
+            for text in (bad, row + '\n' + bad):
+                with self.subTest(text=text), self.assertRaisesRegex(ValueError, 'package/version/path'):
+                    features.solver_features(text, 'rapier3d', features.TARGETS[0])
+
+    def test_conflicting_units_and_missing_solver_refused(self):
+        with self.assertRaisesRegex(ValueError, 'conflicting'):
+            features.solver_features(self.row() + '\n' + self.row(flags='enhanced-determinism'),
+                                     'rapier3d', features.TARGETS[0])
+        with self.assertRaisesRegex(ValueError, 'missing pinned'):
+            features.solver_features(self.row('rapier2d'), 'rapier3d', features.TARGETS[0])
+
+    def test_determinism_and_native_parallel_and_serial_wasm_remain_required(self):
+        for target, flags in [(features.TARGETS[0], 'enhanced-determinism'),
+                              (features.TARGETS[0], 'parallel'),
+                              ('wasm32-unknown-unknown', 'enhanced-determinism,parallel')]:
+            with self.subTest(target=target, flags=flags), self.assertRaisesRegex(ValueError, 'unexpected features'):
+                features.solver_features(self.row(flags=flags), 'rapier3d', target)
 
 
 if __name__ == '__main__':

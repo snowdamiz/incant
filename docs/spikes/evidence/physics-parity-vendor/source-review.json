@@ -1,0 +1,22 @@
+{
+  "reviewer": "astra",
+  "at": "2026-10-13T09:38:40.202099+00:00",
+  "status": "accepted",
+  "base": "d96087e836c0b3ea28edfb2012b5dc116befc0d1",
+  "files": [
+    {
+      "path": "tools/probes/physics-parity/features.py",
+      "sha256": "b994de168b20f16731d53a8e6ec1bd95c1c5fc5f7c0b318e90b30a2c380bbe99"
+    },
+    {
+      "path": "tools/tests/test_physics_parity.py",
+      "sha256": "63a875ad2e69e0bb520f50655d72dd36a152417b40aeb4c093dc56d1d735b564"
+    }
+  ],
+  "scope": "Source review of exact pinned repository package path/version admission replacing registry-only text assumption; all matching units checked, conflicting or mixed versions fail, native parallel and serialWasm policies unchanged. Replayed7CPU tests. Actual35cargo-tree call evidence remains producer-scoped until finalpacketreview. No target execution claim.",
+  "test_log": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/root-test.log",
+    "sha256": "209637c5270ea62667d3505f25f6e8e713fd220b3020983b799e40ff6ae4138a"
+  },
+  "findings": []
+}

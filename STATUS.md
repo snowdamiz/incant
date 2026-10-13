@@ -26,12 +26,18 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main211, 2026-10-13
+## Current overview — main212, 2026-10-13
 
-Development main211 includes the reviewed opt-in cooked renderer families and
+Development main212 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
+
+Checkpoint21 is frozen at exact main212 through PR213. Its first portability
+probe failure is a pinned vendor-path identity mismatch; the scoped
+[repair](docs/spikes/physics-parity-vendor.md) passes local graph and refusal checks,
+with hosted acceptance still pending. The candidate remains unchanged while
+other jobs finish.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows
