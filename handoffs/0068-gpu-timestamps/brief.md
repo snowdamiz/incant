@@ -8,6 +8,17 @@ This is preparation only. Do not build, execute GPU work or acquire the shared
 target until root creates the readiness grant below. Packets 0066 and 0067 precede
 this work. Do not poll for a grant or start another target to bypass the queue.
 
+## Preparation stage while another packet owns the GPU
+
+If the readiness grant is absent, you may read sources, draft packet-only helper
+code and freeze a proposed bounded case list. Do not compile, acquire a target,
+execute GPU work or inspect any new pixels. Return a result.md explicitly marked
+"prepared; execution pending root grant" when that preparation is ready. Do not
+poll, wait for a grant or launch another process as a workaround. Root will resume
+this same session after reviewing helpers and granting ownership. Existing
+regression tests can be invoked directly once granted; avoid inventing a general
+capture framework when a small existing helper can cover the cases.
+
 ## Source and contract
 
 Implementation `99778642585a7b545a9448b9fca4a365ba622985` is based on main186
