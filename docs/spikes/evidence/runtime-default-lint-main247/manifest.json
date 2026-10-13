@@ -1,0 +1,16 @@
+{
+  "base_main": "e301af8110c47aa2cf4e193579eeeefeb14a249f",
+  "source": {
+    "crates/incant_physics_runtime/src/native_owner.rs": "42186996d9bcd9753faf74be188420f04cdb8096cf86106a7311d7c905608e55",
+    "crates/incant_physics_2d_runtime/src/native_owner.rs": "a21acaed1629677986b8cacdefa5af17d6e5a5e9e5919312e5154e0d29dc03af"
+  },
+  "records": 10,
+  "archive_sha256": "55429e2ee9f75f5434420dfc4ce3276e34bb7af6f6ccf23b1dd11bad93fc5d30",
+  "checks": [
+    "ordinary-det",
+    "ordinary-fast8",
+    "native-det",
+    "native-fast8"
+  ],
+  "scope": "Strict all-target Clippy for both physics owner crates on macOS; native-checkpoints off/on and deterministic/fast-simd8. Cargo fmt and diff checks pass. No cross-platform execution or release success claimed."
+}
