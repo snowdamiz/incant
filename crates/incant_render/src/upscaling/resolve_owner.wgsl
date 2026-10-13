@@ -3,6 +3,7 @@
 // color reached its history since the last drop: x is bit31 present plus the
 // bits 0-16 anchor ID; y is a second ID or 0, or bit31 plus a class mask (bit ID%31)
 // that always holds the anchor class. (0,0) is no history. IDs are 1..highest.
+// Catmull-Rom current and history taps join that set exactly like bilinear taps.
 @group(0) @binding(1) var current:texture_2d<f32>;
 @group(0) @binding(2) var motion:texture_2d<f32>;
 @group(0) @binding(3) var current_depth:texture_depth_2d;
@@ -68,6 +69,63 @@ fn record_admissible(r:Stored,support_classes:u32,changed_classes:u32)->bool {
     if r.over {return ((r.m|support_classes)&changed_classes)==0u;}
     return r.b==0u || !changed_id(r.b);
 }
+// Interior current estimate (resolve.wgsl sharp_current) with provenance. A tap
+// outside the central 2x2, whose owners are already support, must also carry a
+// valid unchanged owner, which then joins the support set. Any failure keeps the
+// existing bilinear estimate and its 2x2 support.
+struct Sharp { color:vec4f, owners:Owners, classes:u32 }
+fn sharp_current(q:vec2f,nearest:f32,bilinear:vec4f,start:Owners)->Sharp {
+    let fallback=Sharp(bilinear,start,0u);
+    let base=vec2i(floor(q)); let f=fract(q);
+    var sum=vec3f(0.0); var low=vec3f(65504.0); var high=vec3f(0.0); var central=false;
+    var joined=start; var classes=0u;
+    for(var y=-1;y<=2;y++) {for(var x=-1;x<=2;x++) {
+        let w=catmull_rom(f32(x)-f.x)*catmull_rom(f32(y)-f.y);
+        if w==0.0 {continue;}
+        let tap=clamp(base+vec2i(x,y),lo(frame.source),hi(frame.source));
+        let c=textureLoad(current,tap,0);
+        if !admitted(c) || c.a<1.0 || !compatible(linear_depth(textureLoad(current_depth,tap,0)),nearest) {
+            return fallback;
+        }
+        let v=clean(c).rgb;
+        sum+=v*w;
+        if x>=0 && x<=1 && y>=0 && y<=1 {
+            low=min(low,v);high=max(high,v);central=true;
+        } else {
+            let word=textureLoad(owner,tap,0).x; let n=word&~HIGH_BIT;
+            if !valid_id(n) || (word&HIGH_BIT)!=0u || changed_id(n) {return fallback;}
+            joined=with_id(joined,n); classes|=class_of(n);
+        }
+    }}
+    if !central {return fallback;}
+    return Sharp(clean(vec4f(clamp(sum,low,high),1.0)),joined,classes);
+}
+// Reprojected history (resolve.wgsl sharp_history) with provenance. Every tap with
+// a nonzero weight needs the bilinear tap admission, including its own canonical
+// record with the anchor owner; all their records join the set. Any failure keeps
+// the bilinear history and its set.
+struct SharpHistory { color:vec4f, owners:Owners }
+fn sharp_history(old:vec2f,expected:f32,anchor_id:u32,support_classes:u32,changed_classes:u32,
+                 fresh:Owners,bilinear:SharpHistory)->SharpHistory {
+    let oldq=old-vec2f(0.5); let base=vec2i(floor(oldq)); let f=fract(oldq);
+    var sum=vec3f(0.0); var low=vec3f(65504.0); var high=vec3f(0.0); var central=false;
+    var joined=fresh;
+    for(var y=-1;y<=2;y++) {for(var x=-1;x<=2;x++) {
+        let w=catmull_rom(f32(x)-f.x)*catmull_rom(f32(y)-f.y);
+        if w==0.0 {continue;}
+        let tap=base+vec2i(x,y);
+        if any(tap<lo(frame.output)) || any(tap>hi(frame.output)) {return bilinear;}
+        let c=textureLoad(previous_color,tap,0);let z=textureLoad(previous_depth,tap,0).x;
+        if !admitted(c) || c.a<1.0 || !compatible(z,expected) {return bilinear;}
+        let r=stored(textureLoad(previous_record,tap,0).xy);
+        if !r.ok || r.a!=anchor_id || !record_admissible(r,support_classes,changed_classes) {return bilinear;}
+        let v=clean(c).rgb;
+        sum+=v*w; joined=with_record(joined,r);
+        if x>=0 && x<=1 && y>=0 && y<=1 {low=min(low,v);high=max(high,v);central=true;}
+    }}
+    if !central {return bilinear;}
+    return SharpHistory(clean(vec4f(clamp(sum,low,high),1.0)),joined);
+}
 @fragment fn resolve(@builtin(position) position:vec4f)->OwnerResolved {
     var result=OwnerResolved(vec4f(0.0),0.0,vec2u(0u));
     let p=position.xy;
@@ -115,6 +173,9 @@ fn record_admissible(r:Stored,support_classes:u32,changed_classes:u32)->bool {
     var fresh=owner_set(anchor_id);
     for(var i=0;i<4;i++) {if support[u32(i)]!=0u {fresh=with_id(fresh,support[u32(i)]);}}
     fresh.ok=fresh.ok && support_ok;
+    // Catmull-Rom current (sharp_current) joins its outer owners to the support.
+    let sharp=sharp_current(q,nearest,result.color,fresh);
+    result.color=sharp.color; fresh=sharp.owners; support_classes|=sharp.classes;
     let provable=fresh.ok;
     result.record=encode(fresh);
     if frame.depth.w<0.5 {return result;}
@@ -138,7 +199,7 @@ fn record_admissible(r:Stored,support_classes:u32,changed_classes:u32)->bool {
         let r=stored(textureLoad(previous_record,own,0).xy);
         if admitted(c) && c.a>=1.0 && compatible(z,expected) && r.ok
             && record_unchanged(r,support_classes,changed_classes) {
-            result.color=clean(mix(result.color,clean(c),frame.options.x));
+            result.color=clean(mix(result.color,clean(c),history_fraction(frame.options.x,0.0)));
             result.record=encode(with_record(fresh,r));
             return result;
         }
@@ -160,7 +221,9 @@ fn record_admissible(r:Stored,support_classes:u32,changed_classes:u32)->bool {
         history+=clean(c)*weight; mass+=weight; joined=with_record(joined,r);
     }}
     if !(mass>0.0) {return result;}
-    history=clean(history/mass);
+    let sharp_old=sharp_history(old,expected,anchor_id,support_classes,changed_classes,fresh,
+        SharpHistory(clean(history/mass),joined));
+    history=sharp_old.color; joined=sharp_old.owners;
     var minimum=result.color;var maximum=result.color;
     for(var y=-1;y<=1;y++) {for(var x=-1;x<=1;x++) {
         let tap=clamp(anchor+vec2i(x,y),lo(frame.source),hi(frame.source));
@@ -173,7 +236,7 @@ fn record_admissible(r:Stored,support_classes:u32,changed_classes:u32)->bool {
     }}
     let change=abs(history.rgb-result.color.rgb);
     let reaction=clamp(max(change.x,max(change.y,change.z))/frame.options.w,0.0,1.0);
-    let weight=frame.options.x*(1.0-frame.reactive.x*reaction);
+    let weight=history_fraction(frame.options.x*(1.0-frame.reactive.x*reaction),reaction);
     result.color=clean(mix(result.color,clamp(history,minimum,maximum),weight));
     result.record=encode(joined);
     return result;

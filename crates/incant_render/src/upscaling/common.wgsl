@@ -31,3 +31,21 @@ fn compatible(a:f32,b:f32)->bool {
 fn tap_weight(f:vec2f,x:i32,y:i32)->f32 {
     return select(1.0-f.x,f.x,x==1)*select(1.0-f.y,f.y,y==1);
 }
+// Catmull-Rom kernel at texel distance d. The four taps at offsets -1..2 from
+// floor(q) sum to one and interpolate; callers clamp the result to the central
+// 2x2 (bilinear) range, so it adds no new extrema.
+fn catmull_rom(d:f32)->f32 {
+    let x=abs(d);
+    if x<1.0 {return (1.5*x-2.5)*x*x+1.0;}
+    if x<2.0 {return ((-0.5*x+2.5)*x-4.0)*x+2.0;}
+    return 0.0;
+}
+// History fraction. It never exceeds `limit`, the existing reactive-reduced
+// history weight. reactive.y is the host's expected admitted history evidence in
+// frames of unit evidence; only below h/(1-h), after a cut or a source-scale
+// increase, does it lower the fraction to mass/(mass+1).
+fn history_fraction(limit:f32,reaction:f32)->f32 {
+    let w=clamp(select(0.0,frame.reactive.y,frame.reactive.y>0.0),0.0,1048576.0);
+    let mass=w*(1.0-frame.reactive.x*reaction);
+    return min(limit,mass/(mass+1.0));
+}

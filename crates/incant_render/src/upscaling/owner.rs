@@ -31,6 +31,10 @@ pub(crate) struct State {
     output: Option<Arc<Output>>,
     overlay: Option<Arc<Overlay>>,
     last: Option<UpscaleFrame>,
+    /// Expected admitted-history evidence after the accepted frame, in frames of
+    /// unit evidence; the accepted internal source width it was gathered at.
+    mass: f32,
+    source_width: f32,
 }
 pub(crate) struct Pending {
     pub(super) config: UpscaleConfig,
@@ -39,6 +43,26 @@ pub(crate) struct Pending {
     pub(super) frame: UpscaleFrame,
     pub(super) output: Option<Arc<Output>>,
     pub(super) overlay: Option<Arc<Overlay>>,
+    /// This frame's history evidence for the resolve uniform (reactive.y).
+    pub(super) history_mass: f32,
+    source_width: f32,
+}
+/// Expected admitted-history evidence entering a frame, in frames of unit
+/// evidence: 0 after a cut, the accepted evidence otherwise, counted at the old
+/// density, (old / new width)^2, after an internal-scale increase. It never
+/// exceeds h / (1 - h), so the resolve's history fraction
+/// min(h_r, W_r / (W_r + 1)) equals today's h_r in steady state and is lower
+/// only after a cut or a scale increase.
+pub(super) fn frame_mass(h: f32, mass: f32, has_previous: bool, old_width: f32, width: f32) -> f32 {
+    let cap = h / (1. - h);
+    if !has_previous || !cap.is_finite() || cap <= 0. {
+        return 0.;
+    }
+    let mut w = if mass.is_finite() { mass.clamp(0., cap) } else { 0. };
+    if old_width > 0. && width > old_width {
+        w *= (old_width / width) * (old_width / width);
+    }
+    w
 }
 impl State {
     pub fn new(config: UpscaleConfig) -> Result<Self, crate::temporal::TemporalError> {
@@ -48,6 +72,8 @@ impl State {
             output: None,
             overlay: None,
             last: None,
+            mass: 0.,
+            source_width: 0.,
         })
     }
     pub fn frame(&self) -> Option<UpscaleFrame> {
@@ -129,6 +155,14 @@ impl State {
             output: size,
             slot,
         };
+        let source_width = plan.map_or(0., |p| p.source_rect[2]);
+        let history_mass = frame_mass(
+            self.config.history_weight,
+            self.mass,
+            input.frame.has_previous(),
+            self.source_width,
+            source_width,
+        );
         Ok(Pending {
             config: self.config,
             input,
@@ -136,9 +170,16 @@ impl State {
             frame,
             output: plan.map(|p| Output::prepare(d, p.output, self.output.as_ref(), owner)),
             overlay: plan.map(|p| Overlay::prepare(d, p.source, self.overlay.as_ref())),
+            history_mass,
+            source_width,
         })
     }
     pub fn accept(&mut self, p: Pending) {
+        let h = self.config.history_weight;
+        // Each accepted frame adds one unit of expected evidence (the kernel's
+        // cycle-mean mass), never above the h / (1 - h) cap.
+        self.mass = (p.history_mass + 1.).min(h / (1. - h));
+        self.source_width = p.source_width;
         self.output = p.output;
         self.overlay = p.overlay;
         self.last = Some(p.frame);

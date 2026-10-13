@@ -242,7 +242,7 @@ impl System {
                 c.absolute_depth,
                 c.reactive_threshold,
             ],
-            reactive: [c.reactive_strength, 0., 0., 0.],
+            reactive: [c.reactive_strength, p.history_mass, 0., 0.],
             jitter: [
                 p.input.jitter[0],
                 p.input.jitter[1],

@@ -80,7 +80,8 @@ fn fixture(case: u32) -> Case {
             output: [1., 1., 14., 14.],
             depth: [0.1, 100., f32::from(u8::from(orthographic)), 1.],
             options: [0.9, 0.001, 0.001, 1.],
-            reactive: [0.; 4],
+            // Steady history evidence h / (1 - h) = 9 keeps the fixed weight 0.9.
+            reactive: [0., 9., 0., 0.],
             jitter: [0.; 4],
         },
         current: vec![rgba(0.25); (N * N) as usize],

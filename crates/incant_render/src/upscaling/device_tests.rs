@@ -161,7 +161,8 @@ fn actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay() 
                 f32::from(u8::from(mode != 12 && mode < 16)),
             ],
             options: [0.5, 0.001, 0.001, 1.],
-            reactive: [f32::from(u8::from(mode == 6)), 0., 0., 0.],
+            // Steady history evidence h / (1 - h) = 1 keeps the fixed weight 0.5.
+            reactive: [f32::from(u8::from(mode == 6)), 1., 0., 0.],
             jitter: if mode == 16 {
                 [0.125, -0.125, 0., 0.]
             } else if mode == 17 {

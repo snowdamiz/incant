@@ -17,6 +17,30 @@ fn actual_upscale_shaders_validate() {
     }
 }
 #[test]
+fn frame_mass_resets_attenuates_and_never_exceeds_history_weight() {
+    use super::owner::frame_mass;
+    // h = 0.9: steady evidence h / (1 - h) = 9 gives exactly today's fraction 0.9.
+    let cap = 0.9_f32 / (1. - 0.9);
+    assert_eq!(frame_mass(0.9, 9., false, 120., 120.), 0.);
+    assert_eq!(frame_mass(0.9, 3., true, 120., 120.), 3.);
+    assert_eq!(frame_mass(0.9, 50., true, 120., 120.), cap);
+    assert_eq!(cap / (cap + 1.), 0.9);
+    // 4/16 -> 16/16 counts the old evidence at its density; decreases keep it.
+    assert_eq!(frame_mass(0.9, 4., true, 30., 120.), 4. / 16.);
+    assert_eq!(frame_mass(0.9, 50., true, 30., 120.), cap / 16.);
+    assert_eq!(frame_mass(0.9, 4., true, 120., 60.), 4.);
+    assert_eq!(frame_mass(0., 9., true, 60., 60.), 0.);
+    for h in [0., 0.25, 0.5, 0.9, 0.99] {
+        for mass in [0., 0.5, 1., 99., f32::MAX, f32::INFINITY, f32::NAN, -1.] {
+            for (old, width) in [(60., 60.), (30., 120.), (120., 30.), (0., 60.)] {
+                let w = frame_mass(h, mass, true, old, width);
+                assert!(w.is_finite() && w >= 0., "h={h} mass={mass}: {w}");
+                assert!(w / (w + 1.) <= h, "h={h} mass={mass} widths {old}->{width}: {w}");
+            }
+        }
+    }
+}
+#[test]
 fn footprint_tracks_exact_binary_scale_not_rounded_attachment_ratio() {
     for output in [[65, 33], [255, 127], [1, 1]] {
         for n in [4, 8, 12, 16] {
