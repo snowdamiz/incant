@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-13T15:36:30.873483+00:00",
+  "verdict": "accepted private island source for qualification",
+  "freeze_sha256": "fc67aa067463d12001ba656a791ea548f22cec288bacf6e40f2e471e983a1747",
+  "source_files_checked": 21,
+  "mirrored_implementation_and_tests": true,
+  "context": [
+    {
+      "path": "third_party/rapier3d/src/dynamics/island_manager/local_split.rs",
+      "sha256": "66cc22a589dee90a9246042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/island_manager/global_split.rs",
+      "sha256": "e02e5cbf39251ba943f0342c793a2239096fae760a324200d618d8e099116bb4"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/island_manager/substep_groups.rs",
+      "sha256": "c9556aedcc9f4874d56f4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443"
+    }
+  ],
+  "focused_log_sha256": "a6e95c35d1918e29c9ba340990455545477ed14fbe5796340546d652e80aee91",
+  "observed_tests": 6,
+  "paired_steps_per_dimension": 156,
+  "review": "Checked immutable joined rigid witness and identity boundary, cumulative allocation plan/permit parity, exact VecMap extent/free ordering, active/persistent body and contact ordering, pending split and sleep-scan retention. Read scratch overwrite-before-read paths in local/global split and substep regrouping. Ordinary VecMap with_capacity precharged but infallible allocator OOM remains explicit. No public installer or native deserialization. Constructor tests replace only IslandManager, other owners trusted clones.",
+  "limits": [
+    "Broader qualification/pin closure still pending",
+    "Whole-world restoration not yet implemented",
+    "No SIMD-specific island fixture claim",
+    "No device, performance or phase gate claim"
+  ]
+}
