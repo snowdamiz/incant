@@ -52,3 +52,15 @@ created. The original producer appearance review remains separate.
 exposed an omitted producer analysis path; the collector now retains all 37
 reviewed producer records, with the initial diagnostic preserved. No source or
 execution changed. Final independent integration review is accepted. Publication follows an exact current-main composition check and the required fast check.
+
+The main221 join adds accepted inert CCD/configuration files and a default-off
+Rapier observation getter. Exactly five paths in the original 3,109-file freeze
+differ: one inert library declaration, two vendor patch notices and two getter
+files. Old and new Git bytes are pinned explicitly. The getter is absent from all
+three selected all-target feature graphs; those graphs are byte-identical before
+and after the join. Renderer, native-player, cooker, locks, tools and workflows
+are unchanged. The [qualification](evidence/bloom-main221/qualification.json)
+and [read-only replay](evidence/bloom-main221/verify.py) retain that comparison
+without changing the original verifier or claiming a fresh build or GPU run.
+An initial Cargo-tree invocation omitted the rustc toolchain directory from PATH;
+its failure is retained. Corrected graph queries succeeded without source changes.

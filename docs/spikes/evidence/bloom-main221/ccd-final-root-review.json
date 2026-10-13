@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T11:58:07.237891+00:00",
+  "reviewer": "astra root",
+  "head": "d9239c6f3c52c91d54d908bff187bc177b77bbb2",
+  "manifest_sha256": "a895b71d0b60e1f3556502486773691e24e806e19e13199895a3e57285c7c77d",
+  "source_review": "Read combined lib.rs diff; exactly producer plus main narrow-owner declarations and error variant. No other source rewrite. Producer independent source review retained.",
+  "verification": "Read verifier then executed --verify-only successfully:27records,3113frozen,1542inputs,11checks0,164default+164fast8,22groups each; actual vendor feature artifacts checked.",
+  "scope": "Inert CCD/integration sections only. No live-save, aggregate owner restore, device or phase approval.",
+  "findings": []
+}
