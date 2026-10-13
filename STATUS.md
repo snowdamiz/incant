@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main196, 2026-10-13
+## Current overview — main197, 2026-10-13
 
-Development main196 includes the restart quota-test repair (PR188) and the reviewed,
+Development main197 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -44,8 +44,9 @@ admission checks pass; six actual Android callers remain producer-scoped.
 Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
-Dynamic resolution now has accepted producer Metal evidence; current-main integration
-is queued with cooked clusters. GPU timestamp execution remains pending. CPU profiling has accepted producer
+Dynamic resolution and cooked clusters have accepted producer Metal evidence; their
+[current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks and awaits final packet review.
+Current composed GPU execution remains pending. GPU timestamp execution remains pending. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
 independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
@@ -56,7 +57,9 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
-## Exact physics saves — inert graph adjacency validation underway
+## Exact physics saves — inert components merged; live restoration remains closed
+
+PR197 merges the independently reviewed snapshot, arena and graph validators with 40 passing CPU cases. The normal dependency graph is std-only. No live constructor or runtime consumer is enabled, and `PhysicsUnsupported` is unchanged. See [current integration evidence](docs/spikes/physics-inert-main196.md).
 
 The next inert format preserves node/edge order and validates both linked
 adjacency sides, reciprocal links, complete coverage and dense payload mappings.

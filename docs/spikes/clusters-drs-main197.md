@@ -1,0 +1,13 @@
+# Cooked clusters and retained dynamic resolution on main197
+
+The opt-in cluster compute path and retained dynamic-resolution controller now compose with actual main197. The union preserves the existing Vulkan pipeline-cache argument, cooked shader constructors and explicit backend checks. Three existing frozen-checkpoint cooked feature selections now also enable `cooked-clusters`; default checks remain intact.
+
+Frozen source `9b1df9db27ead20253d9f7b24c6cdc41d459f086` passed 14 checks: shader-cook tests, default and all-cooked renderer/GPU-host CPU suites, cluster-only CPU tests, all-target Clippy, native-window compilation, default/cooked wasm32 compilation, dependency guard, release-policy tests, actionlint, formatting, conventions and diff checks. The actual main197 ancestry join changes documentation only; all 2,865 frozen inputs remain exact. Counts overlap: shader-cook 25; default 82 with 90 ignored GPU cases; all-cooked 109 with 90 ignored; cluster-only 80 with 33 ignored. No current GPU execution is claimed.
+
+Twenty-one of the 28 changed source/build paths exactly match accepted producer commits. Seven integration paths preserve current manifest/cache behavior, combine constructors, or retain/add backend-checked test/CI routing. Cargo.lock is unchanged from main197. Root read the complete integration seam patch and found no source issues; final execution-packet review is pending.
+
+Original producer evidence stays scoped. Cooked clusters have two accepted Apple M5 Pro Metal processes with 84 exact raw count/mask records each. Claude0067 accepted bounded default-feature Metal DRS behavior and appearance, including its visible nearest-expansion degradation and retained helper failures. These are not new GPU results on the composed union. Vulkan/DX12 execution must pass the actual frozen checkpoint. DRS remains opt-in; there is no temporal reconstruction, MetalFX, default enablement, phone/performance or phase claim.
+
+Retention audit found 17 shader artifacts referenced by the original producer manifest but omitted from its commit by an ignored `artifacts/` directory. The integration force-retains the original files with every reviewed hash unchanged. Source, bytecode, shader generation and execution evidence were not modified.
+
+The [manifest](evidence/clusters-drs-main197.json) binds all current checks, the exact source freeze, original producer copies and reviews. The [collector](evidence/clusters-drs-main197/collect.py) supports `--verify-only` and performs no builds, GPU work or image decoding.
