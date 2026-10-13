@@ -14,6 +14,9 @@ import tomllib
 ROOT = Path(__file__).resolve().parents[3]
 OUT = ROOT / 'docs/spikes/evidence/physics-native-persisted'
 E = Path.home() / '.codex/incant-evidence/physics-native-persisted-001'
+# Archive provenance, not the checkout/home executing this read-only verifier.
+RECORDED_ROOT = Path('/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant')
+RECORDED_EVIDENCE = Path('/Users/andreyyurlov/.codex/incant-evidence/physics-native-persisted-001')
 SOURCE = 'b78ff58d4de2a2ee7e1744ca1bd4a290d9d3f0f5'
 BASE = '6c25a3d3365bbac62f16e7113ce9fb2383e39384'
 DEV_ONLY = {
@@ -136,7 +139,7 @@ def verify(originals=False, local_binaries=False):
     def read(name):
         return json.loads(records[name])
     def relative(absolute):
-        return str(Path(absolute).relative_to(E))
+        return str(Path(absolute).relative_to(RECORDED_EVIDENCE))
     freezes = [p for p in records if p.endswith('/freeze.json')]
     for name in freezes:
         for row in read(name)['sources']:
@@ -206,7 +209,7 @@ def verify_final_preparations(records, read, relative, git):
             data = records[relative(row['copy'])]
             expected = replacements[row['copy']]['sha256'] if row['copy'] in replacements else row['copy_sha256']
             assert sha(data) == expected, row['copy']
-            source = str(Path(row['source']).relative_to(ROOT))
+            source = str(Path(row['source']).relative_to(RECORDED_ROOT))
             assert sha(git[source]) == row['source_sha256'], source
         lock = tomllib.loads(records[prefix + 'Cargo.lock'].decode())
         assert registry(lock) - registry(root_lock) == DEV_ONLY
