@@ -75,6 +75,16 @@ their recorded producer binary; no current composed GPU or appearance claim is m
 Final integration review and the exact-head fast check passed; PR204 is merged. Default rendering is unchanged; temporal color,
 upscaling and cooked motion remain separate.
 
+## Exact physics saves — inert regular body state verified locally
+
+The inert path now retains every fixed regular rigid-body field, including
+mass/force/velocity/CCD caches, activation history, exact u128 user data and
+island scalar references, bound to checked body/attachment rows. 101 CPU tests
+and all scoped checks pass; native both-dimension evidence covers force/mass
+changes, sleep/wake, automatic CCD and removal/reuse. Independent producer review is accepted. Current-main integration checks are pending. Derived mass/island consistency, solver work admission, complete
+collider/owner construction and exact continuation remain required; physics
+saves stay refused. [Body contract](docs/spikes/physics-inert-body-state.md).
+
 ## Exact physics saves — inert pair persistence producer accepted
 
 The std-only inert format checks pair event/color/recycle fields and closed
