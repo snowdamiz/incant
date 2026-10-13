@@ -1,3 +1,34 @@
+# Priority continuation — 2026-10-13
+
+The first preparation session was interrupted only to apply the director's
+already-authorized bypassPermissions mode. Its five owned processes are gone;
+no build/target/GPU grant was issued and no capture was made. Resume source-only
+preparation in this same checkout. Explicit Opus5.5 Max remains mandatory.
+Do not restart the source survey from scratch: continue the combined fixture and
+bounded runner/case plan you were preparing. No Cargo, GPU, target or capture yet.
+No memory or outside notes. Model/effort verification is performed before this prompt.
+
+For context, the exact engine source now has completed union CPU evidence on the
+parent at94f604fa (docs-only after your b21f91c1). All11checks passed:25shadercook,
+98default renderer/host,125cooked with overlap,94GPUignored per variant,Clippy,
+web/native compilation and dependency checks. You may read the parent's
+`docs/spikes/render-effects-composition.md` and its evidence manifest read-only.
+Engine hashes are unchanged from reviewed b633f92d.
+
+Known runner mistakes found in another packet must not recur: use git porcelain
+-z without stripping leading status columns; freeze every relevant actual dirty
+source and helper byte plus the compiler binary inputs; put frame reservation
+under the same lock as launches; always finally kill/wait the owned process group
+on interruption/error/timeout before releasing the lock. If reusing previous
+frames, bind exact source/binary/variant/route/viewport/state and actual files;
+simpler fresh bounded captures are preferable. Construct an explicit nonsecret
+environment and record only approved overrides.
+
+Return the prepared helpers promptly once ready for source review. Do not wait
+for a grant and do not repeat extensive evidence reads already completed.
+
+---
+
 # 0070 — opt-in diffuse SSAO: backend and appearance acceptance
 
 Preparation only. **No GPU/native process/target lease is granted by this packet.**
