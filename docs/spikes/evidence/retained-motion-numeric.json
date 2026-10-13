@@ -1,0 +1,42 @@
+{
+  "source": "814717935462e4ee5dbdb1fdae2738d17477f932",
+  "parent_cpu_manifest_sha256": "1e6dd3f7962ff1cb0bbcd3ba6cb1efbfa17e18a8a48f59a63dfdda5d31ee3273",
+  "numeric": {
+    "source": "814717935462e4ee5dbdb1fdae2738d17477f932",
+    "tests": [
+      "accepted_pose_buffers_and_history_swap_only_after_submission",
+      "skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_asset"
+    ],
+    "passed": 2,
+    "new_frames_upper_bound": 9,
+    "output_sizes": [
+      [
+        65,
+        33
+      ],
+      [
+        96,
+        64
+      ]
+    ],
+    "readback": "RGBA32Float motion/depth/validity numeric data only",
+    "appearance": "not examined",
+    "adapter_identity": "not printed by these existing tests; not a backend/device benchmark",
+    "binary_sha256": "73b32363318cfcd028cccef5513994488a6d4bbbf277bee181523b7b68bc05f5"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/retained-motion-numeric/raw.json.gz",
+    "sha256": "7825c206ec1e4d1c0cf9e349625b1cef76cbe27fb487e63a16ed659faee6b6d6",
+    "records": 15,
+    "payloads": 13
+  },
+  "review": {
+    "path": "docs/spikes/evidence/retained-motion-numeric/independent-review.json",
+    "sha256": "39060ae23d23dd2ee330963014198be7f80bb334e50d09853566991763b03f7a"
+  },
+  "limits": [
+    "Two default-feature numerical assertion tests only; no full appearance or device/performance gate.",
+    "Initial runner filter defect refused before execution, corrected grant retained.",
+    "No timing/temporal color or native cooked feature acceptance."
+  ]
+}

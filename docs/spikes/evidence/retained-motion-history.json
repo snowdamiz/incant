@@ -1,0 +1,491 @@
+{
+  "status": "Independent source accepted; producer CPU checks complete; root final evidence audit and GPU/appearance pending",
+  "base": "9b1df9db27ead20253d9f7b24c6cdc41d459f086",
+  "branch": "codex/temporal-motion-history",
+  "source_freeze_sha256": "3470c12458cfbef61bc2b339a2d00efde7086d5babddff77d37408f2c825b8db",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "7d3628b6a59dba4f3613b0aa8af6bbe274c692aa721bac4f7c77cc37bf202c7b"
+    },
+    {
+      "path": "crates/incant_render/src/animation_tests.rs",
+      "sha256": "adb1f784a25f1bd9d120db03f5f83b56cc2cc58f5cdb2bbc9c0d7bad71c1c94e"
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "sha256": "03caea350f4fb1f114d692ea8d24ebb2db4ee4a406d409524162498fcaef7ed9"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "2cb09bacb2692066cf71d1f3fa0c21763c153d4163bdc51c40e4210e8b2609ee"
+    },
+    {
+      "path": "crates/incant_render/src/models.rs",
+      "sha256": "1160c54dd0f4443c57dd7f251c871d3270d761a349b67593e10f82fd9237ec9c"
+    },
+    {
+      "path": "crates/incant_render/src/models/animation.rs",
+      "sha256": "4dc2282e07414fe07010d3246b4c3a2ed2ef4a7930bd4ef307c67bd21c191b7d"
+    },
+    {
+      "path": "crates/incant_render/src/motion/draw.rs",
+      "sha256": "24efb7ed784d37d4384745847c2abfc068008fc5c6e4b3e5298a9f47020035e2"
+    },
+    {
+      "path": "crates/incant_render/src/motion/mod.rs",
+      "sha256": "e5be9680a2a122e91bc45d86bcbc18f7622bf5efcaf9928f51463f42973198f9"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner.rs",
+      "sha256": "255844bb0da3697f59ad7194202c4654e9e03efe84ca48265a323f87a6fd2bf0"
+    },
+    {
+      "path": "crates/incant_render/src/motion/plan.rs",
+      "sha256": "8af0181ea6defab33bb4b5bfb1e09c83308e77b88552deee7eb0fe9fd36c9dd3"
+    },
+    {
+      "path": "crates/incant_render/src/motion/retained.rs",
+      "sha256": "5f27eb0f4147db5481b1adebdf8f889ed1619589fdb0e7436f7b3e16dbfd425c"
+    },
+    {
+      "path": "crates/incant_render/src/motion/shader.wgsl",
+      "sha256": "7f8aed4a2cb30401eaae3d3d0e54d72d37cb4e3875b555f33434d5e8123663b9"
+    },
+    {
+      "path": "crates/incant_render/src/motion/system.rs",
+      "sha256": "226389e54591715071e7694f10e55459c4e83f9659af503968cab560c79d3e2e"
+    },
+    {
+      "path": "crates/incant_render/src/motion/targets.rs",
+      "sha256": "52ffd46e3cf55682d4f94a793edde7c332e2706e1668c6ebfec50cc0108011b5"
+    },
+    {
+      "path": "crates/incant_render/src/motion/tests.rs",
+      "sha256": "64ac227b7ee3a4bf3e53b8e24b8e9665cb9f7474c740bc04c77520f83f225914"
+    },
+    {
+      "path": "crates/incant_render/src/motion_device_tests.rs",
+      "sha256": "0961212382a58f7a4c4cdadea0a2c7faa6fd6b47ed8cd527e23ebeff905dbaa8"
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "sha256": "ebb10364da2411fb3eded96d71b808d29501d2ee1723d565b3cc7ffeb7aee622"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/lib.rs",
+      "sha256": "14c69faf3eaacd9ad5280f3d0e0079a7fd043717e8bb1b921be3505da7e7f4bb"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/motion.rs",
+      "sha256": "161c9190df4dab03224c1b8989d4ed721892d4e6c15170135ac99136feaef687"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/resolution.rs",
+      "sha256": "7eef9c532cad6c836e93ea0d721a3439d77d50340e337b74eb511bcbaf87bb70"
+    },
+    {
+      "path": "docs/spikes/retained-motion-history.md",
+      "sha256": "665c5a02af98f32c5f168695a47a645e9d1b30fe9b12f78f8f51728903beb012"
+    }
+  ],
+  "unchanged_baselines": [
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "sha256": "bae8055bac5246e608357bf76d3c4a4ccc5d626ca6ac233063c100ea9242be86"
+    },
+    {
+      "path": "crates/incant_render/src/frame.rs",
+      "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e"
+    },
+    {
+      "path": "crates/incant_render/src/camera.rs",
+      "sha256": "9c912d4791322ccdb76608014f34358e2bb8aad00337317f5f3d5b50fdd52729"
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "sha256": "edc49c5e19f24230bb20aef6518de545d45b42d58855cce21d5a8a288ce11f12"
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "ce5332bd5b1f4b5c251d55842cb21353c16aa8fb70d1e21605268de62d906f19"
+    },
+    {
+      "path": "crates/incant_render/src/output.wgsl",
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/plan.rs",
+      "sha256": "88b15839889c79bcb52a28b7cec6330d503df5e7c9a7ca7a03b3312ee71c0f6f"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/owner.rs",
+      "sha256": "a7c7d5d52554626aaa91ce6205f19811ed83b2223af2e48d13311930fdc2bb82"
+    },
+    {
+      "path": "crates/incant_render/src/resolution/controller.rs",
+      "sha256": "2dfb73c3b74de5026ebff6a9736dabe37f6219f1d0e9793b139e1a43e647d5e9"
+    },
+    {
+      "path": "crates/incant_render/src/scene.rs",
+      "sha256": "bb7c13689a7145763feac1dd3623874a1b47557848421b9d33d312b11e126fff"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/src/resolution_mailbox.rs",
+      "sha256": "8c70921bc14c1791c7ceeb7b93c53cfffccb4afa2e3a8427ca6fe4036f1227e1"
+    },
+    {
+      "path": "crates/incant_assets/tests/skeletal/fixture.rs",
+      "sha256": "2197fec00fe41cffd023b9865702adc42dfd1d38cf93b14c5f6d37daee05995c"
+    }
+  ],
+  "lock_package_records_unchanged_except_render_dev_edge": 968,
+  "checks": [
+    {
+      "label": "cpu-all",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 16.43395709991455,
+      "pid": 16656,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/cpu-all.log",
+      "sha256": "53cf1cb1173f6b78e2bc2e1d2b0d8f6c2332e1ab714212de7a2f8ef5f96925ac"
+    },
+    {
+      "label": "clippy-all",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.745176076889038,
+      "pid": 17327,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/clippy-all.log",
+      "sha256": "8e0ded4e3340e049f1d4fbf3a3adb72bc9ecad80c6ea6426d36ef97aff8d76a9"
+    },
+    {
+      "label": "cooked-refusal",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-output,cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters",
+        "motion"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 18.635358095169067,
+      "pid": 17571,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/cooked-refusal.log",
+      "sha256": "561f87838c59acd1eed8bf868640d383af38462f362b0e56c5d2b53dec634b88"
+    },
+    {
+      "label": "wasm-check",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 29.730473041534424,
+      "pid": 20102,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/wasm-check.log",
+      "sha256": "9631c2174e48cfef391a14dcca45b986c722a530d172f334f7b486d9c2cd235d"
+    },
+    {
+      "label": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.33518099784851074,
+      "pid": 20702,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/runtime-graph.log",
+      "sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c"
+    },
+    {
+      "label": "format",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.1845848560333252,
+      "pid": 20718,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.02890300750732422,
+      "pid": 20761,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "counts": {
+    "cpu-all": {
+      "passed": 91,
+      "failed": 0,
+      "ignored": 92,
+      "groups": 8
+    },
+    "cooked-refusal": {
+      "passed": 12,
+      "failed": 0,
+      "ignored": 9,
+      "groups": 3
+    }
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-source-001/freeze.json",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-source-001/freeze.json.gz",
+      "raw_sha256": "3470c12458cfbef61bc2b339a2d00efde7086d5babddff77d37408f2c825b8db",
+      "retained_sha256": "d0344eb7cf07f531a81742fbd9177b69cf8253db010cf692b4647e70dd186083",
+      "raw_bytes": 5626
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-source-001/tracked.patch",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-source-001/tracked.patch.gz",
+      "raw_sha256": "c68c957da4d5055fa7ff6d239aa2b2668a1b87e2c3f61e4d9c9e2beff7ca00de",
+      "retained_sha256": "29a0be57bb8c16ee9a993105e460dc768ba35091ff4ff07c6f131dbcdd7550de",
+      "raw_bytes": 15673
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/checks.json",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/checks.json.gz",
+      "raw_sha256": "b2c657541ff57f452148dd08ff9a5f8bca68b4cf042ada5b876ddaecb0ddf603",
+      "retained_sha256": "e9938bf5c034ec080f736a69b6d9cbfa0fa57856f0d67c14c477cf87971be802",
+      "raw_bytes": 3528
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/clippy-001.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/clippy-001.log.gz",
+      "raw_sha256": "022bc40519a61538c1d2d91e5d61c6bac9c0756a25a441c3ce5a5876cdf636b9",
+      "retained_sha256": "7f34f596e23a9d015e789a1b7289c5a587703baa7dc41affe0205d2e0c58e46d",
+      "raw_bytes": 14857
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/clippy-002.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/clippy-002.log.gz",
+      "raw_sha256": "1d6e9ab94cb5b264fed5110cc4ed4c20b91fa5deb9a3e39741bb7a7fa88026c3",
+      "retained_sha256": "638acbe4beea5a76caf7806c926c28d008ad99dc751912c135a6225690d3539d",
+      "raw_bytes": 1010
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/clippy-all.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/clippy-all.log.gz",
+      "raw_sha256": "8e0ded4e3340e049f1d4fbf3a3adb72bc9ecad80c6ea6426d36ef97aff8d76a9",
+      "retained_sha256": "774dc0346c4e459c8763dc633978df8694058c3ba83538aa7eb1fc5b985c465e",
+      "raw_bytes": 319
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/conventions.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/conventions.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_bytes": 0
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/cooked-refusal.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/cooked-refusal.log.gz",
+      "raw_sha256": "561f87838c59acd1eed8bf868640d383af38462f362b0e56c5d2b53dec634b88",
+      "retained_sha256": "8157bc8d4937d89c4e84fb3c058baa263cdea24fd2337520d26cc49a2dfc0c58",
+      "raw_bytes": 4400
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/cpu-all.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/cpu-all.log.gz",
+      "raw_sha256": "53cf1cb1173f6b78e2bc2e1d2b0d8f6c2332e1ab714212de7a2f8ef5f96925ac",
+      "retained_sha256": "5879f89d90916ff937a85fa4a393fe6d6b1b6cb205a16aef1627683ed1169049",
+      "raw_bytes": 25287
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/focused-002.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/focused-002.log.gz",
+      "raw_sha256": "c75dfc92fc2271df8fce326f98374a8321eae4001fa04f5bbc3ee817ad0d3fdb",
+      "retained_sha256": "e709e27fa32c437a6606eea513421b456851d22e1287ff15ced1901776bd0079",
+      "raw_bytes": 2772
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/focused-003.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/focused-003.log.gz",
+      "raw_sha256": "c70fda85dbbb2f72855842be6bed1edd18cf75232dd47806f455e1f2f96bc5af",
+      "retained_sha256": "852f69457376c19ed14252441cac2f6d28fb1e985b1f0aa323bf1d4f2312e48c",
+      "raw_bytes": 7476
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/focused.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/focused.log.gz",
+      "raw_sha256": "cf6e04e10b5401666340b3a0beb403daa05c1ef70c57c77b2d284ff31c714907",
+      "retained_sha256": "89aa9490985b933d716e0abd2c9cb51c8b93d6475cabc6a1d04752e0a0b45312",
+      "raw_bytes": 12670
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/format.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/format.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_bytes": 0
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/run.py",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/run.py.gz",
+      "raw_sha256": "0fbb9f1d7b55854db441b14c15e92a744842355d4e10a6a8202da0bf53134cd0",
+      "retained_sha256": "1a6fae172b440425cf1b1554d25bf92a90014b36502faf58e889b7f614f58862",
+      "raw_bytes": 2292
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/runtime-graph.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/runtime-graph.log.gz",
+      "raw_sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c",
+      "retained_sha256": "5cc48cf24e534b5aef2d26bb0f40dceb92413d38847d6760fb850bdf4244bafc",
+      "raw_bytes": 76
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/wasm-check.log",
+      "retained": "docs/spikes/evidence/retained-motion-history/motion-history-checks-001/wasm-check.log.gz",
+      "raw_sha256": "9631c2174e48cfef391a14dcca45b986c722a530d172f334f7b486d9c2cd235d",
+      "retained_sha256": "4bea9a1d7b91df87281247c85bc1b20c050607006bb1958506b5435d63e40c10",
+      "raw_bytes": 9083
+    }
+  ],
+  "binaries": [
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-90f6082e9b891519",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/incant_render-90f6082e9b891519",
+      "sha256": "73b32363318cfcd028cccef5513994488a6d4bbbf277bee181523b7b68bc05f5",
+      "bytes": 31515168
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-ea4ec409a7f81803",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/model_gpu-ea4ec409a7f81803",
+      "sha256": "bbfef44b1d1293d5e8acd2ac4a945f8a7673c24318553edd3fc0e6e362a57152",
+      "bytes": 16398648
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-56a84c8f1d426b30",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/persistent_cache-56a84c8f1d426b30",
+      "sha256": "8bea9987ad5177367977f1cb48cc1915c810b206ac89548ea6454fbdc36f72a6",
+      "bytes": 1027024
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render_gpu_host-0795fd9ccf521965",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/incant_render_gpu_host-0795fd9ccf521965",
+      "sha256": "a95b978aea65b9c252930831670d03c88b6e4f5226dc22c7cc7111b9345e11f7",
+      "bytes": 1075272
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/game-35bb67096a4febdf",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/game-35bb67096a4febdf",
+      "sha256": "aa15161384794040c3ea772f0a54b2c9dfc70e0be89e760a93369b71fd97e196",
+      "bytes": 31671048
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/ui-a00b00c0f89810d0",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/ui-a00b00c0f89810d0",
+      "sha256": "85b8eca62203b63d717df37aa8beb1ebe53c309486251b807d90b41ba04c93e1",
+      "bytes": 31211728
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-e9c89acbc979e89c",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/incant_render-e9c89acbc979e89c",
+      "sha256": "4549730c28f06f1f027bf6378637fb64d410e9e5558191159ad24f1e0c1ff44e",
+      "bytes": 31947680
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-9ff2c7ef0cb051bf",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/model_gpu-9ff2c7ef0cb051bf",
+      "sha256": "5737395d87efa9ae61d63e6706cab32e9088fecf732f57d0b27c5421ca24558d",
+      "bytes": 16599880
+    },
+    {
+      "original": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-c55ed4374a148e81",
+      "retained": "/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/persistent_cache-c55ed4374a148e81",
+      "sha256": "aa95c1f3cf9893fa8798e2cbbb838edff017da8cb30809bf76cf5680e24e04bc",
+      "bytes": 1027024
+    }
+  ],
+  "historical_failures": [
+    "focused.log: incorrect draw instance range, corrected before source001",
+    "clippy-001.log: test fixture import and deprecated atomic spelling, corrected before source001",
+    "clippy-002.log: fixed-size readback chunk style, corrected before source001"
+  ],
+  "limits": [
+    "CPU-only producer; no GPU, pixels or driver acceptance",
+    "Two new ignored GPU tests exercise real retained buffer swaps but are not executed",
+    "No color-history resolve, disocclusion, jitter, TAA, temporal upscaler or MetalFX",
+    "Cooked native combinations explicitly refused",
+    "Private history families bounded; not RSS or total queued GPU/process memory"
+  ],
+  "source_review": {
+    "path": "docs/spikes/evidence/retained-motion-history-source-review.json",
+    "sha256": "69b08ba91a64e04391e0ab658da82f22b526df8c942457a6a424c170dda517f7",
+    "scope": "Source only; no independent rebuild or GPU execution"
+  }
+}

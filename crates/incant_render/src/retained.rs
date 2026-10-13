@@ -31,6 +31,7 @@ struct NodeBinding {
 /// not a claim that the complete renderer has reached its shipping budgets.
 pub struct RetainedScene {
     owner: Arc<()>,
+    motion: Option<super::motion::MotionState>,
     resolution: Option<crate::resolution::ResolutionOwner>,
     bindings: Vec<NodeBinding>,
     environment: Option<(AssetVersionId, f64, f64)>,
@@ -90,6 +91,7 @@ impl Renderer {
             .count();
         Ok(RetainedScene {
             owner: Arc::clone(&self.identity),
+            motion: None,
             resolution: None,
             bindings: input
                 .nodes
@@ -124,6 +126,32 @@ impl Renderer {
     }
 }
 impl RetainedScene {
+    /// Pipelines must already be enabled on this renderer. Publication is atomic.
+    pub fn enable_motion_history(&mut self, renderer: &Renderer) -> Result<()> {
+        if !Arc::ptr_eq(&self.owner, &renderer.identity) {
+            return Err(crate::motion::MotionError::Owner.into());
+        }
+        let candidate = crate::motion::MotionState::new(
+            renderer,
+            &self.live,
+            &self.staging,
+            self.motion.as_ref(),
+        )?;
+        self.motion = Some(candidate);
+        Ok(())
+    }
+    pub fn disable_motion_history(&mut self) {
+        self.motion = None;
+    }
+    pub fn invalidate_motion_history(&mut self) {
+        if let Some(motion) = &mut self.motion {
+            motion.invalidate();
+        }
+    }
+    pub fn motion_frame(&self) -> Option<crate::motion::MotionFrame> {
+        self.motion.as_ref().and_then(|m| m.frame())
+    }
+
     /// Explicit opt-in, replacing any previous telemetry ownership. Invalid config
     /// leaves the existing policy unchanged. None restores output-sized rendering.
     pub fn set_dynamic_resolution(
@@ -322,13 +350,40 @@ impl RetainedScene {
                 )
             })
             .transpose()?;
-        let commands = renderer.draw_scene_scaled(
-            &self.staging,
-            target,
-            self.resolution
-                .as_ref()
-                .map_or(crate::resolution::ResolutionScale::FULL, |r| r.scale()),
-        )?;
+        let scale = self
+            .resolution
+            .as_ref()
+            .map_or(crate::resolution::ResolutionScale::FULL, |r| r.scale());
+        let motion = self
+            .motion
+            .as_mut()
+            .map(|m| {
+                let plan = crate::resolution::FramePlan::new(
+                    [target.width, target.height],
+                    target.viewport.map(|v| v.rect).unwrap_or([
+                        0.,
+                        0.,
+                        target.width as f32,
+                        target.height as f32,
+                    ]),
+                    self.staging.camera.pixel_resolution,
+                    scale,
+                )?;
+                m.prepare(
+                    renderer,
+                    &self.live,
+                    &self.staging,
+                    input,
+                    [target.width, target.height],
+                    &plan,
+                )
+            })
+            .transpose()?;
+        let (motion_draw, motion_pending) = match motion {
+            Some((draw, pending)) => (draw, Some(pending)),
+            None => (None, None),
+        };
+        let commands = renderer.draw_scene_scaled(&self.staging, target, scale, motion_draw)?;
         for batch in &self.staging.batches {
             if !batch.updates.is_empty() {
                 renderer.queue.write_buffer(
@@ -348,8 +403,14 @@ impl RetainedScene {
         if let Some(text) = &self.staging.text {
             text.write(&renderer.queue);
         }
+        if let (Some(motion), Some(pending)) = (&self.motion, &motion_pending) {
+            motion.write(&renderer.queue, pending);
+        }
         let submission = renderer.queue.submit([commands]);
         std::mem::swap(&mut self.live, &mut self.staging);
+        if let (Some(motion), Some(pending)) = (&mut self.motion, motion_pending) {
+            motion.accept(pending, input);
+        }
         if let (Some(owner), Some(frame)) = (&mut self.resolution, resolution) {
             owner.accept(frame);
         }
@@ -384,3 +445,7 @@ mod text_tests;
 #[cfg(test)]
 #[path = "text_native_tests.rs"]
 mod text_native_tests;
+
+#[cfg(test)]
+#[path = "motion_device_tests.rs"]
+mod motion_tests;

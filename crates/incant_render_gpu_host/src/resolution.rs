@@ -50,6 +50,9 @@ impl<P: TargetProvider> TargetProvider for ResolutionTargets<P> {
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         Some(self.config)
     }
+    fn motion_epoch(&self) -> Option<u64> {
+        self.inner.motion_epoch()
+    }
 }
 #[derive(Default)]
 pub(crate) struct Completion {

@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T06:13:17.005624+00:00",
+  "reviewer": "astra-root",
+  "head": "4d20d10e34c0404bd216711ddc77214dcadbcb66",
+  "manifest_sha256": "e6b28a7d631899c52b47361cb67a7f4b962584cb99be3379582337cc67b6b6f2",
+  "decision": "Accepted current-main composition and final CPU/evidence receipt, contingent required fast checks before main merge. Source remains previously reviewed producer, no seam or new GPU/appearance acceptance.",
+  "checks": "Assertion-only collector passed; root independently hashes every lossless archive payload and verifies record sizes. 10 executions/9 labels and producer-scoped GPU claims qualified explicitly.",
+  "archive_records": 21,
+  "archive_payloads": 12
+}

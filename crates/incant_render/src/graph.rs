@@ -25,6 +25,7 @@ enum Pass {
 pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
+    pub motion: Option<crate::motion::MotionDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
     pub output: OutputDraw,
@@ -168,6 +169,9 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     }
 }
 fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+    if let Some(pass) = &frame.motion {
+        pass.encode(&mut encoder.0);
+    }
     if let Some(pass) = &frame.models {
         pass.encode(&mut encoder.0);
     }
