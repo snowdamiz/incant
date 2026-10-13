@@ -1,0 +1,163 @@
+{
+  "runner_sha256": "0f890ddbf0bbff09df07e49b362565a797d04dfabc2f01d7c34f4e74c24c166a",
+  "passed": true,
+  "cpu_only": true,
+  "records": [
+    {
+      "case": "success",
+      "terminal": {
+        "name": "success",
+        "argv": [
+          "/usr/bin/true",
+          "lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion",
+          "--ignored",
+          "--exact",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "binary_sha256": "511602b8cf083bdff74d43242b71c27484bd63121c07f3b59575d35676e1f6cb",
+        "features": [],
+        "pid": 88754,
+        "start": "2026-10-13T04:10:22.171270+00:00",
+        "end": "2026-10-13T04:10:22.174226+00:00",
+        "seconds": 0.00283679199492326,
+        "exit": 0,
+        "timeout": false,
+        "wait_error": null,
+        "stdout": {
+          "path": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/success/success-gpu.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/success/success-gpu.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "environment": {
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "HOME": "set",
+          "TMPDIR": "/tmp",
+          "RUST_BACKTRACE": "1"
+        }
+      },
+      "release": {
+        "packet": "cluster-grid-readback-002",
+        "at": "2026-10-13T04:10:22.174667+00:00",
+        "children": 1,
+        "owned_processes": [],
+        "ledger_pids_alive": [],
+        "ledger_sha256": "667cda5c7d6c411c184e95c45ea0396294989221fe5bd2be5488a8893ed68154",
+        "system": {
+          "system": "Darwin",
+          "release": "27.0.0",
+          "machine": "arm64",
+          "mac_ver": "27.0.1"
+        }
+      },
+      "original_exception_preserved": null
+    },
+    {
+      "case": "timeout",
+      "terminal": {
+        "name": "timeout",
+        "argv": [
+          "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/sleep",
+          "lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion",
+          "--ignored",
+          "--exact",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "binary_sha256": "eb2c0b11d46d6efb3031027345fb05b0e168ed4c2244e3639b302e3e8e1361c9",
+        "features": [],
+        "pid": 88755,
+        "start": "2026-10-13T04:10:22.179856+00:00",
+        "end": "2026-10-13T04:10:22.284498+00:00",
+        "seconds": 0.10465529200155288,
+        "exit": -9,
+        "timeout": true,
+        "wait_error": null,
+        "stdout": {
+          "path": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/timeout/timeout-gpu.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/timeout/timeout-gpu.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "environment": {
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "HOME": "set",
+          "TMPDIR": "/tmp",
+          "RUST_BACKTRACE": "1"
+        }
+      },
+      "release": {
+        "packet": "cluster-grid-readback-002",
+        "at": "2026-10-13T04:10:22.285354+00:00",
+        "children": 1,
+        "owned_processes": [],
+        "ledger_pids_alive": [],
+        "ledger_sha256": "7ba715eec1f495af083e1381ade6a52938cc3588648fbba049793d8f971b4619",
+        "system": {
+          "system": "Darwin",
+          "release": "27.0.0",
+          "machine": "arm64",
+          "mac_ver": "27.0.1"
+        }
+      },
+      "original_exception_preserved": null
+    },
+    {
+      "case": "interrupt",
+      "terminal": {
+        "name": "interrupt",
+        "argv": [
+          "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/sleep",
+          "lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion",
+          "--ignored",
+          "--exact",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "binary_sha256": "eb2c0b11d46d6efb3031027345fb05b0e168ed4c2244e3639b302e3e8e1361c9",
+        "features": [],
+        "pid": 88756,
+        "start": "2026-10-13T04:10:22.286153+00:00",
+        "end": "2026-10-13T04:10:22.743471+00:00",
+        "seconds": 0.45737233300314983,
+        "exit": -9,
+        "timeout": false,
+        "wait_error": "KeyboardInterrupt",
+        "stdout": {
+          "path": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/interrupt/interrupt-gpu.stdout",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-gpu-runner-lifecycle-0tmhzvbv/interrupt/interrupt-gpu.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "environment": {
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "HOME": "set",
+          "TMPDIR": "/tmp",
+          "RUST_BACKTRACE": "1"
+        }
+      },
+      "release": {
+        "packet": "cluster-grid-readback-002",
+        "at": "2026-10-13T04:10:22.745927+00:00",
+        "children": 1,
+        "owned_processes": [],
+        "ledger_pids_alive": [],
+        "ledger_sha256": "4b79b3b15116194c7fde6ef88f245216e33cff27bc6633fe7a8a9ed01c193809",
+        "system": {
+          "system": "Darwin",
+          "release": "27.0.0",
+          "machine": "arm64",
+          "mac_ver": "27.0.1"
+        }
+      },
+      "original_exception_preserved": "KeyboardInterrupt"
+    }
+  ]
+}
