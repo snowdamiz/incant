@@ -1,0 +1,25 @@
+{
+  "packet": "0076-shadow-guard-review",
+  "stage": "shadow-guard-build",
+  "holder": "root supervised sequential shadow comparison CPU builds",
+  "sources": {
+    "baseline": {
+      "source_commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+      "source_freeze": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/baseline-source-freeze.json",
+        "sha256": "ab1d341ecd098348b1446f4c6e971001ce5bfb7e7e6bfef7fd76340fe90ee673"
+      }
+    },
+    "candidate": {
+      "source_commit": "f636a2d5e595cffae702d078bcee61f34ab35394",
+      "source_freeze": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/candidate-source-freeze.json",
+        "sha256": "6b80b9e8ca7689773d10ebe5f809dff8673372c25e8eecdd5b86abf1d9791d52"
+      }
+    }
+  },
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/target-lease.json",
+  "prior_build_release_sha256": "0e4fe21a6748b6e595a79a496067a9a259bdfcbd93506e0a2ebc296b5235f275"
+}

@@ -1,0 +1,231 @@
+{
+ "published": "2026-10-13T14:56:42.434626+00:00",
+ "analysis": {
+  "path": "summary-2026-10-13T145022.235852+0000.json",
+  "sha256": "1783b5748560f51c076f4bf5487877a3aee5b8e241d2db4d35ee75c2d3b86f43"
+ },
+ "files": [
+  {
+   "path": "review-ready.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/review-ready.json",
+   "sha256": "18e483b361e4a07ad894a7046a7ea094d001c5e55cfc250d4d36f192069a88fc"
+  },
+  {
+   "path": "build-ready.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build-ready.json",
+   "sha256": "83bb00aace62ffb65b85c39bceae0a1d0b9283a16075185c5c7de9c221c52661"
+  },
+  {
+   "path": "gpu-ledger.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/gpu-ledger.jsonl",
+   "sha256": "58b77135607094c578cab1fb3e0c8e0dcbccd595d963daaa5b092e98d1401a47"
+  },
+  {
+   "path": "budget.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/budget.jsonl",
+   "sha256": "9e210890c25f461eab6717ef30fbc66c8099626ca1f5274687eb883a07963a95"
+  },
+  {
+   "path": "gpu-released.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/gpu-released.json",
+   "sha256": "68e22d6d5e280a403d0ab1888402216700d9d2ee0d63c9090f7b92105fc8fd0b"
+  },
+  {
+   "path": "target-lease.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/target-lease.json",
+   "sha256": "18cd8e30eebc25a711ae3edaf2d5bc0853a8d4b83bae486c8168208ddd374690"
+  },
+  {
+   "path": "analysis/summary-2026-10-13T145022.235852+0000.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/analysis/summary-2026-10-13T145022.235852+0000.json",
+   "sha256": "1783b5748560f51c076f4bf5487877a3aee5b8e241d2db4d35ee75c2d3b86f43"
+  },
+  {
+   "path": "analysis/compare-2026-10-13T145029.149628+0000.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/analysis/compare-2026-10-13T145029.149628+0000.json",
+   "sha256": "44bfb050b136302cb1408abbc503b577fffc27f60380d95d4afb44c53b42f3c5"
+  },
+  {
+   "path": "build/baseline/source.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/baseline/source.json",
+   "sha256": "dce94236f76bb77162204df63aacd3a895b9db05b337c7f20face22c3b246eb7"
+  },
+  {
+   "path": "build/baseline/toolchain.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/baseline/toolchain.json",
+   "sha256": "e2ffee1a8c0ee96203de1775c24c4556b3d0b1751d711545fa8650548fe34897"
+  },
+  {
+   "path": "build/baseline/review.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/baseline/review.json",
+   "sha256": "7d38ef4339443e4c2e5283e06b397b355efe33e9194346b19b864f52c7191fd4"
+  },
+  {
+   "path": "build/baseline/lint.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/baseline/lint.json",
+   "sha256": "dfb15d8131c11798789aa5659a347f7ca1828219a0ef5ec414272a7a59fe997b"
+  },
+  {
+   "path": "build/candidate/source.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/candidate/source.json",
+   "sha256": "bcc1e1270e971d940ef328c6d66ddce1fa48aaffe5412537332d389b5980bf59"
+  },
+  {
+   "path": "build/candidate/toolchain.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/candidate/toolchain.json",
+   "sha256": "1bfb52a63c934598419c2a4cbe14a16db0348b3d96d0ae6ce18fb586a126c400"
+  },
+  {
+   "path": "build/candidate/review.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/candidate/review.json",
+   "sha256": "17e0dfc6e17cbf2fc9914b3fc44a15498249bb1b3435df45550c05a715aab6d3"
+  },
+  {
+   "path": "build/candidate/lint.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/build/candidate/lint.json",
+   "sha256": "c70c428f5cf6f576ae625d3901dc22498746f143221bfe9aa866491bf1387dd2"
+  },
+  {
+   "path": "logs/baseline-workspace-clean.stdout",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/baseline-workspace-clean.stdout",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "logs/baseline-workspace-clean.stderr",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/baseline-workspace-clean.stderr",
+   "sha256": "0a6e62607b032891801be4c8370c97e73c44eb2b5b9609f28d7eb2557d05addb"
+  },
+  {
+   "path": "logs/build-baseline-review.stdout.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-review.stdout.jsonl",
+   "sha256": "0e4e867add591509357904377c34fbf32a3eaca1cd5dc6ad564e0ac95144e405"
+  },
+  {
+   "path": "logs/build-baseline-review.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-review.stderr.txt",
+   "sha256": "87fece1fa6d5178577335bda037cee9d558a9c1aedc5967135a20c062ca7d1d1"
+  },
+  {
+   "path": "logs/build-baseline-lint.stdout.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-lint.stdout.jsonl",
+   "sha256": "28cf96236b33c1bea947a47fde85ff16cc54d96dc79e3a83407d17e8a8469f56"
+  },
+  {
+   "path": "logs/build-baseline-lint.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-lint.stderr.txt",
+   "sha256": "0b68ec7d3d3b688c3e84dd1a6e9966d4e7f6ac9b7f54a2d97dac79d02aa8621b"
+  },
+  {
+   "path": "logs/candidate-workspace-clean.stdout",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/candidate-workspace-clean.stdout",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "logs/candidate-workspace-clean.stderr",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/candidate-workspace-clean.stderr",
+   "sha256": "518c526c3d534f9cc4258ffdf7419bdee1b9d29f5a73a23907d526f22f107dd7"
+  },
+  {
+   "path": "logs/build-candidate-review.stdout.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-candidate-review.stdout.jsonl",
+   "sha256": "16d7870f24e0c93f933af81f996b04ee174c44610973c10b62d36b091434299d"
+  },
+  {
+   "path": "logs/build-candidate-review.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-candidate-review.stderr.txt",
+   "sha256": "01697041e2a8f689a2aea6ebc14614bab0025b1c42b5ef34a67873eadad3d74e"
+  },
+  {
+   "path": "logs/build-candidate-lint.stdout.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-candidate-lint.stdout.jsonl",
+   "sha256": "83227ec5d713a8c045c7f112c31f632ba67e3f864a903c37d6a722150499aa5e"
+  },
+  {
+   "path": "logs/build-candidate-lint.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-candidate-lint.stderr.txt",
+   "sha256": "d4944864c897c342b41b45fa29e57f3b11e2f3d061b2b38d4a6131ed684991c8"
+  },
+  {
+   "path": "logs/gpu-list-baseline.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-list-baseline.stdout.txt",
+   "sha256": "b6e02a049df0d8e742f170a9d61fdf3e666521c2b98748bec9951464f4fd3d43"
+  },
+  {
+   "path": "logs/gpu-list-baseline.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-list-baseline.stderr.txt",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "logs/gpu-review-baseline-viewport.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-review-baseline-viewport.stdout.txt",
+   "sha256": "bf9b6517f4b807ea87145a2353c9cef5b49335e9d24b5fccdacf219ea450fd6b"
+  },
+  {
+   "path": "logs/gpu-review-baseline-viewport.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-review-baseline-viewport.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/baseline/viewport/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/baseline/viewport/report.json",
+   "sha256": "5b173e96030a4dc48c8aa130a7fd7263102489f64177f38e7a84efa4103f48e1"
+  },
+  {
+   "path": "captures/baseline/viewport/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/baseline/viewport/events.jsonl",
+   "sha256": "a54c0d6fabaa5039e8159f6927b3fa4bfe85e6c52a381141b78d9bcc333e9913"
+  },
+  {
+   "path": "logs/gpu-list-candidate.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-list-candidate.stdout.txt",
+   "sha256": "b6e02a049df0d8e742f170a9d61fdf3e666521c2b98748bec9951464f4fd3d43"
+  },
+  {
+   "path": "logs/gpu-list-candidate.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-list-candidate.stderr.txt",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "logs/gpu-review-candidate-viewport.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-review-candidate-viewport.stdout.txt",
+   "sha256": "1b36f4c669fb51cfb2ea8765b0d8155bd9f6eea92ae995da776a48717ecc5ffa"
+  },
+  {
+   "path": "logs/gpu-review-candidate-viewport.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-review-candidate-viewport.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/candidate/viewport/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/candidate/viewport/report.json",
+   "sha256": "c405fe73ab1479197790842764baac34f67e5c43c98775267680ecb5b580821a"
+  },
+  {
+   "path": "captures/candidate/viewport/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/candidate/viewport/events.jsonl",
+   "sha256": "80595e6a9591c8d3fb44714bf056d1390a8086ba510172ab3da585178af9c120"
+  }
+ ],
+ "screenshots": [
+  {
+   "name": "baseline-viewport-on-f24.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/baseline/viewport/viewport-on-f24.png",
+   "sha256": "6b3194c903258a11d199566004f77c82d3654ad999c0313fc2f951464d18e649"
+  },
+  {
+   "name": "baseline-viewport-off-f24.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/baseline/viewport/viewport-off-f24.png",
+   "sha256": "2b762c2041e901a3660eef34ab83fc89bbe66776d58ee545b881870d4ac06798"
+  },
+  {
+   "name": "candidate-viewport-on-f24.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/candidate/viewport/viewport-on-f24.png",
+   "sha256": "6b3194c903258a11d199566004f77c82d3654ad999c0313fc2f951464d18e649"
+  },
+  {
+   "name": "candidate-viewport-off-f24.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/captures/candidate/viewport/viewport-off-f24.png",
+   "sha256": "da58165787a86396feb56d093ff5cc8a967c19dd58ecce410f137d598dce6c61"
+  }
+ ]
+}

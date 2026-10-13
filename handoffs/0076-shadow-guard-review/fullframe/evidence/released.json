@@ -1,0 +1,42 @@
+{
+ "packet": "0076-shadow-guard-review",
+ "holder": "Claude Opus5.5 Max",
+ "grant_sha256": "228b2f201cc8fc3dee50c66fbb446f9db72bc00d5073f1946e33b6e5884b865b",
+ "released_at": "2026-10-13T15:24:22.362787+00:00",
+ "children": 2,
+ "runs": [
+  "baseline-stationary",
+  "candidate-stationary"
+ ],
+ "failed": {},
+ "stop_latched": false,
+ "stopped": null,
+ "debited": {
+  "submissions": 34,
+  "pngs": 6
+ },
+ "debits_without_ledger_row": [],
+ "ledger_sha256": "cf9ececa783dcd7faf221e5df0c7df5b62bcf3e41c144bf2941262a894247a3f",
+ "debits_sha256": "86f3f39fbd46abdcf76085b2220c74c97afc529172cd7ac74f9e3ea27955b89e",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "original_checkouts_after": {
+  "baseline": {
+   "role": "baseline",
+   "commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+   "tree": "9363cf4ffb7c2abe2c47042dfb0e85e98a02da00",
+   "files": 19496,
+   "manifest_sha256": "0dcb42189f137065e06292298c89a7039e3ecfa8489f96ec1a08fd0f6f85da7b",
+   "helper_copy_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+  },
+  "candidate": {
+   "role": "candidate",
+   "commit": "f636a2d5e595cffae702d078bcee61f34ab35394",
+   "tree": "c4fe457af5acf6b4d2be6e148379b51c23985c17",
+   "files": 19500,
+   "manifest_sha256": "5710306c53a7864cf3a4131b30b46d024c9ec4d59cb73ebbb9f8f5e43e69546e",
+   "helper_copy_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+  }
+ },
+ "note": "GPU released for root; nothing was written to 0076-shadow-guard-review-001."
+}
