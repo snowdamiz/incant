@@ -75,8 +75,9 @@ the executed source005 prepared tree, including the native capture dependency
 and combined lock. This source comparison is not a new build or execution.
 Current-main source/graph reuse is independently accepted under receipt
 `72be7b2ea605b36fa482a5a69f3488ecbefca4a297c11cb3f64a7f2e86bbe689`.
-Publication follows the separately reviewed native capture merge and the required
-exact-head fast check.
+Native capture merged as PR244. The actual main244 ancestry join changes only
+five documentation/review/verifier paths; the source proof replays unchanged.
+Outer publication awaits its required exact-head fast check.
 
 ## Remaining limits
 
