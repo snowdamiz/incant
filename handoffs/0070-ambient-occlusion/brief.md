@@ -139,3 +139,52 @@ compiler wrappers or arbitrary account/provider environment. Reject unapproved
 build overrides before launching. Record allowed key names and nonsecret tool/
 evidence paths; never dump the parent environment or credentials. Target/backend
 selection, shader features and source identities must match the frozen commands.
+
+## Root priority revision — combined effects preparation, 2026-10-13
+
+This section supersedes earlier source, separate-packet and launch-count details.
+Prepare one combined SSAO+bloom numerical and visual review on this checkout's
+reviewed renderer union `b633f92d9d20cd8ed4c328b0b670ab7935797801`:
+cluster/DRS integration `9b1df9db`, accepted SSAO `0ae7cc02`, and bloom `10befc30`.
+Read both this packet and `handoffs/0071-bloom/brief.md`; 0071 will not run separately.
+The combined source already maps bloom sampling to internal coordinates and has
+an ignored reduced-resolution emitter-position test. Source-only review found no
+integration issues. Root's 11 CPU/compile/lint/tooling checks passed on source003;
+that is not efficacy or appearance acceptance. GPU timestamps are NOT part of
+this union; root is correcting the separately discovered Metal timestamp defect.
+
+THIS SESSION IS PREPARATION ONLY: no Cargo build, target access, new GPU process,
+window, render, screen capture or execution grant. You may inspect existing
+retained images and source and build CPU-only planning/analysis helpers. Prepare
+and commit a bounded case plan and self-contained execution helpers, then return
+for root's correctness review. Do not create or update persistent, personal or
+auto-memory notes. Write only within your isolated handoff worktree. A future
+external evidence directory and target will be explicitly assigned by root.
+
+Plan one matched default-WGSL union with controls off, SSAO-only, bloom-only and
+both enabled. Exercise real diffuse occlusion (not just strength-zero parity),
+excluded contributions, MASK/BLEND/retained deformations, perspective/orthographic,
+odd dimensions and offset viewports, and DRS50/75/100. Preserve exact tone,
+material, chrome and UI behavior. Include the new reduced-resolution bloom emitter
+position test exactly once. Read original source and evidence limitations before
+choosing fixtures; report missing observation capabilities rather than guessing.
+
+A single retained process can handle several bounded cases; separate actual
+renderer regression binaries must still run individually. Propose at most16 serial
+GPU children, at most128 new frames TOTAL across both effects including all new
+ignored tests and failed attempts, at most16 retained matched pairs/32 PNGs,
+maximum960x540. Existing regression ceiling2048 rendered frames, combined2176,
+45-minute execution ceiling excluding compilation. CPU build concurrency2 only.
+Charge actual new test frames to new-frame budget even when invoked in the suite.
+Freeze exact listing delta, per-case counts/source/binary/feature hashes and
+construction environment before launch. There is no license to rerun failing
+cases unboundedly. Original failures and all cleanup outcomes must be retained.
+
+Helpers must re-verify source/grant/binaries, reserve budget before every child,
+and terminate AND REAP owned groups in finally even for interrupted waits or
+postprocessing exceptions. An uncatchable SIGKILL limitation is explicit. Build
+and GPU leases are separate; root may grant one without the other. No account or
+ambient build/provider variables; construct a narrow environment as above. Do
+not copy unreviewed old runner failure handling. Include helper Clippy and actual
+CPU process-lifecycle controls in the proposed check list. On completion return
+result.md describing readiness and any blockers, not claiming visual success.
