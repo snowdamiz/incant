@@ -1,0 +1,220 @@
+{
+ "candidate_out_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_render-aad65e6a034c3378/out",
+ "cluster_artifacts": {
+  "Metal-Compute.shader": {
+   "bytes": 7848,
+   "sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d",
+   "manifest_ci_sha256": "1d501c9dabac36b7530eec4103e488da1a18e89649ffd4f05a74771e1be3b12d",
+   "matches_manifest_ci": true
+  },
+  "Vulkan-Compute.shader": {
+   "bytes": 9760,
+   "sha256": "b5b5e4eba86ec224ca04ecf97adb9ba2cfc62f3fe61ffaca5f5643dbe4ce0120",
+   "manifest_ci_sha256": "b5b5e4eba86ec224ca04ecf97adb9ba2cfc62f3fe61ffaca5f5643dbe4ce0120",
+   "matches_manifest_ci": true
+  },
+  "Dx12-Compute.shader": {
+   "bytes": 6998,
+   "sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3",
+   "manifest_ci_sha256": "e7e4401e67edf5064c54cb843767dc2cdff8452c38ecc87dabc57fe6665598b3",
+   "matches_manifest_ci": true
+  }
+ },
+ "binaries": {
+  "baseline/incant_render-lib-tests": {
+   "sha256": "c2b1adfffcc2cb4b21abcb2a16d9e1c671b5e1ab16b5bb0f7d986fe502bb4f79",
+   "counts": {
+    "grid.wgsl": 1,
+    "cooked Metal-Compute.shader": 0,
+    "cooked Vulkan-Compute.shader": 0,
+    "cooked Dx12-Compute.shader": 0
+   }
+  },
+  "baseline/model_gpu": {
+   "sha256": "24578d772b74325cfb3c951c5f57d1c3d99f01775dfdb251d993342744f9104d",
+   "counts": {
+    "grid.wgsl": 1,
+    "cooked Metal-Compute.shader": 0,
+    "cooked Vulkan-Compute.shader": 0,
+    "cooked Dx12-Compute.shader": 0
+   }
+  },
+  "baseline/gpu_host-game": {
+   "sha256": "e217a4c33d6c30296ba76ee90d340f099f772e6853c7fe165873813436c57da1",
+   "counts": {
+    "grid.wgsl": 1,
+    "cooked Metal-Compute.shader": 0,
+    "cooked Vulkan-Compute.shader": 0,
+    "cooked Dx12-Compute.shader": 0
+   }
+  },
+  "baseline/gpu_host-ui": {
+   "sha256": "e8a87ae0c98126068dcb9eb13291dbe677ec388e1dcd145923aacc9997513f88",
+   "counts": {
+    "grid.wgsl": 1,
+    "cooked Metal-Compute.shader": 0,
+    "cooked Vulkan-Compute.shader": 0,
+    "cooked Dx12-Compute.shader": 0
+   }
+  },
+  "baseline/cluster_review": {
+   "sha256": "dedd22962453e1726299f76987720d6c7c82553e19781fc5a82024217567e85f",
+   "counts": {
+    "grid.wgsl": 1,
+    "cooked Metal-Compute.shader": 0,
+    "cooked Vulkan-Compute.shader": 0,
+    "cooked Dx12-Compute.shader": 0
+   }
+  },
+  "candidate/incant_render-lib-tests": {
+   "sha256": "a8d7d2fb4fd2c83791e4200344f19a5e5022bda901744b9a251d97bd83c077a9",
+   "counts": {
+    "grid.wgsl": 1,
+    "cooked Metal-Compute.shader": 1,
+    "cooked Vulkan-Compute.shader": 1,
+    "cooked Dx12-Compute.shader": 1
+   }
+  },
+  "candidate/model_gpu": {
+   "sha256": "c1c8dc84efe339e89eb270b753b0d82d6a86eb3290eeddcf5ff90c818197a8ff",
+   "counts": {
+    "grid.wgsl": 0,
+    "cooked Metal-Compute.shader": 1,
+    "cooked Vulkan-Compute.shader": 1,
+    "cooked Dx12-Compute.shader": 1
+   }
+  },
+  "candidate/gpu_host-game": {
+   "sha256": "2abb9bc129caacf783d4d687d419d7e910daad85946644bcb2272219cf30a7f4",
+   "counts": {
+    "grid.wgsl": 0,
+    "cooked Metal-Compute.shader": 1,
+    "cooked Vulkan-Compute.shader": 1,
+    "cooked Dx12-Compute.shader": 1
+   }
+  },
+  "candidate/gpu_host-ui": {
+   "sha256": "9dc6bb6a2317ac32cf68d4e3fb68582499202b8a375d2befe976efd024135130",
+   "counts": {
+    "grid.wgsl": 0,
+    "cooked Metal-Compute.shader": 1,
+    "cooked Vulkan-Compute.shader": 1,
+    "cooked Dx12-Compute.shader": 1
+   }
+  },
+  "candidate/cluster_review": {
+   "sha256": "ebe789194734687ef381d7943023866890161156e92d30b86a073447d63c6b4d",
+   "counts": {
+    "grid.wgsl": 0,
+    "cooked Metal-Compute.shader": 1,
+    "cooked Vulkan-Compute.shader": 1,
+    "cooked Dx12-Compute.shader": 1
+   }
+  }
+ },
+ "out_dir_families": {
+  "tests-baseline": {
+   "out_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_render-aa06ba943db7fa9f/out",
+   "families": [
+    "diagnostic-shaders",
+    "material-shaders",
+    "output-shaders",
+    "shadow-shaders",
+    "sprite-shaders",
+    "text-shaders",
+    "ui-shaders"
+   ]
+  },
+  "review-baseline": {
+   "out_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_render-dc2b912306ae19c4/out",
+   "families": [
+    "diagnostic-shaders",
+    "material-shaders",
+    "output-shaders",
+    "shadow-shaders",
+    "sprite-shaders",
+    "text-shaders",
+    "ui-shaders"
+   ]
+  },
+  "tests-candidate": {
+   "out_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_render-aad65e6a034c3378/out",
+   "families": [
+    "cluster-shaders",
+    "diagnostic-shaders",
+    "material-shaders",
+    "output-shaders",
+    "shadow-shaders",
+    "sprite-shaders",
+    "text-shaders",
+    "ui-shaders"
+   ]
+  },
+  "review-candidate": {
+   "out_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_render-76e2a83ecbe6a5f6/out",
+   "families": [
+    "cluster-shaders",
+    "diagnostic-shaders",
+    "material-shaders",
+    "output-shaders",
+    "shadow-shaders",
+    "sprite-shaders",
+    "text-shaders",
+    "ui-shaders"
+   ]
+  }
+ },
+ "non_cluster_outputs_identical": {
+  "diagnostic-shaders/Dx12-Fragment.shader": true,
+  "diagnostic-shaders/Dx12-Vertex.shader": true,
+  "diagnostic-shaders/Metal-Fragment.shader": true,
+  "diagnostic-shaders/Metal-Vertex.shader": true,
+  "diagnostic-shaders/Vulkan-Fragment.shader": true,
+  "diagnostic-shaders/Vulkan-Vertex.shader": true,
+  "diagnostic-shaders/manifest.rs": true,
+  "material-shaders/Dx12-Fragment.shader": true,
+  "material-shaders/Dx12-Vertex.shader": true,
+  "material-shaders/Metal-Fragment.shader": true,
+  "material-shaders/Metal-Vertex.shader": true,
+  "material-shaders/Vulkan-Fragment.shader": true,
+  "material-shaders/Vulkan-Vertex.shader": true,
+  "material-shaders/manifest.rs": true,
+  "output-shaders/Dx12-Fragment.shader": true,
+  "output-shaders/Dx12-Vertex.shader": true,
+  "output-shaders/Metal-Fragment.shader": true,
+  "output-shaders/Metal-Vertex.shader": true,
+  "output-shaders/Vulkan-Fragment.shader": true,
+  "output-shaders/Vulkan-Vertex.shader": true,
+  "output-shaders/manifest.rs": true,
+  "shadow-shaders/Dx12-Fragment.shader": true,
+  "shadow-shaders/Dx12-Vertex.shader": true,
+  "shadow-shaders/Metal-Fragment.shader": true,
+  "shadow-shaders/Metal-Vertex.shader": true,
+  "shadow-shaders/Vulkan-Fragment.shader": true,
+  "shadow-shaders/Vulkan-Vertex.shader": true,
+  "shadow-shaders/manifest.rs": true,
+  "sprite-shaders/Dx12-Fragment.shader": true,
+  "sprite-shaders/Dx12-Vertex.shader": true,
+  "sprite-shaders/Metal-Fragment.shader": true,
+  "sprite-shaders/Metal-Vertex.shader": true,
+  "sprite-shaders/Vulkan-Fragment.shader": true,
+  "sprite-shaders/Vulkan-Vertex.shader": true,
+  "sprite-shaders/manifest.rs": true,
+  "text-shaders/Dx12-Fragment.shader": true,
+  "text-shaders/Dx12-Vertex.shader": true,
+  "text-shaders/Metal-Fragment.shader": true,
+  "text-shaders/Metal-Vertex.shader": true,
+  "text-shaders/Vulkan-Fragment.shader": true,
+  "text-shaders/Vulkan-Vertex.shader": true,
+  "text-shaders/manifest.rs": true,
+  "ui-shaders/Dx12-Fragment.shader": true,
+  "ui-shaders/Dx12-Vertex.shader": true,
+  "ui-shaders/Metal-Fragment.shader": true,
+  "ui-shaders/Metal-Vertex.shader": true,
+  "ui-shaders/Vulkan-Fragment.shader": true,
+  "ui-shaders/Vulkan-Vertex.shader": true,
+  "ui-shaders/manifest.rs": true
+ },
+ "baseline_has_cluster_outputs": false,
+ "baseline_only_outputs": []
+}

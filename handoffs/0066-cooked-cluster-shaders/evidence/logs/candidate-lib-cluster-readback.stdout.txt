@@ -1,0 +1,7 @@
+
+running 3 tests
+test lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data ... ok
+test lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership ... ok
+test lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 104 filtered out; finished in 0.41s

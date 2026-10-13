@@ -1,0 +1,147 @@
+{
+ "kind": "derived figures (CPU crops/zooms of candidate captures; not renders)",
+ "margin": 10,
+ "tile": 64,
+ "figures": {
+  "n33-corner-light": {
+   "from": "C-persp-n33.png",
+   "from_sha256": "088a796ab50b95691e78e85e3eaad1e5b7ae89e60b7f964d0dfdf2d1a1f348f4",
+   "rect": [
+    384,
+    192,
+    128,
+    128
+   ],
+   "zoom": 4,
+   "tile_edges_x": [
+    384,
+    448,
+    512
+   ],
+   "tile_edges_y": [
+    192,
+    256,
+    320
+   ],
+   "sha256": "f08f79def2d96a5bc48598235132c81709e5104bf1ee07e9595eb48792a0ea1d"
+  },
+  "n33-near-row": {
+   "from": "C-persp-n33.png",
+   "from_sha256": "088a796ab50b95691e78e85e3eaad1e5b7ae89e60b7f964d0dfdf2d1a1f348f4",
+   "rect": [
+    384,
+    384,
+    192,
+    128
+   ],
+   "zoom": 3,
+   "tile_edges_x": [
+    384,
+    448,
+    512,
+    576
+   ],
+   "tile_edges_y": [
+    384,
+    448,
+    512
+   ],
+   "sha256": "1c68b96f1be5bffa7bc7e9f491ee354f27b22d691ddf03a06046d7a3e09f85fc"
+  },
+  "n33-horizontal-edge": {
+   "from": "C-persp-n33.png",
+   "from_sha256": "088a796ab50b95691e78e85e3eaad1e5b7ae89e60b7f964d0dfdf2d1a1f348f4",
+   "rect": [
+    512,
+    256,
+    256,
+    128
+   ],
+   "zoom": 3,
+   "tile_edges_x": [
+    512,
+    576,
+    640,
+    704,
+    768
+   ],
+   "tile_edges_y": [
+    256,
+    320,
+    384
+   ],
+   "sha256": "7bdcb3f8a52c05d39668c96406e4d11d8bdf81695f8e0365c1bbcb6e712b7f0c"
+  },
+  "n4096-t000-centre": {
+   "from": "C-persp-n4096-t000.png",
+   "from_sha256": "cdfab98b3fd40369165d77d5a11c7168d0f8bcf5e3bc75dac336a1e39a2643ad",
+   "rect": [
+    320,
+    320,
+    256,
+    128
+   ],
+   "zoom": 3,
+   "tile_edges_x": [
+    320,
+    384,
+    448,
+    512,
+    576
+   ],
+   "tile_edges_y": [
+    320,
+    384,
+    448
+   ],
+   "sha256": "fcaa3770f1c00c50648d3642230e8b2465dd29c3eda1d079274fe7ea55dc991d"
+  },
+  "n4096-t030-centre": {
+   "from": "C-persp-n4096-t030.png",
+   "from_sha256": "1b1e2a165ee9b611ddc66e35481e98c92ee73e4ceb9a33cacc8291603a983315",
+   "rect": [
+    320,
+    320,
+    256,
+    128
+   ],
+   "zoom": 3,
+   "tile_edges_x": [
+    320,
+    384,
+    448,
+    512,
+    576
+   ],
+   "tile_edges_y": [
+    320,
+    384,
+    448
+   ],
+   "sha256": "d7438bf4a910a71c466525138cbbc41abfdcacc1fba859c243dd01e4a9a91cbc"
+  },
+  "ortho-t030-centre": {
+   "from": "C-ortho-n4096-t030.png",
+   "from_sha256": "b1455487d7ed84067bac1e1bb3e1fe5b12913f1e51b72505a14ceb3ea895e446",
+   "rect": [
+    384,
+    192,
+    192,
+    128
+   ],
+   "zoom": 3,
+   "tile_edges_x": [
+    384,
+    448,
+    512,
+    576
+   ],
+   "tile_edges_y": [
+    192,
+    256,
+    320
+   ],
+   "sha256": "f3afc3a7e883e7ee66b54f254cbb2f07eb2d9cdf7dd5fdee73e32588b87a72b6"
+  }
+ }
+}

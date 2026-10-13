@@ -1,0 +1,24 @@
+{
+ "C": {
+  "entities": 4109,
+  "local_lights": 4096,
+  "cooked": {
+   "C": [
+    775485,
+    4
+   ]
+  },
+  "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4SJFGQVC70C76HZJFA3N3VE\",\n  \"schema_version\": 1,\n  \"valid\": true\n}"
+ },
+ "D": {
+  "entities": 5,
+  "local_lights": 0,
+  "cooked": {
+   "D": [
+    949,
+    4
+   ]
+  },
+  "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4SJFJBW11RTNCSQ9MZQF98V\",\n  \"schema_version\": 1,\n  \"valid\": true\n}"
+ }
+}

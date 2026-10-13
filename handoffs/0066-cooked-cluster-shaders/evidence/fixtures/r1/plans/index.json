@@ -1,0 +1,43 @@
+{
+ "main-dry": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/plans/main-dry.json",
+  "sha256": "867db7d84bbd61486faa8433aa188bc6344bc48003932736af7f0c9b40fb5d75",
+  "pngs": [],
+  "frames": 20,
+  "controls": 17
+ },
+ "main": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/plans/main.json",
+  "sha256": "9c31f88f43efffe11fa692e08af47de7fa0d84974ee30bfa9860bce48aaace63",
+  "pngs": [
+   "C-persp-n4096-t000.png",
+   "C-persp-n4096-t030.png",
+   "C-persp-n4096-t030-viewport.png",
+   "C-persp-n33.png",
+   "C-ortho-n4096-t030.png",
+   "D-directional-only.png"
+  ],
+  "frames": 20,
+  "controls": 17
+ },
+ "source-free": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/plans/source-free.json",
+  "sha256": "a0b166551d8a59e4e44af476a962cc3698f76992748f5500a3fc6dc865c69793",
+  "pngs": [
+   "C-persp-n33-source-free.png"
+  ],
+  "frames": 5,
+  "controls": 0,
+  "source_free_boards": [
+   "C",
+   "D"
+  ]
+ },
+ "despawn_counts": [
+  33,
+  32,
+  31,
+  1,
+  0
+ ]
+}

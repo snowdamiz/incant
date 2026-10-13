@@ -1,0 +1,101 @@
+{
+ "packet": "0066-cooked-cluster-shaders",
+ "holder": "claude (Opus 5.5, Max thinking) for handoff 0066",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "Astra via review-ready.json (0065 released it)",
+ "grant_sha256": "43eaf4ea83b44fd2dbeb296dd8446339b1318ff376fe7393888d8456e3a94d0e",
+ "grant": {
+  "packet": "0066-cooked-cluster-shaders",
+  "granted_at": "2026-10-13T02:23:00.619835+00:00",
+  "owner": "Claude Opus5.5 Max via ACP",
+  "source_commit": "96bb23df8eab86e00bef5b22e85525d36dd84972",
+  "prior_release_sha256": "0b88d47a6d0c0d756a0d75d6a53f8cc3b7f26b4b19d70b9242c9b7b2b05e72e1",
+  "prior_lease_sha256": "eb2d547f100dad79dfe9c5cbfaac3bd91a97813672445b91398287e9118287a3",
+  "prior_release_ledger_prefix_sha256": "5ae8d09f74fe5c3746265849b47b0725d2010ee698173e5b5730a9d02d9b8fab",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "restrictions": "Serial offscreen GPU only;24frames max960x540;boundedchildren. No nativewindow/desktopcapture/audio.0065 explicitly released GPU and Cargo target and may not reacquire.",
+  "owned_prior_processes": []
+ },
+ "prior_receipts": {
+  "release": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0065/release.json",
+   "sha256": "0b88d47a6d0c0d756a0d75d6a53f8cc3b7f26b4b19d70b9242c9b7b2b05e72e1",
+   "expected": "0b88d47a6d0c0d756a0d75d6a53f8cc3b7f26b4b19d70b9242c9b7b2b05e72e1"
+  },
+  "lease": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0065/lease.json",
+   "sha256": "eb2d547f100dad79dfe9c5cbfaac3bd91a97813672445b91398287e9118287a3",
+   "expected": "eb2d547f100dad79dfe9c5cbfaac3bd91a97813672445b91398287e9118287a3"
+  },
+  "ledger": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0065/ledger.jsonl",
+   "sha256": "3058694a7d1cb8ddc8646cc00adf8a6024ff765cd6bcabf59a21115ccd1548c8",
+   "prefix_expected": "5ae8d09f74fe5c3746265849b47b0725d2010ee698173e5b5730a9d02d9b8fab",
+   "prefix": {
+    "lines": 99,
+    "bytes": 85525,
+    "suffix": "{\"at\": \"2026-10-13T02:20:00.641353+00:00\", \"event\": \"release\", \"release_sha256\": \"0b88d47a6d0c0d756a0d75d6a53f8cc3b7f26b4b19d70b9242c9b7b2b05e72e1\"}\n"
+   }
+  },
+  "prior_release_body": {
+   "packet": "0065-core-live-hud",
+   "released_at": "2026-10-13T02:20:00.640731+00:00",
+   "grant_sha256": "e333ab2856f4354bfd552d1ce7d054134b3522cdf45a34c8e1c2ad1f0ff29192",
+   "lease_sha256": "eb2d547f100dad79dfe9c5cbfaac3bd91a97813672445b91398287e9118287a3",
+   "ledger_sha256": "5ae8d09f74fe5c3746265849b47b0725d2010ee698173e5b5730a9d02d9b8fab",
+   "children": 49,
+   "retained_frames": 21,
+   "frames": [
+    "captures/frames-ar-route-a/01-pickup-1.rgba",
+    "captures/frames-ar-route-a/02-after-start.rgba",
+    "captures/frames-en-XA-route-a/01-won.rgba",
+    "captures/frames-en-XA-route-a/02-after-start.rgba",
+    "captures/frames-en-default/01-start.rgba",
+    "captures/frames-en-locked/01-locked-exit.rgba",
+    "captures/frames-en-narrow/01-start.rgba",
+    "captures/frames-en-route-a/01-pickup-1.rgba",
+    "captures/frames-en-route-a/02-damage-1.rgba",
+    "captures/frames-en-route-a/03-collected.rgba",
+    "captures/frames-en-route-a/04-won.rgba",
+    "captures/frames-en-route-a/05-after-start.rgba",
+    "captures/frames-en-route-b/01-lost.rgba",
+    "captures/frames-en-route-b/02-after-r.rgba",
+    "captures/frames-zh-Hans-route-a/01-pickup-1.rgba",
+    "captures/frames-zh-Hans-route-a/02-won.rgba",
+    "captures/frames-zh-Hans-route-a/03-after-start.rgba",
+    "captures/review-ar-won/01-won.rgba",
+    "captures/review-en-XA-pickup/01-pickup-1.rgba",
+    "captures/review-en-narrow-lost/01-lost.rgba",
+    "captures/review-en-start/01-start.rgba"
+   ],
+   "owned_processes_alive": [],
+   "target_users": [],
+   "note": "GPU and Cargo target released by 0065; target left in place as warm cache; review-ready.json left untouched (only Astra writes it)."
+  }
+ },
+ "source": {
+  "head": "96bb23df8eab86e00bef5b22e85525d36dd84972",
+  "manifest_inputs": 19,
+  "manifest_inputs_digest": "78a3c62a0cdadd2d94008769a5e32f33130f9591770d10714695277a40e738ff"
+ },
+ "brief_sha256": "9700510ea735ef7547278a023ef1ab31ec42e3b24e9ef775c91dfac5814b21b3",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0066-cooked-cluster-shaders",
+ "acquired_at": "2026-10-13T02:42:56.865426+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only",
+  "--locked",
+  "--offline",
+  "--profile ci",
+  "at most -j2",
+  "serial offscreen GPU children under an exclusive lock",
+  "no native window or desktop capture",
+  "<= 24 retained frames, each <= 960x540",
+  "GPU suites <= 300 s, captures <= 120 s",
+  "binaries/evidence only under /Users/andreyyurlov/.codex/incant-evidence/0066",
+  "no other agent's target or packet files"
+ ],
+ "released_at": "2026-10-13T02:53:20.679032+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0066 cargo/rustc process remains on the target. Contents left in place as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0066/bin"
+}

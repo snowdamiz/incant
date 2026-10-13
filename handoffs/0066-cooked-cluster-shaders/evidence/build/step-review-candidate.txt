@@ -1,0 +1,9 @@
+{
+ "variant": "candidate",
+ "seen": [
+  "cooked-clusters,cooked-geometry,cooked-materials,cooked-output,cooked-sprites,cooked-text,cooked-ui,physics-deterministic"
+ ],
+ "frozen": {
+  "cluster_review": "ebe789194734687ef381d7943023866890161156e92d30b86a073447d63c6b4d"
+ }
+}

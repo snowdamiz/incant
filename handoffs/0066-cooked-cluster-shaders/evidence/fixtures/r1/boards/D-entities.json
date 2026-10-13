@@ -1,0 +1,158 @@
+[
+ {
+  "id": "01JA66DA000000000000000001",
+  "name": "camera",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     2.2,
+     5.5
+    ],
+    "rotation": [
+     -0.1410756949237263,
+     0.0,
+     0.0,
+     0.9899988122729176
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 45.0,
+    "near": 0.1,
+    "far": 30.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA66DA000000000000000002",
+  "name": "floor",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     -2.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     12.0,
+     1.0,
+     12.0
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SJFJHSQ5JSESCHJAYGTXPM",
+    "materials": [],
+    "cast_shadows": false
+   }
+  }
+ },
+ {
+  "id": "01JA66DA000000000000000003",
+  "name": "sphere",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -1.2,
+     0.6,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SJFJMQ2CM9S7MB1P45FGQW",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA66DA000000000000000004",
+  "name": "cube",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     1.2,
+     0.5,
+     -0.5
+    ],
+    "rotation": [
+     0.0,
+     0.21643961393810288,
+     0.0,
+     0.9762960071199334
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SJFJEXR8MV5Y901P8XTT1X",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA66DA000000000000000005",
+  "name": "sun",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     -0.40866790671884173,
+     0.29835469458499686,
+     0.14335296124453836,
+     0.850543912293513
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "DirectionalLight": {
+    "color": [
+     1.0,
+     0.95,
+     0.88
+    ],
+    "intensity": 2.0
+   }
+  }
+ }
+]

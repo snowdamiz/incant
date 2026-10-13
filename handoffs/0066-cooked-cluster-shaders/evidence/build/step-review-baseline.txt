@@ -1,0 +1,9 @@
+{
+ "variant": "baseline",
+ "seen": [
+  "cooked-geometry,cooked-materials,cooked-output,cooked-sprites,cooked-text,cooked-ui,physics-deterministic"
+ ],
+ "frozen": {
+  "cluster_review": "dedd22962453e1726299f76987720d6c7c82553e19781fc5a82024217567e85f"
+ }
+}

@@ -1,0 +1,15 @@
+{
+ "packet": "0066-cooked-cluster-shaders",
+ "released_at": "2026-10-13T02:52:50.414379+00:00",
+ "children": 23,
+ "refusals": 0,
+ "frames_written": 13,
+ "frames_reserved": 13,
+ "first_start": "2026-10-13T02:47:03.164712+00:00",
+ "last_end": "2026-10-13T02:52:36.279935+00:00",
+ "ledger_sha256": "5946821dea263c8a2915f18eb88050b3cdaf8eebaa6aa56cf779d9c8c5ab5646",
+ "grant_sha256_at_release": "43eaf4ea83b44fd2dbeb296dd8446339b1318ff376fe7393888d8456e3a94d0e",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "Release by 0066 for Astra; review-ready.json left untouched (only Astra writes it)."
+}

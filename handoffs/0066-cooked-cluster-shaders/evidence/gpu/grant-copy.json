@@ -1,0 +1,12 @@
+{
+  "packet": "0066-cooked-cluster-shaders",
+  "granted_at": "2026-10-13T02:23:00.619835+00:00",
+  "owner": "Claude Opus5.5 Max via ACP",
+  "source_commit": "96bb23df8eab86e00bef5b22e85525d36dd84972",
+  "prior_release_sha256": "0b88d47a6d0c0d756a0d75d6a53f8cc3b7f26b4b19d70b9242c9b7b2b05e72e1",
+  "prior_lease_sha256": "eb2d547f100dad79dfe9c5cbfaac3bd91a97813672445b91398287e9118287a3",
+  "prior_release_ledger_prefix_sha256": "5ae8d09f74fe5c3746265849b47b0725d2010ee698173e5b5730a9d02d9b8fab",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "restrictions": "Serial offscreen GPU only;24frames max960x540;boundedchildren. No nativewindow/desktopcapture/audio.0065 explicitly released GPU and Cargo target and may not reacquire.",
+  "owned_prior_processes": []
+}

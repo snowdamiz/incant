@@ -1,0 +1,29 @@
+{
+ "board": "D",
+ "at": "2026-10-13T02:52:28.227557+00:00",
+ "removed": {
+  "D/D.incant.json": "a0c0b3355748601d130c43ef18fdb057e2ac98b159dc6ada2def816c21548d49",
+  "D/D.incant.journal.jsonl": "cdd8acf5c997f6163178304baee83b02796c054cf1a6d948bbdb2b69b4a15805",
+  "D/art/cube-white.gltf": "1e3daab06d4be014befe4a27d525121035d47dfb43ff93f35442d4bddf98d947",
+  "D/art/cube.bin": "3a6bd3b2215e471d816ac8581110ffa3641c25cbfaca59ded181a754690f6797",
+  "D/art/floor-gray.gltf": "7684226ca0c7707d08362edfb79a823d1a7cc54ff489cd8585dcfb46ac3c0601",
+  "D/art/floor.bin": "521350c927ade9f2321c8d056ce0631ec97b0e606da9438d31df1046d4cf398f",
+  "D/art/sphere-white.gltf": "7e572d90b4a71072c5ffe18518b2a4d578498534c4f0c244116a2d16380f96c6",
+  "D/art/sphere.bin": "ba2b8cbcaf6bccbc80fb358aa7c966b72665d33e0e136a580da9ffa7d8be949d"
+ },
+ "private_copy": "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/private-fixture/D",
+ "kept_unchanged": true,
+ "kept": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/cooked/D.scene": "a2eb58053f12bb272c2e7d52fb3c4765e3d214db4921ab8958583e640abca3a5",
+  "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/D/.incant/cache/models/b1a92c8bdcf711ca275969d5ba05ce7306adab26234075202a53d1345a52d733.incmodel": "e17b9a9f3eaba5f2d0420030333f328ea35e81e7f466ffa5986fedde6a7acb17",
+  "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/D/.incant/cache/models/cc657285cc7f8d2013aee49ca08a05fddb1a74726720600009fecbc14923f99c.incmodel": "1900e40f0b3ef30089732e287b3d2648231ef279acf81b00b8b8da640772f110",
+  "/Users/andreyyurlov/.codex/incant-evidence/0066/fixtures/r1/D/.incant/cache/models/ee162c6fe156ee7c41657e3554d06425f4b382a9b568d5ba7b48193b4b80d1e0.incmodel": "27d1ea77ee878d613729ad322bcea5a653eda8bb0e58a849fd38e47a6d3c7fad"
+ },
+ "remaining_in_project": [
+  ".incant-source-transactions/lock",
+  ".incant/cache/models/b1a92c8bdcf711ca275969d5ba05ce7306adab26234075202a53d1345a52d733.incmodel",
+  ".incant/cache/models/cc657285cc7f8d2013aee49ca08a05fddb1a74726720600009fecbc14923f99c.incmodel",
+  ".incant/cache/models/ee162c6fe156ee7c41657e3554d06425f4b382a9b568d5ba7b48193b4b80d1e0.incmodel"
+ ],
+ "no_authoring_or_art_left": false
+}
