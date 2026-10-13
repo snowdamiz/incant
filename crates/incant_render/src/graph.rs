@@ -219,6 +219,11 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
             pass.encode(e, q)
         });
     }
+    // Output-viewport clusters of upscaled BLEND models; untimed, after the
+    // internal clusters, before every Models pass that shades with them.
+    if let Some(pass) = frame.models.as_ref().and_then(|m| m.output_cluster_pass()) {
+        pass.encode(&mut encoder.0, None);
+    }
 }
 // One logical Models interval includes motion, both resolve passes and every
 // model subpass actually encoded. Interior passes omit descriptors entirely.
@@ -318,21 +323,13 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
                 .unwrap()
                 .encode_overlay_depth(encoder, timestamp());
         }
-        if plan.transparent {
+        // Without upscaling BLEND models draw here, into the internal target.
+        if plan.transparent && !plan.composite {
             frame
                 .models
                 .as_ref()
                 .unwrap()
                 .encode_transparent(encoder, timestamp());
-        }
-        if plan.composite {
-            // Internal BLEND overlay over the resolved output; sprites and world
-            // text are then drawn over this composite at output resolution.
-            frame
-                .upscaling
-                .as_ref()
-                .unwrap()
-                .composite(encoder, timestamp());
         }
         if plan.output_depth {
             frame
@@ -340,6 +337,23 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
                 .as_ref()
                 .unwrap()
                 .encode_output_depth(encoder, timestamp());
+        }
+        // With upscaling: output-resolution BLEND into the cleared output-resolution
+        // overlay, then the sanitizing composite over the resolved output. Sprites
+        // and world text draw over the composite in their own intervals.
+        if plan.transparent && plan.composite {
+            frame
+                .models
+                .as_ref()
+                .unwrap()
+                .encode_transparent(encoder, timestamp());
+        }
+        if plan.composite {
+            frame
+                .upscaling
+                .as_ref()
+                .unwrap()
+                .composite(encoder, timestamp());
         }
         if plan.all {
             frame.models.as_ref().unwrap().encode(encoder, timestamp());

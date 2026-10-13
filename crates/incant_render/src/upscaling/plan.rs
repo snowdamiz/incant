@@ -1,8 +1,9 @@
 use super::UpscaleError;
 /// Includes old+candidate output color/depth pairs+composite+output overlay depth,
-/// internal overlay, motion targets, maximum motion instance payloads and fixed
-/// packet metadata. Excludes ordinary renderer targets/assets, driver overhead
-/// and older queued work.
+/// the output-extent current-only overlay, motion targets, maximum motion instance
+/// payloads, fixed packet metadata and (State::preflight) the output-viewport light
+/// grid. Excludes ordinary renderer targets/assets, driver overhead and older
+/// queued work.
 pub const MAX_UPSCALE_TRANSITION_BYTES: u64 =
     128 * crate::motion::MAX_MOTION_PIXELS + 2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384;
 /// Per output pixel: two RGBA16F colors and two R32F depths of history, the RGBA16F
@@ -60,7 +61,7 @@ impl Plan {
         old_output: u64,
         old_overlay: u64,
         old_motion: u64,
-    ) -> Result<(), UpscaleError> {
+    ) -> Result<u64, UpscaleError> {
         let pixels = |s: [u32; 2]| -> Result<u64, UpscaleError> {
             let n = u64::from(s[0]) * u64::from(s[1]);
             if s.contains(&0)
@@ -82,12 +83,21 @@ impl Plan {
         let total = old_output
             .checked_add(old_overlay)
             .and_then(|x| x.checked_add(old_motion))
-            .and_then(|x| x.checked_add(OUTPUT_PIXEL_BYTES * output + 32 * source))
+            .and_then(|x| x.checked_add((OUTPUT_PIXEL_BYTES + 8) * output + 24 * source))
             .and_then(|x| x.checked_add(2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384))
             .ok_or(UpscaleError::Capacity)?;
         if total > MAX_UPSCALE_TRANSITION_BYTES {
             return Err(UpscaleError::Capacity);
         }
-        Ok(())
+        Ok(total)
+    }
+    /// Adds the output-viewport light grid of output-resolution BLEND models: the
+    /// retained grid plus a worst-case candidate (maximum mask words), charged even
+    /// when this frame turns out to reuse the retained one.
+    pub fn with_output_grid(self, total: u64, old_grid: u64) -> Option<u64> {
+        total
+            .checked_add(old_grid)?
+            .checked_add(crate::lighting::output_grid_allowance(self.rect)?)
+            .filter(|t| *t <= MAX_UPSCALE_TRANSITION_BYTES)
     }
 }

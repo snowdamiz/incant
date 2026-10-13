@@ -68,9 +68,10 @@ pub(crate) fn admit_records(
             limit,
         )?,
         flagged_component(old_output, output, 16, true, MAX_OWNER_RECORD_BYTES, limit)?,
+        // The current-only overlay has the output extent (output-resolution BLEND).
         component(
             old_overlay,
-            source.size,
+            output.size,
             8,
             8 * plan::MAX_MOTION_PIXELS,
             limit,
@@ -135,7 +136,7 @@ pub(crate) fn admit(
                 OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
                 limit,
             )?,
-            component(old_overlay, source, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
+            component(old_overlay, output, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
         ] {
             total = total.checked_add(bytes).ok_or(MotionError::Capacity)?;
         }
@@ -166,7 +167,7 @@ mod tests {
                 [2048, 2048],
                 [2048, 2048],
                 [2048, 2048],
-                636_043_264,
+                606_552_064,
             ),
             (
                 [2560, 1440],
@@ -180,7 +181,7 @@ mod tests {
                 [1280, 720],
                 [2560, 1600],
                 [2560, 1440],
-                608_960_512,
+                655_654_912,
             ),
         ] {
             assert_eq!(
@@ -189,7 +190,7 @@ mod tests {
                     old(prior_source),
                     output,
                     old(prior_output),
-                    Some(prior_source),
+                    Some(prior_output),
                     8192
                 )
                 .unwrap(),

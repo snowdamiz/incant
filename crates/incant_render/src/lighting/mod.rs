@@ -98,6 +98,12 @@ pub(crate) struct GridBuffers {
     words: u32,
     pub masks: wgpu::Buffer,
 }
+impl GridBuffers {
+    /// Logical bytes of both storage buffers.
+    pub fn bytes(&self) -> u64 {
+        self.counts.size() + self.masks.size()
+    }
+}
 pub(crate) struct LightingSystem {
     pub layout: wgpu::BindGroupLayout,
     compute_layout: wgpu::BindGroupLayout,
@@ -265,11 +271,15 @@ impl LightingSystem {
     pub fn accept_temporal(&mut self, pipeline: wgpu::ComputePipeline) {
         self.temporal_pipeline = Some(pipeline);
     }
+    /// `retained` is Some only for the output-viewport grid, which is never
+    /// cached here: its single owner is the upscaling state that accepted it, so
+    /// it is released with that owner and charged by its admission.
     fn buffers(
         &self,
         device: &wgpu::Device,
         dimensions: [u32; 2],
         words: u32,
+        retained: Option<Option<&Arc<GridBuffers>>>,
     ) -> Result<Arc<GridBuffers>> {
         if !(1..=MAX_MASK_WORDS).contains(&words) {
             return Err(ResourceError::LightGridSize.into());
@@ -285,16 +295,25 @@ impl LightingSystem {
         {
             return Err(ResourceError::LightGridSize.into());
         }
-        let mut cached = self
-            .cache
-            .lock()
-            .map_err(|_| ResourceError::CacheLock("light grid"))?;
-        if let Some(buffers) = cached
-            .as_ref()
-            .filter(|b| b.dimensions == dimensions && b.words == words)
-        {
-            return Ok(Arc::clone(buffers));
-        }
+        let fits = |b: &&Arc<GridBuffers>| b.dimensions == dimensions && b.words == words;
+        let mut cached = match retained {
+            Some(old) => {
+                if let Some(buffers) = old.filter(fits) {
+                    return Ok(Arc::clone(buffers));
+                }
+                None
+            }
+            None => {
+                let cached = self
+                    .cache
+                    .lock()
+                    .map_err(|_| ResourceError::CacheLock("light grid"))?;
+                if let Some(buffers) = cached.as_ref().filter(fits) {
+                    return Ok(Arc::clone(buffers));
+                }
+                Some(cached)
+            }
+        };
         let make = |label, size| {
             device.create_buffer(&wgpu::BufferDescriptor {
                 label: Some(label),
@@ -309,7 +328,9 @@ impl LightingSystem {
             counts: make("Cluster light counts", u64::from(count) * 4),
             masks: make("Cluster light membership masks", bytes),
         });
-        *cached = Some(Arc::clone(&buffers));
+        if let Some(cached) = cached.as_mut() {
+            **cached = Some(Arc::clone(&buffers));
+        }
         Ok(buffers)
     }
     pub fn prepare(
@@ -321,6 +342,38 @@ impl LightingSystem {
         camera: crate::camera::CameraView,
         shadows: &crate::shadows::PreparedShadows,
     ) -> Result<PreparedLighting> {
+        self.prepare_in(device, lights, viewport, selection, camera, shadows, None)
+            .map(|(prepared, _)| prepared)
+    }
+    /// The same clusters for the upscaling output viewport and its unjittered
+    /// camera. Shading reads `pixel - viewport.xy` in output pixels, so output
+    /// fragments never index internal-grid tiles. The grid is reused from
+    /// `retained` when compatible, otherwise newly allocated, and returned for the
+    /// caller's transactional owner; the renderer keeps no reference to it.
+    #[allow(clippy::too_many_arguments)]
+    pub fn prepare_output(
+        &self,
+        device: &wgpu::Device,
+        lights: &GpuLights,
+        viewport: [f32; 4],
+        selection: LocalLightSelection,
+        camera: crate::camera::CameraView,
+        shadows: &crate::shadows::PreparedShadows,
+        retained: Option<&Arc<GridBuffers>>,
+    ) -> Result<(PreparedLighting, Arc<GridBuffers>)> {
+        self.prepare_in(device, lights, viewport, selection, camera, shadows, Some(retained))
+    }
+    #[allow(clippy::too_many_arguments)]
+    fn prepare_in(
+        &self,
+        device: &wgpu::Device,
+        lights: &GpuLights,
+        viewport: [f32; 4],
+        selection: LocalLightSelection,
+        camera: crate::camera::CameraView,
+        shadows: &crate::shadows::PreparedShadows,
+        retained: Option<Option<&Arc<GridBuffers>>>,
+    ) -> Result<(PreparedLighting, Arc<GridBuffers>)> {
         let dimensions = [
             (viewport[2] / 64.).ceil() as u32,
             (viewport[3] / 64.).ceil() as u32,
@@ -332,6 +385,7 @@ impl LightingSystem {
             device,
             if clustered { dimensions } else { [1, 1] },
             if clustered { words } else { 1 },
+            retained,
         )?;
         let grid = GridUniform {
             view: camera.view.to_cols_array_2d(),
@@ -448,14 +502,16 @@ impl LightingSystem {
             binding: 7,
             resource: sizes.as_entire_binding(),
         });
-        Ok(PreparedLighting {
+        let prepared = PreparedLighting {
             compute,
             shading: device.create_bind_group(&wgpu::BindGroupDescriptor {
                 label: Some("Cluster shading frame"),
                 layout: &self.layout,
                 entries: &entries,
             }),
-        })
+        };
+        drop(entries);
+        Ok((prepared, buffers))
     }
 }
 #[cfg(all(
@@ -494,6 +550,22 @@ fn material_lengths_use_allocation_bytes_and_refuse_truncation() {
     ] {
         assert!(storage_lengths(sizes).is_err());
     }
+}
+/// Worst-case logical bytes of an output-viewport grid (counts and masks at the
+/// maximum mask words) for admission before allocation; None if it cannot exist.
+pub(crate) fn output_grid_allowance(viewport: [f32; 4]) -> Option<u64> {
+    if !viewport.iter().all(|v| v.is_finite()) || viewport[2] <= 0. || viewport[3] <= 0. {
+        return None;
+    }
+    let tiles = |v: f32| -> Option<u64> {
+        let t = (v / 64.).ceil();
+        (1.0..=u32::MAX as f32).contains(&t).then_some(t as u64)
+    };
+    let clusters = tiles(viewport[2])?
+        .checked_mul(tiles(viewport[3])?)?
+        .checked_mul(u64::from(DEPTH_SLICES))?;
+    (clusters <= u64::from(MAX_CLUSTERS))
+        .then(|| clusters * 4 * (1 + u64::from(MAX_MASK_WORDS)))
 }
 /// Immutable uniforms and retained storage bindings for one encoded frame.
 pub(crate) struct PreparedLighting {

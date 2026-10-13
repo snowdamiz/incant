@@ -226,3 +226,39 @@ fn current_overlay_is_premultiplied_over_only_and_disoccluded_or_nonfinite_depth
         }
     }
 }
+#[test]
+fn output_blend_grid_is_charged_as_old_plus_worst_case_candidate_under_the_ceiling() {
+    use plan::*;
+    // 128 mask words (4096 local lights) + one count word per cluster, 24 slices.
+    let per_cluster = 4 * (1 + 128);
+    let frame = crate::resolution::FramePlan::new(
+        [2048, 2048],
+        [0., 0., 2048., 2048.],
+        None,
+        crate::resolution::ResolutionScale::new(8).unwrap(),
+    )
+    .unwrap();
+    let p = Plan::new([2048, 2048], [0., 0., 2048., 2048.], &frame).unwrap();
+    let grid = crate::lighting::output_grid_allowance(p.rect).unwrap();
+    assert_eq!(grid, 32 * 32 * 24 * per_cluster);
+    let total = p.preflight(8192, 0, 0, 0).unwrap();
+    assert_eq!(p.with_output_grid(total, 0), Some(total + grid));
+    assert_eq!(p.with_output_grid(total, 7), Some(total + grid + 7));
+    assert_eq!(p.with_output_grid(total, u64::MAX), None);
+    let edge = MAX_UPSCALE_TRANSITION_BYTES - grid;
+    assert_eq!(p.with_output_grid(edge, 0), Some(MAX_UPSCALE_TRANSITION_BYTES));
+    assert_eq!(p.with_output_grid(edge + 1, 0), None);
+    // Fractional offset viewport: tiles of its own extent, never the attachment.
+    assert_eq!(
+        crate::lighting::output_grid_allowance([37.5, 21.25, 885., 497.5]),
+        Some(14 * 8 * 24 * per_cluster)
+    );
+    for bad in [
+        [0., 0., 0., 1.],
+        [0., 0., f32::NAN, 1.],
+        [0., 0., f32::INFINITY, 1.],
+        [0., 0., 8192. * 64., 64.],
+    ] {
+        assert!(crate::lighting::output_grid_allowance(bad).is_none(), "{bad:?}");
+    }
+}

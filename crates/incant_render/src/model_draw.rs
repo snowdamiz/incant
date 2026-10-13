@@ -3,7 +3,86 @@ use super::{Batch, RenderScene};
 use crate::{Renderer, Result, materials::PipelineKey};
 use std::sync::Arc;
 use wgpu::util::DeviceExt;
+#[repr(C)]
+#[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
+struct Frame {
+    matrix: [[f32; 4]; 4],
+    eye: [f32; 4],
+    environment: [f32; 4],
+}
+const _: () = {
+    assert!(size_of::<Frame>() == 96);
+    assert!(std::mem::offset_of!(Frame, matrix) == 0);
+    assert!(std::mem::offset_of!(Frame, eye) == 64);
+    assert!(std::mem::offset_of!(Frame, environment) == 80);
+};
 impl Renderer {
+    fn model_camera_group(&self, frame: Frame) -> wgpu::BindGroup {
+        let camera = self
+            .device
+            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("Material preview frame"),
+                contents: bytemuck::bytes_of(&frame),
+                usage: wgpu::BufferUsages::UNIFORM,
+            });
+        self.device.create_bind_group(&wgpu::BindGroupDescriptor {
+            label: Some("Material preview frame"),
+            layout: &self.materials.globals,
+            entries: &[wgpu::BindGroupEntry {
+                binding: 0,
+                resource: camera.as_entire_binding(),
+            }],
+        })
+    }
+    /// Portable upscaling: current-only BLEND draws move to `target` (the cleared
+    /// output-resolution overlay, the unjittered output-resolution opaque depth and
+    /// the output viewport), with the unjittered camera at the output aspect and
+    /// clusters built for the output viewport. The composite then applies its
+    /// finite/premultiplied sanitation to this overlay. Opaque draws keep their
+    /// internal target. Returns the output grid for the upscaling transaction.
+    pub(crate) fn prepare_transparent_output(
+        &self,
+        scene: &RenderScene,
+        draw: &mut ModelDraw,
+        target: ModelTarget,
+        retained: Option<&Arc<crate::lighting::GridBuffers>>,
+    ) -> Result<Option<Arc<crate::lighting::GridBuffers>>> {
+        if !draw.has_transparent() {
+            return Ok(None);
+        }
+        let environment = scene
+            .environment
+            .as_ref()
+            .expect("model scene has environment");
+        let camera = scene.camera.unjittered();
+        let frame = Frame {
+            matrix: camera
+                .matrix(target.rect[2] / target.rect[3])?
+                .to_cols_array_2d(),
+            eye: camera.shading_eye(),
+            environment: [
+                environment.intensity,
+                environment.rotation.cos(),
+                environment.rotation.sin(),
+                crate::environment::MAX_SPECULAR_LOD,
+            ],
+        };
+        let (lighting, grid) = self.lighting.prepare_output(
+            &self.device,
+            &scene.lights,
+            target.rect,
+            scene.light_selection,
+            camera,
+            &draw.shadows.maps,
+            retained,
+        )?;
+        draw.transparent_output = Some(TransparentOutput {
+            camera: self.model_camera_group(frame),
+            lighting,
+            target,
+        });
+        Ok(Some(grid))
+    }
     pub(crate) fn prepare_models(
         &self,
         scene: &RenderScene,
@@ -12,19 +91,6 @@ impl Renderer {
         if scene.batches.is_empty() {
             return Ok(None);
         }
-        #[repr(C)]
-        #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
-        struct Frame {
-            matrix: [[f32; 4]; 4],
-            eye: [f32; 4],
-            environment: [f32; 4],
-        }
-        const _: () = {
-            assert!(size_of::<Frame>() == 96);
-            assert!(std::mem::offset_of!(Frame, matrix) == 0);
-            assert!(std::mem::offset_of!(Frame, eye) == 64);
-            assert!(std::mem::offset_of!(Frame, environment) == 80);
-        };
         let environment = scene
             .environment
             .as_ref()
@@ -42,23 +108,7 @@ impl Renderer {
                 crate::environment::MAX_SPECULAR_LOD,
             ],
         };
-        let camera_group = |frame: Frame| {
-            let camera = self
-                .device
-                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                    label: Some("Material preview frame"),
-                    contents: bytemuck::bytes_of(&frame),
-                    usage: wgpu::BufferUsages::UNIFORM,
-                });
-            self.device.create_bind_group(&wgpu::BindGroupDescriptor {
-                label: Some("Material preview frame"),
-                layout: &self.materials.globals,
-                entries: &[wgpu::BindGroupEntry {
-                    binding: 0,
-                    resource: camera.as_entire_binding(),
-                }],
-            })
-        };
+        let camera_group = |frame: Frame| self.model_camera_group(frame);
         let bind_group = camera_group(frame);
         let transparent_camera = if scene.camera.jitter != [0.; 2] {
             Some(camera_group(Frame {
@@ -119,6 +169,7 @@ impl Renderer {
         opaque.extend(transparent);
         Ok(Some(ModelDraw {
             transparent_target: None,
+            transparent_output: None,
             target,
             camera: bind_group,
             transparent_camera,
@@ -139,6 +190,7 @@ struct Draw {
 pub(crate) struct ModelDraw {
     target: ModelTarget,
     transparent_target: Option<wgpu::TextureView>,
+    transparent_output: Option<TransparentOutput>,
     camera: wgpu::BindGroup,
     transparent_camera: Option<wgpu::BindGroup>,
     environment: wgpu::BindGroup,
@@ -157,8 +209,10 @@ impl ModelDraw {
             encoder,
             0..self.draws.len(),
             timestamps,
+            &self.target,
             &self.target.color,
             &self.camera,
+            &self.lighting.shading,
         );
     }
     pub fn encode_opaque(
@@ -170,8 +224,10 @@ impl ModelDraw {
             encoder,
             0..self.opaque_count,
             timestamps,
+            &self.target,
             &self.target.color,
             &self.camera,
+            &self.lighting.shading,
         );
     }
     pub fn encode_transparent(
@@ -179,15 +235,35 @@ impl ModelDraw {
         encoder: &mut wgpu::CommandEncoder,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
+        if let Some(output) = &self.transparent_output {
+            self.encode_range(
+                encoder,
+                self.opaque_count..self.draws.len(),
+                timestamps,
+                &output.target,
+                &output.target.color,
+                &output.camera,
+                &output.lighting.shading,
+            );
+            return;
+        }
         self.encode_range(
             encoder,
             self.opaque_count..self.draws.len(),
             timestamps,
+            &self.target,
             self.transparent_target
                 .as_ref()
                 .unwrap_or(&self.target.color),
             self.transparent_camera.as_ref().unwrap_or(&self.camera),
+            &self.lighting.shading,
         );
+    }
+    /// Output-viewport clusters of the BLEND route, encoded with the internal ones.
+    pub fn output_cluster_pass(&self) -> Option<&crate::lighting::ClusterPass> {
+        self.transparent_output
+            .as_ref()
+            .and_then(|o| o.lighting.compute.as_ref())
     }
     pub fn set_transparent_target(&mut self, target: wgpu::TextureView) {
         self.transparent_target = Some(target);
@@ -198,13 +274,16 @@ impl ModelDraw {
     pub fn has_transparent(&self) -> bool {
         self.opaque_count < self.draws.len()
     }
+    #[allow(clippy::too_many_arguments)]
     fn encode_range(
         &self,
         encoder: &mut wgpu::CommandEncoder,
         range: std::ops::Range<usize>,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+        target: &ModelTarget,
         color: &wgpu::TextureView,
         camera: &wgpu::BindGroup,
+        shading: &wgpu::BindGroup,
     ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Imported model geometry"),
@@ -218,7 +297,7 @@ impl ModelDraw {
                 },
             })],
             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
-                view: &self.target.depth,
+                view: &target.depth,
                 depth_ops: Some(wgpu::Operations {
                     load: wgpu::LoadOp::Load,
                     store: wgpu::StoreOp::Store,
@@ -231,8 +310,8 @@ impl ModelDraw {
         });
         pass.set_bind_group(0, camera, &[]);
         pass.set_bind_group(2, &self.environment, &[]);
-        pass.set_bind_group(3, &self.lighting.shading, &[]);
-        let [x, y, w, h] = self.target.rect;
+        pass.set_bind_group(3, shading, &[]);
+        let [x, y, w, h] = target.rect;
         pass.set_viewport(x, y, w, h, 0., 1.);
         for draw in &self.draws[range] {
             let batch = &draw.batch;
@@ -253,6 +332,11 @@ impl ModelDraw {
             pass.draw_indexed(0..primitive.index_count, 0, draw.instances.clone());
         }
     }
+}
+struct TransparentOutput {
+    target: ModelTarget,
+    camera: wgpu::BindGroup,
+    lighting: crate::lighting::PreparedLighting,
 }
 pub(crate) struct ModelTarget {
     pub color: wgpu::TextureView,

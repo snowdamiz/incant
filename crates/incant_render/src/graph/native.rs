@@ -53,6 +53,10 @@ impl FrameGraph {
         {
             pre.timed(crate::timing::GpuPass::AssignLights, |e, q| p.encode(e, q));
         }
+        // Output-viewport clusters of output-resolution BLEND models (untimed).
+        if let Some(p) = frame.models.as_ref().and_then(|m| m.output_cluster_pass()) {
+            p.encode(&mut pre.0, None);
+        }
         if let Some(m) = &frame.models
             && m.shadows.has_passes()
         {
@@ -110,12 +114,6 @@ impl FrameGraph {
                 .unwrap()
                 .encode_overlay_depth(&mut post.0, timestamp());
         }
-        if let Some(m) = &frame.models
-            && m.has_transparent()
-        {
-            m.encode_transparent(&mut post.0, timestamp());
-        }
-        up.composite(&mut post.0, timestamp());
         if output_depth {
             frame
                 .motion
@@ -123,6 +121,14 @@ impl FrameGraph {
                 .unwrap()
                 .encode_output_depth(&mut post.0, timestamp());
         }
+        // Output-resolution BLEND into the output overlay, then the sanitizing
+        // composite, before sprites and text.
+        if let Some(m) = &frame.models
+            && m.has_transparent()
+        {
+            m.encode_transparent(&mut post.0, timestamp());
+        }
+        up.composite(&mut post.0, timestamp());
         debug_assert_eq!(index, count);
         if let Some(s) = &frame.sprites {
             post.timed(crate::timing::GpuPass::Sprites, |e, q| s.encode(e, q));

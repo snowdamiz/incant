@@ -380,15 +380,34 @@ impl Renderer {
             },
         )?;
         let overlay = upscaling.and_then(|p| p.overlay());
-        if let (Some(models), Some(overlay)) = (&mut models, overlay) {
-            models.set_transparent_target(overlay.clone());
-        }
-        // Portable upscaling draws current-only sprites and world text at output
-        // resolution straight over the composited output (never into history),
-        // against an unjittered output-resolution re-raster of the opaque depth.
-        // BLEND models stay on the internal overlay: their clustered lighting is
-        // prepared for the internal viewport only.
+        // Portable upscaling draws current-only BLEND models at output resolution
+        // into the cleared output-resolution overlay, which the composite sanitizes
+        // over the resolved output; sprites and world text then draw over the
+        // composite. All test an unjittered output-resolution re-raster of the
+        // opaque depth, never enter history, and keep BLEND, sprite, text order.
+        // BLEND shading uses clusters built for the output viewport, owned by the
+        // upscaling transaction. Without a plan every overlay keeps its target.
         let screen = upscaling.and_then(|p| p.screen_overlay());
+        if let Some(models) = &mut models {
+            if let (Some(pending), Some(overlay), Some((_, depth, rect))) = (upscaling, overlay, screen) {
+                let grid = self.prepare_transparent_output(
+                    scene,
+                    models,
+                    models::ModelTarget {
+                        color: overlay.clone(),
+                        depth: depth.clone(),
+                        format: frame::HDR_FORMAT,
+                        rect,
+                    },
+                    pending.retained_grid(),
+                )?;
+                if let Some(grid) = grid {
+                    pending.offer_grid(grid);
+                }
+            } else if let Some(overlay) = overlay {
+                models.set_transparent_target(overlay.clone());
+            }
+        }
         let (screen_color, screen_depth, screen_rect) = match screen {
             Some((color, depth, rect)) => (color, depth, rect),
             None => (
@@ -422,13 +441,13 @@ impl Renderer {
             || text.as_ref().is_some_and(|t| t.has_passes());
         let accumulating = temporal.is_some_and(|p| p.active())
             || upscaling.is_some_and(|p| p.overlay().is_some());
-        if accumulating && (transparent || (screen_overlays && screen.is_none())) {
+        if accumulating && screen.is_none() && (transparent || screen_overlays) {
             motion
                 .as_mut()
                 .expect("temporal motion draw")
                 .set_overlay_depth(attachments.depth.clone());
         }
-        if let Some((_, depth, _)) = screen.filter(|_| screen_overlays) {
+        if let Some((_, depth, _)) = screen.filter(|_| transparent || screen_overlays) {
             motion
                 .as_mut()
                 .expect("upscaling motion draw")

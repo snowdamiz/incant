@@ -255,6 +255,17 @@ impl System {
             contents: bytemuck::bytes_of(&f),
             usage: wgpu::BufferUsages::UNIFORM,
         });
+        // The overlay now has the output extent: with source == output the unchanged
+        // composite.wgsl reads it 1:1 (base = p - 0.5, f = 0) and keeps clean() on the
+        // overlay and on the result.
+        let composite_uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("Output-resolution overlay composite frame"),
+            contents: bytemuck::bytes_of(&Frame {
+                source: plan.rect,
+                ..f
+            }),
+            usage: wgpu::BufferUsages::UNIFORM,
+        });
         let slot = p.slot();
         let mut textures = [
             current,
@@ -282,7 +293,7 @@ impl System {
             composite: group(
                 d,
                 &self.composite_layout,
-                &uniform,
+                &composite_uniform,
                 &[&output.color[slot], &overlay.view],
                 None,
             ),

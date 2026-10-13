@@ -35,6 +35,9 @@ pub(crate) struct State {
     /// unit evidence; the accepted internal source width it was gathered at.
     mass: f32,
     source_width: f32,
+    /// Output-viewport light grid of accepted output-resolution BLEND frames. Its
+    /// only owner: released with this state, charged by every upscaling preflight.
+    grid: Option<Arc<crate::lighting::GridBuffers>>,
 }
 pub(crate) struct Pending {
     pub(super) config: UpscaleConfig,
@@ -46,6 +49,9 @@ pub(crate) struct Pending {
     /// This frame's history evidence for the resolve uniform (reactive.y).
     pub(super) history_mass: f32,
     source_width: f32,
+    retained_grid: Option<Arc<crate::lighting::GridBuffers>>,
+    /// Candidate output grid, offered once while encoding; accepted with the frame.
+    grid: std::sync::OnceLock<Arc<crate::lighting::GridBuffers>>,
 }
 /// Expected admitted-history evidence entering a frame, in frames of unit
 /// evidence: 0 after a cut, the accepted evidence otherwise, counted at the old
@@ -78,7 +84,11 @@ impl State {
             last: None,
             mass: 0.,
             source_width: 0.,
+            grid: None,
         })
+    }
+    fn grid_bytes(&self) -> u64 {
+        self.grid.as_ref().map_or(0, |g| g.bytes())
     }
     pub fn frame(&self) -> Option<UpscaleFrame> {
         self.last.clone()
@@ -89,12 +99,15 @@ impl State {
         plan: Plan,
         old_motion: u64,
     ) -> Result<(), UpscaleError> {
-        plan.preflight(
+        let total = plan.preflight(
             device.limits().max_texture_dimension_2d,
             self.output.as_ref().map_or(0, |o| o.bytes()),
             self.overlay.as_ref().map_or(0, |o| o.bytes()),
             old_motion,
-        )
+        )?;
+        plan.with_output_grid(total, self.grid_bytes())
+            .map(|_| ())
+            .ok_or(UpscaleError::Capacity)
     }
     pub fn preflight_owner(
         &self,
@@ -102,7 +115,7 @@ impl State {
         plan: Plan,
         old_motion: Option<crate::motion::attachment::Cache>,
     ) -> Result<(), crate::motion::MotionError> {
-        crate::motion::attachment::admit_records(
+        let total = crate::motion::attachment::admit_records(
             plan.source,
             old_motion,
             plan.output,
@@ -114,8 +127,10 @@ impl State {
                 }),
             self.overlay.as_ref().map(|o| o.size),
             device.limits().max_texture_dimension_2d,
-        )
-        .map(|_| ())
+        )?;
+        plan.with_output_grid(total, self.grid_bytes())
+            .map(|_| ())
+            .ok_or(crate::motion::MotionError::Capacity)
     }
     pub fn prepare(
         &self,
@@ -173,9 +188,12 @@ impl State {
             plan,
             frame,
             output: plan.map(|p| Output::prepare(d, p.output, self.output.as_ref(), owner)),
-            overlay: plan.map(|p| Overlay::prepare(d, p.source, self.overlay.as_ref())),
+            // Output extent: current-only BLEND models render here at output resolution.
+            overlay: plan.map(|p| Overlay::prepare(d, p.output, self.overlay.as_ref())),
             history_mass,
             source_width,
+            retained_grid: self.grid.clone(),
+            grid: std::sync::OnceLock::new(),
         })
     }
     pub fn accept(&mut self, p: Pending) {
@@ -187,6 +205,10 @@ impl State {
         self.output = p.output;
         self.overlay = p.overlay;
         self.last = Some(p.frame);
+        // A frame without BLEND draws keeps the retained grid (still charged).
+        if let Some(grid) = p.grid.into_inner() {
+            self.grid = Some(grid);
+        }
     }
 }
 impl Pending {
@@ -195,6 +217,13 @@ impl Pending {
     }
     pub fn composite(&self) -> Option<&wgpu::TextureView> {
         self.output.as_ref().map(|o| &o.composite)
+    }
+    pub fn retained_grid(&self) -> Option<&Arc<crate::lighting::GridBuffers>> {
+        self.retained_grid.as_ref()
+    }
+    /// Records this frame's output grid; only the first offer is kept.
+    pub fn offer_grid(&self, grid: Arc<crate::lighting::GridBuffers>) {
+        let _ = self.grid.set(grid);
     }
     /// Output-resolution target of current-only sprites and world text: the
     /// composited output, its unjittered opaque depth and the output viewport.
