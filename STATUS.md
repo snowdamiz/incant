@@ -61,7 +61,7 @@ appearance or device acceptance is inferred. See [Core result evidence](docs/spi
 The next inert format preserves node/edge order and validates both linked
 adjacency sides, reciprocal links, complete coverage and dense payload mappings.
 Forty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
-2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass and final integration review is pending. Contact/payload/solver ownership
+2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass with independent final integration acceptance. Publication awaits the required fast check. Contact/payload/solver ownership
 and full native composition remain required; no live restore or physics-save
 admission is enabled. [Graph contract](docs/spikes/physics-inert-graphs.md).
 
@@ -76,7 +76,7 @@ construction or physics-save runtime route; contact/island/payload/native owner
 composition remains required. [Arena contract](docs/spikes/physics-inert-arenas.md).
 The [combined current integration](docs/spikes/physics-inert-main195.md) preserves
 all accepted crate source and existing pinned package identities; independent
-final integration review is pending behind the Parry ownership correction.
+final integration review is accepted, and the Parry prerequisite is merged in PR196.
 
 ## Exact physics saves — inert record validation verified
 

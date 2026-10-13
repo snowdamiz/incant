@@ -344,5 +344,9 @@
     "Actual main196 join changes only documentation/review evidence after frozen checks; source and build identities remain byte-exact.",
     "No live constructor, contact-payload policy, full solver ownership composition, physics-save admission, GPU, shipping, device or performance claim."
   ],
-  "review_state": "Final appended-graph integration acceptance pending"
+  "review_state": "Independent combined integration accepted",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-inert-main196/final-review.json",
+    "sha256": "b6a9d1381e07ae418e1a4917bc42ef43b81c8e5bc0b7e9a0818c8d682dec6fd5"
+  }
 }
