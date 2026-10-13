@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T05:04:04.242336+00:00",
+  "decision": "accepted disjoint actual-main198 qualification",
+  "head": "9705a86b",
+  "qualification_sha256": "5a543546e1d53fcab5ff2340dc739444b36ff6affc8fcdf067f66d618b2238f6",
+  "reviewed_collector_sha256": "690d30d80577b35458db6f78e9dfb92ff0b22e79d4f3528eb87be3da7a9897e2",
+  "verify_only_exit": 0,
+  "scope": "Exactly28 accepted renderer/CI changes; all25 attachment sources, lock, root/package manifest unchanged; previous scoped52CPU evidence remains relevant",
+  "new_build_claim": false
+}
