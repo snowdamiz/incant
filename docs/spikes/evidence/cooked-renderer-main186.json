@@ -1102,7 +1102,7 @@
     "path": "docs/spikes/evidence/persistent-pipeline-cache.json",
     "sha256": "f365d0ae862f0113300f4a2cea1f7bbd9420d4a6cc9bee1419ff1aa661a8debd"
   },
-  "review_state": "Final current-main integration audit pending",
+  "review_state": "Independent current-main source and execution review accepted; exact-head fast check pending",
   "limits": [
     "Current integration executed CPU tests only; 89 GPU tests intentionally ignored in each variant. Counts overlap across default and cooked builds.",
     "The three preserved Claude receipts approve their immutable producer Metal builds and appearance, not a newly rendered integrated build.",
@@ -1113,5 +1113,9 @@
   "actual_main_qualification": {
     "path": "docs/spikes/evidence/cooked-renderer-main186/main187-qualification.json",
     "sha256": "f7a4f2b4ead0a48df56f8ca116781d21d271d3f4eb5a4546e0bc21a8f2507165"
+  },
+  "final_review": {
+    "path": "docs/spikes/evidence/cooked-renderer-main186/final-review.json",
+    "sha256": "0e224d8b426ce8f53a668c5b5286e5db5f539dc4e310c2cd5e2c08e1df2b88bb"
   }
 }

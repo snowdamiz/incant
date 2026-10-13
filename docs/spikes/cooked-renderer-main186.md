@@ -36,5 +36,5 @@ backend-test workflow bytes. Its thirteen source changes are exact previously
 accepted iOS export/cooker files, outside the tested renderer closure; seven were
 in the broad original inventory. The qualification wrapper checks these Git
 identities before replaying the original assertions without changing receipts.
-Final integration review/publication is pending. No phase, phone performance, full offline renderer or measured
+Independent final source/evidence review is accepted; exact-head fast check and publication are pending. No phase, phone performance, full offline renderer or measured
 cache speedup approval is implied.
