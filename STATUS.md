@@ -26,10 +26,26 @@ default-off trusted native adapter preserves the retained CCD verdict while
 replacing scratch. Native Clone owners continue identically for 280 paired
 steps per numerical mode, with warm contacts, sleeping/waking, sensor events,
 removal/reuse and CCD controls. Both 202-case CPU modes, ten parallel controls
-and all ten scoped checks pass. Source and final producer evidence reviews are accepted; current-main
-composition checks are pending. Derived geometry/mass/work admission, authenticated capture and the
+and all ten scoped checks pass. Source and final producer evidence reviews are accepted; current-main composition passes 202 CPU cases in each numerical mode, ten
+two-worker controls each and thirteen scoped checks. Final composition review is
+pending. Derived geometry/mass/work admission, authenticated capture and the
 whole native constructor remain required. `PhysicsUnsupported` is unchanged.
 
+
+
+## Temporal owner foundation — current-main CPU qualification
+
+The [owner/change provenance foundation](docs/spikes/temporal-owner-provenance-verification.md)
+assigns stable placement IDs across handedness batches and compares actual accepted
+transforms and joint palettes, publishing change membership only after submission.
+Its source and producer CPU evidence are independently accepted. The isolated
+eight-file Rust delta passes 143 default and 172 cooked CPU cases and twelve
+current-main checks without importing private upscaling or MetalFX ancestry.
+The disjoint main225 journal-test join preserves renderer source. Final current-main
+review is independently accepted; the required fast publication check remains. Shader bytes, defaults and memory ceilings are unchanged;
+integer shader transport and per-pixel provenance remain open.
+[Current composition](docs/spikes/temporal-owner-main225.md).
+No new GPU, appearance, performance or device result is claimed.
 
 ## Core result HUD — current-main qualification
 
@@ -483,8 +499,10 @@ map-deleted ARM API37 emulator processes match all 17,856 observed fields and
 atomic selection/mode Undo/Redo/journal reopen and four Wasmtime processes also
 pass. Owned software AVDs were removed; the retained port-reuse failure was
 resolved by rerunning only missing callers, without rebuilding archives.
-Source/probe and final producer execution reviews are accepted; current-main
-integration checks are pending. API24 compilation is not minimum-OS execution proof.
+Source/probe and final producer execution reviews are accepted. This historical
+intake state is superseded by the accepted main189 composition and PR190 merge
+(see [current composition](docs/spikes/authored-android-wasm-main189.md)).
+API24 compilation is not minimum-OS execution proof.
 No physical-phone, performance, GPU, live audio, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-android-wasm.md).
 
@@ -501,8 +519,10 @@ unsigned with C/Swift; no device execution is claimed. The first simulator
 compiler output was reused after a reviewed observer-only correction, explicitly
 qualified rather than called a new build. A separate simulator teardown failure
 is retained; the complete retry passed without source/archive changes.
-Source/probe and final execution reviews are accepted; current-main
-integration remains pending. Its original Android refusal is superseded by the
+Source/probe and final execution reviews are accepted. This historical intake
+state is superseded by the accepted main186 composition and PR187 merge
+(see [current composition](docs/spikes/authored-ios-wasm-main185.md)).
+Its original Android refusal is superseded by the
 separate Android proof above; mixed per-entity TypeScript and static guest
 checkpoints remain refused. No phone, minimum-OS, performance,
 rendering, signing or phase gate is claimed.
@@ -517,7 +537,8 @@ unchanged default path starts no client. Two fresh shipping packages preserve
 full 3,600-tick reports and PCM with profiling off/on. An actual opted-in loopback
 Tracy capture contains 20 zone types and four memory/allocation plots; all owned
 processes are reaped. Rust requested bytes, QuickJS heap and RSS are distinct.
-Independent source and final evidence review are accepted; integration is pending.
+Independent source and final evidence review are accepted; the historical
+intake state is superseded by the accepted main194 composition and PR195 merge.
 Native-window/device capture, allocation stacks and the full profiler/performance
 gates remain open. [Contract/evidence](docs/spikes/native-cpu-profiling.md).
 
@@ -527,8 +548,9 @@ Claude 0067 and root accepted the bounded producer scope: 89 existing GPU cases,
 48 numeric attempts and 12 appearance frames, with original helper failures
 retained and corrected within budget. Physical UI and viewport mapping pass;
 nearest expansion remains visibly degraded and opt-in. Exact host feedback uses
-recorded witness bounds. Full temporal upscaling, MetalFX, motion review, composed
-cooked integration and reference-phone gates remain open.
+recorded witness bounds. The producer-only composed-integration status is
+superseded by the accepted main197 composition and PR198 merge. Full temporal
+upscaling, MetalFX and reference-phone gates remain open.
 [Evidence](docs/spikes/dynamic-resolution.md).
 
 ## Authored Core runtime bindings — CPU proof accepted
@@ -890,7 +912,8 @@ Stop, restart and seek now pass the typed native transaction and retained mixer
 checks. The six-package suite passes 530 tests and scoped Clippy. A fresh ordinary
 export passes four separate player processes with byte-exact audio/save
 continuation and ten specific refusals after private inputs are removed. Independent
-execution review accepts the evidence; main integration remains pending. Physical audio,
+execution review accepts the evidence; the historical intake state is superseded
+by the accepted main162 composition and PR163 merge. Physical audio,
 Wasm SDK parity, Core Sample integration and phone gates remain open.
 [Evidence and limits](docs/spikes/native-audio-transport.md).
 
@@ -2455,7 +2478,8 @@ tests remain ignored. [Receipt](docs/spikes/evidence/runtime-pose-blending-main1
   captured-only development route passes; three fresh ordinary wasm2c players
   match every declaration field and exact PCM after private source/cache/build/map
   deletion, with 13 exact refusals. Independent final package review accepts the
-  retained evidence; publisher integration remains pending. No actual-cursor,
+  retained evidence; the historical intake state is superseded by the accepted
+  main166 composition and PR168 merge. No actual-cursor,
   arbitrary guest checkpoint, physical-device or phase-gate claim. See
   [contract and evidence](docs/spikes/native-wasm-audio.md).
 
@@ -2491,7 +2515,7 @@ cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
 Mode-aware launch/export and editor process switching remain separate follow-on
 work. [Evidence](docs/spikes/physics-project-setting.md).
 
-- Authored Android CPU archive route: reviewed fresh-source admission and separate physics-aware exporter pass focused Rust/Python/Clippy checks. Both deterministic and fast ordinary shipping archives pass three source/cache/build/map-deleted ARM Android17/API37 processes each, exact per-field/native/PCM parity and fourteen boundary refusals; owned emulators cleanly removed. Independent final execution review is accepted; publisher integration remains pending. No minimum-OS/phone/performance/platform-host claim. See `docs/spikes/authored-android-project.md`.
+- Authored Android CPU archive route: reviewed fresh-source admission and separate physics-aware exporter pass focused Rust/Python/Clippy checks. Both deterministic and fast ordinary shipping archives pass three source/cache/build/map-deleted ARM Android17/API37 processes each, exact per-field/native/PCM parity and fourteen boundary refusals; owned emulators cleanly removed. Independent final execution review is accepted; the historical intake state is superseded by the accepted main181 composition and PR182 merge. No minimum-OS/phone/performance/platform-host claim. See `docs/spikes/authored-android-project.md`.
 
 ## Authored Android — composed main181 execution passed
 
@@ -2548,5 +2572,6 @@ accepted the scoped implementation; full source003 suites pass156 each in both
 numerical modes. Final source004 changes only two test constructor expressions;
 focused21 each, strictClippy/wasm/lean/fmt/conventions pass. Historical failures are
 retained. No live constructor/cache installer or save admission is added. See
-`docs/spikes/physics-integration-config.md`; cache/shape coherence, complete-owner
-work/phase validation, root final audit and integration remain pending.
+`docs/spikes/physics-integration-config.md`. This historical final-audit/intake
+status is superseded by the accepted main220 composition and PR221 merge.
+Cache/shape coherence and full live-owner admission remain open.

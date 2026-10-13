@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-13T13:10:54.376350+00:00",
+  "decision": "accepted_current_main_cpu_foundation",
+  "head": "ca02d298",
+  "manifest_sha256": "d084e3662330dca3e67ba5eb552326f612746476835c0df22f4092f18ebd795e",
+  "review": "Read complete report and verifier; ran --verify-only exit0. Exact eight-file producer patch is applied to main224 without private ancestry; main225 join has one explicitly bound previously accepted journal-test exemption. All3145input identities and producer56records/54payloads8binaries plus current4binaries verified. Twelve final commands0,143default172cooked CPU and103ignored each. Failed stale-cache attempt retained; scoped cleanup changed no source. No shader/default/budget/GPU/quality/device claims."
+}

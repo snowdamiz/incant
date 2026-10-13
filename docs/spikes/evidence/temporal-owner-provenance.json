@@ -1,0 +1,169 @@
+{
+  "schema": "incant-temporal-owner-evidence-v1",
+  "source": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/source-001/freeze.json",
+    "sha256": "e1f3cde46e63f6e789ec861f72001cd56a56bf85a8a8514b2e6aa78cedb2e4d1",
+    "bytes": 13025
+  },
+  "base": "2fe23dceb4cbedfae860011ad79eab7da95511fc",
+  "root": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001",
+  "source_counts": {
+    "source": 9,
+    "baseline": 19,
+    "design": 3
+  },
+  "review": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/independent-source-review.json",
+    "sha256": "d8a96a3654ac2d1fa81500c1f0eb04be79d56f07dcf78df35cb4fcb2d675a37f",
+    "bytes": 12678
+  },
+  "qualification": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/qualification-001.json",
+    "sha256": "40e39c498c904027cfde97347c266e6d3f940aac1d4973bf5cf7dcf1d38ff2f3",
+    "bytes": 6824
+  },
+  "counts": {
+    "default-cpu": [
+      [
+        140,
+        0,
+        40
+      ],
+      [
+        1,
+        0,
+        50
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ],
+    "cooked-native-cpu": [
+      [
+        155,
+        0,
+        41
+      ],
+      [
+        1,
+        0,
+        50
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "cpu_suites_overlap": true,
+  "gpu_executed": false,
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-owner-provenance-payloads.json.gz",
+    "sha256": "57e281b8fba15f43135966e75d190b55293b5bc544c8b9f20ac0bb58f7aa7d1a",
+    "bytes": 285701,
+    "raw_sha256": "f649dfa9bb85d3818a7501a971a0898f46ee31eee91f1f482e7dbabe139e696f",
+    "records": 56,
+    "payloads": 54
+  },
+  "binaries": [
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/incant_render-bf4961fb357f91a4",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/incant_render-bf4961fb357f91a4",
+      "sha256": "34c46e74363a21f80b39f60170bd02c96effd8eba3089be3acadb58668ae4093",
+      "bytes": 32036224,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/model_gpu-2acb15729dedb56b",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/model_gpu-2acb15729dedb56b",
+      "sha256": "fa1bf3ccf5af87ba594ceae64e05369845402c3c356283f380f14a46f1a58a23",
+      "bytes": 16585896,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/persistent_cache-e1baa34492acd101",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/persistent_cache-e1baa34492acd101",
+      "sha256": "af553ff45a85c731e60a99311443e4173570a2714a90eae735e0343b7fa85da0",
+      "bytes": 1027024,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/timestamp_backend_probe-8a3799c51449d974",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/timestamp_backend_probe-8a3799c51449d974",
+      "sha256": "a3d76ebe7b6b3cee13862fac9368edb59552cb7abe7eade29efdfa886dfce03e",
+      "bytes": 6596536,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/incant_render-288759d68012f619",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/incant_render-288759d68012f619",
+      "sha256": "908f47f3970b93083da9ace9bad0ac4bbffbaad1627039186f91ad46995b1c1f",
+      "bytes": 32857936,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/model_gpu-b270856932857dde",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/model_gpu-b270856932857dde",
+      "sha256": "b6b9bb6dc5b60e3e5337c1f02d269063fae12aa2dcb4515dbcdf3adec5dacaea",
+      "bytes": 16920504,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/persistent_cache-af6b15b99092bba2",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/persistent_cache-af6b15b99092bba2",
+      "sha256": "25d73176c46e1ace3211414155c729767e9c170bd3b78e205a7d91456648e055",
+      "bytes": 1027024,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    },
+    {
+      "original": "/tmp/incant-agent-font-target/ci/deps/timestamp_backend_probe-24486859b03207a7",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/binaries/timestamp_backend_probe-24486859b03207a7",
+      "sha256": "8f5e9932bf9aa73340ee9f291909216b25ae34c1a58cc5c7d0e2ae45c748d5db",
+      "bytes": 6596824,
+      "mode": "0o755",
+      "claims": "CPU tests executed; ignored GPU cases compiled only"
+    }
+  ],
+  "audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-provenance-001/audit.py",
+    "sha256": "733369a88c21ca23412debb2af2a4bb0e9a3ac186364a14bbbe0627a53c8d212",
+    "bytes": 3310
+  },
+  "scope": [
+    "Stable accepted owner/change foundation only; current shaders do not transport integer IDs.",
+    "No new texture, shader, cooked artifact, default enablement or memory ceiling.",
+    "Owner attachments, pixel provenance, caster footprints and temporal/MetalFX repair remain open.",
+    "No GPU, appearance, performance or device gate acceptance."
+  ]
+}
