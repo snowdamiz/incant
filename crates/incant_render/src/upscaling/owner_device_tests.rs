@@ -1,6 +1,7 @@
 //! Corrected C5 owner-history controls. Delegated numeric execution only.
 //! Exactly 12 encoders/submissions/maps: each includes one real Depth32 fixture,
-//! one owner resolve, optional baseline resolves in cases 7/8, and all readbacks.
+//! one owner resolve, a current-only reference in case 3, optional original
+//! baseline resolves in cases 7/8, and all readbacks.
 //! No renderer frame, image, extra readback submission, retry, or appearance gate.
 use super::*;
 
@@ -63,6 +64,7 @@ struct Case {
     depth: f32,
     probes: Vec<Probe>,
     baseline: bool,
+    current_only_reference: bool,
 }
 fn fixture(case: u32) -> Case {
     assert!((1..=12).contains(&case));
@@ -91,6 +93,7 @@ fn fixture(case: u32) -> Case {
         depth: 0.5,
         probes: vec![],
         baseline: case == 7 || case == 8,
+        current_only_reference: case == 3,
     };
     c.changes[1] = 1; // camera_static, no global change
     c.changes[2] = 100_000;
@@ -108,13 +111,22 @@ fn fixture(case: u32) -> Case {
             c.current.fill(rgba(0.));
             c.old.fill(rgba(0.45));
             c.records.fill([PRESENT | 5, 7]);
-            // Owner 7 is present only in a zero-weight source tap at CENTER.
-            // Wrong support counting would reuse 0.45 and the ring would allow it.
+            // Algebraically zero support at CENTER can become 2^-20 under
+            // reciprocal/FMA coordinate lowering. Either fresh reconstruction
+            // must reject the old .45 color carried by changed secondary 7.
             c.owners[at([9, 8])] = 7;
             c.current[at([9, 8])] = rgba(0.5);
             c.changes[0] = classes(&[7]);
             c.changes[4] = 1 << 7;
             color = rgba(0.);
+            // This distant probe cannot gain owner 7 through reconstruction;
+            // it also rejects a missing/misread changed-owner table.
+            c.probes.push(Probe {
+                pixel: [3, 3],
+                color,
+                depth: z,
+                record,
+            });
         }
         4 | 5 => {
             let mask = classes(&[5, 7, 9]);
@@ -218,7 +230,7 @@ fn fixture(case: u32) -> Case {
         }
         _ => unreachable!(),
     }
-    if !c.baseline && case != 12 {
+    if !c.baseline && !c.current_only_reference && case != 12 {
         c.probes.push(Probe {
             pixel: CENTER,
             color,
@@ -318,6 +330,7 @@ fn read_pixel(bytes: &[u8], p: [u32; 2]) -> ([f32; 4], f32, [u32; 2]) {
 fn owner_history_fixture_has_exact_budget_and_independent_counterexamples() {
     let cases: Vec<_> = (1..=12).map(fixture).collect();
     assert_eq!(cases.iter().filter(|c| c.baseline).count(), 2);
+    assert_eq!(cases.iter().filter(|c| c.current_only_reference).count(), 1);
     assert_eq!(size_of::<[u32; 3132]>(), 12_528);
     for bad in [
         [PRESENT, 0],
@@ -338,6 +351,7 @@ fn owner_history_fixture_has_exact_budget_and_independent_counterexamples() {
     }
     assert_eq!(cases[2].owners[at([9, 8])], 7);
     assert_eq!(cases[2].probes[0].color, rgba(0.));
+    assert_eq!(cases[2].probes[0].pixel, [3, 3]);
     assert!((cases[6].motion[0][0] * 14.) < 1. / 256.);
     assert!(cases[6].motion[0][0] > 0.);
     assert_eq!(cases[8].probes[0].record, [PRESENT | 5, 7]);
@@ -367,6 +381,7 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
     let record = texture(d, wgpu::TextureFormat::Rg32Uint, usage);
     let baseline_color = texture(d, crate::frame::HDR_FORMAT, usage);
     let baseline_depth = texture(d, wgpu::TextureFormat::R32Float, usage);
+    let baseline_record = texture(d, wgpu::TextureFormat::Rg32Uint, usage);
     let current_depth =
         texture(d, wgpu::TextureFormat::Depth32Float, usage).create_view(&Default::default());
     let color_view = color.create_view(&Default::default());
@@ -374,13 +389,15 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
     let record_view = record.create_view(&Default::default());
     let baseline_color_view = baseline_color.create_view(&Default::default());
     let baseline_depth_view = baseline_depth.create_view(&Default::default());
+    let baseline_record_view = baseline_record.create_view(&Default::default());
     let read = d.create_buffer(&wgpu::BufferDescriptor {
         label: Some("Batched owner history scalar readback"),
-        size: PLANE * 5,
+        size: PLANE * 6,
         usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
         mapped_at_creation: false,
     });
     let (mut submissions, mut maps, mut owner_renders, mut baseline_renders) = (0, 0, 0, 0);
+    let mut current_only_renders = 0;
     for case in 1..=12 {
         let c = fixture(case);
         let current = upload(d, q, wgpu::TextureFormat::Rgba32Float, &c.current);
@@ -412,6 +429,16 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
         let baseline_bindings = c
             .baseline
             .then(|| group(d, &original.resolve_layout, &frame, &textures, None));
+        let current_only_bindings = c.current_only_reference.then(|| {
+            let mut fresh = c.frame;
+            fresh.depth[3] = 0.;
+            let frame = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("History-disabled owner reference"),
+                contents: bytemuck::bytes_of(&fresh),
+                usage: wgpu::BufferUsages::UNIFORM,
+            });
+            group(d, &owner.layout, &frame, &owner_textures, Some(&changes))
+        });
         let mut e = d.create_command_encoder(&Default::default());
         // This is an actual native depth attachment, not a float texture bound as depth.
         drop(e.begin_render_pass(&wgpu::RenderPassDescriptor {
@@ -435,6 +462,17 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
             Some(&record_view),
         );
         owner_renders += 1;
+        if let Some(fresh) = &current_only_bindings {
+            draw(
+                &mut e,
+                &owner.resolve,
+                fresh,
+                &baseline_color_view,
+                &baseline_depth_view,
+                Some(&baseline_record_view),
+            );
+            current_only_renders += 1;
+        }
         if let Some(baseline) = &baseline_bindings {
             draw(
                 &mut e,
@@ -447,8 +485,11 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
             baseline_renders += 1;
         }
         let mut copies = vec![&color, &depth, &record];
-        if c.baseline {
+        if c.baseline || c.current_only_reference {
             copies.extend([&baseline_color, &baseline_depth]);
+        }
+        if c.current_only_reference {
+            copies.push(&baseline_record);
         }
         for (i, texture) in copies.into_iter().enumerate() {
             e.copy_texture_to_buffer(
@@ -518,24 +559,41 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
             );
             assert_eq!(record, probe.record, "case {case} probe {probe:?}");
         }
-        if c.baseline {
-            for (plane, bpp) in [(0, 8), (1, 4)] {
+        if c.current_only_reference {
+            let (color, _, record) = read_pixel(&bytes, CENTER);
+            // Strict divide gives zero; reciprocal/FMA gives fresh 2^-21.
+            // Allow at most twice that analytically derived contribution. The
+            // full byte comparison below independently forbids history reuse.
+            assert!(
+                color[..3]
+                    .iter()
+                    .all(|v| (0. ..=2_f32.powi(-20)).contains(v))
+            );
+            assert_eq!(color[3], 1.);
+            assert!(record == [PRESENT | 5, 0] || record == [PRESENT | 5, 7]);
+        }
+        if c.baseline || c.current_only_reference {
+            for (plane, bpp) in [(0, 8), (1, 4), (2, 8)] {
+                if plane == 2 && !c.current_only_reference {
+                    continue;
+                }
                 for y in 0..N as usize {
                     let begin = plane * PLANE as usize + y * ROW as usize;
                     let original = (plane + 3) * PLANE as usize + y * ROW as usize;
                     assert_eq!(
                         &bytes[begin..begin + N as usize * bpp],
                         &bytes[original..original + N as usize * bpp],
-                        "case {case} plane {plane} row {y} ordinary fallback changed"
+                        "case {case} plane {plane} row {y} differs from reference"
                     );
                 }
             }
         }
         println!(
-            "OWNER_HISTORY case={case} center={:?} probes={} baseline={}",
+            "OWNER_HISTORY case={case} center={:?} probes={} baseline={} current_only={}",
             read_pixel(&bytes, CENTER),
             c.probes.len(),
-            c.baseline
+            c.baseline,
+            c.current_only_reference
         );
         drop(bytes);
         read.unmap();
@@ -544,7 +602,8 @@ fn actual_owner_history_obeys_provenance_and_preserves_ordinary_fallback() {
         (owner_renders, baseline_renders, submissions, maps),
         (12, 2, 12, 12)
     );
+    assert_eq!(current_only_renders, 1);
     println!(
-        "OWNER_HISTORY cases=12 owner_renders=12 baseline_renders=2 queue_submits=12 readback_maps=12 max_extent=16x16 no_images=true"
+        "OWNER_HISTORY cases=12 owner_renders=12 current_only_renders=1 baseline_renders=2 queue_submits=12 readback_maps=12 max_extent=16x16 no_images=true"
     );
 }
