@@ -47,7 +47,9 @@ fn setup() -> (Project, String, String, String) {
 }
 fn runtime(project: &Project) -> PhysicsRuntime {
     let mut physics = PhysicsRuntime::default();
-    physics.sync(PreparedPhysics::new(project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(project).unwrap())
+        .unwrap();
     physics
 }
 fn ray(scene: &str) -> RayQuery {
@@ -135,7 +137,9 @@ fn queries_are_immediate_stable_filtered_and_removed_handles_do_not_alias() {
         .unwrap()
         .entities
         .remove(&body);
-    physics.sync(PreparedPhysics::new(&project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     assert_eq!(physics.raycast(&query).unwrap().unwrap().entity_id, floor);
     let replacement = entity("replacement", [0., 6., 0.], None, Collider::default());
     let id = replacement.id.clone();
@@ -145,7 +149,9 @@ fn queries_are_immediate_stable_filtered_and_removed_handles_do_not_alias() {
         .unwrap()
         .entities
         .insert(id.clone(), replacement);
-    physics.sync(PreparedPhysics::new(&project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     assert_eq!(physics.raycast(&query).unwrap().unwrap().entity_id, id);
     let duplicate = entity("same distance", [0., 6., 0.], None, Collider::default());
     let expected = id.clone().min(duplicate.id.clone());
@@ -155,7 +161,9 @@ fn queries_are_immediate_stable_filtered_and_removed_handles_do_not_alias() {
         .unwrap()
         .entities
         .insert(duplicate.id.clone(), duplicate);
-    physics.sync(PreparedPhysics::new(&project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     assert_eq!(
         physics.raycast(&query).unwrap().unwrap().entity_id,
         expected

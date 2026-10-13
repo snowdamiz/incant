@@ -37,7 +37,9 @@ fn setup(parts: Vec<ColliderPart>) -> (Project, String, String) {
 }
 fn runtime(project: &Project) -> PhysicsRuntime {
     let mut physics = PhysicsRuntime::default();
-    physics.sync(PreparedPhysics::new(project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(project).unwrap())
+        .unwrap();
     physics
 }
 fn ray(scene: &str, from: [f64; 3]) -> RayQuery {
@@ -80,7 +82,9 @@ fn compound_queries_preserve_holes_local_rotations_and_parent_identity() {
         .components
         .get_mut("Collider")
         .unwrap()["shape"] = json!(ColliderShape::Compound { parts: vec![rod] });
-    physics.sync(PreparedPhysics::new(&project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     assert!(
         physics
             .raycast(&ray(&sid, [0.5, 1.5, 3.]))
@@ -91,7 +95,9 @@ fn compound_queries_preserve_holes_local_rotations_and_parent_identity() {
     assert_eq!(hit.entity_id, eid);
     assert!((hit.distance - 2.9).abs() < 1e-4);
     project.scenes.get_mut(&sid).unwrap().entities.remove(&eid);
-    physics.sync(PreparedPhysics::new(&project).unwrap());
+    physics
+        .sync(PreparedPhysics::new(&project).unwrap())
+        .unwrap();
     assert!(
         physics
             .raycast(&ray(&sid, [0., 2.3, 3.]))
