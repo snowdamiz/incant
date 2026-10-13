@@ -217,10 +217,14 @@ fn clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_da
         let offset = crop(&read(&r, &c), 512, [37, 41, 320, 180]);
         assert_eq!(base.len(), offset.len());
         assert!(base.iter().zip(offset).all(|(a, b)| a.abs_diff(b) <= 1));
-        let small = r.lighting.buffers(&r.device, [5, 3], 1).unwrap();
-        let reused = r.lighting.buffers(&r.device, [5, 3], 1).unwrap();
+        let small = r.lighting.buffers(&r.device, [5, 3], 1, None).unwrap();
+        let reused = r.lighting.buffers(&r.device, [5, 3], 1, None).unwrap();
         assert!(std::sync::Arc::ptr_eq(&small, &reused));
-        assert!(r.lighting.buffers(&r.device, [u32::MAX, 2], 1).is_err());
+        assert!(
+            r.lighting
+                .buffers(&r.device, [u32::MAX, 2], 1, None)
+                .is_err()
+        );
     }
 }
 
@@ -259,10 +263,10 @@ fn masks_represent_every_light_and_clear_tail_bits_across_word_count_changes() {
         }
     }
     for words in [0, 129, u32::MAX] {
-        assert!(r.lighting.buffers(&r.device, [5, 3], words).is_err());
+        assert!(r.lighting.buffers(&r.device, [5, 3], words, None).is_err());
     }
-    let one = r.lighting.buffers(&r.device, [5, 3], 1).unwrap();
-    let two = r.lighting.buffers(&r.device, [5, 3], 2).unwrap();
+    let one = r.lighting.buffers(&r.device, [5, 3], 1, None).unwrap();
+    let two = r.lighting.buffers(&r.device, [5, 3], 2, None).unwrap();
     assert!(!std::sync::Arc::ptr_eq(&one, &two));
     assert_eq!(two.masks.size(), one.masks.size() * 2);
 }
