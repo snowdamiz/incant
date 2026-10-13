@@ -78,6 +78,16 @@ independent source review is accepted. Claude 0062 accepted the producer Metal G
 GPU execution, other shader families and device performance requirements remain pending.
 [Scope and evidence](docs/spikes/cooked-sprite-shaders.md).
 
+## Checkpoint17 restart quota assertion — test correction accepted
+
+Linux and Windows baseline conformance failed the same restart quota test;
+the original assertion omitted its returned error. The test-only correction
+isolates structural quota checks from the production CPU deadline and strengthens
+maximum/overflow/rollback controls. Local 127 script cases and Clippy pass;
+actual corrected hosted results remain pending. Candidate17 stays frozen and
+release remains at accepted checkpoint14.
+[Evidence](docs/spikes/restart-quota-main187.md).
+
 ## Authored iOS static Wasm — producer execution passed
 
 Ordinary iOS export now accepts one public captured Wasm scene module through
