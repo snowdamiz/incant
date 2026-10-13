@@ -26,6 +26,7 @@ pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
     pub motion: Option<crate::motion::MotionDraw>,
+    pub temporal: Option<crate::temporal::TemporalDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
     pub output: OutputDraw,
@@ -172,7 +173,15 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.motion {
         pass.encode(&mut encoder.0);
     }
-    if let Some(pass) = &frame.models {
+    if let Some(temporal) = &frame.temporal {
+        if let Some(models) = &frame.models {
+            models.encode_opaque(&mut encoder.0);
+        }
+        temporal.encode(&mut encoder.0);
+        if let Some(models) = &frame.models {
+            models.encode_transparent(&mut encoder.0);
+        }
+    } else if let Some(pass) = &frame.models {
         pass.encode(&mut encoder.0);
     }
 }

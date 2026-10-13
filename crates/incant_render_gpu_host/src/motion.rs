@@ -21,6 +21,7 @@ impl MotionReset {
 pub struct MotionTargets<P> {
     inner: P,
     epoch: Arc<AtomicU64>,
+    temporal: Option<incant_render::temporal::TemporalConfig>,
 }
 impl<P: TargetProvider> GpuRenderSettings<P> {
     /// Renderer::enable_motion_vectors must have prepared the fixed pipelines.
@@ -33,10 +34,27 @@ impl<P: TargetProvider> GpuRenderSettings<P> {
                 targets: MotionTargets {
                     inner: self.targets,
                     epoch: Arc::clone(&epoch),
+                    temporal: None,
                 },
             },
             MotionReset(epoch),
         )
+    }
+}
+impl<P: TargetProvider> GpuRenderSettings<P> {
+    /// The renderer must have enabled its portable temporal pipelines. This is
+    /// fixed-resolution accumulation; output/UI geometry remains physical size.
+    pub fn with_temporal_history(
+        self,
+        config: incant_render::temporal::TemporalConfig,
+    ) -> Result<
+        (GpuRenderSettings<MotionTargets<P>>, MotionReset),
+        incant_render::temporal::TemporalError,
+    > {
+        config.validate()?;
+        let (mut settings, reset) = self.with_motion_history();
+        settings.targets.temporal = Some(config);
+        Ok((settings, reset))
     }
 }
 impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
@@ -47,6 +65,9 @@ impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
     }
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         self.inner.resolution_config()
+    }
+    fn temporal_config(&self) -> Option<incant_render::temporal::TemporalConfig> {
+        self.temporal
     }
     fn motion_epoch(&self) -> Option<u64> {
         Some(self.epoch.load(Ordering::Acquire))

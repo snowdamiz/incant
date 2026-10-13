@@ -50,6 +50,32 @@ pub(crate) struct Prepared {
     targets: Option<Arc<Targets>>,
     slot: usize,
 }
+pub(crate) struct TemporalInput {
+    pub frame: MotionFrame,
+    pub rect: [f32; 4],
+    pub surfaces: Option<TemporalSurfaces>,
+}
+pub(crate) struct TemporalSurfaces {
+    pub motion: wgpu::TextureView,
+    pub previous_depth: wgpu::TextureView,
+    pub slot: usize,
+}
+impl Prepared {
+    pub fn temporal_input(&self, rect: [f32; 4]) -> TemporalInput {
+        TemporalInput {
+            frame: self.history.frame.clone(),
+            rect,
+            surfaces: self.targets.as_ref().map(|targets| TemporalSurfaces {
+                motion: targets.motion.clone(),
+                previous_depth: targets.depth[1 - self.slot].clone(),
+                slot: self.slot,
+            }),
+        }
+    }
+    pub fn jitter_phase(&self) -> Option<u32> {
+        self.history.frame.jitter_phase()
+    }
+}
 fn capacity(batch: &Batch) -> usize {
     if batch.animated.is_some() {
         1
@@ -201,6 +227,9 @@ impl MotionState {
     pub(crate) fn readback_view(&self) -> Option<wgpu::TextureView> {
         self.targets.as_ref().map(|t| t.motion.clone())
     }
+    pub fn target_bytes(&self) -> u64 {
+        self.targets.as_ref().map_or(0, |t| t.bytes)
+    }
     pub fn frame(&self) -> Option<MotionFrame> {
         self.history.frame()
     }
@@ -215,12 +244,17 @@ impl MotionState {
         input: &SceneInput,
         output: [u32; 2],
         plan: &crate::resolution::FramePlan,
+        temporal: bool,
     ) -> Result<(Option<MotionDraw>, Prepared)> {
         topology(live, current)?;
-        let history = self.history.prepare(
-            Extent::new(output, plan.size, plan.rect, current.camera),
-            current.camera.matrix(plan.rect[2] / plan.rect[3])?,
-        )?;
+        let extent = Extent::new(output, plan.size, plan.rect, current.camera);
+        let history = if temporal {
+            self.history
+                .prepare_temporal(extent, current.camera, plan.rect)?
+        } else {
+            self.history
+                .prepare(extent, current.camera.matrix(plan.rect[2] / plan.rect[3])?)?
+        };
         if history.frame.bypassed() {
             return Ok((
                 None,

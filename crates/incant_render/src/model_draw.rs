@@ -100,6 +100,7 @@ impl Renderer {
         // Primitive-center sorting handles ordinary layered transparency. Crossing
         // triangles and intersecting transparent surfaces remain order-dependent.
         transparent.sort_by(|a, b| b.depth.total_cmp(&a.depth));
+        let opaque_count = opaque.len();
         opaque.extend(transparent);
         Ok(Some(ModelDraw {
             target,
@@ -108,6 +109,7 @@ impl Renderer {
             lighting,
             shadows,
             draws: opaque,
+            opaque_count,
         }))
     }
 }
@@ -124,9 +126,22 @@ pub(crate) struct ModelDraw {
     pub lighting: crate::lighting::PreparedLighting,
     pub shadows: super::ShadowDraw,
     draws: Vec<Draw>,
+    opaque_count: usize,
 }
 impl ModelDraw {
     pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+        self.encode_range(encoder, 0..self.draws.len());
+    }
+    pub fn encode_opaque(&self, encoder: &mut wgpu::CommandEncoder) {
+        self.encode_range(encoder, 0..self.opaque_count);
+    }
+    pub fn encode_transparent(&self, encoder: &mut wgpu::CommandEncoder) {
+        self.encode_range(encoder, self.opaque_count..self.draws.len());
+    }
+    fn encode_range(&self, encoder: &mut wgpu::CommandEncoder, range: std::ops::Range<usize>) {
+        if range.is_empty() {
+            return;
+        }
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Imported model geometry"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
@@ -155,7 +170,7 @@ impl ModelDraw {
         pass.set_bind_group(3, &self.lighting.shading, &[]);
         let [x, y, w, h] = self.target.rect;
         pass.set_viewport(x, y, w, h, 0., 1.);
-        for draw in &self.draws {
+        for draw in &self.draws[range] {
             let batch = &draw.batch;
             let primitive = &batch.model.primitives[batch.primitive];
             let material = &batch.model.materials.materials[primitive.material];

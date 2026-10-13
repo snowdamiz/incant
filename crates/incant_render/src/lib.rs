@@ -31,6 +31,7 @@ mod shader;
 mod shadows;
 mod sprites;
 mod studio;
+pub mod temporal;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
@@ -99,6 +100,7 @@ pub struct Renderer {
     output: output::OutputPass,
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
+    temporal: Option<temporal::TemporalSystem>,
 }
 impl Renderer {
     pub async fn new(
@@ -183,6 +185,7 @@ impl Renderer {
             output,
             graph: Default::default(),
             motion: None,
+            temporal: None,
         })
     }
     pub fn headless() -> Result<Self> {
@@ -268,6 +271,7 @@ impl Renderer {
             },
             resolution::ResolutionScale::FULL,
             None,
+            None,
         )
     }
     fn draw_scene_scaled(
@@ -276,6 +280,7 @@ impl Renderer {
         target: RetainedTarget<'_>,
         scale: resolution::ResolutionScale,
         motion: Option<motion::MotionDraw>,
+        temporal: Option<&temporal::Pending>,
     ) -> Result<wgpu::CommandBuffer> {
         let RetainedTarget {
             view,
@@ -334,6 +339,11 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
+        let temporal = temporal.and_then(|pending| {
+            self.temporal.as_ref().and_then(|system| {
+                system.prepare(&self.device, pending, &attachments.color, scene.camera)
+            })
+        });
         let output = self.output.prepare(
             &self.device,
             &attachments.color,
@@ -348,6 +358,7 @@ impl Renderer {
                 diagnostics,
                 models,
                 motion,
+                temporal,
                 sprites,
                 text,
                 output,
