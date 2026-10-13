@@ -1,0 +1,31 @@
+{
+ "packet": "0063-cooked-ui-text-shaders",
+ "holder": "claude (Opus 5.5, Max thinking) for handoff 0063",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "Astra via review-ready.json (0062 released it)",
+ "grant_sha256": "a7477ce249d100e6520c60a71053e11455648c597510583ad9a50c43b69c7e8e",
+ "grant": {
+  "packet": "0063-cooked-ui-text-shaders",
+  "granted_at": "2026-10-13T00:32:40.911993+00:00",
+  "owner": "Claude Opus5.5 Max via ACP",
+  "prior_gpu_release_sha256": "b035a689e7f4239e9201429db2e21238caf21569f6aa1060ba9e52dd98014900",
+  "prior_target_lease_sha256": "385ba12584361e802c9a6f0aec8025ecf60cfb07e8e07bd0e635eece5d0a4426",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "restrictions": "serial offscreen only; 24frames max960x540; bounded processes; no nativewindows/desktopcapture; no further use by0062",
+  "owned_prior_processes": []
+ },
+ "brief_sha256": "7994fcf8adc1f88d6cb2025b0746f9a3d954b4cd189071d5b5fa9c7f9b37cb1e",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders",
+ "worktree_head": "91b70493e29fda3164bae190ebb88ec918514542",
+ "acquired_at": "2026-10-13T00:40:55.284223+00:00",
+ "rules": [
+  "./tools/cargo only",
+  "--locked",
+  "--profile ci",
+  "at most -j2",
+  "binaries/evidence only under /Users/andreyyurlov/.codex/incant-evidence/0063",
+  "no other agent's target or packet files"
+ ],
+ "released_at": "2026-10-13T01:00:41.173510+00:00",
+ "release_note": "No 0063 cargo/rustc process remains on the target. Contents left in place as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0063/bin"
+}

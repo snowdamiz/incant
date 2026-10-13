@@ -1,0 +1,16 @@
+warning: patch `tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/third_party/tao)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render)
+    Checking incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render_gpu_host)
+    Checking incant_0063_review v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/handoffs/0063-cooked-ui-text-shaders/tools/review)
+    Finished `ci` profile [optimized] target(s) in 0.94s
+warning: patch `tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/third_party/tao)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+    Checking incant_0063_review v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/handoffs/0063-cooked-ui-text-shaders/tools/review)
+    Finished `ci` profile [optimized] target(s) in 0.25s

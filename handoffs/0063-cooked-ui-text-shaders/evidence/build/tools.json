@@ -1,0 +1,131 @@
+{
+ "head": "91b70493e29fda3164bae190ebb88ec918514542",
+ "frozen": {
+  "incant_headless": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0063/bin/tools/incant_headless",
+   "sha256": "ba50e683e0df74b35c8ea8bdaf44fbe64fb263bd0218cddd3ea6553cc80d40ae",
+   "bytes": 60493008,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/incant_headless",
+   "fresh": false
+  },
+  "cook_scene": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0063/bin/tools/cook_scene",
+   "sha256": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53",
+   "bytes": 4370952,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/examples/cook_scene",
+   "fresh": false
+  }
+ },
+ "builds": [
+  {
+   "label": "incant-headless",
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "build",
+    "-p",
+    "incant_headless",
+    "--bin",
+    "incant_headless",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders",
+   "env": {
+    "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target"
+   },
+   "started": "2026-10-13T00:47:22.310160+00:00",
+   "ended": "2026-10-13T00:48:28.019217+00:00",
+   "exit": 0,
+   "stdout_sha256": "ec9d72d804284eaff2b59078a5bbd520c61f276f040e5def3203fe87653fb724",
+   "stderr_sha256": "4b728a9c54d2617f2b256465781b5d4161811732d755cf62063804df2761ae59",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": null,
+     "features": [
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_render#0.0.1",
+     "filenames": [
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-59f0176b6ae3f09d.rlib",
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-59f0176b6ae3f09d.rmeta"
+     ]
+    },
+    {
+     "target": "incant_headless",
+     "kind": [
+      "bin"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/incant_headless",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_headless#0.0.1",
+     "filenames": [
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/incant_headless"
+     ]
+    }
+   ]
+  },
+  {
+   "label": "cook-scene",
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/tools/cargo",
+    "build",
+    "-p",
+    "incant_cook",
+    "--example",
+    "cook_scene",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders",
+   "env": {
+    "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target"
+   },
+   "started": "2026-10-13T00:48:28.023454+00:00",
+   "ended": "2026-10-13T00:49:09.633504+00:00",
+   "exit": 0,
+   "stdout_sha256": "85f950054296f949a2b8cab32d0fe21fa955e498b11bd7396ed0529bb0152a90",
+   "stderr_sha256": "d26fd8ebc919e6184399d4b0c7c4c44575f031a291c733e4c8b3b86329f3ef23",
+   "artifacts": [
+    {
+     "target": "cook_scene",
+     "kind": [
+      "example"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/examples/cook_scene",
+     "features": [
+      "default",
+      "physics-deterministic",
+      "scene",
+      "script"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0063-cooked-ui-text-shaders/crates/incant_cook#0.0.1",
+     "filenames": [
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/examples/cook_scene"
+     ]
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T00:49:09.734512+00:00"
+}

@@ -1,0 +1,215 @@
+{
+ "how": null,
+ "repository_lock_sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+ "helper_lock_sha256": "593bd9117dd7995aa881b38932c767c749cc63922aebbbefe3d9de56637555ee",
+ "repository_packages": 963,
+ "helper_packages": 376,
+ "own_entries": [
+  [
+   "incant_0063_review",
+   "0.0.1",
+   null
+  ]
+ ],
+ "own_dependencies": [
+  "incant_assets_runtime 0.0.1",
+  "incant_audio_runtime 0.0.1",
+  "incant_game_runtime 0.0.1",
+  "incant_input 0.0.1",
+  "incant_render 0.0.1",
+  "incant_render_data 0.0.1",
+  "incant_render_game 0.0.1",
+  "incant_render_gpu_host 0.0.1",
+  "incant_render_native 0.0.1",
+  "incant_runtime 0.0.1",
+  "incant_script 0.0.1",
+  "incant_types 0.0.1",
+  "incant_ui 0.0.1",
+  "png 0.18.1",
+  "serde 1.0.229",
+  "serde_json 1.0.151",
+  "thiserror 2.0.21"
+ ],
+ "not_in_repository_lock": [],
+ "checksum_mismatches": [],
+ "dependency_edges_added": {},
+ "dependency_edges_dropped": {
+  "bevy_platform 0.19.1": [
+   "web-time 1.1.0"
+  ],
+  "bumpalo 3.20.3": [
+   "allocator-api2 0.2.21"
+  ],
+  "cc 1.6.0": [
+   "jobserver 0.1.35",
+   "libc 0.2.190"
+  ],
+  "digest 0.10.7": [
+   "const-oid 0.9.6",
+   "subtle 2.6.1"
+  ],
+  "dispatch2 0.3.1": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "futures-channel 0.3.34": [
+   "futures-sink 0.3.34"
+  ],
+  "futures-util 0.3.34": [
+   "futures-channel 0.3.34",
+   "futures-io 0.3.34",
+   "futures-macro 0.3.34",
+   "futures-sink 0.3.34",
+   "memchr 2.8.3"
+  ],
+  "generic-array 0.14.7": [
+   "zeroize 1.9.1"
+  ],
+  "getrandom 0.4.3": [
+   "js-sys 0.3.103",
+   "rand_core 0.10.1",
+   "wasm-bindgen 0.2.126"
+  ],
+  "hashbrown 0.17.1": [
+   "serde 1.0.229",
+   "serde_core 1.0.229"
+  ],
+  "incant_assets_runtime 0.0.1": [
+   "tempfile 3.27.0"
+  ],
+  "incant_audio_runtime 0.0.1": [
+   "incant_types 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_game_runtime 0.0.1": [
+   "incant_assets_runtime 0.0.1",
+   "incant_types 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_nav 0.0.1": [
+   "serde_json 1.0.151"
+  ],
+  "incant_render 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_cook 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_render_authoring 0.0.1",
+   "incant_render_native 0.0.1",
+   "incant_runtime 0.0.1",
+   "incant_shader_cook 0.0.1",
+   "serde_json 1.0.151",
+   "sha2 0.10.9",
+   "tempfile 3.27.0"
+  ],
+  "incant_render_game 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_assets_runtime 0.0.1",
+   "incant_audio_runtime 0.0.1",
+   "incant_script 0.0.1",
+   "incant_types 0.0.1",
+   "kira 0.12.5",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_render_gpu_host 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_assets_runtime 0.0.1",
+   "incant_audio_runtime 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_game_runtime 0.0.1",
+   "incant_input 0.0.1",
+   "incant_runtime 0.0.1",
+   "incant_script 0.0.1",
+   "incant_types 0.0.1",
+   "incant_ui 0.0.1",
+   "png 0.18.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_render_native 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_cook 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_types 0.0.1",
+   "png 0.18.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_script 0.0.1": [
+   "incant_anim 0.0.1",
+   "serde_json 1.0.151"
+  ],
+  "incant_text 0.0.1": [
+   "incant_assets_runtime 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_ui 0.0.1": [
+   "tempfile 3.27.0"
+  ],
+  "incant_wasm_dev 0.0.1": [
+   "incant_anim 0.0.1",
+   "incant_assets 0.0.1",
+   "incant_assets_runtime 0.0.1",
+   "incant_audio_runtime 0.0.1",
+   "incant_game_runtime 0.0.1",
+   "incant_input 0.0.1",
+   "incant_localization 0.0.1",
+   "incant_render_game 0.0.1",
+   "incant_render_native 0.0.1",
+   "incant_script 0.0.1",
+   "incant_types 0.0.1",
+   "incant_ui 0.0.1",
+   "incant_wasm_cook 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0",
+   "thiserror 2.0.21",
+   "wasmparser 0.258.3",
+   "wasmtime 49.0.2",
+   "wat 1.258.3"
+  ],
+  "incant_wasm_runtime 0.0.1": [
+   "incant-module 0.0.1",
+   "incant_anim 0.0.1"
+  ],
+  "kira 0.12.5": [
+   "cpal 0.18.2"
+  ],
+  "naga 29.0.4": [
+   "petgraph 0.8.3"
+  ],
+  "num-complex 0.4.6": [
+   "bytemuck 1.25.2"
+  ],
+  "objc2 0.6.5": [
+   "objc2-exception-helper 0.1.1"
+  ],
+  "objc2-core-foundation 0.3.2": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "objc2-foundation 0.3.2": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "semver 1.0.28": [
+   "serde 1.0.229",
+   "serde_core 1.0.229"
+  ],
+  "smallvec 1.16.2": [
+   "serde 1.0.229"
+  ],
+  "tracing 0.1.44": [
+   "tracing-attributes 0.1.31"
+  ],
+  "tracing-core 0.1.36": [
+   "valuable 0.1.1"
+  ]
+ },
+ "other_tables": [
+  "[[patch.unused]]\nname = \"tao\"\nversion = \"0.37.1\"\n"
+ ],
+ "recorded": "2026-10-13T00:45:41.528475+00:00"
+}
