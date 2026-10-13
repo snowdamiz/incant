@@ -83,3 +83,9 @@ source003/source004 identities and historical failures. Run
 source and receipt check; `--local-binaries` also hashes the retained executables.
 Current-main composition and publication are reviewed separately. Local binary
 payloads remain under `~/.codex/incant-evidence/native-world-checkpoints-001/`.
+
+The current-main intake subsequently corrected three optional snapshot manifest
+edges and reran the affected checks. Original source004 records remain unchanged;
+use the [current composition qualifier](world-checkpoints-main245.md) to verify
+the repaired tree rather than applying this historical eight-source verifier to
+changed manifests.
