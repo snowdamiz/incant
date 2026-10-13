@@ -43,9 +43,10 @@ authoring, Undo/Redo and reopen pass; all art/layout inputs are preserved. The
 full 2,156-tick 48 kHz route, loss, locked exit, four locale readbacks, repeated
 cues and four complete packaged reset routes pass. Fresh-session logs/entities/UI
 and concatenated PCM match exactly after source/map/build deletion. Independent
-final review is accepted; publisher intake is pending. No GPU/window/device gate is claimed;
+final review and current-main integration are accepted; PR185 is merged. No GPU/window/device gate is claimed;
 historical offscreen provenance and Claude's visible restart hint remain open.
-[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md).
+[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md);
+[current-main proof](docs/spikes/core-main182.md).
 
 ## Core authored-level locked-exit proof — locally accepted
 
@@ -54,7 +55,8 @@ a false positive. A replacement public-input recording reaches the exit alive
 with 3/4 pickups and observes actual positions/inventory for 30 consecutive ticks.
 Three real CPU runs, seven focused oracle tests and independent root review pass;
 original win/loss reports and PCM are unchanged. Controller, art and authoring
-stay untouched. Integration is pending. No visual, device or performance gate
+stay untouched. The correction is merged in PR185 with the
+[current-main proof](docs/spikes/core-main182.md). No visual, device or performance gate
 is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
 
 ## Bounded offline PCM streaming — CPU shipping proof accepted
@@ -1987,3 +1989,12 @@ and fifty-two exact refusals with full native-oracle/log/PCM parity. Final
 independent integration review is pending. Original device links remain
 producer-scoped; no phone, rendering or phase gate is claimed.
 [Current evidence](docs/spikes/authored-ios-wasm-main185.md).
+
+## Windows checkpoint conformance split
+
+Checkpoint16 remains failed: baseline and optimized Windows conformance each
+passed 484 tests, then the shared job exhausted its 90-minute limit before fresh
+shipping. The reviewed repair separates four unchanged proof commands behind the
+existing success-only required context; all 23 release requirements remain.
+Local policy/tooling checks pass; hosted execution is pending the next frozen
+checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
