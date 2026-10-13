@@ -1,0 +1,482 @@
+{
+ "checks": {
+  "api": true,
+  "budgets": true,
+  "freeze": true,
+  "identity": true,
+  "pngs": true,
+  "schedule": true,
+  "static": true,
+  "tests": true
+ },
+ "details": {
+  "api": {
+   "detail": {
+    "fonts_present": true,
+    "items": [
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn prepare_retained\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn set_dynamic_resolution\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn enable_motion_history\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn set_motion_owner_attachment\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn motion_owner_attachment_enabled\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn enable_temporal_upscaling\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub async fn enable_temporal_upscaling\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub async fn enable_motion_owner\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn invalidate_motion_history\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn upscale_frame\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn resolution_frame\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn camera_static\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn same_owner\\("
+     },
+     {
+      "hits": 3,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn jitter_phase\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn has_previous\\("
+     },
+     {
+      "hits": 2,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn bypassed\\("
+     },
+     {
+      "hits": 2,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn output_size\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn ui_layer\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub fn headless\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "pub use owner::UpscaleFrame"
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/src",
+      "pattern": "TemporalConfig as UpscaleConfig"
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/tests/materials/mod.rs",
+      "pattern": "pub fn new\\(material: Value\\)"
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/tests/materials/mod.rs",
+      "pattern": "pub fn cook\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/tests/materials/mod.rs",
+      "pattern": "pub fn environment\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/tests/materials/mod.rs",
+      "pattern": "pub fn write_png\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/tests/materials/mod.rs",
+      "pattern": "pub fn emissive\\("
+     },
+     {
+      "hits": 1,
+      "path": "crates/incant_render/tests/support/mod.rs",
+      "pattern": "pub fn checked\\("
+     }
+    ]
+   },
+   "ok": true
+  },
+  "budgets": {
+   "detail": {
+    "groups": {
+     "c7_disocclusion": {
+      "fixture": {
+       "pngs": 2,
+       "queue_submissions": 164,
+       "readback_maps": 82,
+       "readback_submissions": 82,
+       "rendered_frames": 82,
+       "scene_submissions": 82,
+       "ui_submissions": 0
+      },
+      "ok": true,
+      "plan": {
+       "pngs": 2,
+       "queue_submissions": 164,
+       "readback_maps": 82,
+       "readback_submissions": 82,
+       "rendered_frames": 82,
+       "scene_submissions": 82,
+       "ui_submissions": 0
+      },
+      "recomputed": {
+       "pngs": 2,
+       "queue_submissions": 164,
+       "readback_maps": 82,
+       "readback_submissions": 82,
+       "rendered_frames": 82,
+       "scene_submissions": 82,
+       "ui_submissions": 0
+      }
+     },
+     "motion": {
+      "fixture": {
+       "pngs": 4,
+       "queue_submissions": 88,
+       "readback_maps": 44,
+       "readback_submissions": 44,
+       "rendered_frames": 44,
+       "scene_submissions": 44,
+       "ui_submissions": 0
+      },
+      "ok": true,
+      "plan": {
+       "pngs": 4,
+       "queue_submissions": 88,
+       "readback_maps": 44,
+       "readback_submissions": 44,
+       "rendered_frames": 44,
+       "scene_submissions": 44,
+       "ui_submissions": 0
+      },
+      "recomputed": {
+       "pngs": 4,
+       "queue_submissions": 88,
+       "readback_maps": 44,
+       "readback_submissions": 44,
+       "rendered_frames": 44,
+       "scene_submissions": 44,
+       "ui_submissions": 0
+      }
+     },
+     "p1_crossing": {
+      "fixture": {
+       "pngs": 1,
+       "queue_submissions": 196,
+       "readback_maps": 98,
+       "readback_submissions": 98,
+       "rendered_frames": 98,
+       "scene_submissions": 98,
+       "ui_submissions": 0
+      },
+      "ok": true,
+      "plan": {
+       "pngs": 1,
+       "queue_submissions": 196,
+       "readback_maps": 98,
+       "readback_submissions": 98,
+       "rendered_frames": 98,
+       "scene_submissions": 98,
+       "ui_submissions": 0
+      },
+      "recomputed": {
+       "pngs": 1,
+       "queue_submissions": 196,
+       "readback_maps": 98,
+       "readback_submissions": 98,
+       "rendered_frames": 98,
+       "scene_submissions": 98,
+       "ui_submissions": 0
+      }
+     },
+     "stationary": {
+      "fixture": {
+       "pngs": 6,
+       "queue_submissions": 118,
+       "readback_maps": 50,
+       "readback_submissions": 50,
+       "rendered_frames": 50,
+       "scene_submissions": 50,
+       "ui_submissions": 18
+      },
+      "ok": true,
+      "plan": {
+       "pngs": 6,
+       "queue_submissions": 118,
+       "readback_maps": 50,
+       "readback_submissions": 50,
+       "rendered_frames": 50,
+       "scene_submissions": 50,
+       "ui_submissions": 18
+      },
+      "recomputed": {
+       "pngs": 6,
+       "queue_submissions": 118,
+       "readback_maps": 50,
+       "readback_submissions": 50,
+       "rendered_frames": 50,
+       "scene_submissions": 50,
+       "ui_submissions": 18
+      }
+     },
+     "transitions": {
+      "fixture": {
+       "pngs": 2,
+       "queue_submissions": 212,
+       "readback_maps": 106,
+       "readback_submissions": 106,
+       "rendered_frames": 106,
+       "scene_submissions": 106,
+       "ui_submissions": 0
+      },
+      "ok": true,
+      "plan": {
+       "pngs": 2,
+       "queue_submissions": 212,
+       "readback_maps": 106,
+       "readback_submissions": 106,
+       "rendered_frames": 106,
+       "scene_submissions": 106,
+       "ui_submissions": 0
+      },
+      "recomputed": {
+       "pngs": 2,
+       "queue_submissions": 212,
+       "readback_maps": 106,
+       "readback_submissions": 106,
+       "rendered_frames": 106,
+       "scene_submissions": 106,
+       "ui_submissions": 0
+      }
+     }
+    },
+    "totals": {
+     "pngs": 15,
+     "queue_submissions": 778,
+     "readback_maps": 380,
+     "readback_submissions": 380,
+     "rendered_frames": 380,
+     "scene_submissions": 380,
+     "ui_submissions": 18
+    },
+    "totals_match_plan": true
+   },
+   "ok": true
+  },
+  "freeze": {
+   "detail": {
+    "freeze_sha256": "608ad3628d1d576ef688eb2548c0a4593e1b28a1946c442e6eb5d7a955bcb6f7",
+    "inputs": 2737,
+    "mismatched": [],
+    "mismatched_count": 0,
+    "missing_at_commit": []
+   },
+   "ok": true
+  },
+  "identity": {
+   "detail": {
+    "derived_from_unchanged": true,
+    "fixture_sha256_pinned": true,
+    "inject_path_new_at_commit": true,
+    "pinned_blobs_match": true
+   },
+   "ok": true
+  },
+  "pngs": {
+   "detail": {
+    "groups": {
+     "c7_disocclusion": {
+      "fixture": [
+       "c7-detail.png",
+       "c7-own-moving.png"
+      ],
+      "ok": true
+     },
+     "motion": {
+      "fixture": [
+       "motion-full.png",
+       "motion-up50.png",
+       "motion-own50.png",
+       "motion-detail.png"
+      ],
+      "ok": true
+     },
+     "p1_crossing": {
+      "fixture": [
+       "p1-detail.png"
+      ],
+      "ok": true
+     },
+     "stationary": {
+      "fixture": [
+       "stationary-full.png",
+       "stationary-drs50.png",
+       "stationary-up50.png",
+       "stationary-own50.png",
+       "stationary-phases.png",
+       "stationary-detail.png"
+      ],
+      "ok": true
+     },
+     "transitions": {
+      "fixture": [
+       "transitions-full.png",
+       "transitions-strip.png"
+      ],
+      "ok": true
+     }
+    },
+    "unique_names": true
+   },
+   "ok": true
+  },
+  "schedule": {
+   "detail": {
+    "c7_steps": 20,
+    "fixed16_frames": 24,
+    "motion_controls_at": true,
+    "motion_loop": true,
+    "p1_steps": 24,
+    "schedule": [
+     [
+      8,
+      10,
+      false
+     ],
+     [
+      12,
+      3,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      16,
+      4,
+      false
+     ],
+     [
+      8,
+      3,
+      false
+     ],
+     [
+      8,
+      5,
+      true
+     ]
+    ],
+    "schedule_frames": 28,
+    "stationary_loop": true,
+    "stationary_ui_after": true
+   },
+   "ok": true
+  },
+  "static": {
+   "detail": {
+    "file_write_targets": [
+     "&root",
+     "f.root.path(",
+     "f.root.path(",
+     "root.join(format!(\"{stem}.bin\"",
+     "root.join(&file",
+     "f.root.path(",
+     "f.root.path("
+    ],
+    "rules": {
+     "c7_undefined_is_null": true,
+     "c9_ratios_guarded": true,
+     "file_writes_only_temp_root_or_report": true,
+     "historical_threshold_values_preserved": true,
+     "historical_thresholds_reported_as_observations": true,
+     "no_process_or_network": true,
+     "one_motion_owner_opt_in": true,
+     "one_owner_attachment_call": true,
+     "output_env": true,
+     "owner_attachment_only_for_owner_variant": true,
+     "production_startup_order": true,
+     "review_policy_unchanged": true,
+     "scene_order_history_attachment_upscaling": true
+    }
+   },
+   "ok": true
+  },
+  "tests": {
+   "detail": {
+    "ignored_tests": [
+     "stationary",
+     "motion",
+     "transitions",
+     "c7_disocclusion",
+     "p1_crossing"
+    ],
+    "test_attributes": 5
+   },
+   "ok": true
+  }
+ },
+ "fixture_sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997",
+ "model": "0073 owner_quality CPU self-check",
+ "plan_sha256": "ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4",
+ "python": "3.14.8"
+}

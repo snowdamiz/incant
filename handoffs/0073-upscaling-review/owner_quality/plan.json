@@ -1,0 +1,177 @@
+{
+ "schema": "incant-0073-owner-quality-plan-v1",
+ "state": "PREPARED_FOR_ROOT_REVIEW_NO_GRANT",
+ "grant": null,
+ "brief": {
+  "path": "handoffs/0073-upscaling-review/owner_quality/brief.md",
+  "committed_sha256": "311d12bc086889fe3b478c3b6c9108b41a100c5349953a521e9e645a01ef2d0b",
+  "commit": "b70995507cb735cbcedb419d1723023389cb90e0",
+  "with_root_steering_sha256": "c8529663d0548163ce780b64fdc7b0cd310b7c668f2428ae185d77f55e632056",
+  "root_steering_file_sha256": "8cd864b90fe5c74618f66bc82005948f1f51b42182fd2ab3828186e5f64d5c4f",
+  "steering_applied": "stationary, motion and transitions (ordinary-UP versus owner-UP with FULL and DRS controls) are the primary groups and run first; C7 and P1 are fixture-only secondary groups on the existing public API that root may exclude without affecting the primary evidence",
+  "correctness_review_applied": "Astra: C7/C9 on tone-mapped sRGB-code pixels are rendered-output observations, not passes or fails of the historical linear-model gates; the 24-frame C9 reference is a finite matched-cycle reference, not demonstrated convergence; C9 ratios with a nonfinite or nonpositive reference or previous-scale contrast are null and can never read as a pass. Reporting and validity only: threshold values, renders, budgets and shaders unchanged"
+ },
+ "production": {
+  "repository": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+  "commit": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "source_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-002/source-final/freeze.json",
+   "sha256": "608ad3628d1d576ef688eb2548c0a4593e1b28a1946c442e6eb5d7a955bcb6f7",
+   "inputs": 2737
+  },
+  "never_build_from": "this handoff checkout's engine tree, which is older than fd5b86d0",
+  "pinned_blobs": {
+   "crates/incant_render/tests/materials/mod.rs": "56822ae822f062d45ce92aaf7c6e207dd1aa4032eadb1f2be6bb40a89360d083",
+   "crates/incant_render/tests/support/mod.rs": "7ee5ea9bfef92859bf7109e07158ab82cb8ce41b007959c8eb5aa34a9d6ac7e3",
+   "crates/incant_text/tests/fonts/NotoSans-Regular.ttf": "2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9",
+   "crates/incant_text/tests/fonts/NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+   "crates/incant_text/tests/fonts/IncantCJKFixture.ttf": "3299d6ab8033fb1d163f892dfcb1b8838cf1c46935c329d82da6f7b9e27dad82",
+   "crates/incant_render/Cargo.toml": "a899e17f43173c63e07919fc4404815d4cc765858f7db6961ab5bcd46649720b",
+   "Cargo.lock": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+   "crates/incant_render/src/retained.rs": "7b3ddefbef62fb24e93122ce9f8cd52c1b9b7f61d2a48f1a4c5a4a8f8cdffa39",
+   "crates/incant_render/src/motion/owner_system.rs": "334385be08ddd098c0a5b3a6c51a9a177c5d577d3fa0f7694064b750fdd955af",
+   "crates/incant_render/src/upscaling/system.rs": "20b7bcd844fce15b3328da673cdc133405c2aeac1953d8681c5c5fe872e23b3e",
+   "crates/incant_render/src/upscaling/resolve_owner.wgsl": "0618bd7793f2ef53db7d34bc2020ba515bb722b5a3e5729912cf1f5c5c408777",
+   "crates/incant_render/src/upscaling/common.wgsl": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a"
+  }
+ },
+ "evidence_context": {
+  "gpu002_result_commit": "e8c5044b03972228dfa492190f8c1e61a61de10d",
+  "gpu002_independent_receipt": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-combined-gpu-independent-20261013.json",
+   "sha256": "4e0dea70dbec919f37a9a6101fe1258823836155727e4400140f9d346a7b6006"
+  },
+  "status": "numerical and retained-host evidence only, not appearance acceptance; GPU001 and every earlier visual rejection remain historical failures"
+ },
+ "fixture": {
+  "packet_path": "review/upscaling_owner_review.rs",
+  "path": "handoffs/0073-upscaling-review/owner_quality/review/upscaling_owner_review.rs",
+  "sha256": "650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997",
+  "lines": 3076,
+  "derived_from": {
+   "path": "visual/review/upscaling_review.rs",
+   "sha256": "c0169e34d1f096cc2b1387b416968a46b1adf863eea8a27b4850d92a9abf335e",
+   "reused_verbatim": "pixels, figures, camera, stage meshes, textures, text, UI and Stage sections (old lines 480-1330: 850 of 851 lines verbatim; rustfmt re-laid out one method chain)"
+  },
+  "inject_to": "crates/incant_render/tests/upscaling_owner_review.rs",
+  "shared_test_modules": [
+   "crates/incant_render/tests/materials/mod.rs",
+   "crates/incant_render/tests/support/mod.rs"
+  ],
+  "production_changes": 0
+ },
+ "build": {
+  "owner": "root; Claude did not compile, lint or run a renderer, Cargo or GPU process this turn",
+  "format_check": "rustfmt 1.10.0 from the pinned 1.99.0 toolchain, --edition 2024 --check reading the fixture from stdin (no Cargo, no compilation): exit 0",
+  "checkout": "source-identical to fd5b86d0 (all 2737 freeze-608ad362 inputs verified equal to fd5b86d0 blobs by tools/check.py) plus only the injected fixture",
+  "features": "default only (physics-deterministic): the portable WGSL path. Refuse any cooked-* or native-metalfx feature in the artifact",
+  "review": ["./tools/cargo", "test", "--locked", "--offline", "--profile", "ci", "-j2", "-p", "incant_render", "--test", "upscaling_owner_review", "--no-run", "--message-format=json-render-diagnostics"],
+  "lint": ["./tools/cargo", "clippy", "--locked", "--offline", "--profile", "ci", "-j2", "-p", "incant_render", "--test", "upscaling_owner_review", "--", "-D", "warnings"],
+  "expected_ignored_tests": ["stationary", "motion", "transitions", "c7_disocclusion", "p1_crossing"],
+  "listing": "optional CPU enumeration: <frozen binary> --list --ignored; also lists the shared support module's non-ignored CPU test"
+ },
+ "run": {
+  "order": ["stationary", "motion", "transitions", "c7_disocclusion", "p1_crossing"],
+  "primary": ["stationary", "motion", "transitions"],
+  "secondary": ["c7_disocclusion", "p1_crossing"],
+  "argv": ["<frozen upscaling_owner_review binary>", "--ignored", "--exact", "<group>", "--nocapture", "--test-threads=1"],
+  "environment": {
+   "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+   "TMPDIR": "<fresh evidence root>/tmp",
+   "INCANT_EXPECT_GPU_BACKEND": "Metal",
+   "RUST_BACKTRACE": "0",
+   "INCANT_0073_OWNER_REVIEW_OUT": "<fresh evidence root>/<group>, which must not exist"
+  },
+  "home": "inherited unchanged for the native driver only; never logged",
+  "sequence": "one process per group, in order, foreground; the first failure stops the sequence (nonzero exit, timeout, missing report.json, outcome fail or a budget mismatch); no retry",
+  "timeout_seconds_each": 90,
+  "group_outputs": ["events.jsonl", "report.json", "the group's PNGs"]
+ },
+ "api": {
+  "renderer_startup": "Renderer::headless() -> support::checked; enable_temporal_upscaling().await; enable_motion_owner().await (production order, as in fd5b86d0 upscaling_owner_retained_tests.rs)",
+  "full_and_drs": "prepare_retained(input, camera); DRS adds set_dynamic_resolution(Some(fixed 8/16))",
+  "ordinary_up": "prepare_retained; set_dynamic_resolution; enable_motion_history(renderer); enable_temporal_upscaling(renderer, REVIEW)",
+  "owner_up": "prepare_retained; set_dynamic_resolution; enable_motion_history(renderer); set_motion_owner_attachment(renderer, true); enable_temporal_upscaling(renderer, REVIEW)",
+  "per_frame": "RetainedScene::submit(renderer, input, RetainedTarget); optional UiLayer::stage + UiLayer::submit; one copy_texture_to_buffer submission + map_async + poll(Wait); upscale_frame(), resolution_frame(), motion_owner_attachment_enabled(), MotionFrame::{same_owner, sequence, epoch, has_previous, jitter_phase, bypassed, internal_size, camera_static}",
+  "transitions": "set_dynamic_resolution between segments on both UP and OWN; invalidate_motion_history() for the cut",
+  "policy": "REVIEW unchanged: history_weight 0.9, relative_depth 0.05, absolute_depth 0.02, reactive_threshold 4.0, reactive_strength 0.5",
+  "missing_public_api": [
+   "no public read of the owner record texture or per-pixel persist/reproject/drop decisions; owner effects are observed only through color",
+   "no public control to replay the private per-pixel drop chronology, so P1's reference cannot replay a run's own drops",
+   "no public selection of the jitter phase; UP and OWN share it by identical submission counts from frame 1"
+  ]
+ },
+ "groups": {
+  "stationary": {
+   "priority": "primary",
+   "budget_const": "STATIONARY",
+   "description": "static look-dev stage at 960x540, 8/16 internal: FULL and DRS controls, then 24 UP and 24 OWN frames interleaved (three jitter cycles each); the physical UI on both controls and on the last 8 frames of each",
+   "composition": {"scenes": {"full": 1, "drs": 1, "up": 24, "own": 24}, "ui": {"full": 1, "drs": 1, "up": 8, "own": 8}},
+   "budget": {"scene_submissions": 50, "ui_submissions": 18, "readback_submissions": 50, "readback_maps": 50, "queue_submissions": 118, "rendered_frames": 50, "pngs": 6},
+   "pngs": ["stationary-full.png", "stationary-drs50.png", "stationary-up50.png", "stationary-own50.png", "stationary-phases.png", "stationary-detail.png"]
+  },
+  "motion": {
+   "priority": "primary",
+   "budget_const": "MOTION",
+   "description": "the stage with the moving shadow-casting cube: 8 static frames, 6 of object motion, 6 with a camera pan; UP and OWN every step; FULL and DRS at steps 14 and 20",
+   "composition": {"scenes": {"up": 20, "own": 20, "full": 2, "drs": 2}, "ui": {}},
+   "budget": {"scene_submissions": 44, "ui_submissions": 0, "readback_submissions": 44, "readback_maps": 44, "queue_submissions": 88, "rendered_frames": 44, "pngs": 4},
+   "pngs": ["motion-full.png", "motion-up50.png", "motion-own50.png", "motion-detail.png"]
+  },
+  "transitions": {
+   "priority": "primary",
+   "budget_const": "TRANSITIONS",
+   "description": "fractional offset viewport; UP and OWN in lockstep on the corrected schedule (the 16/16 segment now has the C9 fourth frame), separate 24-frame fixed-16/16 UP and OWN runs for C9's finite matched-cycle reference (frames 17-24), FULL and DRS 8/16 controls",
+   "schedule": [[8, 10, false], [12, 3, false], [4, 3, false], [16, 4, false], [8, 3, false], [8, 5, true]],
+   "schedule_correction": "a5ae3179 had three 16/16 frames and could not measure the fourth; the minimum correction adds one 16/16 frame",
+   "composition": {"scenes": {"full": 1, "drs": 1, "up": 28, "own": 28, "fixed16_up": 24, "fixed16_own": 24}, "ui": {}},
+   "budget": {"scene_submissions": 106, "ui_submissions": 0, "readback_submissions": 106, "readback_maps": 106, "queue_submissions": 212, "rendered_frames": 106, "pngs": 2},
+   "pngs": ["transitions-full.png", "transitions-strip.png"]
+  },
+  "c7_disocclusion": {
+   "priority": "secondary",
+   "budget_const": "C7",
+   "description": "flat board: a white 0.5 m square 4 m from the eye, static for 8 frames, then 3 output pixels per frame over a 4-texel checker 6 m away; never-occluded reference with the square out of view; UP and OWN for both; FULL moving and reference at step 20",
+   "composition": {"scenes": {"up_moving": 20, "own_moving": 20, "up_reference": 20, "own_reference": 20, "full_moving": 1, "full_reference": 1}, "ui": {}},
+   "budget": {"scene_submissions": 82, "ui_submissions": 0, "readback_submissions": 82, "readback_maps": 82, "queue_submissions": 164, "rendered_frames": 82, "pngs": 2},
+   "pngs": ["c7-detail.png", "c7-own-moving.png"]
+  },
+  "p1_crossing": {
+   "priority": "secondary",
+   "budget_const": "P1",
+   "description": "flat grey board: a 0.8 m checker panel 4 m from the eye waits 8 frames, moves on frames 9-16 and stops; an orange bar 5 m from the eye moves every frame, crossing behind it and continuing after the stop; matched bar-free reference; UP and OWN for both; FULL with bar and reference at step 24",
+   "composition": {"scenes": {"up_bar": 24, "own_bar": 24, "up_reference": 24, "own_reference": 24, "full_bar": 1, "full_reference": 1}, "ui": {}},
+   "budget": {"scene_submissions": 98, "ui_submissions": 0, "readback_submissions": 98, "readback_maps": 98, "queue_submissions": 196, "rendered_frames": 98, "pngs": 1},
+   "pngs": ["p1-detail.png"]
+  }
+ },
+ "totals": {
+  "processes": 5,
+  "budget": {"scene_submissions": 380, "ui_submissions": 18, "readback_submissions": 380, "readback_maps": 380, "queue_submissions": 778, "rendered_frames": 380, "pngs": 15},
+  "primary_only": {"processes": 3, "scene_submissions": 200, "ui_submissions": 18, "readback_submissions": 200, "readback_maps": 200, "queue_submissions": 418, "rendered_frames": 200, "pngs": 12},
+  "images": {"format": "PNG, RGBA8, sRGB codes as read back", "size": [960, 540], "raw_bytes_each": 2073600, "file_bytes_max_each": 2100000, "files_max": 15},
+  "readback_buffer_bytes_each": 2073600,
+  "counting": "every scene, UI and readback queue submission is charged before it is attempted; each readback has exactly one map; controls, references and warmups are all counted; report.json fails unless the budget is consumed exactly. A numerical marker never substitutes for these budgets"
+ },
+ "outcome_rules": {
+  "contract_checks": "decide each process: adapter Metal, one owner per UP/OWN run with expected phases/history/epochs/internal sizes, attachment only on OWN, control plainness, UI interior identity (stationary), chrome identity (transitions), measurable C7/P1 regions, nonblank frames, exact budget",
+  "historical_threshold_observations": "the unchanged C7 and C9 threshold values are compared with tone-mapped 8-bit sRGB rendered output and recorded in report.json as rendered-output observations, not passes or fails of the historical linear-model gates; an undefined comparison (nonfinite or nonpositive denominator, empty or nonfinite region) is null, never a pass; they never decide the process outcome",
+  "observations": "error and activity statistics, chart contrast, wire presence, P1 residuals: never decide anything",
+  "quality_judgment": "Claude's later inspection of the retained PNGs, separate from all numbers"
+ },
+ "historical": {
+  "visual_a5ae3179": "quality FAIL (visual-result.md): accumulated texture detail below nearest-neighbour DRS (recorded there as 'converged texture detail'), edge and sub-pixel phase instability, LOD from internal derivatives; preserved",
+  "gpu001": "owner-history case 3 failed (0.40478516 vs 0); preserved",
+  "c7_original_cpu_gate": {"limit": 0.06, "definition_quoted": "quality-repair-brief.md C7: a square moving 3 px/frame over a static textured background; beyond 2 frames of motion behind the trailing edge, the mean absolute difference per column from a never-moved converged reference is at most 0.06", "recorded": "linear CPU model 0.0918: failed (addenda 2 and 3); preserved", "rendered_observation": "report.json historical_threshold_observations.c7 compares the same 0.06 value with mean RGB differences of 8-bit sRGB codes / 255 against the same variant's never-occluded, same-chronology reference (not a converged reference); units are not converted; not a pass or fail of this gate"},
+  "c9_original_cpu_gate": {"third_16": 0.75, "fourth_16": 0.90, "first_4_vs_last_12": 0.90, "recorded": "linear CPU model 0.683 / 0.869 against the model's long-run reference (addenda 2 and 3: 'the converged state') and 0.741 / 0.943 against frame 39: failed; preserved", "rendered_observation": "report.json historical_threshold_observations.c9 compares the same values with luminance standard deviation of sRGB codes per chart region against a finite matched-cycle reference (mean of frames 17-24 of a separate 24-frame fixed-16/16 run of the same variant), not demonstrated convergence; a ratio with a nonfinite or nonpositive denominator is null; an all-region summary is true only if every region is defined and meets the value, false if any defined region is below it, otherwise null; not a pass or fail of this gate"},
+  "p1": {"status": "unresolved", "model_worst_residuals": {"clear 8/16": 0.349, "clear 16/16": 0.221, "grey 8/16": 0.296, "grey 16/16": 0.063}, "gpu_minimal_control": "grey 8/16 only, one stop; reference cannot replay private drops"}
+ },
+ "limits": [
+  "Not compiled or linted this turn; root's targeted build and clippy are the first compiler check",
+  "Default WGSL path only; cooked-temporal and native MetalFX are not covered",
+  "One local Metal adapter; no phone, performance, memory or phase claim",
+  "C7 and C9 regions and units are defined explicitly for tone-mapped 8-bit output and do not equal the linear CPU model's; their values here are rendered-output observations, never passes or fails of the historical gates",
+  "The C9 reference is a finite matched-cycle reference (frames 17-24 of a 24-frame fixed-16/16 run); convergence is not demonstrated",
+  "P1 covers one background and one scale; the CPU model's four settings and five stops are not reproduced"
+ ]
+}
