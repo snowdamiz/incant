@@ -81,7 +81,7 @@ GPU execution, other shader families and device performance requirements remain 
 ## Checkpoint17 restart quota assertion — test correction accepted
 
 Linux and Windows baseline conformance failed the same restart quota test;
-the original assertion omitted its returned error. The test-only correction
+the original assertion omitted its returned error. The test-only correction merged in main188 and
 isolates structural quota checks from the production CPU deadline and strengthens
 maximum/overflow/rollback controls. Local 127 script cases and Clippy pass;
 actual corrected hosted results remain pending. Candidate17 stays frozen and

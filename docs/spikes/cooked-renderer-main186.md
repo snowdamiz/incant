@@ -38,3 +38,8 @@ in the broad original inventory. The qualification wrapper checks these Git
 identities before replaying the original assertions without changing receipts.
 Independent final source/evidence review is accepted; exact-head fast check and publication are pending. No phase, phone performance, full offline renderer or measured
 cache speedup approval is implied.
+
+The subsequent main188 join adds only the independently reviewed restart quota
+unit-test body outside this validation scope. The second qualification verifies
+that exact accepted blob and preserves all runtime, renderer and Cargo inputs.
+No repeated build or new GPU result is claimed.

@@ -1117,5 +1117,9 @@
   "final_review": {
     "path": "docs/spikes/evidence/cooked-renderer-main186/final-review.json",
     "sha256": "0e224d8b426ce8f53a668c5b5286e5db5f539dc4e310c2cd5e2c08e1df2b88bb"
+  },
+  "actual_main188_qualification": {
+    "path": "docs/spikes/evidence/cooked-renderer-main186/main188-qualification.json",
+    "sha256": "6fb5cde30da2352709ad9cf8fce90d2dfd75b431a943088e6f1dfa41f1444882"
   }
 }
