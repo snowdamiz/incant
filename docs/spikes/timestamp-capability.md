@@ -24,5 +24,5 @@ GPU execution was requested. The successor release checkpoint must execute the
 actual native contract on its selected backends before promotion.
 
 [Machine-readable evidence](evidence/timestamp-capability.json) and its read-only
-verifier bind all 3,065 inputs. Independent source review is accepted; final
-packet review is pending. No device, performance or phase gate is approved.
+verifier bind all 3,065 inputs. Independent source and final
+packet reviews are accepted; publication awaits the required fast check. No device, performance or phase gate is approved.

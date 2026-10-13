@@ -39,8 +39,9 @@ acceptance remains pending. A second hosted failure is the timestamp test
 unconditionally requiring an optional capability on Apple Paravirtual Metal.
 The [test correction](docs/spikes/timestamp-capability.md) checks the exact typed
 refusal and an ordinary completed frame when absent, preserving positive timing
-assertions when supported. Its CPU/compile checks pass; final review and successor
-hosted execution remain pending. Both original failures are retained.
+assertions when supported. Its CPU/compile checks and independent final review
+pass; publication and successor hosted execution remain pending. Both original
+failures are retained.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows

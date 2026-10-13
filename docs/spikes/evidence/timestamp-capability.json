@@ -332,5 +332,9 @@
     "Actual adapter capabilities and both runtime contract branches must execute on the successor hosted checkpoint",
     "CPU/compile evidence only; no local GPU run or positive hosted timestamp measurement claimed"
   ],
-  "review_status": "Source accepted; final evidence review pending"
+  "review_status": "Independent source and final evidence reviews accepted; successor hosted execution pending",
+  "final_review": {
+    "path": "docs/spikes/evidence/timestamp-capability/final-review.json",
+    "sha256": "27235c72c594d021e949949edd1d06553c40fc5f8188df0f45433740ddfe4113"
+  }
 }
