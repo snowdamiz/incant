@@ -134,11 +134,11 @@ fn uniform(
     Ok(())
 }
 pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
+    let motion = matches!(kind, Kind::Motion | Kind::Depth);
     require(
-        m.overrides.is_empty() && m.entry_points.len() == 2,
+        m.overrides.is_empty() && m.entry_points.len() == if motion { 3 } else { 2 },
         "temporal entry/override count",
     )?;
-    let motion = kind == Kind::Motion;
     let vary = || {
         vec![
             Io::Position,
@@ -147,14 +147,16 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
             Io::Float(2, 1, true),
         ]
     };
-    let mut seen = [false; 2];
+    let mut seen = [false; 3];
     for (n, e) in m.entry_points.iter().enumerate() {
+        let depth_only = motion && e.name == "depth_only";
         let vertex = match (e.stage, e.name.as_str()) {
             (ShaderStage::Vertex, "vertex") => true,
+            (ShaderStage::Fragment, "fragment" | "depth_only") if motion => false,
             (ShaderStage::Fragment, name) if name == kind.entry() => false,
             _ => return Err(CookError::Contract("temporal entry identity")),
         };
-        let slot = usize::from(!vertex);
+        let slot = if depth_only { 2 } else { usize::from(!vertex) };
         require(!seen[slot], "temporal duplicate stage")?;
         seen[slot] = true;
         let mut inputs = Vec::new();
@@ -183,26 +185,36 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
             vec![Io::Position]
         };
         require(inputs == expected, "temporal inputs")?;
-        let result = e
-            .function
-            .result
-            .as_ref()
-            .ok_or(CookError::Contract("temporal missing output"))?;
         let mut outputs = Vec::new();
-        io(m, result.ty, result.binding.as_ref(), &mut outputs)?;
+        if let Some(result) = &e.function.result {
+            require(!depth_only, "temporal depth fragment output")?;
+            io(m, result.ty, result.binding.as_ref(), &mut outputs)?;
+        } else {
+            require(depth_only, "temporal missing output")?;
+        }
         let expected = if vertex && motion {
             vary()
         } else if vertex {
             vec![Io::Position]
-        } else if kind == Kind::Upscale {
+        } else if depth_only {
+            vec![]
+        } else if matches!(kind, Kind::Upscale | Kind::MetalFxNormalize) {
             vec![Io::Float(0, 4, false), Io::Float(1, 1, false)]
+        } else if kind == Kind::MetalFxPack {
+            vec![
+                Io::Float(0, 4, false),
+                Io::Float(1, 1, false),
+                Io::Float(2, 2, false),
+                Io::Float(3, 1, false),
+            ]
         } else {
             vec![Io::Float(0, 4, false)]
         };
         require(outputs == expected, "temporal outputs/MRT")?;
         for (h, g) in m.global_variables.iter() {
-            let expected = !vertex
-                || (motion
+            let expected = (!vertex && !(depth_only && g.binding.is_some_and(|b| b.group == 0)))
+                || (vertex
+                    && motion
                     && g.binding
                         == Some(naga::ResourceBinding {
                             group: 0,
@@ -215,11 +227,12 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
         }
     }
     let count = match kind {
-        Kind::Motion => 4,
+        Kind::Motion | Kind::Depth => 4,
         Kind::Resolve => 5,
-        Kind::Copy => 1,
+        Kind::Copy => 2,
         Kind::Upscale => 6,
         Kind::Composite => 3,
+        Kind::MetalFxPack | Kind::MetalFxNormalize => 4,
     };
     require(m.global_variables.len() == count, "temporal resource count")?;
     let mut bindings = std::collections::BTreeSet::new();
@@ -232,7 +245,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
             bindings.insert((b.group, b.binding)),
             "temporal duplicate binding",
         )?;
-        let frame = b.group == 0 && b.binding == 0 && kind != Kind::Copy;
+        let frame = b.group == 0 && b.binding == u32::from(kind == Kind::Copy);
         let material = motion && b.group == 1 && b.binding == 0;
         if frame || material {
             require(g.space == AddressSpace::Uniform, "temporal uniform space")?;
@@ -240,12 +253,14 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                 &["base", "emissive_roughness", "factors", "flags"]
             } else {
                 match kind {
-                    Kind::Motion => &["current", "previous", "rect"],
-                    Kind::Resolve => &["rect", "depth", "options", "reactive"],
-                    Kind::Upscale | Kind::Composite => {
+                    Kind::Motion | Kind::Depth => &["current", "previous", "rect"],
+                    Kind::Resolve | Kind::Copy => &["rect", "depth", "options", "reactive"],
+                    Kind::Upscale
+                    | Kind::Composite
+                    | Kind::MetalFxPack
+                    | Kind::MetalFxNormalize => {
                         &["source", "output", "depth", "options", "reactive", "jitter"]
                     }
-                    Kind::Copy => unreachable!(),
                 }
             };
             uniform(m, g.ty, names, frame && motion, material)?;
@@ -288,6 +303,49 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
 #[cfg(test)]
 mod tests {
     use super::*;
+    fn refuses_valid_change(kind: Kind, source: &str, old: &str, new: &str) {
+        let changed = source.replace(old, new);
+        assert_ne!(
+            changed, source,
+            "negative control must actually change source"
+        );
+        let m = naga::front::wgsl::parse_str(&changed).unwrap();
+        let info = naga::valid::Validator::new(
+            naga::valid::ValidationFlags::all(),
+            naga::valid::Capabilities::empty(),
+        )
+        .validate(&m)
+        .unwrap();
+        assert!(validate(kind, &m, &info).is_err());
+    }
+    #[test]
+    fn presentation_native_mrt_and_depth_only_interfaces_fail_closed() {
+        let motion = include_str!("../../../incant_render/src/motion/shader.wgsl");
+        refuses_valid_change(
+            Kind::Depth,
+            motion,
+            "@fragment fn depth_only(in:Output) {mask(in);}",
+            "@fragment fn depth_only(in:Output)->@location(0) vec4f {mask(in);return vec4f(0.0);}",
+        );
+        let copy = include_str!("../../../incant_render/src/temporal/copy.wgsl");
+        refuses_valid_change(Kind::Copy, copy, "@binding(1)", "@binding(2)");
+        let common = include_str!("../../../incant_render/src/upscaling/common.wgsl");
+        let pack = format!(
+            "{common}\n{}",
+            include_str!("../../../incant_render/src/metalfx/prepare.wgsl")
+        );
+        refuses_valid_change(Kind::MetalFxPack, &pack, "@location(3)", "@location(4)");
+        let normalize = format!(
+            "{common}\n{}",
+            include_str!("../../../incant_render/src/metalfx/composite.wgsl")
+        );
+        refuses_valid_change(
+            Kind::MetalFxNormalize,
+            &normalize,
+            "@binding(3)",
+            "@binding(4)",
+        );
+    }
     #[test]
     fn structurally_valid_ir_changes_are_refused_independently_of_source_hash() {
         let source = include_str!("../../../incant_render/src/motion/shader.wgsl");

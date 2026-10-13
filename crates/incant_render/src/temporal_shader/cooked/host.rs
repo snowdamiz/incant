@@ -31,7 +31,7 @@ fn texture(binding: u32, depth: bool) -> wgpu::BindGroupLayoutEntry {
 }
 pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
     use wgpu::{VertexFormat as F, VertexStepMode as S};
-    if kind == Kind::Motion {
+    if matches!(kind, Kind::Motion | Kind::Depth) {
         if crate::motion::system::frame_entry() != uniform(144, wgpu::ShaderStages::VERTEX_FRAGMENT)
         {
             return Err("motion frame layout");
@@ -76,13 +76,23 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
     } else {
         let (actual, size, count) = match kind {
             Kind::Resolve => (crate::temporal::system::layout_entries(false), 64, 4),
-            Kind::Copy => (crate::temporal::system::layout_entries(true), 0, 1),
+            Kind::Copy => (crate::temporal::system::layout_entries(true), 64, 1),
             Kind::Upscale => (crate::upscaling::system::layout_entries(5), 96, 5),
             Kind::Composite => (crate::upscaling::system::layout_entries(2), 96, 2),
-            Kind::Motion => unreachable!(),
+            #[cfg(feature = "native-metalfx")]
+            Kind::MetalFxPack | Kind::MetalFxNormalize => {
+                (crate::metalfx::system::layout_entries().to_vec(), 96, 3)
+            }
+            Kind::Motion | Kind::Depth => unreachable!(),
         };
-        let expected = if size == 0 {
-            vec![texture(0, false)]
+        let expected = if kind == Kind::Copy {
+            vec![
+                texture(0, false),
+                wgpu::BindGroupLayoutEntry {
+                    binding: 1,
+                    ..uniform(64, wgpu::ShaderStages::FRAGMENT)
+                },
+            ]
         } else {
             let mut e = vec![uniform(size, wgpu::ShaderStages::FRAGMENT)];
             e.extend((1..=count).map(|i| texture(i, i == 3)));

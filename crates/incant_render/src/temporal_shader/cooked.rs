@@ -34,7 +34,7 @@ mod copy {
     include!(concat!(env!("OUT_DIR"), "/temporal-copy/manifest.rs"));
     pub(super) const BUNDLE: Bundle = Bundle {
         contract: MANIFEST_CONTRACT,
-        expected: "incant-temporal-copy-v1;naga=29.0.4;wgpu=29.0.4;frame0-f,textures1,mrt1;msl=2.4;hlsl=6.0,special-b0;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        expected: "incant-temporal-copy-v2;naga=29.0.4;wgpu=29.0.4;frame64-f@1,textures1@0,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
         source: SOURCE_HASH,
         producer: PRODUCER_HASH,
         artifacts: &ARTIFACTS,
@@ -62,8 +62,54 @@ mod composite {
         artifacts: &ARTIFACTS,
     };
 }
+mod depth {
+    use super::*;
+    include!(concat!(env!("OUT_DIR"), "/temporal-depth/manifest.rs"));
+    pub(super) const BUNDLE: Bundle = Bundle {
+        contract: MANIFEST_CONTRACT,
+        expected: "incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        source: SOURCE_HASH,
+        producer: PRODUCER_HASH,
+        artifacts: &ARTIFACTS,
+    };
+}
+#[cfg(feature = "native-metalfx")]
+mod metalfx_pack {
+    use super::*;
+    include!(concat!(
+        env!("OUT_DIR"),
+        "/temporal-metalfx-pack/manifest.rs"
+    ));
+    pub(super) const BUNDLE: Bundle = Bundle {
+        contract: MANIFEST_CONTRACT,
+        expected: "incant-metalfx-pack-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt4;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        source: SOURCE_HASH,
+        producer: PRODUCER_HASH,
+        artifacts: &ARTIFACTS,
+    };
+}
+#[cfg(feature = "native-metalfx")]
+mod metalfx_normalize {
+    use super::*;
+    include!(concat!(
+        env!("OUT_DIR"),
+        "/temporal-metalfx-normalize/manifest.rs"
+    ));
+    pub(super) const BUNDLE: Bundle = Bundle {
+        contract: MANIFEST_CONTRACT,
+        expected: "incant-metalfx-normalize-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        source: SOURCE_HASH,
+        producer: PRODUCER_HASH,
+        artifacts: &ARTIFACTS,
+    };
+}
 fn bundle(kind: Kind) -> &'static Bundle {
     match kind {
+        Kind::Depth => &depth::BUNDLE,
+        #[cfg(feature = "native-metalfx")]
+        Kind::MetalFxPack => &metalfx_pack::BUNDLE,
+        #[cfg(feature = "native-metalfx")]
+        Kind::MetalFxNormalize => &metalfx_normalize::BUNDLE,
         Kind::Motion => &motion::BUNDLE,
         Kind::Resolve => &resolve::BUNDLE,
         Kind::Copy => &copy::BUNDLE,
@@ -84,6 +130,11 @@ mod tests {
     #[test]
     fn every_fixed_temporal_program_has_exact_host_and_all_native_stages() {
         for kind in [
+            Kind::Depth,
+            #[cfg(feature = "native-metalfx")]
+            Kind::MetalFxPack,
+            #[cfg(feature = "native-metalfx")]
+            Kind::MetalFxNormalize,
             Kind::Motion,
             Kind::Resolve,
             Kind::Copy,

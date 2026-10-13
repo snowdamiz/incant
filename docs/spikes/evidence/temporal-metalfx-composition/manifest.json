@@ -1,0 +1,282 @@
+{
+  "format": "incant-temporal-metalfx-composition-v1",
+  "status": "CPU/offline/source accepted; GPU/appearance pending",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/freeze.json",
+    "sha256": "812ed5ef2c60d7f059bf03b3ec52a7c79a19960d6febbf075103c6aa979d14dc",
+    "files": 2450
+  },
+  "source_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-metalfx-union-source-20261013.json",
+    "sha256": "c4084df05c84ba112835974f1ffc95257d3058e034915063e2cb3193bfc02a76"
+  },
+  "checks": [
+    {
+      "label": "clippy-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/clippy-001.json",
+      "sha256": "9695ac62bcc6a31390bf80f81287ff4cefc5c42c642070ad10c7763c8be54577",
+      "test_summaries": []
+    },
+    {
+      "label": "complete-cpu-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/complete-cpu-001.json",
+      "sha256": "38c28e6a30412749d1c231310e61382e6dadcbfb429008456ceddd07ac678dab",
+      "test_summaries": [
+        "test result: ok. 138 passed; 0 failed; 41 ignored; 0 measured; 0 filtered out; finished in 0.21s",
+        "test result: ok. 1 passed; 0 failed; 50 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 1 passed; 0 failed; 5 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 1 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "conventions-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/conventions-001.json",
+      "sha256": "a504c5d69c1f54bc486dc3bc3f89546ad858ca444d73295aed20c4f5ab44d710",
+      "test_summaries": []
+    },
+    {
+      "label": "cooker-001",
+      "exit": 101,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/cooker-001.json",
+      "sha256": "c606efac96745d919f34562b44ae05dadc16ffb0d1d553f0c7a20da4d2eef80f",
+      "test_summaries": [
+        "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "cooker-002",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/cooker-002.json",
+      "sha256": "378c4a1ac4d73f61fe394decb9d9cf891e391604a97a194160a5b2e460445186",
+      "test_summaries": [
+        "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "default-cpu-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/default-cpu-001.json",
+      "sha256": "d38e04b92e0c3c50bf08d76ca856fb8e5e6e19a00f9bbc04dce7486d03e37180",
+      "test_summaries": [
+        "test result: ok. 123 passed; 0 failed; 40 ignored; 0 measured; 0 filtered out; finished in 0.18s",
+        "test result: ok. 1 passed; 0 failed; 50 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 1 passed; 0 failed; 5 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 1 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "deps-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/deps-001.json",
+      "sha256": "82d067d585087256feb3e821d1090812a2b3c543704306df37a8d86b46d37621",
+      "test_summaries": []
+    },
+    {
+      "label": "fmt-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/fmt-001.json",
+      "sha256": "f0c67bb22ddc31b41d1d2b80098d3cffd4814472fa50f45bb8b8e95a3d3ea776",
+      "test_summaries": []
+    },
+    {
+      "label": "ios-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/ios-001.json",
+      "sha256": "722ad16a08b7d53197ca7087150f848db1fa2c26427d5db1a36f561549384d91",
+      "test_summaries": []
+    },
+    {
+      "label": "offline-001",
+      "exit": 1,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/offline-001.json",
+      "sha256": "641de1257c38cd37bf967c06a64edc82f3853abc2136ee953beecd649eba4e46",
+      "test_summaries": []
+    },
+    {
+      "label": "offline-002",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/offline-002.json",
+      "sha256": "873beb5d339647f9fcc568b39229b05781fa09ed9a852cc37ec5d603d8f19367",
+      "test_summaries": []
+    },
+    {
+      "label": "partial-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/partial-001.json",
+      "sha256": "31e2e657f35b75024967c42a0e7f9142fd10de2690314b1ce13980a4f83b47c5",
+      "test_summaries": [
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 173 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "partial-002",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/partial-002.json",
+      "sha256": "abf1b475bc8e2dfb89a7eac13565bdb3be7545f85f87023d259ea0d6f62d4dc4",
+      "test_summaries": [
+        "test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 173 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "partial-003",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/partial-003.json",
+      "sha256": "92dd61159d51b2a10ec4e59c86c5647aacab492a6163c9b56f024f5051e15245",
+      "test_summaries": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 172 filtered out; finished in 0.00s"
+      ]
+    },
+    {
+      "label": "wasm-001",
+      "exit": 0,
+      "error": null,
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/wasm-001.json",
+      "sha256": "2a9d9ccef5629c1b82488b694ae01b3950dfef8324c7666c0af419a495fc98f6",
+      "test_summaries": []
+    }
+  ],
+  "offline": {
+    "stages": 17,
+    "commands": 54,
+    "gpu_execution": false,
+    "dxil": "not run: DXC unavailable"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-metalfx-composition/records.json.gz",
+    "sha256": "cda4304159fc89b38a63802c7c17950da50e6feed1ae2234ce4e078b2c51badf",
+    "records": 314,
+    "payloads": 119
+  },
+  "external_binaries": [
+    {
+      "path": "binaries/game-35bb67096a4febdf",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/game-35bb67096a4febdf",
+      "sha256": "c9bc251d2ae7d180ce50bf686c3dce21a58da7b92124bfe2314eff458af80c46",
+      "bytes": 31868040
+    },
+    {
+      "path": "binaries/game-5729eb8c7a31ca57",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/game-5729eb8c7a31ca57",
+      "sha256": "c11816cc45452bc74f4b72cf26f3e8d5d6c0ac11403d39026314a5894ab900ed",
+      "bytes": 32251528
+    },
+    {
+      "path": "binaries/incant_render-86660e7e90587040",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/incant_render-86660e7e90587040",
+      "sha256": "276218ee2d9e238c2c2fcf5811ebc17b0f267e9732d95589c568f583e4c37d9c",
+      "bytes": 32946640
+    },
+    {
+      "path": "binaries/incant_render-90f6082e9b891519",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/incant_render-90f6082e9b891519",
+      "sha256": "865b886352d9ec131d951e08a6a62d2b09ada4b0d666b23aa7540845adc80755",
+      "bytes": 31847952
+    },
+    {
+      "path": "binaries/incant_render_gpu_host-0795fd9ccf521965",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/incant_render_gpu_host-0795fd9ccf521965",
+      "sha256": "0a422372dc72ec42d0ed53cb647b2a95e002b49a9ada94f370fea08a3943e9dd",
+      "bytes": 1075272
+    },
+    {
+      "path": "binaries/incant_render_gpu_host-39557b31c0c75042",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/incant_render_gpu_host-39557b31c0c75042",
+      "sha256": "15868e3e2a8acebd400259ee2fd02ee6134791576c1bb59436140b327412201f",
+      "bytes": 1075288
+    },
+    {
+      "path": "binaries/model_gpu-64c51fbf11fd49de",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/model_gpu-64c51fbf11fd49de",
+      "sha256": "ce0fabeb427cbd413f631db8e57b9fa416b47121416d820365a2d4004bc7ed08",
+      "bytes": 16903464
+    },
+    {
+      "path": "binaries/model_gpu-ea4ec409a7f81803",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/model_gpu-ea4ec409a7f81803",
+      "sha256": "dd54b317c4c5266c9ba88836ca053a45333f451006a71f97e28a6c306d90a6dd",
+      "bytes": 16569784
+    },
+    {
+      "path": "binaries/persistent_cache-413acc7365a5afde",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/persistent_cache-413acc7365a5afde",
+      "sha256": "b68af7815df4a79f9b5fb79ef8c89d1b949139c1918007ee39172f45ed84383a",
+      "bytes": 1027024
+    },
+    {
+      "path": "binaries/persistent_cache-56a84c8f1d426b30",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/persistent_cache-56a84c8f1d426b30",
+      "sha256": "8bea9987ad5177367977f1cb48cc1915c810b206ac89548ea6454fbdc36f72a6",
+      "bytes": 1027024
+    },
+    {
+      "path": "binaries/timestamp_backend_probe-7e6e28e2901c9531",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/timestamp_backend_probe-7e6e28e2901c9531",
+      "sha256": "03781d276f76e2368b4eff0053146f30c9f23bb84496d805719135edada37a42",
+      "bytes": 6588968
+    },
+    {
+      "path": "binaries/timestamp_backend_probe-f2bd3f8092008568",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/timestamp_backend_probe-f2bd3f8092008568",
+      "sha256": "e956b1ea6263a3afbc9892900fc8f5c197fbe850e17c3625fc4e56ad45859554",
+      "bytes": 6589624
+    },
+    {
+      "path": "binaries/ui-1cf2b45d9a2f3e8e",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/ui-1cf2b45d9a2f3e8e",
+      "sha256": "e42a04e4dd34fb81f76179037639bb3fdf6e876caca8cf0db0b775e2d0f4dd15",
+      "bytes": 31775232
+    },
+    {
+      "path": "binaries/ui-a00b00c0f89810d0",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/ui-a00b00c0f89810d0",
+      "sha256": "6561c2c76804fd9af0bf8716b57f59ea837658e5ed3350e4c664fc370b16c8e1",
+      "bytes": 31408176
+    }
+  ],
+  "limitations": [
+    "No GPU test was run; 99 complete and98 default cases ignored, including separate persistent driver-cache probe.",
+    "Partial-001 andpartial-002 filters matched zero; onlypartial-003 executed the named admission case.",
+    "Original cooker-001 contract failure andoffline-001 executable-path refusal retained.",
+    "iOS andwasm32 checks are compile-only; no device or performance claim."
+  ]
+}

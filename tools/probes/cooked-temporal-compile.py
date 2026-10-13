@@ -21,6 +21,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("build_out", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--native-metalfx", action="store_true", help="Require both native boundary program families")
     args = parser.parse_args()
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -55,7 +56,7 @@ def main():
         run("metal-version", ["xcrun", "-sdk", "macosx", "metal", "--version"])
         run("spirv-version", ["spirv-val", "--version"])
         run("sdk-version", ["xcrun", "-sdk", "macosx", "--show-sdk-version"])
-        for family in ("motion", "resolve", "copy", "upscale", "composite", "cluster-shaders"):
+        for family in ("motion", "depth", "resolve", "copy", "upscale", "composite", "cluster-shaders") + (("metalfx-pack", "metalfx-normalize") if args.native_metalfx else ()):
             directory = "temporal-" + family
             original = args.build_out / directory
             target = output / directory

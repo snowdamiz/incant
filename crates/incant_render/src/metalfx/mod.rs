@@ -6,7 +6,7 @@ mod lifecycle;
 mod owner;
 mod plan;
 #[cfg(feature = "native-metalfx")]
-mod system;
+pub(crate) mod system;
 #[cfg(feature = "native-metalfx")]
 mod targets;
 #[cfg(feature = "native-metalfx")]

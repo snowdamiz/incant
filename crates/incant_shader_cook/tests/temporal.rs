@@ -4,12 +4,24 @@ use incant_shader_cook::{
 };
 fn source(kind: Kind) -> String {
     match kind {
-        Kind::Motion => include_str!("../../incant_render/src/motion/shader.wgsl").into(),
+        Kind::Motion | Kind::Depth => {
+            include_str!("../../incant_render/src/motion/shader.wgsl").into()
+        }
         Kind::Resolve => include_str!("../../incant_render/src/temporal/resolve.wgsl").into(),
         Kind::Copy => include_str!("../../incant_render/src/temporal/copy.wgsl").into(),
         Kind::Upscale => [
             include_str!("../../incant_render/src/upscaling/common.wgsl"),
             include_str!("../../incant_render/src/upscaling/resolve.wgsl"),
+        ]
+        .join("\n"),
+        Kind::MetalFxPack => [
+            include_str!("../../incant_render/src/upscaling/common.wgsl"),
+            include_str!("../../incant_render/src/metalfx/prepare.wgsl"),
+        ]
+        .join("\n"),
+        Kind::MetalFxNormalize => [
+            include_str!("../../incant_render/src/upscaling/common.wgsl"),
+            include_str!("../../incant_render/src/metalfx/composite.wgsl"),
         ]
         .join("\n"),
         Kind::Composite => [
@@ -20,9 +32,12 @@ fn source(kind: Kind) -> String {
     }
 }
 #[test]
-fn five_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() {
+fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() {
     for kind in [
         Kind::Motion,
+        Kind::Depth,
+        Kind::MetalFxPack,
+        Kind::MetalFxNormalize,
         Kind::Resolve,
         Kind::Copy,
         Kind::Upscale,
@@ -53,7 +68,7 @@ fn five_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() {
             }
             let text = std::str::from_utf8(&a.bytes).unwrap();
             let required: &[&str] = match (kind, a.backend, a.stage) {
-                (Kind::Motion, Backend::Metal, Stage::Vertex) => &[
+                (Kind::Motion | Kind::Depth, Backend::Metal, Stage::Vertex) => &[
                     "[[buffer(0)]]",
                     "[[buffer(1)]]",
                     "[[buffer(15)]]",
@@ -71,13 +86,41 @@ fn five_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() {
                     "[[texture(0)]]",
                     "[[sampler(0)]]",
                 ],
-                (Kind::Motion, Backend::Dx12, Stage::Vertex) => &["register(b0)", "SV_Position"],
+                (Kind::Motion | Kind::Depth, Backend::Dx12, Stage::Vertex) => {
+                    &["register(b0)", "SV_Position"]
+                }
                 (Kind::Motion, Backend::Dx12, Stage::Fragment) => &[
                     "register(b0)",
                     "register(b1)",
                     "register(t0)",
                     "register(t5, space0)",
                 ],
+                (Kind::Depth, Backend::Metal, Stage::Fragment) => {
+                    &["[[buffer(1)]]", "[[texture(0)]]", "[[sampler(0)]]"]
+                }
+                (Kind::Depth, Backend::Dx12, Stage::Fragment) => {
+                    &["register(b1)", "register(t0)", "register(t5, space0)"]
+                }
+                (Kind::MetalFxPack, Backend::Metal, Stage::Fragment) => &[
+                    "[[color(0)]]",
+                    "[[color(1)]]",
+                    "[[color(2)]]",
+                    "[[color(3)]]",
+                    "[[texture(2)]]",
+                ],
+                (Kind::MetalFxPack, Backend::Dx12, Stage::Fragment) => &[
+                    "SV_Target0",
+                    "SV_Target1",
+                    "SV_Target2",
+                    "SV_Target3",
+                    "register(t2)",
+                ],
+                (Kind::MetalFxNormalize, Backend::Metal, Stage::Fragment) => {
+                    &["[[color(0)]]", "[[color(1)]]", "[[texture(2)]]"]
+                }
+                (Kind::MetalFxNormalize, Backend::Dx12, Stage::Fragment) => {
+                    &["SV_Target0", "SV_Target1", "register(t2)"]
+                }
                 (Kind::Upscale, Backend::Metal, Stage::Fragment) => &[
                     "[[color(0)]]",
                     "[[color(1)]]",
@@ -122,7 +165,14 @@ fn changed_math_interface_and_program_identity_are_not_trusted() {
     ] {
         assert!(cook(Kind::Motion, &changed).is_err());
     }
-    for kind in [Kind::Resolve, Kind::Copy, Kind::Upscale, Kind::Composite] {
+    for kind in [
+        Kind::Resolve,
+        Kind::Copy,
+        Kind::Upscale,
+        Kind::Composite,
+        Kind::MetalFxPack,
+        Kind::MetalFxNormalize,
+    ] {
         assert!(cook(kind, &s).is_err());
     }
 }

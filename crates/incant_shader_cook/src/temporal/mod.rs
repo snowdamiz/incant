@@ -8,15 +8,21 @@ use std::{fmt::Write as _, fs, path::Path};
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Kind {
     Motion,
+    Depth,
     Resolve,
     Copy,
     Upscale,
     Composite,
+    MetalFxPack,
+    MetalFxNormalize,
 }
 impl Kind {
     pub fn entry(self) -> &'static str {
         match self {
             Self::Motion => "fragment",
+            Self::Depth => "depth_only",
+            Self::MetalFxPack => "pack",
+            Self::MetalFxNormalize => "normalize",
             Self::Resolve => "resolve",
             Self::Copy => "copy",
             Self::Upscale => "resolve",
@@ -25,6 +31,15 @@ impl Kind {
     }
     pub fn contract(self) -> &'static str {
         match self {
+            Self::Depth => {
+                "incant-temporal-depth-v1;naga=29.0.4;wgpu=29.0.4;frame144-v,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+            }
+            Self::MetalFxPack => {
+                "incant-metalfx-pack-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt4;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+            }
+            Self::MetalFxNormalize => {
+                "incant-metalfx-normalize-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures3,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+            }
             Self::Motion => {
                 "incant-temporal-motion-v1;naga=29.0.4;wgpu=29.0.4;frame144-vf,material64-f,5textures-samplers;msl=2.4,pulls15-14-13-12,strides48-48-112-80,lengths1,frame0,material1;hlsl=6.0,b0-b1,sampler-t5,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
@@ -32,7 +47,7 @@ impl Kind {
                 "incant-temporal-resolve-v1;naga=29.0.4;wgpu=29.0.4;frame64-f,textures4,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Copy => {
-                "incant-temporal-copy-v1;naga=29.0.4;wgpu=29.0.4;frame0-f,textures1,mrt1;msl=2.4;hlsl=6.0,special-b0;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+                "incant-temporal-copy-v2;naga=29.0.4;wgpu=29.0.4;frame64-f@1,textures1@0,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Upscale => {
                 "incant-temporal-upscale-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures5,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
@@ -46,25 +61,33 @@ impl Kind {
     /// checks alone must not authorize a changed trusted passthrough program.
     pub fn source_hash(self) -> [u8; 32] {
         match self {
-            Self::Motion => [
-                127, 138, 237, 74, 44, 179, 4, 1, 234, 174, 61, 61, 14, 84, 215, 45, 55, 203, 78,
-                56, 117, 181, 85, 243, 52, 52, 213, 232, 18, 54, 99, 185,
+            Self::MetalFxPack => [
+                13, 74, 30, 80, 142, 80, 238, 126, 110, 228, 59, 26, 142, 109, 50, 79, 221, 92, 44,
+                17, 7, 203, 57, 184, 35, 132, 69, 109, 239, 63, 154, 177,
+            ],
+            Self::MetalFxNormalize => [
+                4, 205, 39, 235, 243, 86, 233, 85, 144, 240, 0, 117, 131, 197, 13, 73, 167, 186,
+                86, 68, 83, 120, 116, 79, 66, 62, 0, 9, 88, 194, 65, 166,
+            ],
+            Self::Motion | Self::Depth => [
+                30, 190, 25, 208, 56, 144, 101, 74, 214, 210, 50, 136, 31, 151, 182, 253, 29, 74,
+                10, 195, 201, 189, 178, 150, 17, 209, 183, 33, 168, 48, 71, 123,
             ],
             Self::Resolve => [
-                174, 101, 177, 242, 100, 125, 204, 229, 167, 63, 173, 202, 75, 125, 104, 198, 129,
-                89, 120, 175, 63, 187, 132, 21, 16, 171, 58, 165, 85, 241, 207, 236,
+                225, 175, 83, 86, 90, 41, 159, 106, 3, 161, 58, 62, 224, 90, 3, 123, 84, 14, 36,
+                203, 43, 11, 237, 5, 76, 238, 184, 210, 212, 132, 235, 241,
             ],
             Self::Copy => [
-                80, 242, 187, 186, 145, 2, 247, 248, 157, 229, 36, 53, 107, 126, 110, 75, 155, 30,
-                76, 144, 236, 172, 231, 165, 177, 193, 110, 229, 153, 238, 75, 223,
+                9, 110, 232, 158, 203, 92, 145, 18, 222, 234, 85, 147, 90, 194, 218, 11, 236, 79,
+                215, 243, 186, 96, 58, 160, 76, 135, 91, 164, 141, 235, 36, 139,
             ],
             Self::Upscale => [
-                127, 178, 128, 96, 123, 67, 29, 59, 16, 5, 58, 3, 192, 148, 170, 194, 64, 211, 199,
-                151, 54, 126, 212, 122, 88, 235, 246, 191, 85, 47, 35, 246,
+                74, 5, 87, 196, 159, 13, 190, 192, 49, 59, 251, 215, 27, 237, 98, 104, 127, 114,
+                46, 184, 161, 62, 100, 20, 139, 172, 72, 246, 136, 17, 230, 242,
             ],
             Self::Composite => [
-                46, 65, 155, 10, 187, 238, 70, 138, 83, 174, 70, 182, 115, 96, 218, 193, 79, 172,
-                207, 51, 7, 233, 213, 70, 144, 180, 95, 28, 221, 61, 114, 122,
+                180, 98, 116, 131, 198, 85, 140, 185, 102, 44, 185, 178, 160, 77, 6, 148, 11, 255,
+                117, 137, 129, 57, 5, 24, 129, 40, 79, 22, 63, 68, 53, 62,
             ],
         }
     }

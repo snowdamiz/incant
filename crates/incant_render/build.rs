@@ -9,6 +9,7 @@ fn main() {
             std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"));
         for (kind, paths, name) in [
             (Kind::Motion, vec!["src/motion/shader.wgsl"], "motion"),
+            (Kind::Depth, vec!["src/motion/shader.wgsl"], "depth"),
             (Kind::Resolve, vec!["src/temporal/resolve.wgsl"], "resolve"),
             (Kind::Copy, vec!["src/temporal/copy.wgsl"], "copy"),
             (
@@ -20,6 +21,18 @@ fn main() {
                 Kind::Composite,
                 vec!["src/upscaling/common.wgsl", "src/upscaling/composite.wgsl"],
                 "composite",
+            ),
+            #[cfg(feature = "native-metalfx")]
+            (
+                Kind::MetalFxPack,
+                vec!["src/upscaling/common.wgsl", "src/metalfx/prepare.wgsl"],
+                "metalfx-pack",
+            ),
+            #[cfg(feature = "native-metalfx")]
+            (
+                Kind::MetalFxNormalize,
+                vec!["src/upscaling/common.wgsl", "src/metalfx/composite.wgsl"],
+                "metalfx-normalize",
             ),
         ] {
             let source = paths

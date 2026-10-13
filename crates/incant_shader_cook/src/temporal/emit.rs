@@ -74,7 +74,7 @@ pub(super) fn emit(
     entry: &str,
     backend: Backend,
 ) -> Result<(Vec<u8>, String)> {
-    let motion = kind == Kind::Motion;
+    let motion = matches!(kind, Kind::Motion | Kind::Depth);
     let copy = kind == Kind::Copy;
     let vertex = stage == ShaderStage::Vertex;
     match backend {
@@ -183,7 +183,7 @@ pub(super) fn emit(
             let mut options = hlsl::Options {
                 shader_model: hlsl::ShaderModel::V6_0,
                 fake_missing_bindings: false,
-                special_constants_binding: Some(bind(if motion { 2 } else { u32::from(!copy) })),
+                special_constants_binding: Some(bind(if motion { 2 } else { 1 })),
                 restrict_indexing: true,
                 force_loop_bounding: true,
                 ..Default::default()

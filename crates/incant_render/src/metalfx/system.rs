@@ -26,6 +26,7 @@ pub(crate) struct Draw {
     color: wgpu::TextureView,
     depth: wgpu::TextureView,
 }
+#[cfg(test)]
 const COMMON: &str = include_str!("../upscaling/common.wgsl");
 impl crate::Renderer {
     /// Explicit startup preparation. Native scaler creation remains bound to a
@@ -68,13 +69,13 @@ impl crate::Renderer {
             }
         }
         let scope = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let candidate = System::new(&self.device);
+        let candidate = System::new(&self.device, self.adapter.get_info().backend);
         if let Some(e) = scope.pop().await {
             #[cfg(target_arch = "wasm32")]
             let e = e.into();
             return Err(crate::ResourceError::Preparation(e).into());
         }
-        self.metalfx = Some(candidate);
+        self.metalfx = Some(candidate?);
         self.metalfx_admission = Some(Ok(()));
         Ok(())
     }
@@ -82,14 +83,11 @@ impl crate::Renderer {
 fn shader(
     d: &wgpu::Device,
     l: &wgpu::BindGroupLayout,
-    body: &str,
-    entry: &str,
+    backend: wgpu::Backend,
+    kind: crate::temporal_shader::Kind,
     formats: &[wgpu::TextureFormat],
-) -> wgpu::RenderPipeline {
-    let module = d.create_shader_module(wgpu::ShaderModuleDescriptor {
-        label: Some("Checked MetalFX packing/coverage"),
-        source: wgpu::ShaderSource::Wgsl(format!("{COMMON}\n{body}").into()),
-    });
+) -> crate::Result<wgpu::RenderPipeline> {
+    let stages = crate::temporal_shader::stages(d, backend, kind)?;
     let layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("MetalFX packing"),
         bind_group_layouts: &[Some(l)],
@@ -105,12 +103,12 @@ fn shader(
             })
         })
         .collect::<Vec<_>>();
-    d.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+    Ok(d.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("MetalFX packing/coverage"),
         layout: Some(&layout),
         vertex: wgpu::VertexState {
-            module: &module,
-            entry_point: Some("vertex"),
+            module: &stages.vertex,
+            entry_point: Some(stages.vertex_entry),
             compilation_options: Default::default(),
             buffers: &[],
         },
@@ -118,14 +116,14 @@ fn shader(
         depth_stencil: None,
         multisample: Default::default(),
         fragment: Some(wgpu::FragmentState {
-            module: &module,
-            entry_point: Some(entry),
+            module: &stages.fragment,
+            entry_point: Some(stages.fragment_entry),
             compilation_options: Default::default(),
             targets: &targets,
         }),
         multiview_mask: None,
         cache: None,
-    })
+    }))
 }
 fn group(
     d: &wgpu::Device,
@@ -156,30 +154,33 @@ fn group(
         ],
     })
 }
+pub(crate) fn layout_entries() -> [wgpu::BindGroupLayoutEntry; 4] {
+    std::array::from_fn::<_, 4, _>(|i| wgpu::BindGroupLayoutEntry {
+        binding: i as u32,
+        visibility: wgpu::ShaderStages::FRAGMENT,
+        ty: if i == 0 {
+            wgpu::BindingType::Buffer {
+                ty: wgpu::BufferBindingType::Uniform,
+                has_dynamic_offset: false,
+                min_binding_size: wgpu::BufferSize::new(96),
+            }
+        } else {
+            wgpu::BindingType::Texture {
+                sample_type: if i == 3 {
+                    wgpu::TextureSampleType::Depth
+                } else {
+                    wgpu::TextureSampleType::Float { filterable: false }
+                },
+                view_dimension: wgpu::TextureViewDimension::D2,
+                multisampled: false,
+            }
+        },
+        count: None,
+    })
+}
 impl System {
-    pub fn new(d: &wgpu::Device) -> Self {
-        let entries = std::array::from_fn::<_, 4, _>(|i| wgpu::BindGroupLayoutEntry {
-            binding: i as u32,
-            visibility: wgpu::ShaderStages::FRAGMENT,
-            ty: if i == 0 {
-                wgpu::BindingType::Buffer {
-                    ty: wgpu::BufferBindingType::Uniform,
-                    has_dynamic_offset: false,
-                    min_binding_size: wgpu::BufferSize::new(96),
-                }
-            } else {
-                wgpu::BindingType::Texture {
-                    sample_type: if i == 3 {
-                        wgpu::TextureSampleType::Depth
-                    } else {
-                        wgpu::TextureSampleType::Float { filterable: false }
-                    },
-                    view_dimension: wgpu::TextureViewDimension::D2,
-                    multisampled: false,
-                }
-            },
-            count: None,
-        });
+    pub fn new(d: &wgpu::Device, backend: wgpu::Backend) -> crate::Result<Self> {
+        let entries = layout_entries();
         let layout = d.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("MetalFX input declarations"),
             entries: &entries,
@@ -187,27 +188,27 @@ impl System {
         let pack = shader(
             d,
             &layout,
-            include_str!("prepare.wgsl"),
-            "pack",
+            backend,
+            crate::temporal_shader::Kind::MetalFxPack,
             &[
                 crate::frame::HDR_FORMAT,
                 wgpu::TextureFormat::R32Float,
                 wgpu::TextureFormat::Rg16Float,
                 wgpu::TextureFormat::R8Unorm,
             ],
-        );
+        )?;
         let normalize = shader(
             d,
             &layout,
-            include_str!("composite.wgsl"),
-            "normalize",
+            backend,
+            crate::temporal_shader::Kind::MetalFxNormalize,
             &[crate::frame::HDR_FORMAT, wgpu::TextureFormat::R32Float],
-        );
-        Self {
+        )?;
+        Ok(Self {
             layout,
             pack,
             normalize,
-        }
+        })
     }
     pub fn prepare(
         &self,
