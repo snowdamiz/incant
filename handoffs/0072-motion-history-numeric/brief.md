@@ -1,3 +1,54 @@
+# Priority revision — corrected temporal follow-up, preparation only
+
+The previous visual rejection is retained and has driven an actual engine fix.
+Resume this packet with explicitly verified Claude Opus 5.5, Max thinking. Read
+`docs/spikes/temporal-edge-correctness.md` and `docs/spikes/temporal-metalfx-composition.md`
+from the exact local commit `535003d766bcc1386fd2d2f454c83808a0fcc4c8` using git show.
+It contains corrected valid-history support, unjittered presentation/current-only
+overlays and canonical opaque/MASK overlay depth, plus cooked/native composition.
+Do not edit engine source or merge branch names. Root will provide that exact
+source commit through the build grant. Its complete build freeze is
+`/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json`
+SHA256 `bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0`.
+All CPU/offline checks pass; that is not appearance approval.
+
+PREPARATION ONLY: no Cargo/build/target/GPU/frame/capture until a new grant.
+Adapt the existing bounded fixture and helpers for a fresh corrected-source
+review, preserving previous captures, failed optional lint and rejection. Prefer
+small edits to the existing helpers; no new command framework or large helper
+redesign. A new evidence namespace `0072-temporal-corrected-001` is required;
+old released grants/ledgers are immutable. Root supervises builds in foreground.
+Read-only reuse of the accepted 0073 source-pin routines is allowed: its visual
+tree `4dacd0dff3ee23bf1d8b2ee3a137fa7b8d59fd18` has explicit committed-source freeze
+verification and separate CPU build/GPU grants. Use the actual grant holder in
+receipts. Keep inherited process cleanup, global nonwaiting native-gpu.lock,
+monotonic debits, stop and release semantics. Never start a background build.
+
+Preserve all seven appearance cases and their policy/measurement definitions so
+we can compare the actual corrected source to the original rejected result.
+Fix the known harmless unused-mut at fixture line1418 for strict Clippy. Keep
+other fixture/layout choices as previously reviewed unless a concrete issue
+requires an explained change. Do not run the entire old96-test suite again under
+this visual packet. Include only the exact new fixed numeric regression
+`temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion`
+(14 tiny submissions) after confirming the name in a fresh listing. Root may
+supply its already frozen same-source default library test binary, so no repeated
+whole-workspace build is needed. The fixture uses79 actual submissions, and the
+new numeric14 gives93 total; hard ceiling128 including any failed attempts,
+16 PNGs,960x540,serial boundedchildren,one attempt per case, no automatic retry.
+If the exact test name differs use the source/module listing to report it before
+grant, never broaden a filter. This is default portable fixed-mode quality;
+0073 owns upscaling and0074 owns native MetalFX. No phone/performance claims.
+
+Check the analyzer fails if any required case/check/report is missing or false,
+and does not publish a passing verdict from empty/stale/failed evidence. Reuse
+the narrowly repaired0073 behavior where relevant; a few targeted CPU controls
+are sufficient. Return a concise preparation result with exact helper/source
+identities. Commit with Built-by: claude. Do not poll for a grant or ask the
+director routine approval questions. No memory changes, pushes or PRs.
+
+---
+
 # 0072 priority revision5 — temporal numeric execution then visual preparation
 
 Claude Opus5.5, explicitly Max. Your previous motion-only execution is accepted
