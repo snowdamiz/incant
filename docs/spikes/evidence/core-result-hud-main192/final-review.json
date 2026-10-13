@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-13T03:38:50.930155+00:00",
+  "status": "accepted scoped current-main integration",
+  "head": "e85b1e836f453aab4d755768e302bcc1836e37a3",
+  "manifest_sha256": "c04d6c9d714943a74cb197edb8ab528ce5e5567d94eb2fd811476b396d4671ee",
+  "archive_records": 398,
+  "payloads": 242,
+  "external_files": 309,
+  "summary": {
+    "passed": true,
+    "checks": 5,
+    "frozen_inputs": 2030,
+    "producer_sources": 8,
+    "native_positives": 28,
+    "native_restart_refusals": 2,
+    "binding_refusals": 7,
+    "prior_native_reports_and_pcm_exact": true,
+    "producer_records_rehashed": 575,
+    "producer_external_rehashed": 407,
+    "producer_shipping_runs": 20,
+    "current_shipping_runs": 0,
+    "new_build": false
+  },
+  "root_review": "Read entire collector and independently reran --verify-only; exact4disjoint shipping helper/test exceptions checked, allcurrentproof and producerartifact hashes preserved",
+  "limits": [
+    "Current-main CPU public authoring/native Play only; original 20 source-free shipping processes remain producer-scoped",
+    "No current archive rebuild: exact engine/build-source equality supports immutable headless reuse; four disjoint shipping-proof helper/test changes qualified",
+    "No new production UI nodes, layout or localized style; optional correctness fixture reuses approved controls",
+    "No GPU/window/phone/performance or phase claim; physics session reset is not physics checkpoint save/restore",
+    "Generated authoring media/caches retained externally and fully inventoried; all current process outputs and PCM retained losslessly"
+  ],
+  "findings": []
+}

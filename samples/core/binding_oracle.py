@@ -50,7 +50,10 @@ def cases():
 
 def plan(receipt, name, recording):
     value = playtest.observe(receipt, recording['ticks'], locked=name == 'locked')
-    value['entities'] += [bindings.HUD['won'], bindings.HUD['lost'], *receipt['samples']]
+    selected = bindings.validate_hud(receipt.get('hud', bindings.HUD))
+    value['entities'] += [selected['won'], selected['lost'], *receipt['samples']]
+    if 'prompt' in selected:
+        value['entities'].append(selected['prompt'])
     value['entities'] = list(dict.fromkeys(value['entities']))
     if name == 'idle':
         value['checks'] += [{'name': 'initial-' + owner, 'tick': recording['ticks'],
@@ -73,12 +76,17 @@ def game_state(report):
     return health, count, phase
 
 
-def labels(texts, health, count):
-    return {bindings.HUD['health']: texts[f'health.{health}'],
-            bindings.HUD['collected']: texts[f'samples.{count}'],
-            bindings.HUD['objective']: texts['hud.objective.exit' if count == 4 else 'hud.objective.collect'],
-            bindings.HUD['won']: texts['hud.won'], bindings.HUD['lost']: texts['hud.lost'],
-            ids.widget(8): texts['hud.controls']}
+def labels(texts, health, count, phase='playing', selected=None):
+    selected = bindings.validate_hud(bindings.HUD if selected is None else selected)
+    result = {selected['health']: texts[f'health.{health}'],
+              selected['collected']: texts[f'samples.{count}'],
+              selected['objective']: '' if phase == 'won' else texts[
+                  'hud.objective.exit' if count == 4 else 'hud.objective.collect'],
+              selected['won']: texts['hud.won'], selected['lost']: texts['hud.lost'],
+              ids.widget(8): texts['hud.controls']}
+    if 'prompt' in selected:
+        result[selected['prompt']] = texts['hud.prompt']
+    return result
 
 
 def verify(report, receipt, name):
@@ -95,31 +103,45 @@ def verify(report, receipt, name):
     if name in ('win', 'win-tail'):
         assert [row['tick'] for row in pickups] == [127, 508, 1266, 1842]
         assert [row['tick'] for row in game_logs(report) if row['message'].startswith('core.won ')] == [2066]
-    for role in ('won', 'lost'):
-        parent = bindings.HUD['result' if role == phase else 'inactive']
-        assert report['observations']['entities'][bindings.HUD[role]]['parent'] == parent
+    selected = bindings.validate_hud(receipt.get('hud', bindings.HUD))
+    for role in ('won', 'lost', *(['prompt'] if 'prompt' in selected else [])):
+        shown = phase != 'playing' if role == 'prompt' else role == phase
+        parent = selected['result' if shown else 'inactive']
+        assert report['observations']['entities'][selected[role]]['parent'] == parent
     if name == 'locked':
         assert playtest.locked_exit_checks(report, receipt, report['tick'])['passed']
 
 
-def verify_hud(report, texts):
+def verify_hud(report, texts, selected=None):
     """Observe actual pre-command declarations, one tick after gameplay events."""
-    expected = [(1, owner, text) for owner, text in sorted(labels(texts, 3, 0).items())]
-    health, count = 3, 0
-    previous = labels(texts, health, count)
+    health, count, phase = 3, 0, 'playing'
+    previous = labels(texts, health, count, phase, selected)
+    expected = [(1, owner, text) for owner, text in sorted(previous.items())]
     changes = {}
     for row in game_logs(report):
         message = row['message']
         if message.startswith('core.damage '): health = int(message.rsplit('=', 1)[1])
         elif message.startswith('core.pickup '): count += 1
+        elif message.startswith('core.won '): phase = 'won'
+        elif message.startswith('core.lost '): phase = 'lost'
         else: continue
-        changes[row['tick'] + 1] = labels(texts, health, count)
+        if row['tick'] < report['tick']:
+            changes[row['tick'] + 1] = labels(texts, health, count, phase, selected)
     for tick, current in sorted(changes.items()):
         expected += [(tick, owner, text) for owner, text in sorted(current.items()) if previous[owner] != text]
         previous = current
     actual = [(row['tick'], *json.loads(row['message'][len('proof.hud '):]))
               for row in report['logs']['entries'] if row['message'].startswith('proof.hud ')]
     assert actual == expected, (actual, expected)
+
+
+def verify_ui(report, texts, selected=None):
+    """Exact declared label set and widget count; unknown widgets never disappear."""
+    selected = bindings.validate_hud(bindings.HUD if selected is None else selected)
+    ui = report['render_input']['ui']
+    assert ui['widgets'] == len(bindings.widget_ids(selected))
+    assert ui['glyphs'] > 0 and ui['focus'] is None
+    assert ui['sources'] == labels(texts, *game_state(report), selected)
 
 
 def pcm(path, report):
