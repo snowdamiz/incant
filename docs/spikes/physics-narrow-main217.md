@@ -29,7 +29,8 @@ No new shipping, GPU, device, performance or phase claim follows. Hostile inert
 records still cannot construct a live solver; engine physics saves remain
 `PhysicsUnsupported`.
 
-Independent current-main final review is pending. The
+Independent current-main final review is accepted; publication awaits the
+required fast check. The
 [machine-readable packet](evidence/physics-narrow-main217.json) and
 [read-only verifier](evidence/physics-narrow-main217/verify.py) preserve the exact
 source identities, selected graph, actual output and reuse qualifications.

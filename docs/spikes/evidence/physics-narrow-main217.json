@@ -96,12 +96,16 @@
       "raw_bytes": 4086
     }
   ],
-  "review": "Independent current-main final review pending",
+  "review": "Independent current-main final review accepted",
   "limits": [
     "No current compile: retained producer executable replays after exact source/manifest/lock checks.",
     "Actual current selected normal/build/dev graph contains only exact selected local sources; all workspace manifests equal producer.",
     "Full 143 cases, strict Clippy and wasm compilation remain producer evidence.",
     "Trusted native continuation does not admit hostile inert bytes into a live solver.",
     "No GPU, shipping, device, performance or phase claim."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-narrow-main217/final-review.json",
+    "sha256": "3cfaa84481e6d79465c97fea5f568eaa1f06ccff08a5ce0b986b748e5b99adb0"
+  }
 }
