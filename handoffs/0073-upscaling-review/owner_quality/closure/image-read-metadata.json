@@ -1,0 +1,74 @@
+{
+  "scope": "Tool invocation metadata only; no image content inspected by Astra",
+  "all_15_paths_read": true,
+  "reads": [
+    {
+      "at": "2026-10-13T18:42:26.793Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-full.png"
+    },
+    {
+      "at": "2026-10-13T18:42:27.392Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-drs50.png"
+    },
+    {
+      "at": "2026-10-13T18:42:28.047Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-up50.png"
+    },
+    {
+      "at": "2026-10-13T18:42:28.548Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-own50.png"
+    },
+    {
+      "at": "2026-10-13T18:42:45.243Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-detail.png"
+    },
+    {
+      "at": "2026-10-13T18:42:45.245Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/stationary/artifacts/stationary-phases.png"
+    },
+    {
+      "at": "2026-10-13T18:43:10.854Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-full.png"
+    },
+    {
+      "at": "2026-10-13T18:43:10.856Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-up50.png"
+    },
+    {
+      "at": "2026-10-13T18:43:10.857Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-own50.png"
+    },
+    {
+      "at": "2026-10-13T18:43:23.529Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-detail.png"
+    },
+    {
+      "at": "2026-10-13T18:44:56.528Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/transitions/artifacts/transitions-full.png"
+    },
+    {
+      "at": "2026-10-13T18:44:56.530Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/transitions/artifacts/transitions-strip.png"
+    },
+    {
+      "at": "2026-10-13T18:45:09.093Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/c7_disocclusion/artifacts/c7-detail.png"
+    },
+    {
+      "at": "2026-10-13T18:45:09.098Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/c7_disocclusion/artifacts/c7-own-moving.png"
+    },
+    {
+      "at": "2026-10-13T18:45:58.933Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/p1_crossing/artifacts/p1-detail.png"
+    },
+    {
+      "at": "2026-10-13T18:46:34.855Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-full.png"
+    },
+    {
+      "at": "2026-10-13T18:46:34.857Z",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-gpu-001/motion/artifacts/motion-own50.png"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "incant-owner-quality-closure-v2",
+  "prior_receipt": "/Users/andreyyurlov/.codex/incant-reviews/owner-quality-final-independent-20261013.json",
+  "prior_receipt_sha256": "a377f878b9a4cfcabc521b2c4be39e8ae9043da6475212cf6577f09dd5b6c4b0",
+  "result_commit": "ebc7e69094215796e19b924454ed76efbb78f612",
+  "execution_integrity_accepted": true,
+  "appearance_accepted": false,
+  "original_write_scope_compliant": false,
+  "attributable_memory_edits_reversed": true,
+  "reversal_receipt": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-supervision-001/memory-reversal-applied.json",
+  "reversal_sha256": "2c0d4a9cdecae1e354e97acb840436d46df3a5093a8d627916f06f3ecfdde87e",
+  "next_session_containment_support": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-quality-supervision-001/auto-memory-disable-support.json",
+  "containment_support_sha256": "46f1d9f731d736ac21dd226c7a011d116d46abc6466cb6f95cd5c72863e69e16",
+  "acp_terminal": {
+    "pid": 54262,
+    "pgid": 54262,
+    "exit": 0,
+    "timed_out": false,
+    "interrupted_by": [],
+    "reaped": true,
+    "group_empty_after": true,
+    "seconds": 763.104,
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "tools/handoff/main.py",
+      "run",
+      "0073-upscaling-review",
+      "--permission-mode",
+      "auto"
+    ],
+    "stdout_sha256": "be6ace4298c2fb7f2ee8ed6742724c89c566435712267a7be0be1a36d7c08354",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "release_sha256": "261e14eb5a611d32b32ce17a7bbfaa1fd4580c806ce4d8c1527f141216f19729",
+  "png_identity_receipt_sha256": "552b230535e8ae87a2860c268661872614a8b254de9954c9e0c996ad73d787be",
+  "scope": "Execution integrity accepted; Claude appearance rejected. Original scope deviation remains disclosed despite exact attributable inverse. No new GPU authority."
+}

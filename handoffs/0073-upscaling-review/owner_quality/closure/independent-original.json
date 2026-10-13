@@ -1,0 +1,64 @@
+{
+  "schema": "incant-owner-quality-final-independent-v1",
+  "result_commit": "ebc7e69094215796e19b924454ed76efbb78f612",
+  "result_md_sha256": "8c3e285425f87e309380e0831ab564975400488164eaa58fc68fe276dc826dbf",
+  "result_json_sha256": "14a5e66c185bfa73cd64cf13f85312aef71aefa13034c7bd1250bab01174e544",
+  "execution_audit_sha256": "552b230535e8ae87a2860c268661872614a8b254de9954c9e0c996ad73d787be",
+  "execution_integrity_accepted": true,
+  "appearance_accepted": false,
+  "appearance_verdict_owner": "Claude Opus5.5 Max",
+  "appearance_summary": "Claude rejects current quality; OWN visually indistinguishable from ordinary UP in retained captures. Wire phase flicker, detail loss, slow recovery and undiagnosed dark block remain.",
+  "report_identity_rows_verified": 33,
+  "release_sha256": "261e14eb5a611d32b32ce17a7bbfaa1fd4580c806ce4d8c1527f141216f19729",
+  "counts": {
+    "processes": 5,
+    "pngs": 15,
+    "queue_submissions": 778,
+    "readback_maps": 380,
+    "readback_submissions": 380,
+    "rendered_frames": 380,
+    "scene_submissions": 380,
+    "ui_submissions": 18
+  },
+  "acp_terminal": {
+    "pid": 54262,
+    "pgid": 54262,
+    "exit": 0,
+    "timed_out": false,
+    "interrupted_by": [],
+    "reaped": true,
+    "group_empty_after": true,
+    "seconds": 763.104,
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "tools/handoff/main.py",
+      "run",
+      "0073-upscaling-review",
+      "--permission-mode",
+      "auto"
+    ],
+    "stdout_sha256": "be6ace4298c2fb7f2ee8ed6742724c89c566435712267a7be0be1a36d7c08354",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "observed_start_processes_all_gone": true,
+  "global_gpu_lock_free": true,
+  "protected_tracked_unchanged": 170,
+  "preserved_untracked": {
+    "owner-attachment-cpu-enumeration.json": "68c5434e926678071f4291896f6897137b4010b3885ab8043db7d9785136cfba",
+    "owner-attachment-plan.json": "d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512",
+    "owner-attachment-prep.md": "0332bad7a8a627b01b925474e94824cf462bc0c450d8c2718334463872390d9e"
+  },
+  "png_read_metadata_sha256": "bcb91443f3d47e421b873d6f6ffaab4f135f7b493375c34eae4de03f829daa0d",
+  "scope_deviation": {
+    "complete_write_scope_compliance": false,
+    "description": "Claude made two unauthorized personal .claude memory edits after result commit. These are not accepted instructions. Exact tool metadata and proposed inverse retained; no memory changes made by Astra.",
+    "tool_command_sha256": "5b2af6dd9c63cb793e78cb67030d858b09a8227352f2e53d326decf40fb7cc90",
+    "inverse_proposal_sha256": "2193b39f07f29dbe1e50391571230339904fe101092697e2f1dd2bdb070ba8cd",
+    "inverse_applied": false
+  },
+  "limits": [
+    "Astra audited bytes, process/source contracts and report identities only; no image viewing or appearance judgment",
+    "No historical differently-defined quality gate closed",
+    "No phone, performance, cooked or native MetalFX coverage from this default WGSL quality run"
+  ]
+}
