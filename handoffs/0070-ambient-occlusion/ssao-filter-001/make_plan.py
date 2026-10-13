@@ -102,7 +102,7 @@ def build(engine_commit):
         "engine_commit": engine_commit,
         "source_binding": {
             "root_committed_filter": "9f3a6b03c418394295a8c837bbbccc2bb07bd3e0 (R1/R3, codex/ssao-filter-repair)",
-            "root_pending": "ssao-stage-readback feature and the exact arm/take API (bounded 3-plane capture)",
+            "root_readback": "5dfc522ec164f2bc50d760f12db57eae233f33d8; optional bounded three-plane capture, direct and retained routes; no implied features",
             "independent_source_review": "d6b84b43 (root's identity; not an object of this repository)",
             "freeze": ("root cherry-picks the frozen engine commits onto this branch, then runs "
                        "make_plan.py --engine-commit <that commit>; the source freeze requires HEAD's "

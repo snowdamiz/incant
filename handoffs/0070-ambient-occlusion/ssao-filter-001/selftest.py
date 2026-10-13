@@ -50,12 +50,21 @@ def plan_controls():
     assert [c["name"] for c in plan["numeric_cases"]] == ["ssao_core", "ssao_materials", "ssao_geometry",
                                                           "lifecycle_drs", "ssao_quality"]
     assert sum(len(c["stage_frames"]) for c in plan["numeric_cases"]) == 15  # 13 build004 frames + 2 stripes
-    assert plan["engine_commit"] is None
+    engine = plan["engine_commit"]
+    assert engine is None or (len(engine) == 40 and all(c in "0123456789abcdef" for c in engine))
     return plan
 
 
 def freeze_and_grant_controls(plan, scratch):
-    out = [refuses(fc.source_freeze, "0" * 40, contains="no frozen engine_commit")]
+    saved_load = fc.load_plan
+    try:
+        fc.load_plan = lambda: {**plan, "engine_commit": None}
+        out = [refuses(fc.source_freeze, "0" * 40, contains="no frozen engine_commit")]
+        if plan["engine_commit"] is not None:
+            fc.load_plan = lambda: plan
+            assert fc.engine_commit() == plan["engine_commit"]
+    finally:
+        fc.load_plan = saved_load
     evidence_root = scratch / "evidence"
     evidence = evidence_root / fc.NAMESPACE
     evidence.mkdir(parents=True)
@@ -63,7 +72,7 @@ def freeze_and_grant_controls(plan, scratch):
     fc.base.EVIDENCE_ROOT, fc.base.REQUIRE_EXTERNAL_EVIDENCE = evidence_root, False
     try:
         good = {"format": f"incant-{fc.NAMESPACE}-gpu-grant-v1", "packet": fc.base.PACKET, "namespace": fc.NAMESPACE,
-                "kind": "gpu", "source_commit": "0" * 40, "engine_commit": None, "evidence_dir": str(evidence),
+                "kind": "gpu", "source_commit": "0" * 40, "engine_commit": plan["engine_commit"], "evidence_dir": str(evidence),
                 "plan_sha256": fc.sha256_file(fc.PLAN), "helper_digest": fc.helper_digest()[0],
                 "build_record_sha256": "0" * 64, "expected_backend": "Metal"}
         path = evidence / "gpu-grant.json"
@@ -225,7 +234,7 @@ def main():
     try:
         plan = plan_controls()
         result = {"plan": "make_plan --check reproduces plan.json; 100 of 128 new submissions; 9 children; "
-                          "16 PNGs, 11 pairs; engine_commit unfrozen",
+                          "16 PNGs, 11 pairs; frozen and unfrozen engine guards retained",
                   "freeze_and_grants": freeze_and_grant_controls(plan, scratch),
                   "stage_index": index_controls(scratch),
                   "feature_binding": feature_controls(plan),
