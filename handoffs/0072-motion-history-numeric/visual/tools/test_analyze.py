@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """CPU-only controls for the fail-closed analyzer (pattern of the accepted 0073
-test_analyze.py, narrowly reused), for admission at the fixed-sharpness plan's counts
-(the real plan's 357 submissions fit; nothing beyond the numeric 252, visual 120,
-overall 372 or 16-PNG ceilings is admitted; the coverage and corrected reviews' old
-grants are refused) and for the comparison (sharpness.py) on real retained runs: the
-accepted baseline compared with itself fails honestly on sharpness, the aliased
-original fails on stability, a tampered baseline is not exact and missing candidate
-outputs fail. Synthetic evidence in a temporary directory stands in for a complete
-run; only the visual-tree identity is a test double. Retained runs and old grants are
+test_analyze.py, narrowly reused), for admission at the fixed-warmup plan's counts
+(the real plan's 110 submissions fit; nothing beyond the numeric 5, visual 115,
+overall 120 or 16-PNG ceilings is admitted; the fixed-sharpness, coverage and
+corrected reviews' old grants are refused; the old two-control numeric layout fails)
+and for the comparison (sharpness.py) on real retained runs: the accepted baseline
+compared with itself fails honestly on sharpness, the aliased original fails on
+stability, a tampered baseline or prior is not exact, missing candidate outputs fail,
+the rejected a143b5c0 run evaluated as a candidate reproduces exactly its 13 recorded
+failures with every prior identity verified, and a changed history-free frame is
+detected. Synthetic evidence in a temporary directory stands in for a complete run;
+only the visual-tree identity is a test double. Retained runs and old grants are
 read only. Never starts a renderer, compiler or GPU child, and writes nothing outside
 the temporary directories.
 
@@ -34,8 +37,11 @@ import sharpness  # noqa: E402
 
 RECORDS = []
 TREE = "a" * 40
-OLD_NAMESPACES = {"temporal-coverage": c.EVIDENCE_ROOT / "0072-temporal-coverage-001",
-                  "temporal-corrected": c.EVIDENCE_ROOT / "0072-temporal-corrected-001"}
+# label: (namespace, stage prefix of its grants)
+OLD_NAMESPACES = {"fixed-sharpness-002": (c.EVIDENCE_ROOT / "0072-fixed-sharpness-002", "fixed-sharpness"),
+                  "fixed-sharpness-001": (c.EVIDENCE_ROOT / "0072-fixed-sharpness-001", "fixed-sharpness"),
+                  "temporal-coverage": (c.EVIDENCE_ROOT / "0072-temporal-coverage-001", "temporal-coverage"),
+                  "temporal-corrected": (c.EVIDENCE_ROOT / "0072-temporal-corrected-001", "temporal-corrected")}
 PACKET_DIR = c.PACKET_DIR
 REAL = {"EVIDENCE": c.EVIDENCE, "GRANT": c.GRANT, "BUILD_GRANT": c.BUILD_GRANT}  # before any patching
 
@@ -162,7 +168,7 @@ class Analyzer(unittest.TestCase):
 
     def test_complete_current_evidence_passes_and_publishes(self):
         _, debits = self.rows()
-        self.assertEqual(sum(d["frames"] + d["ui_submissions"] for d in debits), 357)
+        self.assertEqual(sum(d["frames"] + d["ui_submissions"] for d in debits), 110)
         code, summary = self.verdict("complete")
         self.assertEqual((code, summary["verdict"], summary["problems"]), (0, "pass", []))
         analyze.publish()
@@ -177,34 +183,34 @@ class Analyzer(unittest.TestCase):
             c.debit(f"review-{case}", case, details["frames"], details["ui_submissions"],
                     len(details["pngs"]), "synthetic")
         with self.assertRaisesRegex(SystemExit, "visual submission ceiling"):
-            c.debit("over", "over", 16, 0, 0, "synthetic")  # 105 + 16 = 121 > 120
+            c.debit("over", "over", 11, 0, 0, "synthetic")  # 105 + 11 = 116 > 115
         for test in self.plan["numeric"]["tests"]:
             c.debit("numeric-" + test["id"], "numeric-" + test["id"], test["submissions"], 0, 0, "synthetic")
         used = c.budget_used()
-        self.assertEqual((used["frames"] + used["ui_submissions"], used["pngs"]), (357, 16))
+        self.assertEqual((used["frames"] + used["ui_submissions"], used["pngs"]), (110, 16))
         with self.assertRaisesRegex(SystemExit, "numeric submission ceiling"):
-            c.debit("over", "numeric-over", 1, 0, 0, "synthetic")  # 253 > 252, overall 358 <= 372
+            c.debit("over", "numeric-over", 1, 0, 0, "synthetic")  # 6 > 5, overall 111 <= 120
         with self.assertRaisesRegex(SystemExit, "PNG budget"):
             c.debit("over", "over", 0, 0, 1, "synthetic")  # 17 > 16
-        c.debit("edge", "edge", 15, 0, 0, "synthetic")  # exactly 120 visual, 372 overall
+        c.debit("edge", "edge", 10, 0, 0, "synthetic")  # exactly 115 visual, 120 overall
         with self.assertRaisesRegex(SystemExit, "refused: submission ceiling"):
             c.debit("after", "after", 1, 0, 0, "synthetic")
-        # 252 numeric + 96 world frames + 15 = 363 frames, plus 9 UI = 372 submissions.
-        self.assertEqual(c.budget_used(), {"frames": 363, "ui_submissions": 9, "pngs": 16})
+        # 5 numeric + 96 world frames + 10 = 111 frames, plus 9 UI = 120 submissions.
+        self.assertEqual(c.budget_used(), {"frames": 111, "ui_submissions": 9, "pngs": 16})
         self.assertEqual(len(c.read_lines(c.REFUSALS)), 4)
-        RECORDS.append({"test": "plan_counts_admitted_and_ceilings_refused", "admitted": 357,
-                        "edge_admitted": {"submissions": 372, "visual": 120, "pngs": 16}, "refused": 4})
+        RECORDS.append({"test": "plan_counts_admitted_and_ceilings_refused", "admitted": 110,
+                        "edge_admitted": {"submissions": 120, "visual": 115, "pngs": 16}, "refused": 4})
 
     def test_old_grants_refused(self):
         sources = {}
-        for label, namespace in OLD_NAMESPACES.items():
+        for label, (namespace, stage) in OLD_NAMESPACES.items():
             self.assertNotEqual(REAL["EVIDENCE"], namespace)
             for name, call in (("review-ready.json", c.grant), ("build-ready.json", c.build_grant)):
                 old = namespace / name
                 body = json.loads(old.read_text()) if old.is_file() else None
-                if body is None:  # a stand-in shaped like the old grants, if they were ever removed
+                if body is None:  # a stand-in shaped like the old grants, if one was never written
                     body = {"packet": c.PACKET, "holder": "synthetic", "visual_tree": TREE,
-                            "stage": f"{label}-visual" if name == "review-ready.json" else f"{label}-build"}
+                            "stage": f"{stage}-visual" if name == "review-ready.json" else f"{stage}-build"}
                 sources[f"{label}/{name}"] = {"read_only_from": str(old) if old.is_file() else None,
                                               "sha256": c.sha(old) if old.is_file() else None,
                                               "stage": body.get("stage")}
@@ -215,24 +221,27 @@ class Analyzer(unittest.TestCase):
         self.assertEqual(REAL["GRANT"].parent, REAL["EVIDENCE"])
         RECORDS.append({"test": "old_grants_refused", "old_grants": sources})
 
-    def test_old_single_numeric_layout_fails(self):
+    def test_old_two_control_layout_fails(self):
         rows, debits = self.rows()
-        coverage = self.plan["numeric"]["tests"][1]
+        retained = [r for r in rows if r["kind"] == "numeric"][0]
+        old = self.plan["numeric"]["retained_direct_controls"]["prior_results"]
         rows = [r for r in rows if r["kind"] != "numeric"]
-        rows.insert(1, {**{k: v for k, v in self.rows()[0][1].items()}, "label": "numeric", "item": "numeric",
-                        "test": coverage["test"], "debit": {"frames": coverage["submissions"]}})
         debits = [d for d in debits if not d["item"].startswith("numeric")]
-        debits.insert(0, {"label": "numeric", "item": "numeric", "frames": 150, "ui_submissions": 0, "pngs": 0})
+        for index, (item, control) in enumerate(zip(("numeric-resolve", "numeric-coverage"), old), 1):
+            rows.insert(index, {**retained, "label": item, "item": item, "test": control["test"],
+                                "debit": {"frames": control["submissions"]}})
+            debits.insert(index - 1, {"label": item, "item": item, "frames": control["submissions"],
+                                      "ui_submissions": 0, "pngs": 0})
         self.write_ledger(rows, debits)
-        self.failed("old_single_numeric_layout", "expected one numeric child per plan control")
+        self.failed("old_two_control_layout", "expected one numeric child per plan control")
 
     def test_wrong_numeric_test_fails(self):
         rows, debits = self.rows()
         for row in rows:
-            if row.get("item") == "numeric-resolve":
-                row["test"] = self.plan["numeric"]["tests"][1]["test"]
+            if row.get("item") == "numeric-retained":
+                row["test"] = self.plan["numeric"]["retained_direct_controls"]["prior_results"][0]["test"]
         self.write_ledger(rows, debits)
-        self.failed("wrong_numeric_test", "numeric child resolve did not run the exact test once and pass")
+        self.failed("wrong_numeric_test", "numeric child retained did not run the exact test once and pass")
 
     def test_compare_requires_passing_check_and_fails_honestly(self):
         with self.assertRaisesRegex(SystemExit, "no analysis exists"):
@@ -317,6 +326,18 @@ class Compare(unittest.TestCase):
         cls.cases = b["cases"]
         cls.evidence, cls.screenshots = c.ROOT / b["evidence"], c.ROOT / b["screenshots"]
         cls.baseline = sharpness.run_from_published("baseline", cls.evidence, cls.screenshots, cls.cases)
+        ps = cls.plan["comparison"]["prior"]
+        cls.prior_paths = (c.ROOT / ps["evidence"], c.ROOT / ps["screenshots"], ps["cases"])
+        cls.prior = sharpness.run_from_published("prior", *cls.prior_paths)
+
+    def copy_prior(self, temp):
+        evidence, screenshots = Path(temp) / "evidence", Path(temp) / "screenshots"
+        for source, target in ((self.prior_paths[0], evidence), (self.prior_paths[1], screenshots)):
+            for path in source.rglob("*"):
+                if path.is_file():
+                    (target / path.relative_to(source)).parent.mkdir(parents=True, exist_ok=True)
+                    (target / path.relative_to(source)).write_bytes(path.read_bytes())
+        return evidence, screenshots
 
     def summary(self, result):
         return {ch["check"]: ch["pass"] for ch in result["checks"]}
@@ -372,6 +393,55 @@ class Compare(unittest.TestCase):
         self.assertFalse(result["exact"])
         self.assertFalse(passed["baseline_files_match_manifest"])
         RECORDS.append({"test": "tampered_baseline_is_not_exact", "failed": result["failed"]})
+
+    def test_prior_run_reproduces_its_recorded_failures(self):
+        candidate = sharpness.run_from_published("candidate", *self.prior_paths)
+        result = sharpness.compare(candidate, self.baseline, self.plan, prior=self.prior)
+        passed = self.summary(result)
+        recorded = self.plan["comparison"]["prior"]["recorded_quality_failures"]
+        self.assertEqual(result["failed"], ["exactness: candidate_source_commit", *recorded])
+        for name in ("prior_manifest_sha256", "prior_files_match_manifest", "prior_identity",
+                     "prior_recorded_failures", "temporal_off_identical_to_prior", "prior_same_adapter",
+                     "prior_same_toolchain_and_host", "prior_same_review_config",
+                     "prior_recomputed_failures_match_record", "history_free_frames_identical"):
+            self.assertTrue(passed[name], name)
+        frames = next(ch["value"] for ch in result["checks"] if ch["check"] == "history_free_frames_identical")
+        self.assertEqual((frames["frames"], frames["compared"]), (11, {"prior": 11, "baseline": 10}))
+        history = result["baseline_context"]["failure_history"]
+        self.assertEqual((history["resolved"], history["persisting"], history["new"]), ([], recorded, []))
+        RECORDS.append({"test": "prior_run_reproduces_its_recorded_failures", "failed": result["failed"],
+                        "history_free_frames": frames, "failure_history": history})
+
+    def test_tampered_prior_is_not_exact(self):
+        with tempfile.TemporaryDirectory(prefix="incant-0072-tampered-prior-") as temp:
+            evidence, screenshots = self.copy_prior(temp)
+            png = screenshots / "viewport-off-f24.png"
+            data = bytearray(png.read_bytes())
+            data[-20] ^= 1
+            png.write_bytes(bytes(data))
+            tampered = sharpness.run_from_published("prior", evidence, screenshots, self.prior_paths[2])
+            result = sharpness.compare(self.prior, self.baseline, self.plan, sections=["exactness"], prior=tampered)
+        passed = self.summary(result)
+        self.assertFalse(result["exact"])
+        self.assertFalse(passed["prior_files_match_manifest"])
+        self.assertNotIn("prior_recomputed_failures_match_record", passed)  # no quality section requested
+        RECORDS.append({"test": "tampered_prior_is_not_exact", "failed": result["failed"]})
+
+    def test_changed_history_free_frame_is_detected(self):
+        with tempfile.TemporaryDirectory(prefix="incant-0072-reset-frame-") as temp:
+            evidence, screenshots = self.copy_prior(temp)
+            report = evidence / "captures" / "transitions" / "report.json"
+            body = json.loads(report.read_text())
+            for frame in body["frames"]:
+                if frame["name"] == "cut-7":
+                    frame["rgba_sha256"] = "0" * 64
+            report.write_text(json.dumps(body))
+            changed = sharpness.run_from_published("candidate", evidence, screenshots, self.prior_paths[2])
+            result = sharpness.compare(changed, self.baseline, self.plan, sections=["reset"], prior=self.prior)
+        check = next(ch for ch in result["checks"] if ch["check"] == "history_free_frames_identical")
+        self.assertFalse(check["pass"])
+        self.assertEqual(check["value"]["differing"], ["transitions/cut-7"])
+        RECORDS.append({"test": "changed_history_free_frame_is_detected", "value": check["value"]})
 
     def test_missing_candidate_outputs_fail(self):
         with tempfile.TemporaryDirectory(prefix="incant-0072-empty-") as temp:

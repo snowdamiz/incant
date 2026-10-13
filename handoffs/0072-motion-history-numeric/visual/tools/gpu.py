@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guarded serial GPU runner for handoff 0072's fixed-sharpness comparison review.
+"""Guarded serial GPU runner for handoff 0072's fixed-warmup (reset-ramp) comparison review.
 Standard library only.
 
 Adapted from this packet's original gpu.py (from handoff 0068). For every
@@ -16,8 +16,8 @@ timeout, Ctrl-C, SIGTERM or SIGHUP. Every child goes to the ledger (rows always
 carry "pid"); any failure latches stop.json. There is no automatic retry and no
 whole-suite run.
 
-  gpu.py list <lib|review>   lib: confirm both exact numeric test names; review: the 8 cases
-  gpu.py numeric <resolve|coverage>   one exact numeric control, once each, in plan order
+  gpu.py list <lib|review>   lib: confirm the exact retained regression name; review: the 8 cases
+  gpu.py numeric retained    the one exact retained regression (5 submissions), once
   gpu.py review <probe|stationary|motion|excluded|transitions|skinned|timing|viewport>
   gpu.py release             after the last child, also when stopped: write the GPU latch
 """
@@ -232,7 +232,7 @@ def review(case):
     for item in numeric_items(p):
         passed = runs("numeric", item)
         if not passed or passed[-1]["failed"]:
-            c.refuse("both numeric controls must pass before any appearance case")
+            c.refuse("the numeric regression must pass before any appearance case")
     if not runs("list", "review"):
         c.refuse("list review first")
     if len(runs("review", case)) >= spec["max_runs_per_case"]:

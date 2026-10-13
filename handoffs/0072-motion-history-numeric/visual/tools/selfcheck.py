@@ -1,27 +1,39 @@
 #!/usr/bin/env python3
-"""Preparation self-check for handoff 0072's fixed-sharpness comparison review.
+"""Preparation self-check for handoff 0072's fixed-warmup (reset-ramp) comparison review.
 Standard library only; no grant needed. Never compiles, starts a renderer,
-acquires a target or touches the stage evidence directory or the global GPU lock.
+acquires a target or touches the stage evidence directory or the global GPU lock;
+git is only read (show, cat-file, rev-parse, diff, status).
 
   python3 -I -B selfcheck.py [--write <new-output.json>]
 
 1. Every stage Python tool parses (ast only; no bytecode is written).
 2. plan.json is internally consistent and within the brief's budgets: 105 visual
-   (world + UI) submissions within 120, 102 + 150 numeric = 252, 357 planned within
-   372, 16 of 16 PNGs at 960x540.
-3. Comparability with the accepted coverage baseline (visual tree b1327f3d): the
-   fixture is that fixture byte for byte plus one appended case (viewport); its
-   seven cases keep their frames, UI submissions, PNG names, purposes and checks;
-   the baseline fixture still differs from the original only at line 1418.
+   (world + UI) submissions within 115, the one retained regression's 5 numeric
+   submissions within 5, 110 planned within 120, 16 of 16 PNGs at 960x540; new
+   namespace, stages and publication directories, with every earlier publication
+   retained.
+3. Comparability: the fixture, the 8 cases, the review config and every threshold
+   section are byte-identical (as JSON values) to the rejected a143b5c0 run's plan
+   (visual tree b11a7d3a); against the accepted coverage baseline (b1327f3d) the
+   fixture is that fixture plus the appended viewport case, its seven cases are
+   unchanged, and the baseline fixture still differs from the original only at
+   line 1418.
 4. The Rust fixture agrees with the plan: test names in order, Report::open
    limits, PNG names, frame size, output variable, the explicit config and each
    case's exact contract-check names.
-5. With both grants absent, every guarded command refuses with its grant
+5. The numeric regression, measured from the candidate commit's source: the exact
+   libtest path through lib.rs/models.rs/retained.rs, its #[test]/#[ignore]
+   attributes, 5 accepted and 3 refused submit calls, the 7 accepted-sample
+   assertions, one queue.submit per accepted call, the candidate's delta from
+   a143b5c0, the recorded changed-source hashes and the unchanged kernel, cooker
+   and direct-control blobs (which never call the host weight policy).
+6. With both grants absent, every guarded command refuses with its grant
    message, creates no evidence directory, leaves `git status` unchanged and
    does not touch the global native-gpu.lock.
 """
 
 import ast
+import hashlib
 import json
 import re
 import subprocess
@@ -34,17 +46,29 @@ import common as c  # noqa: E402
 
 ORIGINAL = "9009f088ac230e31185e8ce64183ca93878e9444"
 BASELINE_TREE = "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e"  # visual tree of the accepted coverage run
-NUMERIC = {"resolve": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
-           "coverage": "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection"}
+PRIOR_TREE = "b11a7d3aad4228eab0fee10024a87d46bb109560"  # visual tree of the rejected a143b5c0 run
+PRIOR_COMMIT = "a143b5c0f537bd35111e40e99626f40318a385ac"
+CANDIDATE = "296e02268458afea21ff90e8aea820a3dec2b314"
+RETAINED = ("models::retained::temporal_tests::"
+            "temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase")
+NUMERIC = {"retained": RETAINED}
+THRESHOLD_SECTIONS = ("baseline", "sharpness", "stability", "ghosts", "exclusion", "reset", "registration",
+                      "viewport")
+EARLIER_PUBLICATIONS = ("fixed-sharpness-screenshots", "fixed-sharpness-evidence", "temporal-coverage-screenshots",
+                        "temporal-coverage-evidence")
 COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "checkout"],
             ["build.py", "toolchain"], ["build.py", "libtests"], ["build.py", "review"],
-            ["build.py", "lint"], ["gpu.py", "list", "lib"], ["gpu.py", "numeric", "resolve"],
-            ["gpu.py", "numeric", "coverage"],
+            ["build.py", "lint"], ["gpu.py", "list", "lib"], ["gpu.py", "numeric", "retained"],
             ["gpu.py", "list", "review"], ["gpu.py", "review", "probe"],
             ["gpu.py", "review", "stationary"], ["gpu.py", "release"],
             ["gpu.py", "review", "viewport"], ["analyze.py", "check"], ["analyze.py", "compare"],
             ["analyze.py", "publish"]]
 ABSENT = ("build-ready.json is absent", "review-ready.json is absent")
+
+
+def blob(commit, path):
+    return subprocess.run(["git", "cat-file", "blob", f"{commit}:{path}"], cwd=c.ROOT, capture_output=True,
+                          check=True).stdout
 
 
 def plan_checks(p):
@@ -60,14 +84,16 @@ def plan_checks(p):
     return {
         "frames_match_total": frames == totals["frames"] == 96,
         "ui_match_total": ui == totals["ui_submissions"] == 9,
-        "visual_105_within_120": frames + ui == totals["review_submissions"] == 105
-        and budgets["visual_submissions_max"] == 120,
-        "numeric_102_plus_150": [t["submissions"] for t in tests] == [102, 150]
-        and numeric == totals["numeric_submissions"] == budgets["numeric_submissions_max"] == 252,
-        "planned_357_within_372": (frames + ui + numeric == totals["submissions"] == budgets["planned_submissions"]
-                                   == 357 and budgets["submissions_max"] == 372),
+        "visual_105_within_115": frames + ui == totals["review_submissions"] == 105
+        and budgets["visual_submissions_max"] == 115,
+        "numeric_5_within_5": [t["submissions"] for t in tests] == [5]
+        and numeric == totals["numeric_submissions"] == budgets["numeric_submissions_max"] == 5,
+        "planned_110_within_120": (frames + ui + numeric == totals["submissions"] == budgets["planned_submissions"]
+                                   == 110 and budgets["submissions_max"] == 120
+                                   and budgets["visual_submissions_max"] + budgets["numeric_submissions_max"]
+                                   == budgets["submissions_max"]),
         "pngs_16_of_16": len(names) == totals["pngs"] == 16 and budgets["pngs_max"] == 16,
-        "reserves_match": (totals["reserve_submissions"] == 372 - 357 == totals["reserve_visual_submissions"]
+        "reserves_match": (totals["reserve_submissions"] == 120 - 110 == totals["reserve_visual_submissions"]
                            and totals["reserve_pngs"] == 0),
         "gpu_children_at_most_120_s": all(budgets[k] <= 120 for k in (
             "listing_timeout_s", "numeric_timeout_s", "review_case_timeout_s")),
@@ -80,6 +106,9 @@ def plan_checks(p):
         "no_whole_suite": "suites" not in p and "tests-render" not in p["builds"]
         and "tests-host" not in p["builds"],
         "exact_numeric_tests": {t["id"]: t["test"] for t in tests} == NUMERIC,
+        "direct_controls_not_rerun": all(r["test"] not in NUMERIC.values()
+                                         for r in p["numeric"]["retained_direct_controls"]["prior_results"])
+        and [r["submissions"] for r in p["numeric"]["retained_direct_controls"]["prior_results"]] == [102, 150],
         "builds_locked_offline_ci_j2": all(flag in p["builds"]["common_flags"]
                                            for flag in ("--locked", "--offline", "ci", "-j2"))
         and budgets["compile_jobs"] == 2,
@@ -89,15 +118,19 @@ def plan_checks(p):
             and 0 <= config["reactive_strength"] <= 1),
         "expected_backend_metal": p["expected_backend"] == "Metal",
         "new_evidence_namespace": p["evidence_namespace"] == str(c.EVIDENCE)
-        and c.EVIDENCE.name == "0072-fixed-sharpness-002" and c.GRANT.parent == c.EVIDENCE
+        and c.EVIDENCE.name == "0072-fixed-warmup-001" and c.GRANT.parent == c.EVIDENCE
         and c.BUILD_GRANT.parent == c.EVIDENCE,
         "new_stages": (p["stage"], p["build_stage"]) == (c.STAGE, c.BUILD_STAGE)
-        == ("fixed-sharpness-visual", "fixed-sharpness-build"),
+        == ("fixed-warmup-visual", "fixed-warmup-build"),
         "new_publication_directories": (c.PUBLISHED.name, c.PUBLISHED_EVIDENCE.name)
-        == ("fixed-sharpness-screenshots", "fixed-sharpness-evidence"),
-        "comparison_baseline_and_candidate": p["comparison"]["baseline"]["visual_tree"] == BASELINE_TREE
-        and p["comparison"]["candidate_commit"] == p["source_pinning"]["expected_commit"]
-        == "a143b5c0f537bd35111e40e99626f40318a385ac",
+        == ("fixed-warmup-screenshots", "fixed-warmup-evidence")
+        and not c.PUBLISHED.exists() and not c.PUBLISHED_EVIDENCE.exists(),
+        "earlier_publications_retained": all((c.PACKET_DIR / name).is_dir() for name in EARLIER_PUBLICATIONS),
+        "comparison_baseline_prior_and_candidate": p["comparison"]["baseline"]["visual_tree"] == BASELINE_TREE
+        and p["comparison"]["prior"]["visual_tree"] == PRIOR_TREE
+        and p["comparison"]["prior"]["source_commit"] == PRIOR_COMMIT
+        and p["comparison"]["candidate_commit"] == p["source_pinning"]["expected_commit"] == CANDIDATE
+        and p["source_pinning"]["base_commit"] == PRIOR_COMMIT,
     }
 
 
@@ -105,8 +138,9 @@ def comparability_checks(p):
     original_plan = json.loads(c.git("show", f"{ORIGINAL}:{c.VISUAL_RELATIVE}/plan.json"))
     original_fixture = c.git("show", f"{ORIGINAL}:{c.VISUAL_RELATIVE}/review/temporal_visual_review.rs")
     baseline_plan = json.loads(c.git("show", f"{BASELINE_TREE}:plan.json"))
-    baseline_fixture = subprocess.run(["git", "cat-file", "blob", f"{BASELINE_TREE}:review/temporal_visual_review.rs"],
-                                      cwd=c.ROOT, capture_output=True, check=True).stdout
+    baseline_fixture = blob(BASELINE_TREE, "review/temporal_visual_review.rs")
+    prior_plan = json.loads(c.git("show", f"{PRIOR_TREE}:plan.json"))
+    prior_fixture = blob(PRIOR_TREE, "review/temporal_visual_review.rs")
     current = c.HELPER_SOURCE.read_bytes()
     appended = current[len(baseline_fixture):].decode()
     keys = ("frames", "ui_submissions", "pngs", "purpose", "checks")
@@ -119,7 +153,13 @@ def comparability_checks(p):
     base_text = baseline_fixture.decode()
     changed = [(i, a, b) for i, (a, b) in enumerate(zip(original_fixture.splitlines(),
                                                         base_text.splitlines()), 1) if a != b]
+    thresholds = {k: p["comparison"].get(k) == prior_plan["comparison"].get(k) for k in THRESHOLD_SECTIONS}
     return {
+        "fixture_identical_to_prior_run": current == prior_fixture
+        and hashlib.sha256(current).hexdigest() == "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338",
+        "review_section_identical_to_prior_run": p["review"] == prior_plan["review"],
+        "review_config_identical_to_prior_run": p["review_config"] == prior_plan["review_config"],
+        "threshold_sections_identical_to_prior_run": all(thresholds.values()),
         "fixture_extends_baseline_exactly": current.startswith(baseline_fixture),
         "appended_block_adds_only_viewport_case": re.findall(r"#\[test\]\s*#\[ignore[^\]]*\]\s*fn (\w+)\(", appended)
         == ["viewport"],
@@ -130,8 +170,10 @@ def comparability_checks(p):
         "baseline_fixture_only_line_1418_from_original": (
             len(original_fixture.splitlines()) == len(base_text.splitlines())
             and [i for i, _, _ in changed] == [1418]),
-        "observed": {"baseline_case_equality": same_as_baseline, "appended_bytes": len(appended.encode()),
-                     "baseline_fixture_bytes": len(baseline_fixture)},
+        "observed": {"threshold_sections_identical": thresholds,
+                     "prior_plan_sha256": hashlib.sha256(c.git("show", f"{PRIOR_TREE}:plan.json").encode()).hexdigest(),
+                     "baseline_case_equality": same_as_baseline, "appended_bytes": len(appended.encode()),
+                     "baseline_fixture_bytes": len(baseline_fixture), "fixture_bytes": len(current)},
     }
 
 
@@ -162,7 +204,87 @@ def helper_checks(p):
         "output_variable_matches_plan": bool(env) and env[1] == spec["output_env"],
         "review_config_matches_plan": fields == {k: float(v) for k, v in p["review_config"].items()},
         "contract_checks_match_plan": all(checks[name] == spec["cases"][name]["checks"] for name in spec["order"]),
-        "observed": {"tests": tests, "limits": opened, "pngs": pngs, "review_config": fields, "checks": checks},
+        "observed": {"tests": tests, "limits": opened, "frames": sum(v[0] for v in opened.values()),
+                     "ui_submissions": sum(v[1] for v in opened.values()), "pngs": pngs,
+                     "review_config": fields, "checks": checks},
+    }
+
+
+def function_body(source, name):
+    """The braces-balanced body of `fn name(`, or None."""
+    start = source.find(f"fn {name}(")
+    if start < 0:
+        return None
+    opening = source.find("{", start)
+    depth = 0
+    for index in range(opening, len(source)):
+        depth += {"{": 1, "}": -1}.get(source[index], 0)
+        if depth == 0:
+            return source[opening:index + 1]
+    return None
+
+
+def submit_calls(body):
+    """Each `.submit(` call in a test body, classified by what follows its balanced
+    argument list: `.unwrap()` (accepted) or `.is_err()` (refused)."""
+    accepted, refused, other = [], [], []
+    for match in re.finditer(r"\.submit\(", body):
+        depth, index = 0, match.end() - 1
+        while index < len(body):
+            depth += {"(": 1, ")": -1}.get(body[index], 0)
+            if depth == 0:
+                break
+            index += 1
+        rest = body[index + 1:].lstrip()
+        line = body.count("\n", 0, match.start())
+        (accepted if rest.startswith(".unwrap()") else refused if rest.startswith(".is_err()") else other).append(line)
+    return accepted, refused, other
+
+
+def numeric_source_checks(p):
+    def show(path, commit=CANDIDATE):
+        return blob(commit, path).decode()
+    test_path = "crates/incant_render/src/temporal_retained_tests.rs"
+    lib, models, retained, tests = (show("crates/incant_render/src/lib.rs"),
+                                    show("crates/incant_render/src/models.rs"),
+                                    show("crates/incant_render/src/retained.rs"), show(test_path))
+    name = RETAINED.rsplit("::", 1)[1]
+    first = tests.count("\n", 0, max(tests.find(f"fn {name}("), 0)) + 1  # the line holding the body's "{"
+    mounted = (re.search(r"^mod models;$", lib, re.M) is not None
+               and '#[path = "retained.rs"]\nmod retained;' in models
+               and '#[cfg(test)]\n#[path = "temporal_retained_tests.rs"]\nmod temporal_tests;' in retained)
+    attributed = re.findall(r'#\[test\]\n#\[ignore = "[^"]*"\]\nfn (\w+)\(\)', tests)
+    body = function_body(tests, name) or ""
+    accepted, refused, other = submit_calls(body)
+    samples = [int(v) for v in re.findall(r"accepted_samples\(\),\s*(\d+)\)", body)]
+    submit_fn = function_body(retained, "submit") or ""
+    queue = re.findall(r"#\[cfg\(([^\n]*)\)\]\n\s*let submission = renderer\.queue\.submit\(", submit_fn)
+    delta = c.git("diff", "--name-only", PRIOR_COMMIT, CANDIDATE).split()
+    recorded = p["history"]["warmup_source"]["changed_sources_sha256"]
+    hashes = {path: hashlib.sha256(blob(CANDIDATE, path)).hexdigest() for path in recorded}
+    unchanged = p["numeric"]["retained_direct_controls"]["unchanged_blobs_a143b5c0_and_296e0226"]
+    ids = {path: (c.git("rev-parse", f"{PRIOR_COMMIT}:{path.replace(' (tree)', '')}").strip(),
+                  c.git("rev-parse", f"{CANDIDATE}:{path.replace(' (tree)', '')}").strip()) for path in unchanged}
+    controls = {path: show(path) for path in ("crates/incant_render/src/temporal/device_tests.rs",
+                                              "crates/incant_render/src/temporal/coverage_device.rs")}
+    return {
+        "libtest_path_from_source": mounted and RETAINED == "models::retained::temporal_tests::" + name
+        and p["numeric"]["tests"][0]["test"] == RETAINED,
+        "test_is_ignored_gpu_test_and_only_test": attributed == [name] and tests.count("#[test]") == 1,
+        "five_accepted_three_refused_submits": (len(accepted), len(refused), len(other)) == (5, 3, 0)
+        and p["numeric"]["tests"][0]["submissions"] == len(accepted),
+        "seven_ramp_assertions": samples == [1, 1, 2, 2, 1, 1, 1],
+        "one_queue_submit_per_accepted_call": queue == ['feature = "native-metalfx"', 'not(feature = "native-metalfx")'],
+        "candidate_delta_is_the_ramp": delta == p["source_pinning"]["delta_from_base"],
+        "changed_source_hashes_match_record": hashes == recorded,
+        "kernel_cooker_controls_unchanged": all(a == b == unchanged[path] for path, (a, b) in ids.items()),
+        "direct_controls_bypass_host_policy": all(
+            "Frame {" in text and ".history_weight()" not in text and "TemporalSystem::prepare" not in text
+            for text in controls.values()),
+        "observed": {"test_file_sha256": hashlib.sha256(tests.encode()).hexdigest(),
+                     "accepted_submit_lines": [first + n for n in accepted],
+                     "refused_submit_lines": [first + n for n in refused],
+                     "accepted_samples_assertions": samples, "queue_submit_cfgs": queue, "delta": delta},
     }
 
 
@@ -190,6 +312,10 @@ def refusal_checks():
             "global_gpu_lock_untouched": same_lock}
 
 
+def passed(section):
+    return all(v for k, v in section.items() if k != "observed")
+
+
 def main():
     args = sys.argv[1:]
     if args and (len(args) != 2 or args[0] != "--write"):
@@ -202,11 +328,10 @@ def main():
               "tools": {path.name: c.sha(path) for path in sorted(c.TOOLS.glob("*.py"))},
               "syntax": "all tools parse", "plan": plan_checks(p),
               "comparability": comparability_checks(p), "helper": helper_checks(p),
-              "refusals": refusal_checks()}
+              "numeric_source": numeric_source_checks(p), "refusals": refusal_checks()}
     refusals = result["refusals"]
-    result["all_pass"] = (all(result["plan"].values())
-                          and all(v for k, v in result["comparability"].items() if k != "observed")
-                          and all(v for k, v in result["helper"].items() if k != "observed")
+    result["all_pass"] = (all(result["plan"].values()) and passed(result["comparability"])
+                          and passed(result["helper"]) and passed(result["numeric_source"])
                           and all(refusals.get(k, False) for k in (
                               "all_refused_for_absent_grant", "evidence_directory_still_absent",
                               "git_status_unchanged", "global_gpu_lock_untouched")))

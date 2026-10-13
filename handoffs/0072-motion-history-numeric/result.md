@@ -1,7 +1,15 @@
 # 0072 result: retained motion-data GPU execution
 
-> **Current result: [`sharpness-result.md`](sharpness-result.md).** This is the
-> frozen C-reg (`a143b5c0`) sharpness comparison.
+> **Current stage: [`warmup-preparation.md`](warmup-preparation.md).** This is the
+> CPU-only preparation of the reset-ramp (`296e0226`) comparison.
+>
+> - **Not run:** no GPU, Cargo or screenshots.
+> - **Plan:** 110 submissions against a cap of 120.
+> - **Unchanged:** the fixture and the thresholds.
+> - **Status:** ready for root's grants.
+>
+> **Latest executed result: [`sharpness-result.md`](sharpness-result.md).** This is
+> the frozen C-reg (`a143b5c0`) sharpness comparison.
 >
 > - **Integrity:** passed.
 > - **Quality comparison:** **failed**, on 13 of 37 frozen thresholds. C-reg is
@@ -16,7 +24,8 @@
 > 5. `coverage-preparation.md` and `temporal-coverage-result.md` (the accepted
 >    baseline);
 > 6. `fixed-sharpness-design.md`, `sharpness-preparation.md`, root's
->    `sharpness-build-repair.md`, and `sharpness-result.md`.
+>    `sharpness-build-repair.md`, and `sharpness-result.md`;
+> 7. `warmup-preparation.md`.
 >
 > The text below is the original retained motion-data result, unchanged.
 

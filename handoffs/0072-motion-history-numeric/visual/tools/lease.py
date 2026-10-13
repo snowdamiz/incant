@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exclusive Cargo target lease for handoff 0072's corrected-source CPU build.
+"""Exclusive Cargo target lease for handoff 0072's fixed-warmup (reset-ramp) CPU build.
 Standard library only.
 
 Adapted from this packet's original lease.py (from handoff 0068) with the
@@ -88,7 +88,7 @@ def release():
     lease["released_at"] = c.now()
     lease["released_by"] = grant["holder"]
     lease["processes_on_target_at_release"] = remaining
-    lease["release_note"] = ("No 0072 corrected-review cargo/rustc process or frozen binary "
+    lease["release_note"] = ("No 0072 fixed-warmup cargo/rustc process or frozen binary "
                              "remains on the target. Contents left as warm cache; nothing deleted. "
                              "Frozen binaries live under " + str(c.BIN))
     temporary = c.LEASE.with_suffix(".tmp")

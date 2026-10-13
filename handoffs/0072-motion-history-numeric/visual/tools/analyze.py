@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """CPU-only, fail-closed analysis, comparison and publication for handoff 0072's
-fixed-sharpness comparison review. Standard library only; never starts a renderer, compiler or GPU
+fixed-warmup (reset-ramp) comparison review. Standard library only; never starts a renderer, compiler or GPU
 child. The verdict/binding/publication rules follow the accepted 0073 analyzer
 (narrowly reused); appearance is judged only by personal inspection of the PNGs.
 
   analyze.py check     validate the complete current evidence; always writes
                        analysis/summary-<time>.json; exit 0 only on a pass
   analyze.py compare   only after a current passing check: compare the candidate run
-                       with the retained accepted baseline (sharpness.py); always
-                       writes analysis/compare-<time>.json; exit 0 only on a pass
+                       with the retained accepted baseline under unchanged thresholds
+                       and with the retained rejected a143b5c0 run as a second exact
+                       reference (sharpness.py); always writes
+                       analysis/compare-<time>.json; exit 0 only on a pass
   analyze.py publish   copy receipts and the plan's PNGs (<= 16) into the packet
                        (create-only), only from the latest summary, which must
                        pass and still bind the current evidence byte for byte
@@ -22,8 +24,9 @@ child. The verdict/binding/publication rules follow the accepted 0073 analyzer
 - every ledgered build succeeded and its logs match;
 - exactly one passing `list lib` naming the exact numeric test, and exactly one
   passing `list review` naming exactly the plan's cases;
-- exactly one passing child per plan numeric control, each running its exact
-  test once and debited exactly the plan's submissions;
+- exactly one passing child per plan numeric test (here the one retained
+  regression), running its exact test once and debited exactly the plan's
+  submissions;
 - exactly one passing review child per plan case, in plan order, and no other
   GPU child kind; one debit per charged child, equal to the plan; totals within
   the ceiling and the PNG budget;
@@ -260,7 +263,8 @@ def current_passing_summary(tools):
 
 
 def compare():
-    """Exact comparison with the retained accepted baseline; thresholds fail honestly."""
+    """Exact comparison with the retained accepted baseline (and the rejected prior run
+    as a second exact reference); thresholds fail honestly."""
     import sharpness
     data, _ = c.grant()
     tools = c.tools_identity(data)
@@ -269,8 +273,11 @@ def compare():
     b = p["comparison"]["baseline"]
     candidate = sharpness.run_from_captures("candidate", c.EVIDENCE, p["review"]["order"])
     baseline = sharpness.run_from_published("baseline", c.ROOT / b["evidence"], c.ROOT / b["screenshots"], b["cases"])
+    ps = p["comparison"].get("prior")
+    prior = (sharpness.run_from_published("prior", c.ROOT / ps["evidence"], c.ROOT / ps["screenshots"], ps["cases"])
+             if ps else None)
     try:
-        result = sharpness.compare(candidate, baseline, p)
+        result = sharpness.compare(candidate, baseline, p, prior=prior)
     except Exception as error:  # a malformed input is a failed comparison, never a pass
         result = {"verdict": "fail", "exact": False, "failed": [f"comparison error: {error!r}"], "checks": []}
     recorded = c.now()

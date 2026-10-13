@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """CPU-only child checkout, toolchain identity and frozen builds for handoff 0072's
-corrected-source temporal review. Standard library only; Python 3.12+ (tarfile's
+fixed-warmup (reset-ramp) review. Standard library only; Python 3.12+ (tarfile's
 data filter). Root supervises these steps in the foreground; never a background
 build.
 

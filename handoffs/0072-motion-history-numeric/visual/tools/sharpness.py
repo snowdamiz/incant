@@ -1,6 +1,7 @@
 """CPU-only, fail-closed comparison of a candidate fixed-temporal run against the
-retained accepted baseline (handoff 0072, fixed-sharpness review). Standard library
-only; never starts a renderer, compiler or GPU child.
+retained accepted baseline (handoff 0072; first the fixed-sharpness review, now the
+fixed-warmup reset-ramp review). Standard library only; never starts a renderer,
+compiler or GPU child.
 
 The metrics are those of the committed coverage inspection
 (temporal-coverage-inspection/), applied the same way to both runs. The thresholds
@@ -10,6 +11,14 @@ is exact: the baseline matches its committed manifest and identities, and both r
 share the temporal-off references, adapter, toolchain and review config. Otherwise
 it fails; nothing incompatible is reused silently. Every check records its value,
 limit and outcome; the verdict passes only if every check passes.
+
+When the plan names a prior run (comparison.prior: the rejected a143b5c0 sharpness
+run) it is a second exact reference: its manifest, files, identity, recorded failures
+and temporal-off frames must verify, and every quality check is evaluated on it with
+the same code. Its recomputed failures must equal the recorded ones; the side-by-side
+values ("prior_effect") and the resolved, persisting and new failures show the effect
+of the one change and never act as thresholds. comparison.history_free_frames requires
+every history-free frame to be byte-identical to the prior's and the baseline's.
 """
 
 import hashlib
@@ -299,8 +308,9 @@ def registration_linear(on, off):
 class Run:
     """One run's reports, PNGs and build records, located by name."""
 
-    def __init__(self, label, reports, pngs, build, manifest=None):
+    def __init__(self, label, reports, pngs, build, manifest=None, evidence=None):
         self.label, self.reports, self.pngs, self.build, self.manifest = label, reports, pngs, build, manifest
+        self.evidence = Path(evidence) if evidence is not None else None
         self._images = {}
 
     def report(self, case):
@@ -324,7 +334,7 @@ def run_from_captures(label, evidence, cases):
     reports = {c: evidence / "captures" / c / "report.json" for c in cases}
     pngs = {p.name: p for c in cases for p in sorted((evidence / "captures" / c).glob("*.png"))}
     build = {p.name: p for p in sorted((evidence / "build").glob("*.json"))}
-    return Run(label, reports, pngs, build)
+    return Run(label, reports, pngs, build, evidence=evidence)
 
 
 def run_from_published(label, evidence, screenshots, cases):
@@ -340,12 +350,48 @@ def run_from_published(label, evidence, screenshots, cases):
     pngs = {p.name: p for p in sorted(screenshots.glob("*.png"))}
     build = {p.name: p for p in sorted((evidence / "build").glob("*.json"))}
     manifest = evidence / "manifest.json" if (evidence / "manifest.json").is_file() else None
-    return Run(label, reports, pngs, build, manifest)
+    return Run(label, reports, pngs, build, manifest, evidence)
+
+
+def report_frames(run, cases, history_free):
+    """{case/frame: rgba_sha256} for temporal-off frames (temporal null) or for
+    history-free temporal frames (has_previous false, not bypassed)."""
+    frames = {}
+    for case in cases:
+        for frame in (run.report(case) or {}).get("frames", []):
+            if "temporal" not in frame:
+                continue
+            t = frame["temporal"]
+            fresh = isinstance(t, dict) and t.get("has_previous") is False and not t.get("bypassed")
+            if (fresh if history_free else t is None):
+                frames[f"{case}/{frame.get('name')}"] = frame.get("rgba_sha256")
+    return frames
+
+
+def manifest_entries(manifest):
+    entries = {}
+    if manifest is not None:
+        body = json.loads(Path(manifest).read_text())
+        entries.update({e["path"]: e["sha256"] for e in body.get("files", [])})
+        entries.update({e["name"]: e["sha256"] for e in body.get("screenshots", [])})
+    return entries
+
+
+def png_report_hash(run, cases, name):
+    found = None
+    for case in cases:
+        for png in (run.report(case) or {}).get("pngs", []):
+            if png.get("name") == name:
+                found = png.get("rgba_sha256")
+    return found
 
 
 # ------------------------------------------------------------------ comparison
 
-def compare(candidate, baseline, plan, sections=None):
+QUALITY = ("sharpness", "stability", "ghosts", "exclusion", "reset", "registration", "viewport")
+
+
+def compare(candidate, baseline, plan, sections=None, prior=None):
     spec = plan["comparison"]
     checks = []
     context = {}
@@ -428,6 +474,46 @@ def compare(candidate, baseline, plan, sections=None):
         configs = {run.label: config_ok(run) for run in (candidate, baseline)}
         check("exactness", "same_review_config", configs, "every report equals plan review_config (f32)",
               all(configs.values()))
+
+        ps = spec.get("prior")
+        if ps and prior is not None:
+            man = prior.manifest
+            check("exactness", "prior_manifest_sha256", sha(man) if man else None, ps["manifest_sha256"],
+                  man is not None and sha(man) == ps["manifest_sha256"])
+            entries = manifest_entries(man)
+            record = prior.evidence / ps["compare_record"] if prior.evidence is not None else None
+            used = [(f"captures/{c}/report.json", prior.reports.get(c)) for c in ps["cases"]]
+            used += [(f"build/{n}", prior.build.get(n)) for n in ("source.json", "review.json", "toolchain.json")]
+            used += [(ps["compare_record"], record)]
+            used += [(n, prior.pngs.get(n)) for n in ps["pngs"]]
+            mismatched = [rel for rel, path in used
+                          if not path or not Path(path).is_file() or entries.get(rel) != sha(path)]
+            check("exactness", "prior_files_match_manifest", mismatched, [], not mismatched)
+            psource = prior.record("source.json") or {}
+            preview = prior.record("review.json") or {}
+            pfrozen = (preview.get("frozen") or {}).get("temporal_visual_review", {})
+            identity = [psource.get("source_commit"), (preview.get("tools") or {}).get("visual_tree"),
+                        pfrozen.get("sha256")]
+            wanted = [ps["source_commit"], ps["visual_tree"], ps["review_binary_sha256"]]
+            check("exactness", "prior_identity", identity, wanted, identity == wanted)
+            recorded = (json.loads(record.read_text()).get("failed")
+                        if record is not None and record.is_file() else None)
+            check("exactness", "prior_recorded_failures", recorded, ps["recorded_quality_failures"],
+                  recorded == ps["recorded_quality_failures"])
+            order = plan["review"]["order"]
+            mine, theirs = report_frames(candidate, order, False), report_frames(prior, ps["cases"], False)
+            pngs = {n: png_report_hash(candidate, order, n) is not None
+                    and png_report_hash(candidate, order, n) == png_report_hash(prior, ps["cases"], n)
+                    for n in ps["identical_references"]}
+            check("exactness", "temporal_off_identical_to_prior",
+                  {"pngs": pngs, "off_frames": len(mine), "off_frames_identical": bool(mine) and mine == theirs},
+                  "all temporal-off PNGs and frames identical", all(pngs.values()) and bool(mine) and mine == theirs)
+            check("exactness", "prior_same_adapter", [adapter(candidate), adapter(prior)], "equal",
+                  adapter(candidate) == adapter(prior) and adapter(prior)[0] is not None)
+            check("exactness", "prior_same_toolchain_and_host", [toolchain(candidate), toolchain(prior)], "equal",
+                  toolchain(candidate) == toolchain(prior) and bool(toolchain(prior)["rustc"]))
+            check("exactness", "prior_same_review_config", config_ok(prior),
+                  "every prior report equals plan review_config (f32)", config_ok(prior))
 
     def pair(run, on_name, off_name):
         return run.image(on_name), run.image(off_name)
@@ -536,6 +622,23 @@ def compare(candidate, baseline, plan, sections=None):
             value = max_step(a, b) if a is not None and b is not None and (a.w, a.h) == (b.w, b.h) else None
             check("reset", f"{name}_max_step_vs_baseline", value, f"<= {spec['reset']['max_step']}",
                   value is not None and value <= spec["reset"]["max_step"])
+        hf = spec.get("history_free_frames")
+        if hf:
+            order = plan["review"]["order"]
+            mine = report_frames(candidate, order, True)
+            refs = {label: run for label, run in (("prior", prior), ("baseline", baseline))
+                    if label in hf["compare_to"] and run is not None}
+            theirs = {label: report_frames(run, order, True) for label, run in refs.items()}
+            rows = {key: {label: (frames[key] == digest) if key in frames else None
+                          for label, frames in theirs.items()} for key, digest in mine.items()}
+            ok = (bool(mine) and all(v is not False for row in rows.values() for v in row.values())
+                  and ("prior" not in theirs or set(theirs["prior"]) == set(mine)))
+            check("reset", "history_free_frames_identical",
+                  {"frames": len(mine), "compared": {label: sum(1 for row in rows.values() if row[label] is not None)
+                                                     for label in theirs},
+                   "differing": sorted(k for k, row in rows.items() if False in row.values()),
+                   "missing_from_prior": sorted(set(theirs.get("prior", mine)) ^ set(mine))},
+                  "every history-free frame byte-identical to " + " and ".join(theirs), ok)
 
     # -------------------------------------------------- registration
     if "registration" in want:
@@ -590,6 +693,30 @@ def compare(candidate, baseline, plan, sections=None):
                 check("viewport", "pan_off_edge_ge9", bins, "9-16 == 0 and >16 == 0",
                       bins["9-16"] == 0 and bins[">16"] == 0)
 
+    ps = spec.get("prior")
+    quality = [s for s in QUALITY if s in want]
+    if ps and prior is not None and quality:
+        # The same code on the prior run, over the same quality sections; prior=None
+        # stops the recursion. Its failures must equal the recorded ones there.
+        earlier = compare(prior, baseline, plan, sections=quality)
+        recomputed = earlier["failed"]
+        expected = [f for f in ps["recorded_quality_failures"] if f.split(":")[0] in quality]
+        if "exactness" in want:
+            check("exactness", "prior_recomputed_failures_match_record", recomputed, expected,
+                  recomputed == expected)
+        mine = {f"{c['section']}: {c['check']}": c for c in checks if c["section"] != "exactness"}
+        theirs = {f"{c['section']}: {c['check']}": c for c in earlier["checks"]}
+        context["prior_effect"] = {key: {"prior": theirs[key]["value"] if key in theirs else None,
+                                         "candidate": c["value"],
+                                         "prior_pass": theirs[key]["pass"] if key in theirs else None,
+                                         "candidate_pass": c["pass"]} for key, c in mine.items()}
+        now_failed = [key for key, c in mine.items() if not c["pass"]]
+        context["failure_history"] = {
+            "baseline_known_failures": ps.get("baseline_known_failures", []),
+            "prior_recorded": ps["recorded_quality_failures"], "prior_recomputed": recomputed,
+            "resolved": [k for k in ps["recorded_quality_failures"] if k in mine and mine[k]["pass"]],
+            "persisting": [k for k in ps["recorded_quality_failures"] if k in now_failed],
+            "new": [k for k in now_failed if k not in ps["recorded_quality_failures"]]}
     exact = all(c["pass"] for c in checks if c["section"] == "exactness")
     failed = [f"{c['section']}: {c['check']}" for c in checks if not c["pass"]]
     return {"verdict": "pass" if checks and not failed else "fail", "exact": exact,

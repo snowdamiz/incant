@@ -1,0 +1,40 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 4,
+ "records": [
+  {
+   "test": "branch_name_refused",
+   "refused_before_export": true
+  },
+  {
+   "test": "build_input_missing_stops",
+   "stop_latched": true
+  },
+  {
+   "test": "exact_committed_freeze_exports",
+   "coverage": {
+    "build_input_roots": [
+     "crates",
+     "Cargo.toml",
+     "Cargo.lock",
+     "third_party",
+     "tools/cargo",
+     "rust-toolchain.toml"
+    ],
+    "build_inputs": 7,
+    "freeze_rows": 9,
+    "freeze_build_input_rows": 7,
+    "inputs_missing_from_freeze": [],
+    "freeze_rows_missing_from_commit": [],
+    "mismatched": [],
+    "mismatched_count": 0,
+    "exact": true
+   }
+  },
+  {
+   "test": "freeze_hash_mismatch_refused",
+   "refused_before_export": true
+  }
+ ]
+}

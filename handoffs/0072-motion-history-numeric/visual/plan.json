@@ -1,9 +1,9 @@
 {
  "packet": "0072-motion-history-numeric",
- "stage": "fixed-sharpness-visual",
- "build_stage": "fixed-sharpness-build",
- "status": "prepared for root's fixed-sharpness grants; frozen by the commit whose visual tree root pins",
- "evidence_namespace": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002",
+ "stage": "fixed-warmup-visual",
+ "build_stage": "fixed-warmup-build",
+ "status": "prepared for root's fixed-warmup grants; frozen by the commit whose visual tree root pins",
+ "evidence_namespace": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001",
  "history": {
   "original_review": {
    "commit": "9009f088ac230e31185e8ce64183ca93878e9444",
@@ -50,12 +50,66 @@
     "sha256": "bc1bece391ad89c9fa2ddc5b288ad904a81c8c38961a3e8ed1508b43b439f32e",
     "decision": "accepted_test_only_source_delta; moving/rasterized silhouette pairing remains a numerical/appearance responsibility"
    }
+  },
+  "sharpness_comparison": {
+   "source_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+   "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+   "plan_sha256": "c874115d80f54d3bf458b12204979dc2732016eef63ea41331b81e4dc703b9c3",
+   "result_commit": "48a688c58f15ce2951292471c5d37cd2cc1fdc9b",
+   "result": "handoffs/0072-motion-history-numeric/sharpness-result.md",
+   "evidence": "handoffs/0072-motion-history-numeric/fixed-sharpness-evidence (manifest 62e89fa2a5a5bdd7fae4551d9aee430f502310c9b72c1c5e54b4004bb89f6b87)",
+   "namespace": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002",
+   "root_audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/fixed-sharpness-final-root-20261013.json",
+    "sha256": "1dd3d56fb793efd6d2e4e90460e021de0084181cb4b160b76e6e714326646c77"
+   },
+   "verdict": "rejected: integrity pass, 357 submissions; 13 of 37 quality thresholds failed (root receipt quality_accepted false)",
+   "build_repair": {
+    "author": "astra",
+    "reason": "Retain001 compile-helper false failure: unit test build emits no ordinary rlib. New002 requires exact source and package/features, and exact rlib bytes whenever unit build emits an rlib. No GPU ran in001; thresholds/fixture/engine unchanged."
+   }
+  },
+  "warmup_source": {
+   "commit": "296e02268458afea21ff90e8aea820a3dec2b314",
+   "base_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+   "built_by": "astra",
+   "authored_in": "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant (same object store as this worktree)",
+   "changed_sources_sha256": {
+    "crates/incant_render/src/temporal/owner.rs": "f9fb45b3e29a8001c949010d3323eff177e1de44954098fee277aeadcdfcf201",
+    "crates/incant_render/src/temporal/system.rs": "96742ca9e43522a0166460a41b4d46f53f7daf8cf9ed26df33720f6115db5ae2",
+    "crates/incant_render/src/temporal_retained_tests.rs": "eed7c13c7b36ea79ed6b03eceab8645299f87446d55e731ebefa49f7b4544394"
+   },
+   "cargo_lock_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+   "doc": {
+    "path": "docs/spikes/fixed-temporal-warmup.md",
+    "sha256": "887adfe8bebb55db7f484ebf8d740f15c414f8f4e64eadb53daad371a99d9e97"
+   },
+   "qualification_archive": {
+    "path": "docs/spikes/evidence/fixed-temporal-warmup.json",
+    "sha256": "62e6d115dbeedb40e8391c92a19b112d8122a15d46c61624042b7cf04d35b7db"
+   },
+   "qualification_evidence": {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/fixed-temporal-warmup-001",
+    "source_json_sha256": "1ebb7ebca2c1dabe455536b3a6593dae4faeb5e419392de0e9adacd11ea6a5fb",
+    "checks_json_sha256": "8cd46116cb7b333795f5271c9628a9544cf0e0c6fba9a191e597b8daa696e7fb",
+    "results": "incant_render lib tests 133 passed (default) and 141 passed (cooked-materials), 41 ignored in each; strict cooked-materials all-target Clippy, fmt --check, generate_conventions --check and git diff --check all exit 0 (root's local CPU qualification; no GPU)"
+   },
+   "policy": "Accepted history age (TemporalFrame.samples, u8) advances only in TemporalState::accept; a frame without previous history restarts at 1 and a bypassed frame at 0; it saturates at 100. TemporalSystem::prepare writes options.x = Pending::history_weight() = 0 for samples <= 1, else min(configured history_weight, (samples - 1) / samples). Shader source, bindings, resource limits and the configured weight are unchanged.",
+   "independent_source_review": "running separately under root; not part of this preparation"
   }
  },
  "source_pinning": {
-  "expected_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
-  "supersedes": "0c80df4e3733ef6c18718753884f38b4f32f6b17 (production bytes identical; a143b5c0 adds 16 numeric controls in device_tests.rs only)",
-  "base_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+  "expected_commit": "296e02268458afea21ff90e8aea820a3dec2b314",
+  "base_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+  "accepted_baseline_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+  "delta_from_base": [
+   "crates/incant_render/src/temporal/owner.rs",
+   "crates/incant_render/src/temporal/system.rs",
+   "crates/incant_render/src/temporal_retained_tests.rs",
+   "docs/spikes/evidence/fixed-temporal-warmup-records.json.gz",
+   "docs/spikes/evidence/fixed-temporal-warmup.json",
+   "docs/spikes/fixed-temporal-warmup.md"
+  ],
   "expected_freeze": "named by root's build-ready.json after its source/helper/build audit",
   "rule": "Only root's build-ready.json pins the source: a 40-hex commit object and the freeze by path and SHA-256 (accepted 0073 routine, reused read-only). Every build input of the exported commit must equal the freeze exactly; the expected values above are for review, not trusted by the tools."
  },
@@ -68,8 +122,8 @@
   "rust-toolchain.toml"
  ],
  "grants": {
-  "build-ready.json": "packet, stage fixed-sharpness-build, holder, source_commit (40-hex), source_freeze {path, sha256}, visual_tree, target (~/.codex/*-target); optional prior_*_path/_sha256 pins",
-  "review-ready.json": "packet, stage fixed-sharpness-visual, holder, visual_tree, build_record_sha256 (SHA-256 of build/review.json), at least one prior_*release*_path/_sha256 pin, optional numeric_binary {path, sha256} for root's frozen same-source default library test binary"
+  "build-ready.json": "packet, stage fixed-warmup-build, holder, source_commit (40-hex), source_freeze {path, sha256}, visual_tree, target (~/.codex/*-target); optional prior_*_path/_sha256 pins",
+  "review-ready.json": "packet, stage fixed-warmup-visual, holder, visual_tree, build_record_sha256 (SHA-256 of build/review.json), at least one prior_*release*_path/_sha256 pin, optional numeric_binary {path, sha256} for root's frozen same-source (296e0226) default library test binary"
  },
  "expected_backend": "Metal",
  "review_config": {
@@ -80,10 +134,10 @@
   "reactive_strength": 0.5
  },
  "budgets": {
-  "submissions_max": 372,
-  "visual_submissions_max": 120,
-  "numeric_submissions_max": 252,
-  "planned_submissions": 357,
+  "submissions_max": 120,
+  "visual_submissions_max": 115,
+  "numeric_submissions_max": 5,
+  "planned_submissions": 110,
   "pngs_max": 16,
   "frame_max_width": 960,
   "frame_max_height": 540,
@@ -92,7 +146,7 @@
   "listing_timeout_s": 60,
   "numeric_timeout_s": 120,
   "review_case_timeout_s": 120,
-  "counting": "Every world-frame submission (temporal-off references and frames whose PNG is not kept included), every UI overlay submission and every numeric-control submission (102 + 150) is one actual submission. Readback copies are part of their frame's observation. Each charged child is debited, fsynced, under the global GPU lock before launch and never refunded; the ceilings include failed or interrupted attempts. Visual (world + UI) submissions are capped separately at 120. No whole-suite regression runs under this packet."
+  "counting": "Every world-frame submission (temporal-off references and frames whose PNG is not kept included), every UI overlay submission and every numeric submission is one actual submission: the retained regression's 5 accepted RetainedScene::submit calls each make exactly one queue.submit; its 3 refused calls return before any queue write or submission. Readback copies are part of their frame's observation. Each charged child is debited, fsynced, under the global GPU lock before launch and never refunded; the ceilings include failed or interrupted attempts. Visual (world + UI) submissions are capped at 115 and numeric at exactly 5 within the overall 120. The 252 direct shader-control submissions of the a143b5c0 run are not repeated. No whole-suite regression runs under this packet."
  },
  "builds": {
   "libtests": [
@@ -125,7 +179,7 @@
    "-j2",
    "--message-format=json-render-diagnostics"
   ],
-  "note": "libtests is only for the case where root supplies no frozen same-source default library test binary; no whole-workspace build."
+  "note": "libtests builds the default-feature incant_render library test binary that holds the retained regression, unless review-ready.json pins root's frozen same-source (296e0226) default library test binary; it must run before build.py review, which copies the fixture (libtests refuses afterwards). No whole-workspace build."
  },
  "numeric": {
   "binary": "incant_render-lib-tests",
@@ -137,22 +191,51 @@
    "--test-threads=1"
   ],
   "max_runs": 1,
-  "source_mount": "a143b5c0: lib.rs:35 `pub mod temporal`; temporal/mod.rs:12 `pub(crate) mod system`; temporal/system.rs:321-322 `#[path = \"device_tests.rs\"] mod device_tests` and 325-326 `#[path = \"coverage_device.rs\"] mod coverage_device`",
+  "source_mount": "296e0226 (unchanged from a143b5c0): lib.rs:20 `mod models;`; models.rs:42-43 `#[path = \"retained.rs\"] mod retained;`; retained.rs:640-642 `#[cfg(test)] #[path = \"temporal_retained_tests.rs\"] mod temporal_tests;`. The brief's `temporal_retained_tests::...` is the file name; the libtest path is models::retained::temporal_tests.",
   "tests": [
    {
-    "id": "resolve",
-    "test": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
-    "submissions": 102,
-    "bound": "device_tests.rs: for mode in 0..102 (14 original controls + 64 previous/current jitter-phase pairs + 8 registered resets + 8 nonzero-jitter transitions with nonuniform 2-D depth admitting one of four taps + 8 with every tap depth-refused, perspective/orthographic alternating); the one queue.submit is at line 328, on 8x8 targets"
-   },
-   {
-    "id": "coverage",
-    "test": "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection",
-    "submissions": 150,
-    "bound": "coverage_device.rs: for ortho in [false, true] x for case in CASES (5) x for tick in 1..16; the one queue.submit is at line 266, on 12x8 targets"
+    "id": "retained",
+    "test": "models::retained::temporal_tests::temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase",
+    "file": "crates/incant_render/src/temporal_retained_tests.rs",
+    "file_sha256": "eed7c13c7b36ea79ed6b03eceab8645299f87446d55e731ebefa49f7b4544394",
+    "attributes": "#[test] #[ignore = \"requires native GPU; Claude owns bounded numeric execution\"]",
+    "submissions": 5,
+    "bound": "5 accepted RetainedScene::submit calls (test lines 84, 124 and 143 on the retained owner, 151 on the replacement owner, 176 after the internal-scale change), each exactly one queue.submit (retained.rs:586, default features); 3 refused calls (line 97 zero-width target, lines 100-111 R32Float output format, line 139 singular world after invalidate_motion_history) return Err before any queue write or queue.submit; 65x33 Rgba8UnormSrgb target; no readback submission",
+    "ramp_assertions": "accepted_samples() is 1 after the first submission, still 1 after the two refused candidates, 2 after the second accepted submission, still 2 after the refused singular-world candidate, 1 after the motion-invalidated reset, 1 for the replacement owner and 1 after the DRS (internal scale 8, 33x17) reset: 7 new assertions",
+    "admission_limit": "returns early (and passes) when crate::motion::admission() fails; the probe case's temporal_pipelines_enabled check on the same adapter is required by the integrity check"
    }
   ],
-  "rule": "Run each only after `gpu.py list lib` shows both exact names; never broaden a filter. A different name is reported before any grant."
+  "rule": "Run only after `gpu.py list lib` shows the exact name once; never broaden a filter. A different name is reported before any grant.",
+  "retained_direct_controls": {
+   "rule": "Not rerun under this packet. Their sources, the kernels and the cooker are byte-identical between a143b5c0 and 296e0226, so the retained a143b5c0 results stay the evidence for those kernels. Both controls build their own resolve Frame uniform (device_tests.rs:171-179 options [0.5, ...]; coverage_device.rs:216-220 options [CONFIG.history_weight, ...]) and drive system.resolve directly; neither calls TemporalSystem::prepare or Pending::history_weight, and the old binary (e62cf78c..., built from a143b5c0) has no ramp. No claim is made that they exercise the new host policy.",
+   "unchanged_blobs_a143b5c0_and_296e0226": {
+    "crates/incant_render/src/temporal/resolve.wgsl": "fca0f949c8c3b4fd4db233c691f654accbc31567",
+    "crates/incant_render/src/temporal/copy.wgsl": "70890d11b3abbbead405d542f855cec9844e99c2",
+    "crates/incant_render/src/temporal_shader.rs": "ad72aec968ac83619c56ff83178eb7e07fd1e181",
+    "crates/incant_shader_cook (tree)": "06af86ecff57e76473e36aa67631687c9914dc9a",
+    "crates/incant_render/src/temporal/device_tests.rs": "1d871bf318b9a041bfc794c196a37f49d1606399",
+    "crates/incant_render/src/temporal/coverage_device.rs": "ee6c5827d7a5d7a54d85385583d8f2340e00891b",
+    "crates/incant_render/src/temporal/jitter.rs": "5521d0e71bb89ab5185232142da02e3eac3b04d9",
+    "crates/incant_render/src/temporal/targets.rs": "c8d4597c284c763b85bca2504e30b7cf74c8d98b"
+   },
+   "prior_results": [
+    {
+     "test": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
+     "submissions": 102,
+     "child": "numeric-resolve, PID 16633, exit 0, `1 passed; 0 failed; 0 ignored; 0 measured; 170 filtered out`",
+     "log": "handoffs/0072-motion-history-numeric/fixed-sharpness-evidence/logs/gpu-numeric-resolve.stdout.txt",
+     "log_sha256": "59762f014320b6b5dbe89adec9003fa9e09cad7efbe3512952ebf4978906f783"
+    },
+    {
+     "test": "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection",
+     "submissions": 150,
+     "child": "numeric-coverage, PID 16838, exit 0, `1 passed; 0 failed; 0 ignored; 0 measured; 170 filtered out`",
+     "log": "handoffs/0072-motion-history-numeric/fixed-sharpness-evidence/logs/gpu-numeric-coverage.stdout.txt",
+     "log_sha256": "bf25b40c43fe4120fae2ca2a075fafe9005a3347696765407bc225f0355ea53b"
+    }
+   ],
+   "binary": "incant_render-lib-tests e62cf78c618220b067ea569a75459d11e7907753c852dc71471c931fbb631e85 (a143b5c0)"
+  }
  },
  "review": {
   "binary": "temporal_visual_review",
@@ -308,16 +391,16 @@
   "frames": 96,
   "ui_submissions": 9,
   "review_submissions": 105,
-  "numeric_submissions": 252,
-  "submissions": 357,
+  "numeric_submissions": 5,
+  "submissions": 110,
   "pngs": 16,
-  "reserve_visual_submissions": 15,
-  "reserve_submissions": 15,
+  "reserve_visual_submissions": 10,
+  "reserve_submissions": 10,
   "reserve_pngs": 0
  },
  "comparison": {
-  "candidate_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
-  "note": "Thresholds are fixed-sharpness-design.md proposals plus every earlier coverage, ghost, reset and overlay constraint, unchanged and not relaxed. They are not plan gates. The baseline is reused only when the comparison is exact; the new viewport case has no baseline and uses absolute bounds.",
+  "candidate_commit": "296e02268458afea21ff90e8aea820a3dec2b314",
+  "note": "Thresholds are fixed-sharpness-design.md proposals plus every earlier coverage, ghost, reset and overlay constraint, byte-identical to the a143b5c0 comparison (plan c874115d) and not relaxed. They are not plan gates. The accepted baseline is reused only when the comparison is exact; the viewport case has no baseline and uses absolute bounds. The rejected a143b5c0 run is a second exact reference for the effect of the one ramp change, never a threshold.",
   "baseline": {
    "label": "accepted fixed-coverage run (9927598c, source e23776df)",
    "evidence": "handoffs/0072-motion-history-numeric/temporal-coverage-evidence",
@@ -497,17 +580,103 @@
    "same_phase_interior_max": 0,
    "rules": "still and pan: the 3 px border band's non-edge max difference may not exceed the inner viewport's; pan f24: no off-edge difference of 9 steps or more; outside the viewport: identical to the reference",
    "note": "candidate-only proposals: no baseline exists for this new case"
+  },
+  "prior": {
+   "label": "rejected C-reg sharpness run (48a688c5, source a143b5c0)",
+   "evidence": "handoffs/0072-motion-history-numeric/fixed-sharpness-evidence",
+   "screenshots": "handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots",
+   "manifest_sha256": "62e89fa2a5a5bdd7fae4551d9aee430f502310c9b72c1c5e54b4004bb89f6b87",
+   "source_commit": "a143b5c0f537bd35111e40e99626f40318a385ac",
+   "visual_tree": "b11a7d3aad4228eab0fee10024a87d46bb109560",
+   "review_binary_sha256": "81cb64692495792989fae28681a76de0e3085cc9a32abc27e3721b1a49d36980",
+   "compare_record": "analysis/compare-2026-10-13T120142.507964+0000.json",
+   "compare_record_sha256": "759ac37c423f102472700cb09d7e0fadc10be814170e264b09730a7093b18e33",
+   "cases": [
+    "probe",
+    "stationary",
+    "motion",
+    "excluded",
+    "transitions",
+    "skinned",
+    "timing",
+    "viewport"
+   ],
+   "pngs": [
+    "stationary-off.png",
+    "stationary-on-f16.png",
+    "stationary-activity.png",
+    "motion-object-on-f8.png",
+    "motion-object-off-f8.png",
+    "motion-pan-on-f6.png",
+    "motion-pan-off-f6.png",
+    "excluded-on-f8.png",
+    "excluded-off.png",
+    "excluded-activity.png",
+    "transition-cut-f7.png",
+    "transition-drs-f9.png",
+    "skinned-on-f6.png",
+    "skinned-off-f6.png",
+    "viewport-on-f24.png",
+    "viewport-off-f24.png"
+   ],
+   "identical_references": [
+    "stationary-off.png",
+    "motion-object-off-f8.png",
+    "motion-pan-off-f6.png",
+    "excluded-off.png",
+    "skinned-off-f6.png",
+    "viewport-off-f24.png"
+   ],
+   "recorded_quality_failures": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "registration: skinned-on-f6.png",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "baseline_known_failures": [
+    "stability: same_phase_f08_f16_interior_changed (baseline 17)",
+    "stability: halo_stationary-on-f16.png (baseline 1,048) and halo_excluded-on-f8.png (baseline 1,276)"
+   ],
+   "role": "Exactness (manifest, files, identity, recorded failures, temporal-off frames, adapter, toolchain, review config) gates the comparison. Every quality check is also evaluated on the prior run with the same code; its recomputed failures must equal the recorded 13. The side-by-side values and the resolved, persisting and new failures are context, never thresholds."
+  },
+  "history_free_frames": {
+   "rule": "Every frame a report records as temporal with has_previous false and not bypassed (the first frame of each owner and every cut, DRS or output-scale reset) must have the same rgba_sha256 as the same-named frame of the prior run (11 frames) and, where the case exists there, of the baseline (10 frames).",
+   "derivation": "A frame without previous history has samples = 1, so options.x = 0, and the shader returns registered_current before any blend (frame.depth.w < 0.5): the ramp cannot change it. The retained baseline and prior runs already agree on all 10 shared frames (measured from their report hashes).",
+   "compare_to": [
+    "prior",
+    "baseline"
+   ]
+  },
+  "ramp_expectations": {
+   "thresholds": "unchanged; no expectation is relaxed",
+   "unchanged_by_design": [
+    "history-free frames (history_free_frames rule)",
+    "temporal-off frames and the 6 off PNGs",
+    "UI pixels across phases (excluded case)",
+    "cut and DRS PNGs (reset rule against the baseline)"
+   ],
+   "predictions_to_measure": [
+    "skinned registration: the 2-D model predicts 0.204 -> 0.060 px at f6 (sharpness-result.md section 6)",
+    "accumulation frames 2-9 after each reset blend the current sample at 1/2 ... 1/9 instead of 1/10: early frame-to-frame changes rise. The excluded activity map (frames 2-8) lies entirely inside the ramp, so its >= 33-step count, 0 in both earlier runs, may rise; the threshold stays 0",
+    "stationary and viewport activity over frames 9-16 changes little (weights 8/9 then 0.9)",
+    "same-phase f8/f16: the first frame's residual weight falls from 0.48/0.21 to 0.125/0.053",
+    "short captures (motion f8 and f6, skinned f6, excluded f8) end inside the ramp: less history lag, more current-sample aliasing"
+   ]
   }
  },
- "amendments": [
-  {
-   "author": "astra",
-   "reason": "Retain001 compile-helper false failure: unit test build emits no ordinary rlib. New002 requires exact source and package/features, and exact rlib bytes whenever unit build emits an rlib. No GPU ran in001; thresholds/fixture/engine unchanged."
-  }
- ],
+ "amendments": [],
  "order": [
-  "CPU, root-supervised in the foreground under build-ready.json: lease.py acquire; build.py checkout (candidate a143b5c0 and its freeze); build.py toolchain; build.py review; build.py libtests only if root pins no library test binary; build.py lint (strict Clippy); lease.py release",
-  "GPU under review-ready.json: gpu.py list lib; gpu.py numeric resolve; gpu.py numeric coverage; gpu.py list review; gpu.py review probe|stationary|motion|excluded|transitions|skinned|timing|viewport in this order; gpu.py release",
-  "CPU: analyze.py check (fail-closed integrity); analyze.py compare (exact baseline comparison and thresholds; fails honestly); personal inspection of every PNG against the baseline and earlier captures; analyze.py publish (only from a current passing integrity summary)"
+  "CPU, root-supervised in the foreground under build-ready.json: lease.py acquire; build.py checkout (candidate 296e0226 and its freeze); build.py toolchain; build.py libtests (unless review-ready.json will pin root's frozen same-source library test binary; before review); build.py review; build.py lint (strict Clippy); lease.py release",
+  "GPU under review-ready.json: gpu.py list lib; gpu.py numeric retained; gpu.py list review; gpu.py review probe|stationary|motion|excluded|transitions|skinned|timing|viewport in this order; gpu.py release",
+  "CPU: analyze.py check (fail-closed integrity); analyze.py compare (exact comparison with the accepted baseline under unchanged thresholds, plus the exact rejected a143b5c0 run for the ramp's effect; fails honestly); personal inspection of every PNG against both runs; analyze.py publish (only from a current passing integrity summary)"
  ]
 }
