@@ -63,6 +63,7 @@ conventions and diff checks passed. No GPU, device or ordinary exported package
 was run for this script slice. The final packet retains the source002 199-case
 results separately from source003's added silent-owner control.
 
-Root independently accepted source002 and source003. Final evidence acceptance
-is separate. See [the retained manifest](evidence/native-session-hosted-physics/manifest.json)
+Root independently accepted source002, source003 and the final producer evidence.
+The current-main source relevance is separately recorded in
+[native-session-hosted-main248.md](native-session-hosted-main248.md). See [the retained manifest](evidence/native-session-hosted-physics/manifest.json)
 and its read-only verifier `tools/probes/native-session-hosted-physics/collect.py --verify-only`.

@@ -1,8 +1,8 @@
 # Implementation status
 
-The hosted opaque session checkpoint producer is independently accepted with 200 script cases per numerical mode and strict headless/UI/audio feature checks. It preserves actual silent mixer chronology, binds captured UI/audio owners before VM initialization and leaves persisted physics admission closed. Current-main composition is being qualified; producer execution is not relabeled. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
+The hosted opaque session checkpoint producer is independently accepted with 200 script cases per numerical mode and strict headless/UI/audio feature checks. It preserves actual silent mixer chronology, binds captured UI/audio owners before VM initialization and leaves persisted physics admission closed. Current-main248 composition has fourteen passing read-only checks: all 3,663 inputs are bound, with only the six accepted repair paths different and three matching dependency graphs. Final composition review and publication remain pending; producer execution is not relabeled. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
 
-Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; publication and successor hosted execution remain pending. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
+Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check; successor comprehensive execution remains pending. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
 
 Opaque headless TypeScript/native-physics session checkpoints have accepted producer tests: 195 script cases per numerical mode, 186 feature-off cases, strict Clippy and optional/lean/wasm compilation. The original manifest guard failure is retained; its three-manifest repair merged with PR246 and has separate focused script qualification. Current main246 composition matches all 3,656 accepted repaired implementation/build/tool inputs; ten read-only checks pass, selected normal graphs match and ordinary snapshot stays excluded. Final current-main review is accepted; PR247 merged after its exact-head required fast SUCCESS. Public physics byte saves and hosted UI/audio continuation remain refused. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
 
@@ -269,9 +269,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main247, 2026-10-13
+## Current overview — main248, 2026-10-13
 
-Development main247 includes the reviewed opt-in cooked renderer families and
+Development main248 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -296,7 +296,7 @@ conformance hit its configured deadline. Main243 contains the reviewed macOS
 timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
 PR232 and finished with 13 required successes, nine failures and one skipped
 comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
-awaiting publication and actual successor validation. Release remains `2a9d72ea`.
+merged in PR248 and await actual successor validation. Release remains `2a9d72ea`.
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
 and PR247 added headless native session checkpoints. These remain opt-in and

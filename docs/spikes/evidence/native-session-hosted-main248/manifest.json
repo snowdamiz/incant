@@ -1,0 +1,24 @@
+{
+  "source_composition_sha256": "6cc0b430ca291d2d29d181fccca679e3d44a27193b4a6802058e21a6b064976e",
+  "source_files": 3663,
+  "checks": [
+    "producer-verify",
+    "manifest",
+    "runtime-guard",
+    "producer-graph-det",
+    "graph-det",
+    "producer-graph-fast8",
+    "graph-fast8",
+    "producer-graph-ordinary",
+    "graph-ordinary",
+    "audit-det",
+    "audit-fast8",
+    "fmt",
+    "conventions",
+    "diff"
+  ],
+  "records": 28,
+  "archive_sha256": "7c835d99d6e7220e17a21240461b5993aaf09846de3374aefbbe57b08ff74c02",
+  "producer_manifest_sha256": "f311c9887e09ec1192b98d4ccbc775e77a48050c9a24507d9ddf5e5d6bbb5f66",
+  "scope": "Only six accepted main248 paths differ; two cfg-only Default declarations preserve checked construction, four isolated-probe/tool inputs are outside hosted library build. Producer200-case executions remain source003, no new compile or execution."
+}
