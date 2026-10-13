@@ -391,7 +391,11 @@ impl Renderer {
         let screen = upscaling.and_then(|p| p.screen_overlay());
         let (screen_color, screen_depth, screen_rect) = match screen {
             Some((color, depth, rect)) => (color, depth, rect),
-            None => (overlay.unwrap_or(&attachments.color), &attachments.depth, scene_rect),
+            None => (
+                overlay.unwrap_or(&attachments.color),
+                &attachments.depth,
+                scene_rect,
+            ),
         };
         let sprites = self.sprites.prepare(
             &self.device,

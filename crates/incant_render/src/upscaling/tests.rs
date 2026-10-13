@@ -103,7 +103,11 @@ fn all_owned_old_and_candidate_resources_are_admitted_before_allocation() {
         Err(UpscaleError::Capacity)
     );
     p.preflight(8192, 0, 0, 0).unwrap();
-    for (size, half, fits) in [(1923, false, true), (1924, false, false), (2048, true, true)] {
+    for (size, half, fits) in [
+        (1923, false, true),
+        (1924, false, false),
+        (2048, true, true),
+    ] {
         let frame = crate::resolution::FramePlan::new(
             [size, size],
             [0., 0., size as f32, size as f32],

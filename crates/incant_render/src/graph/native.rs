@@ -132,7 +132,9 @@ impl FrameGraph {
         {
             post.timed(crate::timing::GpuPass::Text, |e, q| t.encode(e, q));
         }
-        post.timed(crate::timing::GpuPass::Display, |e, q| frame.output.encode(e, q));
+        post.timed(crate::timing::GpuPass::Display, |e, q| {
+            frame.output.encode(e, q)
+        });
         retain(&mut post.0);
         if let Some(c) = post.1.take() {
             c.finish(&mut post.0);

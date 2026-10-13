@@ -349,7 +349,9 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     // With upscaling the composite was encoded at the end of the Models interval.
-    encoder.timed(crate::timing::GpuPass::Display, |e, q| frame.output.encode(e, q));
+    encoder.timed(crate::timing::GpuPass::Display, |e, q| {
+        frame.output.encode(e, q)
+    });
 }
 
 fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
