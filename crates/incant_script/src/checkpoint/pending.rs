@@ -64,6 +64,15 @@ impl PendingSessionCheckpoint {
         load_world: impl FnOnce(&[u8]) -> Result<NativeWorld>,
     ) -> Result<Self> {
         let sections = codec::sections(bytes, identity(&code))?;
+        Self::decode_sections(sections, code, actions, false, load_world)
+    }
+    pub(in crate::checkpoint) fn decode_sections(
+        sections: codec::Sections<'_>,
+        code: CompiledScript,
+        actions: InputActions,
+        persisted: bool,
+        load_world: impl FnOnce(&[u8]) -> Result<NativeWorld>,
+    ) -> Result<Self> {
         let active = codec::active(sections.active)?;
         let store = codec::store(sections.store)?;
         let schedule = codec::schedule(sections.schedule)?;
@@ -72,10 +81,16 @@ impl PendingSessionCheckpoint {
             .world
             .get(8..12)
             .map(|bytes| u32::from_le_bytes(bytes.try_into().unwrap()));
-        if !matches!(version, Some(3..=11)) {
-            return Err(CheckpointError::Invalid(
-                "session requires world save v3-v11",
-            ));
+        if if persisted {
+            version != Some(12)
+        } else {
+            !matches!(version, Some(3..=11))
+        } {
+            return Err(CheckpointError::Invalid(if persisted {
+                "persisted session requires world save v12"
+            } else {
+                "session requires world save v3-v11"
+            }));
         }
         let world = load_world(sections.world)?;
         if world.source_scene_fingerprint() != sections.origin {
@@ -96,7 +111,9 @@ impl PendingSessionCheckpoint {
         if sections.ui.is_some() {
             return Err(CheckpointError::Unsupported("hosted UI checkpoint feature"));
         }
-        if world.requires_audio_checkpoint() != sections.audio.is_some() {
+        if (world.requires_audio_checkpoint() && sections.audio.is_none())
+            || (!persisted && !world.requires_audio_checkpoint() && sections.audio.is_some())
+        {
             return Err(CheckpointError::Invalid("world/audio section pairing"));
         }
         #[cfg(feature = "audio")]

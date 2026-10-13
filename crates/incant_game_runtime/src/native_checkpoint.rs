@@ -7,10 +7,13 @@ use incant_runtime::{
 use incant_script::{NativeSessionCheckpoint, PendingSessionCheckpoint};
 mod hosted;
 mod offline;
+mod persisted;
+pub use persisted::MAX_PERSISTED_GAME_BYTES;
 
 /// Opaque in-memory physics, opted-in script data and admitted UI/audio state.
 /// Offline sample rate and game suspension belong to this enclosing owner.
-/// There is no byte importer, arbitrary guest heap or device transport restore.
+/// Data-file export is separately validated; byte loading creates a pending game.
+/// Arbitrary guest heaps and device transport restore remain unsupported.
 pub struct GameCheckpoint {
     pub(crate) native: NativeSessionCheckpoint,
     pub(crate) sample_rate: Option<u32>,
