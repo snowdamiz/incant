@@ -158,6 +158,7 @@ def prepare(args):
         refusals = negative_bindings(author, source)
         tx = author.edit('Connect existing Core HUD, cues and whole-session restart', bindings.commands(before, prior, source))
         after = author.call('project.read')['project']
+        receipt['hud'] = bindings.authored_hud(after)
         author.call('history.undo'); assert author.call('project.read')['project'] == before
         assert same_source(author.call('script.read', {'script_id': bindings.SCRIPT})['untrusted_source_data'], prior)
         author.call('history.redo'); assert author.call('project.read')['project'] == after
@@ -194,12 +195,13 @@ def prepare(args):
         author.close()
     # Localization gold values come from the real engine, not a Python ICU clone.
     scene = runpy.run_path(str(HERE / 'scene.py'))
-    texts = {locale: hud.resolve(binary, out / ('l10n-' + locale), locale, 4, scene['run'], scene['Session'])
+    texts = {locale: hud.resolve(binary, out / ('l10n-' + locale), locale, 4, scene['run'], scene['Session'],
+        table=after['string_tables'][receipt['hud']['table']], include_prompt='prompt' in receipt['hud'])
              for locale in hud.LOCALES}
     write(out / 'localized.json', texts)
     for name in ('win', 'lose'):
         actual = native(process, binary, observed / 'core.json', obs_out, receipt, name, recordings[name])
-        oracle.verify_hud(actual, texts['en'])
+        oracle.verify_hud(actual, texts['en'], receipt['hud'])
         assert oracle.game_logs(actual) == reports[name]['logs']['entries']
         assert actual['observations'] == reports[name]['observations']
         assert (obs_out / f'{name}.pcm').read_bytes() == (out / f'{name}.pcm').read_bytes()
@@ -220,12 +222,22 @@ def prepare(args):
         locale_out = out / ('locale-' + locale); locale_out.mkdir()
         author = Author(binary, observed / 'core.json', locale_out)
         try:
-            author.edit('Use existing Claude locale presentation ' + locale,
-                hud.present(bindings.SCENE, texts[locale],
-                    [scene['ASSETS'][k][0] for k in hud.DOCUMENT['fonts']], 4, locale, 'playing'))
+            commands = hud.present(bindings.SCENE, texts[locale],
+                [scene['ASSETS'][k][0] for k in hud.DOCUMENT['fonts']], 4, locale, 'playing')
+            # A public caller can bind an optional authored label before Claude
+            # adds it to this sample's presentation document. Preserve its style.
+            prompt = receipt['hud'].get('prompt')
+            if prompt is not None and prompt != hud.prompt():
+                node = copy.deepcopy(after['scenes'][bindings.SCENE]['entities'][prompt]['components']['UiNode'])
+                node['kind']['text']['content'] = texts[locale]['hud.prompt']
+                commands += [{'op': 'set_component', 'scene_id': bindings.SCENE, 'entity_id': prompt,
+                              'component': 'UiNode', 'value': node},
+                             {'op': 'reparent_entity', 'scene_id': bindings.SCENE, 'entity_id': prompt,
+                              'parent': receipt['hud']['inactive']}]
+            author.edit('Use existing Claude locale presentation ' + locale, commands)
             author.save_reopen()
             localized = native(process, binary, observed / 'core.json', locale_out, receipt, 'win', recordings['win'])
-            oracle.verify_hud(localized, texts[locale])
+            oracle.verify_hud(localized, texts[locale], receipt['hud'])
             assert (locale_out / 'win.pcm').read_bytes() == (out / 'win.pcm').read_bytes()
         finally:
             author.call('history.undo'); author.call('project.save'); author.close()
@@ -282,9 +294,7 @@ def ship(args):
             '--ui-viewport', '640x480', '--output', out / f'{name}.pcm'], cwd=player.parent, env=env)
         assert report['observations']['passed'] and report['logs']['dropped'] == 0
         assert digest(out / f'{name}.pcm') == report['pcm_sha256']
-        ui = report['render_input']['ui']; assert ui['widgets'] == 12 and ui['glyphs'] > 0 and ui['focus'] is None
-        expected = oracle.labels(texts, *oracle.game_state(report)[:2])
-        assert all(ui['sources'].get(owner) == text for owner, text in expected.items())
+        oracle.verify_ui(report, texts, receipt.get('hud'))
         write(out / f'{name}.json', report); actual[name] = report
         return report, oracle.pcm(out / f'{name}.pcm', report)
 

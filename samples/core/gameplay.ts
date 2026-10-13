@@ -17,7 +17,7 @@ type Config = {
 };
 type HudBinding = {
   table: string; health: string; collected: string; objective: string;
-  won: string; lost: string; result: string; inactive: string;
+  won: string; lost: string; result: string; inactive: string; prompt?: string;
 };
 type AudioBinding = Partial<Record<'music' | 'pickup' | 'damage' | 'won' | 'lost', string>>;
 let cached: Config | undefined;
@@ -28,19 +28,28 @@ function properties(value: NativeProp, field: string): { readonly [key: string]:
     throw Error(`Core Sample: ${field} must be an object`);
   return value as { readonly [key: string]: NativeProp };
 }
-function hudBinding(value: NativeProp | undefined): HudBinding | null {
+function hudBinding(value: NativeProp | undefined, context: NativeContext): HudBinding | null {
   if (value === undefined || value === null) return null;
   const p = properties(value, 'hud');
-  const result = {
+  const result: HudBinding = {
     table: id(p.table, 'hud.table'), health: id(p.health, 'hud.health'),
     collected: id(p.collected, 'hud.collected'), objective: id(p.objective, 'hud.objective'),
     won: id(p.won, 'hud.won'), lost: id(p.lost, 'hud.lost'),
     result: id(p.result, 'hud.result'), inactive: id(p.inactive, 'hud.inactive'),
   };
+  if (Object.hasOwn(p, 'prompt')) result.prompt = id(p.prompt, 'hud.prompt');
   const widgets = [result.health, result.collected, result.objective, result.won,
     result.lost, result.result, result.inactive];
+  if (result.prompt !== undefined) widgets.push(result.prompt);
   if (new Set(widgets).size !== widgets.length) throw Error('Core Sample: HUD roles must be distinct');
   if (Object.keys(p).some(key => !Object.hasOwn(result, key))) throw Error('Core Sample: unknown HUD binding');
+  for (const [role, owner] of Object.entries(result)) {
+    if (role === 'table') continue;
+    const widget = context.hud.widgets.find(widget => widget.id === owner);
+    if (!widget) throw Error(`Core Sample: missing HUD widget ${role}`);
+    const expected = role === 'result' || role === 'inactive' ? 'container' : 'label';
+    if (widget.role !== expected) throw Error(`Core Sample: wrong HUD widget kind ${role}`);
+  }
   return result;
 }
 function audioBinding(value: NativeProp | undefined): AudioBinding | null {
@@ -83,7 +92,7 @@ function config(context: NativeContext): Config {
     exit: id(p.exit, 'exit'), enemies: ids(p.enemies, 'enemies'), pickups: ids(p.pickups, 'pickups'),
     camera: p.camera === undefined || p.camera === null ? null : id(p.camera, 'camera'),
     speed: speed(p.speed, 3), enemySpeed: speed(p.enemySpeed, 1.5), jumpSpeed: speed(p.jumpSpeed, 6),
-    hud: hudBinding(p.hud), audio: audioBinding(p.audio),
+    hud: hudBinding(p.hud, context), audio: audioBinding(p.audio),
   };
   const owned = [result.player, result.navigation, result.exit, ...result.enemies, ...result.pickups];
   if (result.camera) owned.push(result.camera);
@@ -138,16 +147,20 @@ function present(context: NativeContext, c: Config, state: Progress, previous: P
       context.commands.setUiText(h.collected, text('hud.samples', {
         collected: state.collected.length, total: c.pickups.length,
       }));
-      context.commands.setUiText(h.objective, text(
-        state.collected.length === c.pickups.length ? 'hud.objective.exit' : 'hud.objective.collect'));
     }
+    if (refresh || displayed!.collected !== state.collected.length || displayed!.phase !== state.phase)
+      context.commands.setUiText(h.objective, state.phase === 'won' ? '' : text(
+        state.collected.length === c.pickups.length ? 'hud.objective.exit' : 'hud.objective.collect'));
     if (refresh) {
       context.commands.setUiText(h.won, text('hud.won'));
       context.commands.setUiText(h.lost, text('hud.lost'));
+      if (h.prompt !== undefined) context.commands.setUiText(h.prompt, text('hud.prompt'));
     }
     if (displayed === undefined || displayed.phase !== state.phase) {
       context.commands.setParent(h.won, state.phase === 'won' ? h.result : h.inactive);
       context.commands.setParent(h.lost, state.phase === 'lost' ? h.result : h.inactive);
+      if (h.prompt !== undefined)
+        context.commands.setParent(h.prompt, state.phase === 'playing' ? h.inactive : h.result);
     }
     displayed = { health: state.health, collected: state.collected.length, phase: state.phase, locale: localeKey };
   }

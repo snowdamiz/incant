@@ -1093,6 +1093,20 @@ Checkpoint17 finished with 20 required successes and three failures and was not 
 
 The sanitized Claude0065 hint/wrapping/font changes are composed with main190 and independently accepted for scoped integration; the fast publication check remains pending. Seven CPU checks, 14 native positive processes, four-locale font coverage and exact baseline gameplay/PCM pass. Result-title/narrow contrast and separate prompt/objective follow-ups remain open; no new rendered or device acceptance. See [integration evidence](docs/spikes/core-live-hud-main190.md).
 
+## Core optional result-label binding — producer CPU proof accepted
+
+The sample accepts an explicitly authored optional `hud.prompt` label and clears
+the objective on winning. Result parenting and whole-session restart restore the
+expected text/parents while the existing 12-widget HUD stays supported. Twenty
+focused Python tests, strict TypeScript, 28 successful native processes and two
+fresh source/map/build-deleted ordinary packages pass. Twenty shipping processes
+include eight complete R/Start/held-input reset routes with exact fresh-state and
+concatenated PCM comparisons. Nine exact native refusals pass. Independent source
+and final execution review are accepted; current-main integration is pending.
+The production prompt node/localization/style is still Claude-owned and absent;
+this is not appearance or device/performance acceptance. Prior 0065 evidence stays
+immutable. [Contract/evidence](docs/spikes/core-result-hud.md).
+
 ## Historical integration snapshots
 
 The paragraphs in this section preserve the state at earlier integrations. Their

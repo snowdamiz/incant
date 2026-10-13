@@ -1,10 +1,14 @@
 """Binding/proof boundary tests; synthetic data is not native execution evidence."""
 import copy
+import json
 import struct
 import unittest
 
 import bindings
 import binding_oracle as oracle
+import hud
+from art import ids
+from unittest.mock import patch
 from verify_bindings import same_source
 
 
@@ -12,10 +16,13 @@ def document():
     entities = {owner: {'components': {'UiNode': {'kind': {'role':
         'container' if role in ('result', 'inactive') else 'label'}}}}
         for role, owner in bindings.HUD.items() if role != 'table'}
+    for index in (1, 2, 3, 6, 8):
+        entities[ids.widget(index)] = {'components': {'UiNode': {'kind': {
+            'role': 'root' if index == 1 else 'label' if index == 8 else 'container'}}}}
     entities.update({owner: {'components': {'AudioSource': {'gain_db': -4}}}
                      for owner in bindings.AUDIO.values()})
     entities[bindings.CONTROLLER] = {'components': {'Script': {
-        'source': bindings.SCRIPT, 'props': {'speed': 3.4, 'enemySpeed': 1.7}}}}
+        'source': bindings.SCRIPT, 'props': {'speed': 3.4, 'enemySpeed': 1.7, 'hud': dict(bindings.HUD)}}}}
     return {'scenes': {bindings.SCENE: {'entities': entities}},
             'string_tables': {bindings.HUD['table']: {}},
             'settings': {'input_actions': {'move': {'kind': 'axis2', 'dead_zone': .1}}}}
@@ -59,6 +66,78 @@ class Bindings(unittest.TestCase):
         del value['string_tables']  # Canonical document serialization omits empty tables.
         with self.assertRaisesRegex(ValueError, '^Core HUD string table is missing$'):
             bindings.commands(value, {}, '')
+
+    def test_optional_prompt_is_preserved_but_unknown_missing_duplicate_and_wrong_kind_refuse(self):
+        value = document(); owner = ids.widget(13)
+        props = value['scenes'][bindings.SCENE]['entities'][bindings.CONTROLLER]['components']['Script']['props']
+        props['hud']['prompt'] = owner
+        value['scenes'][bindings.SCENE]['entities'][owner] = {'components': {'UiNode': {'kind': {'role': 'label'}}}}
+        version = {'state': 'present', 'sha256': 'a' * 64}
+        result = bindings.commands(value, {'version': version}, 'source')
+        self.assertEqual(result[1]['value']['props']['hud']['prompt'], owner)
+        self.assertEqual(len(bindings.widget_ids(props['hud'])), 13)
+        for change, error in [('unknown', 'unknown roles'), ('missing', 'required role is missing'),
+                              ('duplicate', 'roles must be distinct'), ('wrong-kind', 'role mismatch: prompt'),
+                              ('absent-node', 'widget is missing: prompt'), ('unbound', 'inventory differs')]:
+            invalid = copy.deepcopy(value); entities = invalid['scenes'][bindings.SCENE]['entities']
+            selected = entities[bindings.CONTROLLER]['components']['Script']['props']['hud']
+            if change == 'unknown': selected['other'] = owner
+            if change == 'missing': del selected['objective']
+            if change == 'duplicate': selected['prompt'] = selected['won']
+            if change == 'wrong-kind': entities[owner]['components']['UiNode']['kind']['role'] = 'container'
+            if change == 'absent-node': del entities[owner]
+            if change == 'unbound': del selected['prompt']
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, error):
+                bindings.commands(invalid, {'version': version}, 'source')
+
+    def test_win_clears_objective_without_pickup_change_and_fresh_run_restores_it(self):
+        texts = {name: name for name, _, _ in hud.requests(4, True)}
+        selected = bindings.roles(ids.widget(13))['hud']
+        before = oracle.labels(texts, 2, 4, 'playing', selected)
+        won = oracle.labels(texts, 2, 4, 'won', selected)
+        self.assertEqual(before[bindings.HUD['objective']], 'hud.objective.exit')
+        self.assertEqual(won[bindings.HUD['objective']], '')
+        self.assertEqual(oracle.labels(texts, 3, 0, 'playing', selected)[bindings.HUD['objective']],
+                         'hud.objective.collect')
+        self.assertEqual(won[selected['prompt']], 'hud.prompt')
+        report = {'tick': 3, 'logs': {'entries': []}}
+        for owner, text in sorted(oracle.labels(texts, 3, 0, 'playing', selected).items()):
+            report['logs']['entries'].append({'tick': 1, 'message': 'proof.hud ' + json.dumps([owner, text])})
+        report['logs']['entries'] += [{'tick': 2, 'message': 'core.won tick=2 health=3 pickups=0'},
+            {'tick': 3, 'message': 'proof.hud ' + json.dumps([bindings.HUD['objective'], ''])}]
+        oracle.verify_hud(report, texts, selected)
+        report['logs']['entries'][-1]['message'] = 'proof.hud ' + json.dumps([bindings.HUD['objective'], 'stale'])
+        with self.assertRaises(AssertionError): oracle.verify_hud(report, texts, selected)
+
+    def test_ui_inventory_rejects_extra_or_missing_labels_and_wrong_widget_count(self):
+        texts = {name: name for name, _, _ in hud.requests(4, True)}
+        for selected in (bindings.HUD, bindings.roles(ids.widget(13))['hud']):
+            report = {'logs': {'entries': []}, 'render_input': {'ui': {
+                'widgets': len(bindings.widget_ids(selected)), 'glyphs': 1, 'focus': None,
+                'sources': oracle.labels(texts, 3, 0, 'playing', selected)}}}
+            oracle.verify_ui(report, texts, selected)
+            for change in ('extra', 'missing', 'count'):
+                bad = copy.deepcopy(report); ui = bad['render_input']['ui']
+                if change == 'extra': ui['sources'][ids.widget(99)] = 'extra'
+                if change == 'missing': del ui['sources'][bindings.HUD['health']]
+                if change == 'count': ui['widgets'] += 1
+                with self.subTest(change=change), self.assertRaises(AssertionError):
+                    oracle.verify_ui(bad, texts, selected)
+
+    def test_optional_authored_node_contract_and_present_reset(self):
+        spec = copy.deepcopy(hud.DOCUMENT)
+        prompt = copy.deepcopy(spec['widgets'][7])
+        prompt.update(index=13, name='Prompt fixture', binding='prompt', parent=10, text={'key': 'hud.prompt'})
+        spec['widgets'].append(prompt)
+        with patch.object(hud, 'DOCUMENT', spec):
+            self.assertEqual(hud.prompt(), ids.widget(13))
+            texts = {name: name for name, _, _ in hud.requests(4)}
+            for phase in ('playing', 'won', 'lost'):
+                commands = hud.present(bindings.SCENE, texts, [], 4, 'en', phase)
+                parents = {c['entity_id']: c['parent'] for c in commands if c['op'] == 'reparent_entity'}
+                self.assertEqual(parents[ids.widget(13)], bindings.HUD['inactive' if phase == 'playing' else 'result'])
+            spec['widgets'].append(prompt)
+            with self.assertRaisesRegex(ValueError, 'duplicate prompt'): hud.prompt()
 
     def test_restart_timeline_preserves_original_route_and_separate_host_steps(self):
         one = oracle.cases()['win']; original = copy.deepcopy(one)
