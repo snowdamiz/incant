@@ -1,0 +1,37 @@
+{
+  "commands": [
+    {
+      "name": "metal-version",
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metal",
+        "--version"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/metal-version.log",
+      "sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2"
+    },
+    {
+      "name": "metal-link",
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metallib",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/grid.air",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/grid.metallib"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/metal-link.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "metallib": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/grid.metallib",
+    "bytes": 8619,
+    "sha256": "cb95215c57003a0082b0fbedc88bbebbfb230a3153c6c6064e7324a90bbbce03"
+  }
+}

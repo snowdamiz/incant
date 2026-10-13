@@ -1,0 +1,70 @@
+[
+  {
+    "name": "cook",
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_shader_cook"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 1.8939790725708008,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/cook.log",
+    "sha256": "2e63cf0ecc6445869b57f1606cfb9ed8e162f627682b5028290b870a566a1e48"
+  },
+  {
+    "name": "cluster-alone",
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_render",
+      "--features",
+      "cooked-clusters"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 69.40236282348633,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/cluster-alone.log",
+    "sha256": "bf8be473b30736f669f4f0301e3fb63618b9af982cf83437710e61a3306ceb8f"
+  },
+  {
+    "name": "all-cooked",
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_render",
+      "--features",
+      "cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters"
+    ],
+    "exit": 0,
+    "elapsed_seconds": 6.971466064453125,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/all-cooked.log",
+    "sha256": "874a56e8b448e3bd2fba200108bb995501cfc3f8034addd424c33812bb4cc990"
+  },
+  {
+    "name": "clippy",
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+      "clippy",
+      "--locked",
+      "-p",
+      "incant_shader_cook",
+      "-p",
+      "incant_render",
+      "--all-targets",
+      "--features",
+      "cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 101,
+    "elapsed_seconds": 41.072466135025024,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/clippy.log",
+    "sha256": "ed71369dad038d63748b8328671c8d8575a428e46d1955ec6893f86153f69f5f"
+  }
+]

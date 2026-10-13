@@ -1,0 +1,58 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/opt/homebrew/bin/spirv-val",
+        "--target-env",
+        "vulkan1.0",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/artifacts/Vulkan-Compute.shader"
+      ],
+      "exit": 0,
+      "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/offline-0.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "/opt/homebrew/bin/spirv-val",
+        "--target-env",
+        "spv1.0",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/artifacts/Vulkan-Compute.shader"
+      ],
+      "exit": 0,
+      "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/offline-1.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "metal",
+        "-std=macos-metal2.4",
+        "-x",
+        "metal",
+        "-c",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/artifacts/Metal-Compute.shader",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/grid.air"
+      ],
+      "exit": 0,
+      "output": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-004/offline-2.log",
+      "sha256": "1ee19dabe84d7596a24e95d4bf1d5e49ee1e54f92521e4acf4bcac4156139c52"
+    }
+  ],
+  "exact_spirv_change": [
+    {
+      "word_index": 265,
+      "removed_words": [
+        262215,
+        12,
+        6,
+        4
+      ]
+    }
+  ],
+  "old_sha256": "16971d1adb3779b2bbe7bbb424279ddb36a027a6d36c4d1241e6e024c69dfb12",
+  "new_sha256": "9cd2cf8769aad9600726f01a4b742f9d7e392e913210756bfcd753d5d4e116ad",
+  "air_sha256": "0792e651993c9091d3f5440fb139729276e04f859a473812faa0bb7f0b66d9f4"
+}

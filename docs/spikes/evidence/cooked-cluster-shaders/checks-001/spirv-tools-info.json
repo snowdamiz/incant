@@ -1,0 +1,104 @@
+{
+  "formulae": [
+    {
+      "name": "spirv-tools",
+      "full_name": "spirv-tools",
+      "tap": "homebrew/core",
+      "oldnames": [],
+      "aliases": [],
+      "versioned_formulae": [],
+      "desc": "API and commands for processing SPIR-V modules",
+      "license": "Apache-2.0",
+      "homepage": "https://github.com/KhronosGroup/SPIRV-Tools",
+      "versions": {
+        "stable": "1.4.363.0",
+        "head": "HEAD",
+        "bottle": true
+      },
+      "urls": {
+        "stable": {
+          "url": "https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/vulkan-sdk-1.4.363.0.tar.gz",
+          "tag": null,
+          "revision": null,
+          "using": null,
+          "checksum": "e6c83a215538fbfd265ccf398d3877985055df1273dbed73912bd05307664688"
+        },
+        "head": {
+          "url": "https://github.com/KhronosGroup/SPIRV-Tools.git",
+          "branch": "main",
+          "using": null
+        }
+      },
+      "patches": [],
+      "revision": 0,
+      "version_scheme": 1,
+      "compatibility_version": null,
+      "autobump": true,
+      "no_autobump_message": null,
+      "skip_livecheck": false,
+      "bottle": {
+        "stable": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_golden_gate": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/spirv-tools/blobs/sha256:be9c608d9d4062e661bf54c48df8eefcda66503655a68bcf251621eb4b4592d3",
+              "sha256": "be9c608d9d4062e661bf54c48df8eefcda66503655a68bcf251621eb4b4592d3"
+            }
+          }
+        }
+      },
+      "pour_bottle_only_if": null,
+      "keg_only": false,
+      "keg_only_reason": null,
+      "options": [],
+      "build_dependencies": [
+        "cmake",
+        "spirv-headers"
+      ],
+      "dependencies": [],
+      "test_dependencies": [],
+      "recommended_dependencies": [],
+      "optional_dependencies": [],
+      "uses_from_macos": [
+        {
+          "python": "build"
+        }
+      ],
+      "uses_from_macos_bounds": [
+        {}
+      ],
+      "requirements": [],
+      "conflicts_with": [],
+      "conflicts_with_reasons": [],
+      "link_overwrite": [],
+      "caveats": null,
+      "installed": [],
+      "linked_keg": null,
+      "pinned": false,
+      "outdated": false,
+      "deprecated": false,
+      "deprecation_date": null,
+      "deprecation_reason": null,
+      "deprecation_replacement_formula": null,
+      "deprecation_replacement_cask": null,
+      "deprecate_args": null,
+      "disabled": false,
+      "disable_date": null,
+      "disable_reason": null,
+      "disable_replacement_formula": null,
+      "disable_replacement_cask": null,
+      "disable_args": null,
+      "post_install_steps": [],
+      "post_install_defined": false,
+      "service": null,
+      "tap_git_head": "cd76abc6d8bdcfaffe8026a0f3f588f6d34be494",
+      "ruby_source_path": "Formula/s/spirv-tools.rb",
+      "ruby_source_checksum": {
+        "sha256": "ee482cd99e296b4b0f0411a4c32047dd10202ad18f7a8d62847025892f6bce66"
+      }
+    }
+  ],
+  "casks": []
+}

@@ -122,7 +122,7 @@ impl Renderer {
         // caller can submit a frame; frame preparation only looks up handles.
         let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
         let environments = environment::EnvironmentSystem::new(&device, &queue);
-        let lighting = lighting::LightingSystem::new(&device);
+        let lighting = lighting::LightingSystem::new(&device, adapter.get_info().backend)?;
         let materials = materials::MaterialSystem::new(
             &device,
             &queue,

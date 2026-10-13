@@ -1,0 +1,72 @@
+{
+  "commands": [
+    {
+      "name": "original_ci_diagnostic",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-005/ci-diagnostic-original.log",
+      "sha256": "6a639275cc85359747c627f8c802f373f9db1eee5afb2df7944c8a2263548f44",
+      "exit": 101,
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_shader_cook",
+        "--test",
+        "compute",
+        "naga_reader_atomic_aggregate_limitation_is_explicit"
+      ],
+      "profile": "ci"
+    },
+    {
+      "name": "ci_focused",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-006/ci-focused.log",
+      "sha256": "677a0a32300d5ddbf96665ec60ee78e582ca21598064083e912a58ada897ca96",
+      "exit": 0,
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_shader_cook",
+        "--lib",
+        "--test",
+        "compute"
+      ],
+      "profile": "ci"
+    },
+    {
+      "name": "ci_clippy",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-cluster-checks-006/ci-clippy.log",
+      "sha256": "15392f102ddae4d5866a3240f5cd30033cb464c850b0a6d57b5061fdab3e93ad",
+      "exit": 0,
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_shader_cook",
+        "--lib",
+        "--test",
+        "compute",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "profile": "ci"
+    }
+  ],
+  "passed": 7,
+  "failed": 0,
+  "ignored": 0,
+  "source_delta": [
+    "crates/incant_shader_cook/tests/compute.rs"
+  ],
+  "producer_hash_identical_to_dev": true,
+  "note": "Vulkan bytes differ through Naga debug metadata, separately validated; Metal/HLSL identical."
+}

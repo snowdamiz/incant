@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Fixed cluster assignment shaders — CPU/compiler checks passed
+
+The opt-in compute cooker preserves the cluster WGSL/algorithm while emitting
+fixed MSL, SPIR-V and HLSL. Explicit allocation lengths and static workgroup
+locals cover Metal passthrough's missing reflection; a checked workgroup-only
+SPIR-V decoration correction passes independent Vulkan validation. CPU checks,
+clusters-only/combined/default/browser configurations, Clippy and the runtime
+graph pass. Independent CPU/compiler source review is accepted. Native GPU, Claude appearance,
+Vulkan/DX12 execution and phone performance gates remain open.
+[Contract and evidence](docs/spikes/cooked-cluster-shaders.md).
+
 ## Fixed material shaders — CPU/compiler checks passed
 
 The opt-in material path cooks the unchanged imported-material, light and shadow
