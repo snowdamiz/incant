@@ -37,8 +37,8 @@ pass 138 native and 227 snapshot cases and all 28 scoped checks. Four fresh
 captures per dimension/mode continue for 156 paired steps, plus 20 CCD steps;
 3D also checks 32 steps under each friction model. The wake-tick-7 refusal stays
 explicit. Current executable copies are retained immediately per mode.
-Producer and current-source reviews are accepted; final current-main evidence
-review and publication are pending. Capture provenance is supplied only by the
+Producer, current-source and final current-main evidence reviews are accepted;
+publication awaits the required exact-head fast check. Capture provenance is supplied only by the
 exclusive native harness. Outer stable-ID/ECS/event owners and public
 physics-save admission remain closed. Historical source002 producer broad
 binaries were not retained; its original logs and four final003 focused binaries

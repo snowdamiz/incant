@@ -2,7 +2,7 @@
 
 The current composition is `08377c173c5e89d0a9cd2c990bdc4fa3cd84cae6`, based on actual main241 `e281fe7456c7fbb85349e109fcdff3643c701256`. It preserves accepted producer `ea4f6e80196f49e153248d22aed83d5412cae87b` through source/documentation cherry-picks. All 174 affected source, pin and tool inputs are producer-exact. Across 2,098 relevant closure files, the only difference is main's existing snapshot Error declaration ordering; no ordinal encoding or numeric representation was introduced. The root lock retains 968 identities.
 
-Root accepted the producer (`1bc33265`) and this source composition (`f2e0d9d`). The current packet is awaiting independent final evidence review before publication. Its [manifest](evidence/physics-native-world-main241.json), [lossless records](evidence/physics-native-world-main241/records.json.gz) and [assertion-only verifier](evidence/physics-native-world-main241/verify.py) bind every current source and result. The verifier performs no builds or execution; run the original retained script with `--verify-only` for full local replay.
+Root accepted the producer (`1bc33265`) and this source composition (`f2e0d9d`). Root independently accepted the final current-main packet (`f6158882`), including a complete assertion-only replay and the portable actual Dx12 evidence. Publication awaits the required exact-head fast check. Its [manifest](evidence/physics-native-world-main241.json), [lossless records](evidence/physics-native-world-main241/records.json.gz) and [assertion-only verifier](evidence/physics-native-world-main241/verify.py) bind every current source and result. The verifier performs no builds or execution; run the original retained script with `--verify-only` for full local replay.
 
 ## Current execution
 
