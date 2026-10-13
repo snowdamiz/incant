@@ -61,8 +61,8 @@ appearance or device acceptance is inferred. See [Core result evidence](docs/spi
 The next checked-format component preserves Rapier arena slots/free-chain order,
 generations, dense payload-row mappings and stale/invalidated Coarena rows.
 Thirty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
-pinned 2D/3D one-way observations. Independent source review is accepted; final
-evidence review is pending. There is still no live
+pinned 2D/3D one-way observations. Independent source and final evidence reviews
+are accepted. There is still no live
 construction or physics-save runtime route; contact/island/payload/native owner
 composition remains required. [Arena contract](docs/spikes/physics-inert-arenas.md).
 

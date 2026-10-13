@@ -1203,13 +1203,23 @@
       "bytes": 1847,
       "retained": "docs/spikes/evidence/physics-inert-arenas/7e1471217753ca908583282647d4b710f3f2f48a346849938788508f7c9eee21.gz",
       "retained_sha256": "794bd102a3fbb755127b9d8e664d704e43e57a2117b27c1e6f8c26145b337399"
+    },
+    {
+      "name": "independent-final-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/physics-inert-arenas-final-20261013.json",
+      "sha256": "c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8",
+      "bytes": 876,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8.gz",
+      "retained_sha256": "90633f9da0c3f5ef6de847d904176b1298818f5e1236ebb1c3ac65345c0fc53c"
     }
   ],
   "independent_review": {
     "source": "accepted",
     "source_receipt_sha256": "7e1471217753ca908583282647d4b710f3f2f48a346849938788508f7c9eee21",
     "source_receipt_retained": "docs/spikes/evidence/physics-inert-arenas/7e1471217753ca908583282647d4b710f3f2f48a346849938788508f7c9eee21.gz",
-    "final_evidence": "pending"
+    "final_evidence": "accepted",
+    "final_receipt_sha256": "c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8",
+    "final_receipt_retained": "docs/spikes/evidence/physics-inert-arenas/c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8.gz"
   },
   "limitations": [
     "PhysicsUnsupported and world/session versions unchanged",

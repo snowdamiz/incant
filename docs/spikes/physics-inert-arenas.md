@@ -105,7 +105,7 @@ Rapier observation and serde dependency edges; the normal crate remains std-only
 All-target Clippy, normal wasm32 compilation, the selected std-only graph,
 existing physics runtime dependency guards, formatting and convention checks
 also pass. Independent source review accepted all seventeen frozen inputs;
-final evidence review remains pending.
+independent final evidence review also accepted the retained packet.
 [Retained evidence](evidence/physics-inert-arenas.json) binds both frozen source
 iterations, the pinned dependency files, command receipts and lossless raw logs.
 
