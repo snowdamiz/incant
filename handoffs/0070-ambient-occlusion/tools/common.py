@@ -292,6 +292,12 @@ def compiler_inputs(env):
     record["sysroot_digest"] = digest.hexdigest()
     record["rustc_vV"] = _run_text([record["tools"]["rustc"]["path"], "-vV"], env)
     record["cargo_V"] = _run_text([f"{RUSTUP_BIN}/cargo", "-V"], env)
+    # A rustup directory override outranks rust-toolchain.toml; refuse any other release.
+    pinned = tomllib.loads((ROOT / "rust-toolchain.toml").read_text())["toolchain"]["channel"]
+    release = re.search(r"^release: (\S+)$", record["rustc_vV"], re.M)
+    if release is None or release.group(1) != pinned:
+        raise Refused(f"rustc is not the pinned toolchain {pinned}: {record['rustc_vV'][:200]!r}")
+    record["pinned_channel"] = pinned
     return record
 
 

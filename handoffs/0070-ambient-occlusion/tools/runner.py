@@ -282,6 +282,9 @@ def build(args, plan):
                    if d["path"] in unchanged and d["sha256"] != unchanged[d["path"]]]
         if c.helper_digest()[0] != digest or changed or drifted:
             raise Refused(f"helper bytes or working tree changed during the build: {changed + drifted}")
+        if c.compiler_inputs(env) != compilers \
+                or c.cargo_config_audit(env, plan, grant.get("approved_cargo_configs", {})) != audit:
+            raise Refused("compiler binaries or Cargo configuration changed during the build")
         record = {"format": "incant-0070-build-v1", "grant_sha256": grant_sha, "grant": grant,
                   "source_before": freeze, "source_after": after, "helper_digest": digest,
                   "helper_files": helper_files, "helper_lock": lock, "cargo_config_audit": audit,

@@ -132,6 +132,49 @@ def environment(scratch):
         os.environ.update(saved)
 
 
+@check("compiler inputs hash the resolved tools, change on a swap and refuse an unpinned release")
+def toolchain(scratch):
+    work, host = scratch / "toolchain", "aarch64-apple-darwin"
+    for relative in ("bin/rustup", "bin/cargo", "bin/rustc", "tools/rustc", "tools/cargo", "tools/clippy-driver",
+                     "tools/cargo-clippy", "tools/rustfmt", "sysroot/lib/librustc_driver.dylib",
+                     f"sysroot/lib/rustlib/{host}/lib/libstd.rlib"):
+        (work / relative).parent.mkdir(parents=True, exist_ok=True)
+        (work / relative).write_bytes(relative.encode())
+    pinned = c.tomllib.loads((c.ROOT / "rust-toolchain.toml").read_text())["toolchain"]["channel"]
+    release = {"value": pinned}
+
+    def run_text(argv, env, cwd=c.ROOT):  # stands in for rustup/rustc/cargo; nothing is executed
+        if argv[1:2] == ["which"]:
+            return str(work / "tools" / argv[2])
+        if argv[1:] == ["--print", "sysroot"]:
+            return str(work / "sysroot")
+        if argv[1:] == ["-vV"]:
+            return f"rustc {release['value']}\nhost: {host}\nrelease: {release['value']}"
+        if argv[1:] == ["-V"]:
+            return f"cargo {release['value']}"
+        raise AssertionError(argv)
+
+    saved = c._run_text, c.RUSTUP_BIN
+    c._run_text, c.RUSTUP_BIN = run_text, str(work / "bin")
+    try:
+        record = c.compiler_inputs({})
+        assert record["pinned_channel"] == pinned and record["host"] == host, record
+        assert set(record["rustup_proxies"]) == {"rustup", "cargo", "rustc"}, record
+        assert len(record["sysroot_libraries"]) == 2, record["sysroot_libraries"]
+        assert c.compiler_inputs({}) == record
+        (work / "tools" / "clippy-driver").write_bytes(b"swapped")
+        assert c.compiler_inputs({}) != record, "a swapped tool must change the record"
+        release["value"] = "0.0.0"
+        try:
+            c.compiler_inputs({})
+        except Refused:
+            pass
+        else:
+            raise AssertionError("an unpinned rustc release was accepted")
+    finally:
+        c._run_text, c.RUSTUP_BIN = saved
+
+
 @check("ledger ceilings refuse before any reservation; reservations are never released")
 def ledger_budget(scratch):
     directory = scratch / "ledger"
@@ -499,8 +542,8 @@ def main():
     scratch = c.ROOT / c.PACKET_REL / f".selftest-{os.getpid()}"
     scratch.mkdir()
     try:
-        for control in (porcelain, environment, ledger_budget, lock, normal, timeout, escalation, grandchild,
-                        spawn_failure, interrupt, terminate, sigkill, grants):
+        for control in (porcelain, environment, toolchain, ledger_budget, lock, normal, timeout, escalation,
+                        grandchild, spawn_failure, interrupt, terminate, sigkill, grants):
             control(scratch)
         if not unit_only:
             try:
