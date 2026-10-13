@@ -1,0 +1,92 @@
+{
+ "schema": "incant-owner-history-numeric-result-v1",
+ "verdict": "FAILED_NOT_ACCEPTED",
+ "model": "Opus 5.5",
+ "effort": "max",
+ "acp_start": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-supervision-001/acp-start.json",
+ "authority": {
+  "grant_sha256": "dc75b4fed57ee536baffdf1afd0efb798b4be4125b0a5d7536ea82f7e69369b6",
+  "root_preparation_review_sha256": "205ead03f4526129b126272e6a6c5b73f495fa1c3f6f603d016e1a2a2457b1fa",
+  "plan_sha256": "19cdc72ce68564f24e4ec88eb732aa8a17b412d964556b5ae838b21b992168c7",
+  "runner_sha256": "bf9acf839628bf48e34af08367c5c27275551a2dd895e088fddd3c76ffcdddda",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "binary_sha256": [
+   "ca9ae76e301913293c38e6d2b6d1529a523e1ca3342e44cf807d6a7c843792b4",
+   "fd965d4bef936bec79c8acac1ef2926df1b09e3749db67d7fc01ab85cbb40828"
+  ],
+  "predecessor_release_sha256": "09f03b24611984c46343f819ce54fcd816a2db5e099c88f85527c7c1ce5488a5",
+  "all_unchanged_after_run": true
+ },
+ "invocation": {
+  "count": 1,
+  "argv": [
+   "python3",
+   "handoffs/0073-upscaling-review/owner_history/runner.py",
+   "run",
+   "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history/plan.json"
+  ],
+  "interpreter": "/opt/homebrew/bin/python3 3.14.8",
+  "invoked_at": "2026-10-13T16:49:35Z",
+  "finished_at": "2026-10-13T16:49:36Z",
+  "runner_exit": 1,
+  "console_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-001-console"
+ },
+ "gpu_children": {
+  "launched": 1,
+  "maximum": 2,
+  "wgsl": {
+   "pid": 38551,
+   "pgid": 38551,
+   "exit": 101,
+   "seconds": 1.262,
+   "timed_out": false,
+   "reaped": true,
+   "group_empty_after": true,
+   "accepted": false
+  },
+  "cooked_metal": "not launched (runner stops on first failure)"
+ },
+ "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+ "markers": {
+  "case_markers": [1, 2],
+  "final_marker": false,
+  "libtest": "test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 193 filtered out; finished in 1.25s",
+  "panic": "owner_device_tests.rs:510:17: case 3 probe Probe { pixel: [8, 8], color: [0.0, 0.0, 0.0, 1.0], depth: 50.05, record: [2147483653, 0] }: [0.40478516, 0.40478516, 0.40478516, 1.0]"
+ },
+ "budget": {
+  "debited_child_attempts": 1,
+  "debited_queue_submissions": 12,
+  "debited_readback_maps": 12,
+  "executed_submissions_maps": "not counter-verified; case markers 1-2 and the case-3 read-back value evidence at least 3 of each"
+ },
+ "release_verified": {
+  "released": true,
+  "accepted": false,
+  "owned_processes": [],
+  "process_groups_alive": [],
+  "images": [],
+  "exception": null,
+  "pid_38551": "ProcessLookupError",
+  "pgid_38551": "ProcessLookupError",
+  "frozen_binary_or_runner_processes": 0,
+  "lock_open_handles": 0,
+  "embedded_hashes_match_files": true
+ },
+ "files_sha256": {
+  "release.json": "4d2259a09a7d8731bee81eac4d61c1ed6b621c2a05adc244a4381453ffe05928",
+  "ledger.jsonl": "0e6afdd8bf0ffa9d75a72d5807c1e85cff0761b458931bdf743538be35249a64",
+  "debits.jsonl": "6168341100661a7876ee214768f0b6d2ade09661e1563a16387d23523d7df57f",
+  "wgsl/stdout.txt": "bf7e639747a3702f0647a928ab06d3ced68ee501aec89d2306d033620577442c",
+  "wgsl/stderr.txt": "21c22e6b7f042bfa94944bec374d90aa218832618ed2a54d3033c09a89b70640",
+  "grant.json": "dc75b4fed57ee536baffdf1afd0efb798b4be4125b0a5d7536ea82f7e69369b6",
+  "console/console.stdout.txt": "f36898e2296efc2b1f13364b6bdf734c289c148243a89bd002fd59b36c7e63ba",
+  "console/console.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "console/exit.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+ },
+ "established": "WGSL backend on Apple M5 Pro Metal: test cases 1-2 passed their assertions; case 3 failed (CENTER color 0.40478516, expected 0.0 within 0.001).",
+ "not_established": "cases 4-12; anything on the cooked-native backend; full retained history, appearance, performance, MetalFX or fixed TAA ownership, effect integration, reference-phone gates. Prior 0072/0073 quality failures and C7/C9/P1 remain.",
+ "hypotheses_unverified": [
+  "H1: tiny positive fract at 1:1 scale on Metal (only reciprocal division plus fused multiply-add gives fract 9.54e-7 in f32 emulation) puts owner 7 into the positive-weight support, so the {5,7} record is admitted and 0.45 survives the clamp ring (0.405).",
+  "H2: the persistence/changed-table path misread the table (also 0.405). Both write record [P|5,7]; this run cannot distinguish them."
+ ]
+}
