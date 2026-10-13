@@ -2265,3 +2265,8 @@ checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
 Accepted SSAO producer source is being composed with cluster and dynamic-resolution
 work for combined CPU and subsequent Claude GPU/appearance review. No new
 combined acceptance, performance or phase gate is claimed.
+
+The accepted bloom producer is also composed privately. Both the ordinary and
+optional bloom outputs receive the same physical-to-internal resolution mapping;
+bloom samples at the mapped scene position. Combined CPU/Claude evidence remains
+pending, and all effects remain opt-in.

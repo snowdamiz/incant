@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-13T04:18:03.684372+00:00",
+  "reviewer": "astra/root",
+  "result": "accepted source scope; device/appearance pending",
+  "freeze_sha256": "08555cb9778b89e8f3722d59b69d6c354866d40422335414295cafc0cc917d3b",
+  "inputs_verified": 14,
+  "unchanged_baselines_verified": 8,
+  "reviewed": [
+    "Typed finite config, fixed-stack plan and aggregate bounded texture payload admission",
+    "Area-weighted ceil-half downsampling and normalized convex reconstruction with nonnegative bounded radiance",
+    "Explicit zero-alpha extraction and premultiplied source coverage threshold; declared covered/background composition before original tone/chrome/transfer",
+    "Fixed startup pipelines; default off, pixel/zero-gain bypass; native cooked-output explicit refusal",
+    "Display graph ordering after world layers; prepared command buffers retain all GPU handles",
+    "CPU reference tests and Naga validation are scoped and do not claim shader execution; two actual device tests remain ignored"
+  ],
+  "limits": [
+    "No GPU, rendered-pixel or appearance acceptance until Claude executes/reviews packet.",
+    "DRS integration must map output position to actual internal source coordinates before bloom lookup, pass actual source extent/rect, and test combined behavior. This branch does not contain DRS.",
+    "No new timestamp pass slots: bloom stays inside Display, to be verified in composed integration.",
+    "Current source is portable WGSL only; cooked-output artifacts, default enablement, phone budgets and full renderer gates remain open."
+  ]
+}

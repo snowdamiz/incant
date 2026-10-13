@@ -1,0 +1,485 @@
+{
+  "format": "incant-opt-in-bloom-cpu-evidence",
+  "version": 1,
+  "base": "195866988ee6286ecf301149ee3559feedddfb92",
+  "source_freeze": {
+    "path": "~/.codex/incant-evidence/bloom-source-001/freeze.json",
+    "sha256": "08555cb9778b89e8f3722d59b69d6c354866d40422335414295cafc0cc917d3b"
+  },
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "c763e58975763a682b83decced31f8f6c686e1528e1506f6138bf0f00bb8d357"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "666abf55d9c9a063aa9c60cc10cd07eb27b2d35453eb386647b48d823cf281df"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/config.rs",
+      "sha256": "c5bc7172bd8881d7416c7cdadcff63f334017c5f27ae151185da71bf41525996"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/filter.wgsl",
+      "sha256": "95f0b6e39f6e5b51766fc07d23c2330abb49976479b4f57445d731339d21ff02"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/mod.rs",
+      "sha256": "a5dbc821666a70f2c06cbbc572c671823d76f553d3134cbc486b662fc5fc2385"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/output.wgsl",
+      "sha256": "cc093f814b6b75caf2fa40b36c1386c6f1dada841d737f15f5d9de111faeeb7c"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/targets.rs",
+      "sha256": "cd3dd52cf1af771c07859c53f81db64b9bb2480ff96b57ac7b333735019bf86f"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/tests/device.rs",
+      "sha256": "54cdac95a1a6c87b6460242c57d89d5bab47b39a01c70d0afa2b63e122de44b2"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/tests/reference.rs",
+      "sha256": "3ee7d5bc115680664205a25257149a221c9cf5b02628d92985ac48ce3f18ac29"
+    },
+    {
+      "path": "crates/incant_render/src/bloom/tests.rs",
+      "sha256": "4cfa7b536ff76c9b19c0bea7656d72e685070e31fd23e51c1fbcf04832c5573a"
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "sha256": "9bbb7710e5c718cb690d6256c080430adbbf3272bf9f166097c36cde13848123"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "9318ed89e1693484a4dbf63e7e18a1af5edf9b798c2d5bf135dc1cf100dfaa8a"
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "982fa70340a60fddb79b5f316ca38d3fd575bee676a68619830771d8a7cc4822"
+    }
+  ],
+  "unchanged_baselines": [
+    {
+      "path": "crates/incant_render/src/output.wgsl",
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a"
+    },
+    {
+      "path": "crates/incant_render/src/tone_map.wgsl",
+      "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307"
+    },
+    {
+      "path": "crates/incant_render/src/frame.rs",
+      "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e"
+    },
+    {
+      "path": "crates/incant_render/src/camera.rs",
+      "sha256": "9c912d4791322ccdb76608014f34358e2bb8aad00337317f5f3d5b50fdd52729"
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "sha256": "edc49c5e19f24230bb20aef6518de545d45b42d58855cce21d5a8a288ce11f12"
+    },
+    {
+      "path": "crates/incant_render/src/materials.rs",
+      "sha256": "8e69ac99131647c51dc6a3e4ec6df7e40b132d2c9197c5943571ebcbcc152cec"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/shade.wgsl",
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad"
+    },
+    {
+      "path": "crates/incant_render/src/ui/mod.rs",
+      "sha256": "ab526e29a987070f2d1318d301693bf4cc1ce2ec0d199b92d1d0cb089842de53"
+    }
+  ],
+  "lock": {
+    "unchanged_package_identities": 963,
+    "only_dependency_delta": "incant_render dev dependency on existing pinned naga29.0.4"
+  },
+  "checks": [
+    {
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_render",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 1.8590147495269775,
+      "pid": 91950,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/00.log",
+      "sha256": "3516664a1835764c644716a37e7fb21117c4e78bf6529ab3ac5a24b2909a919b"
+    },
+    {
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 1.577604055404663,
+      "pid": 91992,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/01.log",
+      "sha256": "5a0650b3ad8b4dbb69a2772ccb81859a74fd9941dbe69a18ba7d7d312bfc1bdf"
+    },
+    {
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-output",
+        "bloom::tests",
+        "-j2"
+      ],
+      "exit": 0,
+      "seconds": 5.769672155380249,
+      "pid": 92000,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/02.log",
+      "sha256": "1e44a7ba20ef85d4cba31344daa32221f8db257822fdebb0fa123e652d2159a1"
+    },
+    {
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-output",
+        "--all-targets",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 1.9993958473205566,
+      "pid": 92095,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/03.log",
+      "sha256": "9b7d50504c2f25d46aa80713993c85513cc78285f6c34e6a699e124c2bde2ba3"
+    },
+    {
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "-p",
+        "incant_render",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.20929574966430664,
+      "pid": 92169,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/04.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/check_runtime_graph.py",
+        "--package",
+        "incant_render"
+      ],
+      "exit": 2,
+      "seconds": 0.030127763748168945,
+      "pid": 92175,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/05.log",
+      "sha256": "9705e2a224e606a9e1c474ed658cafc864f94f165ba66316199c8778f72c2fd2"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render"
+      ],
+      "exit": 0,
+      "seconds": 0.2944068908691406,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-corrected-001/graph.log",
+      "sha256": "0e939375a2ee0c02747eab24f6ed306a2a719db840a27bf58fcca0b8c38973cd"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.02964305877685547,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-corrected-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "focused_checks": {
+    "final_tests": "8 passed, 0 failed, 2 device tests ignored",
+    "default_all_target_clippy": "bloom-clippy-001.log exits0"
+  },
+  "default_counts": {
+    "passed": 73,
+    "failed": 0,
+    "ignored_gpu": 84
+  },
+  "binaries": [
+    {
+      "configuration": "default",
+      "kind": "unittests src/lib.rs",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/bloom-binaries-001/default-lib",
+      "sha256": "0360385c0195963335d6f95d86d6d8768f4d3e06bc7463a6e2d41514c63a5b39",
+      "bytes": 122330512
+    },
+    {
+      "configuration": "default",
+      "kind": "tests/model_gpu.rs",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/bloom-binaries-001/default-models",
+      "sha256": "cb26690403af3854a8371a04ce368953eb0c1c6f18336ed094b74d897b27d508",
+      "bytes": 60814840
+    },
+    {
+      "configuration": "cooked-output",
+      "kind": "unittests src/lib.rs",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/bloom-binaries-001/cooked-output-lib",
+      "sha256": "993a12991cf813299e99b58d28adaa1f633ce199c574778c04a7cd9a6ea952ac",
+      "bytes": 122362656
+    },
+    {
+      "configuration": "cooked-output",
+      "kind": "tests/model_gpu.rs",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/bloom-binaries-001/cooked-output-models",
+      "sha256": "e3e02fcefa1a6a00578aa0f4f2f8a2495897513dab2ce73a225b7875263ea2f8",
+      "bytes": 60857128
+    }
+  ],
+  "records": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/freeze.json",
+      "raw_sha256": "08555cb9778b89e8f3722d59b69d6c354866d40422335414295cafc0cc917d3b",
+      "raw_bytes": 3499,
+      "retained": "docs/spikes/evidence/bloom/00-freeze.json.gz",
+      "retained_sha256": "871f7551fcf6d55dfdb958dc9f3e902f3d577f65ecd72ece8bae2f9dae38f6a5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/results.json",
+      "raw_sha256": "90a89d84c964ac7a3e8700eaeb76f9117006e7f5aa9c999057bc21289eafe896",
+      "raw_bytes": 2398,
+      "retained": "docs/spikes/evidence/bloom/01-results.json.gz",
+      "retained_sha256": "15ed3461d1e84ad16f6796e8663a7aff81185356eb7fba67130c6b5be5bf2fa2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-corrected-001/results.json",
+      "raw_sha256": "644aa47f98289dccf00188520dd1e7a2d9c398989c7db7f0c5b757bd3777d022",
+      "raw_bytes": 676,
+      "retained": "docs/spikes/evidence/bloom/02-results.json.gz",
+      "retained_sha256": "5a490d81ad0befdc9a3c9f024f7e74538609769d1fc4fdad7a0a80e9f601bdeb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-focused-001.log",
+      "raw_sha256": "3bd6293e6dba7c103d3ef47f1163b47b8bed8e23fe4b57d2b9d8131783fbba3c",
+      "raw_bytes": 1631,
+      "retained": "docs/spikes/evidence/bloom/03-bloom-focused-001.log.gz",
+      "retained_sha256": "1f6381d07cb1a7ded423e0b7dc35e752b8e4589558d381965aea6f5b91b45308"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-focused-002.log",
+      "raw_sha256": "5ea0900e5b89f68f7015c1d665fb0ec0a5834e91c9cc77b94ca95620b63c5ef7",
+      "raw_bytes": 1980,
+      "retained": "docs/spikes/evidence/bloom/04-bloom-focused-002.log.gz",
+      "retained_sha256": "20df35f9c9afd5828dba4ebc68bc2df3fbcf0cfcc682e7fe469d854e6e044f12"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-clippy-001.log",
+      "raw_sha256": "e4e7d302efe89b67e044efa59656b95c84dc29d69d6c3fc5898cbbed8b8cb1bc",
+      "raw_bytes": 194,
+      "retained": "docs/spikes/evidence/bloom/05-bloom-clippy-001.log.gz",
+      "retained_sha256": "9dfd99a6aa0e3a1c194f6a4fc42b947a42d99e87a4a415ed5a402e60d2b5c3f6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/00.log",
+      "raw_sha256": "3516664a1835764c644716a37e7fb21117c4e78bf6529ab3ac5a24b2909a919b",
+      "raw_bytes": 21407,
+      "retained": "docs/spikes/evidence/bloom/06-00.log.gz",
+      "retained_sha256": "071bd17124f31d693e1c21ab5622278efc70a075aa2f5f61066d015c25743ba2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/01.log",
+      "raw_sha256": "5a0650b3ad8b4dbb69a2772ccb81859a74fd9941dbe69a18ba7d7d312bfc1bdf",
+      "raw_bytes": 194,
+      "retained": "docs/spikes/evidence/bloom/07-01.log.gz",
+      "retained_sha256": "1464813107f6a7be437dc432c16ae0593c48d02b3866c1139cfaf272392ad2b9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/02.log",
+      "raw_sha256": "1e44a7ba20ef85d4cba31344daa32221f8db257822fdebb0fa123e652d2159a1",
+      "raw_bytes": 1981,
+      "retained": "docs/spikes/evidence/bloom/08-02.log.gz",
+      "retained_sha256": "3efa406b25f621f836373ec0874cab37e6f1fe97f9c099a82e393ab1f976c04c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/03.log",
+      "raw_sha256": "9b7d50504c2f25d46aa80713993c85513cc78285f6c34e6a699e124c2bde2ba3",
+      "raw_bytes": 194,
+      "retained": "docs/spikes/evidence/bloom/09-03.log.gz",
+      "retained_sha256": "83775c405c795dc8cc951156809d9e5c1fadca6f11d369b6ac954a2164d43c68"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/04.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/bloom/10-04.log.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-001/05.log",
+      "raw_sha256": "9705e2a224e606a9e1c474ed658cafc864f94f165ba66316199c8778f72c2fd2",
+      "raw_bytes": 275,
+      "retained": "docs/spikes/evidence/bloom/11-05.log.gz",
+      "retained_sha256": "fc86111c0de7e79a6f5d262b95e3069edee25947518a555e6d6821213e39f1a5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-corrected-001/graph.log",
+      "raw_sha256": "0e939375a2ee0c02747eab24f6ed306a2a719db840a27bf58fcca0b8c38973cd",
+      "raw_bytes": 52,
+      "retained": "docs/spikes/evidence/bloom/12-graph.log.gz",
+      "retained_sha256": "71a3be3cb8e79325860da89dd71212b740e96b62701ba382f0d9995ad0d42848"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-checks-corrected-001/conventions.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/bloom/13-conventions.log.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/Cargo.lock",
+      "raw_sha256": "c763e58975763a682b83decced31f8f6c686e1528e1506f6138bf0f00bb8d357",
+      "raw_bytes": 251999,
+      "retained": "docs/spikes/evidence/bloom/14-Cargo.lock.gz",
+      "retained_sha256": "a824fa6413c44afb6bcca39bf9945f72fb413cd4c11eb2843691aea6ab47b463"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/Cargo.toml",
+      "raw_sha256": "666abf55d9c9a063aa9c60cc10cd07eb27b2d35453eb386647b48d823cf281df",
+      "raw_bytes": 2460,
+      "retained": "docs/spikes/evidence/bloom/15-Cargo.toml.gz",
+      "retained_sha256": "cf78dbbb5a7f48cecaac1196dab28d1ba5e64bfe0a17a215868e98dad6b4e759"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/config.rs",
+      "raw_sha256": "c5bc7172bd8881d7416c7cdadcff63f334017c5f27ae151185da71bf41525996",
+      "raw_bytes": 3564,
+      "retained": "docs/spikes/evidence/bloom/16-config.rs.gz",
+      "retained_sha256": "84c2cd4c6ec85ce0455bb71bc1b15f0941c15348037fad964a90a4f61868a3c0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/filter.wgsl",
+      "raw_sha256": "95f0b6e39f6e5b51766fc07d23c2330abb49976479b4f57445d731339d21ff02",
+      "raw_bytes": 3587,
+      "retained": "docs/spikes/evidence/bloom/17-filter.wgsl.gz",
+      "retained_sha256": "0e698cd5103a6ada863888e24ca5676944c5d1d167b4354c5c6560e34a9d5ccd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/mod.rs",
+      "raw_sha256": "a5dbc821666a70f2c06cbbc572c671823d76f553d3134cbc486b662fc5fc2385",
+      "raw_bytes": 9269,
+      "retained": "docs/spikes/evidence/bloom/18-mod.rs.gz",
+      "retained_sha256": "b0beb1f4a6c0bb5cb9d37e2e1042b122b3b6cc526bb8d4c645bde6039cc04b27"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/output.wgsl",
+      "raw_sha256": "cc093f814b6b75caf2fa40b36c1386c6f1dada841d737f15f5d9de111faeeb7c",
+      "raw_bytes": 1307,
+      "retained": "docs/spikes/evidence/bloom/19-output.wgsl.gz",
+      "retained_sha256": "1f978998c3a578388ce5dcc6638a5fac192c23b62c8df66e606e46b0b2ee1cfd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/targets.rs",
+      "raw_sha256": "cd3dd52cf1af771c07859c53f81db64b9bb2480ff96b57ac7b333735019bf86f",
+      "raw_bytes": 1372,
+      "retained": "docs/spikes/evidence/bloom/20-targets.rs.gz",
+      "retained_sha256": "ba19f98787ad79baccc3f3ed7cb8f97d5027b7d9b58c0142dfedc11a69c0c152"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/tests/device.rs",
+      "raw_sha256": "54cdac95a1a6c87b6460242c57d89d5bab47b39a01c70d0afa2b63e122de44b2",
+      "raw_bytes": 5602,
+      "retained": "docs/spikes/evidence/bloom/21-device.rs.gz",
+      "retained_sha256": "f1beaafedd9a323af66da4620a0ef2770d0f30689f43b4773850298f83488551"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/tests/reference.rs",
+      "raw_sha256": "3ee7d5bc115680664205a25257149a221c9cf5b02628d92985ac48ce3f18ac29",
+      "raw_bytes": 4492,
+      "retained": "docs/spikes/evidence/bloom/22-reference.rs.gz",
+      "retained_sha256": "37bca77131a9ff4375adc8b34df09226c563d2830778b0fb4a50849cecb22bf2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/bloom/tests.rs",
+      "raw_sha256": "4cfa7b536ff76c9b19c0bea7656d72e685070e31fd23e51c1fbcf04832c5573a",
+      "raw_bytes": 7103,
+      "retained": "docs/spikes/evidence/bloom/23-tests.rs.gz",
+      "retained_sha256": "276cabe1241e8baff51ed9022edc9e8f7572b95b274b7489f5a1a829591281fe"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/graph.rs",
+      "raw_sha256": "9bbb7710e5c718cb690d6256c080430adbbf3272bf9f166097c36cde13848123",
+      "raw_bytes": 6809,
+      "retained": "docs/spikes/evidence/bloom/24-graph.rs.gz",
+      "retained_sha256": "a9285ce0e56a7a97b9b3d365654e41a2132286e0087d91f04a8b564e38ad3d12"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/lib.rs",
+      "raw_sha256": "9318ed89e1693484a4dbf63e7e18a1af5edf9b798c2d5bf135dc1cf100dfaa8a",
+      "raw_bytes": 18714,
+      "retained": "docs/spikes/evidence/bloom/25-lib.rs.gz",
+      "retained_sha256": "f232c2775d76c674556f97c80efda7ff35d40fa79c133c336f62b11e7e45c28f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/crates/incant_render/src/output.rs",
+      "raw_sha256": "982fa70340a60fddb79b5f316ca38d3fd575bee676a68619830771d8a7cc4822",
+      "raw_bytes": 9599,
+      "retained": "docs/spikes/evidence/bloom/26-output.rs.gz",
+      "retained_sha256": "677ae012df41dbad2ddcbe45c26a3542df61e2b75cd1328d14bbb6f4c5181203"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/bloom-source-001/sources/docs/spikes/scene-linear-bloom.md",
+      "raw_sha256": "4508cd1a8b320342ae8991c572b13559dd382a3d1104df07aae842ab978ab54d",
+      "raw_bytes": 5427,
+      "retained": "docs/spikes/evidence/bloom/27-scene-linear-bloom.md.gz",
+      "retained_sha256": "e9a867805fc5a940c574ae16262ecc5df488fd39b51252b1011716c699d44ee2"
+    }
+  ],
+  "source_review": {
+    "path": "docs/spikes/evidence/bloom-source-review.json",
+    "sha256": "bc988f2bb6a85430fcaa26f15acdcb2c7c31467071537345037517630dd87412"
+  },
+  "limits": [
+    "No GPU execution, efficacy or appearance acceptance",
+    "Default off; native cooked-output rejected, pixel cameras bypass",
+    "DRS integration must map physical output position to actual internal source before bloom lookup",
+    "Timing Display group integration pending",
+    "Logical retained payload bound excludes queued frames/driver/RSS/device budgets"
+  ],
+  "historical_failure": "Broad runner used nonexistent check_runtime_graph.py; exit2 retained; existing check_runtime_dependencies.py rerun passes without source changes.",
+  "documentation_after_checks": {
+    "reviewed_source001": [
+      {
+        "path": "docs/spikes/scene-linear-bloom.md",
+        "sha256": "4508cd1a8b320342ae8991c572b13559dd382a3d1104df07aae842ab978ab54d"
+      }
+    ],
+    "path": "docs/spikes/scene-linear-bloom.md",
+    "final_sha256": "50244aba338bcafee8b8a73fd9da9b265b0185f230cadcd5149dc19901805fa1",
+    "change": "Status/evidence links and explicit DRS coordinate qualification only, after source001 checks; reviewed original document retained losslessly."
+  }
+}
