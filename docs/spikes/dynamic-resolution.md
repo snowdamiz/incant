@@ -77,3 +77,22 @@ launched by this implementation lane. Visual scaling quality, native queue callb
 backend execution, mobile defaults and frame-time budgets require Claude and the
 plan's actual device evidence. Enabling this explicitly does not close the full
 temporal-upscaling requirement.
+
+## Producer Metal execution
+
+Claude 0067 completed the bounded Metal review on the frozen default-feature
+producer: 89 existing GPU cases passed, with 48 numeric frame attempts and 12
+appearance frames. The first fixed-scale helper used incorrect logical UI
+exclusion coordinates; its failure is retained, followed by passing physical-UI
+reference checks within the original budget. Full-scale and pixel-camera paths
+are exact controls; reduced-scale world mapping, lifecycle feedback and physical
+UI checks pass within the recorded scope. Nearest expansion visibly degrades
+world edges/text at 75% and 50%, and remains an opt-in fallback.
+
+[Claude result](../../handoffs/0067-dynamic-resolution/result.md) and
+[root evidence review](evidence/dynamic-resolution-0067-review.json) preserve
+source/build identities and limitations. No temporal reconstruction, MetalFX,
+shipping/device performance or full renderer gate is approved. Exact composed
+delivery milliseconds/discard reasons are observed through bounded public
+witness intervals; a test-only observer remains an optional follow-up. The
+focused-control tick-2 pixel comparison and motion/shimmer remain unverified.

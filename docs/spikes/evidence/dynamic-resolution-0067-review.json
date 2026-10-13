@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-13T04:23:25.204737+00:00",
+  "reviewer": "astra/root",
+  "result": "accepted for opt-in nearest-resolution producer scope",
+  "source_commit": "bdd1b205aa34f3494da2fa49241b99efc502ec3e",
+  "implementation_commit": "1a1c6c07e62e67310c0f51ec4556344a8d67f4d6",
+  "claude_commit": "1dbc085d545ebaec4cf23cddf3382d8b20a6ae9f",
+  "claude_model_effort": "Opus5.5 Max verified via ACP",
+  "receipt_manifest_sha256": "92858434b1d9cea6c537d3f0535e06415a3aab8a111787cf8d6eba04e96ab1a8",
+  "verification": {
+    "raw_retained_records": 106,
+    "engine_inputs": 14,
+    "gpu_children": 24,
+    "existing_gpu_regressions": 89,
+    "numeric_attempts": 48,
+    "submitted_numeric_frames": 44,
+    "appearance_renders": 12,
+    "all_processes_reaped": true,
+    "gpu_and_target_released": true,
+    "root_decoded_or_viewed_images": false,
+    "ACP_handle98408_terminal_exit": 0
+  },
+  "resolved_test_failure": "First fixed-scale helper used logical instead of physical UI exclusion coordinates; retained failed run preserved. Later within-budget reference runs pass world mapping and opaque UI interiors. Production code unchanged.",
+  "source_numeric_review": [
+    "Bounded completion mailbox and controller ownership semantics match previous reviewed source",
+    "Lower-level invalid, duplicate, old-epoch and old-scale receipts explicitly refuse; subsequent successful sequence preserved after refused stages",
+    "Composed delayed resize/replacement, terminal errors and host recreation pass controlled public-contract observations",
+    "Unpaced seven-frame loop ended before asynchronous completion dispatch; paced run demonstrates delivery/recovery/cooldown using bounded witness intervals"
+  ],
+  "appearance_verdict_by_claude": "Correct placement/aspect/viewport chrome and physical UI, exact full-scale/pixel-camera bypass. Visible nearest-expansion artifacts at75/50%; acceptable fallback only.",
+  "limits": [
+    "No temporal reconstruction, MetalFX, default enablement, shipping-profile/device performance or phase gate.",
+    "Host exact delivered milliseconds/discard reasons remain inferred within recorded witness bounds; optional cfg(test) observer seam is a follow-up, not current proof.",
+    "Focused-control tick2 pixel comparison was not rechecked after helper-coordinate correction. Functional focus/activation and layout passed.",
+    "Static Metal/default-feature images only; motion/shimmer and composed cooked variants not accepted."
+  ]
+}

@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Dynamic-resolution producer — Metal review complete
+
+Claude 0067 and root accepted the bounded producer scope: 89 existing GPU cases,
+48 numeric attempts and 12 appearance frames, with original helper failures
+retained and corrected within budget. Physical UI and viewport mapping pass;
+nearest expansion remains visibly degraded and opt-in. Exact host feedback uses
+recorded witness bounds. Full temporal upscaling, MetalFX, motion review, composed
+cooked integration and reference-phone gates remain open.
+[Evidence](docs/spikes/dynamic-resolution.md).
+
 ## Authored Core runtime bindings — CPU proof accepted
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the
