@@ -1,3 +1,24 @@
+## Priority update: execution authorized after reviewed preparation
+
+Astra has reviewed the prepared packet and the actual seven CPU lifecycle controls
+at `f676b69e6d372fa199f1a6eb68a8c4826be422cd`. Both prior GPU work and the shared
+Cargo target are released. Read root's external `review-ready.json` grant and use
+only the committed helpers, frozen case plan and granted source. You may now
+acquire the target and perform the bounded offscreen review in the plan. This
+supersedes preparation-only instructions below. Verify Opus 5.5 and Max explicitly
+on this resumed ACP session. Preserve all original failures and stop for source
+review if an implementation defect is found.
+
+The optional `owner_drop` case is approved as a no-panic/no-hang lifecycle smoke
+check only: `queue.submit` may deliver the callback before renderer drop, so it
+does not establish callback-after-drop ordering. Report that limitation accurately.
+The engine source freeze is unchanged by the runner corrections.
+
+Keep edits within this handoff worktree and the explicitly granted evidence and
+Cargo target directories. Do not create or update personal/persistent memory,
+Claude auto-memory, external notes or any other checkout. These exceptions permit
+only packet evidence and bounded builds, never credentials or account access.
+
 # 0068 — native GPU timestamp execution and unchanged appearance
 
 Use Claude Opus 5.5 through ACP with Max effort explicitly verified before every
