@@ -1,0 +1,5 @@
+world text    coverage-corrected mean 0.06 max  13 >8:   17 | coverage-off mean 1.50 max  41 >8:  278 | corrected-off mean 1.45 max  41 >8:  269
+glass card    coverage-corrected mean 0.08 max  10 >8:   57 | coverage-off mean 0.42 max  12 >8:  203 | corrected-off mean 0.34 max  11 >8:  145
+sprites       coverage-corrected mean 0.01 max  13 >8:   22 | coverage-off mean 0.65 max  38 >8:  762 | corrected-off mean 0.63 max  38 >8:  750
+ui button     coverage-corrected mean 0.00 max   0 >8:    0 | coverage-off mean 0.00 max   0 >8:    0 | corrected-off mean 0.00 max   0 >8:    0
+checker only  coverage-corrected mean 0.40 max  29 >8:  140 | coverage-off mean 1.81 max  36 >8:  637 | corrected-off mean 1.42 max  36 >8:  481

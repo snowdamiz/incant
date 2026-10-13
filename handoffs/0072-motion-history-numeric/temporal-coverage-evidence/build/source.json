@@ -1,0 +1,42 @@
+{
+ "build_grant_sha256": "a62dbb56b6bb1074235f8bb5f4d74cce7421945f17b1d98b962867748d5f2cf7",
+ "holder": "root/astra supervised CPU build only",
+ "tools": {
+  "head": "91c59e86b5729feca47be1582f1cb2b2a9a738a5",
+  "visual_tree": "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+  "plan_sha256": "bd480ba1c843aa707b0f9ad641a3ff6b4d5f23d37d0356fda0186bbf1e978c08",
+  "helper_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde"
+ },
+ "source_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+ "tree": "b876ed43427a7f45bebe401662b26f72f37f31ab",
+ "files": 18095,
+ "checkout_manifest_sha256": "310bc04bc5114b3afcfb25f1d6d174e7d1f3858d4c5f217a39c1ee207194f6cb",
+ "source_freeze": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/committed-build-source.json",
+  "sha256": "1e9628677f6631476140d7efe75242042721083c4d21966fdfc81755bb193fe0",
+  "names_commit": {
+   "commit": "e23776df275fa1de81b2027110d9c7b6916999ac"
+  }
+ },
+ "coverage": {
+  "build_input_roots": [
+   "crates",
+   "Cargo.toml",
+   "Cargo.lock",
+   "third_party",
+   "tools/cargo",
+   "rust-toolchain.toml"
+  ],
+  "build_inputs": 2452,
+  "freeze_rows": 2453,
+  "freeze_build_input_rows": 2452,
+  "inputs_missing_from_freeze": [],
+  "freeze_rows_missing_from_commit": [],
+  "mismatched": [],
+  "mismatched_count": 0,
+  "exact": true
+ },
+ "cargo_lock_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "recorded": "2026-10-13T09:58:40.271005+00:00"
+}

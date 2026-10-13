@@ -1,0 +1,18 @@
+{
+  "packet": "0072-motion-history-numeric",
+  "stage": "temporal-coverage-build",
+  "holder": "root/astra supervised CPU build only",
+  "source_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/committed-build-source.json",
+    "sha256": "1e9628677f6631476140d7efe75242042721083c4d21966fdfc81755bb193fe0"
+  },
+  "visual_tree": "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/target-lease.json",
+  "prior_build_release_sha256": "52218a7b049fd9f5a49a6304f5ad88386cb3a995326ea41fbb5897b06aa7d10a",
+  "root_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/0072-coverage-helper-root-20261013.json",
+    "sha256": "49c66f2ca0a79fd64e164597263d58a7ff670d23f564165652675179e7485a38"
+  }
+}

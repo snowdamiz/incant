@@ -1,0 +1,12 @@
+stationary-on-f16.png    original  >=3px from edges: 3-8   600  9-16    0  >16   0  max   7  9-16 bbox None
+stationary-on-f16.png    corrected >=3px from edges: 3-8   559  9-16    0  >16   0  max   7  9-16 bbox None
+stationary-on-f16.png    coverage  >=3px from edges: 3-8   565  9-16    0  >16   0  max   7  9-16 bbox None
+motion-object-on-f8.png  original  >=3px from edges: 3-8   918  9-16   45  >16   0  max  11  9-16 bbox (579, 290, 600, 305)
+motion-object-on-f8.png  corrected >=3px from edges: 3-8   823  9-16   30  >16   0  max  10  9-16 bbox (579, 291, 600, 305)
+motion-object-on-f8.png  coverage  >=3px from edges: 3-8   830  9-16   30  >16   0  max  10  9-16 bbox (579, 291, 600, 305)
+motion-pan-on-f6.png     original  >=3px from edges: 3-8   843  9-16    4  >16   0  max  11  9-16 bbox (375, 58, 386, 65)
+motion-pan-on-f6.png     corrected >=3px from edges: 3-8   240  9-16    0  >16   0  max   7  9-16 bbox None
+motion-pan-on-f6.png     coverage  >=3px from edges: 3-8   391  9-16    0  >16   0  max   7  9-16 bbox None
+skinned-on-f6.png        original  >=3px from edges: 3-8     0  9-16    0  >16   0  max   0  9-16 bbox None
+skinned-on-f6.png        corrected >=3px from edges: 3-8     0  9-16    0  >16   0  max   0  9-16 bbox None
+skinned-on-f6.png        coverage  >=3px from edges: 3-8     0  9-16    0  >16   0  max   0  9-16 bbox None

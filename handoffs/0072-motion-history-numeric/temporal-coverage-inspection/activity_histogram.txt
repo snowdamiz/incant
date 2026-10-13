@@ -1,0 +1,8 @@
+stationary edge pixels 34327
+  original  1-2: e5957/i78198  3-8: e2666/i9546  9-16: e3222/i1367  17-32: e2684/i7  33-63: e897/i0  64-: e10234/i12 | >=33 total 11143 | saturated 10246
+  corrected 1-2: e6901/i38789  3-8: e4275/i90  9-16: e2089/i14  17-32: e2815/i3  33-63: e8419/i11  64-: e3620/i11 | >=33 total 12061 | saturated 3631
+  coverage  1-2: e9229/i39240  3-8: e18848/i71  9-16: e4714/i24  17-32: e708/i3  33-63: e159/i0  64-: e0/i0 | >=33 total 159 | saturated 0
+excluded edge pixels 32592
+  original  1-2: e161/i137  3-8: e1928/i976  9-16: e2933/i79  17-32: e4124/i118  33-63: e2558/i0  64-: e2010/i0 | >=33 total 4568 | saturated 2010
+  corrected 1-2: e2815/i1715  3-8: e6901/i642  9-16: e1909/i54  17-32: e49/i0  33-63: e505/i0  64-: e0/i0 | >=33 total 505 | saturated 0
+  coverage  1-2: e3654/i2072  3-8: e8116/i157  9-16: e1452/i0  17-32: e0/i0  33-63: e0/i0  64-: e0/i0 | >=33 total 0 | saturated 0

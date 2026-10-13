@@ -1,0 +1,558 @@
+{
+  "case": "motion",
+  "checks": {
+    "frames_match_plan": true,
+    "object_run_uninterrupted": true,
+    "pan_run_uninterrupted": true,
+    "references_have_no_temporal_state": true
+  },
+  "frames": [
+    {
+      "name": "object-on-1",
+      "rgba_sha256": "9c3daec53fa38094cccc921c97c56c922cc9d9b5865369f23ac7a4b2f7925cfc",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": false,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 0,
+        "sequence": 1
+      }
+    },
+    {
+      "name": "object-on-2",
+      "rgba_sha256": "114062c0a968f98fa20da3f21d1b60a966b54c2c47cebb16d0d2092593a48b47",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 1,
+        "sequence": 2
+      }
+    },
+    {
+      "name": "object-on-3",
+      "rgba_sha256": "b5d2a450d89ba0007ac1737fadbfa71343f06727db061f119f4cb275bdef97ee",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 2,
+        "sequence": 3
+      }
+    },
+    {
+      "name": "object-on-4",
+      "rgba_sha256": "dd9e0e0e0470792286f51a590c8471e015d214594d318d801cff288bd431e2aa",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 3,
+        "sequence": 4
+      }
+    },
+    {
+      "name": "object-on-5",
+      "rgba_sha256": "6fbe6e678c2972bda706351d9c8c3be17c25722a8a0fded9e545c1983aa39478",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 4,
+        "sequence": 5
+      }
+    },
+    {
+      "name": "object-on-6",
+      "rgba_sha256": "aa5e8935b5d5c032373b321b744f8cf68fdc5b5d516107084b689ed544988c68",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 5,
+        "sequence": 6
+      }
+    },
+    {
+      "name": "object-on-7",
+      "rgba_sha256": "c2be67f6851e4af28de2739c121b4e0176dff42f5408f0c28a136df1acfc8cc7",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 6,
+        "sequence": 7
+      }
+    },
+    {
+      "name": "object-on-8",
+      "rgba_sha256": "178abce0b9ec9a6c5f8074d5e63070a998080b49ba9fdb74ee812e1971d06c04",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 7,
+        "sequence": 8
+      }
+    },
+    {
+      "name": "object-off-8",
+      "rgba_sha256": "3b1c7ae81940fbb1683a58f5d5a7312b305e9f3dad44546c7cfc660dbbca0191",
+      "temporal": null
+    },
+    {
+      "name": "pan-on-1",
+      "rgba_sha256": "9365f02b714b4ad0a54f893c3b483dab10267bf078cb844653ab8a640aef42c2",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": false,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 0,
+        "sequence": 1
+      }
+    },
+    {
+      "name": "pan-on-2",
+      "rgba_sha256": "703a1a063dd88416e37e81ed881812bf6b7c9d615ee124927987a69235551c35",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 1,
+        "sequence": 2
+      }
+    },
+    {
+      "name": "pan-on-3",
+      "rgba_sha256": "0063b78e46ec593ecd699d8ea8891916661d00a7d2416239fdf66a13507fb4ae",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 2,
+        "sequence": 3
+      }
+    },
+    {
+      "name": "pan-on-4",
+      "rgba_sha256": "0c158f695a69c7a6f353564c1ad1c67181693fe1d395ac968fc6295cb1004c85",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 3,
+        "sequence": 4
+      }
+    },
+    {
+      "name": "pan-on-5",
+      "rgba_sha256": "de8d363b6ba745a5186cd218a1dd8c1370ee615509924479d0422436308f3a78",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 4,
+        "sequence": 5
+      }
+    },
+    {
+      "name": "pan-on-6",
+      "rgba_sha256": "0cdba0fc815156f9ce1687b4228f62df3237fe4f3b9cea1ff27787bc72bf5318",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 5,
+        "sequence": 6
+      }
+    },
+    {
+      "name": "pan-off-6",
+      "rgba_sha256": "c620135e76a7ad36b54f7eb54a29fb4dbb213586726a948281a7ef668bdb4485",
+      "temporal": null
+    }
+  ],
+  "frames_rendered": 16,
+  "mover_step_world_units": 0.35,
+  "observations": {
+    "object_consecutive": [
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 21369,
+            "max_delta": 131,
+            "mean_delta": 12.349835375077863,
+            "pixels": 33713
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 4644,
+            "max_delta": 131,
+            "mean_delta": 0.5928568333790674,
+            "pixels": 484687
+          }
+        },
+        "from": "object-on-1",
+        "to": "object-on-2"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 17674,
+            "max_delta": 129,
+            "mean_delta": 5.243793195503218,
+            "pixels": 33713
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 4667,
+            "max_delta": 129,
+            "mean_delta": 0.6735480836085969,
+            "pixels": 484687
+          }
+        },
+        "from": "object-on-2",
+        "to": "object-on-3"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 11941,
+            "max_delta": 127,
+            "mean_delta": 3.6130572776080445,
+            "pixels": 33713
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 5232,
+            "max_delta": 127,
+            "mean_delta": 0.7593952385766485,
+            "pixels": 484687
+          }
+        },
+        "from": "object-on-3",
+        "to": "object-on-4"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 13148,
+            "max_delta": 125,
+            "mean_delta": 4.572212499629223,
+            "pixels": 33713
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 4269,
+            "max_delta": 126,
+            "mean_delta": 0.6273987129838432,
+            "pixels": 484687
+          }
+        },
+        "from": "object-on-4",
+        "to": "object-on-5"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 16708,
+            "max_delta": 126,
+            "mean_delta": 5.30350309969448,
+            "pixels": 33713
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 4306,
+            "max_delta": 125,
+            "mean_delta": 0.5865228487663172,
+            "pixels": 484687
+          }
+        },
+        "from": "object-on-5",
+        "to": "object-on-6"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 11871,
+            "max_delta": 122,
+            "mean_delta": 3.3586450330732953,
+            "pixels": 33713
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 3723,
+            "max_delta": 122,
+            "mean_delta": 0.493204893054693,
+            "pixels": 484687
+          }
+        },
+        "from": "object-on-6",
+        "to": "object-on-7"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 13778,
+            "max_delta": 121,
+            "mean_delta": 4.435203037403968,
+            "pixels": 33713
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 2771,
+            "max_delta": 121,
+            "mean_delta": 0.3855477865096444,
+            "pixels": 484687
+          }
+        },
+        "from": "object-on-7",
+        "to": "object-on-8"
+      }
+    ],
+    "object_f8_vs_off": {
+      "edge": {
+        "changed_over_threshold": 27541,
+        "max_delta": 125,
+        "mean_delta": 26.334173760863763,
+        "pixels": 33713
+      },
+      "identical": false,
+      "interior": {
+        "changed_over_threshold": 4033,
+        "max_delta": 28,
+        "mean_delta": 0.20659105773416658,
+        "pixels": 484687
+      }
+    },
+    "pan_consecutive": [
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 18139,
+            "max_delta": 165,
+            "mean_delta": 22.404863506167064,
+            "pixels": 34214
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 84437,
+            "max_delta": 168,
+            "mean_delta": 5.627196986282131,
+            "pixels": 484186
+          }
+        },
+        "from": "pan-on-1",
+        "to": "pan-on-2"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 19392,
+            "max_delta": 148,
+            "mean_delta": 20.481264979248262,
+            "pixels": 34214
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 85615,
+            "max_delta": 167,
+            "mean_delta": 5.526180021727187,
+            "pixels": 484186
+          }
+        },
+        "from": "pan-on-2",
+        "to": "pan-on-3"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 20502,
+            "max_delta": 146,
+            "mean_delta": 18.632548079733443,
+            "pixels": 34214
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 86181,
+            "max_delta": 168,
+            "mean_delta": 5.532774594887089,
+            "pixels": 484186
+          }
+        },
+        "from": "pan-on-3",
+        "to": "pan-on-4"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 23292,
+            "max_delta": 141,
+            "mean_delta": 20.767405155784182,
+            "pixels": 34214
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 84506,
+            "max_delta": 165,
+            "mean_delta": 5.425739282011459,
+            "pixels": 484186
+          }
+        },
+        "from": "pan-on-4",
+        "to": "pan-on-5"
+      },
+      {
+        "delta": {
+          "edge": {
+            "changed_over_threshold": 31235,
+            "max_delta": 163,
+            "mean_delta": 34.752586660431405,
+            "pixels": 34214
+          },
+          "identical": false,
+          "interior": {
+            "changed_over_threshold": 77976,
+            "max_delta": 163,
+            "mean_delta": 4.422641299004928,
+            "pixels": 484186
+          }
+        },
+        "from": "pan-on-5",
+        "to": "pan-on-6"
+      }
+    ],
+    "pan_f6_vs_off": {
+      "edge": {
+        "changed_over_threshold": 27963,
+        "max_delta": 143,
+        "mean_delta": 25.99675571403519,
+        "pixels": 34214
+      },
+      "identical": false,
+      "interior": {
+        "changed_over_threshold": 3131,
+        "max_delta": 39,
+        "mean_delta": 0.21070828152817306,
+        "pixels": 484186
+      }
+    }
+  },
+  "outcome": "pass",
+  "pngs": [
+    {
+      "name": "motion-object-on-f8.png",
+      "rgba_sha256": "178abce0b9ec9a6c5f8074d5e63070a998080b49ba9fdb74ee812e1971d06c04",
+      "sha256": "f6d3cf64d8de4d908cd4e60d979fd77d326c0309df16094fb16abbc1181dc4e7"
+    },
+    {
+      "name": "motion-object-off-f8.png",
+      "rgba_sha256": "3b1c7ae81940fbb1683a58f5d5a7312b305e9f3dad44546c7cfc660dbbca0191",
+      "sha256": "212ac1a0e0af830729f9113bc797d063b0b5a2fbfd6194d29ae8a4d9281f9757"
+    },
+    {
+      "name": "motion-pan-on-f6.png",
+      "rgba_sha256": "0cdba0fc815156f9ce1687b4228f62df3237fe4f3b9cea1ff27787bc72bf5318",
+      "sha256": "31a48a3acddf549c7f094c1cbbc5dc891ce91296988ceebd5e7abc9b647ddd9a"
+    },
+    {
+      "name": "motion-pan-off-f6.png",
+      "rgba_sha256": "c620135e76a7ad36b54f7eb54a29fb4dbb213586726a948281a7ef668bdb4485",
+      "sha256": "30aa3e196bca8145b45d28d7da2e85ad52e3926c23bb5ca884a29cae1d00154b"
+    }
+  ],
+  "renderer": {
+    "adapter": {
+      "backend": "Metal",
+      "device": 0,
+      "device_type": "IntegratedGpu",
+      "driver": "",
+      "driver_info": "",
+      "name": "Apple M5 Pro",
+      "vendor": 0
+    },
+    "adapter_timestamp_features": {
+      "TIMESTAMP_QUERY": true,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "device_timestamp_features": {
+      "TIMESTAMP_QUERY": false,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "queue_timestamp_period_ns": 1.0,
+    "timing_stats": {
+      "abandoned": 0,
+      "enabled": false,
+      "pending": 0,
+      "ready": 0,
+      "retired": 0,
+      "skipped": 0
+    }
+  },
+  "review_config": {
+    "absolute_depth": 0.019999999552965164,
+    "history_weight": 0.8999999761581421,
+    "reactive_strength": 0.5,
+    "reactive_threshold": 4.0,
+    "relative_depth": 0.05000000074505806
+  },
+  "ui_submissions": 0
+}

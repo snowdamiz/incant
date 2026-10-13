@@ -1,0 +1,39 @@
+# Run from the worktree root; CPU only; reads published PNGs.
+# references.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/references.py handoffs/0067-dynamic-resolution/tools original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# activity_histogram.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/activity_histogram.py handoffs/0067-dynamic-resolution/tools original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# off_edge_differences.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/off_edge_differences.py handoffs/0067-dynamic-resolution/tools original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# registration.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/registration.py handoffs/0067-dynamic-resolution/tools original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# registration_regions-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/registration_regions.py stationary-on-f16.png,stationary-off.png handoffs/0067-dynamic-resolution/tools original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# registration_regions_linear-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/registration_regions_linear.py stationary-on-f16.png,stationary-off.png handoffs/0067-dynamic-resolution/tools original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# registration_regions_linear-motion.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/registration_regions_linear.py motion-object-on-f8.png,motion-object-off-f8.png handoffs/0067-dynamic-resolution/tools original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# profiles-horizon.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/profiles.py stationary-on-f16.png 420,540,29,42 handoffs/0067-dynamic-resolution/tools off=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# detail-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/detail.py stationary-on-f16.png,stationary-off.png 'grille=545,158,665,262;posts+shadows=290,60,380,150;far-posts=380,30,450,95;horizon-diag=180,80,250,120;sphere-edge=430,205,500,260;flat-ground=100,420,200,500' handoffs/0067-dynamic-resolution/tools off=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# blur_equivalent-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/blur_equivalent.py stationary-off.png 'grille=545,158,665,262;posts+shadows=290,60,380,150;far-posts=380,30,450,95;horizon-diag=180,80,250,120;sphere-edge=430,205,500,260' handoffs/0067-dynamic-resolution/tools off=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# edge_bands-motion.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/edge_bands.py handoffs/0067-dynamic-resolution/tools off=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots original=handoffs/0072-motion-history-numeric/temporal-visual-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# rows-motion-leading.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/rows.py motion-object-on-f8.png,motion-object-off-f8.png 493:505:200,215 handoffs/0067-dynamic-resolution/tools off=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots
+
+# overlay_diff-excluded.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/overlay_diff.py handoffs/0067-dynamic-resolution/tools off=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots corrected=handoffs/0072-motion-history-numeric/temporal-corrected-screenshots coverage=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots

@@ -1,0 +1,19 @@
+{
+  "packet": "0072-motion-history-numeric",
+  "stage": "temporal-coverage-visual",
+  "holder": "Claude Opus 5.5 explicitly Max, root scheduled bounded GPU review",
+  "visual_tree": "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+  "build_record_sha256": "037ffc22438c05d93acda0c9feed9e298348e64da0a4e27654de6941357c02cc",
+  "numeric_binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/frozen-binaries/source004/default/render-tests",
+    "sha256": "d900fe08fb2023b42aca223868e6ac367cc5c85b7d8fdaeaa55e2e49c3d19537"
+  },
+  "prior_gpu_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/gpu-released.json",
+  "prior_gpu_release_sha256": "81aa15a6fb3ef38d56eac9a29bd215e3fa87387ebcd828788ad3dcd00ec264be",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/target-lease.json",
+  "prior_build_release_sha256": "ffdee29b69dae973213488d1cce3e2cdd0ad890cd99d9ca4170ded68bd00d3d7",
+  "root_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/0072-coverage-build-root-20261013.json",
+    "sha256": "b7f0ee24396457faf5c240d47691c362afc98c0b756bae17756c3fdc8766275c"
+  }
+}

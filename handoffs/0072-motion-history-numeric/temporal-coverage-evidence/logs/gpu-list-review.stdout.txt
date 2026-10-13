@@ -1,0 +1,9 @@
+excluded: test
+motion: test
+probe: test
+skinned: test
+stationary: test
+timing: test
+transitions: test
+
+7 tests, 0 benchmarks

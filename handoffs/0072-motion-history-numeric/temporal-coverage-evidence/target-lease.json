@@ -1,0 +1,65 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "temporal-coverage-build",
+ "holder": "root/astra supervised CPU build only",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "root via build-ready.json",
+ "grant_sha256": "a62dbb56b6bb1074235f8bb5f4d74cce7421945f17b1d98b962867748d5f2cf7",
+ "grant": {
+  "packet": "0072-motion-history-numeric",
+  "stage": "temporal-coverage-build",
+  "holder": "root/astra supervised CPU build only",
+  "source_commit": "e23776df275fa1de81b2027110d9c7b6916999ac",
+  "source_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/committed-build-source.json",
+   "sha256": "1e9628677f6631476140d7efe75242042721083c4d21966fdfc81755bb193fe0"
+  },
+  "visual_tree": "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/target-lease.json",
+  "prior_build_release_sha256": "52218a7b049fd9f5a49a6304f5ad88386cb3a995326ea41fbb5897b06aa7d10a",
+  "root_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/0072-coverage-helper-root-20261013.json",
+   "sha256": "49c66f2ca0a79fd64e164597263d58a7ff670d23f564165652675179e7485a38"
+  }
+ },
+ "prior_receipts": {
+  "pins": {
+   "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/target-lease.json",
+    "expected": "52218a7b049fd9f5a49a6304f5ad88386cb3a995326ea41fbb5897b06aa7d10a",
+    "sha256": "52218a7b049fd9f5a49a6304f5ad88386cb3a995326ea41fbb5897b06aa7d10a"
+   }
+  },
+  "release_pins": [
+   "build_release"
+  ],
+  "release_alive_fields": {
+   "build_release": {
+    "processes_on_target_at_release": []
+   }
+  }
+ },
+ "tools": {
+  "head": "91c59e86b5729feca47be1582f1cb2b2a9a738a5",
+  "visual_tree": "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+  "plan_sha256": "bd480ba1c843aa707b0f9ad641a3ff6b4d5f23d37d0356fda0186bbf1e978c08",
+  "helper_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde"
+ },
+ "brief_sha256": "6d41190503a33cad03026d6a990d2a31e70776347a75c930d7e0b95392e43754",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0072-motion-history-numeric",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/checkout",
+ "acquired_at": "2026-10-13T09:58:35.405375+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2, in the foreground",
+  "builds from the git-archive child checkout of the granted commit only",
+  "every build input must equal root's committed source freeze",
+  "one bounded process group at a time under the packet flock",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001"
+ ],
+ "released_at": "2026-10-13T09:59:46.791670+00:00",
+ "released_by": "root/astra supervised CPU build only",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0072 corrected-review cargo/rustc process or frozen binary remains on the target. Contents left as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/bin"
+}

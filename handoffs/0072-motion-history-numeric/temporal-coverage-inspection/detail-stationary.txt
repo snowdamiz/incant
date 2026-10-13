@@ -1,0 +1,6 @@
+grille         off mean 0.3371 (+0.0%) detail 0.0477 (100%) | original mean 0.3360 (-0.3%) detail 0.0478 (100%) | corrected mean 0.3349 (-0.7%) detail 0.0366 ( 77%) | coverage mean 0.3380 (+0.3%) detail 0.0087 ( 18%)
+posts+shadows  off mean 0.3977 (+0.0%) detail 0.0145 (100%) | original mean 0.3981 (+0.1%) detail 0.0122 ( 84%) | corrected mean 0.3973 (-0.1%) detail 0.0106 ( 73%) | coverage mean 0.3978 (+0.0%) detail 0.0062 ( 43%)
+far-posts      off mean 0.3456 (+0.0%) detail 0.0366 (100%) | original mean 0.3472 (+0.5%) detail 0.0301 ( 82%) | corrected mean 0.3461 (+0.2%) detail 0.0252 ( 69%) | coverage mean 0.3445 (-0.3%) detail 0.0129 ( 35%)
+horizon-diag   off mean 0.2904 (+0.0%) detail 0.0087 (100%) | original mean 0.2914 (+0.3%) detail 0.0087 (100%) | corrected mean 0.2904 (-0.0%) detail 0.0074 ( 85%) | coverage mean 0.2902 (-0.1%) detail 0.0036 ( 41%)
+sphere-edge    off mean 0.3201 (+0.0%) detail 0.0102 (100%) | original mean 0.3201 (+0.0%) detail 0.0092 ( 90%) | corrected mean 0.3194 (-0.2%) detail 0.0078 ( 77%) | coverage mean 0.3202 (+0.0%) detail 0.0046 ( 45%)
+flat-ground    off mean 0.4959 (+0.0%) detail 0.0002 (100%) | original mean 0.4954 (-0.1%) detail 0.0002 ( 98%) | corrected mean 0.4954 (-0.1%) detail 0.0002 ( 98%) | coverage mean 0.4954 (-0.1%) detail 0.0002 ( 98%)

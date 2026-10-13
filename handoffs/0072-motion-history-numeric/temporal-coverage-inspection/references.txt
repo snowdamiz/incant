@@ -1,0 +1,5 @@
+stationary-off.png {'original': '2485512777e50989', 'corrected': '2485512777e50989', 'coverage': '2485512777e50989'} identical
+motion-object-off-f8.png {'original': '212ac1a0e0af8307', 'corrected': '212ac1a0e0af8307', 'coverage': '212ac1a0e0af8307'} identical
+motion-pan-off-f6.png {'original': '30aa3e196bca8145', 'corrected': '30aa3e196bca8145', 'coverage': '30aa3e196bca8145'} identical
+excluded-off.png {'original': 'd1592ae5ed1f392e', 'corrected': 'd1592ae5ed1f392e', 'coverage': 'd1592ae5ed1f392e'} identical
+skinned-off-f6.png {'original': '9dc53d04deebc66b', 'corrected': '9dc53d04deebc66b', 'coverage': '9dc53d04deebc66b'} identical

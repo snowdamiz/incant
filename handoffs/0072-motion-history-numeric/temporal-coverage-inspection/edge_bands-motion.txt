@@ -1,0 +1,4 @@
+samples: trailing 33, leading 27, top 45; reference R-B cube 113.6, wall -7.1 (contrast 120.7)
+original  trailing 1/2/3 px  +0.0/ +0.0/ +0.0 (edge px  -4.0) | leading +44.5/ -0.0/ +0.0 (edge px  -4.4) | top  +0.0/ +0.0/ +0.0 (edge px  -0.6)
+corrected trailing 1/2/3 px +17.9/ +0.0/ +0.0 (edge px  -6.5) | leading +36.5/ +2.7/ +3.6 (edge px -13.6) | top  +0.0/ +0.0/ +0.0 (edge px -21.7)
+coverage  trailing 1/2/3 px +47.7/ +6.0/ +0.1 (edge px -19.1) | leading +80.7/+31.8/ +6.6 (edge px  -6.9) | top +44.3/ +0.0/ +0.0 (edge px -22.9)

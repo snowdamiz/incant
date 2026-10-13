@@ -1,0 +1,26 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "temporal-coverage-visual",
+ "holder": "Claude Opus 5.5 explicitly Max, root scheduled bounded GPU review",
+ "released_at": "2026-10-13T10:04:19.585206+00:00",
+ "children": 12,
+ "gpu_children": 10,
+ "stop_latched": false,
+ "stopped": null,
+ "debited": {
+  "frames": 220,
+  "ui_submissions": 9,
+  "pngs": 14
+ },
+ "debits": 8,
+ "debits_without_ledger_row": [],
+ "frames_rendered": 70,
+ "ui_submissions": 9,
+ "pngs_written": 14,
+ "ledger_sha256": "10dcb338a271a4896b796344d3c879b0cecd8f4ca532fefcc0745c7e015d8e65",
+ "debits_sha256": "707abc64122286308dcb3c2840801751641b174eecb044b0e326453ebe07bf0b",
+ "grant_sha256_at_release": "e83f97da3017a947e8e84ff29d468da5cbd2978e64700ca3974d41d6ddc039f2",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "GPU released for root; review-ready.json untouched."
+}

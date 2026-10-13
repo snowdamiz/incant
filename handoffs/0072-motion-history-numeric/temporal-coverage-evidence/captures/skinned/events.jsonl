@@ -1,0 +1,11 @@
+{"case":"skinned","event":"open","frame_limit":7,"review_config":{"absolute_depth":0.019999999552965164,"history_weight":0.8999999761581421,"reactive_strength":0.5,"reactive_threshold":4.0,"relative_depth":0.05000000074505806},"ui_limit":0}
+{"event":"frame","index":1,"name":"on-1"}
+{"event":"frame","index":2,"name":"on-2"}
+{"event":"frame","index":3,"name":"on-3"}
+{"event":"frame","index":4,"name":"on-4"}
+{"event":"frame","index":5,"name":"on-5"}
+{"event":"frame","index":6,"name":"on-6"}
+{"event":"frame","index":7,"name":"off-6"}
+{"event":"png","png":{"name":"skinned-on-f6.png","rgba_sha256":"3d8cb4a4dfb352ba9dfc8f40c2b249377508ac9810dacf857b83ea039e60644d","sha256":"ee0d9553c6fb869a849308155035e870e16a319b8e59c8d33edcc643c92bc4a4"}}
+{"event":"png","png":{"name":"skinned-off-f6.png","rgba_sha256":"f5ab60ef6540a26bfa4996e4be7905c161154b950b069e164a9af4ece3cdaebc","sha256":"9dc53d04deebc66b38a873ec680f39e89ce31afcbe59cefaafa0d498ec0b0985"}}
+{"event":"finish","pass":true}

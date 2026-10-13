@@ -1,0 +1,6 @@
+
+running 1 test
+test temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 169 filtered out; finished in 0.71s
+
