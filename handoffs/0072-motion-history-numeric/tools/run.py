@@ -20,13 +20,17 @@ def main():
  for v in map(json.loads,(prior.parent/'gpu-ledger.jsonl').read_text().splitlines()):assert not m.alive(v['pid']) and not m.group_alive(v['pid'])
  rows=[];owned=[]
  tests=['accepted_pose_buffers_and_history_swap_only_after_submission','skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_asset']
+ binary_bytes=Path(b['path']).read_bytes()
+ for name in tests:
+  assert binary_bytes.count(('models::retained::motion_tests::'+name).encode())==1, name
  with (E.parent/'native-gpu.lock').open('a') as lock:
   fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
   try:
    for name in tests:
-    source();assert h(b['path'])==b['sha256'];m.TEST='motion_device_tests::'+name
+    source();assert h(b['path'])==b['sha256'];m.TEST='models::retained::motion_tests::'+name
     rc=m.execute(name,b,rows,owned,timeout=60)
     assert rc==0,(name,rc)
+    assert '1 passed; 0 failed' in Path(rows[-1]['stdout']['path']).read_text(), 'Exact test did not run once'
    source()
   finally:
    for child in owned:m.reap(child)

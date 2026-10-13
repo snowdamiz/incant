@@ -1,3 +1,15 @@
+# Priority revision 2 — execute the corrected runner
+
+Your preflight correctly refused without running any GPU child. Root has reaped
+that ACP invocation and preserved the previous result and unused grant. Root
+corrected both full test names to models::retained::motion_tests::, added a
+binary-name occurrence preflight and checks one passed test after EACH child.
+The root-owned grant now hashes this exact revised runner. Read its small diff
+and the new grant, then run ONCE as already scoped below. No new repository
+survey or builds are needed. Preserve the old result as preflight-result.md;
+write the new execution result to result.md. Root owns brief/tools changes;
+commit only those two result documents with Built-by: claude.
+
 # 0072 — narrow execution of frozen retained motion-data tests
 
 Use Claude Opus5.5 through ACP with thinking explicitly Max. You own this actual
