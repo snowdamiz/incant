@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-13T17:56:58.955280+00:00",
+  "accepted": true,
+  "reviewer": "astra/integrate_runtime_prs",
+  "scope": "Standalone 3D PhysicsRuntime terminal-failure isolation; source correctness only.",
+  "base": "053ce7bef9c6db99e1d8147b081171bbba542031",
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+  "files": [
+    {
+      "path": "crates/incant_physics_runtime/src/lib.rs",
+      "sha256": "1a94fc3a97fc037fcbc18ffb9e502451b7dee61c92bdddb494641e8d470bda4c"
+    },
+    {
+      "path": "crates/incant_physics_runtime/tests/failure_isolation.rs",
+      "sha256": "bca7f8a5febecbe65c40523ba6abc1d74ceca474b43d9a09c823f576146499ba"
+    }
+  ],
+  "patch_sha256": "d73dfb32641c2d14e3f294122fb5ad03e32c0b846b3c3c9134fec5a8c5b961f2",
+  "reviewed": [
+    "Terminal flag is set after retryable dt validation and before any solver advancement; cleared only after all scene state, event cloning/sorting and overlap publication succeeds. Error returns and caught unwinds leave it set.",
+    "Failed state(), state_iter(), states() and events() expose no prior/partial frame; guards precede ID lookup/clone. Existing raycast, character-query and sync_motion guards retain typed NumericRange refusal.",
+    "Void sync/install/remove cannot alter or revive a failed runtime. clear_character_query_frame only invalidates an auxiliary query cache and cannot expose/revive the failed world.",
+    "Late-scene regression has a successful previous trigger frame, then crosses supported position range after an earlier scene advanced; assertions cover hidden state/events and permanent failure.",
+    "Caller-provided ID clone panic induces an actual unwind after stepping, without production failure hooks. Healthy invalid-dt control preserves observations and can resume.",
+    "Scope does not assert transactional structural synchronization or general panic safety before step; no vendor, restore or save admission change."
+  ],
+  "findings": [],
+  "limits": [
+    "No reviewer builds or tests; root baseline red/default green and later mode qualification are separate execution evidence.",
+    "Terminal isolation hides and refuses partially advanced state rather than rolling a solver back."
+  ]
+}
