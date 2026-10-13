@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Opt-in diffuse SSAO — CPU source accepted, GPU pending
+
+The portable retained model path now has a disabled-by-default opaque/MASK
+normal/depth prepass and bounded view-space ambient accessibility. Only diffuse
+IBL is affected; original shaders/default output, direct/specular/emissive,
+transparent models and UI stay unchanged. Native cooked-materials explicitly
+refuses the new option until its matching artifact exists. Independent source
+review and 73 CPU renderer tests passed; 83 GPU tests remained ignored.
+[Contract/evidence](docs/spikes/screen-space-ambient-occlusion.md).
+[Claude 0070](handoffs/0070-ambient-occlusion/brief.md) is prepared only: actual
+nonzero AO, backend/pixel acceptance and device/performance gates remain open.
+
 ## Current overview — main191, 2026-10-13
 
 Development main191 includes the restart quota-test repair (PR188) and the reviewed,

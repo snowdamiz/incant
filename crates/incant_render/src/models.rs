@@ -13,7 +13,7 @@ use std::{
 use wgpu::util::DeviceExt;
 #[path = "model_draw.rs"]
 mod drawing;
-pub(crate) use drawing::{ModelDraw, ModelTarget};
+pub(crate) use drawing::{Draw, ModelDraw, ModelTarget};
 #[path = "shadow_draw.rs"]
 mod shadow_drawing;
 pub(crate) use shadow_drawing::ShadowDraw;

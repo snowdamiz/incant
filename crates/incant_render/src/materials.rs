@@ -151,7 +151,7 @@ impl MaterialSystem {
                             device,
                             &shader,
                             key,
-                            [&globals, &layout, environment, lighting],
+                            &[&globals, &layout, environment, lighting],
                             cache,
                         ),
                     );
