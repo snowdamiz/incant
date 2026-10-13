@@ -1,0 +1,438 @@
+{
+  "schema": 1,
+  "base": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+  "source_head": "8777d6c6e49d8cf62d26359f622c40255b4e6cf8",
+  "source_file": "crates/incant_cmd/src/agent_budget_replay_tests.rs",
+  "source_sha256": "9493228ccfec0a0181c41ef8ff10c6ceea6fcef8dd2b9dfaa8bddbcfed9760e2",
+  "archive": {
+    "path": "docs/spikes/evidence/journal-replay-main224/records.json.gz",
+    "sha256": "90017358d529792c07f9a1c2821c1460e23b7b617a3c26436eb48179e0161afc",
+    "bytes": 399917,
+    "records": 125,
+    "payloads": 104
+  },
+  "freeze": {
+    "path": "docs/spikes/evidence/journal-replay-main224/freeze.json",
+    "sha256": "03c01b0d9fc27b05cb62b88f50c23e561fd8b6e7c95af3d536e0a0bc83d7fcae",
+    "bytes": 518808
+  },
+  "patch": {
+    "path": "docs/spikes/evidence/journal-replay-main224/repair.patch.gz",
+    "sha256": "01f88c0e25333783749db545ae1cbcc410a27ba96b29e7da05c7d8d182bcba7b",
+    "bytes": 1359,
+    "raw_sha256": "c4b9bf90da1db0b1005e7b394b617c45ac8258a45b4ed0fa3b2eacef52bcffc0",
+    "raw_bytes": 3887
+  },
+  "checks": [
+    {
+      "name": "command-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cmd",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 54879,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 28.381504208009574,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-tests.stdout",
+        "sha256": "aaf9ad1ef5be385f72e6b3a2d053c6f2b6428e2a749e96c299fd59fc756f4daa"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-tests.stderr",
+        "sha256": "2c7fac4c051dba9ff5212235d74c71c3b606104d8af27369f61f74b3214ce66a"
+      }
+    },
+    {
+      "name": "command-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cmd",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55190,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 17.87293604199658,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-clippy.stderr",
+        "sha256": "8577cbaa881e7701b79bbdb3594fd662a1b55d0972a0392e25f874c609df47f3"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55447,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.3049007079971489,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55459,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.030262000000220723,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55460,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.022623917000601068,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-0",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55461,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 4.006584791990463,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-0.stdout",
+        "sha256": "44cd25888e8861eff1c6dbeb62317505da5c31c7ccbb0d247f51b65ff05605b0"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-0.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-1",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55510,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.7170819580060197,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-1.stdout",
+        "sha256": "1a26bdec1d90387aa1b2f8d99818f2455e4db9a6b2c4b2657f295d5bf5b99b81"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-1.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-2",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55591,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.235180000003311,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-2.stdout",
+        "sha256": "c60e2ec3d5fc6ceb3df7512a76c2f505af624d139db170ec16ba57151aea27f1"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-2.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-3",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55634,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.7271987079875544,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-3.stdout",
+        "sha256": "c1c083d6ef01e804d755260b0061d9788e3d7f353141d758e1554ddfa28864ec"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-3.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-4",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55668,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.65231395799492,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-4.stdout",
+        "sha256": "f182a848e0dfb65df17897b4529b4004195159c9f9422a480eb579c39bd01e1f"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-4.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-5",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55711,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.143156000005547,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-5.stdout",
+        "sha256": "547ddd8fba1a15348ab7cd01624fccd4b3939900331ddaecf2b2cc13aa54a6b8"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-5.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-6",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55766,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.925251209002454,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-6.stdout",
+        "sha256": "fac803be2113653d09de79d7c9feada45006dc1035d604e8e1196b8996f9bcc1"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-6.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-7",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55803,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.139389250005479,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-7.stdout",
+        "sha256": "7450af66b6de9218592bdd45af0fd56f24838d3f2179babe73d708ed5ff854d4"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-7.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-8",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55845,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.8012724580039503,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-8.stdout",
+        "sha256": "361325f53e6e9ef8a4d7116352ad89e1008180426ee5b172946f0605252b9c83"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-8.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "concurrent-replay-9",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+        "--test-threads=6",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 55893,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.8826490840001497,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-9.stdout",
+        "sha256": "e5c49679b05d6865f5bd9e62485f7723a80e5b6b25130cac98f622454857655a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/concurrent-replay-9.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/journal-replay-main224-001/command-test-binary",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/incant_cmd-599bd015d8d6762c",
+      "sha256": "cc7b1f13446e2c987e51fea5899c9c314964438a59d7c1c34db52abda2b07372",
+      "bytes": 10116792
+    }
+  ],
+  "cases": {
+    "all_targets": 54,
+    "groups": 18,
+    "failed": 0,
+    "ignored": 0,
+    "concurrent_repeats": 10,
+    "cases_each_repeat": 6,
+    "counts_overlap": true
+  },
+  "controlled_diagnostic": {
+    "source": "/Users/andreyyurlov/.codex/incant-integration-evidence/replay-budget-006/diagnostic.rs",
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/replay-budget-006/focused.log",
+    "exit": 0,
+    "reaped": true,
+    "before": "Io wrapping std::fs::TryLockError::WouldBlock",
+    "after": "AgentBudgetUserOnly"
+  },
+  "retained_history": {
+    "initial_library_repeats": 63,
+    "initial_controller_exit": 130,
+    "interruption": "Controller stopped after current child exited; last uncollected child output not claimed.",
+    "diagnostic_001": {
+      "exit": 0,
+      "cases": 2
+    },
+    "diagnostic_002": {
+      "exit": 0,
+      "dense_replay_iterations": 1000
+    },
+    "diagnostic_003": {
+      "exit": 0,
+      "dense_replay_iterations": 1000,
+      "ordinary_subprocesses": 1000
+    },
+    "diagnostic_004": {
+      "exit": 101,
+      "reason": "Controlled lock/refusal observed, harness incorrectly expected outer ErrorKind::WouldBlock."
+    },
+    "diagnostic_005": {
+      "exit": 101,
+      "reason": "Same control observed; harness incorrectly expected Display text equal to Debug variant."
+    },
+    "diagnostic_006": {
+      "exit": 0,
+      "reason": "Typed inner TryLockError downcast verifies WouldBlock before release and authorization refusal after release."
+    }
+  },
+  "hosted_failure": {
+    "candidate": "3381ccefcf42d72a0ea5e502d78947b25e49e523",
+    "run": 38394441579,
+    "job": 115286144925,
+    "raw_log": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint23/failures/checks.log",
+    "sha256": "00237fcb58fb57e5c199033eb326e5458eec5e5172b0eb1a48d1f951e8861021"
+  },
+  "limits": [
+    "Hosted assertion did not retain actual error; inherited lock is a reproduced mechanism and inferred hosted cause, not directly observed hosted diagnosis.",
+    "Only test isolation changes; production authorization, replay, lock exclusivity and error mapping are byte-identical to main224.",
+    "Historical diagnostic binaries were not retained; source/logs and recorded identities stay distinct from the retained final executable.",
+    "No repaired hosted run, release or phase approval claimed."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/journal-replay-main224/final-review.json",
+    "sha256": "b3d5c1c59578c6aa3b8d1cc71eb52b72897ddef5f893e71deefe3fe4d9727b05",
+    "status": "accepted"
+  }
+}
