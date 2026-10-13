@@ -1,0 +1,65 @@
+{
+  "at": "2026-10-13T17:37:53.107081+00:00",
+  "reviewer": "astra/root",
+  "accepted": true,
+  "scope": "Private primitive narrow-phase construction composed on main237; final current-main source and evidence review. No whole-world physics save admission.",
+  "head": "9d80999f7a4c6111b1ff4fd48bd6236847018574",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/docs/spikes/evidence/physics-native-narrow-main237.json",
+    "sha256": "91645bb7cd486ece27db6ec299b7b66b51a4a7beb61fb484eb0519a0537599e0"
+  },
+  "verifier": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-native-narrow-main237-001/verify.py",
+    "sha256": "c3656866c578bf30bfe23a8f7ad6e3734ded88234f01d946a3f3eecd00038328",
+    "replay_session": 78275,
+    "exit": 0,
+    "reaped": true
+  },
+  "checks": 29,
+  "counts": {
+    "default-tests": {
+      "passed": 227,
+      "groups": 26,
+      "failed": 0,
+      "ignored": 0
+    },
+    "default-native-tests": {
+      "passed": 45,
+      "groups": 2,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast8-tests": {
+      "passed": 227,
+      "groups": 26,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast8-native-tests": {
+      "passed": 45,
+      "groups": 2,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/physics-native-narrow-main237/records.json.gz",
+    "sha256": "c1958a4d52ead5809d817b37222cd2831e0940aed224f1b67e4bf96eb2cfd644",
+    "raw_sha256": "6d684a5032f75a8e70d7b0ff6c8d8416c478eb5df1b517c5fb3786ef5f4f2233",
+    "records": 1625,
+    "payloads": 528
+  },
+  "source_review": "84d74d12d0853533d2fbc8a66e242ba778236fc64171cfdc2665032393a7a0fc",
+  "reviewed": [
+    "Full verification script and report read; source identity and declaration-order seam unchanged from prior source review",
+    "Replayed 3655 inputs,95 reviewed paths,2057 closure,1452 copied sources,16 fast8 bindings,10 frozen binaries and producer/current archive payloads",
+    "All29 commands terminal0; both numerical modes contain227 snapshot and45 native cases;312 paired steps per dimension per mode,32 separate trusted3D scratch steps",
+    "Retained event multiset, exact charge measurements, producer failures and construction limitations explicit"
+  ],
+  "limits": [
+    "Private primitive narrow-phase reconstruction only; other native owners remain trusted clones and complete native install remains closed. Thirty-two trusted3Dcompound scratch steps do not admit compound construction.",
+    "Deterministic uses checked-in fixtures. Fast8 reuses sixteen accepted captures: eight event and eight island fixtures, all explicit hash bindings. Event captures were fresh in the producer; no new current-main capture claim. Only narrow-phase state is newly reconstructed.",
+    "No decoded complete-world install, runtime physics saves, phone or performance claim.",
+    "Composed source actually rebuilt in two parallel numerical modes; focused and broad tests overlap."
+  ]
+}
