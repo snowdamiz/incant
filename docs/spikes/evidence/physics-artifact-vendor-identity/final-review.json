@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T06:01:46.319367+00:00",
+  "reviewer": "astra-root",
+  "producer": "c08c8b6790c1d1a4503f6883cff88447c3ad4cee",
+  "manifest_sha256": "70a3a7368d3173a16e4da8060bc03ef7336acb2b14597f7487bd3993c926e899",
+  "patch_sha256": "d413eaec8a0353ad73801fe366f573f158af724a7cc54005f78ce7931453f58e",
+  "source_review": "Accepted exact named/short Cargo path IDs only for pinned Parry directories with exact version and absolute manifest; existing library, target, feature, host and build-finished checks preserved. Reviewed full validator and regression diff. No findings.",
+  "evidence_review": {
+    "collector_verify_exit": 0,
+    "archive_records": 30,
+    "archive_payloads": 25,
+    "payload_hashes_and_sizes": "all independently verified",
+    "actual_target_modes": [
+      "deterministic",
+      "fast"
+    ],
+    "baseline_actual_stream_refusal": true
+  },
+  "scope": "Accepted for repair PR and main merge after required fast checks. Hosted repaired shipping execution remains pending, no release promotion."
+}

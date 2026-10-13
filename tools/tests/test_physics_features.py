@@ -232,6 +232,55 @@ incant_runtime.workspace = true
         return physics.validate_artifacts([*records, {'reason': 'build-finished', 'success': True}], mode, target_dir=self.output,
                                           target=target or self.target, profile='ci')
 
+    def vendored_records(self, mode, target=None, host=False):
+        rows = self.records(mode, target, host)
+        for row in rows:
+            name = row['target']['name']
+            if name.startswith('parry'):
+                package = Path(physics.__file__).resolve().parents[1] / 'third_party' / name
+                row['package_id'] = 'path+' + package.as_uri() + '#' + physics.VERSIONS[name]
+                row['manifest_path'] = str(package / 'Cargo.toml')
+        return rows
+
+    def test_vendored_parry_name_omitted_ids_preserve_exact_target_features(self):
+        for mode in physics.MODES:
+            for target in (self.target, 'wasm32-unknown-unknown'):
+                with self.subTest(mode=mode, target=target):
+                    rows = self.vendored_records(mode, target)
+                    result = self.validate(rows, mode, target)
+                    self.assertEqual(result['features'], self.features(mode, target))
+                    for row in rows:
+                        name = row['target']['name']
+                        if name.startswith('parry'):
+                            row['package_id'] = row['package_id'].replace('#', '#' + name + '@')
+                    self.assertEqual(self.validate(rows, mode, target)['features'], result['features'])
+
+    def test_vendored_identity_requires_exact_package_path_version_manifest_and_library(self):
+        rows = self.vendored_records('fast')
+        for name in ('parry2d', 'parry3d'):
+            row = next(row for row in rows if row['target']['name'] == name)
+            package = Path(row['manifest_path']).parent
+            cases = [('package_id', row['package_id'].replace('#0.31.1', '#0.31.2')),
+                     ('package_id', 'path+' + (self.root / name).as_uri() + '#0.31.1'),
+                     ('package_id', 'path+' + package.as_uri() + '#foreign@0.31.1'),
+                     ('manifest_path', str(self.root / name / 'Cargo.toml')),
+                     ('manifest_path', None),
+                     ('target', {'name': name, 'kind': ['bin']})]
+            for key, value in cases:
+                changed = copy.deepcopy(rows)
+                next(r for r in changed if r['target']['name'] == name)[key] = value
+                with self.subTest(name=name, key=key, value=value), self.assertRaisesRegex(ValueError, 'identity'):
+                    self.validate(changed, 'fast')
+
+    def test_vendored_host_units_cannot_satisfy_target_and_wrong_math_still_refuses(self):
+        host = self.vendored_records('deterministic', host=True)
+        with self.assertRaisesRegex(ValueError, 'missing target physics dependency'):
+            self.validate(host, 'deterministic')
+        with self.assertRaisesRegex(ValueError, 'enhanced-determinism must be enabled'):
+            self.validate(host + self.vendored_records('fast'), 'deterministic')
+        result = self.validate(host + self.vendored_records('fast'), 'fast')
+        self.assertEqual(result['ignored_build_host'], sorted(physics.SOLVERS))
+
     def test_native_modes_and_wasm_serial_target_features(self):
         for mode in physics.MODES:
             for target in (self.target, 'wasm32-unknown-unknown'):
