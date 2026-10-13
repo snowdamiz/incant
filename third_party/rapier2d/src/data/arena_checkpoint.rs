@@ -39,6 +39,39 @@ impl<T> Arena<T> {
     pub(crate) fn checkpoint_slot_count(&self) -> usize {
         self.items.len()
     }
+    /// Refuse exhausted generations and account for the native doubling growth
+    /// policy at the worst ordering (all insertions precede any removals).
+    /// This is a logical capacity/index bound, not an allocation reservation.
+    pub(crate) fn checkpoint_structure_headroom(&self, removals: usize, insertions: usize) -> bool {
+        use incant_physics_snapshot::MAX_ITEMS;
+        let Some(generation) = u32::try_from(removals)
+            .ok()
+            .and_then(|n| self.generation.checked_add(n))
+        else {
+            return false;
+        };
+        // Keep the same next-removal fence as checked construction. Insertion
+        // copies this generation into a live handle; it must never be MAX.
+        if generation >= u32::MAX - 1 || removals > self.len {
+            return false;
+        }
+        let Some(peak) = self.len.checked_add(insertions) else {
+            return false;
+        };
+        let mut capacity = self.items.len();
+        // A decoded zero-capacity arena cannot use native insert_slow_path,
+        // which requests reserve(0). Refuse rather than silently rebuilding it.
+        if capacity == 0 && peak != 0 {
+            return false;
+        }
+        while capacity < peak {
+            let Some(next) = capacity.checked_mul(2) else {
+                return false;
+            };
+            capacity = next;
+        }
+        capacity <= MAX_ITEMS && peak <= MAX_ITEMS
+    }
     pub(crate) fn checkpoint_plan(value: &ValidatedArena) -> ConstructionResult<AllocationPlan> {
         // A later runtime owner must also fence every future generation-changing
         // operation. Do not construct the already-next-removal sentinel boundary.

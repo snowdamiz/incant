@@ -7,7 +7,7 @@ use crate::{
 use alloc::sync::Arc;
 use incant_physics_snapshot::{Identity, MAX_ITEMS};
 use parry::query::PersistentQueryDispatcher;
-type Dispatcher = Arc<dyn PersistentQueryDispatcher<ContactManifoldData, ContactData>>;
+pub(super) type Dispatcher = Arc<dyn PersistentQueryDispatcher<ContactManifoldData, ContactData>>;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum Phase {
     Dirty,
@@ -19,7 +19,8 @@ enum Phase {
 /// Ordinary mutations use `access_mut`, invalidating authority before borrowing.
 pub struct CheckpointOwner {
     world: PhysicsWorld,
-    dispatcher: Dispatcher,
+    pub(super) dispatcher: Dispatcher,
+    pub(super) mutation_revision: u64,
     identity: Result<Identity, CaptureError>,
     phase: Phase,
 }
@@ -44,6 +45,7 @@ impl CheckpointOwner {
         Self {
             world,
             dispatcher,
+            mutation_revision: 0,
             identity: compiled_identity(),
             phase: Phase::Dirty,
         }
@@ -53,6 +55,7 @@ impl CheckpointOwner {
         Self {
             world,
             dispatcher,
+            mutation_revision: 0,
             identity: Ok(identity),
             phase: Phase::Completed,
         }
@@ -90,6 +93,10 @@ impl CheckpointOwner {
     /// The original dispatcher Arc is retained so pointer reuse cannot forge it.
     pub fn access_mut(&mut self) -> Result<&mut PhysicsWorld, CaptureError> {
         self.healthy()?;
+        self.mutation_revision = self
+            .mutation_revision
+            .checked_add(1)
+            .ok_or(CaptureError::MutationExhausted)?;
         self.phase = Phase::Dirty;
         Ok(&mut self.world)
     }
@@ -101,6 +108,10 @@ impl CheckpointOwner {
     }
     fn advance(&mut self, advance: impl FnOnce(&mut PhysicsWorld)) -> Result<(), CaptureError> {
         self.healthy()?;
+        self.mutation_revision = self
+            .mutation_revision
+            .checked_add(1)
+            .ok_or(CaptureError::MutationExhausted)?;
         self.phase = Phase::Poisoned;
         let dt = self.world.integration_parameters.dt;
         advance(&mut self.world);
