@@ -1,0 +1,15 @@
+{
+  "status": "accepted_test_only_source_delta",
+  "patch_sha256": "a78d8e73e179dc80a662e5989aa3b1475f839ed5d4bd79ccc5c61f58ac649b90",
+  "paths": [
+    "crates/incant_render/src/timing/gpu_tests.rs"
+  ],
+  "findings": [],
+  "review": "Logs actual checked adapter and capability. Missing TIMESTAMP_QUERY requires exact typed Unsupported, real completed ordinary draw and empty disabled timing state. Supported branch requires same adapter/features and preserves every positive lifecycle/duration assertion. Any unexpected initialization/poll error fails.",
+  "limits": [
+    "Compile/CPU execution pending",
+    "Hosted unsupported branch and fresh supported GPU execution pending",
+    "No production/workflow/required-context weakening"
+  ],
+  "at": "2026-10-13T10:08:28.626505+00:00"
+}
