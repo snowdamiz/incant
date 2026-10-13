@@ -1,0 +1,119 @@
+{
+ "grant_sha256": "fe6bfa07dd2cfc3591d2ea0b81baf8e998fc826306b89f88064fb226cc9090e6",
+ "visual_tree": "0bb15f5cef0aa1fa03e380d2b2eec9fa73409d78",
+ "analysis": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/analysis/analysis-2026-10-13T094303.733143+0000.json",
+  "sha256": "c29186f5a560800c86f59040a44473b8729544a9fbd40bfa37f87821a3605eda"
+ },
+ "pngs": [
+  {
+   "case": "stationary",
+   "name": "stationary-native-activity.png",
+   "sha256": "1b44f3593f8d48a34553fdf2deadbe2c3ee44cf03218bc77805f935dc75657e0",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/stationary/stationary-native-activity.png"
+  },
+  {
+   "case": "stationary",
+   "name": "stationary-native-f16.png",
+   "sha256": "6e503e9c56ea3c438273265e9a0d1fb2c49fbe48d56fcae04615f364d532fc52",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/stationary/stationary-native-f16.png"
+  },
+  {
+   "case": "stationary",
+   "name": "stationary-off.png",
+   "sha256": "2485512777e509896851e616d78d01f6742da7bbabd19a97915682650e738d2c",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/stationary/stationary-off.png"
+  },
+  {
+   "case": "stationary",
+   "name": "stationary-portable-f08.png",
+   "sha256": "c0ed48a5d4483690e38d2feaa43a5ef11efe77b41a090dcdb4cbacecf87a7417",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/stationary/stationary-portable-f08.png"
+  },
+  {
+   "case": "motion",
+   "name": "motion-native-f8.png",
+   "sha256": "675ffcf1055cc57cb3b2fe904d8b5155e13755a045f106071df2cc8d7e4453ec",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/motion/motion-native-f8.png"
+  },
+  {
+   "case": "motion",
+   "name": "motion-off-f8.png",
+   "sha256": "212ac1a0e0af830729f9113bc797d063b0b5a2fbfd6194d29ae8a4d9281f9757",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/motion/motion-off-f8.png"
+  },
+  {
+   "case": "motion",
+   "name": "motion-pan-native-f6.png",
+   "sha256": "46c8161493401053ac09e144085560c6b2e36861a126ee4ec87b0a2a969b56d0",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/motion/motion-pan-native-f6.png"
+  },
+  {
+   "case": "motion",
+   "name": "motion-pan-off-f6.png",
+   "sha256": "30aa3e196bca8145b45d28d7da2e85ad52e3926c23bb5ca884a29cae1d00154b",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/motion/motion-pan-off-f6.png"
+  },
+  {
+   "case": "motion",
+   "name": "motion-portable-f8.png",
+   "sha256": "2ae7266cc390a4e8195a40da3f65c112e772aa0ab66fca4161b0ff0fbee663ea",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/motion/motion-portable-f8.png"
+  },
+  {
+   "case": "excluded",
+   "name": "excluded-native-activity.png",
+   "sha256": "14894e8453ef4955ad56dba07bacd573d3172039c88c61475c02d8025e4e09cd",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/excluded/excluded-native-activity.png"
+  },
+  {
+   "case": "excluded",
+   "name": "excluded-native-f8.png",
+   "sha256": "5e06eff9c5d677f498485f6865c7e910fe69d0f6450911f0ab697e225fd5057c",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/excluded/excluded-native-f8.png"
+  },
+  {
+   "case": "excluded",
+   "name": "excluded-off.png",
+   "sha256": "d1592ae5ed1f392e8b3972d61b4660ac74a4a0545b221a8c59115875aa203527",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/excluded/excluded-off.png"
+  },
+  {
+   "case": "transitions",
+   "name": "transition-cut-f5.png",
+   "sha256": "562ff166bb41b38d5a83ab8330157670a3c6cda2f7cdf0e75a05b4b1c69a1794",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/transitions/transition-cut-f5.png"
+  },
+  {
+   "case": "transitions",
+   "name": "transition-d12-f7.png",
+   "sha256": "15574725ac76202ac1115de544dd595cc2c4167b66eeb76528c7d5504ee7181b",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/transitions/transition-d12-f7.png"
+  },
+  {
+   "case": "transitions",
+   "name": "transition-d8-f10.png",
+   "sha256": "017cfe50ffd2ea4fb0b96c8db7581cde24879be83b188e3e06c0085787b8cf95",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/transitions/transition-d8-f10.png"
+  },
+  {
+   "case": "transitions",
+   "name": "transition-resume-f15.png",
+   "sha256": "ed23666f79ad5b726fc47f3ddbbd892b78c433e36eea27ef2e4d46451b4957e6",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/transitions/transition-resume-f15.png"
+  },
+  {
+   "case": "viewport",
+   "name": "viewport-native-f6.png",
+   "sha256": "49af47c1047d5be919ad4d227fd45c61caa9a63ec8b9c7bbbd750aacd45187c6",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/viewport/viewport-native-f6.png"
+  },
+  {
+   "case": "viewport",
+   "name": "viewport-off.png",
+   "sha256": "84e453a639956c3b59f2af18190832529e6f1c5fea096ff091455c3a170c1a14",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/captures/viewport/viewport-off.png"
+  }
+ ],
+ "recorded": "2026-10-13T09:48:11.290489+00:00"
+}

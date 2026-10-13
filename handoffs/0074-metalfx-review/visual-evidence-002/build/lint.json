@@ -1,0 +1,62 @@
+{
+ "tools": {
+  "head": "442be465006054171d4e7bbb1bee373208fee200",
+  "visual_tree": "0bb15f5cef0aa1fa03e380d2b2eec9fa73409d78",
+  "plan_sha256": "bbd738c810b128e329177aa01339b09fcca6ee551ed2878efc8ad5fa0a268d0c",
+  "helper_sha256": "c8b1219ac60a46c15c838cbd12ea35c5f50f7f3573c92db8482a6b02222bf507"
+ },
+ "source": {
+  "commit": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
+  "files": 18088,
+  "manifest_sha256": "190eaf2afeb302af044e48e792e811edc1acecf68b3ac6c85187b794e06f4c03",
+  "helper_copy_sha256": "c8b1219ac60a46c15c838cbd12ea35c5f50f7f3573c92db8482a6b02222bf507"
+ },
+ "label": "lint",
+ "kind": "build",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/checkout/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "metalfx_visual_review",
+  "--features",
+  "cooked-temporal,native-metalfx",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/checkout",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/tmp/lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "pid": 35014,
+ "started": "2026-10-13T09:38:32.261852+00:00",
+ "ended": "2026-10-13T09:38:38.830726+00:00",
+ "exit": 0,
+ "timed_out": false,
+ "wait_error": null,
+ "timeout_s": 2700,
+ "group_empty_after": true,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/logs/build-lint.stdout.jsonl",
+ "stdout_sha256": "360e6296f6523be4a92be242d4196a7526f54ef57fcd05e7e4403266b0820ae3",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/logs/build-lint.stderr.txt",
+ "stderr_sha256": "622346dda81ad72a4db8334008a0a530fcd8b65f53e6a2386ecea6de7bd9ad16",
+ "recorded": "2026-10-13T09:38:38.831252+00:00"
+}

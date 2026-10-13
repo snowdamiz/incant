@@ -826,3 +826,69 @@ first-execution evidence are unchanged.
 - **Screenshots:** none in this session.
 - **Process state:** no transient files, background processes, memory writes,
   publication, push or PR. Root's `brief.md` is left uncommitted.
+
+## Corrected-scale execution session — native MetalFX review 002 (2026-10-13)
+
+**Status: executed once under root's grant. Numerical and contract verdict: PASS.
+Appearance is judged separately in `corrected-scale-execution.md`.** The GPU and the
+target are both released. I made no build, lint, fixture, source, helper or grant
+changes, and ran no retries.
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+  Line 2 of root's ACP log `claude-0074-corrected-scale-gpu-acp.log` reads "Claude
+  session verified: Opus 5.5; thinking: max". No subagents were used.
+- **Verified before device work:**
+  - grant `fe6bfa07…` (the brief's authority SHA), with visual tree `0bb15f5c…`
+    equal to HEAD's;
+  - source `077f7c39`, freeze `62db43cb…`, binary `059d28ac…`;
+  - root review `9cbed8d0…` (accepted; its 5 pinned records unchanged);
+  - the 0069 release `55ee54d0…` (09:29:06Z, 18 children, nothing alive);
+  - the lease held under the same grant, no stop or release latch, and a free GPU
+    lock.
+- **Run (09:42:11–09:42:49Z):**
+  - `list review`, then stationary, motion, excluded, transitions and viewport,
+    once each, all exit 0.
+  - All 35 checks are true. The budget was exactly 108 frames + 11 UI = 119
+    submissions and 18 PNGs.
+  - The brief's parenthetical case list differs from the plan order; I ran the plan
+    order, which the helpers enforce.
+- **Releases:** `gpu.py release` at 09:42:53Z (no owned processes, nothing alive,
+  not stopped), then `lease.py release` at 09:42:57Z (no processes on the target).
+- **Analyzer:** `analyze.py check` passed (`c29186f5…`, 0 problems). `analyze.py
+  publish` wrote `visual-screenshots-002/` (manifest `6bdea57b…`).
+- **Selections:**
+  - `MetalFx` at 12/16 (720×405) and 8/16 (480×270) in transitions, and at 8/16
+    in the viewport. This is the first native upscaling in this packet.
+  - `Portable(Some(FractionalViewport))` at 10/16 and in the fractional viewport.
+  - Native resets were inferred at a-1, cut-5, d12-7, d8-10 and full-15.
+- **Appearance (my own inspection of all 18 PNGs and derived crops):**
+  - The full-resolution controls are unchanged. The off and portable PNGs are
+    byte-identical to the first execution, and the native PNGs differ only
+    slightly, on edges.
+  - At 75% and 50%, the retained native frames are reset frames. This run therefore
+    validates actual selection and initial quality, not converged quality.
+  - Silhouettes and the one-texel grille step and fragment at the input pitch. They
+    look like the portable path there, because the current-coverage boundary
+    policy feeds them from the current frame in both paths.
+  - One native-specific observation: a faint vertical striation (≈ ±1 code, period
+    5–6 px) on a flat face in the 8/16 reset frame.
+  - The silhouette policy remains an open engine defect and is not fixed by the
+    unit correction.
+- **Request to root:** a separately reviewed late-frame capture at 75%/50%, for
+  example retaining d12-f9 and d8-f12 or lengthening those steps within the
+  reserve. It would judge converged native quality and whether the 8/16 striation
+  persists. No source fix is indicated by this run.
+- **Screenshots:** `visual-screenshots-002/`, 18 PNGs at 960×540, all inspected
+  personally.
+- **Evidence:** `visual-evidence-002/` holds 33 records copied losslessly, and its
+  manifest `d693bd6c…` lists the pins, 18 hash-only files and 10 inspection aids.
+  The aids live in the evidence directory's `inspection/` and are not published.
+- **Limitations:** one device, offscreen only. There are no phone, performance,
+  timing or memory claims, and no phase approval.
+- **Transients and process state:**
+  - Two `/tmp` stdout captures and `/tmp/0074-002-inspect/` were deleted. The
+    helper is retained in `inspection/png.py`.
+  - No memory writes, credentials, accounts, pushes, PRs, desktop capture, native
+    window or audio.
+  - Root's `brief.md` is left uncommitted.
+  - No active children or background tasks remain.

@@ -1,0 +1,77 @@
+{
+ "packet": "0074-metalfx-review",
+ "stage": "metalfx-visual",
+ "holder": "Root/astra supervises CPU build; Claude Opus 5.5 Max later executes GPU after root scheduling",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "root via review-ready.json",
+ "grant_sha256": "fe6bfa07dd2cfc3591d2ea0b81baf8e998fc826306b89f88064fb226cc9090e6",
+ "grant": {
+  "packet": "0074-metalfx-review",
+  "stage": "metalfx-visual",
+  "source_commit": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "source_tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
+  "source_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/committed-build-source.json",
+   "sha256": "62db43cb2b769b89fde5431c776fc6d89ca670d67ae87ff7317ac1e75f2f33a9"
+  },
+  "features": [
+   "cooked-temporal",
+   "native-metalfx"
+  ],
+  "visual_tree": "0bb15f5cef0aa1fa03e380d2b2eec9fa73409d78",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "holder": "Root/astra supervises CPU build; Claude Opus 5.5 Max later executes GPU after root scheduling",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/target-lease.json",
+  "prior_build_release_sha256": "732334012c40341b38d1eb7e3893cb86af35a83e63e31f3bd1b7d5b74d699428",
+  "root_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/0074-scale-helper-root-20261013.json",
+   "sha256": "57ffda35a1c793d02a74641236593eca1131444654a04db3c589ab47c720168b"
+  },
+  "schedule": "Root CPU supervision only now. Claude may use GPU only after fresh root brief. Hold stage/target lease on successful build; cleanupGPU andtarget onfailure.",
+  "prior_gpu_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/release.json",
+  "prior_gpu_release_sha256": "55ee54d06ae5e9adbcc84ce951da948c0e84485aaafe10edfb0acaafcf344b2f"
+ },
+ "prior_receipts": {
+  "pins": {
+   "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/target-lease.json",
+    "expected": "732334012c40341b38d1eb7e3893cb86af35a83e63e31f3bd1b7d5b74d699428",
+    "sha256": "732334012c40341b38d1eb7e3893cb86af35a83e63e31f3bd1b7d5b74d699428"
+   },
+   "gpu_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/release.json",
+    "expected": "55ee54d06ae5e9adbcc84ce951da948c0e84485aaafe10edfb0acaafcf344b2f",
+    "sha256": "55ee54d06ae5e9adbcc84ce951da948c0e84485aaafe10edfb0acaafcf344b2f"
+   }
+  },
+  "release_alive_fields": {
+   "build_release": {
+    "processes_on_target_at_release": []
+   },
+   "gpu_release": {}
+  }
+ },
+ "tools": {
+  "head": "442be465006054171d4e7bbb1bee373208fee200",
+  "visual_tree": "0bb15f5cef0aa1fa03e380d2b2eec9fa73409d78",
+  "plan_sha256": "bbd738c810b128e329177aa01339b09fcca6ee551ed2878efc8ad5fa0a268d0c",
+  "helper_sha256": "c8b1219ac60a46c15c838cbd12ea35c5f50f7f3573c92db8482a6b02222bf507"
+ },
+ "brief_sha256": "9da02d859aeee38a156ea774e406bb7fbffe74656d251d7fc5e6bda566b3e235",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/.worktrees/0074-metalfx-review",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002/checkout",
+ "acquired_at": "2026-10-13T09:37:26.211246+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2, granted features only",
+  "builds from the git-archive child checkout of the granted combined source only",
+  "one bounded process group at a time under the packet flock",
+  "GPU children only under the global native-gpu.lock, budget debited first",
+  "one serial offscreen child per case; no window, desktop capture, audio or accounts",
+  "<= 128 new submissions including UI (<= 960x540), <= 20 PNGs; no retry",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual-002"
+ ],
+ "released_at": "2026-10-13T09:42:57.340127+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0074 stage B cargo/rustc process or frozen binary remains on the target. Contents left as warm cache; nothing deleted."
+}

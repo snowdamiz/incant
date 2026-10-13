@@ -1,0 +1,26 @@
+{
+  "packet": "0074-metalfx-review",
+  "stage": "metalfx-visual",
+  "source_commit": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "source_tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/committed-build-source.json",
+    "sha256": "62db43cb2b769b89fde5431c776fc6d89ca670d67ae87ff7317ac1e75f2f33a9"
+  },
+  "features": [
+    "cooked-temporal",
+    "native-metalfx"
+  ],
+  "visual_tree": "0bb15f5cef0aa1fa03e380d2b2eec9fa73409d78",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "holder": "Root/astra supervises CPU build; Claude Opus 5.5 Max later executes GPU after root scheduling",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/target-lease.json",
+  "prior_build_release_sha256": "732334012c40341b38d1eb7e3893cb86af35a83e63e31f3bd1b7d5b74d699428",
+  "root_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/0074-scale-helper-root-20261013.json",
+    "sha256": "57ffda35a1c793d02a74641236593eca1131444654a04db3c589ab47c720168b"
+  },
+  "schedule": "Root CPU supervision only now. Claude may use GPU only after fresh root brief. Hold stage/target lease on successful build; cleanupGPU andtarget onfailure.",
+  "prior_gpu_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/release.json",
+  "prior_gpu_release_sha256": "55ee54d06ae5e9adbcc84ce951da948c0e84485aaafe10edfb0acaafcf344b2f"
+}
