@@ -2233,3 +2233,19 @@ shipping. The reviewed repair separates four unchanged proof commands behind the
 existing success-only required context; all 23 release requirements remain.
 Local policy/tooling checks pass; hosted execution is pending the next frozen
 checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
+
+### Opt-in retained dynamic resolution (CPU slice)
+
+- Bounded frame-duration control now selects retained scene attachment dimensions
+  without changing output/UI size or authored pixel-camera grids. Default behavior
+  is unchanged; nearest-texel presentation reuses existing WGSL.
+- Native composed hosts can opt into one-slot, nonblocking queue-completion latency
+  feedback. This is not isolated GPU timing or whole-game frame time; the automatic
+  native clock explicitly refuses browser targets, whose controller can still use
+  explicit host measurements.
+- Independent source/evidence review accepts this CPU slice; publisher integration
+  and Claude0067 actual callback/render acceptance remain pending.
+- 73 CPU tests, Clippy, renderer wasm32 and runtime graph checks pass. All 89 GPU
+  cases remain ignored. Actual callback/render execution, Claude visual acceptance,
+  temporal reconstruction/MetalFX and reference-device budgets remain open. See
+  [contract and evidence](docs/spikes/dynamic-resolution.md).
