@@ -1,0 +1,132 @@
+{
+ "grant_sha256": "b07d3062da34d6bf880dd2ca01d4e61dbdb191569977cce755976742266fe1af",
+ "tools": {
+  "head": "71e4d63ed3515e82151aeb7237bef642c1b4bc02",
+  "plan_sha256": "477082b0c803741629ba88ede05153b80db16fbb1465c681dddfbf0b625d70dc",
+  "helper_sha256": "611cb108c4d92b5082b168f61da35e13094adfb59b8e28ce0ecb88c869f508f9"
+ },
+ "source_commit": "71e4d63ed3515e82151aeb7237bef642c1b4bc02",
+ "tree": "0950c0786767b090bfd141e24ce80b735691748b",
+ "files": 14423,
+ "checkout_manifest_sha256": "f9980c2fd3ea3a0f1dc8fa703afaf854070a805bca1a4a5a8074a939a1a8f6cf",
+ "reviewed_implementation": "99778642585a7b545a9448b9fca4a365ba622985",
+ "implementation_is_ancestor_or_same": true,
+ "build_input_diff_from_implementation": "",
+ "freeze_file_sha256": "d41ba28b5cd1bf3007706d844904c4f846e0cdcc69134522c0c7061fc05a8f25",
+ "freeze_comparison": [
+  {
+   "path": "Cargo.toml",
+   "reviewed_sha256": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+   "checkout_sha256": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+   "same": true
+  },
+  {
+   "path": "Cargo.lock",
+   "reviewed_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d",
+   "checkout_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/Cargo.toml",
+   "reviewed_sha256": "b539789326a31793e2caa030a859edba448a17077b8aea4bbb25cd3ecd21ca04",
+   "checkout_sha256": "b539789326a31793e2caa030a859edba448a17077b8aea4bbb25cd3ecd21ca04",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/lib.rs",
+   "reviewed_sha256": "a148b0f6ea10c5248ae96cfd11d698d6856a85c0d79904f7edcbe2aac93cf7ee",
+   "checkout_sha256": "a148b0f6ea10c5248ae96cfd11d698d6856a85c0d79904f7edcbe2aac93cf7ee",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/graph.rs",
+   "reviewed_sha256": "2f5c6150fc56a3d54d692a52af5458a03fa4dac74033ebe5a0d2f3498222bf29",
+   "checkout_sha256": "2f5c6150fc56a3d54d692a52af5458a03fa4dac74033ebe5a0d2f3498222bf29",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/gpu_tests.rs",
+   "reviewed_sha256": "eca5b838efba593cdea0b994b600d4997945dc9b806a41ef8b046b5612a444b0",
+   "checkout_sha256": "eca5b838efba593cdea0b994b600d4997945dc9b806a41ef8b046b5612a444b0",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/mod.rs",
+   "reviewed_sha256": "02fa98345493d8ffa776a2e131be5f7a605e0faa0eb2899226d3465e165ba1f8",
+   "checkout_sha256": "02fa98345493d8ffa776a2e131be5f7a605e0faa0eb2899226d3465e165ba1f8",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/pool.rs",
+   "reviewed_sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+   "checkout_sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/recorder.rs",
+   "reviewed_sha256": "9a5ebd42fdff590b4d8b4f300c0135d723d9bdea7574ca12e45b99814ffc00d7",
+   "checkout_sha256": "9a5ebd42fdff590b4d8b4f300c0135d723d9bdea7574ca12e45b99814ffc00d7",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/tests.rs",
+   "reviewed_sha256": "542344afefce9233c9419a56f9ceee370db9057ca0a18ddf5beb6a6b3e7dc797",
+   "checkout_sha256": "542344afefce9233c9419a56f9ceee370db9057ca0a18ddf5beb6a6b3e7dc797",
+   "same": true
+  }
+ ],
+ "freeze_all_same": true,
+ "cargo_lock_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "ignore_attributes": {
+  "incant_render (lib + model_gpu)": {
+   "total": 83,
+   "files": {
+    "crates/incant_render/src/animation_tests.rs": 2,
+    "crates/incant_render/src/flipbook_tests.rs": 1,
+    "crates/incant_render/src/retained_native_tests.rs": 1,
+    "crates/incant_render/src/retained_sprite_tests.rs": 1,
+    "crates/incant_render/src/retained_tests.rs": 6,
+    "crates/incant_render/src/retained_tilemap_tests.rs": 1,
+    "crates/incant_render/src/text_draw_tests.rs": 2,
+    "crates/incant_render/src/text_native_tests.rs": 1,
+    "crates/incant_render/src/text_retained_tests.rs": 3,
+    "crates/incant_render/src/timing/gpu_tests.rs": 1,
+    "crates/incant_render/src/ui_draw_tests.rs": 5,
+    "crates/incant_render/src/version_tests.rs": 1,
+    "crates/incant_render/tests/cameras/mod.rs": 4,
+    "crates/incant_render/tests/cameras/orthographic.rs": 3,
+    "crates/incant_render/tests/cameras/pixel_perfect.rs": 3,
+    "crates/incant_render/tests/color_roles/mod.rs": 2,
+    "crates/incant_render/tests/diagnostic_output/mod.rs": 1,
+    "crates/incant_render/tests/environments/mod.rs": 4,
+    "crates/incant_render/tests/frame_graph/mod.rs": 2,
+    "crates/incant_render/tests/hdr_output/mod.rs": 2,
+    "crates/incant_render/tests/lighting_gpu/mod.rs": 3,
+    "crates/incant_render/tests/lights/coverage.rs": 3,
+    "crates/incant_render/tests/lights/masks.rs": 2,
+    "crates/incant_render/tests/lights/mod.rs": 4,
+    "crates/incant_render/tests/model_gpu.rs": 7,
+    "crates/incant_render/tests/pipeline_warmup/mod.rs": 1,
+    "crates/incant_render/tests/shadows/coverage.rs": 2,
+    "crates/incant_render/tests/shadows/lookdev.rs": 1,
+    "crates/incant_render/tests/shadows/mod.rs": 3,
+    "crates/incant_render/tests/shadows/normal_offset.rs": 1,
+    "crates/incant_render/tests/shadows/queued.rs": 1,
+    "crates/incant_render/tests/sprites/atlas.rs": 1,
+    "crates/incant_render/tests/sprites/mod.rs": 4,
+    "crates/incant_render/tests/sprites/ties.rs": 2,
+    "crates/incant_render/tests/sprites/wide.rs": 1,
+    "crates/incant_render/tests/tangents/mod.rs": 1
+   }
+  },
+  "incant_render_gpu_host": {
+   "total": 7,
+   "files": {
+    "crates/incant_render_gpu_host/tests/game.rs": 5,
+    "crates/incant_render_gpu_host/tests/ui.rs": 2
+   }
+  }
+ },
+ "recorded": "2026-10-13T04:34:02.500091+00:00"
+}

@@ -219,7 +219,7 @@ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
                 None,
             )
             .unwrap()
-            .encode(&mut encoder);
+            .encode(&mut encoder, None);
         renderer.queue.submit([encoder.finish()]);
         let pixels = read(&renderer, &target);
         record_numerical("hdr-swatches", &renderer, &target, &pixels);

@@ -176,7 +176,7 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
             }),
             ..Default::default()
         }));
-        draw.encode(&mut encoder);
+        draw.encode(&mut encoder, None, None);
         encoder.copy_texture_to_buffer(
             copy_target.as_image_copy(),
             wgpu::TexelCopyBufferInfo {

@@ -1,0 +1,78 @@
+    Checking incant_types v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_types)
+    Checking nalgebra v0.35.0
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_2d)
+    Checking rerecast v0.4.0 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/third_party/rerecast)
+    Checking incant_nav v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_nav)
+    Checking cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/third_party/cosmic-text)
+    Checking incant_localization v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_localization)
+    Checking glamx v0.3.1
+    Checking incant_anim v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_anim)
+    Checking parry3d v0.31.1
+    Checking bevy_ecs v0.19.1
+    Checking rapier3d v0.36.0
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_text)
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_assets_runtime)
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_physics_runtime)
+    Checking incant_input v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_input)
+    Checking wgpu-naga-bridge v29.0.4
+    Checking parry2d v0.31.1
+    Checking incant_doc v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_doc)
+    Checking wgpu-hal v29.0.4
+    Checking rapier2d v0.36.0
+    Checking wgpu-core-deps-apple v29.0.4
+    Checking incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_render_data)
+    Checking bevy_app v0.19.1
+    Checking wgpu-core v29.0.4
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_physics_2d_runtime)
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_runtime)
+    Checking incant_physics v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_physics)
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_render)
+    Checking incant_assets v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_assets)
+    Checking incant_core v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_core)
+    Checking wgpu v29.0.4
+    Checking incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_render_authoring)
+    Checking incant_cook v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_cook)
+    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068/checkout/crates/incant_render_native)
+error: variable does not need to be mutable
+   --> crates/incant_render/tests/gpu_timestamp_review.rs:953:9
+    |
+953 |     let mut report = Report::open("probe", 0, 0);
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `-D unused-mut` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(unused_mut)]`
+
+error: using `chunks_exact` with a constant chunk size
+   --> crates/incant_render/tests/gpu_timestamp_review.rs:429:30
+    |
+429 |     for (index, (x, y)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+    |                              ^^^^^^^^^^^^^^^ help: consider using `as_chunks` instead: `as_chunks::<4>().0.iter()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+    = note: `-D clippy::chunks-exact-to-as-chunks` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::chunks_exact_to_as_chunks)]`
+
+error: using `chunks_exact` with a constant chunk size
+   --> crates/incant_render/tests/gpu_timestamp_review.rs:429:52
+    |
+429 |     for (index, (x, y)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+    |                                                    ^^^^^^^^^^^^^^^
+    |
+help: consider using `as_chunks::<4>()` instead
+   --> crates/incant_render/tests/gpu_timestamp_review.rs:429:52
+    |
+429 |     for (index, (x, y)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+    |                                                    ^^^^^^^^^^^^^^^
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+
+error: using `chunks_exact` with a constant chunk size
+   --> crates/incant_render/tests/gpu_timestamp_review.rs:450:43
+    |
+450 |     let distinct: HashSet<&[u8]> = pixels.chunks_exact(4).collect();
+    |                                           ^^^^^^^^^^^^^^^ help: consider using `as_chunks` instead: `as_chunks::<4>().0.iter()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+
+error: could not compile `incant_render` (test "gpu_timestamp_review") due to 4 previous errors

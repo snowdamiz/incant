@@ -129,19 +129,39 @@ pub(crate) struct ModelDraw {
     opaque_count: usize,
 }
 impl ModelDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
-        self.encode_range(encoder, 0..self.draws.len());
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        self.encode_range(encoder, 0..self.draws.len(), timestamps);
     }
-    pub fn encode_opaque(&self, encoder: &mut wgpu::CommandEncoder) {
-        self.encode_range(encoder, 0..self.opaque_count);
+    pub fn encode_opaque(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        self.encode_range(encoder, 0..self.opaque_count, timestamps);
     }
-    pub fn encode_transparent(&self, encoder: &mut wgpu::CommandEncoder) {
-        self.encode_range(encoder, self.opaque_count..self.draws.len());
+    pub fn encode_transparent(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        self.encode_range(encoder, self.opaque_count..self.draws.len(), timestamps);
     }
-    fn encode_range(&self, encoder: &mut wgpu::CommandEncoder, range: std::ops::Range<usize>) {
-        if range.is_empty() {
-            return;
-        }
+    pub fn has_opaque(&self) -> bool {
+        self.opaque_count > 0
+    }
+    pub fn has_transparent(&self) -> bool {
+        self.opaque_count < self.draws.len()
+    }
+    fn encode_range(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        range: std::ops::Range<usize>,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Imported model geometry"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
@@ -161,7 +181,7 @@ impl ModelDraw {
                 }),
                 stencil_ops: None,
             }),
-            timestamp_writes: None,
+            timestamp_writes: timestamps,
             occlusion_query_set: None,
             multiview_mask: None,
         });

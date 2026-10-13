@@ -1,0 +1,109 @@
+{
+  "decision": "accepted_source",
+  "reviewer": "astra /root/native_wasm_export",
+  "scope": "Read-only nonvisual independent source review; no GPU execution or independent test reruns. Final broad execution evidence is separate.",
+  "base": "1c5658cf5d7eee8390b272394f38b8d9b49e1628",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/freeze.json",
+    "sha256": "d41ba28b5cd1bf3007706d844904c4f846e0cdcc69134522c0c7061fc05a8f25"
+  },
+  "verified_inputs": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+      "bytes": 3374
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d",
+      "bytes": 251979
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "b539789326a31793e2caa030a859edba448a17077b8aea4bbb25cd3ecd21ca04",
+      "bytes": 2031
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "a148b0f6ea10c5248ae96cfd11d698d6856a85c0d79904f7edcbe2aac93cf7ee",
+      "bytes": 18311
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "sha256": "2f5c6150fc56a3d54d692a52af5458a03fa4dac74033ebe5a0d2f3498222bf29",
+      "bytes": 8629
+    },
+    {
+      "path": "crates/incant_render/src/timing/gpu_tests.rs",
+      "sha256": "eca5b838efba593cdea0b994b600d4997945dc9b806a41ef8b046b5612a444b0",
+      "bytes": 3542
+    },
+    {
+      "path": "crates/incant_render/src/timing/mod.rs",
+      "sha256": "02fa98345493d8ffa776a2e131be5f7a605e0faa0eb2899226d3465e165ba1f8",
+      "bytes": 3489
+    },
+    {
+      "path": "crates/incant_render/src/timing/pool.rs",
+      "sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+      "bytes": 3743
+    },
+    {
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "sha256": "9a5ebd42fdff590b4d8b4f300c0135d723d9bdea7574ca12e45b99814ffc00d7",
+      "bytes": 5510
+    },
+    {
+      "path": "crates/incant_render/src/timing/tests.rs",
+      "sha256": "542344afefce9233c9419a56f9ceee370db9057ca0a18ddf5beb6a6b3e7dc797",
+      "bytes": 5555
+    }
+  ],
+  "live_and_copies_verified": 20,
+  "pinned_dependency_sources": [
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/buffer.rs",
+      "sha256": "c7d2c13d8031a9416d5562ec970a46470da331544d3a5e15bc8fb7dae2a9de32"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/command_buffer.rs",
+      "sha256": "a3880607d748cf7376bf0ca41a0a82de9a90634fa253feba4a403a23b146d88d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/command_encoder.rs",
+      "sha256": "b5a770f88388e3b1368e4c8adeb65886958353fb6130ac392b1f43e7f7a8bbe7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/command_buffer_actions.rs",
+      "sha256": "ebc5f8cfb69ec6aaa4ca35ee634b36e8b21ab54bd712a6730cfbda8cd7f192fd"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-29.0.4/src/api/queue.rs",
+      "sha256": "b3811f0df3ccad53d990bfd66c650759abb67654779b08e160a437b51abd7c71"
+    }
+  ],
+  "findings": [],
+  "resolved_findings": [
+    {
+      "priority": "P2",
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "finding": "Failed map completion previously published a reusable slot while pinned wgpu public map_context remained mapped; next submission could panic. Blind unmap is not a safe recovery for core Idle mapping.",
+      "resolution": "Source003 consumes Readback once then permanently retires that slot. Reserve only selects Idle; retired count is public; no buffer replacement allocation. All-three-retired and decoded-Reversed-reuse regressions cover the bookkeeping boundary.",
+      "status": "source_resolved"
+    }
+  ],
+  "reviewed": [
+    "Explicit opt-in feature admission; browser and unsupported adapter refusal, unchanged default constructor",
+    "Fixed three-slot query/resolve/readback capacity and lease identity; pending and unread ready entries cannot be reused",
+    "Pinned wgpu encoder action ownership transfers on finish and submit, closure drops with unsubmitted command buffer, captured lease pool remains valid after owner drop",
+    "Success drops mapped view and unmaps before publishing Ready; callback does not acquire graph lock and graph/pool lock order has no inverse path",
+    "Seven actual graph passes carry explicit optional query indices without assuming schedule registration order; frame excludes later UI/readback/presentation by documented scope",
+    "Integer tick subtraction precedes f64 conversion; finite positive f32 period and bounded fixed payload; reversed/wrapped interval explicitly refused",
+    "Cargo manifests and lock are byte-identical to freeze base; no dependency or runtime capability widening"
+  ],
+  "limitations": [
+    "No actual GPU lifecycle/timestamp result reviewed; ignored real GPU test remains an execution requirement",
+    "CPU pool allocation regression does not establish whole renderer or wgpu callback allocation behavior",
+    "No performance, phone, visual, presentation latency, or strict GPU execution barrier claim"
+  ]
+}

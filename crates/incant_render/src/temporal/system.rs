@@ -195,23 +195,31 @@ pub(crate) struct TemporalDraw {
     current: wgpu::TextureView,
 }
 impl TemporalDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
-        for (label, target, pipeline, group) in [
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        resolve_time: Option<wgpu::RenderPassTimestampWrites<'_>>,
+        copy_time: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        for (label, target, pipeline, group, timestamps) in [
             (
                 "Accumulate opaque HDR",
                 &self.history,
                 &self.resolve_pipeline,
                 &self.resolve,
+                resolve_time,
             ),
             (
                 "Restore resolved HDR before excluded surfaces",
                 &self.current,
                 &self.copy_pipeline,
                 &self.copy,
+                copy_time,
             ),
         ] {
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some(label),
+                timestamp_writes: timestamps,
                 color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                     view: target,
                     resolve_target: None,

@@ -155,7 +155,7 @@ pub(super) fn grid_readback_at(
         .compute
         .as_ref()
         .expect("local lights require compute")
-        .encode(&mut encoder);
+        .encode(&mut encoder, None);
     r.queue.submit([encoder.finish()]);
     read_last_grid(r)
 }
