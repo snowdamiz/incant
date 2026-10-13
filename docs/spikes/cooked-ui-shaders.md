@@ -21,8 +21,8 @@ checks. Source001's temporary-attribute lifetime error is retained; source002 us
 an identical constant attribute array. Full source identities, commands and raw
 lossless logs are in [the evidence manifest](evidence/cooked-ui-shaders.json).
 
-Work is saved at the director's requested pause. Actual offline Metal compilation
-of the UI artifacts, Claude's native GPU and rendered-pixel comparison, and
-integration remain pending. These CPU checks do not establish a rendering,
-physical-device, performance or phase exit gate. Resume by completing those checks
+Work resumed from the requested pause. Both UI stages pass actual offline Apple
+Metal compilation and metallib linking; the source freeze remains exact. Claude's
+native GPU and rendered-pixel comparison and integration remain pending. These CPU checks do not establish a rendering,
+physical-device, performance or phase exit gate. Continue by completing those checks
 on the frozen source before enabling this path by default.
