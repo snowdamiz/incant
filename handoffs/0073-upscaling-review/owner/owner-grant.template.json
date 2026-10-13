@@ -1,0 +1,15 @@
+{
+ "schema": "incant-owner-numeric-gpu-grant-v1",
+ "packet": "0073-upscaling-review",
+ "stage": "owner-attachment-numeric",
+ "authority": "root",
+ "issued_at": "<root: ISO-8601 UTC issue time, written only after the 0072 warmup release is verified>",
+ "plan_sha256": "d7da3f1ccbe73b18a0f6d90f7da9d6c4ac586be351b04541afe7ae619c6b6512",
+ "runner_sha256": "<root: SHA-256 of handoffs/0073-upscaling-review/owner/owner_runner.py as reviewed>",
+ "binary_sha256": "fc3cd75685839d4b2fa465b853925ee2841ef3b28a568cc9c5cf5e8c650693d1",
+ "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001",
+ "predecessor_release_path": "<root: absolute path of the verified predecessor (0072 warmup) release receipt>",
+ "predecessor_release_sha256": "<root: SHA-256 of that release receipt>",
+ "process_launches": 1,
+ "total_explicit_queue_submissions": 24
+}
