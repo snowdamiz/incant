@@ -243,6 +243,16 @@ Independent source and final evidence review are accepted; integration is pendin
 Native-window/device capture, allocation stacks and the full profiler/performance
 gates remain open. [Contract/evidence](docs/spikes/native-cpu-profiling.md).
 
+## Dynamic-resolution producer — Metal review complete
+
+Claude 0067 and root accepted the bounded producer scope: 89 existing GPU cases,
+48 numeric attempts and 12 appearance frames, with original helper failures
+retained and corrected within budget. Physical UI and viewport mapping pass;
+nearest expansion remains visibly degraded and opt-in. Exact host feedback uses
+recorded witness bounds. Full temporal upscaling, MetalFX, motion review, composed
+cooked integration and reference-phone gates remain open.
+[Evidence](docs/spikes/dynamic-resolution.md).
+
 ## Authored Core runtime bindings — CPU proof accepted
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the
