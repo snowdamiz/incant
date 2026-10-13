@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Parallel physics tree ownership — scoped correction verified
+
+Vendored Parry 0.31.1 fixes overlapping mutable borrows in parallel BVH updates
+and refitting, with duplicate rejection before mutation and explicit source
+provenance. Both physics modes, browser compilation, script compilation and
+Clippy pass; independent source review is accepted. Additional Miri experiments
+remain unsuccessful due to Crossbeam diagnostics and are recorded separately.
+This does not enable persisted physics saves, complete a dependency soundness
+audit, or establish a performance gain.
+[Scope and evidence](docs/spikes/parry-parallel-ownership.md).
+
 ## Cooked renderer integration — CPU checks complete
 
 The accepted sprite, UI, text and material producer changes are composed with

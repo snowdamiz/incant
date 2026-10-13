@@ -12,3 +12,7 @@ rapier = ["dep:rapier3d"]
 oxijolt = { version = "=1.0.1", optional = true, features = ["cross-platform-deterministic"] }
 rapier3d = { version = "=0.36.0", optional = true, features = ["enhanced-determinism"] }
 serde_json = "1.0"
+
+# Keep this independent workspace on the engine-owned source correction.
+[patch.crates-io]
+parry3d = { path = "../../../third_party/parry3d" }
