@@ -97,3 +97,5 @@ impl BroadPhaseBvh {
 mod map_tests;
 #[cfg(all(test, feature = "serde-serialize", feature = "incant-checkpoint"))]
 mod tests;
+
+mod capture;

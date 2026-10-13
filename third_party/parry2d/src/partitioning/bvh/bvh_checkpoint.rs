@@ -134,3 +134,75 @@ impl Bvh {
         construct(witness.record(), expected, permit)
     }
 }
+
+impl Bvh {
+    /// Bounded inert observation of exact storage, not phase/shape admission.
+    /// The identity is a data tag; the enclosing native owner authenticates its
+    /// actual compiled identity separately. Pending flags are not normalized.
+    pub fn checkpoint_capture(
+        &self,
+        identity: Identity,
+        budget: &mut incant_physics_snapshot::Budget,
+    ) -> incant_physics_snapshot::Result<BvhRecord> {
+        use incant_physics_snapshot::{Error, LeafMap, MAX_ITEMS, Wide};
+        let (leaf_slots, occupied) = self.leaf_node_indices.checkpoint_slots();
+        if [
+            self.nodes.0.len(),
+            self.parents.len(),
+            leaf_slots.len(),
+            self.free_wide_nodes.len(),
+            occupied,
+        ]
+        .iter()
+        .any(|n| *n > MAX_ITEMS)
+        {
+            return Err(Error::Limit);
+        }
+        if identity.dimension as usize != crate::math::DIM {
+            return Err(Error::Header);
+        }
+        let bits = |v: Vector| {
+            let mut out = [0u32; 3];
+            for i in 0..crate::math::DIM {
+                out[i] = v[i].to_bits();
+            }
+            out
+        };
+        let node = |n: &BvhNode| Node {
+            mins: bits(n.mins),
+            children: n.children,
+            maxs: bits(n.maxs),
+            data: n.data.0,
+        };
+        let mut nodes = budget.vector(self.nodes.0.len())?;
+        nodes.extend(self.nodes.0.iter().map(|w| Wide {
+            left: node(&w.left),
+            right: node(&w.right),
+        }));
+        let mut parents = budget.vector(self.parents.len())?;
+        for p in &self.parents {
+            parents.push(u32::try_from(p.0).map_err(|_| Error::Limit)?);
+        }
+        let mut slots = budget.vector(leaf_slots.len())?;
+        for slot in leaf_slots {
+            slots.push(match slot {
+                None => None,
+                Some(p) => Some(u32::try_from(p.0).map_err(|_| Error::Limit)?),
+            });
+        }
+        let mut free = budget.vector(self.free_wide_nodes.len())?;
+        free.extend_from_slice(&self.free_wide_nodes);
+        Ok(BvhRecord {
+            identity,
+            nodes,
+            parents,
+            leaves: LeafMap {
+                occupied: occupied as u32,
+                slots,
+            },
+            free,
+            rebuild_frame: self.optimization.rebuild_frame_index,
+            rebuild_start: self.optimization.rebuild_start_index,
+        })
+    }
+}

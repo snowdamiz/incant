@@ -15,7 +15,8 @@ impl WorkBudget {
     pub fn remaining(&self) -> u64 {
         self.remaining
     }
-    fn charge(&mut self, n: u64) -> Result<()> {
+    /// Share this cumulative visit budget with capture and outer-owner checks.
+    pub fn charge(&mut self, n: u64) -> Result<()> {
         self.remaining = self.remaining.checked_sub(n).ok_or(E::Work)?;
         Ok(())
     }
