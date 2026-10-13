@@ -50,7 +50,7 @@ the copied-candidate red resolution, exact lock deltas and final graph receipts.
 python3 docs/spikes/evidence/runtime-probe-locks-main247/verify.py --verify-only
 ```
 
-Final independent packet review is pending. The original checkpoint stays
+Final independent packet review is accepted (`03359ef2`). The original checkpoint stays
 failed and frozen while its remaining jobs finish. Separate feature-off
 NativeOwner Clippy failures are owned by a separately reviewed repair; this lock
 packet does not close those failures or claim successor hosted success.

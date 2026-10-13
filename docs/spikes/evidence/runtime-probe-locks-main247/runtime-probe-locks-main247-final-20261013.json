@@ -1,0 +1,9 @@
+{
+  "result": "accepted",
+  "commit": "735a3edb1502f238f84381010d74befd0852e104",
+  "manifest_sha256": "d524eac314f922a1512dd490a8970c120b26fa696bac67575341c64b7a2a8e1a",
+  "source_patch_review": "b8805013f235a431de5cbafe1c9b088763adc00438bd2907b144ab09b0bc3b1a",
+  "independent_verifier_exit": 0,
+  "scope": "Six nested probe locks; 17 metadata/guard checks; 63 retained records and 83 metadata inputs verified. Same-version local Rapier/Parry patches match engine and previous registry identities retained. Recursive discovery and unselected optional edge negative regression reviewed. No compilation or release/device success claimed.",
+  "findings": []
+}

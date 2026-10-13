@@ -1,0 +1,6 @@
+{
+  "review": "runtime-probe-locks-main247-final-20261013.json",
+  "sha256": "03359ef2e9e9d8a9982e2cdbf5a3ae2c0e6ba4b1ef165c545ba7b55e51c9cdd3",
+  "reviewed_head": "735a3edb1502f238f84381010d74befd0852e104",
+  "scope": "17 metadata/Python checks and exact source identity reconciliation; no hosted rerun."
+}
