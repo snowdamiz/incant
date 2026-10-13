@@ -22,6 +22,10 @@ use crate::transformation::hertel_mehlhorn;
 use crate::utils::hashmap::HashMap;
 use alloc::vec::Vec;
 
+#[cfg(feature = "incant-checked-restore")]
+#[path = "compound_checkpoint/mod.rs"]
+mod checkpoint;
+
 #[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 #[repr(C)]
 #[derive(Clone, Copy, Debug, Default, Eq, Hash, Ord, PartialEq, PartialOrd)]

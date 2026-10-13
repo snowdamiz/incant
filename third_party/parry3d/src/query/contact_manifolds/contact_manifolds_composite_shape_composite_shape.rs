@@ -202,3 +202,7 @@ impl WorkspaceData for CompositeShapeCompositeShapeContactManifoldsWorkspace {
         Box::new(self.clone())
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "checkpoint/double.rs"]
+mod checkpoint;
