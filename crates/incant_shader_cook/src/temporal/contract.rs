@@ -23,12 +23,14 @@ enum Io {
     Position,
     Index,
     Float(u32, u8, bool),
+    Uint(u32, u8, bool),
 }
 fn io(
     m: &naga::Module,
     t: naga::Handle<naga::Type>,
     b: Option<&Binding>,
     out: &mut Vec<Io>,
+    interstage: bool,
 ) -> Result<()> {
     match b {
         Some(Binding::BuiltIn(BuiltIn::Position { invariant: false }))
@@ -53,8 +55,20 @@ fn io(
         }) && sampling
             .is_none_or(|s| s == naga::Sampling::Center || s == naga::Sampling::First) =>
         {
+            let uint = (1..=4).any(|n| numeric(m, t, n, ScalarKind::Uint));
             let n = (1..=4)
-                .find(|n| numeric(m, t, *n, ScalarKind::Float))
+                .find(|n| {
+                    numeric(
+                        m,
+                        t,
+                        *n,
+                        if uint {
+                            ScalarKind::Uint
+                        } else {
+                            ScalarKind::Float
+                        },
+                    )
+                })
                 .ok_or(CookError::Contract("temporal IO type"))?;
             let flat = *interpolation == Some(naga::Interpolation::Flat);
             require(
@@ -67,12 +81,24 @@ fn io(
                 }),
                 "temporal IO sampling",
             )?;
-            out.push(Io::Float(*location, n, flat));
+            if uint {
+                require(
+                    flat && if interstage {
+                        *sampling == Some(naga::Sampling::First)
+                    } else {
+                        sampling.is_none()
+                    },
+                    "temporal integer interpolation",
+                )?;
+                out.push(Io::Uint(*location, n, interstage));
+            } else {
+                out.push(Io::Float(*location, n, flat));
+            }
         }
         None => {
             if let TypeInner::Struct { members, .. } = &m.types[t].inner {
                 for x in members {
-                    io(m, x.ty, x.binding.as_ref(), out)?;
+                    io(m, x.ty, x.binding.as_ref(), out, interstage)?;
                 }
             } else {
                 return Err(CookError::Contract("temporal unbound IO"));
@@ -134,25 +160,31 @@ fn uniform(
     Ok(())
 }
 pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
-    let motion = matches!(kind, Kind::Motion | Kind::Depth);
+    let motion = matches!(kind, Kind::Motion | Kind::Depth | Kind::MotionOwner);
+    let owner = kind == Kind::MotionOwner;
     require(
-        m.overrides.is_empty() && m.entry_points.len() == if motion { 3 } else { 2 },
+        m.overrides.is_empty() && m.entry_points.len() == if motion && !owner { 3 } else { 2 },
         "temporal entry/override count",
     )?;
     let vary = || {
-        vec![
+        let mut result = vec![
             Io::Position,
             Io::Float(0, 4, false),
             Io::Float(1, 2, false),
             Io::Float(2, 1, true),
-        ]
+        ];
+        if owner {
+            result.push(Io::Uint(3, 1, true));
+        }
+        result
     };
     let mut seen = [false; 3];
     for (n, e) in m.entry_points.iter().enumerate() {
-        let depth_only = motion && e.name == "depth_only";
+        let depth_only = motion && !owner && e.name == "depth_only";
         let vertex = match (e.stage, e.name.as_str()) {
             (ShaderStage::Vertex, "vertex") => true,
-            (ShaderStage::Fragment, "fragment" | "depth_only") if motion => false,
+            (ShaderStage::Fragment, "fragment") if motion => false,
+            (ShaderStage::Fragment, "depth_only") if motion && !owner => false,
             (ShaderStage::Fragment, name) if name == kind.entry() => false,
             _ => return Err(CookError::Contract("temporal entry identity")),
         };
@@ -161,11 +193,17 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
         seen[slot] = true;
         let mut inputs = Vec::new();
         for a in &e.function.arguments {
-            io(m, a.ty, a.binding.as_ref(), &mut inputs)?;
+            io(m, a.ty, a.binding.as_ref(), &mut inputs, !vertex)?;
         }
         let expected = if vertex && motion {
-            (0..12)
+            (0..if owner { 13 } else { 12 })
                 .map(|i| {
+                    if owner && i == 12 {
+                        return Io::Uint(12, 1, false);
+                    }
+                    if owner && i == 11 {
+                        return Io::Float(11, 1, false);
+                    }
                     Io::Float(
                         i,
                         match i {
@@ -188,7 +226,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
         let mut outputs = Vec::new();
         if let Some(result) = &e.function.result {
             require(!depth_only, "temporal depth fragment output")?;
-            io(m, result.ty, result.binding.as_ref(), &mut outputs)?;
+            io(m, result.ty, result.binding.as_ref(), &mut outputs, vertex)?;
         } else {
             require(depth_only, "temporal missing output")?;
         }
@@ -198,6 +236,8 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
             vec![Io::Position]
         } else if depth_only {
             vec![]
+        } else if owner {
+            vec![Io::Float(0, 4, false), Io::Uint(1, 1, false)]
         } else {
             vec![Io::Float(0, 4, false)]
         };
@@ -218,7 +258,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
         }
     }
     let count = match kind {
-        Kind::Motion | Kind::Depth => 4,
+        Kind::Motion | Kind::Depth | Kind::MotionOwner => 4,
         Kind::Resolve => 5,
         Kind::Copy => 2,
     };
@@ -241,7 +281,9 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                 &["base", "emissive_roughness", "factors", "flags"]
             } else {
                 match kind {
-                    Kind::Motion | Kind::Depth => &["current", "previous", "rect"],
+                    Kind::Motion | Kind::Depth | Kind::MotionOwner => {
+                        &["current", "previous", "rect"]
+                    }
                     Kind::Resolve | Kind::Copy => &["rect", "depth", "options", "reactive"],
                 }
             };
@@ -333,5 +375,71 @@ mod tests {
             .unwrap();
             assert!(validate(Kind::Motion, &m, &info).is_err());
         }
+    }
+}
+
+#[cfg(test)]
+mod owner_tests {
+    use super::*;
+    #[test]
+    fn integer_owner_contract_rejects_float_missing_nonflat_and_extra_resources() {
+        let source = include_str!("../../../incant_render/src/motion/owner.wgsl");
+        let validate_source = |source: &str| {
+            let module = naga::front::wgsl::parse_str(source).unwrap();
+            let info = naga::valid::Validator::new(
+                naga::valid::ValidationFlags::all(),
+                naga::valid::Capabilities::empty(),
+            )
+            .validate(&module);
+            info.is_ok_and(|info| validate(Kind::MotionOwner, &module, &info).is_ok())
+        };
+        assert!(validate_source(source));
+        for changed in [
+            source.replace("owner:u32", "owner:f32"),
+            source.replace("@location(12)", "@location(13)"),
+            source
+                .replace("@location(11) valid:f32", "@location(11) valid:vec4f")
+                .replace("out.valid=valid;", "out.valid=valid.x;"),
+            source.replace(
+                "@location(3) @interpolate(flat, first)",
+                "@location(3) @interpolate(perspective)",
+            ),
+            source.replace("@location(1) owner:u32", "@location(2) owner:u32"),
+            format!("{source}\n@group(2) @binding(0) var extra:texture_2d<f32>;"),
+        ] {
+            assert_ne!(changed, source);
+            assert!(!validate_source(&changed));
+        }
+        assert!(super::super::cook(Kind::MotionOwner, &format!("{source}\n")).is_err());
+        assert!(super::super::cook(Kind::Motion, source).is_err());
+    }
+    #[test]
+    fn owner_math_and_mask_are_the_unchanged_motion_equations() {
+        let old = include_str!("../../../incant_render/src/motion/shader.wgsl");
+        let owner = include_str!("../../../incant_render/src/motion/owner.wgsl");
+        let body = |s: &str, start: &str| {
+            s.split_once(start)
+                .unwrap()
+                .1
+                .split_once("\n}")
+                .unwrap()
+                .0
+                .to_owned()
+        };
+        assert_eq!(
+            body(old, "fn mask(in:Output) {"),
+            body(owner, "fn mask(in:Output) {")
+        );
+        assert_eq!(
+            body(old, "    // Comparisons also"),
+            body(owner, "    // Comparisons also")
+        );
+        assert!(owner.contains("return Surface(motion(in),in.owner);"));
+        assert!(!owner.contains("fn depth_only"));
+        assert!(old.contains("@location(11) valid:vec4f"));
+        assert_eq!(
+            super::super::Kind::Motion.source_hash(),
+            super::super::Kind::Depth.source_hash()
+        );
     }
 }

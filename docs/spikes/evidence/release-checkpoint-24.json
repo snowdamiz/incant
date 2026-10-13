@@ -1,0 +1,272 @@
+{
+  "schema": 1,
+  "checkpoint": 24,
+  "pr": 213,
+  "candidate": "669bd7ae87d7d1603f2c01ac39ff0cd3e8403e1f",
+  "selected_main": "079ee1aa5e77c4bee352cd792cd43ca3869e2b12",
+  "release": "2a9d72eaf804a00b7752015e33ad2dfa087665f4",
+  "release_parents": [
+    "065aac69289bf9aab067dbd2148624904a860d5e",
+    "669bd7ae87d7d1603f2c01ac39ff0cd3e8403e1f"
+  ],
+  "tree": "632fc223feceaae69986daccbec91b872361324d",
+  "main_at_promotion": "b190d826a3df02466df18bf860f127228d375016",
+  "prepromotion_sha256": "fdc8c5705a577235e42d6917193523207717b31589bb8107c4d1051853a0ed63",
+  "independent_review_sha256": "58ad6cb191ac4efafb22e15c2dc95ac8d638d2bfe097195af9ba53953a25196d",
+  "required_contexts": 23,
+  "push_workflows": 8,
+  "jobs": 28,
+  "successful_jobs": 27,
+  "hosted_logs": {
+    "macos-checks": {
+      "job": 115317712874,
+      "raw_sha256": "197bd0c7e144db0fa2d781960090d0e4a03e6440e3c1bbe573a643c40c9fb2fd",
+      "raw_bytes": 1095142,
+      "gzip_sha256": "7226725f48a26ffceba0a80b94a31490f2c2d44a05d019d9fc1b1a08d9303d7b",
+      "gzip_bytes": 206878
+    },
+    "linux-desktop": {
+      "job": 115317511416,
+      "raw_sha256": "3aa32bf722fc543a309c1591686e7d43653dd852b1cf416597571b5ffbacfbca",
+      "raw_bytes": 1071747,
+      "gzip_sha256": "d78ca96c0e4bd9c3e8b85257eacb74749826d392d0347862528cdd3a9f1e8130",
+      "gzip_bytes": 210533
+    },
+    "windows-desktop": {
+      "job": 115317511701,
+      "raw_sha256": "0332d1b399bce36243211f45c5c575c6c337585ef3072d0c6e3c25e81b396c97",
+      "raw_bytes": 935073,
+      "gzip_sha256": "408bbf3c716ff099c77d3bc2e7ddc611f96b3e356ae2e21aa872c551a0f870d7",
+      "gzip_bytes": 189190
+    },
+    "windows-optimized": {
+      "job": 115317511175,
+      "raw_sha256": "420ace39cc43aa8f1bfd46a90776c2370c09f033330dbbd904eea447e1505256",
+      "raw_bytes": 34343,
+      "gzip_sha256": "755d0838e52fd0dc985c704814b5b162bc071595e55ade49f540c64641d025bc",
+      "gzip_bytes": 7737
+    }
+  },
+  "execution_seconds": {
+    "desktop (windows, windows-latest, incant_platform_smoke.exe)": 799,
+    "desktop (linux, ubuntu-latest, incant_platform_smoke)": 520,
+    "android": 585,
+    "web": 372,
+    "ios": 540,
+    "desktop (macos, macos-latest, incant_platform_smoke)": 681,
+    "build": 75,
+    "deploy": 0,
+    "storage (ubuntu-latest)": 557,
+    "storage (macos-latest)": 306,
+    "storage (windows-latest)": 324,
+    "desktop (ubuntu-latest, Linux)": 2354,
+    "desktop (windows-latest, Windows, .exe)": 4028,
+    "portability": 313,
+    "native (windows-latest)": 1116,
+    "native (macos-latest)": 904,
+    "native (ubuntu-latest)": 900,
+    "compare": 36,
+    "classify": 25,
+    "checks": 4687,
+    "local-service-protocols": 104,
+    "windows-optimized": 2436,
+    "conformance (macos-latest)": 2031,
+    "windows-composed": 706,
+    "windows-baseline": 1755,
+    "conformance (ubuntu-latest)": 1558,
+    "windows-shipping": 578,
+    "conformance (windows-latest)": 26
+  },
+  "retained_artifacts": {
+    "capture-logs.py": {
+      "sha256": "19e4b86c060c885f556dd1a99979a6a6d64cc45e9a1d09092ae179be03bfdb9f",
+      "bytes": 895
+    },
+    "completed-job-logs.json": {
+      "sha256": "c0f0a049cc7b62b73c238e54523f5b45e28b7c67925b9ddb60a7bce849eb54b8",
+      "bytes": 1103
+    },
+    "independent-promotion-review.json": {
+      "sha256": "58ad6cb191ac4efafb22e15c2dc95ac8d638d2bfe097195af9ba53953a25196d",
+      "bytes": 12226
+    },
+    "jobs-38403667575.json": {
+      "sha256": "597b2eeeb90a7e683069fcbdad2235f718ecbe3a7cc0c5641e293e8606958f36",
+      "bytes": 25530
+    },
+    "jobs-38403667723.json": {
+      "sha256": "eaf9fb76b18f56913eb706cd78dfebf64ef62ce705f2d8c74ab1ea2293db49f4",
+      "bytes": 2454
+    },
+    "jobs-38403667741.json": {
+      "sha256": "dad6dec84cdddafa1a7a00d1804f4f1de3a5b16b25e94bb13d2e432163e4840a",
+      "bytes": 4149
+    },
+    "jobs-38403667748.json": {
+      "sha256": "1bcbfef902b40fb867e20f1287c36b2209f485ff9bc06b8273c7d5e2092b8839",
+      "bytes": 26287
+    },
+    "jobs-38403667841.json": {
+      "sha256": "cd4a2d094369b8be25d28dd16481eb76a3564a17f68996b10d8027a78d5c7064",
+      "bytes": 27988
+    },
+    "jobs-38403667905.json": {
+      "sha256": "7192ffa68ef6abb59af1feaef9c645c294d2fa7db580541aba5b2823cfa0c9dd",
+      "bytes": 19192
+    },
+    "jobs-38403667947.json": {
+      "sha256": "6e712f6e77daec7994cede3559fc875308eb20604639c64d0daee544d5a33c78",
+      "bytes": 12101
+    },
+    "jobs-38403668026.json": {
+      "sha256": "6d17ba893b7bc6da81689959545a71fdaba2c95dae29e4d1409af56442fc737a",
+      "bytes": 23394
+    },
+    "latest-state.json": {
+      "sha256": "f94f428b8a1fbf989e51e7053834a7c68887e0926fa306782e942fb184bce242",
+      "bytes": 13637
+    },
+    "linux-desktop.log.gz": {
+      "sha256": "d78ca96c0e4bd9c3e8b85257eacb74749826d392d0347862528cdd3a9f1e8130",
+      "bytes": 210533
+    },
+    "macos-checks.log.gz": {
+      "sha256": "7226725f48a26ffceba0a80b94a31490f2c2d44a05d019d9fc1b1a08d9303d7b",
+      "bytes": 206878
+    },
+    "manifest.json": {
+      "sha256": "39d53fc368ce14dcf8d3c1716f76e530d2c6f7a5dadd1c4803ddd0a355114e6f",
+      "bytes": 1654
+    },
+    "merge-body.md": {
+      "sha256": "9eef2dba395fe5236f330710ff860c84c3b2b7604db4ea4c71cd0a75c0f4a1c5",
+      "bytes": 401
+    },
+    "observations.jsonl": {
+      "sha256": "7b0edeb9fddfae629264079f75c32bd81b1b6abc7188613e957a2a09596569f8",
+      "bytes": 187873
+    },
+    "observed-hosted-lines.json": {
+      "sha256": "aa3740b441ebc6103de288bec7f30badda8b57b2f6ed39f0691926b7ff215088",
+      "bytes": 15334
+    },
+    "pr-body.md": {
+      "sha256": "89ecc8ce64091d7edde802a871e0c20bf6e1b7ae0337e699ca8f0b545938b701",
+      "bytes": 1614
+    },
+    "pr-final.json": {
+      "sha256": "14bb377efa64f1a9b01a3e4d7cf0e8efdda7bf2400f201cc9cf24c008a320dbb",
+      "bytes": 8975
+    },
+    "pr-merged.json": {
+      "sha256": "0a2ae3722a71c43c8647ec50849d70d345c9e8fef2dbdb129f758517eb3f7ceb",
+      "bytes": 285
+    },
+    "prepare-attempt1/jobs-38403667575.json": {
+      "sha256": "597b2eeeb90a7e683069fcbdad2235f718ecbe3a7cc0c5641e293e8606958f36",
+      "bytes": 25530
+    },
+    "prepare-attempt1/jobs-38403667723.json": {
+      "sha256": "eaf9fb76b18f56913eb706cd78dfebf64ef62ce705f2d8c74ab1ea2293db49f4",
+      "bytes": 2454
+    },
+    "prepare-attempt1/jobs-38403667741.json": {
+      "sha256": "dad6dec84cdddafa1a7a00d1804f4f1de3a5b16b25e94bb13d2e432163e4840a",
+      "bytes": 4149
+    },
+    "prepare-attempt1/jobs-38403667748.json": {
+      "sha256": "1bcbfef902b40fb867e20f1287c36b2209f485ff9bc06b8273c7d5e2092b8839",
+      "bytes": 26287
+    },
+    "prepare-attempt1/jobs-38403667947.json": {
+      "sha256": "6e712f6e77daec7994cede3559fc875308eb20604639c64d0daee544d5a33c78",
+      "bytes": 12101
+    },
+    "prepare-attempt1/jobs-38403668026.json": {
+      "sha256": "6d17ba893b7bc6da81689959545a71fdaba2c95dae29e4d1409af56442fc737a",
+      "bytes": 23394
+    },
+    "prepare-attempt1/pr-final.json": {
+      "sha256": "14bb377efa64f1a9b01a3e4d7cf0e8efdda7bf2400f201cc9cf24c008a320dbb",
+      "bytes": 8975
+    },
+    "prepare-attempt1/protection-final.json": {
+      "sha256": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+      "bytes": 3015
+    },
+    "prepare-attempt1/runs-final.json": {
+      "sha256": "ea80645c001506f67044f584a08c060c71b4c4e36686efad21723125d3b61597",
+      "bytes": 99508
+    },
+    "prepare-attempt1.json": {
+      "sha256": "d7097e53e4290405f91d84dd28d4cce97dd67651a4baef01729a4d0ec2f4037e",
+      "bytes": 2305
+    },
+    "prepare-promotion.py": {
+      "sha256": "a40f757f0e12b38a51941f94167f733929e2a8a5d324b63723714d803c245069",
+      "bytes": 5057
+    },
+    "prepromotion.json": {
+      "sha256": "fdc8c5705a577235e42d6917193523207717b31589bb8107c4d1051853a0ed63",
+      "bytes": 3754
+    },
+    "previous-terminal.json": {
+      "sha256": "0eeb43b10b1efef74985d4fe4580e24d78aa08fb00e70f73d2b300b8de65ec91",
+      "bytes": 13842
+    },
+    "progress-jobs-38403667905.json": {
+      "sha256": "a5c372122309806d1c124e6d56ebb2a8c7cc4d63460ea66238740e323e845bc5",
+      "bytes": 18823
+    },
+    "promotion.json": {
+      "sha256": "066a97392c6a6b759d2a0157c85f10c0408698c0c34aad6462017a385803fdaa",
+      "bytes": 807
+    },
+    "protection-final.json": {
+      "sha256": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+      "bytes": 3015
+    },
+    "protection.json": {
+      "sha256": "5c904412bdd5bb66a2b99566fb8ee8737be1207963224c1a7b33a8ef08d74057",
+      "bytes": 4177
+    },
+    "release-to-selected.paths": {
+      "sha256": "a5a7061b6446b7d382d1ff63d6cb5bcd0f783d2b2524740299001da37d6313d8",
+      "bytes": 125500
+    },
+    "release-to-selected.stat": {
+      "sha256": "b65cc2f4bcd730b08134e2273d4727913335a82539e0c6bfa918f898bb883041",
+      "bytes": 114027
+    },
+    "required-final.json": {
+      "sha256": "3904637a10085f957e1d44a93a6d7cceea150d8f9d32180acdae01a5d0429b97",
+      "bytes": 8919
+    },
+    "runs-final.json": {
+      "sha256": "ea80645c001506f67044f584a08c060c71b4c4e36686efad21723125d3b61597",
+      "bytes": 99508
+    },
+    "terminal-state.json": {
+      "sha256": "f94f428b8a1fbf989e51e7053834a7c68887e0926fa306782e942fb184bce242",
+      "bytes": 13637
+    },
+    "verify.py": {
+      "sha256": "d412ea3ea5eb360235fc6df75f09eb4ff67dce3dfac40fcb855932c8fbbd7590",
+      "bytes": 4347
+    },
+    "windows-desktop.log.gz": {
+      "sha256": "408bbf3c716ff099c77d3bc2e7ddc611f96b3e356ae2e21aa872c551a0f870d7",
+      "bytes": 189190
+    },
+    "windows-optimized.log.gz": {
+      "sha256": "755d0838e52fd0dc985c704814b5b162bc071595e55ade49f540c64641d025bc",
+      "bytes": 7737
+    }
+  },
+  "limitations": [
+    "Exact selected main226 only; main227+ remains outside release baseline.",
+    "Hosted default/cooked backend and optional timing capability behavior are qualified by logged adapters, not physical phone or appearance approval.",
+    "First promotion evidence query failed HTTP502; retained successful partial queries and later full success remain separate. No workflow rerun or shared-ref change resulted from that read-only failure.",
+    "No phase, signing, distribution or performance gate approved."
+  ]
+}

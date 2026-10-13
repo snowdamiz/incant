@@ -4,6 +4,7 @@ use crate::{Renderer, Result};
 pub(crate) struct MotionSystem {
     pub(super) globals: wgpu::BindGroupLayout,
     pipelines: [wgpu::RenderPipeline; 8],
+    pub(super) owner_pipelines: Option<[wgpu::RenderPipeline; 4]>,
 }
 const CURRENT: [wgpu::VertexAttribute; 2] = [
     wgpu::VertexAttribute {
@@ -26,6 +27,12 @@ const WORLD: [wgpu::VertexAttribute; 4] =
     wgpu::vertex_attr_array![3=>Float32x4,4=>Float32x4,5=>Float32x4,6=>Float32x4];
 const OLD_WORLD: [wgpu::VertexAttribute; 5] =
     wgpu::vertex_attr_array![7=>Float32x4,8=>Float32x4,9=>Float32x4,10=>Float32x4,11=>Float32x4];
+const OLD_WORLD_OWNER: [wgpu::VertexAttribute; 6] = wgpu::vertex_attr_array![7=>Float32x4,8=>Float32x4,9=>Float32x4,10=>Float32x4,11=>Float32,12=>Uint32];
+pub(crate) fn owner_buffers() -> [wgpu::VertexBufferLayout<'static>; 4] {
+    let mut result = buffers();
+    result[3].attributes = &OLD_WORLD_OWNER;
+    result
+}
 pub(crate) fn frame_entry() -> wgpu::BindGroupLayoutEntry {
     wgpu::BindGroupLayoutEntry {
         binding: 0,
@@ -135,7 +142,11 @@ impl MotionSystem {
                 cache: None,
             })
         });
-        Ok(Self { globals, pipelines })
+        Ok(Self {
+            globals,
+            pipelines,
+            owner_pipelines: None,
+        })
     }
     pub(super) fn pipeline(
         &self,

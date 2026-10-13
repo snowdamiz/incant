@@ -1,0 +1,757 @@
+{
+  "schema": "incant-temporal-owner-current-main-v1",
+  "at": "2026-10-13T15:10:51.877668+00:00",
+  "base": "b190d826a3df02466df18bf860f127228d375016",
+  "source": "a692ef6e8fea2d8e5e0870e2c0676c40a0a788cd",
+  "producer": "4c4310874405f569b60e32a0d8d5f21073546c9d",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/freeze.json",
+    "sha256": "8ff17b69fbf0d727f50f53b9dae956f96cbf03f8d7cc1b78d6c02ddc294fc991",
+    "inputs": 3545
+  },
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/source-freeze.json",
+    "sha256": "1c99b960538a2dd09d94882c5ba15f84b6d5582667cfae9f257f488c34530866"
+  },
+  "source_paths": [
+    "crates/incant_render/build.rs",
+    "crates/incant_render/src/motion/attachment.rs",
+    "crates/incant_render/src/motion/draw.rs",
+    "crates/incant_render/src/motion/mod.rs",
+    "crates/incant_render/src/motion/owner.wgsl",
+    "crates/incant_render/src/motion/owner_system.rs",
+    "crates/incant_render/src/motion/retained.rs",
+    "crates/incant_render/src/motion/system.rs",
+    "crates/incant_render/src/motion/targets.rs",
+    "crates/incant_render/src/motion_owner_device_tests.rs",
+    "crates/incant_render/src/retained.rs",
+    "crates/incant_render/src/temporal_shader.rs",
+    "crates/incant_render/src/temporal_shader/cooked.rs",
+    "crates/incant_render/src/temporal_shader/cooked/host.rs",
+    "crates/incant_shader_cook/src/temporal/contract.rs",
+    "crates/incant_shader_cook/src/temporal/emit.rs",
+    "crates/incant_shader_cook/src/temporal/mod.rs",
+    "crates/incant_shader_cook/tests/temporal.rs"
+  ],
+  "counts": {
+    "shader-cooker": {
+      "passed": 33,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 9,
+      "nonempty_groups": 8
+    },
+    "default-cpu": {
+      "passed": 146,
+      "failed": 0,
+      "ignored": 104,
+      "groups": 10,
+      "nonempty_groups": 7
+    },
+    "cooked-cpu": {
+      "passed": 175,
+      "failed": 0,
+      "ignored": 104,
+      "groups": 10,
+      "nonempty_groups": 7
+    },
+    "partial-cooked-refusal-exact": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1,
+      "nonempty_groups": 1
+    }
+  },
+  "checks": [
+    {
+      "name": "scoped-renderer-clean",
+      "argv": [
+        "./tools/cargo",
+        "clean",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_shader_cook"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 39531,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.14975045899336692,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/scoped-renderer-clean.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/scoped-renderer-clean.stderr",
+        "sha256": "8bc38e5a108c12a6f5207cf80962d82091cbae59b6dc42b92f57123d82e8e956"
+      }
+    },
+    {
+      "name": "shader-cooker",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 39542,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 22.519197667003027,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/shader-cooker.stdout",
+        "sha256": "77c802c66bf82fad12eba2a7cbc1e0182352812dc047742b8e30322b786ca707"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/shader-cooker.stderr",
+        "sha256": "703f667cf21e2bb755a4200fbdcf96a315b6bfca7eecc79d899c2f5379cea998"
+      }
+    },
+    {
+      "name": "default-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 39820,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 160.98860516601417,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/default-cpu.stdout",
+        "sha256": "ff4074a3bb838d855d15a593866f8fb65269b7ae1e9584b5a80e2eb3221f4b46"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/default-cpu.stderr",
+        "sha256": "7e2d13c17cd2a4a9333107ae48be108d38bf6a891c074343abcfe33a47d43006"
+      }
+    },
+    {
+      "name": "default-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 41317,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 28.026585750005324,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/default-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/default-clippy.stderr",
+        "sha256": "99e599d139fd0de80c502142a435d9ec572f5930489e7a7f0dcc1feb10c2d7b5"
+      }
+    },
+    {
+      "name": "cooked-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 41735,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 27.544151666996186,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/cooked-cpu.stdout",
+        "sha256": "2b5692f633921f38574efe67e65588e6818aaca39c13beabf9251ec74156f040"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/cooked-cpu.stderr",
+        "sha256": "067dc82a2d2feb8387d42dd1221303729bcbe8edbab4343f14bb1f72fb06e32d"
+      }
+    },
+    {
+      "name": "offline-recook",
+      "argv": [
+        "python3",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/offline.py",
+        "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/build/incant_render-c7eb858c7336bca5/out",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/offline"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 42386,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.7269576660037274,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/offline-recook.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/offline-recook.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "cooked-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 42417,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 4.72298750000482,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/cooked-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/cooked-clippy.stderr",
+        "sha256": "46340b7e8020a01b4fbd5642b4bac9f8809c8b4028d36f1aae5146e3aab68d54"
+      }
+    },
+    {
+      "name": "shader-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 42529,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 5.653906874998938,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/shader-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/shader-clippy.stderr",
+        "sha256": "04e8366eb158f903e83d6d2c635b6157d2d0bba3f88c046c78e4c6eb06de5de5"
+      }
+    },
+    {
+      "name": "native-window-consumer",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--features",
+        "native-window,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 42661,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 77.28357625000353,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/native-window-consumer.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/native-window-consumer.stderr",
+        "sha256": "d47cf0e704b2bdc2ad60d903cf0ec24294c99c26791edf7799901713b0cad606"
+      }
+    },
+    {
+      "name": "wasm",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 43991,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 19.341750666004373,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/wasm.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/wasm.stderr",
+        "sha256": "d4f089bdee3213fc9a1b5a4b876e6c99f3afe3b277599f2b54bf639947e863a3"
+      }
+    },
+    {
+      "name": "partial-test-list",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/incant_render-f64cac883eb42f17",
+        "--list"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 46168,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.01383170900226105,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/partial-test-list.stdout",
+        "sha256": "832fb7e6c2b619bd3801d9dea8e118933e9a442bd39863f2b5616bb82a5db3b8"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/partial-test-list.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "partial-cooked-refusal-exact",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-materials",
+        "models::motion::tests::native_cooked_features_do_not_silently_create_uncooked_motion",
+        "--",
+        "--exact"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 46171,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.5104014999960782,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/partial-cooked-refusal-exact.stdout",
+        "sha256": "4d567a8708edd546e829bf22d7a05066318bc7db68f48185ab0d6a19bef7dc6e"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/partial-cooked-refusal-exact.stderr",
+        "sha256": "3f3acc18f213425f0e1e41234b4cd579cb11a8a6e4fac85b08e6b39c9bd9a8f3"
+      }
+    },
+    {
+      "name": "normal-graph",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--edges",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 46176,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.16488754100282677,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/normal-graph.stdout",
+        "sha256": "0e84531fe096203875a5175d71e4c314e20a66f592998399855c36c51b14b2ba"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/normal-graph.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "runtime-guard",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host",
+        "incant_game_player"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 46190,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.5062825839995639,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/runtime-guard.stdout",
+        "sha256": "7284772f7a35ae60ace11db993d3bbb863b95b5c88e368a678400e7efbe09bf8"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/runtime-guard.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 46196,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.4861430000019027,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 46203,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.04042004200164229,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "b190d826a3df02466df18bf860f127228d375016",
+        "HEAD"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 46204,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.03912783399573527,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/binaries/default-incant_render_gpu_host-a9cdd36a5770c63d",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/incant_render_gpu_host-a9cdd36a5770c63d",
+      "sha256": "f4f54428688c44c97ed2ff6f5d1d3bb5dac3b50c97abd8ca81b667a13be262e2",
+      "bytes": 1075272,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/binaries/default-incant_render-22e79461d579ebd9",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/incant_render-22e79461d579ebd9",
+      "sha256": "d394ae271f0772015837c5f0319415ab1f00e6183e0250b67c6dd4ec6de621f2",
+      "bytes": 32175312,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/binaries/cooked-incant_render_gpu_host-285635f9ccb95b1e",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/incant_render_gpu_host-285635f9ccb95b1e",
+      "sha256": "d6275b9d890dff60313eff3aaf236ac3d40c680bc7e9dd6510c0462e5a713c21",
+      "bytes": 1075272,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/binaries/cooked-incant_render-b937fdf83ffb6d22",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/incant_render-b937fdf83ffb6d22",
+      "sha256": "78a44d61e3787af023815eecd1a026a102d136f153b00e1adab5e9355e686f1b",
+      "bytes": 32803328,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    }
+  ],
+  "retained_nonqualifying_commands": [
+    {
+      "name": "partial-cooked-refusal",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-materials",
+        "motion::tests::native_cooked_features_do_not_silently_create_uncooked_motion",
+        "--",
+        "--exact"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 44431,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 101.40134062500147,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/partial-cooked-refusal.stdout",
+        "sha256": "2a52eb3b84fae2562a2789dbdaef3ff7610c519aa97580b5b50adaac995d81b2"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/partial-cooked-refusal.stderr",
+        "sha256": "eb3887cc15ac7233beb00e9b8172048f61cbdf5f5fbd9a9672336576758e2980"
+      }
+    }
+  ],
+  "initial_controller": {
+    "at": "2026-10-13T15:09:38.953337+00:00",
+    "handle": 92777,
+    "exit": 1,
+    "reaped": true,
+    "kind": "harness exact libtest filter omitted models namespace",
+    "evidence": "partial-cooked-refusal.stdout records zero tests; runner assertion refused to count it as success",
+    "source_change": false,
+    "repeated_passing_checks": false
+  },
+  "offline": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/owner-attachment-main228-001/offline/result.json",
+    "sha256": "28c966fadd257adf69aa53fb35480840758e3d18f269dd9bd2ca18401e3d94f3",
+    "commands": 9,
+    "old_exact_payloads": 27,
+    "owner_exact_producer_payloads": 6
+  },
+  "producer_evidence": {
+    "records": 213,
+    "payloads": 127,
+    "numeric_records": 14,
+    "render_submissions": 12,
+    "readback_submissions": 12,
+    "source_specific": true
+  },
+  "reviews": {
+    "source": [
+      "docs/spikes/evidence/temporal-owner-main228-source-independent.json",
+      "fcfc04e6e9a3afccc616ff8f425b08693515dab3f3a59daf31785170767b65ab"
+    ],
+    "producer_cpu": [
+      "docs/spikes/evidence/temporal-owner-attachment-final-cpu-root.json",
+      "d232a2241667c7258a4211489b851b2b7bdb7f72bf72b245d613fa678d23d3e2"
+    ],
+    "producer_gpu": [
+      "docs/spikes/evidence/temporal-owner-attachment-gpu-root.json",
+      "ad7cde4b3991e3f80040ccb04a97ba81ab5ba1d84d17b6ff84fc1cc125be7954"
+    ],
+    "final": [
+      "docs/spikes/evidence/temporal-owner-main228-final-root.json",
+      "6029ae16776b8d0aa67bf6bf06ac1c48d7cc182ec680b2e6949b5910b35e47cb"
+    ]
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-owner-main228/artifacts.json.gz",
+    "sha256": "69858cced55c46141fdb1354557c6947aa98ef8803e82e53beb1ac234a4bca82",
+    "raw_sha256": "0573d3dfed15433dc5f3c8ce85275c5b7107eb0bb18453e52007903046e282e3",
+    "records": 134,
+    "payloads": 97
+  },
+  "limits": [
+    "No current GPU execution or appearance; producer numeric proof is source-specific attachment substrate only.",
+    "Main owner-only path excludes private upscaler/MetalFX ancestry; fixed TAA combination refused.",
+    "Old 27 native shader payloads exact; HLSL retained without DXC validation.",
+    "Logical accepted/candidate allocation bounds exclude queued physical GPU residency.",
+    "Checkpoint24 release evidence separately selects main226, not this renderer change."
+  ],
+  "collector": {
+    "path": "docs/spikes/evidence/temporal-owner-main228/verify.py",
+    "sha256": "f65f8cd63a27b05f7420d43d0199e15c76b9585c80f95cfe6fdb44a73e6ab6f1",
+    "mode": "--verify-only"
+  }
+}

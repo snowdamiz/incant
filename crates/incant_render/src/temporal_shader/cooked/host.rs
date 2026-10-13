@@ -31,12 +31,12 @@ fn texture(binding: u32, depth: bool) -> wgpu::BindGroupLayoutEntry {
 }
 pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
     use wgpu::{VertexFormat as F, VertexStepMode as S};
-    if matches!(kind, Kind::Motion | Kind::Depth) {
+    if matches!(kind, Kind::Motion | Kind::Depth | Kind::MotionOwner) {
         if crate::motion::system::frame_entry() != uniform(144, wgpu::ShaderStages::VERTEX_FRAGMENT)
         {
             return Err("motion frame layout");
         }
-        let expected = vec![
+        let mut expected = vec![
             (
                 48,
                 S::Vertex,
@@ -58,9 +58,16 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
                     .collect(),
             ),
         ];
-        for (actual, (stride, step, attributes)) in
-            crate::motion::system::buffers().iter().zip(expected)
-        {
+        let actual = if kind == Kind::MotionOwner {
+            expected[3].2 = (7..=10)
+                .map(|i| (i, u64::from(i - 7) * 16, F::Float32x4))
+                .chain([(11, 64, F::Float32), (12, 68, F::Uint32)])
+                .collect();
+            crate::motion::system::owner_buffers()
+        } else {
+            crate::motion::system::buffers()
+        };
+        for (actual, (stride, step, attributes)) in actual.iter().zip(expected) {
             let got: Vec<_> = actual
                 .attributes
                 .iter()
@@ -77,7 +84,7 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
         let (actual, size, count) = match kind {
             Kind::Resolve => (crate::temporal::system::layout_entries(false), 64, 4),
             Kind::Copy => (crate::temporal::system::layout_entries(true), 64, 1),
-            Kind::Motion | Kind::Depth => unreachable!(),
+            Kind::Motion | Kind::Depth | Kind::MotionOwner => unreachable!(),
         };
         let expected = if kind == Kind::Copy {
             vec![

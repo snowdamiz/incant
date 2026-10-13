@@ -128,6 +128,37 @@ impl Renderer {
     }
 }
 impl RetainedScene {
+    /// Explicit owner attachment reset. Toggling creates a fresh motion owner
+    /// and drops accepted fixed color history atomically. No color consumer
+    /// reads the attachment yet; upscale/native history owners are not present.
+    pub fn set_motion_owner_attachment(
+        &mut self,
+        renderer: &Renderer,
+        enabled: bool,
+    ) -> Result<()> {
+        let old = self
+            .motion
+            .as_ref()
+            .ok_or(crate::motion::MotionError::Disabled)?;
+        if !Arc::ptr_eq(&self.owner, &renderer.identity) {
+            return Err(crate::motion::MotionError::Owner.into());
+        }
+        if enabled && !renderer.motion.as_ref().is_some_and(|m| m.owner_enabled()) {
+            return Err(crate::motion::MotionError::OwnerDisabled.into());
+        }
+        if old.owner_attachment == enabled {
+            return Ok(());
+        }
+        self.enable_motion_history(renderer)?;
+        self.motion
+            .as_mut()
+            .expect("enabled history")
+            .owner_attachment = enabled;
+        Ok(())
+    }
+    pub fn motion_owner_attachment_enabled(&self) -> bool {
+        self.motion.as_ref().is_some_and(|m| m.owner_attachment)
+    }
     /// Pipelines must already be enabled on this renderer. Publication is atomic.
     pub fn enable_motion_history(&mut self, renderer: &Renderer) -> Result<()> {
         if !Arc::ptr_eq(&self.owner, &renderer.identity) {
@@ -168,6 +199,9 @@ impl RetainedScene {
         renderer: &Renderer,
         config: crate::temporal::TemporalConfig,
     ) -> Result<()> {
+        if self.motion_owner_attachment_enabled() {
+            return Err(crate::motion::MotionError::OwnerCombination.into());
+        }
         let temporal = crate::temporal::TemporalState::new(config)?;
         if renderer.temporal.is_none() {
             return Err(crate::temporal::TemporalError::Disabled.into());
@@ -518,3 +552,7 @@ mod motion_tests;
 #[cfg(test)]
 #[path = "temporal_retained_tests.rs"]
 mod temporal_tests;
+
+#[cfg(test)]
+#[path = "motion_owner_device_tests.rs"]
+mod motion_owner_tests;

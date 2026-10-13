@@ -52,6 +52,7 @@ pub(crate) struct MotionState {
     pub(super) targets: Option<Arc<Targets>>,
     slot: usize,
     bytes: u64,
+    pub(crate) owner_attachment: bool,
 }
 pub(crate) struct Prepared {
     history: Pending,
@@ -142,6 +143,7 @@ impl MotionState {
                 targets: None,
                 slot: 1,
                 bytes: size_of::<Self>() as u64,
+                owner_attachment: false,
             });
         }
         let mut slots = 0usize;
@@ -267,11 +269,40 @@ impl MotionState {
             targets: None,
             slot: 1,
             bytes,
+            owner_attachment: false,
         })
     }
     #[cfg(test)]
     pub(crate) fn readback_view(&self) -> Option<wgpu::TextureView> {
         self.targets.as_ref().map(|t| t.motion.clone())
+    }
+    #[cfg(test)]
+    pub(crate) fn owner_test_views(
+        &self,
+    ) -> Option<(wgpu::TextureView, wgpu::TextureView, wgpu::TextureView)> {
+        let t = self.targets.as_ref()?;
+        Some((
+            t.owner.as_ref()?.clone(),
+            t.motion.clone(),
+            t.depth[self.slot].clone(),
+        ))
+    }
+    #[cfg(test)]
+    pub(crate) fn depth_test_view(&self) -> Option<wgpu::TextureView> {
+        self.targets.as_ref().map(|t| t.depth[self.slot].clone())
+    }
+    #[cfg(test)]
+    pub(crate) fn owner_test_id(&self, node: usize) -> Option<u32> {
+        self.rows.iter().find_map(|row| {
+            row.slots
+                .iter()
+                .position(|i| self.nodes[*i] == node)
+                .filter(|_| row.owner_base != 0)
+                .map(|i| row.owner_base + i as u32)
+        })
+    }
+    pub fn target_size(&self) -> Option<[u32; 2]> {
+        self.targets.as_ref().map(|t| t.size)
     }
     pub fn target_bytes(&self) -> u64 {
         self.targets.as_ref().map_or(0, |t| t.bytes)
@@ -329,6 +360,16 @@ impl MotionState {
             plan::MAX_MOTION_TARGET_BYTES,
         )?;
         let system = renderer.motion.as_ref().ok_or(MotionError::Disabled)?;
+        if self.owner_attachment {
+            if system.owner_pipelines.is_none() {
+                return Err(MotionError::OwnerDisabled.into());
+            }
+            super::attachment::admit(
+                plan.size,
+                self.target_size(),
+                renderer.device.limits().max_texture_dimension_2d,
+            )?;
+        }
         let valid = f32::from(u8::from(history.frame.has_previous()));
         for (batch, rows) in current.batches.iter().zip(&mut self.rows) {
             rows.packed.clear();
@@ -376,7 +417,12 @@ impl MotionState {
                 return Err(MotionError::Topology.into());
             }
         }
-        let targets = Targets::prepare(&renderer.device, plan.size, self.targets.as_ref())?;
+        let targets = Targets::prepare(
+            &renderer.device,
+            plan.size,
+            self.targets.as_ref(),
+            self.owner_attachment,
+        )?;
         let slot = if self
             .targets
             .as_ref()
@@ -434,7 +480,16 @@ impl MotionState {
                 batch: Arc::clone(batch),
                 previous_vertices: old.vertices.as_ref().unwrap_or(&primitive.vertices).clone(),
                 previous_instances: rows.buffer.clone(),
-                pipeline: system.pipeline(material.double_sided, batch.mirrored, false),
+                pipeline: if self.owner_attachment {
+                    system
+                        .owner_pipelines
+                        .as_ref()
+                        .ok_or(MotionError::OwnerDisabled)?
+                        [usize::from(batch.mirrored) + 2 * usize::from(material.double_sided)]
+                    .clone()
+                } else {
+                    system.pipeline(material.double_sided, batch.mirrored, false)
+                },
                 depth_pipeline: system.pipeline(material.double_sided, batch.mirrored, true),
             });
         }

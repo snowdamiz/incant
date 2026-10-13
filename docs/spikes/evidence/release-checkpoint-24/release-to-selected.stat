@@ -1,0 +1,1715 @@
+.gitattributes                                     |     7 +
+ .github/workflows/ci.yml                           |     2 +-
+ .github/workflows/desktop.yml                      |     4 +-
+ Cargo.lock                                         |     5 +-
+ Cargo.toml                                         |     4 +-
+ STATUS.md                                          |   306 +-
+ crates/incant_cmd/src/agent_budget_replay_tests.rs |    49 +-
+ crates/incant_physics_snapshot/Cargo.toml          |    11 +-
+ crates/incant_physics_snapshot/src/attachment.rs   |    10 +-
+ .../src/body_state/codec.rs                        |   292 +
+ .../incant_physics_snapshot/src/body_state/mod.rs  |   133 +
+ .../src/body_state/validate.rs                     |   155 +
+ .../src/broad_owner/codec.rs                       |   146 +
+ .../incant_physics_snapshot/src/broad_owner/mod.rs |    71 +
+ .../src/broad_owner/validate.rs                    |   195 +
+ .../incant_physics_snapshot/src/ccd_state/codec.rs |   101 +
+ .../incant_physics_snapshot/src/ccd_state/mod.rs   |    54 +
+ .../src/ccd_state/validate.rs                      |    79 +
+ crates/incant_physics_snapshot/src/coarena.rs      |     5 +-
+ crates/incant_physics_snapshot/src/codec.rs        |    15 +-
+ .../src/collider_state/codec.rs                    |   219 +
+ .../src/collider_state/mod.rs                      |   120 +
+ .../src/collider_state/validate.rs                 |    77 +
+ .../src/contact_manifolds/mod.rs                   |    44 +-
+ .../src/integration_config/codec.rs                |   115 +
+ .../src/integration_config/mod.rs                  |    75 +
+ .../src/integration_config/validate.rs             |    62 +
+ .../src/island_state/codec.rs                      |   254 +
+ .../src/island_state/mod.rs                        |    92 +
+ .../src/island_state/validate.rs                   |   269 +
+ crates/incant_physics_snapshot/src/lib.rs          |    41 +
+ .../src/narrow_owner/codec.rs                      |   113 +
+ .../src/narrow_owner/mod.rs                        |    66 +
+ .../src/narrow_owner/validate.rs                   |   137 +
+ .../src/pair_state/codec.rs                        |   161 +
+ .../incant_physics_snapshot/src/pair_state/mod.rs  |    80 +
+ .../src/pair_state/validate.rs                     |   163 +
+ crates/incant_physics_snapshot/src/pending_bvh.rs  |   107 +
+ .../src/pipeline_state/codec.rs                    |    77 +
+ .../src/pipeline_state/mod.rs                      |    50 +
+ .../src/pipeline_state/validate.rs                 |    43 +
+ .../src/rigid_owner/codec.rs                       |   159 +
+ .../incant_physics_snapshot/src/rigid_owner/mod.rs |    73 +
+ .../src/rigid_owner/validate.rs                    |   264 +
+ crates/incant_physics_snapshot/src/validate.rs     |    30 +-
+ crates/incant_physics_snapshot/tests/body_state.rs |   382 +
+ .../tests/collider_state.rs                        |   482 +
+ .../tests/integration_config.rs                    |   114 +
+ crates/incant_physics_snapshot/tests/islands.rs    |   350 +
+ crates/incant_physics_snapshot/tests/manifolds.rs  |   172 +-
+ crates/incant_physics_snapshot/tests/pair_state.rs |   262 +
+ .../tests/pipeline_state.rs                        |   376 +
+ .../tests/support/body_capture.rs                  |   153 +
+ .../tests/support/body_fixture.rs                  |    81 +
+ .../tests/support/broad_capture.rs                 |   119 +
+ .../tests/support/broad_cases.rs                   |   203 +
+ .../tests/support/broad_checks.rs                  |   234 +
+ .../tests/support/ccd_capture.rs                   |   185 +
+ .../tests/support/collider_capture.rs              |    73 +
+ .../tests/support/collider_cases.rs                |   115 +
+ .../tests/support/continuation_cases.rs            |   159 +
+ .../tests/support/integration_fixture.rs           |    43 +
+ .../tests/support/island_capture.rs                |    95 +
+ .../tests/support/island_cases.rs                  |   418 +
+ .../tests/support/manifold_fixture.rs              |   170 +
+ .../tests/support/narrow_cases.rs                  |   203 +
+ .../tests/support/narrow_checks.rs                 |   142 +
+ .../tests/support/ordered_capture.rs               |   197 +
+ .../tests/support/rigid_owner_capture.rs           |    59 +
+ .../tests/trusted_bodies.rs                        |   345 +
+ .../incant_physics_snapshot/tests/trusted_ccd.rs   |    91 +
+ .../tests/trusted_integration.rs                   |    91 +
+ .../tests/trusted_manifolds.rs                     |   349 +-
+ .../tests/trusted_pipeline.rs                      |   162 +
+ crates/incant_render/Cargo.toml                    |     2 +
+ crates/incant_render/build.rs                      |    39 +
+ crates/incant_render/src/animation_tests.rs        |    27 +
+ crates/incant_render/src/bloom/config.rs           |   123 +
+ crates/incant_render/src/bloom/filter.wgsl         |    78 +
+ crates/incant_render/src/bloom/mod.rs              |   301 +
+ crates/incant_render/src/bloom/output.wgsl         |    21 +
+ crates/incant_render/src/bloom/targets.rs          |    42 +
+ crates/incant_render/src/bloom/tests.rs            |   227 +
+ crates/incant_render/src/bloom/tests/device.rs     |   254 +
+ .../incant_render/src/bloom/tests/output_space.rs  |   146 +
+ crates/incant_render/src/bloom/tests/reference.rs  |   145 +
+ crates/incant_render/src/camera.rs                 |    17 +-
+ crates/incant_render/src/diagnostic_draw.rs        |     7 +-
+ crates/incant_render/src/graph.rs                  |   258 +-
+ crates/incant_render/src/lib.rs                    |   110 +-
+ crates/incant_render/src/lighting/cooked.rs        |    92 +-
+ crates/incant_render/src/lighting/mod.rs           |    64 +-
+ .../incant_render/src/lighting/temporal_source.rs  |    20 +
+ crates/incant_render/src/model_draw.rs             |   110 +-
+ crates/incant_render/src/models/animation.rs       |    49 +
+ crates/incant_render/src/motion/draw.rs            |    74 +-
+ crates/incant_render/src/motion/mod.rs             |     9 +-
+ crates/incant_render/src/motion/owner.rs           |    45 +
+ crates/incant_render/src/motion/provenance.rs      |   191 +
+ .../incant_render/src/motion/provenance_tests.rs   |   194 +
+ crates/incant_render/src/motion/retained.rs        |   290 +-
+ crates/incant_render/src/motion/shader.wgsl        |     8 +-
+ crates/incant_render/src/motion/system.rs          |   128 +-
+ crates/incant_render/src/motion/tests.rs           |    67 +-
+ crates/incant_render/src/motion_device_tests.rs    |    39 +
+ crates/incant_render/src/output.rs                 |    81 +-
+ crates/incant_render/src/resource_error.rs         |     2 +
+ crates/incant_render/src/retained.rs               |    97 +-
+ crates/incant_render/src/shadow_draw.rs            |    13 +-
+ crates/incant_render/src/shadows/cascade.rs        |    50 +-
+ crates/incant_render/src/sprites/drawing.rs        |    15 +-
+ crates/incant_render/src/temporal/config.rs        |    39 +
+ crates/incant_render/src/temporal/copy.wgsl        |    28 +
+ crates/incant_render/src/temporal/coverage.rs      |   239 +
+ .../incant_render/src/temporal/coverage_device.rs  |   334 +
+ .../incant_render/src/temporal/coverage_tests.rs   |   144 +
+ crates/incant_render/src/temporal/device_tests.rs  |   320 +
+ crates/incant_render/src/temporal/jitter.rs        |    20 +
+ crates/incant_render/src/temporal/mod.rs           |    35 +
+ crates/incant_render/src/temporal/oracle.rs        |    86 +
+ crates/incant_render/src/temporal/owner.rs         |   114 +
+ crates/incant_render/src/temporal/resolve.wgsl     |    91 +
+ crates/incant_render/src/temporal/system.rs        |   321 +
+ crates/incant_render/src/temporal/targets.rs       |    82 +
+ crates/incant_render/src/temporal/tests.rs         |   316 +
+ crates/incant_render/src/temporal_joined_tests.rs  |   241 +
+ .../incant_render/src/temporal_retained_tests.rs   |   187 +
+ crates/incant_render/src/temporal_shader.rs        |    44 +
+ crates/incant_render/src/temporal_shader/cooked.rs |   110 +
+ .../src/temporal_shader/cooked/host.rs             |   103 +
+ crates/incant_render/src/text/drawing.rs           |    15 +-
+ crates/incant_render/src/text_draw_tests.rs        |     2 +-
+ crates/incant_render/src/timing/gpu_tests.rs       |   134 +
+ crates/incant_render/src/timing/mod.rs             |   116 +
+ crates/incant_render/src/timing/pool.rs            |   119 +
+ crates/incant_render/src/timing/recorder.rs        |   244 +
+ crates/incant_render/src/timing/tests.rs           |   248 +
+ crates/incant_render/src/ui/geometry.rs            |   135 +-
+ crates/incant_render/src/ui/mod.rs                 |    33 +-
+ crates/incant_render/src/ui/theme.rs               |    23 +-
+ crates/incant_render/src/ui_draw_tests.rs          |   502 +-
+ crates/incant_render/src/ui_tests.rs               |   256 +-
+ crates/incant_render/tests/hdr_output/mod.rs       |     2 +-
+ .../incant_render/tests/lighting_gpu/readback.rs   |     2 +-
+ .../incant_render/tests/timestamp_backend_probe.rs |   244 +
+ crates/incant_render_data/src/lib.rs               |     2 +-
+ crates/incant_render_data/src/ui.rs                |    17 +-
+ crates/incant_render_game/src/ui.rs                |    14 +-
+ crates/incant_script/build.rs                      |     2 +-
+ crates/incant_shader_cook/src/lib.rs               |     1 +
+ crates/incant_shader_cook/src/temporal/contract.rs |   337 +
+ crates/incant_shader_cook/src/temporal/emit.rs     |   235 +
+ crates/incant_shader_cook/src/temporal/mod.rs      |   125 +
+ .../fixtures/temporal-resolve-single-depth.wgsl    |    69 +
+ crates/incant_shader_cook/tests/temporal.rs        |   126 +
+ crates/incant_text/src/atlas.rs                    |   102 +-
+ crates/incant_text/src/halo.rs                     |   205 +
+ crates/incant_text/src/lib.rs                      |     2 +
+ crates/incant_text/tests/atlas.rs                  |    65 +-
+ crates/incant_ui/src/fonts.rs                      |    28 +
+ crates/incant_ui/src/lib.rs                        |     2 +-
+ crates/incant_ui/src/paint.rs                      |    30 +-
+ crates/incant_ui/tests/fonts.rs                    |    72 +-
+ crates/incant_wasm_runtime/Cargo.toml              |     3 +-
+ docs/adr/0014-ci.md                                |     6 +
+ docs/spikes/bloom-main219.md                       |    69 +
+ docs/spikes/core0069-main212.md                    |    84 +
+ docs/spikes/core0069-ui-oracle-correction.md       |    13 +
+ docs/spikes/evidence/bloom-main219.json            |   743 ++
+ ...-bloom004-execution-preaudit-root-20261013.json |   188 +
+ .../0075-bloom004-final-root-20261013.json         |   214 +
+ .../bloom-main219-source-root-20261013.json        |    16 +
+ .../evidence/bloom-main219/final-root-review.json  |    13 +
+ docs/spikes/evidence/bloom-main219/freeze.json     | 12444 ++++++++++++++++++
+ .../bloom-main219/producer-appearance-review.md    |   227 +
+ docs/spikes/evidence/bloom-main219/records.json.gz |   Bin 0 -> 2450078 bytes
+ docs/spikes/evidence/bloom-main219/verify.py       |    71 +
+ .../bloom-main221/ccd-final-root-review.json       |    10 +
+ .../evidence/bloom-main221/final-root-review.json  |    10 +
+ .../bloom-main221/initial-cargo-path-error.stderr  |     4 +
+ .../bloom-main221/initial-cargo-path-error.stdout  |     0
+ .../evidence/bloom-main221/qualification.json      |   275 +
+ .../bloom-main221/tested-cooked-after.stderr       |     0
+ .../bloom-main221/tested-cooked-after.stdout       |   991 ++
+ .../bloom-main221/tested-cooked-before.stderr      |     0
+ .../bloom-main221/tested-cooked-before.stdout      |   991 ++
+ .../bloom-main221/tested-default-after.stderr      |     0
+ .../bloom-main221/tested-default-after.stdout      |   960 ++
+ .../bloom-main221/tested-default-before.stderr     |     0
+ .../bloom-main221/tested-default-before.stdout     |   960 ++
+ .../bloom-main221/tested-player-after.stderr       |     0
+ .../bloom-main221/tested-player-after.stdout       |   952 ++
+ .../bloom-main221/tested-player-before.stderr      |     0
+ .../bloom-main221/tested-player-before.stdout      |   952 ++
+ docs/spikes/evidence/bloom-main221/verify.py       |    39 +
+ docs/spikes/evidence/core0069-main212.json         |    98 +
+ .../evidence/core0069-main212/artifacts.json.gz    |   Bin 0 -> 1656709 bytes
+ .../evidence/core0069-main212/artifacts.tar.gz     |   Bin 0 -> 41518458 bytes
+ .../core0069-main212/current-main-audit.stdout     |    62 +
+ .../core0069-main212/current-main-config.json      |    30 +
+ .../current-main-qualification.json                |    40 +
+ .../core0069-main212/current-main-review.json      |    20 +
+ .../evidence/core0069-main212/final-review.json    |    23 +
+ .../core0069-main212/packaging-review.json         |     9 +
+ .../core0069-main212/qualify-current-main.py       |    43 +
+ docs/spikes/evidence/core0069-main212/verify.py    |    20 +
+ .../evidence/core0069-ui-oracle-correction.json    |   204 +
+ .../core0069-ui-oracle-correction/commands.json    |    73 +
+ .../core0069-oracle-diagnosis-20261013.json        |   171 +
+ .../core0069-oracle-diagnosis-root-20261013.json   |     9 +
+ .../core0069-ui-oracle-correction/cpu-release.json |    13 +
+ .../freeze-g6.json.gz                              |   Bin 0 -> 140476 bytes
+ .../frozen-build-g6.json                           |    70 +
+ .../production-reuse.json.gz                       |   Bin 0 -> 2890 bytes
+ .../regression-g6.json                             |   115 +
+ .../renderer-clippy.stderr                         |    14 +
+ .../renderer-clippy.stdout                         |     0
+ .../renderer-cpu.stderr                            |     6 +
+ .../renderer-cpu.stdout.gz                         |   Bin 0 -> 26141 bytes
+ .../core0069-ui-oracle-correction/run_cpu.py       |    44 +
+ .../core0069-ui-oracle-correction/source.patch     |   179 +
+ docs/spikes/evidence/fixed-temporal-main217.json   |  2140 ++++
+ ...072-fixed-coverage-execution-root-20261013.json |   150 +
+ .../fixed-temporal-main217/final-review.json       |    19 +
+ .../fixed-temporal-main217-001-freeze.json         | 12404 ++++++++++++++++++
+ .../fixed-temporal-main217-002-freeze.json         | 12408 ++++++++++++++++++
+ ...ixed-temporal-main217-source-root-20261013.json |    25 +
+ .../main219-qualification.json                     |   105 +
+ .../main219-selected-graph.txt                     |   909 ++
+ .../producer-fixed-review.md                       |   437 +
+ .../producer-temporal-coverage-logs.json.gz        |   Bin 0 -> 493160 bytes
+ .../producer-temporal-coverage.json                |   742 ++
+ .../fixed-temporal-main217/records.json.gz         |   Bin 0 -> 2980607 bytes
+ .../fixed-temporal-main217/source-review.json      |    25 +
+ ...mporal-coverage-final-packet-root-20261013.json |    24 +
+ ...emporal-coverage-source-cpu-final-20261013.json |   437 +
+ .../evidence/fixed-temporal-main217/verify.py      |    88 +
+ docs/spikes/evidence/gpu-frame-envelope.json       |   312 +
+ ...e30b51433a79cec6c771bb5adb8c226af1717c02dedf.gz |   Bin 0 -> 59900 bytes
+ ...b7c7226d09160e748bb79f939957a5a4582ecf6fc9b2.gz |   Bin 0 -> 809 bytes
+ ...bbb252cfb88d13a6588219e8bbeec8b0ce54c9cc1c0b.gz |   Bin 0 -> 513 bytes
+ ...84ef5e2dcfa0d54611859dd96dd30aae47e63bbbc4c4.gz |   Bin 0 -> 158 bytes
+ ...55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3.gz |   Bin 0 -> 1371 bytes
+ ...dfbb7107c80a6d543d7633354e05e373e6aedc224d83.gz |   Bin 0 -> 442 bytes
+ ...890bfc4692b8d1e2f261d6af5fdf1d3cb4252e0f31ac.gz |   Bin 0 -> 1222 bytes
+ ...a823fdcce6c24d5f44b9c854c5570dc17991cf804b7d.gz |   Bin 0 -> 950 bytes
+ ...315674fb6bcf4d74a624d40a010da2889fc1e7be5549.gz |   Bin 0 -> 1136 bytes
+ ...e42cc4ffe07f8519de81f1410a76243366646d11357a.gz |   Bin 0 -> 1524 bytes
+ ...b699a0de825214c18f76f7f7ea5a743bab59269b211c.gz |   Bin 0 -> 687 bytes
+ ...0007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124.gz |   Bin 0 -> 107 bytes
+ ...ba16ec856bed9de30b3da64770c26d483b90ebaf7867.gz |   Bin 0 -> 2467 bytes
+ ...27913de49f59a5e71f5ac1becfaa5da241efeaf98857.gz |   Bin 0 -> 1144 bytes
+ ...97fe766120043864c1eb5e4d1a7c09d03121c690a44e.gz |   Bin 0 -> 595 bytes
+ ...f4c8996fb92427ae41e4649b934ca495991b7852b855.gz |   Bin 0 -> 20 bytes
+ ...2dfacb02d6edf85d869cd4963c34f1e725267f13aa87.gz |   Bin 0 -> 2879 bytes
+ docs/spikes/evidence/gpu-timestamps-main200.json   |   387 +
+ .../gpu-timestamps-main200/artifacts.json.gz       |   Bin 0 -> 205905 bytes
+ .../evidence/gpu-timestamps-main200/collect.py     |    36 +
+ .../gpu-timestamps-main200/final-cpu-review.json   |    32 +
+ .../evidence/gpu-timestamps-main200/freeze.json    |  2884 +++++
+ docs/spikes/evidence/gpu-timestamps-main200/run.py |    21 +
+ docs/spikes/evidence/gpu-timestamps-main207.json   |   440 +
+ .../gpu-timestamps-main207/artifacts.json.gz       |   Bin 0 -> 214797 bytes
+ .../evidence/gpu-timestamps-main207/collect.py     |    83 +
+ .../gpu-timestamps-main207/final-review.json       |    36 +
+ .../evidence/gpu-timestamps-main207/freeze.json    |  2911 +++++
+ .../gpu-timestamps-main207/integration-seams.patch |    90 +
+ .../producer-final-review.json                     |    36 +
+ .../producer-source-review.json                    |    38 +
+ docs/spikes/evidence/gpu-timestamps-main207/run.py |    22 +
+ .../evidence/gpu-timestamps-pass-resolve.json      |   607 +
+ ...c1a1d19229a9f6f070955dce3d1413a83421ea9954fc.gz |   Bin 0 -> 1090 bytes
+ ...c1e6cdbafdae58c6f67c12aa746ed8b05da5837b8222.gz |   Bin 0 -> 221 bytes
+ ...88783f05141d48502398f79301b96a965976f3148f93.gz |   Bin 0 -> 3686 bytes
+ ...47cdb969e291589f46bd65f7e5c8ad8ad140e864f224.gz |   Bin 0 -> 446 bytes
+ ...cd586ad2ce3ff91827f2982d60660430628b37ed1b2f.gz |   Bin 0 -> 131 bytes
+ ...065c11b5f67977e9070ccc50f103df909f2275b87336.gz |   Bin 0 -> 286 bytes
+ ...14a4e1fe1eeb90729304413f3885e7ac580197dc493b.gz |   Bin 0 -> 20922 bytes
+ ...e67fe4ee9fbd9b101a603aaea1fa92b4d0e3ff35306b.gz |   Bin 0 -> 158 bytes
+ ...1a79909123e7a1cfa9a1b91a36e21d0c816c7c3c3841.gz |   Bin 0 -> 451 bytes
+ ...e7217998d3ba521f4d0a769c2852b8eae9aa78861067.gz |   Bin 0 -> 635 bytes
+ ...f9225e4fc714a38c06ce3c25a618c9477fdf625a69e1.gz |   Bin 0 -> 28556 bytes
+ ...43b6ea238f48e7c811d7bb185190063914ec74716d9f.gz |   Bin 0 -> 69433 bytes
+ ...15afd176a21082465b94e105db9eed0057a6ced89af4.gz |   Bin 0 -> 1053 bytes
+ ...f37318e876095f459c6b75820f5de26f76933964f902.gz |   Bin 0 -> 601 bytes
+ ...119a179cbed43decbd188731435ebac3075543e6fb66.gz |   Bin 0 -> 379 bytes
+ ...a49ac5fc1fc39ad89df9d684c37d7110cc8831d3a257.gz |   Bin 0 -> 405 bytes
+ ...2dc4b9b69d0f996ae47fb425754ac2ac5fde6ccd3ee5.gz |   Bin 0 -> 253 bytes
+ ...99c93edf9bf4eea24ac83eecdb7eb582fab7df0b9db9.gz |   Bin 0 -> 836 bytes
+ ...8b3d9e2e661dec3fc85b01e9b1d42571ccc5fcf365c6.gz |   Bin 0 -> 57 bytes
+ ...7087433647d6965113cd14c8d33c1a311038dbbe8614.gz |   Bin 0 -> 609 bytes
+ ...c684a888f941fd85c218386a3a7347fa9dc1c586e9a8.gz |   Bin 0 -> 159 bytes
+ ...a3baea1016794ab69f181dbd6ecc3eaf6ee16ecf045c.gz |   Bin 0 -> 559 bytes
+ ...f989ff2fcb768b2e9a5db6144fd3578eaf8fa8cc6479.gz |   Bin 0 -> 2726 bytes
+ ...c2ab50b9497a48ef51ccaadf3f3806c14f198c8ac4ad.gz |   Bin 0 -> 369 bytes
+ ...eaf86f0f2bd645dd90436ed0808f56219ac57b6b1651.gz |   Bin 0 -> 252 bytes
+ ...f9f953b765ef651bcd7c208d9a7198ad7a4073215484.gz |   Bin 0 -> 1567 bytes
+ ...c830e680c2b4ccb0e3783b192123e240f38c8ebc1a92.gz |   Bin 0 -> 1902 bytes
+ ...11adcc9be24bd0c5fc57e5911955b2a7fc48ff3bbe64.gz |   Bin 0 -> 273 bytes
+ ...5f70f512eb80707f01b61a880df0bd6076f77c6f0d10.gz |   Bin 0 -> 368 bytes
+ ...c235c2aeb7a4d0dd0e37c96939e7856c5893f8d5aa13.gz |   Bin 0 -> 597 bytes
+ ...b8e44c7632c62d197e92513a06cfddfc3b69591e45cc.gz |   Bin 0 -> 2239 bytes
+ ...4e63c6086544719d8a3501c59fb58cd5d652521017be.gz |   Bin 0 -> 20946 bytes
+ ...93555859a194d48c2e69cee63f6582353a5ebca5c700.gz |   Bin 0 -> 729 bytes
+ ...8b16ca60880e9028418104cfd89b6b0556c017a73c5e.gz |   Bin 0 -> 22546 bytes
+ ...17d11ebc0b3734fad5e95e843f64399951f2954d2d1b.gz |   Bin 0 -> 1597 bytes
+ ...d5ff6d70fae114f22947b1c24bf235b654d28582d771.gz |   Bin 0 -> 69447 bytes
+ ...674f86a0a1810e8a75c621c2562237416adeaa78320e.gz |   Bin 0 -> 567 bytes
+ ...f4c8996fb92427ae41e4649b934ca495991b7852b855.gz |   Bin 0 -> 20 bytes
+ ...735b6e345bfdd48ebfa939ae9a33f53b1722fe8d613d.gz |   Bin 0 -> 322 bytes
+ ...ea7a498a0653b60b4c188ec9515c69093b0fcd05950d.gz |   Bin 0 -> 164 bytes
+ ...3760c3db24d997623a2b37ce0c28fc2259bd410bf3d9.gz |   Bin 0 -> 159 bytes
+ docs/spikes/evidence/gpu-timestamps-r2.json        |   709 ++
+ ...ccc6cb4dbe4ffe33824a015f40eee4bc7fffb72e434e.gz |   Bin 0 -> 9261 bytes
+ ...91a7c05124b64eeece964e09c058ef8f9805daca546b.gz |   Bin 0 -> 21 bytes
+ ...423bdb87f46cc06528c288ca73b121b002a88c0ee300.gz |   Bin 0 -> 4145 bytes
+ ...d40229b7b48cc0fe25aa80d65e2fcc904e449be702a8.gz |   Bin 0 -> 77 bytes
+ ...1ff4bdd7f910824e9e813621a73a2b3bd4368aa00afc.gz |   Bin 0 -> 145 bytes
+ ...936508b0d757327bdb3653afa0d71e41fc3907e21aba.gz |   Bin 0 -> 164 bytes
+ ...673f34c647ff524aae5823d0de22097b68b80bbfa41f.gz |   Bin 0 -> 1700 bytes
+ ...bfa2fb880159149df0d71fca6262d8e2b16ed7d9e501.gz |   Bin 0 -> 9918 bytes
+ ...a3ab80bee6dde9d8edaa89f43e9a880cf93ab4e82f5d.gz |   Bin 0 -> 1273 bytes
+ ...35558b687d285a6aac5d6afa672e2b3e27780c672e97.gz |   Bin 0 -> 437 bytes
+ ...76395500e28581e36d8b8a70d1495e0004281187ec71.gz |   Bin 0 -> 367 bytes
+ ...abfd8518efa58815799f48dc18456afd837db9203da7.gz |   Bin 0 -> 263 bytes
+ ...e203eb5e52ae80e436d177eac890b494f66cf5c773c7.gz |   Bin 0 -> 9826 bytes
+ ...80530fb076a0a36e9491847d2c28c2acb82cc9392b13.gz |   Bin 0 -> 10312 bytes
+ ...a6a2beea74f210fb2d3e5660a8077529f45ad6fe0b0a.gz |   Bin 0 -> 1567 bytes
+ ...3c2140e183ffa35f61770d075303ff07e724a2a1f60d.gz |   Bin 0 -> 502 bytes
+ ...534ea8b9d90b3f53582a66b8f75f43e40e70d6b7f1ea.gz |   Bin 0 -> 6963 bytes
+ ...fb8544458cb8041d3d5925951524381836486ef89372.gz |   Bin 0 -> 98 bytes
+ ...3025ce950651999529c3a88200cb95c95989756e5559.gz |   Bin 0 -> 1571 bytes
+ ...92de77255e26d084fde7700fb968999509e91acb470f.gz |   Bin 0 -> 115 bytes
+ ...3b48343bd2631c6c73e19c68fd475a6cee0db3669651.gz |   Bin 0 -> 200 bytes
+ ...b003654cd06ae8b6025fb13d298f0dddf6e61869a944.gz |   Bin 0 -> 132 bytes
+ ...35104560114b074959b7364988abd07274dabd0f95c6.gz |   Bin 0 -> 51691 bytes
+ ...c75926ad7e4d9d897cf2f08e5544d7abcd8d3d28ee29.gz |   Bin 0 -> 468 bytes
+ ...967ad8a15c87a78cf790e31336fde5d104b4eb477496.gz |   Bin 0 -> 2460 bytes
+ ...5c54808a79fcdf975d5a5c376ac2b33de94bf59968ca.gz |   Bin 0 -> 14469 bytes
+ ...dd6e6e69a44d6caa2425167def666e6fba5bed7e1f91.gz |   Bin 0 -> 2182 bytes
+ ...90dec5a052129798553b1cf4bf82772d358bb9f424cc.gz |   Bin 0 -> 417 bytes
+ ...40f5698f8ebba6e1594589c9a8d7eec4e001d5316525.gz |   Bin 0 -> 98 bytes
+ ...2dd9672cdc98c2e745d94ca058a0aa1b2c044e3ee0b7.gz |   Bin 0 -> 2881 bytes
+ ...f1bdf14c9d72bb52d9df3117636ef9b7ae36eff2d989.gz |   Bin 0 -> 21640 bytes
+ ...bf419b28fe22b5399f9531fd1f9663ee56dee3e5b671.gz |   Bin 0 -> 1225 bytes
+ ...f405146a3f306ee40382dfd99556cca97efd09279592.gz |   Bin 0 -> 112 bytes
+ ...cbe97d3d16b259e6b4af4b28c4f3e1f17f2a0641c7bb.gz |   Bin 0 -> 433 bytes
+ ...551967a00b8f4a01a04dcb6d16f57dc4fef2b7052690.gz |   Bin 0 -> 4481 bytes
+ ...23735e36a8f2a9a2c3f0c67062264c4da9a9489d4ab5.gz |   Bin 0 -> 6230 bytes
+ ...9cf154a6867b789e4004019e478a7ba0ab5dbf104690.gz |   Bin 0 -> 1670 bytes
+ ...d37566b5c1e301536966c8d2161d1d3f20f937713654.gz |   Bin 0 -> 249 bytes
+ ...dbbb75a6cfe36b18930d08cae7a13a3c6fa60d67d1e6.gz |   Bin 0 -> 462 bytes
+ ...5f2907eb3ccaa1ef9b412b36f65dce8c3cf3090afbb3.gz |   Bin 0 -> 169 bytes
+ ...2668c3b573d48e3e1889df50ec70beeaeac11bbb6ab4.gz |   Bin 0 -> 417 bytes
+ ...575f653a799c1942aa38a4f80c7031ac03b44d4f8261.gz |   Bin 0 -> 5896 bytes
+ ...d577f8447effdeb7bbe0497140185cd8f11db514ae7a.gz |   Bin 0 -> 2311 bytes
+ ...d0c4a348c986cafa4199d8ca56d4fa7481bec7582e04.gz |   Bin 0 -> 4511 bytes
+ ...d5770b631c8145b75d21af805e5cda9157e52a3732eb.gz |   Bin 0 -> 356 bytes
+ ...aa27666d1ef015a79931238c65ec8fa7aa7fc1cab314.gz |   Bin 0 -> 683 bytes
+ ...1868e674e3ee22abfef72d0d7559e471c9a77eaa66ec.gz |   Bin 0 -> 679 bytes
+ ...42bb5393763e4cba92f28c130fa8177ec6fac1c72613.gz |   Bin 0 -> 8153 bytes
+ ...51dfea763bd194f4222d90d058b51db2aa59a417e6c9.gz |   Bin 0 -> 296 bytes
+ ...68b7b9998dfcb2312c88bcade7e0479c71dac7158aab.gz |   Bin 0 -> 5761 bytes
+ ...9c6e86a9b7c818bea2344d7600b94cb43a685fd410ff.gz |   Bin 0 -> 8454 bytes
+ ...7e5d9dbcbd5b681c43bd735f69c0b24f876cfdb5ea3d.gz |   Bin 0 -> 435 bytes
+ ...3978302fb9c69344cdfc755a15ae1a68728467446a93.gz |   Bin 0 -> 695 bytes
+ ...998bc6036cc7f0cba57e821b19181a4c498351758bce.gz |   Bin 0 -> 462 bytes
+ ...e55fdfd28c79a59fa1734e5b6aafb4f75f94f9a40fae.gz |   Bin 0 -> 557 bytes
+ ...f1d6e024fd38473dd5980693326ecec728e60eadf6ae.gz |   Bin 0 -> 113 bytes
+ ...9daf43818104f39bfa0340ef4ac739336ccc71e80efe.gz |   Bin 0 -> 1622 bytes
+ ...e6ce9dae752041afad3dfa733365cfa8a4d18dc3e755.gz |   Bin 0 -> 158 bytes
+ ...9d162ac9c142b9b3bcc6d8c92479bf86d41a7e7d3c92.gz |   Bin 0 -> 2155 bytes
+ ...f0bba97668fa4d6a784b29587167b39ce467e21d122f.gz |   Bin 0 -> 323 bytes
+ ...a6c37a362ad6881cf2f95ff47e1c414a90036fcd838c.gz |   Bin 0 -> 2645 bytes
+ ...8e257cae242c6a8471e7893363689d2085f7cc92cae3.gz |   Bin 0 -> 120 bytes
+ ...4cb19d8178324671fcd5ff702c8820770867641f69e0.gz |   Bin 0 -> 1012 bytes
+ ...aafcf3e48b13f2519f35ae2aa4e9e75fca4f744be8b3.gz |   Bin 0 -> 40076 bytes
+ ...0c19343ba7b22c984bcaa2c398a1e217b85655a7786b.gz |   Bin 0 -> 350 bytes
+ ...8e263888b55862b8d1ce6dc01b5f1f3ed0604c73bbf4.gz |   Bin 0 -> 114 bytes
+ ...ff940f1c2d47172ddaac64aa678dfd62569233302260.gz |   Bin 0 -> 117 bytes
+ ...947403659bad56bd106ae4185858202e6ab2ab3b5820.gz |   Bin 0 -> 119 bytes
+ ...3203ff5dd0e1d12443032614f1a3bed818d23a9466f9.gz |   Bin 0 -> 1671 bytes
+ docs/spikes/evidence/gpu-timestamps.json           |   146 +
+ .../evidence/gpu-timestamps/artifacts.json.gz      |   Bin 0 -> 157926 bytes
+ docs/spikes/evidence/gpu-timestamps/freeze.json    |    55 +
+ .../gpu-timestamps-source-20261013.json            |   109 +
+ docs/spikes/evidence/journal-replay-main224.json   |   438 +
+ .../journal-replay-main224/final-review.json       |     7 +
+ .../evidence/journal-replay-main224/freeze.json    | 12581 ++++++++++++++++++
+ .../journal-replay-main224/records.json.gz         |   Bin 0 -> 399917 bytes
+ .../journal-replay-main224/repair.patch.gz         |   Bin 0 -> 1359 bytes
+ docs/spikes/evidence/journal-replay-main224/run.py |    81 +
+ .../evidence/journal-replay-main224/verify.py      |    58 +
+ docs/spikes/evidence/physics-body-main206.json     |   474 +
+ .../physics-body-main206/artifacts.json.gz         |   Bin 0 -> 185884 bytes
+ .../evidence/physics-body-main206/collect.py       |    37 +
+ .../physics-body-main206/final-review.json         |    20 +
+ .../evidence/physics-body-main206/freeze.json      |  2905 +++++
+ .../producer-final-review.json                     |    23 +
+ docs/spikes/evidence/physics-body-main206/run.py   |    20 +
+ docs/spikes/evidence/physics-broad-main221.json    |   349 +
+ .../physics-broad-main221/final-root-review.json   |     9 +
+ .../evidence/physics-broad-main221/freeze.json     | 12508 ++++++++++++++++++
+ .../integration-seam.patch.gz                      |   Bin 0 -> 503 bytes
+ .../producer-final-review.json                     |    16 +
+ .../evidence/physics-broad-main221/records.json.gz |   Bin 0 -> 347509 bytes
+ .../physics-broad-main221/source-identity.json     |  7751 ++++++++++++
+ .../evidence/physics-broad-main221/verify.py       |    57 +
+ .../physics-broad-main222/final-root-review.json   |    10 +
+ .../physics-broad-main222/normal-graph.stdout      |     1 +
+ .../physics-broad-main222/qualification.json       |    90 +
+ .../evidence/physics-broad-main222/verify.py       |    27 +
+ .../evidence/physics-broad-owner-final-review.json |    16 +
+ .../spikes/evidence/physics-broad-owner-final.json |    34 +
+ docs/spikes/evidence/physics-broad-owner.json      |  1309 ++
+ docs/spikes/evidence/physics-broad-owner.tar.gz    |   Bin 0 -> 279262 bytes
+ docs/spikes/evidence/physics-ccd-main220.json      |   357 +
+ .../physics-ccd-main220/final-root-review.json     |    10 +
+ .../evidence/physics-ccd-main220/freeze.json       | 12460 ++++++++++++++++++
+ .../physics-ccd-main220/integration-seam.patch.gz  |   Bin 0 -> 339 bytes
+ .../physics-ccd-main220/producer-final-review.json |    68 +
+ .../evidence/physics-ccd-main220/records.json.gz   |   Bin 0 -> 437604 bytes
+ .../physics-ccd-main220/source-identity.json       | 10800 ++++++++++++++++
+ docs/spikes/evidence/physics-ccd-main220/verify.py |    50 +
+ .../evidence/physics-collider-final-review.json    |    17 +
+ docs/spikes/evidence/physics-collider-main216.json |   140 +
+ .../physics-collider-main216/00-checks.json.gz     |   Bin 0 -> 957 bytes
+ .../physics-collider-main216/01-conventions.log.gz |   Bin 0 -> 20 bytes
+ .../02-current-selected-graph.log.gz               |   Bin 0 -> 1314 bytes
+ .../physics-collider-main216/03-diff.log.gz        |   Bin 0 -> 20 bytes
+ .../physics-collider-main216/04-fmt.log.gz         |   Bin 0 -> 20 bytes
+ .../05-normalized-selected-graph.txt.gz            |   Bin 0 -> 1285 bytes
+ .../06-package-initial.py.gz                       |   Bin 0 -> 1554 bytes
+ .../08-packaging-initial-failures.txt.gz           |   Bin 0 -> 308 bytes
+ .../09-producer-selected-graph.log.gz              |   Bin 0 -> 1317 bytes
+ ...0-replay-collider_state-f56bb5720050bdab.log.gz |   Bin 0 -> 309 bytes
+ ...eplay-trusted_manifolds-81c01168a9839318.log.gz |   Bin 0 -> 1012 bytes
+ .../evidence/physics-collider-main216/12-run.py.gz |   Bin 0 -> 1191 bytes
+ .../13-runtime-graph.log.gz                        |   Bin 0 -> 82 bytes
+ .../14-source-identity.json.gz                     |   Bin 0 -> 92478 bytes
+ .../15-unrelated-main-delta.json.gz                |   Bin 0 -> 1564 bytes
+ .../physics-collider-main216/final-review.json     |    17 +
+ .../evidence/physics-collider-main216/verify.py    |    54 +
+ .../evidence/physics-collider-source-review.json   |    14 +
+ .../evidence/physics-collider-state-final.json     |    30 +
+ docs/spikes/evidence/physics-collider-state.json   |   915 ++
+ docs/spikes/evidence/physics-collider-state.tar.gz |   Bin 0 -> 240294 bytes
+ docs/spikes/evidence/physics-inert-body-state.json |  1538 +++
+ ...ae92ce9d547bd406b955fa3fa29bd112daaa3da14c5f.gz |   Bin 0 -> 353 bytes
+ ...214d42333532bfe97fc07180da2c946d196d60b7fee8.gz |   Bin 0 -> 4505 bytes
+ ...ef31b832f7a97fa787be5e004550e5273944b8f1eb93.gz |   Bin 0 -> 3637 bytes
+ ...7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c.gz |   Bin 0 -> 1380 bytes
+ ...f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz |   Bin 0 -> 2216 bytes
+ ...9ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz |   Bin 0 -> 1287 bytes
+ ...a5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz |   Bin 0 -> 1772 bytes
+ ...3c9c0e4d280fd2b8a452db282c963227afaccf4ed646.gz |   Bin 0 -> 737 bytes
+ ...0c3da390f093525a13a407832dd1c86a5501279b6250.gz |   Bin 0 -> 394 bytes
+ ...c0d63f90cd6cbda767da94adb442629690a852cb259a.gz |   Bin 0 -> 2638 bytes
+ ...7518519956236473b53d431ef6241b067af46611ce6a.gz |   Bin 0 -> 2471 bytes
+ ...32b07e2e073ace7329b1b76ed3493ccbcd0c566839cc.gz |   Bin 0 -> 1466 bytes
+ ...75aff7bb1a598a1b9d7dda1359a7ca50734eb1fde087.gz |   Bin 0 -> 387 bytes
+ ...1e804ebe5a03e4bc195120ed348c62def212584aa575.gz |   Bin 0 -> 9601 bytes
+ ...b6a4e41efa890f91565c62244eb9758b407413711998.gz |   Bin 0 -> 2877 bytes
+ ...90cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz |   Bin 0 -> 2129 bytes
+ ...420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz |   Bin 0 -> 1567 bytes
+ ...e9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da.gz |   Bin 0 -> 4821 bytes
+ ...e547dd781ce2712b13929d3bec533f370a5a64373eef.gz |   Bin 0 -> 18505 bytes
+ ...f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716.gz |   Bin 0 -> 1395 bytes
+ ...91ab9c2467dd40bbbab4273676f15da8fed0b4eb6084.gz |   Bin 0 -> 164 bytes
+ ...ba9f51d8a8a9dbce5d48105ba3cd820e283f1fcdb950.gz |   Bin 0 -> 387 bytes
+ ...0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc.gz |   Bin 0 -> 249 bytes
+ ...f284ba9a68272ac4a979ccb5efe07c2b5a3b4af606ae.gz |   Bin 0 -> 2650 bytes
+ ...f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz |   Bin 0 -> 1392 bytes
+ ...f898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz |   Bin 0 -> 2787 bytes
+ ...d846d0068797cc016723e9b1979ce0a8a4c0c5ee2377.gz |   Bin 0 -> 980 bytes
+ ...fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz |   Bin 0 -> 1582 bytes
+ ...e33cb087c3971b4ee594210d53354f095031bab48911.gz |   Bin 0 -> 353 bytes
+ ...75abc21fcb0580f0add82806123e8b164445dfea429d.gz |   Bin 0 -> 1686 bytes
+ ...af51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz |   Bin 0 -> 1633 bytes
+ ...c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz |   Bin 0 -> 96 bytes
+ ...3adf53b38c2a8faa30c85064c709fa7e18c18233cf5c.gz |   Bin 0 -> 59741 bytes
+ ...1fa12b60471329ad4df31f5cc4939546834e3bfe5a7b.gz |   Bin 0 -> 397 bytes
+ ...40f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz |   Bin 0 -> 2951 bytes
+ ...15b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de.gz |   Bin 0 -> 8275 bytes
+ ...6d06cba1ad482b3caa55669fd06f9f05398335fd782e.gz |   Bin 0 -> 5752 bytes
+ ...3c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf.gz |   Bin 0 -> 6975 bytes
+ ...a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz |   Bin 0 -> 1949 bytes
+ ...be9c665bed50b4761b4f9701ccb9763642cf631ded99.gz |   Bin 0 -> 3271 bytes
+ ...2017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz |   Bin 0 -> 1292 bytes
+ ...755d9fbdc49771affd8dee1fc6dc931f164d9973ef3d.gz |   Bin 0 -> 398 bytes
+ ...8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz |   Bin 0 -> 2709 bytes
+ ...84633f2f0587b765b8f4f323e7461a70ae89d26e3f45.gz |   Bin 0 -> 862 bytes
+ ...2bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz |   Bin 0 -> 1290 bytes
+ ...0701c6e928325a6443650d85dc07538ce3ef9d0f89fe.gz |   Bin 0 -> 2858 bytes
+ ...d448b8c56927b2284c1a6413a43d79f35890b78d3435.gz |   Bin 0 -> 1263 bytes
+ ...7b064780e679b015a14a2d650ebb9fc88caadfe31915.gz |   Bin 0 -> 5973 bytes
+ ...0d8ee6c70072c9e295920dc9be41bfd339b8e738cf88.gz |   Bin 0 -> 424 bytes
+ ...77425ac4826f5b561e25109f8484e235dbdcec322122.gz |   Bin 0 -> 375 bytes
+ ...08650af422693f898b161b19b6d9526f8cf0f3d3761c.gz |   Bin 0 -> 112 bytes
+ ...c46d73c1408e226ad9798bf0fafa5b8717c8a6e2b60d.gz |   Bin 0 -> 1067 bytes
+ ...e71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4.gz |   Bin 0 -> 14191 bytes
+ ...0f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz |   Bin 0 -> 757 bytes
+ ...1971240607b73bf490ff611521dadefc32c140c7a5e1.gz |   Bin 0 -> 387 bytes
+ ...3adea0a39ed961bdfdab7bf35ab8773b26806d710b99.gz |   Bin 0 -> 164 bytes
+ ...798ead1358f399eb317d7098687df3e7b682e0c5d79c.gz |   Bin 0 -> 559 bytes
+ ...ac55b843029833831bc90d5fa0cbda20522cd6fe798f.gz |   Bin 0 -> 809 bytes
+ ...09e706a3d6a40a35612837d98d767723795588fb4cb8.gz |   Bin 0 -> 3364 bytes
+ ...5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz |   Bin 0 -> 1177 bytes
+ ...a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz |   Bin 0 -> 2465 bytes
+ ...925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz |   Bin 0 -> 1305 bytes
+ ...79c759c0d2ec5d3bceaed641ff93f9934d6f469049e8.gz |   Bin 0 -> 4655 bytes
+ ...c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22.gz |   Bin 0 -> 984 bytes
+ ...736e6a16468073dc57cced6f859bd40b919e4d7794df.gz |   Bin 0 -> 1382 bytes
+ ...e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz |   Bin 0 -> 2800 bytes
+ ...519d6da27e93490b876770dc5152d9b94d37a05df5e9.gz |   Bin 0 -> 3365 bytes
+ ...a8756dd7ef8778231bb8c5b0b7df18c571e2bf1a0f48.gz |   Bin 0 -> 382 bytes
+ ...8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz |   Bin 0 -> 1048 bytes
+ ...8eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz |   Bin 0 -> 2531 bytes
+ ...f0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9.gz |   Bin 0 -> 2962 bytes
+ ...3208afc865d6c0c96963d080aa10683a08d59c575a26.gz |   Bin 0 -> 415 bytes
+ ...49ad652e0ae74588afecc76675e5b7ed0b45383907ae.gz |   Bin 0 -> 496 bytes
+ ...3c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz |   Bin 0 -> 1765 bytes
+ ...f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a.gz |   Bin 0 -> 2219 bytes
+ ...e269c88ccd615314d9f8aef81dd82a79dc0c5f6dcba4.gz |   Bin 0 -> 389 bytes
+ ...a77cccbc7fbd05fe1d0bc20c38c03ccd170dad67a7f5.gz |   Bin 0 -> 331 bytes
+ ...f4c8996fb92427ae41e4649b934ca495991b7852b855.gz |   Bin 0 -> 20 bytes
+ ...51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c.gz |   Bin 0 -> 1576 bytes
+ ...09dca29e400df2fd8949b8d4b890087453d296fb35fd.gz |   Bin 0 -> 2159 bytes
+ ...12540a3d77e008ef7116a0fb4e91b87bbc4407c63c5b.gz |   Bin 0 -> 1651 bytes
+ ...4b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz |   Bin 0 -> 2227 bytes
+ ...c9e96003ba96ba4fcf2e8f9866d0aff3dd6453d5fb77.gz |   Bin 0 -> 2017 bytes
+ ...6e0214aa79fefa8ea78c8b5e5185805102cbc44601bc.gz |   Bin 0 -> 2686 bytes
+ ...4331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz |   Bin 0 -> 1231 bytes
+ ...99736cc2c3c973e301a472451d9b2fd324aaa089d605.gz |   Bin 0 -> 1547 bytes
+ ...260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256.gz |   Bin 0 -> 1578 bytes
+ docs/spikes/evidence/physics-inert-islands.json    |  1948 +++
+ ...afd14e9284d97f5ecc6597bed08d8905e0d629800e46.gz |   Bin 0 -> 919 bytes
+ ...855ef1b071409dd1d94ca80d5628a68fc6c4b3a22fd4.gz |   Bin 0 -> 1048 bytes
+ ...44f0ee9f0d6090bb597bebf0898009cacc2dafcd1c47.gz |   Bin 0 -> 623 bytes
+ ...f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz |   Bin 0 -> 2216 bytes
+ ...dcb63b6e646d29e0e857d06a8715d850a45c7df8552b.gz |   Bin 0 -> 8940 bytes
+ ...d3fa33cd2da0da00c9d29c41cb9e7fb2c0d9267599d9.gz |   Bin 0 -> 1106 bytes
+ ...9d1bd101c0a1229d3a4f23db282ed2e0b1970f4711cf.gz |   Bin 0 -> 635 bytes
+ ...9ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz |   Bin 0 -> 1287 bytes
+ ...a5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz |   Bin 0 -> 1772 bytes
+ ...15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c.gz |   Bin 0 -> 5012 bytes
+ ...ac0877a6102f493c5b8c535e7c909d829783e8b66bdc.gz |   Bin 0 -> 612 bytes
+ ...5e78d93df146baea914afb9e8458f6aac7617794c064.gz |   Bin 0 -> 597 bytes
+ ...c0d63f90cd6cbda767da94adb442629690a852cb259a.gz |   Bin 0 -> 2638 bytes
+ ...7518519956236473b53d431ef6241b067af46611ce6a.gz |   Bin 0 -> 2471 bytes
+ ...f17a4db3c57ce72f4f6d62430c3db4c25b606ff17a47.gz |   Bin 0 -> 5649 bytes
+ ...a4a7bc7b1784aa912de59c67aac53a4c7ef736c383cf.gz |   Bin 0 -> 395 bytes
+ ...5ec2dd5d3d5d48cd4f76d777861f6628d65c6e3c88af.gz |   Bin 0 -> 729 bytes
+ ...9c9746445d890fc66f89834f0913dc912c0b85549d7b.gz |   Bin 0 -> 826 bytes
+ ...32b07e2e073ace7329b1b76ed3493ccbcd0c566839cc.gz |   Bin 0 -> 1466 bytes
+ ...3c45b20086469755d64bb900117b098978e9596ad0f7.gz |   Bin 0 -> 723 bytes
+ ...67a26ef9880b731477a61d15d8728e36a77175446d45.gz |   Bin 0 -> 622 bytes
+ ...04167808263b782c9e3a6e0de773af31b777b3b51d30.gz |   Bin 0 -> 7042 bytes
+ ...b9fb317502eb981844e508acaccfbcc17943f64ef6af.gz |   Bin 0 -> 621 bytes
+ ...6d7e18987d1be55de37a187ce37ae852803c1162ae24.gz |   Bin 0 -> 966 bytes
+ ...f7e48c8eba60159601525df0ba60720db51980b7f135.gz |   Bin 0 -> 2888 bytes
+ ...90cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz |   Bin 0 -> 2129 bytes
+ ...9fa495ddb0b21cf51253c7cb9a5a31095e32b6bf5cfe.gz |   Bin 0 -> 614 bytes
+ ...066595e0cccdd97f2df205971ff1cd4a8b9ea799a5e2.gz |   Bin 0 -> 164 bytes
+ ...420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz |   Bin 0 -> 1567 bytes
+ ...f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716.gz |   Bin 0 -> 1395 bytes
+ ...bc829816cfa5576ce504d4de017f545fc00ff1cf95d8.gz |   Bin 0 -> 2954 bytes
+ ...7d694a357804474bc0bc5d7992153129d9871865f3ed.gz |   Bin 0 -> 590 bytes
+ ...0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc.gz |   Bin 0 -> 249 bytes
+ ...1ff99153dcd3ce52992230ddba47516416aa8fbe22f4.gz |   Bin 0 -> 707 bytes
+ ...f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz |   Bin 0 -> 1392 bytes
+ ...f898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz |   Bin 0 -> 2787 bytes
+ ...fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz |   Bin 0 -> 1582 bytes
+ ...2f9050fec0d287eb21e97095bb076c0bd4dc51306d28.gz |   Bin 0 -> 648 bytes
+ ...06a9d901091609ba8c2c938f099c9036dfbb55c8435d.gz |   Bin 0 -> 624 bytes
+ ...75abc21fcb0580f0add82806123e8b164445dfea429d.gz |   Bin 0 -> 1686 bytes
+ ...af51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz |   Bin 0 -> 1633 bytes
+ ...f17d865d01136fe7af83a576c3b735c59174c3b56c78.gz |   Bin 0 -> 625 bytes
+ ...510554956337c393718006a2747603529fe68f215040.gz |   Bin 0 -> 687 bytes
+ ...c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz |   Bin 0 -> 96 bytes
+ ...c83db8de09ce699a495206e8d7244246c3d43c4d2bdb.gz |   Bin 0 -> 623 bytes
+ ...3adf53b38c2a8faa30c85064c709fa7e18c18233cf5c.gz |   Bin 0 -> 59741 bytes
+ ...54cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz |   Bin 0 -> 12359 bytes
+ ...1e1b79300ad9d12f3e34c71a86ad4643bf08956ce1b5.gz |   Bin 0 -> 575 bytes
+ ...042f2addf97f07bc8fe4194ef0d11d3a8f11db3c71c5.gz |   Bin 0 -> 6087 bytes
+ ...78921b5ca97672aa3ee59c2196759a63d73200b080f7.gz |   Bin 0 -> 883 bytes
+ ...33632289f287549155db4bd555ef2850e53e5c9ed760.gz |   Bin 0 -> 2335 bytes
+ ...40f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz |   Bin 0 -> 2951 bytes
+ ...7b9e5f1a4882891289c28959a9d8bfefce25f178a9ab.gz |   Bin 0 -> 165 bytes
+ ...a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz |   Bin 0 -> 1949 bytes
+ ...c56d5da3f6017f360d2c4a51b81a4323283ec4a9a71b.gz |   Bin 0 -> 1567 bytes
+ ...2017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz |   Bin 0 -> 1292 bytes
+ ...826fde731d1c9716fed44dc923722df0eab5f9e254ee.gz |   Bin 0 -> 3467 bytes
+ ...8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz |   Bin 0 -> 2709 bytes
+ ...2bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz |   Bin 0 -> 1290 bytes
+ ...d448b8c56927b2284c1a6413a43d79f35890b78d3435.gz |   Bin 0 -> 1263 bytes
+ ...a34d4d16ecf6f76ced750e4a3ad8be030a9f4565e18f.gz |   Bin 0 -> 616 bytes
+ ...dd8e1aaa12431625b802c443de187ae875a123778ffc.gz |   Bin 0 -> 8871 bytes
+ ...f18a3d5aee19db6b302b4346bb441754063cef7151e5.gz |   Bin 0 -> 1500 bytes
+ ...08650af422693f898b161b19b6d9526f8cf0f3d3761c.gz |   Bin 0 -> 112 bytes
+ ...0f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz |   Bin 0 -> 757 bytes
+ ...6fc871b634e1534baabac5453fd082644e8bf309b5f7.gz |   Bin 0 -> 1104 bytes
+ ...eb228ffa61138d3cc3382d586063c665f4d65c6823fe.gz |   Bin 0 -> 1907 bytes
+ ...361d352e197a80edba2b7755611d55706e5721be8228.gz |   Bin 0 -> 601 bytes
+ ...5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz |   Bin 0 -> 1177 bytes
+ ...a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz |   Bin 0 -> 2465 bytes
+ ...925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz |   Bin 0 -> 1305 bytes
+ ...c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22.gz |   Bin 0 -> 984 bytes
+ ...22875a09bffb752ea8ff8c744ee775c55ae5b95a4642.gz |   Bin 0 -> 3484 bytes
+ ...c97f849afd6d4de521e265e1c9dcd2992b37130e2b50.gz |   Bin 0 -> 2189 bytes
+ ...41a9c1af8e4140f3585bd2370367e877a1fd3a0c1f6f.gz |   Bin 0 -> 3366 bytes
+ ...736e6a16468073dc57cced6f859bd40b919e4d7794df.gz |   Bin 0 -> 1382 bytes
+ ...9228d517d4234a319476c0d1cc596e1c70b63a04ebef.gz |   Bin 0 -> 3296 bytes
+ ...e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz |   Bin 0 -> 2800 bytes
+ ...13c700b5e197e090fd55d7b6ffd173bceb7f81e47270.gz |   Bin 0 -> 1933 bytes
+ ...8e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00.gz |   Bin 0 -> 8778 bytes
+ ...4baded4aaf8571a3ebcdf6a88b522ce142ddc5f24757.gz |   Bin 0 -> 3228 bytes
+ ...42b24d36eeadfc436015f6a7c641c8b28c2e3db4ae85.gz |   Bin 0 -> 578 bytes
+ ...8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz |   Bin 0 -> 1048 bytes
+ ...8eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz |   Bin 0 -> 2531 bytes
+ ...f0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9.gz |   Bin 0 -> 2962 bytes
+ ...4dacf8fd8d4f0ebfcf9558372195e1db2782e4f29443.gz |   Bin 0 -> 3804 bytes
+ ...53e6c21eb86d2a87400a136842a7ebfe65622780fa7b.gz |   Bin 0 -> 555 bytes
+ ...1ddb0d4ba2b852b4fbed89ef2fa848e4bc1364a0aa5b.gz |   Bin 0 -> 597 bytes
+ ...22c2470c2f09e70e444241f400844a7684a28c858571.gz |   Bin 0 -> 1648 bytes
+ ...3c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz |   Bin 0 -> 1765 bytes
+ ...55c97e42702c8a7dc809c04befedaaec44e0e4c01730.gz |   Bin 0 -> 730 bytes
+ ...f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a.gz |   Bin 0 -> 2219 bytes
+ ...bd3e1d03e989f6913e43de407a14081f354cc73d3df2.gz |   Bin 0 -> 924 bytes
+ ...2bd71a0260c20ef91f0ea23f3ff1d4ce2358b8c5308d.gz |   Bin 0 -> 2134 bytes
+ ...d826ba47880784af08d3ab2cb8755b5b8615d55f7b54.gz |   Bin 0 -> 899 bytes
+ ...129821df9e1dccc975a846979c38ce42c9393a556f5d.gz |   Bin 0 -> 2512 bytes
+ ...342c793a2239096fae760a324200d618d8e099116bb4.gz |   Bin 0 -> 3613 bytes
+ ...0e871f6a7ccbe2f890c726cc4a7c877ef7dbea81d356.gz |   Bin 0 -> 1184 bytes
+ ...48ec22f5c8e3b46ccc63e6b673d790af4d9445632fd9.gz |   Bin 0 -> 3198 bytes
+ ...f4c8996fb92427ae41e4649b934ca495991b7852b855.gz |   Bin 0 -> 20 bytes
+ ...51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c.gz |   Bin 0 -> 1576 bytes
+ ...09dca29e400df2fd8949b8d4b890087453d296fb35fd.gz |   Bin 0 -> 2159 bytes
+ ...4b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz |   Bin 0 -> 2227 bytes
+ ...4331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz |   Bin 0 -> 1231 bytes
+ ...260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256.gz |   Bin 0 -> 1578 bytes
+ ...d682ed80fdec743d87e38dcc383e2ebbc5d3ca789967.gz |   Bin 0 -> 478 bytes
+ docs/spikes/evidence/physics-inert-pair-state.json |  1645 +++
+ ...7371f4089a14675070076c0ebcef39ff089598217b66.gz |   Bin 0 -> 881 bytes
+ ...56a3473a6029affef75755fe56fae5b4a11293d1ec60.gz |   Bin 0 -> 17921 bytes
+ ...aaaf0165ff1b1de78fb97274f5f38f70ffddc58823b4.gz |   Bin 0 -> 1315 bytes
+ ...ce4de2ed442141d0f1a144ac77d851fca36d10d873c8.gz |   Bin 0 -> 394 bytes
+ ...0b8f89c0243e38c8f05ccd251659b4690df1ef88f382.gz |   Bin 0 -> 161 bytes
+ ...7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c.gz |   Bin 0 -> 1380 bytes
+ ...0f0e6b98d23db15ac0127ba6db36d1c3a976a42a4976.gz |   Bin 0 -> 788 bytes
+ ...f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz |   Bin 0 -> 2216 bytes
+ ...9ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz |   Bin 0 -> 1287 bytes
+ ...ba5049c4de4b1580787f1f0b504dafbbfc57c823e28b.gz |   Bin 0 -> 378 bytes
+ ...a5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz |   Bin 0 -> 1772 bytes
+ ...c0d63f90cd6cbda767da94adb442629690a852cb259a.gz |   Bin 0 -> 2638 bytes
+ ...7518519956236473b53d431ef6241b067af46611ce6a.gz |   Bin 0 -> 2471 bytes
+ ...32b07e2e073ace7329b1b76ed3493ccbcd0c566839cc.gz |   Bin 0 -> 1466 bytes
+ ...c45ee6a0beab357d23032a7163eabec16a81813673a3.gz |   Bin 0 -> 1716 bytes
+ ...509a1c2c60063d02a2ca573392ec72fff1f6116b5016.gz |   Bin 0 -> 9440 bytes
+ ...77705ea5c4c255d247d5e8877276dfba91203069ee76.gz |   Bin 0 -> 2049 bytes
+ ...90cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz |   Bin 0 -> 2129 bytes
+ ...420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz |   Bin 0 -> 1567 bytes
+ ...f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716.gz |   Bin 0 -> 1395 bytes
+ ...5c51b8577e3697f3ad61e5bc898d8b261966c800ee84.gz |   Bin 0 -> 385 bytes
+ ...9e88ff63e0d2a85ffa0f2daa85fd417bfa64af191688.gz |   Bin 0 -> 387 bytes
+ ...0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc.gz |   Bin 0 -> 249 bytes
+ ...95ddced483da3722caf1bc8170c8e10715d593ec8b61.gz |   Bin 0 -> 2990 bytes
+ ...f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz |   Bin 0 -> 1392 bytes
+ ...f898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz |   Bin 0 -> 2787 bytes
+ ...fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz |   Bin 0 -> 1582 bytes
+ ...6a880efe5033dfbbd14a4ed4a3283dc78b5e34f2e031.gz |   Bin 0 -> 2525 bytes
+ ...27bebb6f5e836265fd8c0e08fc2bb2ab22b770139939.gz |   Bin 0 -> 254 bytes
+ ...af51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz |   Bin 0 -> 1633 bytes
+ ...c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz |   Bin 0 -> 96 bytes
+ ...3adf53b38c2a8faa30c85064c709fa7e18c18233cf5c.gz |   Bin 0 -> 59741 bytes
+ ...54cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz |   Bin 0 -> 12359 bytes
+ ...89deb49e3f979a761bd686d55eafabd9e1e3dbe0fd29.gz |   Bin 0 -> 376 bytes
+ ...40f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz |   Bin 0 -> 2951 bytes
+ ...3c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf.gz |   Bin 0 -> 6975 bytes
+ ...a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz |   Bin 0 -> 1949 bytes
+ ...2017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz |   Bin 0 -> 1292 bytes
+ ...8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz |   Bin 0 -> 2709 bytes
+ ...2bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz |   Bin 0 -> 1290 bytes
+ ...326e45acb1bb7961267d6fe1be62917e24b4081e3174.gz |   Bin 0 -> 165 bytes
+ ...deeb2ee95c5c3853fae582ccfc97a4e742bcbba8f927.gz |   Bin 0 -> 6661 bytes
+ ...d3cfb7ddd230487a65fd35793873a235a6c30c5bb807.gz |   Bin 0 -> 5694 bytes
+ ...d448b8c56927b2284c1a6413a43d79f35890b78d3435.gz |   Bin 0 -> 1263 bytes
+ ...be37ca921c6d9fa8e4310e61b624868f9701167e4ba6.gz |   Bin 0 -> 331 bytes
+ ...0f69d8744b9976b9300da7902db67b1c668b8d40c82f.gz |   Bin 0 -> 3038 bytes
+ ...475603ff0af30570ab8fbad9250159cef2e72b4a4958.gz |   Bin 0 -> 5096 bytes
+ ...08650af422693f898b161b19b6d9526f8cf0f3d3761c.gz |   Bin 0 -> 112 bytes
+ ...0f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz |   Bin 0 -> 757 bytes
+ ...798ead1358f399eb317d7098687df3e7b682e0c5d79c.gz |   Bin 0 -> 559 bytes
+ ...f82967eb823ef667ada8f25b4b4177331b4ec2a0199a.gz |   Bin 0 -> 1185 bytes
+ ...c6760d9cfd53be0204a8414783c2462acd6fa1d1c0b4.gz |   Bin 0 -> 165 bytes
+ ...26b7265d45a283d7dd9db25f92b245edeb63ac6d3442.gz |   Bin 0 -> 2163 bytes
+ ...5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz |   Bin 0 -> 1177 bytes
+ ...a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz |   Bin 0 -> 2465 bytes
+ ...925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz |   Bin 0 -> 1305 bytes
+ ...c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22.gz |   Bin 0 -> 984 bytes
+ ...736e6a16468073dc57cced6f859bd40b919e4d7794df.gz |   Bin 0 -> 1382 bytes
+ ...e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz |   Bin 0 -> 2800 bytes
+ ...874c3660e8c60341fc114b479482d6385fb5d4684018.gz |   Bin 0 -> 2155 bytes
+ ...bf757607774adb7d4aa0584c16a826ab6d2aff5007a9.gz |   Bin 0 -> 352 bytes
+ ...0a75c4d8e97d314ffd867a186ba1bbc3794c4eb0e880.gz |   Bin 0 -> 353 bytes
+ ...997c468af023e27b6423adf53d87fe6bbac68778bb05.gz |   Bin 0 -> 1505 bytes
+ ...8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz |   Bin 0 -> 1048 bytes
+ ...8eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz |   Bin 0 -> 2531 bytes
+ ...f0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9.gz |   Bin 0 -> 2962 bytes
+ ...3208afc865d6c0c96963d080aa10683a08d59c575a26.gz |   Bin 0 -> 415 bytes
+ ...4d3c1fdffae17e7633c758a3ae26a5c1bafcc9b4844a.gz |   Bin 0 -> 2525 bytes
+ ...3c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz |   Bin 0 -> 1765 bytes
+ ...937948841ee102748b9a9388cd660c4b23ecabd05d56.gz |   Bin 0 -> 1608 bytes
+ ...6da532059588759682d5da361a7c229d75057be8f0eb.gz |   Bin 0 -> 1430 bytes
+ ...a4717bc5469063d98f452965cf58333799f3b28e846d.gz |   Bin 0 -> 251 bytes
+ ...ea2e84557575f25ee1a9f434d30616cbe41f77b3cc74.gz |   Bin 0 -> 1811 bytes
+ ...f4c8996fb92427ae41e4649b934ca495991b7852b855.gz |   Bin 0 -> 20 bytes
+ ...556c6aa08e00738afd108991aec298d73e2500e82c0a.gz |   Bin 0 -> 7791 bytes
+ ...4b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz |   Bin 0 -> 2227 bytes
+ ...5525bdd4cfa5a1a4029525e84f6fa84ea788d6250225.gz |   Bin 0 -> 396 bytes
+ ...4331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz |   Bin 0 -> 1231 bytes
+ ...d7779659923fd6d4f62ce21072bb1b16072918fb2055.gz |   Bin 0 -> 908 bytes
+ ...260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256.gz |   Bin 0 -> 1578 bytes
+ ...7e97195cae98c037a429245be023034e4c26a5171b34.gz |   Bin 0 -> 391526 bytes
+ .../physics-integration-config-logs.json.gz        |   Bin 0 -> 543633 bytes
+ .../evidence/physics-integration-config.json       |  1239 ++
+ docs/spikes/evidence/physics-islands-main208.json  |   518 +
+ .../physics-islands-main208/artifacts.json.gz      |   Bin 0 -> 186433 bytes
+ .../evidence/physics-islands-main208/collect.py    |    37 +
+ .../physics-islands-main208/final-review.json      |    25 +
+ .../evidence/physics-islands-main208/freeze.json   |  2919 +++++
+ .../producer-final-review.json                     |    31 +
+ .../spikes/evidence/physics-islands-main208/run.py |    21 +
+ docs/spikes/evidence/physics-narrow-main217.json   |   111 +
+ .../physics-narrow-main217/00-checks.json.gz       |   Bin 0 -> 787 bytes
+ .../physics-narrow-main217/01-conventions.log.gz   |   Bin 0 -> 20 bytes
+ .../evidence/physics-narrow-main217/02-diff.log.gz |   Bin 0 -> 20 bytes
+ .../evidence/physics-narrow-main217/03-fmt.log.gz  |   Bin 0 -> 20 bytes
+ ...eplay-trusted_manifolds-81c01168a9839318.log.gz |   Bin 0 -> 1269 bytes
+ .../evidence/physics-narrow-main217/05-run.py.gz   |   Bin 0 -> 1541 bytes
+ .../physics-narrow-main217/06-runtime-graph.log.gz |   Bin 0 -> 82 bytes
+ .../07-selected-graph.log.gz                       |   Bin 0 -> 1314 bytes
+ .../08-source-identity.json.gz                     |   Bin 0 -> 103574 bytes
+ .../09-unrelated-main-delta.json.gz                |   Bin 0 -> 1568 bytes
+ .../physics-narrow-main217/final-review.json       |    23 +
+ .../evidence/physics-narrow-main217/verify.py      |   110 +
+ .../physics-narrow-owner-final-review.json         |    24 +
+ .../evidence/physics-narrow-owner-final.json       |    30 +
+ .../physics-narrow-owner-source-review.json        |   183 +
+ docs/spikes/evidence/physics-narrow-owner.json     |  1142 ++
+ docs/spikes/evidence/physics-narrow-owner.tar.gz   |   Bin 0 -> 263415 bytes
+ docs/spikes/evidence/physics-pair-main205.json     |   456 +
+ .../physics-pair-main205/artifacts.json.gz         |   Bin 0 -> 185000 bytes
+ .../evidence/physics-pair-main205/collect.py       |    40 +
+ .../physics-pair-main205/final-review.json         |    20 +
+ .../evidence/physics-pair-main205/freeze.json      |  2900 +++++
+ .../producer-final-review.json                     |    18 +
+ docs/spikes/evidence/physics-pair-main205/run.py   |    20 +
+ docs/spikes/evidence/physics-parity-vendor.json    |   176 +
+ .../physics-parity-vendor/00-actual-targets.log.gz |   Bin 0 -> 65 bytes
+ .../physics-parity-vendor/01-conventions.log.gz    |   Bin 0 -> 20 bytes
+ .../evidence/physics-parity-vendor/02-diff.log.gz  |   Bin 0 -> 20 bytes
+ .../physics-parity-vendor/03-focused.log.gz        |   Bin 0 -> 390 bytes
+ .../evidence/physics-parity-vendor/04-red.log.gz   |   Bin 0 -> 261 bytes
+ .../physics-parity-vendor/05-root-test.log.gz      |   Bin 0 -> 54 bytes
+ .../evidence/physics-parity-vendor/06-tools.log.gz |   Bin 0 -> 12253 bytes
+ .../07-actual-targets.json.gz                      |   Bin 0 -> 570 bytes
+ .../physics-parity-vendor/08-checks.json.gz        |   Bin 0 -> 311 bytes
+ .../physics-parity-vendor/09-source.json.gz        |   Bin 0 -> 180 bytes
+ .../10-target-streams.json.gz                      |   Bin 0 -> 10599 bytes
+ .../physics-parity-vendor/11-red-exit.txt.gz       |   Bin 0 -> 22 bytes
+ .../physics-parity-vendor/12-repair.patch.gz       |   Bin 0 -> 1974 bytes
+ .../evidence/physics-parity-vendor/13-run.py.gz    |   Bin 0 -> 670 bytes
+ .../physics-parity-vendor/14-portability.log.gz    |   Bin 0 -> 6083 bytes
+ .../physics-parity-vendor/15-source-review.json.gz |   Bin 0 -> 658 bytes
+ .../evidence/physics-parity-vendor/collect.py      |    31 +
+ .../physics-parity-vendor/final-review.json        |    13 +
+ .../physics-parity-vendor/source-review.json       |    22 +
+ .../physics-pipeline-boundary-logs.json.gz         |   Bin 0 -> 655766 bytes
+ .../spikes/evidence/physics-pipeline-boundary.json |  1606 +++
+ docs/spikes/evidence/physics-pipeline-main222.json |   514 +
+ .../physics-pipeline-main222/final-review.json     |     9 +
+ .../evidence/physics-pipeline-main222/freeze.json  | 12580 ++++++++++++++++++
+ .../integration-seam.patch.gz                      |   Bin 0 -> 387 bytes
+ .../main223-qualification.json                     |    12 +
+ .../producer-final-review.json                     |    13 +
+ .../physics-pipeline-main222/records.json.gz       |   Bin 0 -> 399567 bytes
+ .../physics-pipeline-main222/source-identity.json  |  7796 ++++++++++++
+ .../evidence/physics-pipeline-main222/verify.py    |    61 +
+ .../producer-final-review.json                     |    73 +
+ .../qualification.json                             |   144 +
+ .../physics-world-continuation-main211/qualify.py  |    19 +
+ .../root-final-review.json                         |    10 +
+ .../selected-normal-graph.txt                      |   487 +
+ .../evidence/physics-world-continuation.json       |   781 ++
+ .../physics-world-continuation/artifacts.json.gz   |   Bin 0 -> 2282938 bytes
+ .../evidence/physics-world-continuation/collect.py |    91 +
+ .../physics-world-continuation/source-freeze.json  |  3261 +++++
+ .../physics-world-continuation/source-review.json  |    45 +
+ ...release-checkpoint-20-documentation-review.json |    15 +
+ docs/spikes/evidence/release-checkpoint-20.json    |   236 +
+ .../evidence/release-checkpoint-20/capture-logs.py |    11 +
+ .../release-checkpoint-20/completed-job-logs.json  |    30 +
+ .../independent-promotion-review.json              |   275 +
+ .../release-checkpoint-20/jobs-38356955805.json    |     1 +
+ .../release-checkpoint-20/jobs-38356955807.json    |     1 +
+ .../release-checkpoint-20/jobs-38356955854.json    |     1 +
+ .../release-checkpoint-20/jobs-38356955876.json    |     1 +
+ .../release-checkpoint-20/jobs-38356955958.json    |     1 +
+ .../release-checkpoint-20/jobs-38356955963.json    |     1 +
+ .../release-checkpoint-20/jobs-38356956098.json    |     1 +
+ .../release-checkpoint-20/jobs-38356956176.json    |     1 +
+ .../release-checkpoint-20/latest-state.json        |   295 +
+ .../release-checkpoint-20/linux-desktop.log.gz     |   Bin 0 -> 199673 bytes
+ .../release-checkpoint-20/macos-checks.log.gz      |   Bin 0 -> 199101 bytes
+ .../evidence/release-checkpoint-20/manifest.json   |    38 +
+ .../evidence/release-checkpoint-20/merge-body.md   |     3 +
+ .../release-checkpoint-20/observations.jsonl       |    21 +
+ .../evidence/release-checkpoint-20/pr-body.md      |     9 +
+ .../evidence/release-checkpoint-20/pr-final.json   |     1 +
+ .../evidence/release-checkpoint-20/pr-merged.json  |    10 +
+ .../release-checkpoint-20/prepare-promotion.py     |    59 +
+ .../release-checkpoint-20/prepromotion.json        |    52 +
+ .../release-checkpoint-20/previous-terminal.json   |  1351 ++
+ .../evidence/release-checkpoint-20/promotion.json  |    22 +
+ .../release-checkpoint-20/protection-final.json    |     1 +
+ .../evidence/release-checkpoint-20/protection.json |   163 +
+ .../release-to-selected.paths                      |  9488 ++++++++++++++
+ .../release-checkpoint-20/release-to-selected.stat |  9489 ++++++++++++++
+ .../release-checkpoint-20/required-final.json      |   235 +
+ .../evidence/release-checkpoint-20/runs-final.json |     1 +
+ .../release-checkpoint-20/terminal-state.json      |   295 +
+ .../verified-observations.json                     |    35 +
+ .../evidence/release-checkpoint-20/verify.py       |    44 +
+ .../release-checkpoint-20/windows-desktop.log.gz   |   Bin 0 -> 175099 bytes
+ .../release-checkpoint-20/windows-optimized.log.gz |   Bin 0 -> 8908 bytes
+ docs/spikes/evidence/temporal-owner-main225.json   |   631 +
+ .../temporal-owner-main225/final-review.json       |     7 +
+ .../evidence/temporal-owner-main225/freeze.json    | 12588 +++++++++++++++++++
+ .../temporal-owner-main225/records.json.gz         |   Bin 0 -> 394877 bytes
+ docs/spikes/evidence/temporal-owner-main225/run.py |    81 +
+ .../evidence/temporal-owner-main225/verify.py      |   136 +
+ .../temporal-owner-provenance-final-review.json    |     9 +
+ .../evidence/temporal-owner-provenance-final.json  |    30 +
+ .../temporal-owner-provenance-payloads.json.gz     |   Bin 0 -> 285701 bytes
+ .../spikes/evidence/temporal-owner-provenance.json |   169 +
+ docs/spikes/evidence/timestamp-capability.json     |   340 +
+ .../00-00-workspace-products-clean.log.gz          |   Bin 0 -> 323 bytes
+ .../timestamp-capability/01-01-renderer-cpu.log.gz |   Bin 0 -> 4800 bytes
+ .../02-02-renderer-clippy.log.gz                   |   Bin 0 -> 318 bytes
+ .../evidence/timestamp-capability/03-03-fmt.log.gz |   Bin 0 -> 44 bytes
+ .../timestamp-capability/04-04-conventions.log.gz  |   Bin 0 -> 68 bytes
+ .../timestamp-capability/05-05-diff.log.gz         |   Bin 0 -> 39 bytes
+ .../timestamp-capability/06-after-freeze.json.gz   |   Bin 0 -> 53 bytes
+ .../timestamp-capability/07-binary.json.gz         |   Bin 0 -> 288 bytes
+ .../timestamp-capability/08-checks.json.gz         |   Bin 0 -> 1029 bytes
+ .../timestamp-capability/09-freeze.json.gz         |   Bin 0 -> 160545 bytes
+ .../timestamp-capability/10-gpu_tests.rs.gz        |   Bin 0 -> 1836 bytes
+ .../timestamp-capability/12-initial-checks.log.gz  |   Bin 0 -> 154920 bytes
+ .../evidence/timestamp-capability/13-run.py.gz     |   Bin 0 -> 1065 bytes
+ .../timestamp-capability/14-source-review.json.gz  |   Bin 0 -> 512 bytes
+ .../timestamp-capability/15-source.patch.gz        |   Bin 0 -> 1194 bytes
+ .../timestamp-capability/final-review.json         |    23 +
+ .../timestamp-capability/source-review.json        |    15 +
+ .../spikes/evidence/timestamp-capability/verify.py |    24 +
+ .../timestamp-diagnostic-capabilities.json         |   330 +
+ .../final-review.json                              |    14 +
+ .../timestamp-diagnostic-capabilities/freeze.json  | 12431 ++++++++++++++++++
+ .../records.json.gz                                |   Bin 0 -> 551059 bytes
+ .../timestamp-diagnostic-capabilities/repair.patch |   198 +
+ .../timestamp-diagnostic-capabilities/source.json  |     6 +
+ .../timestamp-diagnostic-capabilities/verify.py    |    34 +
+ .../wasm-c-parallel-integration/qualification.json |    20 +
+ .../wasm-c-parallel-integration/root-review.json   |    12 +
+ docs/spikes/evidence/wasm-c-parallel-logs.json.gz  |   Bin 0 -> 1819704 bytes
+ docs/spikes/evidence/wasm-c-parallel.json          |   195 +
+ docs/spikes/fixed-temporal-main217.md              |   112 +
+ docs/spikes/gpu-frame-envelope.md                  |    34 +
+ docs/spikes/gpu-timestamps-main200.md              |    29 +
+ docs/spikes/gpu-timestamps-main207.md              |    42 +
+ docs/spikes/gpu-timestamps.md                      |    79 +
+ docs/spikes/journal-replay-test-isolation.md       |    42 +
+ docs/spikes/native-ui-draw.md                      |   101 +-
+ docs/spikes/physics-body-main206.md                |    26 +
+ docs/spikes/physics-broad-main221.md               |    47 +
+ docs/spikes/physics-broad-owner.md                 |   125 +
+ docs/spikes/physics-ccd-main220.md                 |    33 +
+ docs/spikes/physics-collider-main216.md            |    29 +
+ docs/spikes/physics-collider-state.md              |    96 +
+ docs/spikes/physics-inert-body-state.md            |   147 +
+ docs/spikes/physics-inert-islands.md               |   121 +
+ docs/spikes/physics-inert-pair-state.md            |   139 +
+ docs/spikes/physics-integration-config.md          |   141 +
+ docs/spikes/physics-islands-main208.md             |    30 +
+ docs/spikes/physics-narrow-main217.md              |    37 +
+ docs/spikes/physics-narrow-owner.md                |   116 +
+ docs/spikes/physics-pair-main205.md                |    28 +
+ docs/spikes/physics-parity-vendor.md               |    25 +
+ docs/spikes/physics-pipeline-boundary.md           |    97 +
+ docs/spikes/physics-pipeline-main222.md            |    38 +
+ docs/spikes/physics-world-continuation-results.md  |    52 +
+ docs/spikes/physics-world-continuation.md          |    95 +
+ docs/spikes/release-checkpoint-20.md               |    38 +
+ docs/spikes/temporal-owner-main225.md              |    38 +
+ .../temporal-owner-provenance-verification.md      |    41 +
+ docs/spikes/temporal-owner-provenance.md           |    88 +
+ docs/spikes/timestamp-capability.md                |    28 +
+ docs/spikes/timestamp-diagnostic-capabilities.md   |    34 +
+ docs/spikes/wasm-c-parallel.md                     |    95 +
+ handoffs/0065-core-live-hud/brief.md               |    76 +
+ handoffs/0068-gpu-timestamps/brief.md              |   137 +
+ .../summary-2026-10-13T043959.848770+0000.json     |   543 +
+ .../0068-gpu-timestamps/evidence/build/lint.json   |    61 +
+ .../0068-gpu-timestamps/evidence/build/review.json |   143 +
+ .../0068-gpu-timestamps/evidence/build/source.json |   132 +
+ .../0068-gpu-timestamps/evidence/build/tests.json  |   322 +
+ .../evidence/build/toolchain.json                  |    71 +
+ .../evidence/captures/lit-r1/events.jsonl          |    21 +
+ .../evidence/captures/lit-r1/report.json           |   836 ++
+ .../evidence/captures/owner_drop-r1/events.jsonl   |     3 +
+ .../evidence/captures/owner_drop-r1/report.json    |    35 +
+ .../evidence/captures/probe-r1/events.jsonl        |     2 +
+ .../evidence/captures/probe-r1/report.json         |    89 +
+ .../evidence/captures/sprites_text-r1/events.jsonl |     8 +
+ .../evidence/captures/sprites_text-r1/report.json  |   285 +
+ .../evidence/captures/viewport-r1/events.jsonl     |     8 +
+ .../evidence/captures/viewport-r1/report.json      |   312 +
+ .../evidence/gpu/gpu-released.json                 |    18 +
+ .../evidence/gpu/grant-copy.json                   |    19 +
+ .../0068-gpu-timestamps/evidence/gpu/ledger.jsonl  |    18 +
+ .../evidence/gpu/post-release-ledger.jsonl         |     1 +
+ .../evidence/gpu/refusals.jsonl                    |     3 +
+ .../evidence/lease/target-lease.json               |    88 +
+ .../evidence/logs/build-lint.stderr.txt            |    78 +
+ .../evidence/logs/build-review.stderr.txt          |    13 +
+ .../evidence/logs/build-tests-host.stderr.txt      |    22 +
+ .../evidence/logs/build-tests-render.stderr.txt    |    23 +
+ .../evidence/logs/gpu-list-game.stderr.txt         |     1 +
+ .../evidence/logs/gpu-list-game.stdout.txt         |     7 +
+ .../evidence/logs/gpu-list-lib.stderr.txt          |     1 +
+ .../evidence/logs/gpu-list-lib.stdout.txt          |    35 +
+ .../evidence/logs/gpu-list-model_gpu.stderr.txt    |     1 +
+ .../evidence/logs/gpu-list-model_gpu.stdout.txt    |    52 +
+ .../evidence/logs/gpu-list-review.stderr.txt       |     1 +
+ .../evidence/logs/gpu-list-review.stdout.txt       |     7 +
+ .../evidence/logs/gpu-list-ui.stderr.txt           |     1 +
+ .../evidence/logs/gpu-list-ui.stdout.txt           |     4 +
+ .../evidence/logs/gpu-numeric.stderr.txt           |     3 +
+ .../evidence/logs/gpu-numeric.stdout.txt           |     5 +
+ .../evidence/logs/gpu-review-lit-r1.stderr.txt     |     1 +
+ .../evidence/logs/gpu-review-lit-r1.stdout.txt     |     5 +
+ .../logs/gpu-review-owner_drop-r1.stderr.txt       |     1 +
+ .../logs/gpu-review-owner_drop-r1.stdout.txt       |     5 +
+ .../evidence/logs/gpu-review-probe-r1.stderr.txt   |     1 +
+ .../evidence/logs/gpu-review-probe-r1.stdout.txt   |     5 +
+ .../logs/gpu-review-sprites_text-r1.stderr.txt     |     1 +
+ .../logs/gpu-review-sprites_text-r1.stdout.txt     |     5 +
+ .../logs/gpu-review-viewport-r1.stderr.txt         |     1 +
+ .../logs/gpu-review-viewport-r1.stdout.txt         |     5 +
+ .../evidence/logs/gpu-suite-game.stderr.txt        |    18 +
+ .../evidence/logs/gpu-suite-game.stdout.txt        |     9 +
+ .../evidence/logs/gpu-suite-lib.stderr.txt         |    18 +
+ .../evidence/logs/gpu-suite-lib.stdout.txt         |    36 +
+ .../evidence/logs/gpu-suite-model_gpu.stderr.txt   |     3 +
+ .../evidence/logs/gpu-suite-model_gpu.stdout.txt   |    54 +
+ .../evidence/logs/gpu-suite-ui.stderr.txt          |     1 +
+ .../evidence/logs/gpu-suite-ui.stdout.txt          |     6 +
+ .../0068-gpu-timestamps/evidence/manifest.json     |   427 +
+ handoffs/0068-gpu-timestamps/plan.json             |   151 +
+ .../preparation/lifecycle-checks.json              |   342 +
+ .../preparation/lifecycle-checks.log.gz            |   Bin 0 -> 171 bytes
+ .../0068-gpu-timestamps/preparation/selfcheck.json |   146 +
+ handoffs/0068-gpu-timestamps/result.md             |   420 +
+ .../screenshots/lit-r1-lit-off-1.png               |   Bin 0 -> 52071 bytes
+ .../sprites_text-r1-sprites-text-off.png           |   Bin 0 -> 10076 bytes
+ .../screenshots/viewport-r1-viewport-off.png       |   Bin 0 -> 40829 bytes
+ handoffs/0068-gpu-timestamps/tools/analyze.py      |   281 +
+ handoffs/0068-gpu-timestamps/tools/build.py        |   357 +
+ handoffs/0068-gpu-timestamps/tools/common.py       |   203 +
+ handoffs/0068-gpu-timestamps/tools/gpu.py          |   367 +
+ handoffs/0068-gpu-timestamps/tools/lease.py        |   129 +
+ .../tools/review/gpu_timestamp_review.rs           |  1272 ++
+ handoffs/0068-gpu-timestamps/tools/selfcheck.py    |   138 +
+ .../0068-gpu-timestamps/tools/test_lifecycle.py    |   124 +
+ handoffs/0069-core-result-presentation/brief.md    |   266 +
+ .../cpu-evidence/artifacts.json.gz                 |   Bin 0 -> 13516360 bytes
+ .../cpu-evidence/manifest.json                     |  3590 ++++++
+ .../cpu-evidence/observation-verification.json     |     1 +
+ .../cpu-evidence/verification.json                 |     1 +
+ .../cpu-evidence/verify.py                         |    16 +
+ .../0069-core-result-presentation/cpu-result.md    |    41 +
+ .../0069-core-result-presentation/cpu-review.json  |    90 +
+ .../gpu-attempt-001/exit-status.txt                |     1 +
+ .../gpu-attempt-001/finished-utc.txt               |     1 +
+ .../gpu-attempt-001/started-utc.txt                |     1 +
+ .../gpu-attempt-001/stderr.txt                     |    20 +
+ .../gpu-attempt-001/stdout.txt                     |     0
+ .../gpu-attempt-002/exit-status.txt                |     1 +
+ .../gpu-attempt-002/finished-utc.txt               |     1 +
+ .../gpu-attempt-002/images/hosted-ui-narrow-2x.png |   Bin 0 -> 19006 bytes
+ .../gpu-attempt-002/images/ui-clip-open.png        |   Bin 0 -> 1899 bytes
+ .../gpu-attempt-002/images/ui-halo-black.png       |   Bin 0 -> 4818 bytes
+ .../gpu-attempt-002/images/ui-halo-white.png       |   Bin 0 -> 5129 bytes
+ .../images/ui-panel-2x-Rgba8UnormSrgb.png          |   Bin 0 -> 17376 bytes
+ .../gpu-attempt-002/started-utc.txt                |     1 +
+ .../gpu-attempt-002/stderr.txt                     |    13 +
+ .../gpu-attempt-002/stdout.txt                     |     8 +
+ .../gpu-attempt-003/exit-status.txt                |     1 +
+ .../gpu-attempt-003/finished-utc.txt               |     1 +
+ .../gpu-attempt-003/frames-index.json              |   310 +
+ .../frames/final-ar-640x480--01-start.png          |   Bin 0 -> 294599 bytes
+ .../frames/final-ar-640x480--02-won.png            |   Bin 0 -> 226925 bytes
+ .../frames/final-en-420x320--01-start.png          |   Bin 0 -> 151184 bytes
+ .../frames/final-en-420x320--02-won.png            |   Bin 0 -> 123218 bytes
+ .../final-en-420x320--03-lost-generation-2.png     |   Bin 0 -> 155322 bytes
+ .../frames/final-en-640x480--01-start.png          |   Bin 0 -> 295740 bytes
+ .../frames/final-en-640x480--02-lost.png           |   Bin 0 -> 303189 bytes
+ .../frames/final-en-640x480--03-after-r.png        |   Bin 0 -> 295740 bytes
+ .../final-en-640x480--04-won-generation-2.png      |   Bin 0 -> 227352 bytes
+ .../frames/final-en-960x540--01-start.png          |   Bin 0 -> 476313 bytes
+ .../frames/final-en-960x540--02-won.png            |   Bin 0 -> 345600 bytes
+ .../frames/final-en-960x540--03-after-start.png    |   Bin 0 -> 476313 bytes
+ .../final-en-960x540--04-lost-generation-2.png     |   Bin 0 -> 495122 bytes
+ .../frames/final-en-XA-420x320--01-lost.png        |   Bin 0 -> 158471 bytes
+ .../frames/final-en-XA-640x480--01-start.png       |   Bin 0 -> 300319 bytes
+ .../frames/final-en-XA-640x480--02-won.png         |   Bin 0 -> 234320 bytes
+ .../frames/final-zh-Hans-640x480--01-start.png     |   Bin 0 -> 294074 bytes
+ .../frames/final-zh-Hans-640x480--02-lost.png      |   Bin 0 -> 299324 bytes
+ .../frames/review-en-420x320--01-won.png           |   Bin 0 -> 123218 bytes
+ .../frames/review-en-640x480--01-lost.png          |   Bin 0 -> 303189 bytes
+ .../frames/review-en-960x540--01-won.png           |   Bin 0 -> 345600 bytes
+ .../review-en-960x540--02-lost-generation-2.png    |   Bin 0 -> 495122 bytes
+ .../gpu-attempt-003/started-utc.txt                |     1 +
+ .../gpu-attempt-003/stderr.txt                     |     0
+ .../gpu-attempt-003/stdout.txt                     |     8 +
+ .../gpu-g6-guard-evidence.json                     |    72 +
+ .../gpu-proposal-g6.md                             |    26 +
+ .../0069-core-result-presentation/gpu-proposal.md  |   103 +
+ .../gpu-provenance-002.json                        |   252 +
+ .../gpu-provenance-003.json                        |   652 +
+ .../gpu-provenance.json                            |   124 +
+ .../gpu-result-002.md                              |   166 +
+ .../gpu-result-003.md                              |   208 +
+ .../0069-core-result-presentation/gpu-result.md    |   135 +
+ handoffs/0069-core-result-presentation/gpu_only.py |   266 +
+ .../0069-core-result-presentation/gpu_only_g6.py   |   238 +
+ .../0069-core-result-presentation/prep-result.md   |   413 +
+ .../previous-preparation-result.md                 |   178 +
+ handoffs/0069-core-result-presentation/result.md   |   178 +
+ .../root-helper-review.json                        |    97 +
+ .../0069-core-result-presentation/test_gpu_only.py |   150 +
+ .../test_gpu_only_g6.py                            |   140 +
+ .../tools/build_variant.py                         |   168 +
+ .../0069-core-result-presentation/tools/capture.py |   157 +
+ .../tools/frame_profile.py                         |   114 +
+ .../0069-core-result-presentation/tools/lease.py   |   657 +
+ .../tools/placement.py                             |    79 +
+ .../0069-core-result-presentation/tools/plans.json |   366 +
+ .../tools/regression.json                          |   115 +
+ .../tools/regression.py                            |   177 +
+ .../tools/result_hud.rs                            |   678 +
+ .../0069-core-result-presentation/tools/routes.py  |    58 +
+ .../tools/test_lease.py                            |   571 +
+ .../tools/text_width.py                            |   110 +
+ samples/core/PRESENTATION.md                       |    75 +-
+ samples/core/art/fonts/CoreSampleSC-Regular.ttf    |   Bin 13232 -> 13764 bytes
+ samples/core/art/fonts/provenance.json             |     8 +-
+ samples/core/test_bindings.py                      |     5 +
+ samples/core/ui/hud.json                           |    33 +-
+ samples/core/ui/strings.json                       |    11 +-
+ samples/planar/PRESENTATION.md                     |     8 +-
+ samples/planar/hud.py                              |     6 +-
+ third_party/rapier2d/.cargo_vcs_info.json          |     7 +
+ third_party/rapier2d/Cargo.lock                    |   768 ++
+ third_party/rapier2d/Cargo.toml                    |   399 +
+ third_party/rapier2d/Cargo.toml.orig               |   138 +
+ third_party/rapier2d/INCANT_CCD_CAPTURE.json       |     9 +
+ third_party/rapier2d/INCANT_LICENSE.json           |     9 +
+ third_party/rapier2d/INCANT_PATCH.md               |    20 +
+ third_party/rapier2d/INCANT_PIPELINE_CAPTURE.json  |    23 +
+ third_party/rapier2d/INCANT_UPSTREAM.json          |  1159 ++
+ third_party/rapier2d/LICENSE                       |   201 +
+ third_party/rapier2d/README.md                     |   123 +
+ .../rapier2d/src/control/character_controller.rs   |  1496 +++
+ third_party/rapier2d/src/control/mod.rs            |    20 +
+ third_party/rapier2d/src/control/pid_controller.rs |   422 +
+ .../src/control/ray_cast_vehicle_controller.rs     |   823 ++
+ third_party/rapier2d/src/counters/ccd_counters.rs  |    52 +
+ .../src/counters/collision_detection_counters.rs   |    45 +
+ third_party/rapier2d/src/counters/mod.rs           |   242 +
+ .../rapier2d/src/counters/solver_counters.rs       |    72 +
+ .../rapier2d/src/counters/stages_counters.rs       |    75 +
+ third_party/rapier2d/src/counters/timer.rs         |    75 +
+ third_party/rapier2d/src/data/arena.rs             |  1191 ++
+ third_party/rapier2d/src/data/coarena.rs           |   160 +
+ third_party/rapier2d/src/data/graph.rs             |   786 ++
+ third_party/rapier2d/src/data/mod.rs               |    21 +
+ third_party/rapier2d/src/data/modified_objects.rs  |    70 +
+ third_party/rapier2d/src/data/pubsub.rs            |   158 +
+ third_party/rapier2d/src/data/union_find.rs        |   106 +
+ .../rapier2d/src/dynamics/ccd/ccd_solver.rs        |   363 +
+ third_party/rapier2d/src/dynamics/ccd/mod.rs       |     5 +
+ third_party/rapier2d/src/dynamics/ccd/sweeps.rs    |   722 ++
+ .../src/dynamics/coefficient_combine_rule.rs       |   135 +
+ .../src/dynamics/integration_parameters.rs         |   437 +
+ .../src/dynamics/island_manager/checkpoint.rs      |    49 +
+ .../src/dynamics/island_manager/global_split.rs    |   310 +
+ .../rapier2d/src/dynamics/island_manager/island.rs |    72 +
+ .../src/dynamics/island_manager/local_split.rs     |   470 +
+ .../src/dynamics/island_manager/manager.rs         |   483 +
+ .../rapier2d/src/dynamics/island_manager/mod.rs    |    19 +
+ .../src/dynamics/island_manager/persistent.rs      |   921 ++
+ .../rapier2d/src/dynamics/island_manager/sleep.rs  |   179 +
+ .../src/dynamics/island_manager/substep_groups.rs  |   282 +
+ .../rapier2d/src/dynamics/joint/fixed_joint.rs     |   180 +
+ .../rapier2d/src/dynamics/joint/generic_joint.rs   |   888 ++
+ .../dynamics/joint/impulse_joint/impulse_joint.rs  |    63 +
+ .../joint/impulse_joint/impulse_joint_handle.rs    |    25 +
+ .../joint/impulse_joint/impulse_joint_set.rs       |   728 ++
+ .../src/dynamics/joint/impulse_joint/mod.rs        |    11 +
+ third_party/rapier2d/src/dynamics/joint/mod.rs     |    27 +
+ .../rapier2d/src/dynamics/joint/motor_model.rs     |    56 +
+ .../src/dynamics/joint/multibody_joint/mod.rs      |    37 +
+ .../dynamics/joint/multibody_joint/multibody.rs    |  2054 +++
+ .../dynamics/joint/multibody_joint/multibody_ik.rs |   265 +
+ .../joint/multibody_joint/multibody_joint.rs       |   462 +
+ .../multibody_joint/multibody_joint_handle.rs      |    39 +
+ .../joint/multibody_joint/multibody_joint_set.rs   |   479 +
+ .../joint/multibody_joint/multibody_link.rs        |   160 +
+ .../multibody_joint/multibody_regression_tests.rs  |   650 +
+ .../joint/multibody_joint/multibody_workspace.rs   |    27 +
+ .../joint/multibody_joint/unit_multibody_joint.rs  |   207 +
+ .../rapier2d/src/dynamics/joint/pin_slot_joint.rs  |   297 +
+ .../rapier2d/src/dynamics/joint/prismatic_joint.rs |   317 +
+ .../rapier2d/src/dynamics/joint/revolute_joint.rs  |   387 +
+ .../rapier2d/src/dynamics/joint/rope_joint.rs      |   280 +
+ .../rapier2d/src/dynamics/joint/spherical_joint.rs |   340 +
+ .../rapier2d/src/dynamics/joint/spring_joint.rs    |   184 +
+ third_party/rapier2d/src/dynamics/mod.rs           |    58 +
+ third_party/rapier2d/src/dynamics/rigid_body.rs    |  2209 ++++
+ .../rapier2d/src/dynamics/rigid_body_components.rs |  1646 +++
+ .../rapier2d/src/dynamics/rigid_body_handle.rs     |    30 +
+ .../rapier2d/src/dynamics/rigid_body_set.rs        |   464 +
+ .../soft_body/collision_mesh/collision_mesh.rs     |   173 +
+ .../collision_mesh/collision_mesh_accessors.rs     |   351 +
+ .../collision_mesh/collision_mesh_binding.rs       |   264 +
+ .../collision_mesh/collision_mesh_geometry.rs      |   355 +
+ .../collision_mesh/collision_mesh_topology.rs      |   665 +
+ .../src/dynamics/soft_body/collision_mesh/mod.rs   |    22 +
+ third_party/rapier2d/src/dynamics/soft_body/mod.rs |    58 +
+ .../rapier2d/src/dynamics/soft_body/soft_body.rs   |   151 +
+ .../src/dynamics/soft_body/soft_body_accessors.rs  |   317 +
+ .../dynamics/soft_body/soft_body_builder/mod.rs    |    17 +
+ .../soft_body/soft_body_builder/soft_body_build.rs |   307 +
+ .../soft_body_builder/soft_body_builder.rs         |   130 +
+ .../soft_body_builder_mesh_helpers.rs              |   384 +
+ .../soft_body_builder_settings.rs                  |   483 +
+ .../soft_body_builder/soft_body_builder_shapes.rs  |   603 +
+ .../src/dynamics/soft_body/soft_body_cluster.rs    |   803 ++
+ .../src/dynamics/soft_body/soft_body_coloring.rs   |    80 +
+ .../src/dynamics/soft_body/soft_body_contacts.rs   |   267 +
+ .../dynamics/soft_body/soft_body_crossing_tests.rs |    67 +
+ .../src/dynamics/soft_body/soft_body_elements.rs   |   336 +
+ .../src/dynamics/soft_body/soft_body_geometry.rs   |   136 +
+ .../src/dynamics/soft_body/soft_body_handle.rs     |    30 +
+ .../src/dynamics/soft_body/soft_body_material.rs   |   211 +
+ .../src/dynamics/soft_body/soft_body_meshes.rs     |   236 +
+ .../src/dynamics/soft_body/soft_body_motion.rs     |   200 +
+ .../src/dynamics/soft_body/soft_body_plasticity.rs |   265 +
+ .../src/dynamics/soft_body/soft_body_set/mod.rs    |    13 +
+ .../soft_body/soft_body_set/soft_body_set.rs       |   107 +
+ .../soft_body_set/soft_body_set_clusters.rs        |   168 +
+ .../soft_body_set/soft_body_set_insert_remove.rs   |   174 +
+ .../soft_body_set/soft_body_set_proxies.rs         |   309 +
+ .../soft_body/soft_body_set/soft_body_set_split.rs |   568 +
+ .../soft_body_set/soft_body_set_step_sync.rs       |   496 +
+ .../src/dynamics/soft_body/soft_body_settings.rs   |    80 +
+ .../dynamics/soft_body/soft_body_shape_matching.rs |    63 +
+ .../src/dynamics/soft_body/soft_body_volume.rs     |   170 +
+ .../dynamics/soft_body/soft_recovery_settings.rs   |   169 +
+ .../rapier2d/src/dynamics/soft_body/tearing/mod.rs |    17 +
+ .../src/dynamics/soft_body/tearing/tearing.rs      |   152 +
+ .../dynamics/soft_body/tearing/tearing_crack.rs    |   277 +
+ .../src/dynamics/soft_body/tearing/tearing_cut.rs  |   362 +
+ .../dynamics/soft_body/tearing/tearing_event.rs    |   134 +
+ .../dynamics/soft_body/tearing/tearing_helpers.rs  |   192 +
+ .../soft_body/tearing/tearing_particle_split.rs    |   751 ++
+ .../dynamics/soft_body/tearing/tearing_tables.rs   |    29 +
+ .../dynamics/soft_body/tearing/tearing_validate.rs |   216 +
+ .../src/dynamics/soft_body/tearing/tests.rs        |   462 +
+ .../rapier2d/src/dynamics/solver/categorization.rs |    22 +
+ .../contact_constraint_element.rs                  |   939 ++
+ .../contact_constraint/contact_constraints_set.rs  |    71 +
+ .../contact_with_coulomb_friction.rs               |   914 ++
+ .../contact_with_twist_friction.rs                 |   981 ++
+ .../generic_contact_constraint.rs                  |   742 ++
+ .../generic_contact_constraint_element.rs          |   584 +
+ .../src/dynamics/solver/contact_constraint/mod.rs  |    47 +
+ .../src/dynamics/solver/interaction_groups.rs      |   361 +
+ .../joint_constraint/any_joint_constraint.rs       |    23 +
+ .../joint_constraint/generic_joint_constraint.rs   |   325 +
+ .../generic_joint_constraint_builder.rs            |   848 ++
+ .../joint_constraint/joint_constraint_builder.rs   |   509 +
+ .../joint_constraint/joint_constraint_helper.rs    |   847 ++
+ .../joint_constraint/joint_constraints_set.rs      |   149 +
+ .../joint_constraint/joint_velocity_constraint.rs  |   543 +
+ .../src/dynamics/solver/joint_constraint/mod.rs    |    66 +
+ .../rapier2d/src/dynamics/solver/manifold_store.rs |   179 +
+ third_party/rapier2d/src/dynamics/solver/mod.rs    |    60 +
+ .../src/dynamics/solver/soft_constraint/mod.rs     |    11 +
+ .../solver/soft_constraint/soft_attachment.rs      |   167 +
+ .../soft_constraint/soft_constraints_set/mod.rs    |    23 +
+ .../soft_constraint_plasticity.rs                  |   211 +
+ .../soft_constraint_prepare.rs                     |   416 +
+ .../soft_constraint_rigid_coupling.rs              |   285 +
+ .../soft_constraints_set/soft_constraint_solve.rs  |   395 +
+ .../soft_constraint_writeback.rs                   |   209 +
+ .../soft_constraints_set/soft_constraints.rs       |   203 +
+ .../soft_constraints_set/soft_constraints_set.rs   |   226 +
+ .../solver/soft_constraint/soft_contact.rs         |   427 +
+ .../soft_constraint/soft_contact_assembly/mod.rs   |    17 +
+ .../soft_contact_assembly/soft_contact_assembly.rs |   206 +
+ .../soft_contact_assembly_body_contacts.rs         |   807 ++
+ .../soft_contact_assembly_edge_contacts.rs         |   268 +
+ .../soft_contact_assembly_vertex_contacts.rs       |   511 +
+ .../soft_contact_assembly_volume_constraints.rs    |   378 +
+ .../soft_contact_assembly_workspace.rs             |   214 +
+ .../soft_contact_assembly_writeback.rs             |   241 +
+ .../solver/soft_constraint/soft_contact_chunks.rs  |   388 +
+ .../soft_constraint/soft_element_constraint/mod.rs |    14 +
+ .../soft_elastic_constraint.rs                     |   495 +
+ .../soft_element_constraint/soft_element_linalg.rs |   100 +
+ .../soft_element_constraint/soft_neo_hookean.rs    |   166 +
+ .../soft_scalar_constraint.rs                      |   218 +
+ .../soft_element_constraint/test.rs                |   379 +
+ .../soft_element_constraint_assembly.rs            |   992 ++
+ .../rapier2d/src/dynamics/solver/soft_fem/mod.rs   |    10 +
+ .../src/dynamics/solver/soft_fem/soft_fem_set.rs   |   654 +
+ .../dynamics/solver/soft_fem/soft_fem_skyline.rs   |   358 +
+ .../dynamics/solver/soft_fem/soft_fem_sparse.rs    |   380 +
+ .../src/dynamics/solver/soft_fem/system/mod.rs     |    11 +
+ .../soft_fem/system/soft_fem_system_assemble.rs    |   366 +
+ .../soft_fem/system/soft_fem_system_elements.rs    |   139 +
+ .../soft_fem/system/soft_fem_system_prepare.rs     |   275 +
+ .../soft_fem/system/soft_fem_system_response.rs    |   203 +
+ .../src/dynamics/solver/soft_fem/system/tests.rs   |   110 +
+ .../rapier2d/src/dynamics/solver/solver_body.rs    |   458 +
+ .../src/dynamics/solver/solver_contact_graph.rs    |   334 +
+ .../solver/staged_island_solver/helpers.rs         |   157 +
+ .../dynamics/solver/staged_island_solver/init.rs   |   700 ++
+ .../dynamics/solver/staged_island_solver/joints.rs |   561 +
+ .../dynamics/solver/staged_island_solver/mod.rs    |   348 +
+ .../dynamics/solver/staged_island_solver/solve.rs  |   507 +
+ .../dynamics/solver/staged_island_solver/sync.rs   |   186 +
+ .../dynamics/solver/staged_island_solver/worker.rs |  1041 ++
+ .../src/dynamics/solver/velocity_solver.rs         |    65 +
+ .../rapier2d/src/geometry/broad_phase_bvh/mod.rs   |   333 +
+ .../src/geometry/broad_phase_bvh/update.rs         |   606 +
+ .../src/geometry/broad_phase_pair_event.rs         |    48 +
+ third_party/rapier2d/src/geometry/collider.rs      |  1527 +++
+ .../rapier2d/src/geometry/collider_components.rs   |   427 +
+ .../rapier2d/src/geometry/collider_handle.rs       |    25 +
+ third_party/rapier2d/src/geometry/collider_set.rs  |   610 +
+ .../rapier2d/src/geometry/contact_clustering.rs    |   174 +
+ third_party/rapier2d/src/geometry/contact_pair.rs  |  1063 ++
+ .../rapier2d/src/geometry/interaction_graph.rs     |   284 +
+ .../rapier2d/src/geometry/interaction_groups.rs    |   262 +
+ .../rapier2d/src/geometry/manifold_reduction.rs    |    84 +
+ .../rapier2d/src/geometry/mesh_converter.rs        |    99 +
+ third_party/rapier2d/src/geometry/mod.rs           |   314 +
+ .../rapier2d/src/geometry/narrow_phase/contacts.rs |   417 +
+ .../src/geometry/narrow_phase/intersections.rs     |   221 +
+ .../rapier2d/src/geometry/narrow_phase/mod.rs      |   470 +
+ .../src/geometry/narrow_phase/pair_management.rs   |   696 +
+ .../src/geometry/narrow_phase/pair_update.rs       |   805 ++
+ .../rapier2d/src/geometry/narrow_phase/queries.rs  |   264 +
+ .../src/geometry/narrow_phase/soft_contacts/mod.rs |    26 +
+ .../soft_contacts/soft_contacts_classify.rs        |   364 +
+ .../soft_contacts/soft_contacts_driver.rs          |    91 +
+ .../soft_contacts/soft_contacts_edge_pass.rs       |   337 +
+ .../soft_contacts/soft_contacts_pairs.rs           |   277 +
+ .../soft_contacts/soft_contacts_types.rs           |   438 +
+ .../soft_contacts/soft_contacts_vertex_pass.rs     |   764 ++
+ .../soft_contacts/soft_contacts_volume.rs          |   566 +
+ .../soft_contacts/soft_self_contacts.rs            |   559 +
+ .../src/geometry/narrow_phase/solver_graph.rs      |   843 ++
+ .../rapier2d/src/geometry/narrow_phase/test.rs     |   292 +
+ third_party/rapier2d/src/lib.rs                    |   344 +
+ .../rapier2d/src/pipeline/collision_pipeline.rs    |   328 +
+ .../debug_render_pipeline/debug_render_backend.rs  |    97 +
+ .../debug_render_pipeline/debug_render_pipeline.rs |   929 ++
+ .../debug_render_pipeline/debug_render_style.rs    |   119 +
+ .../src/pipeline/debug_render_pipeline/mod.rs      |     8 +
+ .../src/pipeline/debug_render_pipeline/outlines.rs |    38 +
+ third_party/rapier2d/src/pipeline/event_handler.rs |   254 +
+ third_party/rapier2d/src/pipeline/mod.rs           |    47 +
+ third_party/rapier2d/src/pipeline/physics_hooks.rs |   335 +
+ .../src/pipeline/physics_pipeline/checkpoint.rs    |    64 +
+ .../rapier2d/src/pipeline/physics_pipeline/mod.rs  |   310 +
+ .../src/pipeline/physics_pipeline/quarantine.rs    |   477 +
+ .../src/pipeline/physics_pipeline/solve.rs         |   424 +
+ .../src/pipeline/physics_pipeline/substep.rs       |   715 ++
+ .../rapier2d/src/pipeline/physics_pipeline/test.rs |   740 ++
+ .../src/pipeline/physics_pipeline/test_staged.rs   |   313 +
+ third_party/rapier2d/src/pipeline/physics_world.rs |  1007 ++
+ .../rapier2d/src/pipeline/query_pipeline.rs        |   935 ++
+ third_party/rapier2d/src/pipeline/user_changes.rs  |   251 +
+ .../rapier2d/src/utils/angular_inertia_ops.rs      |   113 +
+ third_party/rapier2d/src/utils/component_mul.rs    |    37 +
+ third_party/rapier2d/src/utils/copysign.rs         |    64 +
+ third_party/rapier2d/src/utils/cross_product.rs    |    88 +
+ .../rapier2d/src/utils/cross_product_matrix.rs     |   141 +
+ third_party/rapier2d/src/utils/dot_product.rs      |    89 +
+ third_party/rapier2d/src/utils/fp_flags.rs         |    50 +
+ third_party/rapier2d/src/utils/index_mut2.rs       |    39 +
+ third_party/rapier2d/src/utils/matrix_column.rs    |    46 +
+ third_party/rapier2d/src/utils/mod.rs              |   413 +
+ .../rapier2d/src/utils/orthonormal_basis.rs        |    94 +
+ third_party/rapier2d/src/utils/pos_ops.rs          |   139 +
+ third_party/rapier2d/src/utils/prefetch.rs         |    34 +
+ third_party/rapier2d/src/utils/rotation_ops.rs     |   220 +
+ third_party/rapier2d/src/utils/scalar_type.rs      |   138 +
+ third_party/rapier2d/src/utils/simd_real_copy.rs   |    10 +
+ third_party/rapier2d/src/utils/simd_select.rs      |    26 +
+ third_party/rapier2d/tests/ccd_default_vs_fixed.rs |   216 +
+ .../tests/ccd_fixed_target_cache_invalidation.rs   |    67 +
+ third_party/rapier2d/tests/ccd_oriented_wall.rs    |    88 +
+ third_party/rapier2d/tests/ccd_semantics.rs        |   283 +
+ third_party/rapier2d/tests/ccd_split_step.rs       |   134 +
+ .../rapier2d/tests/heightfield_solver_graph.rs     |    69 +
+ .../tests/issue_258_sleeping_jointed_to_fixed.rs   |    38 +
+ .../issue_288_collision_groups_broad_phase.rs      |   151 +
+ .../tests/issue_448_manual_sleep_honored.rs        |    43 +
+ .../tests/issue_477_body_type_toggle_stress.rs     |    53 +
+ .../rapier2d/tests/issue_499_angular_limits.rs     |   140 +
+ .../tests/issue_593_mass_collider_removal.rs       |    69 +
+ .../tests/issue_629_large_ground_stability.rs      |   142 +
+ .../tests/issue_634_round_triangle_debug_render.rs |    66 +
+ .../tests/issue_643_polyline_corner_stuck.rs       |   156 +
+ ...issue_662_collision_pipeline_modified_bodies.rs |    52 +
+ .../tests/issue_669_polyline_ghost_collisions.rs   |   133 +
+ .../issue_718_contact_reporting_feature_churn.rs   |    54 +
+ .../tests/issue_752_oneway_platform_normal.rs      |    87 +
+ .../rapier2d/tests/issue_772_pin_slot_joint.rs     |    74 +
+ .../tests/issue_783_disable_and_remove_bodies.rs   |    55 +
+ .../rapier2d/tests/issue_798_empty_polyline.rs     |    36 +
+ .../tests/issue_818_nan_tangent_impulse.rs         |   105 +
+ .../tests/issue_858_set_fixed_with_joint.rs        |    29 +
+ .../tests/issue_866_joints_between_parallel.rs     |    95 +
+ .../tests/issue_918_joint_sleep_wake_stress.rs     |    53 +
+ .../issue_919_prediction_distance_restitution.rs   |    88 +
+ .../tests/issue_949_coupled_linear_accel_motor.rs  |    85 +
+ .../tests/issue_952_simd_joint_offset_com.rs       |    83 +
+ .../rapier2d/tests/joint_assembly_persistence.rs   |   107 +
+ .../rapier2d/tests/joint_contact_solve_order.rs    |    75 +
+ third_party/rapier2d/tests/joint_stability.rs      |   319 +
+ third_party/rapier2d/tests/miri_scenes.rs          |   233 +
+ .../rapier2d/tests/pseudo_normals_debug_render.rs  |    63 +
+ third_party/rapier2d/tests/snapshot_portability.rs |   149 +
+ third_party/rapier2d/tests/snapshot_roundtrip.rs   |   436 +
+ third_party/rapier2d/tests/soft_bodies.rs          |  3579 ++++++
+ third_party/rapier2d/tests/soft_body_clusters.rs   |   639 +
+ third_party/rapier2d/tests/soft_body_grab.rs       |   202 +
+ .../rapier2d/tests/soft_contact_debug_render.rs    |   188 +
+ third_party/rapier2d/tests/soft_recovery.rs        |   756 ++
+ third_party/rapier2d/tests/speed_cap.rs            |   184 +
+ third_party/rapier2d/tests/spinner_containment.rs  |   134 +
+ third_party/rapier2d/tests/zero_dt_step.rs         |   137 +
+ third_party/rapier3d/.cargo_vcs_info.json          |     7 +
+ third_party/rapier3d/Cargo.lock                    |   812 ++
+ third_party/rapier3d/Cargo.toml                    |   548 +
+ third_party/rapier3d/Cargo.toml.orig               |   135 +
+ third_party/rapier3d/INCANT_CCD_CAPTURE.json       |     9 +
+ third_party/rapier3d/INCANT_LICENSE.json           |     9 +
+ third_party/rapier3d/INCANT_PATCH.md               |    20 +
+ third_party/rapier3d/INCANT_PIPELINE_CAPTURE.json  |    23 +
+ third_party/rapier3d/INCANT_UPSTREAM.json          |  1311 ++
+ third_party/rapier3d/LICENSE                       |   201 +
+ third_party/rapier3d/README.md                     |   123 +
+ third_party/rapier3d/examples/fem_bench.rs         |   184 +
+ .../rapier3d/src/control/character_controller.rs   |  1496 +++
+ third_party/rapier3d/src/control/mod.rs            |    20 +
+ third_party/rapier3d/src/control/pid_controller.rs |   422 +
+ .../src/control/ray_cast_vehicle_controller.rs     |   823 ++
+ third_party/rapier3d/src/counters/ccd_counters.rs  |    52 +
+ .../src/counters/collision_detection_counters.rs   |    45 +
+ third_party/rapier3d/src/counters/mod.rs           |   242 +
+ .../rapier3d/src/counters/solver_counters.rs       |    72 +
+ .../rapier3d/src/counters/stages_counters.rs       |    75 +
+ third_party/rapier3d/src/counters/timer.rs         |    75 +
+ third_party/rapier3d/src/data/arena.rs             |  1191 ++
+ third_party/rapier3d/src/data/coarena.rs           |   160 +
+ third_party/rapier3d/src/data/graph.rs             |   786 ++
+ third_party/rapier3d/src/data/mod.rs               |    21 +
+ third_party/rapier3d/src/data/modified_objects.rs  |    70 +
+ third_party/rapier3d/src/data/pubsub.rs            |   158 +
+ third_party/rapier3d/src/data/union_find.rs        |   106 +
+ .../rapier3d/src/dynamics/ccd/ccd_solver.rs        |   363 +
+ third_party/rapier3d/src/dynamics/ccd/mod.rs       |     5 +
+ third_party/rapier3d/src/dynamics/ccd/sweeps.rs    |   722 ++
+ .../src/dynamics/coefficient_combine_rule.rs       |   135 +
+ .../src/dynamics/integration_parameters.rs         |   437 +
+ .../src/dynamics/island_manager/checkpoint.rs      |    49 +
+ .../src/dynamics/island_manager/global_split.rs    |   310 +
+ .../rapier3d/src/dynamics/island_manager/island.rs |    72 +
+ .../src/dynamics/island_manager/local_split.rs     |   470 +
+ .../src/dynamics/island_manager/manager.rs         |   483 +
+ .../rapier3d/src/dynamics/island_manager/mod.rs    |    19 +
+ .../src/dynamics/island_manager/persistent.rs      |   921 ++
+ .../rapier3d/src/dynamics/island_manager/sleep.rs  |   179 +
+ .../src/dynamics/island_manager/substep_groups.rs  |   282 +
+ .../rapier3d/src/dynamics/joint/fixed_joint.rs     |   180 +
+ .../rapier3d/src/dynamics/joint/generic_joint.rs   |   888 ++
+ .../dynamics/joint/impulse_joint/impulse_joint.rs  |    63 +
+ .../joint/impulse_joint/impulse_joint_handle.rs    |    25 +
+ .../joint/impulse_joint/impulse_joint_set.rs       |   728 ++
+ .../src/dynamics/joint/impulse_joint/mod.rs        |    11 +
+ third_party/rapier3d/src/dynamics/joint/mod.rs     |    27 +
+ .../rapier3d/src/dynamics/joint/motor_model.rs     |    56 +
+ .../src/dynamics/joint/multibody_joint/mod.rs      |    37 +
+ .../dynamics/joint/multibody_joint/multibody.rs    |  2054 +++
+ .../dynamics/joint/multibody_joint/multibody_ik.rs |   265 +
+ .../joint/multibody_joint/multibody_joint.rs       |   462 +
+ .../multibody_joint/multibody_joint_handle.rs      |    39 +
+ .../joint/multibody_joint/multibody_joint_set.rs   |   479 +
+ .../joint/multibody_joint/multibody_link.rs        |   160 +
+ .../multibody_joint/multibody_regression_tests.rs  |   650 +
+ .../joint/multibody_joint/multibody_workspace.rs   |    27 +
+ .../joint/multibody_joint/unit_multibody_joint.rs  |   207 +
+ .../rapier3d/src/dynamics/joint/pin_slot_joint.rs  |   297 +
+ .../rapier3d/src/dynamics/joint/prismatic_joint.rs |   317 +
+ .../rapier3d/src/dynamics/joint/revolute_joint.rs  |   387 +
+ .../rapier3d/src/dynamics/joint/rope_joint.rs      |   280 +
+ .../rapier3d/src/dynamics/joint/spherical_joint.rs |   340 +
+ .../rapier3d/src/dynamics/joint/spring_joint.rs    |   184 +
+ third_party/rapier3d/src/dynamics/mod.rs           |    58 +
+ third_party/rapier3d/src/dynamics/rigid_body.rs    |  2209 ++++
+ .../rapier3d/src/dynamics/rigid_body_components.rs |  1646 +++
+ .../rapier3d/src/dynamics/rigid_body_handle.rs     |    30 +
+ .../rapier3d/src/dynamics/rigid_body_set.rs        |   464 +
+ .../soft_body/collision_mesh/collision_mesh.rs     |   173 +
+ .../collision_mesh/collision_mesh_accessors.rs     |   351 +
+ .../collision_mesh/collision_mesh_binding.rs       |   264 +
+ .../collision_mesh/collision_mesh_geometry.rs      |   355 +
+ .../collision_mesh/collision_mesh_topology.rs      |   665 +
+ .../src/dynamics/soft_body/collision_mesh/mod.rs   |    22 +
+ third_party/rapier3d/src/dynamics/soft_body/mod.rs |    58 +
+ .../rapier3d/src/dynamics/soft_body/soft_body.rs   |   151 +
+ .../src/dynamics/soft_body/soft_body_accessors.rs  |   317 +
+ .../dynamics/soft_body/soft_body_builder/mod.rs    |    17 +
+ .../soft_body/soft_body_builder/soft_body_build.rs |   307 +
+ .../soft_body_builder/soft_body_builder.rs         |   130 +
+ .../soft_body_builder_mesh_helpers.rs              |   384 +
+ .../soft_body_builder_settings.rs                  |   483 +
+ .../soft_body_builder/soft_body_builder_shapes.rs  |   603 +
+ .../src/dynamics/soft_body/soft_body_cluster.rs    |   803 ++
+ .../src/dynamics/soft_body/soft_body_coloring.rs   |    80 +
+ .../src/dynamics/soft_body/soft_body_contacts.rs   |   267 +
+ .../dynamics/soft_body/soft_body_crossing_tests.rs |    67 +
+ .../src/dynamics/soft_body/soft_body_elements.rs   |   336 +
+ .../src/dynamics/soft_body/soft_body_geometry.rs   |   136 +
+ .../src/dynamics/soft_body/soft_body_handle.rs     |    30 +
+ .../src/dynamics/soft_body/soft_body_material.rs   |   211 +
+ .../src/dynamics/soft_body/soft_body_meshes.rs     |   236 +
+ .../src/dynamics/soft_body/soft_body_motion.rs     |   200 +
+ .../src/dynamics/soft_body/soft_body_plasticity.rs |   265 +
+ .../src/dynamics/soft_body/soft_body_set/mod.rs    |    13 +
+ .../soft_body/soft_body_set/soft_body_set.rs       |   107 +
+ .../soft_body_set/soft_body_set_clusters.rs        |   168 +
+ .../soft_body_set/soft_body_set_insert_remove.rs   |   174 +
+ .../soft_body_set/soft_body_set_proxies.rs         |   309 +
+ .../soft_body/soft_body_set/soft_body_set_split.rs |   568 +
+ .../soft_body_set/soft_body_set_step_sync.rs       |   496 +
+ .../src/dynamics/soft_body/soft_body_settings.rs   |    80 +
+ .../dynamics/soft_body/soft_body_shape_matching.rs |    63 +
+ .../src/dynamics/soft_body/soft_body_volume.rs     |   170 +
+ .../dynamics/soft_body/soft_recovery_settings.rs   |   169 +
+ .../rapier3d/src/dynamics/soft_body/tearing/mod.rs |    17 +
+ .../src/dynamics/soft_body/tearing/tearing.rs      |   152 +
+ .../dynamics/soft_body/tearing/tearing_crack.rs    |   277 +
+ .../src/dynamics/soft_body/tearing/tearing_cut.rs  |   362 +
+ .../dynamics/soft_body/tearing/tearing_event.rs    |   134 +
+ .../dynamics/soft_body/tearing/tearing_helpers.rs  |   192 +
+ .../soft_body/tearing/tearing_particle_split.rs    |   751 ++
+ .../dynamics/soft_body/tearing/tearing_tables.rs   |    29 +
+ .../dynamics/soft_body/tearing/tearing_validate.rs |   216 +
+ .../src/dynamics/soft_body/tearing/tests.rs        |   462 +
+ .../rapier3d/src/dynamics/solver/categorization.rs |    22 +
+ .../contact_constraint_element.rs                  |   939 ++
+ .../contact_constraint/contact_constraints_set.rs  |    71 +
+ .../contact_with_coulomb_friction.rs               |   914 ++
+ .../contact_with_twist_friction.rs                 |   981 ++
+ .../generic_contact_constraint.rs                  |   742 ++
+ .../generic_contact_constraint_element.rs          |   584 +
+ .../src/dynamics/solver/contact_constraint/mod.rs  |    47 +
+ .../src/dynamics/solver/interaction_groups.rs      |   361 +
+ .../joint_constraint/any_joint_constraint.rs       |    23 +
+ .../joint_constraint/generic_joint_constraint.rs   |   325 +
+ .../generic_joint_constraint_builder.rs            |   848 ++
+ .../joint_constraint/joint_constraint_builder.rs   |   509 +
+ .../joint_constraint/joint_constraint_helper.rs    |   847 ++
+ .../joint_constraint/joint_constraints_set.rs      |   149 +
+ .../joint_constraint/joint_velocity_constraint.rs  |   543 +
+ .../src/dynamics/solver/joint_constraint/mod.rs    |    66 +
+ .../rapier3d/src/dynamics/solver/manifold_store.rs |   179 +
+ third_party/rapier3d/src/dynamics/solver/mod.rs    |    60 +
+ .../src/dynamics/solver/soft_constraint/mod.rs     |    11 +
+ .../solver/soft_constraint/soft_attachment.rs      |   167 +
+ .../soft_constraint/soft_constraints_set/mod.rs    |    23 +
+ .../soft_constraint_plasticity.rs                  |   211 +
+ .../soft_constraint_prepare.rs                     |   416 +
+ .../soft_constraint_rigid_coupling.rs              |   285 +
+ .../soft_constraints_set/soft_constraint_solve.rs  |   395 +
+ .../soft_constraint_writeback.rs                   |   209 +
+ .../soft_constraints_set/soft_constraints.rs       |   203 +
+ .../soft_constraints_set/soft_constraints_set.rs   |   226 +
+ .../solver/soft_constraint/soft_contact.rs         |   427 +
+ .../soft_constraint/soft_contact_assembly/mod.rs   |    17 +
+ .../soft_contact_assembly/soft_contact_assembly.rs |   206 +
+ .../soft_contact_assembly_body_contacts.rs         |   807 ++
+ .../soft_contact_assembly_edge_contacts.rs         |   268 +
+ .../soft_contact_assembly_vertex_contacts.rs       |   511 +
+ .../soft_contact_assembly_volume_constraints.rs    |   378 +
+ .../soft_contact_assembly_workspace.rs             |   214 +
+ .../soft_contact_assembly_writeback.rs             |   241 +
+ .../solver/soft_constraint/soft_contact_chunks.rs  |   388 +
+ .../soft_constraint/soft_element_constraint/mod.rs |    14 +
+ .../soft_elastic_constraint.rs                     |   495 +
+ .../soft_element_constraint/soft_element_linalg.rs |   100 +
+ .../soft_element_constraint/soft_neo_hookean.rs    |   166 +
+ .../soft_scalar_constraint.rs                      |   218 +
+ .../soft_element_constraint/test.rs                |   379 +
+ .../soft_element_constraint_assembly.rs            |   992 ++
+ .../rapier3d/src/dynamics/solver/soft_fem/mod.rs   |    10 +
+ .../src/dynamics/solver/soft_fem/soft_fem_set.rs   |   654 +
+ .../dynamics/solver/soft_fem/soft_fem_skyline.rs   |   358 +
+ .../dynamics/solver/soft_fem/soft_fem_sparse.rs    |   380 +
+ .../src/dynamics/solver/soft_fem/system/mod.rs     |    11 +
+ .../soft_fem/system/soft_fem_system_assemble.rs    |   366 +
+ .../soft_fem/system/soft_fem_system_elements.rs    |   139 +
+ .../soft_fem/system/soft_fem_system_prepare.rs     |   275 +
+ .../soft_fem/system/soft_fem_system_response.rs    |   203 +
+ .../src/dynamics/solver/soft_fem/system/tests.rs   |   110 +
+ .../rapier3d/src/dynamics/solver/solver_body.rs    |   458 +
+ .../src/dynamics/solver/solver_contact_graph.rs    |   334 +
+ .../solver/staged_island_solver/helpers.rs         |   157 +
+ .../dynamics/solver/staged_island_solver/init.rs   |   700 ++
+ .../dynamics/solver/staged_island_solver/joints.rs |   561 +
+ .../dynamics/solver/staged_island_solver/mod.rs    |   348 +
+ .../dynamics/solver/staged_island_solver/solve.rs  |   507 +
+ .../dynamics/solver/staged_island_solver/sync.rs   |   186 +
+ .../dynamics/solver/staged_island_solver/worker.rs |  1041 ++
+ .../src/dynamics/solver/velocity_solver.rs         |    65 +
+ .../rapier3d/src/geometry/broad_phase_bvh/mod.rs   |   333 +
+ .../src/geometry/broad_phase_bvh/update.rs         |   606 +
+ .../src/geometry/broad_phase_pair_event.rs         |    48 +
+ third_party/rapier3d/src/geometry/collider.rs      |  1527 +++
+ .../rapier3d/src/geometry/collider_components.rs   |   427 +
+ .../rapier3d/src/geometry/collider_handle.rs       |    25 +
+ third_party/rapier3d/src/geometry/collider_set.rs  |   610 +
+ .../rapier3d/src/geometry/contact_clustering.rs    |   174 +
+ third_party/rapier3d/src/geometry/contact_pair.rs  |  1063 ++
+ .../rapier3d/src/geometry/interaction_graph.rs     |   284 +
+ .../rapier3d/src/geometry/interaction_groups.rs    |   262 +
+ .../rapier3d/src/geometry/manifold_reduction.rs    |    84 +
+ .../rapier3d/src/geometry/mesh_converter.rs        |    99 +
+ third_party/rapier3d/src/geometry/mod.rs           |   314 +
+ .../rapier3d/src/geometry/narrow_phase/contacts.rs |   417 +
+ .../src/geometry/narrow_phase/intersections.rs     |   221 +
+ .../rapier3d/src/geometry/narrow_phase/mod.rs      |   470 +
+ .../src/geometry/narrow_phase/pair_management.rs   |   696 +
+ .../src/geometry/narrow_phase/pair_update.rs       |   805 ++
+ .../rapier3d/src/geometry/narrow_phase/queries.rs  |   264 +
+ .../src/geometry/narrow_phase/soft_contacts/mod.rs |    26 +
+ .../soft_contacts/soft_contacts_classify.rs        |   364 +
+ .../soft_contacts/soft_contacts_driver.rs          |    91 +
+ .../soft_contacts/soft_contacts_edge_pass.rs       |   337 +
+ .../soft_contacts/soft_contacts_pairs.rs           |   277 +
+ .../soft_contacts/soft_contacts_types.rs           |   438 +
+ .../soft_contacts/soft_contacts_vertex_pass.rs     |   764 ++
+ .../soft_contacts/soft_contacts_volume.rs          |   566 +
+ .../soft_contacts/soft_self_contacts.rs            |   559 +
+ .../src/geometry/narrow_phase/solver_graph.rs      |   843 ++
+ .../rapier3d/src/geometry/narrow_phase/test.rs     |   292 +
+ third_party/rapier3d/src/lib.rs                    |   344 +
+ .../rapier3d/src/pipeline/collision_pipeline.rs    |   328 +
+ .../debug_render_pipeline/debug_render_backend.rs  |    97 +
+ .../debug_render_pipeline/debug_render_pipeline.rs |   929 ++
+ .../debug_render_pipeline/debug_render_style.rs    |   119 +
+ .../src/pipeline/debug_render_pipeline/mod.rs      |     8 +
+ .../src/pipeline/debug_render_pipeline/outlines.rs |    38 +
+ third_party/rapier3d/src/pipeline/event_handler.rs |   254 +
+ third_party/rapier3d/src/pipeline/mod.rs           |    47 +
+ third_party/rapier3d/src/pipeline/physics_hooks.rs |   335 +
+ .../src/pipeline/physics_pipeline/checkpoint.rs    |    64 +
+ .../rapier3d/src/pipeline/physics_pipeline/mod.rs  |   310 +
+ .../src/pipeline/physics_pipeline/quarantine.rs    |   477 +
+ .../src/pipeline/physics_pipeline/solve.rs         |   424 +
+ .../src/pipeline/physics_pipeline/substep.rs       |   715 ++
+ .../rapier3d/src/pipeline/physics_pipeline/test.rs |   740 ++
+ .../src/pipeline/physics_pipeline/test_staged.rs   |   313 +
+ third_party/rapier3d/src/pipeline/physics_world.rs |  1007 ++
+ .../rapier3d/src/pipeline/query_pipeline.rs        |   935 ++
+ third_party/rapier3d/src/pipeline/user_changes.rs  |   251 +
+ .../rapier3d/src/utils/angular_inertia_ops.rs      |   113 +
+ third_party/rapier3d/src/utils/component_mul.rs    |    37 +
+ third_party/rapier3d/src/utils/copysign.rs         |    64 +
+ third_party/rapier3d/src/utils/cross_product.rs    |    88 +
+ .../rapier3d/src/utils/cross_product_matrix.rs     |   141 +
+ third_party/rapier3d/src/utils/dot_product.rs      |    89 +
+ third_party/rapier3d/src/utils/fp_flags.rs         |    50 +
+ third_party/rapier3d/src/utils/index_mut2.rs       |    39 +
+ third_party/rapier3d/src/utils/matrix_column.rs    |    46 +
+ third_party/rapier3d/src/utils/mod.rs              |   413 +
+ .../rapier3d/src/utils/orthonormal_basis.rs        |    94 +
+ third_party/rapier3d/src/utils/pos_ops.rs          |   139 +
+ third_party/rapier3d/src/utils/prefetch.rs         |    34 +
+ third_party/rapier3d/src/utils/rotation_ops.rs     |   220 +
+ third_party/rapier3d/src/utils/scalar_type.rs      |   138 +
+ third_party/rapier3d/src/utils/simd_real_copy.rs   |    10 +
+ third_party/rapier3d/src/utils/simd_select.rs      |    26 +
+ .../rapier3d/tests/additional_solver_iterations.rs |   197 +
+ .../rapier3d/tests/broad_phase_pair_filter.rs      |   128 +
+ third_party/rapier3d/tests/ccd_default_vs_fixed.rs |   374 +
+ third_party/rapier3d/tests/ccd_split_step.rs       |   138 +
+ .../tests/collision_pipeline_moving_bodies.rs      |   122 +
+ third_party/rapier3d/tests/contact_clustering.rs   |   209 +
+ .../tests/contact_force_event_clustering.rs        |   126 +
+ .../tests/contact_force_event_first_tick.rs        |   170 +
+ third_party/rapier3d/tests/gyroscopic.rs           |   157 +
+ .../rapier3d/tests/heightfield_solver_graph.rs     |    63 +
+ .../rapier3d/tests/issue_182_heightfield_seam.rs   |   128 +
+ .../rapier3d/tests/issue_217_ccd_large_dt_hitch.rs |   124 +
+ .../rapier3d/tests/issue_253_unsync_callbacks.rs   |    70 +
+ .../issue_287_kinematic_wakes_jointed_dynamic.rs   |    53 +
+ .../tests/issue_309_locked_rotations_offset_com.rs |    72 +
+ .../rapier3d/tests/issue_372_trimesh_sleep.rs      |   132 +
+ .../rapier3d/tests/issue_485_kcc_depenetration.rs  |   175 +
+ .../rapier3d/tests/issue_499_angular_limits.rs     |   196 +
+ .../tests/issue_524_thin_slab_trimesh_tunnel.rs    |   130 +
+ .../tests/issue_617_broad_phase_memory_growth.rs   |    64 +
+ .../tests/issue_634_round_triangle_debug_render.rs |    40 +
+ .../tests/issue_666_additional_mass_inertia.rs     |    83 +
+ .../tests/issue_692_joint_get_mut_wakes_bodies.rs  |    56 +
+ .../rapier3d/tests/issue_717_trimesh_result.rs     |    25 +
+ .../issue_730_many_separate_colliders_perf.rs      |    69 +
+ .../tests/issue_734_collider_reparenting.rs        |    69 +
+ .../tests/issue_746_prismatic_axis_frames.rs       |    64 +
+ .../issue_749_query_after_collider_removal.rs      |    61 +
+ .../tests/issue_78_additional_mass_rest.rs         |    78 +
+ .../tests/issue_792_coupled_angular_spring.rs      |    48 +
+ .../tests/issue_810_cubes_thin_cylinder_tunnel.rs  |   123 +
+ .../rapier3d/tests/issue_836_physics_world.rs      |    40 +
+ .../issue_856_motor_position_rotating_base.rs      |    57 +
+ .../rapier3d/tests/issue_862_kcc_impulse_point.rs  |   119 +
+ .../tests/issue_868_same_machine_determinism.rs    |    55 +
+ .../rapier3d/tests/issue_925_wheel_rotation.rs     |    94 +
+ .../tests/issue_932_low_ccd_substeps_stutter.rs    |   114 +
+ .../tests/issue_946_vehicle_braking_friction.rs    |   112 +
+ .../tests/issue_952_simd_joint_offset_com.rs       |    83 +
+ .../tests/issue_954_multibody_parallel_contact.rs  |    46 +
+ .../tests/issue_968_multibody_weld_settle.rs       |    69 +
+ .../tests/issue_970_multi_collider_body_perf.rs    |    64 +
+ .../rapier3d/tests/issue_974_restitution.rs        |    92 +
+ .../rapier3d/tests/joint_assembly_persistence.rs   |   107 +
+ .../rapier3d/tests/joint_contact_solve_order.rs    |    75 +
+ third_party/rapier3d/tests/joint_stability.rs      |   322 +
+ .../rapier3d/tests/loop_closure_com_repro.rs       |   179 +
+ third_party/rapier3d/tests/miri_scenes.rs          |   320 +
+ third_party/rapier3d/tests/multibody_armature.rs   |   134 +
+ third_party/rapier3d/tests/multibody_coupling.rs   |   121 +
+ .../rapier3d/tests/multibody_coupling_topology.rs  |   187 +
+ .../rapier3d/tests/multibody_dof_inertia.rs        |   115 +
+ third_party/rapier3d/tests/multibody_spring.rs     |    98 +
+ .../tests/parallel_external_caller_livelock.rs     |   122 +
+ third_party/rapier3d/tests/parallel_path_parity.rs |   161 +
+ third_party/rapier3d/tests/persistent_islands.rs   |   359 +
+ third_party/rapier3d/tests/pipeline_counters.rs    |    80 +
+ .../rapier3d/tests/pseudo_normals_debug_render.rs  |    52 +
+ .../rapier3d/tests/query_pipeline_subshapes.rs     |   120 +
+ .../rapier3d/tests/simd_backend_determinism.rs     |   152 +
+ third_party/rapier3d/tests/simd_backend_parity.rs  |   183 +
+ .../rapier3d/tests/single_worker_deferred_bvh.rs   |    90 +
+ third_party/rapier3d/tests/sleep_wake.rs           |   814 ++
+ third_party/rapier3d/tests/sleep_wide_bodies.rs    |    99 +
+ third_party/rapier3d/tests/snapshot_portability.rs |   158 +
+ third_party/rapier3d/tests/snapshot_roundtrip.rs   |   449 +
+ third_party/rapier3d/tests/soft_bodies.rs          |  4790 +++++++
+ third_party/rapier3d/tests/soft_body_clusters.rs   |  1199 ++
+ third_party/rapier3d/tests/soft_body_grab.rs       |   354 +
+ third_party/rapier3d/tests/soft_body_joints.rs     |   475 +
+ third_party/rapier3d/tests/soft_body_meshes.rs     |   597 +
+ third_party/rapier3d/tests/soft_recovery3.rs       |   590 +
+ third_party/rapier3d/tests/soft_wires.rs           |   242 +
+ .../rapier3d/tests/solver_graph_stale_refs.rs      |   111 +
+ third_party/rapier3d/tests/speed_cap.rs            |   187 +
+ .../tests/substep_chain_high_mass_ratio.rs         |   161 +
+ .../rapier3d/tests/thread_count_determinism.rs     |   315 +
+ .../rapier3d/tests/total_contact_impulse.rs        |    75 +
+ third_party/rapier3d/tests/unsync_callbacks.rs     |   197 +
+ third_party/rapier3d/tests/whole_island_sleep.rs   |   316 +
+ third_party/rapier3d/tests/zero_dt_step.rs         |    58 +
+ tools/physics_features.py                          |     4 +-
+ tools/probes/native-physics/Cargo.lock             |     4 -
+ tools/probes/native-physics/Cargo.toml             |     2 +
+ tools/probes/physics-parity/Cargo.lock             |     2 -
+ tools/probes/physics-parity/Cargo.toml             |     1 +
+ tools/probes/physics-parity/features.py            |    32 +-
+ tools/probes/physics-snapshot-boundary/Cargo.lock  |     4 -
+ tools/probes/physics-snapshot-boundary/Cargo.toml  |     2 +
+ tools/probes/physics/Cargo.lock                    |     2 -
+ tools/probes/physics/Cargo.toml                    |     1 +
+ tools/tests/test_physics_features.py               |    16 +-
+ tools/tests/test_physics_parity.py                 |    39 +
+ 1714 files changed, 452997 insertions(+), 739 deletions(-)

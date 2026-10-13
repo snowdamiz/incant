@@ -1,7 +1,9 @@
 //! Opt-in opaque-surface motion and depth, not temporal color reconstruction.
 //! History belongs to one immediately submitted retained scene, never world ticks.
+pub(crate) mod attachment;
 mod draw;
 mod owner;
+mod owner_system;
 mod plan;
 mod provenance;
 mod retained;
@@ -25,6 +27,10 @@ pub enum MotionError {
     Cooked,
     #[error("motion pipelines were not enabled at renderer startup")]
     Disabled,
+    #[error("motion owner attachment pipelines were not enabled")]
+    OwnerDisabled,
+    #[error("motion owner attachment is not admitted with fixed temporal history")]
+    OwnerCombination,
     #[error("motion history belongs to another renderer")]
     Owner,
     #[error("motion history sequence exhausted")]
