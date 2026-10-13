@@ -1,0 +1,78 @@
+{
+  "decision": "accepted_producer_execution",
+  "reviewer": "astra /root",
+  "head": "a11bd4f4fe3b74402572e8c3bc0ca41b814f62df",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/docs/spikes/evidence/authored-android-wasm/manifest.json",
+    "sha256": "843aded36191d3fc76505c2b969d8a836d90248e87b14a0fe3173b3d2973150a"
+  },
+  "records": 1281,
+  "lossless_payloads": 465,
+  "external_binaries_rehashed": 10,
+  "independent_audit": "Read producer-audit.py and replayed all assertions without rewriting original receipt; restricted Git fallback to STATUS.md. No export or emulator process rerun.",
+  "proof": {
+    "passed": true,
+    "records": [
+      {
+        "mode": "deterministic",
+        "target": "aarch64-linux-android",
+        "actual_api": "37",
+        "compiler_api": 24,
+        "positive_processes": 3,
+        "exact_refusals": 13,
+        "raw_command_streams_rehashed": 376,
+        "archive_bytes": 24745978,
+        "caller_bytes": 13487064,
+        "runtime_files": 10,
+        "export_receipt_sha256": "a5994c1bb08adadf9ce1b6b7d0d6e1e054bcff6b285729f69e649bd084d16e0e",
+        "caller_receipt_sha256": "53dfdb53fc1123024ae53f0e0525444fdd29e67ced33d60dd41d80d6ddccdfa1"
+      },
+      {
+        "mode": "fast",
+        "target": "aarch64-linux-android",
+        "actual_api": "37",
+        "compiler_api": 24,
+        "positive_processes": 3,
+        "exact_refusals": 13,
+        "raw_command_streams_rehashed": 374,
+        "archive_bytes": 24736964,
+        "caller_bytes": 13481192,
+        "runtime_files": 10,
+        "export_receipt_sha256": "d6aa4b90c7a864f30998b820ff469f92e4e3af962b4ac62015f881fbe37e7a02",
+        "caller_receipt_sha256": "86b5ca49af2aa2c13cae1ea807e17ac49467b6e36b8dc246556d1a6a126c7d36"
+      }
+    ],
+    "frozen_inputs_verified": 14411,
+    "immutable_git_fallback": [
+      "STATUS.md"
+    ],
+    "all_fields_per_tick": 186,
+    "ticks": 96,
+    "development_processes": 4,
+    "fresh_android_processes": 6,
+    "android_refusals": 26,
+    "sources_builds_maps_removed": true,
+    "scope": "API37 local ARM emulator CPU only; no physical-device, minimum-OS, GPU or performance gate."
+  },
+  "source_reviews": [
+    {
+      "path": "authored-android-wasm-source-20261013.json",
+      "sha256": "fc720192797a856a69677faaee7b7c0e12393341e3b746e92bd8aca9e5bf018d"
+    },
+    {
+      "path": "authored-android-wasm-probe-20261013.json",
+      "sha256": "9ff41ccaf0cbea125b2e1fb1eb25f4f133c35958c7576bdf097634da850e407b"
+    }
+  ],
+  "limits": [
+    "Actual local ARM Android API37 emulator CPU only; both physics families. API24 is compilation target, not minimum-OS execution proof.",
+    "Two ordinary exports freshly compiled; one fast caller stage retried unchanged archives on a fresh port after a retained port-reuse refusal before AVD creation.",
+    "Compiled backup/generated source inputs were producer-hashed before removal; removed files cannot be independently rehashed afterward. Both corresponding unstripped archives remain retained.",
+    "One selected scene module; mixed per-entity TypeScript and unknown/incomplete/stale bundles fail closed.",
+    "Static guest checkpoint remains unsupported; unknown save request establishes only C ABI refusal.",
+    "Failure no-PCM/report boundary is distinct from atomic callback rollback established by prior native host conformance.",
+    "No physical-phone/performance/rendering/mobile window/live audio/signing/store/phase gate.",
+    "Public SDK opcodes and runtime capabilities unchanged; no JIT/source compiler/cache loader added."
+  ],
+  "findings": []
+}
