@@ -1,0 +1,7 @@
+    Checking wgpu-hal v29.0.4
+   Compiling incant_shader_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant/crates/incant_shader_cook)
+    Checking wgpu-core-deps-apple v29.0.4
+    Checking wgpu-core v29.0.4
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant/crates/incant_render)
+    Checking wgpu v29.0.4
+    Finished `ci` profile [optimized] target(s) in 4.10s

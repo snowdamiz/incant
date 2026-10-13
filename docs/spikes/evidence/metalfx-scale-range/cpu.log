@@ -1,0 +1,188 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 9.91s
+     Running unittests src/lib.rs (/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-288759d68012f619)
+
+running 180 tests
+test diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats ... ignored, requires a native GPU; actual default/cooked comparison runs separately
+test graph::overlay_depth_is_counted_only_when_history_and_actual_overlays_exist ... ok
+test geometry_shader::cooked::tests::family_mismatch_is_refused_before_native_creation ... ok
+test graph::ownership_tests::desktop_graph_and_renderer_preserve_send_sync_contract ... ok
+test camera::tests::orthographic_size_rejects_unrepresentable_gpu_extents ... ok
+test camera::tests::camera_world_basis_uses_inherited_pose_but_not_scale_for_clip_units ... ok
+test camera::tests::unrepresentable_cameras_fail_before_encoding_gpu_work ... ok
+test graph::temporal_models_interval_counts_motion_and_each_real_resolve_overlay_pass ... ok
+test camera::tests::pixel_grid_preserves_logical_framing_and_snaps_only_rendered_camera_motion ... ok
+test graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation ... ignored, requires a native GPU; run by all desktop workflows
+test camera::tests::orthographic_extent_depth_and_view_direction_are_independent_of_distance ... ok
+test graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing ... ignored, requires a native GPU; run by all desktop workflows
+test hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once ... ignored, requires a native GPU; run by all desktop workflows
+test hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets ... ignored, requires a native GPU; run by all desktop workflows
+test lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data ... ignored, requires a native GPU; run by desktop workflows
+test lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership ... ignored, requires a native GPU; run by desktop workflows
+test lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion ... ignored, requires a native GPU; coordinated baseline/cooked run with --nocapture
+test lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes ... ignored, requires a native GPU; run by desktop workflows
+test lighting::material_lengths_use_allocation_bytes_and_refuse_truncation ... ok
+test lighting::gpu_tests::readback::readback_invariants_reject_bad_counts_tail_bits_and_lengths ... ok
+test lighting::gpu_tests::readback::readback_invariants_admit_full_last_word_and_directional_zero ... ok
+test geometry_shader::cooked::tests::embedded_geometry_families_match_sources_host_layouts_and_native_descriptors ... ok
+test lighting::cooked::tests::exact_compute_descriptors_match_the_fixed_host_and_workgroup ... ok
+test lighting::cooked::tests::guarded_temporal_variant_is_distinct_and_has_identical_native_compute_abi ... ok
+test metalfx::lifecycle::tests::abandoned_native_encode_and_backend_change_require_reset ... ok
+test metalfx::lifecycle::tests::dropped_pending_and_late_completion_cannot_reuse_busy_lease ... ok
+test metalfx::lifecycle::tests::actual_completion_closure_retains_resources_after_owner_drop_and_abandon ... ok
+test lighting::scene::tests::world_transform_affects_position_direction_but_not_light_range_or_intensity ... ok
+test metalfx::lifecycle::tests::in_flight_retired_allocations_remain_charged_until_actual_completion ... ok
+test lighting::scene::tests::enabled_shadow_slots_remain_aligned_and_capacity_fails_explicitly ... ok
+test lighting::scene::tests::unrepresentable_light_transforms_and_cones_fail_explicitly ... ok
+test metalfx::lifecycle::tests::preference_never_silently_accepts_a_required_native_path ... ok
+test metalfx::numerics::all_jitter_phases_and_content_extents_remove_raster_jitter_in_motion ... ok
+test metalfx::numerics::native_alpha_never_changes_current_coverage_or_contaminates_clear_edges ... ok
+test metalfx::numerics::offset_native_output_indices_and_source_packing_do_not_use_attachment_ratios ... ok
+test metalfx::plan::tests::allocation_accounts_old_and_candidate_before_allocating ... ok
+test metalfx::plan::tests::integral_offsets_and_fractional_drs_never_change_native_aspect ... ok
+test metalfx::plan::tests::native_device_upscale_factors_admit_reduced_content ... ok
+test material_pipeline::cooked::tests::complete_native_material_bundle_matches_host_and_rejects_tampering ... ok
+test graph::ownership_tests::non_send_passes_stay_on_owner_thread_and_release_each_frame ... ok
+test lighting::scene::tests::explicit_zero_lights_disable_preview_and_budgets_fail_without_dropping_lights ... ok
+test metalfx::system::tests::native_boundary_wgsl_validates_without_gpu ... ok
+test environment::tests::environment_sources_decode_linear_srgb_hdr_and_reject_invalid_radiance ... ok
+test models::animation::tests::aggregate_charge_refuses_before_pose_copy_or_geometry_expansion ... ok
+test models::animation::tests::crossfade::outgoing_only_sample_cannot_silently_bind_a_static_model ... ok
+test models::animation::tests::grouped::compound_consumer_preserves_inner_interpolation_endpoints_and_inactive_admission ... ok
+test models::animation::tests::crossfade::reflected_blend_keeps_orientation_policy_and_singular_deformation_refuses ... ok
+test models::animation::tests::retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame ... ignored, requires a native GPU; coordinate numerical GPU ownership
+test models::animation::tests::single_sided_reflected_skin_and_shadow_match_static_transform_oracle ... ignored, requires a native GPU; coordinate numerical GPU ownership
+test models::animation::tests::crossfade::both_samples_and_weight_are_checked_at_endpoints_before_pose_publication ... ok
+test models::animation::tests::crossfade::canonical_blend_matches_independent_trs_skin_oracle_without_source_or_allocations ... ok
+test models::motion::retained::tests::previous_rows_follow_placement_identity_across_mirrored_packing_without_allocations ... ok
+test models::motion::tests::aggregate_target_and_cpu_gpu_payload_admission_is_checked ... ok
+test models::motion::tests::camera_and_object_motion_use_previous_minus_current_top_left_uv ... ok
+test models::motion::tests::drs_and_offset_viewports_share_exact_internal_coordinates_and_reset_history ... ok
+test models::motion::tests::fresh_owner_resize_projection_viewport_and_pixel_fence_previous ... ok
+test models::motion::tests::history_advances_only_on_accept_and_cuts_survive_failed_preparation ... ok
+test models::motion::tests::invalid_or_offscreen_previous_projection_never_fabricates_zero_motion ... ok
+test models::motion::tests::native_cooked_features_do_not_silently_create_uncooked_motion ... ok
+test models::motion::tests::portable_motion_shader_validates_and_uses_canonical_mask_contract ... ok
+test models::animation::tests::ik::canonical_resolve_applies_ik_after_pose_and_deforms_both_source_deleted_meshes ... ok
+test models::motion::tests::repeated_simulation_state_still_has_distinct_submitted_sequence ... ok
+test models::motion::tests::temporal_phase_matrix_and_depth_epoch_commit_together_across_failure_cut_and_resize ... ok
+test models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion ... ignored, requires a native GPU; run by desktop workflows
+test models::motion::tests::upscaling_keeps_exact_prior_matrix_and_jitter_through_internal_only_scale_changes ... ok
+test models::retained::metalfx_tests::actual_native_batch_and_fallback_preserve_retained_submission_ownership ... ignored, requires delegated MetalFX GPU execution; at most six submitted frames
+test models::retained::motion_tests::accepted_pose_buffers_and_history_swap_only_after_submission ... ignored, requires native GPU; Claude owns bounded numerical execution
+test models::retained::motion_tests::skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_asset ... ignored, requires native GPU; Claude owns bounded numerical execution
+test models::retained::native_tests::binary_native_motion_and_structural_rebuilds_submit_without_source_or_document ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::temporal_tests::temporal_color_motion_and_geometry_publish_once_and_failures_consume_no_phase ... ignored, requires native GPU; Claude owns bounded numeric execution
+test models::retained::tests::motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::tests::rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::tests::retained_flipbook_selection_stages_without_allocation ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::tests::retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::text_native_tests::source_free_native_text_moves_rebuilds_and_changes_through_the_retained_consumer ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::text_tests::foreign_or_reset_handles_refuse_preparation_before_any_text_upload ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::text_tests::opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it ... ignored, requires a native GPU; run by desktop workflows
+test models::retained::text_tests::retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities ... ignored, requires a native GPU; run by desktop workflows
+test environment::tests::large_environment_uses_cooked_low_pass_mips_before_cube_resampling ... ok
+test models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection ... ignored, requires a native GPU; run by desktop workflows
+test models::animation::tests::ik::global_ik_budget_refuses_before_any_private_pose_allocation ... ok
+test models::retained::upscaling_tests::upscaling_color_motion_geometry_and_dynamic_source_extent_commit_together ... ignored, requires native GPU; Claude owns bounded numeric execution
+test output::cooked::tests::all_embedded_stages_select_the_native_descriptor_without_wgsl ... ok
+test output::cooked::tests::corrupted_and_unsupported_inputs_refuse_before_driver_calls ... ok
+test output::layout::tests::output_formats_remain_the_same_fixed_catalog ... ok
+test output::layout::tests::uniform_offsets_and_binding_size_match_the_cook_contract ... ok
+test pixel_grid::tests::logical_pixels_fit_wholly_inside_integer_and_fractional_viewports ... ok
+test resolution::tests::alternating_spikes_do_not_oscillate_and_slew_never_exceeds_policy ... ok
+test resolution::tests::authored_pixel_grid_is_fixed_and_never_drives_resolution_feedback ... ok
+test resolution::tests::layout_scales_scene_not_output_or_ui_and_preserves_camera_aspect ... ok
+test resolution::tests::malformed_policy_and_measurements_leave_previous_state_exact ... ok
+test resolution::tests::only_accepted_same_owner_current_extent_receipts_change_resolution ... ok
+test resolution::tests::sustained_load_cooldown_recovery_and_deadband_are_bounded ... ok
+test models::animation::tests::source_deleted_independent_instances_deform_full_checked_vertices ... ok
+test models::animation::tests::clip_only_model_retains_rigid_node_hierarchy_and_static_models_reject_samples ... ok
+test resolution::tests::unchanged_frame_planning_and_feedback_allocate_nothing_and_keep_cache_key ... ok
+test models::animation::tests::invalid_samples_refuse_before_publication ... ok
+test models::animation::tests::weighted_tree_consumer_uses_full_local_pose_and_refuses_inconsistent_bindings ... ok
+test scene::typed_tests::canonical_scene_resolution_accepts_text_input_without_nodes_as_nothing_to_draw ... ok
+test lighting::gpu_tests::extended::retained_cluster_fixture_resolves_real_model_geometry_without_source_files ... ok
+test environment::tests::cubemap_axes_edges_and_constant_radiance_are_preserved ... ok
+test scene::typed_tests::typed_input_checks_identity_projection_light_and_affine_transform_without_documents ... ok
+test shadows::cascade::temporal_receiver_guard_covers_all_subpixel_phases_for_both_projections ... ok
+test environment::tests::brdf_lookup_matches_independent_hemisphere_integrals ... ok
+test shadows::cascade::tests::receiver_frustum_and_offscreen_caster_depth_are_covered ... ok
+test shadows::cascade::tests::subtexel_camera_motion_keeps_xy_projection_and_invalid_precision_fails ... ok
+test sprites::shader::cooked::tests::embedded_sprite_stages_match_current_source_host_and_backends ... ok
+test sprites::texture::tests::invisible_rgb_is_removed_before_linear_filtering_and_alpha_remains_linear ... ok
+test sprites::geometry::tests::bounded_spans_preserve_full_geometry_and_source_mapping_for_flips_and_slices ... ok
+test temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion ... ignored, requires native GPU; Claude owns numerical execution
+test sprites::upload_span_tests::one_flipbook_preserves_coalesced_uploads_for_many_static_entities ... ok
+test temporal::tests::actual_resolve_copy_and_jitter_cluster_shaders_validate ... ok
+test temporal::tests::all_history_payloads_and_old_candidate_overlap_admit_before_allocation ... ok
+test temporal::tests::centered_internal_pixel_offsets_preserve_depth_and_projection_for_odd_offset_views ... ok
+test temporal::tests::disocclusion_uses_previous_projected_view_depth_not_current_surface_depth ... ok
+test temporal::tests::compatible_positive_history_support_renormalizes_phase_edges_without_aliasing_disocclusion ... ok
+test temporal::tests::excluded_camera_and_presented_grid_are_independent_of_all_jitter_phases ... ok
+test temporal::tests::expanded_cluster_bounds_contain_all_jittered_rays_including_outer_edges ... ok
+test temporal::tests::policy_rejects_nonfinite_unbounded_and_history_only_weights ... ok
+test temporal::tests::scene_linear_convex_history_clamps_reacts_and_preserves_constant_fields_and_coverage ... ok
+test temporal_shader::cooked::tests::every_fixed_temporal_program_has_exact_host_and_all_native_stages ... ok
+test test_support::required_backend_rejects_unknown_and_mismatched_adapters ... ok
+test text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs ... ignored, requires a native GPU; run by desktop workflows
+test models::animation::tests::uniform_skin_reflection_is_retained_and_mixed_vertex_orientation_refuses ... ok
+test text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference ... ignored, requires a native GPU; run by desktop workflows
+test models::animation::tests::ik::pose_dependent_reflection_or_degenerate_chain_refuses_canonical_candidate ... ok
+test scene::tests::camera_rig_frames_hide_diagnostic_cubes_but_preserve_explicit_meshes ... ok
+test timing::gpu_tests::bounded_timestamp_queries_follow_real_submission_and_abandonment ... ignored, requires native encoder timestamp support; run serially under GPU ownership
+test text::shader::cooked::tests::embedded_text_stages_match_current_source_host_and_backends ... ok
+test timing::tests::absent_capability_fails_explicitly_without_changing_defaults ... ok
+test environment::tests::prefilter_broadens_a_bright_direction_without_negative_radiance ... ok
+test timing::tests::decoded_pass_labels_follow_their_query_pairs_not_execution_order ... ok
+test scene::tests::model_nodes_use_default_scene_and_repeated_entities_share_one_draw ... ok
+test timing::tests::failed_mapping_is_delivered_once_and_its_buffer_slot_is_never_reserved_again ... ok
+test timing::tests::delayed_cross_thread_completion_does_not_change_new_owner_or_reuse_pending_slot ... ok
+test timing::tests::fixed_capacity_skips_and_reuses_only_completed_consumed_or_abandoned_slots ... ok
+test text::tests::layout_pixels_map_to_entity_local_units_baselines_and_transforms ... ok
+test timing::tests::grouped_pass_boundaries_never_emit_an_empty_timestamp_descriptor ... ok
+test timing::tests::integer_delta_preserves_small_intervals_and_rejects_reversed_clocks ... ok
+test text::tests::plan_keeps_shaped_order_bidi_spaces_bearings_and_missing_glyphs ... ok
+test ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui ... ignored, requires a native GPU; run by desktop workflows
+test timing::tests::pool_bookkeeping_and_timestamp_conversion_allocate_nothing_after_setup ... ok
+test ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales ... ignored, requires a native GPU; run by desktop workflows
+test timing::tests::zero_filled_queries_are_refused_without_rejecting_nonzero_quantized_intervals ... ok
+test ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow ... ignored, requires a native GPU; run by desktop workflows
+test ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages ... ignored, requires a native GPU; run by desktop workflows
+test ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels ... ignored, requires a native GPU; run by desktop workflows
+test ui::shader::cooked::tests::embedded_ui_stages_match_current_source_host_and_backends ... ok
+test models::retained::tilemap_tests::authoring_and_native_bind_the_same_cells_after_both_sources_are_gone ... ok
+test models::retained::tilemap_tests::source_free_v6_tile_bindings_share_atlas_and_retain_one_world_slot_per_map ... ok
+test ui::tests::glyph_quads_use_exact_shaped_positions_and_keep_overflowing_rtl_glyphs ... ok
+test ui::tests::caret_and_composition_follow_the_supplied_edit_ranges_only ... ok
+test upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay ... ignored, requires delegated GPU numerical execution; no appearance acceptance
+test scene::tests::shadow_caster_flags_split_instances_without_dropping_geometry ... ok
+test upscaling::tests::all_owned_old_and_candidate_resources_are_admitted_before_allocation ... ok
+test scene::typed_tests::retained_typed_model_input_outlives_authoring_and_source_files ... ok
+test upscaling::tests::current_overlay_is_premultiplied_over_only_and_disoccluded_or_nonfinite_depth_is_not_history ... ok
+test scene::tests::unloaded_or_stale_models_fail_instead_of_falling_back_to_cubes ... ok
+test upscaling::tests::footprint_tracks_exact_binary_scale_not_rounded_attachment_ratio ... ok
+test upscaling::tests::output_footprints_remove_each_actual_internal_jitter_instead_of_using_ceiled_extent_ratio ... ok
+test version_tests::live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry ... ignored, requires a native GPU; run by the desktop workflow
+test upscaling::tests::positive_normalized_reconstruction_rejects_outside_history_and_preserves_linear_constant_fields ... ok
+test web_error::tests::copied_error_preserves_category_display_and_source_chain_without_backend_owner ... ok
+test scene::typed_tests::typed_environment_rejects_normal_map_and_out_of_range_rotation_at_startup ... ok
+test web_error::tests::native_preparation_error_keeps_original_typed_source ... ok
+test upscaling::tests::actual_upscale_shaders_validate ... ok
+test ui::tests::caret_accessor_returns_the_drawn_caret_and_only_for_a_focused_enabled_field ... ok
+test ui::tests::plan_layers_each_widget_in_canonical_order_with_state_colours ... ok
+test text::tests::foreign_reset_mismatched_and_oversized_text_is_refused_before_expansion ... ok
+test ui::tests::selection_spans_merge_per_line_and_split_mixed_direction_runs ... ok
+test ui::tests::caret_follows_cluster_edges_bidi_levels_and_downstream_affinity ... ok
+test ui::tests::caret_on_empty_text_empty_paragraphs_and_every_line_ending ... ok
+test version_tests::same_recipe_different_payloads_never_alias_resolved_model_plans ... ok
+test environment::tests::shared_color_asset_preserves_sprite_coverage_and_alpha_independent_environment_radiance ... ok
+test ui::tests::plan_refuses_foreign_reset_and_inconsistent_input_before_building ... ok
+test models::retained::tilemap_tests::sprite_and_tile_counts_share_one_cap_before_expanded_vertex_allocation ... ok
+test ui::draw_tests::reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity ... ok
+
+test result: ok. 139 passed; 0 failed; 41 ignored; 0 measured; 0 filtered out; finished in 0.18s
+
