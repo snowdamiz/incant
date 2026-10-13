@@ -23,7 +23,7 @@
     },
     {
       "path": "src/pipeline/checked_restore/capture/owner.rs",
-      "sha256": "5bb08ec867661475ecc40f2d27905358b556a70020f6dcbbc917a56e71fc8879"
+      "sha256": "7a97897f84d691b3c6abdd6245b87e722ff2b0b6a180fc51e5f8fc61bd2e5bab"
     },
     {
       "path": "src/pipeline/checked_restore/capture/structure.rs",
@@ -31,7 +31,7 @@
     },
     {
       "path": "src/pipeline/checked_restore/capture/structure/tests.rs",
-      "sha256": "7f867360448b7d8f6b4dac21fab38344de127be55b4b43d6d808e7537ba7551b"
+      "sha256": "73e25d65a8792f48e213c487603f88edae27826d8675deead973ffdb13c58012"
     },
     {
       "path": "src/pipeline/checked_restore/mod.rs",

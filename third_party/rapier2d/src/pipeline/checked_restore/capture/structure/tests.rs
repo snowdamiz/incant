@@ -276,3 +276,36 @@ fn persisted_structure_sparse_island_capacity_is_precharged_before_iteration() {
     assert_eq!(exact.remaining(), 0);
     assert_eq!(serde_json::to_vec(&w.islands).unwrap(), before);
 }
+
+#[test]
+fn persisted_structure_revision_preflight_covers_structural_and_numeric_edits_together() {
+    let (mut o, a, _, _) = two();
+    o.mutation_revision = u64::MAX - 2;
+    let before = serde_json::to_vec(o.get().unwrap()).unwrap();
+    // One removal plus two numeric borrows cannot be admitted separately.
+    assert_eq!(
+        o.preflight_revision_edits(3),
+        Err(CaptureError::MutationExhausted)
+    );
+    assert_eq!(o.mutation_revision, u64::MAX - 2);
+    assert_eq!(serde_json::to_vec(o.get().unwrap()).unwrap(), before);
+    assert!(o.completed_step(&mut work()).is_ok());
+    o.preflight_revision_edits(2).unwrap();
+    let operations = [StructuralRemoval::Body(a)];
+    let plan = o
+        .preflight_structure(&operations, StructuralInsertions::default(), &mut work())
+        .unwrap();
+    let mut permit = o.structural_permit(plan).unwrap();
+    permit.remove_body(a).unwrap();
+    permit.finish().unwrap();
+    o.access_mut().unwrap().gravity *= 0.5;
+    assert_eq!(o.mutation_revision, u64::MAX);
+    assert_eq!(
+        o.preflight_revision_edits(1),
+        Err(CaptureError::MutationExhausted)
+    );
+    assert!(matches!(
+        o.access_mut(),
+        Err(CaptureError::MutationExhausted)
+    ));
+}
