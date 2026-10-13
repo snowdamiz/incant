@@ -1,5 +1,7 @@
 //! Explicit bounded world checkpoints, never the tick path. Hashes detect
 //! corruption, not origin or authorization. VM/host state is a separate boundary.
+#[cfg(feature = "native-checkpoints")]
+mod checkpoint;
 mod codec;
 mod graph_fade;
 mod ik;
@@ -7,6 +9,8 @@ mod root_motion;
 use crate::flipbook::Playback;
 use crate::world::{Local, Motion};
 use crate::{CookedEntity, CookedScene, CookedSpatial, NativeWorld, SceneError};
+#[cfg(feature = "native-checkpoints")]
+pub use checkpoint::{WorldCheckpoint, WorldCheckpointError};
 use sha2::{Digest, Sha256};
 use thiserror::Error;
 
@@ -59,6 +63,12 @@ impl NativeWorld {
     /// overlap this shared borrow. Saving never mutates the running world.
     pub fn save_bytes(&self) -> Result<Vec<u8>, SaveError> {
         self.check_save_capabilities()?;
+        self.encode_components()
+    }
+
+    // The opaque native checkpoint calls this only after checking its separate
+    // solver owners. Public byte saves retain the physics refusal above.
+    fn encode_components(&self) -> Result<Vec<u8>, SaveError> {
         self.ensure_navigation_current()
             .map_err(|_| SaveError::UncommittedNavigation)?;
         let entities = self
@@ -87,6 +97,18 @@ impl NativeWorld {
             })
             .collect();
         let scene = CookedScene::new(self.scene_id(), self.tick_rate, entities)?
+            .with_physics(
+                self.entities
+                    .keys()
+                    .filter_map(|&id| self.physics_configuration(id))
+                    .collect(),
+            )?
+            .with_physics_2d(
+                self.entities
+                    .keys()
+                    .filter_map(|&id| self.physics_2d_configuration(id))
+                    .collect(),
+            )?
             .with_audio(self.audio_nodes().map(|(node, _)| node.clone()).collect())?
             .with_localization(self.localization.clone())?
             .with_spatial(self.visual_assets.clone(), spatial)?
@@ -196,6 +218,16 @@ impl NativeWorld {
     pub fn from_save_bytes(bytes: &[u8]) -> Result<Self, SaveError> {
         let decoded = codec::decode(bytes)?;
         let scene = CookedScene::from_bytes(decoded.scene)?;
+        Self::from_decoded_components(decoded, scene, None)
+    }
+
+    // This is not a byte admission API. The other caller owns an authenticated
+    // in-memory checkpoint and supplies both complete native owners.
+    fn from_decoded_components(
+        decoded: codec::Decoded<'_>,
+        scene: CookedScene,
+        owners: Option<crate::world::NativePhysicsOwners>,
+    ) -> Result<Self, SaveError> {
         if decoded.version < 3 && !scene.localization().is_default() {
             return Err(SaveError::LocalizationUnsupported);
         }
@@ -210,7 +242,9 @@ impl NativeWorld {
                 return Err(SaveError::SpatialUnsupported);
             }
         }
-        check_scene_capabilities(&scene)?;
+        if owners.is_none() {
+            check_scene_capabilities(&scene)?;
+        }
         if decoded.version < 8 && !scene.audio().is_empty() {
             return Err(SaveError::AudioUnsupported);
         }
@@ -246,7 +280,7 @@ impl NativeWorld {
             return Err(SaveError::Invalid("animation graph membership"));
         }
         let ik_states = ik::decode(&scene, decoded.ik)?;
-        let mut world = Self::new(scene);
+        let mut world = Self::with_physics_owners(scene, owners);
         world.install_ik_states(ik_states);
         for row in decoded.states.as_chunks::<{ codec::STATE_BYTES }>().0 {
             let (id, checkpoint) = codec::state(row)?;
@@ -447,6 +481,11 @@ impl NativeWorld {
         // V1 never carried the origin fingerprint. A matching live destination
         // retains its own known origin; the restored data cannot replace it.
         candidate.source_scene_fingerprint = self.source_scene_fingerprint;
+        self.publish_restored_components(candidate)
+    }
+
+    // All compatibility and owner checks precede this final atomic publication.
+    fn publish_restored_components(&mut self, mut candidate: Self) -> Result<(), SaveError> {
         candidate.topology_generation = self
             .topology_generation
             .checked_add(1)
@@ -483,7 +522,11 @@ impl NativeWorld {
         self.audio_used
     }
     fn check_save_capabilities(&self) -> Result<(), SaveError> {
-        if self.physics_failed || self.physics_used || self.physics_2d_used {
+        if self.physics_failed
+            || self.physics_used
+            || self.physics_2d_used
+            || self.physics_save_required
+        {
             return Err(SaveError::PhysicsUnsupported);
         }
         Ok(())
