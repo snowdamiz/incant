@@ -32,6 +32,7 @@ mod studio;
 #[path = "../tests/support/mod.rs"]
 mod test_support;
 mod text;
+pub mod timing;
 mod ui;
 #[cfg(test)]
 mod version_tests;
@@ -98,6 +99,22 @@ impl Renderer {
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
     ) -> Result<Self> {
+        Self::new_configured(instance, surface, false).await
+    }
+    /// Explicit opt-in to bounded, asynchronous native GPU timestamp collection.
+    /// Unsupported adapters fail rather than silently substituting CPU timings.
+    /// Instrumentation can perturb performance and is off in `new`/`headless`.
+    pub async fn new_with_gpu_timing(
+        instance: &wgpu::Instance,
+        surface: Option<&wgpu::Surface<'_>>,
+    ) -> Result<Self> {
+        Self::new_configured(instance, surface, true).await
+    }
+    async fn new_configured(
+        instance: &wgpu::Instance,
+        surface: Option<&wgpu::Surface<'_>>,
+        gpu_timing: bool,
+    ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
                 power_preference: wgpu::PowerPreference::LowPower,
@@ -109,7 +126,8 @@ impl Renderer {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Incant renderer"),
-                required_features: output::required_features(&adapter)?,
+                required_features: output::required_features(&adapter)?
+                    | timing::required_features(gpu_timing, adapter.features())?,
                 ..Default::default()
             })
             .await?;
@@ -133,6 +151,11 @@ impl Renderer {
         let sprites = sprites::SpriteSystem::new(&device);
         let text = text::TextSystem::new(&device);
         let ui = ui::UiSystem::new(&device, &queue);
+        let graph = if gpu_timing {
+            graph::FrameGraph::with_timings(&device, &queue)?
+        } else {
+            Default::default()
+        };
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
@@ -156,12 +179,24 @@ impl Renderer {
             shadows,
             frames: Default::default(),
             output,
-            graph: Default::default(),
+            graph,
         })
     }
     pub fn headless() -> Result<Self> {
         let instance = wgpu::Instance::default();
         pollster::block_on(Self::new(&instance, None))
+    }
+    /// Poll callbacks without waiting, then consume at most one completed sample.
+    /// Covers the scene graph through display conversion, excluding later UI,
+    /// presentation, uploads, CPU work, and GPU readback/resolve overhead.
+    pub fn take_gpu_timing(&self) -> Result<Option<timing::GpuFrameTiming>> {
+        self.check_device()?;
+        Ok(self.graph.take_timing()?)
+    }
+    pub fn gpu_timing_stats(
+        &self,
+    ) -> std::result::Result<timing::GpuTimingStats, timing::GpuTimingError> {
+        self.graph.timing_stats()
     }
     /// Drive native callbacks without waiting for GPU completion and reject a
     /// reported device loss. Successfully queued work cannot be rolled back.

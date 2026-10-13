@@ -1,0 +1,146 @@
+{
+  "base": "1c5658cf5d7eee8390b272394f38b8d9b49e1628",
+  "source_freeze": {
+    "path": "docs/spikes/evidence/gpu-timestamps/freeze.json",
+    "sha256": "d41ba28b5cd1bf3007706d844904c4f846e0cdcc69134522c0c7061fc05a8f25",
+    "count": 10
+  },
+  "checks": [
+    {
+      "name": "cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "seconds": 7.960575500001141,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/cpu.log",
+      "sha256": "1c76dc8f402a87e7f3e6ef2dd5a9736dab140d35aa62f2c0a3c50cc573a67ac8"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 1.5855693749981583,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/clippy.log",
+      "sha256": "46dbcf080ab1b3786f69b09f30f1926b2acb49f466cc8e8f5ea5bdd4d2133ec4"
+    },
+    {
+      "name": "web",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 0.7016181250000955,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/web.log",
+      "sha256": "fbc3a7cccb4c45678dd5aca93b7cca3cb65a71ac82851794755b519f086086f3"
+    },
+    {
+      "name": "graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "seconds": 0.4643532500049332,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/graph.log",
+      "sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.2715542919977452,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0329408749967115,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.01986933299485827,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-timestamps-003/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "summary": {
+    "passed": 70,
+    "failed": 0,
+    "ignored_gpu": 90,
+    "focused_cpu": 7,
+    "gpu_executed": false
+  },
+  "review": {
+    "path": "docs/spikes/evidence/gpu-timestamps/gpu-timestamps-source-20261013.json",
+    "sha256": "2c0090c0e80723391a257dc76dcd5dd3e65b8c550ef994d95896f1ab266f30a2"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/gpu-timestamps/artifacts.json.gz",
+    "sha256": "ba0f549132e74674bc3661fd601b9ece2e9146dc2c81003e806706adb056229e",
+    "bytes": 157926,
+    "records": 52,
+    "payloads": 31
+  },
+  "retained_attempts": [
+    "source001 CPU pass and Clippy failure on intentional inline large enum and byte chunk spelling; corrected in source002",
+    "source002 all seven checks pass; peer review then identified failed-map buffer reuse defect corrected in source003",
+    "Initial pre-freeze allocation assertion encountered lazy mutex thread parking; warmed control passes. No retained pre-freeze log is claimed by this archive."
+  ],
+  "limits": [
+    "Default rendering unchanged; explicitly enabled native encoder timestamp groups only.",
+    "Numeric ignored GPU test compiled but not executed; no GPU/backend/visual/phone performance acceptance.",
+    "Three bounded slots; a failed map retires its slot, all retired skips measurement while rendering continues.",
+    "Measured intervals exclude later UI/presentation/uploads and cannot be summed or treated as CPU/GPU clock alignment."
+  ]
+}

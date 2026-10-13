@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## GPU timestamp profiling — CPU and source review accepted
+
+The renderer has an explicit native profiling constructor and a bounded
+three-slot asynchronous timestamp path for scene-graph groups. Ordinary rendering
+stays uninstrumented. Seven focused cases and 70 affected CPU cases pass, with
+90 GPU cases ignored; all-target Clippy, browser and runtime dependency checks
+pass. Independent review accepts the corrected failed-map retirement behavior.
+Actual GPU execution and appearance parity remain queued. This is not a measured
+performance gain or a complete Tracy/device profiler.
+[Contract and limits](docs/spikes/gpu-timestamps.md).
+
 ## Authored Core runtime bindings — CPU proof accepted
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the
