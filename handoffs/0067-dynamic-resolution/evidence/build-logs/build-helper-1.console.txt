@@ -1,0 +1,10 @@
+{
+ "frozen": {
+  "drs_gpu": "ed2a858b695cd9e4f3db259fe361269fe03d62fb246db3e356754fcb3161b82c",
+  "drs_appearance": "bef3671a5474a3f89f8100679f701fec751c844d038ab88f419c88acc16ddf7e"
+ },
+ "helper_digest": "1f97b6b1923639a1c73baee6a267adf5427d8d0803c92c2bd335455caaf50b23",
+ "renderer_and_host_identical": true,
+ "differing": {}
+}
+exit 0
