@@ -1,0 +1,385 @@
+{
+  "at": "2026-10-13T05:17:23.048151+00:00",
+  "tested_head": "1c1183847f9108011449c3f19c59cfa08bf2fabb",
+  "review_head": "1c1183847f9108011449c3f19c59cfa08bf2fabb",
+  "main_ancestor": "d4830ddf125c00b07c82cf828777cc71dfdd72c8",
+  "producer": "d369a7d40651ecdc042396074e8c59e5d5b2895e",
+  "summary": {
+    "passed": true,
+    "checks": 8,
+    "counts": {
+      "passed": 65,
+      "failed": 0,
+      "ignored": 0,
+      "nonempty_groups": 11
+    },
+    "frozen_inputs": 2873,
+    "producer_inputs": 29,
+    "exact_crate_inputs": 28,
+    "producer_records_rehashed": 105,
+    "pinned_sources": 15,
+    "changed_source_paths": [
+      "crates/incant_physics_snapshot/src/contact_points.rs",
+      "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "crates/incant_physics_snapshot/src/lib.rs",
+      "crates/incant_physics_snapshot/tests/contact_points.rs",
+      "crates/incant_physics_snapshot/tests/trusted_contact_points.rs"
+    ],
+    "lock_unchanged": true,
+    "main_ancestor": "d4830ddf125c00b07c82cf828777cc71dfdd72c8",
+    "live_restore_or_save_admission": false
+  },
+  "checks": [
+    {
+      "name": "tests-003.json",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "exit": 0,
+      "seconds": 4.262871082995844,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/tests-003.json.stdout",
+        "sha256": "21e7fb95b145cacabf12d893d31d3fb8d5a77a969aa686a7976bcd7ddc2ef67b"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/tests-003.json.stderr",
+        "sha256": "c7fe979086324153b617c5668cf3c93c93e7c15423e3ff51857a7268a8f403f2"
+      }
+    },
+    {
+      "name": "clippy-003.json",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 0.691690750005364,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/clippy-003.json.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/clippy-003.json.stderr",
+        "sha256": "604ca3bc1557026f03d0c62c2c52e8be3fbec3c9dedd4607691fe3d216c47230"
+      }
+    },
+    {
+      "name": "wasm32-003.json",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 0.2908175000047777,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/wasm32-003.json.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/wasm32-003.json.stderr",
+        "sha256": "0ed269e8d7b6bcd9faf42985b210d4003716e91e957ec4e539a240ec6cf86833"
+      }
+    },
+    {
+      "name": "normal-graph-003.json",
+      "command": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "exit": 0,
+      "seconds": 0.10527691699826391,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/normal-graph-003.json.stdout",
+        "sha256": "4a393fa5ace88511dd8ae2bf90d087c3584026f17bcc4075db5b8d1f03a69044"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/normal-graph-003.json.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "runtime-graph-003.json",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "exit": 0,
+      "seconds": 0.2937775419995887,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/runtime-graph-003.json.stdout",
+        "sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/runtime-graph-003.json.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt-003.json",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.08229250000294996,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/fmt-003.json.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/fmt-003.json.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions-003.json",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.027225083998928312,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/conventions-003.json.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/conventions-003.json.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff-003.json",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.02670116599620087,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/diff-003.json.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/inert-contact-main199-001/diff-003.json.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "producer_sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "current_sha256": "176512af279587109f7ae30b51433a79cec6c771bb5adb8c226af1717c02dedf"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "producer_sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "current_sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena.rs",
+      "producer_sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "current_sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "producer_sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "current_sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "producer_sha256": "f488ca1ce32586d3ae8970c646a37281642eb1bf80932e1c80ed6bb57d2b0977",
+      "current_sha256": "f488ca1ce32586d3ae8970c646a37281642eb1bf80932e1c80ed6bb57d2b0977"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "producer_sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "current_sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "producer_sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "current_sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "producer_sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "current_sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "producer_sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "current_sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+      "producer_sha256": "3133ec696750a65feae7fbd42600d6f6732c016e851e321888fa43fdcdfe6a36",
+      "current_sha256": "3133ec696750a65feae7fbd42600d6f6732c016e851e321888fa43fdcdfe6a36"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "producer_sha256": "8baab422faf018f945e057befd088a680491206888071cf07e5b60b9645136d2",
+      "current_sha256": "8baab422faf018f945e057befd088a680491206888071cf07e5b60b9645136d2"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry.rs",
+      "producer_sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "current_sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "producer_sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "current_sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "producer_sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "current_sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "producer_sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "current_sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "producer_sha256": "dcfd826ea48d9e61bc41c06ea92d1407b527fe3b8b3360bc98c8b580cb8d1b36",
+      "current_sha256": "dcfd826ea48d9e61bc41c06ea92d1407b527fe3b8b3360bc98c8b580cb8d1b36"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "producer_sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "current_sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "producer_sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "current_sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "producer_sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "current_sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+      "producer_sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "current_sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+      "producer_sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "current_sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+      "producer_sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "current_sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+      "producer_sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "current_sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+      "producer_sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "current_sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "producer_sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "current_sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "producer_sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "current_sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "producer_sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "current_sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "producer_sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "current_sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "producer_sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "current_sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89"
+    }
+  ],
+  "source_freeze": {
+    "path": "docs/spikes/evidence/physics-contact-main199/freeze.json",
+    "sha256": "05c39725f85fc3e676cf66947211b6a82faafb263378fdd8cabc67c99fce4a4b"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/physics-contact-main199/artifacts.json.gz",
+    "sha256": "089932cac6e60a50dc3f150164dfdd908eaa26b098b61ce483c6215b387a04a0",
+    "bytes": 182180,
+    "records": 19,
+    "payloads": 10
+  },
+  "independent_source_review": {
+    "path": "docs/spikes/evidence/physics-contact-main199/independent-source-review.json",
+    "sha256": "c1519ea92b057764bcb542ef8cfab32e816d7487e60a8906efb01c0e13ff2b34"
+  },
+  "limits": [
+    "65 cases include prior52 inert cases plus13 contact cases; counts are not additive.",
+    "All28 crate source/test/manifest files equal the reviewed producer; older producer lock differs by already-merged profiling packages/edges; lock is unchanged from currentmain199.",
+    "No live constructor, contact/solver ownership composition, physics-save admission, GPU, shipping, device or performance claim."
+  ],
+  "review_state": "Final contact integration acceptance pending"
+}

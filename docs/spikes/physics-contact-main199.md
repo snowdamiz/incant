@@ -1,0 +1,7 @@
+# Inert contact points on main199
+
+The reviewed contact leaf component composes on actual main199 without Rust or dependency changes. Only STATUS required reconciliation. All 28 crate source/test/manifest files exactly match producer d369a7d4. The current Cargo.lock remains identical to main199; the older producer lock lacks the profiling packages and edges already merged in PR195.
+
+All eight current scoped checks pass on frozen 1c118384: 65 CPU cases in 11 nonempty groups, with zero failures or ignored cases, all-target Clippy, wasm32 library compilation, the std-only normal graph, runtime dependency guard, formatting, conventions and full-base diff. Counts include the prior 52 inert cases and 13 contact cases. Actual 2D/3D observations retain nonzero warm starts and friction, native contact ordering, stable sleeping rows and changed wake state. This is validation of inert contact fields, without a live constructor or physics-save admission.
+
+The [manifest](evidence/physics-contact-main199.json) binds 2,873 frozen inputs, 105 producer artifact records, 15 pinned source files and current logs. The [collector](evidence/physics-contact-main199/collect.py) supports read-only verification. Independent source review has no findings; final producer execution and integrated packet acceptance are pending. No GPU, shipping, device, performance or phase gate claim follows from these checks.
