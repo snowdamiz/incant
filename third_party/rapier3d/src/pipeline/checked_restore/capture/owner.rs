@@ -107,6 +107,18 @@ impl CheckpointOwner {
         self.healthy()?;
         Ok(&self.world)
     }
+    /// Check one cumulative allowance for every forthcoming mutable borrow or
+    /// step in an outer transaction, including structural permit operations.
+    /// This does not reserve or advance the private revision. Call before any
+    /// mutation; the caller must not spend separately checked overlapping
+    /// allowances. Imported bytes never supply the revision.
+    pub fn preflight_revision_edits(&self, count: u64) -> Result<(), CaptureError> {
+        self.healthy()?;
+        self.mutation_revision
+            .checked_add(count)
+            .ok_or(CaptureError::MutationExhausted)?;
+        Ok(())
+    }
     /// Invalidate before exposing any mutation, including a native owner swap.
     /// The original dispatcher Arc is retained so pointer reuse cannot forge it.
     pub fn access_mut(&mut self) -> Result<&mut PhysicsWorld, CaptureError> {
