@@ -13,6 +13,13 @@ pub(crate) struct Light {
     pub radiance_inner: [f32; 4],
     pub kind: [u32; 4],
 }
+const _: () = {
+    assert!(size_of::<Light>() == 64);
+    assert!(std::mem::offset_of!(Light, position_range) == 0);
+    assert!(std::mem::offset_of!(Light, direction_outer) == 16);
+    assert!(std::mem::offset_of!(Light, radiance_inner) == 32);
+    assert!(std::mem::offset_of!(Light, kind) == 48);
+};
 #[derive(Default)]
 pub(crate) struct LightPlan {
     directional: Vec<Light>,

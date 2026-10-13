@@ -16,6 +16,7 @@ cooked-geometry = ["cooked-output"]
 cooked-sprites = ["cooked-output"]
 cooked-ui = ["cooked-output"]
 cooked-text = ["cooked-output"]
+cooked-materials = ["cooked-geometry"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [

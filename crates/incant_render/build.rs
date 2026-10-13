@@ -1,4 +1,26 @@
 fn main() {
+    #[cfg(feature = "cooked-materials")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::geometry::{self, Kind};
+        let paths = [
+            "src/shadows/shade.wgsl",
+            "src/lighting/shade.wgsl",
+            "src/model_material.wgsl",
+        ];
+        for path in paths {
+            println!("cargo:rerun-if-changed={path}");
+        }
+        let source = paths
+            .map(|path| std::fs::read_to_string(path).expect("engine-owned material source"))
+            .join("\n");
+        let bundle =
+            geometry::cook(Kind::Material, &source).expect("fixed material shader contract");
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"))
+                .join("material-shaders");
+        geometry::write_bundle(Kind::Material, &bundle, &output)
+            .expect("write cooked material shaders");
+    }
     println!("cargo:rerun-if-changed=src/fixture.wgsl");
     println!("cargo:rerun-if-changed=src/ui/ui.wgsl");
     println!("cargo:rerun-if-changed=src/text/text.wgsl");

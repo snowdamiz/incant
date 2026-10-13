@@ -3,7 +3,7 @@ use incant_assets_runtime::AlphaMode;
 
 pub(crate) fn build(
     device: &wgpu::Device,
-    shader: &wgpu::ShaderModule,
+    shader: &crate::shader::Stages,
     key: PipelineKey,
     globals: &wgpu::BindGroupLayout,
     materials: &wgpu::BindGroupLayout,
@@ -24,25 +24,22 @@ pub(crate) fn build(
         label: Some("Imported metallic roughness"),
         layout: Some(&layout),
         vertex: wgpu::VertexState {
-            module: shader,
-            entry_point: Some("vertex"),
+            module: &shader.vertex,
+            entry_point: Some(shader.vertex_entry),
             compilation_options: Default::default(),
-            buffers: &[
-                wgpu::VertexBufferLayout {
-                    array_stride: size_of::<incant_assets_runtime::Vertex>() as u64,
-                    step_mode: wgpu::VertexStepMode::Vertex,
-                    attributes: &wgpu::vertex_attr_array![0=>Float32x3,1=>Float32x3,9=>Float32x2,10=>Float32x4],
-                },
-                wgpu::VertexBufferLayout {
-                    array_stride: size_of::<crate::scene::Instance>() as u64,
-                    step_mode: wgpu::VertexStepMode::Instance,
-                    attributes: &wgpu::vertex_attr_array![2=>Float32x4,3=>Float32x4,4=>Float32x4,5=>Float32x4,6=>Float32x4,7=>Float32x4,8=>Float32x4],
-                },
-            ],
+            buffers: &crate::geometry_shader::shadow_buffers(),
         },
         primitive: wgpu::PrimitiveState {
-            front_face: if key.mirrored { wgpu::FrontFace::Cw } else { wgpu::FrontFace::Ccw },
-            cull_mode: if key.double_sided { None } else { Some(wgpu::Face::Back) },
+            front_face: if key.mirrored {
+                wgpu::FrontFace::Cw
+            } else {
+                wgpu::FrontFace::Ccw
+            },
+            cull_mode: if key.double_sided {
+                None
+            } else {
+                Some(wgpu::Face::Back)
+            },
             ..Default::default()
         },
         depth_stencil: Some(wgpu::DepthStencilState {
@@ -54,12 +51,16 @@ pub(crate) fn build(
         }),
         multisample: Default::default(),
         fragment: Some(wgpu::FragmentState {
-            module: shader,
-            entry_point: Some("fragment"),
+            module: &shader.fragment,
+            entry_point: Some(shader.fragment_entry),
             compilation_options: Default::default(),
             targets: &[Some(wgpu::ColorTargetState {
                 format: key.format,
-                blend: if key.alpha == AlphaMode::Blend { Some(wgpu::BlendState::ALPHA_BLENDING) } else { None },
+                blend: if key.alpha == AlphaMode::Blend {
+                    Some(wgpu::BlendState::ALPHA_BLENDING)
+                } else {
+                    None
+                },
                 write_mask: wgpu::ColorWrites::ALL,
             })],
         }),
@@ -68,17 +69,35 @@ pub(crate) fn build(
     })
 }
 
-pub(crate) fn shader(device: &wgpu::Device) -> wgpu::ShaderModule {
-    device.create_shader_module(wgpu::ShaderModuleDescriptor {
-        label: Some("glTF metallic roughness"),
-        source: wgpu::ShaderSource::Wgsl(
-            format!(
-                "{}\n{}\n{}",
-                include_str!("shadows/shade.wgsl"),
-                include_str!("lighting/shade.wgsl"),
-                include_str!("model_material.wgsl")
-            )
-            .into(),
-        ),
-    })
+#[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+#[path = "material_shader.rs"]
+mod cooked;
+
+pub(crate) fn shader(
+    device: &wgpu::Device,
+    _backend: wgpu::Backend,
+) -> crate::Result<crate::shader::Stages> {
+    #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+    return cooked::stages(device, _backend);
+    #[cfg(not(all(feature = "cooked-materials", not(target_arch = "wasm32"))))]
+    {
+        let module = device.create_shader_module(wgpu::ShaderModuleDescriptor {
+            label: Some("glTF metallic roughness"),
+            source: wgpu::ShaderSource::Wgsl(
+                format!(
+                    "{}\n{}\n{}",
+                    include_str!("shadows/shade.wgsl"),
+                    include_str!("lighting/shade.wgsl"),
+                    include_str!("model_material.wgsl")
+                )
+                .into(),
+            ),
+        });
+        Ok(crate::shader::Stages {
+            vertex: module.clone(),
+            fragment: module,
+            vertex_entry: "vertex",
+            fragment_entry: "fragment",
+        })
+    }
 }

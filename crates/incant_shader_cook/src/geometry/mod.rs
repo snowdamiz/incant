@@ -1,6 +1,8 @@
 //! Fixed engine programs; never a project shader passthrough.
 mod contract;
 mod emit;
+mod material;
+mod material_emit;
 mod sprite;
 mod text;
 mod ui;
@@ -17,10 +19,14 @@ pub enum Kind {
     Sprite,
     Ui,
     Text,
+    Material,
 }
 impl Kind {
     pub fn contract(self) -> &'static str {
         match self {
+            Self::Material => {
+                "incant-material-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,vertex-sizes1,fragment-sizes7;spv=1.0,no-y-flip;hlsl=6.0,special-b5;bounds=restrict;loops=bounded"
+            }
             Self::Diagnostic => {
                 "incant-diagnostic-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15,stride28,sizes0;spv=1.0,no-y-flip;hlsl=6.0,special-b0;bounds=restrict;loops=bounded"
             }
@@ -79,6 +85,8 @@ pub fn cook(kind: Kind, source: &str) -> Result<Bundle> {
         include_str!("sprite.rs"),
         include_str!("ui.rs"),
         include_str!("text.rs"),
+        include_str!("material.rs"),
+        include_str!("material_emit.rs"),
         include_str!("../../Cargo.toml"),
     ]
     .join("\n");

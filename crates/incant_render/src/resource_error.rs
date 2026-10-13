@@ -15,6 +15,8 @@ pub enum ResourceError {
     CookedUi(&'static str),
     #[error("cooked world text shader rejected: {0}")]
     CookedText(&'static str),
+    #[error("cooked material shader rejected: {0}")]
+    CookedMaterial(&'static str),
     #[error("renderer initialization failed: {0}")]
     Preparation(#[source] PreparationError),
     #[error("{0} pipeline variant was not prepared during renderer initialization")]
