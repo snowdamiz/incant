@@ -1,0 +1,136 @@
+{
+ "packet": "0074-metalfx-review",
+ "stage": "metalfx-late",
+ "status": "prepared only; frozen by the commit whose visual tree root pins in review-ready.json; nothing builds or runs until root grants the metalfx-late stage",
+ "authorization": "brief.md root priority (2026-10-13), late-frame native quality preparation: at most 160 world submissions, at most 16 PNGs at 960x540, one foreground child per case, 120 s each, failed attempts charged the same, no retry loop or broad suite; root supervises compilation",
+ "prior_stage": {
+  "plan": "plan.json",
+  "plan_blob": "1f5f8ec23a117b6cb552e4f574702215eff3db8e",
+  "visual_tree": "0bb15f5cef0aa1fa03e380d2b2eec9fa73409d78",
+  "fixture_blob": "31257a55e75ddc2ce02318984fcc5de202e48350",
+  "fixture_sha256": "c8b1219ac60a46c15c838cbd12ea35c5f50f7f3573c92db8482a6b02222bf507",
+  "fixture_bytes": 83695,
+  "cases": ["stationary", "motion", "excluded", "transitions", "viewport"],
+  "binary_sha256": "059d28ac7dbefd8d1b761da2a03b607957b767e7545e8ed1cfdee5e659085376",
+  "evidence": "0074-metalfx-visual-002: visual-evidence-002/manifest.json d693bd6c, root acceptance 0074-corrected-scale-execution-root-20261013.json 80bde0f1",
+  "reuse": "not rerun: the late fixture keeps the frozen fixture as an exact byte prefix, so the five cases are source-identical in the late binary, and their 002 evidence stays bound to source 077f7c39 and binary 059d28ac; the late listing filter never lists them"
+ },
+ "source_policy": {
+  "required_grant_fields": ["packet", "stage", "source_commit", "source_tree", "source_freeze", "features", "visual_tree", "target", "holder", "prior_<name>_path", "prior_<name>_sha256"],
+  "source_freeze_shape": "absolute path and SHA-256 of root's committed build freeze {commit: <source_commit>, files: [{path, sha256, bytes}]}; its rows must cover the build_inputs of the exported commit exactly, and every row (a probe outside the roots included) must exist in the commit and match its file; no other freeze shape is accepted",
+  "holder": "lease.py records the grant's root-assigned holder field and refuses a grant without one",
+  "allowed_feature_sets": [["native-metalfx"], ["cooked-temporal", "native-metalfx"]],
+  "denied_source_commits": ["4bc810fe0daf238f219801de76b06f19e4daf826", "a337c86d8d74e819b3e879d4a7db830b74de8862", "535003d766bcc1386fd2d2f454c83808a0fcc4c8"],
+  "denied_freezes": ["b68c62d5e58b89a07aebfd17f144902917cee5890c4d09fbf06f51a64146a77b", "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"],
+  "expected_source": "the same scale-corrected source as the 002 run: commit 077f7c39 (tree 408c4bb2) with root's freeze metalfx-scale-correction-001/committed-build-source.json 62db43cb (2448 build inputs plus probe) and features cooked-temporal + native-metalfx; only the copied fixture differs, by its appended late cases. Evidence namespace 0074-metalfx-late-001; publication visual-screenshots-late-001",
+  "jitter_table_check": "build.py checkout refuses unless the fixture's SAMPLES equal crates/incant_render/src/temporal/jitter.rs at the granted commit"
+ },
+ "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
+ "expected_backend": "Metal",
+ "review_config": {
+  "history_weight": 0.9,
+  "relative_depth": 0.05,
+  "absolute_depth": 0.02,
+  "reactive_threshold": 4.0,
+  "reactive_strength": 0.5
+ },
+ "current_only_config": {
+  "history_weight": 0.0,
+  "relative_depth": 0.05,
+  "absolute_depth": 0.02,
+  "reactive_threshold": 4.0,
+  "reactive_strength": 0.5
+ },
+ "arms": {
+  "off": "RetainedScene without temporal state",
+  "current_only": "RetainedScene::enable_temporal_upscaling(current_only_config): jittered current frame resampled, no history",
+  "portable": "RetainedScene::enable_temporal_upscaling(review_config)",
+  "native": "RetainedScene::enable_metalfx(PreferMetalFx, review_config); every native step must select MetalFx (Expect::Native), so a portable fallback fails selections_as_planned"
+ },
+ "viewports": {
+  "integral": [96.0, 54.0, 768.0, 432.0],
+  "fractional": [96.5, 54.5, 767.0, 431.0],
+  "canvas_srgb": [20, 21, 25]
+ },
+ "budgets": {
+  "new_submissions_max": 160,
+  "pngs_max": 16,
+  "frame_max_width": 960,
+  "frame_max_height": 540,
+  "compile_jobs": 2,
+  "build_timeout_s": 2700,
+  "listing_timeout_s": 60,
+  "review_case_timeout_s": 120,
+  "counting": "Every world-frame submission (off references and frames whose PNG is not kept included) is one actual submission; the late cases submit no UI. Readback copies are part of their frame's observation. Each case's planned submissions and PNGs are debited, fsynced, under the global GPU lock before launch and never refunded, so failed or interrupted cases stay charged. A failed case latches stop.json; nothing is retried."
+ },
+ "builds": {
+  "review": ["test", "-p", "incant_render", "--test", "metalfx_visual_review", "--no-run"],
+  "lint": ["clippy", "-p", "incant_render", "--test", "metalfx_visual_review"],
+  "common_flags": ["--locked", "--offline", "--profile", "ci", "-j2", "--message-format=json-render-diagnostics"],
+  "features": "appended from the grant: --features <one allowlisted set>"
+ },
+ "review": {
+  "binary": "metalfx_visual_review",
+  "cwd": "crates/incant_render",
+  "output_env": "INCANT_0074_REVIEW_OUT",
+  "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
+  "list_args": ["--list", "--ignored", "late_"],
+  "size": [960, 540],
+  "max_runs_per_case": 1,
+  "cases": {
+   "late_stationary": {"frames": 75, "ui_submissions": 0,
+    "pngs": ["late-stationary-native16-f16.png", "late-stationary-native12-f01.png", "late-stationary-native12-f08.png", "late-stationary-native12-f16.png", "late-stationary-native8-f01.png", "late-stationary-native8-f08.png", "late-stationary-native8-f16.png", "late-stationary-portable8-f16.png"],
+    "checks": ["selections_as_planned", "controls_have_no_metalfx_owner", "one_native_owner_advances_through_scales", "internal_sizes_as_planned", "portable_run_uninterrupted", "current_only_run_uninterrupted", "references_have_no_upscale_state", "frames_match_plan"],
+    "steps": [
+     {"arm": "off", "frames": 1, "sixteenths": 16, "viewport": null},
+     {"arm": "off", "frames": 1, "sixteenths": 12, "viewport": null},
+     {"arm": "off", "frames": 1, "sixteenths": 8, "viewport": null},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 16, "sixteenths": 16, "viewport": null, "expect": "native", "retained_frames": [16]},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 16, "sixteenths": 12, "viewport": null, "expect": "native", "retained_frames": [1, 8, 16]},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 16, "sixteenths": 8, "viewport": null, "expect": "native", "retained_frames": [1, 8, 16]},
+     {"arm": "portable", "frames": 16, "sixteenths": 8, "viewport": null, "retained_frames": [16]},
+     {"arm": "current_only", "frames": 8, "sixteenths": 8, "viewport": null}
+    ],
+    "expected_reference_rgba_sha256": {
+     "off": "4f3f379e6786934d4cb2c2afcd723273c1f780406b62c0055ac4ffba53a73f55",
+     "off-d8": "ea8f6b949cb61ce32d7ecf1bc76aeeb3bb3e50abaad7ad95b9f49f93521a2cdf",
+     "source": "transitions off-b and off-b-d8 in visual-evidence-002/reports/transitions.json (150e76cb); an observation for the reviewer, not a contract"
+    },
+    "purpose": "Static view B (transitions' second viewpoint, no cut). One preferring native owner for 16 frames each at 16/16, 12/16 and 8/16; each scale change resets native history exactly as transitions d12-7 and d8-10 did, so frame 1 of each reduced segment is the reset frame and frames 8 and 16 show one and two jitter cycles of accumulation. Same-source 8/16 controls: portable (16 frames) and current-only (8 frames, for the current-coverage boundary band), plus unjittered references at 16/16, 12/16 and 8/16. The 002 striation is measured on the same flat face (STRIATION_RECT) for every milestone frame and control."},
+   "late_motion": {"frames": 51, "ui_submissions": 0,
+    "pngs": ["late-motion-native12-f01.png", "late-motion-native12-f08.png", "late-motion-native12-f16.png", "late-motion-native8-f01.png", "late-motion-native8-f08.png", "late-motion-native8-f16.png", "late-motion-off-f16.png"],
+    "checks": ["selections_as_planned", "controls_have_no_metalfx_owner", "native_runs_uninterrupted", "portable_run_uninterrupted", "references_have_no_upscale_state", "frames_match_plan"],
+    "steps": [
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 16, "sixteenths": 12, "viewport": null, "expect": "native", "motion": "late", "retained_frames": [1, 8, 16]},
+     {"arm": "native", "preference": "PreferMetalFx", "frames": 16, "sixteenths": 8, "viewport": null, "expect": "native", "motion": "late", "retained_frames": [1, 8, 16]},
+     {"arm": "portable", "frames": 16, "sixteenths": 8, "viewport": null, "motion": "late"},
+     {"arm": "off", "frames": 3, "sixteenths": 16, "viewport": null, "motion": "late", "path_steps": [1, 8, 16], "retained_frames": [3]}
+    ],
+    "purpose": "View A with modest combined motion: the mover advances a quarter of the motion case's step per frame (0.0875 world units, about 5 px) toward the thin wall while the camera pans at a quarter of camera_world's speed. Fresh native owners at 12/16 and 8/16 and a portable 8/16 control each run the same 16 path steps, so frame 1 is each owner's reset frame; unjittered references at path steps 1, 8 and 16 serve every arm."}
+  }
+ },
+ "totals": {
+  "frames": 126,
+  "ui_submissions": 0,
+  "new_submissions": 126,
+  "pngs": 15,
+  "reserve_submissions": 34,
+  "reserve_pngs": 1
+ },
+ "amendments": [],
+ "order": [
+  "root grants review-ready.json for stage metalfx-late in 0074-metalfx-late-001 (source 077f7c39, freeze 62db43cb, features, this visual tree, target, holder, prior pins)",
+  "lease.py acquire",
+  "build.py checkout",
+  "build.py toolchain",
+  "build.py review (root supervises compilation of the extended fixture)",
+  "build.py lint (strict Clippy, CPU only; a failure exits nonzero and latches stop)",
+  "gpu.py list review (list_args lists only the late_ cases)",
+  "gpu.py review late_stationary|late_motion (this order, one foreground child each)",
+  "gpu.py release",
+  "lease.py release",
+  "analyze.py check (requires complete passing evidence and both clean releases; always retains a summary)",
+  "personal inspection of every retained PNG",
+  "analyze.py publish (re-validates; requires the latest summary to be a pass bound to the current evidence)"
+ ]
+}

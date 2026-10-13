@@ -14,7 +14,7 @@ and reaped after exit, timeout, Ctrl-C, SIGTERM or SIGHUP. Every child goes to
 the ledger (rows always carry "pid"); any failure latches stop.json.
 
   gpu.py list review  list the frozen binary's ignored cases (no GPU work)
-  gpu.py review <stationary|motion|excluded|transitions|viewport>
+  gpu.py review <case>  the plan's cases, in plan order (late_stationary, late_motion)
   gpu.py release      after the last child, also when stopped: write the GPU latch
 """
 
@@ -150,7 +150,9 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, charge=None, e
 
 
 def listing():
-    """`--list --ignored` of the frozen binary: exactly the planned cases, no GPU work."""
+    """`--list --ignored` of the frozen binary: exactly the planned cases, no GPU work.
+    The plan's list_args may add a name filter, so earlier stages' frozen cases in
+    the same binary stay unlisted and unrunnable."""
     p = c.plan()
     spec = p["review"]
     if runs("list", "review"):
@@ -161,7 +163,8 @@ def listing():
         return {"listed": found, "listed_count": len(found),
                 "contract": {"matches_plan": sorted(found) == sorted(spec["cases"])}}
 
-    return run_child("list-review", "list", "review", spec["binary"], ["--list", "--ignored"],
+    return run_child("list-review", "list", "review", spec["binary"],
+                     spec.get("list_args", ["--list", "--ignored"]),
                      spec["cwd"], p["budgets"]["listing_timeout_s"], after=names)
 
 

@@ -10,6 +10,9 @@ sources and their freezes are refused by name; there is no regression-suite
 build or run; budgets are 128 submissions and 20 PNGs. The second execution
 uses the new 0074-metalfx-visual-002 evidence namespace and publishes to
 visual-screenshots-002, so the first execution's evidence stays intact.
+The active stage is now metalfx-late: late-plan.json (160 world submissions,
+16 PNGs), namespace 0074-metalfx-late-001, publication
+visual-screenshots-late-001. plan.json stays the 002 stage's frozen record.
 
 As in 0072: the grant pins the reviewed visual tree and names the Cargo target
 (validated, never a forbidden shared one); GPU children run under the global
@@ -38,16 +41,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
 PACKET = "0074-metalfx-review"
-STAGE = "metalfx-visual"
+STAGE = "metalfx-late"
 PACKET_DIR = ROOT / "handoffs" / PACKET
 VISUAL_RELATIVE = "handoffs/" + PACKET + "/visual"
 VISUAL = ROOT / VISUAL_RELATIVE
 TOOLS = VISUAL / "tools"
-PLAN_PATH = VISUAL / "plan.json"
+PLAN_PATH = VISUAL / "late-plan.json"
 HELPER_SOURCE = VISUAL / "review" / "metalfx_visual_review.rs"
 HELPER_DEST = "crates/incant_render/tests/metalfx_visual_review.rs"
 EVIDENCE_ROOT = Path("/Users/andreyyurlov/.codex/incant-evidence")
-EVIDENCE = EVIDENCE_ROOT / "0074-metalfx-visual-002"
+EVIDENCE = EVIDENCE_ROOT / "0074-metalfx-late-001"
 GRANT = EVIDENCE / "review-ready.json"
 GPU_LOCK = EVIDENCE_ROOT / "native-gpu.lock"  # global; shared with root's runners
 PACKET_LOCK = EVIDENCE / "packet.lock"
@@ -64,7 +67,7 @@ BIN = EVIDENCE / "bin"
 LOGS = EVIDENCE / "logs"
 SCRATCH = EVIDENCE / "tmp"
 CAPTURES = EVIDENCE / "captures"
-PUBLISHED = PACKET_DIR / "visual-screenshots-002"
+PUBLISHED = PACKET_DIR / "visual-screenshots-late-001"
 RUSTUP_BIN = "/opt/homebrew/opt/rustup/bin"
 SYSTEM_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
 TARGET_PARENT = Path("/Users/andreyyurlov/.codex")

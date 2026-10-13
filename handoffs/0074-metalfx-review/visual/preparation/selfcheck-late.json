@@ -1,0 +1,1118 @@
+{
+ "python": "3.14.8",
+ "plan_sha256": "79d6bcafb0392b0dae3fc65605b238a733dc6a26b676800024b33fdd05f15fa0",
+ "prior_plan_sha256": "bbd738c810b128e329177aa01339b09fcca6ee551ed2878efc8ad5fa0a268d0c",
+ "helper_sha256": "4ec5d81c94af3f48b9c3f249f99df4cb128ad1ee22ce225df9b00caf3a45b45f",
+ "tools": {
+  "analyze.py": "13b212b24ba8839298e96cd7b3c8c2c8ed86c7c8ca3c02c9fd91982abced5e9e",
+  "build.py": "60216e36cb044523249d11128e9de08c3dca8e1e4f86e26abc42b7436da4ced2",
+  "common.py": "af76ea56b81b2d8b1a41e7dbe486b31e5f91956bb5d1fd1dc91825fd81980896",
+  "gpu.py": "a4aec6ba2d695aa6ce032964ed00e8d2a9dc6bcbfe34e5499a7df227b56efb26",
+  "lease.py": "49fc45ab1882d629df51a081545f6d6e6389cce46cfd47a3e0674b6d3bfa4d50",
+  "selfcheck.py": "390696b0c62ccc5e97fad268dc5cc1d1299a89f69ba43d79f6d39ccc55bc2dce",
+  "test_analyze.py": "6ef9051c9f8abf513306b2c5a63ec9707599ce8b45c1955dbccb275bf8db6911",
+  "test_lifecycle.py": "30165f90f18ba265bc33bdc1b111065857d37b6d7cf7f15a87e619e2f7d04514"
+ },
+ "syntax": "all tools parse",
+ "plan": {
+  "frames_match_total": true,
+  "ui_match_total": true,
+  "submissions_match_total": true,
+  "submissions_within_cap": true,
+  "pngs_match_total": true,
+  "pngs_within_cap": true,
+  "case_timeout_within_cap": true,
+  "reserves_match": true,
+  "retained_frames_match_pngs": true,
+  "png_names_unique": true,
+  "pngs_not_more_than_frames": true,
+  "steps_sum_to_case_frames": true,
+  "case_order": true,
+  "size_within_960x540": true,
+  "one_run_per_case": true,
+  "builds_locked_offline_ci_j2": true,
+  "review_config_equals_0072": true,
+  "current_only_is_review_with_zero_weight": true,
+  "expected_backend_metal": true,
+  "source_policy_matches_tools": true,
+  "output_variable_allowlisted": true,
+  "build_inputs_declared": true,
+  "checks_declared_per_case": true,
+  "holder_required": true
+ },
+ "footprints": {
+  "device_raw_range": [
+   1.0,
+   3.0
+  ],
+  "steps": [
+   {
+    "case": "late_stationary",
+    "step": 0,
+    "arm": "off",
+    "sixteenths": 16,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     960,
+     540
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "frame_plan_valid": true
+   },
+   {
+    "case": "late_stationary",
+    "step": 1,
+    "arm": "off",
+    "sixteenths": 12,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     720,
+     405
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     720.0,
+     405.0
+    ],
+    "frame_plan_valid": true
+   },
+   {
+    "case": "late_stationary",
+    "step": 2,
+    "arm": "off",
+    "sixteenths": 8,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     480,
+     270
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     480.0,
+     270.0
+    ],
+    "frame_plan_valid": true
+   },
+   {
+    "case": "late_stationary",
+    "step": 3,
+    "arm": "native",
+    "sixteenths": 16,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     960,
+     540
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true,
+    "native_class": "native",
+    "expected": "native"
+   },
+   {
+    "case": "late_stationary",
+    "step": 4,
+    "arm": "native",
+    "sixteenths": 12,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     720,
+     405
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     720.0,
+     405.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true,
+    "native_class": "native",
+    "expected": "native"
+   },
+   {
+    "case": "late_stationary",
+    "step": 5,
+    "arm": "native",
+    "sixteenths": 8,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     480,
+     270
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     480.0,
+     270.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true,
+    "native_class": "native",
+    "expected": "native"
+   },
+   {
+    "case": "late_stationary",
+    "step": 6,
+    "arm": "portable",
+    "sixteenths": 8,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     480,
+     270
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     480.0,
+     270.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true
+   },
+   {
+    "case": "late_stationary",
+    "step": 7,
+    "arm": "current_only",
+    "sixteenths": 8,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     480,
+     270
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     480.0,
+     270.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true
+   },
+   {
+    "case": "late_motion",
+    "step": 0,
+    "arm": "native",
+    "sixteenths": 12,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     720,
+     405
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     720.0,
+     405.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true,
+    "native_class": "native",
+    "expected": "native"
+   },
+   {
+    "case": "late_motion",
+    "step": 1,
+    "arm": "native",
+    "sixteenths": 8,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     480,
+     270
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     480.0,
+     270.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true,
+    "native_class": "native",
+    "expected": "native"
+   },
+   {
+    "case": "late_motion",
+    "step": 2,
+    "arm": "portable",
+    "sixteenths": 8,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     480,
+     270
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     480.0,
+     270.0
+    ],
+    "frame_plan_valid": true,
+    "upscale_admitted": true
+   },
+   {
+    "case": "late_motion",
+    "step": 3,
+    "arm": "off",
+    "sixteenths": 16,
+    "viewport": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "internal_size": [
+     960,
+     540
+    ],
+    "source_rect": [
+     0.0,
+     0.0,
+     960.0,
+     540.0
+    ],
+    "frame_plan_valid": true
+   }
+  ],
+  "all_classified_as_planned": true,
+  "internal_sizes": {
+   "8/16": [
+    480,
+    270
+   ],
+   "12/16": [
+    720,
+    405
+   ],
+   "16/16": [
+    960,
+    540
+   ]
+  }
+ },
+ "helper": {
+  "cfg_native_metalfx_feature": true,
+  "tests_match_plan_in_order": true,
+  "list_filter_selects_plan_cases": true,
+  "limits_match_plan": true,
+  "png_names_match_plan_per_case": true,
+  "check_names_match_plan_per_case": true,
+  "preferences_match_plan_per_case": true,
+  "size_matches_plan": true,
+  "output_variable_matches_plan": true,
+  "review_config_matches_plan": true,
+  "current_only_is_zero_weight_review": true,
+  "viewports_match_plan": true,
+  "internal_sizes_checked_are_planned": true,
+  "jitter_copy_equals_prepared_source": true,
+  "jitter_copy_equals_announced_source": true,
+  "observed": {
+   "tests": [
+    "stationary",
+    "motion",
+    "excluded",
+    "transitions",
+    "viewport",
+    "late_stationary",
+    "late_motion"
+   ],
+   "listed_by_filter": [
+    "late_stationary",
+    "late_motion"
+   ],
+   "limits": {
+    "stationary": [
+     33,
+     0
+    ],
+    "motion": [
+     34,
+     0
+    ],
+    "excluded": [
+     11,
+     11
+    ],
+    "transitions": [
+     18,
+     0
+    ],
+    "viewport": [
+     12,
+     0
+    ],
+    "late_stationary": [
+     75,
+     0
+    ],
+    "late_motion": [
+     51,
+     0
+    ]
+   },
+   "pngs": {
+    "stationary": [
+     "stationary-off.png",
+     "stationary-portable-f08.png",
+     "stationary-native-f16.png",
+     "stationary-native-activity.png"
+    ],
+    "motion": [
+     "motion-native-f8.png",
+     "motion-portable-f8.png",
+     "motion-off-f8.png",
+     "motion-pan-native-f6.png",
+     "motion-pan-off-f6.png"
+    ],
+    "excluded": [
+     "excluded-native-f8.png",
+     "excluded-off.png",
+     "excluded-native-activity.png"
+    ],
+    "transitions": [
+     "transition-cut-f5.png",
+     "transition-d12-f7.png",
+     "transition-d8-f10.png",
+     "transition-resume-f15.png"
+    ],
+    "viewport": [
+     "viewport-native-f6.png",
+     "viewport-off.png"
+    ],
+    "late_stationary": [
+     "late-stationary-native16-f16.png",
+     "late-stationary-native12-f01.png",
+     "late-stationary-native12-f08.png",
+     "late-stationary-native12-f16.png",
+     "late-stationary-native8-f01.png",
+     "late-stationary-native8-f08.png",
+     "late-stationary-native8-f16.png",
+     "late-stationary-portable8-f16.png"
+    ],
+    "late_motion": [
+     "late-motion-native12-f01.png",
+     "late-motion-native12-f08.png",
+     "late-motion-native12-f16.png",
+     "late-motion-native8-f01.png",
+     "late-motion-native8-f08.png",
+     "late-motion-native8-f16.png",
+     "late-motion-off-f16.png"
+    ]
+   },
+   "checks": {
+    "stationary": [
+     "native_selected_every_frame",
+     "controls_have_no_metalfx_owner",
+     "native_run_uninterrupted_over_two_cycles",
+     "portable_run_uninterrupted",
+     "current_only_run_uninterrupted",
+     "reference_has_no_upscale_state",
+     "frames_match_plan"
+    ],
+    "motion": [
+     "native_selected_every_frame",
+     "controls_have_no_metalfx_owner",
+     "object_runs_uninterrupted",
+     "pan_run_uninterrupted",
+     "references_have_no_upscale_state",
+     "frames_match_plan"
+    ],
+    "excluded": [
+     "native_selected_every_frame",
+     "controls_have_no_metalfx_owner",
+     "native_run_uninterrupted",
+     "portable_run_uninterrupted",
+     "ui_stable_across_jitter_phases_arms_and_off",
+     "scene_has_blend_sprites_and_text",
+     "reference_has_no_upscale_state",
+     "frames_match_plan"
+    ],
+    "transitions": [
+     "selections_as_planned",
+     "one_owner_through_cut_scales_and_fallback",
+     "view_a_run_uninterrupted",
+     "cut_restarts_history_at_phase_zero",
+     "cut_advances_epoch",
+     "internal_sizes_as_planned",
+     "references_have_no_upscale_state",
+     "frames_match_plan"
+    ],
+    "viewport": [
+     "selections_as_planned",
+     "framed_run_uninterrupted",
+     "outside_viewport_matches_off",
+     "half_scale_internal_size",
+     "reference_has_no_upscale_state",
+     "frames_match_plan"
+    ],
+    "late_stationary": [
+     "selections_as_planned",
+     "controls_have_no_metalfx_owner",
+     "one_native_owner_advances_through_scales",
+     "internal_sizes_as_planned",
+     "portable_run_uninterrupted",
+     "current_only_run_uninterrupted",
+     "references_have_no_upscale_state",
+     "frames_match_plan"
+    ],
+    "late_motion": [
+     "selections_as_planned",
+     "controls_have_no_metalfx_owner",
+     "native_runs_uninterrupted",
+     "portable_run_uninterrupted",
+     "references_have_no_upscale_state",
+     "frames_match_plan"
+    ]
+   },
+   "preferences": {
+    "stationary": [
+     "RequireMetalFx"
+    ],
+    "motion": [
+     "RequireMetalFx"
+    ],
+    "excluded": [
+     "RequireMetalFx"
+    ],
+    "transitions": [
+     "PreferMetalFx"
+    ],
+    "viewport": [
+     "PreferMetalFx"
+    ],
+    "late_stationary": [
+     "PreferMetalFx"
+    ],
+    "late_motion": [
+     "PreferMetalFx"
+    ]
+   },
+   "review_config": {
+    "history_weight": 0.9,
+    "relative_depth": 0.05,
+    "absolute_depth": 0.02,
+    "reactive_threshold": 4.0,
+    "reactive_strength": 0.5
+   },
+   "internal_sizes_checked": [
+    [
+     480,
+     270
+    ],
+    [
+     720,
+     405
+    ]
+   ],
+   "jitter": {
+    "fixture": [
+     [
+      -0.375,
+      -0.125
+     ],
+     [
+      0.125,
+      0.375
+     ],
+     [
+      0.375,
+      -0.375
+     ],
+     [
+      -0.125,
+      0.125
+     ],
+     [
+      0.375,
+      0.125
+     ],
+     [
+      -0.125,
+      -0.375
+     ],
+     [
+      -0.375,
+      0.375
+     ],
+     [
+      0.125,
+      -0.125
+     ]
+    ],
+    "prepared_source_4bc810fe": [
+     [
+      -0.375,
+      -0.125
+     ],
+     [
+      0.125,
+      0.375
+     ],
+     [
+      0.375,
+      -0.375
+     ],
+     [
+      -0.125,
+      0.125
+     ],
+     [
+      0.375,
+      0.125
+     ],
+     [
+      -0.125,
+      -0.375
+     ],
+     [
+      -0.375,
+      0.375
+     ],
+     [
+      0.125,
+      -0.125
+     ]
+    ],
+    "combined_head_0c890514": [
+     [
+      -0.375,
+      -0.125
+     ],
+     [
+      0.125,
+      0.375
+     ],
+     [
+      0.375,
+      -0.375
+     ],
+     [
+      -0.125,
+      0.125
+     ],
+     [
+      0.375,
+      0.125
+     ],
+     [
+      -0.125,
+      -0.375
+     ],
+     [
+      -0.375,
+      0.375
+     ],
+     [
+      0.125,
+      -0.125
+     ]
+    ],
+    "announced_077f7c39": [
+     [
+      -0.375,
+      -0.125
+     ],
+     [
+      0.125,
+      0.375
+     ],
+     [
+      0.375,
+      -0.375
+     ],
+     [
+      -0.125,
+      0.125
+     ],
+     [
+      0.375,
+      0.125
+     ],
+     [
+      -0.125,
+      -0.375
+     ],
+     [
+      -0.375,
+      0.375
+     ],
+     [
+      0.125,
+      -0.125
+     ]
+    ]
+   },
+   "note": "build.py re-checks the jitter table against the granted commit"
+  }
+ },
+ "reuse": {
+  "base_fixture_blob_matches": true,
+  "reused_items_identical": true,
+  "reused_items_checked": 63,
+  "mismatched": [],
+  "new_or_adapted_items": [
+   "CURRENT_ONLY",
+   "FRACTIONAL_VIEWPORT",
+   "LATE_MOTION",
+   "OUTPUT_ENV",
+   "SAMPLES",
+   "STRIATION_RECT",
+   "VIEWPORT",
+   "arms",
+   "changed",
+   "count",
+   "current_band",
+   "enum Expect",
+   "excluded",
+   "fixed",
+   "identical_where",
+   "impl Expect",
+   "impl Meta",
+   "impl Output",
+   "impl Report",
+   "impl Shot",
+   "inferred_resets",
+   "internal_is",
+   "late_camera",
+   "late_motion",
+   "late_mover",
+   "late_run",
+   "late_stationary",
+   "milestones",
+   "motion",
+   "named",
+   "native",
+   "object_run",
+   "one_owner",
+   "open_renderer",
+   "outside",
+   "portable",
+   "regions",
+   "registration",
+   "run",
+   "same_owner",
+   "segment",
+   "segmented",
+   "selected",
+   "selection_value",
+   "shift",
+   "shoot",
+   "stationary",
+   "steps_as_planned",
+   "striation",
+   "striation_milestones",
+   "struct Meta",
+   "struct Output",
+   "struct Shot",
+   "transitions",
+   "viewport"
+  ],
+  "tools_descend_from_0072": true,
+  "tools": {
+   "analyze.py": {
+    "base_blob_present": true,
+    "adapted_from_0072_noted": true,
+    "lines_removed": 70,
+    "lines_added": 220
+   },
+   "build.py": {
+    "base_blob_present": true,
+    "adapted_from_0072_noted": true,
+    "lines_removed": 71,
+    "lines_added": 122
+   },
+   "common.py": {
+    "base_blob_present": true,
+    "adapted_from_0072_noted": true,
+    "lines_removed": 30,
+    "lines_added": 94
+   },
+   "gpu.py": {
+    "base_blob_present": true,
+    "adapted_from_0072_noted": true,
+    "lines_removed": 57,
+    "lines_added": 35
+   },
+   "lease.py": {
+    "base_blob_present": true,
+    "adapted_from_0072_noted": true,
+    "lines_removed": 10,
+    "lines_added": 16
+   },
+   "selfcheck.py": {
+    "base_blob_present": true,
+    "adapted_from_0072_noted": true,
+    "lines_removed": 36,
+    "lines_added": 607
+   },
+   "test_lifecycle.py": {
+    "base_blob_present": true,
+    "adapted_from_0072_noted": true,
+    "lines_removed": 7,
+    "lines_added": 180
+   }
+  }
+ },
+ "grant_policy": {
+  "cases": {
+   "explicit_uncooked_source_accepted": true,
+   "explicit_cooked_source_accepted": true,
+   "announced_corrected_source_accepted": true,
+   "core_presentation_target_accepted": true,
+   "superseded_4bc810fe_refused": true,
+   "superseded_a337c86d_refused": true,
+   "superseded_535003d7_refused": true,
+   "superseded_freeze_refused": true,
+   "superseded_535003d7_freeze_refused": true,
+   "missing_freeze_refused": true,
+   "relative_freeze_refused": true,
+   "missing_tree_refused": true,
+   "short_commit_refused": true,
+   "missing_features_refused": true,
+   "partial_cooked_features_refused": true,
+   "cooked_without_metalfx_refused": true,
+   "other_packet_refused": true,
+   "shared_target_refused": true,
+   "missing_target_refused": true
+  },
+  "all_as_expected": true
+ },
+ "format": {
+  "argv": [
+   "rustfmt",
+   "--edition",
+   "2024",
+   "--emit",
+   "stdout"
+  ],
+  "rustfmt": "rustfmt 1.10.0-stable (b940084d7e 2026-09-28)",
+  "exit": 0,
+  "identical": true,
+  "method": "stdin to stdout and byte comparison (stdin --check exits 0 even with a diff)"
+ },
+ "announced_source": {
+  "announced": {
+   "commit": "077f7c39c0f4122aae36ea3a88537be006722822",
+   "tree": "408c4bb2948983cfde980fa40c31f443b5d78a0c",
+   "reviewed": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+   "changed_inputs": [
+    "crates/incant_render/src/metalfx/native.rs",
+    "crates/incant_render/src/metalfx/numerics.rs",
+    "crates/incant_render/src/metalfx/plan.rs"
+   ],
+   "freeze": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/committed-build-source.json",
+   "freeze_sha256": "62db43cb2b769b89fde5431c776fc6d89ca670d67ae87ff7317ac1e75f2f33a9"
+  },
+  "tree_matches": true,
+  "descends_from_reviewed_source": true,
+  "build_inputs_changed": [
+   "crates/incant_render/src/metalfx/native.rs",
+   "crates/incant_render/src/metalfx/numerics.rs",
+   "crates/incant_render/src/metalfx/plan.rs"
+  ],
+  "only_scale_unit_inputs_changed": true,
+  "build_inputs": 2448,
+  "freeze_sha256_matches": true,
+  "freeze_shape_accepted": true,
+  "freeze_rows": 2449,
+  "freeze_build_input_rows": 2448,
+  "freeze_rows_outside_roots": [
+   "tools/probes/cooked-temporal-compile.py"
+  ],
+  "inputs_missing_from_freeze": [],
+  "freeze_rows_missing_from_commit": [],
+  "blob_sha256_compared": 2449,
+  "mismatched": [],
+  "exact": true,
+  "all_pass": true
+ },
+ "prior_strict_native": {
+  "measured_raw_range": [
+   1.0,
+   3.0
+  ],
+  "reduced_steps_expect_native": true,
+  "expectations_are_native_or_fractional": true,
+  "fixture": {
+   "variants_are_native_and_fractional": true,
+   "native_allows_only_metalfx": true,
+   "no_scale_fallback_accepted": true,
+   "steps_bound_as_planned": true,
+   "selections_checked_against_steps": true
+  },
+  "fixture_binds_metalfx": true,
+  "first_fixture": {
+   "variants_are_native_and_fractional": false,
+   "native_allows_only_metalfx": false,
+   "no_scale_fallback_accepted": false,
+   "steps_bound_as_planned": false,
+   "selections_checked_against_steps": true
+  },
+  "first_fixture_refused": true,
+  "replay": [
+   {
+    "case": "transitions",
+    "group": "view_a",
+    "sixteenths": 16,
+    "recorded": [
+     "MetalFx"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "MetalFx",
+    "corrected_model": "MetalFx",
+    "expect": "native",
+    "accepted_now": true
+   },
+   {
+    "case": "transitions",
+    "group": "cut",
+    "sixteenths": 16,
+    "recorded": [
+     "MetalFx"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "MetalFx",
+    "corrected_model": "MetalFx",
+    "expect": "native",
+    "accepted_now": true
+   },
+   {
+    "case": "transitions",
+    "group": "d12",
+    "sixteenths": 12,
+    "recorded": [
+     "Portable(Some(Scale))"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "Portable(Some(Scale))",
+    "corrected_model": "MetalFx",
+    "expect": "native",
+    "accepted_now": false
+   },
+   {
+    "case": "transitions",
+    "group": "d8",
+    "sixteenths": 8,
+    "recorded": [
+     "Portable(Some(Scale))"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "Portable(Some(Scale))",
+    "corrected_model": "MetalFx",
+    "expect": "native",
+    "accepted_now": false
+   },
+   {
+    "case": "transitions",
+    "group": "d10",
+    "sixteenths": 10,
+    "recorded": [
+     "Portable(Some(FractionalViewport))"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "Portable(Some(FractionalViewport))",
+    "corrected_model": "Portable(Some(FractionalViewport))",
+    "expect": "fractional",
+    "accepted_now": true
+   },
+   {
+    "case": "transitions",
+    "group": "resumed",
+    "sixteenths": 16,
+    "recorded": [
+     "MetalFx"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "MetalFx",
+    "corrected_model": "MetalFx",
+    "expect": "native",
+    "accepted_now": true
+   },
+   {
+    "case": "viewport",
+    "group": "framed",
+    "sixteenths": 16,
+    "recorded": [
+     "MetalFx"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "MetalFx",
+    "corrected_model": "MetalFx",
+    "expect": "native",
+    "accepted_now": true
+   },
+   {
+    "case": "viewport",
+    "group": "framed_8_16",
+    "sixteenths": 8,
+    "recorded": [
+     "Portable(Some(Scale))"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "Portable(Some(Scale))",
+    "corrected_model": "MetalFx",
+    "expect": "native",
+    "accepted_now": false
+   },
+   {
+    "case": "viewport",
+    "group": "fractional",
+    "sixteenths": 16,
+    "recorded": [
+     "Portable(Some(FractionalViewport))"
+    ],
+    "frames_and_size_as_planned": true,
+    "superseded_model": "Portable(Some(FractionalViewport))",
+    "corrected_model": "Portable(Some(FractionalViewport))",
+    "expect": "fractional",
+    "accepted_now": true
+   }
+  ],
+  "first_records_verified_and_passed_then": true,
+  "replay_frames_and_sizes_as_planned": true,
+  "superseded_model_reproduces_records": true,
+  "corrected_model_selects_metalfx_at_reduced_steps": true,
+  "recorded_scale_fallbacks_now_refused": true,
+  "other_recorded_steps_still_accepted": true
+ },
+ "late": {
+  "prior_plan_is_the_002_blob": true,
+  "prior_fixture_is_an_exact_prefix": true,
+  "appended_section_adds_exactly_the_late_tests": true,
+  "prior_cases_are_the_002_plan_cases": true,
+  "late_native_steps_bind_metalfx": true,
+  "expected_references_match_002_records": true,
+  "striation_rect_matches_002_measurement": true,
+  "observed_binding": {
+   "variants_are_native_and_fractional": true,
+   "native_allows_only_metalfx": true,
+   "no_scale_fallback_accepted": true,
+   "steps_bound_as_planned": true,
+   "selections_checked_against_steps": true
+  }
+ },
+ "refusals": {
+  "commands": {
+   "lease.py acquire": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "lease.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py checkout": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py toolchain": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py lint": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review late_stationary": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review late_motion": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py check": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py publish": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   }
+  },
+  "all_refused_for_absent_grant": true,
+  "evidence_directory_still_absent": true,
+  "git_status_unchanged": true,
+  "global_gpu_lock_untouched": true
+ },
+ "all_pass": true
+}

@@ -5,7 +5,9 @@ missing case, a false report check (a native-step portable fallback included),
 a failed child, a changed PNG or report, an orphan debit, and a stale or failed
 summary must each refuse; check always retains its diagnostic summary. Never
 builds, runs a renderer or touches the real evidence directory: every evidence
-path is redirected to a temporary directory.
+path is redirected to a temporary directory. The analyzer is plan-driven: these
+controls run on the frozen five-case 002 plan, and one test shows that complete
+evidence for the active late plan checks and publishes.
 
   python3 -I -B test_analyze.py [--receipt NEW_PATH]
 """
@@ -26,6 +28,7 @@ import analyze  # noqa: E402
 import common as c  # noqa: E402
 
 RECORDS = []
+ACTIVE_PLAN, PRIOR_PLAN = c.PLAN_PATH, c.VISUAL / "plan.json"
 GRANT = {"packet": c.PACKET, "stage": c.STAGE, "source_commit": "a" * 40, "source_tree": "c" * 40,
          "visual_tree": "b" * 40, "source_freeze": {"path": "/Users/andreyyurlov/.codex/freeze.json",
                                                     "sha256": "d" * 64},
@@ -53,6 +56,7 @@ class Analyze(unittest.TestCase):
         root = Path(self.directory.name)
         self.patches = contextlib.ExitStack()
         self.patches.enter_context(mock.patch.multiple(c, **{k: root / v for k, v in PATHS.items()}))
+        self.patches.enter_context(mock.patch.object(c, "PLAN_PATH", PRIOR_PLAN))
         self.patches.enter_context(contextlib.redirect_stdout(io.StringIO()))
         c.EVIDENCE.mkdir()
         c.write_new_json(c.GRANT, GRANT)
@@ -149,6 +153,19 @@ class Analyze(unittest.TestCase):
         self.assertEqual(len(manifest["pngs"]), self.plan["totals"]["pngs"])
         RECORDS.append({"test": "complete_evidence_checks_and_publishes", "pngs": len(manifest["pngs"]),
                         "bound_files": len(summary["binding"])})
+
+    def test_late_plan_complete_evidence_checks_and_publishes(self):
+        with mock.patch.object(c, "PLAN_PATH", ACTIVE_PLAN):
+            self.plan = c.plan()
+            self.complete()
+            analyze.check()
+            self.assertTrue(c.read_json(analyze.latest_summary())["pass"])
+            analyze.publish()
+        manifest = c.read_json(c.PUBLISHED / "manifest.json")
+        self.assertEqual(len(manifest["pngs"]), self.plan["totals"]["pngs"])
+        self.assertEqual(sorted({row["case"] for row in manifest["pngs"]}), sorted(self.plan["review"]["cases"]))
+        RECORDS.append({"test": "late_plan_complete_evidence_checks_and_publishes", "plan": ACTIVE_PLAN.name,
+                        "pngs": len(manifest["pngs"])})
 
     def test_empty_evidence_refuses(self):
         problems = self.check_refused()

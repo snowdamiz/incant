@@ -2377,3 +2377,473 @@ fn viewport() {
         "viewport failed; see report.json"
     );
 }
+
+// ------------------------------------------------------------------ late frames
+//
+// Additive late-frame cases for the native late-frame preparation: native MetalFX
+// at 12/16 and 8/16, stationary and under modest motion, 16 frames per scale so
+// the reset frame, frame 8 and frame 16 can be compared. Everything above this
+// section is the frozen five-case fixture (blob 31257a55) executed as
+// 0074-metalfx-visual-002; selfcheck.py verifies that it is an unchanged prefix.
+
+/// The flat left face of the white cube in view B, where the 002 run's native
+/// 8/16 reset frame showed a faint vertical striation: [x0, y0, x1, y1).
+const STRIATION_RECT: [usize; 4] = [422, 330, 462, 380];
+/// The late motion path's fraction of the motion case's per-frame mover step and
+/// camera pan (about 5 instead of 21 px per frame for the mover).
+const LATE_MOTION: f64 = 0.25;
+
+/// Column structure on a flat face: per-column means of the mean sRGB code over
+/// STRIATION_RECT, their range, and the mean absolute second difference along x
+/// (the measure corrected-scale-execution.md used for the 002 finding).
+fn striation(pixels: &[u8]) -> Value {
+    let width = SIZE[0] as usize;
+    let [x0, y0, x1, y1] = STRIATION_RECT;
+    let columns: Vec<f64> = (x0..x1)
+        .map(|x| {
+            (y0..y1)
+                .map(|y| {
+                    let i = (y * width + x) * 4;
+                    (f64::from(pixels[i]) + f64::from(pixels[i + 1]) + f64::from(pixels[i + 2]))
+                        / 3.
+                })
+                .sum::<f64>()
+                / (y1 - y0) as f64
+        })
+        .collect();
+    let second: Vec<f64> = columns
+        .windows(3)
+        .map(|w| (w[0] - 2. * w[1] + w[2]).abs())
+        .collect();
+    json!({
+        "rect": STRIATION_RECT,
+        "column_mean_min": columns.iter().copied().fold(f64::INFINITY, f64::min),
+        "column_mean_max": columns.iter().copied().fold(f64::NEG_INFINITY, f64::max),
+        "mean_abs_second_difference": second.iter().sum::<f64>() / second.len() as f64,
+    })
+}
+/// `count` frames of a borrowed owner over an unchanged input, named
+/// `<prefix>-NN`; unlike `run`, the owner survives for the next segment.
+fn segment(
+    report: &mut Report,
+    renderer: &Renderer,
+    scene: &mut RetainedScene,
+    input: &SceneInput,
+    output: &Output,
+    prefix: &str,
+    count: u32,
+) -> Vec<Shot> {
+    (1..=count)
+        .map(|k| {
+            let name = format!("{prefix}-{k:02}");
+            shoot(report, renderer, scene, input, output, None, &name)
+        })
+        .collect()
+}
+/// One native owner across fixed-scale segments: the accepted sequence and
+/// jitter phase advance by one per frame, only the owner's first frame lacks
+/// motion history, the epoch and owner never change and each segment keeps its
+/// planned internal size.
+fn segmented(segments: &[(&[Shot], [u32; 2])]) -> bool {
+    let shots: Vec<(&Shot, [u32; 2])> = segments
+        .iter()
+        .flat_map(|(shots, size)| shots.iter().map(move |s| (s, *size)))
+        .collect();
+    let Some(first) = shots.first().and_then(|(s, _)| s.meta()) else {
+        return false;
+    };
+    let groups: Vec<&[Shot]> = segments.iter().map(|(s, _)| *s).collect();
+    shots.iter().enumerate().all(|(i, (shot, size))| {
+        shot.meta().is_some_and(|m| {
+            m.phase == Some(i as u32 % 8)
+                && m.previous == (i > 0)
+                && m.epoch == first.epoch
+                && m.sequence == first.sequence + i as u64
+                && m.internal == *size
+                && !m.bypassed
+        })
+    }) && one_owner(&groups)
+}
+/// The mover at step `k` of the late motion path.
+fn late_mover(k: u32) -> DMat4 {
+    DMat4::from_translation(DVec3::new(
+        MOVER_START[0] + MOVER_STEP * LATE_MOTION * f64::from(k),
+        MOVER_START[1],
+        MOVER_START[2],
+    ))
+}
+/// `camera_world`'s pan at LATE_MOTION of its per-step speed.
+fn late_camera(k: u32) -> DMat4 {
+    let k = LATE_MOTION * f64::from(k);
+    DMat4::from_rotation_translation(
+        DQuat::from_rotation_y(-0.012 * k) * DQuat::from_rotation_x(CAMERA_PITCH),
+        DVec3::new(CAMERA_AT[0] + 0.12 * k, CAMERA_AT[1], CAMERA_AT[2]),
+    )
+}
+/// One owner over the late motion path's 16 steps, named `<prefix>-NN`; `nodes`
+/// are the mover and camera.
+fn late_run(
+    report: &mut Report,
+    renderer: &Renderer,
+    mut scene: RetainedScene,
+    input: &mut SceneInput,
+    nodes: [usize; 2],
+    output: &Output,
+    prefix: &str,
+) -> Vec<Shot> {
+    (1..=16_u32)
+        .map(|k| {
+            input.nodes[nodes[0]].world = late_mover(k);
+            input.nodes[nodes[1]].world = late_camera(k);
+            let name = format!("{prefix}-{k:02}");
+            shoot(report, renderer, &mut scene, input, output, None, &name)
+        })
+        .collect()
+}
+/// Frames 1, 8 and 16 of a 16-frame run against one reference.
+fn milestones(reference: &[u8], shots: &[Shot], edge: &[bool]) -> Value {
+    json!({
+        "f01": split(reference, &shots[0].pixels, edge),
+        "f08": split(reference, &shots[7].pixels, edge),
+        "f16": split(reference, &shots[15].pixels, edge),
+    })
+}
+/// The striation measure of frames 1, 8 and 16 of a 16-frame run.
+fn striation_milestones(shots: &[Shot]) -> Value {
+    json!({
+        "f01": striation(&shots[0].pixels),
+        "f08": striation(&shots[7].pixels),
+        "f16": striation(&shots[15].pixels),
+    })
+}
+
+#[test]
+#[ignore = "handoff 0074 MetalFX late-frame review; run only by the guarded packet runner"]
+fn late_stationary() {
+    let mut report = Report::open("late_stationary", 75, 0);
+    let stage = Stage::new();
+    let mut input = stage.input();
+    let camera = node(&input, &stage.camera);
+    input.nodes[camera].world = view_b();
+    let renderer = open_renderer();
+    let output = Output::new(&renderer, None);
+    // Unjittered view B at output scale and both reduced scales; the 16/16 and
+    // 8/16 frames repeat transitions' off-b and off-b-d8 from the 002 run.
+    let mut off = plain(&renderer, &input, &stage.camera);
+    let reference = shoot(
+        &mut report,
+        &renderer,
+        &mut off,
+        &input,
+        &output,
+        None,
+        "off",
+    );
+    off.set_dynamic_resolution(Some(fixed(12)))
+        .expect("fixed 12/16 reference scale");
+    let reference_d12 = shoot(
+        &mut report,
+        &renderer,
+        &mut off,
+        &input,
+        &output,
+        None,
+        "off-d12",
+    );
+    off.set_dynamic_resolution(Some(fixed(8)))
+        .expect("fixed 8/16 reference scale");
+    let reference_d8 = shoot(
+        &mut report,
+        &renderer,
+        &mut off,
+        &input,
+        &output,
+        None,
+        "off-d8",
+    );
+    drop(off);
+    // One preferring native owner, 16 frames at each scale; each scale change
+    // resets native history, as transitions d12-7 and d8-10 did in the 002 run.
+    let mut on = native(&renderer, &input, &stage.camera, Preference::PreferMetalFx);
+    let n16 = segment(&mut report, &renderer, &mut on, &input, &output, "n16", 16);
+    on.set_dynamic_resolution(Some(fixed(12)))
+        .expect("fixed 12/16 scale");
+    let n12 = segment(&mut report, &renderer, &mut on, &input, &output, "n12", 16);
+    on.set_dynamic_resolution(Some(fixed(8)))
+        .expect("fixed 8/16 scale");
+    let n8 = segment(&mut report, &renderer, &mut on, &input, &output, "n8", 16);
+    drop(on);
+    // Same-source controls at 8/16: fresh owners from jitter phase 0.
+    let mut scene = portable(&renderer, &input, &stage.camera, REVIEW);
+    scene
+        .set_dynamic_resolution(Some(fixed(8)))
+        .expect("fixed 8/16 portable scale");
+    let p8 = run(&mut report, &renderer, scene, &input, &output, "p8", 16);
+    let mut scene = portable(&renderer, &input, &stage.camera, CURRENT_ONLY);
+    scene
+        .set_dynamic_resolution(Some(fixed(8)))
+        .expect("fixed 8/16 current-only scale");
+    let c8 = run(&mut report, &renderer, scene, &input, &output, "c8", 8);
+    let edge = edges(&reference.pixels);
+    report.png("late-stationary-native16-f16.png", &n16[15].pixels);
+    report.png("late-stationary-native12-f01.png", &n12[0].pixels);
+    report.png("late-stationary-native12-f08.png", &n12[7].pixels);
+    report.png("late-stationary-native12-f16.png", &n12[15].pixels);
+    report.png("late-stationary-native8-f01.png", &n8[0].pixels);
+    report.png("late-stationary-native8-f08.png", &n8[7].pixels);
+    report.png("late-stationary-native8-f16.png", &n8[15].pixels);
+    report.png("late-stationary-portable8-f16.png", &p8[15].pixels);
+    let steps = [
+        (Expect::Native, n16.as_slice()),
+        (Expect::Native, n12.as_slice()),
+        (Expect::Native, n8.as_slice()),
+    ];
+    let checks = [
+        ("selections_as_planned", steps_as_planned(&steps)),
+        (
+            "controls_have_no_metalfx_owner",
+            selected(&p8, None)
+                && selected(&c8, None)
+                && [&reference, &reference_d12, &reference_d8]
+                    .iter()
+                    .all(|s| s.selection.is_none()),
+        ),
+        (
+            "one_native_owner_advances_through_scales",
+            segmented(&[
+                (n16.as_slice(), SIZE),
+                (n12.as_slice(), [720, 405]),
+                (n8.as_slice(), [480, 270]),
+            ]),
+        ),
+        (
+            "internal_sizes_as_planned",
+            internal_is(&n16, SIZE)
+                && internal_is(&n12, [720, 405])
+                && internal_is(&n8, [480, 270])
+                && internal_is(&p8, [480, 270])
+                && internal_is(&c8, [480, 270]),
+        ),
+        ("portable_run_uninterrupted", continuous(&p8, [480, 270])),
+        (
+            "current_only_run_uninterrupted",
+            continuous(&c8, [480, 270]),
+        ),
+        (
+            "references_have_no_upscale_state",
+            reference.upscale.is_none()
+                && reference_d12.upscale.is_none()
+                && reference_d8.upscale.is_none(),
+        ),
+        ("frames_match_plan", report.frames == 75),
+    ];
+    let groups = [n16.as_slice(), n12.as_slice(), n8.as_slice()];
+    // A separate json! keeps each macro expansion shallow.
+    let striations = json!({
+        "off": striation(&reference.pixels),
+        "off_d12": striation(&reference_d12.pixels),
+        "off_d8": striation(&reference_d8.pixels),
+        "native_16_16": striation_milestones(&n16),
+        "native_12_16": striation_milestones(&n12),
+        "native_8_16": striation_milestones(&n8),
+        "portable_8_16_f16": striation(&p8[15].pixels),
+        "current_only_8_16_f08": striation(&c8[7].pixels),
+    });
+    let body = json!({
+        "renderer": describe(&renderer),
+        "arms": arms(),
+        "view": "view B, static: transitions' second viewpoint without the cut",
+        "edge_mask": {
+            "source": "off reference, 3x3 dilated",
+            "threshold": EDGE_THRESHOLD,
+            "pixels": count(&edge),
+        },
+        "selections": {
+            "n16": selection_value(&n16),
+            "n12": selection_value(&n12),
+            "n8": selection_value(&n8),
+        },
+        "observations": {
+            "native_resets_inferred": inferred_resets(&groups),
+            "vs_off": {
+                "native_16_16": milestones(&reference.pixels, &n16, &edge),
+                "native_12_16": milestones(&reference.pixels, &n12, &edge),
+                "native_8_16": milestones(&reference.pixels, &n8, &edge),
+                "portable_8_16": milestones(&reference.pixels, &p8, &edge),
+                "current_only_8_16_f08": split(&reference.pixels, &c8[7].pixels, &edge),
+            },
+            "vs_unreconstructed": {
+                "native_12_16_f16_vs_off_d12": split(&reference_d12.pixels, &n12[15].pixels, &edge),
+                "native_8_16_f16_vs_off_d8": split(&reference_d8.pixels, &n8[15].pixels, &edge),
+                "portable_8_16_f16_vs_off_d8": split(&reference_d8.pixels, &p8[15].pixels, &edge),
+            },
+            "native_12_16_vs_16_16_f16": split(&n16[15].pixels, &n12[15].pixels, &edge),
+            "native_8_16_vs_16_16_f16": split(&n16[15].pixels, &n8[15].pixels, &edge),
+            "native_vs_portable_8_16_f16": split(&p8[15].pixels, &n8[15].pixels, &edge),
+            "consecutive": {
+                "native_16_16": consecutive(&n16, &edge),
+                "native_12_16": consecutive(&n12, &edge),
+                "native_8_16": consecutive(&n8, &edge),
+                "portable_8_16": consecutive(&p8, &edge),
+            },
+            "registration_f09_f16": {
+                "native_16_16": registration(&reference.pixels, &n16[8..], &edge),
+                "native_12_16": registration(&reference.pixels, &n12[8..], &edge),
+                "native_8_16": registration(&reference.pixels, &n8[8..], &edge),
+                "portable_8_16": registration(&reference.pixels, &p8[8..], &edge),
+            },
+            "current_only_boundary_8_16": current_band(&n8[..8], &c8, &edge, &n8[8..]),
+            "striation": striations,
+        },
+    });
+    assert!(
+        report.finish(body, &checks),
+        "late_stationary failed; see report.json"
+    );
+}
+
+#[test]
+#[ignore = "handoff 0074 MetalFX late-frame review; run only by the guarded packet runner"]
+fn late_motion() {
+    let mut report = Report::open("late_motion", 51, 0);
+    let stage = Stage::new();
+    let mut input = stage.input();
+    let nodes = [node(&input, &stage.mover), node(&input, &stage.camera)];
+    let renderer = open_renderer();
+    let output = Output::new(&renderer, None);
+    // The mover heads for the thin wall while the camera pans, each at a quarter
+    // of the motion case's per-frame speed. Every arm is a fresh owner over the
+    // same 16 steps, so step k shows the same scene to all of them.
+    let mut scene = native(&renderer, &input, &stage.camera, Preference::PreferMetalFx);
+    scene
+        .set_dynamic_resolution(Some(fixed(12)))
+        .expect("fixed 12/16 scale");
+    let n12 = late_run(
+        &mut report,
+        &renderer,
+        scene,
+        &mut input,
+        nodes,
+        &output,
+        "n12",
+    );
+    let mut scene = native(&renderer, &input, &stage.camera, Preference::PreferMetalFx);
+    scene
+        .set_dynamic_resolution(Some(fixed(8)))
+        .expect("fixed 8/16 scale");
+    let n8 = late_run(
+        &mut report,
+        &renderer,
+        scene,
+        &mut input,
+        nodes,
+        &output,
+        "n8",
+    );
+    let mut scene = portable(&renderer, &input, &stage.camera, REVIEW);
+    scene
+        .set_dynamic_resolution(Some(fixed(8)))
+        .expect("fixed 8/16 portable scale");
+    let p8 = late_run(
+        &mut report,
+        &renderer,
+        scene,
+        &mut input,
+        nodes,
+        &output,
+        "p8",
+    );
+    let mut off = plain(&renderer, &input, &stage.camera);
+    let mut references = Vec::new();
+    for k in [1_u32, 8, 16] {
+        input.nodes[nodes[0]].world = late_mover(k);
+        input.nodes[nodes[1]].world = late_camera(k);
+        let name = format!("off-{k:02}");
+        references.push(shoot(
+            &mut report,
+            &renderer,
+            &mut off,
+            &input,
+            &output,
+            None,
+            &name,
+        ));
+    }
+    drop(off);
+    let edge: Vec<Vec<bool>> = references.iter().map(|r| edges(&r.pixels)).collect();
+    report.png("late-motion-native12-f01.png", &n12[0].pixels);
+    report.png("late-motion-native12-f08.png", &n12[7].pixels);
+    report.png("late-motion-native12-f16.png", &n12[15].pixels);
+    report.png("late-motion-native8-f01.png", &n8[0].pixels);
+    report.png("late-motion-native8-f08.png", &n8[7].pixels);
+    report.png("late-motion-native8-f16.png", &n8[15].pixels);
+    report.png("late-motion-off-f16.png", &references[2].pixels);
+    let steps = [
+        (Expect::Native, n12.as_slice()),
+        (Expect::Native, n8.as_slice()),
+    ];
+    let checks = [
+        ("selections_as_planned", steps_as_planned(&steps)),
+        (
+            "controls_have_no_metalfx_owner",
+            selected(&p8, None) && selected(&references, None),
+        ),
+        (
+            "native_runs_uninterrupted",
+            continuous(&n12, [720, 405]) && continuous(&n8, [480, 270]),
+        ),
+        ("portable_run_uninterrupted", continuous(&p8, [480, 270])),
+        (
+            "references_have_no_upscale_state",
+            references.iter().all(|s| s.upscale.is_none()),
+        ),
+        ("frames_match_plan", report.frames == 51),
+    ];
+    // Each milestone against the unjittered reference of the same step.
+    let same_step = |shots: &[Shot]| {
+        json!({
+            "f01": split(&references[0].pixels, &shots[0].pixels, &edge[0]),
+            "f08": split(&references[1].pixels, &shots[7].pixels, &edge[1]),
+            "f16": split(&references[2].pixels, &shots[15].pixels, &edge[2]),
+        })
+    };
+    let body = json!({
+        "renderer": describe(&renderer),
+        "arms": arms(),
+        "motion": {
+            "fraction_of_motion_case": LATE_MOTION,
+            "mover_step_world_units": MOVER_STEP * LATE_MOTION,
+            "camera_step": {
+                "translation_x_world_units": 0.12 * LATE_MOTION,
+                "yaw_radians": -0.012 * LATE_MOTION,
+            },
+        },
+        "selections": {
+            "n12": selection_value(&n12),
+            "n8": selection_value(&n8),
+        },
+        "observations": {
+            "native_resets_inferred": {
+                "native_12_16": inferred_resets(&[n12.as_slice()]),
+                "native_8_16": inferred_resets(&[n8.as_slice()]),
+            },
+            "vs_off_same_step": {
+                "native_12_16": same_step(n12.as_slice()),
+                "native_8_16": same_step(n8.as_slice()),
+                "portable_8_16": same_step(p8.as_slice()),
+            },
+            "native_vs_portable_8_16_f16": split(&p8[15].pixels, &n8[15].pixels, &edge[2]),
+            "native_8_16_vs_12_16_f16": split(&n12[15].pixels, &n8[15].pixels, &edge[2]),
+            "registration_vs_off_same_step": {
+                "native_12_16_f08": registration(&references[1].pixels, &n12[7..8], &edge[1]),
+                "native_12_16_f16": registration(&references[2].pixels, &n12[15..], &edge[2]),
+                "native_8_16_f08": registration(&references[1].pixels, &n8[7..8], &edge[1]),
+                "native_8_16_f16": registration(&references[2].pixels, &n8[15..], &edge[2]),
+            },
+        },
+    });
+    assert!(
+        report.finish(body, &checks),
+        "late_motion failed; see report.json"
+    );
+}

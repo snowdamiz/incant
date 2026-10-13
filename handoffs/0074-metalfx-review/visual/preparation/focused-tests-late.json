@@ -1,0 +1,147 @@
+{
+ "cpu_only": true,
+ "focused": true,
+ "passed": true,
+ "tests_run": 17,
+ "tests": [
+  "Analyze.test_changed_png_refuses",
+  "Analyze.test_changed_report_refuses",
+  "Analyze.test_complete_evidence_checks_and_publishes",
+  "Analyze.test_empty_evidence_refuses",
+  "Analyze.test_failed_child_refuses",
+  "Analyze.test_failed_summary_refuses_publish",
+  "Analyze.test_false_check_refuses",
+  "Analyze.test_late_plan_complete_evidence_checks_and_publishes",
+  "Analyze.test_missing_case_refuses",
+  "Analyze.test_orphan_debit_refuses",
+  "Analyze.test_scale_fallback_selection_refuses",
+  "Analyze.test_stale_summary_refuses_publish",
+  "Lifecycle.test_listing_passes_the_plan_filter",
+  "Lifecycle.test_superseded_source_refused_before_checkout",
+  "Lifecycle.test_ill_formed_sources_refused",
+  "Lifecycle.test_explicit_source_passes_the_grant_gate",
+  "Lifecycle.test_checkout_refuses_a_freeze_naming_another_commit_before_export"
+ ],
+ "failed": [],
+ "seconds": 0.17,
+ "python": "3.14.8",
+ "records": [
+  {
+   "test": "changed_png_refuses",
+   "problems": 1,
+   "first": [
+    "stationary: stationary-native-f16.png changed since its run"
+   ]
+  },
+  {
+   "test": "changed_report_refuses",
+   "problems": 1,
+   "first": [
+    "excluded: report.json missing or changed since its run"
+   ]
+  },
+  {
+   "test": "complete_evidence_checks_and_publishes",
+   "pngs": 18,
+   "bound_files": 46
+  },
+  {
+   "test": "empty_evidence_refuses",
+   "problems": 14,
+   "first": [
+    "missing /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0074-analyze-msa87w99/evidence/build/source.json",
+    "the review source is not the granted commit with exact freeze coverage",
+    "missing /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0074-analyze-msa87w99/evidence/build/checkout.json"
+   ]
+  },
+  {
+   "test": "failed_child_refuses",
+   "problems": 2,
+   "first": [
+    "child review-motion failed: exit 101, failed ['exit 101']",
+    "motion: child failed: exit 101, failed ['exit 101']"
+   ]
+  },
+  {
+   "test": "failed_summary_refuses_publish",
+   "problems": 1,
+   "first": [
+    "the target lease is not cleanly released under this grant"
+   ]
+  },
+  {
+   "test": "false_check_refuses",
+   "problems": 2,
+   "first": [
+    "viewport: required checks are not exactly the plan's, all true (not true: ['outside_viewport_matches_off'])",
+    "viewport: report outcome 'fail' is not this case's pass"
+   ]
+  },
+  {
+   "test": "late_plan_complete_evidence_checks_and_publishes",
+   "plan": "late-plan.json",
+   "pngs": 15
+  },
+  {
+   "test": "missing_case_refuses",
+   "problems": 2,
+   "first": [
+    "review cases ran as ['stationary', 'motion', 'excluded', 'transitions'], not ['stationary', 'motion', 'excluded', 'transitions', 'viewport'] once each in order",
+    "charged {'frames': 96, 'ui_submissions': 11, 'pngs': 16}, not the planned totals"
+   ]
+  },
+  {
+   "test": "orphan_debit_refuses",
+   "problems": 2,
+   "first": [
+    "the debits are not exactly the review runs' debits (orphan, missing or changed)",
+    "charged {'frames': 141, 'ui_submissions': 11, 'pngs': 22}, not the planned totals"
+   ]
+  },
+  {
+   "test": "scale_fallback_selection_refuses",
+   "problems": 4,
+   "first": [
+    "transitions: required checks are not exactly the plan's, all true (not true: ['selections_as_planned'])",
+    "transitions: report outcome 'fail' is not this case's pass",
+    "viewport: required checks are not exactly the plan's, all true (not true: ['selections_as_planned'])"
+   ]
+  },
+  {
+   "test": "stale_summary_refuses_publish",
+   "republished_after_fresh_check": true
+  },
+  {
+   "test": "listing_passes_the_plan_filter",
+   "args": [
+    "--list",
+    "--ignored",
+    "late_"
+   ]
+  },
+  {
+   "test": "superseded_sources_refused_before_checkout",
+   "refusals": [
+    "source 4bc810fe0daf238f219801de76b06f19e4daf826 is superseded (native MetalFX producer reviewed for 0074's numeric stage only); an explicit combined source is required",
+    "source 535003d766bcc1386fd2d2f454c83808a0fcc4c8 is superseded (first execution's source, which read MetalFX factors as content fractions); an explicit combined source is required",
+    "source a337c86d8d74e819b3e879d4a7db830b74de8862 is superseded (temporal upscaling base before the corrected edge and overlay-depth fixes); an explicit combined source is required"
+   ]
+  },
+  {
+   "test": "ill_formed_sources_refused",
+   "refusals": [
+    "freeze native-metalfx-source-003 (the 4bc810fe freeze) is superseded",
+    "features must be exactly one of [['native-metalfx'], ['cooked-temporal', 'native-metalfx']]",
+    "the grant lacks a full source_commit, source_tree or visual_tree",
+    "the grant lacks an absolute source_freeze path and SHA-256"
+   ]
+  },
+  {
+   "test": "explicit_source_passes_the_grant_gate"
+  },
+  {
+   "test": "checkout_refuses_a_freeze_naming_another_commit_before_export",
+   "refusal": "the granted freeze does not name the granted commit"
+  }
+ ]
+}

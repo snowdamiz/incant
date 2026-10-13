@@ -892,3 +892,68 @@ changes, and ran no retries.
     window or audio.
   - Root's `brief.md` is left uncommitted.
   - No active children or background tasks remain.
+
+## Late-frame and coverage-repair preparation session (2026-10-13)
+
+**Status: preparation and design only. Nothing was granted, built, run or
+captured.** The two deliverables are `native-late-preparation.md` and
+`native-coverage-repair.md`, with the focused helper diff in
+`native-late-helper.diff`. All earlier fixtures, plans, reports, grants, evidence and
+sections of this file are unchanged.
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+  Line 2 of root's ACP log `claude-0074-native-late-preparation-acp.log` reads
+  "Claude session verified: Opus 5.5; thinking: max". No subagents were used.
+- **Root input:** acceptance `80bde0f1…`, for numeric, source and evidence scope.
+  Both earlier verdicts are preserved: the 75%/50% judgment is initial quality only,
+  and the shared silhouette quality is still rejected. The 50% striation goes to the
+  late follow-up.
+- **Late-frame review (stage `metalfx-late`):**
+  - two cases on the same source and freeze, `077f7c39` and `62db43cb…`:
+    - `late_stationary` (view B: one owner at 16/16, 12/16 and 8/16 for 16 frames
+      each; portable and current-only at 8/16; off at three scales);
+    - `late_motion` (view A, quarter-speed mover and camera: fresh native owners at
+      12/16 and 8/16, a portable 8/16 control, off at path steps 1, 8 and 16);
+  - 126 world submissions of 160, 15 PNGs of 16, 120 s per case;
+  - reset frame, f08 and f16 retained at 75% and 50%, plus a scale-1 f16 control, a
+    portable 8/16 f16 and a motion off reference;
+  - striation measured on the 002 rectangle;
+  - the 16/16 and 8/16 off references are bound to 002's `off-b` and `off-b-d8`.
+- **Helper delta:**
+  - the fixture is append-only (+470; blob `31257a55` is an exact prefix);
+  - new `late-plan.json`; `plan.json` unchanged;
+  - `common.py`: 4 constants;
+  - `gpu.py`: listing arguments taken from the plan (the `late_` filter);
+  - `analyze.py`, `build.py` and `lease.py` byte-unchanged;
+  - `selfcheck.py` adapted, with a new late section;
+  - one test added each to `test_analyze.py` and `test_lifecycle.py`.
+
+  The five 002 cases are not rerun; their evidence stays bound to source and binary.
+- **CPU checks:**
+  - `visual/preparation/selfcheck-late.json`: `all_pass` (`f04a1307…`). That
+    includes exact coverage of the freeze `62db43cb`: 2,448 inputs plus the probe,
+    2,449 blobs.
+  - `visual/preparation/focused-tests-late.json`: 17/17 (`50007faf…`).
+  - Seven in-memory mutation controls each caught their mutation.
+  - rustfmt identity holds.
+  - No Cargo, Clippy or GPU work was done; root's build is the first compile of the
+    extended fixture.
+- **Coverage repair design:**
+  - coverage class is decided by the 3×3 neighbourhood;
+  - opaque depth discontinuities go to native output with colour rectification;
+  - coverage boundaries use engine-owned R16F coverage history, neighbourhood-clamped
+    and motion-reprojected, with filled unpremultiplied pack colours;
+  - depth and overlay semantics are unchanged;
+  - every existing oracle row stays a special case, and 7 new oracle rows, 8 API
+    assumptions to validate, cost figures and 9 negative controls are listed.
+
+  **Key decision for root:** the history needs a budget change.
+  `MAX_METALFX_TRANSITION_BYTES` is exactly 2 × 25 B/px at 4,194,304 px; adding
+  4 B/px history needs +32 MiB, or a lower admitted extent.
+- **Screenshots:** none in this session.
+- **Process state:**
+  - The transient files `/tmp/0074-late-fmt.rs` and `/tmp/0074-late-fmt2.rs`
+    (rustfmt output) and the mutation-control temporary directory were removed.
+  - No GPU lock, lease, target, evidence-directory write, memory write, push or PR.
+  - Root's `brief.md` is left uncommitted.
+  - No background processes remain.

@@ -303,6 +303,20 @@ class Lifecycle(unittest.TestCase):
         self.assertFalse(c.REFUSALS.exists())
         RECORDS.append({"test": "explicit_source_passes_the_grant_gate"})
 
+    def test_listing_passes_the_plan_filter(self):
+        # The late plan's filter keeps the frozen 002 cases in the binary unlisted.
+        plan = {"budgets": {"listing_timeout_s": 60},
+                "review": {"binary": "review", "cwd": ".", "cases": {"late_a": {}, "late_b": {}},
+                           "list_args": ["--list", "--ignored", "late_"]}}
+        with mock.patch.object(c, "plan", return_value=plan), \
+                mock.patch.object(gpu, "run_child", return_value={}) as child:
+            gpu.listing()
+        args, after = child.call_args.args[4], child.call_args.kwargs["after"]
+        self.assertEqual(args, ["--list", "--ignored", "late_"])
+        self.assertTrue(after("late_a: test\nlate_b: test\n")["contract"]["matches_plan"])
+        self.assertFalse(after("late_a: test\nlate_b: test\nstationary: test\n")["contract"]["matches_plan"])
+        RECORDS.append({"test": "listing_passes_the_plan_filter", "args": args})
+
     def test_feature_and_jitter_guards(self):
         admitted = build.features_admitted
         self.assertTrue(admitted(["native-metalfx"], ["native-metalfx", "physics-deterministic"]))
