@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T09:05:37.203634+00:00",
+  "producer": "58cea6a76b07c9f0168a7ccad4ec5fbfb08d0c7b",
+  "base": "8c1db376fc8c3e6651a353112c58ba66515f6733",
+  "integration": "437a6a150cdbb6112b0297d41ca42e6198473110",
+  "exact_production_and_build_inputs": true,
+  "producer_manifest_sha256": "c420656fd1b0e6975cc9d61983eea89f55917a407fb31b466d5668453d26b5e0",
+  "archive_records_rehashed": 154,
+  "archive_payloads_decoded": 148,
+  "all_source_hashes": {
+    "crates/incant_wasm_runtime/Cargo.toml": "4cd3c7888d57d7c20c600ed2f34efec21ee32bd9c0b2134828a25adfb160e265",
+    "crates/incant_wasm_runtime/build.rs": "b752b73bf585df002c6ee0d2a8f42f49dfaa5c0733748c18f5a331fa0b102f1b",
+    "Cargo.lock": "ecae698c336af3c2cbb9724e089d3455fe3848260cfc2f20acb04b260ccf9882",
+    ".github/workflows/development-wasm.yml": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b",
+    "tools/probes/shipping-wasm2c.py": "8599375d2064bc6658584bb67a92c0bc4133f1b93f5d13d541c31faa98a60ac9"
+  },
+  "review_sha256": "a066bbb499f4689ad3ea82dc59bcd30457454a8208e1a1c33355f4c3c425f55f",
+  "build_reuse": "Exact same main210 base and executable tree as accepted producer. No new conformance build or Windows execution claimed.",
+  "scope": "Only embedded-fixture selects cc/parallel; existing flags, modules, lock and workflows unchanged."
+}

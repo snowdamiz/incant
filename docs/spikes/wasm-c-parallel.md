@@ -89,3 +89,7 @@ hash-bound external paths; records explicitly distinguish retained artifacts
 from the 1,106 prepared files directly checked before the original helper's
 normal cleanup. No new Windows, shipping-package, device, frame-performance or
 phase gate is claimed.
+
+## Current-main integration
+
+The final producer packet is independently accepted. [Root review](evidence/wasm-c-parallel-integration/root-review.json) and [exact main210 source qualification](evidence/wasm-c-parallel-integration/qualification.json) bind the unchanged production and build inputs. All154 retained records were rehashed against their originals. The accepted492-case conformance run is reused without claiming another build; actual Windows execution remains pending the next frozen checkpoint.
