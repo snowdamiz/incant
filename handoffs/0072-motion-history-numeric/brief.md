@@ -1,4 +1,4 @@
-# 0072 priority revision3 — temporal numeric execution then visual preparation
+# 0072 priority revision4 — temporal numeric execution then visual preparation
 
 Claude Opus5.5, explicitly Max. Your previous motion-only execution is accepted
 (root39060ae); all original result/grants/logs remain historical and untouched.
@@ -7,11 +7,11 @@ Source+CPU acceptance:196ba29d41d9482f971bf2895611a452c47031d4df517805ac19de6856
 Do not resurvey the whole repository. Read temporal-color-verification.md and
 its contract plus the two small numerical test sources and root runner.
 
-Stage A is GRANTED: execute only once
+Stage A is GRANTED as a fresh retry: execute only once
 
-    python3 -B handoffs/0072-motion-history-numeric/tools/temporal_numeric.py
+    python3 -B handoffs/0072-motion-history-numeric/tools/temporal_numeric_r2.py
 
-Root grant is ~/.codex/incant-evidence/0072-temporal/review-ready.json, runner
+Root grant is ~/.codex/incant-evidence/0072-temporal-r2/review-ready.json, runner
 hash, frozen exact binary and57source/baseline files checked; lifecycle helper
 unchanged and globally serialized. No Cargo/target/build permission. At most
 13 tiny frames:8 synthetic8x8 actual temporal resolve/copy controls and5 accepted
@@ -19,7 +19,7 @@ unchanged and globally serialized. No Cargo/target/build permission. At most
 each,60seconds per child. On failure retain outputs/release and report; do not
 retry, widen scope or change production. Root controls new grants. You may read
 exact frozen source/evidence/binary paths referenced by the two manifests.
-Evidence writes only ~/.codex/incant-evidence/0072-temporal and this worktree.
+Evidence writes only ~/.codex/incant-evidence/0072-temporal-r2 and this worktree.
 The existing tests do not print adapter/raw values; retain that limit.
 
 Stage B is PREPARATION ONLY after StageA releases GPU. Build a bounded visual
@@ -52,3 +52,5 @@ release sentinel and stop on failure. No source changes after grant, no lost
 failed evidence or reuse based merely on matching path/name. No credentials,
 external accounts, memory writes, pushing,PRs or phase approvals. Commit owned
 results/helpers with Built-by: claude; root owns this brief/numeric runner.
+
+Root revision4: prior attempt failed before launching because its retained binary was mode0644. Original remains unchanged. Root created a byte-identical mode0700 copy under fresh0072-temporal-r2 and added executable preflight, one-shot durable attempt latch, prelaunch frame debits and SIGTERM/HUP cleanup. Root gracefully stopped the unproductive prior ACP session (exit130, all five owned PIDs gone). Do not rerun old runner/grant or alter failed evidence. 0068 GPU released and is pinned as predecessor. StageB stays preparation-only. Keep progress moving from targeted source reads to a small complete fixture; avoid another broad survey.
