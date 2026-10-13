@@ -1,0 +1,606 @@
+{
+ "configs": {
+  "C1": {
+   "n6_authored_persp": {
+    "at": 164,
+    "step_255": 7.0
+   },
+   "n6t_ortho_255_diagnostic": 4.29,
+   "n6t_persp_255": 3.19,
+   "n7": {
+    "edge_slab_persp": 0,
+    "white_slab_ortho": 0,
+    "white_slab_persp": 0
+   },
+   "n8_ortho": {
+    "110": {
+     "p2p_255": 8.0,
+     "ratio": 0.1,
+     "shipped_255": 79.69
+    },
+    "111": {
+     "p2p_255": 9.0,
+     "ratio": 0.113,
+     "shipped_255": 79.69
+    },
+    "112": {
+     "p2p_255": 10.0,
+     "ratio": 0.157,
+     "shipped_255": 63.75
+    },
+    "113": {
+     "p2p_255": 12.0,
+     "ratio": 0.251,
+     "shipped_255": 47.81
+    },
+    "114": {
+     "p2p_255": 13.0,
+     "ratio": 0.272,
+     "shipped_255": 47.81
+    },
+    "115": {
+     "p2p_255": 16.0,
+     "ratio": 0.335,
+     "shipped_255": 47.81
+    },
+    "116": {
+     "p2p_255": 15.0,
+     "ratio": 0.314,
+     "shipped_255": 47.81
+    }
+   },
+   "n8_persp": {
+    "124": {
+     "p2p_255": 11.0,
+     "ratio": 0.345,
+     "shipped_255": 31.88
+    },
+    "125": {
+     "p2p_255": 15.0,
+     "ratio": 0.471,
+     "shipped_255": 31.88
+    },
+    "126": {
+     "p2p_255": 16.0,
+     "ratio": 0.502,
+     "shipped_255": 31.88
+    },
+    "127": {
+     "p2p_255": 13.0,
+     "ratio": 0.408,
+     "shipped_255": 31.88
+    },
+    "128": {
+     "p2p_255": 8.0,
+     "ratio": 0.167,
+     "shipped_255": 47.81
+    },
+    "129": {
+     "p2p_255": 7.0,
+     "ratio": 0.146,
+     "shipped_255": 47.81
+    },
+    "130": {
+     "p2p_255": 6.0,
+     "ratio": 0.125,
+     "shipped_255": 47.81
+    }
+   },
+   "probes_per_texel": 64
+  },
+  "C2": {
+   "n6_authored_persp": {
+    "at": 164,
+    "step_255": 7.0
+   },
+   "n6t_ortho_255_diagnostic": 4.14,
+   "n6t_persp_255": 3.19,
+   "n7": {
+    "edge_slab_persp": 0,
+    "white_slab_ortho": 1,
+    "white_slab_persp": 0
+   },
+   "n8_ortho": {
+    "110": {
+     "p2p_255": 6.0,
+     "ratio": 0.075,
+     "shipped_255": 79.69
+    },
+    "111": {
+     "p2p_255": 6.0,
+     "ratio": 0.075,
+     "shipped_255": 79.69
+    },
+    "112": {
+     "p2p_255": 8.0,
+     "ratio": 0.125,
+     "shipped_255": 63.75
+    },
+    "113": {
+     "p2p_255": 6.0,
+     "ratio": 0.125,
+     "shipped_255": 47.81
+    },
+    "114": {
+     "p2p_255": 5.0,
+     "ratio": 0.105,
+     "shipped_255": 47.81
+    },
+    "115": {
+     "p2p_255": 5.0,
+     "ratio": 0.105,
+     "shipped_255": 47.81
+    },
+    "116": {
+     "p2p_255": 4.0,
+     "ratio": 0.084,
+     "shipped_255": 47.81
+    }
+   },
+   "n8_persp": {
+    "124": {
+     "p2p_255": 7.0,
+     "ratio": 0.22,
+     "shipped_255": 31.88
+    },
+    "125": {
+     "p2p_255": 7.0,
+     "ratio": 0.22,
+     "shipped_255": 31.88
+    },
+    "126": {
+     "p2p_255": 7.0,
+     "ratio": 0.22,
+     "shipped_255": 31.88
+    },
+    "127": {
+     "p2p_255": 3.0,
+     "ratio": 0.094,
+     "shipped_255": 31.88
+    },
+    "128": {
+     "p2p_255": 5.0,
+     "ratio": 0.105,
+     "shipped_255": 47.81
+    },
+    "129": {
+     "p2p_255": 7.0,
+     "ratio": 0.146,
+     "shipped_255": 47.81
+    },
+    "130": {
+     "p2p_255": 6.0,
+     "ratio": 0.125,
+     "shipped_255": 47.81
+    }
+   },
+   "probes_per_texel": 64
+  },
+  "C3": {
+   "n6_authored_persp": {
+    "at": 163,
+    "step_255": 8.0
+   },
+   "n6t_ortho_255_diagnostic": 4.14,
+   "n6t_persp_255": 4.39,
+   "n7": {
+    "edge_slab_persp": 0,
+    "white_slab_ortho": 0,
+    "white_slab_persp": 0
+   },
+   "n8_ortho": {
+    "110": {
+     "p2p_255": 9.0,
+     "ratio": 0.113,
+     "shipped_255": 79.69
+    },
+    "111": {
+     "p2p_255": 6.0,
+     "ratio": 0.075,
+     "shipped_255": 79.69
+    },
+    "112": {
+     "p2p_255": 6.0,
+     "ratio": 0.094,
+     "shipped_255": 63.75
+    },
+    "113": {
+     "p2p_255": 5.0,
+     "ratio": 0.105,
+     "shipped_255": 47.81
+    },
+    "114": {
+     "p2p_255": 3.0,
+     "ratio": 0.063,
+     "shipped_255": 47.81
+    },
+    "115": {
+     "p2p_255": 4.0,
+     "ratio": 0.084,
+     "shipped_255": 47.81
+    },
+    "116": {
+     "p2p_255": 5.0,
+     "ratio": 0.105,
+     "shipped_255": 47.81
+    }
+   },
+   "n8_persp": {
+    "124": {
+     "p2p_255": 14.0,
+     "ratio": 0.439,
+     "shipped_255": 31.88
+    },
+    "125": {
+     "p2p_255": 12.0,
+     "ratio": 0.376,
+     "shipped_255": 31.88
+    },
+    "126": {
+     "p2p_255": 13.0,
+     "ratio": 0.408,
+     "shipped_255": 31.88
+    },
+    "127": {
+     "p2p_255": 16.0,
+     "ratio": 0.502,
+     "shipped_255": 31.88
+    },
+    "128": {
+     "p2p_255": 15.0,
+     "ratio": 0.314,
+     "shipped_255": 47.81
+    },
+    "129": {
+     "p2p_255": 11.0,
+     "ratio": 0.23,
+     "shipped_255": 47.81
+    },
+    "130": {
+     "p2p_255": 10.0,
+     "ratio": 0.209,
+     "shipped_255": 47.81
+    }
+   },
+   "probes_per_texel": 64
+  },
+  "D": {
+   "n6_authored_persp": {
+    "at": 161,
+    "step_255": 7.0
+   },
+   "n6t_ortho_255_diagnostic": 4.63,
+   "n6t_persp_255": 3.37,
+   "n7": {
+    "edge_slab_persp": 0,
+    "white_slab_ortho": 0,
+    "white_slab_persp": 0
+   },
+   "n8_ortho": {
+    "110": {
+     "p2p_255": 14.0,
+     "ratio": 0.176,
+     "shipped_255": 79.69
+    },
+    "111": {
+     "p2p_255": 13.0,
+     "ratio": 0.163,
+     "shipped_255": 79.69
+    },
+    "112": {
+     "p2p_255": 11.0,
+     "ratio": 0.173,
+     "shipped_255": 63.75
+    },
+    "113": {
+     "p2p_255": 8.0,
+     "ratio": 0.167,
+     "shipped_255": 47.81
+    },
+    "114": {
+     "p2p_255": 8.0,
+     "ratio": 0.167,
+     "shipped_255": 47.81
+    },
+    "115": {
+     "p2p_255": 6.0,
+     "ratio": 0.125,
+     "shipped_255": 47.81
+    },
+    "116": {
+     "p2p_255": 7.0,
+     "ratio": 0.146,
+     "shipped_255": 47.81
+    }
+   },
+   "n8_persp": {
+    "124": {
+     "p2p_255": 12.0,
+     "ratio": 0.376,
+     "shipped_255": 31.88
+    },
+    "125": {
+     "p2p_255": 14.0,
+     "ratio": 0.439,
+     "shipped_255": 31.88
+    },
+    "126": {
+     "p2p_255": 16.0,
+     "ratio": 0.502,
+     "shipped_255": 31.88
+    },
+    "127": {
+     "p2p_255": 17.0,
+     "ratio": 0.533,
+     "shipped_255": 31.88
+    },
+    "128": {
+     "p2p_255": 17.0,
+     "ratio": 0.356,
+     "shipped_255": 47.81
+    },
+    "129": {
+     "p2p_255": 16.0,
+     "ratio": 0.335,
+     "shipped_255": 47.81
+    },
+    "130": {
+     "p2p_255": 13.0,
+     "ratio": 0.272,
+     "shipped_255": 47.81
+    }
+   },
+   "probes_per_texel": 64
+  },
+  "S16": {
+   "n6_authored_persp": {
+    "at": 162,
+    "step_255": 8.0
+   },
+   "n6t_ortho_255_diagnostic": 4.69,
+   "n6t_persp_255": 4.37,
+   "n7": {
+    "edge_slab_persp": 4,
+    "white_slab_ortho": 0,
+    "white_slab_persp": 0
+   },
+   "n8_ortho": {
+    "110": {
+     "p2p_255": 5.0,
+     "ratio": 0.063,
+     "shipped_255": 79.69
+    },
+    "111": {
+     "p2p_255": 6.0,
+     "ratio": 0.075,
+     "shipped_255": 79.69
+    },
+    "112": {
+     "p2p_255": 6.0,
+     "ratio": 0.094,
+     "shipped_255": 63.75
+    },
+    "113": {
+     "p2p_255": 6.0,
+     "ratio": 0.125,
+     "shipped_255": 47.81
+    },
+    "114": {
+     "p2p_255": 5.0,
+     "ratio": 0.105,
+     "shipped_255": 47.81
+    },
+    "115": {
+     "p2p_255": 4.0,
+     "ratio": 0.084,
+     "shipped_255": 47.81
+    },
+    "116": {
+     "p2p_255": 2.0,
+     "ratio": 0.042,
+     "shipped_255": 47.81
+    }
+   },
+   "n8_persp": {
+    "124": {
+     "p2p_255": 9.0,
+     "ratio": 0.282,
+     "shipped_255": 31.88
+    },
+    "125": {
+     "p2p_255": 9.0,
+     "ratio": 0.282,
+     "shipped_255": 31.88
+    },
+    "126": {
+     "p2p_255": 8.0,
+     "ratio": 0.251,
+     "shipped_255": 31.88
+    },
+    "127": {
+     "p2p_255": 8.0,
+     "ratio": 0.251,
+     "shipped_255": 31.88
+    },
+    "128": {
+     "p2p_255": 7.0,
+     "ratio": 0.146,
+     "shipped_255": 47.81
+    },
+    "129": {
+     "p2p_255": 7.0,
+     "ratio": 0.146,
+     "shipped_255": 47.81
+    },
+    "130": {
+     "p2p_255": 6.0,
+     "ratio": 0.125,
+     "shipped_255": 47.81
+    }
+   },
+   "probes_per_texel": 256
+  }
+ },
+ "constructions": {
+  "c1_tile_pairing_0_4_2_net": true,
+  "c1_tile_pairing_coarse_cells_of_16": 16,
+  "c2_every_ray_tile_pairing_0_4_2_net": true,
+  "c3_every_probe_tile_pairing_0_4_2_net": true,
+  "c3_per_texel_radial_strata_64": true,
+  "design_tile_pairing_0_4_2_net": false,
+  "design_tile_pairing_coarse_cells_of_16": 4,
+  "rays_elevation_azimuth_phase_0_4_3_net": true
+ },
+ "device_design_001": {
+  "model_agreement": {
+   "edge_p_interior": {
+    "equal": 40289,
+    "max_abs_codes": 1,
+    "texels": 42653
+   },
+   "n8_windows_ortho": {
+    "equal": 46,
+    "max_abs_codes": 1,
+    "texels": 49
+   },
+   "n8_windows_persp": {
+    "equal": 71,
+    "max_abs_codes": 1,
+    "texels": 77
+   },
+   "slab_o_interior": {
+    "equal": 41112,
+    "max_abs_codes": 1,
+    "texels": 42593
+   },
+   "slab_p_interior": {
+    "equal": 40291,
+    "max_abs_codes": 1,
+    "texels": 41949
+   }
+  },
+  "n6_authored_persp": {
+   "at": 161,
+   "step_255": 7.0
+  },
+  "n6t_ortho_255_diagnostic": 4.63,
+  "n6t_persp_255": 3.37,
+  "n7": {
+   "edge_slab_persp": 0,
+   "white_slab_ortho": 0,
+   "white_slab_persp": 0
+  },
+  "n8_ortho": {
+   "110": {
+    "p2p_255": 14.0,
+    "ratio": 0.176,
+    "shipped_255": 79.69
+   },
+   "111": {
+    "p2p_255": 13.0,
+    "ratio": 0.163,
+    "shipped_255": 79.69
+   },
+   "112": {
+    "p2p_255": 12.0,
+    "ratio": 0.188,
+    "shipped_255": 63.75
+   },
+   "113": {
+    "p2p_255": 8.0,
+    "ratio": 0.167,
+    "shipped_255": 47.81
+   },
+   "114": {
+    "p2p_255": 8.0,
+    "ratio": 0.167,
+    "shipped_255": 47.81
+   },
+   "115": {
+    "p2p_255": 6.0,
+    "ratio": 0.125,
+    "shipped_255": 47.81
+   },
+   "116": {
+    "p2p_255": 7.0,
+    "ratio": 0.146,
+    "shipped_255": 47.81
+   }
+  },
+  "n8_persp": {
+   "124": {
+    "p2p_255": 12.0,
+    "ratio": 0.376,
+    "shipped_255": 31.88
+   },
+   "125": {
+    "p2p_255": 14.0,
+    "ratio": 0.439,
+    "shipped_255": 31.88
+   },
+   "126": {
+    "p2p_255": 16.0,
+    "ratio": 0.502,
+    "shipped_255": 31.88
+   },
+   "127": {
+    "p2p_255": 17.0,
+    "ratio": 0.533,
+    "shipped_255": 31.88
+   },
+   "128": {
+    "p2p_255": 17.0,
+    "ratio": 0.356,
+    "shipped_255": 47.81
+   },
+   "129": {
+    "p2p_255": 16.0,
+    "ratio": 0.335,
+    "shipped_255": 47.81
+   },
+   "130": {
+    "p2p_255": 13.0,
+    "ratio": 0.272,
+    "shipped_255": 47.81
+   }
+  },
+  "source": "retained 0070-ssao-filter-001 V planes (final R8 codes), Apple M5 Pro / Metal"
+ },
+ "format": "incant-0070-next-repair-screen-v1",
+ "seconds": {
+  "C1": 4.6,
+  "C2": 4.9,
+  "C3": 5.0,
+  "D": 3.6,
+  "S16": 12.2,
+  "total": 42.4
+ },
+ "self_checks": {
+  "D_equals_quality_model_raw": true,
+  "S16_equals_quality_model_raw": true
+ },
+ "sigma": [
+  0,
+  8,
+  12,
+  4,
+  10,
+  2,
+  6,
+  14,
+  15,
+  7,
+  3,
+  11,
+  5,
+  13,
+  9,
+  1
+ ],
+ "tau": [
+  0,
+  5,
+  10,
+  15
+ ]
+}

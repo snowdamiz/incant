@@ -1,0 +1,73 @@
+{
+ "plan": "make_plan --check reproduces plan.json; 100 of 128 new submissions; 9 children; 16 PNGs, 11 pairs; frozen and unfrozen engine guards retained; guard tests bound",
+ "freeze_and_grants": [
+  "the plan binds no frozen engine_commit; root freezes it with `make_plan.py --engine-commit <40-hex>` after the source freeze",
+  "gpu grant refused: [\"format='incant-0070-gpu-grant-v1'\"]",
+  "gpu grant refused: ['plan_sha256 does not match ssao-filter-002/plan.json']",
+  "gpu grant refused: [\"engine_commit does not match the plan's frozen engine commit\"]",
+  "gpu grant refused: ['helper_digest does not match the namespace, reused tools and analyzer bytes']",
+  "gpu grant refused: ['evidence_dir must be the 0070-ssao-filter-002 namespace directory']",
+  "gpu grant refused: [\"format='incant-0070-ssao-filter-001-gpu-grant-v1'\", \"namespace='0070-ssao-filter-001'\", 'evidence_dir must be the 0070-ssao-filter-002 namespace directory']"
+ ],
+ "stage_index": [
+  "missing plane",
+  "undeclared frame",
+  "short plane",
+  "declared frame without planes",
+  "tampered plane"
+ ],
+ "feature_binding": [
+  "feature binding refused: [\"lib features ['default', 'physics-deterministic'] != plan ['default', 'physics-deterministic', 'ssao-stage-readback']\"]",
+  "feature binding refused: ['lib test and helper incant_render features differ']",
+  "feature binding refused: [\"lib features ['cooked-output', 'default', 'physics-deterministic', 'ssao-stage-readback'] != plan ['default', 'physics-deterministic', 'ssao-stage-readback']\", 'a cooked-* family is enabled in the default lib or helper build']",
+  "feature binding refused: [\"cooked control binary lacks ['cooked-materials', 'ssao-stage-readback']\"]"
+ ],
+ "order_and_latch": [
+  "cases refused before both required controls",
+  "appearance refused before every case",
+  "a failed control latches in the reused ledger"
+ ],
+ "helper_scope": {
+  "src/appearance.rs": "identical",
+  "src/common.rs": "identical",
+  "src/composed.rs": "identical",
+  "src/gltf.rs": "identical",
+  "src/lib.rs": "comments only",
+  "src/main.rs": "comments only",
+  "Cargo.toml": "comments only",
+  "src/numeric.rs": "001 + corrected predicate + named 10% tolerance + 3 synthetic tests"
+ },
+ "sphere_guard": {
+  "rim_only": {
+   "001_predicate": 601,
+   "002_predicate": 0
+  },
+  "persp": {
+   "expected": 2824.635,
+   "painted": 2818,
+   "001_predicate": 3419,
+   "002_predicate": 2818
+  },
+  "ortho": {
+   "expected": 455.221,
+   "painted": 456,
+   "001_predicate": 1057,
+   "002_predicate": 456
+  },
+  "guard_step_refuses": [
+   "no test ran (filter matched nothing)",
+   "a test missing",
+   "an extra test",
+   "a failed test"
+  ]
+ },
+ "digest": {
+  "digest": "d2cbd33cc6fc3719bb26dd9297097ae5060290b7452e16ee42d0ea5133567d54",
+  "files": 27,
+  "reused_tools": 6,
+  "analyzer": 7
+ },
+ "cli": [
+  "build without a grant refuses (exit 2) before any process or lock"
+ ]
+}

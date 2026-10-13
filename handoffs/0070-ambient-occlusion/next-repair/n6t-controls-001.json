@@ -1,0 +1,208 @@
+{
+ "bound_255": 3.984,
+ "format": "incant-0070-n6t-controls-v1",
+ "orthographic_diagnostic": {
+  "c2_model": {
+   "n6_255": 11.0,
+   "n6_at": 158,
+   "n6_pass": false,
+   "n6t_255": 4.14,
+   "n6t_at": 158,
+   "n6t_pass": false
+  },
+  "control_fine_limit_filtered_exact": {
+   "n6_255": 6.71,
+   "n6_at": 158,
+   "n6_pass": false,
+   "n6t_255": 0.23,
+   "n6t_at": 127,
+   "n6t_pass": true
+  },
+  "control_fine_limit_filtered_r8": {
+   "n6_255": 7.0,
+   "n6_at": 155,
+   "n6_pass": false,
+   "n6t_255": 1.05,
+   "n6t_at": 135,
+   "n6t_pass": true
+  },
+  "r1r3_device_001": {
+   "n6_255": 11.0,
+   "n6_at": 157,
+   "n6_pass": false,
+   "n6t_255": 4.63,
+   "n6t_at": 157,
+   "n6t_pass": false
+  },
+  "shipped_model": {
+   "n6_255": 47.81,
+   "n6_at": 151,
+   "n6_pass": false,
+   "n6t_255": 41.67,
+   "n6t_at": 151,
+   "n6t_pass": false
+  }
+ },
+ "pairs": [
+  100,
+  169,
+  70
+ ],
+ "perspective": {
+  "banded_control_1_16": {
+   "n6_255": 15.94,
+   "n6_at": 108,
+   "n6_pass": false,
+   "n6t_255": 14.78,
+   "n6t_at": 124,
+   "n6t_pass": false
+  },
+  "build003_device": {
+   "ambiguous": [],
+   "equals_shipped_model": true,
+   "inferred_texels": 72,
+   "n6_255": 31.88,
+   "n6_at": 150,
+   "n6_pass": false,
+   "n6t_255": 29.22,
+   "n6t_at": 150,
+   "n6t_pass": false
+  },
+  "build003_shipped_model": {
+   "n6_255": 31.88,
+   "n6_at": 150,
+   "n6_pass": false,
+   "n6t_255": 29.22,
+   "n6t_at": 150,
+   "n6t_pass": false
+  },
+  "c2_model": {
+   "n6_255": 7.0,
+   "n6_at": 164,
+   "n6_pass": false,
+   "n6t_255": 3.19,
+   "n6t_at": 164,
+   "n6t_pass": true
+  },
+  "control_fine_limit_filtered_exact": {
+   "n6_255": 3.79,
+   "n6_at": 164,
+   "n6_pass": true,
+   "n6t_255": 0.39,
+   "n6t_at": 157,
+   "n6t_pass": true
+  },
+  "control_fine_limit_filtered_r8": {
+   "n6_255": 4.0,
+   "n6_at": 164,
+   "n6_pass": false,
+   "n6t_255": 1.02,
+   "n6t_at": 116,
+   "n6t_pass": true
+  },
+  "control_fine_limit_unfiltered_r8": {
+   "n6_255": 5.0,
+   "n6_at": 166,
+   "n6_pass": false,
+   "n6t_255": 1.98,
+   "n6t_at": 154,
+   "n6t_pass": true
+  },
+  "hatch_control_pm_1_32": {
+   "n6_255": 19.94,
+   "n6_at": 169,
+   "n6_pass": false,
+   "n6t_255": 16.96,
+   "n6t_at": 116,
+   "n6t_pass": false
+  },
+  "injected_step_codes": {
+   "16": {
+    "n6_255": 15.0,
+    "n6_at": 134,
+    "n6_pass": false,
+    "n6t_255": 16.65,
+    "n6t_at": 134,
+    "n6t_pass": false
+   },
+   "2": {
+    "n6_255": 4.0,
+    "n6_at": 164,
+    "n6_pass": false,
+    "n6t_255": 2.65,
+    "n6t_at": 134,
+    "n6t_pass": true
+   },
+   "3": {
+    "n6_255": 4.0,
+    "n6_at": 164,
+    "n6_pass": false,
+    "n6t_255": 3.65,
+    "n6t_at": 134,
+    "n6t_pass": true
+   },
+   "4": {
+    "n6_255": 4.0,
+    "n6_at": 166,
+    "n6_pass": false,
+    "n6t_255": 4.65,
+    "n6t_at": 134,
+    "n6t_pass": false
+   },
+   "5": {
+    "n6_255": 4.0,
+    "n6_at": 134,
+    "n6_pass": false,
+    "n6t_255": 5.65,
+    "n6t_at": 134,
+    "n6t_pass": false
+   },
+   "6": {
+    "n6_255": 5.0,
+    "n6_at": 134,
+    "n6_pass": false,
+    "n6t_255": 6.65,
+    "n6t_at": 134,
+    "n6t_pass": false
+   },
+   "8": {
+    "n6_255": 7.0,
+    "n6_at": 134,
+    "n6_pass": false,
+    "n6t_255": 8.65,
+    "n6t_at": 134,
+    "n6t_pass": false
+   }
+  },
+  "r1r3_device_001": {
+   "n6_255": 7.0,
+   "n6_at": 161,
+   "n6_pass": false,
+   "n6t_255": 3.37,
+   "n6t_at": 162,
+   "n6t_pass": true
+  },
+  "r1r3_model": {
+   "n6_255": 7.0,
+   "n6_at": 161,
+   "n6_pass": false,
+   "n6t_255": 3.37,
+   "n6t_at": 162,
+   "n6t_pass": true
+  },
+  "truth_grid_unfiltered_r8": {
+   "n6_255": 5.0,
+   "n6_at": 154,
+   "n6_pass": false,
+   "n6t_255": 0.83,
+   "n6t_at": 105,
+   "n6t_pass": true
+  }
+ },
+ "seconds": 42.1,
+ "truth": "24 x 64 directions, 32 steps; control: 32 x 96 directions, 48 steps",
+ "truth_max_step_255": {
+  "filtered": 3.82,
+  "unfiltered": 4.98
+ }
+}

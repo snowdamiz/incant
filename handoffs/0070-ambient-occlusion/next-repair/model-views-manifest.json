@@ -1,0 +1,33 @@
+{
+ "format": "incant-0070-next-repair-model-views-v1",
+ "note": "CPU model planes (screen.py), not renders or screenshots; no acceptance evidence.",
+ "outputs": {
+  "edge_slab_persp_D_C2.png": {
+   "description": "edge_slab perspective, darkening x6, x3: D (R1/R3) | C2",
+   "png_sha256": "3d6ce4448da0ccea1f42ceecb7869cb8738617a6146743535b26b75df133e003",
+   "size": [
+    768,
+    519
+   ]
+  },
+  "stripes_persp_D_C2_S16.png": {
+   "description": "stripes perspective, darkening x6, x3: D (R1/R3) | C2 | S16; red ticks: N8 ROI row 124",
+   "png_sha256": "18740283ce47e2efa31df5bad18cd63918342dc38e8fba39e84de3655df6e44b",
+   "size": [
+    1605,
+    519
+   ]
+  },
+  "white_slab_persp_D_C2.png": {
+   "description": "white_slab perspective, darkening x6, x3: D (R1/R3) | C2",
+   "png_sha256": "8e8eae94934735a2707e703b06cf5d11fec6579c530b2fb713ca0c65e777afe9",
+   "size": [
+    1212,
+    519
+   ]
+  }
+ },
+ "tool": {
+  "model_views.py": "ddc2d99c336f37db09025b4ba701e11b9c1d8264279ff71489829963ade12d91"
+ }
+}

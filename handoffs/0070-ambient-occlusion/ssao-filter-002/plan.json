@@ -1,0 +1,456 @@
+{
+ "format": "incant-0070-ssao-filter-plan-v1",
+ "packet": "0070-ambient-occlusion",
+ "namespace": "0070-ssao-filter-002",
+ "engine_commit": null,
+ "source_binding": {
+  "engine_candidate": "pending root's final pick: R1/R3 as measured (5dfc522ec164f2bc50d760f12db57eae233f33d8) or a repaired sampling candidate (next-repair-preparation.md)",
+  "freeze": "root commits the chosen engine on this branch, then runs make_plan.py --engine-commit <that commit>; the source freeze requires HEAD's engine inputs to equal it byte for byte",
+  "oracle_condition": "analyze_filter.py's oracle and quality model encode R1/R3's rotation and phase; a different sampling candidate needs the matching oracle change before the freeze, or its numeric gates fail by construction",
+  "previous_namespace": "0070-ssao-filter-001 stays latched on case-ssao_quality; nothing of it is reused"
+ },
+ "guard_regression": {
+  "build_child": "build-helper-guard-tests",
+  "command": "cargo test --manifest-path <helper>/Cargo.toml --lib -- sphere_guard (CPU only)",
+  "tests": [
+   "numeric::sphere_guard_tests::sphere_guard_fractional_rim_alone_is_not_sphere",
+   "numeric::sphere_guard_tests::sphere_guard_interior_disc_counts_within_tolerance",
+   "numeric::sphere_guard_tests::sphere_guard_tolerance_stays_ten_percent"
+  ],
+  "asserts": [
+   "the fractional viewport rim alone (601 canvas-blend texels) counts as no sphere",
+   "an interior disc of the analytic area counts exactly its texels in both projections",
+   "the coverage tolerance stays 10% (3419 fails, 2818 passes for perspective)"
+  ],
+  "rule": "the build records nothing unless exactly these three tests run and pass"
+ },
+ "tool_revision": {
+  "reused_tools": {
+   "handoffs/0070-ambient-occlusion/tools/runner.py": "a5adf3df71793090c03fa94e929e42eaea286ec5890119e189c19413d77c0189",
+   "handoffs/0070-ambient-occlusion/tools/common.py": "4fb9cdc5684bbf10dfd8ea6a532cc85ab59ea5dc7099adb599a1bb31ef5d528a",
+   "handoffs/0070-ambient-occlusion/tools/ledger.py": "1b1e8840b431e89c8aa75dc2fb69baf09eacc094d4f0d9a5a929e3a5a02d9b0a",
+   "handoffs/0070-ambient-occlusion/tools/lifecycle.py": "574db13f25dc27939b99becb7fdb5272b6b5734bcda694487d1e42b127e764a0",
+   "handoffs/0070-ambient-occlusion/tools/analyze.py": "91245f64046f7d1ddeeb4b5e1c5a524da4813a8ccfa0a58d2b35f84791831889",
+   "handoffs/0070-ambient-occlusion/tools/ssao_reference.py": "8b0f50eb7061d5f09ad53d4cd304569cfab06ace74745a8f2cb4e324971fbe0a"
+  },
+  "analyzer": {
+   "handoffs/0070-ambient-occlusion/ssao-repair/filter/analyze_filter.py": "d04732cdf32e27097c11da4f633e7663b1afd6c398c5ce4872e11d5c5b2a0207",
+   "handoffs/0070-ambient-occlusion/ssao-repair/filter/oracle.py": "bdc81363181da907eae789c06b6f00807c71d3db08bf0b5e62cdecba7bb5b8d4",
+   "handoffs/0070-ambient-occlusion/ssao-repair/filter/controls.py": "2b4794afc8d92856434c897f8af8bcb4a04410a0bd8a06780653f47967a3c1e0",
+   "handoffs/0070-ambient-occlusion/ssao-repair/filter/cases.json": "fa6d1076a08e54c47843f26367b51998a4035fd33a004495c480b4f31c5716d7",
+   "handoffs/0070-ambient-occlusion/ssao-repair/quality_model.py": "e7d083e55cf4d8b0c7c1527954a655f7d4230c6434ce143c5f30f44f2fa5c190",
+   "handoffs/0070-ambient-occlusion/ssao-repair/quality_report.py": "882953de7e9cc7fbdfde8c4440086b8b2a879b84d0cca1424ab08cea07646277",
+   "handoffs/0070-ambient-occlusion/ssao-repair/sphere_rise_bound.py": "e1bba7f144e5aa309dd88369bc5ab5e60146335b5539c5bcc966c358aa4fc93d"
+  }
+ },
+ "features": {
+  "lib_requested": [
+   "ssao-stage-readback"
+  ],
+  "lib_expected": [
+   "default",
+   "physics-deterministic",
+   "ssao-stage-readback"
+  ],
+  "helper_incant_render_expected": [
+   "default",
+   "physics-deterministic",
+   "ssao-stage-readback"
+  ],
+  "lib_cooked_requested": [
+   "cooked-materials",
+   "ssao-stage-readback"
+  ],
+  "lib_cooked_required": [
+   "cooked-materials",
+   "ssao-stage-readback"
+  ],
+  "note": "Test default shader features include the non-default diagnostic ssao-stage-readback; the build records the actual compiler-artifact features and refuses any other set."
+ },
+ "frame_rule": "One charged frame = one call that encodes a scene graph, display/output pass, text or UI pass, compute cluster grid, retained submit or composed game tick, including refused attempts. Readbacks/copies are not frames. Existing-test bounds are static counts from source review; helper cases count actual calls in-process and refuse beyond their declaration.",
+ "controls": [
+  {
+   "name": "filter_device",
+   "binary": "lib",
+   "test": "ambient_occlusion::filter_device_tests::actual_plane_filter_horizontal_vertical_depth_and_r8_contract",
+   "source": "crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+   "frames": 2,
+   "render_passes": 6,
+   "images": 0,
+   "required_before_cases": true,
+   "counted": "two 19x15 submissions, six render passes, no images (root, 9f3a6b03)"
+  },
+  {
+   "name": "ao_device",
+   "binary": "lib",
+   "test": "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output",
+   "source": "crates/incant_render/src/ambient_occlusion/device_tests.rs",
+   "frames": 7,
+   "images": 0,
+   "required_before_cases": true,
+   "counted": "3 sizes x (reference + AO frame) + empty scene"
+  },
+  {
+   "name": "ao_device_cooked",
+   "binary": "lib-cooked",
+   "test": "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output",
+   "source": "crates/incant_render/src/ambient_occlusion/device_tests.rs",
+   "frames": 0,
+   "images": 0,
+   "required_before_cases": false,
+   "optional": true,
+   "counted": "typed CookedMaterials refusal before any submission (cfg cooked-materials branch)"
+  }
+ ],
+ "numeric_cases": [
+  {
+   "name": "ssao_core",
+   "frames": 20,
+   "stage_frames": [
+    "p_ao_white",
+    "o_ao_white",
+    "p_ao_strength_0_5",
+    "p_ao_edge"
+   ],
+   "renderers": [
+    "off",
+    "ao",
+    "ao_radius_0_5",
+    "ao_strength_0_5"
+   ],
+   "route": "SceneInput + Renderer::prepare + with_camera + draw_scene, 321x193 Rgba8UnormSrgb, offset fractional viewport",
+   "covers": [
+    "perspective and orthographic receiver z=-4 / slab z=-3 with a side boundary",
+    "white diffuse on/off pairs and black specular-only (diffuse factor 0) pairs",
+    "isolated flat control, reversed normal sign, far slab, radius 0.5, strength 0.5",
+    "slab extending outside the frustum (single-layer screen-space limitation)"
+   ]
+  },
+  {
+   "name": "ssao_materials",
+   "frames": 10,
+   "stage_frames": [],
+   "renderers": [
+    "off",
+    "ao"
+   ],
+   "route": "SceneInput + draw_scene, perspective",
+   "covers": [
+    "direct-only (environment intensity 0, directional light)",
+    "emissive-only",
+    "BLEND-only",
+    "opaque receiver with BLEND slab (not an occluder)",
+    "opaque receiver/slab then BLEND pane (bind-group/pipeline switch under a validation scope)"
+   ]
+  },
+  {
+   "name": "ssao_geometry",
+   "frames": 17,
+   "stage_frames": [
+    "g_ao_white",
+    "g_ao_mask_equal",
+    "g_ao_mask_cutout",
+    "g_ao_backface",
+    "g_ao_mirrored",
+    "g_ao_skin_t0",
+    "g_ao_skin_t1",
+    "g_ao_motion_far",
+    "g_ao_motion_near"
+   ],
+   "renderers": [
+    "off",
+    "ao"
+   ],
+   "route": "SceneInput + draw_scene and RetainedScene::submit",
+   "covers": [
+    "MASK alpha equal to cutoff, below cutoff and textured cutout",
+    "double-sided back-facing receiver",
+    "mirrored receiver instance",
+    "nonuniform + mirrored tilted flat analytic control (no self-occlusion)",
+    "retained skinned slab deformation vs baked far/near oracles",
+    "retained instance motion"
+   ]
+  },
+  {
+   "name": "lifecycle_drs",
+   "frames": 18,
+   "stage_frames": [],
+   "renderers": [
+    "off",
+    "ao",
+    "bloom",
+    "both"
+   ],
+   "route": "draw_scene queued out of order; RetainedScene::set_dynamic_resolution fixed 16/12/8",
+   "covers": [
+    "alternating odd sizes, out-of-order submission, dropped scene/assets/source files",
+    "invalid viewport and invalid AO/bloom configuration followed by a valid frame",
+    "SSAO DRS 100/75/50 vs disabled and nearest expansion of internal-size references",
+    "bloom DRS 100/75/50 halo centered on the physical emitter"
+   ]
+  },
+  {
+   "name": "ssao_quality",
+   "frames": 10,
+   "stage_frames": [
+    "p_ao_stripes",
+    "o_ao_stripes"
+   ],
+   "renderers": [
+    "off",
+    "ao"
+   ],
+   "route": "SceneInput + Renderer::prepare + with_camera + draw_scene, 321x193 Rgba8UnormSrgb, offset fractional viewport",
+   "covers": [
+    "isolated gltf::sphere(24, 48) x 1.2 at view (0, 0, -3), gray 0.5: AO identity in both projections",
+    "N8 stripes: four 0.1-wide quads, pitch 0.3, y -0.5..1.5, z = -3, before the z = -4 receiver",
+    "white on/off and black basis per projection; stage planes for both AO-on stripe frames"
+   ]
+  }
+ ],
+ "not_run": {
+  "bloom_numeric": "bloom code unchanged by the filter; the DRS bloom centroid stays in lifecycle_drs",
+  "full_lib_gpu_suite": "not repeated; prior qualified unaffected areas remain evidence"
+ },
+ "appearance": {
+  "renders": 16,
+  "pngs": 16,
+  "pairs": 11,
+  "max_extent": [
+   960,
+   540
+  ],
+  "route": "canonical composed host (HostedOfflineGameSession + NativeRenderHost + GpuRenderConsumer), offscreen target, tick 1",
+  "effects": {
+   "ao": {
+    "radius": 2.0,
+    "bias": 0.01,
+    "strength": 1.0
+   },
+   "bloom": {
+    "threshold": 1.0,
+    "intensity": 0.5,
+    "levels": 6
+   }
+  },
+  "views": [
+   {
+    "view": "v1",
+    "projection": "perspective",
+    "size": [
+     959,
+     539
+    ],
+    "viewport": "offset",
+    "ui": true,
+    "variants": [
+     "off",
+     "ssao",
+     "bloom",
+     "both"
+    ]
+   },
+   {
+    "view": "v2",
+    "projection": "orthographic",
+    "size": [
+     960,
+     540
+    ],
+    "viewport": "none",
+    "ui": false,
+    "variants": [
+     "off",
+     "ssao",
+     "bloom",
+     "both"
+    ]
+   },
+   {
+    "view": "v3",
+    "projection": "perspective",
+    "size": [
+     959,
+     539
+    ],
+    "viewport": "offset",
+    "ui": true,
+    "variants": [
+     "off@12",
+     "both@12",
+     "off@8",
+     "both@8"
+    ]
+   },
+   {
+    "view": "v4",
+    "projection": "close-up",
+    "size": [
+     640,
+     480
+    ],
+    "viewport": "none",
+    "ui": false,
+    "variants": [
+     "off",
+     "ssao",
+     "bloom",
+     "both"
+    ]
+   }
+  ]
+ },
+ "analysis": {
+  "after": "release (never before; quality results never affect device work)",
+  "command": "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/analyze.py <evidence-dir>",
+  "analyzer": "handoffs/0070-ambient-occlusion/ssao-repair/filter/analyze_filter.py",
+  "entry": "handoffs/0070-ambient-occlusion/ssao-filter-002/analyze.py binds analyze_filter.py's plan check to this namespace's plan.json",
+  "note": "Numerical gates and the original quality gates (N6 authored, N7, N8 stripes ROI) are all recorded; the predicted N6 and N8-perspective failures are reported as failed quality, never as a device-work failure. N6T is a diagnostic."
+ },
+ "budgets": {
+  "gpu_children_max": 9,
+  "children_planned": {
+   "controls": 3,
+   "numeric": 5,
+   "appearance": 1,
+   "focused_retries_reserved": 0
+  },
+  "existing_frames_max": 0,
+  "new_frames_max": 128,
+  "combined_frames_max": 128,
+  "existing_frames_planned": 0,
+  "new_frames_planned": {
+   "controls": 9,
+   "numeric": 75,
+   "appearance": 16,
+   "total": 100,
+   "unallocated": 28
+  },
+  "pngs_max": 32,
+  "pairs_max": 16,
+  "max_extent": [
+   960,
+   540
+  ],
+  "execution_seconds_max": 2700,
+  "build_jobs_max": 2
+ },
+ "timeouts_s": {
+  "control": {
+   "filter_device": 60,
+   "ao_device": 120,
+   "ao_device_cooked": 60
+  },
+  "numeric": 150,
+  "appearance": 300
+ },
+ "timeouts_basis": "Watchdogs, not measurements; their sum (1290 s) stays under the 2700 s ceiling.",
+ "environment": {
+  "build": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "forwarded_unchanged_if_set": [
+    "HOME",
+    "CARGO_HOME",
+    "RUSTUP_HOME"
+   ],
+   "granted": [
+    "CARGO_TARGET_DIR"
+   ],
+   "private": [
+    "TMPDIR"
+   ],
+   "fixed": {
+    "CARGO_TERM_COLOR": "never",
+    "CARGO_INCREMENTAL": "0",
+    "LC_ALL": "C"
+   }
+  },
+  "run": {
+   "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+   "private": [
+    "TMPDIR"
+   ],
+   "fixed": {
+    "RUST_BACKTRACE": "1",
+    "LC_ALL": "C"
+   },
+   "granted": [
+    "INCANT_EXPECT_GPU_BACKEND"
+   ],
+   "inherited_descriptors": [
+    "the shared native GPU lock"
+   ]
+  },
+  "spawn_gate": "The leader starts as this Python interpreter (-I -S -B) blocked on a pipe; its exact identity is recorded before the runner sends the exact environment, and only then does it exec the program. A gate that never opens exits 125.",
+  "never": [
+   "INCANT_* (except INCANT_EXPECT_GPU_BACKEND)",
+   "WGPU_*",
+   "TRACY_*",
+   "RUSTFLAGS",
+   "RUSTDOCFLAGS",
+   "RUSTC",
+   "CARGO_ENCODED_*",
+   "RUSTC_WRAPPER",
+   "RUSTC_WORKSPACE_WRAPPER",
+   "RUSTUP_TOOLCHAIN",
+   "CARGO_BUILD_*",
+   "CARGO_FEATURE_*",
+   "CARGO_PROFILE_*",
+   "CARGO_TARGET_* (except CARGO_TARGET_DIR)",
+   "account/provider variables"
+  ]
+ },
+ "shared_gpu_lock": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/native-gpu.lock",
+  "protocol": "flock(2) LOCK_EX|LOCK_NB, taken before the grant preflight and the packet lock and held through reservation, launch, kill+wait, completion and unlock; released by closing, never LOCK_UN; device children inherit the descriptor. Other packets must flock the same path to be excluded."
+ },
+ "reviewed_repo_cargo_config_sha256": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
+ "grants": {
+  "build": {
+   "format": "incant-0070-ssao-filter-002-build-grant-v1",
+   "required": [
+    "packet",
+    "namespace",
+    "kind=build",
+    "source_commit",
+    "engine_commit",
+    "plan_sha256",
+    "helper_digest",
+    "evidence_dir (an existing <EVIDENCE_ROOT>/0070-ssao-filter-002)",
+    "cargo_target_dir",
+    "max_jobs<=2",
+    "approved_cargo_configs {absolute path: sha256}"
+   ]
+  },
+  "gpu": {
+   "format": "incant-0070-ssao-filter-002-gpu-grant-v1",
+   "required": [
+    "packet",
+    "namespace",
+    "kind=gpu",
+    "source_commit",
+    "engine_commit",
+    "plan_sha256",
+    "helper_digest",
+    "evidence_dir (the same 0070-ssao-filter-002 directory)",
+    "build_record_sha256",
+    "expected_backend (Metal|Vulkan|Dx12)"
+   ]
+  }
+ },
+ "sequence": [
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py build --grant <evidence>/build-grant.json   (includes the CPU guard regression)",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py release-build --grant <evidence>/build-grant.json",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py control --grant <evidence>/gpu-grant.json filter_device",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py control --grant <evidence>/gpu-grant.json ao_device",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py control --grant <evidence>/gpu-grant.json ao_device_cooked",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py case --grant <evidence>/gpu-grant.json ssao_core",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py case --grant <evidence>/gpu-grant.json ssao_materials",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py case --grant <evidence>/gpu-grant.json ssao_geometry",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py case --grant <evidence>/gpu-grant.json lifecycle_drs",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py case --grant <evidence>/gpu-grant.json ssao_quality",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py appearance --grant <evidence>/gpu-grant.json",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/filter_runner.py release --grant <evidence>/gpu-grant.json   (always, also after any failure)",
+  "python3 -I -B handoffs/0070-ambient-occlusion/ssao-filter-002/analyze.py <evidence>"
+ ]
+}
