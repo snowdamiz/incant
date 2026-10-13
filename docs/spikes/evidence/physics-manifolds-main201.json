@@ -414,5 +414,9 @@
     "All33 crate source/test/manifest files equal the reviewed producer; the older producer lock differs by already-merged profiling packages/edges; lock is unchanged from currentmain201.",
     "No live constructor, whole-owner authentication, reciprocal solver/island ownership, physics-save admission, GPU, shipping, device or performance claim."
   ],
-  "review_state": "Final manifold integration acceptance pending"
+  "review_state": "Final current-main integration independently accepted; publication requires exact-head fast check",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-manifolds-main201/final-review.json",
+    "sha256": "f4df6411325219c207ba9afb6738e3425e9c0536354366270c320cd8499784d6"
+  }
 }

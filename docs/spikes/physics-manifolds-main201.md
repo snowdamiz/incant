@@ -22,7 +22,8 @@ commands, source identities and receipts are in the
 
 [Second source review](evidence/physics-manifolds-main201/independent-source-review.json)
 and [producer final acceptance](evidence/physics-manifolds-main201/producer-final-review.json)
-are retained. Final current-main integration review is pending.
+are retained. [Final current-main integration acceptance](evidence/physics-manifolds-main201/final-review.json)
+independently verifies the packet. Publication remains subject to the exact-head fast check.
 
 This remains an inert structural format. Pending-mutation journals explicitly
 refuse; caller-supplied phase labels do not authenticate the world. Whole-owner

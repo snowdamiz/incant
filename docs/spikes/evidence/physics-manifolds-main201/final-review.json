@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-13T05:45:54.780596+00:00",
+  "decision": "accepted",
+  "candidate": "9b81fa8ae929e9467512f4031523181f898e8be9",
+  "tested_source": "1da75a94f754ce7f9f914d0e9f655f759fa21aa1",
+  "main": "ebccdfda1f41a0409eb3a566f06bb174d23cfd34",
+  "producer": "7ca4dd872c7d97c66829c60a360218071d187bb1",
+  "manifest_sha256": "a5a45e69b9341285864f096a61009b4519ef9ddd6e7b502d45fbb6b09118ee23",
+  "review": "Read collector; verify-only passed. Independently decoded19records/10payloads exact raw originals. All33crate inputs equal reviewed producer; Cargo.lock equals main201; only9 expected physics paths changed. Eight local checks passed including79CPU.",
+  "limits": [
+    "Inert current contact graph/manifold support only; full save continuation not enabled.",
+    "No device/performance/phase gate."
+  ],
+  "next": "Publish scoped PR and merge after exact-head required fast SUCCESS."
+}
