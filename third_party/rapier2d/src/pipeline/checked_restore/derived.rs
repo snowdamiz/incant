@@ -1,42 +1,13 @@
-use super::{AdmissionError as E, Result, convert::*};
+use super::{AdmissionError as E, Result, convert::*, derived_shape::DerivedShape};
 use crate::dynamics::{
     LockedAxes, MassProperties, RigidBodyForces, RigidBodyMassProps, RigidBodyVelocity,
 };
 use incant_physics_snapshot::{
-    AdditionalMass, BodyKind, CcdCache, ColliderEnabled, ColliderMass, GeometryKind, Primitive,
-    WorldBoundary,
+    AdditionalMass, BodyKind, CcdCache, ColliderEnabled, ColliderMass, WorldBoundary,
 };
 use parry::bounding_volume::BoundingVolume;
-use parry::shape::{Ball, Capsule, Cuboid, Shape};
 
-enum PrimitiveShape {
-    Box(Cuboid),
-    Ball(Ball),
-    Capsule(Capsule),
-}
-impl PrimitiveShape {
-    fn new(p: Primitive) -> Self {
-        match p {
-            Primitive::Box { half_extents } => Self::Box(Cuboid::new(v(half_extents))),
-            Primitive::Ball { radius } => Self::Ball(Ball::new(f32::from_bits(radius))),
-            Primitive::CapsuleY {
-                half_height,
-                radius,
-            } => Self::Capsule(Capsule::new_y(
-                f32::from_bits(half_height),
-                f32::from_bits(radius),
-            )),
-        }
-    }
-    fn shape(&self) -> &dyn Shape {
-        match self {
-            Self::Box(v) => v,
-            Self::Ball(v) => v,
-            Self::Capsule(v) => v,
-        }
-    }
-}
-fn collider_mass(m: ColliderMass, s: &dyn Shape) -> MassProperties {
+fn collider_mass(m: ColliderMass, s: &DerivedShape<'_>) -> MassProperties {
     // Exact ColliderMassProps::mass_properties order, including zero sentinels.
     match m {
         ColliderMass::Density(bits) => {
@@ -71,14 +42,12 @@ pub(super) fn admit(frame: WorldBoundary<'_>) -> Result<()> {
         .zip(c.geometries)
         .enumerate()
     {
-        if g.record().kind != GeometryKind::Primitive {
-            return Err(E::UnsupportedGeometry);
-        }
         if co.active_hooks != 0 {
             return Err(E::UnsupportedHooks);
         }
-        let shape = PrimitiveShape::new(g.record().parts[0].shape);
-        let bounds = shape.shape().compute_aabb(&pose(co.position));
+        let shape = DerivedShape::new(g)?;
+        shape.validate()?;
+        let bounds = shape.compute_aabb(&pose(co.position));
         if !bounds.mins.is_finite() || !bounds.maxs.is_finite() {
             return Err(E::Arithmetic);
         }
@@ -99,8 +68,8 @@ pub(super) fn admit(frame: WorldBoundary<'_>) -> Result<()> {
                 continue;
             }
             let parent = a.record().colliders[row].ok_or(E::Identity)?;
-            let shape = PrimitiveShape::new(c.geometries[row].record().parts[0].shape);
-            local += collider_mass(co.mass, shape.shape()).transform_by(&pose(parent.local_pose));
+            let shape = DerivedShape::new(&c.geometries[row])?;
+            local += collider_mass(co.mass, &shape).transform_by(&pose(parent.local_pose));
         }
         // Exact recompute_mass_properties_from_colliders branches and ordering.
         match body.mass.additional {
@@ -119,9 +88,8 @@ pub(super) fn admit(frame: WorldBoundary<'_>) -> Result<()> {
                             continue;
                         }
                         let parent = a.record().colliders[row].ok_or(E::Identity)?;
-                        let shape = PrimitiveShape::new(c.geometries[row].record().parts[0].shape);
+                        let shape = DerivedShape::new(&c.geometries[row])?;
                         unit += shape
-                            .shape()
                             .mass_properties(1.)
                             .transform_by(&pose(parent.local_pose));
                     }
@@ -144,9 +112,8 @@ pub(super) fn admit(frame: WorldBoundary<'_>) -> Result<()> {
                 continue;
             }
             let parent = a.record().colliders[row].ok_or(E::Identity)?;
-            let shape = PrimitiveShape::new(c.geometries[row].record().parts[0].shape);
+            let shape = DerivedShape::new(&c.geometries[row])?;
             let sphere = shape
-                .shape()
                 .compute_local_bounding_sphere()
                 .transform_by(&pose(parent.local_pose));
             let next = (sphere.center - local.local_com).length() + sphere.radius;
@@ -216,11 +183,10 @@ pub(super) fn admit(frame: WorldBoundary<'_>) -> Result<()> {
         for t in targets {
             let row = a.collider_row(t.collider).ok_or(E::Identity)? as usize;
             let co = &colliders.record().colliders[row];
-            let shape = PrimitiveShape::new(c.geometries[row].record().parts[0].shape);
+            let shape = DerivedShape::new(&c.geometries[row])?;
             // CCD fixed target cache uses its historical prediction directly,
             // without collision skin or the broad-phase half-prediction rule.
             let bounds = shape
-                .shape()
                 .compute_aabb(&pose(co.position))
                 .loosened(f32::from_bits(*prediction));
             if !bounds.mins.is_finite() || !bounds.maxs.is_finite() {

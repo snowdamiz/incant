@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "at": "2026-10-13T21:45:21.863762+00:00",
+  "result": "accepted scoped final CPU evidence",
+  "producer": "9b8d58863ac7fede21086c0b7aec25e5f577a1d5",
+  "manifest_sha256": "a82fa06ef1f856c9a2da68573b4c37d9b695ca29c4d38f841d32616dd4489483",
+  "collector_sha256": "65f4e73703ce8f28b8293ee31a0b5c40c5ca968cb2e6a6baa834e2f9b3d875ab",
+  "records": 75,
+  "owned_sources": 79,
+  "immediate_binaries": 174,
+  "current_inputs": 3155,
+  "prior_inputs": 3139,
+  "main250_changed_inputs": [
+    "crates/incant_game_runtime/Cargo.toml",
+    "crates/incant_game_runtime/src/core.rs",
+    "crates/incant_game_runtime/src/hosted.rs",
+    "crates/incant_game_runtime/src/lib.rs",
+    "crates/incant_game_runtime/src/offline.rs",
+    "crates/incant_script/Cargo.toml",
+    "crates/incant_script/build.rs",
+    "crates/incant_script/src/checkpoint/mod.rs",
+    "crates/incant_script/src/checkpoint/pending.rs",
+    "crates/incant_script/src/checkpoint/tests.rs",
+    "crates/incant_script/src/lib.rs"
+  ],
+  "main250_added_inputs": [
+    "crates/incant_game_runtime/src/native_checkpoint.rs",
+    "crates/incant_game_runtime/src/native_checkpoint/hosted.rs",
+    "crates/incant_game_runtime/src/native_checkpoint/offline.rs",
+    "crates/incant_game_runtime/tests/native_checkpoints.rs",
+    "crates/incant_game_runtime/tests/native_checkpoints/cases.rs",
+    "crates/incant_game_runtime/tests/native_checkpoints/ui.rs",
+    "crates/incant_script/src/checkpoint/native.rs",
+    "crates/incant_script/src/checkpoint/native/hosted.rs",
+    "crates/incant_script/src/checkpoint/native/prepare.rs",
+    "crates/incant_script/src/checkpoint/native/tests.rs",
+    "crates/incant_script/src/checkpoint/native/tests/hosted.rs",
+    "crates/incant_script/src/checkpoint/native/tests/hosted/audio.rs",
+    "crates/incant_script/src/checkpoint/native/tests/hosted/ui.rs",
+    "crates/incant_script/src/checkpoint/native/tests/physics.rs",
+    "crates/incant_script/src/checkpoint/native/tests/refusals.rs",
+    "crates/incant_script/src/checkpoint/pending/native.rs"
+  ],
+  "tests": {
+    "union-002-det": {
+      "tests": 538,
+      "groups": 67,
+      "copied": 67
+    },
+    "union-002-fast8": {
+      "tests": 538,
+      "groups": 67,
+      "copied": 67
+    },
+    "consumers-001-det": {
+      "tests": 238,
+      "groups": 17,
+      "copied": 17
+    },
+    "consumers-001-fast8": {
+      "tests": 238,
+      "groups": 17,
+      "copied": 17
+    }
+  },
+  "retained_reviews": {
+    "reviews/outer-compound-source-root-20261013.json": "e3d0b8b02479e1e579c45b554bcb8226f70c4d6b75c317bdb82809cc6228e8c4",
+    "reviews/parry-compound-final-root-20261013.json": "696fdc045cf8211d4cfbab28314801f01ecefa101c1c2f6a2807880ef09c2fd4",
+    "reviews/parry-compound-source-root-20261013.json": "7835ca0d553088dc3c53b160d27b5867dee5d11949254be61b7d8253a3b82073",
+    "reviews/physics-compound-rapier-final-source-20261013.json": "b9169e9d623898c6e6831dfb66c8a531f5a40b1eb6abeb6590839575298b7f6f",
+    "reviews/physics-compound-rapier-source-20261013.json": "58470e63e7211da4039003e100e3c7bc24580b7d405548350424fce898ab56b3",
+    "reviews/physics-compound-schema-source-independent-20261013.json": "eff32a9b9ad95ee24b2cf30f783f27c53d9bd3470d9547d43b5322c124572994",
+    "reviews/rapier-compound-final-root-20261013.json": "53fa4f110c63918a03135bb2bfa0ff89cc9580f796f1d822aaac19a999afb1dd"
+  },
+  "unchanged_tree_ancestry_merges": [
+    "97bd21af81cf9444a6563d6c54a6c32d77d8c583",
+    "46d957191b23e606280ba6eb658bd88d0979e06c"
+  ],
+  "findings": [],
+  "review": "Read full union collector and command runners, scopes and retained independent source reviews; independently decoded/rehashed all raw originals, sources, immediate binary copies and generation joins. Replayed union plus separate Parry/Rapier portable/original/binary verifiers. Actual native mode/compiler identities and full unfiltered result counts verified. No builds or runtime executions performed by reviewer.",
+  "limits": [
+    "Public persisted physics bytes remain refused.",
+    "SIMD8 workspace preserves canonical logical keys, not physical hash buckets.",
+    "Prior observer failure and wrong-edition formatting failure retained.",
+    "Main251 disjoint test-only join requires separate current composition record.",
+    "No GPU, exported-player, device, shipping-performance or phase completion claim."
+  ]
+}

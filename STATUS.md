@@ -1,6 +1,10 @@
 # Implementation status
 
-Checkpoint29 remains frozen on candidate `74e77456` after a Linux source-store lock test failed at immediate drop/reopen. A controlled inherited-descriptor diagnostic proves a possible `WouldBlock` mechanism; the hosted error was not printed, so its cause remains inferred. The reviewed one-file test isolation preserves production and all exclusivity assertions. Ten source-store cases, strict Clippy and ten concurrent repetitions pass; independent final evidence review is accepted and publication awaits the required fast check. No release promotion or repaired hosted-success claim. [Evidence](docs/spikes/source-lock-test-isolation.md).
+Compound and tile opaque checkpoints have accepted source reviews and passing CPU qualification: 538 snapshot/physics/ECS cases per numerical mode, followed by 238 script/game cases per mode on the actual-main250 composition. Native Parry and Rapier suites pass separately. Eighteen current checks pass; independent final union review is accepted. Current-main251 composition preserves 3,155 inputs except the reviewed authoring test, matches three graphs and passes eight read-only checks; independent final composition review is accepted and publication awaits the required fast check. Public persisted physics stays closed. [Scope](docs/spikes/native-compound-checkpoints.md).
+
+Private Rapier regression qualification after lower compound integration and work precharge passed all 159 planar and 177 spatial unit tests in each of deterministic and SIMD8 modes, with no filtered or ignored cases. Both strict native-library Clippy checks passed; four immediately copied executables and the full source/graph/fixture ledger are retained. Independent final packet review is accepted. This CPU evidence does not qualify the outer game union or persisted physics saves. [Evidence](docs/spikes/rapier-compound-regressions.md).
+
+Checkpoint29 remains frozen on candidate `74e77456` after a Linux source-store lock test failed at immediate drop/reopen. A controlled inherited-descriptor diagnostic proves a possible `WouldBlock` mechanism; the hosted error was not printed, so its cause remains inferred. The reviewed one-file test isolation preserves production and all exclusivity assertions. Ten source-store cases, strict Clippy and ten concurrent repetitions pass; independent final evidence review is accepted and PR251 merged after its required exact-head fast check. No release promotion or repaired hosted-success claim. [Evidence](docs/spikes/source-lock-test-isolation.md).
 
 The complete game checkpoint producer is independently accepted: both numerical modes passed 39 game cases with real offline PCM continuation; the earlier 33 ordinary cases remain source002. Current composition binds all 3,667 producer inputs plus two evidence collectors, qualifies the six reviewed main248 repairs and passes fourteen read-only checks. Independent final composition review is accepted, hosted PR249 is merged and the actual-main249 join changes no implementation/build/tool input. PR250 merged after its exact-head required fast SUCCESS. The feature stays default-off and public persisted physics remains closed. [Scope](docs/spikes/native-game-main248.md).
 
@@ -273,9 +277,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main250, 2026-10-13
+## Current overview — main251, 2026-10-13
 
-Development main250 includes the reviewed opt-in cooked renderer families and
+Development main251 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -2722,3 +2726,5 @@ has strict native/wasm compilation, with the source009 test generations retained
 separately. Final producer execution and current-main source composition reviews are accepted. PR244 merged after its required exact-head fast check; outer runtime integration remains separate.
 Public persisted physics saves remain refused. See
 [scope and evidence](docs/spikes/physics-native-capture-owner.md).
+
+- Historical outer compound/tile checkpoint preparation: its 12 focused CPU controls on main246 ancestry are superseded by the accepted full native union above (538 physics/ECS plus 238 script/game cases per mode). Persisted physics save bytes remain refused. See `docs/spikes/outer-compound-checkpoints.md`.

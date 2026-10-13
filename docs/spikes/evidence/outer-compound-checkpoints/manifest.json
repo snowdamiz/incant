@@ -1,0 +1,195 @@
+{
+  "base": "42e13e75c3768dcc88783543ec573ce875850e00",
+  "source002_sha256": "46385e0bc867a9b7266f07a9de26b07f9efcfb17a6f8235f176fd385b04bc93b",
+  "sources": [
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint.rs",
+      "sha256": "46f2814eb16913bc0d0a17d9c5842fd0be61371658e974e38d253c87c47ea3f8",
+      "bytes": 11431
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint/tests.rs",
+      "sha256": "fbcfed0b6309856b8a4e5117eb2e7920bc1dadb4bf78f19b9b3f45e4db2e4b16",
+      "bytes": 10183
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint/tests/tiles.rs",
+      "sha256": "626940957a9c6ad4139f85045735bd3c5605e071911a7769d2775eaf69af2ada",
+      "bytes": 3919
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint_validation.rs",
+      "sha256": "84a5005cb637fa4ea0d33de109fa18fc9a06f47078ff9224542f6b63acb3a520",
+      "bytes": 9555
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint_validation/tests.rs",
+      "sha256": "c335a09727e30e5e1307a79c7b2fa93c7351ca358745d4584215355dc4bf9241",
+      "bytes": 5420
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/lib.rs",
+      "sha256": "73cbe3da26aa3502f052de81acfcc6811200f301846533c26b926e17ca9d2a89",
+      "bytes": 13748
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint.rs",
+      "sha256": "67c181cb0eea746aa05a9232247d014bb85967f9ca3e8014d9e68c40c4836460",
+      "bytes": 12472
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint/tests.rs",
+      "sha256": "8d416ffe51136370bf6f8ffa637d1a2b35dc5d5fdbf159c3f008a16e8d739cc0",
+      "bytes": 10024
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint/tests/compound.rs",
+      "sha256": "0fb602814fc9d34ab45b84fddfae9550adb982bbf93a19ee81f8909c5de2505d",
+      "bytes": 4579
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint_validation.rs",
+      "sha256": "29d7e492332eb92f3246aadd9bb43a5e6124a08d98cbe767438870c8d1974a52",
+      "bytes": 9933
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint_validation/tests.rs",
+      "sha256": "6b62f546aa50f73be0f69cfc9d6656cd175243a4b54ee22df7eca1da5ee6937c",
+      "bytes": 6570
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint.rs",
+      "sha256": "387877e8a38f235bf12a7aadc3342c270057c7717173ad68ae596645b4dd182d",
+      "bytes": 9220
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint/tests.rs",
+      "sha256": "26a9d0a99a426d74af878726cf58e0246ba06acb5e1c727552cdd3fe27495264",
+      "bytes": 17833
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint/tests/compound_tiles.rs",
+      "sha256": "29dc45268755aca14aef8b0323c38b85477dc39a644fd6e7c6e29445a482d47a",
+      "bytes": 5769
+    },
+    {
+      "path": "crates/incant_runtime/src/save/checkpoint/validation.rs",
+      "sha256": "ac2a0c2c315f23ff70e57b795ec1e8fb02d2d3fe8de3b68625142fa66ed896d5",
+      "bytes": 7547
+    }
+  ],
+  "archive_sha256": "2b8452324ac6df50c84b5a8a9592b2d3f6437ef28ec5c715f1f8a1c65fd85989",
+  "records": 44,
+  "checks": [
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--lib",
+        "checkpoint_validation::tests",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "exit_code": 0,
+      "seconds": 36.26849875001062,
+      "log_sha256": "973c6dc7988c203d8365c2fd1cff4f7f9f3b506e6f6bafeff65535cb7df63431",
+      "source_freeze_sha256": "b8f412732d5919965864cbc3d734e1562c159d0f81b78efdcbc326323157220f"
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--lib",
+        "--features",
+        "incant_physics_runtime/native-checkpoints,incant_physics_2d_runtime/native-checkpoints",
+        "configuration_copy",
+        "--",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "exit_code": 0,
+      "seconds": 36.50699945799715,
+      "log_sha256": "0b9b83f3c7fbcb4103377c09c90b6efbdac62add81f5b9e74ec445e9d8b087c9",
+      "source_freeze_sha256": "b8f412732d5919965864cbc3d734e1562c159d0f81b78efdcbc326323157220f"
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "--features",
+        "native-checkpoints",
+        "--lib",
+        "save::checkpoint::tests::compound_tiles::tile_checkpoint_binding_refuses_map_and_membership_drift_before_publication",
+        "--",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "exit_code": 0,
+      "seconds": 47.7024282499915,
+      "log_sha256": "a273a384f7d91a05d96a813dc6078f2fd161cb8bea18ea72a6dba288a3be6d68",
+      "source_freeze_sha256": "b8f412732d5919965864cbc3d734e1562c159d0f81b78efdcbc326323157220f"
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--offline",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_runtime",
+        "--features",
+        "native-checkpoints",
+        "--lib",
+        "save::checkpoint::tests::compound_tiles::tile_checkpoint_binding_refuses_map_and_membership_drift_before_publication",
+        "--",
+        "--exact",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/outer-compound-checkpoints/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "exit_code": 0,
+      "seconds": 14.950182041997323,
+      "log_sha256": "98083bb229a79bd37a642078e5c3cc89918374de1d44472f77cb36903a0da302",
+      "source_freeze_sha256": "46385e0bc867a9b7266f07a9de26b07f9efcfb17a6f8235f176fd385b04bc93b"
+    }
+  ],
+  "unique_focused_tests": 12,
+  "claims": "Focused current default-mode native geometry joins, budget/copy API controls and early ECS tile binding refusal. Source002 only removes a test mut qualifier after first passing warning-bearing ECS run. Full compound/tile native checkpoint continuations are authored/compiled but NOT executed, require lower native compound implementation. No broad mode/Clippy/GPU/device/public-byte-save claim."
+}

@@ -113,3 +113,6 @@ mod simd {
 /// Actual linked native source and feature identity; no restore authority.
 #[cfg(feature = "incant-checked-restore")]
 pub mod checkpoint_identity;
+
+#[cfg(all(test, feature = "incant-checked-restore"))]
+mod checkpoint_allocation_tests;

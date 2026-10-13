@@ -210,3 +210,6 @@ mod contact_manifolds_voxels_shape;
 mod contact_manifolds_voxels_voxels;
 mod contact_manifolds_workspace;
 mod normals_constraint;
+
+#[cfg(feature = "incant-checked-restore")]
+mod checkpoint;

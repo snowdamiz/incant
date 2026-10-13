@@ -58,7 +58,7 @@ impl NativeWorld {
         if self.physics_failed {
             return Err(WorldCheckpointError::Owner("failed world"));
         }
-        validation::bindings(self)?;
+        validation::bindings(self, planar_work, spatial_work)?;
         // A physics tick advances both dimensions, including an empty planar
         // owner in a 3D-only world. Declaration history is a separate flag.
         let stepped = self.physics_used || self.physics_2d_used;
@@ -165,10 +165,11 @@ impl WorldCheckpoint {
         let scene = CookedScene::from_bytes(decoded.scene).map_err(SaveError::from)?;
         if (!scene.physics().is_empty() && self.spatial.is_none())
             || (!scene.physics_2d().is_empty() && self.planar.is_none())
-            || scene
-                .spatial()
-                .iter()
-                .any(|n| n.tilemap.as_ref().is_some_and(|m| m.has_collision()))
+            || (self.planar.is_none()
+                && scene
+                    .spatial()
+                    .iter()
+                    .any(|n| n.tilemap.as_ref().is_some_and(|m| m.has_collision())))
         {
             return Err(WorldCheckpointError::Owner("missing native owner"));
         }
@@ -197,7 +198,7 @@ impl WorldCheckpoint {
         candidate.ik_catalog = Arc::clone(&self.ik_catalog);
         candidate.root_catalog = Arc::clone(&self.root_catalog);
         validation::restore_planar_cache(&mut candidate, &self.planar_rotations)?;
-        validation::bindings(&candidate)?;
+        validation::bindings(&candidate, planar_work, spatial_work)?;
         Ok(candidate)
     }
 }

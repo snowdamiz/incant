@@ -4,7 +4,7 @@ use super::*;
 use incant_physics_snapshot::{
     Budget, Error as RecordError, MAX_ITEMS, construction::AllocationBudget,
 };
-use incant_types::{ColliderShape, StableId};
+use incant_types::{ColliderPart, ColliderShape, StableId};
 use rapier3d::pipeline::checked_restore::{
     WorkBudget,
     capture::{CaptureError, NativeFrame},
@@ -35,18 +35,81 @@ struct SavedScene {
     native: NativeFrame,
     entries: Vec<SavedEntry>,
 }
-/// Complete primitive scene owners plus stable IDs and committed observations.
+/// Complete supported scene owners plus stable IDs and committed observations.
 /// The capability stays in memory and has no Clone or bytes-to-value constructor.
 pub struct PhysicsCheckpoint {
     scenes: Vec<SavedScene>,
     overlaps: Vec<(StableId, StableId, StableId)>,
     events: Vec<TriggerEvent<StableId>>,
 }
-fn copy_config(value: &PhysicsSpec) -> Result<PhysicsSpec, CheckpointError> {
-    if matches!(value.collider.shape, ColliderShape::Compound { .. }) {
-        return Err(CheckpointError::Owner("compound checkpoint unsupported"));
+fn copy_config(value: &PhysicsSpec, budget: &mut Budget) -> Result<PhysicsSpec, CheckpointError> {
+    let shape = match &value.collider.shape {
+        ColliderShape::Compound { parts } => {
+            if !(1..=64).contains(&parts.len()) {
+                return Err(CheckpointError::Owner("compound part limit"));
+            }
+            let mut copied = budget.vector(parts.len())?;
+            for part in parts {
+                if part.id.len() != 26 {
+                    return Err(CheckpointError::Owner("compound part identity length"));
+                }
+                budget.charge(part.id.len())?;
+                let mut id = String::new();
+                id.try_reserve_exact(part.id.len())
+                    .map_err(|_| RecordError::Allocation)?;
+                id.push_str(&part.id);
+                copied.push(ColliderPart {
+                    id,
+                    translation: part.translation,
+                    rotation: part.rotation,
+                    shape: part.shape.clone(),
+                });
+            }
+            ColliderShape::Compound { parts: copied }
+        }
+        primitive => primitive.clone(),
+    };
+    Ok(PhysicsSpec {
+        body: value.body.clone(),
+        collider: DocCollider {
+            shape,
+            density: value.collider.density,
+            friction: value.collider.friction,
+            restitution: value.collider.restitution,
+            sensor: value.collider.sensor,
+            memberships: value.collider.memberships,
+            filter: value.collider.filter,
+        },
+        state: value.state.clone(),
+    })
+}
+// Precharge child/identity visits before declaration validation or deep copying.
+// The entry walk itself is already charged by charge_work. No shape construction
+// or native acceleration rebuild occurs at this outer boundary.
+fn charge_geometry<'a>(
+    configs: impl Iterator<Item = &'a PhysicsSpec>,
+    work: &mut WorkBudget,
+) -> Result<(), CheckpointError> {
+    let mut total = 0usize;
+    for config in configs {
+        if let ColliderShape::Compound { parts } = &config.collider.shape {
+            if !(1..=64).contains(&parts.len()) {
+                return Err(CheckpointError::Owner("compound part limit"));
+            }
+            total = total
+                .checked_add(parts.len())
+                .filter(|n| *n <= MAX_ITEMS)
+                .ok_or(CheckpointError::Owner("compound aggregate part limit"))?;
+            // Each valid ID has exactly 26 bytes; refuse longer strings before
+            // any character walk, comparison or clone.
+            work.charge(parts.len() as u64 * 32)
+                .map_err(CaptureError::from)?;
+            if parts.iter().any(|p| p.id.len() != 26) {
+                return Err(CheckpointError::Owner("compound part identity length"));
+            }
+        }
     }
-    Ok(value.clone())
+    Ok(())
 }
 fn charge<T>(count: usize, budget: &mut Budget) -> Result<(), RecordError> {
     budget.charge(
@@ -119,9 +182,10 @@ impl PhysicsRuntime<StableId> {
         }))
     }
 
-    /// Capture healthy completed primitive worlds under shared payload/work
-    /// budgets. Active/retained character query caches and compound shapes are
-    /// currently refused. Logical payload charging excludes allocator overhead.
+    /// Capture healthy completed supported worlds under shared payload/work
+    /// budgets. Active/retained character query caches remain refused. Compound
+    /// children and IDs are charged cumulatively; native admission independently
+    /// validates their acceleration state. Logical bytes exclude allocator overhead.
     pub fn checkpoint(
         &mut self,
         budget: &mut Budget,
@@ -138,6 +202,12 @@ impl PhysicsRuntime<StableId> {
             self.events.len(),
             work,
         )?;
+        charge_geometry(
+            self.scenes
+                .values()
+                .flat_map(|s| s.entries.values().map(|e| &e.config)),
+            work,
+        )?;
         charge_native_pairs(self, work)?;
         checkpoint_validation::validate(self).map_err(CheckpointError::Owner)?;
         let mut scenes = budget.vector(self.scenes.len())?;
@@ -148,7 +218,7 @@ impl PhysicsRuntime<StableId> {
                     id,
                     body: entry.body,
                     collider: entry.collider,
-                    config: copy_config(&entry.config)?,
+                    config: copy_config(&entry.config, budget)?,
                 });
             }
             scenes.push(SavedScene {
@@ -196,6 +266,12 @@ impl PhysicsCheckpoint {
             self.events.len(),
             work,
         )?;
+        charge_geometry(
+            self.scenes
+                .iter()
+                .flat_map(|s| s.entries.iter().map(|e| &e.config)),
+            work,
+        )?;
         if !self.scenes.windows(2).all(|w| w[0].id < w[1].id)
             || !self.overlaps.windows(2).all(|w| w[0] < w[1])
         {
@@ -235,7 +311,7 @@ impl PhysicsCheckpoint {
                     Entry {
                         body: row.body,
                         collider: row.collider,
-                        config: copy_config(&row.config)?,
+                        config: copy_config(&row.config, budget)?,
                     },
                 );
                 if scene.ids.insert(row.collider, row.id).is_some() {

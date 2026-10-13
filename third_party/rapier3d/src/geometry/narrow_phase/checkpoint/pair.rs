@@ -2,6 +2,7 @@ use super::*;
 use crate::geometry::contact_pair::ContactRecycleState;
 use crate::math::Rotation;
 use crate::pipeline::checked_restore::convert::pose;
+use parry::query::ContactManifoldsWorkspace;
 fn rotation(b: [u32; 4]) -> Rotation {
     #[cfg(feature = "dim2")]
     {
@@ -14,7 +15,12 @@ fn rotation(b: [u32; 4]) -> Rotation {
 }
 pub(super) fn plan(f: WorldBoundary<'_>) -> ConstructionResult<AllocationPlan> {
     let mut p = AllocationPlan::default();
-    for pair in &f.manifolds().record().pairs {
+    let pairs = f.broad().context().narrow.context().rigid.pairs();
+    let identity = f.pipeline().record().identity;
+    for (row, pair) in f.manifolds().record().pairs.iter().enumerate() {
+        p.append(ContactManifoldsWorkspace::checkpoint_plan(
+            pairs, row as u32, identity,
+        )?)?;
         for span in [pair.plain, pair.clusters] {
             p.append(AllocationPlan::array::<ContactManifold>(
                 span.count as usize,
@@ -62,7 +68,12 @@ pub(super) fn construct(
             solver_clusters_prev: Vec::new(),
             solver_color: s.solver_color as u8,
             solver_color_bodies: s.solver_color_bodies,
-            workspace: None,
+            workspace: ContactManifoldsWorkspace::from_checkpoint(
+                f.broad().context().narrow.context().rigid.pairs(),
+                row as u32,
+                f.pipeline().record().identity,
+                p,
+            )?,
             recycle_state: s.recycle.map(|s| ContactRecycleState {
                 pos12: pose(s.relative_pose),
                 rot1: rotation(s.rotations[0]),

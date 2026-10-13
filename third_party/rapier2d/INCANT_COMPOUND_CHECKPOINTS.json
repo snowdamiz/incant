@@ -1,0 +1,64 @@
+{
+  "format": "incant-native-compound-checkpoint-layer",
+  "version": 1,
+  "baseline": "42e13e75c3768dcc88783543ec573ce875850e00",
+  "feature": "incant-checked-restore",
+  "scope": "Closed flat compound and planar tile native capture, exact derived arithmetic and composite contact workspace reconstruction. Cumulative metadata/child work is precharged. Opaque in-memory only; no untrusted-byte importer or public physics save. Supersedes historical pins only for listed paths.",
+  "files": [
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/capture.rs",
+      "baseline_sha256": "bbd7ca0b9fc1a25a234cc80ff114240fe4d63fbcf3d4f28effd2daa1827dd9a5",
+      "sha256": "d25005b492f43f7d772de1ea4e486b5e0361dfd359aace36c541b443740b0474"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/mod.rs",
+      "baseline_sha256": "b9bbaba7a11814dc539f006a397ecc7b6ea77aeed9e2141fb41bf7b4842a74ed",
+      "sha256": "1704b93b50a45628f9e7dacd575577e85646fa735531be7f8141a99f36801e02"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/pair.rs",
+      "baseline_sha256": "2a33e5b6d1cfdeaf3838e259b00433c557a0a10ba56f898dbabd5efafd2da7a1",
+      "sha256": "77299d2c3c6325394755e3d0df3c920889be63a5094d15fd1f80a490ebe404b0"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/fields.rs",
+      "baseline_sha256": "47b4ac2892bba9ff64437ef814853626d9c898e0977da2b13eb81bf1231904fe",
+      "sha256": "c0451ce581183d833282fdfb3f745ced1ad910ce66de4b54c6715c57dc86bf59"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/fields_tests.rs",
+      "baseline_sha256": "127b759c1510e535a60062a31d011793921807495cc5fc7d764fd8fcff8274a7",
+      "sha256": "167ebacbe83f2c99aaec64829a661bcca458198c2f819e6858d1d7abb185b9b3"
+    },
+    {
+      "path": "src/pipeline/checked_restore/collider.rs",
+      "baseline_sha256": "a2ab0604c0d1cbd76482b76d3362d27f5f7b73f159c858fc139169c5863aae7b",
+      "sha256": "4c0bd6034959593f331bc8ad8067960b54bbae722dcd1cbe90e631743c04694a"
+    },
+    {
+      "path": "src/pipeline/checked_restore/derived.rs",
+      "baseline_sha256": "5d58ac1133af2b02120843c3aa3eb41ae49d2292a9cd611b13083da5360510ac",
+      "sha256": "90f0464117faafc9d73673b3b56e136eea5cfc313ff337f571b81e7a615abeca"
+    },
+    {
+      "path": "src/pipeline/checked_restore/derived_shape.rs",
+      "baseline_sha256": null,
+      "sha256": "442d72758c5bb8000ee6dc0656e4f805b7af50c3e226b55cf9322713547e60c3"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "baseline_sha256": "4094ea67dec97211f1c283f7636ca1f69cc20b0a2c4171dafa1fd7d7b75e4f31",
+      "sha256": "3720f52676970984c254683b9e980fa76e5b27d3c081e8044e9f7cd2c4030cd6"
+    },
+    {
+      "path": "src/pipeline/checked_restore/work.rs",
+      "baseline_sha256": "4edb58895776450c7d6eba792e2a0bd3530ec792482dc9b9c2f6492788bca0a0",
+      "sha256": "3bdf27e7cb6a2aabc7294e90f669035a92af055b3f42caa530f2b97ae6e821a6"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world.rs",
+      "baseline_sha256": "9fe528fc34bbc099a4b96095e209c0e7aec36939ea1b630efa38b406bf1f9392",
+      "sha256": "ab858f34ea6ad4967f9288d5a69c95deb2bfa2e9dd2de6260fe68630b3b7898d"
+    }
+  ]
+}

@@ -302,3 +302,5 @@ fn planar_checkpoint_configurations_refuse_tiles_before_yielding_primitive_rows(
     world.apply(vec![(id(9), None)]).unwrap();
     assert_eq!(world.checkpoint_configurations().unwrap().len(), 1);
 }
+
+mod tiles;

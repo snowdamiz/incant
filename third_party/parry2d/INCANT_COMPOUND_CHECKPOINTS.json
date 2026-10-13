@@ -1,0 +1,84 @@
+{
+  "format": "incant-compound-checkpoint-layer",
+  "version": 1,
+  "baseline": "42e13e75c3768dcc88783543ec573ce875850e00",
+  "feature": "incant-checked-restore",
+  "scope": "Exact typed compound acceleration and native composite workspace capture/construction; deterministic native map order and canonical fast key records. Supersedes historical pins only for listed paths. No generic world installer or physics file-save admission.",
+  "files": [
+    {
+      "path": "src/checkpoint_allocation_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "822e87f390102e2558d57a468a89c8a68b16cb2c5399a52108ccbc05ca01f234"
+    },
+    {
+      "path": "src/lib.rs",
+      "baseline_sha256": "5d67c86e6cea6634b585f42014ba248e4f01c0ce9ace87ff8cb389a4ef61a2a3",
+      "sha256": "0b682ab6682f125039879ccf32dc36bc12b9fda8b5bd52341f81e0dd2e9ad4ae"
+    },
+    {
+      "path": "src/query/contact_manifolds/checkpoint/double.rs",
+      "baseline_sha256": null,
+      "sha256": "c1be5b3ecd5647470e3cd76dad9939fdfb6c58c6615942cde6a6f09401f4311f"
+    },
+    {
+      "path": "src/query/contact_manifolds/checkpoint/map.rs",
+      "baseline_sha256": null,
+      "sha256": "7f7fc7978f4ce85b77148fb90d55841f5ea7f34e899282e3b0d9c574f111459d"
+    },
+    {
+      "path": "src/query/contact_manifolds/checkpoint/mod.rs",
+      "baseline_sha256": null,
+      "sha256": "68992f8e0e80dd94167c6402f9ee05e34f6f268b135db3619ce827f7b57c5a8e"
+    },
+    {
+      "path": "src/query/contact_manifolds/checkpoint/single.rs",
+      "baseline_sha256": null,
+      "sha256": "a6993a0415fb0bcab236b8e61fd7da84c368d69f3bda43057c67d698bd8ecc13"
+    },
+    {
+      "path": "src/query/contact_manifolds/checkpoint/tests.rs",
+      "baseline_sha256": null,
+      "sha256": "1bfc8903f7836ff48950fd3c409a94e633544178a949f706a474bc4797da7e8e"
+    },
+    {
+      "path": "src/query/contact_manifolds/contact_manifolds_composite_shape_composite_shape.rs",
+      "baseline_sha256": "dc3dd4a812e1b08f12ddea2e84557575f25ee1a9f434d30616cbe41f77b3cc74",
+      "sha256": "17a3e68a22e0ce725ab45089557e7d89a537877c9eb431f641b38e77efcdf43f"
+    },
+    {
+      "path": "src/query/contact_manifolds/contact_manifolds_composite_shape_shape.rs",
+      "baseline_sha256": "3b492efd7f2a5289e86177705ea5c4c255d247d5e8877276dfba91203069ee76",
+      "sha256": "7924d62c56e037f75360b30a9e20ee2d6ae8b0d908f6a767eb4adf50d04f87a0"
+    },
+    {
+      "path": "src/query/contact_manifolds/mod.rs",
+      "baseline_sha256": "58dffedb1b7b55973912d8fa5c67341c0ace296630d2444faba5ea5eaca82783",
+      "sha256": "3904f7be5cf47e6d0e101553b9f345b9bd57d471264fb7c029f925e1e5385031"
+    },
+    {
+      "path": "src/shape/compound.rs",
+      "baseline_sha256": "050a406c295671b2111756a3473a6029affef75755fe56fae5b4a11293d1ec60",
+      "sha256": "da37ea7e2d3d36aecaf9ff8de6583356e1192658458472b394b504997ca5b177"
+    },
+    {
+      "path": "src/shape/compound_checkpoint/mass.rs",
+      "baseline_sha256": null,
+      "sha256": "d8e472ca14d5035b44a04f1aa74ff058aeda676221258dd01abf1f361cbb5234"
+    },
+    {
+      "path": "src/shape/compound_checkpoint/mod.rs",
+      "baseline_sha256": null,
+      "sha256": "ac3d999110e21229874fb5c6ef4b744b10f4723d48bbcc94859a3a1fec33e51c"
+    },
+    {
+      "path": "src/shape/compound_checkpoint/primitive.rs",
+      "baseline_sha256": null,
+      "sha256": "a1fe79befa27b8cfa00af2247c157d4507f09f199cd134604ce05d562b595a51"
+    },
+    {
+      "path": "src/shape/compound_checkpoint/tests.rs",
+      "baseline_sha256": null,
+      "sha256": "9fc196a562758c5685cb3e11b06e71f029ae35da908007baeccab76bf52600c5"
+    }
+  ]
+}
