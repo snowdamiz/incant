@@ -1,6 +1,6 @@
 # Implementation status
 
-Checkpoint28 remains frozen at reviewed main246 on PR232. Its native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; publication and successor hosted execution remain pending. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
+Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; publication and successor hosted execution remain pending. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
 
 Opaque headless TypeScript/native-physics session checkpoints have accepted producer tests: 195 script cases per numerical mode, 186 feature-off cases, strict Clippy and optional/lean/wasm compilation. The original manifest guard failure is retained; its three-manifest repair merged with PR246 and has separate focused script qualification. Current main246 composition matches all 3,656 accepted repaired implementation/build/tool inputs; ten read-only checks pass, selected normal graphs match and ordinary snapshot stays excluded. Final current-main review is accepted; PR247 merged after its exact-head required fast SUCCESS. Public physics byte saves and hosted UI/audio continuation remain refused. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
 
@@ -267,9 +267,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main241, 2026-10-13
+## Current overview — main247, 2026-10-13
 
-Development main241 includes the reviewed opt-in cooked renderer families and
+Development main247 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -289,12 +289,17 @@ original Windows Dx12 SSAO filter failure retained. PR241 merged its reviewed
 raster-coverage repair; the exact merged source passed both original strict
 Dx12 projection contracts and six observation submissions in a fixed Windows
 run. [Portable strict evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
-Checkpoint27 now freezes main241 (`e281fe74`) as candidate `bb46015a` in the same
-PR232. All 23 required contexts and eight workflows must succeed; validation is
-active. Later main changes do not alter this frozen head or release `2a9d72ea`.
-PR242's complete private primitive-world composition is independently accepted
-and locally qualified, with publication awaiting its exact-head fast check;
-public capture/save admission and outer engine ownership remain unsupported.
+Checkpoint27 finished unpromoted: 22 required contexts succeeded and macOS
+conformance hit its configured deadline. Main243 contains the reviewed macOS
+timeout repair. Checkpoint28 then froze main246 (`42e13e75`) at `be3422f8` on
+PR232 and finished with 13 required successes, nine failures and one skipped
+comparison. The reviewed isolated-lock and ordinary-owner Default repairs are
+awaiting publication and actual successor validation. Release remains `2a9d72ea`.
+PR242 merged the private primitive-world composition; PR244/245 added native
+capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
+and PR247 added headless native session checkpoints. These remain opt-in and
+process-local. Public persisted physics bytes and hosted UI/audio continuation
+remain refused; each original execution generation retains its stated scope.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
