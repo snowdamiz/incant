@@ -1,0 +1,121 @@
+{
+  "base_main": "d5702546b34fcc6452a9fe2b22a0e2b23802991a",
+  "source_freeze": {
+    "head": "d5702546b34fcc6452a9fe2b22a0e2b23802991a",
+    "files": {
+      ".github/workflows/development-wasm.yml": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b",
+      "tools/check_workflow_jobs.py": "c2fb47ddd81db0ee4e3f1561ab83e29b89d8c1adfc15927523a5556a5d04686e",
+      "tools/tests/test_workflow_jobs.py": "d086fed573991fcd834f7c1243da69a42ac97259059dd97a9d8a0f2afd7b9cee"
+    },
+    "patch_sha256": "a44a13176ae8006f5d89ec165d3b9fa8645d44e7c105a5a30003f30c33ab8032"
+  },
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_workflow_jobs.py",
+        "-v"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-conformance-split-main185/check-0.log",
+      "sha256": "1b202a6fc1a910e2eb83a7096a082f4cd41da3ed9c299f789d494a9b6af10a4a"
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_release_policy.py",
+        "-v"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-conformance-split-main185/check-1.log",
+      "sha256": "4d478081cac3e3d975b61784aa137453dcf023792f7175c42942a4949c048d70"
+    },
+    {
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+        ".github/workflows/development-wasm.yml"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-conformance-split-main185/check-2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-conformance-split-main185/check-3.log",
+      "sha256": "ba8b2b046207c52ac35087d9da599ebec3f0e669b9545d1aefece71eb9c7d696"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-conformance-split-main185/check-4.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/windows-conformance-split-main185/check-5.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "retained_archive": {
+    "path": "docs/spikes/evidence/windows-conformance-split/artifacts.json.gz",
+    "sha256": "7155fd10a9f714bcfccf6dd6df70154751e7f5d187fae7a680e091c8160f06da",
+    "records": 26,
+    "payloads": 23
+  },
+  "review": {
+    "path": "docs/spikes/evidence/windows-conformance-split/source-review.json",
+    "sha256": "35a2fd69d21d75a17b4d98e3a40cc601c1d0df99b8c05ae7772ed259caea29a5"
+  },
+  "failed_checkpoint": {
+    "number": 16,
+    "head": "6a336ac5cf83290bfcdf4e4c85440872e9cd7ab2",
+    "job": 115065722665,
+    "cause": "Actual GitHub 90-minute timeout; both baseline and optimized tests passed. Cancelled while third optimized development child was running; fresh shipping steps had not started.",
+    "tests": {
+      "static-wasm-conformance": {
+        "passed": 484,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 87
+      },
+      "static-wasm-optimized": {
+        "passed": 484,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 87
+      }
+    }
+  },
+  "scope": "Four independent Windows jobs keep all original proof commands, the original per-job 90-minute limit, and registry-only caching. The existing required conformance (windows-latest) gate always runs and accepts only four actual successes. All 23 required contexts unchanged.",
+  "limits": [
+    "No hosted run or measured speedup for split yet.",
+    "No feature graph or artifact reuse optimization in this change.",
+    "Checkpoint16 remains failed/frozen; release unchanged."
+  ]
+}
