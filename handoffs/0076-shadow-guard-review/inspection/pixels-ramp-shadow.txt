@@ -1,0 +1,4 @@
+y=236 screenshots/baseline-viewport-on-f24.png:  83, 85, 93
+y=236 screenshots/baseline-viewport-off-f24.png:  83, 85, 93
+y=236 screenshots/candidate-viewport-on-f24.png:  83, 85, 93
+y=236 screenshots/candidate-viewport-off-f24.png:  83, 85, 93

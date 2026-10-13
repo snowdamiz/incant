@@ -1,0 +1,200 @@
+{
+ "files": [
+  {
+   "path": "root-grant.json",
+   "raw_sha256": "78a5d7df186205c471546b3e58c6e01011b0abdd598ef08ae7b84563e425c0d9",
+   "sha256": "78a5d7df186205c471546b3e58c6e01011b0abdd598ef08ae7b84563e425c0d9",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/root-grant.json"
+  },
+  {
+   "path": "ledger.jsonl",
+   "raw_sha256": "da8da449ddb23ece2fbbbc0bb0aae5db91bb96c591ce6ac58b6819e5b9ffa9ad",
+   "sha256": "da8da449ddb23ece2fbbbc0bb0aae5db91bb96c591ce6ac58b6819e5b9ffa9ad",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/ledger.jsonl"
+  },
+  {
+   "path": "budget.jsonl",
+   "raw_sha256": "46c6b8de2a46e9e9c21154a63cbff4a6af64556f1567888a8f93c635f06f5d7c",
+   "sha256": "46c6b8de2a46e9e9c21154a63cbff4a6af64556f1567888a8f93c635f06f5d7c",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/budget.jsonl"
+  },
+  {
+   "path": "released.json",
+   "raw_sha256": "1df641e806ef42393552316645431980ba2760205e816ba4fa6293b1edcf4d01",
+   "sha256": "1df641e806ef42393552316645431980ba2760205e816ba4fa6293b1edcf4d01",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/released.json"
+  },
+  {
+   "path": "analysis/summary.json",
+   "raw_sha256": "d6c749c6c44ae586b00e9e2b7a73dbba82b21b71910ab0ef0a0829c3023075ac",
+   "sha256": "d6c749c6c44ae586b00e9e2b7a73dbba82b21b71910ab0ef0a0829c3023075ac",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/analysis/summary.json"
+  },
+  {
+   "path": "logs/baseline-1.stdout.txt.gz",
+   "raw_sha256": "73c68b55dfd2a4a0ef513b6bdf812f7ad58b0b4f3ecf3af54603ea114bd62fc4",
+   "sha256": "23ff43424fcf64f0ba6bff3deab9181be066fedac5ad50b0c65fa8d1ecaca3ec",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/baseline-1.stdout.txt"
+  },
+  {
+   "path": "logs/baseline-1.stderr.txt",
+   "raw_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/baseline-1.stderr.txt"
+  },
+  {
+   "path": "runs/baseline-1/viewport/report.json",
+   "raw_sha256": "5b173e96030a4dc48c8aa130a7fd7263102489f64177f38e7a84efa4103f48e1",
+   "sha256": "5b173e96030a4dc48c8aa130a7fd7263102489f64177f38e7a84efa4103f48e1",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-1/viewport/report.json"
+  },
+  {
+   "path": "runs/baseline-1/viewport/events.jsonl",
+   "raw_sha256": "a54c0d6fabaa5039e8159f6927b3fa4bfe85e6c52a381141b78d9bcc333e9913",
+   "sha256": "a54c0d6fabaa5039e8159f6927b3fa4bfe85e6c52a381141b78d9bcc333e9913",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-1/viewport/events.jsonl"
+  },
+  {
+   "path": "logs/candidate-1.stdout.txt.gz",
+   "raw_sha256": "b703cc9f4477057e222f3180a5d8db72ac079e112347e3379c635282f1fbe1eb",
+   "sha256": "ab4fb177f286ced7e1fe8c3d8d4186d18a91c051e50ca8ec8fa5d036c06f939b",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/candidate-1.stdout.txt"
+  },
+  {
+   "path": "logs/candidate-1.stderr.txt",
+   "raw_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/candidate-1.stderr.txt"
+  },
+  {
+   "path": "runs/candidate-1/viewport/report.json",
+   "raw_sha256": "fe3868d8a3acae04067c51eef82092bc45a1eb7c0c636378b6175e9eed6aa1e5",
+   "sha256": "fe3868d8a3acae04067c51eef82092bc45a1eb7c0c636378b6175e9eed6aa1e5",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-1/viewport/report.json"
+  },
+  {
+   "path": "runs/candidate-1/viewport/events.jsonl",
+   "raw_sha256": "80595e6a9591c8d3fb44714bf056d1390a8086ba510172ab3da585178af9c120",
+   "sha256": "80595e6a9591c8d3fb44714bf056d1390a8086ba510172ab3da585178af9c120",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-1/viewport/events.jsonl"
+  },
+  {
+   "path": "logs/baseline-2.stdout.txt.gz",
+   "raw_sha256": "1c2e067bda1fd9b612f27b1553f5faecd132a4548637537f6f5f7bd7af6893ef",
+   "sha256": "508ae0297dc62b5e0399b396bd49dfdc5837182f8af322171bc59820eaa037b4",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/baseline-2.stdout.txt"
+  },
+  {
+   "path": "logs/baseline-2.stderr.txt",
+   "raw_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/baseline-2.stderr.txt"
+  },
+  {
+   "path": "runs/baseline-2/viewport/report.json",
+   "raw_sha256": "5b173e96030a4dc48c8aa130a7fd7263102489f64177f38e7a84efa4103f48e1",
+   "sha256": "5b173e96030a4dc48c8aa130a7fd7263102489f64177f38e7a84efa4103f48e1",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-2/viewport/report.json"
+  },
+  {
+   "path": "runs/baseline-2/viewport/events.jsonl",
+   "raw_sha256": "a54c0d6fabaa5039e8159f6927b3fa4bfe85e6c52a381141b78d9bcc333e9913",
+   "sha256": "a54c0d6fabaa5039e8159f6927b3fa4bfe85e6c52a381141b78d9bcc333e9913",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-2/viewport/events.jsonl"
+  },
+  {
+   "path": "logs/candidate-2.stdout.txt.gz",
+   "raw_sha256": "1dbf59eab88d1d34b365a7858e0d82b1b51a6835407ac4d763b974e7be5b2072",
+   "sha256": "0ea6e417f37e523ab51c11d08e13dfe7bbb4b93c17e04b9c679ef40372f2be95",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/candidate-2.stdout.txt"
+  },
+  {
+   "path": "logs/candidate-2.stderr.txt",
+   "raw_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/logs/candidate-2.stderr.txt"
+  },
+  {
+   "path": "runs/candidate-2/viewport/report.json",
+   "raw_sha256": "fe3868d8a3acae04067c51eef82092bc45a1eb7c0c636378b6175e9eed6aa1e5",
+   "sha256": "fe3868d8a3acae04067c51eef82092bc45a1eb7c0c636378b6175e9eed6aa1e5",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-2/viewport/report.json"
+  },
+  {
+   "path": "runs/candidate-2/viewport/events.jsonl",
+   "raw_sha256": "80595e6a9591c8d3fb44714bf056d1390a8086ba510172ab3da585178af9c120",
+   "sha256": "80595e6a9591c8d3fb44714bf056d1390a8086ba510172ab3da585178af9c120",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-2/viewport/events.jsonl"
+  }
+ ],
+ "gzip_retained": [
+  {
+   "gzip_sha256": "23ff43424fcf64f0ba6bff3deab9181be066fedac5ad50b0c65fa8d1ecaca3ec",
+   "path": "logs/baseline-1.stdout.txt",
+   "raw_sha256": "73c68b55dfd2a4a0ef513b6bdf812f7ad58b0b4f3ecf3af54603ea114bd62fc4",
+   "retained_path": "logs/baseline-1.stdout.txt.gz"
+  },
+  {
+   "gzip_sha256": "ab4fb177f286ced7e1fe8c3d8d4186d18a91c051e50ca8ec8fa5d036c06f939b",
+   "path": "logs/candidate-1.stdout.txt",
+   "raw_sha256": "b703cc9f4477057e222f3180a5d8db72ac079e112347e3379c635282f1fbe1eb",
+   "retained_path": "logs/candidate-1.stdout.txt.gz"
+  },
+  {
+   "gzip_sha256": "508ae0297dc62b5e0399b396bd49dfdc5837182f8af322171bc59820eaa037b4",
+   "path": "logs/baseline-2.stdout.txt",
+   "raw_sha256": "1c2e067bda1fd9b612f27b1553f5faecd132a4548637537f6f5f7bd7af6893ef",
+   "retained_path": "logs/baseline-2.stdout.txt.gz"
+  },
+  {
+   "gzip_sha256": "0ea6e417f37e523ab51c11d08e13dfe7bbb4b93c17e04b9c679ef40372f2be95",
+   "path": "logs/candidate-2.stdout.txt",
+   "raw_sha256": "1dbf59eab88d1d34b365a7858e0d82b1b51a6835407ac4d763b974e7be5b2072",
+   "retained_path": "logs/candidate-2.stdout.txt.gz"
+  }
+ ],
+ "namespace": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001",
+ "note": "PNGs are not copied: each is byte-identical to the committed screenshot named in byte_identical_to.",
+ "pngs_not_copied": [
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/baseline-viewport-on-f24.png",
+   "sha256": "6b3194c903258a11d199566004f77c82d3654ad999c0313fc2f951464d18e649",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-1/viewport/viewport-on-f24.png"
+  },
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/baseline-viewport-off-f24.png",
+   "sha256": "2b762c2041e901a3660eef34ab83fc89bbe66776d58ee545b881870d4ac06798",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-1/viewport/viewport-off-f24.png"
+  },
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/candidate-viewport-on-f24.png",
+   "sha256": "6b3194c903258a11d199566004f77c82d3654ad999c0313fc2f951464d18e649",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-1/viewport/viewport-on-f24.png"
+  },
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/candidate-viewport-off-f24.png",
+   "sha256": "da58165787a86396feb56d093ff5cc8a967c19dd58ecce410f137d598dce6c61",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-1/viewport/viewport-off-f24.png"
+  },
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/baseline-viewport-on-f24.png",
+   "sha256": "6b3194c903258a11d199566004f77c82d3654ad999c0313fc2f951464d18e649",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-2/viewport/viewport-on-f24.png"
+  },
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/baseline-viewport-off-f24.png",
+   "sha256": "2b762c2041e901a3660eef34ab83fc89bbe66776d58ee545b881870d4ac06798",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/baseline-2/viewport/viewport-off-f24.png"
+  },
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/candidate-viewport-on-f24.png",
+   "sha256": "6b3194c903258a11d199566004f77c82d3654ad999c0313fc2f951464d18e649",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-2/viewport/viewport-on-f24.png"
+  },
+  {
+   "byte_identical_to": "handoffs/0076-shadow-guard-review/screenshots/candidate-viewport-off-f24.png",
+   "sha256": "da58165787a86396feb56d093ff5cc8a967c19dd58ecce410f137d598dce6c61",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-determinism-001/runs/candidate-2/viewport/viewport-off-f24.png"
+  }
+ ]
+}

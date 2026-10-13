@@ -1,0 +1,27 @@
+{
+ "files": [
+  {
+   "published_path": "logs/gpu-review-baseline-viewport.stdout.txt",
+   "retained_path": "logs/gpu-review-baseline-viewport.stdout.txt.gz",
+   "raw_sha256": "bf9b6517f4b807ea87145a2353c9cef5b49335e9d24b5fccdacf219ea450fd6b",
+   "raw_bytes": 133,
+   "gzip_sha256": "f7665f558e2fb0c8fac4be41004302a3117c37b3d0d13c345fc586ec21bcb96f",
+   "gzip_bytes": 117,
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-review-baseline-viewport.stdout.txt",
+   "reason": "libtest stdout ends with a blank line, which `git diff --cached --check` rejects; kept byte-exact as deterministic gzip (level 9, mtime 0)",
+   "verify": "gunzip -c <retained_path> | shasum -a 256 equals raw_sha256, which manifest.json and gpu-ledger.jsonl record"
+  },
+  {
+   "published_path": "logs/gpu-review-candidate-viewport.stdout.txt",
+   "retained_path": "logs/gpu-review-candidate-viewport.stdout.txt.gz",
+   "raw_sha256": "1b36f4c669fb51cfb2ea8765b0d8155bd9f6eea92ae995da776a48717ecc5ffa",
+   "raw_bytes": 133,
+   "gzip_sha256": "9a9bc293d5a50f4a77790f44df0b164f13c1cdf6d746511dae5c4842d8bf0e1c",
+   "gzip_bytes": 117,
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/gpu-review-candidate-viewport.stdout.txt",
+   "reason": "libtest stdout ends with a blank line, which `git diff --cached --check` rejects; kept byte-exact as deterministic gzip (level 9, mtime 0)",
+   "verify": "gunzip -c <retained_path> | shasum -a 256 equals raw_sha256, which manifest.json and gpu-ledger.jsonl record"
+  }
+ ],
+ "manifest_unchanged": true
+}
