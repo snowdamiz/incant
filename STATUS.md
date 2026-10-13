@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main193, 2026-10-13
+## Current overview — main194, 2026-10-13
 
-Development main193 includes the restart quota-test repair (PR188) and the reviewed,
+Development main194 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -45,14 +45,15 @@ Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
 Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
-their queued GPU/appearance checks remain open. CPU profiling has accepted producer package evidence and is undergoing
-current-main integration. These independent lanes do not satisfy
+their queued GPU/appearance checks remain open. CPU profiling has accepted producer
+package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
+independent integration review is pending. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
 below are historical integration snapshots, not the current queue.
 
 Safe Core live-HUD changes are merged in PR192. The optional result-label and won-objective
-correction has passed current-main192 public native checks and independent
-integration review; publication awaits its exact-head fast check. Original source-free shipping remains producer-scoped; no new
+correction is merged in PR194 after public native checks, independent integration
+review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
 ## Cooked renderer integration — CPU checks complete
