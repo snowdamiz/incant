@@ -1,0 +1,3017 @@
+{
+  "format": "incant-physics-native-world-construction",
+  "version": 1,
+  "base": "333e7f46cf01c32eac5d10b54371d1960a72bf9d",
+  "status": "Source001 independently accepted; scoped CPU qualification passed; final independent evidence review pending.",
+  "source_review_sha256": "7a3eb1c36361dcc8b0d701d778f5f3568fa0e89e4dff6c1fafa80766241430dd",
+  "lint_delta_review_sha256": "726689aa1937bb6c23e47af93812c9be6d601f26786311e4be086acf09159084",
+  "compiled_source_freeze_sha256": "95f7bd46f1da19c0113c7e0297c51e3ac0d5cac940c2f6291c891dc3e800ea23",
+  "corrected_fixture_freeze_sha256": "ac607b4f026be9f61ed414c6170d366ad2c7f4c2707c1bf85f3423743204a18e",
+  "source001_reviewed_freeze_sha256": "eccc6088eccca38830071c0a63e8f4515bb05402c87f1c1c2273e930d634e276",
+  "final_docs_freeze_sha256": "c9df4ebee22c360b2f033755968dae3bb729902337fa19187774d759f1b114f6",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "scope": "unchanged-baseline",
+      "sha256": "9b12089f30cde2f70542c1871904e87b7a1d62b0869b316641506f5ef587124f",
+      "bytes": 252800,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/Cargo.lock",
+      "baseline_sha256": "9b12089f30cde2f70542c1871904e87b7a1d62b0869b316641506f5ef587124f"
+    },
+    {
+      "path": "Cargo.toml",
+      "scope": "unchanged-baseline",
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+      "bytes": 3722,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/Cargo.toml",
+      "baseline_sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5"
+    },
+    {
+      "path": "STATUS.md",
+      "scope": "owned",
+      "sha256": "b3045ced113b9d12da426f986dd94fe539dcfa8762829b01bb15d36473efcf8a",
+      "bytes": 184463,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/STATUS.md",
+      "baseline_sha256": "7e7caca31ef5abc2b541eb25d332130c32d42f83a80941c48723fa9d3d70b116"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "scope": "unchanged-baseline",
+      "sha256": "e596a2a3a8ed6a44972f5ded5ef8b595e5f14671b187aee60501f3c064964677",
+      "bytes": 1145,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/Cargo.toml",
+      "baseline_sha256": "e596a2a3a8ed6a44972f5ded5ef8b595e5f14671b187aee60501f3c064964677"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/construction.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "253f38762b8a41d2822a5eddc4341bb17cc4c810324c5c1eb4cf95c1cd88a734",
+      "bytes": 5464,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/construction.rs",
+      "baseline_sha256": "253f38762b8a41d2822a5eddc4341bb17cc4c810324c5c1eb4cf95c1cd88a734"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "baseline_sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998",
+      "bytes": 5025,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "baseline_sha256": "66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "baseline_sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/codec.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec",
+      "bytes": 3070,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/narrow_owner/codec.rs",
+      "baseline_sha256": "c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254",
+      "bytes": 2341,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "baseline_sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23",
+      "bytes": 4760,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "baseline_sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "baseline_sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "6976b53438e4f3bde526f16ed532f7c54edad20839b6b525b497f873ea56e4e7",
+      "bytes": 2635,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "baseline_sha256": "6976b53438e4f3bde526f16ed532f7c54edad20839b6b525b497f873ea56e4e7"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "baseline_sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/codec.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "5797cd96787d8b3a1aeef18f00a7b772b7274f2e07f2888c09cee2a060a09940",
+      "bytes": 4485,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/rigid_owner/codec.rs",
+      "baseline_sha256": "5797cd96787d8b3a1aeef18f00a7b772b7274f2e07f2888c09cee2a060a09940"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "b8a3b88d5462e9f4453c3bdbb3ffc953c131396529c641ab935a3f680cf67372",
+      "bytes": 2688,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "baseline_sha256": "b8a3b88d5462e9f4453c3bdbb3ffc953c131396529c641ab935a3f680cf67372"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492",
+      "bytes": 9653,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+      "baseline_sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/world_boundary/codec.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "8f393157e2b98242375e5b1e8acfbeed775fd2700a98280848f79d8878ce8193",
+      "bytes": 3861,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/world_boundary/codec.rs",
+      "baseline_sha256": "8f393157e2b98242375e5b1e8acfbeed775fd2700a98280848f79d8878ce8193"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/world_boundary/decode.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "9086be4d46da1e1590231f8c7e876883b4b86fc99af0a23d29878629fa62e6e4",
+      "bytes": 3594,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/world_boundary/decode.rs",
+      "baseline_sha256": "9086be4d46da1e1590231f8c7e876883b4b86fc99af0a23d29878629fa62e6e4"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/world_boundary/metadata.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "4aa94ff1990bbf5f3ca3a46b27d3778986c4aade76085e1c2def43ac0c8f1089",
+      "bytes": 2602,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/world_boundary/metadata.rs",
+      "baseline_sha256": "4aa94ff1990bbf5f3ca3a46b27d3778986c4aade76085e1c2def43ac0c8f1089"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "246d748481f7215f5269a4374a9478796c1118e471b2b2ca7f93e519f3b2e032",
+      "bytes": 2087,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+      "baseline_sha256": "246d748481f7215f5269a4374a9478796c1118e471b2b2ca7f93e519f3b2e032"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/world_boundary/shapes.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "5b9f934afac28386aa09f68eb08d4282bf66a2f52cb22c2d9233e0c7bb1f5c4e",
+      "bytes": 1891,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/world_boundary/shapes.rs",
+      "baseline_sha256": "5b9f934afac28386aa09f68eb08d4282bf66a2f52cb22c2d9233e0c7bb1f5c4e"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/world_boundary/validate.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "751385672c1a766b70c029c58bafbb52d00aa1098c5ad3a925adc61232863772",
+      "bytes": 811,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/src/world_boundary/validate.rs",
+      "baseline_sha256": "751385672c1a766b70c029c58bafbb52d00aa1098c5ad3a925adc61232863772"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/world_capture.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "c6b9918865105f78d2bf855b82583dd14fe8bc3c872d66282eec345df6f31a51",
+      "bytes": 13771,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/tests/support/world_capture.rs",
+      "baseline_sha256": "c6b9918865105f78d2bf855b82583dd14fe8bc3c872d66282eec345df6f31a51"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/world_cases.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "021a71b1e5c4d331c86207e85948dfc45e82ed49dd8424a75bda3793e1da6880",
+      "bytes": 6927,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/tests/support/world_cases.rs",
+      "baseline_sha256": "021a71b1e5c4d331c86207e85948dfc45e82ed49dd8424a75bda3793e1da6880"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/world_checks.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "fc8f1ee28ea4eb2fd468653f02d838b512a0b15aa40e0b18f1424996dd2bcb94",
+      "bytes": 3340,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/tests/support/world_checks.rs",
+      "baseline_sha256": "fc8f1ee28ea4eb2fd468653f02d838b512a0b15aa40e0b18f1424996dd2bcb94"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "218092ae1bf74a0caf9e9638827109a3f030563bb459fc788a117a37f3b187c7",
+      "bytes": 40768,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "baseline_sha256": "218092ae1bf74a0caf9e9638827109a3f030563bb459fc788a117a37f3b187c7"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-native-world-source-review.json",
+      "scope": "owned",
+      "sha256": "7a3eb1c36361dcc8b0d701d778f5f3568fa0e89e4dff6c1fafa80766241430dd",
+      "bytes": 2387,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/docs/spikes/evidence/physics-native-world-source-review.json",
+      "baseline_sha256": null
+    },
+    {
+      "path": "docs/spikes/evidence/physics-native-world-source002-review.json",
+      "scope": "owned",
+      "sha256": "726689aa1937bb6c23e47af93812c9be6d601f26786311e4be086acf09159084",
+      "bytes": 697,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/docs/spikes/evidence/physics-native-world-source002-review.json",
+      "baseline_sha256": null
+    },
+    {
+      "path": "docs/spikes/physics-native-narrow-construction.md",
+      "scope": "unchanged-baseline",
+      "sha256": "d4c5117928008107f12d1339a9f895e45b3cd8d8876a09bdb933e2c099d10fca",
+      "bytes": 7495,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/docs/spikes/physics-native-narrow-construction.md",
+      "baseline_sha256": "d4c5117928008107f12d1339a9f895e45b3cd8d8876a09bdb933e2c099d10fca"
+    },
+    {
+      "path": "docs/spikes/physics-native-world-construction.md",
+      "scope": "owned",
+      "sha256": "fb67733b103fda25ad60288a32a09963e51ada699130e83f901df268146484fd",
+      "bytes": 9886,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/docs/spikes/physics-native-world-construction.md",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/parry2d/src/query/contact_manifolds/contact_manifold.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/parry2d/src/query/contact_manifolds/contact_manifold.rs",
+      "baseline_sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a"
+    },
+    {
+      "path": "third_party/parry3d/src/query/contact_manifolds/contact_manifold.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/parry3d/src/query/contact_manifolds/contact_manifold.rs",
+      "baseline_sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a"
+    },
+    {
+      "path": "third_party/rapier2d/Cargo.toml",
+      "scope": "unchanged-baseline",
+      "sha256": "139271bd923a034fbee02e005567337761728b7d8d56ba0a0a0cdba9951fe619",
+      "bytes": 8646,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/Cargo.toml",
+      "baseline_sha256": "139271bd923a034fbee02e005567337761728b7d8d56ba0a0a0cdba9951fe619"
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_CHECKED_NARROW.json",
+      "scope": "unchanged-baseline",
+      "sha256": "bb90d10cf89ee84de6f6f1da99c735677c5a3686b1c7413d3633e7098c091668",
+      "bytes": 3639,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/INCANT_CHECKED_NARROW.json",
+      "baseline_sha256": "bb90d10cf89ee84de6f6f1da99c735677c5a3686b1c7413d3633e7098c091668"
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_CHECKED_WORLD.json",
+      "scope": "owned",
+      "sha256": "57a9959b8046d91cb2af6625ae0fb678bcf2846498acbb87d8791f0abb165bd6",
+      "bytes": 7137,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/INCANT_CHECKED_WORLD.json",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/INCANT_PATCH.md",
+      "scope": "unchanged-baseline",
+      "sha256": "7ea39f16f77b6747c6de6274ac5de825edf0638f89d2e19bb9f247d4cd19d5da",
+      "bytes": 3965,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/INCANT_PATCH.md",
+      "baseline_sha256": "7ea39f16f77b6747c6de6274ac5de825edf0638f89d2e19bb9f247d4cd19d5da"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/arena_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "ae9d41adce78b31bcb6fc7c10a654673799a4aaa426219dd640b1ebb1f4c7fb2",
+      "bytes": 8260,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/data/arena_checkpoint.rs",
+      "baseline_sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/coarena_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "af95d2823d12f5ddf1ca390e8278b4a65aa08e6712273a212c2279089eda36e6",
+      "bytes": 4170,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/data/coarena_checkpoint.rs",
+      "baseline_sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/graph_checkpoint.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3",
+      "bytes": 4966,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/data/graph_checkpoint.rs",
+      "baseline_sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/ccd/ccd_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "d00efd985aff42bed2d5c0caa823aed92a3c4ce0c0220bc05dd88cd5610757f2",
+      "bytes": 1557,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/ccd/ccd_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/ccd/ccd_solver.rs",
+      "scope": "owned",
+      "sha256": "664d1db5fc0608788121c9e126fe863bea70bf9116086b7877d28402fca88646",
+      "bytes": 16404,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/ccd/ccd_solver.rs",
+      "baseline_sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/integration_parameters.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/integration_parameters.rs",
+      "baseline_sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/joint/impulse_joint/impulse_joint_set.rs",
+      "scope": "owned",
+      "sha256": "671cbfe773eb73ed845dc28076952164460a5135d59ff234ed005d54151d1e22",
+      "bytes": 29917,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/joint/impulse_joint/impulse_joint_set.rs",
+      "baseline_sha256": "b71bf56dcb99d076be39187ab7fb51563303369470d01822157b0f8e41cb66c6"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/joint/impulse_joint/impulse_joint_set_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "01697fb64f5175e5ba407c9f408935e8cd3fbea09346527fdb9e3a859de70034",
+      "bytes": 3232,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/joint/impulse_joint/impulse_joint_set_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/joint/multibody_joint/multibody_joint_set.rs",
+      "scope": "owned",
+      "sha256": "244adc4beca54820373474fba7b31aa406ec7971455693d38182b6eccd01215c",
+      "bytes": 19346,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/joint/multibody_joint/multibody_joint_set.rs",
+      "baseline_sha256": "81dcd3c58e8e8267fdeae01330a3d492b17e04ed07ac2cbb11d9912c144c59e2"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/joint/multibody_joint/multibody_joint_set_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "49d3ef677e1e114ba0398393dd5c74412bc987210859bca02256d3459beec0a1",
+      "bytes": 2170,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/joint/multibody_joint/multibody_joint_set_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/soft_body/soft_body_set/soft_body_set.rs",
+      "scope": "owned",
+      "sha256": "03802fd786c8f460b20b64fe6a370e89ef355e0809ddf5482454fc2bab69b220",
+      "bytes": 4157,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/soft_body/soft_body_set/soft_body_set.rs",
+      "baseline_sha256": "4be33cac03f2470043f91d6eee86edb7b84a7d3fc69f61af7bac1bb6a16a4911"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/soft_body/soft_body_set/soft_body_set_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "53e99ac4cc7ffab67aa17f240a29f104fa96e734c26ceab6fe07a98d2e5416c2",
+      "bytes": 1174,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/soft_body/soft_body_set/soft_body_set_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/contact_constraint/contact_constraints_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "e660f6785f47c0a2e31b9c57778932a178c3239d486383ecb8ea1458ac92319e",
+      "bytes": 884,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/contact_constraint/contact_constraints_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/contact_constraint/contact_constraints_set.rs",
+      "scope": "owned",
+      "sha256": "5bc8a2586611f01beba595e197d1e08b04313ac245bbc4612408d0a9299ac4b9",
+      "bytes": 3328,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/contact_constraint/contact_constraints_set.rs",
+      "baseline_sha256": "8946c7ac90c7ef1ddada45015992839ae9fd01e611572774e3940e3ceee63cea"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/interaction_groups.rs",
+      "scope": "owned",
+      "sha256": "bfcaf8a1cd2a425653da85b4b0f1919d18232f422e6673a0e544826245a35522",
+      "bytes": 14047,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/interaction_groups.rs",
+      "baseline_sha256": "d9e114e3e88d8a79f417ff392a0f285b754c4436d2005217e000d70c12c5ccfb"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/interaction_groups_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "ad068fddde5c99f983ae7e9df750dbc045d216265850e9484408cae18b7d9c5d",
+      "bytes": 721,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/interaction_groups_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/joint_constraint/joint_constraints_set.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "80d87709a16984f0a382da71e2fdd64015f37225df564f0617de0d1210a285b6",
+      "bytes": 5772,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/joint_constraint/joint_constraints_set.rs",
+      "baseline_sha256": "80d87709a16984f0a382da71e2fdd64015f37225df564f0617de0d1210a285b6"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/solver_contact_graph.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "eb436a976acf1ce1e46c74ba9781e4511de21d819b6c8ef754f0ed6f9394dfcb",
+      "bytes": 12769,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/solver_contact_graph.rs",
+      "baseline_sha256": "eb436a976acf1ce1e46c74ba9781e4511de21d819b6c8ef754f0ed6f9394dfcb"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "55ff52d4dcde4a381946cfb93f587e7ca7fd273d5f9f3ac7c5a6d5e20f5ca0c7",
+      "bytes": 1274,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+      "baseline_sha256": "55ff52d4dcde4a381946cfb93f587e7ca7fd273d5f9f3ac7c5a6d5e20f5ca0c7"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/staged_island_solver/checkpoint.rs",
+      "scope": "owned",
+      "sha256": "61734785ac690804ec6cad995e101b422d471629a6722b81d0c347075fd246aa",
+      "bytes": 2034,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/staged_island_solver/checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/staged_island_solver/init.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "0506a6bd21d01b4035e615d1e7218b62cefa09b2a1e43bfc52658055ad7bc88d",
+      "bytes": 31973,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/staged_island_solver/init.rs",
+      "baseline_sha256": "0506a6bd21d01b4035e615d1e7218b62cefa09b2a1e43bfc52658055ad7bc88d"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/staged_island_solver/joints.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "dcdfa670b3f17b3abb662016c9f5b5ace3a62b52ca3fa1bf5258eb5fb5af40a4",
+      "bytes": 25363,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/staged_island_solver/joints.rs",
+      "baseline_sha256": "dcdfa670b3f17b3abb662016c9f5b5ace3a62b52ca3fa1bf5258eb5fb5af40a4"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/staged_island_solver/mod.rs",
+      "scope": "owned",
+      "sha256": "350050a9816bc93ee582e18301dbf646e852cb95dac614f2a5eebf20a83888c8",
+      "bytes": 16561,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/staged_island_solver/mod.rs",
+      "baseline_sha256": "1cbd48daf242c35cd41527b0a286b5fab622e17301ffc73262b8bbb8a5564373"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/staged_island_solver/sync.rs",
+      "scope": "owned",
+      "sha256": "40ed5454d5bd0c56246ae8c5f6229acf39c621298e90f62cf3fb15a2bbf6e55e",
+      "bytes": 8250,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/staged_island_solver/sync.rs",
+      "baseline_sha256": "c8c2b7551e11051f8cdc04dad0ab810695403c9ff99259e8158b2329780fe7cf"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/staged_island_solver/sync_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "aef9b3172a6eb036df73e1e1a235971c239eda10348844da8d17945673e46564",
+      "bytes": 625,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/staged_island_solver/sync_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/solver/velocity_solver.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d95803cafe7f6a9ea063f0c5918e952eebeab2c7fdc31d5f65716d0c5ca13bb4",
+      "bytes": 2603,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/dynamics/solver/velocity_solver.rs",
+      "baseline_sha256": "d95803cafe7f6a9ea063f0c5918e952eebeab2c7fdc31d5f65716d0c5ca13bb4"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "806edd955c2f3cd4966a71b5e1d8eecc7b200f41c5324f623cf57ab232bd6afc",
+      "bytes": 3099,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+      "baseline_sha256": "806edd955c2f3cd4966a71b5e1d8eecc7b200f41c5324f623cf57ab232bd6afc"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/contact_clustering.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/contact_clustering.rs",
+      "baseline_sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/contact_pair.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/contact_pair.rs",
+      "baseline_sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/manifold.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d5ca2d2dd0e891435544cadccd847418f59c4dbcb79e61979ea2869f41230602",
+      "bytes": 6692,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/checkpoint/manifold.rs",
+      "baseline_sha256": "d5ca2d2dd0e891435544cadccd847418f59c4dbcb79e61979ea2869f41230602"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "e7e56f19ab57001c6fadd6e2d1e9b9a47817e50830761c9497f50ba53974fb10",
+      "bytes": 5911,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/checkpoint/mod.rs",
+      "baseline_sha256": "e7e56f19ab57001c6fadd6e2d1e9b9a47817e50830761c9497f50ba53974fb10"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/pair.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "2a33e5b6d1cfdeaf3838e259b00433c557a0a10ba56f898dbabd5efafd2da7a1",
+      "bytes": 2592,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/checkpoint/pair.rs",
+      "baseline_sha256": "2a33e5b6d1cfdeaf3838e259b00433c557a0a10ba56f898dbabd5efafd2da7a1"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/tests.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "cd28c2415377ff2b80c0d4c882c02eae65f3687f16e26fd95b872f9dfc32c34d",
+      "bytes": 14892,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/checkpoint/tests.rs",
+      "baseline_sha256": "cd28c2415377ff2b80c0d4c882c02eae65f3687f16e26fd95b872f9dfc32c34d"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/contacts.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66",
+      "bytes": 18554,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/contacts.rs",
+      "baseline_sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d2e9cf363cc8741eea7a1b0243d35c3b2a16356d9e078f3d67054db8fc683950",
+      "bytes": 19671,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/mod.rs",
+      "baseline_sha256": "d2e9cf363cc8741eea7a1b0243d35c3b2a16356d9e078f3d67054db8fc683950"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs",
+      "baseline_sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/pair_update.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/pair_update.rs",
+      "baseline_sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/solver_graph.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/geometry/narrow_phase/solver_graph.rs",
+      "baseline_sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d413c42071ba425879791a6bad45046558e2c9a03ba42e8d5c56e98b73263433",
+      "bytes": 131,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+      "baseline_sha256": "d413c42071ba425879791a6bad45046558e2c9a03ba42e8d5c56e98b73263433"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/allocation_test_meter.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "822e87f390102e2558d57a468a89c8a68b16cb2c5399a52108ccbc05ca01f234",
+      "bytes": 1647,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/allocation_test_meter.rs",
+      "baseline_sha256": "822e87f390102e2558d57a468a89c8a68b16cb2c5399a52108ccbc05ca01f234"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/integration.rs",
+      "scope": "owned",
+      "sha256": "d9d3ee140bd6be46de6c484907d34aa795d9285cc94fd53ee59e1eea3ac7c69f",
+      "bytes": 2768,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/integration.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/island_fixture.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "2e1477c9f2134ff8fbceaa60b634e2918e23831e2646d051da52202908d3a32f",
+      "bytes": 2662,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/island_fixture.rs",
+      "baseline_sha256": "2e1477c9f2134ff8fbceaa60b634e2918e23831e2646d051da52202908d3a32f"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/0.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "b2e190c3e9adf5a89eaa5db758052fb23efe5ec7e10c26f90883df16f874c077",
+      "bytes": 9000,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/0.bin",
+      "baseline_sha256": "b2e190c3e9adf5a89eaa5db758052fb23efe5ec7e10c26f90883df16f874c077"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/16.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "14ce065a9f3f30f459873d0add7546a10dd3ef80ef1284eaa6f366ed805c3bab",
+      "bytes": 8276,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/16.bin",
+      "baseline_sha256": "14ce065a9f3f30f459873d0add7546a10dd3ef80ef1284eaa6f366ed805c3bab"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/32.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "bc67576952494cfe48753b1df207377419a4246fb96fef61c2ad4e041aef990d",
+      "bytes": 8308,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/32.bin",
+      "baseline_sha256": "bc67576952494cfe48753b1df207377419a4246fb96fef61c2ad4e041aef990d"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/48.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "adba857db4964465d14b37ef13b8a44747f4c552310fec4a1a502f16e267ff29",
+      "bytes": 8096,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/island_fixtures/48.bin",
+      "baseline_sha256": "adba857db4964465d14b37ef13b8a44747f4c552310fec4a1a502f16e267ff29"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+      "scope": "owned",
+      "sha256": "c87a21975a6b132da70eb8fd55a334303b3e16ade7e62e13c96323976e285c07",
+      "bytes": 3673,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+      "baseline_sha256": "1c3f8c7a31e5dcd04846f11a12d2e4557f6c559e02b0b24b1c1095246422ccb4"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/narrow.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d81f7052f24877c91032a0d7ef255125e16950311eb97059e3844725ae3cfb1b",
+      "bytes": 372,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/narrow.rs",
+      "baseline_sha256": "d81f7052f24877c91032a0d7ef255125e16950311eb97059e3844725ae3cfb1b"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixture.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "758c39a187e7dc8a68b70161b8427d07127989a4178303c046aea05054590c4b",
+      "bytes": 5081,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/narrow_fixture.rs",
+      "baseline_sha256": "758c39a187e7dc8a68b70161b8427d07127989a4178303c046aea05054590c4b"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/0.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "70cc4e15add55fe4e031be422109b4267d648d0970935cfcf4a0b1338eb515d8",
+      "bytes": 9760,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/0.bin",
+      "baseline_sha256": "70cc4e15add55fe4e031be422109b4267d648d0970935cfcf4a0b1338eb515d8"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/16.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "ebaaa46b0abb78d7262f3f185b45586ce99c8165b8382b67aade6251dc01e195",
+      "bytes": 9048,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/16.bin",
+      "baseline_sha256": "ebaaa46b0abb78d7262f3f185b45586ce99c8165b8382b67aade6251dc01e195"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/32.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "c78d8675f2f0ccf05c2c0770a6e42ec9ee8c5f17063d3e7ed312eae8baa297c0",
+      "bytes": 8116,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/32.bin",
+      "baseline_sha256": "c78d8675f2f0ccf05c2c0770a6e42ec9ee8c5f17063d3e7ed312eae8baa297c0"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/48.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "1e9614a3f58933641206b35dc44136b45098e1240f4f849ed3c8a6fa68e2df30",
+      "bytes": 8476,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/48.bin",
+      "baseline_sha256": "1e9614a3f58933641206b35dc44136b45098e1240f4f849ed3c8a6fa68e2df30"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/work.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "506f328aed4db260689f1565fe85839e6f81178a6fd40636064624bc45df2aee",
+      "bytes": 4817,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/work.rs",
+      "baseline_sha256": "506f328aed4db260689f1565fe85839e6f81178a6fd40636064624bc45df2aee"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world.rs",
+      "scope": "owned",
+      "sha256": "9e7eacd13b1556feaaceac30ea411f9071af61d8df459c3b1f14dc91ab876979",
+      "bytes": 3949,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world/admit.rs",
+      "scope": "owned",
+      "sha256": "3364a698942c93081c39913bf2017c92fc26f6d5fcd21fdf6c4af3e083f1794e",
+      "bytes": 1705,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world/admit.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world/ccd_tests.rs",
+      "scope": "owned",
+      "sha256": "00907df452b227061db6516dd0796d0e025117694881012302452160a1b83e45",
+      "bytes": 5939,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world/ccd_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world/continuation_tests.rs",
+      "scope": "owned",
+      "sha256": "d6f9dc2f619c2d5bf214a7d8856b3b77e0635f3661d437a75d141f17d0ab3a89",
+      "bytes": 5521,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world/continuation_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world/frame.rs",
+      "scope": "owned",
+      "sha256": "5907b8ad60ed2569df8e8ef46c5462bbb6498e548327b00d845e283094e7bf65",
+      "bytes": 2228,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world/frame.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world/refusal_tests.rs",
+      "scope": "owned",
+      "sha256": "34ee58ac8e0e32174a3c3f47fc2851bf60d3d144c04e6ca930c51c9287f54d20",
+      "bytes": 4387,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world/refusal_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world/test_support.rs",
+      "scope": "owned",
+      "sha256": "e49b58e12b8aee30ec54fda423915e37450e74abd784e0bfb880b429a3519212",
+      "bytes": 7517,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world/test_support.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world_cases.rs",
+      "scope": "owned",
+      "sha256": "bcbbbd6e937336f4d320ebd2865a7dc7b754ec4a27324a8b0d12a16bc0efbbec",
+      "bytes": 210,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world_cases.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/checked_restore/world_tests.rs",
+      "scope": "owned",
+      "sha256": "24f8b8ac0f11f53f6262717b5bce7e6a633f75ebed0c4bdcf880537978ee1786",
+      "bytes": 218,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/checked_restore/world_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/collision_pipeline.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "ec2d1e96413019ac803fdb6dbcd3ba592e6261ad1e7a2a679ba70c16c036a4ac",
+      "bytes": 10162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/collision_pipeline.rs",
+      "baseline_sha256": "ec2d1e96413019ac803fdb6dbcd3ba592e6261ad1e7a2a679ba70c16c036a4ac"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/checked_world.rs",
+      "scope": "owned",
+      "sha256": "906699340f24abe3c4a7ebeaf6e6c1305b7115e774c5bc028ba666cbb9be159b",
+      "bytes": 1739,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/physics_pipeline/checked_world.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/mod.rs",
+      "scope": "owned",
+      "sha256": "a7c328cca1c5c3b27d899219de8080e2b8280f20a297a7c62966d04b9a18ef25",
+      "bytes": 13886,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/physics_pipeline/mod.rs",
+      "baseline_sha256": "637afd12bd7e2fb84603da4872e8d115f1d094121a5b1c6a507177284dca030d"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/solve.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/physics_pipeline/solve.rs",
+      "baseline_sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_world.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier2d/src/pipeline/physics_world.rs",
+      "baseline_sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de"
+    },
+    {
+      "path": "third_party/rapier3d/Cargo.toml",
+      "scope": "unchanged-baseline",
+      "sha256": "cf9bedb954c775482f47dd8f6e12766150717d7b2f0c4012cbf022ab904debfe",
+      "bytes": 11785,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/Cargo.toml",
+      "baseline_sha256": "cf9bedb954c775482f47dd8f6e12766150717d7b2f0c4012cbf022ab904debfe"
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_CHECKED_NARROW.json",
+      "scope": "unchanged-baseline",
+      "sha256": "e5ef8f5a7efcad4c16859ce0c6488ad0578a2a81a903eb6564160a3529b85271",
+      "bytes": 3639,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/INCANT_CHECKED_NARROW.json",
+      "baseline_sha256": "e5ef8f5a7efcad4c16859ce0c6488ad0578a2a81a903eb6564160a3529b85271"
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_CHECKED_WORLD.json",
+      "scope": "owned",
+      "sha256": "57a9959b8046d91cb2af6625ae0fb678bcf2846498acbb87d8791f0abb165bd6",
+      "bytes": 7137,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/INCANT_CHECKED_WORLD.json",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/INCANT_PATCH.md",
+      "scope": "unchanged-baseline",
+      "sha256": "7ea39f16f77b6747c6de6274ac5de825edf0638f89d2e19bb9f247d4cd19d5da",
+      "bytes": 3965,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/INCANT_PATCH.md",
+      "baseline_sha256": "7ea39f16f77b6747c6de6274ac5de825edf0638f89d2e19bb9f247d4cd19d5da"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/arena_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "ae9d41adce78b31bcb6fc7c10a654673799a4aaa426219dd640b1ebb1f4c7fb2",
+      "bytes": 8260,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/data/arena_checkpoint.rs",
+      "baseline_sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/coarena_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "af95d2823d12f5ddf1ca390e8278b4a65aa08e6712273a212c2279089eda36e6",
+      "bytes": 4170,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/data/coarena_checkpoint.rs",
+      "baseline_sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/graph_checkpoint.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3",
+      "bytes": 4966,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/data/graph_checkpoint.rs",
+      "baseline_sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/ccd/ccd_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "d00efd985aff42bed2d5c0caa823aed92a3c4ce0c0220bc05dd88cd5610757f2",
+      "bytes": 1557,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/ccd/ccd_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/ccd/ccd_solver.rs",
+      "scope": "owned",
+      "sha256": "664d1db5fc0608788121c9e126fe863bea70bf9116086b7877d28402fca88646",
+      "bytes": 16404,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/ccd/ccd_solver.rs",
+      "baseline_sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/integration_parameters.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/integration_parameters.rs",
+      "baseline_sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/joint/impulse_joint/impulse_joint_set.rs",
+      "scope": "owned",
+      "sha256": "671cbfe773eb73ed845dc28076952164460a5135d59ff234ed005d54151d1e22",
+      "bytes": 29917,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/joint/impulse_joint/impulse_joint_set.rs",
+      "baseline_sha256": "b71bf56dcb99d076be39187ab7fb51563303369470d01822157b0f8e41cb66c6"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/joint/impulse_joint/impulse_joint_set_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "01697fb64f5175e5ba407c9f408935e8cd3fbea09346527fdb9e3a859de70034",
+      "bytes": 3232,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/joint/impulse_joint/impulse_joint_set_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/joint/multibody_joint/multibody_joint_set.rs",
+      "scope": "owned",
+      "sha256": "244adc4beca54820373474fba7b31aa406ec7971455693d38182b6eccd01215c",
+      "bytes": 19346,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/joint/multibody_joint/multibody_joint_set.rs",
+      "baseline_sha256": "81dcd3c58e8e8267fdeae01330a3d492b17e04ed07ac2cbb11d9912c144c59e2"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/joint/multibody_joint/multibody_joint_set_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "49d3ef677e1e114ba0398393dd5c74412bc987210859bca02256d3459beec0a1",
+      "bytes": 2170,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/joint/multibody_joint/multibody_joint_set_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/soft_body/soft_body_set/soft_body_set.rs",
+      "scope": "owned",
+      "sha256": "03802fd786c8f460b20b64fe6a370e89ef355e0809ddf5482454fc2bab69b220",
+      "bytes": 4157,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/soft_body/soft_body_set/soft_body_set.rs",
+      "baseline_sha256": "4be33cac03f2470043f91d6eee86edb7b84a7d3fc69f61af7bac1bb6a16a4911"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/soft_body/soft_body_set/soft_body_set_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "53e99ac4cc7ffab67aa17f240a29f104fa96e734c26ceab6fe07a98d2e5416c2",
+      "bytes": 1174,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/soft_body/soft_body_set/soft_body_set_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/contact_constraint/contact_constraints_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "e660f6785f47c0a2e31b9c57778932a178c3239d486383ecb8ea1458ac92319e",
+      "bytes": 884,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/contact_constraint/contact_constraints_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/contact_constraint/contact_constraints_set.rs",
+      "scope": "owned",
+      "sha256": "5bc8a2586611f01beba595e197d1e08b04313ac245bbc4612408d0a9299ac4b9",
+      "bytes": 3328,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/contact_constraint/contact_constraints_set.rs",
+      "baseline_sha256": "8946c7ac90c7ef1ddada45015992839ae9fd01e611572774e3940e3ceee63cea"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/interaction_groups.rs",
+      "scope": "owned",
+      "sha256": "bfcaf8a1cd2a425653da85b4b0f1919d18232f422e6673a0e544826245a35522",
+      "bytes": 14047,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/interaction_groups.rs",
+      "baseline_sha256": "d9e114e3e88d8a79f417ff392a0f285b754c4436d2005217e000d70c12c5ccfb"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/interaction_groups_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "ad068fddde5c99f983ae7e9df750dbc045d216265850e9484408cae18b7d9c5d",
+      "bytes": 721,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/interaction_groups_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/joint_constraint/joint_constraints_set.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "80d87709a16984f0a382da71e2fdd64015f37225df564f0617de0d1210a285b6",
+      "bytes": 5772,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/joint_constraint/joint_constraints_set.rs",
+      "baseline_sha256": "80d87709a16984f0a382da71e2fdd64015f37225df564f0617de0d1210a285b6"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/solver_contact_graph.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "eb436a976acf1ce1e46c74ba9781e4511de21d819b6c8ef754f0ed6f9394dfcb",
+      "bytes": 12769,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/solver_contact_graph.rs",
+      "baseline_sha256": "eb436a976acf1ce1e46c74ba9781e4511de21d819b6c8ef754f0ed6f9394dfcb"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "55ff52d4dcde4a381946cfb93f587e7ca7fd273d5f9f3ac7c5a6d5e20f5ca0c7",
+      "bytes": 1274,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+      "baseline_sha256": "55ff52d4dcde4a381946cfb93f587e7ca7fd273d5f9f3ac7c5a6d5e20f5ca0c7"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/staged_island_solver/checkpoint.rs",
+      "scope": "owned",
+      "sha256": "61734785ac690804ec6cad995e101b422d471629a6722b81d0c347075fd246aa",
+      "bytes": 2034,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/staged_island_solver/checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/staged_island_solver/init.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "0506a6bd21d01b4035e615d1e7218b62cefa09b2a1e43bfc52658055ad7bc88d",
+      "bytes": 31973,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/staged_island_solver/init.rs",
+      "baseline_sha256": "0506a6bd21d01b4035e615d1e7218b62cefa09b2a1e43bfc52658055ad7bc88d"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/staged_island_solver/joints.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "dcdfa670b3f17b3abb662016c9f5b5ace3a62b52ca3fa1bf5258eb5fb5af40a4",
+      "bytes": 25363,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/staged_island_solver/joints.rs",
+      "baseline_sha256": "dcdfa670b3f17b3abb662016c9f5b5ace3a62b52ca3fa1bf5258eb5fb5af40a4"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/staged_island_solver/mod.rs",
+      "scope": "owned",
+      "sha256": "350050a9816bc93ee582e18301dbf646e852cb95dac614f2a5eebf20a83888c8",
+      "bytes": 16561,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/staged_island_solver/mod.rs",
+      "baseline_sha256": "1cbd48daf242c35cd41527b0a286b5fab622e17301ffc73262b8bbb8a5564373"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/staged_island_solver/sync.rs",
+      "scope": "owned",
+      "sha256": "40ed5454d5bd0c56246ae8c5f6229acf39c621298e90f62cf3fb15a2bbf6e55e",
+      "bytes": 8250,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/staged_island_solver/sync.rs",
+      "baseline_sha256": "c8c2b7551e11051f8cdc04dad0ab810695403c9ff99259e8158b2329780fe7cf"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/staged_island_solver/sync_checkpoint.rs",
+      "scope": "owned",
+      "sha256": "aef9b3172a6eb036df73e1e1a235971c239eda10348844da8d17945673e46564",
+      "bytes": 625,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/staged_island_solver/sync_checkpoint.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/solver/velocity_solver.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d95803cafe7f6a9ea063f0c5918e952eebeab2c7fdc31d5f65716d0c5ca13bb4",
+      "bytes": 2603,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/dynamics/solver/velocity_solver.rs",
+      "baseline_sha256": "d95803cafe7f6a9ea063f0c5918e952eebeab2c7fdc31d5f65716d0c5ca13bb4"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "806edd955c2f3cd4966a71b5e1d8eecc7b200f41c5324f623cf57ab232bd6afc",
+      "bytes": 3099,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+      "baseline_sha256": "806edd955c2f3cd4966a71b5e1d8eecc7b200f41c5324f623cf57ab232bd6afc"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/contact_clustering.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/contact_clustering.rs",
+      "baseline_sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/contact_pair.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/contact_pair.rs",
+      "baseline_sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/manifold.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d5ca2d2dd0e891435544cadccd847418f59c4dbcb79e61979ea2869f41230602",
+      "bytes": 6692,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/checkpoint/manifold.rs",
+      "baseline_sha256": "d5ca2d2dd0e891435544cadccd847418f59c4dbcb79e61979ea2869f41230602"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "e7e56f19ab57001c6fadd6e2d1e9b9a47817e50830761c9497f50ba53974fb10",
+      "bytes": 5911,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/checkpoint/mod.rs",
+      "baseline_sha256": "e7e56f19ab57001c6fadd6e2d1e9b9a47817e50830761c9497f50ba53974fb10"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/pair.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "2a33e5b6d1cfdeaf3838e259b00433c557a0a10ba56f898dbabd5efafd2da7a1",
+      "bytes": 2592,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/checkpoint/pair.rs",
+      "baseline_sha256": "2a33e5b6d1cfdeaf3838e259b00433c557a0a10ba56f898dbabd5efafd2da7a1"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/tests.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "cd28c2415377ff2b80c0d4c882c02eae65f3687f16e26fd95b872f9dfc32c34d",
+      "bytes": 14892,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/checkpoint/tests.rs",
+      "baseline_sha256": "cd28c2415377ff2b80c0d4c882c02eae65f3687f16e26fd95b872f9dfc32c34d"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/contacts.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66",
+      "bytes": 18554,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/contacts.rs",
+      "baseline_sha256": "59927aea63bbaf51535ed58065176cf491b49503bbf1149c641d877ddbb82b66"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/mod.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d2e9cf363cc8741eea7a1b0243d35c3b2a16356d9e078f3d67054db8fc683950",
+      "bytes": 19671,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/mod.rs",
+      "baseline_sha256": "d2e9cf363cc8741eea7a1b0243d35c3b2a16356d9e078f3d67054db8fc683950"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs",
+      "baseline_sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/pair_update.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/pair_update.rs",
+      "baseline_sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/solver_graph.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc",
+      "bytes": 38994,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/geometry/narrow_phase/solver_graph.rs",
+      "baseline_sha256": "8d28e74338fc8a874ecedd8e1aaa12431625b802c443de187ae875a123778ffc"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d413c42071ba425879791a6bad45046558e2c9a03ba42e8d5c56e98b73263433",
+      "bytes": 131,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+      "baseline_sha256": "d413c42071ba425879791a6bad45046558e2c9a03ba42e8d5c56e98b73263433"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/allocation_test_meter.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "822e87f390102e2558d57a468a89c8a68b16cb2c5399a52108ccbc05ca01f234",
+      "bytes": 1647,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/allocation_test_meter.rs",
+      "baseline_sha256": "822e87f390102e2558d57a468a89c8a68b16cb2c5399a52108ccbc05ca01f234"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/integration.rs",
+      "scope": "owned",
+      "sha256": "d9d3ee140bd6be46de6c484907d34aa795d9285cc94fd53ee59e1eea3ac7c69f",
+      "bytes": 2768,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/integration.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/island_fixture.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "2e1477c9f2134ff8fbceaa60b634e2918e23831e2646d051da52202908d3a32f",
+      "bytes": 2662,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/island_fixture.rs",
+      "baseline_sha256": "2e1477c9f2134ff8fbceaa60b634e2918e23831e2646d051da52202908d3a32f"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/0.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "860e178032fe1e46bba6377b30c2b9be4dccfde5930fe28885861fed391789dd",
+      "bytes": 9000,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/0.bin",
+      "baseline_sha256": "860e178032fe1e46bba6377b30c2b9be4dccfde5930fe28885861fed391789dd"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/16.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "c93c1c74d3d72f0c5494e030db858cb0ea2598b3f7f4244d3376136eb003d679",
+      "bytes": 8276,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/16.bin",
+      "baseline_sha256": "c93c1c74d3d72f0c5494e030db858cb0ea2598b3f7f4244d3376136eb003d679"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/32.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "69b2e07a2e5da014a6764016ae84c39679bd7b9dcc1fa3935c3f3a29c66338e7",
+      "bytes": 8308,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/32.bin",
+      "baseline_sha256": "69b2e07a2e5da014a6764016ae84c39679bd7b9dcc1fa3935c3f3a29c66338e7"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/48.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "1976814b76135720a062262e119e7b40e0f2321bfe9fb26287e327ba0fb1293e",
+      "bytes": 8096,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/island_fixtures/48.bin",
+      "baseline_sha256": "1976814b76135720a062262e119e7b40e0f2321bfe9fb26287e327ba0fb1293e"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+      "scope": "owned",
+      "sha256": "c87a21975a6b132da70eb8fd55a334303b3e16ade7e62e13c96323976e285c07",
+      "bytes": 3673,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+      "baseline_sha256": "1c3f8c7a31e5dcd04846f11a12d2e4557f6c559e02b0b24b1c1095246422ccb4"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/narrow.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "d81f7052f24877c91032a0d7ef255125e16950311eb97059e3844725ae3cfb1b",
+      "bytes": 372,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/narrow.rs",
+      "baseline_sha256": "d81f7052f24877c91032a0d7ef255125e16950311eb97059e3844725ae3cfb1b"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixture.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "758c39a187e7dc8a68b70161b8427d07127989a4178303c046aea05054590c4b",
+      "bytes": 5081,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/narrow_fixture.rs",
+      "baseline_sha256": "758c39a187e7dc8a68b70161b8427d07127989a4178303c046aea05054590c4b"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/0.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "15ffa51bc4dfb242a8fd1171b071c6ce6267664206d300a009ba31c45246f638",
+      "bytes": 9760,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/0.bin",
+      "baseline_sha256": "15ffa51bc4dfb242a8fd1171b071c6ce6267664206d300a009ba31c45246f638"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/16.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "5a40ec921673bfb9f3f31f3f5ff429fa00ed6892eb2d14d8aab57f9221b99240",
+      "bytes": 9048,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/16.bin",
+      "baseline_sha256": "5a40ec921673bfb9f3f31f3f5ff429fa00ed6892eb2d14d8aab57f9221b99240"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/32.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "54eacb3c38314283ebfe8904345e35e36d58c1fa404723f59e523b983d9b4f38",
+      "bytes": 8116,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/32.bin",
+      "baseline_sha256": "54eacb3c38314283ebfe8904345e35e36d58c1fa404723f59e523b983d9b4f38"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/48.bin",
+      "scope": "unchanged-baseline",
+      "sha256": "b62aec1d739d0a95228c94e1de207256f77efb84f0ca09c7775f52393d9c09c1",
+      "bytes": 8476,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/48.bin",
+      "baseline_sha256": "b62aec1d739d0a95228c94e1de207256f77efb84f0ca09c7775f52393d9c09c1"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/work.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "506f328aed4db260689f1565fe85839e6f81178a6fd40636064624bc45df2aee",
+      "bytes": 4817,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/work.rs",
+      "baseline_sha256": "506f328aed4db260689f1565fe85839e6f81178a6fd40636064624bc45df2aee"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world.rs",
+      "scope": "owned",
+      "sha256": "9e7eacd13b1556feaaceac30ea411f9071af61d8df459c3b1f14dc91ab876979",
+      "bytes": 3949,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world/admit.rs",
+      "scope": "owned",
+      "sha256": "3364a698942c93081c39913bf2017c92fc26f6d5fcd21fdf6c4af3e083f1794e",
+      "bytes": 1705,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world/admit.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world/ccd_tests.rs",
+      "scope": "owned",
+      "sha256": "00907df452b227061db6516dd0796d0e025117694881012302452160a1b83e45",
+      "bytes": 5939,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world/ccd_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world/continuation_tests.rs",
+      "scope": "owned",
+      "sha256": "d6f9dc2f619c2d5bf214a7d8856b3b77e0635f3661d437a75d141f17d0ab3a89",
+      "bytes": 5521,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world/continuation_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world/frame.rs",
+      "scope": "owned",
+      "sha256": "5907b8ad60ed2569df8e8ef46c5462bbb6498e548327b00d845e283094e7bf65",
+      "bytes": 2228,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world/frame.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world/refusal_tests.rs",
+      "scope": "owned",
+      "sha256": "34ee58ac8e0e32174a3c3f47fc2851bf60d3d144c04e6ca930c51c9287f54d20",
+      "bytes": 4387,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world/refusal_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world/test_support.rs",
+      "scope": "owned",
+      "sha256": "e49b58e12b8aee30ec54fda423915e37450e74abd784e0bfb880b429a3519212",
+      "bytes": 7517,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world/test_support.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world_cases.rs",
+      "scope": "owned",
+      "sha256": "bcbbbd6e937336f4d320ebd2865a7dc7b754ec4a27324a8b0d12a16bc0efbbec",
+      "bytes": 210,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world_cases.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/checked_restore/world_tests.rs",
+      "scope": "owned",
+      "sha256": "24f8b8ac0f11f53f6262717b5bce7e6a633f75ebed0c4bdcf880537978ee1786",
+      "bytes": 218,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/checked_restore/world_tests.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/collision_pipeline.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "ec2d1e96413019ac803fdb6dbcd3ba592e6261ad1e7a2a679ba70c16c036a4ac",
+      "bytes": 10162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/collision_pipeline.rs",
+      "baseline_sha256": "ec2d1e96413019ac803fdb6dbcd3ba592e6261ad1e7a2a679ba70c16c036a4ac"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_pipeline/checked_world.rs",
+      "scope": "owned",
+      "sha256": "906699340f24abe3c4a7ebeaf6e6c1305b7115e774c5bc028ba666cbb9be159b",
+      "bytes": 1739,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/physics_pipeline/checked_world.rs",
+      "baseline_sha256": null
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_pipeline/mod.rs",
+      "scope": "owned",
+      "sha256": "a7c328cca1c5c3b27d899219de8080e2b8280f20a297a7c62966d04b9a18ef25",
+      "bytes": 13886,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/physics_pipeline/mod.rs",
+      "baseline_sha256": "637afd12bd7e2fb84603da4872e8d115f1d094121a5b1c6a507177284dca030d"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_pipeline/solve.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/physics_pipeline/solve.rs",
+      "baseline_sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_world.rs",
+      "scope": "unchanged-baseline",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/third_party/rapier3d/src/pipeline/physics_world.rs",
+      "baseline_sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de"
+    },
+    {
+      "path": "tools/probes/physics-native-construction/prepare.py",
+      "scope": "unchanged-baseline",
+      "sha256": "350133f10f25955c837850fd2d31cf0208cbe9bd581300351bc0a6095cc6a0d3",
+      "bytes": 2828,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/tools/probes/physics-native-construction/prepare.py",
+      "baseline_sha256": "350133f10f25955c837850fd2d31cf0208cbe9bd581300351bc0a6095cc6a0d3"
+    },
+    {
+      "path": "tools/probes/physics-native-construction/prepare_world.py",
+      "scope": "owned",
+      "sha256": "53840114560e1c9e30f4adddbabb8d346f7785966ea0a4e47ecbf330e4459382",
+      "bytes": 4150,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/source-final/tools/probes/physics-native-construction/prepare_world.py",
+      "baseline_sha256": null
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/physics-native-world-construction-logs.json.gz",
+    "sha256": "99674837e834b0a690c192d566f002fcc3b4568c926a26e649a82dcf1a653e60",
+    "records": 15706,
+    "payloads": 862
+  },
+  "tests": {
+    "focused-013": {
+      "passed": 21,
+      "summary_rows": 2,
+      "nonempty_groups": 2
+    },
+    "focused-final-det-003": {
+      "passed": 21,
+      "summary_rows": 2,
+      "nonempty_groups": 2
+    },
+    "focused-final-fast8-003": {
+      "passed": 21,
+      "summary_rows": 2,
+      "nonempty_groups": 2
+    },
+    "native-tests-det-002": {
+      "passed": 138,
+      "summary_rows": 2,
+      "nonempty_groups": 2
+    },
+    "native-tests-fast8-002": {
+      "passed": 138,
+      "summary_rows": 2,
+      "nonempty_groups": 2
+    },
+    "snapshot-tests-det-002": {
+      "passed": 227,
+      "summary_rows": 27,
+      "nonempty_groups": 26
+    },
+    "snapshot-tests-fast8-002": {
+      "passed": 227,
+      "summary_rows": 27,
+      "nonempty_groups": 26
+    }
+  },
+  "commands": [
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/clippy-native-det-001.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/clippy-native-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/clippy-native-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/clippy-snapshot-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/conventions-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/diff-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/fixture-diff-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/fixture-fmt-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/fmt-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-001.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-002.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-003.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-004.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-005.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-006.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-007.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-008.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-009.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-010.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-011.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-012.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-013.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-final-det-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/focused-final-fast8-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/guards-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/lean-construction-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/lean-default-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-005.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-006.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-007.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-008.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-009.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-010.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-011.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-012.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-013.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-final-det-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/metadata-final-fast8-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/native-graph-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/native-graph-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/native-graph-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/native-tests-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/native-tests-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/native-tests-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-005.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-006.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-007.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-008.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-009.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-010.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-011.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-012.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-013.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-det-001.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-final-det-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepare-final-fast8-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/runtime-graph-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/runtime-normal-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/snapshot-tests-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/snapshot-tests-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/vendor-owned-fmt-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/wasm-construction-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/wasm-default-002.json",
+      "exit_code": 0
+    }
+  ],
+  "prepared_native_harnesses": [
+    {
+      "mode": "det",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepared-qualification-det-002",
+      "copied_sources": 766,
+      "test_only_lock_extras": [
+        [
+          "bincode",
+          "1.3.3",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
+        ],
+        [
+          "oorandom",
+          "11.1.5",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "d6790f58c7ff633d8771f42965289203411a5e5c68388703c06e14f24770b41e"
+        ]
+      ]
+    },
+    {
+      "mode": "fast8",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/prepared-qualification-fast8-002",
+      "copied_sources": 766,
+      "test_only_lock_extras": [
+        [
+          "bincode",
+          "1.3.3",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "b1f45e9417d87227c7a56d22e471c6206462cba514c7590c09aff4cf6d1ddcad"
+        ],
+        [
+          "oorandom",
+          "11.1.5",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "d6790f58c7ff633d8771f42965289203411a5e5c68388703c06e14f24770b41e"
+        ]
+      ]
+    }
+  ],
+  "allocation_measurements": [
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 22650,
+      "actual_bytes": 22642,
+      "calls": 53
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 21992,
+      "actual_bytes": 21984,
+      "calls": 57
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 20848,
+      "actual_bytes": 20840,
+      "calls": 56
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 21394,
+      "actual_bytes": 21386,
+      "calls": 55
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17608,
+      "actual_bytes": 17608,
+      "calls": 26
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17564,
+      "actual_bytes": 17564,
+      "calls": 25
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17880,
+      "actual_bytes": 17880,
+      "calls": 29
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 264648,
+      "actual_bytes": 264648,
+      "calls": 538
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17556,
+      "actual_bytes": 17556,
+      "calls": 24
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17580,
+      "actual_bytes": 17580,
+      "calls": 23
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17412,
+      "actual_bytes": 17412,
+      "calls": 18
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17600,
+      "actual_bytes": 17600,
+      "calls": 25
+    },
+    {
+      "log": "focused-013",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 25454,
+      "actual_bytes": 25446,
+      "calls": 63
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 24612,
+      "actual_bytes": 24604,
+      "calls": 63
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 23544,
+      "actual_bytes": 23536,
+      "calls": 60
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 23978,
+      "actual_bytes": 23970,
+      "calls": 59
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20072,
+      "actual_bytes": 20072,
+      "calls": 26
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20020,
+      "actual_bytes": 20020,
+      "calls": 25
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20416,
+      "actual_bytes": 20416,
+      "calls": 29
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 312040,
+      "actual_bytes": 312040,
+      "calls": 538
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20012,
+      "actual_bytes": 20012,
+      "calls": 24
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20044,
+      "actual_bytes": 20044,
+      "calls": 23
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 19868,
+      "actual_bytes": 19868,
+      "calls": 18
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20064,
+      "actual_bytes": 20064,
+      "calls": 25
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 21330,
+      "actual_bytes": 21322,
+      "calls": 42
+    },
+    {
+      "log": "focused-013",
+      "dimension": 3,
+      "charged_bytes": 21330,
+      "actual_bytes": 21322,
+      "calls": 42
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 22650,
+      "actual_bytes": 22642,
+      "calls": 53
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 21992,
+      "actual_bytes": 21984,
+      "calls": 57
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 20848,
+      "actual_bytes": 20840,
+      "calls": 56
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 21394,
+      "actual_bytes": 21386,
+      "calls": 55
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17608,
+      "actual_bytes": 17608,
+      "calls": 26
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17564,
+      "actual_bytes": 17564,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17880,
+      "actual_bytes": 17880,
+      "calls": 29
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 264648,
+      "actual_bytes": 264648,
+      "calls": 538
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17556,
+      "actual_bytes": 17556,
+      "calls": 24
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17580,
+      "actual_bytes": 17580,
+      "calls": 23
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17412,
+      "actual_bytes": 17412,
+      "calls": 18
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17600,
+      "actual_bytes": 17600,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 25454,
+      "actual_bytes": 25446,
+      "calls": 63
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 24612,
+      "actual_bytes": 24604,
+      "calls": 63
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 23544,
+      "actual_bytes": 23536,
+      "calls": 60
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 23978,
+      "actual_bytes": 23970,
+      "calls": 59
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20072,
+      "actual_bytes": 20072,
+      "calls": 26
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20020,
+      "actual_bytes": 20020,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20416,
+      "actual_bytes": 20416,
+      "calls": 29
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 312040,
+      "actual_bytes": 312040,
+      "calls": 538
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20012,
+      "actual_bytes": 20012,
+      "calls": 24
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20044,
+      "actual_bytes": 20044,
+      "calls": 23
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 19868,
+      "actual_bytes": 19868,
+      "calls": 18
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20064,
+      "actual_bytes": 20064,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 21330,
+      "actual_bytes": 21322,
+      "calls": 42
+    },
+    {
+      "log": "focused-final-det-003",
+      "dimension": 3,
+      "charged_bytes": 21330,
+      "actual_bytes": 21322,
+      "calls": 42
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 26682,
+      "actual_bytes": 26674,
+      "calls": 52
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 25960,
+      "actual_bytes": 25952,
+      "calls": 56
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 24880,
+      "actual_bytes": 24872,
+      "calls": 55
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 25394,
+      "actual_bytes": 25386,
+      "calls": 54
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21704,
+      "actual_bytes": 21704,
+      "calls": 26
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21660,
+      "actual_bytes": 21660,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21976,
+      "actual_bytes": 21976,
+      "calls": 29
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 268744,
+      "actual_bytes": 268744,
+      "calls": 538
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21652,
+      "actual_bytes": 21652,
+      "calls": 24
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21728,
+      "actual_bytes": 21728,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21728,
+      "actual_bytes": 21728,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21676,
+      "actual_bytes": 21676,
+      "calls": 23
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21508,
+      "actual_bytes": 21508,
+      "calls": 18
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21696,
+      "actual_bytes": 21696,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 2,
+      "charged_bytes": 21728,
+      "actual_bytes": 21728,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 30046,
+      "actual_bytes": 30038,
+      "calls": 62
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 29092,
+      "actual_bytes": 29084,
+      "calls": 62
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 27992,
+      "actual_bytes": 27984,
+      "calls": 59
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 28442,
+      "actual_bytes": 28434,
+      "calls": 58
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24360,
+      "actual_bytes": 24360,
+      "calls": 26
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24308,
+      "actual_bytes": 24308,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24704,
+      "actual_bytes": 24704,
+      "calls": 29
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 348968,
+      "actual_bytes": 348968,
+      "calls": 538
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24300,
+      "actual_bytes": 24300,
+      "calls": 24
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24392,
+      "actual_bytes": 24392,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24392,
+      "actual_bytes": 24392,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24332,
+      "actual_bytes": 24332,
+      "calls": 23
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24156,
+      "actual_bytes": 24156,
+      "calls": 18
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24352,
+      "actual_bytes": 24352,
+      "calls": 25
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 24392,
+      "actual_bytes": 24392,
+      "calls": 27
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 25682,
+      "actual_bytes": 25674,
+      "calls": 41
+    },
+    {
+      "log": "focused-final-fast8-003",
+      "dimension": 3,
+      "charged_bytes": 25682,
+      "actual_bytes": 25674,
+      "calls": 41
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 22650,
+      "actual_bytes": 22642,
+      "calls": 53
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 21992,
+      "actual_bytes": 21984,
+      "calls": 57
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 20848,
+      "actual_bytes": 20840,
+      "calls": 56
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 21394,
+      "actual_bytes": 21386,
+      "calls": 55
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17608,
+      "actual_bytes": 17608,
+      "calls": 26
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17564,
+      "actual_bytes": 17564,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17880,
+      "actual_bytes": 17880,
+      "calls": 29
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 264648,
+      "actual_bytes": 264648,
+      "calls": 538
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17556,
+      "actual_bytes": 17556,
+      "calls": 24
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17580,
+      "actual_bytes": 17580,
+      "calls": 23
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17412,
+      "actual_bytes": 17412,
+      "calls": 18
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17600,
+      "actual_bytes": 17600,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 2,
+      "charged_bytes": 17632,
+      "actual_bytes": 17632,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 25454,
+      "actual_bytes": 25446,
+      "calls": 63
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 24612,
+      "actual_bytes": 24604,
+      "calls": 63
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 23544,
+      "actual_bytes": 23536,
+      "calls": 60
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 23978,
+      "actual_bytes": 23970,
+      "calls": 59
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20072,
+      "actual_bytes": 20072,
+      "calls": 26
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20020,
+      "actual_bytes": 20020,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20416,
+      "actual_bytes": 20416,
+      "calls": 29
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 312040,
+      "actual_bytes": 312040,
+      "calls": 538
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20012,
+      "actual_bytes": 20012,
+      "calls": 24
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20044,
+      "actual_bytes": 20044,
+      "calls": 23
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 19868,
+      "actual_bytes": 19868,
+      "calls": 18
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20064,
+      "actual_bytes": 20064,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 20104,
+      "actual_bytes": 20104,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 21330,
+      "actual_bytes": 21322,
+      "calls": 42
+    },
+    {
+      "log": "native-tests-det-002",
+      "dimension": 3,
+      "charged_bytes": 21330,
+      "actual_bytes": 21322,
+      "calls": 42
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 26682,
+      "actual_bytes": 26674,
+      "calls": 52
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 25960,
+      "actual_bytes": 25952,
+      "calls": 56
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 24880,
+      "actual_bytes": 24872,
+      "calls": 55
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 25394,
+      "actual_bytes": 25386,
+      "calls": 54
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21704,
+      "actual_bytes": 21704,
+      "calls": 26
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21660,
+      "actual_bytes": 21660,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21976,
+      "actual_bytes": 21976,
+      "calls": 29
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 268744,
+      "actual_bytes": 268744,
+      "calls": 538
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21652,
+      "actual_bytes": 21652,
+      "calls": 24
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21728,
+      "actual_bytes": 21728,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21728,
+      "actual_bytes": 21728,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21676,
+      "actual_bytes": 21676,
+      "calls": 23
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21508,
+      "actual_bytes": 21508,
+      "calls": 18
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21696,
+      "actual_bytes": 21696,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 2,
+      "charged_bytes": 21728,
+      "actual_bytes": 21728,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 30046,
+      "actual_bytes": 30038,
+      "calls": 62
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 29092,
+      "actual_bytes": 29084,
+      "calls": 62
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 27992,
+      "actual_bytes": 27984,
+      "calls": 59
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 28442,
+      "actual_bytes": 28434,
+      "calls": 58
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24360,
+      "actual_bytes": 24360,
+      "calls": 26
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24308,
+      "actual_bytes": 24308,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24704,
+      "actual_bytes": 24704,
+      "calls": 29
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 348968,
+      "actual_bytes": 348968,
+      "calls": 538
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24300,
+      "actual_bytes": 24300,
+      "calls": 24
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24392,
+      "actual_bytes": 24392,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24392,
+      "actual_bytes": 24392,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24332,
+      "actual_bytes": 24332,
+      "calls": 23
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24156,
+      "actual_bytes": 24156,
+      "calls": 18
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24352,
+      "actual_bytes": 24352,
+      "calls": 25
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 24392,
+      "actual_bytes": 24392,
+      "calls": 27
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 25682,
+      "actual_bytes": 25674,
+      "calls": 41
+    },
+    {
+      "log": "native-tests-fast8-002",
+      "dimension": 3,
+      "charged_bytes": 25682,
+      "actual_bytes": 25674,
+      "calls": 41
+    }
+  ],
+  "binaries": [
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-1496def7e0ef3cb6",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/focused-final-det-003-rapier2d-1496def7e0ef3cb6",
+      "sha256": "970b093c815c9696aef5fe65139b217993c5bd41b898e53b9c4b5e25a2755689",
+      "bytes": 12239776,
+      "mode": "0o755",
+      "executed_log": "focused-final-det-003.log",
+      "source_generation": 3
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-cea959100e29d5a0",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/focused-final-det-003-rapier3d-cea959100e29d5a0",
+      "sha256": "605427c645332d98ca3583bb8474c0bce91a0dc7d5a02bcbe574bcce0cc0d1e0",
+      "bytes": 13503856,
+      "mode": "0o755",
+      "executed_log": "focused-final-det-003.log",
+      "source_generation": 3
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-2d97f79c39c21dfc",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/focused-final-fast8-003-rapier2d-2d97f79c39c21dfc",
+      "sha256": "30fad55bd253fe496f373e0f13bf647b5d73fb361ff536fc99342424d444e7ac",
+      "bytes": 12123920,
+      "mode": "0o755",
+      "executed_log": "focused-final-fast8-003.log",
+      "source_generation": 3
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-f5ebe9b7bfb42663",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-world-construction-001/frozen-binaries/focused-final-fast8-003-rapier3d-f5ebe9b7bfb42663",
+      "sha256": "e296855ea594bd2b1b9dc7f15aaa4b202bac0dbedb0a60b090daa09555f4aa55",
+      "bytes": 13358928,
+      "mode": "0o755",
+      "executed_log": "focused-final-fast8-003.log",
+      "source_generation": 3
+    }
+  ],
+  "historical_binary_correction": {
+    "producer": "d4bde636c685c799dcf6a34e2e8b25b7f9a57301",
+    "receipt_followup": "03869da43e14a0fd0b4f1dd204f5b45cc2e02c5c",
+    "manifest_sha256": "8346fd8b6d80d35826642fd2834da4fb2ce267ba9c82cf3ecdbaa83c8ffeaccf",
+    "archive_sha256": "4cc2c04d9f7ff99ccc0c88b510fabdc80a5c56fa65d2183e275bff6e50cd69de",
+    "archive_git_path": "docs/spikes/evidence/physics-native-world-construction-logs.json.gz",
+    "finding": "Collector copied source002 Cargo artifact paths only after source003 rebuilt the same paths. Those four copies cannot establish historical source002 executed binary identity. No contemporaneous source002 binary hashes were saved.",
+    "correction": "Retain only four previously frozen focused-final source003 binaries; broad source002 logs and exact source copies remain valid, original source002 binary bytes are not retained. No rebuild or rerun."
+  },
+  "limits": [
+    "Original source002 broad-test binaries were overwritten by later Cargo builds and are not retained; broad logs/source remain historical evidence. Only four source003 focused binaries are retained as executed identities.",
+    "Private captured primitive-world candidate only. No public bytes-to-live installer or runtime save admission.",
+    "No reconstructed physical owner is a trusted clone. A trusted Rayon pool Arc is shared process execution policy.",
+    "Exact event bit records are compared as multisets, not parallel callback scheduling order.",
+    "Capture provenance is supplied only by the exclusive in-crate native harness; private ICNATIV1 binding is not authentication.",
+    "Empty-but-used joint or soft families, custom/compound state, deferred work, quarantine, zero-dt and pending journals remain refused.",
+    "Only native wake tick7 refuses intermediate capture in the pinned churn sequence; both worlds retain and compare that exact boundary.",
+    "Logical allocation requests are measured on arm64 macOS, not allocator overhead/RSS; Box/Arc OOM semantics remain.",
+    "Inherited fast8 private island/narrow fixtures use explicit accepted source hashes; full-world controls capture fresh state in each current mode.",
+    "Scoped native library Clippy, not blanket vendored all-target lint. No GPU/device/performance claim.",
+    "Outer SceneWorld/ECS, stable-ID maps, external event queues and poison save composition remain separate."
+  ]
+}

@@ -312,3 +312,6 @@ impl PhysicsPipeline {
             .map(|pool| pool.current_num_threads())
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+mod checked_world;

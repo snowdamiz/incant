@@ -726,3 +726,7 @@ impl ImpulseJointSet {
         deleted
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "impulse_joint_set_checkpoint.rs"]
+mod checkpoint;

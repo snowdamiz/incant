@@ -1,13 +1,12 @@
-//! Default-off numeric admission for a checked inert frame. Public functions
-//! never construct a live owner. Private staged storage constructors are tested
-//! in-crate only and are not a complete body/collider/PhysicsWorld installer.
-//! This token is deliberately not a restore capability: compound/subshape,
-//! historical broad bounds, full native allocation and runtime-owner admission
-//! remain necessary before the future private exact-field constructor.
+//! Default-off checked inert admission and exclusive in-memory checkpoints.
+//! The numeric token alone is not a restore capability. Only the capture owner
+//! authenticates a completed step and issues an opaque NativeFrame; its private
+//! reconstruction preserves the supported primitive world under shared budgets.
+//! There is no public arbitrary bytes-to-live installer. Persisted byte admission,
+//! outer stable IDs/ECS/events and public physics file saves remain separate.
 #[cfg(not(feature = "f32"))]
 compile_error!("checked Incant physics frames require the pinned f32 solver");
-// Private staging is exercised in native unit tests until the whole owner
-// constructor is complete. No public constructor or installer is exposed.
+// Native staging remains private behind the exclusive opaque capture owner.
 #[allow(dead_code)]
 pub(crate) mod allocation;
 #[allow(dead_code)]
@@ -93,3 +92,11 @@ pub fn admit_numeric_frame<'a>(
 
 #[cfg(test)]
 pub(crate) mod allocation_test_meter;
+
+#[allow(dead_code)]
+mod integration;
+#[allow(dead_code)]
+pub(crate) mod world;
+
+/// Default-off exclusive in-memory native capture ownership.
+pub mod capture;

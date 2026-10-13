@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "status": "accepted",
+  "at": "2026-10-13T19:34:43.496234+00:00",
+  "findings": [],
+  "producer": "5f287f875520d65c04c20496eaeee4cff68f76d1",
+  "integrated_head": "485a8faa67e5beacbf862a5a0b0536888df0fbd2",
+  "base": "2e6f5ead7c09c078d39ed4a24366346ce23dbe5d",
+  "source_paths": [
+    ".github/workflows/development-wasm.yml",
+    "docs/spikes/evidence/macos-conformance-timeout-checkpoint27.json",
+    "docs/spikes/macos-conformance-timeout.md"
+  ],
+  "workflow_before_sha256": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b",
+  "workflow_after_sha256": "9603cb7fe976a9e03ca04bddfcf17a17a54857574adaed431af993cd18876433",
+  "semantic_change_only": "macOS job maximum 40 to 90 minutes; Linux remains 40",
+  "verification": [
+    "Complete three-path diff reviewed; replacing exact new comment/timeout block restores original workflow byte-for-byte.",
+    "Sanitized retained job steps and exact head match independent raw job query and timeout annotation.",
+    "Nine workflow/profile guard tests independently rerun: passed. Conventions and full-base diff checks passed.",
+    "Main242 exact base; cherry-pick source/docs byte-identical to reviewed producer."
+  ],
+  "limitations": [
+    "No hosted successful retry or speed improvement claim; configured timeout cause retained.",
+    "PyYAML and actionlint unavailable in reviewer default environment; producer parsed-YAML check is retained, reviewer used stronger exact byte replacement assertion for all other workflow bytes.",
+    "Checkpoint27 remains immutable and unpromotable after cancellation; no replacement while active workflows run."
+  ]
+}

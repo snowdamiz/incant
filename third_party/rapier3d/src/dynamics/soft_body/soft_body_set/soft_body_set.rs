@@ -105,3 +105,7 @@ impl core::ops::IndexMut<SoftBodyHandle> for SoftBodySet {
         &mut self.bodies[index.0]
     }
 }
+
+#[cfg(feature = "incant-checked-restore")]
+#[path = "soft_body_set_checkpoint.rs"]
+mod checkpoint;

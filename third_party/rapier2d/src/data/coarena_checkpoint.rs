@@ -3,6 +3,31 @@ use super::*;
 use crate::pipeline::checked_restore::allocation::*;
 use incant_physics_snapshot::ValidatedCoarena;
 impl<T> Coarena<T> {
+    pub(crate) fn checkpoint_rows(&self) -> &[(u32, T)] {
+        &self.data
+    }
+    pub(crate) fn checkpoint_capture(
+        &self,
+        identity: incant_physics_snapshot::Identity,
+        budget: &mut incant_physics_snapshot::Budget,
+    ) -> incant_physics_snapshot::Result<incant_physics_snapshot::CoarenaRecord> {
+        use incant_physics_snapshot::{CoarenaRecord, CoarenaRow, Error, MAX_ITEMS};
+        if self.data.len() > MAX_ITEMS {
+            return Err(Error::Limit);
+        }
+        let mut rows = budget.vector(self.data.len())?;
+        rows.extend(
+            self.data
+                .iter()
+                .enumerate()
+                .map(|(i, (generation, _))| CoarenaRow {
+                    generation: *generation,
+                    row: i as u32,
+                }),
+        );
+        Ok(CoarenaRecord { identity, rows })
+    }
+
     pub(crate) fn checkpoint_plan(
         value: &ValidatedCoarena<'_>,
     ) -> ConstructionResult<AllocationPlan> {
@@ -103,5 +128,11 @@ mod tests {
         *a.ensure_element_exist(Index::from_raw_parts(3, 2), 55) += 1;
         *b.ensure_element_exist(Index::from_raw_parts(3, 2), 55) += 1;
         assert_eq!(a.data, b.data);
+    }
+}
+
+impl<T> Coarena<T> {
+    pub(crate) fn checkpoint_no_rows(&self) -> bool {
+        self.data.is_empty()
     }
 }

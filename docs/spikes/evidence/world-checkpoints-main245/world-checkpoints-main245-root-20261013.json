@@ -1,0 +1,20 @@
+{
+  "status": "accepted",
+  "scope": "Root independent current-main245 composition review; no new build or runtime execution",
+  "head": "2493c24a20a052909745b0ef5c6f36b753405439",
+  "source_composition_sha256": "584a92480dbe4ec315fdfe5e0cf6a13fd9116c5393b1b258e2aa745c201aabc3",
+  "source_and_build_paths": 3651,
+  "checks": [
+    "Verifier source read; complete selected path-set equality and every current/source004 hash checked.",
+    "Producer archive/source/receipt hashes verified and tests retain exact generation; default205 consumer results clearly003, runtime261 per mode004.",
+    "Three ordinary/det/fast8 normal/build dependency graph equality checks passed; optional graph isolated.",
+    "No source changes beyond accepted6252,9f335231,6f782a26; documentation accurately states in-memory scope and unmet gates."
+  ],
+  "verifier_exit": 0,
+  "verifier_stdout": "Verified 342 records, 8 source identities, 10 passing command receipts (executable payloads remain local). No fresh test, GPU, device, or performance claim.\nVerified 3651 exact current/source004 inputs, three selected dependency graphs and 342 retained producer records. No new build or runtime execution claim.\n",
+  "findings": [],
+  "limits": [
+    "Current composition source/dependency proof, not newly compiled or executed.",
+    "Public persisted physics and full game-session/device/performance gates remain open."
+  ]
+}

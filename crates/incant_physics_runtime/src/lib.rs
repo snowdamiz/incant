@@ -14,6 +14,16 @@ pub use navigation::navigation_geometry;
 mod character;
 mod character_frame;
 mod character_queries;
+#[cfg(feature = "native-checkpoints")]
+mod checkpoint;
+#[cfg(any(test, feature = "native-checkpoints"))]
+mod checkpoint_validation;
+#[cfg(feature = "native-checkpoints")]
+pub use checkpoint::{CheckpointError, PhysicsCheckpoint};
+#[cfg(feature = "native-checkpoints")]
+pub use rapier3d::pipeline::checked_restore::WorkBudget as CheckpointWorkBudget;
+mod native_owner;
+use native_owner::NativeOwner;
 mod queries;
 mod shapes;
 pub use character::{
@@ -155,7 +165,7 @@ struct Entry {
     config: PhysicsSpec,
 }
 struct SceneWorld<I: Ord> {
-    world: PhysicsWorld,
+    world: NativeOwner,
     entries: BTreeMap<I, Entry>,
     ids: HashMap<ColliderHandle, I>,
     query_dirty: bool,
@@ -170,7 +180,7 @@ pub struct PhysicsRuntime<I: Ord> {
 impl<I: Ord> Default for SceneWorld<I> {
     fn default() -> Self {
         Self {
-            world: PhysicsWorld::default(),
+            world: NativeOwner::default(),
             entries: BTreeMap::new(),
             ids: HashMap::new(),
             query_dirty: false,
@@ -300,18 +310,18 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
             if let Some(cache) = &mut scene.character {
                 cache.ready = false;
             }
-            scene.world.integration_parameters.dt = dt as f32;
-            scene.world.step();
+            scene.world.edit().integration_parameters.dt = dt as f32;
+            scene.world.step()?;
             scene.query_dirty = false;
-            if !scene.world.quarantine().bodies().is_empty()
-                || !scene.world.quarantine().colliders().is_empty()
+            if !scene.world.read().quarantine().bodies().is_empty()
+                || !scene.world.read().quarantine().colliders().is_empty()
             {
                 self.failed = true;
                 return Err(PhysicsError::NumericRange);
             }
             for entry in scene.entries.values_mut() {
                 if let Some(body) = entry.body {
-                    let body = &scene.world.bodies[body];
+                    let body = &scene.world.read().bodies[body];
                     let state = BodyState {
                         translation: body.translation().to_array().map(f64::from),
                         rotation: body.rotation().to_array().map(f64::from),
@@ -326,7 +336,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                     entry.config.state = state;
                 }
             }
-            for (a, _, b, _, intersecting) in scene.world.intersection_pairs() {
+            for (a, _, b, _, intersecting) in scene.world.read().intersection_pairs() {
                 if !intersecting {
                     continue;
                 }
@@ -398,14 +408,17 @@ impl<I: Ord + Clone> SceneWorld<I> {
         let previous = &entry.config.state;
         if state.translation != previous.translation || state.rotation != previous.rotation {
             if let Some(body) = entry.body {
-                self.world.bodies[body].set_position(pose(state), true);
+                self.world.edit().bodies[body].set_position(pose(state), true);
             } else {
-                self.world.colliders[entry.collider].set_position(pose(state));
+                self.world.edit().colliders[entry.collider].set_position(pose(state));
             }
             self.query_dirty = true;
         }
-        if let Some(body) = entry.body {
-            let body = &mut self.world.bodies[body];
+        if let Some(body) = entry.body
+            && (state.velocity != previous.velocity
+                || state.angular_velocity != previous.angular_velocity)
+        {
+            let body = &mut self.world.edit().bodies[body];
             if state.velocity != previous.velocity {
                 body.set_linvel(vector(state.velocity), true);
             }
@@ -416,7 +429,7 @@ impl<I: Ord + Clone> SceneWorld<I> {
         entry.config.state = state.clone();
         entry.config.state.sleeping = entry
             .body
-            .is_some_and(|body| self.world.bodies[body].is_sleeping());
+            .is_some_and(|body| self.world.read().bodies[body].is_sleeping());
         Ok(())
     }
     fn remove(&mut self, id: &I) {
@@ -424,9 +437,9 @@ impl<I: Ord + Clone> SceneWorld<I> {
             self.character = None;
             self.ids.remove(&entry.collider);
             if let Some(body) = entry.body {
-                self.world.remove_body(body);
+                self.world.edit().remove_body(body);
             } else {
-                self.world.remove_collider(entry.collider);
+                self.world.edit().remove_collider(entry.collider);
             }
         }
     }
@@ -453,16 +466,17 @@ impl<I: Ord + Clone> SceneWorld<I> {
             .angular_damping(config.angular_damping as f32)
             .can_sleep(config.can_sleep)
             .ccd_enabled(config.ccd);
-            let (b, c) = self.world.insert(body, shape);
+            let (b, c) = self.world.edit().insert(body, shape);
             (Some(b), c)
         } else {
             (
                 None,
                 self.world
+                    .edit()
                     .insert_collider(shape.position(pose(&spec.state)), None),
             )
         };
-        spec.state.sleeping = body.is_some_and(|body| self.world.bodies[body].is_sleeping());
+        spec.state.sleeping = body.is_some_and(|body| self.world.read().bodies[body].is_sleeping());
         self.ids.insert(collider, id.clone());
         self.entries.insert(
             id,

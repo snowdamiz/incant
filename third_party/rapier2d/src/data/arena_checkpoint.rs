@@ -3,6 +3,42 @@ use super::*;
 use crate::pipeline::checked_restore::allocation::*;
 use incant_physics_snapshot::{ArenaSlot, ValidatedArena};
 impl<T> Arena<T> {
+    pub(crate) fn checkpoint_capture(
+        &self,
+        identity: incant_physics_snapshot::Identity,
+        budget: &mut incant_physics_snapshot::Budget,
+    ) -> incant_physics_snapshot::Result<incant_physics_snapshot::ArenaRecord> {
+        use incant_physics_snapshot::{ArenaRecord, Error, MAX_ITEMS};
+        if self.items.len() > MAX_ITEMS || self.len > MAX_ITEMS {
+            return Err(Error::Limit);
+        }
+        let mut slots = budget.vector(self.items.len())?;
+        let mut row = 0u32;
+        for item in &self.items {
+            slots.push(match item {
+                Entry::Free { next_free } => ArenaSlot::Free { next: *next_free },
+                Entry::Occupied { generation, .. } => {
+                    let value = ArenaSlot::Occupied {
+                        generation: *generation,
+                        row,
+                    };
+                    row += 1;
+                    value
+                }
+            });
+        }
+        Ok(ArenaRecord {
+            identity,
+            generation: self.generation,
+            free_head: self.free_list_head,
+            live: self.len as u32,
+            slots,
+        })
+    }
+
+    pub(crate) fn checkpoint_slot_count(&self) -> usize {
+        self.items.len()
+    }
     pub(crate) fn checkpoint_plan(value: &ValidatedArena) -> ConstructionResult<AllocationPlan> {
         // A later runtime owner must also fence every future generation-changing
         // operation. Do not construct the already-next-removal sentinel boundary.
@@ -186,5 +222,38 @@ mod tests {
         assert!(budget.admit(plan).is_err());
         assert_eq!(a.len(), 2);
         assert_eq!(a.iter().map(|(_, v)| *v).collect::<Vec<_>>(), [7, 11]);
+    }
+}
+
+impl<T> Arena<T> {
+    // Exact native new() storage, not merely len()==0. Used only for the
+    // explicitly unsupported joint/soft families, which must have no history.
+    pub(crate) fn checkpoint_pristine_empty(&self) -> bool {
+        self.len == 0
+            && self.generation == 0
+            && self.free_list_head == Some(0)
+            && self.items.len() == DEFAULT_CAPACITY
+            && self.items.iter().enumerate().all(|(i, e)| {
+                matches!(e,
+                Entry::Free { next_free } if *next_free ==
+                    (i + 1 < DEFAULT_CAPACITY).then_some((i + 1) as u32))
+            })
+    }
+    pub(crate) fn checkpoint_empty_plan() -> ConstructionResult<AllocationPlan> {
+        AllocationPlan::array::<Entry<T>>(DEFAULT_CAPACITY)
+    }
+    pub(crate) fn checkpoint_empty(permit: &mut AllocationPermit) -> ConstructionResult<Self> {
+        let mut items = permit.vector(DEFAULT_CAPACITY)?;
+        for i in 0..DEFAULT_CAPACITY {
+            items.push(Entry::Free {
+                next_free: (i + 1 < DEFAULT_CAPACITY).then_some((i + 1) as u32),
+            });
+        }
+        Ok(Self {
+            items,
+            generation: 0,
+            free_list_head: Some(0),
+            len: 0,
+        })
     }
 }
