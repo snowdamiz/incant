@@ -1,0 +1,814 @@
+{
+ "about": "0065 offscreen runs. layout-* and dry-* retain no frames (public snapshot only). review-* retain four frames that decide copy/layout first; frames-* retain the rest. If review requires a fix, a full 20-frame recapture still fits the 24-frame bound. Routes are the accepted binding_oracle recordings in evidence/routes. frames-en-default was added after review: English at the default 640x480 window size.",
+ "retained_frames_planned": 21,
+ "review_frames": 4,
+ "runs": {
+  "layout-en-960x540": {
+   "variant": "en",
+   "route": "idle",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-en-640x480": {
+   "variant": "en",
+   "route": "idle",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-en-420x320": {
+   "variant": "en",
+   "route": "idle",
+   "viewport": [
+    420,
+    320
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-ar-960x540": {
+   "variant": "ar",
+   "route": "idle",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-ar-640x480": {
+   "variant": "ar",
+   "route": "idle",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-ar-420x320": {
+   "variant": "ar",
+   "route": "idle",
+   "viewport": [
+    420,
+    320
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-zh-Hans-960x540": {
+   "variant": "zh-Hans",
+   "route": "idle",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-zh-Hans-640x480": {
+   "variant": "zh-Hans",
+   "route": "idle",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-zh-Hans-420x320": {
+   "variant": "zh-Hans",
+   "route": "idle",
+   "viewport": [
+    420,
+    320
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-en-XA-960x540": {
+   "variant": "en-XA",
+   "route": "idle",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-en-XA-640x480": {
+   "variant": "en-XA",
+   "route": "idle",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "layout-en-XA-420x320": {
+   "variant": "en-XA",
+   "route": "idle",
+   "viewport": [
+    420,
+    320
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    }
+   ]
+  },
+  "dry-en-route-a": {
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": false
+    },
+    {
+     "host_step": 665,
+     "name": "damage-1",
+     "frame": false
+    },
+    {
+     "host_step": 1843,
+     "name": "collected",
+     "frame": false
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": false
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2157,
+     "name": "restarted-tick-1",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": false
+    }
+   ]
+  },
+  "dry-en-route-b": {
+   "variant": "en",
+   "route": "lose-restart-win",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 902,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 527,
+     "name": "damage-1",
+     "frame": false
+    },
+    {
+     "host_step": 617,
+     "name": "lost",
+     "frame": false
+    },
+    {
+     "host_step": 900,
+     "name": "r-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 901,
+     "name": "restarted-tick-1",
+     "frame": false
+    },
+    {
+     "host_step": 902,
+     "name": "after-r",
+     "frame": false
+    }
+   ]
+  },
+  "dry-en-locked": {
+   "variant": "en",
+   "route": "locked",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 1588,
+   "captures": [
+    {
+     "host_step": 1559,
+     "name": "arrival",
+     "frame": false
+    },
+    {
+     "host_step": 1588,
+     "name": "locked-exit",
+     "frame": false
+    }
+   ]
+  },
+  "dry-ar-route-a": {
+   "variant": "ar",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": false
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": false
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": false
+    }
+   ]
+  },
+  "dry-zh-Hans-route-a": {
+   "variant": "zh-Hans",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": false
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": false
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": false
+    }
+   ]
+  },
+  "dry-en-XA-route-a": {
+   "variant": "en-XA",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": false
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": false
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": false
+    }
+   ]
+  },
+  "dry-en-narrow": {
+   "variant": "en",
+   "route": "lose-short",
+   "viewport": [
+    420,
+    320
+   ],
+   "scale": 1.0,
+   "ticks": 617,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 617,
+     "name": "lost",
+     "frame": false
+    }
+   ]
+  },
+  "review-en-start": {
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": true
+    }
+   ]
+  },
+  "review-en-XA-pickup": {
+   "variant": "en-XA",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 128,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": true
+    }
+   ]
+  },
+  "review-ar-won": {
+   "variant": "ar",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2067,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": false
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": true
+    }
+   ]
+  },
+  "review-en-narrow-lost": {
+   "variant": "en",
+   "route": "lose-short",
+   "viewport": [
+    420,
+    320
+   ],
+   "scale": 1.0,
+   "ticks": 617,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 617,
+     "name": "lost",
+     "frame": true
+    }
+   ]
+  },
+  "frames-en-route-a": {
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": true
+    },
+    {
+     "host_step": 665,
+     "name": "damage-1",
+     "frame": true
+    },
+    {
+     "host_step": 1843,
+     "name": "collected",
+     "frame": true
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": true
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2157,
+     "name": "restarted-tick-1",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": true
+    }
+   ]
+  },
+  "frames-en-route-b": {
+   "variant": "en",
+   "route": "lose-restart-win",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 902,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 527,
+     "name": "damage-1",
+     "frame": false
+    },
+    {
+     "host_step": 617,
+     "name": "lost",
+     "frame": true
+    },
+    {
+     "host_step": 900,
+     "name": "r-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 901,
+     "name": "restarted-tick-1",
+     "frame": false
+    },
+    {
+     "host_step": 902,
+     "name": "after-r",
+     "frame": true
+    }
+   ]
+  },
+  "frames-en-locked": {
+   "variant": "en",
+   "route": "locked",
+   "viewport": [
+    960,
+    540
+   ],
+   "scale": 1.0,
+   "ticks": 1588,
+   "captures": [
+    {
+     "host_step": 1559,
+     "name": "arrival",
+     "frame": false
+    },
+    {
+     "host_step": 1588,
+     "name": "locked-exit",
+     "frame": true
+    }
+   ]
+  },
+  "frames-ar-route-a": {
+   "variant": "ar",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": true
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": false
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": true
+    }
+   ]
+  },
+  "frames-zh-Hans-route-a": {
+   "variant": "zh-Hans",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": true
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": true
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": true
+    }
+   ]
+  },
+  "frames-en-XA-route-a": {
+   "variant": "en-XA",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2158,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": false
+    },
+    {
+     "host_step": 128,
+     "name": "pickup-1",
+     "frame": false
+    },
+    {
+     "host_step": 2067,
+     "name": "won",
+     "frame": true
+    },
+    {
+     "host_step": 2156,
+     "name": "start-pressed",
+     "frame": false
+    },
+    {
+     "host_step": 2158,
+     "name": "after-start",
+     "frame": true
+    }
+   ]
+  },
+  "frames-en-narrow": {
+   "variant": "en",
+   "route": "lose-short",
+   "viewport": [
+    420,
+    320
+   ],
+   "scale": 1.0,
+   "ticks": 617,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": true
+    },
+    {
+     "host_step": 617,
+     "name": "lost",
+     "frame": false
+    }
+   ]
+  },
+  "frames-en-default": {
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 1.0,
+   "ticks": 2,
+   "captures": [
+    {
+     "host_step": 2,
+     "name": "start",
+     "frame": true
+    }
+   ]
+  }
+ }
+}
