@@ -1,0 +1,1070 @@
+{
+ "N6": {
+  "ortho": {
+   "continuous_max_step_filtered": 0.02691650390625,
+   "continuous_max_step_raw": 0.03190104166666674,
+   "design": {
+    "N6R_at": 153,
+    "N6R_vs_family": 0.008636414770986423,
+    "N6T_vs_continuous": 0.018173875995710742,
+    "N6_at": 157,
+    "N6_max_step": 0.04313725490196074,
+    "family_reference_max_step": 0.039958953857421875
+   },
+   "design_filter_only": {
+    "N6R_at": 152,
+    "N6R_vs_family": 0.049820903703278185,
+    "N6T_vs_continuous": 0.041932109757965685,
+    "N6_at": 152,
+    "N6_max_step": 0.06274509803921569,
+    "family_reference_max_step": 0.039958953857421875
+   },
+   "design_no_filter": {
+    "N6R_at": 156,
+    "N6R_vs_family": 0.09765625,
+    "N6T_vs_continuous": 0.103515625,
+    "N6_at": 156,
+    "N6_max_step": 0.125,
+    "family_reference_max_step": 0.0828857421875
+   },
+   "design_no_jitter": {
+    "N6R_at": 150,
+    "N6R_vs_family": 0.021978976679783213,
+    "N6T_vs_continuous": 0.023061714920343257,
+    "N6_at": 149,
+    "N6_max_step": 0.03921568627450989,
+    "family_reference_max_step": 0.039958953857421875
+   },
+   "design_no_rotation": {
+    "N6R_at": 153,
+    "N6R_vs_family": 0.03450084013097421,
+    "N6T_vs_continuous": 0.025493068321078227,
+    "N6_at": 153,
+    "N6_max_step": 0.04705882352941171,
+    "family_reference_max_step": 0.039958953857421875
+   },
+   "full_stratum": {
+    "N6R_at": 151,
+    "N6R_vs_family": 0.008198143454159035,
+    "N6T_vs_continuous": 0.014252307368259776,
+    "N6_at": 157,
+    "N6_max_step": 0.039215686274509776,
+    "family_reference_max_step": 0.03929328918457031
+   },
+   "old": {
+    "N6T_vs_continuous": 0.16341145833333337,
+    "N6_at": 151,
+    "N6_max_step": 0.1875
+   },
+   "pairs": [
+    100,
+    170,
+    66
+   ],
+   "reference_precision": {
+    "design": 0.00128173828125,
+    "full_stratum": 0.00299072265625,
+    "steps8": 0.00054931640625
+   },
+   "steps8": {
+    "N6R_at": 152,
+    "N6R_vs_family": 0.006607295017616477,
+    "N6T_vs_continuous": 0.013722617953431548,
+    "N6_at": 158,
+    "N6_max_step": 0.039215686274509776,
+    "family_reference_max_step": 0.03618049621582031
+   },
+   "steps8_filter_only": {
+    "N6R_at": 150,
+    "N6R_vs_family": 0.034680130902458584,
+    "N6T_vs_continuous": 0.029317938112744968,
+    "N6_at": 150,
+    "N6_max_step": 0.04705882352941171,
+    "family_reference_max_step": 0.03618049621582031
+   },
+   "steps8_no_filter": {
+    "N6R_at": 156,
+    "N6R_vs_family": 0.1038818359375,
+    "N6T_vs_continuous": 0.103515625,
+    "N6_at": 156,
+    "N6_max_step": 0.125,
+    "family_reference_max_step": 0.0828857421875
+   },
+   "steps8_no_jitter": {
+    "N6R_at": 144,
+    "N6R_vs_family": 0.008316458907781876,
+    "N6T_vs_continuous": 0.018392405790441213,
+    "N6_at": 157,
+    "N6_max_step": 0.039215686274509776,
+    "family_reference_max_step": 0.03618049621582031
+   },
+   "steps8_no_rotation": {
+    "N6R_at": 150,
+    "N6R_vs_family": 0.03860169952990955,
+    "N6T_vs_continuous": 0.033239506740195934,
+    "N6_at": 150,
+    "N6_max_step": 0.050980392156862675,
+    "family_reference_max_step": 0.03618049621582031
+   },
+   "tile8_full_stratum": {
+    "N6R_at": 136,
+    "N6R_vs_family": 0.003761411180683183,
+    "N6T_vs_continuous": 0.009018303366268077,
+    "N6_at": 156,
+    "N6_max_step": 0.027450980392156876,
+    "family_reference_max_step": 0.02718067169189453
+   }
+  },
+  "persp": {
+   "continuous_max_step_filtered": 0.01499430338541674,
+   "continuous_max_step_raw": 0.01953125,
+   "design": {
+    "N6R_at": 139,
+    "N6R_vs_family": 0.006302179074754832,
+    "N6T_vs_continuous": 0.013229788985906876,
+    "N6_at": 161,
+    "N6_max_step": 0.027450980392156876,
+    "family_reference_max_step": 0.027788162231445312
+   },
+   "design_filter_only": {
+    "N6R_at": 151,
+    "N6R_vs_family": 0.038395646039177445,
+    "N6T_vs_continuous": 0.03745595894607845,
+    "N6_at": 151,
+    "N6_max_step": 0.04705882352941182,
+    "family_reference_max_step": 0.027788162231445312
+   },
+   "design_no_filter": {
+    "N6R_at": 160,
+    "N6R_vs_family": 0.111083984375,
+    "N6T_vs_continuous": 0.11067708333333326,
+    "N6_at": 160,
+    "N6_max_step": 0.125,
+    "family_reference_max_step": 0.034912109375
+   },
+   "design_no_jitter": {
+    "N6R_at": 146,
+    "N6R_vs_family": 0.01905292436188344,
+    "N6T_vs_continuous": 0.017685355392156987,
+    "N6_at": 146,
+    "N6_max_step": 0.027450980392156876,
+    "family_reference_max_step": 0.027788162231445312
+   },
+   "design_no_rotation": {
+    "N6R_at": 145,
+    "N6R_vs_family": 0.01980823442047719,
+    "N6T_vs_continuous": 0.018946748621323395,
+    "N6_at": 167,
+    "N6_max_step": 0.03137254901960784,
+    "family_reference_max_step": 0.027788162231445312
+   },
+   "full_stratum": {
+    "N6R_at": 140,
+    "N6R_vs_family": 0.008117974973192443,
+    "N6T_vs_continuous": 0.013290824142156876,
+    "N6_at": 163,
+    "N6_max_step": 0.027450980392156876,
+    "family_reference_max_step": 0.02400970458984375
+   },
+   "old": {
+    "N6T_vs_continuous": 0.11458333333333326,
+    "N6_at": 150,
+    "N6_max_step": 0.125
+   },
+   "pairs": [
+    100,
+    169,
+    70
+   ],
+   "reference_precision": {
+    "design": 0.001220703125,
+    "full_stratum": 0.003173828125,
+    "steps8": 0.001220703125
+   },
+   "steps8": {
+    "N6R_at": 162,
+    "N6R_vs_family": 0.009586872774011934,
+    "N6T_vs_continuous": 0.02107292624080881,
+    "N6_at": 162,
+    "N6_max_step": 0.03529411764705881,
+    "family_reference_max_step": 0.025707244873046875
+   },
+   "steps8_filter_only": {
+    "N6R_at": 146,
+    "N6R_vs_family": 0.03711772245519307,
+    "N6T_vs_continuous": 0.03729319852941193,
+    "N6_at": 146,
+    "N6_max_step": 0.04705882352941182,
+    "family_reference_max_step": 0.025707244873046875
+   },
+   "steps8_no_filter": {
+    "N6R_at": 157,
+    "N6R_vs_family": 0.1376953125,
+    "N6T_vs_continuous": 0.140625,
+    "N6_at": 156,
+    "N6_max_step": 0.125,
+    "family_reference_max_step": 0.0438232421875
+   },
+   "steps8_no_jitter": {
+    "N6R_at": 141,
+    "N6R_vs_family": 0.011200370040594376,
+    "N6T_vs_continuous": 0.018661917892156876,
+    "N6_at": 141,
+    "N6_max_step": 0.027450980392156876,
+    "family_reference_max_step": 0.025707244873046875
+   },
+   "steps8_no_rotation": {
+    "N6R_at": 147,
+    "N6R_vs_family": 0.03598088283164835,
+    "N6T_vs_continuous": 0.03290369370404411,
+    "N6_at": 147,
+    "N6_max_step": 0.04313725490196085,
+    "family_reference_max_step": 0.025707244873046875
+   },
+   "tile8_full_stratum": {
+    "N6R_at": 152,
+    "N6R_vs_family": 0.004277885661405745,
+    "N6T_vs_continuous": 0.009582878561580799,
+    "N6_at": 163,
+    "N6_max_step": 0.02352941176470591,
+    "family_reference_max_step": 0.020819664001464844
+   }
+  }
+ },
+ "N7": {
+  "astra_log_reproduced": true,
+  "edge_slab_persp": {
+   "design": 0,
+   "design_filter_only": 15,
+   "design_no_filter": 8106,
+   "design_no_jitter": 0,
+   "design_no_rotation": 0,
+   "full_stratum": 0,
+   "old": 2027,
+   "steps8": 0,
+   "steps8_filter_only": 21,
+   "steps8_no_filter": 7745,
+   "steps8_no_jitter": 0,
+   "steps8_no_rotation": 32,
+   "tile8_full_stratum": 0
+  },
+  "white_slab_ortho": {
+   "design": 0,
+   "design_filter_only": 89,
+   "design_no_filter": 5272,
+   "design_no_jitter": 7,
+   "design_no_rotation": 51,
+   "full_stratum": 0,
+   "old": 1767,
+   "steps8": 0,
+   "steps8_filter_only": 24,
+   "steps8_no_filter": 4888,
+   "steps8_no_jitter": 0,
+   "steps8_no_rotation": 32,
+   "tile8_full_stratum": 0
+  },
+  "white_slab_persp": {
+   "design": 0,
+   "design_filter_only": 0,
+   "design_no_filter": 5462,
+   "design_no_jitter": 0,
+   "design_no_rotation": 0,
+   "full_stratum": 0,
+   "old": 1382,
+   "steps8": 0,
+   "steps8_filter_only": 2,
+   "steps8_no_filter": 5389,
+   "steps8_no_jitter": 0,
+   "steps8_no_rotation": 5,
+   "tile8_full_stratum": 0
+  }
+ },
+ "N7_attribution": {
+  "edge_slab_persp": {
+   "exact_definition": 2027,
+   "interval_inexact_pixels": 36,
+   "model_disagreements_on_exact_pixels": 0,
+   "only_exact_interval_inexact": 36,
+   "only_exact_other": 0,
+   "only_previous_forward_neighbour_in_band": {
+    "lower": 20,
+    "right": 35
+   },
+   "previous_definition": 2046
+  },
+  "white_slab_ortho": {
+   "exact_definition": 1767,
+   "interval_inexact_pixels": 0,
+   "model_disagreements_on_exact_pixels": 0,
+   "only_exact_interval_inexact": 0,
+   "only_exact_other": 0,
+   "only_previous_forward_neighbour_in_band": {
+    "lower": 7,
+    "right": 8
+   },
+   "previous_definition": 1782
+  },
+  "white_slab_persp": {
+   "exact_definition": 1382,
+   "interval_inexact_pixels": 35,
+   "model_disagreements_on_exact_pixels": 0,
+   "only_exact_interval_inexact": 56,
+   "only_exact_other": 0,
+   "only_previous_forward_neighbour_in_band": {
+    "lower": 31,
+    "right": 40
+   },
+   "previous_definition": 1397
+  }
+ },
+ "N8": {
+  "fixture": "stripes:-0.5,-0.5,1.5",
+  "ortho": {
+   "cols": [
+    150,
+    156,
+    7
+   ],
+   "continuous_p2p_raw": 0.014973958333333481,
+   "design": {
+    "N8R_ratio_to_old": 0.09754707087753112,
+    "N8T_ratio_to_old": 0.18653015926287528,
+    "N8_p2p": 0.05490196078431375,
+    "N8_ratio_to_old": 0.175686274509804,
+    "family_reference_p2p": 0.035541534423828125,
+    "profile_255": [
+     204.0,
+     201.0,
+     198.0,
+     202.0,
+     209.0,
+     212.0,
+     210.0
+    ]
+   },
+   "design_filter_only": {
+    "N8R_ratio_to_old": 0.21684667309546773,
+    "N8T_ratio_to_old": 0.20223639248230407,
+    "N8_p2p": 0.05882352941176472,
+    "N8_ratio_to_old": 0.1882352941176471,
+    "family_reference_p2p": 0.035541534423828125,
+    "profile_255": [
+     201.0,
+     200.0,
+     204.0,
+     196.0,
+     189.0,
+     198.0,
+     204.0
+    ]
+   },
+   "design_no_filter": {
+    "N8R_ratio_to_old": 0.4521311475409836,
+    "N8T_ratio_to_old": 0.645228215767635,
+    "N8_p2p": 0.1875,
+    "N8_ratio_to_old": 0.6,
+    "family_reference_p2p": 0.0841064453125,
+    "profile_255": [
+     207.19,
+     191.25,
+     175.31,
+     223.12,
+     223.12,
+     223.12,
+     223.12
+    ]
+   },
+   "design_no_jitter": {
+    "N8R_ratio_to_old": 0.08151655416264893,
+    "N8T_ratio_to_old": 0.06476995362460351,
+    "N8_p2p": 0.015686274509803977,
+    "N8_ratio_to_old": 0.05019607843137273,
+    "family_reference_p2p": 0.035541534423828125,
+    "profile_255": [
+     205.0,
+     201.0,
+     201.0,
+     204.0,
+     205.0,
+     203.0,
+     203.0
+    ]
+   },
+   "design_no_rotation": {
+    "N8R_ratio_to_old": 0.17837234811957567,
+    "N8T_ratio_to_old": 0.10811264339760798,
+    "N8_p2p": 0.039215686274509776,
+    "N8_ratio_to_old": 0.1254901960784313,
+    "family_reference_p2p": 0.035541534423828125,
+    "profile_255": [
+     200.0,
+     199.0,
+     206.0,
+     209.0,
+     207.0,
+     203.0,
+     200.0
+    ]
+   },
+   "full_stratum": {
+    "N8R_ratio_to_old": 0.04410185797165325,
+    "N8T_ratio_to_old": 0.08255087564071269,
+    "N8_p2p": 0.02352941176470591,
+    "N8_ratio_to_old": 0.07529411764705891,
+    "family_reference_p2p": 0.021387100219726562,
+    "profile_255": [
+     207.0,
+     206.0,
+     203.0,
+     202.0,
+     202.0,
+     201.0,
+     201.0
+    ]
+   },
+   "old": {
+    "N8T_ratio_to_old": 1.0,
+    "N8_p2p": 0.3125,
+    "N8_ratio_to_old": 1.0,
+    "profile_255": [
+     191.25,
+     255.0,
+     175.31,
+     175.31,
+     207.19,
+     175.31,
+     191.25
+    ]
+   },
+   "reference_precision": {
+    "design": 0.00115966796875,
+    "full_stratum": 0.001983642578125,
+    "steps8": 0.00079345703125
+   },
+   "row": 110,
+   "steps8": {
+    "N8R_ratio_to_old": 0.09411170553313682,
+    "N8T_ratio_to_old": 0.1249694898706369,
+    "N8_p2p": 0.039215686274509776,
+    "N8_ratio_to_old": 0.1254901960784313,
+    "family_reference_p2p": 0.023313522338867188,
+    "profile_255": [
+     180.0,
+     177.0,
+     175.0,
+     179.0,
+     185.0,
+     184.0,
+     181.0
+    ]
+   },
+   "steps8_filter_only": {
+    "N8R_ratio_to_old": 0.06423716872962924,
+    "N8T_ratio_to_old": 0.06741251220405188,
+    "N8_p2p": 0.027450980392156876,
+    "N8_ratio_to_old": 0.087843137254902,
+    "family_reference_p2p": 0.023313522338867188,
+    "profile_255": [
+     171.0,
+     171.0,
+     174.0,
+     175.0,
+     171.0,
+     169.0,
+     168.0
+    ]
+   },
+   "steps8_no_filter": {
+    "N8R_ratio_to_old": 0.5976253298153035,
+    "N8T_ratio_to_old": 0.7531120331950204,
+    "N8_p2p": 0.25,
+    "N8_ratio_to_old": 0.8,
+    "family_reference_p2p": 0.0576171875,
+    "profile_255": [
+     143.44,
+     159.38,
+     175.31,
+     207.19,
+     159.38,
+     207.19,
+     159.38
+    ]
+   },
+   "steps8_no_jitter": {
+    "N8R_ratio_to_old": 0.08001274800817416,
+    "N8T_ratio_to_old": 0.1249694898706369,
+    "N8_p2p": 0.039215686274509776,
+    "N8_ratio_to_old": 0.1254901960784313,
+    "family_reference_p2p": 0.023313522338867188,
+    "profile_255": [
+     182.0,
+     176.0,
+     176.0,
+     182.0,
+     186.0,
+     183.0,
+     178.0
+    ]
+   },
+   "steps8_no_rotation": {
+    "N8R_ratio_to_old": 0.08390820625743704,
+    "N8T_ratio_to_old": 0.08311874542348067,
+    "N8_p2p": 0.03137254901960784,
+    "N8_ratio_to_old": 0.1003921568627451,
+    "family_reference_p2p": 0.023313522338867188,
+    "profile_255": [
+     170.0,
+     169.0,
+     173.0,
+     177.0,
+     176.0,
+     171.0,
+     169.0
+    ]
+   },
+   "tile8_full_stratum": {
+    "N8R_ratio_to_old": 0.021007479338609112,
+    "N8T_ratio_to_old": 0.13821805393877873,
+    "N8_p2p": 0.04705882352941171,
+    "N8_ratio_to_old": 0.15058823529411747,
+    "family_reference_p2p": 0.04428400137485611,
+    "profile_255": [
+     211.0,
+     203.0,
+     202.0,
+     201.0,
+     200.0,
+     199.0,
+     204.0
+    ]
+   }
+  },
+  "persp": {
+   "cols": [
+    148,
+    158,
+    11
+   ],
+   "continuous_p2p_raw": 0.01888020833333326,
+   "design": {
+    "N8R_ratio_to_old": 0.183123121126142,
+    "N8T_ratio_to_old": 0.45258633304067797,
+    "N8_p2p": 0.04705882352941171,
+    "N8_ratio_to_old": 0.37647058823529367,
+    "family_reference_p2p": 0.06197929382324219,
+    "profile_255": [
+     201.0,
+     196.0,
+     191.0,
+     191.0,
+     191.0,
+     191.0,
+     192.0,
+     195.0,
+     198.0,
+     201.0,
+     203.0
+    ]
+   },
+   "design_filter_only": {
+    "N8R_ratio_to_old": 0.5522759706811232,
+    "N8T_ratio_to_old": 0.29793038484050455,
+    "N8_p2p": 0.050980392156862786,
+    "N8_ratio_to_old": 0.4078431372549023,
+    "family_reference_p2p": 0.06197929382324219,
+    "profile_255": [
+     191.0,
+     199.0,
+     201.0,
+     199.0,
+     195.0,
+     195.0,
+     200.0,
+     204.0,
+     203.0,
+     202.0,
+     197.0
+    ]
+   },
+   "design_no_filter": {
+    "N8R_ratio_to_old": 1.2282515073212747,
+    "N8T_ratio_to_old": 1.4328358208955223,
+    "N8_p2p": 0.1875,
+    "N8_ratio_to_old": 1.5,
+    "family_reference_p2p": 0.0750732421875,
+    "profile_255": [
+     175.31,
+     175.31,
+     175.31,
+     191.25,
+     207.19,
+     191.25,
+     175.31,
+     191.25,
+     191.25,
+     223.12,
+     191.25
+    ]
+   },
+   "design_no_jitter": {
+    "N8R_ratio_to_old": 0.4334776794007874,
+    "N8T_ratio_to_old": 0.377492134913667,
+    "N8_p2p": 0.04313725490196085,
+    "N8_ratio_to_old": 0.3450980392156868,
+    "family_reference_p2p": 0.06197929382324219,
+    "profile_255": [
+     193.0,
+     193.0,
+     194.0,
+     197.0,
+     197.0,
+     195.0,
+     195.0,
+     197.0,
+     201.0,
+     203.0,
+     204.0
+    ]
+   },
+   "design_no_rotation": {
+    "N8R_ratio_to_old": 0.883487548766276,
+    "N8T_ratio_to_old": 0.5663191395961378,
+    "N8_p2p": 0.0862745098039216,
+    "N8_ratio_to_old": 0.6901960784313728,
+    "family_reference_p2p": 0.06197929382324219,
+    "profile_255": [
+     182.0,
+     185.0,
+     193.0,
+     200.0,
+     203.0,
+     203.0,
+     204.0,
+     203.0,
+     202.0,
+     199.0,
+     194.0
+    ]
+   },
+   "full_stratum": {
+    "N8R_ratio_to_old": 0.5242891920281627,
+    "N8T_ratio_to_old": 0.5424120207784604,
+    "N8_p2p": 0.05882352941176472,
+    "N8_ratio_to_old": 0.47058823529411775,
+    "family_reference_p2p": 0.016246795654296875,
+    "profile_255": [
+     201.0,
+     201.0,
+     197.0,
+     192.0,
+     188.0,
+     186.0,
+     189.0,
+     193.0,
+     195.0,
+     195.0,
+     194.0
+    ]
+   },
+   "old": {
+    "N8T_ratio_to_old": 1.0,
+    "N8_p2p": 0.125,
+    "N8_ratio_to_old": 1.0,
+    "profile_255": [
+     191.25,
+     207.19,
+     207.19,
+     191.25,
+     191.25,
+     191.25,
+     191.25,
+     207.19,
+     223.12,
+     191.25,
+     191.25
+    ]
+   },
+   "reference_precision": {
+    "design": 0.00140380859375,
+    "full_stratum": 0.001678466796875,
+    "steps8": 0.001068115234375
+   },
+   "row": 124,
+   "steps8": {
+    "N8R_ratio_to_old": 0.16125913780146195,
+    "N8T_ratio_to_old": 0.1976852868012867,
+    "N8_p2p": 0.027450980392156876,
+    "N8_ratio_to_old": 0.219607843137255,
+    "family_reference_p2p": 0.026128768920898438,
+    "profile_255": [
+     169.0,
+     167.0,
+     167.0,
+     168.0,
+     171.0,
+     172.0,
+     174.0,
+     174.0,
+     172.0,
+     172.0,
+     171.0
+    ]
+   },
+   "steps8_filter_only": {
+    "N8R_ratio_to_old": 0.5383377741340438,
+    "N8T_ratio_to_old": 0.6275762730465321,
+    "N8_p2p": 0.09411764705882353,
+    "N8_ratio_to_old": 0.7529411764705882,
+    "family_reference_p2p": 0.026128768920898438,
+    "profile_255": [
+     150.0,
+     160.0,
+     170.0,
+     174.0,
+     174.0,
+     169.0,
+     166.0,
+     166.0,
+     164.0,
+     166.0,
+     167.0
+    ]
+   },
+   "steps8_no_filter": {
+    "N8R_ratio_to_old": 1.2334494773519165,
+    "N8T_ratio_to_old": 1.2885572139303487,
+    "N8_p2p": 0.1875,
+    "N8_ratio_to_old": 1.5,
+    "family_reference_p2p": 0.053955078125,
+    "profile_255": [
+     159.38,
+     159.38,
+     159.38,
+     159.38,
+     159.38,
+     191.25,
+     175.31,
+     175.31,
+     175.31,
+     175.31,
+     143.44
+    ]
+   },
+   "steps8_no_jitter": {
+    "N8R_ratio_to_old": 0.17549841582974585,
+    "N8T_ratio_to_old": 0.287588710857476,
+    "N8_p2p": 0.03921568627450989,
+    "N8_ratio_to_old": 0.3137254901960791,
+    "family_reference_p2p": 0.026128768920898438,
+    "profile_255": [
+     163.0,
+     163.0,
+     164.0,
+     168.0,
+     172.0,
+     173.0,
+     173.0,
+     172.0,
+     170.0,
+     170.0,
+     171.0
+    ]
+   },
+   "steps8_no_rotation": {
+    "N8R_ratio_to_old": 0.4264022682243633,
+    "N8T_ratio_to_old": 0.536351331577408,
+    "N8_p2p": 0.08235294117647063,
+    "N8_ratio_to_old": 0.658823529411765,
+    "family_reference_p2p": 0.026128768920898438,
+    "profile_255": [
+     155.0,
+     163.0,
+     170.0,
+     175.0,
+     176.0,
+     171.0,
+     168.0,
+     166.0,
+     164.0,
+     165.0,
+     165.0
+    ]
+   },
+   "tile8_full_stratum": {
+    "N8R_ratio_to_old": 0.15584124355953458,
+    "N8T_ratio_to_old": 0.1760681650195469,
+    "N8_p2p": 0.039215686274509776,
+    "N8_ratio_to_old": 0.3137254901960782,
+    "family_reference_p2p": 0.020541484539325472,
+    "profile_255": [
+     203.0,
+     196.0,
+     195.0,
+     194.0,
+     193.0,
+     194.0,
+     194.0,
+     194.0,
+     195.0,
+     197.0,
+     200.0
+    ]
+   }
+  }
+ },
+ "N8_adjacent_rows_diagnostic": {
+  "ortho": {
+   "110": {
+    "continuous_ratio": 0.04791666666666714,
+    "design_ratio": 0.175686274509804,
+    "old_p2p_255": 79.69,
+    "steps8_ratio": 0.1254901960784313
+   },
+   "111": {
+    "continuous_ratio": 0.03958333333333357,
+    "design_ratio": 0.1631372549019609,
+    "old_p2p_255": 79.69,
+    "steps8_ratio": 0.1254901960784313
+   },
+   "112": {
+    "continuous_ratio": 0.041666666666666075,
+    "design_ratio": 0.17254901960784297,
+    "old_p2p_255": 63.75,
+    "steps8_ratio": 0.14117647058823524
+   },
+   "113": {
+    "continuous_ratio": 0.041666666666666664,
+    "design_ratio": 0.16732026143790849,
+    "old_p2p_255": 47.81,
+    "steps8_ratio": 0.18823529411764697
+   },
+   "114": {
+    "continuous_ratio": 0.07986111111111072,
+    "design_ratio": 0.16732026143790849,
+    "old_p2p_255": 47.81,
+    "steps8_ratio": 0.1254901960784315
+   },
+   "115": {
+    "continuous_ratio": 0.048611111111111306,
+    "design_ratio": 0.1254901960784315,
+    "old_p2p_255": 47.81,
+    "steps8_ratio": 0.06274509803921606
+   },
+   "116": {
+    "continuous_ratio": 0.0625,
+    "design_ratio": 0.14640522875817,
+    "old_p2p_255": 47.81,
+    "steps8_ratio": 0.06274509803921606
+   }
+  },
+  "persp": {
+   "124": {
+    "continuous_ratio": 0.15104166666666607,
+    "design_ratio": 0.37647058823529367,
+    "old_p2p_255": 31.88,
+    "steps8_ratio": 0.219607843137255
+   },
+   "125": {
+    "continuous_ratio": 0.08333333333333393,
+    "design_ratio": 0.43921568627451,
+    "old_p2p_255": 31.88,
+    "steps8_ratio": 0.2823529411764705
+   },
+   "126": {
+    "continuous_ratio": 0.052083333333333925,
+    "design_ratio": 0.5019607843137255,
+    "old_p2p_255": 31.88,
+    "steps8_ratio": 0.37647058823529367
+   },
+   "127": {
+    "continuous_ratio": 0.08333333333333215,
+    "design_ratio": 0.5333333333333332,
+    "old_p2p_255": 31.88,
+    "steps8_ratio": 0.4078431372549023
+   },
+   "128": {
+    "continuous_ratio": 0.03125,
+    "design_ratio": 0.35555555555555546,
+    "old_p2p_255": 47.81,
+    "steps8_ratio": 0.29281045751634
+   },
+   "129": {
+    "continuous_ratio": 0.03819444444444464,
+    "design_ratio": 0.33464052287581697,
+    "old_p2p_255": 47.81,
+    "steps8_ratio": 0.23006535947712456
+   },
+   "130": {
+    "continuous_ratio": 0.03819444444444464,
+    "design_ratio": 0.2718954248366015,
+    "old_p2p_255": 47.81,
+    "steps8_ratio": 0.14640522875817
+   }
+  }
+ },
+ "configs": {
+  "design": {
+   "family": "design",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": true,
+   "rotate": true,
+   "steps": 4,
+   "tile": 4
+  },
+  "design_filter_only": {
+   "family": "design",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": false,
+   "rotate": false,
+   "steps": 4,
+   "tile": 4
+  },
+  "design_no_filter": {
+   "family": "design",
+   "filter": false,
+   "full_stratum": false,
+   "jitter": true,
+   "rotate": true,
+   "steps": 4,
+   "tile": 4
+  },
+  "design_no_jitter": {
+   "family": "design",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": false,
+   "rotate": true,
+   "steps": 4,
+   "tile": 4
+  },
+  "design_no_rotation": {
+   "family": "design",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": true,
+   "rotate": false,
+   "steps": 4,
+   "tile": 4
+  },
+  "full_stratum": {
+   "family": "full_stratum",
+   "filter": true,
+   "full_stratum": true,
+   "jitter": true,
+   "rotate": true,
+   "steps": 4,
+   "tile": 4
+  },
+  "old": {
+   "family": null,
+   "filter": false,
+   "full_stratum": false,
+   "jitter": false,
+   "rotate": false,
+   "steps": 4,
+   "tile": 4
+  },
+  "steps8": {
+   "family": "steps8",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": true,
+   "rotate": true,
+   "steps": 8,
+   "tile": 4
+  },
+  "steps8_filter_only": {
+   "family": "steps8",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": false,
+   "rotate": false,
+   "steps": 8,
+   "tile": 4
+  },
+  "steps8_no_filter": {
+   "family": "steps8",
+   "filter": false,
+   "full_stratum": false,
+   "jitter": true,
+   "rotate": true,
+   "steps": 8,
+   "tile": 4
+  },
+  "steps8_no_jitter": {
+   "family": "steps8",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": false,
+   "rotate": true,
+   "steps": 8,
+   "tile": 4
+  },
+  "steps8_no_rotation": {
+   "family": "steps8",
+   "filter": true,
+   "full_stratum": false,
+   "jitter": true,
+   "rotate": false,
+   "steps": 8,
+   "tile": 4
+  },
+  "tile8_full_stratum": {
+   "family": "full_stratum",
+   "filter": true,
+   "full_stratum": true,
+   "jitter": true,
+   "rotate": true,
+   "steps": 4,
+   "tile": 8
+  }
+ },
+ "continuous_convergence": {
+  "N6_ortho_filtered_step_change": 0.0008951822916670737,
+  "N6_ortho_fine_filtered_max_step": 0.02631632486979163,
+  "N6_persp_filtered_step_change": 0.0015207926432291297,
+  "N6_persp_fine_filtered_max_step": 0.01487223307291663,
+  "N8_ortho_p2p_base_fine": [
+   0.014973958333333481,
+   0.0166015625
+  ],
+  "N8_persp_p2p_base_fine": [
+   0.01888020833333326,
+   0.01822916666666674
+  ]
+ },
+ "continuous_limit": {
+  "convergence_check": "32 x 96 directions, 48 steps",
+  "directions": "24 x 64 cosine-weighted midpoint grid",
+  "steps": 32
+ },
+ "families": {
+  "design": {
+   "full_stratum": false,
+   "steps": 4
+  },
+  "full_stratum": {
+   "full_stratum": true,
+   "steps": 4
+  },
+  "steps8": {
+   "full_stratum": false,
+   "steps": 8
+  }
+ },
+ "format": "incant-0070-ssao-quality-addendum-cpu-v3",
+ "model": "ssao-repair/quality_model.py (f64, exact f32 uniform inputs; not a GPU oracle)",
+ "seconds": 278.1,
+ "strata": {
+  "precision_check": [
+   64,
+   32
+  ],
+  "reference": [
+   32,
+   16
+  ]
+ }
+}
