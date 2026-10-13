@@ -16,6 +16,28 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored Core runtime bindings — CPU proof accepted
+
+The 0060 mesa now binds its existing localized HUD and audio sources to the
+unchanged current controller, with R/Start whole-session restart. Public atomic
+authoring, Undo/Redo and reopen pass; all art/layout inputs are preserved. The
+full 2,156-tick 48 kHz route, loss, locked exit, four locale readbacks, repeated
+cues and four complete packaged reset routes pass. Fresh-session logs/entities/UI
+and concatenated PCM match exactly after source/map/build deletion. Independent
+final review is accepted; publisher intake is pending. No GPU/window/device gate is claimed;
+historical offscreen provenance and Claude's visible restart hint remain open.
+[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md).
+
+## Core authored-level locked-exit proof — locally accepted
+
+The retained 0060 locked run died before reaching the exit; its old assertion was
+a false positive. A replacement public-input recording reaches the exit alive
+with 3/4 pickups and observes actual positions/inventory for 30 consecutive ticks.
+Three real CPU runs, seven focused oracle tests and independent root review pass;
+original win/loss reports and PCM are unchanged. Controller, art and authoring
+stay untouched. Integration is pending. No visual, device or performance gate
+is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
+
 ## Bounded offline PCM streaming — CPU shipping proof accepted
 
 The ordinary player now stages PCM with one tick buffer and an 8 KiB encoder,
@@ -64,7 +86,7 @@ complete producer execution packet has independent final acceptance. The compose
 main181 runtime now passes nine checks, two fresh simulator archives, twelve actual
 C/Swift positives and thirty-two precise refusals. Both current device target
 compilations pass; original unsigned device links remain producer-scoped. Final
-integration review is accepted; publication requires the exact-head fast check.
+integration review and the exact-head fast check passed; PR183 is merged.
 [Current integration evidence](docs/spikes/authored-ios-physics-main181.md).
 No phone, performance, rendered-output, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-ios-physics-modes.md).
@@ -912,9 +934,21 @@ unsupported restart. Independent final integration review and exact-head fast ch
 restart is merged in PR180. [Current evidence](docs/spikes/native-restart-main179.md) retains the
 original missing-bundle compile attempt and unchanged-source correction.
 
+## Authored Core runtime bindings — current integration passed
+
+The full accepted 0060 presentation, corrected live locked-exit route and native
+HUD/audio/restart bindings pass six current main182 integration checks. Sixteen
+focused tests, the original seven numerical scenarios and fourteen fresh native
+positive processes pass, with one precise headless-restart refusal. All sample
+and art bytes remain exact; the matching headless is reused by exact source
+identity. The original ten source-free shipping processes and four exact reset
+PCM comparisons remain producer-scoped. Final integration review is accepted; the required fast check precedes publication.
+Historical offscreen helper provenance remains qualified; live appearance/device
+acceptance is separate. [Evidence](docs/spikes/core-main182.md).
+
 ## Current milestone
 
-Main #183 includes compound native animation and Wasm snapshots, authored two-bone
+Main #184 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
 checkpoints, public physics queries, and the Core/Planar gameplay foundations.
 Pearl Cove's authored art/HUD and runtime hooks are merged with their scoped
@@ -929,8 +963,8 @@ whole-session restart is merged in main180 and bounded PCM in main181. Both auth
 Android variants pass preserved pre-PCM archive/emulator proofs; the final composed
 deterministic archive and both-mode mobile/target checks pass, with independent
 integration review and the exact-head fast check passed; Android is merged in main182.
-The composed iOS fixed-mode simulator proof and final integration review are
-complete; its required fast check remains ahead. Core authored HUD/audio/restart bindings are independently accepted locally
+The composed iOS fixed-mode simulator proof, final integration review and required
+fast check passed; fixed-mode iOS export is merged in main183. Core authored HUD/audio/restart bindings are independently accepted locally
 and queued; their new live presentation acceptance remains separate. Phase 1 and the finished game
 remain incomplete.
 

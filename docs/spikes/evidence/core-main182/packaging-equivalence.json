@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-13T01:27:39.751233+00:00",
+  "accepted_manifest_sha256": "67f68021ce54268c7ec638ddc5877a4340fca7feacb5b8abc672c6485f2ac637",
+  "new_manifest_sha256": "68fcc1dc17014ac791a214f5d4a32e90dac033caf93d8fc14b0c26c535029993",
+  "parts_manifest_sha256": "3ef0bc6a4ba5ee7ecd1a44bdc0e037cd185ddeae0159eedf5630681aaaa0bf7b",
+  "reconstructed_sha256": "3840687f294a10d756e0fca5ba814fb1c1155dc2ad0a98c9dc83d3b2b8c69a72",
+  "parts": 7,
+  "content_unchanged": true
+}

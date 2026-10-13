@@ -1,0 +1,264 @@
+{
+  "at": "2026-10-13T01:18:32.817436+00:00",
+  "tested_head": "32482b67abcdeaf463ac1b6f4418e6ff99c8aaef",
+  "review_head": "32482b67abcdeaf463ac1b6f4418e6ff99c8aaef",
+  "summary": {
+    "passed": true,
+    "current_checks": 6,
+    "current_native_positive": 14,
+    "current_native_refusal": 1,
+    "producer_artifacts": 312,
+    "producer_shipping_positive": 10,
+    "producer_exact_reset_pairs": 4,
+    "frozen_inputs": 1990,
+    "historical_changed_inputs": 11
+  },
+  "source_freeze": {
+    "path": "docs/spikes/evidence/core-main182/freeze.json",
+    "sha256": "73c960a900e92410f8cddf25e773f91a529b8338f798b9f8a662619a86e70922"
+  },
+  "checks": [
+    {
+      "name": "units",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "samples/core",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.07558824999432545,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/units.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/units.stderr",
+        "sha256": "9cd517a9f7d31eded58e3a03f8d180f20e3ab08802879c128146347d0237b3f1"
+      }
+    },
+    {
+      "name": "strict-types",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "--noEmit",
+        "-p",
+        "samples/core/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.265100042000995,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/strict-types.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/strict-types.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "seven-scenarios",
+      "command": [
+        "python3",
+        "-B",
+        "samples/core/verify.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/seven-scenarios",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-pcm-main181-001/incant_headless-deterministic"
+      ],
+      "exit": 0,
+      "seconds": 5.614549333004106,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/seven-scenarios.stdout",
+        "sha256": "ad601a7ee2ac07c9047cf2506496e2430608ef711cd811dc9c66dd5a92a99be4"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/seven-scenarios.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "authored-bindings",
+      "command": [
+        "python3",
+        "-B",
+        "samples/core/verify_bindings.py",
+        "prepare",
+        "/Users/andreyyurlov/.codex/incant-evidence/0060/builds/f5-en-playing",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/native",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-pcm-main181-001/incant_headless-deterministic"
+      ],
+      "exit": 0,
+      "seconds": 35.90660570900218,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/authored-bindings.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/authored-bindings.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03466083300008904,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.17477479099761695,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/core-main182-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "headless_relevance": {
+    "binary": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-pcm-main181-001/incant_headless-deterministic",
+      "sha256": "ed533f6b6a9fac70df8bbd61c09fc5300be0c142057f2073864b0094a0063bd6",
+      "bytes": 60466224
+    },
+    "tested_head": "489168fc49a23a4f4779907cd85793971dfe3cca",
+    "all_crates_manifests_lock_sdk_schemas_vendor_toolchain_tools_equal": true,
+    "note": "Only sample/docs/license attribute differ; existing immutable matching headless reused, not a new build."
+  },
+  "producer_manifest": {
+    "path": "docs/spikes/evidence/core-authored-runtime-bindings.json",
+    "sha256": "f275bce1c1d70d8f175102e303c7f2a4136178f3cb73c66749954e7fc04a795c",
+    "tip": "a9e26999e0763de7cbd625930595be8a36f3f460"
+  },
+  "historical_source_differences": [
+    {
+      "path": "crates/incant_cook/Cargo.toml",
+      "sha256": "d2689c32e5f3462f1d6756783fb7916a3a4476ebd49acff92849f4cd2a1614e6",
+      "current_sha256": "74838f36a35d75470633bfbd477cdec0ea205207ac9422bce75cec434be00562",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_cook/src/build_script.rs",
+      "sha256": "5e41bb377bb55cb7cc3e77d8cd5d663dde350767f596711e7f9930918a797863",
+      "current_sha256": "025979e20450815c7d0ccbce6b95f76c62aa73973a4068e254c5cf1650ac72b6",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_cook/src/project_build.rs",
+      "sha256": "a0c0a90a9675651d11aa12244e134a78d3a6a1a5efbad9f905e1c6cc65fa99d3",
+      "current_sha256": "26af2fd4152f8536638b76df6f4deb22e47846f1d9f7891f1faaea1519ffa4e5",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_cook/tests/mobile_project.rs",
+      "sha256": "d8722dce5e80cb4c9c287dadb2cd00fbab6047e21c6208554c23cf335bdf8220",
+      "current_sha256": "3a72b31032056a2255bf39ef01469fa226538cdbf8477a77ab62453a08adab24",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_cook/tests/scripts.rs",
+      "sha256": "64c592a27ae0641ebe4f61dc6ea276b48f340fbfcae89eddf38fcc59f25522d0",
+      "current_sha256": "6c45d2731d99cd2afe3e6d5f7377c656e6250fadb35fff5bdfa610bc11376862",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "1e48e313ba2081e7a62c7525255cfb3a059c79d445ca3da6df57de0aabb5aebf",
+      "current_sha256": "1431e56f053ea5a2813213ccbbc31b99f298eb8493aea3bf6be5fb391edaac7e",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_game_player/build.rs",
+      "sha256": "6a2020028dabbdf2cf3809c2ee77afa7baee9b548eb7f68ebbab3210642a923d",
+      "current_sha256": "753fbb393cc5aa760b966de3ec1905bea1d80ea15a0ed0ee2aea95c86b4e06f2",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "sha256": "07859a4855a1752cc3277efd1a048d35c7716d2459293a6e113fb45808947c4f",
+      "current_sha256": "9d2e19dd52e113875f0ada3a62e3fb023b57f45cf867744187f9fd47c0fb01f8",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_script/build.rs",
+      "sha256": "4a592581860180d2689f4583ff676a596817526f1caf78056f5d7217cdb8977e",
+      "current_sha256": "f7f9b9e84fd70efa12cf5144bddf97c58fa3f5f97b9c901bd6f1a3914acae1dd",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/compatibility.rs",
+      "sha256": "aa7548c658a85ee664316fe636fe290026b146a4863bd96b4ca6cfd45f161f35",
+      "current_sha256": "728e9df0dd3e626ae1a43fc59d492742246981b2d34aea60a3ff7b13d4f385a9",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/mobile_tests.rs",
+      "sha256": "9c5070fe5548500fe14ef0d162dc48f4998641b692df55cb4aa1433e48e1bcb5",
+      "current_sha256": "80ef35a62dcc6bc605d963b60d63d43fb749fc0e248862d6212eebd371b25adf",
+      "historical_git": "a9e26999e0763de7cbd625930595be8a36f3f460"
+    }
+  ],
+  "historical_proof_assertions": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/audit.py",
+    "sha256": "f366560963641a567a8bcf0c8db548a67e899333bd7dab36b83fcc279ad48803",
+    "result": {
+      "passed": true,
+      "source_rows": 14,
+      "build_rows": 1805,
+      "positive_processes": 24,
+      "precise_headless_refusals": 1,
+      "retained_overlimit_restart_refusals": 1,
+      "shipping_processes": 10,
+      "native_processes": 15,
+      "restart_exact_pcm_pairs": 4,
+      "package_files": 37,
+      "player_sha256": "9349b6a71b8f247bdcfe1220473c50f2d12b84afb0009b4957244894ecce03d4",
+      "player_bytes": 9549792,
+      "source_only_observer": true,
+      "gpu": false
+    }
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/core-main182/artifacts.json.gz",
+    "sha256": "3840687f294a10d756e0fca5ba814fb1c1155dc2ad0a98c9dc83d3b2b8c69a72",
+    "records": 312,
+    "payloads": 191
+  },
+  "limits": [
+    "Current CPU authoring and native readback only; prior ten shipping processes/four resets retain original main181 identity",
+    "No new appearance/native-window/device claim; historical0060 helper identity gap remains unresolved",
+    "No engine/controller/art changes; original full Claude0060 and locked-exit correction retained",
+    "One exact-file whitespace attribute preserves original font license bytes"
+  ],
+  "review_state": "Final integration independent review pending"
+}
