@@ -9,6 +9,7 @@ publish.workspace = true
 profile = ["incant_profile/summary", "incant_game_runtime/profile", "incant_script/profile", "incant_runtime/profile"]
 profile-tracy = ["profile", "incant_profile/tracy"]
 default = ["physics-deterministic"]
+native-checkpoints = ["incant_game_runtime/native-checkpoints", "incant_script/native-checkpoints", "incant_runtime/native-checkpoints"]
 # Thin platform ABI for bounded offline CPU package execution, not a UI host.
 mobile-ffi = ["dep:thiserror"]
 # Trusted, fresh numeric bytecode compatibility experiment; not production admission.
