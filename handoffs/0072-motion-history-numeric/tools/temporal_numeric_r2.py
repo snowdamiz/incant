@@ -30,6 +30,7 @@ def main():
   assert not (E/'gpu-released.json').exists()
   with (E/'attempt-started.json').open('x') as started:
    json.dump({'at':m.now(),'runner_sha256':h(__file__)},started);started.flush();os.fsync(started.fileno())
+  (E/'attempt-debits.jsonl').touch(exist_ok=False)
   def interrupted(signum,frame): raise KeyboardInterrupt(f'signal {signum}')
   for sig in (signal.SIGTERM,signal.SIGHUP):signal.signal(sig,interrupted)
   try:
