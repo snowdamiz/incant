@@ -1,0 +1,16 @@
+{"case":"viewport","event":"open","frame_limit":12,"review_config":{"absolute_depth":0.019999999552965164,"history_weight":0.8999999761581421,"reactive_strength":0.5,"reactive_threshold":4.0,"relative_depth":0.05000000074505806},"ui_limit":0}
+{"event":"frame","index":1,"name":"framed-1"}
+{"event":"frame","index":2,"name":"framed-2"}
+{"event":"frame","index":3,"name":"framed-3"}
+{"event":"frame","index":4,"name":"framed-4"}
+{"event":"frame","index":5,"name":"framed-5"}
+{"event":"frame","index":6,"name":"framed-6"}
+{"event":"frame","index":7,"name":"framed-d8-7"}
+{"event":"frame","index":8,"name":"framed-d8-8"}
+{"event":"frame","index":9,"name":"framed-d8-9"}
+{"event":"frame","index":10,"name":"off-framed"}
+{"event":"frame","index":11,"name":"fractional-1"}
+{"event":"frame","index":12,"name":"fractional-2"}
+{"event":"png","png":{"name":"viewport-native-f6.png","rgba_sha256":"bce55fb0c7ee2bb62853c8287ec87fcd1b864436dd2114d5fcdadd17868a36c8","sha256":"458b25a98ab09f84cd5bd3983fa705061cdd09e479ce1a48ae4f9cf08e55933c"}}
+{"event":"png","png":{"name":"viewport-off.png","rgba_sha256":"af5e68e740fc56089991ebca1dd346f7bd2bc86f05f38d3272e47ccb7f864bd3","sha256":"84e453a639956c3b59f2af18190832529e6f1c5fea096ff091455c3a170c1a14"}}
+{"event":"finish","pass":true}

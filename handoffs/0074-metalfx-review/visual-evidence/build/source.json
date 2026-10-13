@@ -1,0 +1,79 @@
+{
+ "grant_sha256": "40e64a7b030de29ea4de428579595d1ec19cadc97a89eca7c60058e06403a99c",
+ "tools": {
+  "head": "5ebb4100650b957cee267bf73846f0bd72579331",
+  "visual_tree": "b2c3e14e61ddfb2980ba3063a7148b424fb0d27c",
+  "plan_sha256": "e6bb71b2d5f69458c95d5f8027a28ef14c835253321051fb25d77c6212e9c46e",
+  "helper_sha256": "9f2704d58b38a87014d1d780bb36878a484ee8db366b16fa63481d8b8651dd9b"
+ },
+ "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+ "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+ "files": 18076,
+ "checkout_manifest_sha256": "19dac25898746dd665696377e5e7e2a262ef0dedb9fb016e4e0f26cec80ceaa2",
+ "source_freeze": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+  "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"
+ },
+ "coverage": {
+  "build_input_roots": [
+   "crates",
+   "Cargo.toml",
+   "Cargo.lock",
+   "third_party",
+   "tools/cargo",
+   "rust-toolchain.toml"
+  ],
+  "build_inputs": 2448,
+  "freeze_rows": 2449,
+  "freeze_build_input_rows": 2448,
+  "freeze_rows_outside_roots": [
+   "tools/probes/cooked-temporal-compile.py"
+  ],
+  "inputs_missing_from_freeze": [],
+  "freeze_rows_missing_from_commit": [],
+  "mismatched": [],
+  "mismatched_count": 0,
+  "exact": true
+ },
+ "features": [
+  "cooked-temporal",
+  "native-metalfx"
+ ],
+ "jitter_table": [
+  [
+   -0.375,
+   -0.125
+  ],
+  [
+   0.125,
+   0.375
+  ],
+  [
+   0.375,
+   -0.375
+  ],
+  [
+   -0.125,
+   0.125
+  ],
+  [
+   0.375,
+   0.125
+  ],
+  [
+   -0.125,
+   -0.375
+  ],
+  [
+   -0.375,
+   0.375
+  ],
+  [
+   0.125,
+   -0.125
+  ]
+ ],
+ "cargo_lock_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "recorded": "2026-10-13T08:45:28.918135+00:00"
+}

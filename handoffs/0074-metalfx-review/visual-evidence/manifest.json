@@ -1,0 +1,246 @@
+{
+ "evidence_directory": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual",
+ "copied_unchanged": [
+  {
+   "retained": "analysis.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/analysis/analysis-2026-10-13T085245.421082+0000.json",
+   "sha256": "cb2b546e5aac44c51fb0c2b354fac64d81863c31ef7369809bd742f1ea960794",
+   "bytes": 59726
+  },
+  {
+   "retained": "review-ready.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/review-ready.json",
+   "sha256": "40e64a7b030de29ea4de428579595d1ec19cadc97a89eca7c60058e06403a99c",
+   "bytes": 1403
+  },
+  {
+   "retained": "gpu-ledger.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/gpu-ledger.jsonl",
+   "sha256": "94ff4578d63bf48b827bc7c34db7fd23b36795ff8816bf7863de59e98dc4eb37",
+   "bytes": 23626
+  },
+  {
+   "retained": "budget.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/budget.jsonl",
+   "sha256": "7924abb807cbc5bc4fc1a6fdcadcb968fde83f35d9495bc0d4df4987643335e3",
+   "bytes": 1112
+  },
+  {
+   "retained": "gpu-released.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/gpu-released.json",
+   "sha256": "9d90d3ddbaeec67f47a9c9fd1cf1319fa34fa57f3a24e0de3e02e85e0bf4975c",
+   "bytes": 735
+  },
+  {
+   "retained": "target-lease.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/target-lease.json",
+   "sha256": "732334012c40341b38d1eb7e3893cb86af35a83e63e31f3bd1b7d5b74d699428",
+   "bytes": 3735
+  },
+  {
+   "retained": "build/source.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/build/source.json",
+   "sha256": "1d52c5321956502ae12153cabf1d6be29d79989e5cb8fbc0ed61b15d9d1a3b96",
+   "bytes": 1882
+  },
+  {
+   "retained": "build/review.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/build/review.json",
+   "sha256": "f88a64e431b07e95fb5ada5807ef07de5b497cc1f6dd047ecbf4443eb78d18cc",
+   "bytes": 6213
+  },
+  {
+   "retained": "build/lint.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/build/lint.json",
+   "sha256": "90d600b8640288b2386e787e3c4d8945bac3ca544272a76ad77f72013807f32d",
+   "bytes": 2160
+  },
+  {
+   "retained": "build/toolchain.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/build/toolchain.json",
+   "sha256": "6461826b2c8fbe0d7edb289307895e2b04dd95088399dad0a4f278875e85b1c1",
+   "bytes": 1561
+  },
+  {
+   "retained": "reports/stationary.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/stationary/report.json",
+   "sha256": "23369b826cf92aa5045e492a6b1774aa63b716194ff6fb209075705fa5adf1d4",
+   "bytes": 46253
+  },
+  {
+   "retained": "events/stationary.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/stationary/events.jsonl",
+   "sha256": "9076efe9609a559a148249d6be14968d2636d8b98ecf97e79f2cbc26859c350a",
+   "bytes": 2733
+  },
+  {
+   "retained": "reports/motion.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/motion/report.json",
+   "sha256": "9676be18af0c810fd246c517d7f9c35c4cd9779f2010262c895e688d1bdf8c6e",
+   "bytes": 36855
+  },
+  {
+   "retained": "events/motion.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/motion/events.jsonl",
+   "sha256": "02091a155c01902cfba1aad69c32ae671e7efd96f6e2c272a4ab7dfebaf27617",
+   "bytes": 2960
+  },
+  {
+   "retained": "reports/excluded.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/excluded/report.json",
+   "sha256": "8a2a8ebc0dae2dcbb25abaa4249f9fbac4085e7d82ed959842ba18b6e4a93c03",
+   "bytes": 16249
+  },
+  {
+   "retained": "events/excluded.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/excluded/events.jsonl",
+   "sha256": "a1c203917ea653f2cf983827eea456f6458f57ff3afce42f61c0df071dc43934",
+   "bytes": 1895
+  },
+  {
+   "retained": "reports/transitions.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/transitions/report.json",
+   "sha256": "7bcc167971b8ec016cc3077cbdcc7e7e89e88d97582f9b0c85d099a1af930d58",
+   "bytes": 24213
+  },
+  {
+   "retained": "events/transitions.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/transitions/events.jsonl",
+   "sha256": "12d8ee0989b129b40ccf422c9a580128b6cbaed5667ee0a7151ccf70794e1880",
+   "bytes": 1911
+  },
+  {
+   "retained": "reports/viewport.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/viewport/report.json",
+   "sha256": "3cf84253ee4e7122648a0ea91133b46721a463b1e7c4cfe77fea7e348f5cd04f",
+   "bytes": 18561
+  },
+  {
+   "retained": "events/viewport.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/captures/viewport/events.jsonl",
+   "sha256": "05cd6e1a81e003583d02b6f5521778a93223ac094a6bf0cf93e3df4c52134039",
+   "bytes": 1268
+  },
+  {
+   "retained": "logs/gpu-list-review.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-list-review.stdout.txt",
+   "sha256": "5e6289f178dacc0e12939398dbb8a2dfb962cd91df2cf274675100cdb659e88f",
+   "bytes": 101
+  },
+  {
+   "retained": "logs/gpu-list-review.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-list-review.stderr.txt",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "bytes": 0
+  },
+  {
+   "retained": "logs/gpu-review-stationary.stdout.txt.gz",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-stationary.stdout.txt",
+   "sha256": "76a115879bbeb266b478440b638d04677e3b54de6642e062f143fca60bcd4bdd",
+   "bytes": 135,
+   "retained_encoding": "deterministic gzip (level 9, mtime 0) to keep libtest's trailing blank line byte-exact",
+   "retained_sha256": "bdec91a9201280ceaa5a20775e491c096175f2ebcc1757088c50d2a0997f2ad6"
+  },
+  {
+   "retained": "logs/gpu-review-stationary.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-stationary.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "bytes": 282
+  },
+  {
+   "retained": "logs/gpu-review-motion.stdout.txt.gz",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-motion.stdout.txt",
+   "sha256": "2d4861f513f9022351a200735091a9e861692849a0c9a7821ab661290598f60a",
+   "bytes": 131,
+   "retained_encoding": "deterministic gzip (level 9, mtime 0) to keep libtest's trailing blank line byte-exact",
+   "retained_sha256": "505127d6657c59d2d5f637af41363296e2fe62b79f6bd94cfe78ec0060736f08"
+  },
+  {
+   "retained": "logs/gpu-review-motion.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-motion.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "bytes": 282
+  },
+  {
+   "retained": "logs/gpu-review-excluded.stdout.txt.gz",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-excluded.stdout.txt",
+   "sha256": "9b4207fdb1f07b72b952b56fbfbfe87743ddc3a0c26b31ab7c8eafd767280d50",
+   "bytes": 133,
+   "retained_encoding": "deterministic gzip (level 9, mtime 0) to keep libtest's trailing blank line byte-exact",
+   "retained_sha256": "46aed4c5c574d222db2429d9726c40fe3ce9f3f382c266b9cbc920b4b187b3db"
+  },
+  {
+   "retained": "logs/gpu-review-excluded.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-excluded.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "bytes": 282
+  },
+  {
+   "retained": "logs/gpu-review-transitions.stdout.txt.gz",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-transitions.stdout.txt",
+   "sha256": "1d4cb31bc2aed87f3a1f4a04e7f8fc911a9eab26fa00279844faa86c88c0f18f",
+   "bytes": 136,
+   "retained_encoding": "deterministic gzip (level 9, mtime 0) to keep libtest's trailing blank line byte-exact",
+   "retained_sha256": "982619d9b29026b0223510e0bd7b0678389a2b3ea6da87faf5baae6491f9dff9"
+  },
+  {
+   "retained": "logs/gpu-review-transitions.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-transitions.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "bytes": 282
+  },
+  {
+   "retained": "logs/gpu-review-viewport.stdout.txt.gz",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-viewport.stdout.txt",
+   "sha256": "a86913957d69aec1205b95a3eb18cb13ed5f712904d1c71fbcd1ea01e06e8d2c",
+   "bytes": 133,
+   "retained_encoding": "deterministic gzip (level 9, mtime 0) to keep libtest's trailing blank line byte-exact",
+   "retained_sha256": "d2da8608596b48d19ccb1f6ab27724098d324fb329d5b0d1b92dd2685f48ee0b"
+  },
+  {
+   "retained": "logs/gpu-review-viewport.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/gpu-review-viewport.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "bytes": 282
+  }
+ ],
+ "not_copied": [
+  {
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/build/checkout.json",
+   "sha256": "19dac25898746dd665696377e5e7e2a262ef0dedb9fb016e4e0f26cec80ceaa2",
+   "bytes": 3140158,
+   "reason": "3.1 MB per-file export manifest of the granted commit; hash only"
+  },
+  {
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/bin/review/metalfx_visual_review",
+   "sha256": "e00b947a53e6219182a89f4783c1edbf39664cd45230ff73ce56f1fc089fce4c",
+   "bytes": 18729912,
+   "reason": "frozen review binary; hash only"
+  },
+  {
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/build-lint.stderr.txt",
+   "sha256": "893adbccf6e1c5fdb962280e0a76e2c6cb78ff2842824e79cccc0dc6650e37f9",
+   "bytes": 596,
+   "reason": "root-supervised build/lint log; hash only"
+  },
+  {
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/build-lint.stdout.jsonl",
+   "sha256": "ffccb1ff8fa9e554cef3194a277b8a953bdad1b60b3804923fdeaf6572d7245a",
+   "bytes": 315059,
+   "reason": "root-supervised build/lint log; hash only"
+  },
+  {
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/build-review.stderr.txt",
+   "sha256": "19c52e47fe3df1dd176ab83f138b2dc30ff67520820c4b7026b86814086cf67f",
+   "bytes": 597,
+   "reason": "root-supervised build/lint log; hash only"
+  },
+  {
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/logs/build-review.stdout.jsonl",
+   "sha256": "f782912c28cb7bb3410fa867e1ac2af9463c79f7dc256567f7aecdf6f104b81f",
+   "bytes": 342124,
+   "reason": "root-supervised build/lint log; hash only"
+  }
+ ],
+ "inspection_aids": "derived crops/difference maps under inspection/ in the evidence directory; not renders, not published"
+}

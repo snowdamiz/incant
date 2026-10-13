@@ -694,3 +694,69 @@ Run the foreground supervised build, then issue the one-shot grant. It needs:
 This session made no memory writes, read no credentials, used no accounts, did not
 push and opened no PR. It requested or implied no phase approval, and leaves no
 active children or background tasks.
+
+---
+
+## Execution session — cooked native MetalFX visual review (2026-10-13)
+
+**Status: executed once under root's grant. The numerical and contract verdict is
+PASS. The appearance verdict is recorded separately in
+`visual-execution-result.md`.** The GPU and the target are both released. This
+session made no source, plan, threshold or helper edits and ran no retries.
+
+- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+  Line 2 of root's ACP log `claude-0074-cooked-execute-acp.log` reads "Claude
+  session verified: Opus 5.5; thinking: max". No subagents were used.
+- **Verified before device work:**
+  - brief `7a0b9162…`;
+  - grant `40e64a7b…`, whose visual tree `b2c3e14e…` equals HEAD's;
+  - root build receipt `ba6f2a06…`, build record `f88a64e4…` and source record
+    `1d52c532…`;
+  - frozen binary `e00b947a…`, with exact coverage of 2448 build inputs plus the
+    probe;
+  - 0072's GPU release `3c54be77…`, with no live children;
+  - the global GPU lock was free.
+- **Run** (Apple M5 Pro, Metal, macOS 27.0.1, all serial and in the foreground):
+  - `list review`, then `stationary`, `motion`, `excluded`, `transitions` and
+    `viewport`. All exited 0, and all 35 required checks are true.
+  - Exactly 108 frames, 11 UI submissions and 18 PNGs were charged.
+  - `gpu.py release` (08:52:35Z) and `lease.py release` (08:52:39Z) were both
+    clean.
+  - `analyze.py check` passed, and `analyze.py publish` re-validated and then
+    published.
+- **Appearance verdict:**
+  - Native MetalFX at content scale 1 shows no native-specific defect. Jitter is
+    undone (fitted slopes are effectively zero), there's no disocclusion ghost,
+    overlays and UI are excluded and byte-stable, viewport placement is exact, and
+    resets are clean.
+  - It matches or beats the same-source portable arm.
+  - It is still not accepted as finished anti-aliasing. Silhouette shimmer remains
+    in both arms because of the engine's current-coverage boundary policy.
+  - The portable upscale failure at 12/16 and 8/16 is retained, not relabelled.
+- **Selections:**
+  - native `MetalFx` at 16/16 in every case;
+  - `Portable(Some(Scale))` at every 12/16 and 8/16 step, so native upscaling was
+    never selected;
+  - `Portable(Some(FractionalViewport))` at 10/16 and for the fractional viewport.
+- **Request to root:** before any native-upscaling review I need the raw MetalFX
+  supported content-scale values for this device. The engine-admitted range
+  excludes 0.75 and 0.5, and an upscale-factor versus content-scale interpretation
+  mismatch would fit that, but it is unverified.
+- **Screenshots:** `visual-screenshots/` holds 18 published PNGs at 960×540, all
+  personally inspected, plus a manifest bound to the grant and the passing
+  summary.
+- **Evidence:** `visual-evidence/` holds 32 records copied unchanged with a
+  manifest, and the five case stdout logs as deterministic gzip.
+- **Limitations:**
+  - MetalFX was observed only at scale 1.
+  - Reset and range facts are inferred.
+  - One device, offscreen only.
+  - No iOS, phone, performance, timing or memory claims, and no phase approval.
+- **Transients and process state:**
+  - `/tmp/0074-lease-release-unused.txt` held the lease-release output and was
+    deleted.
+  - The derived crops and difference maps are in the evidence directory's
+    `inspection/`, not published.
+  - No memory writes, credentials, accounts, pushes, PRs, desktop capture, native
+    window or audio.
+  - No active children or background tasks remain.

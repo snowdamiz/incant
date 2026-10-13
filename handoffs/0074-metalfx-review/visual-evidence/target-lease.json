@@ -1,0 +1,69 @@
+{
+ "packet": "0074-metalfx-review",
+ "stage": "metalfx-visual",
+ "holder": "Root/astra supervises CPU build; Claude Opus 5.5 Max later executes GPU after root scheduling",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "root via review-ready.json",
+ "grant_sha256": "40e64a7b030de29ea4de428579595d1ec19cadc97a89eca7c60058e06403a99c",
+ "grant": {
+  "packet": "0074-metalfx-review",
+  "stage": "metalfx-visual",
+  "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "source_tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+  "source_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+   "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0"
+  },
+  "features": [
+   "cooked-temporal",
+   "native-metalfx"
+  ],
+  "visual_tree": "b2c3e14e61ddfb2980ba3063a7148b424fb0d27c",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "holder": "Root/astra supervises CPU build; Claude Opus 5.5 Max later executes GPU after root scheduling",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/target-lease.json",
+  "prior_build_release_sha256": "ef5886c0250710b188fdc8a691d25b98aa0d8a9cb21cb90759ef8cd1999e5c3a",
+  "root_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/metalfx0074-helper-root-20261013.json",
+   "sha256": "2fb649cb821a0f8e36314a2ae5d014809a0268d94c69ec46b3c4120b8f971906"
+  },
+  "schedule": "CPU preparation now only. GPU execution requires a later root brief after0072 releases; do not start Claude before that. Hold target ownership after a successful build through later GPU review, because the existing helper uses one stage lease."
+ },
+ "prior_receipts": {
+  "pins": {
+   "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/target-lease.json",
+    "expected": "ef5886c0250710b188fdc8a691d25b98aa0d8a9cb21cb90759ef8cd1999e5c3a",
+    "sha256": "ef5886c0250710b188fdc8a691d25b98aa0d8a9cb21cb90759ef8cd1999e5c3a"
+   }
+  },
+  "release_alive_fields": {
+   "build_release": {
+    "processes_on_target_at_release": []
+   }
+  }
+ },
+ "tools": {
+  "head": "5ebb4100650b957cee267bf73846f0bd72579331",
+  "visual_tree": "b2c3e14e61ddfb2980ba3063a7148b424fb0d27c",
+  "plan_sha256": "e6bb71b2d5f69458c95d5f8027a28ef14c835253321051fb25d77c6212e9c46e",
+  "helper_sha256": "9f2704d58b38a87014d1d780bb36878a484ee8db366b16fa63481d8b8651dd9b"
+ },
+ "brief_sha256": "6443f184e0fdafd76444bf652c1d6e4cc934eb0c844abe3f78f7c4504568ccbd",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/.worktrees/0074-metalfx-review",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual/checkout",
+ "acquired_at": "2026-10-13T08:45:24.080145+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2, granted features only",
+  "builds from the git-archive child checkout of the granted combined source only",
+  "one bounded process group at a time under the packet flock",
+  "GPU children only under the global native-gpu.lock, budget debited first",
+  "one serial offscreen child per case; no window, desktop capture, audio or accounts",
+  "<= 128 new submissions including UI (<= 960x540), <= 20 PNGs; no retry",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-visual"
+ ],
+ "released_at": "2026-10-13T08:52:39.524902+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0074 stage B cargo/rustc process or frozen binary remains on the target. Contents left as warm cache; nothing deleted."
+}
