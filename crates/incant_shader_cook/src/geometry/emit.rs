@@ -72,6 +72,15 @@ fn vertex_mappings(kind: Kind) -> Vec<msl::VertexBufferMapping> {
                     .collect(),
             },
         ],
+        Kind::Text => vec![B {
+            id: 15,
+            stride: 32,
+            step_mode: S::ByInstance,
+            attributes: vec![
+                attribute(0, 0, F::Float32x4),
+                attribute(1, 16, F::Float32x4),
+            ],
+        }],
         Kind::Ui => vec![B {
             id: 15,
             stride: 64,
@@ -119,12 +128,23 @@ pub(super) fn emit(
 ) -> Result<(Vec<u8>, String)> {
     let shadow = kind == Kind::Shadow;
     let textured = kind != Kind::Diagnostic;
+    let world_text = kind == Kind::Text;
+    let atlas_group = if world_text { 2 } else { 1 };
     match backend {
         Backend::Metal => {
             let mut resources = msl::EntryPointResources::default();
             if stage == ShaderStage::Vertex {
                 // hal29 reserves one vertex lengths buffer after ordinary buffers.
-                resources.sizes_buffer = Some(u8::from(textured));
+                resources.sizes_buffer = Some(if world_text { 2 } else { u8::from(textured) });
+                if world_text {
+                    resources.resources.insert(
+                        resource(1, 0),
+                        msl::BindTarget {
+                            buffer: Some(1),
+                            ..Default::default()
+                        },
+                    );
+                }
                 if textured {
                     resources.resources.insert(
                         resource(0, 0),
@@ -135,7 +155,7 @@ pub(super) fn emit(
                     );
                 }
             } else if textured {
-                if kind == Kind::Ui {
+                if matches!(kind, Kind::Ui | Kind::Text) {
                     resources.resources.insert(
                         resource(0, 0),
                         msl::BindTarget {
@@ -154,14 +174,14 @@ pub(super) fn emit(
                     );
                 }
                 resources.resources.insert(
-                    resource(1, u32::from(shadow)),
+                    resource(atlas_group, u32::from(shadow)),
                     msl::BindTarget {
                         texture: Some(0),
                         ..Default::default()
                     },
                 );
                 resources.resources.insert(
-                    resource(1, 1 + u32::from(shadow)),
+                    resource(atlas_group, 1 + u32::from(shadow)),
                     msl::BindTarget {
                         sampler: Some(msl::BindSamplerTarget::Resource(0)),
                         ..Default::default()
@@ -202,20 +222,25 @@ pub(super) fn emit(
                 flags: spv::WriterFlags::FORCE_POINT_SIZE,
                 fake_missing_bindings: false,
                 binding_map: if textured {
-                    [(0, 0), (1, 0), (1, 1), (1, 2)]
-                        .into_iter()
-                        .filter(|pair| shadow || *pair != (1, 2))
-                        .map(|(group, binding)| {
-                            (
-                                resource(group, binding),
-                                spv::BindingInfo {
-                                    descriptor_set: group,
-                                    binding,
-                                    binding_array_size: None,
-                                },
-                            )
-                        })
-                        .collect()
+                    [
+                        (0, 0),
+                        (atlas_group, 0),
+                        (atlas_group, 1),
+                        (1, if world_text { 0 } else { 2 }),
+                    ]
+                    .into_iter()
+                    .filter(|pair| shadow || world_text || *pair != (1, 2))
+                    .map(|(group, binding)| {
+                        (
+                            resource(group, binding),
+                            spv::BindingInfo {
+                                descriptor_set: group,
+                                binding,
+                                binding_array_size: None,
+                            },
+                        )
+                    })
+                    .collect()
                 } else {
                     Default::default()
                 },
@@ -225,7 +250,8 @@ pub(super) fn emit(
                     [spv::Capability::Shader, spv::Capability::ImageQuery]
                         .into_iter()
                         .filter(|c| {
-                            matches!(kind, Kind::Sprite | Kind::Ui) || *c == spv::Capability::Shader
+                            matches!(kind, Kind::Sprite | Kind::Ui | Kind::Text)
+                                || *c == spv::Capability::Shader
                         })
                         .collect(),
                 ),
@@ -259,7 +285,7 @@ pub(super) fn emit(
                 shader_model: hlsl::ShaderModel::V6_0,
                 fake_missing_bindings: false,
                 special_constants_binding: Some(binding(match kind {
-                    Kind::Shadow => 2,
+                    Kind::Shadow | Kind::Text => 2,
                     Kind::Sprite | Kind::Ui => 1,
                     Kind::Diagnostic => 0,
                 })),
@@ -291,12 +317,12 @@ pub(super) fn emit(
                     standard_samplers: binding(0),
                     comparison_samplers: binding(2048),
                 };
-            } else if matches!(kind, Kind::Sprite | Kind::Ui) {
+            } else if matches!(kind, Kind::Sprite | Kind::Ui | Kind::Text) {
                 options.binding_map = [
                     (resource(0, 0), binding(0)),
-                    (resource(1, 0), binding(0)),
+                    (resource(atlas_group, 0), binding(0)),
                     (
-                        resource(1, 1),
+                        resource(atlas_group, 1),
                         hlsl::BindTarget {
                             space: 255,
                             register: 0,
@@ -305,9 +331,13 @@ pub(super) fn emit(
                     ),
                 ]
                 .into();
-                options
-                    .sampler_buffer_binding_map
-                    .insert(hlsl::SamplerIndexBufferKey { group: 1 }, binding(1));
+                if world_text {
+                    options.binding_map.insert(resource(1, 0), binding(1));
+                }
+                options.sampler_buffer_binding_map.insert(
+                    hlsl::SamplerIndexBufferKey { group: atlas_group },
+                    binding(1),
+                );
                 options.sampler_heap_target = hlsl::SamplerHeapBindTargets {
                     standard_samplers: binding(0),
                     comparison_samplers: binding(2048),

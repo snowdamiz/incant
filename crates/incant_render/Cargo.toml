@@ -15,6 +15,7 @@ cooked-geometry = ["cooked-output"]
 # Fixed sprite family; native backend acceptance tracked separately.
 cooked-sprites = ["cooked-output"]
 cooked-ui = ["cooked-output"]
+cooked-text = ["cooked-output"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [

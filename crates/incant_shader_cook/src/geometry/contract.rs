@@ -62,6 +62,9 @@ fn io(
 }
 
 pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
+    if kind == Kind::Text {
+        return super::text::validate(m, info);
+    }
     if kind == Kind::Ui {
         return super::ui::validate(m, info);
     }
@@ -96,7 +99,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                     (Some(5), 4),
                     (Some(9), 2),
                 ],
-                Kind::Sprite | Kind::Ui => {
+                Kind::Sprite | Kind::Ui | Kind::Text => {
                     unreachable!("textured 2D contract validated separately")
                 }
             }

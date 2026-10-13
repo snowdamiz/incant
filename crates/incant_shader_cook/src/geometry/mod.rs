@@ -1,7 +1,8 @@
-//! Fixed diagnostic and shadow programs; never a project shader passthrough.
+//! Fixed engine programs; never a project shader passthrough.
 mod contract;
 mod emit;
 mod sprite;
+mod text;
 mod ui;
 
 use crate::{Artifact, Backend, Bundle, CookError, Result, Stage};
@@ -15,6 +16,7 @@ pub enum Kind {
     Shadow,
     Sprite,
     Ui,
+    Text,
 }
 impl Kind {
     pub fn contract(self) -> &'static str {
@@ -24,6 +26,9 @@ impl Kind {
             }
             Self::Shadow => {
                 "incant-shadow-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15v14i,stride48-112,sizes1;spv=1.0,no-y-flip;hlsl=6.0,camera-b0,material-b1,texture-t0,sampler-indices-t5,special-b2;bounds=restrict;loops=bounded"
+            }
+            Self::Text => {
+                "incant-text-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15i,stride32,sizes2,frame0,node1;spv=1.0,no-y-flip;hlsl=6.0,frame-b0,node-b1,texture-t0,sampler-indices-t1,special-b2;bounds=restrict;loops=bounded"
             }
             Self::Ui => {
                 "incant-ui-v1;naga=29.0.4;wgpu=29.0.4;msl=2.4,pull15i,stride64,sizes1,frame0;spv=1.0,no-y-flip;hlsl=6.0,frame-b0,texture-t0,sampler-indices-t1,special-b1;bounds=restrict;loops=bounded"
@@ -73,6 +78,7 @@ pub fn cook(kind: Kind, source: &str) -> Result<Bundle> {
         include_str!("emit.rs"),
         include_str!("sprite.rs"),
         include_str!("ui.rs"),
+        include_str!("text.rs"),
         include_str!("../../Cargo.toml"),
     ]
     .join("\n");

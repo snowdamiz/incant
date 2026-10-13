@@ -1,6 +1,7 @@
 fn main() {
     println!("cargo:rerun-if-changed=src/fixture.wgsl");
     println!("cargo:rerun-if-changed=src/ui/ui.wgsl");
+    println!("cargo:rerun-if-changed=src/text/text.wgsl");
     println!("cargo:rerun-if-changed=src/sprites/sprite.wgsl");
     println!("cargo:rerun-if-changed=src/shadows/caster.wgsl");
     println!("cargo:rerun-if-changed=src/output.wgsl");
@@ -54,5 +55,16 @@ fn main() {
             std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"))
                 .join("ui-shaders");
         geometry::write_bundle(Kind::Ui, &bundle, &output).expect("write cooked UI shaders");
+    }
+    #[cfg(feature = "cooked-text")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::geometry::{self, Kind};
+        let source =
+            std::fs::read_to_string("src/text/text.wgsl").expect("engine-owned text shader");
+        let bundle = geometry::cook(Kind::Text, &source).expect("fixed text shader contract");
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"))
+                .join("text-shaders");
+        geometry::write_bundle(Kind::Text, &bundle, &output).expect("write cooked text shaders");
     }
 }

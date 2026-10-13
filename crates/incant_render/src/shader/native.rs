@@ -73,7 +73,7 @@ impl Bundle {
         let fragment_desc = descriptor(fragment)?;
         // SAFETY: callers are private fixed-builtin selectors. Their pinned host
         // cook validates exact IR/host layouts and emits bounded accesses/loops.
-        // Output has no side metadata; geometry/sprites/UI use the exact hal29 bounded
+        // Output has no side metadata; geometry/sprites/UI/text use exact hal29 bounded
         // vertex pulling, supplied lengths and full sampler-index binding map.
         // Embedded bytes/entry names are never supplied by project artifacts.
         let (vertex_module, fragment_module) = unsafe {
