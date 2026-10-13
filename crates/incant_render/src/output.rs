@@ -35,7 +35,11 @@ fn decode(byte: u8) -> f32 {
 }
 pub(crate) struct OutputPass(HashMap<wgpu::TextureFormat, wgpu::RenderPipeline>);
 impl OutputPass {
-    pub fn new(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Self> {
+    pub fn new(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let shader = shader(device, backend)?;
         #[cfg(all(feature = "cooked-output", not(target_arch = "wasm32")))]
         let layout = Some(layout::create(device));
@@ -49,7 +53,12 @@ impl OutputPass {
                 wgpu::TextureFormat::Bgra8UnormSrgb,
             ]
             .into_iter()
-            .map(|format| (format, build(device, &shader, layout.as_ref(), format)))
+            .map(|format| {
+                (
+                    format,
+                    build(device, &shader, layout.as_ref(), format, cache),
+                )
+            })
             .collect(),
         ))
     }
@@ -177,6 +186,7 @@ fn build(
     shader: &Stages,
     layout: Option<&wgpu::PipelineLayout>,
     format: wgpu::TextureFormat,
+    cache: Option<&wgpu::PipelineCache>,
 ) -> wgpu::RenderPipeline {
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("HDR display transform"),
@@ -201,6 +211,6 @@ fn build(
             })],
         }),
         multiview_mask: None,
-        cache: None,
+        cache,
     })
 }

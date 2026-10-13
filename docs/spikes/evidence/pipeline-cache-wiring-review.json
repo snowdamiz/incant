@@ -1,0 +1,166 @@
+{
+  "format": "incant-independent-source-review",
+  "version": 1,
+  "reviewer": "Astra /root/native_wasm_export",
+  "at": "2026-10-13T01:50:44.340168+00:00",
+  "verdict": "accepted-scoped-source",
+  "findings": [],
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/persistent-pipeline-cache/incant",
+  "base": "e0fbd05642275b3f201cb04cdcd9990f8077aa76",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-004/freeze.json",
+    "sha256": "27c5fca23ec3468cfc37e8a2b4ac38ceafec222925eca146045add1b38c6b791"
+  },
+  "verified_current_and_copied_files": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "0426870d9d76d36fa0ae462ce6893a9b69f10478e44b3953e6cbec5cb87cb562",
+      "bytes": 251974
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "6cdbfc2dc09c80ae96089823a2f8edff9394c77dcc6a596a928dc510cbf8818e",
+      "bytes": 2405
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "a9fc24f8d6234fbadf0d45584594d6395489a07511c8426f0a028286f76a1ac5",
+      "bytes": 17698
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "sha256": "608d8226cb4fd274b3f4b05c811dfcd893761c1eb75039e619925b48e25b773e",
+      "bytes": 15343
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "sha256": "edc49c5e19f24230bb20aef6518de545d45b42d58855cce21d5a8a288ce11f12",
+      "bytes": 3367
+    },
+    {
+      "path": "crates/incant_render/src/materials.rs",
+      "sha256": "8e69ac99131647c51dc6a3e4ec6df7e40b132d2c9197c5943571ebcbcc152cec",
+      "bytes": 13614
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "ce5332bd5b1f4b5c251d55842cb21353c16aa8fb70d1e21605268de62d906f19",
+      "bytes": 7527
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/mod.rs",
+      "sha256": "d3ea28f43b2834bcb85c8444ff6cdd232c17e93d1c514297d876575b1a98ffdc",
+      "bytes": 5742
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/private.rs",
+      "sha256": "43109fa34d2e268aaf1c657c4cf5a8954a9eb949020f0184d78b85d4ee9f880e",
+      "bytes": 5273
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "sha256": "cd4cce64bff9d8c7eef10b894cd497175a6bd620e0ab89d06a417eeb03486a24",
+      "bytes": 8304
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/store.rs",
+      "sha256": "375e2f3360ed0154fe0aaa192f162c4be6953fbe33d2e0985859e18337c5f912",
+      "bytes": 3564
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "sha256": "72f2d2e1129cb8741c22faebc1a55d519cac3b53dfe7ad2abffebdba77311645",
+      "bytes": 5312
+    },
+    {
+      "path": "crates/incant_render/src/shadows/mod.rs",
+      "sha256": "73a154126addadc6129e05daef262956cb78281a1388b780ca57c0725980229a",
+      "bytes": 8357
+    },
+    {
+      "path": "crates/incant_render/src/shadows/pipeline.rs",
+      "sha256": "40f1b33d6b36dcda2f6beed96e0f455bb944cd48e530d44231c6ebce8203efd8",
+      "bytes": 2222
+    },
+    {
+      "path": "crates/incant_render/src/sprites/mod.rs",
+      "sha256": "3d2e49a58e4162c10838f8067df2f99765636fe5843fbc6de101e87fcece9f7b",
+      "bytes": 22447
+    },
+    {
+      "path": "crates/incant_render/src/text/drawing.rs",
+      "sha256": "fd7993994b3a8cfb2d2644c380c641895e8326e6e59c439afd8aa884da7c832d",
+      "bytes": 6303
+    },
+    {
+      "path": "crates/incant_render/src/text/mod.rs",
+      "sha256": "ef41ba419ee0675a2fbd41d927e359b86eb60f4deb4622435aa52bc11ee6e900",
+      "bytes": 17650
+    },
+    {
+      "path": "crates/incant_render/src/ui/mod.rs",
+      "sha256": "ab526e29a987070f2d1318d301693bf4cc1ce2ec0d199b92d1d0cb089842de53",
+      "bytes": 21306
+    },
+    {
+      "path": "crates/incant_render/tests/persistent_cache.rs",
+      "sha256": "d7e8f65e62c6320ba99fd1753791aae53188587e1bfc480578b20348a4dea931",
+      "bytes": 7749
+    }
+  ],
+  "independent_review_scope": {
+    "complete_root_authored_files": [
+      "Cargo.lock",
+      "crates/incant_render/Cargo.toml",
+      "crates/incant_render/src/lib.rs",
+      "crates/incant_render/src/lighting/mod.rs",
+      "crates/incant_render/src/material_pipeline.rs",
+      "crates/incant_render/src/materials.rs",
+      "crates/incant_render/src/output.rs",
+      "crates/incant_render/src/pipeline_cache/mod.rs",
+      "crates/incant_render/src/pipeline_cache/store.rs",
+      "crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "crates/incant_render/src/shadows/mod.rs",
+      "crates/incant_render/src/shadows/pipeline.rs",
+      "crates/incant_render/src/sprites/mod.rs",
+      "crates/incant_render/src/text/drawing.rs",
+      "crates/incant_render/src/text/mod.rs",
+      "crates/incant_render/src/ui/mod.rs"
+    ],
+    "test_delta_only": {
+      "path": "crates/incant_render/tests/persistent_cache.rs",
+      "comparison_source": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/vulkan-test-source-003/persistent_cache.rs",
+      "comparison_sha256": "900ddee2ab7b224c350c48fd7a1312ce855d08d327cd3e23a0b78e8c12890c86",
+      "reviewed_delta": "Actual AdapterInfo logging plus at most 64 KiB child text after process reap, before status handling. No opaque cache bytes printed."
+    }
+  },
+  "explicit_exclusions": [
+    "private.rs and private_tests.rs are this reviewer's authored implementation; hashes verified only, not independently approved here. Root separately reviews these files.",
+    "Original persistent_cache.rs test design is this reviewer's implementation; only root's subsequent logging delta was independently reviewed.",
+    "No execution evidence audit or fresh Cargo/GPU invocation was performed as part of this source review."
+  ],
+  "checks": [
+    "Rehashed all 19 current files and 19 retained source copies against exact freeze sizes and SHA-256 values.",
+    "Compared Cargo.lock to immutable base: all 963 name/version/source/checksum identities unchanged; only incant_render gains the existing pinned rustix dependency.",
+    "Reviewed opt-in feature and Unix-specific pinned rustix 1.1.5 fs/process dependency; default and unsupported backends retain explicit inactive results.",
+    "Reviewed platform gates before load and unsafe admission: only Linux/Android Vulkan with PIPELINE_CACHE; Darwin/Windows storage refused, other backends unsupported.",
+    "Reviewed application-path selection and store boundary: absolute environment-owned cache base, digest-only names; held-directory helper is the explicit filesystem trust prerequisite.",
+    "Reviewed length-delimited adapter/driver identity, fixed envelope magic, exact payload length, nonzero 64 MiB limit, checksum and trailing-byte rejection; missing/corrupt/I/O cases remain distinct.",
+    "Reviewed save producer: only pipeline cache get_data output reaches Store::save; bounded envelope chunks go through Directory::publish. Checksums are not described as authentication.",
+    "Reviewed construction and lifetime: single cache passed to all fixed startup constructors inside validation scope; failure exits without finish, persistence only follows successful scope completion; no per-frame disk path.",
+    "Counted fixed startup catalog from actual loops: 12 material + 8 shadow + 1 diagnostic + 4 output + 1 sprite + 1 text + 3 UI render pipelines, plus 1 lighting compute pipeline. All 8 creation sites use the same supplied handle.",
+    "Checked material bind-layout array refactor preserves original globals/material/environment/lighting order.",
+    "Read seven store test cases covering reopen, corruption/truncation/trailing/identity, refusal preserving prior bytes, unavailable path, concurrent publication, and symlink leaf behavior.",
+    "Compared root test logging delta against exact reviewer source003: bounded text output occurs only after try_wait reaps the child; added adapter data is public metadata, no opaque bytes.",
+    "Consulted locally pinned wgpu 29.0.4 pipeline-cache API documentation for Vulkan-only support, shared handle lifecycle, get_data provenance, and atomic persistence expectations."
+  ],
+  "limits": [
+    "Actual Linux Vulkan cold/reopen/corruption/recovery execution remains pending release CI. Mac compilation is not this backend proof.",
+    "Supplied reports submitted cache bytes, not driver cache hits, speedup, or reference-device performance.",
+    "The new test is init/poll-only; it does not independently establish frame pipeline invariance or rendered appearance.",
+    "Android production admission still needs a usable absolute host cache location; absence is NoDirectory. No Android execution or phone gate is approved.",
+    "Darwin/Windows persistent storage remains disabled pending appropriate platform trust implementations. No Metal archive or DX12 persistence completion.",
+    "Same-user hostile code and privileged operating-system compromise are outside this private-cache trust boundary; filesystem trust depends on the separately reviewed helper.",
+    "Cache eviction/total directory growth and complete phase gates are outside this slice."
+  ]
+}

@@ -15,6 +15,7 @@ pub(super) fn pipeline(
     device: &wgpu::Device,
     layouts: [&wgpu::BindGroupLayout; 3],
     backend: wgpu::Backend,
+    cache: Option<&wgpu::PipelineCache>,
 ) -> Result<wgpu::RenderPipeline> {
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Text coverage"),
@@ -55,7 +56,7 @@ pub(super) fn pipeline(
             }),
             multisample: Default::default(),
             multiview_mask: None,
-            cache: None,
+            cache,
         }),
     )
 }

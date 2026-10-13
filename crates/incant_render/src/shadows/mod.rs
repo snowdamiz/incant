@@ -66,6 +66,7 @@ impl ShadowSystem {
         device: &wgpu::Device,
         materials: &wgpu::BindGroupLayout,
         backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
     ) -> Result<Self> {
         let cameras = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Directional cascade camera"),
@@ -87,7 +88,7 @@ impl ShadowSystem {
                     };
                     pipelines.insert(
                         key,
-                        pipeline::build(device, &shader, &cameras, materials, key),
+                        pipeline::build(device, &shader, &cameras, materials, key, cache),
                     );
                 }
             }

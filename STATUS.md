@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Persistent Vulkan pipeline cache — CPU verification
+
+An optional renderer cache now wraps the complete 31-pipeline startup catalog
+with private, bounded, adapter/driver-bound storage and atomic publication.
+Filesystem/CPU checks, browser compilation and dependency checks pass. A fresh-
+process Vulkan corruption/reopen test is prepared for Linux release CI; actual
+Linux driver execution and measured cache benefit remain pending. Default
+rendering is unchanged. Metal/DX12 storage, per-level recording, asynchronous
+fallback and reference-phone gates remain open.
+[Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+
 ## Fixed material shaders — CPU/compiler checks passed
 
 The opt-in material path cooks the unchanged imported-material, light and shadow

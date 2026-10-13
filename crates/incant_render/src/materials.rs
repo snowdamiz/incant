@@ -90,6 +90,7 @@ impl MaterialSystem {
         environment: &wgpu::BindGroupLayout,
         lighting: &wgpu::BindGroupLayout,
         backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
     ) -> Result<Self> {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Material frame"),
@@ -150,10 +151,8 @@ impl MaterialSystem {
                             device,
                             &shader,
                             key,
-                            &globals,
-                            &layout,
-                            environment,
-                            lighting,
+                            [&globals, &layout, environment, lighting],
+                            cache,
                         ),
                     );
                 }

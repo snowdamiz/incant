@@ -11,6 +11,7 @@ pub(super) fn build(
     camera: &wgpu::BindGroupLayout,
     materials: &wgpu::BindGroupLayout,
     key: PipelineKey,
+    cache: Option<&wgpu::PipelineCache>,
 ) -> wgpu::RenderPipeline {
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Directional depth caster"),
@@ -58,6 +59,6 @@ pub(super) fn build(
             targets: &[],
         }),
         multiview_mask: None,
-        cache: None,
+        cache,
     })
 }

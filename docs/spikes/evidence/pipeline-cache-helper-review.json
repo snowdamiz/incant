@@ -1,0 +1,23 @@
+{
+  "verdict": "accepted scoped helper and original test source",
+  "at": "2026-10-13T01:52:56.232253+00:00",
+  "reviewer": "Astra /root",
+  "scope": [
+    "private.rs",
+    "private_tests.rs",
+    "original persistent_cache.rs lifecycle test"
+  ],
+  "source_freeze_sha256": "27c5fca23ec3468cfc37e8a2b4ac38ceafec222925eca146045add1b38c6b791",
+  "findings": [],
+  "checks": [
+    "Read held-descriptor ownership/mode checks, nofollow/nonblocking bounded regular-file read, exclusive0600 atomic publication, sync and cleanup.",
+    "Read eight real-filesystem tests and rechecked exact helper identity43109fa3/private_tests cd4cce64 unchanged.",
+    "Executed combined15filesystem/envelope tests on macOS; full library suites exercise same helper.",
+    "Read fresh-subprocess Vulkan test: backend forced, four status expectations, actual pipeline counts, private child environment, bounded timeout and reap, checksum-only corruption.",
+    "Compiled final test helper on macOS and reran focused final Clippy after root logging delta."
+  ],
+  "limits": [
+    "No independent acceptance of root-authored session/store here; separate peer receipt covers it.",
+    "No Linux GPU execution, cache hit, speedup, visual or phone gate."
+  ]
+}
