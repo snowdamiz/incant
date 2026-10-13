@@ -1,0 +1,8 @@
+{"case":"viewport","event":"open","frame_limit":2,"submission_limit":1}
+{"event":"frame","index":1,"name":"off-1","timed":false}
+{"event":"frame-read","name":"off-1","rgba_sha256":"bbe52bb85f82ac275db6d111415636d79734bc0bba67ff70e8abaabaa90feb6a","settle_polls":0,"stats":{"abandoned":0,"enabled":false,"pending":0,"ready":0,"retired":0,"skipped":0}}
+{"event":"frame","index":2,"name":"on-1","timed":true}
+{"event":"frame-read","name":"on-1","rgba_sha256":"bbe52bb85f82ac275db6d111415636d79734bc0bba67ff70e8abaabaa90feb6a","settle_polls":0,"stats":{"abandoned":0,"enabled":true,"pending":0,"ready":1,"retired":0,"skipped":0}}
+{"event":"png","png":{"name":"viewport-off.png","rgba_sha256":"bbe52bb85f82ac275db6d111415636d79734bc0bba67ff70e8abaabaa90feb6a","sha256":"d6215b533019fc696f94aafcf3e48b13f2519f35ae2aa4e9e75fca4f744be8b3"}}
+{"event":"png","png":{"name":"viewport-on.png","rgba_sha256":"bbe52bb85f82ac275db6d111415636d79734bc0bba67ff70e8abaabaa90feb6a","sha256":"d6215b533019fc696f94aafcf3e48b13f2519f35ae2aa4e9e75fca4f744be8b3"}}
+{"event":"finish","pass":true}

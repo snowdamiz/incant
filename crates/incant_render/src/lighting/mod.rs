@@ -460,11 +460,15 @@ pub(crate) struct ClusterPass {
     dimensions: [u32; 2],
 }
 impl ClusterPass {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        queries: Option<&crate::timing::PassQueries>,
+    ) {
         // Every used cluster word is overwritten, including empty clusters.
         let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
             label: Some("Assign local lights to view clusters"),
-            timestamp_writes: None,
+            timestamp_writes: queries.map(|q| q.compute()),
         });
         pass.set_pipeline(&self.pipeline);
         pass.set_bind_group(0, &self.group, &[]);

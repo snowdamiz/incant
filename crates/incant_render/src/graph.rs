@@ -30,7 +30,17 @@ pub(crate) struct PreparedFrame {
     pub output: OutputDraw,
 }
 #[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
-struct Encoder(wgpu::CommandEncoder);
+struct Encoder(wgpu::CommandEncoder, Option<crate::timing::Capture>);
+impl Encoder {
+    fn timed(
+        &mut self,
+        pass: crate::timing::GpuPass,
+        encode: impl FnOnce(&mut wgpu::CommandEncoder, Option<&crate::timing::PassQueries>),
+    ) {
+        let queries = self.1.as_mut().map(|capture| capture.pass(pass));
+        encode(&mut self.0, queries.as_ref());
+    }
+}
 #[cfg(not(target_arch = "wasm32"))]
 type FrameInput<'w> = Res<'w, PreparedFrame>;
 #[cfg(target_arch = "wasm32")]
@@ -42,6 +52,7 @@ type EncoderInput<'w> = NonSendMut<'w, Encoder>;
 struct GraphState {
     world: World,
     schedule: Schedule,
+    timings: Option<crate::timing::Profiler>,
 }
 pub(crate) struct FrameGraph(
     Mutex<GraphState>,
@@ -98,6 +109,7 @@ impl Default for FrameGraph {
             Mutex::new(GraphState {
                 world: World::new(),
                 schedule,
+                timings: None,
             }),
             #[cfg(target_arch = "wasm32")]
             std::marker::PhantomData,
@@ -129,6 +141,37 @@ fn take_encoder(world: &mut World) -> Encoder {
         .expect("graph owns encoder")
 }
 impl FrameGraph {
+    pub fn with_timings(device: &wgpu::Device, queue: &wgpu::Queue) -> Result<Self> {
+        let graph = Self::default();
+        graph
+            .0
+            .lock()
+            .map_err(|_| crate::timing::GpuTimingError::State)?
+            .timings = Some(crate::timing::Profiler::new(device, queue)?);
+        Ok(graph)
+    }
+    pub fn take_timing(
+        &self,
+    ) -> std::result::Result<Option<crate::timing::GpuFrameTiming>, crate::timing::GpuTimingError>
+    {
+        let state = self
+            .0
+            .lock()
+            .map_err(|_| crate::timing::GpuTimingError::State)?;
+        state.timings.as_ref().map_or(Ok(None), |p| p.take())
+    }
+    pub fn timing_stats(
+        &self,
+    ) -> std::result::Result<crate::timing::GpuTimingStats, crate::timing::GpuTimingError> {
+        let state = self
+            .0
+            .lock()
+            .map_err(|_| crate::timing::GpuTimingError::State)?;
+        state
+            .timings
+            .as_ref()
+            .map_or(Ok(Default::default()), |p| p.stats())
+    }
     pub fn encode(
         &self,
         device: &wgpu::Device,
@@ -138,25 +181,30 @@ impl FrameGraph {
             .0
             .lock()
             .map_err(|_| ResourceError::CacheLock("frame graph"))?;
-        let GraphState { world, schedule } = &mut *state;
-        insert_frame(
+        let GraphState {
             world,
-            frame,
-            Encoder(
-                device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
-                    label: Some("Incant frame graph"),
-                }),
-            ),
-        );
+            schedule,
+            timings,
+        } = &mut *state;
+        let encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
+            label: Some("Incant frame graph"),
+        });
+        let capture = timings.as_ref().map(|p| p.begin()).transpose()?.flatten();
+        insert_frame(world, frame, Encoder(encoder, capture));
         schedule.run(world);
         // No frame handles remain in the scheduler after encoding. Wgpu retains
         // the referenced GPU resources in the returned command buffer instead.
-        let encoder = take_encoder(world);
+        let mut encoder = take_encoder(world);
+        if let Some(capture) = encoder.1.take() {
+            capture.finish(&mut encoder.0);
+        }
         Ok(encoder.0.finish())
     }
 }
 fn initialize_scene(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    frame.diagnostics.encode(&mut encoder.0);
+    encoder.timed(crate::timing::GpuPass::InitializeScene, |e, q| {
+        frame.diagnostics.encode(e, q)
+    });
 }
 fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = frame
@@ -164,33 +212,43 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         .as_ref()
         .and_then(|m| m.lighting.compute.as_ref())
     {
-        pass.encode(&mut encoder.0);
+        encoder.timed(crate::timing::GpuPass::AssignLights, |e, q| {
+            pass.encode(e, q)
+        });
     }
 }
 fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.models {
-        pass.encode(&mut encoder.0);
+        encoder.timed(crate::timing::GpuPass::Models, |e, q| pass.encode(e, q));
     }
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    frame.output.encode(&mut encoder.0);
+    encoder.timed(crate::timing::GpuPass::Display, |e, q| {
+        frame.output.encode(e, q)
+    });
 }
 
 fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    if let Some(pass) = &frame.models {
-        pass.shadows.encode(&mut encoder.0);
+    if let Some(pass) = &frame.models
+        && pass.shadows.has_passes()
+    {
+        encoder.timed(crate::timing::GpuPass::Shadows, |e, q| {
+            pass.shadows.encode(e, q)
+        });
     }
 }
 
 fn sprites(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.sprites {
-        pass.encode(&mut encoder.0);
+        encoder.timed(crate::timing::GpuPass::Sprites, |e, q| pass.encode(e, q));
     }
 }
 
 fn text(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    if let Some(pass) = &frame.text {
-        pass.encode(&mut encoder.0);
+    if let Some(pass) = &frame.text
+        && pass.has_passes()
+    {
+        encoder.timed(crate::timing::GpuPass::Text, |e, q| pass.encode(e, q));
     }
 }
 #[cfg(test)]

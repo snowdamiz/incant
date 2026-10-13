@@ -1,0 +1,18 @@
+{
+ "packet": "0068-gpu-timestamps",
+ "released_at": "2026-10-13T04:41:40.330651+00:00",
+ "children": 18,
+ "gpu_children": 15,
+ "refusals": 0,
+ "frames_reserved": 12,
+ "frames_rendered": 12,
+ "pngs_written": 7,
+ "submissions_reserved": 11,
+ "first_start": "2026-10-13T04:34:58.154240+00:00",
+ "last_end": "2026-10-13T04:39:50.388930+00:00",
+ "ledger_sha256": "1ca536072c569d5eecf09b831cbedddee6c6b1339e64e374db9b2c9a86ba8559",
+ "grant_sha256_at_release": "b07d3062da34d6bf880dd2ca01d4e61dbdb191569977cce755976742266fe1af",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "GPU released by 0068 for Astra; review-ready.json left untouched (only Astra writes it). Run lease.py release next."
+}

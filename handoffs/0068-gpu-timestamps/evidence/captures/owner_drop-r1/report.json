@@ -1,0 +1,35 @@
+{
+  "case": "owner_drop",
+  "checks": {
+    "fresh_owner_starts_empty": true,
+    "fresh_owner_take_none": true,
+    "one_pending_before_submit": true,
+    "retained_device_wait_ok_after_owner_drop": true
+  },
+  "frames_rendered": 0,
+  "fresh_stats": {
+    "abandoned": 0,
+    "enabled": true,
+    "pending": 0,
+    "ready": 0,
+    "retired": 0,
+    "skipped": 0
+  },
+  "fresh_take": {
+    "outcome": "none"
+  },
+  "outcome": "pass",
+  "pngs": [],
+  "retained_device_wait": {
+    "ok": "QueueEmpty"
+  },
+  "stats_before_submit": {
+    "abandoned": 0,
+    "enabled": true,
+    "pending": 1,
+    "ready": 0,
+    "retired": 0,
+    "skipped": 0
+  },
+  "timed_submissions": 1
+}

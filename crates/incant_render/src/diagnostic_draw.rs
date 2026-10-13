@@ -36,8 +36,13 @@ impl DiagnosticDraw {
             count: vertices.len() as u32,
         })
     }
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        queries: Option<&crate::timing::PassQueries>,
+    ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+            timestamp_writes: queries.map(|q| q.render()),
             label: Some("Clear scene and draw diagnostic geometry"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: &self.targets.color,
