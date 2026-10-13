@@ -99,7 +99,7 @@ Clippy pass; independent source review is accepted. Additional Miri experiments
 remain unsuccessful due to Crossbeam diagnostics and are recorded separately.
 This does not enable persisted physics saves, complete a dependency soundness
 audit, or establish a performance gain.
-[Producer scope](docs/spikes/parry-parallel-ownership.md). The current-main195 union passes 18 CPU cases in each physics mode, all-target Clippy, browser/script checks and four isolated patched dependency graphs. Actual source-change/restore controls verify runtime identity invalidation for both Parry and the optional profiler. [Integration evidence](docs/spikes/parry-main195.md) awaits independent final review; no physics-save admission is enabled.
+[Producer scope](docs/spikes/parry-parallel-ownership.md). The current-main195 union passes 18 CPU cases in each physics mode, all-target Clippy, browser/script checks and four isolated patched dependency graphs. Actual source-change/restore controls verify runtime identity invalidation for both Parry and the optional profiler. [Integration evidence](docs/spikes/parry-main195.md) has independent final acceptance; publication follows the required fast check. No physics-save admission is enabled.
 
 ## Cooked renderer integration — CPU checks complete
 

@@ -4886,7 +4886,7 @@
     "Producer Miri experiments remain failed and qualified; this is no clean Miri gate, complete dependency soundness audit, shipping/performance/device claim, or physics-save admission.",
     "Read-only clone reused only external build dependencies after local workspace products were removed. No graphics, native window, or shipping package was executed."
   ],
-  "review_state": "Independent current-main acceptance pending",
+  "review_state": "Independent current-main and lossless packaging acceptance complete",
   "integration_seams": {
     "path": "docs/spikes/evidence/parry-main195/integration-seams.patch.gz",
     "encoding": "gzip",
@@ -4894,5 +4894,15 @@
     "raw_sha256": "f7866864b071803f189d2c569f56241a9c560eb52685ddde2eae4b2f3a295fce",
     "raw_bytes": 3232
   },
-  "packaging_previous_manifest_sha256": "42c943bec0898d0a4ebdc987168a2cbf666c70d332481a87026b4e47fdcf3732"
+  "packaging_previous_manifest_sha256": "42c943bec0898d0a4ebdc987168a2cbf666c70d332481a87026b4e47fdcf3732",
+  "final_reviews": [
+    {
+      "path": "docs/spikes/evidence/parry-main195/parry-main195-final-20261013.json",
+      "sha256": "bb466168a453c5b96e941d9e8606191aa679a7600e311aa8ed306a4244bd5fcd"
+    },
+    {
+      "path": "docs/spikes/evidence/parry-main195/parry-main195-packaging-20261013.json",
+      "sha256": "a0dd8812f0e61d62632982f4b330c5b1af5f266c937a6eab0818caf131a1b4cc"
+    }
+  ]
 }
