@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "tested_head": "eb43b8ed982f47d20bf33707de1d55c2f0b623f6",
+  "actual_main": "195866988ee6286ecf301149ee3559feedddfb92",
+  "integration_head": "3738eb1648e5162345635930722374eb43eccaee",
+  "exemptions": [
+    {
+      "path": "editor/app/tests/model_gpu.rs",
+      "tested_sha256": "d5597411fc707981241992b7a89e3a5cbeebfdcf65611eff60d6475dd1df6274",
+      "current_sha256": "3111e5fb5d94094c6d0debb473f931786f750d87b34e23686d205e3f20a57b45"
+    }
+  ],
+  "collector_original": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/docs/spikes/evidence/core-result-hud-main192/collect.py",
+    "sha256": "aba5d25ba2174d8c14429ff4aed138019ff3f0f2c43254e040eaa2459cbec0e1"
+  },
+  "scope": "Only the independently accepted editor integration test differs. It is absent from the native headless/library graph and was not invoked by this sample proof. No runtime crate/build/lock/SDK/schema/vendor input changed. No new runtime build or proof claimed."
+}

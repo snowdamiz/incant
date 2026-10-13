@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main192, 2026-10-13
+## Current overview — main193, 2026-10-13
 
-Development main192 includes the restart quota-test repair (PR188) and the reviewed,
+Development main193 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -32,10 +32,11 @@ quota repair preserves production's 50 ms budget, and the reviewed player probe
 correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
 all 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
-Checkpoint18 Linux and Windows desktop jobs both fail compiling the editor test
+Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
 that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
-passes local compile/CPU/Clippy checks and final review; production and backend
-assertions are unchanged. Other candidate jobs continue without an advance.
+is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
+production and backend assertions are unchanged. Other candidate jobs continue
+without an advance.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -48,6 +49,11 @@ their queued GPU/appearance checks remain open. CPU profiling is being verified
 locally, with final package evidence pending. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
 below are historical integration snapshots, not the current queue.
+
+Safe Core live-HUD changes are merged in PR192. The optional result-label and won-objective
+correction has passed current-main192 public native checks and independent
+integration review; publication awaits its exact-head fast check. Original source-free shipping remains producer-scoped; no new
+appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
 ## Cooked renderer integration — CPU checks complete
 
@@ -1096,6 +1102,20 @@ Checkpoint17 finished with 20 required successes and three failures and was not 
 ## Core live HUD integration reviewed
 
 The sanitized Claude0065 hint/wrapping/font changes are composed with main190 and independently accepted for scoped integration; the fast publication check remains pending. Seven CPU checks, 14 native positive processes, four-locale font coverage and exact baseline gameplay/PCM pass. Result-title/narrow contrast and separate prompt/objective follow-ups remain open; no new rendered or device acceptance. See [integration evidence](docs/spikes/core-live-hud-main190.md).
+
+## Core optional result-label binding — producer CPU proof accepted
+
+The sample accepts an explicitly authored optional `hud.prompt` label and clears
+the objective on winning. Result parenting and whole-session restart restore the
+expected text/parents while the existing 12-widget HUD stays supported. Twenty
+focused Python tests, strict TypeScript, 28 successful native processes and two
+fresh source/map/build-deleted ordinary packages pass. Twenty shipping processes
+include eight complete R/Start/held-input reset routes with exact fresh-state and
+concatenated PCM comparisons. Nine exact native refusals pass. Independent source
+and final execution review are accepted; current-main integration is pending.
+The production prompt node/localization/style is still Claude-owned and absent;
+this is not appearance or device/performance acceptance. Prior 0065 evidence stays
+immutable. [Contract/evidence](docs/spikes/core-result-hud.md).
 
 ## Historical integration snapshots
 
