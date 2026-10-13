@@ -229,9 +229,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main229, 2026-10-13
+## Current overview — main231, 2026-10-13
 
-Development main229 includes the reviewed opt-in cooked renderer families and
+Development main231 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -242,8 +242,12 @@ main226 `079ee1aa` exactly. Independent review verified the tested tree, ancestr
 unchanged protection and all success receipts. The journal replay repair passed
 on actual macOS/Linux/Windows; optional timestamp diagnostics preserve explicit
 Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12.
-No checkpoint is currently active. The next regular selection follows the
-three-hour cadence; later main changes do not alter this tested baseline.
+Checkpoint25 is frozen on reviewed main230 (`56185dab`) in PR232, with all23
+required contexts preserved. One Windows UI test timed out; the original failure
+remains failed while remaining workflows run. Its scoped per-case deadline
+repair passes local focused/full UI checks and is independently accepted;
+publication follows its required fast check.
+Later main changes do not alter either frozen checkpoint.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
@@ -2635,7 +2639,7 @@ status is superseded by the accepted main220 composition and PR221 merge.
 Cache/shape coherence and full live-owner admission remain open.
 
 
-## Private physics constructors — producer accepted, integration pending
+## Private physics constructors — merged main231
 
 Exact private storage/body/collider construction at `0a96dc0f` has independent
 source/final CPU acceptance: 216 snapshot cases and 22 native controls per mode,
@@ -2644,7 +2648,8 @@ The separately reviewed observer alias from `d6b53f8b` is included. This private
 main229 composition now has independent source acceptance and21 successful
 current checks:216 snapshot plus22 private native controls per parallel mode,
 with144 continuation steps per dimension. Final integration review is accepted;
-the disjoint main230 renderer join awaits narrow relevance review.
+the disjoint main230 renderer join is independently accepted. PR231 merged
+after the required exact-head fast check.
 [composed evidence](docs/spikes/physics-construction-main229.md) is retained. Exact manager construction,
 whole-owner admission and live physics saves remain closed.
 [Producer evidence](docs/spikes/physics-native-construction.md).
