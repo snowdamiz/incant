@@ -9,7 +9,7 @@ fn budget() -> Budget {
     Budget::new(MAX_ALLOCATION).unwrap()
 }
 fn work() -> WorkBudget {
-    WorkBudget::new(100_000_000)
+    crate::CheckpointWorkBudget::new(100_000_000)
 }
 fn allocations() -> AllocationBudget {
     AllocationBudget::new(MAX_ALLOCATION, 100_000)
@@ -157,6 +157,7 @@ fn planar_checkpoint_requires_a_completed_step_after_real_mutations() {
     let mut motion = world.state(id(2)).unwrap().clone();
     motion.velocity[0] += 1.;
     world.sync_motion(&[(id(2), motion)]).unwrap();
+    assert_eq!(world.checkpoint_configurations().unwrap().len(), 3);
     assert!(world.checkpoint(&mut budget(), &mut work()).is_err());
     world.step(1. / 64.).unwrap();
     capture(&mut world);
@@ -223,6 +224,10 @@ fn planar_failed_simulation_refuses_capture_before_native_access_or_charges() {
     motion.velocity[0] = 2.;
     world.sync_motion(&[(id(2), motion)]).unwrap();
     assert_eq!(world.step(1.), Err(PhysicsError::Failed));
+    assert!(matches!(
+        world.checkpoint_configurations(),
+        Err(CheckpointError::Owner("failed runtime"))
+    ));
     let mut payload = budget();
     let mut visits = work();
     let before = (payload.remaining(), visits.remaining());
@@ -231,4 +236,69 @@ fn planar_failed_simulation_refuses_capture_before_native_access_or_charges() {
         Err(CheckpointError::Owner("failed runtime"))
     ));
     assert_eq!(before, (payload.remaining(), visits.remaining()));
+}
+
+#[test]
+fn planar_checkpoint_configurations_borrow_ordered_cached_state_and_preserve_authority() {
+    let empty = PhysicsWorld2D::default();
+    assert_eq!(empty.checkpoint_configurations().unwrap().len(), 0);
+    let mut world = warm();
+    let before = capture(&mut world).native.encoded().to_vec();
+    let rows = world.checkpoint_configurations().unwrap();
+    assert_eq!(rows.len(), 3);
+    let mut ids = Vec::new();
+    for (id, body, collider, state) in rows {
+        ids.push(id);
+        let config = &world.entries[&id].config;
+        assert!(std::ptr::eq(body, &config.body));
+        assert!(std::ptr::eq(collider, &config.collider));
+        assert!(std::ptr::eq(state, &config.state));
+        assert_eq!(state, world.state(id).unwrap());
+    }
+    assert_eq!(ids, [id(1), id(2), id(3)]);
+    assert_eq!(before, capture(&mut world).native.encoded());
+}
+
+#[test]
+fn planar_checkpoint_configurations_refuse_tiles_before_yielding_primitive_rows() {
+    let map = incant_2d::Tilemap {
+        tileset: id(20),
+        size: [1, 1],
+        cell_size: [1., 1.],
+        layers: vec![incant_2d::TilemapLayer {
+            id: id(21),
+            cells: vec![Some(id(22))],
+            layer: 0,
+            order: 0,
+            solid: true,
+        }],
+    }
+    .prepare()
+    .unwrap();
+    let mut world = PhysicsWorld2D::default();
+    world
+        .apply(vec![
+            (id(1), Some(declaration(true, false, 4.))),
+            (
+                id(9),
+                Some(PreparedBody::tilemap(&map, BodyState::default()).unwrap()),
+            ),
+        ])
+        .unwrap();
+    assert!(matches!(
+        world.checkpoint_configurations(),
+        Err(CheckpointError::Owner(
+            "tile geometry checkpoint unsupported"
+        ))
+    ));
+    world.step(1. / 64.).unwrap();
+    assert!(matches!(
+        world.checkpoint_configurations(),
+        Err(CheckpointError::Owner(
+            "tile geometry checkpoint unsupported"
+        ))
+    ));
+    assert_eq!(world.states().count(), 2);
+    world.apply(vec![(id(9), None)]).unwrap();
+    assert_eq!(world.checkpoint_configurations().unwrap().len(), 1);
 }

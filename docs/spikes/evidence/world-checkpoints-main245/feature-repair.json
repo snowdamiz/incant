@@ -1,0 +1,151 @@
+{
+  "format": "incant-world-checkpoints-mode-forwarding-qualification",
+  "version": 1,
+  "source_commit": "78fa7e8be556cd5fb955ccbbefb688bde368aa95",
+  "previous_reviewed_head": "cc3e1f3feef7e97fb8b2b0b534f81b1c174d6b1a",
+  "freeze_sha256": "2f3f15a47213cda4aaf392bcff91a018c3d1685a6d3c87905dd713d55dbbf093",
+  "patch_sha256": "e8ae30c848edc552bf3b13e26e544b42b1ae1cce27dbdb06d8908a868d61a304",
+  "manifest_changes": [
+    {
+      "path": "crates/incant_physics_2d_runtime/Cargo.toml",
+      "before_sha256": "fa793e06de0f660ccb3f5e3b6385867f2fe9b68692f4b82505833d0e7fa67a21",
+      "after_sha256": "1111903b7a26f8a42e00f5c7c9125723cc4490fda230b1a6a9aec5280076fdb5"
+    },
+    {
+      "path": "crates/incant_physics_runtime/Cargo.toml",
+      "before_sha256": "efee331ccfc9a9d98e310f1be1c632ddc81428b44a27bdb3b45b9bb8a54f9fcd",
+      "after_sha256": "613f2277b32ff6fc7aec26d5ab126ca0888a3f4cd22e47e66880421444501dfa"
+    },
+    {
+      "path": "crates/incant_runtime/Cargo.toml",
+      "before_sha256": "57eebd5ba55887059dc8fcb4b12dfdc10d5b09afc4bb94d403b1869842521cb9",
+      "after_sha256": "9e52c22dda5c6c15983da987604213745850da9015195ae62de5c3fc078ee2fd"
+    }
+  ],
+  "archive": {
+    "path": "feature-repair-records.json.gz",
+    "sha256": "68a031a6a7acef4a6e82df5db6c4854a3663d4d132b93988beed51d3145d1801",
+    "records": 49
+  },
+  "checks": [
+    {
+      "name": "manifest-runtime",
+      "receipt_sha256": "be0ddb73fe889f095d2fd23120566fd3282d8876a9658a03535440d77dbf4f5d",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "manifest-script",
+      "receipt_sha256": "b2e495cc3b599d793d6986e13f727a992ef3e00797628f8ef2e669ad041c174c",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "policy-tests",
+      "receipt_sha256": "fe8e489d66d18b94984d5e23e71e3b64b13b02c31e55bee946eccf263fc6381c",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "runtime-det",
+      "receipt_sha256": "4692f2b63a9234a98e733052ba3b7f3f102f83dc99bcbb69bb327e7c292ab4b6",
+      "passed": 261,
+      "groups": 34
+    },
+    {
+      "name": "runtime-fast8",
+      "receipt_sha256": "463106b488ca6555a09fcc84254f8dbcdf777c47a99258c59be1329d46dbb904",
+      "passed": 261,
+      "groups": 34
+    },
+    {
+      "name": "clippy-det",
+      "receipt_sha256": "1c498fd75bc3348b56224f64706e068c7917c6ddd8115d0a57aa6b9b16a0203e",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "clippy-fast8",
+      "receipt_sha256": "5a15651fee01e7df4bb98af59b7a732c0e56ab9d6ef42202b68552c3fe964fba",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "wasm",
+      "receipt_sha256": "8b73a5048b5527d3ed529ec72fd05bcc96305be6ae7ff823f3f30c9bf5cb6117",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "graph-ordinary",
+      "receipt_sha256": "317f87b2b42a83cd1103e6e5e1b0ad147fad9f3c8f9cc856db9fc2dd9f76bccd",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "graph-audit-ordinary",
+      "receipt_sha256": "77e59c59ba19f7705ea8166c55b11b53d811592109943d5f4ee0ae702a741d9b",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "graph-det",
+      "receipt_sha256": "fe0bc4d79793e49c5846fb677b8c9c0f3242368d390287504557025aa49a3255",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "graph-audit-det",
+      "receipt_sha256": "c3ba18b6e3fbf856f8f4f7946198f5b2bd64892c0240180081e4e98bc86c5e4f",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "graph-fast8",
+      "receipt_sha256": "7bdede3d6d067a1070e1bfb723d356fd407070481e6b5a728cf07752e3de2808",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "graph-audit-fast8",
+      "receipt_sha256": "e7bf7d4cff1aa4ad2f242b3c0fbb13cd4b525a7b68566e24e7ca21824b89fcd6",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "fmt",
+      "receipt_sha256": "4587b60dbb2f215cba3ab0924b1baf40ac674db93c3dcb68e508b5bda0a7df3c",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "conventions",
+      "receipt_sha256": "59a18e9d215da09285e9e3b349169c1a912f282920222b3dacb5791d11e455ec",
+      "passed": 0,
+      "groups": 0
+    },
+    {
+      "name": "diff",
+      "receipt_sha256": "d9cf657605954ba48ebbdc3a5936d6befd276680b0478878ebbb2d1f2fd1c54b",
+      "passed": 0,
+      "groups": 0
+    }
+  ],
+  "binary_counts": {
+    "runtime-det": 32,
+    "runtime-fast8": 32
+  },
+  "producer_files": {
+    "manifest.json": "3b56115a4377bef4bb76076963c52bab1e3a2ad52b874a167669f3faff9b3cf2",
+    "records.json.gz": "f86919529015ca0dfd0468be061feba2224487ce10fa74c22647e5f850fd6718",
+    "verify.py": "28399c10e42c0d1236f16c00c1361cd9a028ae62c25eee0035d5e6feedb50ef0"
+  },
+  "limits": [
+    "The all-path manifest guard had12 actual policy failures on previouscc3; selected five-solver normal graphs were not found to mix numerical modes.",
+    "Exactlythree manifest changes disable optional snapshot defaults and weakly forward selected modes. Algorithms, Rust source and lock remain unchanged.",
+    "Fresh repaired runtime261 per mode, strictClippy bothmodes and wasm pass. Default205consumer execution remains source003; ordinary selectedgraph still excludes snapshot.",
+    "Previoussource004 graph strings remain historical. Repaired graph records require explicit selected snapshot mode and actual five-solver assertions.",
+    "OldPR246 fastSUCCESS oncc3 is retained only as historical; newexacthead must pass requiredfast gate.",
+    "No persisted physics, fullsession, GPU/device/performance admission."
+  ]
+}
