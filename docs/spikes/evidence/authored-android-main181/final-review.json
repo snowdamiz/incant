@@ -1,0 +1,70 @@
+{
+  "at": "2026-10-13T00:57:07.075648+00:00",
+  "reviewer": "astra/root",
+  "decision": "accepted_scoped_current_main_android_integration",
+  "head": "33f733f55539f45b80ee8eb0dc015762eeede3c8",
+  "tested_head": "489168fc49a23a4f4779907cd85793971dfe3cca",
+  "base_main": "569f491311fbd25b2d47354386739cc08b049f94",
+  "manifest_sha256": "e07cfaf9f2ce80c756618df544ac184f8e6774f7e70970ae24db645b7e03f114",
+  "source_inputs": 1958,
+  "archive_audit": [
+    {
+      "records": 474,
+      "payloads": 200,
+      "external": 5
+    },
+    {
+      "records": 809,
+      "payloads": 288,
+      "external": 8
+    }
+  ],
+  "checks": 17,
+  "counts": {
+    "deterministic-player-tests": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "fast-player-tests": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "cook-admission": {
+      "passed": 7,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 2
+    }
+  },
+  "execution": [
+    {
+      "mode": "deterministic",
+      "export_receipt_sha256": "1c09f2679ca8b770a62fd34352ccac5e8e7a1591aa0b5fd522656365af4ea477",
+      "caller_receipt_sha256": "abdf8c7fde7b57c1808a37ff16c5f9ecee3d60f2af3846f1e2adffb49faa69ed",
+      "commands_with_avd": 123,
+      "raw_command_streams_rehashed": 246,
+      "positive_processes": 3,
+      "exact_refusals": 7,
+      "logs_per_positive": 36,
+      "vector_checks_per_positive": 72,
+      "pcm_bytes_per_positive": 76800,
+      "runtime_files": 9,
+      "archive_bytes": 23938500,
+      "caller_bytes": 12909984,
+      "api": "37",
+      "os": "17",
+      "owned_emulator_cleanup": true
+    }
+  ],
+  "review_basis": "Read source-relevance and assertion collector; independently rehashed both retained archives, external binaries, raw originals and all1958 source inputs. Current deterministic execution and fast target compile are distinct from pre-PCM paired execution. No source implementation changes beyond accepted Android and main181 PCM inputs.",
+  "limits": [
+    "local Android17/API37 ARM emulator CPU only",
+    "NDK API24 compiler identity is not minimum OS execution",
+    "no phone/performance/rendering/mobile platform host/signing/store/phase gate",
+    "static Wasm mobile export unsupported"
+  ]
+}
