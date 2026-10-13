@@ -27,6 +27,7 @@ pub(crate) struct PreparedFrame {
     pub models: Option<ModelDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
+    pub bloom: Option<crate::bloom::BloomDraw>,
     pub output: OutputDraw,
 }
 #[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
@@ -173,6 +174,11 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     }
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+    // Bloom belongs to Display: after all world layers, before tone mapping.
+    // Screen-space UI remains in its separate presentation consumer.
+    if let Some(bloom) = &frame.bloom {
+        bloom.encode(&mut encoder.0);
+    }
     frame.output.encode(&mut encoder.0);
 }
 

@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Reviewed producer: opt-in scene-linear bloom
+
+The private bloom producer connects a bounded normalized HDR pyramid to Display,
+after world text and before the existing tone/chrome/transfer path. Default output
+and pixel cameras stay unchanged. Native cooked-output refuses this unsupported
+variant. Source review and 73 CPU tests, Clippy, default/web/feature checks pass;
+84 GPU cases were ignored. [Evidence](docs/spikes/evidence/bloom.json) records the
+logical retained memory bound and precise coverage policy. Actual bloom efficacy,
+Claude appearance, paired DRS coordinate integration, phone/performance and
+full-renderer acceptance remain open. No default enablement or GPU execution.
+
 ## Current overview — main192, 2026-10-13
 
 Development main192 includes the restart quota-test repair (PR188) and the reviewed,

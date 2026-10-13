@@ -1,7 +1,9 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Bevy-scheduled HDR geometry, lighting, display transform and composition.
 //! Authored clustered lights; the full production render graph remains open.
+mod bloom;
 mod camera;
+pub use bloom::{Bloom, BloomError};
 mod diagnostic_draw;
 #[cfg(test)]
 #[path = "../tests/diagnostic_output/mod.rs"]
@@ -95,6 +97,7 @@ pub struct Renderer {
     shadows: shadows::ShadowSystem,
     frames: frame::FrameCache,
     output: output::OutputPass,
+    bloom: Option<bloom::BloomSystem>,
     graph: graph::FrameGraph,
 }
 impl Renderer {
@@ -178,6 +181,7 @@ impl Renderer {
             shadows,
             frames: Default::default(),
             output,
+            bloom: None,
             graph: Default::default(),
         })
     }
@@ -319,14 +323,35 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
-        let output = self.output.prepare(
-            &self.device,
-            &attachments.color,
-            view,
-            format,
-            viewport,
-            grid.map(|g| g.output),
-        )?;
+        // Pixel cameras retain their exact existing nearest presentation path.
+        // Zero gain likewise uses the original shader and allocates no pyramid.
+        let bloom_system = self
+            .bloom
+            .as_ref()
+            .filter(|b| grid.is_none() && b.config.intensity > 0.);
+        let bloom = bloom_system
+            .map(|system| system.prepare(&self.device, &attachments.color, frame_size, scene_rect))
+            .transpose()?;
+        let output = if let Some((draw, system)) = bloom.as_ref().zip(bloom_system) {
+            system.output.prepare_optional_bloom(
+                &self.device,
+                &attachments.color,
+                view,
+                format,
+                viewport,
+                None,
+                Some((&draw.result, system.config.intensity)),
+            )?
+        } else {
+            self.output.prepare(
+                &self.device,
+                &attachments.color,
+                view,
+                format,
+                viewport,
+                grid.map(|g| g.output),
+            )?
+        };
         self.graph.encode(
             &self.device,
             graph::PreparedFrame {
@@ -334,6 +359,7 @@ impl Renderer {
                 models,
                 sprites,
                 text,
+                bloom,
                 output,
             },
         )
