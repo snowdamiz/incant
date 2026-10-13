@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/native-cpu-profile.py", line 274, in <module>
+    main()
+    ~~~~^^
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/native-cpu-profile.py", line 113, in main
+    result = call('command.execute', {'expected_revision': 0, 'description': 'Author numerical profiler fixture', 'commands': commands})
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/native-cpu-profile.py", line 102, in call
+    value = rpc.call(method, params)
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/script-source-transactions.py", line 42, in call
+    require('error' not in response, f'{method}: {response}')
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/script-source-transactions.py", line 25, in require
+    raise ValueError(message)
+ValueError: command.execute: {'error': {'message': 'invalid command: one script source write per transaction is supported'}, 'id': 1}

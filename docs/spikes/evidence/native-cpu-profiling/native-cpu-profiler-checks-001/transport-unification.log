@@ -1,0 +1,21 @@
+   Compiling once_cell v1.21.4
+   Compiling tracy-client-sys v0.29.0
+   Compiling tracy-client v0.18.5
+   Compiling tempfile v3.27.0
+   Compiling incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_profile)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_runtime)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_audio_runtime)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_script)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_runtime)
+   Compiling incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_observe)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_player)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.20s
+     Running unittests src/lib.rs (/tmp/incant-cpu-profiler-target/debug/deps/incant_game_player-2aab1d49ee1add1f)
+
+running 3 tests
+test profile::tests::summary_build_rejects_transport_explicitly ... ok
+test profile::tests::duplicate_flags_refuse_without_starting_capture ... ok
+test profile::tests::embedded_transport_refuses_before_initialization ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 0.00s
+

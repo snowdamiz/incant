@@ -1,0 +1,7 @@
+   Compiling incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_profile)
+    Checking incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_runtime)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_runtime)
+    Checking incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_script)
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_cook)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_player)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.31s

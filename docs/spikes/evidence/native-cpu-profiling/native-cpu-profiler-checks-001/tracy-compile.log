@@ -1,0 +1,12 @@
+ Downloading crates ...
+  Downloaded tracy-client-sys v0.29.0
+  Downloaded tracy-client v0.18.5
+   Compiling tracy-client-sys v0.29.0
+    Checking serde_core v1.0.229
+    Checking libc v0.2.190
+    Checking once_cell v1.21.4
+    Checking cpu-time v1.0.0
+    Checking serde v1.0.229
+    Checking tracy-client v0.18.5
+    Checking incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_profile)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.43s

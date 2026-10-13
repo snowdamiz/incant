@@ -1,0 +1,58 @@
+    Updating crates.io index
+     Locking 2 packages to highest Rust 1.99 compatible versions
+      Adding tracy-client v0.18.5 (available: v0.19.0)
+      Adding tracy-client-sys v0.29.0 (available: v0.30.0)
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling serde_core v1.0.229
+   Compiling libc v0.2.190
+   Compiling syn v3.0.6
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde_derive v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling cpu-time v1.0.0
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_profile)
+warning: use of deprecated method `std::sync::atomic::Atomic::<u64>::fetch_update`: renamed to `try_update` for consistency
+  --> crates/incant_profile/src/allocation.rs:18:10
+   |
+18 |         .fetch_update(Relaxed, Relaxed, |old| {
+   |          ^^^^^^^^^^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+help: replace the use of the deprecated method
+   |
+18 -         .fetch_update(Relaxed, Relaxed, |old| {
+18 +         .try_update(Relaxed, Relaxed, |old| {
+   |
+
+warning: use of deprecated method `std::sync::atomic::Atomic::<u64>::fetch_update`: renamed to `try_update` for consistency
+  --> crates/incant_profile/src/allocation.rs:34:18
+   |
+34 |     let _ = LIVE.fetch_update(Relaxed, Relaxed, |v| Some(v.saturating_sub(n as u64)));
+   |                  ^^^^^^^^^^^^
+   |
+help: replace the use of the deprecated method
+   |
+34 -     let _ = LIVE.fetch_update(Relaxed, Relaxed, |v| Some(v.saturating_sub(n as u64)));
+34 +     let _ = LIVE.try_update(Relaxed, Relaxed, |v| Some(v.saturating_sub(n as u64)));
+   |
+
+warning: `incant_profile` (lib) generated 2 warnings (run `cargo fix --lib -p incant_profile` to apply 2 suggestions)
+warning: `incant_profile` (lib test) generated 2 warnings (2 duplicates)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.20s
+     Running unittests src/lib.rs (/tmp/incant-cpu-profiler-target/debug/deps/incant_profile-20b616525bc1b5bd)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests incant_profile
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

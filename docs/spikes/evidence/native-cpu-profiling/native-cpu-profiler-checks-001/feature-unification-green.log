@@ -1,0 +1,11 @@
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_player)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.59s
+     Running unittests src/lib.rs (/tmp/incant-cpu-profiler-target/debug/deps/incant_game_player-f186c85a00587527)
+
+running 3 tests
+test profile::tests::embedded_transport_refuses_before_initialization ... ok
+test profile::tests::duplicate_flags_refuse_without_starting_capture ... ok
+test profile::tests::default_build_rejects_profile_explicitly ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 0.00s
+

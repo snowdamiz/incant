@@ -1,0 +1,32 @@
+   Compiling incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_profile)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.52s
+     Running unittests src/lib.rs (/tmp/incant-cpu-profiler-target/debug/deps/incant_profile-20b616525bc1b5bd)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/allocations.rs (/tmp/incant-cpu-profiler-target/debug/deps/allocations-8e2fe804ab80df6b)
+allocation controls: hot scopes no allocation; exact requested/live/free; null allocation/reallocation; zeroed/grow/shrink preserve ownership and contents
+     Running tests/disabled.rs (/tmp/incant-cpu-profiler-target/debug/deps/disabled-a39627eb55d62574)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/summary.rs (/tmp/incant-cpu-profiler-target/debug/deps/summary-8bce70dff9c98256)
+
+running 4 tests
+test nested_thread_zones_and_failure_cleanup_are_observable ... ok
+test numeric_source_bound_drops_excess_without_unbounded_registry_or_hot_allocations ... ok
+test heap_metrics_are_vm_samples_and_rust_requested_sizes_are_separate ... ok
+test stale_scope_and_old_worker_cannot_write_into_replacement_capture ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests incant_profile
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

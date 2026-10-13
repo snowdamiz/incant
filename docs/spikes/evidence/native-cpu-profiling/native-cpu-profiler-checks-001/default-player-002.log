@@ -1,0 +1,34 @@
+   Compiling incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_profile)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_runtime)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_script)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_audio_runtime)
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_cook)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_player)
+   Compiling incant_observe v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_observe)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_game_runtime)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.89s
+     Running unittests src/lib.rs (/tmp/incant-cpu-profiler-target/debug/deps/incant_game_player-8cee3a55fae1f426)
+
+running 19 tests
+test checkpoint::tests::fractional_output_continues_absolute_phase_and_checks_overflow ... ok
+test profile::tests::default_build_rejects_profile_explicitly ... ok
+test profile::tests::duplicate_flags_refuse_without_starting_capture ... ok
+test profile::tests::embedded_transport_refuses_before_initialization ... ok
+test program::tests::explicit_prefix_is_bounded_and_default_arguments_are_unchanged ... ok
+test observe::tests::observation_options_preserve_strict_legacy_and_spatial_argument_shapes ... ok
+test checkpoint::tests::unsupported_routes_and_ambiguous_options_refuse_before_startup ... ok
+test pcm_output::tests::partial_io_failure_is_terminal_and_never_counts_a_partial_tick ... ok
+test restart::input::tests::fresh_game_gets_topology_but_never_a_held_press_or_axis ... ok
+test restart::tests::accepted_requests_reset_simulation_while_fractional_output_and_host_steps_continue ... ok
+test package::tests::offline_and_window_expand_to_existing_hosts ... ok
+test pcm_output::tests::rejected_or_abandoned_stream_cleans_staging_and_never_clobbers ... ok
+test pcm_output::tests::runner::checkpoint_fractional_phase_streams_exact_continuation ... ok
+test checkpoint::tests::publication_is_complete_create_only_and_cleans_failed_staging ... ok
+test package::tests::tampered_or_indirected_startup_files_are_refused ... ok
+test pcm_output::tests::arbitrary_tick_chunks_preserve_pcm_bits_and_hash ... ok
+test pcm_output::tests::runner::late_real_guest_failure_discards_one_million_staged_frames ... ok
+test pcm_output::tests::long_capture_has_constant_chunk_bound_and_incremental_digest ... ok
+test pcm_output::tests::runner::complete_player_exceeds_previous_limit_and_preserves_diagnostic_pcm_and_no_clobber ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.81s
+
