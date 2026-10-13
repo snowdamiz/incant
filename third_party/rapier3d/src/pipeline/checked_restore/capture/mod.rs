@@ -6,11 +6,13 @@ mod fields;
 mod frame;
 mod identity;
 mod owner;
+mod structure;
 pub(crate) mod util;
 pub use super::world::OmittedOwnerError;
 pub use frame::NativeFrame;
 pub use identity::{CompiledMode, compiled_identity, compiled_mode};
 pub use owner::{CheckpointOwner, CompletedStep};
+pub use structure::{StructuralError, StructuralInsertions, StructuralPermit, StructuralPlan, StructuralRemoval};
 /// Typed checkpoint refusal; native stepping is never silently repaired.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CaptureError {
@@ -20,6 +22,8 @@ pub enum CaptureError {
     Poisoned,
     /// The owner has not completed a positive finite step since mutable access.
     NotCompleted,
+    /// The private mutation revision cannot advance without wrapping.
+    MutationExhausted,
     /// A native owner was substituted with a different dispatcher identity.
     Dispatcher,
     /// A joint/soft family carries unsupported persistent history.
