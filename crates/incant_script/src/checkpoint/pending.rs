@@ -19,6 +19,28 @@ pub struct PendingSessionCheckpoint {
     audio: Option<incant_audio_runtime::PendingAudioCheckpoint>,
 }
 impl PendingSessionCheckpoint {
+    /// Only the opaque native checkpoint can supply this already validated,
+    /// separately reconstructed world. Public byte decoding still uses decode.
+    #[cfg(feature = "native-checkpoints")]
+    pub(super) fn from_native(
+        world: NativeWorld,
+        code: CompiledScript,
+        state: ScriptState,
+        bindings: ValidatedActions,
+    ) -> Self {
+        Self {
+            world,
+            code,
+            active: state.active,
+            store: state.store,
+            schedule: state.schedule,
+            bindings,
+            #[cfg(feature = "ui")]
+            ui: None,
+            #[cfg(feature = "audio")]
+            audio: None,
+        }
+    }
     pub fn new(
         bytes: &[u8],
         initial: &CookedScene,

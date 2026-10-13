@@ -78,7 +78,7 @@ def verify_probe(root, manifest):
 
 class ProbeLockTests(unittest.TestCase):
     def test_committed_isolated_probe_locks_preserve_required_local_edges(self):
-        locks = sorted((ROOT / 'tools/probes').glob('*/Cargo.lock'))
+        locks = sorted((ROOT / 'tools/probes').rglob('Cargo.lock'))
         self.assertTrue(locks)
         for lock in locks:
             with self.subTest(probe=lock.parent.name):
@@ -159,6 +159,15 @@ class ProbeLockTests(unittest.TestCase):
             f.write('[build-dependencies]\nserde.workspace=true\n')
         with self.assertRaisesRegex(ValueError, 'missing required dependency edge engine -> serde'):
             verify_probe(root, manifest)
+
+    def test_unselected_optional_local_dependency_is_not_required(self):
+        root, manifest = self.fixture()
+        with (root / 'engine/Cargo.toml').open('a') as f:
+            f.write('[dependencies]\nunused={path="../unused",optional=true}\n')
+        (root / 'unused').mkdir()
+        (root / 'unused/Cargo.toml').write_text(
+            '[package]\nname="unused"\nversion="1.0.0"\n')
+        verify_probe(root, manifest)
 
     def test_unselected_optional_registry_dependency_is_not_required(self):
         root, manifest = self.fixture()

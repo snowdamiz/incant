@@ -1,0 +1,19 @@
+{
+  "verdict": "accepted scoped source and retained local qualification",
+  "commit": "165b3dd62899e0a46c8dc1ebe82c89d8a0ba993a",
+  "manifest_sha256": "9d3168a70d0b1241b42a29b0ff08847537ae6b21923a19f1017daac5664c45a7",
+  "source": {
+    "crates/incant_physics_runtime/src/native_owner.rs": "42186996d9bcd9753faf74be188420f04cdb8096cf86106a7311d7c905608e55",
+    "crates/incant_physics_2d_runtime/src/native_owner.rs": "a21acaed1629677986b8cacdefa5af17d6e5a5e9e5919312e5154e0d29dc03af"
+  },
+  "retained_records": 10,
+  "checks": [
+    "ordinary-det",
+    "ordinary-fast8",
+    "native-det",
+    "native-fast8"
+  ],
+  "findings": [],
+  "reason": "Both cfg branches are mutually exclusive. Non-checkpoint derive delegates the sole field to PhysicsWorld::default exactly as before; native-checkpoints retains explicit CheckpointOwner::for_simulation. No runtime, field visibility, read/edit/step or feature activation change. Both dimensions match. Four strict local Clippy receipts and logs independently rehashed.",
+  "bounds": "Read-only Git-object review; no reviewer builds. No hosted CI, release or persisted-save admission claim."
+}

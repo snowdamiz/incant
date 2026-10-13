@@ -1,0 +1,18 @@
+{
+  "scope": "Root independent headless NativeSession source004 delta and final CPU evidence review",
+  "status": "accepted_scoped_source_and_execution_with_manifest_repair_required_before_integration",
+  "source": "515df4824e2e949721eb2d9dccc73d6aefab5e70",
+  "packet": "1d604dfa",
+  "manifest_sha256": "994b596166820a47bbc7454a2c7791decf6d145e7dbbd51e48af9282becf2fec",
+  "freeze_sha256": "d965212665e7b26f30f99680194b313c920dbd48a5eebf1d03e7201c62a04b0e",
+  "prior_source_review_sha256": "a8817d47936b30cc6c2b14c2afe3084ee6db7690f4a1b62d9ff75d6ea4c35413",
+  "findings": [],
+  "verified": [
+    "Source004 differs from reviewed001 only build.rs conservative native.rs identity-list addition and test oracle/braces correction.",
+    "Read collector and replayed verify-only;101 records,14 exact Git/frozen paths,18 command receipts/logs,5 immediate library binaries verified.",
+    "195 script tests per numerical mode and186 feature-off pass; strict Clippy both, optionalfeatures/lean/wasm compilation and normal dependency check pass.",
+    "Historical oracle101, formatting101 and manifestguard1 remain explicit and not counted green.",
+    "No integration/doc executable retention claimed; no GPU, arbitrary heap, exported-player, hostedUI/audio, device or persistedphysics acceptance."
+  ],
+  "integration_condition": "Publisher three-manifest default-feature/weak forwarding repair and actual guards/selected solver modes must pass beforemerge. Repaired source identity and any compile/test coverage tracked separately."
+}
