@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-13T04:33:17.790781+00:00",
+  "reviewer": "astra/root",
+  "head": "e0e6d6879d59d12df9a581516821690b67e5f9e9",
+  "manifest_sha256": "74235b39d88aaf20cfc492918304edc05b9a7256b4c48c83f67c9ac615e99959",
+  "source_review_sha256": "bc988f2bb6a85430fcaa26f15acdcb2c7c31467071537345037517630dd87412",
+  "verified_engine_sources": 13,
+  "verified_unchanged_baselines": 8,
+  "verified_raw_lossless_records": 28,
+  "verified_frozen_binaries": 4,
+  "default_counts": {
+    "passed": 73,
+    "failed": 0,
+    "ignored_gpu": 84
+  },
+  "decision": "accepted CPU/source packet; GPU and appearance gates open",
+  "limits": [
+    "No GPU execution, efficacy or appearance acceptance",
+    "Default off; native cooked-output rejected, pixel cameras bypass",
+    "DRS integration must map physical output position to actual internal source before bloom lookup",
+    "Timing Display group integration pending",
+    "Logical retained payload bound excludes queued frames/driver/RSS/device budgets"
+  ],
+  "historical_failure": "Broad runner used nonexistent check_runtime_graph.py; exit2 retained; existing check_runtime_dependencies.py rerun passes without source changes."
+}

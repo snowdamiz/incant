@@ -94,3 +94,15 @@ output/UI/chrome isolation, odd/offset extents and current projection/retained
 scene paths, with matched baseline, bounded render budgets and an explicit GPU
 lease. Styling, default enablement, phone/device performance, temporal upscaling,
 MetalFX and full renderer acceptance remain open.
+
+## Final independent CPU review
+
+The root final [CPU/source receipt](evidence/bloom-final-cpu-review.json)
+accepts the producer at `e0e6d6879d59d12df9a581516821690b67e5f9e9`
+and the unchanged [evidence manifest](evidence/bloom.json)
+`74235b39d88aaf20cfc492918304edc05b9a7256b4c48c83f67c9ac615e99959`.
+It independently verified 13 engine inputs, eight baseline identities,
+28 lossless records and four binaries: 73 CPU tests passed, with 84 GPU tests
+ignored. The earlier incorrect graph-helper path remains recorded. This
+documentation follow-up adds no engine changes or GPU/appearance acceptance;
+Claude 0071 remains prepared without a grant.
