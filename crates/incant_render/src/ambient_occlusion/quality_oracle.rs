@@ -45,6 +45,16 @@ pub const OLD: Config = Config {
     ..REPAIRED
 };
 pub const BIAS: f64 = 0.01;
+pub fn sampling_phase(x: usize, y: usize, ray: usize) -> f64 {
+    let base = (BAYER[y % 4][x % 4] as u32).reverse_bits() >> 28;
+    // Generate the digital coordinate independently of the shader's lookup table.
+    let sobol = [8u32, 12, 10, 15]
+        .into_iter()
+        .enumerate()
+        .filter(|(bit, _)| ray & (1 << bit) != 0)
+        .fold(0, |value, (_, direction)| value ^ direction);
+    (f64::from(base ^ sobol) + 0.5) / 16.
+}
 pub fn raw(grid: &Grid, cfg: Config) -> Vec<f64> {
     let kernel = directions();
     let rotation = rotations();
@@ -74,13 +84,13 @@ pub fn raw(grid: &Grid, cfg: Config) -> Vec<f64> {
             } else {
                 [1., 0., 0., 0.]
             };
-            let t = if cfg.jitter {
-                0.5 + 0.5 * (BAYER[x % 4][y % 4] as f64 + 0.5) / 16.
-            } else {
-                1.
-            };
             let mut count = 0;
-            for k in kernel {
+            for (ray, k) in kernel.into_iter().enumerate() {
+                let t = if cfg.jitter {
+                    sampling_phase(x, y, ray)
+                } else {
+                    1.
+                };
                 let kx = k.x * f64::from(cos) - k.y * f64::from(sin);
                 let ky = k.x * f64::from(sin) + k.y * f64::from(cos);
                 let d = tangent * kx + bitangent * ky + n * k.z;

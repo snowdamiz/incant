@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "base": "5dfc522ec164f2bc50d760f12db57eae233f33d8",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/ssao-c2-sampling-001/source-002/freeze.json",
+    "sha256": "ca1e89268164f69d5518079dccb0fad8d241075d5953cb7c2ba09d26f684fef2"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/ssao-c2-sampling/records.json.gz",
+    "sha256": "a39c41c751df2c4affe1790435161308b571308ae016d17498009edbbfeba670",
+    "bytes": 266658,
+    "records": 42,
+    "payloads": 26
+  },
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ssao-c2-sampling-001/bin/default-cpu",
+      "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-bf4961fb357f91a4",
+      "sha256": "6bae9b87b3a6fa818dd94cbe58f27b9aa9643b9fc61bd578f5a3da737144ef42",
+      "bytes": 31829776,
+      "features": [
+        "default",
+        "physics-deterministic"
+      ],
+      "executed_log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-c2-sampling-001/qualification-002/default-cpu.stdout"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/ssao-c2-sampling-001/bin/observer-cooked-cpu",
+      "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-144bda8c1ec63a87",
+      "sha256": "a92ed8ee926e9c8434a4ff6a9c7a33fa2fcbaf2d24e5a0c5ca8ae6dc878ad1c2",
+      "bytes": 31984608,
+      "features": [
+        "cooked-geometry",
+        "cooked-materials",
+        "cooked-output",
+        "default",
+        "physics-deterministic",
+        "ssao-stage-readback"
+      ],
+      "executed_log": "/Users/andreyyurlov/.codex/incant-evidence/ssao-c2-sampling-001/qualification-002/observer-cooked-cpu.stdout"
+    }
+  ],
+  "counts": {
+    "default": [
+      105,
+      0,
+      38
+    ],
+    "observer_cooked": [
+      119,
+      0,
+      88
+    ]
+  },
+  "checks": 7,
+  "prior_qualification": "104pass1fail38ignored; stale R1R3 literal expected-failure test, corrected with same bound/all14rows",
+  "source_reviews": [
+    "ssao-c2-source-independent-20261013.json",
+    "ssao-c2-source002-independent-20261013.json",
+    "ssao-n6t-metric-root-20261013.json"
+  ],
+  "gpu_executed": false,
+  "quality_accepted": false
+}

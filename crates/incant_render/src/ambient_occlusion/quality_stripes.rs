@@ -1,11 +1,11 @@
-//! N8's reviewed geometry fixes the ROI before observing the output. A passing
-//! regression here retains the known perspective quality failure; it does not
-//! accept that failure as a quality pass.
+//! N8's reviewed geometry fixes the ROI before observing the output. These C2
+//! model checks cover the authored row and six neighbouring rows; they do not
+//! establish a GPU or appearance result. Earlier R1/R3 failures remain archived.
 use super::{quality_geometry::*, quality_oracle::*};
 use glam::DVec2;
 
 #[test]
-fn exact_stripe_roi_retains_perspective_quality_failure() {
+fn exact_stripe_roi_and_adjacent_rows_meet_c2_model_bound() {
     for orthographic in [false, true] {
         let grid = fixture("stripes_gate", orthographic);
         let receiver_point = |x: usize, y: usize| {
@@ -35,23 +35,27 @@ fn exact_stripe_roi_retains_perspective_quality_failure() {
         );
         let old = raw(&grid, OLD);
         let candidate = filtered(&grid, &raw(&grid, REPAIRED), FILTER);
-        let peak = |values: &[f64]| {
-            let samples = xs.iter().map(|&x| values[row * grid.size[0] + x]);
+        let peak = |values: &[f64], y: usize| {
+            let samples = xs.iter().map(|&x| values[y * grid.size[0] + x]);
             samples.clone().reduce(f64::max).unwrap() - samples.reduce(f64::min).unwrap()
         };
-        let before = peak(&old);
-        let after = peak(&candidate);
-        assert_eq!(before, if orthographic { 0.3125 } else { 0.125 });
-        assert!((after * 255. - if orthographic { 14. } else { 12. }).abs() < 1e-10);
-        let passes = after <= before * 0.25;
-        assert_eq!(passes, orthographic);
-        eprintln!(
-            "SSAO_N8_EXACT {}",
-            serde_json::json!({
-                "orthographic":orthographic,"row":row,"x_first":xs[0],"x_last":xs.last(),
-                "old_peak":before,"candidate_peak":after,"ratio":after/before,
-                "required_ratio":0.25,"quality_pass":passes,"production_admission":false
-            })
-        );
+        assert_eq!(peak(&old, row), if orthographic { 0.3125 } else { 0.125 });
+        for y in row..row + 7 {
+            let before = peak(&old, y);
+            let after = peak(&candidate, y);
+            let passes = before > 0. && after <= before * 0.25;
+            eprintln!(
+                "SSAO_N8_EXACT {}",
+                serde_json::json!({
+                    "orthographic":orthographic,"row":y,"x_first":xs[0],"x_last":xs.last(),
+                    "old_peak":before,"candidate_peak":after,"ratio":after/before,
+                    "required_ratio":0.25,"model_pass":passes,"production_admission":false
+                })
+            );
+            assert!(
+                passes,
+                "projection={orthographic} row={y}: {after}/{before}"
+            );
+        }
     }
 }

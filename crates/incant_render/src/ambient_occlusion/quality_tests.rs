@@ -32,11 +32,20 @@ fn quality_exact_uniform_inputs_bayer_strata_and_resource_cost() {
         let gap = (angles[(i + 1) % 256] - angles[i]).rem_euclid(std::f64::consts::TAU);
         assert!((gap - std::f64::consts::TAU / 256.).abs() < 2e-7);
     }
-    let steps: Vec<_> = (0..16)
-        .flat_map(|b| (0..4).map(move |j| (j as f64 + 0.5 + 0.5 * (b as f64 + 0.5) / 16.) / 4.))
-        .collect();
-    assert_eq!(steps.iter().copied().reduce(f64::min), Some(0.12890625));
-    assert_eq!(steps.iter().copied().reduce(f64::max), Some(0.99609375));
+    // Every texel distributes its maximum 64 probes over all radial strata.
+    // The previous shared phase revisited only four distinct radii per texel.
+    for y in 0..4 {
+        for x in 0..4 {
+            let mut steps: Vec<_> = (0..16)
+                .flat_map(|ray| (0..4).map(move |j| (j as f64 + sampling_phase(x, y, ray)) / 4.))
+                .collect();
+            steps.sort_by(f64::total_cmp);
+            assert_eq!(
+                steps,
+                (0..64).map(|i| (i as f64 + 0.5) / 64.).collect::<Vec<_>>()
+            );
+        }
+    }
     assert_eq!(size_of::<super::math::Uniform>(), 736);
     assert_eq!(super::math::MAX_PIXELS * 14, 56 * 1024 * 1024);
     assert_eq!(super::math::BYTES_PER_PIXEL, 14);
