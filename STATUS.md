@@ -47,10 +47,20 @@ intersection payloads and independent emitted-event history. Eight new native
 reuse, sensor transfers, event-mask toggles and generation reuse. Independent source and final evidence review accepted 143 CPU tests and seven
 scoped checks. The exact-source main217 qualification passes six current checks
 and a 36-case copied-binary rerun with 728 trusted continuation steps; independent
-current-main review is accepted. The required fast check precedes merge. `PhysicsUnsupported` and hostile live restore
+current-main review is accepted and PR218 merged after the required fast check. `PhysicsUnsupported` and hostile live restore
 admission remain closed; no vendor/world-format changes.
 [Scope and limits](docs/spikes/physics-narrow-owner.md);
 [current-main qualification](docs/spikes/physics-narrow-main217.md).
+
+## Timestamp backend diagnostic — capability repair
+
+Checkpoint22 remains frozen while its jobs drain. A separate direct timestamp
+diagnostic failed on hosted Apple Paravirtual Metal after the production timing
+test had correctly completed its unsupported-capability path. The test-only repair
+keeps mandatory backend selection, runs supported timestamp modes, and executes
+checked ordinary compute when queries are absent. Two CPU policy tests and focused
+strict checks and independent final review pass; required fast checks precede
+merge, and hosted successor execution remains pending. [Failure and repair evidence](docs/spikes/timestamp-diagnostic-capabilities.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -62,9 +72,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main217, 2026-10-13
+## Current overview — main218, 2026-10-13
 
-Development main217 includes the reviewed opt-in cooked renderer families and
+Development main218 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -83,7 +93,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–217 changes remain outside that tested baseline. No device, performance or
+Later main206–218 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
