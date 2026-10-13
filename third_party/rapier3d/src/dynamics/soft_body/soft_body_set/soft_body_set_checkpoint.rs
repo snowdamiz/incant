@@ -3,7 +3,6 @@ use super::*;
 use crate::pipeline::checked_restore::{allocation::*, world::OmittedOwnerError};
 impl SoftBodySet {
     // Only the private test capture issuer calls this until runtime ownership is integrated.
-    #[cfg_attr(not(test), expect(dead_code))]
     pub(crate) fn checkpoint_empty_gate(&self) -> Result<(), OmittedOwnerError> {
         if !self.bodies.checkpoint_pristine_empty() {
             return Err(OmittedOwnerError::SoftArena);

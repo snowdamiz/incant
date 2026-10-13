@@ -4,7 +4,6 @@ use crate::data::graph::{Edge, Graph, Node};
 use crate::pipeline::checked_restore::{allocation::*, world::OmittedOwnerError};
 impl MultibodyJointSet {
     // Only the private test capture issuer calls this until runtime ownership is integrated.
-    #[cfg_attr(not(test), expect(dead_code))]
     pub(crate) fn checkpoint_empty_gate(&self) -> Result<(), OmittedOwnerError> {
         if !self.multibodies.checkpoint_pristine_empty() {
             return Err(OmittedOwnerError::MultibodyArena);

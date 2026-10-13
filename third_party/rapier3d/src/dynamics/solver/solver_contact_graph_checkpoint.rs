@@ -33,3 +33,31 @@ impl SolverContactGraph {
         Ok(Self { buckets })
     }
 }
+
+impl SolverContactGraph {
+    pub(crate) fn checkpoint_capture(
+        &self,
+        budget: &mut incant_physics_snapshot::Budget,
+    ) -> incant_physics_snapshot::Result<(
+        Vec<incant_physics_snapshot::RecordSpan>,
+        Vec<incant_physics_snapshot::SolverReference>,
+    )> {
+        use crate::pipeline::checked_restore::capture::util::{count, total};
+        use incant_physics_snapshot::{RecordSpan, SolverReference};
+        count(self.buckets.len())?;
+        let n = total(self.buckets.iter().map(|b| b.len()))?;
+        let mut buckets = budget.vector(self.buckets.len())?;
+        let mut references = budget.vector(n)?;
+        for bucket in &self.buckets {
+            buckets.push(RecordSpan {
+                start: references.len() as u32,
+                count: bucket.len() as u32,
+            });
+            references.extend(bucket.iter().map(|v| SolverReference {
+                edge: v.edge,
+                manifold: v.manifold,
+            }));
+        }
+        Ok((buckets, references))
+    }
+}

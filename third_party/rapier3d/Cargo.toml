@@ -16,7 +16,7 @@ rust-version = "1.86"
 name = "rapier3d"
 version = "0.36.0"
 authors = ["Sébastien Crozet <sebcrozet@dimforge.com>"]
-build = false
+build = "build.rs"
 autolib = false
 autobins = false
 autoexamples = false
@@ -58,7 +58,7 @@ status = "actively-developed"
 # Trusted checkpoint diagnostics only; no default solver behavior changes.
 incant-checkpoint = ["alloc"]
 # Private checked-frame staging; not enabled by ordinary runtime features.
-incant-checked-restore = ["std", "alloc", "dep:incant_physics_snapshot", "incant_physics_snapshot/construction", "parry3d/incant-checked-restore"]
+incant-checked-restore = ["std", "alloc", "dep:incant_physics_snapshot", "incant_physics_snapshot/construction", "parry3d/incant-checked-restore", "dep:sha2", "incant-checkpoint"]
 alloc = [
     "nalgebra/alloc",
     "parry3d/alloc",
@@ -552,4 +552,12 @@ check-cfg = [
 [dependencies.incant_physics_snapshot]
 path = "../../crates/incant_physics_snapshot"
 default-features = false
+optional = true
+
+[build-dependencies.sha2]
+version = "=0.10.9"
+optional = true
+
+[dependencies.sha2]
+version = "=0.10.9"
 optional = true

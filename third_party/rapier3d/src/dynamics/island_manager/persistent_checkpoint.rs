@@ -224,3 +224,6 @@ mod tests {
         }
     }
 }
+
+#[path = "persistent_capture.rs"]
+mod capture;

@@ -29,7 +29,7 @@
 use self::Entry::*;
 
 use alloc::vec::{self, Vec};
-use core::cmp::{max, Ordering};
+use core::cmp::{Ordering, max};
 use core::fmt;
 use core::hash::{Hash, Hasher};
 use core::iter::{Enumerate, FilterMap, FromIterator};
@@ -1687,5 +1687,15 @@ mod test {
         assert_eq!(map.get(1), None);
         assert_eq!(map[2], "two changed");
         assert_eq!(map.get(3), None);
+    }
+}
+
+// Read-only exact storage, including invalidated/trailing slots. This is an
+// observation and grants no validated owner or reconstruction authority.
+#[cfg(feature = "incant-checked-restore")]
+impl<V> VecMap<V> {
+    /// Exact allocated slot values and separately stored live count.
+    pub fn checkpoint_slots(&self) -> (&[Option<V>], usize) {
+        (&self.v, self.n)
     }
 }

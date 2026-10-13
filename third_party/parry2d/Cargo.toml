@@ -14,7 +14,7 @@ edition = "2021"
 name = "parry2d"
 version = "0.31.1"
 authors = ["Sébastien Crozet <developer@crozet.re>"]
-build = false
+build = "build.rs"
 autolib = false
 autobins = false
 autoexamples = false
@@ -55,7 +55,7 @@ status = "actively-developed"
 
 [features]
 # Default-off typed BVH construction; no raw or serde live installer.
-incant-checked-restore = ["std", "dep:incant_physics_snapshot", "incant_physics_snapshot/construction"]
+incant-checked-restore = ["std", "dep:incant_physics_snapshot", "incant_physics_snapshot/construction", "dep:sha2"]
 alloc = [
     "hashbrown",
     "smallvec",
@@ -426,4 +426,8 @@ check-cfg = [
 [dependencies.incant_physics_snapshot]
 path = "../../crates/incant_physics_snapshot"
 default-features = false
+optional = true
+
+[build-dependencies.sha2]
+version = "=0.10.9"
 optional = true

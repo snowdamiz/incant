@@ -1,0 +1,39 @@
+{
+  "format": "incant-exclusive-native-capture-layer",
+  "version": 1,
+  "baseline": "ea4f6e80196f49e153248d22aed83d5412cae87b",
+  "feature": "incant-checked-restore",
+  "scope": "Direct typed capture and actual linked identity; exclusive completed-step authority and opaque in-memory reconstruction. No arbitrary bytes importer, enclosing runtime publication or physics file-save admission. Supersedes historical pins only for listed paths.",
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "baseline_sha256": "d880cc1492d488060fcade79ebd44e15fa79c9ac7ab77eff78bfd90b5a1cce99",
+      "sha256": "790bff213c0ad1e08d0fb2165ca83151da162ebba6416d02476c36512aeb68ae"
+    },
+    {
+      "path": "build.rs",
+      "baseline_sha256": null,
+      "sha256": "da7bf5d33fe19498554c8f3728566ff24c9d5b2bdd3e65e25712171a55cd92e6"
+    },
+    {
+      "path": "src/checkpoint_identity.rs",
+      "baseline_sha256": null,
+      "sha256": "f59490f752070e24ca41451b261af38c9b6333c53082b91eb3dd8fd577970a9b"
+    },
+    {
+      "path": "src/lib.rs",
+      "baseline_sha256": "293e5f96b3c0c291e9bc494d904a1cf73bb437de5d2e23386cf768226a1502ed",
+      "sha256": "5d67c86e6cea6634b585f42014ba248e4f01c0ce9ace87ff8cb389a4ef61a2a3"
+    },
+    {
+      "path": "src/partitioning/bvh/bvh_checkpoint.rs",
+      "baseline_sha256": "0cf1310fe100fd5e39656b15605e80e9e53e2c126b371a404cd00f6994901873",
+      "sha256": "2c88b32641bb2ae02dd89f12304f26fb018c76aab71605f0f150b86b8efcaf3a"
+    },
+    {
+      "path": "src/utils/vec_map.rs",
+      "baseline_sha256": "bac667db9df3f5c84e258e58e5d861ce3ce80b93a3a0d014b75f5b76614b7f00",
+      "sha256": "cc7a835dbbe67a9edb43da0a234081222ded5632b7a3291e547901f9b503a820"
+    }
+  ]
+}

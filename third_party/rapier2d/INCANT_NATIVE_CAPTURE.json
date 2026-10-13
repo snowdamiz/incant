@@ -1,0 +1,169 @@
+{
+  "format": "incant-exclusive-native-capture-layer",
+  "version": 1,
+  "baseline": "ea4f6e80196f49e153248d22aed83d5412cae87b",
+  "feature": "incant-checked-restore",
+  "scope": "Direct typed capture and actual linked identity; exclusive completed-step authority and opaque in-memory reconstruction. No arbitrary bytes importer, enclosing runtime publication or physics file-save admission. Supersedes historical pins only for listed paths.",
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "baseline_sha256": "139271bd923a034fbee02e005567337761728b7d8d56ba0a0a0cdba9951fe619",
+      "sha256": "b51048236371b3e8f482b9ff6c9a7cf105c3e0193e964222fd0f34e323ffb752"
+    },
+    {
+      "path": "build.rs",
+      "baseline_sha256": null,
+      "sha256": "da7bf5d33fe19498554c8f3728566ff24c9d5b2bdd3e65e25712171a55cd92e6"
+    },
+    {
+      "path": "src/data/arena_checkpoint.rs",
+      "baseline_sha256": "ae9d41adce78b31bcb6fc7c10a654673799a4aaa426219dd640b1ebb1f4c7fb2",
+      "sha256": "0b614b259e2f0b40d04a2e582cc5de1e42df80714ef10269a549e20d66e426c9"
+    },
+    {
+      "path": "src/data/coarena_checkpoint.rs",
+      "baseline_sha256": "af95d2823d12f5ddf1ca390e8278b4a65aa08e6712273a212c2279089eda36e6",
+      "sha256": "841e23367e9c5d11727e44e6a5411b3ac918d170cf5372c9229260cd4169ab0e"
+    },
+    {
+      "path": "src/data/graph_checkpoint.rs",
+      "baseline_sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3",
+      "sha256": "05903f0f0d8962ca5338cf7674fde76125970fd9fbe04a798e26df82b9d10f87"
+    },
+    {
+      "path": "src/dynamics/island_manager/persistent_capture.rs",
+      "baseline_sha256": null,
+      "sha256": "006809cfed9f486ddb1d0e6b35d6fe42142e4e0f6274f975b30a6bbc6116c309"
+    },
+    {
+      "path": "src/dynamics/island_manager/persistent_checkpoint.rs",
+      "baseline_sha256": "bcbe5fd2292e85e63c00532b6a82027ae31f06ed9d466722424c310552236d66",
+      "sha256": "8b6fc63287f8cf89e402df94c43be933e94ddff1b67b96662e6c69c53b56cc2b"
+    },
+    {
+      "path": "src/dynamics/joint/impulse_joint/impulse_joint_set_checkpoint.rs",
+      "baseline_sha256": "01697fb64f5175e5ba407c9f408935e8cd3fbea09346527fdb9e3a859de70034",
+      "sha256": "6d066ac1aa40a731ac45d08eb30661ca0f27b0c9afdf3610a7887c5ea8ea41b7"
+    },
+    {
+      "path": "src/dynamics/joint/multibody_joint/multibody_joint_set_checkpoint.rs",
+      "baseline_sha256": "49d3ef677e1e114ba0398393dd5c74412bc987210859bca02256d3459beec0a1",
+      "sha256": "bb8e234bf353dfa416db9dbc595e2184b0d6a0fb237b72c1b9e7288d79183011"
+    },
+    {
+      "path": "src/dynamics/soft_body/soft_body_set/soft_body_set_checkpoint.rs",
+      "baseline_sha256": "53e99ac4cc7ffab67aa17f240a29f104fa96e734c26ceab6fe07a98d2e5416c2",
+      "sha256": "bb2d06814cce680109c871817712f53e71494362dd55e2ce885552dac56c1948"
+    },
+    {
+      "path": "src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+      "baseline_sha256": "55ff52d4dcde4a381946cfb93f587e7ca7fd273d5f9f3ac7c5a6d5e20f5ca0c7",
+      "sha256": "cec27c80821b93ff4d05216ac4940e4856a6e29bc5312b56250f4c13be9f7dda"
+    },
+    {
+      "path": "src/geometry/broad_phase_bvh/checkpoint/capture.rs",
+      "baseline_sha256": null,
+      "sha256": "95b80ccdec9e2f6d1875627c813f773ffaa94e154b0ef69b43a56a31cd5aa849"
+    },
+    {
+      "path": "src/geometry/broad_phase_bvh/checkpoint/mod.rs",
+      "baseline_sha256": "7b9cc37dc15fa67434d3abb7317878ff9639b634ee140e0d06c81fed45d75556",
+      "sha256": "b32aa10b268b9a6e163c4b6c43852a37b2832f7c5bff5070f917eba72cf364f2"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/capture.rs",
+      "baseline_sha256": null,
+      "sha256": "bbd7ca0b9fc1a25a234cc80ff114240fe4d63fbcf3d4f28effd2daa1827dd9a5"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/capture/points.rs",
+      "baseline_sha256": null,
+      "sha256": "bb223e03e2739930a38186f78c907cdbe1a5d85beb389e0c3e23daf3623fa68b"
+    },
+    {
+      "path": "src/geometry/narrow_phase/checkpoint/mod.rs",
+      "baseline_sha256": "e7e56f19ab57001c6fadd6e2d1e9b9a47817e50830761c9497f50ba53974fb10",
+      "sha256": "b9bbaba7a11814dc539f006a397ecc7b6ea77aeed9e2141fb41bf7b4842a74ed"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/aggregate.rs",
+      "baseline_sha256": null,
+      "sha256": "6bf58044fdd7dc5a3360ac81878c2690749562b75ef157d9b793c1d19c126f2f"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/config.rs",
+      "baseline_sha256": null,
+      "sha256": "d74df50a98e2f5fac96b89acee58be599f21aade75497b011f7608c3f419724a"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/fields.rs",
+      "baseline_sha256": null,
+      "sha256": "47b4ac2892bba9ff64437ef814853626d9c898e0977da2b13eb81bf1231904fe"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/fields_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "127b759c1510e535a60062a31d011793921807495cc5fc7d764fd8fcff8274a7"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/frame.rs",
+      "baseline_sha256": null,
+      "sha256": "38c4938524ae2d55b712ca52b8dd62a907c9d1f7a76288eb6c66d2f46468d839"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/identity.rs",
+      "baseline_sha256": null,
+      "sha256": "0602fdfed356644b363a03f7a9891ec860f98ec3a76811865c074edc5ae83d60"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/mod.rs",
+      "baseline_sha256": null,
+      "sha256": "1a8e4928df8052a8dfc0190dd4d9008aab82d17b7e3fe1ff0cc2665656d3d8f5"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/owner.rs",
+      "baseline_sha256": null,
+      "sha256": "1e86dc7d7eb3e95ddf8754c538f8132d93f85200369ce1f58f177f5774f843bf"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/owner/tests.rs",
+      "baseline_sha256": null,
+      "sha256": "5c54cfeb9b936ab42a84d0da4f79c0d4066fd6820a9d127f262a5686e858fde9"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/tests.rs",
+      "baseline_sha256": null,
+      "sha256": "0cf6f3a988eb3cefa795dbe5442563581ab1b3c603a8ed52dbf95d6c73fc5f2b"
+    },
+    {
+      "path": "src/pipeline/checked_restore/capture/util.rs",
+      "baseline_sha256": null,
+      "sha256": "a6bb7853e9245a9b4096abaf57f58fd94274fae528d98f8455ac5ae58cf06bf5"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "baseline_sha256": "c87a21975a6b132da70eb8fd55a334303b3e16ade7e62e13c96323976e285c07",
+      "sha256": "4094ea67dec97211f1c283f7636ca1f69cc20b0a2c4171dafa1fd7d7b75e4f31"
+    },
+    {
+      "path": "src/pipeline/checked_restore/work.rs",
+      "baseline_sha256": "506f328aed4db260689f1565fe85839e6f81178a6fd40636064624bc45df2aee",
+      "sha256": "4edb58895776450c7d6eba792e2a0bd3530ec792482dc9b9c2f6492788bca0a0"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world.rs",
+      "baseline_sha256": "9e7eacd13b1556feaaceac30ea411f9071af61d8df459c3b1f14dc91ab876979",
+      "sha256": "b58ce9db75bbbd9d966a10b44171e7979c13e83c733cec6e9e0909d4ff213b78"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world/capture_reference_tests.rs",
+      "baseline_sha256": null,
+      "sha256": "c0bf00564e02bda286eb010e33fa02ed1068c7ecd4bbe9e5ec50383f2916cfba"
+    },
+    {
+      "path": "src/pipeline/checked_restore/world_cases.rs",
+      "baseline_sha256": "bcbbbd6e937336f4d320ebd2865a7dc7b754ec4a27324a8b0d12a16bc0efbbec",
+      "sha256": "819d860490676c8bb9f75a83e6d9eee53f95b25d2c5d77b3de617154f74847df"
+    }
+  ]
+}

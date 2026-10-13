@@ -40,6 +40,11 @@ fn check<'a>(n: &NumericFrame<'a>) -> ConstructionResult<WorldBoundary<'a>> {
     Ok(f)
 }
 impl NarrowPhase {
+    pub(crate) fn checkpoint_dispatcher(
+        &self,
+    ) -> Arc<dyn parry::query::PersistentQueryDispatcher<ContactManifoldData, ContactData>> {
+        self.query_dispatcher.clone()
+    }
     pub(crate) fn checkpoint_plan(n: &NumericFrame<'_>) -> ConstructionResult<AllocationPlan> {
         let f = check(n)?;
         let w = f.broad().context().narrow;
@@ -143,3 +148,5 @@ impl NarrowPhase {
 }
 #[cfg(all(test, feature = "serde-serialize", feature = "incant-checkpoint"))]
 mod tests;
+
+mod capture;

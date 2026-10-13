@@ -3,6 +3,35 @@ use super::*;
 use crate::pipeline::checked_restore::allocation::*;
 use incant_physics_snapshot::ValidatedGraph;
 impl<N, E> Graph<N, E> {
+    pub(crate) fn checkpoint_capture(
+        &self,
+        identity: incant_physics_snapshot::Identity,
+        budget: &mut incant_physics_snapshot::Budget,
+    ) -> incant_physics_snapshot::Result<incant_physics_snapshot::GraphRecord> {
+        use incant_physics_snapshot::{Error, GraphEdge, GraphNode, GraphRecord, MAX_ITEMS};
+        if self.nodes.len() > MAX_ITEMS || self.edges.len() > MAX_ITEMS {
+            return Err(Error::Limit);
+        }
+        let mut nodes = budget.vector(self.nodes.len())?;
+        let mut edges = budget.vector(self.edges.len())?;
+        let ix = |e: EdgeIndex| (e != EdgeIndex::end()).then_some(e.0);
+        nodes.extend(self.nodes.iter().enumerate().map(|(i, n)| GraphNode {
+            head: n.next.map(ix),
+            row: i as u32,
+        }));
+        edges.extend(self.edges.iter().enumerate().map(|(i, e)| GraphEdge {
+            node: e.node.map(|n| n.0),
+            next: e.next.map(ix),
+            prev: e.prev.map(ix),
+            row: i as u32,
+        }));
+        Ok(GraphRecord {
+            identity,
+            nodes,
+            edges,
+        })
+    }
+
     pub(crate) fn checkpoint_plan(value: &ValidatedGraph) -> ConstructionResult<AllocationPlan> {
         let mut p = AllocationPlan::array::<Node<N>>(value.record().nodes.len())?;
         p.append(AllocationPlan::array::<Edge<E>>(
