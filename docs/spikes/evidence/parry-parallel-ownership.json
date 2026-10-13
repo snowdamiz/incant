@@ -6082,7 +6082,11 @@
     "No GPU/window/device/performance or phase gate",
     "Unordered duplicate preflight and serial refit reverse-map pass have costs not yet device-measured"
   ],
-  "final_review": "source accepted; final packet review pending",
+  "final_review": {
+    "status": "accepted scoped producer",
+    "path": "docs/spikes/evidence/parry-parallel-ownership/final-review.json",
+    "sha256": "e2b3879789c86bac796d6d5f9ee10bdd091f43045852c4b6ac456ac4d12504aa"
+  },
   "probe_sources": [
     {
       "path": "tools/probes/native-physics/Cargo.toml",

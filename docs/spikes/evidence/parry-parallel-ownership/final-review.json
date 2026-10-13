@@ -1,0 +1,32 @@
+{
+  "decision": "accepted_scoped_source_and_evidence",
+  "commit": "396f0602e89af1aee459a935f37b3cdc44d021b6",
+  "manifest": "docs/spikes/evidence/parry-parallel-ownership.json",
+  "manifest_sha256": "338e37b7e32f3a55cc684fd7fedfc9030a8c244f57baf5628534250d1fcc7ccc",
+  "verified": {
+    "frozen_source_live_and_copies": 840,
+    "additional_probe_sources": 8,
+    "lossless_compressed_and_original_records": 79,
+    "ordinary_commands_exit_zero": 8,
+    "tests_per_default_and_no_default_physics_configuration": 18,
+    "additional_green_checks": [
+      "runtime dependency graph",
+      "physics feature guard",
+      "corrected nine-case probe-lock guard",
+      "four --locked --offline probe metadata commands"
+    ],
+    "independent_miri_control_inputs": 13
+  },
+  "source_reviews": [
+    "537ac137122cff2a02a16efa0a360603bd4366ca1f7ef4c0ff5cd92bf7229608",
+    "a4fc2ee63b2b831ab85cda2023de0ff93e4dd3bfbb9916590006347877ff21d3"
+  ],
+  "findings": [],
+  "qualifications": [
+    "The initial missing probe patch guard fails and is retained; its scoped fix and successful rerun are distinct.",
+    "Stacked Borrows fails at Crossbeam epoch container-of before the BVH test. Tree Borrows executes one sibling test then exits1 on nine unreclaimed allocations; no clean Miri result.",
+    "Independent safe Rayon control reproduces those failure classes without engine/Parry/Rapier, but does not establish dependency soundness.",
+    "No new build/test/Miri/GPU execution by this final reviewer; retained outputs and identities were independently rehashed and read.",
+    "No untrusted solver load, persisted physics save, all-solver safety, performance, phone or phase completion claim."
+  ]
+}
