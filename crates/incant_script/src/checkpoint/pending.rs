@@ -1,4 +1,6 @@
 use super::*;
+#[cfg(feature = "native-checkpoints")]
+mod native;
 use incant_input::{InputRuntime, ValidatedActions};
 
 /// Decoded ordinary-load candidate, before any guest initialization. Native hosts
@@ -13,6 +15,8 @@ pub struct PendingSessionCheckpoint {
     store: Store,
     schedule: Schedule,
     bindings: ValidatedActions,
+    #[cfg(feature = "native-checkpoints")]
+    restart_requests: bool,
     #[cfg(feature = "ui")]
     ui: Option<incant_ui::PendingUiCheckpoint>,
     #[cfg(feature = "audio")]
@@ -35,6 +39,8 @@ impl PendingSessionCheckpoint {
             store: state.store,
             schedule: state.schedule,
             bindings,
+            #[cfg(feature = "native-checkpoints")]
+            restart_requests: false,
             #[cfg(feature = "ui")]
             ui: None,
             #[cfg(feature = "audio")]
@@ -159,6 +165,8 @@ impl PendingSessionCheckpoint {
             store,
             schedule,
             bindings,
+            #[cfg(feature = "native-checkpoints")]
+            restart_requests: false,
             #[cfg(feature = "ui")]
             ui,
             #[cfg(feature = "audio")]
@@ -168,10 +176,17 @@ impl PendingSessionCheckpoint {
     pub fn world(&self) -> &NativeWorld {
         &self.world
     }
+    fn requires_audio_owner(&self) -> bool {
+        #[cfg(feature = "audio")]
+        if self.audio.is_some() {
+            return true;
+        }
+        self.world.requires_audio_checkpoint()
+    }
     /// Run trusted module initialization; globals/closures are explicitly
     /// ephemeral. No tick occurs and the prepared world identity is preserved.
     pub fn start(self) -> Result<NativeSession> {
-        if self.world.requires_audio_checkpoint() {
+        if self.requires_audio_owner() {
             return Err(CheckpointError::Unsupported(
                 "restored audio owner is required",
             ));
@@ -191,7 +206,7 @@ impl PendingSessionCheckpoint {
     /// guest initialization. A same-ID owner from another world cannot pass.
     #[cfg(feature = "ui")]
     pub fn start_with_ui(self, ui: &incant_ui::UiRuntime) -> Result<NativeSession> {
-        if self.world.requires_audio_checkpoint() {
+        if self.requires_audio_owner() {
             return Err(CheckpointError::Unsupported(
                 "restored audio owner is required",
             ));
@@ -236,6 +251,10 @@ impl PendingSessionCheckpoint {
             &self.schedule,
             &self.world,
         )?;
+        #[cfg(feature = "native-checkpoints")]
+        if self.restart_requests {
+            host.enable_restart_requests()?;
+        }
         *host.persistent.borrow_mut() = self.store;
         host.schedule = self.schedule;
         let mut input = InputRuntime::default();

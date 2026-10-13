@@ -2,6 +2,8 @@ use super::*;
 use incant_input::{InputEvent, KeyCode};
 use incant_runtime::{CookedEntity, CookedScene};
 
+#[cfg(any(feature = "ui", feature = "audio"))]
+mod hosted;
 mod physics;
 mod refusals;
 

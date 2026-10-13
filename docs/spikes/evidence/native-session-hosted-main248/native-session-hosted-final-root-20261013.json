@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-13T20:48:46.439949+00:00",
+  "source": "c8c1329036821735cc1c4203075e72383cb101cd",
+  "packet": "eb7fc7d48573b8a4b1f0ab56bf46c3f8703ab4bd",
+  "manifest_sha256": "f311c9887e09ec1192b98d4ccbc775e77a48050c9a24507d9ddf5e5d6bbb5f66",
+  "decision": "accepted",
+  "scope": "Source002/003 independently reviewed, including mandatory captured empty audio owner and unchanged byte pairing. Portable verification128records/15sources/33commands/9immediate librarycopies replayed;9binarypayloads independently hashed. Final003200testspermode, five strict configurations and optional/wasm/guards pass; historical001failure and002199scope retained. Integration/doc tests exact logs only. No file physics, GPU, device, heap or export admission."
+}
