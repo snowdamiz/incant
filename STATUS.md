@@ -56,6 +56,17 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
+## Exact physics saves — inert attachment ownership verified locally
+
+The next std-only inert component preserves exact ordered body/collider
+attachments and native local-pose bits against two checked arena layouts.
+Fifty-two CPU tests, Clippy, wasm32 and dependency checks pass, including actual
+2D/3D public attach/detach/reparent/remove/reuse observations and hostile decoding.
+Independent producer source/evidence review is accepted; current-main integration checks are pending. Enclosing-owner authentication,
+complete body/collider/contact state and exact continuation remain required;
+no live construction or physics-save admission is enabled.
+[Attachment contract](docs/spikes/physics-inert-attachments.md).
+
 ## Exact physics saves — inert graph adjacency validation underway
 
 The next inert format preserves node/edge order and validates both linked
