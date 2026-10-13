@@ -33,4 +33,4 @@ exclude it from coverage. Existing default output remains unchanged.
 [Machine-readable evidence](evidence/retained-motion-main203.json) retains the
 freeze, commands, lossless logs, source identities and prior review receipts.
 [Assertion-only collector](evidence/retained-motion-main203/collect.py) accepts
-`--verify-only`. Final current-main integration review is pending.
+`--verify-only`. Final current-main integration review is accepted; publication requires the exact-head fast check.

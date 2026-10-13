@@ -62,7 +62,7 @@ geometry and advances history only after submission. [Current-main203 checks](do
 pass 91 CPU cases plus 12 overlapping cooked-refusal cases, Clippy, wasm32, native-window
 compile and dependency checks. The prior two numerical GPU processes remain scoped to
 their recorded producer binary; no current composed GPU or appearance claim is made.
-Final integration review is pending. Default rendering is unchanged; temporal color,
+Final integration review is accepted; publication requires the exact-head fast check. Default rendering is unchanged; temporal color,
 upscaling and cooked motion remain separate.
 
 ## Exact physics saves — inert manifold ownership verified locally

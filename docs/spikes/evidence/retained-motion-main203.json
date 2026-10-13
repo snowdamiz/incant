@@ -474,5 +474,9 @@
     "Timestamp composition is not in this source. The separate motion render pass must receive its own timestamp span or an explicit exclusion when composing the timestamp candidate.",
     "Cargo.lock adds only incant_render dev-only naga; no package identity changes."
   ],
-  "review_state": "Current-main integration final independent review pending"
+  "review_state": "Final current-main integration review accepted; publication requires exact-head fast check",
+  "final_review": {
+    "path": "docs/spikes/evidence/retained-motion-main203/final-review.json",
+    "sha256": "9d753098d07bad2aafbcab1f0917a749db90202715e19f74f1c14063465e2d4f"
+  }
 }
