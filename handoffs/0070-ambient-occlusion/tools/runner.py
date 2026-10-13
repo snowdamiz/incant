@@ -253,8 +253,11 @@ def cargo(ledger, plan, env, jobs, label, args):
     head, tail = split_cargo_args(args)
     argv = [str(c.ROOT / "tools/cargo"), *head, "--locked", "--offline", "--profile", "ci", f"-j{jobs}",
             "--message-format=json-render-diagnostics", *tail]
+    # execute owns create-only per-child scratch directories. The toolchain
+    # audit's shared build TMPDIR already exists and cannot be reused here.
+    child_env = {**env, "TMPDIR": str(private_dir(ledger, "tmp", f"build-{label}"))}
     completion = execute(ledger, plan, {"label": f"build-{label}", "kind": "build", "counts_as_child": False},
-                         argv, env, c.ROOT, BUILD_TIMEOUT_S)
+                         argv, child_env, c.ROOT, BUILD_TIMEOUT_S)
     if completion["success"] is not True:
         raise Refused(f"cargo {label} failed {completion['failure_reasons']}; see logs/build-{label}.stderr")
     artifacts = []
@@ -357,8 +360,9 @@ def build(args, plan):
             shutil.copyfile(c.ROOT / "Cargo.lock", c.HELPER / "Cargo.lock")
             argv = [str(c.ROOT / "tools/cargo"), "metadata", "--offline", "--format-version", "1",
                     "--manifest-path", str(c.HELPER / "Cargo.toml")]
+            lock_env = {**env, "TMPDIR": str(private_dir(ledger, "tmp", "build-helper-lock"))}
             done = execute(ledger, plan, {"label": "build-helper-lock", "kind": "build", "counts_as_child": False},
-                           argv, env, c.ROOT, BUILD_TIMEOUT_S)
+                           argv, lock_env, c.ROOT, BUILD_TIMEOUT_S)
             if done["success"] is not True:
                 raise Refused("cargo metadata could not prune the helper lock offline")
         lock = verify_helper_lock()
