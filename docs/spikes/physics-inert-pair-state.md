@@ -132,7 +132,7 @@ that omitting it preserves every observable allocation-state distinction for all
 admitted native states. A future full-owner policy/constructor must close that
 boundary before live restoration, rather than silently normalizing it.
 
-Independent source/final review is pending. Complete body/collider payloads,
+Independent source/final review is accepted; the receipt is retained in the [main205 integration packet](evidence/physics-pair-main205/producer-final-review.json). Complete body/collider payloads,
 shape acceleration and feature ownership, reciprocal solver graph/island state,
 intersection/soft/journal state and enclosing owner authentication remain required.
 Safe live construction and exact continuation must be proven before enabling
