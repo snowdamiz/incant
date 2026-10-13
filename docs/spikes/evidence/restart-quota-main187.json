@@ -119,7 +119,7 @@
     "records": 63,
     "payloads": 24
   },
-  "review_state": "Independent source/final review pending",
+  "review_state": "Independent source and execution review accepted; exact-head fast check pending",
   "limits": [
     "Only the quota test uses5s; production default50ms and deadline implementation unchanged.",
     "Exact InputLimit assertion retained; now tests pure/mixed full quota success, caught overflow, full world rollback and FailedSession.",
@@ -132,5 +132,9 @@
     "platform": "windows-latest",
     "same_assertion": true,
     "result": "127 sibling library cases passed, one quota assertion failed; actual error variant not printed"
+  },
+  "final_review": {
+    "path": "docs/spikes/evidence/restart-quota-main187/final-review.json",
+    "sha256": "ab50c9a25600abe661798c1907ad13e42b3692db2f809ddcff9b80d8a813491b"
   }
 }

@@ -21,7 +21,7 @@ error occurred on either hosted runner. All raw results are retained.
 
 The repaired four restart tests pass; the full UI/audio script library passes
 127 cases, with no failures or ignored tests. All-target Clippy, formatting and
-diff checks pass. Independent review and the next corrected full checkpoint
-remain required; the running checkpoint17 is unchanged.
+diff checks pass. Independent source/evidence review is accepted. The exact-head fast check and
+next corrected full checkpoint remain required; the running checkpoint17 is unchanged.
 
 [Lossless evidence and source identities](evidence/restart-quota-main187.json).
