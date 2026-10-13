@@ -83,6 +83,23 @@ and MASK detail of approximately 18% of the reference remain explicit quality li
 acceptance is for opt-in fixed mode only. It does not approve default quality,
 upscaling, MetalFX, phone performance or a phase gate.
 
-Current composed source review, CPU/consumer checks and explicit offline recook
-are pending. No GPU execution or current-composition appearance acceptance is
-claimed. Original producer execution remains tied to its own source and binary.
+Current composed source review and 16 initial checks passed: 30 cooker cases,
+124 default and 153 cooked CPU cases across targets, strict Clippy, native-window
+and browser compilation, dependency/CI policy and conventions checks. Nine narrowed
+shader stages passed actual Metal compilation/linking and Vulkan spirv-val (30
+commands including tool identities); emitted HLSL has no local DXC result.
+
+A reviewed test-only addition then passed six checks (115 default and 144 cooked
+library CPU cases overlap the initial totals). The exact copied default and cooked
+binaries each completed four tiny Metal frames under an exclusive, bounded grant:
+full/full/half/half DRS, real opaque plus BLEND geometry, fixed-history phase/reset,
+and positive Models/InitializeScene/Display timestamp spans inside their envelope.
+All eight frames and four child processes completed and were reaped. No images
+were produced; this verifies current composed submission/lifecycle behavior, not
+new appearance or complete-frame GPU performance. The original producer appearance
+acceptance remains source/binary-specific and retains its softness limitation.
+
+[Manifest](evidence/fixed-temporal-main217.json) and
+[read-only verifier](evidence/fixed-temporal-main217/verify.py) retain all current
+raw checks, explicitly recooked artifacts, producer evidence and source identities.
+Final independent integration evidence review is pending.
