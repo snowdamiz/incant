@@ -85,8 +85,14 @@ def positive_and_perturbed():
                                memory)
         staged = af.run_gate(af.stage_gate(case, on, off, spec, scene_name, orthographic, strength), memory)
         assert filtered["pass"] and staged["pass"], (gate, filtered.get("problems"), staged.get("problems"))
+        # Runtime-measured R8 rounding: the model rounds half up, so every exact tie goes up.
+        rounding = staged["raw_rounding_measured"]
+        assert rounding["exact_raw_texels"] > 0 and rounding["ties"]["down"] == 0, rounding
+        assert all(-0.5 <= float(k) <= 0.5 for k in rounding["residual_histogram"]), rounding
         out[gate] = {"filtered": "pass", "stages": "pass", "certainly_occluded": filtered["certainly_occluded"],
-                     "oracle_final_widths": filtered["oracle_decisions"]["final_width_histogram"]}
+                     "oracle_final_widths": filtered["oracle_decisions"]["final_width_histogram"],
+                     "raw_rounding_measured": {"exact_raw_texels": rounding["exact_raw_texels"],
+                                               "ties": rounding["ties"]}}
     # One raw code off by one where the oracle is exact: only the raw stage can see it.
     oracle, _, _ = af.oracle_for("white_slab", False, 1.0)
     planes = dict(memory.planes[(af.CORE, "p_ao_white")])
@@ -197,6 +203,15 @@ def report_controls(memory):
         assert not report["pass"] and report["missing_or_invalid_cases"] == sorted(af.declared_cases())
         assert all(not g["pass"] and "missing" in g for g in report["numeric_gates"].values())
         out.append("empty evidence: every case missing, every gate fails")
+        # A build record from another plan cannot stand behind this analysis.
+        foreign = scratch / "foreign"
+        (foreign / "outputs").mkdir(parents=True)
+        (foreign / "build").mkdir()
+        (foreign / "build" / "build.json").write_text(json.dumps({"namespace": "0070-ssao-filter-001",
+                                                                  "plan_sha256": "0" * 64}))
+        bound = af.analyse(foreign)
+        assert bound["binding"]["plan_matches_build"] is False and bound["numeric_pass"] is False, bound["binding"]
+        out.append("build record from another plan: numeric_pass false")
         # Empty index and a zero-length plane make their cases invalid, not partially passing.
         hollow = scratch / "hollow"
         (hollow / "outputs" / af.CORE).mkdir(parents=True)

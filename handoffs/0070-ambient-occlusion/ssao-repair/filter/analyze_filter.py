@@ -242,6 +242,7 @@ def stage_agreement(planes, oracle, finals, frames):
     counts = {"viewport_texels": 0, "raw_outside": 0, "h_outside": 0, "v_outside": 0, "v_outside_final": 0,
               "clear_not_white": 0, "forward_outside": 0, "forward_uninferable": 0}
     first = []
+    rounding = {"exact_raw_texels": 0, "residual_histogram": {}, "ties": {"down": 0, "up": 0}}
     raw_source, h_source = orc.plane_source(raw), orc.plane_source(h)
     for y in range(SIZE[1]):
         for x in range(SIZE[0]):
@@ -250,6 +251,7 @@ def stage_agreement(planes, oracle, finals, frames):
                 counts["clear_not_white"] += (raw[i], h[i], v[i]) != (255, 255, 255)
                 continue
             counts["viewport_texels"] += 1
+            measure_rounding(rounding, oracle, x, y, raw[i])
             checks = (("raw_outside", raw[i], oracle.raw(x, y)),
                       ("h_outside", h[i], orc.r8_codes(*oracle.pass_value(x, y, True, raw_source))),
                       ("v_outside", v[i], orc.r8_codes(*oracle.pass_value(x, y, False, h_source))))
@@ -269,7 +271,26 @@ def stage_agreement(planes, oracle, finals, frames):
         elif not inferred[0] - 1e-9 <= code / 255 <= inferred[1] + 1e-9:
             counts["forward_outside"] += 1
     problems = [f"{k} {n}" for k, n in counts.items() if n and k != "viewport_texels"]
-    return {**counts, "first_failures": first, "problems": problems, "pass": not problems}
+    return {**counts, "first_failures": first, "raw_rounding_measured": rounding, "problems": problems,
+            "pass": not problems}
+
+
+def measure_rounding(rounding, oracle, x, y, code):
+    """Runtime-measured R8 rounding (an observation, not a gate): wherever the
+    AO-pass value is exact (one coverage candidate, exact k), record the device
+    code minus 255 * value and which way exact ties went."""
+    options = oracle.candidates(x, y)
+    if len(options) != 1 or options[0] is None:
+        return
+    k_lo, k_hi = oracle.k_interval(x, y, options[0])
+    if k_lo != k_hi:
+        return
+    scaled = 255 * max(0.0, 1 - oracle.strength * k_lo / 16)
+    key = f"{code - scaled:+.4f}"
+    rounding["exact_raw_texels"] += 1
+    rounding["residual_histogram"][key] = rounding["residual_histogram"].get(key, 0) + 1
+    if scaled - math.floor(scaled) == 0.5:
+        rounding["ties"]["up" if code == math.ceil(scaled) else "down"] += 1
 
 
 # ------------------------------------------------------------------ gates
@@ -437,22 +458,43 @@ def run_gate(function, ev):
     return result
 
 
+NAMESPACE_PLAN = REPAIR.parent / "ssao-filter-001" / "plan.json"
+
+
+def run_binding(evidence):
+    """Identity of the run being analysed: its build record, when present, must
+    have been built from the namespace plan analysed here."""
+    path = Path(evidence) / "build" / "build.json"
+    if not path.is_file():
+        return {"build_record": None, "plan_matches_build": None}
+    record = json.loads(path.read_text())
+    plan = hashlib.sha256(NAMESPACE_PLAN.read_bytes()).hexdigest() if NAMESPACE_PLAN.is_file() else None
+    return {"build_record_sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            "namespace": record.get("namespace"), "plan_sha256": record.get("plan_sha256"),
+            "plan_matches_build": plan is not None and plan == record.get("plan_sha256"),
+            "engine_commit": (record.get("grant") or {}).get("engine_commit"),
+            "feature_binding": record.get("feature_binding"), "frozen": {
+                k: v.get("sha256") for k, v in (record.get("frozen") or {}).items()}}
+
+
 def analyse(evidence):
     ev = Evidence(evidence)
     numeric = {name: run_gate(f, ev) for name, f in NUMERIC_GATES.items()}
     quality = {name: run_gate(f, ev) for name, f in QUALITY_GATES.items()}
     diagnostics = {"n6t": run_gate(n6t_diagnostic, ev)}
+    binding = run_binding(evidence)
     missing = sorted(c for c, s in ev.status.items() if s["status"] != "loaded")
     failed_numeric = sorted(n for n, g in numeric.items() if not g["pass"])
     failed_quality = sorted(n for n, g in quality.items() if not g["pass"])
-    return {"format": "incant-0070-ssao-filter-analysis-v1", "evidence": str(evidence),
+    bound = binding["plan_matches_build"] is not False
+    return {"format": "incant-0070-ssao-filter-analysis-v1", "evidence": str(evidence), "binding": binding,
             "declared_cases": declared_cases(), "cases": ev.status, "missing_or_invalid_cases": missing,
             "numeric_gates": numeric, "quality_gates": quality, "diagnostics": diagnostics,
             "failed_numeric_gates": failed_numeric, "failed_quality_gates": failed_quality,
-            "numeric_pass": not missing and not failed_numeric,
+            "numeric_pass": bound and not missing and not failed_numeric,
             "quality_pass": not missing and not failed_quality,
             "appearance": {"judged_here": False, "note": "Claude's rendered-pair review is separate."},
-            "pass": not missing and not failed_numeric and not failed_quality}
+            "pass": bound and not missing and not failed_numeric and not failed_quality}
 
 
 def main(argv=None):
