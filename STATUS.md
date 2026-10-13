@@ -16,6 +16,32 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Current overview — main189, 2026-10-13
+
+Development main189 includes the restart quota-test repair (PR188) and the reviewed,
+opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
+(PR189). Default renderer checks remain; the next frozen checkpoint also exercises
+cooked features and asserts the actual native backend. Producer Metal appearance
+reviews remain scoped to their recorded builds; current Vulkan/DX12 execution is pending.
+
+Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
+held at its exact main186 tree: Linux and Windows conformance failed the same quota
+test assertion, while the remaining macOS general check is still running. The main188
+repair preserves production's 50 ms budget and the exact quota/rollback contract.
+No release or phase approval follows from a main merge.
+
+Android static-Wasm producer evidence is accepted. Current main189 integration has
+passed CPU/public preflights and both-mode target compile/admission checks; its final
+source-relevance audit is pending. Six actual Android callers remain producer-scoped.
+Core authored bindings and the corrected locked-exit proof are merged in PR185
+([current-main evidence](docs/spikes/core-main182.md)).
+
+Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
+their queued GPU/appearance checks remain open. CPU profiling is being verified
+locally, with final package evidence pending. These independent lanes do not satisfy
+phone, performance, complete-renderer or phase gates. Older milestone narratives
+below are historical integration snapshots, not the current queue.
+
 ## Cooked renderer integration — CPU checks complete
 
 The accepted sprite, UI, text and material producer changes are composed with
@@ -1056,7 +1082,11 @@ PCM comparisons remain producer-scoped. Final integration review is accepted; th
 Historical offscreen helper provenance remains qualified; live appearance/device
 acceptance is separate. [Evidence](docs/spikes/core-main182.md).
 
-## Current milestone
+## Historical integration snapshots
+
+The paragraphs in this section preserve the state at earlier integrations. Their
+main numbers, queued work and active checkpoint labels are historical; use the
+current overview above and linked immutable receipts for present status.
 
 Main #184 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
