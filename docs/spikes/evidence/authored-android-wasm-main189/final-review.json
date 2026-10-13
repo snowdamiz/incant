@@ -1,0 +1,57 @@
+{
+  "at": "2026-10-13T02:59:31.955090+00:00",
+  "decision": "accepted for fast-main integration",
+  "review_head": "407ee161409aca1a2b8e0ffae1879ac489c05b2d",
+  "manifest_sha256": "d2d3c0b1874d62bf5d1fa2c3003a0958eb5b87e952f53a6b191d367585aa148f",
+  "producer_source_and_probe_files_equal": [
+    "crates/incant_cook/src/project_build_wasm.rs",
+    "crates/incant_cook/tests/mobile_project.rs",
+    "tools/android_archive.py",
+    "tools/android_wasm.py",
+    "tools/export_android.py",
+    "tools/tests/test_android_export.py",
+    "tools/tests/test_android_wasm.py",
+    "tools/probes/authored-android-wasm/prepare.py",
+    "tools/probes/authored-android-wasm/verify.py"
+  ],
+  "assertions_replayed": {
+    "passed": true,
+    "current_commands": 11,
+    "target_commands": 24,
+    "cook_cases": 62,
+    "current_native_processes": 4,
+    "actual_android_target_checks": 2,
+    "producer_android_processes": 6,
+    "producer_refusals": 26,
+    "frozen_inputs": 2028,
+    "producer_records": 1281
+  },
+  "archive": {
+    "parts": [
+      {
+        "path": "docs/spikes/evidence/authored-android-wasm-main189/artifacts.json.gz.part-000",
+        "sha256": "7f038324c9e65489a70a8c75f216071a555a7a3b52d9987ebaaf713bdf17236f",
+        "bytes": 6302383
+      }
+    ],
+    "sha256": "7f038324c9e65489a70a8c75f216071a555a7a3b52d9987ebaaf713bdf17236f",
+    "bytes": 6302383,
+    "records": 330,
+    "payloads": 118
+  },
+  "external_artifacts_verified": 9,
+  "reviewed": [
+    "complete collector assertions and target audit implementation",
+    "selected Android normal/build graphs and all source/feature qualifications",
+    "fresh wasm2c target C compile records and exact original guest reproduction control",
+    "lossless current and prior producer archives and external binaries",
+    "updated current STATUS summary and explicit deferred release/phone gates"
+  ],
+  "findings": [],
+  "limits": [
+    "Current target work is compile/build-time admission only, no new archive/caller execution. Original accepted six Android API37 CPU processes remain producer-scoped.",
+    "Three prior runner-only assertion/setup failures are retained: WABT root/bin mismatch, guest source-location hash difference and compiler diagnostic cwd hash difference. No production source changed or passing runtime suite rerun for them.",
+    "Both selected runtime/build dependency graphs and source closure audited; conservative script identity freshly recooked with current lock.",
+    "No physical-device, minimum-OS, GPU/audio-device, performance, signing or phase approval."
+  ]
+}

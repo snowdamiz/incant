@@ -16,6 +16,32 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Current overview — main189, 2026-10-13
+
+Development main189 includes the restart quota-test repair (PR188) and the reviewed,
+opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
+(PR189). Default renderer checks remain; the next frozen checkpoint also exercises
+cooked features and asserts the actual native backend. Producer Metal appearance
+reviews remain scoped to their recorded builds; current Vulkan/DX12 execution is pending.
+
+Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
+held at its exact main186 tree: Linux and Windows conformance failed the same quota
+test assertion, while the remaining macOS general check is still running. The main188
+repair preserves production's 50 ms budget and the exact quota/rollback contract.
+No release or phase approval follows from a main merge.
+
+Android static-Wasm producer evidence is accepted. Current main189 integration has
+passed CPU/public preflights and both-mode target compile/admission checks; its final
+independent source-relevance audit is accepted, with the fast publication check pending. Six actual Android callers remain producer-scoped.
+Core authored bindings and the corrected locked-exit proof are merged in PR185
+([current-main evidence](docs/spikes/core-main182.md)).
+
+Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
+their queued GPU/appearance checks remain open. CPU profiling is being verified
+locally, with final package evidence pending. These independent lanes do not satisfy
+phone, performance, complete-renderer or phase gates. Older milestone narratives
+below are historical integration snapshots, not the current queue.
+
 ## Cooked renderer integration — CPU checks complete
 
 The accepted sprite, UI, text and material producer changes are composed with
@@ -88,6 +114,21 @@ actual corrected hosted results remain pending. Candidate17 stays frozen and
 release remains at accepted checkpoint14.
 [Evidence](docs/spikes/restart-quota-main187.md).
 
+## Authored Android static Wasm — producer execution passed
+
+Ordinary Android export now admits the reviewed captured wasm2c module route
+with complete bundle/producer/target/physics checks and exact NDK C compilation
+audits. Both fresh shipping physics archives pass; six fresh source/cache/build/
+map-deleted ARM API37 emulator processes match all 17,856 observed fields and
+614,400 PCM bytes each, with twenty-six exact refusal controls. Public import,
+atomic selection/mode Undo/Redo/journal reopen and four Wasmtime processes also
+pass. Owned software AVDs were removed; the retained port-reuse failure was
+resolved by rerunning only missing callers, without rebuilding archives.
+Source/probe and final producer execution reviews are accepted; current-main
+integration checks are pending. API24 compilation is not minimum-OS execution proof.
+No physical-phone, performance, GPU, live audio, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-android-wasm.md).
+
 ## Authored iOS static Wasm — producer execution passed
 
 Ordinary iOS export now accepts one public captured Wasm scene module through
@@ -102,8 +143,9 @@ compiler output was reused after a reviewed observer-only correction, explicitly
 qualified rather than called a new build. A separate simulator teardown failure
 is retained; the complete retry passed without source/archive changes.
 Source/probe and final execution reviews are accepted; current-main
-integration remains pending. Android static Wasm, mixed per-entity TypeScript and
-static guest checkpoints remain refused. No phone, minimum-OS, performance,
+integration remains pending. Its original Android refusal is superseded by the
+separate Android proof above; mixed per-entity TypeScript and static guest
+checkpoints remain refused. No phone, minimum-OS, performance,
 rendering, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-ios-wasm.md).
 
@@ -1040,7 +1082,11 @@ PCM comparisons remain producer-scoped. Final integration review is accepted; th
 Historical offscreen helper provenance remains qualified; live appearance/device
 acceptance is separate. [Evidence](docs/spikes/core-main182.md).
 
-## Current milestone
+## Historical integration snapshots
+
+The paragraphs in this section preserve the state at earlier integrations. Their
+main numbers, queued work and active checkpoint labels are historical; use the
+current overview above and linked immutable receipts for present status.
 
 Main #184 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
