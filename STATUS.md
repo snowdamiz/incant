@@ -1,5 +1,14 @@
 # Implementation status
 
+Native TypeScript haptics now has a bounded committed request queue and optional
+desktop gamepad consumer. CPU qualification passes 29 input, 172 script, 44 game
+and 53 window/input cases, plus the static-module refusal and focused SIMD8
+controls. Strict lint, SDK and dependency guards pass; three failed generations
+are retained. Final independent review is pending. No physical motor/window/GPU
+was exercised; Gilrs worker lifetime and asynchronous delivery limits are explicit.
+Wasm haptic ABI parity and mobile actuators remain open.
+[Scope and evidence](docs/spikes/native-haptics-qualification.md).
+
 The default-off persisted native game path has passing joined CPU qualification:
 267 script/game/player cases in each numerical mode, including separate-process
 save/resume with real fractional PCM timing. Thirteen current checks pass;
