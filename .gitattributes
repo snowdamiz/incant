@@ -32,3 +32,14 @@ docs/spikes/evidence/native-restart-main179/integration-manifest.patch -text whi
 
 # Preserve the upstream Core font license, including its original trailing space.
 samples/core/art/fonts/OFL-NotoSansSC.txt whitespace=-blank-at-eol
+
+# Preserve exact reviewed profiler raw logs with terminal blank lines.
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/default-player-002.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/default.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/feature-unification-green.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/player.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/profile-behavior-002.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/profile-behavior-003.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/profile-initial.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/script.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/transport-unification.log -text whitespace=-blank-at-eof
