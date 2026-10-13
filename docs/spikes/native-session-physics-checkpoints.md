@@ -10,8 +10,8 @@ entire world and fresh VM initialize successfully.
 This is a process-local headless session capability. There is no byte importer,
 arbitrary JavaScript heap or closure snapshot, Wasm state admission, or change to
 public physics byte-save refusal. UI and audio host obligations, including prior
-use after declaration removal, refuse explicitly. Composed host/session exports
-remain separate work.
+use after declaration removal, refuse explicitly. The subsequent [hosted opaque extension](native-session-hosted-physics-checkpoints.md)
+adds typed preparation without widening these default headless methods.
 
 ## State and publication
 

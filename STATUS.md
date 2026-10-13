@@ -1,5 +1,7 @@
 # Implementation status
 
+The script-owned hosted opaque checkpoint extension passed 200 cases in each physics mode and strict headless/UI/audio feature checks. It preserves real offline mixer chronology even before the first audio declaration, binds required host owners before VM initialization, and keeps file physics admission closed. Source003 is independently accepted; final packet and game-level execution are separate. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
+
 Opaque headless TypeScript/native-physics session checkpoints have passed 195 script tests per numerical mode, 186 feature-off tests, strict Clippy and optional/lean/wasm compilation. Public physics byte saves remain refused. The conservative manifest guard exposes inherited optional snapshot forwarding diagnostics; actual selected solver graphs pass and the separate repair remains explicit. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
 
 Current main is PR243: the private primitive-world composition is merged, while public physics saves and outer runtime admission remain closed. Frozen checkpoint27 still selects main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Remaining checkpoint jobs continue on the original head; release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).

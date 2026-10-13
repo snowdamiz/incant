@@ -1,0 +1,229 @@
+{
+  "format": "incant.native-session-hosted-physics.cpu-evidence",
+  "version": 1,
+  "source_commit": "c8c1329036821735cc1c4203075e72383cb101cd",
+  "source_freeze": "source-003/freeze.json",
+  "archive": {
+    "path": "records.json.gz",
+    "sha256": "6f9f04f0e7d01f62abb3e1db8aeb2ceb31aba6b723188e22ec417e8d9fe90104",
+    "records": 128,
+    "payloads": 99
+  },
+  "commands": [
+    {
+      "receipt": "all-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "all-det-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "all-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "all-fast8-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-audio-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-audio-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-det-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-det-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-fast8-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-fast8-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-headless-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-headless-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-ui-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-ui-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "conventions-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "conventions-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "diff-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "diff-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "feature-off-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "feature-off-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "fmt-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "fmt-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "focused-hosted-001.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "focused-hosted-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "focused-hosted-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "graph-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "graph-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "manifest-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "manifest-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "optional-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "optional-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "wasm-002.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "wasm-003.json",
+      "exit_code": 0
+    }
+  ],
+  "binaries": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-all-det-002/incant_script-fc7d882f02a98ce7",
+      "path": "binaries-all-det-002/incant_script-fc7d882f02a98ce7",
+      "sha256": "6166b2a2856d4ca1ce422c429bf0d054a5c569604ded8bdc56bb2358c223d3b4",
+      "bytes": 22420544,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-all-det-003/incant_script-fc7d882f02a98ce7",
+      "path": "binaries-all-det-003/incant_script-fc7d882f02a98ce7",
+      "sha256": "341129ab98c411460ba42ce0f677ec6ae22f76ea55a9ee4b5e01f482883b54b6",
+      "bytes": 22428144,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-all-fast8-002/incant_script-6ab307c76ee60811",
+      "path": "binaries-all-fast8-002/incant_script-6ab307c76ee60811",
+      "sha256": "d0b083220cdb5e71225b000f97f830f84f088fd29ba00918fe15d9163abcbd17",
+      "bytes": 21986688,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-all-fast8-003/incant_script-6ab307c76ee60811",
+      "path": "binaries-all-fast8-003/incant_script-6ab307c76ee60811",
+      "sha256": "5473cbd96ab659656f4dc3299dc296edd9dc809b66854bc5280e349ca7ebcdb1",
+      "bytes": 22009600,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-feature-off-002/incant_script-78d8b7d6011aa5d0",
+      "path": "binaries-feature-off-002/incant_script-78d8b7d6011aa5d0",
+      "sha256": "2f76309fba8c26756b2c6e8d5df081a6831a0e49da9a27180da1151fb0b075fb",
+      "bytes": 19927936,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-feature-off-003/incant_script-78d8b7d6011aa5d0",
+      "path": "binaries-feature-off-003/incant_script-78d8b7d6011aa5d0",
+      "sha256": "2256283038d83c2b46752b7d7babb254ec6dcda9f11d86499deb55a8cac0d5a1",
+      "bytes": 19927936,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-focused-hosted-001/incant_script-7029454b4fcb87b0",
+      "path": "binaries-focused-hosted-001/incant_script-7029454b4fcb87b0",
+      "sha256": "195a3c32d1d4bb9efdf7f4bb18c5aedb982245c8a1119a4357cf5001efc291f1",
+      "bytes": 22420608,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-focused-hosted-002/incant_script-7029454b4fcb87b0",
+      "path": "binaries-focused-hosted-002/incant_script-7029454b4fcb87b0",
+      "sha256": "e669cc57d69f8c06ba519676745edf71957a2a3a47e84c67ed0de5a9dc94f8b3",
+      "bytes": 22420560,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-hosted-physics-001/binaries-focused-hosted-003/incant_script-7029454b4fcb87b0",
+      "path": "binaries-focused-hosted-003/incant_script-7029454b4fcb87b0",
+      "sha256": "ad65b40c9e6da98f604c578092053378081f4b95ff873c0a28f76bd4f7da8362",
+      "bytes": 22428144,
+      "mode": "0o755"
+    }
+  ],
+  "test_summaries": {
+    "all-det-002.log": 199,
+    "all-fast8-002.log": 199,
+    "all-det-003.log": 200,
+    "all-fast8-003.log": 200,
+    "feature-off-002.log": 14,
+    "feature-off-003.log": 14,
+    "focused-hosted-002.log": 13,
+    "focused-hosted-003.log": 14
+  },
+  "limits": [
+    "Independent root source002 and source003 reviews retained. Final execution audit separate.",
+    "Source001 failed missing-font fixture and inherited headless host-refusal precedence controls; raw failure/binary retained.",
+    "Source002 broad199 cases per mode precede silent-owner preservation; final source003 broad200 cases per mode include that additional control.",
+    "Library executable copies retained immediately. Integration/doc tests have exact logs, not copied executables.",
+    "Focused counts overlap full suites. UI uses CPU measurement fixture; real offline mixer control is silent. Real mixed PCM game proof is separate.",
+    "No arbitrary VM heap, Wasm state, device audio rewind, exported player, GPU or persisted physics admission claim."
+  ]
+}
