@@ -1,0 +1,38 @@
+{
+  "reviewed_at": "2026-10-13T06:33:49.646786+00:00",
+  "reviewer": "astra/integrate_runtime_prs",
+  "scope": "CPU-only timestamp envelope decoder and observable regression; no visual or GPU execution acceptance",
+  "base": "f33495b2211ac37f172cd83e2552b2041df2357f",
+  "patch": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/gpu-frame-envelope-source-20261013.patch",
+    "sha256": "73c5436c00863bb6789b5f961e98beb162eb5392e455fe270169a1073c288921"
+  },
+  "sources": [
+    {
+      "path": "crates/incant_render/src/timing/mod.rs",
+      "sha256": "9789d47afbef6bdf086ae42cc4ffe07f8519de81f1410a76243366646d11357a"
+    },
+    {
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "sha256": "ed0ff504313a909fbe262dfacb02d6edf85d869cd4963c34f1e725267f13aa87"
+    },
+    {
+      "path": "crates/incant_render/src/timing/tests.rs",
+      "sha256": "cdcb9ca717c73f4b16a0ba16ec856bed9de30b3da64770c26d483b90ebaf7867"
+    }
+  ],
+  "findings": [],
+  "verdict": "accepted source; final changed-source check results must be retained by producer",
+  "reasoning": [
+    "Frame interval is min validated start to max validated end across allocated pairs, so overlapping and out-of-encoding-order groups remain enclosed without summing overlap.",
+    "Even count and aligned in-bounds pass indices prevent malformed count/index access and avoid index+1 overflow. Every pair is validated even when unlabelled.",
+    "The wider-than-half-u64 envelope refuses ambiguous between-pair wrap; this is a conservative counter-domain restriction, not an adapter-specific modulus or measured duration claim.",
+    "Per-pass labels and raw spans are unchanged. Timestamp writes, GPU submission/resolve, query lifetime and bounded pool ownership are unchanged.",
+    "New test exercises overlap/extrema, exact interval, pass containment, odd/out-of-range/max indices, reversed unlabelled pair, odd count and ordered pairs across wrap."
+  ],
+  "limitations": [
+    "No new GPU run or rendered-pixel review by reviewer.",
+    "No inference that all frame work is instrumented; public docs explicitly exclude uninstrumented work and presentation.",
+    "Motion is a separate render pass and requires its own instrumentation or explicit scope exclusion in future composition."
+  ]
+}

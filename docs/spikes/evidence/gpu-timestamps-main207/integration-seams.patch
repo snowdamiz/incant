@@ -1,0 +1,90 @@
+diff --git a/crates/incant_render/src/graph.rs b/crates/incant_render/src/graph.rs
+index b12dd7aa..d1fdb303 100644
+--- a/crates/incant_render/src/graph.rs
++++ b/crates/incant_render/src/graph.rs
+@@ -25,6 +25,7 @@ enum Pass {
+ pub(crate) struct PreparedFrame {
+     pub diagnostics: DiagnosticDraw,
+     pub models: Option<ModelDraw>,
++    pub motion: Option<crate::motion::MotionDraw>,
+     pub sprites: Option<crate::sprites::SpriteDraw>,
+     pub text: Option<crate::text::TextDraw>,
+     pub output: OutputDraw,
+@@ -218,6 +219,11 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+     }
+ }
+ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
++    // Retained motion is deliberately uninstrumented; Models covers only the
++    // following model pass. GpuFrameTiming documents this coverage boundary.
++    if let Some(pass) = &frame.motion {
++        pass.encode(&mut encoder.0);
++    }
+     if let Some(pass) = &frame.models {
+         encoder.timed(crate::timing::GpuPass::Models, |e, q| pass.encode(e, q));
+     }
+diff --git a/crates/incant_render/src/lib.rs b/crates/incant_render/src/lib.rs
+index 80ee0669..f7337be4 100644
+--- a/crates/incant_render/src/lib.rs
++++ b/crates/incant_render/src/lib.rs
+@@ -45,6 +45,7 @@ use bytemuck::{Pod, Zeroable};
+ use glam::{Mat4, Vec3};
+ pub use incant_render_data::{SceneInput, ScenePreparer};
+ pub use lighting::LocalLightSelection;
++pub use models::motion;
+ pub use models::{RenderScene, RetainedScene, RetainedTarget};
+ pub use resource_error::{PreparationError, ResourceError};
+ pub use scene::{SceneError, SceneStats};
+@@ -98,6 +99,7 @@ pub struct Renderer {
+     frames: frame::FrameCache,
+     output: output::OutputPass,
+     graph: graph::FrameGraph,
++    motion: Option<motion::MotionSystem>,
+ }
+ impl Renderer {
+     pub async fn new(
+@@ -203,6 +205,7 @@ impl Renderer {
+             frames: Default::default(),
+             output,
+             graph,
++            motion: None,
+         })
+     }
+     pub fn headless() -> Result<Self> {
+@@ -299,6 +302,7 @@ impl Renderer {
+                 viewport,
+             },
+             resolution::ResolutionScale::FULL,
++            None,
+         )
+     }
+     fn draw_scene_scaled(
+@@ -306,6 +310,7 @@ impl Renderer {
+         scene: &RenderScene,
+         target: RetainedTarget<'_>,
+         scale: resolution::ResolutionScale,
++        motion: Option<motion::MotionDraw>,
+     ) -> Result<wgpu::CommandBuffer> {
+         let RetainedTarget {
+             view,
+@@ -377,6 +382,7 @@ impl Renderer {
+             graph::PreparedFrame {
+                 diagnostics,
+                 models,
++                motion,
+                 sprites,
+                 text,
+                 output,
+diff --git a/crates/incant_render/src/timing/mod.rs b/crates/incant_render/src/timing/mod.rs
+index c2fdfe57..f8ae28cc 100644
+--- a/crates/incant_render/src/timing/mod.rs
++++ b/crates/incant_render/src/timing/mod.rs
+@@ -45,7 +45,8 @@ pub struct GpuFrameTiming {
+     pub sequence: u64,
+     pub timestamp_period_ns: f32,
+     /// Earliest start through latest end of all instrumented pass groups.
+-    /// Includes overlap once; excludes uninstrumented work and presentation.
++    /// Counts overlap/gaps once; does not attribute uninstrumented work or
++    /// presentation. The separate retained motion pass has no query pair.
+     pub frame: GpuSpan,
+     /// Indexed in `GpuPass::ALL` order. Absent passes are None, never fake zeros.
+     pub passes: [Option<GpuSpan>; GPU_PASS_COUNT],
