@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "archive_sha256": "96a655c0a18a751bb2e383b4fe7865e1e8c643a42f7f28e41986eb846f06ea82",
+  "records_and_originals_rehashed": 1202,
+  "payloads_rehashed": 360,
+  "external_binaries_rehashed": 24,
+  "kind": "producer retention integrity; independent review separate"
+}

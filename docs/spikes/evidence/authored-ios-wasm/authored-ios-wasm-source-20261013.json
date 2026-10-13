@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T00:40:43.127873+00:00",
+  "decision": "source accepted for actual authored iOS Wasm archive/caller experiment",
+  "source_inventory": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-wasm-001/source-001/inventory.json",
+  "source_sha256": "a04fdfca7a048789faf24e79c6b3419ed54d6827df7b1c96a327e02c87b88092",
+  "exact_files": 10,
+  "inspection": [
+    "Fixed iOS destinations only; native/mobile caller ABI and runtime unchanged",
+    "Public selector refuses mixed or unknown scene program; static module feature only selected authored Wasm",
+    "Original/prepared module, registry and complete trusted generated bundle identities remain bound",
+    "Private engine-owned bundle never loads native project sources; bounded regular inputs and exact generated file set",
+    "Actual target C compiler audit covers destination/SDK, all5 C sources, bounds/stack/FP flags; capture removes SDKROOT from host build",
+    "Native exporter legacy default runner preserved; successful archive publication remains atomic"
+  ],
+  "limits": [
+    "Actual archives, C/Swift simulator execution and unsigned device links pending",
+    "Android merge must retain separate static Wasm refusal until reviewed",
+    "No physical-device, performance, signing, whole module checkpoint or phase gate acceptance"
+  ]
+}

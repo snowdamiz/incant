@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-13T00:43:57.919302+00:00",
+  "decision": "source002 and probe001 accepted for actual target archive/caller runs",
+  "identities": {
+    "source-002": "87911aa65636f22e312a86a0023a6ed3af50f5a704f2c37ee7f528568581e51a",
+    "probe-001": "e9772b72ca0eb4c79160137bfd9eb4e059e79e489b083291942cbf65f23c67e9"
+  },
+  "review": [
+    "Explicit static mobile Wasm iOS-only guard protects future Android TypeScript admission",
+    "Public import and command transaction, Undo/Redo/reopen; source removal checks",
+    "Independent native oracle186fields per tick plus248boundedchecks; actual desired state and nonzero/paused PCM, repeated Wasmtime parity",
+    "Exact C/Swift simulator ABI, logs/state/PCM; six guest failures; unchanged checksummed opposite-mode runtime",
+    "Device path links only and reports no execution; private cleanup simulator finally",
+    "No appearances/deviceperformance/signing/fullsave claims"
+  ]
+}

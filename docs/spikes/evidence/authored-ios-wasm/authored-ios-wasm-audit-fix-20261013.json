@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T00:59:20.728451+00:00",
+  "decision": "accepted_source_only_observer_correction",
+  "reviewer": "astra/root",
+  "freeze_sha256": "65b4019883bc1c20ee484e4de11acee831c412854a8840771c47a27e41d29f77",
+  "files": [
+    {
+      "path": "tools/export_ios.py",
+      "sha256": "0880ea37aae5e33e9198b40a0892bbfd845d065ee17225304751db210327f08e",
+      "bytes": 12915,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-wasm-001/audit-fix-001/tools/export_ios.py"
+    },
+    {
+      "path": "tools/ios_wasm.py",
+      "sha256": "4662e6377ca8fca08b1de1df4a5c971c6aace49659d2dd5635b67afe62626105",
+      "bytes": 8766,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-wasm-001/audit-fix-001/tools/ios_wasm.py"
+    },
+    {
+      "path": "tools/tests/test_ios_wasm.py",
+      "sha256": "92816a5d9ac6012aa7676b347df651c2958a1cf30cbfddf78bc3ab3e7d2ef7d7",
+      "bytes": 10198,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-wasm-001/audit-fix-001/tools/tests/test_ios_wasm.py"
+    },
+    {
+      "path": "tools/tests/fixtures/ios-wasm-cargo.txt",
+      "sha256": "0e4122134a8f1cdad5408913753d2e15d1a42b90a35b3c3f06a545af78ec439c",
+      "bytes": 7208,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-wasm-001/audit-fix-001/tools/tests/fixtures/ios-wasm-cargo.txt"
+    }
+  ],
+  "basis": "Read both production diffs, all new regression tests and normalized actual Cargo transcript. stdout JSON binds one unique static-runtime build-script output; exact flag_check path/output/O0 accepted separately while five C sources retain compiler/target/SDK/flags checks. No Rust, C, guest or ABI changes.",
+  "limits": [
+    "Repackaging/reuse evidence still pending; this receipt is not shipped execution acceptance."
+  ]
+}
