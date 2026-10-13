@@ -292,8 +292,27 @@ def verify_helper_lock():
     own = [k for k in helper if k[0] == HELPER_PACKAGE]
     foreign = [f"{k[0]} {k[1]}" for k in helper if k[0] != HELPER_PACKAGE and k not in root]
     checksum = [f"{k[0]} {k[1]}" for k in helper if k in root and helper[k][0] != root[k][0]]
-    added = {f"{k[0]} {k[1]}": sorted(set(helper[k][1]) - set(root[k][1]))
-             for k in helper if k in root and set(helper[k][1]) - set(root[k][1])}
+    # Cargo shortens dependency references after pruning versions. Resolve
+    # references against each lock's package identities before comparing edges.
+    def edges(key, packages):
+        resolved = set()
+        for reference in packages[key][1]:
+            match = re.fullmatch(r"([^ ]+)(?: ([^ ()]+))?(?: \((.+)\))?", reference)
+            if match is None:
+                raise Refused(f"unknown lock dependency reference {reference!r}")
+            name, version, source = match.groups()
+            choices = [p for p in packages if p[0] == name
+                       and (version is None or p[1] == version)
+                       and (source is None or p[2] == source)]
+            if len(choices) != 1:
+                raise Refused(f"ambiguous lock dependency reference {reference!r}: {choices}")
+            resolved.add(choices[0])
+        return resolved
+    added = {}
+    for key in helper.keys() & root.keys():
+        extra = edges(key, helper) - edges(key, root)
+        if extra:
+            added[f"{key[0]} {key[1]}"] = [list(k) for k in sorted(extra, key=repr)]
     record = {"repository_lock_sha256": c.sha256_file(c.ROOT / "Cargo.lock"),
               "helper_lock_sha256": c.sha256_file(c.HELPER / "Cargo.lock"),
               "repository_packages": len(root), "helper_packages": len(helper),
