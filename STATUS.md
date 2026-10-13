@@ -34,7 +34,7 @@ all 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
 Checkpoint18 Linux and Windows desktop jobs both fail compiling the editor test
 that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
-passes local compile/CPU/Clippy checks and awaits final review; production and backend
+passes local compile/CPU/Clippy checks and final review; production and backend
 assertions are unchanged. Other candidate jobs continue without an advance.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance

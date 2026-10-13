@@ -198,5 +198,14 @@
     "No local GPU execution or actual hosted repair success claimed; checkpoint18 remains frozen and unpromoted",
     "Local macOS compilation and CPU tests do not substitute for Linux/Windows full release checks"
   ],
-  "review_state": "Final independent execution review pending"
+  "review_state": "Independent final review accepted",
+  "final_review": {
+    "path": "docs/spikes/evidence/editor-renderer-import/final-review.json",
+    "sha256": "4ff73baf494cd34e09cade416df325daebe564c6a8340a8afdc0e58fc3d38ad4"
+  },
+  "additional_hosted_failure": {
+    "path": "docs/spikes/evidence/editor-renderer-import/macos-failure.json",
+    "sha256": "7a87a4867db864f83865639c363ba0cbceb359fa1e52a0fe74f311bb7194e0da",
+    "scope": "Third same-cause macOS check failure; prior two-job archive unchanged"
+  }
 }

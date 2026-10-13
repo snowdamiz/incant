@@ -21,4 +21,6 @@ codes were101; correcting that assertion changed no source or command result.
 
 Checkpoint18 remains frozen and unpromoted while its other jobs finish. The next
 reviewed candidate must pass all23 required contexts; a local compile does not
-satisfy that release requirement. Final integration review is pending.
+satisfy that release requirement. [Final integration review](evidence/editor-renderer-import/final-review.json) is accepted.
+A subsequently completed macOS checkpoint job reports the same E0425; its exact
+log is retained separately without rewriting the original two-job archive.

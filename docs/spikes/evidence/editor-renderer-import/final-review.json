@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-13T03:46:03.889734+00:00",
+  "reviewer": "root",
+  "accepted": true,
+  "head": "b23919b1a234ae3ac430c5d8b14586a318db22a4",
+  "manifest_sha256": "9856ee1b69215f11384309042d898c4a731e62ecce9a72d401c299aaceec6810",
+  "patch_sha256": "a7b9542b70171d1aca5ef17ce4b3be6130f34ce2104a92686240b6be39d543d3",
+  "verification": {
+    "passed": true,
+    "frozen_inputs": 2029,
+    "checks": 6,
+    "editor_cpu": {
+      "passed": 1,
+      "ignored_gpu": 1
+    },
+    "renderer_cpu": {
+      "passed": 1,
+      "filtered_out": 95
+    },
+    "failed_hosted_jobs": 2,
+    "production_unchanged": true,
+    "gpu_executed": false
+  },
+  "independent_archive_check": {
+    "records": 19,
+    "payloads": 13,
+    "original_bytes_equal": true
+  },
+  "source_review": "Reviewed the two-line test-only repair. Import resolves shared support crate-root type; checked wrapper retains backend assertion and applies it to editor GPU renderer. No production changes.",
+  "limits": [
+    "No local GPU execution",
+    "No corrected hosted success claimed",
+    "Checkpoint18 remains frozen and unpromoted"
+  ]
+}
