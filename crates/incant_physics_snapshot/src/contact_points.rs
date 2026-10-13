@@ -132,9 +132,19 @@ pub fn validate_contact_points(
     record: ContactPointsRecord,
     _budget: &mut Budget,
 ) -> Result<ValidatedContactPoints> {
-    let d = record.identity.dimension;
-    contact_lengths(d, record.points.len(), record.solver.len())?;
-    for p in &record.points {
+    validate_contact_slices(record.identity.dimension, &record.points, &record.solver)?;
+    // O(points + solver), no scratch allocation. Already-owned input allocation
+    // is the caller's responsibility; decode charges all requested Vec payloads.
+    Ok(ValidatedContactPoints { record })
+}
+
+pub(crate) fn validate_contact_slices(
+    d: Dimension,
+    points: &[TrackedContactPoint],
+    solver: &[SolverContactPoint],
+) -> Result<()> {
+    contact_lengths(d, points.len(), solver.len())?;
+    for p in points {
         vector(p.local_p1, d)?;
         vector(p.local_p2, d)?;
         finite(p.distance)?;
@@ -161,16 +171,14 @@ pub fn validate_contact_points(
             return Err(Error::Contact);
         }
     }
-    for s in &record.solver {
+    for s in solver {
         vector(s.anchor1, d)?;
         vector(s.anchor2, d)?;
         vector(s.tangent_velocity, d)?;
         finite(s.distance)?;
-        if s.padding != 0 || s.point_index() as usize >= record.points.len() {
+        if s.padding != 0 || s.point_index() as usize >= points.len() {
             return Err(Error::Contact);
         }
     }
-    // O(points + solver), no scratch allocation. Already-owned input allocation
-    // is the caller's responsibility; decode charges all requested Vec payloads.
-    Ok(ValidatedContactPoints { record })
+    Ok(())
 }

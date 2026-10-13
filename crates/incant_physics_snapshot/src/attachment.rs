@@ -45,6 +45,9 @@ pub struct ValidatedAttachments<'a> {
     colliders: &'a ValidatedArena,
 }
 impl ValidatedAttachments<'_> {
+    pub fn collider_row(&self, collider: Handle) -> Option<u32> {
+        self.colliders.lookup(collider)
+    }
     pub fn record(&self) -> &AttachmentRecord {
         &self.record
     }

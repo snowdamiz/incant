@@ -9,6 +9,7 @@ mod attachment_codec;
 mod coarena;
 mod coarena_codec;
 mod codec;
+mod contact_manifolds;
 mod contact_points;
 mod contact_points_codec;
 mod geometry;
@@ -25,6 +26,7 @@ pub use attachment_codec::{decode_attachments, encode_attachments};
 pub use coarena::*;
 pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
+pub use contact_manifolds::*;
 pub use contact_points::*;
 pub use contact_points_codec::{decode_contact_points, encode_contact_points};
 pub use geometry::*;
@@ -54,6 +56,8 @@ pub enum Error {
     Generation,
     Adjacency,
     Contact,
+    PendingMutation,
+    Manifold,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

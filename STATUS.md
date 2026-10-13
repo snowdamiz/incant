@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Exact physics saves — inert manifold ownership verified locally
+
+The std-only inert format now joins contact edges to exact collider generations,
+current body parents and checked child geometry, preserving fixed manifold
+metadata and ordered plain/cluster point rows. Pending mutation journals return
+an explicit typed refusal. Actual planar/spatial native tests observe nonzero
+warm starts, removal/reuse and mixed-child cluster coordinate transforms.
+79 CPU tests, Clippy, wasm32 and dependency guards pass; independent review is
+pending. Solver/island reciprocal ownership, dispatcher/recycle payloads, full
+world composition and live/save admission remain open.
+[Manifold contract](docs/spikes/physics-inert-manifolds.md).
+
 ## Exact physics saves — inert contact leaf payloads verified locally
 
 The next std-only inert component preserves complete tracked-point warm-start
