@@ -1,3 +1,39 @@
+# Priority revision: execute the accepted generation-5 GPU-only review
+
+This revision supersedes the earlier preparation-only restrictions for this invocation.
+Use the existing worktree. ACP must verify Claude Opus 5.5 and thinking Max before
+prompting; confirm the verified header before running. Root reviewed the GPU-only
+wrapper at 0351d93e and its seven CPU guard tests and exact-input preflight passed.
+0073 released the GPU at 08:23:36Z with every child reaped. You now own the sole
+GPU interval for this packet. Do not build, recook, edit source, or use a Cargo target.
+
+Read gpu-proposal.md and cpu-result.md. Root authority is
+/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready.json
+with SHA256 6b8064c83fefc0b0b51e752809603bc012f7f84cfe9680082dab3648b82f987e. Wrapper gpu_only.py SHA256
+e3530e5d51c4a09d6f4b3f803b1c5aaddfd93c2d32f35f5e489c0a6bb464ae71. Root review is
+/Users/andreyyurlov/.codex/incant-reviews/core0069-gpu-wrapper-root-20261013.json.
+
+Run once, in the foreground (no background process or automatic retry):
+
+    python3 -B handoffs/0069-core-result-presentation/gpu_only.py run --evidence /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-001 --authority /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready.json
+
+This runs the eight exact GPU regressions (39 tiny frames), then the ten exact
+capture processes (22 appearance frames). The wrapper releases on every outcome;
+verify its release record and no owned processes before returning. A failure stops
+this attempt; retain it and report, without changing gates, sources or authority.
+After a successful run inspect every retained image yourself, including narrow,
+RTL, CJK, pseudolocalized, win/loss/restart states and text contrast. Appearance
+is your judgment. Give a clear scoped verdict; do not substitute numerical passes.
+Write gpu-result.md and a compact provenance manifest linking immutable external
+reports and the CPU packet, and commit only your new packet evidence/result with
+Built-by: claude. Preserve all prior failures and original CPU files. No push/PR.
+If repairs are needed, describe them and stop after release; root coordinates a
+fresh source/build interval. No desktop capture, native window, device audio,
+persistent memory, other checkouts, or unrelated edits. No phone/performance or
+phase-gate claim. Report source, frames, regressions, images, release, and limitations.
+
+---
+
 # Priority revision: finalize prepared halo source for CPU review
 
 Root has read the prepared halo implementation and renderer/paint integration;
