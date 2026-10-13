@@ -1,0 +1,36 @@
+{
+  "format": "incant-world-checkpoint-intake-preparation",
+  "base_main": "27e666be45433fe82228639708f7914e0caa8196",
+  "accepted_helper": "6252f4eeb0a7f214fa28a02be6737a78d5e95566",
+  "source_rows": [
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint.rs",
+      "sha256": "bffb719bddc6208eaf3bf9dd2e3cae513e8f6cb3d81724f4a6fdb415bf672572"
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/checkpoint/tests.rs",
+      "sha256": "d9a517bb79eb0cffdd068a1c171fbaeb7799213a13444056ade78b9f1ea328d5"
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/src/lib.rs",
+      "sha256": "c098ff861d12bedc7bc7f5dee18ae3a43b2bd4f738626f43af9120d07fef17c9"
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint.rs",
+      "sha256": "eec3f92fa2a1dbfb026f5d8ed7401ae9bd577db82a4cbf78aea86ac8e8d1d144"
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/checkpoint/tests.rs",
+      "sha256": "7c1448dac8b6f3801125a634e68aa50c10d154269fbaf88f7e2cea92debfefe1"
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/lib.rs",
+      "sha256": "becf7eea6771d86a8e98d44571cb7b1b658ea9ac5beaeb551576e80dc7c0b2ea"
+    }
+  ],
+  "review": {
+    "path": "docs/spikes/evidence/world-checkpoints-main245/physics-checkpoint-configurations-root-20261013.json",
+    "sha256": "6c19d0fb9a830261325aae281c9b468e5c56d21e171faf467c292c6691c3230e"
+  },
+  "state": "Private baseline only; aggregate source004/final packet pending. No new build, execution, PR or publication."
+}
