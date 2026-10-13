@@ -26,9 +26,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main209, 2026-10-13
+## Current overview — main211, 2026-10-13
 
-Development main209 includes the reviewed opt-in cooked renderer families and
+Development main211 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -38,7 +38,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–209 changes remain outside that baseline. No device, performance or
+Later main206–209 runtime changes and main210 documentation remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
@@ -66,6 +66,21 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Physics world continuation — trusted native proof, live saves still closed
+
+The [joined rigid owner slice](docs/spikes/physics-world-continuation.md) now checks
+solver buckets, color masks, pair hints, force-event caches and stamp-sensitive
+sleep scans against the existing inert witnesses. Actual trusted native 2D/3D
+reconstruction continues identically through contacts, sleep/wake, removal and
+handle reuse; omitted scan state has a failing near-wrap control. Final default
+121 cases and two overlapping 20-case parallel mode suites pass, along with
+Clippy, runtime/wasm/compiler identity and tooling checks. The default-off pinned
+Rapier adapter stays absent from ordinary runtime compiler features.
+
+[The execution packet](docs/spikes/physics-world-continuation-results.md) has independent source and final evidence acceptance; current-main
+qualification is independently accepted; publication awaits the fast check. No hostile live constructor or engine save admission
+is enabled; complete collider/manager/joint/phase composition remains pending.
+
 ## GPU timestamps — device review passed; concurrent interval corrected
 
 Claude's bounded default-feature Metal review passes92 actual GPU/regression cases

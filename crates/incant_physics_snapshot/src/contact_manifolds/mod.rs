@@ -42,7 +42,7 @@ pub struct ContactPairManifolds {
 
 /// All fixed native ContactManifold / ContactManifoldData fields, plus spans
 /// into shared ordered contact arrays. Only solver color/index/position scalar
-/// domains are checked here; reciprocal solver-graph/island ownership is pending.
+/// domains are checked here; the joined rigid owner checks reciprocal solver state.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub struct ContactManifoldRecord {
     pub points: RecordSpan,
@@ -78,6 +78,15 @@ pub struct ValidatedManifolds<'a> {
     context: ManifoldContext<'a>,
 }
 impl<'a> ValidatedManifolds<'a> {
+    pub(crate) fn edge_row(&self, edge: u32) -> Option<usize> {
+        self.context
+            .graph
+            .record()
+            .edges
+            .get(edge as usize)
+            .map(|e| e.row as usize)
+    }
+
     pub(crate) fn attachments(&self) -> &'a ValidatedAttachments<'a> {
         self.context.attachments
     }

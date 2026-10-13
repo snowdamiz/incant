@@ -45,3 +45,7 @@ docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/script.
 docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/transport-unification.log -text whitespace=-blank-at-eof
 # Preserve the leading space on the retained source-relevance diff context lines.
 docs/spikes/evidence/native-cpu-profiler-main194/source-relevance.patch -text whitespace=-blank-at-eol
+
+# Preserve exact pinned Rapier upstream comment whitespace.
+third_party/rapier2d/src/dynamics/rigid_body.rs whitespace=-blank-at-eol
+third_party/rapier3d/src/dynamics/rigid_body.rs whitespace=-blank-at-eol

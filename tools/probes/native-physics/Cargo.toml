@@ -21,6 +21,8 @@ wasm-bindgen = "=0.2.126"
 
 # Standalone workspaces do not inherit the engine workspace's source patches.
 [patch.crates-io]
+rapier2d = { path = "../../../third_party/rapier2d" }
+rapier3d = { path = "../../../third_party/rapier3d" }
 rerecast = { path = "../../../third_party/rerecast" }
 parry2d = { path = "../../../third_party/parry2d" }
 parry3d = { path = "../../../third_party/parry3d" }

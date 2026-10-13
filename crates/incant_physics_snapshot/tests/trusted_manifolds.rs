@@ -1,13 +1,19 @@
-//! Actual completed pinned native worlds, observed one-way. No live deserialize.
+//! Native owner observation plus explicitly trusted continuation diagnostics.
+//! No hostile native deserialization or production live-save admission.
 use incant_physics_snapshot::*;
 use serde_json::Value;
 #[path = "support/body_capture.rs"]
 mod body_capture;
 #[path = "support/island_capture.rs"]
 mod island_capture;
+#[path = "support/rigid_owner_capture.rs"]
+mod rigid_owner_capture;
 #[macro_use]
 #[path = "support/island_cases.rs"]
 mod island_cases;
+#[macro_use]
+#[path = "support/continuation_cases.rs"]
+mod continuation_cases;
 #[path = "support/ordered_capture.rs"]
 mod ordered_capture;
 fn budget() -> Budget {
@@ -235,6 +241,63 @@ fn captured_pair(value: &Value, r: &mut PairStateTable) {
         },
     });
 }
+fn check_owner_corruption(r: RigidOwnerRecord, c: RigidOwnerContext<'_>, bytes: &[u8]) {
+    let mut mutations = vec![];
+    let mut bad = r.clone();
+    bad.sleep_scan_stamp = bad.sleep_scan_stamp.wrapping_add(1);
+    mutations.push(bad);
+    let mut bad = r.clone();
+    bad.sleep_scan_touched = 1;
+    mutations.push(bad);
+    let mut bad = r.clone();
+    bad.force_flagged.push(0);
+    mutations.push(bad);
+    if !r.sleep_scan.is_empty() {
+        let mut bad = r.clone();
+        bad.sleep_scan.clear();
+        mutations.push(bad);
+    }
+    if let Some(pair) = c.pairs.record().pairs.iter().find(|p| p.solver_color < 128) {
+        let mut bad = r.clone();
+        bad.body_color_masks[pair.solver_color_bodies[0] as usize] &= !(1u128 << pair.solver_color);
+        mutations.push(bad);
+    }
+    if !r.pair_hints.is_empty() {
+        let mut bad = r.clone();
+        bad.pair_hints[0] = 65536;
+        mutations.push(bad);
+    }
+    if !r.references.is_empty() {
+        let mut bad = r.clone();
+        bad.references[0].edge = u32::MAX;
+        mutations.push(bad);
+    }
+    if !r.force_positions.is_empty() {
+        let mut bad = r.clone();
+        bad.force_positions[0] = if bad.force_positions[0] == u32::MAX {
+            0
+        } else {
+            u32::MAX
+        };
+        mutations.push(bad);
+    }
+    for bad in mutations {
+        assert!(validate_rigid_owner(bad, c, &mut budget()).is_err());
+    }
+    for cut in [0, 1, 43, 99, bytes.len() - 1] {
+        assert!(decode_rigid_owner(&bytes[..cut], c, &mut budget()).is_err());
+    }
+    let mut trailing = bytes.to_vec();
+    trailing.push(0);
+    assert!(decode_rigid_owner(&trailing, c, &mut budget()).is_err());
+    let mut bad = bytes.to_vec();
+    bad[68..72].copy_from_slice(&u32::MAX.to_le_bytes());
+    assert!(decode_rigid_owner(&bad, c, &mut budget()).is_err());
+    assert!(matches!(
+        decode_rigid_owner(bytes, c, &mut Budget::new(0).unwrap()),
+        Err(Error::Limit)
+    ));
+}
 macro_rules! cases {
     ($name:ident,$rapier:ident,$dim:ident,$vector:path,$cuboid:path,$bits:path,$data:path,$posebits:path) => {
         mod $name {
@@ -368,6 +431,9 @@ macro_rules! cases {
                 r
             }
             fn observe(w: &PhysicsWorld, pending: bool) -> Option<ManifoldTable> {
+                observe_with_owner(w,pending).map(|(m,_)|m)
+            }
+            fn observe_with_owner(w: &PhysicsWorld, pending: bool) -> Option<(ManifoldTable,RigidOwnerRecord)> {
                 let bv = serde_json::to_value(&w.bodies).unwrap();
                 let cv = serde_json::to_value(&w.colliders).unwrap();
                 let (ba, bh) = layout(&bv["bodies"], identity());
@@ -473,7 +539,7 @@ macro_rules! cases {
                         );
                     }
                 }
-                check_islands(w, &a, &v);
+                let owner=check_islands(w, &a, &v);
                 let bytes = encode_manifolds(&v, &mut budget()).unwrap();
                 let loaded = decode_manifolds(&bytes, c, &mut budget()).unwrap();
                 assert_eq!(loaded.record(), &t);
@@ -487,9 +553,10 @@ macro_rules! cases {
                         &t.points[m.points.start as usize..(m.points.start + m.points.count) as usize]
                     );
                 }
-                Some(t)
+                Some((t,owner))
             }
             island_cases!($rapier, $vector, $cuboid);
+            continuation_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;

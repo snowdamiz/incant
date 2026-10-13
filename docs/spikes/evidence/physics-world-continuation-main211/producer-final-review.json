@@ -1,0 +1,73 @@
+{
+  "at": "2026-10-13T09:08:42.917868+00:00",
+  "reviewer": "astra /root/native_wasm_export",
+  "status": "accepted scoped final delta and execution evidence; no findings",
+  "commit": "922308128de18b8a82882d0b9112f6f3ff0f14dd",
+  "manifest_sha256": "42a59ea03dc36b74de6accdf21db9224219efef6088a6096421e7b1dba2b4902",
+  "source_freeze_sha256": "09936373f129de39423ebc10ed4934f3b960363365bc814d427b5beb1491c6be",
+  "source001_sha256": "1591325b3ec33a98789f95f6b1c31c68717a7518b5dbf6c311cfa53e8352cdea",
+  "delta_sha256": "dec76dfe6375ef57d2b9bcba24cdcb812b53bcff7aa62a136e17ed6de4aaf2f7",
+  "scope": [
+    "Read all19 source001-to003 changes, full snapshot feature manifest, exact vendor modification notices and license provenance.",
+    "Read precise negative-test corrections: wrong path and foreign package keep current correct versions, preventing accidental version-only refusal.",
+    "Verified no normal/build dependencies in snapshot; final normal graph contains root alone; numerical selection forwards only diagnostic dev solver edges.",
+    "Read explicit source001 qualification for normal runtime/Wasm/compiler records and unchanged algorithm/default source; no fresh execution inferred from003.",
+    "Read final collector; ran --verify-only without builds, and independently rehashed every lossless/raw source and binary reference.",
+    "Reviewed two exact .gitattributes paths outside source freeze; upstream rigid_body bytes remain original."
+  ],
+  "verified": {
+    "current_copy_git_sources": 651,
+    "delta_rows": 19,
+    "lossless_records": 761,
+    "payloads": 480,
+    "binary_identities": 5,
+    "final_commands": 11,
+    "tooling_commands": 2,
+    "counts": {
+      "snapshot-default": {
+        "passed": 121,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 18
+      },
+      "continuation-fast-parallel": {
+        "passed": 20,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1
+      },
+      "continuation-simd8-parallel": {
+        "passed": 20,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1
+      }
+    },
+    "python_tests_run": 369,
+    "python_skipped": 4,
+    "licenses": [
+      {
+        "package": "rapier2d",
+        "vcs_commit": "b716d375efc0201003f0cd9ef7168eee0b62c177",
+        "registry_dirty": true,
+        "license_sha256": "ceacfa4d7fa67df64ab09a56fe248c50a3bfc9bc00374d69bd74ad763b14b89c",
+        "license_git_blob": "97f4383a35a48ddd50566a879e836491d2fe9b75"
+      },
+      {
+        "package": "rapier3d",
+        "vcs_commit": "b716d375efc0201003f0cd9ef7168eee0b62c177",
+        "registry_dirty": true,
+        "license_sha256": "ceacfa4d7fa67df64ab09a56fe248c50a3bfc9bc00374d69bd74ad763b14b89c",
+        "license_git_blob": "97f4383a35a48ddd50566a879e836491d2fe9b75"
+      }
+    ]
+  },
+  "findings": [],
+  "limits": [
+    "This review adds no native test rerun, new build, GPU or remote lookup.",
+    "Source001 core validator/adapter acceptance is inherited from root receipt ba2d68eb; this is the final19-row addendum and execution audit, not a duplicate whole-source safety proof.",
+    "Trusted same-owner serde continuation does not admit hostile live restores; PhysicsUnsupported stays closed.",
+    "Normal solver target compile/runtime/wasm evidence remains source001-qualified; final003 repeats affected snapshot modes, Clippy, identity and tools.",
+    "No shipping/device/performance/phase acceptance."
+  ]
+}

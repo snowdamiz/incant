@@ -1,0 +1,144 @@
+{
+  "producer": "922308128de18b8a82882d0b9112f6f3ff0f14dd",
+  "main": "70e7aa2ee25f49fe6fcf7e67264a559cc60d33b0",
+  "base": "8c1db376fc8c3e6651a353112c58ba66515f6733",
+  "frozen_inputs": 651,
+  "all_frozen_inputs_exact": true,
+  "changed_build_source_paths": [
+    "crates/incant_wasm_runtime/Cargo.toml"
+  ],
+  "old_new_path_hashes": {
+    "old": "0a84dcaea2e06cfc9f1f54bd333eeb6acde797e5197e8a609f0ff28f589710ff",
+    "new": "4cd3c7888d57d7c20c600ed2f34efec21ee32bd9c0b2134828a25adfb160e265"
+  },
+  "normal_graph_sha256": "2fd74deb52014a0d03f6b58e2487ba50ff6b1bb606d3b3db60eff7f21332946f",
+  "collector_summary": {
+    "passed": true,
+    "frozen_files": 651,
+    "final_checks": 11,
+    "tooling_checks": 2,
+    "actual_counts": {
+      "snapshot-default": {
+        "passed": 121,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 18,
+        "nonempty_groups": 17
+      },
+      "continuation-fast-parallel": {
+        "passed": 20,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1,
+        "nonempty_groups": 1
+      },
+      "continuation-simd8-parallel": {
+        "passed": 20,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1,
+        "nonempty_groups": 1
+      }
+    },
+    "runtime_tests": 18,
+    "modes": "default deterministic, fast parallel, simd8 parallel; earlier deterministic parallel preserved",
+    "continuation": "3 checkpoints x100 steps x2 dimensions per mode; exact serialized owner, skipped scan, collision/bitwise force events",
+    "wrap": "synthetic counter placement near u32MAX, actual native scan step and32 subsequent steps; serde-only omission must diverge",
+    "normal_snapshot_graph": "std-only",
+    "normal_solver_adapter_enabled": false,
+    "vendors": [
+      {
+        "name": "rapier2d",
+        "upstream_files": 288,
+        "changed": [
+          "Cargo.toml",
+          "Cargo.toml.orig",
+          "src/dynamics/island_manager/mod.rs",
+          "src/dynamics/island_manager/persistent.rs",
+          "src/dynamics/mod.rs"
+        ],
+        "license_sha256": "ceacfa4d7fa67df64ab09a56fe248c50a3bfc9bc00374d69bd74ad763b14b89c"
+      },
+      {
+        "name": "rapier3d",
+        "upstream_files": 326,
+        "changed": [
+          "Cargo.toml",
+          "Cargo.toml.orig",
+          "src/dynamics/island_manager/mod.rs",
+          "src/dynamics/island_manager/persistent.rs",
+          "src/dynamics/mod.rs"
+        ],
+        "license_sha256": "ceacfa4d7fa67df64ab09a56fe248c50a3bfc9bc00374d69bd74ad763b14b89c"
+      }
+    ],
+    "locks": [
+      {
+        "path": "Cargo.lock",
+        "packages": 968,
+        "registry_to_exact_path": [
+          [
+            "rapier2d",
+            "0.36.0"
+          ],
+          [
+            "rapier3d",
+            "0.36.0"
+          ]
+        ]
+      },
+      {
+        "path": "tools/probes/physics/Cargo.lock",
+        "packages": 72,
+        "registry_to_exact_path": [
+          [
+            "rapier3d",
+            "0.36.0"
+          ]
+        ]
+      },
+      {
+        "path": "tools/probes/physics-parity/Cargo.lock",
+        "packages": 74,
+        "registry_to_exact_path": [
+          [
+            "rapier3d",
+            "0.36.0"
+          ]
+        ]
+      },
+      {
+        "path": "tools/probes/native-physics/Cargo.lock",
+        "packages": 221,
+        "registry_to_exact_path": [
+          [
+            "rapier2d",
+            "0.36.0"
+          ],
+          [
+            "rapier3d",
+            "0.36.0"
+          ]
+        ]
+      },
+      {
+        "path": "tools/probes/physics-snapshot-boundary/Cargo.lock",
+        "packages": 73,
+        "registry_to_exact_path": [
+          [
+            "rapier2d",
+            "0.36.0"
+          ],
+          [
+            "rapier3d",
+            "0.36.0"
+          ]
+        ]
+      }
+    ],
+    "live_physics_save_admission": false
+  },
+  "producer_final_review_sha256": "dd4b9380714988c7c4b6f1ef449f01eed4222492fb7e7dc7ebf93ed3e59ae1a1",
+  "relevance": "The only added executable/build input is the reviewed embedded-fixture cc/parallel feature. That package/feature is absent from the tested snapshot, physics runtime and script normal graph. Physics sources/tests, all five locks, root manifests and compatibility build script remain exact. No new Rust execution claimed.",
+  "live_restore_or_save": false
+}

@@ -20,6 +20,7 @@ mod graph_codec;
 mod island_state;
 mod pair_state;
 mod records;
+mod rigid_owner;
 mod validate;
 
 pub use arena::*;
@@ -40,6 +41,7 @@ pub use graph_codec::{decode_graph, encode_graph};
 pub use island_state::*;
 pub use pair_state::*;
 pub use records::*;
+pub use rigid_owner::*;
 pub use validate::validate;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -69,6 +71,8 @@ pub enum Error {
     UnsupportedBody,
     Island,
     UnsupportedIsland,
+    Solver,
+    SleepScan,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

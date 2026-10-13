@@ -23,7 +23,7 @@ pub enum WorkspaceKind {
 pub struct PairState {
     pub event_status: u32,
     pub solver_color: u32,
-    /// Native body-mask slots. Reciprocal solver/island ownership is still pending.
+    /// Native body-mask slots; reciprocal masks are checked by the joined owner.
     pub solver_color_bodies: [u32; 2],
     pub recycle: Option<RecycleState>,
     pub workspace: WorkspaceKind,
@@ -51,7 +51,11 @@ pub struct ValidatedPairState<'a> {
     record: PairStateTable,
     manifolds: &'a ValidatedManifolds<'a>,
 }
-impl ValidatedPairState<'_> {
+impl<'a> ValidatedPairState<'a> {
+    pub(crate) fn manifolds(&self) -> &'a ValidatedManifolds<'a> {
+        self.manifolds
+    }
+
     pub fn record(&self) -> &PairStateTable {
         &self.record
     }
