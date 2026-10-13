@@ -3,8 +3,8 @@
 The playable level, original art, localized HUD and music for the Core Sample:
 a small survey robot crosses a red-rock canyon at late afternoon, recovers four
 glowing rock cores while ember mites close in, and rides the lift on the north
-rim. Gameplay is the unmodified `gameplay.ts`; this layer only authors content
-and role properties for it. Nothing here claims a device, performance or phase
+rim. Gameplay is the current native `gameplay.ts`; this layer only authors content
+and existing role properties for it. Nothing here claims a device, performance or phase
 gate.
 
 ## Build
@@ -37,10 +37,11 @@ python3 -B samples/core/playtest.py OUT OUT-playtest --player PKG/player
 `playtest.py` runs three recordings on the packaged player's CPU route: the win
 route in `routes/win-input.json` (planned against this level's real simulation;
 all four samples, one hit, the lift at tick 2066), an idle run that loses by
-contact, and a sample-less run that never opens the exit. It also checks that
+contact, and a live three-sample arrival that dwells inside the exit without winning. It also checks that
 every chaser plans a navmesh route and that authoring is unchanged.
-`incant native-play` and RPC Play refuse scenes with screen-space UI, so the
-playtests use the player.
+Current `incant native-play --camera ... --ui-viewport 640x480` supports the
+scene for CPU checks. Whole-session restart uses the ordinary packaged player
+or native window owner; headless Play explicitly refuses that request.
 
 ## Art direction
 
@@ -124,29 +125,37 @@ presentation states.
 
 ## Integration contract
 
-Widget, entity and asset IDs are stable across builds. The current native SDK
-can already do the structural part:
+Widget, entity and asset IDs are stable across builds. `bindings.py` connects
+the existing controller roles, without changing widget style or authored sound:
 
-- Win/loss: `commands.setParent(WON or LOST, RESULT)` once, on the transition.
-  Exercised offscreen through the real game render path (show and re-stash).
-- Audio: start one cue per occurrence with `commands.setAudioPlaying(id, true)`;
-  ended voices do not replay, so each occurrence has its own silent source.
-  Pickup cues `01CSEN...43`-`46` (in collection order), hurt `...47`-`49`,
-  won `...50`, lost `...51`. Music `...42` plays from the start.
+- Win/loss: `setParent(WON or LOST, RESULT)` shows the existing localized title
+  once, on transition. The other title stays in the authored inactive container.
+- Audio: `restartAudio` plays the existing first pickup (`01CSEN...43`) and
+  hurt (`...47`) source on each occurrence, including after the voice ends.
+  Won (`...50`) and lost (`...51`) play once at transition; music (`...42`)
+  stops. Historical extra pickup/hurt sources stay unchanged and silent.
+- Text: `setUiText` receives the existing `localization.localize()` results for
+  health, samples and objective. The controller updates changed values and
+  locale changes, and localizes both result titles.
+- Restart: R or gamepad Start while won/lost requests a complete fresh session.
+  World, script, audio, UI and held input reset together; it is not a save load.
+  These actions are ignored while playing. The existing HUD copy is unchanged;
+  a visible restart hint remains a Claude presentation follow-up.
 
-Text changes (health pips, sample count, objective) need an engine command
-that sets a label's content, for example `setUiText(id, text)`, fed by
-`localization.localize()` with the keys above, only when a value changes. No
-such command exists today; this layer authors the `playing` texts and does not
-claim live text binding.
+`verify_bindings.py prepare BUILD OUT --binary ...` copies an authored build and
+connects its roles through one reversible public transaction. It checks the real
+native full routes, separate test-only HUD readback and paired cue PCM controls.
+`verify_bindings.py ship OUT SHIP` exports the production scene, deletes its own
+source/maps and checks exact baseline/restarted PCM plus shaped text. Execution
+results must be retained before calling the new bindings verified.
 
 ## Limitations
 
-- Static HUD text until a text-setting command exists; the presentation states
-  are authored transactions, not live bindings.
+- The four `--state` choices remain authored presentation snapshots; gameplay
+  starts from its normal fresh state. They do not pre-complete gameplay.
 - The game UI theme is fixed (no colour, panels or per-widget styles), so the
   HUD relies on placement over the deep sky band for contrast.
-- `incant native-play` cannot run this level (screen-space UI); development
-  checks use the packaged player.
+- The original 0060 offscreen helper source hash remains unresolved. New
+  correctly bound source evidence does not retroactively change that claim.
 - Desktop (Apple M5 Pro, Metal, ci profile) evidence only; no phone, shipping
   performance or phase-gate claim.

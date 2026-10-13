@@ -33,6 +33,7 @@ ROOT = HERE.parents[1]
 sys.path.insert(0, str(HERE))
 from art import fontcheck, ids, level, sky  # noqa: E402
 import hud  # noqa: E402
+import bindings  # noqa: E402
 
 SCRIPT = ids.make('script', 1)
 SCENE = ids.make('scene', 1)
@@ -120,16 +121,17 @@ def animation(seconds=0.0):
 def input_actions():
     keys = [('KeyD', [1, 0]), ('KeyA', [-1, 0]), ('KeyW', [0, -1]), ('KeyS', [0, 1]),
             ('ArrowRight', [1, 0]), ('ArrowLeft', [-1, 0]), ('ArrowUp', [0, -1]), ('ArrowDown', [0, 1])]
-    return {'move': {'kind': 'axis2', 'dead_zone': 0.1, 'bindings': [
+    return bindings.with_restart({'move': {'kind': 'axis2', 'dead_zone': 0.1, 'bindings': [
                 {'type': 'key', 'code': code, 'scale': value} for code, value in keys] +
                 [{'type': 'gamepad_stick', 'id': 0, 'stick': 'left', 'invert_y': False}]},
             'jump': {'kind': 'button', 'bindings': [{'type': 'key', 'code': 'Space'},
-                                                    {'type': 'gamepad_button', 'id': 0, 'button': 'south'}]}}
+                                                    {'type': 'gamepad_button', 'id': 0, 'button': 'south'}]}})
 
 
 def audio_commands(scene):
     """Music plays from the start; event cues are authored silent for the gameplay
-    binding to start (one source per occurrence: an ended voice does not replay)."""
+    binding to start. Historical per-occurrence sources remain unchanged; the
+    current binding explicitly restarts the first pickup/hurt source per event."""
     def source(clip, gain, bus, playing=False, looping=False, streaming=False):
         return {'AudioSource': {'clip': ASSETS[clip][0], 'gain_db': gain, 'pan': 0.0, 'rate': 1.0,
                                 'start_seconds': 0.0, 'playing': playing, 'looping': looping,
@@ -197,7 +199,7 @@ def world_commands(scene):
             'MeshRenderer': mesh('sample', shadows=False), 'Animation': animation(0.55 * i),
             'PointLight': {'color': [0.3, 0.95, 0.9], 'intensity': 1.5, 'range': 2.8}}))
     props = {'player': E['player'], 'navigation': E['navigation'], 'exit': E['exit'], 'enemies': ENEMIES,
-             'pickups': SAMPLES, 'camera': E['camera'], **SETTINGS}
+             'pickups': SAMPLES, 'camera': E['camera'], **SETTINGS, **bindings.roles()}
     cmds.append(entity(scene, E['controller'], 'Core Sample gameplay', {
         'Transform': transform((0, 0, 0)), 'Script': {'source': SCRIPT, 'props': props}}))
     return cmds

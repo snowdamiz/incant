@@ -1,0 +1,69 @@
+{
+  "at": "2026-10-13T01:03:09.013258+00:00",
+  "reviewer": "astra/root",
+  "decision": "accepted_nonvisual_binding_and_shipping_scope",
+  "manifest_sha256": "a9cdc8fe71b51f23b54e95acce35cfc00affe91e2a3057a7f3840fcb83d6cf9c",
+  "source_freeze_sha256": "5865bfc9011818f89d85ee265f75cf5305c009f7faf2d64dd53b72653c3a59dd",
+  "records_rehashed": 312,
+  "unique_retained": 208,
+  "protected_art_layout": 21,
+  "actual_audit": {
+    "passed": true,
+    "source_rows": 14,
+    "build_rows": 1805,
+    "positive_processes": 24,
+    "precise_headless_refusals": 1,
+    "retained_overlimit_restart_refusals": 1,
+    "shipping_processes": 10,
+    "native_processes": 15,
+    "restart_exact_pcm_pairs": 4,
+    "package_files": 37,
+    "player_sha256": "9349b6a71b8f247bdcfe1220473c50f2d12b84afb0009b4957244894ecce03d4",
+    "player_bytes": 9549792,
+    "source_only_observer": true,
+    "gpu": false
+  },
+  "checks": {
+    "python_tests": 16,
+    "strict_typescript": true,
+    "matching_headless_build": true,
+    "original_numerical_scenarios": 7,
+    "native_final_positive": 14,
+    "native_precise_restart_refusal": 1,
+    "shipping_final_positive": 10,
+    "locales": [
+      "en",
+      "ar",
+      "zh-Hans",
+      "en-XA"
+    ],
+    "public_binding_negative_controls": [
+      "wrong-role",
+      "wrong-source",
+      "missing-table"
+    ],
+    "public_atomic_three_commands_undo_redo_reopen": true
+  },
+  "review_basis": "Read semantic bindings, all restart-recording changes, cue and HUD oracle and assertion script; rehashed every retained/original artifact and frozen semantic/art source; exact same production package exercises full win/loss both directions, held isolation and gamepad restart without observer script. Original failed overlimit and missing-pad helpers retained. No visual changes or rendering acceptance.",
+  "limits": [
+    "No GPU/native-window/appearance/device or performance gate claimed.",
+    "Visible restart hint is deferred to Claude; R/Start currently work through existing action binding.",
+    "Physics save/load remains refused; restarting is a fresh whole-session replacement, not persistence.",
+    "Two full win routes exceed the existing3600-host-tick CLI limit; complete win/loss routes cover both terminal restart directions.",
+    "Historical0060 offscreen helper d086 provenance remains unresolved; these new exact-source CPU results do not retroactively repair it."
+  ],
+  "external_binaries_rehashed": [
+    {
+      "role": "matching_native",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/binaries/incant_headless",
+      "bytes": 60497696,
+      "sha256": "18b2f944d250bc66566bc6d5cd8aa2fe761c15a2660ae6d09d77e8840c4cae21"
+    },
+    {
+      "role": "ordinary_export",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/package/player/incant_game_player",
+      "bytes": 9549792,
+      "sha256": "9349b6a71b8f247bdcfe1220473c50f2d12b84afb0009b4957244894ecce03d4"
+    }
+  ]
+}

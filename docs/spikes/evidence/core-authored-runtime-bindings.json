@@ -1,0 +1,2872 @@
+{
+  "version": 1,
+  "status": "independent source and final execution review accepted; publisher intake pending",
+  "base": "83ba4af4e623f15adc9d68b794addf00639b68af",
+  "actual_main": "569f491311fbd25b2d47354386739cc08b049f94",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/inventory.json",
+    "sha256": "5865bfc9011818f89d85ee265f75cf5305c009f7faf2d64dd53b72653c3a59dd",
+    "sources": [
+      {
+        "path": "samples/core/bindings.py",
+        "sha256": "821aa9afdefe16aaaf0a3bba704ff540dad2ebdd43c274370d53505569c880ab",
+        "bytes": 2823
+      },
+      {
+        "path": "samples/core/scene.py",
+        "sha256": "1bad3df4011575a71689d8af5e21082bb44d26babdd0dee876878348164d68a0",
+        "bytes": 20615
+      },
+      {
+        "path": "samples/core/binding_oracle.py",
+        "sha256": "1eee33ae986c31ab9e19f6441315d2663f38f094715640974a51a4b664a2e58c",
+        "bytes": 10841
+      },
+      {
+        "path": "samples/core/verify_bindings.py",
+        "sha256": "c73e838ef6bb951b840c5eb7dcfaafb05db7b9e6a0afa27c61b18a0ef064442d",
+        "bytes": 20446
+      },
+      {
+        "path": "samples/core/test_bindings.py",
+        "sha256": "2001022e7b3c65d14cb1fd8eaa6186c0be1e95aba03e7fe12af3b49d94e4b10c",
+        "bytes": 6596
+      },
+      {
+        "path": "samples/core/PRESENTATION.md",
+        "sha256": "1d6eb2b91f6fa7cfce0437ec805b5d918f8dbc601b3b88285b38c3aafff85ec3",
+        "bytes": 8925
+      },
+      {
+        "path": "samples/core/gameplay.ts",
+        "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+        "bytes": 15111
+      },
+      {
+        "path": "samples/core/hud.py",
+        "sha256": "903278fcfc0f4d7ef474192187a6158ff0066183c10d44570f727f575eb9663e",
+        "bytes": 7352
+      },
+      {
+        "path": "samples/core/ui/hud.json",
+        "sha256": "2ae3136757a767b3c21d8d8b8aabf5cf720ccf4e2eb32ab68c87a5036a954dae",
+        "bytes": 2848
+      },
+      {
+        "path": "samples/core/ui/strings.json",
+        "sha256": "8bc4cb760ac832b9133d8699e47448e909f5e0b3827c5b5c711b9b06af500526",
+        "bytes": 1389
+      },
+      {
+        "path": "samples/core/routes/win-input.json",
+        "sha256": "5c23f6f64bf59a8c40634f8e34f4469ab0a17f40750f02bcbee630f721729a63",
+        "bytes": 13571
+      },
+      {
+        "path": "samples/core/routes/locked-input.json",
+        "sha256": "b0bfc0ad8b76032941f9ae77b67060be8c5b8ba8fe4bb4f170681f55379ea30d",
+        "bytes": 8894
+      },
+      {
+        "path": "samples/core/playtest.py",
+        "sha256": "85eacb004af3f42fcd2a12274639b77f25b98d07a54cfdcb85996ca86c8ebd22",
+        "bytes": 13264
+      },
+      {
+        "path": "samples/core/test_playtest.py",
+        "sha256": "f0c54327512c6d331fe358798b84078ec63e71e5f2aa64a0875df2ba0f459b40",
+        "bytes": 4769
+      }
+    ],
+    "protected_art_layout": [
+      {
+        "path": "samples/core/art/__init__.py",
+        "sha256": "187a17f4f9352cb5761441b65b5f9d8d5a82f08b5b0168abc4d99537230b888a"
+      },
+      {
+        "path": "samples/core/art/actors.py",
+        "sha256": "54d46aefd9b526b6d7aff7813f082a5f733964cb1b35971a5b4ca215eca97611"
+      },
+      {
+        "path": "samples/core/art/fontcheck.py",
+        "sha256": "04069f64b17fe6a75ac2cdcf5fa44f778ae53473ca105cdbce7ebb5e27737916"
+      },
+      {
+        "path": "samples/core/art/fonts/CoreSampleSC-Regular.ttf",
+        "sha256": "7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5"
+      },
+      {
+        "path": "samples/core/art/fonts/OFL-NotoSansSC.txt",
+        "sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9"
+      },
+      {
+        "path": "samples/core/art/fonts/provenance.json",
+        "sha256": "aa7f05977e67f22f1214d7b2ad57bd72ae924877f04b94008bcc718177d501eb"
+      },
+      {
+        "path": "samples/core/art/fonts/subset_sc.py",
+        "sha256": "04ad8578a6544a424fed7a35c33523ac6aa47807256b993458ea10f257637cee"
+      },
+      {
+        "path": "samples/core/art/gltf.py",
+        "sha256": "6adcad31460ecb68e91f76178ff659a8de1862d82794d56073a60a74822edf84"
+      },
+      {
+        "path": "samples/core/art/ids.py",
+        "sha256": "394237e6d2a462c883551ad5f1db5159af6fb20d0ca7ae4791680d9ee1b5d316"
+      },
+      {
+        "path": "samples/core/art/level.py",
+        "sha256": "779cccc629ea5da9738f9ddcae8d85332e2eb0d8aaa330db68b17c80eca2635f"
+      },
+      {
+        "path": "samples/core/art/mesh.py",
+        "sha256": "535f758886542166909b83fd9fd8df4fa946d9f0b169fbc70414b71789690709"
+      },
+      {
+        "path": "samples/core/art/music.py",
+        "sha256": "51a1844d26959bdb7591b993eff8fd19158fa38318180f40c134ee285d4a06e3"
+      },
+      {
+        "path": "samples/core/art/noise.py",
+        "sha256": "702eb6bab2b6025f350f981f79557b904cc5695727b9a3314cc497495fc20524"
+      },
+      {
+        "path": "samples/core/art/pngio.py",
+        "sha256": "9ffd0ec2dfb7bb49696c4930b347fa586997344898768f0f986bb61d2368147c"
+      },
+      {
+        "path": "samples/core/art/props.py",
+        "sha256": "777e5af8f70522155ea5336304514783547a657983f795d0d5a4f844a7f62709"
+      },
+      {
+        "path": "samples/core/art/raster.py",
+        "sha256": "a2604e6e6eff2d8da6c716e428d377df59ecc44974ddba34694c276bfcc948b4"
+      },
+      {
+        "path": "samples/core/art/sky.py",
+        "sha256": "74bb139d92da8844880e162761946c1b99c68ec989619b70c4489e20e4f9c8b9"
+      },
+      {
+        "path": "samples/core/art/terrain.py",
+        "sha256": "8cfb208de514f482ff47720c4d63ccb8d5ccc40fdd3e287c3787675600c75521"
+      },
+      {
+        "path": "samples/core/art/world.py",
+        "sha256": "b286bf0f5c245959c2361cb0ae346f64dcd95c45ba215bc145711268d760f213"
+      },
+      {
+        "path": "samples/core/ui/hud.json",
+        "sha256": "2ae3136757a767b3c21d8d8b8aabf5cf720ccf4e2eb32ab68c87a5036a954dae"
+      },
+      {
+        "path": "samples/core/ui/strings.json",
+        "sha256": "8bc4cb760ac832b9133d8699e47448e909f5e0b3827c5b5c711b9b06af500526"
+      }
+    ]
+  },
+  "engine_inputs": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/build-inputs.json",
+    "sha256": "534070fbcade610f8ad43ab40507301507b7cfc43aaeb31ed67387704dbbfc0e",
+    "count": 1805
+  },
+  "audit": {
+    "passed": true,
+    "source_rows": 14,
+    "build_rows": 1805,
+    "positive_processes": 24,
+    "precise_headless_refusals": 1,
+    "retained_overlimit_restart_refusals": 1,
+    "shipping_processes": 10,
+    "native_processes": 15,
+    "restart_exact_pcm_pairs": 4,
+    "package_files": 37,
+    "player_sha256": "9349b6a71b8f247bdcfe1220473c50f2d12b84afb0009b4957244894ecce03d4",
+    "player_bytes": 9549792,
+    "source_only_observer": true,
+    "gpu": false
+  },
+  "checks": {
+    "python_tests": 16,
+    "strict_typescript": true,
+    "matching_headless_build": true,
+    "original_numerical_scenarios": 7,
+    "native_final_positive": 14,
+    "native_precise_restart_refusal": 1,
+    "shipping_final_positive": 10,
+    "locales": [
+      "en",
+      "ar",
+      "zh-Hans",
+      "en-XA"
+    ],
+    "public_binding_negative_controls": [
+      "wrong-role",
+      "wrong-source",
+      "missing-table"
+    ],
+    "public_atomic_three_commands_undo_redo_reopen": true
+  },
+  "public_authoring": {
+    "project_sha256": "735bf9c4a8b3913dadeb7e1cb3b3c9d75b57a92f1eac02936fe4824981ca3551",
+    "controller_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+    "observer_source_sha256": "deeccf30cb804250e4c7a039c37cdc9caf9fc7619df63ceb36c574e733bb9f40",
+    "observer_not_in_export": true,
+    "cue_checks": {
+      "pickup": {
+        "ticks": [
+          127,
+          508,
+          1266,
+          1842
+        ],
+        "peak_differences": [
+          0.35479861963540316,
+          0.3547986298799515,
+          0.3547986140474677,
+          0.3547986187040806
+        ],
+        "outside_windows_exact": true
+      },
+      "damage": {
+        "ticks": [
+          664
+        ],
+        "peak_differences": [
+          0.5011663064360619
+        ],
+        "outside_windows_exact": true
+      },
+      "won": {
+        "ticks": [
+          2066
+        ],
+        "peak_differences": [
+          0.39809057116508484
+        ],
+        "outside_windows_exact": true
+      },
+      "lost": {
+        "ticks": [
+          616
+        ],
+        "peak_differences": [
+          0.39809057116508484
+        ],
+        "outside_windows_exact": true
+      }
+    }
+  },
+  "shipping": {
+    "passed": true,
+    "proof": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001",
+    "player_sha256": "9349b6a71b8f247bdcfe1220473c50f2d12b84afb0009b4957244894ecce03d4",
+    "project_sha256": "735bf9c4a8b3913dadeb7e1cb3b3c9d75b57a92f1eac02936fe4824981ca3551",
+    "source_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+    "package_files": {
+      "build.log": "2423b0982f3faf5240cfde8b509d6c579ab3e90de9c7889c341654acfeb07a89",
+      "export.json": "255905f29b96b87e511990a45e2d6673c709d92822bc0db417f2d34668e97087",
+      "normal-dependencies.txt": "92325d2e67dd0ba903f7901ec907d9fcd5eff469ca49d57d85d0894326c930ed",
+      "player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "player/data/clips.bin": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865",
+      "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "player/data/fonts/04997af85ce1afe4180d11009cc2884dd84449b72338e7d095c96cf6462aeaee.json": "b2d077e4f2a062d3bcc23123f589589c0ae102312c90d8dd112b33bdaae0947c",
+      "player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "player/data/fonts/7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5.ifont": "9de2171e0bbc868b9d74854bdcb76d233eb853932c275363ae9f2bbf32446dd8",
+      "player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "player/data/input-actions.json": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf",
+      "player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "player/data/package.json": "6c6e5e6451c5025e4c864403750ac37595e0a1db723fff195cd1dc35db238633",
+      "player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "player/data/world.scene": "77616abae7566eb37aa8f8591204966b3489a82359a402b0000a63253bab2551",
+      "player/incant_game_player": "9349b6a71b8f247bdcfe1220473c50f2d12b84afb0009b4957244894ecce03d4",
+      "project-build.json": "a9f3f7db871a6bc9d8838d8e1ec72d0a4e909b4894effe1ccb09b9d641973327",
+      "symbols/incant_game_player.dSYM/Contents/Info.plist": "ca042e291c1249ec4c27c7acf3f0c636e0e9ed3d195da1f8faa673135040fc47",
+      "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-677db0277c2ed96a": "49f3c12179dc60ac80f6069f21550b82ca0c8dd0aacaea89ae45bf661de61bb6",
+      "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-677db0277c2ed96a.yml": "329c15da2146a5fe3ece868585394c010e1468dded7d0886e90bf766cabd264e",
+      "symbols/script-symbols.json": "f4bb3405abb81df9e5472e4a168498fe62eecacfebf6c5f041805fc5c299e875"
+    },
+    "runs": [
+      "win",
+      "lose",
+      "locked",
+      "idle",
+      "win-tail",
+      "lose-short",
+      "win-restart-lose",
+      "lose-restart-win",
+      "gamepad-restart-lose",
+      "held-restart-idle"
+    ],
+    "actual_processes": 10,
+    "production_observer_absent": true,
+    "source_maps_build_removed": true,
+    "exact_restart_pcm": true,
+    "limits": [
+      "CPU ordinary shipping package only, no native-window/device/appearance gate",
+      "Two full wins exceed the existing 3600-host-tick CLI bound; complete win/loss restarts are tested in both directions",
+      "Whole-session reset is not physics save/restore",
+      "Historical0060 offscreen helper identity remains unresolved"
+    ]
+  },
+  "binaries": [
+    {
+      "role": "matching_native",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/binaries/incant_headless",
+      "bytes": 60497696,
+      "sha256": "18b2f944d250bc66566bc6d5cd8aa2fe761c15a2660ae6d09d77e8840c4cae21"
+    },
+    {
+      "role": "ordinary_export",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/package/player/incant_game_player",
+      "bytes": 9549792,
+      "sha256": "9349b6a71b8f247bdcfe1220473c50f2d12b84afb0009b4957244894ecce03d4"
+    }
+  ],
+  "source_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/core-runtime-bindings-probe-20261013.json",
+    "sha256": "cf233b31be056c41a7f412e3e13375b398747e2990a8c78e48aa60deebf8e70c"
+  },
+  "retained_failures": [
+    "Initial strict test observer used string instead of NativeInput KeyCode; corrected test-only typing.",
+    "Initial Undo oracle incorrectly compared monotonically increasing project revision; source/version/history remained exact.",
+    "Initial missing-table preflight assumed serialized empty map; now handles omitted map and has regression.",
+    "Shipping001 retained successful full build and five baselines, then correctly refused4312 ticks above3600.",
+    "Shipping002 retained win-to-loss success, then missing gamepad connection from helper composition; source006 preserves new connections and suppresses only duplicates."
+  ],
+  "scope": [
+    "Production gameplay.ts byte-identical main181; only public authoring bindings and existing input action added. Claude art/layout/media unchanged.",
+    "Original seven numerical fixture scenarios are separate from the current authored mesa routes.",
+    "Full current level wins at2066 in2156 ticks; actual locked route remains alive with incomplete inventory inside exit threshold.",
+    "Four whole-session resets compare exact fresh logs/entities/UI/PCM including R,gamepadStart and held isolation.",
+    "All authoring/debug maps/private build storage removed for ordinary package execution; separate native observer/control attachments never exported."
+  ],
+  "limits": [
+    "No GPU/native-window/appearance/device or performance gate claimed.",
+    "Visible restart hint is deferred to Claude; R/Start currently work through existing action binding.",
+    "Physics save/load remains refused; restarting is a fresh whole-session replacement, not persistence.",
+    "Two full win routes exceed the existing3600-host-tick CLI limit; complete win/loss routes cover both terminal restart directions.",
+    "Historical0060 offscreen helper d086 provenance remains unresolved; these new exact-source CPU results do not retroactively repair it."
+  ],
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/audit-result.json",
+      "raw_bytes": 441,
+      "raw_sha256": "c1e2c6e66351b11f62957eb5ff21cd1b6165f5fc051286e77940ad2d75ce05b7",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c1e2c6e66351b11f62957eb5ff21cd1b6165f5fc051286e77940ad2d75ce05b7.gz",
+      "retained_bytes": 272,
+      "retained_sha256": "16fce839047b2adf3b16688539450f92d3585f28c82a58aca9c8d27950feb6ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/audit.log",
+      "raw_bytes": 441,
+      "raw_sha256": "c1e2c6e66351b11f62957eb5ff21cd1b6165f5fc051286e77940ad2d75ce05b7",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c1e2c6e66351b11f62957eb5ff21cd1b6165f5fc051286e77940ad2d75ce05b7.gz",
+      "retained_bytes": 272,
+      "retained_sha256": "16fce839047b2adf3b16688539450f92d3585f28c82a58aca9c8d27950feb6ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/audit.py",
+      "raw_bytes": 5741,
+      "raw_sha256": "f366560963641a567a8bcf0c8db548a67e899333bd7dab36b83fcc279ad48803",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f366560963641a567a8bcf0c8db548a67e899333bd7dab36b83fcc279ad48803.gz",
+      "retained_bytes": 2174,
+      "retained_sha256": "02271aacc9bbc4f469ea560a82b1f16055efcaf025cfc3884fd2281db2456388"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/build-inputs.json",
+      "raw_bytes": 280496,
+      "raw_sha256": "534070fbcade610f8ad43ab40507301507b7cfc43aaeb31ed67387704dbbfc0e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/534070fbcade610f8ad43ab40507301507b7cfc43aaeb31ed67387704dbbfc0e.gz",
+      "retained_bytes": 86317,
+      "retained_sha256": "cdd05e6bcd0f5bc98e58b1fa0bf97f1be97bbdf394338a35b461279952078864"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/check-00.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_bytes": 20,
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/check-01.log",
+      "raw_bytes": 4049,
+      "raw_sha256": "8527a6419e3b0d921f6f6952111ec7392975c9f368e014da0e15693c320ad074",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/8527a6419e3b0d921f6f6952111ec7392975c9f368e014da0e15693c320ad074.gz",
+      "retained_bytes": 445,
+      "retained_sha256": "d64e7c4d97c08dfbf4a01d6177bde47710e7d68f2921ff5ddd2ff32be45d326d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/check-02.log",
+      "raw_bytes": 135,
+      "raw_sha256": "8df5299b8cf7559587f075c07093ab5c282dd8d0fe372119fdc34bf0d87776a1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/8df5299b8cf7559587f075c07093ab5c282dd8d0fe372119fdc34bf0d87776a1.gz",
+      "retained_bytes": 133,
+      "retained_sha256": "dfa1e674c698db215e1314afac04ff6e6409522cf5a8b50d0d48b8f7538c2b94"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/check-03.log",
+      "raw_bytes": 999,
+      "raw_sha256": "70f7b9e50c20c6fa6b2e568fd241ccbf2bddb2617e1882b871691ed0c7b14dc0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/70f7b9e50c20c6fa6b2e568fd241ccbf2bddb2617e1882b871691ed0c7b14dc0.gz",
+      "retained_bytes": 364,
+      "retained_sha256": "2c60a3d733d8e4c2f4a4a56714e00207bcd05542bc55dfc419bd0b9c7bb27712"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/collect.py",
+      "raw_bytes": 5967,
+      "raw_sha256": "74e76f618190b90c9c54fff9457758ad2841f14c74791b9e39873f016fea11f8",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/74e76f618190b90c9c54fff9457758ad2841f14c74791b9e39873f016fea11f8.gz",
+      "retained_bytes": 2650,
+      "retained_sha256": "df6bfafeee83a1cb59db1fb3c14300b72a7989867fa00276df8c95f54adcff35"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/commands.json",
+      "raw_bytes": 2157,
+      "raw_sha256": "36e97e54ec84f3d0713e9a155e732ba736de9445cf4af99f2b396bfb581b7a92",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/36e97e54ec84f3d0713e9a155e732ba736de9445cf4af99f2b396bfb581b7a92.gz",
+      "retained_bytes": 650,
+      "retained_sha256": "9468effdf320e5f608995de2cb1fc31fc7094ba62efe354c7e8618d861afd11a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-001/authoring-calls.json",
+      "raw_bytes": 957286,
+      "raw_sha256": "703db7525611bf9109e91fd6a52defa970f10fa1a4e115ae09d8c2bc7fe3f882",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/703db7525611bf9109e91fd6a52defa970f10fa1a4e115ae09d8c2bc7fe3f882.gz",
+      "retained_bytes": 63505,
+      "retained_sha256": "0a5172f78907303fd6fe401c6534fb407656d93dbb15524e30a6d5e3e6e5da35"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-001/original.json",
+      "raw_bytes": 28894,
+      "raw_sha256": "5085954800314404e14691914f0308cf51477f88ef24bfb81885942fa4bc7b4d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5085954800314404e14691914f0308cf51477f88ef24bfb81885942fa4bc7b4d.gz",
+      "retained_bytes": 7081,
+      "retained_sha256": "9947930cc5f07343a480f081b1111f78d3a9d28551dce77e56b0b13ba8ce745a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-002/authoring-calls.json",
+      "raw_bytes": 2038672,
+      "raw_sha256": "a729e4c29744d7557b9bded64d2d97391da43c2cc4c01a1e13919070fcc81f8c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a729e4c29744d7557b9bded64d2d97391da43c2cc4c01a1e13919070fcc81f8c.gz",
+      "retained_bytes": 130945,
+      "retained_sha256": "b2ac4d15998e2e6121bfe911994afcaa37fa99056d9235872e405bbc0d4c67cf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-002/original.json",
+      "raw_bytes": 28894,
+      "raw_sha256": "5085954800314404e14691914f0308cf51477f88ef24bfb81885942fa4bc7b4d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5085954800314404e14691914f0308cf51477f88ef24bfb81885942fa4bc7b4d.gz",
+      "retained_bytes": 7081,
+      "retained_sha256": "9947930cc5f07343a480f081b1111f78d3a9d28551dce77e56b0b13ba8ce745a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-002-command.json",
+      "raw_bytes": 540,
+      "raw_sha256": "4951f3e1282fa8b3976d449537665cece5192f71aa6ec9656e1ac93701144da1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4951f3e1282fa8b3976d449537665cece5192f71aa6ec9656e1ac93701144da1.gz",
+      "retained_bytes": 329,
+      "retained_sha256": "26a9f55d6169ac74c322ac877ee3100b8b7181dc2fc5518f6faa8161da514fcc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-002.log",
+      "raw_bytes": 1165,
+      "raw_sha256": "9eee7c86d80bcd354c844568c951f5281b932b2743b688e38faf879efc71be0f",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/9eee7c86d80bcd354c844568c951f5281b932b2743b688e38faf879efc71be0f.gz",
+      "retained_bytes": 387,
+      "retained_sha256": "84017ffcf5c255f541d0efff8d69a22c553dda8273ee89f408ecbb06b54442ce"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/authoring/bindings.journal.jsonl",
+      "raw_bytes": 1511393,
+      "raw_sha256": "09ceadd5bebaa09a1e0376c0bde8922a8cd0dd7aa20424e7381d4d8fb2e35712",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/09ceadd5bebaa09a1e0376c0bde8922a8cd0dd7aa20424e7381d4d8fb2e35712.gz",
+      "retained_bytes": 627057,
+      "retained_sha256": "4e747ed41236b252a5f3be42667d5f13b7f3e19b6a4a4c1c144091b9b299dd1b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/authoring/core.json",
+      "raw_bytes": 110272,
+      "raw_sha256": "735bf9c4a8b3913dadeb7e1cb3b3c9d75b57a92f1eac02936fe4824981ca3551",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/735bf9c4a8b3913dadeb7e1cb3b3c9d75b57a92f1eac02936fe4824981ca3551.gz",
+      "retained_bytes": 7571,
+      "retained_sha256": "0382c48b445558750b5ee0437b5cc5decf8324512fe7302bb7d7d36786d9968a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/authoring/gameplay.ts",
+      "raw_bytes": 15111,
+      "raw_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211.gz",
+      "retained_bytes": 4647,
+      "retained_sha256": "ef975f64022db0cbbea22fcb81ce14a585c48f81463404794e9a463a1138ee95"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/authoring-calls.json",
+      "raw_bytes": 3559175,
+      "raw_sha256": "42e371a3c3c2d060ab33b7a041f05ab72f219e0bdbf548946fc56d177e31bf35",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/42e371a3c3c2d060ab33b7a041f05ab72f219e0bdbf548946fc56d177e31bf35.gz",
+      "retained_bytes": 231485,
+      "retained_sha256": "449c9ab45897ab8e261c761c1a2ef0d992e326619cf2bb552fa2337a4b356a2c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-001.json",
+      "raw_bytes": 8864,
+      "raw_sha256": "a773c43919688e3d65b880887ec1049a0d9e952be618f47867c966367367f184",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a773c43919688e3d65b880887ec1049a0d9e952be618f47867c966367367f184.gz",
+      "retained_bytes": 1365,
+      "retained_sha256": "e7307a774ab3f536230edc3604404686885abc276bc0cb1b760c8ad372496390"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-002.json",
+      "raw_bytes": 11591,
+      "raw_sha256": "3a558f8da94ab575ea6df08847cd64eb72578b16bf0f8ab0cdf910d567723dc1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3a558f8da94ab575ea6df08847cd64eb72578b16bf0f8ab0cdf910d567723dc1.gz",
+      "retained_bytes": 1410,
+      "retained_sha256": "36813b334cc4cfc75b566d058d5a5a5194ab3e33fa28a4df85f192d1b20f2eb7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-003.json",
+      "raw_bytes": 76359,
+      "raw_sha256": "b4688deb3be0ac7db55f05651c3d2ba9ebe74a063c7865d80fd128b4150e5bea",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b4688deb3be0ac7db55f05651c3d2ba9ebe74a063c7865d80fd128b4150e5bea.gz",
+      "retained_bytes": 2799,
+      "retained_sha256": "5425a0830c312eebc1446540b33136e795c5cd3b4a07432526af7a7e7668b017"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-004.json",
+      "raw_bytes": 12428,
+      "raw_sha256": "125ff42d758123c291a4cd9064a55c8d072a41837cf34374a789b004fd969779",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/125ff42d758123c291a4cd9064a55c8d072a41837cf34374a789b004fd969779.gz",
+      "retained_bytes": 1512,
+      "retained_sha256": "1ef5a2a1aa1b3c1381f1177b28672824189f7ac2055087e8b633ecb04fb82016"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-005.json",
+      "raw_bytes": 8879,
+      "raw_sha256": "c77c751e705ecf0ae6f75e662a75cca2fdd4db1c501740d97a24c8eecf5566c9",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c77c751e705ecf0ae6f75e662a75cca2fdd4db1c501740d97a24c8eecf5566c9.gz",
+      "retained_bytes": 1370,
+      "retained_sha256": "15ae0c8dd7bd46110cfab24d3e087bc02a08579c4dd2c14a878aee41a5365743"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-006.json",
+      "raw_bytes": 10911,
+      "raw_sha256": "907301c85995650d4e20b6d4c755e6f026094f38ead4810580a21ea95359de67",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/907301c85995650d4e20b6d4c755e6f026094f38ead4810580a21ea95359de67.gz",
+      "retained_bytes": 1562,
+      "retained_sha256": "581d903ac3c50ea519701d870203773c24dbb30ce36ec37754617a06903c4ffd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-007.json",
+      "raw_bytes": 13130,
+      "raw_sha256": "cc64d239d0af8838225f8e19b7fa3b54f2ea9022ce6276a3ca67946a1cdebcc7",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cc64d239d0af8838225f8e19b7fa3b54f2ea9022ce6276a3ca67946a1cdebcc7.gz",
+      "retained_bytes": 1576,
+      "retained_sha256": "09340955c7ad22a274d0d57700bd25a1ef57d0b85de55778ce399ac3a58c36ae"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-008.json",
+      "raw_bytes": 10935,
+      "raw_sha256": "f08aac5c771658518bd2e58b39b634c550ac3f9274f4030eb82bdc9ab3727b73",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f08aac5c771658518bd2e58b39b634c550ac3f9274f4030eb82bdc9ab3727b73.gz",
+      "retained_bytes": 1564,
+      "retained_sha256": "60a5754ab621a0b2f0d7fc961608162e09e1356d65e9de28f2bbd0c020687d70"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-009.json",
+      "raw_bytes": 10935,
+      "raw_sha256": "2e5028ec0365db9f0c8c0eb3fc618e5ce1ce46eb46fb7aa851c02ed59f4c7751",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2e5028ec0365db9f0c8c0eb3fc618e5ce1ce46eb46fb7aa851c02ed59f4c7751.gz",
+      "retained_bytes": 1567,
+      "retained_sha256": "e88ff83ae4cd7f18fe64cfda2fc24d27dac3ac9609f989d1bc4a37f21be2253c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-010.json",
+      "raw_bytes": 10926,
+      "raw_sha256": "9df3e4f6ecf4b32969f14883a63056b6996e17b2ea7e9897ab3d12d7a5146607",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/9df3e4f6ecf4b32969f14883a63056b6996e17b2ea7e9897ab3d12d7a5146607.gz",
+      "retained_bytes": 1565,
+      "retained_sha256": "d3bde539a8f618a0100af58bcf565c61345c04777e4b1b5cd5cda0308cec530d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-011.json",
+      "raw_bytes": 13145,
+      "raw_sha256": "1e28546d84c27278e1bba61fe3a14216e34a3f511ce46179fd3b558e098bad3f",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1e28546d84c27278e1bba61fe3a14216e34a3f511ce46179fd3b558e098bad3f.gz",
+      "retained_bytes": 1580,
+      "retained_sha256": "9b59acec7d99a08adca6959c214be501917b7cbd82929587e7d85f3bb2b64983"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-012.json",
+      "raw_bytes": 11010,
+      "raw_sha256": "315d1147e06ef59f36167763781a8a89618aea303c3d8e96027184619c6c393d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/315d1147e06ef59f36167763781a8a89618aea303c3d8e96027184619c6c393d.gz",
+      "retained_bytes": 1634,
+      "retained_sha256": "b6554608b950691d3df4b4f5caf1476a784c47fdc95e0d5c0f01ffffc0da0e03"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-013.json",
+      "raw_bytes": 10937,
+      "raw_sha256": "97866b3466ca763d23fe952abfe21a0f79debb4e20f3d113c4cea41813d8fadb",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/97866b3466ca763d23fe952abfe21a0f79debb4e20f3d113c4cea41813d8fadb.gz",
+      "retained_bytes": 1645,
+      "retained_sha256": "eec52d772676a039dbf529a24a9fd1cf587ef5cdef7e669dab3340b6f3fe8501"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-014.json",
+      "raw_bytes": 11209,
+      "raw_sha256": "b8481fdbb961a770fb90642bcb85b63ec95a54bd5189aea2b7f5e2c7866ccebf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b8481fdbb961a770fb90642bcb85b63ec95a54bd5189aea2b7f5e2c7866ccebf.gz",
+      "retained_bytes": 1684,
+      "retained_sha256": "55a32c524c37fb4824f4a2c7582a58cd642eb11a10b9cbf51626ce9553e1d295"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/command-015.json",
+      "raw_bytes": 1031,
+      "raw_sha256": "e512543db7b0b020822ef99c399168227af974b1498fd6905ace854add21e9dd",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e512543db7b0b020822ef99c399168227af974b1498fd6905ace854add21e9dd.gz",
+      "retained_bytes": 420,
+      "retained_sha256": "6b68b5e671e2030889287a407d42f0fa98c7bb072856b88937921ff27728c6d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/idle-input.json",
+      "raw_bytes": 116,
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0.gz",
+      "retained_bytes": 107,
+      "retained_sha256": "2be7ad4fed8f6deed7aa6d8daf3315da06cc71c878d989805aceaf951c1ec22c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/idle-observe.json",
+      "raw_bytes": 1440,
+      "raw_sha256": "ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb.gz",
+      "retained_bytes": 269,
+      "retained_sha256": "0c3e5ff162a7eedc6965d20c8713b40e1c1f5ccd2ca696127bc35ad55a4f2beb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/idle.json",
+      "raw_bytes": 10653,
+      "raw_sha256": "d494d87e03e7666303141caacdef261ef94e1afbe5c249706ff7adb2fff06a8e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d494d87e03e7666303141caacdef261ef94e1afbe5c249706ff7adb2fff06a8e.gz",
+      "retained_bytes": 1202,
+      "retained_sha256": "7f2b513aaf48f13c0d6f0ecdbeebfdbec0ce9b64e88c11890dc6df28fcddbabe"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/idle.pcm",
+      "raw_bytes": 192000,
+      "raw_sha256": "e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951.gz",
+      "retained_bytes": 149316,
+      "retained_sha256": "82f5858ea6ad319e2d1b432efc52570d8814a805d9c5dcf5ce43a0bab92c706c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-ar/native-play.json",
+      "raw_bytes": 3079,
+      "raw_sha256": "2f57cb9e45fad33fa38f6aa6a4d3c572999eab0df6514cc9fbab71d3e22d13a1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2f57cb9e45fad33fa38f6aa6a4d3c572999eab0df6514cc9fbab71d3e22d13a1.gz",
+      "retained_bytes": 730,
+      "retained_sha256": "a7e31958cf279061f7503c03e7a3cbfb0861144ab39a0b41e7215ceced213e55"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-ar/probe.journal.jsonl",
+      "raw_bytes": 22198,
+      "raw_sha256": "c6f9b17d98badb9a3fa167c834141d9ab92ba19719dc0afa327b7c9cc17405f1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c6f9b17d98badb9a3fa167c834141d9ab92ba19719dc0afa327b7c9cc17405f1.gz",
+      "retained_bytes": 6089,
+      "retained_sha256": "444a0a0edef2629d8c5b64f578a926d75570fca6d03be942216b8b291762ceec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-ar/probe.json",
+      "raw_bytes": 2725,
+      "raw_sha256": "ff98a9c530b8ba6c4d23347fd40de02e60070ce77f9c10af644de56b6c3bd91d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ff98a9c530b8ba6c4d23347fd40de02e60070ce77f9c10af644de56b6c3bd91d.gz",
+      "retained_bytes": 974,
+      "retained_sha256": "f0f64215953e8a9b2f8b8f82953e99f41414f2f3633941db4b3c16de7e9f2c6d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-ar/probe.ts",
+      "raw_bytes": 1324,
+      "raw_sha256": "22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe.gz",
+      "retained_bytes": 550,
+      "retained_sha256": "fbcbbd22288cbe5d13c45fd68e3a1f20f7cd80a62423f0f99e0f201164114a51"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en/native-play.json",
+      "raw_bytes": 2983,
+      "raw_sha256": "bfc724d7344d3fc8fe600951df4e36c6d5bc79bba7cab597f3ac727dd06baace",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/bfc724d7344d3fc8fe600951df4e36c6d5bc79bba7cab597f3ac727dd06baace.gz",
+      "retained_bytes": 662,
+      "retained_sha256": "4ef9702290a0a172a1378b64f84c0e3cbac01c4a8c11c04fca4b9d82939f8ca3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en/probe.journal.jsonl",
+      "raw_bytes": 21745,
+      "raw_sha256": "f7a23791c9166ee26a487c7f0ac7bbe42f31c6b43ff620cebe5c02c29cf86a58",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f7a23791c9166ee26a487c7f0ac7bbe42f31c6b43ff620cebe5c02c29cf86a58.gz",
+      "retained_bytes": 6266,
+      "retained_sha256": "aa66928648fb1073da0f0317f1a5805ca34ed1d10b10130b41dc9d85709dd30f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en/probe.json",
+      "raw_bytes": 2629,
+      "raw_sha256": "105f783bd33fb281c7104fb25c1d4a4053afdb793635390b9fd954fdc87dd12b",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/105f783bd33fb281c7104fb25c1d4a4053afdb793635390b9fd954fdc87dd12b.gz",
+      "retained_bytes": 935,
+      "retained_sha256": "a2498aabebdbebb17e367d67b13eb37ac4f6428c74f9135a48600a8cc58b5550"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en/probe.ts",
+      "raw_bytes": 1324,
+      "raw_sha256": "22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe.gz",
+      "retained_bytes": 550,
+      "retained_sha256": "fbcbbd22288cbe5d13c45fd68e3a1f20f7cd80a62423f0f99e0f201164114a51"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en-XA/native-play.json",
+      "raw_bytes": 3285,
+      "raw_sha256": "6e0de169211a88b21327c06be37bcc5bee3df0e2e45e89383293173ad1e884a1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6e0de169211a88b21327c06be37bcc5bee3df0e2e45e89383293173ad1e884a1.gz",
+      "retained_bytes": 772,
+      "retained_sha256": "36d0d2396605a6bbe2ddcce4e9cb88f5beecfb6d3afb7d8d559404c23a96a7d3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en-XA/probe.journal.jsonl",
+      "raw_bytes": 22179,
+      "raw_sha256": "3e08d468eea5fd21ce1c6fb219bdcc86b13cdc8cf92953fad696fb90a38fb1bf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3e08d468eea5fd21ce1c6fb219bdcc86b13cdc8cf92953fad696fb90a38fb1bf.gz",
+      "retained_bytes": 6433,
+      "retained_sha256": "cac57e3ec9ca92c8be2733c96b256073b9ba4909f503ff5777226315548d0559"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en-XA/probe.json",
+      "raw_bytes": 2724,
+      "raw_sha256": "fbb69b16c0b90e9372994ce1680989afee3e6ed15c35723635d73e9823e5b160",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/fbb69b16c0b90e9372994ce1680989afee3e6ed15c35723635d73e9823e5b160.gz",
+      "retained_bytes": 978,
+      "retained_sha256": "7cfec6b5e7886de59f78ebdc26929d5b423bd38f6c66c6b93a0fe9287db38c5b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-en-XA/probe.ts",
+      "raw_bytes": 1324,
+      "raw_sha256": "22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe.gz",
+      "retained_bytes": 550,
+      "retained_sha256": "fbcbbd22288cbe5d13c45fd68e3a1f20f7cd80a62423f0f99e0f201164114a51"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-zh-Hans/native-play.json",
+      "raw_bytes": 3061,
+      "raw_sha256": "553fe2911c7416152c8c94e068c766619b011ef4e1be47e3360c8a135ff80e1c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/553fe2911c7416152c8c94e068c766619b011ef4e1be47e3360c8a135ff80e1c.gz",
+      "retained_bytes": 732,
+      "retained_sha256": "124559e2d05828de7ba3a3be7e113fc343bab6581f5cfd50307ef2f6b1f0bad7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-zh-Hans/probe.journal.jsonl",
+      "raw_bytes": 22269,
+      "raw_sha256": "f233ff02e891de22a866d997d57637477815ef3a46b15021ea294da61b4e73c4",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f233ff02e891de22a866d997d57637477815ef3a46b15021ea294da61b4e73c4.gz",
+      "retained_bytes": 6394,
+      "retained_sha256": "7299c5ee9108bf575d6d99bb00bc84586e629e41224b4f33ce14edfb8332966a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-zh-Hans/probe.json",
+      "raw_bytes": 2730,
+      "raw_sha256": "193ac46a637961189356b30c5a81b09fe6a391ad6490199512facd3c95e38a50",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/193ac46a637961189356b30c5a81b09fe6a391ad6490199512facd3c95e38a50.gz",
+      "retained_bytes": 978,
+      "retained_sha256": "15052e9eb9b62032a7ae70aeb88d84757508fcb5dc8fcc9a1fc27f06ba05d6ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/l10n-zh-Hans/probe.ts",
+      "raw_bytes": 1324,
+      "raw_sha256": "22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/22382016e116f9ceaf91d8ac33227feeaf3d6390d33046711768864be40149fe.gz",
+      "retained_bytes": 550,
+      "retained_sha256": "fbcbbd22288cbe5d13c45fd68e3a1f20f7cd80a62423f0f99e0f201164114a51"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-ar/authoring-calls.json",
+      "raw_bytes": 688362,
+      "raw_sha256": "73554db68b354a879ec773666e592cce715c46b21da751e831e5cba0cedf79ab",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/73554db68b354a879ec773666e592cce715c46b21da751e831e5cba0cedf79ab.gz",
+      "retained_bytes": 39428,
+      "retained_sha256": "8a675749cadd2183a3d5fbaf9a57a65a9e387577dc58f44ff6d101bb40002aee"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-ar/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-ar/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-ar/win.json",
+      "raw_bytes": 9201,
+      "raw_sha256": "210b0a0790d3a5c245806a2826642c9aad603d9af4a5b3da5cda364cebc0eb40",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/210b0a0790d3a5c245806a2826642c9aad603d9af4a5b3da5cda364cebc0eb40.gz",
+      "retained_bytes": 1317,
+      "retained_sha256": "ac6c5f5c050032da2fa5774557cf1ab6d36e3148afe76f8fb26d82f8816e80ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-ar/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-en-XA/authoring-calls.json",
+      "raw_bytes": 688794,
+      "raw_sha256": "09a1b0f9de1759f7172c4d02b460c71a039e6429bea57713866d600fac9e4d5e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/09a1b0f9de1759f7172c4d02b460c71a039e6429bea57713866d600fac9e4d5e.gz",
+      "retained_bytes": 40016,
+      "retained_sha256": "e39d0fdd38a4f5a68d00b143143fe57694a585fe7d68c16ae4d818850023a77b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-en-XA/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-en-XA/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-en-XA/win.json",
+      "raw_bytes": 9391,
+      "raw_sha256": "90bebbddaa1a1b94daa4e0f60e1ed89a4990db19557a40b9183e585dc5e39d55",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/90bebbddaa1a1b94daa4e0f60e1ed89a4990db19557a40b9183e585dc5e39d55.gz",
+      "retained_bytes": 1360,
+      "retained_sha256": "4c37591543c39c1e4eebce36d79f77e5542a4ac027e4e791cacd685f593420a2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-en-XA/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-zh-Hans/authoring-calls.json",
+      "raw_bytes": 688175,
+      "raw_sha256": "20a484a45ac0322b47313db9522410d91d339b2263e738a160e9d0b62bb82ea3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/20a484a45ac0322b47313db9522410d91d339b2263e738a160e9d0b62bb82ea3.gz",
+      "retained_bytes": 39424,
+      "retained_sha256": "1d4ed379be9b8ab606ce01c0402af3944e8b7a275499dbaa91ad1958e7564aff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-zh-Hans/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-zh-Hans/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-zh-Hans/win.json",
+      "raw_bytes": 9113,
+      "raw_sha256": "65ce5e7346f07c5241c775f3fb5e0ac7502e179d6aa18e3d11c7ca295f8c85e0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/65ce5e7346f07c5241c775f3fb5e0ac7502e179d6aa18e3d11c7ca295f8c85e0.gz",
+      "retained_bytes": 1321,
+      "retained_sha256": "6f9b6aeed63dcefb9e406b871eb4252a88d8497a3bce2c87add8878494d1f900"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locale-zh-Hans/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/localized.json",
+      "raw_bytes": 2485,
+      "raw_sha256": "d19b2d8637c8a6166acc506a5e8e87c5f7d7936bfab2103f8171e4ed0b79cbdc",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d19b2d8637c8a6166acc506a5e8e87c5f7d7936bfab2103f8171e4ed0b79cbdc.gz",
+      "retained_bytes": 765,
+      "retained_sha256": "926d697dc0c78fb014d48bec909601630e2060f1513762915108b6c91896f288"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locked-input.json",
+      "raw_bytes": 18216,
+      "raw_sha256": "adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf.gz",
+      "retained_bytes": 877,
+      "retained_sha256": "8d779222e8d25557f14bd46823b2faef0a06a32ebabf835ecebabeeade2fe2eb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locked-observe.json",
+      "raw_bytes": 42506,
+      "raw_sha256": "7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378.gz",
+      "retained_bytes": 1305,
+      "retained_sha256": "d38bd6ee0d1586c42b911ef8cee1600cd2f4fb0642aecb18f51d72512c630f6b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locked.json",
+      "raw_bytes": 67858,
+      "raw_sha256": "9a9ecf7f2ac8e1bdc251ef7552172ad045425463b145b64ac6d7e88ce94b75b5",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/9a9ecf7f2ac8e1bdc251ef7552172ad045425463b145b64ac6d7e88ce94b75b5.gz",
+      "retained_bytes": 2447,
+      "retained_sha256": "1dea6b432df809b42c4315bd0ad7674bdd6f58678e8e898493053fde7192ae89"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/locked.pcm",
+      "raw_bytes": 10163200,
+      "raw_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77.gz",
+      "retained_bytes": 8034991,
+      "retained_sha256": "d8e10c6fde29c289f02385e9996a21512dc4910a215f28150521e2cb547c4d9b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/lose-input.json",
+      "raw_bytes": 118,
+      "raw_sha256": "33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38.gz",
+      "retained_bytes": 108,
+      "retained_sha256": "33aacbff1e49e7fd3a562acb218739f2633114dbd53178fdf8d3f209ea9b8027"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/lose-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "359105c09de4b8b44697b9335feaf34f96cd901eb0f7cb740019b0bdaab62834"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/lose.json",
+      "raw_bytes": 9886,
+      "raw_sha256": "6a88e08f12f6c9fc6ea95b44743a9422853cb794504b6b5496f6989853377428",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6a88e08f12f6c9fc6ea95b44743a9422853cb794504b6b5496f6989853377428.gz",
+      "retained_bytes": 1102,
+      "retained_sha256": "808e454492f0d0f3f81bb555c2e05c57a4ca1f61978bb8217e8d69ed2262f1b1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/lose.pcm",
+      "raw_bytes": 9600000,
+      "raw_sha256": "305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d.gz",
+      "retained_bytes": 3272657,
+      "retained_sha256": "57a6001812221c69a2c9701f88a6a95a3bcb9d4fc5f82f3e1aac2517d369b5ec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observed/bindings.journal.jsonl",
+      "raw_bytes": 1005017,
+      "raw_sha256": "4a9be579a53600556e7b57f8fb5cb428a6919e07ae2d82f9bf9dedd0eda90027",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4a9be579a53600556e7b57f8fb5cb428a6919e07ae2d82f9bf9dedd0eda90027.gz",
+      "retained_bytes": 394218,
+      "retained_sha256": "8cd707b7cf32f3bd59046a25080a91116c76de036cb42ed7fb5767c49b48db74"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observed/core.json",
+      "raw_bytes": 110951,
+      "raw_sha256": "bd13c5343f73aaa6925e8117fc7fa87bd411f939a77b7a57dacffc4fb24a2473",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/bd13c5343f73aaa6925e8117fc7fa87bd411f939a77b7a57dacffc4fb24a2473.gz",
+      "retained_bytes": 7678,
+      "retained_sha256": "9895accccc3bbb8fb42590435d23298808451475ddb81f7dea03dd84b5de3021"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observed/gameplay.ts",
+      "raw_bytes": 15111,
+      "raw_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211.gz",
+      "retained_bytes": 4647,
+      "retained_sha256": "ef975f64022db0cbbea22fcb81ce14a585c48f81463404794e9a463a1138ee95"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observed/observe.ts",
+      "raw_bytes": 714,
+      "raw_sha256": "deeccf30cb804250e4c7a039c37cdc9caf9fc7619df63ceb36c574e733bb9f40",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/deeccf30cb804250e4c7a039c37cdc9caf9fc7619df63ceb36c574e733bb9f40.gz",
+      "retained_bytes": 401,
+      "retained_sha256": "07f5a902edc4b830ad1512763957789384d83c44acc0a3ba902861b0bc90d934"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/authoring-calls.json",
+      "raw_bytes": 538803,
+      "raw_sha256": "e5acfa30bcfca3f8d8feb3bc89e0291e11b5efd2614a9e8923a0e09f2ddb2b15",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e5acfa30bcfca3f8d8feb3bc89e0291e11b5efd2614a9e8923a0e09f2ddb2b15.gz",
+      "retained_bytes": 31516,
+      "retained_sha256": "4b731bf1c867a20f0d4fc62f7925c70866a164a266cfc33aeeed5cfe8f18f487"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/lose-input.json",
+      "raw_bytes": 118,
+      "raw_sha256": "33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38.gz",
+      "retained_bytes": 108,
+      "retained_sha256": "33aacbff1e49e7fd3a562acb218739f2633114dbd53178fdf8d3f209ea9b8027"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/lose-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "359105c09de4b8b44697b9335feaf34f96cd901eb0f7cb740019b0bdaab62834"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/lose.json",
+      "raw_bytes": 11192,
+      "raw_sha256": "bc506bf81a6bda902af95c2f1d02d55ceeec73f91f5a6516c0832f53ebf1eeaa",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/bc506bf81a6bda902af95c2f1d02d55ceeec73f91f5a6516c0832f53ebf1eeaa.gz",
+      "retained_bytes": 1265,
+      "retained_sha256": "c9eaa2fb2a3e7b2ec14477d757c3ca50d3356fa58b3d3c912e3287548bc08a63"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/lose.pcm",
+      "raw_bytes": 9600000,
+      "raw_sha256": "305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d.gz",
+      "retained_bytes": 3272657,
+      "retained_sha256": "57a6001812221c69a2c9701f88a6a95a3bcb9d4fc5f82f3e1aac2517d369b5ec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-damage-input.json",
+      "raw_bytes": 27848,
+      "raw_sha256": "94b81f12c345824b3d66646f01af5c6000fc0f08eaca1cfb920dc5735b1b968d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/94b81f12c345824b3d66646f01af5c6000fc0f08eaca1cfb920dc5735b1b968d.gz",
+      "retained_bytes": 1214,
+      "retained_sha256": "cb8d94334443324df77e75c23109bca27d74245d31ca4189cb5afb9906c51f90"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-damage-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-damage.json",
+      "raw_bytes": 9105,
+      "raw_sha256": "65fae29a2b470e85f398e682aed095d3504001e47828e688870f8b0a41e86613",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/65fae29a2b470e85f398e682aed095d3504001e47828e688870f8b0a41e86613.gz",
+      "retained_bytes": 1253,
+      "retained_sha256": "661f542e04c763b70e2b4004d52477e785c417ea8403f47fc036483d30159d40"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-damage.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "fa71c1e64f3d0b9fb8871b80330962b934e7f60190c2f0a76e87a759f9d2f6b7",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/fa71c1e64f3d0b9fb8871b80330962b934e7f60190c2f0a76e87a759f9d2f6b7.gz",
+      "retained_bytes": 10609084,
+      "retained_sha256": "dbe6a11e9638397f80e895f1e66129baa866bdfc8586405d7681ccd839f06032"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-lost-input.json",
+      "raw_bytes": 270,
+      "raw_sha256": "7488de2c0b61de0dd4e466c0953c363c47569eab364ee96a67201b8f81991329",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/7488de2c0b61de0dd4e466c0953c363c47569eab364ee96a67201b8f81991329.gz",
+      "retained_bytes": 167,
+      "retained_sha256": "00d41e3ebfb84003e3a7975ee416c8e03a9f2fad8baa35ff11b19e121838d151"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-lost-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "359105c09de4b8b44697b9335feaf34f96cd901eb0f7cb740019b0bdaab62834"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-lost.json",
+      "raw_bytes": 11192,
+      "raw_sha256": "f717bf11c730ae4be6ef0000334c21b957bc1f9596f7212cbfb607cac18d49c1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f717bf11c730ae4be6ef0000334c21b957bc1f9596f7212cbfb607cac18d49c1.gz",
+      "retained_bytes": 1265,
+      "retained_sha256": "8a91e4ea83f2dc7a0f918104eac6af314bb1d00bfcfb0e91d60963906f7a5f25"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-lost.pcm",
+      "raw_bytes": 9600000,
+      "raw_sha256": "cb9f8ab16c1b070173afe84e572a4759780e29b58fde1a99fa97120b0044ee64",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cb9f8ab16c1b070173afe84e572a4759780e29b58fde1a99fa97120b0044ee64.gz",
+      "retained_bytes": 3109145,
+      "retained_sha256": "7f79867d9bb16e84b0552322008caaac6b19ca855cbe93f860c405b122efb8d0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-pickup-input.json",
+      "raw_bytes": 27848,
+      "raw_sha256": "ca4c204f0854787c9c42e4feaa52913e95f21b109c531eecdf6dd38408969b8e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ca4c204f0854787c9c42e4feaa52913e95f21b109c531eecdf6dd38408969b8e.gz",
+      "retained_bytes": 1214,
+      "retained_sha256": "db9eec4087d8aa2afc11f22b5df4cc14f36d427014ba8ad37c0317b4791e1ae8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-pickup-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-pickup.json",
+      "raw_bytes": 9105,
+      "raw_sha256": "621d37f797796330604a39ff7fb15d8987f556caa19926d4cef3e56cb9390615",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/621d37f797796330604a39ff7fb15d8987f556caa19926d4cef3e56cb9390615.gz",
+      "retained_bytes": 1253,
+      "retained_sha256": "60ee3ab573a00fdef011cdd06722e033d0a2555811576a5ab2b5fb63a97d01ba"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-pickup.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "19dbafc9d890f7ea7605194803a66aa4b27b1d8e59fc9b6647893e01b4c77d3a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/19dbafc9d890f7ea7605194803a66aa4b27b1d8e59fc9b6647893e01b4c77d3a.gz",
+      "retained_bytes": 10418476,
+      "retained_sha256": "c1ef254aa8e1799d2b67ea179df031ef9eacdafe0f372da0846d0f6580eb14b0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-won-input.json",
+      "raw_bytes": 27848,
+      "raw_sha256": "a6111aa113a4543e3f418f5d2700c6ff1bc5d67be62d1a2cc138b9cbeaea2bc2",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a6111aa113a4543e3f418f5d2700c6ff1bc5d67be62d1a2cc138b9cbeaea2bc2.gz",
+      "retained_bytes": 1214,
+      "retained_sha256": "42570bc23c38cd8c0d71f2ca8289b931b614d615791e333ce3651d35f454dcf9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-won-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-won.json",
+      "raw_bytes": 9105,
+      "raw_sha256": "2cfc9fb6c41469cd10bb99a0e3b6e4631d042dbca5742ca3522f6c737014595d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2cfc9fb6c41469cd10bb99a0e3b6e4631d042dbca5742ca3522f6c737014595d.gz",
+      "retained_bytes": 1253,
+      "retained_sha256": "3ed666ba132967be00031d7a390e9c5b4cf6fa74e130fba049e82afa587e398d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/mute-won.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "6bb810e653dd8b76d049708b5d26c55dc6a3e6fdacd68986c903e83a57fee37f",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6bb810e653dd8b76d049708b5d26c55dc6a3e6fdacd68986c903e83a57fee37f.gz",
+      "retained_bytes": 10421228,
+      "retained_sha256": "5e17c684ea7d6674ac0817786ee5194d1b1751af9217cdeb03aab65a0b54a044"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/win.json",
+      "raw_bytes": 9105,
+      "raw_sha256": "786f9c4b8561ca4dbc7110dd7832a114f0eb13ceb0f68099cbe89ee301346d95",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/786f9c4b8561ca4dbc7110dd7832a114f0eb13ceb0f68099cbe89ee301346d95.gz",
+      "retained_bytes": 1252,
+      "retained_sha256": "6d4b3cc3730baaaec0137c0450c7fba8191aa07ac7de678feea7bc517da0f543"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/observer/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/original.json",
+      "raw_bytes": 28894,
+      "raw_sha256": "5085954800314404e14691914f0308cf51477f88ef24bfb81885942fa4bc7b4d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5085954800314404e14691914f0308cf51477f88ef24bfb81885942fa4bc7b4d.gz",
+      "retained_bytes": 7081,
+      "retained_sha256": "9947930cc5f07343a480f081b1111f78d3a9d28551dce77e56b0b13ba8ce745a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/prepared.json",
+      "raw_bytes": 157059,
+      "raw_sha256": "d168f8e41d85533c1ec32491b8897ec5fe03a83b7ad7e4191a416a18dd7413df",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d168f8e41d85533c1ec32491b8897ec5fe03a83b7ad7e4191a416a18dd7413df.gz",
+      "retained_bytes": 17001,
+      "retained_sha256": "6d9018c9757d5fb63bddb8466d8aaaf1a73617a6e1b659aedb6997f8aa6398df"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/unsupported-restart-input.json",
+      "raw_bytes": 28060,
+      "raw_sha256": "e73fc34c4215c4beb2d557c60e3a07a30661bd35e195328331c88d3095563619",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e73fc34c4215c4beb2d557c60e3a07a30661bd35e195328331c88d3095563619.gz",
+      "retained_bytes": 1227,
+      "retained_sha256": "ccbaf8741293281864f7b26776844ae73d4020b2908f0757b82b1761d36cfd68"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/unsupported-restart-observe.json",
+      "raw_bytes": 1450,
+      "raw_sha256": "159c5ce1774e8775d08ca1fc5e20b28e7ab7033e33169c4b545c0b09a210dcd0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/159c5ce1774e8775d08ca1fc5e20b28e7ab7033e33169c4b545c0b09a210dcd0.gz",
+      "retained_bytes": 272,
+      "retained_sha256": "e451aac719d11fe4c3f8acdba46e251d554f9239f92d2aa437c9e0b134067004"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win-tail-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "b913335ef5a457debd710e895a12161f62ed9334c29eebe42843d3a8ddca8076"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win-tail-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54.gz",
+      "retained_bytes": 226,
+      "retained_sha256": "cf0d101051cade5019326c731f356818474d5d813ae750273ee4409e07ce407e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win-tail.json",
+      "raw_bytes": 7360,
+      "raw_sha256": "e0bd5f89e84a5dcbe018868d17d61ca0eca04c3af8be1989edd9b3b81a4f2590",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e0bd5f89e84a5dcbe018868d17d61ca0eca04c3af8be1989edd9b3b81a4f2590.gz",
+      "retained_bytes": 1058,
+      "retained_sha256": "211031cc2fdc88c91451e9ee4e2865cba25607c61b7df32f71fdd00b5a023677"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win-tail.pcm",
+      "raw_bytes": 14758400,
+      "raw_sha256": "a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e.gz",
+      "retained_bytes": 10652371,
+      "retained_sha256": "d06872e602bff83dd2147d391d0b3165f8b1143d62a2c7824e496d13512e5f3e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win.json",
+      "raw_bytes": 7360,
+      "raw_sha256": "b635501824cb50578436ab01705df5f48d02584f86b57e6a2851f6198a8b2666",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b635501824cb50578436ab01705df5f48d02584f86b57e6a2851f6198a8b2666.gz",
+      "retained_bytes": 1057,
+      "retained_sha256": "c42391a5c257e24b1887aaede43c3721ce08e6db351c6a683e40d5c357889a0d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003-command.json",
+      "raw_bytes": 540,
+      "raw_sha256": "807b972f86c18fb11470043b03c3104ba052efb76d95943188cec46a537cf34e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/807b972f86c18fb11470043b03c3104ba052efb76d95943188cec46a537cf34e.gz",
+      "retained_bytes": 330,
+      "retained_sha256": "029d2b02bb7be01c2c172aa35465f8dab9be77b8b7be66b1c401619a06afe18e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/native-003.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_bytes": 20,
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/authoring-calls.json",
+      "raw_bytes": 141333,
+      "raw_sha256": "f63ecc74b5351041e78ecc355dec17f7f65dd113e3392ead9d6358056fea0e1c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f63ecc74b5351041e78ecc355dec17f7f65dd113e3392ead9d6358056fea0e1c.gz",
+      "retained_bytes": 8233,
+      "retained_sha256": "65b83a413348ed640302c1c6a9bf748548034ca49d0fbae462253bc23ff47279"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/gamepad-input.json",
+      "raw_bytes": 555,
+      "raw_sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c.gz",
+      "retained_bytes": 208,
+      "retained_sha256": "6c756bce334389eec29985ae7e73bc8200e3c91f3087da34e2df71d7ed4b88fc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/gamepad-observe.json",
+      "raw_bytes": 2667,
+      "raw_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5.gz",
+      "retained_bytes": 344,
+      "retained_sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/gamepad.json",
+      "raw_bytes": 7592,
+      "raw_sha256": "a38f7e2fe4ee0ff9935a9307c2de6e4e7f3c93b91e5c42c73062878d87847bee",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a38f7e2fe4ee0ff9935a9307c2de6e4e7f3c93b91e5c42c73062878d87847bee.gz",
+      "retained_bytes": 1058,
+      "retained_sha256": "b794caeaa9df5a6b636ba646480358004786fef7980a79e9f610b3b5db5d10bd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/jump-input.json",
+      "raw_bytes": 725,
+      "raw_sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb.gz",
+      "retained_bytes": 202,
+      "retained_sha256": "f5ef8d8bc00fa972dc2d4632d0fb76cf14daf846c22b908336cfafc488b30f85"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/jump-observe.json",
+      "raw_bytes": 2971,
+      "raw_sha256": "2c4fa46a4369c9ad5e9b66ed301a44821dccfce46531628586fc481b2eba6315",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2c4fa46a4369c9ad5e9b66ed301a44821dccfce46531628586fc481b2eba6315.gz",
+      "retained_bytes": 390,
+      "retained_sha256": "76922546fc99ee7402f16061b496f44f6a48a4cedd7878583337d5fa6ecf88b3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/jump.json",
+      "raw_bytes": 8147,
+      "raw_sha256": "77a41dd3dc368e5128830e7f823025ce51212e11eb4794b3fe2f10e1766fa399",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/77a41dd3dc368e5128830e7f823025ce51212e11eb4794b3fe2f10e1766fa399.gz",
+      "retained_bytes": 1136,
+      "retained_sha256": "cbf9920a90183d5caf541cd93a36732b19d65fed69f4863d8d1db515f6939e18"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/lose-input.json",
+      "raw_bytes": 117,
+      "raw_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227.gz",
+      "retained_bytes": 107,
+      "retained_sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/lose-observe.json",
+      "raw_bytes": 2666,
+      "raw_sha256": "5efea284d7ae848427f533b38fcf503109298be762ea9aefd5f8148903385689",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5efea284d7ae848427f533b38fcf503109298be762ea9aefd5f8148903385689.gz",
+      "retained_bytes": 345,
+      "retained_sha256": "89e8988f10098585f07776083566792e302a0db662dff96b2a88f3c10b2ad287"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/lose.json",
+      "raw_bytes": 7524,
+      "raw_sha256": "584363facf743d04621307e53d20a6c0cf57ffd5a8f0a03f4ab07dab2a0f36f4",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/584363facf743d04621307e53d20a6c0cf57ffd5a8f0a03f4ab07dab2a0f36f4.gz",
+      "retained_bytes": 1037,
+      "retained_sha256": "aab55348812f3b0457797cd16d1b29f8a92494f77cf4d2571dfe2385bcb9a1be"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-00.json",
+      "raw_bytes": 398,
+      "raw_sha256": "b71b41ee016eb06e93695ef8c04d2f320331cfbb31919390f6e4d254191cb786",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b71b41ee016eb06e93695ef8c04d2f320331cfbb31919390f6e4d254191cb786.gz",
+      "retained_bytes": 284,
+      "retained_sha256": "a0101ee337cc94b2912d0fba0cf5d6b4fa17a167396a5301c37e1bcf6fe892bb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-01.json",
+      "raw_bytes": 8882,
+      "raw_sha256": "4e86ff49a27617a250ca9296ed7614b43ec7b91b77a230df41f2bc127feb2e11",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4e86ff49a27617a250ca9296ed7614b43ec7b91b77a230df41f2bc127feb2e11.gz",
+      "retained_bytes": 1277,
+      "retained_sha256": "f30d77464b231f543b822ee59802951332c104dfb2f292d2d81ee808f83e3ea5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-02.json",
+      "raw_bytes": 8890,
+      "raw_sha256": "9ad76e84c6ac279eb9976b5328e3210457dd9c34561dc368cb57d0b4be95de93",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/9ad76e84c6ac279eb9976b5328e3210457dd9c34561dc368cb57d0b4be95de93.gz",
+      "retained_bytes": 1280,
+      "retained_sha256": "0ecc171ac91b75d26d62219443ff6c0a3be018c7f600f48e419314c6e6cac4b2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-03.json",
+      "raw_bytes": 9503,
+      "raw_sha256": "ed361de8669e765c644c74b00bbf85d8ab56af9938d472058187961d99428846",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ed361de8669e765c644c74b00bbf85d8ab56af9938d472058187961d99428846.gz",
+      "retained_bytes": 1353,
+      "retained_sha256": "91dafaec4c82079eeb438534f16382a77d1e0d55e007366745ceec52197febc5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-04.json",
+      "raw_bytes": 8816,
+      "raw_sha256": "57e73ca5611d0a119d81c1742f91268e5f4f18325609f3906138246810bb2995",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/57e73ca5611d0a119d81c1742f91268e5f4f18325609f3906138246810bb2995.gz",
+      "retained_bytes": 1257,
+      "retained_sha256": "e0a22bfdbbf982a0f96cbc76050edf555b446a7076da7555a5bbc7ac29c5685e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-05.json",
+      "raw_bytes": 8896,
+      "raw_sha256": "6f479d1506db5490ef5342ee919946c0084c240afa4c4c0883e0b62c46805530",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6f479d1506db5490ef5342ee919946c0084c240afa4c4c0883e0b62c46805530.gz",
+      "retained_bytes": 1282,
+      "retained_sha256": "d2be5f79f9d51845d0bb9761d586ebc6673bd170a556fe893b007d48c28797e0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-06.json",
+      "raw_bytes": 6363,
+      "raw_sha256": "241a1daf0fcabc8354b648114d5ca190e73bdec5d809ba0b157738e6324627a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/241a1daf0fcabc8354b648114d5ca190e73bdec5d809ba0b157738e6324627a0.gz",
+      "retained_bytes": 1351,
+      "retained_sha256": "40ae22eb66270a4e9643cecde8dfb8c5817c4859d90331c0b21cbfae8f14bf16"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/process-07.json",
+      "raw_bytes": 5604,
+      "raw_sha256": "9931b7e10df02773210f5754009fc1ad5cda0893dd6ba10387bf247bff48aeb9",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/9931b7e10df02773210f5754009fc1ad5cda0893dd6ba10387bf247bff48aeb9.gz",
+      "retained_bytes": 1224,
+      "retained_sha256": "a45a2e73d79d6ffa93683149758c1be4faf8bd512b946af75203290cdba9dedf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/repeat-win-input.json",
+      "raw_bytes": 422,
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731.gz",
+      "retained_bytes": 184,
+      "retained_sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/repeat-win-observe.json",
+      "raw_bytes": 2667,
+      "raw_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5.gz",
+      "retained_bytes": 344,
+      "retained_sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/repeat-win.json",
+      "raw_bytes": 7592,
+      "raw_sha256": "a38f7e2fe4ee0ff9935a9307c2de6e4e7f3c93b91e5c42c73062878d87847bee",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a38f7e2fe4ee0ff9935a9307c2de6e4e7f3c93b91e5c42c73062878d87847bee.gz",
+      "retained_bytes": 1058,
+      "retained_sha256": "b794caeaa9df5a6b636ba646480358004786fef7980a79e9f610b3b5db5d10bd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/runs.json",
+      "raw_bytes": 58132,
+      "raw_sha256": "cb1559a457badbf1e32d9358ca9bc8532d42a13d4c5173c2fba3ae14514f3092",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cb1559a457badbf1e32d9358ca9bc8532d42a13d4c5173c2fba3ae14514f3092.gz",
+      "retained_bytes": 2874,
+      "retained_sha256": "2352a134dd60a394796062fef26e343a7fee5d3b0e3da863fe5a588b137eb9df"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/skip-pickup-input.json",
+      "raw_bytes": 727,
+      "raw_sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110.gz",
+      "retained_bytes": 202,
+      "retained_sha256": "8b60e456536167676774dbbcb02e32a1a69bbc25877a84741f274a05daa49cbf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/skip-pickup-observe.json",
+      "raw_bytes": 1075,
+      "raw_sha256": "ae8aee17d141bcf67aafdeb7c49b1b6410d08412befc578900777302aa6356d4",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ae8aee17d141bcf67aafdeb7c49b1b6410d08412befc578900777302aa6356d4.gz",
+      "retained_bytes": 318,
+      "retained_sha256": "1e338b08b200cd52ffc7607cd5c3a6378a89b9b317398042dadd290e7bbb8f78"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/skip-pickup.json",
+      "raw_bytes": 5317,
+      "raw_sha256": "a29af053ad86f3ac0ac6fc08b64c752abf1f7d9ea25d5b2151127f0f390413d8",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a29af053ad86f3ac0ac6fc08b64c752abf1f7d9ea25d5b2151127f0f390413d8.gz",
+      "retained_bytes": 1131,
+      "retained_sha256": "93f0ee6afbf6d23d551338abae87c6af7ce8b3c727338e61e95787e0db724dd6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/wall-input.json",
+      "raw_bytes": 764,
+      "raw_sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68.gz",
+      "retained_bytes": 202,
+      "retained_sha256": "99bfbc7d5e8df6c57e1fb9f4b8a7efbbf010b0e74db57b4455a975ebeb927bb6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/wall-observe.json",
+      "raw_bytes": 764,
+      "raw_sha256": "1a41c16c67de45d54f75522338b59b9a722bb6dfe902078dc2dda1fd15e16a1e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1a41c16c67de45d54f75522338b59b9a722bb6dfe902078dc2dda1fd15e16a1e.gz",
+      "retained_bytes": 239,
+      "retained_sha256": "bc56a62ee5c0309e840c75ecb99ada1dabd62fd17e0b237a31967d97474fef0e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/wall.json",
+      "raw_bytes": 4649,
+      "raw_sha256": "6ed8ca608651101c8e2b3a8c0cbdc999b5a80b96e4c4c50ea2fc7c750b5c279f",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6ed8ca608651101c8e2b3a8c0cbdc999b5a80b96e4c4c50ea2fc7c750b5c279f.gz",
+      "retained_bytes": 1012,
+      "retained_sha256": "3678b4937438fd73ed853ac91f9142d0e38b29c50874755fdd0389473f733671"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/win-input.json",
+      "raw_bytes": 422,
+      "raw_sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731.gz",
+      "retained_bytes": 184,
+      "retained_sha256": "1fd02f62fe580dd92dd698b4bfbe94f1f6a0d5d2217dce6f5f66c904ae1cd3c6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/win-observe.json",
+      "raw_bytes": 2667,
+      "raw_sha256": "6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6c73c23f0de6297b049a189cb34697364590bc51cb3db671275b1bf6f19806d5.gz",
+      "retained_bytes": 344,
+      "retained_sha256": "9ac5d87aa95a97caa3383abb52cabb7fdde96579dfce6f0eff8afe23c53a6323"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/original-seven/win.json",
+      "raw_bytes": 7592,
+      "raw_sha256": "a38f7e2fe4ee0ff9935a9307c2de6e4e7f3c93b91e5c42c73062878d87847bee",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a38f7e2fe4ee0ff9935a9307c2de6e4e7f3c93b91e5c42c73062878d87847bee.gz",
+      "retained_bytes": 1058,
+      "retained_sha256": "b794caeaa9df5a6b636ba646480358004786fef7980a79e9f610b3b5db5d10bd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/protected-check.json",
+      "raw_bytes": 132,
+      "raw_sha256": "468f7f70066ad1ed1dc56406b4ebde9595c9766f28542f209a0a54a392ff97ea",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/468f7f70066ad1ed1dc56406b4ebde9595c9766f28542f209a0a54a392ff97ea.gz",
+      "retained_bytes": 124,
+      "retained_sha256": "4f99bf2530e84b00f35db4405d01427c58a898c8a1f90ad189b693bddde1b682"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/command-001.json",
+      "raw_bytes": 6758,
+      "raw_sha256": "4e8e4c05a4a4c13dac3f123aa3a7ecc85b56eea5639ef21d2fe96a843a8cfe4a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4e8e4c05a4a4c13dac3f123aa3a7ecc85b56eea5639ef21d2fe96a843a8cfe4a.gz",
+      "retained_bytes": 1531,
+      "retained_sha256": "bb3b57c14c9953cbfea9baa3c084b1189378aca074b746c8bc67d612ff874dcb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/command-002.json",
+      "raw_bytes": 7377,
+      "raw_sha256": "9b8f29f4e5d008afa558d8aa0b39bef38a42ebf9a8ac7b5912dca4eb950d9ab3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/9b8f29f4e5d008afa558d8aa0b39bef38a42ebf9a8ac7b5912dca4eb950d9ab3.gz",
+      "retained_bytes": 1537,
+      "retained_sha256": "6d4dc49fd874cef0656831660da6947faca13796b7e051b2dd26c990c53bec54"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/command-003.json",
+      "raw_bytes": 44079,
+      "raw_sha256": "9d5aa154c1cca791c7fffc1382014783d5653a8c9e74073b729cb551694b461b",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/9d5aa154c1cca791c7fffc1382014783d5653a8c9e74073b729cb551694b461b.gz",
+      "retained_bytes": 2786,
+      "retained_sha256": "e392f527ee36129e37656dc447784e08c6e20a2e9b756caeb5c120fe5b140288"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/command-004.json",
+      "raw_bytes": 7869,
+      "raw_sha256": "6b991142550c9b38d3af64eae134e1266a30365f6149fb58e8fa684862afb3fd",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6b991142550c9b38d3af64eae134e1266a30365f6149fb58e8fa684862afb3fd.gz",
+      "retained_bytes": 1631,
+      "retained_sha256": "0db5ee1da9ee949defbd061b9baff7a99ca191f82feb13657dd312caf1ac16ea"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/command-005.json",
+      "raw_bytes": 6773,
+      "raw_sha256": "76405a5f5a7e682a7ec704485bfaf4834c97e31dc1405a65ee82b27e63b88a63",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/76405a5f5a7e682a7ec704485bfaf4834c97e31dc1405a65ee82b27e63b88a63.gz",
+      "retained_bytes": 1536,
+      "retained_sha256": "f1974386171e76d2187e9950781ba40e0661a10725c82dda38247c291a06b437"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/command-006.json",
+      "raw_bytes": 1354,
+      "raw_sha256": "4313bd3513120943c1f9afe76a71296b16a3ee6f6c308be09b8d126e1f12e23c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4313bd3513120943c1f9afe76a71296b16a3ee6f6c308be09b8d126e1f12e23c.gz",
+      "retained_bytes": 337,
+      "retained_sha256": "5f1dbe628f7ead501b11d7e27211eb61481f6be734428b98b2d710a54eeadc9f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/deleted-authoring.json",
+      "raw_bytes": 9137,
+      "raw_sha256": "1840dca4528e397b4466db128ee350f97075d38392d060e36dbd1709720483a4",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1840dca4528e397b4466db128ee350f97075d38392d060e36dbd1709720483a4.gz",
+      "retained_bytes": 4095,
+      "retained_sha256": "e000414ee8b350cf8de6afcb785f881481b1606b437a206467258d2764318cf2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/deleted-maps.json",
+      "raw_bytes": 132,
+      "raw_sha256": "4b2502e579c01784cb5460f53e3f6c76da375b1d05fbf77ec7d7f10fa12038d0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4b2502e579c01784cb5460f53e3f6c76da375b1d05fbf77ec7d7f10fa12038d0.gz",
+      "retained_bytes": 134,
+      "retained_sha256": "882bf3e43f377196ce6e5caf472259016ba623720f6aa867a7cfb2860dee7972"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/idle-input.json",
+      "raw_bytes": 116,
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0.gz",
+      "retained_bytes": 107,
+      "retained_sha256": "2be7ad4fed8f6deed7aa6d8daf3315da06cc71c878d989805aceaf951c1ec22c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/idle-observe.json",
+      "raw_bytes": 1440,
+      "raw_sha256": "ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb.gz",
+      "retained_bytes": 269,
+      "retained_sha256": "0c3e5ff162a7eedc6965d20c8713b40e1c1f5ccd2ca696127bc35ad55a4f2beb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/idle.json",
+      "raw_bytes": 14773,
+      "raw_sha256": "b27f08f23a73c4c5ef88dddd4b52338e4b8c158fa949cdf5a1fe833754c0e576",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b27f08f23a73c4c5ef88dddd4b52338e4b8c158fa949cdf5a1fe833754c0e576.gz",
+      "retained_bytes": 1606,
+      "retained_sha256": "3f827c040d9156f16f4c5c66dc14ecddc051806a4e93241a0b13164f3f70e151"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/idle.pcm",
+      "raw_bytes": 192000,
+      "raw_sha256": "e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951.gz",
+      "retained_bytes": 149316,
+      "retained_sha256": "82f5858ea6ad319e2d1b432efc52570d8814a805d9c5dcf5ce43a0bab92c706c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/locked-input.json",
+      "raw_bytes": 18216,
+      "raw_sha256": "adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf.gz",
+      "retained_bytes": 877,
+      "retained_sha256": "8d779222e8d25557f14bd46823b2faef0a06a32ebabf835ecebabeeade2fe2eb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/locked-observe.json",
+      "raw_bytes": 42506,
+      "raw_sha256": "7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378.gz",
+      "retained_bytes": 1305,
+      "retained_sha256": "d38bd6ee0d1586c42b911ef8cee1600cd2f4fb0642aecb18f51d72512c630f6b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/locked.json",
+      "raw_bytes": 72034,
+      "raw_sha256": "a4e43472e1bd3a72775e1066d4698c650a95837138cd59026e73849f2001b1c9",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a4e43472e1bd3a72775e1066d4698c650a95837138cd59026e73849f2001b1c9.gz",
+      "retained_bytes": 2877,
+      "retained_sha256": "4ee5e21ca8531e3cdf89dbbc5447ef0fc2d2780ec95f4c0cdc85e405346ae91a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/locked.pcm",
+      "raw_bytes": 10163200,
+      "raw_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77.gz",
+      "retained_bytes": 8034991,
+      "retained_sha256": "d8e10c6fde29c289f02385e9996a21512dc4910a215f28150521e2cb547c4d9b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/lose-input.json",
+      "raw_bytes": 118,
+      "raw_sha256": "33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38.gz",
+      "retained_bytes": 108,
+      "retained_sha256": "33aacbff1e49e7fd3a562acb218739f2633114dbd53178fdf8d3f209ea9b8027"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/lose-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "359105c09de4b8b44697b9335feaf34f96cd901eb0f7cb740019b0bdaab62834"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/lose.json",
+      "raw_bytes": 14067,
+      "raw_sha256": "0473bc130f91c02cdc1fb7d419ef9b59d718ca2a9f4f96aff5354c8f198f22ae",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/0473bc130f91c02cdc1fb7d419ef9b59d718ca2a9f4f96aff5354c8f198f22ae.gz",
+      "retained_bytes": 1500,
+      "retained_sha256": "01065e819b4794a648c5057552b97e9001d133e23d59532535a0cbf0e41c52c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/lose.pcm",
+      "raw_bytes": 9600000,
+      "raw_sha256": "305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d.gz",
+      "retained_bytes": 3272657,
+      "retained_sha256": "57a6001812221c69a2c9701f88a6a95a3bcb9d4fc5f82f3e1aac2517d369b5ec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/package/build.log",
+      "raw_bytes": 1358869,
+      "raw_sha256": "2423b0982f3faf5240cfde8b509d6c579ab3e90de9c7889c341654acfeb07a89",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2423b0982f3faf5240cfde8b509d6c579ab3e90de9c7889c341654acfeb07a89.gz",
+      "retained_bytes": 127840,
+      "retained_sha256": "9517edec0f28b875c0794ce285aceb3ca5e5f922582e859305c107f83d5f9db9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/package/export.json",
+      "raw_bytes": 17170,
+      "raw_sha256": "255905f29b96b87e511990a45e2d6673c709d92822bc0db417f2d34668e97087",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/255905f29b96b87e511990a45e2d6673c709d92822bc0db417f2d34668e97087.gz",
+      "retained_bytes": 5304,
+      "retained_sha256": "71fdc1a52eb494404509c03e3671e083ba553757f97c9fc433a6492dd6c1e329"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/package/normal-dependencies.txt",
+      "raw_bytes": 29661,
+      "raw_sha256": "92325d2e67dd0ba903f7901ec907d9fcd5eff469ca49d57d85d0894326c930ed",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/92325d2e67dd0ba903f7901ec907d9fcd5eff469ca49d57d85d0894326c930ed.gz",
+      "retained_bytes": 3927,
+      "retained_sha256": "19f581cb3fa7df2e09aa06e70b2b206dab8a9729b1a08e469b0fd06f3c063d90"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/package/project-build.json",
+      "raw_bytes": 5067,
+      "raw_sha256": "a9f3f7db871a6bc9d8838d8e1ec72d0a4e909b4894effe1ccb09b9d641973327",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a9f3f7db871a6bc9d8838d8e1ec72d0a4e909b4894effe1ccb09b9d641973327.gz",
+      "retained_bytes": 2081,
+      "retained_sha256": "e69619e76ed99ec083791d75e32e43009f7bcdc059a3dc11e6cb9bc53c871672"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/package/symbols/script-symbols.json",
+      "raw_bytes": 1359,
+      "raw_sha256": "f4bb3405abb81df9e5472e4a168498fe62eecacfebf6c5f041805fc5c299e875",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f4bb3405abb81df9e5472e4a168498fe62eecacfebf6c5f041805fc5c299e875.gz",
+      "retained_bytes": 761,
+      "retained_sha256": "ae5c706a8a5f5034d4c2609fefaa44b3b35829bae4873e2d9198a2eb7a73d8f2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-restart-win-input.json",
+      "raw_bytes": 55608,
+      "raw_sha256": "4b14271563954bb69f5843ee1657fc7e29084af063277810f7ef54875ef5424b",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4b14271563954bb69f5843ee1657fc7e29084af063277810f7ef54875ef5424b.gz",
+      "retained_bytes": 1851,
+      "retained_sha256": "6b99571f6509f67f6fbea77d915499e08489eed75807b7e1123c24b350404704"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-restart-win-observe.json",
+      "raw_bytes": 1193,
+      "raw_sha256": "fd4e257f08a9dfc9dfd05c287ef887519bd96ee7fe8f2a1b189455ecec2fab6a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/fd4e257f08a9dfc9dfd05c287ef887519bd96ee7fe8f2a1b189455ecec2fab6a.gz",
+      "retained_bytes": 282,
+      "retained_sha256": "3775811f8bbc5819393fbe962fe84225be44fb15645eebd07e6d450b851a8244"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-tail-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "b913335ef5a457debd710e895a12161f62ed9334c29eebe42843d3a8ddca8076"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-tail-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54.gz",
+      "retained_bytes": 226,
+      "retained_sha256": "cf0d101051cade5019326c731f356818474d5d813ae750273ee4409e07ce407e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-tail.json",
+      "raw_bytes": 11531,
+      "raw_sha256": "366d5109ee51295c7cacd4c5cf0eb06a988ae47f89cd796555d267c5915cb03a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/366d5109ee51295c7cacd4c5cf0eb06a988ae47f89cd796555d267c5915cb03a.gz",
+      "retained_bytes": 1455,
+      "retained_sha256": "60139328170b469263064d968929793ae003a047ddf2e55c62a16d505b09d624"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win-tail.pcm",
+      "raw_bytes": 14758400,
+      "raw_sha256": "a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e.gz",
+      "retained_bytes": 10652371,
+      "retained_sha256": "d06872e602bff83dd2147d391d0b3165f8b1143d62a2c7824e496d13512e5f3e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win.json",
+      "raw_bytes": 11531,
+      "raw_sha256": "891c71a1dc3fd5ddfe5928ffe8cf919d0ebb4598883354e05245d0189d97c2b1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/891c71a1dc3fd5ddfe5928ffe8cf919d0ebb4598883354e05245d0189d97c2b1.gz",
+      "retained_bytes": 1453,
+      "retained_sha256": "2f9fe963cde622020561d528c196f29dacea8966115e7b0f186c54ced3d1d86d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001-command.json",
+      "raw_bytes": 477,
+      "raw_sha256": "d7d41a1814f9a4755638df47c169e599134282d46dc17f31154cf9ef0f78f0d9",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d7d41a1814f9a4755638df47c169e599134282d46dc17f31154cf9ef0f78f0d9.gz",
+      "retained_bytes": 283,
+      "retained_sha256": "226accaf3a405c0f9545afcab00a5299c73dc5868433b047ca102baf15966efa"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-001.log",
+      "raw_bytes": 2944,
+      "raw_sha256": "286c964b676b0bdfe68651e1c34ddab284b39c0e2ff3d60cfacb8378020fdf72",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/286c964b676b0bdfe68651e1c34ddab284b39c0e2ff3d60cfacb8378020fdf72.gz",
+      "retained_bytes": 804,
+      "retained_sha256": "cd4dafcac3368b0cb5e363f2a1cb6a023743ee7e4b81c5da00d0fe7ae00416c0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-001.json",
+      "raw_bytes": 6758,
+      "raw_sha256": "616457910b17f26b87b86befb6d150caa10e01d302ca85c9c1a62565700a0b14",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/616457910b17f26b87b86befb6d150caa10e01d302ca85c9c1a62565700a0b14.gz",
+      "retained_bytes": 1533,
+      "retained_sha256": "199a71f41345cf24b69634a87d269689091c70ab2f8808687e6c61ba68ea2936"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-002.json",
+      "raw_bytes": 7377,
+      "raw_sha256": "05ac0d9d840c65b5bdb4b6e6ee71411c74d01b15e9d20d47f67bcb1dd3b594ed",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/05ac0d9d840c65b5bdb4b6e6ee71411c74d01b15e9d20d47f67bcb1dd3b594ed.gz",
+      "retained_bytes": 1539,
+      "retained_sha256": "a43e7c3b75485687bb667048d27f444e6128c85cc0faa6ed8fcb7a4516848c8e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-003.json",
+      "raw_bytes": 44079,
+      "raw_sha256": "cdcd96f89eb64438b6edb787fb76b292307dfcded90e5432f42c089e929ee7fb",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cdcd96f89eb64438b6edb787fb76b292307dfcded90e5432f42c089e929ee7fb.gz",
+      "retained_bytes": 2788,
+      "retained_sha256": "a1b8aab793001332023305ac1e85ba77aa4746c76d45e379a2b91a005a2eb097"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-004.json",
+      "raw_bytes": 7869,
+      "raw_sha256": "0b431a68f6156626597b5acd0f43db2ef980df0b71cfdd5fe90ac902b61b946a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/0b431a68f6156626597b5acd0f43db2ef980df0b71cfdd5fe90ac902b61b946a.gz",
+      "retained_bytes": 1630,
+      "retained_sha256": "4fe223d9493ea24b8fc2bc7b48af1af138b5aed0e3cccbba99ef10a72c451c79"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-005.json",
+      "raw_bytes": 6773,
+      "raw_sha256": "479cbe685f160ce8d81337ac3988d9b76a15d65755c6272eccb92802d100605a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/479cbe685f160ce8d81337ac3988d9b76a15d65755c6272eccb92802d100605a.gz",
+      "retained_bytes": 1538,
+      "retained_sha256": "ed323f26b674dac498a05317f86eb1d59087182c2720725be4b1ad2b6479b841"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-006.json",
+      "raw_bytes": 7389,
+      "raw_sha256": "91062301c63a9e4d9de81c1b88ae2381348780d7ce88500a6a5c43f3bdfc4912",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/91062301c63a9e4d9de81c1b88ae2381348780d7ce88500a6a5c43f3bdfc4912.gz",
+      "retained_bytes": 1545,
+      "retained_sha256": "a55fd6d33896e290a44bfab74d5facccf7880b9bc2bae1e6835471f2979ef94c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-007.json",
+      "raw_bytes": 8110,
+      "raw_sha256": "f6f89b6374ff3bd41c47fead04ddd9c5a12f4339dcdd8798d8cb2cf82d409b16",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f6f89b6374ff3bd41c47fead04ddd9c5a12f4339dcdd8798d8cb2cf82d409b16.gz",
+      "retained_bytes": 1679,
+      "retained_sha256": "968abc4aef251a4d2e2167537ef88c0cbcbf55540a044b92322ca47c3f0d5a9e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/command-008.json",
+      "raw_bytes": 1373,
+      "raw_sha256": "a7b874857522abc8d9dd75689979edc0756d115bd07bf419fa8b5adb6b966c46",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a7b874857522abc8d9dd75689979edc0756d115bd07bf419fa8b5adb6b966c46.gz",
+      "retained_bytes": 355,
+      "retained_sha256": "24d6c189cc7c510c3b30506c0bb5e7994011464f5058f10a083453fca69408b2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/idle-input.json",
+      "raw_bytes": 116,
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0.gz",
+      "retained_bytes": 107,
+      "retained_sha256": "2be7ad4fed8f6deed7aa6d8daf3315da06cc71c878d989805aceaf951c1ec22c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/idle-observe.json",
+      "raw_bytes": 1440,
+      "raw_sha256": "ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb.gz",
+      "retained_bytes": 269,
+      "retained_sha256": "0c3e5ff162a7eedc6965d20c8713b40e1c1f5ccd2ca696127bc35ad55a4f2beb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/idle.json",
+      "raw_bytes": 14773,
+      "raw_sha256": "b27f08f23a73c4c5ef88dddd4b52338e4b8c158fa949cdf5a1fe833754c0e576",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b27f08f23a73c4c5ef88dddd4b52338e4b8c158fa949cdf5a1fe833754c0e576.gz",
+      "retained_bytes": 1606,
+      "retained_sha256": "3f827c040d9156f16f4c5c66dc14ecddc051806a4e93241a0b13164f3f70e151"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/idle.pcm",
+      "raw_bytes": 192000,
+      "raw_sha256": "e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951.gz",
+      "retained_bytes": 149316,
+      "retained_sha256": "82f5858ea6ad319e2d1b432efc52570d8814a805d9c5dcf5ce43a0bab92c706c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/locked-input.json",
+      "raw_bytes": 18216,
+      "raw_sha256": "adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf.gz",
+      "retained_bytes": 877,
+      "retained_sha256": "8d779222e8d25557f14bd46823b2faef0a06a32ebabf835ecebabeeade2fe2eb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/locked-observe.json",
+      "raw_bytes": 42506,
+      "raw_sha256": "7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378.gz",
+      "retained_bytes": 1305,
+      "retained_sha256": "d38bd6ee0d1586c42b911ef8cee1600cd2f4fb0642aecb18f51d72512c630f6b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/locked.json",
+      "raw_bytes": 72034,
+      "raw_sha256": "a4e43472e1bd3a72775e1066d4698c650a95837138cd59026e73849f2001b1c9",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a4e43472e1bd3a72775e1066d4698c650a95837138cd59026e73849f2001b1c9.gz",
+      "retained_bytes": 2877,
+      "retained_sha256": "4ee5e21ca8531e3cdf89dbbc5447ef0fc2d2780ec95f4c0cdc85e405346ae91a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/locked.pcm",
+      "raw_bytes": 10163200,
+      "raw_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77.gz",
+      "retained_bytes": 8034991,
+      "retained_sha256": "d8e10c6fde29c289f02385e9996a21512dc4910a215f28150521e2cb547c4d9b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-input.json",
+      "raw_bytes": 118,
+      "raw_sha256": "33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38.gz",
+      "retained_bytes": 108,
+      "retained_sha256": "33aacbff1e49e7fd3a562acb218739f2633114dbd53178fdf8d3f209ea9b8027"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "359105c09de4b8b44697b9335feaf34f96cd901eb0f7cb740019b0bdaab62834"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-restart-win-input.json",
+      "raw_bytes": 27968,
+      "raw_sha256": "5601a77ae929ee065a5cbea3d772d89d4d30b812467b26c374c6c257b66bda8c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5601a77ae929ee065a5cbea3d772d89d4d30b812467b26c374c6c257b66bda8c.gz",
+      "retained_bytes": 1213,
+      "retained_sha256": "cd4f78680cdc099ddbf6b60dc528cbf7d8ac96d22fa4ca5e64b0f85ae86eda98"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-restart-win-observe.json",
+      "raw_bytes": 1190,
+      "raw_sha256": "1a7a9b94c1c5c14e98930526819b2a8ba3c3674478933102423cc7858959b5a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1a7a9b94c1c5c14e98930526819b2a8ba3c3674478933102423cc7858959b5a0.gz",
+      "retained_bytes": 279,
+      "retained_sha256": "10fb23e0f7dc54eca1193653c2927ff85b55501e21c5af2f349a940ea535bb09"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-short-input.json",
+      "raw_bytes": 117,
+      "raw_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227.gz",
+      "retained_bytes": 107,
+      "retained_sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-short-observe.json",
+      "raw_bytes": 621,
+      "raw_sha256": "80e81384c39704db66e02083d36798864ae9c59f5a475c4867c38e9cb99837d4",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/80e81384c39704db66e02083d36798864ae9c59f5a475c4867c38e9cb99837d4.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "83a76969308da369bbb0c398d9f5934e6df1f0de809926492ed126d25a9c93f0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-short.json",
+      "raw_bytes": 14062,
+      "raw_sha256": "a5f9ffb1f1ec5ba15ff9d04c87f7d973413278e9fa1c9bf042e04d00555a526d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a5f9ffb1f1ec5ba15ff9d04c87f7d973413278e9fa1c9bf042e04d00555a526d.gz",
+      "retained_bytes": 1503,
+      "retained_sha256": "49e600482dfc6bcaffdc60c8f8aecbc78bc309b016dda0b11f02b4e4fe276eb7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose-short.pcm",
+      "raw_bytes": 5760000,
+      "raw_sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3.gz",
+      "retained_bytes": 3268925,
+      "retained_sha256": "2de2010c56a002781ea29850c088db8a6264302878ad399a86de9c9bd7793b88"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose.json",
+      "raw_bytes": 14067,
+      "raw_sha256": "0473bc130f91c02cdc1fb7d419ef9b59d718ca2a9f4f96aff5354c8f198f22ae",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/0473bc130f91c02cdc1fb7d419ef9b59d718ca2a9f4f96aff5354c8f198f22ae.gz",
+      "retained_bytes": 1500,
+      "retained_sha256": "01065e819b4794a648c5057552b97e9001d133e23d59532535a0cbf0e41c52c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/lose.pcm",
+      "raw_bytes": 9600000,
+      "raw_sha256": "305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d.gz",
+      "retained_bytes": 3272657,
+      "retained_sha256": "57a6001812221c69a2c9701f88a6a95a3bcb9d4fc5f82f3e1aac2517d369b5ec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-restart-lose-input.json",
+      "raw_bytes": 28060,
+      "raw_sha256": "1f104ffec19a35f6ca0f5d4429db3d3b6ef86c55eec678a80507d15179dcd16c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1f104ffec19a35f6ca0f5d4429db3d3b6ef86c55eec678a80507d15179dcd16c.gz",
+      "retained_bytes": 1228,
+      "retained_sha256": "c2f2facefefce7d0f996f24d7181cdc300012973b6ab8cda266550e36d87a891"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-restart-lose-observe.json",
+      "raw_bytes": 1193,
+      "raw_sha256": "784d4f56adafbf7d2dfbb5f59a828cfb9494f2022ae9c19047801f286530ea13",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/784d4f56adafbf7d2dfbb5f59a828cfb9494f2022ae9c19047801f286530ea13.gz",
+      "retained_bytes": 280,
+      "retained_sha256": "d4e56ef1f21c55453df7bf8a45660f14981157c90e58fe456f4ec3398d567ef1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-restart-lose.json",
+      "raw_bytes": 15095,
+      "raw_sha256": "006068abe59f76052fa51c34204b4a728da9bd54737ebe562b474cf3f9325332",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/006068abe59f76052fa51c34204b4a728da9bd54737ebe562b474cf3f9325332.gz",
+      "retained_bytes": 1638,
+      "retained_sha256": "e7b7087392e9536ec6351b42baabfb0b922a01f730242b136b00b1ebbaa7bcdb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-restart-lose.pcm",
+      "raw_bytes": 19558400,
+      "raw_sha256": "d1468dc08ed997d9528056ded579051b4ee47fd7c6c228656dfa3e21d441d5e0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d1468dc08ed997d9528056ded579051b4ee47fd7c6c228656dfa3e21d441d5e0.gz",
+      "retained_bytes": 13910058,
+      "retained_sha256": "bfc10d2375bc71be78bc71b595e3505fad54c927673ef01fc88588bd4ce23b04"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-tail-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "b913335ef5a457debd710e895a12161f62ed9334c29eebe42843d3a8ddca8076"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-tail-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54.gz",
+      "retained_bytes": 226,
+      "retained_sha256": "cf0d101051cade5019326c731f356818474d5d813ae750273ee4409e07ce407e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-tail.json",
+      "raw_bytes": 11531,
+      "raw_sha256": "366d5109ee51295c7cacd4c5cf0eb06a988ae47f89cd796555d267c5915cb03a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/366d5109ee51295c7cacd4c5cf0eb06a988ae47f89cd796555d267c5915cb03a.gz",
+      "retained_bytes": 1455,
+      "retained_sha256": "60139328170b469263064d968929793ae003a047ddf2e55c62a16d505b09d624"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win-tail.pcm",
+      "raw_bytes": 14758400,
+      "raw_sha256": "a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e.gz",
+      "retained_bytes": 10652371,
+      "retained_sha256": "d06872e602bff83dd2147d391d0b3165f8b1143d62a2c7824e496d13512e5f3e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win.json",
+      "raw_bytes": 11531,
+      "raw_sha256": "891c71a1dc3fd5ddfe5928ffe8cf919d0ebb4598883354e05245d0189d97c2b1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/891c71a1dc3fd5ddfe5928ffe8cf919d0ebb4598883354e05245d0189d97c2b1.gz",
+      "retained_bytes": 1453,
+      "retained_sha256": "2f9fe963cde622020561d528c196f29dacea8966115e7b0f186c54ced3d1d86d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002-command.json",
+      "raw_bytes": 589,
+      "raw_sha256": "558fa66752da5904434a7b45a8d6eb7efac1e2ba7837a2ba2b4c0a7bfe078128",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/558fa66752da5904434a7b45a8d6eb7efac1e2ba7837a2ba2b4c0a7bfe078128.gz",
+      "retained_bytes": 295,
+      "retained_sha256": "e8a0ba6a866e6366418bd205b64c9c9ac4d5958faf02fedf58692219bdcc66e4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-002.log",
+      "raw_bytes": 2833,
+      "raw_sha256": "ce11e311a21049b7c0acc862b61213a50da5c33fcb5d83d52757d7c555acc280",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ce11e311a21049b7c0acc862b61213a50da5c33fcb5d83d52757d7c555acc280.gz",
+      "retained_bytes": 740,
+      "retained_sha256": "5be4d1e138a1f8614d08f3a9282d74bc3d265a1a459d270cae467e9b54bb1c16"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-001.json",
+      "raw_bytes": 6758,
+      "raw_sha256": "6caf5b9b3ab01b85fac2b8b687420f2fce927d78ae63aa66313ce1056cac8c65",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/6caf5b9b3ab01b85fac2b8b687420f2fce927d78ae63aa66313ce1056cac8c65.gz",
+      "retained_bytes": 1533,
+      "retained_sha256": "9beebbe6facb4b9502413043ea6e1c5028389b93a21b546666652acc8e20166c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-002.json",
+      "raw_bytes": 7377,
+      "raw_sha256": "fb6d71fc5328e53fe50fb40df404afabfa3fe127d7afb90e715eef0d13caa921",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/fb6d71fc5328e53fe50fb40df404afabfa3fe127d7afb90e715eef0d13caa921.gz",
+      "retained_bytes": 1539,
+      "retained_sha256": "1396270f6484dea2daf477b084a33744790adc63f1457bcf1ec53ea0a1c93758"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-003.json",
+      "raw_bytes": 44079,
+      "raw_sha256": "c45bd52c7957a77de7dd3847bd7ad5c350ebc6815825f31484dedb8b99c08d3f",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c45bd52c7957a77de7dd3847bd7ad5c350ebc6815825f31484dedb8b99c08d3f.gz",
+      "retained_bytes": 2788,
+      "retained_sha256": "44afc6c98b0afe486a3642f456fd20a90ddc2abe7eab3adb0740a03e97ea4e3d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-004.json",
+      "raw_bytes": 7869,
+      "raw_sha256": "72504ec0787aa94963b69614dae96857160bfc14cb1b095c97f6085d96daedce",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/72504ec0787aa94963b69614dae96857160bfc14cb1b095c97f6085d96daedce.gz",
+      "retained_bytes": 1630,
+      "retained_sha256": "14eef27a200b4a6048a221bab6dfc6b108aadfb28a14b54fdeba78feea973530"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-005.json",
+      "raw_bytes": 6773,
+      "raw_sha256": "00fe30e1c3ef7a5427e2870a780468726a06b1f76a4f65cd8ef198443a7fb583",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/00fe30e1c3ef7a5427e2870a780468726a06b1f76a4f65cd8ef198443a7fb583.gz",
+      "retained_bytes": 1538,
+      "retained_sha256": "563cac3b0310c2f9fe7c22ce4ce59266d65db83534f1a0ef62178a33aa265ceb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-006.json",
+      "raw_bytes": 7389,
+      "raw_sha256": "89dc13366affa18af10ae34c15c67b1ca5dad01f9983c0a5a813e294002e7769",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/89dc13366affa18af10ae34c15c67b1ca5dad01f9983c0a5a813e294002e7769.gz",
+      "retained_bytes": 1545,
+      "retained_sha256": "110d2316a3641441c0513ff63ef3264bf9130a8d54a0d2b4e7782d9748a1d020"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-007.json",
+      "raw_bytes": 8110,
+      "raw_sha256": "a695b44e6bcc283a905972aa66020a612607bcca854499c77bcebf9e066ae01d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a695b44e6bcc283a905972aa66020a612607bcca854499c77bcebf9e066ae01d.gz",
+      "retained_bytes": 1679,
+      "retained_sha256": "40cfac286ef37769a136fcebee45ecae8e7e433c10435be4707f990146a6e2a3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-008.json",
+      "raw_bytes": 7492,
+      "raw_sha256": "77d1ecceca6d4f48082b792b59510025febbd14a4f99af4d4cb31d51f925770a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/77d1ecceca6d4f48082b792b59510025febbd14a4f99af4d4cb31d51f925770a.gz",
+      "retained_bytes": 1668,
+      "retained_sha256": "bb9d6366458f673ab1e19667cb0580d04f21e61a962bc9ba8aedc61499d5bf63"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-009.json",
+      "raw_bytes": 8122,
+      "raw_sha256": "427666344988e58bbee5bfde20602b60f952dc4e08790ae0a3b59364bd514d3f",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/427666344988e58bbee5bfde20602b60f952dc4e08790ae0a3b59364bd514d3f.gz",
+      "retained_bytes": 1678,
+      "retained_sha256": "bc079d95b3d041dd1b528878be8ff8fcb6687bae499bc12103630465c6e690e0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/command-010.json",
+      "raw_bytes": 9418,
+      "raw_sha256": "8e4b758000068675c882bff8ad3e0b0f6603c46dbd138a748415053d3767249b",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/8e4b758000068675c882bff8ad3e0b0f6603c46dbd138a748415053d3767249b.gz",
+      "retained_bytes": 1868,
+      "retained_sha256": "a8ce46442a0f9c7ae9253fc9834fb9c894981de916676b3a0685ddc8f6fc1196"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/gamepad-restart-lose-input.json",
+      "raw_bytes": 28121,
+      "raw_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72.gz",
+      "retained_bytes": 1212,
+      "retained_sha256": "ceeb26982511068cbfd05ad1f523dcecc224040d7234e433b9673e94d459dba4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/gamepad-restart-lose-observe.json",
+      "raw_bytes": 1193,
+      "raw_sha256": "784d4f56adafbf7d2dfbb5f59a828cfb9494f2022ae9c19047801f286530ea13",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/784d4f56adafbf7d2dfbb5f59a828cfb9494f2022ae9c19047801f286530ea13.gz",
+      "retained_bytes": 280,
+      "retained_sha256": "d4e56ef1f21c55453df7bf8a45660f14981157c90e58fe456f4ec3398d567ef1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/gamepad-restart-lose.json",
+      "raw_bytes": 15095,
+      "raw_sha256": "006068abe59f76052fa51c34204b4a728da9bd54737ebe562b474cf3f9325332",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/006068abe59f76052fa51c34204b4a728da9bd54737ebe562b474cf3f9325332.gz",
+      "retained_bytes": 1638,
+      "retained_sha256": "e7b7087392e9536ec6351b42baabfb0b922a01f730242b136b00b1ebbaa7bcdb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/gamepad-restart-lose.pcm",
+      "raw_bytes": 19558400,
+      "raw_sha256": "d1468dc08ed997d9528056ded579051b4ee47fd7c6c228656dfa3e21d441d5e0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d1468dc08ed997d9528056ded579051b4ee47fd7c6c228656dfa3e21d441d5e0.gz",
+      "retained_bytes": 13910058,
+      "retained_sha256": "bfc10d2375bc71be78bc71b595e3505fad54c927673ef01fc88588bd4ce23b04"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/held-restart-idle-input.json",
+      "raw_bytes": 28155,
+      "raw_sha256": "c3b459a37f6e73cbf639cdf8329e891365675276710a5e01b8de98a3547c09a3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c3b459a37f6e73cbf639cdf8329e891365675276710a5e01b8de98a3547c09a3.gz",
+      "retained_bytes": 1240,
+      "retained_sha256": "d0211670ef7347a82604b2268f38ce6d937ce09b759e737da6b53fc93f0f2e4f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/held-restart-idle-observe.json",
+      "raw_bytes": 2633,
+      "raw_sha256": "76cec5d7b92a256f4098792c4b19eceb5c929ba41d6ddb52ad7b560c70a47a4e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/76cec5d7b92a256f4098792c4b19eceb5c929ba41d6ddb52ad7b560c70a47a4e.gz",
+      "retained_bytes": 379,
+      "retained_sha256": "284eebbac7e9844e89e555df8d80b4b6ae373307ab94eb0868dc15553188ec53"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/held-restart-idle.json",
+      "raw_bytes": 17185,
+      "raw_sha256": "ec5a20041acb2553c49ee25ca0fc5a78c3cbf17d2ee3a26b398aeb44704e0c20",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ec5a20041acb2553c49ee25ca0fc5a78c3cbf17d2ee3a26b398aeb44704e0c20.gz",
+      "retained_bytes": 1861,
+      "retained_sha256": "61ca9357f1cf5dcc37a94086146bab12e739963d55d2bd9104c149cd889cc1dd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/held-restart-idle.pcm",
+      "raw_bytes": 13990400,
+      "raw_sha256": "8e7f7245422e5c849c257c6443102e52887c489f953270db399f4f16bf1d56b7",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/8e7f7245422e5c849c257c6443102e52887c489f953270db399f4f16bf1d56b7.gz",
+      "retained_bytes": 10788784,
+      "retained_sha256": "646b14a63f952370ecff9cf37e4cb715b4273fca8d53a4a1bb442535b08945c7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/idle-input.json",
+      "raw_bytes": 116,
+      "raw_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0.gz",
+      "retained_bytes": 107,
+      "retained_sha256": "2be7ad4fed8f6deed7aa6d8daf3315da06cc71c878d989805aceaf951c1ec22c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/idle-observe.json",
+      "raw_bytes": 1440,
+      "raw_sha256": "ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ca3c5b84b09d42897f4b9ab70ad4fb47f22ae1926539585b6be60b9304d03abb.gz",
+      "retained_bytes": 269,
+      "retained_sha256": "0c3e5ff162a7eedc6965d20c8713b40e1c1f5ccd2ca696127bc35ad55a4f2beb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/idle.json",
+      "raw_bytes": 14773,
+      "raw_sha256": "b27f08f23a73c4c5ef88dddd4b52338e4b8c158fa949cdf5a1fe833754c0e576",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b27f08f23a73c4c5ef88dddd4b52338e4b8c158fa949cdf5a1fe833754c0e576.gz",
+      "retained_bytes": 1606,
+      "retained_sha256": "3f827c040d9156f16f4c5c66dc14ecddc051806a4e93241a0b13164f3f70e151"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/idle.pcm",
+      "raw_bytes": 192000,
+      "raw_sha256": "e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e254ec382a2ab58641d276d4fb174f653adf617b495951fc842ea6fa79577951.gz",
+      "retained_bytes": 149316,
+      "retained_sha256": "82f5858ea6ad319e2d1b432efc52570d8814a805d9c5dcf5ce43a0bab92c706c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/locked-input.json",
+      "raw_bytes": 18216,
+      "raw_sha256": "adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf.gz",
+      "retained_bytes": 877,
+      "retained_sha256": "8d779222e8d25557f14bd46823b2faef0a06a32ebabf835ecebabeeade2fe2eb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/locked-observe.json",
+      "raw_bytes": 42506,
+      "raw_sha256": "7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/7a3f6dfdef4474b05f48e3963c6a4ef11e3c23041167108d335f9dc94c44a378.gz",
+      "retained_bytes": 1305,
+      "retained_sha256": "d38bd6ee0d1586c42b911ef8cee1600cd2f4fb0642aecb18f51d72512c630f6b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/locked.json",
+      "raw_bytes": 72034,
+      "raw_sha256": "a4e43472e1bd3a72775e1066d4698c650a95837138cd59026e73849f2001b1c9",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a4e43472e1bd3a72775e1066d4698c650a95837138cd59026e73849f2001b1c9.gz",
+      "retained_bytes": 2877,
+      "retained_sha256": "4ee5e21ca8531e3cdf89dbbc5447ef0fc2d2780ec95f4c0cdc85e405346ae91a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/locked.pcm",
+      "raw_bytes": 10163200,
+      "raw_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77.gz",
+      "retained_bytes": 8034991,
+      "retained_sha256": "d8e10c6fde29c289f02385e9996a21512dc4910a215f28150521e2cb547c4d9b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-input.json",
+      "raw_bytes": 118,
+      "raw_sha256": "33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/33d598f2ede489354d76d4c47dc5c04a54abe7f23e50ee6b6af3d8ddbd8b7b38.gz",
+      "retained_bytes": 108,
+      "retained_sha256": "33aacbff1e49e7fd3a562acb218739f2633114dbd53178fdf8d3f209ea9b8027"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/3dede6976363a56238dee1d0d3b91c707ea55bf0f3119dd4a7111ff3640c2056.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "359105c09de4b8b44697b9335feaf34f96cd901eb0f7cb740019b0bdaab62834"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-restart-win-input.json",
+      "raw_bytes": 28046,
+      "raw_sha256": "97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777.gz",
+      "retained_bytes": 1233,
+      "retained_sha256": "4185522f4f4c54b3c8a3e64b7695f5515b752f2106d60a0241254ba270aeab08"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-restart-win-observe.json",
+      "raw_bytes": 1190,
+      "raw_sha256": "1a7a9b94c1c5c14e98930526819b2a8ba3c3674478933102423cc7858959b5a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1a7a9b94c1c5c14e98930526819b2a8ba3c3674478933102423cc7858959b5a0.gz",
+      "retained_bytes": 279,
+      "retained_sha256": "10fb23e0f7dc54eca1193653c2927ff85b55501e21c5af2f349a940ea535bb09"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-restart-win.json",
+      "raw_bytes": 12557,
+      "raw_sha256": "20015235f85a37f50be4b21b7bcc0e40b780936e756b19213a294c3950d168c5",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/20015235f85a37f50be4b21b7bcc0e40b780936e756b19213a294c3950d168c5.gz",
+      "retained_bytes": 1590,
+      "retained_sha256": "c79fe7b0a36f25534a32df0c0348de56ef29795337a2566304977852ce61f773"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-restart-win.pcm",
+      "raw_bytes": 19558400,
+      "raw_sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442.gz",
+      "retained_bytes": 13909687,
+      "retained_sha256": "77ea741da5dd88934f20b47491132189886251d067c40a854b1fe41d9e747bdc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-short-input.json",
+      "raw_bytes": 117,
+      "raw_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227.gz",
+      "retained_bytes": 107,
+      "retained_sha256": "cb81adeb43532701eedf372d1d963e33ade64d8b5fe24f46b6ad175e2d7ca8a1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-short-observe.json",
+      "raw_bytes": 621,
+      "raw_sha256": "80e81384c39704db66e02083d36798864ae9c59f5a475c4867c38e9cb99837d4",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/80e81384c39704db66e02083d36798864ae9c59f5a475c4867c38e9cb99837d4.gz",
+      "retained_bytes": 225,
+      "retained_sha256": "83a76969308da369bbb0c398d9f5934e6df1f0de809926492ed126d25a9c93f0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-short.json",
+      "raw_bytes": 14062,
+      "raw_sha256": "a5f9ffb1f1ec5ba15ff9d04c87f7d973413278e9fa1c9bf042e04d00555a526d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a5f9ffb1f1ec5ba15ff9d04c87f7d973413278e9fa1c9bf042e04d00555a526d.gz",
+      "retained_bytes": 1503,
+      "retained_sha256": "49e600482dfc6bcaffdc60c8f8aecbc78bc309b016dda0b11f02b4e4fe276eb7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-short.pcm",
+      "raw_bytes": 5760000,
+      "raw_sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3.gz",
+      "retained_bytes": 3268925,
+      "retained_sha256": "2de2010c56a002781ea29850c088db8a6264302878ad399a86de9c9bd7793b88"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose.json",
+      "raw_bytes": 14067,
+      "raw_sha256": "0473bc130f91c02cdc1fb7d419ef9b59d718ca2a9f4f96aff5354c8f198f22ae",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/0473bc130f91c02cdc1fb7d419ef9b59d718ca2a9f4f96aff5354c8f198f22ae.gz",
+      "retained_bytes": 1500,
+      "retained_sha256": "01065e819b4794a648c5057552b97e9001d133e23d59532535a0cbf0e41c52c3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose.pcm",
+      "raw_bytes": 9600000,
+      "raw_sha256": "305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/305eb404385a7f086e4cb251a4dc37c014febe8c36e0455ec2ccd6b99ab3c26d.gz",
+      "retained_bytes": 3272657,
+      "retained_sha256": "57a6001812221c69a2c9701f88a6a95a3bcb9d4fc5f82f3e1aac2517d369b5ec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/result.json",
+      "raw_bytes": 6420,
+      "raw_sha256": "41259d5211173c6d2e796874d3e1a581a6928d6056132d22a5a485ad5c4a7b8c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/41259d5211173c6d2e796874d3e1a581a6928d6056132d22a5a485ad5c4a7b8c.gz",
+      "retained_bytes": 3124,
+      "retained_sha256": "838771959a3abe7012fdeff5e1f9cbeba7172e6fdd7ca6b4f57111f63fa3155b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "1f479c8084c922c2d97beb172b29ad9d5e3c8e3c305b2f4cccab70c255eab3d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/399d8357dedc303ca940f000dacaf85fa5a7fc5cc6c4a015fed600d572300627.gz",
+      "retained_bytes": 227,
+      "retained_sha256": "01138f55685f633246a75fc3d5d8d64625fa9f7ee656550f5f9c5e8fb86bde91"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-restart-lose-input.json",
+      "raw_bytes": 28060,
+      "raw_sha256": "1f104ffec19a35f6ca0f5d4429db3d3b6ef86c55eec678a80507d15179dcd16c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1f104ffec19a35f6ca0f5d4429db3d3b6ef86c55eec678a80507d15179dcd16c.gz",
+      "retained_bytes": 1228,
+      "retained_sha256": "c2f2facefefce7d0f996f24d7181cdc300012973b6ab8cda266550e36d87a891"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-restart-lose-observe.json",
+      "raw_bytes": 1193,
+      "raw_sha256": "784d4f56adafbf7d2dfbb5f59a828cfb9494f2022ae9c19047801f286530ea13",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/784d4f56adafbf7d2dfbb5f59a828cfb9494f2022ae9c19047801f286530ea13.gz",
+      "retained_bytes": 280,
+      "retained_sha256": "d4e56ef1f21c55453df7bf8a45660f14981157c90e58fe456f4ec3398d567ef1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-restart-lose.json",
+      "raw_bytes": 15095,
+      "raw_sha256": "006068abe59f76052fa51c34204b4a728da9bd54737ebe562b474cf3f9325332",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/006068abe59f76052fa51c34204b4a728da9bd54737ebe562b474cf3f9325332.gz",
+      "retained_bytes": 1638,
+      "retained_sha256": "e7b7087392e9536ec6351b42baabfb0b922a01f730242b136b00b1ebbaa7bcdb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-restart-lose.pcm",
+      "raw_bytes": 19558400,
+      "raw_sha256": "d1468dc08ed997d9528056ded579051b4ee47fd7c6c228656dfa3e21d441d5e0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d1468dc08ed997d9528056ded579051b4ee47fd7c6c228656dfa3e21d441d5e0.gz",
+      "retained_bytes": 13910058,
+      "retained_sha256": "bfc10d2375bc71be78bc71b595e3505fad54c927673ef01fc88588bd4ce23b04"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-tail-input.json",
+      "raw_bytes": 27753,
+      "raw_sha256": "1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1f2b1d52e35baaa458329c6482cf5dbd15d5da45b7d7ef82bd99626dcf40bd0a.gz",
+      "retained_bytes": 1179,
+      "retained_sha256": "b913335ef5a457debd710e895a12161f62ed9334c29eebe42843d3a8ddca8076"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-tail-observe.json",
+      "raw_bytes": 622,
+      "raw_sha256": "30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/30fccf6bcd7d867aa8243f7a164065acb8dec9f647b66ca4635fe7d8e8233a54.gz",
+      "retained_bytes": 226,
+      "retained_sha256": "cf0d101051cade5019326c731f356818474d5d813ae750273ee4409e07ce407e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-tail.json",
+      "raw_bytes": 11531,
+      "raw_sha256": "366d5109ee51295c7cacd4c5cf0eb06a988ae47f89cd796555d267c5915cb03a",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/366d5109ee51295c7cacd4c5cf0eb06a988ae47f89cd796555d267c5915cb03a.gz",
+      "retained_bytes": 1455,
+      "retained_sha256": "60139328170b469263064d968929793ae003a047ddf2e55c62a16d505b09d624"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-tail.pcm",
+      "raw_bytes": 14758400,
+      "raw_sha256": "a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/a25c977ad67d01e0fc60641506fa2ed4f9b6870a11b8a143efc3a7673779427e.gz",
+      "retained_bytes": 10652371,
+      "retained_sha256": "d06872e602bff83dd2147d391d0b3165f8b1143d62a2c7824e496d13512e5f3e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win.json",
+      "raw_bytes": 11531,
+      "raw_sha256": "891c71a1dc3fd5ddfe5928ffe8cf919d0ebb4598883354e05245d0189d97c2b1",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/891c71a1dc3fd5ddfe5928ffe8cf919d0ebb4598883354e05245d0189d97c2b1.gz",
+      "retained_bytes": 1453,
+      "retained_sha256": "2f9fe963cde622020561d528c196f29dacea8966115e7b0f186c54ced3d1d86d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win.pcm",
+      "raw_bytes": 13798400,
+      "raw_sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3.gz",
+      "retained_bytes": 10637640,
+      "retained_sha256": "28d9d6fad797c5071d05e1628789150237924f667b8db393f929303bb65386ff"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003-command.json",
+      "raw_bytes": 591,
+      "raw_sha256": "1cc0a6351b83bc09f453ea3854099d7156f087ae08142ee8d3e682d7bf84e51c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1cc0a6351b83bc09f453ea3854099d7156f087ae08142ee8d3e682d7bf84e51c.gz",
+      "retained_bytes": 297,
+      "retained_sha256": "8e19f47d529b5c215becf398eed621faf611c36432abdafe14a42b6a45ded246"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003.log",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_bytes": 20,
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/unit-005.log",
+      "raw_bytes": 2430,
+      "raw_sha256": "90fbe2b4ab7233ba3f8ae18e6fc8b30e496f78ff79f33fef5442d13ad76d091b",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/90fbe2b4ab7233ba3f8ae18e6fc8b30e496f78ff79f33fef5442d13ad76d091b.gz",
+      "retained_bytes": 622,
+      "retained_sha256": "b3fd6c4c1104e4c227fde606eb6eebdbc2d3a42dbdb7315c8a273b64efbfe568"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/unit-006.log",
+      "raw_bytes": 2604,
+      "raw_sha256": "577d844eba328fe401d8f978e879b75819de903f83219b18eba4be28a5f45960",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/577d844eba328fe401d8f978e879b75819de903f83219b18eba4be28a5f45960.gz",
+      "retained_bytes": 651,
+      "retained_sha256": "def30a6b9d74362507523806016a5a6f418a7335757f8bef274f4873e03716ad"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-001/inventory.json",
+      "raw_bytes": 1547,
+      "raw_sha256": "0ab19ae3390427ca4fafab2166b2a0c0b137fbbf0783f5837d2f1d16b5be72d9",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/0ab19ae3390427ca4fafab2166b2a0c0b137fbbf0783f5837d2f1d16b5be72d9.gz",
+      "retained_bytes": 698,
+      "retained_sha256": "5b590c214092bd4b38cf8f1e33c43de85a396ade2d19be8f02908e446ffe2c2a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-002/inventory.json",
+      "raw_bytes": 5770,
+      "raw_sha256": "abd8a7026f22750d607a929f14d2184a9fbf3ef825b40ca00981edfbad0aad02",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/abd8a7026f22750d607a929f14d2184a9fbf3ef825b40ca00981edfbad0aad02.gz",
+      "retained_bytes": 2139,
+      "retained_sha256": "ec6966bf118d4ed6356b4509233e7b61b051168459c8308a7ab4033ea81934d5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-002/patch.diff",
+      "raw_bytes": 7802,
+      "raw_sha256": "78c4e896a9f66af9bde8bed211aaccd010fb9021dfb70caa786fad13108e6c0e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/78c4e896a9f66af9bde8bed211aaccd010fb9021dfb70caa786fad13108e6c0e.gz",
+      "retained_bytes": 3470,
+      "retained_sha256": "5943c5552235e691256f9ff641ea286d422b789e1665e266fd8ed2d2d3f95a1e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-002/unit.log",
+      "raw_bytes": 2090,
+      "raw_sha256": "5f1a5c6cbd3bb5995b3057234cb399fb3a26958974f71f32afcda4592cea089e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5f1a5c6cbd3bb5995b3057234cb399fb3a26958974f71f32afcda4592cea089e.gz",
+      "retained_bytes": 545,
+      "retained_sha256": "a728015e22e23e3bd2286b7b7fcf56d520ad793dcc869fcfb02deef702b9a59c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-003/inventory.json",
+      "raw_bytes": 6400,
+      "raw_sha256": "c76bff939366b1d110696c54a73183e857a078670ad2ebc60f6d67570b2a42ae",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c76bff939366b1d110696c54a73183e857a078670ad2ebc60f6d67570b2a42ae.gz",
+      "retained_bytes": 2389,
+      "retained_sha256": "044e109db60ed3c88d2a8e3a7159a9889feeb2282d0c4e761ceb234ca64b78b8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-003/patch.diff",
+      "raw_bytes": 7802,
+      "raw_sha256": "78c4e896a9f66af9bde8bed211aaccd010fb9021dfb70caa786fad13108e6c0e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/78c4e896a9f66af9bde8bed211aaccd010fb9021dfb70caa786fad13108e6c0e.gz",
+      "retained_bytes": 3470,
+      "retained_sha256": "5943c5552235e691256f9ff641ea286d422b789e1665e266fd8ed2d2d3f95a1e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-003/unit.log",
+      "raw_bytes": 2248,
+      "raw_sha256": "ee423d66845c92dee56bbaa388bf34b566086114b4c08cca81fcea49c6eb065d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ee423d66845c92dee56bbaa388bf34b566086114b4c08cca81fcea49c6eb065d.gz",
+      "retained_bytes": 580,
+      "retained_sha256": "a43251b8f300944c5ba9bb9160047069cd44fbed4b17cd6af75b043e5ea199fc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-004/inventory.json",
+      "raw_bytes": 6478,
+      "raw_sha256": "d6b77f02420747ad021fbb0fecd15a7b438fdbca1f8691bf835afe6a47d88a2c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/d6b77f02420747ad021fbb0fecd15a7b438fdbca1f8691bf835afe6a47d88a2c.gz",
+      "retained_bytes": 2439,
+      "retained_sha256": "b2311a680de9b45614e10ee0d303fc318633af0bea76f3bece083bba53fd0e95"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-004/unit.log",
+      "raw_bytes": 2248,
+      "raw_sha256": "ee423d66845c92dee56bbaa388bf34b566086114b4c08cca81fcea49c6eb065d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ee423d66845c92dee56bbaa388bf34b566086114b4c08cca81fcea49c6eb065d.gz",
+      "retained_bytes": 580,
+      "retained_sha256": "a43251b8f300944c5ba9bb9160047069cd44fbed4b17cd6af75b043e5ea199fc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-005/inventory.json",
+      "raw_bytes": 6692,
+      "raw_sha256": "38d337ab891706582f6b9cd4dc6165e80fe3644b724078ed661ad79894465d57",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/38d337ab891706582f6b9cd4dc6165e80fe3644b724078ed661ad79894465d57.gz",
+      "retained_bytes": 2524,
+      "retained_sha256": "4fc6ce1ebda666565dc3ef9816555f93ff5d9030eb496ffef393aea9d809ef8f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/inventory.json",
+      "raw_bytes": 6669,
+      "raw_sha256": "5865bfc9011818f89d85ee265f75cf5305c009f7faf2d64dd53b72653c3a59dd",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5865bfc9011818f89d85ee265f75cf5305c009f7faf2d64dd53b72653c3a59dd.gz",
+      "retained_bytes": 2498,
+      "retained_sha256": "5a167b830955618642bebaaabc4903e60b942d3549c82ef01567b863eeb150ab"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/PRESENTATION.md",
+      "raw_bytes": 8925,
+      "raw_sha256": "1d6eb2b91f6fa7cfce0437ec805b5d918f8dbc601b3b88285b38c3aafff85ec3",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1d6eb2b91f6fa7cfce0437ec805b5d918f8dbc601b3b88285b38c3aafff85ec3.gz",
+      "retained_bytes": 4187,
+      "retained_sha256": "743161568ab26075b1a895c496ca8c7fa4d92226e58209083596cf2bc5e91784"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/binding_oracle.py",
+      "raw_bytes": 10841,
+      "raw_sha256": "1eee33ae986c31ab9e19f6441315d2663f38f094715640974a51a4b664a2e58c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1eee33ae986c31ab9e19f6441315d2663f38f094715640974a51a4b664a2e58c.gz",
+      "retained_bytes": 3752,
+      "retained_sha256": "bb167c4ca10c44331abd1f2f2eef4087c0872e50ee83a473dc1b50fe1ac1fcc2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/bindings.py",
+      "raw_bytes": 2823,
+      "raw_sha256": "821aa9afdefe16aaaf0a3bba704ff540dad2ebdd43c274370d53505569c880ab",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/821aa9afdefe16aaaf0a3bba704ff540dad2ebdd43c274370d53505569c880ab.gz",
+      "retained_bytes": 1280,
+      "retained_sha256": "ac8fd8fe07231742ed01b09d12dc0d132d9aef24ab5a458695e05b5595137f53"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/gameplay.ts",
+      "raw_bytes": 15111,
+      "raw_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211.gz",
+      "retained_bytes": 4647,
+      "retained_sha256": "ef975f64022db0cbbea22fcb81ce14a585c48f81463404794e9a463a1138ee95"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/hud.py",
+      "raw_bytes": 7352,
+      "raw_sha256": "903278fcfc0f4d7ef474192187a6158ff0066183c10d44570f727f575eb9663e",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/903278fcfc0f4d7ef474192187a6158ff0066183c10d44570f727f575eb9663e.gz",
+      "retained_bytes": 2723,
+      "retained_sha256": "e9243f5a49e31b9a21b20f784650231eb94d906e80406cd50e4bc72cf32f09ad"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/playtest.py",
+      "raw_bytes": 13264,
+      "raw_sha256": "85eacb004af3f42fcd2a12274639b77f25b98d07a54cfdcb85996ca86c8ebd22",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/85eacb004af3f42fcd2a12274639b77f25b98d07a54cfdcb85996ca86c8ebd22.gz",
+      "retained_bytes": 4503,
+      "retained_sha256": "7e5b429de66956fb0162a9250c5ef48028ede2c87e7d7d45508db8539695204b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/routes/locked-input.json",
+      "raw_bytes": 8894,
+      "raw_sha256": "b0bfc0ad8b76032941f9ae77b67060be8c5b8ba8fe4bb4f170681f55379ea30d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/b0bfc0ad8b76032941f9ae77b67060be8c5b8ba8fe4bb4f170681f55379ea30d.gz",
+      "retained_bytes": 794,
+      "retained_sha256": "7ba96f8951a9074ed6e79f15903fddcbea8b5ea1549be3c7b1c245ae86658808"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/routes/win-input.json",
+      "raw_bytes": 13571,
+      "raw_sha256": "5c23f6f64bf59a8c40634f8e34f4469ab0a17f40750f02bcbee630f721729a63",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/5c23f6f64bf59a8c40634f8e34f4469ab0a17f40750f02bcbee630f721729a63.gz",
+      "retained_bytes": 1058,
+      "retained_sha256": "7ff68a4de3cea1d12c41c8464d723aacd16a0abf91ee0a82467cd181f81e456c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/scene.py",
+      "raw_bytes": 20615,
+      "raw_sha256": "1bad3df4011575a71689d8af5e21082bb44d26babdd0dee876878348164d68a0",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/1bad3df4011575a71689d8af5e21082bb44d26babdd0dee876878348164d68a0.gz",
+      "retained_bytes": 6811,
+      "retained_sha256": "371ffcaf8d4d47e088aba450316badcdc65232b328341fec1a5c8d6824e231bd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/test_bindings.py",
+      "raw_bytes": 6596,
+      "raw_sha256": "2001022e7b3c65d14cb1fd8eaa6186c0be1e95aba03e7fe12af3b49d94e4b10c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2001022e7b3c65d14cb1fd8eaa6186c0be1e95aba03e7fe12af3b49d94e4b10c.gz",
+      "retained_bytes": 2148,
+      "retained_sha256": "080f63edb8e5491861de3a27badf9bd84134866865a972f223b48f367d683826"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/test_playtest.py",
+      "raw_bytes": 4769,
+      "raw_sha256": "f0c54327512c6d331fe358798b84078ec63e71e5f2aa64a0875df2ba0f459b40",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/f0c54327512c6d331fe358798b84078ec63e71e5f2aa64a0875df2ba0f459b40.gz",
+      "retained_bytes": 1567,
+      "retained_sha256": "123eddce1190c799881642a6d51c0a507c3db84ca4d5369aae44a1a0f631a94b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/ui/hud.json",
+      "raw_bytes": 2848,
+      "raw_sha256": "2ae3136757a767b3c21d8d8b8aabf5cf720ccf4e2eb32ab68c87a5036a954dae",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/2ae3136757a767b3c21d8d8b8aabf5cf720ccf4e2eb32ab68c87a5036a954dae.gz",
+      "retained_bytes": 886,
+      "retained_sha256": "fb4dcd8874a9ef991c65c007a47b775675df13b56100db7f6ee7ac16dc79d641"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/ui/strings.json",
+      "raw_bytes": 1389,
+      "raw_sha256": "8bc4cb760ac832b9133d8699e47448e909f5e0b3827c5b5c711b9b06af500526",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/8bc4cb760ac832b9133d8699e47448e909f5e0b3827c5b5c711b9b06af500526.gz",
+      "retained_bytes": 559,
+      "retained_sha256": "478aeb9ca2099a8e54ad2b37094258ba2f4ae83dda875ffa7411075cb0684a73"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-source-006/samples/core/verify_bindings.py",
+      "raw_bytes": 20446,
+      "raw_sha256": "c73e838ef6bb951b840c5eb7dcfaafb05db7b9e6a0afa27c61b18a0ef064442d",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/c73e838ef6bb951b840c5eb7dcfaafb05db7b9e6a0afa27c61b18a0ef064442d.gz",
+      "retained_bytes": 6164,
+      "retained_sha256": "c3a5d3a1318024422f7ff2182fe16d241ffb5eb4fbcf0cd24af804639af67771"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/core-runtime-bindings-probe-20261013.json",
+      "raw_bytes": 1160,
+      "raw_sha256": "cf233b31be056c41a7f412e3e13375b398747e2990a8c78e48aa60deebf8e70c",
+      "retained": "docs/spikes/evidence/core-authored-runtime-bindings/cf233b31be056c41a7f412e3e13375b398747e2990a8c78e48aa60deebf8e70c.gz",
+      "retained_bytes": 713,
+      "retained_sha256": "fd40fa595bc366b621862b095062a323b1790ac5eab23ed28cc154b72c522687"
+    }
+  ],
+  "reviewed_execution_manifest_sha256": "a9cdc8fe71b51f23b54e95acce35cfc00affe91e2a3057a7f3840fcb83d6cf9c",
+  "final_review": {
+    "path": "docs/spikes/evidence/core-authored-runtime-bindings-review.json",
+    "sha256": "0d4d531f63283dc3c0e018315cd1d74cc44e1051ec6b1ec4cf4f0a55afd8b125",
+    "original": "/Users/andreyyurlov/.codex/incant-reviews/core-authored-runtime-bindings-final-20261013.json"
+  }
+}

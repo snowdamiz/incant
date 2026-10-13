@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Authored Core runtime bindings — CPU proof accepted
+
+The 0060 mesa now binds its existing localized HUD and audio sources to the
+unchanged current controller, with R/Start whole-session restart. Public atomic
+authoring, Undo/Redo and reopen pass; all art/layout inputs are preserved. The
+full 2,156-tick 48 kHz route, loss, locked exit, four locale readbacks, repeated
+cues and four complete packaged reset routes pass. Fresh-session logs/entities/UI
+and concatenated PCM match exactly after source/map/build deletion. Independent
+final review is accepted; publisher intake is pending. No GPU/window/device gate is claimed;
+historical offscreen provenance and Claude's visible restart hint remain open.
+[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md).
+
 ## Core authored-level locked-exit proof — locally accepted
 
 The retained 0060 locked run died before reaching the exit; its old assertion was
