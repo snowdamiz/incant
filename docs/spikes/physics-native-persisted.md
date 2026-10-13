@@ -1,9 +1,9 @@
 # Checked native persisted rigid subset
 
 This is a default-off native byte-admission candidate under `incant-checked-restore`.
-It does not open existing runtime, session or player file-save APIs. Its source
-review and broader deterministic/fast qualification are pending. No GPU work is
-involved.
+It does not open existing runtime, session or player file-save APIs. Independent
+successor source review and scoped deterministic/fast CPU qualification pass. Final producer evidence review and outer save integration
+remain separate. No GPU work is involved.
 
 `NativeFrame::persisted_bytes(&mut Budget, &mut WorkBudget)` independently validates
 the stricter editable-data domain, then charges and copies the exact retained
@@ -47,7 +47,7 @@ collision or simulation actually occurred.
   pairs are precharged for two complete bounded TOIs (including overlap retries)
   and endpoint checks. Units are logical iteration visits, not CPU instructions,
   memory, or latency. Scalar bounds include independent collider/world and
-  parent/child offsets, local COM, predicted motion, radii and effective5*slop.
+  parent/child offsets, local COM, predicted motion, radii and effective `5 * slop`.
   Degree-six setup bounds cover squared triple-cross GJK arithmetic. They are
   not a proof against every tiny barycentric divisor or of query precision;
   native fraction comparisons bound published clamps and native numerical
@@ -56,7 +56,7 @@ collision or simulation actually occurred.
 - Query-visible enabled leaf bounds must contain current geometry plus the
   native skin/prediction margin. All retained ancestors must already contain
   their children, even along pending paths. Bounds/flags/queues are never rebuilt.
-  BVH flags01/11 denote changed/pending, not enablement; exact deferred flag
+  BVH flags `01`/`11` denote changed/pending, not enablement; exact deferred flag
   propagation remains governed by the named pending-tree witness.
 - Current active material coefficients and effective dominance must match their
   native joined values. Packed primitive contact features must be emitted by the
@@ -87,7 +87,7 @@ collision or simulation actually occurred.
 commands, raw logs, and immediate executable copies. `persisted-004` passed 15
 native controls in each dimension (seven structural, eight persisted), with no
 ignored tests. Each dimension has 64 paired continuation steps: default boxes
-at tick67 and a populated flat compound/tile workspace, each continued32 ticks.
+at tick 67 and a populated flat compound/tile workspace, each continued 32 ticks.
 Immediate imported recapture/re-export and repeated opaque reconstruction preserve
 exact bytes without a hidden step.
 
@@ -103,36 +103,83 @@ Historical `persisted-001` compile errors (trait imports/test visibility),
 source are retained. The planar fixture had negative tile-local centers outside
 the already-reviewed tile domain; it was corrected to positive local centers and
 a translated parent. Neither geometry admission nor thresholds were widened.
-Source005 adds documentation/pin provenance after the successful004 run; executable
-receipts remain bound to004, not relabeled as a new run. Broader mode, feature and
-source acceptance remain separate required work before publication.
+Historical source005 added documentation/pin provenance after successful004;
+executable receipts remain bound to004, not relabeled as a new run. That initial
+domain is superseded by the CCD correction below; its passing focused execution does not establish acceptance of the incorrect CCD premise.
 
 ## CCD and pending-tree correction generation
 
-Source42dee is historical and changes-required: its no-enabled-flags implication
+Source `42dee` is historical and changes-required: its no-enabled-flags implication
 incorrectly ignored Rapier automatic fast-body activation. The earlier scoped
-counter/source receipts were superseded on that premise. Sourceccd004 instead
+counter/source receipts were superseded on that premise. Source ccd004 instead
 uses configuration-based single-pass admission and actual clamp tests; it passed
 23 focused native tests per dimension (eight structural, fifteen persisted),
 zero ignored. This includes actual default-enabled boxes, both implicit and
 bullet fast origins across ball/cuboid/capsule/flat compound, empty/populated/full
-BVH caches, and162 paired continuation steps per dimension. A48-step moving
+BVH caches, and 162 paired continuation steps per dimension. A 48-step moving
 floor/ball/sensor fixture repeatedly imports/recaptures and observes a pending
 leaf below an unchanged ancestor. The previous validator's invented enablement
 bit check was removed; actual retained bounds remain checked.
 
 The root audit added two complete TOIs per directed primitive pair, independent
-collider/parent positions and5*slop to the arithmetic envelope. Hostile edited
+collider/parent positions and `5 * slop` to the arithmetic envelope. Hostile edited
 configuration tests reject multiple passes, zero tolerance and huge tolerance;
 far parentless target coordinates also refuse. Active and removed impulse,
 multibody and soft histories refuse before a later imported step. The cumulative
 revision helper checks structural plus numeric edits together without reservation.
 
-Raw compile/fixture failuresccd001/002 and successfulccd003/004 logs and immediate
-executables are retained. Theccd002 moving stacked-box fixture encountered the
+Raw compile/fixture failures ccd001/002 and successful ccd003/004 logs and immediate
+executables are retained. The ccd002 moving stacked-box fixture encountered the
 existing PendingMutation gate; the corrected fixture reproduces the actual outer
 moving-ball failure without changing that admission. The separate read-only
 broad-flag-diagnostic binds both original outer frames and confirms the false
-predicate while their actual bounds contain children. Sourceccd005 is a docs/pin
-freeze over unchanged executedccd004 Rust; no new execution is claimed. Final
-independent review and broad deterministic/fast qualification remain pending.
+predicate while their actual bounds contain children. Source ccd005 is a docs/pin
+freeze over unchanged executed ccd004 Rust; no new execution is claimed.
+Independent successor source review accepted this scoped correction; the final
+CPU qualification is recorded below.
+
+## Final native CPU qualification
+
+Immutable production source `b78ff58d` passed all **182 planar and 200 spatial
+native unit tests in each of deterministic and SIMD8 mode**: 382 per mode,
+zero ignored. Each mode includes the 23 focused persisted/structural controls per
+dimension described above. Counts overlap focused runs and are not additive.
+The complete original unit suites also preserve all preceding constructor and
+opaque-capture controls.
+
+Strict selected native-library Clippy passes in both numerical modes, and the
+nonparallel checked feature passes strict Clippy on native macOS and
+`wasm32-unknown-unknown`. The selected ordinary native dependency graph excludes
+both `incant-checked-restore` and `incant_physics_snapshot`. The lean runtime graph,
+32 probe/physics guard tests, formatting of every changed Rust file, generated
+conventions and diff checks pass. The root lock is unchanged; the private native
+unit-test lock additionally retains only the already pinned test dependencies
+bincode 1.3.3 and oorandom 11.1.5. No whole-workspace or GPU run is claimed.
+
+The independent source receipts retain the historical CCD rejection and its
+successor closure. Final successor review is
+`physics-persisted-ccd-source-independent-20261013.json`, SHA
+`f9add4b9de16ec143b9fc6d703b04f3ca2b2d249331de436089e81f8d50a7c8b`.
+The cumulative revision seam has separate acceptance
+`86305aa3c7ddccaca4feb71800fd567034f906c16e9f959e0eb39d525b3a666c`.
+
+[Portable manifest](evidence/physics-native-persisted/manifest.json) retains raw
+logs, all fourteen source generations, exact prepared source and locks, immediate
+executable identities and all four native compile/fixture failures. The first
+collector check also refused the two known native test-only lock additions; that
+observer-only failure and exact correction are retained. No native rerun or source
+change followed the collector correction. Executable bytes stay in the original
+local evidence directory; the archive retains their hashes, modes and actual
+execution-log associations.
+
+Read-only verification (no builds):
+
+```sh
+python3 tools/probes/physics-native-persisted/collect.py --verify-only
+python3 tools/probes/physics-native-persisted/collect.py --verify-only --originals --local-binaries
+```
+
+The second command additionally requires the retained local evidence and binary
+copies. This packet does not claim outer ECS/session/player file-save admission,
+full physics-feature coverage, allocation failure recovery, reference-phone
+performance, or a formal proof of all floating-point collision-query intermediates.
