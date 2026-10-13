@@ -27,8 +27,9 @@ pub enum Phase {
     AudioRender,
     HostSync,
     Restart,
+    Presentation,
 }
-pub const PHASE_COUNT: usize = 25;
+pub const PHASE_COUNT: usize = 26;
 pub const MAX_SOURCES: usize = 64;
 impl Phase {
     pub const ALL: [Self; PHASE_COUNT] = [
@@ -57,6 +58,7 @@ impl Phase {
         Self::AudioRender,
         Self::HostSync,
         Self::Restart,
+        Self::Presentation,
     ];
     pub const fn name(self) -> &'static str {
         match self {
@@ -85,6 +87,7 @@ impl Phase {
             Self::AudioRender => "game.audio_render",
             Self::HostSync => "game.host_sync",
             Self::Restart => "player.restart",
+            Self::Presentation => "player.presentation",
         }
     }
 }
@@ -102,7 +105,7 @@ pub enum Error {
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
-            Self::UnsupportedRoute => "profile reports require the ordinary offline player route",
+            Self::UnsupportedRoute => "profiling is unavailable for the requested player route",
             Self::Options => "duplicate profiling option",
             Self::Disabled => "CPU profiling requires the profile build feature",
             Self::Busy => "a process profile capture is already active",

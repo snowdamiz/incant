@@ -126,7 +126,7 @@ impl Options {
         })
     }
 }
-pub fn run(args: &[String]) -> session::Result<()> {
+pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     let options = Options::parse(args)?;
     let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
     let has_ui = scene.has_ui();
@@ -303,7 +303,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         }
                         // Resize and actual consumption share this callback and
                         // reservation, even when no simulation tick is due.
-                        let result = (|| -> session::Result<()> {
+                        let result = crate::profile::presentation(|| -> session::Result<()> {
                             ui_relayouts += fit_ui(
                                 &mut game,
                                 &surface,
@@ -313,7 +313,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             )?;
                             game.refresh_host()?;
                             Ok(())
-                        })();
+                        });
                         let consumed = surface.consumed();
                         surface.cancel();
                         result?;
@@ -349,7 +349,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             && presentable
                             && surface.reserve(&renderer)?
                         {
-                            let result = (|| -> session::Result<()> {
+                            let result = crate::profile::presentation(|| -> session::Result<()> {
                                 if has_ui {
                                     ui_relayouts += fit_ui(
                                         &mut game,
@@ -361,7 +361,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 }
                                 game.refresh_host()?;
                                 Ok(())
-                            })();
+                            });
                             let consumed = surface.consumed();
                             surface.cancel();
                             result?;
@@ -380,7 +380,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 clock.reset(now);
                                 return Ok(());
                             }
-                            let result = game.refresh_host();
+                            let result = crate::profile::presentation(|| game.refresh_host());
                             let consumed = surface.consumed();
                             surface.cancel();
                             result?;
@@ -429,17 +429,20 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 gamepads.synchronize(&mut input)?;
                             }
                             let events = controls.filter(input.events())?;
-                            let result = if has_ui {
-                                game.tick_with_ui(events, ui_input.receipts())
-                            } else {
-                                game.tick(events)
-                            };
-                            let consumed = surface.consumed();
-                            surface.cancel(); // also releases reservation on retryable input failure
-                            result?;
-                            if !consumed {
-                                return Err(Error::Reservation.into());
-                            }
+                            crate::profile::frame(|| -> session::Result<()> {
+                                let result = if has_ui {
+                                    game.tick_with_ui(events, ui_input.receipts())
+                                } else {
+                                    game.tick(events)
+                                };
+                                let consumed = surface.consumed();
+                                surface.cancel(); // also releases reservation on retryable input failure
+                                result?;
+                                if !consumed {
+                                    return Err(Error::Reservation.into());
+                                }
+                                Ok(())
+                            })?;
                             gamepads.commit();
                             input.clear();
                             ui_input.accepted();
@@ -448,6 +451,8 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             host_steps = host_steps.checked_add(1).ok_or("host step exhausted")?;
                             let restart = game.take_session_request()?.is_some();
                             if restart {
+                                let _profile =
+                                    incant_profile::scope(incant_profile::Phase::Restart);
                                 let next = generation
                                     .checked_add(1)
                                     .ok_or("session generation exhausted")?;
@@ -547,8 +552,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
         });
     }
     drop(game); // stop device audio before returning/closing the native surface
-    println!("{report}");
-    Ok(())
+    Ok(report)
 }
 
 /// Layout uses the dimensions of the reserved frame. Window dimensions can

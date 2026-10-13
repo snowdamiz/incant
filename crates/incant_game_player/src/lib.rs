@@ -77,7 +77,12 @@ fn run_owned(
             feature = "native-window",
             any(target_os = "macos", target_os = "windows", target_os = "linux")
         ))]
-        return window::run(&args[1..]);
+        {
+            let mut report = window::run(&args[1..])?;
+            profile::append(&mut report, &profile)?;
+            emit(&report.to_string());
+            return Ok(());
+        }
         #[cfg(not(all(
             feature = "native-window",
             any(target_os = "macos", target_os = "windows", target_os = "linux")
@@ -169,16 +174,14 @@ fn run_owned(
         if count > output.len() {
             return Err("output frame bound".into());
         }
-        let frame_profile = incant_profile::scope(incant_profile::Phase::Frame);
-        let tick_result = game.tick_recorded(
-            restart.input.filter(replay.events_at(tick)?)?,
-            replay.ui_at(tick)?,
-            replay.viewport_at(tick)?,
-            &mut output[..count],
-        );
-        drop(frame_profile);
-        incant_profile::frame_outcome(tick_result.is_ok());
-        tick_result?;
+        profile::frame(|| {
+            game.tick_recorded(
+                restart.input.filter(replay.events_at(tick)?)?,
+                replay.ui_at(tick)?,
+                replay.viewport_at(tick)?,
+                &mut output[..count],
+            )
+        })?;
         if let Some(plan) = &mut observations {
             plan.observe_at(start_tick + tick, game.world()?, game.input()?)?;
         }

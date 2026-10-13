@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native-window CPU profiling — locally verified
+
+The desktop player now accepts explicit summary/standalone Tracy profiling on its
+window route. Simulation attempts, redraw-only CPU work and restarts have separate
+fixed zones; the final native report uses the existing host callback. Ten local
+CPU/compile/tooling checks pass, including public-route failure cleanup. Independent
+review, actual native window execution and an actual Tracy capture remain pending.
+[Scope and evidence](docs/spikes/native-window-profile.md).
+
 ## Current overview — main200, 2026-10-13
 
 Development main199 includes the restart quota-test repair (PR188) and the reviewed,
