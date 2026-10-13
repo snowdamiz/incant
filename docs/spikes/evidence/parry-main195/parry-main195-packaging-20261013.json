@@ -1,0 +1,8 @@
+{
+  "reviewed_head": "025d3a7e53a59d4ab1ff3e68221860d7b59be71a",
+  "manifest_sha256": "ad5899bad99564c24a23993eaedd597c866b5c139dd268ac16a4a9c354a78ccc",
+  "previous_review": "parry-main195-final-20261013.json",
+  "lossless_raw_sha256": "f7866864b071803f189d2c569f56241a9c560eb52685ddde2eae4b2f3a295fce",
+  "source_unchanged": true,
+  "decision": "accepted packaging amendment"
+}

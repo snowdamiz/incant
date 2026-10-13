@@ -34,12 +34,28 @@ def widgets():
     return {w['index']: w for w in DOCUMENT['widgets']}
 
 
-def requests(total):
+def prompt():
+    """Optional authored role; this helper never invents its node or wording."""
+    selected = [w for w in DOCUMENT['widgets'] if w.get('binding') == 'prompt']
+    if len(selected) > 1:
+        raise ValueError('Core HUD has duplicate prompt bindings')
+    if not selected:
+        return None
+    node = selected[0]
+    if node['role'] != 'label' or node['text']['key'] != 'hud.prompt':
+        raise ValueError('Core HUD prompt must be a label using hud.prompt')
+    return widget(node['index'])
+
+
+def requests(total, include_prompt=None):
     """Every (request id, key, arguments) any presentation state can display."""
     out = [('health.%d' % h, 'hud.health', {'health': h}) for h in (3, 2, 1, 0)]
     out += [('samples.%d' % c, 'hud.samples', {'collected': c, 'total': total}) for c in range(total + 1)]
     out += [(k, k, {}) for k in ('hud.objective.collect', 'hud.objective.exit', 'hud.controls', 'hud.won',
                                  'hud.lost')]
+    needs_prompt = prompt() is not None if include_prompt is None else include_prompt
+    if needs_prompt:
+        out.append(('hud.prompt', 'hud.prompt', {}))
     return out
 
 
@@ -59,17 +75,18 @@ export default {
 """
 
 
-def resolve(binary, workdir, locale, total, run, session_type):
+def resolve(binary, workdir, locale, total, run, session_type, *, table=None, include_prompt=None):
     """Engine-resolved display strings for `locale` via a disposable probe project."""
+    table = TABLE if table is None else table
     workdir.mkdir()
     project = workdir / 'probe.json'
     run([binary, 'init', project, '--entities', '0', '--name', 'HUD localization probe'])
     session = session_type(binary, project, workdir / 'probe.journal.jsonl', [])
     try:
         scene = next(iter(session.call('project.read')['project']['scenes']))
-        source = PROBE_SOURCE % (json.dumps(requests(total), ensure_ascii=False), TABLE['id'])
+        source = PROBE_SOURCE % (json.dumps(requests(total, include_prompt), ensure_ascii=False), table['id'])
         session.execute('Localization probe for ' + locale, [
-            {'op': 'upsert_string_table', 'table': TABLE},
+            {'op': 'upsert_string_table', 'table': table},
             {'op': 'set_locale', 'settings': LOCALES[locale]},
             {'op': 'write_script', 'script_id': PROBE_SCRIPT, 'expected_source': {'state': 'missing'},
              'source': source},
@@ -89,7 +106,7 @@ def resolve(binary, workdir, locale, total, run, session_type):
         texts[value['id']] = value['text']
         if value['missing']:
             missing.append(value)
-    expected = {r[0] for r in requests(total)}
+    expected = {r[0] for r in requests(total, include_prompt)}
     if set(texts) != expected:
         raise RuntimeError(f'localization probe returned {sorted(set(texts) ^ expected)}')
     if missing:
@@ -115,7 +132,7 @@ def _text(spec, texts, state, total):
     if spec['binding'] == 'collected':
         return texts['samples.%d' % state['collected']]
     if key == '$objective':
-        return texts[state['objective']]
+        return '' if state['result'] == 'won' else texts[state['objective']]
     return texts[key]
 
 
@@ -150,10 +167,12 @@ def present(scene, texts, fonts, total, locale, state_name):
     for spec in DOCUMENT['widgets']:
         out.append({'op': 'set_component', 'scene_id': scene, 'entity_id': widget(spec['index']),
                     'component': 'UiNode', 'value': _node(spec, texts, state, total, fonts, rtl)})
-    if state['result']:
-        label = by_name['Won' if state['result'] == 'won' else 'Lost']
-        out.append({'op': 'reparent_entity', 'scene_id': scene, 'entity_id': widget(label['index']),
-                    'parent': widget(by_name['Result']['index'])})
+    for role, name in (('won', 'Won'), ('lost', 'Lost')):
+        out.append({'op': 'reparent_entity', 'scene_id': scene, 'entity_id': widget(by_name[name]['index']),
+                    'parent': widget(by_name['Result' if state['result'] == role else 'Inactive results']['index'])})
+    if prompt() is not None:
+        out.append({'op': 'reparent_entity', 'scene_id': scene, 'entity_id': prompt(),
+                    'parent': widget(by_name['Result' if state['result'] else 'Inactive results']['index'])})
     return out
 
 

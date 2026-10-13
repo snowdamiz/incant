@@ -1,0 +1,44 @@
+[package]
+name = "incant_game_runtime"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+publish.workspace = true
+
+[features]
+profile = ["incant_profile/summary", "incant_script/profile", "incant_runtime/profile"]
+default = ["physics-deterministic"]
+ui = ["dep:incant_ui", "incant_ui/native", "incant_script/ui"]
+static-module = ["incant_script/static-module"]
+device = ["incant_audio_runtime/device"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_audio_runtime/physics-deterministic",
+    "incant_runtime/physics-deterministic",
+    "incant_script/physics-deterministic",
+    "incant_ui?/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_runtime/physics-fast-simd8",
+    "incant_script/physics-fast-simd8",
+    "incant_ui?/physics-fast-simd8",
+]
+
+[dependencies]
+incant_profile.workspace = true
+incant_ui = { workspace = true, optional = true }
+incant_script = { workspace = true, features = ["audio"] }
+incant_runtime.workspace = true
+incant_input.workspace = true
+incant_audio_runtime = { workspace = true, features = ["scene"] }
+kira = { version = "=0.12.5", default-features = false }
+thiserror.workspace = true
+
+[dev-dependencies]
+incant_script = { workspace = true, features = ["compiler"] }
+incant_types.workspace = true
+incant_assets_runtime.workspace = true
+serde_json.workspace = true
+tempfile = "3"

@@ -1,0 +1,79 @@
+{
+  "status": "accepted_source_only",
+  "scope": "Independent helper003 source review; prior two lifecycle findings resolved. No profiler shipping/capture/listener/GPU or Rust build by reviewer.",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-003/freeze.json",
+  "freeze_sha256": "6d8b78bd0b57f9ae75b162da4cd2d214c43615dd3d0e2a8e2a05105c023d71f6",
+  "sources": [
+    {
+      "path": "tools/probes/native-cpu-profile.py",
+      "sha256": "684b1141f93201b14fa0f28765c2a7458d97d4eb8e2026897ab34d609e84512a",
+      "bytes": 19465,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-003/tools/probes/native-cpu-profile.py"
+    },
+    {
+      "path": "tools/probes/native-cpu-profile/behavior.ts",
+      "sha256": "a4156aa4502058bde76f7a7e39afa795951a1ef2567b220057323f6a749adbea",
+      "bytes": 894,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-003/tools/probes/native-cpu-profile/behavior.ts"
+    },
+    {
+      "path": "tools/tests/test_native_cpu_profile_probe.py",
+      "sha256": "5c95e07141f1e50689a3e52056e88c60226fbb4dda26db9bffe0d10ce59468ec",
+      "bytes": 3423,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-003/tools/tests/test_native_cpu_profile_probe.py"
+    }
+  ],
+  "engine_freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-004/freeze.json",
+  "engine_sha256": "1eb27298a911c757bfb4fdc79504e3aaba00a55fedf8125ba15c9a1fdd3ba034",
+  "engine_inputs_unchanged": 33,
+  "previous_review": "native-cpu-profiler-helper-002-review.json",
+  "resolved_findings": [
+    {
+      "priority": 2,
+      "issue": "Outer exporter timeout killed cleanup owner",
+      "resolution": "Public export_native.export called in-process; exceptions unwind existing native_process child-session cleanup before temporary storage ends. No outer kill/timeout."
+    },
+    {
+      "priority": 2,
+      "issue": "Undrained report PIPE could block valid player exit",
+      "resolution": "All owned leaf stdout/stderr use retained regular files; direct child killed/waited on exception and raw output/hash receipt retained."
+    }
+  ],
+  "additional_review": [
+    "Two separate atomic public source/entity transactions preserve one source-write command admission",
+    "RPC errors retained before rethrow and direct process waited during close",
+    "Leaf process vs in-process export identity distinguished in receipts",
+    "Capture and player nested context managers both reap on failure",
+    "Existing complete report/PCM/privacy/refusal oracles unchanged"
+  ],
+  "independent_checks": [
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_native_cpu_profile_probe.py",
+        "-v"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+      "exit_code": 0,
+      "tests_passed": 4,
+      "actual_controls": [
+        "2MB stdout plus1MB stderr avoids pipe blockage",
+        "Timeout retains raw output and process is gone",
+        "Concurrent capture leaf reaped after player failure",
+        "Actual public exporter existing-output refusal recorded in-process"
+      ]
+    }
+  ],
+  "findings": [],
+  "limitations": [
+    "This is source and small lifecycle testing only; fresh ordinary exports, profile records and real upstream capture remain owner execution work",
+    "In-process exporter inherits the already-reviewed native_process ownership contract; arbitrary escaping child sessions are outside trusted leaf scope"
+  ]
+}

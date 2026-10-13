@@ -1,0 +1,163 @@
+{
+ "model": "Claude Opus 5.5 (claude-opus-5-5)",
+ "thinking_effort": "max",
+ "acp_record": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/claude-0065-acp.log",
+  "line": 3,
+  "text": "Claude session verified: Opus 5.5; thinking: max"
+ },
+ "source": {
+  "head": "d58c45b5500267b59bea992b0bbd2f9587f9e8f1",
+  "tree": "a5f55d582879f04125c2666e57c6773b3429a538",
+  "start_commit": "a9e26999e0763de7cbd625930595be8a36f3f460",
+  "cargo_lock_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d"
+ },
+ "brief_sha256": "667c75db017ed256fc66a26edcfab1bf0e76d9e93fdb97a4900b1d260123b779",
+ "brief_sha256_at_lease": "667c75db017ed256fc66a26edcfab1bf0e76d9e93fdb97a4900b1d260123b779",
+ "grant": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0065/review-ready.json",
+  "sha256": "e333ab2856f4354bfd552d1ce7d054134b3522cdf45a34c8e1c2ad1f0ff29192",
+  "grant": {
+   "packet": "0065-core-live-hud",
+   "granted_at": "2026-10-13T01:37:48.782788+00:00",
+   "owner": "Claude Opus5.5 Max via ACP",
+   "prior_gpu_release_sha256": "116562e1b14886ba027e840d33d22f40bd068cfaeb8853cf1a476302490d0123",
+   "prior_target_lease_sha256": "f983643e666991f2c4ebad071626188998c2557e776b2451594dc9899d3185e9",
+   "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "restrictions": "Serial offscreen only;24frames max960x540; bounded children; no native windows or desktop capture;0064 may not reacquire.",
+   "owned_prior_processes": []
+  }
+ },
+ "lease": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0065/lease.json",
+  "sha256": "eb2d547f100dad79dfe9c5cbfaac3bd91a97813672445b91398287e9118287a3",
+  "acquired_at": "2026-10-13T02:00:27.538696+00:00",
+  "processes_on_target_at_acquire": [],
+  "rules": [
+   "./tools/cargo only",
+   "--locked",
+   "--profile ci",
+   "at most -j2",
+   "serial offscreen GPU groups under an exclusive lock",
+   "no native window or desktop capture",
+   "<= 24 retained frames, each <= 960x540",
+   "route children <= 300 s, capture <= 120 s",
+   "evidence and binaries only under /Users/andreyyurlov/.codex/incant-evidence/0065"
+  ]
+ },
+ "release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0065/release.json",
+  "sha256": "0b88d47a6d0c0d756a0d75d6a53f8cc3b7f26b4b19d70b9242c9b7b2b05e72e1",
+  "packet": "0065-core-live-hud",
+  "released_at": "2026-10-13T02:20:00.640731+00:00",
+  "grant_sha256": "e333ab2856f4354bfd552d1ce7d054134b3522cdf45a34c8e1c2ad1f0ff29192",
+  "lease_sha256": "eb2d547f100dad79dfe9c5cbfaac3bd91a97813672445b91398287e9118287a3",
+  "ledger_sha256": "5ae8d09f74fe5c3746265849b47b0725d2010ee698173e5b5730a9d02d9b8fab",
+  "children": 49,
+  "retained_frames": 21,
+  "frames": [
+   "captures/frames-ar-route-a/01-pickup-1.rgba",
+   "captures/frames-ar-route-a/02-after-start.rgba",
+   "captures/frames-en-XA-route-a/01-won.rgba",
+   "captures/frames-en-XA-route-a/02-after-start.rgba",
+   "captures/frames-en-default/01-start.rgba",
+   "captures/frames-en-locked/01-locked-exit.rgba",
+   "captures/frames-en-narrow/01-start.rgba",
+   "captures/frames-en-route-a/01-pickup-1.rgba",
+   "captures/frames-en-route-a/02-damage-1.rgba",
+   "captures/frames-en-route-a/03-collected.rgba",
+   "captures/frames-en-route-a/04-won.rgba",
+   "captures/frames-en-route-a/05-after-start.rgba",
+   "captures/frames-en-route-b/01-lost.rgba",
+   "captures/frames-en-route-b/02-after-r.rgba",
+   "captures/frames-zh-Hans-route-a/01-pickup-1.rgba",
+   "captures/frames-zh-Hans-route-a/02-won.rgba",
+   "captures/frames-zh-Hans-route-a/03-after-start.rgba",
+   "captures/review-ar-won/01-won.rgba",
+   "captures/review-en-XA-pickup/01-pickup-1.rgba",
+   "captures/review-en-narrow-lost/01-lost.rgba",
+   "captures/review-en-start/01-start.rgba"
+  ],
+  "owned_processes_alive": [],
+  "target_users": [],
+  "note": "GPU and Cargo target released by 0065; target left in place as warm cache; review-ready.json left untouched (only Astra writes it)."
+ },
+ "prior_release_chain": {
+  "0064_gpu_released_sha256": "116562e1b14886ba027e840d33d22f40bd068cfaeb8853cf1a476302490d0123",
+  "0064_target_lease_sha256": "f983643e666991f2c4ebad071626188998c2557e776b2451594dc9899d3185e9",
+  "matches_grant": true
+ },
+ "host": {
+  "os": "macOS 27.0.1 (26A434)",
+  "model": "Mac17,9",
+  "machine": "arm64"
+ },
+ "gpu": {
+  "adapter": "Apple M5 Pro",
+  "backend": "Metal",
+  "device_type": "IntegratedGpu",
+  "driver": null,
+  "target_format": "Rgba8UnormSrgb"
+ },
+ "toolchain": {
+  "rustc": "1.99.0 (b940084d7 2026-09-28)",
+  "cargo": "1.99.0 (5f94df478 2026-08-27)",
+  "profile": "ci",
+  "jobs": 2,
+  "flags": [
+   "--locked",
+   "--offline (packages)"
+  ],
+  "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "python": "3.14.8 (tools), 3.9.6 (/usr/bin/python3, scene.py)",
+  "node": "v22.23.3",
+  "typescript": "5.9.3"
+ },
+ "binaries": {
+  "incant_headless": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0065/bin/incant_headless",
+   "sha256": "410ce6551d8e6d5109d23834117876130aed45e5470dd654a696e212363330f4",
+   "bytes": 60497696
+  },
+  "en": {
+   "player_sha256": "74c9be4a10713c65dae9e727358a4e528aa92b39e6ba6dd6a94a6c8fb6bd7eb2",
+   "player_bytes": 30700800,
+   "adapter_sha256": "141d071e3c48aa1d2b340d5ee99a785c84941870f5a8858bf2d75e196f74b924",
+   "adapter_source_sha256": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+   "behavior_sha256": "9346a352c1cf6ffa2c73cc507daed7722b606eb9c5ffa6ccbb9b97d552995dab",
+   "features": "project,render-gpu"
+  },
+  "ar": {
+   "player_sha256": "7ab42ff4fff7d27430d1d2953f690a3dc9b3e7f332dfabeb42a728bc841dace7",
+   "player_bytes": 30700800,
+   "adapter_sha256": "d04d5ad45f88045be6e881231830266fdde50fe93454c5a9b71babed19e8ce53",
+   "adapter_source_sha256": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+   "behavior_sha256": "6cfa61c4e2baf3a3b0681ea22c3f446eb74de2d5cc1efa4ec4afde066f289cb0",
+   "features": "project,render-gpu"
+  },
+  "zh-Hans": {
+   "player_sha256": "0a68682a9ed60c81817d445acdbd13af9e73da49c5504dbfc47bf77a77354e29",
+   "player_bytes": 30700800,
+   "adapter_sha256": "bfb42223730a5459ac8ee923714f3270782ac8f4d73231f32362bc9c61a9a46b",
+   "adapter_source_sha256": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+   "behavior_sha256": "454861bfa026fb4a4e42c9123592018ca707d93bcf6b1d1ff233de64f8fabe06",
+   "features": "project,render-gpu"
+  },
+  "en-XA": {
+   "player_sha256": "70b4f40e3dce3a3c38f8b22daa1fee1ef991247df0780ddf88c8c1964c1a46f0",
+   "player_bytes": 30700800,
+   "adapter_sha256": "808f03e54868a4a204b349790cf519bfdfe91f320ee2bbe9f357ab410a7e1e58",
+   "adapter_source_sha256": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+   "behavior_sha256": "93ad26d83b0b7bc8430007309283bb5862c28b9f454caf7943a3e9d8c13ebb02",
+   "features": "project,render-gpu"
+  }
+ },
+ "adapter_freeze": {
+  "source": "handoffs/0065-core-live-hud/tools/live_hud.rs",
+  "sha256": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+  "bytes": 26494,
+  "fence_mirror_of": "crates/incant_game_player/src/restart/input.rs",
+  "fence_mirror_sha256": "77976afd18f9e294287f361dfcbea4ee5e1035d89eeba5bdde300b4cfb2f074a",
+  "frozen_at": "2026-10-13T02:04:50.782537+00:00"
+ }
+}

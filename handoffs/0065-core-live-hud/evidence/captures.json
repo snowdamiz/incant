@@ -1,0 +1,6416 @@
+{
+ "adapter": "handoffs/0065-core-live-hud/tools/live_hud.rs built per variant as example zz_0065_live_hud",
+ "runner": "handoffs/0065-core-live-hud/tools/capture.py RUN (plans in tools/plans.json)",
+ "gpu": "Apple M5 Pro, Metal, Rgba8UnormSrgb offscreen target, scale 1",
+ "retained_frames": 21,
+ "frame_bound": 24,
+ "restart_pixel_identity": {
+  "frames": {
+   "review-en-start/01-start.rgba": "20ec7c5ce6b0dfb1fdf4fe2b203f2561e989aa2fb090090c3fa21432148b52d7",
+   "frames-en-route-a/05-after-start.rgba": "20ec7c5ce6b0dfb1fdf4fe2b203f2561e989aa2fb090090c3fa21432148b52d7",
+   "frames-en-route-b/02-after-r.rgba": "20ec7c5ce6b0dfb1fdf4fe2b203f2561e989aa2fb090090c3fa21432148b52d7"
+  },
+  "identical": true
+ },
+ "route_checks": {
+  "frames-ar-route-a": {
+   "run": "frames-ar-route-a",
+   "variant": "ar",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 5,
+   "failures": []
+  },
+  "frames-en-XA-route-a": {
+   "run": "frames-en-XA-route-a",
+   "variant": "en-XA",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 5,
+   "failures": []
+  },
+  "frames-en-locked": {
+   "run": "frames-en-locked",
+   "variant": "en",
+   "route": "locked",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 1270400,
+   "pcm_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+   "accepted_pcm_prefix_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+   "restarted_equal_fresh": [],
+   "captures": 2,
+   "failures": []
+  },
+  "frames-en-narrow": {
+   "run": "frames-en-narrow",
+   "variant": "en",
+   "route": "lose-short",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 493600,
+   "pcm_sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997",
+   "accepted_pcm_prefix_sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997",
+   "restarted_equal_fresh": [],
+   "captures": 2,
+   "failures": []
+  },
+  "frames-en-route-a": {
+   "run": "frames-en-route-a",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 8,
+   "failures": []
+  },
+  "frames-en-route-b": {
+   "run": "frames-en-route-b",
+   "variant": "en",
+   "route": "lose-restart-win",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 900,
+     "output_frames": 720000,
+     "simulation_tick": 900
+    }
+   ],
+   "pcm_frames": 721600,
+   "pcm_sha256": "f6b229ea0ee7cbe4a6fa0b9fe972d0615868f5886aec99716d2e4457572e1d60",
+   "accepted_pcm_prefix_sha256": "f6b229ea0ee7cbe4a6fa0b9fe972d0615868f5886aec99716d2e4457572e1d60",
+   "restarted_equal_fresh": [
+    "after-r"
+   ],
+   "captures": 6,
+   "failures": []
+  },
+  "frames-zh-Hans-route-a": {
+   "run": "frames-zh-Hans-route-a",
+   "variant": "zh-Hans",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 5,
+   "failures": []
+  },
+  "review-ar-won": {
+   "run": "review-ar-won",
+   "variant": "ar",
+   "route": "gamepad-restart-lose",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 1653600,
+   "pcm_sha256": "c8386b256c2976fda044173f376b7c750207cb7d81d3816c579203d6d99b940f",
+   "accepted_pcm_prefix_sha256": "c8386b256c2976fda044173f376b7c750207cb7d81d3816c579203d6d99b940f",
+   "restarted_equal_fresh": [],
+   "captures": 3,
+   "failures": []
+  },
+  "review-en-XA-pickup": {
+   "run": "review-en-XA-pickup",
+   "variant": "en-XA",
+   "route": "gamepad-restart-lose",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 102400,
+   "pcm_sha256": "2c2d59a978da6773accf54b8282b0cddc3271bab2cf6e6176b525d8ca1289a90",
+   "accepted_pcm_prefix_sha256": "2c2d59a978da6773accf54b8282b0cddc3271bab2cf6e6176b525d8ca1289a90",
+   "restarted_equal_fresh": [],
+   "captures": 2,
+   "failures": []
+  },
+  "review-en-narrow-lost": {
+   "run": "review-en-narrow-lost",
+   "variant": "en",
+   "route": "lose-short",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 493600,
+   "pcm_sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997",
+   "accepted_pcm_prefix_sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997",
+   "restarted_equal_fresh": [],
+   "captures": 2,
+   "failures": []
+  },
+  "review-en-start": {
+   "run": "review-en-start",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 1600,
+   "pcm_sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a",
+   "accepted_pcm_prefix_sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a",
+   "restarted_equal_fresh": [],
+   "captures": 1,
+   "failures": []
+  },
+  "frames-en-default": {
+   "run": "frames-en-default",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 1600,
+   "pcm_sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a",
+   "accepted_pcm_prefix_sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a",
+   "restarted_equal_fresh": [],
+   "captures": 1,
+   "failures": []
+  },
+  "dry-ar-route-a": {
+   "run": "dry-ar-route-a",
+   "variant": "ar",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 5,
+   "failures": []
+  },
+  "dry-en-XA-route-a": {
+   "run": "dry-en-XA-route-a",
+   "variant": "en-XA",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 5,
+   "failures": []
+  },
+  "dry-en-locked": {
+   "run": "dry-en-locked",
+   "variant": "en",
+   "route": "locked",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 1270400,
+   "pcm_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+   "accepted_pcm_prefix_sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77",
+   "restarted_equal_fresh": [],
+   "captures": 2,
+   "failures": []
+  },
+  "dry-en-narrow": {
+   "run": "dry-en-narrow",
+   "variant": "en",
+   "route": "lose-short",
+   "generations": 1,
+   "boundaries": [],
+   "pcm_frames": 493600,
+   "pcm_sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997",
+   "accepted_pcm_prefix_sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997",
+   "restarted_equal_fresh": [],
+   "captures": 2,
+   "failures": []
+  },
+  "dry-en-route-a": {
+   "run": "dry-en-route-a",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 8,
+   "failures": []
+  },
+  "dry-en-route-b": {
+   "run": "dry-en-route-b",
+   "variant": "en",
+   "route": "lose-restart-win",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 900,
+     "output_frames": 720000,
+     "simulation_tick": 900
+    }
+   ],
+   "pcm_frames": 721600,
+   "pcm_sha256": "f6b229ea0ee7cbe4a6fa0b9fe972d0615868f5886aec99716d2e4457572e1d60",
+   "accepted_pcm_prefix_sha256": "f6b229ea0ee7cbe4a6fa0b9fe972d0615868f5886aec99716d2e4457572e1d60",
+   "restarted_equal_fresh": [
+    "after-r"
+   ],
+   "captures": 6,
+   "failures": []
+  },
+  "dry-zh-Hans-route-a": {
+   "run": "dry-zh-Hans-route-a",
+   "variant": "zh-Hans",
+   "route": "gamepad-restart-lose",
+   "generations": 2,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm_frames": 1726400,
+   "pcm_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "accepted_pcm_prefix_sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523",
+   "restarted_equal_fresh": [
+    "after-start"
+   ],
+   "captures": 5,
+   "failures": []
+  }
+ },
+ "layout_checks": [
+  {
+   "report": "frames-ar-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-ar-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 104.8,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 1/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-ar-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    186.8300018310547,
+    94.0,
+    453.16998291015625,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 100.5,
+    "samples": 108.7,
+    "controls": 215.0,
+    "won": 266.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "عُد إلى المصعد",
+    "samples": "العينات 4/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R",
+    "won": "تم تأمين العينات"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-ar-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    186.8300018310547,
+    94.0,
+    453.16998291015625,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 100.5,
+    "samples": 108.7,
+    "controls": 215.0,
+    "won": 266.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "عُد إلى المصعد",
+    "samples": "العينات 4/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R",
+    "won": "تم تأمين العينات"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-ar-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-XA-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-XA-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 206.4,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 1/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-XA-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    49.545440673828125,
+    94.0,
+    590.45458984375,
+    142.0
+   ],
+   "widths": {
+    "health": 125.6,
+    "objective": 217.1,
+    "samples": 210.3,
+    "controls": 320.0,
+    "won": 540.9
+   },
+   "texts": {
+    "health": "[!! ● ● ○ !!]",
+    "objective": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+    "samples": "[!! Šááɱþľééš 4/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+    "won": "[!! Šááɱþľééš šééçúúŕééď !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-XA-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    49.545440673828125,
+    94.0,
+    590.45458984375,
+    142.0
+   ],
+   "widths": {
+    "health": 125.6,
+    "objective": 217.1,
+    "samples": 210.3,
+    "controls": 320.0,
+    "won": 540.9
+   },
+   "texts": {
+    "health": "[!! ● ● ○ !!]",
+    "objective": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+    "samples": "[!! Šááɱþľééš 4/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+    "won": "[!! Šááɱþľééš šééçúúŕééď !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-XA-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-locked",
+   "host_step": 1559,
+   "name": "arrival",
+   "generation": 1,
+   "simulation_tick": 1559,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.7,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 3/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-locked",
+   "host_step": 1588,
+   "name": "locked-exit",
+   "generation": 1,
+   "simulation_tick": 1588,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.7,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 3/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-narrow",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-narrow",
+   "host_step": 617,
+   "name": "lost",
+   "generation": 1,
+   "simulation_tick": 617,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": "lost",
+   "title_box": [
+    68.125,
+    146.0,
+    351.875,
+    194.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2,
+    "lost": 283.8
+   },
+   "texts": {
+    "health": "○ ○ ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again",
+    "lost": "Surveyor down"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 126.9,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 1/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 665,
+   "name": "damage-1",
+   "generation": 1,
+   "simulation_tick": 665,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.0,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 2/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 1843,
+   "name": "collected",
+   "generation": 1,
+   "simulation_tick": 1843,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 130.3,
+    "samples": 130.8,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Return to the lift",
+    "samples": "Samples 4/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    317.86932373046875,
+    94.0,
+    642.1306762695312,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 130.3,
+    "samples": 130.8,
+    "controls": 224.2,
+    "won": 324.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Return to the lift",
+    "samples": "Samples 4/4",
+    "controls": "WASD move · Space jump · R play again",
+    "won": "Samples secured"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    317.86932373046875,
+    94.0,
+    642.1306762695312,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 130.3,
+    "samples": 130.8,
+    "controls": 224.2,
+    "won": 324.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Return to the lift",
+    "samples": "Samples 4/4",
+    "controls": "WASD move · Space jump · R play again",
+    "won": "Samples secured"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 2157,
+   "name": "restarted-tick-1",
+   "generation": 2,
+   "simulation_tick": 1,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-b",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-b",
+   "host_step": 527,
+   "name": "damage-1",
+   "generation": 1,
+   "simulation_tick": 527,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-b",
+   "host_step": 617,
+   "name": "lost",
+   "generation": 1,
+   "simulation_tick": 617,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "lost",
+   "title_box": [
+    338.125,
+    94.0,
+    621.875,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2,
+    "lost": 283.8
+   },
+   "texts": {
+    "health": "○ ○ ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again",
+    "lost": "Surveyor down"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-b",
+   "host_step": 900,
+   "name": "r-pressed",
+   "generation": 1,
+   "simulation_tick": 900,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "lost",
+   "title_box": [
+    338.125,
+    94.0,
+    621.875,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2,
+    "lost": 283.8
+   },
+   "texts": {
+    "health": "○ ○ ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again",
+    "lost": "Surveyor down"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-b",
+   "host_step": 901,
+   "name": "restarted-tick-1",
+   "generation": 2,
+   "simulation_tick": 1,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-route-b",
+   "host_step": 902,
+   "name": "after-r",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-zh-Hans-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 85.9,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 0/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-zh-Hans-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 82.4,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 1/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-zh-Hans-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    180.0,
+    94.0,
+    460.0,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 85.0,
+    "samples": 86.3,
+    "controls": 205.0,
+    "won": 280.0
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "返回升降台",
+    "samples": "样本 4/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+    "won": "样本已安全回收"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-zh-Hans-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    180.0,
+    94.0,
+    460.0,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 85.0,
+    "samples": 86.3,
+    "controls": 205.0,
+    "won": 280.0
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "返回升降台",
+    "samples": "样本 4/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+    "won": "样本已安全回收"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-zh-Hans-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 85.9,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 0/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-ar-won",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-ar-won",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 104.8,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 1/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-ar-won",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    186.8300018310547,
+    94.0,
+    453.16998291015625,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 100.5,
+    "samples": 108.7,
+    "controls": 215.0,
+    "won": 266.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "عُد إلى المصعد",
+    "samples": "العينات 4/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R",
+    "won": "تم تأمين العينات"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-en-XA-pickup",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-en-XA-pickup",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 206.4,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 1/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-en-narrow-lost",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-en-narrow-lost",
+   "host_step": 617,
+   "name": "lost",
+   "generation": 1,
+   "simulation_tick": 617,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": "lost",
+   "title_box": [
+    68.125,
+    146.0,
+    351.875,
+    194.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2,
+    "lost": 283.8
+   },
+   "texts": {
+    "health": "○ ○ ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again",
+    "lost": "Surveyor down"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "review-en-start",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "frames-en-default",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-ar-420x320",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-ar-640x480",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-ar-960x540",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-en-420x320",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-en-640x480",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-en-960x540",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-en-XA-420x320",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-en-XA-640x480",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-en-XA-960x540",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-zh-Hans-420x320",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 85.9,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 0/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-zh-Hans-640x480",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 85.9,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 0/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "layout-zh-Hans-960x540",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 85.9,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 0/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-ar-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-ar-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 104.8,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 1/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-ar-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    186.8300018310547,
+    94.0,
+    453.16998291015625,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 100.5,
+    "samples": 108.7,
+    "controls": 215.0,
+    "won": 266.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "عُد إلى المصعد",
+    "samples": "العينات 4/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R",
+    "won": "تم تأمين العينات"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-ar-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    186.8300018310547,
+    94.0,
+    453.16998291015625,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 100.5,
+    "samples": 108.7,
+    "controls": 215.0,
+    "won": 266.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "عُد إلى المصعد",
+    "samples": "العينات 4/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R",
+    "won": "تم تأمين العينات"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-ar-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 127.8,
+    "samples": 108.3,
+    "controls": 215.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "اجمع العينات اللبية",
+    "samples": "العينات 0/4",
+    "controls": "الحركة WASD · القفز Space · إعادة اللعب R"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-XA-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-XA-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 206.4,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 1/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-XA-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    49.545440673828125,
+    94.0,
+    590.45458984375,
+    142.0
+   ],
+   "widths": {
+    "health": 125.6,
+    "objective": 217.1,
+    "samples": 210.3,
+    "controls": 320.0,
+    "won": 540.9
+   },
+   "texts": {
+    "health": "[!! ● ● ○ !!]",
+    "objective": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+    "samples": "[!! Šááɱþľééš 4/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+    "won": "[!! Šááɱþľééš šééçúúŕééď !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-XA-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    49.545440673828125,
+    94.0,
+    590.45458984375,
+    142.0
+   ],
+   "widths": {
+    "health": 125.6,
+    "objective": 217.1,
+    "samples": 210.3,
+    "controls": 320.0,
+    "won": 540.9
+   },
+   "texts": {
+    "health": "[!! ● ● ○ !!]",
+    "objective": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+    "samples": "[!! Šááɱþľééš 4/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+    "won": "[!! Šááɱþľééš šééçúúŕééď !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-XA-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 125.6,
+    "objective": 312.5,
+    "samples": 209.9,
+    "controls": 320.0
+   },
+   "texts": {
+    "health": "[!! ● ● ● !!]",
+    "objective": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+    "samples": "[!! Šááɱþľééš 0/4 !!]",
+    "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-locked",
+   "host_step": 1559,
+   "name": "arrival",
+   "generation": 1,
+   "simulation_tick": 1559,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.7,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 3/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-locked",
+   "host_step": 1588,
+   "name": "locked-exit",
+   "generation": 1,
+   "simulation_tick": 1588,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.7,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 3/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-narrow",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-narrow",
+   "host_step": 617,
+   "name": "lost",
+   "generation": 1,
+   "simulation_tick": 617,
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "stacked": true,
+   "title": "lost",
+   "title_box": [
+    68.125,
+    146.0,
+    351.875,
+    194.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2,
+    "lost": 283.8
+   },
+   "texts": {
+    "health": "○ ○ ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again",
+    "lost": "Surveyor down"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 126.9,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 1/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 665,
+   "name": "damage-1",
+   "generation": 1,
+   "simulation_tick": 665,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.0,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 2/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 1843,
+   "name": "collected",
+   "generation": 1,
+   "simulation_tick": 1843,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 130.3,
+    "samples": 130.8,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Return to the lift",
+    "samples": "Samples 4/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    317.86932373046875,
+    94.0,
+    642.1306762695312,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 130.3,
+    "samples": 130.8,
+    "controls": 224.2,
+    "won": 324.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Return to the lift",
+    "samples": "Samples 4/4",
+    "controls": "WASD move · Space jump · R play again",
+    "won": "Samples secured"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    317.86932373046875,
+    94.0,
+    642.1306762695312,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 130.3,
+    "samples": 130.8,
+    "controls": 224.2,
+    "won": 324.3
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Return to the lift",
+    "samples": "Samples 4/4",
+    "controls": "WASD move · Space jump · R play again",
+    "won": "Samples secured"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 2157,
+   "name": "restarted-tick-1",
+   "generation": 2,
+   "simulation_tick": 1,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-b",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-b",
+   "host_step": 527,
+   "name": "damage-1",
+   "generation": 1,
+   "simulation_tick": 527,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-b",
+   "host_step": 617,
+   "name": "lost",
+   "generation": 1,
+   "simulation_tick": 617,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "lost",
+   "title_box": [
+    338.125,
+    94.0,
+    621.875,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2,
+    "lost": 283.8
+   },
+   "texts": {
+    "health": "○ ○ ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again",
+    "lost": "Surveyor down"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-b",
+   "host_step": 900,
+   "name": "r-pressed",
+   "generation": 1,
+   "simulation_tick": 900,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": "lost",
+   "title_box": [
+    338.125,
+    94.0,
+    621.875,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2,
+    "lost": 283.8
+   },
+   "texts": {
+    "health": "○ ○ ○",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again",
+    "lost": "Surveyor down"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-b",
+   "host_step": 901,
+   "name": "restarted-tick-1",
+   "generation": 2,
+   "simulation_tick": 1,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-en-route-b",
+   "host_step": 902,
+   "name": "after-r",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 198.8,
+    "samples": 130.4,
+    "controls": 224.2
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "Collect the core samples",
+    "samples": "Samples 0/4",
+    "controls": "WASD move · Space jump · R play again"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-zh-Hans-route-a",
+   "host_step": 2,
+   "name": "start",
+   "generation": 1,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 85.9,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 0/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-zh-Hans-route-a",
+   "host_step": 128,
+   "name": "pickup-1",
+   "generation": 1,
+   "simulation_tick": 128,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 82.4,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 1/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-zh-Hans-route-a",
+   "host_step": 2067,
+   "name": "won",
+   "generation": 1,
+   "simulation_tick": 2067,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    180.0,
+    94.0,
+    460.0,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 85.0,
+    "samples": 86.3,
+    "controls": 205.0,
+    "won": 280.0
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "返回升降台",
+    "samples": "样本 4/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+    "won": "样本已安全回收"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-zh-Hans-route-a",
+   "host_step": 2156,
+   "name": "start-pressed",
+   "generation": 1,
+   "simulation_tick": 2156,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": "won",
+   "title_box": [
+    180.0,
+    94.0,
+    460.0,
+    142.0
+   ],
+   "widths": {
+    "health": 72.8,
+    "objective": 85.0,
+    "samples": 86.3,
+    "controls": 205.0,
+    "won": 280.0
+   },
+   "texts": {
+    "health": "● ● ○",
+    "objective": "返回升降台",
+    "samples": "样本 4/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+    "won": "样本已安全回收"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  },
+  {
+   "report": "dry-zh-Hans-route-a",
+   "host_step": 2158,
+   "name": "after-start",
+   "generation": 2,
+   "simulation_tick": 2,
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "stacked": false,
+   "title": null,
+   "title_box": null,
+   "widths": {
+    "health": 72.8,
+    "objective": 102.0,
+    "samples": 85.9,
+    "controls": 205.0
+   },
+   "texts": {
+    "health": "● ● ●",
+    "objective": "收集岩芯样本",
+    "samples": "样本 0/4",
+    "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+   },
+   "missing_glyphs": 0,
+   "failures": []
+  }
+ ],
+ "contrast_estimates": [
+  {
+   "frame": "review-ar-won/01-won.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      545,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.59,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      518,
+      46,
+      618,
+      68
+     ],
+     "median_contrast": 4.79,
+     "p90_box_luminance": 0.591
+    },
+    "samples": {
+     "box": [
+      22,
+      16,
+      131,
+      44
+     ],
+     "median_contrast": 5.77,
+     "p90_box_luminance": 0.631
+    },
+    "controls": {
+     "box": [
+      22,
+      46,
+      237,
+      62
+     ],
+     "median_contrast": 4.96,
+     "p90_box_luminance": 0.611
+    },
+    "won": {
+     "box": [
+      187,
+      94,
+      453,
+      142
+     ],
+     "median_contrast": 2.98,
+     "p90_box_luminance": 0.792
+    }
+   }
+  },
+  {
+   "frame": "review-en-XA-pickup/01-pickup-1.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      148,
+      44
+     ],
+     "median_contrast": 12.53,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      335,
+      68
+     ],
+     "median_contrast": 5.41,
+     "p90_box_luminance": 0.658
+    },
+    "samples": {
+     "box": [
+      412,
+      74,
+      618,
+      102
+     ],
+     "median_contrast": 3.65,
+     "p90_box_luminance": 0.768
+    },
+    "controls": {
+     "box": [
+      298,
+      104,
+      618,
+      120
+     ],
+     "median_contrast": 2.65,
+     "p90_box_luminance": 0.659
+    }
+   }
+  },
+  {
+   "frame": "review-en-narrow-lost/01-lost.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.57,
+     "p90_box_luminance": 0.618
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 4.0,
+     "p90_box_luminance": 0.643
+    },
+    "samples": {
+     "box": [
+      268,
+      74,
+      398,
+      102
+     ],
+     "median_contrast": 3.75,
+     "p90_box_luminance": 0.739
+    },
+    "controls": {
+     "box": [
+      174,
+      104,
+      398,
+      120
+     ],
+     "median_contrast": 3.19,
+     "p90_box_luminance": 0.647
+    },
+    "lost": {
+     "box": [
+      68,
+      146,
+      352,
+      194
+     ],
+     "median_contrast": 2.75,
+     "p90_box_luminance": 0.854
+    }
+   }
+  },
+  {
+   "frame": "review-en-start/01-start.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 12.02,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 12.3,
+     "p90_box_luminance": 0.624
+    },
+    "samples": {
+     "box": [
+      808,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.723
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.18,
+     "p90_box_luminance": 0.611
+    }
+   }
+  },
+  {
+   "frame": "frames-ar-route-a/01-pickup-1.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      545,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.58,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      490,
+      46,
+      618,
+      68
+     ],
+     "median_contrast": 4.87,
+     "p90_box_luminance": 0.61
+    },
+    "samples": {
+     "box": [
+      22,
+      16,
+      127,
+      44
+     ],
+     "median_contrast": 12.7,
+     "p90_box_luminance": 0.611
+    },
+    "controls": {
+     "box": [
+      22,
+      46,
+      237,
+      62
+     ],
+     "median_contrast": 11.34,
+     "p90_box_luminance": 0.599
+    }
+   }
+  },
+  {
+   "frame": "frames-ar-route-a/02-after-start.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      545,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.58,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      490,
+      46,
+      618,
+      68
+     ],
+     "median_contrast": 4.8,
+     "p90_box_luminance": 0.604
+    },
+    "samples": {
+     "box": [
+      22,
+      16,
+      130,
+      44
+     ],
+     "median_contrast": 5.77,
+     "p90_box_luminance": 0.637
+    },
+    "controls": {
+     "box": [
+      22,
+      46,
+      237,
+      62
+     ],
+     "median_contrast": 5.19,
+     "p90_box_luminance": 0.605
+    }
+   }
+  },
+  {
+   "frame": "frames-en-XA-route-a/01-won.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      148,
+      44
+     ],
+     "median_contrast": 5.74,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      239,
+      68
+     ],
+     "median_contrast": 4.73,
+     "p90_box_luminance": 0.644
+    },
+    "samples": {
+     "box": [
+      408,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.769
+    },
+    "controls": {
+     "box": [
+      298,
+      46,
+      618,
+      62
+     ],
+     "median_contrast": 4.89,
+     "p90_box_luminance": 0.631
+    },
+    "won": {
+     "box": [
+      50,
+      94,
+      590,
+      142
+     ],
+     "median_contrast": 2.72,
+     "p90_box_luminance": 0.854
+    }
+   }
+  },
+  {
+   "frame": "frames-en-XA-route-a/02-after-start.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      148,
+      44
+     ],
+     "median_contrast": 5.77,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      335,
+      68
+     ],
+     "median_contrast": 4.95,
+     "p90_box_luminance": 0.659
+    },
+    "samples": {
+     "box": [
+      408,
+      74,
+      618,
+      102
+     ],
+     "median_contrast": 3.93,
+     "p90_box_luminance": 0.775
+    },
+    "controls": {
+     "box": [
+      298,
+      104,
+      618,
+      120
+     ],
+     "median_contrast": 2.86,
+     "p90_box_luminance": 0.652
+    }
+   }
+  },
+  {
+   "frame": "frames-en-locked/01-locked-exit.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.68,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 4.96,
+     "p90_box_luminance": 0.637
+    },
+    "samples": {
+     "box": [
+      807,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.66,
+     "p90_box_luminance": 0.709
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.03,
+     "p90_box_luminance": 0.611
+    }
+   }
+  },
+  {
+   "frame": "frames-en-narrow/01-start.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.1,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 4.01,
+     "p90_box_luminance": 0.643
+    },
+    "samples": {
+     "box": [
+      268,
+      74,
+      398,
+      102
+     ],
+     "median_contrast": 3.49,
+     "p90_box_luminance": 0.732
+    },
+    "controls": {
+     "box": [
+      174,
+      104,
+      398,
+      120
+     ],
+     "median_contrast": 3.3,
+     "p90_box_luminance": 0.632
+    }
+   }
+  },
+  {
+   "frame": "frames-en-route-a/01-pickup-1.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 10.53,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 12.88,
+     "p90_box_luminance": 0.624
+    },
+    "samples": {
+     "box": [
+      811,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.694
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.0,
+     "p90_box_luminance": 0.611
+    }
+   }
+  },
+  {
+   "frame": "frames-en-route-a/02-damage-1.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 4.89,
+     "p90_box_luminance": 0.637
+    },
+    "samples": {
+     "box": [
+      808,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.59,
+     "p90_box_luminance": 0.714
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 4.9,
+     "p90_box_luminance": 0.617
+    }
+   }
+  },
+  {
+   "frame": "frames-en-route-a/03-collected.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.68,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      152,
+      68
+     ],
+     "median_contrast": 4.89,
+     "p90_box_luminance": 0.637
+    },
+    "samples": {
+     "box": [
+      807,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.715
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.04,
+     "p90_box_luminance": 0.611
+    }
+   }
+  },
+  {
+   "frame": "frames-en-route-a/04-won.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.68,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      152,
+      68
+     ],
+     "median_contrast": 4.9,
+     "p90_box_luminance": 0.637
+    },
+    "samples": {
+     "box": [
+      807,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.66,
+     "p90_box_luminance": 0.715
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.03,
+     "p90_box_luminance": 0.611
+    },
+    "won": {
+     "box": [
+      318,
+      94,
+      642,
+      142
+     ],
+     "median_contrast": 3.11,
+     "p90_box_luminance": 0.854
+    }
+   }
+  },
+  {
+   "frame": "frames-en-route-a/05-after-start.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 12.02,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 12.3,
+     "p90_box_luminance": 0.624
+    },
+    "samples": {
+     "box": [
+      808,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.723
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.18,
+     "p90_box_luminance": 0.611
+    }
+   }
+  },
+  {
+   "frame": "frames-en-route-b/01-lost.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 12.29,
+     "p90_box_luminance": 0.598
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 12.23,
+     "p90_box_luminance": 0.624
+    },
+    "samples": {
+     "box": [
+      808,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.723
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.34,
+     "p90_box_luminance": 0.605
+    },
+    "lost": {
+     "box": [
+      338,
+      94,
+      622,
+      142
+     ],
+     "median_contrast": 3.17,
+     "p90_box_luminance": 0.854
+    }
+   }
+  },
+  {
+   "frame": "frames-en-route-b/02-after-r.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 12.02,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 12.3,
+     "p90_box_luminance": 0.624
+    },
+    "samples": {
+     "box": [
+      808,
+      16,
+      938,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.723
+    },
+    "controls": {
+     "box": [
+      714,
+      46,
+      938,
+      62
+     ],
+     "median_contrast": 5.18,
+     "p90_box_luminance": 0.611
+    }
+   }
+  },
+  {
+   "frame": "frames-zh-Hans-route-a/01-pickup-1.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 11.82,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      124,
+      68
+     ],
+     "median_contrast": 12.12,
+     "p90_box_luminance": 0.783
+    },
+    "samples": {
+     "box": [
+      536,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.738
+    },
+    "controls": {
+     "box": [
+      413,
+      46,
+      618,
+      62
+     ],
+     "median_contrast": 4.82,
+     "p90_box_luminance": 0.637
+    }
+   }
+  },
+  {
+   "frame": "frames-zh-Hans-route-a/02-won.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.68,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      107,
+      68
+     ],
+     "median_contrast": 4.61,
+     "p90_box_luminance": 0.709
+    },
+    "samples": {
+     "box": [
+      532,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.76
+    },
+    "controls": {
+     "box": [
+      413,
+      46,
+      618,
+      62
+     ],
+     "median_contrast": 4.82,
+     "p90_box_luminance": 0.637
+    },
+    "won": {
+     "box": [
+      180,
+      94,
+      460,
+      142
+     ],
+     "median_contrast": 2.72,
+     "p90_box_luminance": 0.854
+    }
+   }
+  },
+  {
+   "frame": "frames-zh-Hans-route-a/03-after-start.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.75,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      124,
+      68
+     ],
+     "median_contrast": 4.96,
+     "p90_box_luminance": 0.79
+    },
+    "samples": {
+     "box": [
+      532,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.76
+    },
+    "controls": {
+     "box": [
+      413,
+      46,
+      618,
+      62
+     ],
+     "median_contrast": 4.82,
+     "p90_box_luminance": 0.637
+    }
+   }
+  },
+  {
+   "frame": "frames-en-default/01-start.rgba",
+   "labels": {
+    "health": {
+     "box": [
+      22,
+      16,
+      95,
+      44
+     ],
+     "median_contrast": 5.75,
+     "p90_box_luminance": 0.854
+    },
+    "objective": {
+     "box": [
+      22,
+      46,
+      221,
+      68
+     ],
+     "median_contrast": 5.11,
+     "p90_box_luminance": 0.631
+    },
+    "samples": {
+     "box": [
+      488,
+      16,
+      618,
+      44
+     ],
+     "median_contrast": 5.67,
+     "p90_box_luminance": 0.723
+    },
+    "controls": {
+     "box": [
+      394,
+      46,
+      618,
+      62
+     ],
+     "median_contrast": 4.9,
+     "p90_box_luminance": 0.612
+    }
+   }
+  }
+ ],
+ "runs": {
+  "dry-ar-route-a": {
+   "report_sha256": "987b9cbb34f4fd7c0ba64ba7c28d356cb606b04f81f57c3be5cbbcffa6019176",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 3.05076775,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "b8941b7038c415d1832f14a9cab654a72de2ca6c5c57158a0c144f19292cad34",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "6b40e7018278847a200d5602841f44d3a04a607f597512b01b79bb42bfdd45c5"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 1/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "عُد إلى المصعد",
+      "07": "العينات 4/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R",
+      "11": "تم تأمين العينات"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "عُد إلى المصعد",
+      "07": "العينات 4/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R",
+      "11": "تم تأمين العينات"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    }
+   ]
+  },
+  "dry-en-XA-route-a": {
+   "report_sha256": "052a61c802505b2d75ebbefe7df888db1280a7140ca5cb766e046aa04e85b1f3",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 3.348727417,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "b8941b7038c415d1832f14a9cab654a72de2ca6c5c57158a0c144f19292cad34",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "a17f24d3683d911aebbfb010ae00ba507b0220791a356881a5f18ca9a3f4e51d"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 1/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ○ !!]",
+      "05": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+      "07": "[!! Šááɱþľééš 4/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+      "11": "[!! Šááɱþľééš šééçúúŕééď !!]"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ○ !!]",
+      "05": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+      "07": "[!! Šááɱþľééš 4/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+      "11": "[!! Šááɱþľééš šééçúúŕééď !!]"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    }
+   ]
+  },
+  "dry-en-locked": {
+   "report_sha256": "20d6de47f24323a071ba1aca584132e31730869acc0400b207c7aa567d0351bd",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 1588,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1270400,
+    "sample_rate": 48000,
+    "sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77"
+   },
+   "elapsed_seconds": 2.076792125,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "65ea954182310e93202183cb23278f9bd0502267707b69ae0f6f987b6de363fe",
+    "recording_sha256": "adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "arrival",
+     "host_step": 1559,
+     "generation": 1,
+     "simulation_tick": 1559,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 3/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "locked-exit",
+     "host_step": 1588,
+     "generation": 1,
+     "simulation_tick": 1588,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 3/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "dry-en-narrow": {
+   "report_sha256": "3b43e2fe63190de42ae044a289bd83c18356ea42df87d93acce8a33dfee72243",
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "size": [
+    420,
+    320
+   ],
+   "host_steps": 617,
+   "boundaries": [],
+   "pcm": {
+    "frames": 493600,
+    "sample_rate": 48000,
+    "sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997"
+   },
+   "elapsed_seconds": 1.141918375,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "1f797de52e5331faa88fe56ec8dbfc8e7769be0f83b3ee6e169f9e3a3050f28b",
+    "recording_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "lost",
+     "host_step": 617,
+     "generation": 1,
+     "simulation_tick": 617,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "○ ○ ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again",
+      "12": "Surveyor down"
+     }
+    }
+   ]
+  },
+  "dry-en-route-a": {
+   "report_sha256": "40e47bbb76593dddfa392634d389cb4296e169b1ab38d42780d06d2b0c01d393",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 3.217843416,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "cbf2db865c8cdba9de0aa712856179b7c3e554c37c53bd5be23cc18501d9c806",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 1/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "damage-1",
+     "host_step": 665,
+     "generation": 1,
+     "simulation_tick": 665,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 2/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "collected",
+     "host_step": 1843,
+     "generation": 1,
+     "simulation_tick": 1843,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Return to the lift",
+      "07": "Samples 4/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Return to the lift",
+      "07": "Samples 4/4",
+      "08": "WASD move · Space jump · R play again",
+      "11": "Samples secured"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Return to the lift",
+      "07": "Samples 4/4",
+      "08": "WASD move · Space jump · R play again",
+      "11": "Samples secured"
+     }
+    },
+    {
+     "name": "restarted-tick-1",
+     "host_step": 2157,
+     "generation": 2,
+     "simulation_tick": 1,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "dry-en-route-b": {
+   "report_sha256": "a7d30608b2fd796f50931fa1290af2f2520b47173c18c5dde9259f515e9644f7",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 902,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 900,
+     "output_frames": 720000,
+     "simulation_tick": 900
+    }
+   ],
+   "pcm": {
+    "frames": 721600,
+    "sample_rate": 48000,
+    "sha256": "f6b229ea0ee7cbe4a6fa0b9fe972d0615868f5886aec99716d2e4457572e1d60"
+   },
+   "elapsed_seconds": 1.6595345,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "44e45fa90580814b883c30a62c5db68d6e0bff7518502a1eed5b84ccea0186fa",
+    "recording_sha256": "97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "damage-1",
+     "host_step": 527,
+     "generation": 1,
+     "simulation_tick": 527,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "lost",
+     "host_step": 617,
+     "generation": 1,
+     "simulation_tick": 617,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "○ ○ ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again",
+      "12": "Surveyor down"
+     }
+    },
+    {
+     "name": "r-pressed",
+     "host_step": 900,
+     "generation": 1,
+     "simulation_tick": 900,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "○ ○ ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again",
+      "12": "Surveyor down"
+     }
+    },
+    {
+     "name": "restarted-tick-1",
+     "host_step": 901,
+     "generation": 2,
+     "simulation_tick": 1,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "after-r",
+     "host_step": 902,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "dry-zh-Hans-route-a": {
+   "report_sha256": "7d9159837dc446bc8df3ca473beebd90f31619a44c5d6788e88c696d0d97b277",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 3.189137917,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "b8941b7038c415d1832f14a9cab654a72de2ca6c5c57158a0c144f19292cad34",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "c72085a5a56ea10cbb61eb315d98e85110e041198e40af35a91ceecf3051d651"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 0/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 1/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "返回升降台",
+      "07": "样本 4/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+      "11": "样本已安全回收"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "返回升降台",
+      "07": "样本 4/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+      "11": "样本已安全回收"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 0/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    }
+   ]
+  },
+  "frames-ar-route-a": {
+   "report_sha256": "4d85f531e052a349b9f197baac83f8a03215fe356ef24300b729d0e18c4e30c5",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 4.045861292,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "e8d4ab440d6d12db357a7de468762a0b2adcc3e26cf9e5c5e739ed8a4fb3be1e",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "6b40e7018278847a200d5602841f44d3a04a607f597512b01b79bb42bfdd45c5"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": "01-pickup-1.rgba",
+     "rgba_sha256": "cc53959c2077fd06d457cde3d2145d14a4c03d3c7493f6f4791dae4e062b70d2",
+     "capture_seconds": 0.0064,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 1/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "عُد إلى المصعد",
+      "07": "العينات 4/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R",
+      "11": "تم تأمين العينات"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "عُد إلى المصعد",
+      "07": "العينات 4/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R",
+      "11": "تم تأمين العينات"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": "02-after-start.rgba",
+     "rgba_sha256": "4eb53c2f93f93228759696be22a7f576f589b5caace24552acd6677fccfc3e6d",
+     "capture_seconds": 0.008,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    }
+   ]
+  },
+  "frames-en-XA-route-a": {
+   "report_sha256": "b2b0f5646b81f36b33626b4f68ebd46ebf0e91b02c4e80294950a37165df3ce3",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 3.844193917,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "336ea6f98053aac89d4447bd23fe0284511ce2246a90e5d0f4b5785ac9936fb3",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "a17f24d3683d911aebbfb010ae00ba507b0220791a356881a5f18ca9a3f4e51d"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 1/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": "01-won.rgba",
+     "rgba_sha256": "5a2c9676559edaaff7a592abe9849fc58ffa5d3c5fb3662604d2824cd9357986",
+     "capture_seconds": 0.0061,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ○ !!]",
+      "05": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+      "07": "[!! Šááɱþľééš 4/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+      "11": "[!! Šááɱþľééš šééçúúŕééď !!]"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ○ !!]",
+      "05": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+      "07": "[!! Šááɱþľééš 4/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+      "11": "[!! Šááɱþľééš šééçúúŕééď !!]"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": "02-after-start.rgba",
+     "rgba_sha256": "2bbb38f6d4377aaa415b7ee56e3ddafc575691b21be3eeba4daa95d2932bbfa0",
+     "capture_seconds": 0.0061,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    }
+   ]
+  },
+  "frames-en-default": {
+   "report_sha256": "4757e9656db2d739ef7262544c7ec032e42042ec57fc10c580da3f070095b20b",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.450163333,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "cad7b0c44c451eb1ee401e3201440b73b99c66ea1bfbe0602ecdbd7ebf78783f",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": "01-start.rgba",
+     "rgba_sha256": "4e812a8abaa0acee5cc24a97a66bb94bd7fae2f8b69af4036a818f89f7b0ae65",
+     "capture_seconds": 0.0129,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "frames-en-locked": {
+   "report_sha256": "ac90e9cd829d14e71e0d683535a875b60b9772bc978fe1ed6a3f4560dc3baf8d",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 1588,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1270400,
+    "sample_rate": 48000,
+    "sha256": "1c6140c10bca83d890ff1ee08e066cf83ccc7b0bbc52e4801128f86c4a68bc77"
+   },
+   "elapsed_seconds": 2.5580745,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "636561b13f911f79452bc5f2f7a3fcd76dee9cae1ba053b052ae9c4b346fc1d9",
+    "recording_sha256": "adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "arrival",
+     "host_step": 1559,
+     "generation": 1,
+     "simulation_tick": 1559,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 3/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "locked-exit",
+     "host_step": 1588,
+     "generation": 1,
+     "simulation_tick": 1588,
+     "rgba": "01-locked-exit.rgba",
+     "rgba_sha256": "6767c6a024353e8b07a95b3763440d3f31c318e15f383f812528dd0fa828287a",
+     "capture_seconds": 0.0094,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 3/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "frames-en-narrow": {
+   "report_sha256": "52cef87f219c9113f9b9b7205e1f6e6b90afebfbde2c171db0b3b6d43bf732f2",
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "size": [
+    420,
+    320
+   ],
+   "host_steps": 617,
+   "boundaries": [],
+   "pcm": {
+    "frames": 493600,
+    "sample_rate": 48000,
+    "sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997"
+   },
+   "elapsed_seconds": 1.231583834,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "85dc7a78dc53cfdd4716dfb0ff40e03a42334d30aae6bafbcb3e7e6b554da001",
+    "recording_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": "01-start.rgba",
+     "rgba_sha256": "6697e1798b78808e51b021ae5f910e641f8bd459d57ddee5d8ee4f9ad6885886",
+     "capture_seconds": 0.0095,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "lost",
+     "host_step": 617,
+     "generation": 1,
+     "simulation_tick": 617,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "○ ○ ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again",
+      "12": "Surveyor down"
+     }
+    }
+   ]
+  },
+  "frames-en-route-a": {
+   "report_sha256": "7e183eade65bee2014cd2c4520732b7ea4b2ad2f6f89e57fe60429a4b5ebd4b2",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 3.489795084,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "a568be55e69455f9bdb730947a1697a32f21567670ea1b698a8b9d5627329105",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": "01-pickup-1.rgba",
+     "rgba_sha256": "55503e4a2aa674aa038dcff806b9125bee0a1913c48c42dca2af0673a4d58da7",
+     "capture_seconds": 0.0092,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 1/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "damage-1",
+     "host_step": 665,
+     "generation": 1,
+     "simulation_tick": 665,
+     "rgba": "02-damage-1.rgba",
+     "rgba_sha256": "cb9b061b66f8e1444b0e58edc7ae3cb3ab871b411a44fef9794d8c2441e636c2",
+     "capture_seconds": 0.0091,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 2/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "collected",
+     "host_step": 1843,
+     "generation": 1,
+     "simulation_tick": 1843,
+     "rgba": "03-collected.rgba",
+     "rgba_sha256": "c878dd2775df2133f4d28255638842ee698498f05ad5cdb210f25d35ae95e39a",
+     "capture_seconds": 0.0093,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Return to the lift",
+      "07": "Samples 4/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": "04-won.rgba",
+     "rgba_sha256": "153a5534f0e4cc73a3d8aae22b478337edd2212c9cb9ef0d6d602703d8c96205",
+     "capture_seconds": 0.0093,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Return to the lift",
+      "07": "Samples 4/4",
+      "08": "WASD move · Space jump · R play again",
+      "11": "Samples secured"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Return to the lift",
+      "07": "Samples 4/4",
+      "08": "WASD move · Space jump · R play again",
+      "11": "Samples secured"
+     }
+    },
+    {
+     "name": "restarted-tick-1",
+     "host_step": 2157,
+     "generation": 2,
+     "simulation_tick": 1,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": "05-after-start.rgba",
+     "rgba_sha256": "20ec7c5ce6b0dfb1fdf4fe2b203f2561e989aa2fb090090c3fa21432148b52d7",
+     "capture_seconds": 0.0112,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "frames-en-route-b": {
+   "report_sha256": "9e04222e6b52b789f59214d4d5ed690d98d3d3aef8a3e277df1470caa946df77",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 902,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 900,
+     "output_frames": 720000,
+     "simulation_tick": 900
+    }
+   ],
+   "pcm": {
+    "frames": 721600,
+    "sample_rate": 48000,
+    "sha256": "f6b229ea0ee7cbe4a6fa0b9fe972d0615868f5886aec99716d2e4457572e1d60"
+   },
+   "elapsed_seconds": 1.856090375,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "459722c1b71ee606d1e385679b00b33a7b733234ca5502312327789dbb8d9bf6",
+    "recording_sha256": "97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "damage-1",
+     "host_step": 527,
+     "generation": 1,
+     "simulation_tick": 527,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "lost",
+     "host_step": 617,
+     "generation": 1,
+     "simulation_tick": 617,
+     "rgba": "01-lost.rgba",
+     "rgba_sha256": "62e384946ec6bb92b1852d7f7f0dcfa261dff6365aeff15a36c5c93142c9e611",
+     "capture_seconds": 0.0096,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "○ ○ ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again",
+      "12": "Surveyor down"
+     }
+    },
+    {
+     "name": "r-pressed",
+     "host_step": 900,
+     "generation": 1,
+     "simulation_tick": 900,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "○ ○ ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again",
+      "12": "Surveyor down"
+     }
+    },
+    {
+     "name": "restarted-tick-1",
+     "host_step": 901,
+     "generation": 2,
+     "simulation_tick": 1,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "after-r",
+     "host_step": 902,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": "02-after-r.rgba",
+     "rgba_sha256": "20ec7c5ce6b0dfb1fdf4fe2b203f2561e989aa2fb090090c3fa21432148b52d7",
+     "capture_seconds": 0.0112,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "frames-zh-Hans-route-a": {
+   "report_sha256": "40dcd9d27f6e62a326a326cc89ab57fbf1229cc5967fadb51aa545638366e34a",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2158,
+   "boundaries": [
+    {
+     "completed_generation": 1,
+     "host_step": 2156,
+     "output_frames": 1724800,
+     "simulation_tick": 2156
+    }
+   ],
+   "pcm": {
+    "frames": 1726400,
+    "sample_rate": 48000,
+    "sha256": "1a76ccabedeaace52a24fe0dd0206df27a6deb22ff27a27d854d33d031c9f523"
+   },
+   "elapsed_seconds": 3.791977041,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "23703d1b402bc4986e71b3a6be40360e9a060b94a7e48966d0eec50e1670561d",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "c72085a5a56ea10cbb61eb315d98e85110e041198e40af35a91ceecf3051d651"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 0/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": "01-pickup-1.rgba",
+     "rgba_sha256": "aa42ad441eed2d669f62e881b892b28225285ccd0149f7885a62d4df7f88fe07",
+     "capture_seconds": 0.0066,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 1/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": "02-won.rgba",
+     "rgba_sha256": "abff155445b4e6a89b95bbe8302b039ee9fa11cdc0c45e232e4d58e76259d345",
+     "capture_seconds": 0.0063,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "返回升降台",
+      "07": "样本 4/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+      "11": "样本已安全回收"
+     }
+    },
+    {
+     "name": "start-pressed",
+     "host_step": 2156,
+     "generation": 1,
+     "simulation_tick": 2156,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "返回升降台",
+      "07": "样本 4/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+      "11": "样本已安全回收"
+     }
+    },
+    {
+     "name": "after-start",
+     "host_step": 2158,
+     "generation": 2,
+     "simulation_tick": 2,
+     "rgba": "03-after-start.rgba",
+     "rgba_sha256": "491dd33a678a9ff4bdac6faee737bdaf6c3bee7046213074cba8d934329840e7",
+     "capture_seconds": 0.0067,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 0/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    }
+   ]
+  },
+  "layout-ar-420x320": {
+   "report_sha256": "2f9de836f7be5aba40384a80d4f99e160c79556cf282e1ebf882febf4c8b229c",
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "size": [
+    420,
+    320
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.425312958,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "6ee9e1dc5b98fb5ce9ce2796b8d12035ef7dc4fe61d38f4f24c093fdd486c115",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "6b40e7018278847a200d5602841f44d3a04a607f597512b01b79bb42bfdd45c5"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    }
+   ]
+  },
+  "layout-ar-640x480": {
+   "report_sha256": "51cc695f2235ee295588f3d1c10f5ed5415b72bc1e1d61860be809e79841931d",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.429853291,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "7c7a0e87aa59762e86167a00b443c216a4b79578c51c092a58d8c7211653b96f",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "6b40e7018278847a200d5602841f44d3a04a607f597512b01b79bb42bfdd45c5"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    }
+   ]
+  },
+  "layout-ar-960x540": {
+   "report_sha256": "e47fc3c1903f163af187dbae8379534f344dd1a72f13c66bd622dd668eb02d82",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.436006542,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "fd573de4183c98e8f0cf3d028f68de2bac310ed4cbcee325b0a71f1221c7e9a1",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "6b40e7018278847a200d5602841f44d3a04a607f597512b01b79bb42bfdd45c5"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    }
+   ]
+  },
+  "layout-en-420x320": {
+   "report_sha256": "38086240d3e17dee6ffedeeb7eba0351e8d1cb05dad70a4fe8bc7100f2366175",
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "size": [
+    420,
+    320
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.431272125,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "6ee9e1dc5b98fb5ce9ce2796b8d12035ef7dc4fe61d38f4f24c093fdd486c115",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "layout-en-640x480": {
+   "report_sha256": "1fbc02fa5dbfa4c6e9242d63927134745a63fef74aebae55f6880d732d9d01de",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.423592916,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "7c7a0e87aa59762e86167a00b443c216a4b79578c51c092a58d8c7211653b96f",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "layout-en-960x540": {
+   "report_sha256": "99cadf1e22f14e73f6644d24931e723437343288ea11a53198f049d245ecafda",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.427320042,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "fd573de4183c98e8f0cf3d028f68de2bac310ed4cbcee325b0a71f1221c7e9a1",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  },
+  "layout-en-XA-420x320": {
+   "report_sha256": "ebcaa063c95b15208161d988f6860373fa641fe1216f4dbcdff2ba949fa7847f",
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "size": [
+    420,
+    320
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.425397334,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "6ee9e1dc5b98fb5ce9ce2796b8d12035ef7dc4fe61d38f4f24c093fdd486c115",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "a17f24d3683d911aebbfb010ae00ba507b0220791a356881a5f18ca9a3f4e51d"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    }
+   ]
+  },
+  "layout-en-XA-640x480": {
+   "report_sha256": "24d5a59de6570de74f6ba2a32e0b054e8af666f23a25813650c335d0e458fa1c",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.440025458,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "7c7a0e87aa59762e86167a00b443c216a4b79578c51c092a58d8c7211653b96f",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "a17f24d3683d911aebbfb010ae00ba507b0220791a356881a5f18ca9a3f4e51d"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    }
+   ]
+  },
+  "layout-en-XA-960x540": {
+   "report_sha256": "b0bc41ac4e704056a8732aa77c653905ca825011c60cf4d06f4d3e59f4990523",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.432859791,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "fd573de4183c98e8f0cf3d028f68de2bac310ed4cbcee325b0a71f1221c7e9a1",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "a17f24d3683d911aebbfb010ae00ba507b0220791a356881a5f18ca9a3f4e51d"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    }
+   ]
+  },
+  "layout-zh-Hans-420x320": {
+   "report_sha256": "2d3cfb36e48a24eeedba4effa1a306f4432953cb300adea771e8c0c2c3cdd27e",
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "size": [
+    420,
+    320
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.434243667,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "6ee9e1dc5b98fb5ce9ce2796b8d12035ef7dc4fe61d38f4f24c093fdd486c115",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "c72085a5a56ea10cbb61eb315d98e85110e041198e40af35a91ceecf3051d651"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 0/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    }
+   ]
+  },
+  "layout-zh-Hans-640x480": {
+   "report_sha256": "65c50f2f7a984d89e77cf4f93f02e7efb013975feb19356298f10d0853e2c91c",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.434362167,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "7c7a0e87aa59762e86167a00b443c216a4b79578c51c092a58d8c7211653b96f",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "c72085a5a56ea10cbb61eb315d98e85110e041198e40af35a91ceecf3051d651"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 0/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    }
+   ]
+  },
+  "layout-zh-Hans-960x540": {
+   "report_sha256": "9c7b97b3f4a5cdd9b6ab08c9bc913369895fa3aa268efebf564a9a87f56127aa",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.433161291,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "fd573de4183c98e8f0cf3d028f68de2bac310ed4cbcee325b0a71f1221c7e9a1",
+    "recording_sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+    "world_scene_sha256": "c72085a5a56ea10cbb61eb315d98e85110e041198e40af35a91ceecf3051d651"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "收集岩芯样本",
+      "07": "样本 0/4",
+      "08": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+     }
+    }
+   ]
+  },
+  "review-ar-won": {
+   "report_sha256": "4f5c5b71065bfcb02744d42523d1a02ddbfb0f6b5edb074137943149008ca616",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 2067,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1653600,
+    "sample_rate": 48000,
+    "sha256": "c8386b256c2976fda044173f376b7c750207cb7d81d3816c579203d6d99b940f"
+   },
+   "elapsed_seconds": 3.065213125,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "72f2459f3722713d6b213f7c10087368e0a51ef1d2a3a2e26c99166d7090af0e",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "6b40e7018278847a200d5602841f44d3a04a607f597512b01b79bb42bfdd45c5"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 0/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "اجمع العينات اللبية",
+      "07": "العينات 1/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R"
+     }
+    },
+    {
+     "name": "won",
+     "host_step": 2067,
+     "generation": 1,
+     "simulation_tick": 2067,
+     "rgba": "01-won.rgba",
+     "rgba_sha256": "a2a0e04d724112c11a0b4e302b590ba1cd51adea164a8c1153a1d6e273d72537",
+     "capture_seconds": 0.0062,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ○",
+      "05": "عُد إلى المصعد",
+      "07": "العينات 4/4",
+      "08": "الحركة WASD · القفز Space · إعادة اللعب R",
+      "11": "تم تأمين العينات"
+     }
+    }
+   ]
+  },
+  "review-en-XA-pickup": {
+   "report_sha256": "93f807d78fd33298f0c952d92de0c0bd5cd2e00cb208d9f143031ed741ad7767",
+   "viewport": [
+    640.0,
+    480.0
+   ],
+   "size": [
+    640,
+    480
+   ],
+   "host_steps": 128,
+   "boundaries": [],
+   "pcm": {
+    "frames": 102400,
+    "sample_rate": 48000,
+    "sha256": "2c2d59a978da6773accf54b8282b0cddc3271bab2cf6e6176b525d8ca1289a90"
+   },
+   "elapsed_seconds": 0.620451291,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "d4f1cbe678ef247c67f34a70eecc4e902afaa437c41ccb29faa522f0326b8601",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "a17f24d3683d911aebbfb010ae00ba507b0220791a356881a5f18ca9a3f4e51d"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0001,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 0/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    },
+    {
+     "name": "pickup-1",
+     "host_step": 128,
+     "generation": 1,
+     "simulation_tick": 128,
+     "rgba": "01-pickup-1.rgba",
+     "rgba_sha256": "3ff1454ee37e5e5e738b41a124e1f5f8a65927e9f01c444e07f5de9cb8217df0",
+     "capture_seconds": 0.0062,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "[!! ● ● ● !!]",
+      "05": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+      "07": "[!! Šááɱþľééš 1/4 !!]",
+      "08": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+     }
+    }
+   ]
+  },
+  "review-en-narrow-lost": {
+   "report_sha256": "a38d11f0425f2056f0d5498d1b5dabdd3196c7aad9ef43ac50ea79e0a2cedfae",
+   "viewport": [
+    420.0,
+    320.0
+   ],
+   "size": [
+    420,
+    320
+   ],
+   "host_steps": 617,
+   "boundaries": [],
+   "pcm": {
+    "frames": 493600,
+    "sample_rate": 48000,
+    "sha256": "811929cf32239137361bf44a76df110ee61c550f04635e0ebac64351d82f4997"
+   },
+   "elapsed_seconds": 1.355913208,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "8d23afc38b4a5de46a284209591ffbd7aa135d939184caea9d0b0d7f8ded11a0",
+    "recording_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": null,
+     "rgba_sha256": null,
+     "capture_seconds": 0.0,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    },
+    {
+     "name": "lost",
+     "host_step": 617,
+     "generation": 1,
+     "simulation_tick": 617,
+     "rgba": "01-lost.rgba",
+     "rgba_sha256": "2bca0f2ee66cc58b5e2be2cf58f67e36223b07d5fd85db89eb112b80f47e5477",
+     "capture_seconds": 0.0037,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "○ ○ ○",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again",
+      "12": "Surveyor down"
+     }
+    }
+   ]
+  },
+  "review-en-start": {
+   "report_sha256": "6ef3ac438796b5d8d4abaa819df57b65b3658466b4014916ba18e2948459555c",
+   "viewport": [
+    960.0,
+    540.0
+   ],
+   "size": [
+    960,
+    540
+   ],
+   "host_steps": 2,
+   "boundaries": [],
+   "pcm": {
+    "frames": 1600,
+    "sample_rate": 48000,
+    "sha256": "f34e2cc3d5046392f34b55acb0eda7dc4e19402fee1cf35ad08e4baa8815678a"
+   },
+   "elapsed_seconds": 0.442532875,
+   "program": {
+    "build": "56f5a0abb206b5be873cfe346bccd43e4a6a5317d93af6280c6c749c1a7a239a",
+    "engine": "rquickjs-0.14.0/quickjs-ng-0.16.2/bytecode-28",
+    "target": "aarch64-apple-darwin"
+   },
+   "inputs": {
+    "plan_sha256": "be537915134eeb20cbe2f6ddb87d94b5c40f953d522204874054df44f0dd2ca2",
+    "recording_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+    "world_scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057"
+   },
+   "captures": [
+    {
+     "name": "start",
+     "host_step": 2,
+     "generation": 1,
+     "simulation_tick": 2,
+     "rgba": "01-start.rgba",
+     "rgba_sha256": "20ec7c5ce6b0dfb1fdf4fe2b203f2561e989aa2fb090090c3fa21432148b52d7",
+     "capture_seconds": 0.0167,
+     "missing_glyphs": 0,
+     "labels": {
+      "04": "● ● ●",
+      "05": "Collect the core samples",
+      "07": "Samples 0/4",
+      "08": "WASD move · Space jump · R play again"
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-13T04:30:20.974393+00:00",
+  "reviewer": "astra/root",
+  "head": "ad050c7642cc94a6fba53d6b269e4d5b108f46af",
+  "manifest_sha256": "35c904100ebcb82b2562a7cdb817ce1c91685a263f0cd4daa5b72d3837eeb082",
+  "collector_source_reviewed": true,
+  "collector_verify_only_exit": 0,
+  "independent_archive_records": 22,
+  "independent_archive_payloads": 12,
+  "summary": {
+    "passed": true,
+    "current_checks": 8,
+    "current_counts": {
+      "passed": 30,
+      "failed": 0,
+      "ignored": 0,
+      "nonempty_groups": 5
+    },
+    "frozen_inputs": 2845,
+    "producer_sources": 17,
+    "exact_crate_sources": 16,
+    "pinned_sources": 4,
+    "producer_records_rehashed": 137,
+    "existing_locked_identities": 966,
+    "new_locked_identities": [
+      [
+        "incant_physics_snapshot",
+        "0.0.1",
+        null,
+        null
+      ],
+      [
+        "serde_arrays",
+        "0.2.0",
+        "registry+https://github.com/rust-lang/crates.io-index",
+        "94a16b99c5ea4fe3daccd14853ad260ec00ea043b2708d1fd1da3106dcd8d9df"
+      ]
+    ],
+    "normal_graph": "new crate only, no dependencies",
+    "engine_inputs_unchanged_except_lock": true,
+    "live_solver_or_save_admission": false
+  },
+  "decision": "accepted scoped combined integration",
+  "limits": [
+    "Inert validation only; no live solver construction, runtime consumer, world-format adoption or PhysicsUnsupported change.",
+    "Both producer source/final reviews are preserved. Current30 tests include the prior18 cases; counts are not additive.",
+    "All existing package identities are unchanged; pinned serde_arrays0.2.0 and the new crate are added with reviewed dev-only observation feature edges. Normal crate graph has no dependencies.",
+    "Only post-test packaging change was lossless gzip for a retained Parry diff. Initial whitespace failure and all unchanged passing checks are retained.",
+    "No shipping, GPU, window, phone, performance or complete physics-save claim."
+  ]
+}

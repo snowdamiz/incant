@@ -19,6 +19,7 @@ import subprocess
 import tempfile
 
 import native_process
+import native_profiling
 import physics_export
 from physics_features import selected_graph_errors, validate_artifacts
 
@@ -106,7 +107,9 @@ def runtime_symbol_audit(executable, kind, llvm_bin, link_map):
     return evidence
 
 
-def build(project, staging, storage, scene, camera, mode, wabt=None):
+def build(project, staging, storage, scene, camera, mode, wabt=None, profiling=None):
+    profile_features = native_profiling.features(profiling, mode)
+    native_profiling.environment(profiling, os.environ)
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
     compiler = execute([rustc, '-vV']).stdout
     host = re.search(r'^host: (.+)$', compiler, re.MULTILINE).group(1)
@@ -128,7 +131,7 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
     project_hash = sha256(project_bytes)
     physics_mode = physics_export.project_mode(project_bytes)
     features = ','.join(physics_export.cargo_features(physics_mode,
-                       ['project', 'native-window' if mode == 'window' else 'render-input']))
+                       ['project', 'native-window' if mode == 'window' else 'render-input'] + profile_features))
     from native_wasm import capture
     module = capture(project, scene, storage, cargo, env, execute, wabt)
     if module is not None:
@@ -137,6 +140,7 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
                               '--features', features, '--target', host, '-e', 'normal',
                               '--prefix', 'none', '--format', '{p}|{f}'], env=env).stdout
     graph = normal_dependencies(selected_graph)
+    profile_graph = native_profiling.graph(selected_graph, profiling)
     errors = selected_graph_errors(selected_graph, physics_mode, host)
     require(not errors, 'Selected physics graph differs from project mode: ' + '; '.join(errors))
     (staging / 'normal-dependencies.txt').write_text(selected_graph, encoding='utf-8')
@@ -155,6 +159,8 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
     require(result.returncode == 0, 'Native player build failed; no package was published:\n' + log[-8000:])
     flags = verify_codegen(log, host, split)
     messages = cargo_messages(storage / 'cargo.jsonl')
+    profile_units = native_profiling.artifacts(messages, profiling, target_dir=storage / 'target',
+                                              target=host, profile='shipping')
     physics = validate_artifacts(messages, physics_mode, target_dir=storage / 'target',
                                  target=host, profile='shipping')
     artifacts = [a for a in messages if a.get('reason') == 'compiler-artifact' and a['target']['name'] == NAME and a.get('executable')]
@@ -181,7 +187,7 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
         if source.exists():
             shutil.copy2(source, staging / 'symbols' / name)
     write_json(staging / 'project-build.json', receipt)
-    return player, {'format': 'incant-native-export', 'version': 1, 'target': host, 'mode': mode,
+    report = {'format': 'incant-native-export', 'version': 1, 'target': host, 'mode': mode,
                     'project_sha256': project_hash, 'scene_id': receipt['scene_id'], 'camera': chosen_camera,
                     'physics_mode': physics_mode, 'physics_variant': physics_mode, 'physics': physics,
                     'program': receipt.get('program'), 'compiler': compiler, 'codegen': flags, 'normal_dependencies': graph, 'symbols': identity,
@@ -190,6 +196,11 @@ def build(project, staging, storage, scene, camera, mode, wabt=None):
                     'startup_source_parsing': False, 'signed': False,
                     'limits': ['host==target desktop only', 'existing cooked caches required',
                                'window export GPU execution requires a desktop', 'no phone or performance gate']}
+    if profiling is not None:
+        report['profiling'] = {'mode': profiling, 'normal_graph': profile_graph, 'compiler': profile_units,
+                               'startup_capture': False, 'runtime_opt_in': '--profile-tracy' if profiling == 'tracy' else '--profile',
+                               'transport': 'explicit loopback process lifetime' if profiling == 'tracy' else 'none'}
+    return player, report
 
 
 def ui_startup_options(mode, viewport):
@@ -202,8 +213,10 @@ def ui_startup_options(mode, viewport):
     return ['--ui-viewport', viewport]
 
 
-def export(project, output, scene=None, camera=None, mode='headless', wabt=None, ui_viewport=None):
+def export(project, output, scene=None, camera=None, mode='headless', wabt=None, ui_viewport=None, profiling=None):
     require(mode in ('headless', 'window'), 'Unknown native export mode')
+    native_profiling.features(profiling, mode)
+    native_profiling.environment(profiling, os.environ)
     ui_options = ui_startup_options(mode, ui_viewport)
     project = project.resolve(strict=True)
     output = output.absolute()
@@ -216,7 +229,7 @@ def export(project, output, scene=None, camera=None, mode='headless', wabt=None,
         staging = Path(temporary).resolve()
         with tempfile.TemporaryDirectory(prefix='incant-project-build-') as scratch:
             storage = Path(scratch).resolve()
-            player, report = build(project, staging, storage, scene, camera, mode, wabt)
+            player, report = build(project, staging, storage, scene, camera, mode, wabt, profiling)
         require(not storage.exists(), 'Private build storage was not removed')
         print('Checking copied player after removal of private build storage...', flush=True)
         runtime_env = {'PATH': str(player.parent),
@@ -241,6 +254,7 @@ def main():
     parser.add_argument('project', type=Path)
     parser.add_argument('output', type=Path)
     parser.add_argument('--wabt', type=Path, help='Trusted pinned WABT 1.0.42 directory for authored Wasm export')
+    parser.add_argument('--profiling', choices=('summary', 'tracy'), help='Trusted opt-in offline diagnostics build; runtime capture remains explicit')
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--mode', choices=('headless', 'window'), default='headless')
@@ -248,7 +262,7 @@ def main():
     args = parser.parse_args()
     try:
         result = export(args.project, args.output, args.scene, args.camera, args.mode,
-                        wabt=args.wabt, ui_viewport=args.ui_viewport)
+                        wabt=args.wabt, ui_viewport=args.ui_viewport, profiling=args.profiling)
     except (OSError, ValueError, subprocess.SubprocessError) as error:
         parser.exit(1, f'Native export failed: {error}\n')
     print(json.dumps({'output': str(args.output.absolute()), 'target': result['target'], 'player_sha256': result['player_sha256']}))

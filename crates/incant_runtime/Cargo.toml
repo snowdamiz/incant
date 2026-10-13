@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+profile = ["incant_profile/summary"]
 default = ["physics-deterministic"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
@@ -16,6 +17,7 @@ physics-deterministic = [
 physics-fast-simd8 = ["incant_physics_2d_runtime/fast-simd8", "incant_physics_runtime/fast-simd8"]
 
 [dependencies]
+incant_profile.workspace = true
 incant_anim.workspace = true
 incant_localization.workspace = true
 incant_nav.workspace = true

@@ -1,0 +1,270 @@
+{
+ "unittest": {
+  "command": "(cd samples/core && python3 -B -m unittest -v test_bindings test_playtest)",
+  "exit": 0,
+  "tail": [
+   "Ran 16 tests in 0.013s",
+   "",
+   "OK"
+  ]
+ },
+ "tsc": {
+  "command": "node node_modules/typescript/bin/tsc --noEmit -p samples/core/tsconfig.json",
+  "exit": 0,
+  "output_bytes": 0
+ },
+ "verify_bindings_prepare": {
+  "command": "python3 -B samples/core/verify_bindings.py prepare builds/en-playing checks/bindings-en --binary bin/incant_headless",
+  "passed": true,
+  "runs": [
+   "win",
+   "lose",
+   "locked",
+   "idle",
+   "win-tail"
+  ],
+  "native_processes": 15,
+  "binding_refusals": [
+   "wrong-role",
+   "wrong-source",
+   "missing-table"
+  ],
+  "cue_checks": {
+   "pickup": {
+    "ticks": [
+     127,
+     508,
+     1266,
+     1842
+    ],
+    "outside_windows_exact": true
+   },
+   "damage": {
+    "ticks": [
+     664
+    ],
+    "outside_windows_exact": true
+   },
+   "won": {
+    "ticks": [
+     2066
+    ],
+    "outside_windows_exact": true
+   },
+   "lost": {
+    "ticks": [
+     616
+    ],
+    "outside_windows_exact": true
+   }
+  },
+  "controls_by_locale": {
+   "en": "WASD move · Space jump · R play again",
+   "en-XA": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+   "ar": "الحركة WASD · القفز Space · إعادة اللعب R",
+   "zh-Hans": "WASD 移动 · 空格键 跳跃 · R 再玩一次"
+  },
+  "controls_readback_tick1": {
+   "ar": "الحركة WASD · القفز Space · إعادة اللعب R",
+   "zh-Hans": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+   "en-XA": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]"
+  },
+  "equals_accepted_native_003": {
+   "win": {
+    "pcm_sha256": true,
+    "logs": true,
+    "observations": true
+   },
+   "lose": {
+    "pcm_sha256": true,
+    "logs": true,
+    "observations": true
+   },
+   "locked": {
+    "pcm_sha256": true,
+    "logs": true,
+    "observations": true
+   },
+   "idle": {
+    "pcm_sha256": true,
+    "logs": true,
+    "observations": true
+   },
+   "win-tail": {
+    "pcm_sha256": true,
+    "logs": true,
+    "observations": true
+   }
+  }
+ },
+ "playtest": {
+  "command": "python3 -B samples/core/playtest.py builds/en-playing checks/playtest-en --player packages/en/player",
+  "passed": true,
+  "checks": {
+   "win_collects_all": true,
+   "win_reaches_lift": true,
+   "lose_by_contact": true,
+   "locked_exit_refuses": true,
+   "observations_passed": true,
+   "every_chaser_routes": true,
+   "authoring_unchanged": true
+  },
+  "results": {
+   "win": {
+    "ticks": 2156,
+    "won_tick": 2066,
+    "lost_tick": null,
+    "pickups": 4,
+    "pickup_order": [
+     "01CSEN00000000000000000030",
+     "01CSEN00000000000000000031",
+     "01CSEN00000000000000000032",
+     "01CSEN00000000000000000033"
+    ]
+   },
+   "lose": {
+    "ticks": 1500,
+    "won_tick": null,
+    "lost_tick": 617,
+    "pickups": 0,
+    "pickup_order": []
+   },
+   "locked": {
+    "ticks": 1588,
+    "won_tick": null,
+    "lost_tick": null,
+    "pickups": 3,
+    "pickup_order": [
+     "01CSEN00000000000000000030",
+     "01CSEN00000000000000000031",
+     "01CSEN00000000000000000032"
+    ]
+   }
+  },
+  "locked_exit": {
+   "complete_observations": true,
+   "complete_gameplay_logs": true,
+   "incomplete_inventory": true,
+   "live_player": true,
+   "no_victory": true,
+   "inside_exit_for_entire_dwell": true,
+   "thirty_stopped_ticks": true
+  }
+ },
+ "routes": {
+  "idle": {
+   "ticks": 30,
+   "sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/idle-input.json",
+   "equals_accepted": true
+  },
+  "lose-short": {
+   "ticks": 900,
+   "sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-short-input.json",
+   "equals_accepted": true
+  },
+  "locked": {
+   "ticks": 1588,
+   "sha256": "adc62cdf40aae07ad6b12dbfe5807da949a950eae0df06cbac1bcf68bfb2c6bf",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/locked-input.json",
+   "equals_accepted": true
+  },
+  "win": {
+   "ticks": 2156,
+   "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-input.json",
+   "equals_accepted": true
+  },
+  "win-restart-lose": {
+   "ticks": 3056,
+   "sha256": "1f104ffec19a35f6ca0f5d4429db3d3b6ef86c55eec678a80507d15179dcd16c",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/win-restart-lose-input.json",
+   "equals_accepted": true
+  },
+  "lose-restart-win": {
+   "ticks": 3056,
+   "sha256": "97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/lose-restart-win-input.json",
+   "equals_accepted": true
+  },
+  "gamepad-restart-lose": {
+   "ticks": 3056,
+   "sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/gamepad-restart-lose-input.json",
+   "equals_accepted": true
+  },
+  "held-restart-idle": {
+   "ticks": 2186,
+   "sha256": "c3b459a37f6e73cbf639cdf8329e891365675276710a5e01b8de98a3547c09a3",
+   "accepted": "/Users/andreyyurlov/.codex/incant-evidence/core-runtime-bindings-001/shipping-003/held-restart-idle-input.json",
+   "equals_accepted": true
+  }
+ },
+ "checker_mutations": {
+  "passed": true,
+  "source_report": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-route-a/report.json",
+  "results": {
+   "route-none": {
+    "exit": 0,
+    "detected": false,
+    "expected": false
+   },
+   "route-label-text": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "route-won-parent": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "route-log-tick": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "route-dropped-log": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "route-pcm": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "route-restart-differs": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "layout-none": {
+    "exit": 0,
+    "detected": false,
+    "expected": false
+   },
+   "layout-two-lines": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "layout-off-edge": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "layout-missing-glyph": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   },
+   "layout-overlap": {
+    "exit": 1,
+    "detected": true,
+    "expected": true
+   }
+  }
+ }
+}

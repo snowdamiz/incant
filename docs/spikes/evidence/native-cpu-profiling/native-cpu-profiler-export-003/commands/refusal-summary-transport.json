@@ -1,0 +1,16 @@
+{
+  "kind": "process",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/package-summary/player/incant_game_player",
+    "--profile-tracy"
+  ],
+  "pid": 66672,
+  "exit": 1,
+  "started_ns": 1791861395992065000,
+  "ended_ns": 1791861395997792000,
+  "stdout": "",
+  "stderr": "Error: TracyUnavailable\n",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "d1879daa6946e7b40fe0bfb960c4b58542f96cbbe2ce8605fa7d4b48ad87d21a",
+  "exception": null
+}

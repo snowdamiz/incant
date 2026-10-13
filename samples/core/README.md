@@ -38,3 +38,10 @@ these numerical checks from the ongoing visual and device work.
 
 The room is a test fixture, not the finished level or a performance benchmark.
 No device, full-save or Phase 1 gate is claimed by these checks.
+
+The authored HUD may bind one optional label as `hud.prompt`, using the localized
+`hud.prompt` string-table key. It joins the existing result title only after a
+win or loss and returns to the inactive container on restart. Winning clears the
+gameplay objective. The original HUD remains supported; missing or malformed
+roles fail explicitly. No prompt node, wording or styling is supplied by the
+controller. See [the binding contract and CPU proof](../../docs/spikes/core-result-hud.md).

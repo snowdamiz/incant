@@ -1,0 +1,1234 @@
+{
+  "format": "incant-physics-inert-arenas-evidence",
+  "version": 1,
+  "scope": "bounded inert Arena/Coarena layout and generation codecs; no payload or live solver construction",
+  "base": "c095d9728c6c466a6fa473dd4fdadbd9c3038442",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/freeze.json",
+    "sha256": "f478118ad7af4b01dd09a61d6c4986509067a902bdb1130af74198e7fd438f5c"
+  },
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "bytes": 252215,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/arena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/arena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/coarena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/coarena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/geometry_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "fb7fb013d05fd1feb6790a53863c3eb7ac10610d10090830d42aacc6130dce78",
+      "bytes": 1363,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/records.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/adversarial.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/trusted_arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/trusted_parry.rs"
+    }
+  ],
+  "pinned_dependency_sources": [
+    {
+      "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/data/arena.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier2d/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497
+    },
+    {
+      "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/data/coarena.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier2d/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246
+    },
+    {
+      "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/data/arena.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier3d/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497
+    },
+    {
+      "original": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/data/coarena.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier3d/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246
+    }
+  ],
+  "commands": [
+    {
+      "receipt": "clippy-001.json",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864644566975000,
+      "end_ns": 1791864652425390000,
+      "log_sha256": "e3f84e2d7cf90edd912754b98b569eb1d50a3acbfbbc2c10465ed549a9096089"
+    },
+    {
+      "receipt": "clippy-002.json",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864806396780000,
+      "end_ns": 1791864806854191000,
+      "log_sha256": "7195eac63c421d88edd92695b44fb8218436d874ab4f901f32e01cb3d226967b"
+    },
+    {
+      "receipt": "conventions-001.json",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864653389317000,
+      "end_ns": 1791864653417339000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "conventions-002.json",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864807603388000,
+      "end_ns": 1791864807631292000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "diff-001.json",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864653417573000,
+      "end_ns": 1791864653437558000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "diff-002.json",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864807631532000,
+      "end_ns": 1791864807651783000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "fmt-001.json",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864653313232000,
+      "end_ns": 1791864653389047000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "fmt-002.json",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864807529000000,
+      "end_ns": 1791864807603109000,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "normal-graph-001.json",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864652710730000,
+      "end_ns": 1791864652818074000,
+      "log_sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c"
+    },
+    {
+      "receipt": "normal-graph-002.json",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864807116530000,
+      "end_ns": 1791864807223181000,
+      "log_sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c"
+    },
+    {
+      "receipt": "runtime-graph-001.json",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864652818617000,
+      "end_ns": 1791864653312866000,
+      "log_sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0"
+    },
+    {
+      "receipt": "runtime-graph-002.json",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864807223472000,
+      "end_ns": 1791864807528561000,
+      "log_sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0"
+    },
+    {
+      "receipt": "tests-001.json",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864532775372000,
+      "end_ns": 1791864563547388000,
+      "log_sha256": "511e7953f1e600b42521f645e9d75b87f43e0b37c74a4980d5d3858f5a28de4d"
+    },
+    {
+      "receipt": "tests-002.json",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864804887931000,
+      "end_ns": 1791864806396489000,
+      "log_sha256": "c937afbedf4d02782d35982c3fcae45f0df2da7d0977a96e11ac0da5cacadfa0"
+    },
+    {
+      "receipt": "wasm32-001.json",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864652425652000,
+      "end_ns": 1791864652710518000,
+      "log_sha256": "6d8f3722792aa39c93b5ff038554635a98ff007048401b0fc2dc47c61590e410"
+    },
+    {
+      "receipt": "wasm32-002.json",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "exit": 0,
+      "start_ns": 1791864806854426000,
+      "end_ns": 1791864807116302000,
+      "log_sha256": "ac99f54d5778978f18d053b0ee0fb0c5cfb6968e91dcc46ed16e2feffe5abe97"
+    }
+  ],
+  "test_results": {
+    "final_passed": 30,
+    "failed": 0,
+    "ignored": 0,
+    "nonempty_groups": 5,
+    "new_arena_tests": 12
+  },
+  "normal_graph": "incant_physics_snapshot only; no normal/build dependencies",
+  "old_locked_identities_unchanged": 965,
+  "records": [
+    {
+      "name": "clippy-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/clippy-001.json",
+      "sha256": "5652a9ae31fd7ebc7e51d728507a47783b48bd7d822a4d85d41bb0e05f7f080f",
+      "bytes": 593,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/5652a9ae31fd7ebc7e51d728507a47783b48bd7d822a4d85d41bb0e05f7f080f.gz",
+      "retained_sha256": "fb78f57db580ec2691736e5644223b100a3dc9ee1ba0e9c2f1e6b5fbdb0d59dd"
+    },
+    {
+      "name": "clippy-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/clippy-001.log",
+      "sha256": "e3f84e2d7cf90edd912754b98b569eb1d50a3acbfbbc2c10465ed549a9096089",
+      "bytes": 649,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/e3f84e2d7cf90edd912754b98b569eb1d50a3acbfbbc2c10465ed549a9096089.gz",
+      "retained_sha256": "64e9db3b2e356e88e4657833d5de7707ba0107bf0d7f183736486e2e10445d2f"
+    },
+    {
+      "name": "clippy-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/clippy-002.json",
+      "sha256": "d484e92cd0d604ee748fc166e546b7bbedb63c50438b3356d2c149671130b084",
+      "bytes": 593,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/d484e92cd0d604ee748fc166e546b7bbedb63c50438b3356d2c149671130b084.gz",
+      "retained_sha256": "0b28362b27202985bb9b6a9dd25f8d8506beef3d21fcbb7ccb0291a234cbf931"
+    },
+    {
+      "name": "clippy-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/clippy-002.log",
+      "sha256": "7195eac63c421d88edd92695b44fb8218436d874ab4f901f32e01cb3d226967b",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7195eac63c421d88edd92695b44fb8218436d874ab4f901f32e01cb3d226967b.gz",
+      "retained_sha256": "8f67a6ec66e0e977b38771415552d6665951b0b9b135a6f96c78dcf92668042c"
+    },
+    {
+      "name": "conventions-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/conventions-001.json",
+      "sha256": "32f23cd92f827cb889034168527fdc5e330bb7c823850dac51b80eb44e566b97",
+      "bytes": 456,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/32f23cd92f827cb889034168527fdc5e330bb7c823850dac51b80eb44e566b97.gz",
+      "retained_sha256": "0849f9b7bf4d076bfda8fba5551a5600d98eabe94086964c033ae59a4b2a7db7"
+    },
+    {
+      "name": "conventions-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "conventions-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/conventions-002.json",
+      "sha256": "22df805138b57daa0e8a5e9e2577aef83e4a60b3095a8ff684ccafc5c15820fc",
+      "bytes": 456,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/22df805138b57daa0e8a5e9e2577aef83e4a60b3095a8ff684ccafc5c15820fc.gz",
+      "retained_sha256": "c386e0c1d8872258e6615467f3ebf2ebbcca20237713237676ec0f8a1780865d"
+    },
+    {
+      "name": "conventions-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/conventions-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "diff-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/diff-001.json",
+      "sha256": "9bc2f175d2be572c63ca362b55209f8fd024d5d3e1049943068b12115997f31e",
+      "bytes": 427,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/9bc2f175d2be572c63ca362b55209f8fd024d5d3e1049943068b12115997f31e.gz",
+      "retained_sha256": "0b25b3932b2fcdb27dd94431ae4ec0d4ea117f4627b8adede571fe2e2b6b1618"
+    },
+    {
+      "name": "diff-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "diff-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/diff-002.json",
+      "sha256": "a2489f27c2a2f0b1f5af7bc93bf901d1a7142398ecbbca830aaf1f886c50a4cb",
+      "bytes": 427,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/a2489f27c2a2f0b1f5af7bc93bf901d1a7142398ecbbca830aaf1f886c50a4cb.gz",
+      "retained_sha256": "130a24cad8c474d88f257935ac31ffeb2a37e9cb9ce766dcb86e67139ff15761"
+    },
+    {
+      "name": "diff-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/diff-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "fmt-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/fmt-001.json",
+      "sha256": "28b81286ffebc646b783a084acb0a71f098d189840faa8b2eb2f3c8af452a038",
+      "bytes": 477,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/28b81286ffebc646b783a084acb0a71f098d189840faa8b2eb2f3c8af452a038.gz",
+      "retained_sha256": "6be4246a877e4a1e21b1c29569dc7049dd28b53ebc6a6b783a8a424e8bc349ef"
+    },
+    {
+      "name": "fmt-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "fmt-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/fmt-002.json",
+      "sha256": "984d080beee0620780f8f31b21fdbbe9876676f7e3b0d689753a2358abea5ccc",
+      "bytes": 477,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/984d080beee0620780f8f31b21fdbbe9876676f7e3b0d689753a2358abea5ccc.gz",
+      "retained_sha256": "49d9cfb720fe5355fbf6016da90a280a2955bad338e8f632a8097161a47b4ffd"
+    },
+    {
+      "name": "fmt-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/fmt-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "initial-source/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/Cargo.lock",
+      "sha256": "71e47e0b2b531404ea128f14d4154eea29d041c2cc5f1a419ff776151fcfe85f",
+      "bytes": 252169,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/71e47e0b2b531404ea128f14d4154eea29d041c2cc5f1a419ff776151fcfe85f.gz",
+      "retained_sha256": "2bdb8949c210e58aba86cd86343b8016b1ddfefb554d698990a31e379bf5196b"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e.gz",
+      "retained_sha256": "6154e900ddbabd90a7cb533ab96a2ffb88c0206699ed08fb12221ec580628708"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "7a83d5917cb44fd6a2d4fd0a4b4d327fdfdbfffb0b5a6d91173565046c4fb187",
+      "bytes": 3334,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7a83d5917cb44fd6a2d4fd0a4b4d327fdfdbfffb0b5a6d91173565046c4fb187.gz",
+      "retained_sha256": "5d1cfebd5da75eb57040fc660f2c6f59ecd0bc71aa9c300e1605aa1e8dc80cc0"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "fb7fb013d05fd1feb6790a53863c3eb7ac10610d10090830d42aacc6130dce78",
+      "bytes": 1363,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/fb7fb013d05fd1feb6790a53863c3eb7ac10610d10090830d42aacc6130dce78.gz",
+      "retained_sha256": "e3c6d6e87f302352b3fcc54b17fcd365796fc6d160fe6a417cfea759fda3ad09"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "5792df81a757c393ec5ea27a4931456bd9029f30d2aa983328cf25e4acc82786",
+      "bytes": 7218,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/5792df81a757c393ec5ea27a4931456bd9029f30d2aa983328cf25e4acc82786.gz",
+      "retained_sha256": "50d1d6da7c9305275e233d1e5c18ca7e51269b0799cf6c70b4ac5f136a0a00cc"
+    },
+    {
+      "name": "initial-source/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "initial-source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/initial-source.json",
+      "sha256": "3db25ec3e258685d4dad46b98f73c9fbe8a350cb1213efec8f65c3b3b87fcd59",
+      "bytes": 5016,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/3db25ec3e258685d4dad46b98f73c9fbe8a350cb1213efec8f65c3b3b87fcd59.gz",
+      "retained_sha256": "a680ed84b566b7239d4509012f94098832a7b56b67d1b1799169d1263f650820"
+    },
+    {
+      "name": "lock-identity.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/lock-identity.json",
+      "sha256": "d10fa37839d747e615461d76a0359496d7e19f56b27fadf8aa6892177d03f643",
+      "bytes": 402,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/d10fa37839d747e615461d76a0359496d7e19f56b27fadf8aa6892177d03f643.gz",
+      "retained_sha256": "9512c159fe74188ecbb38987727139a32cee7e236747a6a6cb7b620c3fabcaf0"
+    },
+    {
+      "name": "normal-graph-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/normal-graph-001.json",
+      "sha256": "8aea563ac9cd1540a0165e7491ce9b8692899f2638e6bd760a202612e35df829",
+      "bytes": 548,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/8aea563ac9cd1540a0165e7491ce9b8692899f2638e6bd760a202612e35df829.gz",
+      "retained_sha256": "4f673a6a6e232b21ad532ba9b4893a9130635dd5b2f5e3584d0c65d13b4f6d31"
+    },
+    {
+      "name": "normal-graph-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/normal-graph-001.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "bytes": 124,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c.gz",
+      "retained_sha256": "b212649c683b80fc2d54b1aa54497594d1b7f5cb99243c3dad0ee95afaaa6ecd"
+    },
+    {
+      "name": "normal-graph-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/normal-graph-002.json",
+      "sha256": "28e04ca9dedef4d9c490c552bac2f7f29e06134a5ca889fb286488c5e5803c9a",
+      "bytes": 548,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/28e04ca9dedef4d9c490c552bac2f7f29e06134a5ca889fb286488c5e5803c9a.gz",
+      "retained_sha256": "45c2f671e4837a2589745deaaf23bd702c93bf3b4a28bcd8cfa89bd4bfd79e8b"
+    },
+    {
+      "name": "normal-graph-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/normal-graph-002.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "bytes": 124,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c.gz",
+      "retained_sha256": "b212649c683b80fc2d54b1aa54497594d1b7f5cb99243c3dad0ee95afaaa6ecd"
+    },
+    {
+      "name": "pinned-sources/rapier2d/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier2d/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915.gz",
+      "retained_sha256": "a18211d1570df2ecbabc6c810009565e7b001423611e9730c51cad9acc744db7"
+    },
+    {
+      "name": "pinned-sources/rapier2d/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier2d/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61.gz",
+      "retained_sha256": "a4e5adfa1a2e63225aab44b83363ea4675eb068506d6d0473d3ed4381c4306e8"
+    },
+    {
+      "name": "pinned-sources/rapier3d/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier3d/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915.gz",
+      "retained_sha256": "a18211d1570df2ecbabc6c810009565e7b001423611e9730c51cad9acc744db7"
+    },
+    {
+      "name": "pinned-sources/rapier3d/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources/rapier3d/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61.gz",
+      "retained_sha256": "a4e5adfa1a2e63225aab44b83363ea4675eb068506d6d0473d3ed4381c4306e8"
+    },
+    {
+      "name": "pinned-sources.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/pinned-sources.json",
+      "sha256": "2058c1705c3f8d2dcf03c5acb7015bece74ae6f6373ce06bd619043bbe40b2c6",
+      "bytes": 1417,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/2058c1705c3f8d2dcf03c5acb7015bece74ae6f6373ce06bd619043bbe40b2c6.gz",
+      "retained_sha256": "1bb572e005db7a414f03be1f9d05beedf2b4cb56082123aeef4973412c4c736e"
+    },
+    {
+      "name": "runtime-graph-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/runtime-graph-001.json",
+      "sha256": "416230cb8f25726be943e4fed4653cb3ec253872ea029cd64767b439053d75af",
+      "bytes": 541,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/416230cb8f25726be943e4fed4653cb3ec253872ea029cd64767b439053d75af.gz",
+      "retained_sha256": "a932a362280dd749dd1d38c754c35ae2e4a78cf8a0ecff5536bbcd9482a2f11e"
+    },
+    {
+      "name": "runtime-graph-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/runtime-graph-001.log",
+      "sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0",
+      "bytes": 113,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz",
+      "retained_sha256": "f5bfcbb956f60d69141e44f0fcb4b30b89968e8c3ac6bba75f729ead5bb0db48"
+    },
+    {
+      "name": "runtime-graph-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/runtime-graph-002.json",
+      "sha256": "5df17feb83b798c20cc9d8b905adbc6e009782e2f2c76e3ea0e68ef4e2a6e6b9",
+      "bytes": 541,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/5df17feb83b798c20cc9d8b905adbc6e009782e2f2c76e3ea0e68ef4e2a6e6b9.gz",
+      "retained_sha256": "63d117fa56f491a54fba8863675bf60b7ac8517d8718a86d4b12fbcbeeba8491"
+    },
+    {
+      "name": "runtime-graph-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/runtime-graph-002.log",
+      "sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0",
+      "bytes": 113,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz",
+      "retained_sha256": "f5bfcbb956f60d69141e44f0fcb4b30b89968e8c3ac6bba75f729ead5bb0db48"
+    },
+    {
+      "name": "source-001/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/Cargo.lock",
+      "sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "bytes": 252215,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f.gz",
+      "retained_sha256": "c223527fc4fea66a5f124a13a8f9db369db82cb948bd7dbfb66b6cccec44d9db"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e.gz",
+      "retained_sha256": "6154e900ddbabd90a7cb533ab96a2ffb88c0206699ed08fb12221ec580628708"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "7a83d5917cb44fd6a2d4fd0a4b4d327fdfdbfffb0b5a6d91173565046c4fb187",
+      "bytes": 3334,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7a83d5917cb44fd6a2d4fd0a4b4d327fdfdbfffb0b5a6d91173565046c4fb187.gz",
+      "retained_sha256": "5d1cfebd5da75eb57040fc660f2c6f59ecd0bc71aa9c300e1605aa1e8dc80cc0"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "fb7fb013d05fd1feb6790a53863c3eb7ac10610d10090830d42aacc6130dce78",
+      "bytes": 1363,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/fb7fb013d05fd1feb6790a53863c3eb7ac10610d10090830d42aacc6130dce78.gz",
+      "retained_sha256": "e3c6d6e87f302352b3fcc54b17fcd365796fc6d160fe6a417cfea759fda3ad09"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "5792df81a757c393ec5ea27a4931456bd9029f30d2aa983328cf25e4acc82786",
+      "bytes": 7218,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/5792df81a757c393ec5ea27a4931456bd9029f30d2aa983328cf25e4acc82786.gz",
+      "retained_sha256": "50d1d6da7c9305275e233d1e5c18ca7e51269b0799cf6c70b4ac5f136a0a00cc"
+    },
+    {
+      "name": "source-001/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-001/freeze.json",
+      "sha256": "94856c01c4ab0f39a110524070861192132a725a5915545781f963dd08bdbdc3",
+      "bytes": 5628,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/94856c01c4ab0f39a110524070861192132a725a5915545781f963dd08bdbdc3.gz",
+      "retained_sha256": "790c1ca74d03a838f1ccafa88862c045e8706fdc0903c6bbe0f1a7b336bcdc2e"
+    },
+    {
+      "name": "source-002/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/Cargo.lock",
+      "sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "bytes": 252215,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f.gz",
+      "retained_sha256": "c223527fc4fea66a5f124a13a8f9db369db82cb948bd7dbfb66b6cccec44d9db"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e.gz",
+      "retained_sha256": "6154e900ddbabd90a7cb533ab96a2ffb88c0206699ed08fb12221ec580628708"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435.gz",
+      "retained_sha256": "52c6530b76adb7b5df7dddb01957c17c421e97c91094f91a85a92be8c6991925"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "fb7fb013d05fd1feb6790a53863c3eb7ac10610d10090830d42aacc6130dce78",
+      "bytes": 1363,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/fb7fb013d05fd1feb6790a53863c3eb7ac10610d10090830d42aacc6130dce78.gz",
+      "retained_sha256": "e3c6d6e87f302352b3fcc54b17fcd365796fc6d160fe6a417cfea759fda3ad09"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz",
+      "retained_sha256": "abf5226058381b564373e1497979d6558ea123d4ea69fa32c9ba33bbd174dcdf"
+    },
+    {
+      "name": "source-002/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/source-002/freeze.json",
+      "sha256": "f478118ad7af4b01dd09a61d6c4986509067a902bdb1130af74198e7fd438f5c",
+      "bytes": 5628,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/f478118ad7af4b01dd09a61d6c4986509067a902bdb1130af74198e7fd438f5c.gz",
+      "retained_sha256": "9d72eec2e774c50e2a32fca0f67b3485390236c7f5f3511dd1801afe1396dc99"
+    },
+    {
+      "name": "tests-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/tests-001.json",
+      "sha256": "36629a4720cecf63e5961ecfd865a4ef57e1f0aab9e3df8825f35c7ef7ac3773",
+      "bytes": 518,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/36629a4720cecf63e5961ecfd865a4ef57e1f0aab9e3df8825f35c7ef7ac3773.gz",
+      "retained_sha256": "0fc351bd842cd32fcd081087fed2f202768b856f498de8640283e6fbd124e3a5"
+    },
+    {
+      "name": "tests-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/tests-001.log",
+      "sha256": "511e7953f1e600b42521f645e9d75b87f43e0b37c74a4980d5d3858f5a28de4d",
+      "bytes": 4265,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/511e7953f1e600b42521f645e9d75b87f43e0b37c74a4980d5d3858f5a28de4d.gz",
+      "retained_sha256": "c3d351173bc9d8ea9454efd6bbf49f195d9bab5cf71cb6bbb0f2552471f9bf4c"
+    },
+    {
+      "name": "tests-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/tests-002.json",
+      "sha256": "29bdd2aad1f92e6dd64fffa8a9532aa191ffbc253b3b2783ba5c7e5c60fbff91",
+      "bytes": 534,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/29bdd2aad1f92e6dd64fffa8a9532aa191ffbc253b3b2783ba5c7e5c60fbff91.gz",
+      "retained_sha256": "bdb64b192069d23d910ecb80de39b5639a48f1f7c030cd6ba0d6c94e77bd55f7"
+    },
+    {
+      "name": "tests-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/tests-002.log",
+      "sha256": "c937afbedf4d02782d35982c3fcae45f0df2da7d0977a96e11ac0da5cacadfa0",
+      "bytes": 3840,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/c937afbedf4d02782d35982c3fcae45f0df2da7d0977a96e11ac0da5cacadfa0.gz",
+      "retained_sha256": "2e3754899dabefdbd997e02f1a75e10cf320477d502b8fde72ff1e5454a1226a"
+    },
+    {
+      "name": "wasm32-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/wasm32-001.json",
+      "sha256": "5b003a53282ac588662314a8530e19a3eb1ab9249583f23ccdf6cd5207552006",
+      "bytes": 594,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/5b003a53282ac588662314a8530e19a3eb1ab9249583f23ccdf6cd5207552006.gz",
+      "retained_sha256": "e0cb944ea81a28753c2c6f01da849c5096e247b55353a4ef51f8f4c82fbe634c"
+    },
+    {
+      "name": "wasm32-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/wasm32-001.log",
+      "sha256": "6d8f3722792aa39c93b5ff038554635a98ff007048401b0fc2dc47c61590e410",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/6d8f3722792aa39c93b5ff038554635a98ff007048401b0fc2dc47c61590e410.gz",
+      "retained_sha256": "e45dfc851b427ea6560475174429508b37bcd5b1a915831e0a72bf0bde58c0ea"
+    },
+    {
+      "name": "wasm32-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/wasm32-002.json",
+      "sha256": "7425ed624a13f92764c99fa11b1e6cc5d3d5e78d7f14d9bea34237b8cf9b3d36",
+      "bytes": 594,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7425ed624a13f92764c99fa11b1e6cc5d3d5e78d7f14d9bea34237b8cf9b3d36.gz",
+      "retained_sha256": "263bc7d22182fb422823e4aed1119249cd47ecb9c6fa808328dbaea023176752"
+    },
+    {
+      "name": "wasm32-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-arenas-001/wasm32-002.log",
+      "sha256": "ac99f54d5778978f18d053b0ee0fb0c5cfb6968e91dcc46ed16e2feffe5abe97",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/ac99f54d5778978f18d053b0ee0fb0c5cfb6968e91dcc46ed16e2feffe5abe97.gz",
+      "retained_sha256": "a066f8234914b298c77c82f949c93b05d45d8a1dbae2ca8d6ade1accae945190"
+    },
+    {
+      "name": "independent-source-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/physics-inert-arenas-source-20261013.json",
+      "sha256": "7e1471217753ca908583282647d4b710f3f2f48a346849938788508f7c9eee21",
+      "bytes": 1847,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/7e1471217753ca908583282647d4b710f3f2f48a346849938788508f7c9eee21.gz",
+      "retained_sha256": "794bd102a3fbb755127b9d8e664d704e43e57a2117b27c1e6f8c26145b337399"
+    },
+    {
+      "name": "independent-final-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/physics-inert-arenas-final-20261013.json",
+      "sha256": "c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8",
+      "bytes": 876,
+      "retained": "docs/spikes/evidence/physics-inert-arenas/c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8.gz",
+      "retained_sha256": "90633f9da0c3f5ef6de847d904176b1298818f5e1236ebb1c3ac65345c0fc53c"
+    }
+  ],
+  "independent_review": {
+    "source": "accepted",
+    "source_receipt_sha256": "7e1471217753ca908583282647d4b710f3f2f48a346849938788508f7c9eee21",
+    "source_receipt_retained": "docs/spikes/evidence/physics-inert-arenas/7e1471217753ca908583282647d4b710f3f2f48a346849938788508f7c9eee21.gz",
+    "final_evidence": "accepted",
+    "final_receipt_sha256": "c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8",
+    "final_receipt_retained": "docs/spikes/evidence/physics-inert-arenas/c253ebc497f3b812b3483952624a51ebcbb82daa95689f30ab869c8e37053ef8.gz"
+  },
+  "limitations": [
+    "PhysicsUnsupported and world/session versions unchanged",
+    "No live constructor, payload validation, save/load runtime route or post-restore continuation",
+    "Arena MAX-1 is inertly representable; future live mutation requires checked exhaustion policy",
+    "Coarena sentinel handle lookup is deliberately stricter than pinned native get; unknown-generation payload retained",
+    "Borrowed arena witness is structural association, not native world/owner authorization",
+    "Private allocator capacity and complete future clear/insert continuation remain unproven",
+    "Cumulative requested Vec budget is not an RSS/caller-input bound",
+    "No GPU, device, package or performance acceptance"
+  ]
+}

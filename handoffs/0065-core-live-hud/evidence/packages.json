@@ -1,0 +1,82 @@
+{
+ "command": "python3 -B handoffs/0065-core-live-hud/tools/build_variant.py VARIANT PROJECT OUT [--clippy]",
+ "clippy": "en build: cargo clippy --profile ci -p incant_game_player --example zz_0065_live_hud --features project,render-gpu -- -D warnings, exit 0",
+ "packages": {
+  "en": {
+   "project_sha256": "5865f28f5226053ab53f5ec77e9da3bfb6301df5ad5a2e09d42109e2b81c80be",
+   "scene_sha256": "0e3fdc52a80ca03b42b92d8bbb19d66116cb8063095574ec2e2d3923af0e7057",
+   "compiler_modules": [
+    {
+     "bytes": 15111,
+     "path": "gameplay.ts",
+     "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211"
+    }
+   ],
+   "bundle_sha256": "68ca3b91b913788ac38dc2bab11c6390ebd153b6a9dd73e0eff60671524b6e10",
+   "player_sha256": "74c9be4a10713c65dae9e727358a4e528aa92b39e6ba6dd6a94a6c8fb6bd7eb2",
+   "adapter_sha256": "141d071e3c48aa1d2b340d5ee99a785c84941870f5a8858bf2d75e196f74b924",
+   "behavior_sha256": "9346a352c1cf6ffa2c73cc507daed7722b606eb9c5ffa6ccbb9b97d552995dab",
+   "data_files": 28,
+   "startup_tick": 1,
+   "features": "project,render-gpu",
+   "profile": "ci"
+  },
+  "ar": {
+   "project_sha256": "ac8f2b3777cec1b7137de79933e3cceea26c966aaed3c88d977d99e812cda6d6",
+   "scene_sha256": "6b40e7018278847a200d5602841f44d3a04a607f597512b01b79bb42bfdd45c5",
+   "compiler_modules": [
+    {
+     "bytes": 15111,
+     "path": "gameplay.ts",
+     "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211"
+    }
+   ],
+   "bundle_sha256": "68ca3b91b913788ac38dc2bab11c6390ebd153b6a9dd73e0eff60671524b6e10",
+   "player_sha256": "7ab42ff4fff7d27430d1d2953f690a3dc9b3e7f332dfabeb42a728bc841dace7",
+   "adapter_sha256": "d04d5ad45f88045be6e881231830266fdde50fe93454c5a9b71babed19e8ce53",
+   "behavior_sha256": "6cfa61c4e2baf3a3b0681ea22c3f446eb74de2d5cc1efa4ec4afde066f289cb0",
+   "data_files": 28,
+   "startup_tick": 1,
+   "features": "project,render-gpu",
+   "profile": "ci"
+  },
+  "zh-Hans": {
+   "project_sha256": "afaf70750f681cd517f947d6c3834b034554f420295332a25c4f00e4695e9556",
+   "scene_sha256": "c72085a5a56ea10cbb61eb315d98e85110e041198e40af35a91ceecf3051d651",
+   "compiler_modules": [
+    {
+     "bytes": 15111,
+     "path": "gameplay.ts",
+     "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211"
+    }
+   ],
+   "bundle_sha256": "68ca3b91b913788ac38dc2bab11c6390ebd153b6a9dd73e0eff60671524b6e10",
+   "player_sha256": "0a68682a9ed60c81817d445acdbd13af9e73da49c5504dbfc47bf77a77354e29",
+   "adapter_sha256": "bfb42223730a5459ac8ee923714f3270782ac8f4d73231f32362bc9c61a9a46b",
+   "behavior_sha256": "454861bfa026fb4a4e42c9123592018ca707d93bcf6b1d1ff233de64f8fabe06",
+   "data_files": 28,
+   "startup_tick": 1,
+   "features": "project,render-gpu",
+   "profile": "ci"
+  },
+  "en-XA": {
+   "project_sha256": "28039978807ed01ea5ba14e3a8ce2c0b795e942ea3ab847770b48d01169d579c",
+   "scene_sha256": "a17f24d3683d911aebbfb010ae00ba507b0220791a356881a5f18ca9a3f4e51d",
+   "compiler_modules": [
+    {
+     "bytes": 15111,
+     "path": "gameplay.ts",
+     "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211"
+    }
+   ],
+   "bundle_sha256": "68ca3b91b913788ac38dc2bab11c6390ebd153b6a9dd73e0eff60671524b6e10",
+   "player_sha256": "70b4f40e3dce3a3c38f8b22daa1fee1ef991247df0780ddf88c8c1964c1a46f0",
+   "adapter_sha256": "808f03e54868a4a204b349790cf519bfdfe91f320ee2bbe9f357ab410a7e1e58",
+   "behavior_sha256": "93ad26d83b0b7bc8430007309283bb5862c28b9f454caf7943a3e9d8c13ebb02",
+   "data_files": 28,
+   "startup_tick": 1,
+   "features": "project,render-gpu",
+   "profile": "ci"
+  }
+ }
+}

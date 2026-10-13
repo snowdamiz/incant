@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main190, 2026-10-13
+## Current overview — main196, 2026-10-13
 
-Development main190 includes the restart quota-test repair (PR188) and the reviewed,
+Development main196 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -28,9 +28,15 @@ Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
 terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux and
 Windows conformance failed the quota assertion, and macOS rejected a successful
 player compile because its probe confused library and executable units. The main188
-quota repair preserves production's 50 ms budget; the probe correction has independent final acceptance and awaits its fast check
-and the next frozen full checkpoint.
+quota repair preserves production's 50 ms budget, and the reviewed player probe
+correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
+all 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
+Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
+that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
+is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
+production and backend assertions are unchanged. Other candidate jobs continue
+without an advance.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/
@@ -38,11 +44,62 @@ admission checks pass; six actual Android callers remain producer-scoped.
 Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
-Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
-their queued GPU/appearance checks remain open. CPU profiling is being verified
-locally, with final package evidence pending. These independent lanes do not satisfy
+Dynamic resolution now has accepted producer Metal evidence; current-main integration
+is queued with cooked clusters. GPU timestamp execution remains pending. CPU profiling has accepted producer
+package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
+independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
 below are historical integration snapshots, not the current queue.
+
+Safe Core live-HUD changes are merged in PR192. The optional result-label and won-objective
+correction is merged in PR194 after public native checks, independent integration
+review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
+appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+
+## Exact physics saves — inert graph adjacency validation underway
+
+The next inert format preserves node/edge order and validates both linked
+adjacency sides, reciprocal links, complete coverage and dense payload mappings.
+Forty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
+2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass with independent final integration acceptance. Publication awaits the required fast check. Contact/payload/solver ownership
+and full native composition remain required; no live restore or physics-save
+admission is enabled. [Graph contract](docs/spikes/physics-inert-graphs.md).
+
+## Exact physics saves — inert arena validation verified
+
+The next checked-format component preserves Rapier arena slots/free-chain order,
+generations, dense payload-row mappings and stale/invalidated Coarena rows.
+Current integration passes thirty CPU cases, Clippy, wasm32 and dependency checks, including actual
+pinned 2D/3D one-way observations. Independent source and final evidence reviews
+are accepted. There is still no live
+construction or physics-save runtime route; contact/island/payload/native owner
+composition remains required. [Arena contract](docs/spikes/physics-inert-arenas.md).
+The [combined current integration](docs/spikes/physics-inert-main195.md) preserves
+all accepted crate source and existing pinned package identities; independent
+final integration review is accepted, and the Parry prerequisite is merged in PR196.
+
+## Exact physics saves — inert record validation verified
+
+A new dependency-free normal crate validates versioned inert BVH/VecMap and
+closed rigid geometry records, with bounded allocation/traversal and exact field
+preservation. Eighteen CPU tests, scoped Clippy, wasm32 compilation and dependency
+checks pass, including trusted pinned Parry observations and malformed graph
+controls. Independent source and final evidence reviews are accepted.
+No live solver constructor or runtime consumer
+exists; `PhysicsUnsupported` remains unchanged. Complete checked solver/native
+owner composition and exact save continuation remain required.
+[Contract and bounds](docs/spikes/physics-inert-snapshot.md).
+
+## Parallel physics tree ownership — scoped correction verified
+
+Vendored Parry 0.31.1 fixes overlapping mutable borrows in parallel BVH updates
+and refitting, with duplicate rejection before mutation and explicit source
+provenance. Both physics modes, browser compilation, script compilation and
+Clippy pass; independent source review is accepted. Additional Miri experiments
+remain unsuccessful due to Crossbeam diagnostics and are recorded separately.
+This does not enable persisted physics saves, complete a dependency soundness
+audit, or establish a performance gain.
+[Producer scope](docs/spikes/parry-parallel-ownership.md). The current-main195 union passes 18 CPU cases in each physics mode, all-target Clippy, browser/script checks and four isolated patched dependency graphs. Actual source-change/restore controls verify runtime identity invalidation for both Parry and the optional profiler. [Integration evidence](docs/spikes/parry-main195.md) has independent final acceptance and is merged in PR196 after its exact-head fast check. No physics-save admission is enabled.
 
 ## Cooked renderer integration — CPU checks complete
 
@@ -152,6 +209,19 @@ rendering, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-ios-wasm.md).
 
 ## Authored Core runtime bindings — merged in main185
+## Opt-in native CPU profiler — locally accepted
+
+Connected runtime/system/script zones and bounded player summaries pass actual
+CPU checks. Explicit trusted headless exports bind summary/Tracy features; the
+unchanged default path starts no client. Two fresh shipping packages preserve
+full 3,600-tick reports and PCM with profiling off/on. An actual opted-in loopback
+Tracy capture contains 20 zone types and four memory/allocation plots; all owned
+processes are reaped. Rust requested bytes, QuickJS heap and RSS are distinct.
+Independent source and final evidence review are accepted; integration is pending.
+Native-window/device capture, allocation stacks and the full profiler/performance
+gates remain open. [Contract/evidence](docs/spikes/native-cpu-profiling.md).
+
+## Authored Core runtime bindings — CPU proof accepted
 
 The 0060 mesa now binds its existing localized HUD and audio sources to the
 unchanged current controller, with R/Start whole-session restart. Public atomic
@@ -1087,6 +1157,24 @@ acceptance is separate. [Evidence](docs/spikes/core-main182.md).
 ## Checkpoint17 terminal and shipping probe repair
 
 Checkpoint17 finished with 20 required successes and three failures and was not promoted. Linux/Windows quota controls have the reviewed main188 repair. A separate macOS player library/executable audit correction now passes the exact retained compile-log replay and six regression controls; independent final review is accepted and the fast/full frozen checks remain required. See [probe evidence](docs/spikes/shipping-player-probe-kinds.md).
+
+## Core live HUD integration reviewed
+
+The sanitized Claude0065 hint/wrapping/font changes are composed with main190 and independently accepted for scoped integration; the fast publication check remains pending. Seven CPU checks, 14 native positive processes, four-locale font coverage and exact baseline gameplay/PCM pass. Result-title/narrow contrast and separate prompt/objective follow-ups remain open; no new rendered or device acceptance. See [integration evidence](docs/spikes/core-live-hud-main190.md).
+
+## Core optional result-label binding — producer CPU proof accepted
+
+The sample accepts an explicitly authored optional `hud.prompt` label and clears
+the objective on winning. Result parenting and whole-session restart restore the
+expected text/parents while the existing 12-widget HUD stays supported. Twenty
+focused Python tests, strict TypeScript, 28 successful native processes and two
+fresh source/map/build-deleted ordinary packages pass. Twenty shipping processes
+include eight complete R/Start/held-input reset routes with exact fresh-state and
+concatenated PCM comparisons. Nine exact native refusals pass. Independent source
+and final execution review are accepted; current-main integration is pending.
+The production prompt node/localization/style is still Claude-owned and absent;
+this is not appearance or device/performance acceptance. Prior 0065 evidence stays
+immutable. [Contract/evidence](docs/spikes/core-result-hud.md).
 
 ## Historical integration snapshots
 

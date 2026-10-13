@@ -1,0 +1,9 @@
+test_capture_failure_reaps_concurrent_leaf (test_native_cpu_profile_probe.ProfileProbeProcessTests.test_capture_failure_reaps_concurrent_leaf) ... ok
+test_export_invocation_retains_real_early_refusal (test_native_cpu_profile_probe.ProfileProbeProcessTests.test_export_invocation_retains_real_early_refusal) ... ok
+test_regular_files_do_not_block_large_final_report (test_native_cpu_profile_probe.ProfileProbeProcessTests.test_regular_files_do_not_block_large_final_report) ... ok
+test_timeout_reaps_leaf_and_retains_output_receipt (test_native_cpu_profile_probe.ProfileProbeProcessTests.test_timeout_reaps_leaf_and_retains_output_receipt) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.364s
+
+OK

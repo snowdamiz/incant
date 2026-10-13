@@ -198,6 +198,9 @@ name = "arrayvec"
 version = "0.7.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "arref"
@@ -2919,6 +2922,7 @@ dependencies = [
  "approx",
  "libm",
  "mint",
+ "serde_core",
 ]
 
 [[package]]
@@ -2931,6 +2935,7 @@ dependencies = [
  "glam 0.33.12",
  "nalgebra",
  "num-traits",
+ "serde",
  "simba",
 ]
 
@@ -4067,6 +4072,7 @@ dependencies = [
  "incant_game_runtime",
  "incant_input",
  "incant_observe",
+ "incant_profile",
  "incant_render",
  "incant_render_game",
  "incant_render_gpu_host",
@@ -4093,6 +4099,7 @@ dependencies = [
  "incant_assets_runtime",
  "incant_audio_runtime",
  "incant_input",
+ "incant_profile",
  "incant_runtime",
  "incant_script",
  "incant_types",
@@ -4257,6 +4264,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_physics_snapshot"
+version = "0.0.1"
+dependencies = [
+ "parry2d",
+ "parry3d",
+ "rapier2d",
+ "rapier3d",
+ "serde_json",
+]
+
+[[package]]
 name = "incant_platform_smoke"
 version = "0.0.1"
 dependencies = [
@@ -4313,6 +4331,17 @@ dependencies = [
  "serde_json",
  "sha2 0.10.9",
  "thiserror 2.0.21",
+]
+
+[[package]]
+name = "incant_profile"
+version = "0.0.1"
+dependencies = [
+ "cpu-time",
+ "serde",
+ "serde_json",
+ "tracy-client",
+ "tracy-client-sys",
 ]
 
 [[package]]
@@ -4452,6 +4481,7 @@ dependencies = [
  "incant_nav",
  "incant_physics_2d_runtime",
  "incant_physics_runtime",
+ "incant_profile",
  "incant_types",
  "libm",
  "serde",
@@ -4468,6 +4498,7 @@ dependencies = [
  "incant_audio_runtime",
  "incant_input",
  "incant_localization",
+ "incant_profile",
  "incant_runtime",
  "incant_types",
  "incant_ui",
@@ -5595,6 +5626,7 @@ dependencies = [
  "num-complex",
  "num-rational",
  "num-traits",
+ "serde",
  "simba",
  "typenum",
 ]
@@ -5731,6 +5763,7 @@ checksum = "73f88a1307638156682bada9d7604135552957b7818057dcef22705b4d509495"
 dependencies = [
  "bytemuck",
  "num-traits",
+ "serde",
 ]
 
 [[package]]
@@ -6241,8 +6274,6 @@ dependencies = [
 [[package]]
 name = "parry2d"
 version = "0.31.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fe1ba500175e957aaa27ddc92290ec8ff503d73331365443660816d6302e2a31"
 dependencies = [
  "approx",
  "arrayvec",
@@ -6259,6 +6290,8 @@ dependencies = [
  "num-traits",
  "ordered-float",
  "rayon",
+ "serde",
+ "serde_arrays",
  "simba",
  "slab",
  "smallvec",
@@ -6269,8 +6302,6 @@ dependencies = [
 [[package]]
 name = "parry3d"
 version = "0.31.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b626edc0b497dba4bdf6e1e0797895294ed9f61dac2bd28cb5d34d37ad2ca7e"
 dependencies = [
  "approx",
  "arrayvec",
@@ -6288,6 +6319,8 @@ dependencies = [
  "ordered-float",
  "rayon",
  "rstar",
+ "serde",
+ "serde_arrays",
  "simba",
  "slab",
  "smallvec",
@@ -7742,6 +7775,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde_arrays"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "94a16b99c5ea4fe3daccd14853ad260ec00ea043b2708d1fd1da3106dcd8d9df"
+dependencies = [
+ "serde",
+]
+
+[[package]]
 name = "serde_columnar"
 version = "0.3.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -8160,6 +8202,7 @@ dependencies = [
  "hashbrown 0.16.1",
  "num-traits",
  "robust",
+ "serde",
  "smallvec",
 ]
 
@@ -9094,6 +9137,27 @@ dependencies = [
  "tracing",
  "tracing-core",
  "tracing-log",
+]
+
+[[package]]
+name = "tracy-client"
+version = "0.18.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6131992ff3e2cb96f407eb4eb005427ba15e2687260d99089b90e60e33169ce0"
+dependencies = [
+ "loom",
+ "once_cell",
+ "tracy-client-sys",
+]
+
+[[package]]
+name = "tracy-client-sys"
+version = "0.29.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ab27f167b093214c68413a2e0bcd318f0591af475597405ff68138ba0a433379"
+dependencies = [
+ "cc",
+ "windows-targets 0.52.6",
 ]
 
 [[package]]

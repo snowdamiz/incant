@@ -1,0 +1,10 @@
+{
+  "url": "https://github.com/wolfpld/tracy/releases/download/v0.14.0/macos-0.14.0.zip",
+  "archive_sha256": "74bed456be107e40f77d6d72ff840b39496aabb6c89a2004b69039a95a9c4a19",
+  "archive_bytes": 11382134,
+  "extracted": [
+    "tracy-capture",
+    "tracy-csvexport"
+  ],
+  "gui_launched": false
+}

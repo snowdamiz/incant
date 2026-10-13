@@ -1,0 +1,212 @@
+{
+  "root": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+  "base": "1c5658cf5d7eee8390b272394f38b8d9b49e1628",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "73d552b8402fbe3b3fd226fe7f307cdb16c84576fd522d8899331452c13a80b8",
+      "bytes": 252719,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/Cargo.lock"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "128e116fd472a924fcd56c3fc9717ec205b077ccc31b07fe6fb16912e32deda2",
+      "bytes": 3452,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "38fd202c44f28c85a4835afb2f0403258cb2d747e468741474abcf0244513431",
+      "bytes": 4200,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_game_player/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "sha256": "9800adbc42317e3c2885f78af1414a73300c3e8f995c4db11710d4cfd24ef446",
+      "bytes": 10047,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_game_player/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_game_player/src/main.rs",
+      "sha256": "b4699db7cad9451e07cf898f29bafb14e37c5cae885f2bc103638ecfe3affe4d",
+      "bytes": 432,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_game_player/src/main.rs"
+    },
+    {
+      "path": "crates/incant_game_player/src/profile.rs",
+      "sha256": "7d9e1d35550fb83981499083631687292362aa16ad0eb7684b8c3c15b5a34afe",
+      "bytes": 2893,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_game_player/src/profile.rs"
+    },
+    {
+      "path": "crates/incant_game_player/tests/profile.rs",
+      "sha256": "361babbe61002607e406cac1d7305b123bb47a821e85ea7c378746a53ec8606f",
+      "bytes": 4767,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_game_player/tests/profile.rs"
+    },
+    {
+      "path": "crates/incant_game_runtime/Cargo.toml",
+      "sha256": "695d83d752c1daefd1981fcb90c986947c92ecdba35a4380e2c3cdb380baeeed",
+      "bytes": 1471,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_game_runtime/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/core.rs",
+      "sha256": "c4f82b583cb23ca8e377adc44306b89e7fd201dc1717e58063139edda5316481",
+      "bytes": 14736,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_game_runtime/src/core.rs"
+    },
+    {
+      "path": "crates/incant_profile/Cargo.toml",
+      "sha256": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef",
+      "bytes": 902,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_profile/src/allocation.rs",
+      "sha256": "d5ead34f95e07db61d494a1100c2161dfefb073653df900680dae9a841877b0f",
+      "bytes": 4422,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/src/allocation.rs"
+    },
+    {
+      "path": "crates/incant_profile/src/disabled.rs",
+      "sha256": "7443107f7daaa73b5395e67163d7b25022a8386d8f18667e2d82d8ffcc03fbbf",
+      "bytes": 717,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/src/disabled.rs"
+    },
+    {
+      "path": "crates/incant_profile/src/enabled.rs",
+      "sha256": "8cc10066d6beb252fed4eb9eb351f523b59abb24200356ffe13d9e9864e2c6aa",
+      "bytes": 9323,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/src/enabled.rs"
+    },
+    {
+      "path": "crates/incant_profile/src/lib.rs",
+      "sha256": "b02608c6d683e82f3232b2e9bdcded261b7695bcd88a4daf20b9967359ca00f4",
+      "bytes": 650,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_profile/src/model.rs",
+      "sha256": "5fec6a62be1304381eb05c40df297a0475121e22ea223948aa0aaa1df62673ef",
+      "bytes": 5668,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/src/model.rs"
+    },
+    {
+      "path": "crates/incant_profile/src/tracy.rs",
+      "sha256": "f6896a3968c51cecc47c6a5f838d1cc322bb300011a073687a88a65aa0b67ebf",
+      "bytes": 2863,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/src/tracy.rs"
+    },
+    {
+      "path": "crates/incant_profile/tests/allocations.rs",
+      "sha256": "dded0e6d0cc6521c784c5421dc08c9657482781df46b420b1bd391f170bb2a63",
+      "bytes": 4881,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/tests/allocations.rs"
+    },
+    {
+      "path": "crates/incant_profile/tests/disabled.rs",
+      "sha256": "89a2e76c94776c39a0769041c925cf976c7081029afbab9c73485a4da050675a",
+      "bytes": 485,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/tests/disabled.rs"
+    },
+    {
+      "path": "crates/incant_profile/tests/summary.rs",
+      "sha256": "e30d257216cb69b0b26dcfcabcc969a59f90c38c8e607fe192c37dee9b2ee9b0",
+      "bytes": 4012,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_profile/tests/summary.rs"
+    },
+    {
+      "path": "crates/incant_runtime/Cargo.toml",
+      "sha256": "6f69521b9038242fd278dd732c8d5db577b19efa47a622e4308c9bd515598209",
+      "bytes": 1187,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_runtime/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_runtime/src/animation.rs",
+      "sha256": "17e3d0d6e9a252a2a78433cee1fbb594109bac6b059794b25b3ccdf622a263e2",
+      "bytes": 21956,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_runtime/src/animation.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/flipbook.rs",
+      "sha256": "04d75989b8f93d1718a849a8a9385a9b3436ece4bbadfa7ebeab207431cf87b1",
+      "bytes": 5704,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_runtime/src/flipbook.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "sha256": "8107201ef6e3d33ca36ea19b2b405fa7f17387ed118d8a34bb7c67b0a54a710e",
+      "bytes": 31876,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_runtime/src/world.rs"
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "sha256": "2dbc844664f84e46f18684c687867d50efb887842946d394aa2288ac4d16a7d1",
+      "bytes": 2632,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_script/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "e281df2179a848870c304fe7afce54fe6911f2b0050bd6970d6ecc98646e146f",
+      "bytes": 26272,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_script/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_script/src/program.rs",
+      "sha256": "47aaf334d32a3f85d1deb1de4a55cd6b5fa7d01a4a129bd5340d05af2ee3a1c3",
+      "bytes": 6214,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_script/src/program.rs"
+    },
+    {
+      "path": "crates/incant_script/src/session.rs",
+      "sha256": "d3192f395f1b6623d8b6c7ff52b10674c1cbe8a033245fc82d1e71aa7ecd4b25",
+      "bytes": 6417,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_script/src/session.rs"
+    },
+    {
+      "path": "crates/incant_script/tests/profile.rs",
+      "sha256": "0d03a7454cfe9da11456be99a0ad7fa8cc8d8e23a2659aba425f01cd7f6177c2",
+      "bytes": 2867,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/crates/incant_script/tests/profile.rs"
+    },
+    {
+      "path": "docs/spikes/native-cpu-profiling.md",
+      "sha256": "1e0837faa4aa7c0e5c81940bb008befec72e9a535c0a4fcedc7cf2f9e79f838a",
+      "bytes": 5785,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/docs/spikes/native-cpu-profiling.md"
+    },
+    {
+      "path": "tools/export_native.py",
+      "sha256": "b29b2c9befa358bbd1cf31d76a61ea945f30ec0b886a4a01a51c76897831ff01",
+      "bytes": 16861,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/tools/export_native.py"
+    },
+    {
+      "path": "tools/native_profiling.py",
+      "sha256": "077d27d41baa2f6fe0bc17e2c303ccfa902097af7822bb009a3037eddb1d79d2",
+      "bytes": 4913,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/tools/native_profiling.py"
+    },
+    {
+      "path": "tools/tests/test_native_profiling.py",
+      "sha256": "bf9310b95e3e57837b70dc2aa94c2e69249da39c62ea47a5681d34dfee8d7c79",
+      "bytes": 5098,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/tools/tests/test_native_profiling.py"
+    },
+    {
+      "path": "tools/tests/test_native_ui_export.py",
+      "sha256": "021358c8d4351515888eb256c44df2e394ff5b58978f747a5cec43109e922985",
+      "bytes": 1675,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-003/tools/tests/test_native_ui_export.py"
+    }
+  ],
+  "previous_freeze_sha256": "77b7f90f5f3a2db561abfb244ab0b0630effdf50edde3edcae794bf6f391dfae",
+  "changed_since_previous": [
+    "docs/spikes/native-cpu-profiling.md",
+    "tools/export_native.py",
+    "tools/native_profiling.py",
+    "tools/tests/test_native_profiling.py",
+    "tools/tests/test_native_ui_export.py"
+  ]
+}
