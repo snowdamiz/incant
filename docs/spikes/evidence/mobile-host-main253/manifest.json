@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "main": "31519f8be9d09ce53eb93dc68b69ec275915492e",
+  "tested_source": "3e257acdb7b8173dad70f63675ab39e04cd2fd97",
+  "qualification": {
+    "path": "docs/spikes/evidence/mobile-host-main253/qualification.json",
+    "bytes": 2306,
+    "sha256": "5da23d033dd5baa35c09d71b14d80f93d4210c0890d6b4f0791d5e81ddff2e7f"
+  },
+  "verifier": {
+    "path": "docs/spikes/evidence/mobile-host-main253/verify.py",
+    "bytes": 8445,
+    "sha256": "5189f43eee745169d01cd5b8073bf184d52ffa311d077056e10ee4814407d17b"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/mobile-host-main253/records.json.gz",
+    "bytes": 402710,
+    "sha256": "ac358e2c270103730214cbad387d29dfb25075887da2ac7dcb329bd797f854e8"
+  },
+  "records": 31,
+  "producer_files": [
+    {
+      "path": "docs/spikes/evidence/mobile-retained-host/manifest.json",
+      "bytes": 421,
+      "sha256": "9db1f003f272e1b1a68d3ca13acc2bb21ce6c6551d470bad88deacf021ebd80f"
+    },
+    {
+      "path": "docs/spikes/evidence/mobile-retained-host/records.json.gz",
+      "bytes": 569802,
+      "sha256": "06aa6d2daf24d0da93ad0abd4e601486940e439000d628e46ea585d7d4a77d68"
+    },
+    {
+      "path": "tools/probes/mobile-retained-host/collect.py",
+      "bytes": 5934,
+      "sha256": "903915dbb70f1400f0ba1f7d84bffe72de3cc00a78a882ee5412ae40049e9552"
+    }
+  ],
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/mobile-host-main253/producer-review.json",
+      "bytes": 5011,
+      "sha256": "0a0a4340b25227a7478d973a6c7f249f952dd485d86d35abf19d11fdf95d3025"
+    }
+  ],
+  "claim": "Fresh current-main CPU/player continuation and compilation only. Final current-main independent review pending."
+}
