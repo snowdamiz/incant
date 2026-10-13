@@ -1,0 +1,97 @@
+Diff in /Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/src/main.rs:100:
+                     !(16..=MAX_WIDTH).contains(&f.width) || !(16..=MAX_HEIGHT).contains(&f.height)
+                 })
+             {
+-                return Err(format!("step {}: invalid frames (order, count, size <=960x540)", step.label).into());
++                return Err(format!(
++                    "step {}: invalid frames (order, count, size <=960x540)",
++                    step.label
++                )
++                .into());
+             }
+             for d in &step.despawn {
+-                if d.tick == 0 || d.tick > step.frames.last().unwrap().tick || d.entities.is_empty() {
+-                    return Err(format!("step {}: despawn ticks must be within the frames", step.label).into());
++                if d.tick == 0 || d.tick > step.frames.last().unwrap().tick || d.entities.is_empty()
++                {
++                    return Err(format!(
++                        "step {}: despawn ticks must be within the frames",
++                        step.label
++                    )
++                    .into());
+                 }
+                 for e in &d.entities {
+                     id(e)?;
+Diff in /Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/src/main.rs:147:
+         .write_all(text.as_bytes())?;
+     println!(
+         "{}",
+-        serde_json::to_string(&json!({"adapter": report["adapter"], "frames": records.len(),
+-            "pngs_written": pngs_written}))?
++        serde_json::to_string(
++            &json!({"adapter": report["adapter"], "frames": records.len(),
++            "pngs_written": pngs_written})
++        )?
+     );
+     Ok(())
+ }
+Diff in /Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/src/main.rs:212:
+             let path = output.join(name);
+             write_png(&path, frame.width, frame.height, &rgba)?;
+             *pngs_written += 1;
+-            record["png"] = json!({"name": name, "sha256": hex(&Sha256::digest(std::fs::read(&path)?))});
++            record["png"] =
++                json!({"name": name, "sha256": hex(&Sha256::digest(std::fs::read(&path)?))});
+         }
+         if frame.controls {
+             let label = input.camera_label().to_owned();
+Diff in /Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/src/main.rs:222:
+             if submit(renderer, &world, &mut input, &mut retained, &repeat)? != UpdateKind::Motion {
+                 return Err("unexpected rebuild while repeating an accepted frame".into());
+             }
+-            controls.insert("retained_repeat".into(), compare(&rgba, &repeat.read(renderer)?, frame.width));
++            controls.insert(
++                "retained_repeat".into(),
++                compare(&rgba, &repeat.read(renderer)?, frame.width),
++            );
+             for (name, selection) in [
+                 ("nonretained_clustered", LocalLightSelection::Clustered),
+                 ("nonretained_all_lights", LocalLightSelection::All),
+Diff in /Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/src/main.rs:423:
+     let (mut differing, mut over_one, mut worst) = (0u64, 0u64, 0u8);
+     let mut bbox = [u32::MAX, u32::MAX, 0, 0];
+     for (i, (pa, pb)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+-        let delta = pa.iter().zip(pb).map(|(x, y)| x.abs_diff(*y)).max().unwrap_or(0);
++        let delta = pa
++            .iter()
++            .zip(pb)
++            .map(|(x, y)| x.abs_diff(*y))
++            .max()
++            .unwrap_or(0);
+         if delta > 0 {
+             let (x, y) = (i as u32 % width, i as u32 / width);
+             differing += 1;
+Diff in /Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/src/main.rs:430:
+             over_one += u64::from(delta > 1);
+             worst = worst.max(delta);
+-            bbox = [bbox[0].min(x), bbox[1].min(y), bbox[2].max(x), bbox[3].max(y)];
++            bbox = [
++                bbox[0].min(x),
++                bbox[1].min(y),
++                bbox[2].max(x),
++                bbox[3].max(y),
++            ];
+         }
+     }
+     json!({"rgba_sha256": hex(&Sha256::digest(b)), "differing_pixels": differing,
+Diff in /Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/src/main.rs:445:
+
+ fn decode(bytes: &[u8]) -> Result<(u32, u32, Vec<u8>), Error> {
+     let mut reader = png::Decoder::new(std::io::Cursor::new(bytes)).read_info()?;
+-    let size = reader.output_buffer_size().ok_or("PNG output size overflow")?;
++    let size = reader
++        .output_buffer_size()
++        .ok_or("PNG output size overflow")?;
+     let mut pixels = vec![0; size];
+     let info = reader.next_frame(&mut pixels)?;
+     if info.color_type != png::ColorType::Rgba || info.bit_depth != png::BitDepth::Eight {

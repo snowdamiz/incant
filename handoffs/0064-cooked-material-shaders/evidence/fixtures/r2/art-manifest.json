@@ -1,0 +1,485 @@
+{
+ "files": {
+  "arrow.png": "f638a7025097830bd9b5da4fb4eb8c648fb3926002ca38b774ff43b47ef020cd",
+  "checker.png": "62cafa2d9037abc132a42476da35f422f99ec5df470a83617bc5db15b372b40c",
+  "cube-checker.gltf": "acb7e0eaa4507b4ba9b0e4571b7d890d4e49e90705b5380e7b268c8daaa91df1",
+  "cube-white.gltf": "1e3daab06d4be014befe4a27d525121035d47dfb43ff93f35442d4bddf98d947",
+  "cube.bin": "3a6bd3b2215e471d816ac8581110ffa3641c25cbfaca59ded181a754690f6797",
+  "emissive.png": "04f9b8ef9206784e23f8e030bff7c0f85167b1823d60b391c9399ec599b5f257",
+  "floor-gray.gltf": "7684226ca0c7707d08362edfb79a823d1a7cc54ff489cd8585dcfb46ac3c0601",
+  "floor-mip.gltf": "8398c0642c0112b3c240107dd7a3801bedecaa893740ccd17328ac786ee6fb4d",
+  "floor-nomip.gltf": "8fa64a59084c9206a468962a37b9fd50ecddb9941b9234848b873aa2989e4c87",
+  "floor.bin": "521350c927ade9f2321c8d056ce0631ec97b0e606da9438d31df1046d4cf398f",
+  "mask.png": "2d6d806f94f099381eeb154fef9576a2d4a3129a21964faf8dc77f5c5f472e7c",
+  "mr.png": "314395c3df35c48c72a2e88c909b5379356bfa85d74520b5f99a2a6ed013e4a2",
+  "normal.png": "d00c17938e02cfaa3cfb4336ac5ed0bf6fa51dca533f0ab64b5ecde819848cbb",
+  "occlusion.png": "05d39bb3167f19b1640e59b0967d30d02d191c37dc2892325125fe4d5c456460",
+  "panel-v1.png": "55604c4cc537a97f537774b5b548fa0bc7b7bb562b03e98a888f30baffb39002",
+  "panel-v2.png": "fac604e763cdae09481fef53fc5b242bdc786e99c33b276bea9c1907bf43a292",
+  "panel.png": "55604c4cc537a97f537774b5b548fa0bc7b7bb562b03e98a888f30baffb39002",
+  "quad-arrow-double.gltf": "0fe5bccf2903da853e57702f0b1987409e4a6a3a53789320b1bc26674dd0c65a",
+  "quad-arrow-single.gltf": "01058b27e7311254f693d7893ec65e80b53f60e5e9497e1826ccb4de92c9da10",
+  "quad-emissive.gltf": "302931289820bb63970daab703fb65e08ec5448f8e4264aea90faabd55cfc1ce",
+  "quad-mask.gltf": "103a616f9eea22cdf63956a5fe04318b714450fbdd80137174231609dc025bb2",
+  "quad-normal.gltf": "267d8979786aea51d26c6b338037daf03075f61013092ccca3d15435529c944d",
+  "quad-occlusion.gltf": "8130c303298b6886ea350e1deacc7f60b4875efbeb2f1e2b0141327fe5e08ac1",
+  "quad-panel.gltf": "dc2865ee386f9a8a4f0febd4bb58926b98ec4bc0253eeede7d336edd87a9973e",
+  "quad.bin": "4d57601b662085a83bf7ba849648e9f865afb66f3e752183efbcbed1bd041029",
+  "sky-dim.png": "a66cc91d2a47eec5ad197f4da4cfe73dcb6e1e9a6dce86314a60d467d71701c2",
+  "sky.png": "e9f3db9dd0b621b494ac930d78329a2048e47b32e22f433550adba7d446ac6cf",
+  "sphere-checker.gltf": "a0591fa653e0a6e037ad5bb0fe2ddb74687d9716ca0e972ec38fe40507e95f8b",
+  "sphere-chrome.gltf": "a366cf8a6a1175f05221bf7e29381e9f3b1feaa124850043d19981ee9ab88a48",
+  "sphere-glass.gltf": "49b1855655fcd45622f753972081dd0e24830f3778caf7476f962f908c64c50d",
+  "sphere-mr.gltf": "2c94e4a52a80959eabb1ae066019953095f4feb90fee561d9ae43134ae66060d",
+  "sphere-red.gltf": "de5218c6dc2e4a53e0baa925ea0131706874cefbf6967caa59498ff79b24bba5",
+  "sphere-white.gltf": "7e572d90b4a71072c5ffe18518b2a4d578498534c4f0c244116a2d16380f96c6",
+  "sphere.bin": "ba2b8cbcaf6bccbc80fb358aa7c966b72665d33e0e136a580da9ffa7d8be949d",
+  "stripes.png": "938e42b738b2e5a97e6cf69d7a92c85164b83130bb0f0ddf26ac1a8165e0cfd2"
+ },
+ "meshes": {
+  "cube": {
+   "bin_bytes": 912,
+   "triangles": 12,
+   "vertices": 24
+  },
+  "floor": {
+   "bin_bytes": 152,
+   "triangles": 2,
+   "vertices": 4
+  },
+  "quad": {
+   "bin_bytes": 152,
+   "triangles": 2,
+   "vertices": 4
+  },
+  "sphere": {
+   "bin_bytes": 116256,
+   "triangles": 3968,
+   "vertices": 2145
+  }
+ },
+ "models": {
+  "cube-checker": {
+   "images": [
+    "checker.png"
+   ],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.4
+    }
+   },
+   "mesh": "cube"
+  },
+  "cube-white": {
+   "images": [],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.8,
+      0.8,
+      0.8,
+      1
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.6
+    }
+   },
+   "mesh": "cube"
+  },
+  "floor-gray": {
+   "images": [],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.5,
+      0.5,
+      0.5,
+      1
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.7
+    }
+   },
+   "mesh": "floor"
+  },
+  "floor-mip": {
+   "images": [
+    "stripes.png"
+   ],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.8
+    }
+   },
+   "mesh": "floor"
+  },
+  "floor-nomip": {
+   "images": [
+    "stripes.png"
+   ],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.8
+    }
+   },
+   "mesh": "floor"
+  },
+  "quad-arrow-double": {
+   "images": [
+    "arrow.png"
+   ],
+   "material": {
+    "doubleSided": true,
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.5
+    }
+   },
+   "mesh": "quad"
+  },
+  "quad-arrow-single": {
+   "images": [
+    "arrow.png"
+   ],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.5
+    }
+   },
+   "mesh": "quad"
+  },
+  "quad-emissive": {
+   "images": [
+    "emissive.png"
+   ],
+   "material": {
+    "emissiveFactor": [
+     1,
+     1,
+     1
+    ],
+    "emissiveTexture": {
+     "index": 0
+    },
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.05,
+      0.05,
+      0.05,
+      1
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.5
+    }
+   },
+   "mesh": "quad"
+  },
+  "quad-mask": {
+   "images": [
+    "mask.png"
+   ],
+   "material": {
+    "alphaCutoff": 0.5,
+    "alphaMode": "MASK",
+    "doubleSided": true,
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.5
+    }
+   },
+   "mesh": "quad"
+  },
+  "quad-normal": {
+   "images": [
+    "normal.png"
+   ],
+   "material": {
+    "normalTexture": {
+     "index": 0,
+     "scale": 1.0
+    },
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.7,
+      0.7,
+      0.72,
+      1
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.35
+    }
+   },
+   "mesh": "quad"
+  },
+  "quad-occlusion": {
+   "images": [
+    "occlusion.png"
+   ],
+   "material": {
+    "occlusionTexture": {
+     "index": 0,
+     "strength": 1.0
+    },
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.85,
+      0.85,
+      0.85,
+      1
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.6
+    }
+   },
+   "mesh": "quad"
+  },
+  "quad-panel": {
+   "images": [
+    "panel.png"
+   ],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.45
+    }
+   },
+   "mesh": "quad"
+  },
+  "sphere-checker": {
+   "images": [
+    "checker.png"
+   ],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      1,
+      1,
+      1,
+      1
+     ],
+     "baseColorTexture": {
+      "index": 0
+     },
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.5
+    }
+   },
+   "mesh": "sphere"
+  },
+  "sphere-chrome": {
+   "images": [],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.97,
+      0.96,
+      0.94,
+      1
+     ],
+     "metallicFactor": 1.0,
+     "roughnessFactor": 0.08
+    }
+   },
+   "mesh": "sphere"
+  },
+  "sphere-glass": {
+   "images": [],
+   "material": {
+    "alphaMode": "BLEND",
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.35,
+      0.6,
+      0.95,
+      0.4
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.05
+    }
+   },
+   "mesh": "sphere"
+  },
+  "sphere-mr": {
+   "images": [
+    "mr.png"
+   ],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.95,
+      0.75,
+      0.35,
+      1
+     ],
+     "metallicFactor": 1.0,
+     "metallicRoughnessTexture": {
+      "index": 0
+     },
+     "roughnessFactor": 1.0
+    }
+   },
+   "mesh": "sphere"
+  },
+  "sphere-red": {
+   "images": [],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.75,
+      0.06,
+      0.05,
+      1
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.3
+    }
+   },
+   "mesh": "sphere"
+  },
+  "sphere-white": {
+   "images": [],
+   "material": {
+    "pbrMetallicRoughness": {
+     "baseColorFactor": [
+      0.82,
+      0.82,
+      0.82,
+      1
+     ],
+     "metallicFactor": 0.0,
+     "roughnessFactor": 0.55
+    }
+   },
+   "mesh": "sphere"
+  }
+ },
+ "textures": {
+  "arrow.png": {
+   "bytes": 165,
+   "height": 32,
+   "width": 32
+  },
+  "checker.png": {
+   "bytes": 238,
+   "height": 64,
+   "width": 64
+  },
+  "emissive.png": {
+   "bytes": 329,
+   "height": 64,
+   "width": 64
+  },
+  "mask.png": {
+   "bytes": 457,
+   "height": 64,
+   "width": 64
+  },
+  "mr.png": {
+   "bytes": 390,
+   "height": 64,
+   "width": 64
+  },
+  "normal.png": {
+   "bytes": 624,
+   "height": 64,
+   "width": 64
+  },
+  "occlusion.png": {
+   "bytes": 178,
+   "height": 64,
+   "width": 64
+  },
+  "panel-v1.png": {
+   "bytes": 188,
+   "height": 32,
+   "width": 32
+  },
+  "panel-v2.png": {
+   "bytes": 154,
+   "height": 32,
+   "width": 32
+  },
+  "sky-dim.png": {
+   "bytes": 92,
+   "height": 16,
+   "width": 32
+  },
+  "sky.png": {
+   "bytes": 544,
+   "height": 64,
+   "width": 128
+  },
+  "stripes.png": {
+   "bytes": 458,
+   "height": 128,
+   "width": 128
+  }
+ }
+}

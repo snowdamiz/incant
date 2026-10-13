@@ -1,0 +1,438 @@
+{
+ "key": "S",
+ "title": "directional shadow cascades and distance fade",
+ "items": [
+  {
+   "name": "camera",
+   "slot": 1,
+   "at": [
+    0.0,
+    4.0,
+    10.0
+   ],
+   "rotation": [
+    -0.08980559531591709,
+    0.0,
+    0.0,
+    0.9959593139531121
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "camera": {
+    "fov_degrees": 50.0,
+    "near": 0.1,
+    "far": 80.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  },
+  {
+   "name": "floor",
+   "slot": 2,
+   "at": [
+    0.0,
+    0.0,
+    -18.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    30.0,
+    1.0,
+    48.0
+   ],
+   "mesh": {
+    "model": "floor-gray",
+    "cast_shadows": false
+   }
+  },
+  {
+   "name": "pillar-0-z3",
+   "slot": 3,
+   "at": [
+    -2.5,
+    1.25,
+    3.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "pillar-1-z-3",
+   "slot": 4,
+   "at": [
+    2.5,
+    1.25,
+    -3.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "pillar-2-z-9",
+   "slot": 5,
+   "at": [
+    -2.5,
+    1.25,
+    -9.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "pillar-3-z-15",
+   "slot": 6,
+   "at": [
+    2.5,
+    1.25,
+    -15.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "pillar-4-z-21",
+   "slot": 7,
+   "at": [
+    -2.5,
+    1.25,
+    -21.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "pillar-5-z-27",
+   "slot": 8,
+   "at": [
+    2.5,
+    1.25,
+    -27.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "pillar-6-z-33",
+   "slot": 9,
+   "at": [
+    -2.5,
+    1.25,
+    -33.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "pillar-7-z-39",
+   "slot": 10,
+   "at": [
+    2.5,
+    1.25,
+    -39.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.5,
+    2.5,
+    0.5
+   ],
+   "mesh": {
+    "model": "cube-white",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "sphere-near",
+   "slot": 11,
+   "at": [
+    -0.6,
+    0.6,
+    1.5
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.6,
+    0.6,
+    0.6
+   ],
+   "mesh": {
+    "model": "sphere-red",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "sphere-mid",
+   "slot": 12,
+   "at": [
+    1.0,
+    0.8,
+    -6.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.8,
+    0.8,
+    0.8
+   ],
+   "mesh": {
+    "model": "sphere-checker",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "mask-caster",
+   "slot": 13,
+   "at": [
+    -1.0,
+    1.3,
+    -1.5
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "mesh": {
+    "model": "quad-mask",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "cube-mirrored",
+   "slot": 14,
+   "at": [
+    0.6,
+    0.5,
+    -12.0
+   ],
+   "rotation": [
+    0.0,
+    0.3007057995042731,
+    0.0,
+    0.9537169507482269
+   ],
+   "scale": [
+    -1.0,
+    1.0,
+    1.0
+   ],
+   "mesh": {
+    "model": "cube-checker",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "sun-low",
+   "slot": 15,
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    -0.21592792682671014,
+    -0.35080077390209186,
+    -0.08347922095780211,
+    0.9073836934364045
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "directional": {
+    "color": [
+     1.0,
+     0.93,
+     0.82
+    ],
+    "intensity": 2.5,
+    "shadows": {
+     "distance": 40.0
+    }
+   }
+  },
+  {
+   "name": "environment-fill",
+   "slot": 16,
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "environment": {
+    "texture": "sky.png",
+    "intensity": 0.35,
+    "rotation_degrees": 30.0
+   }
+  }
+ ],
+ "ids": {
+  "camera": "01JA64SH000000000000000001",
+  "floor": "01JA64SH000000000000000002",
+  "pillar-0-z3": "01JA64SH000000000000000003",
+  "pillar-1-z-3": "01JA64SH000000000000000004",
+  "pillar-2-z-9": "01JA64SH000000000000000005",
+  "pillar-3-z-15": "01JA64SH000000000000000006",
+  "pillar-4-z-21": "01JA64SH000000000000000007",
+  "pillar-5-z-27": "01JA64SH000000000000000008",
+  "pillar-6-z-33": "01JA64SH000000000000000009",
+  "pillar-7-z-39": "01JA64SH00000000000000000A",
+  "sphere-near": "01JA64SH00000000000000000B",
+  "sphere-mid": "01JA64SH00000000000000000C",
+  "mask-caster": "01JA64SH00000000000000000D",
+  "cube-mirrored": "01JA64SH00000000000000000E",
+  "sun-low": "01JA64SH00000000000000000F",
+  "environment-fill": "01JA64SH00000000000000000G"
+ },
+ "hex": {
+  "camera": "01928c4cc40000000000000000000001",
+  "floor": "01928c4cc40000000000000000000002",
+  "pillar-0-z3": "01928c4cc40000000000000000000003",
+  "pillar-1-z-3": "01928c4cc40000000000000000000004",
+  "pillar-2-z-9": "01928c4cc40000000000000000000005",
+  "pillar-3-z-15": "01928c4cc40000000000000000000006",
+  "pillar-4-z-21": "01928c4cc40000000000000000000007",
+  "pillar-5-z-27": "01928c4cc40000000000000000000008",
+  "pillar-6-z-33": "01928c4cc40000000000000000000009",
+  "pillar-7-z-39": "01928c4cc4000000000000000000000a",
+  "sphere-near": "01928c4cc4000000000000000000000b",
+  "sphere-mid": "01928c4cc4000000000000000000000c",
+  "mask-caster": "01928c4cc4000000000000000000000d",
+  "cube-mirrored": "01928c4cc4000000000000000000000e",
+  "sun-low": "01928c4cc4000000000000000000000f",
+  "environment-fill": "01928c4cc40000000000000000000010"
+ }
+}

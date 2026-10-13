@@ -1,0 +1,99 @@
+{
+ "variant": "candidate",
+ "features": "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials",
+ "incant_render_features_seen": [
+  "cooked-geometry,cooked-materials,cooked-output,cooked-sprites,cooked-text,cooked-ui,physics-deterministic"
+ ],
+ "head": "e0fbd05642275b3f201cb04cdcd9990f8077aa76",
+ "frozen": {
+  "material_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0064/bin/candidate/material_review",
+   "sha256": "25346f7d04c0855109a42defc9eed92c6d7cb7b978821a0052364d4ae652c9ac",
+   "bytes": 23080816,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/material_review",
+   "fresh": false,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ]
+  }
+ },
+ "helper_sources": {
+  "handoffs/0064-cooked-material-shaders/tools/review/Cargo.lock": "0f44c6bbdf5adf269f3e92842aadf7e14eba8e967becea6c614ab11f8d68c12b",
+  "handoffs/0064-cooked-material-shaders/tools/review/Cargo.toml": "2d3d07877b47403ad48ce4cac334f534793d40d445d8e23bf3d16577e081054b",
+  "handoffs/0064-cooked-material-shaders/tools/review/src/main.rs": "08b4aebe092914512d96a1ed30a072513eddef58196348269574bf81860c888a"
+ },
+ "builds": [
+  {
+   "label": "review-candidate",
+   "argv": [
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/tools/cargo",
+    "build",
+    "--manifest-path",
+    "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/Cargo.toml",
+    "--bin",
+    "material_review",
+    "--features",
+    "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders",
+   "env": {
+    "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target"
+   },
+   "started": "2026-10-13T01:17:56.770394+00:00",
+   "ended": "2026-10-13T01:18:01.293479+00:00",
+   "exit": 0,
+   "stdout_sha256": "48bb4960ec8e08c9bda91d277982a8f0965446757204e1bec5a84784f63487b4",
+   "stderr_sha256": "a2e139aec605b0c7f73614ee85cb609de8b112176bde8267ba7f28c88aeef740",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": null,
+     "features": [
+      "cooked-geometry",
+      "cooked-materials",
+      "cooked-output",
+      "cooked-sprites",
+      "cooked-text",
+      "cooked-ui",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_render#0.0.1",
+     "filenames": [
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-dbe3561be18d9611.rlib",
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-dbe3561be18d9611.rmeta"
+     ]
+    },
+    {
+     "target": "material_review",
+     "kind": [
+      "bin"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/material_review",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review#incant_0064_review@0.0.1",
+     "filenames": [
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/material_review"
+     ]
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T01:18:01.331586+00:00"
+}

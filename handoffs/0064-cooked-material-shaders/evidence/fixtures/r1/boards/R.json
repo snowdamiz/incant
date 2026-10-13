@@ -1,0 +1,122 @@
+{
+ "key": "R",
+ "title": "reimported panel image",
+ "items": [
+  {
+   "name": "camera",
+   "slot": 1,
+   "at": [
+    0.0,
+    0.0,
+    3.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "camera": {
+    "fov_degrees": 45.0,
+    "near": 0.1,
+    "far": 20.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  },
+  {
+   "name": "panel",
+   "slot": 2,
+   "at": [
+    -0.35,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.9,
+    0.9,
+    0.9
+   ],
+   "mesh": {
+    "model": "quad-panel",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "unchanged-sphere",
+   "slot": 3,
+   "at": [
+    1.25,
+    -0.45,
+    0.3
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    0.45,
+    0.45,
+    0.45
+   ],
+   "mesh": {
+    "model": "sphere-checker",
+    "cast_shadows": true
+   }
+  },
+  {
+   "name": "key",
+   "slot": 4,
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    -0.21911911429394568,
+    0.1416072065975341,
+    0.03215985741677969,
+    0.9648315689080724
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "directional": {
+    "color": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "intensity": 2.0
+   }
+  }
+ ],
+ "ids": {
+  "camera": "01JA64RE000000000000000001",
+  "panel": "01JA64RE000000000000000002",
+  "unchanged-sphere": "01JA64RE000000000000000003",
+  "key": "01JA64RE000000000000000004"
+ },
+ "hex": {
+  "camera": "01928c4c380000000000000000000001",
+  "panel": "01928c4c380000000000000000000002",
+  "unchanged-sphere": "01928c4c380000000000000000000003",
+  "key": "01928c4c380000000000000000000004"
+ }
+}

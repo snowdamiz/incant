@@ -1,0 +1,6 @@
+
+running 2 tests
+test composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources ... ok
+test refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.63s

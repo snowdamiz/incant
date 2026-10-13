@@ -1,0 +1,137 @@
+{
+ "kind": "derived figures (CPU crops/zooms of candidate captures; not renders)",
+ "figures": {
+  "M-close-normal-occlusion": {
+   "from": "M-close.png",
+   "from_sha256": "ca20486ddbca10c3b61f81af5aaa80289bc6cff573a36b82726d7fa746f2abe9",
+   "rect": [
+    0,
+    120,
+    480,
+    300
+   ],
+   "zoom": 2,
+   "sha256": "773f8c8885a183d93e34568e664d096ea8f13fbc4ed143c00f352f3a6a549960"
+  },
+  "M-close-emissive-mask": {
+   "from": "M-close.png",
+   "from_sha256": "ca20486ddbca10c3b61f81af5aaa80289bc6cff573a36b82726d7fa746f2abe9",
+   "rect": [
+    440,
+    100,
+    520,
+    330
+   ],
+   "zoom": 2,
+   "sha256": "81766761b11af801a2c37655064330203c3eb0c9f7072976999207219abecf18"
+  },
+  "M-close-spheres": {
+   "from": "M-close.png",
+   "from_sha256": "ca20486ddbca10c3b61f81af5aaa80289bc6cff573a36b82726d7fa746f2abe9",
+   "rect": [
+    0,
+    300,
+    960,
+    240
+   ],
+   "zoom": 1,
+   "sha256": "cb18dfeb238da2b878da32c39f25a447d2e23dc54145fe315210b87fdde7df29"
+  },
+  "M-wide-culling-row": {
+   "from": "M-wide.png",
+   "from_sha256": "601c5c62b923054cfe11de901acbe206b40dbb2e9783cbdea2e298fdbdf888f1",
+   "rect": [
+    520,
+    190,
+    440,
+    150
+   ],
+   "zoom": 2,
+   "sha256": "e0556ad2e5606271fab38f364a2d7820e8a34b474bdf72c76761c333e85c4ebb"
+  },
+  "M-wide-spheres": {
+   "from": "M-wide.png",
+   "from_sha256": "601c5c62b923054cfe11de901acbe206b40dbb2e9783cbdea2e298fdbdf888f1",
+   "rect": [
+    150,
+    250,
+    660,
+    150
+   ],
+   "zoom": 2,
+   "sha256": "33f265b46445dac21a87d5a69cc51f5842485a1d90494bb08a058c72052c0b1b"
+  },
+  "M-wide-minification": {
+   "from": "M-wide.png",
+   "from_sha256": "601c5c62b923054cfe11de901acbe206b40dbb2e9783cbdea2e298fdbdf888f1",
+   "rect": [
+    0,
+    140,
+    960,
+    120
+   ],
+   "zoom": 1,
+   "sha256": "5ffaf410df46449d1dcdc83357b2c242aaa2eb53d3125f2805305ce57409da7e"
+  },
+  "L-persp-t090-centre": {
+   "from": "L-persp-t090.png",
+   "from_sha256": "5a64696006cbd3ebb34b33e88beb2d951c078fa26bc28d3bfb26e56e2312e665",
+   "rect": [
+    280,
+    160,
+    400,
+    225
+   ],
+   "zoom": 2,
+   "sha256": "987d69c1d8c98a60b2b548d3c28a4c4e0496df94d90abf73652e5bc7a4311b75"
+  },
+  "R-v1-panel": {
+   "from": "R-v1.png",
+   "from_sha256": "54421f726ee9b72b6f9c8f9ef2e65787b0d023e209f2493adc06e5565ffcb3af",
+   "rect": [
+    60,
+    30,
+    300,
+    210
+   ],
+   "zoom": 2,
+   "sha256": "47734b2b0e4d3c3537469bab8780022e02362b9619a19a0a8e965b67dff9fa25"
+  },
+  "R-v2-panel": {
+   "from": "R-v2.png",
+   "from_sha256": "2c3bb4d44e612776231e3b38fea82db75cdc1e1682752d84bf65c1a0dcf5c8fb",
+   "rect": [
+    60,
+    30,
+    300,
+    210
+   ],
+   "zoom": 2,
+   "sha256": "85a73490d668adc77d68cde5905c0ee416d3874d7427adbdd735a6778ba49f5a"
+  },
+  "S-shadows-near": {
+   "from": "S-shadows.png",
+   "from_sha256": "1ed6f1e51282e50b79deb58bc944caeeb46bc82aae08344c9536eae93dcbfce3",
+   "rect": [
+    230,
+    230,
+    500,
+    270
+   ],
+   "zoom": 2,
+   "sha256": "c6ae72fb33af84c16c2d65e9b7e05669e56445222eaff595f94e6c909d5cf9c7"
+  },
+  "S-shadows-far": {
+   "from": "S-shadows.png",
+   "from_sha256": "1ed6f1e51282e50b79deb58bc944caeeb46bc82aae08344c9536eae93dcbfce3",
+   "rect": [
+    330,
+    170,
+    320,
+    120
+   ],
+   "zoom": 3,
+   "sha256": "6d47fc86d8f5b47bca8e583afdbd5184c7af0ca6b2df94c9bf60a9710abed812"
+  }
+ }
+}
