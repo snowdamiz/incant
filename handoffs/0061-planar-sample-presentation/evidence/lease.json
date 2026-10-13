@@ -1,0 +1,15 @@
+{
+  "packet": "0061-planar-sample-presentation",
+  "owner": "Claude Opus 5.5 (claude-opus-5-5), thinking effort max, ACP handoff session",
+  "granted_by": "handoffs/0061-planar-sample-presentation/brief.md, \"Builds, evidence and desktop coordination\"",
+  "brief_sha256": "e30ae96ddd1cec17dea4b5c6fb7be97abafc60db23940ce9cdceb4474fdadeed",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation",
+  "source_head": "2b6eabc4c433cdd808636888f548b0a0d3f3ce5b",
+  "cargo_target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "cargo_policy": "./tools/cargo, --locked, Rust 1.99.0, --profile ci, -j 2",
+  "started_at": "2026-10-12T20:05:13+00:00",
+  "expires_at": "2026-10-13T08:05:13+00:00",
+  "release_marker": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/artifacts/0061/released",
+  "ledger": "/Users/andreyyurlov/.codex/worktrees/native-rust-sdk/incant/.worktrees/0061-planar-sample-presentation/artifacts/0061/ledger.jsonl",
+  "scope": "exclusive warm cargo target and offscreen renderer runs; no native window or screen capture before 0060 releases the desktop"
+}

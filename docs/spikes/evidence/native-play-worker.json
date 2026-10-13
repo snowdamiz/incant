@@ -1,0 +1,1074 @@
+{
+  "at": "2026-10-12T22:54:29.852437+00:00",
+  "base": "35694825797eca4cc4123c5a28a42e5041283b0b",
+  "passed": true,
+  "source_sha256": {
+    "crates/incant_headless/src/main.rs": "7015e1dc6c6c0523c0f92fdbc502c25bfd300fcc7182fbbfd669d9f37bd7f02f",
+    "crates/incant_headless/src/native_play.rs": "a35435e33020f0769e0e4b7040af902adbe92d7387da8623e4869a2dc7a3e326",
+    "crates/incant_headless/src/native_worker.rs": "86677a61ad4aa5cbb979dd9194644cd85acb6204c8a6f76b93e361efb2279dab",
+    "crates/incant_headless/src/native_worker/tests.rs": "707b31ffea2a46eea61c4f6d97420dc7bfb0d2c741550fd22285511b125cc0f9",
+    "tools/probes/native-play-worker.py": "59dbed71a4d06fc1e279185ed42880bb796f61f74410ce940fe7b657fe5d579b"
+  },
+  "checks": [
+    {
+      "name": "deterministic-test",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--bin",
+        "incant_headless",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic",
+        "--message-format=json"
+      ],
+      "exit_code": 0,
+      "seconds": 4.114269958998193,
+      "changed": []
+    },
+    {
+      "name": "deterministic-clippy",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--bin",
+        "incant_headless",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic",
+        "--message-format=json",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 31.47505679200185,
+      "changed": []
+    },
+    {
+      "name": "deterministic-build",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--bin",
+        "incant_headless",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic",
+        "--message-format=json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.8844162089990277,
+      "changed": [],
+      "physics": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-variant-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "fast-test",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--bin",
+        "incant_headless",
+        "--no-default-features",
+        "--message-format=json"
+      ],
+      "exit_code": 0,
+      "seconds": 3.5319950000011886,
+      "changed": []
+    },
+    {
+      "name": "fast-clippy",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--bin",
+        "incant_headless",
+        "--no-default-features",
+        "--message-format=json",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 13.08921220800039,
+      "changed": []
+    },
+    {
+      "name": "fast-build",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "aarch64-apple-darwin",
+        "-j2",
+        "-p",
+        "incant_headless",
+        "--bin",
+        "incant_headless",
+        "--no-default-features",
+        "--message-format=json"
+      ],
+      "exit_code": 0,
+      "seconds": 4.466684584000177,
+      "changed": [],
+      "physics": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-variant-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    }
+  ],
+  "tests_per_mode": 21,
+  "worker_tests_per_mode": 5,
+  "actual_process_proof": {
+    "passed": true,
+    "cases": [
+      "deterministic:changed",
+      "deterministic:wrong-mode",
+      "deterministic:eof",
+      "deterministic:truncated",
+      "deterministic:oversized",
+      "deterministic:retained-source-deleted",
+      "fast:changed",
+      "fast:wrong-mode",
+      "fast:eof",
+      "fast:truncated",
+      "fast:oversized",
+      "fast:retained-source-deleted"
+    ],
+    "binary_sha256": {
+      "deterministic": "004afcafda745d32d34f03277a0950bcca3531a9220a784c7c4652814f5e92c4",
+      "fast": "c18fc98c8567ccbc0c46eb29656b98d178a790ded126e292fb10b4935b2078ba"
+    },
+    "limits": [
+      "Native CPU protocol only, no editor GPU/window or shipping/device claim.",
+      "Movement fixture has no active physics bodies. PCM is not exposed by this worker."
+    ]
+  },
+  "binaries": {
+    "deterministic": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/incant_headless-deterministic",
+      "sha256": "004afcafda745d32d34f03277a0950bcca3531a9220a784c7c4652814f5e92c4",
+      "physics": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-variant-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    "fast": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/incant_headless-fast",
+      "sha256": "c18fc98c8567ccbc0c46eb29656b98d178a790ded126e292fb10b4935b2078ba",
+      "physics": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-variant-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    }
+  },
+  "frozen_inputs": {
+    "build": 1846,
+    "process": 1847
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-001/tests.stderr",
+      "raw_sha256": "b9aac976428f44afe5faf54f9bfec520755c6d96d758cbf915049a65237e4def",
+      "raw_bytes": 742,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-001/tests.stderr.gz",
+      "sha256": "9f0b39d23fc535be4b939ead36aff9500c18d7c30f6d3c3d3d07eb702b0d7d07",
+      "bytes": 474
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-001/tests.stdout",
+      "raw_sha256": "925665ef015715fc7861f1aaa50a89eda63277e6b644fef8577486d5aa0ed3a8",
+      "raw_bytes": 729,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-001/tests.stdout.gz",
+      "sha256": "af72ebd0d01a3fe2b74e97bb1fff5436e1a56cc962047c516f9d4feaf56b4ec0",
+      "bytes": 352
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-002/tests.stderr",
+      "raw_sha256": "11add8bfd78ae96712e2d474cfffeeaa9ef687d35d314ac5664e9d8c1b97c791",
+      "raw_bytes": 336,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-002/tests.stderr.gz",
+      "sha256": "f67f6f6682ec973e6bbfe8a080fd2432460bfe5819f3278dd842c3ed4cddc303",
+      "bytes": 238
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-002/tests.stdout",
+      "raw_sha256": "c026248a6c03f53ab6a65a1d1f6c2971e5d7ce7c1e4c012119be282c7246c26e",
+      "raw_bytes": 604,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-002/tests.stdout.gz",
+      "sha256": "5213ceb57d0c754ff178d6cdd6d84218e100e5c696712b1c4623de5d41a965f2",
+      "bytes": 320
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/binaries.json",
+      "raw_sha256": "eb55d5675bf97dee808576bf67a4379430db0a037e7d994ff1885a43a309a80a",
+      "raw_bytes": 3378,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/binaries.json.gz",
+      "sha256": "d47f7054bc9c44153f5a9f173bcb75b223ccd7996a31fc1ae0963b27dfd8a483",
+      "bytes": 588
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/commands.json",
+      "raw_sha256": "8b62f1c6955bade8c7a252480e68645f31b6fbadca9cca600d364f1bda663386",
+      "raw_bytes": 6070,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/commands.json.gz",
+      "sha256": "ed23d57b7013dda53e7cda2e57bda72d7a1414fa4f623c840e78c40ca0862b49",
+      "bytes": 771
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/deterministic-build.stderr",
+      "raw_sha256": "4cf8c04ce01a7636078b8df9ae806fc8d6af5d2237b2971eae41774cc98f892a",
+      "raw_bytes": 180,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/deterministic-build.stderr.gz",
+      "sha256": "76fbd85d6c0dd36198492fd1b6c9d1398884af1a52b65086fd37014c141bbe32",
+      "bytes": 160
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/deterministic-build.stdout",
+      "raw_sha256": "de5fc9a45562be4dbba8a5e06b56e05e2071723a6b60ed4df2ce6e6aab2ec404",
+      "raw_bytes": 665263,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/deterministic-build.stdout.gz",
+      "sha256": "cf7c2bbf82b36b6848cbc9ab8f12ebe4f729a0087ac3456015c363a0ee443e6b",
+      "bytes": 44990
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/deterministic-clippy.stderr",
+      "raw_sha256": "bc7e63aba03e56ddc08b111e2b3a4224547fefc55f95b25ed2cfc5edd303a8a9",
+      "raw_bytes": 9006,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/deterministic-clippy.stderr.gz",
+      "sha256": "f0d6079440dda547ac8061719f13d3bd10856131a31c7c9ff2a935d977229e94",
+      "bytes": 1819
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/deterministic-clippy.stdout",
+      "raw_sha256": "d97c6a3a68cd105e9a9446c14e0d2eb16a0255302593f232f0ae875fefc9ccaa",
+      "raw_bytes": 612303,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/deterministic-clippy.stdout.gz",
+      "sha256": "4511e4ff6bd5cb62ae28e2eb3eaa0361bc38965d0c792b3b2eecb9f3501be406",
+      "bytes": 42865
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/deterministic-test.stderr",
+      "raw_sha256": "7b7c372132e130fa73f6bde852d5c3defc08a2afc838ab3c818579adfa371ecb",
+      "raw_bytes": 336,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/deterministic-test.stderr.gz",
+      "sha256": "c947195fb44799e96eaa58dbaf93af813a94612a7be4980f0da03a1799087c50",
+      "bytes": 238
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/deterministic-test.stdout",
+      "raw_sha256": "da7197786423b81566aa0d1428029cd085120fcffff82eb922ac2271bd7420ec",
+      "raw_bytes": 667507,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/deterministic-test.stdout.gz",
+      "sha256": "95cb509336cd6e93b163c0aa870e7fdcea20e3894ea923dcbef670a3ccf2979e",
+      "bytes": 46011
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/fast-build.stderr",
+      "raw_sha256": "e2cab85fc1cc42ecdb4fae39331d5b24d144d42ffa4b8dcea3271ec23f29c75f",
+      "raw_bytes": 180,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/fast-build.stderr.gz",
+      "sha256": "f51bb09789207fa1d068e5fbd7a0ec30aa5e9bf1ff4c87d5873a15e1c7e1420e",
+      "bytes": 160
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/fast-build.stdout",
+      "raw_sha256": "255619770810a899352077728d865b941384ee1218ceae4989085fde2f070bae",
+      "raw_bytes": 664163,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/fast-build.stdout.gz",
+      "sha256": "c390868e4ebfc5e3a1e62f34b8568ba944b7310514a1f69212d5d0fc1aa9c844",
+      "bytes": 44808
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/fast-clippy.stderr",
+      "raw_sha256": "91ad5cc079f7dffca61d61e82a2081d87b90f5138cdd2b1756f5775456105868",
+      "raw_bytes": 3514,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/fast-clippy.stderr.gz",
+      "sha256": "0bcc463f92da2af23e1c51808c5ebfe55eca88d88a8f4bbb1b1b1f3ca968e332",
+      "bytes": 512
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/fast-clippy.stdout",
+      "raw_sha256": "479067223855aade756509f33873a5c911151199dc0ed4e491163ddd5196e5d4",
+      "raw_bytes": 611061,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/fast-clippy.stdout.gz",
+      "sha256": "be7cae7af98f9c4266b91e7ef93d04ff37d8307fdaa1ab6e97b1b135bf428e4e",
+      "bytes": 42382
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/fast-test.stderr",
+      "raw_sha256": "8b89668b3fde06e20c3eb4f54ed170887fd5450a4a5ee2566a2434df6189321b",
+      "raw_bytes": 336,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/fast-test.stderr.gz",
+      "sha256": "036bec8ec9d60846f5d369723ee97641d853e432ac579313f037b8c948677c3a",
+      "bytes": 237
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/fast-test.stdout",
+      "raw_sha256": "4d406b57e2bd61a71eecb1537d119aa7624b7c20bfc0d3e0ab74a959a33f516e",
+      "raw_bytes": 666407,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/fast-test.stdout.gz",
+      "sha256": "f195a54948877e8f1f6b5abcbcd68dc65302aa9dfd75b8775fd20c61a4cfd5ff",
+      "bytes": 45832
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/freeze.json",
+      "raw_sha256": "c3ea832eb9adef2c588b0b1b35397fcef1779ff4ebb5dfd11629808e9773a045",
+      "raw_bytes": 211018,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/freeze.json.gz",
+      "sha256": "bf8f4fd8915c015295a44ba5b712db77a164f566f7417e814ca9bba3513977c2",
+      "bytes": 86497
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/result.json",
+      "raw_sha256": "f99a1be99d513ef5d19571672dc7d82acd278fb7452cfdc4da151d81915ac3c8",
+      "raw_bytes": 3756,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/result.json.gz",
+      "sha256": "d8fb62e3636c63f4908ce61b7f9272ab0d4359ce7b2be263b490582362bee4e2",
+      "bytes": 635
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/run.py",
+      "raw_sha256": "e9efa7d28dc73f237d0262851d56371f24d8dad8a7f5910a3204518f4fa06f33",
+      "raw_bytes": 2616,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-003/run.py.gz",
+      "sha256": "6678ab27347602f3848700ba4092972f72ec240d5ba88745f6117b7fb5527d71",
+      "bytes": 1255
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/command.json",
+      "raw_sha256": "b56764b3ee940b331a0af24ff4dfa0914109e361102971096e59d6102a1ab279",
+      "raw_bytes": 485,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/command.json.gz",
+      "sha256": "0a8334474c47a904e05ea2804b6ffcce4bdc8537a40e5b7783ad710e47bb8e4b",
+      "bytes": 229
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/freeze.json",
+      "raw_sha256": "2bd18cd87c098645cf92bfb5acf7883c7f73489aafc843c28f37b42da6370e5f",
+      "raw_bytes": 211126,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/freeze.json.gz",
+      "sha256": "c38691c516cd89a2a36f559f3c4e5ee683fa9020675f861816cb52fa756d4a5e",
+      "bytes": 86560
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/commands.json",
+      "raw_sha256": "86be39e2e79e4d4558beee4956d6af6f189a548a60a2db31bb2bab4f84140665",
+      "raw_bytes": 7162,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/commands.json.gz",
+      "sha256": "cd151bf8978027dbaf5c64091ac987510824247b8145db4cec12012a30da668b",
+      "bytes": 1095
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/eof/process.json",
+      "raw_sha256": "ded82861f1ab83fbf1890bd83fb87324c331cf635e43246e104cdeb2ed6c3b05",
+      "raw_bytes": 399,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/eof/process.json.gz",
+      "sha256": "660c760d28495390a7688ffe469cef41fe00e2c52b99b1a03408b19f70cf8dba",
+      "bytes": 253
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/eof/stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/eof/stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/eof/stdin",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/eof/stdin.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/eof/stdout",
+      "raw_sha256": "948408c9135ec9f106c6701ef5b94eee17284fb117f3fb0ea9cbd032648a41ac",
+      "raw_bytes": 538,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/eof/stdout.gz",
+      "sha256": "50a645df1a8710be9bda3be8348d880018c0717c820ee45eb3ba9f92bfa21ba0",
+      "bytes": 359
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/observe.json",
+      "raw_sha256": "314186bd609b9d6c2a1ad4df09e4bd793628fb7089562c80587e39a5a4ea5f2a",
+      "raw_bytes": 130,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/observe.json.gz",
+      "sha256": "14f3c24f87dc504faf89e22720b0db682c734b9a22034a96e2d46f2f9ef4c623",
+      "bytes": 108
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/oversized/process.json",
+      "raw_sha256": "2a06c41b81cc66760b877f442afac6986fbc3c7a4009778e68751ac4861096bb",
+      "raw_bytes": 399,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/oversized/process.json.gz",
+      "sha256": "885d0231cbb21de08dde8740cd057d9d9ca4a823fdfd0ff0e3563044fef22428",
+      "bytes": 253
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/oversized/stderr",
+      "raw_sha256": "b7e97222222f09068e998387125a5d82c3974dd3d1f9dd72f661ae3881cd2e2a",
+      "raw_bytes": 62,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/oversized/stderr.gz",
+      "sha256": "83feb3b9d9af55ee7493fe4db2812df12fa596db0913b7364929b720bbaf9e79",
+      "bytes": 80
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/oversized/stdin",
+      "raw_sha256": "27cb03b898e978f2493818e414119edabc05246a6697a65ea42b21b682dc07d4",
+      "raw_bytes": 262145,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/oversized/stdin.gz",
+      "sha256": "c24491f731cf3c730c6579ff07371be84114ca0a256241e696c44205bea8b3a7",
+      "bytes": 290
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/oversized/stdout",
+      "raw_sha256": "948408c9135ec9f106c6701ef5b94eee17284fb117f3fb0ea9cbd032648a41ac",
+      "raw_bytes": 538,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/oversized/stdout.gz",
+      "sha256": "50a645df1a8710be9bda3be8348d880018c0717c820ee45eb3ba9f92bfa21ba0",
+      "bytes": 359
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/retained/process.json",
+      "raw_sha256": "ded82861f1ab83fbf1890bd83fb87324c331cf635e43246e104cdeb2ed6c3b05",
+      "raw_bytes": 399,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/retained/process.json.gz",
+      "sha256": "660c760d28495390a7688ffe469cef41fe00e2c52b99b1a03408b19f70cf8dba",
+      "bytes": 253
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/retained/stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/retained/stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/retained/stdin",
+      "raw_sha256": "81c8969b3b7c4dbd9dc40a32b238e7f4d6735f5172b180f66cb2536661b13d47",
+      "raw_bytes": 2491,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/retained/stdin.gz",
+      "sha256": "fe095e95e835bb961609d6ab89f7405a6e5e3466faec380344a3be28f4878201",
+      "bytes": 244
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/retained/stdout",
+      "raw_sha256": "490f4d5be0bdc78852ed4a418a9174ac3de1198f007ffee9e41792bfae1f5272",
+      "raw_bytes": 14235,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/retained/stdout.gz",
+      "sha256": "e04636f60e8d01203f075db9b63944b7ed73036d061dcb07c4728303fd2bcbb0",
+      "bytes": 1170
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/state.json",
+      "raw_sha256": "67429cb61a08985ac6d1b633378c457da4afbc2729c2c1ac9510940a6aff3dd1",
+      "raw_bytes": 1850,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/state.json.gz",
+      "sha256": "bfbb97d7d2130e1f2981257faecc5b9c23286173bffd0758459d01695d30810e",
+      "bytes": 606
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/truncated/process.json",
+      "raw_sha256": "2a06c41b81cc66760b877f442afac6986fbc3c7a4009778e68751ac4861096bb",
+      "raw_bytes": 399,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/truncated/process.json.gz",
+      "sha256": "885d0231cbb21de08dde8740cd057d9d9ca4a823fdfd0ff0e3563044fef22428",
+      "bytes": 253
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/truncated/stderr",
+      "raw_sha256": "2b7af9ac52d71d4fd63a6acddae1f5883951cb1591cce9ea607b0b582cc5c90e",
+      "raw_bytes": 56,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/truncated/stderr.gz",
+      "sha256": "838b3dd2d265f5262aa821caa50724af335da1e8782058c90200b7ef98904205",
+      "bytes": 74
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/truncated/stdin",
+      "raw_sha256": "41cbfda38a35128baf8ace5e231e922bb256c588e5cd83b0b6a6c6d959c30279",
+      "raw_bytes": 12,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/truncated/stdin.gz",
+      "sha256": "7f06dc155ee7cd2a2baab89fb431e64842ad79c0b9985780075d014e2bc9f79f",
+      "bytes": 32
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/deterministic/truncated/stdout",
+      "raw_sha256": "948408c9135ec9f106c6701ef5b94eee17284fb117f3fb0ea9cbd032648a41ac",
+      "raw_bytes": 538,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/deterministic/truncated/stdout.gz",
+      "sha256": "50a645df1a8710be9bda3be8348d880018c0717c820ee45eb3ba9f92bfa21ba0",
+      "bytes": 359
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/eof/process.json",
+      "raw_sha256": "a66bac3449260a00971e2e8954d93bdfab204a8b927e214b8d20c0a311bc32d7",
+      "raw_bytes": 381,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/eof/process.json.gz",
+      "sha256": "d5fd80d997529c3bb3e88fce313f08903a33623bdf98f87670283e80995be784",
+      "bytes": 246
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/eof/stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/eof/stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/eof/stdin",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/eof/stdin.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/eof/stdout",
+      "raw_sha256": "f79950f6f5fd77e85eba9bdac1067c7f8402a7b9d28c492473e4ed0691e8b920",
+      "raw_bytes": 520,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/eof/stdout.gz",
+      "sha256": "b11ab2907d823bba873ba728e115421c4340b245ebc7cbb9e83700bf9c3effbe",
+      "bytes": 350
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/observe.json",
+      "raw_sha256": "314186bd609b9d6c2a1ad4df09e4bd793628fb7089562c80587e39a5a4ea5f2a",
+      "raw_bytes": 130,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/observe.json.gz",
+      "sha256": "14f3c24f87dc504faf89e22720b0db682c734b9a22034a96e2d46f2f9ef4c623",
+      "bytes": 108
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/oversized/process.json",
+      "raw_sha256": "57f7d8eb320ba38d44904d0f67a85035f03c2698726b49c00016836185e3b2a4",
+      "raw_bytes": 381,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/oversized/process.json.gz",
+      "sha256": "301adda17265559f52ca5bafff2052c948dc24aea895bed44010894acd7a2240",
+      "bytes": 246
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/oversized/stderr",
+      "raw_sha256": "b7e97222222f09068e998387125a5d82c3974dd3d1f9dd72f661ae3881cd2e2a",
+      "raw_bytes": 62,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/oversized/stderr.gz",
+      "sha256": "83feb3b9d9af55ee7493fe4db2812df12fa596db0913b7364929b720bbaf9e79",
+      "bytes": 80
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/oversized/stdin",
+      "raw_sha256": "27cb03b898e978f2493818e414119edabc05246a6697a65ea42b21b682dc07d4",
+      "raw_bytes": 262145,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/oversized/stdin.gz",
+      "sha256": "c24491f731cf3c730c6579ff07371be84114ca0a256241e696c44205bea8b3a7",
+      "bytes": 290
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/oversized/stdout",
+      "raw_sha256": "f79950f6f5fd77e85eba9bdac1067c7f8402a7b9d28c492473e4ed0691e8b920",
+      "raw_bytes": 520,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/oversized/stdout.gz",
+      "sha256": "b11ab2907d823bba873ba728e115421c4340b245ebc7cbb9e83700bf9c3effbe",
+      "bytes": 350
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/retained/process.json",
+      "raw_sha256": "a66bac3449260a00971e2e8954d93bdfab204a8b927e214b8d20c0a311bc32d7",
+      "raw_bytes": 381,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/retained/process.json.gz",
+      "sha256": "d5fd80d997529c3bb3e88fce313f08903a33623bdf98f87670283e80995be784",
+      "bytes": 246
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/retained/stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/retained/stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/retained/stdin",
+      "raw_sha256": "81c8969b3b7c4dbd9dc40a32b238e7f4d6735f5172b180f66cb2536661b13d47",
+      "raw_bytes": 2491,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/retained/stdin.gz",
+      "sha256": "fe095e95e835bb961609d6ab89f7405a6e5e3466faec380344a3be28f4878201",
+      "bytes": 244
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/retained/stdout",
+      "raw_sha256": "a37d0a8bc59d5be079c25f782c76e6b135315944453423881029336179513f58",
+      "raw_bytes": 14217,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/retained/stdout.gz",
+      "sha256": "7e53ef736e3c73ad0ed34cca02a0895f85cc64830a0daa2f3fbe676b9f19ee8f",
+      "bytes": 1164
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/state.json",
+      "raw_sha256": "b24ab7da778fed57f462b965700b2aa965d61fd1134745b040bb51ec42673840",
+      "raw_bytes": 1850,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/state.json.gz",
+      "sha256": "ec74345f067cc054f4285cc4626ce5e9ec0955d0294a0b8ca29d5b8f2e5a7af5",
+      "bytes": 606
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/truncated/process.json",
+      "raw_sha256": "57f7d8eb320ba38d44904d0f67a85035f03c2698726b49c00016836185e3b2a4",
+      "raw_bytes": 381,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/truncated/process.json.gz",
+      "sha256": "301adda17265559f52ca5bafff2052c948dc24aea895bed44010894acd7a2240",
+      "bytes": 246
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/truncated/stderr",
+      "raw_sha256": "2b7af9ac52d71d4fd63a6acddae1f5883951cb1591cce9ea607b0b582cc5c90e",
+      "raw_bytes": 56,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/truncated/stderr.gz",
+      "sha256": "838b3dd2d265f5262aa821caa50724af335da1e8782058c90200b7ef98904205",
+      "bytes": 74
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/truncated/stdin",
+      "raw_sha256": "41cbfda38a35128baf8ace5e231e922bb256c588e5cd83b0b6a6c6d959c30279",
+      "raw_bytes": 12,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/truncated/stdin.gz",
+      "sha256": "7f06dc155ee7cd2a2baab89fb431e64842ad79c0b9985780075d014e2bc9f79f",
+      "bytes": 32
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/fast/truncated/stdout",
+      "raw_sha256": "f79950f6f5fd77e85eba9bdac1067c7f8402a7b9d28c492473e4ed0691e8b920",
+      "raw_bytes": 520,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/fast/truncated/stdout.gz",
+      "sha256": "b11ab2907d823bba873ba728e115421c4340b245ebc7cbb9e83700bf9c3effbe",
+      "bytes": 350
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/result.json",
+      "raw_sha256": "d71180f9e8beeb05082663971706bb4e70daef533566874c9ba0be5f0d4560e4",
+      "raw_bytes": 751,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/result.json.gz",
+      "sha256": "c3336d07b903ed832354fa746c7b5d6e8d0b1640bf8e832833d8c645d90321d3",
+      "bytes": 399
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/proof/rpc.json",
+      "raw_sha256": "66b12740abe5131aeeb072a34da40c33ed478c3b073672bde9cacf533a586a72",
+      "raw_bytes": 8528,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/proof/rpc.json.gz",
+      "sha256": "cff479d833dc611cdb65287f04948ec654ace9391770f4502eb3eec6c76e74b9",
+      "bytes": 1089
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-process-001/stdout",
+      "raw_sha256": "2d0c1457c57c80f5bfc66182f7b6e1391e3da9417c36754bdd71e219d1ca75d6",
+      "raw_bytes": 123,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-process-001/stdout.gz",
+      "sha256": "e9db22b4818c5dd3e3e4d04d5d683dc6bb37b4eb5e05ef7a0f6a229fb40698cf",
+      "bytes": 123
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-closure-001/0.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-closure-001/0.stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-closure-001/0.stdout",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-closure-001/0.stdout.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-closure-001/1.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-closure-001/1.stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-closure-001/1.stdout",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-closure-001/1.stdout.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-closure-001/2.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-closure-001/2.stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-closure-001/2.stdout",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-closure-001/2.stdout.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-closure-001/result.json",
+      "raw_sha256": "c3a811364cccd8e809fd788e112efbcba7a79840b310221b58762d6a193bb978",
+      "raw_bytes": 342,
+      "retained": "docs/spikes/evidence/native-play-worker/native-play-worker-closure-001/result.json.gz",
+      "sha256": "b641b548fe25c606ff7f3ab2200bb00e4004aab444876a3b70504ebb036b4667",
+      "bytes": 148
+    }
+  ],
+  "external_binaries": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/incant_headless-deterministic",
+      "raw_sha256": "004afcafda745d32d34f03277a0950bcca3531a9220a784c7c4652814f5e92c4",
+      "raw_bytes": 60464384
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-play-worker-003/incant_headless-fast",
+      "raw_sha256": "c18fc98c8567ccbc0c46eb29656b98d178a790ded126e292fb10b4935b2078ba",
+      "raw_bytes": 60093280
+    }
+  ],
+  "historical_attempts": {
+    "native-play-worker-001": "One test failed: Serde unit Stop accepted an unknown field. Changed it to a strict empty struct variant; original failure retained.",
+    "native-play-worker-002": "Five focused worker tests passed after correction."
+  },
+  "limits": [
+    "Native CPU protocol only, no editor GPU/window or shipping/device claim.",
+    "Movement fixture has no active physics bodies. PCM is not exposed by this worker.",
+    "No automatic editor worker startup or GPU viewport embedding yet.",
+    "Project SHA binds document startup; authored scripts are compiled once by the existing trusted cook.",
+    "CPU worker retains native state and selected observations, not a shipped-player distribution."
+  ]
+}

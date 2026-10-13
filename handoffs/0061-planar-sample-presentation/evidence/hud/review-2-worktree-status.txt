@@ -1,0 +1,12 @@
+ M handoffs/0061-planar-sample-presentation/tools/mutate.py
+ M samples/planar/PRESENTATION.md
+ M samples/planar/README.md
+ M samples/planar/art/cove.py
+ M samples/planar/art/terrain.py
+ M samples/planar/playtest.py
+ M samples/planar/scene.py
+ M tools/tests/test_planar_presentation.py
+?? crates/incant_game_player/examples/hud_frames.rs
+?? handoffs/0061-planar-sample-presentation/tools/hud_review.py
+?? handoffs/0061-planar-sample-presentation/tools/lease.py
+?? samples/planar/hud.py

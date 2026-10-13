@@ -578,6 +578,14 @@
       ],
       "type": "string"
     },
+    "PhysicsMode": {
+      "description": "Authoring choice for a separately built simulation process. Fast mode does\nnot promise bit-identical results across hardware or solver variants.",
+      "enum": [
+        "fast",
+        "deterministic"
+      ],
+      "type": "string"
+    },
     "Project": {
       "additionalProperties": false,
       "properties": {
@@ -655,6 +663,10 @@
         },
         "localization": {
           "$ref": "#/$defs/LocaleSettings"
+        },
+        "physics_mode": {
+          "$ref": "#/$defs/PhysicsMode",
+          "default": "deterministic"
         },
         "tick_rate": {
           "format": "uint32",

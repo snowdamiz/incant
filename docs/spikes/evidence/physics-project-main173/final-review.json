@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-12T22:33:05.166611+00:00",
+  "accepted": true,
+  "manifest_sha256": "a7ca1910cd14b536d4d048c30512972950db352bcd3b6eb34bcb77cee5d7daff",
+  "tested_head": "38dcd215b6165cebbeaadfa5f876113a3fdbb604",
+  "current_head": "9fee4c52e32c8142be53954211733f8a11584909",
+  "source_rows": 32,
+  "artifacts": 24,
+  "frozen_inputs": 1875,
+  "current_commands": 9,
+  "fresh_independent_schema_files": 70,
+  "source_comparison": "All32 changed source files equal accepted530; both1411-input engine freezes and all1875 current inputs rehashed. Source-identical Rust evidence reused, no new Rust build/test claim.",
+  "limits": [
+    "Nine current schema/generator/type/feature/fmt checks do not constitute a fresh Rust test or build.",
+    "Source-identical producer tests/Clippy are reused:134 document/command/cook/Play cases in each mode, plus later integrated65 cook/Play cases per mode, with overlap.",
+    "Settings atomically select requested family; mismatched processes explicitly refuse. Automatic editor/mode-aware process/export execution remains separately pending.",
+    "No GPU/device/performance/physics save claim."
+  ]
+}

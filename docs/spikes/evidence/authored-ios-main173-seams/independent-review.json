@@ -1,0 +1,29 @@
+{
+  "format": "incant-independent-source-review",
+  "scope": "Authored iOS current-main selected normal graph and fixed deterministic admission seam",
+  "reviewer": "astra /root/runtime_review",
+  "base": "a4a71b5793607e470a866dd8c69399e80e2bd7cd",
+  "patch_sha256": "8ecdc313707321ed8016792c8739d18dd85b624dac3eab2bc64e039fa201578b",
+  "producer_review_sha256": "5a81af7e6677a11b5d4ceed80fb3ee8a5306b40b569511a66b4132b62fbca075",
+  "sources": {
+    "tools/export_ios.py": "5faaaf0bda07469ed7a957093890c5c6d378470cc875a1161e9fc6011b033f94",
+    "tools/ios_archive.py": "8df7aa427e2c7b64d9856c23fbbbe04d4445fd449f0f17a2e15eedb3e6dd39e3",
+    "tools/tests/test_ios_export.py": "1b644055c3ace0a12e2d8815d58bd6aa6a32e22ed4acdaf34cc0e7786952fbe0",
+    "tools/physics_features.py": "514b60331bf9610505eaf2ed4f603186cd918273898c334a2611c92d2fd31821"
+  },
+  "decision": "accepted",
+  "findings": [],
+  "verified": [
+    "Exact three-file diff and every producer retained artifact hash",
+    "Selected cargo tree uses same package/features/target/defaults-off as staticlib invocation; normal-only traversal excludes unrelated workspace and build-host authoring edges",
+    "Project fast/invalid physics selection refused before build; producer receipt independently binds deterministic mode and variant",
+    "Actual target artifacts are audited for both Rapier, both Parry and Simba under requested target/profile output, distinct from build-host units",
+    "Original target codegen, bytecode compiler refusal, archive/platform and create-only publication checks remain in force",
+    "Ten helper test results and selected 217-package graph retained; read but not rerun"
+  ],
+  "limits": [
+    "Source/evidence review only; no new archive build, simulator/device execution, signing, GPU or performance claim",
+    "Fixed deterministic iOS route only; no fast mobile expansion",
+    "Cargo/compiler receipt evidence is not binary authentication"
+  ]
+}

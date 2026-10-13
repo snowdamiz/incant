@@ -11,7 +11,9 @@ use incant_ui::{UiEvent, UiFonts, UiRuntime, Widget};
 use std::{fs, sync::Arc};
 const FONT: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSans-Regular.ttf");
 fn fixture(root: &std::path::Path) -> (CommandBus, String, String, String) {
-    let mut bus = CommandBus::new(Project::empty("UI")).unwrap();
+    let mut project = Project::empty("UI");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
+    let mut bus = CommandBus::new(project).unwrap();
     fs::write(root.join("font.ttf"), FONT).unwrap();
     let imported = ImportSnapshot::capture(&bus)
         .prepare(

@@ -25,6 +25,9 @@ fn fixture(root: &Path) -> (String, String) {
         .insert("Velocity".into(), json!({"linear":[2.,0.,0.]}));
     bus.execute(
         vec![
+            Command::SetPhysicsMode {
+                mode: incant_runtime::PHYSICS_VARIANT.mode(),
+            },
             Command::CreateEntity {
                 scene_id: sid.clone(),
                 entity,

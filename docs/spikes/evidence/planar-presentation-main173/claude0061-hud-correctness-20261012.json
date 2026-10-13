@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-12T22:00:22.598618+00:00",
+  "reviewer": "astra root correctness only",
+  "commit": "bdfbff1543a7fd63e3348c62529303940aa6df33",
+  "decision": "accepted bounded local offscreen HUD presentation packet",
+  "findings": [],
+  "source_files": 87,
+  "actual_hud_captures_verified": 28,
+  "locale_variants": 5,
+  "root_public_authoring_scenarios": 7,
+  "public_undo_redo_reopen": true,
+  "root_run": "1492 terminal0/reaped",
+  "root_unit_tests": 5,
+  "review_json_sha256": "628dd2b5fe10ec049277594561578e50df417274124f1c61b9b98fe9b8ca45dc",
+  "root_source_manifest_sha256": "ec4a540f5b2a1e59cb971e4bbb376f2cad12f64125d7461f980c7ece2f44b831",
+  "root_authoring_result_sha256": "03558ddda369e2e99cdaa7a2d83f0c2b296e063c6b5f79c81407d246929a6572",
+  "limits": [
+    "Rendered appearance accepted by Claude Opus5.5 Max; Astra checked code, data, hashes and public CPU behavior.",
+    "Native window review remains pending0060 lease release; no window was opened by this audit.",
+    "ci-profile Mac offscreen/CPU evidence only, not audited shipping, reference-phone or performance gates.",
+    "Restart and localized terminal-headline bindings remain open; no audio.",
+    "Source packet depends on the independently reviewed Planar presentation hooks; integrate those before/with art."
+  ]
+}

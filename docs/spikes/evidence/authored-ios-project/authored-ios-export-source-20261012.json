@@ -1,0 +1,34 @@
+{
+  "reviewer": "astra root",
+  "at": "2026-10-12T21:25:19.565022+00:00",
+  "source_manifest": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-project-001/source-freeze-002/inventory.json",
+  "source_manifest_sha256": "0d26591311116d65047d95ec4a91f701172c3c9f3b497b067e116427c0413402",
+  "files": {
+    "crates/incant_cook/src/lib.rs": "685ce5c8f8e2b49adbb64aa41c8731d1bd83ef0a185bdfb0f17932fd840b4498",
+    "crates/incant_cook/src/project_build.rs": "6a887e6e71602ea8750703f3380d211ce652c78f88691f2214496238a8cf9c22",
+    "crates/incant_cook/src/project_script.rs": "55d73108542cd3e0eaa98453031cf33d3f6f002fa92fc74ace1c513378453fec",
+    "crates/incant_cook/src/script.rs": "519137b70669a234847612e4f6bc5193bafe93af85b1f0bb474884ef06ab2ece",
+    "crates/incant_cook/src/typescript.rs": "0b3d63a698e1fb251865fd2f9d936a87d1a655021567b8ea9904fd540b196dd9",
+    "crates/incant_cook/tests/mobile_project.rs": "d8722dce5e80cb4c9c287dadb2cd00fbab6047e21c6208554c23cf335bdf8220",
+    "crates/incant_game_player/build.rs": "6a2020028dabbdf2cf3809c2ee77afa7baee9b548eb7f68ebbab3210642a923d",
+    "crates/incant_script/src/compiler.rs": "1de5c6bd1207c571b21cbdcb425cd9d1026e6c156e60cbaa5c4d00c8b8134f87",
+    "tools/export_ios.py": "ecfcfc615c4d3e714447e1ce1d4b791ecc0bf5f3570618a97f6abd769433fa05",
+    "tools/ios_archive.py": "b93afc6c9b974ba90bb294bb13296952ee2f2e0c4018973878809951459632f5",
+    "tools/tests/test_ios_export.py": "a31bf7d0f5491536f523089e68075013cc07fd40fcf24cf7bac793e2905179b8"
+  },
+  "decision": "accepted source; actual shipping and simulator proof pending",
+  "findings": [],
+  "verification": [
+    "Read all11sourcefiles; exactfreezehashes verified",
+    "Root reran9Python tests, including real subprocess failure/audit retention",
+    "Closed MacARM-iOS producer and target object platform identity, no forged runtime input",
+    "Shipping flags and no runtime authoring/JIT dependencies checked from actualtarget commands",
+    "Unlinked parser definitions explicitly retained in report; require final caller dead_strip symbol audit",
+    "Review suggestion to retain all audit command streams implemented; source-freeze001 history retained"
+  ],
+  "test_log_sha256": "94c02d8ee3c4496bd9f55c875e8a5f3fdb46c55c40951ecaec54e90e44cd048d",
+  "limits": [
+    "No iOS archive execution or reference-phone gate accepted yet",
+    "Current base fixed deterministic parallel kernel; later selectablephysics union must enforce matchingcook/runtime modes"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-12T23:05:41.588700+00:00",
+  "accepted": true,
+  "base": "80aad2dd9a6db6fcacfa17a5465de369e8eaf39b",
+  "manifest_sha256": "e794110c2412279245c0b468d26e4eeab266a259868672de0d55f665ce8a5bc8",
+  "source_sha256": {
+    "tools/native_process.py": "5f7c07e0f8e79d8db807d0fa85016b86a241de164ff545826baf223f847ec6c6",
+    "tools/play_native.py": "ced684f2e256e7966089dbc683f51ce07d1862a6bcc6470a3c5bcb4d4e4a3d86",
+    "tools/play_worker.py": "bf01f9e01017e86816e5d4dcefe260fb5328ad8187faa9b4691711ac9e2d3750",
+    "tools/tests/test_native_process.py": "56615130027cc79877a2e9697b61cfc0bf3315bc1fe53c58ae04fe161637ed96",
+    "tools/tests/test_play_worker.py": "0933a10ac81cc83b354a9ef4e8a68f912388d57a90571c7f3b9d1010cd7b5d9a",
+    "tools/probes/native-worker-owner.py": "e949346123c50971d8fe806e4d33b038d51510ca824a2a54bc96df03541110dd"
+  },
+  "source_review": [
+    "Reviewed complete six-file process ownership, prepare/copy locking, bounded worker client, tests and actual public process helper.",
+    "Windows Job assignment gate reads exactly three bytes with os.read before inheriting stdin; POSIX process-group identity remains owned until kill/reap.",
+    "Deadline/read/write errors close the owned process tree and join the IO thread before temporary executable cleanup. Protocol mismatches are terminal; native admission errors consume sequence without silently resetting the session.",
+    "Fixed P3: Darwin observer constructor failure now closes interactive stdin as well as stdout/stderr; actual failure-injection test checks a reaped process and all three closed descriptors."
+  ],
+  "resolved_findings": [
+    {
+      "priority": "P3",
+      "issue": "Interactive stdin descriptor omitted from Darwin observer-construction failure cleanup",
+      "status": "fixed",
+      "evidence": "One deterministic red failure; corrected focused 54 discovered / 4 Windows skips pass."
+    }
+  ],
+  "remaining_findings": [],
+  "verified": {
+    "retained_raw_pairs": 43,
+    "source_inputs": 6,
+    "prior_freeze": 1850,
+    "post_proof_changed_files": [
+      "tools/native_process.py",
+      "tools/tests/test_native_process.py"
+    ],
+    "actual_modes": [
+      "deterministic",
+      "fast"
+    ],
+    "actual_ticks_per_mode": 12,
+    "actual_one_shot_and_caller_failure_cleanup": true,
+    "full_tools_before_cleanup_fix": {
+      "python_discovered": 292,
+      "python_skipped": 4,
+      "node_passed": 22
+    },
+    "focused_after_fix": {
+      "discovered": 54,
+      "skipped": 4
+    }
+  },
+  "reuse_scope": "Only post-proof change closes interactive stdin on Darwin observer construction failure; regression failed before and passed after. Actual mode selection, successful lifetimes and compiler inputs unchanged.",
+  "limits": [
+    "Developer CPU worker only; editor/GPU, Windows execution and phone performance are separate.",
+    "Movement fixture has no active solver bodies; no solver parity/speed claim.",
+    "Windows gated stdin and Job Object changes are source-reviewed; Windows execution is deferred to release CI.",
+    "The interactive process owner trusts fixed engine executables, not arbitrary guest commands.",
+    "Trusted fixed engine process ownership is not an untrusted-executable sandbox.",
+    "No new independent rebuild or actual Windows execution was performed by this reviewer."
+  ]
+}

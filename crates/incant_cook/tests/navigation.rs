@@ -10,6 +10,7 @@ use serde_json::json;
 use std::sync::Arc;
 fn fixture(mesh: bool) -> (Project, String, String, String) {
     let mut p = Project::empty("Cook navigation");
+    p.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut s = Scene::new("World");
     let mut source = Entity::new("Floor");
     source.components.insert(

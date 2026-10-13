@@ -41,7 +41,9 @@ fn fixture(root: &Path) -> String {
         line_height: 24.,
         wrap: TextWrap::WordOrGlyph,
     };
-    let mut commands = vec![];
+    let mut commands = vec![Command::SetPhysicsMode {
+        mode: incant_runtime::PHYSICS_VARIANT.mode(),
+    }];
     for n in 1..=4 {
         let mut e = Entity::new("Fixture");
         e.id = id(n);

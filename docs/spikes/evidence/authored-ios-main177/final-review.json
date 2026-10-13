@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-12T23:10:11.353057+00:00",
+  "result": "accepted",
+  "head": "910948b3a1baa81b0617be0de915b55ea3733d32",
+  "manifest_sha256": "b49aa30cd12f21d8055a286485e90c588225fd27f9cbb8c47b03ad9733574e55",
+  "verification": {
+    "artifacts": 311,
+    "binaries": 9,
+    "source_freeze": 1930,
+    "sources": 16,
+    "checks": 18,
+    "actual_simulator_positives": 6,
+    "observations": 432,
+    "logs": 216,
+    "refusals": 14,
+    "commands": 41,
+    "pcm": "exact nonzero native oracle",
+    "source_cache_build_maps_removed": true,
+    "simulator_shutdown_delete": true,
+    "shipping_archive_codegen_and_five_solver_features": true
+  },
+  "limits": [
+    "Actual iPhone 18 Pro / iOS 27.0 simulator CPU callers, not physical-device execution. No GPU, window, signing or reference-phone/performance gate.",
+    "Unsigned device archive and C/Swift links only; no device launch.",
+    "Fixed deterministic parallel physics only; fast authored iOS projects refuse before build. Android authored export and mobile static Wasm remain denied in this slice.",
+    "Archive retains developer symbols separately; runtime/caller symbols are audited and private authoring/cache/build/maps removed before execution.",
+    "No editor process-worker integration or complete mobile runtime host claim."
+  ],
+  "method": "Read and independently re-evaluated complete collector export/caller assertions; rehashed retained lossless payloads, original logs, source identities and preserved executables. No re-execution or source mutation."
+}

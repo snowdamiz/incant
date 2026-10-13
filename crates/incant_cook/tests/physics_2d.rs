@@ -8,6 +8,7 @@ use incant_doc::{Entity, Project, Scene, Transform, new_id};
 use std::collections::BTreeMap;
 fn fixture() -> (Project, String, String) {
     let mut p = Project::empty("Planar cook");
+    p.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     p.settings.tick_rate = 64;
     let scene = new_id();
     let entity = new_id();
