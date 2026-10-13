@@ -36,3 +36,14 @@ repeating unchanged shipping builds while making the tested identities explicit.
 [graph relevance](evidence/native-cpu-profiler-main194/graph-relevance.json) retain
 the exact current checks and qualified reuse. The feature remains opt-in; no GUI,
 GPU, native-window, phone, performance gain or full PLAN profiler gate is approved.
+
+The first PR fast check exposed an isolated native-physics probe lock missing the
+new no-op profiler edge and a test scanning archived Cargo manifests as live
+packages. The correction adds only that exact local lock edge and derives actual
+workspace/patch roots while preserving genuine duplicate and missing-file refusal.
+A decoy-evidence regression passes. All 366 Python controls (four existing platform
+skips) and 22 Node controls pass; the failed hosted log and local red/green logs are
+[retained](evidence/native-cpu-profiler-main194/tooling-repair.json). The exact raw
+source-diff whitespace attribute preserves its context bytes. A bounded
+[qualification](evidence/native-cpu-profiler-main194/qualify-tooling.py) replays the
+original collector without rewriting its evidence or claiming another Rust run.
