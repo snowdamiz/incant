@@ -15,9 +15,8 @@ offset 68 of the existing 80-byte instance row. The second MRT is R32Uint, with
 no blending. Clear and excluded surfaces write zero. The original Motion/Depth,
 fixed resolve/copy, bloom, output and cluster shader sources are unchanged.
 The existing four-program temporal cooker adds only MotionOwner; all old source
-hashes/contracts remain unchanged. Qualification will compare actual old native
-payload bytes after the explicit recook, rather than infer equality from hashes
-of WGSL alone. Default runtime behavior and Cargo feature definitions are unchanged.
+hashes/contracts remain unchanged. Qualification compares actual old native payload bytes after the explicit
+recook, rather than inferring equality from hashes of WGSL alone. Default runtime behavior and Cargo feature definitions are unchanged.
 
 Main has no upscaler or MetalFX history owners. Admission therefore accounts only
 for the actual accepted and candidate motion/depth plus integer target sets. It
@@ -48,8 +47,26 @@ binary `fc3cd756`; compiling native-MetalFX features did not enable that backend
 in the test. It proves only the tested attachment substrate, not appearance,
 history consumption, new native-backend behavior or performance.
 
-Current-main source review is independently accepted (`fcfc04e6`). Scoped
-CPU/recook checks are pending. The ignored
+Current-main source review is independently accepted (`fcfc04e6`). The exact
+`a692ef6e` source passes all seventeen final commands: 33 shader-cooker cases,
+146 default and 175 overlapping cooked CPU cases (104 GPU cases ignored in
+each renderer suite), strict renderer/cooker Clippy, browser and native-window
+consumer checks, graph/format/conventions checks and one exact partial-cooked
+refusal case. Explicit recooking reproduces all 27 prior temporal/cluster native
+payloads byte-for-byte, and all six owner native payloads match the reviewed
+producer. Both new owner stages pass actual Metal compile/link and SPIR-V
+validation; HLSL is retained without a DXC execution claim.
+
+The first partial-cooked test filter omitted the internal `models::` module and
+matched zero tests. The runner's explicit count assertion stopped qualification
+instead of accepting it. Original output/controller failure are retained; only
+the corrected exact filter and remaining guards ran afterward. No source change
+or repetition of passing expensive checks was needed. The final packet retains
+134 raw records / 97 payloads, all 3,545 frozen inputs and four immutable current
+test binaries; producer evidence retains 213 records / 127 payloads and two
+binary identities separately. Independent final integration review is pending.
+[Manifest](evidence/temporal-owner-main228.json) and
+[read-only verifier](evidence/temporal-owner-main228/verify.py). The ignored
 GPU test has not run on this composition. There is no color-history consumer,
 reactivity repair, default enablement, physical GPU residency bound or phone gate
 claim. The full original producer documents and raw evidence remain historical.
