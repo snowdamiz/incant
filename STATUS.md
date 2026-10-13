@@ -109,7 +109,7 @@ appearance acceptance remains source-specific; no new appearance claim is made.
 Native cooked output refuses bloom explicitly. Independent final integration
 review and exact main221 source relevance are independently accepted; PR222 merged after the required fast check. [Scope and evidence](docs/spikes/bloom-main219.md).
 
-## Physics pipeline boundary — inert producer, final review pending
+## Physics pipeline boundary — composed source and CPU evidence
 
 The [pipeline capture slice](docs/spikes/physics-pipeline-boundary.md) preserves
 exact gravity and the historical `None`/false/true staged CCD verdict with checked
@@ -118,7 +118,11 @@ fresh pipelines can differ in CCD cache and substep counters after the last body
 is removed, while serialized owners remain equal; no trajectory difference is
 claimed. Deferred work, quarantine, nonpositive or unverified phases refuse.
 Independent source review, both 176-case CPU modes, 20 parallel controls and all
-ten qualification commands pass. Whole-owner provenance, derived geometry/work
+ten producer qualification commands pass. The actual broad/narrow/CCD composition
+passes 192 default and 192 fast8 CPU cases plus explicitly pinned two-worker
+controls; fifteen commands pass. Final current composition review is pending.
+[Current composition](docs/spikes/physics-pipeline-main222.md).
+Whole-owner provenance, derived geometry/work
 checks, live construction and exact physics save admission remain open.
 
 ## Static Wasm C builds — bounded local scheduling verified
