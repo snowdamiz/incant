@@ -1,0 +1,245 @@
+{
+ "sun_travel": [
+  0.6824,
+  -0.6157,
+  0.394
+ ],
+ "ground_corners": [
+  [
+   1.566,
+   -0.504
+  ],
+  [
+   3.783,
+   0.776
+  ],
+  [
+   3.566,
+   -0.504
+  ],
+  [
+   5.783,
+   0.776
+  ]
+ ],
+ "poses": {
+  "viewport-pan-f24": {
+   "rect": [
+    37.0,
+    19.0,
+    885.0,
+    501.0
+   ],
+   "pan_step": 8,
+   "grille_shadow": [
+    [
+     443.861,
+     278.838
+    ],
+    [
+     550.478,
+     274.514
+    ],
+    [
+     695.231,
+     300.544
+    ],
+    [
+     579.894,
+     305.846
+    ]
+   ],
+   "card": [
+    [
+     434.447,
+     269.658
+    ],
+    [
+     541.105,
+     265.498
+    ],
+    [
+     546.516,
+     159.493
+    ],
+    [
+     430.414,
+     161.989
+    ]
+   ]
+  },
+  "full-still": {
+   "rect": [
+    0.0,
+    0.0,
+    960.0,
+    540.0
+   ],
+   "pan_step": 0,
+   "grille_shadow": [
+    [
+     547.977,
+     279.53
+    ],
+    [
+     664.549,
+     279.53
+    ],
+    [
+     835.6,
+     315.276
+    ],
+    [
+     703.485,
+     315.276
+    ]
+   ],
+   "card": [
+    [
+     538.131,
+     269.267
+    ],
+    [
+     654.393,
+     269.267
+    ],
+    [
+     669.945,
+     153.577
+    ],
+    [
+     543.315,
+     153.577
+    ]
+   ]
+  },
+  "full-pan-f6": {
+   "rect": [
+    0.0,
+    0.0,
+    960.0,
+    540.0
+   ],
+   "pan_step": 6,
+   "grille_shadow": [
+    [
+     468.2,
+     279.314
+    ],
+    [
+     583.015,
+     275.82
+    ],
+    [
+     741.929,
+     305.609
+    ],
+    [
+     616.327,
+     309.941
+    ]
+   ],
+   "card": [
+    [
+     458.173,
+     269.348
+    ],
+    [
+     572.944,
+     265.99
+    ],
+    [
+     581.118,
+     151.611
+    ],
+    [
+     456.226,
+     153.626
+    ]
+   ]
+  },
+  "viewport-still": {
+   "rect": [
+    37.0,
+    19.0,
+    885.0,
+    501.0
+   ],
+   "pan_step": 0,
+   "grille_shadow": [
+    [
+     542.568,
+     278.341
+    ],
+    [
+     650.721,
+     278.341
+    ],
+    [
+     809.418,
+     311.506
+    ],
+    [
+     686.845,
+     311.506
+    ]
+   ],
+   "card": [
+    [
+     533.433,
+     268.82
+    ],
+    [
+     641.298,
+     268.82
+    ],
+    [
+     655.727,
+     161.485
+    ],
+    [
+     538.242,
+     161.485
+    ]
+   ]
+  }
+ },
+ "grille_sampling_cascade_1": {
+  "viewport unguarded": {
+   "bar_width_texels": {
+    "x": 0.363,
+    "y": 0.391
+   },
+   "vertical_bar_spacing_texels": 1.451,
+   "horizontal_bar_spacing_texels": 2.346
+  },
+  "viewport guarded": {
+   "bar_width_texels": {
+    "x": 0.361,
+    "y": 0.389
+   },
+   "vertical_bar_spacing_texels": 1.445,
+   "horizontal_bar_spacing_texels": 2.337
+  },
+  "960x540": {
+   "bar_width_texels": {
+    "x": 0.36,
+    "y": 0.388
+   },
+   "vertical_bar_spacing_texels": 1.439,
+   "horizontal_bar_spacing_texels": 2.328
+  }
+ },
+ "cascade_texels_lines": [
+  "== shadow of the card on the ground (y = 0), still pose",
+  "  ground (+1.566, -0.504): view depth 9.934 (cascade 1 or blend), viewport pixel (542.6, 278.3)",
+  "  ground (+3.783, +0.776): view depth 8.765 (cascade 1 or blend), viewport pixel (686.8, 311.5)",
+  "  ground (+3.566, -0.504): view depth 9.934 (cascade 1 or blend), viewport pixel (650.7, 278.3)",
+  "  ground (+5.783, +0.776): view depth 8.765 (cascade 1 or blend), viewport pixel (809.4, 311.5)",
+  "== shadow of the card on the ground (y = 0), last pan pose (f24)",
+  "  ground (+1.566, -0.504): view depth 9.914 (cascade 1 or blend), viewport pixel (443.9, 278.8)",
+  "  ground (+3.783, +0.776): view depth 8.945 (cascade 1 or blend), viewport pixel (579.9, 305.8)",
+  "  ground (+3.566, -0.504): view depth 10.089 (cascade 1 or blend), viewport pixel (550.5, 274.5)",
+  "  ground (+5.783, +0.776): view depth 9.120 (cascade 1 or blend), viewport pixel (695.2, 300.5)"
+ ]
+}

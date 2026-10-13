@@ -1,35 +1,37 @@
 #!/usr/bin/env python3
-"""CPU-only child checkout, toolchain identity and frozen builds for handoff 0072's
-corrected-source temporal review. Standard library only; Python 3.12+ (tarfile's
-data filter). Root supervises these steps in the foreground; never a background
-build.
+"""CPU-only child checkouts, toolchain identity and frozen builds for handoff
+0076's shadow receiver guard comparison. Standard library only; Python 3.12+
+(tarfile's data filter). Root supervises these steps in the foreground; never a
+background build.
 
-Adapted from this packet's original build.py (from handoff 0068) with the
-accepted 0073 source-pin routine reused read-only. It never runs a built
-executable. Every step passes the build grant/stop/lease gate and runs one
-bounded process group under the packet flock with deferred signals; any failed
-build or source mismatch latches stop.json.
+Adapted narrowly from 0072's build.py (48a688c5, with root's cd4f4cd7 fix) and
+its accepted 0073 source-pin routine, now per role: `baseline` and `candidate`
+each get their own `git archive` export, build record and frozen binary, built
+with identical arguments, one after the other in the one granted Cargo target.
+It never runs a built executable. Every step passes the build grant/stop/lease
+gate and runs one bounded process group under the packet flock with deferred
+signals; any failed build or source mismatch latches stop.json. No library test
+binary is built: this slice reruns no numeric control.
 
-Source pinning comes only from root's build-ready.json: a 40-hex commit object
-(never a branch name) and root's source freeze by path and SHA-256. The checkout
-is a `git archive` export of that commit (blob- and mode-verified). The freeze
-must name the same commit if it names one, and its rows must cover every build
-input exactly: the same paths under the plan's build-input roots, each with the
-same SHA-256 and byte size; every other freeze row present in the commit must
-match too.
+Source pinning comes only from root's build-ready.json: per role a 40-hex commit
+object (never a branch name, and equal to the plan's) and root's source freeze
+by path and SHA-256. The checkout is a `git archive` export of that commit (blob-
+and mode-verified). The freeze must name the same commit if it names one, and
+its rows must cover every build input exactly: the same paths under the plan's
+build-input roots, each with the same SHA-256 and byte size; every other freeze
+row present in the commit must match too.
 
-  python3 -I -B handoffs/0072-motion-history-numeric/visual/tools/build.py <step>
+  python3 -I -B handoffs/0076-shadow-guard-review/visual/tools/build.py <step> <role>
 
-Steps:
-  checkout   export and verify the granted commit against the granted freeze
-  toolchain  rustc/cargo versions (no compilation) plus OS and hardware model
-  libtests   optional: only if root supplies no frozen same-source library test
-             binary; builds the incant_render library tests (--no-run, no other
-             package or suite) and freezes that one binary
-  review     copy the committed fixture into the checkout, build it (--no-run),
-             freeze it; review.json is the build record the GPU grant binds
-  lint       optional, CPU only, while the lease is held: clippy -D warnings on
-             the review fixture target
+Steps (role is baseline or candidate):
+  checkout   export and verify the role's granted commit against its freeze
+  toolchain  rustc/cargo versions in the role's checkout (no compilation) plus OS
+             and hardware model
+  review     copy the committed fixture into the role's checkout, build it
+             (--no-run), freeze it; build/<role>/review.json is the record the
+             GPU grant binds
+  lint       CPU only, while the lease is held: clippy -D warnings on the role's
+             review fixture target
 """
 
 import json
@@ -120,7 +122,7 @@ def under(path, roots):
     return any(path == root or path.startswith(root + "/") for root in roots)
 
 
-def freeze_coverage(rows, entries, roots):
+def freeze_coverage(rows, entries, roots, checkout_root):
     """Exact build-input coverage: the freeze and the exported commit name the same
     paths under every build-input root, and every freeze row matches its file."""
     exported = {entry["path"] for entry in entries}
@@ -128,7 +130,7 @@ def freeze_coverage(rows, entries, roots):
     frozen = {path for path in rows if under(path, roots)}
     mismatched = []
     for path, row in sorted(rows.items()):
-        file = c.CHECKOUT / path
+        file = checkout_root / path
         if path not in exported or not file.is_file():
             continue
         if c.sha(file) != row["sha256"] or (row["bytes"] is not None
@@ -144,21 +146,23 @@ def freeze_coverage(rows, entries, roots):
     return result
 
 
-def checkout():
+def checkout(role):
     data, grant_sha = c.build_gate()
     tools = c.tools_identity(data)
     if sys.version_info < (3, 12):
         c.refuse("checkout needs Python 3.12+ for tarfile's data filter")
-    commit = data["source_commit"]
-    if c.CHECKOUT.exists() or (c.BUILD / "checkout.json").exists():
-        c.refuse("child checkout already exists; it is never replaced")
+    source = data["sources"][role]
+    commit = source["source_commit"]
+    root, build = c.checkout_dir(role), c.build_dir(role)
+    if root.exists() or (build / "checkout.json").exists():
+        c.refuse(f"the {role} checkout already exists; it is never replaced")
     kind = subprocess.run(["git", "cat-file", "-t", commit], cwd=c.ROOT, capture_output=True,
                           text=True).stdout.strip()
     if kind != "commit":
         c.refuse(f"granted source {commit} is not a commit in the local object store")
-    freeze_path = Path(data["source_freeze"]["path"])
-    if not freeze_path.is_file() or c.sha(freeze_path) != data["source_freeze"]["sha256"]:
-        c.refuse("the granted source freeze is absent or its SHA-256 differs from the grant")
+    freeze_path = Path(source["source_freeze"]["path"])
+    if not freeze_path.is_file() or c.sha(freeze_path) != source["source_freeze"]["sha256"]:
+        c.refuse(f"the granted {role} source freeze is absent or its SHA-256 differs from the grant")
     freeze = c.read_json(freeze_path)
     heads = {key: freeze[key] for key in FREEZE_HEADS if isinstance(freeze, dict) and key in freeze}
     if any(value != commit for value in heads.values()):
@@ -167,73 +171,78 @@ def checkout():
     tree = c.git("rev-parse", commit + "^{tree}").strip()
     entries = tree_entries(commit)
     with c.packet_lock():
-        c.CHECKOUT.mkdir(parents=True)
+        root.mkdir(parents=True)
         archive = subprocess.Popen(["git", "archive", "--format=tar", commit], cwd=c.ROOT,
                                    stdout=subprocess.PIPE)
         with tarfile.open(fileobj=archive.stdout, mode="r|") as stream:
-            stream.extractall(c.CHECKOUT, filter="data")
+            stream.extractall(root, filter="data")
         if archive.wait() != 0:
             c.refuse("git archive failed")
     mismatched = []
     for entry in entries:
-        path = c.CHECKOUT / entry["path"]
+        path = root / entry["path"]
         executable = bool(path.stat().st_mode & 0o100)
         if (path.is_symlink() or c.git_blob_sha1(path) != entry["blob"]
                 or executable != (entry["mode"] == "100755")):
             mismatched.append(entry["path"])
     listed = {entry["path"] for entry in entries}
-    extra = [str(Path(d, n).relative_to(c.CHECKOUT)) for d, _, names in os.walk(c.CHECKOUT)
-             for n in names if str(Path(d, n).relative_to(c.CHECKOUT)) not in listed]
+    extra = [str(Path(d, n).relative_to(root)) for d, _, names in os.walk(root)
+             for n in names if str(Path(d, n).relative_to(root)) not in listed]
     if mismatched or extra:
         c.refuse(f"export differs from {commit}: {mismatched[:5]} extra {extra[:5]}")
-    c.write_new_json(c.BUILD / "checkout.json", {
-        "commit": commit, "tree": tree, "files": entries,
+    c.write_new_json(build / "checkout.json", {
+        "role": role, "commit": commit, "tree": tree, "files": entries,
         "method": "git archive --format=tar | tarfile data filter", "recorded": c.now()})
-    coverage = freeze_coverage(rows, entries, c.plan()["build_inputs"])
-    c.write_new_json(c.BUILD / "source.json", {
-        "build_grant_sha256": grant_sha, "holder": data["holder"], "tools": tools,
+    coverage = freeze_coverage(rows, entries, c.plan()["build_inputs"], root)
+    c.write_new_json(build / "source.json", {
+        "role": role, "build_grant_sha256": grant_sha, "holder": data["holder"], "tools": tools,
         "source_commit": commit, "tree": tree, "files": len(entries),
-        "checkout_manifest_sha256": c.sha(c.BUILD / "checkout.json"),
+        "checkout_manifest_sha256": c.sha(build / "checkout.json"),
         "source_freeze": {"path": str(freeze_path), "sha256": c.sha(freeze_path),
                           "names_commit": heads},
-        "coverage": coverage, "cargo_lock_sha256": c.sha(c.CHECKOUT / "Cargo.lock"),
-        "rust_toolchain": (c.CHECKOUT / "rust-toolchain.toml").read_text(), "recorded": c.now()})
-    print(json.dumps({"commit": commit, "files": len(entries), "build_inputs": coverage["build_inputs"],
-                      "freeze_rows": coverage["freeze_rows"], "exact": coverage["exact"]}, indent=1))
+        "coverage": coverage, "cargo_lock_sha256": c.sha(root / "Cargo.lock"),
+        "rust_toolchain": (root / "rust-toolchain.toml").read_text(), "recorded": c.now()})
+    print(json.dumps({"role": role, "commit": commit, "files": len(entries),
+                      "build_inputs": coverage["build_inputs"], "freeze_rows": coverage["freeze_rows"],
+                      "exact": coverage["exact"]}, indent=1))
     if not coverage["exact"]:
-        c.latch_stop("checkout", "granted source freeze does not match every build input")
-        raise SystemExit("the exported commit does not match the granted freeze exactly; stop latched")
+        c.latch_stop(f"checkout-{role}", "granted source freeze does not match every build input")
+        raise SystemExit(f"the exported {role} commit does not match its freeze exactly; stop latched")
 
 
 # ------------------------------------------------------------------ toolchain
 
-def toolchain():
+def toolchain(role):
     data, _ = c.build_gate()
     c.tools_identity(data)
-    c.verify_checkout()
+    c.verify_checkout(role)
+    root, record_path = c.checkout_dir(role), c.build_dir(role) / "toolchain.json"
+    if record_path.exists():
+        c.refuse(f"the {role} toolchain record exists; it is never replaced")
     overrides = {"PATH": c.RUSTUP_BIN + ":" + c.SYSTEM_PATH, "RUSTUP_AUTO_INSTALL": "0",
-                 "TMPDIR": str(c.fresh_dir(c.SCRATCH / "toolchain"))}
-    record = {"recorded": c.now(), "holder": data["holder"], "env": c.env_receipt(overrides),
-              "commands": {}, "python": sys.version}
+                 "TMPDIR": str(c.fresh_dir(c.SCRATCH / f"toolchain-{role}"))}
+    record = {"role": role, "recorded": c.now(), "holder": data["holder"],
+              "env": c.env_receipt(overrides), "commands": {}, "python": sys.version}
     with c.packet_lock():
-        for name, argv in [("cargo", [str(c.CHECKOUT / "tools/cargo"), "-V"]),
+        for name, argv in [("cargo", [str(root / "tools/cargo"), "-V"]),
                            ("rustc", ["rustc", "-vV"]), ("sw_vers", ["sw_vers"]),
                            ("uname", ["uname", "-srm"]), ("hw_model", ["sysctl", "-n", "hw.model"]),
                            ("cpu", ["sysctl", "-n", "machdep.cpu.brand_string"])]:
-            result = subprocess.run(argv, cwd=c.CHECKOUT, env=c.child_env(overrides),
+            result = subprocess.run(argv, cwd=root, env=c.child_env(overrides),
                                     capture_output=True, text=True, timeout=60)
             record["commands"][name] = {"argv": argv, "exit": result.returncode,
                                         "stdout": result.stdout, "stderr": result.stderr}
-    c.write_new_json(c.BUILD / "toolchain.json", record)
+    c.write_new_json(record_path, record)
     print(json.dumps({k: v["stdout"].strip() for k, v in record["commands"].items()}, indent=1))
 
 
 # ------------------------------------------------------------------ builds
 
-def cargo(label, args, data):
+def cargo(label, args, data, role):
     p = c.plan()
-    argv = [str(c.CHECKOUT / "tools/cargo"), *args, *p["builds"]["common_flags"]]
-    entry = run_group(label, argv, c.CHECKOUT, build_overrides(label, data),
+    root = c.checkout_dir(role)
+    argv = [str(root / "tools/cargo"), *args, *p["builds"]["common_flags"]]
+    entry = run_group(label, argv, root, build_overrides(label, data),
                       p["budgets"]["build_timeout_s"], f"build-{label}.stdout.jsonl",
                       f"build-{label}.stderr.txt", data["holder"])
     artifacts = []
@@ -253,7 +262,7 @@ def cargo(label, args, data):
                               "filenames": {f: c.sha(f) for f in message.get("filenames", [])}})
     record = {**entry, "artifacts": artifacts}
     if entry["exit"] != 0 or entry["timed_out"]:
-        c.write_new_json(c.BUILD / f"{label}.failed.json", record)
+        c.write_new_json(c.build_dir(role) / f"{label}.failed.json", record)
         raise SystemExit(f"cargo {label} failed ({entry['exit']}); see {entry['stderr']}")
     return record
 
@@ -293,99 +302,56 @@ def library(record):
             if a["target"] == "incant_render" and a["kind"] == ["lib"] and not a["test"]]
 
 
-def library_linkage(tested, linked, test_artifacts):
-    """A unit-test target may emit no ordinary rlib. In that case compare the
-    actual unit executable's package/features, never claim binary equivalence.
-    An emitted ordinary library must still match the linked files exactly.
-    """
-    units = [a for a in test_artifacts if a["target"] == "incant_render"
-             and a["kind"] == ["lib"] and a["test"] and a["executable"]]
-    same = None if not tested else (len(tested) == 1 and len(linked) == 1
-                                   and linked[0]["filenames"] == tested[0]["filenames"])
-    features = (len(units) == 1 and len(linked) == 1
-                and units[0]["package_id"] == linked[0]["package_id"]
-                and sorted(units[0]["features"]) == sorted(linked[0]["features"]))
-    return {"same_ordinary_library": same, "same_package_features": features,
-            "valid": features and same is not False,
-            "ordinary_library_emitted_by_unit_build": bool(tested)}
-
-
-def libtests():
+def review(role):
     data, _ = c.build_gate()
     tools = c.tools_identity(data)
-    source = c.verify_checkout()
-    if source["helper_copy_sha256"] is not None:
-        c.refuse("the review fixture is already in the checkout; library tests build first")
-    if (c.BUILD / "tests.json").exists():
-        c.refuse("library test binary already frozen")
-    record = cargo("libtests", c.plan()["builds"]["libtests"], data)
-    frozen = freeze(record, {
-        "incant_render-lib-tests": lambda a: a["test"] and a["kind"] == ["lib"] and a["target"] == "incant_render"},
-        "tests")
-    c.write_new_json(c.BUILD / "tests.json", {
-        "holder": data["holder"], "tools": tools, "source": source, "frozen": frozen,
-        "incant_render_library": {"libtests": library(record)}, "builds": [record],
-        "recorded": c.now()})
-    print(json.dumps({k: v["sha256"] for k, v in frozen.items()}, indent=1))
-
-
-def review():
-    data, _ = c.build_gate()
-    tools = c.tools_identity(data)
-    c.verify_checkout()
-    if (c.BUILD / "review.json").exists():
-        c.refuse("review binary already frozen; the build record is never replaced")
-    destination = c.CHECKOUT / c.HELPER_DEST
+    c.verify_checkout(role)
+    build = c.build_dir(role)
+    if (build / "review.json").exists():
+        c.refuse(f"the {role} review binary is already frozen; the build record is never replaced")
+    destination = c.checkout_dir(role) / c.HELPER_DEST
     if destination.exists():
-        c.refuse("review fixture already copied; the copy is never replaced")
+        c.refuse(f"the review fixture is already copied into the {role} checkout; never replaced")
     shutil.copyfile(c.HELPER_SOURCE, destination)
-    source = c.verify_checkout()
-    record = cargo("review", c.plan()["builds"]["review"], data)
+    source = c.verify_checkout(role)
+    record = cargo(f"{role}-review", c.plan()["builds"]["review"], data, role)
     frozen = freeze(record, {"temporal_visual_review": lambda a: a["test"] and a["target"] == "temporal_visual_review"},
-                    "review")
-    linked = library(record)
-    tests_path = c.BUILD / "tests.json"
-    tested = (c.read_json(tests_path)["incant_render_library"]["libtests"]
-              if tests_path.exists() else None)
-    linkage = (None if tested is None else library_linkage(
-        tested, linked, c.read_json(tests_path)["builds"][0]["artifacts"]))
-    same = None if linkage is None else linkage["same_ordinary_library"]
-    c.write_new_json(c.BUILD / "review.json", {
-        "holder": data["holder"], "build_grant_sha256": c.sha(c.BUILD_GRANT),
-        "source_commit": data["source_commit"], "tools": tools, "source": source,
-        "source_record_sha256": c.sha(c.BUILD / "source.json"),
+                    role)
+    c.write_new_json(build / "review.json", {
+        "role": role, "holder": data["holder"], "build_grant_sha256": c.sha(c.BUILD_GRANT),
+        "source_commit": data["sources"][role]["source_commit"], "tools": tools, "source": source,
+        "source_record_sha256": c.sha(build / "source.json"),
         "helper_sha256": c.sha(c.HELPER_SOURCE), "helper_copy": str(destination),
-        "frozen": frozen, "incant_render_library": linked,
-        "library_same_as_libtests": same, "library_linkage": linkage, "builds": [record], "recorded": c.now()})
-    print(json.dumps({"temporal_visual_review": frozen["temporal_visual_review"]["sha256"],
-                      "library_same_as_libtests": same}, indent=1))
-    if linkage is not None and not linkage["valid"]:
-        c.latch_stop("review", "review/unit-test library package, features or emitted bytes differ")
-        raise SystemExit("review/unit-test library linkage failed")
+        "frozen": frozen, "incant_render_library": library(record), "builds": [record],
+        "recorded": c.now()})
+    print(json.dumps({"role": role, "temporal_visual_review": frozen["temporal_visual_review"]["sha256"],
+                      "features": frozen["temporal_visual_review"]["features"]}, indent=1))
 
 
-def lint():
+def lint(role):
     data, _ = c.build_gate()
     tools = c.tools_identity(data)
-    source = c.verify_checkout()
+    source = c.verify_checkout(role)
     if source["helper_copy_sha256"] is None:
-        c.refuse("build.py review first; lint checks the copied fixture")
+        c.refuse(f"build.py review {role} first; lint checks the copied fixture")
+    if (c.build_dir(role) / "lint.json").exists():
+        c.refuse(f"the {role} lint record exists; it is never replaced")
     p = c.plan()
-    argv = [str(c.CHECKOUT / "tools/cargo"), *p["builds"]["lint"], *p["builds"]["common_flags"],
+    root = c.checkout_dir(role)
+    argv = [str(root / "tools/cargo"), *p["builds"]["lint"], *p["builds"]["common_flags"],
             "--", "-D", "warnings"]
-    entry = run_group("lint", argv, c.CHECKOUT, build_overrides("lint", data),
-                      p["budgets"]["build_timeout_s"], "build-lint.stdout.jsonl",
-                      "build-lint.stderr.txt", data["holder"])
-    c.write_new_json(c.BUILD / "lint.json", {"tools": tools, "source": source, **entry,
-                                             "recorded": c.now()})
+    entry = run_group(f"{role}-lint", argv, root, build_overrides(f"{role}-lint", data),
+                      p["budgets"]["build_timeout_s"], f"build-{role}-lint.stdout.jsonl",
+                      f"build-{role}-lint.stderr.txt", data["holder"])
+    c.write_new_json(c.build_dir(role) / "lint.json", {"role": role, "tools": tools, "source": source,
+                                                       **entry, "recorded": c.now()})
     print(json.dumps({k: entry[k] for k in ("label", "exit", "timed_out")}, indent=1))
     if entry["exit"] != 0 or entry["timed_out"]:
         raise SystemExit(entry["exit"] if entry["exit"] else 1)
 
 
 if __name__ == "__main__":
-    steps = {"checkout": checkout, "toolchain": toolchain, "libtests": libtests, "review": review,
-             "lint": lint}
-    if len(sys.argv) != 2 or sys.argv[1] not in steps:
+    steps = {"checkout": checkout, "toolchain": toolchain, "review": review, "lint": lint}
+    if len(sys.argv) != 3 or sys.argv[1] not in steps or sys.argv[2] not in c.ROLES:
         raise SystemExit(__doc__)
-    steps[sys.argv[1]]()
+    steps[sys.argv[1]](sys.argv[2])

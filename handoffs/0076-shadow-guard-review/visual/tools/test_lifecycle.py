@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""CPU-only real child-process tests for the stage B runners; never builds, never
-calls a GPU binary, never touches the real evidence directory or global lock.
+"""CPU-only real child-process tests for handoff 0076's runners (adapted from
+0072's test_lifecycle.py, 48a688c5); never builds, never calls a GPU binary,
+never touches the real evidence directory or global lock.
 
 Only paths, plan and grant/source lookups are redirected to a temporary
 fixture; the actual supervise/run_child/run_group code runs with /usr/bin/true,
@@ -30,7 +31,9 @@ import common as c  # noqa: E402
 import gpu  # noqa: E402
 
 RECORDS = []
-PLAN = {"expected_backend": "Metal", "budgets": {"submissions_max": 128, "pngs_max": 16}}
+PLAN = {"expected_backend": "Metal", "budgets": {"submissions_max": 60, "pngs_max": 4},
+        "review": {"binary": "cpu-fixture"}}
+ROLE = "baseline"
 HOLDER = "lifecycle-test-holder"
 
 
@@ -50,7 +53,7 @@ def lines(path):
 
 class Lifecycle(unittest.TestCase):
     def setUp(self):
-        self.directory = tempfile.TemporaryDirectory(prefix="incant-0072-lifecycle-")
+        self.directory = tempfile.TemporaryDirectory(prefix="incant-0076-lifecycle-")
         root = Path(self.directory.name)
         self.paths = {name: root / relative for name, relative in {
             "EVIDENCE": "evidence", "GRANT": "evidence/review-ready.json",
@@ -63,6 +66,7 @@ class Lifecycle(unittest.TestCase):
             "PACKET_LOCK": "evidence/packet.lock", "GPU_LOCK": "native-gpu.lock"}.items()}
         for name in ("EVIDENCE", "SCRATCH", "CHECKOUT"):
             self.paths[name].mkdir(parents=True, exist_ok=True)
+        (self.paths["CHECKOUT"] / ROLE).mkdir()
         self.patches = contextlib.ExitStack()
         self.patches.enter_context(mock.patch.multiple(c, **self.paths))
         self.patches.enter_context(mock.patch.object(c, "plan", return_value=PLAN))
@@ -86,7 +90,7 @@ class Lifecycle(unittest.TestCase):
         raised = None
         with self.fake_gate(), mock.patch.object(gpu, "frozen", return_value=(program, c.sha(program), "cpu-fixture")):
             try:
-                gpu.run_child(label, "review", label, "cpu-fixture", list(args), ".", timeout,
+                gpu.run_child(label, "review", label, ROLE, list(args), ".", timeout,
                               charge=charge)
             except BaseException as error:  # interrupts and SystemExit are the subject here
                 raised = error
@@ -175,7 +179,7 @@ class Lifecycle(unittest.TestCase):
         RECORDS.append({"test": "non_executable_refused", "raised": str(raised)})
 
     def test_budget_exhaustion_refused_before_launch(self):
-        raised, rows = self.child("excess", "/usr/bin/true", charge=(120, 9, 1))
+        raised, rows = self.child("excess", "/usr/bin/true", charge=(53, 8, 1))  # 61 > 60
         self.assertIsInstance(raised, SystemExit)
         self.assertIn("submission ceiling", str(raised))
         self.assertEqual((rows, lines(c.BUDGET)), ([], []))
@@ -201,7 +205,7 @@ class Lifecycle(unittest.TestCase):
 
     def test_stop_latch_blocks_the_next_child(self):
         grant = {"packet": c.PACKET, "stage": c.STAGE, "holder": HOLDER, "visual_tree": "b" * 40,
-                 "build_record_sha256": "c" * 64,
+                 "build_records": {role: "c" * 64 for role in c.ROLES},
                  "prior_test_release_path": "/nonexistent/gpu-released.json",
                  "prior_test_release_sha256": "d" * 64}
         c.write_new_json(c.GRANT, grant)
@@ -209,7 +213,7 @@ class Lifecycle(unittest.TestCase):
         program = Path("/usr/bin/true")
         with mock.patch.object(gpu, "frozen", return_value=(program, c.sha(program), "cpu-fixture")):
             with self.assertRaisesRegex(SystemExit, "stop.json latched a failure"):
-                gpu.run_child("after-stop", "review", "after", "cpu-fixture", [], ".", 5,
+                gpu.run_child("after-stop", "review", "after", ROLE, [], ".", 5,
                               charge=(1, 0, 0))
         self.assertEqual((lines(c.LEDGER), lines(c.BUDGET)), ([], []))
         self.assertEqual(len(lines(c.REFUSALS)), 1)

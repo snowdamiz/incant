@@ -1,23 +1,23 @@
-"""Shared constants and guards for handoff 0072's fixed-sharpness comparison review.
+"""Shared constants and guards for handoff 0076's shadow receiver guard comparison.
 Standard library only. Importing this module has no side effects.
 
-Adapted from this packet's original stage B tools (themselves from handoff 0068),
-with the accepted 0073 source-pin routines reused read-only: two root grants gate
-the stage, and every mutating entry point checks its grant first; without it,
-tools refuse without creating any file or directory.
+Adapted narrowly from 0072's fixed-sharpness tools (48a688c5, visual tree
+b11a7d3a, with root's cd4f4cd7 build fix): the same two root grants gate the
+stage and every mutating entry point checks its grant first; without it, tools
+refuse without creating any file or directory. What changed is that one stage
+now builds and runs two roles, `baseline` (main224) and `candidate` (the
+shadow receiver guard), each from its own exported commit into its own frozen
+binary, with the same fixture, flags and Cargo target used one after the other.
 - build-ready.json (root-supervised CPU build): this packet and build stage, the
-  actual holder, a committed source as a 40-hex commit (never a branch name),
-  root's source freeze by path and SHA-256, the committed visual tree and a
-  dedicated Cargo target. Every build input of the exported commit must equal
-  that freeze (build.py checkout).
-- review-ready.json (GPU review, written after the build): this packet and
-  review stage, the actual holder, the visual tree, the SHA-256 of the frozen
-  build record, at least one prior release pin and optionally root's frozen
-  same-source default library test binary for the one numeric regression.
-Old namespaces (0072-temporal-coverage-001, 0072-temporal-corrected-001,
-0072-temporal-visual and earlier) are never written, and their grants name stages these
-tools refuse. The accepted coverage run is read only, through its committed published
-evidence, by the CPU comparison (sharpness.py).
+  actual holder, per role a committed source as a 40-hex commit (never a branch
+  name) equal to the plan's, and root's source freeze for it by path and
+  SHA-256; the committed visual tree and one dedicated Cargo target. Every build
+  input of each exported commit must equal its freeze (build.py checkout).
+- review-ready.json (GPU review, written after both builds): this packet and
+  review stage, the actual holder, the visual tree, the SHA-256 of each role's
+  frozen build record and at least one prior release pin.
+0072 namespaces are never written, and their grants name a packet and stages these
+tools refuse.
 
 GPU children run under the global non-waiting native-gpu.lock; budgets are
 debited before launch, monotonic and never refunded; signals are deferred so
@@ -41,9 +41,10 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-PACKET = "0072-motion-history-numeric"
-STAGE = "fixed-sharpness-visual"
-BUILD_STAGE = "fixed-sharpness-build"
+PACKET = "0076-shadow-guard-review"
+STAGE = "shadow-guard-visual"
+BUILD_STAGE = "shadow-guard-build"
+ROLES = ("baseline", "candidate")  # built and run in this order
 PACKET_DIR = ROOT / "handoffs" / PACKET
 VISUAL_RELATIVE = "handoffs/" + PACKET + "/visual"
 VISUAL = ROOT / VISUAL_RELATIVE
@@ -53,7 +54,7 @@ HELPER_SOURCE = VISUAL / "review" / "temporal_visual_review.rs"
 HELPER_DEST = "crates/incant_render/tests/temporal_visual_review.rs"
 CODEX = Path("/Users/andreyyurlov/.codex")
 EVIDENCE_ROOT = CODEX / "incant-evidence"
-EVIDENCE = EVIDENCE_ROOT / "0072-fixed-sharpness-002"
+EVIDENCE = EVIDENCE_ROOT / "0076-shadow-guard-review-001"
 GRANT = EVIDENCE / "review-ready.json"
 BUILD_GRANT = EVIDENCE / "build-ready.json"
 GPU_LOCK = EVIDENCE_ROOT / "native-gpu.lock"  # global; shared with root's runners
@@ -72,8 +73,8 @@ LOGS = EVIDENCE / "logs"
 SCRATCH = EVIDENCE / "tmp"
 CAPTURES = EVIDENCE / "captures"
 ANALYSIS = EVIDENCE / "analysis"
-PUBLISHED = PACKET_DIR / "fixed-sharpness-screenshots"
-PUBLISHED_EVIDENCE = PACKET_DIR / "fixed-sharpness-evidence"
+PUBLISHED = PACKET_DIR / "screenshots"
+PUBLISHED_EVIDENCE = PACKET_DIR / "evidence"
 RUSTUP_BIN = "/opt/homebrew/opt/rustup/bin"
 SYSTEM_PATH = "/usr/bin:/bin:/usr/sbin:/sbin"
 FORBIDDEN_TARGETS = ("/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
@@ -90,6 +91,7 @@ OVERRIDES = {
     "CARGO_TERM_COLOR": "never, so build logs carry no terminal escapes",
     "RUSTUP_AUTO_INSTALL": "0, so rustup never downloads a toolchain",
     "INCANT_EXPECT_GPU_BACKEND": "required adapter backend, read only by tests/support checked()",
+    # The reused fixture keeps 0072's variable name byte for byte.
     "INCANT_0072_REVIEW_OUT": "new output directory for one review child",
 }
 DEFERRED = (signal.SIGINT, signal.SIGTERM, signal.SIGHUP)
@@ -170,47 +172,71 @@ def release_pins(data):
     return [k for k in data if k.startswith("prior_") and k.endswith("_path") and "release" in k]
 
 
+def source_ok(source, expected):
+    freeze = source.get("source_freeze") if isinstance(source, dict) else None
+    return (isinstance(source, dict) and HEX40.fullmatch(str(source.get("source_commit", "")))
+            and source.get("source_commit") == expected
+            and isinstance(freeze, dict) and str(freeze.get("path", "")).startswith("/")
+            and HEX64.fullmatch(str(freeze.get("sha256", ""))) is not None)
+
+
 def build_grant():
-    """Root's supervised CPU build grant (0073 routine): a committed source
-    (40-hex commit, never a branch name), root's source freeze by path and
-    SHA-256, the committed visual tree, an allowed target and the actual holder."""
+    """Root's supervised CPU build grant (0073 routine, per role): for baseline and
+    candidate a committed source (40-hex commit, never a branch name) equal to the
+    plan's and root's source freeze by path and SHA-256; the committed visual tree,
+    one allowed target and the actual holder."""
     if not BUILD_GRANT.is_file():
         raise SystemExit("refused: build-ready.json is absent; preparation only")
     data = read_json(BUILD_GRANT)
-    freeze = data.get("source_freeze")
+    sources = data.get("sources")
+    expected = {role: plan()["sources"][role]["commit"] for role in ROLES}
     if (data.get("packet") != PACKET or data.get("stage") != BUILD_STAGE
             or not holder_ok(data.get("holder"))
-            or not HEX40.fullmatch(str(data.get("source_commit", "")))
-            or not isinstance(freeze, dict) or not str(freeze.get("path", "")).startswith("/")
-            or not HEX64.fullmatch(str(freeze.get("sha256", "")))
+            or not isinstance(sources, dict) or sorted(sources) != sorted(ROLES)
+            or not all(source_ok(sources[role], expected[role]) for role in ROLES)
             or not HEX40.fullmatch(str(data.get("visual_tree", "")))
             or not target_allowed(data.get("target"))):
-        refuse("build-ready.json does not name this packet and build stage, the holder, a 40-hex "
-               "source commit, root's source freeze path and SHA-256, the visual tree and an "
-               "allowed ~/.codex/*-target")
+        refuse("build-ready.json does not name this packet and build stage, the holder, for "
+               "baseline and candidate exactly the plan's 40-hex source commit with root's source "
+               "freeze path and SHA-256, the visual tree and an allowed ~/.codex/*-target")
     return data, sha(BUILD_GRANT)
 
 
 def grant():
-    """Root's GPU review grant, written after the build: this packet and review
-    stage, the holder, the visual tree, the build record's SHA-256, a prior release
-    pin and, optionally, root's frozen default library test binary by path/SHA."""
+    """Root's GPU review grant, written after both builds: this packet and review
+    stage, the holder, the visual tree, each role's build record SHA-256 and a
+    prior release pin."""
     if not GRANT.is_file():
         raise SystemExit("refused: review-ready.json is absent; preparation only")
     data = read_json(GRANT)
-    numeric = data.get("numeric_binary")
+    records = data.get("build_records")
     if (data.get("packet") != PACKET or data.get("stage") != STAGE
             or not holder_ok(data.get("holder"))
             or not HEX40.fullmatch(str(data.get("visual_tree", "")))
-            or not HEX64.fullmatch(str(data.get("build_record_sha256", "")))
-            or not release_pins(data)
-            or (numeric is not None and not (isinstance(numeric, dict)
-                                             and str(numeric.get("path", "")).startswith("/")
-                                             and HEX64.fullmatch(str(numeric.get("sha256", "")))))):
+            or not isinstance(records, dict) or sorted(records) != sorted(ROLES)
+            or not all(HEX64.fullmatch(str(records[role])) for role in ROLES)
+            or not release_pins(data)):
         refuse("review-ready.json does not name this packet and review stage, the holder, the "
-               "visual tree, the build record SHA-256 and a prior release pin (and a well-formed "
-               "numeric_binary when present)")
+               "visual tree, the SHA-256 of both roles' build records and a prior release pin")
     return data, sha(GRANT)
+
+
+def role_ok(role):
+    if role not in ROLES:
+        raise SystemExit(f"refused: unknown role {role!r}; roles are {', '.join(ROLES)}")
+    return role
+
+
+def checkout_dir(role):
+    return CHECKOUT / role_ok(role)
+
+
+def build_dir(role):
+    return BUILD / role_ok(role)
+
+
+def captures_dir(role):
+    return CAPTURES / role_ok(role)
 
 
 def target(data):
@@ -283,24 +309,27 @@ def git_blob_sha1(path):
     return hashlib.sha1(b"blob %d\0" % len(data) + data).hexdigest()
 
 
-def verify_checkout():
-    """Every exported file still matches its blob; the only extra file allowed is
-    the review fixture copy, and only with the committed fixture's bytes."""
-    manifest = read_json(BUILD / "checkout.json")
+def verify_checkout(role):
+    """Every file of the role's export still matches its blob; the only extra file
+    allowed is the review fixture copy, and only with the committed fixture's bytes."""
+    root, record = checkout_dir(role), build_dir(role) / "checkout.json"
+    if not record.is_file():
+        refuse(f"no {role} checkout; run build.py checkout {role} first")
+    manifest = read_json(record)
     for entry in manifest["files"]:
-        path = CHECKOUT / entry["path"]
+        path = root / entry["path"]
         if path.is_symlink() or git_blob_sha1(path) != entry["blob"]:
-            refuse("checkout file changed: " + entry["path"])
+            refuse(f"{role} checkout file changed: " + entry["path"])
     expected = {entry["path"] for entry in manifest["files"]}
-    extra = sorted(str(Path(d, n).relative_to(CHECKOUT)) for d, _, names in os.walk(CHECKOUT)
-                   for n in names if str(Path(d, n).relative_to(CHECKOUT)) not in expected)
+    extra = sorted(str(Path(d, n).relative_to(root)) for d, _, names in os.walk(root)
+                   for n in names if str(Path(d, n).relative_to(root)) not in expected)
     if extra not in ([], [HELPER_DEST]):
-        refuse("unexpected files in the checkout: " + ", ".join(extra[:10]))
-    helper = CHECKOUT / HELPER_DEST
+        refuse(f"unexpected files in the {role} checkout: " + ", ".join(extra[:10]))
+    helper = root / HELPER_DEST
     if extra and sha(helper) != sha(HELPER_SOURCE):
-        refuse("the checkout fixture copy differs from the committed fixture")
-    return {"commit": manifest["commit"], "tree": manifest["tree"], "files": len(manifest["files"]),
-            "manifest_sha256": sha(BUILD / "checkout.json"),
+        refuse(f"the {role} checkout fixture copy differs from the committed fixture")
+    return {"role": role, "commit": manifest["commit"], "tree": manifest["tree"],
+            "files": len(manifest["files"]), "manifest_sha256": sha(record),
             "helper_copy_sha256": sha(helper) if extra else None}
 
 

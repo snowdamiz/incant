@@ -1,25 +1,23 @@
 #!/usr/bin/env python3
-"""Guarded serial GPU runner for handoff 0072's fixed-sharpness comparison review.
+"""Guarded serial GPU runner for handoff 0076's shadow receiver guard comparison.
 Standard library only.
 
-Adapted from this packet's original gpu.py (from handoff 0068). For every
+Adapted narrowly from 0072's gpu.py (48a688c5): the same lock, debit, supervise,
+ledger and latch lifecycle, now per role and without numeric controls. For every
 child, under the packet flock and then the global native-gpu.lock (never
 waited for), it checks in order: root's GPU grant (review-ready.json), the stop
-and release latches, the committed visual tree, every child-checkout file
-against its blob, the frozen binary's identity and execute bit. The review
-binary is the one the build record (bound by the grant's SHA-256) froze; the
-numeric binary is root's pinned same-source default library test binary, or
-this stage's own libtests record. Submissions are debited (fsynced, never
-refunded) before launch under the same lock. Each child runs in its own process
-group with a constructed environment and is SIGKILLed and reaped after exit,
-timeout, Ctrl-C, SIGTERM or SIGHUP. Every child goes to the ledger (rows always
-carry "pid"); any failure latches stop.json. There is no automatic retry and no
-whole-suite run.
+and release latches, the committed visual tree, every file of the role's child
+checkout against its blob, the role's frozen binary identity and execute bit.
+The binary is the one the role's build record (bound by the grant's SHA-256 for
+that role) froze. Submissions are debited (fsynced, never refunded) before
+launch under the same lock. Each child runs in its own process group with a
+constructed environment and is SIGKILLed and reaped after exit, timeout, Ctrl-C,
+SIGTERM or SIGHUP. Every child goes to the ledger (rows always carry "pid");
+any failure latches stop.json. There is no automatic retry and no whole-suite run.
 
-  gpu.py list <lib|review>   lib: confirm both exact numeric test names; review: the 8 cases
-  gpu.py numeric <resolve|coverage>   one exact numeric control, once each, in plan order
-  gpu.py review <probe|stationary|motion|excluded|transitions|skinned|timing|viewport>
-  gpu.py release             after the last child, also when stopped: write the GPU latch
+  gpu.py list <baseline|candidate>             the role's binary lists exactly the fixture's 8 cases
+  gpu.py review <baseline|candidate> viewport  the one exact case, once per role, baseline first
+  gpu.py release                               after the last child, also when stopped: GPU latch
 """
 
 import json
@@ -36,7 +34,6 @@ LISTING = re.compile(r"^(.+): test$", re.M)
 RESULT = re.compile(r"^test result: (\w+)\. (\d+) passed; (\d+) failed; (\d+) ignored; "
                     r"(\d+) measured; (\d+) filtered out", re.M)
 RUNNING = re.compile(r"^running (\d+) tests?$", re.M)
-LIB = "incant_render-lib-tests"
 
 
 def ledger():
@@ -47,22 +44,18 @@ def runs(kind, item):
     return [e for e in ledger() if e.get("kind") == kind and e.get("item") == item]
 
 
-def frozen(name, data):
-    """The granted identity of one frozen binary, never matched by path or name alone."""
-    if name == LIB and data.get("numeric_binary"):
-        pinned = data["numeric_binary"]
-        path = Path(pinned["path"])
-        if not path.is_file() or c.sha(path) != pinned["sha256"]:
-            c.refuse("root's pinned library test binary is absent or differs from the grant")
-        return path, pinned["sha256"], "root-pinned in review-ready.json"
-    record = c.BUILD / ("tests.json" if name == LIB else "review.json")
+def frozen(role, data):
+    """The granted identity of the role's frozen review binary, never matched by
+    path or name alone."""
+    name = c.plan()["review"]["binary"]
+    record = c.build_dir(role) / "review.json"
     if not record.is_file():
-        c.refuse(f"no build record for {name}")
-    if name != LIB and c.sha(record) != data["build_record_sha256"]:
-        c.refuse("build/review.json is not the build record review-ready.json binds")
+        c.refuse(f"no {role} build record")
+    if c.sha(record) != data["build_records"][role]:
+        c.refuse(f"build/{role}/review.json is not the build record review-ready.json binds")
     entry = c.read_json(record)["frozen"].get(name)
     if not entry:
-        c.refuse(f"no frozen binary {name}")
+        c.refuse(f"no frozen {role} binary {name}")
     return Path(entry["path"]), entry["sha256"], str(record)
 
 
@@ -91,7 +84,7 @@ def libtest_summary(stdout):
             "failures": failures(stdout)}
 
 
-def run_child(label, kind, item, binary_name, args, cwd, timeout, charge=None, extra=None,
+def run_child(label, kind, item, role, args, cwd, timeout, charge=None, extra=None,
               after=None):
     """charge = (frames, ui_submissions, pngs) debited before launch, or None."""
     p = c.plan()
@@ -100,8 +93,8 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, charge=None, e
     with c.packet_lock(), c.gpu_lock(), c.deferred_signals():
         data, grant_sha = c.gate()
         tools = c.tools_identity(data)
-        source = c.verify_checkout()
-        binary, expected, bound_by = frozen(binary_name, data)
+        source = c.verify_checkout(role)
+        binary, expected, bound_by = frozen(role, data)
         if c.sha(binary) != expected:
             c.refuse(f"{binary} does not match its frozen hash")
         c.require_executable(binary)
@@ -117,11 +110,11 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, charge=None, e
         started = c.now()
         with open(stdout_path, "x") as out, open(stderr_path, "x") as err:
             pid, code, timed_out, original, group_empty = c.supervise(
-                argv, c.CHECKOUT / cwd, c.child_env(overrides), out, err, timeout)
+                argv, c.checkout_dir(role) / cwd, c.child_env(overrides), out, err, timeout)
         stdout = stdout_path.read_text(errors="replace")
-        entry = {"label": label, "kind": kind, "item": item, "holder": data["holder"],
-                 "binary": binary_name, "binary_bound_by": bound_by, "argv": argv,
-                 "cwd": str(c.CHECKOUT / cwd), "env": c.env_receipt(overrides),
+        entry = {"label": label, "kind": kind, "item": item, "role": role, "holder": data["holder"],
+                 "binary": p["review"]["binary"], "binary_bound_by": bound_by, "argv": argv,
+                 "cwd": str(c.checkout_dir(role) / cwd), "env": c.env_receipt(overrides),
                  "binary_sha256_before": expected, "binary_sha256_after": c.sha(binary),
                  "grant_sha256": grant_sha, "tools": tools, "source": source, "debit": debit,
                  "pid": pid, "started": started, "ended": c.now(), "exit": code,
@@ -163,89 +156,42 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, charge=None, e
     return entry
 
 
-def listing(name):
+def listing(role):
     p = c.plan()
-    if runs("list", name):
-        c.refuse(f"{name} already listed; listings never repeat")
-    if name == "lib":
-        binary, cwd = LIB, p["numeric"]["cwd"]
-        wanted = [t["test"] for t in p["numeric"]["tests"]]
+    spec = p["review"]
+    if runs("list", role):
+        c.refuse(f"{role} already listed; listings never repeat")
 
-        def names(stdout):
-            found = LISTING.findall(stdout)
-            return {"listed": found, "listed_count": len(found),
-                    "contract": {"exact_numeric_tests_listed": all(found.count(w) == 1 for w in wanted)}}
-    else:
-        spec = p["review"]
-        binary, cwd = spec["binary"], spec["cwd"]
+    def names(stdout):
+        found = LISTING.findall(stdout)
+        return {"listed": found, "listed_count": len(found),
+                "contract": {"matches_fixture_cases": sorted(found) == sorted(spec["listed_cases"])}}
 
-        def names(stdout):
-            found = LISTING.findall(stdout)
-            return {"listed": found, "listed_count": len(found),
-                    "contract": {"matches_plan": sorted(found) == sorted(spec["order"])}}
-
-    return run_child(f"list-{name}", "list", name, binary, ["--list", "--ignored"], cwd,
+    return run_child(f"list-{role}", "list", role, role, ["--list", "--ignored"], spec["cwd"],
                      p["budgets"]["listing_timeout_s"], after=names)
 
 
-def numeric_items(p):
-    return ["numeric-" + t["id"] for t in p["numeric"]["tests"]]
-
-
-def numeric(test_id):
-    p = c.plan()
-    spec = p["numeric"]
-    tests = {t["id"]: t for t in spec["tests"]}
-    if test_id not in tests:
-        c.refuse(f"unknown numeric control {test_id}")
-    test = tests[test_id]
-    lists = runs("list", "lib")
-    if not lists or lists[-1]["failed"] or test["test"] not in lists[-1].get("listed", []):
-        c.refuse("list lib first; the exact numeric test must appear in a fresh listing")
-    item = "numeric-" + test_id
-    if runs("numeric", item):
-        c.refuse(f"{item} already ran; there is no automatic retry")
-    order = numeric_items(p)
-    for earlier in order[:order.index(item)]:
-        previous = runs("numeric", earlier)
-        if not previous or previous[-1]["failed"]:
-            c.refuse(f"run {earlier} first; numeric controls run in plan order and stop on failure")
-
-    def outcome(stdout):
-        summary = libtest_summary(stdout)
-        ok = (summary["running"] == [1] and len(summary["results"]) == 1
-              and summary["results"][0]["passed"] == 1 and summary["results"][0]["failed"] == 0
-              and not summary["failures"])
-        return {"test": test["test"], "contract": {"exact_test_ran_once_and_passed": ok}}
-
-    return run_child(item, "numeric", item, LIB, [test["test"], *spec["args"]],
-                     spec["cwd"], p["budgets"]["numeric_timeout_s"],
-                     charge=(test["submissions"], 0, 0), after=outcome)
-
-
-def review(case):
+def review(role, case):
     p = c.plan()
     spec = p["review"]
-    cases = spec["order"]
     if case not in spec["cases"]:
         c.refuse(f"unknown review case {case}")
-    for item in numeric_items(p):
-        passed = runs("numeric", item)
-        if not passed or passed[-1]["failed"]:
-            c.refuse("both numeric controls must pass before any appearance case")
-    if not runs("list", "review"):
-        c.refuse("list review first")
-    if len(runs("review", case)) >= spec["max_runs_per_case"]:
-        c.refuse(f"{case} already ran; reruns need a root amendment and grant")
-    for earlier in cases[:cases.index(case)]:
+    lists = runs("list", role)
+    if not lists or lists[-1]["failed"]:
+        c.refuse(f"list {role} first; its binary must list exactly the fixture's cases")
+    item = f"{role}/{case}"
+    if len(runs("review", item)) >= spec["max_runs_per_case"]:
+        c.refuse(f"{item} already ran; reruns need a root amendment and grant")
+    order = [f"{r}/{k}" for r in c.ROLES for k in spec["order"]]
+    for earlier in order[:order.index(item)]:
         previous = runs("review", earlier)
         if not previous or previous[-1]["failed"]:
-            c.refuse(f"run {earlier} first; cases run in plan order and stop on failure")
+            c.refuse(f"run {earlier} first; roles and cases run in plan order and stop on failure")
     details = spec["cases"][case]
-    output = c.CAPTURES / case
+    output = c.captures_dir(role) / case
     if output.exists():
         c.refuse(f"{output} exists; captures are never overwritten")
-    c.CAPTURES.mkdir(parents=True, exist_ok=True)
+    output.parent.mkdir(parents=True, exist_ok=True)
 
     def outputs(stdout_unused):
         report = output / "report.json"
@@ -265,17 +211,14 @@ def review(case):
                              "frames_match_debit": body.get("frames_rendered") == details["frames"]
                              and body.get("ui_submissions") == details["ui_submissions"]}}
 
-    return run_child(f"review-{case}", "review", case, spec["binary"], [case, *spec["args"]],
+    return run_child(f"review-{role}-{case}", "review", item, role, [case, *spec["args"]],
                      spec["cwd"], p["budgets"]["review_case_timeout_s"],
                      charge=(details["frames"], details["ui_submissions"], len(details["pngs"])),
                      extra={spec["output_env"]: str(output)}, after=outputs)
 
 
-def owned_prefixes(data):
-    prefixes = [str(c.BIN), str(c.CHECKOUT)]
-    if data.get("numeric_binary"):
-        prefixes.append(data["numeric_binary"]["path"])
-    return tuple(prefixes)
+def owned_prefixes(data_unused):
+    return (str(c.BIN), str(c.CHECKOUT))
 
 
 def owned_processes(data):
@@ -336,12 +279,10 @@ def main():
         return
     c.gate()
     p = c.plan()
-    if len(args) == 2 and args[0] == "list" and args[1] in ("lib", "review"):
+    if len(args) == 2 and args[0] == "list" and args[1] in c.ROLES:
         listing(args[1])
-    elif len(args) == 2 and args[0] == "numeric" and args[1] in [t["id"] for t in p["numeric"]["tests"]]:
-        numeric(args[1])
-    elif len(args) == 2 and args[0] == "review" and args[1] in p["review"]["cases"]:
-        review(args[1])
+    elif len(args) == 3 and args[0] == "review" and args[1] in c.ROLES and args[2] in p["review"]["cases"]:
+        review(args[1], args[2])
     else:
         raise SystemExit(__doc__)
 

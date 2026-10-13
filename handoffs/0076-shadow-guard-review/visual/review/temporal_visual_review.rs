@@ -1204,6 +1204,7 @@ fn ui_input() -> Arc<UiInput> {
             ],
             layout,
             glyphs: glyphs.into(),
+            halos: None,
             edit: None,
         }],
     })

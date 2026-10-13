@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Exclusive Cargo target lease for handoff 0072's corrected-source CPU build.
-Standard library only.
+"""Exclusive Cargo target lease for handoff 0076's two CPU builds (baseline and
+candidate, one after the other in the one granted target). Standard library only.
 
-Adapted from this packet's original lease.py (from handoff 0068) with the
-accepted 0073 build-grant split: the lease belongs to root's build-ready.json,
-records the grant's actual holder, and is released after the CPU build (the GPU
-review needs no target; its frozen binaries are bound by hash).
+Adapted unchanged in substance from 0072's lease.py (48a688c5) with the accepted
+0073 build-grant split: the lease belongs to root's build-ready.json, records the
+grant's actual holder, and is released after both builds (the GPU review needs
+no target; its frozen binaries are bound by hash).
 
   python3 -I -B lease.py acquire   # only after root's build-ready.json grant
   python3 -I -B lease.py release   # after the last build or lint step
@@ -68,8 +68,8 @@ def acquire():
         "child_checkout": str(c.CHECKOUT), "acquired_at": c.now(),
         "processes_on_target_at_acquire": running,
         "rules": ["./tools/cargo only, --locked --offline --profile ci -j2, in the foreground",
-                  "builds from the git-archive child checkout of the granted commit only",
-                  "every build input must equal root's committed source freeze",
+                  "builds from each role's git-archive child checkout of its granted commit only",
+                  "every build input must equal root's committed source freeze for that role",
                   "one bounded process group at a time under the packet flock",
                   "binaries and evidence only under " + str(c.EVIDENCE)]})
     print(c.LEASE.read_text())
@@ -88,8 +88,8 @@ def release():
     lease["released_at"] = c.now()
     lease["released_by"] = grant["holder"]
     lease["processes_on_target_at_release"] = remaining
-    lease["release_note"] = ("No 0072 corrected-review cargo/rustc process or frozen binary "
-                             "remains on the target. Contents left as warm cache; nothing deleted. "
+    lease["release_note"] = ("No 0076 cargo/rustc process or frozen binary remains on the target. "
+                             "Contents left as warm cache; nothing deleted. "
                              "Frozen binaries live under " + str(c.BIN))
     temporary = c.LEASE.with_suffix(".tmp")
     with open(temporary, "x") as out:

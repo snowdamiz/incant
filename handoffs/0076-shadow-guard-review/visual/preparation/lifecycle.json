@@ -1,0 +1,236 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 14,
+ "seconds": 2.67,
+ "python": "3.14.8",
+ "records": [
+  {
+   "test": "budget_exhaustion_refused",
+   "raised": "refused: submission ceiling: {'frames': 0, 'ui_submissions': 0, 'pngs': 0} used, 53 frames + 8 UI requested"
+  },
+  {
+   "test": "build_term",
+   "row": {
+    "pid": 18880,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "Interrupted",
+    "group_empty_after": true,
+    "failed": null,
+    "debit": null
+   },
+   "raised": "Interrupted"
+  },
+  {
+   "test": "build_ok",
+   "row": {
+    "pid": 18882,
+    "exit": 0,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": null,
+    "debit": null
+   },
+   "raised": null
+  },
+  {
+   "test": "build_slow",
+   "row": {
+    "pid": 18883,
+    "exit": -9,
+    "timed_out": true,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": null,
+    "debit": null
+   },
+   "raised": null
+  },
+  {
+   "test": "busy_gpu_lock_refused",
+   "raised": "refused: native-gpu.lock is held by another runner; nothing launched or charged"
+  },
+  {
+   "test": "child_default_mask",
+   "row": {
+    "pid": 18885,
+    "exit": -15,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [
+     "exit -15"
+    ],
+    "debit": {
+     "label": "mask",
+     "item": "mask",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T13:53:32.942000+00:00"
+    }
+   },
+   "raised": "SystemExit"
+  },
+  {
+   "test": "gpu_failure_exit",
+   "row": {
+    "pid": 18886,
+    "exit": 1,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [
+     "exit 1"
+    ],
+    "debit": {
+     "label": "false",
+     "item": "false",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T13:53:32.959656+00:00"
+    }
+   },
+   "raised": "SystemExit"
+  },
+  {
+   "test": "sighup",
+   "row": {
+    "pid": 18888,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "Interrupted",
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "wait_error"
+    ],
+    "debit": {
+     "label": "sighup",
+     "item": "sighup",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T13:53:32.968912+00:00"
+    }
+   },
+   "raised": "Interrupted"
+  },
+  {
+   "test": "sigint",
+   "row": {
+    "pid": 18891,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "KeyboardInterrupt",
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "wait_error"
+    ],
+    "debit": {
+     "label": "sigint",
+     "item": "sigint",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T13:53:33.390350+00:00"
+    }
+   },
+   "raised": "KeyboardInterrupt"
+  },
+  {
+   "test": "sigterm",
+   "row": {
+    "pid": 18894,
+    "exit": -9,
+    "timed_out": false,
+    "wait_error": "Interrupted",
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "wait_error"
+    ],
+    "debit": {
+     "label": "sigterm",
+     "item": "sigterm",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T13:53:34.073551+00:00"
+    }
+   },
+   "raised": "Interrupted"
+  },
+  {
+   "test": "gpu_success",
+   "row": {
+    "pid": 18896,
+    "exit": 0,
+    "timed_out": false,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [],
+    "debit": {
+     "label": "success",
+     "item": "success",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T13:53:34.495504+00:00"
+    }
+   },
+   "raised": null
+  },
+  {
+   "test": "gpu_timeout",
+   "row": {
+    "pid": 18897,
+    "exit": -9,
+    "timed_out": true,
+    "wait_error": null,
+    "group_empty_after": true,
+    "failed": [
+     "exit -9",
+     "timed_out"
+    ],
+    "debit": {
+     "label": "timeout",
+     "item": "timeout",
+     "frames": 8,
+     "ui_submissions": 0,
+     "pngs": 1,
+     "grant_sha256": "cpu-only-grant",
+     "at": "2026-10-13T13:53:34.509113+00:00"
+    }
+   },
+   "raised": "SystemExit"
+  },
+  {
+   "test": "non_executable_refused",
+   "raised": "refused: /var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0076-lifecycle-a3l605q2/not-executable is not executable (mode 0o644)"
+  },
+  {
+   "test": "stop_latch_blocks_next_child",
+   "refusals": [
+    {
+     "at": "2026-10-13T13:53:34.833096+00:00",
+     "reason": "stop.json latched a failure; only analysis and releases may run",
+     "argv": [
+      "--receipt",
+      "handoffs/0076-shadow-guard-review/visual/preparation/lifecycle.json"
+     ]
+    }
+   ]
+  }
+ ]
+}

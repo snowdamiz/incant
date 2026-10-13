@@ -1,0 +1,1607 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 22,
+ "records": [
+  {
+   "test": "other_commit",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the candidate build record does not name the plan's candidate commit"
+   ]
+  },
+  {
+   "test": "candidate_first",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "review children ['candidate/viewport', 'baseline/viewport'] are not ['baseline/viewport', 'candidate/viewport'] once each in order"
+   ]
+  },
+  {
+   "test": "before_compare",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "compare_requires_passing_check_and_fails_honestly",
+   "exit": 1,
+   "failed": [
+    "comparison error: error('Error -5 while decompressing data: incomplete or truncated stream')"
+   ],
+   "published": true
+  },
+  {
+   "test": "complete",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "empty_evidence",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the GPU release latch is absent; run gpu.py release first",
+    "expected one passing baseline listing, found 0",
+    "expected one passing candidate listing, found 0"
+   ]
+  },
+  {
+   "test": "failed_child",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "candidate/viewport: the child failed or exited nonzero"
+   ]
+  },
+  {
+   "test": "false_contract_check",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "candidate/viewport: a contract check is false or missing"
+   ]
+  },
+  {
+   "test": "missing_listing",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "expected one passing candidate listing, found 0"
+   ]
+  },
+  {
+   "test": "missing_report",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "baseline/viewport: output holds ['events.jsonl', 'viewport-off-f24.png', 'viewport-on-f24.png'], not ['events.jsonl', 'report.json', 'viewport-off-f24.png', 'viewport-on-f24.png']",
+    "baseline/viewport: report.json is absent or empty",
+    "baseline/viewport: report.json differs from the ledger"
+   ]
+  },
+  {
+   "test": "missing_review",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "review children ['baseline/viewport'] are not ['baseline/viewport', 'candidate/viewport'] once each in order",
+    "candidate/viewport: not exactly one debit of the plan's charge",
+    "candidate/viewport: missing or duplicate review child (0 rows)"
+   ]
+  },
+  {
+   "test": "old_grants_refused",
+   "old_grants": {
+    "review-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/review-ready.json",
+     "sha256": "d5e500578c426eef0fa6ef365f87178d915d86d8a62aa7d11f229def83dc0db9",
+     "packet": "0072-motion-history-numeric"
+    },
+    "build-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/build-ready.json",
+     "sha256": "0907ee4faf48f12d0b17b4f7d5eca666f639be5201b49b7a9274c44c0f5fc2b5",
+     "packet": "0072-motion-history-numeric"
+    }
+   }
+  },
+  {
+   "test": "plan_counts_admitted_and_ceilings_refused",
+   "admitted": 52,
+   "edge_admitted": {
+    "submissions": 60,
+    "pngs": 4
+   },
+   "refused": 3
+  },
+  {
+   "test": "rebound_build_record",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the candidate build record is not the one review-ready.json binds"
+   ]
+  },
+  {
+   "test": "same_binary",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "both roles froze the same binary bytes",
+    "candidate/viewport: the child did not run the build record's binary unchanged"
+   ]
+  },
+  {
+   "test": "stale_before_change",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "stale_summary_blocks_publication",
+   "publish": "refused",
+   "pairs": "refused"
+  },
+  {
+   "test": "stop_latch",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "stop latched: {\"label\": \"synthetic\", \"reason\": \"control\"}"
+   ]
+  },
+  {
+   "test": "blurred_reference_is_not_agreement",
+   "verdict": "fail",
+   "exact": true,
+   "checks": [
+    {
+     "section": "exactness",
+     "check": "reports_and_pngs_present",
+     "value": {
+      "baseline": true,
+      "candidate": true
+     },
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "source_commits",
+     "value": [
+      "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+      "f636a2d5e595cffae702d078bcee61f34ab35394"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_fixture",
+     "value": [
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_features",
+     "value": [
+      [
+       "default",
+       "physics-deterministic"
+      ],
+      [
+       "default",
+       "physics-deterministic"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_build_arguments",
+     "value": [
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ],
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_lock_and_toolchain_file",
+     "value": [
+      "1111111111111111111111111111111111111111111111111111111111111111",
+      "1111111111111111111111111111111111111111111111111111111111111111"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_toolchain_and_host",
+     "value": [
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      },
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_adapter",
+     "value": [
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      },
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_review_config",
+     "value": [
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      },
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_viewport",
+     "value": [
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ],
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "temporal_on_frames_identical",
+     "value": {
+      "frames": 24,
+      "differing": []
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_baseline",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_candidate",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-on-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-off-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_still_f16_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      96
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_pan_f24_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      95
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "off_change_not_concentrated_at_border",
+     "value": {
+      "band": {
+       "max": 0,
+       "over_2": 0
+      },
+      "inner": {
+       "max": 126,
+       "over_2": 4631
+      }
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "mask_card_bars_identical_off",
+     "value": {
+      "pixels": [
+       5047,
+       4660
+      ],
+      "differing": 387
+     },
+     "pass": false
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_mean_gap",
+     "value": 0.19723,
+     "pass": false
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_blur_residual",
+     "value": 0.17012,
+     "pass": false
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_lowpass_max",
+     "value": 0.31355,
+     "pass": false
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_still_interior_max_delta",
+     "value": 96,
+     "pass": false
+    },
+    {
+     "section": "defect",
+     "check": "baseline_reproduces_on_off_mismatch",
+     "value": {
+      "agreement_limits_met": {
+       "mean_gap": false,
+       "blur_residual": false,
+       "lowpass_max": false
+      },
+      "mean_gap": 0.19741,
+      "blur_residual": 0.17062,
+      "lowpass_max": 0.32108
+     },
+     "pass": true
+    },
+    {
+     "section": "defect",
+     "check": "candidate_better_than_baseline",
+     "value": {
+      "mean_gap": [
+       0.19723,
+       0.19741
+      ],
+      "blur_residual": [
+       0.17012,
+       0.17062
+      ],
+      "lowpass_max": [
+       0.31355,
+       0.32108
+      ],
+      "still_interior_max_delta": [
+       96,
+       96
+      ]
+     },
+     "pass": false
+    }
+   ]
+  },
+  {
+   "test": "changed_temporal_on_frame",
+   "verdict": "fail",
+   "exact": false,
+   "checks": [
+    {
+     "section": "exactness",
+     "check": "reports_and_pngs_present",
+     "value": {
+      "baseline": true,
+      "candidate": true
+     },
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "source_commits",
+     "value": [
+      "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+      "f636a2d5e595cffae702d078bcee61f34ab35394"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_fixture",
+     "value": [
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_features",
+     "value": [
+      [
+       "default",
+       "physics-deterministic"
+      ],
+      [
+       "default",
+       "physics-deterministic"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_build_arguments",
+     "value": [
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ],
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_lock_and_toolchain_file",
+     "value": [
+      "1111111111111111111111111111111111111111111111111111111111111111",
+      "1111111111111111111111111111111111111111111111111111111111111111"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_toolchain_and_host",
+     "value": [
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      },
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_adapter",
+     "value": [
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      },
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_review_config",
+     "value": [
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      },
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_viewport",
+     "value": [
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ],
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "temporal_on_frames_identical",
+     "value": {
+      "frames": 24,
+      "differing": [
+       "on-07"
+      ]
+     },
+     "pass": false
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_baseline",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_candidate",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-on-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-off-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_still_f16_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      96
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_pan_f24_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      95
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "off_change_not_concentrated_at_border",
+     "value": {
+      "band": {
+       "max": 0,
+       "over_2": 0
+      },
+      "inner": {
+       "max": 95,
+       "over_2": 3882
+      }
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "mask_card_bars_identical_off",
+     "value": {
+      "pixels": [
+       5047,
+       5047
+      ],
+      "differing": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_mean_gap",
+     "value": 0.0,
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_blur_residual",
+     "value": 0.0,
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_lowpass_max",
+     "value": 0.00052,
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_still_interior_max_delta",
+     "value": 24,
+     "pass": true
+    },
+    {
+     "section": "defect",
+     "check": "baseline_reproduces_on_off_mismatch",
+     "value": {
+      "agreement_limits_met": {
+       "mean_gap": false,
+       "blur_residual": false,
+       "lowpass_max": false
+      },
+      "mean_gap": 0.19741,
+      "blur_residual": 0.17062,
+      "lowpass_max": 0.32108
+     },
+     "pass": true
+    },
+    {
+     "section": "defect",
+     "check": "candidate_better_than_baseline",
+     "value": {
+      "mean_gap": [
+       0.0,
+       0.19741
+      ],
+      "blur_residual": [
+       0.0,
+       0.17062
+      ],
+      "lowpass_max": [
+       0.00052,
+       0.32108
+      ],
+      "still_interior_max_delta": [
+       24,
+       96
+      ]
+     },
+     "pass": true
+    }
+   ]
+  },
+  {
+   "test": "diagnosed_mismatch_in_both_roles",
+   "verdict": "fail",
+   "exact": true,
+   "checks": [
+    {
+     "section": "exactness",
+     "check": "reports_and_pngs_present",
+     "value": {
+      "baseline": true,
+      "candidate": true
+     },
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "source_commits",
+     "value": [
+      "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+      "f636a2d5e595cffae702d078bcee61f34ab35394"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_fixture",
+     "value": [
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_features",
+     "value": [
+      [
+       "default",
+       "physics-deterministic"
+      ],
+      [
+       "default",
+       "physics-deterministic"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_build_arguments",
+     "value": [
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ],
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_lock_and_toolchain_file",
+     "value": [
+      "1111111111111111111111111111111111111111111111111111111111111111",
+      "1111111111111111111111111111111111111111111111111111111111111111"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_toolchain_and_host",
+     "value": [
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      },
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_adapter",
+     "value": [
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      },
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_review_config",
+     "value": [
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      },
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_viewport",
+     "value": [
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ],
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "temporal_on_frames_identical",
+     "value": {
+      "frames": 24,
+      "differing": []
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_baseline",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_candidate",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-on-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-off-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_still_f16_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      96
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_pan_f24_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      95
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "off_change_not_concentrated_at_border",
+     "value": {
+      "band": {
+       "max": 0,
+       "over_2": 0
+      },
+      "inner": {
+       "max": 0,
+       "over_2": 0
+      }
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "mask_card_bars_identical_off",
+     "value": {
+      "pixels": [
+       5047,
+       5047
+      ],
+      "differing": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_mean_gap",
+     "value": 0.19741,
+     "pass": false
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_blur_residual",
+     "value": 0.17062,
+     "pass": false
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_lowpass_max",
+     "value": 0.32108,
+     "pass": false
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_still_interior_max_delta",
+     "value": 96,
+     "pass": false
+    },
+    {
+     "section": "defect",
+     "check": "baseline_reproduces_on_off_mismatch",
+     "value": {
+      "agreement_limits_met": {
+       "mean_gap": false,
+       "blur_residual": false,
+       "lowpass_max": false
+      },
+      "mean_gap": 0.19741,
+      "blur_residual": 0.17062,
+      "lowpass_max": 0.32108
+     },
+     "pass": true
+    },
+    {
+     "section": "defect",
+     "check": "candidate_better_than_baseline",
+     "value": {
+      "mean_gap": [
+       0.19741,
+       0.19741
+      ],
+      "blur_residual": [
+       0.17062,
+       0.17062
+      ],
+      "lowpass_max": [
+       0.32108,
+       0.32108
+      ],
+      "still_interior_max_delta": [
+       96,
+       96
+      ]
+     },
+     "pass": false
+    }
+   ]
+  },
+  {
+   "test": "guards_fail_on_outside_border_and_bar_changes",
+   "failed": {
+    "outside": [
+     "guards: outside_viewport_identical_viewport-off-f24.png"
+    ],
+    "border": [
+     "guards: off_change_not_concentrated_at_border"
+    ],
+    "bar": [
+     "guards: mask_card_bars_identical_off"
+    ]
+   }
+  },
+  {
+   "test": "missing_outputs_fail",
+   "failed": [
+    "exactness: reports_and_pngs_present"
+   ]
+  },
+  {
+   "test": "synthetic_agreeing_candidate",
+   "verdict": "pass",
+   "exact": true,
+   "checks": [
+    {
+     "section": "exactness",
+     "check": "reports_and_pngs_present",
+     "value": {
+      "baseline": true,
+      "candidate": true
+     },
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "source_commits",
+     "value": [
+      "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+      "f636a2d5e595cffae702d078bcee61f34ab35394"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_fixture",
+     "value": [
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+      "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_features",
+     "value": [
+      [
+       "default",
+       "physics-deterministic"
+      ],
+      [
+       "default",
+       "physics-deterministic"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_build_arguments",
+     "value": [
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ],
+      [
+       "test",
+       "-p",
+       "incant_render",
+       "--test",
+       "temporal_visual_review",
+       "--no-run",
+       "--locked",
+       "--offline",
+       "--profile",
+       "ci",
+       "-j2",
+       "--message-format=json-render-diagnostics"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_lock_and_toolchain_file",
+     "value": [
+      "1111111111111111111111111111111111111111111111111111111111111111",
+      "1111111111111111111111111111111111111111111111111111111111111111"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_toolchain_and_host",
+     "value": [
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      },
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_adapter",
+     "value": [
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      },
+      {
+       "backend": "Metal",
+       "device": 0,
+       "device_type": "IntegratedGpu",
+       "driver": "",
+       "driver_info": "",
+       "name": "Apple M5 Pro",
+       "vendor": 0
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_review_config",
+     "value": [
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      },
+      {
+       "absolute_depth": 0.019999999552965164,
+       "history_weight": 0.8999999761581421,
+       "reactive_strength": 0.5,
+       "reactive_threshold": 4.0,
+       "relative_depth": 0.05000000074505806
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_viewport",
+     "value": [
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ],
+      [
+       [
+        37.0,
+        19.0,
+        885.0,
+        501.0
+       ],
+       [
+        960,
+        540
+       ]
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "temporal_on_frames_identical",
+     "value": {
+      "frames": 24,
+      "differing": []
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_baseline",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_static_candidate",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-on-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "outside_viewport_identical_viewport-off-f24.png",
+     "value": {
+      "pixels": 75015,
+      "differing": 0,
+      "not_canvas": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_still_f16_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      96
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "candidate_pan_f24_border_vs_off_band_not_above_inner",
+     "value": [
+      1,
+      95
+     ],
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "off_change_not_concentrated_at_border",
+     "value": {
+      "band": {
+       "max": 0,
+       "over_2": 0
+      },
+      "inner": {
+       "max": 95,
+       "over_2": 3882
+      }
+     },
+     "pass": true
+    },
+    {
+     "section": "guards",
+     "check": "mask_card_bars_identical_off",
+     "value": {
+      "pixels": [
+       5047,
+       5047
+      ],
+      "differing": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_mean_gap",
+     "value": 0.0,
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_blur_residual",
+     "value": 0.0,
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_grille_shadow_lowpass_max",
+     "value": 0.00052,
+     "pass": true
+    },
+    {
+     "section": "agreement",
+     "check": "candidate_still_interior_max_delta",
+     "value": 24,
+     "pass": true
+    },
+    {
+     "section": "defect",
+     "check": "baseline_reproduces_on_off_mismatch",
+     "value": {
+      "agreement_limits_met": {
+       "mean_gap": false,
+       "blur_residual": false,
+       "lowpass_max": false
+      },
+      "mean_gap": 0.19741,
+      "blur_residual": 0.17062,
+      "lowpass_max": 0.32108
+     },
+     "pass": true
+    },
+    {
+     "section": "defect",
+     "check": "candidate_better_than_baseline",
+     "value": {
+      "mean_gap": [
+       0.0,
+       0.19741
+      ],
+      "blur_residual": [
+       0.0,
+       0.17062
+      ],
+      "lowpass_max": [
+       0.00052,
+       0.32108
+      ],
+      "still_interior_max_delta": [
+       24,
+       96
+      ]
+     },
+     "pass": true
+    }
+   ]
+  }
+ ]
+}
