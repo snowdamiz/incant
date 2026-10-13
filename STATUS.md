@@ -26,8 +26,17 @@ tests, four public locale builds, 14 native positive processes and ten fresh
 source-deleted shipping runs pass, including four exact whole-session PCM
 continuations. Original g5/g6 GPU acceptance remains attached to those binaries;
 no new GPU/device/performance claim is made. Final archive review is accepted;
-current-main qualification is independently accepted, with publication awaiting
+current-main qualification is independently accepted and PR216 merged after
 the required fast check. [Scope and evidence](docs/spikes/core0069-main212.md).
+
+## Inert collider properties — main216 integration
+
+Accepted collider records and exact owner joins are composed on main216 with
+unchanged physics source, vendor inputs, lock and selected dependency graph.
+The two retained executable suites pass 34 cases again; the complete 135-case
+producer suite and strict Clippy/wasm checks remain exact-source evidence.
+Current-main integration review is pending. Live physics saves remain refused.
+[Scope and relevance](docs/spikes/physics-collider-main216.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -39,9 +48,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main215, 2026-10-13
+## Current overview — main216, 2026-10-13
 
-Development main215 includes the reviewed opt-in cooked renderer families and
+Development main216 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -61,7 +70,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–215 changes remain outside that tested baseline. No device, performance or
+Later main206–216 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
