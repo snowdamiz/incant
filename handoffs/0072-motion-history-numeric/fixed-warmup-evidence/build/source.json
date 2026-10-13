@@ -1,0 +1,42 @@
+{
+ "build_grant_sha256": "46c1d3ef5fa4b81e89a4e5c1cf3c63743c0b4ff1fdeeb7e51cd6571b30ecf97d",
+ "holder": "root-supervised warmup comparison CPU build",
+ "tools": {
+  "head": "8dfeb207be5760f11f29178b8f9d928fe1ebca82",
+  "visual_tree": "648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25",
+  "plan_sha256": "e587e6f29378f5b8a2892c4f3d74d5233cbc9be9aac448bb02d7274269de351e",
+  "helper_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "source_commit": "296e02268458afea21ff90e8aea820a3dec2b314",
+ "tree": "19e3a512596fc6625329c3ad98dff7df27739156",
+ "files": 18099,
+ "checkout_manifest_sha256": "5929e05ff2ed34a3fceec3c5611973155305019a32ccea31b0a151b5c33f7922",
+ "source_freeze": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/source-freeze.json",
+  "sha256": "05daf1a38a4782c2e40c3dde7cf15ed3037de63ce752f9cdf83e81a8e61929d5",
+  "names_commit": {
+   "source_commit": "296e02268458afea21ff90e8aea820a3dec2b314"
+  }
+ },
+ "coverage": {
+  "build_input_roots": [
+   "crates",
+   "Cargo.toml",
+   "Cargo.lock",
+   "third_party",
+   "tools/cargo",
+   "rust-toolchain.toml"
+  ],
+  "build_inputs": 2452,
+  "freeze_rows": 2452,
+  "freeze_build_input_rows": 2452,
+  "inputs_missing_from_freeze": [],
+  "freeze_rows_missing_from_commit": [],
+  "mismatched": [],
+  "mismatched_count": 0,
+  "exact": true
+ },
+ "cargo_lock_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "recorded": "2026-10-13T13:24:19.573432+00:00"
+}

@@ -1,0 +1,2 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/checkout/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 5.10s

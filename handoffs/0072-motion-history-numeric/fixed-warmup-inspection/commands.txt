@@ -1,0 +1,55 @@
+# Run from the worktree root; CPU only; reads published PNGs. python3 is /opt/homebrew/bin/python3 (3.14).
+# W = handoffs/0072-motion-history-numeric/fixed-warmup-screenshots (this run, 296e0226), A = handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots (rejected a143b5c0), B = handoffs/0072-motion-history-numeric/temporal-coverage-screenshots (accepted e23776df).
+# Scripts other than png_vs_prior.py are the committed fixed-sharpness-inspection/ aids, reused read-only.
+
+# png_vs_prior.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-warmup-inspection/png_vs_prior.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-warmup-screenshots handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+
+# localize-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/localize.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-off.png prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-on-f16.png,handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-activity.png warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/stationary-on-f16.png,handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/stationary-activity.png
+
+# activity_bands-stationary.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/activity_bands.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-off.png baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/stationary-activity.png prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/stationary-activity.png warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/stationary-activity.png
+
+# activity_bands-excluded.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/activity_bands.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/excluded-off.png baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/excluded-activity.png prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/excluded-activity.png warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/excluded-activity.png
+
+# cube_profile.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/cube_profile.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-off-f8.png baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots/motion-object-on-f8.png prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-on-f8.png warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/motion-object-on-f8.png
+
+# off_edge_clusters-object-warmup.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/motion-object-on-f8.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-object-off-f8.png 9
+
+# off_edge_clusters-pan-prior-ge3.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png 3
+
+# off_edge_clusters-pan-warmup-ge3.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png 3
+
+# off_edge_clusters-viewport-pan-warmup.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/off_edge_clusters.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/viewport-on-f24.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/viewport-off-f24.png 9
+
+# region_compare-pan-frame.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/region_compare.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/motion-pan-on-f6.png 0,0,960,540
+
+# region_compare-skinned-triangle.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/region_compare.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-off-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/skinned-on-f6.png 470,190,630,375
+
+# registration_split-skinned-warmup.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/registration_split.py handoffs/0072-motion-history-numeric/visual/tools handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-off-f6.png 360,180,640,390
+
+# pixels-skinned-corner.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools window 206 131 8 1 handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/skinned-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/skinned-off-f6.png
+
+# pixels-pan-post-shadow.txt (exit 0)
+python3 -I -B handoffs/0072-motion-history-numeric/fixed-sharpness-inspection/pixels.py handoffs/0072-motion-history-numeric/visual/tools window 380 54 10 1 handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-warmup-screenshots/motion-pan-on-f6.png handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots/motion-pan-off-f6.png
+
+# Viewing aids (all exit 0): magnified crops written outside the worktree (<crops>), not committed.
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> grille-low:stationary-on-f16.png:stationary-off.png:530,200,660,256:4 handoffs/0067-dynamic-resolution/tools prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> grille-low-act:stationary-activity.png:stationary-off.png:530,200,660,256:4 handoffs/0067-dynamic-resolution/tools prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> skin:skinned-on-f6.png:skinned-off-f6.png:190,115,240,155:8 handoffs/0067-dynamic-resolution/tools baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> tri:skinned-on-f6.png:skinned-off-f6.png:460,190,630,370:3 handoffs/0067-dynamic-resolution/tools prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> cube:motion-object-on-f8.png:motion-object-off-f8.png:410,160,560,250:3 handoffs/0067-dynamic-resolution/tools baseline=handoffs/0072-motion-history-numeric/temporal-coverage-screenshots prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> pan:motion-pan-on-f6.png:motion-pan-off-f6.png:370,40,470,80:5 handoffs/0067-dynamic-resolution/tools prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> excl:excluded-on-f8.png:excluded-off.png:300,100,420,170:4 handoffs/0067-dynamic-resolution/tools prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots
+python3 -I -B handoffs/0072-motion-history-numeric/temporal-coverage-inspection/crops.py <crops> vp-shadow:viewport-on-f24.png:viewport-off-f24.png:440,260,700,310:3 handoffs/0067-dynamic-resolution/tools prior=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots warmup=handoffs/0072-motion-history-numeric/fixed-warmup-screenshots off=handoffs/0072-motion-history-numeric/fixed-sharpness-screenshots

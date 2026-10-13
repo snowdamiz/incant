@@ -1,20 +1,20 @@
 # 0072 result: retained motion-data GPU execution
 
-> **Current stage: [`warmup-preparation.md`](warmup-preparation.md).** This is the
-> CPU-only preparation of the reset-ramp (`296e0226`) comparison.
->
-> - **Not run:** no GPU, Cargo or screenshots.
-> - **Plan:** 110 submissions against a cap of 120.
-> - **Unchanged:** the fixture and the thresholds.
-> - **Status:** ready for root's grants.
->
-> **Latest executed result: [`sharpness-result.md`](sharpness-result.md).** This is
-> the frozen C-reg (`a143b5c0`) sharpness comparison.
+> **Current result: [`warmup-result.md`](warmup-result.md).** This is the frozen
+> reset-ramp (`296e0226`) comparison: 110 submissions and 16 PNGs.
 >
 > - **Integrity:** passed.
-> - **Quality comparison:** **failed**, on 13 of 37 frozen thresholds. C-reg is
->   much sharper than the accepted baseline, but less stable and misregistered
->   after resets.
+> - **Comparison:** exact against both the accepted `e23776df` baseline and the
+>   rejected `a143b5c0` prior.
+> - **Quality:** **failed**, on 11 of 38 unchanged thresholds.
+>   - **Resolved (2):** skinned registration (0.207 → 0.067 px) and pan off-edge.
+>   - **Persisting (11):** the rest of a143's failures.
+>   - **New:** none.
+>   - **Reset frames:** all history-free frames are byte-identical.
+> - **Side effect:** steady-state flicker peaks on sub-pixel features grew.
+>
+> **Previous executed result: [`sharpness-result.md`](sharpness-result.md).** This
+> is the a143 comparison: integrity passed; quality failed on 13 of 37.
 >
 > **Stage records, in order:**
 > 1. this file and `preflight-result.md`;
@@ -25,7 +25,7 @@
 >    baseline);
 > 6. `fixed-sharpness-design.md`, `sharpness-preparation.md`, root's
 >    `sharpness-build-repair.md`, and `sharpness-result.md`;
-> 7. `warmup-preparation.md`.
+> 7. `warmup-preparation.md` and `warmup-result.md`.
 >
 > The text below is the original retained motion-data result, unchanged.
 

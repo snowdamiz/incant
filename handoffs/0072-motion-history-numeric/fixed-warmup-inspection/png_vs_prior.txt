@@ -1,0 +1,16 @@
+excluded-activity.png        identical  513730 | 1-2      0 | 3-8   1714 | >8   2956 | max 68
+excluded-off.png             identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+excluded-on-f8.png           identical  514166 | 1-2   1180 | 3-8   2468 | >8    586 | max 13
+motion-object-off-f8.png     identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+motion-object-on-f8.png      identical  489125 | 1-2  17590 | 3-8   6977 | >8   4708 | max 43
+motion-pan-off-f6.png        identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+motion-pan-on-f6.png         identical  470322 | 1-2  33609 | 3-8  11161 | >8   3308 | max 37
+skinned-off-f6.png           identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+skinned-on-f6.png            identical  510926 | 1-2   1934 | 3-8   3724 | >8   1816 | max 18
+stationary-activity.png      identical  500847 | 1-2      0 | 3-8  16557 | >8    996 | max 72
+stationary-off.png           identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+stationary-on-f16.png        identical  499066 | 1-2  14119 | 3-8   4603 | >8    612 | max 15
+transition-cut-f7.png        identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+transition-drs-f9.png        identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+viewport-off-f24.png         identical  518400 | 1-2      0 | 3-8      0 | >8      0 | max 0
+viewport-on-f24.png          identical  512840 | 1-2   5560 | 3-8      0 | >8      0 | max 2

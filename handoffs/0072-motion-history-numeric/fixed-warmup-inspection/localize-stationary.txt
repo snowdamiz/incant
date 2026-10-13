@@ -1,0 +1,40 @@
+== prior
+  saturated (64+ steps) 4: [(431, 53, 'edge'), (428, 54, 'edge'), (428, 55, 'edge'), (428, 57, 'edge')]
+  activity >= 33: 216
+    cell 408,48: 9 px, bbox (428,48)-(431,57), max 64
+    cell 408,24: 8 px, bbox (428,42)-(431,47), max 63
+    cell 600,48: 8 px, bbox (602,52)-(623,59), max 35
+    cell 672,72: 8 px, bbox (673,76)-(694,83), max 35
+    cell 744,96: 8 px, bbox (744,100)-(765,107), max 35
+    cell 552,216: 8 px, bbox (553,226)-(571,237), max 49
+    cell 816,120: 6 px, bbox (818,125)-(833,130), max 35
+    cell 888,144: 6 px, bbox (889,149)-(904,154), max 35
+  halo above local max by > 2 steps: 100
+    cell 384,240: 24 px, bbox (384,243)-(407,243), max 10
+    cell 408,240: 24 px, bbox (408,243)-(431,243), max 10
+    cell 360,240: 17 px, bbox (367,243)-(383,243), max 9
+    cell 432,240: 13 px, bbox (432,243)-(444,243), max 9
+    cell 576,168: 6 px, bbox (579,182)-(598,183), max 6
+    cell 432,24: 4 px, bbox (434,42)-(434,45), max 23
+    cell 600,168: 3 px, bbox (606,182)-(610,183), max 4
+    cell 432,264: 3 px, bbox (438,279)-(438,281), max 3
+== warmup
+  saturated (64+ steps) 6: [(431, 53, 'edge'), (428, 54, 'edge'), (428, 55, 'edge'), (428, 57, 'edge'), (556, 242, 'edge'), (542, 243, 'edge')]
+  activity >= 33: 139
+    cell 408,48: 11 px, bbox (427,48)-(431,57), max 64
+    cell 408,24: 10 px, bbox (427,42)-(431,47), max 63
+    cell 552,240: 9 px, bbox (552,242)-(574,252), max 64
+    cell 552,216: 8 px, bbox (553,226)-(571,237), max 60
+    cell 600,240: 8 px, bbox (600,242)-(623,252), max 58
+    cell 528,216: 7 px, bbox (542,216)-(549,237), max 52
+    cell 552,168: 6 px, bbox (562,187)-(575,189), max 56
+    cell 624,240: 6 px, bbox (625,242)-(640,252), max 59
+  halo above local max by > 2 steps: 101
+    cell 384,240: 24 px, bbox (384,243)-(407,243), max 10
+    cell 408,240: 24 px, bbox (408,243)-(431,243), max 10
+    cell 360,240: 17 px, bbox (367,243)-(383,243), max 9
+    cell 432,240: 13 px, bbox (432,243)-(444,243), max 9
+    cell 576,168: 6 px, bbox (579,182)-(598,183), max 6
+    cell 432,24: 4 px, bbox (434,42)-(434,45), max 23
+    cell 600,168: 4 px, bbox (606,182)-(610,183), max 4
+    cell 432,264: 3 px, bbox (438,279)-(438,281), max 3

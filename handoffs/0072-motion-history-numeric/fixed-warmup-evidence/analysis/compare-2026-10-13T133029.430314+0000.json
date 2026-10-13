@@ -1,0 +1,1183 @@
+{
+ "verdict": "fail",
+ "exact": true,
+ "failed": [
+  "stability: stationary_activity_saturated",
+  "stability: frames_9_16_edge_max",
+  "stability: same_phase_f08_f16_interior_changed",
+  "stability: halo_stationary-on-f16.png",
+  "ghosts: off_edge_motion-object-on-f8.png",
+  "ghosts: trailing_band_vs_top_control",
+  "ghosts: trailing_band_no_worse_than_baseline",
+  "viewport: still_activity_saturated",
+  "viewport: still_frames_9_16_edge_max",
+  "viewport: still_same_phase_interior_changed",
+  "viewport: pan_off_edge_ge9"
+ ],
+ "checks": [
+  {
+   "section": "exactness",
+   "check": "baseline_manifest_sha256",
+   "value": "e337bc34ba0f1a83b73a862fac229f65827cbd4313a55114d1075032c5227016",
+   "limit": "e337bc34ba0f1a83b73a862fac229f65827cbd4313a55114d1075032c5227016",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "baseline_files_match_manifest",
+   "value": [],
+   "limit": [],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "baseline_identity",
+   "value": [
+    "e23776df275fa1de81b2027110d9c7b6916999ac",
+    "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+    "27756c0dad957287c328f690d15ef14565dd3fb83be3156275fefa042c934d64"
+   ],
+   "limit": [
+    "e23776df275fa1de81b2027110d9c7b6916999ac",
+    "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+    "27756c0dad957287c328f690d15ef14565dd3fb83be3156275fefa042c934d64"
+   ],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "candidate_source_commit",
+   "value": "296e02268458afea21ff90e8aea820a3dec2b314",
+   "limit": "296e02268458afea21ff90e8aea820a3dec2b314",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "temporal_off_references_identical",
+   "value": {
+    "stationary-off.png": true,
+    "motion-object-off-f8.png": true,
+    "motion-pan-off-f6.png": true,
+    "excluded-off.png": true,
+    "skinned-off-f6.png": true
+   },
+   "limit": "all true",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_adapter",
+   "value": [
+    [
+     "Apple M5 Pro",
+     "Metal",
+     "IntegratedGpu"
+    ],
+    [
+     "Apple M5 Pro",
+     "Metal",
+     "IntegratedGpu"
+    ]
+   ],
+   "limit": "equal",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_toolchain_and_host",
+   "value": [
+    {
+     "rustc": [
+      "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "binary: rustc"
+     ],
+     "cargo": [
+      "cargo 1.99.0 (5f94df478 2026-08-27)"
+     ],
+     "sw_vers": [
+      "ProductName:\t\tmacOS",
+      "ProductVersion:\t\t27.0.1"
+     ],
+     "hw_model": [
+      "Mac17,9"
+     ]
+    },
+    {
+     "rustc": [
+      "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "binary: rustc"
+     ],
+     "cargo": [
+      "cargo 1.99.0 (5f94df478 2026-08-27)"
+     ],
+     "sw_vers": [
+      "ProductName:\t\tmacOS",
+      "ProductVersion:\t\t27.0.1"
+     ],
+     "hw_model": [
+      "Mac17,9"
+     ]
+    }
+   ],
+   "limit": "equal",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_review_config",
+   "value": {
+    "candidate": true,
+    "baseline": true
+   },
+   "limit": "every report equals plan review_config (f32)",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "prior_manifest_sha256",
+   "value": "62e89fa2a5a5bdd7fae4551d9aee430f502310c9b72c1c5e54b4004bb89f6b87",
+   "limit": "62e89fa2a5a5bdd7fae4551d9aee430f502310c9b72c1c5e54b4004bb89f6b87",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "prior_files_match_manifest",
+   "value": [],
+   "limit": [],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "prior_identity",
+   "value": [
+    "a143b5c0f537bd35111e40e99626f40318a385ac",
+    "b11a7d3aad4228eab0fee10024a87d46bb109560",
+    "81cb64692495792989fae28681a76de0e3085cc9a32abc27e3721b1a49d36980"
+   ],
+   "limit": [
+    "a143b5c0f537bd35111e40e99626f40318a385ac",
+    "b11a7d3aad4228eab0fee10024a87d46bb109560",
+    "81cb64692495792989fae28681a76de0e3085cc9a32abc27e3721b1a49d36980"
+   ],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "prior_recorded_failures",
+   "value": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "registration: skinned-on-f6.png",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "limit": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "registration: skinned-on-f6.png",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "temporal_off_identical_to_prior",
+   "value": {
+    "pngs": {
+     "stationary-off.png": true,
+     "motion-object-off-f8.png": true,
+     "motion-pan-off-f6.png": true,
+     "excluded-off.png": true,
+     "skinned-off-f6.png": true,
+     "viewport-off-f24.png": true
+    },
+    "off_frames": 12,
+    "off_frames_identical": true
+   },
+   "limit": "all temporal-off PNGs and frames identical",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "prior_same_adapter",
+   "value": [
+    [
+     "Apple M5 Pro",
+     "Metal",
+     "IntegratedGpu"
+    ],
+    [
+     "Apple M5 Pro",
+     "Metal",
+     "IntegratedGpu"
+    ]
+   ],
+   "limit": "equal",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "prior_same_toolchain_and_host",
+   "value": [
+    {
+     "rustc": [
+      "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "binary: rustc"
+     ],
+     "cargo": [
+      "cargo 1.99.0 (5f94df478 2026-08-27)"
+     ],
+     "sw_vers": [
+      "ProductName:\t\tmacOS",
+      "ProductVersion:\t\t27.0.1"
+     ],
+     "hw_model": [
+      "Mac17,9"
+     ]
+    },
+    {
+     "rustc": [
+      "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "binary: rustc"
+     ],
+     "cargo": [
+      "cargo 1.99.0 (5f94df478 2026-08-27)"
+     ],
+     "sw_vers": [
+      "ProductName:\t\tmacOS",
+      "ProductVersion:\t\t27.0.1"
+     ],
+     "hw_model": [
+      "Mac17,9"
+     ]
+    }
+   ],
+   "limit": "equal",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "prior_same_review_config",
+   "value": true,
+   "limit": "every prior report equals plan review_config (f32)",
+   "pass": true
+  },
+  {
+   "section": "sharpness",
+   "check": "grille_detail_ratio",
+   "value": 0.587,
+   "limit": ">= 0.5",
+   "pass": true
+  },
+  {
+   "section": "sharpness",
+   "check": "grille_sigma_px",
+   "value": 0.521,
+   "limit": "<= 0.6",
+   "pass": true
+  },
+  {
+   "section": "sharpness",
+   "check": "posts+shadows_sigma_px",
+   "value": 0.519,
+   "limit": "<= 0.6",
+   "pass": true
+  },
+  {
+   "section": "sharpness",
+   "check": "far-posts_sigma_px",
+   "value": 0.557,
+   "limit": "<= 0.6",
+   "pass": true
+  },
+  {
+   "section": "sharpness",
+   "check": "horizon-diag_sigma_px",
+   "value": 0.531,
+   "limit": "<= 0.6",
+   "pass": true
+  },
+  {
+   "section": "sharpness",
+   "check": "sphere-edge_sigma_px",
+   "value": 0.451,
+   "limit": "<= 0.6",
+   "pass": true
+  },
+  {
+   "section": "stability",
+   "check": "stationary_activity_ge33",
+   "value": 139,
+   "limit": "<= 318",
+   "pass": true
+  },
+  {
+   "section": "stability",
+   "check": "stationary_activity_saturated",
+   "value": 6,
+   "limit": "<= 0",
+   "pass": false
+  },
+  {
+   "section": "stability",
+   "check": "frames_9_16_edge_mean",
+   "value": 2.368,
+   "limit": "<= 5",
+   "pass": true
+  },
+  {
+   "section": "stability",
+   "check": "frames_9_16_edge_max",
+   "value": 83,
+   "limit": "<= 50",
+   "pass": false
+  },
+  {
+   "section": "stability",
+   "check": "frames_9_16_interior_changed",
+   "value": 40,
+   "limit": "<= 100",
+   "pass": true
+  },
+  {
+   "section": "stability",
+   "check": "same_phase_f08_f16_interior_changed",
+   "value": 9,
+   "limit": "<= 0",
+   "pass": false
+  },
+  {
+   "section": "stability",
+   "check": "halo_stationary-on-f16.png",
+   "value": {
+    "above_local_max": 101,
+    "below_local_min": 123
+   },
+   "limit": "above_local_max <= 0",
+   "pass": false
+  },
+  {
+   "section": "stability",
+   "check": "halo_excluded-on-f8.png",
+   "value": {
+    "above_local_max": 0,
+    "below_local_min": 3
+   },
+   "limit": "above_local_max <= 0",
+   "pass": true
+  },
+  {
+   "section": "ghosts",
+   "check": "off_edge_motion-object-on-f8.png",
+   "value": {
+    "3-8": 349,
+    "9-16": 36,
+    ">16": 0,
+    "max": 11
+   },
+   "limit": {
+    "baseline": {
+     "3-8": 830,
+     "9-16": 30,
+     ">16": 0,
+     "max": 10
+    },
+    "rule": "each bin <= baseline"
+   },
+   "pass": false
+  },
+  {
+   "section": "ghosts",
+   "check": "off_edge_motion-pan-on-f6.png",
+   "value": {
+    "3-8": 96,
+    "9-16": 0,
+    ">16": 0,
+    "max": 8
+   },
+   "limit": {
+    "baseline": {
+     "3-8": 391,
+     "9-16": 0,
+     ">16": 0,
+     "max": 7
+    },
+    "rule": "each bin <= baseline"
+   },
+   "pass": true
+  },
+  {
+   "section": "ghosts",
+   "check": "off_edge_skinned-on-f6.png",
+   "value": {
+    "3-8": 0,
+    "9-16": 0,
+    ">16": 0,
+    "max": 0
+   },
+   "limit": {
+    "baseline": {
+     "3-8": 0,
+     "9-16": 0,
+     ">16": 0,
+     "max": 0
+    },
+    "rule": "each bin <= baseline"
+   },
+   "pass": true
+  },
+  {
+   "section": "ghosts",
+   "check": "trailing_band_vs_top_control",
+   "value": {
+    "trailing_1px": 51.45,
+    "top_1px": 38.07,
+    "samples": [
+     33,
+     45
+    ]
+   },
+   "limit": "trailing_1px <= 1.1 x top_1px",
+   "pass": false
+  },
+  {
+   "section": "ghosts",
+   "check": "trailing_band_no_worse_than_baseline",
+   "value": [
+    51.45,
+    47.73
+   ],
+   "limit": "candidate trailing_1px <= baseline trailing_1px",
+   "pass": false
+  },
+  {
+   "section": "exclusion",
+   "check": "ui_identical_all_phases",
+   "value": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "limit": "8 x true",
+   "pass": true
+  },
+  {
+   "section": "exclusion",
+   "check": "overlay_activity_ge33",
+   "value": 0,
+   "limit": "<= 0",
+   "pass": true
+  },
+  {
+   "section": "reset",
+   "check": "transition-cut-f7.png_max_step_vs_baseline",
+   "value": 0,
+   "limit": "<= 1",
+   "pass": true
+  },
+  {
+   "section": "reset",
+   "check": "transition-drs-f9.png_max_step_vs_baseline",
+   "value": 0,
+   "limit": "<= 1",
+   "pass": true
+  },
+  {
+   "section": "reset",
+   "check": "history_free_frames_identical",
+   "value": {
+    "frames": 11,
+    "compared": {
+     "prior": 11,
+     "baseline": 10
+    },
+    "differing": [],
+    "missing_from_prior": []
+   },
+   "limit": "every history-free frame byte-identical to prior and baseline",
+   "pass": true
+  },
+  {
+   "section": "registration",
+   "check": "stationary-on-f16.png",
+   "value": {
+    "dx": 0.008,
+    "dy": -0.027,
+    "points": 20282
+   },
+   "limit": "|dx|,|dy| <= 0.1",
+   "pass": true
+  },
+  {
+   "section": "registration",
+   "check": "motion-object-on-f8.png",
+   "value": {
+    "dx": 0.034,
+    "dy": -0.023,
+    "points": 20025
+   },
+   "limit": "|dx|,|dy| <= 0.1",
+   "pass": true
+  },
+  {
+   "section": "registration",
+   "check": "skinned-on-f6.png",
+   "value": {
+    "dx": 0.067,
+    "dy": -0.005,
+    "points": 87
+   },
+   "limit": "|dx|,|dy| <= 0.1",
+   "pass": true
+  },
+  {
+   "section": "registration",
+   "check": "excluded-on-f8.png",
+   "value": {
+    "dx": -0.0,
+    "dy": -0.001,
+    "points": 10534
+   },
+   "limit": "|dx|,|dy| <= 0.1",
+   "pass": true
+  },
+  {
+   "section": "viewport",
+   "check": "still_activity_ge33",
+   "value": 198,
+   "limit": "<= 318",
+   "pass": true
+  },
+  {
+   "section": "viewport",
+   "check": "still_activity_saturated",
+   "value": 23,
+   "limit": "<= 0",
+   "pass": false
+  },
+  {
+   "section": "viewport",
+   "check": "still_frames_9_16_edge_mean",
+   "value": 1.93,
+   "limit": "<= 5",
+   "pass": true
+  },
+  {
+   "section": "viewport",
+   "check": "still_frames_9_16_edge_max",
+   "value": 91,
+   "limit": "<= 50",
+   "pass": false
+  },
+  {
+   "section": "viewport",
+   "check": "still_frames_9_16_interior_changed",
+   "value": 39,
+   "limit": "<= 100",
+   "pass": true
+  },
+  {
+   "section": "viewport",
+   "check": "still_same_phase_interior_changed",
+   "value": 2,
+   "limit": "<= 0",
+   "pass": false
+  },
+  {
+   "section": "viewport",
+   "check": "still_f16_border_vs_off_band_max_not_above_inner",
+   "value": [
+    1,
+    96
+   ],
+   "limit": "band <= inner",
+   "pass": true
+  },
+  {
+   "section": "viewport",
+   "check": "pan_f24_border_vs_off_band_max_not_above_inner",
+   "value": [
+    1,
+    95
+   ],
+   "limit": "band <= inner",
+   "pass": true
+  },
+  {
+   "section": "viewport",
+   "check": "outside_viewport_max_delta",
+   "value": 0,
+   "limit": "== 0",
+   "pass": true
+  },
+  {
+   "section": "viewport",
+   "check": "pan_off_edge_ge9",
+   "value": {
+    "3-8": 815,
+    "9-16": 2,
+    ">16": 211,
+    "max": 86
+   },
+   "limit": "9-16 == 0 and >16 == 0",
+   "pass": false
+  },
+  {
+   "section": "exactness",
+   "check": "prior_recomputed_failures_match_record",
+   "value": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "registration: skinned-on-f6.png",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "limit": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "registration: skinned-on-f6.png",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "pass": true
+  }
+ ],
+ "baseline_context": {
+  "baseline_grille": {
+   "detail_ratio": 0.182,
+   "sigma_px": 0.887
+  },
+  "baseline_posts+shadows": {
+   "detail_ratio": 0.426,
+   "sigma_px": 0.9
+  },
+  "baseline_far-posts": {
+   "detail_ratio": 0.352,
+   "sigma_px": 0.874
+  },
+  "baseline_horizon-diag": {
+   "detail_ratio": 0.413,
+   "sigma_px": 0.879
+  },
+  "baseline_sphere-edge": {
+   "detail_ratio": 0.449,
+   "sigma_px": 0.757
+  },
+  "baseline_halo_stationary-on-f16.png": {
+   "above_local_max": 1048,
+   "below_local_min": 1193
+  },
+  "baseline_halo_excluded-on-f8.png": {
+   "above_local_max": 1276,
+   "below_local_min": 297
+  },
+  "baseline_registration_stationary-on-f16.png": {
+   "dx": 0.001,
+   "dy": -0.033,
+   "points": 20282
+  },
+  "baseline_registration_motion-object-on-f8.png": {
+   "dx": 0.001,
+   "dy": -0.038,
+   "points": 20025
+  },
+  "baseline_registration_skinned-on-f6.png": {
+   "dx": 0.004,
+   "dy": 0.023,
+   "points": 87
+  },
+  "baseline_registration_excluded-on-f8.png": {
+   "dx": -0.0,
+   "dy": -0.001,
+   "points": 10534
+  },
+  "prior_effect": {
+   "sharpness: grille_detail_ratio": {
+    "prior": 0.566,
+    "candidate": 0.587,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "sharpness: grille_sigma_px": {
+    "prior": 0.533,
+    "candidate": 0.521,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "sharpness: posts+shadows_sigma_px": {
+    "prior": 0.531,
+    "candidate": 0.519,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "sharpness: far-posts_sigma_px": {
+    "prior": 0.567,
+    "candidate": 0.557,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "sharpness: horizon-diag_sigma_px": {
+    "prior": 0.533,
+    "candidate": 0.531,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "sharpness: sphere-edge_sigma_px": {
+    "prior": 0.457,
+    "candidate": 0.451,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "stability: stationary_activity_ge33": {
+    "prior": 216,
+    "candidate": 139,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "stability: stationary_activity_saturated": {
+    "prior": 4,
+    "candidate": 6,
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "stability: frames_9_16_edge_mean": {
+    "prior": 2.419,
+    "candidate": 2.368,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "stability: frames_9_16_edge_max": {
+    "prior": 68,
+    "candidate": 83,
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "stability: frames_9_16_interior_changed": {
+    "prior": 40,
+    "candidate": 40,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "stability: same_phase_f08_f16_interior_changed": {
+    "prior": 10,
+    "candidate": 9,
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "stability: halo_stationary-on-f16.png": {
+    "prior": {
+     "above_local_max": 100,
+     "below_local_min": 123
+    },
+    "candidate": {
+     "above_local_max": 101,
+     "below_local_min": 123
+    },
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "stability: halo_excluded-on-f8.png": {
+    "prior": {
+     "above_local_max": 0,
+     "below_local_min": 3
+    },
+    "candidate": {
+     "above_local_max": 0,
+     "below_local_min": 3
+    },
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "ghosts: off_edge_motion-object-on-f8.png": {
+    "prior": {
+     "3-8": 403,
+     "9-16": 39,
+     ">16": 0,
+     "max": 11
+    },
+    "candidate": {
+     "3-8": 349,
+     "9-16": 36,
+     ">16": 0,
+     "max": 11
+    },
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "ghosts: off_edge_motion-pan-on-f6.png": {
+    "prior": {
+     "3-8": 285,
+     "9-16": 2,
+     ">16": 0,
+     "max": 10
+    },
+    "candidate": {
+     "3-8": 96,
+     "9-16": 0,
+     ">16": 0,
+     "max": 8
+    },
+    "prior_pass": false,
+    "candidate_pass": true
+   },
+   "ghosts: off_edge_skinned-on-f6.png": {
+    "prior": {
+     "3-8": 0,
+     "9-16": 0,
+     ">16": 0,
+     "max": 0
+    },
+    "candidate": {
+     "3-8": 0,
+     "9-16": 0,
+     ">16": 0,
+     "max": 0
+    },
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "ghosts: trailing_band_vs_top_control": {
+    "prior": {
+     "trailing_1px": 54.0,
+     "top_1px": 42.42,
+     "samples": [
+      33,
+      45
+     ]
+    },
+    "candidate": {
+     "trailing_1px": 51.45,
+     "top_1px": 38.07,
+     "samples": [
+      33,
+      45
+     ]
+    },
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "ghosts: trailing_band_no_worse_than_baseline": {
+    "prior": [
+     54.0,
+     47.73
+    ],
+    "candidate": [
+     51.45,
+     47.73
+    ],
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "exclusion: ui_identical_all_phases": {
+    "prior": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "candidate": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "exclusion: overlay_activity_ge33": {
+    "prior": 0,
+    "candidate": 0,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "reset: transition-cut-f7.png_max_step_vs_baseline": {
+    "prior": 0,
+    "candidate": 0,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "reset: transition-drs-f9.png_max_step_vs_baseline": {
+    "prior": 0,
+    "candidate": 0,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "reset: history_free_frames_identical": {
+    "prior": {
+     "frames": 11,
+     "compared": {
+      "baseline": 10
+     },
+     "differing": [],
+     "missing_from_prior": []
+    },
+    "candidate": {
+     "frames": 11,
+     "compared": {
+      "prior": 11,
+      "baseline": 10
+     },
+     "differing": [],
+     "missing_from_prior": []
+    },
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "registration: stationary-on-f16.png": {
+    "prior": {
+     "dx": 0.007,
+     "dy": -0.027,
+     "points": 20282
+    },
+    "candidate": {
+     "dx": 0.008,
+     "dy": -0.027,
+     "points": 20282
+    },
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "registration: motion-object-on-f8.png": {
+    "prior": {
+     "dx": 0.022,
+     "dy": -0.028,
+     "points": 20025
+    },
+    "candidate": {
+     "dx": 0.034,
+     "dy": -0.023,
+     "points": 20025
+    },
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "registration: skinned-on-f6.png": {
+    "prior": {
+     "dx": 0.207,
+     "dy": 0.042,
+     "points": 87
+    },
+    "candidate": {
+     "dx": 0.067,
+     "dy": -0.005,
+     "points": 87
+    },
+    "prior_pass": false,
+    "candidate_pass": true
+   },
+   "registration: excluded-on-f8.png": {
+    "prior": {
+     "dx": -0.0,
+     "dy": -0.001,
+     "points": 10534
+    },
+    "candidate": {
+     "dx": -0.0,
+     "dy": -0.001,
+     "points": 10534
+    },
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "viewport: still_activity_ge33": {
+    "prior": 280,
+    "candidate": 198,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "viewport: still_activity_saturated": {
+    "prior": 10,
+    "candidate": 23,
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "viewport: still_frames_9_16_edge_mean": {
+    "prior": 2.015,
+    "candidate": 1.93,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "viewport: still_frames_9_16_edge_max": {
+    "prior": 67,
+    "candidate": 91,
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "viewport: still_frames_9_16_interior_changed": {
+    "prior": 33,
+    "candidate": 39,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "viewport: still_same_phase_interior_changed": {
+    "prior": 7,
+    "candidate": 2,
+    "prior_pass": false,
+    "candidate_pass": false
+   },
+   "viewport: still_f16_border_vs_off_band_max_not_above_inner": {
+    "prior": [
+     1,
+     96
+    ],
+    "candidate": [
+     1,
+     96
+    ],
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "viewport: pan_f24_border_vs_off_band_max_not_above_inner": {
+    "prior": [
+     1,
+     95
+    ],
+    "candidate": [
+     1,
+     95
+    ],
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "viewport: outside_viewport_max_delta": {
+    "prior": 0,
+    "candidate": 0,
+    "prior_pass": true,
+    "candidate_pass": true
+   },
+   "viewport: pan_off_edge_ge9": {
+    "prior": {
+     "3-8": 824,
+     "9-16": 3,
+     ">16": 211,
+     "max": 86
+    },
+    "candidate": {
+     "3-8": 815,
+     "9-16": 2,
+     ">16": 211,
+     "max": 86
+    },
+    "prior_pass": false,
+    "candidate_pass": false
+   }
+  },
+  "failure_history": {
+   "baseline_known_failures": [
+    "stability: same_phase_f08_f16_interior_changed (baseline 17)",
+    "stability: halo_stationary-on-f16.png (baseline 1,048) and halo_excluded-on-f8.png (baseline 1,276)"
+   ],
+   "prior_recorded": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "registration: skinned-on-f6.png",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "prior_recomputed": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "registration: skinned-on-f6.png",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "resolved": [
+    "ghosts: off_edge_motion-pan-on-f6.png",
+    "registration: skinned-on-f6.png"
+   ],
+   "persisting": [
+    "stability: stationary_activity_saturated",
+    "stability: frames_9_16_edge_max",
+    "stability: same_phase_f08_f16_interior_changed",
+    "stability: halo_stationary-on-f16.png",
+    "ghosts: off_edge_motion-object-on-f8.png",
+    "ghosts: trailing_band_vs_top_control",
+    "ghosts: trailing_band_no_worse_than_baseline",
+    "viewport: still_activity_saturated",
+    "viewport: still_frames_9_16_edge_max",
+    "viewport: still_same_phase_interior_changed",
+    "viewport: pan_off_edge_ge9"
+   ],
+   "new": []
+  }
+ },
+ "sections": [
+  "exactness",
+  "exclusion",
+  "ghosts",
+  "registration",
+  "reset",
+  "sharpness",
+  "stability",
+  "viewport"
+ ],
+ "recorded": "2026-10-13T13:30:29.430314+00:00",
+ "integrity_summary": {
+  "path": "summary-2026-10-13T132958.314439+0000.json",
+  "sha256": "671ee5a73948bf767fec6842064767ca21fc364b97af7924ec6c0169a9c543b7"
+ },
+ "visual_tree": "648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25",
+ "note": "Thresholds are proposals (plan.json comparison), not plan gates."
+}

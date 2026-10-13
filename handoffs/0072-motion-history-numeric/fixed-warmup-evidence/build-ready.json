@@ -1,0 +1,14 @@
+{
+  "packet": "0072-motion-history-numeric",
+  "stage": "fixed-warmup-build",
+  "holder": "root-supervised warmup comparison CPU build",
+  "source_commit": "296e02268458afea21ff90e8aea820a3dec2b314",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/source-freeze.json",
+    "sha256": "05daf1a38a4782c2e40c3dde7cf15ed3037de63ce752f9cdf83e81a8e61929d5"
+  },
+  "visual_tree": "648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/target-lease.json",
+  "prior_build_release_sha256": "aaa8f2eba8d87d88ec416a6e4d83c897d949d6eae11a2fb662bf9607d6850d88"
+}

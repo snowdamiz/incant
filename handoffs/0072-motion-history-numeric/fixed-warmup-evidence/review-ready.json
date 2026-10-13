@@ -1,0 +1,11 @@
+{
+  "packet": "0072-motion-history-numeric",
+  "stage": "fixed-warmup-visual",
+  "holder": "Claude0072 Opus5.5 Max frozen warmup comparison",
+  "visual_tree": "648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25",
+  "build_record_sha256": "afb3f68b511ad3e1c0963a52fc93798e1d832fbd725f2d2519f408e4e3fef476",
+  "prior_gpu_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/released.json",
+  "prior_gpu_release_sha256": "ec52f60f5f25d75bc54b4097dff3567a342e0ad7fbe217a3b70e79502953ad01",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/target-lease.json",
+  "prior_build_release_sha256": "0e4fe21a6748b6e595a79a496067a9a259bdfcbd93506e0a2ebc296b5235f275"
+}

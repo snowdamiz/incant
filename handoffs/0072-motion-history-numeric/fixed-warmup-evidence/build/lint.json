@@ -1,0 +1,61 @@
+{
+ "tools": {
+  "head": "8dfeb207be5760f11f29178b8f9d928fe1ebca82",
+  "visual_tree": "648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25",
+  "plan_sha256": "e587e6f29378f5b8a2892c4f3d74d5233cbc9be9aac448bb02d7274269de351e",
+  "helper_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "source": {
+  "commit": "296e02268458afea21ff90e8aea820a3dec2b314",
+  "tree": "19e3a512596fc6625329c3ad98dff7df27739156",
+  "files": 18099,
+  "manifest_sha256": "5929e05ff2ed34a3fceec3c5611973155305019a32ccea31b0a151b5c33f7922",
+  "helper_copy_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "label": "lint",
+ "kind": "build",
+ "holder": "root-supervised warmup comparison CPU build",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/checkout/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "temporal_visual_review",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/checkout",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/tmp/lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "pid": 95855,
+ "started": "2026-10-13T13:25:23.443434+00:00",
+ "ended": "2026-10-13T13:25:28.433560+00:00",
+ "exit": 0,
+ "timed_out": false,
+ "wait_error": null,
+ "timeout_s": 2700,
+ "group_empty_after": true,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-lint.stdout.jsonl",
+ "stdout_sha256": "b2b62592912ce61289a95dac76eb79df606a5f08cffb932a5b4b564d0d301005",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-lint.stderr.txt",
+ "stderr_sha256": "8974fa5eb713679ca73c4b57f3d572de8380ec5e5ca4d3416493879d41067864",
+ "recorded": "2026-10-13T13:25:28.434089+00:00"
+}

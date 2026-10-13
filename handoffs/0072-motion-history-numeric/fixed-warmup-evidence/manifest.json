@@ -1,0 +1,376 @@
+{
+ "published": "2026-10-13T13:34:12.994496+00:00",
+ "analysis": {
+  "path": "summary-2026-10-13T132958.314439+0000.json",
+  "sha256": "671ee5a73948bf767fec6842064767ca21fc364b97af7924ec6c0169a9c543b7"
+ },
+ "files": [
+  {
+   "path": "review-ready.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/review-ready.json",
+   "sha256": "a06113250697f54640d6886b335bd47b001eebdd1ebe1ec0270fb7ac08e94050"
+  },
+  {
+   "path": "build-ready.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/build-ready.json",
+   "sha256": "46c1d3ef5fa4b81e89a4e5c1cf3c63743c0b4ff1fdeeb7e51cd6571b30ecf97d"
+  },
+  {
+   "path": "gpu-ledger.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/gpu-ledger.jsonl",
+   "sha256": "6c3f008caf1bd0b7b74c70ad5d982e5b91ea5cc0515d6248b50396d06d604d3a"
+  },
+  {
+   "path": "budget.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/budget.jsonl",
+   "sha256": "94ce7d4294a87a36a895950cef7c85a6fac476a2f07869be59d98b0779444b42"
+  },
+  {
+   "path": "gpu-released.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/gpu-released.json",
+   "sha256": "7e1a55aca025c3c980761d588bf07136a176e3d69d0afa7d3a65091970a3f091"
+  },
+  {
+   "path": "target-lease.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/target-lease.json",
+   "sha256": "0e4fe21a6748b6e595a79a496067a9a259bdfcbd93506e0a2ebc296b5235f275"
+  },
+  {
+   "path": "analysis/summary-2026-10-13T132958.314439+0000.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/analysis/summary-2026-10-13T132958.314439+0000.json",
+   "sha256": "671ee5a73948bf767fec6842064767ca21fc364b97af7924ec6c0169a9c543b7"
+  },
+  {
+   "path": "analysis/compare-2026-10-13T133029.430314+0000.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/analysis/compare-2026-10-13T133029.430314+0000.json",
+   "sha256": "eeba0f35c87c9685a3eadf699ef6e75cf4d361619662e98fe75e857d02978ed6"
+  },
+  {
+   "path": "build/source.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/build/source.json",
+   "sha256": "9a50b598423d535cd0dc3bda9d54227c3a65eecbe067169794c4a2ead7dac191"
+  },
+  {
+   "path": "build/toolchain.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/build/toolchain.json",
+   "sha256": "5c0fe83f7ef419356510cee8d9cc08497d1b5dbe4dd779fccaf13cceca52cd30"
+  },
+  {
+   "path": "build/review.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/build/review.json",
+   "sha256": "afb3f68b511ad3e1c0963a52fc93798e1d832fbd725f2d2519f408e4e3fef476"
+  },
+  {
+   "path": "build/tests.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/build/tests.json",
+   "sha256": "e87d83e1ebb077759fa834ace800ea6af09bb1d268b0de82eb7a93e80bab33d1"
+  },
+  {
+   "path": "build/lint.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/build/lint.json",
+   "sha256": "e1204284e16e0e77eb7dc818f88e53a1d4fd3357b055d98eb7e975eab4f4a044"
+  },
+  {
+   "path": "logs/build-libtests.stdout.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-libtests.stdout.jsonl",
+   "sha256": "2947f420a4ec8fc685d00f278e2d1777d0d6ac00c5f763b3b20e4f6848f586a5"
+  },
+  {
+   "path": "logs/build-libtests.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-libtests.stderr.txt",
+   "sha256": "26710d287370914ec6f634e36dc9eb6daeb49494ecf5a26e9b1a703ad59fa39b"
+  },
+  {
+   "path": "logs/build-review.stdout.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-review.stdout.jsonl",
+   "sha256": "8606e058fc46f0720f39881c48bb5204aac50ab081ce9a2bb8e6f56e3f282f0a"
+  },
+  {
+   "path": "logs/build-review.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-review.stderr.txt",
+   "sha256": "cc329272d95ed8d3614f82dc37df437b213d7b2631b63ac233a1a82de8c518d3"
+  },
+  {
+   "path": "logs/build-lint.stdout.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-lint.stdout.jsonl",
+   "sha256": "b2b62592912ce61289a95dac76eb79df606a5f08cffb932a5b4b564d0d301005"
+  },
+  {
+   "path": "logs/build-lint.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/build-lint.stderr.txt",
+   "sha256": "8974fa5eb713679ca73c4b57f3d572de8380ec5e5ca4d3416493879d41067864"
+  },
+  {
+   "path": "logs/gpu-list-lib.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-list-lib.stdout.txt",
+   "sha256": "dc96937e87290b8aefd839ae3f2758feb58ad2cd482c0bcf16dbfb8f6f2f7782"
+  },
+  {
+   "path": "logs/gpu-list-lib.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-list-lib.stderr.txt",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "logs/gpu-numeric-retained.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-numeric-retained.stdout.txt",
+   "sha256": "4e75cfc9c4c9eeec32d73b3ca9539015646f7e946ce21aa00df857c04c7b10a8"
+  },
+  {
+   "path": "logs/gpu-numeric-retained.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-numeric-retained.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "logs/gpu-list-review.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-list-review.stdout.txt",
+   "sha256": "b6e02a049df0d8e742f170a9d61fdf3e666521c2b98748bec9951464f4fd3d43"
+  },
+  {
+   "path": "logs/gpu-list-review.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-list-review.stderr.txt",
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": "logs/gpu-review-probe.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-probe.stdout.txt",
+   "sha256": "e2c928f71e4c7daf197352f83ef0555ff4a9cc2eb85fd3683c9f864e83956b8c"
+  },
+  {
+   "path": "logs/gpu-review-probe.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-probe.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/probe/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/probe/report.json",
+   "sha256": "e178aeab40cba8d20607d7c90047df98a425745f8b52ec890e6ef4e63089234f"
+  },
+  {
+   "path": "captures/probe/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/probe/events.jsonl",
+   "sha256": "553b06f0bfa9111071dcd84b780d0df36901401c5c61b9f1dd5b709155cb26a8"
+  },
+  {
+   "path": "logs/gpu-review-stationary.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-stationary.stdout.txt",
+   "sha256": "e3731ef68533c20c01f1c5c30aa2b10e2be148f1ad938b34f1bb92056d2f6070"
+  },
+  {
+   "path": "logs/gpu-review-stationary.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-stationary.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/stationary/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/stationary/report.json",
+   "sha256": "2a58b7ce9c6477f4ee823a3f3e6fe1b3c2da5e752a8f70b5c3426d026327f4c4"
+  },
+  {
+   "path": "captures/stationary/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/stationary/events.jsonl",
+   "sha256": "9002c70ba63cde1bc5e4fc40a411dcabeecffcee8aa74cc73de7f302cc87f1f0"
+  },
+  {
+   "path": "logs/gpu-review-motion.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-motion.stdout.txt",
+   "sha256": "02b6383c413583cf36c5ed8c9b5e5414a01ea9dcf6c31e8b60153cf3d3ec75e5"
+  },
+  {
+   "path": "logs/gpu-review-motion.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-motion.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/motion/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/motion/report.json",
+   "sha256": "6eed4a416072e396b87a702218140b3c03e2f4230d8deb1217fbf4776f500959"
+  },
+  {
+   "path": "captures/motion/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/motion/events.jsonl",
+   "sha256": "0272469bd4c0492cc4f25eb8ea02d760b358a4c9d72eeb62fb1b8003db7374da"
+  },
+  {
+   "path": "logs/gpu-review-excluded.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-excluded.stdout.txt",
+   "sha256": "5086408a9d2fbde9f94f170d3d6d968633cd2ed783b32dd83c91fbcbcb82777f"
+  },
+  {
+   "path": "logs/gpu-review-excluded.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-excluded.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/excluded/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/excluded/report.json",
+   "sha256": "2cf00341778cb4ff4665cc8a86a5d2265a2b1a1bde9455620b12086f504f749e"
+  },
+  {
+   "path": "captures/excluded/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/excluded/events.jsonl",
+   "sha256": "22b641d36c9e2f5de72fe0715c3b7c70c3432a4cf78bc88acc4108c9cfd9497b"
+  },
+  {
+   "path": "logs/gpu-review-transitions.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-transitions.stdout.txt",
+   "sha256": "18045d1096a2e5496f342b8019bda235068e398c0c7887e296853e0a04f6c27f"
+  },
+  {
+   "path": "logs/gpu-review-transitions.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-transitions.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/transitions/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/transitions/report.json",
+   "sha256": "903433256d131b475586d36942929a163c8fc0e43fa715bbfed24eeb108033cf"
+  },
+  {
+   "path": "captures/transitions/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/transitions/events.jsonl",
+   "sha256": "86e67575edda367d63502b592b6465f5a1fa899969e700106ede22efff9f0a35"
+  },
+  {
+   "path": "logs/gpu-review-skinned.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-skinned.stdout.txt",
+   "sha256": "efb86380d7812474a67ef2f49208757c925a60222e20cc545cab36198b43d129"
+  },
+  {
+   "path": "logs/gpu-review-skinned.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-skinned.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/skinned/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/skinned/report.json",
+   "sha256": "f45f26023d4303078d775da4c91a573276bf51e40a902e1dd395aebfa66bde8c"
+  },
+  {
+   "path": "captures/skinned/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/skinned/events.jsonl",
+   "sha256": "994766fc3a25a8752ab74872674296cd00d14636738b84b4991975bda9609062"
+  },
+  {
+   "path": "logs/gpu-review-timing.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-timing.stdout.txt",
+   "sha256": "c40af90444d37a979ce51018311b0a05e0e86b2549ca6ab5ce737d4fd21ebfc8"
+  },
+  {
+   "path": "logs/gpu-review-timing.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-timing.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/timing/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/timing/report.json",
+   "sha256": "e30ed5c6163b9ed08ec7c4eb82db329a3c52ff38336abd0a6e57a405eb9fdc75"
+  },
+  {
+   "path": "captures/timing/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/timing/events.jsonl",
+   "sha256": "3ed49346d979b02eabd407cf1d369386484e9d2fa66ceb178ca4f7755b950f82"
+  },
+  {
+   "path": "logs/gpu-review-viewport.stdout.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-viewport.stdout.txt",
+   "sha256": "59704b6394e67e3fb41144af06feffa29619e47e4225bba16be9fa93513d13ee"
+  },
+  {
+   "path": "logs/gpu-review-viewport.stderr.txt",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/logs/gpu-review-viewport.stderr.txt",
+   "sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+  },
+  {
+   "path": "captures/viewport/report.json",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/viewport/report.json",
+   "sha256": "bec2f4289b9e7135cc00209bcffe3f4f40829ba3755fda4d77f565c03f1d7094"
+  },
+  {
+   "path": "captures/viewport/events.jsonl",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/viewport/events.jsonl",
+   "sha256": "179b96a9fb0ffe9535756247dcd20826513500922a7d1a113188028283b70321"
+  }
+ ],
+ "screenshots": [
+  {
+   "name": "stationary-off.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/stationary/stationary-off.png",
+   "sha256": "2485512777e509896851e616d78d01f6742da7bbabd19a97915682650e738d2c"
+  },
+  {
+   "name": "stationary-on-f16.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/stationary/stationary-on-f16.png",
+   "sha256": "10082f5aed1438d22bb48fe83923a820719e808a5278d7a7b1bf951bfc0e3164"
+  },
+  {
+   "name": "stationary-activity.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/stationary/stationary-activity.png",
+   "sha256": "e599eec847957339f59df7e54a478abf4fb768e313265c6f8352a530563dcc5e"
+  },
+  {
+   "name": "motion-object-on-f8.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/motion/motion-object-on-f8.png",
+   "sha256": "541871d817450c78a15b6dc1a76add52d4447d72357d4a30dc32325d52bed401"
+  },
+  {
+   "name": "motion-object-off-f8.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/motion/motion-object-off-f8.png",
+   "sha256": "212ac1a0e0af830729f9113bc797d063b0b5a2fbfd6194d29ae8a4d9281f9757"
+  },
+  {
+   "name": "motion-pan-on-f6.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/motion/motion-pan-on-f6.png",
+   "sha256": "55784f565f71e5c1e23150ef4381847d99ed6edc26b160837eacce28a836c0cc"
+  },
+  {
+   "name": "motion-pan-off-f6.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/motion/motion-pan-off-f6.png",
+   "sha256": "30aa3e196bca8145b45d28d7da2e85ad52e3926c23bb5ca884a29cae1d00154b"
+  },
+  {
+   "name": "excluded-on-f8.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/excluded/excluded-on-f8.png",
+   "sha256": "85e630e7cdf9972688eaf00fa76ed0f5b4e8011eccf2b0aa41507fc0c9e507e6"
+  },
+  {
+   "name": "excluded-off.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/excluded/excluded-off.png",
+   "sha256": "d1592ae5ed1f392e8b3972d61b4660ac74a4a0545b221a8c59115875aa203527"
+  },
+  {
+   "name": "excluded-activity.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/excluded/excluded-activity.png",
+   "sha256": "a2aaf8f2c75a7188bc25feedbb8831ec0a7698326cb0f15d33b787bf25ea088a"
+  },
+  {
+   "name": "transition-cut-f7.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/transitions/transition-cut-f7.png",
+   "sha256": "5bc0618bc5a5f44fbbdf96ed1b7fca0ca2d74d836e90fffb061e5f9d25a6046c"
+  },
+  {
+   "name": "transition-drs-f9.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/transitions/transition-drs-f9.png",
+   "sha256": "89097514f9ef2b968bf3d9e3776b4e5a89317b8960179842cf0ca206caf9a6f6"
+  },
+  {
+   "name": "skinned-on-f6.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/skinned/skinned-on-f6.png",
+   "sha256": "c9db68887a0408a228e30bf98092fed44b4429e54f07b8ae73903855f4cf16ec"
+  },
+  {
+   "name": "skinned-off-f6.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/skinned/skinned-off-f6.png",
+   "sha256": "9dc53d04deebc66b38a873ec680f39e89ce31afcbe59cefaafa0d498ec0b0985"
+  },
+  {
+   "name": "viewport-on-f24.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/viewport/viewport-on-f24.png",
+   "sha256": "fe22b8849e8f5f995f52648eac8adf67bff7499acbe5cec47596d75a76d9046d"
+  },
+  {
+   "name": "viewport-off-f24.png",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/captures/viewport/viewport-off-f24.png",
+   "sha256": "2b762c2041e901a3660eef34ab83fc89bbe66776d58ee545b881870d4ac06798"
+  }
+ ]
+}

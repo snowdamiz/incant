@@ -1,0 +1,61 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "fixed-warmup-build",
+ "holder": "root-supervised warmup comparison CPU build",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "root via build-ready.json",
+ "grant_sha256": "46c1d3ef5fa4b81e89a4e5c1cf3c63743c0b4ff1fdeeb7e51cd6571b30ecf97d",
+ "grant": {
+  "packet": "0072-motion-history-numeric",
+  "stage": "fixed-warmup-build",
+  "holder": "root-supervised warmup comparison CPU build",
+  "source_commit": "296e02268458afea21ff90e8aea820a3dec2b314",
+  "source_freeze": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/source-freeze.json",
+   "sha256": "05daf1a38a4782c2e40c3dde7cf15ed3037de63ce752f9cdf83e81a8e61929d5"
+  },
+  "visual_tree": "648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/target-lease.json",
+  "prior_build_release_sha256": "aaa8f2eba8d87d88ec416a6e4d83c897d949d6eae11a2fb662bf9607d6850d88"
+ },
+ "prior_receipts": {
+  "pins": {
+   "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-sharpness-002/target-lease.json",
+    "expected": "aaa8f2eba8d87d88ec416a6e4d83c897d949d6eae11a2fb662bf9607d6850d88",
+    "sha256": "aaa8f2eba8d87d88ec416a6e4d83c897d949d6eae11a2fb662bf9607d6850d88"
+   }
+  },
+  "release_pins": [
+   "build_release"
+  ],
+  "release_alive_fields": {
+   "build_release": {
+    "processes_on_target_at_release": []
+   }
+  }
+ },
+ "tools": {
+  "head": "8dfeb207be5760f11f29178b8f9d928fe1ebca82",
+  "visual_tree": "648e32e9d9b1a7b85f2c2e6db2b03e7be1998e25",
+  "plan_sha256": "e587e6f29378f5b8a2892c4f3d74d5233cbc9be9aac448bb02d7274269de351e",
+  "helper_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338"
+ },
+ "brief_sha256": "899828a1fc5e6bcc7fecabc9463c5cac2eff5fbc6537cad18c5f5b666be7b240",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0072-motion-history-numeric",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/checkout",
+ "acquired_at": "2026-10-13T13:24:14.527142+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2, in the foreground",
+  "builds from the git-archive child checkout of the granted commit only",
+  "every build input must equal root's committed source freeze",
+  "one bounded process group at a time under the packet flock",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001"
+ ],
+ "released_at": "2026-10-13T13:25:28.497131+00:00",
+ "released_by": "root-supervised warmup comparison CPU build",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0072 fixed-warmup cargo/rustc process or frozen binary remains on the target. Contents left as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/bin"
+}
