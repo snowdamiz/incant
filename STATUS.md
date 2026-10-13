@@ -16,12 +16,12 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Cooked screen-space UI shaders — saved at requested pause
+## Cooked screen-space UI shaders — CPU and Metal compilation passed
 
 The opt-in fixed UI shader family passes independent source review, 87 enabled
 CPU tests, Clippy, wasm32 compilation and 63 default library tests. Existing WGSL,
-layout, theme and blending are unchanged. Metal UI compilation, native GPU and
-Claude appearance checks, and integration remain pending. No rendering or phase
+layout, theme and blending are unchanged. Both stages compile and link with the
+actual Apple Metal toolchain. Native GPU, Claude appearance and integration remain pending. No rendering or phase
 gate is claimed. [Scope and evidence](docs/spikes/cooked-ui-shaders.md).
 
 ## Cooked sprite shader family — CPU and compiler checks passed
