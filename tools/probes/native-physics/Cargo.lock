@@ -1027,6 +1027,7 @@ name = "incant_physics_2d_runtime"
 version = "0.0.1"
 dependencies = [
  "incant_2d",
+ "incant_physics_snapshot",
  "incant_types",
  "rapier2d",
  "schemars",
@@ -1039,12 +1040,17 @@ name = "incant_physics_runtime"
 version = "0.0.1"
 dependencies = [
  "incant_nav",
+ "incant_physics_snapshot",
  "incant_types",
  "rapier3d",
  "schemars",
  "serde",
  "thiserror",
 ]
+
+[[package]]
+name = "incant_physics_snapshot"
+version = "0.0.1"
 
 [[package]]
 name = "incant_profile"
@@ -1062,6 +1068,7 @@ dependencies = [
  "incant_nav",
  "incant_physics_2d_runtime",
  "incant_physics_runtime",
+ "incant_physics_snapshot",
  "incant_profile",
  "incant_types",
  "libm",

@@ -107,4 +107,4 @@ pass, including exact normalized graph comparisons and ordinary snapshot
 exclusion. No new compile or session execution was necessary. The current
 composition, portable receipts and limitations are bound in
 [native-session-main246.md](native-session-main246.md). Final current-main
-independent review is accepted (`12de683d`); publication awaits its exact-head fast check. Hosted UI/audio continuation stays separate.
+independent review is accepted (`12de683d`); PR247 merged after its exact-head required fast SUCCESS. Hosted UI/audio continuation stays separate.

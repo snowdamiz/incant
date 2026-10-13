@@ -5,19 +5,18 @@ use rapier2d::pipeline::PhysicsWorld;
 #[cfg(feature = "native-checkpoints")]
 use rapier2d::pipeline::checked_restore::capture::CheckpointOwner;
 
+#[cfg_attr(not(feature = "native-checkpoints"), derive(Default))]
 pub(super) struct NativeOwner {
     #[cfg(feature = "native-checkpoints")]
     pub(super) inner: CheckpointOwner,
     #[cfg(not(feature = "native-checkpoints"))]
     inner: PhysicsWorld,
 }
+#[cfg(feature = "native-checkpoints")]
 impl Default for NativeOwner {
     fn default() -> Self {
         Self {
-            #[cfg(feature = "native-checkpoints")]
             inner: CheckpointOwner::for_simulation(),
-            #[cfg(not(feature = "native-checkpoints"))]
-            inner: PhysicsWorld::default(),
         }
     }
 }

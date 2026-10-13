@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T21:03:16.412492+00:00",
+  "reviewer": "astra-integrate-runtime-prs",
+  "decision": "accepted_scoped_source_and_evidence",
+  "producer": "165b3dd62899e0a46c8dc1ebe82c89d8a0ba993a",
+  "manifest_sha256": "9d3168a70d0b1241b42a29b0ff08847537ae6b21923a19f1017daac5664c45a7",
+  "source": {
+    "crates/incant_physics_runtime/src/native_owner.rs": "42186996d9bcd9753faf74be188420f04cdb8096cf86106a7311d7c905608e55",
+    "crates/incant_physics_2d_runtime/src/native_owner.rs": "a21acaed1629677986b8cacdefa5af17d6e5a5e9e5919312e5154e0d29dc03af"
+  },
+  "records": 10,
+  "checks": 4,
+  "findings": [],
+  "verified": [
+    "Both NativeOwner wrappers contain one active inner field. Ordinary derive calls the same PhysicsWorld Default; native-checkpoints retains exactly CheckpointOwner::for_simulation. Other access/step code is unchanged.",
+    "All ten retained rows rehashed, four receipts match exact mirrored source, all strict all-target Clippy commands/logs exit0; both modes and feature off/on covered.",
+    "Current root build/config/crate/vendor/tool-wrapper source diff vs exact producer165b is empty. Separate isolated probe metadata/test changes do not affect these package graphs.",
+    "No new compiler, runtime/device execution or hosted success claimed."
+  ]
+}
