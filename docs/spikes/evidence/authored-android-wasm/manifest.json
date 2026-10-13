@@ -1,0 +1,128 @@
+{
+  "source_commit": "026426d1dca4ff8e41aacbf02741ec68fc4aa386",
+  "base": "4b277d577c6627e98e407b2c25daf274a99fd406",
+  "archive": {
+    "path": "docs/spikes/evidence/authored-android-wasm/completed-evidence.json.gz",
+    "sha256": "d5e2ef9e88453cec9cc3627f1824b220f28466fcb98c2bab31f0a93b4fef2030",
+    "bytes": 13777544
+  },
+  "records": 1281,
+  "payloads": 465,
+  "external_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-001/native-build-001/deterministic/audio_package_oracle",
+      "sha256": "ea2dc70765f4c2f00cfab2a692c121984a6c330828d6a78bfc1dc818bc44fe9f",
+      "bytes": 72950280
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-001/native-build-001/deterministic/incant_headless",
+      "sha256": "ce56b704f7d1050a92f4819cd8c3c3b7a490dbcfa3fa016a29c5ddf5d3f58137",
+      "bytes": 258037568
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-001/native-build-001/fast/audio_package_oracle",
+      "sha256": "e5cf7f59f7b6e2efff95a014e40ee60d1614e6ff5676ec7fadf2f98d6aae5a10",
+      "bytes": 72129768
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-001/native-build-001/fast/incant_headless",
+      "sha256": "5813dc1a254528a911b23b07c92c1557f6526eec79797160440d167618ab95ff",
+      "bytes": 257350096
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-shipping-001/deterministic-archive/runtime/libincant_game_player.a",
+      "sha256": "862d4541a31264a5139006b77d01cfad91a5d2e3960be38f976272f0aa380a06",
+      "bytes": 24745978
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-shipping-001/deterministic-archive/symbols/libincant_game_player.unstripped.a",
+      "sha256": "14aeb2dc8296858b3d809dcf63f2396a5630ef644b9bd5914814e5ad9e48c736",
+      "bytes": 405090226
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-shipping-001/deterministic-callers/caller-c",
+      "sha256": "4a860ef2646b90a06c9d45a53fef24ee4482e39af86d7ad758e0b0a3b965e744",
+      "bytes": 13487064
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-shipping-001/fast-archive/runtime/libincant_game_player.a",
+      "sha256": "abf2966afb2ab1f373e4d8dbe1ca91c6a330f83b0c7f2aa9557e53c5b75ba406",
+      "bytes": 24736964
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-shipping-001/fast-archive/symbols/libincant_game_player.unstripped.a",
+      "sha256": "385a935cc3265cfbec78fd7cfafe755b7986609662d6ee9b0605748c20fcdc21",
+      "bytes": 406207100
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-shipping-001/fast-callers-002/caller-c",
+      "sha256": "2cdc47bf66e2fac1cbfcd611d5b8c9cafd2cc628d3bdd8d058c5c41b8888fbcc",
+      "bytes": 13481192
+    }
+  ],
+  "source_reviews": [
+    {
+      "path": "authored-android-wasm-source-20261013.json",
+      "sha256": "fc720192797a856a69677faaee7b7c0e12393341e3b746e92bd8aca9e5bf018d"
+    },
+    {
+      "path": "authored-android-wasm-probe-20261013.json",
+      "sha256": "9ff41ccaf0cbea125b2e1fb1eb25f4f133c35958c7576bdf097634da850e407b"
+    }
+  ],
+  "final_execution_review": "pending",
+  "proof": {
+    "passed": true,
+    "records": [
+      {
+        "mode": "deterministic",
+        "target": "aarch64-linux-android",
+        "actual_api": "37",
+        "compiler_api": 24,
+        "positive_processes": 3,
+        "exact_refusals": 13,
+        "raw_command_streams_rehashed": 376,
+        "archive_bytes": 24745978,
+        "caller_bytes": 13487064,
+        "runtime_files": 10,
+        "export_receipt_sha256": "a5994c1bb08adadf9ce1b6b7d0d6e1e054bcff6b285729f69e649bd084d16e0e",
+        "caller_receipt_sha256": "53dfdb53fc1123024ae53f0e0525444fdd29e67ced33d60dd41d80d6ddccdfa1"
+      },
+      {
+        "mode": "fast",
+        "target": "aarch64-linux-android",
+        "actual_api": "37",
+        "compiler_api": 24,
+        "positive_processes": 3,
+        "exact_refusals": 13,
+        "raw_command_streams_rehashed": 374,
+        "archive_bytes": 24736964,
+        "caller_bytes": 13481192,
+        "runtime_files": 10,
+        "export_receipt_sha256": "d6aa4b90c7a864f30998b820ff469f92e4e3af962b4ac62015f881fbe37e7a02",
+        "caller_receipt_sha256": "86b5ca49af2aa2c13cae1ea807e17ac49467b6e36b8dc246556d1a6a126c7d36"
+      }
+    ],
+    "frozen_inputs_verified": 14411,
+    "immutable_git_fallback": [
+      "STATUS.md"
+    ],
+    "all_fields_per_tick": 186,
+    "ticks": 96,
+    "development_processes": 4,
+    "fresh_android_processes": 6,
+    "android_refusals": 26,
+    "sources_builds_maps_removed": true,
+    "scope": "API37 local ARM emulator CPU only; no physical-device, minimum-OS, GPU or performance gate."
+  },
+  "limits": [
+    "Actual local ARM Android API37 emulator CPU only; both physics families. API24 is compilation target, not minimum-OS execution proof.",
+    "Two ordinary exports freshly compiled; one fast caller stage retried unchanged archives on a fresh port after a retained port-reuse refusal before AVD creation.",
+    "Compiled backup/generated source inputs were producer-hashed before removal; removed files cannot be independently rehashed afterward. Both corresponding unstripped archives remain retained.",
+    "One selected scene module; mixed per-entity TypeScript and unknown/incomplete/stale bundles fail closed.",
+    "Static guest checkpoint remains unsupported; unknown save request establishes only C ABI refusal.",
+    "Failure no-PCM/report boundary is distinct from atomic callback rollback established by prior native host conformance.",
+    "No physical-phone/performance/rendering/mobile window/live audio/signing/store/phase gate.",
+    "Public SDK opcodes and runtime capabilities unchanged; no JIT/source compiler/cache loader added."
+  ]
+}

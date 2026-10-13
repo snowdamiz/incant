@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-13T02:06:49.242644+00:00",
+  "accepted": true,
+  "freeze_sha256": "72563bb70a2c7cb28ebf6fca989f627354389f9aa7d098c125d6fbe0ce222193",
+  "source_bindings": 11,
+  "review": [
+    "Public import/select/mode transaction plus Undo/Redo/save/reopen",
+    "Independent native per-field/PCM oracle and fresh development sessions",
+    "Three fresh C ABI processes per mode after private source/cache/map removal",
+    "Precise guest, ABI, checksum, opposite-physics and no-clobber controls",
+    "Owned UUID emulator/AVD with serial identity checks, bounded children and finally cleanup",
+    "Software renderer/no window/no audio, separate port5584, no unrelated emulator mutation"
+  ],
+  "scope": "Source/probe review only; no mobile archive or emulator execution yet. Production source needs stale mobile_project Android regression corrected and full targeted test file passing before archive execution."
+}
