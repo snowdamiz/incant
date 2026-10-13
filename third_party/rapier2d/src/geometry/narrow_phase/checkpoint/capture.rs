@@ -1,5 +1,5 @@
 //! Complete currently supported rigid records, with exact ordered payloads.
-//! Non-None dispatcher workspaces and soft pairs refuse; no approximation.
+//! Closed composite workspaces are retained; soft/unknown caches still refuse.
 use super::*;
 use crate::math::Rotation;
 use crate::pipeline::checked_restore::capture::util::{
@@ -44,13 +44,25 @@ impl NarrowPhase {
         let edges = raw.raw_edges();
         // First bound every outer list, then all inner totals before allocating.
         let mut manifold_count = 0usize;
+        let mut detector_count = 0usize;
+        let mut workspaces = budget.vector(edges.len())?;
         for e in edges {
             let p = e.weight.rigid().ok_or(Error::Workspace)?;
-            if p.workspace.is_some() || p.soft.is_some() {
+            if p.soft.is_some() {
                 return Err(Error::Workspace);
             }
             manifold_count =
                 total([manifold_count, p.manifolds.len(), p.solver_clusters.len()].into_iter())?;
+            let workspace = match &p.workspace {
+                Some(w) => w.checkpoint_capture(budget)?,
+                None => s::WorkspaceRecord {
+                    kind: s::WorkspaceKind::None,
+                    timestamp: false,
+                    detectors: Vec::new(),
+                },
+            };
+            detector_count = total([detector_count, workspace.detectors.len()].into_iter())?;
+            workspaces.push(workspace);
         }
         let manifolds_iter = || {
             edges
@@ -71,9 +83,9 @@ impl NarrowPhase {
         let mut pairs = s::PairStateTable {
             identity,
             pairs: budget.vector(edges.len())?,
-            detectors: Vec::new(),
+            detectors: budget.vector(detector_count)?,
         };
-        for e in edges {
+        for (e, workspace) in edges.iter().zip(workspaces) {
             let p = e.weight.rigid().ok_or(Error::Workspace)?;
             let plain = s::RecordSpan {
                 start: manifolds.manifolds.len() as u32,
@@ -107,10 +119,14 @@ impl NarrowPhase {
                     max_extent: v.max_extent.to_bits(),
                     max_drift: v.max_drift.to_bits(),
                 }),
-                workspace: s::WorkspaceKind::None,
-                timestamp: false,
-                detectors: s::RecordSpan::default(),
+                workspace: workspace.kind,
+                timestamp: workspace.timestamp,
+                detectors: s::RecordSpan {
+                    start: pairs.detectors.len() as u32,
+                    count: workspace.detectors.len() as u32,
+                },
             });
+            pairs.detectors.extend(workspace.detectors);
         }
         let (buckets, references) = self.solver_contact_graph.checkpoint_capture(budget)?;
         let rigid = s::RigidOwnerRecord {

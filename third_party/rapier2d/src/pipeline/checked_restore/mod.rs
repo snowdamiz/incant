@@ -1,7 +1,7 @@
 //! Default-off checked inert admission and exclusive in-memory checkpoints.
 //! The numeric token alone is not a restore capability. Only the capture owner
 //! authenticates a completed step and issues an opaque NativeFrame; its private
-//! reconstruction preserves the supported primitive world under shared budgets.
+//! reconstruction preserves the supported closed-shape world under shared budgets.
 //! There is no public arbitrary bytes-to-live installer. Persisted byte admission,
 //! outer stable IDs/ECS/events and public physics file saves remain separate.
 #[cfg(not(feature = "f32"))]
@@ -17,6 +17,7 @@ mod broad;
 mod collider;
 pub(crate) mod convert;
 mod derived;
+mod derived_shape;
 #[allow(dead_code)]
 mod islands;
 #[allow(dead_code)]
@@ -30,7 +31,7 @@ pub use work::{WorkBudget, WorkReport};
 pub enum AdmissionError {
     /// The frame does not match the independently supplied native identity.
     Identity,
-    /// This first numeric stage accepts single primitives only.
+    /// Only closed primitives and exact flat compound storage are supported.
     UnsupportedGeometry,
     /// External physics hooks need an authenticated runtime policy.
     UnsupportedHooks,

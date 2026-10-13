@@ -1,9 +1,9 @@
-//! Primitive-only private numeric staging; no native owner installation.
+//! Closed private numeric staging; no native owner installation.
 use super::*;
 use crate::data::graph::{Graph, NodeIndex};
 use crate::geometry::{ContactManifold, PairContacts, PairEventStatus, RigidPairContacts};
 use crate::pipeline::checked_restore::{NumericFrame, allocation::*};
-use incant_physics_snapshot::{WorkspaceKind, WorldBoundary};
+use incant_physics_snapshot::WorldBoundary;
 mod manifold;
 mod pair;
 fn handle(h: incant_physics_snapshot::Handle) -> ColliderHandle {
@@ -22,21 +22,8 @@ fn check<'a>(n: &NumericFrame<'a>) -> ConstructionResult<WorldBoundary<'a>> {
     if n.identity().dimension as usize != crate::math::DIM {
         return Err(ConstructionError::Payload);
     }
-    // NumericFrame already refuses non-primitive geometry and custom hooks.
-    // A retained composite dispatcher cache is never silently discarded.
-    if f.broad()
-        .context()
-        .narrow
-        .context()
-        .rigid
-        .pairs()
-        .record()
-        .pairs
-        .iter()
-        .any(|p| p.workspace != WorkspaceKind::None)
-    {
-        return Err(ConstructionError::Payload);
-    }
+    // Pair construction retains every admitted workspace through its own
+    // checked adapter; unsupported dispatcher caches still fail explicitly.
     Ok(f)
 }
 impl NarrowPhase {

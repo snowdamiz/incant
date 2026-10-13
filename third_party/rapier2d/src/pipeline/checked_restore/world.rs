@@ -1,4 +1,4 @@
-//! Atomic private primitive-world assembly. The production exclusive capture
+//! Atomic private closed-shape world assembly. The production exclusive capture
 //! owner issues the context after its authentic completed step. No public
 //! arbitrary bytes-to-live entry or caller-supplied authority flag exists.
 use super::{
