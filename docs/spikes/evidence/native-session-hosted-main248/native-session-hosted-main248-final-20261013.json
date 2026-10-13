@@ -1,0 +1,8 @@
+{
+  "result": "accepted",
+  "head": "15e316da",
+  "manifest_sha256": "bebfab20b8950410a58f78efa5b48c9b5a837830234a217b1cb2cb843c303255",
+  "independent_verifier_exit": 0,
+  "findings": [],
+  "review": "Reviewed immutable source composition and all six accepted-main248 exceptions: four isolated probe/guard paths and two semantically equivalent Default cfg repairs with own four-configuration Clippy evidence. All3663inputs/three selected normal graphs verified; native hosted/capture/restore code and main Cargo lock unchanged against accepted200-per-mode producer. 28 current and128producer retained records independently verified. This is source/graph relevance, not new suite execution, live-device or public persisted-physics admission."
+}

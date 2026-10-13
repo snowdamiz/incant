@@ -33,8 +33,8 @@ results and initial failing fixture remain historical. UI evidence uses CPU
 measurement fixtures, and script audio evidence uses a real silent offline
 mixer. Game-level mixed PCM continuation is a separate intake. No device audio,
 GPU, appearance, exported-player, arbitrary VM-heap or persisted-physics-byte
-admission follows. Required current-head fast CI and final integration review
-remain pending at this preparation checkpoint.
+admission follows. Independent final integration review is accepted. Publication still requires
+the exact current-head fast CI success; no new runtime execution is inferred.
 
 [Manifest](evidence/native-session-hosted-main248/manifest.json). Read-only:
 `python3 docs/spikes/evidence/native-session-hosted-main248/verify.py --verify-only`.
