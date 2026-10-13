@@ -66,6 +66,44 @@ class IosWasm(unittest.TestCase):
                     ios_wasm.compiler_audit(good.replace(' -c ', ' ' + extra + ' -c '),
                                             'aarch64-apple-ios-sim', '/trusted/sdk', self.fixture(root), root)
 
+    def test_cargo_stdout_and_only_its_bound_flag_probe_are_audited(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory).resolve(); target = 'aarch64-apple-ios-sim'
+            out = root / 'target' / target / 'shipping/build/incant_wasm_runtime-012abc/out'
+            messages = [json.dumps({'reason': 'compiler-artifact', 'package_id': 'runtime',
+                                   'target': {'name': 'incant_wasm_runtime'}}),
+                        json.dumps({'reason': 'build-script-executed', 'package_id': 'runtime', 'out_dir': str(out)})]
+            probe = '[incant_wasm_runtime 0.0.1] running: ' + shlex.join([
+                '/trusted/clang', '-O0', '--target=arm64-apple-ios-simulator', '-isysroot', '/trusted/sdk',
+                '-mno-omit-leaf-frame-pointer', '-o', str(out / 'flag_check'), '-c', str(out / 'flag_check.c')])
+            stdout = '\n'.join([*messages, probe, *self.commands(root, target)])
+            audit = ios_wasm.audit_build(stdout, 'Rust compiler diagnostics', target, '/trusted/sdk', self.fixture(root), root)
+            self.assertEqual(len(audit['sources']), 5)
+            self.assertEqual(len(audit['compiler_probes']), 1)
+            self.assertEqual(audit['build_script_output'], str(out))
+            bad_output = stdout.replace('-o ' + str(out / 'flag_check') + ' -c', '-o ' + str(root / 'outside') + ' -c')
+            self.assertNotEqual(bad_output, stdout)
+            for bad in ('', '\n'.join(messages), stdout + '\n' + probe,
+                        stdout.replace('flag_check.c', 'untrusted.c'),
+                        bad_output,
+                        stdout.replace('"package_id": "runtime", "out_dir"', '"package_id": "other", "out_dir"')):
+                with self.subTest(bad=bad[:70]), self.assertRaises(ValueError):
+                    ios_wasm.audit_build(bad, '', target, '/trusted/sdk', self.fixture(root), root)
+
+    def test_actual_cargo_stream_with_five_compiles_and_one_cc_probe(self):
+        # Exact first iOS compiler transcript, with only engine/storage prefixes
+        # normalized. Cargo JSON and cc-rs command quoting remain unmodified.
+        stdout = (Path(__file__).parent / 'fixtures/ios-wasm-cargo.txt').read_text()
+        compiler = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang'
+        sdk = '/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator27.0.sdk'
+        prepared = {'bundle': '/fixture/storage/wasm-bundle', 'compiler': {'path': compiler}}
+        audit = ios_wasm.audit_build(stdout, '', 'aarch64-apple-ios-sim', sdk, prepared, Path('/fixture/engine'))
+        self.assertEqual(len(audit['sources']), 5)
+        self.assertEqual(len(audit['compiler_probes']), 1)
+        self.assertEqual(audit['compiler_probes'][0]['kind'], 'cc_flag_check')
+        with self.assertRaisesRegex(ValueError, 'Missing unique'):
+            ios_wasm.audit_build('', stdout, 'aarch64-apple-ios-sim', sdk, prepared, Path('/fixture/engine'))
+
     def test_exact_complete_program_identity_and_legacy_default(self):
         expected = {'kind': 'wasm', 'module': '00000000000000000000000001',
                     'translator': 'wasm2c-1.0.42', **{key: str(i) * 64 for i, key in enumerate(

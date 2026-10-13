@@ -124,7 +124,8 @@ def build(project, staging, storage, target, scene, camera, wabt=None):
     receipt = json.loads(read(producer / 'project-export.json', 4 * 1024**2))
     expected_program = module['program'] if module else None
     ios_archive.producer_receipt(receipt, target, project_hash, mode, expected_program)
-    compiled_module = None if module is None else ios_wasm.compiler_audit(log, target, env['SDKROOT'], module, ROOT)
+    compiled_module = None if module is None else ios_wasm.audit_build(
+        (staging / 'cargo.jsonl').read_text(), log, target, env['SDKROOT'], module, ROOT)
     require(sha256(read(project, 64 * 1024**2)) == project_hash, 'Project changed during archive build')
     camera = select_camera(receipt, camera, False)
     llvm = Path(execute([rustc, '--print', 'sysroot']).stdout.strip()) / 'lib/rustlib' / host / 'bin'
