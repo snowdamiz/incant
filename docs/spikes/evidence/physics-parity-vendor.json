@@ -1,0 +1,176 @@
+{
+  "base": "d96087e836c0b3ea28edfb2012b5dc116befc0d1",
+  "scope": "Probe package identity only; real hosted rerun still required",
+  "sources": [
+    {
+      "path": "tools/probes/physics-parity/features.py",
+      "sha256": "b994de168b20f16731d53a8e6ec1bd95c1c5fc5f7c0b318e90b30a2c380bbe99"
+    },
+    {
+      "path": "tools/tests/test_physics_parity.py",
+      "sha256": "63a875ad2e69e0bb520f50655d72dd36a152417b40aeb4c093dc56d1d735b564"
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/actual-targets.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/00-actual-targets.log.gz",
+      "sha256": "a8276195d8af815b6a78db33fa11043ad1674f0b66c2ada5bdd7f6c9e36f4eb8",
+      "bytes": 45,
+      "gzip_sha256": "f100cc0acc4fe2ee1e6c38507b243caf722579855963abb2d1aae48a8993dacd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/conventions.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/01-conventions.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/diff.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/02-diff.log.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/focused.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/03-focused.log.gz",
+      "sha256": "ebbcd94190730eacd821ff432698343219f125863c175832d090d14bc6f95c52",
+      "bytes": 1357,
+      "gzip_sha256": "e315af5cbaf4d4c34cee3b35a26f169bdaa88ea86679c51cbe14e93b37708ce8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/red.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/04-red.log.gz",
+      "sha256": "02a3a20e240779bc746a50f2610c49c8dd422ac05c18667a30ce080b6bda5f86",
+      "bytes": 452,
+      "gzip_sha256": "85be19ef1f41c756258a662672786c41a00c8fb92cb7f3f1a5dcb57db4f44abd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/root-test.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/05-root-test.log.gz",
+      "sha256": "209637c5270ea62667d3505f25f6e8e713fd220b3020983b799e40ff6ae4138a",
+      "bytes": 105,
+      "gzip_sha256": "b5256d6cfdf17c8f5b61ff2420447d787f9a695e14fb91c4428162db990d9a41"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/tools.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/06-tools.log.gz",
+      "sha256": "188fcae70ec8820d80f843fc30cea4149dbec95ad2f217c0b25963125fb89def",
+      "bytes": 68473,
+      "gzip_sha256": "410a6d646b63aa37498057b6e9f17e1820b271037398d6d9562b6a34a3742aea"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/actual-targets.json",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/07-actual-targets.json.gz",
+      "sha256": "d8539e5ad766608a970ff65c9160a6a9ab72fafa6a9acf3a2c3c703d24c56774",
+      "bytes": 17468,
+      "gzip_sha256": "fb3d0d82e10cdb50efdd4911a015b072fffd147eef8638b58c8ed65654f79348"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/checks.json",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/08-checks.json.gz",
+      "sha256": "aaa1dc63ea8b486078bf228093a559f7cbe7f2806cac900e61018255aa09c5a9",
+      "bytes": 716,
+      "gzip_sha256": "4406823eabf70176721be65ded85789e49876f136b99b85067dbee1ea643eb4f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/source.json",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/09-source.json.gz",
+      "sha256": "ae5cc9002a9de4280ff7e318888336567ca0f2a751c893c058d6853bd9adb16a",
+      "bytes": 224,
+      "gzip_sha256": "b773316e14f2c8542ebeff212abec285e67a4f418c59e01571eba368e2fbacb2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/target-streams.json",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/10-target-streams.json.gz",
+      "sha256": "e316e8d53bc37f348c31ef7d55d0009f2b22e5f2e412676d036e384bf9a52d11",
+      "bytes": 489891,
+      "gzip_sha256": "153a1c4c087809423e9360777706797bdc01f3d632167c5daafec3678c55cc0b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/red-exit.txt",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/11-red-exit.txt.gz",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "bytes": 2,
+      "gzip_sha256": "c28cc69d141393e44a931229323624ef7b8c5bde3ee047ca9b87332daef23c82"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/repair.patch",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/12-repair.patch.gz",
+      "sha256": "69fff6075759b1e5affc511afab3f46d30f9368563404f1475a9bf17ff5eaa60",
+      "bytes": 5954,
+      "gzip_sha256": "800da6e79bb5a001800165670084464d036882cf0c95155f51205f5090d46e1d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-parity-vendor-001/run.py",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/13-run.py.gz",
+      "sha256": "5298879b198f3ed29dc396f1ab3ae9aa89db94b945c5cc0baf446df8d0324310",
+      "bytes": 1215,
+      "gzip_sha256": "0ec1bf03a2e865eed1cfcb22d6ba671cf3361ec5e8b6a7e6e3697d2311667fa5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint21/failures/portability.log",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/14-portability.log.gz",
+      "sha256": "df0f669391e0a834971430ccf82e0b686da673870baf1e625875e7844a77d5b7",
+      "bytes": 25461,
+      "gzip_sha256": "d16858970fb645cae78d34fecc2429f34b88496be5051007955abdd115558efe"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/docs/spikes/evidence/physics-parity-vendor/source-review.json",
+      "retained": "docs/spikes/evidence/physics-parity-vendor/15-source-review.json.gz",
+      "sha256": "a9c0c01df85801c9f0ea05eaa7ba2db85c8e06f919661220fa6a17e16288a98d",
+      "bytes": 1055,
+      "gzip_sha256": "b0f655c62ed825426f0c43aff25d2657701300c5217f45d557b516510d7efe3e"
+    }
+  ],
+  "checks": [
+    {
+      "name": "tools",
+      "argv": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 27.21041512489319,
+      "sha256": "188fcae70ec8820d80f843fc30cea4149dbec95ad2f217c0b25963125fb89def"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03206205368041992,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.023329734802246094,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "focused_tests": 7,
+  "tools_tests": {
+    "python": 373,
+    "platform_skips": 4,
+    "node": 22
+  },
+  "hosted_failure": {
+    "head": "51d8ab52a776e133c55acae180b4da464b4446db",
+    "job": 115226651500,
+    "error": "missing pinned rapier3d dependency"
+  },
+  "old_source_reproduction_exit": 1,
+  "targets_record": "docs/spikes/evidence/physics-parity-vendor/07-actual-targets.json.gz"
+}
