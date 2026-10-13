@@ -1,0 +1,90 @@
+{
+ "schema": "incant-owner-history-combined-result-v1",
+ "verdict": "ACCEPTED_ALL_FOUR_CHILDREN",
+ "scope": "numeric kernel/backend and retained host-connection evidence only; no appearance, temporal quality, performance, phone or phase acceptance",
+ "model": "Opus 5.5",
+ "effort": "max",
+ "acp_start": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-supervision-002/acp-start.json",
+ "authority": {
+  "grant_sha256": "6fc9ad7b744e01524acf220ea4cf61aeb3d6640f34fdc94fe57e783b552524c8",
+  "root_review_sha256": "d49a8393eafa5bdaa35791ba5a55a56814c37b85b68a05fa150ca86d441b6f34",
+  "plan_sha256": "6a618f250e17e50015621ac9c9aef649dd12338fd23f2ac2f55b801962bdb2e0",
+  "runner_sha256": "d89272e66a039d43911a58a04447056ccab26822a3a005429c5edf5c0221cf13",
+  "lifecycle_sha256": "b9e12895389a046e1c0a0bd4c43f01a215505c793be4106b31fafc18aa2aff34",
+  "producer": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "binaries": {
+   "wgsl": {"sha256": "0401132375f7a146d812e1d75dc2f085911a459f570a9cb978299f6a194ad002", "bytes": 32321424, "mode": "0555"},
+   "cooked-metal": {"sha256": "808243663e214ef421acd4234b3a87f31c21d485dae8dacefce65db83588510b", "bytes": 33736992, "mode": "0555"}
+  },
+  "predecessor_release_sha256": "4d2259a09a7d8731bee81eac4d61c1ed6b621c2a05adc244a4381453ffe05928",
+  "all_unchanged_after_run": true
+ },
+ "invocation": {
+  "count": 1,
+  "argv": [
+   "python3",
+   "-B",
+   "handoffs/0073-upscaling-review/owner_history_002/runner.py",
+   "run",
+   "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0073-upscaling-review/handoffs/0073-upscaling-review/owner_history_002/plan.json"
+  ],
+  "interpreter": "/opt/homebrew/bin/python3 3.14.8",
+  "invoked_at": "2026-10-13T17:33:43Z",
+  "finished_at": "2026-10-13T17:33:48Z",
+  "runner_exit": 0,
+  "console_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-history-gpu-002-console"
+ },
+ "children": [
+  {"job": "numeric-wgsl", "pid": 1316, "pgid": 1316, "exit": 0, "seconds": 0.59, "reaped": true, "group_empty_after": true, "accepted": true},
+  {"job": "numeric-cooked-metal", "pid": 1323, "pgid": 1323, "exit": 0, "seconds": 2.05, "reaped": true, "group_empty_after": true, "accepted": true},
+  {"job": "retained-wgsl", "pid": 1329, "pgid": 1329, "exit": 0, "seconds": 0.975, "reaped": true, "group_empty_after": true, "accepted": true},
+  {"job": "retained-cooked-metal", "pid": 1372, "pgid": 1372, "exit": 0, "seconds": 0.834, "reaped": true, "group_empty_after": true, "accepted": true}
+ ],
+ "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+ "adapter_identical_across_children": true,
+ "markers_reached": {
+  "numeric": "OWNER_HISTORY cases=12 owner_renders=12 current_only_renders=1 baseline_renders=2 queue_submits=12 readback_maps=12 max_extent=16x16 no_images=true",
+  "numeric_backends": ["wgsl", "cooked-metal"],
+  "numeric_case_lines_identical_across_backends": true,
+  "retained": "RETAINED_OWNER frames=12 readback_submits=12 queue_submits=24 maps=12 max_extent=32x32 no_images=true",
+  "retained_backends": ["wgsl", "cooked-metal"],
+  "case3_center": {"color": "4.172325e-7", "depth": "50.05", "record": [2147483653, 7], "current_only": true,
+   "byte_identical_to_history_disabled_reference_planes": ["color", "depth", "record"]}
+ },
+ "budget": {
+  "debited": {"child_attempts": 4, "queue_submissions": 72, "readback_maps": 48, "refundable": false,
+   "per_child": {"numeric-wgsl": [12, 12], "numeric-cooked-metal": [12, 12], "retained-wgsl": [24, 12], "retained-cooked-metal": [24, 12]}},
+  "reached_by_markers": {"queue_submissions": 72, "readback_maps": 48},
+  "not_attempted": []
+ },
+ "release_verified": {
+  "released": true,
+  "accepted": true,
+  "exception": null,
+  "owned_processes": [],
+  "process_groups_alive": [],
+  "images": [],
+  "pids_and_groups_gone": [1316, 1323, 1329, 1372],
+  "remaining_processes_referencing_binaries_runner_or_evidence": 0,
+  "lock_open_handles": 0,
+  "tmp_empty": true,
+  "embedded_hashes_match_files": true
+ },
+ "files_sha256": {
+  "release.json": "c1bdfed0b833a1e6c275170ce9a39a34f265e22ce8d5969e9e5068239e310899",
+  "ledger.jsonl": "f3e576d63d885736ed47e35e68f25993de3c2f89ead6d07755962954f1f8a9e0",
+  "debits.jsonl": "fcdbd24c5e4238c45bca9612f250a2480d38f1b86998aa5919f458ba81be95d0",
+  "numeric-wgsl/stdout.txt": "9b5876c0d876831c9d3b91f3f267cf0ccaa0ab1d16ba732143eca94cba7a564d",
+  "numeric-cooked-metal/stdout.txt": "3eb245adc0de2d8626462cbdd1c42925e13df02003fbfec1cbc17766bf387d7c",
+  "retained-wgsl/stdout.txt": "0fd457d37e5ce1e68ca375093535087057861e26d114435652d56c7824da4392",
+  "retained-cooked-metal/stdout.txt": "eb8bf91facedfbb38a657740b1452d7e457f424c310aab8e8f90987bf5877202",
+  "each_child_stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+  "grant.json": "6fc9ad7b744e01524acf220ea4cf61aeb3d6640f34fdc94fe57e783b552524c8",
+  "console/console.stdout.txt": "a302dbc2cb4a3003ec96df589e2aa88b70817b390d74c65b02afda2ac308ac02",
+  "console/console.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "console/exit.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+ },
+ "diagnosis_comparison": "Case 3 CENTER equals the 6d7fa1e4 oracle prediction for the patched shader with positive [9,8] weight (class A); inconsistent with exact arithmetic (0.0) and the table-misread class (about 0.405). Not proof of the instruction sequence; the GPU001 binary was not re-run. 4.172325e-7 is again consistent with toward-zero f16 storage (observation only).",
+ "not_established": "appearance or general stale-color quality; MetalFX or fixed TAA owner consumption and native packing; mutable SSAO or effect composition; performance, physical or queued memory, phone and phase gates",
+ "preserved": "GPU001 failure 13540b9c and CPU diagnosis 6d7fa1e4; every earlier visual rejection and quality failure (edge/subpixel, C7, C9, P1)"
+}
