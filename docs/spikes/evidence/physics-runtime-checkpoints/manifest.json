@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "scope": "Local primitive in-memory runtime checkpoint qualification; no persisted physics-save or phase/device acceptance",
+  "producer_commit": "3e95ecc3ffb9d104585f7a9db8020557ef852fdc",
+  "base_main": "2e6f5ead7c09c078d39ed4a24366346ce23dbe5d",
+  "native_source009": "f19f54ac06f21827390d7afbcddc4f77be3ec3f0",
+  "native_source010": "d6ca98670cc13afe1cb63323f1761d770e822a42",
+  "freeze004_sha256": "e938a3740882e0d97ac3ff6467e453d650c7a817d7dfa23fc50eaaead384974f",
+  "freeze005_sha256": "439c9e995269ac8d53d52bb8018f7717154d3ead2f6915cf09cfbb5c06ec4da5",
+  "record_count": 58,
+  "source_count": 27,
+  "records_sha256": "74f61527c078b84d30b7812d41dbf37bfe8044f3466a0b5af62ff3d666522143",
+  "checks": [
+    {
+      "command": "checkpoint-all-004",
+      "exit_code": 0,
+      "tests_passed": 38
+    },
+    {
+      "command": "tests-fast8-004",
+      "exit_code": 0,
+      "tests_passed": 38
+    },
+    {
+      "command": "clippy-default-004",
+      "exit_code": 0,
+      "tests_passed": 0
+    },
+    {
+      "command": "clippy-fast8-004",
+      "exit_code": 0,
+      "tests_passed": 0
+    },
+    {
+      "command": "wasm-check-004",
+      "exit_code": 0,
+      "tests_passed": 0
+    },
+    {
+      "command": "fmt-004",
+      "exit_code": 0,
+      "tests_passed": 0
+    },
+    {
+      "command": "tests-consumers-default-004",
+      "exit_code": 0,
+      "tests_passed": 263
+    },
+    {
+      "command": "checkpoint-all-005",
+      "exit_code": 0,
+      "tests_passed": 38
+    },
+    {
+      "command": "tests-fast8-005",
+      "exit_code": 0,
+      "tests_passed": 38
+    }
+  ],
+  "binaries": "Hashes and copy receipts retained; actual executables verified locally and kept outside repository",
+  "native_change": "Source010 only renames the conditionally used capture_context parameter and updates two pins; root source unchanged004/005",
+  "reviews": [
+    "49d614f61590391c44e811a8cd70f085016bef9a7925aed350c8fce2a9530828",
+    "e6e9d6953e0369186b3dfa860f149770a10e85a95519d5591c566e328d519cf2",
+    "8c71dcd5b4466c24d1ced042ed3a7ed894d2d2e4177755acb47a77e6e414bbfc"
+  ],
+  "limitations": [
+    "Native numerical/unsupported-family refusals retained",
+    "Primitive shapes only; no compound/tile/retained character cache checkpoint",
+    "No public bytes admission or full ECS/script/session save",
+    "No performance or physical-device gate"
+  ]
+}
