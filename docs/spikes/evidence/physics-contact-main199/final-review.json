@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-13T05:18:41.633316+00:00",
+  "decision": "accepted scoped contact integration",
+  "head": "1560984522809087f60babf6f042f9e8f0a6a1db",
+  "manifest_sha256": "637f76888100cfd0b022a7e288247b429066c7254658020725cfeb06755d1691",
+  "collector_read_and_verify_only_exit": 0,
+  "independent_rehash": {
+    "sources": 2873,
+    "archived_records": 19,
+    "unique_payloads": 10,
+    "commands": 8
+  },
+  "source_relevance": "28 exact accepted producer crate files, only5 source changes; Cargo.lock exact main199",
+  "limits": [
+    "65 cases include prior52 inert cases plus13 contact cases; counts are not additive.",
+    "All28 crate source/test/manifest files equal the reviewed producer; older producer lock differs by already-merged profiling packages/edges; lock is unchanged from currentmain199.",
+    "No live constructor, contact/solver ownership composition, physics-save admission, GPU, shipping, device or performance claim."
+  ]
+}

@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main198, 2026-10-13
+## Current overview — main199, 2026-10-13
 
-Development main198 includes the restart quota-test repair (PR188) and the reviewed,
+Development main199 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -29,8 +29,8 @@ terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux
 Windows conformance failed the quota assertion, and macOS rejected a successful
 player compile because its probe confused library and executable units. The main188
 quota repair preserves production's 50 ms budget, and the reviewed player probe
-correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
-all 23 requirements must pass before release promotion.
+correction is merged in PR191. Checkpoint18 retained the exact main191 tree and is closed as described below.
+All 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
 Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
 that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
@@ -55,6 +55,17 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## Exact physics saves — inert contact leaf payloads verified locally
+
+The next std-only inert component preserves complete tracked-point warm-start
+data and ordered solver-contact rows, with exact float/feature/index bits and
+bounded hostile decoding. Sixty-five CPU tests, Clippy, wasm32 and dependency
+checks pass. Actual 2D/3D stepped contacts include nonzero warm starts/friction,
+retained recycle references, unchanged sleeping rows and wake changes.
+Independent source and final producer evidence review are accepted; [main199 integration](docs/spikes/physics-contact-main199.md) passes eight checks and 65 CPU cases. Final integration review is accepted; publication awaits the required fast check. Shape/owner/manifold
+composition and full exact continuation remain required; live construction and
+physics-save admission stay refused.
+[Contact leaf contract](docs/spikes/physics-inert-contact-points.md).
 
 ## Exact physics saves — inert attachment ownership verified locally
 
@@ -62,7 +73,7 @@ The next std-only inert component preserves exact ordered body/collider
 attachments and native local-pose bits against two checked arena layouts.
 Fifty-two CPU tests, Clippy, wasm32 and dependency checks pass, including actual
 2D/3D public attach/detach/reparent/remove/reuse observations and hostile decoding.
-Independent producer source/evidence review is accepted; [current-main197 integration](docs/spikes/physics-attachments-main197.md) passes all eight checks with 52 CPU cases; independent final integration review is accepted; the actual-main198 join is qualified as renderer-only with no snapshot or dependency change. Enclosing-owner authentication,
+Independent producer source/evidence review is accepted; [current-main197 integration](docs/spikes/physics-attachments-main197.md) passes all eight checks with 52 CPU cases; independent final integration review and the renderer-only main198 qualification are accepted. PR199 is merged after the exact-head fast check; no snapshot or dependency change was introduced by that join. Enclosing-owner authentication,
 complete body/collider/contact state and exact continuation remain required;
 no live construction or physics-save admission is enabled.
 [Attachment contract](docs/spikes/physics-inert-attachments.md).
