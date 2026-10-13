@@ -92,5 +92,8 @@ evidence of pending-journal refusal, not successful continuation.
 source copies, command receipts and raw logs; two actual trusted-test binaries
 are copied with executable mode outside the build target. All 968 locked package
 identities are unchanged; the root lock adds only the two default-off optional
-local dependency edges. Final independent evidence review is pending. These are
+local dependency edges. Final independent evidence review is accepted
+([retained receipt](evidence/physics-numerics-main227/producer-final-review.json)).
+Current-main composition is qualified separately
+[in the integration report](physics-numerics-main227.md). These are
 CPU/native mathematical checks, not a device or performance gate.
