@@ -257,9 +257,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main237, 2026-10-13
+## Current overview — main241, 2026-10-13
 
-Development main237 includes the reviewed opt-in cooked renderer families and
+Development main241 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -274,10 +274,17 @@ Checkpoint25 finished without promotion: 21 required contexts succeeded, the
 Windows full-App UI test timed out, and the checks job was cancelled before a
 runner acquired it. Those outcomes remain retained. PR233 merged the reviewed
 single-case deadline repair after its required fast check.
-Checkpoint26 is frozen on main235 (`fd290c3b`) with candidate `0da0a6db` in the
-same PR232. All 23 required contexts and eight workflows remain required; actual
-checkpoint execution is pending. Later main changes do not alter that frozen
-head or the already promoted release.
+Checkpoint26 finished unpromoted with 22 required checks successful and the
+original Windows Dx12 SSAO filter failure retained. PR241 merged its reviewed
+raster-coverage repair; the exact merged source passed both original strict
+Dx12 projection contracts and six observation submissions in a fixed Windows
+run. [Portable strict evidence](docs/spikes/evidence/ssao-strict-dx12-main241/manifest.json).
+Checkpoint27 now freezes main241 (`e281fe74`) as candidate `bb46015a` in the same
+PR232. All 23 required contexts and eight workflows must succeed; validation is
+active. Later main changes do not alter this frozen head or release `2a9d72ea`.
+PR242's complete private primitive-world composition is independently accepted
+and locally qualified, with publication awaiting its exact-head fast check;
+public capture/save admission and outer engine ownership remain unsupported.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
@@ -285,7 +292,7 @@ macOS command journal assertion failed. The hosted error was not printed, so the
 inherited-lock cause remains inferred from a controlled local reproduction.
 PR225's test-only isolation preserves production locking and authorization.
 Earlier checkpoint21/22 portability and optional-query failures remain retained.
-Main227–229 work stays outside release; no device, performance or phase gate follows
+Main227 onward stays outside the currently promoted release; no device, performance or phase gate follows
 from promotion. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
 historical evidence for selected main205.
 
