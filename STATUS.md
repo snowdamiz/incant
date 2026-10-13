@@ -2722,3 +2722,17 @@ Public persisted physics saves remain refused. See
 [scope and evidence](docs/spikes/physics-native-capture-owner.md).
 
 - Private outer compound/tile checkpoint join: 12 focused CPU controls pass on main246 ancestry; independent source review and complete native compound reconstruction/paired continuation await the lower Parry/Rapier union. Persisted physics save bytes remain refused. See `docs/spikes/outer-compound-checkpoints.md`.
+
+
+### Checked native persisted rigid subset — producer CPU qualified
+
+Default-off byte admission now reconstructs a staged native rigid candidate under
+joined identity, geometry/contact/cache, arithmetic and budget checks. Imported
+readiness remains distinct from historical completion. Single-pass CCD includes
+actual default-enabled and implicit fast-body clamping; unsupported multi-pass,
+soft/joint/custom/cluster states refuse explicitly. Both modes pass 382 complete
+native tests each, strict native/wasm Clippy and scoped graph/guard checks. The
+independent source correction is accepted; final producer evidence review and
+outer world/session/player integration remain separate. Historical CCD premise
+and fixture failures are retained. See
+[contract and evidence](docs/spikes/physics-native-persisted.md).
