@@ -62,7 +62,7 @@ data and ordered solver-contact rows, with exact float/feature/index bits and
 bounded hostile decoding. Sixty-five CPU tests, Clippy, wasm32 and dependency
 checks pass. Actual 2D/3D stepped contacts include nonzero warm starts/friction,
 retained recycle references, unchanged sleeping rows and wake changes.
-Independent source and final producer evidence review are accepted; [main199 integration](docs/spikes/physics-contact-main199.md) passes eight checks and 65 CPU cases. Final execution packet review and publication remain pending. Shape/owner/manifold
+Independent source and final producer evidence review are accepted; [main199 integration](docs/spikes/physics-contact-main199.md) passes eight checks and 65 CPU cases. Final integration review is accepted; publication awaits the required fast check. Shape/owner/manifold
 composition and full exact continuation remain required; live construction and
 physics-save admission stay refused.
 [Contact leaf contract](docs/spikes/physics-inert-contact-points.md).

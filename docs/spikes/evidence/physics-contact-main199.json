@@ -385,5 +385,9 @@
     "All28 crate source/test/manifest files equal the reviewed producer; older producer lock differs by already-merged profiling packages/edges; lock is unchanged from currentmain199.",
     "No live constructor, contact/solver ownership composition, physics-save admission, GPU, shipping, device or performance claim."
   ],
-  "review_state": "Final contact integration acceptance pending"
+  "review_state": "Accepted for scoped publication",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-contact-main199/final-review.json",
+    "sha256": "fe888bad31d572da3c9d5a624f113ffdee87ed29f8601b289c1d543a40c1402e"
+  }
 }
