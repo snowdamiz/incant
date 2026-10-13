@@ -1,0 +1,14 @@
+{
+  "schema": "incant-owner-quality-repair-preparation-v1",
+  "runner_sha256": "10e0cfde16592e624c93552907d8ed5fe823b817355ca2931aa794b8bec4a721",
+  "plan_sha256": "11fb0f702be37dbd2631922fe9794a1d7a1daeed0f62e3ff39f78e1be8b39013",
+  "tests_sha256": "ade74c6a0f091ba001975393a4378f87a01cea7a289ba0011546dd44de3ba991",
+  "controls_log": "/Users/andreyyurlov/.codex/incant-evidence/owner-quality-repair-build-002/runner-controls.log",
+  "controls_sha256": "5a8719d3360354036cf7dce7ee0e3ea79da78462069f562d7bb3f98442f00cdc",
+  "controls": 14,
+  "exit": 0,
+  "reaped": true,
+  "gpu_executions": 0,
+  "build_receipt_sha256": "1974b41c37d5fb9e1e8c3d6c83f8e6d9659d3157fe75af92d196f6d77e4066dc",
+  "date": "2026-10-13T20:09:20.369487+00:00"
+}
