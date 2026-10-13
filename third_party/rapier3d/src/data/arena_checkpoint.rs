@@ -59,7 +59,7 @@ impl<T> Arena<T> {
             return false;
         };
         let mut capacity = self.items.len();
-        // A decoded zero-capacity arena cannot use native insert_slow_path,
+        // A manually supplied zero-capacity native arena cannot use native insert_slow_path,
         // which requests reserve(0). Refuse rather than silently rebuilding it.
         if capacity == 0 && peak != 0 {
             return false;

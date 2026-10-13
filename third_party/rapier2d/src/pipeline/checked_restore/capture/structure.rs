@@ -226,7 +226,12 @@ pub(super) fn island_headroom(
     extra: u64,
     work: &mut WorkBudget,
 ) -> Result<()> {
-    work.charge(w.islands.persistent.islands.len() as u64 + 1)
+    // VecMap iteration walks retained slots, not just occupied entries.
+    let capacity = w.islands.persistent.islands.capacity();
+    if capacity > MAX_ITEMS {
+        return Err(StructuralError::IslandCounter);
+    }
+    work.charge(capacity as u64 + 1)
         .map_err(|_| StructuralError::Work)?;
     let sum = w
         .islands
