@@ -1,0 +1,12 @@
+{
+  "source_pcm": "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof/full.pcm",
+  "sha256": "7d5a10ee3eb4ae369ebf86b6aa6e60649a11cf6f805358ac665d5b713a7023bd",
+  "samples": 3449600,
+  "finite_samples": 3449600,
+  "nonzero_samples": 3449356,
+  "peak_absolute": 0.25117814540863037,
+  "first_nonzero_sample": 0,
+  "last_nonzero_sample": 3449599,
+  "all_samples_after_won_zero": false,
+  "analysis_read_chunk_bytes": 65536
+}

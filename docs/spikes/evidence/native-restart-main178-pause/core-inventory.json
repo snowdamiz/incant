@@ -1,0 +1,361 @@
+{
+  "root": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping",
+  "files": {
+    "gamepad-restart-win-observe.json": {
+      "sha256": "dcb55df90082a90ec59a31e840003dac3448b18207cfe17c317598a720379de2",
+      "bytes": 5635
+    },
+    "win-restart-win-input.json": {
+      "sha256": "2190bb535241a27b430f4752ef96845f88595ea1afcc41c3f533c227de788717",
+      "bytes": 975
+    },
+    "repeat-win.json": {
+      "sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079",
+      "bytes": 12646
+    },
+    "deleted-maps.json": {
+      "sha256": "2bebfb83106d3158f24fe541acc9ef6e5539a6bc0167ae701c1a9d410b3d9297",
+      "bytes": 132
+    },
+    "lose-restart-win.json": {
+      "sha256": "4e317203f9f81dbc0efe0e9d4a7778b589b96da2e62e3466ff9fbe3180363237",
+      "bytes": 17027
+    },
+    "lose-input.json": {
+      "sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+      "bytes": 117
+    },
+    "skip-pickup-observe.json": {
+      "sha256": "9436545d7f13cbb71445c099826ffea016c1fee1f2ee7614e2cf2e7c9939f91c",
+      "bytes": 1076
+    },
+    "repeat-win-input.json": {
+      "sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "bytes": 422
+    },
+    "result.json": {
+      "sha256": "c452dfdfbf6ce41a9030325df08e538807c0a2f19094dc281011750895546998",
+      "bytes": 4582
+    },
+    "command-001.json": {
+      "sha256": "a57f5d2b0ad26ef79f11eabc37b7b86e55c3aaa70b12fb0c000653b389ce6372",
+      "bytes": 9059
+    },
+    "lose-restart-win-observe.json": {
+      "sha256": "e1787b4367daf20921beb9473931f5f11ba32f5a02f15febfb413546f7c95ec1",
+      "bytes": 5642
+    },
+    "lose-restart-win-input.json": {
+      "sha256": "56727e2b6fcd27c0da1dcb9cbd2b5386db2e6a234c53d7a5f3fe2e10aa931178",
+      "bytes": 674
+    },
+    "gamepad-restart-win.json": {
+      "sha256": "4f9e53e12db819d1fd2db0a521f3fa3ec12aeb8d972e9d88520823bc22ddad6f",
+      "bytes": 17021
+    },
+    "idle-observe.json": {
+      "sha256": "30e1e0a0cc79b0da24838ae7c9b842ce40582d1dcc7aa9896b916a65221dc434",
+      "bytes": 538
+    },
+    "skip-pickup.json": {
+      "sha256": "a46687989884b63fc9f314aa986b3e21734373bc3c6e84a67d792aeaedb705a7",
+      "bytes": 9935
+    },
+    "jump-input.json": {
+      "sha256": "aea85027dc03cc63b99bf611716ad775ced10cdef0a7b8c6e1c7abe5c1e37cbb",
+      "bytes": 725
+    },
+    "wall-input.json": {
+      "sha256": "4ac0e3cdb046ee14ea7fa9fe234f123bcc32b5e0b95f3e592aa97ddbd7a63f68",
+      "bytes": 764
+    },
+    "repeat-win.pcm": {
+      "sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "bytes": 1920000
+    },
+    "gamepad-input.json": {
+      "sha256": "2cacb813c6bd3521150dca137d8adc649e6039c12ad0fb349f27a309e78a3b1c",
+      "bytes": 555
+    },
+    "wall.json": {
+      "sha256": "a4c0b5af9ecbbfaa1ec08c607c14062b2ca390d19ca3e2eae911c680402de5e8",
+      "bytes": 8815
+    },
+    "win-observe.json": {
+      "sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "bytes": 2668
+    },
+    "wall.pcm": {
+      "sha256": "98654a46a8fdd59803138a8e1fe42a69ba591f5d9671d71c572e377b8d6224ed",
+      "bytes": 1344000
+    },
+    "command-006.json": {
+      "sha256": "2445107a75e36d745858a6c2ede1a204edd997847221b20a9d7a750c8fa236be",
+      "bytes": 6481
+    },
+    "command-010.json": {
+      "sha256": "86c97572bd8c75b7e8bcca85634f8f74ba66da76231d9515c5d0375f3427584d",
+      "bytes": 11803
+    },
+    "command-011.json": {
+      "sha256": "49e32df0199864cf410737ab7a87b404e6e2dd34b4ce83f15d4530fa22222ceb",
+      "bytes": 11801
+    },
+    "command-007.json": {
+      "sha256": "2935885b2e6ff5182901b5413e69c74613a20df0126e02ee862b61b886ff0a55",
+      "bytes": 9080
+    },
+    "win-restart-win.json": {
+      "sha256": "4f9e53e12db819d1fd2db0a521f3fa3ec12aeb8d972e9d88520823bc22ddad6f",
+      "bytes": 17021
+    },
+    "win.json": {
+      "sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079",
+      "bytes": 12646
+    },
+    "wall-observe.json": {
+      "sha256": "87d5644fe2ab87b71f806b98e1056c11ffc470320945ecaf901d8e7efae332f9",
+      "bytes": 765
+    },
+    "gamepad.pcm": {
+      "sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "bytes": 1920000
+    },
+    "held-input-restart-idle-input.json": {
+      "sha256": "1e445f14943221f954343fafe156256a56edaf393a584d2f74b05c2432d16f99",
+      "bytes": 822
+    },
+    "lose.json": {
+      "sha256": "a7bef143f32178688148cd713627567fbb2a4f5d2154356242baae5fbb4e09b0",
+      "bytes": 12586
+    },
+    "gamepad-restart-win-input.json": {
+      "sha256": "ffc8ecd98ac3539d3c5a165418709ef5e9458038f56b43dc604a8a513167fbd8",
+      "bytes": 1224
+    },
+    "repeat-win-observe.json": {
+      "sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "bytes": 2668
+    },
+    "idle.json": {
+      "sha256": "be7c9986c5b8feac77647069a58fbba6a2af5d90069f4998bea29f4b155f529d",
+      "bytes": 5612
+    },
+    "win-restart-win.pcm": {
+      "sha256": "36b29835f5733786b42fde4b5ae76ae7d3f831ddc815358c8f13ae9088246987",
+      "bytes": 3840000
+    },
+    "lose-restart-win.pcm": {
+      "sha256": "33106c23e11afdf7e7047b829e5c9c019ccb618a41c59f5a6683e3238fa87219",
+      "bytes": 7680000
+    },
+    "command-008.json": {
+      "sha256": "ea4f8d05ca6928443ce2b82e89db0a3cee54da83238e42574ba67432ef1e9b53",
+      "bytes": 4442
+    },
+    "jump-observe.json": {
+      "sha256": "dd85cfc161ed93f8922a3ec45d290d4880b1eb6b8e8523313b2b0dfe9a5eeb42",
+      "bytes": 2972
+    },
+    "held-input-restart-idle.json": {
+      "sha256": "1d235dcb5c2272c42dd6a597d107345ad4e8c79624966802e3802ca86326d895",
+      "bytes": 10846
+    },
+    "jump.json": {
+      "sha256": "3a9e6835d0968ed1d277b33aff8cd2e239011936e4af1b967c0e867b6f92b7c9",
+      "bytes": 13202
+    },
+    "command-012.json": {
+      "sha256": "1b9278a945cc01069e255bfd3868c29f79aea862dc7e5f8f21cb800ce502d2f1",
+      "bytes": 7673
+    },
+    "command-004.json": {
+      "sha256": "ef8dbd51d84143b0c0f8058778e4e3bece73ab0a28ff1396ee19921b19cab04c",
+      "bytes": 9387
+    },
+    "lose.pcm": {
+      "sha256": "c4baa82e7504eb240b6d4fa8108ff53530c4b4fa13176cac7bb2b4e9b13bc625",
+      "bytes": 5760000
+    },
+    "held-input-restart-idle-observe.json": {
+      "sha256": "340804f576880ba7b433d7be57ace2136786447ddda16f91d3910b03740b4d57",
+      "bytes": 3859
+    },
+    "win-restart-win-observe.json": {
+      "sha256": "dcb55df90082a90ec59a31e840003dac3448b18207cfe17c317598a720379de2",
+      "bytes": 5635
+    },
+    "idle-input.json": {
+      "sha256": "cee21dcac738f7c7069a9e385bc7a8d2e0692e26c5d0d71485c0d8a92083a3a0",
+      "bytes": 116
+    },
+    "command-005.json": {
+      "sha256": "d0208df0df8a3845f8b3dcb73fbb4b55946fdc00dc09d793a7ee16a1d49fe334",
+      "bytes": 7373
+    },
+    "idle.pcm": {
+      "sha256": "a3dd1dccf9b11d8ac8734baf07ddf140a564903d47afc0c3376c2bcdbe9e397f",
+      "bytes": 192000
+    },
+    "held-input-restart-idle.pcm": {
+      "sha256": "c6d350331b26380aae0e89f3d2c908b4be7e08180131d561efefcb2441f1b2a6",
+      "bytes": 2112000
+    },
+    "win.pcm": {
+      "sha256": "5cc3227745f064c559e7f17dbe260006981b6b82d47dd0d92e2f13c5884de996",
+      "bytes": 1920000
+    },
+    "gamepad-observe.json": {
+      "sha256": "ca6628858947acd3647e553daccfccd1882844792e656a344e65e267b79d5339",
+      "bytes": 2668
+    },
+    "command-009.json": {
+      "sha256": "1d23f26c738413754db0b1052cb5747dcef03cdbebe8c13c5cad510fa51f8054",
+      "bytes": 11791
+    },
+    "gamepad.json": {
+      "sha256": "eced876a8b4bf9560e44f81c6c1ad621b8c9101751423dd95fc9da6d5fd1a079",
+      "bytes": 12646
+    },
+    "command-002.json": {
+      "sha256": "e50c7b613a83937dd5dd500c37bf8be9d82cc0cfa15a69ebab8f56056f704490",
+      "bytes": 9002
+    },
+    "gamepad-restart-win.pcm": {
+      "sha256": "36b29835f5733786b42fde4b5ae76ae7d3f831ddc815358c8f13ae9088246987",
+      "bytes": 3840000
+    },
+    "deleted-authoring.json": {
+      "sha256": "0e905d61fdf1c911618a312cc1b749504b7ba6f6a1a2497c0dcd2f4e17564db0",
+      "bytes": 4560
+    },
+    "win-input.json": {
+      "sha256": "aedbc57164dcdd45652c98f5c67e5f3987472eed5625f56ac0af0f9fea0cc731",
+      "bytes": 422
+    },
+    "lose-observe.json": {
+      "sha256": "60bd599d72638053e6de1abf926eb02946e8c1777a3e74aebe0760b666d98a33",
+      "bytes": 2666
+    },
+    "skip-pickup-input.json": {
+      "sha256": "10bf77b346b66beacea785e2f2ac095f57512b8784397bec4756b77d1c491110",
+      "bytes": 727
+    },
+    "jump.pcm": {
+      "sha256": "2d5b4bf04f893c7e07875c0d07b31e4fbdec638c77e5aa967b3d856a2fe5bfd2",
+      "bytes": 1920000
+    },
+    "command-003.json": {
+      "sha256": "e2798b756f1e92db4cdd88cabdf79588465530782efb6afd77b0e19baaf798fc",
+      "bytes": 9071
+    },
+    "skip-pickup.pcm": {
+      "sha256": "0d700e62459d89eb23478bf5a099d021e01f1ecdecfaa02ba108953f56fd455f",
+      "bytes": 1920000
+    },
+    "package/export.json": {
+      "sha256": "63123a8f572e327d15faf3661e6bc6b96a8b51e8ea0118ebdc6084cd2ad907e7",
+      "bytes": 13917
+    },
+    "package/project-build.json": {
+      "sha256": "eb88addbf8af42b56e3a0c865aea2cde2f494526796fe1480b1c42c0c6ac7d60",
+      "bytes": 3781
+    },
+    "package/normal-dependencies.txt": {
+      "sha256": "b512c759e91ab3fb29d697fd0860ed889a441eb462c4c4f4f49e5dc82f5c7466",
+      "bytes": 29764
+    },
+    "package/build.log": {
+      "sha256": "51113cf80cb9eedb87adacb79ef57423682c379391bdb96d59a06f4596df3b87",
+      "bytes": 1358766
+    },
+    "package/symbols/script-symbols.json": {
+      "sha256": "31302a739f71849cb4be03b8e24d0dbcc7ebc2699a95f20e81ed157f16682280",
+      "bytes": 1359
+    },
+    "package/player/incant_game_player": {
+      "sha256": "066bb3489090ce361d9edf5c9e21a79abbf30af368a501ea6e490d77baa7b0a3",
+      "bytes": 9549776
+    },
+    "package/player/data/empty-input.json": {
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "bytes": 103
+    },
+    "package/player/data/clips.bin": {
+      "sha256": "d6240ea3eef2ce260066a21dc01dbe147669facea3e8158b9b097efd9d58e3ae",
+      "bytes": 252
+    },
+    "package/player/data/package.json": {
+      "sha256": "381e0937ecfacd19a98b84bb646330a10a8589d9d075b626cbe4ded930ec07ec",
+      "bytes": 479
+    },
+    "package/player/data/world.scene": {
+      "sha256": "80b351226d03bf3176ad741652bae882f3556d3f9e6281069e678dbd1f9ec147",
+      "bytes": 5110
+    },
+    "package/player/data/input-actions.json": {
+      "sha256": "4c0449a25e70fb1c39c7e00464380bbdb928a29bd6960a5f9e5b2a778eecbb5b",
+      "bytes": 650
+    },
+    "package/player/data/audio/3c1296a9c03eda2e90ade53650776166ac3126345dfa13690052feaf390506a0.json": {
+      "sha256": "df160fecacfa564c74bf33af9351faa138dadeafa89434ab23debc02187ff0ed",
+      "bytes": 755
+    },
+    "package/player/data/audio/2398da29e2def0b16fccdcacba29b8a83e3aa0c7f1132ac7b83f30968b5cf102.json": {
+      "sha256": "15f5ddadde2cb5f7352de105d2d7fdc87fbb0084b042e59bf4b9ed61346f4849",
+      "bytes": 756
+    },
+    "package/player/data/audio/a32b666415328455ef62426b3b10bba357c757246d4209dbaa2f58ce6ccbe852.json": {
+      "sha256": "298895127a2e1013ed8cab96d941c7cfcfce24602299580d51807ee7a1c4dfb0",
+      "bytes": 753
+    },
+    "package/player/data/audio/0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e.ipcm": {
+      "sha256": "0d703edf8fc9341848b5c265fd4ece9171d98693d0d64f74148641ef1ae6df4e",
+      "bytes": 384000
+    },
+    "package/player/data/audio/c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5.ipcm": {
+      "sha256": "c85ced8e077bc39729e9f18405bc8218eb0e4ee91840428fd07237b2336871a5",
+      "bytes": 384000
+    },
+    "package/player/data/audio/f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a.ipcm": {
+      "sha256": "f01894a8ef6dd549b16b0130e4404b0ec83df571bc821f76100648e100f4306a",
+      "bytes": 384000
+    },
+    "package/player/data/audio/395329b5981927a184aa612c4709fbdaae717a7fb1ef7df8c81b535721e2a9fa.json": {
+      "sha256": "de730c367d68e88d68db1cbb8d7b23d26d6a31f86adc22de71735865f70a2cfe",
+      "bytes": 756
+    },
+    "package/player/data/audio/76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe.ipcm": {
+      "sha256": "76d1d2b6b7ec18a99448e0d3651057014a3952a2a3df4d307c998e07a303d8fe",
+      "bytes": 384000
+    },
+    "package/player/data/audio/3b9d7408f9e8467a46f26b7d43bc4b3230faf7ce549445ed1756fc7838752f84.json": {
+      "sha256": "2df70e6b78b69baf75da3020b37e52a34a2a821726987bb6eeca68d51545c402",
+      "bytes": 754
+    },
+    "package/player/data/audio/459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71.ipcm": {
+      "sha256": "459081754b942c81495b0e5cd4ac8773100ff7fabd52a54fa8c6a2daeaf53d71",
+      "bytes": 384000
+    },
+    "package/player/data/fonts/9ecc2391738734ba927df201f5e7d980c4e49015c2270d1efe69638bd4a120e2.json": {
+      "sha256": "e43c79c54c311c5759bdf686b43b9b112b0177bafd6938782ebb782d75018812",
+      "bytes": 314
+    },
+    "package/player/data/fonts/2ec33f84606cbaa0a1a944488e14f97faf2f6a25ecdd8354f5358f06da13c7d9.ifont": {
+      "sha256": "92960e6b23eff12e1bf13361b2b94b490d723f8d93e6945ba34b9f9b3acd2081",
+      "bytes": 556264
+    },
+    "package/symbols/incant_game_player.dSYM/Contents/Info.plist": {
+      "sha256": "a325edef7ee76bf99ea09648956f34dd7c7c86ae26102a78aca991d8b7f9fba1",
+      "bytes": 664
+    },
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-14eb24f8b8fefb33": {
+      "sha256": "c1c9decf1ba74bcd97c12813ca5d2317bfd1046e59f39399ac014a38ff99f33e",
+      "bytes": 210604018
+    },
+    "package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-14eb24f8b8fefb33.yml": {
+      "sha256": "89261f587a9f9b2b9b1e92f4d0c9d7e6bf70671ec530e002485093047dc655f5",
+      "bytes": 3267910
+    }
+  }
+}
