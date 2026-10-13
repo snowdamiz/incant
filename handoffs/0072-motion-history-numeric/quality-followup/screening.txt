@@ -1,0 +1,74 @@
+CPU model (not render evidence). Values are sRGB 8-bit after the identity tone map.
+ideal retention (plain mean of the last 8 raw samples): gaps 1.022, bars 0.912
+== verbatim
+  posts: {'edge_max': 83, 'ge64': 5, 'ge33': 14, 'peak_max': 70, 'detail': 0.517, 'same_phase': 0, 'halo': 0, 'gap_retention': 0.354}
+  grille: {'edge_max': 68, 'ge64': 1, 'ge33': 7, 'peak_max': 68, 'detail': 0.589, 'same_phase': 0, 'halo': 0, 'bar_retention': 0.811}
+  diag: {'edge_max': 13, 'ge64': 0, 'ge33': 0, 'peak_max': 13, 'detail': 0.696, 'same_phase': 0, 'halo': 0}
+  thin: {'edge_max': 7, 'ge64': 0, 'ge33': 0, 'peak_max': 7, 'detail': 0.663, 'same_phase': 0, 'halo': 0}
+  aligned_bias: 0.06
+  cube: {'trailing': [38.73, 0.48, 0.0], 'top': 28.0, 'excess': 11.21, 'disocclusion': 0}
+  shadow: {'3-8': 267, '9-16': 0, '>16': 0, 'max': 8}
+  occluder_ghost: 38
+  despawn_ghost: 38
+  sweep: 33
+  overlay: (0, 0)
+  convexity_posts: (0, 0)
+  held: {'posts': 0, 'grille': 0, 'checker': 0, 'penumbra': 0, 'shadow': 0, 'cube': 0}
+== C1
+  posts: {'edge_max': 69, 'ge64': 1, 'ge33': 9, 'peak_max': 69, 'detail': 0.657, 'same_phase': 0, 'halo': 2, 'gap_retention': 0.956}
+  grille: {'edge_max': 68, 'ge64': 1, 'ge33': 7, 'peak_max': 68, 'detail': 0.589, 'same_phase': 0, 'halo': 0, 'bar_retention': 0.811}
+  diag: {'edge_max': 13, 'ge64': 0, 'ge33': 0, 'peak_max': 13, 'detail': 0.696, 'same_phase': 0, 'halo': 0}
+  thin: {'edge_max': 7, 'ge64': 0, 'ge33': 0, 'peak_max': 7, 'detail': 0.663, 'same_phase': 0, 'halo': 0}
+  aligned_bias: 0.06
+  cube: {'trailing': [38.73, 0.48, 0.0], 'top': 28.0, 'excess': 11.21, 'disocclusion': 0}
+  shadow: {'3-8': 267, '9-16': 0, '>16': 0, 'max': 8}
+  occluder_ghost: 38
+  despawn_ghost: 38
+  sweep: 33
+  overlay: (0, 0)
+  convexity_posts: (276, 0)
+  held: {'posts': 214, 'grille': 0, 'checker': 0, 'penumbra': 0, 'shadow': 0, 'cube': 0}
+  C1 path per frame 8-16 (path, current, history, output; sRGB G):
+   (428, 54): t8 A 183 161 164 | t9 H  84 164 156 | t10A 183 156 159 | t11A 183 159 162 | t12A 183 162 165 | t13A 183 165 167 | t14A 183 167 169 | t15H  84 169 161 | t16A 183 161 163
+   (434, 49): t8 A 183  84 109 | t9 H  84 109 107 | t10A 183 107 121 | t11H  84 121 117 | t12C  84 117  84 | t13A  84  84  84 | t14A  84  84  84 | t15A  84  84  84 | t16A 183  84 106
+   (556, 242): t8 A 163 173 171 | t9 A 163 171 170 | t10R 185   - 185 | t11A 163 185 182 | t12A 163 182 179 | t13A 163 179 177 | t14A 163 177 175 | t15A 185 175 177 | t16A 163 177 175
+== C2
+  posts: {'edge_max': 69, 'ge64': 1, 'ge33': 9, 'peak_max': 69, 'detail': 0.657, 'same_phase': 0, 'halo': 2, 'gap_retention': 0.956}
+  grille: {'edge_max': 28, 'ge64': 0, 'ge33': 0, 'peak_max': 24, 'detail': 0.609, 'same_phase': 0, 'halo': 0, 'bar_retention': 0.873}
+  diag: {'edge_max': 13, 'ge64': 0, 'ge33': 0, 'peak_max': 13, 'detail': 0.696, 'same_phase': 0, 'halo': 0}
+  thin: {'edge_max': 7, 'ge64': 0, 'ge33': 0, 'peak_max': 7, 'detail': 0.663, 'same_phase': 0, 'halo': 0}
+  aligned_bias: 0.06
+  cube: {'trailing': [38.73, 0.48, 0.0], 'top': 28.0, 'excess': 11.21, 'disocclusion': 0}
+  shadow: {'3-8': 267, '9-16': 0, '>16': 0, 'max': 8}
+  occluder_ghost: 38
+  despawn_ghost: 52
+  sweep: 33
+  overlay: (0, 0)
+  convexity_posts: (276, 0)
+  held: {'posts': 227, 'grille': 16, 'checker': 0, 'penumbra': 0, 'shadow': 0, 'cube': 2}
+  C2 path per frame 8-16 (path, current, history, output; sRGB G):
+   (428, 54): t8 A 183 161 164 | t9 H  84 164 156 | t10A 183 156 159 | t11A 183 159 162 | t12A 183 162 165 | t13A 183 165 167 | t14A 183 167 169 | t15H  84 169 161 | t16A 183 161 163
+   (434, 49): t8 A 183  84 109 | t9 H  84 109 107 | t10A 183 107 121 | t11H  84 121 117 | t12C  84 117  84 | t13A  84  84  84 | t14A  84  84  84 | t15A  84  84  84 | t16A 183  84 106
+   (556, 242): t8 A 163 173 171 | t9 A 163 171 170 | t10H 185 170 172 | t11A 163 172 171 | t12A 163 171 170 | t13A 163 170 169 | t14A 163 169 169 | t15A 185 169 171 | t16A 163 171 170
+== C3
+  posts: {'edge_max': 34, 'ge64': 0, 'ge33': 3, 'peak_max': 34, 'detail': 0.678, 'same_phase': 0, 'halo': 2, 'gap_retention': 1.039}
+  grille: {'edge_max': 28, 'ge64': 0, 'ge33': 0, 'peak_max': 24, 'detail': 0.609, 'same_phase': 0, 'halo': 0, 'bar_retention': 0.873}
+  diag: {'edge_max': 13, 'ge64': 0, 'ge33': 0, 'peak_max': 13, 'detail': 0.696, 'same_phase': 0, 'halo': 0}
+  thin: {'edge_max': 7, 'ge64': 0, 'ge33': 0, 'peak_max': 7, 'detail': 0.663, 'same_phase': 0, 'halo': 0}
+  aligned_bias: 0.06
+  cube: {'trailing': [38.73, 0.48, 0.0], 'top': 28.0, 'excess': 11.21, 'disocclusion': 0}
+  shadow: {'3-8': 267, '9-16': 0, '>16': 0, 'max': 8}
+  occluder_ghost: 38
+  despawn_ghost: 38
+  sweep: 33
+  overlay: (0, 0)
+  convexity_posts: (390, 0)
+  held: {'posts': 769, 'grille': 123, 'checker': 0, 'penumbra': 0, 'shadow': 0, 'cube': 25678}
+  C3 path per frame 8-16 (path, current, history, output; sRGB G):
+   (428, 54): t8 H 183 161 164 | t9 H  84 164 156 | t10H 183 156 159 | t11H 183 159 162 | t12H 183 162 165 | t13H 183 165 167 | t14H 183 167 169 | t15H  84 169 161 | t16H 183 161 163
+   (434, 49): t8 H 183 105 122 | t9 H  84 122 118 | t10H 183 118 130 | t11H  84 130 125 | t12H  84 125 121 | t13H  84 121 118 | t14H  84 118 115 | t15H  84 115 112 | t16H 183 112 125
+   (556, 242): t8 H 163 173 171 | t9 H 163 171 170 | t10H 185 170 172 | t11H 163 172 171 | t12H 163 171 170 | t13H 163 170 169 | t14H 163 169 169 | t15H 185 169 171 | t16H 163 171 170
+== verdicts against the declared criteria (candidates.md)
+  C1: flicker NOT met, detail kept, safety failures none -> not supported
+  C2: flicker NOT met, detail kept, safety failures ['depth rejection'] -> not supported
+  C3: flicker met, detail kept, safety failures none -> SUPPORTED

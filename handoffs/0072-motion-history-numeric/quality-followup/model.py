@@ -21,6 +21,8 @@ j_prev - j - (screen displacement). Scenes, camera and sun come from geometry.py
 
   python3 -I -B model.py             # reproduction against the retained GPU runs
   python3 -I -B model.py screen      # the three declared candidates (candidates.md)
+  python3 -I -B model.py checks      # post-screening checks (added after screening ran)
+  python3 -I -B model.py viewaid     # writes the two labelled CPU-model viewing aids (no overwrite)
 """
 
 import math
@@ -1085,11 +1087,168 @@ def screen():
               f"safety failures {failed or 'none'} -> {'SUPPORTED' if flicker and detail_kept and not failed else 'not supported'}")
 
 
+def wire_sample(sx, sy, k):
+    """The far posts behind a static 0.6-px wire (depth 40) removed, without motion, at frame 9."""
+    if k < 8 and 429.2 <= sx < 429.8 and 46.0 <= sy < 60.0:
+        return CUBE_FRONT, 1.0, OCCLUDER_DEPTH, STATIC, OCCLUDER_DEPTH
+    return posts_sample(sx, sy, k)
+
+
+SCENES["wire"] = (wire_sample, 418, 44, 24, 18, list(range(16)))
+
+
+def residue_rows(scene, ts):
+    sampler, x0, y0, w, h, ks = SCENES[scene]
+    for candidate in (None, "C1", "C2", "C3"):
+        shown = run(scene, "warmup", candidate)
+        cells = []
+        for t in ts:
+            value, i = max((rb8(shown[t][i]) - 4, i) for i in range(w * h) if interior(i, w, h))
+            cells.append(f"f{t + 1} {max(value, 0):3d}@{(x0 + i % w, y0 + i // w)}")
+        print(f"  {candidate or 'verbatim':8s} " + " ".join(cells))
+
+
+def checks():
+    """Post-screening checks, added after `screen` first ran; none changes a declared verdict."""
+    print("== despawn box (declared scene): largest R-B residue above +4 per frame, from the removal frame f9")
+    residue_rows("despawn", range(8, 16))
+    sampler, x0, y0, w, h, ks = SCENES["despawn"]
+    i = (57 - y0) * w + (428 - x0)
+    trace = {i: []}
+    run("despawn", "warmup", None, trace)
+    print("  verbatim at (428, 57), whose own samples never hit the box: path, current, history, output (sRGB RGB)")
+    for t, path, c, hv, value in trace[i][5:9]:
+        print(f"    f{t + 1} {path} {to8(c)} {to8(hv) if hv else '-'} -> {to8(value)}")
+    print("== occluder (declared scene): largest R-B residue above +4 per frame after it left the patch")
+    residue_rows("occluder", range(9, 16))
+    print("== wire despawn STRESS TEST (not a declared criterion): static 0.6-px wire at depth 40, removed at f9")
+    residue_rows("wire", range(6, 16))
+    sampler, x0, y0, w, h, ks = SCENES["wire"]
+    present = SCENES["wire"]
+    for candidate in (None, "C3"):
+        shown = run("wire", "warmup", candidate)
+        i = (52 - y0) * w + (429 - x0)
+        print(f"  {candidate or 'verbatim':8s} wire pixel (429, 52) R-B per frame f2-f16: " +
+              " ".join(f"{rb8(shown[t][i]):3d}" for t in range(1, 16)))
+    print("== sweep (declared scene): largest stale-shading step per frame, overall / at held pixels")
+    sampler, x0, y0, w, h, ks = SCENES["sweep"]
+    for candidate in (None, "C1", "C2", "C3"):
+        trace = {i: [] for i in range(w * h)}
+        swept, plain = run("sweep", "warmup", candidate, trace), run("posts", "warmup", candidate)
+        held_at = {(i, t) for i, rows in trace.items() for t, path, *_ in rows if path == "H"}
+        cells = []
+        for t in range(9, 16):
+            bright_until = 410.0 + 2.5 * ks[t - 2] - 1.0
+            ds = [(step(to8(swept[t][i]), to8(plain[t][i])), (i, t) in held_at) for i in range(w * h)
+                  if interior(i, w, h) and x0 + i % w + 1.875 < bright_until]
+            cells.append(f"f{t + 1} {max(d for d, _ in ds):2d}/{max([d for d, held_px in ds if held_px] or [0]):2d}")
+        print(f"  {candidate or 'verbatim':8s} " + " ".join(cells))
+    sampler, x0, y0, w, h, ks = SCENES["posts"]
+    ref8 = [to8(q) for q in reference(sampler, x0, y0, w, h, 0)]
+    edge = edges(ref8, w, h)
+    trace = {i: [] for i in range(w * h)}
+    shown = run("posts", "warmup", "C3", trace)
+    print("== C3 posts: remaining frame-to-frame steps >= 33 (paths f(t-3)..f(t): path(current, history, output) sRGB G)")
+    for t in range(8, 16):
+        for i in range(w * h):
+            if interior(i, w, h) and edge[i] and step(to8(shown[t][i]), to8(shown[t - 1][i])) >= 33:
+                rows = {tt: r for tt, *r in trace[i]}
+                g = lambda v: srgb8(v[1]) if v is not None else "-"
+                print(f"  {step(to8(shown[t][i]), to8(shown[t - 1][i]))} at {(x0 + i % w, y0 + i // w)}: " +
+                      " ".join(f"f{tt + 1}{rows[tt][0]}({g(rows[tt][1])},{g(rows[tt][2])},{g(rows[tt][3])})"
+                               for tt in range(t - 3, t + 1)))
+    sampler, x0, y0, w, h, ks = SCENES["cube"]
+    raw = frames("cube")
+    trace = {i: [] for i in range(w * h)}
+    c3, verbatim = run("cube", "warmup", "C3", trace), run("cube", "warmup")
+    covered = [any(raw[t][i][3] != STATIC for t in range(8)) for i in range(w * h)]
+    held_px = [(i, t) for i, rows in trace.items() for t, path, *_ in rows if path == "H"]
+    moved = sum(1 for i, t in held_px if covered[i])
+    differ = [step(to8(c3[7][i]), to8(verbatim[7][i])) for i in range(w * h)]
+    print(f"== C3 cube: {len(held_px)} held pixel-frames, {moved} at pixels the cube had covered (memory set by the "
+          f"disocclusion glimpse), {len(held_px) - moved} at never-covered static pixels; f8 differs from verbatim at "
+          f"{sum(1 for d in differ if d)} of {w * h} pixels (max {max(differ)} steps), "
+          f"{sum(1 for i in range(w * h) if differ[i] and raw[7][i][3] != STATIC)} of them moving in f8")
+    print("== C3 predictions at the GPU's failing pixels: f16 sRGB RGB, verbatim model (GPU warmup matched it) -> C3")
+    for scene, pts in (("posts", GAP_PIXELS + [(425, 52)]), ("grille", BAR_PIXELS + [(545, 240)])):
+        sx0, sy0, sw = SCENES[scene][1], SCENES[scene][2], SCENES[scene][3]
+        before, after = run(scene, "warmup")[15], run(scene, "warmup", "C3")[15]
+        print(f"  {scene}: " + "; ".join(f"{pt} {to8(before[(pt[1] - sy0) * sw + pt[0] - sx0])} -> "
+                                         f"{to8(after[(pt[1] - sy0) * sw + pt[0] - sx0])}" for pt in pts))
+    print("== C3 posts: halo pixels (f16 above the point-sampled reference 3x3 max + 2), sRGB G")
+    sampler, x0, y0, w, h, ks = SCENES["posts"]
+    out8 = [to8(q) for q in shown[15]]
+    raw = frames("posts")
+    for i in range(w * h):
+        x, y = i % w, i // w
+        if not interior(i, w, h):
+            continue
+        local = max(ref8[(y + dy) * w + x + dx][1] for dy in (-1, 0, 1) for dx in (-1, 0, 1))
+        if out8[i][1] > local + 2:
+            cov = coverage_true(sampler, x0, y0, x, y, 0, GROUND)
+            hits = sum(raw[t][i][0] == GROUND for t in range(8, 16))
+            box = srgb8(cov * GROUND[1] + (1 - cov) * POST[1])
+            print(f"  {(x0 + x, y0 + y)}: C3 {out8[i][1]} | reference 3x3 max {local} | box-filtered truth {box} "
+                  f"(ground coverage {cov:.2f}) | jittered samples hitting the gap {hits}/8")
+
+
+def viewaid():
+    """CPU-MODEL VIEWING AIDS, not screenshots or render evidence. Per scene, x8 nearest
+    magnification, panels left to right: box-filtered truth (8x8 supersampling), verbatim
+    296e0226 f16, C3 f16; second row: blank, verbatim and C3 frames 9-16 activity (largest
+    frame-to-frame step, grey = 4 x step)."""
+    sys.path.insert(0, str(HERE.parents[1] / "0067-dynamic-resolution" / "tools"))
+    import pngio
+    for scene in ("posts", "grille"):
+        sampler, x0, y0, w, h, ks = SCENES[scene]
+        truth = []
+        for y in range(h):
+            for x in range(w):
+                acc = [0.0, 0.0, 0.0]
+                for a in range(8):
+                    for b in range(8):
+                        colour = sampler(x0 + x + (a + 0.5) / 8, y0 + y + (b + 0.5) / 8, ks[-1])[0]
+                        acc = [acc[c] + colour[c] / 64 for c in range(3)]
+                truth.append(to8(acc))
+        runs = [run(scene, "warmup"), run(scene, "warmup", "C3")]
+        outputs = [[to8(q) for q in r[15]] for r in runs]
+        activity = []
+        for r in runs:
+            s8 = [[to8(q) for q in f] for f in r]
+            act = [max(step(s8[t][i], s8[t - 1][i]) for t in range(9, 16)) for i in range(w * h)]
+            activity.append([(min(255, 4 * v),) * 3 for v in act])
+        blank = [(128, 128, 128)] * (w * h)
+        grid = [[truth, outputs[0], outputs[1]], [blank, activity[0], activity[1]]]
+        scale, gap = 8, 4
+        width, height = 3 * w * scale + 2 * gap, 2 * h * scale + gap
+        rows = []
+        for py in range(height):
+            line = bytearray()
+            for px in range(width):
+                gy, ry = divmod(py, h * scale + gap)
+                gx, rx = divmod(px, w * scale + gap)
+                if ry >= h * scale or rx >= w * scale:
+                    line += bytes((40, 40, 40, 255))
+                else:
+                    r, g_, b = grid[gy][gx][(ry // scale) * w + rx // scale]
+                    line += bytes((r, g_, b, 255))
+            rows.append(bytes(line))
+        path = HERE / f"cpu-model-{scene}-truth-verbatim-c3.png"
+        pngio.write(path, width, height, rows)
+        print(f"wrote {path.name} ({width}x{height})")
+
+
 def main():
     args = sys.argv[1:]
     print("CPU model (not render evidence). Values are sRGB 8-bit after the identity tone map.")
     if args == ["screen"]:
         screen()
+        return
+    if args == ["checks"]:
+        checks()
+        return
+    if args == ["viewaid"]:
+        viewaid()
         return
     reproduce_static("posts", "stationary-on-f16.png",
                      [(428, 54), (428, 56), (431, 53), (431, 50), (434, 49), (425, 52)], POST)

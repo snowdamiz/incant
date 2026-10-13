@@ -1,7 +1,24 @@
 # 0072 result: retained motion-data GPU execution
 
-> **Current result: [`warmup-result.md`](warmup-result.md).** This is the frozen
-> reset-ramp (`296e0226`) comparison: 110 submissions and 16 PNGs.
+> **Current result: [`quality-followup.md`](quality-followup.md).** This is the
+> bounded CPU-only investigation of resolve flicker and trailing. It used no GPU,
+> screenshots, captures or Cargo, and changed no production file. Model: Claude
+> Opus 5.5; thinking effort: max.
+> - **C3, the persistent glimpse-memory hold:** the only one of three pre-declared
+>   candidates to meet every declared criterion. This is a model result.
+>   - It removes the posts and MASK collapses (posts edge max 83 → 34;
+>     saturated 5 → 0).
+>   - It also improves feature retention.
+>   - It costs one R8Uint pair.
+>   - A thin-wire despawn stress test shows an 8-frame ghost.
+>   - Its source prescription and falsification test are unimplemented and
+>     unrun.
+> - **Trailing and the moving shadow:** a bounded readback diagnostic instead of
+>   a guess.
+> - **Halo and same-phase:** assessed and retained as failing.
+>
+> **Latest executed GPU result: [`warmup-result.md`](warmup-result.md).** This is
+> the frozen reset-ramp (`296e0226`) comparison: 110 submissions and 16 PNGs.
 >
 > - **Integrity:** passed.
 > - **Comparison:** exact against both the accepted `e23776df` baseline and the
@@ -13,7 +30,7 @@
 >   - **Reset frames:** all history-free frames are byte-identical.
 > - **Side effect:** steady-state flicker peaks on sub-pixel features grew.
 >
-> **Previous executed result: [`sharpness-result.md`](sharpness-result.md).** This
+> **Earlier executed result: [`sharpness-result.md`](sharpness-result.md).** This
 > is the a143 comparison: integrity passed; quality failed on 13 of 37.
 >
 > **Stage records, in order:**
@@ -25,7 +42,10 @@
 >    baseline);
 > 6. `fixed-sharpness-design.md`, `sharpness-preparation.md`, root's
 >    `sharpness-build-repair.md`, and `sharpness-result.md`;
-> 7. `warmup-preparation.md` and `warmup-result.md`.
+> 7. `warmup-preparation.md` and `warmup-result.md`;
+> 8. `quality-followup.md`, `quality-followup/candidates.md` (the declaration,
+>    committed before screening) and the retained CPU results in
+>    `quality-followup/`.
 >
 > The text below is the original retained motion-data result, unchanged.
 

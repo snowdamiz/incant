@@ -1,0 +1,39 @@
+CPU model (not render evidence). Values are sRGB 8-bit after the identity tone map.
+== despawn box (declared scene): largest R-B residue above +4 per frame, from the removal frame f9
+  verbatim f9  38@(428, 57) f10  30@(428, 57) f11  25@(428, 57) f12  20@(428, 57) f13  17@(428, 57) f14  15@(428, 57) f15  11@(431, 56) f16   9@(431, 56)
+  C1       f9  38@(428, 57) f10  30@(428, 57) f11  25@(428, 57) f12  20@(428, 57) f13  17@(428, 57) f14  15@(428, 57) f15  11@(431, 56) f16  10@(428, 56)
+  C2       f9  52@(431, 47) f10  38@(431, 47) f11  33@(431, 47) f12  26@(431, 47) f13  23@(431, 47) f14  18@(431, 47) f15  16@(431, 47) f16  13@(431, 47)
+  C3       f9  38@(428, 57) f10  30@(428, 57) f11  25@(428, 57) f12  21@(428, 47) f13  17@(428, 57) f14  15@(428, 57) f15  13@(428, 57) f16  11@(428, 57)
+  verbatim at (428, 57), whose own samples never hit the box: path, current, history, output (sRGB RGB)
+    f6 A (184, 183, 180) (171, 170, 168) -> (173, 173, 170)
+    f7 C (82, 84, 91) (173, 173, 170) -> (153, 104, 91)
+    f8 A (184, 183, 180) (153, 104, 91) -> (159, 122, 112)
+    f9 A (82, 84, 91) (159, 122, 112) -> (151, 117, 109)
+== occluder (declared scene): largest R-B residue above +4 per frame after it left the patch
+  verbatim f10  46@(435, 56) f11  38@(435, 55) f12   7@(427, 52) f13   6@(435, 53) f14   5@(435, 53) f15   4@(431, 58) f16   3@(431, 58)
+  C1       f10  46@(435, 56) f11  38@(435, 55) f12   7@(427, 52) f13   6@(435, 53) f14   5@(435, 53) f15   4@(431, 58) f16   3@(431, 58)
+  C2       f10  46@(435, 56) f11  38@(435, 55) f12   7@(427, 52) f13   6@(435, 53) f14   5@(435, 53) f15   4@(431, 58) f16   3@(431, 58)
+  C3       f10  46@(435, 56) f11  38@(435, 55) f12   7@(427, 52) f13   6@(435, 53) f14   5@(435, 53) f15   4@(431, 58) f16   3@(431, 58)
+== wire despawn STRESS TEST (not a declared criterion): static 0.6-px wire at depth 40, removed at f9
+  verbatim f7   0@(438, 58) f8  10@(429, 57) f9   0@(438, 58) f10   0@(438, 58) f11   0@(438, 58) f12   0@(438, 58) f13   0@(438, 58) f14   0@(438, 58) f15   0@(438, 58) f16   0@(438, 58)
+  C1       f7   0@(438, 58) f8  10@(429, 57) f9   0@(438, 58) f10   0@(438, 58) f11   0@(438, 58) f12   0@(438, 58) f13   0@(438, 58) f14   0@(438, 58) f15   0@(438, 58) f16   0@(438, 58)
+  C2       f7  29@(429, 57) f8  40@(429, 57) f9  35@(429, 57) f10  22@(429, 57) f11  18@(429, 57) f12  15@(429, 58) f13  13@(429, 57) f14  10@(429, 58) f15   8@(429, 58) f16   7@(429, 58)
+  C3       f7  29@(429, 57) f8  40@(429, 57) f9  35@(429, 57) f10  30@(429, 57) f11  25@(429, 57) f12  22@(429, 57) f13  19@(429, 57) f14  15@(429, 57) f15  13@(429, 57) f16  10@(429, 57)
+  verbatim wire pixel (429, 52) R-B per frame f2-f16:  56  -9  29  -9  19  -9  14  -9  -9  -9  -9  -9  -9  -9  -9
+  C3       wire pixel (429, 52) R-B per frame f2-f16:  56  -9  29  22  40  33  44  39  34  29  26  23  19  17  14
+== sweep (declared scene): largest stale-shading step per frame, overall / at held pixels
+  verbatim f10 30/ 0 f11 26/ 0 f12 27/ 0 f13 32/ 0 f14 27/ 0 f15 33/ 0 f16 28/ 0
+  C1       f10 30/ 0 f11 26/ 0 f12 27/21 f13 32/27 f14 27/17 f15 33/20 f16 28/ 0
+  C2       f10 30/ 0 f11 26/ 0 f12 27/21 f13 32/27 f14 27/17 f15 33/20 f16 28/ 0
+  C3       f10 30/ 0 f11 26/ 0 f12 27/24 f13 32/27 f14 29/29 f15 33/26 f16 28/18
+== C3 posts: remaining frame-to-frame steps >= 33 (paths f(t-3)..f(t): path(current, history, output) sRGB G)
+  34 at (427, 47): f9A(183,108,123) f10A(84,123,119) f11A(84,119,116) f12C(84,116,84)
+  34 at (427, 48): f9A(183,108,123) f10A(84,123,119) f11A(84,119,116) f12C(84,116,84)
+  34 at (427, 49): f9A(183,108,123) f10A(84,123,119) f11A(84,119,116) f12C(84,116,84)
+== C3 cube: 25678 held pixel-frames, 25666 at pixels the cube had covered (memory set by the disocclusion glimpse), 12 at never-covered static pixels; f8 differs from verbatim at 23 of 20500 pixels (max 10 steps), 0 of them moving in f8
+== C3 predictions at the GPU's failing pixels: f16 sRGB RGB, verbatim model (GPU warmup matched it) -> C3
+  posts: (428, 54) (105, 106, 110) -> (164, 163, 162); (428, 56) (105, 106, 110) -> (164, 163, 162); (431, 53) (131, 131, 132) -> (164, 164, 162); (431, 50) (105, 106, 110) -> (147, 147, 147); (434, 49) (105, 106, 110) -> (124, 125, 126); (425, 52) (85, 87, 94) -> (85, 87, 94)
+  grille: (556, 242) (143, 175, 151) -> (117, 170, 132); (542, 242) (114, 170, 130) -> (114, 170, 130); (543, 240) (96, 167, 119) -> (96, 167, 119); (550, 242) (87, 166, 113) -> (87, 166, 113); (545, 240) (185, 185, 184) -> (185, 185, 184)
+== C3 posts: halo pixels (f16 above the point-sampled reference 3x3 max + 2), sRGB G
+  (436, 47): C3 121 | reference 3x3 max 84 | box-filtered truth 103 (ground coverage 0.12) | jittered samples hitting the gap 2/8
+  (436, 48): C3 112 | reference 3x3 max 84 | box-filtered truth 103 (ground coverage 0.12) | jittered samples hitting the gap 1/8
