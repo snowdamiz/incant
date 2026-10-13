@@ -1037,6 +1037,7 @@ name = "incant_physics_2d_runtime"
 version = "0.0.1"
 dependencies = [
  "incant_2d",
+ "incant_physics_snapshot",
  "incant_types",
  "rapier2d",
  "schemars",
@@ -1049,12 +1050,21 @@ name = "incant_physics_runtime"
 version = "0.0.1"
 dependencies = [
  "incant_nav",
+ "incant_physics_snapshot",
  "incant_types",
  "rapier3d",
  "schemars",
  "serde",
  "thiserror",
 ]
+
+[[package]]
+name = "incant_physics_snapshot"
+version = "0.0.1"
+
+[[package]]
+name = "incant_profile"
+version = "0.0.1"
 
 [[package]]
 name = "incant_runtime"
@@ -1068,6 +1078,8 @@ dependencies = [
  "incant_nav",
  "incant_physics_2d_runtime",
  "incant_physics_runtime",
+ "incant_physics_snapshot",
+ "incant_profile",
  "incant_types",
  "libm",
  "serde",
@@ -1273,8 +1285,6 @@ checksum = "f38d5652c16fde515bb1ecef450ab0f6a219d619a7274976324d5e377f7dceba"
 [[package]]
 name = "parry2d"
 version = "0.31.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fe1ba500175e957aaa27ddc92290ec8ff503d73331365443660816d6302e2a31"
 dependencies = [
  "approx",
  "arrayvec",
@@ -1301,8 +1311,6 @@ dependencies = [
 [[package]]
 name = "parry3d"
 version = "0.31.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b626edc0b497dba4bdf6e1e0797895294ed9f61dac2bd28cb5d34d37ad2ca7e"
 dependencies = [
  "approx",
  "arrayvec",
@@ -1459,8 +1467,6 @@ dependencies = [
 [[package]]
 name = "rapier2d"
 version = "0.36.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e6708b492a19e936d66ba45fd0749ea8e20275f9a8e9891050944c35b8305349"
 dependencies = [
  "approx",
  "arrayvec",
@@ -1482,8 +1488,6 @@ dependencies = [
 [[package]]
 name = "rapier3d"
 version = "0.36.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c2e2b20538584bb3ba5bfe6a66c2d9a242ee17d15e5398be0fa35279c7d73739"
 dependencies = [
  "approx",
  "arrayvec",

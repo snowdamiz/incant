@@ -1,0 +1,465 @@
+{
+  "base_main": "e301af8110c47aa2cf4e193579eeeefeb14a249f",
+  "failed_candidate": "be3422f868915d0a95b76599b4a8dcaad53fcda5",
+  "archive_sha256": "935679b5c0778f72753964eeb56c48ef90aa8b91d64b696dd75a2f55d6d76326",
+  "records": 63,
+  "source": [
+    {
+      "path": "tools/probes/native-physics/Cargo.lock",
+      "sha256": "4b0b0547f06d8bceaad5a44bcf498b14e6f64422f5a4333e9531f1857e0f7964"
+    },
+    {
+      "path": "tools/probes/mobile-runtime-library/fixture/Cargo.toml",
+      "sha256": "2a508a4d27ea1e634c1bd803672ef304e27e5843f53fbe019c88410be83db989"
+    },
+    {
+      "path": "tools/probes/mobile-runtime-library/fixture/Cargo.lock",
+      "sha256": "7419a5c276295cfbf851fc8c6923d72a7a7b9e9694db810027f134fc29445a87"
+    },
+    {
+      "path": "tools/tests/test_probe_locks.py",
+      "sha256": "9918ec997729589a8b4acf8c636bce8b9b8caeeed7a1387bb0faad4c45e337e5"
+    }
+  ],
+  "build_metadata_inputs": [
+    {
+      "path": ".cargo/config.toml",
+      "sha256": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "566663fdac00502620a84e9055b3fba04c5a812f12217627deff9f6f08b7ac72"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5"
+    },
+    {
+      "path": "crates/incant_2d/Cargo.toml",
+      "sha256": "57378df7552b4ea8a12dbc876467d06bc067592b7c37a8a875bc670e84540a0f"
+    },
+    {
+      "path": "crates/incant_agent/Cargo.toml",
+      "sha256": "48d9059020553633a521f6a680ddc89b9ed5b1fd2a48d9e9e94806843f27a21e"
+    },
+    {
+      "path": "crates/incant_agent_native/Cargo.toml",
+      "sha256": "1c38376dab3087e36193e87c73d486aaaf69f5b811e24fd68ff66d01bdf04f49"
+    },
+    {
+      "path": "crates/incant_anim/Cargo.toml",
+      "sha256": "50541fad032635738e705c8c946ce3c7fcdd2ab9f624ce47662943d429fcd58f"
+    },
+    {
+      "path": "crates/incant_assets/Cargo.toml",
+      "sha256": "18b2a98512b7c6912c721bd56c27913a39a7f697007076c0455aa62580cce4dc"
+    },
+    {
+      "path": "crates/incant_assets_runtime/Cargo.toml",
+      "sha256": "0e5dea47b7437deacda86f692cf51b97b95b438a274253bd54dfe1b6fab3e898"
+    },
+    {
+      "path": "crates/incant_audio/Cargo.toml",
+      "sha256": "0f0df7a7811dafb1ed9bcf1154204b1242b4b4dbcafb0d36d7db951614556e55"
+    },
+    {
+      "path": "crates/incant_audio_runtime/Cargo.toml",
+      "sha256": "f4999fd7a80c3dc2790abe6ca64ff1975adbc576ccdbe2a75776db13307cc497"
+    },
+    {
+      "path": "crates/incant_cmd/Cargo.toml",
+      "sha256": "92e4bbded4fdf960ab3f0e5c42741c476eede1cfa2bae2ff587726c4587dd569"
+    },
+    {
+      "path": "crates/incant_cook/Cargo.toml",
+      "sha256": "74838f36a35d75470633bfbd477cdec0ea205207ac9422bce75cec434be00562"
+    },
+    {
+      "path": "crates/incant_core/Cargo.toml",
+      "sha256": "6bce86808181a9275903d7598e467eef6b801f553c78631f9b1840a708c4ab8f"
+    },
+    {
+      "path": "crates/incant_doc/Cargo.toml",
+      "sha256": "cde6826774ba803196e281988f55f9825da56edafbf711b2eabacb8a69a584bd"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "38fd202c44f28c85a4835afb2f0403258cb2d747e468741474abcf0244513431"
+    },
+    {
+      "path": "crates/incant_game_runtime/Cargo.toml",
+      "sha256": "695d83d752c1daefd1981fcb90c986947c92ecdba35a4380e2c3cdb380baeeed"
+    },
+    {
+      "path": "crates/incant_headless/Cargo.toml",
+      "sha256": "267fc6dccd224dc9ffbbb22a1b0420c5d33c96ec52a38d65a216caef8c5b143c"
+    },
+    {
+      "path": "crates/incant_import/Cargo.toml",
+      "sha256": "059fa6dc5e58a5cc4b8753130161e1043ef3d3781ed291a3cd8fcf8338cd3bc5"
+    },
+    {
+      "path": "crates/incant_input/Cargo.toml",
+      "sha256": "e642b20236fceb732e03a59fdf95cfb14f68529a3e0b83b240b028ee87e9430f"
+    },
+    {
+      "path": "crates/incant_localization/Cargo.toml",
+      "sha256": "4889f4620e0135701e5821ef1f938fda0cc34879b839d72e7ed1eeb856b18ca2"
+    },
+    {
+      "path": "crates/incant_nav/Cargo.toml",
+      "sha256": "7a5d3142db098c458d11c993c03742d2393be44b7519edcb1d0107d84b6e1234"
+    },
+    {
+      "path": "crates/incant_observe/Cargo.toml",
+      "sha256": "0b5799363c3548c621ce8b292deaf99f2aef9d92c31bc5c7990d1d688092ea40"
+    },
+    {
+      "path": "crates/incant_physics/Cargo.toml",
+      "sha256": "148cdfcb285a619aa251a54bf36deca1997e2642e82029aa663a792ecaa0145c"
+    },
+    {
+      "path": "crates/incant_physics_2d_runtime/Cargo.toml",
+      "sha256": "1111903b7a26f8a42e00f5c7c9125723cc4490fda230b1a6a9aec5280076fdb5"
+    },
+    {
+      "path": "crates/incant_physics_runtime/Cargo.toml",
+      "sha256": "613f2277b32ff6fc7aec26d5ab126ca0888a3f4cd22e47e66880421444501dfa"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "e596a2a3a8ed6a44972f5ded5ef8b595e5f14671b187aee60501f3c064964677"
+    },
+    {
+      "path": "crates/incant_platform_smoke/Cargo.toml",
+      "sha256": "04cc1f0e042a0463583c4f0289f4ebeaba51d8d836836700447600117d58d0c1"
+    },
+    {
+      "path": "crates/incant_play/Cargo.toml",
+      "sha256": "0a2eaa1f27d2216dc724e37ecd9227a4e5fe49fe61614a2e0e62644cf6d83cba"
+    },
+    {
+      "path": "crates/incant_play_legacy/Cargo.toml",
+      "sha256": "dbf57e7f790c87d0a9a332d7a7884d449b619bebca2575f009356394ac3dc741"
+    },
+    {
+      "path": "crates/incant_profile/Cargo.toml",
+      "sha256": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "781adf7c888c530ed50216ed231558d2d3ee8cb8d581d37f158d619ebc3f9988"
+    },
+    {
+      "path": "crates/incant_render_authoring/Cargo.toml",
+      "sha256": "9629daf8044c5db0f88cbc95f7f8f40cc1399085a8c497457b0fb5cd5bc91ae7"
+    },
+    {
+      "path": "crates/incant_render_data/Cargo.toml",
+      "sha256": "13df30475404a851540fc2bfbc82e100a57a66666a6ad429cf2f3d860cb2b18f"
+    },
+    {
+      "path": "crates/incant_render_game/Cargo.toml",
+      "sha256": "d7aa056ae7021fb5b8bc09f328c7bad75499f856be719bce9fba716041a63712"
+    },
+    {
+      "path": "crates/incant_render_gpu_host/Cargo.toml",
+      "sha256": "386f065fd226154c5144c95d1a5c1143d0e789763085aeec6ef4db90dcbf8e9a"
+    },
+    {
+      "path": "crates/incant_render_native/Cargo.toml",
+      "sha256": "f08748483c6555dce55b94b39b0b533e2454a2e6f54351b8f6c7112ff70e1d9f"
+    },
+    {
+      "path": "crates/incant_runtime/Cargo.toml",
+      "sha256": "9e52c22dda5c6c15983da987604213745850da9015195ae62de5c3fc078ee2fd"
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "sha256": "dda230d29bb95c1b1cd843a79b025facea0d2d475785670b8eac636caa8e7e6c"
+    },
+    {
+      "path": "crates/incant_script_player/Cargo.toml",
+      "sha256": "ba8acbcbc122d19bbe78eb48e93c5117d80955354b80f77f09cae8f7ab500e89"
+    },
+    {
+      "path": "crates/incant_shader_cook/Cargo.toml",
+      "sha256": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270"
+    },
+    {
+      "path": "crates/incant_source/Cargo.toml",
+      "sha256": "57c99f7fc98c55774d99a445fa682b7247227faaa4cf1b0234dc3d571e850091"
+    },
+    {
+      "path": "crates/incant_text/Cargo.toml",
+      "sha256": "be99373f05f096eba5b457fe7246033922d54d2b8b057613843b1d5511bb2a65"
+    },
+    {
+      "path": "crates/incant_types/Cargo.toml",
+      "sha256": "ae094bd227e3e585de808ad18da99b02cc7bc8282720cffeb6d3a8b3275c5e9c"
+    },
+    {
+      "path": "crates/incant_ui/Cargo.toml",
+      "sha256": "6cd5a59e70d67221ae05bcce35a3f49ce4202b06912b836d6c4e5d6adfdce68c"
+    },
+    {
+      "path": "crates/incant_wasm_abi/Cargo.toml",
+      "sha256": "c821e714ebc5e14c782656595d9ebe14044edddfcd746d94f70c7f6127c3a1f2"
+    },
+    {
+      "path": "crates/incant_wasm_cook/Cargo.toml",
+      "sha256": "3dc14de47c0da7a4745069bbf5f13f49f0b938a621eaa899490bf09e3b0ffbeb"
+    },
+    {
+      "path": "crates/incant_wasm_dev/Cargo.toml",
+      "sha256": "1f34f1afd2286157652818bfd6cd8496c628db3a6283fd90d35c9aa24f4e268d"
+    },
+    {
+      "path": "crates/incant_wasm_player/Cargo.toml",
+      "sha256": "12ea56f4f1f89277e25334290d9eeaa0e62df0d6d84a390b2856f576c8233fa5"
+    },
+    {
+      "path": "crates/incant_wasm_runtime/Cargo.toml",
+      "sha256": "4cd3c7888d57d7c20c600ed2f34efec21ee32bd9c0b2134828a25adfb160e265"
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    {
+      "path": "third_party/cosmic-text/Cargo.lock",
+      "sha256": "0ac778e4af5a821e878e1dea9dbc660efdf56e770a74d921f94752337308bcf2"
+    },
+    {
+      "path": "third_party/cosmic-text/Cargo.toml",
+      "sha256": "a1255253ab95624ef85be6629f54f834a91046e0a1d327bcfc5ca855c32bb8f8"
+    },
+    {
+      "path": "third_party/kira/Cargo.lock",
+      "sha256": "bf36c35018ecdfaec0b029b1f37bd1746625ca2ea88e5a46816a79a484c79ed4"
+    },
+    {
+      "path": "third_party/kira/Cargo.toml",
+      "sha256": "7a0eb9aa9cf80166bab2c2800d8e429d0f7502cb92735b308eb7f057f432d77a"
+    },
+    {
+      "path": "third_party/parry2d/Cargo.lock",
+      "sha256": "9cd470de14f6ea92dd40ac6e1533d3b82040d17e23f41f09d62d1d238b58b6a0"
+    },
+    {
+      "path": "third_party/parry2d/Cargo.toml",
+      "sha256": "790bff213c0ad1e08d0fb2165ca83151da162ebba6416d02476c36512aeb68ae"
+    },
+    {
+      "path": "third_party/parry3d/Cargo.lock",
+      "sha256": "92316ee1df9d26c666dacd19780865ada93fcea54b8cf095490d7ce0e76ad051"
+    },
+    {
+      "path": "third_party/parry3d/Cargo.toml",
+      "sha256": "bc039bbf628bcea6f47b287873ccb154f99ff24311d28d8cad32d290eaa8d4b3"
+    },
+    {
+      "path": "third_party/rapier2d/Cargo.lock",
+      "sha256": "61d946bf8ef98ac6a18f25016ccc83619cd8d3c857628ba5cf46d866540f17e1"
+    },
+    {
+      "path": "third_party/rapier2d/Cargo.toml",
+      "sha256": "b51048236371b3e8f482b9ff6c9a7cf105c3e0193e964222fd0f34e323ffb752"
+    },
+    {
+      "path": "third_party/rapier3d/Cargo.lock",
+      "sha256": "f26d144eb812fe77dd9e2f73d52b448070b192d957d183340bf7a57c4192508e"
+    },
+    {
+      "path": "third_party/rapier3d/Cargo.toml",
+      "sha256": "29e5c5e581ea26d1ab87065897ca71d3543c5858973d5f4a819c201fe92743ef"
+    },
+    {
+      "path": "third_party/rerecast/Cargo.lock",
+      "sha256": "bfc794a23d55b103d868f1dfc6162354bb64cac90927f62828907214a7919bed"
+    },
+    {
+      "path": "third_party/rerecast/Cargo.toml",
+      "sha256": "6588459d4dc71ed7e238edf4ac84d070a81cfbc2293cf25e0b0cdcd30523f9ec"
+    },
+    {
+      "path": "third_party/tao/Cargo.lock",
+      "sha256": "fa2b667719b40b19deb79e34fc5a977d4ca582a15bdd530cc3671d6cb1d420bc"
+    },
+    {
+      "path": "third_party/tao/Cargo.toml",
+      "sha256": "0c7532197536ab91685090097e75de8cf38b84553f07f402d2f8d5e87d5a1961"
+    },
+    {
+      "path": "tools/cargo",
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    {
+      "path": "tools/probes/mobile-runtime-library/fixture/Cargo.lock",
+      "sha256": "7419a5c276295cfbf851fc8c6923d72a7a7b9e9694db810027f134fc29445a87"
+    },
+    {
+      "path": "tools/probes/mobile-runtime-library/fixture/Cargo.toml",
+      "sha256": "2a508a4d27ea1e634c1bd803672ef304e27e5843f53fbe019c88410be83db989"
+    },
+    {
+      "path": "tools/probes/native-physics/Cargo.lock",
+      "sha256": "4b0b0547f06d8bceaad5a44bcf498b14e6f64422f5a4333e9531f1857e0f7964"
+    },
+    {
+      "path": "tools/probes/native-physics/Cargo.toml",
+      "sha256": "d6728a9ed24b9d4ef53bb70d013ccdb02b840abbdcdc17490272c1495bbb54d7"
+    },
+    {
+      "path": "tools/probes/native-session-checkpoint/Cargo.toml",
+      "sha256": "0a7e132c86cb54c9ee1cc13637b34dbf7872a9f6b99e2b6854503262e2fc4b03"
+    },
+    {
+      "path": "tools/probes/physics-parity/Cargo.lock",
+      "sha256": "05674511dd4311dc1926e0abe80dd8dd1ead18c2c6072a0ab86489d25b022516"
+    },
+    {
+      "path": "tools/probes/physics-parity/Cargo.toml",
+      "sha256": "39d547e2c3735dc0edbeb078de4b738bd21d41575e1f526d33ebf8db9d863da0"
+    },
+    {
+      "path": "tools/probes/physics-snapshot-boundary/Cargo.lock",
+      "sha256": "42ba6be94ced190367fed247b111663b42b3ba484a96f95053f4abf96218fe9c"
+    },
+    {
+      "path": "tools/probes/physics-snapshot-boundary/Cargo.toml",
+      "sha256": "e1866374eee13a3a5a7ee019a7497a292244c1a509c787aef8af952ed5ac0e60"
+    },
+    {
+      "path": "tools/probes/physics/Cargo.lock",
+      "sha256": "1091adb91c1119f340c0ba9717aae7a17dee280877b57d51fec0dbd94d091cd8"
+    },
+    {
+      "path": "tools/probes/physics/Cargo.toml",
+      "sha256": "5c51de42dbb28e27bac31e7b85e192c0e9a0ed3222877b07d76def992debcbe7"
+    },
+    {
+      "path": "tools/probes/project-script-embedding/Cargo.toml",
+      "sha256": "91dfaa1a305306430472bd680a51ed0814746c46559f0b4921dcce4c5821d16a"
+    },
+    {
+      "path": "tools/probes/shader-cook/Cargo.lock",
+      "sha256": "466d5c495b79a3dec428d26f167239ec71174373e229fb57896ba341805df963"
+    },
+    {
+      "path": "tools/probes/shader-cook/Cargo.toml",
+      "sha256": "bdf9bbba0644ae734c54c170caff8f7f4cf7e28ffcdf458b1d51314cf5936550"
+    },
+    {
+      "path": "tools/tests/test_probe_locks.py",
+      "sha256": "9918ec997729589a8b4acf8c636bce8b9b8caeeed7a1387bb0faad4c45e337e5"
+    }
+  ],
+  "checks": [
+    "mobile-runtime-library-fixture-aarch64-apple-darwin",
+    "mobile-runtime-library-fixture-x86_64-unknown-linux-gnu",
+    "mobile-runtime-library-fixture-x86_64-pc-windows-msvc",
+    "mobile-runtime-library-fixture-wasm32-unknown-unknown",
+    "mobile-runtime-library-fixture-aarch64-linux-android",
+    "mobile-runtime-library-fixture-aarch64-apple-ios",
+    "native-physics-aarch64-apple-darwin",
+    "native-physics-x86_64-unknown-linux-gnu",
+    "native-physics-x86_64-pc-windows-msvc",
+    "native-physics-wasm32-unknown-unknown",
+    "physics-aarch64-apple-darwin",
+    "physics-parity-aarch64-apple-darwin",
+    "physics-snapshot-boundary-aarch64-apple-darwin",
+    "shader-cook-aarch64-apple-darwin",
+    "guard",
+    "conventions",
+    "diff"
+  ],
+  "identity_changes": [
+    {
+      "path": "tools/probes/native-physics/Cargo.lock",
+      "old_packages": 221,
+      "new_packages": 222,
+      "removed_identities": [],
+      "added_identities": [
+        [
+          "incant_physics_snapshot",
+          "0.0.1",
+          null,
+          null
+        ]
+      ],
+      "preserved_identities": 221
+    },
+    {
+      "path": "tools/probes/mobile-runtime-library/fixture/Cargo.lock",
+      "old_packages": 221,
+      "new_packages": 223,
+      "removed_identities": [
+        [
+          "parry2d",
+          "0.31.1",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "fe1ba500175e957aaa27ddc92290ec8ff503d73331365443660816d6302e2a31"
+        ],
+        [
+          "parry3d",
+          "0.31.1",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "7b626edc0b497dba4bdf6e1e0797895294ed9f61dac2bd28cb5d34d37ad2ca7e"
+        ],
+        [
+          "rapier2d",
+          "0.36.0",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "e6708b492a19e936d66ba45fd0749ea8e20275f9a8e9891050944c35b8305349"
+        ],
+        [
+          "rapier3d",
+          "0.36.0",
+          "registry+https://github.com/rust-lang/crates.io-index",
+          "c2e2b20538584bb3ba5bfe6a66c2d9a242ee17d15e5398be0fa35279c7d73739"
+        ]
+      ],
+      "added_identities": [
+        [
+          "incant_physics_snapshot",
+          "0.0.1",
+          null,
+          null
+        ],
+        [
+          "incant_profile",
+          "0.0.1",
+          null,
+          null
+        ],
+        [
+          "parry2d",
+          "0.31.1",
+          null,
+          null
+        ],
+        [
+          "parry3d",
+          "0.31.1",
+          null,
+          null
+        ],
+        [
+          "rapier2d",
+          "0.36.0",
+          null,
+          null
+        ],
+        [
+          "rapier3d",
+          "0.36.0",
+          null,
+          null
+        ]
+      ],
+      "preserved_identities": 217
+    }
+  ],
+  "scope": "17 Cargo-resolution/Python checks only; no compile/shipping/device rerun. Hosted native lock failures remain failed. Mobile fixture registry physics sources reconciled to exact engine local patches at same versions."
+}
