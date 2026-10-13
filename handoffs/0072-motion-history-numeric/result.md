@@ -1,129 +1,127 @@
-# 0072 result — retained motion-data GPU execution
+# 0072 result: retained motion-data GPU execution
 
-**Status: BLOCKED before execution.** I did not invoke the runner and no GPU
-child ran. The grant is still unconsumed. Reason: the supplied runner's test
-filter cannot match either compiled test, so running it would consume the
-one-shot grant and produce no numeric evidence.
+**Status: PASSED.** I ran the corrected runner once. Both exact compiled tests
+ran once each and passed, and the GPU was released with no live process. No
+phase or performance gate is claimed.
 
-- Model: Claude Opus 5.5 (`claude-opus-5-5`). Thinking effort: **max**. Both
-  values come from this session's environment; I cannot re-verify the ACP-side
-  settings from inside the session.
-- Director feedback: the current brief has no appended priority revisions or new
-  director feedback. I re-checked it before committing; its sha256 is
-  `ebf31dd9…`, unchanged from commit `928a4ae8`.
-
-## The defect (report for Astra)
-
-1. `tools/run.py:27` sets `m.TEST='motion_device_tests::'+name`.
-2. The audited helper passes that value with `--exact` (`run-gpu.py:34`).
-3. libtest names a test by its module path, not by its file name, and this file
-   is mounted as `mod motion_tests`:
-   - `crates/incant_render/src/lib.rs:19`: `mod models;`
-   - `crates/incant_render/src/models.rs:42-43`:
-     `#[path = "retained.rs"] mod retained;`
-   - `crates/incant_render/src/retained.rs:450-451`:
-     `#[path = "motion_device_tests.rs"] mod motion_tests;`
-4. The compiled names are therefore
-   `models::retained::motion_tests::<fn>`, and neither `--exact` nor substring
-   matching on `motion_device_tests::<fn>` can select them.
-
-The frozen binary confirms this. I only read it; I did not execute it.
-
-- **Its own earlier CPU run log:**
-  `docs/spikes/evidence/retained-motion-history/motion-history-checks-001/cpu-all.log.gz`.
-  The raw sha256 is `53cf1cb1…`, matching the manifest.
-  - Line 4 runs `.../incant_render-90f6082e9b891519`.
-  - Lines 51–52 list both tests as
-    `models::retained::motion_tests::… ... ignored`.
-- **The retained binary itself** (sha256 `73b32363…`):
-  - It contains each full `models::retained::motion_tests::<fn>` string exactly
-    once.
-  - It contains no `motion_device_tests::<fn>` string.
-  - `motion_device_tests` appears only as the source filename
-    `motion_device_tests.rs`.
-
-**Predicted outcome of running as-is.** This comes from the static evidence
-above; I did not observe it.
-
-- Each child selects 0 tests and exits 0 without creating a GPU device.
-- The runner then writes `gpu-results.json` and `gpu-released.json`, which
-  permanently blocks reuse (see `run.py:8`).
-- It then fails `run.py:40`, because `'1 passed; 0 failed'` never appears.
-
-That outcome cannot be undone, and stopping keeps the grant reusable. So I
-followed the brief's "report the exact failure and stop" at the earliest point.
-
-I did not:
-
-- edit the hash-bound runner,
-- launch the binary (not even with `--list`),
-- open or take the global GPU lock,
-- create a replacement grant,
-- write anything under `~/.codex/incant-evidence`.
-
-**Requested fix (root/Astra):** change `run.py:27` to
-`m.TEST='models::retained::motion_tests::'+name`. Then re-hash the runner and
-update or reissue the grant. Everything else in the chain below passes as-is.
-
-## Source and binary identity; precondition audit
-
-These checks were read-only and mirror the runner's pre-execution assertions.
-
-| Check | Result |
-|---|---|
-| Grant `~/.codex/incant-evidence/0072/review-ready.json` (sha256 `247e1bc8…`) | packet `0072-motion-history-numeric` ✔ |
-| Runner sha256 `00dbc8bcba33…c8e4` vs grant | match ✔ |
-| `gpu-released.json` | absent ✔ |
-| Manifest `retained-motion-history.json` sha256 `1e6dd3f7…3273` | ✔ |
-| 22 sources + 13 unchanged baselines vs manifest | 35/35 match ✔ |
-| Worktree HEAD `928a4ae8` vs source `814717935462e4ee5dbdb1fdae2738d17477f932` | differs only in the two handoff files |
-| Binary `~/.codex/incant-evidence/motion-history-checks-001/binaries/incant_render-90f6082e9b891519` | sha256 `73b32363318cfcd028cccef5513994488a6d4bbbf277bee181523b7b68bc05f5`, 31,515,168 B ✔ |
-| Binary features | default: `cpu-all` argv has no `--features`, and log line 4 maps this binary |
-| Predecessor `timestamp-pass-002/gpu-released.json` (sha256 `96837759…`) | ✔; `owned_processes: []`, `ledger_pids_alive: []` |
-| Predecessor ledger (sha256 `37cd86da…`) | ✔; 1 row, pid 24220 gone (kill/killpg signal 0) |
-| Helper `cluster-grid-readback-002/run-gpu.py` sha256 `0f890ddb…` | ✔ (read, not imported or changed) |
-| `~/.codex/incant-evidence/native-gpu.lock` | exists, no current holder (`lsof`) |
-| `motion::admission()` with default features | `Ok`: it errors at compile time only for cooked features. A corrected run therefore cannot pass vacuously through the tests' early return. |
+- **Model:** Claude Opus 5.5 (`claude-opus-5-5`).
+- **Thinking effort:** max, as reported by this session's environment.
+- **Director feedback:** I applied priority revision 2 (brief sha256 `a8746458…`).
+  - I reviewed root's runner diff. It makes three changes: the
+    `models::retained::motion_tests::` filters, a check that each full name
+    occurs exactly once in the binary, and a `1 passed; 0 failed` check after
+    each child.
+  - I checked the new grant and ran the runner once.
+  - The earlier refusal is preserved byte-identical in `preflight-result.md`.
 
 ## Cases and outcomes
 
-| Test (compiled name) | Outcome |
+Both tests were run from the binary at
+`/Users/andreyyurlov/.codex/incant-evidence/motion-history-checks-001/binaries/incant_render-90f6082e9b891519`.
+The arguments were `<exact name> --ignored --exact --nocapture --test-threads=1`.
+
+| Exact test | Exit | Wall time | Libtest result | Raw stdout sha256 |
+|---|---|---|---|---|
+| `models::retained::motion_tests::accepted_pose_buffers_and_history_swap_only_after_submission` | 0, no timeout | 0.561 s (libtest 0.52 s) | `1 passed; 0 failed; 0 ignored; 0 measured; 118 filtered out` | `790516a2…2c14` |
+| `models::retained::motion_tests::skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_asset` | 0, no timeout | 0.389 s (libtest 0.35 s) | `1 passed; 0 failed; 0 ignored; 0 measured; 118 filtered out` | `a5902818…4811` |
+
+- **Process IDs:** 33007 and 33009.
+- **Stderr:** empty for both children.
+- **Environment:** `PATH=/usr/bin:/bin:/usr/sbin:/sbin`, `HOME`, `TMPDIR=/tmp`,
+  `RUST_BACKTRACE=1`.
+
+The passing assertions read back RGBA32F motion, previous-depth and validity
+values from tiny targets. There were at most 9 accepted submissions, at 65×33
+and 96×64.
+
+**Accepted-pose test.** It covers the following:
+
+- **First frame:** there is no previous frame, and every sample is invalid.
+- **Rejected zero-width target:** the sequence and the live instance buffer are
+  unchanged.
+- **Accepted move:** the old live buffer becomes staging, and more than 8 valid
+  samples have x motion within 1e-5 of −33/(65·8) and y within 1e-6.
+- **Singular transform:** the submission is rejected, and the sequence stays at 2.
+- **Mirrored placement:** it produces valid non-zero motion.
+- **Explicit reset:** after a reset there is no previous frame; the next frame
+  has one.
+- **Replacement owner:** it starts fresh and is not the same owner.
+
+The cooked source directory is deleted before the first render.
+
+**Skinned/IK test.** It covers the following:
+
+- **Pose change:** the exact previous live deformed vertex buffer becomes
+  staging, with its sampled vertex preserved, and the live buffer changes.
+- **Motion:** valid samples have |motion| above 0.005.
+- **Foreign asset generation:** rebinding to it is rejected, and the sequence
+  stays at 2.
+- **Rest pose plus IK chain:** the submission is accepted at sequence 3, every
+  readback value is finite, and valid non-zero motion is present.
+
+## Source and binary identity
+
+| Item | Identity |
 |---|---|
-| `models::retained::motion_tests::accepted_pose_buffers_and_history_swap_only_after_submission` | not executed |
-| `models::retained::motion_tests::skinned_and_ik_history_uses_exact_live_deformed_buffer_and_rejects_rebound_asset` | not executed |
+| Source | `814717935462e4ee5dbdb1fdae2738d17477f932`. Worktree HEAD differs only in handoff files. |
+| Manifest | `docs/spikes/evidence/retained-motion-history.json`, sha256 `1e6dd3f7…3273` |
+| Frozen files | 22 sources and 13 unchanged baselines, verified by the runner before each child and after both |
+| Binary | `incant_render-90f6082e9b891519`, sha256 `73b32363318cfcd028cccef5513994488a6d4bbbf277bee181523b7b68bc05f5`, 31,515,168 B, default features. Hash checked before each child; each full test name occurs once. |
+| Runner | `handoffs/0072-motion-history-numeric/tools/run.py`, sha256 `0053f161…127e` (root-owned revision 2) |
+| Grant | `~/.codex/incant-evidence/0072/review-ready.json`, sha256 `2aa3c60b…dc33`. The unused first grant was preserved by root as `superseded-unexecuted-grant.json`. |
+| Lifecycle helper | `cluster-grid-readback-002/run-gpu.py`, sha256 `0f890ddb…166a`. Imported unchanged with `-B`. |
+| Predecessor | `timestamp-pass-002/gpu-released.json`, sha256 `96837759…be64`. Its ledger process was gone. |
 
-- GPU children: 0. Frames rendered: 0.
-- Process ledger and release paths: none were created.
-  `~/.codex/incant-evidence/0072/` still holds only `review-ready.json`.
+## Process ledger and release
 
-## Commands run (all read-only)
+All of these files are under `/Users/andreyyurlov/.codex/incant-evidence/0072/`.
 
-- `cat`/`sed`/`grep` on the brief, runner, grant, helper, spike doc, manifest,
-  `motion_device_tests.rs`, and the module-chain lines.
-- `git diff --stat 814717935462e4ee5dbdb1fdae2738d17477f932 HEAD`: only the two
-  handoff files changed.
-- `gzip -dc …/cpu-all.log.gz | grep`, plus `shasum -a 256` on the gz and raw
-  streams.
-- `LC_ALL=C grep -aoc <test name> <retained binary>`.
-- `python3 -I -B -` (script on stdin, no files written): hashes, JSON reads, and
-  signal-0 liveness probes.
-- `lsof` on the lock file.
-- **Not run:** `python3 -B handoffs/0072-motion-history-numeric/tools/run.py`.
+| File | sha256 |
+|---|---|
+| `gpu-ledger.jsonl` (2 rows, identical to `gpu-results.json`) | `99890e34…f5f9` |
+| `gpu-results.json` | `0ebf163b…6900` |
+| `gpu-released.json` | `7c036f73…b330` |
+| `summary.json` (`passed: 2`) | `928934e5…426a` |
+| `<test>-gpu.stdout` / `<test>-gpu.stderr` | as listed above; both stderr files are empty (`e3b0c442…`) |
+| `runner-console.stdout` / `.stderr` (my noclobber shell capture) | `685ae8ff…cdd9` / empty |
+
+**Release record:**
+
+- Recorded at 2026-10-13T05:41:25.995559Z with `children: 2`.
+- `owned_processes: []` and `ledger_pids_alive: []`.
+- `ledger_sha256` matches the ledger file.
+- Target: none (precompiled binary only).
+- Host: Darwin 27.0.0 arm64, macOS 27.0.1.
+
+**Re-checked after the run:** both PIDs and their process groups were gone, and
+no process held `native-gpu.lock`.
+
+## Commands run
+
+- **Reads:** the revised brief, the runner diff, the new grant, and hashes.
+- **Pre-run checks:** `lsof` on the lock found no holder, and a names-only
+  `PYTHON*` environment check found no variables.
+- **The run, executed once from the worktree root** with
+  `/opt/homebrew/bin/python3` 3.14.8:
+  `python3 -B handoffs/0072-motion-history-numeric/tools/run.py`. Exit code 0.
+  Console output: two JSON exit lines, then
+  `Both exact retained motion-data tests passed; GPU released.`
+- **After the run:** hash and liveness cross-checks, all read-only.
+- **Not done:** no build, Cargo target, binary launch outside the runner,
+  screenshot, capture or memory write.
 
 ## Limitations
 
-- This packet produced no GPU, numeric-readback, adapter, appearance, phone or
-  performance evidence. No gate is claimed.
-- The failure prediction rests on static evidence: the binary's bytes and its
-  own earlier log. It was intentionally not confirmed by spending the grant.
-- Even after the fix, these tests print no adapter identity and no raw values.
-  The only receipt is libtest's pass/fail on assertions over the RGBA32F
-  motion, previous-depth and validity readbacks.
-- Screenshots: none, and none are in scope. Model and effort are as reported by
-  the session.
-
-## Open question
-
-After the fix, should the run reuse this evidence directory (still clean) or
-use a fresh one? That is root's choice. If root prefers that the unmodified
-runner be executed once anyway, the grant is intact for that.
+- **Adapter and backend unknown.** The tests do not print adapter or backend
+  identity. The host is recorded, but which wgpu adapter ran is not. This is
+  not a Metal-specific, device or backend benchmark.
+- **Pass/fail only.** The receipt is libtest pass/fail on in-process assertions.
+  No raw motion or depth values were dumped or retained.
+- **Desktop run only.** This is a single local desktop execution. There is no
+  appearance, image, phone, performance or memory evidence, and no
+  shipping-profile or reference-device gate is claimed.
+- **Feature set.** Only the default-feature binary was run; the cooked
+  combinations are refused by design.
+- **Still unimplemented.** Temporal antialiasing, jitter, color-history resolve
+  and disocclusion remain unimplemented, per the spike doc.
+- **Screenshots:** none, and none are in scope.
