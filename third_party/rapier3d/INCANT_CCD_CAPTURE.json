@@ -1,0 +1,9 @@
+{
+  "format": "incant-rapier-ccd-capture",
+  "version": 1,
+  "feature": "incant-checkpoint",
+  "source": "src/dynamics/ccd/ccd_solver.rs",
+  "upstream_sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+  "sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+  "scope": "readonly borrowed capture only; no restoration or algorithm change"
+}

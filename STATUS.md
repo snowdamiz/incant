@@ -52,9 +52,18 @@ admission remain closed; no vendor/world-format changes.
 [Scope and limits](docs/spikes/physics-narrow-owner.md);
 [current-main qualification](docs/spikes/physics-narrow-main217.md).
 
+## Inert CCD and integration configuration — composed main220 checks passed
+
+The accepted bounded configuration/CCD records and read-only vendor getter are
+composed with the current narrow-owner boundary. Actual rebuilt deterministic
+and fast8 suites each pass 164 tests; strict Clippy, wasm32 and the std-only normal
+graph pass. Eleven current checks are zero-exit, with exact source/pin identities.
+Independent current-main review is accepted; publication awaits the required fast check. Live save/restore admission remains
+closed. [Scope and evidence](docs/spikes/physics-ccd-main220.md).
+
 ## Timestamp backend diagnostic — capability repair
 
-Checkpoint22 remains frozen while its jobs drain. A separate direct timestamp
+Checkpoint22 is terminal and unpromoted. A separate direct timestamp
 diagnostic failed on hosted Apple Paravirtual Metal after the production timing
 test had correctly completed its unsupported-capability path. The test-only repair
 keeps mandatory backend selection, runs supported timestamp modes, and executes
@@ -72,7 +81,7 @@ current-composition binaries then completed eight bounded Metal frames, checking
 fixed history, overlay depth and timestamp submission together. No new pixel review
 is claimed. Producer acceptance remains opt-in fixed mode only, with softness and
 MASK detail approximately 18% of reference. Final integration evidence review is
-independently accepted; the scoped PR awaits its required fast check. Defaults
+independently accepted and PR220 merged after its required fast check. Defaults
 and phase/device gates remain unchanged.
 
 ## Static Wasm C builds — bounded local scheduling verified
@@ -85,28 +94,27 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main219, 2026-10-13
+## Current overview — main220, 2026-10-13
 
-Development main219 includes the reviewed opt-in cooked renderer families and
+Development main220 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
-Checkpoint22 is frozen at exact main216 through PR213, candidate `a894b7ca`,
-with all 23 required contexts and eight workflows preserved. Checkpoint21 is
-terminal and unpromoted: 21 contexts succeeded; its pinned vendor-path and
-optional timestamp capability failures are retained and repaired in main214/215.
-The [timestamp correction](docs/spikes/timestamp-capability.md) requires exact
-typed refusal and an ordinary completed frame when the adapter lacks timing,
-while preserving positive lifecycle assertions where supported. Successor hosted
-execution remains pending. Later main changes will not move the frozen candidate.
+Checkpoint23 is frozen at exact main220 through PR213, candidate `3381ccef`,
+with all 23 required contexts and eight workflows preserved. Checkpoint22 is
+terminal and unpromoted: 22 contexts succeeded; its optional timestamp diagnostic
+failure is retained and repaired in main219. The corrected test keeps forced backend
+selection mandatory and runs only supported timing paths, retaining actual compute
+observations and explicit unsupported records. Hosted successor execution remains
+pending. Later main changes will not move the frozen candidate.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–219 changes remain outside that tested baseline. No device, performance or
+Later main206–220 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
@@ -2465,3 +2473,16 @@ checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).
   cases remain ignored. Actual callback/render execution, Claude visual acceptance,
   temporal reconstruction/MetalFX and reference-device budgets remain open. See
   [contract and evidence](docs/spikes/dynamic-resolution.md).
+
+### Inert integration/CCD configuration (producer, final audit pending)
+
+The std-only snapshot crate now retains pinned rigid integration settings and the
+completed-step CCD fixed-target cache, including exact historical prediction bits,
+ordered handles/AABBs and all three cache states. A separate default-off vendor
+getter only borrows the previously serde-skipped cache. Independent source review
+accepted the scoped implementation; full source003 suites pass156 each in both
+numerical modes. Final source004 changes only two test constructor expressions;
+focused21 each, strictClippy/wasm/lean/fmt/conventions pass. Historical failures are
+retained. No live constructor/cache installer or save admission is added. See
+`docs/spikes/physics-integration-config.md`; cache/shape coherence, complete-owner
+work/phase validation, root final audit and integration remain pending.
