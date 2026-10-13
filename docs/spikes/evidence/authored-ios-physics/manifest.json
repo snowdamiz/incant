@@ -1,0 +1,116 @@
+{
+  "source_commit": "818ff1b2a4413ed813b30f19f6db06e5fc4b6e24",
+  "base": "15f31d0375983ac3eac82086cd6a2379ad6adb46",
+  "archive": {
+    "path": "docs/spikes/evidence/authored-ios-physics/completed-evidence.json.gz",
+    "sha256": "92d15494fb5c0420df9141b006f2929b9b19a4c908ba43ff8a63d70916ca0f30",
+    "bytes": 14841781
+  },
+  "records": 713,
+  "payloads": 242,
+  "external_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-native-build-001/incant-headless-deterministic",
+      "sha256": "c90c271b7abd721bc5ad59cee739feebf04c64186fda1463c48492de2ca681ea",
+      "bytes": 60232176
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-native-build-001/incant-headless-fast",
+      "sha256": "f69592146f62e7d3d59d534b5c228d790f8bacf4c861376dad903b1aed925bfa",
+      "bytes": 59864768
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-device-callers/caller-c",
+      "sha256": "d43a36bff60e755550ab7502ba2782e534ffb4aebe598ef58167a5c23a4f5e91",
+      "bytes": 10921696
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-device-callers/caller-swift",
+      "sha256": "83fa8df1ff9ac57406d2fa99a255fd270bada315fbaf9cc748dd8af22007d8fc",
+      "bytes": 10951232
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-device-export/runtime/libincant_game_player.a",
+      "sha256": "329035fc897bb070375a2c0fbff55a37c54a9338ada978d65e5f050eb9b3bd47",
+      "bytes": 14522416
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-device-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "094c0f47e42937bc7df92dab152c5500dbecd8cf68695ff92c1b2c57c1204ea2",
+      "bytes": 224981704
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-simulator-callers/caller-c",
+      "sha256": "9e93664e7e6892ce4c66bf7f16cb34f5c953d0442b819fd0477e72335431a844",
+      "bytes": 10990472
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-simulator-callers/caller-swift",
+      "sha256": "3c81a2b7f98aec03273e907bc1e457dab40daceec192ea8bd303ecde227a3712",
+      "bytes": 11020224
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-simulator-export/runtime/libincant_game_player.a",
+      "sha256": "760e4b663b98cf91c809cde76e89c7c66bb3522b9c01f847e5ccebccd5498c61",
+      "bytes": 14527072
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/deterministic-simulator-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "744cb94f7599fd5ed4af5d385e866cf88e1f36253b1e82a8dc018eb86974ded1",
+      "bytes": 225303432
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-device-callers/caller-c",
+      "sha256": "8fd5d69007190d3d66c8fc53864c6ff317a3a5eaca2d97052b5e7ec4e4bbd89e",
+      "bytes": 10920864
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-device-callers/caller-swift",
+      "sha256": "2d28a813ce49382e9a31821d79f96cfc0b93eb266a91e1b5bcfef45c88bcf1a6",
+      "bytes": 10950392
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-device-export/runtime/libincant_game_player.a",
+      "sha256": "db415c929c364395266f60a8ace565967214336187e1f0db8a8a54d783e5b635",
+      "bytes": 14519392
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-device-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "7b3470548e94f86128026e0a32e3a0f4644bcc98f95cd7866e54966cafb5fb1f",
+      "bytes": 223650840
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-simulator-callers/caller-c",
+      "sha256": "25dcf28276be7457329654b94653b0bf1e435381cc345df265b9d9d68557b3b7",
+      "bytes": 10989304
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-simulator-callers/caller-swift",
+      "sha256": "7646fe1d9a2159e31a0dce45eaeb16175a7f8e0576a9a4ee9a0b91a4e8894258",
+      "bytes": 11019072
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-simulator-export/runtime/libincant_game_player.a",
+      "sha256": "85e745ed1618a6de92a7ac6eadfd16a1e1d87f6c2eaeabae31bdf7566ffda9a3",
+      "bytes": 14523000
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-shipping-001/fast-simulator-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "cf95ba2f3b064d841bb19931997fbac663b39e42d111173bdab8ace7a59cc06d",
+      "bytes": 223946280
+    }
+  ],
+  "source_and_probe_review": {
+    "status": "accepted",
+    "path": "authored-ios-physics-source-20261012.json",
+    "sha256": "4ef76cc3be476c232f1860d05b92f8ef550462be70fbcb4ffb2ac58d6ade9af4"
+  },
+  "final_execution_review": "pending",
+  "limits": [
+    "actual local iOS27.0 arm64 simulator CPU only; both physics families",
+    "device archives and unsigned C/Swift links only; no device execution",
+    "archive object minimum versions do not prove earlier OS compatibility",
+    "no phone/performance/rendering/mobile window or audio host/signing/store/phase gate",
+    "static Wasm mobile export unsupported; desktop target guard unchanged"
+  ]
+}

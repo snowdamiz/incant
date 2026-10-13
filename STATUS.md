@@ -52,6 +52,19 @@ source and final execution reviews and the exact-head fast check passed; restart
 Native-window/device/appearance acceptance, Wasm/headless restart ownership and
 physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
 
+## Authored iOS fixed physics — producer execution passed
+
+Ordinary iOS export now selects the project's deterministic or fast kernel and
+audits the selected normal graph, all five actual target solver artifacts and
+shipping codegen. Four fresh archives pass; twelve source/cache/build/map-deleted
+C/Swift simulator processes reproduce 864 checks, 432 complete log records and
+exact nonzero PCM. Thirty-two precise refusals include checksum-valid opposite-mode
+packages in both directions. Both-mode device archives and unsigned C/Swift links
+pass without device execution. The accepted source/probe is unchanged, and the
+complete producer execution packet has independent final acceptance; current-main integration remains pending.
+No phone, performance, rendered-output, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-ios-physics-modes.md).
+
 ## Authored iOS project archives — merged in main178
 
 The separate trusted-source iOS exporter cooks public-authored TypeScript imports,
@@ -63,8 +76,8 @@ observations, 216 log records and exact nonzero PCM after private source, cache,
 build and maps are removed; fourteen precise refusal controls pass. Device
 archives and unsigned caller links pass, without device execution. Independent
 producer, integration-source and final execution reviews are accepted; the
-exact-head fast check passed and PR178 is merged. Fast iOS projects, desktop cross-target
-export, Android and mobile static Wasm remain denied in this slice. No signing,
+exact-head fast check passed and PR178 is merged. This historical proof was deterministic-only; the separate producer above adds fast iOS projects. Desktop cross-target
+export and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
