@@ -65,8 +65,9 @@ correction is `791a45a8afbeb998777c474329c9b8e5fb24dff7`. The original build fro
 13,408 inputs; the three later archives froze 13,409, with 13,405 original inputs
 unchanged and three observer/test paths changed. All Rust/C/ABI/build settings
 remained unchanged. The additional input is the real compiler transcript fixture.
-Source and probe reviews are accepted. The complete final execution packet is
-pending independent review; current-main integration is separate.
+Source and probe reviews are accepted. The complete final execution packet is independently accepted in the
+[final review](evidence/authored-ios-wasm/final-review.json); current-main
+integration is separate.
 
 | Physics | Target | Stripped archive bytes | SHA-256 |
 | --- | --- | ---: | --- |

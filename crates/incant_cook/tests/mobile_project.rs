@@ -288,11 +288,12 @@ fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_i
     std::fs::create_dir(&bundle).unwrap();
     // Identity-only data deliberately cannot stand in for generated native code.
     std::fs::write(bundle.join("manifest.json"), "{}").unwrap();
-    for (index, (feature, has_bundle, wrong_binding, error)) in [
-        (false, false, false, "authored Wasm export requires the static-module player feature"),
-        (true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
-        (true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
-        (true, true, false, "mobile static bundle captured identity mismatch"),
+    for (index, (target, feature, has_bundle, wrong_binding, error)) in [
+        ("aarch64-apple-ios-sim", false, false, false, "authored Wasm export requires the static-module player feature"),
+        ("aarch64-apple-ios-sim", true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
+        ("aarch64-apple-ios-sim", true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
+        ("aarch64-apple-ios-sim", true, true, false, "mobile static bundle captured identity mismatch"),
+        ("aarch64-linux-android", true, true, false, "authored mobile static Wasm requires an explicit iOS destination"),
     ].into_iter().enumerate() {
         let out = root.path().join(format!("refused-{index}"));
         std::fs::create_dir(&out).unwrap();
@@ -306,7 +307,7 @@ fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_i
             .env("INCANT_TEST_PROJECT_PRODUCER", "mobile")
             .env("INCANT_TEST_PROJECT_PATH", &path)
             .env("INCANT_TEST_PROJECT_ERROR", error)
-            .env("HOST", artifact::TARGET).env("TARGET", "aarch64-apple-ios-sim")
+            .env("HOST", artifact::TARGET).env("TARGET", target)
             .env("OUT_DIR", &out)
             .env_remove("CARGO_FEATURE_STATIC_MODULE")
             .env("INCANT_NATIVE_WASM_FINGERPRINT", captured.fingerprint())

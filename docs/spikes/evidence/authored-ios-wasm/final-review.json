@@ -1,0 +1,169 @@
+{
+  "at": "2026-10-13T01:27:08.835813+00:00",
+  "reviewer": "astra root",
+  "accepted": true,
+  "tip": "a7654dd9a2a17b6150fd33ed4589140214ebf067",
+  "manifest_sha256": "ac029f4cb3adc8c7b629915e5f6395e90c5514ea78b10b265233b642826e9987",
+  "archive_sha256": "96a655c0a18a751bb2e383b4fe7865e1e8c643a42f7f28e41986eb846f06ea82",
+  "independent_hashes": {
+    "records": 1202,
+    "payloads": 360,
+    "external_binaries": 24
+  },
+  "readonly_assertion_source_sha256": "95e9e5aa6dd9309822e12c3ea9d3b8ce07e6258b8e5a30bd83a5b9a300799363",
+  "assertions": {
+    "passed": true,
+    "kind": "producer re-audit; independent final review separate",
+    "frozen_inputs": 13409,
+    "immutable_git_fallbacks": [
+      "STATUS.md"
+    ],
+    "original_build_frozen_inputs": 13408,
+    "original_build_git_fallbacks": [
+      "STATUS.md",
+      "tools/export_ios.py",
+      "tools/ios_wasm.py",
+      "tools/tests/test_ios_wasm.py"
+    ],
+    "observer_only_changes_between_frozen_builds": [
+      "tools/export_ios.py",
+      "tools/ios_wasm.py",
+      "tools/tests/test_ios_wasm.py"
+    ],
+    "shipping_commands": 9,
+    "original_observer_refusals": 1,
+    "failed_infrastructure_caller_suites": 1,
+    "fresh_remaining_archives": 3,
+    "caller_suites": 4,
+    "reused_compiler_output": {
+      "receipt": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-wasm-shipping-001/completed-compiler-reuse.json",
+      "receipt_sha256": "7224e437ddcdcc7922fed22a8ad2a5fecba7f614a9df7355ee47bc69ae06787c",
+      "archive_sha256_before_strip": "6af80f4730bf036105140067884c0bbfeed1e79055d2fa31e6a6632e6663b800",
+      "source_commit": "decd11ca78603626e2caa90eb13a6e561ebfd3b3",
+      "unchanged_compiled_inputs": 13405,
+      "observer_only_changed_paths": [
+        "tools/export_ios.py",
+        "tools/ios_wasm.py",
+        "tools/tests/test_ios_wasm.py"
+      ],
+      "original_compiler_binary_sha256_recorded": false,
+      "compiler_identity_scope": "Original invocation path and version stdout retained; current binary hash recorded during re-audit. Historical binary-hash equality is not claimed.",
+      "observer_source_freeze_sha256": "65b4019883bc1c20ee484e4de11acee831c412854a8840771c47a27e41d29f77",
+      "reason": "Original ordinary export compile completed; observer-only stream/probe audit corrected. This is reused compiled output, not a fresh build."
+    },
+    "records": [
+      {
+        "mode": "deterministic",
+        "platform": "simulator",
+        "target": "aarch64-apple-ios-sim",
+        "export_receipt_sha256": "e5ec1106e22748ee4a41c3f9be634d3a0d00f999a3010b8b3981a97846de4e07",
+        "caller_receipt_sha256": "837247aa4dbb6941a3ab131b2ccaf9d3e88ebdc2a25acf325158d7c162fe6af7",
+        "positive_processes": 6,
+        "exact_refusals": 26,
+        "raw_command_streams_rehashed": 132,
+        "archive_bytes": 15368304,
+        "caller_bytes": {
+          "c": 11638664,
+          "swift": 11668416
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "iossimulator",
+          "object_minimum_versions": [
+            "14.0",
+            "27.0"
+          ],
+          "headers_sha256": "1ad85fb2277b1df7f455859fffe034346060ce7a3fd30bc3e5a0d4b328219cc9"
+        },
+        "runtime_files": 10
+      },
+      {
+        "mode": "deterministic",
+        "platform": "device",
+        "target": "aarch64-apple-ios",
+        "export_receipt_sha256": "1ede028328958fcf87e83beed89a0ad4f9dfebfbc64db6c9f193735d6092d674",
+        "caller_receipt_sha256": "d4e56ec7207e560010d44d5bbcd5a99334b2bd325966b6140f993db2517bb99f",
+        "positive_processes": 0,
+        "exact_refusals": 0,
+        "raw_command_streams_rehashed": 58,
+        "archive_bytes": 15363864,
+        "caller_bytes": {
+          "c": 11564840,
+          "swift": 11594376
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "ios",
+          "object_minimum_versions": [
+            "10.0",
+            "27.0"
+          ],
+          "headers_sha256": "5719d01201244f06be06a2c8b98d8ab5b447f68332cc1329ed0db184f8da5d06"
+        },
+        "runtime_files": 10
+      },
+      {
+        "mode": "fast",
+        "platform": "simulator",
+        "target": "aarch64-apple-ios-sim",
+        "export_receipt_sha256": "b9bb1f10b6d743e5ca35ace5e121e6f1c0b57367be472c81dfa7213bd763e865",
+        "caller_receipt_sha256": "c4b9ce7704833f2c1c4f8ecda7e495d09e150bcef563ed7932e0e8dd49564746",
+        "positive_processes": 6,
+        "exact_refusals": 26,
+        "raw_command_streams_rehashed": 132,
+        "archive_bytes": 15364072,
+        "caller_bytes": {
+          "c": 11637400,
+          "swift": 11667152
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "iossimulator",
+          "object_minimum_versions": [
+            "14.0",
+            "27.0"
+          ],
+          "headers_sha256": "2147e0ff6787e666020df47322ad00efba89f71e033b14262f7ff7a18ef9039f"
+        },
+        "runtime_files": 10
+      },
+      {
+        "mode": "fast",
+        "platform": "device",
+        "target": "aarch64-apple-ios",
+        "export_receipt_sha256": "28edb4a4c76a7fa9c489c540df825b354f862a2faf316b651c8c2a5e36b76437",
+        "caller_receipt_sha256": "f3c33fc49197b69093eb5f7d9896723ae42aba2bd86d9e8281eb51bcb68c4365",
+        "positive_processes": 0,
+        "exact_refusals": 0,
+        "raw_command_streams_rehashed": 58,
+        "archive_bytes": 15360968,
+        "caller_bytes": {
+          "c": 11564248,
+          "swift": 11593784
+        },
+        "object_platform": {
+          "architecture": "aarch64",
+          "platform": "ios",
+          "object_minimum_versions": [
+            "10.0",
+            "27.0"
+          ],
+          "headers_sha256": "4becfbd45eb631e77273ced43f3514964af52f4e1509addedc6ff9f882172e51"
+        },
+        "runtime_files": 10
+      }
+    ]
+  },
+  "limits": [
+    "Actual local iOS27.0 arm64 simulator CPU only; both physics families.",
+    "Unsigned device archives and C/Swift links only; no device execution.",
+    "The first simulator compiler output was reused after an observer-only audit correction; no fresh-compile claim for that repackaging.",
+    "Original compiler invocation/version stdout retained; original binary hash not separately persisted before the first observer failure.",
+    "Archive object minimum versions do not prove earlier OS compatibility.",
+    "One selected scene module; mixed per-entity TypeScript and unknown or incomplete bundles fail closed.",
+    "Static guest checkpoint remains unsupported; unknown save request is only an ABI refusal.",
+    "No phone/performance/rendering/mobile window/live audio/signing/store/phase gate.",
+    "Android static Wasm remains explicitly denied; public SDK opcodes unchanged."
+  ],
+  "findings": []
+}

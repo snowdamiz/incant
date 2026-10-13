@@ -29,8 +29,8 @@ unsigned with C/Swift; no device execution is claimed. The first simulator
 compiler output was reused after a reviewed observer-only correction, explicitly
 qualified rather than called a new build. A separate simulator teardown failure
 is retained; the complete retry passed without source/archive changes.
-Source/probe reviews are accepted; final execution review and current-main
-integration remain pending. Android static Wasm, mixed per-entity TypeScript and
+Source/probe and final execution reviews are accepted; current-main
+integration remains pending. Android static Wasm, mixed per-entity TypeScript and
 static guest checkpoints remain refused. No phone, minimum-OS, performance,
 rendering, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-ios-wasm.md).
