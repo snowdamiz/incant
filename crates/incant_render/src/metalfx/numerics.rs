@@ -100,7 +100,7 @@ fn native_alpha_never_changes_current_coverage_or_contaminates_clear_edges() {
 }
 #[test]
 fn offset_native_output_indices_and_source_packing_do_not_use_attachment_ratios() {
-    let p = super::plan::Plan::new([3., 2., 48., 32.], [6., 4., 96., 64.], [0.25, 1.]).unwrap();
+    let p = super::plan::Plan::new([3., 2., 48., 32.], [6., 4., 96., 64.], [1., 4.]).unwrap();
     for y in 0..p.output[3] {
         for x in 0..p.output[2] {
             let physical = [

@@ -33,14 +33,7 @@ pub(super) fn range(device: &wgpu::Device) -> Result<[f32; 2], Fallback> {
             MTLFXTemporalScalerDescriptor::supportedInputContentMinScaleForDevice(d.raw_device()),
             MTLFXTemporalScalerDescriptor::supportedInputContentMaxScaleForDevice(d.raw_device()),
         ];
-        if !r.iter().all(|x| x.is_finite() && *x > 0.) || r[0] > r[1] {
-            return Err(Fallback::Scale);
-        }
-        let r = [r[0].max(0.25), r[1].min(1.)];
-        if r[0] > r[1] {
-            return Err(Fallback::Scale);
-        }
-        Ok(r)
+        super::plan::upscale_range(r)
     }
 }
 impl Scaler {

@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-13T09:03:25.877091+00:00",
+  "source_sha256": "756bdcf944587a3c6276b1158fa94a2dc4ff54c49fbb8025d7da8dfb6cfd402f",
+  "binary_sha256": "dbc683b953c28d5af71b50efef231c61b746427c0881395f1effe6607eda30a1",
+  "build_command": [
+    "/usr/bin/xcrun",
+    "clang",
+    "-fobjc-arc",
+    "-framework",
+    "Foundation",
+    "-framework",
+    "Metal",
+    "-framework",
+    "MetalFX",
+    "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/query.m",
+    "-o",
+    "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/query"
+  ],
+  "build_exit": 0,
+  "query_exit": 0,
+  "query": {
+    "gpu_submissions": 0,
+    "device": "Apple M5 Pro",
+    "os": "Version 27.0.1 (Build 26A434)",
+    "supported": true,
+    "raw_min_scale": 1,
+    "raw_max_scale": 3
+  },
+  "predecessor_release_sha256": "e2aedc7e561284508501aa29b2a56b86385308adb1930748e80fde4dfeb19761",
+  "scope": "Capability query only; no texture, queue, encoder, image or submission created. Owned child reaped."
+}

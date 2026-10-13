@@ -1,0 +1,8 @@
+{
+  "base": "f57ac7d307fc33f0fe81a19591a41a45734e6df5",
+  "files": {
+    "crates/incant_render/src/metalfx/plan.rs": "1e2b963ef8e513c594592d54b45c1725f8c88b189901c7b4fe2c8c3cf11d4ef4",
+    "crates/incant_render/src/metalfx/native.rs": "c251b6ee8c9e7cfe7d6f810a84e809d4bea861b54d5fb7b2f82d1c1c8e7278c0",
+    "crates/incant_render/src/metalfx/numerics.rs": "1df12e3757183340cb206f33d410ffd18e4c99ad6dc9cf70106d17b0e0d2c5bb"
+  }
+}

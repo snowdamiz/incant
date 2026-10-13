@@ -1,0 +1,8 @@
+{
+  "gpu_submissions" : 0,
+  "device" : "Apple M5 Pro",
+  "os" : "Version 27.0.1 (Build 26A434)",
+  "supported" : true,
+  "raw_min_scale" : 1,
+  "raw_max_scale" : 3
+}

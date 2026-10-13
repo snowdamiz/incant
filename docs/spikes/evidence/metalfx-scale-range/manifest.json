@@ -1,0 +1,60 @@
+{
+  "scope": "MetalFX output/input scale-factor correction; capability observation and CPU verification only",
+  "files": [
+    {
+      "path": "query.m",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/query.m",
+      "sha256": "756bdcf944587a3c6276b1158fa94a2dc4ff54c49fbb8025d7da8dfb6cfd402f"
+    },
+    {
+      "path": "query.stdout",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/query.stdout",
+      "sha256": "395ec0bf0a53e66f2dd89f45ca63eb3be448d12b1b10151d7b82311ad25b0c5a"
+    },
+    {
+      "path": "query.stderr",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/query.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build.stdout",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/build.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build.stderr",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/build.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "receipt.json",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-query-001/receipt.json",
+      "sha256": "e5610fe06e38b64f46186cb5ca71d8ac555a3183a4dfbe0e8b71b081d653abc9"
+    },
+    {
+      "path": "source.json",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/source.json",
+      "sha256": "82f339dab2ddc7e1bdaefa79b08496bc09ac29fa89d2ee75ecc50be5ce088315"
+    },
+    {
+      "path": "result.json",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/result.json",
+      "sha256": "91eaa5721154a3d4b5bb3b4ed624acaed271e0dc440da85d24c1972bbb11a50a"
+    },
+    {
+      "path": "cpu.log",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/cpu.log",
+      "sha256": "b5eeaa8d4c13198dfbe4a996a25c33fb7ebed0f8f1d2359d21213a0237db14c8"
+    },
+    {
+      "path": "clippy.log",
+      "source": "/Users/andreyyurlov/.codex/incant-evidence/metalfx-scale-correction-001/clippy.log",
+      "sha256": "6567645409d26adcf982efc96011ea6b7eccb9fab344d16c4a020ea838878c60"
+    }
+  ],
+  "limits": [
+    "No corrected native GPU/upscaling appearance execution yet",
+    "Prior535 native review only selected native at scale1; quality failure at silhouettes remains open",
+    "No phone/performance/phase approval"
+  ]
+}

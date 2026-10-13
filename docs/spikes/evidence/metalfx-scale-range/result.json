@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-13T09:05:51.877101+00:00",
+  "checks": [
+    {
+      "name": "cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-temporal,native-metalfx"
+      ],
+      "exit": 0,
+      "log_sha256": "b5eeaa8d4c13198dfbe4a996a25c33fb7ebed0f8f1d2359d21213a0237db14c8"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "cooked-temporal,native-metalfx",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "log_sha256": "6567645409d26adcf982efc96011ea6b7eccb9fab344d16c4a020ea838878c60"
+    }
+  ],
+  "source_unchanged": true,
+  "gpu_run": false
+}
