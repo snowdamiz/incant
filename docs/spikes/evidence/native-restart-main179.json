@@ -1,0 +1,808 @@
+{
+  "at": "2026-10-13T00:17:01.611402+00:00",
+  "tested_head": "7f6e41c4a1a4d799dd115944f26cee51676fd36c",
+  "review_head": "466c0793be9266e356ec30164cfd281b56fabefb",
+  "actual_main": "02203670a7f18c68ff9e3bcf1913b0d574e82f6d",
+  "source_freeze": {
+    "path": "docs/spikes/evidence/native-restart-main179/freeze.json",
+    "sha256": "8eddc01dd561789db6d19f7ed741d80ea7176049a5c0a981c85b555fbb6467c6",
+    "count": 1927
+  },
+  "source_comparison": {
+    "producer": "be0ef2d7093071379dfc90a859ca54a38688f42d",
+    "rows": [
+      {
+        "path": "crates/incant_audio_runtime/src/mixer.rs",
+        "producer_sha256": "9b4928ec942aa66c703e9190bfc2faa33aeff0f09af6024fb380ad9af59bb052",
+        "current_sha256": "9b4928ec942aa66c703e9190bfc2faa33aeff0f09af6024fb380ad9af59bb052",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_audio_runtime/src/scene.rs",
+        "producer_sha256": "5772a2105fb9a5cbd5d47fec32835837f452baab1236a0cd6e8683e8fd5ae33d",
+        "current_sha256": "5772a2105fb9a5cbd5d47fec32835837f452baab1236a0cd6e8683e8fd5ae33d",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_audio_runtime/src/scene/binding.rs",
+        "producer_sha256": "657de6b00a996c9f4635ac9611cfc8979cd5b1f795c28b8d7fc0be3f9f126648",
+        "current_sha256": "657de6b00a996c9f4635ac9611cfc8979cd5b1f795c28b8d7fc0be3f9f126648",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_audio_runtime/tests/scene.rs",
+        "producer_sha256": "7da9583c22d352c17603fb14c6267433557079bcc2a8a266a28ad563e9de53d4",
+        "current_sha256": "7da9583c22d352c17603fb14c6267433557079bcc2a8a266a28ad563e9de53d4",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/Cargo.toml",
+        "producer_sha256": "f55f69fb27e06087f1c924ecc36adec81318a1ae5507d99191fd4f2f248603f2",
+        "current_sha256": "84d26bd2ff236e2588ae6ca53a6f6d4f89bb75f9c76a6e471488fdcb43c4065d",
+        "exact": false
+      },
+      {
+        "path": "crates/incant_game_player/src/lib.rs",
+        "producer_sha256": "eb6f1807af92e5208436b86cafa4a8ee13d537f2d7ccaf051df6576d84d72f67",
+        "current_sha256": "eb6f1807af92e5208436b86cafa4a8ee13d537f2d7ccaf051df6576d84d72f67",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/session.rs",
+        "producer_sha256": "ea29d2b68b3a24e30ae6bf908c5c769b5e5744b4075b02e68a4667006c8eccee",
+        "current_sha256": "ea29d2b68b3a24e30ae6bf908c5c769b5e5744b4075b02e68a4667006c8eccee",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/window/gamepad/tests.rs",
+        "producer_sha256": "46b31fff0bcae9e519aaed314992892b5107847ad7378b5aa90f173424544c10",
+        "current_sha256": "46b31fff0bcae9e519aaed314992892b5107847ad7378b5aa90f173424544c10",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/window/mod.rs",
+        "producer_sha256": "907748d2b57fc669524db8bd5aec1e5b6016ba5565178acc836c47a6c03ac67f",
+        "current_sha256": "907748d2b57fc669524db8bd5aec1e5b6016ba5565178acc836c47a6c03ac67f",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/window/surface.rs",
+        "producer_sha256": "a9c860514476d147500bbd6e3988783e6c365f214f498ef26a1af7edc6cf623c",
+        "current_sha256": "a9c860514476d147500bbd6e3988783e6c365f214f498ef26a1af7edc6cf623c",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/window/ui_input.rs",
+        "producer_sha256": "a6296e20f3675210f9dd045b3ea0ac144022aa949098f20b8581f63047db22f5",
+        "current_sha256": "a6296e20f3675210f9dd045b3ea0ac144022aa949098f20b8581f63047db22f5",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/window/ui_input/tests.rs",
+        "producer_sha256": "0a6c06412ff0f09dcc18c145d00caff803c41e37e8beb8df469f7449e5b49462",
+        "current_sha256": "0a6c06412ff0f09dcc18c145d00caff803c41e37e8beb8df469f7449e5b49462",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_runtime/src/core.rs",
+        "producer_sha256": "db8885eca01d6b194ce9497b6334ac1aacd1561283ccae7aa29d4d143a2f554b",
+        "current_sha256": "db8885eca01d6b194ce9497b6334ac1aacd1561283ccae7aa29d4d143a2f554b",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_runtime/src/hosted.rs",
+        "producer_sha256": "dd88ff6501f09caa3793af4c3e050f0b61a8eebba99aacbc5f47ae9c0902c1a4",
+        "current_sha256": "dd88ff6501f09caa3793af4c3e050f0b61a8eebba99aacbc5f47ae9c0902c1a4",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_runtime/src/lib.rs",
+        "producer_sha256": "1f3cf3be48f410a388bde88afea3055e11d9c56eb1989f695e9e5908a58485b3",
+        "current_sha256": "1f3cf3be48f410a388bde88afea3055e11d9c56eb1989f695e9e5908a58485b3",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_runtime/src/offline.rs",
+        "producer_sha256": "19e1b7ae9fa9337bab222134086b00013791a1e12e21fc8eff117f53bd0931bc",
+        "current_sha256": "19e1b7ae9fa9337bab222134086b00013791a1e12e21fc8eff117f53bd0931bc",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_runtime/tests/hosting.rs",
+        "producer_sha256": "add1f3ed165df1979355e99f79e07bae4775ea3575f5043e6a16e1784abfaac9",
+        "current_sha256": "add1f3ed165df1979355e99f79e07bae4775ea3575f5043e6a16e1784abfaac9",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_observe/src/lib.rs",
+        "producer_sha256": "c15032240bdf7ab115762902091330a966a9ee7cb2abc007ea6d854783c2345e",
+        "current_sha256": "c15032240bdf7ab115762902091330a966a9ee7cb2abc007ea6d854783c2345e",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_observe/src/tests.rs",
+        "producer_sha256": "87695572d360885a86e05c0ca6914922232ceeecab259d531ab3082b4cbdd690",
+        "current_sha256": "87695572d360885a86e05c0ca6914922232ceeecab259d531ab3082b4cbdd690",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_render_game/tests/ui/checkpoints.rs",
+        "producer_sha256": "f3616aa9f4b2537d7f3e1b51f1f68699f283bac89a20be68f7aecabd13775475",
+        "current_sha256": "f3616aa9f4b2537d7f3e1b51f1f68699f283bac89a20be68f7aecabd13775475",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_script/src/checkpoint/mod.rs",
+        "producer_sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+        "current_sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_script/src/commands.rs",
+        "producer_sha256": "d58969ae3f24eef677394fd16810c907ac715a4f3f0b77f867a5b728ef44f425",
+        "current_sha256": "d58969ae3f24eef677394fd16810c907ac715a4f3f0b77f867a5b728ef44f425",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_script/src/lib.rs",
+        "producer_sha256": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57",
+        "current_sha256": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_script/src/program.rs",
+        "producer_sha256": "d13e6709e8768053de1aa6831d10c8b16a2f0602b24bb19606b22530a58ff15e",
+        "current_sha256": "d13e6709e8768053de1aa6831d10c8b16a2f0602b24bb19606b22530a58ff15e",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_script/src/session.rs",
+        "producer_sha256": "101f6ec19a9221a5f658339278b2c127b624bfc47d34739ae03e2e873dedda7f",
+        "current_sha256": "101f6ec19a9221a5f658339278b2c127b624bfc47d34739ae03e2e873dedda7f",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_script/tests/project_bindings.rs",
+        "producer_sha256": "89415d2e7223612293b8797e819290ca3f20196318876ed51f73c50cd72e42a8",
+        "current_sha256": "89415d2e7223612293b8797e819290ca3f20196318876ed51f73c50cd72e42a8",
+        "exact": true
+      },
+      {
+        "path": "samples/core/gameplay.ts",
+        "producer_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+        "current_sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+        "exact": true
+      },
+      {
+        "path": "samples/planar/gameplay.ts",
+        "producer_sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8",
+        "current_sha256": "3aa27cdc2e0e3002e4d8251d0ab3cd0004875bfb0da02c3afbb222b3b9b6b7b8",
+        "exact": true
+      },
+      {
+        "path": "sdk/ts/src/native.d.ts",
+        "producer_sha256": "4a9e36893f882a48dc91e1675dbfa780386d44f43c819fdaa45adde16936161c",
+        "current_sha256": "4a9e36893f882a48dc91e1675dbfa780386d44f43c819fdaa45adde16936161c",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/restart.rs",
+        "producer_sha256": "ff924b11dc50cf76403830ad52682836c44107ed63d29f926bbc272f6ce249c3",
+        "current_sha256": "ff924b11dc50cf76403830ad52682836c44107ed63d29f926bbc272f6ce249c3",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/restart/input.rs",
+        "producer_sha256": "77976afd18f9e294287f361dfcbea4ee5e1035d89eeba5bdde300b4cfb2f074a",
+        "current_sha256": "77976afd18f9e294287f361dfcbea4ee5e1035d89eeba5bdde300b4cfb2f074a",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_runtime/src/seed.rs",
+        "producer_sha256": "a2ebee27ba7da838d497a63c0dcb9200dbd0c92a8eae416ba17e6eb8bee33b9f",
+        "current_sha256": "a2ebee27ba7da838d497a63c0dcb9200dbd0c92a8eae416ba17e6eb8bee33b9f",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_runtime/tests/restart.rs",
+        "producer_sha256": "f5e061efaa59d2efa3b9aa279ee09673560ef9bc31a2782b57837b5529142bb8",
+        "current_sha256": "f5e061efaa59d2efa3b9aa279ee09673560ef9bc31a2782b57837b5529142bb8",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_script/src/restart_request_tests.rs",
+        "producer_sha256": "dd982d0f3084e421bc6b31cab991896cdc19653ddf490bea19beb7a4c5cf86e6",
+        "current_sha256": "dd982d0f3084e421bc6b31cab991896cdc19653ddf490bea19beb7a4c5cf86e6",
+        "exact": true
+      }
+    ],
+    "qualification": "Only player manifest differs: main physics defaults/forwards and defaults-off dependencies retained; restart compiler-only dev edge retained. No production Rust delta from accepted source."
+  },
+  "metadata_seam": {
+    "path": ".gitattributes",
+    "tested_sha256": "42ab4eb7b96ba7d24fd878a073bc1cab0dc17f8aade0d40c9dffe4b53d41b691",
+    "current_sha256": "6f14b1bad45ec88df74bed391052a3adf7e45544c416e7ba5c86241c195d11eb",
+    "reason": "Preserve producer raw log bytes and exempt only their terminal blank lines; no compiler input or runtime change."
+  },
+  "checks": [
+    {
+      "name": "window-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 32.66129208300117,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/window-tests.log",
+      "sha256": "66240a54cd8375e10415dce37f95bdeb4773d8ca229e74dae6e71e9f94351d23"
+    },
+    {
+      "name": "runtime-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime"
+      ],
+      "exit": 0,
+      "seconds": 54.955245584002114,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/runtime-tests.log",
+      "sha256": "8588b6c9b34d20c327a04a47f0e93ee82495830755b0d8d95037044cc9414c88"
+    },
+    {
+      "name": "mobile-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "mobile-ffi",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 24.21785020799871,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/mobile-tests.log",
+      "sha256": "20df22455300cb0bdc6ce584d49b83112f92ed6de5ee0c6095f29e80ba380b68"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime",
+        "--all-targets",
+        "--features",
+        "incant_game_player/native-window,incant_game_player/mobile-ffi",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 13.908585833996767,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/clippy.log",
+      "sha256": "961500fb6102d170481f8c17103e4b3119363f3e81c2605fad3b8fcf83089a5e"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 47.78505674999906,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/headless.log",
+      "sha256": "807aad3dca3b2b6b35b9a17397fb8f8363c2ba3f7e4e7a8304ca155cd646ecf5"
+    },
+    {
+      "name": "static-check",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "static-module,render-input"
+      ],
+      "exit": 101,
+      "seconds": 19.713452875002986,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-check.log",
+      "sha256": "61322fbb0d56553c7e75241ce456a3fc142b8d9a097827879c9044bc5f8a039c"
+    },
+    {
+      "name": "static-fixture-cook",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_wasm_cook"
+      ],
+      "exit": 0,
+      "seconds": 1.238351624997449,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture-cook.log",
+      "sha256": "fb49c8422d0984c50aed1565dd6287996abd36538b9b3403f7320e713700d19f"
+    },
+    {
+      "name": "static-wabt-version",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-conformance-007/inputs/wabt/bin/wasm2c",
+        "--version"
+      ],
+      "exit": 0,
+      "seconds": 0.01362104200234171,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-wabt-version.log",
+      "sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed"
+    },
+    {
+      "name": "static-rust-guest",
+      "command": [
+        "python3",
+        "tools/rust_guest.py",
+        "crates/incant_wasm_dev/fixtures/bulk.rs",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bulk.wasm"
+      ],
+      "exit": 0,
+      "seconds": 1.2122009590020753,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-rust-guest.log",
+      "sha256": "612dcc7d49d4ac216c194333d979f50ae66820c44dc32e445f77ca9c3e421ce7"
+    },
+    {
+      "name": "static-fixture-prepare",
+      "command": [
+        "python3",
+        "tools/wasm2c.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bundle",
+        "--module",
+        "bulk=/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bulk.wasm",
+        "--wabt",
+        "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-conformance-007/inputs/wabt",
+        "--cook",
+        "/Users/andreyyurlov/.codex/incant-planar-integration-target/ci/incant_wasm_cook"
+      ],
+      "exit": 0,
+      "seconds": 0.15249587500147754,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture-prepare.log",
+      "sha256": "2aae8621aaa71466a3be9558de5e2138dd864de539b58d5200c3b35c4a8d9244"
+    },
+    {
+      "name": "static-check-retry",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "static-module,render-input"
+      ],
+      "exit": 0,
+      "seconds": 3.3709017080036574,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-check-retry.log",
+      "sha256": "8c1ce4c151a8224ba36344d874a342107d6ff3a3c3486be93c64701fd011c1da"
+    },
+    {
+      "name": "compiler-free-check",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--no-default-features"
+      ],
+      "exit": 0,
+      "seconds": 6.365731750003761,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/compiler-free-check.log",
+      "sha256": "50747bd23f1ec31c9f760bcc0f50f38bba70582cf28ebdcfe531724a3e05161b"
+    },
+    {
+      "name": "ts-samples-core",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "samples/core/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.22224454199749744,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-samples-core.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ts-samples-planar",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "samples/planar/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.20510662499873433,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-samples-planar.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ts-sdk-ts",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.20066458299697842,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-sdk-ts.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "graphs",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_runtime",
+        "incant_game_player",
+        "incant_script",
+        "--features",
+        "incant_game_player/static-module,incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 0.3882014999981038,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/graphs.log",
+      "sha256": "a5ae06e078f8dca5b3b87ebe583bec9a85b2b118b41f608fee5bb26ee8380041"
+    },
+    {
+      "name": "features",
+      "command": [
+        "python3",
+        "tools/physics_features.py",
+        "manifest"
+      ],
+      "exit": 0,
+      "seconds": 0.03902666599606164,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/features.log",
+      "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1666557919961633,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.028531832998851314,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.015955332994053606,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-prepare",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "prepare",
+        "core",
+        "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-002/authoring",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-development",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 7.2793878329976,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-prepare.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-ship",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "ship",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-development",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping"
+      ],
+      "exit": 0,
+      "seconds": 260.2001437079962,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-ship.log",
+      "sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868"
+    },
+    {
+      "name": "planar-prepare",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "prepare",
+        "planar",
+        "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/authoring",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-development",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 6.433590375003405,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-prepare.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "planar-ship",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "ship",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-development",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping"
+      ],
+      "exit": 0,
+      "seconds": 254.7296975000063,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-ship.log",
+      "sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868"
+    }
+  ],
+  "counts": {
+    "window-tests": {
+      "passed": 59,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "runtime-tests": {
+      "passed": 284,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 28
+    },
+    "mobile-tests": {
+      "passed": 12,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    }
+  },
+  "proofs": {
+    "core": {
+      "processes": 12,
+      "baseline_cases": [
+        "win",
+        "lose",
+        "gamepad",
+        "jump",
+        "skip-pickup",
+        "wall",
+        "repeat-win",
+        "idle"
+      ],
+      "restart_cases": [
+        "win-restart-win",
+        "gamepad-restart-win",
+        "lose-restart-win",
+        "held-input-restart-idle"
+      ],
+      "exact_session_state_and_pcm": true,
+      "headless_refusal": "Error: native play startup/runtime failure: script tick failed: TypeError: host does not accept session restart requests\n",
+      "package_files": 26,
+      "player_sha256": "066bb3489090ce361d9edf5c9e21a79abbf30af368a501ea6e490d77baa7b0a3",
+      "result_sha256": "c452dfdfbf6ce41a9030325df08e538807c0a2f19094dc281011750895546998",
+      "export_sha256": "63123a8f572e327d15faf3661e6bc6b96a8b51e8ea0118ebdc6084cd2ad907e7",
+      "authoring_undo_redo_reopen": true
+    },
+    "planar": {
+      "processes": 12,
+      "baseline_cases": [
+        "win",
+        "gamepad",
+        "lose",
+        "wall",
+        "locked-exit",
+        "diagonal",
+        "repeat-win",
+        "idle"
+      ],
+      "restart_cases": [
+        "win-restart-win",
+        "gamepad-restart-win",
+        "lose-restart-win",
+        "held-input-restart-idle"
+      ],
+      "exact_session_state_and_pcm": true,
+      "headless_refusal": "Error: native play startup/runtime failure: script tick failed: TypeError: host does not accept session restart requests\n",
+      "package_files": 18,
+      "player_sha256": "6d768989cdc019c3aa9349ccbbbb5312f23499962f2f2eac699e02e2e331ea37",
+      "result_sha256": "094fc5e6acf2e549d79be7a48ae0f0f721429de476cd7e150c4fe0c8defe21b9",
+      "export_sha256": "d109e096dc7d59cad1493e5fb77a85765623d6b81d059c48f8cb12388c4fb254",
+      "authoring_undo_redo_reopen": true
+    }
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/native-restart-main179/artifacts.json.gz",
+    "sha256": "df00feb9fdda727b39c725e0a68c43bb3c2b7e3c49facd269bbc6e21f91e9d18",
+    "artifacts": 327,
+    "unique_payloads": 228,
+    "bytes": 1856186
+  },
+  "external_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping/package/player/incant_game_player",
+      "sha256": "066bb3489090ce361d9edf5c9e21a79abbf30af368a501ea6e490d77baa7b0a3",
+      "bytes": 9549776
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "sha256": "a325edef7ee76bf99ea09648956f34dd7c7c86ae26102a78aca991d8b7f9fba1",
+      "bytes": 664
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-14eb24f8b8fefb33",
+      "sha256": "c1c9decf1ba74bcd97c12813ca5d2317bfd1046e59f39399ac014a38ff99f33e",
+      "bytes": 210604018
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-14eb24f8b8fefb33.yml",
+      "sha256": "89261f587a9f9b2b9b1e92f4d0c9d7e6bf70671ec530e002485093047dc655f5",
+      "bytes": 3267910
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping/package/symbols/script-symbols.json",
+      "sha256": "31302a739f71849cb4be03b8e24d0dbcc7ebc2699a95f20e81ed157f16682280",
+      "bytes": 1359
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/incant_headless",
+      "sha256": "ac4e217fe060f562c7b630ca624b5206a19ec8cc0ded6218ece5efbdd09bb0cb",
+      "bytes": 60497696
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping/package/player/incant_game_player",
+      "sha256": "6d768989cdc019c3aa9349ccbbbb5312f23499962f2f2eac699e02e2e331ea37",
+      "bytes": 9549776
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "sha256": "a325edef7ee76bf99ea09648956f34dd7c7c86ae26102a78aca991d8b7f9fba1",
+      "bytes": 664
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-14eb24f8b8fefb33",
+      "sha256": "a68206df1db62261457ee4bb834456162cbbadc88b79ed9320ec17154406f39b",
+      "bytes": 210662327
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-14eb24f8b8fefb33.yml",
+      "sha256": "0095428447043f543fcc45707de8fea10f722f1518954c0df6e531fe36943f1f",
+      "bytes": 3267549
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping/package/symbols/script-symbols.json",
+      "sha256": "ab9c84cf7a7d3fee2ca7c29f6d3bbbaba7c0f66610344ff0881d0ee2a8f43b27",
+      "bytes": 1359
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bulk.wasm",
+      "sha256": "89f63d69d66329c1f67d6fcde0e4b5fc64606f96dc1519bc8ea9a07df6e88cfa",
+      "bytes": 618696
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bundle/m0.original.wasm",
+      "sha256": "89f63d69d66329c1f67d6fcde0e4b5fc64606f96dc1519bc8ea9a07df6e88cfa",
+      "bytes": 618696
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bundle/m0.wasm",
+      "sha256": "ce4938db24ada15ad7997e5a3ae2d64a5b9abafb317d633907d9394974944267",
+      "bytes": 626727
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/rust-sdk-libraries/libincant_module.rlib",
+      "sha256": "e8dc35e8634879ba39aaab44610063b9d465de567492251d9d3c012ec92dbceb",
+      "bytes": 1072542
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/rust-sdk-libraries/libincant_wasm_abi.rlib",
+      "sha256": "3b5b0d789a32cf5d2b8813193ef877c46eecaaaf1de7fa9142ecf1457da0dd33",
+      "bytes": 2035154
+    }
+  ],
+  "producer_final_review": {
+    "status": "accepted",
+    "receipt": "docs/spikes/evidence/native-session-restart/final-review.json",
+    "sha256": "7e5f2907f0baff970f90b5f0b0b5ba189bfa850953b92fc129b8a9bfa8fe5097"
+  },
+  "initial_failure": {
+    "name": "static-check",
+    "exit": 101,
+    "reason": "Runner omitted mandatory INCANT_WASM_BUNDLE; no source defect. Fresh current bulk guest/pinned WABT prepared, compile-only retry passed on identical source. Original failure retained."
+  },
+  "pause": "Final valid Planar export was active at user pause; allowed to drain. Docs-only pause commit466c retained. User resumed before this final audit.",
+  "review_state": "Independent final integration audit pending; actual main179 ancestry still to join after review.",
+  "limits": [
+    "CPU ordinary package only; no native-window/GPU/device evidence",
+    "Fresh startup reset, not physics save/restore",
+    "Wasm and headless Play request owners remain unsupported"
+  ]
+}

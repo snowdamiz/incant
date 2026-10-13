@@ -1,0 +1,64 @@
+{
+  "audio_clips": {},
+  "cameras": [
+    "00000000000000000000000007"
+  ],
+  "compiler": {
+    "bundleBytes": 12300,
+    "bundleSha256": "203621123e1ba1c29c64e896db77745642f5b8dac880cc00cc1de2928f6b2582",
+    "compilers": {
+      "swc": "1.16.13",
+      "typescript": "5.9.3"
+    },
+    "format": "incant-native-typescript-project",
+    "limits": {
+      "bundleBytes": 1000000,
+      "fileBytes": 262144,
+      "mapBytes": 4194304,
+      "modules": 64,
+      "sourceBytes": 1048576
+    },
+    "mapBytes": 22668,
+    "mapSha256": "03448187b20e2b56da6739d77a65ad1b60b9d40b88091ae13c6c27aa9a5c4b98",
+    "modules": [
+      {
+        "bytes": 11424,
+        "path": "gameplay.ts",
+        "sha256": "a0c0cf1acd443488027d96790c9a8c4b47964eebb392fd967be193e32803ede1"
+      }
+    ],
+    "sourceBytes": 11424,
+    "sources": [
+      {
+        "id": "00000000000000000000000001",
+        "path": "gameplay.ts"
+      }
+    ],
+    "trust": "fresh local source transform; no project code or configuration executed",
+    "version": 1
+  },
+  "font_assets": [
+    {
+      "fingerprint": "27434b14189e6b823382d06b768a3544557f29f875e3b483452bac0eb87edc9a",
+      "id": "01M4RZNBNNEEQ8QHYGJJA4GNKY"
+    }
+  ],
+  "format": "incant-native-project-build",
+  "has_spatial_content": true,
+  "program": null,
+  "project_id": "01M4RZNBKBHMPS6REP68QR5WYQ",
+  "project_sha256": "09507561641fb87454de8eeb9d8671db5ecdbbf18f0fde5ff9174cbec8cf5698",
+  "scene_id": "01M4RZNBKBG7XYQSXNZAXZQREB",
+  "scene_sha256": "3550f0f7a64510299136e653b462678707481705472d1cd334d69d800364e9a7",
+  "startup_source_parsing": false,
+  "target": "aarch64-apple-darwin",
+  "tick_rate": 60,
+  "version": 1,
+  "visual_assets": [
+    {
+      "fingerprint": "de1efc9cac8d47956233a59b453545d7a915a1b4603d03d3d71530821637dd3e",
+      "id": "01M4RZNBMJRHRB7DT4Z1JHPXW5",
+      "kind": "texture"
+    }
+  ]
+}

@@ -146,6 +146,10 @@ export default {
     for (const chunk of context.chunks) for (let row = 0; row < chunk.ids.length; row++)
       if (needed.has(chunk.ids[row])) rows.set(chunk.ids[row], { chunk, row });
     const player = actor(rows, c.player), at = position(player), state = progress(context.state.get(), c, at);
+    if (state.phase !== 'playing' && context.input.actions.restart?.pressed) {
+      context.commands.requestRestart();
+      return undefined;
+    }
     actor(rows, c.exit);
     for (const hazard of c.hazards) actor(rows, hazard);
     for (const pickup of c.pickups) if (!state.collected.includes(pickup)) actor(rows, pickup);

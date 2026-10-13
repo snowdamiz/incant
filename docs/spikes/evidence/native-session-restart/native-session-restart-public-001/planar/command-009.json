@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+    "native-play",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/authoring/planar.json",
+    "--camera",
+    "00000000000000000000000007",
+    "--ticks",
+    "300",
+    "--ui-viewport",
+    "640x480",
+    "--input-replay",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-session-restart-public-001/planar/unsupported-input.json"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Error: native play startup/runtime failure: script tick failed: TypeError: host does not accept session restart requests\n"
+}

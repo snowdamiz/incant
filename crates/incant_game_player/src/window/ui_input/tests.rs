@@ -695,3 +695,70 @@ fn retired_native_payloads_are_discarded_before_semantic_validation() {
     accept(&mut ui, &mut input);
     assert!(ui.text(id(3)).unwrap().text().ends_with("accepted"));
 }
+
+#[test]
+fn whole_session_replacement_retires_ime_pointer_and_receipts_without_reusing_serials() {
+    use tao::text_input::TextInputEvent;
+    let mut old = runtime(true);
+    let mut input = UiInput::new();
+    let mut physical = PendingInput::new();
+    let focus = old
+        .prepare(&[UiEvent::Focus(id(3))], [400., 100.], &mut Measure)
+        .unwrap();
+    old.commit(focus).unwrap();
+    let (old_serial, true) = input.text_session(Some(&old), true).unwrap().unwrap() else {
+        panic!("text session")
+    };
+    input
+        .native_text(
+            Some(&old),
+            old_serial,
+            &TextInputEvent::Preedit {
+                text: "old".into(),
+                cursor: None,
+            },
+        )
+        .unwrap();
+    move_to(&mut input, &old, &mut physical, [20., 20.], 1.);
+    input.left(Some(&old), &mut physical, true).unwrap();
+    let (retired, false) = input.replace_session().unwrap().unwrap() else {
+        panic!("retirement")
+    };
+    assert!(retired > old_serial);
+    assert!(input.receipts().is_empty());
+    let mut fresh = runtime(true);
+    let focus = fresh
+        .prepare(&[UiEvent::Focus(id(3))], [400., 100.], &mut Measure)
+        .unwrap();
+    fresh.commit(focus).unwrap();
+    let (new_serial, true) = input.text_session(Some(&fresh), true).unwrap().unwrap() else {
+        panic!("new session")
+    };
+    assert!(new_serial > retired);
+    input
+        .native_text(
+            Some(&fresh),
+            old_serial,
+            &TextInputEvent::Commit("stale".into()),
+        )
+        .unwrap();
+    input.left(Some(&fresh), &mut physical, false).unwrap();
+    assert!(input.receipts().is_empty());
+    assert!(physical.events().is_empty());
+    input.presented(Some(&fresh), &mut physical).unwrap();
+    input
+        .native_text(
+            Some(&fresh),
+            new_serial,
+            &TextInputEvent::Commit("fresh".into()),
+        )
+        .unwrap();
+    accept(&mut fresh, &mut input);
+    assert_eq!(fresh.text(id(3)).unwrap().text(), "Namefresh");
+    assert!(
+        fresh
+            .actions()
+            .iter()
+            .all(|a| !matches!(a, UiAction::Activated(_)))
+    );
+}

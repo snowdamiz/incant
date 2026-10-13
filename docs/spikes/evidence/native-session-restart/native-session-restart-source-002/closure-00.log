@@ -1,0 +1,71 @@
+    Checking bytemuck v1.25.2
+   Compiling zerofrom v0.1.8
+   Compiling yoke v0.8.3
+    Checking wide v1.7.1
+   Compiling zerovec v0.11.8
+   Compiling thiserror v2.0.21
+   Compiling tinystr v0.8.4
+   Compiling zerocopy v0.8.62
+   Compiling icu_locale_core v2.3.0
+    Checking simba v0.10.2
+   Compiling ppv-lite86 v0.2.21
+   Compiling potential_utf v0.1.6
+   Compiling zerotrie v0.2.5
+    Checking incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_types)
+    Checking nalgebra v0.35.0
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling icu_provider v2.3.1
+   Compiling rand_chacha v0.9.0
+   Compiling ref-cast v1.0.27
+   Compiling schemars v1.2.2
+    Checking glamx v0.3.1
+   Compiling icu_locale_fallback v2.3.0
+   Compiling rand v0.9.5
+    Checking parry3d v0.31.1
+    Checking parry2d v0.31.1
+    Checking incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_anim)
+    Checking rustybuzz v0.14.1
+    Checking rapier3d v0.36.0
+    Checking rapier2d v0.36.0
+    Checking incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_nav)
+    Checking cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/cosmic-text)
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_2d_runtime)
+    Checking bevy_ecs v0.19.1
+   Compiling calendrical_calculations v0.2.4
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_physics_runtime)
+   Compiling fixed_decimal v0.7.2
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_text)
+   Compiling icu_calendar v2.3.0
+   Compiling ulid v1.2.1
+   Compiling icu_collections v2.3.0
+   Compiling dodgy_2d v0.5.5
+   Compiling rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/rerecast)
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_runtime)
+   Compiling icu_plurals v2.3.0
+   Compiling icu_time v2.3.0
+   Compiling icu_decimal v2.3.0
+   Compiling icu_pattern v0.5.0
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_assets_runtime)
+   Compiling icu_datetime v2.3.0
+   Compiling icu_locale v2.3.0
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_2d)
+    Checking incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_input)
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_localization)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+   Compiling incant_wasm_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_runtime)
+    Checking kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/kira)
+error: failed to run custom build command for `incant_wasm_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_wasm_runtime)`
+
+Caused by:
+  process didn't exit successfully: `/tmp/incant-font-atlas-target/debug/build/incant_wasm_runtime-9d69e2dc1b53f78c/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:rerun-if-env-changed=INCANT_WASM_BUNDLE
+  cargo:rerun-if-env-changed=INCANT_WASM_MSVC_OPT_LEVEL
+
+  --- stderr
+
+  thread 'main' (4331345) panicked at crates/incant_wasm_runtime/build.rs:11:14:
+  embedded-fixture requires a trusted tools/wasm2c.py output directory
+  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+warning: build failed, waiting for other jobs to finish...

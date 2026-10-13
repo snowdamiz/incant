@@ -1,0 +1,97 @@
+{
+  "head": "5e3de230755ef10dab86e35faae12818066fd7b4",
+  "sources": [
+    {
+      "path": "crates/incant_audio_runtime/src/mixer.rs",
+      "sha256": "9b4928ec942aa66c703e9190bfc2faa33aeff0f09af6024fb380ad9af59bb052"
+    },
+    {
+      "path": "crates/incant_audio_runtime/src/scene.rs",
+      "sha256": "5772a2105fb9a5cbd5d47fec32835837f452baab1236a0cd6e8683e8fd5ae33d"
+    },
+    {
+      "path": "crates/incant_audio_runtime/src/scene/binding.rs",
+      "sha256": "657de6b00a996c9f4635ac9611cfc8979cd5b1f795c28b8d7fc0be3f9f126648"
+    },
+    {
+      "path": "crates/incant_audio_runtime/tests/scene.rs",
+      "sha256": "d36873cae251722fa5709d1bee5cb4fa2b5e76c65b23dfe32fcfebb8184186f4"
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "sha256": "eb6f1807af92e5208436b86cafa4a8ee13d537f2d7ccaf051df6576d84d72f67"
+    },
+    {
+      "path": "crates/incant_game_player/src/session.rs",
+      "sha256": "ea29d2b68b3a24e30ae6bf908c5c769b5e5744b4075b02e68a4667006c8eccee"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/core.rs",
+      "sha256": "db8885eca01d6b194ce9497b6334ac1aacd1561283ccae7aa29d4d143a2f554b"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/hosted.rs",
+      "sha256": "dddd1d2c9e6ebabf9b17e75a17ec872e593e209f3d334ce3265f547198277e99"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/lib.rs",
+      "sha256": "1f3cf3be48f410a388bde88afea3055e11d9c56eb1989f695e9e5908a58485b3"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/offline.rs",
+      "sha256": "19e1b7ae9fa9337bab222134086b00013791a1e12e21fc8eff117f53bd0931bc"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/hosting.rs",
+      "sha256": "add1f3ed165df1979355e99f79e07bae4775ea3575f5043e6a16e1784abfaac9"
+    },
+    {
+      "path": "crates/incant_observe/src/lib.rs",
+      "sha256": "c15032240bdf7ab115762902091330a966a9ee7cb2abc007ea6d854783c2345e"
+    },
+    {
+      "path": "crates/incant_script/src/commands.rs",
+      "sha256": "76c6e5bef2dd67face0d7a08a31a644642684643310ef6409f63fab1e48464f8"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57"
+    },
+    {
+      "path": "crates/incant_script/src/program.rs",
+      "sha256": "d13e6709e8768053de1aa6831d10c8b16a2f0602b24bb19606b22530a58ff15e"
+    },
+    {
+      "path": "crates/incant_script/src/session.rs",
+      "sha256": "101f6ec19a9221a5f658339278b2c127b624bfc47d34739ae03e2e873dedda7f"
+    },
+    {
+      "path": "crates/incant_script/tests/project_bindings.rs",
+      "sha256": "89415d2e7223612293b8797e819290ca3f20196318876ed51f73c50cd72e42a8"
+    },
+    {
+      "path": "sdk/ts/src/native.d.ts",
+      "sha256": "4a9e36893f882a48dc91e1675dbfa780386d44f43c819fdaa45adde16936161c"
+    },
+    {
+      "path": "crates/incant_game_player/src/restart.rs",
+      "sha256": "792e1ec07fda724c071a60d8d1fa1201a95429cebf8ebbfe365049829b5338a8"
+    },
+    {
+      "path": "crates/incant_game_player/src/restart/input.rs",
+      "sha256": "423d520d9dc6204bad59c20a657016fd8d35e19b30da409ecb4ec03a673219db"
+    },
+    {
+      "path": "crates/incant_game_runtime/src/seed.rs",
+      "sha256": "a2ebee27ba7da838d497a63c0dcb9200dbd0c92a8eae416ba17e6eb8bee33b9f"
+    },
+    {
+      "path": "crates/incant_game_runtime/tests/restart.rs",
+      "sha256": "f5e061efaa59d2efa3b9aa279ee09673560ef9bc31a2782b57837b5529142bb8"
+    },
+    {
+      "path": "crates/incant_script/src/restart_request_tests.rs",
+      "sha256": "5fc3fbd18c23e9bc4fd24b7842afa09288ce238cc33688b2d0ebd94af229cb29"
+    }
+  ]
+}

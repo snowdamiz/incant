@@ -194,6 +194,16 @@ where
     pub fn logs(&self) -> Result<&incant_script::NativeLogs, H::Error> {
         Ok(self.ready()?.native.logs()?)
     }
+    pub fn enable_restart_requests(&mut self) -> Result<(), H::Error> {
+        Ok(self.ready_mut()?.native.enable_restart_requests()?)
+    }
+    pub fn take_session_request(
+        &mut self,
+    ) -> Result<Option<incant_script::SessionRequest>, H::Error> {
+        // The entire live composition is absent throughout the accepted operation.
+        // A later audio/host failure drops its native request together with it.
+        Ok(self.ready_mut()?.native.take_session_request()?)
+    }
     pub fn rebind(&mut self, actions: InputActions) -> Result<(), H::Error> {
         Ok(self.ready_mut()?.native.rebind(actions)?)
     }
@@ -212,6 +222,12 @@ where
         self.suspended = suspended;
         self.live = Some(live);
         Ok(())
+    }
+    /// Only for constructors that created SceneAudio with its private master
+    /// initially paused. No backend command is issued by this bookkeeping.
+    pub(crate) fn initially_suspended(mut self) -> Self {
+        self.suspended = true;
+        self
     }
     pub fn refresh_host(&mut self) -> Result<(), H::Error> {
         // Presentation of the current committed world is independent of the

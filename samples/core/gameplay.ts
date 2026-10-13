@@ -193,6 +193,10 @@ export default {
     }
     state.previousPlayer = at;
     if (state.phase !== 'playing') {
+      if (context.input.actions.restart?.pressed) {
+        context.commands.requestRestart();
+        return undefined;
+      }
       velocity(player, [0, 0, 0]);
       for (const entity of c.enemies) velocity(actor(actors, entity), [0, 0, 0]);
       present(context, c, state, stored);

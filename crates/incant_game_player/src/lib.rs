@@ -10,6 +10,7 @@ pub mod mobile;
 mod observe;
 mod package;
 mod program;
+mod restart;
 mod session;
 mod startup;
 mod ui;
@@ -108,27 +109,22 @@ pub fn run(
     }
     let actions = serde_json::from_slice(&bounded(&args[4], 256 * 1024)?)?;
     let clips = startup::clips(&args[1], &args[2])?;
+    let program = program::load(module)?;
+    let mut restart = restart::Restart::prepare(&scene, &program, &actions, &clips, &spatial)?;
     let mut game = if let Some(path) = &checkpoint.load {
         Player::from_checkpoint(
             &bounded(path, incant_script::MAX_CHECKPOINT_BYTES)?,
             &scene,
-            program::load(module)?,
+            program,
             actions,
             clips,
             rate,
             spatial,
         )?
     } else {
-        Player::new(
-            scene,
-            program::load(module)?,
-            actions,
-            clips,
-            rate,
-            spatial,
-            ticks,
-        )?
+        Player::new(scene, program, actions, clips, rate, spatial, ticks)?
     };
+    restart.enable(&mut game)?;
     game.validate_ui_recording(replay.has_ui())?;
     // A requested save must be supported before gameplay begins. The final save
     // is checked again: a script may introduce an unsupported capability later.
@@ -145,24 +141,38 @@ pub fn run(
     if let Some(plan) = &mut observations {
         plan.observe(game.world()?, game.input()?)?;
     }
-    let mut output = vec![0.; frames as usize * 2];
+    // Resetting the rational audio clock changes fractional rounding. Reserve
+    // the checked per-step ceiling, while retaining the existing total cap.
+    let capacity = (u128::from(ticks)
+        * u128::from(rate).div_ceil(u128::from(game.world()?.tick_rate())))
+    .min(1_000_000);
+    let mut output = vec![0.; capacity as usize * 2];
     let mut offset = 0;
     for tick in 1..=ticks {
         let end = offset + game.next_output_frames()? * 2;
+        if end > output.len() {
+            return Err("output frame bound".into());
+        }
         game.tick_recorded(
-            replay.events_at(tick)?,
+            restart.input.filter(replay.events_at(tick)?)?,
             replay.ui_at(tick)?,
             replay.viewport_at(tick)?,
             &mut output[offset..end],
         )?;
         if let Some(plan) = &mut observations {
-            plan.observe(game.world()?, game.input()?)?;
+            plan.observe_at(start_tick + tick, game.world()?, game.input()?)?;
         }
         offset = end;
+        restart.viewport(replay.viewport_at(tick)?);
+        restart.accept(&mut game, start_tick + tick, (offset / 2) as u128)?;
     }
-    if offset != output.len() || game.rendered_frames()? - previous_frames != frames {
+    if restart.boundaries.is_empty()
+        && ((offset / 2) as u128 != frames || game.rendered_frames()? - previous_frames != frames)
+    {
         return Err("sample clock invariant".into());
     }
+    output.truncate(offset);
+    let frames = offset / 2;
     let world = game.world()?;
     // Bounded by the cooked 128-source cap, not the total world entity count.
     let sources:Vec<_>=world.audio_nodes().filter(|(node,_)|node.source.is_some()).map(|(node,pose)| {
@@ -171,6 +181,10 @@ pub fn run(
     }).collect();
     let bytes: Vec<_> = output.iter().flat_map(|v| v.to_le_bytes()).collect();
     let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources,"logs":game.logs()?});
+    if !restart.boundaries.is_empty() {
+        report["session"] = serde_json::json!({"generation":restart.generation,
+            "host_tick":end_tick,"simulation_tick":world.tick(),"restarts":restart.boundaries});
+    }
     // One final bounded observation, never a tick-time projection. Playback
     // rows contain no asset data or private rational clock remainder.
     report["flipbooks"] = world

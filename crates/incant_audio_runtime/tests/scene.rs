@@ -692,3 +692,26 @@ fn master_suspend_freezes_static_and_streamed_cursors_without_resuming_paused_so
         assert_eq!(host.source_state(id(2)).unwrap(), SourceState::Paused);
     }
 }
+
+#[test]
+fn startup_suspended_master_has_no_audible_prefix_or_cursor_advance() {
+    let temp = tempfile::tempdir().unwrap();
+    let key = tone(&temp);
+    // Static sound uses Kira's unchanged device-side transport here. Streaming
+    // checkpoints/offline behavior remain covered by the ordinary restart test.
+    let world = world(vec![bus(), source(false)]);
+    let settings = || incant_audio_runtime::AudioManagerSettings {
+        backend_settings: 48000,
+        ..Default::default()
+    };
+    let mut paused =
+        SceneAudio::new_suspended(&world, vec![binding(&temp, &key)], settings()).unwrap();
+    let mut control =
+        SceneAudio::new_suspended(&world, vec![binding(&temp, &key)], settings()).unwrap();
+    for frames in [1, 17, 997, 31] {
+        assert_eq!(render(&mut paused, frames), vec![0.; frames * 2]);
+    }
+    paused.set_suspended(false).unwrap();
+    control.set_suspended(false).unwrap();
+    assert_eq!(render(&mut paused, 1337), render(&mut control, 1337));
+}
