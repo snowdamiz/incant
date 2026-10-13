@@ -1,6 +1,66 @@
 # 0073 result — output upscaling numeric execution and visual-review preparation
 
-## Status
+## Revision 1 (current): fail-closed analyzer and corrected-source readiness
+
+**Status: PREPARED, not run.** The root review blocker is fixed, and the stage is
+ready for root's supervised CPU build grant. Details are in
+[`revision-result.md`](revision-result.md).
+- No Cargo build, target, compile, GPU child, render or capture ran in this
+  revision.
+- No appearance, performance, phone or gate claim is made.
+
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort max.
+Root's `claude-0073-analyzer-repair-acp.log` header reads `Claude session
+verified: Opus 5.5; thinking: max`.
+
+**Inputs:** brief `cd7c45b7…` (root priority revision `15ddda49`) and root review
+receipt `d307b665…`; both hashes were verified.
+
+**Applied:**
+- **`analyze.py` fails closed.** It validates exact complete plan cases, the
+  plan's contract checks, the current ledger, debit, report, PNG and log
+  bindings, and every independent comparison. It always retains a diagnostic
+  summary and exits nonzero on any problem. `publish` accepts only the latest
+  passing summary whose bindings still match.
+- **Source pinning comes from root grants.**
+  - `build-ready.json` names a commit object and root's freeze by SHA-256.
+    Every build input of the exported commit must match that freeze exactly.
+  - `review-ready.json` binds the build record.
+  - `cooked-*` and `native-metalfx` builds are refused.
+- **Corrected source read-only at `9a65b6c8`.** The fixture's contract checks
+  are independent of the changed math, so its source is unchanged. Three prose
+  expectations are superseded: overlays (now unjittered), motion disocclusion
+  and the viewport border.
+
+**Evidence (CPU only, receipts in `visual/preparation/r1-*.json`):**
+- the 17 unchanged lifecycle controls pass;
+- 17 analyzer controls pass: one positive, the rest negatives (missing
+  case/report/PNG, bad hash, replaced build record, false
+  contract/tile/statistic/UI/chrome, failed child, stop latch, zero-verdict
+  evidence, stale or superseded summary, CLI exit codes);
+- 10 source-pinning controls pass;
+- selfcheck reports `all_pass`.
+
+**Frozen identity:** commit `9bcd1e0e`, visual tree `09271a62…`; fixture
+`f8ec6311…` (unchanged).
+
+**Screenshots:** none; nothing has been rendered.
+
+**Root's next actions:**
+1. The final committed corrected source and its freeze, generated from that
+   commit. The current generation-2 freeze for `9a65b6c8` includes 11
+   uncommitted rows and an uncommitted doc, so it would be refused.
+2. `build-ready.json` for the supervised CPU build.
+3. After the build, `review-ready.json`.
+
+**Limits:**
+- The fixture has not been compiled against the corrected source.
+- This covers the portable path only.
+- StageA stays historical evidence for the `0452c5f5` binary only.
+
+## Revision 0 (preserved; only its headings are nested one level)
+
+### Status
 
 - **StageA (granted once): executed and passed.** Both exact tests ran once on
   Apple M5 Pro (Metal) and exited 0. The GPU was released with no owned processes.
@@ -16,7 +76,7 @@
   MetalFX, the cooked-native path, or any phase-gate approval. The numeric pass
   is not used as appearance evidence.
 
-## Model, effort, brief
+### Model, effort, brief
 
 - **Model:** Claude Opus 5.5 (`claude-opus-5-5`).
 - **Thinking effort:** max. Root's
@@ -32,7 +92,7 @@
 - **Files left to root:** `numeric.py` and the brief are root's and are
   unmodified.
 
-## Commands and results
+### Commands and results
 
 | Command | Result |
 |---|---|
@@ -50,13 +110,13 @@ this stage:
 - any GPU appearance run;
 - regression suites.
 
-## Screenshots
+### Screenshots
 
 None. StageA reads back scalar rows only, and StageB has not run. The 13 planned
 PNGs (960×540) are listed in `visual/plan.json`; after a grant they will be
 published to `handoffs/0073-upscaling-review/screenshots/`.
 
-## Changed paths
+### Changed paths
 
 - `handoffs/0073-upscaling-review/numerical-result.md`
 - `handoffs/0073-upscaling-review/tools/numeric_receipt.py`
@@ -76,7 +136,7 @@ Every commit carries `Built-by: claude`.
 `runner-console.{stdout,stderr}` beside root's StageA outputs in
 `~/.codex/incant-evidence/0073-upscaling-numeric/`. Nothing was pushed.
 
-## Rationale
+### Rationale
 
 **StageB visual direction (mine).** One 960×540 physical output is compared
 across FULL, DRS 8/16 and UP 8/16, using identical crop rectangles.
@@ -109,7 +169,7 @@ half-float step below round-to-nearest, which is consistent with
 round-toward-zero conversion. This is within the test's 1e-3 tolerance and is
 not a defect claim.
 
-## Open questions for root
+### Open questions for root
 
 1. **Target and pins.** Which `~/.codex/*-target` should the grant name, and
    which prior release(s) should it pin? StageA's `gpu-released.json` is
@@ -123,7 +183,7 @@ not a defect claim.
 4. **Regression suites.** Should the existing ignored lib/`model_gpu` suites run
    with the same frozen inputs, budgeted separately?
 
-## Limits
+### Limits
 
 - **StageA:** one local Metal adapter and scalar readback. Its 22 actually
   submitted frames are derived from source and were not instrumented.
