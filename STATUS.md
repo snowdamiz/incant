@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Exact physics saves — inert island ownership verified locally
+
+The inert path now checks reciprocal active/persistent body membership and
+contact-link ownership, retaining native ordering, free stacks and deferred
+split scheduling. Actual 2D/3D observations include sleep/wake, empty awake
+containers, fixed-body active history, reorder, removal/reuse and delayed splits.
+115 CPU tests, Clippy, wasm32 and dependency/contract checks pass; independent
+review is pending.
+Stamp-sensitive scratch, solver masks/buckets, complete collider/owner composition
+and continued live execution remain open; physics saves stay refused.
+[Island contract](docs/spikes/physics-inert-islands.md).
+
 ## Exact physics saves — inert regular body state verified locally
 
 The inert path now retains every fixed regular rigid-body field, including
