@@ -1,0 +1,1828 @@
+{
+  "format": "incant-physics-world-boundary-evidence",
+  "version": 1,
+  "base": "64f7db33",
+  "vendor_workspace_commit": "219e83bf5f2a0bc26a81168a231bad09259925cd",
+  "source": {
+    "base": "219e83bf5f2a0bc26a81168a231bad09259925cd",
+    "qualification_source": "source-003 + workspace-source-001",
+    "post_qualification_changes": [
+      "docs/spikes/physics-world-boundary.md",
+      "STATUS.md"
+    ],
+    "files": [
+      {
+        "path": "AGENTS.md",
+        "bytes": 5470,
+        "sha256": "cab17f69f519b40681263a4e6cdf6de7d74f00e3d25316c769e6ec63ee3e145a"
+      },
+      {
+        "path": "Cargo.lock",
+        "bytes": 252688,
+        "sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f"
+      },
+      {
+        "path": "Cargo.toml",
+        "bytes": 3722,
+        "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5"
+      },
+      {
+        "path": "PLAN.md",
+        "bytes": 130811,
+        "sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c"
+      },
+      {
+        "path": "STATUS.md",
+        "bytes": 179176,
+        "sha256": "c178cfc757c9156951797e116f00b2a1fc371fd22aec63461909214c87515999"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/Cargo.toml",
+        "bytes": 890,
+        "sha256": "c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/arena.rs",
+        "bytes": 3513,
+        "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+        "bytes": 3897,
+        "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/attachment.rs",
+        "bytes": 6495,
+        "sha256": "4b39400af10ff730281a2715652d512168c7322fb6e776fd7fe099a1215705c9"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+        "bytes": 4618,
+        "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/body_state/codec.rs",
+        "bytes": 8261,
+        "sha256": "d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/body_state/mod.rs",
+        "bytes": 4468,
+        "sha256": "77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/body_state/validate.rs",
+        "bytes": 4572,
+        "sha256": "518f6a6c760987d642bb9340ede773710ab9eef2152761a4cebb83b812a20553"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/broad_owner/codec.rs",
+        "bytes": 3938,
+        "sha256": "23b2207e767287ccdc900f44d0b8b8c4674fa3dc8df0e9f50e61da54785fde9a"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/broad_owner/mod.rs",
+        "bytes": 2515,
+        "sha256": "fbb1a31904306751fa04dac42d5d82bf383acf7b682c465de112b307d3c27274"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/broad_owner/validate.rs",
+        "bytes": 6342,
+        "sha256": "0ebfa66d69615e5596c225bd0ecb9d7c3e26c59f35f80e4f60dc936b397e6d7b"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/ccd_state/codec.rs",
+        "bytes": 3217,
+        "sha256": "52f66ee5dc350e5c7f0dfefe127def77ed56d3ef3d83a6a45419475d36a013d4"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/ccd_state/mod.rs",
+        "bytes": 1754,
+        "sha256": "2208abe0672f6e1c0b345b515a1e72c04135678fa26c9be504e1233a04348679"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/ccd_state/validate.rs",
+        "bytes": 3045,
+        "sha256": "c647e1c0e538ea46c36a8dcde63b970fda324ae5617c3915ed54740c5e77ca96"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/coarena.rs",
+        "bytes": 3573,
+        "sha256": "b9ca8908016a0f7762c57b9e0e2b363610d193f8fcabb351c720431ec4e9bfc4"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+        "bytes": 1992,
+        "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/codec.rs",
+        "bytes": 6265,
+        "sha256": "31cbfc95b4e03cdbd88d47b9f60e9196601a463e6080bef87bc5cf9d8249d8c6"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/collider_state/codec.rs",
+        "bytes": 6165,
+        "sha256": "7992f85b674725684fc38f6b2b4c54d85c5652629cf397cf22823a9dea8eb914"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/collider_state/mod.rs",
+        "bytes": 3850,
+        "sha256": "1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/collider_state/validate.rs",
+        "bytes": 2648,
+        "sha256": "8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+        "bytes": 6753,
+        "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+        "bytes": 5025,
+        "sha256": "66abaf52fb7f4c5f29aa656e582b8fa95a9ff0d50321dfb85a4d4aa9b780a998"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+        "bytes": 7710,
+        "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+        "bytes": 6402,
+        "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+        "bytes": 4325,
+        "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/geometry.rs",
+        "bytes": 4037,
+        "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+        "bytes": 3933,
+        "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/graph.rs",
+        "bytes": 4914,
+        "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+        "bytes": 3196,
+        "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/integration_config/codec.rs",
+        "bytes": 3787,
+        "sha256": "d590d72ce311cd096b4de2c28e749292b1318638965ecb8bf5bcbb1861baa079"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/integration_config/mod.rs",
+        "bytes": 2888,
+        "sha256": "5f33cea0b5f77bab0db2816753fdc5fb0a31206573c02e4891c21cb102223e99"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/integration_config/validate.rs",
+        "bytes": 2494,
+        "sha256": "029c1d580617c3289df4661eb46016d3c35210ef088aa472f0314446d43ce639"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/island_state/codec.rs",
+        "bytes": 7181,
+        "sha256": "b553e1caba0e4d95710913c700b5e197e090fd55d7b6ffd173bceb7f81e47270"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/island_state/mod.rs",
+        "bytes": 3207,
+        "sha256": "c12cb7a6fbc27f230def44b97ede5e3c555f9e1bbc5b1476238f27d4a6032ac0"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/island_state/validate.rs",
+        "bytes": 9463,
+        "sha256": "69c4daacf90dc4a4ee9233632289f287549155db4bd555ef2850e53e5c9ed760"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/lib.rs",
+        "bytes": 2694,
+        "sha256": "bdcc01451063d048f22d49ddc8d2ad18aa0ebafc2651ac0cf431295d0fb68890"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/narrow_owner/codec.rs",
+        "bytes": 3070,
+        "sha256": "c8a65bce9ff731f8bc6f2ef5cdeb44e4f06e81184f0960845d4d10aa1095e4ec"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+        "bytes": 2341,
+        "sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+        "bytes": 4760,
+        "sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pair_state/codec.rs",
+        "bytes": 4637,
+        "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pair_state/mod.rs",
+        "bytes": 2635,
+        "sha256": "6976b53438e4f3bde526f16ed532f7c54edad20839b6b525b497f873ea56e4e7"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pair_state/validate.rs",
+        "bytes": 5380,
+        "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pending_bvh.rs",
+        "bytes": 3661,
+        "sha256": "ebf007d74f072c5e5308a016cfbd19b98356f179272d1947bed59684e989d3f9"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pipeline_state/codec.rs",
+        "bytes": 2318,
+        "sha256": "ef125dbc267c2d684a1448dbb89da4063c3155098441eecc664508ec2731cf9d"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pipeline_state/mod.rs",
+        "bytes": 1888,
+        "sha256": "55bf6f7e3df90a892a95d7b29cc5b12115dccfa1761ac71294e94eb3473b5f2c"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pipeline_state/validate.rs",
+        "bytes": 1591,
+        "sha256": "9f08847313524f32dcc5c32448cedc45077236701cfd7f427406a3b004000fbf"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/records.rs",
+        "bytes": 3267,
+        "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/rigid_owner/codec.rs",
+        "bytes": 4485,
+        "sha256": "5797cd96787d8b3a1aeef18f00a7b772b7274f2e07f2888c09cee2a060a09940"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+        "bytes": 2688,
+        "sha256": "b8a3b88d5462e9f4453c3bdbb3ffc953c131396529c641ab935a3f680cf67372"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+        "bytes": 9653,
+        "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/validate.rs",
+        "bytes": 6338,
+        "sha256": "b2b4e32f6424fc1882c23894b6dfeb3728ea370abff610a48cc40e8341b88628"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/codec.rs",
+        "bytes": 3861,
+        "sha256": "8f393157e2b98242375e5b1e8acfbeed775fd2700a98280848f79d8878ce8193"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/decode.rs",
+        "bytes": 3594,
+        "sha256": "9086be4d46da1e1590231f8c7e876883b4b86fc99af0a23d29878629fa62e6e4"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/metadata.rs",
+        "bytes": 2602,
+        "sha256": "4aa94ff1990bbf5f3ca3a46b27d3778986c4aade76085e1c2def43ac0c8f1089"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+        "bytes": 896,
+        "sha256": "49c38e589d4ef26d76eb5404b683ee80da947b0b94bda2f3b5c68f45d8412593"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/shapes.rs",
+        "bytes": 1891,
+        "sha256": "5b9f934afac28386aa09f68eb08d4282bf66a2f52cb22c2d9233e0c7bb1f5c4e"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/validate.rs",
+        "bytes": 811,
+        "sha256": "751385672c1a766b70c029c58bafbb52d00aa1098c5ad3a925adc61232863772"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+        "bytes": 11111,
+        "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+        "bytes": 14209,
+        "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+        "bytes": 13794,
+        "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/body_state.rs",
+        "bytes": 13389,
+        "sha256": "3a6a4e970138b68e4aecf7e48c8eba60159601525df0ba60720db51980b7f135"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/collider_state.rs",
+        "bytes": 16468,
+        "sha256": "71ed5076522eca3335ac639b4aca9a3762ae94e7befc49cd38e9f996b756b127"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+        "bytes": 11858,
+        "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+        "bytes": 6582,
+        "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+        "bytes": 9274,
+        "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/integration_config.rs",
+        "bytes": 4161,
+        "sha256": "c6088a012445849820f0942a08bc9dfebc6aa1ddbde9fc5ba62dfd932bdcc0b6"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/islands.rs",
+        "bytes": 12127,
+        "sha256": "45ed38f17af142353b5fbc829816cfa5576ce504d4de017f545fc00ff1cf95d8"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/manifolds.rs",
+        "bytes": 13804,
+        "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/pair_state.rs",
+        "bytes": 9879,
+        "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/pipeline_state.rs",
+        "bytes": 17315,
+        "sha256": "ac2326c930e75a501d9dfca99ff26baf5ba699fe725499a7eee0387be3e254e5"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/body_capture.rs",
+        "bytes": 5588,
+        "sha256": "fcd30fc62edffeaa69d46804d1d0630e41c6583fc269c1d7887412642c2ce231"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/body_fixture.rs",
+        "bytes": 2268,
+        "sha256": "d5d7defe6f604e12dea355c97e42702c8a7dc809c04befedaaec44e0e4c01730"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/broad_capture.rs",
+        "bytes": 3783,
+        "sha256": "78637ddb85ae37324e842f92ca97ee029f8a364b3463b19176da39f58d1e37e5"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/broad_cases.rs",
+        "bytes": 11923,
+        "sha256": "39c7229efa6e462cad50d115a5c21922166d1858271bf7613a4647004d89bd19"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/broad_checks.rs",
+        "bytes": 8164,
+        "sha256": "0d1d1d5aa2de49766c388e0adb7908a99810e040a6b08bb7dfc32fc9a1744247"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/ccd_capture.rs",
+        "bytes": 7408,
+        "sha256": "ab52fa2ec6eca16efc920e90bea002c2fb90532f29b5a9963a0c7198d2b8e5d9"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/collider_capture.rs",
+        "bytes": 2883,
+        "sha256": "40979f7626c7330be432694fec35173075b39c21a5e3d4bdc542091f9618721f"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/collider_cases.rs",
+        "bytes": 7573,
+        "sha256": "a2fa8853af515864cdf0f64c096868ec8972daa42e5c363d2550bd4899633ca5"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/continuation_cases.rs",
+        "bytes": 8569,
+        "sha256": "8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/integration_fixture.rs",
+        "bytes": 1554,
+        "sha256": "8641ae5c9fb720e34c2b238469082406d9b49151b356351df1bfc17022868d1a"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/island_capture.rs",
+        "bytes": 3340,
+        "sha256": "051367e268049c2cfe3c855ef1b071409dd1d94ca80d5628a68fc6c4b3a22fd4"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/island_cases.rs",
+        "bytes": 17548,
+        "sha256": "bffd679b5ffff4f4dc990d3bfd1fd157771bd668496aa030a1f83151a9eb76e4"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+        "bytes": 4776,
+        "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/narrow_cases.rs",
+        "bytes": 15648,
+        "sha256": "6d8ecc4da3862f30c385ebb0eadd0b0298185f5dc7290cd534d19b88371443c7"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/narrow_checks.rs",
+        "bytes": 4799,
+        "sha256": "8a8a3270ede58f59fb3920f69cf0b907fde6a37a85a34098ef762bf36a5f2ad8"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+        "bytes": 6485,
+        "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/rigid_owner_capture.rs",
+        "bytes": 1939,
+        "sha256": "580bb53027a822c193cb9990d9e89920ee6df3f96dcb5e51d6d835b6c01e52fd"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/world_capture.rs",
+        "bytes": 13771,
+        "sha256": "c6b9918865105f78d2bf855b82583dd14fe8bc3c872d66282eec345df6f31a51"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/world_cases.rs",
+        "bytes": 6927,
+        "sha256": "021a71b1e5c4d331c86207e85948dfc45e82ed49dd8424a75bda3793e1da6880"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/world_checks.rs",
+        "bytes": 3340,
+        "sha256": "fc8f1ee28ea4eb2fd468653f02d838b512a0b15aa40e0b18f1424996dd2bcb94"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+        "bytes": 8159,
+        "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+        "bytes": 12783,
+        "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+        "bytes": 13415,
+        "sha256": "799e2c75c3252b3e53e1826fde731d1c9716fed44dc923722df0eab5f9e254ee"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_ccd.rs",
+        "bytes": 7055,
+        "sha256": "d29f6dd22ecd978981948bb06bf0c9d248e1e7c2958aafa61f985b77e65cc112"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+        "bytes": 10821,
+        "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+        "bytes": 5690,
+        "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_integration.rs",
+        "bytes": 7551,
+        "sha256": "b63ec3b6b6dfcc7f297be348acb6beea7572a2e00f25b691d4a89b3ba3530eb9"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+        "bytes": 37076,
+        "sha256": "1921e00700f29aa1c901cd1ecaf6939e1131bae922d452124ac328b9dd246c4a"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+        "bytes": 4727,
+        "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89"
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_pipeline.rs",
+        "bytes": 8523,
+        "sha256": "02c27ccedf087e065ccbcbb9574737035bde752c2d29c662bfa73e0d5f48b15a"
+      },
+      {
+        "path": "docs/spikes/physics-world-boundary.md",
+        "bytes": 6118,
+        "sha256": "e60f9e7437d53cdd4d111f9019f35bb84546f2409b087bbf3e35d3ee4b4cb527"
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_PATCH.md",
+        "bytes": 1976,
+        "sha256": "9eca6238e4d490d058615483d3404608ede57953e149339d928dedab88e51c32"
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_PIPELINE_CAPTURE.json",
+        "bytes": 881,
+        "sha256": "f94ec637ac21f2cd01b78fdf90e24190a88bf04f3b10a43459b90351e55521bd"
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_TRUSTED_WORKSPACE.json",
+        "bytes": 1253,
+        "sha256": "260e3f2d0b81c3e9bc2109e07b692bdef3fd83ae3da319aa497459839cf79968"
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/mod.rs",
+        "bytes": 1600,
+        "sha256": "a89b0fedf80778489347aaf4a256458507328263dbc97fd136e80001ba8746a0"
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/physics_pipeline/checkpoint.rs",
+        "bytes": 3008,
+        "sha256": "62cc49a4a27452c0cf05b217f35f01582652684098d939446f928d85b47f1258"
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/physics_pipeline/checkpoint_workspace.rs",
+        "bytes": 2443,
+        "sha256": "4209fd543a43d85e31e0ae05d2a6278d5a1befd45e8a77a3145bd11d58697630"
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/physics_pipeline/mod.rs",
+        "bytes": 13823,
+        "sha256": "637afd12bd7e2fb84603da4872e8d115f1d094121a5b1c6a507177284dca030d"
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_PATCH.md",
+        "bytes": 1976,
+        "sha256": "9eca6238e4d490d058615483d3404608ede57953e149339d928dedab88e51c32"
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_PIPELINE_CAPTURE.json",
+        "bytes": 881,
+        "sha256": "f94ec637ac21f2cd01b78fdf90e24190a88bf04f3b10a43459b90351e55521bd"
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_TRUSTED_WORKSPACE.json",
+        "bytes": 1253,
+        "sha256": "260e3f2d0b81c3e9bc2109e07b692bdef3fd83ae3da319aa497459839cf79968"
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/mod.rs",
+        "bytes": 1600,
+        "sha256": "a89b0fedf80778489347aaf4a256458507328263dbc97fd136e80001ba8746a0"
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/physics_pipeline/checkpoint.rs",
+        "bytes": 3008,
+        "sha256": "62cc49a4a27452c0cf05b217f35f01582652684098d939446f928d85b47f1258"
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/physics_pipeline/checkpoint_workspace.rs",
+        "bytes": 2443,
+        "sha256": "4209fd543a43d85e31e0ae05d2a6278d5a1befd45e8a77a3145bd11d58697630"
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/physics_pipeline/mod.rs",
+        "bytes": 13823,
+        "sha256": "637afd12bd7e2fb84603da4872e8d115f1d094121a5b1c6a507177284dca030d"
+      }
+    ]
+  },
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/source-004-final/freeze.json",
+    "bytes": 22817,
+    "sha256": "172b824a1df46c0f1e7386524e6dfe1d780bc7a54946e6adb3d7690c25cc932a"
+  },
+  "qualification_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/qualification-001/freeze.json",
+    "bytes": 22618,
+    "sha256": "6267eb1fb0892c210a9e10436dbe5ea0435e385aa1f0d7b5ed6b5d79b8fdd8b7"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/physics-world-boundary-logs.json.gz",
+    "bytes": 598157,
+    "sha256": "bbddd8784e5c8bff141f38751ebd995885b0cc429d53317c5c729d2873ec570c",
+    "records": 608,
+    "payloads": 162
+  },
+  "commands": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894931.35473,
+      "duration_seconds": 4.664128065109253,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/clippy-001.log",
+      "sha256": "0186c12dc0b71d26f9348dc21c9abfdb4ae299b8d8f40c3ee17eb43d0bc195ab",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/clippy-001.json",
+        "bytes": 633,
+        "sha256": "f315b872fbf8b5c518e4d2813211709e9a9a3bbb752ddea2ea29adf9811dbf88"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894939.131517,
+      "duration_seconds": 0.030504941940307617,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/conventions-001.json",
+        "bytes": 505,
+        "sha256": "981c32e9625d433a549d66818dd6249d282b9a407455100b003683bfe0d38afd"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894939.19613,
+      "duration_seconds": 0.02508091926574707,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/diff-001.json",
+        "bytes": 467,
+        "sha256": "3e7130cbdaaca2a1ce88e538b6d4ce82f179d429cbf921207173fec66a7ab9e7"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791895040.923928,
+      "duration_seconds": 0.036450862884521484,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/diff-final.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/diff-final.json",
+        "bytes": 471,
+        "sha256": "31ef12b33a5fedee724b834b6aa0c4ac0b941c8d7e9330af3a7d18c18e552f58"
+      },
+      "source_generation": "source-004-final docs only"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894937.52059,
+      "duration_seconds": 1.5828468799591064,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fmt-001.json",
+        "bytes": 497,
+        "sha256": "2892d45dc978b6113cb1fa82b852aee5c1ac8e342beb6c5c4e9aca422b39886f"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "world_boundary_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894431.845056,
+      "duration_seconds": 19.46155595779419,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-003.log",
+      "sha256": "4292b3ee3e1b7ab618a17be6c2e43e4851e4513097321c0b74f0fef1e4e5adf0",
+      "tests": [
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-003.json",
+        "bytes": 667,
+        "sha256": "ca6b9434b4e4c1b7a1d9f863fdfef08b2579d8ed7efabdbb4e8b2fc2b3a1aec7"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "env",
+        "RAYON_NUM_THREADS=2",
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--features",
+        "rapier2d/parallel,rapier3d/parallel",
+        "--test",
+        "trusted_manifolds",
+        "world_boundary_",
+        "--",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894891.868216,
+      "duration_seconds": 39.449787855148315,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-parallel-001.log",
+      "sha256": "ef0df2c2581b464f0dccda445c6d8d1aa9296855fad9dd933d4c2e2ecff13600",
+      "tests": [
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-parallel-001.json",
+        "bytes": 800,
+        "sha256": "124a5828e9c5600f48c91a0e3f9dae99d5259a5c516a505003772108c6ff4a7a"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--edges",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894936.757612,
+      "duration_seconds": 0.1170051097869873,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/lean-001.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/lean-001.json",
+        "bytes": 593,
+        "sha256": "46c76edb50d38c50f4813d184db12a40d3383a393121cf81a20fed6b06e208b3"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894936.90105,
+      "duration_seconds": 0.594822883605957,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/runtime-graph-001.log",
+      "sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/runtime-graph-001.json",
+        "bytes": 525,
+        "sha256": "6d8096aed9f8cfe4e5e442b87118cbfea44cd3c6246b5954846e19b2159531a7"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894834.220256,
+      "duration_seconds": 10.590564966201782,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/tests-default-001.log",
+      "sha256": "7a15fac7644a32325bb46ed32d6b11414f06c67d00b46507a9b06a43550c8fa2",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 54,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/tests-default-001.json",
+        "bytes": 612,
+        "sha256": "c667efaad56ead3f85ccc4ff89c9a8951a6f28bdf694718423982826b5a56848"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894844.838263,
+      "duration_seconds": 47.00448489189148,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/tests-fast-001.log",
+      "sha256": "4f7f6fc66834f757bf041f88dded6e598e7e2697638a885bde3a8d8e3db9cb07",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 54,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/tests-fast-001.json",
+        "bytes": 681,
+        "sha256": "516cf7b0ea978db3777110e7b4c8f9f4a23dbf727b62d88098fe213548b24bdf"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894936.044707,
+      "duration_seconds": 0.6859138011932373,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/wasm-001.log",
+      "sha256": "30453bcfc8b63138879aeed646158dff8d001cb2d0cca38395253fdc3783bacd",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/wasm-001.json",
+        "bytes": 634,
+        "sha256": "a6e6fbf269596322179ef6b486602a56179bcd328659cb2092d3db0417ac7d92"
+      },
+      "source_generation": "source-003 + workspace-source-001"
+    }
+  ],
+  "failed_attempts": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "spatial::world_boundary_warm",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894355.282037,
+      "duration_seconds": 0.15610599517822266,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fixture-diagnostic-001.log",
+      "sha256": "41c912244e3df08ba78595186855b3cc1e8de8ecb1cbbe7c7c1206a023bac511",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fixture-diagnostic-001.json",
+        "bytes": 695,
+        "sha256": "6041595aaf8ebbfda64ed6eeae710a73070c8383f5462514ec88aa5298f94132"
+      },
+      "source_generation": "source-002"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "spatial::world_boundary_warm",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894370.950798,
+      "duration_seconds": 0.15564918518066406,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fixture-diagnostic-002.log",
+      "sha256": "859708798873a3ad9c3fab3e9e733e5628494690ca30586b5ebc1d53d4cfd05b",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fixture-diagnostic-002.json",
+        "bytes": 695,
+        "sha256": "80fdde8fa531a018e349f08e5593169523088823ee1a4c6557100b6fc968886d"
+      },
+      "source_generation": "source-002"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "spatial::world_boundary_warm",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894390.552748,
+      "duration_seconds": 19.89682698249817,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fixture-diagnostic-003.log",
+      "sha256": "210de0f8226a89a6ae446aaf45c6dfacc439865837ae5a6af3c2539b5d1177a0",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 1,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/fixture-diagnostic-003.json",
+        "bytes": 693,
+        "sha256": "80720fcc24ff352a9c30368180bf61c7eaf353ef501423f1096ef6e8869e8412"
+      },
+      "source_generation": "historical diagnostic fixture, retained raw log"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "world_boundary_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894221.5978088,
+      "duration_seconds": 18.512141227722168,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-001.log",
+      "sha256": "e732c2721cf42e67706ed3089c3d789f0627e42ca8e53f298241b431f4883eef",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-001.json",
+        "bytes": 671,
+        "sha256": "98a62c01b24596bf0cf18868c9211fac70df2a4256f93c26500757d751533ede"
+      },
+      "source_generation": "source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "trusted_manifolds",
+        "world_boundary_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791894282.829729,
+      "duration_seconds": 19.687448024749756,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-002.log",
+      "sha256": "2d9f341be8477fe6f75ad0b01968278071a5c47f8d8d0da359aba0bb8ac99913",
+      "tests": [
+        {
+          "passed": 9,
+          "failed": 1,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-002.json",
+        "bytes": 670,
+        "sha256": "8dbb3788c9dd383ef32a4568296785ff5dd3afb8bb455eb66a8081e5d342df6c"
+      },
+      "source_generation": "source-002"
+    }
+  ],
+  "failure_explanation": {
+    "focused-001": "Test-only public joint-set emptiness API corrected before compilation.",
+    "focused-002": "3D warm check observed ordinary manifolds only, omitted actual clustered warm starts.",
+    "fixture-diagnostic-001": "Failed source search prevented diagnostic patch; unchanged previous test reran.",
+    "fixture-diagnostic-002": "Patch precondition failed before source edit; unchanged previous test reran.",
+    "fixture-diagnostic-003": "Actual diagnostic showed warm=false and sleep=true. Final check includes ordinary plus solver-cluster native impulses without changing scenario or threshold."
+  },
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/frozen-binaries/tests-default-001/trusted_manifolds-81c01168a9839318",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/trusted_manifolds-81c01168a9839318",
+      "bytes": 18351472,
+      "sha256": "e9a9a5152d80222685f53fefd3d4467cda06884d70e59cca11b1ec0fe04a6ee5",
+      "mode": "0o755",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/tests-default-001.log"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/frozen-binaries/tests-fast-001/trusted_manifolds-5707753f042f877b",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/trusted_manifolds-5707753f042f877b",
+      "bytes": 17872160,
+      "sha256": "5a2376c54337c9e4ff6fc5daead5e6d631937f207a1dd6ddca179dab55f1bd24",
+      "mode": "0o755",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/tests-fast-001.log"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/frozen-binaries/focused-parallel-001/trusted_manifolds-2ece91224597867b",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/trusted_manifolds-2ece91224597867b",
+      "bytes": 20763248,
+      "sha256": "578ec15604b85deb2df93514f731037d9352142404c81bf3f23663755f8825be",
+      "mode": "0o755",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/focused-parallel-001.log"
+    }
+  ],
+  "source_reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/reviews/physics-fresh-workspace-source-root-20261013.json",
+      "bytes": 736,
+      "sha256": "76225af882c5dac96f2b4a197803358d87a69f2cb0d60dc767f047dda34d402a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/reviews/physics-world-boundary-source003-root-20261013.json",
+      "bytes": 1070,
+      "sha256": "fdbcdc80613aac4220a3f2d8137d2554d4890a7b61c277eb02e7d76fac0d732e"
+    }
+  ],
+  "results": {
+    "source_generation": "source-003, workspace-source-001",
+    "source_rows_unchanged": 119,
+    "source_sha256": "72fff961e75ecc41ba58d422c32252dd6992a92629e1a8ca03a2ebd28ddcee76",
+    "lock_unchanged": true,
+    "summary": {
+      "tests-default-001": {
+        "passed": 202,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 25,
+        "nonempty_groups": 23,
+        "rows": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            9,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            54,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "exit_code": 0
+      },
+      "tests-fast-001": {
+        "passed": 202,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 25,
+        "nonempty_groups": 23,
+        "rows": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            12,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            9,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            3,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            6,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            4,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            8,
+            0,
+            0
+          ],
+          [
+            54,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0
+          ],
+          [
+            10,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "exit_code": 0
+      },
+      "focused-parallel-001": {
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1,
+        "nonempty_groups": 1,
+        "rows": [
+          [
+            10,
+            0,
+            0
+          ]
+        ],
+        "exit_code": 0
+      },
+      "clippy-001": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0,
+        "nonempty_groups": 0,
+        "rows": [],
+        "exit_code": 0
+      },
+      "wasm-001": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0,
+        "nonempty_groups": 0,
+        "rows": [],
+        "exit_code": 0
+      },
+      "lean-001": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0,
+        "nonempty_groups": 0,
+        "rows": [],
+        "exit_code": 0
+      },
+      "runtime-graph-001": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0,
+        "nonempty_groups": 0,
+        "rows": [],
+        "exit_code": 0
+      },
+      "fmt-001": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0,
+        "nonempty_groups": 0,
+        "rows": [],
+        "exit_code": 0
+      },
+      "conventions-001": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0,
+        "nonempty_groups": 0,
+        "rows": [],
+        "exit_code": 0
+      },
+      "diff-001": {
+        "passed": 0,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 0,
+        "nonempty_groups": 0,
+        "rows": [],
+        "exit_code": 0
+      }
+    },
+    "continuation_steps_per_mode": 280,
+    "parallel_continuation_steps": 280,
+    "counterexample": "omitted retained CCD verdict differs in cache/substep counters, not demonstrated trajectory",
+    "original_binary_copy_modes_preserved": true
+  },
+  "review": "Root accepted isolated workspace and aggregate source003. Final independent evidence acceptance pending.",
+  "limitations": [
+    "No record-to-live constructor, installer, runtime consumer or PhysicsUnsupported change",
+    "Trusted fresh continuation uses typed native Clone owners, never decoded inert bytes",
+    "Exact retained CCD verdict omission changes cache/counter state; no trajectory difference claimed",
+    "Section pointer joins and declared phase/journal fields are not enclosing native authentication",
+    "Derived geometry/mass/AABB and total solver arithmetic/work bounds remain prerequisites",
+    "Default-off adapter refuses actual deferred and quarantine state; only the trusted harness establishes completed positive steps",
+    "Native event/stable-ID ownership, full constructor and restored-byte continuation remain open",
+    "Three executable binaries retained with original modes; successful CPU suites overlap",
+    "No GPU, device, shipping or performance acceptance"
+  ]
+}

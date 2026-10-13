@@ -17,6 +17,10 @@ use crate::pipeline::{EventHandler, PhysicsHooks};
 #[cfg(feature = "incant-checkpoint")]
 mod checkpoint;
 #[cfg(feature = "incant-checkpoint")]
+mod checkpoint_workspace;
+#[cfg(feature = "incant-checkpoint")]
+pub use checkpoint_workspace::CheckpointWorkspaceError;
+#[cfg(feature = "incant-checkpoint")]
 pub use checkpoint::{CheckpointPipelineError, CheckpointPipelineObservation};
 
 mod quarantine;

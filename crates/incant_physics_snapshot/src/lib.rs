@@ -29,6 +29,7 @@ mod pipeline_state;
 mod records;
 mod rigid_owner;
 mod validate;
+mod world_boundary;
 
 pub use arena::*;
 pub use arena_codec::{decode_arena, encode_arena};
@@ -57,6 +58,7 @@ pub use pipeline_state::*;
 pub use records::*;
 pub use rigid_owner::*;
 pub use validate::validate;
+pub use world_boundary::*;
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Error {

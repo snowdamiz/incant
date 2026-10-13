@@ -16,6 +16,25 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Joined physics owner boundary — source and CPU qualification accepted
+
+The [joined inert frame](docs/spikes/physics-world-boundary.md) composes 22
+canonical sections under one aggregate allocation budget and exact borrowed
+witness joins. Its checked decoder invokes a scoped callback only after all
+sections pass; it never constructs a live solver. The separately reviewed
+default-off trusted native adapter preserves the retained CCD verdict while
+replacing scratch. Native Clone owners continue identically for 280 paired
+steps per numerical mode, with warm contacts, sleeping/waking, sensor events,
+removal/reuse and CCD controls. Both 202-case CPU modes, ten parallel controls
+and all ten scoped checks pass. Source and final producer evidence reviews are
+accepted; current-main composition passes 202 CPU cases in each numerical mode, ten
+two-worker controls each and thirteen scoped checks. Final composition review is
+independently accepted; the required fast publication check remains. [Current composition](docs/spikes/physics-world-main225.md).
+Derived geometry/mass/work admission, authenticated capture and the
+whole native constructor remain required. `PhysicsUnsupported` is unchanged.
+
+
+
 ## Temporal owner foundation — current-main CPU qualification
 
 The [owner/change provenance foundation](docs/spikes/temporal-owner-provenance-verification.md)
@@ -25,7 +44,8 @@ Its source and producer CPU evidence are independently accepted. The isolated
 eight-file Rust delta passes 143 default and 172 cooked CPU cases and twelve
 current-main checks without importing private upscaling or MetalFX ancestry.
 The disjoint main225 journal-test join preserves renderer source. Final current-main
-review is independently accepted; the required fast publication check remains. Shader bytes, defaults and memory ceilings are unchanged;
+review and the required fast check passed; PR226 merged. Shader bytes, defaults
+and memory ceilings are unchanged;
 integer shader transport and per-pixel provenance remain open.
 [Current composition](docs/spikes/temporal-owner-main225.md).
 No new GPU, appearance, performance or device result is claimed.
@@ -152,39 +172,37 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main224, 2026-10-13
+## Current overview — main226, 2026-10-13
 
-Development main224 includes the reviewed opt-in cooked renderer families and
+Development main226 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
-Checkpoint23 is frozen at exact main220 through PR213, candidate `3381ccef`,
-with all 23 required contexts and eight workflows preserved. Its macOS journal
-authorization replay test failed; the exact original log is retained and diagnosis
-uses a controlled inherited-lock reproduction and a test-only isolation repair
-independently accepted while the remaining workflows finish. The hosted error was not
-printed, so the exact hosted cause remains inferred.
-[Repair evidence](docs/spikes/journal-replay-test-isolation.md). Checkpoint22 is
-terminal and unpromoted: 22 contexts succeeded; its optional timestamp diagnostic
-failure is retained and repaired in main219. The corrected test keeps forced backend
-selection mandatory and runs only supported timing paths, retaining actual compute
-observations and explicit unsupported records. Hosted successor execution remains
-pending. Later main changes will not move the frozen candidate.
+Checkpoint24 is frozen at exact main226 through PR213, candidate `669bd7ae`,
+with all 23 required contexts and eight workflows preserved. Checkpoint23 is
+terminal and unpromoted: 22 required contexts succeeded and the macOS command
+journal replay assertion failed. Its original error was not printed, so the
+inherited-lock cause remains inferred from a controlled local reproduction.
+The independently accepted test-only isolation repair merged in PR225; production
+locking and authorization are unchanged. [Repair evidence](docs/spikes/journal-replay-test-isolation.md).
+The hosted successor must execute the repair. Earlier checkpoint22's optional
+query diagnostic failure and reviewed main219 repair remain retained. Later main
+changes will not move or restart this frozen candidate.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–224 changes remain outside that tested baseline. No device, performance or
+Later main206–226 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
 exposed the quota/probe issues repaired in PR188/191; checkpoint18 exposed the editor
 test import repaired in PR193; checkpoint19 exposed the cache count and vendored
 Parry compiler-identity issues repaired in PR201/203. Their original failures remain
-retained. The subsequent frozen checkpoint23 preserves
+retained. The subsequent frozen checkpoint24 preserves
 ADR0014's exact selected tree and all 23 requirements.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
