@@ -7,6 +7,7 @@ pub(crate) struct Targets {
     pub depth: wgpu::TextureView,
     pub normals: wgpu::TextureView,
     pub accessibility: wgpu::TextureView,
+    pub scratch: wgpu::TextureView,
 }
 #[derive(Default)]
 pub(crate) struct Cache(Mutex<Option<Arc<Targets>>>);
@@ -43,8 +44,15 @@ impl Cache {
         let targets = Arc::new(Targets {
             size,
             depth: create("SSAO depth", wgpu::TextureFormat::Depth32Float),
-            normals: create("SSAO geometric normals", wgpu::TextureFormat::Rgba16Float),
+            normals: create(
+                "SSAO authored shading normals",
+                wgpu::TextureFormat::Rgba16Float,
+            ),
             accessibility: create("SSAO diffuse accessibility", wgpu::TextureFormat::R8Unorm),
+            scratch: create(
+                "SSAO horizontal accessibility",
+                wgpu::TextureFormat::R8Unorm,
+            ),
         });
         *cached = Some(Arc::clone(&targets));
         Ok(targets)

@@ -2,6 +2,8 @@
 #[cfg(test)]
 mod device_tests;
 mod draw;
+#[cfg(test)]
+mod filter_device_tests;
 mod math;
 mod pipelines;
 #[cfg(test)]
@@ -12,6 +14,8 @@ mod quality_metrics;
 mod quality_oracle;
 #[cfg(test)]
 mod quality_sphere;
+#[cfg(test)]
+mod quality_stripes;
 #[cfg(test)]
 mod quality_tests;
 mod targets;

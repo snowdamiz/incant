@@ -4,6 +4,7 @@ use glam::{DVec2, DVec3};
 #[test]
 fn quality_exact_uniform_inputs_bayer_strata_and_resource_cost() {
     let native = super::math::directions();
+    assert_eq!(super::math::rotations(), rotations());
     for (a, b) in native.iter().zip(directions()) {
         assert_eq!(
             DVec3::new(f64::from(a[0]), f64::from(a[1]), f64::from(a[2])),
@@ -36,13 +37,10 @@ fn quality_exact_uniform_inputs_bayer_strata_and_resource_cost() {
         .collect();
     assert_eq!(steps.iter().copied().reduce(f64::min), Some(0.12890625));
     assert_eq!(steps.iter().copied().reduce(f64::max), Some(0.99609375));
-    // Test-only feasibility accounting. Production remains its original 13 B/px.
-    assert_eq!(
-        size_of::<super::math::Uniform>() + size_of::<[[f32; 4]; 16]>(),
-        736
-    );
+    assert_eq!(size_of::<super::math::Uniform>(), 736);
     assert_eq!(super::math::MAX_PIXELS * 14, 56 * 1024 * 1024);
-    assert_eq!(super::math::BYTES_PER_PIXEL, 13);
+    assert_eq!(super::math::BYTES_PER_PIXEL, 14);
+    assert_eq!(2 * 14 * super::math::MAX_PIXELS, 112 * 1024 * 1024);
     // Old maximum + candidate maximum; two previously queued maxima + current
     // candidate are larger again. Logical idle-cache cap is not total GPU cap.
     assert_eq!((13 + 14) * super::math::MAX_PIXELS, 108 * 1024 * 1024);

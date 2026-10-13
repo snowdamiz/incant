@@ -3,8 +3,9 @@
 // first-layer screen-space visibility approximation, not hidden/offscreen geometry.
 struct Parameters {
     projection:mat4x4f, inverse:mat4x4f, view:mat4x4f,
-    viewport:vec4f, values:vec4f, directions:array<vec4f,16>
+    viewport:vec4f, values:vec4f, directions:array<vec4f,16>, rotations:array<vec4f,16>
 }
+const BAYER=array<u32,16>(0u,8u,2u,10u,12u,4u,14u,6u,3u,11u,1u,9u,15u,7u,13u,5u);
 @group(0) @binding(0) var<uniform> ao:Parameters;
 @group(0) @binding(1) var depths:texture_depth_2d;
 @group(0) @binding(2) var normals:texture_2d<f32>;
@@ -30,12 +31,19 @@ fn position(pixel:vec2f,depth:f32)->vec3f {
     // Stable orthogonal frame even for normals parallel to either reference axis.
     let axis=select(vec3f(0,0,1),vec3f(0,1,0),abs(n.z)>0.9);
     let tangent=normalize(cross(axis,n));let bitangent=cross(n,tangent);
+    // Full internal-target coordinates keep the pattern independent of viewport
+    // origin and deterministic across frames. Transpose the step phase.
+    let phase=vec2u(xy)%vec2u(4u);
+    let rotation=ao.rotations[BAYER[phase.y*4u+phase.x]].xy;
+    let rotated_tangent=tangent*rotation.x+bitangent*rotation.y;
+    let rotated_bitangent=bitangent*rotation.x-tangent*rotation.y;
+    let jitter=f32(33u+2u*BAYER[phase.x*4u+phase.y])/64.;
     var blocked=0.;
     for(var ray=0u;ray<16u;ray++) {
         let k=ao.directions[ray].xyz;
-        let direction=tangent*k.x+bitangent*k.y+n*k.z;
+        let direction=rotated_tangent*k.x+rotated_bitangent*k.y+n*k.z;
         for(var step=1u;step<=4u;step++) {
-            let q=p+direction*(ao.values.x*f32(step)/4.);
+            let q=p+direction*(ao.values.x*(f32(step)-1.+jitter)/4.);
             let clip=ao.projection*vec4f(q,1);
             // Perspective points behind the eye / either clip plane do not occlude.
             if clip.w<=0. || clip.z<0. || clip.z>=clip.w {continue;}

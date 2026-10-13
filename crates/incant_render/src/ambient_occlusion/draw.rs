@@ -7,6 +7,8 @@ pub(crate) struct Prepared {
     targets: Arc<Targets>,
     group: wgpu::BindGroup,
     pipeline: wgpu::RenderPipeline,
+    filter_groups: [wgpu::BindGroup; 2],
+    filter_pipelines: [wgpu::RenderPipeline; 2],
     pub camera: wgpu::BindGroup,
 }
 impl System {
@@ -26,7 +28,7 @@ impl System {
             usage: wgpu::BufferUsages::UNIFORM,
         });
         let group = device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: Some("SSAO depth and geometric normals"),
+            label: Some("SSAO depth and authored shading normals"),
             layout: &self.sample_layout,
             entries: &[
                 wgpu::BindGroupEntry {
@@ -42,6 +44,30 @@ impl System {
                     resource: wgpu::BindingResource::TextureView(&targets.normals),
                 },
             ],
+        });
+        let filter_groups = [&targets.accessibility, &targets.scratch].map(|source| {
+            device.create_bind_group(&wgpu::BindGroupDescriptor {
+                label: Some("SSAO immutable filter inputs"),
+                layout: &self.filter_layout,
+                entries: &[
+                    wgpu::BindGroupEntry {
+                        binding: 0,
+                        resource: buffer.as_entire_binding(),
+                    },
+                    wgpu::BindGroupEntry {
+                        binding: 1,
+                        resource: wgpu::BindingResource::TextureView(&targets.depth),
+                    },
+                    wgpu::BindGroupEntry {
+                        binding: 2,
+                        resource: wgpu::BindingResource::TextureView(&targets.normals),
+                    },
+                    wgpu::BindGroupEntry {
+                        binding: 3,
+                        resource: wgpu::BindingResource::TextureView(source),
+                    },
+                ],
+            })
         });
         let camera = device.create_bind_group(&wgpu::BindGroupDescriptor {
             label: Some("SSAO forward frame"),
@@ -61,6 +87,8 @@ impl System {
             targets,
             group,
             pipeline: self.sample.clone(),
+            filter_groups,
+            filter_pipelines: self.filters.clone(),
             camera,
         })
     }
@@ -104,23 +132,46 @@ impl Prepared {
                 }
             }
         }
-        let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-            label: Some("SSAO diffuse accessibility"),
-            color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                view: &self.targets.accessibility,
-                resolve_target: None,
-                depth_slice: None,
-                ops: wgpu::Operations {
-                    load: wgpu::LoadOp::Clear(wgpu::Color::WHITE),
-                    store: wgpu::StoreOp::Store,
-                },
-            })],
-            ..Default::default()
-        });
-        pass.set_pipeline(&self.pipeline);
-        pass.set_bind_group(0, &self.group, &[]);
-        let [x, y, w, h] = rect;
-        pass.set_viewport(x, y, w, h, 0., 1.);
-        pass.draw(0..3, 0..1);
+        // Every pass ends before its output becomes the next pass's input.
+        // The vertical pass restores T0, the unchanged forward-material source.
+        for (target, pipeline, group, label) in [
+            (
+                &self.targets.accessibility,
+                &self.pipeline,
+                &self.group,
+                "SSAO diffuse accessibility",
+            ),
+            (
+                &self.targets.scratch,
+                &self.filter_pipelines[0],
+                &self.filter_groups[0],
+                "SSAO horizontal filter",
+            ),
+            (
+                &self.targets.accessibility,
+                &self.filter_pipelines[1],
+                &self.filter_groups[1],
+                "SSAO vertical filter",
+            ),
+        ] {
+            let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                label: Some(label),
+                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                    view: target,
+                    resolve_target: None,
+                    depth_slice: None,
+                    ops: wgpu::Operations {
+                        load: wgpu::LoadOp::Clear(wgpu::Color::WHITE),
+                        store: wgpu::StoreOp::Store,
+                    },
+                })],
+                ..Default::default()
+            });
+            pass.set_pipeline(pipeline);
+            pass.set_bind_group(0, group, &[]);
+            let [x, y, w, h] = rect;
+            pass.set_viewport(x, y, w, h, 0., 1.);
+            pass.draw(0..3, 0..1);
+        }
     }
 }

@@ -11,6 +11,8 @@ pub(crate) struct System {
     pub globals: wgpu::BindGroupLayout,
     pub sample_layout: wgpu::BindGroupLayout,
     pub sample: wgpu::RenderPipeline,
+    pub filter_layout: wgpu::BindGroupLayout,
+    pub filters: [wgpu::RenderPipeline; 2],
     pub prepass: HashMap<PipelineKey, wgpu::RenderPipeline>,
     pub shading: HashMap<PipelineKey, wgpu::RenderPipeline>,
     pub targets: Cache,
@@ -64,20 +66,7 @@ impl System {
         });
         let sample_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("SSAO sampling"),
-            entries: &[
-                wgpu::BindGroupLayoutEntry {
-                    binding: 0,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Buffer {
-                        ty: wgpu::BufferBindingType::Uniform,
-                        has_dynamic_offset: false,
-                        min_binding_size: wgpu::BufferSize::new(size_of::<Uniform>() as u64),
-                    },
-                    count: None,
-                },
-                texture(1, true),
-                texture(2, false),
-            ],
+            entries: &[uniform_entry(), texture(1, true), texture(2, false)],
         });
         let module = |label, source: String| {
             device.create_shader_module(wgpu::ShaderModuleDescriptor {
@@ -139,44 +128,97 @@ impl System {
             "SSAO bounded hemisphere visibility",
             include_str!("ao.wgsl").into(),
         );
-        let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
-            label: Some("SSAO sampling"),
-            bind_group_layouts: &[Some(&sample_layout)],
-            immediate_size: 0,
+        let sample = fullscreen(
+            device,
+            &sample_layout,
+            &shader,
+            "fragment",
+            "SSAO bounded sampling",
+        );
+        let filter_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
+            label: Some("SSAO plane-aware filter"),
+            entries: &[
+                uniform_entry(),
+                texture(1, true),
+                texture(2, false),
+                texture(3, false),
+            ],
         });
-        let sample = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-            label: Some("SSAO bounded sampling"),
-            layout: Some(&layout),
-            vertex: wgpu::VertexState {
-                module: &shader,
-                entry_point: Some("vertex"),
-                compilation_options: Default::default(),
-                buffers: &[],
-            },
-            primitive: Default::default(),
-            depth_stencil: None,
-            multisample: Default::default(),
-            fragment: Some(wgpu::FragmentState {
-                module: &shader,
-                entry_point: Some("fragment"),
-                compilation_options: Default::default(),
-                targets: &[Some(wgpu::ColorTargetState {
-                    format: wgpu::TextureFormat::R8Unorm,
-                    blend: None,
-                    write_mask: wgpu::ColorWrites::RED,
-                })],
-            }),
-            multiview_mask: None,
-            cache: None,
+        let filter = module(
+            "SSAO plane-aware filter",
+            include_str!("filter.wgsl").into(),
+        );
+        let filters = ["horizontal", "vertical"].map(|entry| {
+            fullscreen(
+                device,
+                &filter_layout,
+                &filter,
+                entry,
+                "SSAO plane-aware filter",
+            )
         });
         Ok(Self {
             settings,
             globals,
             sample_layout,
             sample,
+            filter_layout,
+            filters,
             prepass,
             shading,
             targets: Cache::default(),
         })
     }
+}
+
+fn uniform_entry() -> wgpu::BindGroupLayoutEntry {
+    wgpu::BindGroupLayoutEntry {
+        binding: 0,
+        visibility: wgpu::ShaderStages::FRAGMENT,
+        ty: wgpu::BindingType::Buffer {
+            ty: wgpu::BufferBindingType::Uniform,
+            has_dynamic_offset: false,
+            min_binding_size: wgpu::BufferSize::new(size_of::<Uniform>() as u64),
+        },
+        count: None,
+    }
+}
+
+fn fullscreen(
+    device: &wgpu::Device,
+    bindings: &wgpu::BindGroupLayout,
+    shader: &wgpu::ShaderModule,
+    entry: &str,
+    label: &str,
+) -> wgpu::RenderPipeline {
+    let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+        label: Some(label),
+        bind_group_layouts: &[Some(bindings)],
+        immediate_size: 0,
+    });
+    device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+        label: Some(label),
+        layout: Some(&layout),
+        vertex: wgpu::VertexState {
+            module: shader,
+            entry_point: Some("vertex"),
+            compilation_options: Default::default(),
+            buffers: &[],
+        },
+        primitive: Default::default(),
+        depth_stencil: None,
+        multisample: Default::default(),
+        fragment: Some(wgpu::FragmentState {
+            module: shader,
+            entry_point: Some(entry),
+            compilation_options: Default::default(),
+            targets: &[Some(wgpu::ColorTargetState {
+                format: wgpu::TextureFormat::R8Unorm,
+                blend: None,
+                write_mask: wgpu::ColorWrites::RED,
+            })],
+        }),
+        multiview_mask: None,
+        cache: None,
+    })
 }
