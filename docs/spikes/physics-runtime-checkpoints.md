@@ -73,7 +73,10 @@ Current-main243 source composition is preserved separately in
 all 3,647 listed implementation, build and tool inputs are byte-identical to
 the executed source005 prepared tree, including the native capture dependency
 and combined lock. This source comparison is not a new build or execution.
-Integrated review and publication remain pending.
+Current-main source/graph reuse is independently accepted under receipt
+`72be7b2ea605b36fa482a5a69f3488ecbefca4a297c11cb3f64a7f2e86bbe689`.
+Publication follows the separately reviewed native capture merge and the required
+exact-head fast check.
 
 ## Remaining limits
 
