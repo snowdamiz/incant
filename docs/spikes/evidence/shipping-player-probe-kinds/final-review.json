@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-13T03:20:01.059335+00:00",
+  "status": "accepted",
+  "head": "7e383036f2c73c32ac0ac7ccf8668dce5afb96ba",
+  "manifest_sha256": "8df6756b342bc62fba66eec6fcede3f5a620cb959e3ed3df3f16240ae3850d59",
+  "source_files_verified": 4,
+  "archive_records_verified": 31,
+  "payloads_verified": 23,
+  "actual_retained_build_log_replay": "root reran both library and binary audits; exact manifest output",
+  "prior_root_review": "Read full four-file patch, exact feature closure, focused six tests independently passed",
+  "checks": 5,
+  "findings": [],
+  "limits": [
+    "Actual retained hosted compile log is re-audited; no new shipping build or player process claimed",
+    "Checkpoint17 remains terminal20SUCCESS/3FAILURE and unpromoted",
+    "Next frozen checkpoint must run all23 required contexts successfully"
+  ]
+}

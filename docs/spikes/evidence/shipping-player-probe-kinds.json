@@ -265,5 +265,9 @@
     "Checkpoint17 remains terminal20SUCCESS/3FAILURE and unpromoted",
     "Next frozen checkpoint must run all23 required contexts successfully"
   ],
-  "review_state": "Final source/evidence review pending"
+  "review_state": "Independent final source/evidence review accepted; required fast check pending",
+  "final_review": {
+    "path": "docs/spikes/evidence/shipping-player-probe-kinds/final-review.json",
+    "sha256": "1b5c68aba1f105a4ff299a061129f3bac34c09aba74e62b0780aacdac7aa8e9f"
+  }
 }

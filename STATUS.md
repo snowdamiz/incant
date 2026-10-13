@@ -28,8 +28,8 @@ Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
 terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux and
 Windows conformance failed the quota assertion, and macOS rejected a successful
 player compile because its probe confused library and executable units. The main188
-quota repair preserves production's 50 ms budget; the probe correction awaits final
-review and the next frozen full checkpoint.
+quota repair preserves production's 50 ms budget; the probe correction has independent final acceptance and awaits its fast check
+and the next frozen full checkpoint.
 No release or phase approval follows from a main merge.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
@@ -1086,7 +1086,7 @@ acceptance is separate. [Evidence](docs/spikes/core-main182.md).
 
 ## Checkpoint17 terminal and shipping probe repair
 
-Checkpoint17 finished with 20 required successes and three failures and was not promoted. Linux/Windows quota controls have the reviewed main188 repair. A separate macOS player library/executable audit correction now passes the exact retained compile-log replay and six regression controls; final review and the next full frozen checkpoint remain required. See [probe evidence](docs/spikes/shipping-player-probe-kinds.md).
+Checkpoint17 finished with 20 required successes and three failures and was not promoted. Linux/Windows quota controls have the reviewed main188 repair. A separate macOS player library/executable audit correction now passes the exact retained compile-log replay and six regression controls; independent final review is accepted and the fast/full frozen checks remain required. See [probe evidence](docs/spikes/shipping-player-probe-kinds.md).
 
 ## Historical integration snapshots
 
