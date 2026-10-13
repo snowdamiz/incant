@@ -22,6 +22,7 @@ mod pipeline_cache;
 mod pixel_grid;
 pub use pipeline_cache::{CacheRead, CacheWrite, PipelineCacheReport};
 mod preview_environment;
+pub mod resolution;
 mod resource_error;
 #[cfg(test)]
 mod retained_alloc;
@@ -129,7 +130,7 @@ impl Renderer {
         let cache_session = pipeline_cache::Session::new(&device, &adapter);
         let cache = cache_session.cache.as_ref();
         let environments = environment::EnvironmentSystem::new(&device, &queue);
-        let lighting = lighting::LightingSystem::new(&device, cache);
+        let lighting = lighting::LightingSystem::new(&device, adapter.get_info().backend, cache)?;
         let materials = materials::MaterialSystem::new(
             &device,
             &queue,
@@ -253,38 +254,47 @@ impl Renderer {
         height: u32,
         viewport: Option<Viewport>,
     ) -> Result<wgpu::CommandBuffer> {
+        self.draw_scene_scaled(
+            scene,
+            RetainedTarget {
+                view,
+                format,
+                width,
+                height,
+                viewport,
+            },
+            resolution::ResolutionScale::FULL,
+        )
+    }
+    fn draw_scene_scaled(
+        &self,
+        scene: &RenderScene,
+        target: RetainedTarget<'_>,
+        scale: resolution::ResolutionScale,
+    ) -> Result<wgpu::CommandBuffer> {
+        let RetainedTarget {
+            view,
+            format,
+            width,
+            height,
+            viewport,
+        } = target;
         self.check_device()?;
         output::OutputPass::validate(format)?;
-        let rect = viewport
-            .map(|v| v.rect)
-            .unwrap_or([0., 0., width as f32, height as f32]);
-        if rect.iter().any(|v| !v.is_finite())
-            || rect[0] < 0.
-            || rect[1] < 0.
-            || rect[2] <= 0.
-            || rect[3] <= 0.
-            || rect[0] + rect[2] > width as f32
-            || rect[1] + rect[3] > height as f32
-        {
-            return Err("viewport outside render target".into());
-        }
+        frame::FrameCache::validate(&self.device, width, height)?;
         if viewport.is_some_and(|v| v.corner_radii.iter().any(|r| !r.is_finite() || *r < 0.)) {
             return Err("invalid viewport corner radius".into());
         }
-        frame::FrameCache::validate(&self.device, width, height)?;
-        let grid = scene
-            .camera
-            .pixel_resolution
-            .map(|resolution| pixel_grid::PixelGrid::fit(resolution, rect))
-            .transpose()?;
-        let (frame_size, scene_rect) = if let Some(grid) = &grid {
-            (
-                grid.resolution,
-                [0., 0., grid.resolution[0] as f32, grid.resolution[1] as f32],
-            )
-        } else {
-            ([width, height], rect)
-        };
+        let plan = resolution::FramePlan::new(
+            [width, height],
+            viewport
+                .map(|v| v.rect)
+                .unwrap_or([0., 0., width as f32, height as f32]),
+            scene.camera.pixel_resolution,
+            scale,
+        )?;
+        let frame_size = plan.size;
+        let scene_rect = plan.rect;
         let attachments = self
             .frames
             .get(&self.device, frame_size[0], frame_size[1])?;
@@ -325,7 +335,7 @@ impl Renderer {
             view,
             format,
             viewport,
-            grid.map(|g| g.output),
+            plan.output_mapping,
         )?;
         self.graph.encode(
             &self.device,

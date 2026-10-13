@@ -1,4 +1,17 @@
 fn main() {
+    #[cfg(feature = "cooked-clusters")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        println!("cargo:rerun-if-changed=src/lighting/grid.wgsl");
+        let source = std::fs::read_to_string("src/lighting/grid.wgsl")
+            .expect("engine-owned cluster assignment source");
+        let bundle =
+            incant_shader_cook::compute::cook(&source).expect("fixed cluster assignment contract");
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"))
+                .join("cluster-shaders");
+        incant_shader_cook::compute::write_bundle(&bundle, &output)
+            .expect("write cooked cluster assignment");
+    }
     #[cfg(feature = "cooked-materials")]
     if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
         use incant_shader_cook::geometry::{self, Kind};
