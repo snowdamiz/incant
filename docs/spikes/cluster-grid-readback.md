@@ -2,8 +2,8 @@
 
 This adds only `cfg(test)` numeric observation requested by the 0066 cooked
 cluster handoff. Production renderer, shaders, resource layouts and feature
-admission are unchanged. Actual GPU execution of this extension is pending a
-coordinated numerical GPU run; CPU compilation is not GPU or appearance acceptance.
+admission are unchanged. The extension now passes on Apple M5 Pro Metal in both default and cooked-cluster
+configurations: all 84 named raw count/mask digests match exactly.
 
 The observer clones the already prepared grid from the lighting cache, queues a
 counts/masks copy after the caller's submission, waits with bounded poll/map
@@ -33,26 +33,24 @@ and length refusal. A third resolves actual cooked model geometry and light
 bindings after the temporary authoring sources have been dropped. No pixels, screenshots, image decoding or performance
 measurements are involved.
 
-## Coordinated GPU follow-up
+## Numerical GPU verification
 
-After obtaining the exclusive GPU lease, run this exact ignored test in separate
-baseline and cooked-cluster builds from the same source and toolchain:
+After 0067 released its GPU lease, the independently reviewed runner executed
+one exact ignored test in each frozen binary, serially. Both exited successfully
+and were reaped. Each emitted exactly 84 uniquely named records; the actual
+adapter identities and all little-endian count/mask digests matched. The adapter
+reported Apple M5 Pro, Metal, on macOS 27.0.1 arm64 (Darwin 27.0.0).
 
-```sh
-./tools/cargo test --profile ci --locked -j2 -p incant_render --lib \
-  lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion \
-  -- --ignored --exact --nocapture
-./tools/cargo test --profile ci --locked -j2 -p incant_render --features cooked-clusters --lib \
-  lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion \
-  -- --ignored --exact --nocapture
-```
+This covers the camera/light-count/viewport matrix, actual retained-frame
+movement, offscreen clearing, resize and the directional-only control described
+above. It proves numerical parity for these inputs on this recorded backend.
+Other GPUs, reference-phone budgets, appearance and shader-hitch performance
+remain outside this result. Historical 0066 appearance results remain separate.
 
-Retain both raw logs, test binary hashes, exact source/feature/toolchain identity,
-adapter/OS identity and terminal exits. Compare all 84 named records exactly;
-zero, missing, duplicate or additional records must fail the comparison. This
-would establish numerical parity on the tested backend only, with no claim
-about other GPUs, phone budgets or shader-hitch performance. Historical 0066
-results remain separate and do not count as execution of this new test.
+The runner has bounded waits and kills/reaps its process groups in finalization.
+CPU-only lifecycle controls separately exercised successful completion, timeout
+and interruption; the interrupted exception was preserved while cleanup receipts
+showed no surviving owned processes. The GPU lease is released.
 
 ## Local verification
 
@@ -65,18 +63,19 @@ CPU evidence is preserved in the [historical manifest](evidence/cluster-grid-rea
 Source002 includes the existing cooked triangle fixture, keeps its immutable
 model bindings after source removal, asserts nonzero prepared primitive instances,
 and moves only point/spot lights. A new CPU regression resolves this geometry
-without creating a GPU device. Actual adapter information is printed by the
-future GPU execution, not inferred from the machine name.
+without creating a GPU device. The GPU execution prints actual adapter information; it is not inferred from
+the machine name.
 
 All three CPU cases pass in both default and cooked-cluster configurations;
 four GPU tests remain explicitly ignored in each filtered run. Both complete
 GPU test bodies compile. All-target Clippy passes in both configurations;
 scoped rustfmt, conventions and diff checks also pass. These are seven successful
-commands over 1,119 frozen engine/build files. Neither configuration has run the
-new GPU test. Cooked-clusters also enables its existing cooked-output dependency.
+commands over 1,119 frozen engine/build files. These CPU runs precede the separate, successful two-process GPU verification.
+Cooked-clusters also enables its existing cooked-output dependency.
 
 The [current manifest](evidence/cluster-grid-readback.json) binds the source,
 all terminal logs/receipts and two binaries copied outside the reusable build
 target. A lossless archive retains the full freeze, repair and logs.
 [Independent source review](evidence/cluster-grid-readback-002/source-review.json)
-accepted the corrected fixture. Actual 84-record GPU parity remains pending.
+accepted the corrected fixture. The GPU manifest retains both raw logs, the
+runner, grant/release identities, 84-record comparison and lifecycle checks.

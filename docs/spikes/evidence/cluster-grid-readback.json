@@ -1,6 +1,6 @@
 {
   "format": "incant-cluster-grid-readback-evidence",
-  "version": 2,
+  "version": 3,
   "base": "946f42dccafae269214a4ba51d49f4f9dfa37e33",
   "sources": [
     {
@@ -26,9 +26,12 @@
     ],
     "commands": 7,
     "all_exits": 0,
-    "gpu_executed": false,
+    "gpu_executed": true,
     "planned_gpu_records": 84,
-    "frozen_engine_inputs": 1119
+    "frozen_engine_inputs": 1119,
+    "gpu_commands": 2,
+    "gpu_records_per_variant": 84,
+    "exact_raw_count_and_mask_digests_equal": true
   },
   "checks": [
     {
@@ -195,13 +198,146 @@
     "sha256": "c15b95d43f32c404a617c5075e146b61c7280b3cf56e4751a29961ec0f99541a"
   },
   "prior": {
-    "path": "docs/spikes/evidence/cluster-grid-readback-source001.json",
-    "sha256": "d43b53b584d43231bf9e2edf0c897195dea935ac872015ce92118db493e017bd",
-    "status": "Historical CPU-only evidence. Source001 omitted model geometry in retained test; superseded before any GPU execution. Immutable old binaries retained externally in cluster-grid-readback-001/frozen-binaries."
+    "path": "docs/spikes/evidence/cluster-grid-readback-source002.json",
+    "sha256": "8c057aeaf7dc40bd413ed8336244b5ab393eb7ee735ce963fbea0bccc042146f"
   },
   "limits": [
-    "No GPU execution, pixel capture, appearance or performance claim",
-    "Default/cooked actual84-record raw-grid parity and exact backend still pending",
-    "Shared compile target released after seven terminal commands; current binaries copied to immutable evidence paths"
-  ]
+    "Exact numerical parity on Apple M5 Pro Metal and recorded feature sets only; no other backend or phone claim.",
+    "No image capture/decoding, appearance review, shipping-profile benchmark or performance-gain claim.",
+    "Two bounded sequential GPU children reaped; exclusive GPU released; frozen binaries retained externally."
+  ],
+  "tested_head": "4fffb383786971169caea949ededf3ac64f96d2e",
+  "gpu": {
+    "runner": {
+      "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/run-gpu.py",
+      "sha256": "0f890ddbf0bbff09df07e49b362565a797d04dfabc2f01d7c34f4e74c24c166a"
+    },
+    "runner_review": {
+      "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/runner-source-review.json",
+      "sha256": "cd6489398309c1357b0013c5b3ea986691befc6703ebf713fbb8dd10dd3a46be"
+    },
+    "lifecycle_checks": {
+      "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/runner-lifecycle-checks.json",
+      "sha256": "6612edec5fe61e110cfa9913816ed94208543ec4997697c6f8cd300c4e31275b"
+    },
+    "checks": [
+      {
+        "name": "baseline",
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/baseline-binary",
+          "lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion",
+          "--ignored",
+          "--exact",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "binary_sha256": "ab7335d8ef6639ca81eac85b1cd4a74bb2a0b06a449ea6ec69a878f6c5d37ebc",
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "pid": 89677,
+        "start": "2026-10-13T04:12:22.048749+00:00",
+        "end": "2026-10-13T04:12:23.366351+00:00",
+        "seconds": 1.31736500000261,
+        "exit": 0,
+        "timeout": false,
+        "wait_error": null,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/baseline-gpu.stdout",
+          "sha256": "870145d560647fa9b2cb1e31eb3005798bdcb19ae64225da1eaa80d7e3f42954"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/baseline-gpu.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "environment": {
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "HOME": "set",
+          "TMPDIR": "/tmp",
+          "RUST_BACKTRACE": "1"
+        }
+      },
+      {
+        "name": "cooked",
+        "argv": [
+          "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/cooked-binary",
+          "lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion",
+          "--ignored",
+          "--exact",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "binary_sha256": "0ed2cd6a2d90519cbbeebe1233dad2a3e4d8499455d67bfe4d020c3a13726454",
+        "features": [
+          "cooked-clusters",
+          "cooked-output",
+          "default",
+          "physics-deterministic"
+        ],
+        "pid": 89704,
+        "start": "2026-10-13T04:12:23.427583+00:00",
+        "end": "2026-10-13T04:12:24.361864+00:00",
+        "seconds": 0.9342563330064877,
+        "exit": 0,
+        "timeout": false,
+        "wait_error": null,
+        "stdout": {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/cooked-gpu.stdout",
+          "sha256": "86a078c9ae681337119504b4ec30dcc9c6a2dc2f5e148fb0c867e66a3a1c5456"
+        },
+        "stderr": {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/cooked-gpu.stderr",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "environment": {
+          "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+          "HOME": "set",
+          "TMPDIR": "/tmp",
+          "RUST_BACKTRACE": "1"
+        }
+      }
+    ],
+    "parity": {
+      "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/gpu-parity.json",
+      "sha256": "fa69a31c323975891d8c6b7a380c41fb6c0145cf93840335f4ed439b4d109e7d"
+    },
+    "release": {
+      "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/gpu-released.json",
+      "sha256": "5e88575b75df89eca6d584a5e26a06686fc95ca2ae446be2539f1673ece89d77"
+    },
+    "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+    "system": {
+      "system": "Darwin",
+      "release": "27.0.0",
+      "machine": "arm64",
+      "mac_ver": "27.0.1"
+    },
+    "archive": {
+      "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/artifacts.json.gz",
+      "sha256": "2eed5b8f264ddfd0afbdbde9037f71557abe85bb8d1c17b76586b1180119edec",
+      "bytes": 30880,
+      "records": 11,
+      "payloads": 10
+    },
+    "final_review": {
+      "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/final-review.json",
+      "sha256": "034c29e741714c3d58a1490fb17014d9dae1a21afb42eeb9c0769f17e8590c18"
+    },
+    "reviewed_manifest_sha256": "f908e62fe5cf876ebf3441f5eb7e5795eae9865ba065bbf4acf30252707937cb",
+    "lossless_logs": [
+      {
+        "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/baseline-gpu.stdout.gz",
+        "raw_sha256": "870145d560647fa9b2cb1e31eb3005798bdcb19ae64225da1eaa80d7e3f42954",
+        "sha256": "41cf2d88a4f3f241aec13bf88924a227b6073b8c16196f5e784ca3b5e33147b0",
+        "encoding": "gzip"
+      },
+      {
+        "path": "docs/spikes/evidence/cluster-grid-readback-gpu002/cooked-gpu.stdout.gz",
+        "raw_sha256": "86a078c9ae681337119504b4ec30dcc9c6a2dc2f5e148fb0c867e66a3a1c5456",
+        "sha256": "9dfc02b922e56a6a6dcc4d8101b539ad0c4b96d90e9d2344abc054a84e8d13d1",
+        "encoding": "gzip"
+      }
+    ]
+  }
 }

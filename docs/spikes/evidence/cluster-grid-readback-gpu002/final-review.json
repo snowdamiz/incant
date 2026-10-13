@@ -1,0 +1,21 @@
+{
+  "status": "accepted scoped source and numerical execution evidence",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/docs/spikes/evidence/cluster-grid-readback.json",
+  "manifest_sha256": "f908e62fe5cf876ebf3441f5eb7e5795eae9865ba065bbf4acf30252707937cb",
+  "tested_head": "4fffb383786971169caea949ededf3ac64f96d2e",
+  "verified": {
+    "raw_and_retained_records": 30,
+    "unique_payloads": 21,
+    "frozen_engine_inputs": 1119,
+    "numerical_gpu_processes": 2,
+    "exact_raw_records_per_variant": 84,
+    "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+    "owned_pids_absent": true
+  },
+  "source_review": "Previously read full test fixture and corrected runner; current sources rehashed. Test-only mutation, no engine changes.",
+  "limits": [
+    "Reviewer executed assertion-only audit, no GPU or builds",
+    "Metal raw cluster membership/count parity on reported adapter only",
+    "No pixel appearance, other backend, phone, performance or full renderer gate acceptance"
+  ]
+}
