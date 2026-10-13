@@ -6,6 +6,7 @@ mod draw;
 mod filter_device_tests;
 mod math;
 mod pipelines;
+mod raster;
 #[cfg(feature = "ssao-stage-readback")]
 mod readback;
 #[cfg(feature = "ssao-stage-readback")]
