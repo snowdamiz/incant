@@ -33,3 +33,19 @@ preflight of the joined inert frame through an optional dependency on the
 std-only snapshot crate. It has no native graph/world constructor or installer.
 `INCANT_CHECKED_ADMISSION.json` binds this layer and its prior hashes; upstream
 solver routines are unchanged. The public runtime does not enable this feature.
+
+A later private layer, pinned separately by `INCANT_CHECKED_CONSTRUCTION.json`,
+adds crate-internal exact storage and regular body/collider field construction.
+The prior numerical-only inventory stays historical and unchanged. Private
+constructors precharge logical allocations and have no public restore entry;
+other owners, authenticated whole-world admission and runtime saves remain closed.
+The primitive allocation tests distinguish charged payload/control blocks from
+allocator overhead and retain stable Box/Arc process-OOM behavior explicitly.
+
+Private exact island construction is layered by `INCANT_CHECKED_MANAGERS.json`.
+It preserves active/persistent slot tails, free order, contact links, pending split
+and exact sleep-scan history. Prior construction/admission inventories describe
+their immutable historical layers. The same allocation permit precharges every
+new owner allocation; the native VecMap API has only infallible reserves, so its
+precharged safe allocation retains ordinary process-OOM behavior. No runtime
+feature, native solver algorithm or public world installer is added.

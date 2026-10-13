@@ -1,0 +1,51 @@
+# Handoff 0076 execution stage, 2026-10-13 (UTC). Run from the worktree root with
+# /opt/homebrew/bin/python3 3.14.8, `-I -B`, in the foreground, once each.
+# E = /Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001
+# T = handoffs/0076-shadow-guard-review/visual/tools (frozen visual tree 8d9de3ed)
+
+# Read-only preflight, before any GPU child (scratch scripts, no writes in E):
+# - root's revision of brief.md (sha256 9a25ced3...), root's review
+#   ~/.codex/incant-reviews/shadow-guard-build-root-20261013.json (d37ec6e2...),
+#   E/review-ready.json (18e483b3...), E/build-ready.json (83bb00aa...);
+# - both build records bound by the grant; both frozen binaries hash-checked,
+#   mode 0555, features default + physics-deterministic; strict Clippy exit 0;
+#   source coverage exact (3,141 and 3,142 inputs);
+# - the 0073 release pin verifies and lists no live process;
+# - no stop or release latch, no debit, no capture; lease released;
+# - root's 6 build ledger rows exit 0 with matching log hashes;
+# - both checkouts blob-exact (19,496 and 19,500 files), only the committed
+#   fixture copy extra; no holder on native-gpu.lock; no GPU or Cargo process.
+
+# GPU children (each refuses without the grant; lock, debit and reap by gpu.py)
+T/gpu.py list baseline               # exit 0, pid 26437, 14:49:35.58-35.89, 8 cases, no debit
+T/gpu.py review baseline viewport    # exit 0, pid 26513, 14:49:44.53-46.91, debit 26/0/2, 4 checks true
+T/gpu.py list candidate              # exit 0, pid 26614, 14:49:59.94-50:00.19, 8 cases, no debit
+T/gpu.py review candidate viewport   # exit 0, pid 26727, 14:50:06.84-09.31, debit 26/0/2, 4 checks true
+T/gpu.py release                     # exit 0, 14:50:16.11; 52/0/4 debited, no stop, no owned or live process
+
+# CPU analysis
+T/analyze.py check     # exit 0: summary-2026-10-13T145022.235852+0000.json, pass, no problems
+T/analyze.py compare   # exit 1: compare-2026-10-13T145029.149628+0000.json, fail, exact false,
+                       #   failed only "exactness: temporal_on_frames_identical" (on-06)
+T/analyze.py pairs     # exit 0: E/analysis/pairs-2026-10-13T145325.268186+0000 (10 viewing aids)
+T/analyze.py publish   # exit 0: 40 files + 4 screenshots into the packet
+# Retention (scratch script): the two review stdout logs end with a blank line, which
+# `git diff --cached --check` rejects; kept as deterministic gzip, see evidence/retention.json.
+
+# Inspection (outputs in this directory; I = handoffs/0076-shadow-guard-review/inspection/inspect.py,
+# S = handoffs/0076-shadow-guard-review/screenshots, R = handoffs/0076-shadow-guard-review/evidence/captures)
+I T totals R/baseline/viewport/report.json R/candidate/viewport/report.json > frame-totals.txt   # exit 0
+I T interior S/candidate-viewport-on-f24.png S/candidate-viewport-off-f24.png 12 > interior-candidate-f24.txt   # exit 0
+I T interior S/baseline-viewport-on-f24.png S/baseline-viewport-off-f24.png 12 > interior-baseline-f24.txt   # exit 0
+I T clusters S/baseline-viewport-off-f24.png S/candidate-viewport-off-f24.png 8 20 > clusters-off-before-after.txt   # exit 0
+I T columns 440 704 286 296 <the 4 PNGs> > columns-grille-band.txt   # exit 0
+I T pixels 620 290 0 <the 4 PNGs> > pixels-grille-core.txt   # exit 0
+I T pixels 660 296 0 <the 4 PNGs> > pixels-grille-lower-edge.txt   # exit 0
+I T pixels 720 292 0 <the 4 PNGs> > pixels-lit-ground.txt   # exit 0
+I T pixels 610 236 0 <the 4 PNGs> > pixels-ramp-shadow.txt   # exit 0
+I T pixels 460 352 0 <the 4 PNGs> > pixels-sphere-shadow.txt   # exit 0
+I T pixels 482 262 1 <the 4 PNGs> > pixels-card-bar-58.txt   # exit 0
+
+# Viewing aids (scratch, not committed): I T stack /tmp/incant0076-run/crops/<name>.png <box> <scale> <PNGs>
+#   grille-candidate-on-off.png 428,259,711,322 x4; grille-off-before-after.png same box x4;
+#   ramp-off.png 525,198,655,262 x6; wall-cube-off.png 225,176,295,280 x6; far-post-off.png 345,70,395,92 x10

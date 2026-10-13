@@ -1,0 +1,13 @@
+{
+  "decision": "accepted scoped test-only repair for main fast-check publication",
+  "manifest_sha256": "93d2878095230c70410704b957ed96274bc27c4e0ab3a985cdc7ee8dc6ea80f8",
+  "review": "Independently inspected actual one-case 20s timeout delta, original assertions and existing DockPaging precedent; read and reran verifier. No production, assertion, CI-wide timeout, skip or retry change.",
+  "checks": 5,
+  "focused_passed": 3,
+  "full_ui_passed": 936,
+  "ui_files": 45,
+  "archive_records": 20,
+  "archive_payloads": 16,
+  "hosted_failure": "Original Windows5s timeout and935pass/1fail retained at exact candidate5e9fe37b. Local original and instrumented tests passed. Scheduling/axe attribution remains inference.",
+  "limits": "Hosted repair not yet verified; release promotion requires actual all-context success on advanced frozen candidate."
+}

@@ -1,5 +1,7 @@
 # Implementation status
 
+Native island construction on main231 is source-reviewed and passed current composed CPU qualification: 218 snapshot + 28 private native cases in each of two parallel modes, 156 paired island steps per dimension/mode, all 21 checks successful. Final integration review is accepted; current-main join/fast check remain before publication. Complete-world restore and physics-save admission remain closed. See [the scoped evidence](docs/spikes/physics-islands-main231.md).
+
 [PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
 phase durations have been removed. Work proceeds continuously and in parallel
@@ -16,6 +18,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Consistent shadow receiver fitting — current-main qualification
+
+Shadow cascade fitting now uses the actual render viewport and the same local
+half-pixel guard with temporal rendering off or on. The scene camera, lighting
+clusters, filtering and shaders are unchanged; default unjittered shadow fitting
+intentionally changes. Current composition passes171 default/203 overlapping
+cooked CPU cases and13 checks, with33 native payloads exact. Independent source,
+final evidence and main231 relevance reviews are accepted; publication awaits
+its fast check. Original Metal/Claude visual evidence remains producer-scoped:
+the initial strict comparison is still failed, same-binary one-frame variation
+is unresolved, and thin MASK/temporal quality limits remain. No current GPU or
+phone/performance claim. [Evidence](docs/spikes/shadow-main230.md).
+
 ## Default-off SSAO — curated current-main qualification
 
 The complete diffuse SSAO/R3/C2 producer has independent numerical and Claude
@@ -25,8 +40,8 @@ jittered reconstruction, split model drawing and all four Models timing passes.
 Current source review and thirteen checks pass (168 default and 200 overlapping
 cooked CPU cases). The exact current composition completed eight bounded Metal
 frames under Claude: default SSAO admission and expected cooked refusal both
-passed, with all children reaped. Final integration review is accepted; publication
-awaits the required fast check. Original
+passed, with all children reaped. PR230 merged after independent final review and
+the required exact-head fast check. Original
 appearance acceptance remains producer-scoped.
 Authored N6 remains failed at seven codes; revised N6T/N8 margins are 0.79/0.97
 codes. Cooked SSAO, non-Metal appearance, phone and performance gaps remain open.
@@ -216,9 +231,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main229, 2026-10-13
+## Current overview — main231, 2026-10-13
 
-Development main229 includes the reviewed opt-in cooked renderer families and
+Development main231 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -229,8 +244,12 @@ main226 `079ee1aa` exactly. Independent review verified the tested tree, ancestr
 unchanged protection and all success receipts. The journal replay repair passed
 on actual macOS/Linux/Windows; optional timestamp diagnostics preserve explicit
 Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12.
-No checkpoint is currently active. The next regular selection follows the
-three-hour cadence; later main changes do not alter this tested baseline.
+Checkpoint25 is frozen on reviewed main230 (`56185dab`) in PR232, with all23
+required contexts preserved. One Windows UI test timed out; the original failure
+remains failed while remaining workflows run. Its scoped per-case deadline
+repair passes local focused/full UI checks and is independently accepted;
+publication follows its required fast check.
+Later main changes do not alter either frozen checkpoint.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
@@ -2620,3 +2639,19 @@ retained. No live constructor/cache installer or save admission is added. See
 `docs/spikes/physics-integration-config.md`. This historical final-audit/intake
 status is superseded by the accepted main220 composition and PR221 merge.
 Cache/shape coherence and full live-owner admission remain open.
+
+
+## Private physics constructors — merged main231
+
+Exact private storage/body/collider construction at `0a96dc0f` has independent
+source/final CPU acceptance: 216 snapshot cases and 22 native controls per mode,
+with 144 continuation steps per dimension. Other owners remain trusted clones.
+The separately reviewed observer alias from `d6b53f8b` is included. This private
+main229 composition now has independent source acceptance and21 successful
+current checks:216 snapshot plus22 private native controls per parallel mode,
+with144 continuation steps per dimension. Final integration review is accepted;
+the disjoint main230 renderer join is independently accepted. PR231 merged
+after the required exact-head fast check.
+[composed evidence](docs/spikes/physics-construction-main229.md) is retained. Exact manager construction,
+whole-owner admission and live physics saves remain closed.
+[Producer evidence](docs/spikes/physics-native-construction.md).

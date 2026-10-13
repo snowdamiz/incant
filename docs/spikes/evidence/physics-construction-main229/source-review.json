@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "reviewer": "astra /root/runtime_review",
+  "at_utc": "2026-10-13T16:00:15.853120+00:00",
+  "verdict": "accepted_source_composition_before_current_main_cpu_qualification",
+  "findings": [],
+  "checkout": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+  "head": "3482282a4b2702062f4123490077ffe9f2c40340",
+  "base": "4631f07defcc8bdfa63446723ad25026d8f03b50",
+  "accepted_producer": "d6b53f8bede48ed42b035b565ff6887978f07f97",
+  "source_report": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/source-review.json",
+    "sha256": "73b6cf58dff0dbeaecce9bb43ff31b00de2694b94ed00103c6569d9b23c13ca9"
+  },
+  "verified": {
+    "checkout_clean": true,
+    "base_is_ancestor": true,
+    "changed_source_live_frozen_producer_exact": 45,
+    "closure_paths": 1604,
+    "closure_roots": [
+      "crates/incant_physics_snapshot",
+      "third_party/rapier2d",
+      "third_party/rapier3d",
+      "third_party/parry2d",
+      "third_party/parry3d",
+      "Cargo.toml",
+      "Cargo.lock"
+    ],
+    "closure_inventory_sha256": "5ab79d79cb3569773c6e1127cad8bb01425e23b99513122f32b119e940819cc4",
+    "producer_differences": [
+      {
+        "path": "crates/incant_physics_snapshot/src/lib.rs",
+        "current_sha256": "53ab273528ae78570931fe0d3f1cf70db68227a482de368ea00fbe68c2f7e39d",
+        "producer_sha256": "bdcc01451063d048f22d49ddc8d2ad18aa0ebafc2651ac0cf431295d0fb68890"
+      }
+    ],
+    "cargo_lock_exact_main_and_producer": true,
+    "integration_patch_sha256": "45952a4de2c9660b171fb3a66d157756c7fb6ba226ec0f952697c79c9c9fb5bc"
+  },
+  "source_review": [
+    "Only closure difference is placement of Narrow/Broad/BroadTree in the snapshot Error enum; current bytes equal main. Error has no numeric repr or Serialize derive and this patch adds no ordinal serialization/cast; named variants and Display Debug diagnostics preserve semantics.",
+    "Private native Arena/Coarena/Graph/body/collider staging, allocation charging, primitive shape restrictions and exact borrowed frame joins retain accepted producer bytes. Public NumericFrame still only admits numerical input; no live constructor or installer is exposed.",
+    "Default-off incant-checked-restore and incant-checkpoint dependency edges/manifests are unchanged from main and producer. No root dependency/lock growth.",
+    "Native private test prepare helper retains original source-copy/path-only substitution and root-lock seeding; current-main tests still need exact selected solver feature and copied-lock relevance checks.",
+    "Documentation distinguishes private field continuation using trusted remaining-owner clones from complete world construction/save admission; OOM behavior, allocation-request vs RSS, phase/ownership/generation limitations remain explicit."
+  ],
+  "prior_reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-fields-source-independent-20261013.json",
+      "sha256": "44d8d9523a6a91a7d2637914d1d2214784ac33fb85e4f712d6effae9c02248b2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-native-observer-lint-final-independent-20261013.json",
+      "sha256": "ca02a3658214fe297e040dcf62373cf170b82196c4e1759641da207b08bb8484"
+    }
+  ],
+  "limits": [
+    "No reviewer Cargo/build/GPU/source mutation.",
+    "Current-main CPU qualification has not run at this source review; producer test claims are retained historical evidence, not new execution.",
+    "No live save admission, authenticated restore, phone/performance/appearance or complete-world gate is approved."
+  ]
+}

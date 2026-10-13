@@ -28,6 +28,8 @@ function recording(capabilities: string[]) {
 const row = (name: string) => screen.getByRole('treeitem', { name: new RegExp(`^${name}`) });
 
 describe('hierarchy context menu', () => {
+  // This case includes a full-App axe scan and exceeded 5s on hosted Windows.
+  // Keep its behavior assertions; the local budget is not a performance gate.
   it('opens from the pointer, offers only existing actions, and deletes through the command bus', async () => {
     const { bridge, commands } = recording(['entity.rename', 'entity.delete']);
     const { container } = render(<App resolution={{ kind: 'bridge', bridge }} />);
@@ -41,7 +43,7 @@ describe('hierarchy context menu', () => {
     fireEvent.click(within(menu).getByRole('menuitem', { name: /^Delete/ }));
     expect(screen.queryByRole('menu')).toBeNull();
     await waitFor(() => expect(commands).toEqual([{ type: 'entity.delete', entity: row('Crate 01').id.replace('tree-row-', '') }]));
-  });
+  }, 20_000);
 
   it('opens from the keyboard, moves with arrows, starts a rename, and returns focus on Escape', () => {
     const { bridge } = recording(['entity.rename', 'entity.delete']);

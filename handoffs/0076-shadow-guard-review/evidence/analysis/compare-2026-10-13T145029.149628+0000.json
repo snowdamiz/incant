@@ -1,0 +1,862 @@
+{
+ "verdict": "fail",
+ "exact": false,
+ "failed": [
+  "exactness: temporal_on_frames_identical"
+ ],
+ "checks": [
+  {
+   "section": "exactness",
+   "check": "reports_and_pngs_present",
+   "value": {
+    "baseline": true,
+    "candidate": true
+   },
+   "limit": "both runs",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "source_commits",
+   "value": [
+    "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+    "f636a2d5e595cffae702d078bcee61f34ab35394"
+   ],
+   "limit": [
+    "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+    "f636a2d5e595cffae702d078bcee61f34ab35394"
+   ],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_fixture",
+   "value": [
+    "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+    "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+   ],
+   "limit": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_features",
+   "value": [
+    [
+     "default",
+     "physics-deterministic"
+    ],
+    [
+     "default",
+     "physics-deterministic"
+    ]
+   ],
+   "limit": [
+    "default",
+    "physics-deterministic"
+   ],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_build_arguments",
+   "value": [
+    [
+     "test",
+     "-p",
+     "incant_render",
+     "--test",
+     "temporal_visual_review",
+     "--no-run",
+     "--locked",
+     "--offline",
+     "--profile",
+     "ci",
+     "-j2",
+     "--message-format=json-render-diagnostics"
+    ],
+    [
+     "test",
+     "-p",
+     "incant_render",
+     "--test",
+     "temporal_visual_review",
+     "--no-run",
+     "--locked",
+     "--offline",
+     "--profile",
+     "ci",
+     "-j2",
+     "--message-format=json-render-diagnostics"
+    ]
+   ],
+   "limit": "equal after the checkout's tools/cargo path",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_lock_and_toolchain_file",
+   "value": [
+    "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+    "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f"
+   ],
+   "limit": "equal",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_toolchain_and_host",
+   "value": [
+    {
+     "rustc": [
+      "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "binary: rustc"
+     ],
+     "cargo": [
+      "cargo 1.99.0 (5f94df478 2026-08-27)"
+     ],
+     "sw_vers": [
+      "ProductName:\t\tmacOS",
+      "ProductVersion:\t\t27.0.1"
+     ],
+     "hw_model": [
+      "Mac17,9"
+     ]
+    },
+    {
+     "rustc": [
+      "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "binary: rustc"
+     ],
+     "cargo": [
+      "cargo 1.99.0 (5f94df478 2026-08-27)"
+     ],
+     "sw_vers": [
+      "ProductName:\t\tmacOS",
+      "ProductVersion:\t\t27.0.1"
+     ],
+     "hw_model": [
+      "Mac17,9"
+     ]
+    }
+   ],
+   "limit": "equal",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_adapter",
+   "value": [
+    {
+     "backend": "Metal",
+     "device": 0,
+     "device_type": "IntegratedGpu",
+     "driver": "",
+     "driver_info": "",
+     "name": "Apple M5 Pro",
+     "vendor": 0
+    },
+    {
+     "backend": "Metal",
+     "device": 0,
+     "device_type": "IntegratedGpu",
+     "driver": "",
+     "driver_info": "",
+     "name": "Apple M5 Pro",
+     "vendor": 0
+    }
+   ],
+   "limit": "equal, backend Metal",
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_review_config",
+   "value": [
+    {
+     "absolute_depth": 0.019999999552965164,
+     "history_weight": 0.8999999761581421,
+     "reactive_strength": 0.5,
+     "reactive_threshold": 4.0,
+     "relative_depth": 0.05000000074505806
+    },
+    {
+     "absolute_depth": 0.019999999552965164,
+     "history_weight": 0.8999999761581421,
+     "reactive_strength": 0.5,
+     "reactive_threshold": 4.0,
+     "relative_depth": 0.05000000074505806
+    }
+   ],
+   "limit": {
+    "history_weight": 0.9,
+    "relative_depth": 0.05,
+    "absolute_depth": 0.02,
+    "reactive_threshold": 4.0,
+    "reactive_strength": 0.5
+   },
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "same_viewport",
+   "value": [
+    [
+     [
+      37.0,
+      19.0,
+      885.0,
+      501.0
+     ],
+     [
+      960,
+      540
+     ]
+    ],
+    [
+     [
+      37.0,
+      19.0,
+      885.0,
+      501.0
+     ],
+     [
+      960,
+      540
+     ]
+    ]
+   ],
+   "limit": [
+    [
+     37.0,
+     19.0,
+     885.0,
+     501.0
+    ],
+    [
+     960,
+     540
+    ]
+   ],
+   "pass": true
+  },
+  {
+   "section": "exactness",
+   "check": "temporal_on_frames_identical",
+   "value": {
+    "frames": 24,
+    "differing": [
+     "on-06"
+    ]
+   },
+   "limit": "24 frames, byte-identical (the candidate only changes the temporal-off fit)",
+   "pass": false
+  },
+  {
+   "section": "guards",
+   "check": "outside_viewport_static_baseline",
+   "value": 0,
+   "limit": "== 0",
+   "pass": true
+  },
+  {
+   "section": "guards",
+   "check": "outside_viewport_static_candidate",
+   "value": 0,
+   "limit": "== 0",
+   "pass": true
+  },
+  {
+   "section": "guards",
+   "check": "outside_viewport_identical_viewport-on-f24.png",
+   "value": {
+    "pixels": 75015,
+    "differing": 0,
+    "not_canvas": 0
+   },
+   "limit": "0 differing, all canvas",
+   "pass": true
+  },
+  {
+   "section": "guards",
+   "check": "outside_viewport_identical_viewport-off-f24.png",
+   "value": {
+    "pixels": 75015,
+    "differing": 0,
+    "not_canvas": 0
+   },
+   "limit": "0 differing, all canvas",
+   "pass": true
+  },
+  {
+   "section": "guards",
+   "check": "candidate_still_f16_border_vs_off_band_not_above_inner",
+   "value": [
+    1,
+    19
+   ],
+   "limit": "band <= inner",
+   "pass": true
+  },
+  {
+   "section": "guards",
+   "check": "candidate_pan_f24_border_vs_off_band_not_above_inner",
+   "value": [
+    1,
+    58
+   ],
+   "limit": "band <= inner",
+   "pass": true
+  },
+  {
+   "section": "guards",
+   "check": "off_change_not_concentrated_at_border",
+   "value": {
+    "band": {
+     "max": 0,
+     "over_2": 0
+    },
+    "inner": {
+     "max": 95,
+     "over_2": 6300
+    }
+   },
+   "limit": "band max <= inner max",
+   "pass": true
+  },
+  {
+   "section": "guards",
+   "check": "mask_card_bars_identical_off",
+   "value": {
+    "pixels": [
+     5047,
+     5047
+    ],
+    "differing": 0
+   },
+   "limit": "identical, at least 4000 bar pixels",
+   "pass": true
+  },
+  {
+   "section": "agreement",
+   "check": "candidate_grille_shadow_mean_gap",
+   "value": 0.00159,
+   "limit": "<= 0.02",
+   "pass": true
+  },
+  {
+   "section": "agreement",
+   "check": "candidate_grille_shadow_blur_residual",
+   "value": 0.00406,
+   "limit": "<= 0.026",
+   "pass": true
+  },
+  {
+   "section": "agreement",
+   "check": "candidate_grille_shadow_lowpass_max",
+   "value": 0.02018,
+   "limit": "<= 0.086",
+   "pass": true
+  },
+  {
+   "section": "agreement",
+   "check": "candidate_still_interior_max_delta",
+   "value": 19,
+   "limit": "<= 66",
+   "pass": true
+  },
+  {
+   "section": "defect",
+   "check": "baseline_reproduces_on_off_mismatch",
+   "value": {
+    "agreement_limits_met": {
+     "mean_gap": false,
+     "blur_residual": false,
+     "lowpass_max": false
+    },
+    "mean_gap": 0.1972,
+    "blur_residual": 0.16885,
+    "lowpass_max": 0.32067
+   },
+   "limit": "the baseline fails every grille-shadow agreement limit, as the calibration's mismatch controls do",
+   "pass": true
+  },
+  {
+   "section": "defect",
+   "check": "candidate_better_than_baseline",
+   "value": {
+    "mean_gap": [
+     0.00159,
+     0.1972
+    ],
+    "blur_residual": [
+     0.00406,
+     0.16885
+    ],
+    "lowpass_max": [
+     0.02018,
+     0.32067
+    ],
+    "still_interior_max_delta": [
+     19,
+     96
+    ]
+   },
+   "limit": "every candidate value below the baseline's",
+   "pass": true
+  }
+ ],
+ "observations": {
+  "mask_card_bar_colours_differing_off": 0,
+  "grille_shadow_region": {
+   "baseline": {
+    "pixels": 5700,
+    "bbox": [
+     440,
+     271,
+     699,
+     310
+    ],
+    "mean_on": 0.41347,
+    "mean_off": 0.51503,
+    "mean_gap": 0.1972,
+    "lowpass_max": 0.32067,
+    "lowpass_mean": 0.11446,
+    "blur_residual": 0.16885,
+    "blur_sigma_px": 2.0,
+    "rms_unblurred": 0.17816,
+    "max_step": 95,
+    "over_8": 3256,
+    "over_16": 2904
+   },
+   "candidate": {
+    "pixels": 5700,
+    "bbox": [
+     440,
+     271,
+     699,
+     310
+    ],
+    "mean_on": 0.41347,
+    "mean_off": 0.41413,
+    "mean_gap": 0.00159,
+    "lowpass_max": 0.02018,
+    "lowpass_mean": 0.00523,
+    "blur_residual": 0.00406,
+    "blur_sigma_px": 1.0,
+    "rms_unblurred": 0.01775,
+    "max_step": 25,
+    "over_8": 460,
+    "over_16": 39
+   }
+  },
+  "pan_off_edge_bins": {
+   "baseline": {
+    "all": {
+     "3-8": 1096,
+     "9-16": 6,
+     ">16": 216,
+     "max": 86
+    },
+    "inside": {
+     "3-8": 103,
+     "9-16": 2,
+     ">16": 216,
+     "max": 86
+    },
+    "outside": {
+     "3-8": 993,
+     "9-16": 4,
+     ">16": 0,
+     "max": 10
+    }
+   },
+   "candidate": {
+    "all": {
+     "3-8": 797,
+     "9-16": 1,
+     ">16": 0,
+     "max": 9
+    },
+    "inside": {
+     "3-8": 49,
+     "9-16": 0,
+     ">16": 0,
+     "max": 5
+    },
+    "outside": {
+     "3-8": 748,
+     "9-16": 1,
+     ">16": 0,
+     "max": 9
+    }
+   }
+  },
+  "off_before_after": {
+   "band_split": {
+    "band": {
+     "max": 0,
+     "over_2": 0
+    },
+    "inner": {
+     "max": 95,
+     "over_2": 6300
+    }
+   },
+   "clusters_over_8": {
+    "threshold": 8,
+    "pixels": 3975,
+    "components": 60,
+    "largest": [
+     {
+      "pixels": 3123,
+      "bbox": [
+       469,
+       274,
+       691,
+       306
+      ],
+      "max": 95,
+      "peak": [
+       620,
+       296
+      ]
+     },
+     {
+      "pixels": 162,
+      "bbox": [
+       538,
+       207,
+       590,
+       230
+      ],
+      "max": 16,
+      "peak": [
+       555,
+       216
+      ]
+     },
+     {
+      "pixels": 156,
+      "bbox": [
+       541,
+       214,
+       591,
+       236
+      ],
+      "max": 16,
+      "peak": [
+       579,
+       228
+      ]
+     },
+     {
+      "pixels": 128,
+      "bbox": [
+       605,
+       243,
+       644,
+       255
+      ],
+      "max": 34,
+      "peak": [
+       608,
+       244
+      ]
+     },
+     {
+      "pixels": 85,
+      "bbox": [
+       614,
+       222,
+       634,
+       240
+      ],
+      "max": 32,
+      "peak": [
+       615,
+       237
+      ]
+     },
+     {
+      "pixels": 29,
+      "bbox": [
+       248,
+       186,
+       275,
+       191
+      ],
+      "max": 23,
+      "peak": [
+       272,
+       189
+      ]
+     },
+     {
+      "pixels": 23,
+      "bbox": [
+       249,
+       270,
+       259,
+       273
+      ],
+      "max": 23,
+      "peak": [
+       253,
+       271
+      ]
+     },
+     {
+      "pixels": 22,
+      "bbox": [
+       598,
+       249,
+       608,
+       254
+      ],
+      "max": 32,
+      "peak": [
+       601,
+       251
+      ]
+     },
+     {
+      "pixels": 18,
+      "bbox": [
+       583,
+       304,
+       591,
+       307
+      ],
+      "max": 18,
+      "peak": [
+       588,
+       305
+      ]
+     },
+     {
+      "pixels": 17,
+      "bbox": [
+       599,
+       223,
+       616,
+       224
+      ],
+      "max": 15,
+      "peak": [
+       608,
+       223
+      ]
+     },
+     {
+      "pixels": 15,
+      "bbox": [
+       363,
+       80,
+       378,
+       81
+      ],
+      "max": 42,
+      "peak": [
+       369,
+       80
+      ]
+     },
+     {
+      "pixels": 14,
+      "bbox": [
+       565,
+       300,
+       571,
+       304
+      ],
+      "max": 17,
+      "peak": [
+       567,
+       301
+      ]
+     }
+    ]
+   },
+   "grille_shadow_region": {
+    "pixels": 5700,
+    "bbox": [
+     440,
+     271,
+     699,
+     310
+    ],
+    "mean_on": 0.41413,
+    "mean_off": 0.51503,
+    "mean_gap": 0.19592,
+    "lowpass_max": 0.32051,
+    "lowpass_mean": 0.11644,
+    "blur_residual": 0.17535,
+    "blur_sigma_px": 2.0,
+    "rms_unblurred": 0.18436,
+    "max_step": 95,
+    "over_8": 3161,
+    "over_16": 2888
+   }
+  },
+  "on_before_after_max_step": 0,
+  "inherited_temporal_quality": {
+   "baseline": {
+    "still_activity_ge33": {
+     "value": 41,
+     "limit": 318,
+     "within": true
+    },
+    "still_activity_saturated": {
+     "value": 1,
+     "limit": 0,
+     "within": false
+    },
+    "still_frames_9_16_edge_mean": {
+     "value": 2.704,
+     "limit": 5,
+     "within": true
+    },
+    "still_frames_9_16_edge_max": {
+     "value": 71,
+     "limit": 50,
+     "within": false
+    },
+    "still_frames_9_16_interior_changed": {
+     "value": 66,
+     "limit": 100,
+     "within": true
+    },
+    "still_same_phase_interior_changed": {
+     "value": 32,
+     "limit": 0,
+     "within": false
+    },
+    "pan_off_edge_9_16": {
+     "value": 6,
+     "limit": 0,
+     "within": false
+    },
+    "pan_off_edge_over_16": {
+     "value": 216,
+     "limit": 0,
+     "within": false
+    }
+   },
+   "candidate": {
+    "still_activity_ge33": {
+     "value": 41,
+     "limit": 318,
+     "within": true
+    },
+    "still_activity_saturated": {
+     "value": 1,
+     "limit": 0,
+     "within": false
+    },
+    "still_frames_9_16_edge_mean": {
+     "value": 2.685,
+     "limit": 5,
+     "within": true
+    },
+    "still_frames_9_16_edge_max": {
+     "value": 71,
+     "limit": 50,
+     "within": false
+    },
+    "still_frames_9_16_interior_changed": {
+     "value": 39,
+     "limit": 100,
+     "within": true
+    },
+    "still_same_phase_interior_changed": {
+     "value": 21,
+     "limit": 0,
+     "within": false
+    },
+    "pan_off_edge_9_16": {
+     "value": 1,
+     "limit": 0,
+     "within": false
+    },
+    "pan_off_edge_over_16": {
+     "value": 0,
+     "limit": 0,
+     "within": true
+    }
+   }
+  },
+  "report_still_f16_vs_off": {
+   "baseline": {
+    "edge": {
+     "changed_over_threshold": 25493,
+     "max_delta": 134,
+     "mean_delta": 22.622253701822846,
+     "pixels": 37414
+    },
+    "identical": false,
+    "interior": {
+     "changed_over_threshold": 5597,
+     "max_delta": 96,
+     "mean_delta": 0.4943137638101733,
+     "pixels": 480986
+    }
+   },
+   "candidate": {
+    "edge": {
+     "changed_over_threshold": 26016,
+     "max_delta": 134,
+     "mean_delta": 21.491842346471127,
+     "pixels": 38185
+    },
+    "identical": false,
+    "interior": {
+     "changed_over_threshold": 2569,
+     "max_delta": 19,
+     "mean_delta": 0.18858844475911832,
+     "pixels": 480215
+    }
+   }
+  },
+  "report_pan_f24_vs_off": {
+   "baseline": {
+    "edge": {
+     "changed_over_threshold": 25542,
+     "max_delta": 147,
+     "mean_delta": 22.19819486962947,
+     "pixels": 37892
+    },
+    "identical": false,
+    "interior": {
+     "changed_over_threshold": 6032,
+     "max_delta": 95,
+     "mean_delta": 0.49451413920267717,
+     "pixels": 480508
+    }
+   },
+   "candidate": {
+    "edge": {
+     "changed_over_threshold": 25992,
+     "max_delta": 147,
+     "mean_delta": 21.161139896373058,
+     "pixels": 38600
+    },
+    "identical": false,
+    "interior": {
+     "changed_over_threshold": 3108,
+     "max_delta": 58,
+     "mean_delta": 0.2050854522717799,
+     "pixels": 479800
+    }
+   }
+  }
+ },
+ "inherited_note": "inherited temporal-quality rules are observations of the unchanged resolve; they never decide this verdict",
+ "recorded": "2026-10-13T14:50:29.149628+00:00",
+ "integrity_summary": {
+  "path": "summary-2026-10-13T145022.235852+0000.json",
+  "sha256": "1783b5748560f51c076f4bf5487877a3aee5b8e241d2db4d35ee75c2d3b86f43"
+ },
+ "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+ "note": "Thresholds are calibrated proposals (plan.json comparison), not plan gates."
+}

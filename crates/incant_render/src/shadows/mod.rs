@@ -160,7 +160,7 @@ impl ShadowSystem {
         &self,
         device: &wgpu::Device,
         camera: CameraView,
-        aspect: f32,
+        rect: [f32; 4],
         lights: &[ShadowLight],
         casters: &[Bounds],
     ) -> Result<PreparedShadows> {
@@ -172,7 +172,7 @@ impl ShadowSystem {
         let mut layers = Vec::new();
         for (light_index, light) in lights.iter().enumerate() {
             if let Some(cascades) =
-                cascade::fit(camera, aspect, light.direction, light.distance, casters)?
+                cascade::fit_for_viewport(camera, rect, light.direction, light.distance, casters)?
             {
                 for (i, cascade) in cascades.into_iter().enumerate() {
                     let index = light_index * CASCADES + i;

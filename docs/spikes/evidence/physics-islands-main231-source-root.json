@@ -1,0 +1,10 @@
+{
+  "decision": "accepted current-main source for qualification",
+  "freeze_sha256": "8029a150786c809f90cff567f355a4ad9ff105b11ca3d73187ff09a57b34c6c6",
+  "head": "e6a90da39851b64ae343c255d98b77dee62d5fd4",
+  "base": "b4b0d5e919de8432a6c643d4486e0230ebddbc58",
+  "exact_producer_paths": 25,
+  "closure_inputs": 2010,
+  "review": "Accepted native island constructor source, fixtures and private tests unchanged from producer1a1ad505. Sole closure difference is current-main Error enum ordering, with no encoding/discriminant dependency. Existing final producer receipt1c593 remains scoped; no new code behavior or world-save admission.",
+  "limits": "Current-main CPU/strict/feature qualification pending; no full live world, public save, device or phase gate."
+}
