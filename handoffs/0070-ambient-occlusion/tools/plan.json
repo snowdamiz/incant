@@ -1,5 +1,5 @@
 {
- "format": "incant-0070-plan-v1",
+ "format": "incant-0070-plan-v2",
  "packet": "0070-ambient-occlusion",
  "source_commit": "b633f92d9d20cd8ed4c328b0b670ab7935797801",
  "default_features": "incant_render and incant_render_gpu_host default (physics-deterministic); no cooked-* family",
@@ -13,11 +13,11 @@
    "appearance": 1,
    "focused_retries_reserved": 2
   },
-  "existing_frames_max": 2048,
+  "existing_frames_max": 8192,
   "new_frames_max": 128,
-  "combined_frames_max": 2176,
-  "existing_frames_planned": 1828,
-  "existing_headroom_unallocated": 220,
+  "combined_frames_max": 8320,
+  "existing_frames_planned": 8092,
+  "existing_headroom_unallocated": 100,
   "new_frames_planned": {
    "suite_new_tests": 20,
    "numeric": 73,
@@ -45,6 +45,7 @@
   "appearance": 300,
   "retry": 150
  },
+ "timeouts_basis": "Watchdogs, not measurements; their sum (2370 s) stays under the 2700 s ceiling. The same 50 ignored model_gpu tests, sprites::wide included, finished in 49.43 s and 49.05 s under profile ci (handoffs/0054-native-text-draw and 0055-bidi-wrap-review evidence/test-render-gpu.txt), so 300 s is about 6x.",
  "suites": {
   "lib": {
    "root": "crates/incant_render/src/lib.rs",
@@ -240,7 +241,6 @@
      "counted": "4 draw_scene"
     }
    },
-   "deferred": {},
    "run": [
     "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output",
     "bloom::tests::device::actual_pyramid_nonzero_halo_resize_and_zero_alpha_control",
@@ -531,18 +531,16 @@
      "frames": 49,
      "counted": "1 + 3 scales x 2 heights x 8 orientations"
     },
+    "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels": {
+     "frames": 6264,
+     "counted": "per width/orientation: width/64 palette crops + 14 scales x (10 + 6 x anchors); widths 512..8192, both orientations; 2 x 3132 64x64 screenshots"
+    },
     "tangents::generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection": {
      "frames": 48,
      "counted": "4 mirrors x 3 transforms x 4"
     }
    },
    "new_in_suite": {},
-   "deferred": {
-    "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels": {
-     "frames": 6264,
-     "counted": "per width/orientation: width/64 palette crops + 14 scales x (10 + 6 x anchors); widths 512..8192, both orientations; 2 x 3132 64x64 screenshots"
-    }
-   },
    "run": [
     "alpha_modes_and_back_faces_follow_material_semantics",
     "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
@@ -592,9 +590,10 @@
     "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
     "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
     "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+    "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels",
     "tangents::generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection"
    ],
-   "existing_frames": 1331,
+   "existing_frames": 7595,
    "new_frames": 0
   },
   "gpu_host-game": {
@@ -630,7 +629,6 @@
     }
    },
    "new_in_suite": {},
-   "deferred": {},
    "run": [
     "hosted_text_child_draws_with_models_script_and_audio_without_motion_uploads",
     "observed_device_loss_stops_the_host_before_another_target_is_acquired",
@@ -659,7 +657,6 @@
     }
    },
    "new_in_suite": {},
-   "deferred": {},
    "run": [
     "composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources",
     "refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game"
@@ -668,7 +665,6 @@
    "new_frames": 0
   }
  },
- "deferred_frames": 6264,
  "numeric_cases": [
   {
    "name": "ssao_core",
@@ -860,7 +856,8 @@
    ],
    "fixed": {
     "CARGO_TERM_COLOR": "never",
-    "CARGO_INCREMENTAL": "0"
+    "CARGO_INCREMENTAL": "0",
+    "LC_ALL": "C"
    }
   },
   "run": {
@@ -869,25 +866,38 @@
     "TMPDIR"
    ],
    "fixed": {
-    "RUST_BACKTRACE": "1"
+    "RUST_BACKTRACE": "1",
+    "LC_ALL": "C"
    },
    "granted": [
     "INCANT_EXPECT_GPU_BACKEND"
+   ],
+   "inherited_descriptors": [
+    "the shared native GPU lock"
    ]
   },
+  "spawn_gate": "The leader starts as this Python interpreter (-I -S -B) blocked on a pipe; its exact identity is recorded before the runner sends the exact environment, and only then does it exec the program. A gate that never opens exits 125.",
   "never": [
    "INCANT_* (except INCANT_EXPECT_GPU_BACKEND)",
    "WGPU_*",
    "TRACY_*",
    "RUSTFLAGS",
-   "CARGO_ENCODED_RUSTFLAGS",
+   "RUSTDOCFLAGS",
+   "RUSTC",
+   "CARGO_ENCODED_*",
    "RUSTC_WRAPPER",
    "RUSTC_WORKSPACE_WRAPPER",
+   "RUSTUP_TOOLCHAIN",
    "CARGO_BUILD_*",
    "CARGO_FEATURE_*",
    "CARGO_PROFILE_*",
+   "CARGO_TARGET_* (except CARGO_TARGET_DIR)",
    "account/provider variables"
   ]
+ },
+ "shared_gpu_lock": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/native-gpu.lock",
+  "protocol": "flock(2) LOCK_EX|LOCK_NB, taken before the grant preflight and the packet lock and held through reservation, launch, kill+wait, completion and unlock; released by closing, never LOCK_UN; device children inherit the descriptor. Other packets must flock the same path to be excluded."
  },
  "reviewed_repo_cargo_config_sha256": "0d3b42ee7bc4ef237cb8af440c47e506dcc9cc8b24d49d3cd3d3fea76ae5caa1",
  "grants": {
@@ -915,9 +925,22 @@
     "helper_digest",
     "evidence_dir",
     "build_record_sha256",
-    "expected_backend (Metal|Vulkan|Dx12)",
-    "allow_deferred_tests [] (root revision only)"
+    "expected_backend (Metal|Vulkan|Dx12)"
    ]
+  },
+  "retry": {
+   "format": "incant-0070-retry-v2",
+   "file": "directly in evidence_dir",
+   "required": [
+    "packet",
+    "approved_by=root",
+    "source_commit",
+    "original_label (a latched failure)",
+    "kind and target equal to the latched child",
+    "tests (suite: non-empty subset of its failed or missing tests)",
+    "reason"
+   ],
+   "limits": "one retry per latched child, each receipt used once, at most 2 retries; a passing retry does not unlatch other work"
   }
  }
 }

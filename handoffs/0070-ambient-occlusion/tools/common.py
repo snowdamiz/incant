@@ -35,6 +35,12 @@ BACKENDS = ("Metal", "Vulkan", "Dx12")
 REQUIRE_EXTERNAL_EVIDENCE = True
 
 
+def shared_gpu_lock_path():
+    """One flock(2) file shared by every packet's native GPU runner. Read at
+    call time: only the CPU selftest harness points EVIDENCE_ROOT at scratch."""
+    return EVIDENCE_ROOT / "native-gpu.lock"
+
+
 def sha256_file(path):
     digest = hashlib.sha256()
     with open(path, "rb") as source:

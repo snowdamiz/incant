@@ -1,10 +1,22 @@
-"""Durable launch ledger and exclusive runner lock. Standard library only.
+"""Durable launch ledger and exclusive non-waiting locks. Standard library only.
 
 Every record is one JSON line, flushed and fsynced before the call returns.
 Budgets are charged by `reserve` records only and are never released: a failed,
-timed-out or interrupted child keeps its full reservation. A `reserve` without a
-matching `complete` means a runner died uncatchably (SIGKILL); runner.py then
-refuses new children until `reconcile` resolves it.
+timed-out or interrupted child keeps its full reservation.
+
+Lock order (runner.py): the shared native GPU lock first, then this packet's
+lock. A lock is released by closing its descriptor, never by LOCK_UN: device
+children inherit the shared-lock descriptor, so the lock stays held while any
+of them is alive -- including an orphan that outlived a SIGKILLed runner.
+
+Derived state:
+- blocked: a reservation whose process group was never verified absent (no
+  completion because the runner was lost, a completion with survivors or an
+  unverified group, or a failed reconciliation). Every child refuses until
+  `reconcile` proves ownership by exact identity and verifies the group absent.
+- failed: a device child whose completion is not an explicit success, or that
+  never completed. A failure latches: further device work refuses except a
+  root-receipted precise retry.
 """
 
 import datetime
@@ -15,6 +27,8 @@ import time
 from contextlib import contextmanager
 from pathlib import Path
 
+DEVICE_KINDS = ("listing", "suite", "numeric", "appearance", "retry")
+
 
 class Refused(Exception):
     """A gate refused before any child started."""
@@ -22,6 +36,24 @@ class Refused(Exception):
 
 def now_iso():
     return datetime.datetime.now(datetime.UTC).isoformat()
+
+
+@contextmanager
+def exclusive(path, what):
+    """Exclusive flock(2) on `path`, never waiting. Yields the descriptor."""
+    try:
+        fd = os.open(path, os.O_RDWR | os.O_CREAT, 0o600)
+    except OSError as error:
+        raise Refused(f"cannot open {what} at {path}: {error}") from error
+    try:
+        try:
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as error:
+            raise Refused(f"{what} ({path}) is held by another runner or its child; refusing without waiting") \
+                from error
+        yield fd
+    finally:
+        os.close(fd)
 
 
 class Ledger:
@@ -33,21 +65,13 @@ class Ledger:
 
     @contextmanager
     def locked(self):
-        """Exclusive, non-waiting: a second runner refuses instead of queueing."""
-        fd = os.open(self.lock_path, os.O_RDWR | os.O_CREAT, 0o600)
-        try:
-            try:
-                fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            except BlockingIOError as error:
-                raise Refused("another runner holds the packet lock") from error
+        """This packet's lock: a second runner refuses instead of queueing."""
+        with exclusive(self.lock_path, "the packet lock"):
             self._held = True
             try:
                 yield self
             finally:
                 self._held = False
-                fcntl.flock(fd, fcntl.LOCK_UN)
-        finally:
-            os.close(fd)
 
     def records(self):
         if not self.path.exists():
@@ -93,11 +117,67 @@ class Ledger:
             "labels": [r["label"] for r in reserves],
         }
 
-    def unresolved(self):
-        """Reservations whose child has no completion or reconciliation record."""
-        records = self.records()
-        done = {r["label"] for r in records if r.get("type") in ("complete", "reconciled")}
-        return [r for r in records if r.get("type") == "reserve" and r["label"] not in done]
+    def children(self):
+        """Per label: reservation, spawned/member records, completion, reconciliations."""
+        out = {}
+        for r in self.records():
+            kind, label = r.get("type"), r.get("label")
+            if label is None or kind not in ("reserve", "spawned", "member", "complete", "reconcile"):
+                continue
+            entry = out.setdefault(label, {"reserve": None, "spawned": [], "member": [], "complete": None,
+                                           "reconcile": []})
+            if kind in ("reserve", "complete"):
+                entry[kind] = r
+            else:
+                entry[kind].append(r)
+        return {label: e for label, e in out.items() if e["reserve"] is not None}
+
+    @staticmethod
+    def group_verified(entry):
+        if any(r.get("resolved") is True for r in entry["reconcile"]):
+            return True
+        done = entry["complete"]
+        if done is None:
+            return False
+        outcome = done.get("outcome") or {}
+        return (outcome.get("group_absent") is True and not outcome.get("survivors")
+                and not outcome.get("leader_unreaped"))
+
+    def blocked(self):
+        """Labels whose process group was never verified absent."""
+        return {label: e for label, e in self.children().items() if not self.group_verified(e)}
+
+    def failures(self):
+        """Latched device failures: anything but an explicit success."""
+        out = {}
+        for label, entry in self.children().items():
+            if entry["reserve"].get("kind") not in DEVICE_KINDS:
+                continue
+            done = entry["complete"]
+            if done is None:
+                out[label] = ["no completion record: the runner was lost before the child finished"]
+            elif done.get("success") is not True:
+                out[label] = done.get("failure_reasons") or ["completion without an explicit success"]
+        return out
+
+    def retained_identities(self, entry):
+        """Every exact identity this packet recorded for one child."""
+        found = []
+        for r in entry["spawned"]:
+            found.append(r.get("identity"))
+        for r in entry["member"]:
+            found.append(r.get("identity"))
+        outcome = (entry["complete"] or {}).get("outcome") or {}
+        found.append(outcome.get("leader"))
+        found.extend(outcome.get("members_seen") or [])
+        found.extend(outcome.get("survivors") or [])
+        for r in entry["reconcile"]:
+            found.extend(r.get("retained") or [])
+        unique = []
+        for ident in found:
+            if isinstance(ident, dict) and "start" in ident and ident not in unique:
+                unique.append(ident)
+        return unique
 
     def check_and_reserve(self, budgets, request):
         """Charge `request` iff every ceiling still holds; otherwise refuse."""

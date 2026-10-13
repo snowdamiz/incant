@@ -109,6 +109,10 @@ EXISTING = {
         "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels": (8, "8 screenshots"),
         "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties": (71, "1 + 7 scales x 5 offsets x 2"),
         "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize": (49, "1 + 3 scales x 2 heights x 8 orientations"),
+        "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels": (
+            6264,
+            "per width/orientation: width/64 palette crops + 14 scales x (10 + 6 x anchors); "
+            "widths 512..8192, both orientations; 2 x 3132 64x64 screenshots"),
         "tangents::generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection": (48, "4 mirrors x 3 transforms x 4"),
     },
     "gpu_host-game": {
@@ -133,15 +137,10 @@ NEW_IN_SUITE = {
     "bloom::tests::device::canonical_graph_zero_gain_and_pixel_camera_bypass_and_invalid_replace": (4, "4 draw_scene"),
 }
 
-# Over the entire existing ceiling by itself; refused until root revises the packet.
-DEFERRED = {
-    "model_gpu": {
-        "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels": (
-            6264,
-            "per width/orientation: width/64 palette crops + 14 scales x (10 + 6 x anchors); "
-            "widths 512..8192, both orientations; 2 x 3132 64x64 screenshots"),
-    },
-}
+# Root revision 2: the existing-regression ceiling is 8192 frames (combined
+# 8320), so every one of the 94 compiled ignored tests runs exactly once.
+EXISTING_FRAMES_MAX = 8192
+NEW_FRAMES_MAX = 128
 
 NUMERIC = [
     {"name": "ssao_core", "frames": 20, "renderers": ["off", "ao", "ao_radius_0_5", "ao_strength_0_5"],
@@ -194,16 +193,12 @@ APPEARANCE = {
 def build():
     prediction = listing.predict()
     suites = {}
-    existing_total = new_total = deferred_total = 0
+    existing_total = new_total = 0
     for binary, entry in prediction.items():
         names = entry["ignored"]
-        bounds, deferred, new = {}, {}, {}
+        bounds, new = {}, {}
         for name in names:
-            if name in DEFERRED.get(binary, {}):
-                frames, note = DEFERRED[binary][name]
-                deferred[name] = {"frames": frames, "counted": note}
-                deferred_total += frames
-            elif binary == "lib" and name in NEW_IN_SUITE:
+            if binary == "lib" and name in NEW_IN_SUITE:
                 frames, note = NEW_IN_SUITE[name]
                 new[name] = {"frames": frames, "counted": note}
                 new_total += frames
@@ -213,20 +208,21 @@ def build():
                 existing_total += frames
             else:
                 raise SystemExit(f"{binary}: no frame bound for {name}")
-        stale = (set(EXISTING[binary]) | set(DEFERRED.get(binary, {}))
-                 | (set(NEW_IN_SUITE) if binary == "lib" else set())) - set(names)
+        stale = (set(EXISTING[binary]) | (set(NEW_IN_SUITE) if binary == "lib" else set())) - set(names)
         if stale:
             raise SystemExit(f"{binary}: bounds for tests that no longer exist: {sorted(stale)}")
+        run = sorted(set(bounds) | set(new))
+        if run != sorted(names):
+            raise SystemExit(f"{binary}: every compiled ignored test must run exactly once")
         suites[binary] = {
             "root": entry["root"], "listed_tests": entry["tests"], "ignored": names,
-            "existing": bounds, "new_in_suite": new, "deferred": deferred,
-            "run": sorted(set(bounds) | set(new)),
+            "existing": bounds, "new_in_suite": new, "run": run,
             "existing_frames": sum(v["frames"] for v in bounds.values()),
             "new_frames": sum(v["frames"] for v in new.values()),
         }
     numeric_total = sum(c["frames"] for c in NUMERIC)
     plan = {
-        "format": "incant-0070-plan-v1",
+        "format": "incant-0070-plan-v2",
         "packet": "0070-ambient-occlusion",
         "source_commit": "b633f92d9d20cd8ed4c328b0b670ab7935797801",
         "default_features": "incant_render and incant_render_gpu_host default (physics-deterministic); no cooked-* family",
@@ -238,32 +234,48 @@ def build():
         "budgets": {
             "gpu_children_max": 16, "children_planned": {"listings": 4, "suites": 4, "numeric": len(NUMERIC),
                                                         "appearance": 1, "focused_retries_reserved": 2},
-            "existing_frames_max": 2048, "new_frames_max": 128, "combined_frames_max": 2176,
+            "existing_frames_max": EXISTING_FRAMES_MAX, "new_frames_max": NEW_FRAMES_MAX,
+            "combined_frames_max": EXISTING_FRAMES_MAX + NEW_FRAMES_MAX,
             "existing_frames_planned": existing_total,
-            "existing_headroom_unallocated": 2048 - existing_total,
+            "existing_headroom_unallocated": EXISTING_FRAMES_MAX - existing_total,
             "new_frames_planned": {"suite_new_tests": new_total, "numeric": numeric_total,
                                    "appearance": APPEARANCE["renders"],
-                                   "retry_reserve": 128 - new_total - numeric_total - APPEARANCE["renders"]},
+                                   "retry_reserve": NEW_FRAMES_MAX - new_total - numeric_total - APPEARANCE["renders"]},
             "pngs_max": 32, "pairs_max": 16, "max_extent": [960, 540],
             "execution_seconds_max": 2700, "build_jobs_max": 2,
         },
         "timeouts_s": {"listing": 30, "suite": {"lib": 240, "model_gpu": 300, "gpu_host-game": 180,
                                                  "gpu_host-ui": 180},
                        "numeric": 150, "appearance": 300, "retry": 150},
+        "timeouts_basis": ("Watchdogs, not measurements; their sum (2370 s) stays under the 2700 s ceiling. "
+                           "The same 50 ignored model_gpu tests, sprites::wide included, finished in "
+                           "49.43 s and 49.05 s under profile ci (handoffs/0054-native-text-draw and "
+                           "0055-bidi-wrap-review evidence/test-render-gpu.txt), so 300 s is about 6x."),
         "suites": suites,
-        "deferred_frames": deferred_total,
         "numeric_cases": NUMERIC,
         "appearance": APPEARANCE,
         "environment": {
             "build": {"PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
                       "forwarded_unchanged_if_set": ["HOME", "CARGO_HOME", "RUSTUP_HOME"],
                       "granted": ["CARGO_TARGET_DIR"], "private": ["TMPDIR"],
-                      "fixed": {"CARGO_TERM_COLOR": "never", "CARGO_INCREMENTAL": "0"}},
+                      "fixed": {"CARGO_TERM_COLOR": "never", "CARGO_INCREMENTAL": "0", "LC_ALL": "C"}},
             "run": {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin", "private": ["TMPDIR"],
-                    "fixed": {"RUST_BACKTRACE": "1"}, "granted": ["INCANT_EXPECT_GPU_BACKEND"]},
+                    "fixed": {"RUST_BACKTRACE": "1", "LC_ALL": "C"}, "granted": ["INCANT_EXPECT_GPU_BACKEND"],
+                    "inherited_descriptors": ["the shared native GPU lock"]},
+            "spawn_gate": ("The leader starts as this Python interpreter (-I -S -B) blocked on a pipe; its "
+                           "exact identity is recorded before the runner sends the exact environment, and "
+                           "only then does it exec the program. A gate that never opens exits 125."),
             "never": ["INCANT_* (except INCANT_EXPECT_GPU_BACKEND)", "WGPU_*", "TRACY_*", "RUSTFLAGS",
-                      "CARGO_ENCODED_RUSTFLAGS", "RUSTC_WRAPPER", "RUSTC_WORKSPACE_WRAPPER",
-                      "CARGO_BUILD_*", "CARGO_FEATURE_*", "CARGO_PROFILE_*", "account/provider variables"],
+                      "RUSTDOCFLAGS", "RUSTC", "CARGO_ENCODED_*", "RUSTC_WRAPPER", "RUSTC_WORKSPACE_WRAPPER",
+                      "RUSTUP_TOOLCHAIN", "CARGO_BUILD_*", "CARGO_FEATURE_*", "CARGO_PROFILE_*",
+                      "CARGO_TARGET_* (except CARGO_TARGET_DIR)", "account/provider variables"],
+        },
+        "shared_gpu_lock": {
+            "path": "/Users/andreyyurlov/.codex/incant-evidence/native-gpu.lock",
+            "protocol": ("flock(2) LOCK_EX|LOCK_NB, taken before the grant preflight and the packet lock and "
+                         "held through reservation, launch, kill+wait, completion and unlock; released by "
+                         "closing, never LOCK_UN; device children inherit the descriptor. Other packets "
+                         "must flock the same path to be excluded."),
         },
         "reviewed_repo_cargo_config_sha256": None,
         "grants": {
@@ -272,8 +284,12 @@ def build():
                 "cargo_target_dir", "max_jobs<=2", "approved_cargo_configs {absolute path: sha256}"]},
             "gpu": {"format": "incant-0070-gpu-grant-v1", "required": [
                 "packet", "kind=gpu", "source_commit", "plan_sha256", "helper_digest", "evidence_dir",
-                "build_record_sha256", "expected_backend (Metal|Vulkan|Dx12)",
-                "allow_deferred_tests [] (root revision only)"]},
+                "build_record_sha256", "expected_backend (Metal|Vulkan|Dx12)"]},
+            "retry": {"format": "incant-0070-retry-v2", "file": "directly in evidence_dir", "required": [
+                "packet", "approved_by=root", "source_commit", "original_label (a latched failure)",
+                "kind and target equal to the latched child", "tests (suite: non-empty subset of its "
+                "failed or missing tests)", "reason"], "limits": "one retry per latched child, each "
+                "receipt used once, at most 2 retries; a passing retry does not unlatch other work"},
         },
     }
     return plan
@@ -295,7 +311,7 @@ def main():
     print(json.dumps({"existing_frames_planned": b["existing_frames_planned"],
                       "existing_headroom_unallocated": b["existing_headroom_unallocated"],
                       "new_frames_planned": b["new_frames_planned"],
-                      "deferred_frames": plan["deferred_frames"]}, indent=1))
+                      "tests_run": {k: len(v["run"]) for k, v in plan["suites"].items()}}, indent=1))
 
 
 if __name__ == "__main__":
