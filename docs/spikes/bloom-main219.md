@@ -51,4 +51,4 @@ created. The original producer appearance review remains separate.
 204 lossless payloads and nine binary identities. The first archive verifier
 exposed an omitted producer analysis path; the collector now retains all 37
 reviewed producer records, with the initial diagnostic preserved. No source or
-execution changed. Final independent integration review is pending.
+execution changed. Final independent integration review is accepted. Publication follows an exact current-main composition check and the required fast check.

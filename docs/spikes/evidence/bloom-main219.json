@@ -164,6 +164,10 @@
     "0075-bloom004-execution-preaudit-root-20261013": {
       "path": "docs/spikes/evidence/bloom-main219/0075-bloom004-execution-preaudit-root-20261013.json",
       "sha256": "f359c45aad71eb520893887724a0d0fe8bae82e2a5105c7a7f6ed2ff31b4695a"
+    },
+    "current_final": {
+      "path": "docs/spikes/evidence/bloom-main219/final-root-review.json",
+      "sha256": "e44d87932dbca1fb919e74603cf9a2c58a1383c2d74bdd5257f7c5f712253ad1"
     }
   },
   "freeze": {
@@ -734,6 +738,6 @@
     "producer": "Claude0075 bloom-only approval retains exact producer37GPUtests/534submissions/27gates. SSAO remains rejected; original producer frames do not establish current composed appearance.",
     "limits": "Opt-in only, no phone/performance/phase approval. Fixed temporal softness and MASK detail18% OF reference unchanged.",
     "preliminary": "First absolute cargo fmt invocation lacked cargo-fmt PATH and failed before formatting; corrected pinned PATH succeeded. The first archive verifier exposed an omitted producer analysis path; all37 reviewed retained records were added with exact hashes. Original diagnostic retained, no source or execution change.",
-    "final_review": "pending"
+    "final_review": "Independent current-main source/execution evidence accepted; later main ancestry requires separate exact source relevance qualification."
   }
 }
