@@ -199,5 +199,13 @@
     "Actual compiler target checks use ci and the two native physics libraries, not a fresh shipping package.",
     "The historical failed candidate is immutable; repaired ordinary shipping export and all required release checks remain pending."
   ],
-  "review_state": "Independent final source/evidence review pending"
+  "review_state": "Independent source and final evidence accepted; exact-head fast check required",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-artifact-vendor-identity/final-review.json",
+    "sha256": "d96e36da1e6c679ee776aee0edc15dbd449b8be1bd5f119bbfce2e064d6ce285"
+  },
+  "windows_same_cause": {
+    "path": "docs/spikes/evidence/physics-artifact-vendor-identity/windows-same-cause.json",
+    "sha256": "e56f3d8fc79142aba435485bcc06ed3bfa200a812835e3c974f1fe28043bb2dd"
+  }
 }

@@ -25,5 +25,8 @@ and 22 Node tests; formatting, conventions and full-base diff checks pass. All
 2,878 frozen implementation/build inputs remain unchanged through the six checks.
 Commands, raw streams, the hosted artifact, old-parser replay and exact source
 hashes are retained in the [manifest](evidence/physics-artifact-vendor-identity.json).
-Independent final review and publication are pending. A repaired frozen checkpoint
+[Independent final review](evidence/physics-artifact-vendor-identity/final-review.json)
+accepted source and evidence. The later Windows desktop failure is retained as
+[same-cause evidence](evidence/physics-artifact-vendor-identity/windows-same-cause.json);
+no additional source change was needed. Publication awaits the required fast check. A repaired frozen checkpoint
 must execute the ordinary shipping export and pass all required release checks.
