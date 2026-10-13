@@ -1,6 +1,8 @@
 # Implementation status
 
-Native island construction on main231 is source-reviewed and passed current composed CPU qualification: 218 snapshot + 28 private native cases in each of two parallel modes, 156 paired island steps per dimension/mode, all 21 checks successful. Final integration review is accepted; current-main join/fast check remain before publication. Complete-world restore and physics-save admission remain closed. See [the scoped evidence](docs/spikes/physics-islands-main231.md).
+Private typed Parry BVH construction and shared allocation on main234 passed both composed numerical modes: 225 snapshot + 26 native cases per mode, 226 paired BVH steps per dimension/mode, all23 checks successful. Final current-main packet and main235 join reviews are accepted; required fast check/publication remain. The feature stays default-off and complete-world physics saves remain unsupported. [Evidence](docs/spikes/physics-parry-main234.md).
+
+Native island construction on main231 is source-reviewed and passed current composed CPU qualification: 218 snapshot + 28 private native cases in each of two parallel modes, 156 paired island steps per dimension/mode, all 21 checks successful. Final integration and main234 join reviews are accepted; PR235 merged after its required exact-head fast check. Complete-world restore and physics-save admission remain closed. See [the scoped evidence](docs/spikes/physics-islands-main231.md).
 
 [PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
@@ -25,8 +27,8 @@ half-pixel guard with temporal rendering off or on. The scene camera, lighting
 clusters, filtering and shaders are unchanged; default unjittered shadow fitting
 intentionally changes. Current composition passes171 default/203 overlapping
 cooked CPU cases and13 checks, with33 native payloads exact. Independent source,
-final evidence and main231 relevance reviews are accepted; publication awaits
-its fast check. Original Metal/Claude visual evidence remains producer-scoped:
+final evidence and main231/main233 relevance reviews are accepted; PR234 merged
+after its required exact-head fast check. Original Metal/Claude visual evidence remains producer-scoped:
 the initial strict comparison is still failed, same-binary one-frame variation
 is unresolved, and thin MASK/temporal quality limits remain. No current GPU or
 phone/performance claim. [Evidence](docs/spikes/shadow-main230.md).
@@ -231,9 +233,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main231, 2026-10-13
+## Current overview — main235, 2026-10-13
 
-Development main231 includes the reviewed opt-in cooked renderer families and
+Development main235 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.

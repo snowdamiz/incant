@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-13T16:54:27.499721+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted curated typed BVH source for scoped qualification",
+  "head": "09ba77ae74f9c982ebef5c7b313d488d128fea00",
+  "main": "979e85e633d3fae975f15d8ec0f485119f57062f",
+  "island_dependency": "114e4ab9104f3f6bdf37bf67f1521cd1874f096b",
+  "producer": "c39ad333eafcffd3f47e5b168f91b811fb727b77",
+  "freeze_sha256": "decc54e1d9ef28b82e5da27eda60ed5151ec4f397c1ca775cb117edaa5ab1338",
+  "seam_sha256": "4b02924d1dd4baa84ff977e3287da6fa5d8ebfbafe2871e4b0e5dc7c80818192",
+  "source_files": 23,
+  "closure_files": 2019,
+  "basis": [
+    "Rehashed every current source, exact saved copy and all producer Git blobs in 2019-file selected closure.22 of23 affected files match accepted producer exactly.",
+    "Read sole seam patch: Error declaration ordering matches current main, with no encoded discriminant contract. Construction module feature addition matches accepted producer.",
+    "Default-off typed Parry construction and shared cumulative permit retain producer final acceptance78c052; no new raw or public world installer."
+  ],
+  "limits": [
+    "Current composition full local qualification and final archive pending.",
+    "Island dependency accepted but its main merge still pending required fast check.",
+    "No live physics-save, performance/device or phase acceptance."
+  ]
+}

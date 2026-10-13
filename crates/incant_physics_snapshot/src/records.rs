@@ -86,8 +86,9 @@ pub struct BvhRecord {
     pub rebuild_start: u32,
 }
 
-/// Private ownership prevents mutation after validation. There is deliberately
-/// no conversion from this witness to Parry, Rapier or a native physics owner.
+/// Private ownership prevents mutation after validation. The ordinary inert
+/// crate has no native dependencies. A separate default-off Parry feature may
+/// construct tree storage; that is not native world or physics-save admission.
 pub struct ValidatedBvh {
     pub(crate) record: BvhRecord,
 }
