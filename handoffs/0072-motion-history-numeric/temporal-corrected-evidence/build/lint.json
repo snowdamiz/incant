@@ -1,0 +1,61 @@
+{
+ "tools": {
+  "head": "6986cb04cc61f77ca810acbf1bfc01d363579ce2",
+  "visual_tree": "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e",
+  "plan_sha256": "df1d01c245c7cd60573db09b0f086d923a5158d4308c7f69d7cfa923a7948f89",
+  "helper_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde"
+ },
+ "source": {
+  "commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+  "files": 18076,
+  "manifest_sha256": "1e4302067260cfa787f40ccf55bc93e530dfd289009e880ed11bd091695741f0",
+  "helper_copy_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde"
+ },
+ "label": "lint",
+ "kind": "build",
+ "holder": "root/astra supervised CPU builds",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "temporal_visual_review",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/tmp/lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "pid": 2976,
+ "started": "2026-10-13T08:37:01.036627+00:00",
+ "ended": "2026-10-13T08:37:06.641707+00:00",
+ "exit": 0,
+ "timed_out": false,
+ "wait_error": null,
+ "timeout_s": 2700,
+ "group_empty_after": true,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-lint.stdout.jsonl",
+ "stdout_sha256": "6314e4526ed7da3628b672d9b71e1440fc359b2fb75b08a1b1df6d59f53cc953",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-lint.stderr.txt",
+ "stderr_sha256": "6b9658f08ede000118f1216a9ced77ef194d714f0230a91b0d920b6f03a3babb",
+ "recorded": "2026-10-13T08:37:06.642174+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "packet": "0072-motion-history-numeric",
+  "stage": "temporal-corrected-visual",
+  "holder": "Claude Opus 5.5 Max, explicitly verified through ACP, handoff0072",
+  "visual_tree": "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e",
+  "build_record_sha256": "eebd5b3be9e1233bc6ba9273323e67408e8cb9f051b33e45267f3e30151d99a9",
+  "prior_gpu_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-002/release.json",
+  "prior_gpu_release_sha256": "a3b090e2432cf302162eb99fd742da538210f20d7e3fdd46fc383f84e2f94426",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/target-lease.json",
+  "prior_build_release_sha256": "ef5886c0250710b188fdc8a691d25b98aa0d8a9cb21cb90759ef8cd1999e5c3a",
+  "numeric_binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/binaries/incant_render-90f6082e9b891519",
+    "sha256": "865b886352d9ec131d951e08a6a62d2b09ada4b0d666b23aa7540845adc80755"
+  },
+  "root_build_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal0072-corrected-build-root-20261013.json",
+    "sha256": "cc962b22a9c5c46908235bb7256614dd0cb8c94a27e7a5f52943a1ae6eb53832"
+  }
+}

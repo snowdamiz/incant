@@ -1,0 +1,110 @@
+{
+ "recorded": "2026-10-13T08:46:13.143798+00:00",
+ "verdict": "pass",
+ "complete": true,
+ "problems": [],
+ "cases": {
+  "probe": {
+   "present": true,
+   "problems": []
+  },
+  "stationary": {
+   "present": true,
+   "problems": []
+  },
+  "motion": {
+   "present": true,
+   "problems": []
+  },
+  "excluded": {
+   "present": true,
+   "problems": []
+  },
+  "transitions": {
+   "present": true,
+   "problems": []
+  },
+  "skinned": {
+   "present": true,
+   "problems": []
+  },
+  "timing": {
+   "present": true,
+   "problems": []
+  }
+ },
+ "bindings": {
+  "visual_tree": "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e",
+  "plan": "df1d01c245c7cd60573db09b0f086d923a5158d4308c7f69d7cfa923a7948f89",
+  "grant": "4fa5101f64cadaf4e16b402afc3165e9af4080c5c7a214993e57a112f6e2c7c0",
+  "build_grant": "1a1b226d85730bd69833641cf24a11a8f4d417c5c04e7434fc45017f491882a4",
+  "build_record": "eebd5b3be9e1233bc6ba9273323e67408e8cb9f051b33e45267f3e30151d99a9",
+  "lease": "ef5886c0250710b188fdc8a691d25b98aa0d8a9cb21cb90759ef8cd1999e5c3a",
+  "ledger": "32601b51360d1ce3c6f9d527a411b40e819915b34170e6e8021e6649357b890c",
+  "debits": "fa35336199284000bac98606a082a28ce6da61d4be13afdbcf6300f90e9b5ca5",
+  "latch": "3c54be77b90f1d5ef8124ff779a060afcd46c320864782f74acd003b1b40e915",
+  "stop": null,
+  "files": {
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-review.stdout.jsonl": "4d6473df992dc4ad5dc6b948130fa5f3071f79f0401d72c26ca4aca61d35048b",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-review.stderr.txt": "4641e2492c46983270c1a243ceec65c536bee2e3d12a145495db144385797471",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-lint.stdout.jsonl": "6314e4526ed7da3628b672d9b71e1440fc359b2fb75b08a1b1df6d59f53cc953",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-lint.stderr.txt": "6b9658f08ede000118f1216a9ced77ef194d714f0230a91b0d920b6f03a3babb",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-list-lib.stdout.txt": "494381b89f2889b34734935937c6195baf5b5bdbcadefaa0744c7947fba1b9b7",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-list-lib.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-numeric.stdout.txt": "650b8442c9106ab0984aee57d54db3dbcef04f74d07e0ddc9960efcd65712cd6",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-numeric.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-list-review.stdout.txt": "a99446e9bec05e61e378b60458c1448d8ffd12e3e6cd2cc7eb5a1fc405d11a6c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-list-review.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-probe.stdout.txt": "ab704623ee5bf337cd1ac6c1e308fab1ce42beeb650935849e0c2e88e99b1a76",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-probe.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/probe": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/probe/events.jsonl": "553b06f0bfa9111071dcd84b780d0df36901401c5c61b9f1dd5b709155cb26a8",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/probe/report.json": "e178aeab40cba8d20607d7c90047df98a425745f8b52ec890e6ef4e63089234f",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-stationary.stdout.txt": "9258c4e192c68dcd02f70bf268a9d0e76651907142d3aedc2d694d67278100f4",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-stationary.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/stationary": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/stationary/events.jsonl": "a8b283ff6cb4b77ba6424094e4c78f424a0eb9bdb48fc5f26b13acc414c924f8",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/stationary/report.json": "4578b4eeb0d7bebc965e4729a40427bc72db1c458178e619cea5eb3dc554ae6a",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/stationary/stationary-activity.png": "525b2388c73bb29a58841aac0d4ca65e72d7247af03b6a9aa833ce18de344fcf",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/stationary/stationary-off.png": "2485512777e509896851e616d78d01f6742da7bbabd19a97915682650e738d2c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/stationary/stationary-on-f16.png": "ee1f84cca949291eef0fc5d9d6ca6bfde6ded5e117f83956d95aaf0291e9b1b2",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-motion.stdout.txt": "cd35ff5bdbd5e1973ec6f39d288b788c8783deff744e9ef23fad748f7463429e",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-motion.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/motion": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/motion/events.jsonl": "bf370def5792759565ac89b9f1e8cea2c1e4c612bdf780742dc2fdcfcd22751d",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/motion/motion-object-off-f8.png": "212ac1a0e0af830729f9113bc797d063b0b5a2fbfd6194d29ae8a4d9281f9757",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/motion/motion-object-on-f8.png": "70166cf2ed3dda1e228d9687435f49b58c4fd97a9abd5fda679c387bed5538c7",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/motion/motion-pan-off-f6.png": "30aa3e196bca8145b45d28d7da2e85ad52e3926c23bb5ca884a29cae1d00154b",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/motion/motion-pan-on-f6.png": "9312305a053ad02b90252046f868756c271556d661d0c41d790de7c4dc966ec9",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/motion/report.json": "a0498bf38b9511b822357e4a6eb04662861701272ec66bc36fd8f41d36b7c116",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-excluded.stdout.txt": "9d00891365c06cb7a6dcab69633a59c12e5b7822ce8a0c406c52abeddc82d648",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-excluded.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/excluded": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/excluded/events.jsonl": "de8b417b2b6b6e31c73b1b681bfca626456a2cc655ef33c482d99575d9799f87",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/excluded/excluded-activity.png": "47cd1f9e373696b65e500fd7c1c35dd25202e720e67187bdbf6ce816c64183a5",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/excluded/excluded-off.png": "d1592ae5ed1f392e8b3972d61b4660ac74a4a0545b221a8c59115875aa203527",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/excluded/excluded-on-f8.png": "3f44a6612f39c37bc7a4deff57f272440285762259d382bf156f7039b4c05c7f",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/excluded/report.json": "954b8755d5222a339460d5c6af9eb2500f7338bdeba6a9210b52ec3fafea5c48",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-transitions.stdout.txt": "1987111f7a48b21fc4c4babe4c73c4da2a6a0f51a20109a9980100d39fd7b1b3",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-transitions.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/transitions": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/transitions/events.jsonl": "86e67575edda367d63502b592b6465f5a1fa899969e700106ede22efff9f0a35",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/transitions/report.json": "87e90b58f0646d356e0fcfbcdcf2b3b80f6190e37ddbfeb5e49fa66703955417",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/transitions/transition-cut-f7.png": "5bc0618bc5a5f44fbbdf96ed1b7fca0ca2d74d836e90fffb061e5f9d25a6046c",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/transitions/transition-drs-f9.png": "89097514f9ef2b968bf3d9e3776b4e5a89317b8960179842cf0ca206caf9a6f6",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-skinned.stdout.txt": "77bbcf505aa04697d497cdce6bd065dc2b1de0e23585ce537f29b94e2cba2beb",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-skinned.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/skinned": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/skinned/events.jsonl": "c93d56661839dc09d5b2ca3cb51450d321de1d172c4747f73b1f76079e965372",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/skinned/report.json": "3b82d368ddd8e8536bf6b11dfb280b693331d399457a1af3dec25076322f906e",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/skinned/skinned-off-f6.png": "9dc53d04deebc66b38a873ec680f39e89ce31afcbe59cefaafa0d498ec0b0985",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/skinned/skinned-on-f6.png": "99613fd3a9e064343ccc8178c03d1fcb32d6a3be386bce932acda8446a397e10",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-timing.stdout.txt": "25bb9334bf2a753eb985d8db35504a7a5a0bedf2e7539e1d529118bad4f15a95",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/gpu-review-timing.stderr.txt": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/timing": "directory",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/timing/events.jsonl": "3ed49346d979b02eabd407cf1d369386484e9d2fa66ceb178ca4f7755b950f82",
+   "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/captures/timing/report.json": "fb31887abd41727687cff8fc63036298c9b203945e6a4bacb7f30be28f08f173"
+  }
+ },
+ "observations": "report.json observations are reference data; they never decide the verdict"
+}

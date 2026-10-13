@@ -1,0 +1,26 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "temporal-corrected-visual",
+ "holder": "Claude Opus 5.5 Max, explicitly verified through ACP, handoff0072",
+ "released_at": "2026-10-13T08:46:07.447249+00:00",
+ "children": 12,
+ "gpu_children": 10,
+ "stop_latched": false,
+ "stopped": null,
+ "debited": {
+  "frames": 84,
+  "ui_submissions": 9,
+  "pngs": 14
+ },
+ "debits": 8,
+ "debits_without_ledger_row": [],
+ "frames_rendered": 70,
+ "ui_submissions": 9,
+ "pngs_written": 14,
+ "ledger_sha256": "32601b51360d1ce3c6f9d527a411b40e819915b34170e6e8021e6649357b890c",
+ "debits_sha256": "fa35336199284000bac98606a082a28ce6da61d4be13afdbcf6300f90e9b5ca5",
+ "grant_sha256_at_release": "4fa5101f64cadaf4e16b402afc3165e9af4080c5c7a214993e57a112f6e2c7c0",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "GPU released for root; review-ready.json untouched."
+}

@@ -1,0 +1,8 @@
+stationary-on-f16.png    original  phase 7 jitter (0.125, -0.125)  shift (+0.122, -0.144) px over 18299 gradient pixels
+stationary-on-f16.png    corrected phase 7 jitter (0.125, -0.125)  shift (-0.022, -0.090) px over 18299 gradient pixels
+motion-object-on-f8.png  original  phase 7 jitter (0.125, -0.125)  shift (+0.119, -0.138) px over 18107 gradient pixels
+motion-object-on-f8.png  corrected phase 7 jitter (0.125, -0.125)  shift (-0.025, -0.086) px over 18107 gradient pixels
+skinned-on-f6.png        original  phase 5 jitter (-0.125, -0.375)  shift (-0.098, -0.280) px over 13990 gradient pixels
+skinned-on-f6.png        corrected phase 5 jitter (-0.125, -0.375)  shift (+0.011, +0.098) px over 13990 gradient pixels
+excluded-on-f8.png       original  phase 7 jitter (0.125, -0.125)  shift (+0.096, -0.089) px over 17550 gradient pixels
+excluded-on-f8.png       corrected phase 7 jitter (0.125, -0.125)  shift (-0.009, +0.004) px over 17550 gradient pixels

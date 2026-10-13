@@ -1,0 +1,794 @@
+{
+  "case": "timing",
+  "checks": {
+    "every_frame_produced_one_sample": true,
+    "frames_match_plan": true,
+    "models_span_grows_with_motion_and_resolve_passes": true,
+    "samples_well_formed_with_models_group": true,
+    "temporal_run_uninterrupted": true
+  },
+  "final_stats": {
+    "abandoned": 0,
+    "enabled": true,
+    "pending": 0,
+    "ready": 0,
+    "retired": 0,
+    "skipped": 0
+  },
+  "frames": [
+    {
+      "name": "off-1",
+      "rgba_sha256": "3caa4d5dedae0116d51ad1f0b2c9bf0850db7148d11ebf1eb294bf1e50a57405",
+      "temporal": null
+    },
+    {
+      "name": "on-1",
+      "rgba_sha256": "5bf8f23d340f1e46a56794399737baa9cec5e066caef1cdbd0bc379b92022668",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": false,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 0,
+        "sequence": 1
+      }
+    },
+    {
+      "name": "off-2",
+      "rgba_sha256": "3caa4d5dedae0116d51ad1f0b2c9bf0850db7148d11ebf1eb294bf1e50a57405",
+      "temporal": null
+    },
+    {
+      "name": "on-2",
+      "rgba_sha256": "31ebcbc89ec53dbfedd0d9130f5842cf93a2a48504e827c48ed8e484b91e689e",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 1,
+        "sequence": 2
+      }
+    },
+    {
+      "name": "off-3",
+      "rgba_sha256": "3caa4d5dedae0116d51ad1f0b2c9bf0850db7148d11ebf1eb294bf1e50a57405",
+      "temporal": null
+    },
+    {
+      "name": "on-3",
+      "rgba_sha256": "4ed0a013b2be06769dca3fa57229fd680b0d467d8d9d919c64e66a76cb2fbfaa",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 2,
+        "sequence": 3
+      }
+    },
+    {
+      "name": "off-4",
+      "rgba_sha256": "3caa4d5dedae0116d51ad1f0b2c9bf0850db7148d11ebf1eb294bf1e50a57405",
+      "temporal": null
+    },
+    {
+      "name": "on-4",
+      "rgba_sha256": "30db1e858cf69543d0274ab25ba59429aee6a467d4a018eba9f2655e27a0dd04",
+      "temporal": {
+        "bypassed": false,
+        "epoch": 1,
+        "has_previous": true,
+        "internal_size": [
+          960,
+          540
+        ],
+        "jitter_phase": 3,
+        "sequence": 4
+      }
+    }
+  ],
+  "frames_rendered": 8,
+  "median_nanoseconds": {
+    "AssignLights": {
+      "off": 76749.5,
+      "on": 75500.0
+    },
+    "Display": {
+      "off": 837875.0,
+      "on": 1655854.0
+    },
+    "InitializeScene": {
+      "off": 23541.5,
+      "on": 22645.5
+    },
+    "Models": {
+      "off": 815563.0,
+      "on": 1660604.5
+    },
+    "Shadows": {
+      "off": 175833.5,
+      "on": 175458.5
+    },
+    "Sprites": {
+      "off": null,
+      "on": null
+    },
+    "Text": {
+      "off": null,
+      "on": null
+    }
+  },
+  "observations": {
+    "groups_within_frame": false,
+    "models_median_ratio_on_over_off": 2.0361449697938725,
+    "note": "Medians of four interleaved samples per side; inference about pass coverage, not a performance measurement."
+  },
+  "outcome": "pass",
+  "pngs": [],
+  "renderer": {
+    "adapter": {
+      "backend": "Metal",
+      "device": 0,
+      "device_type": "IntegratedGpu",
+      "driver": "",
+      "driver_info": "",
+      "name": "Apple M5 Pro",
+      "vendor": 0
+    },
+    "adapter_timestamp_features": {
+      "TIMESTAMP_QUERY": true,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "device_timestamp_features": {
+      "TIMESTAMP_QUERY": true,
+      "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+      "TIMESTAMP_QUERY_INSIDE_PASSES": false
+    },
+    "queue_timestamp_period_ns": 1.0,
+    "timing_stats": {
+      "abandoned": 0,
+      "enabled": true,
+      "pending": 0,
+      "ready": 0,
+      "retired": 0,
+      "skipped": 0
+    }
+  },
+  "review_config": {
+    "absolute_depth": 0.019999999552965164,
+    "history_weight": 0.8999999761581421,
+    "reactive_strength": 0.5,
+    "reactive_threshold": 4.0,
+    "relative_depth": 0.05000000074505806
+  },
+  "samples": [
+    {
+      "temporal": false,
+      "value": {
+        "frame": "off-1",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293102146000,
+              "nanoseconds": 70209.0,
+              "start_ticks": 65293102075791
+            },
+            "Display": {
+              "end_ticks": 65293105470375,
+              "nanoseconds": 777334.0,
+              "start_ticks": 65293104693041
+            },
+            "InitializeScene": {
+              "end_ticks": 65293103442750,
+              "nanoseconds": 22084.0,
+              "start_ticks": 65293103420666
+            },
+            "Models": {
+              "end_ticks": 65293105398750,
+              "nanoseconds": 813292.0,
+              "start_ticks": 65293104585458
+            },
+            "Shadows": {
+              "end_ticks": 65293104442125,
+              "nanoseconds": 374209.0,
+              "start_ticks": 65293104067916
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293105470375,
+              "nanoseconds": 3394584.0,
+              "start_ticks": 65293102075791
+            },
+            "passes": [
+              {
+                "end_ticks": 65293103442750,
+                "nanoseconds": 22084.0,
+                "start_ticks": 65293103420666
+              },
+              {
+                "end_ticks": 65293102146000,
+                "nanoseconds": 70209.0,
+                "start_ticks": 65293102075791
+              },
+              {
+                "end_ticks": 65293104442125,
+                "nanoseconds": 374209.0,
+                "start_ticks": 65293104067916
+              },
+              {
+                "end_ticks": 65293105398750,
+                "nanoseconds": 813292.0,
+                "start_ticks": 65293104585458
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293105470375,
+                "nanoseconds": 777334.0,
+                "start_ticks": 65293104693041
+              }
+            ],
+            "sequence": 1,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    },
+    {
+      "temporal": true,
+      "value": {
+        "frame": "on-1",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293115106041,
+              "nanoseconds": 75708.0,
+              "start_ticks": 65293115030333
+            },
+            "Display": {
+              "end_ticks": 65293116507208,
+              "nanoseconds": 794375.0,
+              "start_ticks": 65293115712833
+            },
+            "InitializeScene": {
+              "end_ticks": 65293115069750,
+              "nanoseconds": 25042.0,
+              "start_ticks": 65293115044708
+            },
+            "Models": {
+              "end_ticks": 65293116443666,
+              "nanoseconds": 1190041.0,
+              "start_ticks": 65293115253625
+            },
+            "Shadows": {
+              "end_ticks": 65293115241208,
+              "nanoseconds": 177542.0,
+              "start_ticks": 65293115063666
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293116507208,
+              "nanoseconds": 1476875.0,
+              "start_ticks": 65293115030333
+            },
+            "passes": [
+              {
+                "end_ticks": 65293115069750,
+                "nanoseconds": 25042.0,
+                "start_ticks": 65293115044708
+              },
+              {
+                "end_ticks": 65293115106041,
+                "nanoseconds": 75708.0,
+                "start_ticks": 65293115030333
+              },
+              {
+                "end_ticks": 65293115241208,
+                "nanoseconds": 177542.0,
+                "start_ticks": 65293115063666
+              },
+              {
+                "end_ticks": 65293116443666,
+                "nanoseconds": 1190041.0,
+                "start_ticks": 65293115253625
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293116507208,
+                "nanoseconds": 794375.0,
+                "start_ticks": 65293115712833
+              }
+            ],
+            "sequence": 2,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    },
+    {
+      "temporal": false,
+      "value": {
+        "frame": "off-2",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293123669291,
+              "nanoseconds": 76208.0,
+              "start_ticks": 65293123593083
+            },
+            "Display": {
+              "end_ticks": 65293124593958,
+              "nanoseconds": 836042.0,
+              "start_ticks": 65293123757916
+            },
+            "InitializeScene": {
+              "end_ticks": 65293123601333,
+              "nanoseconds": 24042.0,
+              "start_ticks": 65293123577291
+            },
+            "Models": {
+              "end_ticks": 65293124520750,
+              "nanoseconds": 805959.0,
+              "start_ticks": 65293123714791
+            },
+            "Shadows": {
+              "end_ticks": 65293123772208,
+              "nanoseconds": 175667.0,
+              "start_ticks": 65293123596541
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293124593958,
+              "nanoseconds": 1000875.0,
+              "start_ticks": 65293123593083
+            },
+            "passes": [
+              {
+                "end_ticks": 65293123601333,
+                "nanoseconds": 24042.0,
+                "start_ticks": 65293123577291
+              },
+              {
+                "end_ticks": 65293123669291,
+                "nanoseconds": 76208.0,
+                "start_ticks": 65293123593083
+              },
+              {
+                "end_ticks": 65293123772208,
+                "nanoseconds": 175667.0,
+                "start_ticks": 65293123596541
+              },
+              {
+                "end_ticks": 65293124520750,
+                "nanoseconds": 805959.0,
+                "start_ticks": 65293123714791
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293124593958,
+                "nanoseconds": 836042.0,
+                "start_ticks": 65293123757916
+              }
+            ],
+            "sequence": 3,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    },
+    {
+      "temporal": true,
+      "value": {
+        "frame": "on-2",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293130812375,
+              "nanoseconds": 75167.0,
+              "start_ticks": 65293130737208
+            },
+            "Display": {
+              "end_ticks": 65293132613166,
+              "nanoseconds": 1637541.0,
+              "start_ticks": 65293130975625
+            },
+            "InitializeScene": {
+              "end_ticks": 65293130741416,
+              "nanoseconds": 22666.0,
+              "start_ticks": 65293130718750
+            },
+            "Models": {
+              "end_ticks": 65293132550083,
+              "nanoseconds": 1654875.0,
+              "start_ticks": 65293130895208
+            },
+            "Shadows": {
+              "end_ticks": 65293130913750,
+              "nanoseconds": 173167.0,
+              "start_ticks": 65293130740583
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293132613166,
+              "nanoseconds": 1875958.0,
+              "start_ticks": 65293130737208
+            },
+            "passes": [
+              {
+                "end_ticks": 65293130741416,
+                "nanoseconds": 22666.0,
+                "start_ticks": 65293130718750
+              },
+              {
+                "end_ticks": 65293130812375,
+                "nanoseconds": 75167.0,
+                "start_ticks": 65293130737208
+              },
+              {
+                "end_ticks": 65293130913750,
+                "nanoseconds": 173167.0,
+                "start_ticks": 65293130740583
+              },
+              {
+                "end_ticks": 65293132550083,
+                "nanoseconds": 1654875.0,
+                "start_ticks": 65293130895208
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293132613166,
+                "nanoseconds": 1637541.0,
+                "start_ticks": 65293130975625
+              }
+            ],
+            "sequence": 4,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    },
+    {
+      "temporal": false,
+      "value": {
+        "frame": "off-3",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293139283125,
+              "nanoseconds": 77334.0,
+              "start_ticks": 65293139205791
+            },
+            "Display": {
+              "end_ticks": 65293140212166,
+              "nanoseconds": 839708.0,
+              "start_ticks": 65293139372458
+            },
+            "InitializeScene": {
+              "end_ticks": 65293139215791,
+              "nanoseconds": 23791.0,
+              "start_ticks": 65293139192000
+            },
+            "Models": {
+              "end_ticks": 65293140147125,
+              "nanoseconds": 817834.0,
+              "start_ticks": 65293139329291
+            },
+            "Shadows": {
+              "end_ticks": 65293139387333,
+              "nanoseconds": 176000.0,
+              "start_ticks": 65293139211333
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293140212166,
+              "nanoseconds": 1006375.0,
+              "start_ticks": 65293139205791
+            },
+            "passes": [
+              {
+                "end_ticks": 65293139215791,
+                "nanoseconds": 23791.0,
+                "start_ticks": 65293139192000
+              },
+              {
+                "end_ticks": 65293139283125,
+                "nanoseconds": 77334.0,
+                "start_ticks": 65293139205791
+              },
+              {
+                "end_ticks": 65293139387333,
+                "nanoseconds": 176000.0,
+                "start_ticks": 65293139211333
+              },
+              {
+                "end_ticks": 65293140147125,
+                "nanoseconds": 817834.0,
+                "start_ticks": 65293139329291
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293140212166,
+                "nanoseconds": 839708.0,
+                "start_ticks": 65293139372458
+              }
+            ],
+            "sequence": 5,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    },
+    {
+      "temporal": true,
+      "value": {
+        "frame": "on-3",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293146417375,
+              "nanoseconds": 84875.0,
+              "start_ticks": 65293146332500
+            },
+            "Display": {
+              "end_ticks": 65293148247458,
+              "nanoseconds": 1698333.0,
+              "start_ticks": 65293146549125
+            },
+            "InitializeScene": {
+              "end_ticks": 65293146335833,
+              "nanoseconds": 22458.0,
+              "start_ticks": 65293146313375
+            },
+            "Models": {
+              "end_ticks": 65293148182416,
+              "nanoseconds": 1822333.0,
+              "start_ticks": 65293146360083
+            },
+            "Shadows": {
+              "end_ticks": 65293146562375,
+              "nanoseconds": 226292.0,
+              "start_ticks": 65293146336083
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293148247458,
+              "nanoseconds": 1914958.0,
+              "start_ticks": 65293146332500
+            },
+            "passes": [
+              {
+                "end_ticks": 65293146335833,
+                "nanoseconds": 22458.0,
+                "start_ticks": 65293146313375
+              },
+              {
+                "end_ticks": 65293146417375,
+                "nanoseconds": 84875.0,
+                "start_ticks": 65293146332500
+              },
+              {
+                "end_ticks": 65293146562375,
+                "nanoseconds": 226292.0,
+                "start_ticks": 65293146336083
+              },
+              {
+                "end_ticks": 65293148182416,
+                "nanoseconds": 1822333.0,
+                "start_ticks": 65293146360083
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293148247458,
+                "nanoseconds": 1698333.0,
+                "start_ticks": 65293146549125
+              }
+            ],
+            "sequence": 6,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    },
+    {
+      "temporal": false,
+      "value": {
+        "frame": "off-4",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293154821416,
+              "nanoseconds": 77291.0,
+              "start_ticks": 65293154744125
+            },
+            "Display": {
+              "end_ticks": 65293155756416,
+              "nanoseconds": 846000.0,
+              "start_ticks": 65293154910416
+            },
+            "InitializeScene": {
+              "end_ticks": 65293154754125,
+              "nanoseconds": 23292.0,
+              "start_ticks": 65293154730833
+            },
+            "Models": {
+              "end_ticks": 65293155694125,
+              "nanoseconds": 825959.0,
+              "start_ticks": 65293154868166
+            },
+            "Shadows": {
+              "end_ticks": 65293154924166,
+              "nanoseconds": 174458.0,
+              "start_ticks": 65293154749708
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293155756416,
+              "nanoseconds": 1012291.0,
+              "start_ticks": 65293154744125
+            },
+            "passes": [
+              {
+                "end_ticks": 65293154754125,
+                "nanoseconds": 23292.0,
+                "start_ticks": 65293154730833
+              },
+              {
+                "end_ticks": 65293154821416,
+                "nanoseconds": 77291.0,
+                "start_ticks": 65293154744125
+              },
+              {
+                "end_ticks": 65293154924166,
+                "nanoseconds": 174458.0,
+                "start_ticks": 65293154749708
+              },
+              {
+                "end_ticks": 65293155694125,
+                "nanoseconds": 825959.0,
+                "start_ticks": 65293154868166
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293155756416,
+                "nanoseconds": 846000.0,
+                "start_ticks": 65293154910416
+              }
+            ],
+            "sequence": 7,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    },
+    {
+      "temporal": true,
+      "value": {
+        "frame": "on-4",
+        "settle_polls": 1,
+        "take": {
+          "labeled": {
+            "AssignLights": {
+              "end_ticks": 65293161975250,
+              "nanoseconds": 75292.0,
+              "start_ticks": 65293161899958
+            },
+            "Display": {
+              "end_ticks": 65293163799000,
+              "nanoseconds": 1674167.0,
+              "start_ticks": 65293162124833
+            },
+            "InitializeScene": {
+              "end_ticks": 65293161903125,
+              "nanoseconds": 22625.0,
+              "start_ticks": 65293161880500
+            },
+            "Models": {
+              "end_ticks": 65293163723500,
+              "nanoseconds": 1666334.0,
+              "start_ticks": 65293162057166
+            },
+            "Shadows": {
+              "end_ticks": 65293162076833,
+              "nanoseconds": 173375.0,
+              "start_ticks": 65293161903458
+            },
+            "Sprites": null,
+            "Text": null
+          },
+          "outcome": "sample",
+          "raw": {
+            "frame": {
+              "end_ticks": 65293163799000,
+              "nanoseconds": 1899042.0,
+              "start_ticks": 65293161899958
+            },
+            "passes": [
+              {
+                "end_ticks": 65293161903125,
+                "nanoseconds": 22625.0,
+                "start_ticks": 65293161880500
+              },
+              {
+                "end_ticks": 65293161975250,
+                "nanoseconds": 75292.0,
+                "start_ticks": 65293161899958
+              },
+              {
+                "end_ticks": 65293162076833,
+                "nanoseconds": 173375.0,
+                "start_ticks": 65293161903458
+              },
+              {
+                "end_ticks": 65293163723500,
+                "nanoseconds": 1666334.0,
+                "start_ticks": 65293162057166
+              },
+              null,
+              null,
+              {
+                "end_ticks": 65293163799000,
+                "nanoseconds": 1674167.0,
+                "start_ticks": 65293162124833
+              }
+            ],
+            "sequence": 8,
+            "timestamp_period_ns": 1.0
+          }
+        }
+      }
+    }
+  ],
+  "ui_submissions": 0
+}

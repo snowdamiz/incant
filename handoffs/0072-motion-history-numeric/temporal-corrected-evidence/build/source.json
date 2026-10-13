@@ -1,0 +1,42 @@
+{
+ "build_grant_sha256": "1a1b226d85730bd69833641cf24a11a8f4d417c5c04e7434fc45017f491882a4",
+ "holder": "root/astra supervised CPU builds",
+ "tools": {
+  "head": "6986cb04cc61f77ca810acbf1bfc01d363579ce2",
+  "visual_tree": "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e",
+  "plan_sha256": "df1d01c245c7cd60573db09b0f086d923a5158d4308c7f69d7cfa923a7948f89",
+  "helper_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde"
+ },
+ "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+ "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+ "files": 18076,
+ "checkout_manifest_sha256": "1e4302067260cfa787f40ccf55bc93e530dfd289009e880ed11bd091695741f0",
+ "source_freeze": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json",
+  "sha256": "bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0",
+  "names_commit": {
+   "commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8"
+  }
+ },
+ "coverage": {
+  "build_input_roots": [
+   "crates",
+   "Cargo.toml",
+   "Cargo.lock",
+   "third_party",
+   "tools/cargo",
+   "rust-toolchain.toml"
+  ],
+  "build_inputs": 2448,
+  "freeze_rows": 2449,
+  "freeze_build_input_rows": 2448,
+  "inputs_missing_from_freeze": [],
+  "freeze_rows_missing_from_commit": [],
+  "mismatched": [],
+  "mismatched_count": 0,
+  "exact": true
+ },
+ "cargo_lock_sha256": "68c187dbeb8d0e45d79c83f5503950070bd13090dbe456ad4970f5444c4417a6",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "recorded": "2026-10-13T08:36:01.322040+00:00"
+}

@@ -1,0 +1,2 @@
+{"case":"probe","event":"open","frame_limit":0,"review_config":{"absolute_depth":0.019999999552965164,"history_weight":0.8999999761581421,"reactive_strength":0.5,"reactive_threshold":4.0,"relative_depth":0.05000000074505806},"ui_limit":0}
+{"event":"finish","pass":true}

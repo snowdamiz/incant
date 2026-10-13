@@ -1,0 +1,17 @@
+{"case":"transitions","event":"open","frame_limit":13,"review_config":{"absolute_depth":0.019999999552965164,"history_weight":0.8999999761581421,"reactive_strength":0.5,"reactive_threshold":4.0,"relative_depth":0.05000000074505806},"ui_limit":0}
+{"event":"frame","index":1,"name":"a-1"}
+{"event":"frame","index":2,"name":"a-2"}
+{"event":"frame","index":3,"name":"a-3"}
+{"event":"frame","index":4,"name":"a-4"}
+{"event":"frame","index":5,"name":"a-5"}
+{"event":"frame","index":6,"name":"a-6"}
+{"event":"frame","index":7,"name":"cut-7"}
+{"event":"frame","index":8,"name":"b-8"}
+{"event":"frame","index":9,"name":"drs-9"}
+{"event":"frame","index":10,"name":"drs-10"}
+{"event":"frame","index":11,"name":"drs-11"}
+{"event":"frame","index":12,"name":"full-12"}
+{"event":"frame","index":13,"name":"off-b"}
+{"event":"png","png":{"name":"transition-cut-f7.png","rgba_sha256":"6d1493c1d5da3bd8ee2aedd5cbf34e84a97aa71a0dab342b1629057a3a9b0136","sha256":"5bc0618bc5a5f44fbbdf96ed1b7fca0ca2d74d836e90fffb061e5f9d25a6046c"}}
+{"event":"png","png":{"name":"transition-drs-f9.png","rgba_sha256":"fbe137378e43ab08c3e7c43d2f9ec3372831d4740a7fc4f8b2aa941aedcd2145","sha256":"89097514f9ef2b968bf3d9e3776b4e5a89317b8960179842cf0ca206caf9a6f6"}}
+{"event":"finish","pass":true}

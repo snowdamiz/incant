@@ -1,0 +1,6 @@
+stationary edge pixels 34327 (off references byte-identical)
+  original  1-2: int 78198 edge 5957  3-8: int 9546 edge 2666  9-16: int 1367 edge 3222  17-32: int 7 edge 2684  33-63: int 0 edge 897  64-: int 12 edge 10234
+  corrected 1-2: int 38789 edge 6901  3-8: int 90 edge 4275  9-16: int 14 edge 2089  17-32: int 3 edge 2815  33-63: int 11 edge 8419  64-: int 11 edge 3620
+excluded edge pixels 32592 (off references byte-identical)
+  original  1-2: int 137 edge 161  3-8: int 976 edge 1928  9-16: int 79 edge 2933  17-32: int 118 edge 4124  33-63: int 0 edge 2558  64-: int 0 edge 2010
+  corrected 1-2: int 1715 edge 2815  3-8: int 642 edge 6901  9-16: int 54 edge 1909  17-32: int 0 edge 49  33-63: int 0 edge 505  64-: int 0 edge 0

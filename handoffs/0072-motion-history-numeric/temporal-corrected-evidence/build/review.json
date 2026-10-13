@@ -1,0 +1,142 @@
+{
+ "holder": "root/astra supervised CPU builds",
+ "build_grant_sha256": "1a1b226d85730bd69833641cf24a11a8f4d417c5c04e7434fc45017f491882a4",
+ "source_commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+ "tools": {
+  "head": "6986cb04cc61f77ca810acbf1bfc01d363579ce2",
+  "visual_tree": "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e",
+  "plan_sha256": "df1d01c245c7cd60573db09b0f086d923a5158d4308c7f69d7cfa923a7948f89",
+  "helper_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde"
+ },
+ "source": {
+  "commit": "535003d766bcc1386fd2d2f454c83808a0fcc4c8",
+  "tree": "e98b24847c28f3491f56e38edb051e018748eff7",
+  "files": 18076,
+  "manifest_sha256": "1e4302067260cfa787f40ccf55bc93e530dfd289009e880ed11bd091695741f0",
+  "helper_copy_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde"
+ },
+ "source_record_sha256": "ed56d186f9e644a753e1e8763c6fc67b7114d78ff40d257362ad61b1347bfbca",
+ "helper_sha256": "9841c6b1384a9f02db140d58d588f40a262e63ea061127518781e1c799952dde",
+ "helper_copy": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout/crates/incant_render/tests/temporal_visual_review.rs",
+ "frozen": {
+  "temporal_visual_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/bin/review/temporal_visual_review",
+   "sha256": "3c28ec3ee04c60969f13c772a98a854e7c4d4e5ebab662d0a406ecf53e03b5d8",
+   "bytes": 18214488,
+   "mode": "0o555",
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-624aceeb420fb850",
+   "fresh": false,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout/crates/incant_render#0.0.1"
+  }
+ },
+ "incant_render_library": [
+  {
+   "target": "incant_render",
+   "kind": [
+    "lib"
+   ],
+   "test": false,
+   "fresh": false,
+   "executable": null,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout/crates/incant_render#0.0.1",
+   "filenames": {
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "5f5bc426bcdaba78d3270b96d1b9d462f7627d471d0407c85f8f4e07c5f508b1",
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "96ed39e6cd68a225852c042498ffcb069cc79e22c542dfd8d963665bb3f6a210"
+   }
+  }
+ ],
+ "library_same_as_libtests": null,
+ "builds": [
+  {
+   "label": "review",
+   "kind": "build",
+   "holder": "root/astra supervised CPU builds",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout/tools/cargo",
+    "test",
+    "-p",
+    "incant_render",
+    "--test",
+    "temporal_visual_review",
+    "--no-run",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout",
+   "env": {
+    "inherited_keys_values_not_recorded": [
+     "HOME"
+    ],
+    "overrides": {
+     "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+     "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/tmp/review",
+     "CARGO_TERM_COLOR": "never",
+     "RUSTUP_AUTO_INSTALL": "0"
+    }
+   },
+   "pid": 2579,
+   "started": "2026-10-13T08:36:04.433980+00:00",
+   "ended": "2026-10-13T08:36:59.933527+00:00",
+   "exit": 0,
+   "timed_out": false,
+   "wait_error": null,
+   "timeout_s": 2700,
+   "group_empty_after": true,
+   "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-review.stdout.jsonl",
+   "stdout_sha256": "4d6473df992dc4ad5dc6b948130fa5f3071f79f0401d72c26ca4aca61d35048b",
+   "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/logs/build-review.stderr.txt",
+   "stderr_sha256": "4641e2492c46983270c1a243ceec65c536bee2e3d12a145495db144385797471",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": null,
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "5f5bc426bcdaba78d3270b96d1b9d462f7627d471d0407c85f8f4e07c5f508b1",
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "96ed39e6cd68a225852c042498ffcb069cc79e22c542dfd8d963665bb3f6a210"
+     }
+    },
+    {
+     "target": "temporal_visual_review",
+     "kind": [
+      "test"
+     ],
+     "test": true,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-624aceeb420fb850",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-624aceeb420fb850": "3c28ec3ee04c60969f13c772a98a854e7c4d4e5ebab662d0a406ecf53e03b5d8"
+     }
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T08:36:59.973033+00:00"
+}
