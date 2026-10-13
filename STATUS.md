@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Physics pipeline boundary — inert producer, final review pending
+
+The [pipeline capture slice](docs/spikes/physics-pipeline-boundary.md) preserves
+exact gravity and the historical `None`/false/true staged CCD verdict with checked
+integration/CCD witness association. Actual 2D/3D continuation shows reused versus
+fresh pipelines can differ in CCD cache and substep counters after the last body
+is removed, while serialized owners remain equal; no trajectory difference is
+claimed. Deferred work, quarantine, nonpositive or unverified phases refuse.
+Independent source review, both 176-case CPU modes, 20 parallel controls and all
+ten qualification commands pass. Whole-owner provenance, derived geometry/work
+checks, live construction and exact physics save admission remain open.
+
 ## Static Wasm C builds — bounded local scheduling verified
 
 The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.

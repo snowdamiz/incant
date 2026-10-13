@@ -22,6 +22,7 @@ mod graph_codec;
 mod integration_config;
 mod island_state;
 mod pair_state;
+mod pipeline_state;
 mod records;
 mod rigid_owner;
 mod validate;
@@ -46,6 +47,7 @@ pub use graph_codec::{decode_graph, encode_graph};
 pub use integration_config::*;
 pub use island_state::*;
 pub use pair_state::*;
+pub use pipeline_state::*;
 pub use records::*;
 pub use rigid_owner::*;
 pub use validate::validate;
@@ -84,6 +86,10 @@ pub enum Error {
     Integration,
     UnsupportedIntegration,
     Ccd,
+    Pipeline,
+    PipelinePhase,
+    PipelineDeferred,
+    PipelineQuarantine,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
