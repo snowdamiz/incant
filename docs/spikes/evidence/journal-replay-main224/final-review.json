@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-13T12:54:04.550957+00:00",
+  "decision": "accepted_scoped_test_only_repair",
+  "head": "beade493bb1fae6aca41e61dd6364cd361f0ef39",
+  "manifest_sha256": "9304b27a6c79691f4d6003afd6d1e088f3871aac4e6bbc08b47546e2156e3f0d",
+  "review": "Read complete one-file source diff, diagnosis report, full verifier; executed read-only verification exit0. Exact-filter child assertions retain authorization refusal and journal bytes; no production changes. Controlled inherited-lock mechanism demonstrated, original hosted cause remains inferred. All54actualCPUcases/18groups and10overlapping6case libraryrepeats;15checks0,125records104payloads3143inputs verified. No repaired hosted run or release promotion claimed."
+}

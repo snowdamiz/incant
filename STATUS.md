@@ -149,7 +149,7 @@ Checkpoint23 is frozen at exact main220 through PR213, candidate `3381ccef`,
 with all 23 required contexts and eight workflows preserved. Its macOS journal
 authorization replay test failed; the exact original log is retained and diagnosis
 uses a controlled inherited-lock reproduction and a test-only isolation repair
-under review while the remaining workflows finish. The hosted error was not
+independently accepted while the remaining workflows finish. The hosted error was not
 printed, so the exact hosted cause remains inferred.
 [Repair evidence](docs/spikes/journal-replay-test-isolation.md). Checkpoint22 is
 terminal and unpromoted: 22 contexts succeeded; its optional timestamp diagnostic

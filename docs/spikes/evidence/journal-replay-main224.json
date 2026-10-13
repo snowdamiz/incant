@@ -429,5 +429,10 @@
     "Only test isolation changes; production authorization, replay, lock exclusivity and error mapping are byte-identical to main224.",
     "Historical diagnostic binaries were not retained; source/logs and recorded identities stay distinct from the retained final executable.",
     "No repaired hosted run, release or phase approval claimed."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/journal-replay-main224/final-review.json",
+    "sha256": "b3d5c1c59578c6aa3b8d1cc71eb52b72897ddef5f893e71deefe3fe4d9727b05",
+    "status": "accepted"
+  }
 }
