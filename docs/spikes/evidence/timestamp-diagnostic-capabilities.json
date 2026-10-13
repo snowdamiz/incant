@@ -1,0 +1,325 @@
+{
+  "schema": 1,
+  "base": "7c307f9a3357a4b454b763eefe47edbd4403bbb8",
+  "source": {
+    "base": "7c307f9a3357a4b454b763eefe47edbd4403bbb8",
+    "path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_render/tests/timestamp_backend_probe.rs",
+    "sha256": "b1c41b384830e4495e06c119f47f4a86241c20984ca8bb78621e604dbde87141",
+    "patch_sha256": "fa5d3303416728ead36781713cebe1de0b8b5802d1e34004f59a90e1d4b7e029"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/timestamp-diagnostic-capabilities/records.json.gz",
+    "sha256": "34629cfee33cb1d42294d989add9211fbb59e74090fb1573853e19cfac3aca29",
+    "records": 22,
+    "payloads": 14
+  },
+  "freeze": {
+    "path": "docs/spikes/evidence/timestamp-diagnostic-capabilities/freeze.json",
+    "sha256": "53789bd85b8e953ef67ddd41a5eba42570baaf94b779838ce91a310906f66c49",
+    "count": 3106
+  },
+  "checks": [
+    {
+      "name": "metadata",
+      "argv": [
+        "./tools/cargo",
+        "metadata",
+        "--locked",
+        "--offline",
+        "--no-deps",
+        "--format-version",
+        "1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 80042,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.03770316700683907,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/metadata.stdout",
+        "sha256": "6562fef2c910db4dbf02a5f0a93e3751207bf4795cf54b13e4673f10922938f3"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/metadata.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scoped-clean",
+      "argv": [
+        "./tools/cargo",
+        "clean",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_2d",
+        "-p",
+        "incant_agent",
+        "-p",
+        "incant_agent_native",
+        "-p",
+        "incant_anim",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_audio",
+        "-p",
+        "incant_audio_runtime",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_core",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_editor",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_headless",
+        "-p",
+        "incant_import",
+        "-p",
+        "incant_input",
+        "-p",
+        "incant_localization",
+        "-p",
+        "incant_nav",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_physics",
+        "-p",
+        "incant_physics_2d_runtime",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_snapshot",
+        "-p",
+        "incant_platform_smoke",
+        "-p",
+        "incant_play",
+        "-p",
+        "incant_play_legacy",
+        "-p",
+        "incant_profile",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_script_player",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_source",
+        "-p",
+        "incant_text",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "parry2d",
+        "-p",
+        "parry3d",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 80052,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.33881858400127385,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/scoped-clean.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/scoped-clean.stderr",
+        "sha256": "0bdaeb2aa6a92a0fdfec2d2cc4d0ab71946de5d0654e08c526e4629130ae0f28"
+      }
+    },
+    {
+      "name": "tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "timestamp_backend_probe",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 80058,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 55.94714733400906,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/tests.stdout",
+        "sha256": "d1aff73d6db245317c25beae61931bfa45f361695bbb137d8a8a5a2d74ba6604"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/tests.stderr",
+        "sha256": "fec1c1bd99fc6e9c9b818da2f4901cd30959b44a43f04a669612b1b52f3f7838"
+      }
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "timestamp_backend_probe",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 80285,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 5.467566624996834,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/clippy.stderr",
+        "sha256": "80f5882f2cabfd3f8b51cd7cee62f7516ad67e52dc4631a97c5290add5eb9038"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 80346,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.2258434999966994,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 80354,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.03147937500034459,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 80355,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.0210232089884812,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/timestamp-diagnostic-capabilities/binary/timestamp_backend_probe-c10041ac258ee605",
+      "original": "/Users/andreyyurlov/.codex/incant-timestamp-diagnostic-target/ci/deps/timestamp_backend_probe-c10041ac258ee605",
+      "sha256": "4b01f947a954c81c91e16a0d835eb4e2a63731142d7cefe72188644ef97aa1e8",
+      "bytes": 6599320
+    }
+  ],
+  "tests": {
+    "passed": 2,
+    "failed": 0,
+    "ignored": 1
+  },
+  "review": {
+    "source": "Root read and accepted exact patch fa5d3303 in parent message; final evidence review pending"
+  },
+  "qualification": {
+    "gpu": "No new GPU execution. CPU matrix is not actual unsupported-device execution. Successor checkpoint must execute diagnostic on hosted adapter.",
+    "failure": "Exact frozen checkpoint22 checks job115255920239 failed at unconditional feature union assertion; earlier same-job production test observed Apple Paravirtual Metal without TIMESTAMP_QUERY, exact typed Unsupported and completed ordinary frame.",
+    "semantics": "Mandatory expected backend; query capability independently admits descriptor and encoder modes. Unsupported executes two integer dispatch/readbacks and records null absent timing measurements. Existing diagnostic interval reporting retained; positive production timing assertions unchanged.",
+    "preliminary": "Direct absolute cargo fmt command failed tool discovery before corrected tools/cargo invocation; no executable source mutation. Final formatted source is the reviewed source."
+  }
+}

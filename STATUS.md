@@ -47,10 +47,20 @@ intersection payloads and independent emitted-event history. Eight new native
 reuse, sensor transfers, event-mask toggles and generation reuse. Independent source and final evidence review accepted 143 CPU tests and seven
 scoped checks. The exact-source main217 qualification passes six current checks
 and a 36-case copied-binary rerun with 728 trusted continuation steps; independent
-current-main review is accepted. The required fast check precedes merge. `PhysicsUnsupported` and hostile live restore
+current-main review is accepted and PR218 merged after the required fast check. `PhysicsUnsupported` and hostile live restore
 admission remain closed; no vendor/world-format changes.
 [Scope and limits](docs/spikes/physics-narrow-owner.md);
 [current-main qualification](docs/spikes/physics-narrow-main217.md).
+
+## Timestamp backend diagnostic — capability repair
+
+Checkpoint22 remains frozen while its jobs drain. A separate direct timestamp
+diagnostic failed on hosted Apple Paravirtual Metal after the production timing
+test had correctly completed its unsupported-capability path. The test-only repair
+keeps mandatory backend selection, runs supported timestamp modes, and executes
+checked ordinary compute when queries are absent. Two CPU policy tests and focused
+strict checks pass; independent final review and hosted successor execution remain
+pending. [Failure and repair evidence](docs/spikes/timestamp-diagnostic-capabilities.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -62,9 +72,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main217, 2026-10-13
+## Current overview — main218, 2026-10-13
 
-Development main217 includes the reviewed opt-in cooked renderer families and
+Development main218 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.

@@ -18,9 +18,18 @@ const SHADER: &str = r#"
 fn timestamp_write_and_resolve_paths() {
     let instance = wgpu::Instance::default();
     let adapter = pollster::block_on(instance.request_adapter(&Default::default())).unwrap();
-    let features =
-        wgpu::Features::TIMESTAMP_QUERY | wgpu::Features::TIMESTAMP_QUERY_INSIDE_ENCODERS;
-    assert!(adapter.features().contains(features));
+    let info = adapter.get_info();
+    let supported = adapter.features();
+    let expected = match std::env::var("INCANT_EXPECT_GPU_BACKEND") {
+        Ok(value) => Some(value),
+        Err(std::env::VarError::NotPresent) => None,
+        Err(error) => panic!("invalid expected backend: {error}"),
+    };
+    require_backend(expected.as_deref(), info.backend).unwrap();
+    let (features, cases) = capability_cases(supported);
+    eprintln!(
+        "TIMESTAMP_PROBE_CAPABILITIES adapter={info:?}; supported={supported:?}; requested={features:?}; cases={cases:?}"
+    );
     let (device, queue) = pollster::block_on(adapter.request_device(&wgpu::DeviceDescriptor {
         required_features: features,
         ..Default::default()
@@ -43,7 +52,7 @@ fn timestamp_write_and_resolve_paths() {
         compilation_options: Default::default(),
         cache: None,
     });
-    for descriptor in [false, true] {
+    for descriptor in cases {
         for later_resolve in [false, true] {
             // Fresh zeroed work storage makes every case independently observable.
             let work = device.create_buffer(&wgpu::BufferDescriptor {
@@ -60,16 +69,23 @@ fn timestamp_write_and_resolve_paths() {
                     resource: work.as_entire_binding(),
                 }],
             });
-            let queries = device.create_query_set(&wgpu::QuerySetDescriptor {
-                label: None,
-                ty: wgpu::QueryType::Timestamp,
-                count: 2,
+            let queries = descriptor.map(|_| {
+                device.create_query_set(&wgpu::QuerySetDescriptor {
+                    label: None,
+                    ty: wgpu::QueryType::Timestamp,
+                    count: 2,
+                })
             });
             // A no-op resolve leaves MAX rather than looking like zero samples.
             let resolve = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
                 label: None,
                 contents: &[255; 16],
-                usage: wgpu::BufferUsages::QUERY_RESOLVE | wgpu::BufferUsages::COPY_SRC,
+                usage: wgpu::BufferUsages::COPY_SRC
+                    | if queries.is_some() {
+                        wgpu::BufferUsages::QUERY_RESOLVE
+                    } else {
+                        wgpu::BufferUsages::empty()
+                    },
             });
             let readback = device.create_buffer(&wgpu::BufferDescriptor {
                 label: None,
@@ -78,24 +94,26 @@ fn timestamp_write_and_resolve_paths() {
                 mapped_at_creation: false,
             });
             let mut encoder = device.create_command_encoder(&Default::default());
-            if !descriptor {
-                encoder.write_timestamp(&queries, 0);
+            if descriptor == Some(false) {
+                encoder.write_timestamp(queries.as_ref().unwrap(), 0);
             }
             {
                 let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
                     label: None,
-                    timestamp_writes: descriptor.then_some(wgpu::ComputePassTimestampWrites {
-                        query_set: &queries,
-                        beginning_of_pass_write_index: Some(0),
-                        end_of_pass_write_index: Some(1),
+                    timestamp_writes: (descriptor == Some(true)).then(|| {
+                        wgpu::ComputePassTimestampWrites {
+                            query_set: queries.as_ref().unwrap(),
+                            beginning_of_pass_write_index: Some(0),
+                            end_of_pass_write_index: Some(1),
+                        }
                     }),
                 });
                 pass.set_pipeline(&pipeline);
                 pass.set_bind_group(0, &bindings, &[]);
                 pass.dispatch_workgroups(WORDS / 64, 1, 1);
             }
-            if !descriptor {
-                encoder.write_timestamp(&queries, 1);
+            if descriptor == Some(false) {
+                encoder.write_timestamp(queries.as_ref().unwrap(), 1);
             }
             if later_resolve {
                 queue.submit([encoder.finish()]);
@@ -107,7 +125,9 @@ fn timestamp_write_and_resolve_paths() {
                     .unwrap();
                 encoder = device.create_command_encoder(&Default::default());
             }
-            encoder.resolve_query_set(&queries, 0..2, &resolve, 0);
+            if let Some(queries) = &queries {
+                encoder.resolve_query_set(queries, 0..2, &resolve, 0);
+            }
             encoder.copy_buffer_to_buffer(&resolve, 0, &readback, 0, 16);
             encoder.copy_buffer_to_buffer(&work, 0, &readback, 16, 4);
             encoder.copy_buffer_to_buffer(&work, u64::from(WORDS - 1) * 4, &readback, 20, 4);
@@ -139,12 +159,86 @@ fn timestamp_write_and_resolve_paths() {
                 value
             });
             assert_eq!(values, expected, "independently checked compute dispatch");
+            if descriptor.is_none() {
+                assert_eq!(ticks, [u64::MAX; 2], "untimed sentinel is never a sample");
+            }
             eprintln!(
                 "TIMESTAMP_PROBE {}",
-                serde_json::json!({"descriptor":descriptor,"later_resolve":later_resolve,"ticks":ticks,"work_words":WORDS,"work_rounds":ROUNDS,"values":values,"resolve_changed":ticks!=[u64::MAX;2],"positive_interval":ticks[1]>ticks[0]})
+                serde_json::json!({"descriptor":descriptor,"later_resolve":later_resolve,"status":if descriptor.is_some() { "MeasuredDiagnostic" } else { "Unsupported" },"ticks":descriptor.map(|_| ticks),"work_words":WORDS,"work_rounds":ROUNDS,"values":values,"resolve_changed":descriptor.map(|_| ticks!=[u64::MAX;2]),"positive_interval":descriptor.map(|_| ticks[1]>ticks[0])})
             );
             drop(data);
             readback.unmap();
         }
     }
+}
+
+// None executes ordinary compute and checked readback without creating queries.
+fn capability_cases(supported: wgpu::Features) -> (wgpu::Features, Vec<Option<bool>>) {
+    if !supported.contains(wgpu::Features::TIMESTAMP_QUERY) {
+        return (wgpu::Features::empty(), vec![None]);
+    }
+    let mut features = wgpu::Features::TIMESTAMP_QUERY;
+    let cases = if supported.contains(wgpu::Features::TIMESTAMP_QUERY_INSIDE_ENCODERS) {
+        features |= wgpu::Features::TIMESTAMP_QUERY_INSIDE_ENCODERS;
+        vec![Some(false), Some(true)]
+    } else {
+        vec![Some(true)]
+    };
+    (features, cases)
+}
+fn require_backend(expected: Option<&str>, actual: wgpu::Backend) -> Result<(), &'static str> {
+    let Some(expected) = expected else {
+        return Ok(());
+    };
+    let required = match expected {
+        "Metal" => wgpu::Backend::Metal,
+        "Vulkan" => wgpu::Backend::Vulkan,
+        "Dx12" => wgpu::Backend::Dx12,
+        _ => return Err("unknown required native GPU backend"),
+    };
+    if actual != required {
+        return Err("actual GPU backend does not match required backend");
+    }
+    Ok(())
+}
+#[test]
+fn optional_query_capabilities_preserve_descriptor_and_ordinary_work() {
+    use wgpu::Features as F;
+    assert_eq!(capability_cases(F::empty()), (F::empty(), vec![None]));
+    assert_eq!(
+        capability_cases(F::TIMESTAMP_QUERY_INSIDE_ENCODERS),
+        (F::empty(), vec![None])
+    );
+    assert_eq!(
+        capability_cases(F::TIMESTAMP_QUERY),
+        (F::TIMESTAMP_QUERY, vec![Some(true)])
+    );
+    let both = F::TIMESTAMP_QUERY | F::TIMESTAMP_QUERY_INSIDE_ENCODERS;
+    assert_eq!(
+        capability_cases(both),
+        (both, vec![Some(false), Some(true)])
+    );
+}
+#[test]
+fn forced_backend_is_independent_of_optional_timestamps() {
+    for (name, backend) in [
+        ("Metal", wgpu::Backend::Metal),
+        ("Vulkan", wgpu::Backend::Vulkan),
+        ("Dx12", wgpu::Backend::Dx12),
+    ] {
+        for actual in [
+            wgpu::Backend::Metal,
+            wgpu::Backend::Vulkan,
+            wgpu::Backend::Dx12,
+            wgpu::Backend::Gl,
+            wgpu::Backend::Noop,
+        ] {
+            assert_eq!(
+                require_backend(Some(name), actual).is_ok(),
+                actual == backend
+            );
+        }
+    }
+    assert!(require_backend(Some("all"), wgpu::Backend::Noop).is_err());
+    assert!(require_backend(None, wgpu::Backend::Metal).is_ok());
 }
