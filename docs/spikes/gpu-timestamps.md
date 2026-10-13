@@ -1,70 +1,79 @@
 # Bounded native GPU timestamps
 
-Phase 1 profiler groundwork. `Renderer::new_with_gpu_timing` explicitly enables
-native encoder timestamp queries; ordinary `new` and `headless` behavior remains
-unchanged. An unsupported adapter or browser request fails with a typed error.
-No clock estimate or CPU callback duration is substituted for a GPU query.
+`Renderer::new_with_gpu_timing` opts into native **pass** timestamp queries.
+Ordinary `new` and `headless` remain unchanged. Unsupported adapters and browser
+requests fail with a typed error; CPU callback latency never substitutes for a
+GPU query.
 
-The existing scene graph records its overall interval and separate initialization,
-cluster assignment, shadow, model, sprite, text and display intervals. Absent
-groups have no sample. These are instrumented command-encoder groups, not a claim
-that every group contains exactly one hardware render pass. The measurements
-exclude later screen-space UI, presentation, CPU preparation, queue uploads and
-query resolve/readback. Instrumentation itself can change scheduling and cost.
+The graph records initialization, cluster assignment, shadows, models, sprites,
+text and display when those groups actually encode work. Render and compute pass
+descriptors write the endpoints. A multi-pass shadow group writes only its first
+beginning and last ending; intermediate passes have no timestamp descriptor.
+The overall interval starts at the first instrumented pass and ends at the last.
+These labels do not include later screen-space UI, presentation, preparation,
+uploads, or query resolve/readback. They are not a complete application frame
+budget or a strict barrier guarantee. New graph passes must explicitly join the
+instrumentation when composed; motion and post-processing producers are separate.
 
-Three fixed slots each own one query set, one 128-byte resolve buffer and one
-128-byte CPU readback buffer. A full pool skips instrumentation while rendering
-continues. Pending and unread results keep their slots; callers consume at most
-one result per `take_gpu_timing` call. That method polls native callbacks without
-waiting. Sequence numbers identify encoding order, which need not equal submission
-or completion order. `gpu_timing_stats` reports pending, ready, skipped and
-abandoned and retired measurements. There is no unbounded history, filesystem I/O, network
-transport or blocking queue drain.
+Three fixed slots each own fourteen query entries, a 112-byte resolve buffer and
+a 112-byte readback buffer. A full pool skips measurement while rendering
+continues. Pending and unread results retain their slots. `take_gpu_timing`
+polls native callbacks without waiting and returns at most one result; sequence
+numbers identify encoding order, which can differ from submission/completion.
+There is no unbounded result history or blocking queue drain.
 
-Deferred mapping belongs to the returned command buffer. Dropping it before
-submission drops its lease and returns the slot. After submission, a callback
-decodes only the small numeric timestamp payload, drops the mapped view and
-unmaps the buffer before publishing the result. The lease is disarmed before
-publication so its destructor cannot retire a newly reused slot. GPU resources
-remain owned by wgpu while commands are pending. A failed mapping becomes a typed
-readback error exactly once and permanently retires that slot. wgpu's public
-mapping bookkeeping can remain set after a failed map, while the backend is
-already unmapped; neither reuse nor an unconditional second unmap is safe.
-Other slots keep working, and retiring all three simply skips future samples.
-Device loss follows the existing renderer failure path.
+The submitted frame's completion callback creates and submits a separate tiny
+resolve/copy command buffer. Its deferred map callback decodes the numeric payload,
+drops the mapped view and unmaps before publishing. This adds an asynchronous
+submission per measured frame; it does not wait for GPU completion in normal
+rendering. Callback captures retain the exact device, queue, buffers and lease.
+Dropping an unsubmitted frame releases its reservation. Failed mapping reports
+once and permanently retires the slot because wgpu's public mapping bookkeeping
+cannot safely be reset by an unconditional second unmap. Remaining slots continue.
 
-The queue's timestamp period converts ticks to nanoseconds. Integer subtraction
-precedes floating conversion so small intervals survive large absolute counters.
-Reversed or wrapped counters are discarded, not converted into plausible positive
-durations. Zero can be legitimate timestamp quantization. Raw ticks and period are
-retained alongside each duration. These clocks do not establish CPU/GPU clock
-alignment or add up to a frame-time budget: wgpu explicitly permits backend and
-driver command reordering around encoder timestamps.
+Ticks are subtracted as integers before timestamp-period conversion, preserving
+small deltas in large absolute counters. Reversed/wrapped counters are refused.
+An entirely zero query payload now produces `GpuTimingError::Unwritten` instead
+of a plausible zero-duration measurement. Equal nonzero endpoints remain valid
+quantized zero intervals. Raw ticks and period accompany every accepted result.
 
-The implementation uses the repository's pinned wgpu 29.0.4
-[encoder query API](https://docs.rs/wgpu/29.0.4/wgpu/struct.CommandEncoder.html#method.write_timestamp),
-[deferred mapping](https://docs.rs/wgpu/29.0.4/wgpu/struct.CommandEncoder.html#method.map_buffer_on_submit)
-and [timestamp period](https://docs.rs/wgpu/29.0.4/wgpu/struct.Queue.html#method.get_timestamp_period).
-No dependency resolution changes or shader changes are needed.
+## Metal correction and evidence
 
-Seven focused CPU tests pass and cover capability refusal, period and
-counter handling, capacity/backpressure, abandoned reservations, cross-thread
-completion, failed-map retirement, labeled query decoding and warmed
-allocation-free bookkeeping. Independent review found and corrected the failed-map
-reuse case before GPU execution. The
-first allocation assertion exposed the platform mutex's lazy thread parking
-initialization; the corrected test explicitly warms it before measuring steady
-state. This says nothing about wgpu's callback allocations or full-frame allocation
-behavior. One compiled, ignored GPU test exercises actual out-of-order submissions,
-unsubmitted command-buffer drops, asynchronous query readback and slot reuse;
-it has not yet run. The complete affected CPU run passes 70 cases with 90 GPU
-cases intentionally ignored. All-target Clippy, the browser build, runtime
-dependency boundary, formatting and generated conventions pass. Independent
-source review accepts the corrected implementation. Frozen source copies, raw
-logs, the two prior check attempts and the review receipt are retained in the
-[evidence manifest](evidence/gpu-timestamps.json). Actual query execution and
-appearance parity remain queued for Claude's exclusive GPU lane.
+Claude 0068's original 90 GPU regressions and four timing-off/on appearance pairs
+passed, but all eight instrumented results contained only zero counters. Those
+results are preserved and **do not validate GPU measurement**. The original
+encoder-write implementation is superseded.
 
-This is not the complete profiler: Tracy CPU integration, memory accounting,
-full-frame UI timing, browser pass timestamps, on-device capture and matched
-shipping-profile reference-phone performance evidence remain separate work.
+A bounded numerical compute diagnostic compared encoder writes versus pass
+begin/end descriptors, each resolved in the same buffer or after work completed.
+All four cases verified their actual compute output. On the recorded Apple M5 Pro
+Metal adapter, only pass descriptors with a later resolve returned nonzero ticks.
+The diagnostic preserves that result without extrapolating to other drivers.
+
+The corrected renderer passes 74 affected CPU tests with 91 GPU tests ignored,
+all-target Clippy, browser compilation, formatting and diff checks. Browser
+compilation has five dead-code warnings in the deliberately unavailable native
+readback path; it is not a warning-free browser build. Independent source review
+caught and corrected an empty timestamp descriptor on intermediate shadow
+cascades; shared endpoint tests cover one, two, four and eight passes.
+
+One actual numeric renderer test then submitted three 64×64 frames, including an
+unmeasured frame under full-pool backpressure. The two instrumented frames returned
+positive overall intervals of 304,666 and 406,209 ns, with nonzero initialization,
+model and display samples. Out-of-order submission, unsubmitted abandonment,
+asynchronous readback, absent text groups and slot reuse passed. These are
+correctness observations, **not performance benchmarks**. All owned children were
+reaped and the GPU/target reservation was released. No image was decoded by Astra.
+
+[Retained evidence](evidence/gpu-timestamps-pass-resolve.json) binds the frozen
+source, exact copied binaries, raw logs, historical failures, source-review
+receipts, numeric results and process ledger. The original
+[evidence](evidence/gpu-timestamps.json) remains historical. Revised appearance
+parity, full GPU regressions and composition with current main remain pending.
+
+The implementation uses pinned wgpu 29.0.4 pass timestamp descriptors,
+`CommandEncoder::on_submitted_work_done`, `map_buffer_on_submit` and the queue's
+timestamp period. No shader math or dependency resolution changed. This is not
+the full profiler: memory/allocation tracking, complete-frame timing, network
+capture from phones and matched shipping-profile reference-device measurements
+remain open. CPU Tracy zones are a separate merged implementation.
