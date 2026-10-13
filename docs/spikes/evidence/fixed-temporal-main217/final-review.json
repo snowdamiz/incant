@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-13T11:39:22.647225+00:00",
+  "verdict": "Accepted scoped fixed-only main219 integration; publication subject to exact-head required fast check",
+  "head": "931998df4d9ceb3d076e242938cddc653c75aecc",
+  "manifest_sha256": "816318b0efe58c8c8873f61b190dcecc368675a2229db7f855e69d8650415f74",
+  "verifier_sha256": "10d1fd65ea6ccb6702b2a99514a001d054f646776cf0586d3787ba96f95fec69",
+  "actions": [
+    "Read complete read-only verifier, current scope/status, prior source review and joined fixture/grant",
+    "Ran verifier --verify-only terminal0:533records/371payloads/3100inputs/22checks/30offlinecommands/8current measuredGPUframes",
+    "Verified actual main219 disjoint join of12inert physics sources and1separate diagnostic; unchanged renderer/build graph, no new build claim"
+  ],
+  "prior_source_review": "7e9fa08a30a3afb94871c906ea6c0e38646a72578c17032be504d850b70c1a92",
+  "joined_gpu_grant": "814b10663bdc6890cecf166daa92a6ce36c724d58c968a06b6535a640b00c974",
+  "limits": [
+    "Fixed internal-resolution accumulation opt-in only; producer visual acceptance retains softness and MASK detail18percentOFreference",
+    "No new current-composition appearance review, upscaling, MetalFX, bloom or SSAO acceptance",
+    "No phone, shipping performance or phase gate approval"
+  ]
+}
