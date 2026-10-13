@@ -914,7 +914,7 @@ original missing-bundle compile attempt and unchanged-source correction.
 
 ## Current milestone
 
-Main #182 includes compound native animation and Wasm snapshots, authored two-bone
+Main #183 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
 checkpoints, public physics queries, and the Core/Planar gameplay foundations.
 Pearl Cove's authored art/HUD and runtime hooks are merged with their scoped
@@ -946,9 +946,12 @@ shipping builds. [Promotion and evidence](docs/spikes/release-checkpoint-14.md).
 Checkpoint15 finished unpromoted with20 required successes and three exporter-graph
 failures; Windows conformance passed in87minutes. Checkpoint16 now freezes selected
 main179 `02203670`, candidate `6a336ac5`, with the exact same tree `f9a6007d`.
-All eight existing workflows are running once on that candidate; all23 required
-contexts remain mandatory. Release stays at the checkpoint14 baseline until every
-exact-head context succeeds and promotion is reviewed.
+The general macOS fresh-session ledger failed by confusing the same-named player
+library/executable commands. The reviewed crate-kind correction passes24 focused
+regressions and330 tooling cases (four existing platform skips), with exact hosted
+command replay. Windows conformance remains active at this snapshot. The candidate
+stays frozen; all23 contexts remain required. Release remains checkpoint14 until a
+reviewed repaired candidate fully passes. [Failure and repair](docs/spikes/shipping-session-player-kinds.md).
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
