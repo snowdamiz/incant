@@ -49,32 +49,10 @@ pub fn decode_contact_points(
         solver: vector(s)?,
     };
     for _ in 0..p {
-        record.points.push(TrackedContactPoint {
-            local_p1: words(&mut read)?,
-            local_p2: words(&mut read)?,
-            distance: read.word()?,
-            features: words(&mut read)?,
-            data: ContactWarmstart {
-                impulse: read.word()?,
-                tangent_impulse: words(&mut read)?,
-                warmstart_impulse: read.word()?,
-                warmstart_tangent_impulse: words(&mut read)?,
-                warmstart_twist_impulse: read.word()?,
-                warmstart_tangent_world: words(&mut read)?,
-                solver_dp1: words(&mut read)?,
-                solver_dp2: words(&mut read)?,
-            },
-        });
+        record.points.push(read_point(&mut read)?);
     }
     for _ in 0..s {
-        record.solver.push(SolverContactPoint {
-            anchor1: words(&mut read)?,
-            anchor2: words(&mut read)?,
-            distance: read.word()?,
-            tangent_velocity: words(&mut read)?,
-            contact_id: read.word()?,
-            padding: read.word()?,
-        });
+        record.solver.push(read_solver(&mut read)?);
     }
     validate_contact_points(record, budget)
 }
@@ -92,36 +70,71 @@ pub fn encode_contact_points(
         put(v);
     }
     for p in &r.points {
-        let w = p.data;
-        for v in p
-            .local_p1
-            .into_iter()
-            .chain(p.local_p2)
-            .chain([p.distance])
-            .chain(p.features)
-            .chain([w.impulse])
-            .chain(w.tangent_impulse)
-            .chain([w.warmstart_impulse])
-            .chain(w.warmstart_tangent_impulse)
-            .chain([w.warmstart_twist_impulse])
-            .chain(w.warmstart_tangent_world)
-            .chain(w.solver_dp1)
-            .chain(w.solver_dp2)
-        {
-            put(v);
-        }
+        write_point(p, &mut put);
     }
     for s in &r.solver {
-        for v in s
-            .anchor1
-            .into_iter()
-            .chain(s.anchor2)
-            .chain([s.distance])
-            .chain(s.tangent_velocity)
-            .chain([s.contact_id, s.padding])
-        {
-            put(v);
-        }
+        write_solver(s, &mut put);
     }
     Ok(bytes)
+}
+
+pub(crate) fn read_point(read: &mut Reader<'_>) -> Result<TrackedContactPoint> {
+    Ok(TrackedContactPoint {
+        local_p1: words(read)?,
+        local_p2: words(read)?,
+        distance: read.word()?,
+        features: words(read)?,
+        data: ContactWarmstart {
+            impulse: read.word()?,
+            tangent_impulse: words(read)?,
+            warmstart_impulse: read.word()?,
+            warmstart_tangent_impulse: words(read)?,
+            warmstart_twist_impulse: read.word()?,
+            warmstart_tangent_world: words(read)?,
+            solver_dp1: words(read)?,
+            solver_dp2: words(read)?,
+        },
+    })
+}
+pub(crate) fn read_solver(read: &mut Reader<'_>) -> Result<SolverContactPoint> {
+    Ok(SolverContactPoint {
+        anchor1: words(read)?,
+        anchor2: words(read)?,
+        distance: read.word()?,
+        tangent_velocity: words(read)?,
+        contact_id: read.word()?,
+        padding: read.word()?,
+    })
+}
+pub(crate) fn write_point(p: &TrackedContactPoint, put: &mut impl FnMut(u32)) {
+    let w = p.data;
+    for v in p
+        .local_p1
+        .into_iter()
+        .chain(p.local_p2)
+        .chain([p.distance])
+        .chain(p.features)
+        .chain([w.impulse])
+        .chain(w.tangent_impulse)
+        .chain([w.warmstart_impulse])
+        .chain(w.warmstart_tangent_impulse)
+        .chain([w.warmstart_twist_impulse])
+        .chain(w.warmstart_tangent_world)
+        .chain(w.solver_dp1)
+        .chain(w.solver_dp2)
+    {
+        put(v);
+    }
+}
+pub(crate) fn write_solver(s: &SolverContactPoint, put: &mut impl FnMut(u32)) {
+    for v in s
+        .anchor1
+        .into_iter()
+        .chain(s.anchor2)
+        .chain([s.distance])
+        .chain(s.tangent_velocity)
+        .chain([s.contact_id, s.padding])
+    {
+        put(v);
+    }
 }

@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-13T05:42:25.730037+00:00",
+  "decision": "accepted",
+  "producer": "7ca4dd872c7d97c66829c60a360218071d187bb1",
+  "scope": "Inert contact manifold producer source and CPU evidence. Eligible for current-main integration and scoped revalidation.",
+  "manifest_sha256": "ea311f9af539598369f8b5064d0706a4bc8f6abf1f9a80137030de7dd920c7a1",
+  "reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-inert-manifolds-evidence-audit-20261013.json",
+      "sha256": "944adfe6d74c43469aa280052292ffbec0d78922af208a7cb6311e9a92214d52"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-inert-manifolds-source-002-second-20261013.json",
+      "sha256": "3bdf838cb5e6b36d2b8ec870dcc23d69a1e21357dd4c920bfe7593e318923ca3"
+    }
+  ],
+  "root_review": "Read complete new production codec/validation/records and shared extraction; second reviewer covered full hostile/native tests and pinned contracts. Root independently audited immutable blobs,34 inputs,21 pinned references,116 lossless records and all9 commands; final79 CPU tests passed across13 nonempty groups.",
+  "findings": [],
+  "limits": [
+    "No live construction, full physics save admission or exact continuation.",
+    "Caller phase witness, solver reciprocity, mixed-child features and persistent pair query state remain composition requirements.",
+    "No phone/performance/phase gate approval."
+  ]
+}

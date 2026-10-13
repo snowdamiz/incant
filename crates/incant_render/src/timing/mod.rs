@@ -45,7 +45,8 @@ pub struct GpuFrameTiming {
     pub sequence: u64,
     pub timestamp_period_ns: f32,
     /// Earliest start through latest end of all instrumented pass groups.
-    /// Includes overlap once; excludes uninstrumented work and presentation.
+    /// Counts overlap/gaps once; does not attribute uninstrumented work or
+    /// presentation. The separate retained motion pass has no query pair.
     pub frame: GpuSpan,
     /// Indexed in `GpuPass::ALL` order. Absent passes are None, never fake zeros.
     pub passes: [Option<GpuSpan>; GPU_PASS_COUNT],

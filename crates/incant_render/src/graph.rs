@@ -25,6 +25,7 @@ enum Pass {
 pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
+    pub motion: Option<crate::motion::MotionDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
     pub output: OutputDraw,
@@ -218,6 +219,11 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     }
 }
 fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+    // Retained motion is deliberately uninstrumented; Models covers only the
+    // following model pass. GpuFrameTiming documents this coverage boundary.
+    if let Some(pass) = &frame.motion {
+        pass.encode(&mut encoder.0);
+    }
     if let Some(pass) = &frame.models {
         encoder.timed(crate::timing::GpuPass::Models, |e, q| pass.encode(e, q));
     }

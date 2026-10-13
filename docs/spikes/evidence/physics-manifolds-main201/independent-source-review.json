@@ -1,0 +1,50 @@
+{
+  "format": "incant-independent-source-review",
+  "version": 1,
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "created_at": "2026-10-13T05:41:51.946392+00:00",
+  "decision": "accepted",
+  "scope": "Second read-only correctness review of inert contact graph/manifold source002 and pinned contracts; not final execution-package acceptance.",
+  "commit": "7ca4dd872c7d97c66829c60a360218071d187bb1",
+  "base": "d369a7d40651ecdc042396074e8c59e5d5b2895e",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/docs/spikes/evidence/physics-inert-manifolds.json",
+    "sha256": "ea311f9af539598369f8b5064d0706a4bc8f6abf1f9a80137030de7dd920c7a1"
+  },
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/freeze.json",
+    "sha256": "d143f961f8670aefba074bcee51fc6caad5c5d85a2a4a5ccaf224f3a7bfd55b9"
+  },
+  "source_rows_verified": 34,
+  "source_verification": "All frozen rows byte-identical in working tree, source copies, and immutable Git blobs. Clean producer checkout.",
+  "pinned_rows_verified": 21,
+  "pinned_verification": "All original/copy hashes and sizes equal. Relevant Rapier/Parry definitions reviewed directly.",
+  "reviewed_paths": [
+    "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+    "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+    "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+    "crates/incant_physics_snapshot/tests/manifolds.rs",
+    "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+    "crates/incant_physics_snapshot/src/attachment.rs",
+    "crates/incant_physics_snapshot/src/contact_points.rs",
+    "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+    "crates/incant_physics_snapshot/src/lib.rs",
+    "docs/spikes/physics-inert-manifolds.md"
+  ],
+  "findings": [],
+  "checked_invariants": [
+    "Graph endpoint orientation, unique live collider generations, exact body-parent relation, and duplicate/self-edge refusal.",
+    "Complete sequential partitions for pair/manifold/point/solver arrays; local contact selection bounds preserved.",
+    "Phase witness is explicit and nonzero pending journals refuse before allocation; documentation correctly does not authenticate caller-supplied zeros.",
+    "Fixed-width decode checks identity, counts, total length and cumulative requested allocations before allocation; canonical optional tags and bit-preserving re-encoding.",
+    "Pinned solver scalar domains and sentinels; exact outer allocation state for optional child poses; ordinary child-pose equality and spatial cluster transformed-coordinate distinction.",
+    "Actual-native capture tests cover warm starts, multiedge removal/reuse, absent body owners, mixed-child spatial clusters and pending journals.",
+    "Shared point helper extraction preserves prior validation and wire layout."
+  ],
+  "execution": "No builds, tests, GPU operations, source edits or runtime execution performed for this source review. Producer reports 79 CPU tests; parent separately audits final execution packet.",
+  "limits": [
+    "Inert records only; no live constructor, runtime consumer, save enablement or exact continuation claim.",
+    "Whole-owner authentication, solver/island reciprocities, mixed-child feature provenance, pair/previous-cluster/workspace state remain explicit future composition requirements.",
+    "No device, performance, appearance or phase gate acceptance."
+  ]
+}

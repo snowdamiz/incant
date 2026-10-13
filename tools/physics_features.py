@@ -220,6 +220,25 @@ def selected_graph_errors(text, mode, target):
     return errors + feature_errors(features, mode, target)
 
 
+def _compiler_package_identity(record, name):
+    package_id = record.get('package_id')
+    if not isinstance(package_id, str):
+        return False
+    version = VERSIONS[name]
+    if not package_id.startswith('path+'):
+        return package_id.endswith(f'#{name}@{version}')
+    # Cargo omits the package name when it equals the path's final component.
+    # Only the repository's pinned Parry patches may use a path identity here.
+    if name not in ('parry2d', 'parry3d'):
+        return False
+    package = (Path(__file__).resolve().parents[1] / 'third_party' / name).resolve()
+    expected = 'path+' + package.as_uri()
+    manifest = record.get('manifest_path')
+    return (package_id in (f'{expected}#{version}', f'{expected}#{name}@{version}')
+            and isinstance(manifest, str) and Path(manifest).is_absolute()
+            and Path(manifest).resolve() == package / 'Cargo.toml')
+
+
 def validate_artifacts(messages, mode, *, target_dir, target, profile):
     """Return checked target feature evidence, or raise ValueError atomically.
 
@@ -243,7 +262,7 @@ def validate_artifacts(messages, mode, *, target_dir, target, profile):
         if name not in SOLVERS:
             continue
         if (record['target'].get('kind') != ['lib']
-                or not str(record.get('package_id', '')).endswith(f'#{name}@{VERSIONS[name]}')):
+                or not _compiler_package_identity(record, name)):
             errors.append(f'{name}: unexpected compiler package/version/library identity')
             continue
         paths = record.get('filenames')

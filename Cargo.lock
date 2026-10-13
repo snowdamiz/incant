@@ -4271,6 +4271,7 @@ dependencies = [
  "parry3d",
  "rapier2d",
  "rapier3d",
+ "serde",
  "serde_json",
 ]
 
@@ -4364,6 +4365,7 @@ dependencies = [
  "incant_shader_cook",
  "incant_text",
  "incant_types",
+ "naga",
  "png 0.18.1",
  "pollster",
  "rustix",
