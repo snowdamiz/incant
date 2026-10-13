@@ -2611,6 +2611,8 @@ Cache/shape coherence and full live-owner admission remain open.
 Exact private storage/body/collider construction at `0a96dc0f` has independent
 source/final CPU acceptance: 216 snapshot cases and 22 native controls per mode,
 with 144 continuation steps per dimension. Other owners remain trusted clones.
-Current-main qualification is pending; exact manager construction, whole-owner
-admission and live physics saves remain closed.
+The separately reviewed observer alias from `d6b53f8b` is included. This private
+main229 composition is paused before integration source review and qualification;
+producer results are not current-main results. Exact manager construction,
+whole-owner admission and live physics saves remain closed.
 [Producer evidence](docs/spikes/physics-native-construction.md).
