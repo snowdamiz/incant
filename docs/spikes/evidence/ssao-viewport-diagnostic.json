@@ -1,0 +1,73 @@
+{
+  "schema": "incant-ssao-viewport-diagnostic-v1",
+  "at": "2026-10-13T17:48:14.742777+00:00",
+  "base": "fec0d04092c5c015de9c8cbb56802b5370f6fe37",
+  "source": "c4321a3e78b219157faa302b11dbd4f72968d4ce",
+  "review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/ssao-viewport-diagnostic-source-independent-20261013.json",
+    "sha256": "df3f741a7d38db76a9216efb5ec946f3a86bcb8d0139cfb0fc519924b625dad8"
+  },
+  "checks": [
+    {
+      "name": "final fixture CPU",
+      "exit": 0,
+      "session": 98290,
+      "passed": 1,
+      "ignored_gpu": 2
+    },
+    {
+      "name": "strict clippy lib and tests",
+      "exit": 0,
+      "session": 24063
+    },
+    {
+      "name": "actionlint1.7.12",
+      "exit": 0
+    },
+    {
+      "name": "workflow policy",
+      "exit": 0,
+      "passed": 22
+    },
+    {
+      "name": "formatting, conventions, diff",
+      "exit": 0
+    }
+  ],
+  "prior_cpu": {
+    "exit": 0,
+    "session": 14163,
+    "passed": 1,
+    "source_difference": "Final diagnostic checked-versus-observed label refinement only"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/ssao-viewport-diagnostic-logs.json.gz",
+    "sha256": "22d08e852242cf21e54df10c31438db0e6071235d8ecfc0eede56863a146b001",
+    "records": 10,
+    "payloads": 10
+  },
+  "failure": {
+    "checkpoint": 26,
+    "source": "0da0a6db8112c241e7d16516f4f2e833cee7c626",
+    "job": 115428469287,
+    "run": 38435557444,
+    "backend": "Dx12",
+    "adapter": "Microsoft Basic Render Driver",
+    "driver": "10.0.26100.33438",
+    "horizontal_pixel": [
+      17,
+      1
+    ],
+    "actual": 255,
+    "expected": [
+      98,
+      99
+    ]
+  },
+  "limits": [
+    "GPU diagnostic not run locally; Metal is not the failing Windows backend.",
+    "Only observation harness and manual workflow changed; original strict assertions and production shaders/draw setup unchanged.",
+    "Six diagnostic submissions and maps;18 render passes,19x15,zero images. Completion does not imply any numerical oracle passed.",
+    "Frozen checkpoint remains failed; no release-check substitution or phase approval."
+  ]
+}
