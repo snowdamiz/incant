@@ -1,3 +1,27 @@
+# Priority revision: prepare a concrete portable reconstruction repair brief
+
+Your a5ae3179 review is received: functional contracts pass, appearance fails.
+Preserve that run, its fixture, thresholds, captures and evidence. This invocation
+is CPU/source analysis only; no GPU, captures, build, target use or production edit.
+Use Claude Opus 5.5 with explicitly verified Max. No memory writes or other trees.
+
+Prepare quality-repair-brief.md for Astra implementation. Based on the actual
+535003d7 source and your retained review, specify a coherent bounded solution for
+sample reconstruction, edge/history admission and mip selection. Distinguish
+verified source causes from hypotheses. Keep the 0073 comparison cases and output
+contract fixed; do not improve the score by weakening references or cropping out
+bad edges. Identify concrete shader/data paths, desired behavior at each scale,
+resource/tap budget, disocclusion/coverage failure risks, and focused numerical
+controls Astra should implement. You own appearance direction and later pixel
+acceptance; Astra owns algorithm correctness and integration. For the fixture's
+clipped UI label, propose a separate minimal fixture correction without applying
+it to the historical run or changing the current button contract. Avoid a new
+harness, generic discussion or speculative performance claims. Commit only this
+brief with Built-by: claude and return; root will schedule source repair and a new
+review after the current fixed-temporal and native reviews finish.
+
+---
+
 # Priority revision — execute the corrected portable upscaling review
 
 Root completed and independently checked the foreground CPU build. Resume using
