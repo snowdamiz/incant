@@ -190,6 +190,22 @@ impl OfflineGameSession {
         self.inner.core.logs()
     }
     /// Explicit trusted-owner opt-in for whole-session replacement.
+    /// True only for a program with the implemented typed haptic capability.
+    pub fn supports_haptics(&self) -> Result<bool> {
+        self.inner.core.supports_haptics()
+    }
+    /// Current host-issued targets; never reconstructed from saved data.
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<()> {
+        self.inner.core.set_haptic_capabilities(value)
+    }
+    /// Drain only accepted composed output. Suspension clears pending requests.
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests> {
+        self.inner.core.take_haptics()
+    }
+
     pub fn enable_restart_requests(&mut self) -> Result<()> {
         self.inner.core.enable_restart_requests()
     }
