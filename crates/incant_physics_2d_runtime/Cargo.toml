@@ -11,8 +11,11 @@ default = ["deterministic"]
 deterministic = ["rapier2d/enhanced-determinism"]
 # An explicit build candidate; adoption depends on target measurements.
 fast-simd8 = ["rapier2d/simd8"]
+# Native completed-state ownership; public game-save admission remains separate.
+native-checkpoints = ["rapier2d/incant-checked-restore", "dep:incant_physics_snapshot"]
 
 [dependencies]
+incant_physics_snapshot = { path = "../incant_physics_snapshot", optional = true, features = ["construction"] }
 incant_types.workspace = true
 incant_2d.workspace = true
 thiserror.workspace = true
