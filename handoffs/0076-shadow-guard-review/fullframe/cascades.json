@@ -1,0 +1,193 @@
+{
+ "cascade_boundaries": [
+  0.1,
+  7.784961600191988,
+  16.249744871391588,
+  28.57404651402987,
+  60.0
+ ],
+ "blend_starts": [
+  7.016465440172789,
+  15.403266544271627,
+  27.341616349766042,
+  56.85740465140299
+ ],
+ "cascades": [
+  {
+   "cascade": 0,
+   "view_depth": [
+    0.1,
+    7.784961600191988
+   ],
+   "texel_unguarded": 0.01642156862745098,
+   "texel_guarded": 0.01642156862745098,
+   "texel_changes": false,
+   "centre_changes": false,
+   "depth_range_changes": false,
+   "depth_range_set_by_frustum_corners": {
+    "unguarded": [
+     false,
+     false
+    ],
+    "guarded": [
+     false,
+     false
+    ]
+   },
+   "near_far_unguarded": [
+    -55.14216072719831,
+    14.494176403135986
+   ],
+   "near_far_guarded": [
+    -55.14216072719831,
+    14.494176403135986
+   ],
+   "radius_x16_fraction": [
+    0.47560771954891834,
+    0.6056479679255062
+   ],
+   "centre_fraction_from_half": [
+    [
+     0.25879545771897483,
+     0.25628896328686324
+    ],
+    [
+     0.2587954577189464,
+     0.25628896328686324
+    ]
+   ]
+  },
+  {
+   "cascade": 1,
+   "view_depth": [
+    7.016465440172789,
+    16.249744871391588
+   ],
+   "texel_unguarded": 0.03174019607843137,
+   "texel_guarded": 0.03174019607843137,
+   "texel_changes": false,
+   "centre_changes": false,
+   "depth_range_changes": true,
+   "depth_range_set_by_frustum_corners": {
+    "unguarded": [
+     true,
+     false
+    ],
+    "guarded": [
+     true,
+     false
+    ]
+   },
+   "near_far_unguarded": [
+    -55.14216072719831,
+    14.93965461451295
+   ],
+   "near_far_guarded": [
+    -55.14216072719831,
+    14.959373356082038
+   ],
+   "radius_x16_fraction": [
+    0.08906239539459193,
+    0.38205408689753995
+   ],
+   "centre_fraction_from_half": [
+    [
+     0.2988347580428723,
+     0.14466854199516987
+    ],
+    [
+     0.2988347580428723,
+     0.14466854199518053
+    ]
+   ]
+  },
+  {
+   "cascade": 2,
+   "view_depth": [
+    15.403266544271627,
+    28.57404651402987
+   ],
+   "texel_unguarded": 0.054901960784313725,
+   "texel_guarded": 0.054901960784313725,
+   "texel_changes": false,
+   "centre_changes": false,
+   "depth_range_changes": true,
+   "depth_range_set_by_frustum_corners": {
+    "unguarded": [
+     true,
+     false
+    ],
+    "guarded": [
+     true,
+     false
+    ]
+   },
+   "near_far_unguarded": [
+    -55.14216072719831,
+    24.725995577417052
+   ],
+   "near_far_guarded": [
+    -55.14216072719831,
+    24.76066961342517
+   ],
+   "radius_x16_fraction": [
+    0.4306335139054909,
+    0.9532011336210644
+   ],
+   "centre_fraction_from_half": [
+    [
+     0.23169956238675127,
+     0.06179756852372975
+    ],
+    [
+     0.23169956238675127,
+     0.06179756852372975
+    ]
+   ]
+  },
+  {
+   "cascade": 3,
+   "view_depth": [
+    27.341616349766042,
+    60.0
+   ],
+   "texel_unguarded": 0.11642156862745098,
+   "texel_guarded": 0.11654411764705883,
+   "texel_changes": true,
+   "centre_changes": true,
+   "depth_range_changes": true,
+   "depth_range_set_by_frustum_corners": {
+    "unguarded": [
+     true,
+     true
+    ],
+    "guarded": [
+     true,
+     true
+    ]
+   },
+   "near_far_unguarded": [
+    -60.65421960208459,
+    49.680358495154906
+   ],
+   "near_far_guarded": [
+    -60.72702840637716,
+    49.753167299447476
+   ],
+   "radius_x16_fraction": [
+    0.738894368006072,
+    0.824390838501472
+   ],
+   "centre_fraction_from_half": [
+    [
+     0.390347627581491,
+     0.2703928578903856
+    ],
+    [
+     0.3624287631940888,
+     0.45254807044779
+    ]
+   ]
+  }
+ ]
+}
