@@ -16,6 +16,16 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Inert narrow-phase owner — source and CPU evidence accepted
+
+The checked physics boundary now preserves collider graph-index ownership, ordered
+intersection payloads and independent emitted-event history. Eight new native
+2D/3D controls pass, including 128 trusted continuation steps with retired-pair
+reuse, sensor transfers, event-mask toggles and generation reuse. Independent source and final evidence review accepted 143 CPU tests and seven
+scoped checks; publisher integration is pending. `PhysicsUnsupported` and hostile live
+restore admission remain closed; no vendor/world-format changes.
+[Scope and limits](docs/spikes/physics-narrow-owner.md).
+
 ## Static Wasm C builds — bounded local scheduling verified
 
 The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
