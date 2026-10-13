@@ -1,0 +1,48 @@
+{
+  "at": "2026-10-13T01:25:15.960923+00:00",
+  "tested_head": "32482b67abcdeaf463ac1b6f4418e6ff99c8aaef",
+  "actual_main": "35347a61ccb153b57ad38fc0dcae05b89ea6daee",
+  "integration_head": "f86b3bacc3f2e08a833d491dfdda77fe7bb83b0f",
+  "unchanged_frozen_inputs": 1985,
+  "changed_tools": [
+    {
+      "path": "tools/export_ios.py",
+      "tested_sha256": "5faaaf0bda07469ed7a957093890c5c6d378470cc875a1161e9fc6011b033f94",
+      "current_sha256": "05c7cf0388d62095125a1f9a91809302a6e4471529c1f2dd807406e8650c544d",
+      "current_main_exact": true
+    },
+    {
+      "path": "tools/ios_archive.py",
+      "tested_sha256": "8df7aa427e2c7b64d9856c23fbbbe04d4445fd449f0f17a2e15eedb3e6dd39e3",
+      "current_sha256": "674a10334f894dc1976170052dec6d1ef98fc65d04ad4de935d3b0e7f117a70a",
+      "current_main_exact": true
+    },
+    {
+      "path": "tools/shipping_session.py",
+      "tested_sha256": "712c7e9e61e785efd9874374380c09d7bd7072e1d5ad1bc2678379be854ba91e",
+      "current_sha256": "1ad924608092b51ec9c1b03caf67f660db5c1caeaaf2d339ceb55d23edbcdd30",
+      "current_main_exact": true
+    },
+    {
+      "path": "tools/tests/test_ios_export.py",
+      "tested_sha256": "1b644055c3ace0a12e2d8815d58bd6aa6a32e22ed4acdaf34cc0e7786952fbe0",
+      "current_sha256": "37447926b35124a4b7659914efa4894812fba7858f8099bfd066abf472dff2dc",
+      "current_main_exact": true
+    },
+    {
+      "path": "tools/tests/test_shipping_session.py",
+      "tested_sha256": "8d7badc9763f4ec2742180d92b7f25d371a5d39e96fb8931327696e98f97c1a5",
+      "current_sha256": "831ad043ed2b03014c803ae4ab737ea58462eb9a822c58496107a77f76ab3481",
+      "current_main_exact": true
+    }
+  ],
+  "new_tool_files": [
+    "tools/probes/authored-ios-physics/mover.ts",
+    "tools/probes/authored-ios-physics/other.ts",
+    "tools/probes/authored-ios-physics/prepare.py",
+    "tools/probes/authored-ios-physics/shared.ts",
+    "tools/probes/authored-ios-physics/verify.py"
+  ],
+  "engine_and_sample_exact": true,
+  "scope": "Only accepted iOS exporter/proof tools and shipping-session ledger repair changed; current Core prepare/verify and runtime sources are byte-identical to tested32482. Original collector binds the frozen tested inputs, not later unrelated tool revisions."
+}

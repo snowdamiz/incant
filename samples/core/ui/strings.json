@@ -1,0 +1,42 @@
+{
+  "id": "01CSST00000000000000000001",
+  "name": "Core Sample HUD",
+  "source_locale": "en",
+  "messages": {
+    "hud.health": {
+      "en": "{health, plural, =3 {● ● ●} =2 {● ● ○} =1 {● ○ ○} other {○ ○ ○}}",
+      "ar": "{health, plural, =3 {● ● ●} =2 {● ● ○} =1 {● ○ ○} other {○ ○ ○}}",
+      "zh-Hans": "{health, plural, =3 {● ● ●} =2 {● ● ○} =1 {● ○ ○} other {○ ○ ○}}"
+    },
+    "hud.samples": {
+      "en": "Samples {collected}/{total}",
+      "ar": "العينات {collected}/{total}",
+      "zh-Hans": "样本 {collected}/{total}"
+    },
+    "hud.objective.collect": {
+      "en": "Collect the core samples",
+      "ar": "اجمع العينات اللبية",
+      "zh-Hans": "收集岩芯样本"
+    },
+    "hud.objective.exit": {
+      "en": "Return to the lift",
+      "ar": "عُد إلى المصعد",
+      "zh-Hans": "返回升降台"
+    },
+    "hud.controls": {
+      "en": "WASD move · Space jump",
+      "ar": "الحركة WASD · القفز Space",
+      "zh-Hans": "WASD 移动 · 空格键 跳跃"
+    },
+    "hud.won": {
+      "en": "Samples secured",
+      "ar": "تم تأمين العينات",
+      "zh-Hans": "样本已安全回收"
+    },
+    "hud.lost": {
+      "en": "Surveyor down",
+      "ar": "تعطّل المسّاح",
+      "zh-Hans": "勘测机器人停机"
+    }
+  }
+}

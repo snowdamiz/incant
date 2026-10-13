@@ -1,0 +1,869 @@
+{
+ "route": "ordinary ci-profile window player: incant_game_player --package data --window",
+ "capture": "screencapture -o -x -l <window id> (window only, no shadow)",
+ "bursts": {
+  "started": 24,
+  "exit_0": 20,
+  "yielded_to_user_input": 4
+ },
+ "runs": [
+  {
+   "run": "w1-en",
+   "package": "f3-en-playing",
+   "player_sha256": "6db43a898eb06a937c5c15c402d13d8af59546e2df130516b75c70b9bab8a316",
+   "opened": "{\"id\":1250,\"x\":-2040.0,\"y\":-158.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2048 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T20:37:49Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 572,
+    "accepted_frames": 573,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 0,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 78,
+     "gpu_bytes": 35348,
+     "quads": 156,
+     "relayouts": 0,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 25364,
+      "atlas_textures": 1,
+      "frame_writes": 2,
+      "quad_buffers": 1,
+      "quad_bytes": 9984
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 155616 after the start capture, about 30 s after launch (ps -o rss) (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w1-collect-s1.png",
+     "sha256": "067afa008eaa33be9c8aeb374b33349c1195b7c9eb23dab3952b678a3ac62a8a",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T20:33:46Z",
+     "window": {
+      "id": 1250,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    },
+    {
+     "file": "w1-start.png",
+     "sha256": "e54b74c69ef1040145ccb09a82184282d0b6d13c1d3deac1149db631a1dbd1a5",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T20:29:59Z",
+     "window": {
+      "id": 1250,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w10-zh",
+   "package": "f5-zh-Hans-playing",
+   "player_sha256": "73c97d298f760347e7e653ddfcc9cc31b2dec67011a62769d612b18e5793fca8",
+   "opened": "{\"id\":1714,\"x\":-2040.0,\"y\":-177.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2045 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T23:12:04Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 108,
+    "accepted_frames": 109,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 0,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 40,
+     "gpu_bytes": 40040,
+     "quads": 80,
+     "relayouts": 0,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 34920,
+      "atlas_textures": 1,
+      "frame_writes": 2,
+      "quad_buffers": 1,
+      "quad_bytes": 5120
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 152768 after the start capture, seconds after launch (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w10-start.png",
+     "sha256": "0c1253c7c5ac76fac2589d2a6fa8cf4e7c805a673853b941d0d13f42eb89dc38",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T23:12:03Z",
+     "window": {
+      "id": 1714,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w11-pseudo",
+   "package": "f5-en-XA-playing",
+   "player_sha256": "09983851062bdbceef13185f426335d4d3d3d99b82d603a75afaf76534fb3535",
+   "opened": "{\"id\":1719,\"x\":-2040.0,\"y\":-177.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2045 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T23:12:08Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 103,
+    "accepted_frames": 104,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 1,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 138,
+     "gpu_bytes": 54042,
+     "quads": 276,
+     "relayouts": 0,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 36378,
+      "atlas_textures": 1,
+      "frame_writes": 2,
+      "quad_buffers": 1,
+      "quad_bytes": 17664
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 153552 after the start capture, seconds after launch (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w11-start.png",
+     "sha256": "2d89ff66ada2ade7a48f5de8135545c383b650e7fcae1ff8682fee6cdedef8db",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T23:12:08Z",
+     "window": {
+      "id": 1719,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w12-lost",
+   "package": "f5-en-lost",
+   "player_sha256": "9f33e7d9d99759b4e454fcc7aa98d0203a16f70bf89ec385042beeda41084bad",
+   "opened": "{\"id\":1724,\"x\":-2040.0,\"y\":-177.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2045 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T23:34:49Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 1825,
+    "accepted_frames": 1826,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 1,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 78,
+     "gpu_bytes": 35076,
+     "quads": 156,
+     "relayouts": 0,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 25092,
+      "atlas_textures": 1,
+      "frame_writes": 2,
+      "quad_buffers": 1,
+      "quad_bytes": 9984
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 94192 after the lost capture; the player had been unfocused for about 22 min (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w12-lost.png",
+     "sha256": "8e8b921ba4736109a16e87ef28e87eea557635ddc1819f7db09131186c83305b",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T23:34:49Z",
+     "window": {
+      "id": 1724,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w13-en",
+   "package": "f5-en-playing",
+   "player_sha256": "565f1592aaeafcf05c32bf2d094334124de52c90bdd6fe3ca75eb56a6cc5fd28",
+   "opened": "{\"id\":1772,\"x\":-2040.0,\"y\":-177.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2047 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T23:35:02Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 156,
+    "accepted_frames": 158,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 3,
+    "surface_recreations": 0,
+    "surface_skipped": 1,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 78,
+     "gpu_bytes": 35076,
+     "quads": 156,
+     "relayouts": 2,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 75276,
+      "atlas_textures": 3,
+      "frame_writes": 3,
+      "quad_buffers": 3,
+      "quad_bytes": 29952
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 155280 after the 420x320 capture and restore, seconds after launch (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w13-420x320.png",
+     "sha256": "7d0d136b2990e2ecf647ab3be3bd5cd320e917d2eb70fdc13341e5612ceb180d",
+     "size_px": [
+      840,
+      704
+     ],
+     "logged": "2026-10-12T23:35:01Z",
+     "window": {
+      "id": 1772,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 420.0,
+      "h": 352.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w2-en",
+   "package": "f4-en-playing",
+   "player_sha256": "152734438bc8bcd83047e8fbfae710d7a8e5d775d25140d91bbeab88d101e932",
+   "opened": "{\"id\":1296,\"x\":-2040.0,\"y\":-158.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2047 (waited 218s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T21:20:06Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 926,
+    "accepted_frames": 927,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 0,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 78,
+     "gpu_bytes": 35348,
+     "quads": 156,
+     "relayouts": 0,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 25364,
+      "atlas_textures": 1,
+      "frame_writes": 2,
+      "quad_buffers": 1,
+      "quad_bytes": 9984
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "2026-10-12T21:08Z after w2-start burst (player unfocused ~15 min before): rss_kb 87888 scale 2.0 frame {\"x\":200,\"y\":140,\"w\":640,\"h\":512}"
+   ],
+   "captures": [
+    {
+     "file": "w2-start.png",
+     "sha256": "4ca6d0a43f75ad8760cc03ee94ee0a81988d8702d0918b48e8206909826463e5",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T21:08:18Z",
+     "window": {
+      "id": 1296,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w3-en",
+   "package": "f4-en-playing",
+   "player_sha256": "152734438bc8bcd83047e8fbfae710d7a8e5d775d25140d91bbeab88d101e932",
+   "opened": "{\"id\":1372,\"x\":-2040.0,\"y\":-177.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2045 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T22:05:20Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 1332,
+    "accepted_frames": 1336,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 5,
+    "surface_recreations": 0,
+    "surface_skipped": 2,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 78,
+     "gpu_bytes": 35348,
+     "quads": 156,
+     "relayouts": 3,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 101456,
+      "atlas_textures": 4,
+      "frame_writes": 5,
+      "quad_buffers": 4,
+      "quad_bytes": 39936
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 86768 after the resize captures; the player had been unfocused for most of 45 min (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w3-420x320.png",
+     "sha256": "abaf30fa6c0ce1524e1da022d5b6c8905e85a795c182655198c0df4f31bda5de",
+     "size_px": [
+      840,
+      704
+     ],
+     "logged": "2026-10-12T22:05:18Z",
+     "window": {
+      "id": 1372,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 420.0,
+      "h": 352.0
+     }
+    },
+    {
+     "file": "w3-960x540.png",
+     "sha256": "b9579def4dbd6655cf283b4102d0074142e2eaa14bac418d9ef7142a719116d9",
+     "size_px": [
+      1920,
+      1144
+     ],
+     "logged": "2026-10-12T22:05:16Z",
+     "window": {
+      "id": 1372,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 960.0,
+      "h": 572.0
+     }
+    },
+    {
+     "file": "w3-collect-s1.png",
+     "sha256": "4418212933414894705fd8af378ea24e0c757dc83a1a62fa26631c57203fd7e0",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T21:38:59Z",
+     "window": {
+      "id": 1372,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    },
+    {
+     "file": "w3-start.png",
+     "sha256": "1fa2364693c2be5484339f068937fbc2e8afbde75502484727a5932e302c2e88",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T21:20:22Z",
+     "window": {
+      "id": 1372,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w4-ar",
+   "package": "f4-ar-playing",
+   "player_sha256": "7fa1a08e60d384a0ce95947103506ef3fe7777a14ece57b0766e20d188d055a4",
+   "opened": "pid 1016 has no on-screen window scale pid 1016 has no on-screen window titlebar  pt; front returned to 41270 (waited 0s)",
+   "exit_status": 1,
+   "signal": null,
+   "ended_at": "2026-10-12T22:05:58Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": null,
+    "adapter": null,
+    "backend": null,
+    "tick": null,
+    "accepted_frames": null,
+    "dropped_wall_ticks": null,
+    "surface_reconfigurations": null,
+    "surface_recreations": null,
+    "surface_skipped": null,
+    "on_screen": null,
+    "ui": null
+   },
+   "notes": [],
+   "captures": []
+  },
+  {
+   "run": "w5-zh",
+   "package": "f4-zh-Hans-playing",
+   "player_sha256": "bb9bb479f2b9e0f10848bf2841a398ef78ba63ebd3dc733b94de73262f96afc0",
+   "opened": "{\"id\":1485,\"x\":596.0,\"y\":203.0,\"w\":320.0,\"h\":272.0} scale 2.0 titlebar -208 pt; front returned to 41270 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T22:06:04Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 107,
+    "accepted_frames": 108,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 12,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 40,
+     "gpu_bytes": 40480,
+     "quads": 80,
+     "relayouts": 1,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 70720,
+      "atlas_textures": 2,
+      "frame_writes": 2,
+      "quad_buffers": 2,
+      "quad_bytes": 10240
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 146256 after the start capture, seconds after launch (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w5-start.png",
+     "sha256": "6d7ed6169ba21a0387cde1ad4b95cc9fb682326e306c33363d7ded6fef1f650e",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T22:06:04Z",
+     "window": {
+      "id": 1485,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w6-pseudo",
+   "package": "f4-en-XA-playing",
+   "player_sha256": "195ed17e8ad43d10b51b39875907ea1603f497e2449a4060ab125ebca4be8c2f",
+   "opened": "{\"id\":1494,\"x\":596.0,\"y\":203.0,\"w\":320.0,\"h\":272.0} scale 2.0 titlebar -208 pt; front returned to 41270 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T22:06:10Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 88,
+    "accepted_frames": 89,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 12,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 138,
+     "gpu_bytes": 54472,
+     "quads": 276,
+     "relayouts": 1,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 73616,
+      "atlas_textures": 2,
+      "frame_writes": 2,
+      "quad_buffers": 2,
+      "quad_bytes": 35328
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 146528 after the start capture, seconds after launch (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w6-start.png",
+     "sha256": "55591407859b932dcad916dd726a43c1fcd0f2827ce7efb2c1edc4a77e344393",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T22:06:09Z",
+     "window": {
+      "id": 1494,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w7-lost",
+   "package": "f4-en-lost",
+   "player_sha256": "9e14c4bea1194cd215f72df866c4d6429048f53fa894bb8e8fa2b21a40d5b3d0",
+   "opened": "{\"id\":1503,\"x\":596.0,\"y\":203.0,\"w\":320.0,\"h\":272.0} scale 2.0 titlebar -208 pt; front returned to 41270 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T22:08:00Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 854,
+    "accepted_frames": 855,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 13,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 78,
+     "gpu_bytes": 35348,
+     "quads": 156,
+     "relayouts": 1,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 50728,
+      "atlas_textures": 2,
+      "frame_writes": 2,
+      "quad_buffers": 2,
+      "quad_bytes": 19968
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 144208 after the lost capture, about 1 min after launch (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w7-closing.png",
+     "sha256": "effb0e835b96d978c61deb2cd4a9833eb401a17259e619d0077cf8b8f04d0ec5",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T22:06:19Z",
+     "window": {
+      "id": 1503,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    },
+    {
+     "file": "w7-lost.png",
+     "sha256": "941c3d92870f2a5840f6ae386c2b5df4fab460450686562b1920cab5a2a3a0be",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T22:07:59Z",
+     "window": {
+      "id": 1503,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w8-en",
+   "package": "f5-en-playing",
+   "player_sha256": "565f1592aaeafcf05c32bf2d094334124de52c90bdd6fe3ca75eb56a6cc5fd28",
+   "opened": "{\"id\":1520,\"x\":596.0,\"y\":203.0,\"w\":320.0,\"h\":272.0} scale 2.0 titlebar -208 pt; front returned to 41270 (waited 0s)",
+   "exit_status": 1,
+   "signal": null,
+   "ended_at": "2026-10-12T22:17:55Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": null,
+    "adapter": null,
+    "backend": null,
+    "tick": null,
+    "accepted_frames": null,
+    "dropped_wall_ticks": null,
+    "surface_reconfigurations": null,
+    "surface_recreations": null,
+    "surface_skipped": null,
+    "on_screen": null,
+    "ui": null
+   },
+   "notes": [
+    "rss_kb 143104 after the start capture, about 1 min after launch; the player later exited 1 on \"default output device changed\" (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w8-collect-s1.png",
+     "sha256": "9396a93fa84e8a246d591d932fca3bf66f1690862db4873817fe2255a09708d3",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T22:15:15Z",
+     "window": {
+      "id": 1520,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    },
+    {
+     "file": "w8-start.png",
+     "sha256": "67119b18503adbfde1cb6deb7bf52753127aaf33f002081badbb3be3ae6d1c3b",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T22:13:36Z",
+     "window": {
+      "id": 1520,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  },
+  {
+   "run": "w9-ar",
+   "package": "f5-ar-playing",
+   "player_sha256": "e17a2163a98ff4f55d1123027f522041cb96660732b041962eabc0480934826b",
+   "opened": "{\"id\":1709,\"x\":-2040.0,\"y\":-177.0,\"w\":640.0,\"h\":512.0} scale 1.0 titlebar 32 pt; front returned to 2045 (waited 0s)",
+   "exit_status": 0,
+   "signal": null,
+   "ended_at": "2026-10-12T23:11:59Z",
+   "new_crash_reports": [],
+   "report": {
+    "mode": "native-window",
+    "adapter": "Apple M5 Pro",
+    "backend": "Metal",
+    "tick": 119,
+    "accepted_frames": 120,
+    "dropped_wall_ticks": "0",
+    "surface_reconfigurations": 2,
+    "surface_recreations": 0,
+    "surface_skipped": 1,
+    "on_screen": true,
+    "ui": {
+     "focus": null,
+     "glyph_quads": 77,
+     "gpu_bytes": 44419,
+     "quads": 154,
+     "relayouts": 0,
+     "scale_factor": 2.0,
+     "uploads": {
+      "atlas_bytes": 34563,
+      "atlas_textures": 1,
+      "frame_writes": 2,
+      "quad_buffers": 1,
+      "quad_bytes": 9856
+     },
+     "viewport": [
+      640.0,
+      480.0
+     ],
+     "widgets": 6
+    }
+   },
+   "notes": [
+    "rss_kb 153568 after the start capture, seconds after launch (copied from the burst output)"
+   ],
+   "captures": [
+    {
+     "file": "w9-start.png",
+     "sha256": "62cc8713029582235418786100d3e84973479cfbda3f33a2d876711dcdb033f3",
+     "size_px": [
+      1280,
+      1024
+     ],
+     "logged": "2026-10-12T23:11:59Z",
+     "window": {
+      "id": 1709,
+      "x": 200.0,
+      "y": 140.0,
+      "w": 640.0,
+      "h": 512.0
+     }
+    }
+   ]
+  }
+ ]
+}

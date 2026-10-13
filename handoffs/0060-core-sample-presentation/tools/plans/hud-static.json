@@ -1,0 +1,8 @@
+{"cases": [
+  {"name": "window-640x480", "viewport": [640, 480], "scale": 2.0,
+   "steps": [{"ticks": 2, "capture": "start"}]},
+  {"name": "resize", "viewport": [640, 480], "scale": 2.0,
+   "steps": [{"ticks": 2},
+             {"resize": [960, 540], "ticks": 1, "capture": "960x540"},
+             {"resize": [420, 320], "ticks": 1, "capture": "420x320"}]}
+]}
