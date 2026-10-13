@@ -1,0 +1,85 @@
+{
+  "decision": "accepted_scoped_hud_changes_and_numeric_provenance",
+  "reviewer": "astra /root",
+  "safe_head": "8b82ad4d12445edf9abbc71e264147544f87cce6",
+  "visual_author": "Claude Opus5.5 via ACP; Max verified",
+  "scope": "Read-only correctness/provenance audit. Screenshot and raw frame bytes hashed only; appearance judgment remains Claude result.md. No GPU/build rerun.",
+  "audit_script": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/audit-0065-root.py",
+    "sha256": "30415e5f5039981b52d3431c46c317e19484feb267fd8a6e13da8231bf7cb34f"
+  },
+  "summary": {
+    "source_contracts": 35,
+    "changed_sample_files": 5,
+    "children": 49,
+    "rehashed_logs": 98,
+    "reports": 31,
+    "route_rechecks": 19,
+    "raw_frames_hashed": 21,
+    "screenshots_hashed_not_viewed": 19,
+    "font_reproduction_checked": true,
+    "raw_environment_never_published": true,
+    "no_gpu_rerun": true
+  },
+  "packet_records": [
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/builds.json",
+      "sha256": "230381690614d948fc14e1783043fff783cbb62faa138b553601f45de053b535"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/captures.json",
+      "sha256": "44406286b741f6919f98de36caab4214156f01ec709bb176873db5a094e2090e"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/checks.json",
+      "sha256": "7b270fe5aaa35ca69555ae603472f9862e5e75de8fcf3508855c00cf3e5b2807"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/environment-redaction.json",
+      "sha256": "d1167ac72b8a77d2e5c8f91a803f49a28d1051e26f16b20bdcf075855267c383"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/font.json",
+      "sha256": "929aec3dd1680e06dab21fa926b14ff8e74ff0a6f1ed9168c1be3ea608c67cc1"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/identities.json",
+      "sha256": "74a4dad7b333a48d5b7a88e6ace80ea025c2ec4b5c0acdeac1ee250d80cf411c"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/ledger.json",
+      "sha256": "7b14b2a5882f6f96edb2ad1e605a7e02ab0806759afcf456c9e121fbf7ee5f54"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/packages.json",
+      "sha256": "868185e67950bfd51326878b5e40d40ccf7c39bbdcd7b6750c1a6e8af759b187"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/screenshots.json",
+      "sha256": "588ab7bf97ddd99771d775f17b37b616a83ea13818a17840cd5098fdfa0b54d5"
+    },
+    {
+      "path": "handoffs/0065-core-live-hud/evidence/sources.json",
+      "sha256": "a0da6114458a4a199b54e90d099f178c9b322a91d0c2af3da772da7dd3572d60"
+    }
+  ],
+  "result_sha256": "f3455b651423ce2f5573b688f055c9bd7a404590599ec4ef375e8c202c01bf33",
+  "sanitization": {
+    "private_original_excluded_from_ancestry": true,
+    "original_private_commit": "f517265a568724a5aa09ff1abc939c9368d35afb",
+    "safe_parent": "d58c45b5500267b59bea992b0bbd2f9587f9e8f1",
+    "raw_ledger_publication_forbidden": true,
+    "environment_rows_allowlist_verified": true,
+    "private_value_scan_passed": true,
+    "executed_adapter_unchanged": true
+  },
+  "remaining_work": [
+    "Claude reports low estimated contrast for result titles and narrow stacked row; appearance is not fully accepted.",
+    "Optional result-state prompt and clearing stale won objective assigned to Astra; Claude followup owns authored layout/text and readability.",
+    "No native window, source-free shipping of changed HUD, phone/performance/device-audio or other-backend proof.",
+    "Old0060 helper provenance and false locked-route record remain explicitly qualified, not rewritten."
+  ],
+  "findings": [
+    "Initial audit guessed an authored project filename; corrected to the actual package manifest project path before successful replay. No source/evidence mutation to pass audit."
+  ]
+}
