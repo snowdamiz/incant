@@ -79,4 +79,6 @@ binary or fresh GPU execution is claimed for this disjoint ancestry join.
 artifact map, exact source/binary identities, assertion-only audit and prior root
 reviews. Independent source and final archive review is accepted under retained
 receipt `cd09ae48…`. The separate [main215 qualification](evidence/core0069-main212/current-main-qualification.json)
-is ready for independent review before publication.
+is independently accepted under receipt `87956407…`. One exact-path Git attribute
+preserves the reviewed raw oracle patch's blank context line; no original evidence
+bytes changed. Publication awaits the required fast check.

@@ -66,7 +66,7 @@
     "integration_qualification": "Exact selected UI/text/sample/shader sources and relevant dependency identities; other main renderer input changes recorded. No fresh GPU run or cross-binary pixel equivalence claim."
   },
   "initial_failure": "Minimal authoring environment omitted installed Node; retained before any export. Only the external wrapper PATH was corrected. All repository sources stayed frozen.",
-  "review_status": "Independent current-main source/execution archive review accepted; main215 test/tool-only qualification follows separately",
+  "review_status": "Independent source/execution archive and actual main215 test/tool-only qualification reviews accepted",
   "limits": [
     "No new GPU, window, image inspection, phone, timing/performance or phase gate acceptance",
     "Prior GPU runs remain the g6 regression and g5 capture binary identities",
@@ -85,6 +85,10 @@
   },
   "qualification_output": {
     "path": "docs/spikes/evidence/core0069-main212/current-main-audit.stdout",
-    "sha256": "43af33a5703b52c49b06c38bbc9cfee2345de994c3bae4b957d6d86f113508d5"
+    "sha256": "93bddfebb5a6c8dcbfed8c1abc8dcc156de39577c3099093e21539420d32164a"
+  },
+  "current_main_review": {
+    "path": "docs/spikes/evidence/core0069-main212/current-main-review.json",
+    "sha256": "87956407d407015a1b026f7bc34c6208c04f696751a3b3e3f5327d6b40984878"
   }
 }

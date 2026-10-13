@@ -26,7 +26,8 @@ tests, four public locale builds, 14 native positive processes and ten fresh
 source-deleted shipping runs pass, including four exact whole-session PCM
 continuations. Original g5/g6 GPU acceptance remains attached to those binaries;
 no new GPU/device/performance claim is made. Final archive review is accepted;
-current-main qualification review and publisher intake remain pending. [Scope and evidence](docs/spikes/core0069-main212.md).
+current-main qualification is independently accepted, with publication awaiting
+the required fast check. [Scope and evidence](docs/spikes/core0069-main212.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 

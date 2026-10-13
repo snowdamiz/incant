@@ -24,7 +24,7 @@
   "passed": true,
   "tested_source": "2489325ec5ebcf17e18e60d00c435d56f9b2bc26",
   "actual_main": "09d53653a1b7b433cd9032166e35fa93d46db080",
-  "integration_head": "b8506b8d4a22ffe42c34c4f19a9b886b2915c87d",
+  "integration_head": "f2e4e372117ac4e033fa0361575e1613aa5ccd06",
   "frozen_inputs": 3485,
   "exemptions": [
     {

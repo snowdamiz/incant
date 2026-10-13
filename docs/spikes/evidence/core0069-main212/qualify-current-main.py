@@ -23,6 +23,11 @@ for row in freeze['files']:
   exemptions[p]=(row['sha256'],actual)
 assert set(exemptions)==set(C['allowed'])
 for p in changed:assert (R/p).read_bytes()==git('show',main+':'+p)
+metadata=C['packaging_metadata'];assert h(R/metadata['path'])==metadata['sha256']
+assert h(R/metadata['retained_path'])==metadata['retained_sha256']==sha(git('show',M['accepted_producer']+':'+metadata['retained_path']))
+old_attrs=git('show',main+':.gitattributes').decode()
+assert (R/'.gitattributes').read_text()==old_attrs+'\n# Preserve exact reviewed 0069 oracle diff context, including blank context lines.\ndocs/spikes/evidence/core0069-ui-oracle-correction/source.patch -text whitespace=-blank-at-eol\n'
+
 for review in C['reviews']:
  assert h(R/review['path'])==review['sha256']
 audit=E/'audit.py';retained(audit);code=audit.read_text()
