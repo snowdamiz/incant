@@ -432,5 +432,9 @@
     "Five wasm native-only timing dead-code warnings retained. Browser timing admission fails explicitly.",
     "No native-window, other-backend GPU, phone, performance or complete-profiler gate approval."
   ],
-  "review": "Independent final integration review pending."
+  "review": {
+    "verdict": "accepted scoped current-main integration",
+    "path": "docs/spikes/evidence/gpu-timestamps-main207/final-review.json",
+    "sha256": "4ed5e1fc92a51a3e6c4e54869bade87e8e7cb16bb802512bf7735172af310fd9"
+  }
 }

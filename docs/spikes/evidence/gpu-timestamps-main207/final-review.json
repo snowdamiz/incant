@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T06:50:41.707399+00:00",
+  "status": "accepted scoped final integration",
+  "head": "e6ce715333c3e942b00aa4fc340b5a434084a984",
+  "manifest_sha256": "3cf72ac3e09ac84506cd41f4614369c5b82915e36fc7677f320c5a1e8c735262",
+  "independent_checks": [
+    "Reviewed three composition seams against producer and actual main207",
+    "Re-ran inspected collector --verify-only successfully:2906 frozen inputs,10 exit0 checks,148 prior records,15 exact producer paths",
+    "Independently decoded all integration archive records and compared hashes lengths and original bytes",
+    "Constructor retains graph and motion fields; motion path precedes Models and is explicitly uninstrumented; frame envelope includes gaps once"
+  ],
+  "archive_records": 28,
+  "counts": {
+    "default-cpu": {
+      "passed": 103,
+      "failed": 0,
+      "ignored": 94,
+      "nonempty_groups": 6,
+      "summary_rows": 10
+    },
+    "cooked-cpu": {
+      "passed": 130,
+      "failed": 0,
+      "ignored": 94,
+      "nonempty_groups": 6,
+      "summary_rows": 10
+    }
+  },
+  "limits": [
+    "Current integration ran no GPU or native window. Default103 and cooked130 CPU cases overlap;94 GPU cases were ignored in each suite.",
+    "The92 actual default-feature M5 Pro Metal cases and paired identical PNG bytes belong to f33495b2; final envelope correction9da53be0 was CPU-tested only. No current composed GPU or image review is inferred.",
+    "Seven timestamp pass groups only. Frame is min start through max end of instrumented pairs including intervening gaps; it does not measure complete-frame GPU cost. Retained motion has no query pair.",
+    "Five wasm native-only timing dead-code warnings retained. Browser timing admission fails explicitly.",
+    "No native-window, other-backend GPU, phone, performance or complete-profiler gate approval."
+  ]
+}

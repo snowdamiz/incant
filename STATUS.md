@@ -63,7 +63,7 @@ exposed concurrent passes outside the former first/last encoding-order interval.
 The CPU decoder now encloses all measured pairs, with explicit malformed/wrap
 refusal; ten timing CPU tests and renderer Clippy pass, with independent source
 review accepted. [Scope and retained evidence](docs/spikes/gpu-frame-envelope.md).
-All ten [current-main207 integration checks](docs/spikes/gpu-timestamps-main207.md) pass: 103 default CPU cases and 130 overlapping cooked cases, with 94 GPU cases ignored in each configuration. Final independent integration review is pending. Retained motion is explicitly uninstrumented; the envelope spans measured extrema including intervening gaps and does not measure complete-frame GPU cost. Cooked/native-window/phone and complete
+All ten [current-main207 integration checks](docs/spikes/gpu-timestamps-main207.md) pass: 103 default CPU cases and 130 overlapping cooked cases, with 94 GPU cases ignored in each configuration. Final independent integration review is accepted; publication requires the exact-head fast check. Retained motion is explicitly uninstrumented; the envelope spans measured extrema including intervening gaps and does not measure complete-frame GPU cost. Cooked/native-window/phone and complete
 profiler gates remain open.
 
 ## Native-window CPU profiling — current-main checks pass

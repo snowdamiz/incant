@@ -3,7 +3,7 @@
 The opt-in renderer timestamp path is composed with actual main207 (`9aa8165f`),
 preserving the corrected producer `9da53be0`. The checked source was `7e6ac08b`;
 joining actual main at `5686cd2d` leaves its complete tree unchanged. Final independent
-integration review is pending before publication.
+integration review is accepted; publication requires the exact-head fast check.
 
 Ten scoped commands pass against 2,906 unchanged implementation/build inputs:
 default renderer/GPU-host tests (103 CPU cases), the full existing cooked feature
