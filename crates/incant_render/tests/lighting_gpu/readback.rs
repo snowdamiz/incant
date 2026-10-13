@@ -137,7 +137,7 @@ pub(super) fn grid_readback_at(
 ) -> GridReadback {
     let shadows = r
         .shadows
-        .prepare(&r.device, camera, viewport[2] / viewport[3], &[], &[])
+        .prepare(&r.device, camera, viewport, &[], &[])
         .unwrap();
     let frame = r
         .lighting

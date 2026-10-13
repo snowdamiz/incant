@@ -1,0 +1,126 @@
+{
+  "source": {
+    "base": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+    "at": "2026-10-13T13:09:05.565437+00:00",
+    "files": {
+      "crates/incant_render/src/model_draw.rs": "edfc2370c0e65978312c527b00672042dd5741ff26213dbea9a6f3ed8514c8d5",
+      "crates/incant_render/src/shadow_draw.rs": "b37dce15d82d41292f9593154df67726d1bf008aac6cd15cb8010c2d5a360275",
+      "crates/incant_render/src/shadows/mod.rs": "29ec6d385418b3365daaec2458137c0f0115588ce24176b0f13cde48f7b0c828",
+      "crates/incant_render/src/shadows/cascade.rs": "1a1eafe8f77759a008c5cb7c0aaaa8fc2b11320b23e7b57c16b4a22344ff2ce6",
+      "crates/incant_render/src/shadows/receiver_tests.rs": "3057f35985204031e015a2f040cf5845b679b1445b053035e918d0db5bf9ed79",
+      "crates/incant_render/tests/lighting_gpu/readback.rs": "1547912a9107f299859ae6bf276fccdbc2044fd62aeef0a7b1bf1520493acd5d",
+      "crates/incant_render/tests/lighting_gpu/extended.rs": "5c8b90996223b69e1efe3c9325da321f8781e4c36a28d38729244f68407e2668",
+      "Cargo.lock": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f"
+    }
+  },
+  "checks": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "start": "2026-10-13T13:09:05.566104+00:00",
+      "end": "2026-10-13T13:09:14.522264+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/shadow-receiver-guard-002/check-1.log",
+      "sha256": "2dde918db31b5cd193404f4bc88947b1cff7d307032b6c18024cd4344c5ccf43"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-temporal"
+      ],
+      "start": "2026-10-13T13:09:14.522701+00:00",
+      "end": "2026-10-13T13:09:24.233422+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/shadow-receiver-guard-002/check-2.log",
+      "sha256": "d1aece004025d4b01187939a0012d3d358b45abd3eeb3b3d2704fd0ecb96dbcb"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "cooked-temporal",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "start": "2026-10-13T13:09:24.233695+00:00",
+      "end": "2026-10-13T13:09:31.160874+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/shadow-receiver-guard-002/check-3.log",
+      "sha256": "48adaf894a92bc87df325154cd078fa9b53103f72c76e086908bb8a9b62022f7"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "start": "2026-10-13T13:09:31.161212+00:00",
+      "end": "2026-10-13T13:09:32.490675+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/shadow-receiver-guard-002/check-4.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "start": "2026-10-13T13:09:32.491039+00:00",
+      "end": "2026-10-13T13:09:32.519709+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/shadow-receiver-guard-002/check-5.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "start": "2026-10-13T13:09:32.520050+00:00",
+      "end": "2026-10-13T13:09:32.543229+00:00",
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/shadow-receiver-guard-002/check-6.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/shadow-receiver-guard-records.json.gz",
+    "records": 13,
+    "sha256": "28dd7efa2b962c4252f3b21cd339ca9f746b4e9b2599893016d226388fdbb143"
+  },
+  "historical_failure": "001 compile missed2testhelpercallers, preserved before corrected002 full qualification",
+  "scope": "CPU only, pending independent source and Claude visual review"
+}

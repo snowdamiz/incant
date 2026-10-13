@@ -2,6 +2,10 @@
 use crate::{ResourceError, camera::CameraView};
 use glam::{DMat4, DVec3, Mat4, Vec3};
 
+#[cfg(test)]
+#[path = "receiver_tests.rs"]
+mod receiver_tests;
+
 pub(crate) const CASCADES: usize = 4;
 pub(crate) const MAP_SIZE: u32 = 1024;
 
@@ -44,6 +48,24 @@ pub(crate) struct Cascade {
 
 /// Empty receiver intervals intentionally request no shadow sampling. All caster
 /// bounds participate in depth fitting, including casters outside the view.
+pub(crate) fn fit_for_viewport(
+    mut camera: CameraView,
+    rect: [f32; 4],
+    direction: Vec3,
+    distance: f32,
+    casters: &[Bounds],
+) -> Result<Option<[Cascade; CASCADES]>, ResourceError> {
+    if rect.iter().any(|v| !v.is_finite()) || rect[2] <= 0. || rect[3] <= 0. {
+        return Err(ResourceError::ShadowRange);
+    }
+    // Shadow sampling must not change when temporal accumulation is toggled.
+    // Fit the same conservative subpixel receiver extent before radius
+    // quantization for every phase, including the unjittered reference. Keep
+    // this local: the scene camera's guard also selects temporal light clusters.
+    camera.jitter_guard = crate::temporal::jitter::guard(rect);
+    fit(camera, rect[2] / rect[3], direction, distance, casters)
+}
+
 pub(crate) fn fit(
     camera: CameraView,
     aspect: f32,
@@ -292,9 +314,10 @@ fn temporal_receiver_guard_covers_all_subpixel_phases_for_both_projections() {
             camera.orthographic_half_height = Some(3.);
         }
         for rect in [[3., 5., 65., 33.], [0., 0., 1., 1.]] {
-            camera.jitter_guard = crate::temporal::jitter::guard(rect);
             let aspect = rect[2] / rect[3];
-            let cascades = fit(camera, aspect, Vec3::NEG_Z, 40., &[]).unwrap().unwrap();
+            let cascades = fit_for_viewport(camera, rect, Vec3::NEG_Z, 40., &[])
+                .unwrap()
+                .unwrap();
             let camera_world = camera.view.inverse();
             for phase in 0..8 {
                 let jitter = crate::temporal::jitter::ndc(phase, rect);
