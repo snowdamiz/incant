@@ -1,3 +1,30 @@
+# Priority revision: finalize prepared halo source for CPU review
+
+Root has read the prepared halo implementation and renderer/paint integration;
+no source-correctness blocker was found. Finalize the following small items and
+commit your owned source/helpers/evidence with Built-by: claude. No Cargo/GPU
+or target grant exists yet; do not wait for one. Preserve current source scope.
+
+Answers: use non-waiting global GPU lock acquisition (a busy lease refuses),
+not600seconds. Root schedules GPU ownership explicitly. The new2-frame halo
+regression may use the separate128-frame regression ceiling, but identify it
+as newly added coverage, not an existing historical test; totals must include
+it. Keep current padding for the first bounded visual evaluation and use your
+judgment after inspecting the captures; root does not choose appearance.
+Do not claim identical prepared bytes on every platform without cross-platform
+execution evidence. Document the bounded f32 algorithm and existing local
+oracle tolerance instead; actual cross-platform equality remains unverified.
+
+For the forthcoming CPU-only grant, parameterize/assign this packet TARGET to
+/tmp/incant-agent-font-target (currently idle and reserved by root for0069).
+Do not access/build it yet. 0072 owns incant-core-presentation-target. Re-run
+only affected synthetic lifecycle/configuration checks, no broad redesign.
+Produce the exact final source/helper commit and focused changed-path hashes.
+Root will supervise long CPU builds directly to avoid ACP background jobs
+being lost at the end of an ACP turn. Preserve current prepared result and
+append precise revisions rather than altering historical failures.
+Model Claude Opus5.5 with thinking explicitly Max through ACP remains required.
+
 # Priority revision: complete performance and runner corrections before any grant
 
 Root read the updated source/helpers. The prior five findings are closed by source inspection, but the new review at `~/.codex/incant-reviews/core0069-prep-second-20261013.json` requires correction. Read it now. The halo is25 texture reads PER minification tap, up to400 per fragment, not25perpixel: avoid this global label cost. Keep your visual direction but choose a bounded lower-cost approach, preferably cached/prepared glyph halo coverage outside the rendering hot path. Normal glyph coverage must retain its current contract; all source/layout/cooked implications need explicit tests and documentation. Do not silently swap algorithms or make mobile claims from CPU checks. You may change the necessary glyph-atlas/runtime preparation source for this scope; prepare the concrete approach and implement it, CPU source review only before grant. Also add the global native GPU lock, close release-versus-launch race, and make released ledger hashes stable. Preserve existing result as previous-preparation-result.md, write new prep-result.md; do not overwrite historical evidence. Existing UI GPU regressions can have a separate bounded <=128tinyframe debit (derive actual count from source), in addition to24new appearance frames. Still NO Cargo/shared target/GPU until fresh root grant; CPU parser/lifecycle synthetic controls permitted. Current target belongs to0068. Model Opus5.5 Max remains required.
