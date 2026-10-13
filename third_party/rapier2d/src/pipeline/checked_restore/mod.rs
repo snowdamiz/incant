@@ -13,6 +13,8 @@ pub(crate) mod allocation;
 #[allow(dead_code)]
 mod body;
 #[allow(dead_code)]
+mod broad;
+#[allow(dead_code)]
 mod collider;
 pub(crate) mod convert;
 mod derived;

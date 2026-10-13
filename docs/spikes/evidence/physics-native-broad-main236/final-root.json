@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-13T17:22:55.519822+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted broad-manager current-main236 qualification for scoped publication and required fast-gate merge",
+  "head": "151761923b5e58c7c6d37f435d029da5d4583dee",
+  "manifest_sha256": "1d990d8d4a0d70a81529978d42c745ae8d917b0fde69d22b61c1ecfd2a250f5c",
+  "verifier_sha256": "7db2aec4e5ee4d420dbbfa80bcb78a7032bf32fa0429c57dd355e3205b7f319f",
+  "replay": {
+    "handle": 73583,
+    "exit": 0,
+    "reaped": true
+  },
+  "basis": [
+    "Read complete verifier and current report/STATUS diff; replayed all28successful checks,225snapshot+36native cases per mode,220paired broad steps/dimension/mode and26map observations/mode.",
+    "Verified3629frozeninputs,1400nativecopies,8explicitfast8fixture substitutions,10executed binarycopies and1549current+3051producer archive records.",
+    "Source reviewb76ea991 remains exact; main236 ancestor and only Error-order seam preserved."
+  ],
+  "limits": [
+    "Publication awaits required exact-head development-checks success.",
+    "Only private broad manager reconstructed, other owners trustedclones. No enclosing owner authentication, full live save, phone/performance or phase claim."
+  ]
+}

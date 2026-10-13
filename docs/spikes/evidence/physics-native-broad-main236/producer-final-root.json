@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-13T16:59:10.938687+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted scoped private broadphase constructor producer",
+  "head": "2967a484c09dfb3c1ece0b11caceca11a2dfcc31",
+  "manifest_sha256": "8605c8e6395aa8421f726d22afb508885d551fd3487ec6214c7184f16331be87",
+  "collector_sha256": "70b46e461a2bef348bee679dd481a3658bc8a68dae56d7da2720d923ffe0428f",
+  "archive": {
+    "path": "docs/spikes/evidence/physics-native-broad-construction-logs.json.gz",
+    "sha256": "cbf14543a27caed7259843d71a22de7111a2f088f6a9eb6b7bcdbd08dc18366e",
+    "records": 3051,
+    "payloads": 555
+  },
+  "source_review": "9100d4290628ebd62c6356278618be6e49cfddf0a32847e78dc3840fed3c7578",
+  "basis": [
+    "Read complete collector before assertion-only replay, which completed exit0; source001 implementation unchanged from independent source review.",
+    "Replayed74 final inputs, 11 pinned registry source copies, root/vendor lock identities, exact prepared native source copies and allowed prior fast8 fixture substitution.",
+    "31 successful command receipts and two retained initial test failures; each mode225 snapshot+36 native tests, including10 new broad tests and220 paired steps per dimension.",
+    "26 actual map-allocation measurements per mode bind thresholds, requested bytes and allocation calls;32/64-bit bounds remain source-audited rather than measured off this arm64 Mac.",
+    "3051 lossless records,555 payloads and four copied executed binaries verified; original failure records preserved."
+  ],
+  "limits": [
+    "Only the broad manager is reconstructed; other native owners remain trusted clones. No whole-world installer or save admission.",
+    "Exact pending tree/adjacency/pair stamps and policy/frame order preserved; enclosing phase/provenance authentication still required.",
+    "220 paired steps per dimension/mode are new broad controls; inherited 156 island and226 BVH steps overlap prior evidence.",
+    "Actual map allocations measured on arm64 macOS only; conservative pinned layout model covers supported32/64-bit group sizes, not allocator RSS.",
+    "Box/Arc/VecMap OOM behavior and remaining full owner/shape/global work/stableID/events barriers remain explicit.",
+    "Fast8 uses exact accepted prior captured bytes, not a fresh capture.",
+    "Two failed compile/fixture controls retained; final production source unchanged.",
+    "Scoped native library Clippy, not blanket all-target vendored lint; no GPU/device/performance claim."
+  ]
+}
