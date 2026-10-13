@@ -473,5 +473,11 @@
   "final_review": {
     "path": "docs/spikes/evidence/core-live-hud-main190/final-review.json",
     "sha256": "d6e66b0f47cd2004633decdef71bb7413b333491cd7551cf74c06a9c3d2fbaf0"
+  },
+  "post_main191_qualification": {
+    "path": "docs/spikes/evidence/core-live-hud-main190/main191-qualification.json",
+    "sha256": "e6ede8b0bd6ec4b0db0bf5f1b267b1045f1a123a05698520e7a68f94118fffef",
+    "script": "docs/spikes/evidence/core-live-hud-main190/qualify-main191.py",
+    "script_sha256": "2d1be40b12326704a0d8de6f36fe5cf0b7479e864b0b386bbe4d2fa349e53552"
   }
 }
