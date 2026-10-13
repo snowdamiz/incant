@@ -1,0 +1,94 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "temporal-visual",
+ "status": "proposed during preparation; frozen by the commit whose visual tree root pins in review-ready.json",
+ "reviewed_source": "e73afe43ffaf78e73b725876411128d092791f5a",
+ "source_freeze": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-source-001/freeze.json",
+  "sha256": "06a242fd0d56fa2afc05c9931567795a12919e6b82f0dd90ee8dcd94adeeb39f"
+ },
+ "expected_backend": "Metal",
+ "review_config": {
+  "history_weight": 0.9,
+  "relative_depth": 0.05,
+  "absolute_depth": 0.02,
+  "reactive_threshold": 4.0,
+  "reactive_strength": 0.5
+ },
+ "budgets": {
+  "new_submissions_max": 96,
+  "pngs_max": 16,
+  "frame_max_width": 960,
+  "frame_max_height": 540,
+  "compile_jobs": 2,
+  "build_timeout_s": 2700,
+  "listing_timeout_s": 60,
+  "review_case_timeout_s": 120,
+  "existing_suite_timeout_s": 300,
+  "counting": "Every world-frame submission (temporal-off references and frames whose PNG is not kept included) and every UI overlay submission is one actual submission. Readback copies are part of their frame's observation. Each review case's planned submissions and PNGs are debited, fsynced, under the global GPU lock before launch and never refunded, so failed or interrupted cases stay charged.",
+  "existing_regression": "The 96 existing ignored cases run once per suite, never retried, and are counted separately from the 96 new submissions."
+ },
+ "builds": {
+  "tests-render": ["test", "-p", "incant_render", "--lib", "--test", "model_gpu", "--test", "timestamp_backend_probe", "--no-run"],
+  "tests-host": ["test", "-p", "incant_render_gpu_host", "--test", "game", "--test", "ui", "--no-run"],
+  "review": ["test", "-p", "incant_render", "--test", "temporal_visual_review", "--no-run"],
+  "lint": ["clippy", "-p", "incant_render", "--test", "temporal_visual_review"],
+  "common_flags": ["--locked", "--offline", "--profile", "ci", "-j2", "--message-format=json-render-diagnostics"]
+ },
+ "suites": {
+  "lib": {"binary": "incant_render-lib-tests", "cwd": "crates/incant_render", "expected_ignored_at_reviewed_source": 38},
+  "model_gpu": {"binary": "model_gpu", "cwd": "crates/incant_render", "expected_ignored_at_reviewed_source": 50},
+  "timestamp_backend_probe": {"binary": "timestamp_backend_probe", "cwd": "crates/incant_render", "expected_ignored_at_reviewed_source": 1},
+  "game": {"binary": "gpu_host-game", "cwd": "crates/incant_render_gpu_host", "expected_ignored_at_reviewed_source": 5},
+  "ui": {"binary": "gpu_host-ui", "cwd": "crates/incant_render_gpu_host", "expected_ignored_at_reviewed_source": 2}
+ },
+ "review": {
+  "binary": "temporal_visual_review",
+  "cwd": "crates/incant_render",
+  "output_env": "INCANT_0072_REVIEW_OUT",
+  "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
+  "size": [960, 540],
+  "max_runs_per_case": 1,
+  "cases": {
+   "probe": {"frames": 0, "ui_submissions": 0, "pngs": [],
+    "purpose": "Adapter/backend identity, temporal pipeline enablement and idempotence, validation of the review config and rejection of five invalid configs, availability of the timing constructor. No frame."},
+   "stationary": {"frames": 17, "ui_submissions": 0, "pngs": ["stationary-off.png", "stationary-on-f16.png", "stationary-activity.png"],
+    "purpose": "Static look-dev stage (ground at grazing angles, sphere and cube silhouettes, thin post and wall, 19 receding fence posts, one-texel MASK grille card): one temporal-off reference, then 16 frames = two full 8-phase jitter cycles; activity map over frames 9-16."},
+   "motion": {"frames": 16, "ui_submissions": 0, "pngs": ["motion-object-on-f8.png", "motion-object-off-f8.png", "motion-pan-on-f6.png", "motion-pan-off-f6.png"],
+    "purpose": "8 frames of a bright cube crossing in front of the thin wall towards the sphere (about 21 px/frame, revealing disoccluded background), off reference; then a fresh owner and 6 frames of lateral camera pan with yaw (parallax), off reference."},
+   "excluded": {"frames": 9, "ui_submissions": 9, "pngs": ["excluded-on-f8.png", "excluded-off.png", "excluded-activity.png"],
+    "purpose": "Opaque checker backdrop that accumulates, BLEND card, three sprites and world text that are current-only and jittered, plus a screen-space UI button over uniform sky after every world frame: one 8-phase cycle and an off reference."},
+   "transitions": {"frames": 13, "ui_submissions": 0, "pngs": ["transition-cut-f7.png", "transition-drs-f9.png"],
+    "purpose": "6 frames of view A, explicit cut to view B (2 frames), fixed half-scale dynamic resolution (3 frames), output scale again (1 frame), off reference of view B. Checks phase/history/epoch/extent resets and one owner."},
+   "skinned": {"frames": 7, "ui_submissions": 0, "pngs": ["skinned-on-f6.png", "skinned-off-f6.png"],
+    "purpose": "The skeletal fixture used by the passing motion test, clip 1 (second joint rotation, two vertices deform) at 0.0-0.5 s over 6 frames in front of a checker backdrop, orthographic camera, off reference."},
+   "timing": {"frames": 8, "ui_submissions": 0, "pngs": [],
+    "purpose": "Timing-enabled device: the stationary stage alternates a temporal-off and a temporal-on owner for 4 pairs; each frame's sample must exist and be well formed, and the median Models span must grow when the motion, resolve and copy passes are encoded inside it."}
+  }
+ },
+ "totals": {
+  "frames": 70,
+  "ui_submissions": 9,
+  "new_submissions": 79,
+  "pngs": 14,
+  "reserve_submissions": 17,
+  "reserve_pngs": 2
+ },
+ "amendments": [],
+ "order": [
+  "lease.py acquire",
+  "build.py checkout",
+  "build.py toolchain",
+  "build.py tests",
+  "gpu.py list lib|model_gpu|timestamp_backend_probe|game|ui",
+  "gpu.py suite lib|model_gpu|timestamp_backend_probe|game|ui",
+  "build.py review",
+  "gpu.py list review",
+  "gpu.py review probe|stationary|motion|excluded|transitions|skinned|timing (this order)",
+  "analyze.py check, then personal inspection of every retained PNG",
+  "gpu.py release",
+  "build.py lint (optional, CPU only, under the lease)",
+  "lease.py release",
+  "analyze.py publish"
+ ]
+}

@@ -1,0 +1,173 @@
+{
+ "python": "3.14.8",
+ "plan_sha256": "6af62fba2ef8758b9c2893c7ae33905cfbf85d249c769c491acf2519f6afaa2f",
+ "helper_sha256": "ec804d60435732ba5d33241e8df6b7c7b40045f56e7d62e07b701a0a0b2d4fb2",
+ "tools": {
+  "analyze.py": "027e028bcbeac900f96a4bc5a119a4bee36cf636bdf7db94c442176256de1308",
+  "build.py": "18ec6b0092a8039f27bf38ddc2055f073f805274b872ad81f20368dfe2dd463e",
+  "common.py": "1d2106f12f55c73f9703639352f7dd623f53b778a15b339d970c0c3a25d5a4b3",
+  "gpu.py": "f49faf601f3c565ddfb0073a204d041a7bda73333eb09654cb3dc36279f54320",
+  "lease.py": "9d64f829170f0974f9e9da0c768fe3223ce4f743f746cb878f24432b767bea5d",
+  "selfcheck.py": "9d0003c21ce4b7eec559af4e2337f431918ddc4c9af703f69f627ed94e5a2a22",
+  "test_lifecycle.py": "98c2199c74f72f0389e486580de55c4808766812d2e864933ce2291287546627"
+ },
+ "syntax": "all tools parse",
+ "plan": {
+  "frames_match_total": true,
+  "ui_match_total": true,
+  "submissions_match_total": true,
+  "submissions_within_96": true,
+  "pngs_match_total": true,
+  "pngs_within_16": true,
+  "reserves_match": true,
+  "png_names_unique": true,
+  "pngs_not_more_than_frames": true,
+  "size_within_960x540": true,
+  "one_run_per_case": true,
+  "regression_total_96": true,
+  "builds_locked_offline_ci_j2": true,
+  "review_config_in_validated_ranges": true,
+  "expected_backend_metal": true
+ },
+ "helper": {
+  "tests_match_plan_in_order": true,
+  "limits_match_plan": true,
+  "png_names_match_plan": true,
+  "size_matches_plan": true,
+  "output_variable_matches_plan": true,
+  "review_config_matches_plan": true,
+  "observed": {
+   "tests": [
+    "probe",
+    "stationary",
+    "motion",
+    "excluded",
+    "transitions",
+    "skinned",
+    "timing"
+   ],
+   "limits": {
+    "probe": [
+     0,
+     0
+    ],
+    "stationary": [
+     17,
+     0
+    ],
+    "motion": [
+     16,
+     0
+    ],
+    "excluded": [
+     9,
+     9
+    ],
+    "transitions": [
+     13,
+     0
+    ],
+    "skinned": [
+     7,
+     0
+    ],
+    "timing": [
+     8,
+     0
+    ]
+   },
+   "pngs": [
+    "stationary-off.png",
+    "stationary-on-f16.png",
+    "stationary-activity.png",
+    "motion-object-on-f8.png",
+    "motion-object-off-f8.png",
+    "motion-pan-on-f6.png",
+    "motion-pan-off-f6.png",
+    "excluded-on-f8.png",
+    "excluded-off.png",
+    "excluded-activity.png",
+    "transition-cut-f7.png",
+    "transition-drs-f9.png",
+    "skinned-on-f6.png",
+    "skinned-off-f6.png"
+   ],
+   "review_config": {
+    "history_weight": 0.9,
+    "relative_depth": 0.05,
+    "absolute_depth": 0.02,
+    "reactive_threshold": 4.0,
+    "reactive_strength": 0.5
+   }
+  }
+ },
+ "refusals": {
+  "commands": {
+   "lease.py acquire": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "lease.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py checkout": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py toolchain": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py tests": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py lint": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list lib": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py suite lib": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review probe": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review stationary": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py check": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py publish": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   }
+  },
+  "all_refused_for_absent_grant": true,
+  "evidence_directory_still_absent": true,
+  "git_status_unchanged": true,
+  "global_gpu_lock_untouched": true
+ },
+ "all_pass": true
+}
