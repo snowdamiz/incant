@@ -1,6 +1,6 @@
 # Implementation status
 
-Private broad-phase manager constructor producer2967 is independently accepted. Current-main236 source composition is frozen for review and CPU qualification; no current-main execution claim yet. The default-off constructor installs only broad-manager state, with all other live owners remaining trusted clones. Whole-world restore and public physics saves remain unsupported.
+Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source review is accepted; final current-main evidence review is pending. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
 
 Private typed Parry BVH construction and shared allocation on main234 passed both composed numerical modes: 225 snapshot + 26 native cases per mode, 226 paired BVH steps per dimension/mode, all23 checks successful. Final current-main packet and main235 join reviews are accepted; PR236 merged after its required exact-head fast check. The feature stays default-off and complete-world physics saves remain unsupported. [Evidence](docs/spikes/physics-parry-main234.md).
 
@@ -235,9 +235,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main235, 2026-10-13
+## Current overview — main236, 2026-10-13
 
-Development main235 includes the reviewed opt-in cooked renderer families and
+Development main236 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -248,12 +248,14 @@ main226 `079ee1aa` exactly. Independent review verified the tested tree, ancestr
 unchanged protection and all success receipts. The journal replay repair passed
 on actual macOS/Linux/Windows; optional timestamp diagnostics preserve explicit
 Unsupported results on Apple Paravirtual Metal and measured paths on Vulkan/Dx12.
-Checkpoint25 is frozen on reviewed main230 (`56185dab`) in PR232, with all23
-required contexts preserved. One Windows UI test timed out; the original failure
-remains failed while remaining workflows run. Its scoped per-case deadline
-repair passes local focused/full UI checks and is independently accepted;
-publication follows its required fast check.
-Later main changes do not alter either frozen checkpoint.
+Checkpoint25 finished without promotion: 21 required contexts succeeded, the
+Windows full-App UI test timed out, and the checks job was cancelled before a
+runner acquired it. Those outcomes remain retained. PR233 merged the reviewed
+single-case deadline repair after its required fast check.
+Checkpoint26 is frozen on main235 (`fd290c3b`) with candidate `0da0a6db` in the
+same PR232. All 23 required contexts and eight workflows remain required; actual
+checkpoint execution is pending. Later main changes do not alter that frozen
+head or the already promoted release.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
