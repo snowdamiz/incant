@@ -15,6 +15,7 @@ for p,s in freeze['files'].items():
  if p=='.gitattributes':continue
  assert h(r/p)==s,p
 assert h(o/'raw-log-attributes.patch')=='9fe35a76c4d612795d32d62918fb7c94f88fc898bff9ca8056c0e47ade775bb5'
+assert git('diff',freeze['head'],'HEAD','--','.gitattributes')==(o/'raw-log-attributes.patch').read_bytes()
 subprocess.run(['git','merge-base','--is-ancestor',main,'HEAD'],cwd=r,check=True)
 assert not git('diff','--name-only',freeze['head'],'HEAD','--','crates','tools','Cargo.toml','Cargo.lock','sdk','schemas','third_party','.cargo','rust-toolchain.toml').strip()
 checks=read(o/'results.json');assert len(checks)==10 and all(x['exit']==0 for x in checks)
