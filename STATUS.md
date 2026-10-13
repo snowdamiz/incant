@@ -26,6 +26,29 @@ original win/loss reports and PCM are unchanged. Controller, art and authoring
 stay untouched. Integration is pending. No visual, device or performance gate
 is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
 
+## Bounded offline PCM streaming — CPU shipping proof accepted
+
+The ordinary player now stages PCM with one tick buffer and an 8 KiB encoder,
+then syncs and publishes without clobbering an existing output. The former
+one-million-frame capture cap is removed; existing tick/sample-rate bounds,
+diagnostic failed-observation output, fractional checkpoints and restart clocks
+remain intact. 75 CPU tests and scoped Clippy/static-module/graph checks pass.
+A fresh source/map/build-deleted Core package completes 2,156 ticks at 48 kHz
+(1,724,800 frames), repeats exactly and matches the prior player for its first
+1,000 ticks. Eight actual process controls cover the old refusal, diagnostic PCM,
+and precise publication errors. Independent source and final execution reviews are accepted; publisher
+integration is pending. No whole-engine memory, native-window,
+GPU or device/performance gate is claimed.
+[Contract and evidence](docs/spikes/native-streaming-pcm.md).
+
+## Streaming PCM — current main180 integration passed
+
+The ordinary player stages bounded per-tick PCM and hashes incrementally. Current-main
+validation passes 75 CPU tests and all eleven checks. A fresh source/map/build-deleted
+Core export passes eight actual process controls over the complete 2,156-tick route,
+with exact repeat PCM and preserved old prefix/no-clobber/diagnostic behavior.
+Final integration review is accepted; publication awaits the exact-head fast check. Native-window, device,
+performance and appearance gates remain separate. [Evidence](docs/spikes/native-pcm-main180.md).
 
 ## Whole native session restart — CPU shipping proof accepted
 
@@ -35,7 +58,7 @@ held controls and stale native text/pointer ownership cannot enter the new game.
 Current-main integration passes 355 CPU tests and 24 fresh source/map/build-deleted
 Core/Planar runs, including
 exact fresh-state and concatenated static/streamed PCM comparisons. Independent
-source and final execution reviews are accepted; scoped publication is pending.
+source and final execution reviews and the exact-head fast check passed; restart is merged in PR180.
 Native-window/device/appearance acceptance, Wasm/headless restart ownership and
 physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
 

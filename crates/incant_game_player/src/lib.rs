@@ -1,7 +1,7 @@
 //! Build-produced script + native input/physics/audio proof player. Setup exchange
 //! JSON is bounded and parsed once; ticks contain no document or JSON projection.
-//! Simulation failure creates no output. Output I/O itself is not atomic.
-use incant_assets_runtime::sha256;
+//! Simulation failure creates no output. PCM publication is atomic and create-only;
+//! PCM and an optional checkpoint are separate file transactions.
 mod checkpoint;
 #[cfg(feature = "render-gpu")]
 mod gpu;
@@ -9,6 +9,7 @@ mod gpu;
 pub mod mobile;
 mod observe;
 mod package;
+mod pcm_output;
 mod program;
 mod restart;
 mod session;
@@ -22,10 +23,7 @@ mod window;
 use incant_input::InputReplay;
 use incant_runtime::CookedScene;
 use session::Player;
-use std::{
-    fs::{File, OpenOptions},
-    io::{Read, Write},
-};
+use std::{fs::File, io::Read};
 mod embedded {
     include!(concat!(env!("OUT_DIR"), "/behavior.rs"));
 }
@@ -141,46 +139,46 @@ pub fn run(
     if let Some(plan) = &mut observations {
         plan.observe(game.world()?, game.input()?)?;
     }
-    // Resetting the rational audio clock changes fractional rounding. Reserve
-    // the checked per-step ceiling, while retaining the existing total cap.
-    let capacity = (u128::from(ticks)
-        * u128::from(rate).div_ceil(u128::from(game.world()?.tick_rate())))
-    .min(1_000_000);
-    let mut output = vec![0.; capacity as usize * 2];
-    let mut offset = 0;
+    // The largest tick is independent of total capture length. Restart resets
+    // fractional clock phase, so reserve the per-step ceiling for every step.
+    let max_tick_frames = u64::from(rate).div_ceil(u64::from(game.world()?.tick_rate()));
+    let max_frames = ticks
+        .checked_mul(max_tick_frames)
+        .ok_or("output frame bound")?;
+    let mut output = vec![0.; usize::try_from(max_tick_frames)? * 2];
+    let mut pcm = pcm_output::PcmOutput::new(std::path::Path::new(&args[7]), max_frames)?;
     for tick in 1..=ticks {
-        let end = offset + game.next_output_frames()? * 2;
-        if end > output.len() {
+        let count = game.next_output_frames()? * 2;
+        if count > output.len() {
             return Err("output frame bound".into());
         }
         game.tick_recorded(
             restart.input.filter(replay.events_at(tick)?)?,
             replay.ui_at(tick)?,
             replay.viewport_at(tick)?,
-            &mut output[offset..end],
+            &mut output[..count],
         )?;
         if let Some(plan) = &mut observations {
             plan.observe_at(start_tick + tick, game.world()?, game.input()?)?;
         }
-        offset = end;
+        pcm.append(&output[..count])?;
         restart.viewport(replay.viewport_at(tick)?);
-        restart.accept(&mut game, start_tick + tick, (offset / 2) as u128)?;
+        restart.accept(&mut game, start_tick + tick, u128::from(pcm.frames()))?;
     }
     if restart.boundaries.is_empty()
-        && ((offset / 2) as u128 != frames || game.rendered_frames()? - previous_frames != frames)
+        && (u128::from(pcm.frames()) != frames
+            || game.rendered_frames()? - previous_frames != frames)
     {
         return Err("sample clock invariant".into());
     }
-    output.truncate(offset);
-    let frames = offset / 2;
+    let frames = pcm.frames();
     let world = game.world()?;
     // Bounded by the cooked 128-source cap, not the total world entity count.
     let sources:Vec<_>=world.audio_nodes().filter(|(node,_)|node.source.is_some()).map(|(node,pose)| {
         let physics=world.physics_state(node.entity).map(|s|serde_json::json!({"position":s.translation,"velocity":s.velocity,"sleeping":s.sleeping}));
         serde_json::json!({"id":node.entity.0,"position":pose[3][..3],"physics":physics})
     }).collect();
-    let bytes: Vec<_> = output.iter().flat_map(|v| v.to_le_bytes()).collect();
-    let mut report = serde_json::json!({"tick":world.tick(),"frames":frames as u64,"pcm_sha256":sha256(&bytes),"sources":sources,"logs":game.logs()?});
+    let mut report = serde_json::json!({"tick":world.tick(),"frames":frames,"pcm_sha256":pcm.sha256(),"sources":sources,"logs":game.logs()?});
     if !restart.boundaries.is_empty() {
         report["session"] = serde_json::json!({"generation":restart.generation,
             "host_tick":end_tick,"simulation_tick":world.tick(),"restarts":restart.boundaries});
@@ -216,11 +214,7 @@ pub fn run(
     } else {
         None
     };
-    OpenOptions::new()
-        .write(true)
-        .create_new(true)
-        .open(&args[7])?
-        .write_all(&bytes)?;
+    pcm.publish(std::path::Path::new(&args[7]))?;
     if let (Some(path), Some(bytes)) = (&checkpoint.save, save) {
         checkpoint::publish(std::path::Path::new(path), &bytes)?;
     }
