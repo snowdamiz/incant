@@ -1,0 +1,15 @@
+{
+  "tested_source_commit": "385d623b",
+  "actual_main": "b4c8b2f507a10000fa4dfceb169433278bce37a8",
+  "joined_head": "b7bbbe4d1ab009ff6789f8ea400ec5078ffb219b",
+  "exit": 0,
+  "script": {
+    "path": "docs/spikes/evidence/cooked-renderer-main186/cooked-renderer-main187-qualification.py",
+    "sha256": "6dae682569f611d0b02ee03dbf56c0a4bd5baa87eac95c604f4412e46da7d102"
+  },
+  "log": {
+    "path": "docs/spikes/evidence/cooked-renderer-main186/cooked-renderer-main187-qualification.log",
+    "sha256": "520ff2c886ef0fd0e4c5d768f0f9aab38c6adc4ba536482c019b93910a09e5d3"
+  },
+  "scope": "Seven originally frozen inputs and six new iOS producer paths differ only by exact accepted main187 blobs. Renderer/compiler roots, Cargo manifests/lock, toolchain and tested backend workflows unchanged. Original passing check receipts remain unchanged; no new runtime build or GPU execution claimed."
+}

@@ -31,6 +31,10 @@ remains frozen and does not include this unpublished feature union.
 
 [Machine-readable manifest](evidence/cooked-renderer-main186.json) retains all
 raw check logs losslessly, source hashes, the exact backend patch, original
-reviews and an assertion-only collector. Final integration review/publication
-is pending. No phase, phone performance, full offline renderer or measured
+reviews and an assertion-only collector. The actual main187 ancestry join preserves all renderer/compiler, lock and
+backend-test workflow bytes. Its thirteen source changes are exact previously
+accepted iOS export/cooker files, outside the tested renderer closure; seven were
+in the broad original inventory. The qualification wrapper checks these Git
+identities before replaying the original assertions without changing receipts.
+Final integration review/publication is pending. No phase, phone performance, full offline renderer or measured
 cache speedup approval is implied.

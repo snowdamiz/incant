@@ -1109,5 +1109,9 @@
     "Cache remains default-off and supports trusted Linux/Android Vulkan storage only; actual Linux fresh-process persistence test remains a release-CI requirement.",
     "Default GPU tests are retained. Added cooked release tests require exact Metal/Vulkan/Dx12 adapter identity; neither current Linux nor Windows cooked execution is claimed.",
     "No full-renderer offline adoption, cache hit/performance, physical-device or phase-gate approval."
-  ]
+  ],
+  "actual_main_qualification": {
+    "path": "docs/spikes/evidence/cooked-renderer-main186/main187-qualification.json",
+    "sha256": "7625680850c1190789ad012ad6f1564daa255b86d6c2ef907c114f560ab78460"
+  }
 }
