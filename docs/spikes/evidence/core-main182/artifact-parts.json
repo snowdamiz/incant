@@ -1,0 +1,44 @@
+{
+  "format": "ordered-byte-parts-v1",
+  "reconstructed_filename": "artifacts.json.gz",
+  "reconstructed_sha256": "3840687f294a10d756e0fca5ba814fb1c1155dc2ad0a98c9dc83d3b2b8c69a72",
+  "reconstructed_bytes": 110138987,
+  "parts": [
+    {
+      "path": "docs/spikes/evidence/core-main182/artifacts.json.gz.part-000",
+      "sha256": "de56f01a524974645c3e3daadeefbf71ef12ee3590291fbd1778558f2a269c8b",
+      "bytes": 16777216
+    },
+    {
+      "path": "docs/spikes/evidence/core-main182/artifacts.json.gz.part-001",
+      "sha256": "7584e855d9c98891bc5dfca225ba88229a1f14d209c5b5c693de7865086a7409",
+      "bytes": 16777216
+    },
+    {
+      "path": "docs/spikes/evidence/core-main182/artifacts.json.gz.part-002",
+      "sha256": "32e51b96faf491c81e7c7cf27541db45a543c1e1fcae8ace6973472fb5e36585",
+      "bytes": 16777216
+    },
+    {
+      "path": "docs/spikes/evidence/core-main182/artifacts.json.gz.part-003",
+      "sha256": "57118876c27c8cd6b3b995ff702977130de889946b1979443c6b0ba59a9b5ccc",
+      "bytes": 16777216
+    },
+    {
+      "path": "docs/spikes/evidence/core-main182/artifacts.json.gz.part-004",
+      "sha256": "80f746491a99715e656fe0c2e0487ef943a7bfdb48093279e863237f8a46eb14",
+      "bytes": 16777216
+    },
+    {
+      "path": "docs/spikes/evidence/core-main182/artifacts.json.gz.part-005",
+      "sha256": "31f2906360c9f0ea4b000c8e76b29d18cdcbb48579fbdb1b936a4205818b1ef8",
+      "bytes": 16777216
+    },
+    {
+      "path": "docs/spikes/evidence/core-main182/artifacts.json.gz.part-006",
+      "sha256": "cb6fe6e16436eaab2cd9ee12d7e4eeb675716da7209f3a3ea8fbf58cd6cb2f5a",
+      "bytes": 9475691
+    }
+  ],
+  "content_unchanged": true
+}
