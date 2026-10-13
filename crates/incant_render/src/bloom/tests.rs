@@ -221,7 +221,7 @@ fn fixed_wgsl_variants_validate_and_preserve_original_tone_chrome_transfer() {
     assert!(source.contains(include_str!("../tone_map.wgsl")));
     assert!(source.starts_with(&original.replace(
         "var color = mix(display.backdrop.rgb,tone_map(radiance),coverage);",
-        "var color = bloom_color(radiance,coverage,position.xy);"
+        "var color = display.backdrop.rgb; if inside { color = bloom_color(radiance,coverage,sample_position); }"
     )));
     assert_eq!(std::mem::size_of::<super::Settings>(), 48);
 }
