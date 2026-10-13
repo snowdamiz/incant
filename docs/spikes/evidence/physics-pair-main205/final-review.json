@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T06:31:00.945423+00:00",
+  "decision": "accept scoped pair-state current-main integration for fast check and merge",
+  "head": "5e8314e0ad330effa2f0588af5c3e51141a1d886",
+  "manifest_sha256": "c614db5c71b81770a2e657f70cba4857469dcd26d855db8e544bdd98d9973e55",
+  "review": [
+    "Read collector; verify-only passed",
+    "Independently decoded/hashed integration archive records and payload lengths",
+    "Accepted39 producer crate inputs unchanged; current main adds only pinned dev serde lock edge",
+    "Actual8 checks0 and88 CPU tests; normal graph remains dependency-free",
+    "Frozen source and actual main205 ancestry trees match"
+  ],
+  "archive_records": 20,
+  "archive_payloads": 11,
+  "limits": [
+    "88 cases include the prior79 manifold cases; counts are not additive.",
+    "All39 crate source/test/manifest files equal accepted77910. Older producer lock predates merged profiling packages/edges and renderer dev naga; current main lock adds only an already pinned dev-only serde edge.",
+    "No live constructor, complete owner authentication, reciprocal solver/island ownership, previous-cluster scratch reconstruction, physics-save admission, GPU, shipping, device or performance claim."
+  ]
+}

@@ -18,7 +18,7 @@ pinned source/copy pairs. It binds the eight actual integration command results,
 full frozen inputs, lock comparison and ancestry to the
 [integration manifest](evidence/physics-pair-main205.json).
 [Producer final acceptance](evidence/physics-pair-main205/producer-final-review.json)
-is retained. Current-main final integration review is pending.
+is retained. [Current-main final integration acceptance](evidence/physics-pair-main205/final-review.json) is retained. Publication requires the exact-head fast check.
 
 This remains an inert format. It preserves pair event/color/recycle fields and
 ordered composite-workspace detector keys, timestamps and manifold bijections.

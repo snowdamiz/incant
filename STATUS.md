@@ -81,7 +81,7 @@ The std-only inert format checks pair event/color/recycle fields and closed
 composite workspace maps against existing manifold/geometry ownership. Native
 tuple keys, detector order/timestamps and manifold bijections are retained;
 unknown workspace kinds refuse explicitly. Producer88 CPU cases, Clippy/wasm32
-and dependency checks have independent acceptance. The [current-main205 integration](docs/spikes/physics-pair-main205.md) also passes all eight checks with 88 CPU cases and 2,895 unchanged inputs; final integration review is pending. Previous-cluster scratch reconstruction, complete
+and dependency checks have independent acceptance. The [current-main205 integration](docs/spikes/physics-pair-main205.md) also passes all eight checks with 88 CPU cases and 2,895 unchanged inputs; final integration review is accepted; publication requires the fast check. Previous-cluster scratch reconstruction, complete
 body/island/solver ownership and live/save admission remain open.
 [Pair-state contract](docs/spikes/physics-inert-pair-state.md).
 
