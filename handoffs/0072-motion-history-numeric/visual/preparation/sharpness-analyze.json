@@ -1,0 +1,663 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "tests_run": 19,
+ "records": [
+  {
+   "test": "before_compare",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "compare_requires_passing_check_and_fails_honestly",
+   "exit": 1,
+   "failed": [
+    "comparison error: error('Error -5 while decompressing data: incomplete or truncated stream')"
+   ],
+   "published": true
+  },
+  {
+   "test": "complete",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "empty_evidence",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the GPU release latch is absent; run gpu.py release first",
+    "expected one passing lib listing, found 0",
+    "expected one passing review listing, found 0"
+   ]
+  },
+  {
+   "test": "failed_child",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case viewport: the child failed or exited nonzero"
+   ]
+  },
+  {
+   "test": "false_contract_check",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case transitions: a contract check is false or missing"
+   ]
+  },
+  {
+   "test": "missing_case",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "review children ['probe', 'stationary', 'motion', 'excluded', 'transitions', 'timing', 'viewport'] are not the plan cases once each in order",
+    "case skinned: not exactly one debit of the plan's charge",
+    "case skinned: missing or duplicate review child (0 rows)"
+   ]
+  },
+  {
+   "test": "missing_lib_listing",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "expected one passing lib listing, found 0"
+   ]
+  },
+  {
+   "test": "missing_report",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "case motion: output holds ['events.jsonl', 'motion-object-off-f8.png', 'motion-object-on-f8.png', 'motion-pan-off-f6.png', 'motion-pan-on-f6.png'], not ['events.jsonl', 'motion-object-off-f8.png', 'motion-object-on-f8.png', 'motion-pan-off-f6.png', 'motion-pan-on-f6.png', 'report.json']",
+    "case motion: report.json is absent or empty",
+    "case motion: report.json differs from the ledger"
+   ]
+  },
+  {
+   "test": "numeric_not_run",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "expected one numeric child per plan control in order, found []",
+    "expected one numeric child resolve, found 0",
+    "expected one numeric child coverage, found 0"
+   ]
+  },
+  {
+   "test": "old_grants_refused",
+   "old_grants": {
+    "temporal-coverage/review-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/review-ready.json",
+     "sha256": "e83f97da3017a947e8e84ff29d468da5cbd2978e64700ca3974d41d6ddc039f2",
+     "stage": "temporal-coverage-visual"
+    },
+    "temporal-coverage/build-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/build-ready.json",
+     "sha256": "a62dbb56b6bb1074235f8bb5f4d74cce7421945f17b1d98b962867748d5f2cf7",
+     "stage": "temporal-coverage-build"
+    },
+    "temporal-corrected/review-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/review-ready.json",
+     "sha256": "4fa5101f64cadaf4e16b402afc3165e9af4080c5c7a214993e57a112f6e2c7c0",
+     "stage": "temporal-corrected-visual"
+    },
+    "temporal-corrected/build-ready.json": {
+     "read_only_from": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/build-ready.json",
+     "sha256": "1a1b226d85730bd69833641cf24a11a8f4d417c5c04e7434fc45017f491882a4",
+     "stage": "temporal-corrected-build"
+    }
+   }
+  },
+  {
+   "test": "old_single_numeric_layout",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "expected one numeric child per plan control in order, found ['numeric']",
+    "expected one numeric child resolve, found 0",
+    "expected one numeric child coverage, found 0"
+   ]
+  },
+  {
+   "test": "plan_counts_admitted_and_ceilings_refused",
+   "admitted": 357,
+   "edge_admitted": {
+    "submissions": 372,
+    "visual": 120,
+    "pngs": 16
+   },
+   "refused": 4
+  },
+  {
+   "test": "stale_before_change",
+   "exit": 0,
+   "verdict": "pass",
+   "problems": []
+  },
+  {
+   "test": "stale_summary_blocks_publication",
+   "publish": "refused"
+  },
+  {
+   "test": "stop_latch",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "stop latched: {\"label\": \"synthetic\", \"reason\": \"control\"}"
+   ]
+  },
+  {
+   "test": "wrong_numeric_test",
+   "exit": 1,
+   "verdict": "fail",
+   "problems": [
+    "the numeric child resolve did not run the exact test once and pass"
+   ]
+  },
+  {
+   "test": "aliased_original_fails_stability",
+   "checks": [
+    {
+     "section": "sharpness",
+     "check": "grille_detail_ratio",
+     "value": 1.004,
+     "pass": true
+    },
+    {
+     "section": "sharpness",
+     "check": "grille_sigma_px",
+     "value": 0.0,
+     "pass": true
+    },
+    {
+     "section": "sharpness",
+     "check": "posts+shadows_sigma_px",
+     "value": 0.451,
+     "pass": true
+    },
+    {
+     "section": "sharpness",
+     "check": "far-posts_sigma_px",
+     "value": 0.449,
+     "pass": true
+    },
+    {
+     "section": "sharpness",
+     "check": "horizon-diag_sigma_px",
+     "value": 0.232,
+     "pass": true
+    },
+    {
+     "section": "sharpness",
+     "check": "sphere-edge_sigma_px",
+     "value": 0.388,
+     "pass": true
+    },
+    {
+     "section": "stability",
+     "check": "stationary_activity_ge33",
+     "value": 11143,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "stationary_activity_saturated",
+     "value": 10246,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "frames_9_16_edge_mean",
+     "value": 24.151,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "frames_9_16_edge_max",
+     "value": 169,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "frames_9_16_interior_changed",
+     "value": 7021,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "same_phase_f08_f16_interior_changed",
+     "value": 1,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "halo_stationary-on-f16.png",
+     "value": {
+      "above_local_max": 181,
+      "below_local_min": 134
+     },
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "halo_excluded-on-f8.png",
+     "value": {
+      "above_local_max": 198,
+      "below_local_min": 154
+     },
+     "pass": false
+    }
+   ]
+  },
+  {
+   "test": "baseline_against_itself",
+   "verdict": "fail",
+   "checks": [
+    {
+     "section": "exactness",
+     "check": "baseline_manifest_sha256",
+     "value": "e337bc34ba0f1a83b73a862fac229f65827cbd4313a55114d1075032c5227016",
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "baseline_files_match_manifest",
+     "value": [],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "baseline_identity",
+     "value": [
+      "e23776df275fa1de81b2027110d9c7b6916999ac",
+      "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e",
+      "27756c0dad957287c328f690d15ef14565dd3fb83be3156275fefa042c934d64"
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "candidate_source_commit",
+     "value": "e23776df275fa1de81b2027110d9c7b6916999ac",
+     "pass": false
+    },
+    {
+     "section": "exactness",
+     "check": "temporal_off_references_identical",
+     "value": {
+      "stationary-off.png": true,
+      "motion-object-off-f8.png": true,
+      "motion-pan-off-f6.png": true,
+      "excluded-off.png": true,
+      "skinned-off-f6.png": true
+     },
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_adapter",
+     "value": [
+      [
+       "Apple M5 Pro",
+       "Metal",
+       "IntegratedGpu"
+      ],
+      [
+       "Apple M5 Pro",
+       "Metal",
+       "IntegratedGpu"
+      ]
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_toolchain_and_host",
+     "value": [
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      },
+      {
+       "rustc": [
+        "rustc 1.99.0 (b940084d7 2026-09-28)",
+        "binary: rustc"
+       ],
+       "cargo": [
+        "cargo 1.99.0 (5f94df478 2026-08-27)"
+       ],
+       "sw_vers": [
+        "ProductName:\t\tmacOS",
+        "ProductVersion:\t\t27.0.1"
+       ],
+       "hw_model": [
+        "Mac17,9"
+       ]
+      }
+     ],
+     "pass": true
+    },
+    {
+     "section": "exactness",
+     "check": "same_review_config",
+     "value": {
+      "candidate": true,
+      "baseline": true
+     },
+     "pass": true
+    },
+    {
+     "section": "sharpness",
+     "check": "grille_detail_ratio",
+     "value": 0.182,
+     "pass": false
+    },
+    {
+     "section": "sharpness",
+     "check": "grille_sigma_px",
+     "value": 0.887,
+     "pass": false
+    },
+    {
+     "section": "sharpness",
+     "check": "posts+shadows_sigma_px",
+     "value": 0.9,
+     "pass": false
+    },
+    {
+     "section": "sharpness",
+     "check": "far-posts_sigma_px",
+     "value": 0.874,
+     "pass": false
+    },
+    {
+     "section": "sharpness",
+     "check": "horizon-diag_sigma_px",
+     "value": 0.879,
+     "pass": false
+    },
+    {
+     "section": "sharpness",
+     "check": "sphere-edge_sigma_px",
+     "value": 0.757,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "stationary_activity_ge33",
+     "value": 159,
+     "pass": true
+    },
+    {
+     "section": "stability",
+     "check": "stationary_activity_saturated",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "stability",
+     "check": "frames_9_16_edge_mean",
+     "value": 3.316,
+     "pass": true
+    },
+    {
+     "section": "stability",
+     "check": "frames_9_16_edge_max",
+     "value": 44,
+     "pass": true
+    },
+    {
+     "section": "stability",
+     "check": "frames_9_16_interior_changed",
+     "value": 54,
+     "pass": true
+    },
+    {
+     "section": "stability",
+     "check": "same_phase_f08_f16_interior_changed",
+     "value": 17,
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "halo_stationary-on-f16.png",
+     "value": {
+      "above_local_max": 1048,
+      "below_local_min": 1193
+     },
+     "pass": false
+    },
+    {
+     "section": "stability",
+     "check": "halo_excluded-on-f8.png",
+     "value": {
+      "above_local_max": 1276,
+      "below_local_min": 297
+     },
+     "pass": false
+    },
+    {
+     "section": "ghosts",
+     "check": "off_edge_motion-object-on-f8.png",
+     "value": {
+      "3-8": 830,
+      "9-16": 30,
+      ">16": 0,
+      "max": 10
+     },
+     "pass": true
+    },
+    {
+     "section": "ghosts",
+     "check": "off_edge_motion-pan-on-f6.png",
+     "value": {
+      "3-8": 391,
+      "9-16": 0,
+      ">16": 0,
+      "max": 7
+     },
+     "pass": true
+    },
+    {
+     "section": "ghosts",
+     "check": "off_edge_skinned-on-f6.png",
+     "value": {
+      "3-8": 0,
+      "9-16": 0,
+      ">16": 0,
+      "max": 0
+     },
+     "pass": true
+    },
+    {
+     "section": "ghosts",
+     "check": "trailing_band_vs_top_control",
+     "value": {
+      "trailing_1px": 47.73,
+      "top_1px": 44.29,
+      "samples": [
+       33,
+       45
+      ]
+     },
+     "pass": true
+    },
+    {
+     "section": "ghosts",
+     "check": "trailing_band_no_worse_than_baseline",
+     "value": [
+      47.73,
+      47.73
+     ],
+     "pass": true
+    },
+    {
+     "section": "exclusion",
+     "check": "ui_identical_all_phases",
+     "value": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+     ],
+     "pass": true
+    },
+    {
+     "section": "exclusion",
+     "check": "overlay_activity_ge33",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "reset",
+     "check": "transition-cut-f7.png_max_step_vs_baseline",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "reset",
+     "check": "transition-drs-f9.png_max_step_vs_baseline",
+     "value": 0,
+     "pass": true
+    },
+    {
+     "section": "registration",
+     "check": "stationary-on-f16.png",
+     "value": {
+      "dx": 0.001,
+      "dy": -0.033,
+      "points": 20282
+     },
+     "pass": true
+    },
+    {
+     "section": "registration",
+     "check": "motion-object-on-f8.png",
+     "value": {
+      "dx": 0.001,
+      "dy": -0.038,
+      "points": 20025
+     },
+     "pass": true
+    },
+    {
+     "section": "registration",
+     "check": "skinned-on-f6.png",
+     "value": {
+      "dx": 0.004,
+      "dy": 0.023,
+      "points": 87
+     },
+     "pass": true
+    },
+    {
+     "section": "registration",
+     "check": "excluded-on-f8.png",
+     "value": {
+      "dx": -0.0,
+      "dy": -0.001,
+      "points": 10534
+     },
+     "pass": true
+    },
+    {
+     "section": "viewport",
+     "check": "viewport_report_present",
+     "value": null,
+     "pass": false
+    }
+   ],
+   "baseline_context": {
+    "baseline_grille": {
+     "detail_ratio": 0.182,
+     "sigma_px": 0.887
+    },
+    "baseline_posts+shadows": {
+     "detail_ratio": 0.426,
+     "sigma_px": 0.9
+    },
+    "baseline_far-posts": {
+     "detail_ratio": 0.352,
+     "sigma_px": 0.874
+    },
+    "baseline_horizon-diag": {
+     "detail_ratio": 0.413,
+     "sigma_px": 0.879
+    },
+    "baseline_sphere-edge": {
+     "detail_ratio": 0.449,
+     "sigma_px": 0.757
+    },
+    "baseline_halo_stationary-on-f16.png": {
+     "above_local_max": 1048,
+     "below_local_min": 1193
+    },
+    "baseline_halo_excluded-on-f8.png": {
+     "above_local_max": 1276,
+     "below_local_min": 297
+    },
+    "baseline_registration_stationary-on-f16.png": {
+     "dx": 0.001,
+     "dy": -0.033,
+     "points": 20282
+    },
+    "baseline_registration_motion-object-on-f8.png": {
+     "dx": 0.001,
+     "dy": -0.038,
+     "points": 20025
+    },
+    "baseline_registration_skinned-on-f6.png": {
+     "dx": 0.004,
+     "dy": 0.023,
+     "points": 87
+    },
+    "baseline_registration_excluded-on-f8.png": {
+     "dx": -0.0,
+     "dy": -0.001,
+     "points": 10534
+    }
+   }
+  },
+  {
+   "test": "missing_candidate_outputs_fail",
+   "failed": [
+    "sharpness: stationary_images_present",
+    "stability: stationary_outputs_present",
+    "stability: halo_stationary-on-f16.png",
+    "stability: halo_excluded-on-f8.png",
+    "exclusion: ui_identical_all_phases",
+    "exclusion: excluded_outputs_present",
+    "reset: transition-cut-f7.png_max_step_vs_baseline",
+    "reset: transition-drs-f9.png_max_step_vs_baseline",
+    "viewport: viewport_report_present"
+   ]
+  },
+  {
+   "test": "tampered_baseline_is_not_exact",
+   "failed": [
+    "exactness: baseline_files_match_manifest",
+    "exactness: candidate_source_commit"
+   ]
+  }
+ ]
+}

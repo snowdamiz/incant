@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""Preparation self-check for handoff 0072's fixed-coverage temporal review.
+"""Preparation self-check for handoff 0072's fixed-sharpness comparison review.
 Standard library only; no grant needed. Never compiles, starts a renderer,
 acquires a target or touches the stage evidence directory or the global GPU lock.
 
   python3 -I -B selfcheck.py [--write <new-output.json>]
 
 1. Every stage Python tool parses (ast only; no bytecode is written).
-2. plan.json is internally consistent and within the brief's budgets: 79 review
-   + 150 numeric = 229 planned submissions under the 256 ceiling, 14 of 16 PNGs.
-3. Comparability with the original rejected review: all seven cases keep their
-   frames, UI submissions, PNG names and purposes, and the fixture differs from
-   the original only at line 1418 (the unused mut). The fixture is byte-identical
-   to the one the corrected-source review ran (visual tree 53fd64b6).
+2. plan.json is internally consistent and within the brief's budgets: 105 visual
+   (world + UI) submissions within 120, 102 + 150 numeric = 252, 357 planned within
+   372, 16 of 16 PNGs at 960x540.
+3. Comparability with the accepted coverage baseline (visual tree b1327f3d): the
+   fixture is that fixture byte for byte plus one appended case (viewport); its
+   seven cases keep their frames, UI submissions, PNG names, purposes and checks;
+   the baseline fixture still differs from the original only at line 1418.
 4. The Rust fixture agrees with the plan: test names in order, Report::open
    limits, PNG names, frame size, output variable, the explicit config and each
    case's exact contract-check names.
@@ -21,7 +22,6 @@ acquires a target or touches the stage evidence directory or the global GPU lock
 """
 
 import ast
-import difflib
 import json
 import re
 import subprocess
@@ -33,13 +33,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as c  # noqa: E402
 
 ORIGINAL = "9009f088ac230e31185e8ce64183ca93878e9444"
-CORRECTED_TREE = "53fd64b6ec2ddaef1cd1802e04411d7672d06c5e"  # visual tree of the corrected-source review
+BASELINE_TREE = "b1327f3d9abbaf10f4ba8701dc4ef81231b6d60e"  # visual tree of the accepted coverage run
+NUMERIC = {"resolve": "temporal::system::device_tests::actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion",
+           "coverage": "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection"}
 COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "checkout"],
             ["build.py", "toolchain"], ["build.py", "libtests"], ["build.py", "review"],
-            ["build.py", "lint"], ["gpu.py", "list", "lib"], ["gpu.py", "numeric"],
+            ["build.py", "lint"], ["gpu.py", "list", "lib"], ["gpu.py", "numeric", "resolve"],
+            ["gpu.py", "numeric", "coverage"],
             ["gpu.py", "list", "review"], ["gpu.py", "review", "probe"],
             ["gpu.py", "review", "stationary"], ["gpu.py", "release"],
-            ["analyze.py", "check"], ["analyze.py", "publish"]]
+            ["gpu.py", "review", "viewport"], ["analyze.py", "check"], ["analyze.py", "compare"],
+            ["analyze.py", "publish"]]
 ABSENT = ("build-ready.json is absent", "review-ready.json is absent")
 
 
@@ -50,17 +54,21 @@ def plan_checks(p):
     frames = sum(case["frames"] for case in cases.values())
     ui = sum(case["ui_submissions"] for case in cases.values())
     names = [name for case in cases.values() for name in case["pngs"]]
-    numeric = p["numeric"]["submissions"]
+    tests = p["numeric"]["tests"]
+    numeric = sum(t["submissions"] for t in tests)
     config = p["review_config"]
     return {
-        "frames_match_total": frames == totals["frames"] == 70,
+        "frames_match_total": frames == totals["frames"] == 96,
         "ui_match_total": ui == totals["ui_submissions"] == 9,
-        "review_submissions_79": frames + ui == totals["review_submissions"] == 79,
-        "numeric_submissions_150": numeric == totals["numeric_submissions"] == 150,
-        "planned_229_within_256": (frames + ui + numeric == totals["submissions"] == budgets["planned_submissions"]
-                                   == 229 and budgets["submissions_max"] == 256),
-        "pngs_14_within_16": len(names) == totals["pngs"] == 14 and budgets["pngs_max"] == 16,
-        "reserves_match": (totals["reserve_submissions"] == 256 - 229 and totals["reserve_pngs"] == 2),
+        "visual_105_within_120": frames + ui == totals["review_submissions"] == 105
+        and budgets["visual_submissions_max"] == 120,
+        "numeric_102_plus_150": [t["submissions"] for t in tests] == [102, 150]
+        and numeric == totals["numeric_submissions"] == budgets["numeric_submissions_max"] == 252,
+        "planned_357_within_372": (frames + ui + numeric == totals["submissions"] == budgets["planned_submissions"]
+                                   == 357 and budgets["submissions_max"] == 372),
+        "pngs_16_of_16": len(names) == totals["pngs"] == 16 and budgets["pngs_max"] == 16,
+        "reserves_match": (totals["reserve_submissions"] == 372 - 357 == totals["reserve_visual_submissions"]
+                           and totals["reserve_pngs"] == 0),
         "gpu_children_at_most_120_s": all(budgets[k] <= 120 for k in (
             "listing_timeout_s", "numeric_timeout_s", "review_case_timeout_s")),
         "png_names_unique": len(names) == len(set(names)),
@@ -71,8 +79,7 @@ def plan_checks(p):
         "every_case_lists_checks": all(case.get("checks") for case in cases.values()),
         "no_whole_suite": "suites" not in p and "tests-render" not in p["builds"]
         and "tests-host" not in p["builds"],
-        "exact_numeric_test": p["numeric"]["test"]
-        == "temporal::system::coverage_device::actual_fixed_temporal_coverage_silhouettes_mask_and_trailing_rejection",
+        "exact_numeric_tests": {t["id"]: t["test"] for t in tests} == NUMERIC,
         "builds_locked_offline_ci_j2": all(flag in p["builds"]["common_flags"]
                                            for flag in ("--locked", "--offline", "ci", "-j2"))
         and budgets["compile_jobs"] == 2,
@@ -82,39 +89,49 @@ def plan_checks(p):
             and 0 <= config["reactive_strength"] <= 1),
         "expected_backend_metal": p["expected_backend"] == "Metal",
         "new_evidence_namespace": p["evidence_namespace"] == str(c.EVIDENCE)
-        and c.EVIDENCE.name == "0072-temporal-coverage-001" and c.GRANT.parent == c.EVIDENCE
+        and c.EVIDENCE.name == "0072-fixed-sharpness-001" and c.GRANT.parent == c.EVIDENCE
         and c.BUILD_GRANT.parent == c.EVIDENCE,
         "new_stages": (p["stage"], p["build_stage"]) == (c.STAGE, c.BUILD_STAGE)
-        == ("temporal-coverage-visual", "temporal-coverage-build"),
+        == ("fixed-sharpness-visual", "fixed-sharpness-build"),
         "new_publication_directories": (c.PUBLISHED.name, c.PUBLISHED_EVIDENCE.name)
-        == ("temporal-coverage-screenshots", "temporal-coverage-evidence"),
+        == ("fixed-sharpness-screenshots", "fixed-sharpness-evidence"),
+        "comparison_baseline_and_candidate": p["comparison"]["baseline"]["visual_tree"] == BASELINE_TREE
+        and p["comparison"]["candidate_commit"] == p["source_pinning"]["expected_commit"]
+        == "a143b5c0f537bd35111e40e99626f40318a385ac",
     }
 
 
 def comparability_checks(p):
     original_plan = json.loads(c.git("show", f"{ORIGINAL}:{c.VISUAL_RELATIVE}/plan.json"))
     original_fixture = c.git("show", f"{ORIGINAL}:{c.VISUAL_RELATIVE}/review/temporal_visual_review.rs")
-    current_fixture = c.HELPER_SOURCE.read_text()
-    keys = ("frames", "ui_submissions", "pngs", "purpose")
-    same_cases = {name: all(case.get(k) == original_plan["review"]["cases"].get(name, {}).get(k) for k in keys)
-                  for name, case in p["review"]["cases"].items()}
+    baseline_plan = json.loads(c.git("show", f"{BASELINE_TREE}:plan.json"))
+    baseline_fixture = subprocess.run(["git", "cat-file", "blob", f"{BASELINE_TREE}:review/temporal_visual_review.rs"],
+                                      cwd=c.ROOT, capture_output=True, check=True).stdout
+    current = c.HELPER_SOURCE.read_bytes()
+    appended = current[len(baseline_fixture):].decode()
+    keys = ("frames", "ui_submissions", "pngs", "purpose", "checks")
+    baseline_cases = baseline_plan["review"]["cases"]
+    same_as_baseline = {name: all(p["review"]["cases"].get(name, {}).get(k) == case.get(k) for k in keys)
+                        for name, case in baseline_cases.items()}
+    same_as_original = {name: all(case.get(k) == original_plan["review"]["cases"].get(name, {}).get(k)
+                                  for k in ("frames", "ui_submissions", "pngs", "purpose"))
+                        for name, case in baseline_cases.items()}
+    base_text = baseline_fixture.decode()
     changed = [(i, a, b) for i, (a, b) in enumerate(zip(original_fixture.splitlines(),
-                                                        current_fixture.splitlines()), 1) if a != b]
-    diff = [line for line in difflib.unified_diff(original_fixture.splitlines(), current_fixture.splitlines(),
-                                                  lineterm="", n=0) if line[:1] in "+-" and line[:3] not in ("+++", "---")]
-    corrected_fixture = subprocess.run(
-        ["git", "cat-file", "blob", f"{CORRECTED_TREE}:review/temporal_visual_review.rs"],
-        cwd=c.ROOT, capture_output=True, check=True).stdout
+                                                        base_text.splitlines()), 1) if a != b]
     return {
-        "fixture_byte_identical_to_corrected_review": corrected_fixture == c.HELPER_SOURCE.read_bytes(),
-        "same_case_definitions_as_original": same_cases == {name: True for name in original_plan["review"]["cases"]},
-        "same_review_config_as_original": p["review_config"] == original_plan["review_config"],
-        "fixture_only_line_1418_changed": (
-            len(original_fixture.splitlines()) == len(current_fixture.splitlines())
-            and [i for i, _, _ in changed] == [1418]
-            and changed[0][1].strip() == "let mut report = Report::open(\"probe\", 0, 0);"
-            and changed[0][2].strip() == "let report = Report::open(\"probe\", 0, 0);"),
-        "observed": {"case_equality": same_cases, "fixture_diff": diff},
+        "fixture_extends_baseline_exactly": current.startswith(baseline_fixture),
+        "appended_block_adds_only_viewport_case": re.findall(r"#\[test\]\s*#\[ignore[^\]]*\]\s*fn (\w+)\(", appended)
+        == ["viewport"],
+        "baseline_cases_unchanged": all(same_as_baseline.values())
+        and sorted(p["review"]["cases"]) == sorted([*baseline_cases, "viewport"]),
+        "baseline_cases_as_original": all(same_as_original.values()),
+        "same_review_config": p["review_config"] == baseline_plan["review_config"] == original_plan["review_config"],
+        "baseline_fixture_only_line_1418_from_original": (
+            len(original_fixture.splitlines()) == len(base_text.splitlines())
+            and [i for i, _, _ in changed] == [1418]),
+        "observed": {"baseline_case_equality": same_as_baseline, "appended_bytes": len(appended.encode()),
+                     "baseline_fixture_bytes": len(baseline_fixture)},
     }
 
 

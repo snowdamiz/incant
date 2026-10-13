@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Guarded serial GPU runner for handoff 0072's fixed-coverage temporal review.
+"""Guarded serial GPU runner for handoff 0072's fixed-sharpness comparison review.
 Standard library only.
 
 Adapted from this packet's original gpu.py (from handoff 0068). For every
@@ -16,9 +16,9 @@ timeout, Ctrl-C, SIGTERM or SIGHUP. Every child goes to the ledger (rows always
 carry "pid"); any failure latches stop.json. There is no automatic retry and no
 whole-suite run.
 
-  gpu.py list <lib|review>   lib: confirm the exact numeric test name; review: the 7 cases
-  gpu.py numeric             the one exact fixed numeric regression, once
-  gpu.py review <probe|stationary|motion|excluded|transitions|skinned|timing>
+  gpu.py list <lib|review>   lib: confirm both exact numeric test names; review: the 8 cases
+  gpu.py numeric <resolve|coverage>   one exact numeric control, once each, in plan order
+  gpu.py review <probe|stationary|motion|excluded|transitions|skinned|timing|viewport>
   gpu.py release             after the last child, also when stopped: write the GPU latch
 """
 
@@ -168,12 +168,13 @@ def listing(name):
     if runs("list", name):
         c.refuse(f"{name} already listed; listings never repeat")
     if name == "lib":
-        binary, cwd, wanted = LIB, p["numeric"]["cwd"], p["numeric"]["test"]
+        binary, cwd = LIB, p["numeric"]["cwd"]
+        wanted = [t["test"] for t in p["numeric"]["tests"]]
 
         def names(stdout):
             found = LISTING.findall(stdout)
             return {"listed": found, "listed_count": len(found),
-                    "contract": {"exact_numeric_test_listed": wanted in found}}
+                    "contract": {"exact_numeric_tests_listed": all(found.count(w) == 1 for w in wanted)}}
     else:
         spec = p["review"]
         binary, cwd = spec["binary"], spec["cwd"]
@@ -187,25 +188,39 @@ def listing(name):
                      p["budgets"]["listing_timeout_s"], after=names)
 
 
-def numeric():
+def numeric_items(p):
+    return ["numeric-" + t["id"] for t in p["numeric"]["tests"]]
+
+
+def numeric(test_id):
     p = c.plan()
     spec = p["numeric"]
+    tests = {t["id"]: t for t in spec["tests"]}
+    if test_id not in tests:
+        c.refuse(f"unknown numeric control {test_id}")
+    test = tests[test_id]
     lists = runs("list", "lib")
-    if not lists or lists[-1]["failed"] or spec["test"] not in lists[-1].get("listed", []):
+    if not lists or lists[-1]["failed"] or test["test"] not in lists[-1].get("listed", []):
         c.refuse("list lib first; the exact numeric test must appear in a fresh listing")
-    if runs("numeric", "numeric"):
-        c.refuse("the numeric regression already ran; there is no automatic retry")
+    item = "numeric-" + test_id
+    if runs("numeric", item):
+        c.refuse(f"{item} already ran; there is no automatic retry")
+    order = numeric_items(p)
+    for earlier in order[:order.index(item)]:
+        previous = runs("numeric", earlier)
+        if not previous or previous[-1]["failed"]:
+            c.refuse(f"run {earlier} first; numeric controls run in plan order and stop on failure")
 
     def outcome(stdout):
         summary = libtest_summary(stdout)
         ok = (summary["running"] == [1] and len(summary["results"]) == 1
               and summary["results"][0]["passed"] == 1 and summary["results"][0]["failed"] == 0
               and not summary["failures"])
-        return {"test": spec["test"], "contract": {"exact_test_ran_once_and_passed": ok}}
+        return {"test": test["test"], "contract": {"exact_test_ran_once_and_passed": ok}}
 
-    return run_child("numeric", "numeric", "numeric", LIB, [spec["test"], *spec["args"]],
+    return run_child(item, "numeric", item, LIB, [test["test"], *spec["args"]],
                      spec["cwd"], p["budgets"]["numeric_timeout_s"],
-                     charge=(spec["submissions"], 0, 0), after=outcome)
+                     charge=(test["submissions"], 0, 0), after=outcome)
 
 
 def review(case):
@@ -214,9 +229,10 @@ def review(case):
     cases = spec["order"]
     if case not in spec["cases"]:
         c.refuse(f"unknown review case {case}")
-    passed = runs("numeric", "numeric")
-    if not passed or passed[-1]["failed"]:
-        c.refuse("the numeric regression must pass before any appearance case")
+    for item in numeric_items(p):
+        passed = runs("numeric", item)
+        if not passed or passed[-1]["failed"]:
+            c.refuse("both numeric controls must pass before any appearance case")
     if not runs("list", "review"):
         c.refuse("list review first")
     if len(runs("review", case)) >= spec["max_runs_per_case"]:
@@ -322,8 +338,8 @@ def main():
     p = c.plan()
     if len(args) == 2 and args[0] == "list" and args[1] in ("lib", "review"):
         listing(args[1])
-    elif args == ["numeric"]:
-        numeric()
+    elif len(args) == 2 and args[0] == "numeric" and args[1] in [t["id"] for t in p["numeric"]["tests"]]:
+        numeric(args[1])
     elif len(args) == 2 and args[0] == "review" and args[1] in p["review"]["cases"]:
         review(args[1])
     else:

@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
-"""CPU-only, fail-closed analysis and publication for handoff 0072's fixed-coverage
-temporal review. Standard library only; never starts a renderer, compiler or GPU
+"""CPU-only, fail-closed analysis, comparison and publication for handoff 0072's
+fixed-sharpness comparison review. Standard library only; never starts a renderer, compiler or GPU
 child. The verdict/binding/publication rules follow the accepted 0073 analyzer
 (narrowly reused); appearance is judged only by personal inspection of the PNGs.
 
   analyze.py check     validate the complete current evidence; always writes
                        analysis/summary-<time>.json; exit 0 only on a pass
+  analyze.py compare   only after a current passing check: compare the candidate run
+                       with the retained accepted baseline (sharpness.py); always
+                       writes analysis/compare-<time>.json; exit 0 only on a pass
   analyze.py publish   copy receipts and the plan's PNGs (<= 16) into the packet
                        (create-only), only from the latest summary, which must
                        pass and still bind the current evidence byte for byte
@@ -19,8 +22,8 @@ child. The verdict/binding/publication rules follow the accepted 0073 analyzer
 - every ledgered build succeeded and its logs match;
 - exactly one passing `list lib` naming the exact numeric test, and exactly one
   passing `list review` naming exactly the plan's cases;
-- exactly one passing numeric child that ran the exact test once, debited
-  exactly the plan's submissions;
+- exactly one passing child per plan numeric control, each running its exact
+  test once and debited exactly the plan's submissions;
 - exactly one passing review child per plan case, in plan order, and no other
   GPU child kind; one debit per charged child, equal to the plan; totals within
   the ceiling and the PNG budget;
@@ -161,15 +164,22 @@ def validate(entries, debits, grant):
         need(len(rows) == 1 and rows[0].get("failed") == [] and all(rows[0].get("contract", {}).values())
              and rows[0].get("contract"), f"expected one passing {name} listing, found {len(rows)}")
     numeric_rows = [e for e in gpu if e.get("kind") == "numeric"]
-    if need(len(numeric_rows) == 1, f"expected one numeric child, found {len(numeric_rows)}"):
-        row = numeric_rows[0]
-        need(row.get("failed") == [] and row.get("exit") == 0 and row.get("test") == p["numeric"]["test"]
+    tests = p["numeric"]["tests"]
+    need([e.get("item") for e in numeric_rows] == ["numeric-" + t["id"] for t in tests],
+         f"expected one numeric child per plan control in order, found {[e.get('item') for e in numeric_rows]}")
+    for spec_test in tests:
+        rows = [e for e in numeric_rows if e.get("item") == "numeric-" + spec_test["id"]]
+        if not need(len(rows) == 1, f"expected one numeric child {spec_test['id']}, found {len(rows)}"):
+            continue
+        row = rows[0]
+        need(row.get("failed") == [] and row.get("exit") == 0 and row.get("test") == spec_test["test"]
              and row.get("contract", {}).get("exact_test_ran_once_and_passed") is True,
-             "the numeric child did not run the exact test once and pass")
-        need(row.get("debit", {}).get("frames") == p["numeric"]["submissions"],
-             "the numeric child was not debited the plan's submissions")
+             f"the numeric child {spec_test['id']} did not run the exact test once and pass")
+        need(row.get("debit", {}).get("frames") == spec_test["submissions"],
+             f"the numeric child {spec_test['id']} was not debited the plan's submissions")
         for key in ("stdout", "stderr"):
-            need(row.get(key) and digest(row[key]) == row.get(key + "_sha256"), f"numeric {key} differs from the ledger")
+            need(row.get(key) and digest(row[key]) == row.get(key + "_sha256"),
+                 f"numeric {spec_test['id']} {key} differs from the ledger")
     reviews = [e for e in gpu if e.get("kind") == "review"]
     need([e.get("item") for e in reviews] == order,
          f"review children {[e.get('item') for e in reviews]} are not the plan cases once each in order")
@@ -179,6 +189,9 @@ def validate(entries, debits, grant):
     budgets = p["budgets"]
     need(sum(d.get("frames", 0) + d.get("ui_submissions", 0) for d in debits) <= budgets["submissions_max"]
          and sum(d.get("pngs", 0) for d in debits) <= budgets["pngs_max"], "debits exceed the ceiling or PNG budget")
+    visual = sum(d.get("frames", 0) + d.get("ui_submissions", 0) for d in debits
+                 if not str(d.get("item", "")).startswith("numeric"))
+    need(visual <= budgets.get("visual_submissions_max", visual), "visual debits exceed the visual ceiling")
     cases = {}
     for case in order:
         details = spec["cases"][case]
@@ -228,23 +241,61 @@ def latest_summary():
     return summaries[-1] if summaries else None
 
 
-def publish():
-    data, _ = c.grant()
-    tools = c.tools_identity(data)
+def latest_compare():
+    compares = sorted(c.ANALYSIS.glob("compare-*.json")) if c.ANALYSIS.is_dir() else []
+    return compares[-1] if compares else None
+
+
+def current_passing_summary(tools):
+    """The latest integrity summary must pass and still bind the current evidence."""
     latest = latest_summary()
     if latest is None:
         c.refuse("no analysis exists; run analyze.py check first")
     summary = c.read_json(latest)
     if summary.get("verdict") != "pass" or summary.get("problems") or summary.get("complete") is not True:
         c.refuse(f"the latest analysis {latest.name} did not pass; publication needs a complete passing analysis")
-    entries = c.read_lines(c.LEDGER)
-    if summary.get("bindings") != bindings(entries, tools["visual_tree"]):
+    if summary.get("bindings") != bindings(c.read_lines(c.LEDGER), tools["visual_tree"]):
         c.refuse(f"the latest analysis {latest.name} is stale: evidence changed since it ran")
+    return latest
+
+
+def compare():
+    """Exact comparison with the retained accepted baseline; thresholds fail honestly."""
+    import sharpness
+    data, _ = c.grant()
+    tools = c.tools_identity(data)
+    latest = current_passing_summary(tools)
+    p = c.plan()
+    b = p["comparison"]["baseline"]
+    candidate = sharpness.run_from_captures("candidate", c.EVIDENCE, p["review"]["order"])
+    baseline = sharpness.run_from_published("baseline", c.ROOT / b["evidence"], c.ROOT / b["screenshots"], b["cases"])
+    try:
+        result = sharpness.compare(candidate, baseline, p)
+    except Exception as error:  # a malformed input is a failed comparison, never a pass
+        result = {"verdict": "fail", "exact": False, "failed": [f"comparison error: {error!r}"], "checks": []}
+    recorded = c.now()
+    result.update({"recorded": recorded, "integrity_summary": {"path": latest.name, "sha256": c.sha(latest)},
+                   "visual_tree": tools["visual_tree"],
+                   "note": "Thresholds are proposals (plan.json comparison), not plan gates."})
+    path = c.ANALYSIS / ("compare-" + recorded.replace(":", "") + ".json")
+    c.write_new_json(path, result)
+    print(json.dumps({"compare": str(path), "verdict": result["verdict"], "exact": result.get("exact"),
+                      "failed": result["failed"][:40]}, indent=1))
+    return 0 if result["verdict"] == "pass" else 1
+
+
+def publish():
+    data, _ = c.grant()
+    tools = c.tools_identity(data)
+    latest = current_passing_summary(tools)
+    entries = c.read_lines(c.LEDGER)
     if c.PUBLISHED.exists() or c.PUBLISHED_EVIDENCE.exists():
         c.refuse("published evidence already exists; it is never replaced")
     picks = [(c.GRANT, "review-ready.json"), (c.BUILD_GRANT, "build-ready.json"), (c.LEDGER, "gpu-ledger.jsonl"),
              (c.BUDGET, "budget.jsonl"), (c.LATCH, "gpu-released.json"), (c.LEASE, "target-lease.json"),
              (latest, "analysis/" + latest.name)]
+    if latest_compare() is not None:  # a failing comparison is published too
+        picks.append((latest_compare(), "analysis/" + latest_compare().name))
     for name in ("source.json", "toolchain.json", "review.json", "tests.json", "lint.json"):
         if (c.BUILD / name).exists():
             picks.append((c.BUILD / name, "build/" + name))
@@ -285,7 +336,7 @@ def publish():
 
 
 def main(argv):
-    steps = {"check": check, "publish": publish}
+    steps = {"check": check, "compare": compare, "publish": publish}
     if len(argv) != 1 or argv[0] not in steps:
         raise SystemExit(__doc__)
     return steps[argv[0]]()

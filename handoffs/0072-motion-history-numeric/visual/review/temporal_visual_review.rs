@@ -2053,3 +2053,193 @@ fn timing() {
         "timing failed; see report.json"
     );
 }
+
+// ------------------------------------------------------------------ fixed-sharpness comparison
+
+/// Integer-offset, odd-sized viewport inside the unchanged 960x540 output. At full
+/// scale FramePlan keeps this placement, so it is also the temporal rect.
+const VIEWPORT_RECT: [f32; 4] = [37., 19., 885., 501.];
+/// The neutral #141519 surround outside the viewport.
+const VIEWPORT_CANVAS: [u8; 3] = [0x14, 0x15, 0x19];
+
+fn viewport_target(output: &Output) -> RetainedTarget<'_> {
+    RetainedTarget {
+        viewport: Some(incant_render::Viewport {
+            rect: VIEWPORT_RECT,
+            corner_radii: [0.; 4],
+            canvas_srgb: VIEWPORT_CANVAS,
+        }),
+        ..output.target()
+    }
+}
+/// `shoot` into the offset viewport, without a UI overlay.
+fn shoot_viewport(
+    report: &mut Report,
+    renderer: &Renderer,
+    scene: &mut RetainedScene,
+    input: &SceneInput,
+    output: &Output,
+    name: &str,
+) -> Shot {
+    report.charge_frame(name);
+    scene
+        .submit(renderer, input, viewport_target(output))
+        .expect("retained submit in viewport");
+    let pixels = read(renderer, &output.texture);
+    let temporal = scene.temporal_frame();
+    let meta = temporal.as_ref().map(Meta::of);
+    report.records.push(json!({
+        "name": name,
+        "temporal": meta.map(Meta::json),
+        "rgba_sha256": hex(&pixels),
+    }));
+    Shot {
+        name: name.to_owned(),
+        pixels,
+        temporal,
+    }
+}
+fn viewport_bounds() -> [usize; 4] {
+    VIEWPORT_RECT.map(|v| v as usize)
+}
+/// Largest max-channel difference outside the viewport.
+fn outside_delta(a: &[u8], b: &[u8]) -> u8 {
+    let [width, height] = SIZE.map(|v| v as usize);
+    let [x0, y0, w, h] = viewport_bounds();
+    let mut worst = 0_u8;
+    for y in 0..height {
+        for x in 0..width {
+            if (x0..x0 + w).contains(&x) && (y0..y0 + h).contains(&y) {
+                continue;
+            }
+            worst = worst.max(max_delta(a, b, y * width + x));
+        }
+    }
+    worst
+}
+/// Max-channel differences at non-edge viewport pixels, split into the 3 px band
+/// just inside the viewport border and the rest of the viewport.
+fn border_split(a: &[u8], b: &[u8], edge: &[bool]) -> Value {
+    let width = SIZE[0] as usize;
+    let [x0, y0, w, h] = viewport_bounds();
+    let mut tallies = [Tally::default(); 2];
+    for y in y0..y0 + h {
+        for x in x0..x0 + w {
+            let i = y * width + x;
+            if edge[i] {
+                continue;
+            }
+            let inner = (x0 + 3..x0 + w - 3).contains(&x) && (y0 + 3..y0 + h - 3).contains(&y);
+            tallies[usize::from(!inner)].add(max_delta(a, b, i));
+        }
+    }
+    json!({"inner": tallies[0].json(), "border_band_3px": tallies[1].json()})
+}
+/// Pixels of an activity map (peak consecutive change x4, saturating) per peak band.
+fn activity_bins(map: &[u8]) -> Value {
+    let mut bins = [0_usize; 6];
+    for px in map.chunks(4) {
+        let peak = if px[0] == 255 { 64 } else { px[0] / 4 };
+        let band = match peak {
+            0 => continue,
+            1..=2 => 0,
+            3..=8 => 1,
+            9..=16 => 2,
+            17..=32 => 3,
+            33..=63 => 4,
+            _ => 5,
+        };
+        bins[band] += 1;
+    }
+    json!({
+        "1-2": bins[0], "3-8": bins[1], "9-16": bins[2],
+        "17-32": bins[3], "33-63": bins[4], "64+": bins[5],
+    })
+}
+
+#[test]
+#[ignore = "handoff 0072 temporal visual review; run only by the guarded packet runner"]
+fn viewport() {
+    let mut report = Report::open("viewport", 26, 0);
+    let stage = Stage::new();
+    let mut input = stage.input();
+    let camera = node(&input, &stage.camera);
+    let renderer = open_renderer(false);
+    let output = Output::new(&renderer);
+    let mut off = plain(&renderer, &input, &stage.camera);
+    let still_off = shoot_viewport(
+        &mut report,
+        &renderer,
+        &mut off,
+        &input,
+        &output,
+        "off-still",
+    );
+    drop(off);
+    // One owner: two still jitter cycles, then a lateral pan that carries content
+    // across the viewport border on every frame.
+    let mut on = temporal(&renderer, &input, &stage.camera);
+    let mut shots = Vec::new();
+    for k in 1..=24_u32 {
+        if k > 16 {
+            input.nodes[camera].world = camera_world(k - 16);
+        }
+        let name = format!("on-{k:02}");
+        shots.push(shoot_viewport(
+            &mut report,
+            &renderer,
+            &mut on,
+            &input,
+            &output,
+            &name,
+        ));
+    }
+    drop(on);
+    let mut off = plain(&renderer, &input, &stage.camera);
+    let pan_off = shoot_viewport(&mut report, &renderer, &mut off, &input, &output, "off-pan");
+    drop(off);
+    let still_edge = edges(&still_off.pixels);
+    let pan_edge = edges(&pan_off.pixels);
+    report.png("viewport-on-f24.png", &shots[23].pixels);
+    report.png("viewport-off-f24.png", &pan_off.pixels);
+    let internal = shots[0].meta().map(|m| m.internal);
+    let outside = shots
+        .iter()
+        .map(|s| outside_delta(&s.pixels, &pan_off.pixels))
+        .max()
+        .unwrap_or(u8::MAX)
+        .max(outside_delta(&still_off.pixels, &pan_off.pixels));
+    let checks = [
+        (
+            "viewport_run_uninterrupted",
+            internal.is_some_and(|size| continuous(&shots, size)),
+        ),
+        (
+            "references_have_no_temporal_state",
+            still_off.temporal.is_none() && pan_off.temporal.is_none(),
+        ),
+        ("outside_viewport_matches_reference", outside == 0),
+        ("frames_match_plan", report.frames == 26),
+    ];
+    let body = json!({
+        "renderer": describe(&renderer),
+        "viewport_rect": VIEWPORT_RECT,
+        "internal_size": internal,
+        "observations": {
+            "still_consecutive": consecutive(&shots[..16], &still_edge),
+            "still_same_phase_f08_vs_f16": split(&shots[7].pixels, &shots[15].pixels, &still_edge),
+            "still_f16_vs_off": split(&still_off.pixels, &shots[15].pixels, &still_edge),
+            "still_f16_border_vs_off": border_split(&still_off.pixels, &shots[15].pixels, &still_edge),
+            "still_activity_frames_9_16": activity_bins(&activity(&shots[8..16])),
+            "pan_consecutive": consecutive(&shots[16..], &pan_edge),
+            "pan_f24_vs_off": split(&pan_off.pixels, &shots[23].pixels, &pan_edge),
+            "pan_f24_border_vs_off": border_split(&pan_off.pixels, &shots[23].pixels, &pan_edge),
+            "outside_viewport_max_delta": outside,
+            "activity_map": "not retained; still frames 9-16 bands above",
+        },
+    });
+    assert!(
+        report.finish(body, &checks),
+        "viewport failed; see report.json"
+    );
+}

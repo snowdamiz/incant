@@ -1,0 +1,279 @@
+{
+ "python": "3.14.8",
+ "plan_sha256": "60e8342ae3f697e28e1c7a7c876c1fcd6c1ab6faea61aed54724322ec0521f54",
+ "helper_sha256": "d4fc40029f7e7995719bf058806f9a79936f11c8ac63e7905ac79414eb281338",
+ "tools": {
+  "analyze.py": "d666995c205138290fe60c4dc5da5f90adb230171e910ea8c8d0850c5ccf0d6b",
+  "build.py": "319430e2fd17c5976f20895c17dc0d4e71448bc26bddb972f1245e24e32b021b",
+  "common.py": "fe4b3e71a5ba572e183b09dc8d8a27ccdd8bcf31d8479448c5e5d0f507d28918",
+  "gpu.py": "b956b8ee6f6d6b12d04b32b7a48f9946d6fb206abf318c96bdb1431610e773ce",
+  "lease.py": "13acaa49dbb2082c1a8dd14d60b8b1367eb0c315eae838f303ffc4e57848ec18",
+  "pngread.py": "b627e4025447ab9897e39220e6c6319dce18409efa09b53a90df6ea54f924ae0",
+  "selfcheck.py": "8ab07e8d30483d938a454772f88d6611b7b8e95582622604635447f170d20f49",
+  "sharpness.py": "b84be74823255f27151b3339f965ff1b1f74a0d768791be29f5282a7daa6465f",
+  "test_analyze.py": "c3e44d03add95392e20b37170f85b53b1486cf3ccdb0d9f66b6010644f5cfbbe",
+  "test_lifecycle.py": "8f33f44d5aff65dc565b45811bad968e278ddd315fbcfb8ea8d02349010a3373",
+  "test_source.py": "483abef06f3bf6c63efbc4d34b3d66cbb1c6c6f198e416b225e9a81c16017ffe"
+ },
+ "syntax": "all tools parse",
+ "plan": {
+  "frames_match_total": true,
+  "ui_match_total": true,
+  "visual_105_within_120": true,
+  "numeric_102_plus_150": true,
+  "planned_357_within_372": true,
+  "pngs_16_of_16": true,
+  "reserves_match": true,
+  "gpu_children_at_most_120_s": true,
+  "png_names_unique": true,
+  "size_960x540": true,
+  "one_attempt_each": true,
+  "order_names_every_case": true,
+  "every_case_lists_checks": true,
+  "no_whole_suite": true,
+  "exact_numeric_tests": true,
+  "builds_locked_offline_ci_j2": true,
+  "review_config_in_validated_ranges": true,
+  "expected_backend_metal": true,
+  "new_evidence_namespace": true,
+  "new_stages": true,
+  "new_publication_directories": true,
+  "comparison_baseline_and_candidate": true
+ },
+ "comparability": {
+  "fixture_extends_baseline_exactly": true,
+  "appended_block_adds_only_viewport_case": true,
+  "baseline_cases_unchanged": true,
+  "baseline_cases_as_original": true,
+  "same_review_config": true,
+  "baseline_fixture_only_line_1418_from_original": true,
+  "observed": {
+   "baseline_case_equality": {
+    "probe": true,
+    "stationary": true,
+    "motion": true,
+    "excluded": true,
+    "transitions": true,
+    "skinned": true,
+    "timing": true
+   },
+   "appended_bytes": 6731,
+   "baseline_fixture_bytes": 69578
+  }
+ },
+ "helper": {
+  "tests_match_plan_in_order": true,
+  "limits_match_plan": true,
+  "png_names_match_plan": true,
+  "size_matches_plan": true,
+  "output_variable_matches_plan": true,
+  "review_config_matches_plan": true,
+  "contract_checks_match_plan": true,
+  "observed": {
+   "tests": [
+    "probe",
+    "stationary",
+    "motion",
+    "excluded",
+    "transitions",
+    "skinned",
+    "timing",
+    "viewport"
+   ],
+   "limits": {
+    "probe": [
+     0,
+     0
+    ],
+    "stationary": [
+     17,
+     0
+    ],
+    "motion": [
+     16,
+     0
+    ],
+    "excluded": [
+     9,
+     9
+    ],
+    "transitions": [
+     13,
+     0
+    ],
+    "skinned": [
+     7,
+     0
+    ],
+    "timing": [
+     8,
+     0
+    ],
+    "viewport": [
+     26,
+     0
+    ]
+   },
+   "pngs": [
+    "stationary-off.png",
+    "stationary-on-f16.png",
+    "stationary-activity.png",
+    "motion-object-on-f8.png",
+    "motion-object-off-f8.png",
+    "motion-pan-on-f6.png",
+    "motion-pan-off-f6.png",
+    "excluded-on-f8.png",
+    "excluded-off.png",
+    "excluded-activity.png",
+    "transition-cut-f7.png",
+    "transition-drs-f9.png",
+    "skinned-on-f6.png",
+    "skinned-off-f6.png",
+    "viewport-on-f24.png",
+    "viewport-off-f24.png"
+   ],
+   "review_config": {
+    "history_weight": 0.9,
+    "relative_depth": 0.05,
+    "absolute_depth": 0.02,
+    "reactive_threshold": 4.0,
+    "reactive_strength": 0.5
+   },
+   "checks": {
+    "probe": [
+     "temporal_pipelines_enabled",
+     "second_enable_is_idempotent",
+     "review_config_validates",
+     "invalid_configs_rejected"
+    ],
+    "stationary": [
+     "one_uninterrupted_run_over_two_cycles",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "motion": [
+     "object_run_uninterrupted",
+     "pan_run_uninterrupted",
+     "references_have_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "excluded": [
+     "accumulation_run_uninterrupted",
+     "ui_stable_across_jitter_phases_and_off",
+     "scene_has_blend_sprites_and_text",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "transitions": [
+     "view_a_run_uninterrupted",
+     "cut_restarts_history_at_phase_zero",
+     "cut_advances_epoch",
+     "half_scale_restarts_history",
+     "output_scale_restarts_history",
+     "one_owner_through_cut_and_scale_changes",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "skinned": [
+     "skinned_run_uninterrupted",
+     "reference_has_no_temporal_state",
+     "frames_match_plan"
+    ],
+    "timing": [
+     "every_frame_produced_one_sample",
+     "samples_well_formed_with_models_group",
+     "temporal_run_uninterrupted",
+     "models_span_grows_with_motion_and_resolve_passes",
+     "frames_match_plan"
+    ],
+    "viewport": [
+     "viewport_run_uninterrupted",
+     "references_have_no_temporal_state",
+     "outside_viewport_matches_reference",
+     "frames_match_plan"
+    ]
+   }
+  }
+ },
+ "refusals": {
+  "commands": {
+   "lease.py acquire": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "lease.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py checkout": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py toolchain": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py libtests": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py lint": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list lib": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py numeric resolve": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py numeric coverage": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review probe": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review stationary": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review viewport": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py check": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py compare": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py publish": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   }
+  },
+  "all_refused_for_absent_grant": true,
+  "evidence_directory_still_absent": true,
+  "git_status_unchanged": true,
+  "global_gpu_lock_untouched": true
+ },
+ "all_pass": true
+}
