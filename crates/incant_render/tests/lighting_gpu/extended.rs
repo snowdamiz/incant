@@ -266,7 +266,10 @@ fn directional_only(r: &Renderer) {
     let lights = GpuLights::upload(&r.device, plan(&fixture(0, false)));
     assert_eq!((lights.directional, lights.local), (2, 0));
     let camera = CameraView::preview();
-    let shadows = r.shadows.prepare(&r.device, camera, 1., &[], &[]).unwrap();
+    let shadows = r
+        .shadows
+        .prepare(&r.device, camera, VIEWPORTS[0], &[], &[])
+        .unwrap();
     let frame = r
         .lighting
         .prepare(

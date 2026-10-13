@@ -91,7 +91,7 @@ impl Renderer {
             })
             .transpose()?;
         let mut opaque = Vec::new();
-        let shadows = self.prepare_shadow_draw(scene, target.rect[2] / target.rect[3])?;
+        let shadows = self.prepare_shadow_draw(scene, target.rect)?;
         let lighting = self.lighting.prepare(
             &self.device,
             &scene.lights,
