@@ -1,0 +1,703 @@
+{
+ "model": "0073 implementation-5 correction controls",
+ "python": "3.14.8",
+ "draft_model_sha256": "196cad707f13c50b1a5445deec016f95d02bd2174deeb116efab61c4d13f9cd7",
+ "checks": [
+  {
+   "check": "clamp provenance",
+   "ok": true
+  },
+  {
+   "check": "every reprojected record",
+   "ok": true
+  },
+  {
+   "check": "camera_static identity",
+   "ok": true
+  },
+  {
+   "check": "canonical anchors, positive weight, clear and malformed exits",
+   "ok": true
+  },
+  {
+   "check": "future GPU submissions",
+   "ok": true
+  },
+  {
+   "check": "admission flags, upload charges, reset",
+   "ok": true
+  }
+ ],
+ "details": {
+  "clamp provenance": {
+   "draft": {
+    "frame_t": {
+     "path": "reproject",
+     "color": 0.45,
+     "clamp": [
+      0.0,
+      0.5
+     ],
+     "record": [
+      2147483653,
+      0
+     ],
+     "owners": [
+      5
+     ]
+    },
+    "frame_t1": {
+     "path": "persist",
+     "color": 0.405,
+     "record": [
+      2147483653,
+      0
+     ]
+    }
+   },
+   "corrected": {
+    "frame_t": {
+     "path": "reproject",
+     "color": 0.45,
+     "clamp": [
+      0.0,
+      0.5
+     ],
+     "record": [
+      2147483653,
+      7
+     ],
+     "owners": [
+      5,
+      7
+     ]
+    },
+    "frame_t1": {
+     "path": "drop",
+     "color": 0.0,
+     "record": [
+      2147483653,
+      0
+     ]
+    }
+   }
+  },
+  "every reprojected record": {
+   "draft": {
+    "path": "reproject",
+    "color": 0.52,
+    "record": [
+     2147483653,
+     2147484320
+    ],
+    "owners": {
+     "anchor": 5,
+     "mask": 672
+    },
+    "taps": [
+     {
+      "tap": [
+       0,
+       0
+      ],
+      "weight": 0.375,
+      "verdict": "accept"
+     },
+     {
+      "tap": [
+       1,
+       0
+      ],
+      "weight": 0.125,
+      "verdict": "accept"
+     },
+     {
+      "tap": [
+       0,
+       1
+      ],
+      "weight": 0.375,
+      "verdict": "accept"
+     },
+     {
+      "tap": [
+       1,
+       1
+      ],
+      "weight": 0.125,
+      "verdict": "accept"
+     }
+    ]
+   },
+   "corrected": {
+    "path": "reproject",
+    "color": 0.475,
+    "record": [
+     2147483653,
+     9
+    ],
+    "owners": [
+     5,
+     9
+    ],
+    "taps": [
+     {
+      "tap": [
+       0,
+       0
+      ],
+      "weight": 0.375,
+      "verdict": "accept"
+     },
+     {
+      "tap": [
+       1,
+       0
+      ],
+      "weight": 0.125,
+      "verdict": "changed_absent"
+     },
+     {
+      "tap": [
+       0,
+       1
+      ],
+      "weight": 0.375,
+      "verdict": "accept"
+     },
+     {
+      "tap": [
+       1,
+       1
+      ],
+      "weight": 0.125,
+      "verdict": "accept"
+     }
+    ]
+   },
+   "astra_scalar_decide": [
+    "drop",
+    [
+     2147483653,
+     0
+    ]
+   ],
+   "expected": {
+    "draft_history": 0.55,
+    "corrected_history": 0.5,
+    "corrected_renormalised_mass": 0.875
+   }
+  },
+  "camera_static identity": {
+   "multiplier_w_bits": 1064921682,
+   "eye_x": [
+    1.5,
+    1.5000001192092896
+   ],
+   "eye_x_bits": [
+    1069547520,
+    1069547521
+   ],
+   "unjittered_vp_equal": true,
+   "view_equal": false,
+   "shading_eye_equal": false,
+   "draft_camera_static": true,
+   "corrected_camera_static": false,
+   "collision_scan": {
+    "0.55": {
+     "eye_x": 1.818182110786438,
+     "next_eye_x": 1.8181822299957275,
+     "steps": 2
+    },
+    "0.75": {
+     "eye_x": 1.3333336114883423,
+     "next_eye_x": 1.3333337306976318,
+     "steps": 2
+    },
+    "0.9": {
+     "eye_x": 1.1111118793487549,
+     "next_eye_x": 1.1111119985580444,
+     "steps": 6
+    },
+    "0.99": {
+     "eye_x": 1.0101029872894287,
+     "next_eye_x": 1.0101031064987183,
+     "steps": 16
+    }
+   },
+   "drs_2048_to_1920": {
+    "rects": {
+     "2048": {
+      "aspect_bits": 1065353216,
+      "guard_bits": 973078528
+     },
+     "1920": {
+      "aspect_bits": 1065353216,
+      "guard_bits": 973637769
+     }
+    },
+    "matrix_view_eye_only_static": true,
+    "corrected_static_with_rect": false
+   }
+  },
+  "canonical anchors, positive weight, clear and malformed exits": {
+   "records": [
+    {
+     "case": "encode(0,{7}) (Astra canonical_clear_case)",
+     "draft": {
+      "written": [
+       2147483648,
+       7
+      ],
+      "read": null
+     },
+     "corrected": {
+      "written": [
+       0,
+       0
+      ]
+     },
+     "ok": true
+    },
+    {
+     "case": "present-clear record [P|0,0]",
+     "draft": {
+      "written_at_clear_exits": [
+       2147483648,
+       0
+      ],
+      "read": [
+       0
+      ]
+     },
+     "corrected": {
+      "read": null
+     },
+     "ok": true
+    },
+    {
+     "case": "overflow mask without the anchor class",
+     "draft": {
+      "read_ok": true
+     },
+     "corrected": {
+      "read_ok": false
+     },
+     "ok": true
+    },
+    {
+     "case": "draft decide() cases unchanged under corrected decision",
+     "draft": null,
+     "corrected": null,
+     "ok": true
+    }
+   ],
+   "exits": {
+    "outside": {
+     "path": "outside",
+     "depth": 0.0,
+     "draft_record": [
+      0,
+      0
+     ],
+     "draft_record_readable": null,
+     "corrected_record": [
+      0,
+      0
+     ],
+     "ok": true
+    },
+    "all clear": {
+     "path": "all_clear",
+     "depth": 0.0,
+     "draft_record": [
+      2147483648,
+      0
+     ],
+     "draft_record_readable": false,
+     "corrected_record": [
+      0,
+      0
+     ],
+     "ok": true
+    },
+    "not one surface": {
+     "path": "not_one_surface",
+     "depth": 0.0,
+     "draft_record": [
+      2147483653,
+      9
+     ],
+     "draft_record_readable": true,
+     "corrected_record": [
+      0,
+      0
+     ],
+     "ok": true
+    },
+    "history disabled": {
+     "path": "history_disabled",
+     "depth": 10.0,
+     "draft_record": [
+      2147483653,
+      0
+     ],
+     "draft_record_readable": true,
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "invalid motion": {
+     "path": "invalid_motion",
+     "depth": 10.0,
+     "draft_record": [
+      2147483653,
+      0
+     ],
+     "draft_record_readable": true,
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "old outside": {
+     "path": "old_outside",
+     "depth": 10.0,
+     "draft_record": [
+      2147483653,
+      0
+     ],
+     "draft_record_readable": true,
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "no admitted tap": {
+     "path": "current_only",
+     "depth": 10.0,
+     "draft_record": [
+      2147483653,
+      0
+     ],
+     "draft_record_readable": true,
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "untracked anchor (owner 0 at depth)": {
+     "path": "history_disabled",
+     "depth": 9.0,
+     "draft_record": [
+      2147483648,
+      7
+     ],
+     "draft_record_readable": false,
+     "corrected_record": [
+      0,
+      0
+     ],
+     "ok": true
+    },
+    "support id above highest": {
+     "path": "history_disabled",
+     "depth": 10.0,
+     "draft_record": [
+      2147483653,
+      100001
+     ],
+     "draft_record_readable": false,
+     "corrected_record": [
+      0,
+      0
+     ],
+     "ok": true
+    },
+    "owner word bits 17-30 set": {
+     "path": "history_disabled",
+     "depth": 10.0,
+     "draft_record": [
+      2147483653,
+      0
+     ],
+     "draft_record_readable": true,
+     "corrected_record": [
+      0,
+      0
+     ],
+     "ok": true
+    },
+    "malformed previous record [P|0,7]": {
+     "path": "current_only",
+     "taps": [
+      {
+       "tap": [
+        1,
+        1
+       ],
+       "weight": 1.0,
+       "verdict": "no_record"
+      }
+     ],
+     "corrected_record": [
+      2147483653,
+      0
+     ],
+     "ok": true
+    },
+    "zero-weight tap cannot establish owner 7": {
+     "path": "drop",
+     "record": [
+      2147483653,
+      0
+     ],
+     "if_zero_weight_counted": "reproject",
+     "ok": true
+    }
+   }
+  },
+  "future GPU submissions": {
+   "draft_marker": "OWNER_HISTORY renders=8 readback_submissions=8 max_extent=32x32 no_images=true",
+   "draft_claimed_submissions": 16,
+   "draft_actual_renders": 10,
+   "draft_actual_if_unbatched": 20,
+   "corrected": {
+    "cases": 12,
+    "owner_renders": 12,
+    "baseline_renders": 2,
+    "queue_submits": 12,
+    "readback_maps": 12,
+    "marker": "OWNER_HISTORY cases=12 owner_renders=12 baseline_renders=2 queue_submits=12 readback_maps=12 max_extent=32x32 no_images=true"
+   },
+   "cases": [
+    {
+     "case": "fresh record: history disabled; outside texels (0,0)",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "static persistence, history outside the clamp range",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "changed absent owner drops: record {5,7}, 7 changed (Astra t+1), plus 7 only in a zero-weight tap",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "overflow class hit drops",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "overflow without a hit persists",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "tolerance-close tap with a different anchor owner rejected",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "global set: colour/depth equal the existing Upscale pipeline",
+     "owner_renders": 1,
+     "baseline_renders": 1,
+     "queue_submits": 1
+    },
+    {
+     "case": "camera not static: colour/depth equal the existing Upscale pipeline",
+     "owner_renders": 1,
+     "baseline_renders": 1,
+     "queue_submits": 1
+    },
+    {
+     "case": "clamp-only owner recorded: colour 0.45, record {5,7} (Astra t)",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "four history records: per-tap rejection and renormalisation",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "untracked anchor, id above highest, alpha<1 edge, malformed previous record",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    },
+    {
+     "case": "all clear (depth cleared to 1.0): every record (0,0)",
+     "owner_renders": 1,
+     "baseline_renders": 0,
+     "queue_submits": 1
+    }
+   ]
+  },
+  "admission flags, upload charges, reset": {
+   "cap": 671105024,
+   "rows_flags_equal": {
+    "steady 2048^2 16/16": {
+     "draft_with_record": 486555648,
+     "corrected_flags_equal": 486555648,
+     "equal": true
+    },
+    "DRS 16->15 at 2048^2": {
+     "draft_with_record": 619266048,
+     "corrected_flags_equal": 619266048,
+     "equal": true
+    },
+    "DRS 15->16 at 2048^2": {
+     "draft_with_record": 619266048,
+     "corrected_flags_equal": 619266048,
+     "equal": true
+    },
+    "resize 2048^2 -> 2048x1920 16/16": {
+     "draft_with_record": "refused:ceiling",
+     "corrected_flags_equal": "refused:ceiling",
+     "equal": true
+    },
+    "resize 1920x1080 -> 2560x1440 16/16": {
+     "draft_with_record": 618074112,
+     "corrected_flags_equal": 618074112,
+     "equal": true
+    },
+    "resize 2560x1440 -> 2560x1600 8/16": {
+     "draft_with_record": 577830912,
+     "corrected_flags_equal": 577830912,
+     "equal": true
+    },
+    "steady 2560x1600 8/16": {
+     "draft_with_record": 367706112,
+     "corrected_flags_equal": 367706112,
+     "equal": true
+    }
+   },
+   "flag_mismatch": {
+    "output record flag differs at 2048^2": {
+     "draft_extent_only": 486555648,
+     "corrected": 620773376,
+     "undercount": 134217728
+    },
+    "motion owner flag differs at 2048^2": {
+     "draft_extent_only": 486555648,
+     "corrected": 587218944,
+     "undercount": 100663296
+    }
+   },
+   "instance_subcap_charges": {
+    "owner_changes_uniform_gpu": 12528,
+    "owner_changes_upload_cpu": 12528,
+    "accepted_lights_cpu_max": 263168,
+    "total": 288224
+   },
+   "provenance_words_needed": 3126,
+   "uniform_words": 3128,
+   "reset_sequence": [
+    {
+     "submit": [
+      [
+       2048,
+       1920
+      ],
+      [
+       2048,
+       1920
+      ]
+     ],
+     "result": "refused:ceiling",
+     "retained": {
+      "motion": [
+       2048,
+       2048
+      ],
+      "output": [
+       2048,
+       2048
+      ],
+      "overlay": [
+       2048,
+       2048
+      ]
+     }
+    },
+    {
+     "op": "invalidate_motion_history (cut): MotionState::invalidate only; Targets, Output, Overlay kept"
+    },
+    {
+     "submit": [
+      [
+       2048,
+       1920
+      ],
+      [
+       2048,
+       1920
+      ]
+     ],
+     "result": "refused:ceiling",
+     "retained": {
+      "motion": [
+       2048,
+       2048
+      ],
+      "output": [
+       2048,
+       2048
+      ],
+      "overlay": [
+       2048,
+       2048
+      ]
+     }
+    },
+    {
+     "op": "enable_temporal_upscaling(same config): new State (no Output/Overlay), new MotionState (targets None), attachment flag preserved"
+    },
+    {
+     "submit": [
+      [
+       2048,
+       1920
+      ],
+      [
+       2048,
+       1920
+      ]
+     ],
+     "result": 464535552,
+     "retained": {
+      "motion": [
+       2048,
+       1920
+      ],
+      "output": [
+       2048,
+       1920
+      ],
+      "overlay": [
+       2048,
+       1920
+      ]
+     }
+    }
+   ]
+  }
+ }
+}
