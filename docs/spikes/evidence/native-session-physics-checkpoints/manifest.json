@@ -1,0 +1,137 @@
+{
+  "format": "incant.native-session-physics.cpu-evidence",
+  "version": 1,
+  "source_commit": "515df4824e2e949721eb2d9dccc73d6aefab5e70",
+  "source_freeze": "source-004/freeze.json",
+  "archive": {
+    "path": "records.json.gz",
+    "sha256": "57dfa9478766ce27aabe3d02d8f963ce67c7dc2a285483ebb3d6b9e6ee01c9d5",
+    "records": 101,
+    "payloads": 62
+  },
+  "commands": [
+    {
+      "receipt": "all-det-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "all-fast8-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-det-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "clippy-fast8-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "conventions-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "diff-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "feature-off-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "fmt-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "focused-det-001.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "focused-det-002.json",
+      "exit_code": 101
+    },
+    {
+      "receipt": "focused-det-003.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "graph-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "lean-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "manifest-004.json",
+      "exit_code": 1
+    },
+    {
+      "receipt": "optional-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "selected-det-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "selected-fast8-004.json",
+      "exit_code": 0
+    },
+    {
+      "receipt": "wasm-004.json",
+      "exit_code": 0
+    }
+  ],
+  "binaries": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-physics-checkpoints-001/binaries-all-det-004/incant_script-eb7148e75df1b4b6",
+      "path": "binaries-all-det-004/incant_script-eb7148e75df1b4b6",
+      "sha256": "8502aba7bd31519220b432641b215f76f9ea87506fb2bbadd8eb589031c2e238",
+      "bytes": 21330176,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-physics-checkpoints-001/binaries-all-fast8-004/incant_script-654bf1457c88ff7d",
+      "path": "binaries-all-fast8-004/incant_script-654bf1457c88ff7d",
+      "sha256": "ef135ffc190e16b32b2c38e70b98dba58b66976781e40f784e6dfe38c670c64f",
+      "bytes": 20887296,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-physics-checkpoints-001/binaries-feature-off-004/incant_script-78d8b7d6011aa5d0",
+      "path": "binaries-feature-off-004/incant_script-78d8b7d6011aa5d0",
+      "sha256": "c7e51e51cb9987b5b4c5a662243400b979d5d747a0245d73ff4ddee8903ae086",
+      "bytes": 19927936,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-physics-checkpoints-001/binaries-focused-det-001/incant_script-eb7148e75df1b4b6",
+      "path": "binaries-focused-det-001/incant_script-eb7148e75df1b4b6",
+      "sha256": "8b2254bbf1e89df67bb9a574b440908fa6d74781f3aa191ea860504b12653226",
+      "bytes": 21322976,
+      "mode": "0o755"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-session-physics-checkpoints-001/binaries-focused-det-003/incant_script-eb7148e75df1b4b6",
+      "path": "binaries-focused-det-003/incant_script-eb7148e75df1b4b6",
+      "sha256": "e9cf0b53de176bf10fcdcc8543987b6bdaacc2b455d7884aaf5e749634b2bade",
+      "bytes": 21330176,
+      "mode": "0o755"
+    }
+  ],
+  "test_summaries": {
+    "all-det-004.log": 195,
+    "all-fast8-004.log": 195,
+    "feature-off-004.log": 186,
+    "focused-det-003.log": 9
+  },
+  "limits": [
+    "Source001 independent review; source002/003 fixture correction and source004 identity-list addition retained for final review.",
+    "Conservative manifest guard failed: 12 baseline diagnostics and one transitive script diagnostic; separate root-owned repair pending.",
+    "Both actual scoped normal mode graphs pass all five solver feature assertions.",
+    "Test totals overlap focused cases. Optional host features are compile-only; this slice is headless.",
+    "Only immediately copied library test executables retained; integration and doc tests have logs, not retained executables.",
+    "No arbitrary VM heap, Wasm checkpoint, hosted UI/audio continuation, exported player, GPU/device or persisted physics admission claim."
+  ]
+}
