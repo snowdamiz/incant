@@ -6,6 +6,7 @@ mod arena;
 mod arena_codec;
 mod attachment;
 mod attachment_codec;
+mod body_state;
 mod coarena;
 mod coarena_codec;
 mod codec;
@@ -24,6 +25,7 @@ pub use arena::*;
 pub use arena_codec::{decode_arena, encode_arena};
 pub use attachment::*;
 pub use attachment_codec::{decode_attachments, encode_attachments};
+pub use body_state::*;
 pub use coarena::*;
 pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
@@ -61,6 +63,8 @@ pub enum Error {
     PendingMutation,
     Manifold,
     Workspace,
+    Body,
+    UnsupportedBody,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

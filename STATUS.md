@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Exact physics saves — inert regular body state verified locally
+
+The inert path now retains every fixed regular rigid-body field, including
+mass/force/velocity/CCD caches, activation history, exact u128 user data and
+island scalar references, bound to checked body/attachment rows. 101 CPU tests
+and all scoped checks pass; native both-dimension evidence covers force/mass
+changes, sleep/wake, automatic CCD and removal/reuse. Independent review is
+pending. Derived mass/island consistency, solver work admission, complete
+collider/owner construction and exact continuation remain required; physics
+saves stay refused. [Body contract](docs/spikes/physics-inert-body-state.md).
+
 ## Exact physics saves — inert pair persistence verified locally
 
 The std-only inert format now checks rigid pair event/color/recycle fields and

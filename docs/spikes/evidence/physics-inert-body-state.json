@@ -1,0 +1,1538 @@
+{
+  "format": "incant-physics-inert-body-state-evidence",
+  "version": 1,
+  "scope": "all fixed regular rigid-body payloads bound to checked body/attachment rows; no live reconstruction or save admission",
+  "base": "77910a658f7badd679d4cddbd8f89cc6dab5aeb6",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/freeze.json",
+    "sha256": "84ae6c4e7a9ff96c80740701c6e928325a6443650d85dc07538ce3ef9d0f89fe"
+  },
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c",
+      "bytes": 252225,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc",
+      "bytes": 564,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/arena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd",
+      "bytes": 6312,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/attachment.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/codec.rs",
+      "sha256": "d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a",
+      "bytes": 8261,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/body_state/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "f35bd4006c201edcc5c899736cc2c3c973e301a472451d9b2fd324aaa089d605",
+      "bytes": 4277,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/validate.rs",
+      "sha256": "e6e319d5be06d1a4c2bc51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c",
+      "bytes": 4561,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/body_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/coarena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c",
+      "bytes": 4100,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "92fad5da7c94e828b62aac55b843029833831bc90d5fa0cbda20522cd6fe798f",
+      "bytes": 1980,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "sha256": "a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22",
+      "bytes": 2537,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/records.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/body_state.rs",
+      "sha256": "7631db3d37eb968604f4be9c665bed50b4761b4f9701ccb9763642cf631ded99",
+      "bytes": 15542,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/body_state.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+      "bytes": 13804,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/pair_state.rs",
+      "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+      "bytes": 9879,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+      "bytes": 4776,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+      "sha256": "a44e5660e03a35043b3579c759c0d2ec5d3bceaed641ff93f9934d6f469049e8",
+      "bytes": 18735,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_bodies.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "70dd4b05a4bc37567b093c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf",
+      "bytes": 33434,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs"
+    }
+  ],
+  "pinned": [
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/rigid_body.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/rigid_body.rs",
+      "sha256": "435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef",
+      "bytes": 87505
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/ccd/ccd_solver.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/ccd/ccd_solver.rs",
+      "sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "bytes": 15439
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/solver/staged_island_solver/worker.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/solver/staged_island_solver/worker.rs",
+      "sha256": "32d2193f16adcfe3c61b1e804ebe5a03e4bc195120ed348c62def212584aa575",
+      "bytes": 51151
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/pipeline/physics_world.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/pipeline/user_changes.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/pipeline/user_changes.rs",
+      "sha256": "4c5de6ec8ad0fbfa7328f284ba9a68272ac4a979ccb5efe07c2b5a3b4af606ae",
+      "bytes": 11207
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/pipeline/physics_pipeline/quarantine.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/pipeline/physics_pipeline/quarantine.rs",
+      "sha256": "0c0034fa7313234e58cfef31b832f7a97fa787be5e004550e5273944b8f1eb93",
+      "bytes": 17765
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/data/arena.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/data/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/mass_properties/mass_properties.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/parry2d-0.31.1/mass_properties/mass_properties.rs",
+      "sha256": "6f985ee56e7066b4fe9d6d06cba1ad482b3caa55669fd06f9f05398335fd782e",
+      "bytes": 28203
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/rigid_body.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/rigid_body.rs",
+      "sha256": "435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef",
+      "bytes": 87505
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/ccd/ccd_solver.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/ccd/ccd_solver.rs",
+      "sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "bytes": 15439
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/solver/staged_island_solver/worker.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/solver/staged_island_solver/worker.rs",
+      "sha256": "32d2193f16adcfe3c61b1e804ebe5a03e4bc195120ed348c62def212584aa575",
+      "bytes": 51151
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/pipeline/physics_world.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/pipeline/user_changes.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/pipeline/user_changes.rs",
+      "sha256": "4c5de6ec8ad0fbfa7328f284ba9a68272ac4a979ccb5efe07c2b5a3b4af606ae",
+      "bytes": 11207
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/pipeline/physics_pipeline/quarantine.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/pipeline/physics_pipeline/quarantine.rs",
+      "sha256": "0c0034fa7313234e58cfef31b832f7a97fa787be5e004550e5273944b8f1eb93",
+      "bytes": 17765
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/data/arena.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/data/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/mass_properties/mass_properties.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/parry3d-0.31.1/mass_properties/mass_properties.rs",
+      "sha256": "6f985ee56e7066b4fe9d6d06cba1ad482b3caa55669fd06f9f05398335fd782e",
+      "bytes": 28203
+    }
+  ],
+  "commands": [
+    {
+      "label": "tests-001",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872005406524000,
+      "end_ns": 1791872008762398000,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-001.log",
+      "log_sha256": "7b3429f71548e34f535684633f2f0587b765b8f4f323e7461a70ae89d26e3f45"
+    },
+    {
+      "label": "tests-002",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872023195831000,
+      "end_ns": 1791872027208136000,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-002.log",
+      "log_sha256": "3b08ecc257b800eb67bbb6a4e41efa890f91565c62244eb9758b407413711998"
+    },
+    {
+      "label": "native-diagnostic-001",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--test",
+        "trusted_bodies",
+        "planar::actual_forces",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872041866975000,
+      "end_ns": 1791872042010513000,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/native-diagnostic-001.log",
+      "log_sha256": "263b6d1bb4a75e17d5933c9c0e4d280fd2b8a452db282c963227afaccf4ed646"
+    },
+    {
+      "label": "native-003",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--test",
+        "trusted_bodies",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872062086277000,
+      "end_ns": 1791872063200263000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/native-003.log",
+      "log_sha256": "d3b72dfd9b29d20ba54b49ad652e0ae74588afecc76675e5b7ed0b45383907ae"
+    },
+    {
+      "label": "tests-004",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872182480334000,
+      "end_ns": 1791872184221662000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-004.log",
+      "log_sha256": "968e14499fcfddc092a409e706a3d6a40a35612837d98d767723795588fb4cb8"
+    },
+    {
+      "label": "tests-005",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872228822084000,
+      "end_ns": 1791872230104478000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-005.log",
+      "log_sha256": "c05ea189ccbcfb9d73a0519d6da27e93490b876770dc5152d9b94d37a05df5e9"
+    },
+    {
+      "label": "clippy-001",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872259633565000,
+      "end_ns": 1791872260578339000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/clippy-001.log",
+      "log_sha256": "473e128d1cd99be1cec591ab9c2467dd40bbbab4273676f15da8fed0b4eb6084"
+    },
+    {
+      "label": "wasm32-001",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872260602926000,
+      "end_ns": 1791872260964435000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/wasm32-001.log",
+      "log_sha256": "928100d4df9bceb7821d3adea0a39ed961bdfdab7bf35ab8773b26806d710b99"
+    },
+    {
+      "label": "normal-graph-001",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872260990318000,
+      "end_ns": 1791872261095319000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/normal-graph-001.log",
+      "log_sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c"
+    },
+    {
+      "label": "runtime-graphs-001",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872261119737000,
+      "end_ns": 1791872261414074000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/runtime-graphs-001.log",
+      "log_sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0"
+    },
+    {
+      "label": "fmt-001",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872261438579000,
+      "end_ns": 1791872261541595000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/fmt-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions-001",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872261565139000,
+      "end_ns": 1791872261591928000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/conventions-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "diff-001",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791872261614932000,
+      "end_ns": 1791872261632459000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/diff-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "final_commands": 8,
+  "tests": {
+    "passed": 101,
+    "failed": 0,
+    "ignored": 0,
+    "nonempty_groups": 16,
+    "all_groups": 18
+  },
+  "native_observations": [
+    "BODY_NATIVE dimension=2 forces=true activation=true mass_variants=true kinematics=true disabled=true removed_reused=true",
+    "BODY_NATIVE dimension=3 forces=true activation=true mass_variants=true kinematics=true disabled=true removed_reused=true",
+    "BODY_NATIVE dimension=2 automatic_ccd=true ccd_without_full_enabled=true natural_sleep=true history_steps=91",
+    "BODY_NATIVE dimension=3 automatic_ccd=true ccd_without_full_enabled=true natural_sleep=true history_steps=91",
+    "MANIFOLD_NATIVE dimension=2 compound=true cluster=false transformed=false mixed_children=false warm=true",
+    "PAIR_STATE_NATIVE dimension=2 events=true recycle_reference_reused=true forced_full_changed=true composite_swap=true two_composite=true churn=true both_traversal_sizes=true",
+    "MANIFOLD_NATIVE dimension=2 plain_warm=true removed_reused=true pending_refused=true",
+    "MANIFOLD_NATIVE dimension=3 compound=true cluster=true transformed=true mixed_children=true warm=true",
+    "MANIFOLD_NATIVE dimension=3 plain_warm=true removed_reused=true pending_refused=true",
+    "PAIR_STATE_NATIVE dimension=3 events=true recycle_reference_reused=true forced_full_changed=true composite_swap=true two_composite=true churn=true both_traversal_sizes=true"
+  ],
+  "records": [
+    {
+      "name": "checks.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/checks.py",
+      "sha256": "cb2b8590ba394ac1b8fa3208afc865d6c0c96963d080aa10683a08d59c575a26",
+      "bytes": 884,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/cb2b8590ba394ac1b8fa3208afc865d6c0c96963d080aa10683a08d59c575a26.gz",
+      "retained_sha256": "857d33495c109cfa5c903fbf34032b80cfe8344c02b2e6df90c9ffb95827b316"
+    },
+    {
+      "name": "clippy-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/clippy-001.json",
+      "sha256": "69df333dabe01fd029451fa12b60471329ad4df31f5cc4939546834e3bfe5a7b",
+      "bytes": 697,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/69df333dabe01fd029451fa12b60471329ad4df31f5cc4939546834e3bfe5a7b.gz",
+      "retained_sha256": "8f733e9880a1fa304901a06a78e731a8f6250d3681f6098455a86c3ffc59db6b"
+    },
+    {
+      "name": "clippy-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/clippy-001.log",
+      "sha256": "473e128d1cd99be1cec591ab9c2467dd40bbbab4273676f15da8fed0b4eb6084",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/473e128d1cd99be1cec591ab9c2467dd40bbbab4273676f15da8fed0b4eb6084.gz",
+      "retained_sha256": "a9340b8141af602c2e6a1fb55a5a53c18d667036cd63f3e772ceb9cdbed9d4c6"
+    },
+    {
+      "name": "conventions-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/conventions-001.json",
+      "sha256": "01a7b29907d3aa9ea3e8ae92ce9d547bd406b955fa3fa29bd112daaa3da14c5f",
+      "bytes": 565,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/01a7b29907d3aa9ea3e8ae92ce9d547bd406b955fa3fa29bd112daaa3da14c5f.gz",
+      "retained_sha256": "766dd57188d3313109222d9a643385c4d78a570e90aa8a3976c2045e907b7954"
+    },
+    {
+      "name": "conventions-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "diff-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/diff-001.json",
+      "sha256": "e191c09390b1777ef434a77cccbc7fbd05fe1d0bc20c38c03ccd170dad67a7f5",
+      "bytes": 529,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/e191c09390b1777ef434a77cccbc7fbd05fe1d0bc20c38c03ccd170dad67a7f5.gz",
+      "retained_sha256": "fc238e7e7f746fcad6f7988c60263bed21fe20f150bc06a1527a7898a24b1a96"
+    },
+    {
+      "name": "diff-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "fmt-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/fmt-001.json",
+      "sha256": "5825fac93b7c92a905c7e33cb087c3971b4ee594210d53354f095031bab48911",
+      "bytes": 578,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/5825fac93b7c92a905c7e33cb087c3971b4ee594210d53354f095031bab48911.gz",
+      "retained_sha256": "01b6b4b1af6013c9bf3b3cbe319330bb00850221a381f5a2b1d8e23e4a34c054"
+    },
+    {
+      "name": "fmt-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "formatted-macro.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/formatted-macro.rs",
+      "sha256": "f25f0107a784b92448896e0214aa79fefa8ea78c8b5e5185805102cbc44601bc",
+      "bytes": 11138,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/f25f0107a784b92448896e0214aa79fefa8ea78c8b5e5185805102cbc44601bc.gz",
+      "retained_sha256": "70e022aadc1b551a450ee332d36c8f318edd71900d1ba760d7a1b051f1bf0463"
+    },
+    {
+      "name": "native-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/native-003.json",
+      "sha256": "79d96305bf763b490a3d755d9fbdc49771affd8dee1fc6dc931f164d9973ef3d",
+      "bytes": 703,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/79d96305bf763b490a3d755d9fbdc49771affd8dee1fc6dc931f164d9973ef3d.gz",
+      "retained_sha256": "8ee2cbf1946f26743d23e2e7924db4f96d011e42fda41d49cb8e2ea9afd3e4d6"
+    },
+    {
+      "name": "native-003.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/native-003.log",
+      "sha256": "d3b72dfd9b29d20ba54b49ad652e0ae74588afecc76675e5b7ed0b45383907ae",
+      "bytes": 981,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/d3b72dfd9b29d20ba54b49ad652e0ae74588afecc76675e5b7ed0b45383907ae.gz",
+      "retained_sha256": "d255b051309199e772effb3d5153438037b33b340b2efe33304420b087a91fdf"
+    },
+    {
+      "name": "native-diagnostic-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/native-diagnostic-001.json",
+      "sha256": "8ce2129dcbcadda8485a0d8ee6c70072c9e295920dc9be41bfd339b8e738cf88",
+      "bytes": 745,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/8ce2129dcbcadda8485a0d8ee6c70072c9e295920dc9be41bfd339b8e738cf88.gz",
+      "retained_sha256": "cf389955946c54dd93f39883561eebc52f80e99f05cba7bf62aa4ab205af49ed"
+    },
+    {
+      "name": "native-diagnostic-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/native-diagnostic-001.log",
+      "sha256": "263b6d1bb4a75e17d5933c9c0e4d280fd2b8a452db282c963227afaccf4ed646",
+      "bytes": 1874,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/263b6d1bb4a75e17d5933c9c0e4d280fd2b8a452db282c963227afaccf4ed646.gz",
+      "retained_sha256": "42aa92e5b94ed346108767745b6f26f61274f4cb6b612a69cccf08d87052ce07"
+    },
+    {
+      "name": "normal-graph-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/normal-graph-001.json",
+      "sha256": "c3a50a70dc813cc6723fa8756dd7ef8778231bb8c5b0b7df18c571e2bf1a0f48",
+      "bytes": 658,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/c3a50a70dc813cc6723fa8756dd7ef8778231bb8c5b0b7df18c571e2bf1a0f48.gz",
+      "retained_sha256": "1406af593f6368a061ae2825b63dc0b7f387e892ec2728736b29b608b4b68208"
+    },
+    {
+      "name": "normal-graph-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/normal-graph-001.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "bytes": 124,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c.gz",
+      "retained_sha256": "b212649c683b80fc2d54b1aa54497594d1b7f5cb99243c3dad0ee95afaaa6ecd"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/mass_properties/mass_properties.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/parry2d-0.31.1/mass_properties/mass_properties.rs",
+      "sha256": "6f985ee56e7066b4fe9d6d06cba1ad482b3caa55669fd06f9f05398335fd782e",
+      "bytes": 28203,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/6f985ee56e7066b4fe9d6d06cba1ad482b3caa55669fd06f9f05398335fd782e.gz",
+      "retained_sha256": "07029a607ad7a08087018e026b5e5c342d795694f6cd1791db638bb4224d4dfd"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/mass_properties/mass_properties.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/parry3d-0.31.1/mass_properties/mass_properties.rs",
+      "sha256": "6f985ee56e7066b4fe9d6d06cba1ad482b3caa55669fd06f9f05398335fd782e",
+      "bytes": 28203,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/6f985ee56e7066b4fe9d6d06cba1ad482b3caa55669fd06f9f05398335fd782e.gz",
+      "retained_sha256": "07029a607ad7a08087018e026b5e5c342d795694f6cd1791db638bb4224d4dfd"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/data/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/data/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915.gz",
+      "retained_sha256": "a18211d1570df2ecbabc6c810009565e7b001423611e9730c51cad9acc744db7"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/dynamics/ccd/ccd_solver.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/ccd/ccd_solver.rs",
+      "sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "bytes": 15439,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8.gz",
+      "retained_sha256": "670c6c65a42ff19ad1161885e61c16417ec08c3695bdb36751251d61396c29ff"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/dynamics/rigid_body.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/rigid_body.rs",
+      "sha256": "435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef",
+      "bytes": 87505,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef.gz",
+      "retained_sha256": "f516a732d309faf3fd7766b2cdf44a92b9e8dd9969294a34368b773327642211"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/dynamics/rigid_body_components.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4.gz",
+      "retained_sha256": "bd0c7dd4f1ad009dec6df2849c3b9cbbb3e975e43d33e30d20ce3240fb222484"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/dynamics/rigid_body_set.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da.gz",
+      "retained_sha256": "af85df67981cc2de979a0cd0417ed9a2939d05798403ea912883b1dc580a60fd"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/dynamics/solver/staged_island_solver/worker.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/dynamics/solver/staged_island_solver/worker.rs",
+      "sha256": "32d2193f16adcfe3c61b1e804ebe5a03e4bc195120ed348c62def212584aa575",
+      "bytes": 51151,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/32d2193f16adcfe3c61b1e804ebe5a03e4bc195120ed348c62def212584aa575.gz",
+      "retained_sha256": "4a9b9e47c05accde3483ae56c66cf25647079636f148fb054a6ebab8b16094d6"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/pipeline/physics_pipeline/quarantine.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/pipeline/physics_pipeline/quarantine.rs",
+      "sha256": "0c0034fa7313234e58cfef31b832f7a97fa787be5e004550e5273944b8f1eb93",
+      "bytes": 17765,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/0c0034fa7313234e58cfef31b832f7a97fa787be5e004550e5273944b8f1eb93.gz",
+      "retained_sha256": "a62f3a0592e2552f83451a37e887853b025a0baeca319266d8229910bf705e88"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/pipeline/physics_world.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de.gz",
+      "retained_sha256": "edaa0db7ec4ac1b4716067ef7d3d0c9746901f99dcbbd70c564631d4ac9ac724"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/pipeline/user_changes.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier2d-0.36.0/pipeline/user_changes.rs",
+      "sha256": "4c5de6ec8ad0fbfa7328f284ba9a68272ac4a979ccb5efe07c2b5a3b4af606ae",
+      "bytes": 11207,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4c5de6ec8ad0fbfa7328f284ba9a68272ac4a979ccb5efe07c2b5a3b4af606ae.gz",
+      "retained_sha256": "a765e517ad6de18c8b827d6c7a8d1c8e0376d018c22c6a5d05e4f6146de00d30"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/data/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/data/arena.rs",
+      "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "bytes": 34497,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915.gz",
+      "retained_sha256": "a18211d1570df2ecbabc6c810009565e7b001423611e9730c51cad9acc744db7"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/dynamics/ccd/ccd_solver.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/ccd/ccd_solver.rs",
+      "sha256": "0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8",
+      "bytes": 15439,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/0543f497406c6d404b6b214d42333532bfe97fc07180da2c946d196d60b7fee8.gz",
+      "retained_sha256": "670c6c65a42ff19ad1161885e61c16417ec08c3695bdb36751251d61396c29ff"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/dynamics/rigid_body.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/rigid_body.rs",
+      "sha256": "435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef",
+      "bytes": 87505,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef.gz",
+      "retained_sha256": "f516a732d309faf3fd7766b2cdf44a92b9e8dd9969294a34368b773327642211"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/dynamics/rigid_body_components.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4.gz",
+      "retained_sha256": "bd0c7dd4f1ad009dec6df2849c3b9cbbb3e975e43d33e30d20ce3240fb222484"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/dynamics/rigid_body_set.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da.gz",
+      "retained_sha256": "af85df67981cc2de979a0cd0417ed9a2939d05798403ea912883b1dc580a60fd"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/dynamics/solver/staged_island_solver/worker.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/dynamics/solver/staged_island_solver/worker.rs",
+      "sha256": "32d2193f16adcfe3c61b1e804ebe5a03e4bc195120ed348c62def212584aa575",
+      "bytes": 51151,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/32d2193f16adcfe3c61b1e804ebe5a03e4bc195120ed348c62def212584aa575.gz",
+      "retained_sha256": "4a9b9e47c05accde3483ae56c66cf25647079636f148fb054a6ebab8b16094d6"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/pipeline/physics_pipeline/quarantine.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/pipeline/physics_pipeline/quarantine.rs",
+      "sha256": "0c0034fa7313234e58cfef31b832f7a97fa787be5e004550e5273944b8f1eb93",
+      "bytes": 17765,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/0c0034fa7313234e58cfef31b832f7a97fa787be5e004550e5273944b8f1eb93.gz",
+      "retained_sha256": "a62f3a0592e2552f83451a37e887853b025a0baeca319266d8229910bf705e88"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/pipeline/physics_world.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de.gz",
+      "retained_sha256": "edaa0db7ec4ac1b4716067ef7d3d0c9746901f99dcbbd70c564631d4ac9ac724"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/pipeline/user_changes.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned/rapier3d-0.36.0/pipeline/user_changes.rs",
+      "sha256": "4c5de6ec8ad0fbfa7328f284ba9a68272ac4a979ccb5efe07c2b5a3b4af606ae",
+      "bytes": 11207,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4c5de6ec8ad0fbfa7328f284ba9a68272ac4a979ccb5efe07c2b5a3b4af606ae.gz",
+      "retained_sha256": "a765e517ad6de18c8b827d6c7a8d1c8e0376d018c22c6a5d05e4f6146de00d30"
+    },
+    {
+      "name": "pinned-sources.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/pinned-sources.json",
+      "sha256": "50c7f814467c2ae8db47d846d0068797cc016723e9b1979ce0a8a4c0c5ee2377",
+      "bytes": 7775,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/50c7f814467c2ae8db47d846d0068797cc016723e9b1979ce0a8a4c0c5ee2377.gz",
+      "retained_sha256": "829e4eb8a1ad1f5deaf861a64795c09e6273782a71f2353dcc7931314cc556d1"
+    },
+    {
+      "name": "retain.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/retain.py",
+      "sha256": "ea9e20bb4760c8f1205d12540a3d77e008ef7116a0fb4e91b87bbc4407c63c5b",
+      "bytes": 3712,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/ea9e20bb4760c8f1205d12540a3d77e008ef7116a0fb4e91b87bbc4407c63c5b.gz",
+      "retained_sha256": "e0c66705a204394e07ec0cfcc6e2852d88c3209591b4883fdd3517a7b3c33e57"
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/run.py",
+      "sha256": "92be05d222a66c379ef2798ead1358f399eb317d7098687df3e7b682e0c5d79c",
+      "bytes": 944,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/92be05d222a66c379ef2798ead1358f399eb317d7098687df3e7b682e0c5d79c.gz",
+      "retained_sha256": "91275cd9941ae56c068607550ac3d57425b390ed4f0d0a7a52f80baad9c80ebf"
+    },
+    {
+      "name": "runtime-graphs-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/runtime-graphs-001.json",
+      "sha256": "8d75f2d42a7f8a991edb77425ac4826f5b561e25109f8484e235dbdcec322122",
+      "bytes": 653,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/8d75f2d42a7f8a991edb77425ac4826f5b561e25109f8484e235dbdcec322122.gz",
+      "retained_sha256": "c49ff72797cb3f9ab3063804efa8c6e98770de7aec970adb08d47979db43b5cf"
+    },
+    {
+      "name": "runtime-graphs-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/runtime-graphs-001.log",
+      "sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0",
+      "bytes": 113,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz",
+      "retained_sha256": "f5bfcbb956f60d69141e44f0fcb4b30b89968e8c3ac6bba75f729ead5bb0db48"
+    },
+    {
+      "name": "source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/Cargo.lock",
+      "sha256": "624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c",
+      "bytes": 252225,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/624b0f33bb24a7af68453adf53b38c2a8faa30c85064c709fa7e18c18233cf5c.gz",
+      "retained_sha256": "c066d640de846f90fc421c505bc7f4ae957216f3dbd6afec3c07419b0208f6b9"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc",
+      "bytes": 564,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4c5d3d1849ba95842aaf0f8905785b1f5298e764b3fce5f6f8b61813c17fb2dc.gz",
+      "retained_sha256": "7ed7a4bcb142ab649f5ac80bae4e60b7e80a28abd3cf57b5a7f85363546b7971"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd",
+      "bytes": 6312,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd.gz",
+      "retained_sha256": "2fcdbf041b1d0058ed06008a99cba3866febc7b44ec16a59b7e3758b9bd385b5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz",
+      "retained_sha256": "22fd4278b32061f4a4916fcb42eebf5232e42656f4d8b9f78ca68d99364993e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/body_state/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/body_state/codec.rs",
+      "sha256": "d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a",
+      "bytes": 8261,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a.gz",
+      "retained_sha256": "5ea4abb86060dccf76507838d4a0968dc380dae98297bd2c560d451236b258ad"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "f35bd4006c201edcc5c899736cc2c3c973e301a472451d9b2fd324aaa089d605",
+      "bytes": 4277,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/f35bd4006c201edcc5c899736cc2c3c973e301a472451d9b2fd324aaa089d605.gz",
+      "retained_sha256": "304c04773fe7dffec00ad7424036fb2d0c527fb5eaeb5aaa95e0a9a057c0a789"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/body_state/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/body_state/validate.rs",
+      "sha256": "e6e319d5be06d1a4c2bc51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c",
+      "bytes": 4561,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/e6e319d5be06d1a4c2bc51b8bfe7eb1a38be7262d29c8f8c7fdb91d4762a837c.gz",
+      "retained_sha256": "8c5100310b5d833b526060d33163e2aefb7a0ea2954da3533a3ef0e4bf06bf4a"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435.gz",
+      "retained_sha256": "52c6530b76adb7b5df7dddb01957c17c421e97c91094f91a85a92be8c6991925"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz",
+      "retained_sha256": "799de7df2e8e2d2532a546361950d2fcb81f113cdd2194afc7276e7a0609aa51"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c",
+      "bytes": 4100,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/154078d70de04a51c3bd7cf1b53bc09327398cfd11db3ae752d8c2fcdf3db42c.gz",
+      "retained_sha256": "a5667cefbf4163051ae71af2d50b77beda09fd52ffa098a79d8155c7bccfd144"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz",
+      "retained_sha256": "4daca488999b79813b8d0622153cf7bad0359494de2e3c4366065b0ded177de6"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz",
+      "retained_sha256": "018627ff8c2bad3f01c6f68f90869b1eb796c3ec9e6e22109313350820474447"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz",
+      "retained_sha256": "95692b802416ea70654f479fcc8ad52aa816757c8f1412ed20b21390506735c7"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz",
+      "retained_sha256": "e0efb1a6f3a2801a8f5f8118736e218d164039f714aa8357dfe88f2bb86ac475"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz",
+      "retained_sha256": "51f79ac05ab4a561d9f3c453698de006a3af32e3b54ee67de79e11ef7d1226e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "92fad5da7c94e828b62aac55b843029833831bc90d5fa0cbda20522cd6fe798f",
+      "bytes": 1980,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/92fad5da7c94e828b62aac55b843029833831bc90d5fa0cbda20522cd6fe798f.gz",
+      "retained_sha256": "8d65b2ef9c5aade796fe20ba180fa3901d33808955ead108f4142fd49a5056cc"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/codec.rs",
+      "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+      "bytes": 4637,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc.gz",
+      "retained_sha256": "017a075bfb75e587799124996af94d7e2206fee91da4a64617e8ef1bb44495aa"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/mod.rs",
+      "sha256": "a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22",
+      "bytes": 2537,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/a510e47f95c172a23723c6db37e3426e18b0e3552f89c3a6d8253b97b6325b22.gz",
+      "retained_sha256": "fb78d429b0e58871cfd9dc680cc4d6049c43c5f6bd822cbb7de85707d496f10e"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/pair_state/validate.rs",
+      "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+      "bytes": 5380,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256.gz",
+      "retained_sha256": "0258ad74f7f31be8e97e9ae2e06e94c72b456f8143a5ca1d0091d14fdefc0ab5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz",
+      "retained_sha256": "f5d1cc08ac86b9a222fdd5365f8b21b1e78d3c8e00e62b685cc6e07b59614b07"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/body_state.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/body_state.rs",
+      "sha256": "7631db3d37eb968604f4be9c665bed50b4761b4f9701ccb9763642cf631ded99",
+      "bytes": 15542,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/7631db3d37eb968604f4be9c665bed50b4761b4f9701ccb9763642cf631ded99.gz",
+      "retained_sha256": "f8ba11cfdcd0b729482988d646262f28daa526850f928c076cab775f908d0710"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz",
+      "retained_sha256": "1d5d6fdbc3407278563e7b624a70f6667b9fd27ab990c748075eb6d6f0ff3b06"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz",
+      "retained_sha256": "e2174b3374d44cc4e04dff90eed6cbdae38b707a3add41a8a6c416ef8c1c3eae"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+      "bytes": 13804,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9.gz",
+      "retained_sha256": "471dbb5fe5a863f79c04b284504d909cddecffa47dfff776b48fadecd812bb4b"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/pair_state.rs",
+      "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+      "bytes": 9879,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a.gz",
+      "retained_sha256": "48576ffa835fcdc5f165f1cf859436cd7f4c637db29868fcc767b41dff492d8d"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+      "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+      "bytes": 4776,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716.gz",
+      "retained_sha256": "6500077b9b45625a4ab71dd1c6d351a521f9027059f0fe3e47facb2112efa043"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d.gz",
+      "retained_sha256": "fcf02dab1d55a908ce7f0f9c299741dbbfad229d1c3ccf57716611d6c787e8f0"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz",
+      "retained_sha256": "abf5226058381b564373e1497979d6558ea123d4ea69fa32c9ba33bbd174dcdf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz",
+      "retained_sha256": "c83435a4f584fcff511afb55aa2b1f7d0db05041d3efda31c94b687a35fe75cd"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+      "sha256": "a44e5660e03a35043b3579c759c0d2ec5d3bceaed641ff93f9934d6f469049e8",
+      "bytes": 18735,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/a44e5660e03a35043b3579c759c0d2ec5d3bceaed641ff93f9934d6f469049e8.gz",
+      "retained_sha256": "738b9e15d0340b94ea768939fc783b4f991aa5afc6897ceac53b2fd1d38fdebd"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz",
+      "retained_sha256": "6dc0cf3798d24c9c391ef44d7256974ce9fba372867fd09932cfc511f2b58b12"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz",
+      "retained_sha256": "7c1a305ac22b703be8917c876c65eda6a58e55f26ba941b16239c1f5263f880a"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "70dd4b05a4bc37567b093c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf",
+      "bytes": 33434,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/70dd4b05a4bc37567b093c756c398a67b8ea4e57b0a8b62ccc8e70815d8271cf.gz",
+      "retained_sha256": "7188cf4a4db467a9c0ccc29fd16e95e964656a6d2f2b62aefd8f396988e4a33c"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/freeze.json",
+      "sha256": "84ae6c4e7a9ff96c80740701c6e928325a6443650d85dc07538ce3ef9d0f89fe",
+      "bytes": 15722,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/84ae6c4e7a9ff96c80740701c6e928325a6443650d85dc07538ce3ef9d0f89fe.gz",
+      "retained_sha256": "71df513e307ddd86776413a434fa0259d6a45b43298d9331256278ce3f6801eb"
+    },
+    {
+      "name": "source-001/tracked.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/tracked.patch",
+      "sha256": "8fd2cd1325eee7d944b6c46d73c1408e226ad9798bf0fafa5b8717c8a6e2b60d",
+      "bytes": 3190,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/8fd2cd1325eee7d944b6c46d73c1408e226ad9798bf0fafa5b8717c8a6e2b60d.gz",
+      "retained_sha256": "d1c946746e65c03add757ce10759cb807d5f400f8b5f4ed5ac35c83232877f92"
+    },
+    {
+      "name": "terminal-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/terminal-audit.json",
+      "sha256": "f145b40d518e4d42112bc9e96003ba96ba4fcf2e8f9866d0aff3dd6453d5fb77",
+      "bytes": 11871,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/f145b40d518e4d42112bc9e96003ba96ba4fcf2e8f9866d0aff3dd6453d5fb77.gz",
+      "retained_sha256": "fec5b5084037d05328ef1fbefc5b6585c2602db352117a0a588c8cb9653d45e9"
+    },
+    {
+      "name": "tests-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-001.json",
+      "sha256": "da6bd470df408a70fee7e269c88ccd615314d9f8aef81dd82a79dc0c5f6dcba4",
+      "bytes": 668,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/da6bd470df408a70fee7e269c88ccd615314d9f8aef81dd82a79dc0c5f6dcba4.gz",
+      "retained_sha256": "a0c8f137665546262f8fd52604e5c78df34bd341d0f86c429da5ddedf2c7830a"
+    },
+    {
+      "name": "tests-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-001.log",
+      "sha256": "7b3429f71548e34f535684633f2f0587b765b8f4f323e7461a70ae89d26e3f45",
+      "bytes": 4038,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/7b3429f71548e34f535684633f2f0587b765b8f4f323e7461a70ae89d26e3f45.gz",
+      "retained_sha256": "a4be4b842ed6dfbe94e3a42fa2890fdf8f845e05d16f1cca1d5f86b93de6de79"
+    },
+    {
+      "name": "tests-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-002.json",
+      "sha256": "4ae369c0084ebcd13b9dba9f51d8a8a9dbce5d48105ba3cd820e283f1fcdb950",
+      "bytes": 668,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/4ae369c0084ebcd13b9dba9f51d8a8a9dbce5d48105ba3cd820e283f1fcdb950.gz",
+      "retained_sha256": "362136e78d750535b19602fd5f09f91fce521ee283514669de0b6545fdd46048"
+    },
+    {
+      "name": "tests-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-002.log",
+      "sha256": "3b08ecc257b800eb67bbb6a4e41efa890f91565c62244eb9758b407413711998",
+      "bytes": 9738,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/3b08ecc257b800eb67bbb6a4e41efa890f91565c62244eb9758b407413711998.gz",
+      "retained_sha256": "aaab32471369809d3a8d15a65d3eaa1969425618875fabeb7494f83b3576821e"
+    },
+    {
+      "name": "tests-004.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-004.json",
+      "sha256": "9211a27a09980fc345711971240607b73bf490ff611521dadefc32c140c7a5e1",
+      "bytes": 666,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/9211a27a09980fc345711971240607b73bf490ff611521dadefc32c140c7a5e1.gz",
+      "retained_sha256": "288d595f85455d90fe91789dfad8099778c2901f1e577bda6db97b5358bfc044"
+    },
+    {
+      "name": "tests-004.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-004.log",
+      "sha256": "968e14499fcfddc092a409e706a3d6a40a35612837d98d767723795588fb4cb8",
+      "bytes": 12956,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/968e14499fcfddc092a409e706a3d6a40a35612837d98d767723795588fb4cb8.gz",
+      "retained_sha256": "bdc744c6711e864d85df919c80fd975e56d8785cf0c2069317bbc4759f358cd6"
+    },
+    {
+      "name": "tests-005.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-005.json",
+      "sha256": "311f7a64be0365ba096575aff7bb1a598a1b9d7dda1359a7ca50734eb1fde087",
+      "bytes": 666,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/311f7a64be0365ba096575aff7bb1a598a1b9d7dda1359a7ca50734eb1fde087.gz",
+      "retained_sha256": "b32d8c3512e77829f8d2cf553fa636719eb66d06815f6b106735a56eb1ef0eb3"
+    },
+    {
+      "name": "tests-005.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/tests-005.log",
+      "sha256": "c05ea189ccbcfb9d73a0519d6da27e93490b876770dc5152d9b94d37a05df5e9",
+      "bytes": 12956,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/c05ea189ccbcfb9d73a0519d6da27e93490b876770dc5152d9b94d37a05df5e9.gz",
+      "retained_sha256": "dc84592bfb81b300ee99057dbec8ca84262435d92b05ff0c13835b8a537a18c0"
+    },
+    {
+      "name": "wasm32-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/wasm32-001.json",
+      "sha256": "27bd3cbe04adc0fd476f0c3da390f093525a13a407832dd1c86a5501279b6250",
+      "bytes": 698,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/27bd3cbe04adc0fd476f0c3da390f093525a13a407832dd1c86a5501279b6250.gz",
+      "retained_sha256": "fe3d568cf697733e75916bf8ff18a869e226813c5756c841a008d3da2e0b4122"
+    },
+    {
+      "name": "wasm32-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/wasm32-001.log",
+      "sha256": "928100d4df9bceb7821d3adea0a39ed961bdfdab7bf35ab8773b26806d710b99",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-body-state/928100d4df9bceb7821d3adea0a39ed961bdfdab7bf35ab8773b26806d710b99.gz",
+      "retained_sha256": "a47d06e4774e0f51792e9bf762b11e87e388534dabea0b49c292148dd0df63b4"
+    }
+  ],
+  "record_count": 99,
+  "payload_count": 87,
+  "independent_review": "pending",
+  "failures": [
+    {
+      "record": "tests-001.json",
+      "cause": "Initial new-test macro variable/syntax errors before source freeze; corrected."
+    },
+    {
+      "record": "tests-002.json",
+      "cause": "Trusted observer assumed soft-body Index tuple; pinned Index actually has named index/generation fields."
+    },
+    {
+      "record": "native-diagnostic-001.json",
+      "cause": "Retained backtrace of same observer error; corrected before native003 and source001."
+    }
+  ],
+  "limits": [
+    "No live constructor, runtime consumer/dependency, physics-save admission or restored-world continuation.",
+    "Completed journal counts are caller-supplied witnesses; future whole owner must derive them from checked payloads.",
+    "Finite/unit/nonnegative supported domain explicitly excludes unchecked invalid/nonfinite native user configurations; common f32::MAX CCD and zero-inverse infinite mass/inertia sentinels are preserved.",
+    "Scalar body IDs, known change flags and cached numeric values do not establish reciprocal island/queue, PSD, derived mass/extent, lock or current/next-pose consistency.",
+    "Exact additional iteration u64 values do not authorize solver work; live owner needs checked platform conversion and workload admission.",
+    "Complete collider/shape/feature, solver/island/CCD-manager, journal/intersection/soft/joint policy and scratch/owner composition remain pending.",
+    "Native state observations and inert bit roundtrip are not safe live construction or exact continuation proof.",
+    "No shipping, phone, GPU, visual or performance gate."
+  ]
+}

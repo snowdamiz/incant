@@ -18,7 +18,10 @@ impl serde::Serializer for Observer {
     type SerializeMap = Entries;
     type SerializeStruct = Fields;
     type SerializeStructVariant = Fields;
-    scalar!(serialize_bool:bool,serialize_i8:i8,serialize_i16:i16,serialize_i32:i32,serialize_i64:i64,serialize_i128:i128,serialize_u8:u8,serialize_u16:u16,serialize_u32:u32,serialize_u64:u64,serialize_u128:u128,serialize_f32:f32,serialize_f64:f64,serialize_char:char,serialize_str:&str,serialize_bytes:&[u8]);
+    scalar!(serialize_bool:bool,serialize_i8:i8,serialize_i16:i16,serialize_i32:i32,serialize_i64:i64,serialize_i128:i128,serialize_u8:u8,serialize_u16:u16,serialize_u32:u32,serialize_u64:u64,serialize_f32:f32,serialize_f64:f64,serialize_char:char,serialize_str:&str,serialize_bytes:&[u8]);
+    fn serialize_u128(self, v: u128) -> Result<Value> {
+        Ok(Value::String(v.to_string()))
+    }
     fn serialize_none(self) -> Result<Value> {
         Ok(Value::Null)
     }
@@ -186,4 +189,9 @@ fn observer_keeps_tuple_keys_order_and_finite_float_bits() {
     assert_eq!(rows[1][0], serde_json::json!([1, 7]));
     assert_eq!((rows[0][1].as_f64().unwrap() as f32).to_bits(), 0x8000_0000);
     assert_eq!((rows[1][1].as_f64().unwrap() as f32).to_bits(), 1);
+}
+
+#[test]
+fn exact_u128_observation_is_not_limited_to_json_integer_range() {
+    assert_eq!(capture(&u128::MAX), Value::String(u128::MAX.to_string()));
 }
