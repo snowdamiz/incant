@@ -1,0 +1,299 @@
+{
+ "model": "0073 implementation-5 consumer contract",
+ "python": "3.14.8",
+ "cap": 671105024,
+ "strides": {
+  "motion": 24,
+  "owner": 4,
+  "output": 32,
+  "overlay": 8,
+  "meta": 16
+ },
+ "sub_caps": {
+  "motion": 100663296,
+  "owner": 16777216,
+  "output": 134217728,
+  "overlay": 33554432,
+  "meta": 67108864
+ },
+ "checks": [
+  {
+   "check": "producer steady owner+upscale total",
+   "ok": true,
+   "total": 419446784
+  },
+  {
+   "check": "producer 2048^2 -> 2048x1920 resize refused",
+   "ok": true,
+   "result": "refused:ceiling"
+  },
+  {
+   "check": "producer 1920^2 internal change admitted",
+   "ok": true,
+   "total": 552157184
+  },
+  {
+   "check": "cap unchanged",
+   "ok": true,
+   "cap": 671105024
+  },
+  {
+   "check": "steady maximum with meta fits",
+   "ok": true
+  },
+  {
+   "check": "DRS at maximum output with meta fits",
+   "ok": true
+  },
+  {
+   "check": "provenance reference cases",
+   "ok": true,
+   "cases": 15
+  }
+ ],
+ "admission": {
+  "steady 2048^2 16/16": {
+   "without_meta": 419446784,
+   "with_meta": 486555648
+  },
+  "DRS 16->15 at 2048^2": {
+   "without_meta": 552157184,
+   "with_meta": 619266048
+  },
+  "DRS 15->16 at 2048^2": {
+   "without_meta": 552157184,
+   "with_meta": 619266048
+  },
+  "resize 2048^2 -> 2048x1920 16/16": {
+   "without_meta": "refused:ceiling",
+   "with_meta": "refused:ceiling"
+  },
+  "resize 1920x1080 -> 2560x1440 16/16": {
+   "without_meta": 525914112,
+   "with_meta": 618074112
+  },
+  "resize 2560x1440 -> 2560x1600 8/16": {
+   "without_meta": 453312512,
+   "with_meta": 577830912
+  },
+  "steady 2560x1600 8/16": {
+   "without_meta": 302170112,
+   "with_meta": 367706112
+  }
+ },
+ "resize_sum_threshold_px_approx": {
+  "16/16": 6391320.0,
+  "12/16": 7866240.0,
+  "8/16": 9418787.0,
+  "4/16": 10683998.0
+ },
+ "provenance": [
+  {
+   "case": "unchanged static pixel persists",
+   "branch": "persist",
+   "expected": "persist",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    9
+   ],
+   "record_out": [
+    2147483653,
+    9
+   ]
+  },
+  {
+   "case": "thin owner missing this phase still persists",
+   "branch": "persist",
+   "expected": "persist",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    9
+   ],
+   "record_out": [
+    2147483653,
+    9
+   ]
+  },
+  {
+   "case": "changed recorded owner absent from support drops",
+   "branch": "drop",
+   "expected": "drop",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    7
+   ],
+   "record_out": [
+    2147483653,
+    0
+   ]
+  },
+  {
+   "case": "changed recorded owner still present reprojects",
+   "branch": "reproject",
+   "expected": "reproject",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    7
+   ],
+   "record_out": [
+    2147483653,
+    7
+   ]
+  },
+  {
+   "case": "changed newcomer in support blocks persistence",
+   "branch": "reproject",
+   "expected": "reproject",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    0
+   ],
+   "record_out": [
+    2147483653,
+    3
+   ]
+  },
+  {
+   "case": "camera change blocks persistence",
+   "branch": "reproject",
+   "expected": "reproject",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    0
+   ],
+   "record_out": [
+    2147483653,
+    0
+   ]
+  },
+  {
+   "case": "light or caster change blocks persistence",
+   "branch": "reproject",
+   "expected": "reproject",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    0
+   ],
+   "record_out": [
+    2147483653,
+    0
+   ]
+  },
+  {
+   "case": "moving pixel reprojects",
+   "branch": "reproject",
+   "expected": "reproject",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    0
+   ],
+   "record_out": [
+    2147483653,
+    0
+   ]
+  },
+  {
+   "case": "overflow without class hit persists",
+   "branch": "persist",
+   "expected": "persist",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    2147486240
+   ],
+   "record_out": [
+    2147483653,
+    2147486240
+   ]
+  },
+  {
+   "case": "overflow collision with a non-contributor drops (cost)",
+   "branch": "drop",
+   "expected": "drop",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    2147486240
+   ],
+   "record_out": [
+    2147483653,
+    9
+   ]
+  },
+  {
+   "case": "overflow with class hit drops",
+   "branch": "drop",
+   "expected": "drop",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    2147486240
+   ],
+   "record_out": [
+    2147483653,
+    9
+   ]
+  },
+  {
+   "case": "unrelated changed owner does not disturb exact record",
+   "branch": "persist",
+   "expected": "persist",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    9
+   ],
+   "record_out": [
+    2147483653,
+    9
+   ]
+  },
+  {
+   "case": "no record reprojects without history",
+   "branch": "reproject_no_record",
+   "expected": "reproject_no_record",
+   "ok": true,
+   "record_in": null,
+   "record_out": [
+    2147483653,
+    0
+   ]
+  },
+  {
+   "case": "malformed record is no history",
+   "branch": "reproject_no_record",
+   "expected": "reproject_no_record",
+   "ok": true,
+   "record_in": [
+    2148532229,
+    0
+   ],
+   "record_out": [
+    2147483653,
+    0
+   ]
+  },
+  {
+   "case": "id above highest is no history",
+   "branch": "reproject_no_record",
+   "expected": "reproject_no_record",
+   "ok": true,
+   "record_in": [
+    2147483653,
+    100001
+   ],
+   "record_out": [
+    2147483653,
+    0
+   ]
+  }
+ ]
+}
