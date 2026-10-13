@@ -209,7 +209,7 @@ fn unsupported_or_noncanonical_geometry_is_refused() {
     noncanonical.segment.a.x = 0.0; // canonical factory has negative zero
     let shapes = [
         SharedShape::capsule_x(0.5, 0.2),
-        SharedShape::compound(vec![(Pose::IDENTITY, SharedShape::ball(0.5))]),
+        SharedShape::compound(vec![(Pose::IDENTITY, SharedShape::capsule_x(0.5, 0.2))]),
         SharedShape::new(noncanonical),
         SharedShape::ball(f32::NAN),
     ];

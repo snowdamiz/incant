@@ -28,7 +28,12 @@ pub(super) fn validate(runtime: &PhysicsWorld2D) -> Result<(), &'static str> {
     {
         return Err("native ownership cardinality");
     }
+    let mut shape_count = 0usize;
     for (id, entry) in &runtime.entries {
+        shape_count = shape_count
+            .checked_add(entry.config.shapes())
+            .filter(|n| *n <= MAX_SHAPES)
+            .ok_or("aggregate shape limit")?;
         if runtime.ids.get(&entry.collider) != Some(id) {
             return Err("collider reverse identity");
         }
@@ -39,11 +44,17 @@ pub(super) fn validate(runtime: &PhysicsWorld2D) -> Result<(), &'static str> {
             incant_types::physics_validation::rigid_body(body)
                 .map_err(|_| "invalid retained body")?;
         }
-        let config::Geometry::Primitive(shape) = &entry.config.geometry else {
-            return Err("tile geometry checkpoint unsupported");
-        };
-        if shape != &entry.config.collider.shape {
-            return Err("retained geometry declaration");
+        match &entry.config.geometry {
+            config::Geometry::Primitive(shape) if shape != &entry.config.collider.shape => {
+                return Err("retained geometry declaration");
+            }
+            config::Geometry::Tiles(_)
+                if entry.config.body.is_some()
+                    || entry.config.collider != incant_types::Collider2D::default() =>
+            {
+                return Err("tile declaration");
+            }
+            _ => {}
         }
         let collider = runtime
             .world
@@ -64,7 +75,7 @@ pub(super) fn validate(runtime: &PhysicsWorld2D) -> Result<(), &'static str> {
         {
             return Err("collider declaration");
         }
-        if !shape_matches(collider.shape(), shape)? {
+        if !geometry_matches(collider.shape(), &entry.config.geometry)? {
             return Err("collider geometry");
         }
         match (entry.body, &entry.config.body) {
@@ -187,4 +198,40 @@ fn shape_matches(shape: &dyn Shape, expected: &ColliderShape2D) -> Result<bool, 
                 && s.segment.b == Vector::new(0., *half_height as f32)
         }),
     })
+}
+
+fn geometry_matches(shape: &dyn Shape, expected: &config::Geometry) -> Result<bool, &'static str> {
+    let config::Geometry::Tiles(parts) = expected else {
+        let config::Geometry::Primitive(primitive) = expected else {
+            unreachable!()
+        };
+        return shape_matches(shape, primitive);
+    };
+    if parts.is_empty() || parts.len() > MAX_SHAPES {
+        return Err("tile part limit");
+    }
+    let Some(compound) = shape.as_compound() else {
+        return Ok(false);
+    };
+    if !compound.flags().is_empty() || compound.shapes().len() != parts.len() {
+        return Ok(false);
+    }
+    for ((pose, child), (center, half)) in compound.shapes().iter().zip(parts) {
+        if !center
+            .iter()
+            .all(|n| n.is_finite() && (*n as f32).is_finite())
+            || !half
+                .iter()
+                .all(|n| n.is_finite() && *n > 0. && (*n as f32).is_finite() && (*n as f32) > 0.)
+            || !array_same(pose.translation.to_array(), center.map(|n| n as f32))
+            || !same(pose.rotation.re, 1.)
+            || !same(pose.rotation.im, 0.)
+            || !child
+                .as_cuboid()
+                .is_some_and(|s| array_same(s.half_extents.to_array(), half.map(|n| n as f32)))
+        {
+            return Ok(false);
+        }
+    }
+    Ok(true)
 }

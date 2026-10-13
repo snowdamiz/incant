@@ -185,14 +185,28 @@ pub(super) fn geometry(
     if id.dimension as usize != crate::math::DIM {
         return Err(s::Error::Geometry);
     }
+    if let Some(compound) = c.shape().as_compound() {
+        let (geometry, acceleration) = compound.checkpoint_capture(id, budget)?;
+        return s::attach_compound(s::validate_geometry(geometry)?, acceleration, budget);
+    }
     let shape = match c.shape().as_typed_shape() {
-        parry::shape::TypedShape::Ball(b) => s::Primitive::Ball {
-            radius: b.radius.to_bits(),
-        },
-        parry::shape::TypedShape::Cuboid(b) => s::Primitive::Box {
-            half_extents: bits(b.half_extents),
-        },
-        parry::shape::TypedShape::Capsule(b) => {
+        parry::shape::TypedShape::Ball(b)
+            if c.shape().as_shape::<parry::shape::Ball>().is_some() =>
+        {
+            s::Primitive::Ball {
+                radius: b.radius.to_bits(),
+            }
+        }
+        parry::shape::TypedShape::Cuboid(b)
+            if c.shape().as_shape::<parry::shape::Cuboid>().is_some() =>
+        {
+            s::Primitive::Box {
+                half_extents: bits(b.half_extents),
+            }
+        }
+        parry::shape::TypedShape::Capsule(b)
+            if c.shape().as_shape::<parry::shape::Capsule>().is_some() =>
+        {
             let h = b.segment.b.y;
             let canonical = parry::shape::Capsule::new_y(h, b.radius);
             // Equality of floating values would silently fold signed zeros.

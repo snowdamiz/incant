@@ -1,0 +1,8 @@
+{
+  "result": "accepted",
+  "head": "e4f7bfad746e239031e49ca1b5a6bf9406ece408",
+  "manifest_sha256": "c17ad95551ff4e849e3b73531263a2551eb89ec87e5d90bf3397cec72afb0f8c",
+  "independent_verifier_exit": 0,
+  "findings": [],
+  "review": "Independently reviewed source-composition verifier and accepted all3667producer inputs with exactlysix already-reviewed main248Default/probe exceptions plus two evidence-onlycollectors. Verified28current+96producerrecords,29immediatecopies,21exactownedgamefiles and three normal graphs. Same39-per-mode source003 execution and33ordinary source002; no new run, cross-build checkpoint, public physics save or device claim. Hosted dependency merge and actualfastSUCCESS remain publisher prerequisites."
+}

@@ -287,3 +287,5 @@ fn spatial_checkpoint_configurations_borrow_ordered_cached_state_and_preserve_au
     );
     assert_eq!(before, frames(&capture(&mut runtime)));
 }
+
+mod compound;

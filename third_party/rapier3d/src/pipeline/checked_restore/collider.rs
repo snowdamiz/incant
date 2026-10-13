@@ -1,10 +1,10 @@
-//! Private primitive shape and collider storage construction, not installation.
+//! Private closed shape and collider storage construction, not installation.
 use super::{NumericFrame, allocation::*, convert::*};
 use crate::data::Arena;
 use crate::geometry::{Collider, ColliderSet, SharedShape};
 use core::alloc::Layout;
 use incant_physics_snapshot::{GeometryKind, Primitive, ValidatedGeometry};
-use parry::shape::{Ball, Capsule, Cuboid};
+use parry::shape::{Ball, Capsule, Compound, Cuboid};
 
 // Conservatively charged logical Arc payload: two counters plus alignment
 // padding before and after T. This is not allocator overhead or exact RSS.
@@ -17,7 +17,10 @@ fn shared_plan<T>() -> ConstructionResult<AllocationPlan> {
 }
 pub(super) fn shape_plan(g: &ValidatedGeometry) -> ConstructionResult<AllocationPlan> {
     if g.record().kind != GeometryKind::Primitive {
-        return Err(ConstructionError::Payload);
+        let compound = g.compound().ok_or(ConstructionError::Payload)?;
+        let mut plan = shared_plan::<Compound>()?;
+        plan.append(Compound::checkpoint_plan(&compound, g.record().identity)?)?;
+        return Ok(plan);
     }
     match g.record().parts[0].shape {
         Primitive::Box { .. } => shared_plan::<Cuboid>(),
@@ -29,6 +32,15 @@ pub(super) fn shape(
     g: &ValidatedGeometry,
     p: &mut AllocationPermit,
 ) -> ConstructionResult<SharedShape> {
+    if g.record().kind != GeometryKind::Primitive {
+        let compound = g.compound().ok_or(ConstructionError::Payload)?;
+        p.charge(shared_plan::<Compound>()?)?;
+        return Ok(SharedShape::new(Compound::from_checkpoint(
+            &compound,
+            g.record().identity,
+            p,
+        )?));
+    }
     p.charge(shape_plan(g)?)?;
     Ok(match g.record().parts[0].shape {
         Primitive::Box { half_extents } => SharedShape::new(Cuboid::new(v(half_extents))),

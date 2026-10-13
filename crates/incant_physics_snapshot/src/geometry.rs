@@ -1,5 +1,4 @@
-//! Closed geometry admission only. Compound acceleration and native stable-ID
-//! correspondence still need validation in the future complete owner format.
+//! Closed geometry declarations with optional, separately checked compound storage.
 use crate::{Dimension, Error, Identity, MAX_ITEMS, Result};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -29,6 +28,7 @@ pub struct GeometryRecord {
 }
 pub struct ValidatedGeometry {
     record: GeometryRecord,
+    pub(crate) compound: Option<crate::compound::CompoundStorage>,
 }
 impl ValidatedGeometry {
     pub fn record(&self) -> &GeometryRecord {
@@ -111,5 +111,8 @@ pub fn validate_geometry(record: GeometryRecord) -> Result<ValidatedGeometry> {
             }
         }
     }
-    Ok(ValidatedGeometry { record })
+    Ok(ValidatedGeometry {
+        record,
+        compound: None,
+    })
 }

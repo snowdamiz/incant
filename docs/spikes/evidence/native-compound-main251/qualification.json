@@ -1,0 +1,179 @@
+{
+  "producer": "9b8d58863ac7fede21086c0b7aec25e5f577a1d5",
+  "main": "b2ad9d5acc7a83bbe79e11157da0b9735b17788a",
+  "composition": "c0f217a41cae76f9a70e1d187b5dc824e93b338f",
+  "inputs": 3155,
+  "exceptions": [
+    {
+      "path": "crates/incant_source/src/tests.rs",
+      "old_sha256": "2574209856ed37af7506623f0a62702ac971248901a9fcadab28affe4043c3a3",
+      "new_sha256": "9b79a8ac38eae436d8d91eb473e1436167808b2349903181e66efebed30912fe",
+      "reason": "Reviewed PR251 test isolation in authoring-only source crate; no runtime/native dependency or build configuration changes."
+    }
+  ],
+  "commands": [
+    {
+      "name": "graph-det",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--offline",
+        "--locked",
+        "-p",
+        "incant_runtime",
+        "--target",
+        "aarch64-apple-darwin",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}",
+        "-e",
+        "normal",
+        "--features",
+        "native-checkpoints"
+      ],
+      "exit": 0,
+      "pid": 96709,
+      "reaped": true,
+      "seconds": 0.554710750002414,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/graph-det.log",
+      "sha256": "5eb5e202539bbf8321e1c447e7b991c59a7ed52c83f794c73875f378f4f91426"
+    },
+    {
+      "name": "graph-fast8",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--offline",
+        "--locked",
+        "-p",
+        "incant_runtime",
+        "--target",
+        "aarch64-apple-darwin",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}",
+        "-e",
+        "normal",
+        "--features",
+        "native-checkpoints,physics-fast-simd8",
+        "--no-default-features"
+      ],
+      "exit": 0,
+      "pid": 96722,
+      "reaped": true,
+      "seconds": 0.24157237500185147,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/graph-fast8.log",
+      "sha256": "ddf55a0bc3b743cca7e0b74cbcfe7895d68a985b380c1f6cdeeb6b9e89e1de5c"
+    },
+    {
+      "name": "graph-ordinary",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--offline",
+        "--locked",
+        "-p",
+        "incant_runtime",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}"
+      ],
+      "exit": 0,
+      "pid": 96730,
+      "reaped": true,
+      "seconds": 0.1838232909940416,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/graph-ordinary.log",
+      "sha256": "431443b8f5be93c0e734411790d2c6860e058bfb407a43ef652cd08b8339dde8"
+    },
+    {
+      "name": "graph-audit-det",
+      "argv": [
+        "python3",
+        "tools/physics_features.py",
+        "graph",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/graph-det.log",
+        "--mode",
+        "deterministic",
+        "--target",
+        "aarch64-apple-darwin"
+      ],
+      "exit": 0,
+      "pid": 96736,
+      "reaped": true,
+      "seconds": 0.07695829099975526,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/graph-audit-det.log",
+      "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+    },
+    {
+      "name": "graph-audit-fast8",
+      "argv": [
+        "python3",
+        "tools/physics_features.py",
+        "graph",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/graph-fast8.log",
+        "--mode",
+        "fast-simd8",
+        "--target",
+        "aarch64-apple-darwin"
+      ],
+      "exit": 0,
+      "pid": 96737,
+      "reaped": true,
+      "seconds": 0.040014707992668264,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/graph-audit-fast8.log",
+      "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "pid": 96738,
+      "reaped": true,
+      "seconds": 1.485982749989489,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "pid": 96747,
+      "reaped": true,
+      "seconds": 0.04088658301043324,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "pid": 96748,
+      "reaped": true,
+      "seconds": 0.024483540997607633,
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-compound-main251/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "graphs_exact": 3,
+  "builds_started": false,
+  "production_tree_source": "97bd21af81cf9444a6563d6c54a6c32d77d8c583"
+}
