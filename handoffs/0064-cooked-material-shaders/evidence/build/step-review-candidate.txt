@@ -1,0 +1,9 @@
+{
+ "variant": "candidate",
+ "seen": [
+  "cooked-geometry,cooked-materials,cooked-output,cooked-sprites,cooked-text,cooked-ui,physics-deterministic"
+ ],
+ "frozen": {
+  "material_review": "25346f7d04c0855109a42defc9eed92c6d7cb7b978821a0052364d4ae652c9ac"
+ }
+}

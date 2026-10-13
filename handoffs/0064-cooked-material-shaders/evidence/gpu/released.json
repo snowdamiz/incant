@@ -1,0 +1,14 @@
+{
+ "packet": "0064-cooked-material-shaders",
+ "released_at": "2026-10-13T01:32:19.130830+00:00",
+ "children": 34,
+ "frames_written": 21,
+ "frames_reserved": 21,
+ "first_start": "2026-10-13T01:24:33.653569+00:00",
+ "last_end": "2026-10-13T01:31:51.848257+00:00",
+ "ledger_sha256": "a89dab777c983ac1acfd44cbee53d83b649eb9138f69caab31071c609f6672c5",
+ "grant_sha256_at_release": "7a067eeb5cbf07cdbb39a83d2d1cf406ff9a3399e00cd08355a7b6ed472b42bf",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "Release by 0064 for Astra; review-ready.json left untouched (only Astra writes it)."
+}

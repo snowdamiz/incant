@@ -1,0 +1,32 @@
+{
+ "main-dry": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/plans/main-dry.json",
+  "sha256": "3ba0c0300d9f27e01e40371ceecb4b0ee1d159d1382298e8d70472ae225b1832",
+  "pngs": [],
+  "frames": 19
+ },
+ "main": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/plans/main.json",
+  "sha256": "5997418fc073c34796705cf2a12b6fa27f196208410c10e6a2bbd2e6ce5bc351",
+  "pngs": [
+   "M-wide.png",
+   "M-close.png",
+   "L-persp-t000.png",
+   "L-persp-t090.png",
+   "L-persp-t092.png",
+   "L-ortho-t090.png",
+   "Z1.png",
+   "R-v1.png",
+   "R-v2.png"
+  ],
+  "frames": 19
+ },
+ "source-free": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/plans/source-free.json",
+  "sha256": "130f2bf68339d4291f62b0a8410aaae029dbd3b999525b63979ddb488267ffc4",
+  "pngs": [
+   "M-wide-source-free.png"
+  ],
+  "frames": 7
+ }
+}

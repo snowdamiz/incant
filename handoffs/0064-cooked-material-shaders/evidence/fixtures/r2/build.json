@@ -1,0 +1,140 @@
+{
+ "started": "2026-10-13T01:31:05.425866+00:00",
+ "tools": {
+  "incant_headless": "ce0d27d2b1f6790639d7bbb412ab09b2a0e5ea3fe347dc3282fc314eaf8c1784",
+  "cook_scene": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53"
+ },
+ "art_manifest_sha256": "db87e661a50540a9dbc5f7613f788eda0f58d384f87c4da3d3a52863d707c413",
+ "boards": {
+  "S": {
+   "project": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r2/S/S.incant.json",
+   "scene_id": "01M4SE4YBPJN5XPEMWH02D5Z78",
+   "imports": {
+    "cube-checker": {
+     "asset": {
+      "id": "01M4SE4YE6P76GHG9DV0WEKQB1",
+      "kind": "model",
+      "name": "cube-checker",
+      "path": "art/cube-checker.gltf",
+      "sha256": "742c883a1dc2d650bd2d8b0598d5ea4641431d43152989a5ec13e5b734528732"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 1
+    },
+    "cube-white": {
+     "asset": {
+      "id": "01M4SE4YG8C9MQX4HRRT2395VC",
+      "kind": "model",
+      "name": "cube-white",
+      "path": "art/cube-white.gltf",
+      "sha256": "b1a92c8bdcf711ca275969d5ba05ce7306adab26234075202a53d1345a52d733"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 2
+    },
+    "floor-gray": {
+     "asset": {
+      "id": "01M4SE4YJ9YNAHBXG1ER2AAB8N",
+      "kind": "model",
+      "name": "floor-gray",
+      "path": "art/floor-gray.gltf",
+      "sha256": "cc657285cc7f8d2013aee49ca08a05fddb1a74726720600009fecbc14923f99c"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 3
+    },
+    "quad-mask": {
+     "asset": {
+      "id": "01M4SE4YMCXN071A6D4ZP94G77",
+      "kind": "model",
+      "name": "quad-mask",
+      "path": "art/quad-mask.gltf",
+      "sha256": "c3e5359ac8702394be1ea4b52e07db1785ac7be3f6f0fb71c72b1eb61eadd1c4"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 4
+    },
+    "sphere-checker": {
+     "asset": {
+      "id": "01M4SE4YPG2S800DZZANHQK1J6",
+      "kind": "model",
+      "name": "sphere-checker",
+      "path": "art/sphere-checker.gltf",
+      "sha256": "a7e8da48eb5920c1f84def706ee29c5046d02f03aca07358bd46fa8e46a9daad"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 5
+    },
+    "sphere-red": {
+     "asset": {
+      "id": "01M4SE4YRNXJ2W50WXSAHN7Y71",
+      "kind": "model",
+      "name": "sphere-red",
+      "path": "art/sphere-red.gltf",
+      "sha256": "462febcf0c0b9d4856eb7902a19e5c494c323702762ba2abdd47fb63d9b03664"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 6
+    },
+    "sky.png": {
+     "asset": {
+      "id": "01M4SE4YV33C0SZ1DTZHNKJNKQ",
+      "import_settings": {
+       "type": "texture",
+       "usage": "color"
+      },
+      "kind": "texture",
+      "name": "sky",
+      "path": "art/sky.png",
+      "sha256": "2a02429cea7ae3615e45fd15fcc4fd20424f0b2d2f57fd3fcb44caef16fffb11"
+     },
+     "changed": true,
+     "diagnostics": [],
+     "revision": 7
+    }
+   },
+   "entities": 16,
+   "transaction_id": "01M4SE4YYWRQ60RJAWX7A30SKJ",
+   "revision": 8,
+   "validate": "{\n  \"diagnostics\": [],\n  \"project_id\": \"01M4SE4YBP2XC5KJVBVR6YCFF2\",\n  \"schema_version\": 1,\n  \"valid\": true\n}",
+   "cameras": {
+    "camera": "01928c4cc40000000000000000000001"
+   },
+   "local_lights": {},
+   "cooked": {
+    "S": {
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r2/cooked/S.scene",
+     "sha256": "1bfb3207699af503a0d5764d9f65b25134ae2f6714251ac2681ef748c9feaa29",
+     "bytes": 2686,
+     "version": 4,
+     "stdout": "Cooked 2686 bytes"
+    }
+   },
+   "authored": {
+    "S.incant.json": "e000229f0138efb837cdfe69a7e720a4990a5ace9f575fb71faa1674340e98b4",
+    "S.incant.journal.jsonl": "8469e3f855061040315575638b453c316bd9bb1e5efb252c99fcd5c344068653"
+   },
+   "cache": {
+    ".incant/cache/models/462febcf0c0b9d4856eb7902a19e5c494c323702762ba2abdd47fb63d9b03664.incmodel": "56786500f67f1a4791a4f13e835ac14f5b72c8f62733db2b7deaf3ff5629e10b",
+    ".incant/cache/models/742c883a1dc2d650bd2d8b0598d5ea4641431d43152989a5ec13e5b734528732.incmodel": "c8dabda7250993af434f10018ed33a84acc9cfdb75ed56c5df36f762ce57eb17",
+    ".incant/cache/models/a7e8da48eb5920c1f84def706ee29c5046d02f03aca07358bd46fa8e46a9daad.incmodel": "8fba42dcc2b162623577c4801c650caa1a4dc1efcbd54473774bf12f0de2225b",
+    ".incant/cache/models/b1a92c8bdcf711ca275969d5ba05ce7306adab26234075202a53d1345a52d733.incmodel": "e17b9a9f3eaba5f2d0420030333f328ea35e81e7f466ffa5986fedde6a7acb17",
+    ".incant/cache/models/c3e5359ac8702394be1ea4b52e07db1785ac7be3f6f0fb71c72b1eb61eadd1c4.incmodel": "3ec66c36d474e9df60b4e13e15f010ec8abe27a369b6fc3f5d43d2d93916c06b",
+    ".incant/cache/models/cc657285cc7f8d2013aee49ca08a05fddb1a74726720600009fecbc14923f99c.incmodel": "1900e40f0b3ef30089732e287b3d2648231ef279acf81b00b8b8da640772f110",
+    ".incant/cache/textures/2a02429cea7ae3615e45fd15fcc4fd20424f0b2d2f57fd3fcb44caef16fffb11.json": "c00142fe86de5bdc0f1b99ce25c8d0a9b12adf9e9d0f9213f08fc80f9fa69db6",
+    ".incant/cache/textures/d054d223b3c8167c0d107abcb213438e9c3a28ac4f276d6e885c99024a48c25e.ktx2": "d054d223b3c8167c0d107abcb213438e9c3a28ac4f276d6e885c99024a48c25e"
+   }
+  }
+ },
+ "tools_end": {
+  "incant_headless": "ce0d27d2b1f6790639d7bbb412ab09b2a0e5ea3fe347dc3282fc314eaf8c1784",
+  "cook_scene": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53"
+ },
+ "finished": "2026-10-13T01:31:06.245126+00:00"
+}

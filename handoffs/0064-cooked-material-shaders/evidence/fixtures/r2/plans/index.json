@@ -1,0 +1,16 @@
+{
+ "shadow-dry": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r2/plans/shadow-dry.json",
+  "sha256": "69754c6fa75e8c71eaa7ad0b307b675a3fef5e305149fa207c46e508a70066a6",
+  "pngs": [],
+  "frames": 1
+ },
+ "shadow": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r2/plans/shadow.json",
+  "sha256": "de2cd95c8005e1aae1d698f55f6294379651811eab4d2eb1c7cff5c9c9814537",
+  "pngs": [
+   "S-shadows.png"
+  ],
+  "frames": 1
+ }
+}

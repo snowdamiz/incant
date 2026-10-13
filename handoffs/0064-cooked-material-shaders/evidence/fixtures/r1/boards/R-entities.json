@@ -1,0 +1,128 @@
+[
+ {
+  "id": "01JA64RE000000000000000001",
+  "name": "camera",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     3.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 45.0,
+    "near": 0.1,
+    "far": 20.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA64RE000000000000000002",
+  "name": "panel",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.35,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.9,
+     0.9,
+     0.9
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNGG87E4E3RZ4KMR4NYDZ",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64RE000000000000000003",
+  "name": "unchanged-sphere",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     1.25,
+     -0.45,
+     0.3
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.45,
+     0.45,
+     0.45
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNGJDSEZ1CXM11FDBCGAF",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64RE000000000000000004",
+  "name": "key",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     -0.21911911429394568,
+     0.1416072065975341,
+     0.03215985741677969,
+     0.9648315689080724
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "DirectionalLight": {
+    "color": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "intensity": 2.0
+   }
+  }
+ }
+]

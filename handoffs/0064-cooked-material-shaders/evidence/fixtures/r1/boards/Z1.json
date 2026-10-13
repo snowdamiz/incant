@@ -1,0 +1,66 @@
+{
+ "key": "Z1",
+ "title": "one textured sphere, no authored light or environment",
+ "items": [
+  {
+   "name": "camera",
+   "slot": 1,
+   "at": [
+    0.0,
+    0.3,
+    3.2
+   ],
+   "rotation": [
+    -0.04672137594673278,
+    0.0,
+    0.0,
+    0.9989079602394026
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "camera": {
+    "fov_degrees": 45.0,
+    "near": 0.1,
+    "far": 20.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  },
+  {
+   "name": "sphere",
+   "slot": 2,
+   "at": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    -0.25881904510252074,
+    0.0,
+    0.9659258262890683
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "mesh": {
+    "model": "sphere-checker",
+    "cast_shadows": true
+   }
+  }
+ ],
+ "ids": {
+  "camera": "01JA64ZE000000000000000001",
+  "sphere": "01JA64ZE000000000000000002"
+ },
+ "hex": {
+  "camera": "01928c4fb80000000000000000000001",
+  "sphere": "01928c4fb80000000000000000000002"
+ }
+}

@@ -1,0 +1,364 @@
+{
+ "png_budget": 9,
+ "steps": [
+  {
+   "label": "M-wide",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/M.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/textures",
+   "camera": "01928c4a280000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": true,
+     "png": "M-wide.png"
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "M-close",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/M.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/textures",
+   "camera": "01928c4a280000000000000000000002",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": true,
+     "png": "M-close.png"
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "L-persp",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/L.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/textures",
+   "camera": "01928c49f40000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": true,
+     "png": "L-persp-t000.png"
+    },
+    {
+     "tick": 45,
+     "width": 960,
+     "height": 540,
+     "controls": true
+    },
+    {
+     "tick": 90,
+     "width": 960,
+     "height": 540,
+     "controls": true,
+     "png": "L-persp-t090.png"
+    },
+    {
+     "tick": 90,
+     "width": 640,
+     "height": 360,
+     "controls": true
+    },
+    {
+     "tick": 90,
+     "width": 320,
+     "height": 180,
+     "controls": true
+    },
+    {
+     "tick": 91,
+     "width": 960,
+     "height": 540,
+     "controls": true
+    },
+    {
+     "tick": 92,
+     "width": 960,
+     "height": 540,
+     "controls": true,
+     "png": "L-persp-t092.png"
+    },
+    {
+     "tick": 93,
+     "width": 960,
+     "height": 540,
+     "controls": true
+    },
+    {
+     "tick": 94,
+     "width": 960,
+     "height": 540,
+     "controls": false
+    }
+   ],
+   "despawn": [
+    {
+     "tick": 91,
+     "entities": [
+      "01928c49f40000000000000000000019",
+      "01928c49f4000000000000000000001b",
+      "01928c49f4000000000000000000001d",
+      "01928c49f4000000000000000000001f",
+      "01928c49f40000000000000000000021",
+      "01928c49f40000000000000000000023",
+      "01928c49f40000000000000000000025",
+      "01928c49f40000000000000000000027",
+      "01928c49f40000000000000000000029",
+      "01928c49f4000000000000000000002b",
+      "01928c49f4000000000000000000002d",
+      "01928c49f4000000000000000000002f",
+      "01928c49f40000000000000000000031",
+      "01928c49f40000000000000000000033",
+      "01928c49f40000000000000000000035",
+      "01928c49f40000000000000000000037",
+      "01928c49f40000000000000000000039",
+      "01928c49f4000000000000000000003b",
+      "01928c49f4000000000000000000003d",
+      "01928c49f4000000000000000000003f",
+      "01928c49f40000000000000000000041",
+      "01928c49f40000000000000000000043",
+      "01928c49f40000000000000000000045",
+      "01928c49f40000000000000000000047",
+      "01928c49f40000000000000000000049",
+      "01928c49f4000000000000000000004b",
+      "01928c49f4000000000000000000004d",
+      "01928c49f4000000000000000000004f",
+      "01928c49f40000000000000000000051",
+      "01928c49f40000000000000000000053",
+      "01928c49f40000000000000000000055",
+      "01928c49f40000000000000000000057",
+      "01928c49f40000000000000000000059",
+      "01928c49f4000000000000000000005b",
+      "01928c49f4000000000000000000005d",
+      "01928c49f4000000000000000000005f",
+      "01928c49f40000000000000000000061",
+      "01928c49f40000000000000000000063",
+      "01928c49f40000000000000000000065",
+      "01928c49f40000000000000000000067",
+      "01928c49f40000000000000000000069",
+      "01928c49f4000000000000000000006b",
+      "01928c49f4000000000000000000006d",
+      "01928c49f4000000000000000000006f",
+      "01928c49f40000000000000000000071",
+      "01928c49f40000000000000000000073",
+      "01928c49f40000000000000000000075",
+      "01928c49f40000000000000000000077",
+      "01928c49f40000000000000000000079",
+      "01928c49f4000000000000000000007b",
+      "01928c49f4000000000000000000007d",
+      "01928c49f4000000000000000000007f",
+      "01928c49f40000000000000000000081",
+      "01928c49f40000000000000000000083",
+      "01928c49f40000000000000000000085",
+      "01928c49f40000000000000000000087",
+      "01928c49f40000000000000000000089",
+      "01928c49f4000000000000000000008b",
+      "01928c49f4000000000000000000008d",
+      "01928c49f4000000000000000000008f"
+     ]
+    },
+    {
+     "tick": 92,
+     "entities": [
+      "01928c49f40000000000000000000018",
+      "01928c49f4000000000000000000001a",
+      "01928c49f4000000000000000000001c",
+      "01928c49f4000000000000000000001e",
+      "01928c49f40000000000000000000020",
+      "01928c49f40000000000000000000022",
+      "01928c49f40000000000000000000024",
+      "01928c49f40000000000000000000026",
+      "01928c49f40000000000000000000028",
+      "01928c49f4000000000000000000002a",
+      "01928c49f4000000000000000000002c",
+      "01928c49f4000000000000000000002e",
+      "01928c49f40000000000000000000030",
+      "01928c49f40000000000000000000032",
+      "01928c49f40000000000000000000034",
+      "01928c49f40000000000000000000036",
+      "01928c49f40000000000000000000038",
+      "01928c49f4000000000000000000003a",
+      "01928c49f4000000000000000000003c",
+      "01928c49f4000000000000000000003e",
+      "01928c49f40000000000000000000040",
+      "01928c49f40000000000000000000042",
+      "01928c49f40000000000000000000044",
+      "01928c49f40000000000000000000046",
+      "01928c49f40000000000000000000048",
+      "01928c49f4000000000000000000004a",
+      "01928c49f4000000000000000000004c",
+      "01928c49f4000000000000000000004e"
+     ]
+    },
+    {
+     "tick": 93,
+     "entities": [
+      "01928c49f40000000000000000000050",
+      "01928c49f40000000000000000000052",
+      "01928c49f40000000000000000000054",
+      "01928c49f40000000000000000000056",
+      "01928c49f40000000000000000000058",
+      "01928c49f4000000000000000000005a",
+      "01928c49f4000000000000000000005c",
+      "01928c49f4000000000000000000005e",
+      "01928c49f40000000000000000000060",
+      "01928c49f40000000000000000000062",
+      "01928c49f40000000000000000000064",
+      "01928c49f40000000000000000000066",
+      "01928c49f40000000000000000000068",
+      "01928c49f4000000000000000000006a",
+      "01928c49f4000000000000000000006c",
+      "01928c49f4000000000000000000006e",
+      "01928c49f40000000000000000000070",
+      "01928c49f40000000000000000000072",
+      "01928c49f40000000000000000000074",
+      "01928c49f40000000000000000000076",
+      "01928c49f40000000000000000000078",
+      "01928c49f4000000000000000000007a",
+      "01928c49f4000000000000000000007c",
+      "01928c49f4000000000000000000007e",
+      "01928c49f40000000000000000000080",
+      "01928c49f40000000000000000000082",
+      "01928c49f40000000000000000000084",
+      "01928c49f40000000000000000000086",
+      "01928c49f40000000000000000000088",
+      "01928c49f4000000000000000000008a",
+      "01928c49f4000000000000000000008c",
+      "01928c49f4000000000000000000008e"
+     ]
+    }
+   ]
+  },
+  {
+   "label": "L-ortho",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/L.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/L/.incant/cache/textures",
+   "camera": "01928c49f40000000000000000000002",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": true
+    },
+    {
+     "tick": 90,
+     "width": 960,
+     "height": 540,
+     "controls": true,
+     "png": "L-ortho-t090.png"
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "Z1",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/Z1.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/Z1/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4fb80000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 480,
+     "height": 270,
+     "controls": true,
+     "png": "Z1.png"
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "Z0",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/Z0.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4fb82000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 320,
+     "height": 180,
+     "controls": true
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "M-wide-again",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/M.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/M/.incant/cache/textures",
+   "camera": "01928c4a280000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 960,
+     "height": 540,
+     "controls": false
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "R-v1",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/R-v1.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/R/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4c380000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 480,
+     "height": 270,
+     "controls": true,
+     "png": "R-v1.png"
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "R-v2",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/R-v2.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/R/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4c380000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 480,
+     "height": 270,
+     "controls": true,
+     "png": "R-v2.png"
+    }
+   ],
+   "despawn": []
+  },
+  {
+   "label": "R-v1-again",
+   "scene": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/R-v1.scene",
+   "models": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/R/.incant/cache/models",
+   "textures": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/empty-cache",
+   "camera": "01928c4c380000000000000000000001",
+   "frames": [
+    {
+     "tick": 0,
+     "width": 480,
+     "height": 270,
+     "controls": false
+    }
+   ],
+   "despawn": []
+  }
+ ]
+}

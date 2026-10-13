@@ -1,0 +1,40 @@
+{
+ "key": "Z0",
+ "title": "camera only",
+ "items": [
+  {
+   "name": "camera",
+   "slot": 1,
+   "at": [
+    0.0,
+    0.0,
+    3.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "camera": {
+    "fov_degrees": 45.0,
+    "near": 0.1,
+    "far": 20.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  }
+ ],
+ "ids": {
+  "camera": "01JA64ZE100000000000000001"
+ },
+ "hex": {
+  "camera": "01928c4fb82000000000000000000001"
+ }
+}

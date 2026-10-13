@@ -1,0 +1,1 @@
+{"adapter":{"backend":"Metal","device":0,"device_type":"IntegratedGpu","driver":"","driver_info":"","name":"Apple M5 Pro","vendor":0},"frames":19,"pngs_written":9}

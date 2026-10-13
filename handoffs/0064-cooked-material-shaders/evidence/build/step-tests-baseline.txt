@@ -1,0 +1,13 @@
+{
+ "variant": "baseline",
+ "seen": [
+  "cooked-geometry,cooked-output,cooked-sprites,cooked-text,cooked-ui,default,physics-deterministic"
+ ],
+ "frozen": {
+  "incant_render-lib-tests": "73b7ab5ec3b064b2d7493e62ae2dff981e7b20287518af44781df3370ce294f9",
+  "model_gpu": "2108d52e9b4ac1eeef5464fd3aab5534f04d145be7968f04f5e9ef8ae8fe342e",
+  "gpu_host-game": "976e5e2ddeece5b4b7dc5da2c61bdae7d50826da6336874a52a546fbc9df1206",
+  "gpu_host-ui": "ea6c969fa5587c18baa27a9c79e4969dc6df12b013bee0a9133ffde15550685c",
+  "native_frames": "07245c95b345e4fc3b85f3104fa563948ce44ec8aebd0d052747496bcfc1a9a8"
+ }
+}

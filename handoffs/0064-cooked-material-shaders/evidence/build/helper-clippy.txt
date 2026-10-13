@@ -1,0 +1,71 @@
+warning: patch `kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/third_party/kira)` was not used in the crate graph
+warning: patch `tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/third_party/tao)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+    Checking hashbrown v0.17.1
+    Checking glam v0.33.12
+    Checking indexmap v2.14.2
+    Checking incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_types)
+    Checking nalgebra v0.35.0
+    Checking naga v29.0.4
+    Checking glamx v0.3.1
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_2d)
+    Checking cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/third_party/cosmic-text)
+    Checking wgpu-naga-bridge v29.0.4
+    Checking incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_anim)
+    Checking bevy_utils v0.19.1
+    Checking rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/third_party/rerecast)
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_text)
+    Checking wgpu-hal v29.0.4
+    Checking parry3d v0.31.1
+    Checking parry2d v0.31.1
+    Checking bevy_ecs v0.19.1
+    Checking rapier2d v0.36.0
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_assets_runtime)
+    Checking rapier3d v0.36.0
+    Checking wgpu-core-deps-apple v29.0.4
+    Checking incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_nav)
+    Checking incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_localization)
+    Checking wgpu-core v29.0.4
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_physics_runtime)
+    Checking incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_render_data)
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_physics_2d_runtime)
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_runtime)
+    Checking wgpu v29.0.4
+    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_render_native)
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_render)
+    Checking incant_0064_review v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review)
+error: using `chunks_exact` with a constant chunk size
+   --> src/main.rs:423:19
+    |
+423 |     for p in rgba.chunks_exact(4) {
+    |                   ^^^^^^^^^^^^^^^ help: consider using `as_chunks` instead: `as_chunks::<4>().0`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+    = note: `-D clippy::chunks-exact-to-as-chunks` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::chunks_exact_to_as_chunks)]`
+
+error: using `chunks_exact` with a constant chunk size
+   --> src/main.rs:440:28
+    |
+440 |     for (i, (pa, pb)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+    |                            ^^^^^^^^^^^^^^^ help: consider using `as_chunks` instead: `as_chunks::<4>().0.iter()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+
+error: using `chunks_exact` with a constant chunk size
+   --> src/main.rs:440:50
+    |
+440 |     for (i, (pa, pb)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+    |                                                  ^^^^^^^^^^^^^^^
+    |
+help: consider using `as_chunks::<4>()` instead
+   --> src/main.rs:440:50
+    |
+440 |     for (i, (pa, pb)) in a.chunks_exact(4).zip(b.chunks_exact(4)).enumerate() {
+    |                                                  ^^^^^^^^^^^^^^^
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+
+error: could not compile `incant_0064_review` (bin "material_review") due to 3 previous errors

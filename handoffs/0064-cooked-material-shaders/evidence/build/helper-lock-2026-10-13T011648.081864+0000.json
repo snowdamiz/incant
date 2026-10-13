@@ -1,0 +1,153 @@
+{
+ "how": {
+  "argv": [
+   "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/tools/cargo",
+   "metadata",
+   "--offline",
+   "--format-version",
+   "1",
+   "--manifest-path",
+   "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/handoffs/0064-cooked-material-shaders/tools/review/Cargo.toml"
+  ],
+  "exit": 0,
+  "stderr": "warning: patch `kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/third_party/kira)` was not used in the crate graph\nwarning: patch `tao v0.37.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/third_party/tao)` was not used in the crate graph\nhelp: Check that the patched package version and available features are compatible\n      with the dependency requirements. If the patch has a different version from\n      what is locked in the Cargo.lock file, run `cargo update` to use the new\n      version. This may also occur with an optional dependency that is not enabled.\n"
+ },
+ "repository_lock_sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+ "helper_lock_sha256": "0f44c6bbdf5adf269f3e92842aadf7e14eba8e967becea6c614ab11f8d68c12b",
+ "repository_packages": 963,
+ "helper_packages": 333,
+ "own_entries": [
+  [
+   "incant_0064_review",
+   "0.0.1",
+   null
+  ]
+ ],
+ "own_dependencies": [
+  "incant_render 0.0.1",
+  "incant_render_data 0.0.1",
+  "incant_render_native 0.0.1",
+  "incant_runtime 0.0.1",
+  "png 0.18.1",
+  "serde 1.0.229",
+  "serde_json 1.0.151",
+  "sha2 0.10.9"
+ ],
+ "not_in_repository_lock": [],
+ "checksum_mismatches": [],
+ "dependency_edges_added": {},
+ "dependency_edges_dropped": {
+  "bevy_platform 0.19.1": [
+   "web-time 1.1.0"
+  ],
+  "bumpalo 3.20.3": [
+   "allocator-api2 0.2.21"
+  ],
+  "cc 1.6.0": [
+   "jobserver 0.1.35",
+   "libc 0.2.190"
+  ],
+  "digest 0.10.7": [
+   "const-oid 0.9.6",
+   "subtle 2.6.1"
+  ],
+  "dispatch2 0.3.1": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "futures-channel 0.3.34": [
+   "futures-sink 0.3.34"
+  ],
+  "futures-util 0.3.34": [
+   "futures-channel 0.3.34",
+   "futures-io 0.3.34",
+   "futures-macro 0.3.34",
+   "futures-sink 0.3.34",
+   "memchr 2.8.3"
+  ],
+  "generic-array 0.14.7": [
+   "zeroize 1.9.1"
+  ],
+  "getrandom 0.4.3": [
+   "js-sys 0.3.103",
+   "rand_core 0.10.1",
+   "wasm-bindgen 0.2.126"
+  ],
+  "glam 0.33.12": [
+   "mint 0.5.9"
+  ],
+  "hashbrown 0.17.1": [
+   "allocator-api2 0.2.21",
+   "equivalent 1.0.2",
+   "serde 1.0.229",
+   "serde_core 1.0.229"
+  ],
+  "incant_assets_runtime 0.0.1": [
+   "tempfile 3.27.0"
+  ],
+  "incant_nav 0.0.1": [
+   "serde_json 1.0.151"
+  ],
+  "incant_render 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_cook 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_render_authoring 0.0.1",
+   "incant_render_native 0.0.1",
+   "incant_runtime 0.0.1",
+   "incant_shader_cook 0.0.1",
+   "serde_json 1.0.151",
+   "sha2 0.10.9",
+   "tempfile 3.27.0"
+  ],
+  "incant_render_native 0.0.1": [
+   "incant_assets 0.0.1",
+   "incant_cook 0.0.1",
+   "incant_doc 0.0.1",
+   "incant_types 0.0.1",
+   "png 0.18.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "incant_text 0.0.1": [
+   "incant_assets_runtime 0.0.1",
+   "serde_json 1.0.151",
+   "tempfile 3.27.0"
+  ],
+  "naga 29.0.4": [
+   "petgraph 0.8.3"
+  ],
+  "num-complex 0.4.6": [
+   "bytemuck 1.25.2"
+  ],
+  "objc2 0.6.5": [
+   "objc2-exception-helper 0.1.1"
+  ],
+  "objc2-core-foundation 0.3.2": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "objc2-foundation 0.3.2": [
+   "block2 0.6.2",
+   "libc 0.2.190"
+  ],
+  "semver 1.0.28": [
+   "serde 1.0.229",
+   "serde_core 1.0.229"
+  ],
+  "smallvec 1.16.2": [
+   "serde 1.0.229"
+  ],
+  "tracing 0.1.44": [
+   "tracing-attributes 0.1.31"
+  ],
+  "tracing-core 0.1.36": [
+   "valuable 0.1.1"
+  ]
+ },
+ "other_tables": [
+  "[[patch.unused]]\nname = \"kira\"\nversion = \"0.12.5\"\n",
+  "[[patch.unused]]\nname = \"tao\"\nversion = \"0.37.1\"\n"
+ ],
+ "recorded": "2026-10-13T01:16:48.081682+00:00"
+}

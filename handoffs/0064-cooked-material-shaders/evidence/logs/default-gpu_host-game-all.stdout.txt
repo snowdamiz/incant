@@ -1,0 +1,9 @@
+
+running 5 tests
+test hosted_text_child_draws_with_models_script_and_audio_without_motion_uploads ... ok
+test observed_device_loss_stops_the_host_before_another_target_is_acquired ... ok
+test paused_committed_refresh_submits_without_advancing_game_or_audio ... ok
+test script_physics_audio_and_submitted_frames_share_the_source_free_native_tick ... ok
+test target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.63s

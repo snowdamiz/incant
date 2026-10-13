@@ -1,0 +1,198 @@
+{
+ "retained_artifacts": {
+  "14-Dx12-Fragment.shader.gz": {
+   "bytes": 19552,
+   "sha256": "ff908004333705e3436b30373ada08818e9e52049e316a9883cb110109a71a7d"
+  },
+  "15-Dx12-Vertex.shader.gz": {
+   "bytes": 1569,
+   "sha256": "ce37b1e438bd5d9e9c21d2d69795e340e726f51e5007b3c60633ce132163a5b3"
+  },
+  "16-Metal-Fragment.shader.gz": {
+   "bytes": 20897,
+   "sha256": "98bfd23cb430029366407c0364b9a1abb0cc73f27a5c4fa41dfaa98b787dfba7"
+  },
+  "17-Metal-Vertex.shader.gz": {
+   "bytes": 7015,
+   "sha256": "7cfdc07307366ce9cd20ebe01bc22deb54fa688992f1e018ff9b632d95900eab"
+  },
+  "18-Vulkan-Fragment.shader.gz": {
+   "bytes": 21888,
+   "sha256": "bddcec7ea1d464b03f1b9d9ac81846ed739c2a19ae6a452a6468bde827ce639f"
+  },
+  "19-Vulkan-Vertex.shader.gz": {
+   "bytes": 2656,
+   "sha256": "68925966199164db53e5f1e8da3d7c15f1b1e50c2ceaf2790c2376b00961a012"
+  }
+ },
+ "binaries": {
+  "baseline/incant_render-lib-tests": {
+   "sha256": "73b7ab5ec3b064b2d7493e62ae2dff981e7b20287518af44781df3370ce294f9",
+   "counts": {
+    "model_material.wgsl": 1,
+    "lighting/shade.wgsl": 1,
+    "shadows/shade.wgsl": 1,
+    "cooked 14-Dx12-Fragment.shader.gz": 0,
+    "cooked 15-Dx12-Vertex.shader.gz": 0,
+    "cooked 16-Metal-Fragment.shader.gz": 0,
+    "cooked 17-Metal-Vertex.shader.gz": 0,
+    "cooked 18-Vulkan-Fragment.shader.gz": 0,
+    "cooked 19-Vulkan-Vertex.shader.gz": 0
+   }
+  },
+  "baseline/model_gpu": {
+   "sha256": "2108d52e9b4ac1eeef5464fd3aab5534f04d145be7968f04f5e9ef8ae8fe342e",
+   "counts": {
+    "model_material.wgsl": 1,
+    "lighting/shade.wgsl": 1,
+    "shadows/shade.wgsl": 1,
+    "cooked 14-Dx12-Fragment.shader.gz": 0,
+    "cooked 15-Dx12-Vertex.shader.gz": 0,
+    "cooked 16-Metal-Fragment.shader.gz": 0,
+    "cooked 17-Metal-Vertex.shader.gz": 0,
+    "cooked 18-Vulkan-Fragment.shader.gz": 0,
+    "cooked 19-Vulkan-Vertex.shader.gz": 0
+   }
+  },
+  "baseline/gpu_host-game": {
+   "sha256": "976e5e2ddeece5b4b7dc5da2c61bdae7d50826da6336874a52a546fbc9df1206",
+   "counts": {
+    "model_material.wgsl": 1,
+    "lighting/shade.wgsl": 1,
+    "shadows/shade.wgsl": 1,
+    "cooked 14-Dx12-Fragment.shader.gz": 0,
+    "cooked 15-Dx12-Vertex.shader.gz": 0,
+    "cooked 16-Metal-Fragment.shader.gz": 0,
+    "cooked 17-Metal-Vertex.shader.gz": 0,
+    "cooked 18-Vulkan-Fragment.shader.gz": 0,
+    "cooked 19-Vulkan-Vertex.shader.gz": 0
+   }
+  },
+  "baseline/gpu_host-ui": {
+   "sha256": "ea6c969fa5587c18baa27a9c79e4969dc6df12b013bee0a9133ffde15550685c",
+   "counts": {
+    "model_material.wgsl": 1,
+    "lighting/shade.wgsl": 1,
+    "shadows/shade.wgsl": 1,
+    "cooked 14-Dx12-Fragment.shader.gz": 0,
+    "cooked 15-Dx12-Vertex.shader.gz": 0,
+    "cooked 16-Metal-Fragment.shader.gz": 0,
+    "cooked 17-Metal-Vertex.shader.gz": 0,
+    "cooked 18-Vulkan-Fragment.shader.gz": 0,
+    "cooked 19-Vulkan-Vertex.shader.gz": 0
+   }
+  },
+  "baseline/native_frames": {
+   "sha256": "07245c95b345e4fc3b85f3104fa563948ce44ec8aebd0d052747496bcfc1a9a8",
+   "counts": {
+    "model_material.wgsl": 1,
+    "lighting/shade.wgsl": 1,
+    "shadows/shade.wgsl": 1,
+    "cooked 14-Dx12-Fragment.shader.gz": 0,
+    "cooked 15-Dx12-Vertex.shader.gz": 0,
+    "cooked 16-Metal-Fragment.shader.gz": 0,
+    "cooked 17-Metal-Vertex.shader.gz": 0,
+    "cooked 18-Vulkan-Fragment.shader.gz": 0,
+    "cooked 19-Vulkan-Vertex.shader.gz": 0
+   }
+  },
+  "baseline/material_review": {
+   "sha256": "c6501e54dd79eede16cf01d0814cd98f0e0e8e2acc553cca4397a905e8f7dbc5",
+   "counts": {
+    "model_material.wgsl": 1,
+    "lighting/shade.wgsl": 1,
+    "shadows/shade.wgsl": 1,
+    "cooked 14-Dx12-Fragment.shader.gz": 0,
+    "cooked 15-Dx12-Vertex.shader.gz": 0,
+    "cooked 16-Metal-Fragment.shader.gz": 0,
+    "cooked 17-Metal-Vertex.shader.gz": 0,
+    "cooked 18-Vulkan-Fragment.shader.gz": 0,
+    "cooked 19-Vulkan-Vertex.shader.gz": 0
+   }
+  },
+  "candidate/incant_render-lib-tests": {
+   "sha256": "b14c49343a14890b1e3c9f4d1f198900c9258bc61e47deff5062694493afcd92",
+   "counts": {
+    "model_material.wgsl": 0,
+    "lighting/shade.wgsl": 0,
+    "shadows/shade.wgsl": 0,
+    "cooked 14-Dx12-Fragment.shader.gz": 2,
+    "cooked 15-Dx12-Vertex.shader.gz": 2,
+    "cooked 16-Metal-Fragment.shader.gz": 2,
+    "cooked 17-Metal-Vertex.shader.gz": 2,
+    "cooked 18-Vulkan-Fragment.shader.gz": 2,
+    "cooked 19-Vulkan-Vertex.shader.gz": 2
+   }
+  },
+  "candidate/model_gpu": {
+   "sha256": "a35582803577c6feb24d2442074fb4b950ba4ce7290d780a7e5622ca006014e7",
+   "counts": {
+    "model_material.wgsl": 0,
+    "lighting/shade.wgsl": 0,
+    "shadows/shade.wgsl": 0,
+    "cooked 14-Dx12-Fragment.shader.gz": 1,
+    "cooked 15-Dx12-Vertex.shader.gz": 1,
+    "cooked 16-Metal-Fragment.shader.gz": 1,
+    "cooked 17-Metal-Vertex.shader.gz": 1,
+    "cooked 18-Vulkan-Fragment.shader.gz": 1,
+    "cooked 19-Vulkan-Vertex.shader.gz": 1
+   }
+  },
+  "candidate/gpu_host-game": {
+   "sha256": "09e1c860291bbad2d5124620f62bfd3c06a01ee46a8a5a4b613cf4ae7d2193cc",
+   "counts": {
+    "model_material.wgsl": 0,
+    "lighting/shade.wgsl": 0,
+    "shadows/shade.wgsl": 0,
+    "cooked 14-Dx12-Fragment.shader.gz": 1,
+    "cooked 15-Dx12-Vertex.shader.gz": 1,
+    "cooked 16-Metal-Fragment.shader.gz": 1,
+    "cooked 17-Metal-Vertex.shader.gz": 1,
+    "cooked 18-Vulkan-Fragment.shader.gz": 1,
+    "cooked 19-Vulkan-Vertex.shader.gz": 1
+   }
+  },
+  "candidate/gpu_host-ui": {
+   "sha256": "2a170986593164590abbdef0910bcd7811a551cf94338a0ad631de39789c48c2",
+   "counts": {
+    "model_material.wgsl": 0,
+    "lighting/shade.wgsl": 0,
+    "shadows/shade.wgsl": 0,
+    "cooked 14-Dx12-Fragment.shader.gz": 1,
+    "cooked 15-Dx12-Vertex.shader.gz": 1,
+    "cooked 16-Metal-Fragment.shader.gz": 1,
+    "cooked 17-Metal-Vertex.shader.gz": 1,
+    "cooked 18-Vulkan-Fragment.shader.gz": 1,
+    "cooked 19-Vulkan-Vertex.shader.gz": 1
+   }
+  },
+  "candidate/native_frames": {
+   "sha256": "cdb0cc2ef78cff6b0c4cb3b3083fd7f22cddac0308b568e1b63dfe13fbfd61d3",
+   "counts": {
+    "model_material.wgsl": 0,
+    "lighting/shade.wgsl": 0,
+    "shadows/shade.wgsl": 0,
+    "cooked 14-Dx12-Fragment.shader.gz": 1,
+    "cooked 15-Dx12-Vertex.shader.gz": 1,
+    "cooked 16-Metal-Fragment.shader.gz": 1,
+    "cooked 17-Metal-Vertex.shader.gz": 1,
+    "cooked 18-Vulkan-Fragment.shader.gz": 1,
+    "cooked 19-Vulkan-Vertex.shader.gz": 1
+   }
+  },
+  "candidate/material_review": {
+   "sha256": "25346f7d04c0855109a42defc9eed92c6d7cb7b978821a0052364d4ae652c9ac",
+   "counts": {
+    "model_material.wgsl": 0,
+    "lighting/shade.wgsl": 0,
+    "shadows/shade.wgsl": 0,
+    "cooked 14-Dx12-Fragment.shader.gz": 1,
+    "cooked 15-Dx12-Vertex.shader.gz": 1,
+    "cooked 16-Metal-Fragment.shader.gz": 1,
+    "cooked 17-Metal-Vertex.shader.gz": 1,
+    "cooked 18-Vulkan-Fragment.shader.gz": 1,
+    "cooked 19-Vulkan-Vertex.shader.gz": 1
+   }
+  }
+ }
+}
