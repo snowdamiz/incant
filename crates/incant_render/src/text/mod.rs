@@ -242,7 +242,11 @@ fn atlas_entries() -> [wgpu::BindGroupLayoutEntry; 2] {
     ]
 }
 impl TextSystem {
-    pub fn new(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Self> {
+    pub fn new(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let frame = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Text frame camera and color"),
             entries: &[frame_entry()],
@@ -261,7 +265,7 @@ impl TextSystem {
             min_filter: wgpu::FilterMode::Linear,
             ..Default::default()
         });
-        let pipeline = drawing::pipeline(device, [&frame, &nodes, &atlas], backend)?;
+        let pipeline = drawing::pipeline(device, [&frame, &nodes, &atlas], backend, cache)?;
         Ok(Self {
             frame,
             nodes,

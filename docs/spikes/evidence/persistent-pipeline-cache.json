@@ -1,0 +1,724 @@
+{
+  "scope": "default-off Vulkan persistent pipeline-cache implementation; local CPU/storage and compile checks only",
+  "base": "e0fbd05642275b3f201cb04cdcd9990f8077aa76",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "0426870d9d76d36fa0ae462ce6893a9b69f10478e44b3953e6cbec5cb87cb562",
+      "bytes": 251974
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "6cdbfc2dc09c80ae96089823a2f8edff9394c77dcc6a596a928dc510cbf8818e",
+      "bytes": 2405
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "a9fc24f8d6234fbadf0d45584594d6395489a07511c8426f0a028286f76a1ac5",
+      "bytes": 17698
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "sha256": "608d8226cb4fd274b3f4b05c811dfcd893761c1eb75039e619925b48e25b773e",
+      "bytes": 15343
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "sha256": "edc49c5e19f24230bb20aef6518de545d45b42d58855cce21d5a8a288ce11f12",
+      "bytes": 3367
+    },
+    {
+      "path": "crates/incant_render/src/materials.rs",
+      "sha256": "8e69ac99131647c51dc6a3e4ec6df7e40b132d2c9197c5943571ebcbcc152cec",
+      "bytes": 13614
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "ce5332bd5b1f4b5c251d55842cb21353c16aa8fb70d1e21605268de62d906f19",
+      "bytes": 7527
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/mod.rs",
+      "sha256": "d3ea28f43b2834bcb85c8444ff6cdd232c17e93d1c514297d876575b1a98ffdc",
+      "bytes": 5742
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/private.rs",
+      "sha256": "43109fa34d2e268aaf1c657c4cf5a8954a9eb949020f0184d78b85d4ee9f880e",
+      "bytes": 5273
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/private_tests.rs",
+      "sha256": "cd4cce64bff9d8c7eef10b894cd497175a6bd620e0ab89d06a417eeb03486a24",
+      "bytes": 8304
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/store.rs",
+      "sha256": "375e2f3360ed0154fe0aaa192f162c4be6953fbe33d2e0985859e18337c5f912",
+      "bytes": 3564
+    },
+    {
+      "path": "crates/incant_render/src/pipeline_cache/store_tests.rs",
+      "sha256": "72f2d2e1129cb8741c22faebc1a55d519cac3b53dfe7ad2abffebdba77311645",
+      "bytes": 5312
+    },
+    {
+      "path": "crates/incant_render/src/shadows/mod.rs",
+      "sha256": "73a154126addadc6129e05daef262956cb78281a1388b780ca57c0725980229a",
+      "bytes": 8357
+    },
+    {
+      "path": "crates/incant_render/src/shadows/pipeline.rs",
+      "sha256": "40f1b33d6b36dcda2f6beed96e0f455bb944cd48e530d44231c6ebce8203efd8",
+      "bytes": 2222
+    },
+    {
+      "path": "crates/incant_render/src/sprites/mod.rs",
+      "sha256": "3d2e49a58e4162c10838f8067df2f99765636fe5843fbc6de101e87fcece9f7b",
+      "bytes": 22447
+    },
+    {
+      "path": "crates/incant_render/src/text/drawing.rs",
+      "sha256": "fd7993994b3a8cfb2d2644c380c641895e8326e6e59c439afd8aa884da7c832d",
+      "bytes": 6303
+    },
+    {
+      "path": "crates/incant_render/src/text/mod.rs",
+      "sha256": "ef41ba419ee0675a2fbd41d927e359b86eb60f4deb4622435aa52bc11ee6e900",
+      "bytes": 17650
+    },
+    {
+      "path": "crates/incant_render/src/ui/mod.rs",
+      "sha256": "ab526e29a987070f2d1318d301693bf4cc1ce2ec0d199b92d1d0cb089842de53",
+      "bytes": 21306
+    },
+    {
+      "path": "crates/incant_render/tests/persistent_cache.rs",
+      "sha256": "d7e8f65e62c6320ba99fd1753791aae53188587e1bfc480578b20348a4dea931",
+      "bytes": 7749
+    }
+  ],
+  "source_freeze_sha256": "27c5fca23ec3468cfc37e8a2b4ac38ceafec222925eca146045add1b38c6b791",
+  "checks": [
+    {
+      "name": "cache-lib",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "persistent-pipeline-cache"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6524062156677246,
+      "log_sha256": "4209e80731743d2822df7b8b26cb133c9afaed107118349ee291a5ea3eb03ff7",
+      "run": 2,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/cache-lib.log"
+    },
+    {
+      "name": "combined-lib",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "persistent-pipeline-cache,cooked-materials,cooked-sprites,cooked-ui,cooked-text"
+      ],
+      "exit_code": 0,
+      "seconds": 16.899913787841797,
+      "log_sha256": "192de72b1ef5f095756bcfd30ff9fbb758f51854f53faa733cb00c1378325306",
+      "run": 2,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/combined-lib.log"
+    },
+    {
+      "name": "default-lib",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "exit_code": 0,
+      "seconds": 8.079093217849731,
+      "log_sha256": "3c235cf5920bdf1ecb552163c4579dd9470da39909b782afc29d72817ee4c572",
+      "run": 2,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/default-lib.log"
+    },
+    {
+      "name": "web-combined",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "persistent-pipeline-cache,cooked-materials,cooked-sprites,cooked-ui,cooked-text"
+      ],
+      "exit_code": 0,
+      "seconds": 22.417988061904907,
+      "log_sha256": "3582339729190a038960fb5f1c20c59e1a96d5540500d6404d654e70a41da69a",
+      "run": 2,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/web-combined.log"
+    },
+    {
+      "name": "dependency-graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_native",
+        "incant_render_game",
+        "--features",
+        "incant_render/persistent-pipeline-cache,incant_render/cooked-materials,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text"
+      ],
+      "exit_code": 0,
+      "seconds": 0.3814198970794678,
+      "log_sha256": "c7783ed342b9c811efd7cb6ed0b95bdacec85abd5adcdba87d0d96351e09fdc1",
+      "run": 2,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/dependency-graph.log"
+    },
+    {
+      "name": "renderer-all-target-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "persistent-pipeline-cache,cooked-materials,cooked-sprites,cooked-ui,cooked-text",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 34.775355100631714,
+      "log_sha256": "8f56c82300a6a6ef88c60a2f3f7345c8b94259a42de40c1eda02298c6798dcbc",
+      "run": 3,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/renderer-all-target-clippy.log"
+    },
+    {
+      "name": "integration-tests-compile",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "persistent_cache",
+        "--test",
+        "model_gpu",
+        "--features",
+        "persistent-pipeline-cache,cooked-materials,cooked-sprites,cooked-ui,cooked-text"
+      ],
+      "exit_code": 0,
+      "seconds": 7.771956920623779,
+      "log_sha256": "3c71049a89cecd9fa23cb58a3072f3cb4a52f26f08c68ce8fc8a05c28f6eb04f",
+      "run": 3,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/integration-tests-compile.log"
+    },
+    {
+      "name": "native-consumers",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "exit_code": 0,
+      "seconds": 103.48021292686462,
+      "log_sha256": "d7221f28b3ec1958c598ecec33e058b43bed177d46d6be7e3e50ca94bfb7038e",
+      "run": 3,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/native-consumers.log"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.4220757484436035,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run": 3,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/fmt.log"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.04118514060974121,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run": 3,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/conventions.log"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.026446819305419922,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "run": 3,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/diff.log"
+    },
+    {
+      "name": "final-test-clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "persistent_cache",
+        "--features",
+        "persistent-pipeline-cache,cooked-materials,cooked-sprites,cooked-ui,cooked-text",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 0.6300468444824219,
+      "log_sha256": "471db1f76940eb3ad04136eb3c9d5693b60f398832885b65e046cb17d287284c",
+      "run": 4,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-004/final-test-clippy.log"
+    },
+    {
+      "name": "final-test-compile",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--test",
+        "persistent_cache",
+        "--features",
+        "persistent-pipeline-cache,cooked-materials,cooked-sprites,cooked-ui,cooked-text"
+      ],
+      "exit_code": 0,
+      "seconds": 0.5949249267578125,
+      "log_sha256": "717167f13460a2e5b169be39a7910517ffe1fcbb2ec695ee74de2c650bba762d",
+      "run": 4,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-004/final-test-compile.log"
+    }
+  ],
+  "test_counts": [
+    {
+      "name": "cache-lib",
+      "passed": 78,
+      "failed": 0,
+      "ignored": 32
+    },
+    {
+      "name": "combined-lib",
+      "passed": 89,
+      "failed": 0,
+      "ignored": 32
+    },
+    {
+      "name": "default-lib",
+      "passed": 63,
+      "failed": 0,
+      "ignored": 32
+    },
+    {
+      "name": "native-consumers",
+      "passed": 61,
+      "failed": 0,
+      "ignored": 7
+    }
+  ],
+  "counts_overlap": true,
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-001/combined-private-test.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-001/combined-private-test.log.gz",
+      "raw_sha256": "074f80956917ebbf2fdd11310463bdffc777552bfa3de3cfbc7ebd7f58d49342",
+      "sha256": "850fb62af229729b3e34e089156cae947e498cf96ba27b0a5deeeebc91c960e4",
+      "bytes": 2302,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/cache-lib.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-002/cache-lib.log.gz",
+      "raw_sha256": "4209e80731743d2822df7b8b26cb133c9afaed107118349ee291a5ea3eb03ff7",
+      "sha256": "bc1f09f448c387ce3661ce55196b8711ad563822f7ac93242b3854fc0db4ac9d",
+      "bytes": 13457,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/checks.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-002/checks.json.gz",
+      "raw_sha256": "531f86a4cbaf2dbc97fe2810765886ea9138f545f3bca4fec881ff1edb509b23",
+      "sha256": "732ffc96894c1d69c3a6f939ea801dce3f401ed2b9016951d0ebdfd76b6af53c",
+      "bytes": 2244,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/combined-lib.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-002/combined-lib.log.gz",
+      "raw_sha256": "192de72b1ef5f095756bcfd30ff9fbb758f51854f53faa733cb00c1378325306",
+      "sha256": "f34967cf0d2e8f6a45016148c976f726a58847dd980ea9bae7a71f0f1616d60b",
+      "bytes": 15650,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/default-lib.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-002/default-lib.log.gz",
+      "raw_sha256": "3c235cf5920bdf1ecb552163c4579dd9470da39909b782afc29d72817ee4c572",
+      "sha256": "642ff5bafd797b133e2204832544e0eaebf36c2430b61cf37337df128d17a783",
+      "bytes": 12044,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/dependency-graph.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-002/dependency-graph.log.gz",
+      "raw_sha256": "c7783ed342b9c811efd7cb6ed0b95bdacec85abd5adcdba87d0d96351e09fdc1",
+      "sha256": "ed987b8994562e5a2aa3f0ce70d53995e29c93e57c52750a9147e4238436866f",
+      "bytes": 256,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/freeze.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-002/freeze.json.gz",
+      "raw_sha256": "33ead44675ab51bb669f2085a31a19d22f33ac5d63d6ac25e83f64148a60e250",
+      "sha256": "2b72d3ace64347f3a84d8886800002dbabae53102d4e193047793bc5bac7632d",
+      "bytes": 2892,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-002/web-combined.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-002/web-combined.log.gz",
+      "raw_sha256": "3582339729190a038960fb5f1c20c59e1a96d5540500d6404d654e70a41da69a",
+      "sha256": "01a3dc4ace4d66252a8ffbf5a94aa6ec478eec92ff7c2bd79c5cf824569b499d",
+      "bytes": 5000,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/checks.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/checks.json.gz",
+      "raw_sha256": "4922a2862841c499a6d53fed7907a41f5ad2a0ac98db632fb02dcda367f9c8f3",
+      "sha256": "8be74ca9a6bc02af537d632aaaf7d3326f45dd2b34234b2ac85c2aff8f833ae9",
+      "bytes": 2270,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/conventions.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/conventions.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/diff.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/diff.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/fmt.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/fmt.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 0,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/freeze.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/freeze.json.gz",
+      "raw_sha256": "83a966d27369384d53ae1ace696adcfaa44baf7bd7fd630ae75f7e0b6da75118",
+      "sha256": "91ec42e7892900785c98429ab21b8d53a82194655ae6460dd3aeb03c615f76a9",
+      "bytes": 3459,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/integration-tests-compile.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/integration-tests-compile.log.gz",
+      "raw_sha256": "3c71049a89cecd9fa23cb58a3072f3cb4a52f26f08c68ce8fc8a05c28f6eb04f",
+      "sha256": "a0779913718046c99e0274fdf95daa27885781e327707ad326946d198fc7bf00",
+      "bytes": 8186,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/native-consumers.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/native-consumers.log.gz",
+      "raw_sha256": "d7221f28b3ec1958c598ecec33e058b43bed177d46d6be7e3e50ca94bfb7038e",
+      "sha256": "01e171cce9ac7569a959355b8b8be0d6c40bfbf1e6229d2b4dcd49ec29a66d80",
+      "bytes": 14739,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-003/renderer-all-target-clippy.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-003/renderer-all-target-clippy.log.gz",
+      "raw_sha256": "8f56c82300a6a6ef88c60a2f3f7345c8b94259a42de40c1eda02298c6798dcbc",
+      "sha256": "7e445498dcdebbec7891e94c9a27705b80b2c3f506b60d4d3a3498d8a5130d74",
+      "bytes": 10351,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-004/checks.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-004/checks.json.gz",
+      "raw_sha256": "96bd3ebb37ca243c7ec9883671afa3932bee10d8ab546ad55d96fd79fae64fc9",
+      "sha256": "48aae2e1e7f2806bc7984a7139a17e3f23be2682325091cb73981b71f29913af",
+      "bytes": 1028,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-004/final-test-clippy.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-004/final-test-clippy.log.gz",
+      "raw_sha256": "471db1f76940eb3ad04136eb3c9d5693b60f398832885b65e046cb17d287284c",
+      "sha256": "646283207e7ffd095241e3c7890c7a5a400debbb4b71fd8e67605bd03513b1ac",
+      "bytes": 184,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-004/final-test-compile.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-004/final-test-compile.log.gz",
+      "raw_sha256": "717167f13460a2e5b169be39a7910517ffe1fcbb2ec695ee74de2c650bba762d",
+      "sha256": "0015146417e7b5bd3793ed2f3a674eeeba9f7559b4379088d49570f47c67e211",
+      "bytes": 436,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-cache-source-004/freeze.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-cache-source-004/freeze.json.gz",
+      "raw_sha256": "27c5fca23ec3468cfc37e8a2b4ac38ceafec222925eca146045add1b38c6b791",
+      "sha256": "b252d25d3b8b6ca41bc88409cce1b6234d4ee979557615a5e2ed85b7575efda6",
+      "bytes": 3451,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/clippy-002.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/clippy-002.log.gz",
+      "raw_sha256": "580c59a81e4f84961697b94f91089a77a5e91bf07fac9485ad7774cfebb9d140",
+      "sha256": "a62d2ed072866a2c605bedeb639a5e16a1b060a1fcbc133c752227d8bdf7fa73",
+      "bytes": 454,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/commands-001.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/commands-001.json.gz",
+      "raw_sha256": "2b7baac8acabff2b62f524bb52d89f895716c25325e2c2f051050c70214cf80d",
+      "sha256": "32a66849c139b2ff17faccaba22b12a42b30fdeee3f3254c08dc282fb8eda446",
+      "bytes": 1794,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/commands-002.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/commands-002.json.gz",
+      "raw_sha256": "c0032f693dda1f410d316100f0482ac72d556fcdc2d07af9a190eccd34a1c332",
+      "sha256": "f7c626a7bf5ac3eb85f14da48b994e300e99a7f630f1e9b42c63e3e8b59438ba",
+      "bytes": 3685,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/run-002.py",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/run-002.py.gz",
+      "raw_sha256": "a5a513299116ab9f12cdb436f349aa9e51f288ccf6d6ff939f71acbf34fd8d42",
+      "sha256": "434beb314cab194a001fad773bbf4d49f2c3dc4a9ebabb63de1f1cecf92789eb",
+      "bytes": 1096,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/run.py",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/run.py.gz",
+      "raw_sha256": "721a448d73da3ffaa7e18b4e4495ac0f0bb028f459e1312f173702daabd42d28",
+      "sha256": "8af44b202a7a2d012c7c71ff3e99f75a1fb31633e628383f7dc013d8128d0e31",
+      "bytes": 1085,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/source-001/inventory.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/source-001/inventory.json.gz",
+      "raw_sha256": "b22885cb96bc880b2db26aa5f7c4890296466776f571b53f3babce3c7abfcd35",
+      "sha256": "875d66e65332bf3f4a4053dfe2bf70f82ba0cd480b9e997411210595e4843e73",
+      "bytes": 461,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/source-001/private.rs",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/source-001/private.rs.gz",
+      "raw_sha256": "43109fa34d2e268aaf1c657c4cf5a8954a9eb949020f0184d78b85d4ee9f880e",
+      "sha256": "6c471085be433465af021ef2ac676212570d617a088be9c995e58fa9cb4ad0de",
+      "bytes": 5273,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/source-001/private_tests.rs",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/source-001/private_tests.rs.gz",
+      "raw_sha256": "fcb44366d0fbc83f9e3e84ac5c594ff6fd9f2f64f5283a5321e6e0ce702ea091",
+      "sha256": "041715949d2691b5e7134fda8c2e14ec5554b54a2a6e79a94299aa517fd326ba",
+      "bytes": 7831,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/source-002/inventory.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/source-002/inventory.json.gz",
+      "raw_sha256": "b6b6896ca56d4226ea170f6650292a807c45b98bd17f89581b8697dc96f57118",
+      "sha256": "d961ac976b985a9dfe0c5d599cd3fb624d7347e56b3d3752837cfe2ef17feea1",
+      "bytes": 1394,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/source-002/private.rs",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/source-002/private.rs.gz",
+      "raw_sha256": "43109fa34d2e268aaf1c657c4cf5a8954a9eb949020f0184d78b85d4ee9f880e",
+      "sha256": "6c471085be433465af021ef2ac676212570d617a088be9c995e58fa9cb4ad0de",
+      "bytes": 5273,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/source-002/private_tests.rs",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/source-002/private_tests.rs.gz",
+      "raw_sha256": "cd4cce64bff9d8c7eef10b894cd497175a6bd620e0ab89d06a417eeb03486a24",
+      "sha256": "0e5247b8a6d4f7ef610552d4166728b44cb6305d6d98d252a89e8be91c907928",
+      "bytes": 8304,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/tests-001.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/tests-001.log.gz",
+      "raw_sha256": "88c0b39fd86626050479d3a54809f54d20e5c4e3e59681780815b608f02c1aab",
+      "sha256": "0e64722d0ec4987d7a85a4571b3524ea094eecc1520eef41e5e3a093f754042f",
+      "bytes": 994,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/tests-002.log",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/tests-002.log.gz",
+      "raw_sha256": "448f0b759e201fde9d20afd68517a73392dccc2337139e61fc84e125f5254811",
+      "sha256": "ab8b04bdd107a3e0fa52ce1de53600ca434e0f8e3ebc396acc56f2e2b86e2da4",
+      "bytes": 1279,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/vulkan-test-source-001/inventory.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/vulkan-test-source-001/inventory.json.gz",
+      "raw_sha256": "89f12653cef4d92318371801eaf2942bf719588f920081e27eaa5f3f6e0ee6e0",
+      "sha256": "729f0babd51479e653716bd6fda8e656de5361ed41b355742b0ab9799c67d3da",
+      "bytes": 675,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/vulkan-test-source-001/persistent_cache.rs",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/vulkan-test-source-001/persistent_cache.rs.gz",
+      "raw_sha256": "288a56e7b5d98e0fa95428545a20c35d1c7e2ed3182736f15f9ecaa24fecc4db",
+      "sha256": "ab3b2c2e21a4afb06ec6276c49c3890ca5c8b2edc023764cd3230ecba301e87e",
+      "bytes": 6914,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/vulkan-test-source-002/inventory.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/vulkan-test-source-002/inventory.json.gz",
+      "raw_sha256": "3f71e690f1a8f0e945d24b4d72e44ef8aee56486daeeb4c05b512ab67ba7da8a",
+      "sha256": "0c5b70465ee59f8ecc7cbc7f3c1d1cb62cccc0566f933ed8aff2b0575fe0c1c0",
+      "bytes": 713,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/vulkan-test-source-002/persistent_cache.rs",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/vulkan-test-source-002/persistent_cache.rs.gz",
+      "raw_sha256": "ee91cdebd65dc1a894e66a4051f4d43096921ab7fe58bbcbb89191fca4c0b729",
+      "sha256": "c169df9bba4e874d861880a636b1a2d4aa94becf4a082dff55a68940355bd787",
+      "bytes": 7255,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/vulkan-test-source-003/inventory.json",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/vulkan-test-source-003/inventory.json.gz",
+      "raw_sha256": "372a436146a2b3e33bb1f3232478e6124d3eb801387010c20fad3d81dd9774dc",
+      "sha256": "e636b8d5439c8ed1a869ad00d8ad0ba758b70765433f81e16c5a08740dd40b9c",
+      "bytes": 734,
+      "compression": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/pipeline-private-001/vulkan-test-source-003/persistent_cache.rs",
+      "retained": "docs/spikes/evidence/persistent-pipeline-cache/pipeline-private-001/vulkan-test-source-003/persistent_cache.rs.gz",
+      "raw_sha256": "900ddee2ab7b224c350c48fd7a1312ce855d08d327cd3e23a0b78e8c12890c86",
+      "sha256": "183d62ccf2e1ccc09e2171b5bdb26170aac6e71a77a0633cbdd51ede36871070",
+      "bytes": 7298,
+      "compression": "gzip"
+    }
+  ],
+  "reviews": [
+    {
+      "path": "docs/spikes/evidence/pipeline-cache-helper-review.json",
+      "sha256": "9baa16641bc43916fb4dbc4a7b52eae6bd107958f167849a854c22fd0f39bca5"
+    },
+    {
+      "path": "docs/spikes/evidence/pipeline-cache-wiring-review.json",
+      "sha256": "7b85d83448b029f51abd5cf26322a99da4c4e388ca8fce12bb0c128096c0f3bd"
+    }
+  ],
+  "historical_qualifications": [
+    "Initial private helper001 FIFO helper did not compile on macOS; corrected test-only nonLinux fallback retained in002.",
+    "Root003 freeze raced a returned-file test-only agent correction. The19-file source set unchanged except tests/persistent_cache.rs; no final full-source003 acceptance claimed. Final004 recompiled and linted that exact corrected test after adding bounded public evidence logging.",
+    "Local Docker Desktop reports already running but its engine/socket is unavailable; actual Linux Vulkan proof remains pending."
+  ],
+  "limits": [
+    "Supplied is not a driver hit or measured performance gain.",
+    "No actual Linux/Android GPU runtime, new rendered appearance, device/performance or phase-gate claim.",
+    "Metal/DX12/nativeWindows persistence, Android approved cache path when environment missing, cache eviction, perlevelpermutation recording and asynchronousfallback remain open."
+  ]
+}

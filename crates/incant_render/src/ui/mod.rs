@@ -116,7 +116,12 @@ pub(crate) struct UiSystem {
     frame_writes: AtomicU64,
 }
 impl UiSystem {
-    pub fn new(device: &wgpu::Device, queue: &wgpu::Queue, backend: wgpu::Backend) -> Result<Self> {
+    pub fn new(
+        device: &wgpu::Device,
+        queue: &wgpu::Queue,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let frame = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("UI frame region"),
             entries: &[frame_entry()],
@@ -145,7 +150,7 @@ impl UiSystem {
             wgpu::TextureFormat::Bgra8UnormSrgb,
         ]
         .into_iter()
-        .map(|format| (format, pipeline(device, &layout, &shader, format)))
+        .map(|format| (format, pipeline(device, &layout, &shader, format, cache)))
         .collect();
         let empty = upload_texture(device, queue, &atlas, &sampler, None, [1, 1]);
         Ok(Self {
@@ -221,6 +226,7 @@ fn pipeline(
     layout: &wgpu::PipelineLayout,
     shader: &crate::shader::Stages,
     format: wgpu::TextureFormat,
+    cache: Option<&wgpu::PipelineCache>,
 ) -> wgpu::RenderPipeline {
     device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("Screen-space UI over display output"),
@@ -248,7 +254,7 @@ fn pipeline(
         depth_stencil: None,
         multisample: Default::default(),
         multiview_mask: None,
-        cache: None,
+        cache,
     })
 }
 

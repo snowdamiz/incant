@@ -18,7 +18,9 @@ mod material_pipeline;
 mod materials;
 mod models;
 mod output;
+mod pipeline_cache;
 mod pixel_grid;
+pub use pipeline_cache::{CacheRead, CacheWrite, PipelineCacheReport};
 mod preview_environment;
 mod resource_error;
 #[cfg(test)]
@@ -80,6 +82,8 @@ pub struct Renderer {
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
     pub adapter_name: String,
+    /// Startup-only persistence result; a supplied cache is not a measured hit.
+    pub pipeline_cache_report: PipelineCacheReport,
     diagnostic_pipeline: wgpu::RenderPipeline,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
@@ -109,7 +113,8 @@ impl Renderer {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Incant renderer"),
-                required_features: output::required_features(&adapter)?,
+                required_features: output::required_features(&adapter)?
+                    | pipeline_cache::required_features(&adapter),
                 ..Default::default()
             })
             .await?;
@@ -121,23 +126,34 @@ impl Renderer {
         // The renderer owns a finite pipeline catalog. Prepare it before any
         // caller can submit a frame; frame preparation only looks up handles.
         let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
+        let cache_session = pipeline_cache::Session::new(&device, &adapter);
+        let cache = cache_session.cache.as_ref();
         let environments = environment::EnvironmentSystem::new(&device, &queue);
-        let lighting = lighting::LightingSystem::new(&device);
+        let lighting = lighting::LightingSystem::new(&device, cache);
         let materials = materials::MaterialSystem::new(
             &device,
             &queue,
             &environments.layout,
             &lighting.layout,
             adapter.get_info().backend,
+            cache,
         )?;
-        let shadows =
-            shadows::ShadowSystem::new(&device, &materials.layout, adapter.get_info().backend)?;
-        let diagnostic_pipeline =
-            Self::pipeline(&device, frame::HDR_FORMAT, adapter.get_info().backend)?;
-        let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
-        let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend)?;
-        let text = text::TextSystem::new(&device, adapter.get_info().backend)?;
-        let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend)?;
+        let shadows = shadows::ShadowSystem::new(
+            &device,
+            &materials.layout,
+            adapter.get_info().backend,
+            cache,
+        )?;
+        let diagnostic_pipeline = Self::pipeline(
+            &device,
+            frame::HDR_FORMAT,
+            adapter.get_info().backend,
+            cache,
+        )?;
+        let output = output::OutputPass::new(&device, adapter.get_info().backend, cache)?;
+        let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend, cache)?;
+        let text = text::TextSystem::new(&device, adapter.get_info().backend, cache)?;
+        let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend, cache)?;
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
@@ -153,6 +169,7 @@ impl Renderer {
             queue,
             adapter,
             adapter_name,
+            pipeline_cache_report: cache_session.finish(),
             diagnostic_pipeline,
             models: Mutex::new(HashMap::new()),
             materials,
@@ -182,6 +199,7 @@ impl Renderer {
         device: &wgpu::Device,
         format: wgpu::TextureFormat,
         backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
     ) -> Result<wgpu::RenderPipeline> {
         let shader = geometry_shader::stages(device, backend, geometry_shader::Kind::Diagnostic)?;
         let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
@@ -222,7 +240,7 @@ impl Renderer {
                     })],
                 }),
                 multiview_mask: None,
-                cache: None,
+                cache,
             }),
         )
     }

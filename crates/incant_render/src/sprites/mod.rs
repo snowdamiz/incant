@@ -207,7 +207,11 @@ pub(crate) struct SpriteSystem {
     cache: Mutex<HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuTexture>>>,
 }
 impl SpriteSystem {
-    pub fn new(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Self> {
+    pub fn new(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Sprite camera"),
             entries: &[camera_entry()],
@@ -254,7 +258,7 @@ impl SpriteSystem {
             }),
             multisample: Default::default(),
             multiview_mask: None,
-            cache: None,
+            cache,
         });
         Ok(Self {
             globals,

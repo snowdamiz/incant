@@ -175,7 +175,7 @@ fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
     })
 }
 impl LightingSystem {
-    pub fn new(device: &wgpu::Device) -> Self {
+    pub fn new(device: &wgpu::Device, cache: Option<&wgpu::PipelineCache>) -> Self {
         let compute_layout = layout(device, true);
         let layout = layout(device, false);
         let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
@@ -193,7 +193,7 @@ impl LightingSystem {
             module: &shader,
             entry_point: Some("build"),
             compilation_options: Default::default(),
-            cache: None,
+            cache,
         });
         Self {
             layout,
