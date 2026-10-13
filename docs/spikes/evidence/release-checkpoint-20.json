@@ -1,0 +1,236 @@
+{
+  "at": "2026-10-13T08:07:27.879200+00:00",
+  "checkpoint": 20,
+  "pr": "https://github.com/snowdamiz/incant/pull/174",
+  "merged_at": "2026-10-13T08:06:59Z",
+  "release": "065aac69289bf9aab067dbd2148624904a860d5e",
+  "release_before": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+  "candidate": "99ba87ed82b4009680eaaa5089ffbd76f6bedc58",
+  "selected_main": "7bfeecfdfaa4a52ec198d1caee0fcb4ff9399fd9",
+  "tree": "71e55928908092313a4bcaf4d799cc09f976726c",
+  "main_now": "dbe8e95126260302ef15f56f467972436cefe9dd",
+  "prepromotion_sha256": "d3df869a355013181e9e5533c6679abe5c4a18d61b3e47698c7f03750e62e3f3",
+  "independent_review_sha256": "27121f31b50b38fca685493497547f682407c1650bb3abf659507c0b736a1c12",
+  "release_parents": [
+    "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+    "99ba87ed82b4009680eaaa5089ffbd76f6bedc58"
+  ],
+  "all_required_success": 23,
+  "push_workflows_success": 8,
+  "merge_commit": "commit 065aac69289bf9aab067dbd2148624904a860d5e\nMerge: 2444d81f 99ba87ed\nAuthor:     Andrew <43323844+snowdamiz@users.noreply.github.com>\nAuthorDate: Tue Oct 13 04:06:58 2026 -0400\nCommit:     GitHub <noreply@github.com>\nCommitDate: Tue Oct 13 04:06:58 2026 -0400\n\n    Merge pull request #174 from snowdamiz/codex/release-candidate\n    \n    Promote checkpoint20 at exact candidate 99ba87ed82b4009680eaaa5089ffbd76f6bedc58, whose tree 71e55928908092313a4bcaf4d799cc09f976726c equals reviewed main205 7bfeecfdfaa4a52ec198d1caee0fcb4ff9399fd9. All 23 required contexts and all eight exact-head push workflows succeeded. Independent prepromotion review accepted 27121f31b50b38fca685493497547f682407c1650bb3abf659507c0b736a1c12. Prior failed checkpoints remain retained; later main206-209 work is outside this tested release tree. This promotion does not approve a phase, device, performance, signing or distribution gate.\n    \n    Built-by: astra",
+  "scope": "Exact selected main205 tested integration baseline; no phase/device/performance gate approval.",
+  "retained_artifacts": {
+    "capture-logs.py": {
+      "sha256": "5dbe1045d6a6e1e3a0badd05963355f7de9e34d4dda847c6a778178a677d80b1",
+      "bytes": 895
+    },
+    "completed-job-logs.json": {
+      "sha256": "9da9e321e760e493d96cf93b74809d2785e7ea50d5429f54599f8ea30b722e29",
+      "bytes": 1103
+    },
+    "independent-promotion-review.json": {
+      "sha256": "27121f31b50b38fca685493497547f682407c1650bb3abf659507c0b736a1c12",
+      "bytes": 13007
+    },
+    "jobs-38356955805.json": {
+      "sha256": "0b744cfc31d80d3fa64667f4ff06196223f452f7d1e62fada8c2ca0cd2fc370b",
+      "bytes": 23394
+    },
+    "jobs-38356955807.json": {
+      "sha256": "c38ceea88d83e04f11de9e9359a4b351c6b1763787e6c5ee8fea29246166d20d",
+      "bytes": 27988
+    },
+    "jobs-38356955854.json": {
+      "sha256": "b6b7c525071a8f30ca2ed233725acd88b01088875c1d4ebe651a539dda6cb0b6",
+      "bytes": 2454
+    },
+    "jobs-38356955876.json": {
+      "sha256": "fe4b762b7a1ce68bb54254f272f2c1f9e9609f6c64db06a053202d7140b7644d",
+      "bytes": 25530
+    },
+    "jobs-38356955958.json": {
+      "sha256": "a7c1e58e419fd1868263e0c228b1128885fd100fbfa6ab38821cf3d3376c1624",
+      "bytes": 26287
+    },
+    "jobs-38356955963.json": {
+      "sha256": "9c43710b3b67ab95a0803b9b5488dd5ec266f61340767e8f1d59d8e3a0c1946c",
+      "bytes": 4149
+    },
+    "jobs-38356956098.json": {
+      "sha256": "779ac20fd6c56fa3138be6d2458226631eef67adc58ca92352051a9ce8a1ff47",
+      "bytes": 12101
+    },
+    "jobs-38356956176.json": {
+      "sha256": "9edb7e1ed9f4d680441612cef16a15dc2275ad608568ae7e0e079555b4264048",
+      "bytes": 19192
+    },
+    "latest-state.json": {
+      "sha256": "56e641db0eae1e8fdc469431d634b19f7304e941b07793f34f8b1111807247ca",
+      "bytes": 11646
+    },
+    "linux-desktop.log.gz": {
+      "sha256": "c57582207603129973189b1655f75dde84a894138779dcab7131ccdf3a9569b4",
+      "bytes": 199673
+    },
+    "macos-checks.log.gz": {
+      "sha256": "0ba70d4269bf94fdeca1d794a4e3a1a8fe31273af80cedcc9048267a7d9ba0db",
+      "bytes": 199101
+    },
+    "manifest.json": {
+      "sha256": "38dca14429c7130107fc16d39a461457a6f2eba27218219584fe8d05d11ab8bd",
+      "bytes": 1506
+    },
+    "merge-body.md": {
+      "sha256": "b412205324315514231b308678c3b7ad37d50fe72ec866e3a621fc492fe43159",
+      "bytes": 594
+    },
+    "observations.jsonl": {
+      "sha256": "1744ce16869f986448614b4a244cf03e7afbf7e4acf382b746466b1964cf346f",
+      "bytes": 186459
+    },
+    "pr-body.md": {
+      "sha256": "d4168aacd8d1218a0a239cf00c561f35ee30f60b424d8e0796d9e56a2478d555",
+      "bytes": 1623
+    },
+    "pr-final.json": {
+      "sha256": "1167331ab78238c165ef073c1b2a5c9415c51ae8deb055cfa9eed34f2d433951",
+      "bytes": 8975
+    },
+    "pr-merged.json": {
+      "sha256": "6e099db047e2eab672233ad764ec4c860f161d0e20d271117012da7ee77f2476",
+      "bytes": 317
+    },
+    "prepare-promotion.py": {
+      "sha256": "083c081601fc4582fcf0af00b0a44547a641a2157f8f337aa8b7a197c901a9ef",
+      "bytes": 4818
+    },
+    "prepromotion.json": {
+      "sha256": "d3df869a355013181e9e5533c6679abe5c4a18d61b3e47698c7f03750e62e3f3",
+      "bytes": 3554
+    },
+    "previous-terminal.json": {
+      "sha256": "7a1cab98b1f28ba224965948434ef55e6359e8e4dc2b7d62a150bc79005e3d31",
+      "bytes": 51992
+    },
+    "promotion.json": {
+      "sha256": "3758f3f907f80ca0961e2b3347c527bc6e28b871b3476d8f3955e88e511b9444",
+      "bytes": 1977
+    },
+    "protection-final.json": {
+      "sha256": "09fa0f6fed923b02c858824b316c8f29f45a20cb001a634685b60a1332218058",
+      "bytes": 3015
+    },
+    "protection.json": {
+      "sha256": "5c904412bdd5bb66a2b99566fb8ee8737be1207963224c1a7b33a8ef08d74057",
+      "bytes": 4177
+    },
+    "release-to-selected.paths": {
+      "sha256": "9fe81396e35f64a8c4cec36acae6fcf15e2fc7e705f579feb06ed8ea8e6de7d8",
+      "bytes": 785212
+    },
+    "release-to-selected.stat": {
+      "sha256": "eaa4d8b48862fd936e88d954a4caee64dd95401bcb0b4e1b6638afd5ac1f2bcb",
+      "bytes": 669173
+    },
+    "required-final.json": {
+      "sha256": "ae6f1a7840efae5dba8e37cdf9090b6f08ab2c812f27beb63701d3e2d27d5a65",
+      "bytes": 8919
+    },
+    "runs-final.json": {
+      "sha256": "ad717e3c251a41a298efdfc042f6e0c3a5d187b4f4329e1e9d27c076f0378d38",
+      "bytes": 99507
+    },
+    "terminal-state.json": {
+      "sha256": "56e641db0eae1e8fdc469431d634b19f7304e941b07793f34f8b1111807247ca",
+      "bytes": 11646
+    },
+    "verified-observations.json": {
+      "sha256": "57d39a2e9e8a96b8c03867f117410c1386d34b28e9c036aa8322f38623902142",
+      "bytes": 2158
+    },
+    "windows-desktop.log.gz": {
+      "sha256": "3c8100af9cfd94a4512550e4293b0d5ebed88c5c848d098149d720a39db01d38",
+      "bytes": 175099
+    },
+    "windows-optimized.log.gz": {
+      "sha256": "c9ad351cd03e560a222892a0fc5115b97dc1137dc335fb70062dc21dcda342fa",
+      "bytes": 8908
+    },
+    "verify.py": {
+      "sha256": "1c705dffb8abce0da94c7fb1a6e17ab777ce2a31ebf1e1b4f48f1568c91b328d",
+      "bytes": 2889
+    }
+  },
+  "hosted_logs": {
+    "macos-checks": {
+      "job": 115162102607,
+      "raw_sha256": "e8a12faf1a09bfc764373c0e6171dcf1a6898d516f954d2ee0430fca5a589da4",
+      "raw_bytes": 1048041,
+      "gzip_sha256": "0ba70d4269bf94fdeca1d794a4e3a1a8fe31273af80cedcc9048267a7d9ba0db",
+      "gzip_bytes": 199101
+    },
+    "linux-desktop": {
+      "job": 115161976443,
+      "raw_sha256": "2bbb889463bcd25c53c46f4bf7ccc84ee04019c43cb34b380f5259966647cac4",
+      "raw_bytes": 1012714,
+      "gzip_sha256": "c57582207603129973189b1655f75dde84a894138779dcab7131ccdf3a9569b4",
+      "gzip_bytes": 199673
+    },
+    "windows-desktop": {
+      "job": 115161976526,
+      "raw_sha256": "7bd656abb5bf28566cffa316e3c5529f03f4434bc2aeffee312f6787702fa28e",
+      "raw_bytes": 863238,
+      "gzip_sha256": "3c8100af9cfd94a4512550e4293b0d5ebed88c5c848d098149d720a39db01d38",
+      "gzip_bytes": 175099
+    },
+    "windows-optimized": {
+      "job": 115161976221,
+      "raw_sha256": "dd475cb70994b32eac894654f87e00e16b8ceec79ad3e392d7ea5ac31a9008e2",
+      "raw_bytes": 40961,
+      "gzip_sha256": "c9ad351cd03e560a222892a0fc5115b97dc1137dc335fb70062dc21dcda342fa",
+      "gzip_bytes": 8908
+    }
+  },
+  "observed_job_durations": [
+    {
+      "name": "windows-optimized",
+      "job_id": 115161976221,
+      "started_at": "2026-10-13T06:29:13Z",
+      "completed_at": "2026-10-13T07:58:43Z",
+      "execution_seconds": 5370,
+      "conclusion": "success"
+    },
+    {
+      "name": "desktop (ubuntu-latest, Linux)",
+      "job_id": 115161976443,
+      "started_at": "2026-10-13T06:29:13Z",
+      "completed_at": "2026-10-13T07:12:50Z",
+      "execution_seconds": 2617,
+      "conclusion": "success"
+    },
+    {
+      "name": "desktop (windows-latest, Windows, .exe)",
+      "job_id": 115161976526,
+      "started_at": "2026-10-13T06:29:13Z",
+      "completed_at": "2026-10-13T07:37:11Z",
+      "execution_seconds": 4078,
+      "conclusion": "success"
+    },
+    {
+      "name": "checks",
+      "job_id": 115162102607,
+      "started_at": "2026-10-13T06:38:15Z",
+      "completed_at": "2026-10-13T07:53:34Z",
+      "execution_seconds": 4519,
+      "conclusion": "success"
+    }
+  ],
+  "qualifications": [
+    "Exact selected main205 only; main206-209 integrations remain outside the tested release tree.",
+    "Failed checkpoints15-19 remain historical and unpromoted; checkpoint19 original terminal state is retained and earlier packets remain in repository history.",
+    "Default and opt-in cooked renderer checks passed on logged hosted Metal/Vulkan/Dx12 adapters. This is not phone, appearance, hardware GPU or performance gate acceptance.",
+    "Vulkan cache evidence is lifecycle/corruption handling, not pipeline-cache hit-rate or performance evidence.",
+    "Observed durations are not matched speedup measurements. Windows optimized succeeded in89m30s near its90m budget.",
+    "Original manifest pending wording records the freeze state; promotion.json records the final state."
+  ]
+}

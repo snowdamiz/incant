@@ -1,0 +1,30 @@
+{
+  "macos-checks": {
+    "job": 115162102607,
+    "raw_sha256": "e8a12faf1a09bfc764373c0e6171dcf1a6898d516f954d2ee0430fca5a589da4",
+    "raw_bytes": 1048041,
+    "gzip_sha256": "0ba70d4269bf94fdeca1d794a4e3a1a8fe31273af80cedcc9048267a7d9ba0db",
+    "gzip_bytes": 199101
+  },
+  "linux-desktop": {
+    "job": 115161976443,
+    "raw_sha256": "2bbb889463bcd25c53c46f4bf7ccc84ee04019c43cb34b380f5259966647cac4",
+    "raw_bytes": 1012714,
+    "gzip_sha256": "c57582207603129973189b1655f75dde84a894138779dcab7131ccdf3a9569b4",
+    "gzip_bytes": 199673
+  },
+  "windows-desktop": {
+    "job": 115161976526,
+    "raw_sha256": "7bd656abb5bf28566cffa316e3c5529f03f4434bc2aeffee312f6787702fa28e",
+    "raw_bytes": 863238,
+    "gzip_sha256": "3c8100af9cfd94a4512550e4293b0d5ebed88c5c848d098149d720a39db01d38",
+    "gzip_bytes": 175099
+  },
+  "windows-optimized": {
+    "job": 115161976221,
+    "raw_sha256": "dd475cb70994b32eac894654f87e00e16b8ceec79ad3e392d7ea5ac31a9008e2",
+    "raw_bytes": 40961,
+    "gzip_sha256": "c9ad351cd03e560a222892a0fc5115b97dc1137dc335fb70062dc21dcda342fa",
+    "gzip_bytes": 8908
+  }
+}
