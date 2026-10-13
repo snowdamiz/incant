@@ -1,0 +1,26 @@
+--- accepted-repair/runner.py
++++ output-overlay/runner.py
+@@ -29,9 +29,9 @@
+ QUALITY_SHA = 'ff0f0f488faa3f6d4d6cc1321d5c4e87c35cbb4160130dddd050697bb824dbc4'
+ FIXTURE = PACKET / 'review/upscaling_owner_review.rs'
+ FIXTURE_SHA = '650316a21f30bfb4f7cbe8c99b67f9b5be269b51eb62b4d017b519bd5130d997'
+-PRODUCTION = 'ce6171957eda212d6796335623d8040a0f06b500'
+-PRODUCTION_FREEZE_SHA = 'eaebaccb63aa7dfce86fc8e32af381fd276b3ed2c761f63dbec7607ba55ccf30'
+-E = Path.home() / '.codex/incant-evidence/0073-owner-quality-gpu-002'
++PRODUCTION = '76be9608e99bf089fcb1e0908827330f70c28ac1'
++PRODUCTION_FREEZE_SHA = '54c13c01c4b1de1c4de42f80ba01b026cf53c3752b4d365af058a4c6048d2361'
++E = Path.home() / '.codex/incant-evidence/0073-owner-output-quality-gpu-001'
+ GLOBAL_LOCK = E.parent / 'native-gpu.lock'
+ ORDER = ['stationary', 'motion', 'transitions', 'c7_disocclusion', 'p1_crossing']
+ SELECTIONS = [ORDER]
+@@ -126,8 +126,8 @@
+             'actual build/source/default-feature binding')
+     require([r['name'] for r in build['checks']] == ['build', 'clippy', 'listing']
+             and all(r['exit_code'] == 0 for r in build['checks']), 'three successful build checks')
+-    require(build['checks'][0]['argv'] == q['build']['review']
+-            and build['checks'][1]['argv'] == q['build']['lint']
++    require(build['checks'][0]['argv'] == ['-j1' if a == '-j2' else a for a in q['build']['review']]
++            and build['checks'][1]['argv'] == ['-j1' if a == '-j2' else a for a in q['build']['lint']]
+             and build['checks'][2]['argv'] == [row['path'], '--list', '--ignored'], 'exact build/check commands')
+     for check in build['checks']:
+         log = Path(data['build']['path']).parent / (check['name'] + '.log')

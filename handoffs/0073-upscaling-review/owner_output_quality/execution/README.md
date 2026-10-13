@@ -1,0 +1,9 @@
+# Output-space overlay review: frozen protocol preparation
+
+This packet reuses the prior five-group fixture and all observations, contracts and image outputs without changing its visual choices. It evaluates the joined current-only output sprite/text route plus guarded BLEND source at 76be9608. Prior failed appearance results and historical C7/C9 definitions remain separate; neither CPU checks nor differently defined rendered-output metrics close those gates. Thin-geometry/reconstruction remains a deferred scope.
+
+The candidate preserves exact source from Claude 497a35d4 with a private-test signature adaptation and isolated rustfmt-only follow-up. The new actual review binary must come from final formatted source. The five groups are stationary, motion, transitions, C7 disocclusion and P1 crossing; the first three already contain the BLEND card, three sprites, mixed-script world text and physical UI with FULL/DRS/UP/OWN comparisons. No new look-dev, shaders or captures are authorized by this packet.
+
+Bounded execution, once separately granted by root, is 5 children, 380 scene frames plus 18 UI submits and 380 readback submits: 778 queue submissions, 380 maps, 15 PNGs, maximum 960x540, 90 seconds per child. Primary first; stop on the first process or contract failure, no retry. The original lifecycle helper, environment allowlist, artifact checks and fixture are byte-identical. The only preparation behavior change admits the exact existing build/lint command with -j1 instead of -j2, matching root's third-builder CPU limit. No GPU authority exists merely because preparation passes.
+
+Claude Opus 5.5 with thinking explicitly verified Max must execute the eventual granted runner and inspect all retained images. Astra handles process, hash and numerical contract checks only. Auto-memory stays disabled. No repairs, extra renders, images, shader/design changes or builds are allowed during that execution without new coordination.

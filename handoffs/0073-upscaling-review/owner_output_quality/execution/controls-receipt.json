@@ -1,0 +1,10 @@
+{
+  "status": "14 focused CPU controls passed; no renderer execution",
+  "runner_sha256": "5bd9fa2f0b6da826193f9225517b02a2ec92f4482554d6636cff762ca1406d9c",
+  "plan_sha256": "46189ae9e4fdd5f9bdd4949ba43745b24dd52e16d7227c5f6e02c064ae18e854",
+  "controls_source_sha256": "ade74c6a0f091ba001975393a4378f87a01cea7a289ba0011546dd44de3ba991",
+  "log": "/Users/andreyyurlov/.codex/incant-evidence/owner-output-quality-build-002/protocol-controls.log",
+  "log_sha256": "565ab1b290d2fd6cd205adbb7f5f5b48000be0263f9c919e13ac14d3d1752665",
+  "gpu_executions": 0,
+  "build_jobs_change": "-j2 to -j1 only in admitted CPU build/lint command, root authorized"
+}
