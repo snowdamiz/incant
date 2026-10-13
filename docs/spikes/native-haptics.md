@@ -40,6 +40,10 @@ wrapping. A batch is fully validated and then coalesced to its last desired stat
 per device before driver calls. Failed driver acceptance triggers best-effort stop
 of all effects and terminates this window operation.
 
+Gilrs 0.11.2 creates a process-lifetime force-feedback worker; drop does not join
+or stop that worker. The window process owns one backend and keeps it through
+session replacements. Effect stop/drop cleanup is distinct from worker shutdown.
+
 Gilrs 0.11.2 accepts requests asynchronously and quantizes duration to 50 ms ticks
 (rounding upward). Its driver/server channel is not an acknowledged bounded
 hardware-delivery queue. This slice bounds engine requests, slots, creation

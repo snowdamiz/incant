@@ -37,12 +37,6 @@ export interface NativeChunk {
   readonly transforms: Float64Array;
   readonly velocities: Float64Array | undefined;
 }
-/** Bounded to 65,536 operations per tick. Validated/applied after views detach.
- * Active-call errors reject numeric writes and the complete batch even when
- * caught, and fail the host. An expired function always throws; catching that
- * error alone does not poison the current update.
- * Functions belong to one tick only; retained functions never reactivate.
- * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 /** Host-issued ephemeral actuator identity. Generations expire on reconnect or
  * session replacement and must never be restored from saved gameplay state. */
 export type HapticTarget =
@@ -51,6 +45,12 @@ export type HapticTarget =
 export type HapticEffect =
   | { readonly kind: "rumble"; readonly strong: number; readonly weak: number; readonly durationMs: number }
   | { readonly kind: "impact"; readonly intensity: number };
+/** Bounded to 65,536 operations per tick. Validated/applied after views detach.
+ * Active-call errors reject numeric writes and the complete batch even when
+ * caught, and fail the host. An expired function always throws; catching that
+ * error alone does not poison the current update.
+ * Functions belong to one tick only; retained functions never reactivate.
+ * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
   /** Current host capabilities. Empty on ordinary/headless/mobile hosts; Wasm
    * parity is not yet implemented. Gamepad targets support rumble, device targets

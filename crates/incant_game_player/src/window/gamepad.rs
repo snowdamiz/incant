@@ -22,15 +22,17 @@ impl Gamepads {
                 // two D-pad axes are translated explicitly below.
                 .with_default_filters(false)
                 .with_force_feedback(true)
-                .build()
-                // FF availability must never remove preexisting input support.
-                .or_else(|_| {
-                    GilrsBuilder::new()
-                        .with_default_filters(false)
-                        .with_force_feedback(false)
-                        .build()
-                }),
-        )?;
+                .build(),
+        )
+        // FF availability must never remove preexisting input support.
+        .or_else(|_| {
+            require_backend(
+                GilrsBuilder::new()
+                    .with_default_filters(false)
+                    .with_force_feedback(false)
+                    .build(),
+            )
+        })?;
         let mut adapter = GamepadAdapter::default();
         let mut haptics = super::haptics::Haptics::default();
         // Collect only the supported bounded inventory before borrowing Gilrs

@@ -76,3 +76,59 @@ fn persisted_session_stages_then_atomically_replaces_opted_in_data_and_neutral_i
             .is_err()
     );
 }
+
+#[test]
+fn persisted_haptics_pending_receiver_refuses_and_restored_authority_is_neutral() {
+    use incant_input::haptics::HapticCapabilities;
+    let code = program(
+        "if(t.clock.tick>1){const targets=t.commands.hapticCapabilities();if(targets.length)t.commands.playHaptic(targets[0],{kind:'rumble',strong:0.5,weak:0,durationMs:125});}",
+    );
+    let mut live = NativeSession::new(scene(), code.clone(), Default::default()).unwrap();
+    live.tick(&[]).unwrap();
+    let bytes = save(&mut live);
+    let checkpoint = capture(&mut live).unwrap();
+    live.set_haptic_capabilities(HapticCapabilities::default().with_gamepad(0, 8).unwrap())
+        .unwrap();
+    live.tick(&[]).unwrap();
+    let before = live.world.snapshot();
+    assert!(matches!(
+        live.prepare_persisted_restore(
+            &bytes,
+            &mut payload(),
+            &mut planar(),
+            &mut spatial(),
+            &mut allocations()
+        ),
+        Err(CheckpointError::Unsupported("pending haptic output"))
+    ));
+    assert!(matches!(
+        checkpoint.prepare_for(
+            &live,
+            &mut payload(),
+            &mut planar(),
+            &mut spatial(),
+            &mut allocations()
+        ),
+        Err(CheckpointError::Unsupported("pending haptic output"))
+    ));
+    assert_eq!(live.world.snapshot(), before);
+    assert_eq!(live.take_haptics().unwrap().len(), 1);
+    live.restore_persisted_bytes(
+        &bytes,
+        &mut payload(),
+        &mut planar(),
+        &mut spatial(),
+        &mut allocations(),
+    )
+    .unwrap();
+    assert!(host(&live).unwrap().haptic_capabilities.is_empty());
+    assert!(live.take_haptics().unwrap().is_empty());
+    let mut fresh = load(&bytes, code).unwrap().start().unwrap();
+    assert!(host(&fresh).unwrap().haptic_capabilities.is_empty());
+    for _ in 0..3 {
+        live.tick(&[]).unwrap();
+        fresh.tick(&[]).unwrap();
+        assert!(live.take_haptics().unwrap().is_empty());
+        assert!(fresh.take_haptics().unwrap().is_empty());
+    }
+}

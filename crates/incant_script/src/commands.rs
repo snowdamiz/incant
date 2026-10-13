@@ -121,8 +121,9 @@ impl TickCommands {
                         let mut state = state.borrow_mut();
                         if !state.active || state.failure.is_some() {
                             true
-                        } else if state.queue.len() + state.restarts + state.haptics.len()
-                            >= MAX_FRAME_COMMANDS
+                        } else if (state.restarts != 0 || !state.haptics.is_empty())
+                            && state.queue.len() + state.restarts + state.haptics.len()
+                                >= MAX_FRAME_COMMANDS
                         {
                             state.failure = Some(ScriptError::InputLimit);
                             true

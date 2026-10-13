@@ -133,3 +133,97 @@ fn haptic_checkpoint_restores_neutral_capabilities_and_never_replays_output() {
     assert!(restored.take_haptics().unwrap().is_empty());
     assert!(restored.tick(&[]).is_err()); // unsupported until this host advertises anew
 }
+
+#[test]
+fn haptic_requests_share_the_total_command_quota() {
+    for overflow in [false, true] {
+        let suffix = if overflow {
+            "try{commands.requestRestart()}catch(_){}"
+        } else {
+            ""
+        };
+        let mut host=ScriptHost::with_budget(code(&format!("for(let i=0;i<32;i++){{{PLAY}}}for(let i=0;i<{};i++)commands.requestRestart();{suffix}",incant_runtime::MAX_FRAME_COMMANDS-32)),Duration::from_secs(5)).unwrap();
+        host.set_haptic_capabilities(capabilities()).unwrap();
+        host.enable_restart_requests().unwrap();
+        let result = host.tick(&mut world(), 0.1);
+        if overflow {
+            assert!(matches!(result, Err(ScriptError::InputLimit)));
+        } else {
+            result.unwrap();
+            assert_eq!(host.take_haptics().unwrap().len(), 32);
+            assert_eq!(
+                host.take_session_request().unwrap(),
+                Some(SessionRequest::Restart)
+            );
+        }
+    }
+}
+#[test]
+fn haptic_device_impact_requires_explicit_current_host_authority() {
+    let program = code(
+        "commands.playHaptic({kind:'device',generation:9},{kind:'impact',intensity:0.25});commands.stopHaptic({kind:'device',generation:9});",
+    );
+    let mut unsupported = ScriptHost::new(program.clone()).unwrap();
+    assert!(unsupported.tick(&mut world(), 0.1).is_err());
+    let mut host = ScriptHost::new(program).unwrap();
+    host.set_haptic_capabilities(HapticCapabilities::default().with_device(9).unwrap())
+        .unwrap();
+    host.tick(&mut world(), 0.1).unwrap();
+    let output = host.take_haptics().unwrap();
+    assert_eq!(output.len(), 2);
+    assert_eq!(
+        output.iter().next().unwrap().effect,
+        HapticEffect::Impact { intensity: 0.25 }
+    );
+}
+#[test]
+fn haptic_pending_receiver_refuses_ordinary_restore_without_discarding_output() {
+    let scene = incant_runtime::CookedScene::new(id(99), 60, vec![]).unwrap();
+    let mut session = NativeSession::new(scene, code(PLAY), Default::default()).unwrap();
+    let saved = session.checkpoint_bytes().unwrap();
+    session.set_haptic_capabilities(capabilities()).unwrap();
+    session.tick(&[]).unwrap();
+    let tick = session.world().unwrap().tick();
+    assert!(matches!(
+        session.restore_checkpoint_bytes(&saved),
+        Err(CheckpointError::Unsupported("pending haptic output"))
+    ));
+    assert_eq!(session.world().unwrap().tick(), tick);
+    assert_eq!(session.take_haptics().unwrap().len(), 1);
+    session.restore_checkpoint_bytes(&saved).unwrap();
+    assert!(session.host.take_haptics().unwrap().is_empty());
+    assert!(session.tick(&[]).is_err());
+}
+
+#[test]
+fn haptic_and_structural_reentrant_calls_share_one_quota() {
+    let count = incant_runtime::MAX_FRAME_COMMANDS - 33;
+    let one = "00000000000000000000000001";
+    let two = "00000000000000000000000002";
+    let mut host = ScriptHost::with_budget(
+        code(&format!(
+            r#"
+        chunks[0].transforms[0] = 90;
+        for(let i=0;i<32;i++){{{PLAY}}}
+        for(let i=0;i<{count};i++)commands.setVelocity('{one}',[1,0,0]);
+        const value=[0,0,0];
+        Object.defineProperty(value,0,{{get(){{commands.setVelocity('{two}',[2,0,0]);return 3;}}}});
+        try{{commands.setVelocity('{one}',value)}}catch(_){{}}
+    "#
+        )),
+        Duration::from_secs(5),
+    )
+    .unwrap();
+    host.set_haptic_capabilities(capabilities()).unwrap();
+    let mut world = world();
+    let before = world.snapshot();
+    assert!(matches!(
+        host.tick(&mut world, 0.1),
+        Err(ScriptError::InputLimit)
+    ));
+    assert_eq!(world.snapshot(), before);
+    assert!(matches!(
+        host.take_haptics(),
+        Err(ScriptError::FailedSession)
+    ));
+}
