@@ -5,8 +5,9 @@
 - Nothing was built, compiled, rendered or captured. No Cargo command, GPU
   process, screenshot, screen control or target lease ran.
 - The evidence namespace `~/.codex/incant-evidence/0076-shadow-guard-review-001`
-  does not exist. With the grants absent, every guarded command refused and
-  created nothing.
+  did not exist when the self-check ran. With the grants absent, every guarded
+  command refused and created nothing. Root has since created it to hold the
+  two source freezes; see the post-commit note at the end.
 - No production file changed. This is Phase 1 rendering correctness and quality
   preparation. It approves no phase gate and makes no performance or device claim.
 
@@ -563,3 +564,31 @@ call.
 4. **If on-frame identity fails.** Would you authorize a same-source determinism
    repeat (26 submissions, beyond this cap), or decide on another basis? I
    propose no tolerance in advance.
+
+## Post-commit note: root's source freezes
+
+**What appeared.** After my self-check receipt (`selfcheck.json`, written 09:54:17
+local time), root created
+`~/.codex/incant-evidence/0076-shadow-guard-review-001` at 09:56:16. It holds only:
+- `baseline-source-freeze.json` (sha256 `ab1d341ecd098348b1446f4c6e971001ce5bfb7e7e6bfef7fd76340fe90ee673`);
+- `candidate-source-freeze.json` (sha256 `6b80b9e8ca7689773d10ebe5f809dff8673372c25e8eecdd5b86abf1d9791d52`).
+
+There is no grant file, and none of my tools ran then.
+
+**My read-only preflight.** It was a scratch script, against the Git objects. It
+applied `build.py`'s exact-coverage rule:
+
+| Freeze | Commit (`source_commit`) | Rows | Build inputs | Missing | Mismatched | `.cargo/config.toml` |
+|---|---|---|---|---|---|---|
+| Baseline | `0aa02559` | 3,141 | 3,141 | 0 | 0 | listed |
+| Candidate | `f636a2d5` | 3,142 | 3,142 | 0 | 0 | listed |
+
+- Both freezes are exact.
+- They differ in exactly the 7 Rust delta paths.
+
+**Refusals.** Because the namespace now exists, a fresh `selfcheck.py` skips its
+refusal step by design, as it did at 10:41. I will not probe the guarded tools
+against a namespace root is filling: if a grant landed mid-probe, `lease.py
+acquire` would take a real lease. The committed receipt, made before the
+namespace existed, remains the refusal evidence. Its tool, plan and fixture
+hashes equal the committed files'; the 10:41 run confirmed this.
