@@ -11288,5 +11288,63 @@
     "path": "docs/spikes/evidence/physics-islands-main231/final-root.json",
     "sha256": "cb3bc688f89760e8c91f3af3ed5d734d3361ab42f0bbb87427658bc644bb2624",
     "decision": "accepted"
+  },
+  "main234_join": {
+    "qualification": {
+      "main": "979e85e633d3fae975f15d8ec0f485119f57062f",
+      "tested_base": "b4b0d5e919de8432a6c643d4486e0230ebddbc58",
+      "incoming_implementation_paths": [
+        "crates/incant_render/src/model_draw.rs",
+        "crates/incant_render/src/shadow_draw.rs",
+        "crates/incant_render/src/shadows/cascade.rs",
+        "crates/incant_render/src/shadows/mod.rs",
+        "crates/incant_render/src/shadows/receiver_tests.rs",
+        "crates/incant_render/tests/lighting_gpu/extended.rs",
+        "crates/incant_render/tests/lighting_gpu/readback.rs",
+        "editor/ui/src/components/HierarchyMenu.test.tsx"
+      ],
+      "frozen_exceptions": [
+        {
+          "path": "crates/incant_render/src/model_draw.rs",
+          "old_sha256": "9783e1a067c9db200ae5ed1e95ade387bdca63566802ead8d782d25c44dbe6a3",
+          "new_sha256": "2b71b2ec9fadf04ce8a14b68468c886d782f070ddf1967a02ba978f5378ebc4d"
+        },
+        {
+          "path": "crates/incant_render/src/shadow_draw.rs",
+          "old_sha256": "b2a80a608a038923646fe9ce5f1507312877e72d7c268d312a869d5e1e2f1a94",
+          "new_sha256": "b37dce15d82d41292f9593154df67726d1bf008aac6cd15cb8010c2d5a360275"
+        },
+        {
+          "path": "crates/incant_render/src/shadows/cascade.rs",
+          "old_sha256": "caaa647943712832340f079649a9389c9e1ac24555ee3765e5d0879323ec8919",
+          "new_sha256": "1a1eafe8f77759a008c5cb7c0aaaa8fc2b11320b23e7b57c16b4a22344ff2ce6"
+        },
+        {
+          "path": "crates/incant_render/src/shadows/mod.rs",
+          "old_sha256": "73a154126addadc6129e05daef262956cb78281a1388b780ca57c0725980229a",
+          "new_sha256": "29ec6d385418b3365daaec2458137c0f0115588ce24176b0f13cde48f7b0c828"
+        },
+        {
+          "path": "crates/incant_render/tests/lighting_gpu/extended.rs",
+          "old_sha256": "eab87d502e3a993cc720eb1d18b320f29f9409c1fdb4984f876bef798ccb0142",
+          "new_sha256": "5c8b90996223b69e1efe3c9325da321f8781e4c36a28d38729244f68407e2668"
+        },
+        {
+          "path": "crates/incant_render/tests/lighting_gpu/readback.rs",
+          "old_sha256": "1a834ae4e71b4e799f63d8ad784a9a08f53113922e22f5a7c6a85e07ca1ead1c",
+          "new_sha256": "1547912a9107f299859ae6bf276fccdbc2044fd62aeef0a7b1bf1520493acd5d"
+        }
+      ],
+      "physics_closure_files": 2010,
+      "collector_sha256": "4d5a257d0662405f66fb1a98ab1a05c2f250c9857bfbcaa1875b840eac714614",
+      "physics_vendor_tools_lock_manifests_unchanged": true,
+      "current_main_rebuild_claim": false
+    },
+    "archive": {
+      "path": "docs/spikes/evidence/physics-islands-main231/main234-qualification.json.gz",
+      "sha256": "dd222e28090b5fdabdbf13bdc681b1bc329e2885a704d155f25f8aa9e8e1fb4d",
+      "records": 4
+    },
+    "status": "read-only qualification passed; independent root review pending"
   }
 }
