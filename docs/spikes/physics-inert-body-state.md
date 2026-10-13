@@ -140,7 +140,7 @@ with their failed logs. They were corrected before source001 freeze. The final
 commands, pinned references, source copies and raw output are losslessly retained
 in [the evidence manifest](evidence/physics-inert-body-state.json).
 
-Independent source/final review is pending. Complete collider material/filter/
+Independent producer source/final review is accepted, retained in the [main206 integration packet](evidence/physics-body-main206/producer-final-review.json). Complete collider material/filter/
 pose/change payloads, shape and feature ownership, reciprocal island/solver/CCD
 manager state, mutation/intersection/soft/joint policy, scratch reconstruction,
 enclosing owner identity and safe live construction still need composition and
