@@ -16,6 +16,15 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## SSAO repair oracle experiment
+
+A [test-only CPU proposal model](docs/spikes/ssao-quality-oracle.md) preserves
+the original algorithm and frozen failed draft, and follows the committed design's
+unchanged shading-normal contract. Nine numerical tests and strict renderer
+Clippy pass, but the proposed N6 banding threshold fails and N8's ROI is not fully
+specified. The packet retains exact measurements and independent scalar replay.
+Production shaders/resources are unchanged; no GPU or appearance acceptance follows.
+
 ## Current overview — main196, 2026-10-13
 
 Development main196 includes the restart quota-test repair (PR188) and the reviewed,
