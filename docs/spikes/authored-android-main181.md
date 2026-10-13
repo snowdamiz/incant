@@ -4,7 +4,8 @@ The reviewed Android TypeScript archive route is composed with actual main181
 `569f491311fbd25b2d47354386739cc08b049f94`, including whole-session restart and
 bounded PCM staging. Tested source is
 `489168fc49a23a4f4779907cd85793971dfe3cca`. Independent final integration review
-is pending; this is not a phase, phone, rendering or performance approval.
+is accepted; publication still requires the exact-head fast check. This is not a
+phase, phone, rendering or performance approval.
 
 ## Current composed proof
 
@@ -50,3 +51,8 @@ the complete PCM Rust implementation remains exact reviewed main181 bytes.
 NDK API 24 compilation is distinct from API 37 execution. Static Wasm Android
 export, a mobile presentation/device host, minimum-OS execution, signing and
 reference-phone measurements remain outside this result.
+
+The [final independent review](evidence/authored-android-main181/final-review.json),
+SHA-256 `c65e15610b5034f1973823868d6b2fadcfb0cab42ab037802791045a0a3c4e71`, accepts the unchanged pre-review manifest
+`e07cfaf9f2ce80c756618df544ac184f8e6774f7e70970ae24db645b7e03f114`.
+Its pending review field is the preserved capture-time state; no proof receipt was rewritten.

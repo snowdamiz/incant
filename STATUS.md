@@ -923,7 +923,7 @@ CPU worker and managed owner are merged through main179;
 whole-session restart is merged in main180 and bounded PCM in main181. Both authored
 Android variants pass preserved pre-PCM archive/emulator proofs; the final composed
 deterministic archive and both-mode mobile/target checks pass, with independent
-integration review pending. Phase 1 and the finished game
+integration review accepted and the exact-head fast check pending. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
@@ -1911,5 +1911,5 @@ target compilation. A fresh deterministic archive passes three actual source-fre
 ARM Android17/API37 processes with exact native logs, observations and PCM plus
 seven precise refusals. Owned emulator resources are removed. The earlier complete
 fast shipping proof stays explicitly pre-PCM; no later fast archive rebuild is
-claimed. Final independent review is pending. No phone/rendering/performance gate
+claimed. Final independent review is accepted; publication awaits its fast check. No phone/rendering/performance gate
 is approved. [Scope and evidence](docs/spikes/authored-android-main181.md).
