@@ -1,0 +1,26 @@
+{
+ "format": "incant-0070-ssao-filter-cases-v1",
+ "status": "proposal for root review; not a frozen plan, no grant",
+ "numeric_cases": [
+  {"name": "ssao_core", "frames": 20, "helper": "existing case, unchanged",
+   "stage_frames": ["p_ao_white", "o_ao_white", "p_ao_strength_0_5", "p_ao_edge"]},
+  {"name": "ssao_materials", "frames": 10, "helper": "existing case, unchanged", "stage_frames": []},
+  {"name": "ssao_geometry", "frames": 17, "helper": "existing case, unchanged",
+   "stage_frames": ["g_ao_white", "g_ao_mask_equal", "g_ao_mask_cutout", "g_ao_backface", "g_ao_mirrored",
+                    "g_ao_skin_t0", "g_ao_skin_t1", "g_ao_motion_far", "g_ao_motion_near"]},
+  {"name": "lifecycle_drs", "frames": 18, "helper": "existing case, unchanged", "stage_frames": []},
+  {"name": "ssao_quality", "frames": 10, "helper": "new case (preparation section 5): gray 0.5 isolated sphere, white stripes",
+   "labels": ["p_off_sphere", "p_ao_sphere", "o_off_sphere", "o_ao_sphere",
+              "p_off_stripes", "p_ao_stripes", "p_off_stripes_black",
+              "o_off_stripes", "o_ao_stripes", "o_off_stripes_black"],
+   "stage_frames": ["p_ao_stripes", "o_ao_stripes"]}
+ ],
+ "not_rerun": {"bloom_numeric": "bloom code is unchanged by the filter; its gates are not declared here"},
+ "appearance": {"renders": 16, "pngs": 16, "pairs": 11, "max_extent": [960, 540],
+                "plan": "the existing appearance set, unchanged, rendered by the filter build"},
+ "stage_planes": {"per_frame": ["raw", "h", "v"], "format": "R8 codes, tightly packed rows, internal size",
+                  "charged_frames": 0, "note": "readback copies are not frames (plan frame_rule)"},
+ "budget": {"new_frames_max": 128, "numeric_frames": 75, "appearance_frames": 16, "new_frames_planned": 91,
+            "unallocated": 37, "pairs_max": 16, "pairs_planned": 11, "pngs_max": 32, "pngs_planned": 16,
+            "max_extent": [960, 540]}
+}

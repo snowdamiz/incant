@@ -1,0 +1,98 @@
+{
+ "positive_independent_model": {
+  "ssao_core_p_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 11013,
+   "oracle_final_widths": {
+    "0": 37850,
+    "1": 4464,
+    "2": 1026,
+    "3": 149
+   }
+  },
+  "ssao_core_o_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 9605,
+   "oracle_final_widths": {
+    "0": 39020,
+    "1": 4027,
+    "2": 389,
+    "3": 53
+   }
+  },
+  "ssao_core_edge_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 12726,
+   "oracle_final_widths": {
+    "0": 35925,
+    "1": 5720,
+    "2": 1570,
+    "3": 274
+   }
+  },
+  "ssao_quality_p_stripes_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 17959,
+   "oracle_final_widths": {
+    "0": 34779,
+    "1": 7924,
+    "2": 784,
+    "3": 2
+   }
+  },
+  "ssao_quality_o_stripes_filtered": {
+   "filtered": "pass",
+   "stages": "pass",
+   "certainly_occluded": 6555,
+   "oracle_final_widths": {
+    "0": 40395,
+    "1": 2821,
+    "2": 259,
+    "3": 14
+   }
+  },
+  "perturbations": {
+   "raw_code_plus_1": [
+    "raw_outside 1"
+   ],
+   "final_code_below_interval": [
+    "v_outside 1",
+    "v_outside_final 1"
+   ]
+  },
+  "quality_reproduces_addendum": {
+   "n6_max_step_255": 7.0,
+   "n7_counts": [
+    0,
+    0,
+    0
+   ],
+   "n8_ratios": [
+    0.376,
+    0.176
+   ],
+   "n6t_step_residual_255": 3.37
+  }
+ },
+ "ambiguous": [
+  "conflicting RGB (empty inference)",
+  "no diffuse signal (coverage)",
+  "every ray ambiguous (no certain occlusion)",
+  "inflated decisive widths",
+  "absence mismatch"
+ ],
+ "missing": [
+  "stage plane",
+  "all planes (quality gates)",
+  "frame"
+ ],
+ "report": [
+  "empty evidence: every case missing, every gate fails",
+  "empty index and zero-length plane: cases invalid",
+  "CLI: failing report written (exit 1), never replaced (exit 2)"
+ ]
+}
