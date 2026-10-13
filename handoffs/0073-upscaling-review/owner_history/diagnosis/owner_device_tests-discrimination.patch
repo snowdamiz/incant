@@ -1,0 +1,33 @@
+--- a/crates/incant_render/src/upscaling/owner_device_tests.rs
++++ b/crates/incant_render/src/upscaling/owner_device_tests.rs
+@@ -115,6 +115,14 @@
+             c.changes[0] = classes(&[7]);
+             c.changes[4] = 1 << 7;
+             color = rgba(0.);
++            // Discrimination: a changed-table misread would persist 0.45 here, far
++            // from owner 7; arithmetic that admits the [9,8] tap cannot reach it.
++            c.probes.push(Probe {
++                pixel: [3, 3],
++                color: rgba(0.),
++                depth: z,
++                record: [PRESENT | 5, 0],
++            });
+         }
+         4 | 5 => {
+             let mask = classes(&[5, 7, 9]);
+@@ -516,7 +524,14 @@
+                 (depth - probe.depth).abs() <= 0.0001,
+                 "case {case} probe {probe:?}: {depth}"
+             );
+-            assert_eq!(record, probe.record, "case {case} probe {probe:?}");
++            // Positive-support provenance: CENTER's color can only become nonzero
++            // through the [9,8] tap, and the record names owner 7 exactly then.
++            let expected = if case == 3 && probe.pixel == CENTER && color[0] > 0. {
++                [PRESENT | 5, 7]
++            } else {
++                probe.record
++            };
++            assert_eq!(record, expected, "case {case} probe {probe:?}");
+         }
+         if c.baseline {
+             for (plane, bpp) in [(0, 8), (1, 4)] {

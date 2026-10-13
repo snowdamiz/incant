@@ -1,0 +1,36 @@
+--- a/crates/incant_render/src/upscaling/resolve_owner.wgsl
++++ b/crates/incant_render/src/upscaling/resolve_owner.wgsl
+@@ -59,13 +59,14 @@
+     if r.over {return ((r.m|support_classes)&changed_classes)==0u;}
+     return !changed_id(r.a) && (r.b==0u || !changed_id(r.b));
+ }
+-// A reprojected tap keeps a changed exact owner only while it is in the current
+-// support; an overflow record needs a changed set disjoint from its classes.
+-fn record_admissible(r:Stored,support:vec4u,support_classes:u32,changed_classes:u32)->bool {
++// A reprojected tap follows the motion of the current anchor, which the caller
++// requires to be r.a, so only that owner may have changed. Any other changed exact
++// owner rejects the tap at every current support weight: arbitrarily small support
++// does not validate stale history. An overflow record needs a changed set disjoint
++// from its classes.
++fn record_admissible(r:Stored,support_classes:u32,changed_classes:u32)->bool {
+     if r.over {return ((r.m|support_classes)&changed_classes)==0u;}
+-    let gone_a=changed_id(r.a) && !any(support==vec4u(r.a));
+-    let gone_b=r.b!=0u && changed_id(r.b) && !any(support==vec4u(r.b));
+-    return !gone_a && !gone_b;
++    return r.b==0u || !changed_id(r.b);
+ }
+ @fragment fn resolve(@builtin(position) position:vec4f)->OwnerResolved {
+     var result=OwnerResolved(vec4f(0.0),0.0,vec2u(0u));
+@@ -152,10 +153,10 @@
+         let c=textureLoad(previous_color,tap,0);let z=textureLoad(previous_depth,tap,0).x;
+         if !admitted(c) || c.a<1.0 || !compatible(z,expected) {continue;}
+         // Each tap needs its own canonical record with the current anchor owner and
+-        // no changed owner that left the support. Rejected taps leave the mass.
++        // no other changed owner. Rejected taps leave the mass.
+         let r=stored(textureLoad(previous_record,tap,0).xy);
+         if !provable || !r.ok || r.a!=anchor_id
+-            || !record_admissible(r,support,support_classes,changed_classes) {continue;}
++            || !record_admissible(r,support_classes,changed_classes) {continue;}
+         history+=clean(c)*weight; mass+=weight; joined=with_record(joined,r);
+     }}
+     if !(mass>0.0) {return result;}
