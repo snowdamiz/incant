@@ -174,3 +174,24 @@ fn zero_filled_queries_are_refused_without_rejecting_nonzero_quantized_intervals
     assert_eq!(pool.stats().unwrap().retired, 0);
     assert_eq!(pool.reserve().unwrap().unwrap().index, 0);
 }
+
+#[test]
+fn grouped_pass_boundaries_never_emit_an_empty_timestamp_descriptor() {
+    for count in [1, 2, 4, 8] {
+        let edges: Vec<_> = (0..count)
+            .map(|i| recorder::range_edges(i, count))
+            .collect();
+        assert_eq!(
+            edges.iter().flatten().filter(|(first, _)| *first).count(),
+            1
+        );
+        assert_eq!(edges.iter().flatten().filter(|(_, last)| *last).count(), 1);
+        assert_eq!(edges[0], Some((true, count == 1)));
+        assert_eq!(edges[count - 1], Some((count == 1, true)));
+        if count > 2 {
+            assert!(edges[1..count - 1].iter().all(Option::is_none));
+        }
+        assert_eq!(recorder::range_edges(count, count), None);
+    }
+    assert_eq!(recorder::range_edges(0, 0), None);
+}

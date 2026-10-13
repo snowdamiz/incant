@@ -90,14 +90,19 @@ pub(crate) struct PassQueries {
 }
 impl PassQueries {
     pub fn render(&self) -> wgpu::RenderPassTimestampWrites<'_> {
-        self.render_range(true, true)
+        self.render_range(0, 1).expect("one complete pass")
     }
-    pub fn render_range(&self, first: bool, last: bool) -> wgpu::RenderPassTimestampWrites<'_> {
-        wgpu::RenderPassTimestampWrites {
+    pub fn render_range(
+        &self,
+        index: usize,
+        count: usize,
+    ) -> Option<wgpu::RenderPassTimestampWrites<'_>> {
+        let (first, last) = range_edges(index, count)?;
+        Some(wgpu::RenderPassTimestampWrites {
             query_set: &self.queries,
             beginning_of_pass_write_index: first.then_some(self.start),
             end_of_pass_write_index: last.then_some(self.end),
-        }
+        })
     }
     pub fn compute(&self) -> wgpu::ComputePassTimestampWrites<'_> {
         wgpu::ComputePassTimestampWrites {
@@ -106,6 +111,15 @@ impl PassQueries {
             end_of_pass_write_index: Some(self.end),
         }
     }
+}
+// Wgpu rejects Some(timestamp_writes) with neither index. Interior passes in a
+// logical multi-pass group must omit the descriptor entirely.
+pub(super) fn range_edges(index: usize, count: usize) -> Option<(bool, bool)> {
+    if index >= count {
+        return None;
+    }
+    let edges = (index == 0, index + 1 == count);
+    (edges.0 || edges.1).then_some(edges)
 }
 impl Capture {
     pub fn pass(&mut self, pass: GpuPass) -> PassQueries {

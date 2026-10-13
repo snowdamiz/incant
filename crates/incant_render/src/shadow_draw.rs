@@ -68,7 +68,7 @@ impl ShadowDraw {
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("Directional shadow cascade"),
                 timestamp_writes: queries
-                    .map(|q| q.render_range(index == 0, index + 1 == self.maps.layers.len())),
+                    .and_then(|q| q.render_range(index, self.maps.layers.len())),
                 color_attachments: &[],
                 depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
                     view: &layer.view,
