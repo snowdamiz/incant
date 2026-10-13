@@ -1,0 +1,16 @@
+{
+  "reviewer": "astra-root",
+  "timestamp": "2026-10-13T19:46:28.919038+00:00",
+  "status": "accepted-source-composition",
+  "source_head": "dfc7a200e36390efbef607fb4750929b786c2bdb",
+  "composition_sha256": "7fc621348224b93191b1486b50570bee823ca329da2b94abe6985b5a135bf691",
+  "checked_files": 1751,
+  "seams": [
+    "crates/incant_physics_snapshot/src/lib.rs"
+  ],
+  "findings": [],
+  "notes": [
+    "Only Error variant ordering differs from accepted producer; exact pre-existing main243 ordering retained. No wire discriminant, representation or construction behavior changed.",
+    "Conservative native fingerprint changes; producer execution is not relabeled as this source. Current composed execution remains required."
+  ]
+}

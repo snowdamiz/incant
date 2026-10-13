@@ -1,6 +1,6 @@
 # Implementation status
 
-Current main is PR242: the private primitive-world composition is merged, while public physics saves and outer runtime admission remain closed. Frozen checkpoint27 still selects main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Remaining checkpoint jobs continue on the original head; release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
+Current main is PR243: the private primitive-world composition is merged, while public physics saves and outer runtime admission remain closed. Frozen checkpoint27 still selects main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Remaining checkpoint jobs continue on the original head; release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
 
 Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
 
@@ -2692,3 +2692,14 @@ after the required exact-head fast check.
 [composed evidence](docs/spikes/physics-construction-main229.md) is retained. Exact manager construction,
 whole-owner admission and live physics saves remain closed.
 [Producer evidence](docs/spikes/physics-native-construction.md).
+
+### Exclusive native physics checkpoint capture (producer CPU complete)
+
+Default-off capture now issues opaque in-memory checkpoints only from an exclusive
+completed native owner and reconstructs a full private primitive candidate. Both
+deterministic and SIMD8 qualification pass 182 native and 228 snapshot tests each;
+independent complete-source review is accepted. The warning-only source010 delta
+has strict native/wasm compilation, with the source009 test generations retained
+separately. Final producer execution and current-main source composition reviews are accepted. Publication awaits the required fast check; outer runtime integration remains separate.
+Public persisted physics saves remain refused. See
+[scope and evidence](docs/spikes/physics-native-capture-owner.md).

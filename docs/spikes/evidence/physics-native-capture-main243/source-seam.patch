@@ -1,0 +1,24 @@
+diff --git a/crates/incant_physics_snapshot/src/lib.rs b/crates/incant_physics_snapshot/src/lib.rs
+index aaee11ed..87a80f7f 100644
+--- a/crates/incant_physics_snapshot/src/lib.rs
++++ b/crates/incant_physics_snapshot/src/lib.rs
+@@ -93,16 +93,16 @@ pub enum Error {
+     SleepScan,
+     Collider,
+     UnsupportedCollider,
++    Narrow,
+     Integration,
+     UnsupportedIntegration,
+     Ccd,
++    Broad,
++    BroadTree,
+     Pipeline,
+     PipelinePhase,
+     PipelineDeferred,
+     PipelineQuarantine,
+-    Narrow,
+-    Broad,
+-    BroadTree,
+ }
+ impl std::fmt::Display for Error {
+     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
