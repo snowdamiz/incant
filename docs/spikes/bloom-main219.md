@@ -34,10 +34,21 @@ Producer Claude0075 acceptance (8dbd260d) is bloom-only: 37 GPU cases, 534
 submissions and all 27 unchanged analyzer gates passed. The previous centroid
 defect at reduced DRS is corrected in that producer. SSAO remains rejected.
 Those appearance and numerical results belong to the producer source/binaries;
-current composed CPU and bounded GPU validation are pending. Fixed temporal
+current composed CPU and bounded GPU validation now pass. Fixed temporal
 softness and MASK detail around 18% of reference remain unchanged limitations.
 
 The first formatting invocation used an absolute cargo path without the matching
 cargo-fmt directory on PATH and failed before formatting. The corrected pinned
-PATH invocation succeeded. No compiler or GPU execution has yet been performed
-for this candidate.
+PATH invocation succeeded. Twelve current checks now pass: 137 default and 166 cooked CPU tests (103 GPU
+cases ignored in each CPU suite), strict Clippy, native-window and browser
+consumers, graph and conventions. Two copied binaries completed eight additional
+Metal frames under one bounded grant, with actual positive Display/Models timing
+and the expected cooked bloom refusal. All children were reaped; no images were
+created. The original producer appearance review remains separate.
+
+[Manifest](evidence/bloom-main219.json) and
+[read-only verifier](evidence/bloom-main219/verify.py) retain 353 raw/Git records,
+204 lossless payloads and nine binary identities. The first archive verifier
+exposed an omitted producer analysis path; the collector now retains all 37
+reviewed producer records, with the initial diagnostic preserved. No source or
+execution changed. Final independent integration review is pending.

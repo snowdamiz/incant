@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-13T11:46:46.728197+00:00",
+  "decision": "Accepted scoped minimal bloom integration source for CPU qualification",
+  "freeze_sha256": "57ae247e8ca07493a0ad5c806ef6efb0a54fc0031857484aafe137fe2ac3f76b",
+  "actions": [
+    "Verified all14frozenpaths and exact producer equality for8unchangedbloom inputs",
+    "Read full current renderer/graph/output glue and exact producer deltas in bloom pass timing/device tests",
+    "Verified first actual bloom pass to final output spans same Display query pair, no duplicate interior writes; fixed Models path preserved",
+    "Read added4frame fixed/bloom/timing fixture and exact cooked-output refusal"
+  ],
+  "limits": [
+    "No current GPU/appearance or cooked bloom acceptance",
+    "Producer bloom0075 acceptance scoped separately, no SSAO imported",
+    "No default enablement, phone performance or phase gates"
+  ]
+}
