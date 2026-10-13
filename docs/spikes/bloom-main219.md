@@ -1,0 +1,69 @@
+# Output-space bloom: independent fixed-renderer composition
+
+This private candidate selects the accepted bloom implementation from
+`5d02ad6c09787ffd009a7517d448fb27b1fe9f58` onto the reviewed fixed-only renderer
+candidate `931998df4d9ceb3d076e242938cddc653c75aecc` and actual main219. It does
+not import SSAO or the effects producer ancestry. Bloom remains explicitly opt-in;
+native cooked-output configurations refuse it with `BloomError::CookedOutput`
+until an independently accepted artifact family exists. Default output and
+all existing cooked program catalogs are unchanged.
+
+The normalized pyramid is anchored to physical output extent, with explicit
+first-pass DRS source footprints and center-aligned odd levels. Both bloom WGSL
+files, thresholds, gain, coverage composition, viewport mapping, dimensions,
+level count and resource caps exactly match the accepted producer. Pixel cameras
+and zero gain keep the original output without pyramid allocation. Host glue
+uses the current FramePlan and its output mapping, including fractional viewport
+offsets. No appearance tuning is introduced.
+
+The Display query pair now spans the first actual bloom filter pass through the
+final tone-map/output pass. Interior filters omit query descriptors, so each query
+is written exactly once. Without bloom, the ordinary output pass retains both
+writes. Models retains its reviewed fixed-temporal interval. This envelope still
+measures instrumented extrema and gaps, excluding later screen UI and presentation;
+it is not complete-frame GPU cost.
+
+The three original bloom device tests now assert the requested actual backend
+and precise cooked refusal. A second entry uses the existing four-frame joined
+fixed/overlay/timestamp helper with bloom enabled: full/full/half/half resolution,
+phase/reset checks and positive Display timing where supported. The cooked version
+requires exact refusal before completing ordinary fixed frames. No images are
+created by this fixture. Existing fixed-only entry remains behaviorally unchanged.
+
+Producer Claude0075 acceptance (8dbd260d) is bloom-only: 37 GPU cases, 534
+submissions and all 27 unchanged analyzer gates passed. The previous centroid
+defect at reduced DRS is corrected in that producer. SSAO remains rejected.
+Those appearance and numerical results belong to the producer source/binaries;
+current composed CPU and bounded GPU validation now pass. Fixed temporal
+softness and MASK detail around 18% of reference remain unchanged limitations.
+
+The first formatting invocation used an absolute cargo path without the matching
+cargo-fmt directory on PATH and failed before formatting. The corrected pinned
+PATH invocation succeeded. Twelve current checks now pass: 137 default and 166 cooked CPU tests (103 GPU
+cases ignored in each CPU suite), strict Clippy, native-window and browser
+consumers, graph and conventions. Two copied binaries completed eight additional
+Metal frames under one bounded grant, with actual positive Display/Models timing
+and the expected cooked bloom refusal. All children were reaped; no images were
+created. The original producer appearance review remains separate.
+
+[Manifest](evidence/bloom-main219.json) and
+[read-only verifier](evidence/bloom-main219/verify.py) retain 353 raw/Git records,
+204 lossless payloads and nine binary identities. The first archive verifier
+exposed an omitted producer analysis path; the collector now retains all 37
+reviewed producer records, with the initial diagnostic preserved. No source or
+execution changed. Final independent integration review is accepted. Publication follows an exact current-main composition check and the required fast check.
+
+The main221 join adds accepted inert CCD/configuration files and a default-off
+Rapier observation getter. Exactly five paths in the original 3,109-file freeze
+differ: one inert library declaration, two vendor patch notices and two getter
+files. Old and new Git bytes are pinned explicitly. The getter is absent from all
+three selected all-target feature graphs; those graphs are byte-identical before
+and after the join. Renderer, native-player, cooker, locks, tools and workflows
+are unchanged. The [qualification](evidence/bloom-main221/qualification.json)
+and [read-only replay](evidence/bloom-main221/verify.py) retain that comparison
+without changing the original verifier or claiming a fresh build or GPU run.
+An initial Cargo-tree invocation omitted the rustc toolchain directory from PATH;
+its failure is retained. Corrected graph queries succeeded without source changes.
+
+Independent main221 relevance review is accepted. The original execution and
+appearance limits remain; publication awaits the required fast check.

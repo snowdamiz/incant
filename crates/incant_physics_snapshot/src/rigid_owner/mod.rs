@@ -52,6 +52,9 @@ impl<'a> ValidatedRigidOwner<'a> {
     pub(crate) fn colliders(&self) -> &'a ValidatedColliderState<'a> {
         self.context.colliders
     }
+    pub fn collider_state(&self) -> &'a ValidatedColliderState<'a> {
+        self.context.colliders
+    }
     pub fn record(&self) -> &RigidOwnerRecord {
         &self.record
     }

@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-13T12:16:55.418138+00:00",
+  "reviewer": "astra root",
+  "manifest_sha256": "d110421395c47895c50a7f9e0f4a317b747f04e8afe235f40d7b472f06b687e3",
+  "head": "5768ae8c903ec5aa0ef98adb733fd38306da0a67",
+  "verification": "Read full sourcejoin diff/report/verifier; executed --verify-only0.27records16payloads3125sources1549physics identities11checks172det172fast8compiledcases actualfeatureschecked,124producerrecordsretained. Only library declaration/error union differs acceptedorigins; no vendor/lock/manifestdiff.",
+  "scope": "Inert broad/pending BVH composition, no live-save or phase/device acceptance",
+  "findings": []
+}

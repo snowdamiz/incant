@@ -7,6 +7,8 @@ mod arena_codec;
 mod attachment;
 mod attachment_codec;
 mod body_state;
+mod broad_owner;
+mod ccd_state;
 mod coarena;
 mod coarena_codec;
 mod codec;
@@ -18,9 +20,12 @@ mod geometry;
 mod geometry_codec;
 mod graph;
 mod graph_codec;
+mod integration_config;
 mod island_state;
 mod narrow_owner;
 mod pair_state;
+mod pending_bvh;
+mod pipeline_state;
 mod records;
 mod rigid_owner;
 mod validate;
@@ -30,6 +35,8 @@ pub use arena_codec::{decode_arena, encode_arena};
 pub use attachment::*;
 pub use attachment_codec::{decode_attachments, encode_attachments};
 pub use body_state::*;
+pub use broad_owner::*;
+pub use ccd_state::*;
 pub use coarena::*;
 pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
@@ -41,9 +48,12 @@ pub use geometry::*;
 pub use geometry_codec::{decode_geometry, encode_geometry};
 pub use graph::*;
 pub use graph_codec::{decode_graph, encode_graph};
+pub use integration_config::*;
 pub use island_state::*;
 pub use narrow_owner::*;
 pub use pair_state::*;
+pub use pending_bvh::*;
+pub use pipeline_state::*;
 pub use records::*;
 pub use rigid_owner::*;
 pub use validate::validate;
@@ -80,6 +90,15 @@ pub enum Error {
     Collider,
     UnsupportedCollider,
     Narrow,
+    Integration,
+    UnsupportedIntegration,
+    Ccd,
+    Broad,
+    BroadTree,
+    Pipeline,
+    PipelinePhase,
+    PipelineDeferred,
+    PipelineQuarantine,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

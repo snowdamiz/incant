@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "tested_source": "1a77289a285ff428873c1af16c647de6f606e798",
+  "reviewed_packet": "64dbb0b259cf64d2c9251fec2be484af7a5ac39e",
+  "base": "d23fbebaab64b0cf3befbe9bcf2d7f1b443b61c7",
+  "actual_main": "a9ae68b9fef1209f4c8d16aa698b792cd85af5e7",
+  "changed_paths": [
+    "docs/spikes/evidence/physics-broad-main222/final-root-review.json",
+    "docs/spikes/physics-broad-main221.md"
+  ],
+  "qualification": "Only reviewed broad-owner acceptance documents and STATUS differ between prior base and actual main223. Original 3143-file source freeze and verifier remain exact; no new execution claimed."
+}
