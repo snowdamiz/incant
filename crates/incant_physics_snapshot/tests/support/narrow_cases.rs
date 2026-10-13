@@ -15,6 +15,7 @@ macro_rules! narrow_cases {
             (co,record)
         }
         fn check_narrow(w:&PhysicsWorld,rigid:&ValidatedRigidOwner<'_>,arena:&ValidatedArena) {
+            broad_observation(w);
             let (co,r)=narrow_record(w);
             let co=validate_coarena(co,arena,&mut budget()).unwrap();
             let bytes=encode_coarena(&co,&mut budget()).unwrap();
@@ -24,6 +25,7 @@ macro_rules! narrow_cases {
             let graph=decode_graph(&graph_bytes,identity(),&mut budget()).unwrap();
             let c=NarrowOwnerContext{rigid,indices:&indices,intersections:&graph};
             let v=validate_narrow_owner(r.clone(),c,&mut budget()).unwrap_or_else(|e|panic!("{e:?} narrow={r:?}"));
+            check_broad(w,&v,arena);
             let bytes=encode_narrow_owner(&v,&mut budget()).unwrap();
             let d=decode_narrow_owner(&bytes,c,&mut budget()).unwrap();
             if !r.intersections.is_empty() { narrow_checks::check(&r,c); }
