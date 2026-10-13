@@ -1,6 +1,8 @@
 # Implementation status
 
-Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; publication awaits the required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
+Checkpoint26 remains frozen and failed on the Windows Dx12 SSAO filter interval at pixel (17,1); other checks are still settling. A reviewed test-only diagnostic preserves the strict oracle and compares fractional versus full-target raster coverage. Local CPU qualification passes; actual hosted diagnostic observations and any production repair remain pending. [Diagnostic scope](docs/spikes/ssao-viewport-diagnostic.md).
+
+Private primitive narrow-phase construction on main237 passed 227 snapshot and 45 native cases per mode, 312 decoded continuation steps per dimension/mode and all 29 checks. Source and final current-main evidence reviews are accepted; PR238 merged after its required exact-head fast check. Sixteen fast8 fixture substitutions are explicitly bound. Compound construction, complete native world installation and public physics saves stay closed. [Evidence](docs/spikes/physics-native-narrow-main237.md).
 
 Private broad-phase manager construction on main236 passed both composed numerical modes: 225 snapshot and 36 native cases per mode, 220 paired broad steps per dimension/mode, and all 28 checks. Source and final current-main evidence reviews are accepted; PR237 merged after its required exact-head fast check. Fast8 fixture reuse is explicitly hash-bound. Other live owners remain trusted clones, and whole-world restore/public physics saves stay unsupported. [Evidence](docs/spikes/physics-native-broad-main236.md).
 

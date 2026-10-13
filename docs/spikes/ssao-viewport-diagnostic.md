@@ -30,3 +30,18 @@ strict Clippy, formatting, convention and workflow checks are recorded in the
 [local evidence](evidence/ssao-viewport-diagnostic.json). Actual diagnostic GPU
 observations remain pending. The original Windows failure alone does not yet
 identify whether raster coverage or shader arithmetic caused the white pixel.
+
+The diagnostic is composed on main238 with both reviewed source files byte-exact.
+A fresh scoped current-main CPU run passes its one discriminating fixture case;
+both GPU tests remain ignored locally. Current library and test dependency graphs,
+formatting, conventions and full-base whitespace checks pass. The test graph
+contains ordinary deterministic Rapier without checked-restore or the inert
+snapshot crate. The original strict Clippy and actionlint evidence remains scoped
+to the producer. The [composition record](evidence/ssao-diagnostic-main238.json)
+binds all 3,280 build inputs and six current checks. Initial runner PATH and
+collector graph-classification errors are retained; neither changed source or
+repeated a passing CPU test.
+
+The workflow is manual-only. Later broad ignored-test release invocations also
+discover these six observation submissions alongside the unchanged strict test;
+observation success does not establish oracle success or repair checkpoint26.
