@@ -54,6 +54,14 @@ impl Reader<'_> {
 /// No serde and no live solver object. Complete header, identity, section lengths
 /// and aggregate record allocation are admitted before allocating any vector.
 pub fn decode(bytes: &[u8], expected: Identity, budget: &mut Budget) -> Result<ValidatedBvh> {
+    validate(decode_record(bytes, expected, budget)?, budget)
+}
+
+pub(crate) fn decode_record(
+    bytes: &[u8],
+    expected: Identity,
+    budget: &mut Budget,
+) -> Result<BvhRecord> {
     if bytes.len() < HEADER || bytes.len() > MAX_BYTES {
         return Err(Error::Length);
     }
@@ -137,13 +145,16 @@ pub fn decode(bytes: &[u8], expected: Identity, budget: &mut Budget) -> Result<V
     for _ in 0..free {
         record.free.push(read.word()?);
     }
-    validate(record, budget)
+    Ok(record)
 }
 
 /// Canonical little-endian encoding of a previously validated immutable record.
 /// A future enclosing world format must supply its own integrity/source binding.
 pub fn encode(value: &ValidatedBvh, budget: &mut Budget) -> Result<Vec<u8>> {
-    let record = value.record();
+    encode_record(value.record(), budget)
+}
+
+pub(crate) fn encode_record(record: &BvhRecord, budget: &mut Budget) -> Result<Vec<u8>> {
     let len = encoded_len(
         record.nodes.len(),
         record.leaves.slots.len(),

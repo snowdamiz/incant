@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "decision": "accepted scoped source and final CPU evidence; publisher integration pending",
+  "reviewed_manifest": {
+    "path": "docs/spikes/evidence/physics-broad-owner.json",
+    "sha256": "5911adc28c34f201d7163bf293a6ad930aa51446fd03bca8b210aa98834d84c4"
+  },
+  "source_freeze_sha256": "c6d115528d5ffcf12ab6be0bdd3305623d8ce5e2b467b163e3a37aafa381962f",
+  "root_final_review": {
+    "path": "docs/spikes/evidence/physics-broad-owner-final-review.json",
+    "sha256": "81ca03260b5fa94e69ca6b283800ddfc3dbe9d416c8da44640d17b553bf17235"
+  },
+  "documentation_changes": [
+    {
+      "path": "STATUS.md",
+      "sha256": "f1acac6b99e22eaefb4ccc225b3d94215214ded07a4eed53a3fb81b5539f2ab6"
+    },
+    {
+      "path": "docs/spikes/physics-broad-owner.md",
+      "sha256": "98ea83b1955d4f06d8f44abe39bd2141a8c2249640c5c813ec75b055fc6b8bde"
+    }
+  ],
+  "post_review_audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/post-review-audit.py",
+    "sha256": "b07498073e39ae340872bc68e651b5d88eff75ec7a075a603a3d4f6449d35b7f"
+  },
+  "source_unchanged": true,
+  "limits": [
+    "inert records only",
+    "no vendor edits or live native construction",
+    "no pipeline phase authentication or missing-tree reconstruction",
+    "no physics save admission or performance/device gate"
+  ]
+}

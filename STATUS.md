@@ -27,6 +27,27 @@ claimed. Deferred work, quarantine, nonpositive or unverified phases refuse.
 Independent source review, both 176-case CPU modes, 20 parallel controls and all
 ten qualification commands pass. Whole-owner provenance, derived geometry/work
 checks, live construction and exact physics save admission remain open.
+## Inert broad-phase owner — source and CPU evidence accepted
+
+Checked broad-phase records preserve exact pair/adjacency and update history,
+joined to existing collider/narrow owners. A distinct pending-tree witness admits
+only the demonstrated deferred ancestor flag/bound state; strict BVH validation
+is unchanged. Eight new actual 2D/3D cases include 96 trusted continuation steps,
+plus the prior 728. Independent source and root final evidence review accepted
+151 CPU tests and seven scoped checks. Missing deferred trees still refuse;
+`PhysicsUnsupported`, hostile live restore and full pipeline-phase admission stay
+closed. No vendor changes or performance gate. Publisher integration is pending.
+[Scope and evidence](docs/spikes/physics-broad-owner.md).
+
+## Inert narrow-phase owner — source and CPU evidence accepted
+
+The checked physics boundary now preserves collider graph-index ownership, ordered
+intersection payloads and independent emitted-event history. Eight new native
+2D/3D controls pass, including 128 trusted continuation steps with retired-pair
+reuse, sensor transfers, event-mask toggles and generation reuse. Independent source and final evidence review accepted 143 CPU tests and seven
+scoped checks; publisher integration is pending. `PhysicsUnsupported` and hostile live
+restore admission remain closed; no vendor/world-format changes.
+[Scope and limits](docs/spikes/physics-narrow-owner.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 

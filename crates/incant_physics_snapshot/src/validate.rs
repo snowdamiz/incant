@@ -33,6 +33,18 @@ fn contains(parent: Node, child: Node, dimension: Dimension) -> bool {
 /// with unpropagated counts, flags or bounds are rejected, never silently refit.
 /// Pending flags (3) are retained only with exact ancestor OR propagation.
 pub fn validate(record: BvhRecord, budget: &mut Budget) -> Result<ValidatedBvh> {
+    structure(&record, budget, None)?;
+    Ok(ValidatedBvh { record })
+}
+
+/// Private structural traversal; only the distinct pending-tree constructor can
+/// provide its independently checked ancestor closure. No query-ready witness
+/// is returned for that path.
+pub(crate) fn structure(
+    record: &BvhRecord,
+    budget: &mut Budget,
+    pending: Option<&[u8]>,
+) -> Result<()> {
     let n = record.nodes.len();
     let slots = record.leaves.slots.len();
     lengths(
@@ -53,7 +65,7 @@ pub fn validate(record: BvhRecord, budget: &mut Budget) -> Result<ValidatedBvh> 
         if !record.free.is_empty() {
             return Err(Error::Free);
         }
-        return Ok(ValidatedBvh { record });
+        return Ok(());
     }
     if record.parents[0] != 0 {
         return Err(Error::Parent);
@@ -100,6 +112,11 @@ pub fn validate(record: BvhRecord, budget: &mut Budget) -> Result<ValidatedBvh> 
             bounds(node, record.identity.dimension)?;
             let packed = id * 2 + side as u32;
             if node.leaf_count() == 1 {
+                if let Some(pending) = pending
+                    && (node.flags() == 3) != (pending[packed as usize] & 2 != 0)
+                {
+                    return Err(Error::Metadata);
+                }
                 let key = node.children as usize;
                 if key >= slots || leaves[key] != 0 || record.leaves.slots[key] != Some(packed) {
                     return Err(Error::Leaf);
@@ -118,12 +135,15 @@ pub fn validate(record: BvhRecord, budget: &mut Budget) -> Result<ValidatedBvh> 
                 bounds(child.left, record.identity.dimension)?;
                 bounds(child.right, record.identity.dimension)?;
                 if node.leaf_count() != child.left.leaf_count() + child.right.leaf_count()
-                    || node.flags() != child.left.flags() | child.right.flags()
+                    || (pending.is_none_or(|p| p[packed as usize] == 0)
+                        && node.flags() != child.left.flags() | child.right.flags())
                 {
                     return Err(Error::Metadata);
                 }
-                if !contains(node, child.left, record.identity.dimension)
-                    || !contains(node, child.right, record.identity.dimension)
+                if (pending.is_none_or(|p| p[child_id * 2] == 0)
+                    && !contains(node, child.left, record.identity.dimension))
+                    || (pending.is_none_or(|p| p[child_id * 2 + 1] == 0)
+                        && !contains(node, child.right, record.identity.dimension))
                 {
                     return Err(Error::Bounds);
                 }
@@ -143,5 +163,5 @@ pub fn validate(record: BvhRecord, budget: &mut Budget) -> Result<ValidatedBvh> 
     {
         return Err(Error::Ownership);
     }
-    Ok(ValidatedBvh { record })
+    Ok(())
 }

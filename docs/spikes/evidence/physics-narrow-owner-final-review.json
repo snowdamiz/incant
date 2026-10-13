@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-13T10:57:11.816230+00:00",
+  "verdict": "accepted scoped inert narrow-owner source and complete CPU evidence",
+  "source_review_sha256": "f4be0d8225329fcf752919e7773429e372aa50d804130aa7ca533a239c12289d",
+  "manifest_sha256": "e79ebdfa376e713c5fb5c7b5382cac6ee82926c44f61794bacbdee552820ca7c",
+  "archive_sha256": "4d04c1ff330548bc4b8b560b66ea0804d3c54fa22bd043fade384079af4f4862",
+  "records": 108,
+  "counts": {
+    "passed": 143,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 20
+  },
+  "successful_reaped_checks": 7,
+  "native_dimensions": 2,
+  "trusted_native_continuation_steps": 728,
+  "historical_failure_retained": "focused-001.log: test compile failed because native CollisionEvent has no PartialEq; corrected only test comparisons, production unchanged",
+  "audit_script_sha256": "66b5f6f1001bf70a776e111a3eccd7ffd9e11e78b66373691a2b6ac00781575d",
+  "limits": [
+    "No hostile live restore or save admission",
+    "Completed-owner phase and event queue/dispatcher composition remains open",
+    "No new device, GPU, reference-phone or performance acceptance"
+  ]
+}

@@ -84,8 +84,9 @@ Atomic adapter refusal and hostile inert frame/ownership controls are also cover
 ## Remaining admission work
 
 No engine world/session codec or live restore constructor changes. The fixed rigid
-collider configuration now has a joined checked record; derived collider mass/pose
-arithmetic and broad/narrow-phase indexing/manager composition, CCD/integration
+collider configuration and persistent [narrow-phase indices/sensor history](physics-narrow-owner.md)
+now have joined checked records; derived collider mass/pose
+arithmetic and broad-phase indexing/manager composition, CCD/integration
 configuration, complete journal/phase provenance, supported shape/workspace closure,
 constructor ordering and resource budgets remain prerequisites. Joint/soft-body
 owners remain refused. Near-wrap global-split cooldown arithmetic is a separate

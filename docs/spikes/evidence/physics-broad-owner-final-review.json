@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-13T11:42:52.433874+00:00",
+  "decision": "Accepted scoped inert broad-owner final CPU evidence; integrate after current-main qualification and required fast check",
+  "manifest_sha256": "5911adc28c34f201d7163bf293a6ad930aa51446fd03bca8b210aa98834d84c4",
+  "source_review_sha256": "b43a572a9ec4ef100afd8244d67b3074d35bc3a424211bd68263a34de9990925",
+  "actions": [
+    "Read complete audit and scope plus independent source review",
+    "Executed read-only audit terminal0 confirming124records/63inputs/7checks/151passed0failed0ignored20groups",
+    "Verified both native dimensions and824designated trusted continuation steps; strict BVH retained and native historical failures preserved"
+  ],
+  "limits": [
+    "Pending tree witness is distinct from query-ready validation",
+    "No hostile live construction, aggregate owner authentication, pipeline boundary or live physics save acceptance",
+    "No performance/device/phase gate claim"
+  ]
+}

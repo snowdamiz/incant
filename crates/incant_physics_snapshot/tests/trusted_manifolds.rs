@@ -19,6 +19,18 @@ mod collider_cases;
 #[macro_use]
 #[path = "support/continuation_cases.rs"]
 mod continuation_cases;
+#[macro_use]
+#[path = "support/narrow_cases.rs"]
+mod narrow_cases;
+#[path = "support/broad_capture.rs"]
+mod broad_capture;
+#[path = "support/broad_checks.rs"]
+mod broad_checks;
+#[macro_use]
+#[path = "support/broad_cases.rs"]
+mod broad_cases;
+#[path = "support/narrow_checks.rs"]
+mod narrow_checks;
 #[path = "support/ordered_capture.rs"]
 mod ordered_capture;
 fn budget() -> Budget {
@@ -544,7 +556,7 @@ macro_rules! cases {
                         );
                     }
                 }
-                let owner=check_islands(w, &a, &v, &shapes);
+                let owner=check_islands(w, &a, &v, &shapes, &ca);
                 let bytes = encode_manifolds(&v, &mut budget()).unwrap();
                 let loaded = decode_manifolds(&bytes, c, &mut budget()).unwrap();
                 assert_eq!(loaded.record(), &t);
@@ -563,6 +575,8 @@ macro_rules! cases {
             island_cases!($rapier, $vector, $cuboid);
             collider_cases!($rapier, $vector, $cuboid, $posebits);
             continuation_cases!($rapier, $vector, $cuboid);
+            narrow_cases!($rapier, $vector, $cuboid);
+            broad_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;
