@@ -39,7 +39,7 @@ runtime execution**. Prior execution remains explicitly scoped:
 Only library executables were copied by the producer. Integration and doc tests
 have retained logs, not retained executable claims. Independent producer reviews
 `a0ebc104` and `dbdf947c` are copied byte-for-byte in the current evidence folder.
-Final current-main independent review is pending.
+Final current-main independent review is accepted (`12de683d`); publication awaits its exact-head fast check.
 
 ## Bounds and exclusions
 

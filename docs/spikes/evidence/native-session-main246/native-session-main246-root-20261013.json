@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-13T20:46:40.365686+00:00",
+  "reviewer": "astra-root",
+  "head": "4115600a95733ce8a0af2fb03cf803e4fa331b14",
+  "manifest_sha256": "460755f11fbb179e3fe962b3847baab144d76d05dd0d38af24093fefb2214035",
+  "decision": "accepted",
+  "scope": "Git implementation/build/tools diff equals repaired producer7a900 exactly;3656 current file identities,2 selected normal graph identities,ordinary snapshot exclusion,10 currentread-only checks,101+11 producer records and7 retainedlibrarybinaries independently replayed. No new current-main compile claim; accepted producer195/195/186 broad and repaired9eachmode evidence reused with exact input equality. Required newhead fastSUCCESS still needed."
+}
