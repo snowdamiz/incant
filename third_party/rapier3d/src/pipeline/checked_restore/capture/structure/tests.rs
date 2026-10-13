@@ -252,3 +252,27 @@ fn persisted_structure_mutation_revision_and_zero_capacity_refuse_before_change(
     );
     assert_eq!(o.get().unwrap().bodies.len(), 0);
 }
+
+#[test]
+fn persisted_structure_sparse_island_capacity_is_precharged_before_iteration() {
+    let (mut o, a, _, _) = two();
+    let w = o.access_mut().unwrap();
+    let id = w.bodies[a].ids.island_id as usize;
+    let island = w.islands.persistent.islands[id].clone();
+    w.islands.persistent.islands.insert(4095, island);
+    w.islands.persistent.islands.remove(4095);
+    let capacity = w.islands.persistent.islands.capacity();
+    assert!(capacity >= 4096);
+    assert!(w.islands.persistent.islands.len() < 8);
+    let before = serde_json::to_vec(&w.islands).unwrap();
+    let mut short = WorkBudget::new(capacity as u64);
+    assert_eq!(
+        island_headroom(w, 0, &mut short),
+        Err(StructuralError::Work)
+    );
+    assert_eq!(short.remaining(), capacity as u64);
+    let mut exact = WorkBudget::new(capacity as u64 + 1);
+    island_headroom(w, 0, &mut exact).unwrap();
+    assert_eq!(exact.remaining(), 0);
+    assert_eq!(serde_json::to_vec(&w.islands).unwrap(), before);
+}
