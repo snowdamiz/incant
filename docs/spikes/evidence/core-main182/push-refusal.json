@@ -1,0 +1,15 @@
+{
+  "source": "Exact relevant output retained from exec session 78957; the original command did not write a local log",
+  "exit_code": 1,
+  "branch": "codex/integrate-core-authored-main182",
+  "local_head": "f8cc8d87",
+  "remote_ref_created": false,
+  "pr_created": false,
+  "stderr_lines": [
+    "remote: error: Trace: 4077c74698edf96bd5703a6df6461c2011358d38c75860f832cd8949f50510b3",
+    "remote: error: See https://gh.io/lfs for more information.",
+    "remote: error: File docs/spikes/evidence/core-main182/artifacts.json.gz is 105.04 MB; this exceeds GitHub's file size limit of 100.00 MB",
+    "remote: error: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.",
+    "[remote rejected] codex/integrate-core-authored-main182 -> codex/integrate-core-authored-main182 (pre-receive hook declined)"
+  ]
+}

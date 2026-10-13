@@ -1,0 +1,244 @@
+warning: field `custom_device` is never read
+  --> third_party/kira/src/backend/cpal/desktop/stream_manager.rs:66:2
+   |
+62 | pub(super) struct StreamManager {
+   |                   ------------- field in this struct
+...
+66 |     custom_device: bool,
+   |     ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `kira` (lib) generated 1 warning
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+   Compiling incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_cook)
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_game)
+   Compiling incant_game_player v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_player)
+warning: unused import: `NSString`
+  --> third_party/tao/src/platform_impl/macos/monitor.rs:23:53
+   |
+23 | use objc2_foundation::{ns_string, MainThreadMarker, NSString, NSUInteger};
+   |                                                     ^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `DispatchQueueAttr`
+  --> third_party/tao/src/platform_impl/macos/util/async.rs:11:32
+   |
+11 | use dispatch2::{DispatchQueue, DispatchQueueAttr};
+   |                                ^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSKeyUp`
+  --> third_party/tao/src/platform_impl/macos/app.rs:38:30
+   |
+38 |     if event_type == appkit::NSKeyUp
+   |                              ^^^^^^^
+   |
+   = note: `#[warn(deprecated)]` on by default
+
+warning: use of deprecated static `objc2_app_kit::NSWindowFullScreenButton`: The standard window button for NSWindowFullScreenButton is always nil; use NSWindowZoomButton instead
+  --> third_party/tao/src/platform_impl/macos/window.rs:56:57
+   |
+56 |   NSWindow, NSWindowButton, NSWindowCollectionBehavior, NSWindowFullScreenButton,
+   |                                                         ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSWindowFullScreenButton`: The standard window button for NSWindowFullScreenButton is always nil; use NSWindowZoomButton instead
+   --> third_party/tao/src/platform_impl/macos/window.rs:274:11
+    |
+274 |           NSWindowFullScreenButton,
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSFilenamesPboardType`: Create multiple pasteboard items with NSPasteboardTypeFileURL or kUTTypeFileURL instead
+   --> third_party/tao/src/platform_impl/macos/window.rs:575:75
+    |
+575 |       ns_window.registerForDraggedTypes(&NSArray::arrayWithObject(appkit::NSFilenamesPboardType));
+    |                                                                           ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSFilenamesPboardType`: Create multiple pasteboard items with NSPasteboardTypeFileURL or kUTTypeFileURL instead
+   --> third_party/tao/src/platform_impl/macos/window_delegate.rs:424:61
+    |
+424 |     unsafe { NSPasteboard::propertyListForType(&pb, appkit::NSFilenamesPboardType) }.unwrap();
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated static `objc2_app_kit::NSFilenamesPboardType`: Create multiple pasteboard items with NSPasteboardTypeFileURL or kUTTypeFileURL instead
+   --> third_party/tao/src/platform_impl/macos/window_delegate.rs:458:61
+    |
+458 |     unsafe { NSPasteboard::propertyListForType(&pb, appkit::NSFilenamesPboardType) }.unwrap();
+    |                                                             ^^^^^^^^^^^^^^^^^^^^^
+
+warning: use of deprecated constant `std::f64::EPSILON`: replaced by the `EPSILON` associated constant on `f64`
+  --> third_party/tao/src/platform_impl/macos/window_delegate.rs:76:42
+   |
+76 |     if (scale_factor - 1.0).abs() > f64::EPSILON {
+   |                                          ^^^^^^^
+
+warning: use of deprecated constant `std::f64::EPSILON`: replaced by the `EPSILON` associated constant on `f64`
+   --> third_party/tao/src/platform_impl/macos/window_delegate.rs:104:65
+    |
+104 |     if (scale_factor - self.previous_scale_factor).abs() < f64::EPSILON {
+    |                                                                 ^^^^^^^
+
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform_impl/macos/app_delegate.rs:139:14
+    |
+139 |   let urls = unsafe {
+    |              ^^^^^^ unnecessary `unsafe` block
+    |
+    = note: `#[warn(unused_unsafe)]` (part of `#[warn(unused)]`) on by default
+
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform_impl/macos/event.rs:166:21
+    |
+166 |     let modifiers = unsafe { NSEvent::modifierFlags(ns_event) };
+    |                     ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform_impl/macos/event.rs:309:15
+    |
+309 |   let flags = unsafe { NSEvent::modifierFlags(event) };
+    |               ^^^^^^ unnecessary `unsafe` block
+
+warning: unnecessary `unsafe` block
+   --> third_party/tao/src/platform/macos.rs:419:5
+    |
+419 |     unsafe { objc2_app_kit::NSApplication::sharedApplication(mtm).unhide(None) }
+    |     ^^^^^^ unnecessary `unsafe` block
+
+warning: methods `set_badge_count` and `set_badge_label` are never used
+   --> third_party/tao/src/platform_impl/macos/event_loop.rs:127:10
+    |
+ 86 | impl<T: 'static> EventLoopWindowTarget<T> {
+    | ----------------------------------------- methods in this implementation
+...
+127 |   pub fn set_badge_count(&self, count: Option<i64>, _desktop_filename: Option<String>) {
+    |          ^^^^^^^^^^^^^^^
+...
+132 |   pub fn set_badge_label(&self, label: Option<String>) {
+    |          ^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `0` is never read
+ --> third_party/tao/src/platform_impl/macos/icon.rs:8:25
+  |
+8 | pub struct PlatformIcon(RgbaIcon);
+  |            ------------ ^^^^^^^^
+  |            |
+  |            field in this struct
+  |
+  = help: consider removing this field
+  = note: `PlatformIcon` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: function `yes` is never used
+   --> third_party/tao/src/platform_impl/macos/util/mod.rs:126:19
+    |
+126 | pub extern "C" fn yes(_: &Object, _: Sel) -> BOOL {
+    |                   ^^^
+
+warning: field `saved_desktop_display_mode` is never read
+   --> third_party/tao/src/platform_impl/macos/window.rs:471:7
+    |
+451 | pub struct SharedState {
+    |            ----------- field in this struct
+...
+471 |   pub saved_desktop_display_mode: Option<(CGDisplay, CGDisplayMode)>,
+    |       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: field `inner_rect` is never read
+   --> third_party/tao/src/platform_impl/macos/window.rs:508:7
+    |
+500 | pub struct UnownedWindow {
+    |            ------------- field in this struct
+...
+508 |   pub inner_rect: Option<PhysicalSize<u32>>,
+    |       ^^^^^^^^^^
+
+warning: field `composition` is never read
+  --> third_party/tao/src/text_input.rs:56:7
+   |
+54 | pub(crate) struct State {
+   |                   ----- field in this struct
+55 |   pub session: Option<Session>, // None preserves the original Tao behavior.
+56 |   pub composition: Option<u64>,
+   |       ^^^^^^^^^^^
+   |
+   = note: `State` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: method `active` is never used
+  --> third_party/tao/src/text_input.rs:69:10
+   |
+58 | impl State {
+   | ---------- method in this implementation
+...
+69 |   pub fn active(&self) -> Option<u64> {
+   |          ^^^^^^
+
+warning: `tao` (lib) generated 21 warnings (run `cargo fix --lib -p tao` to apply 2 suggestions)
+   Compiling incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_render_gpu_host)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.82s
+     Running unittests src/lib.rs (/tmp/incant-font-atlas-target/debug/deps/incant_game_player-324367c5e8dbbf8f)
+
+running 59 tests
+test window::gamepad::tests::failed_backend_initialization_is_a_visible_error_without_dummy_fallback ... ok
+test checkpoint::tests::fractional_output_continues_absolute_phase_and_checks_overflow ... ok
+test window::clock::tests::overload_and_resume_are_bounded ... ok
+test window::clock::tests::fractional_ticks_have_no_per_tick_rounding_drift ... ok
+test program::tests::explicit_prefix_is_bounded_and_default_arguments_are_unchanged ... ok
+test window::clock::tests::continuous_background_events_do_not_starve_pending_redraws ... ok
+test observe::tests::observation_options_preserve_strict_legacy_and_spatial_argument_shapes ... ok
+test window::gamepad::tests::raw_poll_work_and_combined_input_queue_are_bounded_even_for_ignored_paused_events ... ok
+test checkpoint::tests::unsupported_routes_and_ambiguous_options_refuse_before_startup ... ok
+test window::gamepad::tests::focus_reset_discards_unpublished_hotplug_then_resume_keeps_neutral_controls ... ok
+test window::gamepad::tests::malformed_native_values_are_visible_and_unknown_controls_do_not_change_keyboard ... ok
+test session::text_settings_tests::explicit_font_cache_extends_existing_cpu_mode_without_inference ... ok
+test window::gamepad::tests::measured_analog_values_and_all_standard_buttons_map_without_invented_edges ... ok
+test window::gamepad::tests::restart_reannounces_real_adapter_topology_and_release_cannot_become_a_fresh_press ... ok
+test restart::input::tests::fresh_game_gets_topology_but_never_a_held_press_or_axis ... ok
+test window::gamepad::tests::native_measured_trigger_and_stick_events_drive_typed_actions_and_preserve_taps ... ok
+test window::gamepad::tests::gamepad_bindings_are_accepted_only_for_bounded_player_ids_and_gestures_stay_unsupported ... ok
+test window::ime::tests::native_generation_exhaustion_refuses_instead_of_reusing_a_lease ... ok
+test window::gamepad::tests::sticks_use_down_positive_and_dpad_reversals_release_opposite_before_pressing ... ok
+test window::input::coordinate_tests::cursor_and_pixel_wheel_use_logical_pixels_at_scale_one_and_two ... ok
+test window::input::coordinate_tests::invalid_scale_is_typed_and_does_not_mutate_the_pending_batch ... ok
+test window::input::coordinate_tests::scale_changes_use_each_samples_current_factor_without_inventing_motion ... ok
+test window::input::tests::invalid_coalesced_sample_is_refused_without_replacing_the_last_valid_position ... ok
+test window::input::tests::queue_is_bounded_and_focus_reset_releases_previous_buttons ... ok
+test window::input::coordinate_tests::scaled_cursor_coalescing_retains_discrete_order_and_logical_displacement ... ok
+test window::surface::tests::os_size_changes_are_bounded_and_can_reenter_the_supported_range ... ok
+test window::input::tests::absolute_motion_coalesces_only_without_intervening_button ... ok
+test window::surface::tests::recovery_defers_repeated_loss_without_unbounded_acquisition ... ok
+test window::surface::tests::transient_skip_and_fatal_validation_never_issue_extra_attempts ... ok
+test window::termination::tests::clean_callback_keeps_delivery_open_and_teardown_failure_visible ... ok
+test window::input::tests::high_rate_cursor_stream_preserves_initial_motion_and_discrete_order_without_double_counting ... ok
+test window::termination::tests::failed_frame_stops_shutdown_delivery_and_preserves_typed_cause_through_cleanup ... ok
+test window::termination::tests::explicit_stop_skips_later_events_but_retires_native_input ... ok
+test window::termination::tests::native_loop_failure_precedes_cleanup_failure ... ok
+test window::tests::physical_surface_and_pointer_coordinates_share_exact_logical_scale ... ok
+test window::ui_input::tests::gamepad_release_during_preserved_surface_wait_cannot_leave_a_held_button ... ok
+test window::tests::explicit_font_cache_and_tick_bound_parse_in_fixed_order ... ok
+test window::ui_input::tests::cancelled_release_after_owner_removal_never_becomes_gameplay_press_or_release ... ok
+test window::ui_input::tests::pending_presentation_fences_hits_until_consumption_and_unknown_cursor_never_leaks ... ok
+test window::ui_input::tests::blur_drops_pending_text_and_neutralizes_capture_with_global_focus_loss ... ok
+test window::ui_input::tests::invalid_coordinates_and_scale_leave_receipts_and_physical_queue_unchanged ... ok
+test window::ui_input::tests::noninteractive_hud_passes_gameplay_and_capture_handoff_releases_once ... ok
+test window::ui_input::tests::ime_consumed_enter_never_submits_and_releases_prior_gameplay_hold ... ok
+test window::ui_input::tests::managed_text_refusal_does_not_publish_partial_queue_and_surface_wait_keeps_session ... ok
+test package::tests::tampered_or_indirected_startup_files_are_refused ... ok
+test window::ui_input::tests::cursor_departure_cancels_runtime_capture_without_changing_text_preedit ... ok
+test window::ui_input::tests::native_callback_from_blurred_replaced_or_other_world_owner_is_never_retargeted ... ok
+test window::ui_input::tests::retired_native_payloads_are_discarded_before_semantic_validation ... ok
+test window::ui_input::tests::managed_preedit_commit_and_cancel_use_the_exact_accepted_text_owner ... ok
+test window::ui_input::tests::resize_acquisition_retry_preserves_delivered_text_and_focus_but_blur_does_not ... ok
+test window::ui_input::tests::resize_cancels_captured_press_without_activation_and_retains_text_focus ... ok
+test window::ui_input::tests::ui_pointer_sequence_is_consumed_and_activates_only_once ... ok
+test package::tests::ui_font_and_observation_options_reach_the_same_composed_host ... ok
+test window::ui_input::tests::whole_session_replacement_retires_ime_pointer_and_receipts_without_reusing_serials ... ok
+test window::ui_input::tests::wrong_world_receipts_never_match_even_when_all_numeric_ids_match ... ok
+test package::tests::offline_and_window_expand_to_existing_hosts ... ok
+test window::ui_input::tests::text_receipts_are_bounded_before_copy_and_queue_survives_candidate_refusal ... ok
+test restart::tests::accepted_requests_reset_simulation_while_fractional_output_and_host_steps_continue ... ok
+test checkpoint::tests::publication_is_complete_create_only_and_cleans_failed_staging ... ok
+
+test result: ok. 59 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

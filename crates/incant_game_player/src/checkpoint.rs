@@ -53,9 +53,6 @@ pub fn frame_range(start: u64, ticks: u64, rate: u32, tick_rate: u32) -> Result<
     let end = start.checked_add(ticks).ok_or("checkpoint tick overflow")?;
     let frames = u128::from(end) * u128::from(rate) / u128::from(tick_rate)
         - u128::from(start) * u128::from(rate) / u128::from(tick_rate);
-    if frames > 1_000_000 {
-        return Err("output frame bound".into());
-    }
     Ok((end, frames))
 }
 /// Same-directory staging + atomic no-clobber publication. The file is synced;
@@ -96,7 +93,10 @@ mod tests {
             frame_range(0, 40, 44100, 144).unwrap().1
         );
         assert!(frame_range(u64::MAX, 1, 48000, 60).is_err());
-        assert!(frame_range(0, 3600, 192000, 1).is_err());
+        assert_eq!(
+            frame_range(0, 3600, 192000, 1).unwrap(),
+            (3600, 691_200_000)
+        );
     }
     #[test]
     fn unsupported_routes_and_ambiguous_options_refuse_before_startup() {

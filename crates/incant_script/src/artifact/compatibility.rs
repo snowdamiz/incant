@@ -1,6 +1,7 @@
 //! Closed, reviewed producer/consumer contract. This is compatibility, never
 //! executable authentication; the unsafe embedded loader still requires a fresh
-//! trusted cook. Android remains denied until actual emulator execution exists.
+//! trusted cook. The exact Android route has actual ARM emulator numeric evidence;
+//! this does not admit arbitrary target strings, cache retargeting or other hosts.
 use std::{
     ffi::CStr,
     mem::{align_of, size_of},
@@ -56,7 +57,10 @@ impl BytecodeAbi {
 pub fn admits(producer: &str, destination: &str, abi: BytecodeAbi) -> bool {
     producer == destination
         || (producer == "aarch64-apple-darwin"
-            && matches!(destination, "aarch64-apple-ios" | "aarch64-apple-ios-sim")
+            && matches!(
+                destination,
+                "aarch64-apple-ios" | "aarch64-apple-ios-sim" | "aarch64-linux-android"
+            )
             && abi.reviewed_arm64())
 }
 

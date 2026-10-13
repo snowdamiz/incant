@@ -1,0 +1,6 @@
+{"cases": [
+  {"name": "reparent", "viewport": [640, 480], "scale": 2.0,
+   "steps": [{"ticks": 2, "capture": "t2-stashed"},
+             {"ticks": 2, "capture": "t4-shown"},
+             {"ticks": 3, "capture": "t7-restashed"}]}
+]}

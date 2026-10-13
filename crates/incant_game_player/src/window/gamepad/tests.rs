@@ -294,3 +294,65 @@ fn gamepad_bindings_are_accepted_only_for_bounded_player_ids_and_gestures_stay_u
         ));
     }
 }
+
+#[test]
+fn restart_reannounces_real_adapter_topology_and_release_cannot_become_a_fresh_press() {
+    let mut adapter = GamepadAdapter::default();
+    let mut pending = PendingInput::new();
+    let mut fence = crate::restart::InputFence::default();
+    let mut old = InputRuntime::default();
+    batch(
+        &mut adapter,
+        &mut pending,
+        &[
+            (42, EventType::Connected),
+            (42, changed(Button::Start, 1.)),
+            (42, axis(Axis::LeftStickX, 0.7)),
+        ],
+        true,
+    );
+    old.advance(fence.filter(pending.events()).unwrap(), DT)
+        .unwrap();
+    adapter.commit();
+    pending.clear();
+    fence.replace_session();
+    let mut fresh = InputRuntime::default();
+    // The native adapter retains its device ID; only the game input owner is new.
+    fresh
+        .advance(fence.filter(pending.events()).unwrap(), DT)
+        .unwrap();
+    assert!(fresh.frame().gamepads.contains_key(&0));
+    assert!(fresh.frame().gamepads[&0].buttons.held.is_empty());
+    let mut ui = super::super::ui_input::UiInput::new();
+    ui.defer_surface();
+    batch(
+        &mut adapter,
+        &mut pending,
+        &[
+            (42, changed(Button::Start, 0.)),
+            (42, axis(Axis::LeftStickX, 0.)),
+        ],
+        ui.accepts_delivery(true, true),
+    );
+    fresh
+        .advance(fence.filter(pending.events()).unwrap(), DT)
+        .unwrap();
+    assert!(fresh.frame().gamepads[&0].buttons.released.is_empty());
+    adapter.commit();
+    pending.clear();
+    batch(
+        &mut adapter,
+        &mut pending,
+        &[(42, changed(Button::Start, 1.))],
+        true,
+    );
+    fresh
+        .advance(fence.filter(pending.events()).unwrap(), DT)
+        .unwrap();
+    assert!(
+        fresh.frame().gamepads[&0]
+            .buttons
+            .pressed
+            .contains(&GamepadButton::Start)
+    );
+}

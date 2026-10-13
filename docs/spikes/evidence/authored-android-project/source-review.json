@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-12T22:55:04.133063+00:00",
+  "accepted": true,
+  "source_inventory_sha256": "d5b56425bcf60ba0830a98e95fab17d5e3616b691a0cae7e515b528b73ba8851",
+  "source_files": 9,
+  "prior_runtime_evidence": "android-bytecode-candidate-final-20261012.json 4baaa296526ae5c8a8b240af5bcee8a893338ba923c2979bf27e5b6999b79448",
+  "review": [
+    "Default admission limited to the actual tested ARM macOS to ARM Android ABI; native host guard, other-host/target/ABI refusals and trusted source cook remain intact.",
+    "Authored mobile receipt is target-specific; static Wasm Android export remains explicitly denied.",
+    "Exporter selects fixed project physics features without defaults and audits scoped normal dependencies plus five actual target compiler artifacts.",
+    "Pinned NDK/compiler/sysroot identity, shipping optimization and panic/codegen audit, ARM64 ELF objects and external DWARF retention checked.",
+    "Archive may retain unused parser definitions; actual final caller link requires GC and independent parser symbol audit before any execution claim.",
+    "Create-only publication, private build removal and failure-log retention are preserved."
+  ],
+  "independent_python_tests": 7,
+  "findings": [],
+  "limits": [
+    "Source review and helper tests only; no authored Android archive or final caller execution claimed yet.",
+    "The existing actual API37 emulator evidence admits a bytecode route, not API24 execution, reference-phone performance or full Android game host."
+  ]
+}

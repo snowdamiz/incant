@@ -1,0 +1,70 @@
+{
+  "passed": true,
+  "scope": "Replays exact hosted Cargo/rustc command identity only; no rebuilt artifacts or full shipping-session success claimed",
+  "raw": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint16/failures/shipping-session/build-0.stderr.log",
+      "sha256": "03a7e29f9a29410b9d7e5152b7b95873e0de575b6a91e1c4c2e28d9f2b66b044"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint16/failures/shipping-session/build-0.stdout.jsonl",
+      "sha256": "8274a98be1b0804233a600142e23521ff512d431621773c13acce02db7925053"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint16/failures/shipping-session/build-1.stderr.log",
+      "sha256": "2645320b4edeb70934ab9092cef763875d05ce53bb92a5ef2c468bc30749c3fb"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint16/failures/shipping-session/build-1.stdout.jsonl",
+      "sha256": "2382ae96276922e872dbabe726522e931cfce0ea40382e9fc7de1d806d671dd8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint16/failures/shipping-session/build-2.stderr.log",
+      "sha256": "6ee51f6af51c59e9d176ea4a366aba314578bd9996d7a60a9e3c6417eecd02f9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint16/failures/shipping-session/build-2.stdout.jsonl",
+      "sha256": "c9ef00ad68355492ca4b9c13525b8d07b6d6c3f80e0e26efe3678e185a5f00f1"
+    }
+  ],
+  "units": [
+    {
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_game_player",
+        "src_path": "/Users/runner/work/incant/incant/crates/incant_game_player/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "old_matches": 1,
+      "corrected_matches": 1,
+      "selected_command": "Running `rustc --crate-name incant_game_player --edition=2024 crates/incant_game_player/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=3 -C panic=abort -C linker-plugin-lto -C codegen-units=1 -C debuginfo=2 -C split-debuginfo=packed --cfg 'feature=\"default\"' --cfg 'feature=\"physics-deterministic\"' --cfg 'feature=\"render-gpu\"' --cfg 'feature=\"render-input\"' --cfg 'feature=\"static-module\"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values(\"default\", \"mobile-ffi\", \"native-window\", \"physics-deterministic\", \"physics-fast-simd8\", \"project\", \"render-gpu\", \"render-input\", \"static-module\"))' -C metadata=ef5dc5d68d1e26f7 -C extra-filename=-047ebf67e2c76aca --out-dir /Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps --target aarch64-apple-darwin -L dependency=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps -L dependency=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/shipping/deps --extern incant_assets_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_assets_runtime-0f21c747f0b030a7.rmeta --extern incant_audio_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_audio_runtime-e5ebdcd3d437b145.rmeta --extern incant_game_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_game_runtime-b6382e7c2f5c8298.rmeta --extern incant_input=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_input-2f234acedf3e9d81.rmeta --extern incant_observe=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_observe-5d34d846c0599061.rmeta --extern incant_render=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render-431a531d096c2b5e.rmeta --extern incant_render_game=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render_game-83d18d0d99ea3cf9.rmeta --extern incant_render_gpu_host=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render_gpu_host-12f994eec8fb9032.rmeta --extern incant_render_native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render_native-20401e85f79cd15d.rmeta --extern incant_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_runtime-83d2cc91e7afd78b.rmeta --extern incant_script=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_script-0a9fcd57ee340ac1.rmeta --extern incant_types=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_types-d2439ee8bdeec953.rmeta --extern incant_ui=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_ui-a94ce496534cc650.rmeta --extern incant_wasm_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_wasm_runtime-1501affd07ebb72f.rmeta --extern serde=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libserde-a6af5350c611388f.rmeta --extern serde_json=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libserde_json-cdb90d2f95a78e58.rmeta --extern tempfile=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libtempfile-4680f4e977bde66f.rmeta --extern thiserror=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libthiserror-3e2a31cad60542ab.rmeta --extern ulid=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libulid-2d25fc475bc2d619.rmeta -L native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/build/meshopt-6f82950a8a0ce265/out -L native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/build/incant_wasm_runtime-0efd8e93915a0abf/out -L native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/build/rquickjs-sys-7c3ed0f202df1f2e/out`"
+    },
+    {
+      "target": {
+        "kind": [
+          "bin"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "incant_game_player",
+        "src_path": "/Users/runner/work/incant/incant/crates/incant_game_player/src/main.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "old_matches": 2,
+      "corrected_matches": 1,
+      "selected_command": "Running `rustc --crate-name incant_game_player --edition=2024 crates/incant_game_player/src/main.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type bin --emit=dep-info,link -C opt-level=3 -C panic=abort -C lto=fat -C codegen-units=1 -C debuginfo=2 -C split-debuginfo=packed --cfg 'feature=\"default\"' --cfg 'feature=\"physics-deterministic\"' --cfg 'feature=\"render-gpu\"' --cfg 'feature=\"render-input\"' --cfg 'feature=\"static-module\"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values(\"default\", \"mobile-ffi\", \"native-window\", \"physics-deterministic\", \"physics-fast-simd8\", \"project\", \"render-gpu\", \"render-input\", \"static-module\"))' -C metadata=4d00cdcb641861c2 -C extra-filename=-9afed80812f1e419 --out-dir /Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps --target aarch64-apple-darwin -L dependency=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps -L dependency=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/shipping/deps --extern incant_assets_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_assets_runtime-0f21c747f0b030a7.rlib --extern incant_audio_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_audio_runtime-e5ebdcd3d437b145.rlib --extern incant_game_player=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_game_player-047ebf67e2c76aca.rlib --extern incant_game_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_game_runtime-b6382e7c2f5c8298.rlib --extern incant_input=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_input-2f234acedf3e9d81.rlib --extern incant_observe=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_observe-5d34d846c0599061.rlib --extern incant_render=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render-431a531d096c2b5e.rlib --extern incant_render_game=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render_game-83d18d0d99ea3cf9.rlib --extern incant_render_gpu_host=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render_gpu_host-12f994eec8fb9032.rlib --extern incant_render_native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_render_native-20401e85f79cd15d.rlib --extern incant_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_runtime-83d2cc91e7afd78b.rlib --extern incant_script=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_script-0a9fcd57ee340ac1.rlib --extern incant_types=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_types-d2439ee8bdeec953.rlib --extern incant_ui=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_ui-a94ce496534cc650.rlib --extern incant_wasm_runtime=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libincant_wasm_runtime-1501affd07ebb72f.rlib --extern serde=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libserde-a6af5350c611388f.rlib --extern serde_json=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libserde_json-cdb90d2f95a78e58.rlib --extern tempfile=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libtempfile-4680f4e977bde66f.rlib --extern thiserror=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libthiserror-3e2a31cad60542ab.rlib --extern ulid=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/deps/libulid-2d25fc475bc2d619.rlib -L native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/build/meshopt-6f82950a8a0ce265/out -L native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/build/incant_wasm_runtime-0efd8e93915a0abf/out -L native=/Users/runner/work/incant/incant/artifacts/shipping-session/fresh-build/aarch64-apple-darwin/shipping/build/rquickjs-sys-7c3ed0f202df1f2e/out`"
+    }
+  ]
+}

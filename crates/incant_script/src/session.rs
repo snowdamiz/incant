@@ -9,6 +9,8 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum SessionError {
+    #[error("this program has no session restart request capability")]
+    RestartUnsupported,
     #[error("this program has no native UI snapshot capability")]
     UiUnsupported,
     #[error(transparent)]
@@ -110,6 +112,20 @@ impl NativeSession {
     pub fn logs(&self) -> Result<&crate::NativeLogs, SessionError> {
         self.ready()?;
         self.host.logs()
+    }
+
+    /// Opt in only when the trusted owner implements whole-session replacement.
+    /// Wasm request parity is unsupported; normal hosts refuse by default.
+    pub fn enable_restart_requests(&mut self) -> Result<(), SessionError> {
+        self.ready()?;
+        self.host.enable_restart_requests()
+    }
+
+    /// Accepted script-phase metadata. A composed owner must defer visibility
+    /// until its audio and mandatory consumer have also accepted this tick.
+    pub fn take_session_request(&mut self) -> Result<Option<crate::SessionRequest>, SessionError> {
+        self.ready()?;
+        self.host.take_session_request()
     }
 
     /// Validate once and reseed from held controls without inventing edges.

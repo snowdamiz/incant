@@ -60,6 +60,24 @@ pub(crate) enum SessionVm {
     Static(Box<incant_wasm_runtime::StaticModule>),
 }
 impl SessionVm {
+    pub fn enable_restart_requests(&mut self) -> Result<(), SessionError> {
+        match self {
+            Self::Bytecode(host) => Ok(host.enable_restart_requests()?),
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(_) => Err(SessionError::RestartUnsupported),
+            #[cfg(feature = "static-module")]
+            Self::Static(_) => Err(SessionError::RestartUnsupported),
+        }
+    }
+    pub fn take_session_request(&mut self) -> Result<Option<crate::SessionRequest>, SessionError> {
+        match self {
+            Self::Bytecode(host) => Ok(host.take_session_request()?),
+            #[cfg(feature = "wasmtime-host")]
+            Self::DevelopmentWasm(_) => Ok(None),
+            #[cfg(feature = "static-module")]
+            Self::Static(_) => Ok(None),
+        }
+    }
     pub(crate) fn supports_ui(&self) -> bool {
         match self {
             Self::Bytecode(_) => true,

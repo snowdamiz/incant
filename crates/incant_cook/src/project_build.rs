@@ -24,14 +24,14 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
     embed(project_path, selected_scene, &target, false)
 }
 
-/// Explicit unsigned iOS archive producer. The desktop entry point retains its
+/// Explicit unsigned mobile archive producer. The desktop entry point retains its
 /// host==target guard; this route freshly compiles checked source and bindings.
 pub fn embed_mobile_project(project_path: &Path, selected_scene: Option<&str>) -> Result<()> {
     let host = env::var("HOST")?;
     let target = env::var("TARGET")?;
     if host != incant_script::artifact::TARGET || !mobile_destination(&host, &target) {
         return Err(
-            "authored mobile project requires the reviewed macOS arm64 to iOS bytecode route"
+            "authored mobile project requires the reviewed macOS arm64 mobile bytecode route"
                 .into(),
         );
     }
@@ -40,7 +40,10 @@ pub fn embed_mobile_project(project_path: &Path, selected_scene: Option<&str>) -
 
 fn mobile_destination(host: &str, target: &str) -> bool {
     host == "aarch64-apple-darwin"
-        && matches!(target, "aarch64-apple-ios" | "aarch64-apple-ios-sim")
+        && matches!(
+            target,
+            "aarch64-apple-ios" | "aarch64-apple-ios-sim" | "aarch64-linux-android"
+        )
         && incant_script::artifact::compatibility::admits(
             host,
             target,
@@ -87,8 +90,13 @@ fn embed(
         .scenes
         .get(&scene_id)
         .ok_or("selected scene is missing")?;
+    let mobile_platform = if target == "aarch64-linux-android" {
+        "Android"
+    } else {
+        "iOS"
+    };
     if mobile && authored.program.is_some() {
-        return Err("authored iOS archive currently requires TypeScript; static Wasm mobile export is unsupported".into());
+        return Err(format!("authored {mobile_platform} archive currently requires TypeScript; static Wasm mobile export is unsupported").into());
     }
     if mobile
         && [
@@ -101,7 +109,10 @@ fn embed(
         .iter()
         .any(|key| env::var_os(key).is_some())
     {
-        return Err("authored iOS archive cannot select a static Wasm build input".into());
+        return Err(format!(
+            "authored {mobile_platform} archive cannot select a static Wasm build input"
+        )
+        .into());
     }
     let wasm = if let Some(incant_doc::SceneProgram::Wasm { module }) = &authored.program {
         if env::var_os("CARGO_FEATURE_STATIC_MODULE").is_none() {
@@ -247,7 +258,7 @@ fn embed(
         "physics_variant": scene.physics_variant(),
         "target": target, "scene_sha256": hex(&Sha256::digest(&scene_bytes)),
         "producer_target": incant_script::artifact::TARGET,
-        "producer_kind": if mobile { "ios-archive" } else { "native-desktop" },
+        "producer_kind": if !mobile { "native-desktop" } else if target == "aarch64-linux-android" { "android-archive" } else { "ios-archive" },
         "script": script_manifest,
         "project_sha256": hex(&Sha256::digest(text.as_bytes())), "visual_assets": visual,
         "audio_clips": audio, "compiler": compiler_manifest,

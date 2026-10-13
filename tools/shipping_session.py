@@ -65,7 +65,12 @@ def target_commands(stderr, target, storage):
         features = sorted(re.fullmatch(r'feature="(.*)"', tokens[i + 1])[1]
                           for i, token in enumerate(tokens[:-1]) if token == '--cfg'
                           and re.fullmatch(r'feature="(.*)"', tokens[i + 1]))
+        crate_types = sorted(kind for i, token in enumerate(tokens[:-1])
+                             if token == '--crate-type' for kind in tokens[i + 1].split(','))
+        require(crate_types and len(set(crate_types)) == len(crate_types),
+                'Missing or duplicate target crate types')
         result.append({'line': line, 'crate': option(tokens, '--crate-name'),
+                       'crate_types': crate_types,
                        'features': features, 'out_dir': str(out_dir),
                        'extra_filename': next((tokens[i + 1].split('=', 1)[1]
                            for i, token in enumerate(tokens[:-1]) if token == '-C'
@@ -193,10 +198,12 @@ class FreshSession:
             require(hashes, 'Target artifact files are missing')
             crate = artifact['target']['name'].replace('-', '_')
             # A larger GPU graph can contain two versions with the same crate
-            # name/features. Join libraries using rustc's exact artifact suffix
+            # name/features. A player also has distinct library and binary units.
+            # Match crate types, then join libraries using the exact artifact suffix
             # before accepting a unique command; package_id stays in the ledger.
             matches = [c for c in commands if c['crate'] == crate
                        and c['features'] == sorted(artifact['features'])
+                       and c['crate_types'] == sorted(artifact['target']['crate_types'])
                        and (artifact.get('executable') or (c['extra_filename'] and any(
                            p.name.startswith(f'lib{crate}{c["extra_filename"]}.')
                            or p.name.startswith(f'{crate}{c["extra_filename"]}.')

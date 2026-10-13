@@ -1,0 +1,636 @@
+{
+ "route": "incant_render_gpu_host HostedOfflineGameSession + GpuRenderConsumer, package data, cooked program from the package producer",
+ "adapter": "Apple M5 Pro",
+ "backend": "Metal",
+ "target_format": "Rgba8UnormSrgb",
+ "captures": [
+  {
+   "run": "f5-ar-playing-hud-one",
+   "guest": "logging stand-in",
+   "capture": "window-640x480-start.png",
+   "file_sha256": "19a51c451cc08c0d4af0779f271a9fb538a1d0d9f0da2d5b52456bc0b6fe29d8",
+   "rgba_sha256": "375157754b8d5c4e00d768a3fb8fe5f1f8c30635d66ff8c0783116c1c1efe0a2",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 77,
+    "gpu_bytes": 44419,
+    "missing_glyphs": 0,
+    "quads": 154,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-ar-playing-hud-one",
+   "guest": "logging stand-in",
+   "capture": "small-420x320-start.png",
+   "file_sha256": "2766505deebdee3d291d7b93c5d9c8ea0184929ad9242d5ed9695d4783b9fd1f",
+   "rgba_sha256": "2b1373857d11ea75f519733f59049576c6768fef9125cf773b810dddd300c13a",
+   "size_px": [
+    840,
+    640
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 77,
+    "gpu_bytes": 44419,
+    "missing_glyphs": 0,
+    "quads": 154,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-XA-playing-hud-one",
+   "guest": "logging stand-in",
+   "capture": "window-640x480-start.png",
+   "file_sha256": "e854d2f8eac1d1ea1154c49ce08f093478f74f049d2caec5ccd381b8ff6669c5",
+   "rgba_sha256": "1f6a9cf0ee3f5420fcf696034d42a2f4cbd53ad62018131c36020d5c21935da8",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 138,
+    "gpu_bytes": 54042,
+    "missing_glyphs": 0,
+    "quads": 276,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-XA-playing-hud-one",
+   "guest": "logging stand-in",
+   "capture": "small-420x320-start.png",
+   "file_sha256": "7c55087088ba2e2e3a3576978e490b641b0bf875f2c220d714a8032746712221",
+   "rgba_sha256": "644bdd59cf27ff8777d643c003da37a5ed8a1e3fbc8183c30342486e8f033017",
+   "size_px": [
+    840,
+    640
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 138,
+    "gpu_bytes": 54042,
+    "missing_glyphs": 0,
+    "quads": 276,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-collected-route-collected",
+   "guest": "package cooked program",
+   "capture": "route-all-collected.png",
+   "file_sha256": "abe59a923696a5db54343fa6a88f67598c06dde823d4f2a7ae5b31c46dbab19f",
+   "rgba_sha256": "4a8f5eb4bd927e8d128951bb6802aa2aa885a877fc4aec723af624c789f5a5e2",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 1905,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 36,
+    "model_entities": 6,
+    "model_triangles": 63651,
+    "primitive_instances": 36
+   },
+   "ui": {
+    "glyph_quads": 72,
+    "gpu_bytes": 33594,
+    "missing_glyphs": 0,
+    "quads": 144,
+    "widgets": 6
+   },
+   "run_logs": [
+    "127 core.pickup 01CSEN00000000000000000030 1/4",
+    "508 core.pickup 01CSEN00000000000000000031 2/4",
+    "664 core.damage health=2",
+    "1266 core.pickup 01CSEN00000000000000000032 3/4",
+    "1842 core.pickup 01CSEN00000000000000000033 4/4",
+    "2066 core.won tick=2066 health=2 pickups=4"
+   ]
+  },
+  {
+   "run": "f5-en-lost-idle-lost",
+   "guest": "package cooked program",
+   "capture": "idle-mites-closing.png",
+   "file_sha256": "57c08c9a547f277d90e5afb8008fa149c6849acb8b8bfb4f39cde3efae4cc3f8",
+   "rgba_sha256": "368eda5ab7c97af13c27823bb2d2ca7d32edc39c9173b9cdc8f3707b28c9a786",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 400,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-lost-idle-lost",
+   "guest": "package cooked program",
+   "capture": "idle-lost.png",
+   "file_sha256": "a9381500d577848c049d8b60a6f7946ac07350776b3cdbce9902543d1b29a02f",
+   "rgba_sha256": "6598bafa71983a7c5dc04628e804ce17df46b633f40ca8027795fe3098cde7a0",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 730,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   },
+   "run_logs": [
+    "526 core.damage health=2",
+    "571 core.damage health=1",
+    "616 core.damage health=0",
+    "616 core.lost tick=616"
+   ]
+  },
+  {
+   "run": "f5-en-playing-hud-static",
+   "guest": "logging stand-in",
+   "capture": "window-640x480-start.png",
+   "file_sha256": "7f1eca5aac94e9a35497f06069968d999356f7ccb22ccbd46b033821d959728a",
+   "rgba_sha256": "03844b1022e19f7dd3c24bb58aeb0a549a475be53bf5037808feac759855237f",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-hud-static",
+   "guest": "logging stand-in",
+   "capture": "resize-960x540.png",
+   "file_sha256": "6eb32e631e701a1201ea484f66c82dd9fe5d444b3563cf98ddaa3a0b85b3569b",
+   "rgba_sha256": "6afcede3a08e25a01a34dfc20a079f2ae20f7d4aaddfb2e5c7f4331e74765b19",
+   "size_px": [
+    1920,
+    1080
+   ],
+   "scale": 2.0,
+   "tick": 3,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-hud-static",
+   "guest": "logging stand-in",
+   "capture": "resize-420x320.png",
+   "file_sha256": "aaf5cb132be13220294d9e3ef0e82c209de4de4e64c0ab1fe343b2f09b371e61",
+   "rgba_sha256": "7acbddc02f864bf6721e5e009b34cc8704d13c9bc8ef3ce96d7ef7d6ebf42c2e",
+   "size_px": [
+    840,
+    640
+   ],
+   "scale": 2.0,
+   "tick": 4,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-reparent",
+   "guest": "development probe script",
+   "capture": "reparent-t2-stashed.png",
+   "file_sha256": "7f1eca5aac94e9a35497f06069968d999356f7ccb22ccbd46b033821d959728a",
+   "rgba_sha256": "03844b1022e19f7dd3c24bb58aeb0a549a475be53bf5037808feac759855237f",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-reparent",
+   "guest": "development probe script",
+   "capture": "reparent-t4-shown.png",
+   "file_sha256": "217b1387034cd7d93b8882fa31d862bae025deaf291ab4d1ae328d9adea2f415",
+   "rgba_sha256": "b29262f4722bde7541f8b5fbe660900bebe776b388237278255b724a3345148f",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 4,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-reparent",
+   "guest": "development probe script",
+   "capture": "reparent-t7-restashed.png",
+   "file_sha256": "2387f34a8e49d637851752c3638974c81efb5d2cf88ad2ae6f05d2b12dfa665d",
+   "rgba_sha256": "9a195fb96e876e8f15fc2a62c0547196ca342022632952ec32effd109f2dbaf3",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 7,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   },
+   "run_logs": [
+    "3 won label -> result",
+    "6 won label -> stash"
+   ]
+  },
+  {
+   "run": "f5-en-playing-route-playing",
+   "guest": "package cooked program",
+   "capture": "route-approach-s1.png",
+   "file_sha256": "b8e64b316cd1e80b2c40da2659ccaa0559b009c21b4bc581a2a38127409be1e5",
+   "rgba_sha256": "870c9f8e94fc8be04a2ffe0edf62a532d8ed144746ad44c274829e9932bace1c",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 100,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-route-playing",
+   "guest": "package cooked program",
+   "capture": "route-pocket-s2.png",
+   "file_sha256": "972e6e404160f32a40e6f1b31e3b175c7897c14ce96f72c8de76f68dd5fa0ab0",
+   "rgba_sha256": "b4bef64a2594f2a1a84ade665d34d5a23c444d3fceeee2efe3b9562a95cf3b8b",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 500,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 42,
+    "model_entities": 9,
+    "model_triangles": 64407,
+    "primitive_instances": 42
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-route-playing",
+   "guest": "package cooked program",
+   "capture": "route-contact.png",
+   "file_sha256": "f84edd7670f979ba18c08f5305646ed010895dea92bfe8f0bc70f5c08e0a9b03",
+   "rgba_sha256": "5c737ac90c26c2ff15393c0fd75709a55b899d23589c31570b94c99f60545189",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 660,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 40,
+    "model_entities": 8,
+    "model_triangles": 64155,
+    "primitive_instances": 40
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-route-playing",
+   "guest": "package cooked program",
+   "capture": "route-shelf-s3.png",
+   "file_sha256": "bc090747573354833bfc4029ec68562aa81e8dcc2c26e8b47188160dca50c3a8",
+   "rgba_sha256": "a2bac05d53edeee5ac5bf3312f7f8a703e03f64f0ec0cb820a976b77fd6cb594",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 1250,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 40,
+    "model_entities": 8,
+    "model_triangles": 64155,
+    "primitive_instances": 40
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-route-playing",
+   "guest": "package cooked program",
+   "capture": "route-plateau-s4.png",
+   "file_sha256": "6866cd1d6c797b15aa9da66f7a29255f7582c4f96f7edbd9ff8566e9e4242ade",
+   "rgba_sha256": "82e1b65befb94d00c9bc6abf5e4dea76df58554198092a9da84414be70ff8627",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 1830,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 38,
+    "model_entities": 7,
+    "model_triangles": 63903,
+    "primitive_instances": 38
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-en-playing-route-playing",
+   "guest": "package cooked program",
+   "capture": "route-lift-approach.png",
+   "file_sha256": "0093c990eb9f5db762c375f2a705250e59eaae316b59a1423abfa899ca14f834",
+   "rgba_sha256": "06f0f92a710aa3abad9b9cffd80f1432912555ca443d6cdedb9216ee63db9b4a",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 2040,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 36,
+    "model_entities": 6,
+    "model_triangles": 63651,
+    "primitive_instances": 36
+   },
+   "ui": {
+    "glyph_quads": 78,
+    "gpu_bytes": 35076,
+    "missing_glyphs": 0,
+    "quads": 156,
+    "widgets": 6
+   },
+   "run_logs": [
+    "127 core.pickup 01CSEN00000000000000000030 1/4",
+    "508 core.pickup 01CSEN00000000000000000031 2/4",
+    "664 core.damage health=2",
+    "1266 core.pickup 01CSEN00000000000000000032 3/4",
+    "1842 core.pickup 01CSEN00000000000000000033 4/4",
+    "2066 core.won tick=2066 health=2 pickups=4"
+   ]
+  },
+  {
+   "run": "f5-en-won-route-won",
+   "guest": "package cooked program",
+   "capture": "route-won.png",
+   "file_sha256": "2a7c2ca2f80674dac207fbd6d7aa4dfd62e1c930c3a28ecbb831b6fa22eaf777",
+   "rgba_sha256": "bb072a40e82c2c672952780a102bc5c00c62294bed95e25726503e440fefc45d",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 2110,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 36,
+    "model_entities": 6,
+    "model_triangles": 63651,
+    "primitive_instances": 36
+   },
+   "ui": {
+    "glyph_quads": 72,
+    "gpu_bytes": 33594,
+    "missing_glyphs": 0,
+    "quads": 144,
+    "widgets": 6
+   },
+   "run_logs": [
+    "127 core.pickup 01CSEN00000000000000000030 1/4",
+    "508 core.pickup 01CSEN00000000000000000031 2/4",
+    "664 core.damage health=2",
+    "1266 core.pickup 01CSEN00000000000000000032 3/4",
+    "1842 core.pickup 01CSEN00000000000000000033 4/4",
+    "2066 core.won tick=2066 health=2 pickups=4"
+   ]
+  },
+  {
+   "run": "f5-zh-Hans-playing-hud-one",
+   "guest": "logging stand-in",
+   "capture": "window-640x480-start.png",
+   "file_sha256": "8fb22705502c2d05ed774acd3b4f5ce19f119d6015af50d8d4e239cf3fc5115c",
+   "rgba_sha256": "5bf13a57ed29475cddd68f469e362797a2c7ed393a104e96f2fdf22378574339",
+   "size_px": [
+    1280,
+    960
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 40,
+    "gpu_bytes": 40040,
+    "missing_glyphs": 0,
+    "quads": 80,
+    "widgets": 6
+   }
+  },
+  {
+   "run": "f5-zh-Hans-playing-hud-one",
+   "guest": "logging stand-in",
+   "capture": "small-420x320-start.png",
+   "file_sha256": "e06c9460f5259ba4d80eda0d38144471edb4160062b81c1c3054d249c366acc6",
+   "rgba_sha256": "ff3f74a1e0c6e3829e636aa30b043b4aa9e53ea4060230d8790435b74a17793a",
+   "size_px": [
+    840,
+    640
+   ],
+   "scale": 2.0,
+   "tick": 2,
+   "scene": {
+    "diagnostic_entities": 0,
+    "model_draw_calls": 44,
+    "model_entities": 10,
+    "model_triangles": 64659,
+    "primitive_instances": 44
+   },
+   "ui": {
+    "glyph_quads": 40,
+    "gpu_bytes": 40040,
+    "missing_glyphs": 0,
+    "quads": 80,
+    "widgets": 6
+   }
+  }
+ ]
+}
