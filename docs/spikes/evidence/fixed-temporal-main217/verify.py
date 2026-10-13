@@ -4,8 +4,11 @@ import argparse,base64,gzip,hashlib,json,re,subprocess
 P=argparse.ArgumentParser();P.add_argument('--verify-only',required=True,action='store_true');P.parse_args()
 R=Path(__file__).resolve().parents[4];D=Path(__file__).parent;B=Path('/Users/andreyyurlov/.codex/incant-integration-evidence')
 M=json.loads((R/'docs/spikes/evidence/fixed-temporal-main217.json').read_text())
+Q=json.loads((D/'main219-qualification.json').read_text()) if (D/'main219-qualification.json').exists() else None
 def h(b):return hashlib.sha256(b).hexdigest()
 def git(*a):return subprocess.check_output(['git',*a],cwd=R)
+PA=M['producer_cpu_archive'];assert h((R/PA['path']).read_bytes())==PA['sha256']
+if Q:assert h((D/'main219-qualification.json').read_bytes())==M['main219_qualification']['sha256']
 A=M['archive'];raw=(R/A['path']).read_bytes();assert h(raw)==A['sha256'] and len(raw)==A['bytes'];a=json.loads(gzip.decompress(raw));assert len(a['records'])==A['records'] and len(a['payloads'])==A['payloads'];blobs={k:base64.b64decode(v,validate=True) for k,v in a['payloads'].items()}
 for k,b in blobs.items():assert h(b)==k
 by={}
@@ -19,7 +22,13 @@ def log_counts(name,checks):
 for key in ['freeze','initial_freeze']:
  f=M[key];raw=(R/f['path']).read_bytes();assert h(raw)==f['sha256'];rows=json.loads(raw)['files'];assert len(rows)==f['count']
  if key=='freeze':
-  for row in rows:assert h((R/row['path']).read_bytes())==row['sha256'],row['path']
+  for row in rows:
+   actual=h((R/row['path']).read_bytes())
+   if actual!=row['sha256']:
+    assert Q is not None
+    q=next(q for q in Q['paths'] if q['path']==row['path'])
+    assert q['before']==row['sha256'] and q['after']==actual,row['path']
+   else:assert actual==row['sha256']
  else:
   for row in rows:assert h(git('show','725ee636c3ed1f6958f0c00c0ff15ae573cc99fc:'+row['path']))==row['sha256'],row['path']
 assert M['test_only_delta']==['crates/incant_render/src/temporal_joined_tests.rs','crates/incant_render/src/temporal_retained_tests.rs']
@@ -65,4 +74,15 @@ for c in M['gpu']:
  actual+=samples
 assert len(actual)==8
 attempt=data(G/'attempt.json');assert attempt['runner_sha256']=='96bc16293ac1ef52a26790bfd99630e9e877aad1bafa91f9ae2cb06026a850a6' and attempt['max_frames']==8
+if Q:
+ paths=[p for p in git('diff','--name-only',Q['base'],Q['main']).decode().splitlines() if p!='STATUS.md' and not p.startswith('docs/')]
+ assert set(paths)=={p['path'] for p in Q['paths']} and len(paths)==13
+ for row in Q['paths']:
+  p=row['path'];assert p.startswith('crates/incant_physics_snapshot/') or p=='crates/incant_render/tests/timestamp_backend_probe.rs'
+  assert h((R/p).read_bytes())==row['after']==h(git('show',Q['main']+':'+p))
+  if row['before']:assert h(git('show',Q['base']+':'+p))==row['before']
+ assert Q['graph']['exit']==0 and h((R/Q['graph']['path']).read_bytes())==Q['graph']['sha256']
+ assert 'incant_physics_snapshot' not in (R/Q['graph']['path']).read_text()
+ for p in ['Cargo.toml','Cargo.lock','.cargo/config.toml','crates/incant_render/Cargo.toml']:
+  assert git('show',Q['base']+':'+p)==git('show',Q['main']+':'+p)
 print(json.dumps(dict(verified=True,records=A['records'],payloads=A['payloads'],frozen_inputs=M['freeze']['count'],checks=22,offline_commands=30,measured_gpu_frames=len(actual),appearance='producer fixed-only; no current pixel review')))

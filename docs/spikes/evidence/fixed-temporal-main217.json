@@ -2122,5 +2122,15 @@
     "producer": "Prior fixed-only Claude review9927598c,150numeric+79scene submissions/32contracts; softness and MASK detail approximately18% OF reference remain. Original producer evidence remains tied to its source/binaries.",
     "preliminary": "First read-only exact test-list request omitted models:: prefix and matched zero. Corrected listing required exactly one test before each actual GPU launch; no empty execution counted.",
     "final_review": "pending"
+  },
+  "main219_qualification": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/main219-qualification.json",
+    "sha256": "59b97c67d4df86413ae167e1c5ab0399f9b2063bf0849fa261a1b17e64306a05"
+  },
+  "producer_cpu_archive": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/producer-temporal-coverage-logs.json.gz",
+    "sha256": "6a2d60f6f35f5e56e2594006300d1868d5eb5c6514f6ec611a38b38c8ba9dd18",
+    "records": 98,
+    "payloads": 65
   }
 }

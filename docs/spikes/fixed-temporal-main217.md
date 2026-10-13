@@ -103,3 +103,10 @@ acceptance remains source/binary-specific and retains its softness limitation.
 [read-only verifier](evidence/fixed-temporal-main217/verify.py) retain all current
 raw checks, explicitly recooked artifacts, producer evidence and source identities.
 Final independent integration evidence review is pending.
+
+The actual main219 ancestry join changes only twelve inert physics-snapshot source
+paths (absent from the selected renderer graph) and one separate timestamp
+diagnostic integration test. Manifests, lock, build scripts and fixed renderer
+implementation are unchanged. The diagnostic has its own reviewed main219 checks;
+no new build or GPU execution is invented for this disjoint join.
+[Exact old/new hashes and graph](evidence/fixed-temporal-main217/main219-qualification.json).
