@@ -71,3 +71,12 @@ impl Targets {
         })
     }
 }
+
+const _: () = assert!(
+    size_of::<super::TemporalState>()
+        + size_of::<super::Pending>()
+        + size_of::<super::TemporalDraw>()
+        + 2 * (size_of::<Targets>() + 2 * size_of::<usize>())
+        + 128
+        < 4096
+);

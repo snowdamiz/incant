@@ -1,0 +1,41 @@
+{
+  "at": "2026-10-13T05:45:09.497864+00:00",
+  "decision": "accepted for bounded GPU and visual review",
+  "freeze_sha256": "06a242fd0d56fa2afc05c9931567795a12919e6b82f0dd90ee8dcd94adeeb39f",
+  "manifest_sha256": "2040592a60773886f605f396121224659a4a86334f636c406672e6e4ff6d084a",
+  "source_inputs": 42,
+  "unchanged_baselines": 15,
+  "lossless_artifacts": 18,
+  "copied_binaries": 8,
+  "checks": 7,
+  "counts": {
+    "cpu-all": {
+      "passed": 110,
+      "failed": 0,
+      "ignored": 96,
+      "groups": 9
+    },
+    "cooked-refusal": {
+      "passed": 115,
+      "failed": 0,
+      "ignored": 38,
+      "groups": 1
+    }
+  },
+  "reviewed": [
+    "Validated explicit finite policy, centered internal-pixel jitter and conservative light/shadow coverage.",
+    "Single motion owner determines previous matrix, depth/color slot, phase and accepted epoch/sequence. All rejectable staging precedes queue writes and submission; acceptance follows submission.",
+    "Combined old/candidate logical allocation preflight; default path has no temporal owner or extra pipelines.",
+    "Actual WGSL resolve/copy: viewport-limited previous-UV lookup, every bilinear tap depth validated, finite scene-linear clamp/reactivity and current-only uncovered samples.",
+    "Opaque/MASK temporal history occurs before BLEND/sprites/world text/UI; physical UI unchanged.",
+    "Logical Models timestamps span each real motion/opaque/resolve/copy/BLEND pass using only first/last endpoints.",
+    "Native cooked variants explicitly refuse, browser portable path compiles; no invented backend fallback.",
+    "CPU and prepared GPU tests reviewed; original baseline shaders/build/DRS hashes preserved."
+  ],
+  "findings": [],
+  "limits": [
+    "No temporal GPU test or appearance acceptance yet; copied binaries compiled only.",
+    "No complete temporal upscaling, MetalFX, reference-device performance or phase gate.",
+    "Current-only transparent/world-text jitter quality remains pending Claude review."
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "at": "2026-10-13T05:16:05.535548+00:00",
+  "producer": "814717935462e4ee5dbdb1fdae2738d17477f932",
+  "manifest_sha256": "1e6dd3f7962ff1cb0bbcd3ba6cb1efbfa17e18a8a48f59a63dfdda5d31ee3273",
+  "sources_verified": 35,
+  "lossless_records_verified": 16,
+  "copied_binaries_verified": 9,
+  "check_logs_verified": 7,
+  "count_rows": [
+    [
+      "cpu-all",
+      84,
+      0,
+      35
+    ],
+    [
+      "cpu-all",
+      1,
+      0,
+      50
+    ],
+    [
+      "cpu-all",
+      0,
+      0,
+      0
+    ],
+    [
+      "cpu-all",
+      4,
+      0,
+      0
+    ],
+    [
+      "cpu-all",
+      1,
+      0,
+      5
+    ],
+    [
+      "cpu-all",
+      1,
+      0,
+      2
+    ],
+    [
+      "cpu-all",
+      0,
+      0,
+      0
+    ],
+    [
+      "cpu-all",
+      0,
+      0,
+      0
+    ],
+    [
+      "cooked-refusal",
+      12,
+      0,
+      8
+    ],
+    [
+      "cooked-refusal",
+      0,
+      0,
+      1
+    ],
+    [
+      "cooked-refusal",
+      0,
+      0,
+      0
+    ]
+  ],
+  "status": "accepted producer CPU evidence; independent source accepted69b08; GPU and appearance pending",
+  "source_review_sha256": "69b08ba91a64e04391e0ab658da82f22b526df8c942457a6a424c170dda517f7",
+  "limits": [
+    "No motion readback or rendered acceptance",
+    "No temporal accumulation or upscaler delivered by this slice"
+  ]
+}

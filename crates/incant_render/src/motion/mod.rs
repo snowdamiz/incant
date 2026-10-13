@@ -12,7 +12,7 @@ mod tests;
 pub(crate) use draw::MotionDraw;
 pub use owner::MotionFrame;
 pub use plan::{MAX_MOTION_INSTANCE_BYTES, MAX_MOTION_PIXELS, MAX_MOTION_TARGET_BYTES};
-pub(crate) use retained::{MotionState, TemporalInput};
+pub(crate) use retained::{MotionState, MotionView, TemporalInput};
 pub(crate) use system::MotionSystem;
 
 #[derive(Debug, thiserror::Error, PartialEq, Eq)]

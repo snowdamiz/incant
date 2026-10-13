@@ -56,6 +56,17 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
+## Retained temporal color — CPU producer accepted, GPU review pending
+
+The default-off fixed-internal-resolution opaque/MASK temporal resolve is implemented
+with accepted motion/depth/phase ownership, bounded history, projection jitter and
+complete Models timestamp coverage. Independent source and CPU review passed;
+[verification and exact evidence](docs/spikes/temporal-color-verification.md) retain
+110 ordinary CPU tests and 115 overlapping cooked-feature tests. Two parent-motion
+GPU numeric tests passed separately; temporal accumulation, appearance, temporal
+upscaling, MetalFX and device budgets remain pending. Native cooked combinations
+explicitly refuse this new path until their artifact contract is implemented.
+
 ## Exact physics saves — inert graph adjacency validation underway
 
 The next inert format preserves node/edge order and validates both linked

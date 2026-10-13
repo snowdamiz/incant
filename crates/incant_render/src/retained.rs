@@ -387,17 +387,17 @@ impl RetainedScene {
             self.staging.camera.pixel_resolution,
             scale,
         )?;
-        if let Some(temporal) = &self.temporal {
-            if self.staging.camera.pixel_resolution.is_none() {
-                temporal.preflight(
-                    &renderer.device,
-                    plan.size,
-                    self.motion
-                        .as_ref()
-                        .ok_or(crate::temporal::TemporalError::History)?
-                        .target_bytes(),
-                )?;
-            }
+        if let Some(temporal) = &self.temporal
+            && self.staging.camera.pixel_resolution.is_none()
+        {
+            temporal.preflight(
+                &renderer.device,
+                plan.size,
+                self.motion
+                    .as_ref()
+                    .ok_or(crate::temporal::TemporalError::History)?
+                    .target_bytes(),
+            )?;
         }
         let motion = self
             .motion
@@ -408,9 +408,11 @@ impl RetainedScene {
                     &self.live,
                     &self.staging,
                     input,
-                    [target.width, target.height],
-                    &plan,
-                    self.temporal.is_some(),
+                    crate::motion::MotionView {
+                        output: [target.width, target.height],
+                        plan: &plan,
+                        temporal: self.temporal.is_some(),
+                    },
                 )
             })
             .transpose()?;
@@ -507,3 +509,7 @@ mod text_native_tests;
 #[cfg(test)]
 #[path = "motion_device_tests.rs"]
 mod motion_tests;
+
+#[cfg(test)]
+#[path = "temporal_retained_tests.rs"]
+mod temporal_tests;

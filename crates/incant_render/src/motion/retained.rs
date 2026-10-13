@@ -50,6 +50,11 @@ pub(crate) struct Prepared {
     targets: Option<Arc<Targets>>,
     slot: usize,
 }
+pub(crate) struct MotionView<'a> {
+    pub output: [u32; 2],
+    pub plan: &'a crate::resolution::FramePlan,
+    pub temporal: bool,
+}
 pub(crate) struct TemporalInput {
     pub frame: MotionFrame,
     pub rect: [f32; 4],
@@ -242,10 +247,13 @@ impl MotionState {
         live: &RenderScene,
         current: &RenderScene,
         input: &SceneInput,
-        output: [u32; 2],
-        plan: &crate::resolution::FramePlan,
-        temporal: bool,
+        view: MotionView<'_>,
     ) -> Result<(Option<MotionDraw>, Prepared)> {
+        let MotionView {
+            output,
+            plan,
+            temporal,
+        } = view;
         topology(live, current)?;
         let extent = Extent::new(output, plan.size, plan.rect, current.camera);
         let history = if temporal {

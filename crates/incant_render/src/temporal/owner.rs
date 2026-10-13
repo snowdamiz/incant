@@ -21,6 +21,7 @@ pub(crate) struct TemporalState {
     pub config: TemporalConfig,
     targets: Option<Arc<Targets>>,
     last: Option<TemporalFrame>,
+    slot: usize,
 }
 pub(crate) struct Pending {
     pub(super) targets: Option<Arc<Targets>>,
@@ -34,6 +35,7 @@ impl TemporalState {
             config,
             targets: None,
             last: None,
+            slot: 1,
         })
     }
     pub fn frame(&self) -> Option<TemporalFrame> {
@@ -58,6 +60,13 @@ impl TemporalState {
         device: &wgpu::Device,
         input: TemporalInput,
     ) -> Result<Pending, TemporalError> {
+        if input.frame.bypassed() != input.surfaces.is_none()
+            || input.surfaces.as_ref().is_some_and(|s| {
+                s.slot > 1 || (input.frame.has_previous() && s.slot != 1 - self.slot)
+            })
+        {
+            return Err(TemporalError::History);
+        }
         if input.frame.has_previous()
             && self.last.as_ref().is_none_or(|last| {
                 !last.motion.same_owner(&input.frame)
@@ -83,9 +92,17 @@ impl TemporalState {
         })
     }
     pub fn accept(&mut self, pending: Pending) {
+        self.slot = pending.input.surfaces.as_ref().map_or(1, |s| s.slot);
         self.last = Some(TemporalFrame {
             motion: pending.input.frame,
         });
         self.targets = pending.targets;
+    }
+}
+
+#[cfg(test)]
+impl TemporalState {
+    pub(crate) fn accepted_color(&self) -> Option<wgpu::TextureView> {
+        self.targets.as_ref().map(|t| t.color[self.slot].clone())
     }
 }
