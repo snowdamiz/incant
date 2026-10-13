@@ -87,7 +87,7 @@ fn same_recipe_different_payloads_never_alias_resolved_model_plans() {
 fn live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry() {
     let directory = tempfile::tempdir().unwrap();
     let sources = versions(directory.path());
-    let renderer = crate::Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(crate::Renderer::headless().unwrap());
     let old = renderer.prepare(&input(&sources[..1])).unwrap();
     let before = renderer.screenshot_scene_png(&old, 160, 90).unwrap();
     let new = renderer.prepare(&input(&sources[1..])).unwrap();

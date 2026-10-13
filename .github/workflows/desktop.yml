@@ -11,6 +11,8 @@ concurrency:
   cancel-in-progress: true
 jobs:
   desktop:
+    env:
+      INCANT_EXPECT_GPU_BACKEND: ${{ matrix.platform == 'Windows' && 'Dx12' || 'Vulkan' }}
     strategy:
       fail-fast: false
       matrix:
@@ -62,6 +64,13 @@ jobs:
       # package invocations otherwise rebuild the renderer dependencies.
       - name: Verify geometry, editor recovery and simulated frame capture
         run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
+      # Defaults above stay covered; this second run selects every reviewed
+      # cooked family. Every GPU fixture asserts the actual native backend.
+      - name: Verify opt-in cooked shaders on the required native backend
+        run: cargo test -p incant_render -p incant_render_gpu_host --all-targets --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/persistent-pipeline-cache -- --ignored --skip vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
+      - name: Verify Vulkan cache across fresh processes and corruption
+        if: runner.os == 'Linux'
+        run: cargo test -p incant_render --test persistent_cache --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/persistent-pipeline-cache -- --ignored --exact vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
       # Keep workspace feature unification from the release tests while building
       # only the editor, headless and cook tools used below.
       - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings

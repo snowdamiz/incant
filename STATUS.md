@@ -16,6 +16,19 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Cooked renderer integration — CPU checks complete
+
+The accepted sprite, UI, text and material producer changes are composed with
+optional private Vulkan pipeline storage. Default and cooked configurations pass
+87 and 113 CPU cases respectively (overlapping coverage), with 89 GPU cases
+explicitly ignored in each local run. All-target Clippy, web compilation and
+workflow/dependency checks pass. Claude 0062–0064 accepted the immutable producer
+Metal results; these remain producer evidence. Release CI retains defaults and
+adds cooked GPU checks with exact Metal/Vulkan/Dx12 adapter assertions, plus the
+Linux fresh-process cache test. Current composed GPU execution, Vulkan/DX12
+acceptance, cache benefit and reference-phone gates remain pending. Features
+remain opt-in. [Integration evidence](docs/spikes/cooked-renderer-main186.md).
+
 ## Persistent Vulkan pipeline cache — CPU verification
 
 An optional renderer cache now wraps the complete 31-pipeline startup catalog
@@ -34,8 +47,9 @@ sampling shaders to native backend artifacts. Its explicit Metal storage-length
 binding covers metadata absent from passthrough; bounds and loop checks remain.
 All seven CPU/static checks pass: 92 enabled cases, 63 default-library cases,
 Clippy and browser portability. Both MSL stages compile and link. Independent source review passes.
-Claude GPU/appearance review remains pending; grid compute, full
-renderer cooking, pipeline caching and reference-phone gates remain open.
+Claude 0064 accepted the producer Metal GPU/appearance packet. Current composed
+GPU execution, grid compute, full renderer cooking and reference-phone gates
+remain open; optional Vulkan cache CPU integration is described above.
 [Contract and evidence](docs/spikes/cooked-material-shaders.md).
 
 ## Cooked world-space text shaders — CPU and Metal compilation passed
@@ -43,8 +57,8 @@ renderer cooking, pipeline caching and reference-phone gates remain open.
 The fixed text shader path passes independent source review, 90 enabled CPU
 tests, Clippy, wasm32 compilation and 63 default library tests. Both generated
 stages compile and link with the actual Apple Metal toolchain. Existing WGSL,
-glyph placement, coverage and depth behavior are unchanged. Native GPU, Claude
-appearance and integration remain pending; this is not a rendering or device
+glyph placement, coverage and depth behavior are unchanged. Claude 0063 accepted the producer Metal GPU/appearance packet. Current composed
+GPU and other-backend execution remain pending; this is not a rendering or device
 gate. [Scope and evidence](docs/spikes/cooked-text-shaders.md).
 
 ## Cooked screen-space UI shaders — CPU and Metal compilation passed
@@ -52,16 +66,16 @@ gate. [Scope and evidence](docs/spikes/cooked-text-shaders.md).
 The opt-in fixed UI shader family passes independent source review, 87 enabled
 CPU tests, Clippy, wasm32 compilation and 63 default library tests. Existing WGSL,
 layout, theme and blending are unchanged. Both stages compile and link with the
-actual Apple Metal toolchain. Native GPU, Claude appearance and integration remain pending. No rendering or phase
-gate is claimed. [Scope and evidence](docs/spikes/cooked-ui-shaders.md).
+actual Apple Metal toolchain. Claude 0063 accepted the producer Metal GPU/appearance packet. Current composed
+GPU and other-backend execution remain pending. No rendering or phase gate is claimed. [Scope and evidence](docs/spikes/cooked-ui-shaders.md).
 
 ## Cooked sprite shader family — CPU and compiler checks passed
 
 The existing sprite shader now has an opt-in fixed backend artifact path with
 checked stage/resource/host layouts and preserved sampling math. CPU tests,
 Clippy, default/web compilation and actual Metal stage compilation/linking pass;
-independent source review is accepted. Native GPU and Claude appearance checks
-remain pending, as do other shader families and device performance requirements.
+independent source review is accepted. Claude 0062 accepted the producer Metal GPU/appearance packet. Current composed
+GPU execution, other shader families and device performance requirements remain pending.
 [Scope and evidence](docs/spikes/cooked-sprite-shaders.md).
 
 ## Authored Core runtime bindings — merged in main185

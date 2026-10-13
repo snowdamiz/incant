@@ -34,7 +34,7 @@ fn supply_tangent(fixture: &mut Fixture, tangent: [f32; 4]) {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     for (mirror_u, mirror_v, x, w) in [
         (false, false, 1_f32, 1_f32),
         (true, false, -1., -1.),

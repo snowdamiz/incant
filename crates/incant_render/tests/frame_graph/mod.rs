@@ -9,7 +9,7 @@ use incant_render_authoring::RendererAuthoringExt as _;
 #[test]
 #[ignore = "requires a native GPU; run by all desktop workflows"]
 fn queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing() {
-    let renderer = crate::Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(crate::Renderer::headless().unwrap());
     let directory = tempfile::tempdir().unwrap();
     let (mut project, assets, _) = test_support::fixture(directory.path());
     let mut camera = incant_doc::Entity::new("Retained logical camera");
@@ -109,7 +109,7 @@ fn queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing
 #[test]
 #[ignore = "requires a native GPU; run by all desktop workflows"]
 fn queued_graph_frames_outlive_scene_versions_and_failed_preparation() {
-    let renderer = crate::Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(crate::Renderer::headless().unwrap());
     let directory = tempfile::tempdir().unwrap();
     let (mut project, mut assets, asset_id) = test_support::fixture(directory.path());
     let mut jobs = Vec::new();

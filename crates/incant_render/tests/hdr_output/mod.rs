@@ -162,7 +162,7 @@ fn record_numerical(case: &str, renderer: &Renderer, target: &wgpu::Texture, pix
 #[test]
 #[ignore = "requires a native GPU; run by all desktop workflows"]
 fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     // Expected sRGB code values independently evaluated from the documented derived curve.
     let signals: [([f32; 3], [u8; 3]); 12] = [
         ([0.; 3], [0; 3]),
@@ -240,7 +240,7 @@ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
 #[test]
 #[ignore = "requires a native GPU; run by all desktop workflows"]
 fn output_composes_display_colors_and_reuses_bounded_resize_targets() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let first = renderer.frames.get(&renderer.device, 96, 64).unwrap();
     assert!(Arc::ptr_eq(
         &first,
