@@ -1,0 +1,142 @@
+{
+ "python": "3.14.8",
+ "plan_sha256": "756d2cc27cca0efe82caf04325d2b7ef4356db5af13429d49bcb36ccdac9d7a5",
+ "helper_sha256": "4ad3da1933086a87011d0c52ca89df64b7d5c0d7295b7ef67e6bac3bf5286929",
+ "tools": {
+  "analyze.py": "886b5e2babefbc349451037411406ecddc1e29b0dd4f8a86c4fc540e85fae63c",
+  "build.py": "73727aa676d8e86e55d139df1f9f53a3d9e8fa8aae781dde163309851c07460f",
+  "common.py": "e11e641a63fb1222c9469bc5ffee36fa52850837163aa1f2c13be70d57a8ad81",
+  "gpu.py": "58ac3660181c267c66f3cc4cc386c44859eea782eb4eed1e8f987036894dd639",
+  "lease.py": "8bf5d2875439e026ef61ce87b17bb1b064758f7067e19dd927d465f7e6b64d60",
+  "selfcheck.py": "3925315b1c2163c735e0fccecdebbfbfffaf527f277874d3c0a5e189f4bcb836"
+ },
+ "syntax": "all tools parse",
+ "plan": {
+  "first_run_frames_match_total": true,
+  "rerun_frames_match_total": true,
+  "rerun_frames_within_budget": true,
+  "first_run_submissions_match_total": true,
+  "rerun_submissions_match_total": true,
+  "rerun_submissions_within_budget": true,
+  "sizes_within_960x540": true,
+  "png_names_unique": true,
+  "pngs_not_more_than_frames": true,
+  "retained_pairs_name_real_pngs": true,
+  "retained_pairs_3_to_6": true,
+  "numeric_is_the_only_lib_skip": true,
+  "other_suites_skip_nothing": true,
+  "builds_locked_offline_ci_j2": true,
+  "reviewed_base_ignored_total_90": true
+ },
+ "helper": {
+  "tests_match_plan": true,
+  "limits_match_plan": true,
+  "png_names_match_plan": true,
+  "size_matches_plan": true,
+  "output_variable_matches_plan": true,
+  "observed": {
+   "tests": [
+    "probe",
+    "lit",
+    "sprites_text",
+    "viewport",
+    "owner_drop"
+   ],
+   "limits": {
+    "probe": [
+     0,
+     0
+    ],
+    "lit": [
+     8,
+     5
+    ],
+    "owner_drop": [
+     0,
+     1
+    ],
+    "sprites_text": [
+     2,
+     1
+    ],
+    "viewport": [
+     2,
+     1
+    ]
+   },
+   "pngs": [
+    "lit-off-1.png",
+    "lit-on-1.png",
+    "lit-on-4-skipped.png",
+    "sprites-text-off.png",
+    "sprites-text-on.png",
+    "viewport-off.png",
+    "viewport-on.png"
+   ]
+  }
+ },
+ "refusals": {
+  "commands": {
+   "lease.py acquire": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "lease.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py checkout": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py toolchain": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py tests": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list lib": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py numeric": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py suite lib": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review lit": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review owner_drop": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py check": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py publish": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   }
+  },
+  "all_refused_for_absent_grant": true,
+  "evidence_directory_still_absent": true,
+  "git_status_unchanged": true
+ },
+ "all_pass": true
+}
