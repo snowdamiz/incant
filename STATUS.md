@@ -93,7 +93,7 @@ contact-link ownership, retaining native ordering, free stacks and deferred
 split scheduling. Actual 2D/3D observations include sleep/wake, empty awake
 containers, fixed-body active history, reorder, removal/reuse and delayed splits.
 115 CPU tests, Clippy, wasm32 and dependency/contract checks pass; independent
-producer review is accepted. The [current-main208 integration](docs/spikes/physics-islands-main208.md) passes eight checks and 115 CPU cases with 2,914 unchanged inputs; final integration review is pending.
+producer review is accepted. The [current-main208 integration](docs/spikes/physics-islands-main208.md) passes eight checks and 115 CPU cases with 2,914 unchanged inputs; final integration review is accepted and publication requires the fast check.
 Stamp-sensitive scratch, solver masks/buckets, complete collider/owner composition
 and continued live execution remain open; physics saves stay refused.
 [Island contract](docs/spikes/physics-inert-islands.md).

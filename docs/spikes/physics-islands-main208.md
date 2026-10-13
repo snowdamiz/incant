@@ -19,7 +19,7 @@ observations cover active/persistent membership, sleeping and empty awake
 containers, retained fixed-body membership, free-slot reuse and deferred splits.
 The original failures and corrected fixture/observer expectations remain in the
 producer packet. Independent producer source and final evidence acceptance is
-retained; final current-main integration review is pending.
+retained; final current-main integration review is accepted. Publication requires the exact-head fast check.
 
 Stamp-sensitive scratch, cooldown overflow during execution, solver buckets and
 caches, complete collider/owner authentication and exact live continuation remain

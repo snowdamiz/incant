@@ -510,5 +510,9 @@
     "All52 crate source/test/manifest files equal acceptedb09. Older producer lock predates merged profiling packages/edges and renderer dev naga; current lock equals actualmain208.",
     "No live constructor, complete owner authentication, solver buckets/caches or sleep-scan restoration proof, physics-save admission, GPU, shipping, device or performance claim."
   ],
-  "review_state": "Current-main final island-state integration review pending"
+  "review_state": "Accepted scoped current-main integration; required fast check pending",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-islands-main208/final-review.json",
+    "sha256": "cdf10fbd47d29c07bf5f2a6061be9830b5cb03cbe514ea7b68e8257a39d625cd"
+  }
 }
