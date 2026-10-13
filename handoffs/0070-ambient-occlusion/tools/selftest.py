@@ -430,9 +430,12 @@ def e2e_cases(scratch, rig):
 
 @check("end-to-end: duplicate labels and exhausted budgets refuse without a process")
 def e2e_refusals(scratch, rig):
-    again = rig.run("case", str(rig.grant), "ssao_core")
-    assert again.returncode == 2 and "already used" in again.stdout, again.stdout
     before = len(rig.ledger().records())
+    again = rig.run("case", str(rig.grant), "ssao_core")
+    # Refused before any process: by the never-replace output guard (checked
+    # first) or the duplicate-label guard; either way nothing is reserved.
+    assert again.returncode == 2 and ("exists" in again.stdout or "already used" in again.stdout), again.stdout
+    assert len(rig.ledger().records()) == before
     receipt = rig.evidence / "retry.json"
     receipt.write_text(json.dumps({"format": "incant-0070-retry-v1", "target": "ssao_geometry",
                                    "original_label": "case-ssao_geometry", "approved_by": "root", "reason": "x"}))
