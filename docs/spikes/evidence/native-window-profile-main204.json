@@ -641,5 +641,9 @@
     "No GPU, rendered-pixel, phone, shipping performance or profiler-completion claim.",
     "Original producer archive retains thirteen actual raw files and54 Git source payloads; relative source/ paths are synthetic retained entries, not missing absolute original files."
   ],
-  "review_state": "Current-main final independent integration review pending"
+  "review_state": "Final current-main integration review accepted; publication requires exact-head fast check",
+  "final_review": {
+    "path": "docs/spikes/evidence/native-window-profile-main204/final-review.json",
+    "sha256": "a57356c8e7d65e4fa8d469941d01c6d4aff9a1f7d4c98976cb5a04266fd12569"
+  }
 }

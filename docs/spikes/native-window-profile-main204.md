@@ -29,4 +29,4 @@ profiler acceptance is claimed.
 [Manifest](evidence/native-window-profile-main204.json) and
 [read-only collector](evidence/native-window-profile-main204/collect.py) preserve
 commands, source identities and lossless artifacts. Run the collector with
-`--verify-only` to reassert its checks. Final integration review is pending.
+`--verify-only` to reassert its checks. Final integration review is accepted; publication requires the exact-head fast check.

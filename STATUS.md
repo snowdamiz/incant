@@ -62,7 +62,7 @@ window route. Simulation attempts, redraw-only CPU work and restarts have separa
 fixed zones; the final native report uses the existing host callback. Ten producer
 CPU/compile/tooling checks and independent producer review pass. All ten
 [current-main204 checks](docs/spikes/native-window-profile-main204.md) also pass;
-final integration review, actual native-window execution and live Tracy capture remain pending.
+final integration review is accepted. Publication requires its fast check; actual native-window execution and live Tracy capture remain pending.
 [Scope and evidence](docs/spikes/native-window-profile.md).
 
 ## Retained opaque motion — current-main CPU integration verified
