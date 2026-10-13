@@ -55,6 +55,8 @@ features = ["wavefront"]
 status = "actively-developed"
 
 [features]
+# Default-off typed BVH construction; no raw or serde live installer.
+incant-checked-restore = ["std", "dep:incant_physics_snapshot", "incant_physics_snapshot/construction"]
 alloc = [
     "hashbrown",
     "smallvec",
@@ -547,3 +549,8 @@ check-cfg = [
     'cfg(feature, values("encase"))',
     'cfg(target_arch, values("spirv"))',
 ]
+
+[dependencies.incant_physics_snapshot]
+path = "../../crates/incant_physics_snapshot"
+default-features = false
+optional = true
