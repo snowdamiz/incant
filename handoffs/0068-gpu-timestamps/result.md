@@ -328,8 +328,7 @@ SIGINT; plus interrupted GPU postprocessing). They execute `/usr/bin/true` or
 absence. The GPU-runner controls also prove that charged attempts block a next
 child exceeding the budget. Grant/source lookups alone are temporary test stubs;
 no renderer, Cargo compiler, target lease or GPU work runs. Exact source hashes
-and rows are in `preparation/lifecycle-checks.json`, with the unittest log beside
-it. All test processes were reaped. This follow-up was implemented by Astra.
+and rows are in `preparation/lifecycle-checks.json`, with the lossless `lifecycle-checks.log.gz` beside it. All test processes were reaped. This follow-up was implemented by Astra.
 
 `owner_drop` is suitable only as the documented bounded owner destruction and
 retained-device completion smoke. The earlier phrase "before its mapping callback"
