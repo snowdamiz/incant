@@ -1,4 +1,4 @@
-# Exclusive native checkpoint capture (in progress)
+# Exclusive native checkpoint capture
 
 This default-off `incant-checked-restore` route adds direct typed native capture
 and an opaque in-memory checkpoint. It does not admit arbitrary persisted bytes,
@@ -52,8 +52,9 @@ is conservative compatibility metadata, not a cryptographic authenticity claim.
 Focused implementation evidence is retained under
 `~/.codex/incant-evidence/physics-native-capture-001`. Earlier lock-selection,
 block-solver, recursive-format traversal and compile failures remain historical;
-they are not relabeled as passing results. Final review and broad qualification
-are pending. No GPU or device/performance work is part of this slice.
+they are not relabeled as passing results. Scoped CPU qualification and independent
+source review pass; final execution review remains pending. No GPU or
+device/performance work is part of this slice.
 
 Focused source008 qualification passed 21 capture tests plus one independent
 reference test per dimension. The opaque continuation test compares 96 complete
@@ -71,5 +72,33 @@ outer runtime build (20 focused cases per dimension). Source008 adds independent
 reference/churn tests, retaining the earlier test compile and assumption
 failures. The final source handoff additionally removes six obsolete non-test
 dead-code expectations now that production capture invokes those gates; test
-configuration and runtime algorithms are unchanged. Full deterministic/fast8
-qualification and independent whole-source review are still pending.
+configuration and runtime algorithms are unchanged.
+
+Source009 (`f19f54ac`) passes 182 native tests and 228 snapshot tests in each
+deterministic and SIMD8 mode, with no failed or ignored tests. The two native
+groups are 90 planar and 92 spatial tests. Snapshot output contains 27 summary
+rows, including one empty group. Counts overlap the focused cases above and are
+not additive. All 24 broad commands pass: native strict library Clippy in both
+modes, snapshot all-target Clippy, default/construction wasm checks, normal graph
+isolation, feature guards, formatting and conventions. Each native executable was
+copied immediately after its successful mode-specific run; four executable
+source009 binaries and their exact logs are retained.
+
+Source010 (`d6ca9867`) only renames the conditional `capture_context` argument
+and updates the two vendor pins. Native and wasm strict nonparallel library
+Clippy and scoped formatting pass. These compiler checks do not relabel the
+source009 test executions or binaries. Independent source009 review is accepted
+under receipt `f43b5b74444ac96c269a6c973497f26129befb91a28f553ca867ba2479831737`;
+the complete final execution packet still needs independent acceptance.
+
+The lossless packet is
+[`evidence/physics-native-capture.json`](evidence/physics-native-capture.json).
+Its archive retains exact source generations, commands, historical failures and
+the collector. Revalidate the originals without rebuilding:
+
+```sh
+python3 ~/.codex/incant-evidence/physics-native-capture-001/collect.py --verify-only
+```
+
+The separate outer runtime's stable-ID/event integration results are not counted
+as evidence for this native producer. Persisted physics saves remain refused.
