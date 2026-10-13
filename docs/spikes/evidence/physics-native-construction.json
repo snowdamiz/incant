@@ -1,0 +1,2279 @@
+{
+  "format": "incant-physics-native-construction-evidence",
+  "version": 1,
+  "base": "7afb2b8b42bcb4cd28a5611e42d26ae37fd9e6d4",
+  "source": {
+    "base": "7afb2b8b42bcb4cd28a5611e42d26ae37fd9e6d4",
+    "source": [
+      {
+        "path": "STATUS.md",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/STATUS.md",
+        "sha256": "5d4f54dcfae1f3bd37efd353578ecc94267a66820dc06125d67d5caa473f57f9",
+        "bytes": 180420
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+        "sha256": "d99c544627d1509ce9b3fd77a2106d03b41c442ccebcb5a1c1a2f1f6fea44275",
+        "bytes": 1907
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/construction_allocations.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/crates/incant_physics_snapshot/tests/construction_allocations.rs",
+        "sha256": "64d3851d185172e2b65ee0321131830f9d427213627b2c3910e1bf54c656a29c",
+        "bytes": 3858
+      },
+      {
+        "path": "docs/spikes/physics-native-construction.md",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/docs/spikes/physics-native-construction.md",
+        "sha256": "b703362a1ea975e6f5a960cb8ac11cb659cb8616d1dc9d04805a278ba4932535",
+        "bytes": 5421
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_CHECKED_CONSTRUCTION.json",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/INCANT_CHECKED_CONSTRUCTION.json",
+        "sha256": "2e0938bd3ad658592c9536b894961565a93fdd1024c3b23dea4221bb201333c3",
+        "bytes": 3723
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_PATCH.md",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/INCANT_PATCH.md",
+        "sha256": "237ba7297faee3fbf194f9df9ff91a443b88eeb093f576f502ce484d97b0d587",
+        "bytes": 2917
+      },
+      {
+        "path": "third_party/rapier2d/src/data/arena.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/data/arena.rs",
+        "sha256": "5a5138390d4b9d22c22c805dbda7c1a2fe7048874f055a1c7d31e8ef46ed59df",
+        "bytes": 34671
+      },
+      {
+        "path": "third_party/rapier2d/src/data/arena_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/data/arena_checkpoint.rs",
+        "sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc",
+        "bytes": 7003
+      },
+      {
+        "path": "third_party/rapier2d/src/data/coarena.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/data/coarena.rs",
+        "sha256": "8091da4f62c363dcb3b89bc4564e8941ebe47c0f29cda3c7847e8a5a0190f3bb",
+        "bytes": 5422
+      },
+      {
+        "path": "third_party/rapier2d/src/data/coarena_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/data/coarena_checkpoint.rs",
+        "sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385",
+        "bytes": 4057
+      },
+      {
+        "path": "third_party/rapier2d/src/data/graph.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/data/graph.rs",
+        "sha256": "92b46c3580a206ef6ee3eb190f1524c47d1120bae7086e0b119d18f29d7503c8",
+        "bytes": 25358
+      },
+      {
+        "path": "third_party/rapier2d/src/data/graph_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/data/graph_checkpoint.rs",
+        "sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3",
+        "bytes": 4966
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/collider.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/geometry/collider.rs",
+        "sha256": "cfda081691078cecc015b753cc37fa20193ccae6b07a76be6e30433e3b133f59",
+        "bytes": 60809
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/collider_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/geometry/collider_checkpoint.rs",
+        "sha256": "21d2ca3926d351e301f1c509a9f5aa3b316d8d894acbf1c87d7d587e5e01739e",
+        "bytes": 4446
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+        "sha256": "46c14a2ba0a6d35834b28927e2f9af6d4d686fbd4839ab08202a7ee7dbe87da8",
+        "bytes": 5594
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/body.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/body.rs",
+        "sha256": "eeef6a26c6fdd99d38005f60c7a02010b4529854fca4772758f119800bb3ba7f",
+        "bytes": 7135
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/body_observe.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/body_observe.rs",
+        "sha256": "9a145c5f48ca42dab8171c2a6df59da6018b06f01ea96de64bb941536db05485",
+        "bytes": 5638
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/body_tests.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/body_tests.rs",
+        "sha256": "3bc5ae23350c3ff2d2e5e9d2f921a511dd59a2815ed7c13b01317ccaa764cb3b",
+        "bytes": 16399
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/collider.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/collider.rs",
+        "sha256": "a2ab0604c0d1cbd76482b76d3362d27f5f7b73f159c858fc139169c5863aae7b",
+        "bytes": 3196
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/collider_observe.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/collider_observe.rs",
+        "sha256": "f604830e8a3ed7511ffec368ecb6807215f7018a373c20ff597dbbb86916f3d9",
+        "bytes": 2894
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/convert.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/convert.rs",
+        "sha256": "78f3aaf874139df74453def47076c6155d66869cca1abbbf9a381cb8f6b20a3d",
+        "bytes": 2858
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+        "sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb",
+        "bytes": 3360
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/native_observe.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier2d/src/pipeline/checked_restore/native_observe.rs",
+        "sha256": "a217e27c638b1866bc29ed28c87b20a7e44bd923f35bf743556a13b4ca6b73e3",
+        "bytes": 6551
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_CHECKED_CONSTRUCTION.json",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/INCANT_CHECKED_CONSTRUCTION.json",
+        "sha256": "2e0938bd3ad658592c9536b894961565a93fdd1024c3b23dea4221bb201333c3",
+        "bytes": 3723
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_PATCH.md",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/INCANT_PATCH.md",
+        "sha256": "237ba7297faee3fbf194f9df9ff91a443b88eeb093f576f502ce484d97b0d587",
+        "bytes": 2917
+      },
+      {
+        "path": "third_party/rapier3d/src/data/arena.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/data/arena.rs",
+        "sha256": "5a5138390d4b9d22c22c805dbda7c1a2fe7048874f055a1c7d31e8ef46ed59df",
+        "bytes": 34671
+      },
+      {
+        "path": "third_party/rapier3d/src/data/arena_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/data/arena_checkpoint.rs",
+        "sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc",
+        "bytes": 7003
+      },
+      {
+        "path": "third_party/rapier3d/src/data/coarena.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/data/coarena.rs",
+        "sha256": "8091da4f62c363dcb3b89bc4564e8941ebe47c0f29cda3c7847e8a5a0190f3bb",
+        "bytes": 5422
+      },
+      {
+        "path": "third_party/rapier3d/src/data/coarena_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/data/coarena_checkpoint.rs",
+        "sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385",
+        "bytes": 4057
+      },
+      {
+        "path": "third_party/rapier3d/src/data/graph.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/data/graph.rs",
+        "sha256": "92b46c3580a206ef6ee3eb190f1524c47d1120bae7086e0b119d18f29d7503c8",
+        "bytes": 25358
+      },
+      {
+        "path": "third_party/rapier3d/src/data/graph_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/data/graph_checkpoint.rs",
+        "sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3",
+        "bytes": 4966
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/collider.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/geometry/collider.rs",
+        "sha256": "cfda081691078cecc015b753cc37fa20193ccae6b07a76be6e30433e3b133f59",
+        "bytes": 60809
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/collider_checkpoint.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/geometry/collider_checkpoint.rs",
+        "sha256": "21d2ca3926d351e301f1c509a9f5aa3b316d8d894acbf1c87d7d587e5e01739e",
+        "bytes": 4446
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+        "sha256": "46c14a2ba0a6d35834b28927e2f9af6d4d686fbd4839ab08202a7ee7dbe87da8",
+        "bytes": 5594
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/body.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/body.rs",
+        "sha256": "eeef6a26c6fdd99d38005f60c7a02010b4529854fca4772758f119800bb3ba7f",
+        "bytes": 7135
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/body_observe.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/body_observe.rs",
+        "sha256": "9a145c5f48ca42dab8171c2a6df59da6018b06f01ea96de64bb941536db05485",
+        "bytes": 5638
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/body_tests.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/body_tests.rs",
+        "sha256": "3bc5ae23350c3ff2d2e5e9d2f921a511dd59a2815ed7c13b01317ccaa764cb3b",
+        "bytes": 16399
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/collider.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/collider.rs",
+        "sha256": "a2ab0604c0d1cbd76482b76d3362d27f5f7b73f159c858fc139169c5863aae7b",
+        "bytes": 3196
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/collider_observe.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/collider_observe.rs",
+        "sha256": "f604830e8a3ed7511ffec368ecb6807215f7018a373c20ff597dbbb86916f3d9",
+        "bytes": 2894
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/convert.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/convert.rs",
+        "sha256": "78f3aaf874139df74453def47076c6155d66869cca1abbbf9a381cb8f6b20a3d",
+        "bytes": 2858
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+        "sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb",
+        "bytes": 3360
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/native_observe.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/third_party/rapier3d/src/pipeline/checked_restore/native_observe.rs",
+        "sha256": "a217e27c638b1866bc29ed28c87b20a7e44bd923f35bf743556a13b4ca6b73e3",
+        "bytes": 6551
+      },
+      {
+        "path": "tools/probes/physics-native-construction/prepare.py",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/source/tools/probes/physics-native-construction/prepare.py",
+        "sha256": "350133f10f25955c837850fd2d31cf0208cbe9bd581300351bc0a6095cc6a0d3",
+        "bytes": 2828
+      }
+    ],
+    "baseline": [
+      {
+        "path": "third_party/rapier2d/src/dynamics/rigid_body.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier2d/src/dynamics/rigid_body.rs",
+        "sha256": "435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef",
+        "bytes": 87505
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/rigid_body_set.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier2d/src/dynamics/rigid_body_set.rs",
+        "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+        "bytes": 17736
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/rigid_body_components.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier2d/src/dynamics/rigid_body_components.rs",
+        "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+        "bytes": 62442
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/collider_components.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier2d/src/geometry/collider_components.rs",
+        "sha256": "5aa729268d67120f1b119b7f9f105e120cc7f7c9bf70d972d61b01f57d8f04fd",
+        "bytes": 17107
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/collider_set.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier2d/src/geometry/collider_set.rs",
+        "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+        "bytes": 23738
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/interaction_groups.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier2d/src/geometry/interaction_groups.rs",
+        "sha256": "107245a01190a9eee3f6c4b4e288d94ce809e237dbcdc8cda368ef551d189804",
+        "bytes": 9628
+      },
+      {
+        "path": "third_party/rapier2d/Cargo.toml",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier2d/Cargo.toml",
+        "sha256": "d42697749566d078e2e2ef3202032abf7aa3895a7a5fec38b0a3310ea7c939ad",
+        "bytes": 8572
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/rigid_body.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier3d/src/dynamics/rigid_body.rs",
+        "sha256": "435345cc00d582a8c14ae547dd781ce2712b13929d3bec533f370a5a64373eef",
+        "bytes": 87505
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/rigid_body_set.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier3d/src/dynamics/rigid_body_set.rs",
+        "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+        "bytes": 17736
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/rigid_body_components.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier3d/src/dynamics/rigid_body_components.rs",
+        "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+        "bytes": 62442
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/collider_components.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier3d/src/geometry/collider_components.rs",
+        "sha256": "5aa729268d67120f1b119b7f9f105e120cc7f7c9bf70d972d61b01f57d8f04fd",
+        "bytes": 17107
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/collider_set.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier3d/src/geometry/collider_set.rs",
+        "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+        "bytes": 23738
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/interaction_groups.rs",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier3d/src/geometry/interaction_groups.rs",
+        "sha256": "107245a01190a9eee3f6c4b4e288d94ce809e237dbcdc8cda368ef551d189804",
+        "bytes": 9628
+      },
+      {
+        "path": "third_party/rapier3d/Cargo.toml",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/third_party/rapier3d/Cargo.toml",
+        "sha256": "fb70f652cfb3269ae497d31081ebfb90d5d5ae811af03db960a970f87bd896fb",
+        "bytes": 11711
+      },
+      {
+        "path": "Cargo.lock",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/Cargo.lock",
+        "sha256": "864759518e0e1ddaef6e37b8642451a88f442ab6f6654ad209fe2247c2df6252",
+        "bytes": 252744
+      },
+      {
+        "path": "rust-toolchain.toml",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/rust-toolchain.toml",
+        "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+        "bytes": 100
+      },
+      {
+        "path": "crates/incant_physics_snapshot/Cargo.toml",
+        "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/baseline/crates/incant_physics_snapshot/Cargo.toml",
+        "sha256": "da83ff4cc41f3b5faec1ecce50f7f828507b5d9e692d01146b4c6d620406cee8",
+        "bytes": 1060
+      }
+    ],
+    "scope": "Private exact storage/body/collider fields. No public installer/save admission; continuation preserves other owners as trusted clones.",
+    "delta": "Documentation/STATUS only after source002 compile; adds unchanged root lock/toolchain/snapshot-manifest provenance."
+  },
+  "source_freezes": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-source-001/freeze.json",
+      "bytes": 5805,
+      "sha256": "ba255adc715fd6b3a29d9cae3a57af1ca1f96c56393d62c951cbaff97a1ad6a5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fields-source-001/freeze.json",
+      "bytes": 20348,
+      "sha256": "6b3d1444a40bcde2ee5db16c6dd6497db687f4c6288f4bde5c944cb956ae1db7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fields-source-002/freeze.json",
+      "bytes": 20740,
+      "sha256": "aedc313d6fe3e374f4eb72cf5bb825158d5685b294883e398adaeef84cb9f39e"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/source-003-final/freeze.json",
+      "bytes": 21586,
+      "sha256": "f6a7b9b70c1b6a4366f329a1a88babafdf3a39c49e04de888ca1346bbee1e7e6"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/physics-native-construction-logs.json.gz",
+    "bytes": 3264372,
+    "sha256": "19c3282abf25713a9f90fe1f36560f1d8e51ceccb3dcf748004ce7f65ea24513",
+    "records": 6944,
+    "payloads": 557
+  },
+  "commands": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--features",
+        "native-admission",
+        "--test",
+        "construction_allocations",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791902419.609869,
+      "duration_seconds": 18.705421924591064,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/allocation-focused-001.log",
+      "sha256": "5d20723b6092afa45d6f0451db221f00b2f1884fc36aaf79e764085ec60f2003",
+      "name": "allocation-focused-001",
+      "tests": [
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/allocation-focused-001.json",
+        "bytes": 710,
+        "sha256": "f7144f960d73a85f730e308c1729c44d6697c66e7c5279ac2ceca54cdfb07468"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-006/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore,rapier2d/incant-checkpoint,rapier3d/incant-checkpoint",
+        "checked_body",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791899225.892638,
+      "duration_seconds": 2.305540084838867,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/body-focused-001.log",
+      "sha256": "53fbbcb6ea4134c9c5c2977f0b99d56ddc70e3892a94fdbfc98482ecf1c24112",
+      "name": "body-focused-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/body-focused-001.json",
+        "bytes": 937,
+        "sha256": "e3b686bbff33e8f4045bafdc43d49941886a97fb7574b30ee03fa134a228118e"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-007/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore,rapier2d/incant-checkpoint,rapier3d/incant-checkpoint,rapier2d/serde-serialize,rapier3d/serde-serialize",
+        "checked_body",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791899278.624313,
+      "duration_seconds": 37.47685098648071,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/body-focused-002.log",
+      "sha256": "8cd2ffeffd27cad4b2d4d4d00338a2ead0db3a471c31c2c1f0a50fc93cee0ff6",
+      "name": "body-focused-002",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 2,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/body-focused-002.json",
+        "bytes": 987,
+        "sha256": "cb0367193b942a8b104e61512cd82c8d552950c0c463e35e646693a3a6b8ab56"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-008/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore,rapier2d/incant-checkpoint,rapier3d/incant-checkpoint,rapier2d/serde-serialize,rapier3d/serde-serialize",
+        "checked_body",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791899384.0281432,
+      "duration_seconds": 23.34348964691162,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/body-focused-003.log",
+      "sha256": "fea672da362faf4d9633773f1079c469971f933a6681b54c8716790c7466bc42",
+      "name": "body-focused-003",
+      "tests": [
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/body-focused-003.json",
+        "bytes": 986,
+        "sha256": "124a1dddcd6098a7603db405d3b527d03c125874f29da98b23f239414ecd9781"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903599.956844,
+      "duration_seconds": 11.453092813491821,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-native-001.log",
+      "sha256": "7eb84301a7786e2d75b297c88c55cb6b78578265b594260835016f482b219b0e",
+      "name": "clippy-native-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-native-001.json",
+        "bytes": 1076,
+        "sha256": "b6de001320b9fa7a53adfaa66e1b8dabf57eefba573b609e79d0e61d27af3f11"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903694.7509792,
+      "duration_seconds": 4.5446226596832275,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-native-002.log",
+      "sha256": "b3177076fb365cb52ba0879dbb41daedd88306a9158e35347d71469822215a0d",
+      "name": "clippy-native-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-native-002.json",
+        "bytes": 1021,
+        "sha256": "8e7bced0599be388af76c9293e23ce1823013f60ac64404baeb7a888863791eb"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-002/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903802.4823291,
+      "duration_seconds": 4.703843832015991,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-native-003.log",
+      "sha256": "054ef219a4876e2909bfb232443a54ed7756a1e075f2830682e9a60da68180a8",
+      "name": "clippy-native-003",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-native-003.json",
+        "bytes": 1020,
+        "sha256": "460918d5d0b4025eb94710d54222fa31f1eee92b3bbe1be873a59811dba1b571"
+      },
+      "source_generation": "fields-source-002"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--features",
+        "native-admission",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903594.5835478,
+      "duration_seconds": 5.344877243041992,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-snapshot-001.log",
+      "sha256": "faac966b3ca1e7eb94535896c5ccba649b6bfcd178531f4c4fb56453939887f5",
+      "name": "clippy-snapshot-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/clippy-snapshot-001.json",
+        "bytes": 691,
+        "sha256": "90d1b6d24dd56d301f7289c14c51b073e1f2c73df76e5f20ffa1133bb28dab8e"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903807.2813451,
+      "duration_seconds": 0.030637025833129883,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "conventions-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/conventions-001.json",
+        "bytes": 511,
+        "sha256": "23ee30ea4742d12c48770cfb87629c7db82bb5931a42228c48fc6dedd9f3be60"
+      },
+      "source_generation": "fields-source-002"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903807.339391,
+      "duration_seconds": 0.02645397186279297,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "diff-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/diff-001.json",
+        "bytes": 473,
+        "sha256": "98df733715a72fd0ff5dde8411492a744a5984cd758bd8e0ca6e2f4626a44fdd"
+      },
+      "source_generation": "fields-source-002"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791904096.7188008,
+      "duration_seconds": 0.06940221786499023,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/diff-final-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "diff-final-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/diff-final-001.json",
+        "bytes": 480,
+        "sha256": "96a08968b0ac87908e2ab44d971ad6f9d123fe9929080db859ccbf6c1e85e3e2"
+      },
+      "source_generation": "source-003-final docs/evidence only"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fetch",
+        "--locked",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-002/Cargo.toml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898369.491185,
+      "duration_seconds": 0.18934917449951172,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fetch-native-tests-001.log",
+      "sha256": "177297bc0953daab0c8b6cdb3188973333e2d706aad39319760d518364917a1b",
+      "name": "fetch-native-tests-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fetch-native-tests-001.json",
+        "bytes": 632,
+        "sha256": "1ec28b03ea27b6f8ce19f7a002a9384f285b3de0fb4816fee03e82b05fe172b2"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-009/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore,rapier2d/incant-checkpoint,rapier3d/incant-checkpoint,rapier2d/serde-serialize,rapier3d/serde-serialize",
+        "checked_fields",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791899632.781329,
+      "duration_seconds": 23.968659162521362,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fields-focused-001.log",
+      "sha256": "f2be451203b3a7565ab926166faf67229ecb7a187353718ba67883661db3bdab",
+      "name": "fields-focused-001",
+      "tests": [
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fields-focused-001.json",
+        "bytes": 990,
+        "sha256": "310b312938f4de4a1bbcfbb95030e05118659e96c9803a441db16f4f683c73cb"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-010/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore,rapier2d/incant-checkpoint,rapier3d/incant-checkpoint,rapier2d/serde-serialize,rapier3d/serde-serialize",
+        "checked_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791902489.952331,
+      "duration_seconds": 24.149905920028687,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fields-focused-002.log",
+      "sha256": "53fedf5d3db6de246ae9b1d1578572bd5565538bf3c67495326bcefa193ada49",
+      "name": "fields-focused-002",
+      "tests": [
+        {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fields-focused-002.json",
+        "bytes": 984,
+        "sha256": "85cb18e81a384f0237a33c2c0fe0b336d08d7121c9960c474ee6b40a08b0b6b4"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903701.244649,
+      "duration_seconds": 1.923523187637329,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "fmt-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/fmt-001.json",
+        "bytes": 502,
+        "sha256": "13d8b81d3fd9cac4d187de7c24e579703201491eeb7965188d27532e669a842f"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "tools.tests.test_probe_locks",
+        "tools.tests.test_physics_features"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903701.0027149,
+      "duration_seconds": 0.20704102516174316,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/guards-001.log",
+      "sha256": "7d8f86d189dc000646c9eeece8236081cb4943148bfb3e26dfe4344bdba63ebf",
+      "name": "guards-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/guards-001.json",
+        "bytes": 556,
+        "sha256": "0b7dd91084ef83621ba6ac1332bd72e7752cad203565e972eca79bae74f15cec"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--edges",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903700.141674,
+      "duration_seconds": 0.1293790340423584,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/lean-001.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "name": "lean-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/lean-001.json",
+        "bytes": 598,
+        "sha256": "0aea08104865c7a018de552310405f993e5d1597f3a009ed77b872f7f5b57990"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903340.873232,
+      "duration_seconds": 0.07957005500793457,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-graph-det-002.log",
+      "sha256": "c2005fe753a3204afe4d831f9140a36b99c9b8a978895745bc99cf378a85efd8",
+      "name": "native-graph-det-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-graph-det-002.json",
+        "bytes": 1116,
+        "sha256": "01908b2df8bf2b7fefa3c31992486830d017fa9c3911999298df5663d44b7da3"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore,rapier2d/incant-checkpoint,rapier3d/incant-checkpoint,rapier2d/serde-serialize,rapier3d/serde-serialize,rapier2d/simd8,rapier3d/simd8"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903253.659459,
+      "duration_seconds": 0.055452823638916016,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-graph-fast-001.log",
+      "sha256": "5cdf2e06c3b875552530fc2e60c18d89a122d7b992325eebfde942e74eb296f5",
+      "name": "native-graph-fast-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-graph-fast-001.json",
+        "bytes": 1008,
+        "sha256": "d7331139b46065ade9a0a04fa38d8ff08134b59234095a8ac363c00247b38be0"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/simd8,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/simd8"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903413.363155,
+      "duration_seconds": 0.18865513801574707,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-graph-fast8-002.log",
+      "sha256": "586cd5dc4cd80f3a08de138cfcded6d725234a6ce635b357b8f8cad471874913",
+      "name": "native-graph-fast8-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-graph-fast8-002.json",
+        "bytes": 1088,
+        "sha256": "b024944958d60a85775258ed52f1fa2d117e272ddee968504a4b86a17a05b235"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism",
+        "checked_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903340.98278,
+      "duration_seconds": 72.32941794395447,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-det-001.log",
+      "sha256": "8a8a4c610d463b763349c9c0556dbbb1f56f55b13579746cf89dda9f1d2bdf27",
+      "name": "native-tests-det-001",
+      "tests": [
+        {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-det-001.json",
+        "bytes": 1082,
+        "sha256": "ac270071e3c78707439a379d6e79ea2b522223f1213324079aafc8051357cc5d"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/simd8,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/simd8",
+        "checked_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903413.60449,
+      "duration_seconds": 68.52495408058167,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-fast8-001.log",
+      "sha256": "6d1c834f02db7889b07ecf60acf49195b584eaa5c2ad1be0b7fe5ce12ce912a9",
+      "name": "native-tests-fast8-001",
+      "tests": [
+        {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-fast8-001.json",
+        "bytes": 1054,
+        "sha256": "25806a46509960681e5872aee18f92e434c7e8c70bd447a4d147e51d03acc5a4"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/probes/physics-native-construction/prepare.py",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-002"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903802.039105,
+      "duration_seconds": 0.2782411575317383,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepare-final-002.log",
+      "sha256": "45372028596b2ae08a68bb41e85d8a65289b8c611605e26954af26209784df5f",
+      "name": "prepare-final-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepare-final-002.json",
+        "bytes": 634,
+        "sha256": "20c770c72403acb1f2f8f201d427f802f23ca0b36ef6ee19b416b5922b918a1e"
+      },
+      "source_generation": "fields-source-002"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "metadata",
+        "--offline",
+        "--format-version",
+        "1",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-001/Cargo.toml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903155.254807,
+      "duration_seconds": 0.0913858413696289,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-metadata-001.log",
+      "sha256": "a32b9d5de49ed75bb76a0888efdf14c669fb6e4e7c61e851b3e8d7f22a73cea7",
+      "name": "prepared-metadata-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-metadata-001.json",
+        "bytes": 669,
+        "sha256": "1f2b32cc7be79964ccb343fa3cbd0cad8ec29e5e6ee08cfd298c17df9e3b5320"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "metadata",
+        "--offline",
+        "--format-version",
+        "1",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-final-002/Cargo.toml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903802.346951,
+      "duration_seconds": 0.10326695442199707,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-metadata-002.log",
+      "sha256": "bf2950b73d61d05d6cd2a6ddb251acbd7c494a1d929a3a466c37ac6e43742c6e",
+      "name": "prepared-metadata-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/prepared-metadata-002.json",
+        "bytes": 670,
+        "sha256": "d45fbd3f5f1ac39aea82b6d604d3d0bf536db669ba36a3bf84c9d2f31b73b31a"
+      },
+      "source_generation": "fields-source-002"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "generate-lockfile",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests/Cargo.toml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898181.692569,
+      "duration_seconds": 0.08106708526611328,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-001.log",
+      "sha256": "3000722ee22b04bde242a80a3162ac5862590a8f4ff86d6b4bb63a9dec77cfea",
+      "name": "resolve-private-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-001.json",
+        "bytes": 638,
+        "sha256": "bd88097ea04f4e38835d5cce1e80f53d6e7ce43ffc7ecc0b9f182467f2066df5"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "generate-lockfile",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-002/Cargo.toml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898239.479965,
+      "duration_seconds": 0.03990292549133301,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-002.log",
+      "sha256": "5a965b406441a84e3d9d9617dd3626a2f6b78b2c0832738af9bbc856a41c42b5",
+      "name": "resolve-private-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-002.json",
+        "bytes": 644,
+        "sha256": "f42578c3c23d7632241a1ecac8dfbba3e09bf08bc073d1f3307744f7b3917605"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "generate-lockfile",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-002/Cargo.toml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898287.9730382,
+      "duration_seconds": 1.1271767616271973,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-online-003.log",
+      "sha256": "ed8491b4558d7983f7d7ed55f344323380e12c7dfd3e07325a9f0e9f77187564",
+      "name": "resolve-private-online-003",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-online-003.json",
+        "bytes": 632,
+        "sha256": "9661ac0f893fb412a98086f5aa642d8a2f1da40630a491352978278870dcb14b"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "metadata",
+        "--offline",
+        "--format-version",
+        "1",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-004/Cargo.toml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898438.0954251,
+      "duration_seconds": 0.0741119384765625,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-seeded-004.log",
+      "sha256": "100693dfdafdaeae72164271d14cca9d4da0a897643e5bfdc2fd7384b759b086",
+      "name": "resolve-private-seeded-004",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/resolve-private-seeded-004.json",
+        "bytes": 673,
+        "sha256": "e50a38ae33439c49e9d2c1819b47f6e0665de51894e977620856044d936086e4"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903700.299146,
+      "duration_seconds": 0.6661050319671631,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/runtime-graph-001.log",
+      "sha256": "872dbc4414638e093715b54368f7da10e1125f93c588a9e2550de9983cd2b600",
+      "name": "runtime-graph-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/runtime-graph-001.json",
+        "bytes": 554,
+        "sha256": "7c353e0b46c172ab36d5f277c378f4df113b8bfec75b8c92543f2133d2271d2b"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--features",
+        "native-admission",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903482.162843,
+      "duration_seconds": 37.64659118652344,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/snapshot-tests-det-001.log",
+      "sha256": "e5c3410e23fd688a5a4ec859fae3a302961b09be8777c3b33b3380eb02111964",
+      "name": "snapshot-tests-det-001",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 66,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/snapshot-tests-det-001.json",
+        "bytes": 663,
+        "sha256": "b8773956e6b442988a50c036f477d27ce17c38b86b126d09340d538277e8a9bc"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8,native-admission",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903519.8526442,
+      "duration_seconds": 74.70043683052063,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/snapshot-tests-fast8-001.log",
+      "sha256": "e5eec1f5acca5865cdc54f464ee9dee5c23c1aea3dc212109dd7479f34179876",
+      "name": "snapshot-tests-fast8-001",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 66,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/snapshot-tests-fast8-001.json",
+        "bytes": 714,
+        "sha256": "798a5bf5bb68bc3e47112ae6b3ccaf574676e3ff458fb579d6f09b0c78f4865c"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "checked_storage",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898181.797489,
+      "duration_seconds": 0.06679105758666992,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-001.log",
+      "sha256": "3561975cdafc6fc718487d20bbeeb921f11622eb886ed659001aee13893f053b",
+      "name": "storage-focused-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-001.json",
+        "bytes": 798,
+        "sha256": "2c0c39de1c725234f61accea16550a784b6dc5f013fe571548eba246f6bcad28"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-002/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore",
+        "checked_storage",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898239.543917,
+      "duration_seconds": 0.03720402717590332,
+      "exit_code": 101,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-002.log",
+      "sha256": "5a965b406441a84e3d9d9617dd3626a2f6b78b2c0832738af9bbc856a41c42b5",
+      "name": "storage-focused-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-002.json",
+        "bytes": 891,
+        "sha256": "46ddd944d8d18cf7965e71b77a02bf46e8375ce023bdc66b184635ba4e3a2115"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-002/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore",
+        "checked_storage",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898376.486578,
+      "duration_seconds": 38.405428886413574,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-003.log",
+      "sha256": "fd537e49e9c60a2a761594233c13b67c21e1c8bd787f0f62325f069a240c2a90",
+      "name": "storage-focused-003",
+      "tests": [
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-003.json",
+        "bytes": 888,
+        "sha256": "67097722bd70166d6323da189d9e9390292a61d5a6f285d62a02e6f218836975"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-004/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore",
+        "checked_storage",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898457.197267,
+      "duration_seconds": 32.37110900878906,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-004.log",
+      "sha256": "7f8113ff50ff18010014b769fd4a7db5b8e8b819c8fe845b3806b05ee51aa9ac",
+      "name": "storage-focused-004",
+      "tests": [
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-004.json",
+        "bytes": 887,
+        "sha256": "6ce66dc2f5601367341929f4fc3c0e6cc951db293198b9bec0feafc02717d30b"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/native-tests-005/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier3d/incant-checked-restore",
+        "checked_storage",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791898758.808029,
+      "duration_seconds": 18.028502941131592,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-005.log",
+      "sha256": "bb58e6dcfab53cbe34c677d538ae49c44ed76e0dc051713d5b315123617cb999",
+      "name": "storage-focused-005",
+      "tests": [
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/storage-focused-005.json",
+        "bytes": 888,
+        "sha256": "48d0d33e88e2f5c063230706203d6fe71a708f0050acc2edc732dc87962087c9"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "rustc",
+        "-vV"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903903.749108,
+      "duration_seconds": 0.03985595703125,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/toolchain-001.log",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "name": "toolchain-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/toolchain-001.json",
+        "bytes": 461,
+        "sha256": "0af76e047ed06abf557f8e4b3bf243020d0e71b97bb8d4f7335bbcd4f8f90684"
+      },
+      "source_generation": "historical focused/harness attempt; see immutable copies"
+    },
+    {
+      "argv": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "--config",
+        "skip_children=true",
+        "--check",
+        "third_party/rapier2d/src/data/arena_checkpoint.rs",
+        "third_party/rapier2d/src/data/coarena_checkpoint.rs",
+        "third_party/rapier2d/src/data/graph_checkpoint.rs",
+        "third_party/rapier2d/src/geometry/collider_checkpoint.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body_observe.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body_tests.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/collider.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/collider_observe.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/convert.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/native_observe.rs",
+        "third_party/rapier3d/src/data/arena_checkpoint.rs",
+        "third_party/rapier3d/src/data/coarena_checkpoint.rs",
+        "third_party/rapier3d/src/data/graph_checkpoint.rs",
+        "third_party/rapier3d/src/geometry/collider_checkpoint.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body_observe.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body_tests.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/collider.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/collider_observe.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/convert.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/native_observe.rs"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903703.201151,
+      "duration_seconds": 0.048014163970947266,
+      "exit_code": 1,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/vendor-fmt-001.log",
+      "sha256": "5da7dab04308aac5aa898fb7676edf8f88ca4795166e8ddcc7e2aad1516b0761",
+      "name": "vendor-fmt-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/vendor-fmt-001.json",
+        "bytes": 2283,
+        "sha256": "daa1597bc4a18513045cb94780a48e6da0164a0229b51de23bf274f094bd636e"
+      },
+      "source_generation": "fields-source-001"
+    },
+    {
+      "argv": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "--config",
+        "skip_children=true",
+        "--check",
+        "third_party/rapier2d/src/data/arena_checkpoint.rs",
+        "third_party/rapier2d/src/data/coarena_checkpoint.rs",
+        "third_party/rapier2d/src/data/graph_checkpoint.rs",
+        "third_party/rapier2d/src/geometry/collider_checkpoint.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body_observe.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body_tests.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/collider.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/collider_observe.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/convert.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/native_observe.rs",
+        "third_party/rapier3d/src/data/arena_checkpoint.rs",
+        "third_party/rapier3d/src/data/coarena_checkpoint.rs",
+        "third_party/rapier3d/src/data/graph_checkpoint.rs",
+        "third_party/rapier3d/src/geometry/collider_checkpoint.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body_observe.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body_tests.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/collider.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/collider_observe.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/convert.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/native_observe.rs"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903807.2140858,
+      "duration_seconds": 0.0404362678527832,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/vendor-fmt-002.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "name": "vendor-fmt-002",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/vendor-fmt-002.json",
+        "bytes": 2282,
+        "sha256": "5b8332ba3d909f0a3728c221f4a58b566aee72b9caf1c0a35525d572e0c3190a"
+      },
+      "source_generation": "fields-source-002"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791903699.331657,
+      "duration_seconds": 0.780994176864624,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/wasm-001.log",
+      "sha256": "42d51c4f91b9bbec02afeb121369deddb39aa006d436948b5349603f5d73335b",
+      "name": "wasm-001",
+      "tests": [],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/wasm-001.json",
+        "bytes": 638,
+        "sha256": "35c4db76345739334a6f180570663b1ffde5b2b73f601c42f517774c97e18b6a"
+      },
+      "source_generation": "fields-source-001"
+    }
+  ],
+  "qualification_commands": [
+    "native-graph-det-002",
+    "native-tests-det-001",
+    "native-graph-fast8-002",
+    "native-tests-fast8-001",
+    "snapshot-tests-det-001",
+    "snapshot-tests-fast8-001",
+    "clippy-snapshot-001",
+    "clippy-native-003",
+    "wasm-001",
+    "lean-001",
+    "runtime-graph-001",
+    "guards-001",
+    "fmt-001",
+    "vendor-fmt-002",
+    "conventions-001",
+    "diff-001",
+    "diff-final-001"
+  ],
+  "reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/reviews/physics-native-admission-final-independent-20261013.json",
+      "bytes": 3102,
+      "sha256": "fd0cba95b8ce65950916c7d5ddb0a8b64c46f67f7685f4ae8a1b1a26d4d9e66d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/reviews/physics-native-fields-source-independent-20261013.json",
+      "bytes": 16740,
+      "sha256": "44d8d9523a6a91a7d2637914d1d2214784ac33fb85e4f712d6effae9c02248b2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/reviews/physics-native-fields-source002-independent-20261013.json",
+      "bytes": 1231,
+      "sha256": "cd763f3915834978919482200ff4247f39b580af2804cd7849b40f83f579c87c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/reviews/physics-native-storage-source-independent-20261013.json",
+      "bytes": 3891,
+      "sha256": "2103a80c3bb0ae0d876072754e60361adb03e3492c1db4a4349d2f0347a6271d"
+    }
+  ],
+  "binaries": [
+    {
+      "mode": "det",
+      "crate": "rapier2d",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-f3b432281b0eb498",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/rapier2d-det",
+      "bytes": 6256896,
+      "sha256": "040b62cf1ccf07baabdce178b6e8f951927f746f0774f0ca86bf02906f684976",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual private checked_ unit test binary; no GPU"
+    },
+    {
+      "mode": "det",
+      "crate": "rapier3d",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-6007796747461f44",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/rapier3d-det",
+      "bytes": 7052416,
+      "sha256": "8e8a6e54e71386e96af9b4837b3eafb5de35fd46fc76fb702e9578ea2962b179",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual private checked_ unit test binary; no GPU"
+    },
+    {
+      "mode": "fast8",
+      "crate": "rapier2d",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier2d-487d7a3d7907792e",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/rapier2d-fast8",
+      "bytes": 6146256,
+      "sha256": "0ce9a45662a84cb47ef5372e25d3158f49577634c7916f11b361dacb761bb45a",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual private checked_ unit test binary; no GPU"
+    },
+    {
+      "mode": "fast8",
+      "crate": "rapier3d",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/rapier3d-0194cf8ad0d4ae0d",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/rapier3d-fast8",
+      "bytes": 6933120,
+      "sha256": "0631bf9c9d226b616509e3b7fcef568ee80d0322174dd78ec26c0daf336fc676",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual private checked_ unit test binary; no GPU"
+    },
+    {
+      "mode": "det",
+      "crate": "incant_physics_snapshot",
+      "test": "construction_allocations",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/construction_allocations-30ce7cb0d9ffee5a",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/construction_allocations-det",
+      "bytes": 1395096,
+      "sha256": "7d6bc240b7bf380493af3495e907364ce30d204e513ed791a2e746df58024976",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual snapshot native observation/allocator test executable; no GPU"
+    },
+    {
+      "mode": "det",
+      "crate": "incant_physics_snapshot",
+      "test": "trusted_manifolds",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/trusted_manifolds-fad1337e20768b29",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/trusted_manifolds-det",
+      "bytes": 18544144,
+      "sha256": "8840ddd88ffd7547a3d77ca2a64b6a1eaa1d70667802e157852c80eb330e3d88",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual snapshot native observation/allocator test executable; no GPU"
+    },
+    {
+      "mode": "fast8",
+      "crate": "incant_physics_snapshot",
+      "test": "construction_allocations",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/construction_allocations-4dce316426999620",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/construction_allocations-fast8",
+      "bytes": 1351816,
+      "sha256": "897b11af77607b0b7ca7ac4ca815c53ba64250a26ed2fccd2100876436c71f42",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual snapshot native observation/allocator test executable; no GPU"
+    },
+    {
+      "mode": "fast8",
+      "crate": "incant_physics_snapshot",
+      "test": "trusted_manifolds",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/trusted_manifolds-c499e448d87a201c",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-native-construction-001/frozen-binaries/trusted_manifolds-fast8",
+      "bytes": 18099312,
+      "sha256": "623cbc4681b2c9821eb62fc99ad65e6a678a2de5fc48170fea3cd84854d2d772",
+      "mode_bits": "0o755",
+      "source_freeze": "fields-source-001",
+      "scope": "actual snapshot native observation/allocator test executable; no GPU"
+    }
+  ],
+  "results": {
+    "snapshot_per_mode": {
+      "passed": 216,
+      "failed": 0,
+      "ignored": 0,
+      "groups_including_empty": 26,
+      "nonempty_groups": 24
+    },
+    "private_native_per_mode": {
+      "passed": 22,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 2,
+      "actual_continuation_steps_per_dimension": 144
+    },
+    "modes": [
+      "parallel deterministic",
+      "parallel SIMD8"
+    ],
+    "allocator_controls": 2,
+    "policy_controls": 31
+  },
+  "historical_attempts": {
+    "storage-focused-001": "Excluded vendored packages are not selectable as root package tests.",
+    "storage-focused-002/resolve-private-002": "Offline harness lacked already-declared upstream dev dependency oorandom.",
+    "resolve-private-online-003/storage-focused-003": "Initial diagnostic lock resolution selected newer available transitive versions; not final exact-lock evidence.",
+    "storage-focused-004": "Exact-root seeded lock succeeded before the final sixth storage control was added.",
+    "body-focused-001": "Test-only compilation setup lacked explicit serde feature/macros and dimensional API types; retained and corrected before focused proof.",
+    "body-focused-002": "Human-readable bitflags serialization differed from the existing raw observer contract; fixed test observer without native deserialization.",
+    "clippy-native-001": "Pre-existing checkpoint_fixed_targets observer return type triggers strict type_complexity. Observer unchanged; passing strict native library scope excludes its incant-checkpoint feature.",
+    "vendor-fmt-001": "Module declaration ordering only; source002 reordered two declarations and updated pins, then strict constructor-library compile and format passed.",
+    "ad-hoc audits": "Initial lock audit expected an incorrect harness name then unselected workspace packages; corrected exact selected identity assertion. Initial feature audit rejected exact Cargo warning prefix in combined stream; corrected audit explicitly checks that prefix before strict graph parsing."
+  },
+  "final_review": "Source reviews accepted 2103a80c, 44d8d952 and cd763f39. Final execution packet review pending.",
+  "limitations": [
+    "Private body/collider/storage construction only. Other native owners are trusted clones; no complete NumericFrame-to-PhysicsWorld reconstruction or installer.",
+    "Runtime physics saves remain refused; no authenticated phase, stable-ID or event integration is enabled.",
+    "Only primitive box/ball/Y-capsule shapes. Arena MAX-1 and MAX generations refuse pending future enclosing-owner fence.",
+    "Logical cumulative allocation requests precharged. Box/Arc stable constructors retain process-abort OOM semantics, not recoverable allocation failure or RSS bounds.",
+    "Selected parallel modes have actual tests; historical focused native runs do not establish production mode features. Counts overlap, not additive unique tests.",
+    "Passing strict native constructor library Clippy excludes the inherited observation feature. No all-target/all-feature native Clippy claim.",
+    "Executed source001 binaries retained with executable mode; source002 module-order-only compile and source003 docs do not relabel original binaries.",
+    "Exact island/narrow/broad/CCD managers, full solver arithmetic, generation exhaustion, derived pending bounds and whole-owner continuation remain required.",
+    "No GPU, rendered output, shipping, device or performance gate claim."
+  ]
+}

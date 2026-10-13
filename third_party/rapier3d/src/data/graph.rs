@@ -784,3 +784,9 @@ where
         self.index == rhs.index && self.weight == rhs.weight
     }
 }
+
+// Incant private checked construction; no public raw setter.
+#[cfg(feature = "incant-checked-restore")]
+#[path = "graph_checkpoint.rs"]
+#[allow(dead_code)]
+mod checkpoint;

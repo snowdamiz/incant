@@ -1,0 +1,94 @@
+{
+  "format": "incant-rapier-private-checked-construction",
+  "version": 1,
+  "feature": "incant-checked-restore",
+  "baseline": "7afb2b8b42bcb4cd28a5611e42d26ae37fd9e6d4",
+  "scope": "crate-private exact storage/rigid field construction only; no public owner installer or runtime save admission",
+  "files": [
+    {
+      "path": "src/data/arena.rs",
+      "previous_sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+      "sha256": "5a5138390d4b9d22c22c805dbda7c1a2fe7048874f055a1c7d31e8ef46ed59df"
+    },
+    {
+      "path": "src/data/arena_checkpoint.rs",
+      "previous_sha256": null,
+      "sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc"
+    },
+    {
+      "path": "src/data/coarena.rs",
+      "previous_sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "sha256": "8091da4f62c363dcb3b89bc4564e8941ebe47c0f29cda3c7847e8a5a0190f3bb"
+    },
+    {
+      "path": "src/data/coarena_checkpoint.rs",
+      "previous_sha256": null,
+      "sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385"
+    },
+    {
+      "path": "src/data/graph.rs",
+      "previous_sha256": "2a08bdffaac1dcf9ef516b6c8cf6a34ab282b2fd29d7774d88790a1b0d1d41fb",
+      "sha256": "92b46c3580a206ef6ee3eb190f1524c47d1120bae7086e0b119d18f29d7503c8"
+    },
+    {
+      "path": "src/data/graph_checkpoint.rs",
+      "previous_sha256": null,
+      "sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3"
+    },
+    {
+      "path": "src/geometry/collider.rs",
+      "previous_sha256": "dc5395bbf3f3d53e002d913471aa9683ca787eba5f22e0116293d612646be148",
+      "sha256": "cfda081691078cecc015b753cc37fa20193ccae6b07a76be6e30433e3b133f59"
+    },
+    {
+      "path": "src/geometry/collider_checkpoint.rs",
+      "previous_sha256": null,
+      "sha256": "21d2ca3926d351e301f1c509a9f5aa3b316d8d894acbf1c87d7d587e5e01739e"
+    },
+    {
+      "path": "src/pipeline/checked_restore/allocation.rs",
+      "previous_sha256": null,
+      "sha256": "46c14a2ba0a6d35834b28927e2f9af6d4d686fbd4839ab08202a7ee7dbe87da8"
+    },
+    {
+      "path": "src/pipeline/checked_restore/body.rs",
+      "previous_sha256": null,
+      "sha256": "eeef6a26c6fdd99d38005f60c7a02010b4529854fca4772758f119800bb3ba7f"
+    },
+    {
+      "path": "src/pipeline/checked_restore/body_observe.rs",
+      "previous_sha256": null,
+      "sha256": "9a145c5f48ca42dab8171c2a6df59da6018b06f01ea96de64bb941536db05485"
+    },
+    {
+      "path": "src/pipeline/checked_restore/body_tests.rs",
+      "previous_sha256": null,
+      "sha256": "3bc5ae23350c3ff2d2e5e9d2f921a511dd59a2815ed7c13b01317ccaa764cb3b"
+    },
+    {
+      "path": "src/pipeline/checked_restore/collider.rs",
+      "previous_sha256": null,
+      "sha256": "a2ab0604c0d1cbd76482b76d3362d27f5f7b73f159c858fc139169c5863aae7b"
+    },
+    {
+      "path": "src/pipeline/checked_restore/collider_observe.rs",
+      "previous_sha256": null,
+      "sha256": "f604830e8a3ed7511ffec368ecb6807215f7018a373c20ff597dbbb86916f3d9"
+    },
+    {
+      "path": "src/pipeline/checked_restore/convert.rs",
+      "previous_sha256": "6c5052129cf468e7ef686dcc2f2de76a1d9d7cef59c11b479a3b117f9a3e479a",
+      "sha256": "78f3aaf874139df74453def47076c6155d66869cca1abbbf9a381cb8f6b20a3d"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "previous_sha256": "3f2637d424a0708278df157f4bfc1e57403418d032ba6695ec56beeea08fee45",
+      "sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb"
+    },
+    {
+      "path": "src/pipeline/checked_restore/native_observe.rs",
+      "previous_sha256": null,
+      "sha256": "a217e27c638b1866bc29ed28c87b20a7e44bd923f35bf743556a13b4ca6b73e3"
+    }
+  ]
+}

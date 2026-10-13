@@ -2474,3 +2474,11 @@ focused21 each, strictClippy/wasm/lean/fmt/conventions pass. Historical failures
 retained. No live constructor/cache installer or save admission is added. See
 `docs/spikes/physics-integration-config.md`; cache/shape coherence, complete-owner
 work/phase validation, root final audit and integration remain pending.
+
+- Private exact physics storage/body/collider construction has independent source
+  acceptance and scoped CPU qualification: 216 snapshot tests and 22 private
+  native controls per deterministic/SIMD8 mode, with 144 continuation steps per
+  dimension. Other native owners remain trusted clones in these controls. Final
+  execution review, remaining exact manager construction and whole-owner admission
+  are pending; physics saves remain refused. See
+  `docs/spikes/physics-native-construction.md`.

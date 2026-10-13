@@ -31,6 +31,14 @@ impl<'a> WorldBoundary<'a> {
             .bodies
             .attachments()
     }
+    /// Exact witnessed arena layout, with no construction authority.
+    pub fn body_arena(self) -> &'a crate::ValidatedArena {
+        self.attachments().body_arena()
+    }
+    /// Exact witnessed arena layout, with no construction authority.
+    pub fn collider_arena(self) -> &'a crate::ValidatedArena {
+        self.attachments().collider_arena()
+    }
     pub fn manifolds(self) -> &'a crate::ValidatedManifolds<'a> {
         self.broad
             .context()

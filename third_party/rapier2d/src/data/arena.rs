@@ -1189,3 +1189,9 @@ impl<T> ops::IndexMut<Index> for Arena<T> {
         self.get_mut(index).expect("No element at index")
     }
 }
+
+// Incant private checked construction; no public raw setter.
+#[cfg(feature = "incant-checked-restore")]
+#[path = "arena_checkpoint.rs"]
+#[allow(dead_code)]
+mod checkpoint;
