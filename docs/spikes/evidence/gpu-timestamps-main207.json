@@ -1,0 +1,440 @@
+{
+  "tested_head": "7e6ac08b58fbc4659daf6c35bd6fd9ea7e5d89f0",
+  "joined_head": "5686cd2d4a9b3abf907796ba959e7e265c41de7c",
+  "main": "9aa8165f3c3a5ec4754b1bda180cf6169bd7c21c",
+  "producer": "9da53be04c008a992b638c87129178df4e6000a9",
+  "summary": {
+    "checks": 10,
+    "counts": {
+      "default-cpu": {
+        "passed": 103,
+        "failed": 0,
+        "ignored": 94,
+        "nonempty_groups": 6,
+        "summary_rows": 10
+      },
+      "cooked-cpu": {
+        "passed": 130,
+        "failed": 0,
+        "ignored": 94,
+        "nonempty_groups": 6,
+        "summary_rows": 10
+      }
+    },
+    "frozen_inputs": 2906,
+    "producer_records": 148,
+    "producer_crate_paths": 18,
+    "exact_producer_crate_paths": 15,
+    "reviewed_seams": [
+      "crates/incant_render/src/graph.rs",
+      "crates/incant_render/src/lib.rs",
+      "crates/incant_render/src/timing/mod.rs"
+    ],
+    "main": "9aa8165f3c3a5ec4754b1bda180cf6169bd7c21c",
+    "producer": "9da53be04c008a992b638c87129178df4e6000a9",
+    "gpu_execution": false,
+    "tested_and_joined_trees_equal": true
+  },
+  "checks": [
+    {
+      "name": "default-cpu",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets"
+      ],
+      "exit": 0,
+      "seconds": 28.728796374998637,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/default-cpu.stdout",
+        "sha256": "147975d463650bc631dc70ca67d6a37135a89762530f7fcdf6c376c834170de5"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/default-cpu.stderr",
+        "sha256": "bfabde2dc951e3d746767617485896fef342c84cd851e3b45181bab7ca981f2e"
+      }
+    },
+    {
+      "name": "cooked-cpu",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/persistent-pipeline-cache"
+      ],
+      "exit": 0,
+      "seconds": 16.093857250001747,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/cooked-cpu.stdout",
+        "sha256": "c8d1fd516cf2d1467bf7ec73e5254baf9f6971dfcc449f2496320cf9486d2e48"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/cooked-cpu.stderr",
+        "sha256": "a01a56e11358344c16be5040be14d29214c9409d40dbf3ec230c1f70c4b69167"
+      }
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/persistent-pipeline-cache",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 3.1290194160028477,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/clippy.stderr",
+        "sha256": "463382f6670dcc501c8420e159a2b391f6dd913f69d0856da6f2a7f1c9372c16"
+      }
+    },
+    {
+      "name": "native-window-compile",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--features",
+        "native-window,incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/persistent-pipeline-cache"
+      ],
+      "exit": 0,
+      "seconds": 4.878241833001084,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/native-window-compile.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/native-window-compile.stderr",
+        "sha256": "163fc8d965723bc3474198d7d21ba4397b9eabd49196643df1a55bafdc966f7b"
+      }
+    },
+    {
+      "name": "web-default",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 0.9636574999967706,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/web-default.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/web-default.stderr",
+        "sha256": "360bf4a755669488d22601854a6e0f0a564353feacfffbdc9ecf072c7b82be1e"
+      }
+    },
+    {
+      "name": "web-cooked",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/persistent-pipeline-cache"
+      ],
+      "exit": 0,
+      "seconds": 0.5487659589998657,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/web-cooked.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/web-cooked.stderr",
+        "sha256": "df56d51deabbc05d6880d171d651d1f82c6efda8965e8916e60d614333c3ffab"
+      }
+    },
+    {
+      "name": "runtime-graph",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/cooked-clusters,incant_render/persistent-pipeline-cache"
+      ],
+      "exit": 0,
+      "seconds": 0.4139765419968171,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/runtime-graph.stdout",
+        "sha256": "d280802b054a3187b0ec6b3ebedef3eaee1e3d62f34067053e66a279493cad13"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/runtime-graph.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.0988121249974938,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.032997209003951866,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.051514207996660843,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/gpu-timestamps-main206-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "crates/incant_render/src/diagnostic_draw.rs",
+      "producer_sha256": "fff98360a4350b20be1e7acb2f022f06f0e325c363e9c521a5e92d9851555510",
+      "current_sha256": "fff98360a4350b20be1e7acb2f022f06f0e325c363e9c521a5e92d9851555510",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "producer_sha256": "91b7818e421a9d467309a3d9b4487f7bb728258475e25af2dc82f6ab35b92a20",
+      "current_sha256": "467bb3720999d3d1dca2eea71e8c41ecb839f9ea801583c21118f699af62aac5",
+      "reviewed_seam": true
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "producer_sha256": "2e80028e2f56205b3c2f7abc72c6dcfc225885c133ab8fc0926ba9c6397cf03f",
+      "current_sha256": "dd367c7008a46e0cc65c37ce7f95e4721a85104afc18999b9c76170b6602f457",
+      "reviewed_seam": true
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "producer_sha256": "ced8e9d30fb756848595157125894e0d01b92769c492aed964651e8e679a19d4",
+      "current_sha256": "ced8e9d30fb756848595157125894e0d01b92769c492aed964651e8e679a19d4",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "producer_sha256": "522770bbb295d170dfd1576d9acc558184a8a38af24f83916b140918c00d8659",
+      "current_sha256": "522770bbb295d170dfd1576d9acc558184a8a38af24f83916b140918c00d8659",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "producer_sha256": "792b2ce89d6cf7844dffd8e3fbd2e6ddefc06e3f8e8ff4953686ee066fd0341a",
+      "current_sha256": "792b2ce89d6cf7844dffd8e3fbd2e6ddefc06e3f8e8ff4953686ee066fd0341a",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/shadow_draw.rs",
+      "producer_sha256": "b2a80a608a038923646fe9ce5f1507312877e72d7c268d312a869d5e1e2f1a94",
+      "current_sha256": "b2a80a608a038923646fe9ce5f1507312877e72d7c268d312a869d5e1e2f1a94",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/sprites/drawing.rs",
+      "producer_sha256": "33e9f6c91018f5dcfd966a306bb741f95187c1dc0bb1157084551cd972dad7c4",
+      "current_sha256": "33e9f6c91018f5dcfd966a306bb741f95187c1dc0bb1157084551cd972dad7c4",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/text/drawing.rs",
+      "producer_sha256": "dea8093b52cb3e4fa5698315559774c1098a501635720956b7dd9df26596537b",
+      "current_sha256": "dea8093b52cb3e4fa5698315559774c1098a501635720956b7dd9df26596537b",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/text_draw_tests.rs",
+      "producer_sha256": "1a03ebd70a61af45e5baea63186c4923732f9849b2965713b54c95a9b47b8111",
+      "current_sha256": "1a03ebd70a61af45e5baea63186c4923732f9849b2965713b54c95a9b47b8111",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/timing/gpu_tests.rs",
+      "producer_sha256": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3",
+      "current_sha256": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/timing/mod.rs",
+      "producer_sha256": "9789d47afbef6bdf086ae42cc4ffe07f8519de81f1410a76243366646d11357a",
+      "current_sha256": "63006dd695a697e02743e66f7e9a6990b7aba832d3357221b160ef9fc8c01caf",
+      "reviewed_seam": true
+    },
+    {
+      "path": "crates/incant_render/src/timing/pool.rs",
+      "producer_sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+      "current_sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "producer_sha256": "ed0ff504313a909fbe262dfacb02d6edf85d869cd4963c34f1e725267f13aa87",
+      "current_sha256": "ed0ff504313a909fbe262dfacb02d6edf85d869cd4963c34f1e725267f13aa87",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/src/timing/tests.rs",
+      "producer_sha256": "cdcb9ca717c73f4b16a0ba16ec856bed9de30b3da64770c26d483b90ebaf7867",
+      "current_sha256": "cdcb9ca717c73f4b16a0ba16ec856bed9de30b3da64770c26d483b90ebaf7867",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/tests/hdr_output/mod.rs",
+      "producer_sha256": "a940816bc28b4f7e3866518e17442221b123dc28e8828dcd38909e5c7fe24f14",
+      "current_sha256": "a940816bc28b4f7e3866518e17442221b123dc28e8828dcd38909e5c7fe24f14",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/readback.rs",
+      "producer_sha256": "1a834ae4e71b4e799f63d8ad784a9a08f53113922e22f5a7c6a85e07ca1ead1c",
+      "current_sha256": "1a834ae4e71b4e799f63d8ad784a9a08f53113922e22f5a7c6a85e07ca1ead1c",
+      "reviewed_seam": false
+    },
+    {
+      "path": "crates/incant_render/tests/timestamp_backend_probe.rs",
+      "producer_sha256": "971225d1f13bb7f3901be021800aca4ad1a03f79ba1296942b0b5000e7543665",
+      "current_sha256": "971225d1f13bb7f3901be021800aca4ad1a03f79ba1296942b0b5000e7543665",
+      "reviewed_seam": false
+    }
+  ],
+  "producer_evidence": [
+    {
+      "path": "docs/spikes/evidence/gpu-frame-envelope.json",
+      "sha256": "26ecacd4ca1dd0881033470c8ae14d8336d686bd3c0408b41f990cde5cdab1d5",
+      "records": 20
+    },
+    {
+      "path": "docs/spikes/evidence/gpu-timestamps-r2.json",
+      "sha256": "ed606eedfc155bedf9b81a5603447d48b94a4d1848dd441711885fd00080e59e",
+      "records": 81
+    },
+    {
+      "path": "docs/spikes/evidence/gpu-timestamps-pass-resolve.json",
+      "sha256": "17cccdc112948d7b1ff56f0ef7626a3b9645853ed7359a04e27f96871e3c52a7",
+      "records": 47
+    }
+  ],
+  "freeze": {
+    "path": "docs/spikes/evidence/gpu-timestamps-main207/freeze.json",
+    "sha256": "288c8f094fb44eab426509771d2d4602b51c2624c5c406c7814e0a5cc1cbfa4d"
+  },
+  "collector": {
+    "path": "docs/spikes/evidence/gpu-timestamps-main207/collect.py",
+    "sha256": "741dadc3723f4b190d96ee78323971ca5cf0bff29500aff6692088a5ebcde6e4"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/gpu-timestamps-main207/artifacts.json.gz",
+    "sha256": "ed427ad747965cd905df79779af4884fb26b98e74a6578d9f717af2b58666f44",
+    "bytes": 214797,
+    "records": 28,
+    "payloads": 18
+  },
+  "integration_seams_sha256": "0186fb0f8444b37825171cbbefd08b0001a4029c36d293e735fd41ec2e5b121f",
+  "limits": [
+    "Current integration ran no GPU or native window. Default103 and cooked130 CPU cases overlap;94 GPU cases were ignored in each suite.",
+    "The92 actual default-feature M5 Pro Metal cases and paired identical PNG bytes belong to f33495b2; final envelope correction9da53be0 was CPU-tested only. No current composed GPU or image review is inferred.",
+    "Seven timestamp pass groups only. Frame is min start through max end of instrumented pairs including intervening gaps; it does not measure complete-frame GPU cost. Retained motion has no query pair.",
+    "Five wasm native-only timing dead-code warnings retained. Browser timing admission fails explicitly.",
+    "No native-window, other-backend GPU, phone, performance or complete-profiler gate approval."
+  ],
+  "review": {
+    "verdict": "accepted scoped current-main integration",
+    "path": "docs/spikes/evidence/gpu-timestamps-main207/final-review.json",
+    "sha256": "4ed5e1fc92a51a3e6c4e54869bade87e8e7cb16bb802512bf7735172af310fd9"
+  }
+}

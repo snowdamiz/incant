@@ -1,0 +1,285 @@
+{
+  "case": "sprites_text",
+  "checks": {
+    "expected_groups_same_on_both_devices": true,
+    "no_second_sample": true,
+    "one_sample_with_sequence_1": true,
+    "pixels_identical_timing_off_vs_on": true,
+    "sample_contract": true,
+    "stats_after_frame": true,
+    "stats_after_take": true
+  },
+  "comparisons": {
+    "on-1 vs off-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    }
+  },
+  "frames": {
+    "off-1": {
+      "bottom_right": [
+        20,
+        21,
+        25,
+        255
+      ],
+      "center": [
+        20,
+        21,
+        25,
+        255
+      ],
+      "distinct_colors": 427,
+      "rgba_sha256": "21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "on-1": {
+      "bottom_right": [
+        20,
+        21,
+        25,
+        255
+      ],
+      "center": [
+        20,
+        21,
+        25,
+        255
+      ],
+      "distinct_colors": 427,
+      "rgba_sha256": "21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    }
+  },
+  "frames_rendered": 2,
+  "outcome": "pass",
+  "pngs": [
+    {
+      "name": "sprites-text-off.png",
+      "rgba_sha256": "21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e",
+      "sha256": "bdadd584ff2e7bba1dda9c6e86a9b7c818bea2344d7600b94cb43a685fd410ff"
+    },
+    {
+      "name": "sprites-text-on.png",
+      "rgba_sha256": "21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e",
+      "sha256": "bdadd584ff2e7bba1dda9c6e86a9b7c818bea2344d7600b94cb43a685fd410ff"
+    }
+  ],
+  "renderers": {
+    "off": {
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "adapter_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "device_features": "Features { features_wgpu: FeaturesWGPU(0x0), features_webgpu: FeaturesWebGPU(0x0) }",
+      "device_timestamp_features": {
+        "TIMESTAMP_QUERY": false,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "queue_timestamp_period_ns": 1.0,
+      "timing_stats": {
+        "abandoned": 0,
+        "enabled": false,
+        "pending": 0,
+        "ready": 0,
+        "retired": 0,
+        "skipped": 0
+      }
+    },
+    "on": {
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "adapter_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "device_features": "Features { features_wgpu: FeaturesWGPU(TIMESTAMP_QUERY_INSIDE_ENCODERS), features_webgpu: FeaturesWebGPU(TIMESTAMP_QUERY) }",
+      "device_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "queue_timestamp_period_ns": 1.0,
+      "timing_stats": {
+        "abandoned": 0,
+        "enabled": true,
+        "pending": 0,
+        "ready": 0,
+        "retired": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "scene": {
+    "expected_groups": {
+      "AssignLights": false,
+      "Display": true,
+      "InitializeScene": true,
+      "Models": false,
+      "Shadows": false,
+      "Sprites": true,
+      "Text": true
+    },
+    "format": "Rgba8UnormSrgb",
+    "local_lights": 0,
+    "size": [
+      640,
+      360
+    ],
+    "stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 0,
+      "model_entities": 0,
+      "model_triangles": 0,
+      "primitive_instances": 0,
+      "sprite_entities": 3,
+      "text_entities": 2,
+      "text_glyph_quads": 9,
+      "text_gpu_bytes": 8016,
+      "text_missing_glyphs": 1,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+    },
+    "viewport": null
+  },
+  "timed_submissions": 1,
+  "timing": {
+    "sample_checks": {
+      "labels_match_expected": true,
+      "observation_dependency_order_violations": [],
+      "observation_groups_within_frame": true,
+      "observation_zero_tick_groups": [
+        "InitializeScene",
+        "Sprites",
+        "Text",
+        "Display"
+      ],
+      "period_finite_positive": true,
+      "present": {
+        "AssignLights": false,
+        "Display": true,
+        "InitializeScene": true,
+        "Models": false,
+        "Shadows": false,
+        "Sprites": true,
+        "Text": true
+      },
+      "sequence": 1,
+      "spans_ordered_finite_nonnegative": true
+    },
+    "stats_after_frame": {
+      "abandoned": 0,
+      "enabled": true,
+      "pending": 0,
+      "ready": 1,
+      "retired": 0,
+      "skipped": 0
+    },
+    "stats_final": {
+      "abandoned": 0,
+      "enabled": true,
+      "pending": 0,
+      "ready": 0,
+      "retired": 0,
+      "skipped": 0
+    },
+    "takes": [
+      {
+        "labeled": {
+          "AssignLights": null,
+          "Display": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "InitializeScene": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Models": null,
+          "Shadows": null,
+          "Sprites": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Text": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          }
+        },
+        "outcome": "sample",
+        "raw": {
+          "frame": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "passes": [
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            null,
+            null,
+            null,
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            }
+          ],
+          "sequence": 1,
+          "timestamp_period_ns": 1.0
+        }
+      },
+      {
+        "outcome": "none"
+      }
+    ]
+  }
+}

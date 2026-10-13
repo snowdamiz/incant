@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main206, 2026-10-13
+## Current overview — main207, 2026-10-13
 
-Development main206 includes the restart quota-test repair (PR188) and the reviewed,
+Development main207 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -45,7 +45,7 @@ Core authored bindings and the corrected locked-exit proof are merged in PR185
 
 Dynamic resolution and cooked clusters have accepted producer Metal evidence; their
 [current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks with independent final packet acceptance; PR198 is merged after the required fast check.
-Current composed GPU execution remains pending. GPU timestamp execution remains pending. CPU profiling has accepted producer
+Current composed GPU execution remains pending. GPU timestamps have scoped producer Metal evidence and passing current-main207 CPU checks, as described below. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
 independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
@@ -55,6 +55,17 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+## GPU timestamps — device review passed; concurrent interval corrected
+
+Claude's bounded default-feature Metal review passes92 actual GPU/regression cases
+and reports unchanged pixels in all timing-off/on controls. Three lit samples
+exposed concurrent passes outside the former first/last encoding-order interval.
+The CPU decoder now encloses all measured pairs, with explicit malformed/wrap
+refusal; ten timing CPU tests and renderer Clippy pass, with independent source
+review accepted. [Scope and retained evidence](docs/spikes/gpu-frame-envelope.md).
+All ten [current-main207 integration checks](docs/spikes/gpu-timestamps-main207.md) pass: 103 default CPU cases and 130 overlapping cooked cases, with 94 GPU cases ignored in each configuration. Final independent integration review is accepted; publication requires the exact-head fast check. Retained motion is explicitly uninstrumented; the envelope spans measured extrema including intervening gaps and does not measure complete-frame GPU cost. Cooked/native-window/phone and complete
+profiler gates remain open.
+
 ## Native-window CPU profiling — current-main checks pass
 
 The desktop player accepts explicit summary/standalone Tracy profiling on its
@@ -81,7 +92,7 @@ The inert path now retains every fixed regular rigid-body field, including
 mass/force/velocity/CCD caches, activation history, exact u128 user data and
 island scalar references, bound to checked body/attachment rows. 101 CPU tests
 and all scoped checks pass; native both-dimension evidence covers force/mass
-changes, sleep/wake, automatic CCD and removal/reuse. Independent producer review is accepted. The [current-main206 integration](docs/spikes/physics-body-main206.md) passes all eight checks and 101 CPU cases with 2,900 unchanged inputs; final integration review is accepted and publication requires the fast check. Derived mass/island consistency, solver work admission, complete
+changes, sleep/wake, automatic CCD and removal/reuse. Independent producer review is accepted. The [current-main206 integration](docs/spikes/physics-body-main206.md) passes all eight checks and 101 CPU cases with 2,900 unchanged inputs; final integration review and the exact-head fast check passed, and PR207 is merged. Derived mass/island consistency, solver work admission, complete
 collider/owner construction and exact continuation remain required; physics
 saves stay refused. [Body contract](docs/spikes/physics-inert-body-state.md).
 

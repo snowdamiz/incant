@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T06:37:57.943123+00:00",
+  "reviewer": "astra/integrate_runtime_prs",
+  "producer": "9da53be04c008a992b638c87129178df4e6000a9",
+  "verdict": "accepted scoped source and final evidence",
+  "findings": [],
+  "envelope_manifest_sha256": "26ecacd4ca1dd0881033470c8ae14d8336d686bd3c0408b41f990cde5cdab1d5",
+  "gpu_manifest_sha256": "ed606eedfc155bedf9b81a5603447d48b94a4d1848dd441711885fd00080e59e",
+  "source_review_sha256": "816d243f8cb64d84e338890bfc4692b8d1e2f261d6af5fdf1d3cb4252e0f31ac",
+  "verified": {
+    "envelope_records": 20,
+    "envelope_sources": 9,
+    "final_cpu_tests": 10,
+    "final_commands": 3,
+    "gpu_records": 81,
+    "original_file_pairs": 64,
+    "screenshot_hashes": 5,
+    "frozen_gpu_inputs": 2879,
+    "successful_reaped_children": 21,
+    "gpu_test_counts": {
+      "numeric": 1,
+      "suite-lib": 33,
+      "suite-model_gpu": 50,
+      "suite-timestamp_backend_probe": 1,
+      "suite-game": 5,
+      "suite-ui": 2
+    },
+    "old_aggregate_defects_reproduced_from_raw": 3
+  },
+  "limitations": [
+    "No GPU execution or image decoding/viewing by reviewer; appearance review is Claude-owned.",
+    "Actual92 GPU cases and byte-identical PNG pairs are on f334; final9da decoder changes are CPU-tested only.",
+    "Default shader features/M5 Pro Metal only; other backends/cooked combinations/current-main composition need scoped verification.",
+    "No native-window/phone/performance/full-frame instrumentation claim. Motion must be explicitly excluded or receive a dedicated pass group in later composition."
+  ]
+}

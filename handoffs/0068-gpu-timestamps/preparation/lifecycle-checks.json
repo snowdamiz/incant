@@ -1,0 +1,342 @@
+{
+  "cpu_only": true,
+  "passed": true,
+  "tests_run": 7,
+  "records": [
+    {
+      "runner": "build",
+      "case": "interrupt",
+      "row": {
+        "label": "interrupt",
+        "kind": "build",
+        "argv": [
+          "/bin/sleep",
+          "30"
+        ],
+        "cwd": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-zeusdzrl",
+        "env": {
+          "inherited_keys_values_not_recorded": [
+            "HOME"
+          ],
+          "overrides": {
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin"
+          }
+        },
+        "pid": 97709,
+        "started": "2026-10-13T04:29:21.101155+00:00",
+        "ended": "2026-10-13T04:29:21.509266+00:00",
+        "exit": -9,
+        "timed_out": false,
+        "wait_error": "KeyboardInterrupt",
+        "timeout_s": 5,
+        "group_empty_after": true,
+        "frames_reserved": 0,
+        "submissions_reserved": 0,
+        "stdout": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-zeusdzrl/logs/out",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-zeusdzrl/logs/err",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "original_exception_preserved": "KeyboardInterrupt",
+      "pid_and_group_absent": true
+    },
+    {
+      "runner": "build",
+      "case": "success",
+      "row": {
+        "label": "success",
+        "kind": "build",
+        "argv": [
+          "/usr/bin/true"
+        ],
+        "cwd": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-fy10bpxs",
+        "env": {
+          "inherited_keys_values_not_recorded": [
+            "HOME"
+          ],
+          "overrides": {
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin"
+          }
+        },
+        "pid": 97712,
+        "started": "2026-10-13T04:29:21.512487+00:00",
+        "ended": "2026-10-13T04:29:21.518943+00:00",
+        "exit": 0,
+        "timed_out": false,
+        "wait_error": null,
+        "timeout_s": 5,
+        "group_empty_after": true,
+        "frames_reserved": 0,
+        "submissions_reserved": 0,
+        "stdout": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-fy10bpxs/logs/out",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-fy10bpxs/logs/err",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "original_exception_preserved": null,
+      "pid_and_group_absent": true
+    },
+    {
+      "runner": "build",
+      "case": "timeout",
+      "row": {
+        "label": "timeout",
+        "kind": "build",
+        "argv": [
+          "/bin/sleep",
+          "30"
+        ],
+        "cwd": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-rgzelu_m",
+        "env": {
+          "inherited_keys_values_not_recorded": [
+            "HOME"
+          ],
+          "overrides": {
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin"
+          }
+        },
+        "pid": 97713,
+        "started": "2026-10-13T04:29:21.521616+00:00",
+        "ended": "2026-10-13T04:29:21.629231+00:00",
+        "exit": -9,
+        "timed_out": true,
+        "wait_error": null,
+        "timeout_s": 0.1,
+        "group_empty_after": true,
+        "frames_reserved": 0,
+        "submissions_reserved": 0,
+        "stdout": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-rgzelu_m/logs/out",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-rgzelu_m/logs/err",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "original_exception_preserved": null,
+      "pid_and_group_absent": true
+    },
+    {
+      "runner": "gpu",
+      "case": "after_interrupt",
+      "row": {
+        "label": "after_interrupt",
+        "kind": "review",
+        "item": "after_interrupt",
+        "binary": "cpu-fixture",
+        "argv": [
+          "/usr/bin/true"
+        ],
+        "cwd": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-3dqcwfyr/checkout",
+        "env": {
+          "inherited_keys_values_not_recorded": [
+            "HOME"
+          ],
+          "overrides": {
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+            "TMPDIR": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-3dqcwfyr/tmp/after_interrupt",
+            "RUST_BACKTRACE": "1"
+          }
+        },
+        "binary_sha256_before": "511602b8cf083bdff74d43242b71c27484bd63121c07f3b59575d35676e1f6cb",
+        "binary_sha256_after": "511602b8cf083bdff74d43242b71c27484bd63121c07f3b59575d35676e1f6cb",
+        "grant_sha256": "cpu-only-grant",
+        "tools": {},
+        "source": {},
+        "pid": 97714,
+        "started": "2026-10-13T04:29:21.632213+00:00",
+        "ended": "2026-10-13T04:29:21.636087+00:00",
+        "exit": 0,
+        "timed_out": false,
+        "wait_error": null,
+        "timeout_s": 5,
+        "group_empty_after": true,
+        "frames_reserved": 8,
+        "submissions_reserved": 5,
+        "scratch_leftovers": [],
+        "stdout": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-3dqcwfyr/logs/gpu-after_interrupt.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-3dqcwfyr/logs/gpu-after_interrupt.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "libtest": {
+          "running": [],
+          "results": [],
+          "failures": []
+        },
+        "after_error": "KeyboardInterrupt('after-parser-control')"
+      },
+      "original_exception_preserved": "KeyboardInterrupt",
+      "pid_and_group_absent": true
+    },
+    {
+      "runner": "gpu",
+      "case": "interrupt",
+      "row": {
+        "label": "interrupt",
+        "kind": "review",
+        "item": "interrupt",
+        "binary": "cpu-fixture",
+        "argv": [
+          "/bin/sleep",
+          "30"
+        ],
+        "cwd": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-gitrthdy/checkout",
+        "env": {
+          "inherited_keys_values_not_recorded": [
+            "HOME"
+          ],
+          "overrides": {
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+            "TMPDIR": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-gitrthdy/tmp/interrupt",
+            "RUST_BACKTRACE": "1"
+          }
+        },
+        "binary_sha256_before": "38d6b9431656a92cfa223d1325cbea4dc3f56ef29833eb2a3ff7f6ab21f95b5b",
+        "binary_sha256_after": "38d6b9431656a92cfa223d1325cbea4dc3f56ef29833eb2a3ff7f6ab21f95b5b",
+        "grant_sha256": "cpu-only-grant",
+        "tools": {},
+        "source": {},
+        "pid": 97715,
+        "started": "2026-10-13T04:29:21.639046+00:00",
+        "ended": "2026-10-13T04:29:22.043544+00:00",
+        "exit": -9,
+        "timed_out": false,
+        "wait_error": "KeyboardInterrupt",
+        "timeout_s": 5,
+        "group_empty_after": true,
+        "frames_reserved": 8,
+        "submissions_reserved": 5,
+        "scratch_leftovers": [],
+        "stdout": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-gitrthdy/logs/gpu-interrupt.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-gitrthdy/logs/gpu-interrupt.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "libtest": {
+          "running": [],
+          "results": [],
+          "failures": []
+        }
+      },
+      "original_exception_preserved": "KeyboardInterrupt",
+      "pid_and_group_absent": true
+    },
+    {
+      "runner": "gpu",
+      "case": "success",
+      "row": {
+        "label": "success",
+        "kind": "review",
+        "item": "success",
+        "binary": "cpu-fixture",
+        "argv": [
+          "/usr/bin/true"
+        ],
+        "cwd": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-hobauc4j/checkout",
+        "env": {
+          "inherited_keys_values_not_recorded": [
+            "HOME"
+          ],
+          "overrides": {
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+            "TMPDIR": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-hobauc4j/tmp/success",
+            "RUST_BACKTRACE": "1"
+          }
+        },
+        "binary_sha256_before": "511602b8cf083bdff74d43242b71c27484bd63121c07f3b59575d35676e1f6cb",
+        "binary_sha256_after": "511602b8cf083bdff74d43242b71c27484bd63121c07f3b59575d35676e1f6cb",
+        "grant_sha256": "cpu-only-grant",
+        "tools": {},
+        "source": {},
+        "pid": 97742,
+        "started": "2026-10-13T04:29:22.046557+00:00",
+        "ended": "2026-10-13T04:29:22.049545+00:00",
+        "exit": 0,
+        "timed_out": false,
+        "wait_error": null,
+        "timeout_s": 5,
+        "group_empty_after": true,
+        "frames_reserved": 8,
+        "submissions_reserved": 5,
+        "scratch_leftovers": [],
+        "stdout": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-hobauc4j/logs/gpu-success.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-hobauc4j/logs/gpu-success.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "libtest": {
+          "running": [],
+          "results": [],
+          "failures": []
+        }
+      },
+      "original_exception_preserved": null,
+      "pid_and_group_absent": true
+    },
+    {
+      "runner": "gpu",
+      "case": "timeout",
+      "row": {
+        "label": "timeout",
+        "kind": "review",
+        "item": "timeout",
+        "binary": "cpu-fixture",
+        "argv": [
+          "/bin/sleep",
+          "30"
+        ],
+        "cwd": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-zad1ut_0/checkout",
+        "env": {
+          "inherited_keys_values_not_recorded": [
+            "HOME"
+          ],
+          "overrides": {
+            "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+            "TMPDIR": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-zad1ut_0/tmp/timeout",
+            "RUST_BACKTRACE": "1"
+          }
+        },
+        "binary_sha256_before": "38d6b9431656a92cfa223d1325cbea4dc3f56ef29833eb2a3ff7f6ab21f95b5b",
+        "binary_sha256_after": "38d6b9431656a92cfa223d1325cbea4dc3f56ef29833eb2a3ff7f6ab21f95b5b",
+        "grant_sha256": "cpu-only-grant",
+        "tools": {},
+        "source": {},
+        "pid": 97743,
+        "started": "2026-10-13T04:29:22.051924+00:00",
+        "ended": "2026-10-13T04:29:22.157817+00:00",
+        "exit": -9,
+        "timed_out": true,
+        "wait_error": null,
+        "timeout_s": 0.1,
+        "group_empty_after": true,
+        "frames_reserved": 8,
+        "submissions_reserved": 5,
+        "scratch_leftovers": [],
+        "stdout": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-zad1ut_0/logs/gpu-timeout.stdout.txt",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-0068-lifecycle-zad1ut_0/logs/gpu-timeout.stderr.txt",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "libtest": {
+          "running": [],
+          "results": [],
+          "failures": []
+        }
+      },
+      "original_exception_preserved": null,
+      "pid_and_group_absent": true
+    }
+  ],
+  "sources": [
+    {
+      "path": "handoffs/0068-gpu-timestamps/tools/build.py",
+      "sha256": "8f0581d67dc8835ec2e4689e5107ac92e547701944eaad8b6f6f2ad5a86f6e12"
+    },
+    {
+      "path": "handoffs/0068-gpu-timestamps/tools/gpu.py",
+      "sha256": "80285568e12af99d9fb19124f04cd0aacfc6d85028467ce1c43fa5542e3ad6b7"
+    },
+    {
+      "path": "handoffs/0068-gpu-timestamps/tools/test_lifecycle.py",
+      "sha256": "dab88bc96dac8d49d03806288821efb4b1084bded13359bace088cb4e259537b"
+    },
+    {
+      "path": "handoffs/0068-gpu-timestamps/tools/review/gpu_timestamp_review.rs",
+      "sha256": "611cb108c4d92b5082b168f61da35e13094adfb59b8e28ce0ecb88c869f508f9"
+    }
+  ]
+}
