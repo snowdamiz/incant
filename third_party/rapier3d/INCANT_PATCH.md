@@ -18,3 +18,12 @@ The read-only pipeline observer is also gated by `incant-checkpoint`.
 `INCANT_PIPELINE_CAPTURE.json` pins its copied verdict/deferred/quarantine
 metadata and additive exports. It does not authenticate a completed phase, join
 a task, clear poison or install state; all native algorithms remain unchanged.
+
+The same default-off feature exposes a separately pinned trusted live-to-live
+`checkpoint_fresh_workspace` experiment. It refuses deferred/quarantined owners,
+retains exact historical CCD verdict and shares any configured execution pool,
+while resetting other scratch/counters. It neither accepts records nor proves
+phase or scratch completeness. `INCANT_TRUSTED_WORKSPACE.json` layers these
+additions over the recorded historical pipeline-capture hashes. The current
+capture inventory reflects the additive exports. Generic live
+restoration and physics save admission remain disabled.
