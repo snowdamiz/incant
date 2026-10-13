@@ -3,7 +3,7 @@ use alloc::vec::Vec;
 use incant_physics_snapshot::*;
 // Editable inert sections only. No hostile record is ever serde-deserialized
 // into live native storage; every native candidate uses the checked importer.
-fn section(bytes: &[u8], tag: usize, replacement: &[u8]) -> Vec<u8> {
+pub(super) fn section(bytes: &[u8], tag: usize, replacement: &[u8]) -> Vec<u8> {
     let header = 16 + 224;
     assert_eq!(&bytes[..8], b"ICNATIV1");
     let mut out = bytes[..header].to_vec();
