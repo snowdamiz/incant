@@ -88,6 +88,21 @@ actual corrected hosted results remain pending. Candidate17 stays frozen and
 release remains at accepted checkpoint14.
 [Evidence](docs/spikes/restart-quota-main187.md).
 
+## Authored Android static Wasm — producer execution passed
+
+Ordinary Android export now admits the reviewed captured wasm2c module route
+with complete bundle/producer/target/physics checks and exact NDK C compilation
+audits. Both fresh shipping physics archives pass; six fresh source/cache/build/
+map-deleted ARM API37 emulator processes match all 17,856 observed fields and
+614,400 PCM bytes each, with twenty-six exact refusal controls. Public import,
+atomic selection/mode Undo/Redo/journal reopen and four Wasmtime processes also
+pass. Owned software AVDs were removed; the retained port-reuse failure was
+resolved by rerunning only missing callers, without rebuilding archives.
+Source/probe reviews pass; independent final execution review and current-main
+integration are pending. API24 compilation is not minimum-OS execution proof.
+No physical-phone, performance, GPU, live audio, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-android-wasm.md).
+
 ## Authored iOS static Wasm — producer execution passed
 
 Ordinary iOS export now accepts one public captured Wasm scene module through
@@ -102,8 +117,9 @@ compiler output was reused after a reviewed observer-only correction, explicitly
 qualified rather than called a new build. A separate simulator teardown failure
 is retained; the complete retry passed without source/archive changes.
 Source/probe and final execution reviews are accepted; current-main
-integration remains pending. Android static Wasm, mixed per-entity TypeScript and
-static guest checkpoints remain refused. No phone, minimum-OS, performance,
+integration remains pending. Its original Android refusal is superseded by the
+separate Android proof above; mixed per-entity TypeScript and static guest
+checkpoints remain refused. No phone, minimum-OS, performance,
 rendering, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-ios-wasm.md).
 
