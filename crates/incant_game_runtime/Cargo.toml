@@ -8,6 +8,7 @@ publish.workspace = true
 [features]
 profile = ["incant_profile/summary", "incant_script/profile", "incant_runtime/profile"]
 default = ["physics-deterministic"]
+native-checkpoints = ["incant_script/native-checkpoints", "incant_runtime/native-checkpoints"]
 ui = ["dep:incant_ui", "incant_ui/native", "incant_script/ui"]
 static-module = ["incant_script/static-module"]
 device = ["incant_audio_runtime/device"]

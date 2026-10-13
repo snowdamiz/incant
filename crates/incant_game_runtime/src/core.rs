@@ -133,6 +133,13 @@ where
         audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
     ) -> Result<Self, H::Error> {
         let pending = PendingSessionCheckpoint::new(bytes, initial, program, actions)?;
+        Self::from_pending_checkpoint(pending, prepare, audio)
+    }
+    pub(crate) fn from_pending_checkpoint(
+        pending: PendingSessionCheckpoint,
+        prepare: impl FnOnce(&PendingSessionCheckpoint) -> Result<H, H::Error>,
+        audio: impl FnOnce(&NativeWorld) -> incant_audio_runtime::Result<SceneAudio<B>>,
+    ) -> Result<Self, H::Error> {
         if pending.audio().is_some() {
             return Err(GameError::Audio(
                 incant_audio_runtime::AudioError::Unsupported(
@@ -178,6 +185,55 @@ where
                 .checkpoint_bytes_with_ui(live.host.ui().ok_or(GameError::UiHost)?)?);
         }
         Ok(live.native.checkpoint_bytes()?)
+    }
+    #[cfg(feature = "native-checkpoints")]
+    pub(crate) fn checkpoint(
+        &mut self,
+        sample_rate: Option<u32>,
+        payload: &mut incant_runtime::CheckpointPayloadBudget,
+        planar_work: &mut incant_runtime::PlanarCheckpointWorkBudget,
+        spatial_work: &mut incant_runtime::SpatialCheckpointWorkBudget,
+    ) -> Result<crate::GameCheckpoint, H::Error> {
+        let suspended = self.suspended;
+        let live = self.ready_mut()?;
+        // Even a silent offline mixer owns the absolute rendered-sample clock.
+        // Retain it before a later audio declaration can make it observable.
+        let native = if sample_rate.is_some() || live.native.world()?.requires_audio_checkpoint() {
+            live.native.checkpoint_with_audio(
+                &live.audio,
+                #[cfg(feature = "ui")]
+                live.host.ui(),
+                payload,
+                planar_work,
+                spatial_work,
+            )?
+        } else {
+            #[cfg(feature = "ui")]
+            if live.native.world()?.requires_ui_checkpoint() {
+                live.native.checkpoint_with_ui(
+                    live.host.ui().ok_or(GameError::UiHost)?,
+                    payload,
+                    planar_work,
+                    spatial_work,
+                )?
+            } else {
+                live.native.checkpoint(payload, planar_work, spatial_work)?
+            }
+            #[cfg(not(feature = "ui"))]
+            live.native.checkpoint(payload, planar_work, spatial_work)?
+        };
+        Ok(crate::GameCheckpoint {
+            native,
+            sample_rate,
+            suspended,
+        })
+    }
+    #[cfg(feature = "native-checkpoints")]
+    pub(crate) fn with_checkpoint_suspension(mut self, suspended: bool) -> Result<Self, H::Error> {
+        if self.suspended != suspended {
+            self.set_suspended(suspended)?;
+        }
+        Ok(self)
     }
     pub fn ready(&self) -> Result<&Live<B, H>, H::Error> {
         self.live.as_ref().ok_or(GameError::Failed)
@@ -365,6 +421,14 @@ impl<H: Hook> Core<incant_audio_runtime::OfflineBackend, H> {
         sample_rate: u32,
     ) -> Result<Self, H::Error> {
         let pending = PendingSessionCheckpoint::new(bytes, initial, program, actions)?;
+        Self::from_pending_offline_checkpoint(pending, prepare, clips, sample_rate)
+    }
+    pub(crate) fn from_pending_offline_checkpoint(
+        pending: PendingSessionCheckpoint,
+        prepare: impl FnOnce(&PendingSessionCheckpoint) -> Result<H, H::Error>,
+        clips: Vec<incant_audio_runtime::ClipBinding>,
+        sample_rate: u32,
+    ) -> Result<Self, H::Error> {
         if pending.world().requires_ui_checkpoint() && (!cfg!(feature = "ui") || !H::SUPPORTS_UI) {
             return Err(GameError::UiHost);
         }

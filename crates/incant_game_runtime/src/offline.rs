@@ -81,7 +81,7 @@ impl Drop for SilenceOnFailure<'_> {
 /// rendered stereo frames. Incorrect buffers/input are retryable and untouched.
 /// Any accepted failure/unwind destroys live state and clears the entire buffer.
 pub struct OfflineGameSession {
-    inner: OfflineCore,
+    pub(crate) inner: OfflineCore,
 }
 impl OfflineGameSession {
     /// Create a fresh native session with the restart-request contract enabled.

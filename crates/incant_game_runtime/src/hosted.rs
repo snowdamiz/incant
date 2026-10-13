@@ -76,7 +76,7 @@ pub trait SceneHost: Sized {
 /// tick synchronizes the retained host last; failure/unwind drops the composite.
 /// Submitted device audio and external consumer effects are not rolled back.
 pub struct HostedGameSession<B: Backend, H: SceneHost> {
-    core: Core<B, WithHost<H>>,
+    pub(crate) core: Core<B, WithHost<H>>,
 }
 impl<B: Backend, H: SceneHost> HostedGameSession<B, H>
 where
@@ -250,7 +250,7 @@ where
 /// OfflineGameSession. Host sync follows native/script/audio sync and rendering;
 /// any accepted failure/unwind clears output and hides every live observation.
 pub struct HostedOfflineGameSession<H: SceneHost> {
-    inner: OfflineCore<WithHost<H>>,
+    pub(crate) inner: OfflineCore<WithHost<H>>,
 }
 impl<H: SceneHost> HostedOfflineGameSession<H> {
     /// Reuse only immutable startup data. The retained host is prepared on the

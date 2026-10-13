@@ -5,6 +5,10 @@
 //! world nor asynchronous device cursors are rolled back. Plain constructors
 //! refuse spatial declarations. Hosted variants require a trusted native host.
 mod core;
+#[cfg(feature = "native-checkpoints")]
+mod native_checkpoint;
+#[cfg(feature = "native-checkpoints")]
+pub use native_checkpoint::{GameCheckpoint, PendingGameCheckpoint};
 #[cfg(feature = "ui")]
 pub struct RoutedUiInput {
     pub events: Vec<incant_input::InputEvent>,
