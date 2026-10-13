@@ -19,6 +19,7 @@ mod geometry_codec;
 mod graph;
 mod graph_codec;
 mod island_state;
+mod narrow_owner;
 mod pair_state;
 mod records;
 mod rigid_owner;
@@ -41,6 +42,7 @@ pub use geometry_codec::{decode_geometry, encode_geometry};
 pub use graph::*;
 pub use graph_codec::{decode_graph, encode_graph};
 pub use island_state::*;
+pub use narrow_owner::*;
 pub use pair_state::*;
 pub use records::*;
 pub use rigid_owner::*;
@@ -77,6 +79,7 @@ pub enum Error {
     SleepScan,
     Collider,
     UnsupportedCollider,
+    Narrow,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

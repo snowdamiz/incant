@@ -1,5 +1,5 @@
 //! Joined rigid owner state: body/island/pair witnesses plus persistent solver
-//! caches and stamp-sensitive scratch. Still inert: collider properties and the
+//! caches and stamp-sensitive scratch. Still inert: derived arithmetic and the
 //! broad-phase owner must be closed before any hostile live restore admission.
 mod codec;
 mod validate;
@@ -49,6 +49,9 @@ pub struct ValidatedRigidOwner<'a> {
     context: RigidOwnerContext<'a>,
 }
 impl<'a> ValidatedRigidOwner<'a> {
+    pub(crate) fn colliders(&self) -> &'a ValidatedColliderState<'a> {
+        self.context.colliders
+    }
     pub fn record(&self) -> &RigidOwnerRecord {
         &self.record
     }

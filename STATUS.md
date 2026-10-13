@@ -39,14 +39,40 @@ Current-main integration review and the required fast check passed; PR217 is
 merged. Live physics saves remain refused.
 [Scope and relevance](docs/spikes/physics-collider-main216.md).
 
-## Fixed-resolution temporal accumulation — private source composition
+## Inert narrow-phase owner — source and CPU evidence accepted
 
-The [curated main217 source](docs/spikes/fixed-temporal-main217.md) selects the
-accepted opt-in fixed TAA path and its exact WGSL, with a narrowed four-program
-native cooker. Upscaling, MetalFX, bloom and SSAO stay outside this composition.
-Current source review, CPU checks and explicit recook are pending; no new GPU or
-appearance evidence is claimed. Producer fixed-mode acceptance retains softness
-and low MASK-detail retention; default rendering remains unchanged.
+The checked physics boundary now preserves collider graph-index ownership, ordered
+intersection payloads and independent emitted-event history. Eight new native
+2D/3D controls pass, including 128 trusted continuation steps with retired-pair
+reuse, sensor transfers, event-mask toggles and generation reuse. Independent source and final evidence review accepted 143 CPU tests and seven
+scoped checks. The exact-source main217 qualification passes six current checks
+and a 36-case copied-binary rerun with 728 trusted continuation steps; independent
+current-main review is accepted and PR218 merged after the required fast check. `PhysicsUnsupported` and hostile live restore
+admission remain closed; no vendor/world-format changes.
+[Scope and limits](docs/spikes/physics-narrow-owner.md);
+[current-main qualification](docs/spikes/physics-narrow-main217.md).
+
+## Timestamp backend diagnostic — capability repair
+
+Checkpoint22 remains frozen while its jobs drain. A separate direct timestamp
+diagnostic failed on hosted Apple Paravirtual Metal after the production timing
+test had correctly completed its unsupported-capability path. The test-only repair
+keeps mandatory backend selection, runs supported timestamp modes, and executes
+checked ordinary compute when queries are absent. Two CPU policy tests and focused
+strict checks and independent final review pass; PR219 merged after its required
+fast check, and hosted successor execution remains pending. [Failure and repair evidence](docs/spikes/timestamp-diagnostic-capabilities.md).
+
+## Fixed-resolution temporal accumulation — composed checks passed
+
+The [curated fixed-only integration](docs/spikes/fixed-temporal-main217.md) keeps
+upscaling, MetalFX, bloom and SSAO outside its narrowed four-program native cooker.
+Independent source review, default/cooked CPU checks, strict Clippy, native/browser
+consumer compilation and actual Metal/SPIR-V recook validation pass. Two copied
+current-composition binaries then completed eight bounded Metal frames, checking
+fixed history, overlay depth and timestamp submission together. No new pixel review
+is claimed. Producer acceptance remains opt-in fixed mode only, with softness and
+MASK detail approximately 18% of reference. Final integration evidence review is
+pending; defaults and phase/device gates remain unchanged.
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -58,9 +84,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main217, 2026-10-13
+## Current overview — main219, 2026-10-13
 
-Development main217 includes the reviewed opt-in cooked renderer families and
+Development main219 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -79,7 +105,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–217 changes remain outside that tested baseline. No device, performance or
+Later main206–219 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17

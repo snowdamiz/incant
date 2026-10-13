@@ -78,6 +78,9 @@ pub struct ValidatedManifolds<'a> {
     context: ManifoldContext<'a>,
 }
 impl<'a> ValidatedManifolds<'a> {
+    pub(crate) fn graph(&self) -> &'a ValidatedGraph {
+        self.context.graph
+    }
     pub(crate) fn edge_row(&self, edge: u32) -> Option<usize> {
         self.context
             .graph
