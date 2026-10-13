@@ -2604,3 +2604,13 @@ retained. No live constructor/cache installer or save admission is added. See
 `docs/spikes/physics-integration-config.md`. This historical final-audit/intake
 status is superseded by the accepted main220 composition and PR221 merge.
 Cache/shape coherence and full live-owner admission remain open.
+
+
+## Private physics constructors — producer accepted, integration pending
+
+Exact private storage/body/collider construction at `0a96dc0f` has independent
+source/final CPU acceptance: 216 snapshot cases and 22 native controls per mode,
+with 144 continuation steps per dimension. Other owners remain trusted clones.
+Current-main qualification is pending; exact manager construction, whole-owner
+admission and live physics saves remain closed.
+[Producer evidence](docs/spikes/physics-native-construction.md).
