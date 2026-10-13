@@ -1,0 +1,77 @@
+{
+  "format": "incant-core0069-integration-evidence",
+  "version": 1,
+  "source_head": "2489325ec5ebcf17e18e60d00c435d56f9b2bc26",
+  "base_main": "d96087e836c0b3ea28edfb2012b5dc116befc0d1",
+  "accepted_producer": "00dd82b704b5c0537d075257089c2714dbfe82bd",
+  "proof_root": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001",
+  "archive": {
+    "path": "docs/spikes/evidence/core0069-main212/artifacts.tar.gz",
+    "sha256": "823a8becafbe7b39eff76cf7a0835f4f5df54f9793569cc811b442c09092513c",
+    "bytes": 41518458,
+    "records": 770,
+    "unique_payloads": 2859,
+    "payload_format": "Non-PCM maps to one payload; PCM maps to an ordered list of 6400-byte content-addressed chunks (last may be shorter). Concatenation exactly reconstructs the original hash/length.",
+    "raw_bytes": 122718314
+  },
+  "artifact_map": {
+    "path": "docs/spikes/evidence/core0069-main212/artifacts.json.gz",
+    "sha256": "71bada93e03d4450d73238b05f41f34d66a6eac1d40c47cfff97fb1905fb97c3",
+    "raw_sha256": "58f37abd2575081337e36304495d8f7153c7055b47c5f59f18a1508542ec10d5",
+    "records": 770
+  },
+  "external_artifacts": [
+    {
+      "path": "frozen-binaries/incant_headless",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001/frozen-binaries/incant_headless",
+      "sha256": "7b75efd9a1ea8af08b29ea884e7cc7519dd891341c8acfb3a61978fe09f5c53c",
+      "bytes": 60561936,
+      "retention": "external copied executable/debug artifact"
+    },
+    {
+      "path": "public-002/shipping-001/package/player/incant_game_player",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001/public-002/shipping-001/package/player/incant_game_player",
+      "sha256": "4186d085eec6e58c4edc078b96ebc133f1774331320c454d5e3d6148d1ce6261",
+      "bytes": 9450544,
+      "retention": "external copied executable/debug artifact"
+    },
+    {
+      "path": "public-002/shipping-001/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-8f8363e4c4956d7e",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/core0069-main212-001/public-002/shipping-001/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-8f8363e4c4956d7e",
+      "sha256": "a526bf79581e8d6ca35a15a250c0e405d2f94b9b1a266503e546e1672d315360",
+      "bytes": 206988893,
+      "retention": "external copied executable/debug artifact"
+    }
+  ],
+  "summary": {
+    "passed": true,
+    "frozen_files": 3485,
+    "checks": 8,
+    "rust_cpu": 221,
+    "rust_ignored_gpu": 88,
+    "python_core": 20,
+    "locale_authoring": 4,
+    "native_positive": 14,
+    "native_exact_refusal": 1,
+    "binding_refusals": 3,
+    "shipping_positive": 10,
+    "exact_restart_pcm": 4,
+    "package_files": 37,
+    "player_sha256": "4186d085eec6e58c4edc078b96ebc133f1774331320c454d5e3d6148d1ce6261"
+  },
+  "prior_gpu_acceptance": {
+    "receipt": "prior-review-receipts/core0069-g6-execution-root-20261013.json",
+    "sha256": "097dcd3e308013108c6c1258918c9e5b752e3124ccc7ae684e3649d660a88a36",
+    "appearance_owner": "Claude Opus 5.5 Max; verdict at accepted producer gpu-result-003.md",
+    "integration_qualification": "Exact selected UI/text/sample/shader sources and relevant dependency identities; other main renderer input changes recorded. No fresh GPU run or cross-binary pixel equivalence claim."
+  },
+  "initial_failure": "Minimal authoring environment omitted installed Node; retained before any export. Only the external wrapper PATH was corrected. All repository sources stayed frozen.",
+  "review_status": "Prior source/CPU/GPU packet accepted; current-main integration final independent review pending",
+  "limits": [
+    "No new GPU, window, image inspection, phone, timing/performance or phase gate acceptance",
+    "Prior GPU runs remain the g6 regression and g5 capture binary identities",
+    "Current 4-locale public authoring/native proof and English source-deleted shipping are new executions",
+    "Original dirty brief and three untracked CPU/report paths preserved untouched in Claude checkout",
+    "Main214 disjoint Python helper/docs ancestry intentionally left to publisher; no source rebuild justified solely by that ancestry"
+  ]
+}

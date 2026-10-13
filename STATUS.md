@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Core result HUD — current-main qualification
+
+The accepted 0069 label halos, localized result/restart presentation and approved
+font subset are integrated privately on main212. All selected UI/text/sample
+sources equal Claude's accepted producer; 221 affected Rust CPU tests, 20 Python
+tests, four public locale builds, 14 native positive processes and ten fresh
+source-deleted shipping runs pass, including four exact whole-session PCM
+continuations. Original g5/g6 GPU acceptance remains attached to those binaries;
+no new GPU/device/performance claim is made. Final archive review and publisher
+intake remain pending. [Scope and evidence](docs/spikes/core0069-main212.md).
+
 ## Static Wasm C builds — bounded local scheduling verified
 
 The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
