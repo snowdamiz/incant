@@ -56,6 +56,17 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
+## Parallel physics tree ownership — scoped correction verified
+
+Vendored Parry 0.31.1 fixes overlapping mutable borrows in parallel BVH updates
+and refitting, with duplicate rejection before mutation and explicit source
+provenance. Both physics modes, browser compilation, script compilation and
+Clippy pass; independent source review is accepted. Additional Miri experiments
+remain unsuccessful due to Crossbeam diagnostics and are recorded separately.
+This does not enable persisted physics saves, complete a dependency soundness
+audit, or establish a performance gain.
+[Scope and evidence](docs/spikes/parry-parallel-ownership.md).
+
 ## Cooked renderer integration — CPU checks complete
 
 The accepted sprite, UI, text and material producer changes are composed with
