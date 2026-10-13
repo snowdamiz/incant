@@ -67,7 +67,7 @@ fn bounded_timestamp_queries_follow_real_submission_and_abandonment() {
     );
     for sample in samples {
         assert!(sample.timestamp_period_ns.is_finite() && sample.timestamp_period_ns > 0.);
-        assert!(sample.frame.nanoseconds.is_finite() && sample.frame.nanoseconds >= 0.);
+        assert!(sample.frame.nanoseconds.is_finite() && sample.frame.nanoseconds > 0.);
         assert!(sample.passes[GpuPass::InitializeScene.index()].is_some());
         assert!(sample.passes[GpuPass::Display.index()].is_some());
         assert!(sample.passes[GpuPass::Models.index()].is_some());

@@ -75,6 +75,8 @@ pub enum GpuTimingError {
     Reversed,
     #[error("GPU timestamp payload has invalid length")]
     Payload,
+    #[error("GPU timestamp queries returned only zero counters; measurement unavailable")]
+    Unwritten,
 }
 pub(crate) fn required_features(
     enabled: bool,

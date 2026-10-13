@@ -147,3 +147,28 @@ fn pool_bookkeeping_and_timestamp_conversion_allocate_nothing_after_setup() {
     });
     assert_eq!(count, 0);
 }
+
+#[test]
+fn zero_filled_queries_are_refused_without_rejecting_nonzero_quantized_intervals() {
+    assert_eq!(
+        recorder::decode(&[0; 32], 1, 1., [None; GPU_PASS_COUNT], 4),
+        Err(GpuTimingError::Unwritten)
+    );
+    let raw: Vec<_> = [19u64, 19].into_iter().flat_map(u64::to_ne_bytes).collect();
+    assert_eq!(
+        recorder::decode(&raw, 1, 1., [None; GPU_PASS_COUNT], 2)
+            .unwrap()
+            .frame
+            .nanoseconds,
+        0.
+    );
+    let pool = pool::Pool::default();
+    pool.reserve()
+        .unwrap()
+        .unwrap()
+        .complete(Err(GpuTimingError::Unwritten));
+    assert_eq!(pool.take().unwrap(), Some(Err(GpuTimingError::Unwritten)));
+    assert!(pool.take().unwrap().is_none());
+    assert_eq!(pool.stats().unwrap().retired, 0);
+    assert_eq!(pool.reserve().unwrap().unwrap().index, 0);
+}

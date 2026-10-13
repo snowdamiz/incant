@@ -138,6 +138,12 @@ pub(super) fn decode(
     for (slot, chunk) in ticks.iter_mut().zip(bytes.as_chunks::<8>().0) {
         *slot = u64::from_ne_bytes(*chunk);
     }
+    // An entire zero-filled payload is indistinguishable from unwritten query
+    // storage. Refuse it rather than publishing a fabricated zero-cost frame.
+    // Equal nonzero endpoints remain valid: short intervals can quantize to zero.
+    if ticks[..count as usize].iter().all(|&tick| tick == 0) {
+        return Err(GpuTimingError::Unwritten);
+    }
     let mut passes = [None; GPU_PASS_COUNT];
     for (pass, pair) in passes.iter_mut().zip(pairs) {
         if let Some(index) = pair {
