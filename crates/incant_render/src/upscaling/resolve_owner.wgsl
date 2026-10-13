@@ -124,17 +124,17 @@ fn record_admissible(r:Stored,support:vec4u,support_classes:u32,changed_classes:
     let u=(p-frame.output.xy)/frame.output.zw;
     let old=frame.output.xy+(u+frame.jitter.xy+m.xy-frame.jitter.zw)*frame.output.zw;
     if !inside(old,frame.output) {return result;}
-    // A still pixel (static camera, motion under 1/256 px) reads only its own texel.
-    let flags=changes.header.y;
-    let still=(flags&1u)!=0u && all(abs(old-p)<vec2f(1.0/256.0));
-    let oldq=select(old,p,still)-vec2f(0.5);let oldbase=vec2i(floor(oldq));let oldf=fract(oldq);
     // Unclipped persistence needs no anchor match, only the complete proof: static
-    // camera, no global change, provable unchanged current support, and same-texel
-    // admitted history whose every recorded owner is unchanged. Else fall through.
-    if still && (flags&2u)==0u && provable && !support_changed
-        && all(oldbase>=lo(frame.output)) && all(oldbase<=hi(frame.output)) {
-        let c=textureLoad(previous_color,oldbase,0);let z=textureLoad(previous_depth,oldbase,0).x;
-        let r=stored(textureLoad(previous_record,oldbase,0).xy);
+    // camera, motion under 1/256 px, no global change, provable unchanged current
+    // support, and own-texel admitted history whose every recorded owner is
+    // unchanged. Only this branch reads texel P directly; any failure falls through
+    // to ordinary reprojection at the actual old position below.
+    let flags=changes.header.y;
+    let own=vec2i(p);
+    if (flags&1u)!=0u && (flags&2u)==0u && all(abs(old-p)<vec2f(1.0/256.0)) && provable
+        && !support_changed && all(own>=lo(frame.output)) && all(own<=hi(frame.output)) {
+        let c=textureLoad(previous_color,own,0);let z=textureLoad(previous_depth,own,0).x;
+        let r=stored(textureLoad(previous_record,own,0).xy);
         if admitted(c) && c.a>=1.0 && compatible(z,expected) && r.ok
             && record_unchanged(r,support_classes,changed_classes) {
             result.color=clean(mix(result.color,clean(c),frame.options.x));
@@ -142,6 +142,7 @@ fn record_admissible(r:Stored,support:vec4u,support_classes:u32,changed_classes:
             return result;
         }
     }
+    let oldq=old-vec2f(0.5);let oldbase=vec2i(floor(oldq));let oldf=fract(oldq);
     var history=vec4f(0.0); var mass=0.0; var joined=fresh;
     for(var y=0;y<2;y++) {for(var x=0;x<2;x++) {
         let weight=tap_weight(oldf,x,y);if !(weight>0.0) {continue;}
