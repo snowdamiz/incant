@@ -120,6 +120,26 @@ impl Pending {
     pub fn composite(&self) -> Option<&wgpu::TextureView> {
         self.output.as_ref().map(|o| &o.composite)
     }
+    #[cfg(feature = "native-metalfx")]
+    pub(crate) fn native_input(
+        &self,
+    ) -> Option<(&Input, Plan, &wgpu::TextureView, &wgpu::TextureView)> {
+        let o = self.output.as_ref()?;
+        Some((
+            &self.input,
+            self.plan?,
+            &o.color[self.slot()],
+            &o.depth[self.slot()],
+        ))
+    }
+    #[cfg(feature = "native-metalfx")]
+    pub(crate) fn native_config(&self) -> UpscaleConfig {
+        self.config
+    }
+    #[cfg(feature = "native-metalfx")]
+    pub(crate) fn discard_color_history(&mut self) {
+        self.config.history_weight = 0.;
+    }
     pub(super) fn slot(&self) -> usize {
         self.frame.slot
     }

@@ -23,6 +23,8 @@ pub struct MotionTargets<P> {
     epoch: Arc<AtomicU64>,
     temporal: Option<incant_render::temporal::TemporalConfig>,
     upscale: bool,
+    #[cfg(feature = "native-metalfx")]
+    metalfx: Option<incant_render::metalfx::Preference>,
 }
 impl<P: TargetProvider> GpuRenderSettings<P> {
     /// Renderer::enable_motion_vectors must have prepared the fixed pipelines.
@@ -37,6 +39,8 @@ impl<P: TargetProvider> GpuRenderSettings<P> {
                     epoch: Arc::clone(&epoch),
                     temporal: None,
                     upscale: false,
+                    #[cfg(feature = "native-metalfx")]
+                    metalfx: None,
                 },
             },
             MotionReset(epoch),
@@ -74,6 +78,23 @@ impl<P: TargetProvider> GpuRenderSettings<P> {
         Ok((settings, reset))
     }
 }
+#[cfg(feature = "native-metalfx")]
+impl<P: TargetProvider> GpuRenderSettings<P> {
+    /// Explicit native preference with a reported portable fallback. Renderer
+    /// startup must call enable_metalfx; no authored or device-global setting.
+    pub fn with_metalfx(
+        self,
+        config: incant_render::upscaling::UpscaleConfig,
+        preference: incant_render::metalfx::Preference,
+    ) -> Result<
+        (GpuRenderSettings<MotionTargets<P>>, MotionReset),
+        incant_render::temporal::TemporalError,
+    > {
+        let (mut settings, reset) = self.with_temporal_upscaling(config)?;
+        settings.targets.metalfx = Some(preference);
+        Ok((settings, reset))
+    }
+}
 impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
     type Error = P::Error;
     type Frame = P::Frame;
@@ -88,6 +109,10 @@ impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
     }
     fn upscale_config(&self) -> Option<incant_render::upscaling::UpscaleConfig> {
         if self.upscale { self.temporal } else { None }
+    }
+    #[cfg(feature = "native-metalfx")]
+    fn metalfx_preference(&self) -> Option<incant_render::metalfx::Preference> {
+        self.metalfx
     }
     fn motion_epoch(&self) -> Option<u64> {
         Some(self.epoch.load(Ordering::Acquire))

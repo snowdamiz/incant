@@ -44,6 +44,10 @@ pub trait TargetProvider {
     fn upscale_config(&self) -> Option<incant_render::upscaling::UpscaleConfig> {
         None
     }
+    #[cfg(feature = "native-metalfx")]
+    fn metalfx_preference(&self) -> Option<incant_render::metalfx::Preference> {
+        None
+    }
     /// Trusted presentation opt-in, captured once per consumer lifetime.
     fn temporal_config(&self) -> Option<incant_render::temporal::TemporalConfig> {
         None
@@ -75,6 +79,8 @@ struct Live<P> {
     motion_epoch: Option<u64>,
     temporal_config: Option<incant_render::temporal::TemporalConfig>,
     upscale_config: Option<incant_render::upscaling::UpscaleConfig>,
+    #[cfg(feature = "native-metalfx")]
+    metalfx_preference: Option<incant_render::metalfx::Preference>,
 }
 /// Owns the actual GPU bindings plus its target provider. NativeRenderHost owns
 /// the sole CPU adapter and calls this consumer inside every mandatory sync.
@@ -109,6 +115,10 @@ impl<P: TargetProvider> GpuRenderConsumer<P> {
     }
     pub fn upscale_frame(&self) -> Option<incant_render::upscaling::UpscaleFrame> {
         self.live.as_ref().and_then(|l| l.scene.upscale_frame())
+    }
+    #[cfg(feature = "native-metalfx")]
+    pub fn metalfx_selection(&self) -> Option<incant_render::metalfx::Selection> {
+        self.live.as_ref().and_then(|l| l.scene.metalfx_selection())
     }
     pub fn temporal_frame(&self) -> Option<incant_render::temporal::TemporalFrame> {
         self.live
@@ -148,12 +158,31 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
         let motion_epoch = settings.targets.motion_epoch();
         let temporal_config = settings.targets.temporal_config();
         let upscale_config = settings.targets.upscale_config();
+        #[cfg(feature = "native-metalfx")]
+        let metalfx_preference = settings.targets.metalfx_preference();
+        #[cfg(feature = "native-metalfx")]
+        if metalfx_preference.is_some() && upscale_config.is_none() {
+            return Err(GpuHostError::Render(
+                incant_render::metalfx::MetalFxError::Interop.into(),
+            ));
+        }
         if upscale_config.is_some() && (temporal_config.is_some() || motion_epoch.is_none()) {
             return Err(GpuHostError::Render(Box::new(
                 incant_render::upscaling::UpscaleError::History,
             )));
         }
         if let Some(config) = upscale_config {
+            #[cfg(feature = "native-metalfx")]
+            if let Some(preference) = metalfx_preference {
+                scene
+                    .enable_metalfx(&settings.renderer, preference, config)
+                    .map_err(GpuHostError::Render)?;
+            } else {
+                scene
+                    .enable_temporal_upscaling(&settings.renderer, config)
+                    .map_err(GpuHostError::Render)?;
+            }
+            #[cfg(not(feature = "native-metalfx"))]
             scene
                 .enable_temporal_upscaling(&settings.renderer, config)
                 .map_err(GpuHostError::Render)?;
@@ -191,6 +220,8 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
                 motion_epoch,
                 temporal_config,
                 upscale_config,
+                #[cfg(feature = "native-metalfx")]
+                metalfx_preference,
             }),
             frames: 0,
         })
@@ -263,6 +294,17 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             // are retained in the bounded slot and discarded by the new owner.
             scene.set_dynamic_resolution(live.resolution_config)?;
             if let Some(config) = live.upscale_config {
+                #[cfg(feature = "native-metalfx")]
+                if let Some(preference) = live.metalfx_preference {
+                    scene
+                        .enable_metalfx(&self.renderer, preference, config)
+                        .map_err(GpuHostError::Render)?;
+                } else {
+                    scene
+                        .enable_temporal_upscaling(&self.renderer, config)
+                        .map_err(GpuHostError::Render)?;
+                }
+                #[cfg(not(feature = "native-metalfx"))]
                 scene
                     .enable_temporal_upscaling(&self.renderer, config)
                     .map_err(GpuHostError::Render)?;
