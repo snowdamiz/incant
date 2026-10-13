@@ -2612,7 +2612,9 @@ Exact private storage/body/collider construction at `0a96dc0f` has independent
 source/final CPU acceptance: 216 snapshot cases and 22 native controls per mode,
 with 144 continuation steps per dimension. Other owners remain trusted clones.
 The separately reviewed observer alias from `d6b53f8b` is included. This private
-main229 composition is paused before integration source review and qualification;
-producer results are not current-main results. Exact manager construction,
+main229 composition now has independent source acceptance and21 successful
+current checks:216 snapshot plus22 private native controls per parallel mode,
+with144 continuation steps per dimension. Final integration review is pending;
+[composed evidence](docs/spikes/physics-construction-main229.md) is retained. Exact manager construction,
 whole-owner admission and live physics saves remain closed.
 [Producer evidence](docs/spikes/physics-native-construction.md).
