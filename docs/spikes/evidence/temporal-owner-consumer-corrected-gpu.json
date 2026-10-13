@@ -1,0 +1,86 @@
+{
+  "schema": "incant-owner-history-bounded-gpu-v1",
+  "producer": "fd5b86d03a2cabfcc9bd5a8441a137645fb858ae",
+  "root_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-combined-gpu-root-20261013.json",
+    "sha256": "c7e75a9acf3481af638d50b511d435d1288e7d05b31491b0f9ea2d7f695f8097"
+  },
+  "independent_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/temporal-owner-combined-gpu-independent-20261013.json",
+    "sha256": "4e0dea70dbec919f37a9a6101fe1258823836155727e4400140f9d346a7b6006"
+  },
+  "audit": {
+    "verified": true,
+    "accepted": true,
+    "released_at": "2026-10-13T17:33:48.800074+00:00",
+    "children": [
+      {
+        "job": "numeric-wgsl",
+        "exit": 0,
+        "pid": 1316,
+        "accepted": true,
+        "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+        "charged_submissions": 12,
+        "charged_maps": 12,
+        "stdout_sha256": "9b5876c0d876831c9d3b91f3f267cf0ccaa0ab1d16ba732143eca94cba7a564d",
+        "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+      },
+      {
+        "job": "numeric-cooked-metal",
+        "exit": 0,
+        "pid": 1323,
+        "accepted": true,
+        "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+        "charged_submissions": 12,
+        "charged_maps": 12,
+        "stdout_sha256": "3eb245adc0de2d8626462cbdd1c42925e13df02003fbfec1cbc17766bf387d7c",
+        "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+      },
+      {
+        "job": "retained-wgsl",
+        "exit": 0,
+        "pid": 1329,
+        "accepted": true,
+        "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+        "charged_submissions": 24,
+        "charged_maps": 12,
+        "stdout_sha256": "0fd457d37e5ce1e68ca375093535087057861e26d114435652d56c7824da4392",
+        "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+      },
+      {
+        "job": "retained-cooked-metal",
+        "exit": 0,
+        "pid": 1372,
+        "accepted": true,
+        "adapter": "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }",
+        "charged_submissions": 24,
+        "charged_maps": 12,
+        "stdout_sha256": "eb8bf91facedfbb38a657740b1452d7e457f424c310aab8e8f90987bf5877202",
+        "stderr_sha256": "77ab8aa1c98cb41d2b477cf761985c5fca6ce2881e2976e24f6bd07b5e76c8ef"
+      }
+    ],
+    "charged_submissions": 72,
+    "charged_maps": 48,
+    "ledger_sha256": "f3e576d63d885736ed47e35e68f25993de3c2f89ead6d07755962954f1f8a9e0",
+    "debits_sha256": "fcdbd24c5e4238c45bca9612f250a2480d38f1b86998aa5919f458ba81be95d0",
+    "release_sha256": "c1bdfed0b833a1e6c275170ce9a39a34f265e22ce8d5969e9e5068239e310899",
+    "no_images": true,
+    "exact_cross_backend_printed_cases": 12,
+    "acp_reaped": true,
+    "historical_and_preserved_inputs_exact": true
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-owner-consumer-corrected-gpu/records.json.gz",
+    "sha256": "0fd92543637fbd3fa80e3825477345bcb7db287732947d34a86b7f013b9c93a2",
+    "raw_sha256": "70942d4b85e64950e634458001c8318edefdfd62a54bd1d255b069555ccfedb9",
+    "records": 31,
+    "payloads": 27
+  },
+  "scope": [
+    "Exactly four child processes: numerical default/cooked, then retained default/cooked. All reached markers; 72 explicit queue submissions and48maps.",
+    "All12 printed numerical case observations byte-equal across backends; case3 current-only whole color/depth/record comparison passed, fresh center4.172325e-7.",
+    "Retained full pixel data not externally retained; assertion-only inside the pinned test binary, not a claim of full cross-backend image equality.",
+    "Historical GPU001 and prior visual failures remain untouched. No appearance, general convergence, performance, phone, queued memory, or phase acceptance.",
+    "No further GPU/ACP work authorized by this review."
+  ]
+}

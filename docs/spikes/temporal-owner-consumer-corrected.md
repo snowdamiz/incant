@@ -45,7 +45,16 @@ shader payloads are byte-identical; nine manifest producer stamps changed, and
 67 old records were not rebuilt. The two new binaries are frozen separately.
 
 Independent source reviews accepted the shader, reference fixture and retained
-lifecycle test. Fresh bounded GPU execution remains pending. The older private
+lifecycle test. The [fresh bounded Metal run](evidence/temporal-owner-consumer-corrected-gpu.json)
+passed the numerical and retained tests in both frozen binaries on Apple M5 Pro.
+All four children and their supervisor exited cleanly: 72 explicit submissions
+and 48 maps. The corrected case 3 is byte-identical to its current-only reference;
+its center is `4.172325e-7`, consistent with the tiny positive-weight CPU diagnosis.
+The old binary was not rerun. All twelve printed numerical observations match
+between WGSL and cooked Metal; retained pixel data are assertion-only, not an
+external cross-backend image comparison.
+
+Appearance acceptance remains pending. The older private
 upscaling/MetalFX ancestry, appearance failures, current-main AO integration,
 device measurements and performance gates remain open. This is not permission
 to publish that entire private branch or a Phase 1 completion claim.
