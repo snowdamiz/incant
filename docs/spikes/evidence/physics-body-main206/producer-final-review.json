@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-13T06:24:48.719771+00:00",
+  "decision": "accept scoped inert body-state producer for integration",
+  "producer": "c250c23eb2bed7acd667b2e97bcb10789217463c",
+  "manifest_sha256": "121429371ff5c6c8a3843e28a57d35447ec1e82fc0672cbfba75fa84600f8828",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-body-state-001/source-001/freeze.json",
+    "sha256": "84ae6c4e7a9ff96c80740701c6e928325a6443650d85dc07538ce3ef9d0f89fe"
+  },
+  "review": [
+    "Read complete production model/validator/464-byte codec and attachment accessor",
+    "Read hostile/budget/identity/generation/native observer tests and matched native RigidBody/component fields",
+    "Exact finite float bits, known enum/bool domains, dimensional padding, native CCD/MAX/infinite-mass-zero and sleep sentinels retained",
+    "Before allocation: owner identity/count/completed-journal witness/length; shared Budget charges rows and encoded bytes",
+    "Independently rehashed all99 archive records87 unique payloads and20 actual pinned sources",
+    "All45 source copies match committed c250 bytes;13 actual command logs rehashed; final8 commands exit0,101 tests independently recounted"
+  ],
+  "limits": [
+    "Inert regular body data only; no live native deserialization or physics save admission",
+    "Pending whole-world identity, mass-derived/PSD/island reciprocal ownership and work policy",
+    "No restored continuation or performance/phone/phase gate claim"
+  ]
+}
