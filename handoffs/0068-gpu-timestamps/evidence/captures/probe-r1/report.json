@@ -1,0 +1,89 @@
+{
+  "case": "probe",
+  "checks": {
+    "default_device_requests_no_timestamp_feature": true,
+    "default_stats_disabled": true,
+    "default_take_none": true,
+    "period_finite_positive": true,
+    "timing_constructor_succeeded": true,
+    "timing_device_has_encoder_timestamps": true,
+    "timing_stats_empty": true,
+    "timing_take_none_before_frames": true
+  },
+  "disabled": {
+    "renderer": {
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "adapter_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "device_features": "Features { features_wgpu: FeaturesWGPU(0x0), features_webgpu: FeaturesWebGPU(0x0) }",
+      "device_timestamp_features": {
+        "TIMESTAMP_QUERY": false,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "queue_timestamp_period_ns": 1.0,
+      "timing_stats": {
+        "abandoned": 0,
+        "enabled": false,
+        "pending": 0,
+        "ready": 0,
+        "retired": 0,
+        "skipped": 0
+      }
+    },
+    "take": {
+      "outcome": "none"
+    }
+  },
+  "enabled": {
+    "renderer": {
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "adapter_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "device_features": "Features { features_wgpu: FeaturesWGPU(TIMESTAMP_QUERY_INSIDE_ENCODERS), features_webgpu: FeaturesWebGPU(TIMESTAMP_QUERY) }",
+      "device_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "queue_timestamp_period_ns": 1.0,
+      "timing_stats": {
+        "abandoned": 0,
+        "enabled": true,
+        "pending": 0,
+        "ready": 0,
+        "retired": 0,
+        "skipped": 0
+      }
+    },
+    "take": {
+      "outcome": "none"
+    }
+  },
+  "frames_rendered": 0,
+  "outcome": "pass",
+  "pngs": [],
+  "timed_submissions": 0
+}

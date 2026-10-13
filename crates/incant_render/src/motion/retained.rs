@@ -3,6 +3,7 @@ use super::{
     draw::{Draw, MotionDraw},
     owner::{Extent, History, Pending},
     plan,
+    provenance::{self, MotionChanges},
     targets::Targets,
 };
 use crate::{
@@ -17,10 +18,13 @@ use wgpu::util::DeviceExt;
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
 struct Previous {
     world: [[f32; 4]; 4],
-    valid: [f32; 4],
+    valid: f32,
+    owner_word: u32,
+    reserved: [u32; 2],
 }
 struct Rows {
     slots: Vec<usize>,
+    owner_base: u32,
     packed: Vec<Previous>,
     buffer: wgpu::Buffer,
 }
@@ -33,6 +37,9 @@ struct Frame {
 }
 const _: () = {
     assert!(size_of::<Previous>() == 80);
+    assert!(std::mem::offset_of!(Previous, valid) == 64);
+    assert!(std::mem::offset_of!(Previous, owner_word) == 68);
+    assert!(std::mem::offset_of!(Previous, reserved) == 72);
     assert!(size_of::<Frame>() == 144);
 };
 
@@ -41,6 +48,7 @@ pub(crate) struct MotionState {
     nodes: Vec<usize>,
     worlds: Vec<DMat4>,
     rows: Vec<Rows>,
+    provenance: provenance::State,
     pub(super) targets: Option<Arc<Targets>>,
     slot: usize,
     bytes: u64,
@@ -49,6 +57,37 @@ pub(crate) struct Prepared {
     history: Pending,
     targets: Option<Arc<Targets>>,
     slot: usize,
+}
+pub(crate) struct MotionView<'a> {
+    pub output: [u32; 2],
+    pub plan: &'a crate::resolution::FramePlan,
+    pub temporal: bool,
+}
+pub(crate) struct TemporalInput {
+    pub frame: MotionFrame,
+    pub rect: [f32; 4],
+    pub surfaces: Option<TemporalSurfaces>,
+}
+pub(crate) struct TemporalSurfaces {
+    pub motion: wgpu::TextureView,
+    pub previous_depth: wgpu::TextureView,
+    pub slot: usize,
+}
+impl Prepared {
+    pub fn temporal_input(&self, rect: [f32; 4]) -> TemporalInput {
+        TemporalInput {
+            frame: self.history.frame.clone(),
+            rect,
+            surfaces: self.targets.as_ref().map(|targets| TemporalSurfaces {
+                motion: targets.motion.clone(),
+                previous_depth: targets.depth[1 - self.slot].clone(),
+                slot: self.slot,
+            }),
+        }
+    }
+    pub fn jitter_phase(&self) -> Option<u32> {
+        self.history.frame.jitter_phase()
+    }
 }
 fn capacity(batch: &Batch) -> usize {
     if batch.animated.is_some() {
@@ -99,6 +138,7 @@ impl MotionState {
                 nodes: Vec::new(),
                 worlds: Vec::new(),
                 rows: Vec::new(),
+                provenance: provenance::State::new(0),
                 targets: None,
                 slot: 1,
                 bytes: size_of::<Self>() as u64,
@@ -141,12 +181,42 @@ impl MotionState {
         // Before allocating even the temporary node list, charge its worst case
         // capacity and every previous entity transform (duplicates only reduce it).
         plan::charge(&mut bytes, slots, size_of::<usize>() + size_of::<DMat4>())?;
-        plan::charge(&mut bytes, 1, size_of::<Frame>() * 2)?;
+        plan::charge(&mut bytes, 1, size_of::<Frame>() * 4)?;
+        provenance::charge(&mut bytes, live.batches.len(), slots)?;
         plan::overlap(
             old.map_or(0, |o| o.bytes),
             bytes,
             plan::MAX_MOTION_INSTANCE_BYTES,
         )?;
+        let mut groups = Vec::with_capacity(live.batches.len());
+        for (batch_index, batch) in live.batches.iter().enumerate() {
+            let primitive = &batch.model.primitives[batch.primitive];
+            if batch.model.materials.materials[primitive.material].alpha
+                == incant_assets_runtime::AlphaMode::Blend
+            {
+                continue;
+            }
+            let key = if let Some(binding) = batch.animated {
+                let [instance, node, geometry] = animation::motion_owner_key(binding);
+                provenance::Key([1, instance, node, geometry])
+            } else {
+                // All allocations remain alive in the retained scenes, so exact
+                // shared allocation identity is safe to use only during grouping.
+                provenance::Key([
+                    0,
+                    batch.placements.as_ptr() as usize,
+                    batch.placements.len(),
+                    0,
+                ])
+            };
+            groups.push(provenance::Group {
+                key,
+                batch: batch_index,
+                count: capacity(batch),
+            });
+        }
+        let (owners, highest) = provenance::assign(&mut groups, live.batches.len())?;
+        let provenance = provenance::State::new(highest);
         let mut nodes = Vec::with_capacity(slots);
         for batch in &live.batches {
             if let Some(binding) = batch.animated {
@@ -159,7 +229,7 @@ impl MotionState {
         nodes.dedup();
         let worlds = vec![DMat4::IDENTITY; nodes.len()];
         let mut rows = Vec::with_capacity(live.batches.len());
-        for batch in &live.batches {
+        for (batch, owner) in live.batches.iter().zip(owners) {
             let count = capacity(batch);
             let mut slots = Vec::with_capacity(count);
             if let Some(binding) = batch.animated {
@@ -178,6 +248,7 @@ impl MotionState {
             }
             rows.push(Rows {
                 slots,
+                owner_base: owner.first,
                 packed: Vec::with_capacity(count),
                 buffer: renderer.device.create_buffer(&wgpu::BufferDescriptor {
                     label: Some("Motion previous instance rows"),
@@ -192,6 +263,7 @@ impl MotionState {
             nodes,
             worlds,
             rows,
+            provenance,
             targets: None,
             slot: 1,
             bytes,
@@ -201,8 +273,16 @@ impl MotionState {
     pub(crate) fn readback_view(&self) -> Option<wgpu::TextureView> {
         self.targets.as_ref().map(|t| t.motion.clone())
     }
+    pub fn target_bytes(&self) -> u64 {
+        self.targets.as_ref().map_or(0, |t| t.bytes)
+    }
     pub fn frame(&self) -> Option<MotionFrame> {
         self.history.frame()
+    }
+    pub fn changes(&self) -> Option<MotionChanges<'_>> {
+        self.history
+            .frame()
+            .map(|frame| self.provenance.view(frame))
     }
     pub fn invalidate(&mut self) {
         self.history.invalidate();
@@ -213,14 +293,23 @@ impl MotionState {
         live: &RenderScene,
         current: &RenderScene,
         input: &SceneInput,
-        output: [u32; 2],
-        plan: &crate::resolution::FramePlan,
+        view: MotionView<'_>,
     ) -> Result<(Option<MotionDraw>, Prepared)> {
+        let MotionView {
+            output,
+            plan,
+            temporal,
+        } = view;
         topology(live, current)?;
-        let history = self.history.prepare(
-            Extent::new(output, plan.size, plan.rect, current.camera),
-            current.camera.matrix(plan.rect[2] / plan.rect[3])?,
-        )?;
+        let extent = Extent::new(output, plan.size, plan.rect, current.camera);
+        let history = if temporal {
+            self.history
+                .prepare_temporal(extent, current.camera, plan.rect)?
+        } else {
+            self.history
+                .prepare(extent, current.camera.matrix(plan.rect[2] / plan.rect[3])?)?
+        };
+        self.provenance.begin();
         if history.frame.bypassed() {
             return Ok((
                 None,
@@ -244,6 +333,17 @@ impl MotionState {
         for (batch, rows) in current.batches.iter().zip(&mut self.rows) {
             rows.packed.clear();
             if let Some(binding) = batch.animated {
+                let node = animation::motion_node(binding, &current.animations);
+                let previous_entity = self.worlds[rows.slots[0]];
+                let current_entity = input.nodes[node].world;
+                let changed = valid == 0.
+                    || !provenance::same_matrix(previous_entity, current_entity)
+                    || !animation::motion_pose_unchanged(
+                        binding,
+                        &live.animations,
+                        &current.animations,
+                    );
+                let owner_word = self.provenance.mark(rows.owner_base, changed);
                 if batch.count > 0 {
                     let world = animation::motion_world(
                         binding,
@@ -252,17 +352,23 @@ impl MotionState {
                     );
                     rows.packed.push(Previous {
                         world: world.to_cols_array_2d(),
-                        valid: [valid, 0., 0., 0.],
+                        valid,
+                        owner_word,
+                        reserved: [0; 2],
                     });
                 }
             } else {
-                pack_static(
-                    &batch.placements,
-                    &rows.slots,
-                    &self.worlds,
+                StaticPrevious {
+                    placements: &batch.placements,
+                    slots: &rows.slots,
+                    worlds: &self.worlds,
+                    owner_base: rows.owner_base,
+                }
+                .pack(
                     input,
                     batch.mirrored,
                     valid,
+                    &mut self.provenance,
                     &mut rows.packed,
                 )?;
             }
@@ -285,23 +391,38 @@ impl MotionState {
             previous: history.previous.to_cols_array_2d(),
             rect: plan.rect,
         };
-        let buffer = renderer
-            .device
-            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
-                label: Some("Motion frame"),
-                contents: bytemuck::bytes_of(&uniform),
-                usage: wgpu::BufferUsages::UNIFORM,
-            });
-        let frame = renderer
-            .device
-            .create_bind_group(&wgpu::BindGroupDescriptor {
-                label: Some("Motion frame"),
-                layout: &system.globals,
-                entries: &[wgpu::BindGroupEntry {
-                    binding: 0,
-                    resource: buffer.as_entire_binding(),
-                }],
-            });
+        let group = |uniform: Frame| {
+            let buffer = renderer
+                .device
+                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                    label: Some("Motion frame"),
+                    contents: bytemuck::bytes_of(&uniform),
+                    usage: wgpu::BufferUsages::UNIFORM,
+                });
+            renderer
+                .device
+                .create_bind_group(&wgpu::BindGroupDescriptor {
+                    label: Some("Motion frame"),
+                    layout: &system.globals,
+                    entries: &[wgpu::BindGroupEntry {
+                        binding: 0,
+                        resource: buffer.as_entire_binding(),
+                    }],
+                })
+        };
+        let frame = group(uniform);
+        let overlay_frame = if temporal {
+            Some(group(Frame {
+                current: current
+                    .camera
+                    .unjittered()
+                    .matrix(plan.rect[2] / plan.rect[3])?
+                    .to_cols_array_2d(),
+                ..uniform
+            }))
+        } else {
+            None
+        };
         let mut draws = Vec::with_capacity(current.batches.len());
         for ((batch, old), rows) in current.batches.iter().zip(&live.batches).zip(&self.rows) {
             let primitive = &batch.model.primitives[batch.primitive];
@@ -313,7 +434,8 @@ impl MotionState {
                 batch: Arc::clone(batch),
                 previous_vertices: old.vertices.as_ref().unwrap_or(&primitive.vertices).clone(),
                 previous_instances: rows.buffer.clone(),
-                pipeline: system.pipeline(material.double_sided, batch.mirrored),
+                pipeline: system.pipeline(material.double_sided, batch.mirrored, false),
+                depth_pipeline: system.pipeline(material.double_sided, batch.mirrored, true),
             });
         }
         Ok((
@@ -322,6 +444,8 @@ impl MotionState {
                 slot,
                 rect: plan.rect,
                 frame,
+                overlay_frame,
+                overlay_depth: None,
                 draws,
             }),
             Prepared {
@@ -345,35 +469,57 @@ impl MotionState {
         for (&node, world) in self.nodes.iter().zip(&mut self.worlds) {
             *world = input.nodes[node].world;
         }
+        self.provenance.accept();
         self.history.accept(pending.history);
         self.targets = pending.targets;
         self.slot = pending.slot;
     }
 }
 
-fn pack_static(
-    placements: &[crate::scene::Placement],
-    slots: &[usize],
-    previous: &[DMat4],
-    input: &SceneInput,
-    mirrored: bool,
-    valid: f32,
-    out: &mut Vec<Previous>,
-) -> Result<()> {
-    for (placement, &slot) in placements.iter().zip(slots) {
-        let current_world = (input.nodes[placement.node].world * placement.local).as_mat4();
-        let transform = crate::scene::Instance::new(current_world)?;
-        if (transform.normal[0][3] < 0.) != mirrored {
-            continue;
-        }
-        let previous = (previous[slot] * placement.local).as_mat4();
-        out.push(Previous {
-            world: previous.to_cols_array_2d(),
-            valid: [valid, 0., 0., 0.],
-        });
-    }
-    Ok(())
+struct StaticPrevious<'a> {
+    placements: &'a [crate::scene::Placement],
+    slots: &'a [usize],
+    worlds: &'a [DMat4],
+    owner_base: u32,
 }
+impl StaticPrevious<'_> {
+    fn pack(
+        &self,
+        input: &SceneInput,
+        mirrored: bool,
+        valid: f32,
+        provenance: &mut provenance::State,
+        out: &mut Vec<Previous>,
+    ) -> Result<()> {
+        for (index, (placement, &slot)) in self.placements.iter().zip(self.slots).enumerate() {
+            let current = input.nodes[placement.node].world * placement.local;
+            let old = self.worlds[slot] * placement.local;
+            let changed = valid == 0. || !provenance::same_matrix(old, current);
+            let owner_word = provenance.mark(
+                if self.owner_base == 0 {
+                    0
+                } else {
+                    self.owner_base + index as u32
+                },
+                changed,
+            );
+            let current_world = current.as_mat4();
+            let transform = crate::scene::Instance::new(current_world)?;
+            if (transform.normal[0][3] < 0.) != mirrored {
+                continue;
+            }
+            let previous = (self.worlds[slot] * placement.local).as_mat4();
+            out.push(Previous {
+                world: previous.to_cols_array_2d(),
+                valid,
+                owner_word,
+                reserved: [0; 2],
+            });
+        }
+        Ok(())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -411,8 +557,19 @@ mod tests {
             DMat4::from_scale(glam::DVec3::new(-2., 1., 1.)),
         ];
         let mut rows = Vec::with_capacity(2);
+        let mut provenance = provenance::State::new(2);
         let allocations = crate::retained_alloc::measured(|| {
-            pack_static(&placements, &[0, 1], &worlds, &input, false, 1., &mut rows).unwrap();
+            StaticPrevious {
+                placements: &placements,
+                slots: &[0, 1],
+                worlds: &worlds,
+                owner_base: 1,
+            }
+            .pack(&input, false, 1., &mut provenance, &mut rows)
+            .unwrap();
+            assert_eq!(rows[0].owner_word, 2 | provenance::CHANGED);
+            assert_eq!(rows[0].valid, 1.);
+            assert_eq!(rows[0].reserved, [0; 2]);
             assert_eq!(rows.len(), 1);
             assert_eq!(
                 rows[0].world,
@@ -421,13 +578,38 @@ mod tests {
                     .to_cols_array_2d()
             );
             rows.clear();
-            pack_static(&placements, &[0, 1], &worlds, &input, true, 1., &mut rows).unwrap();
+            StaticPrevious {
+                placements: &placements,
+                slots: &[0, 1],
+                worlds: &worlds,
+                owner_base: 1,
+            }
+            .pack(&input, true, 1., &mut provenance, &mut rows)
+            .unwrap();
+            assert_eq!(rows[0].owner_word, 1 | provenance::CHANGED);
+            assert_eq!(rows[0].valid, 1.);
+            assert_eq!(rows[0].reserved, [0; 2]);
             assert_eq!(rows.len(), 1);
             assert_eq!(
                 rows[0].world,
                 (worlds[0] * placements[0].local)
                     .as_mat4()
                     .to_cols_array_2d()
+            );
+            rows.clear();
+            provenance.begin();
+            let accepted = [input.nodes[0].world, input.nodes[1].world];
+            StaticPrevious {
+                placements: &placements,
+                slots: &[0, 1],
+                worlds: &accepted,
+                owner_base: 1,
+            }
+            .pack(&input, true, 1., &mut provenance, &mut rows)
+            .unwrap();
+            assert_eq!(
+                rows[0].owner_word, 1,
+                "same placement after handedness change"
             );
         });
         assert_eq!(allocations, 0);

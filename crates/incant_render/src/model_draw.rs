@@ -42,21 +42,36 @@ impl Renderer {
                 crate::environment::MAX_SPECULAR_LOD,
             ],
         };
-        let camera = self
-            .device
-            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+        let camera_group = |frame: Frame| {
+            let camera = self
+                .device
+                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                    label: Some("Material preview frame"),
+                    contents: bytemuck::bytes_of(&frame),
+                    usage: wgpu::BufferUsages::UNIFORM,
+                });
+            self.device.create_bind_group(&wgpu::BindGroupDescriptor {
                 label: Some("Material preview frame"),
-                contents: bytemuck::bytes_of(&frame),
-                usage: wgpu::BufferUsages::UNIFORM,
-            });
-        let bind_group = self.device.create_bind_group(&wgpu::BindGroupDescriptor {
-            label: Some("Material preview frame"),
-            layout: &self.materials.globals,
-            entries: &[wgpu::BindGroupEntry {
-                binding: 0,
-                resource: camera.as_entire_binding(),
-            }],
-        });
+                layout: &self.materials.globals,
+                entries: &[wgpu::BindGroupEntry {
+                    binding: 0,
+                    resource: camera.as_entire_binding(),
+                }],
+            })
+        };
+        let bind_group = camera_group(frame);
+        let transparent_camera = if scene.camera.jitter != [0.; 2] {
+            Some(camera_group(Frame {
+                matrix: scene
+                    .camera
+                    .unjittered()
+                    .matrix(target.rect[2] / target.rect[3])?
+                    .to_cols_array_2d(),
+                ..frame
+            }))
+        } else {
+            None
+        };
         let mut opaque = Vec::new();
         let shadows = self.prepare_shadow_draw(scene, target.rect[2] / target.rect[3])?;
         let lighting = self.lighting.prepare(
@@ -100,14 +115,17 @@ impl Renderer {
         // Primitive-center sorting handles ordinary layered transparency. Crossing
         // triangles and intersecting transparent surfaces remain order-dependent.
         transparent.sort_by(|a, b| b.depth.total_cmp(&a.depth));
+        let opaque_count = opaque.len();
         opaque.extend(transparent);
         Ok(Some(ModelDraw {
             target,
             camera: bind_group,
+            transparent_camera,
             environment: environment.resource.group.clone(),
             lighting,
             shadows,
             draws: opaque,
+            opaque_count,
         }))
     }
 }
@@ -120,17 +138,71 @@ struct Draw {
 pub(crate) struct ModelDraw {
     target: ModelTarget,
     camera: wgpu::BindGroup,
+    transparent_camera: Option<wgpu::BindGroup>,
     environment: wgpu::BindGroup,
     pub lighting: crate::lighting::PreparedLighting,
     pub shadows: super::ShadowDraw,
     draws: Vec<Draw>,
+    opaque_count: usize,
 }
 impl ModelDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        self.encode_range(
+            encoder,
+            0..self.draws.len(),
+            timestamps,
+            &self.target.color,
+            &self.camera,
+        );
+    }
+    pub fn encode_opaque(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        self.encode_range(
+            encoder,
+            0..self.opaque_count,
+            timestamps,
+            &self.target.color,
+            &self.camera,
+        );
+    }
+    pub fn encode_transparent(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        self.encode_range(
+            encoder,
+            self.opaque_count..self.draws.len(),
+            timestamps,
+            &self.target.color,
+            self.transparent_camera.as_ref().unwrap_or(&self.camera),
+        );
+    }
+    pub fn has_opaque(&self) -> bool {
+        self.opaque_count > 0
+    }
+    pub fn has_transparent(&self) -> bool {
+        self.opaque_count < self.draws.len()
+    }
+    fn encode_range(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        range: std::ops::Range<usize>,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+        color: &wgpu::TextureView,
+        camera: &wgpu::BindGroup,
+    ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Imported model geometry"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                view: &self.target.color,
+                view: color,
                 resolve_target: None,
                 depth_slice: None,
                 ops: wgpu::Operations {
@@ -146,16 +218,16 @@ impl ModelDraw {
                 }),
                 stencil_ops: None,
             }),
-            timestamp_writes: None,
+            timestamp_writes: timestamps,
             occlusion_query_set: None,
             multiview_mask: None,
         });
-        pass.set_bind_group(0, &self.camera, &[]);
+        pass.set_bind_group(0, camera, &[]);
         pass.set_bind_group(2, &self.environment, &[]);
         pass.set_bind_group(3, &self.lighting.shading, &[]);
         let [x, y, w, h] = self.target.rect;
         pass.set_viewport(x, y, w, h, 0., 1.);
-        for draw in &self.draws {
+        for draw in &self.draws[range] {
             let batch = &draw.batch;
             let primitive = &batch.model.primitives[batch.primitive];
             let material = &batch.model.materials.materials[primitive.material];

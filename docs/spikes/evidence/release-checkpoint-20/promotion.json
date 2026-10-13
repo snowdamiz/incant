@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-13T08:07:27.879200+00:00",
+  "checkpoint": 20,
+  "pr": "https://github.com/snowdamiz/incant/pull/174",
+  "merged_at": "2026-10-13T08:06:59Z",
+  "release": "065aac69289bf9aab067dbd2148624904a860d5e",
+  "release_before": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+  "candidate": "99ba87ed82b4009680eaaa5089ffbd76f6bedc58",
+  "selected_main": "7bfeecfdfaa4a52ec198d1caee0fcb4ff9399fd9",
+  "tree": "71e55928908092313a4bcaf4d799cc09f976726c",
+  "main_now": "dbe8e95126260302ef15f56f467972436cefe9dd",
+  "prepromotion_sha256": "d3df869a355013181e9e5533c6679abe5c4a18d61b3e47698c7f03750e62e3f3",
+  "independent_review_sha256": "27121f31b50b38fca685493497547f682407c1650bb3abf659507c0b736a1c12",
+  "release_parents": [
+    "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+    "99ba87ed82b4009680eaaa5089ffbd76f6bedc58"
+  ],
+  "all_required_success": 23,
+  "push_workflows_success": 8,
+  "merge_commit": "commit 065aac69289bf9aab067dbd2148624904a860d5e\nMerge: 2444d81f 99ba87ed\nAuthor:     Andrew <43323844+snowdamiz@users.noreply.github.com>\nAuthorDate: Tue Oct 13 04:06:58 2026 -0400\nCommit:     GitHub <noreply@github.com>\nCommitDate: Tue Oct 13 04:06:58 2026 -0400\n\n    Merge pull request #174 from snowdamiz/codex/release-candidate\n    \n    Promote checkpoint20 at exact candidate 99ba87ed82b4009680eaaa5089ffbd76f6bedc58, whose tree 71e55928908092313a4bcaf4d799cc09f976726c equals reviewed main205 7bfeecfdfaa4a52ec198d1caee0fcb4ff9399fd9. All 23 required contexts and all eight exact-head push workflows succeeded. Independent prepromotion review accepted 27121f31b50b38fca685493497547f682407c1650bb3abf659507c0b736a1c12. Prior failed checkpoints remain retained; later main206-209 work is outside this tested release tree. This promotion does not approve a phase, device, performance, signing or distribution gate.\n    \n    Built-by: astra",
+  "scope": "Exact selected main205 tested integration baseline; no phase/device/performance gate approval."
+}

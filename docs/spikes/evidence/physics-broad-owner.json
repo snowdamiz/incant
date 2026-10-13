@@ -1,0 +1,1309 @@
+{
+  "schema": 1,
+  "scope": "Inert broad-phase pair history and distinct pending-tree witness; physics saves remain unsupported",
+  "base": "e921a308ca73e0331540dac4c0f90bce372b200b",
+  "evidence_root": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001",
+  "freeze_sha256": "c6d115528d5ffcf12ab6be0bdd3305623d8ce5e2b467b163e3a37aafa381962f",
+  "sources": [
+    {
+      "path": "crates/incant_physics_snapshot/src/broad_owner/codec.rs",
+      "sha256": "23b2207e767287ccdc900f44d0b8b8c4674fa3dc8df0e9f50e61da54785fde9a",
+      "bytes": 3938,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/broad_owner/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/broad_owner/mod.rs",
+      "sha256": "fbb1a31904306751fa04dac42d5d82bf383acf7b682c465de112b307d3c27274",
+      "bytes": 2515,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/broad_owner/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/broad_owner/validate.rs",
+      "sha256": "0ebfa66d69615e5596c225bd0ecb9d7c3e26c59f35f80e4f60dc936b397e6d7b",
+      "bytes": 6342,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/broad_owner/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "31cbfc95b4e03cdbd88d47b9f60e9196601a463e6080bef87bc5cf9d8249d8c6",
+      "bytes": 6265,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "f5a4596dfecdbe7a47da23b8af8d8cccb860220d356fdda24808a7b77cfad8e6",
+      "bytes": 2375,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/pending_bvh.rs",
+      "sha256": "ebf007d74f072c5e5308a016cfbd19b98356f179272d1947bed59684e989d3f9",
+      "bytes": 3661,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/pending_bvh.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "sha256": "4b346dc36e2550af09032d0e4c0f1d121ab40a560ded8817d38910f180efeceb",
+      "bytes": 2595,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/rigid_owner/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "b2b4e32f6424fc1882c23894b6dfeb3728ea370abff610a48cc40e8341b88628",
+      "bytes": 6338,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/broad_capture.rs",
+      "sha256": "78637ddb85ae37324e842f92ca97ee029f8a364b3463b19176da39f58d1e37e5",
+      "bytes": 3783,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/broad_capture.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/broad_cases.rs",
+      "sha256": "39c7229efa6e462cad50d115a5c21922166d1858271bf7613a4647004d89bd19",
+      "bytes": 11923,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/broad_cases.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/broad_checks.rs",
+      "sha256": "0d1d1d5aa2de49766c388e0adb7908a99810e040a6b08bb7dfc32fc9a1744247",
+      "bytes": 8164,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/broad_checks.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/narrow_cases.rs",
+      "sha256": "6d8ecc4da3862f30c385ebb0eadd0b0298185f5dc7290cd534d19b88371443c7",
+      "bytes": 15648,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/narrow_cases.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "56b5b65e66c809627fb2ada70641739e31da9adf37d64d052d82698801a43bd8",
+      "bytes": 36780,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs"
+    },
+    {
+      "path": "docs/spikes/physics-broad-owner.md",
+      "sha256": "95a70e0d0ff901af847d7fd910c1f7d9e38206ab537148fa88c8a2f7a0292452",
+      "bytes": 7527,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/docs/spikes/physics-broad-owner.md"
+    }
+  ],
+  "baselines": [
+    {
+      "path": "Cargo.toml",
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+      "bytes": 3722,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/Cargo.toml"
+    },
+    {
+      "path": "Cargo.lock",
+      "sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+      "bytes": 252688,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba",
+      "bytes": 890,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/records.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4",
+      "bytes": 4468,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/collider_state/mod.rs",
+      "sha256": "1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f",
+      "bytes": 3850,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/collider_state/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/collider_state/validate.rs",
+      "sha256": "8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f",
+      "bytes": 2648,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/collider_state/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+      "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492",
+      "bytes": 9653,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/rigid_owner/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254",
+      "bytes": 2341,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/narrow_owner/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23",
+      "bytes": 4760,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/narrow_owner/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/continuation_cases.rs",
+      "sha256": "8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e",
+      "bytes": 8569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/continuation_cases.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs"
+    },
+    {
+      "path": "crates/incant_runtime/src/save.rs",
+      "sha256": "8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754",
+      "bytes": 20624,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_runtime/src/save.rs"
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/mod.rs",
+      "sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+      "bytes": 12191,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/crates/incant_script/src/checkpoint/mod.rs"
+    }
+  ],
+  "native_pins": [
+    {
+      "path": "third_party/rapier2d/src/geometry/broad_phase_bvh/mod.rs",
+      "sha256": "cdc9b6a89a3e521622f9e7181138b7c19cbfdbda7755c780d07e2050794b1259",
+      "bytes": 15718,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/geometry/broad_phase_bvh/mod.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/broad_phase_bvh/update.rs",
+      "sha256": "62fa0c4c5a959cb32dc8ddd5416174b0135de9c9d3199dd3ad0bdcb3eb924fec",
+      "bytes": 29531,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/geometry/broad_phase_bvh/update.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/mod.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/data/coarena.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/pipeline/physics_world.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/mod.rs",
+      "sha256": "31e0c921654bb7b7156011e53af869aa3774bb003ce64cf638ba452da22b30a4",
+      "bytes": 13494,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/pipeline/physics_pipeline/mod.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/substep.rs",
+      "sha256": "c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447",
+      "bytes": 30677,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/pipeline/physics_pipeline/substep.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/pipeline/physics_pipeline/solve.rs",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/pipeline/physics_pipeline/solve.rs"
+    },
+    {
+      "path": "third_party/rapier2d/src/dynamics/integration_parameters.rs",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier2d/src/dynamics/integration_parameters.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/broad_phase_bvh/mod.rs",
+      "sha256": "cdc9b6a89a3e521622f9e7181138b7c19cbfdbda7755c780d07e2050794b1259",
+      "bytes": 15718,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/geometry/broad_phase_bvh/mod.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/broad_phase_bvh/update.rs",
+      "sha256": "62fa0c4c5a959cb32dc8ddd5416174b0135de9c9d3199dd3ad0bdcb3eb924fec",
+      "bytes": 29531,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/geometry/broad_phase_bvh/update.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/mod.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/data/coarena.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/pipeline/physics_world.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_pipeline/mod.rs",
+      "sha256": "31e0c921654bb7b7156011e53af869aa3774bb003ce64cf638ba452da22b30a4",
+      "bytes": 13494,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/pipeline/physics_pipeline/mod.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_pipeline/substep.rs",
+      "sha256": "c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447",
+      "bytes": 30677,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/pipeline/physics_pipeline/substep.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/pipeline/physics_pipeline/solve.rs",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/pipeline/physics_pipeline/solve.rs"
+    },
+    {
+      "path": "third_party/rapier3d/src/dynamics/integration_parameters.rs",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/rapier3d/src/dynamics/integration_parameters.rs"
+    },
+    {
+      "path": "third_party/parry2d/src/partitioning/bvh/bvh_insert.rs",
+      "sha256": "091b1841e4458e8ce624466674ea95d8bde4338b36f16e1dc4e71d951e4284bd",
+      "bytes": 33514,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_insert.rs"
+    },
+    {
+      "path": "third_party/parry2d/src/partitioning/bvh/bvh_tree.rs",
+      "sha256": "f46261e1e4ddeda600c5ca34ca4838b0130c5d01afbe1524c5f4cfccc7819bfe",
+      "bytes": 85279,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_tree.rs"
+    },
+    {
+      "path": "third_party/parry2d/src/partitioning/bvh/bvh_refit.rs",
+      "sha256": "5af4666de7a57aab74e49a7ab1d746db5e9f768aa468aacfd1e6fdbf183caecd",
+      "bytes": 26170,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_refit.rs"
+    },
+    {
+      "path": "third_party/parry2d/src/partitioning/bvh/bvh_optimize.rs",
+      "sha256": "e6159fd10ad6f9b484178de2b79fc31895bd457b054981a749133fef57902140",
+      "bytes": 20724,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_optimize.rs"
+    },
+    {
+      "path": "third_party/parry3d/src/partitioning/bvh/bvh_insert.rs",
+      "sha256": "091b1841e4458e8ce624466674ea95d8bde4338b36f16e1dc4e71d951e4284bd",
+      "bytes": 33514,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_insert.rs"
+    },
+    {
+      "path": "third_party/parry3d/src/partitioning/bvh/bvh_tree.rs",
+      "sha256": "f46261e1e4ddeda600c5ca34ca4838b0130c5d01afbe1524c5f4cfccc7819bfe",
+      "bytes": 85279,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_tree.rs"
+    },
+    {
+      "path": "third_party/parry3d/src/partitioning/bvh/bvh_refit.rs",
+      "sha256": "5af4666de7a57aab74e49a7ab1d746db5e9f768aa468aacfd1e6fdbf183caecd",
+      "bytes": 26170,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_refit.rs"
+    },
+    {
+      "path": "third_party/parry3d/src/partitioning/bvh/bvh_optimize.rs",
+      "sha256": "e6159fd10ad6f9b484178de2b79fc31895bd457b054981a749133fef57902140",
+      "bytes": 20724,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_optimize.rs"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/physics-broad-owner.tar.gz",
+    "sha256": "b0f470878ea515fd5b5615727fe1589a4521064730c02593872372d5060c542f",
+    "bytes": 279262
+  },
+  "records": [
+    {
+      "path": "audit.py",
+      "sha256": "23fbc4256ab9043945123c264683ea83c31ec3333d79539e9cf88f34d1131323",
+      "bytes": 3414,
+      "payload": "payload/23fbc4256ab9043945123c264683ea83c31ec3333d79539e9cf88f34d1131323"
+    },
+    {
+      "path": "checks-final-001.json",
+      "sha256": "89e08ab4cee1149dfe0012041982397d65878449e19cab6b0b1c358124ffd928",
+      "bytes": 4212,
+      "payload": "payload/89e08ab4cee1149dfe0012041982397d65878449e19cab6b0b1c358124ffd928"
+    },
+    {
+      "path": "final-clippy-001.log",
+      "sha256": "c3c3d0fe05104d389a67d276999c966284ba60da803f6e8cb45c40e8426b54ad",
+      "bytes": 196,
+      "payload": "payload/c3c3d0fe05104d389a67d276999c966284ba60da803f6e8cb45c40e8426b54ad"
+    },
+    {
+      "path": "final-conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "payload": "payload/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "final-diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "payload": "payload/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "final-fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "payload": "payload/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "final-runtime-graph-001.log",
+      "sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+      "bytes": 62,
+      "payload": "payload/5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6"
+    },
+    {
+      "path": "final-tests-001.log",
+      "sha256": "2cd81d141ec76201330e265ab62177cec46650dbba4386f4af9b424422609a0e",
+      "bytes": 20012,
+      "payload": "payload/2cd81d141ec76201330e265ab62177cec46650dbba4386f4af9b424422609a0e"
+    },
+    {
+      "path": "final-wasm32-001.log",
+      "sha256": "66b3eda29f401470bafead6c1205b9b283217dec51e724d05276e9e547d7ddbe",
+      "bytes": 196,
+      "payload": "payload/66b3eda29f401470bafead6c1205b9b283217dec51e724d05276e9e547d7ddbe"
+    },
+    {
+      "path": "freeze.py",
+      "sha256": "1d43c35f21e1d1b8ea0d8968b5099ed6fbd0c18b461963efa443396e5137455f",
+      "bytes": 3437,
+      "payload": "payload/1d43c35f21e1d1b8ea0d8968b5099ed6fbd0c18b461963efa443396e5137455f"
+    },
+    {
+      "path": "native-join-001-broad-cases.rs",
+      "sha256": "05d05859deb4687bba082c9f3a16b6330811f45c815777d7d4dd4970d484f90d",
+      "bytes": 1021,
+      "payload": "payload/05d05859deb4687bba082c9f3a16b6330811f45c815777d7d4dd4970d484f90d"
+    },
+    {
+      "path": "native-join-001.json",
+      "sha256": "b46097e2041de10147df1329ddcf147201a0dd07dcc45d064fa34d1a675ca212",
+      "bytes": 640,
+      "payload": "payload/b46097e2041de10147df1329ddcf147201a0dd07dcc45d064fa34d1a675ca212"
+    },
+    {
+      "path": "native-join-001.log",
+      "sha256": "eab2173ecec6e689a9a996daf709d7a6d0567d88b01d6592bed7aca109ec8ea1",
+      "bytes": 3484,
+      "payload": "payload/eab2173ecec6e689a9a996daf709d7a6d0567d88b01d6592bed7aca109ec8ea1"
+    },
+    {
+      "path": "native-join-001.patch",
+      "sha256": "e282728032417bc32e0fff239365ee7e92633a134a59bcc129bafe947aaf2127",
+      "bytes": 1749,
+      "payload": "payload/e282728032417bc32e0fff239365ee7e92633a134a59bcc129bafe947aaf2127"
+    },
+    {
+      "path": "native-join-002.json",
+      "sha256": "579ac0eddef1e48291c6aa47f8dd9055b497eea2f3b6fac1af4a7201890b6c10",
+      "bytes": 639,
+      "payload": "payload/579ac0eddef1e48291c6aa47f8dd9055b497eea2f3b6fac1af4a7201890b6c10"
+    },
+    {
+      "path": "native-join-002.log",
+      "sha256": "dabc0ad31b115cdd983bb72806e0fb7cdc1d675c65e4df9034724057a816c0c8",
+      "bytes": 5771,
+      "payload": "payload/dabc0ad31b115cdd983bb72806e0fb7cdc1d675c65e4df9034724057a816c0c8"
+    },
+    {
+      "path": "native-join-002.patch",
+      "sha256": "e282728032417bc32e0fff239365ee7e92633a134a59bcc129bafe947aaf2127",
+      "bytes": 1749,
+      "payload": "payload/e282728032417bc32e0fff239365ee7e92633a134a59bcc129bafe947aaf2127"
+    },
+    {
+      "path": "owner-001-files/crates/incant_physics_snapshot/src/broad_owner/codec.rs",
+      "sha256": "14ae5f5e8eefeb93623ce129c38f44c74f484d00c50ef051890e75f2c320cc5a",
+      "bytes": 3856,
+      "payload": "payload/14ae5f5e8eefeb93623ce129c38f44c74f484d00c50ef051890e75f2c320cc5a"
+    },
+    {
+      "path": "owner-001-files/crates/incant_physics_snapshot/src/broad_owner/mod.rs",
+      "sha256": "1cc2d3a9308d30fe0885d5508ddc7b736426215e844b5c9e667d4312db5ef6fa",
+      "bytes": 2490,
+      "payload": "payload/1cc2d3a9308d30fe0885d5508ddc7b736426215e844b5c9e667d4312db5ef6fa"
+    },
+    {
+      "path": "owner-001-files/crates/incant_physics_snapshot/src/broad_owner/validate.rs",
+      "sha256": "88820830302c658d8de697b327bcbfd026ef9530e2b2e3e32f1db9a520fd0bef",
+      "bytes": 6164,
+      "payload": "payload/88820830302c658d8de697b327bcbfd026ef9530e2b2e3e32f1db9a520fd0bef"
+    },
+    {
+      "path": "owner-001-files/crates/incant_physics_snapshot/tests/support/broad_capture.rs",
+      "sha256": "78637ddb85ae37324e842f92ca97ee029f8a364b3463b19176da39f58d1e37e5",
+      "bytes": 3783,
+      "payload": "payload/78637ddb85ae37324e842f92ca97ee029f8a364b3463b19176da39f58d1e37e5"
+    },
+    {
+      "path": "owner-001-files/crates/incant_physics_snapshot/tests/support/broad_cases.rs",
+      "sha256": "5a4cdab07ec3c66a131e9659c5fa61ab18255c279c3ae7a3a335f1b1cd919b2d",
+      "bytes": 3568,
+      "payload": "payload/5a4cdab07ec3c66a131e9659c5fa61ab18255c279c3ae7a3a335f1b1cd919b2d"
+    },
+    {
+      "path": "owner-001-files/crates/incant_physics_snapshot/tests/support/broad_checks.rs",
+      "sha256": "b552739284e3af9de1c0f20f9add28745dc06da746b619ed8e109c36705a8736",
+      "bytes": 4462,
+      "payload": "payload/b552739284e3af9de1c0f20f9add28745dc06da746b619ed8e109c36705a8736"
+    },
+    {
+      "path": "owner-001.json",
+      "sha256": "3cb7e5f6b38b938fb9afee5c05ea10cd30bc96ef101ef7d63e02b6883dd59265",
+      "bytes": 634,
+      "payload": "payload/3cb7e5f6b38b938fb9afee5c05ea10cd30bc96ef101ef7d63e02b6883dd59265"
+    },
+    {
+      "path": "owner-001.log",
+      "sha256": "1d37cbe682393db3ad06ef2b6677e11ca22c977d434ac73157bafaf96be6eabd",
+      "bytes": 6783,
+      "payload": "payload/1d37cbe682393db3ad06ef2b6677e11ca22c977d434ac73157bafaf96be6eabd"
+    },
+    {
+      "path": "owner-001.patch",
+      "sha256": "80fb32adcdc2046647cc7a981a6397067545390418d6cdcc4430e27e6fe61c47",
+      "bytes": 3389,
+      "payload": "payload/80fb32adcdc2046647cc7a981a6397067545390418d6cdcc4430e27e6fe61c47"
+    },
+    {
+      "path": "owner-002.json",
+      "sha256": "760b797f6409775f2eed26f3517df4ccc2dee832c93b15d1f7993abe6233f9b8",
+      "bytes": 636,
+      "payload": "payload/760b797f6409775f2eed26f3517df4ccc2dee832c93b15d1f7993abe6233f9b8"
+    },
+    {
+      "path": "owner-002.log",
+      "sha256": "5515b25d3ec3787054731417cc7723b6e45d2362be22c1d4852d389f3887ef7e",
+      "bytes": 666,
+      "payload": "payload/5515b25d3ec3787054731417cc7723b6e45d2362be22c1d4852d389f3887ef7e"
+    },
+    {
+      "path": "owner-002.patch",
+      "sha256": "c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba",
+      "bytes": 9436,
+      "payload": "payload/c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba"
+    },
+    {
+      "path": "owner-003.json",
+      "sha256": "59e7442ab6469b77c60c552560fe47385c8c4797e77db53bba70869a6233c311",
+      "bytes": 543,
+      "payload": "payload/59e7442ab6469b77c60c552560fe47385c8c4797e77db53bba70869a6233c311"
+    },
+    {
+      "path": "owner-003.log",
+      "sha256": "303eab18233429d921217c1dcd83e56eab27961f897f8b42ae6ba9a18d61b761",
+      "bytes": 5044,
+      "payload": "payload/303eab18233429d921217c1dcd83e56eab27961f897f8b42ae6ba9a18d61b761"
+    },
+    {
+      "path": "owner-003.patch",
+      "sha256": "c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba",
+      "bytes": 9436,
+      "payload": "payload/c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba"
+    },
+    {
+      "path": "owner-004-broad-cases.rs",
+      "sha256": "1807d1e1f3cb8d0ac935a0d193adb06de227ce7c3fc91ffc89e16961a5743038",
+      "bytes": 10820,
+      "payload": "payload/1807d1e1f3cb8d0ac935a0d193adb06de227ce7c3fc91ffc89e16961a5743038"
+    },
+    {
+      "path": "owner-004.json",
+      "sha256": "0576fab4a3457a6b223d74ef8b7e23e8111f43e01472b029659cb46eb6ece2b6",
+      "bytes": 588,
+      "payload": "payload/0576fab4a3457a6b223d74ef8b7e23e8111f43e01472b029659cb46eb6ece2b6"
+    },
+    {
+      "path": "owner-004.log",
+      "sha256": "17d001a819adf9f7a5b3cb4eefda49c217ca9c5c55f93eb3a1e3894467110c02",
+      "bytes": 2173,
+      "payload": "payload/17d001a819adf9f7a5b3cb4eefda49c217ca9c5c55f93eb3a1e3894467110c02"
+    },
+    {
+      "path": "owner-004.patch",
+      "sha256": "c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba",
+      "bytes": 9436,
+      "payload": "payload/c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba"
+    },
+    {
+      "path": "owner-005-broad-cases.rs",
+      "sha256": "7839f1ff063b0136a06b90f9113de0d49e946363919f7e0691f7c62f1af4c91e",
+      "bytes": 10967,
+      "payload": "payload/7839f1ff063b0136a06b90f9113de0d49e946363919f7e0691f7c62f1af4c91e"
+    },
+    {
+      "path": "owner-005.json",
+      "sha256": "2e9f61d9bd7c6e13db1db1419cddae7597b0008f01f628e4b9c00430a0bc4d21",
+      "bytes": 587,
+      "payload": "payload/2e9f61d9bd7c6e13db1db1419cddae7597b0008f01f628e4b9c00430a0bc4d21"
+    },
+    {
+      "path": "owner-005.log",
+      "sha256": "58d0820250be4d174f082ed4f7436cdcfc1ab2a8b08228212cebcff69e14aa35",
+      "bytes": 2164,
+      "payload": "payload/58d0820250be4d174f082ed4f7436cdcfc1ab2a8b08228212cebcff69e14aa35"
+    },
+    {
+      "path": "owner-005.patch",
+      "sha256": "c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba",
+      "bytes": 9436,
+      "payload": "payload/c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba"
+    },
+    {
+      "path": "owner-006.json",
+      "sha256": "623e7df181a77e850101a812136e51046d4ee4d9ec1e53b892ee59fbc9c58a2a",
+      "bytes": 585,
+      "payload": "payload/623e7df181a77e850101a812136e51046d4ee4d9ec1e53b892ee59fbc9c58a2a"
+    },
+    {
+      "path": "owner-006.log",
+      "sha256": "ed48e79900d785d23ddd00c57e2f66f23167dd91c81b656a51cee970cc7cc6cd",
+      "bytes": 1637,
+      "payload": "payload/ed48e79900d785d23ddd00c57e2f66f23167dd91c81b656a51cee970cc7cc6cd"
+    },
+    {
+      "path": "owner-006.patch",
+      "sha256": "c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba",
+      "bytes": 9436,
+      "payload": "payload/c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba"
+    },
+    {
+      "path": "owner-007.json",
+      "sha256": "876c2f666093f8db20c027740f9ec25747364317999cc482140ff98a050f0815",
+      "bytes": 571,
+      "payload": "payload/876c2f666093f8db20c027740f9ec25747364317999cc482140ff98a050f0815"
+    },
+    {
+      "path": "owner-007.log",
+      "sha256": "4b7fdd0938db04d23ad5067a4a0a6dde8a4c355d68e0730e8aa74207b32689ff",
+      "bytes": 7373,
+      "payload": "payload/4b7fdd0938db04d23ad5067a4a0a6dde8a4c355d68e0730e8aa74207b32689ff"
+    },
+    {
+      "path": "owner-007.patch",
+      "sha256": "c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba",
+      "bytes": 9436,
+      "payload": "payload/c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba"
+    },
+    {
+      "path": "retain.py",
+      "sha256": "a1c0fcde9784a62077c29fbacf5bf9852b280dc81a4c0b642e76f3957c2fab14",
+      "bytes": 3836,
+      "payload": "payload/a1c0fcde9784a62077c29fbacf5bf9852b280dc81a4c0b642e76f3957c2fab14"
+    },
+    {
+      "path": "run-final.py",
+      "sha256": "c0c01b883212cc16558591b132d15343061626f422fe0e78ac90f3c0c63d72c2",
+      "bytes": 2308,
+      "payload": "payload/c0c01b883212cc16558591b132d15343061626f422fe0e78ac90f3c0c63d72c2"
+    },
+    {
+      "path": "run.py",
+      "sha256": "35cc4a4cd53352e617bee2fdba6b064b70547a622888e95e169c48fc3bf8d4aa",
+      "bytes": 975,
+      "payload": "payload/35cc4a4cd53352e617bee2fdba6b064b70547a622888e95e169c48fc3bf8d4aa"
+    },
+    {
+      "path": "source-001/files/Cargo.lock",
+      "sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+      "bytes": 252688,
+      "payload": "payload/37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f"
+    },
+    {
+      "path": "source-001/files/Cargo.toml",
+      "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+      "bytes": 3722,
+      "payload": "payload/9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba",
+      "bytes": 890,
+      "payload": "payload/c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "payload": "payload/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/body_state/mod.rs",
+      "sha256": "77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4",
+      "bytes": 4468,
+      "payload": "payload/77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/broad_owner/codec.rs",
+      "sha256": "23b2207e767287ccdc900f44d0b8b8c4674fa3dc8df0e9f50e61da54785fde9a",
+      "bytes": 3938,
+      "payload": "payload/23b2207e767287ccdc900f44d0b8b8c4674fa3dc8df0e9f50e61da54785fde9a"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/broad_owner/mod.rs",
+      "sha256": "fbb1a31904306751fa04dac42d5d82bf383acf7b682c465de112b307d3c27274",
+      "bytes": 2515,
+      "payload": "payload/fbb1a31904306751fa04dac42d5d82bf383acf7b682c465de112b307d3c27274"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/broad_owner/validate.rs",
+      "sha256": "0ebfa66d69615e5596c225bd0ecb9d7c3e26c59f35f80e4f60dc936b397e6d7b",
+      "bytes": 6342,
+      "payload": "payload/0ebfa66d69615e5596c225bd0ecb9d7c3e26c59f35f80e4f60dc936b397e6d7b"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "payload": "payload/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "31cbfc95b4e03cdbd88d47b9f60e9196601a463e6080bef87bc5cf9d8249d8c6",
+      "bytes": 6265,
+      "payload": "payload/31cbfc95b4e03cdbd88d47b9f60e9196601a463e6080bef87bc5cf9d8249d8c6"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/collider_state/mod.rs",
+      "sha256": "1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f",
+      "bytes": 3850,
+      "payload": "payload/1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/collider_state/validate.rs",
+      "sha256": "8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f",
+      "bytes": 2648,
+      "payload": "payload/8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "payload": "payload/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "payload": "payload/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "payload": "payload/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "f5a4596dfecdbe7a47da23b8af8d8cccb860220d356fdda24808a7b77cfad8e6",
+      "bytes": 2375,
+      "payload": "payload/f5a4596dfecdbe7a47da23b8af8d8cccb860220d356fdda24808a7b77cfad8e6"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/narrow_owner/mod.rs",
+      "sha256": "9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254",
+      "bytes": 2341,
+      "payload": "payload/9c34dba5270b73850ec90390aa969c4cc6512635dfd1eaab6a789f70807da254"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/narrow_owner/validate.rs",
+      "sha256": "706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23",
+      "bytes": 4760,
+      "payload": "payload/706a445c47472c03ee25e0df5b8b6d84ee2d77f19ba8a03bf299798f71caef23"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/pending_bvh.rs",
+      "sha256": "ebf007d74f072c5e5308a016cfbd19b98356f179272d1947bed59684e989d3f9",
+      "bytes": 3661,
+      "payload": "payload/ebf007d74f072c5e5308a016cfbd19b98356f179272d1947bed59684e989d3f9"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "payload": "payload/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+      "sha256": "4b346dc36e2550af09032d0e4c0f1d121ab40a560ded8817d38910f180efeceb",
+      "bytes": 2595,
+      "payload": "payload/4b346dc36e2550af09032d0e4c0f1d121ab40a560ded8817d38910f180efeceb"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+      "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492",
+      "bytes": 9653,
+      "payload": "payload/f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "b2b4e32f6424fc1882c23894b6dfeb3728ea370abff610a48cc40e8341b88628",
+      "bytes": 6338,
+      "payload": "payload/b2b4e32f6424fc1882c23894b6dfeb3728ea370abff610a48cc40e8341b88628"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "payload": "payload/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/broad_capture.rs",
+      "sha256": "78637ddb85ae37324e842f92ca97ee029f8a364b3463b19176da39f58d1e37e5",
+      "bytes": 3783,
+      "payload": "payload/78637ddb85ae37324e842f92ca97ee029f8a364b3463b19176da39f58d1e37e5"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/broad_cases.rs",
+      "sha256": "39c7229efa6e462cad50d115a5c21922166d1858271bf7613a4647004d89bd19",
+      "bytes": 11923,
+      "payload": "payload/39c7229efa6e462cad50d115a5c21922166d1858271bf7613a4647004d89bd19"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/broad_checks.rs",
+      "sha256": "0d1d1d5aa2de49766c388e0adb7908a99810e040a6b08bb7dfc32fc9a1744247",
+      "bytes": 8164,
+      "payload": "payload/0d1d1d5aa2de49766c388e0adb7908a99810e040a6b08bb7dfc32fc9a1744247"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/continuation_cases.rs",
+      "sha256": "8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e",
+      "bytes": 8569,
+      "payload": "payload/8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/narrow_cases.rs",
+      "sha256": "6d8ecc4da3862f30c385ebb0eadd0b0298185f5dc7290cd534d19b88371443c7",
+      "bytes": 15648,
+      "payload": "payload/6d8ecc4da3862f30c385ebb0eadd0b0298185f5dc7290cd534d19b88371443c7"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+      "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+      "bytes": 6485,
+      "payload": "payload/599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "56b5b65e66c809627fb2ada70641739e31da9adf37d64d052d82698801a43bd8",
+      "bytes": 36780,
+      "payload": "payload/56b5b65e66c809627fb2ada70641739e31da9adf37d64d052d82698801a43bd8"
+    },
+    {
+      "path": "source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "payload": "payload/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89"
+    },
+    {
+      "path": "source-001/files/crates/incant_runtime/src/save.rs",
+      "sha256": "8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754",
+      "bytes": 20624,
+      "payload": "payload/8d399337ee694197bfa5718ce26740670f4fb4bde321f9597d3d2b06f2cec754"
+    },
+    {
+      "path": "source-001/files/crates/incant_script/src/checkpoint/mod.rs",
+      "sha256": "064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480",
+      "bytes": 12191,
+      "payload": "payload/064662800b4f4138d9aa96f5e372eda2b99f8d99cbcffeb2d277c56d36cf2480"
+    },
+    {
+      "path": "source-001/files/docs/spikes/physics-broad-owner.md",
+      "sha256": "95a70e0d0ff901af847d7fd910c1f7d9e38206ab537148fa88c8a2f7a0292452",
+      "bytes": 7527,
+      "payload": "payload/95a70e0d0ff901af847d7fd910c1f7d9e38206ab537148fa88c8a2f7a0292452"
+    },
+    {
+      "path": "source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_insert.rs",
+      "sha256": "091b1841e4458e8ce624466674ea95d8bde4338b36f16e1dc4e71d951e4284bd",
+      "bytes": 33514,
+      "payload": "payload/091b1841e4458e8ce624466674ea95d8bde4338b36f16e1dc4e71d951e4284bd"
+    },
+    {
+      "path": "source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_optimize.rs",
+      "sha256": "e6159fd10ad6f9b484178de2b79fc31895bd457b054981a749133fef57902140",
+      "bytes": 20724,
+      "payload": "payload/e6159fd10ad6f9b484178de2b79fc31895bd457b054981a749133fef57902140"
+    },
+    {
+      "path": "source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_refit.rs",
+      "sha256": "5af4666de7a57aab74e49a7ab1d746db5e9f768aa468aacfd1e6fdbf183caecd",
+      "bytes": 26170,
+      "payload": "payload/5af4666de7a57aab74e49a7ab1d746db5e9f768aa468aacfd1e6fdbf183caecd"
+    },
+    {
+      "path": "source-001/files/third_party/parry2d/src/partitioning/bvh/bvh_tree.rs",
+      "sha256": "f46261e1e4ddeda600c5ca34ca4838b0130c5d01afbe1524c5f4cfccc7819bfe",
+      "bytes": 85279,
+      "payload": "payload/f46261e1e4ddeda600c5ca34ca4838b0130c5d01afbe1524c5f4cfccc7819bfe"
+    },
+    {
+      "path": "source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_insert.rs",
+      "sha256": "091b1841e4458e8ce624466674ea95d8bde4338b36f16e1dc4e71d951e4284bd",
+      "bytes": 33514,
+      "payload": "payload/091b1841e4458e8ce624466674ea95d8bde4338b36f16e1dc4e71d951e4284bd"
+    },
+    {
+      "path": "source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_optimize.rs",
+      "sha256": "e6159fd10ad6f9b484178de2b79fc31895bd457b054981a749133fef57902140",
+      "bytes": 20724,
+      "payload": "payload/e6159fd10ad6f9b484178de2b79fc31895bd457b054981a749133fef57902140"
+    },
+    {
+      "path": "source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_refit.rs",
+      "sha256": "5af4666de7a57aab74e49a7ab1d746db5e9f768aa468aacfd1e6fdbf183caecd",
+      "bytes": 26170,
+      "payload": "payload/5af4666de7a57aab74e49a7ab1d746db5e9f768aa468aacfd1e6fdbf183caecd"
+    },
+    {
+      "path": "source-001/files/third_party/parry3d/src/partitioning/bvh/bvh_tree.rs",
+      "sha256": "f46261e1e4ddeda600c5ca34ca4838b0130c5d01afbe1524c5f4cfccc7819bfe",
+      "bytes": 85279,
+      "payload": "payload/f46261e1e4ddeda600c5ca34ca4838b0130c5d01afbe1524c5f4cfccc7819bfe"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "payload": "payload/ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/dynamics/integration_parameters.rs",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972,
+      "payload": "payload/85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/broad_phase_bvh/mod.rs",
+      "sha256": "cdc9b6a89a3e521622f9e7181138b7c19cbfdbda7755c780d07e2050794b1259",
+      "bytes": 15718,
+      "payload": "payload/cdc9b6a89a3e521622f9e7181138b7c19cbfdbda7755c780d07e2050794b1259"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/broad_phase_bvh/update.rs",
+      "sha256": "62fa0c4c5a959cb32dc8ddd5416174b0135de9c9d3199dd3ad0bdcb3eb924fec",
+      "bytes": 29531,
+      "payload": "payload/62fa0c4c5a959cb32dc8ddd5416174b0135de9c9d3199dd3ad0bdcb3eb924fec"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "payload": "payload/df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "payload": "payload/237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/pipeline/physics_pipeline/mod.rs",
+      "sha256": "31e0c921654bb7b7156011e53af869aa3774bb003ce64cf638ba452da22b30a4",
+      "bytes": 13494,
+      "payload": "payload/31e0c921654bb7b7156011e53af869aa3774bb003ce64cf638ba452da22b30a4"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/pipeline/physics_pipeline/solve.rs",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "payload": "payload/27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/pipeline/physics_pipeline/substep.rs",
+      "sha256": "c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447",
+      "bytes": 30677,
+      "payload": "payload/c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447"
+    },
+    {
+      "path": "source-001/files/third_party/rapier2d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "payload": "payload/6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/data/coarena.rs",
+      "sha256": "ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61",
+      "bytes": 5246,
+      "payload": "payload/ceef7e1a827be657c520c023a5d19259fe277ab3ac4885151c13aacd69642d61"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/dynamics/integration_parameters.rs",
+      "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+      "bytes": 20972,
+      "payload": "payload/85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/broad_phase_bvh/mod.rs",
+      "sha256": "cdc9b6a89a3e521622f9e7181138b7c19cbfdbda7755c780d07e2050794b1259",
+      "bytes": 15718,
+      "payload": "payload/cdc9b6a89a3e521622f9e7181138b7c19cbfdbda7755c780d07e2050794b1259"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/broad_phase_bvh/update.rs",
+      "sha256": "62fa0c4c5a959cb32dc8ddd5416174b0135de9c9d3199dd3ad0bdcb3eb924fec",
+      "bytes": 29531,
+      "payload": "payload/62fa0c4c5a959cb32dc8ddd5416174b0135de9c9d3199dd3ad0bdcb3eb924fec"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/mod.rs",
+      "sha256": "df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85",
+      "bytes": 19611,
+      "payload": "payload/df4e5f7d6f18eda3489f3682a7509100f3201460849ea56458ea8ebff7a0fe85"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "payload": "payload/237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/pipeline/physics_pipeline/mod.rs",
+      "sha256": "31e0c921654bb7b7156011e53af869aa3774bb003ce64cf638ba452da22b30a4",
+      "bytes": 13494,
+      "payload": "payload/31e0c921654bb7b7156011e53af869aa3774bb003ce64cf638ba452da22b30a4"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/pipeline/physics_pipeline/solve.rs",
+      "sha256": "27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c",
+      "bytes": 18080,
+      "payload": "payload/27a362665ab370375aaa15fc9494bc3aefe2ebf0690e44e238f7aca83ab4d69c"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/pipeline/physics_pipeline/substep.rs",
+      "sha256": "c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447",
+      "bytes": 30677,
+      "payload": "payload/c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447"
+    },
+    {
+      "path": "source-001/files/third_party/rapier3d/src/pipeline/physics_world.rs",
+      "sha256": "6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de",
+      "bytes": 39162,
+      "payload": "payload/6cf5f8ba115e355ebbf615b20e392a0a8220ed6af38dfc5a2ddfc878c5d431de"
+    },
+    {
+      "path": "source-001/freeze.json",
+      "sha256": "c6d115528d5ffcf12ab6be0bdd3305623d8ce5e2b467b163e3a37aafa381962f",
+      "bytes": 30537,
+      "payload": "payload/c6d115528d5ffcf12ab6be0bdd3305623d8ce5e2b467b163e3a37aafa381962f"
+    },
+    {
+      "path": "source-001/source.patch",
+      "sha256": "727f0fad2c89e44f51f7ec0481a0577c203683d11e4949e7e5459d928ba98ca3",
+      "bytes": 60583,
+      "payload": "payload/727f0fad2c89e44f51f7ec0481a0577c203683d11e4949e7e5459d928ba98ca3"
+    },
+    {
+      "path": "source-review.json",
+      "sha256": "b43a572a9ec4ef100afd8244d67b3074d35bc3a424211bd68263a34de9990925",
+      "bytes": 19037,
+      "payload": "payload/b43a572a9ec4ef100afd8244d67b3074d35bc3a424211bd68263a34de9990925"
+    },
+    {
+      "path": "strict-001.json",
+      "sha256": "6b46353672ed3019c8a2e6c3218b1f427fbf988ebc84fbeb7675cdac384f7071",
+      "bytes": 573,
+      "payload": "payload/6b46353672ed3019c8a2e6c3218b1f427fbf988ebc84fbeb7675cdac384f7071"
+    },
+    {
+      "path": "strict-001.log",
+      "sha256": "2a2c6ba21c0d8a019cd0321586283683143acd8c342b12b442641d2eebb801e7",
+      "bytes": 1631,
+      "payload": "payload/2a2c6ba21c0d8a019cd0321586283683143acd8c342b12b442641d2eebb801e7"
+    },
+    {
+      "path": "strict-001.patch",
+      "sha256": "c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba",
+      "bytes": 9436,
+      "payload": "payload/c8d82e96d377998f2797b6b562434c989e05e773a4676a50239475a4324b0aba"
+    },
+    {
+      "path": "tree-boundary-001.json",
+      "sha256": "4f86e20a2e22f744e430407297e070e5afa403fa13fdf776a23e172842b5060e",
+      "bytes": 731,
+      "payload": "payload/4f86e20a2e22f744e430407297e070e5afa403fa13fdf776a23e172842b5060e"
+    },
+    {
+      "path": "tree-boundary-001.log",
+      "sha256": "2caea0d4d2049d7ff2024e3b8a5b507d0a21574c16b5f0129b634f4df315d7ac",
+      "bytes": 989,
+      "payload": "payload/2caea0d4d2049d7ff2024e3b8a5b507d0a21574c16b5f0129b634f4df315d7ac"
+    },
+    {
+      "path": "tree-boundary-001.patch",
+      "sha256": "80fb32adcdc2046647cc7a981a6397067545390418d6cdcc4430e27e6fe61c47",
+      "bytes": 3389,
+      "payload": "payload/80fb32adcdc2046647cc7a981a6397067545390418d6cdcc4430e27e6fe61c47"
+    },
+    {
+      "path": "tree-boundary-002.json",
+      "sha256": "bc37f2e5ff73a84ead4025bc606299603c3d07a55c401947e8f6b6907498bc52",
+      "bytes": 731,
+      "payload": "payload/bc37f2e5ff73a84ead4025bc606299603c3d07a55c401947e8f6b6907498bc52"
+    },
+    {
+      "path": "tree-boundary-002.log",
+      "sha256": "8d078c5c6054498b82bbad5fbd6b7f0e1fd1cb8b9145d63b505c50baae054e75",
+      "bytes": 1859,
+      "payload": "payload/8d078c5c6054498b82bbad5fbd6b7f0e1fd1cb8b9145d63b505c50baae054e75"
+    },
+    {
+      "path": "tree-boundary-002.patch",
+      "sha256": "80fb32adcdc2046647cc7a981a6397067545390418d6cdcc4430e27e6fe61c47",
+      "bytes": 3389,
+      "payload": "payload/80fb32adcdc2046647cc7a981a6397067545390418d6cdcc4430e27e6fe61c47"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/binaries/trusted_manifolds-81c01168a9839318",
+      "sha256": "373add9c55f9b57f17830d4430940a9200d3a2fbd5f93d54732b11e7d44aa698",
+      "bytes": 17892544,
+      "mode": "0o755",
+      "original": "/tmp/incant-agent-font-target/ci/deps/trusted_manifolds-81c01168a9839318"
+    }
+  ],
+  "checks": {
+    "freeze_sha256": "c6d115528d5ffcf12ab6be0bdd3305623d8ce5e2b467b163e3a37aafa381962f",
+    "target": "/tmp/incant-agent-font-target",
+    "jobs": 2,
+    "checks": [
+      {
+        "name": "tests",
+        "argv": [
+          "./tools/cargo",
+          "test",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_physics_snapshot",
+          "--",
+          "--test-threads=1",
+          "--nocapture"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 97234,
+        "exit": 0,
+        "seconds": 25.647015810012817,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/final-tests-001.log",
+        "sha256": "2cd81d141ec76201330e265ab62177cec46650dbba4386f4af9b424422609a0e",
+        "reaped": true
+      },
+      {
+        "name": "clippy",
+        "argv": [
+          "./tools/cargo",
+          "clippy",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_physics_snapshot",
+          "--all-targets",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 97608,
+        "exit": 0,
+        "seconds": 1.3984699249267578,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/final-clippy-001.log",
+        "sha256": "c3c3d0fe05104d389a67d276999c966284ba60da803f6e8cb45c40e8426b54ad",
+        "reaped": true
+      },
+      {
+        "name": "wasm32",
+        "argv": [
+          "./tools/cargo",
+          "check",
+          "--locked",
+          "--offline",
+          "--profile",
+          "ci",
+          "-j2",
+          "-p",
+          "incant_physics_snapshot",
+          "--lib",
+          "--target",
+          "wasm32-unknown-unknown"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 97712,
+        "exit": 0,
+        "seconds": 0.5306980609893799,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/final-wasm32-001.log",
+        "sha256": "66b3eda29f401470bafead6c1205b9b283217dec51e724d05276e9e547d7ddbe",
+        "reaped": true
+      },
+      {
+        "name": "runtime-graph",
+        "argv": [
+          "python3",
+          "tools/check_runtime_dependencies.py",
+          "incant_physics_snapshot"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 97721,
+        "exit": 0,
+        "seconds": 0.40262413024902344,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/final-runtime-graph-001.log",
+        "sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+        "reaped": true
+      },
+      {
+        "name": "conventions",
+        "argv": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 97728,
+        "exit": 0,
+        "seconds": 0.027919769287109375,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/final-conventions-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reaped": true
+      },
+      {
+        "name": "fmt",
+        "argv": [
+          "./tools/cargo",
+          "fmt",
+          "--all",
+          "--",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 97729,
+        "exit": 0,
+        "seconds": 1.2242810726165771,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/final-fmt-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reaped": true
+      },
+      {
+        "name": "diff",
+        "argv": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+        "pid": 97735,
+        "exit": 0,
+        "seconds": 0.020378828048706055,
+        "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-broad-owner-001/final-diff-001.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "reaped": true
+      }
+    ]
+  },
+  "counts": {
+    "passed": 151,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 20
+  },
+  "historical_failures": [
+    "native-join-001: private native graph node access in test observer",
+    "owner-001: strict BVH rejected four actual pending trees; tree-boundary-002 captures exact native counterexample",
+    "owner-002: missing Rust lifetime annotation",
+    "owner-004/005: fixture requested velocity beyond native default400 cap; final120 m/s fixture preserves geometry distinction"
+  ],
+  "gpu": false,
+  "live_restore": false,
+  "review": "source accepted; final evidence audit pending",
+  "source_review_sha256": "b43a572a9ec4ef100afd8244d67b3074d35bc3a424211bd68263a34de9990925"
+}

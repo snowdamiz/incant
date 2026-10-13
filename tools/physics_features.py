@@ -228,8 +228,8 @@ def _compiler_package_identity(record, name):
     if not package_id.startswith('path+'):
         return package_id.endswith(f'#{name}@{version}')
     # Cargo omits the package name when it equals the path's final component.
-    # Only the repository's pinned Parry patches may use a path identity here.
-    if name not in ('parry2d', 'parry3d'):
+    # Only the repository's pinned Rapier/Parry patches may use a path identity here.
+    if name not in ('rapier2d', 'rapier3d', 'parry2d', 'parry3d'):
         return False
     package = (Path(__file__).resolve().parents[1] / 'third_party' / name).resolve()
     expected = 'path+' + package.as_uri()

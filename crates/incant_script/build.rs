@@ -131,7 +131,7 @@ fn main() {
     }
     // Path-patched runtime dependencies have no registry checksum in Cargo.lock.
     // Include their actual sources so a later patch cannot reuse stale saves.
-    for name in ["kira", "parry2d", "parry3d"] {
+    for name in ["kira", "parry2d", "parry3d", "rapier2d", "rapier3d"] {
         let dir = root.join("third_party").join(name);
         hash_tree(&dir.join("src"), &mut runtime);
         hash_file(&dir.join("Cargo.toml"), &mut runtime);

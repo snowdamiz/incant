@@ -1,0 +1,312 @@
+{
+  "at": "2026-10-13T06:35:01.622791+00:00",
+  "base": "f33495b2211ac37f172cd83e2552b2041df2357f",
+  "sources": {
+    "Cargo.toml": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+    "Cargo.lock": "176512af279587109f7ae30b51433a79cec6c771bb5adb8c226af1717c02dedf",
+    "rust-toolchain.toml": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+    "crates/incant_render/Cargo.toml": "385058531b411a0af483b7c7226d09160e748bb79f939957a5a4582ecf6fc9b2",
+    "crates/incant_render/src/timing/recorder.rs": "ed0ff504313a909fbe262dfacb02d6edf85d869cd4963c34f1e725267f13aa87",
+    "crates/incant_render/src/timing/mod.rs": "9789d47afbef6bdf086ae42cc4ffe07f8519de81f1410a76243366646d11357a",
+    "crates/incant_render/src/timing/gpu_tests.rs": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3",
+    "crates/incant_render/src/timing/pool.rs": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+    "crates/incant_render/src/timing/tests.rs": "cdcb9ca717c73f4b16a0ba16ec856bed9de30b3da64770c26d483b90ebaf7867"
+  },
+  "checks": [
+    {
+      "name": "fmt-r2",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:32:30.235843+00:00",
+      "ended": "2026-10-13T06:32:31.387154+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/fmt-r2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tests-r2",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "timing::tests::"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:32:31.387503+00:00",
+      "ended": "2026-10-13T06:32:38.643077+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/tests-r2.log",
+      "sha256": "ab2379c33df11115d107b699a0de825214c18f76f7f7ea5a743bab59269b211c"
+    },
+    {
+      "name": "clippy-r2",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:32:38.643403+00:00",
+      "ended": "2026-10-13T06:32:40.152201+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/clippy-r2.log",
+      "sha256": "61d5afaf4e519b41627684ef5e2dcfa0d54611859dd96dd30aae47e63bbbc4c4"
+    }
+  ],
+  "prior_checks": [
+    {
+      "name": "fmt",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:26:35.276081+00:00",
+      "ended": "2026-10-13T06:26:36.597689+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "tests",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "timing::tests::"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:26:36.597998+00:00",
+      "ended": "2026-10-13T06:27:34.580404+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/tests.log",
+      "sha256": "8731fac6bc8e39f490a2a823fdcce6c24d5f44b9c854c5570dc17991cf804b7d"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:27:34.580916+00:00",
+      "ended": "2026-10-13T06:27:40.921223+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/clippy.log",
+      "sha256": "78ed760539c91917126ddfbb7107c80a6d543d7633354e05e373e6aedc224d83"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:27:40.921559+00:00",
+      "ended": "2026-10-13T06:27:40.952119+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "started": "2026-10-13T06:27:40.952393+00:00",
+      "ended": "2026-10-13T06:27:41.152837+00:00",
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tests": 10,
+  "review_sha256": "816d243f8cb64d84e338890bfc4692b8d1e2f261d6af5fdf1d3cb4252e0f31ac",
+  "records": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/results-r2.json",
+      "sha256": "3a888eac8361e8873fbbbbb252cfb88d13a6588219e8bbeec8b0ce54c9cc1c0b",
+      "bytes": 1514,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/3a888eac8361e8873fbbbbb252cfb88d13a6588219e8bbeec8b0ce54c9cc1c0b.gz",
+      "retained_sha256": "a04f56d8d15beb8305bd78a0e47ac1ac91a64343715d4373c83b16ef28c79c50"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/fmt-r2.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/results.json",
+      "sha256": "d788d635fb56ca4e972397fe766120043864c1eb5e4d1a7c09d03121c690a44e",
+      "bytes": 2266,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/d788d635fb56ca4e972397fe766120043864c1eb5e4d1a7c09d03121c690a44e.gz",
+      "retained_sha256": "b7e64949a98031851ad4c4fe7d9403437b7c2ae561a287397da359fcc47378ce"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/clippy.log",
+      "sha256": "78ed760539c91917126ddfbb7107c80a6d543d7633354e05e373e6aedc224d83",
+      "bytes": 3100,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/78ed760539c91917126ddfbb7107c80a6d543d7633354e05e373e6aedc224d83.gz",
+      "retained_sha256": "0044ebeb1b4d1f1cf9bc33b54b128540c263ee080bcc9fc8772dc4d667dc520c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/clippy-r2.log",
+      "sha256": "61d5afaf4e519b41627684ef5e2dcfa0d54611859dd96dd30aae47e63bbbc4c4",
+      "bytes": 176,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/61d5afaf4e519b41627684ef5e2dcfa0d54611859dd96dd30aae47e63bbbc4c4.gz",
+      "retained_sha256": "b7ec12f1e7861fe0ef9a92b2cf00dba3099ba846412be806fcf829f094063169"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/tests-r2.log",
+      "sha256": "ab2379c33df11115d107b699a0de825214c18f76f7f7ea5a743bab59269b211c",
+      "bytes": 1389,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/ab2379c33df11115d107b699a0de825214c18f76f7f7ea5a743bab59269b211c.gz",
+      "retained_sha256": "cfc1a2b2896ebd7b39c6e609bc3a6d8bbd4e1d525ddc1041b7800bf0b7bda987"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/tests.log",
+      "sha256": "8731fac6bc8e39f490a2a823fdcce6c24d5f44b9c854c5570dc17991cf804b7d",
+      "bytes": 4257,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/8731fac6bc8e39f490a2a823fdcce6c24d5f44b9c854c5570dc17991cf804b7d.gz",
+      "retained_sha256": "aa5c42060daa5dbfd5db536689ff94cf8a51898c4d91de554242f6170d8bedf7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/gpu-frame-envelope-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "source/Cargo.toml",
+      "sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+      "bytes": 3584,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857.gz",
+      "retained_sha256": "8a88b94a437b76f63d28bb04d3f5a7a21132718756eaa2fe89a59d328d319470"
+    },
+    {
+      "path": "source/Cargo.lock",
+      "sha256": "176512af279587109f7ae30b51433a79cec6c771bb5adb8c226af1717c02dedf",
+      "bytes": 252955,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/176512af279587109f7ae30b51433a79cec6c771bb5adb8c226af1717c02dedf.gz",
+      "retained_sha256": "516e0938170c8d05b341e4d931f7b0061f5aabeadd2c394439dd0ef8a3b47aeb"
+    },
+    {
+      "path": "source/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "bytes": 100,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124.gz",
+      "retained_sha256": "1cdb27a1925e711784f63973e12e40b77c171f78f0761dd77929264af057f3c6"
+    },
+    {
+      "path": "source/crates/incant_render/Cargo.toml",
+      "sha256": "385058531b411a0af483b7c7226d09160e748bb79f939957a5a4582ecf6fc9b2",
+      "bytes": 2441,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/385058531b411a0af483b7c7226d09160e748bb79f939957a5a4582ecf6fc9b2.gz",
+      "retained_sha256": "a61178aaad916001eaa15bfab3b82d710f6d58a2e22c134dd5f49b9459e3085c"
+    },
+    {
+      "path": "source/crates/incant_render/src/timing/recorder.rs",
+      "sha256": "ed0ff504313a909fbe262dfacb02d6edf85d869cd4963c34f1e725267f13aa87",
+      "bytes": 8829,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/ed0ff504313a909fbe262dfacb02d6edf85d869cd4963c34f1e725267f13aa87.gz",
+      "retained_sha256": "2b4e3a1168b66ab0b47aa7f81c0c8dca213471b1ac96d5f158d3323b5adef1fa"
+    },
+    {
+      "path": "source/crates/incant_render/src/timing/mod.rs",
+      "sha256": "9789d47afbef6bdf086ae42cc4ffe07f8519de81f1410a76243366646d11357a",
+      "bytes": 3702,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/9789d47afbef6bdf086ae42cc4ffe07f8519de81f1410a76243366646d11357a.gz",
+      "retained_sha256": "1fbe85b651a663f1d825818467d9341a880c69f839ecb916a54e786e024f2f11"
+    },
+    {
+      "path": "source/crates/incant_render/src/timing/gpu_tests.rs",
+      "sha256": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3",
+      "bytes": 3541,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3.gz",
+      "retained_sha256": "387cb18fa646bb9c60f72f464c013fb0d1978d26a850e0e57ca5f6f273395de0"
+    },
+    {
+      "path": "source/crates/incant_render/src/timing/pool.rs",
+      "sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+      "bytes": 3743,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549.gz",
+      "retained_sha256": "0f832639885b58858687a5d4b3a40dd270c214034165a1f9a088bbd0ffca3c2e"
+    },
+    {
+      "path": "source/crates/incant_render/src/timing/tests.rs",
+      "sha256": "cdcb9ca717c73f4b16a0ba16ec856bed9de30b3da64770c26d483b90ebaf7867",
+      "bytes": 9160,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/cdcb9ca717c73f4b16a0ba16ec856bed9de30b3da64770c26d483b90ebaf7867.gz",
+      "retained_sha256": "7be5c0bca0de0c39d1eb48254929677a92efe163cf1d5c452367f67367b5f127"
+    },
+    {
+      "path": "peer-review.json",
+      "sha256": "816d243f8cb64d84e338890bfc4692b8d1e2f261d6af5fdf1d3cb4252e0f31ac",
+      "bytes": 2278,
+      "retained": "docs/spikes/evidence/gpu-frame-envelope/816d243f8cb64d84e338890bfc4692b8d1e2f261d6af5fdf1d3cb4252e0f31ac.gz",
+      "retained_sha256": "42673ff6e279b68991fb763431d7b9473c956192dd718ec3bb16a530a357f8af"
+    }
+  ],
+  "limits": [
+    "CPU decode/reporting change only. No query descriptor, GPU encoding, submission, shader or resource-lifetime changes",
+    "Both checks runs actual0; first before conservative half-u64 guard, second final-source10 timing cases and all-target Clippy",
+    "Actual GPU/pass/appearance evidence is separately bound to unmodified f334 source in gpu-timestamps-r2.json",
+    "Half-u64 guard conservatively rejects ambiguous counter envelopes; no adapter-specific smaller wrap modulus inferred",
+    "Uninstrumented work/presentation/CPU frame latency not covered; no performance or phase gate"
+  ]
+}

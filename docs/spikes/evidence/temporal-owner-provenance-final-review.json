@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-13T12:36:09.111950+00:00",
+  "reviewer": "astra root",
+  "manifest_sha256": "ba95b3a89224ef20c1e3a614865e22294d4a0bb6003f973d6542a891d0daba49",
+  "source_review_sha256": "d8a96a3654ac2d1fa81500c1f0eb04be79d56f07dcf78df35cb4fcb2d675a37f",
+  "findings": [],
+  "verification": "Read full collector/audit/report, foundational provenance implementation and integer ABI boundary. Ran assertion-only audit0.56records54payloads31exactinputs9commands0;141default/156cookednative overlap,7focused overlap;8exact executablecopies;22WGSL/cookers unchanged. No GPU executed.",
+  "scope": "Accept CPU placement/change foundation as immutable producer. Independent current-main composition review remains required; do not import unaccepted portable/native rendering ancestry."
+}

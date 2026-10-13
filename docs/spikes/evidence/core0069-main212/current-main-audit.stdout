@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "records": 770,
+  "payloads": 2859,
+  "external_artifacts": 3
+}
+{
+  "passed": true,
+  "frozen_files": 3485,
+  "checks": 8,
+  "rust_cpu": 221,
+  "rust_ignored_gpu": 88,
+  "python_core": 20,
+  "locale_authoring": 4,
+  "native_positive": 14,
+  "native_exact_refusal": 1,
+  "binding_refusals": 3,
+  "shipping_positive": 10,
+  "exact_restart_pcm": 4,
+  "package_files": 37,
+  "player_sha256": "4186d085eec6e58c4edc078b96ebc133f1774331320c454d5e3d6148d1ce6261"
+}
+{
+  "passed": true,
+  "tested_source": "2489325ec5ebcf17e18e60d00c435d56f9b2bc26",
+  "actual_main": "09d53653a1b7b433cd9032166e35fa93d46db080",
+  "integration_head": "f2e4e372117ac4e033fa0361575e1613aa5ccd06",
+  "frozen_inputs": 3485,
+  "exemptions": [
+    {
+      "path": "crates/incant_render/src/timing/gpu_tests.rs",
+      "tested_sha256": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3",
+      "current_sha256": "8ea61d6b885a80f767d6c0edb7072e342b68dde7684c60ae94d549b34d4b6f58"
+    },
+    {
+      "path": "tools/probes/physics-parity/features.py",
+      "tested_sha256": "0ca4860d120c918455e4b8915f7b47fc57deeb59e93b374d40d2bc0822093b9a",
+      "current_sha256": "b994de168b20f16731d53a8e6ec1bd95c1c5fc5f7c0b318e90b30a2c380bbe99"
+    },
+    {
+      "path": "tools/tests/test_physics_parity.py",
+      "tested_sha256": "218e67169f2c8cfa36b788264920a4e068bf65b707e1a5b655a614c7d18846c2",
+      "current_sha256": "63a875ad2e69e0bb520f50655d72dd36a152417b40aeb4c093dc56d1d735b564"
+    }
+  ],
+  "original_audit_sha256": "04a85071ef944a9557e52bd9e270309074c8d17bfb4ebc3463bd01aa9d4e0ca2",
+  "source_review": [
+    {
+      "path": "docs/spikes/evidence/core0069-main212/final-review.json",
+      "sha256": "cd09ae48b128da98d2d4023e2f0fdbe4726a98136213df4af92f8b5dcde6da39"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-parity-vendor/final-review.json",
+      "sha256": "69ddb387fbb203499e9d997c43852f6884a33af9ff8021bd8de4784348d3a3f6"
+    },
+    {
+      "path": "docs/spikes/evidence/timestamp-capability/final-review.json",
+      "sha256": "27235c72c594d021e949949edd1d06553c40fc5f8188df0f45433740ddfe4113"
+    }
+  ],
+  "scope": "The only executable-scope differences from tested2489325 are the independently accepted physics portability Python helper/test and optional GPU timing test. No runtime implementation, shader, UI/text/sample, dependency, compiler, feature, or lock input differs. The original 221 CPU/20 Python/native/shipping executions remain explicitly on tested2489325; no new execution or GPU inference from ancestry. All original observable assertions replayed read-only with exact old/new Git hashes for only those three paths."
+}

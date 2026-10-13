@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-13T06:59:55.746431+00:00",
+  "status": "accepted",
+  "head": "e8cd1e79a67201a7fd993420b25ecf626a741fc3",
+  "manifest_sha256": "5bdfc07c99953eff0f87e142a670a091e9245490872dae736cc8586353ecb7eb",
+  "main": "d15b0bd28a1947bf0cc08d17a42ec5adc42032bb",
+  "producer": "b09beb365c3e6b3a5f49ebcabf938fe3e2883d13",
+  "independent_audit": {
+    "archive_records": 20,
+    "payloads": 11,
+    "original_byte_comparison": true,
+    "collector_verify_only_exit": 0,
+    "source_exactness": "52 crate inputs match independently accepted b09",
+    "checks": 8,
+    "cpu_tests": 115,
+    "ignored": 0,
+    "lock": "unchanged against actualmain208"
+  },
+  "limits": [
+    "115 cases include prior101 body-state cases; counts are not additive.",
+    "All52 crate source/test/manifest files equal acceptedb09. Older producer lock predates merged profiling packages/edges and renderer dev naga; current lock equals actualmain208.",
+    "No live constructor, complete owner authentication, solver buckets/caches or sleep-scan restoration proof, physics-save admission, GPU, shipping, device or performance claim."
+  ],
+  "authorization": "Publish scoped PR and merge only following actual required fast-check SUCCESS; no phase or restore/save admission approval."
+}

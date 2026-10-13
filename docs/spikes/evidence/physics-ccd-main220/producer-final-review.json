@@ -1,0 +1,68 @@
+{
+  "format": "incant-independent-source-cpu-review",
+  "version": 1,
+  "reviewer": "astra:/root/runtime_review",
+  "created_utc": "2026-10-13T11:20:23.639903+00:00",
+  "decision": "accepted-scoped-source-and-retained-cpu-evidence",
+  "commit": "1ebee95eb47f9d5fbf99af8ea461ef718998eba5",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/docs/spikes/evidence/physics-integration-config.json",
+    "sha256": "bdd1a905095e998f5ddf276826d42e9c94cec045d709de27d58e784ede94a6a3"
+  },
+  "source004_sha256": "2b68f72e0750a0488c7e0e8488daf585979d998e48432a46166c3163b283aeb2",
+  "source_followup": "Only two planar constructor closures changed to the identical direct function item; all production/vendor sources unchanged from accepted003. Entire delta inspected.",
+  "integrity": {
+    "live_frozen_sources": 100,
+    "lossless_records_originals_verified": 449,
+    "deduplicated_payloads": 141,
+    "copied_binaries": 6,
+    "zero_exit_commands": 13
+  },
+  "results": {
+    "tests-default-001": {
+      "passed": 156,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 23,
+      "nonempty_groups": 21
+    },
+    "tests-fast-001": {
+      "passed": 156,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 23,
+      "nonempty_groups": 21
+    },
+    "focused-004": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 3,
+      "nonempty_groups": 3
+    },
+    "focused-fast-001": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 3,
+      "nonempty_groups": 3
+    }
+  },
+  "findings": [],
+  "qualification": "Source003 full156 default and156 fast-simd8 are overlapping suites; source004 reruns focused21 in each mode plus strict Clippy/wasm/normal graph/fmt/conventions. Original compile/test-lint/CLI failures preserved. Reviewer parsed retained logs; no rerun or build performed.",
+  "retained_binary_mode": "All six copied binaries were observed mode0644; bytes match executed target artifacts, but direct execution requires an explicit executable copy/mode fix. This receipt does not claim they were executed from retained locations.",
+  "limits": [
+    "Inert records only; no live construction/cache installation/save admission",
+    "Default-only soft settings; no joints/soft owner closure",
+    "Exact u64 counts are not execution-work or destination usize admission",
+    "Actual substep spring/derived arithmetic remains a whole-owner prerequisite",
+    "Cache AABB shape coherence is observed in native fixtures, not validated against hostile shape geometry",
+    "Completed journals/build/witness equality are not authenticated phase or owner provenance",
+    "CPU only; no GPU/device/shipping/performance gate",
+    "Repeated native observer controls and numerical modes overlap; test counts are not additive coverage"
+  ],
+  "prior_receipts": [
+    "bf53123a8062032cb38fed5d48fe918b10c06aa4090ee31548c7f55df81c8668",
+    "12c4795b1257986d885d06f4c85f946613a37915331ccfb9d9a82556bca76988"
+  ]
+}

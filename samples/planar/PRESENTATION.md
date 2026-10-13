@@ -134,9 +134,11 @@ labels under root `01PSHD00000000000000000001`:
 | `01PSHD00000000000000000002` | status label | top centre, Inter 16 on a 20-point line, 6-point inset |
 | `01PSHD00000000000000000003` | prompt label | bottom centre, same type; always blank (see Restart) |
 
-Engine labels are light text with a hard one-pixel shadow and no surface. The
-status line therefore sits on dark ground: the top letterbox bar on taller
-windows, and otherwise the top cliff band. The band's two rows use a quiet moss
+Engine labels are light text with a thin dark halo (1/16 em, at least 1 px)
+and no surface; this layout was chosen under the earlier hard one-pixel shadow
+and has not been re-reviewed with the halo. The status line sits on dark
+ground: the top letterbox bar on taller windows, and otherwise the top cliff
+band. The band's two rows use a quiet moss
 variant without light tufts, so thin strokes stay clean. At 16:9 the alcove
 faces begin 28 points below the top edge, and the 6-point inset and 20-point
 line keep even the longest locale above them. There are no panels, borders or

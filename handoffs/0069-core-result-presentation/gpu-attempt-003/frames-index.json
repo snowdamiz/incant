@@ -1,0 +1,310 @@
+{
+ "final-ar-640x480--01-start.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-ar-640x480/01-start.rgba",
+  "rgba_sha256": "2ca24602d0e9c9b28c07007afbe5274ec6f026c9369059d8fcfa7de10e7b303b",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "1b81f73b6479343a991a2a5ab10923ab33b9b3a0a35043bad65cc3f7a2d08111",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2,
+  "generation": 1
+ },
+ "final-ar-640x480--02-won.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-ar-640x480/02-won.rgba",
+  "rgba_sha256": "8559652bb5ba0ae66789596da3b26a4c6344ae6b07b48085902ac2134bb87661",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "cb57bbb60ac50f357ac693eec66b6616e587b8f6f8eed6b18fbb29571a6ea97d",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2067,
+  "generation": 1
+ },
+ "final-en-420x320--01-start.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-420x320/01-start.rgba",
+  "rgba_sha256": "c0fbf18bdfc542d5207917c25c0c440bdadf8e7e1d10224ccb450381bcc9679a",
+  "size": [
+   420,
+   320
+  ],
+  "png_sha256": "f9dd70c0e739860fa416fe01a3e37fa9ee7429efb957b3ba416cca648009799c",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2,
+  "generation": 1
+ },
+ "final-en-420x320--02-won.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-420x320/02-won.rgba",
+  "rgba_sha256": "656a5fcaf90fe1f96693e9a673ec76a364c969820b3235e5a58e8ff03af81c37",
+  "size": [
+   420,
+   320
+  ],
+  "png_sha256": "f5b6d8828ce66879281dbb984a28fb469ccb36bb32cbe04567ac714715074096",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2067,
+  "generation": 1
+ },
+ "final-en-420x320--03-lost-generation-2.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-420x320/03-lost-generation-2.rgba",
+  "rgba_sha256": "da2e328af5a30f33a52429fab88a892b6c5c4757f7afe5ece58691cc7546aacd",
+  "size": [
+   420,
+   320
+  ],
+  "png_sha256": "e05a8450e897f44420343e42e8fb82f1d083527fccc998cb259cc09a67e199d8",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2773,
+  "generation": 2
+ },
+ "final-en-640x480--01-start.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-640x480/01-start.rgba",
+  "rgba_sha256": "cc801eab6170aa69dba0c4f64523f6404afa6ad774a58a975f7212d23206374b",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "2d66cce1d5aa0c1dceadb8263585e94bc80600c6b7aaa7c5682b86768bd811a5",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2,
+  "generation": 1
+ },
+ "final-en-640x480--02-lost.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-640x480/02-lost.rgba",
+  "rgba_sha256": "e63ba96d83a5711f889ea0155658f52cb9722eb7c118b21e2fb50a2225b46117",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "da84fd8b2e0f6667a2ce644a45553931ca607c8ec3afce967f9723b9798f3874",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 617,
+  "generation": 1
+ },
+ "final-en-640x480--03-after-r.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-640x480/03-after-r.rgba",
+  "rgba_sha256": "cc801eab6170aa69dba0c4f64523f6404afa6ad774a58a975f7212d23206374b",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "2d66cce1d5aa0c1dceadb8263585e94bc80600c6b7aaa7c5682b86768bd811a5",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 902,
+  "generation": 2
+ },
+ "final-en-640x480--04-won-generation-2.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-640x480/04-won-generation-2.rgba",
+  "rgba_sha256": "04c8ccde33c9baafc071515d7809761f90ae10d7f1c0c8409a904abf7c86b8ae",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "b9061b0e6be06ee6010c3e625f31f889716f6a63341ad32bfb8509ca0f19d327",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2967,
+  "generation": 2
+ },
+ "final-en-960x540--01-start.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-960x540/01-start.rgba",
+  "rgba_sha256": "72a8597dfba4d0c35e5b4cdc88950ae352a45d57a5ce3c4ce8c6a1e77c3c2453",
+  "size": [
+   960,
+   540
+  ],
+  "png_sha256": "36e14ccb1d9f5a14aaf0753997e6c39f603c189cf6bf5e3b363c068b0cc17d29",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2,
+  "generation": 1
+ },
+ "final-en-960x540--02-won.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-960x540/02-won.rgba",
+  "rgba_sha256": "be9f4f285d80c7c2b30605982edf0e794c897e9a68dd556412772c5fd3a48324",
+  "size": [
+   960,
+   540
+  ],
+  "png_sha256": "7253181fe62b9bd3e31869f02335929a6b1b6079b144b631629bd9989cd894c4",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2067,
+  "generation": 1
+ },
+ "final-en-960x540--03-after-start.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-960x540/03-after-start.rgba",
+  "rgba_sha256": "72a8597dfba4d0c35e5b4cdc88950ae352a45d57a5ce3c4ce8c6a1e77c3c2453",
+  "size": [
+   960,
+   540
+  ],
+  "png_sha256": "36e14ccb1d9f5a14aaf0753997e6c39f603c189cf6bf5e3b363c068b0cc17d29",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2158,
+  "generation": 2
+ },
+ "final-en-960x540--04-lost-generation-2.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-960x540/04-lost-generation-2.rgba",
+  "rgba_sha256": "1b4a556dec2441a48f8d3ccf856d6ba81289c5cea6309975c32839f55165e245",
+  "size": [
+   960,
+   540
+  ],
+  "png_sha256": "57a289b8fadb1d1853e31c2fc873682ee2a9b205862a02b6bc227eb8f2fcc270",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2773,
+  "generation": 2
+ },
+ "final-en-XA-420x320--01-lost.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-XA-420x320/01-lost.rgba",
+  "rgba_sha256": "c916592d47b4ef9b17e0ec1947925cd83166453425263ac7b21193267a5baa8d",
+  "size": [
+   420,
+   320
+  ],
+  "png_sha256": "e373acca5b9e5bb6e282c1e082af36a058d7913dee44124293f1eda61fb67877",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 617,
+  "generation": 1
+ },
+ "final-en-XA-640x480--01-start.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-XA-640x480/01-start.rgba",
+  "rgba_sha256": "4c8314a539b2520b8312749f40aba449ab62ac8b80b62952a8c892a77d4ddd10",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "dd1a3e20d4069e450d49bb18411a0477325e9d034e68cfd4d8ab71048ddc9f8d",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2,
+  "generation": 1
+ },
+ "final-en-XA-640x480--02-won.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-en-XA-640x480/02-won.rgba",
+  "rgba_sha256": "5ffb4bed816bf5908a17cba94926e666a3c89b0c4f46c81e102b22117a6b08c0",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "ad6c6324563333854dbf857efd2e09c3514840794f31f2330f5289eb58fc5a21",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2067,
+  "generation": 1
+ },
+ "final-zh-Hans-640x480--01-start.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-zh-Hans-640x480/01-start.rgba",
+  "rgba_sha256": "2d4bc24b83936f9240e27e3a8ac87623274cbb78d7ad46e15930c37d4cb9b48c",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "48fa3d37c13c5ea62f6b975eb364611c498541862d67058e9e243a1c5bf646f6",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2,
+  "generation": 1
+ },
+ "final-zh-Hans-640x480--02-lost.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/final-zh-Hans-640x480/02-lost.rgba",
+  "rgba_sha256": "04bf24eca389953a92244e3e45cb65e1b0a6abecacc1af052570aae4fb44f770",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "f94c6c69f1a17da3ee0e3787df285292eaf239f343195a350b5f2a000af2c953",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 617,
+  "generation": 1
+ },
+ "review-en-420x320--01-won.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/review-en-420x320/01-won.rgba",
+  "rgba_sha256": "656a5fcaf90fe1f96693e9a673ec76a364c969820b3235e5a58e8ff03af81c37",
+  "size": [
+   420,
+   320
+  ],
+  "png_sha256": "f5b6d8828ce66879281dbb984a28fb469ccb36bb32cbe04567ac714715074096",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2067,
+  "generation": 1
+ },
+ "review-en-640x480--01-lost.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/review-en-640x480/01-lost.rgba",
+  "rgba_sha256": "e63ba96d83a5711f889ea0155658f52cb9722eb7c118b21e2fb50a2225b46117",
+  "size": [
+   640,
+   480
+  ],
+  "png_sha256": "da84fd8b2e0f6667a2ce644a45553931ca607c8ec3afce967f9723b9798f3874",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 617,
+  "generation": 1
+ },
+ "review-en-960x540--01-won.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/review-en-960x540/01-won.rgba",
+  "rgba_sha256": "be9f4f285d80c7c2b30605982edf0e794c897e9a68dd556412772c5fd3a48324",
+  "size": [
+   960,
+   540
+  ],
+  "png_sha256": "7253181fe62b9bd3e31869f02335929a6b1b6079b144b631629bd9989cd894c4",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2067,
+  "generation": 1
+ },
+ "review-en-960x540--02-lost-generation-2.png": {
+  "source": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003/captures/review-en-960x540/02-lost-generation-2.rgba",
+  "rgba_sha256": "1b4a556dec2441a48f8d3ccf856d6ba81289c5cea6309975c32839f55165e245",
+  "size": [
+   960,
+   540
+  ],
+  "png_sha256": "57a289b8fadb1d1853e31c2fc873682ee2a9b205862a02b6bc227eb8f2fcc270",
+  "alpha_values": [
+   255
+  ],
+  "host_step": 2773,
+  "generation": 2
+ }
+}

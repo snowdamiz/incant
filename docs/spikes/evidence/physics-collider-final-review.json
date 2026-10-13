@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T10:33:30.303202+00:00",
+  "verdict": "accepted scoped inert collider implementation and retained CPU evidence; no phase or live restore gate",
+  "source_review_sha256": "4773d3bf2fdea3bd5e45f8c9029e0aa1dad912b06618c5b2de1a28381d12352b",
+  "manifest_sha256": "2fed433a3cf7986c49706ca196cc9c31e2ba78d283c59583c0046a8f374ecefd",
+  "audit_replayed": true,
+  "records": 73,
+  "frozen_inputs": 48,
+  "cpu_tests": 135,
+  "failures": 0,
+  "ignored": 0,
+  "checks_zero_exit": 7,
+  "native_dimensions": 2,
+  "trusted_continuation_steps": 600,
+  "retained_red_controls": 2,
+  "source_code_unchanged_since_review": true
+}

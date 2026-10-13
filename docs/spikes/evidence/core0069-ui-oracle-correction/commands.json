@@ -1,0 +1,73 @@
+[
+  {
+    "label": "renderer-cpu",
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/tools/cargo",
+      "test",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j",
+      "2",
+      "-p",
+      "incant_render",
+      "--message-format=json",
+      "--",
+      "--test-threads=1"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation",
+    "env": {
+      "PATH": "/opt/homebrew/opt/rustup/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin",
+      "HOME": "/Users/andreyyurlov",
+      "TMPDIR": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/",
+      "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target",
+      "CARGO_BUILD_JOBS": "2"
+    },
+    "started": "2026-10-13T09:11:06.255093+00:00",
+    "pid": 23932,
+    "exit": 0,
+    "reaped": true,
+    "finished": "2026-10-13T09:11:20.033324+00:00",
+    "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-cpu.stdout",
+    "stdout_sha256": "0395221628b9fe8b5b73b3e26b4e5c82ae8e5301ea2cd2a26f666491018aa726",
+    "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-cpu.stderr",
+    "stderr_sha256": "d259a413486a53545422e0d76bd6abcefe4358fda76a72323116c769d3995d7b"
+  },
+  {
+    "label": "renderer-clippy",
+    "argv": [
+      "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/tools/cargo",
+      "clippy",
+      "--offline",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j",
+      "2",
+      "-p",
+      "incant_render",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation",
+    "env": {
+      "PATH": "/opt/homebrew/opt/rustup/bin:/Users/andreyyurlov/.local/share/fnm/node-versions/v22.23.3/installation/bin:/opt/homebrew/bin:/usr/bin:/bin",
+      "HOME": "/Users/andreyyurlov",
+      "TMPDIR": "/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/",
+      "CARGO_TARGET_DIR": "/tmp/incant-agent-font-target",
+      "CARGO_BUILD_JOBS": "2"
+    },
+    "started": "2026-10-13T09:11:20.138401+00:00",
+    "pid": 24022,
+    "exit": 0,
+    "reaped": true,
+    "finished": "2026-10-13T09:11:25.138470+00:00",
+    "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-clippy.stdout",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/logs/renderer-clippy.stderr",
+    "stderr_sha256": "908e8b1a5981056a9e246ebd9aa8e3463cf14bbfcb54eb617c3ecabaa44d91dc"
+  }
+]

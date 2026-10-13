@@ -26,12 +26,24 @@ pub(crate) struct PreparedFrame {
     pub diagnostics: DiagnosticDraw,
     pub models: Option<ModelDraw>,
     pub motion: Option<crate::motion::MotionDraw>,
+    pub temporal: Option<crate::temporal::TemporalDraw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
+    pub bloom: Option<crate::bloom::BloomDraw>,
     pub output: OutputDraw,
 }
 #[cfg_attr(not(target_arch = "wasm32"), derive(Resource))]
-struct Encoder(wgpu::CommandEncoder);
+struct Encoder(wgpu::CommandEncoder, Option<crate::timing::Capture>);
+impl Encoder {
+    fn timed(
+        &mut self,
+        pass: crate::timing::GpuPass,
+        encode: impl FnOnce(&mut wgpu::CommandEncoder, Option<&crate::timing::PassQueries>),
+    ) {
+        let queries = self.1.as_mut().map(|capture| capture.pass(pass));
+        encode(&mut self.0, queries.as_ref());
+    }
+}
 #[cfg(not(target_arch = "wasm32"))]
 type FrameInput<'w> = Res<'w, PreparedFrame>;
 #[cfg(target_arch = "wasm32")]
@@ -43,6 +55,7 @@ type EncoderInput<'w> = NonSendMut<'w, Encoder>;
 struct GraphState {
     world: World,
     schedule: Schedule,
+    timings: Option<crate::timing::Profiler>,
 }
 pub(crate) struct FrameGraph(
     Mutex<GraphState>,
@@ -99,6 +112,7 @@ impl Default for FrameGraph {
             Mutex::new(GraphState {
                 world: World::new(),
                 schedule,
+                timings: None,
             }),
             #[cfg(target_arch = "wasm32")]
             std::marker::PhantomData,
@@ -130,6 +144,37 @@ fn take_encoder(world: &mut World) -> Encoder {
         .expect("graph owns encoder")
 }
 impl FrameGraph {
+    pub fn with_timings(device: &wgpu::Device, queue: &wgpu::Queue) -> Result<Self> {
+        let graph = Self::default();
+        graph
+            .0
+            .lock()
+            .map_err(|_| crate::timing::GpuTimingError::State)?
+            .timings = Some(crate::timing::Profiler::new(device, queue)?);
+        Ok(graph)
+    }
+    pub fn take_timing(
+        &self,
+    ) -> std::result::Result<Option<crate::timing::GpuFrameTiming>, crate::timing::GpuTimingError>
+    {
+        let state = self
+            .0
+            .lock()
+            .map_err(|_| crate::timing::GpuTimingError::State)?;
+        state.timings.as_ref().map_or(Ok(None), |p| p.take())
+    }
+    pub fn timing_stats(
+        &self,
+    ) -> std::result::Result<crate::timing::GpuTimingStats, crate::timing::GpuTimingError> {
+        let state = self
+            .0
+            .lock()
+            .map_err(|_| crate::timing::GpuTimingError::State)?;
+        state
+            .timings
+            .as_ref()
+            .map_or(Ok(Default::default()), |p| p.stats())
+    }
     pub fn encode(
         &self,
         device: &wgpu::Device,
@@ -139,25 +184,30 @@ impl FrameGraph {
             .0
             .lock()
             .map_err(|_| ResourceError::CacheLock("frame graph"))?;
-        let GraphState { world, schedule } = &mut *state;
-        insert_frame(
+        let GraphState {
             world,
-            frame,
-            Encoder(
-                device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
-                    label: Some("Incant frame graph"),
-                }),
-            ),
-        );
+            schedule,
+            timings,
+        } = &mut *state;
+        let encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
+            label: Some("Incant frame graph"),
+        });
+        let capture = timings.as_ref().map(|p| p.begin()).transpose()?.flatten();
+        insert_frame(world, frame, Encoder(encoder, capture));
         schedule.run(world);
         // No frame handles remain in the scheduler after encoding. Wgpu retains
         // the referenced GPU resources in the returned command buffer instead.
-        let encoder = take_encoder(world);
+        let mut encoder = take_encoder(world);
+        if let Some(capture) = encoder.1.take() {
+            capture.finish(&mut encoder.0);
+        }
         Ok(encoder.0.finish())
     }
 }
 fn initialize_scene(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    frame.diagnostics.encode(&mut encoder.0);
+    encoder.timed(crate::timing::GpuPass::InitializeScene, |e, q| {
+        frame.diagnostics.encode(e, q)
+    });
 }
 fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = frame
@@ -165,38 +215,198 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         .as_ref()
         .and_then(|m| m.lighting.compute.as_ref())
     {
-        pass.encode(&mut encoder.0);
+        encoder.timed(crate::timing::GpuPass::AssignLights, |e, q| {
+            pass.encode(e, q)
+        });
+    }
+}
+// One logical Models interval includes motion, both resolve passes and every
+// model subpass actually encoded. Interior passes omit descriptors entirely.
+#[derive(Debug)]
+struct ModelsPlan {
+    motion: bool,
+    opaque: bool,
+    temporal: bool,
+    overlay_depth: bool,
+    transparent: bool,
+    all: bool,
+}
+impl ModelsPlan {
+    fn new(motion: bool, temporal: bool, models: bool, opaque: bool, transparent: bool) -> Self {
+        Self {
+            motion,
+            opaque: temporal && opaque,
+            temporal,
+            overlay_depth: false,
+            transparent: temporal && transparent,
+            all: !temporal && models,
+        }
+    }
+    fn with_overlay_depth(mut self, active: bool) -> Self {
+        self.overlay_depth = self.temporal && self.motion && active;
+        self
+    }
+    fn count(&self) -> usize {
+        usize::from(self.motion)
+            + usize::from(self.opaque)
+            + 2 * usize::from(self.temporal)
+            + usize::from(self.overlay_depth)
+            + usize::from(self.transparent)
+            + usize::from(self.all)
     }
 }
 fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    if let Some(pass) = &frame.motion {
-        pass.encode(&mut encoder.0);
+    let plan = ModelsPlan::new(
+        frame.motion.is_some(),
+        frame.temporal.is_some(),
+        frame.models.is_some(),
+        frame.models.as_ref().is_some_and(|m| m.has_opaque()),
+        frame.models.as_ref().is_some_and(|m| m.has_transparent()),
+    )
+    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()));
+    if plan.count() == 0 {
+        return;
     }
-    if let Some(pass) = &frame.models {
-        pass.encode(&mut encoder.0);
-    }
+    encoder.timed(crate::timing::GpuPass::Models, |encoder, queries| {
+        let mut index = 0;
+        let mut timestamp = || {
+            let result = queries.and_then(|q| q.render_range(index, plan.count()));
+            index += 1;
+            result
+        };
+        if plan.motion {
+            frame.motion.as_ref().unwrap().encode(encoder, timestamp());
+        }
+        if plan.opaque {
+            frame
+                .models
+                .as_ref()
+                .unwrap()
+                .encode_opaque(encoder, timestamp());
+        }
+        if plan.temporal {
+            frame
+                .temporal
+                .as_ref()
+                .unwrap()
+                .encode(encoder, timestamp(), timestamp());
+        }
+        if plan.overlay_depth {
+            frame
+                .motion
+                .as_ref()
+                .unwrap()
+                .encode_overlay_depth(encoder, timestamp());
+        }
+        if plan.transparent {
+            frame
+                .models
+                .as_ref()
+                .unwrap()
+                .encode_transparent(encoder, timestamp());
+        }
+        if plan.all {
+            frame.models.as_ref().unwrap().encode(encoder, timestamp());
+        }
+        debug_assert_eq!(index, plan.count());
+    });
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    frame.output.encode(&mut encoder.0);
+    encoder.timed(crate::timing::GpuPass::Display, |e, q| {
+        let bloom_passes = frame.bloom.as_ref().map_or(0, |draw| draw.pass_count());
+        if let Some(draw) = &frame.bloom {
+            draw.encode(e, q);
+        }
+        frame.output.encode(
+            e,
+            q.and_then(|queries| queries.render_range(bloom_passes, bloom_passes + 1)),
+        )
+    });
 }
 
 fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    if let Some(pass) = &frame.models {
-        pass.shadows.encode(&mut encoder.0);
+    if let Some(pass) = &frame.models
+        && pass.shadows.has_passes()
+    {
+        encoder.timed(crate::timing::GpuPass::Shadows, |e, q| {
+            pass.shadows.encode(e, q)
+        });
     }
 }
 
 fn sprites(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     if let Some(pass) = &frame.sprites {
-        pass.encode(&mut encoder.0);
+        encoder.timed(crate::timing::GpuPass::Sprites, |e, q| pass.encode(e, q));
     }
 }
 
 fn text(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    if let Some(pass) = &frame.text {
-        pass.encode(&mut encoder.0);
+    if let Some(pass) = &frame.text
+        && pass.has_passes()
+    {
+        encoder.timed(crate::timing::GpuPass::Text, |e, q| pass.encode(e, q));
     }
 }
 #[cfg(test)]
 #[path = "../tests/graph_ownership/mod.rs"]
 mod ownership_tests;
+
+#[cfg(test)]
+#[test]
+fn temporal_models_interval_counts_motion_and_each_real_resolve_overlay_pass() {
+    assert_eq!(
+        ModelsPlan::new(false, false, false, false, false).count(),
+        0
+    );
+    assert_eq!(ModelsPlan::new(false, false, true, true, true).count(), 1);
+    assert_eq!(ModelsPlan::new(true, false, true, true, true).count(), 2);
+    assert_eq!(ModelsPlan::new(true, true, true, true, true).count(), 5);
+    assert_eq!(ModelsPlan::new(true, true, true, false, true).count(), 4);
+    assert_eq!(ModelsPlan::new(true, true, true, true, false).count(), 4);
+    assert_eq!(ModelsPlan::new(true, true, false, false, false).count(), 3);
+    // Overlay depth is a real render pass even when the only overlay is a sprite
+    // or text batch, so it owns the interval's end if no transparent model follows.
+    assert_eq!(
+        ModelsPlan::new(true, true, true, true, false)
+            .with_overlay_depth(true)
+            .count(),
+        5
+    );
+    assert_eq!(
+        ModelsPlan::new(true, true, true, true, true)
+            .with_overlay_depth(true)
+            .count(),
+        6
+    );
+    assert_eq!(
+        ModelsPlan::new(true, false, true, true, true)
+            .with_overlay_depth(true)
+            .count(),
+        2
+    );
+    for motion in [false, true] {
+        for temporal in [false, true] {
+            for opaque in [false, true] {
+                for transparent in [false, true] {
+                    let p = ModelsPlan::new(
+                        motion,
+                        temporal,
+                        opaque || transparent,
+                        opaque,
+                        transparent,
+                    );
+                    let operations = [
+                        p.motion,
+                        p.opaque,
+                        p.temporal,
+                        p.temporal,
+                        p.transparent,
+                        p.all,
+                    ];
+                    assert_eq!(operations.into_iter().filter(|b| *b).count(), p.count());
+                    assert!(!p.all || (!p.opaque && !p.transparent && !p.temporal));
+                }
+            }
+        }
+    }
+}

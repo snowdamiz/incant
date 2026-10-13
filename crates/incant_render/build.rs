@@ -1,4 +1,43 @@
+#[cfg(feature = "cooked-temporal")]
+#[path = "src/lighting/temporal_source.rs"]
+mod temporal_source;
 fn main() {
+    #[cfg(feature = "cooked-temporal")]
+    if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
+        use incant_shader_cook::temporal::{self, Kind};
+        let output =
+            std::path::PathBuf::from(std::env::var_os("OUT_DIR").expect("Cargo output directory"));
+        for (kind, paths, name) in [
+            (Kind::Motion, vec!["src/motion/shader.wgsl"], "motion"),
+            (Kind::Depth, vec!["src/motion/shader.wgsl"], "depth"),
+            (Kind::Resolve, vec!["src/temporal/resolve.wgsl"], "resolve"),
+            (Kind::Copy, vec!["src/temporal/copy.wgsl"], "copy"),
+        ] {
+            let source = paths
+                .iter()
+                .map(|path| {
+                    println!("cargo:rerun-if-changed={path}");
+                    std::fs::read_to_string(path).expect("engine-owned temporal program")
+                })
+                .collect::<Vec<_>>()
+                .join("\n");
+            let bundle = temporal::cook(kind, &source).expect("fixed temporal source and ABI");
+            temporal::write_bundle(kind, &bundle, &output.join(format!("temporal-{name}")))
+                .expect("write temporal program");
+        }
+        println!("cargo:rerun-if-changed=src/lighting/temporal_source.rs");
+        println!("cargo:rerun-if-changed=src/lighting/grid.wgsl");
+        let source =
+            temporal_source::temporal_grid_source().expect("guarded temporal cluster source");
+        let bundle =
+            incant_shader_cook::compute::cook(&source).expect("fixed temporal compute ABI");
+        incant_shader_cook::compute::write_bundle(
+            &bundle,
+            &output.join("temporal-cluster-shaders"),
+        )
+        .expect("write temporal clusters");
+    }
+
     #[cfg(feature = "cooked-clusters")]
     if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() != Ok("wasm32") {
         println!("cargo:rerun-if-changed=src/lighting/grid.wgsl");

@@ -1,0 +1,909 @@
+incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render)
+bevy_ecs v0.19.1
+arrayvec v0.7.8
+bevy_ecs_macros v0.19.1 (proc-macro)
+bevy_ecs_macro_logic v0.19.1
+bevy_macro_utils v0.19.1
+proc-macro2 v1.0.107
+unicode-ident v1.0.26
+quote v1.0.47
+proc-macro2 v1.0.107 (*)
+syn v2.0.119
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+unicode-ident v1.0.26
+toml_edit v0.25.16+spec-1.1.0
+indexmap v2.14.2
+equivalent v1.0.2
+hashbrown v0.17.1
+toml_datetime v1.1.2+spec-1.1.0
+toml_parser v1.1.4+spec-1.1.0
+winnow v1.0.4
+winnow v1.0.4
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+bevy_macro_utils v0.19.1 (*)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+bevy_platform v0.19.1
+foldhash v0.2.0
+futures-lite v2.6.1
+fastrand v2.5.0
+futures-core v0.3.34
+futures-io v0.3.34
+parking v2.2.1
+pin-project-lite v0.2.17
+hashbrown v0.16.1
+allocator-api2 v0.2.21
+equivalent v1.0.2
+foldhash v0.2.0
+spin v0.10.1
+bevy_ptr v0.19.1
+bevy_tasks v0.19.1
+async-channel v2.5.0
+concurrent-queue v2.5.0
+crossbeam-utils v0.8.23
+event-listener-strategy v0.5.4
+event-listener v5.4.2
+parking v2.2.1
+pin-project-lite v0.2.17
+pin-project-lite v0.2.17
+futures-core v0.3.34
+pin-project-lite v0.2.17
+async-executor v1.14.0
+async-task v4.7.1
+concurrent-queue v2.5.0 (*)
+fastrand v2.5.0
+futures-lite v2.6.1 (*)
+pin-project-lite v0.2.17
+slab v0.4.12
+async-task v4.7.1
+atomic-waker v1.1.2
+bevy_platform v0.19.1 (*)
+concurrent-queue v2.5.0 (*)
+crossbeam-queue v0.3.14
+crossbeam-utils v0.8.23
+derive_more v2.1.1
+derive_more-impl v2.1.1 (proc-macro)
+convert_case v0.10.0
+unicode-segmentation v1.13.3
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+unicode-xid v0.2.6
+rustc_version v0.4.1
+semver v1.0.28
+futures-lite v2.6.1 (*)
+bevy_utils v0.19.1
+bevy_platform v0.19.1 (*)
+disqualified v1.1.0
+indexmap v2.14.2
+equivalent v1.0.2
+hashbrown v0.17.1
+foldhash v0.2.0
+serde_core v1.0.229
+thread_local v1.1.10
+cfg-if v1.0.5
+bitflags v2.13.2
+bumpalo v3.20.3
+concurrent-queue v2.5.0 (*)
+derive_more v2.1.1 (*)
+fixedbitset v0.5.7
+indexmap v2.14.2 (*)
+log v0.4.34
+nonmax v0.5.5
+slotmap v1.1.1
+version_check v0.9.5
+smallvec v1.16.2
+thiserror v2.0.21
+thiserror-impl v2.0.21 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+unicode-ident v1.0.26
+variadics_please v1.1.0 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+bytemuck v1.25.2
+bytemuck_derive v1.12.1 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+glam v0.32.1
+libm v0.2.16
+half v2.7.1
+cfg-if v1.0.5
+num-traits v0.2.19
+libm v0.2.16
+autocfg v1.5.1
+zerocopy v0.8.62
+zerocopy-derive v0.8.62 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d)
+schemars v1.2.2
+dyn-clone v1.0.20
+ref-cast v1.0.27
+ref-cast-impl v1.0.27 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+schemars_derive v1.2.2 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+serde_derive_internals v0.30.0
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+syn v3.0.6 (*)
+serde v1.0.229
+serde_core v1.0.229
+serde_derive v1.0.229 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+serde_json v1.0.151
+itoa v1.0.18
+memchr v2.8.3
+serde_core v1.0.229
+zmij v1.0.23
+serde v1.0.229 (*)
+thiserror v2.0.21 (*)
+ulid v1.2.1
+rand v0.9.5
+rand_chacha v0.9.0
+ppv-lite86 v0.2.21
+zerocopy v0.8.62 (*)
+rand_core v0.9.5
+getrandom v0.3.4
+cfg-if v1.0.5
+libc v0.2.190
+rand_core v0.9.5 (*)
+serde v1.0.229 (*)
+incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_assets_runtime)
+glam v0.32.1 (*)
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d) (*)
+incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_anim)
+glam v0.32.1 (*)
+thiserror v2.0.21 (*)
+incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_text)
+cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/cosmic-text)
+bitflags v2.13.2
+fontdb v0.16.2
+log v0.4.34
+memmap2 v0.9.11
+libc v0.2.190
+slotmap v1.1.1 (*)
+tinyvec v1.13.3
+ttf-parser v0.20.0
+log v0.4.34
+rangemap v1.8.0
+rustc-hash v1.1.0
+rustybuzz v0.14.1
+bitflags v2.13.2
+bytemuck v1.25.2 (*)
+libm v0.2.16
+smallvec v1.16.2
+ttf-parser v0.21.1
+unicode-bidi-mirroring v0.2.0
+unicode-ccc v0.2.0
+unicode-properties v0.1.4
+unicode-script v0.5.8
+self_cell v1.3.0
+smol_str v0.2.2
+sys-locale v0.3.2
+ttf-parser v0.21.1
+unicode-bidi v0.3.18
+unicode-linebreak v0.1.5
+unicode-script v0.5.8
+unicode-segmentation v1.13.3
+rustybuzz v0.14.1 (*)
+sha2 v0.10.9
+cfg-if v1.0.5
+cpufeatures v0.2.17
+libc v0.2.190
+digest v0.10.7
+block-buffer v0.10.4
+generic-array v0.14.7
+typenum v1.20.1
+version_check v0.9.5
+crypto-common v0.1.7
+generic-array v0.14.7 (*)
+typenum v1.20.1
+thiserror v2.0.21 (*)
+ulid v1.2.1 (*)
+unicode-script v0.5.8
+unicode-segmentation v1.13.3
+zeno v0.3.3
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+ktx2 v0.5.0
+bitflags v2.13.2
+meshopt v0.6.2
+bitflags v2.13.2
+float-cmp v0.10.0
+num-traits v0.2.19 (*)
+thiserror v2.0.21 (*)
+cc v1.6.0
+find-msvc-tools v0.1.14
+shlex v2.0.1
+serde v1.0.229 (*)
+serde_json v1.0.151 (*)
+sha2 v0.10.9 (*)
+thiserror v2.0.21 (*)
+ulid v1.2.1 (*)
+incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_data)
+glam v0.32.1 (*)
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d) (*)
+incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_assets_runtime) (*)
+incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_text) (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+serde v1.0.229 (*)
+thiserror v2.0.21 (*)
+ulid v1.2.1 (*)
+incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_text) (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+png v0.18.1
+bitflags v2.13.2
+crc32fast v1.5.2
+cfg-if v1.0.5
+fdeflate v0.3.7
+simd-adler32 v0.3.10
+flate2 v1.1.10
+crc32fast v1.5.2 (*)
+miniz_oxide v0.9.1
+adler2 v2.0.1
+simd-adler32 v0.3.10
+miniz_oxide v0.8.9
+adler2 v2.0.1
+simd-adler32 v0.3.10
+pollster v0.4.0
+rustix v1.1.5
+bitflags v2.13.2
+errno v0.3.14
+libc v0.2.190
+libc v0.2.190
+serde v1.0.229 (*)
+sha2 v0.10.9 (*)
+thiserror v2.0.21 (*)
+wgpu v29.0.4
+arrayvec v0.7.8
+bitflags v2.13.2
+bytemuck v1.25.2 (*)
+cfg-if v1.0.5
+document-features v0.2.12 (proc-macro)
+litrs v1.0.0
+hashbrown v0.16.1 (*)
+log v0.4.34
+parking_lot v0.12.5
+lock_api v0.4.14
+scopeguard v1.2.0
+parking_lot_core v0.9.12
+cfg-if v1.0.5
+libc v0.2.190
+smallvec v1.16.2
+profiling v1.0.18
+profiling-procmacros v1.0.18 (proc-macro)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+raw-window-handle v0.6.2
+smallvec v1.16.2
+static_assertions v1.1.0
+wgpu-core v29.0.4
+arrayvec v0.7.8
+bit-set v0.9.1
+bit-vec v0.9.1
+bit-vec v0.9.1
+bitflags v2.13.2
+bytemuck v1.25.2 (*)
+document-features v0.2.12 (proc-macro) (*)
+hashbrown v0.16.1 (*)
+indexmap v2.14.2 (*)
+log v0.4.34
+naga v29.0.4
+arrayvec v0.7.8
+bit-set v0.9.1 (*)
+bitflags v2.13.2
+cfg-if v1.0.5
+codespan-reporting v0.13.1
+unicode-width v0.2.2
+half v2.7.1 (*)
+hashbrown v0.16.1 (*)
+hexf-parse v0.2.1
+indexmap v2.14.2 (*)
+libm v0.2.16
+log v0.4.34
+num-traits v0.2.19 (*)
+once_cell v1.21.4
+rustc-hash v1.1.0
+thiserror v2.0.21 (*)
+unicode-ident v1.0.26
+cfg_aliases v0.2.2
+once_cell v1.21.4
+parking_lot v0.12.5 (*)
+profiling v1.0.18 (*)
+raw-window-handle v0.6.2
+rustc-hash v1.1.0
+smallvec v1.16.2
+thiserror v2.0.21 (*)
+wgpu-core-deps-apple v29.0.4
+wgpu-hal v29.0.4
+arrayvec v0.7.8
+bitflags v2.13.2
+block2 v0.6.2
+objc2 v0.6.5
+objc2-encode v4.1.0
+bytemuck v1.25.2 (*)
+cfg-if v1.0.5
+hashbrown v0.16.1 (*)
+libc v0.2.190
+log v0.4.34
+naga v29.0.4 (*)
+objc2 v0.6.5 (*)
+objc2-core-foundation v0.3.2
+bitflags v2.13.2
+objc2 v0.6.5 (*)
+objc2-foundation v0.3.2
+bitflags v2.13.2
+objc2 v0.6.5 (*)
+objc2-core-foundation v0.3.2 (*)
+objc2-metal v0.3.2
+bitflags v2.13.2
+block2 v0.6.2 (*)
+objc2 v0.6.5 (*)
+objc2-foundation v0.3.2 (*)
+objc2-quartz-core v0.3.2
+bitflags v2.13.2
+objc2 v0.6.5 (*)
+objc2-core-foundation v0.3.2 (*)
+objc2-foundation v0.3.2 (*)
+objc2-metal v0.3.2 (*)
+parking_lot v0.12.5 (*)
+profiling v1.0.18 (*)
+raw-window-handle v0.6.2
+raw-window-metal v1.1.0
+objc2 v0.6.5 (*)
+objc2-core-foundation v0.3.2 (*)
+objc2-foundation v0.3.2 (*)
+objc2-quartz-core v0.3.2 (*)
+smallvec v1.16.2
+thiserror v2.0.21 (*)
+wgpu-naga-bridge v29.0.4
+naga v29.0.4 (*)
+wgpu-types v29.0.4
+bitflags v2.13.2
+bytemuck v1.25.2 (*)
+log v0.4.34
+raw-window-handle v0.6.2
+wgpu-types v29.0.4 (*)
+cfg_aliases v0.2.2
+wgpu-hal v29.0.4 (*)
+wgpu-naga-bridge v29.0.4 (*)
+wgpu-types v29.0.4 (*)
+cfg_aliases v0.2.2
+wgpu-hal v29.0.4 (*)
+wgpu-types v29.0.4 (*)
+cfg_aliases v0.2.2
+incant_shader_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_shader_cook)
+naga v29.0.4
+arrayvec v0.7.8
+bit-set v0.9.1 (*)
+bitflags v2.13.2
+cfg-if v1.0.5
+codespan-reporting v0.13.1 (*)
+half v2.7.1
+cfg-if v1.0.5
+num-traits v0.2.19
+libm v0.2.16
+autocfg v1.5.1
+zerocopy v0.8.62 (*)
+hashbrown v0.16.1
+foldhash v0.2.0
+hexf-parse v0.2.1
+indexmap v2.14.2 (*)
+libm v0.2.16
+log v0.4.34
+num-traits v0.2.19 (*)
+once_cell v1.21.4
+rustc-hash v1.1.0
+spirv v0.4.0+sdk-1.4.341.0
+bitflags v2.13.2
+thiserror v2.0.21 (*)
+unicode-ident v1.0.26
+cfg_aliases v0.2.2
+sha2 v0.10.9 (*)
+thiserror v2.0.21 (*)
+incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_assets)
+base64 v0.22.1
+exr v1.74.2
+bit_field v0.10.3
+half v2.7.1 (*)
+lebe v0.5.3
+miniz_oxide v0.8.9 (*)
+num-complex v0.4.6
+bytemuck v1.25.2 (*)
+num-traits v0.2.19 (*)
+pulp v0.22.3
+bytemuck v1.25.2 (*)
+cfg-if v1.0.5
+libm v0.2.16
+num-complex v0.4.6 (*)
+paste v1.0.15 (proc-macro)
+pulp-wasm-simd-flag v0.1.1
+reborrow v0.5.5
+version_check v0.9.5
+smallvec v1.16.2
+zune-inflate v0.2.54
+simd-adler32 v0.3.10
+glam v0.32.1 (*)
+gltf v1.4.1
+byteorder v1.5.0
+gltf-json v1.4.1
+gltf-derive v1.4.1 (proc-macro)
+inflections v1.1.1
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+serde v1.0.229 (*)
+serde_derive v1.0.229 (proc-macro) (*)
+serde_json v1.0.151 (*)
+lazy_static v1.5.1
+serde_json v1.0.151 (*)
+image v0.25.10
+bytemuck v1.25.2 (*)
+byteorder-lite v0.1.0
+exr v1.74.2 (*)
+moxcms v0.8.1
+num-traits v0.2.19 (*)
+pxfm v0.1.30
+num-traits v0.2.19 (*)
+png v0.18.1 (*)
+zune-core v0.5.3
+zune-jpeg v0.5.15
+zune-core v0.5.3
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d) (*)
+incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_assets_runtime) (*)
+incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_doc)
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d) (*)
+incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_input)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+serde_json v1.0.151 (*)
+thiserror v2.0.21 (*)
+incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_localization)
+icu_datetime v2.3.0
+displaydoc v0.2.7 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+fixed_decimal v0.7.2
+displaydoc v0.2.7 (proc-macro) (*)
+smallvec v1.16.2
+writeable v0.6.4
+either v1.19.0
+icu_calendar v2.3.0
+calendrical_calculations v0.2.4
+core_maths v0.1.1
+libm v0.2.16
+displaydoc v0.2.7 (proc-macro) (*)
+displaydoc v0.2.7 (proc-macro) (*)
+icu_calendar_data v2.3.0
+icu_locale_core v2.3.0
+displaydoc v0.2.7 (proc-macro) (*)
+litemap v0.8.3
+tinystr v0.8.4
+displaydoc v0.2.7 (proc-macro) (*)
+zerovec v0.11.8
+yoke v0.8.3
+stable_deref_trait v1.2.1
+yoke-derive v0.8.4 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+synstructure v0.14.0
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+zerofrom v0.1.8
+zerofrom-derive v0.1.8 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+synstructure v0.14.0 (*)
+zerofrom v0.1.8 (*)
+zerovec-derive v0.11.6 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+writeable v0.6.4 (*)
+zerovec v0.11.8 (*)
+icu_locale_fallback v2.3.0
+icu_locale_core v2.3.0 (*)
+icu_locale_fallback_data v2.3.0
+icu_provider v2.3.1
+displaydoc v0.2.7 (proc-macro) (*)
+icu_locale_core v2.3.0 (*)
+stable_deref_trait v1.2.1
+writeable v0.6.4 (*)
+yoke v0.8.3 (*)
+zerofrom v0.1.8 (*)
+zerotrie v0.2.5
+displaydoc v0.2.7 (proc-macro) (*)
+yoke v0.8.3 (*)
+zerofrom v0.1.8 (*)
+zerovec v0.11.8 (*)
+potential_utf v0.1.6
+writeable v0.6.4 (*)
+zerovec v0.11.8 (*)
+tinystr v0.8.4 (*)
+zerovec v0.11.8 (*)
+icu_provider v2.3.1 (*)
+tinystr v0.8.4 (*)
+zerovec v0.11.8 (*)
+icu_datetime_data v2.3.0
+icu_decimal v2.3.0
+displaydoc v0.2.7 (proc-macro) (*)
+fixed_decimal v0.7.2 (*)
+icu_decimal_data v2.3.0
+icu_locale_core v2.3.0 (*)
+icu_locale_fallback v2.3.0 (*)
+icu_provider v2.3.1 (*)
+writeable v0.6.4 (*)
+zerovec v0.11.8 (*)
+icu_locale_core v2.3.0 (*)
+icu_locale_fallback v2.3.0 (*)
+icu_pattern v0.5.0
+displaydoc v0.2.7 (proc-macro) (*)
+either v1.19.0
+writeable v0.6.4 (*)
+zerovec v0.11.8 (*)
+icu_plurals v2.3.0
+fixed_decimal v0.7.2 (*)
+icu_locale_fallback v2.3.0 (*)
+icu_plurals_data v2.3.0
+icu_provider v2.3.1 (*)
+zerovec v0.11.8 (*)
+icu_provider v2.3.1 (*)
+icu_time v2.3.0
+calendrical_calculations v0.2.4 (*)
+displaydoc v0.2.7 (proc-macro) (*)
+icu_calendar v2.3.0 (*)
+icu_locale_core v2.3.0 (*)
+icu_provider v2.3.1 (*)
+icu_time_data v2.3.1
+zerotrie v0.2.5 (*)
+zerovec v0.11.8 (*)
+potential_utf v0.1.6 (*)
+tinystr v0.8.4 (*)
+writeable v0.6.4 (*)
+zerovec v0.11.8 (*)
+icu_decimal v2.3.0 (*)
+icu_locale v2.3.0
+icu_collections v2.3.0
+displaydoc v0.2.7 (proc-macro) (*)
+potential_utf v0.1.6 (*)
+utf8_iter v1.0.4
+yoke v0.8.3 (*)
+zerofrom v0.1.8 (*)
+zerovec v0.11.8 (*)
+icu_locale_core v2.3.0 (*)
+icu_locale_fallback v2.3.0 (*)
+icu_provider v2.3.1 (*)
+tinystr v0.8.4 (*)
+zerovec v0.11.8 (*)
+icu_plurals v2.3.0 (*)
+quick-xml v0.42.0
+memchr v2.8.3
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+serde_json v1.0.151 (*)
+thiserror v2.0.21 (*)
+ulid v1.2.1 (*)
+writeable v0.6.4 (*)
+incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_nav)
+dodgy_2d v0.5.5
+glam v0.29.3
+libm v0.2.16
+rand v0.9.5 (*)
+glam v0.29.3 (*)
+glam v0.32.1 (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+rerecast v0.4.0 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/rerecast)
+anyhow v1.0.104
+bitflags v2.13.2
+glam v0.32.1 (*)
+libm v0.2.16
+slotmap v1.1.1 (*)
+thiserror v2.0.21 (*)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+sha2 v0.10.9 (*)
+thiserror v2.0.21 (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+serde_json v1.0.151 (*)
+thiserror v2.0.21 (*)
+ulid v1.2.1 (*)
+incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_nav) (*)
+ktx2 v0.5.0 (*)
+meshopt v0.6.2 (*)
+mikktspace v0.3.0
+glam v0.15.2
+percent-encoding v2.3.2
+serde v1.0.229 (*)
+serde_json v1.0.151 (*)
+sha2 v0.10.9 (*)
+symphonia v0.6.0
+lazy_static v1.5.1
+symphonia-codec-pcm v0.6.1
+log v0.4.34
+symphonia-core v0.6.1
+bitflags v2.13.2
+bytemuck v1.25.2 (*)
+lazy_static v1.5.1
+log v0.4.34
+num-complex v0.4.6 (*)
+smallvec v1.16.2
+symphonia-codec-vorbis v0.6.1
+log v0.4.34
+symphonia-common v0.6.1
+log v0.4.34
+symphonia-core v0.6.1 (*)
+symphonia-metadata v0.6.1
+lazy_static v1.5.1
+log v0.4.34
+regex-lite v0.1.9
+smallvec v1.16.2
+symphonia-core v0.6.1 (*)
+symphonia-core v0.6.1 (*)
+symphonia-core v0.6.1 (*)
+symphonia-format-ogg v0.6.1
+log v0.4.34
+symphonia-common v0.6.1 (*)
+symphonia-core v0.6.1 (*)
+symphonia-metadata v0.6.1 (*)
+symphonia-format-riff v0.6.1
+extended v0.1.0
+log v0.4.34
+symphonia-core v0.6.1 (*)
+symphonia-metadata v0.6.1 (*)
+symphonia-metadata v0.6.1 (*)
+tempfile v3.27.0
+fastrand v2.5.0
+getrandom v0.4.3
+cfg-if v1.0.5
+libc v0.2.190
+once_cell v1.21.4
+rustix v1.1.5 (*)
+thiserror v2.0.21 (*)
+ufbx v0.11.5
+cc v1.6.0 (*)
+incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_cook)
+incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_anim) (*)
+incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_assets_runtime) (*)
+incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_doc) (*)
+incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_nav) (*)
+incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_runtime)
+bevy_ecs v0.19.1 (*)
+glam v0.32.1 (*)
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d) (*)
+incant_anim v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_anim) (*)
+incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_localization) (*)
+incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_nav) (*)
+incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_physics_2d_runtime)
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d) (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+rapier2d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/rapier2d)
+approx v0.5.1
+num-traits v0.2.19 (*)
+arrayvec v0.7.8
+bitflags v2.13.2
+glamx v0.3.1
+approx v0.5.1 (*)
+glam v0.33.12
+approx v0.5.1 (*)
+libm v0.2.16
+nalgebra v0.35.0
+approx v0.5.1 (*)
+glam v0.33.12 (*)
+matrixmultiply v0.3.11
+rawpointer v0.2.1
+autocfg v1.5.1
+nalgebra-macros v0.3.0 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+num-complex v0.4.6 (*)
+num-rational v0.4.2
+num-integer v0.1.47
+num-traits v0.2.19 (*)
+num-traits v0.2.19 (*)
+num-traits v0.2.19 (*)
+simba v0.10.2
+approx v0.5.1 (*)
+libm v0.2.16
+num-complex v0.4.6 (*)
+num-traits v0.2.19 (*)
+wide v1.7.1
+bytemuck v1.25.2 (*)
+typenum v1.20.1
+num-traits v0.2.19 (*)
+simba v0.10.2 (*)
+log v0.4.34
+nalgebra v0.35.0 (*)
+num-traits v0.2.19 (*)
+parry2d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/parry2d)
+approx v0.5.1 (*)
+arrayvec v0.7.8
+bitflags v2.13.2
+downcast-rs v2.0.2
+either v1.19.0
+ena v0.14.4
+log v0.4.34
+foldhash v0.2.0
+glamx v0.3.1 (*)
+hashbrown v0.17.1 (*)
+indexmap v2.14.2 (*)
+log v0.4.34
+num-derive v0.5.1 (proc-macro)
+proc-macro2 v1.0.107 (*)
+quote v1.0.47 (*)
+syn v3.0.6 (*)
+num-traits v0.2.19 (*)
+ordered-float v5.5.0
+num-traits v0.2.19 (*)
+rayon v1.12.0
+either v1.19.0
+rayon-core v1.13.0
+crossbeam-deque v0.8.8
+crossbeam-epoch v0.9.21
+crossbeam-utils v0.8.23
+crossbeam-utils v0.8.23
+crossbeam-utils v0.8.23
+simba v0.10.2 (*)
+slab v0.4.12
+smallvec v1.16.2
+spade v2.15.1
+hashbrown v0.16.1 (*)
+num-traits v0.2.19 (*)
+robust v1.2.0
+smallvec v1.16.2
+thiserror v2.0.21 (*)
+profiling v1.0.18 (*)
+rayon v1.12.0 (*)
+simba v0.10.2 (*)
+static_assertions v1.1.0
+thiserror v2.0.21 (*)
+wide v1.7.1 (*)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+thiserror v2.0.21 (*)
+incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_physics_runtime)
+incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_nav) (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+rapier3d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/rapier3d)
+approx v0.5.1 (*)
+arrayvec v0.7.8
+bitflags v2.13.2
+glamx v0.3.1 (*)
+log v0.4.34
+nalgebra v0.35.0 (*)
+num-traits v0.2.19 (*)
+parry3d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/parry3d)
+approx v0.5.1 (*)
+arrayvec v0.7.8
+bitflags v2.13.2
+downcast-rs v2.0.2
+either v1.19.0
+ena v0.14.4 (*)
+foldhash v0.2.0
+glamx v0.3.1 (*)
+hashbrown v0.17.1 (*)
+indexmap v2.14.2 (*)
+log v0.4.34
+num-derive v0.5.1 (proc-macro) (*)
+num-traits v0.2.19 (*)
+ordered-float v5.5.0 (*)
+rayon v1.12.0 (*)
+rstar v0.13.0
+heapless v0.8.0
+hash32 v0.3.1
+byteorder v1.5.0
+stable_deref_trait v1.2.1
+num-traits v0.2.19 (*)
+smallvec v1.16.2
+simba v0.10.2 (*)
+slab v0.4.12
+smallvec v1.16.2
+static_assertions v1.1.0
+thiserror v2.0.21 (*)
+profiling v1.0.18 (*)
+rayon v1.12.0 (*)
+simba v0.10.2 (*)
+static_assertions v1.1.0
+thiserror v2.0.21 (*)
+wide v1.7.1 (*)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+thiserror v2.0.21 (*)
+incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_profile)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+libm v0.2.16
+serde v1.0.229 (*)
+sha2 v0.10.9 (*)
+thiserror v2.0.21 (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+serde_json v1.0.151 (*)
+thiserror v2.0.21 (*)
+ulid v1.2.1 (*)
+incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_doc) (*)
+incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_authoring)
+glam v0.32.1 (*)
+incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_assets) (*)
+incant_core v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_core)
+bevy_app v0.19.1
+bevy_derive v0.19.1 (proc-macro)
+bevy_macro_utils v0.19.1 (*)
+quote v1.0.47 (*)
+syn v2.0.119 (*)
+bevy_ecs v0.19.1 (*)
+bevy_platform v0.19.1 (*)
+bevy_tasks v0.19.1 (*)
+bevy_utils v0.19.1 (*)
+ctrlc v3.5.2
+dispatch2 v0.3.1
+bitflags v2.13.2
+block2 v0.6.2 (*)
+libc v0.2.190
+objc2 v0.6.5 (*)
+nix v0.31.3
+bitflags v2.13.2
+cfg-if v1.0.5
+libc v0.2.190
+cfg_aliases v0.2.2
+downcast-rs v2.0.2
+log v0.4.34
+thiserror v2.0.21 (*)
+variadics_please v1.1.0 (proc-macro) (*)
+bevy_ecs v0.19.1 (*)
+glam v0.32.1 (*)
+incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_doc) (*)
+incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_nav) (*)
+incant_physics v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_physics)
+incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_doc) (*)
+incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_nav) (*)
+incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_physics_runtime) (*)
+rapier3d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/third_party/rapier3d) (*)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+serde_json v1.0.151 (*)
+thiserror v2.0.21 (*)
+schemars v1.2.2 (*)
+serde v1.0.229 (*)
+serde_json v1.0.151 (*)
+incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_doc) (*)
+incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_data) (*)
+incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_types) (*)
+serde_json v1.0.151 (*)
+incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_native)
+glam v0.32.1 (*)
+incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_2d) (*)
+incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_assets_runtime) (*)
+incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_data) (*)
+incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_runtime) (*)
+incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_text) (*)
+thiserror v2.0.21 (*)
+ulid v1.2.1 (*)
+incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_runtime) (*)
+naga v29.0.4 (*)
+serde_json v1.0.151 (*)
+sha2 v0.10.9 (*)
+tempfile v3.27.0 (*)

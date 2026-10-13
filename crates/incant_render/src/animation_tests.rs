@@ -622,3 +622,30 @@ mod ik;
 
 #[path = "animation_grouped_tests.rs"]
 mod grouped;
+
+#[test]
+fn provenance_compares_actual_retained_joint_palettes_without_resampling_or_allocating() {
+    let dir = tempfile::tempdir().unwrap();
+    let asset = source(dir.path());
+    let data = model(&asset);
+    let mut accepted = AnimationPlayer::new(data).unwrap();
+    let mut candidate = AnimationPlayer::new(data).unwrap();
+    dir.close().unwrap();
+    accepted.sample(Some(0), 0.25).unwrap();
+    candidate.sample(Some(0), 0.25).unwrap();
+    assert!(same_joint_palette(&accepted, &candidate, 0));
+    candidate.sample(Some(0), 0.75).unwrap();
+    assert!(!same_joint_palette(&accepted, &candidate, 0));
+    // A failed candidate sample leaves the last staged palette, not a fake rest
+    // pose or an accepted-state update. Retrying equal time restores equality.
+    assert!(candidate.sample(Some(usize::MAX), 0.).is_err());
+    assert!(!same_joint_palette(&accepted, &candidate, 0));
+    candidate.sample(Some(0), 0.25).unwrap();
+    let allocations = crate::retained_alloc::measured(|| {
+        for _ in 0..128 {
+            assert!(same_joint_palette(&accepted, &candidate, 0));
+        }
+    });
+    assert_eq!(allocations, 0);
+    assert!(!same_joint_palette(&accepted, &candidate, usize::MAX));
+}

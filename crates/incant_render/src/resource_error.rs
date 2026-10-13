@@ -5,6 +5,8 @@ pub type PreparationError = wgpu::Error;
 pub use crate::web_error::PreparationError;
 #[derive(Debug, thiserror::Error)]
 pub enum ResourceError {
+    #[error("cooked temporal shader contract refused: {0}")]
+    CookedTemporal(&'static str),
     #[error("cooked output shader rejected: {0}")]
     CookedOutput(&'static str),
     #[error("cooked geometry shader rejected: {0}")]

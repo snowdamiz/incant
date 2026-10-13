@@ -1,0 +1,652 @@
+{
+ "format": "incant-0069-gpu-provenance",
+ "packet": "0069-core-result-presentation",
+ "phase": "gpu-only-generation-6-oracle",
+ "attempt": 3,
+ "executor": {
+  "model": "Claude Opus 5.5 (claude-opus-5-5)",
+  "thinking_effort": "max",
+  "acp_record": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/claude-0069-g6-gpu-acp.log",
+   "verification_line": "Claude session verified: Opus 5.5; thinking: max"
+  }
+ },
+ "outcome": "passed: 8 of 8 exact GPU regressions, then 10 capture processes rendering 22 appearance frames; released",
+ "command": "python3 -B handoffs/0069-core-result-presentation/gpu_only_g6.py run --authority /Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready-003.json",
+ "invocations": 1,
+ "retries": 0,
+ "preflight": "gpu_only_g6.py check passed (read-only, 0 children) immediately before the run",
+ "authority": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-review-ready-003.json",
+  "sha256": "5c242df5f8cae6d8752d6329321096e9c56a3aedc8dc71eff1e3269c127231ea"
+ },
+ "wrapper": {
+  "path": "handoffs/0069-core-result-presentation/gpu_only_g6.py",
+  "sha256": "22d2bf0c8c5d008b5ff9031325be051d477ddc9cc852367ad5d51aae5ec3646d",
+  "commit": "0a677941eaff8773dfb967b57999c7fe51573afc",
+  "imports_original_wrapper_sha256": "0cf379927af6ace42f8ef5d76b5249f455aa759690e0cdffa00911710bd77914"
+ },
+ "brief": {
+  "path": "handoffs/0069-core-result-presentation/brief.md",
+  "sha256": "0bdd7eba04aa932bd273cac5ec9d22a31fd698242afa232d64908bcc8b9beb47",
+  "bound_by": "authority brief_sha256"
+ },
+ "root_review": {
+  "path": "/Users/andreyyurlov/.codex/incant-reviews/core0069-g6-wrapper-root-20261013.json",
+  "sha256": "f49ae41cacea3fb4e7b621b41dd3842de56dd1911b47c67c1b403201fe593849"
+ },
+ "predecessor_release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/released.json",
+  "sha256": "e2aedc7e561284508501aa29b2a56b86385308adb1930748e80fde4dfeb19761"
+ },
+ "generations": {
+  "regressions_g6": {
+   "source_commit": "e193af4df19ca4762441aec5957a9a40357e6437",
+   "note": "oracle correction: among inventoried engine inputs only crates/incant_render/src/ui_draw_tests.rs (cfg(test)) differs from g5",
+   "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/freeze-g6.json",
+    "sha256": "255c7f15d28268e80c494102fc1a1e5c5dde2105551241a0451e76d57da90793"
+   },
+   "build": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/frozen-build-g6.json",
+    "sha256": "c9c125462437aa1d1f212d4c00538867bd7c84eeca48ffd6d2ecc1e84348b12e"
+   },
+   "cases": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/regression-g6.json",
+    "sha256": "fffb7857e5c9dd3e9c4d21fc9ca0bdc09319ac93fd042db40152f3340a0b01d0"
+   },
+   "executables": {
+    "render-lib": {
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0069-oracle-correction-002/frozen-binaries/generation-6/render-lib",
+     "sha256": "ddf12438b44998808feb2d7f2e2e34ed7bdb18420d355cb44f3db357cf4cdcaf"
+    },
+    "gpu-host-ui": {
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/frozen-binaries/generation-5/gpu-host-ui",
+     "sha256": "8b85ceb1dca228e6ca04e60c55f5592afd8ce44cc37f727a40932092346d3b6e"
+    }
+   }
+  },
+  "captures_g5": {
+   "note": "the unchanged generation-5 CI packages and adapters (not shipping exports); the wrapper admitted them only after checking that the current source equals the g5 inventory except the brief and the single cfg(test) file",
+   "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0069/freeze/generation-5.json",
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "packages": {
+    "ar": {
+     "package_json_sha256": "0ba398a3ef3108bc37b100d4c40f61d20f95468088d8a6fb638d6c1e7728d6b1"
+    },
+    "en": {
+     "package_json_sha256": "8af9c6cb615142c0dfeec1195ecd1fa23f530983cf598987f2854ea784021989"
+    },
+    "en-XA": {
+     "package_json_sha256": "e97767c2b68b4d01df78f678ac64deee270bba316dd23966607c9840c0752085"
+    },
+    "zh-Hans": {
+     "package_json_sha256": "0df34869983c95f2188008c49fd1bad6b0b6e0e2021208b7e8d3b36b0e42fe4d"
+    }
+   },
+   "routes": {
+    "gamepad-restart-lose": {
+     "sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72",
+     "equals_accepted": true,
+     "accepted_path": "/Users/andreyyurlov/.codex/incant-evidence/0069/shipping-002/gamepad-restart-lose-input.json",
+     "accepted_sha256": "65ba294f07c345f97c97d19ad4fed9163ecd5314c772367fb8fcfc815b399a72"
+    },
+    "lose-restart-win": {
+     "sha256": "97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777",
+     "equals_accepted": true,
+     "accepted_path": "/Users/andreyyurlov/.codex/incant-evidence/0069/shipping-002/lose-restart-win-input.json",
+     "accepted_sha256": "97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777"
+    },
+    "lose-short": {
+     "sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227",
+     "equals_accepted": true,
+     "accepted_path": "/Users/andreyyurlov/.codex/incant-evidence/0069/shipping-002/lose-short-input.json",
+     "accepted_sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227"
+    }
+   }
+  },
+  "shipping_reuse": "numerical route, restart, HUD state and PCM proof is the CPU lane shipping-002 evidence (cpu-result.md); not re-run here"
+ },
+ "cpu_packet": {
+  "cpu_result_sha256": "be6bad1c2b7367811f5e90e9e2f26aad361b1abdd3b59b31b57adef8954d2656",
+  "cpu_manifest_sha256": "1d5f8a8922e42a1bdda534c598633f7afce1c093bc6ebc615e8d61e7b70b4d27",
+  "cpu_review_sha256": "ef978631b061cdbbf37e11b761ba2e5c8a80a34c1fbcaef59eef8bae358ca20b",
+  "cpu_release_sha256": "bc2cabe26bae17700e300188e3c7f8e68fa06538cb44c7b4197d000c5862696f",
+  "correction_release_sha256": "32df75ed4d7707182b5ef0269e142d35ccfd5c0cb149c541e9e063d03b3ebee2"
+ },
+ "run_evidence": {
+  "dir": "/Users/andreyyurlov/.codex/incant-evidence/0069-gpu-003",
+  "release.json": "55ee54d06ae5e9adbcc84ce951da948c0e84485aaafe10edfb0acaafcf344b2f",
+  "released": "d2ed705a3b27bf6b31ee78a32be05a6eaccd8bb172c819580543f47cbeed5073",
+  "ledger.jsonl": "f71f19985bd75d06c2eaef894a74168b158788a6f564560a928fa4d4b999425d",
+  "frames.json": "053c0e9ddba3f2d6c57317b169c3e5d4868532dc359b991cfa95628373873d11",
+  "lease.json": "709c4dee75693ad5a7b581b3501e49c088e09878937223bf0cdf6a4408066bfa",
+  "gpu.json": "9337b83682d652134d2f39056fe1570f4b7dd9461d35c01f4e0f05d1a32bcbe1",
+  "captures.jsonl": "42f3af7680cbd5444ac977f0bb9327c66064bc4cdf655a10c674f9d78b2e79ab",
+  "routes/routes.json": "33a7477f1619cdcd28b62e1e579bacc979556c616a72296c202aa324f394183b",
+  "regression/results.jsonl": "670c916cd1e67d4b898435866fa199953f150de69b20d2ec3a672c899531e25c",
+  "regression/build-g6.json": "c9c125462437aa1d1f212d4c00538867bd7c84eeca48ffd6d2ecc1e84348b12e",
+  "regression/manifest-g6.json": "fffb7857e5c9dd3e9c4d21fc9ca0bdc09319ac93fd042db40152f3340a0b01d0",
+  "regression/build-g5.json": "dba7bc052da4f333a51fee3e6409d69507f7dfa1fc58f6d188a42b69c7e6a810",
+  "freeze/generation-5.json": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d",
+  "freeze/generation-6.json": "255c7f15d28268e80c494102fc1a1e5c5dde2105551241a0451e76d57da90793",
+  "plans": {
+   "final-ar-640x480.json": "7b986327e4976d1dd23ced095a1edaa0c1fb600fe665b2e85bb4476093d8e079",
+   "final-en-420x320.json": "22f18e941855a47979782e620f7758b34c5b586b52ebcfe00a26896a25e42ad4",
+   "final-en-640x480.json": "557e5381288dfd8f72c7b7ef5ea45955960b4dd5b640458bcc4e1cb2f88510ff",
+   "final-en-960x540.json": "e80a1725122dd64f172b9b95b68116c6c60aa20d3ed40080526bbe7750bf0708",
+   "final-en-XA-420x320.json": "8d23afc38b4a5de46a284209591ffbd7aa135d939184caea9d0b0d7f8ded11a0",
+   "final-en-XA-640x480.json": "7b986327e4976d1dd23ced095a1edaa0c1fb600fe665b2e85bb4476093d8e079",
+   "final-zh-Hans-640x480.json": "61e82a10a17ef5cc9a750853ab1f9dc42e308247f1d38c8ad11a322fc3dba4bf",
+   "review-en-420x320.json": "64a1736db312bd13c5742ea19dc48f7d0e931a4cab675a20e7361c79b96c9a71",
+   "review-en-640x480.json": "804962567ec827361e80b4d6ad43801721497a8e0abfbabfc65633bd5923e815",
+   "review-en-960x540.json": "c4ebc006a633a63159b6d244d7709687f514a6b6c40138e7b48f905c6963b50c"
+  },
+  "reports": {
+   "review-en-960x540": "88375c828471c712bcbee64dc111dd4125c411aef782556e60426300656de91e",
+   "review-en-640x480": "365f93520ea256d4699cebf22b2481d19be273d0418a08447b94a18bd5c74e17",
+   "review-en-420x320": "30494ee71e4ea0f30ec545aed9b1cc74905ada780a5a7ff5f5d2d95bf6e67157",
+   "final-en-960x540": "d74ef3e15f00fc93c25115cff1e178afb878441e2b591c8fdf2efb68a7e13b2e",
+   "final-en-640x480": "5276739ac70657fbf07058ca90457597c169d6a1c5041b58fc74ee6b19338c94",
+   "final-en-420x320": "08b959539aff3f532390685bdbb8d875dba3b40f71fe01d8f59c1ce32e57b8b1",
+   "final-ar-640x480": "bfdf827dcba6480d4780b37c0000a9d92bc437028589830a92ac3e57634970aa",
+   "final-zh-Hans-640x480": "e000e357e1362342846db31ef61cd9110e654e6167892a9ed65757336a7b014c",
+   "final-en-XA-640x480": "70159947363f62ce24ec84c159876825ac86e5e53900fac21dd1156f7c0efbcf",
+   "final-en-XA-420x320": "a709276501d858516e2e2f5aa9b57e1e939d6de1b237b3e1745c89a0d57563e1"
+  },
+  "logs": {
+   "0002-regression-g6-render-scales.stderr.txt": "579a7c8f1e10fecc3e0b6be456dd65777fc19c34e37494e7b894e476f1bf8c72",
+   "0002-regression-g6-render-scales.stdout.txt": "12f25ab02625913799a7fb8e498b99be3a41ddcae3f142518f480ebd692ef45f",
+   "0005-regression-g6-render-nested.stderr.txt": "b6e366a7f3c8d20ada7f251d0346d9ef6d05179069aa3a145eaf35bea73900e8",
+   "0005-regression-g6-render-nested.stdout.txt": "4a13a5246910e84f76b5c3565ca8e547e5a60a03f804f86278d8a21b0f46bcaf",
+   "0008-regression-g6-render-halo-backdrops.stderr.txt": "4a8745f430230ba206c698119200eeb0d85a69da73fed29b2bfc21c13ff7a55d",
+   "0008-regression-g6-render-halo-backdrops.stdout.txt": "eb9790964f83923b546e14abe899f2f2c24c483af13cadb82d1aef39489091fe",
+   "0011-regression-g6-render-over-world.stderr.txt": "c352e770ecefd2da8c36b2607c8f8714eb646d244b24985940238a68f441cb5c",
+   "0011-regression-g6-render-over-world.stdout.txt": "f0a47a24a52fd1141dfb3379d50d99de9f51e8b17933d5ff8a7408389c31fdba",
+   "0014-regression-g6-render-retained.stderr.txt": "d8d76c7860bc1361e3ffc59af664101c3f15b03db676fc061d6dcbf69f211fd1",
+   "0014-regression-g6-render-retained.stdout.txt": "b1d575c6a0ba94d7dd2c2f02fedab974de2935b01c6b77b9f5d60cf89ecfc86b",
+   "0017-regression-g6-render-region.stderr.txt": "d578771da0d9991f434092f128a515615516c300b865d8926843e95729c8467d",
+   "0017-regression-g6-render-region.stdout.txt": "5cf51c6389204f0e660af5c9a5604a9096826b0ad86c0572bd7b6ff904cd99b6",
+   "0020-regression-g6-host-composed.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0020-regression-g6-host-composed.stdout.txt": "3b66ac118111f902bc52f69dde251912d234e552819b7cc17a29655dde39f3c0",
+   "0023-regression-g6-host-relayout.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0023-regression-g6-host-relayout.stdout.txt": "438da87585158bcd196d46e6ba9ae593ba80540842abb45fe65739d5cbb0ea64",
+   "0026-adapter-review-en-960x540.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0026-adapter-review-en-960x540.stdout.txt": "6a0c60445a07fc5f7608fa4f7e9463888c3773833a37b44f968d176d024b0f36",
+   "0029-adapter-review-en-640x480.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0029-adapter-review-en-640x480.stdout.txt": "ff6d97ac765c97042c983c8fc36bf4534da52e043a9915a6f6c879972a307c25",
+   "0032-adapter-review-en-420x320.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0032-adapter-review-en-420x320.stdout.txt": "d6921d385ca8f0ecd8b61db33bbf2652ea53f5ebefd54d2d48fcc81cecacd52a",
+   "0035-adapter-final-en-960x540.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0035-adapter-final-en-960x540.stdout.txt": "0d19c5cd7e950c8bb77a3437e89c7ffe7cd1af8ff743825a6e30dc1281d246a2",
+   "0038-adapter-final-en-640x480.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0038-adapter-final-en-640x480.stdout.txt": "2fc2a99ba3061e8d37d3a020232c4b0cde6b68a0b4d703538765ff0209280aa3",
+   "0041-adapter-final-en-420x320.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0041-adapter-final-en-420x320.stdout.txt": "b8e33ff2197b59f870bdbb02674c41b45a7498605fc543a18ead7d9b670aae30",
+   "0044-adapter-final-ar-640x480.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0044-adapter-final-ar-640x480.stdout.txt": "3dbccab37a5e968091a8aa93c8bc320801a1b5dbe968de1f98bcc259e66bb19e",
+   "0047-adapter-final-zh-Hans-640x480.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0047-adapter-final-zh-Hans-640x480.stdout.txt": "63a9106948d9801b4185ff9842325dbbf74aff45c1083b9112ce447aa5ff6c1d",
+   "0050-adapter-final-en-XA-640x480.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0050-adapter-final-en-XA-640x480.stdout.txt": "c5f5a8d3443ba13326c3142fc2e19ef62603d30e33ef657f073f9b3d6820063f",
+   "0053-adapter-final-en-XA-420x320.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "0053-adapter-final-en-XA-420x320.stdout.txt": "a6ffad793be89f4939512b6140eb24e7cf99b2824cc3e249ba00d18464647660"
+  }
+ },
+ "release": {
+  "released_at": "2026-10-13T09:29:06.340972+00:00",
+  "children": 18,
+  "frames_debited": {
+   "appearance": 22,
+   "regression": 39
+  },
+  "owned_processes_alive": [],
+  "target_users": [],
+  "ledger_rows": 56,
+  "ledger_hash_matches": true,
+  "latch_binds_release": true,
+  "checked_after_return": {
+   "owned_processes": [],
+   "native_gpu_lock_open_by_any_process": false
+  }
+ },
+ "adapter": {
+  "backend": "Metal",
+  "device_type": "IntegratedGpu",
+  "driver": "",
+  "driver_info": "",
+  "name": "Apple M5 Pro"
+ },
+ "regressions": [
+  {
+   "case": "render-scales",
+   "coverage": "existing",
+   "test": "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+   "frames_debited": 4,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-nested",
+   "coverage": "existing",
+   "test": "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+   "frames_debited": 2,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-halo-backdrops",
+   "coverage": "new",
+   "test": "ui::draw_tests::label_halo_separates_text_from_bright_and_dark_backdrops",
+   "frames_debited": 2,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-over-world",
+   "coverage": "existing",
+   "test": "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels",
+   "frames_debited": 3,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-retained",
+   "coverage": "existing",
+   "test": "ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages",
+   "frames_debited": 6,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "render-region",
+   "coverage": "existing",
+   "test": "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+   "frames_debited": 1,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "host-composed",
+   "coverage": "existing",
+   "test": "composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources",
+   "frames_debited": 17,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  },
+  {
+   "case": "host-relayout",
+   "coverage": "existing",
+   "test": "refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game",
+   "frames_debited": 4,
+   "status": 0,
+   "passed": true,
+   "libtest": {
+    "passed": 1,
+    "failed": 0,
+    "ignored": 0,
+    "measured": 0
+   }
+  }
+ ],
+ "captures": [
+  {
+   "run": "review-en-960x540",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    960,
+    540
+   ],
+   "frames": [
+    "01-won.rgba",
+    "02-lost-generation-2.rgba"
+   ],
+   "frame_sha256": {
+    "01-won.rgba": "be9f4f285d80c7c2b30605982edf0e794c897e9a68dd556412772c5fd3a48324",
+    "02-lost-generation-2.rgba": "1b4a556dec2441a48f8d3ccf856d6ba81289c5cea6309975c32839f55165e245"
+   },
+   "gpu_frames_rendered": 2,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "e2058f228aec91584952ad7d9731dcb591ee932a070ca6cdc7d371e283a85b6f"
+  },
+  {
+   "run": "review-en-640x480",
+   "variant": "en",
+   "route": "lose-restart-win",
+   "viewport": [
+    640,
+    480
+   ],
+   "frames": [
+    "01-lost.rgba"
+   ],
+   "frame_sha256": {
+    "01-lost.rgba": "e63ba96d83a5711f889ea0155658f52cb9722eb7c118b21e2fb50a2225b46117"
+   },
+   "gpu_frames_rendered": 1,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "e2058f228aec91584952ad7d9731dcb591ee932a070ca6cdc7d371e283a85b6f"
+  },
+  {
+   "run": "review-en-420x320",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    420,
+    320
+   ],
+   "frames": [
+    "01-won.rgba"
+   ],
+   "frame_sha256": {
+    "01-won.rgba": "656a5fcaf90fe1f96693e9a673ec76a364c969820b3235e5a58e8ff03af81c37"
+   },
+   "gpu_frames_rendered": 1,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "e2058f228aec91584952ad7d9731dcb591ee932a070ca6cdc7d371e283a85b6f"
+  },
+  {
+   "run": "final-en-960x540",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    960,
+    540
+   ],
+   "frames": [
+    "01-start.rgba",
+    "02-won.rgba",
+    "03-after-start.rgba",
+    "04-lost-generation-2.rgba"
+   ],
+   "frame_sha256": {
+    "01-start.rgba": "72a8597dfba4d0c35e5b4cdc88950ae352a45d57a5ce3c4ce8c6a1e77c3c2453",
+    "02-won.rgba": "be9f4f285d80c7c2b30605982edf0e794c897e9a68dd556412772c5fd3a48324",
+    "03-after-start.rgba": "72a8597dfba4d0c35e5b4cdc88950ae352a45d57a5ce3c4ce8c6a1e77c3c2453",
+    "04-lost-generation-2.rgba": "1b4a556dec2441a48f8d3ccf856d6ba81289c5cea6309975c32839f55165e245"
+   },
+   "gpu_frames_rendered": 4,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "e2058f228aec91584952ad7d9731dcb591ee932a070ca6cdc7d371e283a85b6f"
+  },
+  {
+   "run": "final-en-640x480",
+   "variant": "en",
+   "route": "lose-restart-win",
+   "viewport": [
+    640,
+    480
+   ],
+   "frames": [
+    "01-start.rgba",
+    "02-lost.rgba",
+    "03-after-r.rgba",
+    "04-won-generation-2.rgba"
+   ],
+   "frame_sha256": {
+    "01-start.rgba": "cc801eab6170aa69dba0c4f64523f6404afa6ad774a58a975f7212d23206374b",
+    "02-lost.rgba": "e63ba96d83a5711f889ea0155658f52cb9722eb7c118b21e2fb50a2225b46117",
+    "03-after-r.rgba": "cc801eab6170aa69dba0c4f64523f6404afa6ad774a58a975f7212d23206374b",
+    "04-won-generation-2.rgba": "04c8ccde33c9baafc071515d7809761f90ae10d7f1c0c8409a904abf7c86b8ae"
+   },
+   "gpu_frames_rendered": 4,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "e2058f228aec91584952ad7d9731dcb591ee932a070ca6cdc7d371e283a85b6f"
+  },
+  {
+   "run": "final-en-420x320",
+   "variant": "en",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    420,
+    320
+   ],
+   "frames": [
+    "01-start.rgba",
+    "02-won.rgba",
+    "03-lost-generation-2.rgba"
+   ],
+   "frame_sha256": {
+    "01-start.rgba": "c0fbf18bdfc542d5207917c25c0c440bdadf8e7e1d10224ccb450381bcc9679a",
+    "02-won.rgba": "656a5fcaf90fe1f96693e9a673ec76a364c969820b3235e5a58e8ff03af81c37",
+    "03-lost-generation-2.rgba": "da2e328af5a30f33a52429fab88a892b6c5c4757f7afe5ece58691cc7546aacd"
+   },
+   "gpu_frames_rendered": 3,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "e2058f228aec91584952ad7d9731dcb591ee932a070ca6cdc7d371e283a85b6f"
+  },
+  {
+   "run": "final-ar-640x480",
+   "variant": "ar",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "frames": [
+    "01-start.rgba",
+    "02-won.rgba"
+   ],
+   "frame_sha256": {
+    "01-start.rgba": "2ca24602d0e9c9b28c07007afbe5274ec6f026c9369059d8fcfa7de10e7b303b",
+    "02-won.rgba": "8559652bb5ba0ae66789596da3b26a4c6344ae6b07b48085902ac2134bb87661"
+   },
+   "gpu_frames_rendered": 2,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "16d86e165b5ca47fc0c573febe490ea097d1a7422b68c73ad2cda0c7470b4079"
+  },
+  {
+   "run": "final-zh-Hans-640x480",
+   "variant": "zh-Hans",
+   "route": "lose-restart-win",
+   "viewport": [
+    640,
+    480
+   ],
+   "frames": [
+    "01-start.rgba",
+    "02-lost.rgba"
+   ],
+   "frame_sha256": {
+    "01-start.rgba": "2d4bc24b83936f9240e27e3a8ac87623274cbb78d7ad46e15930c37d4cb9b48c",
+    "02-lost.rgba": "04bf24eca389953a92244e3e45cb65e1b0a6abecacc1af052570aae4fb44f770"
+   },
+   "gpu_frames_rendered": 2,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "ed6c17818434d360f842a41e86c0bcb5778af49de39d4746530818c05e944fd8"
+  },
+  {
+   "run": "final-en-XA-640x480",
+   "variant": "en-XA",
+   "route": "gamepad-restart-lose",
+   "viewport": [
+    640,
+    480
+   ],
+   "frames": [
+    "01-start.rgba",
+    "02-won.rgba"
+   ],
+   "frame_sha256": {
+    "01-start.rgba": "4c8314a539b2520b8312749f40aba449ab62ac8b80b62952a8c892a77d4ddd10",
+    "02-won.rgba": "5ffb4bed816bf5908a17cba94926e666a3c89b0c4f46c81e102b22117a6b08c0"
+   },
+   "gpu_frames_rendered": 2,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "379da2cb06d453ff3991e1eb04ff6f68ad858b4b76c18273700891e09b1766d0"
+  },
+  {
+   "run": "final-en-XA-420x320",
+   "variant": "en-XA",
+   "route": "lose-short",
+   "viewport": [
+    420,
+    320
+   ],
+   "frames": [
+    "01-lost.rgba"
+   ],
+   "frame_sha256": {
+    "01-lost.rgba": "c916592d47b4ef9b17e0ec1947925cd83166453425263ac7b21193267a5baa8d"
+   },
+   "gpu_frames_rendered": 1,
+   "freeze": {
+    "generation": 5,
+    "sha256": "acb68a621b4b74acd4c4e14280171451de81f53d2feaa4f8585a9fc6d12d1f1d"
+   },
+   "adapter_sha256": "379da2cb06d453ff3991e1eb04ff6f68ad858b4b76c18273700891e09b1766d0"
+  }
+ ],
+ "identical_frames": [
+  [
+   "final-en-420x320--02-won.png",
+   "review-en-420x320--01-won.png"
+  ],
+  [
+   "final-en-640x480--01-start.png",
+   "final-en-640x480--03-after-r.png"
+  ],
+  [
+   "final-en-640x480--02-lost.png",
+   "review-en-640x480--01-lost.png"
+  ],
+  [
+   "final-en-960x540--01-start.png",
+   "final-en-960x540--03-after-start.png"
+  ],
+  [
+   "final-en-960x540--02-won.png",
+   "review-en-960x540--01-won.png"
+  ],
+  [
+   "final-en-960x540--04-lost-generation-2.png",
+   "review-en-960x540--02-lost-generation-2.png"
+  ]
+ ],
+ "png_conversions": {
+  "method": "lossless RGBA8 to PNG (no resampling, colour change or crop)",
+  "index": "gpu-attempt-003/frames-index.json",
+  "files": {
+   "gpu-attempt-003/frames/final-ar-640x480--01-start.png": "1b81f73b6479343a991a2a5ab10923ab33b9b3a0a35043bad65cc3f7a2d08111",
+   "gpu-attempt-003/frames/final-ar-640x480--02-won.png": "cb57bbb60ac50f357ac693eec66b6616e587b8f6f8eed6b18fbb29571a6ea97d",
+   "gpu-attempt-003/frames/final-en-420x320--01-start.png": "f9dd70c0e739860fa416fe01a3e37fa9ee7429efb957b3ba416cca648009799c",
+   "gpu-attempt-003/frames/final-en-420x320--02-won.png": "f5b6d8828ce66879281dbb984a28fb469ccb36bb32cbe04567ac714715074096",
+   "gpu-attempt-003/frames/final-en-420x320--03-lost-generation-2.png": "e05a8450e897f44420343e42e8fb82f1d083527fccc998cb259cc09a67e199d8",
+   "gpu-attempt-003/frames/final-en-640x480--01-start.png": "2d66cce1d5aa0c1dceadb8263585e94bc80600c6b7aaa7c5682b86768bd811a5",
+   "gpu-attempt-003/frames/final-en-640x480--02-lost.png": "da84fd8b2e0f6667a2ce644a45553931ca607c8ec3afce967f9723b9798f3874",
+   "gpu-attempt-003/frames/final-en-640x480--03-after-r.png": "2d66cce1d5aa0c1dceadb8263585e94bc80600c6b7aaa7c5682b86768bd811a5",
+   "gpu-attempt-003/frames/final-en-640x480--04-won-generation-2.png": "b9061b0e6be06ee6010c3e625f31f889716f6a63341ad32bfb8509ca0f19d327",
+   "gpu-attempt-003/frames/final-en-960x540--01-start.png": "36e14ccb1d9f5a14aaf0753997e6c39f603c189cf6bf5e3b363c068b0cc17d29",
+   "gpu-attempt-003/frames/final-en-960x540--02-won.png": "7253181fe62b9bd3e31869f02335929a6b1b6079b144b631629bd9989cd894c4",
+   "gpu-attempt-003/frames/final-en-960x540--03-after-start.png": "36e14ccb1d9f5a14aaf0753997e6c39f603c189cf6bf5e3b363c068b0cc17d29",
+   "gpu-attempt-003/frames/final-en-960x540--04-lost-generation-2.png": "57a289b8fadb1d1853e31c2fc873682ee2a9b205862a02b6bc227eb8f2fcc270",
+   "gpu-attempt-003/frames/final-en-XA-420x320--01-lost.png": "e373acca5b9e5bb6e282c1e082af36a058d7913dee44124293f1eda61fb67877",
+   "gpu-attempt-003/frames/final-en-XA-640x480--01-start.png": "dd1a3e20d4069e450d49bb18411a0477325e9d034e68cfd4d8ab71048ddc9f8d",
+   "gpu-attempt-003/frames/final-en-XA-640x480--02-won.png": "ad6c6324563333854dbf857efd2e09c3514840794f31f2330f5289eb58fc5a21",
+   "gpu-attempt-003/frames/final-zh-Hans-640x480--01-start.png": "48fa3d37c13c5ea62f6b975eb364611c498541862d67058e9e243a1c5bf646f6",
+   "gpu-attempt-003/frames/final-zh-Hans-640x480--02-lost.png": "f94c6c69f1a17da3ee0e3787df285292eaf239f343195a350b5f2a000af2c953",
+   "gpu-attempt-003/frames/review-en-420x320--01-won.png": "f5b6d8828ce66879281dbb984a28fb469ccb36bb32cbe04567ac714715074096",
+   "gpu-attempt-003/frames/review-en-640x480--01-lost.png": "da84fd8b2e0f6667a2ce644a45553931ca607c8ec3afce967f9723b9798f3874",
+   "gpu-attempt-003/frames/review-en-960x540--01-won.png": "7253181fe62b9bd3e31869f02335929a6b1b6079b144b631629bd9989cd894c4",
+   "gpu-attempt-003/frames/review-en-960x540--02-lost-generation-2.png": "57a289b8fadb1d1853e31c2fc873682ee2a9b205862a02b6bc227eb8f2fcc270"
+  }
+ },
+ "regression_images": {
+  "hosted-ui-button-focus.png": "ea13b0c7d34f18f6568cc755b065bafbbf4a281b819a1a9c8eb92a3cc7b69669",
+  "hosted-ui-field-commit.png": "3946a844dee612443bf9c81772ecec057fdcadd2a31eee0f1a589503a613503a",
+  "hosted-ui-field-preedit.png": "73b01cbc8d586282e5547040a7b26b8335e93d97f3bb581702ea5170c6773e6c",
+  "hosted-ui-narrow-2x.png": "f8c4693c4b3ead289d00f6e0f1e25d6181732dd6d1f39e2f4ad9067e4d55e5ab",
+  "hosted-ui-tick1.png": "79076fe7182e907ddb7f89c3c7999c90b16bd67e19caaa989f482621f171d39c",
+  "hosted-world-tick1.png": "11746e16d0da9a408ad76f7a27e5dd8450cd04368a9bccae952cb05808b61889",
+  "ui-clip-nested.png": "e8213c1c31070c3f1b16c7462d414fb4b3a9c486195945ba2d4627ff37d78a17",
+  "ui-clip-open.png": "cfeb3c77563aa6b97fb9429c19127b961f07cd4c32c084fa0f31df760a16e16e",
+  "ui-halo-black.png": "b9580c6fb9685c0b410c85ef9b43b23b0a7e9fef595a4cf1a2fb8ee21ea437c4",
+  "ui-halo-white.png": "d71548357c2a896357bdc180a5e4a0aee182237c074a1a805b59c7c819d127ab",
+  "ui-over-world.png": "95edee7ad4a14f680beeef9dbf892b352643f64e8866bd12326174aaf6d1f339",
+  "ui-panel-1.5x-Rgba8UnormSrgb.png": "08f2ca7cfcf41b4d1b12859174b1df351557a6961904b50a4dcd3bda78b090c5",
+  "ui-panel-1x-Rgba8Unorm.png": "1e4b463bf89363d66fccadc5ddb93f1cff0d3b114120a4618cda15e4d4d6bb09",
+  "ui-panel-1x-Rgba8UnormSrgb.png": "60a6673c6ddbd2d6bc24f550c17cf91df5473dbbeeb8d15448a1982b714a61e6",
+  "ui-panel-2x-Rgba8UnormSrgb.png": "c263e7ab54e0c890ac6d09dd3e6711ea8a30768dfdbf7a3e8c813c9837785594",
+  "ui-region.png": "23c1e7f7f7e65d69c8a24ca0257c850240e785b97cbca974fe0026b43b2a227a"
+ },
+ "attempt_files": {
+  "exit-status.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+  "finished-utc.txt": "0354e39f7b29560f121eddf328f58b00426f04a77bd9746f0abb07aa328bc5b1",
+  "frames-index.json": "1727ad0ce704c8ee4a875e4b2f68625d2ef57d66b869d4a8b9cfe43b94b313b0",
+  "started-utc.txt": "e7f42041183e4194dd1c8085ce1d2eeb4ffb05e325e8d8dbb636aa109c3f3b5b",
+  "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout.txt": "670c916cd1e67d4b898435866fa199953f150de69b20d2ec3a672c899531e25c"
+ }
+}

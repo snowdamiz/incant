@@ -102,6 +102,7 @@ pub(crate) struct LightingSystem {
     pub layout: wgpu::BindGroupLayout,
     compute_layout: wgpu::BindGroupLayout,
     pipeline: wgpu::ComputePipeline,
+    temporal_pipeline: Option<wgpu::ComputePipeline>,
     cache: Mutex<Option<Arc<GridBuffers>>>,
 }
 pub(crate) fn layout_entries(compute: bool) -> Vec<wgpu::BindGroupLayoutEntry> {
@@ -223,8 +224,46 @@ impl LightingSystem {
             layout,
             compute_layout,
             pipeline,
+            temporal_pipeline: None,
             cache: Mutex::new(None),
         })
+    }
+    pub fn temporal_pipeline(
+        &self,
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+    ) -> Result<wgpu::ComputePipeline> {
+        #[cfg(all(feature = "cooked-temporal", not(target_arch = "wasm32")))]
+        let (shader, entry) = cooked::temporal_shader(device, backend)?;
+        #[cfg(not(all(feature = "cooked-temporal", not(target_arch = "wasm32"))))]
+        let (shader, entry) = {
+            let _ = backend;
+            (
+                device.create_shader_module(wgpu::ShaderModuleDescriptor {
+                    label: Some("Conservative jittered clusters"),
+                    source: wgpu::ShaderSource::Wgsl(temporal_grid_source()?.into()),
+                }),
+                "build",
+            )
+        };
+        let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+            label: Some("Conservative jittered clusters"),
+            bind_group_layouts: &[Some(&self.compute_layout)],
+            immediate_size: 0,
+        });
+        Ok(
+            device.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
+                label: Some("Conservative jittered clusters"),
+                layout: Some(&layout),
+                module: &shader,
+                entry_point: Some(entry),
+                compilation_options: Default::default(),
+                cache: None,
+            }),
+        )
+    }
+    pub fn accept_temporal(&mut self, pipeline: wgpu::ComputePipeline) {
+        self.temporal_pipeline = Some(pipeline);
     }
     fn buffers(
         &self,
@@ -360,7 +399,14 @@ impl LightingSystem {
             #[cfg(all(feature = "cooked-clusters", not(target_arch = "wasm32")))]
             entries.pop();
             Some(ClusterPass {
-                pipeline: self.pipeline.clone(),
+                pipeline: if camera.jitter_guard != [0.; 2] {
+                    self.temporal_pipeline
+                        .as_ref()
+                        .ok_or(crate::temporal::TemporalError::Disabled)?
+                        .clone()
+                } else {
+                    self.pipeline.clone()
+                },
                 group,
                 dimensions,
             })
@@ -460,14 +506,26 @@ pub(crate) struct ClusterPass {
     dimensions: [u32; 2],
 }
 impl ClusterPass {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        queries: Option<&crate::timing::PassQueries>,
+    ) {
         // Every used cluster word is overwritten, including empty clusters.
         let mut pass = encoder.begin_compute_pass(&wgpu::ComputePassDescriptor {
             label: Some("Assign local lights to view clusters"),
-            timestamp_writes: None,
+            timestamp_writes: queries.map(|q| q.compute()),
         });
         pass.set_pipeline(&self.pipeline);
         pass.set_bind_group(0, &self.group, &[]);
         pass.dispatch_workgroups(self.dimensions[0], self.dimensions[1], DEPTH_SLICES);
     }
+}
+
+/// Fixed portable variant only: expand each tile by one internal pixel, enough
+/// to contain all admitted half-pixel raster offsets. Source body is unchanged.
+mod temporal_source;
+pub(crate) fn temporal_grid_source() -> Result<String> {
+    temporal_source::temporal_grid_source()
+        .map_err(|_| crate::temporal::TemporalError::ClusterSource.into())
 }

@@ -1,0 +1,2140 @@
+{
+  "schema": 1,
+  "source_head": "d087401648d7d9e6a06f9f2619aaab71f9f5f911",
+  "base": "1da6cab9778913999a745803445f209d4da0f90d",
+  "accepted_fixed_producer": "e23776df275fa1de81b2027110d9c7b6916999ac",
+  "fixed_motion_owner": "e73afe43ffaf78e73b725876411128d092791f5a",
+  "archive": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/records.json.gz",
+    "sha256": "7dda51539eac358e639a50efddcba2217efb7ee96e09d51fe337922d1ee084f1",
+    "bytes": 2980607,
+    "records": 533,
+    "payloads": 371
+  },
+  "external_binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/binaries/default-incant_render_gpu_host-a9cdd36a5770c63d",
+      "original": "/tmp/incant-dynamic-resolution-target/ci/deps/incant_render_gpu_host-a9cdd36a5770c63d",
+      "sha256": "6f6b94d684bf49921556a5e11813306764dbb80a465f3a87f6ee0e5e6b16a545",
+      "bytes": 1075272,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/binaries/default-incant_render-22e79461d579ebd9",
+      "original": "/tmp/incant-dynamic-resolution-target/ci/deps/incant_render-22e79461d579ebd9",
+      "sha256": "30eb9caa74b6ffaefdf53476cf6f690a6fb3b8c88cdff0d909b4f1a07e5f6735",
+      "bytes": 31777904,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/binaries/cooked-incant_render_gpu_host-285635f9ccb95b1e",
+      "original": "/tmp/incant-dynamic-resolution-target/ci/deps/incant_render_gpu_host-285635f9ccb95b1e",
+      "sha256": "a2d1edb5a6d7581e51f8cde00203fbea319c312ac38fe4061811b2adaa456ecb",
+      "bytes": 1075272,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render_gpu_host",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render_gpu_host/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/binaries/cooked-incant_render-b937fdf83ffb6d22",
+      "original": "/tmp/incant-dynamic-resolution-target/ci/deps/incant_render-b937fdf83ffb6d22",
+      "sha256": "d127227335207ec9ea68076ad846d63d255137c157f3f525b662574e5e0f24f3",
+      "bytes": 32513248,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/binaries/default-incant_render-25a5275fc192b898",
+      "original": "/tmp/incant-dynamic-resolution-target/ci/deps/incant_render-25a5275fc192b898",
+      "sha256": "a5f8e9a0f66a402a9c88c4c0375a42008763242770492418b5645c081fbee6b3",
+      "bytes": 31940064,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/binaries/cooked-incant_render-1bc338a36799738a",
+      "original": "/tmp/incant-dynamic-resolution-target/ci/deps/incant_render-1bc338a36799738a",
+      "sha256": "bd76bb59d1c001211c5a57a8858ed013ba43f073fc9b437929ba8f8ab308587a",
+      "bytes": 32652512,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "incant_render",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant/crates/incant_render/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/frozen-binaries/source004/default/render-tests",
+      "sha256": "d900fe08fb2023b42aca223868e6ac367cc5c85b7d8fdaeaa55e2e49c3d19537",
+      "bytes": 32021904,
+      "qualification": "historical producer binary"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-coverage-001/bin/review/temporal_visual_review",
+      "sha256": "27756c0dad957287c328f690d15ef14565dd3fb83be3156275fefa042c934d64",
+      "bytes": 18231000,
+      "qualification": "historical producer binary"
+    }
+  ],
+  "reviews": {
+    "fixed-temporal-main217-source-root-20261013": {
+      "path": "docs/spikes/evidence/fixed-temporal-main217/fixed-temporal-main217-source-root-20261013.json",
+      "sha256": "7e9fa08a30a3afb94871c906ea6c0e38646a72578c17032be504d850b70c1a92"
+    },
+    "0072-fixed-coverage-execution-root-20261013": {
+      "path": "docs/spikes/evidence/fixed-temporal-main217/0072-fixed-coverage-execution-root-20261013.json",
+      "sha256": "ed99f05b54bd00e3d29ad2dbed37988f0736b101b528eefcf632bbbf805b4197"
+    },
+    "temporal-coverage-final-packet-root-20261013": {
+      "path": "docs/spikes/evidence/fixed-temporal-main217/temporal-coverage-final-packet-root-20261013.json",
+      "sha256": "6de85178ba85ba934615bc56bf6dcfa2381b4ee9a6c0fd5ac30a99af4874e5e6"
+    },
+    "temporal-coverage-source-cpu-final-20261013": {
+      "path": "docs/spikes/evidence/fixed-temporal-main217/temporal-coverage-source-cpu-final-20261013.json",
+      "sha256": "678e67b083603de9ce5fef5103be4761933b07b1d84f64efe2bf6b71625818cc"
+    },
+    "current-main219-final": {
+      "path": "docs/spikes/evidence/fixed-temporal-main217/final-review.json",
+      "sha256": "216bae9385a16b090ee4e6accae567aabf782a14e7d13c28c7aa6fb6bfd06495"
+    }
+  },
+  "freeze": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/fixed-temporal-main217-002-freeze.json",
+    "sha256": "adb89831874b40369f83b0b1deea25a2f88efac4aa7c585ec3a370028faddecd",
+    "count": 3100
+  },
+  "initial_freeze": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/fixed-temporal-main217-001-freeze.json",
+    "sha256": "b06bed67cddf6e2eeae8a515fa43ecaa36131e13c837306a26fa715faa8c4c96",
+    "count": 3099
+  },
+  "test_only_delta": [
+    "crates/incant_render/src/temporal_joined_tests.rs",
+    "crates/incant_render/src/temporal_retained_tests.rs"
+  ],
+  "checks": [
+    {
+      "name": "workspace-metadata",
+      "argv": [
+        "./tools/cargo",
+        "metadata",
+        "--locked",
+        "--offline",
+        "--format-version",
+        "1",
+        "--no-deps"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 70516,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.041174457990564406,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/workspace-metadata.stdout",
+        "sha256": "477f5b0c3ba3442579bc3ec9c7b2a9bd4a5379ece4eb7b91cc08189eeb47a6de"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/workspace-metadata.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "scoped-target-clean",
+      "argv": [
+        "./tools/cargo",
+        "clean",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_2d",
+        "-p",
+        "incant_agent",
+        "-p",
+        "incant_agent_native",
+        "-p",
+        "incant_anim",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_audio",
+        "-p",
+        "incant_audio_runtime",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_core",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_editor",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_headless",
+        "-p",
+        "incant_import",
+        "-p",
+        "incant_input",
+        "-p",
+        "incant_localization",
+        "-p",
+        "incant_nav",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_physics",
+        "-p",
+        "incant_physics_2d_runtime",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_snapshot",
+        "-p",
+        "incant_platform_smoke",
+        "-p",
+        "incant_play",
+        "-p",
+        "incant_play_legacy",
+        "-p",
+        "incant_profile",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_script_player",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_source",
+        "-p",
+        "incant_text",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "parry2d",
+        "-p",
+        "parry3d",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 70520,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.38533175000338815,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/scoped-target-clean.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/scoped-target-clean.stderr",
+        "sha256": "51ce1074aeef62ae49345c9fda18907b8bbb3bdcf4d0863633e436deaf4efaa8"
+      }
+    },
+    {
+      "name": "shader-cooker",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 70530,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 5.629968709006789,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/shader-cooker.stdout",
+        "sha256": "f1bb44d58bda74e52cdd30e1c6b2215663a8eda54c89f37741a1e5e0ecacccb3"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/shader-cooker.stderr",
+        "sha256": "c9a750aa5ff8f0684ab723bc8088448608afa11c9b26241746205bdb575b718e"
+      }
+    },
+    {
+      "name": "default-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 70675,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 56.820186291006394,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/default-tests.stdout",
+        "sha256": "847db20722f84013fba5cb165b4860f7c7d65d626e3ba5e4d95cdc4a11fe920f"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/default-tests.stderr",
+        "sha256": "9e0240d0007422581b96b15fef09daf5d4d4be0056841a94282296edb916c18a"
+      }
+    },
+    {
+      "name": "cooked-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 72508,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 21.886617458003457,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/cooked-tests.stdout",
+        "sha256": "73c8e3f177cd8384cde653e8fd2b4c0ba61ae226cda60347b0f83642e2283e9c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/cooked-tests.stderr",
+        "sha256": "fffe4d038beef50ce4db01eb47cfa7c769bd4a937a24afe1adba821dc2bb7e34"
+      }
+    },
+    {
+      "name": "offline-recook-validation",
+      "argv": [
+        "python3",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline.py",
+        "/tmp/incant-dynamic-resolution-target/ci/build/incant_render-c7eb858c7336bca5/out",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 73266,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 2.286919249992934,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline-recook-validation.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline-recook-validation.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "default-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 73337,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 7.448696333987755,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/default-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/default-clippy.stderr",
+        "sha256": "ce654b624b3ae2b41c62a12f919c44497cd302685d758c05babea853faee9d32"
+      }
+    },
+    {
+      "name": "cooked-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 73421,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 3.157309250003891,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/cooked-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/cooked-clippy.stderr",
+        "sha256": "cc205e9ac6ae3cd353dcdb3a46ed0e4d29a47ef10deade472a472dc9c01fdc1c"
+      }
+    },
+    {
+      "name": "native-window-consumer",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--features",
+        "incant_game_player/native-window,incant_render/cooked-temporal,incant_render/persistent-pipeline-cache"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 73456,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 52.33014620801259,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/native-window-consumer.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/native-window-consumer.stderr",
+        "sha256": "a05f6263a2c6e9bc5161b849c8618ed6c58e80706725a61758e90d5ea6343c60"
+      }
+    },
+    {
+      "name": "browser",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 76317,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 4.486391833008383,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/browser.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/browser.stderr",
+        "sha256": "c8145e71b8f83a89bbd9e9f1caeeb2397ecd0ec1380032e85eebda3f395dce45"
+      }
+    },
+    {
+      "name": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host",
+        "incant_game_player"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 76344,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.31104195899388287,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/runtime-graph.stdout",
+        "sha256": "7284772f7a35ae60ace11db993d3bbb863b95b5c88e368a678400e7efbe09bf8"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/runtime-graph.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "ci-policy",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_release_policy.py"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 76349,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.038337625010171905,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/ci-policy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/ci-policy.stderr",
+        "sha256": "62cfbeb2911bb226088bfb0918eb4b05008ea70b20bce854ee2ca8a564bd37a5"
+      }
+    },
+    {
+      "name": "actionlint",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-tools/actionlint-1.7.12/actionlint",
+        "-shellcheck=",
+        "-pyflakes=",
+        ".github/workflows/ci.yml",
+        ".github/workflows/desktop.yml"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 76350,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.024910874999477528,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/actionlint.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/actionlint.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 76351,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.2608595000056084,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 76357,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.031457292003324255,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "1da6cab9778913999a745803445f209d4da0f90d",
+        "HEAD"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 76358,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.01547358300013002,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "followup_checks": [
+    {
+      "name": "default-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 79679,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 10.449705708000693,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/default-tests.stdout",
+        "sha256": "b2e5e2bbe96eb224fffa95eb163203bade42d34ea4392d154d30d7cd84f0b529"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/default-tests.stderr",
+        "sha256": "5ce602883439b2844ca0cb1133f290149a16876a01c4dfe1a153f8f3b2e4ec59"
+      }
+    },
+    {
+      "name": "cooked-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 79706,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 9.515407250000862,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/cooked-tests.stdout",
+        "sha256": "6f424f0ffbf01261c30a3206a05d11f6aa60c0aec60f358682248caf475531c1"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/cooked-tests.stderr",
+        "sha256": "00b2bcb56a2d18f1641444e1cff3ac73cbbac94f19810da362266cef11bba40d"
+      }
+    },
+    {
+      "name": "default-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 79785,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.8649290419998579,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/default-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/default-clippy.stderr",
+        "sha256": "441a9cfcdceb5ef05712e46bf7612fd7d2b1dabe4f7a3790508bfa017044e83d"
+      }
+    },
+    {
+      "name": "cooked-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/persistent-pipeline-cache",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 79815,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.673704999993788,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/cooked-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/cooked-clippy.stderr",
+        "sha256": "f7fa88bb90cc9592bc22cca1cd7104f344a44d6e812c872a4b5bfda5a88b60b7"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 79829,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.2450728749972768,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/ci-build-cache/incant",
+      "pid": 79841,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.020420500004547648,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "offline": {
+    "format": "incant-cooked-temporal-offline",
+    "version": 1,
+    "build_out": "/private/tmp/incant-dynamic-resolution-target/ci/build/incant_render-c7eb858c7336bca5/out",
+    "commands": [
+      {
+        "name": "metal-version",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "--version"
+        ],
+        "exit_code": 0,
+        "started": 1791889741.166452,
+        "ended": 1791889741.733734,
+        "stdout_sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "spirv-version",
+        "command": [
+          "spirv-val",
+          "--version"
+        ],
+        "exit_code": 0,
+        "started": 1791889741.7339,
+        "ended": 1791889741.7577422,
+        "stdout_sha256": "3f0ae05093de44cefafa15a117371fcc7ad25aabca0dfbc222a6a29f1c55f26a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "sdk-version",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "--show-sdk-version"
+        ],
+        "exit_code": 0,
+        "started": 1791889741.757879,
+        "ended": 1791889741.7642329,
+        "stdout_sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "motion-Vertex-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Metal-Vertex.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Vertex.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889741.765623,
+        "ended": 1791889742.270025,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "motion-Vertex-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Vertex.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Vertex.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.2702122,
+        "ended": 1791889742.5920808,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "motion-Vertex-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Vulkan-Vertex.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.592266,
+        "ended": 1791889742.604515,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "motion-Fragment-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Metal-Fragment.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Fragment.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.604657,
+        "ended": 1791889742.6929731,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "motion-Fragment-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Fragment.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Fragment.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.693155,
+        "ended": 1791889742.717567,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "motion-Fragment-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-motion/Vulkan-Fragment.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.7177181,
+        "ended": 1791889742.723815,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "depth-Vertex-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Metal-Vertex.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Vertex.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.725339,
+        "ended": 1791889742.815454,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "depth-Vertex-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Vertex.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Vertex.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.815607,
+        "ended": 1791889742.8400471,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "depth-Vertex-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Vulkan-Vertex.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.840238,
+        "ended": 1791889742.846401,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "depth-Fragment-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Metal-Fragment.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Fragment.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.846535,
+        "ended": 1791889742.894764,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "depth-Fragment-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Fragment.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Fragment.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.8949099,
+        "ended": 1791889742.919311,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "depth-Fragment-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-depth/Vulkan-Fragment.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.9194748,
+        "ended": 1791889742.925657,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "resolve-Vertex-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Metal-Vertex.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Vertex.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.927275,
+        "ended": 1791889742.975478,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "resolve-Vertex-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Vertex.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Vertex.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889742.975636,
+        "ended": 1791889743.000018,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "resolve-Vertex-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Vulkan-Vertex.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.000159,
+        "ended": 1791889743.0062962,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "resolve-Fragment-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Metal-Fragment.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Fragment.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.006436,
+        "ended": 1791889743.0967522,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "resolve-Fragment-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Fragment.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Fragment.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.096919,
+        "ended": 1791889743.121354,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "resolve-Fragment-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-resolve/Vulkan-Fragment.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.121512,
+        "ended": 1791889743.127708,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copy-Vertex-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Metal-Vertex.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Vertex.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.129233,
+        "ended": 1791889743.177516,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copy-Vertex-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Vertex.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Vertex.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.17766,
+        "ended": 1791889743.202189,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copy-Vertex-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Vulkan-Vertex.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.2023392,
+        "ended": 1791889743.2086048,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copy-Fragment-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Metal-Fragment.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Fragment.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.208739,
+        "ended": 1791889743.256934,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copy-Fragment-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Fragment.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Fragment.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.257104,
+        "ended": 1791889743.2814348,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "copy-Fragment-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-copy/Vulkan-Fragment.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.2815979,
+        "ended": 1791889743.2876348,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "cluster-shaders-Compute-metal",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-x",
+          "metal",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-cluster-shaders/Metal-Compute.shader",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-cluster-shaders/Compute.air"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.288718,
+        "ended": 1791889743.3790138,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "8ceb2e989daf300c496e075435083d2e9a31e75dd2ad66fb4f01e7cf738d4753"
+      },
+      {
+        "name": "cluster-shaders-Compute-metallib",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-cluster-shaders/Compute.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-cluster-shaders/Compute.metallib"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.379192,
+        "ended": 1791889743.4036522,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "cluster-shaders-Compute-spirv",
+        "command": [
+          "spirv-val",
+          "--target-env",
+          "vulkan1.0",
+          "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-001/offline/temporal-cluster-shaders/Vulkan-Compute.shader"
+        ],
+        "exit_code": 0,
+        "started": 1791889743.403788,
+        "ended": 1791889743.409838,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "artifacts": [
+      {
+        "path": "cluster-shaders-Compute-metal.stderr",
+        "bytes": 747,
+        "sha256": "8ceb2e989daf300c496e075435083d2e9a31e75dd2ad66fb4f01e7cf738d4753"
+      },
+      {
+        "path": "cluster-shaders-Compute-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "cluster-shaders-Compute-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "cluster-shaders-Compute-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "cluster-shaders-Compute-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "cluster-shaders-Compute-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Fragment-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Fragment-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Fragment-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Fragment-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Fragment-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Fragment-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Vertex-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Vertex-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Vertex-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Vertex-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Vertex-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "copy-Vertex-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Fragment-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Fragment-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Fragment-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Fragment-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Fragment-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Fragment-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Vertex-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Vertex-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Vertex-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Vertex-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Vertex-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "depth-Vertex-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "metal-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "metal-version.stdout",
+        "bytes": 264,
+        "sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2"
+      },
+      {
+        "path": "motion-Fragment-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Fragment-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Fragment-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Fragment-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Fragment-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Fragment-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Vertex-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Vertex-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Vertex-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Vertex-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Vertex-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "motion-Vertex-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Fragment-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Fragment-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Fragment-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Fragment-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Fragment-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Fragment-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Vertex-metal.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Vertex-metal.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Vertex-metallib.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Vertex-metallib.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Vertex-spirv.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "resolve-Vertex-spirv.stdout",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "sdk-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "sdk-version.stdout",
+        "bytes": 5,
+        "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a"
+      },
+      {
+        "path": "spirv-version.stderr",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "spirv-version.stdout",
+        "bytes": 465,
+        "sha256": "3f0ae05093de44cefafa15a117371fcc7ad25aabca0dfbc222a6a29f1c55f26a"
+      },
+      {
+        "path": "temporal-cluster-shaders/Compute.air",
+        "bytes": 9280,
+        "sha256": "5c0ad5546b61b0996db95845efdfec06af6dcfb05c1372cef6ed04b65b5f2e04"
+      },
+      {
+        "path": "temporal-cluster-shaders/Compute.metallib",
+        "bytes": 8651,
+        "sha256": "a336d853ecc8c22bd9cff3a0bd9a76d2208780147aa960a19218409615a3ab66"
+      },
+      {
+        "path": "temporal-cluster-shaders/Dx12-Compute.shader",
+        "bytes": 7058,
+        "sha256": "71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250"
+      },
+      {
+        "path": "temporal-cluster-shaders/Metal-Compute.shader",
+        "bytes": 7923,
+        "sha256": "e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402"
+      },
+      {
+        "path": "temporal-cluster-shaders/Vulkan-Compute.shader",
+        "bytes": 9864,
+        "sha256": "345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9"
+      },
+      {
+        "path": "temporal-cluster-shaders/manifest.rs",
+        "bytes": 1509,
+        "sha256": "40ce0db8bda6d1ed371ebe262691fc3118fa802909b7c851f6c313f03687e48a"
+      },
+      {
+        "path": "temporal-copy/Dx12-Fragment.shader",
+        "bytes": 3805,
+        "sha256": "5ee5c4eb31c13aba287473b222acdb78fd9d69fce62dde7a7e586c73f62c32bd"
+      },
+      {
+        "path": "temporal-copy/Dx12-Vertex.shader",
+        "bytes": 387,
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406"
+      },
+      {
+        "path": "temporal-copy/Fragment.air",
+        "bytes": 6976,
+        "sha256": "380e6969fc9f66146c9261702791a5514faf7d3510e0d4010fb6cb5db810cd86"
+      },
+      {
+        "path": "temporal-copy/Fragment.metallib",
+        "bytes": 6394,
+        "sha256": "7fe5e87c910d0de99a9354b3bc4a9003cfaae32299d00635e6590777cb7ea3c8"
+      },
+      {
+        "path": "temporal-copy/Metal-Fragment.shader",
+        "bytes": 4583,
+        "sha256": "32f848a5693d443c3a6d5cce33c07b0ff7281daf772ffd5dd4c7b49579c19f44"
+      },
+      {
+        "path": "temporal-copy/Metal-Vertex.shader",
+        "bytes": 429,
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40"
+      },
+      {
+        "path": "temporal-copy/Vertex.air",
+        "bytes": 3472,
+        "sha256": "4189fc54ad7a9522dfb0bd8349f6f89dfb1887dc57379e8c314ad4d93e7c054f"
+      },
+      {
+        "path": "temporal-copy/Vertex.metallib",
+        "bytes": 3389,
+        "sha256": "27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f"
+      },
+      {
+        "path": "temporal-copy/Vulkan-Fragment.shader",
+        "bytes": 5152,
+        "sha256": "e138082b5b17ae23cacc0b8eb568f372d4cae13ef37156136b193f28ca291f6d"
+      },
+      {
+        "path": "temporal-copy/Vulkan-Vertex.shader",
+        "bytes": 688,
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418"
+      },
+      {
+        "path": "temporal-copy/manifest.rs",
+        "bytes": 2217,
+        "sha256": "b55a977245e64d5896b483ef52c46ff115a6c7e97390f354803813db6019272c"
+      },
+      {
+        "path": "temporal-depth/Dx12-Fragment.shader",
+        "bytes": 1657,
+        "sha256": "9dbafe1b8c2b064105f38022242c94aaea0ff2ac25e7c5c95fc5e7a5ad37465d"
+      },
+      {
+        "path": "temporal-depth/Dx12-Vertex.shader",
+        "bytes": 1390,
+        "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2"
+      },
+      {
+        "path": "temporal-depth/Fragment.air",
+        "bytes": 4912,
+        "sha256": "369fdb65bee437942bface311fa12aeaa57e5d4283fb9bd1048c031d57b44395"
+      },
+      {
+        "path": "temporal-depth/Fragment.metallib",
+        "bytes": 4496,
+        "sha256": "193674533f387f54a8ce6a0c1ddc29d05308ee3bcf40d08a1db58c89a9820b23"
+      },
+      {
+        "path": "temporal-depth/Metal-Fragment.shader",
+        "bytes": 1560,
+        "sha256": "690ccd400af8ddbcad386d75d6946c798e02fceccd4e613ed7428f592b5e81a1"
+      },
+      {
+        "path": "temporal-depth/Metal-Vertex.shader",
+        "bytes": 7573,
+        "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962"
+      },
+      {
+        "path": "temporal-depth/Vertex.air",
+        "bytes": 14416,
+        "sha256": "fb014b97f5dba0ece5f1ea9ef6b3b8ef87315524671cd0c887e2641a57d7235a"
+      },
+      {
+        "path": "temporal-depth/Vertex.metallib",
+        "bytes": 12605,
+        "sha256": "d2054d86571e56497a46219e04114e5334af35ae37ad6ba8b391f510cc2cdd36"
+      },
+      {
+        "path": "temporal-depth/Vulkan-Fragment.shader",
+        "bytes": 1884,
+        "sha256": "f89df296e25829e86f6d841690ed30ed4eb3258a93a38ecd4d08bcb03c1e33cb"
+      },
+      {
+        "path": "temporal-depth/Vulkan-Vertex.shader",
+        "bytes": 2304,
+        "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837"
+      },
+      {
+        "path": "temporal-depth/manifest.rs",
+        "bytes": 2346,
+        "sha256": "2c99cb359d2bcd3456256220d8d2f704d189066b66fc580dec7b386fa6235ede"
+      },
+      {
+        "path": "temporal-motion/Dx12-Fragment.shader",
+        "bytes": 3307,
+        "sha256": "463b318167cf096655f0a83d87006ca1ab3f712b2815563d3b1c6120ca6cc051"
+      },
+      {
+        "path": "temporal-motion/Dx12-Vertex.shader",
+        "bytes": 1390,
+        "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2"
+      },
+      {
+        "path": "temporal-motion/Fragment.air",
+        "bytes": 6080,
+        "sha256": "beb3ea0a9b33390a70b6600cab1f50fe13d99c0d77c2df3fe2b3bc0aafce7a19"
+      },
+      {
+        "path": "temporal-motion/Fragment.metallib",
+        "bytes": 5663,
+        "sha256": "89aefcfdfab1ae5592df244091ee3f27ae9d127c1c868ec27324796d0d1d8d5a"
+      },
+      {
+        "path": "temporal-motion/Metal-Fragment.shader",
+        "bytes": 3542,
+        "sha256": "caa0875f398511c5e3e4cf48d41939c3e45fc73b3ec68f676b1244a6d7def750"
+      },
+      {
+        "path": "temporal-motion/Metal-Vertex.shader",
+        "bytes": 7573,
+        "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962"
+      },
+      {
+        "path": "temporal-motion/Vertex.air",
+        "bytes": 14416,
+        "sha256": "c0d3275f3537d804aed7b8d658e88ed31c1851f89f8847fac6c46dda22c2192a"
+      },
+      {
+        "path": "temporal-motion/Vertex.metallib",
+        "bytes": 12605,
+        "sha256": "d2054d86571e56497a46219e04114e5334af35ae37ad6ba8b391f510cc2cdd36"
+      },
+      {
+        "path": "temporal-motion/Vulkan-Fragment.shader",
+        "bytes": 4720,
+        "sha256": "c1d9a7afad75309bbd274dc78348dd1ab24862c893c67ee9beaa1056aad1e162"
+      },
+      {
+        "path": "temporal-motion/Vulkan-Vertex.shader",
+        "bytes": 2304,
+        "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837"
+      },
+      {
+        "path": "temporal-motion/manifest.rs",
+        "bytes": 2342,
+        "sha256": "332584c4ca600764dc0b459b5fa36a20d68be9150a256a775a8044f355b19771"
+      },
+      {
+        "path": "temporal-resolve/Dx12-Fragment.shader",
+        "bytes": 12344,
+        "sha256": "bc55874f497470715a29efae70d20f89b9fb87c5dea96493a8b44a05265be0a0"
+      },
+      {
+        "path": "temporal-resolve/Dx12-Vertex.shader",
+        "bytes": 387,
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406"
+      },
+      {
+        "path": "temporal-resolve/Fragment.air",
+        "bytes": 11712,
+        "sha256": "b9ccc414d67337a261e8535823f1552ea6e4164b15b1c88756245fba33821028"
+      },
+      {
+        "path": "temporal-resolve/Fragment.metallib",
+        "bytes": 10813,
+        "sha256": "29ca768a9413d187fb6b89adfd7c48816b8ced0f6f52e3af9f6fb89712c1a1a0"
+      },
+      {
+        "path": "temporal-resolve/Metal-Fragment.shader",
+        "bytes": 14426,
+        "sha256": "722225dd46b112a3692747f413c7e670f70e994b28fce631be08489ea0103b61"
+      },
+      {
+        "path": "temporal-resolve/Metal-Vertex.shader",
+        "bytes": 429,
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40"
+      },
+      {
+        "path": "temporal-resolve/Vertex.air",
+        "bytes": 3488,
+        "sha256": "5bba251fa2f085290497c1aabd2f7340de89dbadf9252dfd4b3d3ccbf120b926"
+      },
+      {
+        "path": "temporal-resolve/Vertex.metallib",
+        "bytes": 3389,
+        "sha256": "27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f"
+      },
+      {
+        "path": "temporal-resolve/Vulkan-Fragment.shader",
+        "bytes": 13944,
+        "sha256": "ea4a6becebddeba854da6344ea4e53a33390ae33a221decbea89f8552c49f8be"
+      },
+      {
+        "path": "temporal-resolve/Vulkan-Vertex.shader",
+        "bytes": 688,
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418"
+      },
+      {
+        "path": "temporal-resolve/manifest.rs",
+        "bytes": 2221,
+        "sha256": "b9c4a3c023992ee6ffe5ad672ea232f398661d0c8f22213bbcdf50c8c2f34e43"
+      }
+    ],
+    "gpu_execution": false,
+    "dxil": "not run: DXC unavailable",
+    "complete": true
+  },
+  "gpu": [
+    {
+      "label": "default-incant_render-25a5275fc192b898.list",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/binaries/default-incant_render-25a5275fc192b898",
+        "--list",
+        "--exact",
+        "models::retained::temporal_tests::joined::fixed_history_overlay_depth_and_timestamps_share_real_submissions"
+      ],
+      "pid": 81744,
+      "exit": 0,
+      "reaped": true,
+      "started": "2026-10-13T11:27:28.054184+00:00",
+      "seconds": 0.006279166991589591,
+      "error": null,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/default-incant_render-25a5275fc192b898.list.stdout",
+        "sha256": "183d4177812acb9eb94c7cda33163fd64c7d71b5d23e5468d75df02d4f7369ca"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/default-incant_render-25a5275fc192b898.list.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "default-incant_render-25a5275fc192b898",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/binaries/default-incant_render-25a5275fc192b898",
+        "--ignored",
+        "--exact",
+        "models::retained::temporal_tests::joined::fixed_history_overlay_depth_and_timestamps_share_real_submissions",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "pid": 81745,
+      "exit": 0,
+      "reaped": true,
+      "started": "2026-10-13T11:27:28.060900+00:00",
+      "seconds": 1.1665149580076104,
+      "error": null,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/default-incant_render-25a5275fc192b898.stdout",
+        "sha256": "c15767b6bb2f4e322b63c5fc3fd8c33a709aad759731931e289857face7efa58"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/default-incant_render-25a5275fc192b898.stderr",
+        "sha256": "b69eb2ed9a01e4a0a06116f1541ecb3500c4d2fc1fc6ea73fd780e41c773fd59"
+      }
+    },
+    {
+      "label": "cooked-incant_render-1bc338a36799738a.list",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/binaries/cooked-incant_render-1bc338a36799738a",
+        "--list",
+        "--exact",
+        "models::retained::temporal_tests::joined::fixed_history_overlay_depth_and_timestamps_share_real_submissions"
+      ],
+      "pid": 81753,
+      "exit": 0,
+      "reaped": true,
+      "started": "2026-10-13T11:27:29.308086+00:00",
+      "seconds": 0.01249499998812098,
+      "error": null,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/cooked-incant_render-1bc338a36799738a.list.stdout",
+        "sha256": "183d4177812acb9eb94c7cda33163fd64c7d71b5d23e5468d75df02d4f7369ca"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/cooked-incant_render-1bc338a36799738a.list.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "label": "cooked-incant_render-1bc338a36799738a",
+      "argv": [
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/binaries/cooked-incant_render-1bc338a36799738a",
+        "--ignored",
+        "--exact",
+        "models::retained::temporal_tests::joined::fixed_history_overlay_depth_and_timestamps_share_real_submissions",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "pid": 81754,
+      "exit": 0,
+      "reaped": true,
+      "started": "2026-10-13T11:27:29.321034+00:00",
+      "seconds": 1.159253208010341,
+      "error": null,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/cooked-incant_render-1bc338a36799738a.stdout",
+        "sha256": "b9e66231062a9f7189df28653fcd58b7f75c4d58137c86001ad136994abd1ef6"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/fixed-temporal-main217-002/gpu/cooked-incant_render-1bc338a36799738a.stderr",
+        "sha256": "ba10ff762526b24aaf044d8c15ae6f18bfeeb41674baa28f00fec90da7a4f15e"
+      }
+    }
+  ],
+  "gpu_release": {
+    "at": "2026-10-13T11:27:30.546367+00:00",
+    "pid": 81736,
+    "released": true,
+    "all_children_reaped": true,
+    "frame_debit": 8,
+    "success": true,
+    "failure": null,
+    "records": 4
+  },
+  "qualification": {
+    "source": "Curated fixed path only, four-program native cooker explicitly regenerated; no upscaler, MetalFX or SSAO/bloom. Frozen after source review except two reviewed test-only files and precise MASK documentation correction.",
+    "cpu": "Initial30 cooker,124default/153cooked(all-target CPU totals) overlap; final115default/144cooked library CPU tests after test-only join. Ignored GPU tests never count as executed.",
+    "offline": "Nine stages: Metal compile/link and Vulkan spirv-val plus three tool-version queries,30commands. HLSL emitted; no DXC validation.",
+    "gpu": "Two exact copied current-composition binaries, one bounded joined test each, eight65x33 submitted/completed Metal frames. Positive Models/InitializeScene/Display intervals, contained envelope, history phase and DRS reset. No current appearance/readback/pixel/performance claim.",
+    "producer": "Prior fixed-only Claude review9927598c,150numeric+79scene submissions/32contracts; softness and MASK detail approximately18% OF reference remain. Original producer evidence remains tied to its source/binaries.",
+    "preliminary": "First read-only exact test-list request omitted models:: prefix and matched zero. Corrected listing required exactly one test before each actual GPU launch; no empty execution counted.",
+    "final_review": "Independent root source and complete current-main219 execution/archive audit accepted at 931998df; publication requires exact-head fast SUCCESS."
+  },
+  "main219_qualification": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/main219-qualification.json",
+    "sha256": "59b97c67d4df86413ae167e1c5ab0399f9b2063bf0849fa261a1b17e64306a05"
+  },
+  "producer_cpu_archive": {
+    "path": "docs/spikes/evidence/fixed-temporal-main217/producer-temporal-coverage-logs.json.gz",
+    "sha256": "6a2d60f6f35f5e56e2594006300d1868d5eb5c6514f6ec611a38b38c8ba9dd18",
+    "records": 98,
+    "payloads": 65
+  }
+}

@@ -1,0 +1,1239 @@
+{
+  "format": "incant-physics-integration-evidence",
+  "version": 1,
+  "base": "9c7f5a446962eac365a746682e6c6e54bc0fb372",
+  "vendor_adapter_commit": "d45b6c0e",
+  "source": {
+    "format": "physics-integration-source",
+    "version": 1,
+    "base": "d45b6c0e7967788ed6a717ed1328a6090843a4ea",
+    "files": [
+      {
+        "path": "Cargo.lock",
+        "sha256": "37dc56f393c528289e6bd86486ede9297425e4f33260d204bb5144a0ebbe228f",
+        "bytes": 252688
+      },
+      {
+        "path": "Cargo.toml",
+        "sha256": "9d721f2b105c0c539e8a16347338a2e68170d524723122e0101d7ccded92c7d5",
+        "bytes": 3722
+      },
+      {
+        "path": "crates/incant_physics_snapshot/Cargo.toml",
+        "sha256": "c5d501c75f9ccd03ee1f0722c72b9dbdf84ab3085837a58e93d244e9793a23ba",
+        "bytes": 890
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/arena.rs",
+        "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+        "bytes": 3513
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+        "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+        "bytes": 3897
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/attachment.rs",
+        "sha256": "e8e9e37bb17011d68d3809dca29e400df2fd8949b8d4b890087453d296fb35fd",
+        "bytes": 6312
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+        "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+        "bytes": 4618
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/body_state/codec.rs",
+        "sha256": "d88a9ecfff664c9ac607f2d4b61cff7cc3eec440cb6fd58f520a4f523ec5583a",
+        "bytes": 8261
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/body_state/mod.rs",
+        "sha256": "77f78673fbb879721390176d8c9668de8a44234f0015b7edec697e797e2342f4",
+        "bytes": 4468
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/body_state/validate.rs",
+        "sha256": "518f6a6c760987d642bb9340ede773710ab9eef2152761a4cebb83b812a20553",
+        "bytes": 4572
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/ccd_state/codec.rs",
+        "sha256": "52f66ee5dc350e5c7f0dfefe127def77ed56d3ef3d83a6a45419475d36a013d4",
+        "bytes": 3217
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/ccd_state/mod.rs",
+        "sha256": "2208abe0672f6e1c0b345b515a1e72c04135678fa26c9be504e1233a04348679",
+        "bytes": 1754
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/ccd_state/validate.rs",
+        "sha256": "c647e1c0e538ea46c36a8dcde63b970fda324ae5617c3915ed54740c5e77ca96",
+        "bytes": 3045
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/coarena.rs",
+        "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+        "bytes": 3489
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+        "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+        "bytes": 1992
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/codec.rs",
+        "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+        "bytes": 5991
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/collider_state/codec.rs",
+        "sha256": "7992f85b674725684fc38f6b2b4c54d85c5652629cf397cf22823a9dea8eb914",
+        "bytes": 6165
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/collider_state/mod.rs",
+        "sha256": "1fa412b8f7d43ccc046a301ff05efcee7f22bea73cad9c78706e1aa5275c1a4f",
+        "bytes": 3850
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/collider_state/validate.rs",
+        "sha256": "8d3a271ff739798d76fa5ce5895852ae50b4b9cbee719557fd3fb558c10d501f",
+        "bytes": 2648
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+        "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+        "bytes": 6753
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+        "sha256": "82b1a8627586eee7b06488f8d528905b11dec0b6c7a920f0fe4ca640add3125c",
+        "bytes": 4937
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+        "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+        "bytes": 7710
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+        "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+        "bytes": 6402
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+        "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+        "bytes": 4325
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/geometry.rs",
+        "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+        "bytes": 4037
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+        "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+        "bytes": 3933
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/graph.rs",
+        "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+        "bytes": 4914
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+        "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+        "bytes": 3196
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/integration_config/codec.rs",
+        "sha256": "d590d72ce311cd096b4de2c28e749292b1318638965ecb8bf5bcbb1861baa079",
+        "bytes": 3787
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/integration_config/mod.rs",
+        "sha256": "5f33cea0b5f77bab0db2816753fdc5fb0a31206573c02e4891c21cb102223e99",
+        "bytes": 2888
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/integration_config/validate.rs",
+        "sha256": "029c1d580617c3289df4661eb46016d3c35210ef088aa472f0314446d43ce639",
+        "bytes": 2494
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/island_state/codec.rs",
+        "sha256": "b553e1caba0e4d95710913c700b5e197e090fd55d7b6ffd173bceb7f81e47270",
+        "bytes": 7181
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/island_state/mod.rs",
+        "sha256": "c12cb7a6fbc27f230def44b97ede5e3c555f9e1bbc5b1476238f27d4a6032ac0",
+        "bytes": 3207
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/island_state/validate.rs",
+        "sha256": "69c4daacf90dc4a4ee9233632289f287549155db4bd555ef2850e53e5c9ed760",
+        "bytes": 9463
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/lib.rs",
+        "sha256": "3f662ea36be69d4cb5cd5d6e9389b4e554c5388059dcda84d817a8c5f8c58723",
+        "bytes": 2358
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pair_state/codec.rs",
+        "sha256": "2e61bdda870d27e3632032b07e2e073ace7329b1b76ed3493ccbcd0c566839cc",
+        "bytes": 4637
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pair_state/mod.rs",
+        "sha256": "6976b53438e4f3bde526f16ed532f7c54edad20839b6b525b497f873ea56e4e7",
+        "bytes": 2635
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/pair_state/validate.rs",
+        "sha256": "fcfca5816c474accea8d260d6b16edef23b21dca2385b5f25b3eaa10b4ed0256",
+        "bytes": 5380
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/records.rs",
+        "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+        "bytes": 3267
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/rigid_owner/codec.rs",
+        "sha256": "5797cd96787d8b3a1aeef18f00a7b772b7274f2e07f2888c09cee2a060a09940",
+        "bytes": 4485
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/rigid_owner/mod.rs",
+        "sha256": "3d14bd31931e96737410224ae060329fb425bc66417dd93e70953e1b2b875b0c",
+        "bytes": 2382
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/rigid_owner/validate.rs",
+        "sha256": "f3271a9794089c9995633de10f8d681328d8af98d286b7dd93d3ec04007a0492",
+        "bytes": 9653
+      },
+      {
+        "path": "crates/incant_physics_snapshot/src/validate.rs",
+        "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+        "bytes": 5556
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+        "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+        "bytes": 11111
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+        "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+        "bytes": 14209
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+        "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+        "bytes": 13794
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/body_state.rs",
+        "sha256": "3a6a4e970138b68e4aecf7e48c8eba60159601525df0ba60720db51980b7f135",
+        "bytes": 13389
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/collider_state.rs",
+        "sha256": "71ed5076522eca3335ac639b4aca9a3762ae94e7befc49cd38e9f996b756b127",
+        "bytes": 16468
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+        "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+        "bytes": 11858
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+        "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+        "bytes": 6582
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+        "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+        "bytes": 9274
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/integration_config.rs",
+        "sha256": "c6088a012445849820f0942a08bc9dfebc6aa1ddbde9fc5ba62dfd932bdcc0b6",
+        "bytes": 4161
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/islands.rs",
+        "sha256": "45ed38f17af142353b5fbc829816cfa5576ce504d4de017f545fc00ff1cf95d8",
+        "bytes": 12127
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/manifolds.rs",
+        "sha256": "c58fbf468ec19f4e16caf0e4fcfb3cbef5b50d127b868b15f67fcaae076738f9",
+        "bytes": 13804
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/pair_state.rs",
+        "sha256": "2835bd7943daced64c5d7518519956236473b53d431ef6241b067af46611ce6a",
+        "bytes": 9879
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/body_capture.rs",
+        "sha256": "fcd30fc62edffeaa69d46804d1d0630e41c6583fc269c1d7887412642c2ce231",
+        "bytes": 5588
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/body_fixture.rs",
+        "sha256": "d5d7defe6f604e12dea355c97e42702c8a7dc809c04befedaaec44e0e4c01730",
+        "bytes": 2268
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/ccd_capture.rs",
+        "sha256": "ab52fa2ec6eca16efc920e90bea002c2fb90532f29b5a9963a0c7198d2b8e5d9",
+        "bytes": 7408
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/collider_capture.rs",
+        "sha256": "40979f7626c7330be432694fec35173075b39c21a5e3d4bdc542091f9618721f",
+        "bytes": 2883
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/collider_cases.rs",
+        "sha256": "a2fa8853af515864cdf0f64c096868ec8972daa42e5c363d2550bd4899633ca5",
+        "bytes": 7573
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/continuation_cases.rs",
+        "sha256": "8972208a1b4c1f2465563ddfae47e24acd5f519b5bc99732750b2b7ff5eaf55e",
+        "bytes": 8569
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/integration_fixture.rs",
+        "sha256": "8641ae5c9fb720e34c2b238469082406d9b49151b356351df1bfc17022868d1a",
+        "bytes": 1554
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/island_capture.rs",
+        "sha256": "051367e268049c2cfe3c855ef1b071409dd1d94ca80d5628a68fc6c4b3a22fd4",
+        "bytes": 3340
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/island_cases.rs",
+        "sha256": "2b834e0342711e837c75f401396ce9fcf4e1f428051cd12e911cc8874f722677",
+        "bytes": 17449
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/manifold_fixture.rs",
+        "sha256": "44080c5585b05615f045f84f3c7ddfe765263f91fc49af8f9fb56c0c9bd60716",
+        "bytes": 4776
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/ordered_capture.rs",
+        "sha256": "599e10df332d8205a72275abc21fcb0580f0add82806123e8b164445dfea429d",
+        "bytes": 6485
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/support/rigid_owner_capture.rs",
+        "sha256": "580bb53027a822c193cb9990d9e89920ee6df3f96dcb5e51d6d835b6c01e52fd",
+        "bytes": 1939
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+        "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+        "bytes": 8159
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+        "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+        "bytes": 12783
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_bodies.rs",
+        "sha256": "799e2c75c3252b3e53e1826fde731d1c9716fed44dc923722df0eab5f9e254ee",
+        "bytes": 13415
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_ccd.rs",
+        "sha256": "d29f6dd22ecd978981948bb06bf0c9d248e1e7c2958aafa61f985b77e65cc112",
+        "bytes": 7055
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+        "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+        "bytes": 10821
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+        "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+        "bytes": 5690
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_integration.rs",
+        "sha256": "b63ec3b6b6dfcc7f297be348acb6beea7572a2e00f25b691d4a89b3ba3530eb9",
+        "bytes": 7551
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+        "sha256": "e224fb4680a080fdb4b6635a3d4bfd77b7a7c557a7dcd6aebeeef4b74337108e",
+        "bytes": 36370
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+        "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+        "bytes": 4727
+      },
+      {
+        "path": "third_party/rapier2d/Cargo.toml",
+        "sha256": "f0731d0b366462720f2c8a136f1ea8bf0435efd60735ea225dbf63873287c297",
+        "bytes": 8297
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_CCD_CAPTURE.json",
+        "sha256": "2b67d0b4d658661d5edc28b7989974910c91d0f08b68d0cbe880fe1f3ab7b637",
+        "bytes": 390
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_PATCH.md",
+        "sha256": "b4b08ef530792b4f4e5644b9ff22bd08c0074f10725e86e49266d974e172feb2",
+        "bytes": 1084
+      },
+      {
+        "path": "third_party/rapier2d/src/data/arena.rs",
+        "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+        "bytes": 34497
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/ccd/ccd_solver.rs",
+        "sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+        "bytes": 16131
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/ccd/sweeps.rs",
+        "sha256": "c0b9d1b1defea1a0aa1ef839421f4d5de9932c8e849bc56e247115fe8e84d4f9",
+        "bytes": 26398
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/integration_parameters.rs",
+        "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+        "bytes": 20972
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/soft_body/soft_body_settings.rs",
+        "sha256": "2602bcf0114ef946e92eb236e45b972e52db181aec86447d61dfbd5c09767ec0",
+        "bytes": 3858
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/soft_body/soft_recovery_settings.rs",
+        "sha256": "8c33b041ded9748349ea8639783f5be39523806844c439ac056808f87cd3c564",
+        "bytes": 9663
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/solver/staged_island_solver/init.rs",
+        "sha256": "0506a6bd21d01b4035e615d1e7218b62cefa09b2a1e43bfc52658055ad7bc88d",
+        "bytes": 31973
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/collider_set.rs",
+        "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+        "bytes": 23738
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/physics_pipeline/substep.rs",
+        "sha256": "c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447",
+        "bytes": 30677
+      },
+      {
+        "path": "third_party/rapier3d/Cargo.toml",
+        "sha256": "c6e08c4b3c2942e2ccc74faf30e79b824c3b5a4e25bae70b7964283f44c83970",
+        "bytes": 11436
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_CCD_CAPTURE.json",
+        "sha256": "2b67d0b4d658661d5edc28b7989974910c91d0f08b68d0cbe880fe1f3ab7b637",
+        "bytes": 390
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_PATCH.md",
+        "sha256": "b4b08ef530792b4f4e5644b9ff22bd08c0074f10725e86e49266d974e172feb2",
+        "bytes": 1084
+      },
+      {
+        "path": "third_party/rapier3d/src/data/arena.rs",
+        "sha256": "895b4a352c977df4ef8e7b064780e679b015a14a2d650ebb9fc88caadfe31915",
+        "bytes": 34497
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/ccd/ccd_solver.rs",
+        "sha256": "059558201eb3437842f2eaf024aa9e29312686b9a00be26984c691fd1acd481d",
+        "bytes": 16131
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/ccd/sweeps.rs",
+        "sha256": "c0b9d1b1defea1a0aa1ef839421f4d5de9932c8e849bc56e247115fe8e84d4f9",
+        "bytes": 26398
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/integration_parameters.rs",
+        "sha256": "85780cd4252c2d6f7b780cb1e7a5646492f09a5b2e2827736d027a8b3fee4c2c",
+        "bytes": 20972
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/soft_body/soft_body_settings.rs",
+        "sha256": "2602bcf0114ef946e92eb236e45b972e52db181aec86447d61dfbd5c09767ec0",
+        "bytes": 3858
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/soft_body/soft_recovery_settings.rs",
+        "sha256": "8c33b041ded9748349ea8639783f5be39523806844c439ac056808f87cd3c564",
+        "bytes": 9663
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/solver/staged_island_solver/init.rs",
+        "sha256": "0506a6bd21d01b4035e615d1e7218b62cefa09b2a1e43bfc52658055ad7bc88d",
+        "bytes": 31973
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/collider_set.rs",
+        "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+        "bytes": 23738
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/physics_pipeline/substep.rs",
+        "sha256": "c8afc37889439dcb59ffaaae0f0cd040c652b76b32af1452ef5e156b805e7447",
+        "bytes": 30677
+      }
+    ]
+  },
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/source-004/freeze.json",
+    "bytes": 18951,
+    "sha256": "2b68f72e0750a0488c7e0e8488daf585979d998e48432a46166c3163b283aeb2"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/physics-integration-config-logs.json.gz",
+    "bytes": 543633,
+    "sha256": "20212b20249bf9508bea5e97108ce7d67938db92ce126c4bcdf791c2a1ad5a63",
+    "records": 449,
+    "payloads": 141
+  },
+  "commands": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889966.295276,
+      "duration_seconds": 0.662020206451416,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/clippy-002.log",
+      "sha256": "540f6b59ab977afbc26e2a796324866b749503248492d6a181b13b5071a70c85",
+      "tests": [],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791890032.3075042,
+      "duration_seconds": 0.02759575843811035,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": [],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791890032.3592498,
+      "duration_seconds": 0.021039247512817383,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": [],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791890030.8997812,
+      "duration_seconds": 1.3829197883605957,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tests": [],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "integration_config",
+        "--test",
+        "trusted_integration",
+        "--test",
+        "trusted_ccd",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889203.560576,
+      "duration_seconds": 0.8189420700073242,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/focused-002.log",
+      "sha256": "823356855cd7dcb56dc9313d16901db2b17f41d90196c3634e80979c1de51221",
+      "tests": [
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "source_generation": "source-002"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "integration_config",
+        "--test",
+        "trusted_integration",
+        "--test",
+        "trusted_ccd",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889740.879025,
+      "duration_seconds": 2.9354279041290283,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/focused-003.log",
+      "sha256": "597276573a70d9a25ef41932a7fe6d56cc4f83a3a615cf39a56be9982bffbb3c",
+      "tests": [
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "source_generation": "source-003"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--test",
+        "integration_config",
+        "--test",
+        "trusted_integration",
+        "--test",
+        "trusted_ccd",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889963.069058,
+      "duration_seconds": 1.6486310958862305,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/focused-004.log",
+      "sha256": "fa09a0ab464086a704e6621a92ebe0ff728354b88f0f7aea05d885f0800f43d1",
+      "tests": [
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8",
+        "--test",
+        "integration_config",
+        "--test",
+        "trusted_integration",
+        "--test",
+        "trusted_ccd",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889964.745135,
+      "duration_seconds": 1.523306131362915,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/focused-fast-001.log",
+      "sha256": "a286f988b4037cff85200dea7bb4ac65166ac59e7d46b96afc09a2f240659bde",
+      "tests": [
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--edges",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889967.475038,
+      "duration_seconds": 0.11463594436645508,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/lean-001.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "tests": [],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791890030.570443,
+      "duration_seconds": 0.303570032119751,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/runtime-graph-002.log",
+      "sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+      "tests": [],
+      "source_generation": "source-004"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889827.746121,
+      "duration_seconds": 18.78617811203003,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/tests-default-001.log",
+      "sha256": "57e080898fb1c916ae8d528c27d979c3f6433d58713e46af751f964d383076d0",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 28,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "source_generation": "source-003"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889846.557935,
+      "duration_seconds": 48.083948850631714,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/tests-fast-001.log",
+      "sha256": "fe155f20690c10876e0aa511ae618126b89c0ac51450d7d6b73c0c64ebd6c553",
+      "tests": [
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 28,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "passed": 0,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "source_generation": "source-003"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+      "started": 1791889966.984263,
+      "duration_seconds": 0.4636070728302002,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/wasm-001.log",
+      "sha256": "e5c8b843e4c5d8694a51e658020d69ddce17e00facd940af9b24852dec711437",
+      "tests": [],
+      "source_generation": "source-004"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/frozen-binaries/default/integration_config",
+      "bytes": 1051600,
+      "sha256": "bb31681bab1b3c5bc47f766aa39871fa37c69b52fe8ab73ec313296e703992d6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/frozen-binaries/default/trusted_ccd",
+      "bytes": 7020880,
+      "sha256": "a6d779b8d20ff1d259d5140649342393647db18d03902927c2a155f5e401fdf4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/frozen-binaries/default/trusted_integration",
+      "bytes": 6631976,
+      "sha256": "a73b6b60ccf989e637d22fe924aece9e42366dabf5110ae49bc5d1496ad7bada"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/frozen-binaries/fast/integration_config",
+      "bytes": 1051600,
+      "sha256": "39ded111f05aa671e398197a02575685df36b3d9c7e8e79d0b7f1dd6d8e09cf6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/frozen-binaries/fast/trusted_ccd",
+      "bytes": 6753088,
+      "sha256": "2aa0089231be2a57ee20c8c511e34bfdbbcf4a779d709f937166689470f6e008"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/frozen-binaries/fast/trusted_integration",
+      "bytes": 6362520,
+      "sha256": "6f25ada7d3d42a5c3037d25e85220efea464a202a0df86d479f56dc7718983d8"
+    }
+  ],
+  "failed_attempts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/focused-001.json",
+      "bytes": 725,
+      "sha256": "de46c0d7d7886322abb60798420ee2693375459850edf7a356bb66798b32b45b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/clippy-001.json",
+      "bytes": 641,
+      "sha256": "96d3588df926c020882921bf8f2ca0f95d01800c3c43e4859d87fce60952ff4d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/runtime-graph-001.json",
+      "bytes": 502,
+      "sha256": "35c13e777fe6089a34ca1dcb631cf1745c00658edd9f1dec4287b9dc197a9b8d"
+    }
+  ],
+  "source_reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/reviews/source-002.json",
+      "bytes": 23554,
+      "sha256": "bf53123a8062032cb38fed5d48fe918b10c06aa4090ee31548c7f55df81c8668"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-integration-config-001/reviews/source-003.json",
+      "bytes": 1700,
+      "sha256": "12c4795b1257986d885d06f4c85f946613a37915331ccfb9d9a82556bca76988"
+    }
+  ],
+  "results": {
+    "tests-default-001": {
+      "passed": 156,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 23,
+      "nonempty_groups": 21
+    },
+    "tests-fast-001": {
+      "passed": 156,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 23,
+      "nonempty_groups": 21
+    },
+    "focused-004": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 3,
+      "nonempty_groups": 3
+    },
+    "focused-fast-001": {
+      "passed": 21,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 3,
+      "nonempty_groups": 3
+    }
+  },
+  "review": "Independent final source/execution acceptance pending.",
+  "limitations": [
+    "Inert records only; no live construction/cache installation/save admission",
+    "Default-only soft settings; no joints/soft owner closure",
+    "Exact u64 counts are not execution-work or destination usize admission",
+    "Actual substep spring/derived arithmetic remains a whole-owner prerequisite",
+    "Cache AABB shape coherence is observed in native fixtures, not validated against hostile shape geometry",
+    "Completed journals/build/witness equality are not authenticated phase or owner provenance",
+    "CPU only; no GPU/device/shipping/performance gate",
+    "Repeated native observer controls and numerical modes overlap; test counts are not additive coverage"
+  ]
+}

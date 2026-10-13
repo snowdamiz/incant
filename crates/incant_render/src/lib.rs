@@ -1,6 +1,8 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Bevy-scheduled HDR geometry, lighting, display transform and composition.
 //! Authored clustered lights; the full production render graph remains open.
+mod bloom;
+pub use bloom::{Bloom, BloomError};
 mod camera;
 mod diagnostic_draw;
 #[cfg(test)]
@@ -31,10 +33,13 @@ mod shader;
 mod shadows;
 mod sprites;
 mod studio;
+pub mod temporal;
+mod temporal_shader;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
 mod text;
+pub mod timing;
 mod ui;
 #[cfg(test)]
 mod version_tests;
@@ -97,13 +102,31 @@ pub struct Renderer {
     shadows: shadows::ShadowSystem,
     frames: frame::FrameCache,
     output: output::OutputPass,
+    bloom: Option<bloom::BloomSystem>,
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
+    temporal: Option<temporal::TemporalSystem>,
 }
 impl Renderer {
     pub async fn new(
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
+    ) -> Result<Self> {
+        Self::new_configured(instance, surface, false).await
+    }
+    /// Explicit opt-in to bounded, asynchronous native GPU timestamp collection.
+    /// Unsupported adapters fail rather than silently substituting CPU timings.
+    /// Instrumentation can perturb performance and is off in `new`/`headless`.
+    pub async fn new_with_gpu_timing(
+        instance: &wgpu::Instance,
+        surface: Option<&wgpu::Surface<'_>>,
+    ) -> Result<Self> {
+        Self::new_configured(instance, surface, true).await
+    }
+    async fn new_configured(
+        instance: &wgpu::Instance,
+        surface: Option<&wgpu::Surface<'_>>,
+        gpu_timing: bool,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -117,7 +140,8 @@ impl Renderer {
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Incant renderer"),
                 required_features: output::required_features(&adapter)?
-                    | pipeline_cache::required_features(&adapter),
+                    | pipeline_cache::required_features(&adapter)
+                    | timing::required_features(gpu_timing, adapter.features())?,
                 ..Default::default()
             })
             .await?;
@@ -157,6 +181,11 @@ impl Renderer {
         let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend, cache)?;
         let text = text::TextSystem::new(&device, adapter.get_info().backend, cache)?;
         let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend, cache)?;
+        let graph = if gpu_timing {
+            graph::FrameGraph::with_timings(&device, &queue)?
+        } else {
+            Default::default()
+        };
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
@@ -181,13 +210,27 @@ impl Renderer {
             shadows,
             frames: Default::default(),
             output,
-            graph: Default::default(),
+            bloom: None,
+            graph,
             motion: None,
+            temporal: None,
         })
     }
     pub fn headless() -> Result<Self> {
         let instance = wgpu::Instance::default();
         pollster::block_on(Self::new(&instance, None))
+    }
+    /// Poll callbacks without waiting, then consume at most one completed sample.
+    /// Covers the scene graph through display conversion, excluding later UI,
+    /// presentation, uploads, CPU work, and GPU readback/resolve overhead.
+    pub fn take_gpu_timing(&self) -> Result<Option<timing::GpuFrameTiming>> {
+        self.check_device()?;
+        Ok(self.graph.take_timing()?)
+    }
+    pub fn gpu_timing_stats(
+        &self,
+    ) -> std::result::Result<timing::GpuTimingStats, timing::GpuTimingError> {
+        self.graph.timing_stats()
     }
     /// Drive native callbacks without waiting for GPU completion and reject a
     /// reported device loss. Successfully queued work cannot be rolled back.
@@ -268,6 +311,7 @@ impl Renderer {
             },
             resolution::ResolutionScale::FULL,
             None,
+            None,
         )
     }
     fn draw_scene_scaled(
@@ -275,7 +319,8 @@ impl Renderer {
         scene: &RenderScene,
         target: RetainedTarget<'_>,
         scale: resolution::ResolutionScale,
-        motion: Option<motion::MotionDraw>,
+        mut motion: Option<motion::MotionDraw>,
+        temporal: Option<&temporal::Pending>,
     ) -> Result<wgpu::CommandBuffer> {
         let RetainedTarget {
             view,
@@ -334,22 +379,65 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
-        let output = self.output.prepare(
-            &self.device,
-            &attachments.color,
-            view,
-            format,
-            viewport,
-            plan.output_mapping,
-        )?;
+        let overlays = models.as_ref().is_some_and(|m| m.has_transparent())
+            || sprites.as_ref().is_some_and(|s| s.has_passes())
+            || text.as_ref().is_some_and(|t| t.has_passes());
+        if temporal.is_some_and(|p| p.active()) && overlays {
+            motion
+                .as_mut()
+                .expect("temporal motion draw")
+                .set_overlay_depth(attachments.depth.clone());
+        }
+        let temporal = temporal.and_then(|pending| {
+            self.temporal.as_ref().and_then(|system| {
+                system.prepare(&self.device, pending, &attachments.color, scene.camera)
+            })
+        });
+        let bloom_system = self
+            .bloom
+            .as_ref()
+            .filter(|b| scene.camera.pixel_resolution.is_none() && b.config.intensity > 0.);
+        let bloom = bloom_system
+            .map(|system| {
+                system.prepare(
+                    &self.device,
+                    &attachments.color,
+                    [width, height],
+                    &plan,
+                    scale,
+                )
+            })
+            .transpose()?;
+        let output = if let Some((draw, system)) = bloom.as_ref().zip(bloom_system) {
+            system.output.prepare_optional_bloom(
+                &self.device,
+                &attachments.color,
+                view,
+                format,
+                viewport,
+                plan.output_mapping,
+                Some((&draw.result, system.config.intensity, [width, height])),
+            )?
+        } else {
+            self.output.prepare(
+                &self.device,
+                &attachments.color,
+                view,
+                format,
+                viewport,
+                plan.output_mapping,
+            )?
+        };
         self.graph.encode(
             &self.device,
             graph::PreparedFrame {
                 diagnostics,
                 models,
                 motion,
+                temporal,
                 sprites,
                 text,
+                bloom,
                 output,
             },
         )

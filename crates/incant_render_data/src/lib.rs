@@ -3,7 +3,7 @@
 mod text;
 pub use text::{TextInput, TextNode};
 mod ui;
-pub use ui::{UiEdit, UiInput, UiRect, UiRole, UiWidget};
+pub use ui::{UI_LABEL_HALO, UiEdit, UiInput, UiRect, UiRole, UiWidget};
 mod flipbook;
 mod tilemap;
 pub use flipbook::SpriteFrames;

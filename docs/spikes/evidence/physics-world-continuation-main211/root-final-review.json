@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T09:12:43.784332+00:00",
+  "reviewer": "root/astra",
+  "commit": "a9fca64da3c637ea565a24ac37586fe40a1eabe6",
+  "accepted": true,
+  "qualification_sha256": "6a22ae59211e6fb0c3a948ede0dec9bdd2e88329f9c12114dab995336f7e1254",
+  "qualification_verify_exit": 0,
+  "basis": "Read qualify.py and qualification, re-executed verification; exact651 producer frozen inputs, only added upstream build delta is accepted cc/parallel mapping absent selected normal graph. Peer final delta review dd4b938 retained. No duplicate native execution claimed.",
+  "limits": "Trusted continuation evidence only; live hostile physics restore/save stays refused. No device or phase gate."
+}
