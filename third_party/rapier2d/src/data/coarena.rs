@@ -158,3 +158,9 @@ impl<T> Coarena<T> {
         (&mut elt1.1, &mut elt2.1)
     }
 }
+
+// Incant private checked construction; no public raw setter.
+#[cfg(feature = "incant-checked-restore")]
+#[path = "coarena_checkpoint.rs"]
+#[allow(dead_code)]
+mod checkpoint;

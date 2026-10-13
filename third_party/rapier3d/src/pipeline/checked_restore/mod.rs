@@ -1,11 +1,20 @@
-//! Default-off numeric admission for a checked inert frame. No live graph,
-//! collider set or PhysicsWorld is constructed, queried or stepped here.
+//! Default-off numeric admission for a checked inert frame. Public functions
+//! never construct a live owner. Private staged storage constructors are tested
+//! in-crate only and are not a complete body/collider/PhysicsWorld installer.
 //! This token is deliberately not a restore capability: compound/subshape,
 //! historical broad bounds, full native allocation and runtime-owner admission
 //! remain necessary before the future private exact-field constructor.
 #[cfg(not(feature = "f32"))]
 compile_error!("checked Incant physics frames require the pinned f32 solver");
-mod convert;
+// Private staging is exercised in native unit tests until the whole owner
+// constructor is complete. No public constructor or installer is exposed.
+#[allow(dead_code)]
+pub(crate) mod allocation;
+#[allow(dead_code)]
+mod body;
+#[allow(dead_code)]
+mod collider;
+pub(crate) mod convert;
 mod derived;
 mod work;
 use incant_physics_snapshot::{Identity, WorldBoundary};

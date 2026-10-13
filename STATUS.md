@@ -25,8 +25,8 @@ jittered reconstruction, split model drawing and all four Models timing passes.
 Current source review and thirteen checks pass (168 default and 200 overlapping
 cooked CPU cases). The exact current composition completed eight bounded Metal
 frames under Claude: default SSAO admission and expected cooked refusal both
-passed, with all children reaped. Final integration review is accepted; publication
-awaits the required fast check. Original
+passed, with all children reaped. PR230 merged after independent final review and
+the required exact-head fast check. Original
 appearance acceptance remains producer-scoped.
 Authored N6 remains failed at seven codes; revised N6T/N8 margins are 0.79/0.97
 codes. Cooked SSAO, non-Metal appearance, phone and performance gaps remain open.
@@ -2620,3 +2620,18 @@ retained. No live constructor/cache installer or save admission is added. See
 `docs/spikes/physics-integration-config.md`. This historical final-audit/intake
 status is superseded by the accepted main220 composition and PR221 merge.
 Cache/shape coherence and full live-owner admission remain open.
+
+
+## Private physics constructors — producer accepted, integration pending
+
+Exact private storage/body/collider construction at `0a96dc0f` has independent
+source/final CPU acceptance: 216 snapshot cases and 22 native controls per mode,
+with 144 continuation steps per dimension. Other owners remain trusted clones.
+The separately reviewed observer alias from `d6b53f8b` is included. This private
+main229 composition now has independent source acceptance and21 successful
+current checks:216 snapshot plus22 private native controls per parallel mode,
+with144 continuation steps per dimension. Final integration review is accepted;
+the disjoint main230 renderer join awaits narrow relevance review.
+[composed evidence](docs/spikes/physics-construction-main229.md) is retained. Exact manager construction,
+whole-owner admission and live physics saves remain closed.
+[Producer evidence](docs/spikes/physics-native-construction.md).

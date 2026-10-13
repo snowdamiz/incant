@@ -1,0 +1,1398 @@
+{
+  "schema": "incant-physics-construction-current-main-v1",
+  "at": "2026-10-13T16:07:48.888837+00:00",
+  "base": "4631f07defcc8bdfa63446723ad25026d8f03b50",
+  "source": "3482282a4b2702062f4123490077ffe9f2c40340",
+  "producer": "d6b53f8bede48ed42b035b565ff6887978f07f97",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/freeze.json",
+    "sha256": "6bad624660268362d5afffdfd12176b1202a3ff1accac71ee26bd7f2865ec0e2",
+    "inputs": 3571
+  },
+  "source_review": {
+    "at": "2026-10-13T15:56:17.226433+00:00",
+    "checkout": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+    "base": "4631f07defcc8bdfa63446723ad25026d8f03b50",
+    "head": "3482282a4b2702062f4123490077ffe9f2c40340",
+    "producer": "d6b53f8bede48ed42b035b565ff6887978f07f97",
+    "source": [
+      {
+        "path": "crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+        "sha256": "d99c544627d1509ce9b3fd77a2106d03b41c442ccebcb5a1c1a2f1f6fea44275",
+        "bytes": 1907,
+        "exact_producer": true
+      },
+      {
+        "path": "crates/incant_physics_snapshot/tests/construction_allocations.rs",
+        "sha256": "64d3851d185172e2b65ee0321131830f9d427213627b2c3910e1bf54c656a29c",
+        "bytes": 3858,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_CCD_CAPTURE.json",
+        "sha256": "0fbe106b331f17b19eb6600918016db7571e80291d5ebc8b1038ba0cccc7a420",
+        "bytes": 390,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_CHECKED_CONSTRUCTION.json",
+        "sha256": "2e0938bd3ad658592c9536b894961565a93fdd1024c3b23dea4221bb201333c3",
+        "bytes": 3723,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/INCANT_PATCH.md",
+        "sha256": "237ba7297faee3fbf194f9df9ff91a443b88eeb093f576f502ce484d97b0d587",
+        "bytes": 2917,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/data/arena.rs",
+        "sha256": "5a5138390d4b9d22c22c805dbda7c1a2fe7048874f055a1c7d31e8ef46ed59df",
+        "bytes": 34671,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/data/arena_checkpoint.rs",
+        "sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc",
+        "bytes": 7003,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/data/coarena.rs",
+        "sha256": "8091da4f62c363dcb3b89bc4564e8941ebe47c0f29cda3c7847e8a5a0190f3bb",
+        "bytes": 5422,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/data/coarena_checkpoint.rs",
+        "sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385",
+        "bytes": 4057,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/data/graph.rs",
+        "sha256": "92b46c3580a206ef6ee3eb190f1524c47d1120bae7086e0b119d18f29d7503c8",
+        "bytes": 25358,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/data/graph_checkpoint.rs",
+        "sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3",
+        "bytes": 4966,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/dynamics/ccd/ccd_solver.rs",
+        "sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47",
+        "bytes": 16314,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/collider.rs",
+        "sha256": "cfda081691078cecc015b753cc37fa20193ccae6b07a76be6e30433e3b133f59",
+        "bytes": 60809,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/geometry/collider_checkpoint.rs",
+        "sha256": "21d2ca3926d351e301f1c509a9f5aa3b316d8d894acbf1c87d7d587e5e01739e",
+        "bytes": 4446,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+        "sha256": "46c14a2ba0a6d35834b28927e2f9af6d4d686fbd4839ab08202a7ee7dbe87da8",
+        "bytes": 5594,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/body.rs",
+        "sha256": "eeef6a26c6fdd99d38005f60c7a02010b4529854fca4772758f119800bb3ba7f",
+        "bytes": 7135,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/body_observe.rs",
+        "sha256": "9a145c5f48ca42dab8171c2a6df59da6018b06f01ea96de64bb941536db05485",
+        "bytes": 5638,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/body_tests.rs",
+        "sha256": "3bc5ae23350c3ff2d2e5e9d2f921a511dd59a2815ed7c13b01317ccaa764cb3b",
+        "bytes": 16399,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/collider.rs",
+        "sha256": "a2ab0604c0d1cbd76482b76d3362d27f5f7b73f159c858fc139169c5863aae7b",
+        "bytes": 3196,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/collider_observe.rs",
+        "sha256": "f604830e8a3ed7511ffec368ecb6807215f7018a373c20ff597dbbb86916f3d9",
+        "bytes": 2894,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/convert.rs",
+        "sha256": "78f3aaf874139df74453def47076c6155d66869cca1abbbf9a381cb8f6b20a3d",
+        "bytes": 2858,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+        "sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb",
+        "bytes": 3360,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier2d/src/pipeline/checked_restore/native_observe.rs",
+        "sha256": "a217e27c638b1866bc29ed28c87b20a7e44bd923f35bf743556a13b4ca6b73e3",
+        "bytes": 6551,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_CCD_CAPTURE.json",
+        "sha256": "0fbe106b331f17b19eb6600918016db7571e80291d5ebc8b1038ba0cccc7a420",
+        "bytes": 390,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_CHECKED_CONSTRUCTION.json",
+        "sha256": "2e0938bd3ad658592c9536b894961565a93fdd1024c3b23dea4221bb201333c3",
+        "bytes": 3723,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/INCANT_PATCH.md",
+        "sha256": "237ba7297faee3fbf194f9df9ff91a443b88eeb093f576f502ce484d97b0d587",
+        "bytes": 2917,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/data/arena.rs",
+        "sha256": "5a5138390d4b9d22c22c805dbda7c1a2fe7048874f055a1c7d31e8ef46ed59df",
+        "bytes": 34671,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/data/arena_checkpoint.rs",
+        "sha256": "4972275f8c2eaaf8a9818cd0c6c16fa5936b128111c39d8b6445eb1ab57aacfc",
+        "bytes": 7003,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/data/coarena.rs",
+        "sha256": "8091da4f62c363dcb3b89bc4564e8941ebe47c0f29cda3c7847e8a5a0190f3bb",
+        "bytes": 5422,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/data/coarena_checkpoint.rs",
+        "sha256": "9e777cce52dbe50e4d761da01d93c8b20e93ad71a6e270a03ce9e7d639bdf385",
+        "bytes": 4057,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/data/graph.rs",
+        "sha256": "92b46c3580a206ef6ee3eb190f1524c47d1120bae7086e0b119d18f29d7503c8",
+        "bytes": 25358,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/data/graph_checkpoint.rs",
+        "sha256": "7fe71921f29db087bab8fefa76b51e99ed499b0792b5735af133a905ecd224c3",
+        "bytes": 4966,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/dynamics/ccd/ccd_solver.rs",
+        "sha256": "368ce950557926755617fb1008a311f59116b6f1536f1903a7a1601d0f7d7d47",
+        "bytes": 16314,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/collider.rs",
+        "sha256": "cfda081691078cecc015b753cc37fa20193ccae6b07a76be6e30433e3b133f59",
+        "bytes": 60809,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/geometry/collider_checkpoint.rs",
+        "sha256": "21d2ca3926d351e301f1c509a9f5aa3b316d8d894acbf1c87d7d587e5e01739e",
+        "bytes": 4446,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+        "sha256": "46c14a2ba0a6d35834b28927e2f9af6d4d686fbd4839ab08202a7ee7dbe87da8",
+        "bytes": 5594,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/body.rs",
+        "sha256": "eeef6a26c6fdd99d38005f60c7a02010b4529854fca4772758f119800bb3ba7f",
+        "bytes": 7135,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/body_observe.rs",
+        "sha256": "9a145c5f48ca42dab8171c2a6df59da6018b06f01ea96de64bb941536db05485",
+        "bytes": 5638,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/body_tests.rs",
+        "sha256": "3bc5ae23350c3ff2d2e5e9d2f921a511dd59a2815ed7c13b01317ccaa764cb3b",
+        "bytes": 16399,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/collider.rs",
+        "sha256": "a2ab0604c0d1cbd76482b76d3362d27f5f7b73f159c858fc139169c5863aae7b",
+        "bytes": 3196,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/collider_observe.rs",
+        "sha256": "f604830e8a3ed7511ffec368ecb6807215f7018a373c20ff597dbbb86916f3d9",
+        "bytes": 2894,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/convert.rs",
+        "sha256": "78f3aaf874139df74453def47076c6155d66869cca1abbbf9a381cb8f6b20a3d",
+        "bytes": 2858,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+        "sha256": "704682e80bc6664199380464ac1fc966a409adb4c8bc58fbbe9b78cf3aaaa9cb",
+        "bytes": 3360,
+        "exact_producer": true
+      },
+      {
+        "path": "third_party/rapier3d/src/pipeline/checked_restore/native_observe.rs",
+        "sha256": "a217e27c638b1866bc29ed28c87b20a7e44bd923f35bf743556a13b4ca6b73e3",
+        "bytes": 6551,
+        "exact_producer": true
+      },
+      {
+        "path": "tools/probes/physics-native-construction/prepare.py",
+        "sha256": "350133f10f25955c837850fd2d31cf0208cbe9bd581300351bc0a6095cc6a0d3",
+        "bytes": 2828,
+        "exact_producer": true
+      }
+    ],
+    "closure_paths": 1604,
+    "producer_differences": [
+      {
+        "path": "crates/incant_physics_snapshot/src/lib.rs",
+        "current_sha256": "53ab273528ae78570931fe0d3f1cf70db68227a482de368ea00fbe68c2f7e39d",
+        "producer_sha256": "bdcc01451063d048f22d49ddc8d2ad18aa0ebafc2651ac0cf431295d0fb68890",
+        "exact_main": true
+      }
+    ],
+    "patch_sha256": "45952a4de2c9660b171fb3a66d157756c7fb6ba226ec0f952697c79c9c9fb5bc",
+    "lock_exact_main": true,
+    "checks_started": false,
+    "qualification": "Pending current-main review; producer accepted evidence retained separately."
+  },
+  "checks": [
+    {
+      "name": "scoped-clean",
+      "argv": [
+        "./tools/cargo",
+        "clean",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_physics_snapshot",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 2342,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.5826839999936055,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/scoped-clean.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/scoped-clean.stderr",
+        "sha256": "b522ea880180a44986f414ddb28f86abe0576aecf0df5cb4bdc0756c0762bb30"
+      }
+    },
+    {
+      "name": "prepare-native",
+      "argv": [
+        "python3",
+        "tools/probes/physics-native-construction/prepare.py",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 2348,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.2102712500054622,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/prepare-native.stdout",
+        "sha256": "45372028596b2ae08a68bb41e85d8a65289b8c611605e26954af26209784df5f"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/prepare-native.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "native-metadata",
+      "argv": [
+        "./tools/cargo",
+        "metadata",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/Cargo.toml",
+        "--format-version",
+        "1"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 2349,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.09921245799341705,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-metadata.stdout",
+        "sha256": "361c36e92e05f490b0fe83dce6fd647d48a49ff836f8d408e08240bbcd41a44c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-metadata.stderr",
+        "sha256": "9a6f839871d2e670f67e91863943ca00fe0cffa1eac4f7884e015ecd2d3c1740"
+      }
+    },
+    {
+      "name": "default-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--features",
+        "native-admission",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 2353,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 52.9144550839992,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-tests.stdout",
+        "sha256": "793e06b6542808bec649b05bc5b7a8a160d0946eafe506e926de9587d63a92a1"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-tests.stderr",
+        "sha256": "9ad849d2f9bff1fcc9143520d188e380a65150ad2dc64764516ff9dfa0955f78"
+      }
+    },
+    {
+      "name": "default-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--features",
+        "native-admission",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 3757,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 4.736746458002017,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-clippy.stderr",
+        "sha256": "b1ad5ba8dbd3ad3b5afc051fd2b7ef91bda4be00b1213ff6a92055718ad1a2a0"
+      }
+    },
+    {
+      "name": "default-native-graph",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 3807,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.11544966700603254,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-native-graph.stdout",
+        "sha256": "57d09a22f4d0ba6a7fe43c412287200fc4436d2eb94a8a6c57837a6a018af582"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-native-graph.stderr",
+        "sha256": "7c9367a9115919489e28cd59dbe989a211e0c74bc234b3595bd04f1e811671d4"
+      }
+    },
+    {
+      "name": "default-native-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism",
+        "--message-format=json",
+        "checked_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 3814,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 57.88328733299568,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-native-tests.stdout",
+        "sha256": "a50af70ae6cd215ed1460104d7476837eb10270a0f5ccf8dc04776f25002e272"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-native-tests.stderr",
+        "sha256": "be18d4f92078dd788a27911aeefa353dd960b2f10ba6451d6307f835649e8989"
+      }
+    },
+    {
+      "name": "default-native-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/enhanced-determinism,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/enhanced-determinism",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 4875,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 10.923198375006905,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-native-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/default-native-clippy.stderr",
+        "sha256": "ec69c76c2a49691ec91b669f8d020e256c62e31fe7f23c58cb3627de639374ae"
+      }
+    },
+    {
+      "name": "fast8-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8,native-admission",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 4960,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 52.32431904200348,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-tests.stdout",
+        "sha256": "d1257d1610486e8810d49f51091ed98f517c753f6a1a4f101c799203c0db0557"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-tests.stderr",
+        "sha256": "5abae459eef4c9315f52231638a00e540e1bf863386fd16c350c1678dbd60bad"
+      }
+    },
+    {
+      "name": "fast8-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--no-default-features",
+        "--features",
+        "physics-fast-simd8,native-admission",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 5608,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 4.971855083000264,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-clippy.stderr",
+        "sha256": "f4bb17586b0e9cfae1134f4788619e6e642f97be1769b2b20dbbc1921197b624"
+      }
+    },
+    {
+      "name": "fast8-native-graph",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/simd8,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/simd8"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 5661,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.11368200001015794,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-native-graph.stdout",
+        "sha256": "d8ee5683584f2ad4a6943140985b81d83505ac733b93d0af2f85447432510556"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-native-graph.stderr",
+        "sha256": "7c9367a9115919489e28cd59dbe989a211e0c74bc234b3595bd04f1e811671d4"
+      }
+    },
+    {
+      "name": "fast8-native-tests",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/simd8,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/simd8",
+        "--message-format=json",
+        "checked_",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 5668,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 46.777334500002326,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-native-tests.stdout",
+        "sha256": "eef08b1b94212c6e8862e5154391d9c86ca1ffae5e9e165037316bdb2d39bcbc"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-native-tests.stderr",
+        "sha256": "84344a56116c12e8d694cc038e8406d528d68cdfd3d572aeac33841be54e69f6"
+      }
+    },
+    {
+      "name": "fast8-native-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "--manifest-path",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/Cargo.toml",
+        "-p",
+        "rapier2d",
+        "-p",
+        "rapier3d",
+        "--lib",
+        "--features",
+        "rapier2d/incant-checked-restore,rapier2d/incant-checkpoint,rapier2d/serde-serialize,rapier2d/parallel,rapier2d/simd8,rapier3d/incant-checked-restore,rapier3d/incant-checkpoint,rapier3d/serde-serialize,rapier3d/parallel,rapier3d/simd8",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6266,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 8.012958624996827,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-native-clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fast8-native-clippy.stderr",
+        "sha256": "b40064ce36fc3b0c946470570d703f16d2af2e46dd5990f515ea40ad7263260e"
+      }
+    },
+    {
+      "name": "wasm",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6311,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.5713475840020692,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/wasm.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/wasm.stderr",
+        "sha256": "abb965abbf636db1615617babc775771dd5edf06eba4845de1e0f1fd97a9980c"
+      }
+    },
+    {
+      "name": "normal-graph",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--edges",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6320,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.11376287500024773,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/normal-graph.stdout",
+        "sha256": "935db8a013187a0ec3505782b491c810aff1a736efd97b2a5a3e99043bf82da7"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/normal-graph.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "runtime-guard",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6324,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.47328558399749454,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/runtime-guard.stdout",
+        "sha256": "872dbc4414638e093715b54368f7da10e1125f93c588a9e2550de9983cd2b600"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/runtime-guard.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "python-guards",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "tools.tests.test_probe_locks",
+        "tools.tests.test_physics_features"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6333,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.14203737500065472,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/python-guards.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/python-guards.stderr",
+        "sha256": "2e549d8b85ee9f07853d5dc522a8fc8aa1d7ddd5e4f140689f96dfd42f8f4c61"
+      }
+    },
+    {
+      "name": "vendor-fmt",
+      "argv": [
+        "rustfmt",
+        "--edition",
+        "2024",
+        "--check",
+        "third_party/rapier2d/src/pipeline/checked_restore/allocation.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body_observe.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/body_tests.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/collider.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/collider_observe.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/convert.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/derived.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/native_observe.rs",
+        "third_party/rapier2d/src/pipeline/checked_restore/work.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/allocation.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body_observe.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/body_tests.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/collider.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/collider_observe.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/convert.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/derived.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/native_observe.rs",
+        "third_party/rapier3d/src/pipeline/checked_restore/work.rs"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6336,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.06280233299185056,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/vendor-fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/vendor-fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6337,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 1.3532446250028443,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6345,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.030082208992098458,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "4631f07defcc8bdfa63446723ad25026d8f03b50",
+        "HEAD"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant",
+      "pid": 6347,
+      "exit": 0,
+      "reaped": true,
+      "seconds": 0.022768042006646283,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "counts": {
+    "default-tests": {
+      "passed": 216,
+      "groups": 25,
+      "failed": 0,
+      "ignored": 0
+    },
+    "default-native-tests": {
+      "passed": 22,
+      "groups": 2,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast8-tests": {
+      "passed": 216,
+      "groups": 25,
+      "failed": 0,
+      "ignored": 0
+    },
+    "fast8-native-tests": {
+      "passed": 22,
+      "groups": 2,
+      "failed": 0,
+      "ignored": 0
+    }
+  },
+  "features": {
+    "default": {
+      "rapier2d": [
+        "alloc",
+        "block-solver",
+        "default",
+        "dim2",
+        "enhanced-determinism",
+        "f32",
+        "incant-checked-restore",
+        "incant-checkpoint",
+        "parallel",
+        "serde-serialize",
+        "std"
+      ],
+      "simba": [
+        "libm",
+        "libm_force",
+        "std",
+        "wide"
+      ],
+      "parry2d": [
+        "alloc",
+        "dim2",
+        "downcast-rs",
+        "ena",
+        "enhanced-determinism",
+        "f32",
+        "hashbrown",
+        "indexmap",
+        "parallel",
+        "rayon",
+        "required-features",
+        "serde",
+        "serde-serialize",
+        "serde_arrays",
+        "slab",
+        "smallvec",
+        "spade",
+        "std"
+      ],
+      "rapier3d": [
+        "alloc",
+        "default",
+        "dim3",
+        "enhanced-determinism",
+        "f32",
+        "incant-checked-restore",
+        "incant-checkpoint",
+        "parallel",
+        "serde-serialize",
+        "std"
+      ],
+      "parry3d": [
+        "alloc",
+        "dim3",
+        "downcast-rs",
+        "ena",
+        "enhanced-determinism",
+        "f32",
+        "hashbrown",
+        "indexmap",
+        "parallel",
+        "rayon",
+        "required-features",
+        "rstar",
+        "serde",
+        "serde-serialize",
+        "serde_arrays",
+        "slab",
+        "smallvec",
+        "std"
+      ]
+    },
+    "fast8": {
+      "rapier2d": [
+        "alloc",
+        "block-solver",
+        "default",
+        "dim2",
+        "f32",
+        "incant-checked-restore",
+        "incant-checkpoint",
+        "parallel",
+        "serde-serialize",
+        "simd8",
+        "std"
+      ],
+      "simba": [
+        "libm",
+        "std",
+        "wide"
+      ],
+      "parry2d": [
+        "alloc",
+        "dim2",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "parallel",
+        "rayon",
+        "required-features",
+        "serde",
+        "serde-serialize",
+        "serde_arrays",
+        "simd8",
+        "slab",
+        "smallvec",
+        "spade",
+        "std"
+      ],
+      "rapier3d": [
+        "alloc",
+        "default",
+        "dim3",
+        "f32",
+        "incant-checked-restore",
+        "incant-checkpoint",
+        "parallel",
+        "serde-serialize",
+        "simd8",
+        "std"
+      ],
+      "parry3d": [
+        "alloc",
+        "dim3",
+        "downcast-rs",
+        "ena",
+        "f32",
+        "hashbrown",
+        "parallel",
+        "rayon",
+        "required-features",
+        "rstar",
+        "serde",
+        "serde-serialize",
+        "serde_arrays",
+        "simd8",
+        "slab",
+        "smallvec",
+        "std"
+      ]
+    }
+  },
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/default-construction_allocations-30ce7cb0d9ffee5a",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/construction_allocations-30ce7cb0d9ffee5a",
+      "sha256": "7d6bc240b7bf380493af3495e907364ce30d204e513ed791a2e746df58024976",
+      "bytes": 1395096,
+      "target": {
+        "kind": [
+          "test"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "construction_allocations",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_physics_snapshot/tests/construction_allocations.rs",
+        "edition": "2024",
+        "doc": false,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/default-trusted_manifolds-fad1337e20768b29",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/trusted_manifolds-fad1337e20768b29",
+      "sha256": "0d247f669d5a3170ae1b3dba82e939f3f25f1e74186198722b67edfbe652cf35",
+      "bytes": 18544144,
+      "target": {
+        "kind": [
+          "test"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "trusted_manifolds",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+        "edition": "2024",
+        "doc": false,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/default-native-rapier2d-5ce73f851b6b6b15",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/rapier2d-5ce73f851b6b6b15",
+      "sha256": "7d6b1750283a7cf0476490acdaaa3eca9e8e976154dad8e2d8588d53a2a9fec0",
+      "bytes": 6258256,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "rapier2d",
+        "src_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/rapier2d/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": true,
+        "overflow_checks": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/default-native-rapier3d-117a944bf7ff6dec",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/rapier3d-117a944bf7ff6dec",
+      "sha256": "932d7bb9f10ea05a72096866d4b369c699269534f7a555e6282c7cad59428677",
+      "bytes": 7053664,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "rapier3d",
+        "src_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/rapier3d/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": true,
+        "overflow_checks": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/fast8-construction_allocations-4dce316426999620",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/construction_allocations-4dce316426999620",
+      "sha256": "897b11af77607b0b7ca7ac4ca815c53ba64250a26ed2fccd2100876436c71f42",
+      "bytes": 1351816,
+      "target": {
+        "kind": [
+          "test"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "construction_allocations",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_physics_snapshot/tests/construction_allocations.rs",
+        "edition": "2024",
+        "doc": false,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/fast8-trusted_manifolds-c499e448d87a201c",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/trusted_manifolds-c499e448d87a201c",
+      "sha256": "671936d5a6fd0420e9d7f9b61c740ccdc18cae60c62e051aeb344cc497de26bb",
+      "bytes": 18099312,
+      "target": {
+        "kind": [
+          "test"
+        ],
+        "crate_types": [
+          "bin"
+        ],
+        "name": "trusted_manifolds",
+        "src_path": "/Users/andreyyurlov/.codex/worktrees/grid-navigation/incant/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+        "edition": "2024",
+        "doc": false,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": false,
+        "overflow_checks": false,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/fast8-native-rapier2d-fa6ddde53adcab0b",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/rapier2d-fa6ddde53adcab0b",
+      "sha256": "196e9ad7c8c2853b058399535be35596ef7c3340f23cb634debeb871ea7205ba",
+      "bytes": 6147568,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "rapier2d",
+        "src_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/rapier2d/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": false,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": true,
+        "overflow_checks": true,
+        "test": true
+      }
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/binaries/fast8-native-rapier3d-54d136ecd95e5f92",
+      "original": "/Users/andreyyurlov/.codex/incant-physics-restore-target/ci/deps/rapier3d-54d136ecd95e5f92",
+      "sha256": "60b94b262a7cb8da6973b18ea88aa03ffd978d071fc5bc6961b2b2a463bf07c9",
+      "bytes": 6934352,
+      "target": {
+        "kind": [
+          "lib"
+        ],
+        "crate_types": [
+          "lib"
+        ],
+        "name": "rapier3d",
+        "src_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-construction-main229-001/native-workspace/rapier3d/src/lib.rs",
+        "edition": "2024",
+        "doc": true,
+        "doctest": true,
+        "test": true
+      },
+      "profile": {
+        "opt_level": "1",
+        "debuginfo": 0,
+        "debug_assertions": true,
+        "overflow_checks": true,
+        "test": true
+      }
+    }
+  ],
+  "producer_archives": [
+    {
+      "path": "docs/spikes/evidence/physics-native-construction-logs.json.gz",
+      "sha256": "19c3282abf25713a9f90fe1f36560f1d8e51ceccb3dcf748004ce7f65ea24513",
+      "records": 6944
+    },
+    {
+      "path": "docs/spikes/evidence/physics-native-observer-lint-logs.json.gz",
+      "sha256": "2bb190099c1869e62dde51edc08a105e97846ea1d27c4ffb5eb05837beaa4384",
+      "records": 40
+    }
+  ],
+  "reviews": {
+    "source": [
+      "physics-construction-main229-source-independent-20261013.json",
+      "fcafd9b97aa707e191b8b95a0a3477f2a4317970a4ca4e511eb502aef261e0bf"
+    ],
+    "constructor": [
+      "physics-native-construction-final-root-20261013.json",
+      "17f6b3e6c079e73bf5511c4b410b516f23d4ef82ff04988aefbf72f960a06521"
+    ]
+  },
+  "native_copies": 668,
+  "root_lock_identities": 968,
+  "selected_root_identities": 88,
+  "steps_per_dimension_per_mode": 144,
+  "archive": {
+    "path": "docs/spikes/evidence/physics-construction-main229/records.json.gz",
+    "sha256": "1d201318820f2b56d31fb462b03123b92cc89cd4e4ef62d24756c2b45771184c",
+    "raw_sha256": "ae64890152a4df22e91d4d8aa607c147affe094c3363512fad2fd239c3df97c1",
+    "records": 772,
+    "payloads": 445
+  },
+  "limits": [
+    "Private field/storage constructors only; other native owners are trusted clones.",
+    "No decoded complete-world install, runtime physics saves, phone or performance claim.",
+    "Composed source actually rebuilt in two parallel numerical modes; focused and broad tests overlap."
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-construction-main229/final-root.json",
+    "sha256": "2f90c6ff3920c4b0cb75f603b526f9c66b9a64eb2e0c224875cf51ddf2ffbffb",
+    "decision": "accepted"
+  },
+  "main230_qualification": {
+    "path": "docs/spikes/evidence/physics-construction-main229/main230-qualification.json.gz",
+    "sha256": "b76d59b70fac5508fe54a4462cc946b5349b8ab5b0b26a1f0c14d043c5dc3f5c",
+    "records": 3,
+    "review": {
+      "path": "docs/spikes/evidence/physics-construction-main229/main230-root.json",
+      "sha256": "41e57d4b0059c65f6be60a0ec41ddcfd16dede8485a11bb1fefcd07b025db70a",
+      "decision": "accepted"
+    },
+    "scope": "27exact main renderer files,9frozen exceptions; all physics inputs unchanged; original verifier replayed"
+  }
+}
