@@ -21,7 +21,7 @@ pub const SIZE: [u32; 2] = [321, 193];
 pub const RECT: [f32; 4] = [13.25, 17.5, 280.5, 160.5];
 pub const CANVAS: [u8; 3] = [31, 63, 95];
 /// Exactly one radian, as in the CPU reference (ambient_occlusion::tests).
-pub const FOV_DEGREES: f64 = 57.295_779_513_082_32;
+pub const FOV_DEGREES: f64 = 180. / std::f64::consts::PI;
 /// Uniform linear environment radiance 179/255: below the tone-map shoulder.
 pub const ENVIRONMENT_BYTE: u8 = 179;
 /// (centre, scale) of the unit quad; view space equals world space.
