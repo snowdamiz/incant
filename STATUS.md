@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## SSAO provisional sampler and plane-filter repair
+
+The private [R1/R3 implementation](docs/spikes/ssao-filter-repair.md) adds Bayer
+rotation/jitter and two depth-aware R8 filter passes. Independent source review
+accepted its numerical and resource contracts; ten scoped CPU/build checks pass
+(108 default and 113 cooked-material CPU cases). Actual GPU execution is still
+pending. Default-disabled behavior and cooked-material
+refusal remain. The now-explicit perspective N8 fixture fails its quality gate,
+and original N6 failure remains visible. No appearance, performance or phase
+acceptance follows.
+
 ## SSAO repair oracle experiment
 
 A [test-only CPU proposal model](docs/spikes/ssao-quality-oracle.md) preserves
@@ -23,7 +34,8 @@ the original algorithm and frozen failed draft, and follows the committed design
 unchanged shading-normal contract. Nine numerical tests and strict renderer
 Clippy pass, but the proposed N6 banding threshold fails and N8's ROI is not fully
 specified. The packet retains exact measurements and independent scalar replay.
-Production shaders/resources are unchanged; no GPU or appearance acceptance follows.
+That retained experiment did not change production shaders/resources; the new
+private implementation above is separate, with no GPU or appearance acceptance.
 
 ## Current overview — main196, 2026-10-13
 

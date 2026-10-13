@@ -3,12 +3,12 @@ use glam::{Mat4, Vec3};
 
 pub(crate) const DIRECTIONS: usize = 16;
 pub(crate) const STEPS: usize = 4;
-/// Three extra full-resolution attachments: depth32 + normal RGBA16 + AO R8.
-/// At most 52 MiB logical texel payload in the one-size idle cache (driver padding
+/// Four extra full-resolution attachments: depth32 + normal RGBA16 + two AO R8.
+/// At most 56 MiB logical texel payload in the one-size idle cache (driver padding
 /// is not measured here). In-flight commands retain replaced attachments; this
 /// is not a bound on caller-owned queue depth or aggregate GPU memory.
 pub(crate) const MAX_PIXELS: u64 = 4 * 1024 * 1024;
-pub(crate) const BYTES_PER_PIXEL: u64 = 4 + 8 + 1;
+pub(crate) const BYTES_PER_PIXEL: u64 = 4 + 8 + 1 + 1;
 
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct AmbientOcclusion {
@@ -26,7 +26,7 @@ pub enum AmbientOcclusionError {
         "SSAO requires finite radius in [0.0001, 1000], bias in [0, radius), strength in [0, 1]"
     )]
     Parameters,
-    #[error("SSAO attachment dimensions exceed the four-megapixel / 52 MiB budget")]
+    #[error("SSAO attachment dimensions exceed the four-megapixel / 56 MiB budget")]
     TargetSize,
     #[error("SSAO projection or viewport exceeds supported finite precision")]
     Projection,
@@ -66,11 +66,13 @@ pub(crate) struct Uniform {
     pub viewport: [f32; 4],
     pub parameters: [f32; 4],
     pub directions: [[f32; 4]; DIRECTIONS],
+    pub rotations: [[f32; 4]; 16],
 }
 const _: () = {
-    assert!(size_of::<Uniform>() == 480);
+    assert!(size_of::<Uniform>() == 736);
     assert!(std::mem::offset_of!(Uniform, viewport) == 192);
     assert!(std::mem::offset_of!(Uniform, directions) == 224);
+    assert!(std::mem::offset_of!(Uniform, rotations) == 480);
 };
 impl Uniform {
     pub fn new(
@@ -122,8 +124,18 @@ impl Uniform {
                 STEPS as f32,
             ],
             directions: directions(),
+            rotations: rotations(),
         })
     }
+}
+
+/// One interleaved azimuth stratum per internal-target Bayer phase. Uniform
+/// arrays require a 16-byte stride; round the f64 trigonometry only once.
+pub(crate) fn rotations() -> [[f32; 4]; 16] {
+    std::array::from_fn(|i| {
+        let angle = std::f64::consts::TAU / 16. * (i as f64 + 0.5) / 16.;
+        [angle.cos() as f32, angle.sin() as f32, 0., 0.]
+    })
 }
 
 /// Deterministic equal-probability strata of a cosine-weighted hemisphere:

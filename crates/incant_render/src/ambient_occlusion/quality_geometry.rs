@@ -164,11 +164,18 @@ pub fn fixture(name: &str, orthographic: bool) -> Grid {
                 ..slab
             },
         ],
-        // Draft leaves origin/height unspecified. Explicit diagnostic fixture,
-        // not a claim of matching a future authored stripe capture.
+        // Retained original diagnostic placement. The reviewed addendum's
+        // explicitly defined N8 fixture is separate, below.
         "stripes" => std::iter::once(receiver)
             .chain((0..4).map(|i| Rect {
                 x: [0.4 + i as f64 * 0.3, 0.5 + i as f64 * 0.3],
+                ..slab
+            }))
+            .collect(),
+        "stripes_gate" => std::iter::once(receiver)
+            .chain((0..4).map(|i| Rect {
+                x: [-0.5 + i as f64 * 0.3, -0.4 + i as f64 * 0.3],
+                y: [-0.5, 1.5],
                 ..slab
             }))
             .collect(),

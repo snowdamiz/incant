@@ -47,7 +47,8 @@ fn typed_parameters_and_attachment_budget_reject_before_preparation() {
             .is_err()
         );
     }
-    assert_eq!(target_bytes([2048, 2048]).unwrap(), 52 * 1024 * 1024);
+    assert_eq!(target_bytes([2048, 2048]).unwrap(), 56 * 1024 * 1024);
+    assert_eq!(target_bytes([8192, 512]).unwrap(), 56 * 1024 * 1024);
     for size in [
         [0, 1],
         [1, 0],
@@ -123,11 +124,12 @@ fn invalid_projection_and_outside_background_samples_never_generate_coordinates(
     }
 }
 #[test]
-fn all_three_actual_wgsl_sources_validate_without_a_device() {
-    for source in [
-        include_str!("ao.wgsl").to_owned(),
-        material_source(true).unwrap(),
-        material_source(false).unwrap(),
+fn all_actual_wgsl_sources_validate_without_a_device() {
+    for (source, entries) in [
+        (include_str!("ao.wgsl").to_owned(), 2),
+        (include_str!("filter.wgsl").to_owned(), 3),
+        (material_source(true).unwrap(), 2),
+        (material_source(false).unwrap(), 2),
     ] {
         let module = naga::front::wgsl::parse_str(&source)
             .unwrap_or_else(|e| panic!("{}", e.emit_to_string(&source)));
@@ -137,7 +139,61 @@ fn all_three_actual_wgsl_sources_validate_without_a_device() {
         )
         .validate(&module)
         .unwrap();
-        assert_eq!(module.entry_points.len(), 2);
+        assert_eq!(module.entry_points.len(), entries);
+    }
+}
+
+#[test]
+fn sampling_and_filter_share_exact_host_uniform_and_typed_texture_bindings() {
+    for (source, binding_count) in [
+        (include_str!("ao.wgsl"), 3),
+        (include_str!("filter.wgsl"), 4),
+    ] {
+        let module = naga::front::wgsl::parse_str(source).unwrap();
+        let globals: Vec<_> = module.global_variables.iter().map(|(_, v)| v).collect();
+        assert_eq!(globals.len(), binding_count);
+        let uniform = globals
+            .iter()
+            .find(|v| v.binding.as_ref().unwrap().binding == 0)
+            .unwrap();
+        assert_eq!(uniform.space, naga::AddressSpace::Uniform);
+        let naga::TypeInner::Struct { members, span } = &module.types[uniform.ty].inner else {
+            panic!("expected uniform struct")
+        };
+        assert_eq!(*span as usize, size_of::<Uniform>());
+        assert_eq!(
+            members.iter().map(|m| m.offset).collect::<Vec<_>>(),
+            [0, 64, 128, 192, 208, 224, 480]
+        );
+        for member in &members[5..] {
+            assert!(matches!(module.types[member.ty].inner,
+                naga::TypeInner::Array { stride: 16, size: naga::ArraySize::Constant(n), .. } if n.get() == 16));
+        }
+        for global in globals.iter().skip(1) {
+            let binding = global.binding.as_ref().unwrap();
+            assert_eq!(binding.group, 0);
+            let naga::TypeInner::Image {
+                dim,
+                arrayed,
+                class,
+            } = module.types[global.ty].inner
+            else {
+                panic!("expected texture")
+            };
+            assert_eq!(dim, naga::ImageDimension::D2);
+            assert!(!arrayed);
+            assert_eq!(
+                class,
+                if binding.binding == 1 {
+                    naga::ImageClass::Depth { multi: false }
+                } else {
+                    naga::ImageClass::Sampled {
+                        kind: naga::ScalarKind::Float,
+                        multi: false,
+                    }
+                }
+            );
+        }
     }
 }
 #[test]
@@ -155,7 +211,8 @@ fn forward_variant_changes_only_diffuse_irradiance_and_prepass_reuses_actual_ver
     assert!(prepass.contains("material.flags.z!=0u && !front"));
 }
 
-// CPU reference for the fixed first-layer test. Surface depth comes from an
+// Historical unrotated first-layer control. The independent quality oracle tests
+// the repaired kernel and staged filter. Surface depth here comes from an
 // independent analytic plane/foreground half-plane, never a fabricated AO image.
 fn accessibility(orthographic: bool, obstacle: bool, normal: Vec3, strength: f32) -> f32 {
     let c = camera(orthographic);
