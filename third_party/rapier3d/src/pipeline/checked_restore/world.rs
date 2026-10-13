@@ -1,6 +1,7 @@
-//! Atomic private closed-shape world assembly. The production exclusive capture
-//! owner issues the context after its authentic completed step. No public
-//! arbitrary bytes-to-live entry or caller-supplied authority flag exists.
+//! Atomic private closed-shape world assembly. Opaque reconstruction retains its
+//! exclusive owner context. The separate persisted path validates a stricter
+//! editable-data domain and chooses receiving native context, without claiming
+//! historical completion or accepting caller-supplied authority.
 use super::{
     NumericFrame, allocation, allocation::*, body, broad, collider, convert::v, integration,
     islands, narrow,
