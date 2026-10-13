@@ -31,6 +31,15 @@ integration is pending. No whole-engine memory, native-window,
 GPU or device/performance gate is claimed.
 [Contract and evidence](docs/spikes/native-streaming-pcm.md).
 
+## Streaming PCM — current main180 integration passed
+
+The ordinary player stages bounded per-tick PCM and hashes incrementally. Current-main
+validation passes 75 CPU tests and all eleven checks. A fresh source/map/build-deleted
+Core export passes eight actual process controls over the complete 2,156-tick route,
+with exact repeat PCM and preserved old prefix/no-clobber/diagnostic behavior.
+Final integration review and publication are pending. Native-window, device,
+performance and appearance gates remain separate. [Evidence](docs/spikes/native-pcm-main180.md).
+
 ## Whole native session restart — CPU shipping proof accepted
 
 Opted-in native TypeScript hosts now replace the complete world, VM, input/UI and
@@ -39,7 +48,7 @@ held controls and stale native text/pointer ownership cannot enter the new game.
 Current-main integration passes 355 CPU tests and 24 fresh source/map/build-deleted
 Core/Planar runs, including
 exact fresh-state and concatenated static/streamed PCM comparisons. Independent
-source and final execution reviews are accepted; scoped publication is pending.
+source and final execution reviews and the exact-head fast check passed; restart is merged in PR180.
 Native-window/device/appearance acceptance, Wasm/headless restart ownership and
 physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
 
