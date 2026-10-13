@@ -221,10 +221,12 @@ fn assign_lights(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     }
 }
 // One logical Models interval includes motion, both resolve passes and every
-// model subpass actually encoded. Interior passes omit descriptors entirely.
+// model subpass actually encoded, including all four SSAO passes when enabled.
+// Interior passes omit descriptors entirely.
 #[derive(Debug)]
 struct ModelsPlan {
     motion: bool,
+    ambient_occlusion: bool,
     opaque: bool,
     temporal: bool,
     overlay_depth: bool,
@@ -235,6 +237,7 @@ impl ModelsPlan {
     fn new(motion: bool, temporal: bool, models: bool, opaque: bool, transparent: bool) -> Self {
         Self {
             motion,
+            ambient_occlusion: false,
             opaque: temporal && opaque,
             temporal,
             overlay_depth: false,
@@ -246,8 +249,13 @@ impl ModelsPlan {
         self.overlay_depth = self.temporal && self.motion && active;
         self
     }
+    fn with_ambient_occlusion(mut self, active: bool) -> Self {
+        self.ambient_occlusion = active && (self.opaque || self.transparent || self.all);
+        self
+    }
     fn count(&self) -> usize {
         usize::from(self.motion)
+            + 4 * usize::from(self.ambient_occlusion)
             + usize::from(self.opaque)
             + 2 * usize::from(self.temporal)
             + usize::from(self.overlay_depth)
@@ -263,7 +271,13 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         frame.models.as_ref().is_some_and(|m| m.has_opaque()),
         frame.models.as_ref().is_some_and(|m| m.has_transparent()),
     )
-    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()));
+    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()))
+    .with_ambient_occlusion(
+        frame
+            .models
+            .as_ref()
+            .is_some_and(|m| m.has_ambient_occlusion()),
+    );
     if plan.count() == 0 {
         return;
     }
@@ -276,6 +290,12 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         };
         if plan.motion {
             frame.motion.as_ref().unwrap().encode(encoder, timestamp());
+        }
+        if plan.ambient_occlusion {
+            frame.models.as_ref().unwrap().encode_ambient_occlusion(
+                encoder,
+                [timestamp(), timestamp(), timestamp(), timestamp()],
+            );
         }
         if plan.opaque {
             frame
@@ -409,4 +429,34 @@ fn temporal_models_interval_counts_motion_and_each_real_resolve_overlay_pass() {
             }
         }
     }
+}
+
+#[test]
+fn model_timing_includes_ssao_once_before_geometry_in_split_and_unsplit_routes() {
+    for (motion, temporal, opaque, transparent, expected) in [
+        (false, false, true, true, 5),
+        (true, false, true, true, 6),
+        (true, true, true, true, 9),
+        (true, true, true, false, 8),
+        (true, true, false, true, 8),
+    ] {
+        let plan = ModelsPlan::new(motion, temporal, true, opaque, transparent)
+            .with_ambient_occlusion(true);
+        assert!(plan.ambient_occlusion);
+        assert_eq!(plan.count(), expected);
+        let overlay = plan.with_overlay_depth(true);
+        assert_eq!(overlay.count(), expected + usize::from(motion && temporal));
+    }
+    assert_eq!(
+        ModelsPlan::new(false, false, false, false, false)
+            .with_ambient_occlusion(true)
+            .count(),
+        0
+    );
+    assert_eq!(
+        ModelsPlan::new(true, true, false, false, false)
+            .with_ambient_occlusion(true)
+            .count(),
+        3
+    );
 }

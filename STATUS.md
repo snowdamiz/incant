@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Default-off SSAO — curated current-main qualification
+
+The complete diffuse SSAO/R3/C2 producer has independent numerical and Claude
+Metal appearance acceptance (`22ac4dc7`). Current integration preserves its
+sampling/filter shaders, bounds and default-off behavior, and explicitly joins
+jittered reconstruction, split model drawing and all four Models timing passes.
+Current source review is accepted; CPU and composed device checks are pending.
+Authored N6 remains failed at seven codes; revised N6T/N8 margins are 0.79/0.97
+codes. Cooked SSAO, non-Metal appearance, phone and performance gaps remain open.
+[Current composition](docs/spikes/ssao-main229.md).
+
 ## Integer motion owner attachment — current-main integration
 
 The reviewed owner/change foundation gains an explicit R32Uint attachment with
@@ -25,7 +36,7 @@ refuses fixed temporal history while attached. Default output and old shader
 sources remain unchanged. Source review is accepted; all seventeen current checks pass with 146 default
 and 175 overlapping cooked CPU cases and exact old/new shader payload identity.
 Final integration and checkpoint 24 documentation review is accepted (`6029ae16`);
-publication awaits the required fast check. Original producer numerical Metal evidence covers twelve renders
+PR229 merged after the required fast check. Original producer numerical Metal evidence covers twelve renders
 plus twelve readback submissions only; no appearance or history-consumption
 claim. [Current integration](docs/spikes/temporal-owner-main228.md).
 
@@ -74,7 +85,7 @@ current-main checks without importing private upscaling or MetalFX ancestry.
 The disjoint main225 journal-test join preserves renderer source. Final current-main
 review and the required fast check passed; PR226 merged. Shader bytes, defaults
 and memory ceilings are unchanged;
-integer shader transport and per-pixel provenance remain open.
+integer shader transport subsequently merged in PR229; history consumers remain open.
 [Current composition](docs/spikes/temporal-owner-main225.md).
 No new GPU, appearance, performance or device result is claimed.
 
@@ -200,9 +211,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main228, 2026-10-13
+## Current overview — main229, 2026-10-13
 
-Development main228 includes the reviewed opt-in cooked renderer families and
+Development main229 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -222,7 +233,7 @@ macOS command journal assertion failed. The hosted error was not printed, so the
 inherited-lock cause remains inferred from a controlled local reproduction.
 PR225's test-only isolation preserves production locking and authorization.
 Earlier checkpoint21/22 portability and optional-query failures remain retained.
-Main227–228 work stays outside release; no device, performance or phase gate follows
+Main227–229 work stays outside release; no device, performance or phase gate follows
 from promotion. [Previous checkpoint20](docs/spikes/release-checkpoint-20.md) remains
 historical evidence for selected main205.
 

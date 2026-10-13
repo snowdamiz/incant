@@ -1,0 +1,40 @@
+{
+  "schema": 1,
+  "at": "2026-10-13T13:50:10.691292+00:00",
+  "reviewer": "astra /root/integrate_runtime_prs",
+  "decision": "accepted-scoped-final-CPU-and-retained-evidence",
+  "producer": "02c71fdb60715a24ca519bf3258ebaf22025d42f",
+  "manifest": {
+    "path": "docs/spikes/evidence/ssao-c2-sampling.json",
+    "sha256": "6a97677c2916d94677bc6ad6fa5eee5a60fc029431ef2afab0f2820bac25d40e"
+  },
+  "source_freeze_sha256": "ca1e89268164f69d5518079dccb0fad8d241075d5953cb7c2ba09d26f684fef2",
+  "independent_assertion_audit": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/audit-ssao-c2-final-20261013.py",
+    "sha256": "74c87db74a3d8e035a2a156f12b3ff40834f707faca91441c359f443f8f9f66a",
+    "exit": 0
+  },
+  "producer_verifier": {
+    "path": "docs/spikes/evidence/ssao-c2-sampling/verify.py",
+    "sha256": "66cc7f5819a7f66284eb1ec7246e7245021ba6f36bf89b9ad6e2b1bfb424bb96",
+    "read_entirely": true,
+    "verify_only_exit": 0
+  },
+  "verified": [
+    "All42 archive records directly matched original bytes and all26 unique payload hashes and sizes verified independently; no pixel payload opened or decoded.",
+    "Exact immutable Git source: four changed source/test files and four unchanged baselines match finalfreeze; original three-file source001 remains unchanged and only reviewed quality_stripes test is added. No extra executable-scope delta.",
+    "Read prior source acceptance45b57c70, followupab3f0213 and metric22ea6c42; retained hashes match.",
+    "Seven final zero-exit/reaped receipts and exact raw stream hashes/argv verified: default105CPU/38ignored, observer-cooked119CPU/88ignored (116 library plus3 integration), strict all-target Clippy, wasm32, fmt, conventions and diff. Counts overlap between modes.",
+    "Both executable copies match recorded hashes/sizes and exact Cargo compiler-artifact feature sets/test profiles; no new execution performed.",
+    "Fourteen predetermined N8 model rows per mode preserve0.25 threshold, positive denominator and actual ratio; both modes return identical measurements. This is CPU model evidence only.",
+    "Original qualification001104pass/1fail/38ignored and initial clean are retained with exact failure and child status; final test preserves geometry and bound while replacing obsolete expected-failure literal.",
+    "N6T retained controls reject old measured banding, bands/hatch and four-code step; finer smooth reference passes revisedN6T while still failing rawN6. OriginalN6 and orthographic diagnostic limitations remain explicit."
+  ],
+  "findings": [],
+  "limits": [
+    "No build, GPU, screenshot/pixel review, visual acceptance or performance/device gate was performed by this reviewer.",
+    "Acceptance permits frozen CPU fixture preparation only; actual shader/stage-oracle agreement and Claude appearance remain pending.",
+    "N6T is an explicitly revised experimental metric, not a retroactive pass of originalN6; under-one-code CPU margin remains a device risk.",
+    "Do not integrate or publish this private SSAO source based on this receipt."
+  ]
+}
