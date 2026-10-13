@@ -1,0 +1,607 @@
+{
+  "source": "e11f7f15f469b62fa36d76c65c045275ee660289",
+  "prior_claude_result": "71335983217ddf70cfc1ccae7a0f330b20f4605b",
+  "sources": [
+    {
+      "path": "crates/incant_render/src/diagnostic_draw.rs",
+      "sha256": "fff98360a4350b20be1e7acb2f022f06f0e325c363e9c521a5e92d9851555510"
+    },
+    {
+      "path": "crates/incant_render/src/graph.rs",
+      "sha256": "91b7818e421a9d467309a3d9b4487f7bb728258475e25af2dc82f6ab35b92a20"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "sha256": "46ec50cd69f4392a31e09c08e228b702b8057dc2f4e70255e7fc532500969609"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "sha256": "1b3f13204f713764e49b88cb18dc2b940396361e2ec9d03efdf82255a9e33b35"
+    },
+    {
+      "path": "crates/incant_render/src/output.rs",
+      "sha256": "9b0617ca613863f44cea56c93fda115ff953e5c9713f38a3e5151839a8b586c6"
+    },
+    {
+      "path": "crates/incant_render/src/shadow_draw.rs",
+      "sha256": "b2a80a608a038923646fe9ce5f1507312877e72d7c268d312a869d5e1e2f1a94"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/drawing.rs",
+      "sha256": "33e9f6c91018f5dcfd966a306bb741f95187c1dc0bb1157084551cd972dad7c4"
+    },
+    {
+      "path": "crates/incant_render/src/text/drawing.rs",
+      "sha256": "70456297c4ec34a9c6999e7d9324555b5c311b97702269553f034b8aedf17ba5"
+    },
+    {
+      "path": "crates/incant_render/src/text_draw_tests.rs",
+      "sha256": "acc51ea5c96c6e2913ae97236e049756d485c1aef482fd57291bd3bb2cf16ca1"
+    },
+    {
+      "path": "crates/incant_render/src/timing/gpu_tests.rs",
+      "sha256": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3"
+    },
+    {
+      "path": "crates/incant_render/src/timing/mod.rs",
+      "sha256": "eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e"
+    },
+    {
+      "path": "crates/incant_render/src/timing/recorder.rs",
+      "sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a"
+    },
+    {
+      "path": "crates/incant_render/src/timing/tests.rs",
+      "sha256": "91c736ee99b87c68b3d0ce96d9d9445994bb215d2c8637ac3a9ec7ab53193998"
+    },
+    {
+      "path": "crates/incant_render/tests/hdr_output/mod.rs",
+      "sha256": "5be2a60de4e4f95a5274a9d0d27da3ee535ead2baba3b7f0c87882683c4b1d7e"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/mod.rs",
+      "sha256": "8d87a1c38d5d772bd6dced8b4fd286908262f4500ff48c0950783a31a90ec7e4"
+    },
+    {
+      "path": "crates/incant_render/tests/timestamp_backend_probe.rs",
+      "sha256": "971225d1f13bb7f3901be021800aca4ad1a03f79ba1296942b0b5000e7543665"
+    }
+  ],
+  "source_freeze_sha256": "d5c37e4e1a9c3343252ed5ff6d70fae114f22947b1c24bf235b654d28582d771",
+  "checks": [
+    {
+      "name": "cpu",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--message-format=json"
+      ],
+      "exit": 0,
+      "seconds": 14.38273874999868,
+      "stdout_sha256": "2d32ca56179ce7e834c7f9225e4fc714a38c06ce3c25a618c9477fdf625a69e1",
+      "stderr_sha256": "2b1408c7b22215dce76a1a79909123e7a1cfa9a1b91a36e21d0c816c7c3c3841"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 3.2712285410016193,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f2df9358d4a348cdbad5735b6e345bfdd48ebfa939ae9a33f53b1722fe8d613d"
+    },
+    {
+      "name": "web",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 13.734937291003007,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c5dfa26a1673b96cbee017d11ebc0b3734fad5e95e843f64399951f2954d2d1b"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.0261454999999842,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "71335983"
+      ],
+      "exit": 0,
+      "seconds": 0.04790674999821931,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "cpu": {
+    "passed": 74,
+    "failed": 0,
+    "ignored": 91
+  },
+  "actual_numeric": {
+    "source": "e11f7f15f469b62fa36d76c65c045275ee660289",
+    "binary_sha256": "22a31f5a810938934184fb7d3711ecb42dec33f83bc52575624ba7dfe636e6e1",
+    "samples": [
+      {
+        "sequence": 1,
+        "timestamp_period_ns": 1.0,
+        "frame": {
+          "start_ticks": 52664487602000,
+          "end_ticks": 52664487906666,
+          "nanoseconds": 304666.0
+        },
+        "passes": [
+          {
+            "start_ticks": 52664487602000,
+            "end_ticks": 52664487618041,
+            "nanoseconds": 16041.0
+          },
+          null,
+          null,
+          {
+            "start_ticks": 52664487627000,
+            "end_ticks": 52664487673041,
+            "nanoseconds": 46041.0
+          },
+          null,
+          null,
+          {
+            "start_ticks": 52664487874333,
+            "end_ticks": 52664487906666,
+            "nanoseconds": 32333.0
+          }
+        ]
+      },
+      {
+        "sequence": 2,
+        "timestamp_period_ns": 1.0,
+        "frame": {
+          "start_ticks": 52664486623791,
+          "end_ticks": 52664487030000,
+          "nanoseconds": 406209.0
+        },
+        "passes": [
+          {
+            "start_ticks": 52664486623791,
+            "end_ticks": 52664486640833,
+            "nanoseconds": 17042.0
+          },
+          null,
+          null,
+          {
+            "start_ticks": 52664486839000,
+            "end_ticks": 52664486887000,
+            "nanoseconds": 48000.0
+          },
+          null,
+          null,
+          {
+            "start_ticks": 52664487001500,
+            "end_ticks": 52664487030000,
+            "nanoseconds": 28500.0
+          }
+        ]
+      }
+    ],
+    "rendered_frames": 3,
+    "readback_images": 0,
+    "max_submission_calls": 3,
+    "limits": [
+      "One Metal adapter; not a shipping profile or device performance measurement",
+      "Appearance remains Claude owned and unverified for revised timing path"
+    ]
+  },
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/incant_render-numeric",
+    "sha256": "22a31f5a810938934184fb7d3711ecb42dec33f83bc52575624ba7dfe636e6e1",
+    "features": [
+      "default",
+      "physics-deterministic"
+    ],
+    "original": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-aebefab23bab6e5b"
+  },
+  "records": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/backend-probe-gpu.stderr",
+      "sha256": "99510bf279c9f743e6045f70f512eb80707f01b61a880df0bd6076f77c6f0d10",
+      "bytes": 1049,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/99510bf279c9f743e6045f70f512eb80707f01b61a880df0bd6076f77c6f0d10.gz",
+      "retained_sha256": "5e14c9269f8a24c255f9381d9f88a336cf73a8b21bd9599403c777a140f7c32d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/backend-probe-gpu.stdout",
+      "sha256": "232a17695a1089e517a3cd586ad2ce3ff91827f2982d60660430628b37ed1b2f",
+      "bytes": 158,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/232a17695a1089e517a3cd586ad2ce3ff91827f2982d60660430628b37ed1b2f.gz",
+      "retained_sha256": "9679589e776d7a88ac018b16daa9f458dbd1576d56b35b50653dd9e164cba37f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/binaries.json",
+      "sha256": "2608c64fc0065bfaffc2065c11b5f67977e9070ccc50f103df909f2275b87336",
+      "bytes": 569,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/2608c64fc0065bfaffc2065c11b5f67977e9070ccc50f103df909f2275b87336.gz",
+      "retained_sha256": "5aa7192012d8b43adca85117c3a84e1f12ee1ef7641268e7c13cf875920c3e1f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/build-002.stderr",
+      "sha256": "273653e55d94191fa27ce67fe4ee9fbd9b101a603aaea1fa92b4d0e3ff35306b",
+      "bytes": 176,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/273653e55d94191fa27ce67fe4ee9fbd9b101a603aaea1fa92b4d0e3ff35306b.gz",
+      "retained_sha256": "928dd96b1442e952bfdbb2d80c78f3b1fba97a388da426c4363908309ab0d94b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/build-002.stdout",
+      "sha256": "270bc06c6832bb7e491314a4e1fe1eeb90729304413f3885e7ac580197dc493b",
+      "bytes": 310400,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/270bc06c6832bb7e491314a4e1fe1eeb90729304413f3885e7ac580197dc493b.gz",
+      "retained_sha256": "c06cb0ab60e9933c38774213779aee6d30cbbb6ac2ece6a80f22e7d82da47082"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/build.stderr",
+      "sha256": "fac0f3eee575cfdac1bc3760c3db24d997623a2b37ce0c28fc2259bd410bf3d9",
+      "bytes": 176,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/fac0f3eee575cfdac1bc3760c3db24d997623a2b37ce0c28fc2259bd410bf3d9.gz",
+      "retained_sha256": "1ac65ded51a984b8094937d7860ae358051eb48cc5519be60919f8429c9635ad"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/build.stdout",
+      "sha256": "acc8422efcb20311a6e94e63c6086544719d8a3501c59fb58cd5d652521017be",
+      "bytes": 310402,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/acc8422efcb20311a6e94e63c6086544719d8a3501c59fb58cd5d652521017be.gz",
+      "retained_sha256": "6957921b08f1dc026fd90449be90806e91740ec2479063484d7ca18c84ca90d0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/cpu.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/cpu.stdout",
+      "sha256": "1e846c908af3bbe3ecfc47cdb969e291589f46bd65f7e5c8ad8ad140e864f224",
+      "bytes": 905,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/1e846c908af3bbe3ecfc47cdb969e291589f46bd65f7e5c8ad8ad140e864f224.gz",
+      "retained_sha256": "a3b919264a47e2163c6a8301d3ec42c935d6ac119693e7bf62262efd47fdb4ad"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/diagnosis.json",
+      "sha256": "39db203db79287aaad0c119a179cbed43decbd188731435ebac3075543e6fb66",
+      "bytes": 1490,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/39db203db79287aaad0c119a179cbed43decbd188731435ebac3075543e6fb66.gz",
+      "retained_sha256": "71251ff8310cb6c15b641278455badf912d5ae0f87afcd3045cfe2c21f33fc1f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/gpu-ledger.jsonl",
+      "sha256": "dc6ad91bde1c03d81270674f86a0a1810e8a75c621c2562237416adeaa78320e",
+      "bytes": 1038,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/dc6ad91bde1c03d81270674f86a0a1810e8a75c621c2562237416adeaa78320e.gz",
+      "retained_sha256": "fb616b4246c969883e089737f3bb23975e9aff1730a7ae113b7fbcda773e2818"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/gpu-released-corrected.json",
+      "sha256": "8325b9785e08e2ca3173c2ab50b9497a48ef51ccaadf3f3806c14f198c8ac4ad",
+      "bytes": 565,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/8325b9785e08e2ca3173c2ab50b9497a48ef51ccaadf3f3806c14f198c8ac4ad.gz",
+      "retained_sha256": "f9e15ac04c7d1d8e4234ed384121e7767c4a2e67d50e2034e4eddbee76709ad7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/gpu-released.json",
+      "sha256": "84dfb7ac854ab1c0331aeaf86f0f2bd645dd90436ed0808f56219ac57b6b1651",
+      "bytes": 360,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/84dfb7ac854ab1c0331aeaf86f0f2bd645dd90436ed0808f56219ac57b6b1651.gz",
+      "retained_sha256": "0c31a5d78a1cb38c4af81177ddebe831abce02f76b0380584730bcb3695616e6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/gpu-results.json",
+      "sha256": "997fd0c75c888126ee3bc235c2aeb7a4d0dd0e37c96939e7856c5893f8d5aa13",
+      "bytes": 1230,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/997fd0c75c888126ee3bc235c2aeb7a4d0dd0e37c96939e7856c5893f8d5aa13.gz",
+      "retained_sha256": "81dccc5272568626094662a513214c95d038e72131a52247da59fc1d5d6b0715"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/modify.py",
+      "sha256": "819b2cd4676e4a040e3ef989ff2fcb768b2e9a5db6144fd3578eaf8fa8cc6479",
+      "bytes": 8348,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/819b2cd4676e4a040e3ef989ff2fcb768b2e9a5db6144fd3578eaf8fa8cc6479.gz",
+      "retained_sha256": "71d5c3db2cd73a811e5815f293d62ed9ac4251bd49aec688a0903a4054dec24a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/pass-build.stderr",
+      "sha256": "74d00effe5aa2dbad4bcc684a888f941fd85c218386a3a7347fa9dc1c586e9a8",
+      "bytes": 196,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/74d00effe5aa2dbad4bcc684a888f941fd85c218386a3a7347fa9dc1c586e9a8.gz",
+      "retained_sha256": "f96fad464603fb239d6471a316495182cf292f35f34fdac0b29e49adfe4d3199"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/pass-build.stdout",
+      "sha256": "c23413b63f6f24a4cded8b16ca60880e9028418104cfd89b6b0556c017a73c5e",
+      "bytes": 321046,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/c23413b63f6f24a4cded8b16ca60880e9028418104cfd89b6b0556c017a73c5e.gz",
+      "retained_sha256": "2fad37c385c737d3edb6ba122dea9b8147d9ca3731154edd557eb80e31e84d07"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/pass-cpu.stderr",
+      "sha256": "11d8d66b5057558b5f29c1e6cdbafdae58c6f67c12aa746ed8b05da5837b8222",
+      "bytes": 310,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/11d8d66b5057558b5f29c1e6cdbafdae58c6f67c12aa746ed8b05da5837b8222.gz",
+      "retained_sha256": "b8961c7917ea666928d8570a6247d9a1ccffb8f3b12ba36f578e825b6de6fb1b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/pass-cpu.stdout",
+      "sha256": "1b4a30c90f975c9935b588783f05141d48502398f79301b96a965976f3148f93",
+      "bytes": 12699,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/1b4a30c90f975c9935b588783f05141d48502398f79301b96a965976f3148f93.gz",
+      "retained_sha256": "98a698b1bd14dfd17ca3f37e7dcce9f1b16d1af7a84aedf5de7e91f5aec0d2d0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/run.py",
+      "sha256": "8e255eb4916453199c52f9f953b765ef651bcd7c208d9a7198ad7a4073215484",
+      "bytes": 3179,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/8e255eb4916453199c52f9f953b765ef651bcd7c208d9a7198ad7a4073215484.gz",
+      "retained_sha256": "cd0ef31282cb249a20b4a4cee00aaf5fb0145fe1f26d6c9560bc33f33237cd5f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-backend-001/source-002.json",
+      "sha256": "2d41d239a0133872dc8943b6ea238f48e7c811d7bb185190063914ec74716d9f",
+      "bytes": 175550,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/2d41d239a0133872dc8943b6ea238f48e7c811d7bb185190063914ec74716d9f.gz",
+      "retained_sha256": "0f112f09229ac9b739d5ba7aff67d86652318d4e9e28862c877e952561665d1f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/actual-pass-gpu.stderr",
+      "sha256": "3f56ec01f5a87e24c441a49ac5fc1fc39ad89df9d684c37d7110cc8831d3a257",
+      "bytes": 1095,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/3f56ec01f5a87e24c441a49ac5fc1fc39ad89df9d684c37d7110cc8831d3a257.gz",
+      "retained_sha256": "4ebee470f383bb97eb9a3ea976d3fe7e37b12f6966840543b24219c4ae59e214"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/actual-pass-gpu.stdout",
+      "sha256": "f726d9f8fc9f626549e1ea7a498a0653b60b4c188ec9515c69093b0fcd05950d",
+      "bytes": 210,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/f726d9f8fc9f626549e1ea7a498a0653b60b4c188ec9515c69093b0fcd05950d.gz",
+      "retained_sha256": "fe5c38948e2b0b7c5cf78007eaa78d994e5d749ed2011e138cda99e2b7d9364a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/clippy.stderr",
+      "sha256": "f2df9358d4a348cdbad5735b6e345bfdd48ebfa939ae9a33f53b1722fe8d613d",
+      "bytes": 2067,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/f2df9358d4a348cdbad5735b6e345bfdd48ebfa939ae9a33f53b1722fe8d613d.gz",
+      "retained_sha256": "c34753720b0c71e18815372616b76d991ea0e810f2751eb4fbc1f7600db1c4da"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/clippy.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/cpu.stderr",
+      "sha256": "2b1408c7b22215dce76a1a79909123e7a1cfa9a1b91a36e21d0c816c7c3c3841",
+      "bytes": 1562,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/2b1408c7b22215dce76a1a79909123e7a1cfa9a1b91a36e21d0c816c7c3c3841.gz",
+      "retained_sha256": "97da1019030448de5ecff259a124f4e3787ac7a700fc75562ff6d21bf5dc49c0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/cpu.stdout",
+      "sha256": "2d32ca56179ce7e834c7f9225e4fc714a38c06ce3c25a618c9477fdf625a69e1",
+      "bytes": 365828,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/2d32ca56179ce7e834c7f9225e4fc714a38c06ce3c25a618c9477fdf625a69e1.gz",
+      "retained_sha256": "d8e2e68d90d94c766d098a54701002bd8c34fc376b65b8897707fdad245e1d2b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/diff.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/diff.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/fmt.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/fmt.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/freeze.json",
+      "sha256": "d5c37e4e1a9c3343252ed5ff6d70fae114f22947b1c24bf235b654d28582d771",
+      "bytes": 175550,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/d5c37e4e1a9c3343252ed5ff6d70fae114f22947b1c24bf235b654d28582d771.gz",
+      "retained_sha256": "d73d1d2a7fb6f4eaa0990f47b1841565977fad1f05fccb01bde2348483c0ce79"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/gpu-binary.json",
+      "sha256": "5b920bd366acc5095ca02dc4b9b69d0f996ae47fb425754ac2ac5fde6ccd3ee5",
+      "bytes": 359,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/5b920bd366acc5095ca02dc4b9b69d0f996ae47fb425754ac2ac5fde6ccd3ee5.gz",
+      "retained_sha256": "88e79a528f59fe93f92f7a19e9c7f5555e51acafa217ae6c1948f2cdff263e75"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/gpu-ledger.jsonl",
+      "sha256": "37cd86daf579b1c97656f37318e876095f459c6b75820f5de26f76933964f902",
+      "bytes": 1070,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/37cd86daf579b1c97656f37318e876095f459c6b75820f5de26f76933964f902.gz",
+      "retained_sha256": "b2bbf19536a7f30b48fde77799d2a80de29269b71c0449eec9d39d5b10355fe7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/gpu-released.json",
+      "sha256": "96837759c939d5bf8e9511adcc9be24bd0c5fc57e5911955b2a7fc48ff3bbe64",
+      "bytes": 393,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/96837759c939d5bf8e9511adcc9be24bd0c5fc57e5911955b2a7fc48ff3bbe64.gz",
+      "retained_sha256": "4f5d0aa0a857fbdce0766c5d40522c04a35e2b5da72bd067e5dc29678851c826"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/gpu-results.json",
+      "sha256": "2cebcf2405685dff20b3e7217998d3ba521f4d0a769c2852b8eae9aa78861067",
+      "bytes": 1262,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/2cebcf2405685dff20b3e7217998d3ba521f4d0a769c2852b8eae9aa78861067.gz",
+      "retained_sha256": "d173eca972230acfa17e3d5a54ee2684277a46f45cbfc323c88859dad9bcd1c0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/numeric-result.json",
+      "sha256": "7ab74c2e73465633705ca3baea1016794ab69f181dbd6ecc3eaf6ee16ecf045c",
+      "bytes": 1791,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/7ab74c2e73465633705ca3baea1016794ab69f181dbd6ecc3eaf6ee16ecf045c.gz",
+      "retained_sha256": "b40fed461f15a876b45b5fdb14d50d6aefcaed07195f45922ba119d79012739c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/results.json",
+      "sha256": "68f6dffa8af5e11ec8aa7087433647d6965113cd14c8d33c1a311038dbbe8614",
+      "bytes": 2273,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/68f6dffa8af5e11ec8aa7087433647d6965113cd14c8d33c1a311038dbbe8614.gz",
+      "retained_sha256": "5629eb38e03f2e91b25b0c6eb813f71d90c240b55cefb3bf952c5f81b25d1adf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/run-gpu.py",
+      "sha256": "9051f43fdcf8b6b523d0c830e680c2b4ccb0e3783b192123e240f38c8ebc1a92",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/9051f43fdcf8b6b523d0c830e680c2b4ccb0e3783b192123e240f38c8ebc1a92.gz",
+      "retained_sha256": "6185c3fce77947e66de2801b51cc3406eacb46f1c925503a3c77e3f96482455c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/terminal.json",
+      "sha256": "68cf698eb675a6552bed8b3d9e2e661dec3fc85b01e9b1d42571ccc5fcf365c6",
+      "bytes": 38,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/68cf698eb675a6552bed8b3d9e2e661dec3fc85b01e9b1d42571ccc5fcf365c6.gz",
+      "retained_sha256": "2b95561371db8fbaba6316eef1c2b6ba4e54d1f333af1c7569e2256378048e92"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/web.stderr",
+      "sha256": "c5dfa26a1673b96cbee017d11ebc0b3734fad5e95e843f64399951f2954d2d1b",
+      "bytes": 4992,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/c5dfa26a1673b96cbee017d11ebc0b3734fad5e95e843f64399951f2954d2d1b.gz",
+      "retained_sha256": "725df51120163d392e5b6eadcd6b6512bc0d10aff7048c2f92e2913ae5cb248f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-002/web.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/gpu-timestamp-unwritten-source-20261013.json",
+      "sha256": "026c05bb22e642ba7a6fc1a1d19229a9f6f070955dce3d1413a83421ea9954fc",
+      "bytes": 2184,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/026c05bb22e642ba7a6fc1a1d19229a9f6f070955dce3d1413a83421ea9954fc.gz",
+      "retained_sha256": "779003ecf219040eb54eebcbb31117f2950eb6511134b04c8c3e89a3946d748e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/gpu-timestamps-0068-result-20261013.json",
+      "sha256": "b054cc74bae6d621586993555859a194d48c2e69cee63f6582353a5ebca5c700",
+      "bytes": 1126,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/b054cc74bae6d621586993555859a194d48c2e69cee63f6582353a5ebca5c700.gz",
+      "retained_sha256": "f6319bf875fa5a40ae49a1f0fb94524c9af48cb9b473420976f9c417570e7a52"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/gpu-timing-pass-resolve-source-20261013.json",
+      "sha256": "a8b16b096a6f74d2f808b8e44c7632c62d197e92513a06cfddfc3b69591e45cc",
+      "bytes": 5262,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/a8b16b096a6f74d2f808b8e44c7632c62d197e92513a06cfddfc3b69591e45cc.gz",
+      "retained_sha256": "ab9ae15537789a32835744d583c69e969e8913d49aa9ba29fcce0f6d116499e4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/gpu-timing-pass-resolve-source-followup-20261013.json",
+      "sha256": "681e6458b9a55a3c91eb99c93edf9bf4eea24ac83eecdb7eb582fab7df0b9db9",
+      "bytes": 1466,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/681e6458b9a55a3c91eb99c93edf9bf4eea24ac83eecdb7eb582fab7df0b9db9.gz",
+      "retained_sha256": "1b68840b5948cda1b35eba8b3a9595232d0a51c93bca256d7ac35b920bee2efd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-pass-run-002.py",
+      "sha256": "36323cf4cfc359534f1d15afd176a21082465b94e105db9eed0057a6ced89af4",
+      "bytes": 2034,
+      "retained": "docs/spikes/evidence/gpu-timestamps-pass-resolve/36323cf4cfc359534f1d15afd176a21082465b94e105db9eed0057a6ced89af4.gz",
+      "retained_sha256": "0a3aa0447d2bedf59c82617087dc22882805cc80b91e2b468ee01a4d951f6010"
+    }
+  ],
+  "release": {
+    "packet": "timestamp-pass-002",
+    "at": "2026-10-13T05:15:33.701935+00:00",
+    "children": 1,
+    "owned_processes": [],
+    "ledger_pids_alive": [],
+    "ledger_sha256": "37cd86daf579b1c97656f37318e876095f459c6b75820f5de26f76933964f902",
+    "root_gpu_and_target_released": true,
+    "system": {
+      "system": "Darwin",
+      "release": "27.0.0",
+      "machine": "arm64",
+      "mac_ver": "27.0.1"
+    }
+  },
+  "status": "Independent source and corrected Metal numeric execution accepted; current-main composition and revised Claude appearance review pending",
+  "limitations": [
+    "One Metal adapter, no performance/device gate",
+    "Original all-zero0068 results retained and refused as measurement",
+    "Five native-only dead-code warnings during browser compile",
+    "Original source review found intermediate-cascade empty descriptor; e11f7 corrected and reviewed"
+  ]
+}

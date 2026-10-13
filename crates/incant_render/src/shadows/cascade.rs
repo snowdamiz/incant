@@ -109,8 +109,11 @@ pub(crate) fn fit(
                 [-1., 1.].into_iter().flat_map(move |y| {
                     [-1., 1.].into_iter().map(move |x| {
                         camera_world.transform_point3(DVec3::new(
-                            x * vertical * f64::from(aspect) * scale,
-                            y * vertical * scale,
+                            x * vertical
+                                * f64::from(aspect)
+                                * scale
+                                * (1. + f64::from(camera.jitter_guard[0])),
+                            y * vertical * scale * (1. + f64::from(camera.jitter_guard[1])),
                             -depth,
                         ))
                     })
@@ -277,5 +280,48 @@ mod tests {
             )
             .is_err()
         );
+    }
+}
+
+#[cfg(test)]
+#[test]
+fn temporal_receiver_guard_covers_all_subpixel_phases_for_both_projections() {
+    for ortho in [false, true] {
+        let mut camera = CameraView::preview();
+        if ortho {
+            camera.orthographic_half_height = Some(3.);
+        }
+        for rect in [[3., 5., 65., 33.], [0., 0., 1., 1.]] {
+            camera.jitter_guard = crate::temporal::jitter::guard(rect);
+            let aspect = rect[2] / rect[3];
+            let cascades = fit(camera, aspect, Vec3::NEG_Z, 40., &[]).unwrap().unwrap();
+            let camera_world = camera.view.inverse();
+            for phase in 0..8 {
+                let jitter = crate::temporal::jitter::ndc(phase, rect);
+                let mut near = camera.near;
+                for cascade in &cascades {
+                    for z in [near, cascade.far] {
+                        let vertical = camera.half_height_at(f64::from(z)) as f32;
+                        for x in [-1., 1.] {
+                            for y in [-1., 1.] {
+                                let world = camera_world.transform_point3(Vec3::new(
+                                    (x - jitter[0]) * vertical * aspect,
+                                    (y - jitter[1]) * vertical,
+                                    -z,
+                                ));
+                                let p = cascade.matrix.project_point3(world);
+                                assert!(
+                                    p.x.abs() <= 1.001
+                                        && p.y.abs() <= 1.001
+                                        && (-0.001..=1.001).contains(&p.z),
+                                    "{p:?}"
+                                );
+                            }
+                        }
+                    }
+                    near = cascade.far;
+                }
+            }
+        }
     }
 }

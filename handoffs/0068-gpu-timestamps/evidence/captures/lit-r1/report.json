@@ -1,0 +1,836 @@
+{
+  "case": "lit",
+  "checks": {
+    "cross_device_control_off_b1": true,
+    "drain_yields_sequences_1_2_3_then_none": true,
+    "every_sample_meets_contract": true,
+    "expected_groups_same_on_both_devices": true,
+    "pixels_identical_all_eight_frames": true,
+    "reuse_yields_sequence_5_then_none": true,
+    "reused_slot_frame_5_unchanged": true,
+    "same_device_determinism_off_a2": true,
+    "skipped_frame_4_renders_unchanged": true,
+    "stats_after_drain": true,
+    "stats_after_reuse_frame": true,
+    "stats_fill_then_skip": true,
+    "stats_final": true,
+    "timing_on_matches_off_1_to_3": true
+  },
+  "comparisons": {
+    "off-a-2 vs off-a-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    },
+    "off-b-1 vs off-a-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    },
+    "on-1 vs off-a-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    },
+    "on-2 vs off-a-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    },
+    "on-3 vs off-a-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    },
+    "on-4 vs off-a-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    },
+    "on-5 vs off-a-1": {
+      "differing_pixels": 0,
+      "equal": true,
+      "first_difference": null,
+      "max_channel_delta": 0
+    }
+  },
+  "frames": {
+    "off-a-1": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "off-a-2": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "off-b-1": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "on-1": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "on-2": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "on-3": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "on-4": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    },
+    "on-5": {
+      "bottom_right": [
+        182,
+        180,
+        177,
+        255
+      ],
+      "center": [
+        131,
+        122,
+        117,
+        255
+      ],
+      "distinct_colors": 7064,
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "top_left": [
+        20,
+        21,
+        25,
+        255
+      ]
+    }
+  },
+  "frames_rendered": 8,
+  "outcome": "pass",
+  "pngs": [
+    {
+      "name": "lit-off-1.png",
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "sha256": "4f019b64e6593d4fa4d535104560114b074959b7364988abd07274dabd0f95c6"
+    },
+    {
+      "name": "lit-on-1.png",
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "sha256": "4f019b64e6593d4fa4d535104560114b074959b7364988abd07274dabd0f95c6"
+    },
+    {
+      "name": "lit-on-4-skipped.png",
+      "rgba_sha256": "bde3d1116cb2ff9ec270e32e0469fb30534f84d955cf1c659a47abd818003c71",
+      "sha256": "4f019b64e6593d4fa4d535104560114b074959b7364988abd07274dabd0f95c6"
+    }
+  ],
+  "renderers": {
+    "off-a": {
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "adapter_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "device_features": "Features { features_wgpu: FeaturesWGPU(0x0), features_webgpu: FeaturesWebGPU(0x0) }",
+      "device_timestamp_features": {
+        "TIMESTAMP_QUERY": false,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "queue_timestamp_period_ns": 1.0,
+      "timing_stats": {
+        "abandoned": 0,
+        "enabled": false,
+        "pending": 0,
+        "ready": 0,
+        "retired": 0,
+        "skipped": 0
+      }
+    },
+    "off-b": {
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "adapter_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "device_features": "Features { features_wgpu: FeaturesWGPU(0x0), features_webgpu: FeaturesWebGPU(0x0) }",
+      "device_timestamp_features": {
+        "TIMESTAMP_QUERY": false,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": false,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "queue_timestamp_period_ns": 1.0,
+      "timing_stats": {
+        "abandoned": 0,
+        "enabled": false,
+        "pending": 0,
+        "ready": 0,
+        "retired": 0,
+        "skipped": 0
+      }
+    },
+    "on": {
+      "adapter": {
+        "backend": "Metal",
+        "device": 0,
+        "device_type": "IntegratedGpu",
+        "driver": "",
+        "driver_info": "",
+        "name": "Apple M5 Pro",
+        "vendor": 0
+      },
+      "adapter_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "device_features": "Features { features_wgpu: FeaturesWGPU(TIMESTAMP_QUERY_INSIDE_ENCODERS), features_webgpu: FeaturesWebGPU(TIMESTAMP_QUERY) }",
+      "device_timestamp_features": {
+        "TIMESTAMP_QUERY": true,
+        "TIMESTAMP_QUERY_INSIDE_ENCODERS": true,
+        "TIMESTAMP_QUERY_INSIDE_PASSES": false
+      },
+      "queue_timestamp_period_ns": 1.0,
+      "timing_stats": {
+        "abandoned": 0,
+        "enabled": true,
+        "pending": 0,
+        "ready": 0,
+        "retired": 0,
+        "skipped": 1
+      }
+    }
+  },
+  "scene": {
+    "expected_groups": {
+      "AssignLights": true,
+      "Display": true,
+      "InitializeScene": true,
+      "Models": true,
+      "Shadows": true,
+      "Sprites": false,
+      "Text": false
+    },
+    "format": "Rgba8UnormSrgb",
+    "local_lights": 2,
+    "size": [
+      640,
+      360
+    ],
+    "stats": {
+      "diagnostic_entities": 0,
+      "model_draw_calls": 1,
+      "model_entities": 1,
+      "model_triangles": 2476,
+      "primitive_instances": 1,
+      "sprite_entities": 0,
+      "text_entities": 0,
+      "text_glyph_quads": 0,
+      "text_gpu_bytes": 0,
+      "text_missing_glyphs": 0,
+      "tile_cells": 0,
+      "tilemap_entities": 0
+    },
+    "viewport": null
+  },
+  "timed_submissions": 5,
+  "timing": {
+    "drain": [
+      {
+        "labeled": {
+          "AssignLights": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Display": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "InitializeScene": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Models": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Shadows": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Sprites": null,
+          "Text": null
+        },
+        "outcome": "sample",
+        "raw": {
+          "frame": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "passes": [
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            null,
+            null,
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            }
+          ],
+          "sequence": 1,
+          "timestamp_period_ns": 1.0
+        }
+      },
+      {
+        "labeled": {
+          "AssignLights": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Display": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "InitializeScene": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Models": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Shadows": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Sprites": null,
+          "Text": null
+        },
+        "outcome": "sample",
+        "raw": {
+          "frame": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "passes": [
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            null,
+            null,
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            }
+          ],
+          "sequence": 2,
+          "timestamp_period_ns": 1.0
+        }
+      },
+      {
+        "labeled": {
+          "AssignLights": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Display": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "InitializeScene": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Models": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Shadows": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Sprites": null,
+          "Text": null
+        },
+        "outcome": "sample",
+        "raw": {
+          "frame": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "passes": [
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            null,
+            null,
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            }
+          ],
+          "sequence": 3,
+          "timestamp_period_ns": 1.0
+        }
+      },
+      {
+        "outcome": "none"
+      }
+    ],
+    "reuse": [
+      {
+        "labeled": {
+          "AssignLights": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Display": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "InitializeScene": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Models": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Shadows": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "Sprites": null,
+          "Text": null
+        },
+        "outcome": "sample",
+        "raw": {
+          "frame": {
+            "end_ticks": 0,
+            "nanoseconds": 0.0,
+            "start_ticks": 0
+          },
+          "passes": [
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            },
+            null,
+            null,
+            {
+              "end_ticks": 0,
+              "nanoseconds": 0.0,
+              "start_ticks": 0
+            }
+          ],
+          "sequence": 5,
+          "timestamp_period_ns": 1.0
+        }
+      },
+      {
+        "outcome": "none"
+      }
+    ],
+    "sample_checks": [
+      {
+        "labels_match_expected": true,
+        "observation_dependency_order_violations": [],
+        "observation_groups_within_frame": true,
+        "observation_zero_tick_groups": [
+          "InitializeScene",
+          "AssignLights",
+          "Shadows",
+          "Models",
+          "Display"
+        ],
+        "period_finite_positive": true,
+        "present": {
+          "AssignLights": true,
+          "Display": true,
+          "InitializeScene": true,
+          "Models": true,
+          "Shadows": true,
+          "Sprites": false,
+          "Text": false
+        },
+        "sequence": 1,
+        "spans_ordered_finite_nonnegative": true
+      },
+      {
+        "labels_match_expected": true,
+        "observation_dependency_order_violations": [],
+        "observation_groups_within_frame": true,
+        "observation_zero_tick_groups": [
+          "InitializeScene",
+          "AssignLights",
+          "Shadows",
+          "Models",
+          "Display"
+        ],
+        "period_finite_positive": true,
+        "present": {
+          "AssignLights": true,
+          "Display": true,
+          "InitializeScene": true,
+          "Models": true,
+          "Shadows": true,
+          "Sprites": false,
+          "Text": false
+        },
+        "sequence": 2,
+        "spans_ordered_finite_nonnegative": true
+      },
+      {
+        "labels_match_expected": true,
+        "observation_dependency_order_violations": [],
+        "observation_groups_within_frame": true,
+        "observation_zero_tick_groups": [
+          "InitializeScene",
+          "AssignLights",
+          "Shadows",
+          "Models",
+          "Display"
+        ],
+        "period_finite_positive": true,
+        "present": {
+          "AssignLights": true,
+          "Display": true,
+          "InitializeScene": true,
+          "Models": true,
+          "Shadows": true,
+          "Sprites": false,
+          "Text": false
+        },
+        "sequence": 3,
+        "spans_ordered_finite_nonnegative": true
+      },
+      {
+        "labels_match_expected": true,
+        "observation_dependency_order_violations": [],
+        "observation_groups_within_frame": true,
+        "observation_zero_tick_groups": [
+          "InitializeScene",
+          "AssignLights",
+          "Shadows",
+          "Models",
+          "Display"
+        ],
+        "period_finite_positive": true,
+        "present": {
+          "AssignLights": true,
+          "Display": true,
+          "InitializeScene": true,
+          "Models": true,
+          "Shadows": true,
+          "Sprites": false,
+          "Text": false
+        },
+        "sequence": 5,
+        "spans_ordered_finite_nonnegative": true
+      }
+    ],
+    "stats_after_drain": {
+      "abandoned": 0,
+      "enabled": true,
+      "pending": 0,
+      "ready": 0,
+      "retired": 0,
+      "skipped": 1
+    },
+    "stats_after_on_frame_5": {
+      "abandoned": 0,
+      "enabled": true,
+      "pending": 0,
+      "ready": 1,
+      "retired": 0,
+      "skipped": 1
+    },
+    "stats_after_on_frames_1_to_4": [
+      {
+        "abandoned": 0,
+        "enabled": true,
+        "pending": 0,
+        "ready": 1,
+        "retired": 0,
+        "skipped": 0
+      },
+      {
+        "abandoned": 0,
+        "enabled": true,
+        "pending": 0,
+        "ready": 2,
+        "retired": 0,
+        "skipped": 0
+      },
+      {
+        "abandoned": 0,
+        "enabled": true,
+        "pending": 0,
+        "ready": 3,
+        "retired": 0,
+        "skipped": 0
+      },
+      {
+        "abandoned": 0,
+        "enabled": true,
+        "pending": 0,
+        "ready": 3,
+        "retired": 0,
+        "skipped": 1
+      }
+    ],
+    "stats_final": {
+      "abandoned": 0,
+      "enabled": true,
+      "pending": 0,
+      "ready": 0,
+      "retired": 0,
+      "skipped": 1
+    }
+  }
+}

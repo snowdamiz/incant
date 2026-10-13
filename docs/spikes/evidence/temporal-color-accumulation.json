@@ -1,0 +1,612 @@
+{
+  "status": "CPU checks complete; independent temporal source/final review pending; GPU numerical and Claude appearance pending",
+  "source_freeze": {
+    "base": "814717935462e4ee5dbdb1fdae2738d17477f932",
+    "timestamp_producer": "40f138f7bacf97530a81cda0df98c90acb34cabb",
+    "head": "02bf9c90417948890b9d6875623a59db46d32409",
+    "branch": "codex/temporal-color-resolve",
+    "checkout": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+    "sources": [
+      {
+        "path": "crates/incant_render/src/camera.rs",
+        "sha256": "4741b522cc6c78ede58f63d7ed04e40c098dc21c394ae720f9fea677c78b0663",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/diagnostic_draw.rs",
+        "sha256": "fff98360a4350b20be1e7acb2f022f06f0e325c363e9c521a5e92d9851555510",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/src/graph.rs",
+        "sha256": "8e146961f1a831a60951c946388bc3c7da2115147b74cbad81fb66fdd61da7e8",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "sha256": "ba12e30be88a8ae50b9778da3302a39d901a8c00627ac9f5d639dbc495c5057a",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/lighting/mod.rs",
+        "sha256": "4c2bf7a70fd8f5b7458259f49cb3ddf98fdec41810d3de80621e6678d6dfb085",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/model_draw.rs",
+        "sha256": "2abca493a7168b0d6f66a206b37465a2cb6dec024e9663e8ffdb5f72b82053c6",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/motion/draw.rs",
+        "sha256": "84da68b2a99373675c1a61e5ed979815948574e0faccaba978faa12487bd6813"
+      },
+      {
+        "path": "crates/incant_render/src/motion/mod.rs",
+        "sha256": "c385d813e9ba424b14d937ea160e4bf3c8e41447207e1b09f3f3f57294624594"
+      },
+      {
+        "path": "crates/incant_render/src/motion/owner.rs",
+        "sha256": "50165e7b82be80d03329e43da5edbe7a5636c27634bfbd497fbed5322c6ba4ac"
+      },
+      {
+        "path": "crates/incant_render/src/motion/retained.rs",
+        "sha256": "f65eddc8a669633296e20526cf597a841e02804ad2faeb103934f4d72853fe8e"
+      },
+      {
+        "path": "crates/incant_render/src/motion/tests.rs",
+        "sha256": "fd8d9e83847f1431579f1392612a95ace8d27cbe8beb2d424625482a2252973d"
+      },
+      {
+        "path": "crates/incant_render/src/output.rs",
+        "sha256": "792b2ce89d6cf7844dffd8e3fbd2e6ddefc06e3f8e8ff4953686ee066fd0341a",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/retained.rs",
+        "sha256": "1b70203e9d417dc74d5bfb7906f293525863fa352c9b0c99cf7cfe7cfb154119",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/shadow_draw.rs",
+        "sha256": "b2a80a608a038923646fe9ce5f1507312877e72d7c268d312a869d5e1e2f1a94",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/src/shadows/cascade.rs",
+        "sha256": "caaa647943712832340f079649a9389c9e1ac24555ee3765e5d0879323ec8919",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/sprites/drawing.rs",
+        "sha256": "33e9f6c91018f5dcfd966a306bb741f95187c1dc0bb1157084551cd972dad7c4",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/src/temporal/config.rs",
+        "sha256": "4fb93739b80c5e1e923cb8d087919cca924151bb8b687ffbc53bb23254f777ee"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/copy.wgsl",
+        "sha256": "50f2bbba9102f7f89de524356b7e6e4b9b1e4c90ecace7a5b1c16ee599ee4bdf"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/device_tests.rs",
+        "sha256": "82e8e8b79385b4eb6275be2167ac6b12c3aa03c66ab108ee800778a9e272d6e0"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/jitter.rs",
+        "sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/mod.rs",
+        "sha256": "3474632dac13cfb365d37098d290c76fc3cca5caea761f6334413067b83938e8"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/oracle.rs",
+        "sha256": "fb539efa64b72857194914b7c98ff72a0f4c08f7c5094c3e19f00e5472ad26d0"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/owner.rs",
+        "sha256": "b6fd11e4bc89380cefef9e8f5cc6f32ec954d6aa8472eb927f66f5949c4add9e"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/resolve.wgsl",
+        "sha256": "ae65b1f2647dcce5a73fadca4b7d68c6815978af3fbb841510ab3aa555f1cfec"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/system.rs",
+        "sha256": "ea8ea87c18de7d177cd90b65e5921a4811f4ec574726489ea22e054502bb863a"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/targets.rs",
+        "sha256": "72736408b81cb92d38d1c0cb7e3ec0e76a8bd1c96859855f18b4f4521e739d53"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/tests.rs",
+        "sha256": "4536dd11d8ac94900c2238bad0868e6a8fb16640ff8ef8812e56077bac4d7070"
+      },
+      {
+        "path": "crates/incant_render/src/temporal_retained_tests.rs",
+        "sha256": "7cc3ed381aaa0ae8dd6139618354d010b447d6b3b1008fafaf526bac6d5e5449"
+      },
+      {
+        "path": "crates/incant_render/src/text/drawing.rs",
+        "sha256": "dea8093b52cb3e4fa5698315559774c1098a501635720956b7dd9df26596537b",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/text_draw_tests.rs",
+        "sha256": "1a03ebd70a61af45e5baea63186c4923732f9849b2965713b54c95a9b47b8111",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/src/timing/gpu_tests.rs",
+        "sha256": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/src/timing/mod.rs",
+        "sha256": "eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/src/timing/pool.rs",
+        "sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/src/timing/recorder.rs",
+        "sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/src/timing/tests.rs",
+        "sha256": "91c736ee99b87c68b3d0ce96d9d9445994bb215d2c8637ac3a9ec7ab53193998",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render/tests/hdr_output/mod.rs",
+        "sha256": "a940816bc28b4f7e3866518e17442221b123dc28e8828dcd38909e5c7fe24f14",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render/tests/lighting_gpu/readback.rs",
+        "sha256": "1a834ae4e71b4e799f63d8ad784a9a08f53113922e22f5a7c6a85e07ca1ead1c"
+      },
+      {
+        "path": "crates/incant_render/tests/timestamp_backend_probe.rs",
+        "sha256": "971225d1f13bb7f3901be021800aca4ad1a03f79ba1296942b0b5000e7543665",
+        "identical_to_timestamp_producer": true
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/lib.rs",
+        "sha256": "c3d4955ba976a3415fb88eefb48cc898c435215a95932b04ed02a99996f38862",
+        "identical_to_timestamp_producer": false
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/motion.rs",
+        "sha256": "e5e08cdc67979ba00ca0b9cfae21ce82ce3462042799524b35591d4eafb50584"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/resolution.rs",
+        "sha256": "ac7a3af6f6295f161045feb5413d0a36da733d050b0e8086c01d814e3781666e"
+      },
+      {
+        "path": "docs/spikes/temporal-color-accumulation.md",
+        "sha256": "14bdcaefedef9dba157071d3bed88d1e576d6c3bcf54db3d629099ebe1a31993"
+      }
+    ],
+    "unchanged_baselines": [
+      {
+        "path": "Cargo.toml",
+        "sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857"
+      },
+      {
+        "path": "Cargo.lock",
+        "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e"
+      },
+      {
+        "path": "crates/incant_render/Cargo.toml",
+        "sha256": "7d3628b6a59dba4f3613b0aa8af6bbe274c692aa721bac4f7c77cc37bf202c7b"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/Cargo.toml",
+        "sha256": "386f065fd226154c5144c95d1a5c1143d0e789763085aeec6ef4db90dcbf8e9a"
+      },
+      {
+        "path": "crates/incant_render/src/model_material.wgsl",
+        "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b"
+      },
+      {
+        "path": "crates/incant_render/src/output.wgsl",
+        "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a"
+      },
+      {
+        "path": "crates/incant_render/src/lighting/grid.wgsl",
+        "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439"
+      },
+      {
+        "path": "crates/incant_render/src/motion/shader.wgsl",
+        "sha256": "7f8aed4a2cb30401eaae3d3d0e54d72d37cb4e3875b555f33434d5e8123663b9"
+      },
+      {
+        "path": "crates/incant_render/src/frame.rs",
+        "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e"
+      },
+      {
+        "path": "crates/incant_render/src/material_pipeline.rs",
+        "sha256": "edc49c5e19f24230bb20aef6518de545d45b42d58855cce21d5a8a288ce11f12"
+      },
+      {
+        "path": "crates/incant_render/src/resolution/plan.rs",
+        "sha256": "88b15839889c79bcb52a28b7cec6330d503df5e7c9a7ca7a03b3312ee71c0f6f"
+      },
+      {
+        "path": "crates/incant_render/src/resolution/owner.rs",
+        "sha256": "a7c7d5d52554626aaa91ce6205f19811ed83b2223af2e48d13311930fdc2bb82"
+      },
+      {
+        "path": "crates/incant_render/src/resolution/controller.rs",
+        "sha256": "2dfb73c3b74de5026ebff6a9736dabe37f6219f1d0e9793b139e1a43e647d5e9"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/resolution_mailbox.rs",
+        "sha256": "8c70921bc14c1791c7ceeb7b93c53cfffccb4afa2e3a8427ca6fe4036f1227e1"
+      },
+      {
+        "path": "crates/incant_render/src/scene.rs",
+        "sha256": "bb7c13689a7145763feac1dd3623874a1b47557848421b9d33d312b11e126fff"
+      }
+    ],
+    "gpu_execution": false,
+    "scope": "source review; CPU broad checks pending; GPU and appearance pending"
+  },
+  "source_freeze_sha256": "06a242fd0d56fa2afc05c9931567795a12919e6b82f0dd90ee8dcd94adeeb39f",
+  "checks": [
+    {
+      "label": "cpu-all",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.36767315864563,
+      "pid": 31962,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/cpu-all.log",
+      "sha256": "5d9786a8290071883ec7c24a8dad1e070c7c3ddded591fa2825c95cd6fe27ae3"
+    },
+    {
+      "label": "clippy-all",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.361293077468872,
+      "pid": 32007,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/clippy-all.log",
+      "sha256": "0fe62818f7db257d11e6fa76ff367aa2a933dcf383b32988ea0d266231c3105c"
+    },
+    {
+      "label": "cooked-refusal",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-output,cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 8.233752965927124,
+      "pid": 32032,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/cooked-refusal.log",
+      "sha256": "c0f77000710d9d4a4d6764dd9fc6ce28b0f57701840bda0d7f984a7abaf64209"
+    },
+    {
+      "label": "wasm-check",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.9221439361572266,
+      "pid": 32072,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/wasm-check.log",
+      "sha256": "a863098af21ef51c4eef7e9c3c5d8ee2ec24eef8ec9bdcfe257985a036ac9a42"
+    },
+    {
+      "label": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.2961740493774414,
+      "pid": 32081,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/runtime-graph.log",
+      "sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c"
+    },
+    {
+      "label": "format",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.1180779933929443,
+      "pid": 32086,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.029115915298461914,
+      "pid": 32092,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "counts": {
+    "cpu-all": {
+      "passed": 110,
+      "failed": 0,
+      "ignored": 96,
+      "groups": 9
+    },
+    "cooked-refusal": {
+      "passed": 115,
+      "failed": 0,
+      "ignored": 38,
+      "groups": 1
+    }
+  },
+  "overlap": "cooked lib and focused cases overlap ordinary CPU counts; ignored GPU cases were not run",
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/clippy-001.log",
+      "raw_sha256": "16a9e9158128588d6f98dd988bddba3134e047c569398c009f6ae88c9931a7c4",
+      "raw_bytes": 1896,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/16a9e9158128588d6f98dd988bddba3134e047c569398c009f6ae88c9931a7c4.gz",
+      "retained_sha256": "6f9f31c8117509dd72bd4895ffc7c1d7b657147e53e220dbc470ab099c038265"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/clippy-002.log",
+      "raw_sha256": "9bb8482612dc82e54b3ac09a1e171731a771d30852801979c615fdce747be8ac",
+      "raw_bytes": 319,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/9bb8482612dc82e54b3ac09a1e171731a771d30852801979c615fdce747be8ac.gz",
+      "retained_sha256": "edceb80063354760cb5b0de0f85f31601fb8f2953ac98638c34aa0f254dd8379"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/clippy-all.log",
+      "raw_sha256": "0fe62818f7db257d11e6fa76ff367aa2a933dcf383b32988ea0d266231c3105c",
+      "raw_bytes": 179,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/0fe62818f7db257d11e6fa76ff367aa2a933dcf383b32988ea0d266231c3105c.gz",
+      "retained_sha256": "0185bdbbf4bec5c84fcfc7d35e94e88aee2a9c3b229e9837cd3e047c626827c6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/conventions.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/cooked-refusal.log",
+      "raw_sha256": "c0f77000710d9d4a4d6764dd9fc6ce28b0f57701840bda0d7f984a7abaf64209",
+      "raw_bytes": 18300,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/c0f77000710d9d4a4d6764dd9fc6ce28b0f57701840bda0d7f984a7abaf64209.gz",
+      "retained_sha256": "78c4b32e6bed018955aa61b0855ef85d08c03b321be2f6dff229e1942c73738d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/cpu-all.log",
+      "raw_sha256": "5d9786a8290071883ec7c24a8dad1e070c7c3ddded591fa2825c95cd6fe27ae3",
+      "raw_bytes": 28086,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/5d9786a8290071883ec7c24a8dad1e070c7c3ddded591fa2825c95cd6fe27ae3.gz",
+      "retained_sha256": "a6cff851fc6edd57181f20309984d2edaf8ad4b363d024cd474d1289f501edc4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/focused-001.log",
+      "raw_sha256": "5bfcbc7c79b7bc9baa01f8464c0928f2ebe521e31baa38eade803270e334c99f",
+      "raw_bytes": 2105,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/5bfcbc7c79b7bc9baa01f8464c0928f2ebe521e31baa38eade803270e334c99f.gz",
+      "retained_sha256": "1cbb4422a2cebc1301aeec325f537f5a5a0edf79d2aeaf7b352af9caee38cbe2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/focused-002.log",
+      "raw_sha256": "f06ef4dd375e6e1bd63da076bcf0c9c688ac9d119e5d706ca033bcabb9c5e79e",
+      "raw_bytes": 2715,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/f06ef4dd375e6e1bd63da076bcf0c9c688ac9d119e5d706ca033bcabb9c5e79e.gz",
+      "retained_sha256": "193640c909535e0ff77d13b0ab7f6c03816a8d5b3bf21f4b0cf07226a1cf8ef3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/focused-003.log",
+      "raw_sha256": "ef5abe069182a91752e0c26ca74fa10eda23d8ac63e03094236ade0a5735751b",
+      "raw_bytes": 3240,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/ef5abe069182a91752e0c26ca74fa10eda23d8ac63e03094236ade0a5735751b.gz",
+      "retained_sha256": "9eff5e323d09aba1612eda8a2b51aab875a001da3be8df5040847e6ccbae2567"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/format.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/runtime-graph.log",
+      "raw_sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c",
+      "raw_bytes": 76,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c.gz",
+      "retained_sha256": "5cc48cf24e534b5aef2d26bb0f40dceb92413d38847d6760fb850bdf4244bafc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/timing-union-001.log",
+      "raw_sha256": "b432481243829a1582ec9ae0dea0d4b1decdad3ddad5b93eb3e90c7e66ae55bc",
+      "raw_bytes": 2957,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/b432481243829a1582ec9ae0dea0d4b1decdad3ddad5b93eb3e90c7e66ae55bc.gz",
+      "retained_sha256": "23ac72b008ff6add2328b0dc1eccf67c1f4026034022499745af3eb1f1d0aa9a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/wasm-check.log",
+      "raw_sha256": "a863098af21ef51c4eef7e9c3c5d8ee2ec24eef8ec9bdcfe257985a036ac9a42",
+      "raw_bytes": 1972,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/a863098af21ef51c4eef7e9c3c5d8ee2ec24eef8ec9bdcfe257985a036ac9a42.gz",
+      "retained_sha256": "3269292b34f083d932fbf100ef03862f4c9b739e89ed14482cf3ce61c7afdd16"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/checks.json",
+      "raw_sha256": "d25e04a433dbc00506b5d356e116ce20889ae91e220fe8198bf65483ddaad8db",
+      "raw_bytes": 3525,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/d25e04a433dbc00506b5d356e116ce20889ae91e220fe8198bf65483ddaad8db.gz",
+      "retained_sha256": "3cdd8e8f1d48bb990d1d9b6a35730466b033dcd02de07d12566bd43aecc5b449"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/run.py",
+      "raw_sha256": "4c7fe80d56aa72d2b952b317fc2a997232354f31035ba1b159045534b4dae38d",
+      "raw_bytes": 2291,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/4c7fe80d56aa72d2b952b317fc2a997232354f31035ba1b159045534b4dae38d.gz",
+      "retained_sha256": "ab0df132efcfb8ff2e61088b095dd51667ed2d3a246cbea6ddc05ecbcd7e46f9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/retain.py",
+      "raw_sha256": "cba7ff073050e3d91ea631ab4dcec5791c7e5d386edc8c341f88f60c474ed520",
+      "raw_bytes": 3617,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/cba7ff073050e3d91ea631ab4dcec5791c7e5d386edc8c341f88f60c474ed520.gz",
+      "retained_sha256": "c5bd202aa637f25450d2cf167e8c53e687cd0b354256b80fdc0b902beee2826a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-source-001/freeze.json",
+      "raw_sha256": "06a242fd0d56fa2afc05c9931567795a12919e6b82f0dd90ee8dcd94adeeb39f",
+      "raw_bytes": 10269,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/06a242fd0d56fa2afc05c9931567795a12919e6b82f0dd90ee8dcd94adeeb39f.gz",
+      "retained_sha256": "ef0178fde5751cdc4f7131c6b46b809d0a8b72f18f5960fcc6ee4f0bc8da335a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-source-001/tracked.patch",
+      "raw_sha256": "44e91a7dde7c32016c4d96a44aa60e329512e55077502f397cbbfdd530ffe0f9",
+      "raw_bytes": 134265,
+      "retained": "docs/spikes/evidence/temporal-color-accumulation/44e91a7dde7c32016c4d96a44aa60e329512e55077502f397cbbfdd530ffe0f9.gz",
+      "retained_sha256": "93f3e5681b4e2c8f7b783ca0462bbd7f99aa99c3d08f24fced557cfc0da88011"
+    }
+  ],
+  "binaries": [
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-90f6082e9b891519",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/incant_render-90f6082e9b891519",
+      "sha256": "665e9de2750dca6ed6dcca7bdb5e25561d75a1e7e6d2592ee86fe5c2b51fed94",
+      "bytes": 31689232
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-ea4ec409a7f81803",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/model_gpu-ea4ec409a7f81803",
+      "sha256": "6afcc2c8cc8b64ee38fb73d6664f27e44c563879512768c7ce437866157ddb63",
+      "bytes": 16509992
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-56a84c8f1d426b30",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/persistent_cache-56a84c8f1d426b30",
+      "sha256": "8bea9987ad5177367977f1cb48cc1915c810b206ac89548ea6454fbdc36f72a6",
+      "bytes": 1027024
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/timestamp_backend_probe-f2bd3f8092008568",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/timestamp_backend_probe-f2bd3f8092008568",
+      "sha256": "e956b1ea6263a3afbc9892900fc8f5c197fbe850e17c3625fc4e56ad45859554",
+      "bytes": 6589624
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render_gpu_host-0795fd9ccf521965",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/incant_render_gpu_host-0795fd9ccf521965",
+      "sha256": "70cecb2939fd7262d85e634b217a2ad5b3b34195684c0cc01e977d9015d57543",
+      "bytes": 1075272
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/game-35bb67096a4febdf",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/game-35bb67096a4febdf",
+      "sha256": "4396b6961188204e5120c520737e2c624d46d98ca396bc941fe9ca1fe089ab5c",
+      "bytes": 31804040
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/ui-a00b00c0f89810d0",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/ui-a00b00c0f89810d0",
+      "sha256": "1be61343b44f93859f5334362d953cda41fa5c4f72f3f9524b274b2d5de9d356",
+      "bytes": 31344608
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-e9c89acbc979e89c",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-color-checks-001/binaries/incant_render-e9c89acbc979e89c",
+      "sha256": "ad3424508eb733cb2c4b691cd2a0bcf5e21b572726f6c55e1940f44e32e93b85",
+      "bytes": 32074960
+    }
+  ],
+  "gpu_execution": false,
+  "history": "focused001/002 preceded final retained test; initial Clippy001 argument-count/style failure preserved; no shader or behavior failure was suppressed",
+  "parent_motion_acceptance": {
+    "path": "docs/spikes/evidence/retained-motion-history-cpu-review.json",
+    "sha256": "3b2bd8f37250971f96efc4a1f6c4f2f8cf06df4bd37a62f25d3347f15ab73337"
+  },
+  "limits": [
+    "fixed internal resolution only, not temporal upscaling/MetalFX",
+    "all native cooked families explicitly refused",
+    "no GPU/pixel/device/performance gate",
+    "96 ignored GPU cases in ordinary full run",
+    "current-only excluded surfaces may still jitter",
+    "logical memory cap excludes renderer base assets/frames, opaque driver allocations and queued resource retention"
+  ]
+}

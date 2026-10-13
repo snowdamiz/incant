@@ -40,6 +40,10 @@ pub trait TargetProvider {
     fn motion_epoch(&self) -> Option<u64> {
         None
     }
+    /// Trusted presentation opt-in, captured once per consumer lifetime.
+    fn temporal_config(&self) -> Option<incant_render::temporal::TemporalConfig> {
+        None
+    }
 }
 pub struct GpuRenderSettings<P: TargetProvider> {
     pub renderer: Arc<Renderer>,
@@ -65,6 +69,7 @@ struct Live<P> {
     completion: Option<resolution::Completion>,
     resolution_config: Option<ResolutionConfig>,
     motion_epoch: Option<u64>,
+    temporal_config: Option<incant_render::temporal::TemporalConfig>,
 }
 /// Owns the actual GPU bindings plus its target provider. NativeRenderHost owns
 /// the sole CPU adapter and calls this consumer inside every mandatory sync.
@@ -97,6 +102,11 @@ impl<P: TargetProvider> GpuRenderConsumer<P> {
             .as_ref()
             .and_then(|live| live.scene.motion_frame())
     }
+    pub fn temporal_frame(&self) -> Option<incant_render::temporal::TemporalFrame> {
+        self.live
+            .as_ref()
+            .and_then(|live| live.scene.temporal_frame())
+    }
     pub fn discarded_resolution_samples(&self) -> u64 {
         self.live
             .as_ref()
@@ -128,7 +138,17 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             .map_err(GpuHostError::Render)?;
         scene.set_dynamic_resolution(config)?;
         let motion_epoch = settings.targets.motion_epoch();
-        if motion_epoch.is_some() {
+        let temporal_config = settings.targets.temporal_config();
+        if let Some(config) = temporal_config {
+            if motion_epoch.is_none() {
+                return Err(GpuHostError::Render(Box::new(
+                    incant_render::temporal::TemporalError::History,
+                )));
+            }
+            scene
+                .enable_temporal_history(&settings.renderer, config)
+                .map_err(GpuHostError::Render)?;
+        } else if motion_epoch.is_some() {
             scene
                 .enable_motion_history(&settings.renderer)
                 .map_err(GpuHostError::Render)?;
@@ -151,6 +171,7 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
                 completion: config.map(|_| resolution::Completion::default()),
                 resolution_config: config,
                 motion_epoch,
+                temporal_config,
             }),
             frames: 0,
         })
@@ -222,7 +243,11 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             // Replacement has fresh timing ownership. Outstanding old callbacks
             // are retained in the bounded slot and discarded by the new owner.
             scene.set_dynamic_resolution(live.resolution_config)?;
-            if motion_epoch.is_some() {
+            if let Some(config) = live.temporal_config {
+                scene
+                    .enable_temporal_history(&self.renderer, config)
+                    .map_err(GpuHostError::Render)?;
+            } else if motion_epoch.is_some() {
                 scene
                     .enable_motion_history(&self.renderer)
                     .map_err(GpuHostError::Render)?;

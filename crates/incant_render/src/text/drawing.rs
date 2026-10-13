@@ -108,12 +108,20 @@ impl TextSystem {
     }
 }
 impl TextDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn has_passes(&self) -> bool {
+        self.scene.geometry.quads.is_some() && self.scene.geometry.atlas.is_some()
+    }
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        queries: Option<&crate::timing::PassQueries>,
+    ) {
         let geometry = &self.scene.geometry;
         let (Some(quads), Some(atlas)) = (&geometry.quads, &geometry.atlas) else {
             return;
         };
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+            timestamp_writes: queries.map(|q| q.render()),
             label: Some("World-space text"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: &self.color,

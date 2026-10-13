@@ -32,6 +32,7 @@ struct NodeBinding {
 pub struct RetainedScene {
     owner: Arc<()>,
     motion: Option<super::motion::MotionState>,
+    temporal: Option<crate::temporal::TemporalState>,
     resolution: Option<crate::resolution::ResolutionOwner>,
     bindings: Vec<NodeBinding>,
     environment: Option<(AssetVersionId, f64, f64)>,
@@ -92,6 +93,7 @@ impl Renderer {
         Ok(RetainedScene {
             owner: Arc::clone(&self.identity),
             motion: None,
+            temporal: None,
             resolution: None,
             bindings: input
                 .nodes
@@ -138,10 +140,12 @@ impl RetainedScene {
             self.motion.as_ref(),
         )?;
         self.motion = Some(candidate);
+        self.temporal = None;
         Ok(())
     }
     pub fn disable_motion_history(&mut self) {
         self.motion = None;
+        self.temporal = None;
     }
     pub fn invalidate_motion_history(&mut self) {
         if let Some(motion) = &mut self.motion {
@@ -152,6 +156,24 @@ impl RetainedScene {
         self.motion.as_ref().and_then(|m| m.frame())
     }
 
+    /// Atomic opt-in/reset. Color, depth, exact model history and jitter are one
+    /// submitted owner. No authored camera or world state is changed.
+    pub fn enable_temporal_history(
+        &mut self,
+        renderer: &Renderer,
+        config: crate::temporal::TemporalConfig,
+    ) -> Result<()> {
+        let temporal = crate::temporal::TemporalState::new(config)?;
+        if renderer.temporal.is_none() {
+            return Err(crate::temporal::TemporalError::Disabled.into());
+        }
+        self.enable_motion_history(renderer)?;
+        self.temporal = Some(temporal);
+        Ok(())
+    }
+    pub fn temporal_frame(&self) -> Option<crate::temporal::TemporalFrame> {
+        self.temporal.as_ref().and_then(|t| t.frame())
+    }
     /// Explicit opt-in, replacing any previous telemetry ownership. Invalid config
     /// leaves the existing policy unchanged. None restores output-sized rendering.
     pub fn set_dynamic_resolution(
@@ -354,28 +376,43 @@ impl RetainedScene {
             .resolution
             .as_ref()
             .map_or(crate::resolution::ResolutionScale::FULL, |r| r.scale());
+        let plan = crate::resolution::FramePlan::new(
+            [target.width, target.height],
+            target.viewport.map(|v| v.rect).unwrap_or([
+                0.,
+                0.,
+                target.width as f32,
+                target.height as f32,
+            ]),
+            self.staging.camera.pixel_resolution,
+            scale,
+        )?;
+        if let Some(temporal) = &self.temporal
+            && self.staging.camera.pixel_resolution.is_none()
+        {
+            temporal.preflight(
+                &renderer.device,
+                plan.size,
+                self.motion
+                    .as_ref()
+                    .ok_or(crate::temporal::TemporalError::History)?
+                    .target_bytes(),
+            )?;
+        }
         let motion = self
             .motion
             .as_mut()
             .map(|m| {
-                let plan = crate::resolution::FramePlan::new(
-                    [target.width, target.height],
-                    target.viewport.map(|v| v.rect).unwrap_or([
-                        0.,
-                        0.,
-                        target.width as f32,
-                        target.height as f32,
-                    ]),
-                    self.staging.camera.pixel_resolution,
-                    scale,
-                )?;
                 m.prepare(
                     renderer,
                     &self.live,
                     &self.staging,
                     input,
-                    [target.width, target.height],
-                    &plan,
+                    crate::motion::MotionView {
+                        output: [target.width, target.height],
+                        plan: &plan,
+                        temporal: self.temporal.is_some(),
+                    },
                 )
             })
             .transpose()?;
@@ -383,7 +420,27 @@ impl RetainedScene {
             Some((draw, pending)) => (draw, Some(pending)),
             None => (None, None),
         };
-        let commands = renderer.draw_scene_scaled(&self.staging, target, scale, motion_draw)?;
+        let temporal_pending = self
+            .temporal
+            .as_ref()
+            .map(|temporal| {
+                let pending = motion_pending
+                    .as_ref()
+                    .ok_or(crate::temporal::TemporalError::History)?;
+                temporal.prepare(&renderer.device, pending.temporal_input(plan.rect))
+            })
+            .transpose()?;
+        if let Some(phase) = motion_pending.as_ref().and_then(|p| p.jitter_phase()) {
+            self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
+            self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
+        }
+        let commands = renderer.draw_scene_scaled(
+            &self.staging,
+            target,
+            scale,
+            motion_draw,
+            temporal_pending.as_ref(),
+        )?;
         for batch in &self.staging.batches {
             if !batch.updates.is_empty() {
                 renderer.queue.write_buffer(
@@ -410,6 +467,9 @@ impl RetainedScene {
         std::mem::swap(&mut self.live, &mut self.staging);
         if let (Some(motion), Some(pending)) = (&mut self.motion, motion_pending) {
             motion.accept(pending, input);
+        }
+        if let (Some(temporal), Some(pending)) = (&mut self.temporal, temporal_pending) {
+            temporal.accept(pending);
         }
         if let (Some(owner), Some(frame)) = (&mut self.resolution, resolution) {
             owner.accept(frame);
@@ -449,3 +509,7 @@ mod text_native_tests;
 #[cfg(test)]
 #[path = "motion_device_tests.rs"]
 mod motion_tests;
+
+#[cfg(test)]
+#[path = "temporal_retained_tests.rs"]
+mod temporal_tests;

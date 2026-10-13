@@ -1,0 +1,543 @@
+{
+ "recorded": "2026-10-13T04:39:59.848770+00:00",
+ "ledger_sha256": "1ca536072c569d5eecf09b831cbedddee6c6b1339e64e374db9b2c9a86ba8559",
+ "children": 18,
+ "frames_reserved": 12,
+ "submissions_reserved": 11,
+ "builds": [
+  {
+   "label": "tests-render",
+   "exit": 0,
+   "timed_out": false,
+   "started": "2026-10-13T04:34:58.154240+00:00",
+   "ended": "2026-10-13T04:35:36.439844+00:00"
+  },
+  {
+   "label": "tests-host",
+   "exit": 0,
+   "timed_out": false,
+   "started": "2026-10-13T04:35:36.460290+00:00",
+   "ended": "2026-10-13T04:36:07.257316+00:00"
+  },
+  {
+   "label": "review",
+   "exit": 0,
+   "timed_out": false,
+   "started": "2026-10-13T04:36:23.078747+00:00",
+   "ended": "2026-10-13T04:36:24.719832+00:00"
+  }
+ ],
+ "listings": {
+  "lib": {
+   "count": 33,
+   "matches_reviewed_base": true
+  },
+  "model_gpu": {
+   "count": 50,
+   "matches_reviewed_base": true
+  },
+  "game": {
+   "count": 5,
+   "matches_reviewed_base": true
+  },
+  "ui": {
+   "count": 2,
+   "matches_reviewed_base": true
+  },
+  "review": {
+   "count": 5,
+   "matches_reviewed_base": true
+  }
+ },
+ "numeric": [
+  {
+   "exit": 0,
+   "timed_out": false,
+   "libtest": {
+    "running": [
+     1
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 102
+     }
+    ],
+    "failures": []
+   },
+   "adapter_lines": [
+    "Timestamp adapter: AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }"
+   ],
+   "sequences": [
+    1,
+    2
+   ],
+   "samples": [
+    {
+     "sequence": 1,
+     "period_ns": 1.0,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "Shadows",
+      "Models",
+      "Display"
+     ]
+    },
+    {
+     "sequence": 2,
+     "period_ns": 1.0,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "Shadows",
+      "Models",
+      "Display"
+     ]
+    }
+   ]
+  }
+ ],
+ "suites": {
+  "lib": {
+   "exit": 0,
+   "timed_out": false,
+   "libtest": {
+    "running": [
+     32
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 32,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 71
+     }
+    ],
+    "failures": []
+   },
+   "expected_running": 32,
+   "running_matches_listing": true,
+   "skipped_names_absent_from_output": true
+  },
+  "model_gpu": {
+   "exit": 0,
+   "timed_out": false,
+   "libtest": {
+    "running": [
+     50
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 50,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 0
+     }
+    ],
+    "failures": []
+   },
+   "expected_running": 50,
+   "running_matches_listing": true,
+   "skipped_names_absent_from_output": true
+  },
+  "game": {
+   "exit": 0,
+   "timed_out": false,
+   "libtest": {
+    "running": [
+     5
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 0
+     }
+    ],
+    "failures": []
+   },
+   "expected_running": 5,
+   "running_matches_listing": true,
+   "skipped_names_absent_from_output": true
+  },
+  "ui": {
+   "exit": 0,
+   "timed_out": false,
+   "libtest": {
+    "running": [
+     2
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 0
+     }
+    ],
+    "failures": []
+   },
+   "expected_running": 2,
+   "running_matches_listing": true,
+   "skipped_names_absent_from_output": true
+  }
+ },
+ "reviews": [
+  {
+   "case": "probe",
+   "exit": 0,
+   "timed_out": false,
+   "outcome": "pass",
+   "checks": {
+    "default_device_requests_no_timestamp_feature": true,
+    "default_stats_disabled": true,
+    "default_take_none": true,
+    "period_finite_positive": true,
+    "timing_constructor_succeeded": true,
+    "timing_device_has_encoder_timestamps": true,
+    "timing_stats_empty": true,
+    "timing_take_none_before_frames": true
+   },
+   "frames_rendered": 0,
+   "timed_submissions": 0,
+   "take_outcomes": [],
+   "pngs": [],
+   "independent_pairs": [],
+   "independent_samples": []
+  },
+  {
+   "case": "lit",
+   "exit": 0,
+   "timed_out": false,
+   "outcome": "pass",
+   "checks": {
+    "cross_device_control_off_b1": true,
+    "drain_yields_sequences_1_2_3_then_none": true,
+    "every_sample_meets_contract": true,
+    "expected_groups_same_on_both_devices": true,
+    "pixels_identical_all_eight_frames": true,
+    "reuse_yields_sequence_5_then_none": true,
+    "reused_slot_frame_5_unchanged": true,
+    "same_device_determinism_off_a2": true,
+    "skipped_frame_4_renders_unchanged": true,
+    "stats_after_drain": true,
+    "stats_after_reuse_frame": true,
+    "stats_fill_then_skip": true,
+    "stats_final": true,
+    "timing_on_matches_off_1_to_3": true
+   },
+   "frames_rendered": 8,
+   "timed_submissions": 5,
+   "take_outcomes": [
+    "sample",
+    "sample",
+    "sample",
+    "none",
+    "sample",
+    "none"
+   ],
+   "pngs": [
+    {
+     "name": "lit-off-1.png",
+     "size": [
+      640,
+      360
+     ],
+     "file_sha256_matches": true,
+     "decoded_rgba_matches_helper": true
+    },
+    {
+     "name": "lit-on-1.png",
+     "size": [
+      640,
+      360
+     ],
+     "file_sha256_matches": true,
+     "decoded_rgba_matches_helper": true
+    },
+    {
+     "name": "lit-on-4-skipped.png",
+     "size": [
+      640,
+      360
+     ],
+     "file_sha256_matches": true,
+     "decoded_rgba_matches_helper": true
+    }
+   ],
+   "independent_pairs": [
+    {
+     "a": "lit-off-1.png",
+     "b": "lit-on-1.png",
+     "equal": true,
+     "differing_pixels": 0,
+     "max_channel_delta": 0,
+     "first_difference": null
+    },
+    {
+     "a": "lit-off-1.png",
+     "b": "lit-on-4-skipped.png",
+     "equal": true,
+     "differing_pixels": 0,
+     "max_channel_delta": 0,
+     "first_difference": null
+    }
+   ],
+   "independent_samples": [
+    {
+     "sequence": 1,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "AssignLights",
+      "Shadows",
+      "Models",
+      "Display"
+     ]
+    },
+    {
+     "sequence": 2,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "AssignLights",
+      "Shadows",
+      "Models",
+      "Display"
+     ]
+    },
+    {
+     "sequence": 3,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "AssignLights",
+      "Shadows",
+      "Models",
+      "Display"
+     ]
+    },
+    {
+     "sequence": 5,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "AssignLights",
+      "Shadows",
+      "Models",
+      "Display"
+     ]
+    }
+   ]
+  },
+  {
+   "case": "sprites_text",
+   "exit": 0,
+   "timed_out": false,
+   "outcome": "pass",
+   "checks": {
+    "expected_groups_same_on_both_devices": true,
+    "no_second_sample": true,
+    "one_sample_with_sequence_1": true,
+    "pixels_identical_timing_off_vs_on": true,
+    "sample_contract": true,
+    "stats_after_frame": true,
+    "stats_after_take": true
+   },
+   "frames_rendered": 2,
+   "timed_submissions": 1,
+   "take_outcomes": [
+    "sample",
+    "none"
+   ],
+   "pngs": [
+    {
+     "name": "sprites-text-off.png",
+     "size": [
+      640,
+      360
+     ],
+     "file_sha256_matches": true,
+     "decoded_rgba_matches_helper": true
+    },
+    {
+     "name": "sprites-text-on.png",
+     "size": [
+      640,
+      360
+     ],
+     "file_sha256_matches": true,
+     "decoded_rgba_matches_helper": true
+    }
+   ],
+   "independent_pairs": [
+    {
+     "a": "sprites-text-off.png",
+     "b": "sprites-text-on.png",
+     "equal": true,
+     "differing_pixels": 0,
+     "max_channel_delta": 0,
+     "first_difference": null
+    }
+   ],
+   "independent_samples": [
+    {
+     "sequence": 1,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "Sprites",
+      "Text",
+      "Display"
+     ]
+    }
+   ]
+  },
+  {
+   "case": "viewport",
+   "exit": 0,
+   "timed_out": false,
+   "outcome": "pass",
+   "checks": {
+    "expected_groups_same_on_both_devices": true,
+    "no_second_sample": true,
+    "one_sample_with_sequence_1": true,
+    "pixels_identical_timing_off_vs_on": true,
+    "sample_contract": true,
+    "stats_after_frame": true,
+    "stats_after_take": true
+   },
+   "frames_rendered": 2,
+   "timed_submissions": 1,
+   "take_outcomes": [
+    "sample",
+    "none"
+   ],
+   "pngs": [
+    {
+     "name": "viewport-off.png",
+     "size": [
+      640,
+      360
+     ],
+     "file_sha256_matches": true,
+     "decoded_rgba_matches_helper": true
+    },
+    {
+     "name": "viewport-on.png",
+     "size": [
+      640,
+      360
+     ],
+     "file_sha256_matches": true,
+     "decoded_rgba_matches_helper": true
+    }
+   ],
+   "independent_pairs": [
+    {
+     "a": "viewport-off.png",
+     "b": "viewport-on.png",
+     "equal": true,
+     "differing_pixels": 0,
+     "max_channel_delta": 0,
+     "first_difference": null
+    }
+   ],
+   "independent_samples": [
+    {
+     "sequence": 1,
+     "labels_match_expected": true,
+     "missing": [],
+     "unexpected": [],
+     "spans_ordered": true,
+     "conversion_matches_period": true,
+     "observation_dependency_order_violations": [],
+     "observation_within_frame": true,
+     "observation_zero_tick_groups": [
+      "InitializeScene",
+      "AssignLights",
+      "Shadows",
+      "Models",
+      "Display"
+     ]
+    }
+   ]
+  },
+  {
+   "case": "owner_drop",
+   "exit": 0,
+   "timed_out": false,
+   "outcome": "pass",
+   "checks": {
+    "fresh_owner_starts_empty": true,
+    "fresh_owner_take_none": true,
+    "one_pending_before_submit": true,
+    "retained_device_wait_ok_after_owner_drop": true
+   },
+   "frames_rendered": 0,
+   "timed_submissions": 1,
+   "take_outcomes": [],
+   "pngs": [],
+   "independent_pairs": [],
+   "independent_samples": []
+  }
+ ],
+ "all_children_group_empty": true,
+ "binaries_unchanged": true
+}

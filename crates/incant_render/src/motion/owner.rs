@@ -40,8 +40,13 @@ pub struct MotionFrame {
     size: [u32; 2],
     valid_previous: bool,
     bypassed: bool,
+    phase: Option<u32>,
 }
 impl MotionFrame {
+    /// Present only for temporal accumulation; phase is internal-pixel jitter.
+    pub fn jitter_phase(&self) -> Option<u32> {
+        self.phase
+    }
     pub fn sequence(&self) -> u64 {
         self.sequence
     }
@@ -124,6 +129,7 @@ impl History {
                 size: extent.internal,
                 valid_previous,
                 bypassed,
+                phase: None,
             },
             matrix,
             previous: if valid_previous {
@@ -133,6 +139,45 @@ impl History {
             },
             extent,
         })
+    }
+    pub fn prepare_temporal(
+        &self,
+        extent: Extent,
+        camera: CameraView,
+        rect: [f32; 4],
+    ) -> Result<Pending, MotionError> {
+        let mut pending = self.prepare(
+            extent,
+            camera
+                .matrix(rect[2] / rect[3])
+                .map_err(|_| MotionError::Projection)?,
+        )?;
+        if !pending.frame.bypassed {
+            let phase = if pending.frame.has_previous() {
+                (self
+                    .last
+                    .as_ref()
+                    .and_then(|a| a.frame.phase)
+                    .ok_or(MotionError::Topology)?
+                    + 1)
+                    % 8
+            } else {
+                0
+            };
+            let mut camera = camera;
+            camera.jitter = crate::temporal::jitter::ndc(phase, rect);
+            pending.matrix = camera
+                .matrix(rect[2] / rect[3])
+                .map_err(|_| MotionError::Projection)?;
+            if !pending.matrix.inverse().is_finite() {
+                return Err(MotionError::Projection);
+            }
+            if !pending.frame.has_previous() {
+                pending.previous = pending.matrix;
+            }
+            pending.frame.phase = Some(phase);
+        }
+        Ok(pending)
     }
     /// Called only after the owning retained scene immediately submits its packet.
     pub fn accept(&mut self, pending: Pending) {

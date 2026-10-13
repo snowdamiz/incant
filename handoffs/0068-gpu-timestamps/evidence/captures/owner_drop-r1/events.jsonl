@@ -1,0 +1,3 @@
+{"case":"owner_drop","event":"open","frame_limit":0,"submission_limit":1}
+{"event":"owner-dropped"}
+{"event":"finish","pass":true}

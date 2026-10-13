@@ -16,7 +16,11 @@ pub(crate) struct MotionDraw {
     pub(super) draws: Vec<Draw>,
 }
 impl MotionDraw {
-    pub fn encode(&self, encoder: &mut wgpu::CommandEncoder) {
+    pub fn encode(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Opaque surface motion/depth"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
@@ -36,7 +40,7 @@ impl MotionDraw {
                 }),
                 stencil_ops: None,
             }),
-            timestamp_writes: None,
+            timestamp_writes: timestamps,
             occlusion_query_set: None,
             multiview_mask: None,
         });

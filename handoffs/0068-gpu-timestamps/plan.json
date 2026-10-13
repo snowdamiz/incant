@@ -1,0 +1,151 @@
+{
+  "packet": "0068-gpu-timestamps",
+  "status": "proposed during preparation; frozen by the commit that root reviews before granting",
+  "reviewed_implementation": "99778642585a7b545a9448b9fca4a365ba622985",
+  "reviewed_base": "1c5658cf5d7eee8390b272394f38b8d9b49e1628",
+  "reviewed_freeze_sha256": "d41ba28b5cd1bf3007706d844904c4f846e0cdcc69134522c0c7061fc05a8f25",
+  "budgets": {
+    "appearance_frames_max": 24,
+    "frame_max_width": 960,
+    "frame_max_height": 540,
+    "numeric_submissions_max": 48,
+    "existing_suite_timeout_s": 300,
+    "added_process_timeout_s": 120,
+    "listing_timeout_s": 60,
+    "build_timeout_s": 2700,
+    "compile_jobs": 2,
+    "existing_regression_frames": "counted separately; not part of the 24/48 budgets"
+  },
+  "builds": {
+    "tests-render": ["test", "-p", "incant_render", "--lib", "--test", "model_gpu", "--no-run"],
+    "tests-host": ["test", "-p", "incant_render_gpu_host", "--test", "game", "--test", "ui", "--no-run"],
+    "review": ["test", "-p", "incant_render", "--test", "gpu_timestamp_review", "--no-run"],
+    "lint": ["clippy", "-p", "incant_render", "--test", "gpu_timestamp_review"],
+    "common_flags": ["--locked", "--offline", "--profile", "ci", "-j2", "--message-format=json-render-diagnostics"],
+    "note": "tests-render keeps the brief's numeric-test package selection (-p incant_render alone). The review helper is copied into the child checkout only after tests-render and tests-host are frozen."
+  },
+  "suites": {
+    "lib": {
+      "binary": "incant_render-lib-tests",
+      "cwd": "crates/incant_render",
+      "expected_ignored_at_reviewed_base": 33,
+      "skip": ["timing::gpu_tests::bounded_timestamp_queries_follow_real_submission_and_abandonment"],
+      "max_runs": 1
+    },
+    "model_gpu": {
+      "binary": "model_gpu",
+      "cwd": "crates/incant_render",
+      "expected_ignored_at_reviewed_base": 50,
+      "skip": [],
+      "max_runs": 1
+    },
+    "game": {
+      "binary": "gpu_host-game",
+      "cwd": "crates/incant_render_gpu_host",
+      "expected_ignored_at_reviewed_base": 5,
+      "skip": [],
+      "max_runs": 1
+    },
+    "ui": {
+      "binary": "gpu_host-ui",
+      "cwd": "crates/incant_render_gpu_host",
+      "expected_ignored_at_reviewed_base": 2,
+      "skip": [],
+      "max_runs": 1
+    }
+  },
+  "numeric": {
+    "binary": "incant_render-lib-tests",
+    "cwd": "crates/incant_render",
+    "test": "timing::gpu_tests::bounded_timestamp_queries_follow_real_submission_and_abandonment",
+    "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
+    "brief_command": "./tools/cargo test --locked --profile ci -j2 -p incant_render --lib timing::gpu_tests::bounded_timestamp_queries_follow_real_submission_and_abandonment -- --ignored --exact --nocapture --test-threads=1",
+    "submissions": 3,
+    "encoded_unsubmitted": 2,
+    "appearance_frames": 0,
+    "max_runs": 1
+  },
+  "review": {
+    "binary": "gpu_timestamp_review",
+    "cwd": "crates/incant_render",
+    "output_env": "INCANT_0068_REVIEW_OUT",
+    "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
+    "max_runs_per_case": 2,
+    "rerun_rule": "A second run of a case is allowed only after an infrastructure failure (timeout, or a crash before report.json exists) or when a committed entry in amendments names the case and the reason (for example a helper assumption defect found in the first run's raw data). It never hides a recorded failure: every run stays in the ledger and result.md reports both.",
+    "cases": {
+      "probe": {
+        "test": "probe",
+        "frames": 0,
+        "submissions": 0,
+        "pngs": [],
+        "purpose": "Adapter, backend, adapter/device timestamp feature flags and period for Renderer::new and Renderer::new_with_gpu_timing; default constructor requests no timestamp feature; stats/take before any frame."
+      },
+      "lit": {
+        "test": "lit",
+        "frames": 8,
+        "submissions": 5,
+        "size": [640, 360],
+        "viewport": null,
+        "pngs": ["lit-off-1.png", "lit-on-1.png", "lit-on-4-skipped.png"],
+        "purpose": "Shadow look-dev geometry with a shadowing sun, environment fill and two clustered point lights. Timing off: two frames on one device and one frame on a second device (determinism and cross-device controls). Timing on: three measured frames fill the three slots with unread results, a fourth renders with instrumentation skipped, the consumer drains, and a fifth frame reuses a slot. All eight frames are compared byte for byte."
+      },
+      "sprites_text": {
+        "test": "sprites_text",
+        "frames": 2,
+        "submissions": 1,
+        "size": [640, 360],
+        "viewport": null,
+        "pngs": ["sprites-text-off.png", "sprites-text-on.png"],
+        "purpose": "Pixel-perfect camera (100 px/unit, 320x180 logical, integer upscale) with three nearest-sampled sprites and world-space Latin/Arabic/CJK/.notdef text; no models."
+      },
+      "viewport": {
+        "test": "viewport",
+        "frames": 2,
+        "submissions": 1,
+        "size": [640, 360],
+        "viewport": {"rect": [52.5, 30.25, 512.0, 288.0], "corner_radii": [12.0, 12.0, 12.0, 12.0], "canvas_srgb": [64, 80, 96]},
+        "pngs": ["viewport-off.png", "viewport-on.png"],
+        "purpose": "The lit scene inside a fractional, offset, rounded editor-style viewport over a canvas color."
+      },
+      "owner_drop": {
+        "test": "owner_drop",
+        "frames": 0,
+        "submissions": 1,
+        "pngs": [],
+        "requires_astra_review": true,
+        "grant_approval": "run only if review-ready.json lists \"owner_drop\" in approved_extra_cases",
+        "purpose": "Submit one measured 64x64 frame (numeric-test fixture, non-readable target), drop the owning Renderer before its mapping callback, then wait on a retained device clone; afterwards a fresh timing renderer starts empty. Observes absence of panic/hang only; the orphaned result is unobservable by design."
+      }
+    }
+  },
+  "totals": {
+    "appearance_frames_first_runs": 12,
+    "appearance_frames_with_all_reruns": 24,
+    "numeric_submissions_first_runs": 11,
+    "numeric_submissions_with_all_reruns": 19,
+    "retained_png_pairs": [
+      ["lit-off-1.png", "lit-on-1.png"],
+      ["lit-off-1.png", "lit-on-4-skipped.png"],
+      ["sprites-text-off.png", "sprites-text-on.png"],
+      ["viewport-off.png", "viewport-on.png"]
+    ],
+    "counting": "Every rendered review frame counts once as an appearance frame, including controls and frames whose PNG is not retained. Every timing-enabled review frame also counts as a numeric submission, and so does every numeric-test submission. Pixel readback copies are part of their frame's observation, not extra frames."
+  },
+  "amendments": [],
+  "order": [
+    "lease.py acquire",
+    "build.py checkout",
+    "build.py toolchain",
+    "build.py tests",
+    "build.py review",
+    "gpu.py list lib|model_gpu|game|ui|review",
+    "gpu.py numeric",
+    "gpu.py suite lib|model_gpu|game|ui",
+    "gpu.py review probe|lit|sprites_text|viewport [owner_drop only if approved]",
+    "analyze.py check (CPU only) and personal inspection of every retained frame",
+    "gpu.py release",
+    "build.py lint (optional, CPU only, still under the lease)",
+    "lease.py release",
+    "analyze.py publish"
+  ]
+}

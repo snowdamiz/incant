@@ -31,10 +31,12 @@ mod shader;
 mod shadows;
 mod sprites;
 mod studio;
+pub mod temporal;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;
 mod text;
+pub mod timing;
 mod ui;
 #[cfg(test)]
 mod version_tests;
@@ -99,11 +101,28 @@ pub struct Renderer {
     output: output::OutputPass,
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
+    temporal: Option<temporal::TemporalSystem>,
 }
 impl Renderer {
     pub async fn new(
         instance: &wgpu::Instance,
         surface: Option<&wgpu::Surface<'_>>,
+    ) -> Result<Self> {
+        Self::new_configured(instance, surface, false).await
+    }
+    /// Explicit opt-in to bounded, asynchronous native GPU timestamp collection.
+    /// Unsupported adapters fail rather than silently substituting CPU timings.
+    /// Instrumentation can perturb performance and is off in `new`/`headless`.
+    pub async fn new_with_gpu_timing(
+        instance: &wgpu::Instance,
+        surface: Option<&wgpu::Surface<'_>>,
+    ) -> Result<Self> {
+        Self::new_configured(instance, surface, true).await
+    }
+    async fn new_configured(
+        instance: &wgpu::Instance,
+        surface: Option<&wgpu::Surface<'_>>,
+        gpu_timing: bool,
     ) -> Result<Self> {
         let adapter = instance
             .request_adapter(&wgpu::RequestAdapterOptions {
@@ -117,7 +136,8 @@ impl Renderer {
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Incant renderer"),
                 required_features: output::required_features(&adapter)?
-                    | pipeline_cache::required_features(&adapter),
+                    | pipeline_cache::required_features(&adapter)
+                    | timing::required_features(gpu_timing, adapter.features())?,
                 ..Default::default()
             })
             .await?;
@@ -157,6 +177,11 @@ impl Renderer {
         let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend, cache)?;
         let text = text::TextSystem::new(&device, adapter.get_info().backend, cache)?;
         let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend, cache)?;
+        let graph = if gpu_timing {
+            graph::FrameGraph::with_timings(&device, &queue)?
+        } else {
+            Default::default()
+        };
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
@@ -181,13 +206,26 @@ impl Renderer {
             shadows,
             frames: Default::default(),
             output,
-            graph: Default::default(),
+            graph,
             motion: None,
+            temporal: None,
         })
     }
     pub fn headless() -> Result<Self> {
         let instance = wgpu::Instance::default();
         pollster::block_on(Self::new(&instance, None))
+    }
+    /// Poll callbacks without waiting, then consume at most one completed sample.
+    /// Covers the scene graph through display conversion, excluding later UI,
+    /// presentation, uploads, CPU work, and GPU readback/resolve overhead.
+    pub fn take_gpu_timing(&self) -> Result<Option<timing::GpuFrameTiming>> {
+        self.check_device()?;
+        Ok(self.graph.take_timing()?)
+    }
+    pub fn gpu_timing_stats(
+        &self,
+    ) -> std::result::Result<timing::GpuTimingStats, timing::GpuTimingError> {
+        self.graph.timing_stats()
     }
     /// Drive native callbacks without waiting for GPU completion and reject a
     /// reported device loss. Successfully queued work cannot be rolled back.
@@ -268,6 +306,7 @@ impl Renderer {
             },
             resolution::ResolutionScale::FULL,
             None,
+            None,
         )
     }
     fn draw_scene_scaled(
@@ -276,6 +315,7 @@ impl Renderer {
         target: RetainedTarget<'_>,
         scale: resolution::ResolutionScale,
         motion: Option<motion::MotionDraw>,
+        temporal: Option<&temporal::Pending>,
     ) -> Result<wgpu::CommandBuffer> {
         let RetainedTarget {
             view,
@@ -334,6 +374,11 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
+        let temporal = temporal.and_then(|pending| {
+            self.temporal.as_ref().and_then(|system| {
+                system.prepare(&self.device, pending, &attachments.color, scene.camera)
+            })
+        });
         let output = self.output.prepare(
             &self.device,
             &attachments.color,
@@ -348,6 +393,7 @@ impl Renderer {
                 diagnostics,
                 models,
                 motion,
+                temporal,
                 sprites,
                 text,
                 output,
