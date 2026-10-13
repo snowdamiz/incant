@@ -32,3 +32,6 @@ Run `python3 docs/spikes/evidence/world-checkpoints-main245/verify.py --verify-o
 for the portable input, dependency graph and producer-receipt qualification.
 The [independent audit](evidence/world-checkpoints-main245/independent-audit.json)
 records local executable verification; binaries themselves remain local.
+
+Final independent root composition review is accepted (`3b4dfff1`); the receipt
+is retained in this packet. Publication still requires its exact-head fast gate.
