@@ -55,8 +55,8 @@ listings and two tests, eight 65x33 frames total, all children successful and
 reaped. The default route admitted SSAO and completed four positive instrumented
 frames; the cooked route explicitly refused SSAO and completed four ordinary
 fixed-temporal frames. No images were captured or reviewed for this composition.
-All 33 prior native shader payloads remain byte-exact. Final independent
-integration review and publication are pending.
+All 33 prior native shader payloads remain byte-exact. Final independent integration review is accepted (`c3e4b994`); publication
+awaits the required fast check.
 
 [Current manifest](evidence/ssao-main229.json), [original pause](evidence/ssao-main229/pause.json)
 and [original001/002 retention](evidence/ssao-main229/producer-retention.json)

@@ -1207,5 +1207,10 @@
     "Producer C2 appearance is source-specific; original001 and authoredN6 failure retained.",
     "N8/N6T quality margins remain0.97/0.79codes; non-Metal/phone/whole-frame GPU claims open.",
     "No private upscaler/MetalFX ancestry; no default output shader edits."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/ssao-main229-final-root.json",
+    "sha256": "c3e4b9946ed0e2da9f588d81930247414e4c6e669e5b8d28519e42bf386e9880",
+    "decision": "accepted"
+  }
 }
