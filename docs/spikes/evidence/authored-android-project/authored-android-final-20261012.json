@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-12T23:30:31.048278+00:00",
+  "reviewer": "astra root",
+  "verdict": "accepted for authored Android archive CPU integration",
+  "commit": "08a8e10d789f2a083399c63cf3aa82616db484d4",
+  "manifest_sha256": "4ea2e037f93473add9ec18404e7268015dcbb8c69a645600dfb648f9a34cbe21",
+  "archive_sha256": "5d632d44abded73671f1fb18cc906810ac0fcb18ff6f0d6de7fe6631741c510e",
+  "method": [
+    "Reviewed and executed assertion-only producer audit prefix without modifying results or rerunning emulators",
+    "Independently redecoded and rehashed all869 retained records/335 payloads and exact original files",
+    "Rehashed eight extant compiled/native/archive/caller binaries and14 immutable source/probe inputs",
+    "Verified13405 frozen inputs using current bytes or exact frozen Git objects after producer advanced its checkout",
+    "Checked completed proof statuses, exact native/oracle state and logs, nonzero PCM byte equality, source deletion and owned emulator cleanup"
+  ],
+  "counts": {
+    "records": 869,
+    "payloads": 335,
+    "frozen_inputs": 13405,
+    "historical_git_fallbacks": 39,
+    "source_inputs": 14,
+    "external_binaries": 8
+  },
+  "execution": [
+    {
+      "mode": "deterministic",
+      "export_receipt_sha256": "e673a184eb3f49f3bdb3de4b63504433d16601f34a3d29092e621d4bea2b460f",
+      "caller_receipt_sha256": "c1f74861e2e571c756489fa3b5cf8534b157293bcb535e41b73769c30ebc036b",
+      "commands_with_avd": 121,
+      "raw_command_streams_rehashed": 242,
+      "positive_processes": 3,
+      "exact_refusals": 7,
+      "logs_per_positive": 36,
+      "vector_checks_per_positive": 72,
+      "pcm_bytes_per_positive": 76800,
+      "runtime_files": 9,
+      "archive_bytes": 23857828,
+      "caller_bytes": 12860016,
+      "api": "37",
+      "os": "17",
+      "owned_emulator_cleanup": true
+    },
+    {
+      "mode": "fast",
+      "export_receipt_sha256": "883c8af12a6fe1b845c937afaace91c68308d7071e4126ebefed9a7d28d84fe2",
+      "caller_receipt_sha256": "fa37f43f233982f583bb08d8eb4f50f277007fe389bbd850d3dd5d5b89d04f9e",
+      "commands_with_avd": 121,
+      "raw_command_streams_rehashed": 242,
+      "positive_processes": 3,
+      "exact_refusals": 7,
+      "logs_per_positive": 36,
+      "vector_checks_per_positive": 72,
+      "pcm_bytes_per_positive": 76800,
+      "runtime_files": 9,
+      "archive_bytes": 23849196,
+      "caller_bytes": 12853928,
+      "api": "37",
+      "os": "17",
+      "owned_emulator_cleanup": true
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "local Android17/API37 ARM emulator CPU only",
+    "NDK API24 compiler identity is not minimum OS execution",
+    "no phone/performance/rendering/mobile platform host/signing/store/phase gate",
+    "static Wasm mobile export unsupported"
+  ]
+}

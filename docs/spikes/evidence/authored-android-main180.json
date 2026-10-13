@@ -1,0 +1,865 @@
+{
+  "at": "2026-10-13T00:39:08.149282+00:00",
+  "tested_head": "79557b893a13e13ac5eacf7356b3a1591a12bde8",
+  "base_main": "02203670a7f18c68ff9e3bcf1913b0d574e82f6d",
+  "review_head": "79557b893a13e13ac5eacf7356b3a1591a12bde8",
+  "source_freeze": {
+    "path": "docs/spikes/evidence/authored-android-main180/freeze.json",
+    "sha256": "7f0e75b056fbded0da268e62d186e8f8b68f1a4e3a34cfb4cb8cce5b83603ce4",
+    "count": 1954
+  },
+  "producer_rows": [
+    {
+      "path": "crates/incant_cook/src/project_build.rs",
+      "producer_sha256": "26af2fd4152f8536638b76df6f4deb22e47846f1d9f7891f1faaea1519ffa4e5",
+      "current_sha256": "26af2fd4152f8536638b76df6f4deb22e47846f1d9f7891f1faaea1519ffa4e5"
+    },
+    {
+      "path": "crates/incant_cook/tests/android_probe.rs",
+      "producer_sha256": "cd519b686d4970fb9b66bf34677c63297399e54bb3e38c51ef2d6a9f1948634e",
+      "current_sha256": "cd519b686d4970fb9b66bf34677c63297399e54bb3e38c51ef2d6a9f1948634e"
+    },
+    {
+      "path": "crates/incant_cook/tests/mobile_project.rs",
+      "producer_sha256": "3a72b31032056a2255bf39ef01469fa226538cdbf8477a77ab62453a08adab24",
+      "current_sha256": "3a72b31032056a2255bf39ef01469fa226538cdbf8477a77ab62453a08adab24"
+    },
+    {
+      "path": "crates/incant_game_player/build.rs",
+      "producer_sha256": "753fbb393cc5aa760b966de3ec1905bea1d80ea15a0ed0ee2aea95c86b4e06f2",
+      "current_sha256": "753fbb393cc5aa760b966de3ec1905bea1d80ea15a0ed0ee2aea95c86b4e06f2"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/compatibility.rs",
+      "producer_sha256": "728e9df0dd3e626ae1a43fc59d492742246981b2d34aea60a3ff7b13d4f385a9",
+      "current_sha256": "728e9df0dd3e626ae1a43fc59d492742246981b2d34aea60a3ff7b13d4f385a9"
+    },
+    {
+      "path": "crates/incant_script/src/artifact/mobile_tests.rs",
+      "producer_sha256": "80ef35a62dcc6bc605d963b60d63d43fb749fc0e248862d6212eebd371b25adf",
+      "current_sha256": "80ef35a62dcc6bc605d963b60d63d43fb749fc0e248862d6212eebd371b25adf"
+    },
+    {
+      "path": "tools/android_archive.py",
+      "producer_sha256": "18e3894f9ad8774bcaceafced9ca77c553f62461b783ccaa266983f0b7111a97",
+      "current_sha256": "18e3894f9ad8774bcaceafced9ca77c553f62461b783ccaa266983f0b7111a97"
+    },
+    {
+      "path": "tools/export_android.py",
+      "producer_sha256": "bdf67e98a388473abbd18d6a6186018ad0addfdcc6d7e2504cb257eadce5793d",
+      "current_sha256": "bdf67e98a388473abbd18d6a6186018ad0addfdcc6d7e2504cb257eadce5793d"
+    },
+    {
+      "path": "tools/tests/test_android_export.py",
+      "producer_sha256": "1421aa640630c5c1714cf9a67535d90f29b00384304ddc989a4b9fa63aa9e1f0",
+      "current_sha256": "1421aa640630c5c1714cf9a67535d90f29b00384304ddc989a4b9fa63aa9e1f0"
+    },
+    {
+      "path": "tools/probes/authored-android-project/mover.ts",
+      "producer_sha256": "2242c18284807105155244d1dcf5da54e5002d6a647bca86c22f3572b10413b5",
+      "current_sha256": "2242c18284807105155244d1dcf5da54e5002d6a647bca86c22f3572b10413b5"
+    },
+    {
+      "path": "tools/probes/authored-android-project/other.ts",
+      "producer_sha256": "6178c2ffd3d8911077741b243140bfc20c765d94d01435d5f23068b5cb308633",
+      "current_sha256": "6178c2ffd3d8911077741b243140bfc20c765d94d01435d5f23068b5cb308633"
+    },
+    {
+      "path": "tools/probes/authored-android-project/prepare.py",
+      "producer_sha256": "a90d4cf916773609358da83636dafd64c59bdc314c0fd069be431407a96d59e3",
+      "current_sha256": "a90d4cf916773609358da83636dafd64c59bdc314c0fd069be431407a96d59e3"
+    },
+    {
+      "path": "tools/probes/authored-android-project/shared.ts",
+      "producer_sha256": "971968b5b3ffb96ae1ddc3705bc2784dbd6ec3407c8a6201e4ca2e056585f6a2",
+      "current_sha256": "971968b5b3ffb96ae1ddc3705bc2784dbd6ec3407c8a6201e4ca2e056585f6a2"
+    },
+    {
+      "path": "tools/probes/authored-android-project/verify.py",
+      "producer_sha256": "505f834745c2e9eb0e8c35f2d5d83a1adb29fbeb3e83253c4f9001c821c4af70",
+      "current_sha256": "505f834745c2e9eb0e8c35f2d5d83a1adb29fbeb3e83253c4f9001c821c4af70"
+    }
+  ],
+  "checks": [
+    {
+      "name": "cook-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--test",
+        "mobile_project",
+        "--test",
+        "scripts",
+        "--test",
+        "typescript",
+        "--test",
+        "project_scripts"
+      ],
+      "exit": 0,
+      "seconds": 5.286730167004862,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/cook-tests.stdout",
+        "sha256": "00f924d68b89a5dabc53fee10168896ade3dc43f145f2c98d774a4d843085a88"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/cook-tests.stderr",
+        "sha256": "5cd0bb225aa1caeb1b46702161977a2f917052b29975e207bc31bc817ef2af98"
+      }
+    },
+    {
+      "name": "candidate-cook-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "probe-android-bytecode",
+        "--test",
+        "android_probe"
+      ],
+      "exit": 0,
+      "seconds": 4.786518041997624,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/candidate-cook-tests.stdout",
+        "sha256": "d84b3dfe56ee6af8579c58e29ae31b2d3a4ce70e3097c7f7aeeb2559870292f7"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/candidate-cook-tests.stderr",
+        "sha256": "58a5259fbdad8697b47064be53b92a8253b4534a9cb487e0da462b196afe0912"
+      }
+    },
+    {
+      "name": "candidate-script-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--features",
+        "probe-android-bytecode",
+        "artifact::mobile_tests"
+      ],
+      "exit": 0,
+      "seconds": 10.5600465000025,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/candidate-script-tests.stdout",
+        "sha256": "a7057b80d1d5de1bc5cb534ee55d1adc722d31831a8cb8d28cf364aa99dcd7a3"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/candidate-script-tests.stderr",
+        "sha256": "0f81be4ab812af4c95d8f96be8142f774a1d7f34cc895a13019190dd12a5e33c"
+      }
+    },
+    {
+      "name": "player-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "mobile-ffi,render-input",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 9.369239167004707,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/player-tests.stdout",
+        "sha256": "8d78d989319c491cc90aea077e2515b24feede7694482cbce998c273933f01df"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/player-tests.stderr",
+        "sha256": "6b9669bb1c6d77b88688112c21e0950337fb84adbd0189efc4c6e307fec65a5e"
+      }
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_cook/typescript,incant_game_player/mobile-ffi",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 4.926270500000101,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/clippy.stderr",
+        "sha256": "2aa3298a449ad2d370193a0cc9993f83f4b2dbd1f186dc066fae99b20e9396df"
+      }
+    },
+    {
+      "name": "python",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 22.437995250002132,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/python.stdout",
+        "sha256": "0c36913f9d3e4ebbee074b7989d83fcfe160ef6f3b471826f8ff75e4374e0d23"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/python.stderr",
+        "sha256": "f1df8d1f687707d1f30ec846e83e81c20040a1c0b5bdbb0f8f187d3078e8dc06"
+      }
+    },
+    {
+      "name": "graphs",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_script",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/mobile-ffi"
+      ],
+      "exit": 0,
+      "seconds": 0.49499541700060945,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/graphs.stdout",
+        "sha256": "197d2c3375bb79ab3d36a3fa0f62baed27d7f80092cef9815788fb7a1001463d"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/graphs.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "physics-features",
+      "command": [
+        "python3",
+        "tools/physics_features.py",
+        "manifest"
+      ],
+      "exit": 0,
+      "seconds": 0.039013292000163347,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/physics-features.stdout",
+        "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/physics-features.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1013567920017522,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.02888024999992922,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.1026367919985205,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "deterministic-headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic"
+      ],
+      "exit": 0,
+      "seconds": 226.84956404200057,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-headless.stdout",
+        "sha256": "bc7c0f879063c1da4a5e5e48c875a31485db642655be37832f34788c63acc743"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-headless.stderr",
+        "sha256": "c607a57afbc7568caf08fa5040b99620474c5013fd3b7afe62d1b902acf8f983"
+      },
+      "compiler_features": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "fast-headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--target",
+        "aarch64-apple-darwin",
+        "-p",
+        "incant_headless",
+        "--message-format=json",
+        "--no-default-features"
+      ],
+      "exit": 0,
+      "seconds": 108.55863049999607,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-headless.stdout",
+        "sha256": "d6b55b455c9c4316ec2411b4fb3ac0f6a16b6095a50b66e8e30955b24180dd6c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-headless.stderr",
+        "sha256": "db8d054a23fe2bba8622d1ac4508459204a3e363b3d0aa35637c556545a344c5"
+      },
+      "compiler_features": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      }
+    },
+    {
+      "name": "deterministic-prepare",
+      "command": [
+        "python3",
+        "tools/probes/authored-android-project/prepare.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-prepared",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/incant_headless-deterministic",
+        "--play-binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/incant_headless-deterministic",
+        "--physics-mode",
+        "deterministic"
+      ],
+      "exit": 0,
+      "seconds": 2.9748065829990082,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-prepare.stdout",
+        "sha256": "e9a9a3222af9a184c0d8f169288814443a2c360b2c452e396e2cbb9531712dae"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-prepare.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fast-prepare",
+      "command": [
+        "python3",
+        "tools/probes/authored-android-project/prepare.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-prepared",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/incant_headless-deterministic",
+        "--play-binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/incant_headless-fast",
+        "--physics-mode",
+        "fast"
+      ],
+      "exit": 0,
+      "seconds": 2.6612415420022444,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-prepare.stdout",
+        "sha256": "a5f6843fe5e00085fb141f94be11324b610a4694a45ec8ec69e0418f8245172b"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-prepare.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "deterministic-export",
+      "command": [
+        "python3",
+        "tools/export_android.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-prepared/authoring/game.json",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-export",
+        "--target",
+        "aarch64-linux-android",
+        "--ndk",
+        "/opt/homebrew/share/android-commandlinetools/ndk/28.2.13676358",
+        "--evidence",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-build-evidence"
+      ],
+      "exit": 0,
+      "seconds": 220.558481166001,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-export.stdout",
+        "sha256": "07a5f406569181684e00cc3691f3ad888d029a47f2a564c396a6d74767bca4fd"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-export.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "deterministic-callers",
+      "command": [
+        "python3",
+        "tools/probes/authored-android-project/verify.py",
+        "--prepared",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-prepared",
+        "--export",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-export",
+        "--export-sha256",
+        "fac676ba878051956764481c832e405d40239f5b8048be1b4185ecf57f3bee76",
+        "--sdk",
+        "/opt/homebrew/share/android-commandlinetools",
+        "--java",
+        "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
+        "--ndk",
+        "/opt/homebrew/share/android-commandlinetools/ndk/28.2.13676358",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-callers",
+        "--remove-authoring",
+        "--port",
+        "5568"
+      ],
+      "exit": 0,
+      "seconds": 19.832072458004404,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-callers.stdout",
+        "sha256": "5c2a26b5522465ea739047e08b00597124782ffa51cc05dbac14199c9a1089cd"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-callers.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fast-export",
+      "command": [
+        "python3",
+        "tools/export_android.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-prepared/authoring/game.json",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-export",
+        "--target",
+        "aarch64-linux-android",
+        "--ndk",
+        "/opt/homebrew/share/android-commandlinetools/ndk/28.2.13676358",
+        "--evidence",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-build-evidence"
+      ],
+      "exit": 0,
+      "seconds": 206.09502083300322,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-export.stdout",
+        "sha256": "247fdcb1c8ed33666017f87ae8cda3dbd61cf338d752fc57fdc0589dcc5e5bc9"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-export.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fast-callers",
+      "command": [
+        "python3",
+        "tools/probes/authored-android-project/verify.py",
+        "--prepared",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-prepared",
+        "--export",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-export",
+        "--export-sha256",
+        "ab4e4f89f7e4709a3f98c637262f33d06cd2baed4828522debcb2171f38112be",
+        "--sdk",
+        "/opt/homebrew/share/android-commandlinetools",
+        "--java",
+        "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home",
+        "--ndk",
+        "/opt/homebrew/share/android-commandlinetools/ndk/28.2.13676358",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-callers",
+        "--remove-authoring",
+        "--port",
+        "5570"
+      ],
+      "exit": 0,
+      "seconds": 19.75566366699786,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-callers.stdout",
+        "sha256": "7e95a91e1d3d75c13709724ccb189490c3f635d27983a782241e6a4a61c4139a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-callers.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "reused_script_check": {
+    "name": "script-tests",
+    "command": [
+      "./tools/cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "ci",
+      "-j2",
+      "-p",
+      "incant_script"
+    ],
+    "exit": 0,
+    "seconds": 12.839920416001405,
+    "stdout": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-002/script-tests.stdout",
+      "sha256": "cdb5acfa78204d0df125bbfa9b1e45fe7c17a31b4325a7332ed76095958eb606"
+    },
+    "stderr": {
+      "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-002/script-tests.stderr",
+      "sha256": "470ecbb99b1c47de6c55e39a2605a795ddaa67ac7a9f601c264dae11581093f2"
+    }
+  },
+  "counts": {
+    "script-tests": {
+      "passed": 186,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 8
+    },
+    "cook-tests": {
+      "passed": 11,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 4
+    },
+    "candidate-cook-tests": {
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "candidate-script-tests": {
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 7
+    },
+    "player-tests": {
+      "passed": 14,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    }
+  },
+  "execution": [
+    {
+      "mode": "deterministic",
+      "export_receipt_sha256": "fac676ba878051956764481c832e405d40239f5b8048be1b4185ecf57f3bee76",
+      "caller_receipt_sha256": "13a4b57039bcec996ecd707d47dd449585424287d2adbc635e07bf49acfe389b",
+      "commands_with_avd": 120,
+      "raw_command_streams_rehashed": 240,
+      "positive_processes": 3,
+      "exact_refusals": 7,
+      "logs_per_positive": 36,
+      "vector_checks_per_positive": 72,
+      "pcm_bytes_per_positive": 76800,
+      "runtime_files": 9,
+      "archive_bytes": 23935068,
+      "caller_bytes": 12908384,
+      "api": "37",
+      "os": "17",
+      "owned_emulator_cleanup": true
+    },
+    {
+      "mode": "fast",
+      "export_receipt_sha256": "ab4e4f89f7e4709a3f98c637262f33d06cd2baed4828522debcb2171f38112be",
+      "caller_receipt_sha256": "567e1962a4c05fea7357b058aeb814cadb918ab1a0fe2bc140e5cfb300b379cd",
+      "commands_with_avd": 120,
+      "raw_command_streams_rehashed": 240,
+      "positive_processes": 3,
+      "exact_refusals": 7,
+      "logs_per_positive": 36,
+      "vector_checks_per_positive": 72,
+      "pcm_bytes_per_positive": 76800,
+      "runtime_files": 9,
+      "archive_bytes": 23926372,
+      "caller_bytes": 12902304,
+      "api": "37",
+      "os": "17",
+      "owned_emulator_cleanup": true
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/authored-android-main180/artifacts.json.gz",
+    "sha256": "7940ca794b1de9087112e9688ef0a56a9d8cdaca029de4170cbe18280d6b2742",
+    "records": 809,
+    "payloads": 288
+  },
+  "external_artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-callers/caller-c",
+      "sha256": "2fe236fb19a1dd7ab2a612e908c311eba8e947845df4727b5e07cf7ce38f3118",
+      "bytes": 12908384
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-export/runtime/libincant_game_player.a",
+      "sha256": "697a6b4a252655a76ac4f1b7e2d9acb213f085a9ad7279a920fc183fb5645faa",
+      "bytes": 23935068
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/deterministic-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "639bfc46ba5d2f956ab5e0d7756f09d3380e94f84223539d4f2f32c2a3e1e65f",
+      "bytes": 393121748
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-callers/caller-c",
+      "sha256": "e8f5085c153a97b7b9d6db8a018c13acfc8ce95affda88a6010a9520f4572860",
+      "bytes": 12902304
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-export/runtime/libincant_game_player.a",
+      "sha256": "a0823d639fe8428cd9a793eb64a03177ff795f674d1b850fa1c4520fb3063552",
+      "bytes": 23926372
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/fast-export/symbols/libincant_game_player.unstripped.a",
+      "sha256": "9176d3472faa7dcc0123e288d8ea659c112ebb52d7266df89a5be83db13b3d23",
+      "bytes": 394314220
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/incant_headless-deterministic",
+      "sha256": "a9d11dceffb77b7ba73112c3f6e837cff3e5c823385746d910913b13c01ff0da",
+      "bytes": 60466224
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-android-main179-003/incant_headless-fast",
+      "sha256": "6bc86a299d18ac58a2109999002ebdaa9e69ce787180a0fc1cc494bf1c67cded",
+      "bytes": 60095744
+    }
+  ],
+  "assertion_source": {
+    "original": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-shipping-002/audit.py",
+    "sha256": "58845866f27cfca0fe797aca5b5dfcad2bb37fb571a056b753830800bd2e7376"
+  },
+  "initial_failure": "Old cooker test expected exact ARM Android refusal. Reviewed test-only correction79557 retains unknown architecture refusals and unchanged production. Original002 failure preserved separately.",
+  "review_state": "Independent final integration review and actualmain ancestry pending",
+  "limits": [
+    "local Android17/API37 ARM emulator CPU only",
+    "NDK API24 compiler identity is not minimum OS execution",
+    "no phone/performance/rendering/mobile platform host/signing/store/phase gate",
+    "static Wasm mobile export unsupported"
+  ]
+}

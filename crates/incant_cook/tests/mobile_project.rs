@@ -9,7 +9,7 @@ use serde_json::json;
 use sha2::{Digest, Sha256};
 
 fn project() -> (Project, String, String) {
-    let mut project = Project::empty("Authored iOS binding");
+    let mut project = Project::empty("Authored mobile binding");
     let mut scene = Scene::new("Main");
     let mut entity = Entity::new("Mover");
     let source = new_id();
@@ -60,6 +60,7 @@ export default { update({instances,chunks,dt}) {
         artifact::TARGET,
         "aarch64-apple-ios-sim",
         "aarch64-apple-ios",
+        "aarch64-linux-android",
     ];
     for target in targets {
         let prepared = prepare_script_scene(&project, &scene_id).unwrap();
@@ -161,7 +162,7 @@ fn explicit_mobile_producer_retains_desktop_and_unverified_destination_refusals(
     let path = root.path().join("game.incant");
     std::fs::write(&path, project.canonical_text().unwrap()).unwrap();
     let mobile_error =
-        "authored mobile project requires the reviewed macOS arm64 to iOS bytecode route";
+        "authored mobile project requires the reviewed macOS arm64 mobile bytecode route";
     let reviewed = artifact::TARGET == "aarch64-apple-darwin"
         && artifact::compatibility::admits(
             artifact::TARGET,
@@ -174,7 +175,18 @@ fn explicit_mobile_producer_retains_desktop_and_unverified_destination_refusals(
             "aarch64-apple-ios-sim",
             Some("authored project export requires native host == target"),
         ),
-        ("mobile", "aarch64-linux-android", Some(mobile_error)),
+        (
+            "native",
+            "aarch64-linux-android",
+            Some("authored project export requires native host == target"),
+        ),
+        (
+            "mobile",
+            "aarch64-linux-android",
+            (!reviewed).then_some(mobile_error),
+        ),
+        ("mobile", "x86_64-linux-android", Some(mobile_error)),
+        ("mobile", "armv7-linux-androideabi", Some(mobile_error)),
         ("mobile", "aarch64-apple-darwin", Some(mobile_error)),
         (
             "mobile",
@@ -218,7 +230,14 @@ fn explicit_mobile_producer_retains_desktop_and_unverified_destination_refusals(
             let receipt: serde_json::Value =
                 serde_json::from_slice(&std::fs::read(output.join("project-export.json")).unwrap())
                     .unwrap();
-            assert_eq!(receipt["producer_kind"], "ios-archive");
+            assert_eq!(
+                receipt["producer_kind"],
+                if target == "aarch64-linux-android" {
+                    "android-archive"
+                } else {
+                    "ios-archive"
+                }
+            );
             assert_eq!(receipt["producer_target"], artifact::TARGET);
             assert_eq!(receipt["script"]["target"], target);
             let scene = std::fs::read(output.join("world.scene")).unwrap();

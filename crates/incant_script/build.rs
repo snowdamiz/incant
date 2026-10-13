@@ -4,6 +4,12 @@ use std::{env, fs, path::Path};
 fn main() {
     let root = Path::new("../..");
     let mut identity = Sha256::new();
+    // The temporary probe admission is part of executable compatibility. Both
+    // the trusted host producer and target consumer must explicitly opt in.
+    identity.update(b"probe-android-bytecode");
+    identity.update([u8::from(
+        env::var_os("CARGO_FEATURE_PROBE_ANDROID_BYTECODE").is_some(),
+    )]);
     let lock = fs::read_to_string(root.join("Cargo.lock")).expect("pinned Cargo.lock");
     for (package, checksum) in [
         (
