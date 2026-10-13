@@ -1,0 +1,189 @@
+{
+ "python": "3.14.8",
+ "plan_sha256": "e35367bf3364f4103bdb8735d650d5a6e817b892fddbaeea58454de9866d081e",
+ "helper_sha256": "f8ec6311314d4c782e409935d2ec5491ab53fcc9d1b74bd19453dc9481b4a7ee",
+ "tools": {
+  "analyze.py": "cba70dccfa9cf7db30c5d1ee6edc43aba46eeac3c390aa3d82bf941c6e5ca3e4",
+  "build.py": "20641c9672c962a6950605c2fcd5d44c530ec76ca0903a18ce48fab9e1cc8287",
+  "common.py": "d27e8feca1a59950f730fb25bf4f9aeaa25913cef2057db0691925ee9944f063",
+  "gpu.py": "66e39aa305a49d88701b2a7c0d7412813792cfedb7b110269db262c106783b2c",
+  "lease.py": "3ef5812a10f75e90d36717b5a7ef5f52fc076e9927b93ce106a14c905dcb8582",
+  "selfcheck.py": "294529dcc784fac5840fda799e851a68c5302560412f59713dca42807d3a2555",
+  "test_analyze.py": "111ad4bd9d79443f65c24f5074f3f9f86e20ea31c3584820632be2c56df45278",
+  "test_lifecycle.py": "5005ac36b5e486cc83a81403d29c4e783ca56e5b1848ebd99d56aaa9314f9821",
+  "test_source.py": "85e5d633a8c88827f013751ec65a50bfc54194a4461d83b70503c2e7f3b56873"
+ },
+ "syntax": "all tools parse",
+ "plan": {
+  "case_frames_are_scene_plus_ui": true,
+  "frames_match_total": true,
+  "frames_within_96": true,
+  "reserve_frames_consistent": true,
+  "png_names_unique": true,
+  "png_names_case_prefixed": true,
+  "pngs_match_total_within_16": true,
+  "reserve_pngs_consistent": true,
+  "png_size_960x540": true,
+  "one_run_per_case": true,
+  "order_covers_cases_once": true,
+  "builds_locked_offline_ci_j2": true,
+  "builds_feature_free": true,
+  "review_build_names_binary": true,
+  "builds_refuse_cooked_and_metalfx": true,
+  "backend_env_metal": true,
+  "case_checks_nonempty_unique": true,
+  "no_source_pinned_in_plan": true,
+  "build_grant_documented": true,
+  "gpu_grant_documented": true,
+  "build_inputs_cover_cargo_sources": true
+ },
+ "helper": {
+  "tests_match_plan": true,
+  "limits_match_plan": true,
+  "png_names_per_case_match_plan": true,
+  "contract_checks_per_case_match_plan": true,
+  "size_960x540": true,
+  "output_variable_matches_plan": true,
+  "policy_matches_plan": true,
+  "analyze_ui_button_matches": true,
+  "analyze_ui_label_matches": true,
+  "analyze_ui_interior_matches": true,
+  "analyze_viewport_matches": true,
+  "analyze_edge_threshold_matches": true,
+  "observed": {
+   "tests": [
+    "probe",
+    "stationary",
+    "motion",
+    "transitions"
+   ],
+   "limits": {
+    "probe": 0,
+    "stationary": 36,
+    "motion": 24,
+    "transitions": 29
+   },
+   "pngs": {
+    "probe": [],
+    "stationary": [
+     "stationary-full.png",
+     "stationary-drs50.png",
+     "stationary-up50.png",
+     "stationary-phases.png",
+     "stationary-detail.png",
+     "stationary-activity.png"
+    ],
+    "motion": [
+     "motion-full.png",
+     "motion-up50.png",
+     "motion-detail.png"
+    ],
+    "transitions": [
+     "transitions-full.png",
+     "transitions-up50.png",
+     "transitions-strip.png",
+     "transitions-cut.png"
+    ]
+   },
+   "checks": {
+    "probe": [
+     "adapter_backend_metal",
+     "owner_refused_before_startup_opt_in",
+     "startup_opt_in_succeeds",
+     "startup_opt_in_idempotent",
+     "review_policy_valid",
+     "five_invalid_policies_refused",
+     "owner_refuses_invalid_policies",
+     "owner_accepts_review_policy"
+    ],
+    "stationary": [
+     "full_control_has_no_upscale_or_resolution_owner",
+     "drs_control_internal_480x270_without_upscaling",
+     "up_one_owner_phases_history_and_sizes",
+     "ui_button_interior_identical_on_all_ten_ui_frames",
+     "frames_nonblank"
+    ],
+    "motion": [
+     "up_history_survives_object_and_camera_motion",
+     "controls_plain_and_drs_480x270",
+     "frames_nonblank"
+    ],
+    "transitions": [
+     "internal_scale_changes_keep_owner_and_history_then_cut_resets",
+     "controls_plain_and_drs_480x270",
+     "chrome_outside_viewport_identical",
+     "frames_nonblank"
+    ]
+   }
+  }
+ },
+ "refusals": {
+  "commands": {
+   "lease.py acquire": {
+    "exit": 1,
+    "needs": "build-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "lease.py release": {
+    "exit": 1,
+    "needs": "build-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "build.py checkout": {
+    "exit": 1,
+    "needs": "build-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "build.py toolchain": {
+    "exit": 1,
+    "needs": "build-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "build.py review": {
+    "exit": 1,
+    "needs": "build-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "build.py lint": {
+    "exit": 1,
+    "needs": "build-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list": {
+    "exit": 1,
+    "needs": "review-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review probe": {
+    "exit": 1,
+    "needs": "review-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review stationary": {
+    "exit": 1,
+    "needs": "review-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "gpu.py release": {
+    "exit": 1,
+    "needs": "review-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "analyze.py check": {
+    "exit": 1,
+    "needs": "review-ready.json",
+    "refused_for_absent_grant": true
+   },
+   "analyze.py publish": {
+    "exit": 1,
+    "needs": "review-ready.json",
+    "refused_for_absent_grant": true
+   }
+  },
+  "all_refused_for_absent_grant": true,
+  "evidence_directory_still_absent": true,
+  "git_status_unchanged": true,
+  "global_gpu_lock_untouched": true
+ },
+ "all_pass": true
+}

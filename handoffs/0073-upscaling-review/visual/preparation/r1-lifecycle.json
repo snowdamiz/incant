@@ -1,0 +1,178 @@
+{
+  "cpu_only": true,
+  "passed": true,
+  "tests_run": 17,
+  "failures": 0,
+  "errors": 0,
+  "python": "3.14.8",
+  "records": [
+    {
+      "test": "build_sigterm_records_then_raises",
+      "pid": 94157,
+      "exit": -9,
+      "timed_out": false,
+      "interrupted_by": [
+        "SIGTERM"
+      ],
+      "group_empty_after": true,
+      "ok": null,
+      "pid_and_group_absent": true,
+      "keyboard_interrupt_after_recording": true
+    },
+    {
+      "test": "build_ok",
+      "pid": 94173,
+      "exit": 0,
+      "timed_out": false,
+      "interrupted_by": [],
+      "group_empty_after": true,
+      "ok": null,
+      "pid_and_group_absent": true
+    },
+    {
+      "test": "build_slow",
+      "pid": 94174,
+      "exit": -9,
+      "timed_out": true,
+      "interrupted_by": [],
+      "group_empty_after": true,
+      "ok": null,
+      "pid_and_group_absent": true
+    },
+    {
+      "test": "busy_shared_lock",
+      "refused": "native-gpu.lock is held",
+      "charged": false
+    },
+    {
+      "test": "child_starts_with_empty_signal_mask",
+      "pid": 94175,
+      "exit": 0,
+      "timed_out": false,
+      "interrupted_by": [],
+      "group_empty_after": true,
+      "ok": true,
+      "pid_and_group_absent": true,
+      "child_blocked_signals": []
+    },
+    {
+      "test": "exec_failure_recorded_and_charged",
+      "pid": null,
+      "exit": null,
+      "timed_out": false,
+      "interrupted_by": [],
+      "group_empty_after": true,
+      "ok": false,
+      "pid_and_group_absent": true,
+      "launch_error": "OSError(8, 'Exec format error')"
+    },
+    {
+      "test": "frame_budget",
+      "refused": "frame budget",
+      "charged": false
+    },
+    {
+      "test": "gpu_debit_is_durable_before_launch",
+      "pid": 94177,
+      "exit": 0,
+      "timed_out": false,
+      "interrupted_by": [],
+      "group_empty_after": true,
+      "ok": true,
+      "pid_and_group_absent": true,
+      "child_saw_its_debit": true
+    },
+    {
+      "test": "gpu_failure_latches_stop_and_keeps_debit",
+      "pid": 94178,
+      "exit": 1,
+      "timed_out": false,
+      "interrupted_by": [],
+      "group_empty_after": true,
+      "ok": false,
+      "pid_and_group_absent": true,
+      "later_child_refused_without_debit": true
+    },
+    {
+      "test": "gpu_sighup_records_then_raises",
+      "pid": 94180,
+      "exit": -9,
+      "timed_out": false,
+      "interrupted_by": [
+        "SIGHUP"
+      ],
+      "group_empty_after": true,
+      "ok": false,
+      "pid_and_group_absent": true,
+      "keyboard_interrupt_after_recording": true
+    },
+    {
+      "test": "gpu_sigint_records_then_raises",
+      "pid": 94183,
+      "exit": -9,
+      "timed_out": false,
+      "interrupted_by": [
+        "SIGINT"
+      ],
+      "group_empty_after": true,
+      "ok": false,
+      "pid_and_group_absent": true,
+      "keyboard_interrupt_after_recording": true
+    },
+    {
+      "test": "gpu_sigterm_records_then_raises",
+      "pid": 94188,
+      "exit": -9,
+      "timed_out": false,
+      "interrupted_by": [
+        "SIGTERM"
+      ],
+      "group_empty_after": true,
+      "ok": false,
+      "pid_and_group_absent": true,
+      "keyboard_interrupt_after_recording": true
+    },
+    {
+      "test": "gpu_timeout_kills_group",
+      "pid": 94190,
+      "exit": -9,
+      "timed_out": true,
+      "interrupted_by": [],
+      "group_empty_after": true,
+      "ok": false,
+      "pid_and_group_absent": true
+    },
+    {
+      "test": "not_executable",
+      "refused": "not executable",
+      "charged": false
+    },
+    {
+      "test": "png_budget",
+      "refused": "PNG budget",
+      "charged": false
+    },
+    {
+      "test": "release_after_children",
+      "latch": {
+        "children": 1,
+        "debits": 1,
+        "frames_debited": 1,
+        "owned_processes": [],
+        "ledger_pids_alive": [],
+        "debits_without_ledger_row": []
+      },
+      "later_child_refused": true
+    },
+    {
+      "test": "release_latch",
+      "refused": "already released",
+      "charged": false
+    },
+    {
+      "test": "stop_latch",
+      "refused": "stop.json",
+      "charged": false
+    }
+  ]
+}

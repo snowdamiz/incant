@@ -10,14 +10,18 @@ Adapted from handoff 0068's committed, root-reviewed tools/selfcheck.py.
 1. Every tool parses (ast only; no bytecode is written).
 2. plan.json is consistent: case frames are scene plus UI submissions and add up
    to its totals within 96; PNG names are unique, case-prefixed and within 16;
-   builds are locked, offline, ci, -j2 and feature-free; the order covers every
-   case once.
+   every case lists unique contract checks; builds are locked, offline, ci, -j2,
+   feature-free and refuse cooked-* and native-metalfx; no source is pinned in
+   the plan (only root's build grant names one); both grants are documented; the
+   order covers every case once.
 3. The Rust helper agrees with the plan: test names, Report::open limits, PNG
-   names per case, the 960x540 size, the output variable, the review policy, and
-   the constants analyze.py mirrors (UI rectangles, viewport, edge threshold).
-4. With the grant absent, every guarded command refuses with the grant message,
-   creates no evidence directory, leaves `git status` unchanged and leaves the
-   shared native-gpu.lock untouched.
+   names and contract check names per case, the 960x540 size, the output
+   variable, the review policy, and the constants analyze.py mirrors (UI
+   rectangles, viewport, edge threshold).
+4. With no grant present, every guarded command refuses naming the grant it
+   needs (build-ready.json for lease/build steps, review-ready.json for GPU and
+   analysis steps), creates no evidence directory, leaves `git status` unchanged
+   and leaves the shared native-gpu.lock untouched.
 """
 
 import ast
@@ -32,10 +36,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import analyze  # noqa: E402
 import common as c  # noqa: E402
 
-COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "checkout"],
-            ["build.py", "toolchain"], ["build.py", "review"], ["build.py", "lint"],
-            ["gpu.py", "list"], ["gpu.py", "review", "probe"], ["gpu.py", "review", "stationary"],
-            ["gpu.py", "release"], ["analyze.py", "check"], ["analyze.py", "publish"]]
+BUILD_COMMANDS = [["lease.py", "acquire"], ["lease.py", "release"], ["build.py", "checkout"],
+                  ["build.py", "toolchain"], ["build.py", "review"], ["build.py", "lint"]]
+GPU_COMMANDS = [["gpu.py", "list"], ["gpu.py", "review", "probe"], ["gpu.py", "review", "stationary"],
+                ["gpu.py", "release"], ["analyze.py", "check"], ["analyze.py", "publish"]]
 
 
 def plan_checks(p):
@@ -63,7 +67,17 @@ def plan_checks(p):
         "builds_feature_free": not any("feature" in arg for arg in
                                        p["builds"]["review"] + p["builds"]["lint"] + flags),
         "review_build_names_binary": p["builds"]["review"][-3:] == ["--test", p["review"]["binary"], "--no-run"],
+        "builds_refuse_cooked_and_metalfx": sorted(p["builds"]["forbidden_feature_prefixes"])
+        == ["cooked-", "native-metalfx"],
         "backend_env_metal": p["review"]["backend_env"] == {"INCANT_EXPECT_GPU_BACKEND": "Metal"},
+        "case_checks_nonempty_unique": all(case["checks"] and len(case["checks"]) == len(set(case["checks"]))
+                                           for case in cases.values()),
+        "no_source_pinned_in_plan": not ({"producer", "producer_manifest", "source_commit"} & set(p)),
+        "build_grant_documented": {"source_commit", "source_freeze", "visual_tree", "target"}
+        <= set(p["grants"]["build"]["fields"]),
+        "gpu_grant_documented": {"visual_tree", "build_record_sha256"} <= set(p["grants"]["gpu"]["fields"]),
+        "build_inputs_cover_cargo_sources": sorted(p["build_inputs"]) == sorted(
+            ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"]),
     }
 
 
@@ -82,10 +96,12 @@ def helper_checks(p):
     tests = re.findall(r"#\[test\]\s*#\[ignore[^\]]*\]\s*fn (\w+)\(", source)
     opened = {m[0]: int(m[1]) for m in re.findall(r'Report::open\("(\w+)", (\d+)\)', source)}
     bodies = re.split(r"\n#\[test\]", source)[1:]
-    pngs = {}
+    pngs, checks = {}, {}
     for body in bodies:
         name = re.search(r"fn (\w+)\(", body)[1]
         pngs[name] = re.findall(r'report\.png\("([\w-]+\.png)"', body)
+        block = re.search(r"let checks = \[(.*?)\n    \];", body, re.S)
+        checks[name] = re.findall(r'\(\s*"([a-z0-9_]+)",', block[1]) if block else []
     size = re.search(r"const SIZE: \[u32; 2\] = \[(\d+), (\d+)\];", source)
     review = rust_const(source, "REVIEW") or ""
     policy = p["policy"]
@@ -95,6 +111,8 @@ def helper_checks(p):
         "limits_match_plan": all(opened.get(name) == case["frames"] for name, case in cases.items()),
         "png_names_per_case_match_plan": all(sorted(pngs.get(name, [])) == sorted(case["pngs"])
                                              for name, case in cases.items()),
+        "contract_checks_per_case_match_plan": all(checks.get(name) == case["checks"]
+                                                   for name, case in cases.items()),
         "size_960x540": size is not None and [int(size[1]), int(size[2])] == [960, 540],
         "output_variable_matches_plan": f'const OUTPUT_ENV: &str = "{p["review"]["output_env"]}";' in source,
         "policy_matches_plan": numbers(review) == [policy[k] for k in (
@@ -106,7 +124,7 @@ def helper_checks(p):
         "analyze_viewport_matches": numbers(viewport)[:4] == list(analyze.VIEWPORT_RECT)
         and numbers(viewport)[:4] == p["review"]["cases"]["transitions"]["viewport"]["rect"],
         "analyze_edge_threshold_matches": numbers(rust_const(source, "EDGE_THRESHOLD")) == [analyze.EDGE_THRESHOLD],
-        "observed": {"tests": tests, "limits": opened, "pngs": pngs},
+        "observed": {"tests": tests, "limits": opened, "pngs": pngs, "checks": checks},
     }
 
 
@@ -116,12 +134,13 @@ def refusal_checks():
     before = c.git("status", "--porcelain", "--untracked-files=all")
     lock_before = c.GLOBAL_LOCK.stat() if c.GLOBAL_LOCK.exists() else None
     results = {}
-    for command in COMMANDS:
-        run = subprocess.run([sys.executable, "-I", "-B", str(c.TOOLS / command[0]), *command[1:]],
-                             capture_output=True, text=True, timeout=60)
-        results[" ".join(command)] = {
-            "exit": run.returncode,
-            "refused_for_absent_grant": run.returncode != 0 and "review-ready.json is absent" in run.stderr}
+    for needed, commands in (("build-ready.json", BUILD_COMMANDS), ("review-ready.json", GPU_COMMANDS)):
+        for command in commands:
+            run = subprocess.run([sys.executable, "-I", "-B", str(c.TOOLS / command[0]), *command[1:]],
+                                 capture_output=True, text=True, timeout=60)
+            results[" ".join(command)] = {
+                "exit": run.returncode, "needs": needed,
+                "refused_for_absent_grant": run.returncode != 0 and f"{needed} is absent" in run.stderr}
     lock_after = c.GLOBAL_LOCK.stat() if c.GLOBAL_LOCK.exists() else None
     same_lock = (lock_before is None and lock_after is None) or (
         lock_before is not None and lock_after is not None

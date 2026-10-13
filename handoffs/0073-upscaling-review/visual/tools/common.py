@@ -3,11 +3,16 @@
 Adapted from handoff 0068's committed, root-reviewed tools/common.py (read-only
 reuse). Importing this module has no side effects.
 
-Every mutating entry point calls grant() first. Until root's review-ready.json
-exists, tools refuse without creating any file or directory. The grant must
-name this packet and stage, a full source commit, the committed visual tree,
-a dedicated Cargo target and at least one prior release pin. The packet's GPU
-release latch and stop latch make GPU steps refuse afterwards.
+Two root grants gate the stage, and every mutating entry point checks its grant
+first; without it, tools refuse without creating any file or directory.
+- build-ready.json (supervised CPU build): this packet, a committed source as a
+  40-hex commit (never a branch name), root's source freeze by path and SHA-256,
+  the committed visual tree and a dedicated Cargo target. Every build input of
+  the exported commit must equal that freeze (build.py checkout).
+- review-ready.json (GPU review, written after the build): this packet, the
+  visual tree, the SHA-256 of the frozen build record and at least one prior
+  release pin.
+The packet's GPU release latch and stop latch make GPU steps refuse afterwards.
 
 Child environments are constructed from scratch: HOME is passed through (its
 value is never recorded) and every other variable is an explicit override from
@@ -35,6 +40,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 PACKET = "0073-upscaling-review"
 STAGE = "upscaling-visual"
+BUILD_STAGE = "upscaling-build"
 PACKET_DIR = ROOT / "handoffs" / PACKET
 VISUAL = PACKET_DIR / "visual"
 TOOLS = VISUAL / "tools"
@@ -46,6 +52,7 @@ CODEX = Path.home() / ".codex"
 EVIDENCE_ROOT = CODEX / "incant-evidence"
 EVIDENCE = EVIDENCE_ROOT / "0073-upscaling-visual"
 GRANT = EVIDENCE / "review-ready.json"
+BUILD_GRANT = EVIDENCE / "build-ready.json"
 LEASE = EVIDENCE / "target-lease.json"
 LATCH = EVIDENCE / "gpu-released.json"
 STOP = EVIDENCE / "stop.json"
@@ -78,6 +85,7 @@ OVERRIDES = {
     "INCANT_EXPECT_GPU_BACKEND": "Metal, enforced by tests/support::checked",
 }
 HEX40 = re.compile(r"[0-9a-f]{40}")
+HEX64 = re.compile(r"[0-9a-f]{64}")
 # Interrupts that stay pending while an attempt is debited, run and recorded.
 BLOCKED = {signal.SIGINT, signal.SIGTERM, signal.SIGHUP}
 
@@ -129,14 +137,14 @@ def plan():
     return read_json(PLAN_PATH)
 
 
-def git(*args, cwd=ROOT):
-    return subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True,
+def git(*args, cwd=None):
+    return subprocess.run(["git", *args], cwd=cwd or ROOT, capture_output=True, text=True,
                           check=True).stdout
 
 
 def refuse(reason):
-    """Record a refusal only once the grant exists; before it, touch nothing."""
-    if GRANT.is_file():
+    """Record a refusal only once a grant exists; before any grant, touch nothing."""
+    if GRANT.is_file() or BUILD_GRANT.is_file():
         with open(REFUSALS, "a") as log:
             log.write(json.dumps({"at": now(), "reason": reason, "argv": sys.argv[1:]}) + "\n")
     raise SystemExit("refused: " + reason)
@@ -152,53 +160,112 @@ def target_allowed(value):
             and path != EVIDENCE and ROOT not in path.parents)
 
 
+def release_pins(data):
+    return [k for k in data if k.startswith("prior_") and k.endswith("_path") and "release" in k]
+
+
+def build_grant():
+    """Root's supervised CPU build grant: a committed source (40-hex commit, never
+    a branch name), root's source freeze by path and SHA-256, the committed visual
+    tree and an allowed target."""
+    if not BUILD_GRANT.is_file():
+        raise SystemExit("refused: build-ready.json is absent; preparation only")
+    data = read_json(BUILD_GRANT)
+    freeze = data.get("source_freeze")
+    if (data.get("packet") != PACKET or data.get("stage") != BUILD_STAGE
+            or not HEX40.fullmatch(str(data.get("source_commit", "")))
+            or not isinstance(freeze, dict) or not str(freeze.get("path", "")).startswith("/")
+            or not HEX64.fullmatch(str(freeze.get("sha256", "")))
+            or not HEX40.fullmatch(str(data.get("visual_tree", "")))
+            or not target_allowed(data.get("target"))):
+        refuse("build-ready.json does not name this packet and build stage, a 40-hex source "
+               "commit, root's source freeze path and SHA-256, the visual tree and an allowed "
+               "~/.codex/*-target")
+    return data, sha(BUILD_GRANT)
+
+
 def grant():
-    """Root's grant must name this packet and stage, a source commit, the committed
-    visual tree, an allowed target and at least one prior release pin."""
+    """Root's GPU review grant, written after the build: this packet, the committed
+    visual tree, the SHA-256 of the frozen build record and a prior release pin."""
     if not GRANT.is_file():
         raise SystemExit("refused: review-ready.json is absent; preparation only")
     data = read_json(GRANT)
-    pins = [k for k in data if k.startswith("prior_") and k.endswith("_path")]
     if (data.get("packet") != PACKET or data.get("stage") != STAGE
-            or not HEX40.fullmatch(str(data.get("source_commit", "")))
             or not HEX40.fullmatch(str(data.get("visual_tree", "")))
-            or not target_allowed(data.get("target"))
-            or not any("release" in k for k in pins)):
-        refuse("review-ready.json does not name this packet/stage, source commit, visual "
-               "tree, an allowed ~/.codex/*-target and a prior release pin")
+            or not HEX64.fullmatch(str(data.get("build_record_sha256", "")))
+            or not release_pins(data)):
+        refuse("review-ready.json does not name this packet and review stage, the visual tree, "
+               "the build record SHA-256 and a prior release pin")
     return data, sha(GRANT)
 
 
-def target():
-    return Path(grant()[0]["target"])
-
-
-def gate(after_gpu_release=False):
-    """Grant, then the release latch, the stop latch, then the lease (held,
-    unreleased, same grant). Only CPU-only steps may pass after_gpu_release=True."""
-    data, grant_sha = grant()
-    if LATCH.exists() and not after_gpu_release:
+def build_gate():
+    """Build grant, no GPU release or stop latch, and the build lease (held,
+    unreleased, taken under this build grant)."""
+    data, grant_sha = build_grant()
+    if LATCH.exists():
         refuse("GPU and target already released by this packet")
-    if STOP.exists() and not after_gpu_release:
+    if STOP.exists():
         refuse("a failed step latched stop.json; only release and analysis may run")
     if not LEASE.is_file():
         refuse("target lease absent; run lease.py acquire first")
     lease = read_json(LEASE)
     if lease.get("released_at") or lease.get("grant_sha256") != grant_sha:
-        refuse("lease released, or the grant changed since the lease was taken")
+        refuse("lease released, or the build grant changed since the lease was taken")
     return data, grant_sha
 
 
-def tools_identity():
+def gate():
+    """GPU grant, then the release latch and the stop latch. GPU children need no
+    Cargo target: they run the frozen binary the grant binds by its build record."""
+    data, grant_sha = grant()
+    if LATCH.exists():
+        refuse("GPU and target already released by this packet")
+    if STOP.exists():
+        refuse("a failed step latched stop.json; only release and analysis may run")
+    return data, grant_sha
+
+
+def granted_target():
+    """The build grant's target when one is readable; never raises."""
+    try:
+        data = read_json(BUILD_GRANT)
+    except (OSError, ValueError):
+        return None
+    value = data.get("target") if isinstance(data, dict) else None
+    return Path(value) if target_allowed(value) else None
+
+
+def prior_receipts(data, required):
+    """Every prior_<name>_path / _sha256 pin must verify, and every pinned release
+    body must list no live process."""
+    alive_fields = ("owned_processes", "owned_processes_alive", "ledger_pids_alive",
+                    "target_users", "processes_on_target_at_release")
+    pins = {}
+    for key, value in data.items():
+        if key.startswith("prior_") and key.endswith("_path"):
+            name = key[len("prior_"):-len("_path")]
+            path = Path(value)
+            pins[name] = {"path": value, "expected": data.get("prior_" + name + "_sha256"),
+                          "sha256": sha(path) if path.is_file() else None}
+    releases = sorted(name for name in pins if "release" in name)
+    ok = (bool(releases) or not required) and all(
+        p["expected"] and p["sha256"] == p["expected"] for p in pins.values())
+    bodies = {name: read_json(pins[name]["path"]) for name in releases} if ok else {}
+    alive = {name: {k: body[k] for k in alive_fields if k in body} for name, body in bodies.items()}
+    ok = ok and all(v == [] for fields in alive.values() for v in fields.values())
+    return {"pins": pins, "release_pins": releases, "release_alive_fields": alive}, ok
+
+
+def tools_identity(granted_tree):
     """The committed visual tree is what runs: no local edits or untracked files,
     and HEAD's tree for it is the one the grant names."""
     dirty = git("status", "--porcelain", "--untracked-files=all", "--", VISUAL_PATH).strip()
     if dirty:
         refuse("visual tools, plan or helper differ from HEAD: " + dirty[:300])
     tree = git("rev-parse", "HEAD:" + VISUAL_PATH).strip()
-    granted = read_json(GRANT)["visual_tree"] if GRANT.is_file() else None
-    if granted is not None and tree != granted:
-        refuse(f"HEAD visual tree {tree} is not the granted {granted}")
+    if tree != granted_tree:
+        refuse(f"HEAD visual tree {tree} is not the granted {granted_tree}")
     return {"head": git("rev-parse", "HEAD").strip(), "visual_tree": tree,
             "plan_sha256": sha(PLAN_PATH), "helper_sha256": sha(HELPER_SOURCE)}
 

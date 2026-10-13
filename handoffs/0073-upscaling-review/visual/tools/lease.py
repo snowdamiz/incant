@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
-"""Exclusive Cargo target lease for the 0073 upscaling visual stage. Standard library only.
+"""Exclusive Cargo target lease for the 0073 supervised CPU build. Standard library only.
 
 Adapted from handoff 0068's committed, root-reviewed tools/lease.py (read-only reuse).
 
-  python3 -I -B lease.py acquire   # only after root's review-ready.json grant
-  python3 -I -B lease.py release   # after gpu.py release and the last owned build
+  python3 -I -B lease.py acquire   # only after root's build-ready.json grant
+  python3 -I -B lease.py release   # after the last owned build (review, optional lint)
 
-Acquisition verifies every prior receipt the grant pins as a
-prior_<name>_path / prior_<name>_sha256 pair, requires every pinned release body
-to list no live processes, and requires that no cargo/rustc runs on the target
-or child checkout and no binary runs from the target. Release leaves the target
-in place as a warm cache; nothing is deleted.
+The lease covers only the CPU build: it is taken under build-ready.json, every
+build step requires it held and unreleased under that same grant, and it is
+released before any GPU step (gpu.py list refuses while it is held). GPU children
+run the frozen binary and never use the target.
+
+Acquisition verifies every prior receipt the build grant pins as a
+prior_<name>_path / prior_<name>_sha256 pair (pinned release bodies must list no
+live process) and requires that no cargo/rustc runs on the target or child
+checkout and no binary runs from the target. Release leaves the target in place
+as a warm cache; nothing is deleted.
 """
 
 import json
@@ -23,8 +28,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import common as c  # noqa: E402
 
 BUILDERS = ("cargo", "rustc", "rustdoc", "clippy-driver", "cargo-clippy", "rustup")
-ALIVE_FIELDS = ("owned_processes", "owned_processes_alive", "ledger_pids_alive", "target_users",
-                "processes_on_target_at_release")
 
 
 def target_processes(target):
@@ -46,68 +49,45 @@ def target_processes(target):
     return found
 
 
-def prior_receipts(grant):
-    """Every pin must verify; every pinned release body must list no live process."""
-    pins = {}
-    for key, value in grant.items():
-        if key.startswith("prior_") and key.endswith("_path"):
-            name = key[len("prior_"):-len("_path")]
-            expected = grant.get("prior_" + name + "_sha256")
-            path = Path(value)
-            pins[name] = {"path": value, "expected": expected,
-                          "sha256": c.sha(path) if path.is_file() else None}
-    releases = sorted(name for name in pins if "release" in name)
-    ok = bool(releases) and all(p["expected"] and p["sha256"] == p["expected"] for p in pins.values())
-    bodies = {name: c.read_json(pins[name]["path"]) for name in releases} if ok else {}
-    alive = {name: {k: body[k] for k in ALIVE_FIELDS if k in body} for name, body in bodies.items()}
-    ok = ok and all(v == [] for fields in alive.values() for v in fields.values())
-    return {"pins": pins, "release_pins": releases, "release_alive_fields": alive}, ok
-
-
 def acquire():
-    grant, grant_sha = c.grant()
+    grant, grant_sha = c.build_grant()
     if c.LATCH.exists():
         c.refuse("GPU and target already released by this packet")
     if c.LEASE.exists():
-        c.refuse("lease already recorded")
-    tools = c.tools_identity()
-    prior, ok = prior_receipts(grant)
+        c.refuse("lease already recorded; it is never re-acquired")
+    tools = c.tools_identity(grant["visual_tree"])
+    prior, ok = c.prior_receipts(grant, required=False)
     if not ok:
         print(json.dumps(prior, indent=1))
-        c.refuse("the grant's prior-release receipts do not verify")
+        c.refuse("the build grant's prior receipts do not verify")
     target = Path(grant["target"])
     running = target_processes(target)
     if running:
         c.refuse("processes already use the target: " + json.dumps(running)[:400])
     c.write_new_json(c.LEASE, {
-        "packet": c.PACKET, "stage": c.STAGE,
-        "holder": "claude (Opus 5.5, Max thinking) for handoff 0073 visual stage",
-        "target_dir": str(target), "assigned_by": "root via review-ready.json",
+        "packet": c.PACKET, "stage": c.BUILD_STAGE,
+        "holder": "claude (Opus 5.5, Max thinking) for handoff 0073 supervised CPU build",
+        "target_dir": str(target), "assigned_by": "root via build-ready.json",
         "grant_sha256": grant_sha, "grant": grant, "prior_receipts": prior, "tools": tools,
         "brief_sha256": c.sha(c.PACKET_DIR / "brief.md"), "worktree": str(c.ROOT),
         "child_checkout": str(c.CHECKOUT), "acquired_at": c.now(),
         "processes_on_target_at_acquire": running,
         "rules": ["./tools/cargo only, --locked --offline --profile ci -j2, default features",
                   "builds from the git-archive child checkout of the granted commit only",
+                  "every build input must equal root's granted source freeze",
                   "one bounded process group at a time under the packet flock",
-                  "GPU children also hold the shared native-gpu.lock, non-blocking",
-                  "frames and PNGs are debited and fsynced before every GPU launch",
-                  "serial offscreen GPU children; no window, desktop capture, audio or accounts",
-                  "<= 96 new frames including failures, <= 16 PNGs, <= 960x540",
-                  "review cases <= 120 s each, listing <= 60 s",
+                  "no GPU child while the lease is held; release it before gpu.py list",
                   "binaries and evidence only under " + str(c.EVIDENCE)]})
     print(c.LEASE.read_text())
 
 
 def release():
-    grant, _ = c.grant()
+    grant, _ = c.build_grant()
     if not c.LEASE.is_file():
         c.refuse("no lease to release")
     lease = c.read_json(c.LEASE)
     if lease.get("released_at"):
         raise SystemExit("already released")
-    if not c.LATCH.exists():
-        c.refuse("release the GPU (gpu.py release) before the target")
     remaining = target_processes(Path(grant["target"]))
     if remaining:
         c.refuse("processes still use the target: " + json.dumps(remaining)[:400])

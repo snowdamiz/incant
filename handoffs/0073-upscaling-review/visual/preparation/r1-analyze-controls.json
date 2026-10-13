@@ -1,0 +1,183 @@
+{
+  "cpu_only": true,
+  "passed": true,
+  "tests_run": 17,
+  "failures": 0,
+  "errors": 0,
+  "python": "3.14.8",
+  "records": [
+    {
+      "test": "bad_hash",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case stationary: stationary-detail.png differs from the ledger hash",
+        "case stationary: stationary-detail.png differs from the report hash",
+        "case stationary: stationary-detail.png decoded RGBA differs from the report",
+        "case stationary: tile stationary-detail.png#0 (stationary-full.png, crop wires) differs from its raw frame"
+      ]
+    },
+    {
+      "test": "cli_exit_codes",
+      "check_pass": 0,
+      "check_fail": 1,
+      "publish_refused": 1
+    },
+    {
+      "test": "complete_current_evidence",
+      "exit": 0,
+      "tiles": 19,
+      "published_pngs": 13
+    },
+    {
+      "test": "failed_child",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case motion: the ledger marks the child unsuccessful",
+        "case motion: child exit 101, timeout False, interrupts [], group empty True"
+      ]
+    },
+    {
+      "test": "false_chrome_identity",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case transitions: viewport chrome differs between raw frames"
+      ]
+    },
+    {
+      "test": "false_contract",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case transitions: contract checks empty or not all true (false: ['frames_nonblank'])"
+      ]
+    },
+    {
+      "test": "false_statistic",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case stationary: helper statistic drs50 is not reproduced from the raw frames"
+      ]
+    },
+    {
+      "test": "false_tile",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case stationary: tile stationary-detail.png#6 (stationary-up50.png, crop card_edge) differs from its raw frame"
+      ]
+    },
+    {
+      "test": "false_ui_identity",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case stationary: UI interior differs between raw frames"
+      ]
+    },
+    {
+      "test": "missing_case",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "review children ['probe', 'stationary', 'transitions'] are not the plan cases ['probe', 'stationary', 'motion', 'transitions'] once each in order",
+        "case motion: not exactly one debit of the plan's frames and PNGs",
+        "case motion: missing or duplicate review child (0 rows)"
+      ]
+    },
+    {
+      "test": "missing_png",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case motion: output holds ['events.jsonl', 'motion-full.png', 'motion-up50.png', 'report.json'], plan ['events.jsonl', 'motion-detail.png', 'motion-full.png', 'motion-up50.png', 'report.json']",
+        "case motion: motion-detail.png is absent",
+        "case motion: tile motion-detail.png#11 (motion-up50.png, crop pan) cannot be re-cut",
+        "case motion: tile motion-detail.png#12 (motion-full.png, crop pan) cannot be re-cut"
+      ]
+    },
+    {
+      "test": "missing_report",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case transitions: report.json is absent"
+      ]
+    },
+    {
+      "test": "replaced_build_record",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "the build record is not the one review-ready.json binds"
+      ]
+    },
+    {
+      "test": "stale_or_superseded_summary",
+      "publish_refused_without_analysis": true,
+      "publish_refused_stale": true,
+      "publish_refused_after_newer_failure": true
+    },
+    {
+      "test": "stop_latch",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "stop latched: {\"reason\": \"synthetic\"}"
+      ]
+    },
+    {
+      "test": "zero_verdict_empty_checks",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "case probe: contract checks [] are not exactly the plan's ['adapter_backend_metal', 'five_invalid_policies_refused', 'owner_accepts_review_policy', 'owner_refused_before_startup_opt_in', 'owner_refuses_invalid_policies', 'review_policy_valid', 'startup_opt_in_idempotent', 'startup_opt_in_succeeds']",
+        "case probe: contract checks empty or not all true (false: [])"
+      ]
+    },
+    {
+      "test": "zero_verdict_empty_ledger",
+      "exit": 1,
+      "verdict": "fail",
+      "diagnostic_summary_retained": true,
+      "publish_refused": true,
+      "problems": [
+        "expected one listing child, found 0",
+        "review children [] are not the plan cases ['probe', 'stationary', 'motion', 'transitions'] once each in order",
+        "case probe: not exactly one debit of the plan's frames and PNGs",
+        "case probe: missing or duplicate review child (0 rows)",
+        "case stationary: not exactly one debit of the plan's frames and PNGs",
+        "case stationary: missing or duplicate review child (0 rows)"
+      ]
+    }
+  ]
+}

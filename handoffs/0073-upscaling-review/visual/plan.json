@@ -1,24 +1,40 @@
 {
   "packet": "0073-upscaling-review",
   "stage": "upscaling-visual",
-  "status": "prepared; frozen by the commit root reviews before any grant. No build, GPU child or capture has run for this stage.",
-  "producer": "0452c5f5afc11c99b7c90d111428cc23611c9590",
-  "producer_manifest": {
-    "path": "docs/spikes/evidence/temporal-upscaling.json",
-    "sha256": "2d2f4ffa9c6c43a95ab733f8fa3fa92ac4f5a1743f0759597e31534e70f531ca",
-    "source_freeze_sha256": "b7ee5ca277f5ca3b1574dd6640638347ca068cb11ba207cb4c1642bcf9f67411",
-    "files": 39
+  "status": "prepared (revision 1); frozen by the commit root reviews before any grant. No build, GPU child or capture has run for this stage.",
+  "history": {
+    "stagea_numeric": "Historical: StageA ran the two exact numeric tests once on the 0452c5f5 default test binary afa3d035 (numerical-result.md). It is evidence for that binary only and is not relabeled as evidence for the corrected source.",
+    "revision0_visual_tree": "3e328c4754a91d13a036811bc25f8efedcab512f pinned producer 0452c5f5; superseded by root-granted source pinning."
+  },
+  "source_pinning": {
+    "rule": "The source is only what root's build-ready.json grants: a 40-hex commit object (never a branch name) and root's source freeze by absolute path and SHA-256. build.py exports that commit with git archive (blob-verified; no working-tree or dirty file can enter). If the freeze names a head/commit/source_commit it must equal the granted commit. Its rows (files, sources, unchanged_baselines or baselines; path, sha256, optional bytes) must cover every build input exactly: the same set of paths under build_inputs, each with the same SHA-256 and size; every other freeze row must exist in the commit and match too. Any mismatch latches stop.",
+    "expected_next_source": "root's committed corrected union from branch codex/cooked-temporal-metalfx (read at 9a65b6c8); the commit and freeze are named only by the grant"
   },
   "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
-  "grant": {
-    "path": "~/.codex/incant-evidence/0073-upscaling-visual/review-ready.json",
-    "fields": {
-      "packet": "0073-upscaling-review",
-      "stage": "upscaling-visual",
-      "source_commit": "40-hex commit whose build inputs equal the producer's (build.py checkout refuses otherwise)",
-      "visual_tree": "git rev-parse <commit>:handoffs/0073-upscaling-review/visual of the reviewed commit",
-      "target": "a dedicated ~/.codex/<name>-target directory chosen by root",
-      "prior_<name>_path / prior_<name>_sha256": "at least one prior release receipt, e.g. 0073-upscaling-numeric/gpu-released.json"
+  "grants": {
+    "build": {
+      "path": "~/.codex/incant-evidence/0073-upscaling-visual/build-ready.json",
+      "fields": {
+        "packet": "0073-upscaling-review",
+        "stage": "upscaling-build",
+        "source_commit": "40-hex commit object of root's committed corrected source",
+        "source_freeze": {"path": "absolute path of root's freeze JSON", "sha256": "its SHA-256"},
+        "visual_tree": "git rev-parse <commit>:handoffs/0073-upscaling-review/visual of the reviewed commit",
+        "target": "a dedicated ~/.codex/<name>-target directory chosen by root",
+        "prior_<name>_path / prior_<name>_sha256": "optional pins; every pin must verify"
+      },
+      "allows": ["lease.py acquire/release", "build.py checkout/toolchain/review/lint"]
+    },
+    "gpu": {
+      "path": "~/.codex/incant-evidence/0073-upscaling-visual/review-ready.json",
+      "fields": {
+        "packet": "0073-upscaling-review",
+        "stage": "upscaling-visual",
+        "visual_tree": "the same reviewed visual tree",
+        "build_record_sha256": "SHA-256 of build/review.json from the supervised build (binds commit, freeze, helper and frozen binary)",
+        "prior_<name>_release_path / _sha256": "at least one prior GPU release; every pin must verify and list no live process"
+      },
+      "allows": ["gpu.py list/review/release", "analyze.py check/publish"]
     }
   },
   "budgets": {
@@ -34,8 +50,8 @@
     "review": ["test", "-p", "incant_render", "--test", "upscaling_review", "--no-run"],
     "lint": ["clippy", "-p", "incant_render", "--test", "upscaling_review"],
     "common_flags": ["--locked", "--offline", "--profile", "ci", "-j2", "--message-format=json-render-diagnostics"],
-    "forbidden_feature_prefix": "cooked-",
-    "note": "Default features only. Every cooked-* family refuses motion history (motion::admission), so a cooked feature in the build fails the stage before any GPU child."
+    "forbidden_feature_prefixes": ["cooked-", "native-metalfx"],
+    "note": "Default features only: this review is the portable WGSL path. A cooked-* (including cooked-temporal) or native-metalfx feature in the build refuses the stage before any GPU child; those routes need their own same-source grants."
   },
   "policy": {
     "history_weight": 0.9,
@@ -43,7 +59,7 @@
     "absolute_depth": 0.02,
     "reactive_threshold": 4.0,
     "reactive_strength": 0.5,
-    "note": "Fixed review policy, identical to the 0072 fixed-resolution review; there is no quality preset."
+    "note": "Fixed review policy, identical to the 0072 fixed-resolution review; there is no preset. Unchanged by revision 1."
   },
   "review": {
     "binary": "upscaling_review",
@@ -60,6 +76,7 @@
         "scene_submissions": 0,
         "ui_submissions": 0,
         "pngs": [],
+        "checks": ["adapter_backend_metal", "owner_refused_before_startup_opt_in", "startup_opt_in_succeeds", "startup_opt_in_idempotent", "review_policy_valid", "five_invalid_policies_refused", "owner_refuses_invalid_policies", "owner_accepts_review_policy"],
         "purpose": "Adapter and backend; the owner refuses before the startup opt-in; opt-in succeeds and is idempotent; the review policy validates and five invalid policies are refused by validation and by the owner; logical owner footprint recorded as context only."
       },
       "stationary": {
@@ -70,6 +87,7 @@
         "output": [960, 540],
         "internal": [480, 270],
         "pngs": ["stationary-full.png", "stationary-drs50.png", "stationary-up50.png", "stationary-phases.png", "stationary-detail.png", "stationary-activity.png"],
+        "checks": ["full_control_has_no_upscale_or_resolution_owner", "drs_control_internal_480x270_without_upscaling", "up_one_owner_phases_history_and_sizes", "ui_button_interior_identical_on_all_ten_ui_frames", "frames_nonblank"],
         "purpose": "Static look-dev stage. FULL output-size control and DRS 8/16 nearest control (each with the physical UI), then 24 UP 8/16 frames: three 8-phase jitter cycles, UI on the last 8. Thin detail (1.6, 0.8 and 0.4 px wires and a 0.56 px diagonal against the backdrop; posts receding to about 1.3 px), a trilinear-mipmapped chart at about one texel per output pixel, sphere and cube silhouettes, sun shadows, a BLEND card, nearest-sampled sprites and world text."
       },
       "motion": {
@@ -80,6 +98,7 @@
         "output": [960, 540],
         "internal": [480, 270],
         "pngs": ["motion-full.png", "motion-up50.png", "motion-detail.png"],
+        "checks": ["up_history_survives_object_and_camera_motion", "controls_plain_and_drs_480x270", "frames_nonblank"],
         "purpose": "The stage plus a cube: 8 static UP frames, then the cube moves 0.12 m (about 8 px) per frame out from behind the sphere across the chart (occlusion and disocclusion), and from frame 15 the camera also pans 0.05 m per frame. FULL and DRS controls render frames 14 and 20 exactly."
       },
       "transitions": {
@@ -91,6 +110,7 @@
         "viewport": {"rect": [37.5, 21.25, 885.0, 497.5], "corner_radii": [12.0, 12.0, 12.0, 12.0], "canvas_srgb": [64, 80, 96]},
         "schedule": [[8, 10, false], [12, 3, false], [4, 3, false], [16, 3, false], [8, 3, false], [8, 5, true]],
         "pngs": ["transitions-full.png", "transitions-up50.png", "transitions-strip.png", "transitions-cut.png"],
+        "checks": ["internal_scale_changes_keep_owner_and_history_then_cut_resets", "controls_plain_and_drs_480x270", "chrome_outside_viewport_identical", "frames_nonblank"],
         "purpose": "The stage in a fractional, offset, rounded viewport. FULL and DRS 8/16 controls, then UP: 10 frames at 8/16, internal-only changes to 12, 4, 16 and 8 sixteenths (3 frames each, one owner and history throughout), then an explicit cut and 5 frames at 8/16."
       }
     }
@@ -102,21 +122,24 @@
     "reserve_pngs": 3
   },
   "counting": "A frame is one queue submission that renders into a 960x540 review target: every RetainedScene::submit attempt, including refusals and failures, and every UiLayer::submit. Readback copies are part of their frame. The helper charges each frame before attempting it and panics past its case limit; gpu.py debits each case's full reserve under the packet and shared GPU locks, fsyncs it and only then launches. Debits are never refunded, and a failed case ends the stage.",
-  "contract_checks_only": "Pass/fail comes from submitted-owner state (phase, history, epoch, sequence, internal and output size), control identity, opaque UI interior identity, viewport chrome identity and non-blank frames. Image metrics are observations; appearance is judged only by inspecting the PNGs.",
+  "contract_checks_only": "Pass/fail comes from the plan's exact contract checks per case (submitted-owner phase, history, epoch, sequence, internal and output size; control identity; opaque UI interior identity; viewport chrome identity; non-blank frames) and from analyze.py's integrity comparisons. None depends on the reconstruction math changed in the corrected source. Image metrics are observations; appearance is judged only by inspecting the PNGs.",
+  "corrected_contract_expectations": "Read-only at 9a65b6c8: history now renormalizes over supporting previous taps instead of refusing when any positive tap is outside or incompatible; BLEND models, sprites and world text draw with the unjittered camera over a re-rasterized unjittered opaque depth, and the composite samples them on the unjittered internal grid; the current-coverage edge policy is unchanged. These are expectations to verify visually, never inferred from a numeric pass.",
   "order": [
+    "root: build-ready.json (supervised CPU build grant naming commit, freeze, visual tree, target)",
     "lease.py acquire",
     "build.py checkout",
     "build.py toolchain",
     "build.py review",
+    "build.py lint (optional, CPU only)",
+    "lease.py release",
+    "root: review-ready.json (GPU grant binding build/review.json by SHA-256)",
     "gpu.py list",
     "gpu.py review probe",
     "gpu.py review stationary",
     "gpu.py review motion",
     "gpu.py review transitions",
-    "analyze.py check (CPU only) and personal inspection of every retained PNG",
     "gpu.py release",
-    "build.py lint (optional, CPU only, still under the lease)",
-    "lease.py release",
-    "analyze.py publish"
+    "analyze.py check (CPU only; must exit 0) and personal inspection of every retained PNG",
+    "analyze.py publish (only from the latest passing, currently bound analysis)"
   ]
 }

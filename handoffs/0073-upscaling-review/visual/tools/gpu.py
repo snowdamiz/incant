@@ -4,12 +4,15 @@
 Adapted from handoff 0068's committed, root-reviewed tools/gpu.py (read-only
 reuse), with a pre-launch debit. For every child it takes the packet flock
 (blocking) and then the shared native-gpu.lock (non-blocking; a busy lock refuses
-before anything is charged). Holding both, it checks in this order: root's grant,
-the release latch, the stop latch, the target lease, the committed visual tree,
-every child-checkout file against its git blob, and the frozen binary (SHA-256
-and execute bit). It then checks the budgets (<= 96 frames including failures,
-<= 16 PNGs) against debits.jsonl, appends this child's full reserve there and
-fsyncs it, and only then launches. Debits are never refunded.
+before anything is charged). Holding both, it checks in this order: root's GPU
+grant (review-ready.json), the release latch, the stop latch, the committed
+visual tree, every child-checkout file against its git blob, and the frozen
+binary: the build record's SHA-256 must equal the grant's build_record_sha256,
+and the binary's SHA-256 and execute bit must equal that record. It then checks
+the budgets (<= 96 frames including failures, <= 16 PNGs) against debits.jsonl,
+appends this child's full reserve there and fsyncs it, and only then launches.
+Debits are never refunded. `list` (the first GPU step) also requires the CPU
+build lease released and every prior release the GPU grant pins verified.
 
 Each child runs in its own process group with a constructed environment (HOME
 passed through unrecorded; PATH, TMPDIR, RUST_BACKTRACE, the expected backend
@@ -58,9 +61,11 @@ def runs(kind, item):
 
 
 def frozen():
+    """The frozen binary of the build record the GPU grant binds by SHA-256."""
+    data, _ = c.grant()
     record = c.BUILD / "review.json"
-    if not record.exists():
-        c.refuse("no frozen review binary; run build.py review")
+    if not record.exists() or c.sha(record) != data["build_record_sha256"]:
+        c.refuse("the build record is absent or is not the one review-ready.json binds")
     entry = c.read_json(record)["frozen"]
     return Path(entry["path"]), entry["sha256"]
 
@@ -105,8 +110,8 @@ def run_child(label, kind, item, args, timeout, frames=0, pngs=0, extra=None, af
             fcntl.flock(global_lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:
             c.refuse("the shared native-gpu.lock is held by another runner; nothing was charged")
-        _, grant_sha = c.gate()
-        tools = c.tools_identity()
+        data, grant_sha = c.gate()
+        tools = c.tools_identity(data.get("visual_tree"))
         source = c.verify_checkout()
         binary, expected = frozen()
         if c.sha(binary) != expected or not os.access(binary, os.X_OK):
@@ -176,6 +181,13 @@ def listing():
     p = c.plan()
     if runs("list", "review"):
         c.refuse("review cases already listed")
+    data, _ = c.grant()
+    if c.LEASE.exists() and not c.read_json(c.LEASE).get("released_at"):
+        c.refuse("release the CPU build lease (lease.py release) before any GPU step")
+    prior, ok = c.prior_receipts(data, required=True)
+    if not ok:
+        print(json.dumps(prior, indent=1))
+        c.refuse("the GPU grant's prior-release receipts do not verify")
 
     def names(stdout):
         found = LISTING.findall(stdout)
@@ -236,14 +248,19 @@ def review(case):
                      extra={spec["output_env"]: str(output)}, after=outputs)
 
 
-def owned_processes(target):
-    """Running processes whose executable is one of ours: a frozen binary, the
-    child checkout's cargo wrapper, or anything run from the target."""
+def owned_prefixes():
+    """A frozen binary, the child checkout's cargo wrapper, or anything run from
+    the build grant's target (when one is readable)."""
+    target = c.granted_target()
+    return tuple(str(p) for p in (c.BIN, c.CHECKOUT, target) if p is not None)
+
+
+def owned_processes():
     listing_text = subprocess.run(["ps", "-axo", "pid=,args="], capture_output=True, text=True).stdout
     owned = []
     for line in listing_text.splitlines():
         parts = line.split(None, 1)
-        if len(parts) == 2 and parts[1].startswith((str(c.BIN), str(c.CHECKOUT), str(target))):
+        if len(parts) == 2 and parts[1].startswith(owned_prefixes()):
             owned.append(line.strip())
     return owned
 
@@ -251,11 +268,10 @@ def owned_processes(target):
 def release():
     with open(c.LOCK, "a") as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
-        data, _ = c.grant()
+        c.grant()
         if c.LATCH.exists():
             raise SystemExit("already released")
-        target = Path(data["target"])
-        owned = owned_processes(target)
+        owned = owned_processes()
         if owned:
             c.refuse("owned processes still running: " + json.dumps(owned)[:400])
         entries = ledger()
@@ -265,7 +281,7 @@ def release():
                 continue  # an exec failure left no process
             found = subprocess.run(["ps", "-p", str(entry["pid"]), "-o", "args="],
                                    capture_output=True, text=True).stdout.strip()
-            if found.startswith((str(c.BIN), str(c.CHECKOUT), str(target))):
+            if found.startswith(owned_prefixes()):
                 alive.append(entry["pid"])
         if alive:
             c.refuse(f"ledger PIDs still alive: {alive}")
@@ -288,7 +304,7 @@ def release():
                   "grant_sha256_at_release": c.sha(c.GRANT),
                   "owned_processes": owned, "ledger_pids_alive": alive,
                   "note": "GPU released by 0073 for root; review-ready.json left untouched "
-                          "(only root writes it). Run lease.py release next."}
+                          "(only root writes it). Run analyze.py check next."}
         c.write_new_json(c.LATCH, record)
     print(json.dumps(record, indent=1))
 

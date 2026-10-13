@@ -1,0 +1,85 @@
+{
+  "cpu_only": true,
+  "passed": true,
+  "tests_run": 10,
+  "failures": 0,
+  "errors": 0,
+  "python": "3.14.8",
+  "records": [
+    {
+      "test": "branch_name_refused",
+      "refused_before_export": true,
+      "matched": "40-hex source commit"
+    },
+    {
+      "test": "build_input_missing_stops",
+      "stop_latched": true,
+      "inputs_missing_from_freeze": [
+        "third_party/x/LICENSE"
+      ]
+    },
+    {
+      "test": "conflicting_duplicate_refused",
+      "refused_before_export": true,
+      "matched": "two identities"
+    },
+    {
+      "test": "dirty_file_stops",
+      "stop_latched": true,
+      "mismatched": [
+        "crates/a/src/lib.rs"
+      ]
+    },
+    {
+      "test": "exact_committed_freeze_exports",
+      "coverage": {
+        "build_input_roots": [
+          "crates",
+          "Cargo.toml",
+          "Cargo.lock",
+          "third_party",
+          "tools/cargo",
+          "rust-toolchain.toml"
+        ],
+        "build_inputs": 7,
+        "freeze_rows": 9,
+        "freeze_build_input_rows": 7,
+        "inputs_missing_from_freeze": [],
+        "freeze_rows_missing_from_commit": [],
+        "mismatched": [],
+        "mismatched_count": 0,
+        "exact": true
+      },
+      "tree": true
+    },
+    {
+      "test": "freeze_hash_mismatch_refused",
+      "refused_before_export": true,
+      "matched": "SHA-256 differs from the grant"
+    },
+    {
+      "test": "freeze_head_mismatch_refused",
+      "refused_before_export": true,
+      "matched": "not the granted commit"
+    },
+    {
+      "test": "tree_object_refused",
+      "refused_before_export": true,
+      "matched": "is not a commit"
+    },
+    {
+      "test": "size_mismatch_stops",
+      "stop_latched": true,
+      "mismatched": [
+        "Cargo.toml"
+      ]
+    },
+    {
+      "test": "uncommitted_freeze_row_stops",
+      "stop_latched": true,
+      "freeze_rows_missing_from_commit": [
+        "docs/untracked.md"
+      ]
+    }
+  ]
+}
