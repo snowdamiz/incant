@@ -66,7 +66,7 @@ def acquire():
         c.refuse("processes already use the target: " + json.dumps(running)[:400])
     c.write_new_json(c.LEASE, {
         "packet": c.PACKET, "stage": c.BUILD_STAGE,
-        "holder": "claude (Opus 5.5, Max thinking) for handoff 0073 supervised CPU build",
+        "holder": grant.get("holder", "claude (Opus 5.5, Max thinking) for handoff 0073 supervised CPU build"),
         "target_dir": str(target), "assigned_by": "root via build-ready.json",
         "grant_sha256": grant_sha, "grant": grant, "prior_receipts": prior, "tools": tools,
         "brief_sha256": c.sha(c.PACKET_DIR / "brief.md"), "worktree": str(c.ROOT),
