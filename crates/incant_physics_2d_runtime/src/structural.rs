@@ -76,6 +76,26 @@ mod checked {
                     return Err(StructuralError::Plan.into());
                 }
             }
+            let numeric = changes
+                .updates
+                .iter()
+                .filter(|(id, next)| next.is_some() && !changes.rebuild.contains(id))
+                .count();
+            let revisions = changes
+                .removals
+                .len()
+                .checked_add(changes.insertions.bodies)
+                .and_then(|n| n.checked_add(changes.insertions.colliders))
+                .and_then(|n| {
+                    numeric
+                        .checked_mul(2)
+                        .and_then(|edits| n.checked_add(edits))
+                })
+                .ok_or(PhysicsError::Limit)?;
+            self.world
+                .inner
+                .preflight_revision_edits(revisions as u64)
+                .map_err(StructuralError::Owner)?;
             let plan = self.world.inner.preflight_structure(
                 &changes.removals,
                 changes.insertions,
