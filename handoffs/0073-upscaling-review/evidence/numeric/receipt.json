@@ -1,0 +1,610 @@
+{
+ "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric",
+ "chain": {
+  "release_ledger_sha256_matches": true,
+  "release_debits_sha256_matches": true,
+  "release_lists_no_live_processes": true,
+  "grant_runner_sha256_matches_started": true,
+  "children_two_in_test_order": true,
+  "ledger_equals_results": true,
+  "every_child_exit_zero_no_timeout": true,
+  "binary_sha256_is_granted_copy": true,
+  "stdout_stderr_hashes_match": true,
+  "ledger_pids_and_groups_gone_now": true,
+  "granted_copy_sha256_unchanged": true
+ },
+ "chain_all_pass": true,
+ "numeric": {
+  "adapter_lines": [
+   "AdapterInfo { name: \"Apple M5 Pro\", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: \"\", driver: \"\", driver_info: \"\", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }"
+  ],
+  "rows": [
+   {
+    "mode": 0,
+    "attachment": 0,
+    "actual": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "expected": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 0,
+    "attachment": 1,
+    "actual": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "expected": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 1,
+    "attachment": 0,
+    "actual": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "expected": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 1,
+    "attachment": 1,
+    "actual": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "expected": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 2,
+    "attachment": 0,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 2,
+    "attachment": 1,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 3,
+    "attachment": 0,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 3,
+    "attachment": 1,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 4,
+    "attachment": 0,
+    "actual": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "expected": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 4,
+    "attachment": 1,
+    "actual": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "expected": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 5,
+    "attachment": 0,
+    "actual": [
+     0.19995117,
+     0.099975586,
+     0.0,
+     0.5
+    ],
+    "expected": [
+     0.2,
+     0.1,
+     0.0,
+     0.5
+    ],
+    "max_abs_error": 4.882999999999971e-05
+   },
+   {
+    "mode": 5,
+    "attachment": 1,
+    "actual": [
+     0.19995117,
+     0.099975586,
+     0.0,
+     0.5
+    ],
+    "expected": [
+     0.2,
+     0.1,
+     0.0,
+     0.5
+    ],
+    "max_abs_error": 4.882999999999971e-05
+   },
+   {
+    "mode": 6,
+    "attachment": 0,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 6,
+    "attachment": 1,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 7,
+    "attachment": 0,
+    "actual": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "expected": [
+     0.375,
+     0.375,
+     0.375,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 7,
+    "attachment": 1,
+    "actual": [
+     0.28735352,
+     0.23742676,
+     0.1875,
+     1.0
+    ],
+    "expected": [
+     0.2875,
+     0.2375,
+     0.1875,
+     1.0
+    ],
+    "max_abs_error": 0.00014648000000000438
+   },
+   {
+    "mode": 8,
+    "attachment": 0,
+    "actual": [
+     0.0,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.0,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 8,
+    "attachment": 1,
+    "actual": [
+     0.0,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.0,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 9,
+    "attachment": 0,
+    "actual": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "expected": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 9,
+    "attachment": 1,
+    "actual": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "expected": [
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 10,
+    "attachment": 0,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 10,
+    "attachment": 1,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 11,
+    "attachment": 0,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 11,
+    "attachment": 1,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 12,
+    "attachment": 0,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 12,
+    "attachment": 1,
+    "actual": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "expected": [
+     0.5,
+     0.5,
+     0.5,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 13,
+    "attachment": 0,
+    "actual": [
+     2.0,
+     0.5,
+     100.0,
+     1.0
+    ],
+    "expected": [
+     2.0,
+     0.5,
+     100.0,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   },
+   {
+    "mode": 13,
+    "attachment": 1,
+    "actual": [
+     2.0,
+     0.5,
+     100.0,
+     1.0
+    ],
+    "expected": [
+     2.0,
+     0.5,
+     100.0,
+     1.0
+    ],
+    "max_abs_error": 0.0
+   }
+  ],
+  "row_count": 28,
+  "all_modes_both_attachments": true,
+  "worst_abs_error": 0.00014648000000000438,
+  "within_test_tolerance_0_001": true,
+  "libtest_lines": {
+   "upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay": [
+    "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 149 filtered out; finished in 0.85s"
+   ],
+   "models::retained::upscaling_tests::upscaling_color_motion_geometry_and_dynamic_source_extent_commit_together": [
+    "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 149 filtered out; finished in 0.37s"
+   ]
+  }
+ },
+ "artifacts": [
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/review-ready.json",
+   "raw_sha256": "61065efe85c43642b175809920b934ae1155370a9b2a3eaeddd45fb56c4f6b05",
+   "raw_bytes": 943,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/61065efe85c43642b175809920b934ae1155370a9b2a3eaeddd45fb56c4f6b05.gz",
+   "retained_sha256": "e14a9553ab6a13b88d9657838dfc6af5e618bcea84bdb9a3b4daa1b3c541ce12"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/attempt-started.json",
+   "raw_sha256": "5f62109447bdced7a7aaaa6618418500526626634f06b4e6594c352f83a4945a",
+   "raw_bytes": 127,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/5f62109447bdced7a7aaaa6618418500526626634f06b4e6594c352f83a4945a.gz",
+   "retained_sha256": "34fec0e2f873a96cf5fc950380dfa56f1e074d7d90c0705a408c471d3c034c7c"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/attempt-debits.jsonl",
+   "raw_sha256": "56686dbb670c93dc3f27fd8cf2d1befb85918fc5dd474ede042a2731e3f13110",
+   "raw_bytes": 389,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/56686dbb670c93dc3f27fd8cf2d1befb85918fc5dd474ede042a2731e3f13110.gz",
+   "retained_sha256": "4a940bd407c40ebd6f3fd7a9c47c74fe4de60a0e4d0a24efb8fc67f5129485aa"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/gpu-ledger.jsonl",
+   "raw_sha256": "cad389d63af2e7b6fd7954b9fa3522c9036d11cb66253cb7666633f2ff9009d1",
+   "raw_bytes": 2754,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/cad389d63af2e7b6fd7954b9fa3522c9036d11cb66253cb7666633f2ff9009d1.gz",
+   "retained_sha256": "b7176e6009903bd48050d05d3b6d1c91cedc7f1640c251b7d3c021ec692424ba"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/gpu-results.json",
+   "raw_sha256": "f9ea4ab55fd7bb4b2d684252b8f6ea84a71e6e363c7fa30f420ac0a65b19fd44",
+   "raw_bytes": 3123,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/f9ea4ab55fd7bb4b2d684252b8f6ea84a71e6e363c7fa30f420ac0a65b19fd44.gz",
+   "retained_sha256": "8636d367a326304eac95c922e12722a8a9528d3df78a58cf4a8394e3dbb9e994"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/gpu-released.json",
+   "raw_sha256": "fe268a84193da4765bf47e0545d654668e8a2441c7ea153cc64699a6df6d6678",
+   "raw_bytes": 498,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/fe268a84193da4765bf47e0545d654668e8a2441c7ea153cc64699a6df6d6678.gz",
+   "retained_sha256": "146358ff2a8dae289cf8e562a937b08bc2315ca38b1c4bf3b305cbd8e254ea9a"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/summary.json",
+   "raw_sha256": "8691e961ceebfbb6b23690bfbff92bd6214131b6126f5456a40519633b9d11c9",
+   "raw_bytes": 741,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/8691e961ceebfbb6b23690bfbff92bd6214131b6126f5456a40519633b9d11c9.gz",
+   "retained_sha256": "764ecc85a2aa25d272b1585bd86900c16d9059ca0795b83703b112263f4e2c09"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/runner-console.stdout",
+   "raw_sha256": "4a411682bf00ba1301860ab89a7752a1d43a8ff71d5ec07c6847c592b4db8e6a",
+   "raw_bytes": 388,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/4a411682bf00ba1301860ab89a7752a1d43a8ff71d5ec07c6847c592b4db8e6a.gz",
+   "retained_sha256": "7cd9957b8b242b8d7c5e5a5427d892cfb94867b0e80f7ef6ea0522ae7e3a9b1d"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/runner-console.stderr",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "raw_bytes": 0,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+   "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay-gpu.stdout",
+   "raw_sha256": "ea36f4a210c383cabeb730af0bcc3b3499e908ce3c7c64cd6dfbdd9666cd0419",
+   "raw_bytes": 1972,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/ea36f4a210c383cabeb730af0bcc3b3499e908ce3c7c64cd6dfbdd9666cd0419.gz",
+   "retained_sha256": "0fa19c3427718fe6b2787aa28a98074214e81665f7a0280b00381eea3f8b8d7a"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/upscaling::system::device_tests::actual_output_reconstruction_rejects_bad_history_and_never_retains_overlay-gpu.stderr",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "raw_bytes": 0,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+   "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/models::retained::upscaling_tests::upscaling_color_motion_geometry_and_dynamic_source_extent_commit_together-gpu.stdout",
+   "raw_sha256": "49f0bab07480c5c680fa7e228740f927c67ba127fd841b322c6866c7298cef4d",
+   "raw_bytes": 235,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/49f0bab07480c5c680fa7e228740f927c67ba127fd841b322c6866c7298cef4d.gz",
+   "retained_sha256": "0b6b21bbaf28e35d36778f82ddf6618a2b243bee88da6cbabefa799ed04311a6"
+  },
+  {
+   "original": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/models::retained::upscaling_tests::upscaling_color_motion_geometry_and_dynamic_source_extent_commit_together-gpu.stderr",
+   "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "raw_bytes": 0,
+   "retained": "handoffs/0073-upscaling-review/evidence/numeric/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+   "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+  }
+ ],
+ "limits": [
+  "Metal on the recorded adapter only; not a benchmark",
+  "scalar readback rows only; no image or appearance evidence",
+  "the retained case prints no rows; its pass is its own assertions"
+ ]
+}
