@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-13T12:12:54.212985+00:00",
+  "reviewer": "astra root",
+  "qualification_sha256": "15025b367d175024f622543a382027415146bd7a21d974c7b2abcf2d5ac6a7c3",
+  "verification": "Read complete wrapper and31pathqualification; execute --verify-only terminal0. Exactly5old/new Git-pinned inert/default-offphysics rows exempted from original sourcefreeze; allremaining original353record/3109input/rawCPU/GPU assertions replay. Three freshly queried all-target selected graphs unchanged, exclude snapshot/checkpoint.",
+  "main": "f300dbc56a79bde82cd6dbaf936216c1955cd892",
+  "prior_final_review": "e44d87932dbca1fb919e74603cf9a2c58a1383c2d74bdd5257f7c5f712253ad1",
+  "fresh_execution_claim": false,
+  "findings": []
+}

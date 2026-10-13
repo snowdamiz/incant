@@ -1,6 +1,8 @@
 //! Native rendering and GPU readback with retained imported material previews.
 //! Bevy-scheduled HDR geometry, lighting, display transform and composition.
 //! Authored clustered lights; the full production render graph remains open.
+mod bloom;
+pub use bloom::{Bloom, BloomError};
 mod camera;
 mod diagnostic_draw;
 #[cfg(test)]
@@ -100,6 +102,7 @@ pub struct Renderer {
     shadows: shadows::ShadowSystem,
     frames: frame::FrameCache,
     output: output::OutputPass,
+    bloom: Option<bloom::BloomSystem>,
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
     temporal: Option<temporal::TemporalSystem>,
@@ -207,6 +210,7 @@ impl Renderer {
             shadows,
             frames: Default::default(),
             output,
+            bloom: None,
             graph,
             motion: None,
             temporal: None,
@@ -389,14 +393,41 @@ impl Renderer {
                 system.prepare(&self.device, pending, &attachments.color, scene.camera)
             })
         });
-        let output = self.output.prepare(
-            &self.device,
-            &attachments.color,
-            view,
-            format,
-            viewport,
-            plan.output_mapping,
-        )?;
+        let bloom_system = self
+            .bloom
+            .as_ref()
+            .filter(|b| scene.camera.pixel_resolution.is_none() && b.config.intensity > 0.);
+        let bloom = bloom_system
+            .map(|system| {
+                system.prepare(
+                    &self.device,
+                    &attachments.color,
+                    [width, height],
+                    &plan,
+                    scale,
+                )
+            })
+            .transpose()?;
+        let output = if let Some((draw, system)) = bloom.as_ref().zip(bloom_system) {
+            system.output.prepare_optional_bloom(
+                &self.device,
+                &attachments.color,
+                view,
+                format,
+                viewport,
+                plan.output_mapping,
+                Some((&draw.result, system.config.intensity, [width, height])),
+            )?
+        } else {
+            self.output.prepare(
+                &self.device,
+                &attachments.color,
+                view,
+                format,
+                viewport,
+                plan.output_mapping,
+            )?
+        };
         self.graph.encode(
             &self.device,
             graph::PreparedFrame {
@@ -406,6 +437,7 @@ impl Renderer {
                 temporal,
                 sprites,
                 text,
+                bloom,
                 output,
             },
         )

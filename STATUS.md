@@ -58,7 +58,7 @@ The accepted bounded configuration/CCD records and read-only vendor getter are
 composed with the current narrow-owner boundary. Actual rebuilt deterministic
 and fast8 suites each pass 164 tests; strict Clippy, wasm32 and the std-only normal
 graph pass. Eleven current checks are zero-exit, with exact source/pin identities.
-Independent current-main review is accepted; publication awaits the required fast check. Live save/restore admission remains
+Independent current-main review is accepted and PR221 merged after the required fast check. Live save/restore admission remains
 closed. [Scope and evidence](docs/spikes/physics-ccd-main220.md).
 
 ## Timestamp backend diagnostic — capability repair
@@ -84,6 +84,16 @@ MASK detail approximately 18% of reference. Final integration evidence review is
 independently accepted and PR220 merged after its required fast check. Defaults
 and phase/device gates remain unchanged.
 
+## Output-space bloom — current composed evidence complete
+
+The accepted physical-output bloom footprint is integrated independently of SSAO,
+with unchanged shader math and resource bounds. Current default/cooked CPU,
+consumer and browser checks pass, followed by eight bounded Metal frames joining
+fixed history, bloom/refusal and Display timing. Original Claude0075 bloom-only
+appearance acceptance remains source-specific; no new appearance claim is made.
+Native cooked output refuses bloom explicitly. Independent final integration
+review and exact main221 source relevance are independently accepted; publication awaits the required fast check. [Scope and evidence](docs/spikes/bloom-main219.md).
+
 ## Static Wasm C builds — bounded local scheduling verified
 
 The trusted bundle feature now enables pinned cc's Cargo-jobserver scheduler.
@@ -94,9 +104,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main220, 2026-10-13
+## Current overview — main221, 2026-10-13
 
-Development main220 includes the reviewed opt-in cooked renderer families and
+Development main221 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -114,7 +124,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–220 changes remain outside that tested baseline. No device, performance or
+Later main206–221 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17

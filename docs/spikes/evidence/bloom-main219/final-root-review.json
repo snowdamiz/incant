@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-13T12:00:17.285923+00:00",
+  "reviewer": "astra root",
+  "manifest_sha256": "bdcb82697440b55b4bbd6d5dcd0f6b9d222b64c7e8eba567d215610e869c3653",
+  "source_review": "Reviewed14pathfreeze and renderer/output/graph seams previously50c0f569; actual math/WGSL exact Claude accepted producer. No SSAO ancestry.",
+  "execution_review": "Read complete verifier and independently executed --verify-only0:353records204payloads9binaryidentities3109sources12checks0,137default166cooked;8actualMetal GPUframes including cooked typed-bloom refusal and fixed temporal composition, positive actual query spans.",
+  "appearance": "Retained exact Claude0075 bloom pass and SSAO rejection; no new pixel interpretation.",
+  "limits": [
+    "Opt-in bloom only, default/pixel-camera bypass and cooked bloom refusal retained",
+    "No shipping-profile/device performance or phase approval"
+  ],
+  "findings": []
+}
