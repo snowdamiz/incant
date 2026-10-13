@@ -1,0 +1,1493 @@
+{
+  "format": "incant-physics-inert-manifolds-evidence",
+  "version": 1,
+  "scope": "inert current rigid contact graph/manifold metadata and ordered point ownership; completed narrow phase only; no live restoration",
+  "base": "d369a7d40651ecdc042396074e8c59e5d5b2895e",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/freeze.json",
+    "sha256": "d143f961f8670aefba074bcee51fc6caad5c5d85a2a4a5ccaf224f3a7bfd55b9"
+  },
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "bytes": 252215,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/Cargo.lock"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/Cargo.toml"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/arena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/arena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "70af1e61e64bf9655dd62bd4a91ba01f6113dc78a74fa09c09ad77c928fa6afb",
+      "bytes": 6204,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/attachment.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/attachment_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/coarena.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/coarena_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "e58674769d3a3e1a01a1605a02e8d116fa10c39483a63d5796b03e43c3ba5b81",
+      "bytes": 3685,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_points_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/geometry_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/graph.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/graph_codec.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "e68290700e63d6f43b2b0de67d12fb8a62c39a2aef5c9cb401c60fe4ec969761",
+      "bytes": 1856,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/lib.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/records.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/validate.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/adversarial.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/geometry.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "3a08154da4ff8a342c1dd8e0f5f092e8c007653095889ee1d2bb8a5d531fc7b3",
+      "bytes": 18443,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "d47679acf7ad167a6b096b693ea3e2c92bee1fdb641f06565d1f608cf1b18675",
+      "bytes": 22675,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs"
+    },
+    {
+      "path": "crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_parry.rs"
+    }
+  ],
+  "pinned": [
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/interaction_graph.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/geometry/collider_set.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/collider_set.rs",
+      "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+      "bytes": 23738
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "sha256": "11f0849330fdfe0c83fdc137fb515d6f21688a7ba4d81de18b755158fc8e188b",
+      "bytes": 12662
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier2d-0.36.0/src/data/modified_objects.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/data/modified_objects.rs",
+      "sha256": "eed707ef3b77739b02f637a30c69ef9066acaff905bbdc242b563fd8a5bd9758",
+      "bytes": 2448
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry2d/src/query/contact_manifolds/contact_manifold.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/parry2d-0.31.1/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/contact_pair.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/interaction_graph.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/collider_set.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/collider_set.rs",
+      "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+      "bytes": 23738
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "sha256": "11f0849330fdfe0c83fdc137fb515d6f21688a7ba4d81de18b755158fc8e188b",
+      "bytes": 12662
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/data/modified_objects.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/data/modified_objects.rs",
+      "sha256": "eed707ef3b77739b02f637a30c69ef9066acaff905bbdc242b563fd8a5bd9758",
+      "bytes": 2448
+    },
+    {
+      "source": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/third_party/parry3d/src/query/contact_manifolds/contact_manifold.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/parry3d-0.31.1/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698
+    },
+    {
+      "source": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rapier3d-0.36.0/src/geometry/contact_clustering.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/contact_clustering.rs",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725
+    }
+  ],
+  "commands": [
+    {
+      "label": "tests-001",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869509700232000,
+      "end_ns": 1791869515508728000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/tests-001.log",
+      "log_sha256": "72b37158dc47b8aa0ffeae1090ca4ee314c7393962565bf0717bd936944194ee"
+    },
+    {
+      "label": "tests-002",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "--profile",
+        "ci",
+        "-j2",
+        "--",
+        "--nocapture"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869600658552000,
+      "end_ns": 1791869602423860000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/tests-002.log",
+      "log_sha256": "7aadf7e7a66199dfe1eee48a07b4f5b2d3775c2e68ec1c797150d37d92f4f75d"
+    },
+    {
+      "label": "clippy-001",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869630009076000,
+      "end_ns": 1791869630785336000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/clippy-001.log",
+      "log_sha256": "74449753e4c44b42b35fbb80036bd6649e491defdf1e10ad138042bcdeccc92e"
+    },
+    {
+      "label": "wasm32-001",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_snapshot",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869630810622000,
+      "end_ns": 1791869631175791000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/wasm32-001.log",
+      "log_sha256": "928100d4df9bceb7821d3adea0a39ed961bdfdab7bf35ab8773b26806d710b99"
+    },
+    {
+      "label": "normal-graph-001",
+      "argv": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_physics_snapshot",
+        "-e",
+        "normal",
+        "--prefix",
+        "none"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869631199665000,
+      "end_ns": 1791869631302718000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/normal-graph-001.log",
+      "log_sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c"
+    },
+    {
+      "label": "runtime-graphs-001",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_physics_snapshot",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869631328927000,
+      "end_ns": 1791869631727043000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/runtime-graphs-001.log",
+      "log_sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0"
+    },
+    {
+      "label": "fmt-001",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "-p",
+        "incant_physics_snapshot",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869631750733000,
+      "end_ns": 1791869631837636000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/fmt-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions-001",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869631860773000,
+      "end_ns": 1791869631886907000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/conventions-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "diff-001",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "target": "/tmp/incant-agent-font-target",
+      "rust_bin": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin",
+      "start_ns": 1791869631909654000,
+      "end_ns": 1791869631927793000,
+      "exit_code": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/diff-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "tests": {
+    "passed": 79,
+    "failed": 0,
+    "ignored": 0,
+    "nonempty_groups": 13,
+    "all_groups": 15
+  },
+  "final_commands": 8,
+  "native_observations": [
+    "MANIFOLD_NATIVE dimension=2 compound=true cluster=false transformed=false mixed_children=false warm=true",
+    "MANIFOLD_NATIVE dimension=2 plain_warm=true removed_reused=true pending_refused=true",
+    "MANIFOLD_NATIVE dimension=3 compound=true cluster=true transformed=true mixed_children=true warm=true",
+    "MANIFOLD_NATIVE dimension=3 plain_warm=true removed_reused=true pending_refused=true"
+  ],
+  "records": [
+    {
+      "name": "checks.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/checks.py",
+      "sha256": "cb2b8590ba394ac1b8fa3208afc865d6c0c96963d080aa10683a08d59c575a26",
+      "bytes": 884,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/cb2b8590ba394ac1b8fa3208afc865d6c0c96963d080aa10683a08d59c575a26.gz",
+      "retained_sha256": "857d33495c109cfa5c903fbf34032b80cfe8344c02b2e6df90c9ffb95827b316"
+    },
+    {
+      "name": "clippy-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/clippy-001.json",
+      "sha256": "cc735923be6804d2d5f9b1e08d1b77d2bd77ac4b52d068ee991b2abaa9d4410f",
+      "bytes": 696,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/cc735923be6804d2d5f9b1e08d1b77d2bd77ac4b52d068ee991b2abaa9d4410f.gz",
+      "retained_sha256": "125132c04c48e453c8865b298fad6a46247220ac99f98e5eb79f04c1eef7c37e"
+    },
+    {
+      "name": "clippy-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/clippy-001.log",
+      "sha256": "74449753e4c44b42b35fbb80036bd6649e491defdf1e10ad138042bcdeccc92e",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/74449753e4c44b42b35fbb80036bd6649e491defdf1e10ad138042bcdeccc92e.gz",
+      "retained_sha256": "d4a3adecdaa025dffe56a6027082db9fc6c9345ad77904bb1d062de0c205b76f"
+    },
+    {
+      "name": "conventions-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/conventions-001.json",
+      "sha256": "bd50b2673f35ad7ea2ddcfba55846cf39564ff07f638b501a1e8e5cc3fc73ee0",
+      "bytes": 564,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/bd50b2673f35ad7ea2ddcfba55846cf39564ff07f638b501a1e8e5cc3fc73ee0.gz",
+      "retained_sha256": "5937f9aca0be13e217eb6fa1f042eeed6edf5fa05182a6a99e0a53fbe2bdc42b"
+    },
+    {
+      "name": "conventions-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "diff-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/diff-001.json",
+      "sha256": "5a9b2b308578097179b5e32bff65bedcf6780e64e2168277be51ac65b78260e4",
+      "bytes": 528,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/5a9b2b308578097179b5e32bff65bedcf6780e64e2168277be51ac65b78260e4.gz",
+      "retained_sha256": "112813813c7b1befb976989d3b002e1cc12daee2aa0e832e82cbb719aac6741b"
+    },
+    {
+      "name": "diff-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "fmt-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/fmt-001.json",
+      "sha256": "f32b539031d34631fbc9cfef6c3b9054e887d395ef831b89626a7fb57e9a890f",
+      "bytes": 577,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/f32b539031d34631fbc9cfef6c3b9054e887d395ef831b89626a7fb57e9a890f.gz",
+      "retained_sha256": "42b6cb845312473e1054d5c23fcccfddc33d703046c2034cd3b1abb384efcb99"
+    },
+    {
+      "name": "fmt-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "normal-graph-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/normal-graph-001.json",
+      "sha256": "4bcd861b94fcb069204e0561dd1de29594ffc38813cd0b1cfc9e77f3badf9b2f",
+      "bytes": 657,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4bcd861b94fcb069204e0561dd1de29594ffc38813cd0b1cfc9e77f3badf9b2f.gz",
+      "retained_sha256": "9836f25681aa847a7edbf60e6b61920ecc6ac19aa76eb347c244aee6e4421aa4"
+    },
+    {
+      "name": "normal-graph-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/normal-graph-001.log",
+      "sha256": "8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c",
+      "bytes": 124,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/8fb1e5fe10f40c5425e208650af422693f898b161b19b6d9526f8cf0f3d3761c.gz",
+      "retained_sha256": "b212649c683b80fc2d54b1aa54497594d1b7f5cb99243c3dad0ee95afaaa6ecd"
+    },
+    {
+      "name": "pinned/parry2d-0.31.1/contact_manifold.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/parry2d-0.31.1/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a.gz",
+      "retained_sha256": "a9d4d342066c1789f30636f26f6d827d2dfef548c54be344593ad232b821f4fb"
+    },
+    {
+      "name": "pinned/parry3d-0.31.1/contact_manifold.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/parry3d-0.31.1/contact_manifold.rs",
+      "sha256": "ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a",
+      "bytes": 33698,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/ea49175e6e511c93684e556c6aa08e00738afd108991aec298d73e2500e82c0a.gz",
+      "retained_sha256": "a9d4d342066c1789f30636f26f6d827d2dfef548c54be344593ad232b821f4fb"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/data/modified_objects.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/data/modified_objects.rs",
+      "sha256": "eed707ef3b77739b02f637a30c69ef9066acaff905bbdc242b563fd8a5bd9758",
+      "bytes": 2448,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/eed707ef3b77739b02f637a30c69ef9066acaff905bbdc242b563fd8a5bd9758.gz",
+      "retained_sha256": "98240869f7f6401b212647d5963a6ed1ae3c5d86fcbc2d32f30858bb74edfa95"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4.gz",
+      "retained_sha256": "bd0c7dd4f1ad009dec6df2849c3b9cbbb3e975e43d33e30d20ce3240fb222484"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da.gz",
+      "retained_sha256": "af85df67981cc2de979a0cd0417ed9a2939d05798403ea912883b1dc580a60fd"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "sha256": "11f0849330fdfe0c83fdc137fb515d6f21688a7ba4d81de18b755158fc8e188b",
+      "bytes": 12662,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/11f0849330fdfe0c83fdc137fb515d6f21688a7ba4d81de18b755158fc8e188b.gz",
+      "retained_sha256": "65f1dbff5a0944d07aca61f1d20fd38cf9535113f3da945aca5840d46d53e829"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/geometry/collider_set.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/collider_set.rs",
+      "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+      "bytes": 23738,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2.gz",
+      "retained_sha256": "3d551f9ac31dedd2d4dd6b74234b07c4a788fba3a020d523d6d34dabd0c0759c"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/geometry/contact_pair.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz",
+      "retained_sha256": "358ed8977db039f94b06c49e49fea4ea23a9c9053df8bf5d09136fcaf76015b1"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/geometry/interaction_graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b.gz",
+      "retained_sha256": "01761305d6fedf69af192ed00fb88e998edca7c42117c3e3fb4979a8f4ae142b"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84.gz",
+      "retained_sha256": "b082b07ec89be41e7fe6e0f81a8ff7273eebbf9a741a4ddd6f7d053fdd4da4ab"
+    },
+    {
+      "name": "pinned/rapier2d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier2d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016.gz",
+      "retained_sha256": "3e0ec3364d7a05057e388061f749aeeed025586ca607acf7f6eefa6d56ed10d3"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/data/modified_objects.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/data/modified_objects.rs",
+      "sha256": "eed707ef3b77739b02f637a30c69ef9066acaff905bbdc242b563fd8a5bd9758",
+      "bytes": 2448,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/eed707ef3b77739b02f637a30c69ef9066acaff905bbdc242b563fd8a5bd9758.gz",
+      "retained_sha256": "98240869f7f6401b212647d5963a6ed1ae3c5d86fcbc2d32f30858bb74edfa95"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/dynamics/rigid_body_components.rs",
+      "sha256": "9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4",
+      "bytes": 62442,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/9068320a02f27c7d36ede71f6bc2de2031bff3b34bad74ba5e5f3a7f843fccb4.gz",
+      "retained_sha256": "bd0c7dd4f1ad009dec6df2849c3b9cbbb3e975e43d33e30d20ce3240fb222484"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/dynamics/rigid_body_set.rs",
+      "sha256": "4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da",
+      "bytes": 17736,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4218654ce49158ca61cae9e6cb5ecdd4ead27c73f2960ef092fac6ef614150da.gz",
+      "retained_sha256": "af85df67981cc2de979a0cd0417ed9a2939d05798403ea912883b1dc580a60fd"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/dynamics/solver/solver_contact_graph.rs",
+      "sha256": "11f0849330fdfe0c83fdc137fb515d6f21688a7ba4d81de18b755158fc8e188b",
+      "bytes": 12662,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/11f0849330fdfe0c83fdc137fb515d6f21688a7ba4d81de18b755158fc8e188b.gz",
+      "retained_sha256": "65f1dbff5a0944d07aca61f1d20fd38cf9535113f3da945aca5840d46d53e829"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/geometry/collider_set.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/collider_set.rs",
+      "sha256": "4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2",
+      "bytes": 23738,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4afd3d813ca01973a0af11a8ddfaa33b1a4e83891a0ac8defccfed7e464852f2.gz",
+      "retained_sha256": "3d551f9ac31dedd2d4dd6b74234b07c4a788fba3a020d523d6d34dabd0c0759c"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/geometry/contact_clustering.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/contact_clustering.rs",
+      "sha256": "9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442",
+      "bytes": 6725,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/9bb123df4444adb390b826b7265d45a283d7dd9db25f92b245edeb63ac6d3442.gz",
+      "retained_sha256": "d9c0f952b33bfaf6ee2d683bf48d34929a54f1394812780333422c393ee18ef9"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/geometry/contact_pair.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/contact_pair.rs",
+      "sha256": "647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528",
+      "bytes": 44365,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/647dbd51dbacfa201b9854cd4bad68e8e78ee7cc74dae59df7bf20113f194528.gz",
+      "retained_sha256": "358ed8977db039f94b06c49e49fea4ea23a9c9053df8bf5d09136fcaf76015b1"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/geometry/interaction_graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/interaction_graph.rs",
+      "sha256": "072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b",
+      "bytes": 10916,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/072aacd0e3aef9fa10098e31f32ad3b29be7133c175ee780c2a8cdf3aa35fc8b.gz",
+      "retained_sha256": "01761305d6fedf69af192ed00fb88e998edca7c42117c3e3fb4979a8f4ae142b"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/narrow_phase/pair_management.rs",
+      "sha256": "237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84",
+      "bytes": 33569,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/237316fb7394aceb3624d2d643ee499a4c77b9511f5650192d941fcb04f36c84.gz",
+      "retained_sha256": "b082b07ec89be41e7fe6e0f81a8ff7273eebbf9a741a4ddd6f7d053fdd4da4ab"
+    },
+    {
+      "name": "pinned/rapier3d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned/rapier3d-0.36.0/src/geometry/narrow_phase/pair_update.rs",
+      "sha256": "3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016",
+      "bytes": 37038,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/3610cb4653cd87cb25e3509a1c2c60063d02a2ca573392ec72fff1f6116b5016.gz",
+      "retained_sha256": "3e0ec3364d7a05057e388061f749aeeed025586ca607acf7f6eefa6d56ed10d3"
+    },
+    {
+      "name": "pinned-sources.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/pinned-sources.json",
+      "sha256": "dee786dc494c90a610d99d1fee6c3e4c3e94047bb326d12aeb35359569bacf27",
+      "bytes": 8291,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/dee786dc494c90a610d99d1fee6c3e4c3e94047bb326d12aeb35359569bacf27.gz",
+      "retained_sha256": "5a82c262f4618e0327b2988ad19771a31dd77d0049dcfd871589e46236577b3d"
+    },
+    {
+      "name": "retain.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/retain.py",
+      "sha256": "01144610a3b9b17e02afbef3d444d1e00db39b6c5210a1f4570f2c462a0605f3",
+      "bytes": 2418,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/01144610a3b9b17e02afbef3d444d1e00db39b6c5210a1f4570f2c462a0605f3.gz",
+      "retained_sha256": "6b224bad15a0f50f398c782419b9fc79c031ea7de9bea653c54f167c45fd7827"
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/run.py",
+      "sha256": "92be05d222a66c379ef2798ead1358f399eb317d7098687df3e7b682e0c5d79c",
+      "bytes": 944,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/92be05d222a66c379ef2798ead1358f399eb317d7098687df3e7b682e0c5d79c.gz",
+      "retained_sha256": "91275cd9941ae56c068607550ac3d57425b390ed4f0d0a7a52f80baad9c80ebf"
+    },
+    {
+      "name": "runtime-graphs-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/runtime-graphs-001.json",
+      "sha256": "4f3e72ab7caeffafd442e8d6ffbe923afc9c0a8ddc6d615160acf7eb093bc3ad",
+      "bytes": 652,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4f3e72ab7caeffafd442e8d6ffbe923afc9c0a8ddc6d615160acf7eb093bc3ad.gz",
+      "retained_sha256": "aecd3a1417741bac7b0dc3231fcdcafa331489da5259ec8c0309dd2e9532eca9"
+    },
+    {
+      "name": "runtime-graphs-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/runtime-graphs-001.log",
+      "sha256": "603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0",
+      "bytes": 113,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/603855eeb0d71cdfa373c99e0455aba1eaaf43865ec09c87ecfa22f7f3922ef0.gz",
+      "retained_sha256": "f5bfcbb956f60d69141e44f0fcb4b30b89968e8c3ac6bba75f729ead5bb0db48"
+    },
+    {
+      "name": "source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/Cargo.lock",
+      "sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "bytes": 252215,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f.gz",
+      "retained_sha256": "c223527fc4fea66a5f124a13a8f9db369db82cb948bd7dbfb66b6cccec44d9db"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e.gz",
+      "retained_sha256": "6154e900ddbabd90a7cb533ab96a2ffb88c0206699ed08fb12221ec580628708"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "70af1e61e64bf9655dd62bd4a91ba01f6113dc78a74fa09c09ad77c928fa6afb",
+      "bytes": 6204,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/70af1e61e64bf9655dd62bd4a91ba01f6113dc78a74fa09c09ad77c928fa6afb.gz",
+      "retained_sha256": "61ceb7133e7fdac9de6b56d912f2c545885191a74bb19866a373ee161e395280"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz",
+      "retained_sha256": "22fd4278b32061f4a4916fcb42eebf5232e42656f4d8b9f78ca68d99364993e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435.gz",
+      "retained_sha256": "52c6530b76adb7b5df7dddb01957c17c421e97c91094f91a85a92be8c6991925"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz",
+      "retained_sha256": "799de7df2e8e2d2532a546361950d2fcb81f113cdd2194afc7276e7a0609aa51"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "e58674769d3a3e1a01a1605a02e8d116fa10c39483a63d5796b03e43c3ba5b81",
+      "bytes": 3685,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/e58674769d3a3e1a01a1605a02e8d116fa10c39483a63d5796b03e43c3ba5b81.gz",
+      "retained_sha256": "3596ce8083ba315c06ed66439103c7e25dbd3909c9e5b66194c82da0fa55dd30"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz",
+      "retained_sha256": "4daca488999b79813b8d0622153cf7bad0359494de2e3c4366065b0ded177de6"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz",
+      "retained_sha256": "018627ff8c2bad3f01c6f68f90869b1eb796c3ec9e6e22109313350820474447"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz",
+      "retained_sha256": "95692b802416ea70654f479fcc8ad52aa816757c8f1412ed20b21390506735c7"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz",
+      "retained_sha256": "e0efb1a6f3a2801a8f5f8118736e218d164039f714aa8357dfe88f2bb86ac475"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz",
+      "retained_sha256": "51f79ac05ab4a561d9f3c453698de006a3af32e3b54ee67de79e11ef7d1226e4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "e68290700e63d6f43b2b0de67d12fb8a62c39a2aef5c9cb401c60fe4ec969761",
+      "bytes": 1856,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/e68290700e63d6f43b2b0de67d12fb8a62c39a2aef5c9cb401c60fe4ec969761.gz",
+      "retained_sha256": "380b2e0ad43d1e1c125ec1b0e9f809e2d84e9b6c7b719b1416541c580a7cec11"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz",
+      "retained_sha256": "f5d1cc08ac86b9a222fdd5365f8b21b1e78d3c8e00e62b685cc6e07b59614b07"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz",
+      "retained_sha256": "1d5d6fdbc3407278563e7b624a70f6667b9fd27ab990c748075eb6d6f0ff3b06"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz",
+      "retained_sha256": "e2174b3374d44cc4e04dff90eed6cbdae38b707a3add41a8a6c416ef8c1c3eae"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "23fa86f79c76b8760b5e0532d0faf9c2d5e53949c7be90db9cb5f23183ac8a33",
+      "bytes": 16537,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/23fa86f79c76b8760b5e0532d0faf9c2d5e53949c7be90db9cb5f23183ac8a33.gz",
+      "retained_sha256": "e2b7380f6795a12e1df09cec01ac863bdddce8d694184a12d20abc717724390b"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz",
+      "retained_sha256": "abf5226058381b564373e1497979d6558ea123d4ea69fa32c9ba33bbd174dcdf"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz",
+      "retained_sha256": "c83435a4f584fcff511afb55aa2b1f7d0db05041d3efda31c94b687a35fe75cd"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz",
+      "retained_sha256": "6dc0cf3798d24c9c391ef44d7256974ce9fba372867fd09932cfc511f2b58b12"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz",
+      "retained_sha256": "7c1a305ac22b703be8917c876c65eda6a58e55f26ba941b16239c1f5263f880a"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "939f3851b11ae65d2330f4501c087f5b4662c5a5e9e63d52e14bef7992ad101e",
+      "bytes": 15271,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/939f3851b11ae65d2330f4501c087f5b4662c5a5e9e63d52e14bef7992ad101e.gz",
+      "retained_sha256": "17ca0abf32cbda2b18bf9821a702fb745edbac483150c1a55c8265f5d51e8fe5"
+    },
+    {
+      "name": "source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/freeze.json",
+      "sha256": "736980508a0a1cd38f509f645bf38cafce93d5c3213bdc7ecbb66fffaba0d390",
+      "bytes": 11724,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/736980508a0a1cd38f509f645bf38cafce93d5c3213bdc7ecbb66fffaba0d390.gz",
+      "retained_sha256": "a35969d4a522ee94540a9d83234cb29c22d9f62d765e75d45710fe329a88e253"
+    },
+    {
+      "name": "source-001/tracked.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-001/tracked.patch",
+      "sha256": "a89b96b66656637096d5187828696e7dae9a5a4eb9339933f4107c742379f88b",
+      "bytes": 8019,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a89b96b66656637096d5187828696e7dae9a5a4eb9339933f4107c742379f88b.gz",
+      "retained_sha256": "8bea514f1764a0d071f7c44e5026514d001436a4012f66c162c8561bc2cbbd71"
+    },
+    {
+      "name": "source-002/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/Cargo.lock",
+      "sha256": "b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f",
+      "bytes": 252215,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/b55f306395cb71605bc871bf10379f814573ac54bc49255d78f39c32bab4ef5f.gz",
+      "retained_sha256": "c223527fc4fea66a5f124a13a8f9db369db82cb948bd7dbfb66b6cccec44d9db"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/Cargo.toml",
+      "sha256": "1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e",
+      "bytes": 541,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/1bb0188ed40150cceb53b372f54ad16f1c87a9a9226c9efe10ae38cf2023e92e.gz",
+      "retained_sha256": "6154e900ddbabd90a7cb533ab96a2ffb88c0206699ed08fb12221ec580628708"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/arena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/arena.rs",
+      "sha256": "1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e",
+      "bytes": 3513,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/1ede8f086decca2413009ae0b8036b39a26db054f724881e1e45bc0f48e6749e.gz",
+      "retained_sha256": "62a248ae34fd712e8106306201dbcae85ad5414bf8f595ecd64051b0bd56da50"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/arena_codec.rs",
+      "sha256": "7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473",
+      "bytes": 3897,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/7ba68f662fdd237dd7132bfa027508f6d17f4d078f1a21a997393865cd0f4473.gz",
+      "retained_sha256": "af3485f3035136b8fbd592dc4533510f27572a55c8d54467f73fc5ae891d2ec2"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/attachment.rs",
+      "sha256": "70af1e61e64bf9655dd62bd4a91ba01f6113dc78a74fa09c09ad77c928fa6afb",
+      "bytes": 6204,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/70af1e61e64bf9655dd62bd4a91ba01f6113dc78a74fa09c09ad77c928fa6afb.gz",
+      "retained_sha256": "61ceb7133e7fdac9de6b56d912f2c545885191a74bb19866a373ee161e395280"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/attachment_codec.rs",
+      "sha256": "a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12",
+      "bytes": 4618,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a361a534c02a54123982925dc471ba59bf968d8b2d2830e7ff79bc414d57ad12.gz",
+      "retained_sha256": "22fd4278b32061f4a4916fcb42eebf5232e42656f4d8b9f78ca68d99364993e4"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/coarena.rs",
+      "sha256": "86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435",
+      "bytes": 3489,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/86f392b07915f51413dfd448b8c56927b2284c1a6413a43d79f35890b78d3435.gz",
+      "retained_sha256": "52c6530b76adb7b5df7dddb01957c17c421e97c91094f91a85a92be8c6991925"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/coarena_codec.rs",
+      "sha256": "91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d",
+      "bytes": 1992,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/91336755b52a827ae7530f1f3a9ec402dd2aba94aa3288fc5dd57b5e7cb1ef4d.gz",
+      "retained_sha256": "2376679d9ab4a06703af7367b9422f44a56a69960c95f7dc417665f2de5438a5"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/codec.rs",
+      "sha256": "d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec",
+      "bytes": 5991,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/d3ecff00012bad8364533c3fe15d39f8050a9c88c9bb80bfeb545d8f3a2f8aec.gz",
+      "retained_sha256": "9a92379b835becf0ca739941a5803e1b6d8104c191acaec9fbf142986bb801bf"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/codec.rs",
+      "sha256": "730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906",
+      "bytes": 6753,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/730f8e9a5eb76ebe9427a1cc945f18f8d3230b5733f8e42abb8a14bdab70e906.gz",
+      "retained_sha256": "799de7df2e8e2d2532a546361950d2fcb81f113cdd2194afc7276e7a0609aa51"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/mod.rs",
+      "sha256": "e58674769d3a3e1a01a1605a02e8d116fa10c39483a63d5796b03e43c3ba5b81",
+      "bytes": 3685,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/e58674769d3a3e1a01a1605a02e8d116fa10c39483a63d5796b03e43c3ba5b81.gz",
+      "retained_sha256": "3596ce8083ba315c06ed66439103c7e25dbd3909c9e5b66194c82da0fa55dd30"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_manifolds/validate.rs",
+      "sha256": "a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed",
+      "bytes": 7710,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a13e6ed0b2178fa02bb8a9bb9beff6b1b2085bef68eb57277de151d15a627bed.gz",
+      "retained_sha256": "4daca488999b79813b8d0622153cf7bad0359494de2e3c4366065b0ded177de6"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_points.rs",
+      "sha256": "ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854",
+      "bytes": 6402,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/ee154a028d2d3415c4044b244c48fd2fb3d57b7b83f7a61e27e397dcd56e3854.gz",
+      "retained_sha256": "018627ff8c2bad3f01c6f68f90869b1eb796c3ec9e6e22109313350820474447"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/contact_points_codec.rs",
+      "sha256": "771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2",
+      "bytes": 4325,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/771d5c1e22f3ba2d93c62017debbca8ce0dfe9a0b2b10b17369b4d9f2084e9f2.gz",
+      "retained_sha256": "95692b802416ea70654f479fcc8ad52aa816757c8f1412ed20b21390506735c7"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/geometry.rs",
+      "sha256": "a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a",
+      "bytes": 4037,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a00e970f9cc27506f70e5b37418a9efd1446b36f1f5d21c2a78347044192c22a.gz",
+      "retained_sha256": "a95707e9c4a4118635523628027290ae82f1222069983ae987c9defcdd721218"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/geometry_codec.rs",
+      "sha256": "f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3",
+      "bytes": 3933,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/f3408cccf5c1634a74294331e65181c98c25199a3f2a6ca7da39773d984f79c3.gz",
+      "retained_sha256": "5fdc16809f8259f7d538e0fa77e595d32438b82556080bccfa93e64d1c760979"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/graph.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/graph.rs",
+      "sha256": "4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80",
+      "bytes": 4914,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4100587acdd2a963df04420dfaca6ebeadb562422a4d8108f95b2cf07e67bf80.gz",
+      "retained_sha256": "e0efb1a6f3a2801a8f5f8118736e218d164039f714aa8357dfe88f2bb86ac475"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/graph_codec.rs",
+      "sha256": "c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1",
+      "bytes": 3196,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/c428afce5e491a10b57e8806617549e7fa06109409f4ece7ec218ae9e02a8cf1.gz",
+      "retained_sha256": "51f79ac05ab4a561d9f3c453698de006a3af32e3b54ee67de79e11ef7d1226e4"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/lib.rs",
+      "sha256": "e68290700e63d6f43b2b0de67d12fb8a62c39a2aef5c9cb401c60fe4ec969761",
+      "bytes": 1856,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/e68290700e63d6f43b2b0de67d12fb8a62c39a2aef5c9cb401c60fe4ec969761.gz",
+      "retained_sha256": "380b2e0ad43d1e1c125ec1b0e9f809e2d84e9b6c7b719b1416541c580a7cec11"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/records.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/records.rs",
+      "sha256": "a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df",
+      "bytes": 3267,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a9bc555d7db42927d8d0736e6a16468073dc57cced6f859bd40b919e4d7794df.gz",
+      "retained_sha256": "8063ccb2a89b76edc310110b3fd9c2dd0fdf502c9cd31d068e7a0c9bf5066e08"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/src/validate.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/src/validate.rs",
+      "sha256": "231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9",
+      "bytes": 5556,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/231827126cb8a3d0662da5b354bd5d2f8995cfd4eed6a97f55d1d28bf451c0e9.gz",
+      "retained_sha256": "4501ea95cbe3f153358d9f94377ed257739eb7867fda243636dbf4460240b9d4"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/adversarial.rs",
+      "sha256": "27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a",
+      "bytes": 11111,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/27f416210bacb2bf31a1c0d63f90cd6cbda767da94adb442629690a852cb259a.gz",
+      "retained_sha256": "d48ab3a2220048a576587a9bf49df45d54c5649f8bdcbeb788bda05d19a04182"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/arenas.rs",
+      "sha256": "c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80",
+      "bytes": 14209,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/c560030509b222a8f0f68eca52ee9a138c2bf85294dc00a08472f06f27afdd80.gz",
+      "retained_sha256": "915134e9f2383aa38d9f6326459349404154ac1f5c1640dbcf8cd720ef778d6c"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/attachments.rs",
+      "sha256": "ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb",
+      "bytes": 13794,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/ae066af82cbdc844f8e1e693e8c7d69ce8428832d2ee6e475578f86f2cc88eeb.gz",
+      "retained_sha256": "f5d1cc08ac86b9a222fdd5365f8b21b1e78d3c8e00e62b685cc6e07b59614b07"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/contact_points.rs",
+      "sha256": "79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2",
+      "bytes": 11858,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/79f3d110556d1dfe681b8a9c6e8600f20f975ad397bc4e82f2b6daa9f8e75fd2.gz",
+      "retained_sha256": "1d5d6fdbc3407278563e7b624a70f6667b9fd27ab990c748075eb6d6f0ff3b06"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/geometry.rs",
+      "sha256": "51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12",
+      "bytes": 6582,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/51964551ddebe1cc6b68fa9b0ae3f67bc968be946c783a5517cb0f8f6604bd12.gz",
+      "retained_sha256": "ebe84ea7e15f1ec17dec89ca20efb89de65d5890a8c609965fc9c0491ab03c57"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/graphs.rs",
+      "sha256": "163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad",
+      "bytes": 9274,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/163150c7bb652b180991f56c8b3ff5f82d6539f369b95cf3205c5a43626ac2ad.gz",
+      "retained_sha256": "e2174b3374d44cc4e04dff90eed6cbdae38b707a3add41a8a6c416ef8c1c3eae"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/manifolds.rs",
+      "sha256": "3a08154da4ff8a342c1dd8e0f5f092e8c007653095889ee1d2bb8a5d531fc7b3",
+      "bytes": 18443,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/3a08154da4ff8a342c1dd8e0f5f092e8c007653095889ee1d2bb8a5d531fc7b3.gz",
+      "retained_sha256": "3d6fa974fbc0ec1ed8bdb3df96ff0f6d6c5eb1e5e62ed37b87a34af0b939add1"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_arenas.rs",
+      "sha256": "3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1",
+      "bytes": 8159,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/3c7945d0edea08357a1790cb90407bc75f3d0b5e249f6f91b33f0e48f24823d1.gz",
+      "retained_sha256": "abf5226058381b564373e1497979d6558ea123d4ea69fa32c9ba33bbd174dcdf"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_attachments.rs",
+      "sha256": "509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8",
+      "bytes": 12783,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/509af5944e887fb2c69ef898ed64103c6d4feb2801e289d07f8f5d3716999fd8.gz",
+      "retained_sha256": "c83435a4f584fcff511afb55aa2b1f7d0db05041d3efda31c94b687a35fe75cd"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_contact_points.rs",
+      "sha256": "6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b",
+      "bytes": 10821,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/6ab2a3b4cc0fbce35af440f4f2ddc779d8d0629a99b795fe5981dbdcf813a11b.gz",
+      "retained_sha256": "6dc0cf3798d24c9c391ef44d7256974ce9fba372867fd09932cfc511f2b58b12"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_graphs.rs",
+      "sha256": "5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2",
+      "bytes": 5690,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/5a17e8f6d7ac53d8f68caf51dca0a931b77f4fd4191caadf0826c737e06db1f2.gz",
+      "retained_sha256": "7c1a305ac22b703be8917c876c65eda6a58e55f26ba941b16239c1f5263f880a"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+      "sha256": "d47679acf7ad167a6b096b693ea3e2c92bee1fdb641f06565d1f608cf1b18675",
+      "bytes": 22675,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/d47679acf7ad167a6b096b693ea3e2c92bee1fdb641f06565d1f608cf1b18675.gz",
+      "retained_sha256": "896c4b160468be929de60cc5f149d5bf2e0847ef36ca47a203b34e85240d4e53"
+    },
+    {
+      "name": "source-002/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/files/crates/incant_physics_snapshot/tests/trusted_parry.rs",
+      "sha256": "4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89",
+      "bytes": 4727,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/4f6ad61eeb9c69f4d451f7c0a42b3a2b82bba02f29f8d9445af5b9c61be20a89.gz",
+      "retained_sha256": "fbdba0d5b298cc49a520afa1ff515429f1c6a1639f625493e90c2f1eb2ad9805"
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/freeze.json",
+      "sha256": "d143f961f8670aefba074bcee51fc6caad5c5d85a2a4a5ccaf224f3a7bfd55b9",
+      "bytes": 11724,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/d143f961f8670aefba074bcee51fc6caad5c5d85a2a4a5ccaf224f3a7bfd55b9.gz",
+      "retained_sha256": "b59c725e566afde9c7adf51b8a85e80e60a32993163c70db79ad60e52046dd8d"
+    },
+    {
+      "name": "source-002/tracked.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/source-002/tracked.patch",
+      "sha256": "a89b96b66656637096d5187828696e7dae9a5a4eb9339933f4107c742379f88b",
+      "bytes": 8019,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/a89b96b66656637096d5187828696e7dae9a5a4eb9339933f4107c742379f88b.gz",
+      "retained_sha256": "8bea514f1764a0d071f7c44e5026514d001436a4012f66c162c8561bc2cbbd71"
+    },
+    {
+      "name": "terminal-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/terminal-audit.json",
+      "sha256": "0be8f93762c7c0b38986c1af0f85622c2624e9030b82a1cdc6a77cd38a3cdbea",
+      "bytes": 7636,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/0be8f93762c7c0b38986c1af0f85622c2624e9030b82a1cdc6a77cd38a3cdbea.gz",
+      "retained_sha256": "bb6bf6f85c958567e2fbdeb58905dd914d330e821aee0eb54c122a6306f41a24"
+    },
+    {
+      "name": "tests-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/tests-001.json",
+      "sha256": "f04a76937a4e173be13f88aa29e847967601fe0addeb62de7016653fe627bec6",
+      "bytes": 665,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/f04a76937a4e173be13f88aa29e847967601fe0addeb62de7016653fe627bec6.gz",
+      "retained_sha256": "62d62af8e20b0c8560cff9bbfb48f60c9259531542fe16aec0bd2657dbe17783"
+    },
+    {
+      "name": "tests-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/tests-001.log",
+      "sha256": "72b37158dc47b8aa0ffeae1090ca4ee314c7393962565bf0717bd936944194ee",
+      "bytes": 9702,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/72b37158dc47b8aa0ffeae1090ca4ee314c7393962565bf0717bd936944194ee.gz",
+      "retained_sha256": "665c5df484768b9f41244100851a01b5a5feb8e4168765681b953d0fd13ee852"
+    },
+    {
+      "name": "tests-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/tests-002.json",
+      "sha256": "5b08e5b3c54d425030bc548faf2559cfbf86a9472e0276b4984dce0c8fc97c0b",
+      "bytes": 665,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/5b08e5b3c54d425030bc548faf2559cfbf86a9472e0276b4984dce0c8fc97c0b.gz",
+      "retained_sha256": "efd763190e014fc28bf34f6c7660cb90681cc9c9d6ab9314ff146535ef326047"
+    },
+    {
+      "name": "tests-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/tests-002.log",
+      "sha256": "7aadf7e7a66199dfe1eee48a07b4f5b2d3775c2e68ec1c797150d37d92f4f75d",
+      "bytes": 9877,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/7aadf7e7a66199dfe1eee48a07b4f5b2d3775c2e68ec1c797150d37d92f4f75d.gz",
+      "retained_sha256": "2c70fab0109c240cea9b3c3ec53f8d0114ea267b69e2a12ec16c12b0e4ad5de5"
+    },
+    {
+      "name": "wasm32-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/wasm32-001.json",
+      "sha256": "ce35e7b1d75b19a3d083db22b0d977c6f045f97a2eb84f48f87f0a378b32aa59",
+      "bytes": 697,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/ce35e7b1d75b19a3d083db22b0d977c6f045f97a2eb84f48f87f0a378b32aa59.gz",
+      "retained_sha256": "a8de139c27be48c4ec065e31297e2932d606a3a4861df7c2e4023a955caee500"
+    },
+    {
+      "name": "wasm32-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-inert-manifolds-001/wasm32-001.log",
+      "sha256": "928100d4df9bceb7821d3adea0a39ed961bdfdab7bf35ab8773b26806d710b99",
+      "bytes": 194,
+      "retained": "docs/spikes/evidence/physics-inert-manifolds/928100d4df9bceb7821d3adea0a39ed961bdfdab7bf35ab8773b26806d710b99.gz",
+      "retained_sha256": "a47d06e4774e0f51792e9bf762b11e87e388534dabea0b49c292148dd0df63b4"
+    }
+  ],
+  "record_count": 116,
+  "payload_count": 71,
+  "independent_review": "pending",
+  "failures": [],
+  "limits": [
+    "The explicit zero mutation-journal witness must later be derived from checked enclosing payloads, not trusted as phase authentication.",
+    "No live constructor, runtime dependency edge, physics-save admission or full-world continuation.",
+    "Shape-specific features and clustered per-point mixed-child provenance remain incomplete.",
+    "Color/body/GraphPos scalar domains do not establish reciprocal solver graph or island ownership.",
+    "Pair events/colors/body masks, dispatcher/recycle workspaces, previous clusters, soft/intersection state and complete body/collider owner payloads remain pending.",
+    "Finite numeric admission does not prove physical consistency or future arithmetic safety.",
+    "No GPU, shipping, device or performance gate."
+  ]
+}
