@@ -1,0 +1,1039 @@
+{
+ "acceptance": "none granted here: no phase gate, cooked, default-on or phone approval; the filter is not accepted while N6 authored and N8 perspective fail and appearance is unrendered",
+ "analysis": {
+  "appearance": {
+   "judged_here": false,
+   "note": "Claude's rendered-pair review is separate."
+  },
+  "command": "env -i PATH=/usr/bin:/bin LC_ALL=C /opt/homebrew/bin/python3 -I -B handoffs/0070-ambient-occlusion/ssao-repair/filter/analyze_filter.py <evidence>",
+  "diagnostics": {
+   "n6t": {
+    "bound": 0.015625,
+    "diagnostic_only": true,
+    "pass": false,
+    "step_residual": 0.013229788985906876,
+    "step_residual_255": 3.37,
+    "within_bound": true
+   }
+  },
+  "failed_quality_gates": [
+   "quality_n6_authored",
+   "quality_n8_persp"
+  ],
+  "numeric_gates": [
+   43,
+   43
+  ],
+  "numeric_pass": true,
+  "observed_at_run": {
+   "exit_status": 1,
+   "note": "printed by the shell after the analyzer; the file records pass false",
+   "wall_s": 103
+  },
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/filter-analysis.json",
+  "quality_gates": {
+   "quality_n6_authored": {
+    "at": 161,
+    "bound": 0.015625,
+    "max_step": 0.027450980392156876,
+    "max_step_255": 7.0,
+    "pass": false
+   },
+   "quality_n7_edge_slab_persp": {
+    "bound": 202.7,
+    "count": 0,
+    "pass": true,
+    "shipped": 2027
+   },
+   "quality_n7_white_slab_ortho": {
+    "bound": 176.7,
+    "count": 0,
+    "pass": true,
+    "shipped": 1767
+   },
+   "quality_n7_white_slab_persp": {
+    "bound": 138.2,
+    "count": 0,
+    "pass": true,
+    "shipped": 1382
+   },
+   "quality_n8_ortho": {
+    "bound": 0.25,
+    "cols": [
+     150,
+     156
+    ],
+    "p2p_255": 14.0,
+    "pass": true,
+    "ratio": 0.175686274509804,
+    "row": 110,
+    "shipped_255": 79.69
+   },
+   "quality_n8_persp": {
+    "bound": 0.25,
+    "cols": [
+     148,
+     158
+    ],
+    "p2p_255": 12.0,
+    "pass": false,
+    "ratio": 0.37647058823529367,
+    "row": 124,
+    "shipped_255": 31.88
+   }
+  },
+  "quality_pass": false,
+  "sha256": "3eb3c8781c00d16c509f99a528331ad37a851501dd78e45f251711632ae69b79"
+ },
+ "backend": {
+  "backend": "Metal",
+  "device": 0,
+  "device_type": "IntegratedGpu",
+  "driver": "",
+  "driver_info": "",
+  "name": "Apple M5 Pro",
+  "vendor": 0
+ },
+ "budgets": {
+  "form": "[used, planned(, cap)]",
+  "gpu_children": [
+   8,
+   9
+  ],
+  "lifecycle_drs": "18 submissions counted; l_invalid_viewport retains no frame, so 17 are indexed",
+  "new_submissions": [
+   84,
+   100,
+   128
+  ],
+  "pairs": [
+   0,
+   11
+  ],
+  "pngs": [
+   0,
+   16
+  ],
+  "retries": 0
+ },
+ "build": {
+  "grants": [
+   {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/build-grant.json",
+    "sha256": "6b0ac1af7a03b7c0efa0ec0823ce1fdd7e1d2d7272247451a85b74d4591d278d"
+   },
+   {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/build-grant-002.json",
+    "sha256": "1929a2bdff68619070e418f51c612dff30868255b688ec3351f305501daec4f6"
+   }
+  ],
+  "record": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/build/build.json",
+   "sha256": "38c06d0bf43379d5e64c4a815941b5db5333d82bc33150b248e2033a9486edb7"
+  },
+  "refusal_before_any_child": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/refusals.jsonl",
+   "sha256": "8b4f51fe57846b5a33b2dfe7ffb5225675bd6de14d6950690aad2c3da2fe5ae3"
+  },
+  "release": {
+   "children": [
+    {
+     "exit": 0,
+     "group_absent": true,
+     "label": "build-helper-lock",
+     "success": true
+    },
+    {
+     "exit": 0,
+     "group_absent": true,
+     "label": "build-lib-tests",
+     "success": true
+    },
+    {
+     "exit": 0,
+     "group_absent": true,
+     "label": "build-helper",
+     "success": true
+    },
+    {
+     "exit": 0,
+     "group_absent": true,
+     "label": "build-helper-clippy",
+     "success": true
+    },
+    {
+     "exit": 0,
+     "group_absent": true,
+     "label": "build-lib-cooked-tests",
+     "success": true
+    }
+   ],
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/build-released.json",
+   "released_at": "2026-10-13T12:34:33.038616+00:00",
+   "sha256": "de7bedcebf2abcb226c5b24d349576938c18b9e6ca65ba8e148bbfe81d4174fd"
+  },
+  "root_review": {
+   "findings": [],
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/build-review-root.json",
+   "scope": "Authorize sole GPU Claude0070 execution9children100plannedsubmissions128cap16PNG11pairs through frozen guardedrunner only; stopfailure/release, no retry; unchanged qualitygates analyzed afterwards.",
+   "sha256": "59e2096b9d5488feb65c43bd570a3d82b7631217371ff851aaa3abf32c221f09"
+  }
+ },
+ "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001",
+ "feature_binding": {
+  "expected": {
+   "helper_incant_render_expected": [
+    "default",
+    "physics-deterministic",
+    "ssao-stage-readback"
+   ],
+   "lib_cooked_requested": [
+    "cooked-materials",
+    "ssao-stage-readback"
+   ],
+   "lib_cooked_required": [
+    "cooked-materials",
+    "ssao-stage-readback"
+   ],
+   "lib_expected": [
+    "default",
+    "physics-deterministic",
+    "ssao-stage-readback"
+   ],
+   "lib_requested": [
+    "ssao-stage-readback"
+   ],
+   "note": "Test default shader features include the non-default diagnostic ssao-stage-readback; the build records the actual compiler-artifact features and refuses any other set."
+  },
+  "helper_incant_render": [
+   "default",
+   "physics-deterministic",
+   "ssao-stage-readback"
+  ],
+  "lib": [
+   "default",
+   "physics-deterministic",
+   "ssao-stage-readback"
+  ],
+  "lib_cooked": [
+   "cooked-geometry",
+   "cooked-materials",
+   "cooked-output",
+   "default",
+   "physics-deterministic",
+   "ssao-stage-readback"
+  ],
+  "problems": []
+ },
+ "format": "incant-0070-ssao-filter-001-index-v1",
+ "frozen_binaries": {
+  "effects_gpu": {
+   "bytes": 31918672,
+   "equals_analysis_binding": true,
+   "sha256": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e"
+  },
+  "lib": {
+   "bytes": 31850144,
+   "equals_analysis_binding": true,
+   "sha256": "4614a9932da985dc4bb905a5f33961d19c971ed1fc9dcdc16e157810cdb1c95d"
+  },
+  "lib-cooked": {
+   "bytes": 32028432,
+   "equals_analysis_binding": true,
+   "sha256": "932694c68db210d1b65b5ae47b1e61e1e97206da5c580a53e800a3b4994a02b4"
+  }
+ },
+ "gpu_children": [
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/lib",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "ambient_occlusion::filter_device_tests::actual_plane_filter_horizontal_vertical_depth_and_r8_contract"
+   ],
+   "binary_sha256": "4614a9932da985dc4bb905a5f33961d19c971ed1fc9dcdc16e157810cdb1c95d",
+   "binary_unchanged": true,
+   "control": "filter_device",
+   "ended": "2026-10-13T12:36:16.068010+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "kernel_start": [
+    1791894975,
+    311534
+   ],
+   "kind": "suite",
+   "label": "control-filter_device",
+   "new_frames_reserved": 2,
+   "pid": 48157,
+   "pngs_reserved": null,
+   "reaped": true,
+   "retained_index": null,
+   "signal": null,
+   "started": "2026-10-13T12:36:15.311429+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "77a9636e821250773b40765439feeef94b7cc7da94af1dc4196e42889164279f",
+   "success": true,
+   "survivors": [],
+   "target": "lib",
+   "timed_out": false,
+   "timeout_s": 60,
+   "verdict_failures": null
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/lib",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output"
+   ],
+   "binary_sha256": "4614a9932da985dc4bb905a5f33961d19c971ed1fc9dcdc16e157810cdb1c95d",
+   "binary_unchanged": true,
+   "control": "ao_device",
+   "ended": "2026-10-13T12:36:20.000597+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "kernel_start": [
+    1791894979,
+    300901
+   ],
+   "kind": "suite",
+   "label": "control-ao_device",
+   "new_frames_reserved": 7,
+   "pid": 48202,
+   "pngs_reserved": null,
+   "reaped": true,
+   "retained_index": null,
+   "signal": null,
+   "started": "2026-10-13T12:36:19.300778+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "231a635a213ad339a1ced9957896815ffbfd390aa0096f82dbe2c5a20ccfe475",
+   "success": true,
+   "survivors": [],
+   "target": "lib",
+   "timed_out": false,
+   "timeout_s": 120,
+   "verdict_failures": null
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/lib-cooked",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output"
+   ],
+   "binary_sha256": "932694c68db210d1b65b5ae47b1e61e1e97206da5c580a53e800a3b4994a02b4",
+   "binary_unchanged": true,
+   "control": "ao_device_cooked",
+   "ended": "2026-10-13T12:36:24.635366+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "kernel_start": [
+    1791894983,
+    988007
+   ],
+   "kind": "suite",
+   "label": "control-ao_device_cooked",
+   "new_frames_reserved": 0,
+   "pid": 48248,
+   "pngs_reserved": null,
+   "reaped": true,
+   "retained_index": null,
+   "signal": null,
+   "started": "2026-10-13T12:36:23.987877+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "cbfa10b2473024d49920ea9e6700c5c07d3d98422fa2385ff795c681dc984060",
+   "success": true,
+   "survivors": [],
+   "target": "lib-cooked",
+   "timed_out": false,
+   "timeout_s": 60,
+   "verdict_failures": null
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/effects_gpu",
+    "case",
+    "ssao_core",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_core"
+   ],
+   "binary_sha256": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e",
+   "binary_unchanged": true,
+   "control": null,
+   "ended": "2026-10-13T12:36:35.543163+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "kernel_start": [
+    1791894988,
+    635979
+   ],
+   "kind": "numeric",
+   "label": "case-ssao_core",
+   "new_frames_reserved": 20,
+   "pid": 48305,
+   "pngs_reserved": 0,
+   "reaped": true,
+   "retained_index": {
+    "frames": 20,
+    "pngs": 0,
+    "stage_frames": 4
+   },
+   "signal": null,
+   "started": "2026-10-13T12:36:28.635854+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "fc16c4874c58a2eaf483a5caceff8306afaeb0bda9e7cc2f392fc30310f961c7",
+   "success": true,
+   "survivors": [],
+   "target": "ssao_core",
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict_failures": [
+    []
+   ]
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/effects_gpu",
+    "case",
+    "ssao_materials",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_materials"
+   ],
+   "binary_sha256": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e",
+   "binary_unchanged": true,
+   "control": null,
+   "ended": "2026-10-13T12:36:42.373201+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "kernel_start": [
+    1791894999,
+    27986
+   ],
+   "kind": "numeric",
+   "label": "case-ssao_materials",
+   "new_frames_reserved": 10,
+   "pid": 48453,
+   "pngs_reserved": 0,
+   "reaped": true,
+   "retained_index": {
+    "frames": 10,
+    "pngs": 0,
+    "stage_frames": 0
+   },
+   "signal": null,
+   "started": "2026-10-13T12:36:39.027867+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "03690d5813773edb4a504255ced58d0e1046dc9c24df3d6744b45e0e15d9f2f3",
+   "success": true,
+   "survivors": [],
+   "target": "ssao_materials",
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict_failures": [
+    []
+   ]
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/effects_gpu",
+    "case",
+    "ssao_geometry",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_geometry"
+   ],
+   "binary_sha256": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e",
+   "binary_unchanged": true,
+   "control": null,
+   "ended": "2026-10-13T12:36:51.033179+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "kernel_start": [
+    1791895006,
+    564634
+   ],
+   "kind": "numeric",
+   "label": "case-ssao_geometry",
+   "new_frames_reserved": 17,
+   "pid": 48532,
+   "pngs_reserved": 0,
+   "reaped": true,
+   "retained_index": {
+    "frames": 17,
+    "pngs": 0,
+    "stage_frames": 9
+   },
+   "signal": null,
+   "started": "2026-10-13T12:36:46.564519+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "e0db894126325b36eece01495ed79e948709c1f762f40b734203faa507f807d4",
+   "success": true,
+   "survivors": [],
+   "target": "ssao_geometry",
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict_failures": [
+    []
+   ]
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/effects_gpu",
+    "case",
+    "lifecycle_drs",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-lifecycle_drs"
+   ],
+   "binary_sha256": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e",
+   "binary_unchanged": true,
+   "control": null,
+   "ended": "2026-10-13T12:36:57.027490+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "kernel_start": [
+    1791895014,
+    417277
+   ],
+   "kind": "numeric",
+   "label": "case-lifecycle_drs",
+   "new_frames_reserved": 18,
+   "pid": 48658,
+   "pngs_reserved": 0,
+   "reaped": true,
+   "retained_index": {
+    "frames": 17,
+    "pngs": 0,
+    "stage_frames": 0
+   },
+   "signal": null,
+   "started": "2026-10-13T12:36:54.417153+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "5f9261d86b6c7b64734092eea308718bd92a7c6e3b7d2bbdf0beb11c9e6a0e29",
+   "success": true,
+   "survivors": [],
+   "target": "lifecycle_drs",
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict_failures": [
+    []
+   ]
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/bin/effects_gpu",
+    "case",
+    "ssao_quality",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_quality"
+   ],
+   "binary_sha256": "de30ad74eead283acf32702adc98df0cc639a0f9875e72fca1e0a54df57c931e",
+   "binary_unchanged": true,
+   "control": null,
+   "ended": "2026-10-13T12:37:04.150019+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "exit": 1,
+   "failure_reasons": [
+    "exit status 1",
+    "no valid verdict: [\"verdict failures ['perspective: the sphere covers its analytic silhouette area within 10%', 'orthographic: the sphere covers its analytic silhouette area within 10%']\", 'verdict has no checks or a check that is not ok']"
+   ],
+   "group_absent": true,
+   "kernel_start": [
+    1791895020,
+    803053
+   ],
+   "kind": "numeric",
+   "label": "case-ssao_quality",
+   "new_frames_reserved": 10,
+   "pid": 48736,
+   "pngs_reserved": 0,
+   "reaped": true,
+   "retained_index": {
+    "frames": 10,
+    "pngs": 0,
+    "stage_frames": 2
+   },
+   "signal": null,
+   "started": "2026-10-13T12:37:00.802948+00:00",
+   "stderr_sha256": "7cea631fae40571136557cb453cbc435adbcb3453c9cd44bc1ca0419573841e0",
+   "stdout_sha256": "874ea38d5902c7422285f8a4196127843c69d6357dd0702951b7784d65226074",
+   "success": false,
+   "survivors": [],
+   "target": "ssao_quality",
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict_failures": [
+    [
+     "perspective: the sphere covers its analytic silhouette area within 10%",
+     "orthographic: the sphere covers its analytic silhouette area within 10%"
+    ]
+   ]
+  }
+ ],
+ "grant": {
+  "at": "2026-10-13T12:34:33.259628+00:00",
+  "build_record_sha256": "38c06d0bf43379d5e64c4a815941b5db5333d82bc33150b248e2033a9486edb7",
+  "build_review_sha256": "59e2096b9d5488feb65c43bd570a3d82b7631217371ff851aaa3abf32c221f09",
+  "expected_backend": "Metal",
+  "helper_digest": "990dfd7e38e8380f06fa3567ad5639fb995bc20844a92c3010dd80f24ce89841",
+  "holder": "Claude0070 exclusive GPU,100planned128cap, release finally",
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/gpu-grant.json",
+  "plan_sha256": "5bdceae405a45e209177ae9d4af14abee9b2f2d8c630a2b0196d7b0a8677f4f6",
+  "sha256": "2047f97ccdef596355a48393a0611e08550b0fd23107152ddadbb342241d6b9a",
+  "source_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-reviews/0070-filter001-helper-root-20261013.json",
+   "sha256": "212ceccc362b3c98620a47ceb10fca865b94bd7bd39a157ea02186b968257bae"
+  }
+ },
+ "ledger": {
+  "equals_release": true,
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/ledger.jsonl",
+  "sha256": "d040d54a153e3d947437d56a9ebd6a4abdc64cd087da26557f9cb881ca62ce28"
+ },
+ "namespace": "0070-ssao-filter-001",
+ "next_step_checks": [
+  {
+   "candidate": "per-ray full-stratum step phase t_i = frac((b + 0.5)/16 + i/16)",
+   "n6_authored_255": 6.0,
+   "n7": {
+    "edge_slab_persp": 0,
+    "white_slab_ortho": 0,
+    "white_slab_persp": 0
+   },
+   "n8_ortho": {
+    "110": {
+     "candidate_ratio": 0.151,
+     "design_ratio": 0.176
+    }
+   },
+   "n8_persp_rows": {
+    "124": 0.439,
+    "125": 0.471,
+    "126": 0.471,
+    "127": 0.439,
+    "128": 0.314,
+    "129": 0.272,
+    "130": 0.209
+   },
+   "result": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0070-ambient-occlusion/handoffs/0070-ambient-occlusion/evidence/ssao-filter-001/next-step/per-ray-jitter-001.json",
+    "sha256": "b245f596f7180d90ae8ac5585c5311d28423a32ef85952e7b665e51ce52d88c2"
+   },
+   "tool": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0070-ambient-occlusion/handoffs/0070-ambient-occlusion/evidence/ssao-filter-001/next-step/per_ray_jitter.py",
+    "sha256": "213a2b0be634653be6fb94601486157acc4a610af6c48a70525280d33ccbbaf7"
+   },
+   "verdict": "fails N8 perspective: 0.439 at the ROI row 124, worse than the design's 0.376"
+  },
+  {
+   "candidate": "8 probes per ray, full-stratum step phase t = (b + 0.5)/16, R1 rotation, R3 filter",
+   "n6_authored_persp_255": {
+    "steps8_full_stratum": 7.0
+   },
+   "n6t_persp_255": {
+    "design": 3.37,
+    "steps8_full_stratum": 3.76,
+    "steps8_upper_half": 5.37
+   },
+   "n7": {
+    "edge_slab_persp": 0,
+    "white_slab_ortho": 0,
+    "white_slab_persp": 0
+   },
+   "n8_ortho": {
+    "110": {
+     "design": 0.176,
+     "steps8_full_stratum": 0.075,
+     "steps8_upper_half": 0.125
+    }
+   },
+   "n8_persp_rows": {
+    "124": 0.314,
+    "125": 0.345,
+    "126": 0.345,
+    "127": 0.345,
+    "128": 0.188,
+    "129": 0.209,
+    "130": 0.188
+   },
+   "result": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0070-ambient-occlusion/handoffs/0070-ambient-occlusion/evidence/ssao-filter-001/next-step/steps8-full-stratum-001.json",
+    "sha256": "e0d750a244d933dc4a71645b116ef8cdc1f4402440072d59f8b311f457419a0d"
+   },
+   "self_check_rows_match_addendum": {
+    "design": true,
+    "steps8_upper_half": true
+   },
+   "tool": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0070-ambient-occlusion/handoffs/0070-ambient-occlusion/evidence/ssao-filter-001/next-step/steps8_full_stratum.py",
+    "sha256": "571198f74fb7cdc2317cad02a0c572d2717d0670de60f33d814670650bd9df86"
+   },
+   "verdict": "fails N8 perspective: 0.314 at the ROI row 124, at about twice the AO pass cost"
+  }
+ ],
+ "outputs": {
+  "lifecycle_drs": {
+   "files_match_index": true,
+   "index_sha256": "a964370ef2323a9967ed9792e4bd925f2274f60cdaa4916c51524c088b7b7207",
+   "r8": {},
+   "retained_rgba_frames": 17,
+   "rgba": {
+    "d_ao_12": "25002e7a5560d73bea95efd69a84805a9e3612993ea135635ee4c896978edb40",
+    "d_ao_16": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "d_ao_8": "3452385ed2799e00815b2177392016edddc1c101ae52da9baf89524c34ed08ec",
+    "d_ao_disabled": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "d_ao_reference_12": "901100427cd4c2645d0841b8ecedced83cd4482704f08b72579daf8b24b027cd",
+    "d_ao_reference_8": "b720233dbd7d4f2ef2b1c0f518bebd9a9d04929be5802fd2a5f527d9c7fd07a5",
+    "e_bloom_12": "67250a1fc59cc7d2cff90ec79eea6466c9431c1f1e6aaa3d0dcb73543ec849bd",
+    "e_bloom_16": "1dea1525742d4d7d3669ee3ed356a19bcf997da51ca5f6deb64e3668ca96948a",
+    "e_bloom_8": "141f8ef72094ee10287bf860b0c9e64e866cf11302b0fb53187caf63599dedc0",
+    "e_off_12": "8be553b3087b7b27c53ba215e2464ca874d074038909a609b4ef74aa6ce82095",
+    "e_off_16": "8235281b89eb6eb4b489e580e812d3728b71f4c76bd4e2f35e7aade976400024",
+    "e_off_8": "a2b93cde13a2ebaa9dddd22885999220e402d05baf0d6866e2c1b9658497ab23",
+    "l_encoded_a": "d9226f8af734063b9a6fef5ccbe9a2d13001157e475c4f44653c02c9f6fd30d9",
+    "l_encoded_a2": "d9226f8af734063b9a6fef5ccbe9a2d13001157e475c4f44653c02c9f6fd30d9",
+    "l_encoded_b": "38e7db84337c68002bc9216dd0f722af1dab3cdb89259fbd816f30d1e3cd74b7",
+    "l_ref_a": "d9226f8af734063b9a6fef5ccbe9a2d13001157e475c4f44653c02c9f6fd30d9",
+    "l_ref_b": "38e7db84337c68002bc9216dd0f722af1dab3cdb89259fbd816f30d1e3cd74b7"
+   },
+   "stage_planes": 0
+  },
+  "ssao_core": {
+   "files_match_index": true,
+   "index_sha256": "0df0456db9b0c03e730159bb5ef523e32a5af4cc5cf453fbcebb24584f8c6390",
+   "r8": {
+    "o_ao_white.h": "84b821371c0ddcf953493ad30e268563e49eaf7fed3c29e8459eb2425158e3fc",
+    "o_ao_white.raw": "2469194178e88b23f15315c09ecd083908ba97ed0c95578c0afee7fd752f507a",
+    "o_ao_white.v": "82ffde848134fec7976805e51ba545583518387a9a2d695b6c8fb389e366bea7",
+    "p_ao_edge.h": "ccdaeb32631727244529c44f8f8cd42540bfd7e9c12243619da7e7794209284e",
+    "p_ao_edge.raw": "617e0930d4acea7c475f9177a2ef4a3a7aabec567333b2d652e41fdcc5a0ad09",
+    "p_ao_edge.v": "a93d80692171e367b5e3840c4fc1779b269fbe87a3710374cd4665cf3d16f275",
+    "p_ao_strength_0_5.h": "6442bd8590d25b78d683341867b9b9b9c8b73f5501d389066a81b225960bed12",
+    "p_ao_strength_0_5.raw": "a545c5ba4fae59ef2ec2e10923d131332c042b71f770d1a3668a33db4f5440e7",
+    "p_ao_strength_0_5.v": "d1d10cdaecea59675e6980113d6c07616df107ee48c68cfc813ec861f2ccef43",
+    "p_ao_white.h": "a6512a8efec4d44c67d5d35ee9963e5305db09279077ccf2599bae238aa6563b",
+    "p_ao_white.raw": "2e80221101919a3afa18204bffec3dcaa6e6c177582c1944e2d2f75e394abbd6",
+    "p_ao_white.v": "028485b66575a19709a7effb95705bf7ca01973136f82f04f81c3425ce725317"
+   },
+   "retained_rgba_frames": 20,
+   "rgba": {
+    "o_ao_black": "55ca71214857a67ce9850a6397704fed912d857da3d780c1343f150ef37a2912",
+    "o_ao_flat": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "o_ao_white": "bd4465607013f29f4cfea26e58b91bde2661bfaf8d3894abedf1c25bada5e96e",
+    "o_off_black": "55ca71214857a67ce9850a6397704fed912d857da3d780c1343f150ef37a2912",
+    "o_off_flat": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "o_off_white": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_ao_black": "e015a69ea46cdc1e3161cda906f1fba9e63d063fc24da982da319a5e1b2b4895",
+    "p_ao_edge": "bd25698b79abe7eff83b17573e6b2f915bb59a3eb43f5118131bd283285c1e16",
+    "p_ao_far": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_ao_flat": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_ao_radius_0_5": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_ao_reversed": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_ao_strength_0_5": "6c9bf4bcd7091790d0a65feedcb9d497206cea9204af71b6cc158ac7d0c6080d",
+    "p_ao_white": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "p_off_black": "e015a69ea46cdc1e3161cda906f1fba9e63d063fc24da982da319a5e1b2b4895",
+    "p_off_edge": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_off_far": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_off_flat": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_off_reversed": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_off_white": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08"
+   },
+   "stage_planes": 12
+  },
+  "ssao_geometry": {
+   "files_match_index": true,
+   "index_sha256": "4a7ae4ec2732dc5256a598de93c40f98be8035fa10d29e19f16352ed13c4275a",
+   "r8": {
+    "g_ao_backface.h": "a6512a8efec4d44c67d5d35ee9963e5305db09279077ccf2599bae238aa6563b",
+    "g_ao_backface.raw": "2e80221101919a3afa18204bffec3dcaa6e6c177582c1944e2d2f75e394abbd6",
+    "g_ao_backface.v": "028485b66575a19709a7effb95705bf7ca01973136f82f04f81c3425ce725317",
+    "g_ao_mask_cutout.h": "54f50dea1604d0f416023886a7ed3a189701c559e0f9b14ce8f9cb6a0b1eb24c",
+    "g_ao_mask_cutout.raw": "5be794fb7281eb8fa9952bd6b409f523680236ba462ba7e60b20fa151de274a1",
+    "g_ao_mask_cutout.v": "3f6b6729a2ad8864fd563c210d8387df59d81d123d869f3715d70c53c2425e3c",
+    "g_ao_mask_equal.h": "a6512a8efec4d44c67d5d35ee9963e5305db09279077ccf2599bae238aa6563b",
+    "g_ao_mask_equal.raw": "2e80221101919a3afa18204bffec3dcaa6e6c177582c1944e2d2f75e394abbd6",
+    "g_ao_mask_equal.v": "028485b66575a19709a7effb95705bf7ca01973136f82f04f81c3425ce725317",
+    "g_ao_mirrored.h": "a6512a8efec4d44c67d5d35ee9963e5305db09279077ccf2599bae238aa6563b",
+    "g_ao_mirrored.raw": "2e80221101919a3afa18204bffec3dcaa6e6c177582c1944e2d2f75e394abbd6",
+    "g_ao_mirrored.v": "028485b66575a19709a7effb95705bf7ca01973136f82f04f81c3425ce725317",
+    "g_ao_motion_far.h": "4ed62d6d16591d892d662deac2fba98d419301349515a3b6543a84e932280dc4",
+    "g_ao_motion_far.raw": "4ed62d6d16591d892d662deac2fba98d419301349515a3b6543a84e932280dc4",
+    "g_ao_motion_far.v": "4ed62d6d16591d892d662deac2fba98d419301349515a3b6543a84e932280dc4",
+    "g_ao_motion_near.h": "a6512a8efec4d44c67d5d35ee9963e5305db09279077ccf2599bae238aa6563b",
+    "g_ao_motion_near.raw": "2e80221101919a3afa18204bffec3dcaa6e6c177582c1944e2d2f75e394abbd6",
+    "g_ao_motion_near.v": "028485b66575a19709a7effb95705bf7ca01973136f82f04f81c3425ce725317",
+    "g_ao_skin_t0.h": "4ed62d6d16591d892d662deac2fba98d419301349515a3b6543a84e932280dc4",
+    "g_ao_skin_t0.raw": "4ed62d6d16591d892d662deac2fba98d419301349515a3b6543a84e932280dc4",
+    "g_ao_skin_t0.v": "4ed62d6d16591d892d662deac2fba98d419301349515a3b6543a84e932280dc4",
+    "g_ao_skin_t1.h": "a6512a8efec4d44c67d5d35ee9963e5305db09279077ccf2599bae238aa6563b",
+    "g_ao_skin_t1.raw": "2e80221101919a3afa18204bffec3dcaa6e6c177582c1944e2d2f75e394abbd6",
+    "g_ao_skin_t1.v": "028485b66575a19709a7effb95705bf7ca01973136f82f04f81c3425ce725317",
+    "g_ao_white.h": "a6512a8efec4d44c67d5d35ee9963e5305db09279077ccf2599bae238aa6563b",
+    "g_ao_white.raw": "2e80221101919a3afa18204bffec3dcaa6e6c177582c1944e2d2f75e394abbd6",
+    "g_ao_white.v": "028485b66575a19709a7effb95705bf7ca01973136f82f04f81c3425ce725317"
+   },
+   "retained_rgba_frames": 17,
+   "rgba": {
+    "g_ao_backface": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "g_ao_mask_below": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "g_ao_mask_cutout": "fef996a6076771593408f839c7e1116bb5e8c9809a9debf7bc4d03ee94875a47",
+    "g_ao_mask_equal": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "g_ao_mirrored": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "g_ao_motion_far": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "g_ao_motion_near": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "g_ao_skin_oracle_far": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "g_ao_skin_oracle_near": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "g_ao_skin_t0": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "g_ao_skin_t1": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "g_ao_tilted": "a3bc6f3c620f4dc227c6c1c88a7a9ee0367b49b65f230f62d3bc22084cebc2d1",
+    "g_ao_white": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85",
+    "g_off_black": "e015a69ea46cdc1e3161cda906f1fba9e63d063fc24da982da319a5e1b2b4895",
+    "g_off_mask_below": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "g_off_tilted": "a3bc6f3c620f4dc227c6c1c88a7a9ee0367b49b65f230f62d3bc22084cebc2d1",
+    "g_off_white": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08"
+   },
+   "stage_planes": 27
+  },
+  "ssao_materials": {
+   "files_match_index": true,
+   "index_sha256": "d139eb31f9a2a0a3abc403584d5a6265a10bcf4a2171b7abb45e42d1adc1c2a3",
+   "r8": {},
+   "retained_rgba_frames": 10,
+   "rgba": {
+    "m_ao_blend_occluder": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "m_ao_blend_only": "1ef7a07c805469eaffc2c8b262f1ea384b71a832d4e72e260783d7db105a6d00",
+    "m_ao_direct_only": "b33fa2dec84acd96027708a68edfbe33576f250c59a1e03ad07505d9430818dc",
+    "m_ao_emissive_only": "62f11ec28ea658a18cfcbd379aadef679c975dbe978aee49f4081cba0d9e09f2",
+    "m_ao_mixed": "47019b8e5bf5b06320d8e84c63c3a5f18d5462ed2e0f754cbfbbb8c1ab4a9486",
+    "m_off_blend_occluder": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "m_off_blend_only": "1ef7a07c805469eaffc2c8b262f1ea384b71a832d4e72e260783d7db105a6d00",
+    "m_off_direct_only": "b33fa2dec84acd96027708a68edfbe33576f250c59a1e03ad07505d9430818dc",
+    "m_off_emissive_only": "62f11ec28ea658a18cfcbd379aadef679c975dbe978aee49f4081cba0d9e09f2",
+    "m_off_mixed": "177d97c1875973526c8439c23811e928332bdcb3890bb3eb1003c825dbb81a50"
+   },
+   "stage_planes": 0
+  },
+  "ssao_quality": {
+   "files_match_index": true,
+   "index_sha256": "993ca69d090da3a43749daba1772bb89ead52715a60a77c29405d0785dd987f7",
+   "r8": {
+    "o_ao_stripes.h": "d1c91e76c92ca3dc4c0123ac01119577509d2b9242d39b650a20f0b429718072",
+    "o_ao_stripes.raw": "f41b5028a7b3d79c82220b1755f02f824cd88c0acdc5b99a69aa22cac6b00aa6",
+    "o_ao_stripes.v": "9528dcfb1041eebdb3b55aeaf7176387dcf5c3a5b4cbc92e1b668a1c0aa11e6a",
+    "p_ao_stripes.h": "fe5fe38a3300650d20158c029d9acfe3a8222bd956357e01f19448961ec683e6",
+    "p_ao_stripes.raw": "952c1502ca10cd8f26d3e2af2b65f1f1f4e26c52e39a1abd552419c075f91b0e",
+    "p_ao_stripes.v": "4017ede8aa335396d3ee70c2bd633143e13de23d3bb8bdeb68358399aed639cd"
+   },
+   "retained_rgba_frames": 10,
+   "rgba": {
+    "o_ao_sphere": "cac1ae1f492589f095495fd0d8ec1d207fc87ff1cb3d5a52df4e4bf2000cf19a",
+    "o_ao_stripes": "230763918bcfe20fcfbc3ea5b9f6384bd0bf4d4539a9f14c448fad72b7f45b32",
+    "o_off_sphere": "cac1ae1f492589f095495fd0d8ec1d207fc87ff1cb3d5a52df4e4bf2000cf19a",
+    "o_off_stripes": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "o_off_stripes_black": "55ca71214857a67ce9850a6397704fed912d857da3d780c1343f150ef37a2912",
+    "p_ao_sphere": "0315bd0a6a8499c30979e774effaea83b98aa05e502c184f8e848e6a6339a31c",
+    "p_ao_stripes": "16640c0a5685592362887d51385026eb68f0c3121b1367e46ab2e9e052f7cfd5",
+    "p_off_sphere": "0315bd0a6a8499c30979e774effaea83b98aa05e502c184f8e848e6a6339a31c",
+    "p_off_stripes": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08",
+    "p_off_stripes_black": "9ff81fb360c5a7d2f11e2c0a14a7b193d6f5587e0e211470c9e318edb866af7d"
+   },
+   "stage_planes": 6
+  }
+ },
+ "packet": "0070-ambient-occlusion",
+ "plan": {
+  "equals_grant": true,
+  "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0070-ambient-occlusion/handoffs/0070-ambient-occlusion/ssao-filter-001/plan.json",
+  "sha256": "5bdceae405a45e209177ae9d4af14abee9b2f2d8c630a2b0196d7b0a8677f4f6"
+ },
+ "release": {
+  "children": 8,
+  "frozen_processes": [],
+  "latched_failures": {
+   "case-ssao_quality": [
+    "exit status 1",
+    "no valid verdict: [\"verdict failures ['perspective: the sphere covers its analytic silhouette area within 10%', 'orthographic: the sphere covers its analytic silhouette area within 10%']\", 'verdict has no checks or a check that is not ok']"
+   ]
+  },
+  "ledger_sha256": "d040d54a153e3d947437d56a9ebd6a4abdc64cd087da26557f9cb881ca62ce28",
+  "new_frames_reserved": 84,
+  "owned_processes_alive": [],
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/released.json",
+  "pngs_reserved": 0,
+  "released_at": "2026-10-13T12:37:12.480925+00:00",
+  "retries": 0,
+  "sha256": "ec52f60f5f25d75bc54b4097dff3567a342e0ad7fbe217a3b70e79502953ad01"
+ },
+ "review_aids": {
+  "manifest": {
+   "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0070-ambient-occlusion/handoffs/0070-ambient-occlusion/evidence/ssao-filter-001/review/manifest.json",
+   "sha256": "f4dbd506ed259ca4e89c15eb61ad140f694b9cd273f1ac461f7916f2be50f6ce"
+  },
+  "note": "derived after release from retained RGBA; not renders, not the 16 appearance PNGs",
+  "pngs": {
+   "darkening_edge_slab_p_build003_vs_filter001.png": "2e9b51e5eb79bc995ea74c13b41fbe6fadca3d4091fc9bdfeb847bcc2d21bfcc",
+   "darkening_stripes_p_vs_o_filter001.png": "a14d421fe6fc4fafe2cbf7fad5db269b4c8f3ea90640e576d3c4403de702b5f0",
+   "darkening_white_slab_o_build003_vs_filter001.png": "a93437ccd6cd29cf5ce9a930be78850d735ae6a09f39aa3d2a75b6b90687b585",
+   "darkening_white_slab_p_build003_vs_filter001.png": "2dbaf29f3fd1906f2c63403be5260bb6e45f2d260fe26056e6875d65a5589188",
+   "slab_edge_crop_build003_vs_filter001.png": "0f4a48bb07dee2baaa423fe989d66e56c6898bb9c0dc391aa75dc3edcc18853f",
+   "sphere_p_off_vs_on.png": "7f9ba553b10938fafd53e80982172359cc8251a8825074ff53f7a21fc215749c",
+   "stripes_p_roi_crop_off_vs_on.png": "3ca096a56023dd39bc40278d7e5057baa770a33e771a91e113f4d7fe0b47fd9c"
+  },
+  "tool": {
+   "path": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0070-ambient-occlusion/handoffs/0070-ambient-occlusion/evidence/ssao-filter-001/review/make_review.py",
+   "sha256": "98ea86e99ba155bde5fb834d56fa92d544485ba384c276aae888dd4d587efd05"
+  }
+ },
+ "run_contract_failure": {
+  "analyzer_interior_domain": {
+   "ssao_quality_o_sphere_identity": {
+    "expected_area": 455.2,
+    "pass": true,
+    "sphere_texels": 454
+   },
+   "ssao_quality_p_sphere_identity": {
+    "expected_area": 2824.6,
+    "pass": true,
+    "sphere_texels": 2818
+   }
+  },
+  "cause": "the 601 viewport texels only partly covered by the fractional viewport (13.25, 17.5, 280.5, 160.5), columns x 13 and x 293 and row y 17, blend the canvas into the scene background, so they differ from the background probe at (16, 20) and were counted",
+  "checks": [
+   {
+    "check": "perspective: the sphere covers its analytic silhouette area within 10%",
+    "detail": {
+     "expected": 2824.635112170965,
+     "texels": 3419
+    },
+    "ok": false
+   },
+   {
+    "check": "orthographic: the sphere covers its analytic silhouette area within 10%",
+    "detail": {
+     "expected": 455.2211933698301,
+     "texels": 1055
+    },
+    "ok": false
+   }
+  ],
+  "child": "case-ssao_quality",
+  "guard": "ssao-filter-001/effects/src/numeric.rs sphere_texels (texel centre inside RECT)",
+  "interior_counts": {
+   "o_off_sphere": {
+    "all": 1055,
+    "interior": 454,
+    "rim": 601
+   },
+   "p_off_sphere": {
+    "all": 3419,
+    "interior": 2818,
+    "rim": 601
+   }
+  },
+  "rim_colours": {
+   "(22, 32, 45, 255)": 320,
+   "(26, 47, 70, 255)": 281
+  },
+  "root_diagnostic": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/sphere-count-diagnostic-root.json",
+   "sha256": "4ef86898c3b7923e4594e53e84fa2e9f045a76e66cbed777235de6795fff5c26"
+  }
+ },
+ "sequence": {
+  "executed": [
+   "control-filter_device",
+   "control-ao_device",
+   "control-ao_device_cooked",
+   "case-ssao_core",
+   "case-ssao_materials",
+   "case-ssao_geometry",
+   "case-lifecycle_drs",
+   "case-ssao_quality"
+  ],
+  "not_run": [
+   "appearance"
+  ],
+  "planned": [
+   "control-filter_device",
+   "control-ao_device",
+   "control-ao_device_cooked",
+   "case-ssao_core",
+   "case-ssao_materials",
+   "case-ssao_geometry",
+   "case-lifecycle_drs",
+   "case-ssao_quality",
+   "appearance"
+  ],
+  "why_not_run": "every child failure halts device work (brief); no retry"
+ },
+ "source": {
+  "engine_commit": "5dfc522ec164f2bc50d760f12db57eae233f33d8",
+  "head": "880d6c6bc02f03563ae334125611685ba444bc83",
+  "preflight": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/preflight-source.json",
+   "sha256": "617331297cbfeb961ec9cde39ec2a327c1d9addc2a7439168aa3fee1e4722521"
+  }
+ },
+ "status": "halted: case-ssao_quality failed its own numerical-contract guard (sphere coverage), so device work stopped before appearance; GPU released; analyzer run after release",
+ "tool": {
+  "make_index.py": "9c9dc3eabe0bee2fb8dbc75d8e15be1415273a273fe6f7db2cbed79e97e070e2"
+ }
+}

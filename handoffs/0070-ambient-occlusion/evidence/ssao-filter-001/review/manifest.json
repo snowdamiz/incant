@@ -1,0 +1,124 @@
+{
+ "format": "incant-0070-ssao-filter-001-review-v1",
+ "note": "Derived after GPU release from retained RGBA readbacks; not renders and not acceptance evidence.",
+ "outputs": {
+  "darkening_edge_slab_p_build003_vs_filter001.png": {
+   "description": "edge_slab perspective darkening (off - on) x6: build003 (left) vs filter-001",
+   "png_sha256": "2e9b51e5eb79bc995ea74c13b41fbe6fadca3d4091fc9bdfeb847bcc2d21bfcc",
+   "size": [
+    648,
+    193
+   ]
+  },
+  "darkening_stripes_p_vs_o_filter001.png": {
+   "description": "N8 stripes darkening (off - on) x6, filter-001: perspective (left) vs orthographic",
+   "png_sha256": "a14d421fe6fc4fafe2cbf7fad5db269b4c8f3ea90640e576d3c4403de702b5f0",
+   "size": [
+    648,
+    193
+   ]
+  },
+  "darkening_white_slab_o_build003_vs_filter001.png": {
+   "description": "white_slab orthographic darkening (off - on) x6: build003 (left) vs filter-001",
+   "png_sha256": "a93437ccd6cd29cf5ce9a930be78850d735ae6a09f39aa3d2a75b6b90687b585",
+   "size": [
+    648,
+    193
+   ]
+  },
+  "darkening_white_slab_p_build003_vs_filter001.png": {
+   "description": "white_slab perspective darkening (off - on) x6, full frame: build003 (left) vs filter-001",
+   "png_sha256": "2dbaf29f3fd1906f2c63403be5260bb6e45f2d260fe26056e6875d65a5589188",
+   "size": [
+    648,
+    193
+   ]
+  },
+  "slab_edge_crop_build003_vs_filter001.png": {
+   "description": "white_slab perspective, receiver left of the slab edge, x 110..199 y 40..149, x3: build003 (left) vs filter-001",
+   "png_sha256": "0f4a48bb07dee2baaa423fe989d66e56c6898bb9c0dc391aa75dc3edcc18853f",
+   "size": [
+    546,
+    330
+   ]
+  },
+  "sphere_p_off_vs_on.png": {
+   "description": "isolated 24x48 sphere perspective, x 118..189 y 62..133, x3, filter-001: off (left) vs on (byte-identical)",
+   "png_sha256": "7f9ba553b10938fafd53e80982172359cc8251a8825074ff53f7a21fc215749c",
+   "size": [
+    438,
+    216
+   ]
+  },
+  "stripes_p_roi_crop_off_vs_on.png": {
+   "description": "N8 perspective ROI area x 120..189 y 100..159, x4, filter-001: off (left) vs on; ROI row 124, x 148..158",
+   "png_sha256": "3ca096a56023dd39bc40278d7e5057baa770a33e771a91e113f4d7fe0b47fd9c",
+   "size": [
+    566,
+    240
+   ]
+  }
+ },
+ "sources": {
+  "b3_o_ao_white": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-ssao_core/o_ao_white.rgba",
+   "rgba_sha256": "46ee379e5272409142c8e5962b0f6972d9ac2cbfd60bf642ad918e6292ce9ef6"
+  },
+  "b3_p_ao_edge": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-ssao_core/p_ao_edge.rgba",
+   "rgba_sha256": "b02c7a8a9d9d0f1982076425db459392c603c8c574d63d416ffc8d56c296e212"
+  },
+  "b3_p_ao_white": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-ssao_core/p_ao_white.rgba",
+   "rgba_sha256": "a39853d5100de2d6fbc783db9f4bb6a9500569953a9b4e6ad7dbb2165038978d"
+  },
+  "f1_o_ao_stripes": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_quality/o_ao_stripes.rgba",
+   "rgba_sha256": "230763918bcfe20fcfbc3ea5b9f6384bd0bf4d4539a9f14c448fad72b7f45b32"
+  },
+  "f1_o_ao_white": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_core/o_ao_white.rgba",
+   "rgba_sha256": "bd4465607013f29f4cfea26e58b91bde2661bfaf8d3894abedf1c25bada5e96e"
+  },
+  "f1_o_off_stripes": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_quality/o_off_stripes.rgba",
+   "rgba_sha256": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08"
+  },
+  "f1_p_ao_edge": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_core/p_ao_edge.rgba",
+   "rgba_sha256": "bd25698b79abe7eff83b17573e6b2f915bb59a3eb43f5118131bd283285c1e16"
+  },
+  "f1_p_ao_sphere": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_quality/p_ao_sphere.rgba",
+   "rgba_sha256": "0315bd0a6a8499c30979e774effaea83b98aa05e502c184f8e848e6a6339a31c"
+  },
+  "f1_p_ao_stripes": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_quality/p_ao_stripes.rgba",
+   "rgba_sha256": "16640c0a5685592362887d51385026eb68f0c3121b1367e46ab2e9e052f7cfd5"
+  },
+  "f1_p_ao_white": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_core/p_ao_white.rgba",
+   "rgba_sha256": "2fc9b37f6cf6392f36458776620b41c0b664e4853b438fd6a78a1c1d41cfff85"
+  },
+  "f1_p_off_sphere": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_quality/p_off_sphere.rgba",
+   "rgba_sha256": "0315bd0a6a8499c30979e774effaea83b98aa05e502c184f8e848e6a6339a31c"
+  },
+  "f1_p_off_stripes": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_quality/p_off_stripes.rgba",
+   "rgba_sha256": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08"
+  },
+  "o_off_white": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_core/o_off_white.rgba",
+   "rgba_sha256": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08"
+  },
+  "p_off_white": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-ssao-filter-001/outputs/case-ssao_core/p_off_white.rgba",
+   "rgba_sha256": "4575e496dd1b11ef313b3173a5b3ea9239f1ec51ca69327b56d92575efff5f08"
+  }
+ },
+ "tool": {
+  "make_review.py": "98ea86e99ba155bde5fb834d56fa92d544485ba384c276aae888dd4d587efd05",
+  "pngtool.py": "8acdc898cd964fc3a47fa5cf8c890996b4e250ebe544b3ed10b404c37400cfa0"
+ }
+}
