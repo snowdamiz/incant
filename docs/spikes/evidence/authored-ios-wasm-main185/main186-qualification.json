@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T02:04:32.985500+00:00",
+  "tested": "4b277d577c6627e98e407b2c25daf274a99fd406",
+  "current": "43ed989bae5ec6607a78db00b51fb6ed5c8213a6",
+  "main": "1c5658cf5d7eee8390b272394f38b8d9b49e1628",
+  "original_collector_sha256": "000715207264593d59be547f5f3f2dbf40096d2070abe0e8da5cc3352648ba47",
+  "original_manifest_sha256": "45967a33290fc4d7bbf14d2a5d12a94b3fabf861a936d0da851ce9967f7084a0",
+  "frozen_inputs": 2001,
+  "exact_except": [
+    {
+      "path": ".github/workflows/development-wasm.yml",
+      "tested_sha256": "4fd16ed414730d81b4a59884be881d0859aaebb084660a1773587d612b3714b9",
+      "current_sha256": "9fdf6e92d4ce7c891ffb221bd3bf949cde16302973e3dc1a41de58fdfef1021b",
+      "current_source": "1c5658cf5d7eee8390b272394f38b8d9b49e1628"
+    }
+  ],
+  "runtime_and_build_inputs_equal": true,
+  "collector_replay_exit": 0,
+  "scope": "Only accepted main186 CI workflow differs; original frozen workflow verified from exact Git blob. Original collector and execution receipts unchanged."
+}

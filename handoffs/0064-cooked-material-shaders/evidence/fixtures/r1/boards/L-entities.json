@@ -1,0 +1,5670 @@
+[
+ {
+  "id": "01JA64KX000000000000000001",
+  "name": "camera-persp",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     9.5,
+     8.5
+    ],
+    "rotation": [
+     -0.30182244838582944,
+     0.0,
+     0.0,
+     0.9533641537473408
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 50.0,
+    "near": 0.1,
+    "far": 50.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000002",
+  "name": "camera-ortho",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     14.0,
+     -5.0
+    ],
+    "rotation": [
+     -0.7071067811865475,
+     0.0,
+     0.0,
+     0.7071067811865476
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 50.0,
+    "near": 0.1,
+    "far": 40.0,
+    "projection": {
+     "kind": "orthographic",
+     "vertical_size": 16.0
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000003",
+  "name": "floor",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     -4.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     26.0,
+     1.0,
+     22.0
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFBGT052QFNPSV4F3YJQ",
+    "materials": [],
+    "cast_shadows": false
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000004",
+  "name": "ball-0-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.0,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000005",
+  "name": "ball-0-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.0,
+     0.6,
+     -5.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000006",
+  "name": "ball-0-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.0,
+     0.6,
+     -1.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000007",
+  "name": "ball-1-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -3.0,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000008",
+  "name": "ball-1-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -3.0,
+     0.6,
+     -5.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000009",
+  "name": "ball-1-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -3.0,
+     0.6,
+     -1.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000A",
+  "name": "ball-2-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000B",
+  "name": "ball-2-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.6,
+     -5.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000C",
+  "name": "ball-2-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.6,
+     -1.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000D",
+  "name": "ball-3-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     3.0,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000E",
+  "name": "ball-3-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     3.0,
+     0.6,
+     -5.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000F",
+  "name": "ball-3-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     3.0,
+     0.6,
+     -1.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000G",
+  "name": "ball-4-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     6.0,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000H",
+  "name": "ball-4-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     6.0,
+     0.6,
+     -5.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000J",
+  "name": "ball-4-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     6.0,
+     0.6,
+     -1.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     0.6,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFDNK4P09Z4GP2QSS31D",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000K",
+  "name": "pillar-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.5,
+     1.0,
+     -3.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     2.0,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNF9CS14X35ZJE1W6MT72",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000M",
+  "name": "pillar-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.5,
+     1.0,
+     -7.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     2.0,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNF9CS14X35ZJE1W6MT72",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000N",
+  "name": "pillar-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     1.0,
+     -11.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     0.6,
+     2.0,
+     0.6
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNF9CS14X35ZJE1W6MT72",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000P",
+  "name": "key-dim",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     -0.49875232533294406,
+     -0.26899940478558293,
+     -0.16625077511098135,
+     0.8069982143567488
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "DirectionalLight": {
+    "color": [
+     0.6,
+     0.65,
+     0.8
+    ],
+    "intensity": 0.12
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000Q",
+  "name": "environment-dim",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "EnvironmentLight": {
+    "texture": "01M4SDNFG1Z85VCS9KGKZXWX9F",
+    "intensity": 0.25,
+    "rotation_degrees": 0.0
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000R",
+  "name": "point-00-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     0.6,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.6,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000S",
+  "name": "point-01-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     0.8999999999999999,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.7187719590425635,
+     0.0,
+     0.5416335208368434
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000T",
+  "name": "point-02-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     1.2,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.330764826980399,
+     0.0,
+     1.1535140351259827
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000V",
+  "name": "point-03-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     0.6,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.21502076972718015,
+     0.0,
+     0.5601482558983211
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000W",
+  "name": "point-04-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     0.8999999999999999,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.7632432865407833,
+     0.0,
+     0.47692733780988444
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000X",
+  "name": "point-05-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     1.2,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -1.1954336377100947,
+     0.0,
+     -0.10458689129718952
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000Y",
+  "name": "point-06-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     0.6,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.44588689528643655,
+     0.0,
+     -0.40147836381531493
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000000Z",
+  "name": "point-07-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     0.8999999999999999,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.17172809583889012,
+     0.0,
+     -0.8834644651028974
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000010",
+  "name": "point-08-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     1.2,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.5260453761468928,
+     0.0,
+     -1.0785528555590005
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000011",
+  "name": "point-09-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     0.6,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.5346039145130207,
+     0.0,
+     -0.27239429984372815
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000012",
+  "name": "point-10-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     0.8999999999999999,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.8863269777109871,
+     0.0,
+     0.15628335990023728
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000013",
+  "name": "point-11-0",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     1.2,
+     -10.6
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.8183980320749982,
+     0.0,
+     0.8776244419430045
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000014",
+  "name": "point-00-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     0.8999999999999999,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.015707165793555126,
+     0.0,
+     0.8998629256407521
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000015",
+  "name": "point-01-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     1.2,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.73879377039079,
+     0.0,
+     0.9456129043280663
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000016",
+  "name": "point-02-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.5795554957734409,
+     0.0,
+     0.1552914270615126
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000017",
+  "name": "point-03-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     0.8999999999999999,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.8344654691101085,
+     0.0,
+     -0.3371459340743208
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000018",
+  "name": "point-04-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     1.2,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.6180456898920652,
+     0.0,
+     -1.0286007608425345
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000019",
+  "name": "point-05-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.06271707796059178,
+     0.0,
+     -0.596713137220964
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001A",
+  "name": "point-06-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     0.8999999999999999,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.6137985240562488,
+     0.0,
+     -0.6582183314572533
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001B",
+  "name": "point-07-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     1.2,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     1.1817693036146495,
+     0.0,
+     -0.20837781320031645
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001C",
+  "name": "point-08-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.5346039145130207,
+     0.0,
+     0.2723942998437281
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001D",
+  "name": "point-09-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     0.8999999999999999,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.3945340321101697,
+     0.0,
+     0.8089146416692502
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001E",
+  "name": "point-10-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     1.2,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.22897079445185375,
+     0.0,
+     1.1779526201371968
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001F",
+  "name": "point-11-1",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     0.6,
+     -9.0
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.4458868952864364,
+     0.0,
+     0.40147836381531504
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001G",
+  "name": "point-00-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     1.2,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -1.199268992422915,
+     0.0,
+     -0.04187939604300108
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001H",
+  "name": "point-01-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     0.6,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.46628757687418243,
+     0.0,
+     -0.37759223462990255
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001J",
+  "name": "point-02-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     0.8999999999999999,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.217729706039701,
+     0.0,
+     -0.8732661536483968
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001K",
+  "name": "point-03-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     1.2,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.46887735418712817,
+     0.0,
+     -1.1046058241429286
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001M",
+  "name": "point-04-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     0.6,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.519615242270663,
+     0.0,
+     -0.30000000000000027
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001N",
+  "name": "point-05-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     0.8999999999999999,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.8932915364771897,
+     0.0,
+     0.10968240906463272
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001P",
+  "name": "point-06-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     1.2,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.8632077604063814,
+     0.0,
+     0.8335900445507967
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001Q",
+  "name": "point-07-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     0.6,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.09386067902413855,
+     0.0,
+     0.5926130043570826
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001R",
+  "name": "point-08-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     0.8999999999999999,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.4225244065073018,
+     0.0,
+     0.7946528335730341
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001S",
+  "name": "point-09-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     1.2,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -1.0875693444439798,
+     0.0,
+     0.5071419140888394
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001T",
+  "name": "point-10-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     0.6,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.5868885604402834,
+     0.0,
+     -0.1247470144906557
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001V",
+  "name": "point-11-2",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     0.8999999999999999,
+     -7.3999999999999995
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.5904531260914565,
+     0.0,
+     -0.6792386222004947
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001W",
+  "name": "point-00-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     0.6,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.03140157374576637,
+     0.0,
+     -0.5991777208527442
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001X",
+  "name": "point-01-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     0.8999999999999999,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.5785088487178852,
+     0.0,
+     -0.6894399988070803
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001Y",
+  "name": "point-02-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     1.2,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     1.1692440777422821,
+     0.0,
+     -0.2699412652126384
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000001Z",
+  "name": "point-03-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     0.6,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.5481272745855605,
+     0.0,
+     0.24404198584548012
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000020",
+  "name": "point-04-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     0.8999999999999999,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.43632865822170336,
+     0.0,
+     0.7871577364254561
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000021",
+  "name": "point-05-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     1.2,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.16700772115207843,
+     0.0,
+     1.1883216824898843
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000022",
+  "name": "point-06-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     0.6,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.42426406871192845,
+     0.0,
+     0.4242640687119285
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000023",
+  "name": "point-07-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     0.8999999999999999,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.8912412618674133,
+     0.0,
+     0.12525579086405877
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000024",
+  "name": "point-08-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     1.2,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -1.049543648567275,
+     0.0,
+     -0.5817715442956043
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000025",
+  "name": "point-09-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     0.6,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.24404198584548004,
+     0.0,
+     -0.5481272745855605
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000026",
+  "name": "point-10-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     0.8999999999999999,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.2024559489094784,
+     0.0,
+     -0.8769330583067116
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000027",
+  "name": "point-11-3",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     1.2,
+     -5.799999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.9192533317427733,
+     0.0,
+     -0.7713451316238474
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000028",
+  "name": "point-00-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     0.8999999999999999,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.8978076452338417,
+     0.0,
+     0.06278082636971277
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000029",
+  "name": "point-01-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     1.2,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.9056514962673263,
+     0.0,
+     0.7872708347886087
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002A",
+  "name": "point-02-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     0.6,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.12474701449065567,
+     0.0,
+     0.5868885604402834
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002B",
+  "name": "point-03-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     0.8999999999999999,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.38035643556662935,
+     0.0,
+     0.815677008332985
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002C",
+  "name": "point-04-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     1.2,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -1.0595371114307124,
+     0.0,
+     0.5633658753430688
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002D",
+  "name": "point-05-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     0.6,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.5926130043570826,
+     0.0,
+     -0.09386067902413843
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002E",
+  "name": "point-06-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     0.8999999999999999,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.6251925334130974,
+     0.0,
+     -0.647405820304786
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002F",
+  "name": "point-07-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     1.2,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.1462432120861766,
+     0.0,
+     -1.1910553819695864
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002G",
+  "name": "point-08-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     0.6,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.30000000000000004,
+     0.0,
+     -0.5196152422706631
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002H",
+  "name": "point-09-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     0.8999999999999999,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.8284543681071962,
+     0.0,
+     -0.35165801564034643
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002J",
+  "name": "point-10-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     1.2,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     1.1643548715311958,
+     0.0,
+     0.29030627471960124
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002K",
+  "name": "point-11-4",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     0.6,
+     -4.199999999999999
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.37759223462990243,
+     0.0,
+     0.46628757687418254
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002M",
+  "name": "point-00-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     1.2,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.10458689129718989,
+     0.0,
+     1.1954336377100947
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002N",
+  "name": "point-01-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     0.6,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.40147836381531493,
+     0.0,
+     0.44588689528643655
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002P",
+  "name": "point-02-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     0.8999999999999999,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.8834644651028974,
+     0.0,
+     0.17172809583889045
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002Q",
+  "name": "point-03-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     1.2,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -1.0785528555590003,
+     0.0,
+     -0.526045376146893
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002R",
+  "name": "point-04-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     0.6,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.27239429984372815,
+     0.0,
+     -0.5346039145130207
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002S",
+  "name": "point-05-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     0.8999999999999999,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.15628335990023695,
+     0.0,
+     -0.8863269777109872
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002T",
+  "name": "point-06-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     1.2,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.8776244419430048,
+     0.0,
+     -0.8183980320749981
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002V",
+  "name": "point-07-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     0.6,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.596713137220964,
+     0.0,
+     -0.06271707796059205
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002W",
+  "name": "point-08-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     0.8999999999999999,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.771450570631901,
+     0.0,
+     0.4635342674190487
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002X",
+  "name": "point-09-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     1.2,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.4495279120990943,
+     0.0,
+     1.112620625480145
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002Y",
+  "name": "point-10-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     0.6,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.1552914270615125,
+     0.0,
+     0.579555495773441
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000002Z",
+  "name": "point-11-5",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     0.8999999999999999,
+     -2.5999999999999996
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.7092096782460496,
+     0.0,
+     0.5540953277930926
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000030",
+  "name": "point-00-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     0.6,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.596713137220964,
+     0.0,
+     -0.0627170779605921
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000031",
+  "name": "point-01-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     0.8999999999999999,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.6582183314572535,
+     0.0,
+     -0.6137985240562485
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000032",
+  "name": "point-02-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     1.2,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.2083778132003164,
+     0.0,
+     -1.1817693036146495
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000033",
+  "name": "point-03-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     0.6,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.272394299843728,
+     0.0,
+     -0.5346039145130207
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000034",
+  "name": "point-04-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     0.8999999999999999,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.8089146416692501,
+     0.0,
+     -0.39453403211016996
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000035",
+  "name": "point-05-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     1.2,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     1.1779526201371968,
+     0.0,
+     0.22897079445185375
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000036",
+  "name": "point-06-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     0.6,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.40147836381531493,
+     0.0,
+     0.44588689528643655
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000037",
+  "name": "point-07-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     0.8999999999999999,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.07844016847289231,
+     0.0,
+     0.8965752282825709
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000038",
+  "name": "point-08-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     1.2,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.6359031170798457,
+     0.0,
+     1.0176577153877113
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000039",
+  "name": "point-09-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     0.6,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.5601482558983211,
+     0.0,
+     0.21502076972718012
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003A",
+  "name": "point-10-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     0.8999999999999999,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -0.8651355263444869,
+     0.0,
+     -0.24807362023529908
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003B",
+  "name": "point-11-6",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     1.2,
+     -0.9999999999999982
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.7221780277824579,
+     0.0,
+     -0.9583626120567513
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003C",
+  "name": "point-00-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -8.8,
+     0.8999999999999999,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.4,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.1096824090646329,
+     0.0,
+     -0.8932915364771897
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003D",
+  "name": "point-01-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.200000000000001,
+     1.2,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     0.8335900445507967,
+     0.0,
+     -0.8632077604063814
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003E",
+  "name": "point-02-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.6000000000000005,
+     0.6,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 1.0,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.5926130043570825,
+     0.0,
+     -0.09386067902413867
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003F",
+  "name": "point-03-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -4.0,
+     0.8999999999999999,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.4,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.7946528335730342,
+     0.0,
+     0.42252440650730166
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003G",
+  "name": "point-04-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -2.4000000000000004,
+     1.2,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.6,
+     0.15
+    ],
+    "intensity": 0.6,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     0.5071419140888394,
+     0.0,
+     1.0875693444439798
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003H",
+  "name": "point-05-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -0.8000000000000007,
+     0.6,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.7,
+     0.3,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.1247470144906556,
+     0.0,
+     0.5868885604402834
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003J",
+  "name": "point-06-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.8000000000000007,
+     0.8999999999999999,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.3,
+     1.0,
+     0.3
+    ],
+    "intensity": 1.4,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     -0.6792386222004947,
+     0.0,
+     0.5904531260914565
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003K",
+  "name": "point-07-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     2.4000000000000004,
+     1.2,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.25,
+     0.2
+    ],
+    "intensity": 0.6,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     -1.197076860311789,
+     0.0,
+     0.08370776849295063
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003M",
+  "name": "point-08-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     4.0,
+     0.6,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.25,
+     0.45,
+     1.0
+    ],
+    "intensity": 1.0,
+    "range": 2.65
+   },
+   "Velocity": {
+    "linear": [
+     -0.5032023407672545,
+     0.0,
+     -0.32678342100901625
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003N",
+  "name": "point-09-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.6,
+     0.8999999999999999,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.95,
+     0.95,
+     0.2
+    ],
+    "intensity": 1.4,
+    "range": 2.3
+   },
+   "Velocity": {
+    "linear": [
+     -0.3078181289931017,
+     0.0,
+     -0.8457233587073175
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003P",
+  "name": "point-10-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.199999999999999,
+     1.2,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     1.0,
+     0.3,
+     0.75
+    ],
+    "intensity": 0.6,
+    "range": 1.9500000000000002
+   },
+   "Velocity": {
+    "linear": [
+     0.35084604566728406,
+     0.0,
+     -1.1475657071556424
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003Q",
+  "name": "point-11-7",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     8.8,
+     0.6,
+     0.6000000000000014
+    ],
+    "rotation": [
+     0.0,
+     0.0,
+     0.0,
+     1.0
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "PointLight": {
+    "color": [
+     0.2,
+     0.9,
+     0.9
+    ],
+    "intensity": 1.0,
+    "range": 1.6
+   },
+   "Velocity": {
+    "linear": [
+     0.48541019662496837,
+     0.0,
+     -0.352671151375484
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003R",
+  "name": "spot-00",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     3.0,
+     2.5
+    ],
+    "rotation": [
+     -0.28978414868843,
+     0.0,
+     0.0,
+     0.9570920264890529
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.8,
+     0.0,
+     0.0
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003S",
+  "name": "spot-01",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     1.9411428382689055,
+     3.0,
+     2.2444436971680126
+    ],
+    "rotation": [
+     -0.2873050051247281,
+     0.12492557782178881,
+     0.03782442149403002,
+     0.9489039715244183
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.7727406610312547,
+     0.0,
+     0.2070552360820166
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003T",
+  "name": "spot-02",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     3.7499999999999996,
+     3.0,
+     1.49519052838329
+    ],
+    "rotation": [
+     -0.279909993267346,
+     0.24771364437113316,
+     0.07500165664938634,
+     0.9244799065211172
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.692820323027551,
+     0.0,
+     0.39999999999999997
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003V",
+  "name": "spot-03",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.303300858899106,
+     3.0,
+     0.30330085889910663
+    ],
+    "rotation": [
+     -0.267725643819448,
+     0.3662632617860901,
+     0.11089559266508395,
+     0.8842377340029861
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.5656854249492381,
+     0.0,
+     0.565685424949238
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003W",
+  "name": "spot-04",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     6.495190528383289,
+     3.0,
+     -1.2499999999999991
+    ],
+    "rotation": [
+     -0.2509604343782275,
+     0.47854601324452634,
+     0.14489207434421503,
+     0.8288660086990487
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.40000000000000013,
+     0.0,
+     0.6928203230275509
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003X",
+  "name": "spot-05",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.244443697168013,
+     3.0,
+     -3.0588571617310945
+    ],
+    "rotation": [
+     -0.2299012223254179,
+     0.5826407097383282,
+     0.17640941245964423,
+     0.7593121561811974
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.2070552360820166,
+     0.0,
+     0.7727406610312547
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003Y",
+  "name": "spot-06",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.5,
+     3.0,
+     -4.999999999999999
+    ],
+    "rotation": [
+     -0.20490833661795968,
+     0.676766262149984,
+     0.2049083366179596,
+     0.6767662621499843
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -4.898587196589413e-17,
+     0.0,
+     0.8
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000003Z",
+  "name": "spot-07",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     7.244443697168013,
+     3.0,
+     -6.941142838268906
+    ],
+    "rotation": [
+     -0.1764094124596442,
+     0.7593121561811975,
+     0.22990122232541793,
+     0.582640709738328
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.2070552360820167,
+     0.0,
+     0.7727406610312547
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000040",
+  "name": "spot-08",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     6.49519052838329,
+     3.0,
+     -8.749999999999998
+    ],
+    "rotation": [
+     -0.14489207434421508,
+     0.8288660086990486,
+     0.25096043437822746,
+     0.4785460132445265
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.3999999999999999,
+     0.0,
+     0.692820323027551
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000041",
+  "name": "spot-09",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     5.303300858899107,
+     3.0,
+     -10.303300858899107
+    ],
+    "rotation": [
+     -0.11089559266508388,
+     0.8842377340029863,
+     0.26772564381944797,
+     0.36626326178609003
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.565685424949238,
+     0.0,
+     0.5656854249492381
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000042",
+  "name": "spot-10",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     3.7499999999999996,
+     3.0,
+     -11.49519052838329
+    ],
+    "rotation": [
+     -0.07500165664938634,
+     0.9244799065211172,
+     0.279909993267346,
+     0.24771364437113316
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.692820323027551,
+     0.0,
+     0.39999999999999997
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000043",
+  "name": "spot-11",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     1.9411428382689075,
+     3.0,
+     -12.244443697168013
+    ],
+    "rotation": [
+     -0.03782442149403006,
+     0.9489039715244183,
+     0.2873050051247281,
+     0.12492557782178894
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.7727406610312546,
+     0.0,
+     0.2070552360820168
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000044",
+  "name": "spot-12",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     9.18485099360515e-16,
+     3.0,
+     -12.5
+    ],
+    "rotation": [
+     -1.7744161506746324e-17,
+     0.9570920264890529,
+     0.28978414868843,
+     5.860498433646362e-17
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.8,
+     0.0,
+     9.797174393178826e-17
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000045",
+  "name": "spot-13",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -1.941142838268906,
+     3.0,
+     -12.244443697168013
+    ],
+    "rotation": [
+     -0.03782442149402993,
+     -0.9489039715244184,
+     -0.2873050051247282,
+     0.12492557782178852
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.7727406610312547,
+     0.0,
+     -0.20705523608201665
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000046",
+  "name": "spot-14",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -3.750000000000001,
+     3.0,
+     -11.49519052838329
+    ],
+    "rotation": [
+     -0.07500165664938634,
+     -0.9244799065211172,
+     -0.279909993267346,
+     0.24771364437113316
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.6928203230275509,
+     0.0,
+     -0.40000000000000013
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000047",
+  "name": "spot-15",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.303300858899106,
+     3.0,
+     -10.303300858899107
+    ],
+    "rotation": [
+     -0.11089559266508398,
+     -0.8842377340029861,
+     -0.267725643819448,
+     0.3662632617860902
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.5656854249492381,
+     0.0,
+     -0.565685424949238
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000048",
+  "name": "spot-16",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.495190528383288,
+     3.0,
+     -8.750000000000004
+    ],
+    "rotation": [
+     -0.14489207434421492,
+     -0.8288660086990488,
+     -0.25096043437822746,
+     0.47854601324452617
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.40000000000000036,
+     0.0,
+     -0.6928203230275507
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX000000000000000049",
+  "name": "spot-17",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.244443697168013,
+     3.0,
+     -6.941142838268904
+    ],
+    "rotation": [
+     -0.17640941245964425,
+     -0.7593121561811973,
+     -0.22990122232541785,
+     0.5826407097383283
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     0.2070552360820165,
+     0.0,
+     -0.7727406610312547
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000004A",
+  "name": "spot-18",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.5,
+     3.0,
+     -5.000000000000002
+    ],
+    "rotation": [
+     -0.2049083366179596,
+     -0.6767662621499841,
+     -0.20490833661795962,
+     0.676766262149984
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     1.4695761589768238e-16,
+     0.0,
+     -0.8
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000004B",
+  "name": "spot-19",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -7.2444436971680135,
+     3.0,
+     -3.0588571617310976
+    ],
+    "rotation": [
+     -0.22990122232541785,
+     -0.5826407097383284,
+     -0.17640941245964428,
+     0.7593121561811973
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.20705523608201626,
+     0.0,
+     -0.7727406610312548
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000004C",
+  "name": "spot-20",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -6.495190528383289,
+     3.0,
+     -1.2499999999999991
+    ],
+    "rotation": [
+     -0.2509604343782275,
+     -0.47854601324452634,
+     -0.14489207434421503,
+     0.8288660086990487
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.40000000000000013,
+     0.0,
+     -0.6928203230275509
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000004D",
+  "name": "spot-21",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -5.3033008588991075,
+     3.0,
+     0.30330085889910485
+    ],
+    "rotation": [
+     -0.26772564381944786,
+     -0.36626326178609037,
+     -0.11089559266508398,
+     0.8842377340029861
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.5656854249492379,
+     0.0,
+     -0.5656854249492381
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000004E",
+  "name": "spot-22",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -3.7500000000000036,
+     3.0,
+     1.4951905283832883
+    ],
+    "rotation": [
+     -0.27990999326734595,
+     -0.2477136443711334,
+     -0.07500165664938642,
+     0.9244799065211171
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     1.0,
+     0.75,
+     0.45
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.6928203230275507,
+     0.0,
+     -0.40000000000000036
+    ]
+   }
+  }
+ },
+ {
+  "id": "01JA64KX00000000000000004F",
+  "name": "spot-23",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     -1.941142838268905,
+     3.0,
+     2.2444436971680126
+    ],
+    "rotation": [
+     -0.2873050051247281,
+     -0.12492557782178879,
+     -0.037824421494030015,
+     0.9489039715244183
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "SpotLight": {
+    "color": [
+     0.45,
+     0.65,
+     1.0
+    ],
+    "intensity": 45.0,
+    "range": 8.0,
+    "inner_degrees": 10.0,
+    "outer_degrees": 18.0
+   },
+   "Velocity": {
+    "linear": [
+     -0.7727406610312547,
+     0.0,
+     -0.20705523608201656
+    ]
+   }
+  }
+ }
+]

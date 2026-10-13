@@ -1,0 +1,21 @@
+{
+  "status": "accepted source",
+  "reviewer": "Astra root",
+  "at": "2026-10-13T01:56:34.270350+00:00",
+  "base": "d5702546b34fcc6452a9fe2b22a0e2b23802991a",
+  "source_freeze_sha256": "9cd64a55940eccad588f0bef9b9de6407a1606e7a64dc72aa51f8de0f62a2848",
+  "patch_sha256": "a44a13176ae8006f5d89ec165d3b9fa8645d44e7c105a5a30003f30c33ab8032",
+  "findings": [],
+  "checks": [
+    "Read wholeworkflow split and checked originalfourWindowscommands are preserved in independent90minutejobs.",
+    "Mac/Linux commands and prior40minute budget unchanged.",
+    "Requiredconformance(windows-latest) always runs with allfour directneeds and exact-set/actualsuccess validation.",
+    "Malformed/missing/extra/duplicate/failure/skipped/cancelled/neutral/pending states refuse; root independently reran sixgateunit/CLIregressions.",
+    "Alljobuploads alwaysrun, continue-on-error absent, registryonlycache avoids sharingtarget/shippingproof.",
+    "release-checks.json exact23contexts and actualshippingprobe source unchanged."
+  ],
+  "limits": [
+    "No newhostedexecution or wall-time speedup measured yet.",
+    "Windowsjobs remains90minuteindividual budget; any timeout/cancel fails aggregate."
+  ]
+}

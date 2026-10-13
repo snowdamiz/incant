@@ -3,11 +3,18 @@ import os
 from pathlib import Path
 import re
 
+import physics_export
+import ios_wasm
+import native_wasm
+from physics_features import SOLVERS, feature_errors
+
 from native_package import read, require, sha256
 from shipping import codegen
 
 TARGETS = {'aarch64-apple-ios-sim': 'iphonesimulator', 'aarch64-apple-ios': 'iphoneos'}
-FEATURES = ['mobile-ffi', 'project', 'render-input', 'physics-deterministic']
+CAPABILITIES = ['mobile-ffi', 'project', 'render-input']
+# Preserve the historical deterministic caller probe's explicit admission.
+FEATURES = physics_export.cargo_features('deterministic', CAPABILITIES)
 NAME = 'incant_game_player'
 FORBIDDEN = {'incant_doc', 'incant_cmd', 'incant_agent', 'incant_core', 'incant_cook',
              'incant_source', 'incant_play', 'incant_play_legacy', 'incant_wasm_cook',
@@ -21,28 +28,29 @@ def admit(host, target):
             'Authored iOS archive requires macOS arm64 and an explicitly supported iOS destination')
 
 
-def preflight_project(project, scene):
+def preflight_project(project, scene, wabt=None):
     """Early bounded refusal only; the Rust producer owns schema admission."""
     import json
-    document = json.loads(read(project, 64 * 1024**2))
+    payload = read(project, 64 * 1024**2)
+    mode = physics_export.project_mode(payload)
+    document = json.loads(payload)
     require(isinstance(document, dict) and isinstance(document.get('scenes'), dict), 'Missing project scenes')
-    settings = document.get('settings', {})
-    require(isinstance(settings, dict) and settings.get('physics_mode', 'deterministic') == 'deterministic',
-            'Authored iOS archive currently requires deterministic project physics')
     scenes = document['scenes']
     if scene is None:
         require(len(scenes) == 1, 'Choose --scene when the project does not contain exactly one scene')
         scene = next(iter(scenes))
     require(scene in scenes and isinstance(scenes[scene], dict), 'Selected project scene is missing')
-    require(scenes[scene].get('program') is None,
-            'Authored iOS archive currently requires TypeScript; static Wasm mobile export is unsupported')
+    if native_wasm.selection(project, scene) is not None:
+        require(wabt is not None, 'Wasm export requires --wabt pointing to trusted WABT 1.0.42 tools')
+    return mode
 
 
 def environment(source, rustc, project, scene):
     for name, value in source.items():
         if (name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTC_WRAPPER',
                      'RUSTC_WORKSPACE_WRAPPER', 'CFLAGS', 'HOST_CFLAGS', 'TARGET_CFLAGS')
-                or name.startswith(('CARGO_PROFILE_', 'CFLAGS_')) or name.endswith('_RUSTFLAGS')):
+                or name in ('CC', 'HOST_CC', 'TARGET_CC', 'AR', 'HOST_AR', 'TARGET_AR')
+                or name.startswith(('CARGO_PROFILE_', 'CFLAGS_', 'CC_', 'AR_')) or name.endswith('_RUSTFLAGS')):
             require(not value, f'Unset {name} for the audited iOS exporter')
     env = {k: v for k, v in source.items() if not k.startswith(('INCANT_NATIVE_', 'INCANT_MOBILE_',
                                                                'INCANT_WASM_', 'INCANT_AUTHORED_WASM'))}
@@ -66,13 +74,24 @@ def normal_dependencies(graph):
     return sorted(set(names))
 
 
-def verify_codegen(stderr, target):
-    target_lines = [line for line in stderr.splitlines() if 'Running `' in line and f'--target {target}' in line]
+def target_invocations(stderr, target):
+    # Device triples are prefixes of simulator triples; compare the complete token.
+    pattern = re.compile(r'--target ' + re.escape(target) + r'(?=\s|`)')
+    return [line for line in stderr.splitlines() if 'Running `' in line and pattern.search(line)]
+
+
+def verify_codegen(stderr, target, static_module=False):
+    target_lines = target_invocations(stderr, target)
     flags = {}
-    for name in ('incant_runtime', 'incant_script', NAME):
+    crates = ['incant_runtime', 'incant_script', NAME]
+    if static_module:
+        crates.append('incant_wasm_runtime')
+    for name in crates:
         commands = [line for line in target_lines if re.search(r'--crate-name ' + name + r'\b', line)]
         require(len(commands) == 1, f'Missing fresh target invocation for {name}')
         require('feature="compiler"' not in commands[0], 'Runtime source compiler feature leaked')
+        if static_module and name == 'incant_wasm_runtime':
+            require('feature="embedded-fixture"' in commands[0], 'Missing trusted static module compilation')
         actual = codegen(commands[0])
         expected = {'opt-level': '3', 'codegen-units': '1', 'panic': 'abort',
                     'debuginfo': '2', 'split-debuginfo': 'off'}
@@ -91,34 +110,30 @@ def verify_codegen(stderr, target):
     return flags
 
 
-def kernel_provenance(stderr, target):
-    """Current immutable base has one deterministic parallel native kernel.
-
-    Future selectable kernels must wire both host cook and target runtime here;
-    the archive exporter must not infer a match from a host-only compilation.
-    """
+def kernel_provenance(stderr, target, mode='deterministic'):
+    """Audit all five fresh target solver invocations for the requested family."""
+    require(mode in physics_export.MODES, 'Unsupported project physics mode')
     result = {}
-    for name in ('rapier2d', 'rapier3d'):
-        lines = [line for line in stderr.splitlines() if 'Running `' in line and f'--target {target}' in line
-                 and re.search(r'--crate-name ' + name + r'\b', line)]
+    for name in SOLVERS:
+        lines = [line for line in target_invocations(stderr, target)
+                 if re.search(r'--crate-name ' + name + r'\b', line)]
         require(len(lines) == 1, f'Missing fresh target physics invocation for {name}')
         features = sorted(set(re.findall(r'--cfg \'feature="([^"\']+)"\'', lines[0])))
-        require('enhanced-determinism' in features and 'parallel' in features
-                and not any(f.startswith('simd-') for f in features),
-                f'Unexpected target physics kernel for {name}: {features}')
         result[name] = {'features': features, 'command_sha256': sha256(lines[0].encode())}
-    return {'mode': 'fixed deterministic parallel kernel', 'target': target, 'crates': result}
+    errors = feature_errors({name: row['features'] for name, row in result.items()}, mode, target)
+    require(not errors, 'Target physics invocation differs from selected mode: ' + '; '.join(errors))
+    return {'mode': mode, 'target': target, 'crates': result}
 
 
-def producer_receipt(receipt, target, project_hash):
+def producer_receipt(receipt, target, project_hash, mode='deterministic', module=None):
     require(receipt.get('format') == 'incant-native-project-build' and receipt.get('version') == 1,
             'Unsupported authored project producer receipt')
-    require(receipt.get('physics_mode') == 'deterministic' and receipt.get('physics_variant') == 'deterministic',
-            'Authored iOS cook physics differs from the fixed target kernel')
+    physics_export.verify_producer(receipt, mode)
     require(receipt['target'] == target and receipt['producer_target'] == 'aarch64-apple-darwin'
             and receipt['producer_kind'] == 'ios-archive' and receipt['project_sha256'] == project_hash
-            and receipt['startup_source_parsing'] is False and receipt['program'] is None,
+            and receipt['startup_source_parsing'] is False,
             'Authored iOS producer identity mismatch')
+    ios_wasm.program(receipt['program'], module)
     script = receipt['script']
     expected_abi = {'version': 28, 'pointer_bits': 64, 'little_endian': True, 'value_bytes': 16,
                     'value_alignment': 8, 'atom_bytes': 4, 'float_mantissa': 53,

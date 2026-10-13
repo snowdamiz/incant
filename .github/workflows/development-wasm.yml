@@ -14,9 +14,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        runner: [macos-latest, ubuntu-latest, windows-latest]
+        runner: [macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: ${{ matrix.runner == 'windows-latest' && 90 || 40 }}
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
@@ -35,15 +35,8 @@ jobs:
       # Never enable this feature on the workspace or shipped player commands.
       - name: Combined static and development conformance on one development graph
         run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-conformance --conformance-only
-      - name: MSVC optimized C candidate numerical, fuel and trap controls
-        if: runner.os == 'Windows'
-        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-optimized --conformance-only --msvc-opt-level 2
       - name: Fresh compiler-free static shipping executable and matched symbols
-        if: runner.os != 'Windows'
         run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-shipping
-      - name: Fresh MSVC optimized candidate executable and matched PDB
-        if: runner.os == 'Windows'
-        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-shipping --msvc-opt-level 2
       - name: Fresh composed input, physics, module and audio shipping proof
         run: python tools/probes/static-game.py artifacts/static-game-shipping
       - run: python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host
@@ -86,3 +79,153 @@ jobs:
             artifacts/static-game-shipping/player.map
           if-no-files-found: error
           retention-days: 7
+
+  # Independent jobs keep each cold graph and fresh shipping proof within its
+  # existing budget. They share downloads only, never target or shipping artifacts.
+  windows-baseline:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: rustup show
+      - run: rustup target add wasm32-unknown-unknown
+      - run: python tools/generate_wasm_sdk.py --check
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          shared-key: auxiliary-registry-v1-windows-latest
+          cache-targets: 'false'
+          cache-bin: 'false'
+          save-if: ${{ github.event_name == 'push' }}
+      - name: Combined static and development conformance on one development graph
+        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-conformance --conformance-only
+      - run: python tools/check_runtime_dependencies.py incant_wasm_dev incant_game_player incant_script_player --features incant_wasm_dev/wasmtime-host
+      - run: cargo check -p incant_wasm_dev --no-default-features --target wasm32-unknown-unknown --locked
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: development-wasm-Windows-baseline
+          path: |
+            artifacts/static-wasm-conformance/development/result.json
+            artifacts/static-wasm-conformance/rust-sdk.json
+            artifacts/static-wasm-conformance/conformance-*.log
+            artifacts/static-wasm-conformance/conformance-result.json
+            artifacts/static-wasm-conformance/prepared-manifest.json
+            artifacts/static-wasm-conformance/cook-build.log
+          if-no-files-found: error
+          retention-days: 7
+
+  windows-optimized:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: rustup show
+      - run: rustup target add wasm32-unknown-unknown
+      - run: python tools/generate_wasm_sdk.py --check
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          shared-key: auxiliary-registry-v1-windows-latest
+          cache-targets: 'false'
+          cache-bin: 'false'
+          save-if: ${{ github.event_name == 'push' }}
+      - name: MSVC optimized C candidate numerical, fuel and trap controls
+        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-optimized --conformance-only --msvc-opt-level 2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: development-wasm-Windows-optimized
+          path: |
+            artifacts/static-wasm-optimized/development/result.json
+            artifacts/static-wasm-optimized/rust-sdk.json
+            artifacts/static-wasm-optimized/conformance-*.log
+            artifacts/static-wasm-optimized/conformance-result.json
+            artifacts/static-wasm-optimized/prepared-manifest.json
+            artifacts/static-wasm-optimized/cook-build.log
+          if-no-files-found: error
+          retention-days: 7
+
+  windows-shipping:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: rustup show
+      - run: rustup target add wasm32-unknown-unknown
+      - run: python tools/generate_wasm_sdk.py --check
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          shared-key: auxiliary-registry-v1-windows-latest
+          cache-targets: 'false'
+          cache-bin: 'false'
+          save-if: ${{ github.event_name == 'push' }}
+      - name: Fresh MSVC optimized candidate executable and matched PDB
+        run: python tools/probes/shipping-wasm2c.py artifacts/static-wasm-shipping --msvc-opt-level 2
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: development-wasm-Windows-shipping
+          path: |
+            artifacts/static-wasm-shipping/result.json
+            artifacts/static-wasm-shipping/build.log
+            artifacts/static-wasm-shipping/cook-build.log
+            artifacts/static-wasm-shipping/prepared-manifest.json
+            artifacts/static-wasm-shipping/player.zip
+            artifacts/static-wasm-shipping/symbols.zip
+            artifacts/static-wasm-shipping/shipping_module.map
+            artifacts/static-wasm-shipping/msvc-compiler.txt
+          if-no-files-found: error
+          retention-days: 7
+
+  windows-composed:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - run: rustup show
+      - run: rustup target add wasm32-unknown-unknown
+      - run: python tools/generate_wasm_sdk.py --check
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          shared-key: auxiliary-registry-v1-windows-latest
+          cache-targets: 'false'
+          cache-bin: 'false'
+          save-if: ${{ github.event_name == 'push' }}
+      - name: Fresh composed input, physics, module and audio shipping proof
+        run: python tools/probes/static-game.py artifacts/static-game-shipping
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: development-wasm-Windows-composed
+          path: |
+            artifacts/static-game-shipping/result.json
+            artifacts/static-game-shipping/build.log
+            artifacts/static-game-shipping/cook-build.log
+            artifacts/static-game-shipping/prepared-manifest.json
+            artifacts/static-game-shipping/player.zip
+            artifacts/static-game-shipping/symbols.zip
+            artifacts/static-game-shipping/player.map
+          if-no-files-found: error
+          retention-days: 7
+
+  windows-conformance:
+    name: conformance (windows-latest)
+    if: ${{ always() }}
+    needs: [windows-baseline, windows-optimized, windows-shipping, windows-composed]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with: {python-version: '3.12'}
+      - name: Require every Windows proof to succeed
+        env:
+          INCANT_WORKFLOW_NEEDS: ${{ toJSON(needs) }}
+        run: python tools/check_workflow_jobs.py windows-baseline windows-optimized windows-shipping windows-composed

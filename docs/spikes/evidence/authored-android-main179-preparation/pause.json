@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-12T23:38:33.954770+00:00",
+  "state": "paused before integration validation at explicit user request",
+  "prepared_head": "6f38c28633adbf636fc764c7068850c93e6d265f",
+  "baseline": "02203670a7f18c68ff9e3bcf1913b0d574e82f6d",
+  "producer": "2c17eacb7308adc303a3a5e7e8846e6778f88c1a",
+  "source_comparison_sha256": "e5a2ccbc91fe4903bc834d133ed78d814362b6c8e5efc8c2ab14a253cb42ae3a",
+  "producer_review_sha256": "b6db75b59c4912536e641207e70816b81eddcb2fae0567f21a1d7bb7a0236621",
+  "integration": {
+    "code_conflicts": 0,
+    "source_files_exact": 22,
+    "cargo_lock_changed": false,
+    "status_conflict": "Kept current main179 progress and accepted candidate scope."
+  },
+  "validation": "No Android integration build, archive, emulator or new test execution was started. Existing producer acceptance remains scoped to its frozen source.",
+  "resume": [
+    "Finish and review restart integration; adopt actual main after it merges.",
+    "Reassess compile and export inputs, run appropriate current-main checks and archive/caller proof.",
+    "Obtain final integration review and exact required fast check before publication."
+  ],
+  "publication": "No push or PR created.",
+  "limits": [
+    "CPU archive/C ABI route; no physical phone, window, rendering, audio device host, signing, performance or phase gate."
+  ]
+}

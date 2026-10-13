@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "editor/app", "sdk/rust"]
-exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira"]
+exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira", "third_party/parry2d", "third_party/parry3d"]
 default-members = ["crates/*"]
 
 [workspace.package]
@@ -11,6 +11,7 @@ rust-version = "1.99"
 publish = false
 
 [workspace.dependencies]
+incant_profile = { path = "crates/incant_profile", default-features = false }
 incant_render_data = { path = "crates/incant_render_data" }
 incant_render_authoring = { path = "crates/incant_render_authoring", default-features = false }
 serde = { version = "1.0", features = ["derive"] }
@@ -77,6 +78,8 @@ strip = "none"
 split-debuginfo = "off"
 
 [patch.crates-io]
+parry2d = { path = "third_party/parry2d" }
+parry3d = { path = "third_party/parry3d" }
 kira = { path = "third_party/kira" }
 rerecast = { path = "third_party/rerecast" }
 cosmic-text = { path = "third_party/cosmic-text" }

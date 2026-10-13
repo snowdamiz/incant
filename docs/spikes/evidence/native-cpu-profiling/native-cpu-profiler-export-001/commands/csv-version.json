@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-inspection/tracy-tools-0.14.0/tracy-csvexport",
+    "--version"
+  ],
+  "pid": 51581,
+  "exit": 0,
+  "started_ns": 1791860313926628000,
+  "ended_ns": 1791860313931089000,
+  "stdout": "tracy-csvexport 0.14.0 / 099df3d\n",
+  "stderr": ""
+}

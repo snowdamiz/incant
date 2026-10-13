@@ -1,0 +1,13 @@
+{
+ "variant": "default",
+ "seen": [
+  "physics-deterministic"
+ ],
+ "frozen": {
+  "incant_render-lib-tests": "b1b6f333244500bb7af78c90334242b4847c144c49bd63058540064612c00484",
+  "model_gpu": "47fe4b55a7081010e15f209fb95fe39590a1f233e4c8e0d99607bd47ddb2b536",
+  "gpu_host-game": "c42b111223ee5fddd477fe96a37facaed91bd14f4d00637b102b236689dd1bac",
+  "gpu_host-ui": "cfda78a519fc87f9f079f69308b41562c4fd84df7d73663f301d505a624870ca",
+  "native_frames": "a5c4edbce17ba573069c67dfa371b96825e2e6528b8cbf8f0ce9bd67e5c84ccc"
+ }
+}

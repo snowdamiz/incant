@@ -1,0 +1,65 @@
+[
+ {
+  "id": "01JA64ZE000000000000000001",
+  "name": "camera",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.3,
+     3.2
+    ],
+    "rotation": [
+     -0.04672137594673278,
+     0.0,
+     0.0,
+     0.9989079602394026
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "Camera": {
+    "fov_degrees": 45.0,
+    "near": 0.1,
+    "far": 20.0,
+    "projection": {
+     "kind": "perspective"
+    }
+   }
+  }
+ },
+ {
+  "id": "01JA64ZE000000000000000002",
+  "name": "sphere",
+  "parent": null,
+  "components": {
+   "Transform": {
+    "translation": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "rotation": [
+     0.0,
+     -0.25881904510252074,
+     0.0,
+     0.9659258262890683
+    ],
+    "scale": [
+     1.0,
+     1.0,
+     1.0
+    ]
+   },
+   "MeshRenderer": {
+    "mesh": "01M4SDNFW2Y9B8FBB58B8NKG6T",
+    "materials": [],
+    "cast_shadows": true
+   }
+  }
+ }
+]

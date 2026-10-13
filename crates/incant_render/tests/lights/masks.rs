@@ -4,7 +4,7 @@ use super::*;
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn all_4096_local_bits_match_unculled_point_and_spot_lighting() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     light(
         &mut f,
@@ -50,7 +50,7 @@ fn all_4096_local_bits_match_unculled_point_and_spot_lighting() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = fixture();
     light(
         &mut f,

@@ -1,0 +1,776 @@
+{
+  "base": "9a0b4fd61f80c03e5aa34985a8233f0921f73d13",
+  "sources": [
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "23f1786ab418d3cf4072098868a5ff876e12b4b9451f94fd96408b9082de4e21"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "9b645b8e8754678ebf8de955118ddc293d5f7739b55454c089a4fae6053614ba"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "1d2df0753ec0b4cb86e87aa17d6b2ef410f8b0a04450bac19ccac6ce98db3903"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "8be33003a3a5e99b4e7d24333cda8a3944437d6c19e7b7dfffa3e19ebcfb9a08"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "sha256": "72979887f58f8cd1f8be4abdfe05e56c5c878b94ee5d9429263f255103fe0be2"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/mod.rs",
+      "sha256": "5d230429f683523d24f12ce679575457dc14d5e9e45628fb3bcc48d8a33837c8"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "sha256": "e199e147197d7f2e09e330c2b847639ef1cb4d72f66dc78feb43a7494c439477"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "sha256": "44da27205468a4d415b59ae42b3c9e934b324cbad4ec4aa833c03accf97036c5"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "sha256": "7fc851b8c2a955dca02fd1da849e210ca92084e741af409d74e38ecedc056c82"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/geometry.rs",
+      "sha256": "36cafe36a701e03e357afcf3a64bb78665bbabb893742d2c18d3f0d2ae2984b3"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/shader.rs",
+      "sha256": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/shader/cooked.rs",
+      "sha256": "44d17a8e89bacbebfe59a4848664efddbffbf9a2290cda4944ee3fe7804ed1e1"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "sha256": "2dd463bc901b31a3b76becf1124380fb24dd3f1481e9dbc254780263bae0368f"
+    }
+  ],
+  "unchanged_wgsl_sha256": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+  "pinned_backend_source": {
+    "metal/device.rs": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+    "metal/command.rs": "49b3dd48ea241ac66738854b9e76a77ba2863fdc9fe1aaa936e1bc16e5d79e52",
+    "dx12/device.rs": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc"
+  },
+  "counts": {
+    "opt_in": {
+      "passed": 82,
+      "ignored_gpu": 82,
+      "groups": 7
+    },
+    "default": {
+      "passed": 63,
+      "ignored_gpu": 82,
+      "groups": 3
+    }
+  },
+  "checks": [
+    {
+      "name": "metal-version",
+      "argv": [
+        "xcrun",
+        "-sdk",
+        "macosx",
+        "metal",
+        "--version"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8438228749946575,
+      "stdout_sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "Vertex-metal",
+      "argv": [
+        "xcrun",
+        "-sdk",
+        "macosx",
+        "metal",
+        "-std=macos-metal2.4",
+        "-c",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex.metal",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex.air"
+      ],
+      "exit_code": 0,
+      "seconds": 0.9137409590039169,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "Vertex-metallib",
+      "argv": [
+        "xcrun",
+        "-sdk",
+        "macosx",
+        "metallib",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex.air",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex.metallib"
+      ],
+      "exit_code": 0,
+      "seconds": 0.8788469579958473,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "Fragment-metal",
+      "argv": [
+        "xcrun",
+        "-sdk",
+        "macosx",
+        "metal",
+        "-std=macos-metal2.4",
+        "-c",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment.metal",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment.air"
+      ],
+      "exit_code": 0,
+      "seconds": 0.05216770799597725,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "Fragment-metallib",
+      "argv": [
+        "xcrun",
+        "-sdk",
+        "macosx",
+        "metallib",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment.air",
+        "-o",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment.metallib"
+      ],
+      "exit_code": 0,
+      "seconds": 0.027134915995702613,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-sprites,incant_render/cooked-geometry",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 8.399761041997408,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "a7a64c0e18f1604f0a81ad00d41eb37893f9fab2917817ac0648960acdab0334"
+    },
+    {
+      "name": "default-test",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-p",
+        "incant_render",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 13.705528250000498,
+      "stdout_sha256": "c18f8f421a1cf139772e44c4feed71182325f6559e2f87cebbeca60ed727391c",
+      "stderr_sha256": "d50ef9310e56ead6997c0d4239d48da1d8664baad762a1143913584298bb59bc"
+    },
+    {
+      "name": "web-check",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "--target",
+        "wasm32-unknown-unknown",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-sprites,cooked-geometry",
+        "-j2"
+      ],
+      "exit_code": 0,
+      "seconds": 5.118083916997421,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "558f76480cf7f0529de8c7b6befcafecb09c807a6a4f1e648f8ebb6ef443dd22"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.3635957079968648,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.03688195800350513,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 0.02486450000287732,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/Cargo.toml",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/Cargo.toml.gz",
+      "raw_bytes": 2135,
+      "raw_sha256": "23f1786ab418d3cf4072098868a5ff876e12b4b9451f94fd96408b9082de4e21",
+      "retained_sha256": "44d78e6a67fbfe5168a38ec3d0414b9b4f07498856e982737694ea4eff00e0af"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/build.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/build.rs.gz",
+      "raw_bytes": 2499,
+      "raw_sha256": "9b645b8e8754678ebf8de955118ddc293d5f7739b55454c089a4fae6053614ba",
+      "retained_sha256": "fb9c0a87b295f34c0b26f833f648d50affa3affe518aea540f170f528e4a60af"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/src/lib.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/src/lib.rs.gz",
+      "raw_bytes": 16876,
+      "raw_sha256": "1d2df0753ec0b4cb86e87aa17d6b2ef410f8b0a04450bac19ccac6ce98db3903",
+      "retained_sha256": "d19489b98e3fb0166c87379141d5b17feeb18ced3bfdeaff9f32488d6a745645"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/src/resource_error.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/src/resource_error.rs.gz",
+      "raw_bytes": 2329,
+      "raw_sha256": "8be33003a3a5e99b4e7d24333cda8a3944437d6c19e7b7dfffa3e19ebcfb9a08",
+      "retained_sha256": "343801e00dd188d864c2840c46b2c4120a4c28995cb77b1328ec972c7e619277"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/src/shader/native.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/src/shader/native.rs.gz",
+      "raw_bytes": 4811,
+      "raw_sha256": "72979887f58f8cd1f8be4abdfe05e56c5c878b94ee5d9429263f255103fe0be2",
+      "retained_sha256": "6559dfb657d7cba0858a961854867a7fde3f2f1a447ead769145b429fda97c4d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/src/sprites/mod.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/src/sprites/mod.rs.gz",
+      "raw_bytes": 22385,
+      "raw_sha256": "5d230429f683523d24f12ce679575457dc14d5e9e45628fb3bcc48d8a33837c8",
+      "retained_sha256": "3fcd987603958ceea40e6b92a4aeebce15f150e31c7fc597d84377f720be4f57"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/src/sprites/shader/cooked.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/src/sprites/shader/cooked.rs.gz",
+      "raw_bytes": 4067,
+      "raw_sha256": "44d17a8e89bacbebfe59a4848664efddbffbf9a2290cda4944ee3fe7804ed1e1",
+      "retained_sha256": "1e52a8db078a342f846d4902df0c80cc4eb241b290f97a075eea35266a7c405a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_render/src/sprites/shader.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_render/src/sprites/shader.rs.gz",
+      "raw_bytes": 840,
+      "raw_sha256": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0",
+      "retained_sha256": "41a5215d900f6c9207f0cc5f0c415d271eaff5d8aaef1af3b40b8df3095fec6d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/contract.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/contract.rs.gz",
+      "raw_bytes": 8238,
+      "raw_sha256": "e199e147197d7f2e09e330c2b847639ef1cb4d72f66dc78feb43a7494c439477",
+      "retained_sha256": "a2fc198c2e1819a739ac459fb9312cb5072799689ed444d2f573757a01e514d2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/emit.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/emit.rs.gz",
+      "raw_bytes": 11303,
+      "raw_sha256": "44da27205468a4d415b59ae42b3c9e934b324cbad4ec4aa833c03accf97036c5",
+      "retained_sha256": "76b947172a548c496bfc4fac8c6cfb47b517022411a3a07fba0635d172b19ad2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/mod.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/mod.rs.gz",
+      "raw_bytes": 4202,
+      "raw_sha256": "7fc851b8c2a955dca02fd1da849e210ca92084e741af409d74e38ecedc056c82",
+      "retained_sha256": "28a288b51549227e0ecf71d6ebc2d1f9ec3be26748d87cd5af9104b38b8d7b18"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_shader_cook/src/geometry/sprite.rs.gz",
+      "raw_bytes": 6215,
+      "raw_sha256": "2dd463bc901b31a3b76becf1124380fb24dd3f1481e9dbc254780263bae0368f",
+      "retained_sha256": "f22885800c774ed731bef5b417eb394961789a720fbadd32b376ca94f0d104ef"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/crates/incant_shader_cook/tests/geometry.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/crates/incant_shader_cook/tests/geometry.rs.gz",
+      "raw_bytes": 9479,
+      "raw_sha256": "b8f4e226eec7c9df83cbf8f9a9a8422bda2a72ee71047e199f6854887b2b0221",
+      "retained_sha256": "52cd51ac0f5ee3ca48b0293c18e2835dfa35e9f4209e79db91e14620191d4859"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/freeze.json",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/freeze.json.gz",
+      "raw_bytes": 1917,
+      "raw_sha256": "37f0ce2e92589538ea68921d97c58ddf7061e6d21e56cf2418ca285c4004446a",
+      "retained_sha256": "bef2941b8836587aaa97cc424686818a8d502bf71b0ead8838c8c9ca7fd4e303"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/tests.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/tests.stderr.gz",
+      "raw_bytes": 4083,
+      "raw_sha256": "2e92eaa9c8e41b6207c88ab980ecfb2de52b08c526fbc62e288fa0c5a9d3fa52",
+      "retained_sha256": "3830631b8f2d33b1c2f494c95b370cc0e5e514ef1a239d5dd8f3a8e7ce3b5166"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-001/tests.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-001/tests.stdout.gz",
+      "raw_bytes": 23587,
+      "raw_sha256": "3372f54f7c7b2b96d543cfaa6c7d3d537af0f28cfe7d8b6fbfc820155ce0b107",
+      "retained_sha256": "83135aa121a38e618f2d49065de888ec84ed2dd2b9e2e5c403771ddf09dcd572"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/Cargo.toml",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/Cargo.toml.gz",
+      "raw_bytes": 2135,
+      "raw_sha256": "23f1786ab418d3cf4072098868a5ff876e12b4b9451f94fd96408b9082de4e21",
+      "retained_sha256": "44d78e6a67fbfe5168a38ec3d0414b9b4f07498856e982737694ea4eff00e0af"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/build.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/build.rs.gz",
+      "raw_bytes": 2499,
+      "raw_sha256": "9b645b8e8754678ebf8de955118ddc293d5f7739b55454c089a4fae6053614ba",
+      "retained_sha256": "fb9c0a87b295f34c0b26f833f648d50affa3affe518aea540f170f528e4a60af"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/src/lib.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/src/lib.rs.gz",
+      "raw_bytes": 16876,
+      "raw_sha256": "1d2df0753ec0b4cb86e87aa17d6b2ef410f8b0a04450bac19ccac6ce98db3903",
+      "retained_sha256": "d19489b98e3fb0166c87379141d5b17feeb18ced3bfdeaff9f32488d6a745645"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/src/resource_error.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/src/resource_error.rs.gz",
+      "raw_bytes": 2329,
+      "raw_sha256": "8be33003a3a5e99b4e7d24333cda8a3944437d6c19e7b7dfffa3e19ebcfb9a08",
+      "retained_sha256": "343801e00dd188d864c2840c46b2c4120a4c28995cb77b1328ec972c7e619277"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/src/shader/native.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/src/shader/native.rs.gz",
+      "raw_bytes": 4811,
+      "raw_sha256": "72979887f58f8cd1f8be4abdfe05e56c5c878b94ee5d9429263f255103fe0be2",
+      "retained_sha256": "6559dfb657d7cba0858a961854867a7fde3f2f1a447ead769145b429fda97c4d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/src/sprites/mod.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/src/sprites/mod.rs.gz",
+      "raw_bytes": 22385,
+      "raw_sha256": "5d230429f683523d24f12ce679575457dc14d5e9e45628fb3bcc48d8a33837c8",
+      "retained_sha256": "3fcd987603958ceea40e6b92a4aeebce15f150e31c7fc597d84377f720be4f57"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/src/sprites/shader/cooked.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/src/sprites/shader/cooked.rs.gz",
+      "raw_bytes": 4067,
+      "raw_sha256": "44d17a8e89bacbebfe59a4848664efddbffbf9a2290cda4944ee3fe7804ed1e1",
+      "retained_sha256": "1e52a8db078a342f846d4902df0c80cc4eb241b290f97a075eea35266a7c405a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_render/src/sprites/shader.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_render/src/sprites/shader.rs.gz",
+      "raw_bytes": 840,
+      "raw_sha256": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0",
+      "retained_sha256": "41a5215d900f6c9207f0cc5f0c415d271eaff5d8aaef1af3b40b8df3095fec6d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/contract.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/contract.rs.gz",
+      "raw_bytes": 8238,
+      "raw_sha256": "e199e147197d7f2e09e330c2b847639ef1cb4d72f66dc78feb43a7494c439477",
+      "retained_sha256": "a2fc198c2e1819a739ac459fb9312cb5072799689ed444d2f573757a01e514d2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/emit.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/emit.rs.gz",
+      "raw_bytes": 11303,
+      "raw_sha256": "44da27205468a4d415b59ae42b3c9e934b324cbad4ec4aa833c03accf97036c5",
+      "retained_sha256": "76b947172a548c496bfc4fac8c6cfb47b517022411a3a07fba0635d172b19ad2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/mod.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/mod.rs.gz",
+      "raw_bytes": 4202,
+      "raw_sha256": "7fc851b8c2a955dca02fd1da849e210ca92084e741af409d74e38ecedc056c82",
+      "retained_sha256": "28a288b51549227e0ecf71d6ebc2d1f9ec3be26748d87cd5af9104b38b8d7b18"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/sprite.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_shader_cook/src/geometry/sprite.rs.gz",
+      "raw_bytes": 6215,
+      "raw_sha256": "2dd463bc901b31a3b76becf1124380fb24dd3f1481e9dbc254780263bae0368f",
+      "retained_sha256": "f22885800c774ed731bef5b417eb394961789a720fbadd32b376ca94f0d104ef"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/crates/incant_shader_cook/tests/geometry.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/crates/incant_shader_cook/tests/geometry.rs.gz",
+      "raw_bytes": 9477,
+      "raw_sha256": "36cafe36a701e03e357afcf3a64bb78665bbabb893742d2c18d3f0d2ae2984b3",
+      "retained_sha256": "d447cfab211a9e0bd45e448af695e2f26c3d2322d80170ece3805c092b741038"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/freeze.json",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/freeze.json.gz",
+      "raw_bytes": 1917,
+      "raw_sha256": "b1d62e4e466f490fb50710edf6a106d5b0c88075eb1a9ca6e52baf014e40010f",
+      "retained_sha256": "7920b11d07c6d70795ef07d74a712fc97d31779becb7dd92365ee831243b6129"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/tests.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/tests.stderr.gz",
+      "raw_bytes": 884,
+      "raw_sha256": "d645eb33be5dad24459b9852c098162605d721cdf8e8eb456bd0a56d122fc3ce",
+      "retained_sha256": "05fbb1d4676400e41dea05265990407624e24ffae6673944bdc687436f0e3d29"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/tests.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/tests.stdout.gz",
+      "raw_bytes": 21486,
+      "raw_sha256": "3d0c3f5cfe155bcb3bd19ea59639679f9b7aa09adb6c56974bfbb67c6265dd9a",
+      "retained_sha256": "c6c34c9bc1bb28d763eab869cf107598494423cde04d05294389a78a0144cd90"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/tracked.patch",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-source-002/tracked.patch.gz",
+      "raw_bytes": 26153,
+      "raw_sha256": "f03be0730b904e77108c42e57151cad6318a74a358fc23e629de509875a66783",
+      "retained_sha256": "bb326865d15ef145b74bc5bb2cff67d615e78c992bffa735929b8852ee027cb9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment-metal.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Fragment-metal.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment-metal.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Fragment-metal.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment-metallib.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Fragment-metallib.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment-metallib.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Fragment-metallib.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment.air",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Fragment.air.gz",
+      "raw_bytes": 6736,
+      "raw_sha256": "133cfc092321365fc2facd0d69ed0ee912ef77923ac3e6e0f943ddacdd9826e5",
+      "retained_sha256": "ae3306c9d6037cbddbedc54381719cae2d9a4c989564fd679d65654c3e369971"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment.metal",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Fragment.metal.gz",
+      "raw_bytes": 2562,
+      "raw_sha256": "bd271ef6aaac933a5ab9715fff6a5babc0499c6eed0b4545c4a05a4c6b7f37d6",
+      "retained_sha256": "3fafce8d30b747b5195a6573b511f965206dbb7743e0857c30349b07280458e9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Fragment.metallib",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Fragment.metallib.gz",
+      "raw_bytes": 6287,
+      "raw_sha256": "a8f59e22b2599669698fda92c6d25ec67ffca1283076f13cb4aef3e471d47978",
+      "retained_sha256": "76cf19ab8fc29adcbc34ee562244695bd4dfdc34043e3b3592e9f0da5bcf8872"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex-metal.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Vertex-metal.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex-metal.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Vertex-metal.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex-metallib.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Vertex-metallib.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex-metallib.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Vertex-metallib.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex.air",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Vertex.air.gz",
+      "raw_bytes": 9744,
+      "raw_sha256": "28d120e0e51b6bafa3974d5aae251c367672410621adc619286a1595e3bc7b16",
+      "retained_sha256": "c21471c56ed66dd7f8a4db6777b14410efb9eb88322e114498851e718f408711"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex.metal",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Vertex.metal.gz",
+      "raw_bytes": 4955,
+      "raw_sha256": "1580c6021643ba8ac205d39fba7a1ed47601d57fb1c6d2bfa23f2e86fb27cb62",
+      "retained_sha256": "9719b739b3eced4e4b8aca4d7580dec00e1d9983b069fc2fad3977237869a172"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/Vertex.metallib",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/Vertex.metallib.gz",
+      "raw_bytes": 7661,
+      "raw_sha256": "4f88181d52b4a686eb5ed787e6461841d1f2079d694830f90a802c07240d36f0",
+      "retained_sha256": "e1f509c277b0df7c15a5ac9e3cc6c79cf838fc1c6e28f6c13e9573c08cabf2d0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts/Dx12-Fragment.shader",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Dx12-Fragment.shader.gz",
+      "raw_bytes": 2315,
+      "raw_sha256": "37366675f28b23c7b19b5faae9d07d1ae12e0aef92ca3576d0b018b41ebbf9e9",
+      "retained_sha256": "e61e53375eb49aaa8f43eb88dc32ac30325d456124b9acc21ede55f9a4a7f7e2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts/Dx12-Vertex.shader",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Dx12-Vertex.shader.gz",
+      "raw_bytes": 1510,
+      "raw_sha256": "3bf72b294878049dd6dfa0271dc674baac70dd5fda52f68510b908ddd9ef81fd",
+      "retained_sha256": "be50f5942c32179b113a1d2bf4f2211f3d2e99f97e1e5d86efa8edede6657682"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts/Metal-Fragment.shader",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Metal-Fragment.shader.gz",
+      "raw_bytes": 2562,
+      "raw_sha256": "bd271ef6aaac933a5ab9715fff6a5babc0499c6eed0b4545c4a05a4c6b7f37d6",
+      "retained_sha256": "3fafce8d30b747b5195a6573b511f965206dbb7743e0857c30349b07280458e9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts/Metal-Vertex.shader",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Metal-Vertex.shader.gz",
+      "raw_bytes": 4955,
+      "raw_sha256": "1580c6021643ba8ac205d39fba7a1ed47601d57fb1c6d2bfa23f2e86fb27cb62",
+      "retained_sha256": "9719b739b3eced4e4b8aca4d7580dec00e1d9983b069fc2fad3977237869a172"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts/Vulkan-Fragment.shader",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Vulkan-Fragment.shader.gz",
+      "raw_bytes": 2984,
+      "raw_sha256": "9cc8d0eca471605b6ff4bad60c1ded294806d6b74495073c9238756701797254",
+      "retained_sha256": "57b27a0b949e630a42244fe32d30cd549ee3ab62f82303fa170d2f27f359ab5d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts/Vulkan-Vertex.shader",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Vulkan-Vertex.shader.gz",
+      "raw_bytes": 2452,
+      "raw_sha256": "4f25d5f4b4637e4b21c1da4c798849ebfecb2c56f2447981a8a15487f49c73a1",
+      "retained_sha256": "d8c5cb5deff38577131af83ec56de06076c4ffe2e1fd9e0c6bb1faad1b63462b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts/manifest.rs",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/manifest.rs.gz",
+      "raw_bytes": 2343,
+      "raw_sha256": "57352da2802dfddf15e1fc0631f915cce367bb31d713fc7f30491eeb4dbc5a77",
+      "retained_sha256": "7cca7a4a51a4ab9d7d64b93c82937f8878348c510806eed3e5759affd06e6098"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/artifacts.json",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts.json.gz",
+      "raw_bytes": 652,
+      "raw_sha256": "4f7fe0f99a32a5746c12cd9d9566febe574452f15696b43dceb78f62e8af04ce",
+      "retained_sha256": "9fdd703980ea3e63c2451301a1b55fbb1214ae45de1b0d411d3f009d3292e477"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/clippy.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/clippy.stderr.gz",
+      "raw_bytes": 3087,
+      "raw_sha256": "a7a64c0e18f1604f0a81ad00d41eb37893f9fab2917817ac0648960acdab0334",
+      "retained_sha256": "7f03c2be2bf67ad11459bd8602e13ce9619aa544d2cd99483ffa6b2d6f5fb85b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/clippy.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/clippy.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/commands.json",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/commands.json.gz",
+      "raw_bytes": 5491,
+      "raw_sha256": "fadd147766b8411716de15fa2ae3a920d98b2c122a16d5f47f1a3defcc1b2e06",
+      "retained_sha256": "14d92494d22c73e6370db102bbb83b132e06b70c4d53056f0c23ffb47e0664da"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/conventions.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/conventions.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/conventions.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/conventions.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/default-test.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/default-test.stderr.gz",
+      "raw_bytes": 462,
+      "raw_sha256": "d50ef9310e56ead6997c0d4239d48da1d8664baad762a1143913584298bb59bc",
+      "retained_sha256": "bd19500153f855eca8b095b8d06d516568eb27d6a30e6a0d74fefc30b7ffb99d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/default-test.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/default-test.stdout.gz",
+      "raw_bytes": 19467,
+      "raw_sha256": "c18f8f421a1cf139772e44c4feed71182325f6559e2f87cebbeca60ed727391c",
+      "retained_sha256": "18c0cb9f6d637eb87bbce627d04e1d72e233331845f2edb8b743490c74004b72"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/diff.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/diff.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/diff.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/diff.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/fmt.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/fmt.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/fmt.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/fmt.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/metal-version.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/metal-version.stderr.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/metal-version.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/metal-version.stdout.gz",
+      "raw_bytes": 264,
+      "raw_sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+      "retained_sha256": "f70fe9a1a7d570575b9749b2ee06140852ca24fa7f22c9190c59adbeabca6183"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/result.json",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/result.json.gz",
+      "raw_bytes": 90,
+      "raw_sha256": "d8f95480b5a32d716425b88013a99fe9c838b3bd8809de6f09eb50b5e922ea2a",
+      "retained_sha256": "187885b536bd0d6bc64d6e80931d28a0bbc6e99cfd27a1f188083633e0f45b9f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/run.py",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/run.py.gz",
+      "raw_bytes": 2668,
+      "raw_sha256": "106baf1e0a0b6144b6450c76363296b488b506918979fbc14799d0018fab1377",
+      "retained_sha256": "47a78ea64a986e9556f681b628e3f68c24f7dd7f440174ee6a690d7348bd791b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/web-check.stderr",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/web-check.stderr.gz",
+      "raw_bytes": 1205,
+      "raw_sha256": "558f76480cf7f0529de8c7b6befcafecb09c807a6a4f1e648f8ebb6ef443dd22",
+      "retained_sha256": "ef7ba24f4c602017a231065efc87292c2f9346f09e0c8c7459dbf0ab7f77cf55"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-checks-001/web-check.stdout",
+      "retained": "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/web-check.stdout.gz",
+      "raw_bytes": 0,
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    }
+  ],
+  "source_review": {
+    "path": "docs/spikes/evidence/cooked-sprite-shaders/source-review.json",
+    "sha256": "c1f228e7a13ccd1d9b95c6ed116e5da6260edbbbd2af1801ba49d95b1a4cd0fd"
+  },
+  "red_control": "source001 emitter test incorrectly expected HLSL GetDimensions. Source002 only changes expectation to robust DX12 image.Load; production unchanged. Prior development input metadata/SPIR-V capability mistakes were corrected before source001 freeze.",
+  "limits": [
+    "No GPU submission or rendered-pixel review yet; 82 GPU tests deliberately ignored",
+    "Metal source compiled and linked by actual Apple toolchain; DX12 HLSL and Vulkan SPIR-V translated only; no target driver result",
+    "Opt-in cooked-sprites implies cooked-output; default and web remain WGSL",
+    "This removes WGSL translation only for selected fixed families; runtime backend source compilation and other WGSL families, caches, phone hitch gates remain open"
+  ]
+}

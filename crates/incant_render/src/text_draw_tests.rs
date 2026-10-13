@@ -270,7 +270,7 @@ fn compare(gpu: &[[f32; 4]], expected: &[Option<f64>]) -> (f64, usize, f64) {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let size = [256, 64];
     // Layout top-left at world (-1.2, 0.3): frame pixel (8, 2) + layout pixels.
     let world = DMat4::from_translation(DVec3::new(-1.2, 0.3, 0.));
@@ -366,7 +366,7 @@ fn drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs() 
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn rotated_scaled_minified_and_magnified_text_matches_the_affine_reference() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let size = [192, 128];
     for (scale, angle, at) in [
         (0.42, 0.4, DVec3::new(-0.8, 0.45, 0.)),

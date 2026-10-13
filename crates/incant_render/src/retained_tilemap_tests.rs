@@ -148,7 +148,7 @@ fn source_free_v6_tile_bindings_share_atlas_and_retain_one_world_slot_per_map() 
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection() {
     let (mut world, mut input, _) = super::sprite_tests::tile_fixture();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut gpu = renderer
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();

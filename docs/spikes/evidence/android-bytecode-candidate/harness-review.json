@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T22:35:16.573133+00:00",
+  "accepted": true,
+  "scope": "Trusted compile-time numeric Android experiment harness source, not actual target evidence",
+  "inventory_sha256": "3bf934107d2dfe8fa31e060de8a87b60fc628174973dd5ba932ec73422587b6e",
+  "sources": [
+    {
+      "path": "tools/probes/android-bytecode/build.py",
+      "sha256": "56572b2b31fd8d14053eb2f7cddf58c76033dc4fdf293eb729b9b2c79ff702ec",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/android-bytecode-candidate-001/harness-freeze-002/tools/probes/android-bytecode/build.py"
+    },
+    {
+      "path": "tools/probes/android-bytecode/verify.py",
+      "sha256": "2c24d7a467b629ecf076cd6b2768409495355ca63c0f39df8029151690da2946",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/android-bytecode-candidate-001/harness-freeze-002/tools/probes/android-bytecode/verify.py"
+    },
+    {
+      "path": "tools/tests/test_android_bytecode_probe.py",
+      "sha256": "d9563921794337a08a93d9b7a7ad617a1501d8aef0765052cd7d22a2cb37ff72",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/android-bytecode-candidate-001/harness-freeze-002/tools/tests/test_android_bytecode_probe.py"
+    }
+  ],
+  "independent_unit_run": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.254s\n\nOK\n"
+  },
+  "review": "Pinned compiler resolution and target bindgen sysroot/resource explicit; no project bytecode trust. Exact artifact rehash and existing full numeric oracle retained. Serial-fenced isolated AVD; owner identity rechecked for graceful shutdown; owned Popen reaped on ADB failures; AVD delete independent. Actual target compilation/runtime remain required."
+}

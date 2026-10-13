@@ -6,9 +6,12 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+profile = ["incant_profile/summary", "incant_runtime/profile"]
 default = ["compiler", "physics-deterministic"]
 # Authoring/cook and the development runner only. Native players disable this.
 compiler = []
+# Experimental trusted numeric probe only; default Android admission stays closed.
+probe-android-bytecode = []
 # Typed hosted UI checkpoint sections; never enables a renderer or authoring.
 ui = ["dep:incant_ui", "incant_ui/native"]
 audio = ["dep:incant_audio_runtime", "incant_audio_runtime/scene"]
@@ -34,6 +37,7 @@ physics-fast-simd8 = [
 ]
 
 [dependencies]
+incant_profile.workspace = true
 incant_wasm_dev = { path = "../incant_wasm_dev", optional = true, default-features = false }
 incant_localization.workspace = true
 incant_wasm_runtime = { path = "../incant_wasm_runtime", optional = true, default-features = false }

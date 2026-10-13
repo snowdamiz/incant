@@ -75,7 +75,7 @@ fn text_scene(retained: &RetainedScene) -> (&TextScene, &TextScene) {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let size = [192, 96];
     let worlds = [
         DMat4::from_translation(DVec3::new(-1.4, 0.6, 0.)),
@@ -249,7 +249,7 @@ fn retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities() 
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn foreign_or_reset_handles_refuse_preparation_before_any_text_upload() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let a = input(&[(1, "Hello", 20., DMat4::IDENTITY)]);
     let b = input(&[(1, "Hello", 20., DMat4::IDENTITY)]);
     let mut foreign = a.clone();
@@ -274,7 +274,7 @@ fn foreign_or_reset_handles_refuse_preparation_before_any_text_upload() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let directory = tempfile::tempdir().unwrap();
     let (project, assets, _) = crate::test_support::fixture(directory.path());
     let size = [160, 120];

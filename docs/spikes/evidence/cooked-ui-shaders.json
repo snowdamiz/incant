@@ -1,0 +1,598 @@
+{
+  "source": {
+    "root": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant",
+    "base": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+    "sources": [
+      {
+        "path": "crates/incant_render/Cargo.toml",
+        "sha256": "5d2cd162cc39007a5db38376ecb26c808cd261661978246fb0a1388b9a0d1116"
+      },
+      {
+        "path": "crates/incant_render/build.rs",
+        "sha256": "52ee4fdd02cde2f5e51c769d1e004484044d846f699e65c2086b8bd64e18ac70"
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "sha256": "b64d3e202c6411428d66d62f2ff13341c1023afc1501d613e4ade5b09fe532bc"
+      },
+      {
+        "path": "crates/incant_render/src/resource_error.rs",
+        "sha256": "ef370d932b681db882a92e68c3e68e8c94775274b2427fa5e3f426d5d28d6c33"
+      },
+      {
+        "path": "crates/incant_render/src/shader/native.rs",
+        "sha256": "6fb9c9c23991f0c60b784ee03663dcb3daa098eb48a194c58455c9f7dd54972a"
+      },
+      {
+        "path": "crates/incant_render/src/ui/mod.rs",
+        "sha256": "d139c277697f76aa251a47d4b27cb084864240d197467b54763dc2ec143df866"
+      },
+      {
+        "path": "crates/incant_render/src/ui/shader.rs",
+        "sha256": "b5126f0be567125744898352c772e2e6842bb78d4749cc46372f90e566cca4ce"
+      },
+      {
+        "path": "crates/incant_render/src/ui/shader/cooked.rs",
+        "sha256": "d91ae311cacbee6662e3357da94f4c994b411173b5673b4f3d8fa3c87c6379d1"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+        "sha256": "43eaab1824a337b0da21a58ffe88849d531d38fc56fec47ac3c2dc805512f8c3"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+        "sha256": "b474a91e34d5b0444f41c532f28479e272bf5dfc95f2bc54e296083e4a9e1904"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+        "sha256": "b3e9a40276cb6d06cf5d9772b43bfee56ccb777d8faf25aec72bf6b2d52aca4e"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+        "sha256": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2"
+      },
+      {
+        "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+        "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/geometry.rs",
+        "sha256": "89f8a2c886ba7a1952f5866e54628adaa4b87d4e66a164a8114043533ce919d9"
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/ui.rs",
+        "sha256": "2deb4c141220b03b90ba8946499ba78eaed00d211121737fe85c202773febb73"
+      }
+    ]
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-20261012.json",
+    "sha256": "8716abe20064278b566909b4c2b34a13c51c893dbbf4e06ba43053ce40c675d3"
+  },
+  "checks": [
+    {
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui"
+      ],
+      "exit": 0,
+      "seconds": 18.30595600000379,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-00.log",
+      "sha256": "6d8f3155c719b4afe462e8cc10cfa844463db446cef32e4c1129b1e13a45ac01"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 2.9300821669967263,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-01.log",
+      "sha256": "27b3e4c7034411eb534ad7be2673813151e528929e2a9a195771a376470af8aa"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "--target",
+        "wasm32-unknown-unknown",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-output,cooked-geometry,cooked-sprites,cooked-ui"
+      ],
+      "exit": 0,
+      "seconds": 1.8442183749939431,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-02.log",
+      "sha256": "c7d8ede83213e2816aaf5fce44bd2f22b05b2fa5deedac472596f891b150db60"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 8.957515292000608,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-03.log",
+      "sha256": "3fc60114f5700958e16a667448719caa18420bd81a4643d8bb70461af58ad789"
+    },
+    {
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.3369082919962239,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-04.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.036797917004150804,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-05.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.020385499999974854,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-06.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "cpu_counts": {
+    "enabled": 87,
+    "enabled_groups": 9,
+    "enabled_ignored_gpu": 82,
+    "default_library": 63,
+    "default_library_ignored_gpu": 32
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/check-00.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/check-00.log.gz",
+      "raw_sha256": "d7d6716b30fafc952381a98cd572baf892e3846fe198a87993080f744dac0df5",
+      "raw_bytes": 1091,
+      "sha256": "ead3fcffa4e5ff49c536738dfcd5ac08ef217d06d30bfebc53642c6d2d6a252a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/freeze.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/freeze.json",
+      "raw_sha256": "faaaaf7d0979419d09950c0d1f0f57b836fa82340fbefaeb329ef0df0387eae7",
+      "raw_bytes": 2463,
+      "sha256": "faaaaf7d0979419d09950c0d1f0f57b836fa82340fbefaeb329ef0df0387eae7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/results.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/results.json",
+      "raw_sha256": "971c5a2cdc0bafabbe7eb89aee3c7c6f79b43cf501b1a0dc34dc4b1d68eea390",
+      "raw_bytes": 596,
+      "sha256": "971c5a2cdc0bafabbe7eb89aee3c7c6f79b43cf501b1a0dc34dc4b1d68eea390"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-001/run.py",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-001/run.py",
+      "raw_sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6",
+      "raw_bytes": 1995,
+      "sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-00.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-00.log.gz",
+      "raw_sha256": "6d8f3155c719b4afe462e8cc10cfa844463db446cef32e4c1129b1e13a45ac01",
+      "raw_bytes": 23647,
+      "sha256": "a6f73e0288e04b2ddeff83c2161ea2f65c986c8ff47d80404b54ac3fe1ee1c3d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-01.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-01.log.gz",
+      "raw_sha256": "27b3e4c7034411eb534ad7be2673813151e528929e2a9a195771a376470af8aa",
+      "raw_bytes": 305,
+      "sha256": "7efa17d3b6eb862f0e385147a0e79c6eb5f2927241988873a3ce40535085121a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-02.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-02.log.gz",
+      "raw_sha256": "c7d8ede83213e2816aaf5fce44bd2f22b05b2fa5deedac472596f891b150db60",
+      "raw_bytes": 305,
+      "sha256": "410f237248320ccc2429d3a1b46ad4f90101dc1bbb1ffec2c64101ca6d8948db"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-03.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-03.log.gz",
+      "raw_sha256": "3fc60114f5700958e16a667448719caa18420bd81a4643d8bb70461af58ad789",
+      "raw_bytes": 12037,
+      "sha256": "14a16c0b3aba03bdafcf73f79b4b4b700c39b75e1eaa88c2f5e6aa47d12f59e4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-04.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-04.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-05.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-05.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/check-06.log",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/check-06.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/freeze.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/freeze.json",
+      "raw_sha256": "11b5f0bf294f17844ba9892c9a4e8ec64176ff09a1a933c95ef5be37b886407c",
+      "raw_bytes": 2463,
+      "sha256": "11b5f0bf294f17844ba9892c9a4e8ec64176ff09a1a933c95ef5be37b886407c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/results.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/results.json",
+      "raw_sha256": "2a0442323a8f88119255e26d0ee0f59341a99dbd8f3fd74e63135ec7c05a0369",
+      "raw_bytes": 3116,
+      "sha256": "2a0442323a8f88119255e26d0ee0f59341a99dbd8f3fd74e63135ec7c05a0369"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/run.py",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/run.py",
+      "raw_sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6",
+      "raw_bytes": 1995,
+      "sha256": "568c68f7462abc0ecfde43763f3314230ad8d51360cc1c52dbf5383c14c064d6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-source-002/terminal.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/cooked-ui-source-002/terminal.json",
+      "raw_sha256": "68cf698eb675a6552bed8b3d9e2e661dec3fc85b01e9b1d42571ccc5fcf365c6",
+      "raw_bytes": 38,
+      "sha256": "68cf698eb675a6552bed8b3d9e2e661dec3fc85b01e9b1d42571ccc5fcf365c6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment-compile.stderr",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Fragment-compile.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment-compile.stdout",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Fragment-compile.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment-link.stderr",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Fragment-link.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment-link.stdout",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Fragment-link.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment.air",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Fragment.air.gz",
+      "raw_sha256": "b8b01b070cb4fe1c83442cf85cd51d3116a9d9f2d018938c87ae0a15fb1781a8",
+      "raw_bytes": 9568,
+      "sha256": "abaaf17fa8d38afd61c84e27df810736751451439655e2198c031ec25cc98916"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment.metal",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Fragment.metal.gz",
+      "raw_sha256": "eac6bb07ed249abd2dc3e9a04da6008ca27e8e77342f4169b6c76cb5828e8ea7",
+      "raw_bytes": 5641,
+      "sha256": "533b0c0a5ee3f86ca415d544ac2b491e9816061fccf2b6e836f639a1c8db64e2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment.metallib",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Fragment.metallib.gz",
+      "raw_sha256": "92ce86a820d77417d19d7aeaa1677c26f9ee1b810981dc129549f5fe870af3a2",
+      "raw_bytes": 7967,
+      "sha256": "abd622228b21ad7934bd856a853eaad574de296f48f24102ca03c80e190d879d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex-compile.stderr",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Vertex-compile.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex-compile.stdout",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Vertex-compile.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex-link.stderr",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Vertex-link.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex-link.stdout",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Vertex-link.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex.air",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Vertex.air.gz",
+      "raw_sha256": "76b3ade7410ebc4250c0e81453f140b878caee8106039ad660a57adfd5a5fb93",
+      "raw_bytes": 12032,
+      "sha256": "93dd50309959f1ea26c63113cb66b8a7b668cd4aaafe8d1f8e6deaed18daef43"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex.metal",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Vertex.metal.gz",
+      "raw_sha256": "12b8e29f1d86a07dcd51f4f537b4da0ccae89e42600707c01968f20f32dfc93c",
+      "raw_bytes": 7079,
+      "sha256": "7c73b5510554a9724e59193052c4464e228c1dff6107d259a273b4f5dec42bbf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex.metallib",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/Vertex.metallib.gz",
+      "raw_sha256": "8f445e284f3bc6555096e4d75f97606ae1db5155179fc087adcdce0729402967",
+      "raw_bytes": 9229,
+      "sha256": "51c438bbd86d370114afd3f52ac02a29fe798589a6e20e925ca50a633891037a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/artifacts/Dx12-Fragment.shader",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/artifacts/Dx12-Fragment.shader.gz",
+      "raw_sha256": "0213acf7f14f2337c5d0007bb79846ea24d040d3726bfe0d4d8b051959f46d43",
+      "raw_bytes": 5523,
+      "sha256": "431404c1d0e953016acd4098e951c186ce7c2a869ab9a15c944325be2f181030"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/artifacts/Dx12-Vertex.shader",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/artifacts/Dx12-Vertex.shader.gz",
+      "raw_sha256": "d7bb2ed8d4664b4273a28473e407669c971793c5e1830cd651b88bcc02c0ecad",
+      "raw_bytes": 3941,
+      "sha256": "6227289711a673e50aed32663713885c954ea8afa77eb8ef60ca1c10569e9379"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/artifacts/Metal-Fragment.shader",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/artifacts/Metal-Fragment.shader.gz",
+      "raw_sha256": "eac6bb07ed249abd2dc3e9a04da6008ca27e8e77342f4169b6c76cb5828e8ea7",
+      "raw_bytes": 5641,
+      "sha256": "533b0c0a5ee3f86ca415d544ac2b491e9816061fccf2b6e836f639a1c8db64e2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/artifacts/Metal-Vertex.shader",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/artifacts/Metal-Vertex.shader.gz",
+      "raw_sha256": "12b8e29f1d86a07dcd51f4f537b4da0ccae89e42600707c01968f20f32dfc93c",
+      "raw_bytes": 7079,
+      "sha256": "7c73b5510554a9724e59193052c4464e228c1dff6107d259a273b4f5dec42bbf"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/artifacts/Vulkan-Fragment.shader",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/artifacts/Vulkan-Fragment.shader.gz",
+      "raw_sha256": "e9d8c3036792948d27676b8eb69aac55015b5154fa674c39bee3b26cb0321231",
+      "raw_bytes": 6464,
+      "sha256": "75c5217551b4b6ea718db8160db806c193f71dcf1e81c4ccb2563d2db6417e73"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/artifacts/Vulkan-Vertex.shader",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/artifacts/Vulkan-Vertex.shader.gz",
+      "raw_sha256": "928c7feed700898cbbdcac9419bc5a87749c55dd5973e0fe40cefc0fc6a78fc4",
+      "raw_bytes": 5424,
+      "sha256": "17f75a19cc23e66fcc2b4b280b8c4e39d48de840315fd2f483e95340fa5bb437"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/artifacts/manifest.rs",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/artifacts/manifest.rs.gz",
+      "raw_sha256": "9b1b32cf980dde70c9504da603511589ab31e5a426cef494d7e28949a4352e81",
+      "raw_bytes": 2342,
+      "sha256": "b00fe6593f5bdf3310fb19c921b8006b1e07fb68c856990537744b60cce22c4f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/commands.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/commands.json.gz",
+      "raw_sha256": "192fc4e72dfb6bdfedaa7f334e0a72dbd86d2d2c7267cc9e3249228ca7851446",
+      "raw_bytes": 2583,
+      "sha256": "0d349d2eea4b32e08ac0812c28b7791efed883db5fa44e06cb49ccf06d620cc8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/freeze.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/freeze.json.gz",
+      "raw_sha256": "11b5f0bf294f17844ba9892c9a4e8ec64176ff09a1a933c95ef5be37b886407c",
+      "raw_bytes": 2463,
+      "sha256": "d032feebaaacae75aa9cb341d7a6c2fed72b96d73c32742ebd9b87308934d3e3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/result.json",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/result.json.gz",
+      "raw_sha256": "19ea0ef2443f7e5116f2b09420766bc2b4b96f00379158360f4c571f60bbea5f",
+      "raw_bytes": 112,
+      "sha256": "0b605f7949b05336d44e053bb70611c2d8291b702028b1b94ce7c274802e6d15"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/run.py",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/run.py.gz",
+      "raw_sha256": "7d44582afdf109df82857fe11b15aaa36637d8896ed321ba3e1058662938de49",
+      "raw_bytes": 1456,
+      "sha256": "b560ab1c0c66585cf537a1e023dd7fe9d1f9e295d038141dcbad060219390ee9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/version.stderr",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/version.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/version.stdout",
+      "path": "docs/spikes/evidence/cooked-ui-shaders/metal/version.stdout.gz",
+      "raw_sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+      "raw_bytes": 264,
+      "sha256": "f70fe9a1a7d570575b9749b2ee06140852ca24fa7f22c9190c59adbeabca6183"
+    }
+  ],
+  "pause_state": "Resumed; source/CPU/Metal compiler accepted. Native GPU/Claude appearance and integration pending.",
+  "limits": [
+    "No GPU submission for this UI source yet; actual offline Apple Metal compilation and metallib linking pass",
+    "SPIR-V round-trip validation and HLSL translation are not Vulkan/DX12 driver execution",
+    "Default and wasm retain WGSL; no shader math, UI theme or input geometry changed",
+    "Other shader families, pipeline caches, asynchronous fallback and performance gates remain open"
+  ],
+  "corrections": [
+    "Development rejection test initially changed explicit alignment without changing the actual frame ABI; corrected to a member-size change that shifts the ABI",
+    "Source001 E0515 from returning temporary vertex attributes; source002 hoists identical attributes into a static const"
+  ],
+  "metal_compiler": {
+    "commands": [
+      {
+        "name": "version",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "--version"
+        ],
+        "exit": 0,
+        "seconds": 0.5309598340027151,
+        "stdout_sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "Vertex-compile",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex.metal",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex.air"
+        ],
+        "exit": 0,
+        "seconds": 0.4607032089988934,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "Vertex-link",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Vertex.metallib"
+        ],
+        "exit": 0,
+        "seconds": 0.2933606669976143,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "Fragment-compile",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metal",
+          "-std=macos-metal2.4",
+          "-c",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment.metal",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment.air"
+        ],
+        "exit": 0,
+        "seconds": 0.07084666700393427,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "Fragment-link",
+        "command": [
+          "xcrun",
+          "-sdk",
+          "macosx",
+          "metallib",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment.air",
+          "-o",
+          "/Users/andreyyurlov/.codex/incant-evidence/cooked-ui-metal-001/Fragment.metallib"
+        ],
+        "exit": 0,
+        "seconds": 0.022224291999009438,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "result": {
+      "passed": true,
+      "source_unchanged": true,
+      "native_compiler_only": true,
+      "gpu_submitted": false,
+      "commands": 5
+    }
+  }
+}

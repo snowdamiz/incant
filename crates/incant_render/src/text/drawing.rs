@@ -8,60 +8,57 @@ use wgpu::util::DeviceExt;
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
 pub(super) struct FrameUniform {
-    matrix: [[f32; 4]; 4],
-    color: [f32; 4],
+    pub(super) matrix: [[f32; 4]; 4],
+    pub(super) color: [f32; 4],
 }
 pub(super) fn pipeline(
     device: &wgpu::Device,
     layouts: [&wgpu::BindGroupLayout; 3],
-) -> wgpu::RenderPipeline {
+    backend: wgpu::Backend,
+    cache: Option<&wgpu::PipelineCache>,
+) -> Result<wgpu::RenderPipeline> {
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Text coverage"),
         bind_group_layouts: &layouts.map(Some),
         immediate_size: 0,
     });
-    let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-        label: Some("Text placement and coverage math"),
-        source: wgpu::ShaderSource::Wgsl(include_str!("text.wgsl").into()),
-    });
-    device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-        label: Some("World-space text in shared HDR graph"),
-        layout: Some(&layout),
-        vertex: wgpu::VertexState {
-            module: &shader,
-            entry_point: Some("vertex"),
-            compilation_options: Default::default(),
-            buffers: &[wgpu::VertexBufferLayout {
-                array_stride: QUAD_BYTES,
-                step_mode: wgpu::VertexStepMode::Instance,
-                attributes: &wgpu::vertex_attr_array![0 => Float32x4, 1 => Float32x4],
-            }],
-        },
-        fragment: Some(wgpu::FragmentState {
-            module: &shader,
-            entry_point: Some("fragment"),
-            compilation_options: Default::default(),
-            targets: &[Some(wgpu::ColorTargetState {
-                format: crate::frame::HDR_FORMAT,
-                blend: Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),
-                write_mask: wgpu::ColorWrites::ALL,
-            })],
+    let shader = super::shader::stages(device, backend)?;
+    Ok(
+        device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+            label: Some("World-space text in shared HDR graph"),
+            layout: Some(&layout),
+            vertex: wgpu::VertexState {
+                module: &shader.vertex,
+                entry_point: Some(shader.vertex_entry),
+                compilation_options: Default::default(),
+                buffers: &vertex_buffers(),
+            },
+            fragment: Some(wgpu::FragmentState {
+                module: &shader.fragment,
+                entry_point: Some(shader.fragment_entry),
+                compilation_options: Default::default(),
+                targets: &[Some(wgpu::ColorTargetState {
+                    format: crate::frame::HDR_FORMAT,
+                    blend: Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),
+                    write_mask: wgpu::ColorWrites::ALL,
+                })],
+            }),
+            primitive: wgpu::PrimitiveState {
+                cull_mode: None,
+                ..Default::default()
+            },
+            depth_stencil: Some(wgpu::DepthStencilState {
+                format: wgpu::TextureFormat::Depth32Float,
+                depth_write_enabled: Some(false),
+                depth_compare: Some(wgpu::CompareFunction::LessEqual),
+                stencil: Default::default(),
+                bias: Default::default(),
+            }),
+            multisample: Default::default(),
+            multiview_mask: None,
+            cache,
         }),
-        primitive: wgpu::PrimitiveState {
-            cull_mode: None,
-            ..Default::default()
-        },
-        depth_stencil: Some(wgpu::DepthStencilState {
-            format: wgpu::TextureFormat::Depth32Float,
-            depth_write_enabled: Some(false),
-            depth_compare: Some(wgpu::CompareFunction::LessEqual),
-            stencil: Default::default(),
-            bias: Default::default(),
-        }),
-        multisample: Default::default(),
-        multiview_mask: None,
-        cache: None,
-    })
+    )
 }
 pub(crate) struct TextDraw {
     scene: Arc<TextScene>,
@@ -154,4 +151,13 @@ impl TextDraw {
             pass.draw(0..6, 0..node.count);
         }
     }
+}
+
+const ATTRIBUTES: [wgpu::VertexAttribute; 2] = wgpu::vertex_attr_array![0=>Float32x4,1=>Float32x4];
+pub(super) fn vertex_buffers() -> [wgpu::VertexBufferLayout<'static>; 1] {
+    [wgpu::VertexBufferLayout {
+        array_stride: QUAD_BYTES,
+        step_mode: wgpu::VertexStepMode::Instance,
+        attributes: &ATTRIBUTES,
+    }]
 }

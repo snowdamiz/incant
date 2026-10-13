@@ -1,0 +1,88 @@
+{
+  "format": "incant-independent-source-review",
+  "version": 1,
+  "reviewer": "astra /root/native_wasm_export",
+  "reviewed_at_utc": "2026-10-13T02:46:58.936025+00:00",
+  "status": "accepted-scoped-source",
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-004/freeze.json",
+    "sha256": "1eb27298a911c757bfb4fdc79504e3aaba00a55fedf8125ba15c9a1fdd3ba034"
+  },
+  "source_hashes": {
+    "Cargo.lock": "73d552b8402fbe3b3fd226fe7f307cdb16c84576fd522d8899331452c13a80b8",
+    "Cargo.toml": "128e116fd472a924fcd56c3fc9717ec205b077ccc31b07fe6fb16912e32deda2",
+    "crates/incant_game_player/Cargo.toml": "38fd202c44f28c85a4835afb2f0403258cb2d747e468741474abcf0244513431",
+    "crates/incant_game_player/src/lib.rs": "9800adbc42317e3c2885f78af1414a73300c3e8f995c4db11710d4cfd24ef446",
+    "crates/incant_game_player/src/main.rs": "b4699db7cad9451e07cf898f29bafb14e37c5cae885f2bc103638ecfe3affe4d",
+    "crates/incant_game_player/src/profile.rs": "7d9e1d35550fb83981499083631687292362aa16ad0eb7684b8c3c15b5a34afe",
+    "crates/incant_game_player/tests/profile.rs": "361babbe61002607e406cac1d7305b123bb47a821e85ea7c378746a53ec8606f",
+    "crates/incant_game_runtime/Cargo.toml": "695d83d752c1daefd1981fcb90c986947c92ecdba35a4380e2c3cdb380baeeed",
+    "crates/incant_game_runtime/src/core.rs": "c4f82b583cb23ca8e377adc44306b89e7fd201dc1717e58063139edda5316481",
+    "crates/incant_profile/Cargo.toml": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef",
+    "crates/incant_profile/src/allocation.rs": "d5ead34f95e07db61d494a1100c2161dfefb073653df900680dae9a841877b0f",
+    "crates/incant_profile/src/disabled.rs": "f00b0559fd339ff889ff3b94399952ddb4dedafb954e0990979e856405e1453e",
+    "crates/incant_profile/src/enabled.rs": "8cc10066d6beb252fed4eb9eb351f523b59abb24200356ffe13d9e9864e2c6aa",
+    "crates/incant_profile/src/lib.rs": "b02608c6d683e82f3232b2e9bdcded261b7695bcd88a4daf20b9967359ca00f4",
+    "crates/incant_profile/src/model.rs": "5fec6a62be1304381eb05c40df297a0475121e22ea223948aa0aaa1df62673ef",
+    "crates/incant_profile/src/tracy.rs": "f6896a3968c51cecc47c6a5f838d1cc322bb300011a073687a88a65aa0b67ebf",
+    "crates/incant_profile/tests/allocations.rs": "dded0e6d0cc6521c784c5421dc08c9657482781df46b420b1bd391f170bb2a63",
+    "crates/incant_profile/tests/disabled.rs": "89a2e76c94776c39a0769041c925cf976c7081029afbab9c73485a4da050675a",
+    "crates/incant_profile/tests/summary.rs": "e30d257216cb69b0b26dcfcabcc969a59f90c38c8e607fe192c37dee9b2ee9b0",
+    "crates/incant_runtime/Cargo.toml": "6f69521b9038242fd278dd732c8d5db577b19efa47a622e4308c9bd515598209",
+    "crates/incant_runtime/src/animation.rs": "17e3d0d6e9a252a2a78433cee1fbb594109bac6b059794b25b3ccdf622a263e2",
+    "crates/incant_runtime/src/flipbook.rs": "04d75989b8f93d1718a849a8a9385a9b3436ece4bbadfa7ebeab207431cf87b1",
+    "crates/incant_runtime/src/world.rs": "8107201ef6e3d33ca36ea19b2b405fa7f17387ed118d8a34bb7c67b0a54a710e",
+    "crates/incant_script/Cargo.toml": "2dbc844664f84e46f18684c687867d50efb887842946d394aa2288ac4d16a7d1",
+    "crates/incant_script/src/lib.rs": "e281df2179a848870c304fe7afce54fe6911f2b0050bd6970d6ecc98646e146f",
+    "crates/incant_script/src/program.rs": "47aaf334d32a3f85d1deb1de4a55cd6b5fa7d01a4a129bd5340d05af2ee3a1c3",
+    "crates/incant_script/src/session.rs": "d3192f395f1b6623d8b6c7ff52b10674c1cbe8a033245fc82d1e71aa7ecd4b25",
+    "crates/incant_script/tests/profile.rs": "0d03a7454cfe9da11456be99a0ad7fa8cc8d8e23a2659aba425f01cd7f6177c2",
+    "docs/spikes/native-cpu-profiling.md": "1e0837faa4aa7c0e5c81940bb008befec72e9a535c0a4fcedc7cf2f9e79f838a",
+    "tools/export_native.py": "b29b2c9befa358bbd1cf31d76a61ea945f30ec0b886a4a01a51c76897831ff01",
+    "tools/native_profiling.py": "04b455e44a4252e8d7e12fc15b87e4b5a297950d643a0eac03d879b7a46f65a5",
+    "tools/tests/test_native_profiling.py": "fa4f1858c82b72657ca9acc1c1b0fdf276c4e1bc1723920dd03d82d492d6a656",
+    "tools/tests/test_native_ui_export.py": "021358c8d4351515888eb256c44df2e394ff5b58978f747a5cec43109e922985"
+  },
+  "verified_live_and_copy_inputs": 33,
+  "engine_review_parent": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/native-cpu-profiler-source-20261013.json",
+    "sha256": "d02d64fe5442ff127ffca55f4c17a9059fe85e862cd67c533a278285b0799d00"
+  },
+  "scope": [
+    "Explicit trusted headless-only profiling export selection, unchanged omission/runtime-opt-in behavior, no project-controlled configuration.",
+    "Selected normal dependency graph and exact Tracy package/feature identities; actual target library and executable feature equality, required host/target distinction, no host substitution or conflicting/missing target units.",
+    "Ambient Tracy/C++ overrides refused; CARGO_FEATURE_* and CXX/compiler aliases refused by presence including empty strings before project IO.",
+    "Disabled Scope remains zero-sized with empty inlined Drop; disabled Capture cannot be publicly constructed.",
+    "Focused mutation tests and original source003 finding reviewed; no renderer/network/capture execution."
+  ],
+  "resolved_finding": {
+    "priority": "P2",
+    "source003": "Ambient CARGO_FEATURE_BROADCAST/CODE_TRANSFER could change pinned sys build defines outside selected Cargo feature receipts; CXX compiler overrides were also unbounded.",
+    "source004": "Every CARGO_FEATURE_* and compiler-alias key refuses by presence before child execution; empty/nonempty mutation tests cover both. Both actual player target units now must exist and agree."
+  },
+  "findings": [],
+  "independent_tests": {
+    "argv": [
+      "/opt/homebrew/opt/python@3.14/bin/python3.14",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tools/tests",
+      "-p",
+      "test_native_profiling.py",
+      "-v"
+    ],
+    "cwd": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+    "exit_code": 0,
+    "cases": 6,
+    "log": "/Users/andreyyurlov/.codex/incant-reviews/native-cpu-profiler-export-004/focused.log",
+    "sha256": "61dd5956d3baf0e559362034e8e25081d56c5e0646f24776b77514a83f30f873"
+  },
+  "limits": [
+    "Only source and focused Python execution accepted. Actual shipping/Tracy capture, broad/default/web checks and compiler receipts remain separate owner evidence.",
+    "No Rust build, listener, GPU, window, device or performance execution by reviewer.",
+    "Trusted workspace/toolchain assumption remains; arbitrary modified host compilers/configurations are outside the supported exporter contract."
+  ]
+}

@@ -25,7 +25,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         #[cfg(not(all(feature = "project", feature = "mobile-ffi")))]
         {
             let _ = path;
-            return Err("authored iOS archive requires project and mobile-ffi features".into());
+            return Err("authored mobile archive requires project and mobile-ffi features".into());
         }
     }
     if std::env::var_os("INCANT_MOBILE_PROJECT_SCENE").is_some() {

@@ -1,0 +1,38 @@
+{
+  "historical_head": "79557b893a13e13ac5eacf7356b3a1591a12bde8",
+  "current_head": "489168fc49a23a4f4779907cd85793971dfe3cca",
+  "changed_inputs": [
+    {
+      "path": ".gitattributes",
+      "old_sha256": "6f14b1bad45ec88df74bed391052a3adf7e45544c416e7ba5c86241c195d11eb",
+      "current_sha256": "e2859d9bcc0ec7b37156483cc28e7d43415f71814b3d1ae680b2a89068a8a87e"
+    },
+    {
+      "path": "Cargo.lock",
+      "old_sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+      "current_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "old_sha256": "9b6f783497c32d9e43923011b5eb33cd29a7d53104b7ce90d6ed8666109b816e",
+      "current_sha256": "1431e56f053ea5a2813213ccbbc31b99f298eb8493aea3bf6be5fb391edaac7e"
+    },
+    {
+      "path": "crates/incant_game_player/src/checkpoint.rs",
+      "old_sha256": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+      "current_sha256": "b5b4d891cf6593ec4922162b290aea71caa0ecfbfaab3f32dd0bd770172b2d2b"
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "old_sha256": "eb6f1807af92e5208436b86cafa4a8ee13d537f2d7ccaf051df6576d84d72f67",
+      "current_sha256": "5cf9df067f0202d3807fd9a43266c89626ac3cbbc94103bfd7244f5ab1cbf049"
+    }
+  ],
+  "new_inputs": [
+    "crates/incant_game_player/src/pcm_output.rs",
+    "crates/incant_game_player/src/pcm_output/tests.rs",
+    "crates/incant_game_player/src/pcm_output/tests/runner.rs",
+    "tools/probes/native-streaming-pcm.py"
+  ],
+  "basis": "Prior paired Android archive proof retained as pre-PCM. Current deterministic execution and both-mode compile/library checks required because mobile calls crate::run."
+}

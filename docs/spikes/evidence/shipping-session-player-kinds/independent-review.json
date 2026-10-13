@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-13T01:19:53.394551+00:00",
+  "reviewer": "astra root",
+  "accepted": true,
+  "scope": "Narrow Cargo crate_types / rustc --crate-type join; source and regression accepted, not full hosted session execution",
+  "evidence": {
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-session-kinds-001/repair.patch": "3909958e1f721fc8ce423ba2abbc081f8aeb27a714e45cc5ced7bb23b69997a4",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-session-kinds-001/green.log": "f450bfbae66f0021f9a1295d298450786c2271a40bb2c505adb0bb1383d3c333",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-session-kinds-001/red.log": "26ff85195431a2bc98b76cdb420663eeb8971968fd294f67c3cf9bbe906d8582",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-session-kinds-001/all-tools.log": "00c28e8efe1dc98b7c5281716ab92387bcb37afaddb0067626dde01c9bc2769e",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-session-kinds-001/replay.json": "628c82107217c86246e71db8c6e771e0c6ca589c9c5694abbb86f2ad5fdf26ee",
+    "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-session-kinds-001/replay.py": "6060eb52f9199666c20e45e3cb9e6a20720d605e33b66a4f2c6f69594cc88285",
+    "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/shipping_session.py": "1ad924608092b51ec9c1b03caf67f660db5c1caeaaf2d339ceb55d23edbcdd30",
+    "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/tests/test_shipping_session.py": "831ad043ed2b03014c803ae4ab737ea58462eb9a822c58496107a77f76ab3481"
+  },
+  "independent_test": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "tools.tests.test_shipping_session",
+      "-q"
+    ],
+    "cases": 24,
+    "exit": 0
+  },
+  "findings": [],
+  "remaining": [
+    "Full frozen checkpoint rerun required; release stays held"
+  ]
+}

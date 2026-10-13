@@ -1,7 +1,7 @@
 //! Fixed geometry host layouts; no externally supplied shader artifacts.
 use crate::{Result, shader::Stages};
 #[cfg(all(feature = "cooked-geometry", not(target_arch = "wasm32")))]
-mod cooked;
+pub(crate) mod cooked;
 
 #[derive(Clone, Copy, Debug)]
 pub(crate) enum Kind {

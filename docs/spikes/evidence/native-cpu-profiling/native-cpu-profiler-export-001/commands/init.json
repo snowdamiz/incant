@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/private/tmp/incant-cpu-profiler-target/debug/incant_headless",
+    "init",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-001/authoring/project.json",
+    "--entities",
+    "0"
+  ],
+  "pid": 51583,
+  "exit": 0,
+  "started_ns": 1791860313939027000,
+  "ended_ns": 1791860315284505000,
+  "stdout": "{\n  \"created\": \"01M4SK554BKGBRZPCWCCR7Z0MQ\",\n  \"entities\": 0\n}\n",
+  "stderr": ""
+}

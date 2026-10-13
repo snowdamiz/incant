@@ -51,10 +51,10 @@ class FreshShippingLedgerTests(unittest.TestCase):
         self.session.deleted = False
         self.session.check_frozen = Mock()
         self.artifact = {'reason': 'compiler-artifact', 'package_id': 'path+file:///repo/runtime#0.0.1',
-                         'target': {'name': 'incant_runtime', 'kind': ['lib']},
+                         'target': {'name': 'incant_runtime', 'kind': ['lib'], 'crate_types': ['lib']},
                          'features': ['default'], 'profile': {'opt_level': '3', 'test': False},
                          'filenames': [str(self.library)], 'fresh': False, 'executable': None}
-        self.command = (f"Running `rustc --crate-name incant_runtime --target {self.target} "
+        self.command = (f"Running `rustc --crate-name incant_runtime --crate-type lib --target {self.target} "
                         f"--out-dir {self.output} --cfg 'feature=\"default\"' "
                         '-C metadata=abc -C extra-filename=-123 -C opt-level=3 '
                         '-C codegen-units=1 -C panic=abort`')
@@ -63,6 +63,37 @@ class FreshShippingLedgerTests(unittest.TestCase):
         value = copy.deepcopy(artifact or self.artifact)
         value['fresh'] = fresh
         return self.session.record(json.dumps(value), self.command if command is None else command)
+
+    def player_units(self):
+        library = self.output / 'libincant_game_player-lib.rlib'
+        executable = self.output / 'incant_game_player-bin'
+        library.write_bytes(b'fresh player library')
+        executable.write_bytes(b'fresh player executable')
+        lib = dict(self.artifact, target={'name': 'incant_game_player', 'kind': ['lib'],
+                   'crate_types': ['lib']}, filenames=[str(library)])
+        binary = dict(lib, target={'name': 'incant_game_player', 'kind': ['bin'],
+                      'crate_types': ['bin']}, filenames=[str(executable)], executable=str(executable))
+        command = self.command.replace('incant_runtime', 'incant_game_player')
+        lib_command = command.replace('=-123', '=-lib')
+        bin_command = command.replace('--crate-type lib', '--crate-type bin').replace('=-123', '=-bin')
+        return lib, binary, lib_command, bin_command
+
+    def test_player_library_and_binary_join_distinct_fresh_commands(self):
+        lib, binary, lib_command, bin_command = self.player_units()
+        lines = self.session.record(json.dumps(lib) + '\n' + json.dumps(binary),
+                                    lib_command + '\n' + bin_command)
+        self.assertEqual(lines, [lib_command, bin_command])
+        self.assertEqual(len(self.session.units), 2)
+
+    def test_player_library_command_cannot_prove_executable(self):
+        _, binary, lib_command, _ = self.player_units()
+        with self.assertRaisesRegex(ValueError, 'Missing or ambiguous'):
+            self.record(artifact=binary, command=lib_command)
+
+    def test_duplicate_player_binary_commands_still_refuse(self):
+        _, binary, _, bin_command = self.player_units()
+        with self.assertRaisesRegex(ValueError, 'Missing or ambiguous'):
+            self.record(artifact=binary, command=bin_command + '\n' + bin_command)
 
     def test_exact_reuse_retains_original_fresh_command_and_identity(self):
         first = self.record()

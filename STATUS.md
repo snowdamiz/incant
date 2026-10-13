@@ -16,19 +16,176 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Core optional result-label binding — CPU proof complete, final review pending
+## Current overview — main195, 2026-10-13
 
-The sample accepts an explicitly authored optional `hud.prompt` label and clears
-the objective on winning. Result parenting and whole-session restart restore the
-expected text/parents while the existing 12-widget HUD stays supported. Twenty
-focused Python tests, strict TypeScript, 28 successful native processes and two
-fresh source/map/build-deleted ordinary packages pass. Twenty shipping processes
-include eight complete R/Start/held-input reset routes with exact fresh-state and
-concatenated PCM comparisons. Nine exact native refusals pass. Independent source
-review is accepted; final execution review and publisher integration are pending.
-The production prompt node/localization/style is still Claude-owned and absent;
-this is not appearance or device/performance acceptance. Prior 0065 evidence stays
-immutable. [Contract/evidence](docs/spikes/core-result-hud.md).
+Development main195 includes the restart quota-test repair (PR188) and the reviewed,
+opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
+(PR189). Default renderer checks remain; the next frozen checkpoint also exercises
+cooked features and asserts the actual native backend. Producer Metal appearance
+reviews remain scoped to their recorded builds; current Vulkan/DX12 execution is pending.
+
+Release remains the checkpoint14 baseline selected from main160. Checkpoint17 is
+terminal and unpromoted at its exact main186 tree: 20 requirements passed; Linux and
+Windows conformance failed the quota assertion, and macOS rejected a successful
+player compile because its probe confused library and executable units. The main188
+quota repair preserves production's 50 ms budget, and the reviewed player probe
+correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
+all 23 requirements must pass before release promotion.
+No release or phase approval follows from a main merge.
+Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
+that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
+is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
+production and backend assertions are unchanged. Other candidate jobs continue
+without an advance.
+
+Android static-Wasm integration is merged in PR190 after independent source-relevance
+review and the fast check. Current CPU/public preflights and both-mode target compile/
+admission checks pass; six actual Android callers remain producer-scoped.
+Core authored bindings and the corrected locked-exit proof are merged in PR185
+([current-main evidence](docs/spikes/core-main182.md)).
+
+Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
+their queued GPU/appearance checks remain open. CPU profiling has accepted producer
+package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
+independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
+phone, performance, complete-renderer or phase gates. Older milestone narratives
+below are historical integration snapshots, not the current queue.
+
+Safe Core live-HUD changes are merged in PR192. The optional result-label and won-objective
+correction is merged in PR194 after public native checks, independent integration
+review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
+appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+
+## Parallel physics tree ownership — scoped correction verified
+
+Vendored Parry 0.31.1 fixes overlapping mutable borrows in parallel BVH updates
+and refitting, with duplicate rejection before mutation and explicit source
+provenance. Both physics modes, browser compilation, script compilation and
+Clippy pass; independent source review is accepted. Additional Miri experiments
+remain unsuccessful due to Crossbeam diagnostics and are recorded separately.
+This does not enable persisted physics saves, complete a dependency soundness
+audit, or establish a performance gain.
+[Producer scope](docs/spikes/parry-parallel-ownership.md). The current-main195 union passes 18 CPU cases in each physics mode, all-target Clippy, browser/script checks and four isolated patched dependency graphs. Actual source-change/restore controls verify runtime identity invalidation for both Parry and the optional profiler. [Integration evidence](docs/spikes/parry-main195.md) has independent final acceptance; publication follows the required fast check. No physics-save admission is enabled.
+
+## Cooked renderer integration — CPU checks complete
+
+The accepted sprite, UI, text and material producer changes are composed with
+optional private Vulkan pipeline storage. Default and cooked configurations pass
+87 and 113 CPU cases respectively (overlapping coverage), with 89 GPU cases
+explicitly ignored in each local run. All-target Clippy, web compilation and
+workflow/dependency checks pass. Claude 0062–0064 accepted the immutable producer
+Metal results; these remain producer evidence. Release CI retains defaults and
+adds cooked GPU checks with exact Metal/Vulkan/Dx12 adapter assertions, plus the
+Linux fresh-process cache test. Current composed GPU execution, Vulkan/DX12
+acceptance, cache benefit and reference-phone gates remain pending. Features
+remain opt-in. [Integration evidence](docs/spikes/cooked-renderer-main186.md).
+
+## Persistent Vulkan pipeline cache — CPU verification
+
+An optional renderer cache now wraps the complete 31-pipeline startup catalog
+with private, bounded, adapter/driver-bound storage and atomic publication.
+Filesystem/CPU checks, browser compilation and dependency checks pass. A fresh-
+process Vulkan corruption/reopen test is prepared for Linux release CI; actual
+Linux driver execution and measured cache benefit remain pending. Default
+rendering is unchanged. Metal/DX12 storage, per-level recording, asynchronous
+fallback and reference-phone gates remain open.
+[Contract and evidence](docs/spikes/persistent-pipeline-cache.md).
+
+## Fixed material shaders — CPU/compiler checks passed
+
+The opt-in material path cooks the unchanged imported-material, light and shadow
+sampling shaders to native backend artifacts. Its explicit Metal storage-length
+binding covers metadata absent from passthrough; bounds and loop checks remain.
+All seven CPU/static checks pass: 92 enabled cases, 63 default-library cases,
+Clippy and browser portability. Both MSL stages compile and link. Independent source review passes.
+Claude 0064 accepted the producer Metal GPU/appearance packet. Current composed
+GPU execution, grid compute, full renderer cooking and reference-phone gates
+remain open; optional Vulkan cache CPU integration is described above.
+[Contract and evidence](docs/spikes/cooked-material-shaders.md).
+
+## Cooked world-space text shaders — CPU and Metal compilation passed
+
+The fixed text shader path passes independent source review, 90 enabled CPU
+tests, Clippy, wasm32 compilation and 63 default library tests. Both generated
+stages compile and link with the actual Apple Metal toolchain. Existing WGSL,
+glyph placement, coverage and depth behavior are unchanged. Claude 0063 accepted the producer Metal GPU/appearance packet. Current composed
+GPU and other-backend execution remain pending; this is not a rendering or device
+gate. [Scope and evidence](docs/spikes/cooked-text-shaders.md).
+
+## Cooked screen-space UI shaders — CPU and Metal compilation passed
+
+The opt-in fixed UI shader family passes independent source review, 87 enabled
+CPU tests, Clippy, wasm32 compilation and 63 default library tests. Existing WGSL,
+layout, theme and blending are unchanged. Both stages compile and link with the
+actual Apple Metal toolchain. Claude 0063 accepted the producer Metal GPU/appearance packet. Current composed
+GPU and other-backend execution remain pending. No rendering or phase gate is claimed. [Scope and evidence](docs/spikes/cooked-ui-shaders.md).
+
+## Cooked sprite shader family — CPU and compiler checks passed
+
+The existing sprite shader now has an opt-in fixed backend artifact path with
+checked stage/resource/host layouts and preserved sampling math. CPU tests,
+Clippy, default/web compilation and actual Metal stage compilation/linking pass;
+independent source review is accepted. Claude 0062 accepted the producer Metal GPU/appearance packet. Current composed
+GPU execution, other shader families and device performance requirements remain pending.
+[Scope and evidence](docs/spikes/cooked-sprite-shaders.md).
+
+## Checkpoint17 restart quota assertion — test correction accepted
+
+Linux and Windows baseline conformance failed the same restart quota test;
+the original assertion omitted its returned error. The test-only correction merged in main188 and
+isolates structural quota checks from the production CPU deadline and strengthens
+maximum/overflow/rollback controls. Local 127 script cases and Clippy pass;
+actual corrected hosted results remain pending. Candidate17 stays frozen and
+release remains at accepted checkpoint14.
+[Evidence](docs/spikes/restart-quota-main187.md).
+
+## Authored Android static Wasm — producer execution passed
+
+Ordinary Android export now admits the reviewed captured wasm2c module route
+with complete bundle/producer/target/physics checks and exact NDK C compilation
+audits. Both fresh shipping physics archives pass; six fresh source/cache/build/
+map-deleted ARM API37 emulator processes match all 17,856 observed fields and
+614,400 PCM bytes each, with twenty-six exact refusal controls. Public import,
+atomic selection/mode Undo/Redo/journal reopen and four Wasmtime processes also
+pass. Owned software AVDs were removed; the retained port-reuse failure was
+resolved by rerunning only missing callers, without rebuilding archives.
+Source/probe and final producer execution reviews are accepted; current-main
+integration checks are pending. API24 compilation is not minimum-OS execution proof.
+No physical-phone, performance, GPU, live audio, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-android-wasm.md).
+
+## Authored iOS static Wasm — producer execution passed
+
+Ordinary iOS export now accepts one public captured Wasm scene module through
+pinned wasm2c and the existing native bulk runtime. Complete captured/bundle,
+explicit iOS destination, selected physics graph, five actual solver artifacts,
+shipping Rust codegen and target C commands are checked. Both physics families
+have simulator/device archives; twelve fresh C/Swift simulator processes match
+17,856 full-field scalars and 614,400 PCM bytes each after private source/cache/
+build/maps removal, and fifty-two exact refusals pass. Both device archives link
+unsigned with C/Swift; no device execution is claimed. The first simulator
+compiler output was reused after a reviewed observer-only correction, explicitly
+qualified rather than called a new build. A separate simulator teardown failure
+is retained; the complete retry passed without source/archive changes.
+Source/probe and final execution reviews are accepted; current-main
+integration remains pending. Its original Android refusal is superseded by the
+separate Android proof above; mixed per-entity TypeScript and static guest
+checkpoints remain refused. No phone, minimum-OS, performance,
+rendering, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-ios-wasm.md).
+
+## Authored Core runtime bindings — merged in main185
+## Opt-in native CPU profiler — locally accepted
+
+Connected runtime/system/script zones and bounded player summaries pass actual
+CPU checks. Explicit trusted headless exports bind summary/Tracy features; the
+unchanged default path starts no client. Two fresh shipping packages preserve
+full 3,600-tick reports and PCM with profiling off/on. An actual opted-in loopback
+Tracy capture contains 20 zone types and four memory/allocation plots; all owned
+processes are reaped. Rust requested bytes, QuickJS heap and RSS are distinct.
+Independent source and final evidence review are accepted; integration is pending.
+Native-window/device capture, allocation stacks and the full profiler/performance
+gates remain open. [Contract/evidence](docs/spikes/native-cpu-profiling.md).
 
 ## Authored Core runtime bindings — CPU proof accepted
 
@@ -38,19 +195,22 @@ authoring, Undo/Redo and reopen pass; all art/layout inputs are preserved. The
 full 2,156-tick 48 kHz route, loss, locked exit, four locale readbacks, repeated
 cues and four complete packaged reset routes pass. Fresh-session logs/entities/UI
 and concatenated PCM match exactly after source/map/build deletion. Independent
-final review is accepted; publisher intake is pending. No GPU/window/device gate is claimed;
+final integration review and exact-head fast check passed; PR185 is merged.
+No GPU/window/device gate is claimed;
 historical offscreen provenance and Claude's visible restart hint remain open.
-[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md).
+[Contract/evidence](docs/spikes/core-authored-runtime-bindings.md) and
+[current-main integration proof](docs/spikes/core-main182.md).
 
-## Core authored-level locked-exit proof — locally accepted
+## Core authored-level locked-exit proof — merged in main185
 
 The retained 0060 locked run died before reaching the exit; its old assertion was
 a false positive. A replacement public-input recording reaches the exit alive
 with 3/4 pickups and observes actual positions/inventory for 30 consecutive ticks.
 Three real CPU runs, seven focused oracle tests and independent root review pass;
 original win/loss reports and PCM are unchanged. Controller, art and authoring
-stay untouched. Integration is pending. No visual, device or performance gate
-is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
+stay untouched. PR185 includes this correction and its
+[current-main integration proof](docs/spikes/core-main182.md). No new visual,
+device or performance gate is claimed. [Correction/evidence](docs/spikes/core-locked-exit.md).
 
 ## Bounded offline PCM streaming — CPU shipping proof accepted
 
@@ -62,8 +222,7 @@ remain intact. 75 CPU tests and scoped Clippy/static-module/graph checks pass.
 A fresh source/map/build-deleted Core package completes 2,156 ticks at 48 kHz
 (1,724,800 frames), repeats exactly and matches the prior player for its first
 1,000 ticks. Eight actual process controls cover the old refusal, diagnostic PCM,
-and precise publication errors. Independent source and final execution reviews are accepted; publisher
-integration is pending. No whole-engine memory, native-window,
+and precise publication errors. Independent source and final execution reviews are accepted; PR181 is merged after the exact-head fast check. No whole-engine memory, native-window,
 GPU or device/performance gate is claimed.
 [Contract and evidence](docs/spikes/native-streaming-pcm.md).
 
@@ -73,7 +232,7 @@ The ordinary player stages bounded per-tick PCM and hashes incrementally. Curren
 validation passes 75 CPU tests and all eleven checks. A fresh source/map/build-deleted
 Core export passes eight actual process controls over the complete 2,156-tick route,
 with exact repeat PCM and preserved old prefix/no-clobber/diagnostic behavior.
-Final integration review is accepted; publication awaits the exact-head fast check. Native-window, device,
+Final integration review and the exact-head fast check passed; PR181 is merged. Native-window, device,
 performance and appearance gates remain separate. [Evidence](docs/spikes/native-pcm-main180.md).
 
 ## Whole native session restart — CPU shipping proof accepted
@@ -88,6 +247,24 @@ source and final execution reviews and the exact-head fast check passed; restart
 Native-window/device/appearance acceptance, Wasm/headless restart ownership and
 physics save continuation remain open. [Contract and evidence](docs/spikes/native-session-restart.md).
 
+## Authored iOS fixed physics — current integration execution passed
+
+Ordinary iOS export now selects the project's deterministic or fast kernel and
+audits the selected normal graph, all five actual target solver artifacts and
+shipping codegen. Four fresh archives pass; twelve source/cache/build/map-deleted
+C/Swift simulator processes reproduce 864 checks, 432 complete log records and
+exact nonzero PCM. Thirty-two precise refusals include checksum-valid opposite-mode
+packages in both directions. Both-mode device archives and unsigned C/Swift links
+pass without device execution. The accepted source/probe is unchanged, and the
+complete producer execution packet has independent final acceptance. The composed
+main181 runtime now passes nine checks, two fresh simulator archives, twelve actual
+C/Swift positives and thirty-two precise refusals. Both current device target
+compilations pass; original unsigned device links remain producer-scoped. Final
+integration review and the exact-head fast check passed; PR183 is merged.
+[Current integration evidence](docs/spikes/authored-ios-physics-main181.md).
+No phone, performance, rendered-output, signing or phase gate is claimed.
+[Scope and retained evidence](docs/spikes/authored-ios-physics-modes.md).
+
 ## Authored iOS project archives — merged in main178
 
 The separate trusted-source iOS exporter cooks public-authored TypeScript imports,
@@ -99,12 +276,12 @@ observations, 216 log records and exact nonzero PCM after private source, cache,
 build and maps are removed; fourteen precise refusal controls pass. Device
 archives and unsigned caller links pass, without device execution. Independent
 producer, integration-source and final execution reviews are accepted; the
-exact-head fast check passed and PR178 is merged. Fast iOS projects, desktop cross-target
-export, Android and mobile static Wasm remain denied in this slice. No signing,
+exact-head fast check passed and PR178 is merged. This historical proof was deterministic-only; the separate producer above adds fast iOS projects. Desktop cross-target
+export and mobile static Wasm remain denied in this slice. No signing,
 mobile window/audio host, phone performance or phase gate is claimed.
 [Current source and evidence](docs/spikes/authored-ios-main177.md).
 
-## Native worker owner — current main178 CPU integration passed
+## Native worker owner — merged in main179
 
 The trusted developer owner builds the selected kernel, verifies worker identity,
 and enforces request deadlines and complete process-tree cleanup. Actual sessions
@@ -113,7 +290,7 @@ state matches ordinary native Play after private source removal. Both compiled m
 and full tools checks pass on main178. Independent final integration review and required fast check passed; PR179 is merged. Editor GPU embedding and Windows execution remain separate.
 [Contract and evidence](docs/spikes/native-worker-owner.md).
 
-## Retained native CPU worker — current main178 checks passed
+## Retained native CPU worker — merged in main179
 
 A native worker drops authoring state after startup and retains only its disposable
 runtime composition. Both matching physics binaries pass 65 all-target headless tests each,
@@ -121,6 +298,18 @@ Clippy and real source-deleted process checks, including duplicate-step fencing,
 strict protocol refusals and disconnect cleanup. The three mode-aware test fixtures
 use public commands and preserve explicit foreign-mode refusal. Independent final review and fast check passed; PR179 is merged; [integrated evidence](docs/spikes/native-worker-main178.md). Automatic editor process selection and GPU viewport
 embedding remain open. [Contract and evidence](docs/spikes/native-play-worker.md).
+
+## ARM Android bytecode candidate — experiment accepted
+
+The default-off trusted numeric probe has accepted source, 22 admission tests and
+nine harness cases. An actual local Android 17/API 37 ARM emulator passes all 16
+C ABI controls; complete numeric/game/PCM records match prior macOS/iOS callers.
+Independent final execution review is accepted. That immutable candidate keeps default
+and authored admission denied. The separate authored Android implementation below
+now has independently accepted shipping/emulator evidence; no phone or performance
+gate is claimed by either slice.
+[Candidate contract and retained attempts](docs/spikes/android-bytecode-candidate.md).
+
 
 ## Physics process selection — local execution passed
 
@@ -184,7 +373,8 @@ Actual C and Swift callers each pass the same complete numeric/input/failure
 records on macOS and an iOS 27.0 ARM simulator (32 controls per platform). iOS
 device archives compile and link only. Native script/cooker tests, union Clippy
 and lean dependency checks pass; independent final source/execution review is accepted. Android
-cross-target admission remains denied; the authored iOS route above is a separate
+cross-target admission stayed denied in that immutable slice; the later Android
+route below is separately reviewed. The authored iOS route above is a separate
 shipping-profile proof. No
 physical-phone or performance gate is claimed.
 Current main169 integration passes all 16 checks with new matching archives and
@@ -914,13 +1104,51 @@ and complete Game UI/IME gates remain open.
 The resumed private integration passes355CPU cases and two fresh ordinary shipping
 exports with24 separate player processes. Core/Planar restart matches fresh state
 and exact concatenated PCM; both matching headless fixtures explicitly refuse
-unsupported restart. Independent final integration review is accepted; publication awaits the
-exact-head fast check. [Current evidence](docs/spikes/native-restart-main179.md) retains the
+unsupported restart. Independent final integration review and exact-head fast check passed;
+restart is merged in PR180. [Current evidence](docs/spikes/native-restart-main179.md) retains the
 original missing-bundle compile attempt and unchanged-source correction.
 
-## Current milestone
+## Authored Core runtime bindings — current integration passed
 
-Main #178 includes compound native animation and Wasm snapshots, authored two-bone
+The full accepted 0060 presentation, corrected live locked-exit route and native
+HUD/audio/restart bindings pass six current main182 integration checks. Sixteen
+focused tests, the original seven numerical scenarios and fourteen fresh native
+positive processes pass, with one precise headless-restart refusal. All sample
+and art bytes remain exact; the matching headless is reused by exact source
+identity. The original ten source-free shipping processes and four exact reset
+PCM comparisons remain producer-scoped. Final integration review is accepted; the required fast check precedes publication.
+Historical offscreen helper provenance remains qualified; live appearance/device
+acceptance is separate. [Evidence](docs/spikes/core-main182.md).
+
+## Checkpoint17 terminal and shipping probe repair
+
+Checkpoint17 finished with 20 required successes and three failures and was not promoted. Linux/Windows quota controls have the reviewed main188 repair. A separate macOS player library/executable audit correction now passes the exact retained compile-log replay and six regression controls; independent final review is accepted and the fast/full frozen checks remain required. See [probe evidence](docs/spikes/shipping-player-probe-kinds.md).
+
+## Core live HUD integration reviewed
+
+The sanitized Claude0065 hint/wrapping/font changes are composed with main190 and independently accepted for scoped integration; the fast publication check remains pending. Seven CPU checks, 14 native positive processes, four-locale font coverage and exact baseline gameplay/PCM pass. Result-title/narrow contrast and separate prompt/objective follow-ups remain open; no new rendered or device acceptance. See [integration evidence](docs/spikes/core-live-hud-main190.md).
+
+## Core optional result-label binding — producer CPU proof accepted
+
+The sample accepts an explicitly authored optional `hud.prompt` label and clears
+the objective on winning. Result parenting and whole-session restart restore the
+expected text/parents while the existing 12-widget HUD stays supported. Twenty
+focused Python tests, strict TypeScript, 28 successful native processes and two
+fresh source/map/build-deleted ordinary packages pass. Twenty shipping processes
+include eight complete R/Start/held-input reset routes with exact fresh-state and
+concatenated PCM comparisons. Nine exact native refusals pass. Independent source
+and final execution review are accepted; current-main integration is pending.
+The production prompt node/localization/style is still Claude-owned and absent;
+this is not appearance or device/performance acceptance. Prior 0065 evidence stays
+immutable. [Contract/evidence](docs/spikes/core-result-hud.md).
+
+## Historical integration snapshots
+
+The paragraphs in this section preserve the state at earlier integrations. Their
+main numbers, queued work and active checkpoint labels are historical; use the
+current overview above and linked immutable receipts for present status.
+
+Main #184 includes compound native animation and Wasm snapshots, authored two-bone
 IK, native/TypeScript/Wasm root motion, audio transport and HUD, offline audio/UI
 checkpoints, public physics queries, and the Core/Planar gameplay foundations.
 Pearl Cove's authored art/HUD and runtime hooks are merged with their scoped
@@ -931,7 +1159,13 @@ mode-aware developer/desktop export tools are merged; automatic editor worker
 selection and actual physics saves remain separate. Authored iOS archives are
 merged with actual simulator proof and qualified device-link evidence. The retained
 CPU worker and managed owner are merged through main179;
-whole-session restart and authored Android work remain local integration lanes. Phase 1 and the finished game
+whole-session restart is merged in main180 and bounded PCM in main181. Both authored
+Android variants pass preserved pre-PCM archive/emulator proofs; the final composed
+deterministic archive and both-mode mobile/target checks pass, with independent
+integration review and the exact-head fast check passed; Android is merged in main182.
+The composed iOS fixed-mode simulator proof, final integration review and required
+fast check passed; fixed-mode iOS export is merged in main183. Core authored HUD/audio/restart bindings are independently accepted locally
+and queued; their new live presentation acceptance remains separate. Phase 1 and the finished game
 remain incomplete.
 
 Checkpoint14 promoted selected main160 `d1ef35ee` after all 23 exact-candidate
@@ -946,9 +1180,12 @@ shipping builds. [Promotion and evidence](docs/spikes/release-checkpoint-14.md).
 Checkpoint15 finished unpromoted with20 required successes and three exporter-graph
 failures; Windows conformance passed in87minutes. Checkpoint16 now freezes selected
 main179 `02203670`, candidate `6a336ac5`, with the exact same tree `f9a6007d`.
-All eight existing workflows are running once on that candidate; all23 required
-contexts remain mandatory. Release stays at the checkpoint14 baseline until every
-exact-head context succeeds and promotion is reviewed.
+The general macOS fresh-session ledger failed by confusing the same-named player
+library/executable commands. The reviewed crate-kind correction passes24 focused
+regressions and330 tooling cases (four existing platform skips), with exact hosted
+command replay. Windows conformance remains active at this snapshot. The candidate
+stays frozen; all23 contexts remain required. Release remains checkpoint14 until a
+reviewed repaired candidate fully passes. [Failure and repair](docs/spikes/shipping-session-player-kinds.md).
 
 Native animation graphs now connect ordinary typed authoring, captured models,
 v14 cooking, deterministic native clip states and flat adjacent-pair 1D blends.
@@ -1909,3 +2146,34 @@ Rust binary; strict consumer checks and the editor build pass. The integrated
 cook/Play suite passes 65 tests and Clippy in each of three compiled variants.
 Mode-aware launch/export and editor process switching remain separate follow-on
 work. [Evidence](docs/spikes/physics-project-setting.md).
+
+- Authored Android CPU archive route: reviewed fresh-source admission and separate physics-aware exporter pass focused Rust/Python/Clippy checks. Both deterministic and fast ordinary shipping archives pass three source/cache/build/map-deleted ARM Android17/API37 processes each, exact per-field/native/PCM parity and fourteen boundary refusals; owned emulators cleanly removed. Independent final execution review is accepted; publisher integration remains pending. No minimum-OS/phone/performance/platform-host claim. See `docs/spikes/authored-android-project.md`.
+
+## Authored Android — composed main181 execution passed
+
+Seventeen current checks pass, including both-mode mobile tests and fast Android
+target compilation. A fresh deterministic archive passes three actual source-free
+ARM Android17/API37 processes with exact native logs, observations and PCM plus
+seven precise refusals. Owned emulator resources are removed. The earlier complete
+fast shipping proof stays explicitly pre-PCM; no later fast archive rebuild is
+claimed. Final independent review is accepted; publication awaits its fast check. No phone/rendering/performance gate
+is approved. [Scope and evidence](docs/spikes/authored-android-main181.md).
+
+## Authored iOS static Wasm — current-main proof complete
+
+Main185 composition retains Android TypeScript and explicitly refuses Android
+static modules. The frozen current source passes 62 cooker tests and scoped
+checks, two fresh simulator shipping archives, twelve actual C/Swift positives
+and fifty-two exact refusals with full native-oracle/log/PCM parity. Final
+independent integration review is accepted; publication awaits its fast check. Original device links remain
+producer-scoped; no phone, rendering or phase gate is claimed.
+[Current evidence](docs/spikes/authored-ios-wasm-main185.md).
+
+## Windows checkpoint conformance split
+
+Checkpoint16 remains failed: baseline and optimized Windows conformance each
+passed 484 tests, then the shared job exhausted its 90-minute limit before fresh
+shipping. The reviewed repair separates four unchanged proof commands behind the
+existing success-only required context; all 23 release requirements remain.
+Local policy/tooling checks pass; hosted execution is pending the next frozen
+checkpoint. [Evidence](docs/spikes/windows-conformance-split.md).

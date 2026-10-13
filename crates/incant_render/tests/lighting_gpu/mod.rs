@@ -82,7 +82,7 @@ fn grid_readback(r: &Renderer, plan: LightPlan) -> (Vec<u32>, Vec<u32>) {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::test_support::checked(Renderer::headless().unwrap());
     let mut plan = LightPlan::default();
     plan.add(
         &BTreeMap::from([(
@@ -199,7 +199,7 @@ fn clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_da
         .unwrap()
         .entities
         .insert(camera.id.clone(), camera);
-    let r = Renderer::headless().unwrap();
+    let r = crate::test_support::checked(Renderer::headless().unwrap());
     for (selected, orthographic) in [
         (None, false),
         (Some(camera_id.as_str()), false),
@@ -284,7 +284,7 @@ fn clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_da
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn masks_represent_every_light_and_clear_tail_bits_across_word_count_changes() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::test_support::checked(Renderer::headless().unwrap());
     // Downward transitions require the cache key and tail clearing to be right.
     // Global spheres intersect every cluster, including the final local bit.
     for count in [

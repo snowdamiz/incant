@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-13T02:13:33.674473+00:00",
+  "accepted": true,
+  "freeze_sha256": "4ac8659385700d6e48d4834f36101a263b4992de72088f433acb1acfe15bed8a",
+  "source_bindings": 7,
+  "review": [
+    "Exact reviewed Android arm64 destination only",
+    "Complete captured translated bundle identities and existing iOS program validation",
+    "Exact NDK wrapper/driver/API24 macros and five actual C translation/runtime safety compile audits",
+    "Selected static-module and physics graph, producer ABI and target checks",
+    "Stale Android refusal test corrected; malformed bundle/capability/binding and unsupported destination remain refused"
+  ],
+  "full_mobile_project_log": "/Users/andreyyurlov/.codex/incant-evidence/authored-android-wasm-001/mobile-project-final-0.log",
+  "full_mobile_project_log_sha256": "cb86e40eef0279aa37e896c50d818a39918962b4221c0167b424da866d99908b",
+  "mobile_project_cases": 4,
+  "scope": "Source review accepted for fresh serial target archives and reviewed owned emulator helper. No target execution/performance claim yet."
+}

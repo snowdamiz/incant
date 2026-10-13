@@ -1,0 +1,11 @@
+# Parry ownership correction on main195
+
+The accepted Parry 0.31.1 ownership correction is composed with actual main195 (`da6db80d`), including optional CPU profiling. The integration keeps the two local Parry patches and all four isolated probe overrides. It adds `incant_profile` to the conservative runtime compatibility source hash; no dependency version changes or physics-save admission are introduced.
+
+Nineteen commands passed. Both physics modes execute 18 CPU cases in six groups with no failures or ignored cases; these repeated modes overlap. All-target physics Clippy, script/browser compilation, the normal dependency guard, physics tools, four locked isolated dependency graphs, format/conventions and the full-base diff passed. Actual Cargo builds establish baseline equals restored and differs from a bounded comment mutation in each of the profiler and Parry sources. All original source bytes are restored.
+
+The first seven checks passed before an archived patch whitespace failure stopped the chain. The exact-path whitespace correction and reviewed main195 credential-discovery/isolated-lock repairs were then composed. Their three exact changed inputs are recorded; unchanged passing Rust checks were retained, and the remaining twelve checks passed. The actual-main ancestry join has the exact tested tree. No redundant runtime rerun is claimed.
+
+The [machine-readable packet](evidence/parry-main195.json) retains 2,829 frozen inputs, 848 producer input comparisons (844 exact; four explicit integration seams), all current command streams, the first failure, actual build-script identity outputs and the original producer review. The assertion-only [collector](evidence/parry-main195/collect.py) rechecks current source, logs, locks, local patch resolution and all identity controls without changing evidence.
+
+Independent current-main final review and lossless packaging amendment review are accepted; both exact receipts are retained in the packet. Producer Miri experiments remain unsuccessful and separately qualified; this does not establish a clean Miri gate, a complete dependency soundness audit, a performance/device result or enabled physics persistence. No shipping package, graphics or native window was executed by this integration.

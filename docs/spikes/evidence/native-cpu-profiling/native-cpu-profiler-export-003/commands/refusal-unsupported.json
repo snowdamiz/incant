@@ -1,0 +1,17 @@
+{
+  "kind": "process",
+  "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-003/package-tracy/player/incant_game_player",
+    "--profile",
+    "--build-info"
+  ],
+  "pid": 66673,
+  "exit": 1,
+  "started_ns": 1791861395998090000,
+  "ended_ns": 1791861396003598000,
+  "stdout": "",
+  "stderr": "Error: UnsupportedRoute\n",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "623fc2afd809561e6ca885c5b233cfc747b8c581312a51c3f2037f70bb52eec3",
+  "exception": null
+}

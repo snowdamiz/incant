@@ -330,7 +330,7 @@ fn game(with_ui: bool, size: [u32; 2]) -> (Game, Probe) {
         )
         .unwrap();
     let scene = CookedScene::from_bytes(&scene.to_bytes()).unwrap();
-    let renderer = Arc::new(Renderer::headless().unwrap());
+    let renderer = Arc::new(models::checked(Renderer::headless().unwrap()));
     let shared = Arc::new(Mutex::new(texture(&renderer, size)));
     let script = CompiledScript::compile(
         "exports.default={update({input,log}){for(const e of input.ui.events)log(e.kind+('value' in e?':'+e.value:''));}};",

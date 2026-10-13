@@ -62,6 +62,7 @@ captured assets hash-bound at their durable original paths.
 
 [Evidence manifest](evidence/core-result-hud.json) retains 575 lossless records
 in 291 deduplicated payloads and identifies 407 external artifacts. Independent
-source review is accepted; final execution review and integration are pending.
+source and final producer execution review are accepted; current-main integration
+is documented separately in [the main192 check](core-result-hud-main192.md).
 The production prompt node/localization/style remains Claude-owned and unadded.
 This is CPU correctness work, with no GPU/window, device, performance or phase gate.

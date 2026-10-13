@@ -20,7 +20,7 @@ fn minify(fixture: &mut Fixture) {
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn opaque_and_emissive_minification_ignore_alpha_without_recoloring_coverage_roles() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     for (emission, mode) in [
         (false, "OPAQUE"),
         (true, "OPAQUE"),
@@ -101,7 +101,7 @@ fn opaque_and_emissive_minification_ignore_alpha_without_recoloring_coverage_rol
 #[test]
 #[ignore = "requires a native GPU; run by the desktop workflow"]
 fn color_environment_minification_matches_alpha_one_and_retains_prior_versions() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut fixture = Fixture::new(
         json!({"pbrMetallicRoughness":{"baseColorFactor":[0.7,0.7,0.7,1],"metallicFactor":0,"roughnessFactor":1}}),
     );

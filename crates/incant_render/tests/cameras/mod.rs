@@ -72,7 +72,7 @@ fn red_pixels(png: &[u8]) -> usize {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(emissive([1., 0., 0.], 1., "OPAQUE"));
     let preview = r.screenshot_scene_png(&f.scene(&r), 321, 241).unwrap();
     let id = camera(
@@ -182,7 +182,7 @@ fn authored_camera_changes_projection_clips_geometry_and_retains_its_selected_po
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn inherited_cameras_and_custom_light_clusters_match_the_all_light_reference() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f =
         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.6}}));
     f.environment(
@@ -329,7 +329,7 @@ fn inherited_cameras_and_custom_light_clusters_match_the_all_light_reference() {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn transparency_depth_order_follows_the_selected_camera() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(emissive([1., 0., 0.], 0.5, "BLEND"));
     f.edit(|g| {
         let mut red = emissive([1., 0., 0.], 0.5, "BLEND");
@@ -387,7 +387,7 @@ fn red_rows(bytes: &[u8], width: usize) -> (usize, usize) {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose() {
-    let r = Renderer::headless().unwrap();
+    let r = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(emissive([1., 0., 0.], 1., "OPAQUE"));
     let parent_rotation = glam::DQuat::from_rotation_z(30f64.to_radians());
     let child_rotation = glam::DQuat::from_euler(

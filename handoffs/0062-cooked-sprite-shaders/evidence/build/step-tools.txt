@@ -1,0 +1,39 @@
+{
+ "step": "cook",
+ "head": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+ "frozen": {
+  "cook_scene": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/tools/cook_scene",
+   "sha256": "940529cf0de9af90c2fc71253b02a738c7ebe21056c64957df396210b58f0a53",
+   "bytes": 4370952,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/examples/cook_scene",
+   "features": [
+    "default",
+    "physics-deterministic",
+    "scene",
+    "script"
+   ],
+   "fresh": false
+  }
+ },
+ "recorded": "2026-10-12T23:35:15.055543+00:00"
+}
+{
+ "step": "headless",
+ "head": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+ "frozen": {
+  "incant_headless": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/tools/incant_headless",
+   "sha256": "e8260ae81a641e1362aed22a1a15e20b374b454757ff0814695ece807805ea50",
+   "bytes": 60493472,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/incant_headless",
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "fresh": false
+  }
+ },
+ "recorded": "2026-10-12T23:36:12.943549+00:00"
+}
+exit 0

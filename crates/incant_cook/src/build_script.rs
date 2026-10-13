@@ -50,6 +50,14 @@ pub fn embed_script(default_source: &str) -> Result<(), Box<dyn std::error::Erro
         .transpose()?;
     let name =
         env::var("INCANT_NATIVE_SCRIPT_NAME").unwrap_or_else(|_| "embedded-behavior.js".into());
+    #[cfg(feature = "probe-android-bytecode")]
+    if target == "aarch64-linux-android"
+        && (name != "mobile-compat.js"
+            || map.is_some()
+            || source != include_str!("../../incant_script/tests/fixtures/mobile_compat.js"))
+    {
+        return Err("Android bytecode probe requires the exact trusted numeric fixture".into());
+    }
     let artifact = crate::cook_script(&name, &source, map.as_deref(), &target)?;
     let out = PathBuf::from(env::var_os("OUT_DIR").ok_or("OUT_DIR missing")?);
     // Always generate from this invocation's source compilation. Existing

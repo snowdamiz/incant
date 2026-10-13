@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-13T03:51:40.197484+00:00",
+  "reviewer": "root",
+  "accepted": true,
+  "head": "4778bbfd2e15e9fd7553eadde4985c4a3dfe1871",
+  "qualification_sha256": "2d7462366d4e8cea4fd5dc3763bae8d5ae2e87dfb7e2bfa7fd35113ed2c64355",
+  "exit": 0,
+  "stdout": "{\"passed\": true, \"checks\": 5, \"frozen_inputs\": 2030, \"producer_sources\": 8, \"native_positives\": 28, \"native_restart_refusals\": 2, \"binding_refusals\": 7, \"prior_native_reports_and_pcm_exact\": true, \"producer_records_rehashed\": 575, \"producer_external_rehashed\": 407, \"producer_shipping_runs\": 20, \"current_shipping_runs\": 0, \"new_build\": false}\n{\n  \"passed\": true,\n  \"tested_head\": \"eb43b8ed982f47d20bf33707de1d55c2f0b623f6\",\n  \"actual_main\": \"195866988ee6286ecf301149ee3559feedddfb92\",\n  \"integration_head\": \"4778bbfd2e15e9fd7553eadde4985c4a3dfe1871\",\n  \"exemptions\": [\n    {\n      \"path\": \"editor/app/tests/model_gpu.rs\",\n      \"tested_sha256\": \"d5597411fc707981241992b7a89e3a5cbeebfdcf65611eff60d6475dd1df6274\",\n      \"current_sha256\": \"3111e5fb5d94094c6d0debb473f931786f750d87b34e23686d205e3f20a57b45\"\n    }\n  ],\n  \"collector_original\": {\n    \"path\": \"/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/docs/spikes/evidence/core-result-hud-main192/collect.py\",\n    \"sha256\": \"aba5d25ba2174d8c14429ff4aed138019ff3f0f2c43254e040eaa2459cbec0e1\"\n  },\n  \"scope\": \"Only the independently accepted editor integration test differs. It is absent from the native headless/library graph and was not invoked by this sample proof. No runtime crate/build/lock/SDK/schema/vendor input changed. No new runtime build or proof claimed.\"\n}\n",
+  "stderr": "",
+  "scope": "Reviewed explicit old/new file hashes and single disjoint editor test qualification. Native gameplay/build/lock/SDK/schema/vendor inputs remain unchanged. Original proof reused, not new GPU/shipping or platform evidence."
+}

@@ -4,6 +4,12 @@ use std::{env, fs, path::Path};
 fn main() {
     let root = Path::new("../..");
     let mut identity = Sha256::new();
+    // The temporary probe admission is part of executable compatibility. Both
+    // the trusted host producer and target consumer must explicitly opt in.
+    identity.update(b"probe-android-bytecode");
+    identity.update([u8::from(
+        env::var_os("CARGO_FEATURE_PROBE_ANDROID_BYTECODE").is_some(),
+    )]);
     let lock = fs::read_to_string(root.join("Cargo.lock")).expect("pinned Cargo.lock");
     for (package, checksum) in [
         (
@@ -106,6 +112,9 @@ fn main() {
     let mut runtime = Sha256::new();
     for name in [
         "incant_runtime",
+        "incant_profile",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime",
         "incant_input",
         "incant_types",
         "incant_2d",
@@ -120,8 +129,13 @@ fn main() {
         hash_tree(&dir.join("src"), &mut runtime);
         hash_file(&dir.join("Cargo.toml"), &mut runtime);
     }
-    hash_tree(&root.join("third_party/kira/src"), &mut runtime);
-    hash_file(&root.join("third_party/kira/Cargo.toml"), &mut runtime);
+    // Path-patched runtime dependencies have no registry checksum in Cargo.lock.
+    // Include their actual sources so a later patch cannot reuse stale saves.
+    for name in ["kira", "parry2d", "parry3d"] {
+        let dir = root.join("third_party").join(name);
+        hash_tree(&dir.join("src"), &mut runtime);
+        hash_file(&dir.join("Cargo.toml"), &mut runtime);
+    }
     println!(
         "cargo:rustc-env=INCANT_CHECKPOINT_RUNTIME_ID={:x}",
         runtime.finalize()

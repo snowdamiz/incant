@@ -1,0 +1,125 @@
+{
+ "atlas_id": "01JA62AT000000000000000001",
+ "files": {
+  "alpha.png": "c84d4fe5cc544fbaf82daf91bfb734a0cb996915d93853fc4629ad6b05d4508e",
+  "arrow.png": "45d78b8ca6205babeb927f2670093dceaf826127d7f29ce6bc38349ca267a7c1",
+  "checker.png": "c8fb2dcb71fd835e3d18d6fa0f58fa532340c90cbfefd8d140786027c8987a74",
+  "f0.png": "4c38475a95e62bd61c1e4fce7d8cbd2712fa585854151181f02d6d7d24be804e",
+  "f1.png": "bbe138eaf6de2f4e6d34a3b8509ae9a8aaac83ea76aea3657528535089433d06",
+  "f2.png": "115afac28c0b8322fd00f9667d6378474a9094f4cc2325b2c3f5fbc93976b2de",
+  "f3.png": "c2876bda6f8a2b2723cd092260377aacf9faad49b40752a9cd1a30de3d612b6c",
+  "f4.png": "a8cffd73b33562435b527dd4feb0af84ef400ac5a5fee97f4f4c816cc8fd4364",
+  "nine.png": "3a5a3836e1c67bf138944301b1acb4e3c72a53fd44f33748b7c3344fa26a1fbf",
+  "occluder.bin": "81db260ef7944c9a80c2ea25b588fc4aedf78556914da6c58091b42e38c18abd",
+  "occluder.gltf": "8190e0654732a19c80c7d94db05f9d3aac67594e32e5925376a9c91e20eebebb",
+  "ring.png": "d9ccb1299fa680de6e6a663307a30738797c3990c25e708b09cae4e011c3a94b",
+  "sheet.png": "e034cd0f452a94550885f8ff9f7082c3dcbeac750470656c975830cd1c510d31",
+  "sprites.atlas.json": "3e86d3dea05cbf90d989b53e017d8329281ad34215bb0234e49cdc5f543dcfbc",
+  "strip-h.png": "38fdd61e06e6cdfd2b4ea2ede2b6b116c253ae3c80f3ce8fe4207f6c51cfb222",
+  "strip-v.png": "cf2b733a0cf5deadb87ac46b0f5f08d0714e38a9308d9f04b82f2be770367cd1",
+  "t0.png": "4af617fb27d15b7271fc185884d4c6c9f0255e380950769bd6b57d2d5cbe09c8",
+  "t1.png": "e86a924dc7e926017b7327ce417a5d0acb2525459cf701cd1c32b986bce1471b",
+  "t2.png": "948bce42ae756373395bbd4d89593cc962e8e14b7281ebd22b2ef95e2112e054",
+  "t3.png": "6d9b51bf53fd68796108c25c0e32a66e98a358850593f78adaa72419e1c63dbc"
+ },
+ "frame_sizes": {
+  "alpha": [
+   16,
+   8
+  ],
+  "arrow": [
+   12,
+   12
+  ],
+  "checker": [
+   8,
+   8
+  ],
+  "f0": [
+   12,
+   12
+  ],
+  "f1": [
+   14,
+   11
+  ],
+  "f2": [
+   10,
+   13
+  ],
+  "f3": [
+   15,
+   10
+  ],
+  "f4": [
+   11,
+   14
+  ],
+  "nine": [
+   9,
+   9
+  ],
+  "ring": [
+   10,
+   10
+  ],
+  "t0": [
+   8,
+   8
+  ],
+  "t1": [
+   8,
+   8
+  ],
+  "t2": [
+   8,
+   8
+  ],
+  "t3": [
+   8,
+   8
+  ]
+ },
+ "frames": {
+  "alpha": "01JA62FR000000000000000003",
+  "arrow": "01JA62FR000000000000000004",
+  "checker": "01JA62FR000000000000000001",
+  "f0": "01JA62FR000000000000000006",
+  "f1": "01JA62FR000000000000000007",
+  "f2": "01JA62FR000000000000000008",
+  "f3": "01JA62FR000000000000000009",
+  "f4": "01JA62FR00000000000000000A",
+  "nine": "01JA62FR000000000000000005",
+  "ring": "01JA62FR000000000000000002",
+  "t0": "01JA62FR00000000000000000B",
+  "t1": "01JA62FR00000000000000000C",
+  "t2": "01JA62FR00000000000000000D",
+  "t3": "01JA62FR00000000000000000E"
+ },
+ "hidden_rgb": [
+  255,
+  0,
+  255
+ ],
+ "sheet_regions": {
+  "blue": [
+   32,
+   0,
+   16,
+   16
+  ],
+  "middle": [
+   16,
+   0,
+   16,
+   16
+  ],
+  "red": [
+   0,
+   0,
+   16,
+   16
+  ]
+ },
+ "strip_rule": "texel i -> (24 + 7*(i%32), 24 + 14*((i//32)%16), 24 + 30*(i//512)); 4096 unique"
+}

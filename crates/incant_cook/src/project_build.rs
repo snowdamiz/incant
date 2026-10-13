@@ -11,6 +11,8 @@ use sha2::{Digest, Sha256};
 use std::{env, fs, io::Read, path::Path};
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
+#[path = "project_build_wasm.rs"]
+mod wasm_bundle;
 pub const PROJECT_ENV: &str = "INCANT_NATIVE_PROJECT";
 pub const SCENE_ENV: &str = "INCANT_NATIVE_PROJECT_SCENE";
 
@@ -24,14 +26,14 @@ pub fn embed_project(project_path: &Path, selected_scene: Option<&str>) -> Resul
     embed(project_path, selected_scene, &target, false)
 }
 
-/// Explicit unsigned iOS archive producer. The desktop entry point retains its
+/// Explicit unsigned mobile archive producer. The desktop entry point retains its
 /// host==target guard; this route freshly compiles checked source and bindings.
 pub fn embed_mobile_project(project_path: &Path, selected_scene: Option<&str>) -> Result<()> {
     let host = env::var("HOST")?;
     let target = env::var("TARGET")?;
     if host != incant_script::artifact::TARGET || !mobile_destination(&host, &target) {
         return Err(
-            "authored mobile project requires the reviewed macOS arm64 to iOS bytecode route"
+            "authored mobile project requires the reviewed macOS arm64 mobile bytecode route"
                 .into(),
         );
     }
@@ -40,7 +42,10 @@ pub fn embed_mobile_project(project_path: &Path, selected_scene: Option<&str>) -
 
 fn mobile_destination(host: &str, target: &str) -> bool {
     host == "aarch64-apple-darwin"
-        && matches!(target, "aarch64-apple-ios" | "aarch64-apple-ios-sim")
+        && matches!(
+            target,
+            "aarch64-apple-ios" | "aarch64-apple-ios-sim" | "aarch64-linux-android"
+        )
         && incant_script::artifact::compatibility::admits(
             host,
             target,
@@ -87,10 +92,8 @@ fn embed(
         .scenes
         .get(&scene_id)
         .ok_or("selected scene is missing")?;
-    if mobile && authored.program.is_some() {
-        return Err("authored iOS archive currently requires TypeScript; static Wasm mobile export is unsupported".into());
-    }
     if mobile
+        && authored.program.is_none()
         && [
             "INCANT_NATIVE_WASM_FINGERPRINT",
             "INCANT_NATIVE_WASM_INPUT",
@@ -101,11 +104,17 @@ fn embed(
         .iter()
         .any(|key| env::var_os(key).is_some())
     {
-        return Err("authored iOS archive cannot select a static Wasm build input".into());
+        return Err("TypeScript mobile project cannot select static Wasm build inputs".into());
     }
     let wasm = if let Some(incant_doc::SceneProgram::Wasm { module }) = &authored.program {
+        if mobile {
+            wasm_bundle::destination(target)?;
+        }
         if env::var_os("CARGO_FEATURE_STATIC_MODULE").is_none() {
             return Err("authored Wasm export requires the static-module player feature".into());
+        }
+        if mobile && env::var_os("INCANT_WASM_BUNDLE").is_none() {
+            return Err("authored mobile Wasm export requires a trusted static bundle".into());
         }
         let asset = &project.assets[module];
         let cache = incant_wasm_cook::project_cache(root, false)?;
@@ -126,6 +135,12 @@ fn embed(
             if env::var(key).ok().as_deref() != Some(&expected) {
                 return Err("authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py".into());
             }
+        }
+        if mobile {
+            let bundle = env::var_os("INCANT_WASM_BUNDLE")
+                .ok_or("authored mobile Wasm export requires a trusted static bundle")?;
+            wasm_bundle::validate(Path::new(&bundle), &captured)?;
+            changed(Path::new(&bundle))?;
         }
         println!("cargo:rustc-env=INCANT_AUTHORED_WASM=scene-program");
         serde_json::json!({"kind":"wasm", "module":module, "fingerprint":captured.fingerprint(), "input_sha256":captured.input_sha256(), "prepared_sha256":captured.prepared_sha256(), "registry_sha256":captured.registry_sha256(), "translator":"wasm2c-1.0.42"})
@@ -247,7 +262,7 @@ fn embed(
         "physics_variant": scene.physics_variant(),
         "target": target, "scene_sha256": hex(&Sha256::digest(&scene_bytes)),
         "producer_target": incant_script::artifact::TARGET,
-        "producer_kind": if mobile { "ios-archive" } else { "native-desktop" },
+        "producer_kind": if !mobile { "native-desktop" } else if target == "aarch64-linux-android" { "android-archive" } else { "ios-archive" },
         "script": script_manifest,
         "project_sha256": hex(&Sha256::digest(text.as_bytes())), "visual_assets": visual,
         "audio_clips": audio, "compiler": compiler_manifest,

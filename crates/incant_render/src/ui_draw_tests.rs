@@ -54,7 +54,7 @@ const PRODUCT: f64 = 128. / 255.;
 // Existing checkpoint runs use --nocapture; retain the actual selected adapter
 // rather than inferring a backend from installed driver packages.
 fn renderer_with_adapter_receipt() -> Renderer {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     eprintln!(
         "UI draw selected adapter: {:?}",
         renderer.adapter.get_info()

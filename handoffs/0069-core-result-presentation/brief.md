@@ -1,3 +1,19 @@
+## Priority: prepare on the reviewed main196 integration
+
+The latest source now includes main196 (`3da8b0ebeab43f715b0531603e30a864e801be11`),
+including merged Core result/restart support. Sample source is byte-identical to
+the prior reviewed Core producer. This invocation is preparation only: read the
+packet and existing limited appearance evidence, prepare the concrete visual
+proposal and bounded safe helper/case plan, and return for root's correctness
+review. No builds, Cargo target use, GPU execution or captures are authorized yet;
+0068 owns the GPU and shared target. Do not poll or wait for its grant.
+
+Use Opus 5.5 with explicitly verified Max effort. Stay in this handoff worktree.
+Do not create or update personal/persistent memory, Claude auto-memory, external
+notes or other checkouts. Final visual asset edits may be prepared here, but do
+not claim visual acceptance before the later granted execution. Preserve source,
+fixture and historical evidence; no engine or gameplay correctness edits.
+
 # 0069 — finish the Core Sample result and narrow HUD presentation
 
 Use Claude Opus 5.5 through ACP with thinking explicitly verified as Max before

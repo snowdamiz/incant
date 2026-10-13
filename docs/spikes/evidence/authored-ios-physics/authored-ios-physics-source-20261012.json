@@ -1,0 +1,63 @@
+{
+  "at": "2026-10-12T23:30:56.919903+00:00",
+  "reviewer": "astra root",
+  "commit": "818ff1b2a4413ed813b30f19f6db06e5fc4b6e24",
+  "verdict": "accepted source and execution probe; actual fresh shipping proof pending",
+  "inventories": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-001/source-freeze-002/inventory.json",
+      "sha256": "43a05f96ab491795379c4be41ba04758c4eabcb406f780caa95a2a042ab78e10"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/authored-ios-physics-001/probe-freeze-001/inventory.json",
+      "sha256": "bff3f95c59de49ffeef4a8655d8c108113949b0cf99282dd660779866c505200"
+    }
+  ],
+  "source_inputs": [
+    {
+      "path": "tools/ios_archive.py",
+      "sha256": "674a10334f894dc1976170052dec6d1ef98fc65d04ad4de935d3b0e7f117a70a"
+    },
+    {
+      "path": "tools/export_ios.py",
+      "sha256": "05c7cf0388d62095125a1f9a91809302a6e4471529c1f2dd807406e8650c544d"
+    },
+    {
+      "path": "tools/tests/test_ios_export.py",
+      "sha256": "37447926b35124a4b7659914efa4894812fba7858f8099bfd066abf472dff2dc"
+    },
+    {
+      "path": "tools/probes/authored-ios-physics/mover.ts",
+      "sha256": "2242c18284807105155244d1dcf5da54e5002d6a647bca86c22f3572b10413b5"
+    },
+    {
+      "path": "tools/probes/authored-ios-physics/other.ts",
+      "sha256": "6178c2ffd3d8911077741b243140bfc20c765d94d01435d5f23068b5cb308633"
+    },
+    {
+      "path": "tools/probes/authored-ios-physics/prepare.py",
+      "sha256": "d1e8d79bd9108c64372bc39bba6c17b4e3855d4a4611016fedf1717ba5db2633"
+    },
+    {
+      "path": "tools/probes/authored-ios-physics/shared.ts",
+      "sha256": "81c7812aa7eb77ea34c5ff8fa593d20d400bd27784d7cce6e2007b4120a3f7f9"
+    },
+    {
+      "path": "tools/probes/authored-ios-physics/verify.py",
+      "sha256": "11df2253d8498b6ea4fe68c36ecc4f25206fc41e55c0b63a25c6ae21a9573251"
+    }
+  ],
+  "reviewed": [
+    "Project mode selects closed capabilities via physics_export and verifies selected normal graph plus all five compiled solver artifacts; producer identity remains exact",
+    "Exact target-token audit prevents simulator triple satisfying device codegen/kernel checks; numerical adoption policy remains unchanged",
+    "Historical deterministic helper defaults preserved; public set_physics_mode uses common authoring transaction with undo/redo/reopen",
+    "Probe checks both native bitwise oracles and nonzero PCM, compiler refusal, archive and final caller identities, runtime-source removal and process cleanup",
+    "Opposite mode controls use actual checksum-valid fresh exports in both C and Swift, require exact kernel mismatch with no game/PCM",
+    "Simulator execution and unsigned device link-only are explicitly separated"
+  ],
+  "findings": [],
+  "limits": [
+    "Source and probe review only; four fresh shipping archives and caller execution remain pending",
+    "No physical device, performance, rendering, platform host, signing, distribution or phase gate evidence"
+  ]
+}

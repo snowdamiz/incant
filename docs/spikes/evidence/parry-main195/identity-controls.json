@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "controls": [
+    {
+      "path": "crates/incant_profile/src/lib.rs",
+      "original_sha256": "b02608c6d683e82f3232b2e9bdcded261b7695bcd88a4daf20b9967359ca00f4",
+      "mutated_sha256": "086d29298b9dfd19acf186cb79ec51cb9cb24df9488e50e6bc5042160ed3e2d2",
+      "baseline": {
+        "id": "f4b494c3fb08dc45b3fdc588f8ca67f9998eedd2b069c1ac8798bced7e225c27",
+        "original": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-303ea958619f1e9d7b605c44f3ee96e979ea57868ac6340315c481d74c40a082/ci/build/incant_script-6d1e8621417cea0f/output",
+        "retained": "/Users/andreyyurlov/.codex/incant-integration-evidence/parry-main194-001/baseline-build-output.txt",
+        "sha256": "4196616beaf427eb6d0afeba495ba08614f627c15b1856765e89aea76de7ffb4"
+      },
+      "mutated": {
+        "id": "7829d909f78f358931a54c7731d4474c48542106a2c1f9825122f495422cfa96",
+        "original": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-303ea958619f1e9d7b605c44f3ee96e979ea57868ac6340315c481d74c40a082/ci/build/incant_script-6d1e8621417cea0f/output",
+        "retained": "/Users/andreyyurlov/.codex/incant-integration-evidence/parry-main194-001/profiler-changed-build-output.txt",
+        "sha256": "05983bd7c8c5a7a727dd492b38ced4c227fbee06bfaa62f715eb64d0dc9e8efa"
+      },
+      "restored": {
+        "id": "f4b494c3fb08dc45b3fdc588f8ca67f9998eedd2b069c1ac8798bced7e225c27",
+        "original": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-303ea958619f1e9d7b605c44f3ee96e979ea57868ac6340315c481d74c40a082/ci/build/incant_script-6d1e8621417cea0f/output",
+        "retained": "/Users/andreyyurlov/.codex/incant-integration-evidence/parry-main194-001/profiler-restored-build-output.txt",
+        "sha256": "4196616beaf427eb6d0afeba495ba08614f627c15b1856765e89aea76de7ffb4"
+      }
+    },
+    {
+      "path": "third_party/parry3d/src/lib.rs",
+      "original_sha256": "293e5f96b3c0c291e9bc494d904a1cf73bb437de5d2e23386cf768226a1502ed",
+      "mutated_sha256": "03db5a4e3eb542042d20b52c137898347c28e9b58a9365bf5dabc9dedfd8a0f2",
+      "baseline": {
+        "id": "f4b494c3fb08dc45b3fdc588f8ca67f9998eedd2b069c1ac8798bced7e225c27",
+        "original": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-303ea958619f1e9d7b605c44f3ee96e979ea57868ac6340315c481d74c40a082/ci/build/incant_script-6d1e8621417cea0f/output",
+        "retained": "/Users/andreyyurlov/.codex/incant-integration-evidence/parry-main194-001/baseline-build-output.txt",
+        "sha256": "4196616beaf427eb6d0afeba495ba08614f627c15b1856765e89aea76de7ffb4"
+      },
+      "mutated": {
+        "id": "7411243cc65a4ff163e27d296d702da5db71ecd17dc5719678e7416aff4997ba",
+        "original": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-303ea958619f1e9d7b605c44f3ee96e979ea57868ac6340315c481d74c40a082/ci/build/incant_script-6d1e8621417cea0f/output",
+        "retained": "/Users/andreyyurlov/.codex/incant-integration-evidence/parry-main194-001/parry-changed-build-output.txt",
+        "sha256": "651e718728fb4f417cc131517e6c24f5d772f5be760c5978b8258248e3894a4f"
+      },
+      "restored": {
+        "id": "f4b494c3fb08dc45b3fdc588f8ca67f9998eedd2b069c1ac8798bced7e225c27",
+        "original": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-303ea958619f1e9d7b605c44f3ee96e979ea57868ac6340315c481d74c40a082/ci/build/incant_script-6d1e8621417cea0f/output",
+        "retained": "/Users/andreyyurlov/.codex/incant-integration-evidence/parry-main194-001/parry-restored-build-output.txt",
+        "sha256": "4196616beaf427eb6d0afeba495ba08614f627c15b1856765e89aea76de7ffb4"
+      }
+    }
+  ],
+  "actual_cargo_build_script_outputs": true,
+  "all_inputs_restored": true
+}

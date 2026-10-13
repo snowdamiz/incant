@@ -1,0 +1,593 @@
+{
+  "at": "2026-10-13T04:05:40.940928+00:00",
+  "tested_head": "8cc9a729869b5bf290bdf38641b70ef5b63efb6c",
+  "review_head": "5dfbc826324b18e40bdd512402cfcd9344305d7e",
+  "main_ancestor": "071cdf1b7c235702948e27f15d36cda43755577f",
+  "producer": "bfe8ede26d09c3e28da519b01ed3f3b4c41d1bf6",
+  "summary": {
+    "passed": true,
+    "current_checks": 10,
+    "current_counts": {
+      "affected": {
+        "passed": 495,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 62
+      },
+      "default-player": {
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1
+      }
+    },
+    "frozen_inputs": 2048,
+    "producer_inputs": 35,
+    "normal_target_source_inputs": 659,
+    "producer_artifacts_rehashed": 353,
+    "producer_package_files_rehashed": 28,
+    "producer_external_binaries_rehashed": 3,
+    "producer_shipping_runs": 5,
+    "producer_refusals": 5,
+    "current_shipping_runs": 0,
+    "new_shipping_build": false,
+    "current_target_graph_modes": 3,
+    "selector_controls": 5
+  },
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "producer_sha256": "73d552b8402fbe3b3fd226fe7f307cdb16c84576fd522d8899331452c13a80b8",
+      "current_sha256": "8619b887e59d960168fda49f7ae6c98d7c830b8d9625b87d633478a6866ed640",
+      "qualified_lock_difference": true
+    },
+    {
+      "path": "Cargo.toml",
+      "producer_sha256": "128e116fd472a924fcd56c3fc9717ec205b077ccc31b07fe6fb16912e32deda2",
+      "current_sha256": "128e116fd472a924fcd56c3fc9717ec205b077ccc31b07fe6fb16912e32deda2",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "producer_sha256": "38fd202c44f28c85a4835afb2f0403258cb2d747e468741474abcf0244513431",
+      "current_sha256": "38fd202c44f28c85a4835afb2f0403258cb2d747e468741474abcf0244513431",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "producer_sha256": "9800adbc42317e3c2885f78af1414a73300c3e8f995c4db11710d4cfd24ef446",
+      "current_sha256": "9800adbc42317e3c2885f78af1414a73300c3e8f995c4db11710d4cfd24ef446",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_game_player/src/main.rs",
+      "producer_sha256": "b4699db7cad9451e07cf898f29bafb14e37c5cae885f2bc103638ecfe3affe4d",
+      "current_sha256": "b4699db7cad9451e07cf898f29bafb14e37c5cae885f2bc103638ecfe3affe4d",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_game_player/src/profile.rs",
+      "producer_sha256": "7d9e1d35550fb83981499083631687292362aa16ad0eb7684b8c3c15b5a34afe",
+      "current_sha256": "7d9e1d35550fb83981499083631687292362aa16ad0eb7684b8c3c15b5a34afe",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_game_player/tests/profile.rs",
+      "producer_sha256": "361babbe61002607e406cac1d7305b123bb47a821e85ea7c378746a53ec8606f",
+      "current_sha256": "361babbe61002607e406cac1d7305b123bb47a821e85ea7c378746a53ec8606f",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_game_runtime/Cargo.toml",
+      "producer_sha256": "695d83d752c1daefd1981fcb90c986947c92ecdba35a4380e2c3cdb380baeeed",
+      "current_sha256": "695d83d752c1daefd1981fcb90c986947c92ecdba35a4380e2c3cdb380baeeed",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_game_runtime/src/core.rs",
+      "producer_sha256": "c4f82b583cb23ca8e377adc44306b89e7fd201dc1717e58063139edda5316481",
+      "current_sha256": "c4f82b583cb23ca8e377adc44306b89e7fd201dc1717e58063139edda5316481",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/Cargo.toml",
+      "producer_sha256": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef",
+      "current_sha256": "0c73866dc079b138471c83c5a8849b33a71ad438d5484e5589ec1057ed4f51ef",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/src/allocation.rs",
+      "producer_sha256": "d5ead34f95e07db61d494a1100c2161dfefb073653df900680dae9a841877b0f",
+      "current_sha256": "d5ead34f95e07db61d494a1100c2161dfefb073653df900680dae9a841877b0f",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/src/disabled.rs",
+      "producer_sha256": "f00b0559fd339ff889ff3b94399952ddb4dedafb954e0990979e856405e1453e",
+      "current_sha256": "f00b0559fd339ff889ff3b94399952ddb4dedafb954e0990979e856405e1453e",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/src/enabled.rs",
+      "producer_sha256": "8cc10066d6beb252fed4eb9eb351f523b59abb24200356ffe13d9e9864e2c6aa",
+      "current_sha256": "8cc10066d6beb252fed4eb9eb351f523b59abb24200356ffe13d9e9864e2c6aa",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/src/lib.rs",
+      "producer_sha256": "b02608c6d683e82f3232b2e9bdcded261b7695bcd88a4daf20b9967359ca00f4",
+      "current_sha256": "b02608c6d683e82f3232b2e9bdcded261b7695bcd88a4daf20b9967359ca00f4",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/src/model.rs",
+      "producer_sha256": "5fec6a62be1304381eb05c40df297a0475121e22ea223948aa0aaa1df62673ef",
+      "current_sha256": "5fec6a62be1304381eb05c40df297a0475121e22ea223948aa0aaa1df62673ef",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/src/tracy.rs",
+      "producer_sha256": "f6896a3968c51cecc47c6a5f838d1cc322bb300011a073687a88a65aa0b67ebf",
+      "current_sha256": "f6896a3968c51cecc47c6a5f838d1cc322bb300011a073687a88a65aa0b67ebf",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/tests/allocations.rs",
+      "producer_sha256": "dded0e6d0cc6521c784c5421dc08c9657482781df46b420b1bd391f170bb2a63",
+      "current_sha256": "dded0e6d0cc6521c784c5421dc08c9657482781df46b420b1bd391f170bb2a63",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/tests/disabled.rs",
+      "producer_sha256": "89a2e76c94776c39a0769041c925cf976c7081029afbab9c73485a4da050675a",
+      "current_sha256": "89a2e76c94776c39a0769041c925cf976c7081029afbab9c73485a4da050675a",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_profile/tests/summary.rs",
+      "producer_sha256": "e30d257216cb69b0b26dcfcabcc969a59f90c38c8e607fe192c37dee9b2ee9b0",
+      "current_sha256": "e30d257216cb69b0b26dcfcabcc969a59f90c38c8e607fe192c37dee9b2ee9b0",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_runtime/Cargo.toml",
+      "producer_sha256": "6f69521b9038242fd278dd732c8d5db577b19efa47a622e4308c9bd515598209",
+      "current_sha256": "6f69521b9038242fd278dd732c8d5db577b19efa47a622e4308c9bd515598209",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_runtime/src/animation.rs",
+      "producer_sha256": "17e3d0d6e9a252a2a78433cee1fbb594109bac6b059794b25b3ccdf622a263e2",
+      "current_sha256": "17e3d0d6e9a252a2a78433cee1fbb594109bac6b059794b25b3ccdf622a263e2",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_runtime/src/flipbook.rs",
+      "producer_sha256": "04d75989b8f93d1718a849a8a9385a9b3436ece4bbadfa7ebeab207431cf87b1",
+      "current_sha256": "04d75989b8f93d1718a849a8a9385a9b3436ece4bbadfa7ebeab207431cf87b1",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "producer_sha256": "8107201ef6e3d33ca36ea19b2b405fa7f17387ed118d8a34bb7c67b0a54a710e",
+      "current_sha256": "8107201ef6e3d33ca36ea19b2b405fa7f17387ed118d8a34bb7c67b0a54a710e",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "producer_sha256": "2dbc844664f84e46f18684c687867d50efb887842946d394aa2288ac4d16a7d1",
+      "current_sha256": "2dbc844664f84e46f18684c687867d50efb887842946d394aa2288ac4d16a7d1",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "producer_sha256": "e281df2179a848870c304fe7afce54fe6911f2b0050bd6970d6ecc98646e146f",
+      "current_sha256": "e281df2179a848870c304fe7afce54fe6911f2b0050bd6970d6ecc98646e146f",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_script/src/program.rs",
+      "producer_sha256": "47aaf334d32a3f85d1deb1de4a55cd6b5fa7d01a4a129bd5340d05af2ee3a1c3",
+      "current_sha256": "47aaf334d32a3f85d1deb1de4a55cd6b5fa7d01a4a129bd5340d05af2ee3a1c3",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_script/src/session.rs",
+      "producer_sha256": "d3192f395f1b6623d8b6c7ff52b10674c1cbe8a033245fc82d1e71aa7ecd4b25",
+      "current_sha256": "d3192f395f1b6623d8b6c7ff52b10674c1cbe8a033245fc82d1e71aa7ecd4b25",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "crates/incant_script/tests/profile.rs",
+      "producer_sha256": "0d03a7454cfe9da11456be99a0ad7fa8cc8d8e23a2659aba425f01cd7f6177c2",
+      "current_sha256": "0d03a7454cfe9da11456be99a0ad7fa8cc8d8e23a2659aba425f01cd7f6177c2",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "tools/export_native.py",
+      "producer_sha256": "b29b2c9befa358bbd1cf31d76a61ea945f30ec0b886a4a01a51c76897831ff01",
+      "current_sha256": "b29b2c9befa358bbd1cf31d76a61ea945f30ec0b886a4a01a51c76897831ff01",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "tools/native_profiling.py",
+      "producer_sha256": "04b455e44a4252e8d7e12fc15b87e4b5a297950d643a0eac03d879b7a46f65a5",
+      "current_sha256": "04b455e44a4252e8d7e12fc15b87e4b5a297950d643a0eac03d879b7a46f65a5",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "tools/tests/test_native_profiling.py",
+      "producer_sha256": "fa4f1858c82b72657ca9acc1c1b0fdf276c4e1bc1723920dd03d82d492d6a656",
+      "current_sha256": "fa4f1858c82b72657ca9acc1c1b0fdf276c4e1bc1723920dd03d82d492d6a656",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "tools/tests/test_native_ui_export.py",
+      "producer_sha256": "021358c8d4351515888eb256c44df2e394ff5b58978f747a5cec43109e922985",
+      "current_sha256": "021358c8d4351515888eb256c44df2e394ff5b58978f747a5cec43109e922985",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "tools/probes/native-cpu-profile.py",
+      "producer_sha256": "c04e0d93e6804a7049583f9abc389e01678808ed0320ce94babf3a0f76127c0d",
+      "current_sha256": "c04e0d93e6804a7049583f9abc389e01678808ed0320ce94babf3a0f76127c0d",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "tools/probes/native-cpu-profile/behavior.ts",
+      "producer_sha256": "a4156aa4502058bde76f7a7e39afa795951a1ef2567b220057323f6a749adbea",
+      "current_sha256": "a4156aa4502058bde76f7a7e39afa795951a1ef2567b220057323f6a749adbea",
+      "qualified_lock_difference": false
+    },
+    {
+      "path": "tools/tests/test_native_cpu_profile_probe.py",
+      "producer_sha256": "5c95e07141f1e50689a3e52056e88c60226fbb4dda26db9bffe0d10ce59468ec",
+      "current_sha256": "5c95e07141f1e50689a3e52056e88c60226fbb4dda26db9bffe0d10ce59468ec",
+      "qualified_lock_difference": false
+    }
+  ],
+  "checks": [
+    {
+      "name": "affected",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_profile",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/profile"
+      ],
+      "exit": 0,
+      "seconds": 60.44841345799796,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/affected.stdout",
+        "sha256": "554379c749b7f0409f3c0849b972057ada9bfc54270fa1fe03e2974163d14e5e"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/affected.stderr",
+        "sha256": "cce70695d3a5149fce8b6a107b39161a703349859bd49538cfd36ba0cf21725c"
+      }
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_profile",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/profile-tracy",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 10.28020616700087,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/clippy.stderr",
+        "sha256": "fd67f86a49f114a92edcaadff6b85a7d94906b7b567ec5d7a7050ad0338863ad"
+      }
+    },
+    {
+      "name": "default-player",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_game_player",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 15.298404541994387,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/default-player.stdout",
+        "sha256": "54f9f0ff511f57da6f40c13d05aea3c34634d021fdf52dd4e3fb6ebb2c88ed9b"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/default-player.stderr",
+        "sha256": "648975c6bdffedba30e9848fb603efcf0a99ed6d42bbac4976c5a6c05002038f"
+      }
+    },
+    {
+      "name": "wasm-default",
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_profile",
+        "-p",
+        "incant_runtime",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 1.9993994169999496,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/wasm-default.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/wasm-default.stderr",
+        "sha256": "f33dc598eaaf2765bee2e5941bab7ea368de2f056fc4e48137bc333e7e39ea1d"
+      }
+    },
+    {
+      "name": "wasm-summary",
+      "command": [
+        "cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j",
+        "2",
+        "-p",
+        "incant_profile",
+        "--features",
+        "summary",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "exit": 0,
+      "seconds": 2.1807139579977957,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/wasm-summary.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/wasm-summary.stderr",
+        "sha256": "ec046854a27bfec48f9d741004c3bf3de21bffdb700b1245dbeb5896bddffedc"
+      }
+    },
+    {
+      "name": "tools",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_native*profil*.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.47831329199834727,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/tools.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/tools.stderr",
+        "sha256": "af1b91a35962a35cb893e7c47e4fb17031d43b9818bfe31abef5de8884e5cad3"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1546598749991972,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.02905983300297521,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "dependency-guard-complete",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_profile",
+        "incant_runtime",
+        "incant_game_runtime",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/profile-tracy"
+      ],
+      "exit": 0,
+      "seconds": 0.31992675000219606,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/dependency-guard-complete.stdout",
+        "sha256": "e2564f32a2548df4af407e97496b4253b50438eb37869e2086eb77b9c1cbb970"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/dependency-guard-complete.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff-final",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.15556054099579342,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/diff-final.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-cpu-profiler-integration-001/diff-final.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "source_freeze": {
+    "path": "docs/spikes/evidence/native-cpu-profiler-main194/freeze.json",
+    "sha256": "c8dfb319ed694f41740acf46f4c32ef17ebadea8b5256fe69be541b5a022f5e2"
+  },
+  "archive": {
+    "parts": [
+      {
+        "path": "docs/spikes/evidence/native-cpu-profiler-main194/artifacts.json.gz.part-000",
+        "sha256": "fa962709174250123501cc47fc8b734e379cb78de15ba7278ecf0e1548b2e606",
+        "bytes": 276599
+      }
+    ],
+    "gzip_sha256": "fa962709174250123501cc47fc8b734e379cb78de15ba7278ecf0e1548b2e606",
+    "gzip_bytes": 276599,
+    "records": 41,
+    "payloads": 26
+  },
+  "relevance": {
+    "source": {
+      "path": "docs/spikes/evidence/native-cpu-profiler-main194/source-relevance.json",
+      "sha256": "a1a44552148c8bd85fea7463436d8cd82bc44eea8f2f0dbb8bd904a31b654a15"
+    },
+    "graphs": {
+      "path": "docs/spikes/evidence/native-cpu-profiler-main194/graph-relevance.json",
+      "sha256": "afc36cdd65dbc1c04bc9bb49a003773b6ed9abe2d036f7697a855aedd9dfb893"
+    }
+  },
+  "producer_process_comparisons": [
+    {
+      "name": "summary-baseline",
+      "receipt_sha256": "951eb406c2bf6e442c2d63f7544606cb74a04fa01bd44e184c17f7ec9619dab1",
+      "stdout_sha256": "d9a1562da5b35de90b78e3fdb38972f99551e224273cef772b88f8907d6b5c85",
+      "pcm_sha256": "e4532117d2f1b8f0fd4a1c6f48ec086c5df6b4829a235648b179d5c9135cce8e",
+      "producer_scoped": true
+    },
+    {
+      "name": "summary-summary",
+      "receipt_sha256": "9f173e563c77d72cfe19ccbb06f74f6080bde1ba2de0ef1ab313223a75228763",
+      "stdout_sha256": "596f353a392f39fd15b7bbbc001436dea55c4fa17a2515d62fa44fae017d6d6f",
+      "pcm_sha256": "e4532117d2f1b8f0fd4a1c6f48ec086c5df6b4829a235648b179d5c9135cce8e",
+      "producer_scoped": true
+    },
+    {
+      "name": "tracy-baseline",
+      "receipt_sha256": "27995e757c29992bb5a917eecbce4b38ba17a3317aefca9bb05727ade4492ee1",
+      "stdout_sha256": "d9a1562da5b35de90b78e3fdb38972f99551e224273cef772b88f8907d6b5c85",
+      "pcm_sha256": "e4532117d2f1b8f0fd4a1c6f48ec086c5df6b4829a235648b179d5c9135cce8e",
+      "producer_scoped": true
+    },
+    {
+      "name": "tracy-summary",
+      "receipt_sha256": "5ef334ce046f2394cadc235464dbdba1ded6d3fc6dd856691cf09c003e6eb92c",
+      "stdout_sha256": "cfd7a7dc09444cc2f276c33e0e131274a91e4fedb8a6514b8154c1f41ab0ce06",
+      "pcm_sha256": "e4532117d2f1b8f0fd4a1c6f48ec086c5df6b4829a235648b179d5c9135cce8e",
+      "producer_scoped": true
+    },
+    {
+      "name": "tracy-captured",
+      "receipt_sha256": "c4e39fc56088925099e1a5fee32faf5b719011c52173ff0fb752e92284444bcf",
+      "stdout_sha256": "15bcb31b3600296d787cb9c37d234c045acd8b38e5a6607a198380e6b2735c6c",
+      "pcm_sha256": "e4532117d2f1b8f0fd4a1c6f48ec086c5df6b4829a235648b179d5c9135cce8e",
+      "producer_scoped": true
+    }
+  ],
+  "producer_review": {
+    "path": "docs/spikes/evidence/native-cpu-profiling-review.json",
+    "sha256": "63843e9675028b45e06ed0ffa99d54603fbd369c84708dc6d0e024ffc4619efa",
+    "reviewed_manifest_sha256": "369b4486687f52cba1293bcf761354b2ed17fc5078c3dd603bb99db6e7ebb439",
+    "retained_reviewed_manifest": "docs/spikes/evidence/native-cpu-profiling/reviewed-manifest.json.gz",
+    "retained_reviewed_manifest_sha256": "b118d64ebdb735cafdf69bcc10ca93a3e9c80dd94ac6021f874331d072a3f44a"
+  },
+  "limits": [
+    "Current integration runs CPU/Clippy/wasm/tools/dependency checks; producer shipping builds, five processes and partial Tracy capture retain their exact original scope.",
+    "No new shipping archive/process/capture or full profiler/performance/phone/GPU/window claim.",
+    "One cfg(test,compiler) quota-only test differs in the normal target package sources; normal target production and exact dependency features are unchanged.",
+    "Build-host mobile static-Wasm changes are guarded outside the desktop TypeScript path; five old/new bounded selector controls match without invoking any build.",
+    "Original guard invocation usage failure, raw-log EOF metadata check failure and linked temporary selector fixture failure remain retained separately; no production fix was needed."
+  ],
+  "review_state": "Independent current-main acceptance received",
+  "final_review": {
+    "path": "docs/spikes/evidence/native-cpu-profiler-main194/root-review.json",
+    "sha256": "53dcfcc064d2e8adc6b8a74ea8b39900e5647c3b95733e83d9f3a0fa46ec1f76",
+    "reviewed_manifest_sha256": "9a408c07aa7723ecfd9e51608487a637b335daa85898a464a763b690fd4cd3d6"
+  }
+}

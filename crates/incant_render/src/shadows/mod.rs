@@ -22,6 +22,12 @@ struct CascadeUniform {
     matrix: [[f32; 4]; 4],
     parameters: [f32; 4],
 }
+const _: () = {
+    assert!(size_of::<CascadeUniform>() == 80);
+    assert!(std::mem::offset_of!(CascadeUniform, matrix) == 0);
+    assert!(std::mem::offset_of!(CascadeUniform, parameters) == 64);
+    assert!(CASCADES * MAX_SHADOW_LIGHTS == 16);
+};
 struct Atlas {
     lights: usize,
     pub view: wgpu::TextureView,
@@ -60,6 +66,7 @@ impl ShadowSystem {
         device: &wgpu::Device,
         materials: &wgpu::BindGroupLayout,
         backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
     ) -> Result<Self> {
         let cameras = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Directional cascade camera"),
@@ -81,7 +88,7 @@ impl ShadowSystem {
                     };
                     pipelines.insert(
                         key,
-                        pipeline::build(device, &shader, &cameras, materials, key),
+                        pipeline::build(device, &shader, &cameras, materials, key, cache),
                     );
                 }
             }

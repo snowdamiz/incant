@@ -4067,6 +4067,7 @@ dependencies = [
  "incant_game_runtime",
  "incant_input",
  "incant_observe",
+ "incant_profile",
  "incant_render",
  "incant_render_game",
  "incant_render_gpu_host",
@@ -4093,6 +4094,7 @@ dependencies = [
  "incant_assets_runtime",
  "incant_audio_runtime",
  "incant_input",
+ "incant_profile",
  "incant_runtime",
  "incant_script",
  "incant_types",
@@ -4316,6 +4318,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "incant_profile"
+version = "0.0.1"
+dependencies = [
+ "cpu-time",
+ "serde",
+ "serde_json",
+ "tracy-client",
+ "tracy-client-sys",
+]
+
+[[package]]
 name = "incant_render"
 version = "0.0.1"
 dependencies = [
@@ -4337,6 +4350,7 @@ dependencies = [
  "incant_types",
  "png 0.18.1",
  "pollster",
+ "rustix",
  "serde",
  "serde_json",
  "sha2 0.10.9",
@@ -4451,6 +4465,7 @@ dependencies = [
  "incant_nav",
  "incant_physics_2d_runtime",
  "incant_physics_runtime",
+ "incant_profile",
  "incant_types",
  "libm",
  "serde",
@@ -4467,6 +4482,7 @@ dependencies = [
  "incant_audio_runtime",
  "incant_input",
  "incant_localization",
+ "incant_profile",
  "incant_runtime",
  "incant_types",
  "incant_ui",
@@ -6240,8 +6256,6 @@ dependencies = [
 [[package]]
 name = "parry2d"
 version = "0.31.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fe1ba500175e957aaa27ddc92290ec8ff503d73331365443660816d6302e2a31"
 dependencies = [
  "approx",
  "arrayvec",
@@ -6268,8 +6282,6 @@ dependencies = [
 [[package]]
 name = "parry3d"
 version = "0.31.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7b626edc0b497dba4bdf6e1e0797895294ed9f61dac2bd28cb5d34d37ad2ca7e"
 dependencies = [
  "approx",
  "arrayvec",
@@ -9093,6 +9105,27 @@ dependencies = [
  "tracing",
  "tracing-core",
  "tracing-log",
+]
+
+[[package]]
+name = "tracy-client"
+version = "0.18.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6131992ff3e2cb96f407eb4eb005427ba15e2687260d99089b90e60e33169ce0"
+dependencies = [
+ "loom",
+ "once_cell",
+ "tracy-client-sys",
+]
+
+[[package]]
+name = "tracy-client-sys"
+version = "0.29.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ab27f167b093214c68413a2e0bcd318f0591af475597405ff68138ba0a433379"
+dependencies = [
+ "cc",
+ "windows-targets 0.52.6",
 ]
 
 [[package]]

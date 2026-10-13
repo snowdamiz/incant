@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-13T01:11:53.122865+00:00",
+  "reviewer": "astra/root",
+  "decision": "accepted_scoped_machine_and_Claude_report",
+  "manifest_sha256": "25ffe541e908e076c2ff309b45f8ac37b21bfedb36294eda69acb9251ccbdab0",
+  "retained_files": 165,
+  "external_hashed_only": 55,
+  "gpu_tests_each": 89,
+  "whole_frame_png_pairs_exact": 8,
+  "source_deleted_rerenders_exact": 3,
+  "ledger_rows": 38,
+  "retained_refusals": "Both1.5x attempts target a clipped unfocusable widget and fail before capture; separate corrected request used a visible focus target.",
+  "helper_identity": "Original built9546373e source retained; current helper differs only by inspected one-line rustfmt wrapping. Both Cargo manifests/locks exact.",
+  "scope": "No images decoded or viewed by root; Claude owns appearance acceptance and final report remains pending.",
+  "head": "62c802d35c69ea293d84dc7c07ebf1cb1e5f679b",
+  "parent": "91b70493e29fda3164bae190ebb88ec918514542",
+  "changed_files": 183,
+  "final_source_inputs_rehashed": 22,
+  "source_commit": "bacdd6f29bee40a1a14e61b2a224344c26d14da5",
+  "result_sha256": "f3622cbe8abaf29d8c9d010ed46639e7043cb3e10d392a98671dd49d7cf8834c",
+  "appearance": "Claude Opus5.5 explicitly Max reviewed8native frames and19crops; report accepts Metal UI/text parity. Root did not decode or view images.",
+  "limits": [
+    "Apple M5 Pro/macOS27.0.1 Metal only",
+    "No Vulkan/DX12, phone, performance, default-enable or full-renderer gate",
+    "Two clipped-focus fixture refusals retained; corrected visible target then passed",
+    "Packet helper exact original built source retained with later one-line rustfmt-only change"
+  ]
+}
