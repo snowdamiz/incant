@@ -11345,6 +11345,10 @@
       "sha256": "dd222e28090b5fdabdbf13bdc681b1bc329e2885a704d155f25f8aa9e8e1fb4d",
       "records": 4
     },
-    "status": "read-only qualification passed; independent root review pending"
+    "status": "independently accepted",
+    "review": {
+      "path": "docs/spikes/evidence/physics-islands-main231/main234-root.json",
+      "sha256": "14235a80f3214d8dedaf55eb7b3c8a27e757c405413f461ccd1282efbf6d87c3"
+    }
   }
 }

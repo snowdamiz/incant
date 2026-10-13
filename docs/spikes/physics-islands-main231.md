@@ -11,3 +11,5 @@ The private native workspace retains 686 exact source copies, with only the two 
 Root independently accepted the final current-main packet (`cb3bc688`); later ancestry joins require explicit source-relevance qualification before publication. This remains a private, default-off island constructor. There is no complete decoded-world install, runtime physics-save admission, phone or performance claim; PhysicsUnsupported remains closed.
 
 The main234 join contains seven shadow renderer paths and one UI test in implementation scope. Six existing frozen renderer files change and one renderer test is new; all eight paths match main234 exactly. The 2,010-file physics closure, vendor sources, tools, manifests and lock are unchanged. The original full verifier passes with only those six exact old/new hash exceptions, without claiming another build. The initial qualifier expected seven existing exceptions; its failed count assertion is retained and corrected for the new file, with no source or execution change.
+
+Root independently accepted the main234 source-relevance replay (`14235a80`); publication follows the exact required fast check.
