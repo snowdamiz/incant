@@ -1,0 +1,1274 @@
+{
+  "frames": [
+    {
+      "file": "l_ref_a.rgba",
+      "label": "l_ref_a",
+      "meta": {
+        "renderer": "ao_bloom",
+        "route": "draw_scene",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "lifecycle",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                -1.5,
+                1.0,
+                -3.5
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.6,
+                0.6,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "d088f75a1cb980ca6947d9036acda9576d2180fcdf75cc37b1a6273e45a4a95b",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "l_ref_b.rgba",
+      "label": "l_ref_b",
+      "meta": {
+        "renderer": "ao_bloom",
+        "route": "draw_scene",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "lifecycle",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                -1.5,
+                1.0,
+                -3.5
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.6,
+                0.6,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          255,
+          147
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            9.5,
+            11.25,
+            220.25,
+            120.5
+          ]
+        }
+      },
+      "rgba_sha256": "c08030a51b199ae84c07aca9d879ef9f939e34414f5d8ddab7083877a9746d75",
+      "size": [
+        255,
+        147
+      ]
+    },
+    {
+      "file": "l_encoded_a2.rgba",
+      "label": "l_encoded_a2",
+      "meta": {
+        "renderer": "ao_bloom",
+        "route": "draw_scene queued",
+        "size": [
+          321,
+          193
+        ],
+        "submitted_out_of_order": true
+      },
+      "rgba_sha256": "d088f75a1cb980ca6947d9036acda9576d2180fcdf75cc37b1a6273e45a4a95b",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "l_encoded_b.rgba",
+      "label": "l_encoded_b",
+      "meta": {
+        "renderer": "ao_bloom",
+        "route": "draw_scene queued",
+        "size": [
+          255,
+          147
+        ],
+        "submitted_out_of_order": true
+      },
+      "rgba_sha256": "c08030a51b199ae84c07aca9d879ef9f939e34414f5d8ddab7083877a9746d75",
+      "size": [
+        255,
+        147
+      ]
+    },
+    {
+      "file": "l_encoded_a.rgba",
+      "label": "l_encoded_a",
+      "meta": {
+        "renderer": "ao_bloom",
+        "route": "draw_scene queued",
+        "size": [
+          321,
+          193
+        ],
+        "submitted_out_of_order": true
+      },
+      "rgba_sha256": "d088f75a1cb980ca6947d9036acda9576d2180fcdf75cc37b1a6273e45a4a95b",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "d_ao_disabled.rgba",
+      "label": "d_ao_disabled",
+      "meta": {
+        "renderer": "ao",
+        "resolution": null,
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "white_slab",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "a39853d5100de2d6fbc783db9f4bb6a9500569953a9b4e6ad7dbb2165038978d",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "d_ao_16.rgba",
+      "label": "d_ao_16",
+      "meta": {
+        "renderer": "ao",
+        "resolution": {
+          "internal": [
+            321,
+            193
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 16,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "white_slab",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "a39853d5100de2d6fbc783db9f4bb6a9500569953a9b4e6ad7dbb2165038978d",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "d_ao_12.rgba",
+      "label": "d_ao_12",
+      "meta": {
+        "renderer": "ao",
+        "resolution": {
+          "internal": [
+            241,
+            145
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 12,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "white_slab",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "77fc47bc4972d75ca3af267bdb6b64a391ff6a58fa0c886abe297ebefb001f58",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "d_ao_8.rgba",
+      "label": "d_ao_8",
+      "meta": {
+        "renderer": "ao",
+        "resolution": {
+          "internal": [
+            161,
+            97
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 8,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "white_slab",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "275266dedc89839c37c2e14f8fd304c3e57f8961cdb8036c58fa6f3009d6ada2",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "d_ao_reference_12.rgba",
+      "label": "d_ao_reference_12",
+      "meta": {
+        "renderer": "ao",
+        "route": "draw_scene",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "white_slab",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          241,
+          145
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            20,
+            21,
+            25
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            9.9375,
+            13.125,
+            210.375,
+            120.375
+          ]
+        }
+      },
+      "rgba_sha256": "bdf02ebca20183ce769f339b52e5e0f296370533d2ad1bb8c58a54862e8e78c7",
+      "size": [
+        241,
+        145
+      ]
+    },
+    {
+      "file": "d_ao_reference_8.rgba",
+      "label": "d_ao_reference_8",
+      "meta": {
+        "renderer": "ao",
+        "route": "draw_scene",
+        "scene": {
+          "environment": {
+            "intensity": 1.0,
+            "linear_byte": 179
+          },
+          "key_light": 0.0,
+          "name": "white_slab",
+          "parts": [
+            {
+              "center": [
+                0.0,
+                0.0,
+                -4.0
+              ],
+              "id": "receiver",
+              "material": "white",
+              "scale": [
+                16.0,
+                12.0,
+                1.0
+              ]
+            },
+            {
+              "center": [
+                1.7,
+                0.0,
+                -3.0
+              ],
+              "id": "slab",
+              "material": "white",
+              "scale": [
+                2.6,
+                3.0,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          161,
+          97
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            20,
+            21,
+            25
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            6.625,
+            8.75,
+            140.25,
+            80.25
+          ]
+        }
+      },
+      "rgba_sha256": "50aac2d668ae95799ec269eda910e9f0189dee0c20763eb189eb94667c3d4160",
+      "size": [
+        161,
+        97
+      ]
+    },
+    {
+      "file": "e_bloom_16.rgba",
+      "label": "e_bloom_16",
+      "meta": {
+        "renderer": "bloom",
+        "resolution": {
+          "internal": [
+            321,
+            193
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 16,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 0.0,
+            "linear_byte": 179
+          },
+          "name": "single_emitter",
+          "parts": [
+            {
+              "center": [
+                0.9,
+                0.4,
+                -4.0
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.7,
+                0.7,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "1dea1525742d4d7d3669ee3ed356a19bcf997da51ca5f6deb64e3668ca96948a",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "e_off_16.rgba",
+      "label": "e_off_16",
+      "meta": {
+        "renderer": "off",
+        "resolution": {
+          "internal": [
+            321,
+            193
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 16,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 0.0,
+            "linear_byte": 179
+          },
+          "name": "single_emitter",
+          "parts": [
+            {
+              "center": [
+                0.9,
+                0.4,
+                -4.0
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.7,
+                0.7,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "8235281b89eb6eb4b489e580e812d3728b71f4c76bd4e2f35e7aade976400024",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "e_bloom_12.rgba",
+      "label": "e_bloom_12",
+      "meta": {
+        "renderer": "bloom",
+        "resolution": {
+          "internal": [
+            241,
+            145
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 12,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 0.0,
+            "linear_byte": 179
+          },
+          "name": "single_emitter",
+          "parts": [
+            {
+              "center": [
+                0.9,
+                0.4,
+                -4.0
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.7,
+                0.7,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "67250a1fc59cc7d2cff90ec79eea6466c9431c1f1e6aaa3d0dcb73543ec849bd",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "e_off_12.rgba",
+      "label": "e_off_12",
+      "meta": {
+        "renderer": "off",
+        "resolution": {
+          "internal": [
+            241,
+            145
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 12,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 0.0,
+            "linear_byte": 179
+          },
+          "name": "single_emitter",
+          "parts": [
+            {
+              "center": [
+                0.9,
+                0.4,
+                -4.0
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.7,
+                0.7,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "8be553b3087b7b27c53ba215e2464ca874d074038909a609b4ef74aa6ce82095",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "e_bloom_8.rgba",
+      "label": "e_bloom_8",
+      "meta": {
+        "renderer": "bloom",
+        "resolution": {
+          "internal": [
+            161,
+            97
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 8,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 0.0,
+            "linear_byte": 179
+          },
+          "name": "single_emitter",
+          "parts": [
+            {
+              "center": [
+                0.9,
+                0.4,
+                -4.0
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.7,
+                0.7,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "141f8ef72094ee10287bf860b0c9e64e866cf11302b0fb53187caf63599dedc0",
+      "size": [
+        321,
+        193
+      ]
+    },
+    {
+      "file": "e_off_8.rgba",
+      "label": "e_off_8",
+      "meta": {
+        "renderer": "off",
+        "resolution": {
+          "internal": [
+            161,
+            97
+          ],
+          "output": [
+            321,
+            193
+          ],
+          "pixel_perfect": false,
+          "scale16": 8,
+          "sequence": 1
+        },
+        "route": "retained",
+        "scene": {
+          "environment": {
+            "intensity": 0.0,
+            "linear_byte": 179
+          },
+          "name": "single_emitter",
+          "parts": [
+            {
+              "center": [
+                0.9,
+                0.4,
+                -4.0
+              ],
+              "id": "emitter",
+              "material": "emissive_1",
+              "scale": [
+                0.7,
+                0.7,
+                1.0
+              ]
+            }
+          ],
+          "projection": "perspective"
+        },
+        "size": [
+          321,
+          193
+        ],
+        "viewport": {
+          "canvas_srgb": [
+            31,
+            63,
+            95
+          ],
+          "corner_radii": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rect": [
+            13.25,
+            17.5,
+            280.5,
+            160.5
+          ]
+        }
+      },
+      "rgba_sha256": "a2b93cde13a2ebaa9dddd22885999220e402d05baf0d6866e2c1b9658497ab23",
+      "size": [
+        321,
+        193
+      ]
+    }
+  ],
+  "summary": {
+    "case": "lifecycle_drs",
+    "devices": [
+      {
+        "adapter": {
+          "backend": "Metal",
+          "device": 0,
+          "device_type": "IntegratedGpu",
+          "driver": "",
+          "driver_info": "",
+          "name": "Apple M5 Pro",
+          "vendor": 0
+        },
+        "end_registry": {
+          "bind_groups": 1,
+          "buffers": 2,
+          "compute_pipelines": 1,
+          "render_pipelines": 31,
+          "textures": 6
+        },
+        "renderer": "off",
+        "setup_registry": {
+          "bind_groups": 1,
+          "buffers": 0,
+          "compute_pipelines": 1,
+          "render_pipelines": 31,
+          "textures": 3
+        }
+      },
+      {
+        "adapter": {
+          "backend": "Metal",
+          "device": 0,
+          "device_type": "IntegratedGpu",
+          "driver": "",
+          "driver_info": "",
+          "name": "Apple M5 Pro",
+          "vendor": 0
+        },
+        "end_registry": {
+          "bind_groups": 1,
+          "buffers": 2,
+          "compute_pipelines": 1,
+          "render_pipelines": 48,
+          "textures": 9
+        },
+        "renderer": "ao",
+        "setup_registry": {
+          "bind_groups": 1,
+          "buffers": 0,
+          "compute_pipelines": 1,
+          "render_pipelines": 48,
+          "textures": 3
+        }
+      },
+      {
+        "adapter": {
+          "backend": "Metal",
+          "device": 0,
+          "device_type": "IntegratedGpu",
+          "driver": "",
+          "driver_info": "",
+          "name": "Apple M5 Pro",
+          "vendor": 0
+        },
+        "end_registry": {
+          "bind_groups": 1,
+          "buffers": 2,
+          "compute_pipelines": 1,
+          "render_pipelines": 38,
+          "textures": 17
+        },
+        "renderer": "bloom",
+        "setup_registry": {
+          "bind_groups": 1,
+          "buffers": 0,
+          "compute_pipelines": 1,
+          "render_pipelines": 38,
+          "textures": 3
+        }
+      },
+      {
+        "adapter": {
+          "backend": "Metal",
+          "device": 0,
+          "device_type": "IntegratedGpu",
+          "driver": "",
+          "driver_info": "",
+          "name": "Apple M5 Pro",
+          "vendor": 0
+        },
+        "end_registry": {
+          "bind_groups": 1,
+          "buffers": 2,
+          "compute_pipelines": 1,
+          "render_pipelines": 55,
+          "textures": 20
+        },
+        "renderer": "ao_bloom",
+        "setup_registry": {
+          "bind_groups": 1,
+          "buffers": 0,
+          "compute_pipelines": 1,
+          "render_pipelines": 55,
+          "textures": 3
+        }
+      }
+    ],
+    "frames": 18
+  }
+}

@@ -1,0 +1,1 @@
+{"label": "case-ssao_geometry", "success": true, "pid": 60064, "exit": 0, "signal": null, "timed_out": false, "group_absent": true, "failure_reasons": []}

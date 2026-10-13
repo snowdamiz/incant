@@ -1,0 +1,55 @@
+{
+ "metric": "rms radius about the weighted centroid of the positive linear RGB change, whole frame",
+ "pairs": {
+  "v1_bloom-v1_off": {
+   "centroid": [
+    430.52278736094354,
+    267.43323278035683
+   ],
+   "energy": 3540.157539039969,
+   "pixels": 88407,
+   "rms_radius_px": 105.97231268106414,
+   "scale16": 16
+  },
+  "v1_both-v1_off": {
+   "centroid": [
+    429.34641348365915,
+    243.43385450369243
+   ],
+   "energy": 2727.8544091591025,
+   "pixels": 57857,
+   "rms_radius_px": 90.28278198869276,
+   "scale16": 16
+  },
+  "v1_both-v1_ssao": {
+   "centroid": [
+    432.477548754904,
+    263.13650730071765
+   ],
+   "energy": 3381.936018899635,
+   "pixels": 86667,
+   "rms_radius_px": 104.03811073573385,
+   "scale16": 16
+  },
+  "v3_both_12-v3_off_12": {
+   "centroid": [
+    429.653529029091,
+    243.8594286278011
+   ],
+   "energy": 2722.7158053509224,
+   "pixels": 57987,
+   "rms_radius_px": 89.90124152543338,
+   "scale16": 12
+  },
+  "v3_both_8-v3_off_8": {
+   "centroid": [
+    428.9030513411182,
+    242.961954911131
+   ],
+   "energy": 2692.382500784132,
+   "pixels": 58137,
+   "rms_radius_px": 91.01609978421848,
+   "scale16": 8
+  }
+ }
+}

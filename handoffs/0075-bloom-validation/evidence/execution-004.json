@@ -1,0 +1,528 @@
+{
+ "children": [
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/lib",
+    "--list",
+    "--ignored"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/lib",
+    "sha256": "472b6d936d5a41a4cd6c8021d34f0b0371cd671d000b7584d600e389bd7ff9ca"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:45:22.318721+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 0,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 59784,
+    "pid": 59784,
+    "ppid": 59778,
+    "start": [
+     1791888322,
+     36692
+    ],
+    "uid": 501
+   },
+   "kind": "listing",
+   "label": "list-lib",
+   "new_frames": 0,
+   "pid": 59784,
+   "pngs": 0,
+   "signal": null,
+   "started": "2026-10-13T10:45:22.036583+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "5cf0f5e289c69e2c13a0f1d60e1a1f5c2182b035de9b8960aa68ee3bc89df608",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 30,
+   "verdict": {
+    "expected": 37,
+    "listed": 37,
+    "problems": [],
+    "valid": true
+   }
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/lib",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output",
+    "bloom::tests::device::actual_pyramid_nonzero_halo_resize_and_zero_alpha_control",
+    "bloom::tests::device::bloom_output_keeps_emitter_position_at_reduced_internal_resolution",
+    "bloom::tests::device::canonical_graph_zero_gain_and_pixel_camera_bypass_and_invalid_replace",
+    "diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats",
+    "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+    "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+    "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+    "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+    "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+    "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+    "lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion",
+    "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+    "models::animation::tests::retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame",
+    "models::animation::tests::single_sided_reflected_skin_and_shadow_match_static_transform_oracle",
+    "models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion",
+    "models::retained::native_tests::binary_native_motion_and_structural_rebuilds_submit_without_source_or_document",
+    "models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild",
+    "models::retained::tests::motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings",
+    "models::retained::tests::rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry",
+    "models::retained::tests::retained_flipbook_selection_stages_without_allocation",
+    "models::retained::tests::retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion",
+    "models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings",
+    "models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells",
+    "models::retained::text_native_tests::source_free_native_text_moves_rebuilds_and_changes_through_the_retained_consumer",
+    "models::retained::text_tests::foreign_or_reset_handles_refuse_preparation_before_any_text_upload",
+    "models::retained::text_tests::opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it",
+    "models::retained::text_tests::retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities",
+    "models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection",
+    "text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs",
+    "text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference",
+    "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+    "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+    "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+    "ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages",
+    "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels",
+    "version_tests::live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/lib",
+    "sha256": "472b6d936d5a41a4cd6c8021d34f0b0371cd671d000b7584d600e389bd7ff9ca"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:45:33.347886+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 425,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 59865,
+    "pid": 59865,
+    "ppid": 59860,
+    "start": [
+     1791888331,
+     33426
+    ],
+    "uid": 501
+   },
+   "kind": "suite",
+   "label": "suite-lib",
+   "new_frames": 20,
+   "pid": 59865,
+   "pngs": 0,
+   "signal": null,
+   "started": "2026-10-13T10:45:31.033314+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "c01968b01294440055e9f7d2abeff7d236ccd0eee7858d5ad0823a4db8f0b888",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 240,
+   "verdict": {
+    "expected": 37,
+    "failed": [],
+    "passed": 37,
+    "problems": [],
+    "summary": [
+     [
+      "ok",
+      "37",
+      "0",
+      "0",
+      "0",
+      "93"
+     ]
+    ],
+    "valid": true
+   }
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "case",
+    "ssao_core",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-ssao_core"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "sha256": "a90f249b4c0f245af7c1ddb0dba61d61e9da68bcc2b2306d6e6e557255ebd01d"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:45:47.418879+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 0,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 59979,
+    "pid": 59979,
+    "ppid": 59974,
+    "start": [
+     1791888340,
+     691912
+    ],
+    "uid": 501
+   },
+   "kind": "numeric",
+   "label": "case-ssao_core",
+   "new_frames": 20,
+   "pid": 59979,
+   "pngs": 0,
+   "signal": null,
+   "started": "2026-10-13T10:45:40.691798+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "e12617f1cbf9b3a1f079f171abd729d24eb1f1556125ad70407ffeb6b2a71ea9",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict": {
+    "declared": 20,
+    "frames": 20,
+    "index": {
+     "frames": 20,
+     "pngs": 0
+    },
+    "problems": [],
+    "receipts": 3,
+    "valid": true
+   }
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "case",
+    "ssao_materials",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-ssao_materials"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "sha256": "a90f249b4c0f245af7c1ddb0dba61d61e9da68bcc2b2306d6e6e557255ebd01d"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:45:55.958062+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 0,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 60039,
+    "pid": 60039,
+    "ppid": 60034,
+    "start": [
+     1791888352,
+     675162
+    ],
+    "uid": 501
+   },
+   "kind": "numeric",
+   "label": "case-ssao_materials",
+   "new_frames": 10,
+   "pid": 60039,
+   "pngs": 0,
+   "signal": null,
+   "started": "2026-10-13T10:45:52.675046+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "bf0e77d42a048891ae19c5f58499acb006569531dbe3a94b74868eb525efa05e",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict": {
+    "declared": 10,
+    "frames": 10,
+    "index": {
+     "frames": 10,
+     "pngs": 0
+    },
+    "problems": [],
+    "receipts": 3,
+    "valid": true
+   }
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "case",
+    "ssao_geometry",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-ssao_geometry"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "sha256": "a90f249b4c0f245af7c1ddb0dba61d61e9da68bcc2b2306d6e6e557255ebd01d"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:46:05.071413+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 0,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 60064,
+    "pid": 60064,
+    "ppid": 60059,
+    "start": [
+     1791888361,
+     99845
+    ],
+    "uid": 501
+   },
+   "kind": "numeric",
+   "label": "case-ssao_geometry",
+   "new_frames": 17,
+   "pid": 60064,
+   "pngs": 0,
+   "signal": null,
+   "started": "2026-10-13T10:46:01.099725+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "bdf5c7eade0a8d1097394a884fa1a5bf3097b4936ac89ab305728ac246f5546d",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict": {
+    "declared": 17,
+    "frames": 17,
+    "index": {
+     "frames": 17,
+     "pngs": 0
+    },
+    "problems": [],
+    "receipts": 3,
+    "valid": true
+   }
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "case",
+    "lifecycle_drs",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "sha256": "a90f249b4c0f245af7c1ddb0dba61d61e9da68bcc2b2306d6e6e557255ebd01d"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:46:12.755470+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 0,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 60168,
+    "pid": 60168,
+    "ppid": 60163,
+    "start": [
+     1791888370,
+     661782
+    ],
+    "uid": 501
+   },
+   "kind": "numeric",
+   "label": "case-lifecycle_drs",
+   "new_frames": 18,
+   "pid": 60168,
+   "pngs": 0,
+   "signal": null,
+   "started": "2026-10-13T10:46:10.661666+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "731447868de734c9069862e8c658ed30c2a173429604d02add1ca3b8ec45b0e3",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict": {
+    "declared": 18,
+    "frames": 18,
+    "index": {
+     "frames": 17,
+     "pngs": 0
+    },
+    "problems": [],
+    "receipts": 4,
+    "valid": true
+   }
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "case",
+    "bloom_numeric",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-bloom_numeric"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "sha256": "a90f249b4c0f245af7c1ddb0dba61d61e9da68bcc2b2306d6e6e557255ebd01d"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:46:20.780934+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 0,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 60215,
+    "pid": 60215,
+    "ppid": 60210,
+    "start": [
+     1791888378,
+     95384
+    ],
+    "uid": 501
+   },
+   "kind": "numeric",
+   "label": "case-bloom_numeric",
+   "new_frames": 8,
+   "pid": 60215,
+   "pngs": 0,
+   "signal": null,
+   "started": "2026-10-13T10:46:18.095267+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "065c3e37b2ea710b400976b0295dfda725dafbcea41d78a6aef6e69e678a6277",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 150,
+   "verdict": {
+    "declared": 8,
+    "frames": 8,
+    "index": {
+     "frames": 8,
+     "pngs": 0
+    },
+    "problems": [],
+    "receipts": 3,
+    "valid": true
+   }
+  },
+  {
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "appearance",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance"
+   ],
+   "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin/effects_gpu",
+    "sha256": "a90f249b4c0f245af7c1ddb0dba61d61e9da68bcc2b2306d6e6e557255ebd01d"
+   },
+   "binary_unchanged": true,
+   "ended": "2026-10-13T10:46:27.098720+00:00",
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ],
+   "existing_frames": 0,
+   "exit": 0,
+   "failure_reasons": [],
+   "group_absent": true,
+   "identity": {
+    "comm": "python3.14",
+    "pgid": 60265,
+    "pid": 60265,
+    "ppid": 60260,
+    "start": [
+     1791888385,
+     702999
+    ],
+    "uid": 501
+   },
+   "kind": "appearance",
+   "label": "appearance",
+   "new_frames": 16,
+   "pid": 60265,
+   "pngs": 16,
+   "signal": null,
+   "started": "2026-10-13T10:46:25.702884+00:00",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "stdout_sha256": "c0be1658378f063ca836965c714fdcbf1d28dd0e656bf7a8581ae2980bb2975e",
+   "success": true,
+   "survivors": [],
+   "timed_out": false,
+   "timeout_s": 300,
+   "verdict": {
+    "declared": 16,
+    "frames": 16,
+    "index": {
+     "frames": 16,
+     "pngs": 16
+    },
+    "problems": [],
+    "receipts": 3,
+    "valid": true
+   }
+  }
+ ],
+ "ledger_sha256": "7e14f939b1abf6918490975996b225841d74c353a46177ff7c2f30aaac4c0d2f",
+ "totals": {
+  "children": 8,
+  "existing_frames": 425,
+  "new_frames": 109,
+  "pngs": 16,
+  "succeeded": 8
+ }
+}

@@ -1,0 +1,287 @@
+{
+ "appearance_bloom_gain_100_75_50.png": {
+  "op": "positive linear change, mean RGB x8, gamma 2.2 gray; rows v1_both-v1_off (100 %), v3_both_12-v3_off_12 (75 %), v3_both_8-v3_off_8 (50 %)",
+  "sha256": "3e170db14a9dc96f9f9c9771c0e00a606cc99c41c85814f421c1de2afd68f2d5",
+  "size": [
+   959,
+   1629
+  ],
+  "sources": [
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_both",
+    "rgba_sha256": "41eea75679b8f5489d7472f7cbc33c9dd0f38ec3bf1ff0bfdb45d0056dfbd0cf"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_off",
+    "rgba_sha256": "becca3c5ee11b91011b6c639c4d66543717a8f073c1127707e022437979324b1"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_12",
+    "rgba_sha256": "d25c46f2e2b223a101c9cd40890b2c4ff34b6179d0d00b598dba6a0184f15d13"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_off_12",
+    "rgba_sha256": "991e5e380877aeb32a74ff202b208025682877ffff41142296ccffeb3d11c01b"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_8",
+    "rgba_sha256": "11a11aabdff4985fc69a7ccc42c73a39a3ef5513f2e56842dfc70ddcb0aa7220"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_off_8",
+    "rgba_sha256": "3bb78c6e409e4d9c48ec85fbb431f89c4ab1c7abf5d1cc21490f670eea40fa17"
+   }
+  ]
+ },
+ "appearance_bloom_gain_before_after.png": {
+  "op": "gain maps as appearance_bloom_gain_100_75_50.png, crop [150, 110, 420, 280]; columns build003 (before) and build004 (after); rows 100 % (v1, identical in both builds), 75 %, 50 %",
+  "sha256": "d54505a9e4f559f2dbeaca09834a91f07ab08b812b1081b45241e420755b65f1",
+  "size": [
+   846,
+   852
+  ],
+  "sources": [
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance",
+    "label": "v1_both",
+    "rgba_sha256": "41eea75679b8f5489d7472f7cbc33c9dd0f38ec3bf1ff0bfdb45d0056dfbd0cf"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance",
+    "label": "v1_off",
+    "rgba_sha256": "becca3c5ee11b91011b6c639c4d66543717a8f073c1127707e022437979324b1"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance",
+    "label": "v3_both_12",
+    "rgba_sha256": "158112faa1147cb8357808ab0049216f5fb5c6001a743e03d9e9221688c2359a"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance",
+    "label": "v3_off_12",
+    "rgba_sha256": "991e5e380877aeb32a74ff202b208025682877ffff41142296ccffeb3d11c01b"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance",
+    "label": "v3_both_8",
+    "rgba_sha256": "bb6d3832ce5b8e4bca963ab8fef89746c27f8783c2bb3ba6646c5cb4fc539f2b"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/appearance",
+    "label": "v3_off_8",
+    "rgba_sha256": "3bb78c6e409e4d9c48ec85fbb431f89c4ab1c7abf5d1cc21490f670eea40fa17"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_both",
+    "rgba_sha256": "41eea75679b8f5489d7472f7cbc33c9dd0f38ec3bf1ff0bfdb45d0056dfbd0cf"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_off",
+    "rgba_sha256": "becca3c5ee11b91011b6c639c4d66543717a8f073c1127707e022437979324b1"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_12",
+    "rgba_sha256": "d25c46f2e2b223a101c9cd40890b2c4ff34b6179d0d00b598dba6a0184f15d13"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_off_12",
+    "rgba_sha256": "991e5e380877aeb32a74ff202b208025682877ffff41142296ccffeb3d11c01b"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_8",
+    "rgba_sha256": "11a11aabdff4985fc69a7ccc42c73a39a3ef5513f2e56842dfc70ddcb0aa7220"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_off_8",
+    "rgba_sha256": "3bb78c6e409e4d9c48ec85fbb431f89c4ab1c7abf5d1cc21490f670eea40fa17"
+   }
+  ]
+ },
+ "crop_emissive_panel_box_grid.png": {
+  "op": "true contrast crop [230, 160, 270, 150] x2 nearest; grid v1_off | v1_both (100 %) / v3_both_12 (75 %) | v3_both_8 (50 %)",
+  "sha256": "4e0746620f71390e4c802e07f04cb73488a046765f8588937255d4c1d65c5940",
+  "size": [
+   1086,
+   606
+  ],
+  "sources": [
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_off",
+    "rgba_sha256": "becca3c5ee11b91011b6c639c4d66543717a8f073c1127707e022437979324b1"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_both",
+    "rgba_sha256": "41eea75679b8f5489d7472f7cbc33c9dd0f38ec3bf1ff0bfdb45d0056dfbd0cf"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_12",
+    "rgba_sha256": "d25c46f2e2b223a101c9cd40890b2c4ff34b6179d0d00b598dba6a0184f15d13"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_8",
+    "rgba_sha256": "11a11aabdff4985fc69a7ccc42c73a39a3ef5513f2e56842dfc70ddcb0aa7220"
+   }
+  ]
+ },
+ "crop_sphere_crate_grid.png": {
+  "op": "true contrast crop [450, 240, 280, 170] x2 nearest; grid v1_off | v1_both (100 %) / v3_both_12 (75 %) | v3_both_8 (50 %)",
+  "sha256": "2f70d2eb5079385f2784bd1740f71e57ee215c2bfeeb668aad07eb4463f5c218",
+  "size": [
+   1126,
+   686
+  ],
+  "sources": [
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_off",
+    "rgba_sha256": "becca3c5ee11b91011b6c639c4d66543717a8f073c1127707e022437979324b1"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v1_both",
+    "rgba_sha256": "41eea75679b8f5489d7472f7cbc33c9dd0f38ec3bf1ff0bfdb45d0056dfbd0cf"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_12",
+    "rgba_sha256": "d25c46f2e2b223a101c9cd40890b2c4ff34b6179d0d00b598dba6a0184f15d13"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/appearance",
+    "label": "v3_both_8",
+    "rgba_sha256": "11a11aabdff4985fc69a7ccc42c73a39a3ef5513f2e56842dfc70ddcb0aa7220"
+   }
+  ]
+ },
+ "drs_emitter_true_contrast_16_12_8.png": {
+  "op": "e_bloom_N at true contrast, crop [126, 33, 120, 100], x3 nearest, red cross = projected emitter centre; panels 16/16, 12/16, 8/16",
+  "sha256": "6695bc0d6e00faa1564b50b3cb2373e8012c9b2fc5651e8be6dc1c26dcf2f62d",
+  "size": [
+   1092,
+   300
+  ],
+  "sources": [
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_16",
+    "rgba_sha256": "1dea1525742d4d7d3669ee3ed356a19bcf997da51ca5f6deb64e3668ca96948a"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_12",
+    "rgba_sha256": "67250a1fc59cc7d2cff90ec79eea6466c9431c1f1e6aaa3d0dcb73543ec849bd"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_8",
+    "rgba_sha256": "141f8ef72094ee10287bf860b0c9e64e866cf11302b0fb53187caf63599dedc0"
+   }
+  ]
+ },
+ "drs_halo_lifecycle_16_12_8.png": {
+  "op": "positive linear change e_bloom_N - e_off_N, mean RGB x24, gamma 2.2 gray; x2 nearest; red cross = projected emitter centre, blue ring = 48 px radius; panels 16/16, 12/16, 8/16",
+  "sha256": "ac079caf83b2fc17a26774d66b7fe31a2d3d6787161f3d2914c53120f50bbe61",
+  "size": [
+   1938,
+   386
+  ],
+  "sources": [
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_16",
+    "rgba_sha256": "1dea1525742d4d7d3669ee3ed356a19bcf997da51ca5f6deb64e3668ca96948a"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_off_16",
+    "rgba_sha256": "8235281b89eb6eb4b489e580e812d3728b71f4c76bd4e2f35e7aade976400024"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_12",
+    "rgba_sha256": "67250a1fc59cc7d2cff90ec79eea6466c9431c1f1e6aaa3d0dcb73543ec849bd"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_off_12",
+    "rgba_sha256": "8be553b3087b7b27c53ba215e2464ca874d074038909a609b4ef74aa6ce82095"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_8",
+    "rgba_sha256": "141f8ef72094ee10287bf860b0c9e64e866cf11302b0fb53187caf63599dedc0"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_off_8",
+    "rgba_sha256": "a2b93cde13a2ebaa9dddd22885999220e402d05baf0d6866e2c1b9658497ab23"
+   }
+  ]
+ },
+ "drs_halo_lifecycle_before_after_12_8.png": {
+  "op": "as drs_halo_lifecycle_16_12_8.png; columns build003 (before) and build004 (after); rows 12/16, 8/16",
+  "sha256": "1f89f9d547f801cee9a71d7b1f2c9884ab8298d89e185fa29772e2e777847259",
+  "size": [
+   1290,
+   778
+  ],
+  "sources": [
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-lifecycle_drs",
+    "label": "e_bloom_12",
+    "rgba_sha256": "5dd1316b729bcc0d29e946bd0078f3f6a85acc6fec88343a70637e42fab03196"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-lifecycle_drs",
+    "label": "e_off_12",
+    "rgba_sha256": "8be553b3087b7b27c53ba215e2464ca874d074038909a609b4ef74aa6ce82095"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_12",
+    "rgba_sha256": "67250a1fc59cc7d2cff90ec79eea6466c9431c1f1e6aaa3d0dcb73543ec849bd"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_off_12",
+    "rgba_sha256": "8be553b3087b7b27c53ba215e2464ca874d074038909a609b4ef74aa6ce82095"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-lifecycle_drs",
+    "label": "e_bloom_8",
+    "rgba_sha256": "bac156a51601ba7513baa834e91cf53b8c35c1859687863c2b4ae73d5d0cbf92"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-003/outputs/case-lifecycle_drs",
+    "label": "e_off_8",
+    "rgba_sha256": "a2b93cde13a2ebaa9dddd22885999220e402d05baf0d6866e2c1b9658497ab23"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_bloom_8",
+    "rgba_sha256": "141f8ef72094ee10287bf860b0c9e64e866cf11302b0fb53187caf63599dedc0"
+   },
+   {
+    "dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/outputs/case-lifecycle_drs",
+    "label": "e_off_8",
+    "rgba_sha256": "a2b93cde13a2ebaa9dddd22885999220e402d05baf0d6866e2c1b9658497ab23"
+   }
+  ]
+ }
+}

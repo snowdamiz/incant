@@ -1,0 +1,53 @@
+{
+ "g_ao_backface": {
+  "rgba_identical": true
+ },
+ "g_ao_mask_below": {
+  "rgba_identical": true
+ },
+ "g_ao_mask_cutout": {
+  "rgba_identical": true
+ },
+ "g_ao_mask_equal": {
+  "rgba_identical": true
+ },
+ "g_ao_mirrored": {
+  "rgba_identical": true
+ },
+ "g_ao_motion_far": {
+  "rgba_identical": true
+ },
+ "g_ao_motion_near": {
+  "rgba_identical": true
+ },
+ "g_ao_skin_oracle_far": {
+  "rgba_identical": true
+ },
+ "g_ao_skin_oracle_near": {
+  "rgba_identical": true
+ },
+ "g_ao_skin_t0": {
+  "rgba_identical": true
+ },
+ "g_ao_skin_t1": {
+  "rgba_identical": true
+ },
+ "g_ao_tilted": {
+  "rgba_identical": true
+ },
+ "g_ao_white": {
+  "rgba_identical": true
+ },
+ "g_off_black": {
+  "rgba_identical": true
+ },
+ "g_off_mask_below": {
+  "rgba_identical": true
+ },
+ "g_off_tilted": {
+  "rgba_identical": true
+ },
+ "g_off_white": {
+  "rgba_identical": true
+ }
+}

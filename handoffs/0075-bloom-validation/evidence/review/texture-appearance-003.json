@@ -1,0 +1,35 @@
+{
+ "metric": "mean |step| of the summed RGB code change between horizontal neighbours, split by even or odd x",
+ "pairs": {
+  "v1_both-v1_off": {
+   "even_x": 0.9207479964381122,
+   "odd_x": 0.940643407340281,
+   "pairs_compared": [
+    6738,
+    6621
+   ]
+  },
+  "v3_both_12-v3_off_12": {
+   "even_x": 0.7344649893907245,
+   "odd_x": 0.8856083086053412,
+   "pairs_compared": [
+    6598,
+    6740
+   ]
+  },
+  "v3_both_8-v3_off_8": {
+   "even_x": 0.8843108504398827,
+   "odd_x": 0.8563780972774548,
+   "pairs_compared": [
+    6820,
+    6538
+   ]
+  }
+ },
+ "region": [
+  440,
+  200,
+  660,
+  262
+ ]
+}

@@ -1,0 +1,84 @@
+{
+ "expected_centre": [
+  186.55174392517046,
+  83.06033603325757
+ ],
+ "metric": "positive linear RGB change of e_bloom_N over e_off_N on non-emitter interior pixels (analyze.py centroid pixel set); radii about the expected centre; emitter_pixels = interior pixels of e_off_N that are not the backdrop",
+ "scales": {
+  "8": {
+   "centroid": [
+    186.77349702636755,
+    83.21436982220364
+   ],
+   "centroid_offset_px": 0.270001566713251,
+   "emitter_pixels": 676,
+   "energy": 334.7277292601788,
+   "energy_per_emitter_pixel": 0.49515936281091544,
+   "left_right": [
+    0.4916317249199593,
+    0.5083682750800407
+   ],
+   "near_field_24px_centroid": [
+    186.91058051785174,
+    83.05565351031495
+   ],
+   "near_field_offset_px": 0.35886714292091854,
+   "rms_radius_px": 33.21417310083724,
+   "share_beyond_48px": 0.12522707763350244,
+   "up_down": [
+    0.5098466080756079,
+    0.4901533919243921
+   ]
+  },
+  "12": {
+   "centroid": [
+    186.61737791234188,
+    83.35883430723537
+   ],
+   "centroid_offset_px": 0.305628925070491,
+   "emitter_pixels": 675,
+   "energy": 334.91134477397475,
+   "energy_per_emitter_pixel": 0.4961649552207033,
+   "left_right": [
+    0.48993725411785843,
+    0.5100627458821416
+   ],
+   "near_field_24px_centroid": [
+    187.17654748035565,
+    82.85751608413658
+   ],
+   "near_field_offset_px": 0.6568983287644307,
+   "rms_radius_px": 33.309365382265014,
+   "share_beyond_48px": 0.1265702457685745,
+   "up_down": [
+    0.5113768409345298,
+    0.48862315906547016
+   ]
+  },
+  "16": {
+   "centroid": [
+    186.16409250631705,
+    83.20926278470597
+   ],
+   "centroid_offset_px": 0.41527436693833447,
+   "emitter_pixels": 650,
+   "energy": 324.07335049731336,
+   "energy_per_emitter_pixel": 0.4985743853804821,
+   "left_right": [
+    0.49947280250293197,
+    0.500527197497068
+   ],
+   "near_field_24px_centroid": [
+    186.7565258455588,
+    83.04904066656343
+   ],
+   "near_field_offset_px": 0.20509319887966157,
+   "rms_radius_px": 32.920076259313014,
+   "share_beyond_48px": 0.12237475998172037,
+   "up_down": [
+    0.5098773355985348,
+    0.49012266440146524
+   ]
+  }
+ }
+}

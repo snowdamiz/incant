@@ -1,0 +1,162 @@
+{
+ "v1_bloom": {
+  "file": "v1_bloom.png",
+  "png_sha256": "7285564b45abe25e197454faa4997dfb33fa5257f537633ee7a765756b0dd584",
+  "rgba_sha256": "1a40329b7e5967bd6f572d364015a84dfcd6871ca4b43b722892e82e48d3aecd",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v1_both": {
+  "file": "v1_both.png",
+  "png_sha256": "85a1262300849808e690d6e5d6edf1c2ffeb464e72d673602e4e4950b33d35b5",
+  "rgba_sha256": "41eea75679b8f5489d7472f7cbc33c9dd0f38ec3bf1ff0bfdb45d0056dfbd0cf",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v1_off": {
+  "file": "v1_off.png",
+  "png_sha256": "0ced60a82035fb4d8dbd1cf1ba92a805d9acd340e68b505544107d61cd1eb608",
+  "rgba_sha256": "becca3c5ee11b91011b6c639c4d66543717a8f073c1127707e022437979324b1",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v1_ssao": {
+  "file": "v1_ssao.png",
+  "png_sha256": "672c71c17d331d827bdedb022adae4618caa9480130a54e8207cd34de83077ff",
+  "rgba_sha256": "a88c26ec6c002113080b1227a36d4d6261e6fa689c18a6d535c61380243e2e35",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v2_bloom": {
+  "file": "v2_bloom.png",
+  "png_sha256": "0f98b5d62f35ca18782c4b7a55f720a960e5b0ee1cbfdc1c5a2585b324fe330d",
+  "rgba_sha256": "92258f50a2b808a75a5a5ab6a52d7357b8c8b76efca426dff2aa7c9468f722e5",
+  "size": [
+   960,
+   540
+  ],
+  "verified": true
+ },
+ "v2_both": {
+  "file": "v2_both.png",
+  "png_sha256": "ea0f6428ca377ef6d9ad7981ee03ff75784bb8a88e5d08c696d2098f7af56ef8",
+  "rgba_sha256": "7948acbef87d10f55f333789feed82a521f89f5aa269ef07ae365a62a74e6833",
+  "size": [
+   960,
+   540
+  ],
+  "verified": true
+ },
+ "v2_off": {
+  "file": "v2_off.png",
+  "png_sha256": "d8cbfa8c5deb2eaa2f0ecb431597b855122fdc348f1b5d4be291ee34fa8220e8",
+  "rgba_sha256": "e8177d93d32ec44bc9bca146eb3aa5e8e1e76335eca6d4932bb56e963e35ad2c",
+  "size": [
+   960,
+   540
+  ],
+  "verified": true
+ },
+ "v2_ssao": {
+  "file": "v2_ssao.png",
+  "png_sha256": "e1ee1640d422823a2ffc9ead5702c342d2e81aaf865016dc766979c7e25dcdc4",
+  "rgba_sha256": "a63989cf137263f8c15df1fa751eeca3a00a89f3f9aa4cfed962bb7d25af962e",
+  "size": [
+   960,
+   540
+  ],
+  "verified": true
+ },
+ "v3_both_12": {
+  "file": "v3_both_12.png",
+  "png_sha256": "cd3dad7b4d01a5d8f03cd2b0f832da685d60d98431838b038375789ab342b559",
+  "rgba_sha256": "d25c46f2e2b223a101c9cd40890b2c4ff34b6179d0d00b598dba6a0184f15d13",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v3_both_8": {
+  "file": "v3_both_8.png",
+  "png_sha256": "aa270b33dfab29165049139b4ce63a5521bdb451bbdefefb0eaa34ad73b3593c",
+  "rgba_sha256": "11a11aabdff4985fc69a7ccc42c73a39a3ef5513f2e56842dfc70ddcb0aa7220",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v3_off_12": {
+  "file": "v3_off_12.png",
+  "png_sha256": "5dc5467640f7ab24f360009c4cd5a0a88151a7498bbd554debe9ea0008aeb289",
+  "rgba_sha256": "991e5e380877aeb32a74ff202b208025682877ffff41142296ccffeb3d11c01b",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v3_off_8": {
+  "file": "v3_off_8.png",
+  "png_sha256": "1b0a36010c98c3009d082a9d7f7f050f48e9a251c19ef32363c0d3067ecaef63",
+  "rgba_sha256": "3bb78c6e409e4d9c48ec85fbb431f89c4ab1c7abf5d1cc21490f670eea40fa17",
+  "size": [
+   959,
+   539
+  ],
+  "verified": true
+ },
+ "v4_bloom": {
+  "file": "v4_bloom.png",
+  "png_sha256": "412168f9ff2da646cb75d869757673c2f677e0efa8c5dc4346176c32aa502d61",
+  "rgba_sha256": "703416c153cadf594f4e9f2e605a89a5a91092cdc2f4aaa6f9b35065db2f2199",
+  "size": [
+   640,
+   480
+  ],
+  "verified": true
+ },
+ "v4_both": {
+  "file": "v4_both.png",
+  "png_sha256": "8b17e242c10892ec9daf9d9c272b86cd445a20ecdb55379793d2669b90dbc082",
+  "rgba_sha256": "a1d6cf73d78b709a543adc608f027991ccf618d6b5032cf94ab46d969f15bb2b",
+  "size": [
+   640,
+   480
+  ],
+  "verified": true
+ },
+ "v4_off": {
+  "file": "v4_off.png",
+  "png_sha256": "445b40250f28e17479101b95dd5a6c33afbcc3a6553b7329c50e6486ef6b5296",
+  "rgba_sha256": "7a40dee357f63d9f3d672479f86176c789bdd8f39ff5d17f692b444688d7277a",
+  "size": [
+   640,
+   480
+  ],
+  "verified": true
+ },
+ "v4_ssao": {
+  "file": "v4_ssao.png",
+  "png_sha256": "a4452f614a9ea3592c83e726bf8d3721d6e2586ffd17ccd61f73d434e3d87b24",
+  "rgba_sha256": "da08727a8b4a28b45a8a1dc08e5389b2af61f8d53438a124b7b3ea6b9dcf5fcd",
+  "size": [
+   640,
+   480
+  ],
+  "verified": true
+ }
+}

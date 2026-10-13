@@ -1,0 +1,84 @@
+{
+ "expected_centre": [
+  186.55174392517046,
+  83.06033603325757
+ ],
+ "metric": "positive linear RGB change of e_bloom_N over e_off_N on non-emitter interior pixels (analyze.py centroid pixel set); radii about the expected centre; emitter_pixels = interior pixels of e_off_N that are not the backdrop",
+ "scales": {
+  "8": {
+   "centroid": [
+    181.2274193945179,
+    83.21411545256457
+   ],
+   "centroid_offset_px": 5.326544829203154,
+   "emitter_pixels": 676,
+   "energy": 424.6734156050731,
+   "energy_per_emitter_pixel": 0.6282151118418241,
+   "left_right": [
+    0.5307098707100182,
+    0.4692901292899818
+   ],
+   "near_field_24px_centroid": [
+    186.89684476716585,
+    82.87322027688845
+   ],
+   "near_field_offset_px": 0.3925645137140087,
+   "rms_radius_px": 46.10264348060983,
+   "share_beyond_48px": 0.26574973358217746,
+   "up_down": [
+    0.5202184319921951,
+    0.4797815680078049
+   ]
+  },
+  "12": {
+   "centroid": [
+    190.5432683751963,
+    86.46997377765456
+   ],
+   "centroid_offset_px": 5.249561599140518,
+   "emitter_pixels": 675,
+   "energy": 378.3000166483049,
+   "energy_per_emitter_pixel": 0.5604444691085999,
+   "left_right": [
+    0.4748790539065481,
+    0.5251209460934518
+   ],
+   "near_field_24px_centroid": [
+    186.75774113274318,
+    83.45762170727458
+   ],
+   "near_field_offset_px": 0.4475162078706326,
+   "rms_radius_px": 39.18799181390538,
+   "share_beyond_48px": 0.20786365177296706,
+   "up_down": [
+    0.4513930327070883,
+    0.5486069672929117
+   ]
+  },
+  "16": {
+   "centroid": [
+    186.16409250631705,
+    83.20926278470597
+   ],
+   "centroid_offset_px": 0.41527436693833447,
+   "emitter_pixels": 650,
+   "energy": 324.07335049731336,
+   "energy_per_emitter_pixel": 0.4985743853804821,
+   "left_right": [
+    0.49947280250293197,
+    0.500527197497068
+   ],
+   "near_field_24px_centroid": [
+    186.7565258455588,
+    83.04904066656343
+   ],
+   "near_field_offset_px": 0.20509319887966157,
+   "rms_radius_px": 32.920076259313014,
+   "share_beyond_48px": 0.12237475998172037,
+   "up_down": [
+    0.5098773355985348,
+    0.49012266440146524
+   ]
+  }
+ }
+}

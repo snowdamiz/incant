@@ -1,0 +1,1168 @@
+{
+ "appearance": {
+  "judged_here": false,
+  "note": "Numerical invariants only. The appearance PNGs await Claude's separate appearance review; their in-run invariants are the helper's own verdict."
+ },
+ "cases": {
+  "case-bloom_numeric": {
+   "frames": 8,
+   "status": "loaded"
+  },
+  "case-lifecycle_drs": {
+   "frames": 17,
+   "status": "loaded"
+  },
+  "case-ssao_core": {
+   "frames": 20,
+   "status": "loaded"
+  },
+  "case-ssao_geometry": {
+   "frames": 17,
+   "status": "loaded"
+  },
+  "case-ssao_materials": {
+   "frames": 10,
+   "status": "loaded"
+  }
+ },
+ "declared_cases": [
+  "case-ssao_core",
+  "case-ssao_materials",
+  "case-ssao_geometry",
+  "case-lifecycle_drs",
+  "case-bloom_numeric"
+ ],
+ "declared_gates": [
+  "bloom_constant_field_levels",
+  "bloom_coverage",
+  "bloom_threshold",
+  "determinism_g_ao_white_equals_p_ao_white",
+  "determinism_g_off_white_equals_p_off_white",
+  "determinism_retained_drs_disabled_equals_ordinary",
+  "drs_bloom_halo_centroid_on_physical_emitter",
+  "drs_ssao_nearest_expansion_12",
+  "drs_ssao_nearest_expansion_8",
+  "mixed_blend_pane_scales_receiver_change",
+  "ssao_core_edge_reference",
+  "ssao_core_o_reference",
+  "ssao_core_p_ao_far_identity",
+  "ssao_core_p_ao_flat_identity",
+  "ssao_core_p_ao_radius_0_5_identity",
+  "ssao_core_p_ao_reversed_identity",
+  "ssao_core_p_reference",
+  "ssao_core_strength_0_5_reference",
+  "ssao_geometry_g_ao_backface_reference",
+  "ssao_geometry_g_ao_mask_cutout_reference",
+  "ssao_geometry_g_ao_mask_equal_reference",
+  "ssao_geometry_g_ao_mirrored_reference",
+  "ssao_geometry_g_ao_motion_far_reference",
+  "ssao_geometry_g_ao_motion_near_reference",
+  "ssao_geometry_g_ao_skin_t0_reference",
+  "ssao_geometry_g_ao_skin_t1_reference",
+  "ssao_geometry_g_ao_white_reference"
+ ],
+ "evidence": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004",
+ "failed_gates": [],
+ "format": "incant-0070-analysis-v3",
+ "gates": {
+  "bloom_constant_field_levels": {
+   "interior_values": {
+    "f_bloom_l1": [
+     248
+    ],
+    "f_bloom_l4": [
+     248
+    ],
+    "f_bloom_l6": [
+     248
+    ],
+    "f_off": [
+     243
+    ]
+   },
+   "pass": true,
+   "predicted_off": 243,
+   "predicted_on": 248
+  },
+  "bloom_coverage": {
+   "alpha_0_unchanged": true,
+   "energy_alpha_0_0.5_1": [
+    0.0,
+    48.54305320167486,
+    97.65221902526137
+   ],
+   "pass": true,
+   "ratio_half_to_full": 0.4971013837291029
+  },
+  "bloom_threshold": {
+   "max_change_below_at_above": [
+    0,
+    0,
+    49
+   ],
+   "pass": true
+  },
+  "determinism_g_ao_white_equals_p_ao_white": {
+   "differing_pixels": 0,
+   "pass": true,
+   "sizes": [
+    [
+     321,
+     193
+    ],
+    [
+     321,
+     193
+    ]
+   ]
+  },
+  "determinism_g_off_white_equals_p_off_white": {
+   "differing_pixels": 0,
+   "pass": true,
+   "sizes": [
+    [
+     321,
+     193
+    ],
+    [
+     321,
+     193
+    ]
+   ]
+  },
+  "determinism_retained_drs_disabled_equals_ordinary": {
+   "differing_pixels": 0,
+   "pass": true,
+   "sizes": [
+    [
+     321,
+     193
+    ],
+    [
+     321,
+     193
+    ]
+   ]
+  },
+  "drs_bloom_halo_centroid_on_physical_emitter": {
+   "centroids": {
+    "8": [
+     186.77,
+     83.21
+    ],
+    "12": [
+     186.62,
+     83.36
+    ],
+    "16": [
+     186.16,
+     83.21
+    ]
+   },
+   "expected": [
+    186.55174392517046,
+    83.06033603325757
+   ],
+   "pass": true,
+   "tolerance_px": {
+    "8": 3.0,
+    "12": 2.0,
+    "16": 1.5
+   }
+  },
+  "drs_ssao_nearest_expansion_12": {
+   "compared": 43489,
+   "mismatched": 0,
+   "pass": true,
+   "scale16": 12
+  },
+  "drs_ssao_nearest_expansion_8": {
+   "compared": 43056,
+   "mismatched": 0,
+   "pass": true,
+   "scale16": 8
+  },
+  "mixed_blend_pane_scales_receiver_change": {
+   "median_ratio": 0.5057922375002205,
+   "occluded_under_pane": 2639,
+   "outside_pane_identical_to_core": true,
+   "pane_pixels": 4655,
+   "pass": true,
+   "scene_radiance_ratio_intervals_containing_half": 2639
+  },
+  "ssao_core_edge_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 13,
+   "occluded_compared": 11025,
+   "occluded_reference": 11025,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 36,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_core_o_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 7,
+   "occluded_compared": 7075,
+   "occluded_reference": 7075,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 0,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_core_p_ao_far_identity": {
+   "differing_pixels": 0,
+   "pass": true,
+   "sizes": [
+    [
+     321,
+     193
+    ],
+    [
+     321,
+     193
+    ]
+   ]
+  },
+  "ssao_core_p_ao_flat_identity": {
+   "differing_pixels": 0,
+   "pass": true,
+   "sizes": [
+    [
+     321,
+     193
+    ],
+    [
+     321,
+     193
+    ]
+   ]
+  },
+  "ssao_core_p_ao_radius_0_5_identity": {
+   "differing_pixels": 0,
+   "pass": true,
+   "sizes": [
+    [
+     321,
+     193
+    ],
+    [
+     321,
+     193
+    ]
+   ]
+  },
+  "ssao_core_p_ao_reversed_identity": {
+   "differing_pixels": 0,
+   "pass": true,
+   "sizes": [
+    [
+     321,
+     193
+    ],
+    [
+     321,
+     193
+    ]
+   ]
+  },
+  "ssao_core_p_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_core_strength_0_5_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_backface_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_mask_cutout_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 12,
+   "occluded_compared": 10853,
+   "occluded_reference": 10853,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 56,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_mask_equal_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_mirrored_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_motion_far_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 0,
+   "occluded_compared": 0,
+   "occluded_reference": 0,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 0,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_motion_near_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_skin_t0_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 0,
+   "occluded_compared": 0,
+   "occluded_reference": 0,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 0,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_skin_t1_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  },
+  "ssao_geometry_g_ao_white_reference": {
+   "agree": 43489,
+   "bases": {
+    "specular_matching": "per pixel; global uniformity is not required",
+    "specular_observation": {
+     "distinct_rgb_values": 4,
+     "uniform": false,
+     "values": [
+      [
+       44,
+       44,
+       44
+      ],
+      [
+       45,
+       45,
+       45
+      ],
+      [
+       46,
+       46,
+       46
+      ],
+      [
+       47,
+       47,
+       47
+      ]
+     ]
+    },
+    "white_observation": {
+     "distinct_rgb_values": 1,
+     "uniform": true,
+     "values": [
+      [
+       218,
+       218,
+       218
+      ]
+     ]
+    }
+   },
+   "compared": 43489,
+   "coverage_required": 43489,
+   "disagree": 0,
+   "first_disagreements": [],
+   "first_rejections": [],
+   "interior_pixels": 43489,
+   "max_reference_k": 9,
+   "occluded_compared": 8558,
+   "occluded_reference": 8558,
+   "out_of_range": 0,
+   "pass": true,
+   "pixels": 43489,
+   "preconditions": {
+    "explicit_ibl_only_matched_metadata": true,
+    "matched_facing_shading_normals": true,
+    "positive_per_pixel_diffuse": true,
+    "white_furnace_per_pixel": true
+   },
+   "problems": [],
+   "reference_ambiguous": 35,
+   "rejected": {
+    "empty": 0,
+    "inverted": 0,
+    "low_signal": 0,
+    "nonfinite": 0,
+    "radiometry": 0
+   },
+   "uninferable": 0
+  }
+ },
+ "missing_or_invalid_cases": [],
+ "observations": {
+  "edge_single_layer_limitation": {
+   "note": "off-screen geometry cannot occlude in the documented first-layer approximation",
+   "pixels_where_screen_space_sees_fewer_blocked_rays": 336,
+   "pixels_with_true_occlusion": 11039
+  },
+  "retry_outputs_not_analysed": []
+ },
+ "pass": true
+}

@@ -1,0 +1,26 @@
+{
+ "c_bloom": {
+  "rgba_identical": true
+ },
+ "c_off": {
+  "rgba_identical": true
+ },
+ "f_bloom_l1": {
+  "rgba_identical": true
+ },
+ "f_bloom_l4": {
+  "rgba_identical": true
+ },
+ "f_bloom_l6": {
+  "rgba_identical": true
+ },
+ "f_off": {
+  "rgba_identical": true
+ },
+ "t_bloom": {
+  "rgba_identical": true
+ },
+ "t_off": {
+  "rgba_identical": true
+ }
+}

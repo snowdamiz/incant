@@ -1,0 +1,62 @@
+{
+ "o_ao_black": {
+  "rgba_identical": true
+ },
+ "o_ao_flat": {
+  "rgba_identical": true
+ },
+ "o_ao_white": {
+  "rgba_identical": true
+ },
+ "o_off_black": {
+  "rgba_identical": true
+ },
+ "o_off_flat": {
+  "rgba_identical": true
+ },
+ "o_off_white": {
+  "rgba_identical": true
+ },
+ "p_ao_black": {
+  "rgba_identical": true
+ },
+ "p_ao_edge": {
+  "rgba_identical": true
+ },
+ "p_ao_far": {
+  "rgba_identical": true
+ },
+ "p_ao_flat": {
+  "rgba_identical": true
+ },
+ "p_ao_radius_0_5": {
+  "rgba_identical": true
+ },
+ "p_ao_reversed": {
+  "rgba_identical": true
+ },
+ "p_ao_strength_0_5": {
+  "rgba_identical": true
+ },
+ "p_ao_white": {
+  "rgba_identical": true
+ },
+ "p_off_black": {
+  "rgba_identical": true
+ },
+ "p_off_edge": {
+  "rgba_identical": true
+ },
+ "p_off_far": {
+  "rgba_identical": true
+ },
+ "p_off_flat": {
+  "rgba_identical": true
+ },
+ "p_off_reversed": {
+  "rgba_identical": true
+ },
+ "p_off_white": {
+  "rgba_identical": true
+ }
+}

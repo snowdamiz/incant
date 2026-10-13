@@ -1,0 +1,55 @@
+{
+ "d_ao_12": {
+  "rgba_identical": true
+ },
+ "d_ao_16": {
+  "rgba_identical": true
+ },
+ "d_ao_8": {
+  "rgba_identical": true
+ },
+ "d_ao_disabled": {
+  "rgba_identical": true
+ },
+ "d_ao_reference_12": {
+  "rgba_identical": true
+ },
+ "d_ao_reference_8": {
+  "rgba_identical": true
+ },
+ "e_bloom_12": {
+  "differing_pixels": 24595,
+  "rgba_identical": false
+ },
+ "e_bloom_16": {
+  "rgba_identical": true
+ },
+ "e_bloom_8": {
+  "differing_pixels": 37816,
+  "rgba_identical": false
+ },
+ "e_off_12": {
+  "rgba_identical": true
+ },
+ "e_off_16": {
+  "rgba_identical": true
+ },
+ "e_off_8": {
+  "rgba_identical": true
+ },
+ "l_encoded_a": {
+  "rgba_identical": true
+ },
+ "l_encoded_a2": {
+  "rgba_identical": true
+ },
+ "l_encoded_b": {
+  "rgba_identical": true
+ },
+ "l_ref_a": {
+  "rgba_identical": true
+ },
+ "l_ref_b": {
+  "rgba_identical": true
+ }
+}

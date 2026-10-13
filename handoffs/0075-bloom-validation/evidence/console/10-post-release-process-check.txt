@@ -1,0 +1,10 @@
+checked_at: 2026-10-13T10:46:43Z
+== recorded device-child PIDs (spawned + members) and whether any is alive
+recorded pids: [59784, 59865, 59979, 60039, 60064, 60168, 60215, 60265]
+alive now: none
+== processes executing a frozen binary under /Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004/bin
+(end)
+== holders of the shared native GPU lock
+no process holds native-gpu.lock
+== holders of the packet lock
+no process holds runner.lock

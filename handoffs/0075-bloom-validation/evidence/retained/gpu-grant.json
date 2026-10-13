@@ -1,0 +1,22 @@
+{
+  "packet": "0070-ambient-occlusion",
+  "source_commit": "f91266b94bb3c7e8dcf8ad30e4becec9cd957e2a",
+  "plan_sha256": "fa6067e518204e8cd5b9fdae7223ec7e1eb4981d3dce2e5d38c9a5078729a028",
+  "helper_digest": "5ec4955232b6e7b41856fa300a3b2776a5ab8b2dc487178d61853196c429cd48",
+  "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-004",
+  "format": "incant-0070-gpu-grant-v1",
+  "kind": "gpu",
+  "build_record_sha256": "794464ff8cf8bfaa3b9fdede86377e6f158d67be288f98cbf19fb2f6a3648424",
+  "expected_backend": "Metal",
+  "at": "2026-10-13T10:42:53.541202+00:00",
+  "holder": "Claude Opus 5.5 explicitly Max, handoff0075; root exclusive schedule",
+  "predecessor_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0074-metalfx-late-001/gpu-released.json",
+    "sha256": "168cdac73d04b1d4522feacad60ce11715046728e35f83ca01642d1bfd449c5c"
+  },
+  "root_build_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/0070-bloom004-build-root-20261013.json",
+    "sha256": "fc5207779e4915f115734a07b4d10d4bb9df55d749bb05d6686a9f31a9af36ff"
+  },
+  "authorization": "Eight serial children: list lib, suite lib, five numeric cases, appearance.534 submissions=425 existing+109 new;16PNGs. No other suites/build/retry. Original cases and thresholds unchanged."
+}

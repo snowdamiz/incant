@@ -1,0 +1,29 @@
+{
+ "children": 8,
+ "existing_frames_reserved": 425,
+ "format": "incant-0070-release-v2",
+ "frozen_processes": [],
+ "grant_sha256": "5716de8327acad53940e0db8b1e886ee54c80bd10b06f3e4766b60645dacb877",
+ "latched_failures": {},
+ "ledger_sha256": "7e14f939b1abf6918490975996b225841d74c353a46177ff7c2f30aaac4c0d2f",
+ "new_frames_reserved": 109,
+ "note": "GPU lease released under the shared GPU lock; the target directory is left for root.",
+ "owned_processes_alive": [],
+ "packet": "0070-ambient-occlusion",
+ "pngs_reserved": 16,
+ "released_at": "2026-10-13T10:46:32.211955+00:00",
+ "retries": 0,
+ "succeeded": [
+  "appearance",
+  "build-engine-tests",
+  "build-helper",
+  "build-helper-clippy",
+  "case-bloom_numeric",
+  "case-lifecycle_drs",
+  "case-ssao_core",
+  "case-ssao_geometry",
+  "case-ssao_materials",
+  "list-lib",
+  "suite-lib"
+ ]
+}

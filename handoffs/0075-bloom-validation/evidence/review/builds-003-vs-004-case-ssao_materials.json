@@ -1,0 +1,32 @@
+{
+ "m_ao_blend_occluder": {
+  "rgba_identical": true
+ },
+ "m_ao_blend_only": {
+  "rgba_identical": true
+ },
+ "m_ao_direct_only": {
+  "rgba_identical": true
+ },
+ "m_ao_emissive_only": {
+  "rgba_identical": true
+ },
+ "m_ao_mixed": {
+  "rgba_identical": true
+ },
+ "m_off_blend_occluder": {
+  "rgba_identical": true
+ },
+ "m_off_blend_only": {
+  "rgba_identical": true
+ },
+ "m_off_direct_only": {
+  "rgba_identical": true
+ },
+ "m_off_emissive_only": {
+  "rgba_identical": true
+ },
+ "m_off_mixed": {
+  "rgba_identical": true
+ }
+}
