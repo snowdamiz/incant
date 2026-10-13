@@ -120,6 +120,24 @@ macro_rules! continuation {
                         .context()
                         .geometries;
                     assert!(geometries.iter().any(|g| g.compound().is_some()));
+                    // A refused child walk retains the earlier metadata charge.
+                    // This is observable cumulative budgeting, including failure.
+                    let colliders = f.pipeline().context().ccd.context().colliders;
+                    let manifolds = f.manifolds().record();
+                    let rows = colliders.context().bodies.record().bodies.len()
+                        + colliders.record().colliders.len()
+                        + manifolds.manifolds.len()
+                        + manifolds.solver.len();
+                    let mut metadata_only = WorkBudget::new(1 + rows as u64 * 8);
+                    assert!(matches!(
+                        $rapier::pipeline::checked_restore::admit_numeric_frame(
+                            f,
+                            saved.identity(),
+                            &mut metadata_only,
+                        ),
+                        Err($rapier::pipeline::checked_restore::AdmissionError::Work)
+                    ));
+                    assert_eq!(metadata_only.remaining(), 0);
                     Ok(())
                 },
             )

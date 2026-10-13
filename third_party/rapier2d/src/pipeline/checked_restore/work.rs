@@ -63,6 +63,9 @@ pub(super) fn admit(frame: WorldBoundary<'_>, budget: &mut WorkBudget) -> Result
             manifolds.solver.len() as u64,
         )?,
     )?;
+    let base_validation = add(1, mul(rows, 8)?)?;
+    budget.charge(base_validation)?;
+    // The metadata walk below is covered by the collider-row charge above.
     // Compound native-plan checks and two-pass mass arithmetic revisit each
     // flat child. Charge their full declared count before any child walk; this
     // remains logical validation work, not a collision-search/CPU-time bound.
@@ -73,8 +76,9 @@ pub(super) fn admit(frame: WorldBoundary<'_>, budget: &mut WorkBudget) -> Result
             add(n, g.record().parts.len() as u64)
         }
     })?;
-    let validation = add(add(1, mul(rows, 8)?)?, mul(compound_parts, 16)?)?;
-    budget.charge(validation)?;
+    let child_validation = mul(compound_parts, 16)?;
+    budget.charge(child_validation)?;
+    let validation = add(base_validation, child_validation)?;
     let mut extra = [0u64; 2];
     for b in bodies {
         for (i, value) in b.additional_iterations.into_iter().enumerate() {
