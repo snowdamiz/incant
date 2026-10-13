@@ -42,7 +42,7 @@ fn vector(v: &[u32], active: usize) -> Result<()> {
     }
     Ok(())
 }
-fn local_mass(m: LocalMass, d: Dimension) -> Result<()> {
+pub(crate) fn local_mass(m: LocalMass, d: Dimension) -> Result<()> {
     let n = d as usize;
     let angular = if n == 2 { 1 } else { 3 };
     vector(&m.center, n)?;

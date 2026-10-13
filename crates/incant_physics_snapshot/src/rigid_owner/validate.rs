@@ -31,14 +31,12 @@ pub(super) fn context(id: Identity, c: RigidOwnerContext<'_>) -> Result<()> {
     {
         return Err(Error::Identity);
     }
-    if c.force_thresholds.len() != ic.bodies.attachments().record().colliders.len() {
-        return Err(Error::Length);
-    }
-    if c.force_thresholds
-        .iter()
-        .any(|v| !f32::from_bits(*v).is_finite() || f32::from_bits(*v) < 0.)
+    let cc = c.colliders.context();
+    if id != c.colliders.record().identity
+        || !std::ptr::eq(ic.bodies, cc.bodies)
+        || !std::ptr::eq(ic.manifolds.geometries(), cc.geometries)
     {
-        return Err(Error::Solver);
+        return Err(Error::Identity);
     }
     Ok(())
 }
@@ -226,7 +224,9 @@ pub fn validate_rigid_owner<'a>(
         if r.force_valid {
             let enabled = pair.colliders.iter().any(|h| {
                 f32::from_bits(
-                    c.force_thresholds[a.collider_row(*h).expect("validated collider") as usize],
+                    c.colliders
+                        .effective_force_threshold(*h)
+                        .expect("joined collider witness"),
                 ) < f32::MAX
             });
             if (r.force_positions[edge] != u32::MAX) != (selectable && enabled) {

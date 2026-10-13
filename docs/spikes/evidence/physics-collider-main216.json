@@ -1,0 +1,140 @@
+{
+  "schema": 1,
+  "scope": "Exact accepted inert collider source on main216; no live physics-save admission",
+  "producer": "9c7f5a446962eac365a746682e6c6e54bc0fb372",
+  "main": "428ab762235d365f7545395ff896eb1d9d96e450",
+  "integration_source": "43d585eab32ffdc1134c883560fbd7a086ce5c43",
+  "producer_manifest": {
+    "path": "docs/spikes/evidence/physics-collider-state.json",
+    "sha256": "2fed433a3cf7986c49706ca196cc9c31e2ba78d283c59583c0046a8f374ecefd"
+  },
+  "producer_reviews": [
+    {
+      "path": "docs/spikes/evidence/physics-collider-source-review.json",
+      "sha256": "4773d3bf2fdea3bd5e45f8c9029e0aa1dad912b06618c5b2de1a28381d12352b"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-final-review.json",
+      "sha256": "9da78ce6b3e4306feb318a2bd496bb72c69e69626ac614751a599a5bc6386dd1"
+    }
+  ],
+  "source_files": 1901,
+  "unrelated_implementation_files": 17,
+  "checks": 8,
+  "replayed_cases": 34,
+  "retained_full_producer_cases": 135,
+  "records": [
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/00-checks.json.gz",
+      "sha256": "b51a4ebbd5f0420830ae08c1aff250f860810d613ba8b193bd8485c1375fe823",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/checks.json",
+      "raw_sha256": "1bcae2236e34dbafff171e3fba8af35f2f4d65535ff5019c3b8892e884f39e57",
+      "raw_bytes": 4465
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/01-conventions.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/conventions.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/02-current-selected-graph.log.gz",
+      "sha256": "52992332b3969647a73db16c1e8bcd9c38b21eba68c4cfe297427b20454d1205",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/current-selected-graph.log",
+      "raw_sha256": "f1d2ec6952f13bc6df6461192c4013293b97eed8d410fbefe74fcc8a84dbe276",
+      "raw_bytes": 7680
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/03-diff.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/diff.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/04-fmt.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/fmt.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/05-normalized-selected-graph.txt.gz",
+      "sha256": "89f677a6af301f7526d27ed0bda5da734970915b729e42759ee4b36b224676fd",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/normalized-selected-graph.txt",
+      "raw_sha256": "5a6be62692aa583ee422aa253b75cc1098261e19532a2dcf760da03a5217e8da",
+      "raw_bytes": 7309
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/06-package-initial.py.gz",
+      "sha256": "13f37bd5a5243d98e0bc65884e776c91204f8333e8e42b3c64c57575b0248e64",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/package-initial.py",
+      "raw_sha256": "2471ec9154d424cd0b181d8647512216a61a899815674fe0d9b89e6a0e8ca2c0",
+      "raw_bytes": 3373
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/08-packaging-initial-failures.txt.gz",
+      "sha256": "f5aa27c0637ecf2c4634ac121ec1c675c40abe908caaae21707a790b725c640a",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/packaging-initial-failures.txt",
+      "raw_sha256": "74aab743e2685aeb5e306853d2f865f9df50a7851f7d07f2bf35344555c1a5e8",
+      "raw_bytes": 446
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/09-producer-selected-graph.log.gz",
+      "sha256": "8f4f3c99fa37297db7cfe4433cd961962dea6004ec0688da597f8734c89fadc4",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/producer-selected-graph.log",
+      "raw_sha256": "9978a1538901c67f33fe55efbf2fbb2307bf91ac4cc7c0ce81667d6374564d7a",
+      "raw_bytes": 7694
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/10-replay-collider_state-f56bb5720050bdab.log.gz",
+      "sha256": "f52278535825bb9c982dff48902447aeced087a801120579d47358001839e2bf",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/replay-collider_state-f56bb5720050bdab.log",
+      "raw_sha256": "a8e4dfb461ad9fd2754905c66f193cddaf7a74d38ee23a79df32076fefcf3490",
+      "raw_bytes": 533
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/11-replay-trusted_manifolds-81c01168a9839318.log.gz",
+      "sha256": "c01377bb4af21c80e993bad2269b0caae88ca1efbff92cc849cf6de613dc52d9",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/replay-trusted_manifolds-81c01168a9839318.log",
+      "raw_sha256": "1ea9895d284b17ddc76aa54bd97dd3d409d9c6fe2b7298f9082b530cba10c8ff",
+      "raw_bytes": 3971
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/12-run.py.gz",
+      "sha256": "40290f11e655e21a22a85f9609afdd9c72055dbd384702e6d084a42b47ac5796",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/run.py",
+      "raw_sha256": "f93d2af9506a02c826cd9204548b56700bceed4ec3abc3cd5f2f9b3bb0144740",
+      "raw_bytes": 2256
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/13-runtime-graph.log.gz",
+      "sha256": "de6182d76bee95574657111a5ef8202969cb97ab13af0c9e3efb8156c02a15d0",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/runtime-graph.log",
+      "raw_sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+      "raw_bytes": 62
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/14-source-identity.json.gz",
+      "sha256": "a1acc2e5da7b7bd29406fc6afa4774b3bbc3a40de2468f9b0615ab56bfd37065",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/source-identity.json",
+      "raw_sha256": "eaece3ecdb8b270963b2c4d99ac8af2734d10c3d4db85c9228c1be0bbab83a67",
+      "raw_bytes": 324194
+    },
+    {
+      "path": "docs/spikes/evidence/physics-collider-main216/15-unrelated-main-delta.json.gz",
+      "sha256": "09ed75ce5b4c1d1d2c0efcf1a0eb275ea65a2a5625749faef23e61cede23667b",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-collider-main216/unrelated-main-delta.json",
+      "raw_sha256": "1f631c1f154685b5028d0e3f8809ee9479584df668a302c616d050ecd0fb4808",
+      "raw_bytes": 3950
+    }
+  ],
+  "limits": [
+    "No new compile: exact producer binaries were rerun after source and selected dependency equality checks.",
+    "Strict Clippy and wasm32 are reused exact-source producer evidence.",
+    "Trusted own-world serde continuation does not admit hostile decoded records to a live solver.",
+    "No shipping, GPU, device, performance, or phase gate claim."
+  ],
+  "review": "Independent current-main review pending"
+}

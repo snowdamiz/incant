@@ -22,9 +22,10 @@ When the graph is current it also checks qualified selection, per-body active
 indices, first-manifold coloring and overflow. Stale caches retain their exact
 bytes and explicitly require rebuilding; they are not treated as current solver
 indices. Generic multibody buckets remain refused. Force-event membership is
-checked against collider-row ordered effective thresholds. Those scalar thresholds
-and the empty-domain/epoch witnesses must eventually come from a complete checked
-collider/joint owner: they are not authentication supplied by this partial boundary.
+checked against effective thresholds derived from the exact checked
+[collider owner](physics-collider-state.md). Caller scalar threshold arrays are no
+longer admitted. The empty-domain/epoch and journal/phase witnesses still require
+complete owner composition; these partial records do not authenticate a world.
 
 Native collider-node removal leaves conservative color reservations even after
 its edges disappear. Actual 2D and 3D tests exposed this; the validator preserves
@@ -82,8 +83,9 @@ Atomic adapter refusal and hostile inert frame/ownership controls are also cover
 
 ## Remaining admission work
 
-No engine world/session codec or live restore constructor changes. Full collider
-properties and broad/narrow-phase indexing/manager composition, CCD/integration
+No engine world/session codec or live restore constructor changes. The fixed rigid
+collider configuration now has a joined checked record; derived collider mass/pose
+arithmetic and broad/narrow-phase indexing/manager composition, CCD/integration
 configuration, complete journal/phase provenance, supported shape/workspace closure,
 constructor ordering and resource budgets remain prerequisites. Joint/soft-body
 owners remain refused. Near-wrap global-split cooldown arithmetic is a separate

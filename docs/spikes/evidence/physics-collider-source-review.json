@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-13T10:30:38.772332+00:00",
+  "source_freeze_sha256": "b08646fcff999c7a2582f086dc60254d59d43c94bada365b6486c288d458345f",
+  "verified_files": 48,
+  "verdict": "accepted for focused inert collider scope; broader qualification required",
+  "review": [
+    "ICCOLL01 bounded exact52+168*n codec checks context/length before allocation; reserved/enums/mass inactive words exact",
+    "Finite nonnegative scalars and known masks; actual native enabled history preserved rather than invented parent equivalence",
+    "Rigid owner force cache derives event bit and threshold from exact shared body and geometry witnesses",
+    "Actual native getters/setters and group intersection controls, trusted continuation coverage; untrusted decode never constructs live Rapier",
+    "No vendor changes or live restore/save admission; derived arithmetic/managers/phases and aggregate owner closure remain open"
+  ],
+  "findings": []
+}
