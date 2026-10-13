@@ -191,7 +191,10 @@ pub(super) fn decode(
     pairs: [Option<u32>; GPU_PASS_COUNT],
     count: u32,
 ) -> Result<GpuFrameTiming, GpuTimingError> {
-    if !(2..=QUERIES).contains(&count) || bytes.len() != count as usize * 8 {
+    if !(2..=QUERIES).contains(&count)
+        || !count.is_multiple_of(2)
+        || bytes.len() != count as usize * 8
+    {
         return Err(GpuTimingError::Payload);
     }
     let mut ticks = [0u64; QUERIES as usize];
@@ -204,10 +207,25 @@ pub(super) fn decode(
     if ticks[..count as usize].iter().all(|&tick| tick == 0) {
         return Err(GpuTimingError::Unwritten);
     }
+    // Independent compute/render passes can overlap or begin out of encoding
+    // order. Their envelope covers all measured work without counting overlap
+    // twice or assuming the first/last encoded endpoints bound execution.
+    let mut first = u64::MAX;
+    let mut last = 0;
+    for pair in ticks[..count as usize].as_chunks::<2>().0 {
+        span(pair[0], pair[1], period)?;
+        first = first.min(pair[0]);
+        last = last.max(pair[1]);
+    }
+    // Min/max cannot distinguish a wrap between individually ordered pairs
+    // from an implausibly wide interval. Refuse ambiguous 64-bit envelopes.
+    if last - first > u64::MAX / 2 {
+        return Err(GpuTimingError::Reversed);
+    }
     let mut passes = [None; GPU_PASS_COUNT];
     for (pass, pair) in passes.iter_mut().zip(pairs) {
         if let Some(index) = pair {
-            if index + 1 >= count {
+            if !index.is_multiple_of(2) || index >= count {
                 return Err(GpuTimingError::Payload);
             }
             *pass = Some(span(
@@ -220,7 +238,7 @@ pub(super) fn decode(
     Ok(GpuFrameTiming {
         sequence,
         timestamp_period_ns: period,
-        frame: span(ticks[0], ticks[count as usize - 1], period)?,
+        frame: span(first, last, period)?,
         passes,
     })
 }

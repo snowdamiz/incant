@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## GPU timestamps — device review passed; concurrent interval corrected
+
+Claude's bounded default-feature Metal review passes92 actual GPU/regression cases
+and reports unchanged pixels in all timing-off/on controls. Three lit samples
+exposed concurrent passes outside the former first/last encoding-order interval.
+The CPU decoder now encloses all measured pairs, with explicit malformed/wrap
+refusal; ten timing CPU tests and renderer Clippy pass, with independent source
+review accepted. [Scope and retained evidence](docs/spikes/gpu-frame-envelope.md).
+Current-main final integration is pending. Cooked/native-window/phone and complete
+profiler gates remain open.
+
 ## Current overview — main200, 2026-10-13
 
 Development main199 includes the restart quota-test repair (PR188) and the reviewed,

@@ -133,6 +133,57 @@ fn decoded_pass_labels_follow_their_query_pairs_not_execution_order() {
     );
 }
 #[test]
+fn concurrent_passes_are_enclosed_without_summing_overlap() {
+    // A later-encoded clear starts first, while compute finishes after display.
+    let raw: Vec<_> = [100u64, 400, 80, 140, 210, 350]
+        .into_iter()
+        .flat_map(u64::to_ne_bytes)
+        .collect();
+    let mut pairs = [None; GPU_PASS_COUNT];
+    pairs[GpuPass::AssignLights.index()] = Some(0);
+    pairs[GpuPass::InitializeScene.index()] = Some(2);
+    pairs[GpuPass::Display.index()] = Some(4);
+    let result = recorder::decode(&raw, 9, 0.5, pairs, 6).unwrap();
+    assert_eq!(result.frame, span(80, 400, 0.5).unwrap());
+    assert_eq!(result.frame.nanoseconds, 160.);
+    assert_eq!(
+        result.passes[GpuPass::AssignLights.index()],
+        Some(span(100, 400, 0.5).unwrap())
+    );
+    for pass in result.passes.into_iter().flatten() {
+        assert!(pass.start_ticks >= result.frame.start_ticks);
+        assert!(pass.end_ticks <= result.frame.end_ticks);
+    }
+    for index in [1, 6, u32::MAX] {
+        pairs[GpuPass::AssignLights.index()] = Some(index);
+        assert_eq!(
+            recorder::decode(&raw, 9, 0.5, pairs, 6),
+            Err(GpuTimingError::Payload)
+        );
+    }
+    // A reversed pair must not be hidden by otherwise valid envelope extrema.
+    let reversed: Vec<_> = [100u64, 400, 140, 80]
+        .into_iter()
+        .flat_map(u64::to_ne_bytes)
+        .collect();
+    assert_eq!(
+        recorder::decode(&reversed, 9, 0.5, [None; GPU_PASS_COUNT], 4),
+        Err(GpuTimingError::Reversed)
+    );
+    assert_eq!(
+        recorder::decode(&raw[..24], 9, 0.5, [None; GPU_PASS_COUNT], 3),
+        Err(GpuTimingError::Payload)
+    );
+    let wrapped: Vec<_> = [u64::MAX - 20, u64::MAX - 10, 5, 20]
+        .into_iter()
+        .flat_map(u64::to_ne_bytes)
+        .collect();
+    assert_eq!(
+        recorder::decode(&wrapped, 9, 1., [None; GPU_PASS_COUNT], 4),
+        Err(GpuTimingError::Reversed)
+    );
+}
+#[test]
 fn pool_bookkeeping_and_timestamp_conversion_allocate_nothing_after_setup() {
     let pool = pool::Pool::default();
     // Initialize the platform mutex's thread parking state outside measurement.

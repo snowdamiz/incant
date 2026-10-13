@@ -44,6 +44,8 @@ pub struct GpuFrameTiming {
     /// Encoding sequence; completion can arrive out of order. Gaps are expected.
     pub sequence: u64,
     pub timestamp_period_ns: f32,
+    /// Earliest start through latest end of all instrumented pass groups.
+    /// Includes overlap once; excludes uninstrumented work and presentation.
     pub frame: GpuSpan,
     /// Indexed in `GpuPass::ALL` order. Absent passes are None, never fake zeros.
     pub passes: [Option<GpuSpan>; GPU_PASS_COUNT],
