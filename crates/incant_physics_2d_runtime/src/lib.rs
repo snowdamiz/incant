@@ -10,6 +10,14 @@ compile_error!("deterministic and fast-simd8 physics variants are mutually exclu
 pub const DETERMINISTIC: bool = cfg!(feature = "deterministic");
 pub const SIMD_LANES: u8 = if cfg!(feature = "fast-simd8") { 8 } else { 4 };
 
+#[cfg(feature = "native-checkpoints")]
+mod checkpoint;
+#[cfg(any(test, feature = "native-checkpoints"))]
+mod checkpoint_validation;
+#[cfg(feature = "native-checkpoints")]
+pub use checkpoint::{CheckpointError, PhysicsCheckpoint};
+mod native_owner;
+use native_owner::NativeOwner;
 mod config;
 mod query;
 pub use config::{PreparedBody, validate_collider, validate_state};
@@ -72,7 +80,7 @@ struct Entry {
 }
 #[derive(Default)]
 pub struct PhysicsWorld2D {
-    world: PhysicsWorld,
+    world: NativeOwner,
     entries: BTreeMap<StableId, Entry>,
     ids: HashMap<ColliderHandle, StableId>,
     overlaps: BTreeSet<(StableId, StableId)>,
@@ -181,20 +189,20 @@ impl PhysicsWorld2D {
         if !dt.is_finite() || !(1. / 240. ..=1.).contains(&dt) {
             return Err(PhysicsError::InvalidStep);
         }
-        self.world.integration_parameters.dt = dt as f32;
+        self.world.edit().integration_parameters.dt = dt as f32;
         // A caught native unwind cannot resume a partially advanced solver.
         self.failed = true;
-        self.world.step();
+        self.world.step()?;
         self.query_dirty = false;
-        if !self.world.quarantine().bodies().is_empty()
-            || !self.world.quarantine().colliders().is_empty()
+        if !self.world.read().quarantine().bodies().is_empty()
+            || !self.world.read().quarantine().colliders().is_empty()
         {
             self.failed = true;
             return Err(PhysicsError::Failed);
         }
         for entry in self.entries.values_mut() {
             if let Some(body) = entry.body {
-                let body = &self.world.bodies[body];
+                let body = &self.world.read().bodies[body];
                 let state = BodyState {
                     translation: body.translation().to_array().map(f64::from),
                     rotation: f64::from(body.rotation().angle()),
@@ -210,7 +218,7 @@ impl PhysicsWorld2D {
             }
         }
         let mut overlaps = BTreeSet::new();
-        for (a, _, b, _, intersecting) in self.world.intersection_pairs() {
+        for (a, _, b, _, intersecting) in self.world.read().intersection_pairs() {
             if !intersecting {
                 continue;
             }
@@ -262,14 +270,17 @@ impl PhysicsWorld2D {
         let previous = &entry.config.state;
         if state.translation != previous.translation || state.rotation != previous.rotation {
             if let Some(body) = entry.body {
-                self.world.bodies[body].set_position(pose(state), true);
+                self.world.edit().bodies[body].set_position(pose(state), true);
             } else {
-                self.world.colliders[entry.collider].set_position(pose(state));
+                self.world.edit().colliders[entry.collider].set_position(pose(state));
             }
             self.query_dirty = true;
         }
-        if let Some(body) = entry.body {
-            let body = &mut self.world.bodies[body];
+        if let Some(body) = entry.body
+            && (state.velocity != previous.velocity
+                || state.angular_velocity != previous.angular_velocity)
+        {
+            let body = &mut self.world.edit().bodies[body];
             if state.velocity != previous.velocity {
                 body.set_linvel(vector(state.velocity), true);
             }
@@ -280,15 +291,15 @@ impl PhysicsWorld2D {
         entry.config.state = state.clone();
         entry.config.state.sleeping = entry
             .body
-            .is_some_and(|body| self.world.bodies[body].is_sleeping());
+            .is_some_and(|body| self.world.read().bodies[body].is_sleeping());
     }
     fn remove(&mut self, id: StableId) {
         if let Some(entry) = self.entries.remove(&id) {
             self.ids.remove(&entry.collider);
             if let Some(body) = entry.body {
-                self.world.remove_body(body);
+                self.world.edit().remove_body(body);
             } else {
-                self.world.remove_collider(entry.collider);
+                self.world.edit().remove_collider(entry.collider);
             }
             self.query_dirty = true;
         }
@@ -315,16 +326,18 @@ impl PhysicsWorld2D {
             .angular_damping(props.angular_damping as f32)
             .can_sleep(props.can_sleep)
             .ccd_enabled(props.ccd);
-            let (b, c) = self.world.insert(body, shape);
+            let (b, c) = self.world.edit().insert(body, shape);
             (Some(b), c)
         } else {
             (
                 None,
                 self.world
+                    .edit()
                     .insert_collider(shape.position(pose(&config.state)), None),
             )
         };
-        config.state.sleeping = body.is_some_and(|body| self.world.bodies[body].is_sleeping());
+        config.state.sleeping =
+            body.is_some_and(|body| self.world.read().bodies[body].is_sleeping());
         self.ids.insert(collider, id);
         self.entries.insert(
             id,

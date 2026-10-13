@@ -173,8 +173,8 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
             ));
         }
         let handle = entry.body.expect("validated kinematic body");
-        let body = &scene.world.bodies[handle];
-        let collider = &scene.world.colliders[entry.collider];
+        let body = &scene.world.read().bodies[handle];
+        let collider = &scene.world.read().colliders[entry.collider];
         let retained = if prepared {
             Some(
                 scene
@@ -219,32 +219,32 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         let mut fresh_colliders;
         let queries = if let Some(cache) = retained {
             cache.bvh.as_query_pipeline(
-                scene.world.narrow_phase.query_dispatcher(),
-                &scene.world.bodies,
+                scene.world.read().narrow_phase.query_dispatcher(),
+                &scene.world.read().bodies,
                 &cache.colliders,
                 filter,
             )
         } else if scene.query_dirty {
-            fresh_colliders = scene.world.colliders.clone();
+            fresh_colliders = scene.world.read().colliders.clone();
             for e in scene.entries.values() {
                 let c = &mut fresh_colliders[e.collider];
                 if let Some(b) = e.body {
-                    c.set_position(*scene.world.bodies[b].position());
+                    c.set_position(*scene.world.read().bodies[b].position());
                 }
                 fresh_bvh.set_aabb(
-                    &scene.world.integration_parameters,
+                    &scene.world.read().integration_parameters,
                     e.collider,
                     c.compute_aabb(),
                 );
             }
             fresh_bvh.as_query_pipeline(
-                scene.world.narrow_phase.query_dispatcher(),
-                &scene.world.bodies,
+                scene.world.read().narrow_phase.query_dispatcher(),
+                &scene.world.read().bodies,
                 &fresh_colliders,
                 filter,
             )
         } else {
-            scene.world.query_pipeline_with_filter(filter)
+            scene.world.read().query_pipeline_with_filter(filter)
         };
         let dispatcher = crate::character_queries::CharacterQueries(queries.dispatcher);
         let queries = QueryPipeline {

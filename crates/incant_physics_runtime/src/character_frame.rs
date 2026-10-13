@@ -26,7 +26,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
         }
         if scene.character.is_none() {
             let mut cache = CharacterFrame {
-                colliders: scene.world.colliders.clone(),
+                colliders: scene.world.read().colliders.clone(),
                 bvh: BroadPhaseBvh::new(),
                 ready: false,
             };
@@ -34,7 +34,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
                 let c = &mut cache.colliders[entry.collider];
                 c.set_position(pose(&entry.config.state));
                 cache.bvh.set_aabb(
-                    &scene.world.integration_parameters,
+                    &scene.world.read().integration_parameters,
                     entry.collider,
                     c.compute_aabb(),
                 );
@@ -82,7 +82,7 @@ impl<I: Ord + Clone> PhysicsRuntime<I> {
             let collider = &mut cache.colliders[entry.collider];
             collider.set_position(pose(&state));
             cache.bvh.set_aabb(
-                &scene.world.integration_parameters,
+                &scene.world.read().integration_parameters,
                 entry.collider,
                 collider.compute_aabb(),
             );
