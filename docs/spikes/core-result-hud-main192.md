@@ -39,3 +39,6 @@ and backend assertion in the compiled-input scope. The [qualification](evidence/
 binds both exact Git blobs and replays the original collector with that single
 explicit exception; the original proof receipts are unchanged. No additional
 runtime test or build is claimed for this disjoint test-only ancestry merge.
+
+[Independent main193 qualification review](evidence/core-result-hud-main192/main193-review.json)
+accepts this disjoint join after replaying its assertion-only collector.
