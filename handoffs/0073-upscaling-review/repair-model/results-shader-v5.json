@@ -1,0 +1,264 @@
+{
+ "model": "0073 resolve_owner.wgsl transcription check",
+ "python": "3.14.8",
+ "shader_sha256": "45a39859021f3ad7968d2a134b9c0aca7e222c3fa0c0100c1f22715c0bc6a8c0",
+ "reference_model_sha256": "96464a75ff1ec84b32e400c953e5ab5b5b004f98a4d592a800a3ad5fc93c534f",
+ "checks": [
+  {
+   "check": "reference scenarios replayed",
+   "ok": true
+  },
+  {
+   "check": "seeded fuzz against reference",
+   "ok": true
+  },
+  {
+   "check": "shader-only conservative paths",
+   "ok": true
+  },
+  {
+   "check": "changed-table layout",
+   "ok": true
+  }
+ ],
+ "details": {
+  "reference scenarios replayed": {
+   "reference_controls_ok": {
+    "clamp_chain": true,
+    "every_record": true,
+    "canonical_and_malformed": true
+   },
+   "pixels": 15,
+   "results": [
+    {
+     "reference_path": "reproject",
+     "shader_path": "reproject",
+     "match": true,
+     "record": [
+      2147483653,
+      7
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "drop",
+     "shader_path": "current_only",
+     "match": true,
+     "record": [
+      2147483653,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "reproject",
+     "shader_path": "reproject",
+     "match": true,
+     "record": [
+      2147483653,
+      9
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "outside",
+     "shader_path": "outside",
+     "match": true,
+     "record": [
+      0,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "all_clear",
+     "shader_path": "all_clear",
+     "match": true,
+     "record": [
+      0,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "not_one_surface",
+     "shader_path": "not_one_surface",
+     "match": true,
+     "record": [
+      0,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "history_disabled",
+     "shader_path": "history_disabled",
+     "match": true,
+     "record": [
+      2147483653,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "invalid_motion",
+     "shader_path": "invalid_motion",
+     "match": true,
+     "record": [
+      2147483653,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "old_outside",
+     "shader_path": "old_outside",
+     "match": true,
+     "record": [
+      2147483653,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "current_only",
+     "shader_path": "current_only",
+     "match": true,
+     "record": [
+      2147483653,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "history_disabled",
+     "shader_path": "history_disabled",
+     "match": true,
+     "record": [
+      0,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "history_disabled",
+     "shader_path": "history_disabled",
+     "match": true,
+     "record": [
+      0,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "history_disabled",
+     "shader_path": "history_disabled",
+     "match": true,
+     "record": [
+      0,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "current_only",
+     "shader_path": "current_only",
+     "match": true,
+     "record": [
+      2147483653,
+      0
+     ],
+     "canonical": true
+    },
+    {
+     "reference_path": "drop",
+     "shader_path": "current_only",
+     "match": true,
+     "record": [
+      2147483653,
+      0
+     ],
+     "canonical": true
+    }
+   ]
+  },
+  "seeded fuzz against reference": {
+   "pixels": 20000,
+   "seed": 73,
+   "paths": {
+    "all_clear": 45,
+    "current_only": 12263,
+    "history_disabled": 470,
+    "invalid_motion": 424,
+    "not_one_surface": 4223,
+    "old_outside": 434,
+    "outside": 217,
+    "persist": 712,
+    "reproject": 1212
+   },
+   "mismatches": [],
+   "noncanonical_records": 0
+  },
+  "shader-only conservative paths": {
+   "unchanged static pixel persists": {
+    "color": 0.8350000000000001,
+    "depth": 10.0,
+    "record": [
+     2147483653,
+     0
+    ],
+    "path": "persist"
+   },
+   "same pixel without the bit persists unclamped": {
+    "color": 0.8350000000000001,
+    "depth": 10.0,
+    "record": [
+     2147483653,
+     0
+    ],
+    "path": "persist"
+   },
+   "texture changed bit alone blocks persistence": {
+    "color": 0.25,
+    "depth": 10.0,
+    "record": [
+     2147483653,
+     0
+    ],
+    "path": "reproject"
+   },
+   "header highest above MAX_OWNER still bounds IDs": {
+    "color": 0.25,
+    "depth": 10.0,
+    "record": [
+     0,
+     0
+    ],
+    "path": "history_disabled"
+   },
+   "persistence without anchor match (complete proof)": {
+    "color": 0.8350000000000001,
+    "depth": 10.0,
+    "record": [
+     2147483653,
+     9
+    ],
+    "path": "persist"
+   },
+   "global change: ordinary tap needs anchor match": {
+    "color": 0.25,
+    "depth": 10.0,
+    "record": [
+     2147483653,
+     0
+    ],
+    "path": "current_only"
+   }
+  },
+  "changed-table layout": {
+   "ids_checked": 100000,
+   "changed": 305,
+   "max_vec4_index": 781
+  }
+ }
+}
