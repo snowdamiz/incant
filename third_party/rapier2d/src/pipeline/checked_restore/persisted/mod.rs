@@ -16,7 +16,7 @@ pub enum DomainError {
     Work,
     /// Existing derived arithmetic/coherence rejected the state.
     Numeric(super::AdmissionError),
-    /// Hard/soft CCD or a retained fixed-target cache needs further admission.
+    /// Multi-pass CCD, soft prediction, unrestricted rotation or sweep settings refuse.
     Ccd,
     /// Gyroscopic correction has a nonfinite intermediate.
     Gyroscopic,
@@ -38,6 +38,8 @@ pub enum DomainError {
     WorkspaceOrder,
     /// Saved arithmetic exceeds the documented finite intermediate envelope.
     Arithmetic,
+    /// Unsupported joint or soft-body history invalidates the rigid step domain.
+    Family(super::world::OmittedOwnerError),
     /// Native removal/index arithmetic lacks conservative next-step headroom.
     Counter,
 }
@@ -111,6 +113,19 @@ pub(super) fn admit(n: &super::NumericFrame<'_>, work: &mut WorkBudget) -> Domai
 /// step. A lifecycle transition cannot remove its operation-boundary safeguards.
 pub(super) fn pre_step(w: &crate::pipeline::PhysicsWorld) -> DomainResult<()> {
     use incant_physics_snapshot::MAX_ITEMS;
+    w.impulse_joints
+        .checkpoint_empty_gate()
+        .map_err(DomainError::Family)?;
+    w.multibody_joints
+        .checkpoint_empty_gate()
+        .map_err(DomainError::Family)?;
+    w.soft_bodies
+        .checkpoint_empty_gate()
+        .map_err(DomainError::Family)?;
+    domain::ccd_configuration(
+        w.integration_parameters.max_ccd_substeps as u64,
+        w.integration_parameters.allowed_linear_error(),
+    )?;
     let bodies = w.bodies.bodies.checkpoint_slot_count();
     let colliders = w.colliders.colliders.checkpoint_slot_count();
     let islands = &w.islands.persistent.islands;
@@ -119,13 +134,15 @@ pub(super) fn pre_step(w: &crate::pipeline::PhysicsWorld) -> DomainResult<()> {
     }
     if w.bodies
         .iter()
-        .any(|(_, b)| b.is_ccd_enabled() || b.is_ccd_active() || b.soft_ccd_prediction() != 0.)
+        .any(|(_, b)| b.soft_ccd_prediction() != 0. || b.ccd.allow_fast_rotation)
     {
         return Err(DomainError::Ccd);
     }
     // Each modified endpoint can unlink/relink a touching pair independently
     // during user-change processing. The one non-CCD narrow update can unlink
-    // it again. Include already queued removals; merges preserve the sum.
+    // it again per permitted CCD pass. The current domain admits at most one
+    // pass by configuration, not by the saved active/enabled flags. Include
+    // already queued removals; merges preserve the sum.
     let pending = w.islands.checkpoint_pending_removal_count();
     if pending > MAX_ITEMS {
         return Err(DomainError::Counter);
@@ -135,7 +152,7 @@ pub(super) fn pre_step(w: &crate::pipeline::PhysicsWorld) -> DomainResult<()> {
         .ok_or(DomainError::Counter)?
         / 2;
     let extra = pairs
-        .checked_mul(3)
+        .checked_mul(2 + (w.integration_parameters.max_ccd_substeps as u64).max(1))
         .and_then(|n| n.checked_add(bodies as u64))
         .and_then(|n| n.checked_add(pending as u64))
         .ok_or(DomainError::Counter)?;

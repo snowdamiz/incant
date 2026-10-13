@@ -15,7 +15,7 @@
     },
     {
       "path": "src/pipeline/checked_restore/capture/frame.rs",
-      "sha256": "b3bc7585a08789426f9e746d227c4ceb9b7ea9354c9ef53abdb1139f573531ef"
+      "sha256": "1311ba04076796548b68e0742b10cf694af3b045c22f79b50c6bd75b43530f29"
     },
     {
       "path": "src/pipeline/checked_restore/capture/mod.rs",
@@ -23,7 +23,7 @@
     },
     {
       "path": "src/pipeline/checked_restore/capture/owner.rs",
-      "sha256": "7a97897f84d691b3c6abdd6245b87e722ff2b0b6a180fc51e5f8fc61bd2e5bab"
+      "sha256": "a4484af58ab7c1f088581ff78a1120c170e55c55a278e2c9632a14f9c6ee555d"
     },
     {
       "path": "src/pipeline/checked_restore/capture/structure.rs",
@@ -39,11 +39,11 @@
     },
     {
       "path": "src/pipeline/checked_restore/persisted/domain.rs",
-      "sha256": "02cf06da6e9c27f8c9a36f58e08b2281616cda4f0753a74166796a3ea1a99758"
+      "sha256": "b3d3b27fddf03e2b69659c370947b890c082ab675fb3679e34984afad9b62440"
     },
     {
       "path": "src/pipeline/checked_restore/persisted/domain/arithmetic.rs",
-      "sha256": "975767f3ac436d1c2c6b85bffdfaf8cca95fcc763b44b0508fa2bf82960d96cd"
+      "sha256": "36b0e568e5d6053e639f856e0cbea5a50f12eb95ad2cf2ae0c44175b5c776c3c"
     },
     {
       "path": "src/pipeline/checked_restore/persisted/domain/contacts.rs",
@@ -51,19 +51,23 @@
     },
     {
       "path": "src/pipeline/checked_restore/persisted/mod.rs",
-      "sha256": "56bc3598f905a4956d527cd684fd667c1e761fabbaa097a2d6d9c802e2fa123f"
+      "sha256": "19e13c44893b18635866c71a95a2a5ab885b409caf8f5cf79efe76111756ea6c"
     },
     {
       "path": "src/pipeline/checked_restore/persisted/tests.rs",
-      "sha256": "cb24d059f797a13829b7bce2f202e9cc62332e0b92e66c7e2dd3e3544601b2de"
+      "sha256": "63613ca59a0ab96e38aca0d3e7711da8353d6d5d5b76e7cdd07c66c5a517fb4a"
     },
     {
       "path": "src/pipeline/checked_restore/persisted/tests/adversarial.rs",
-      "sha256": "3f7c6da7a556f4779ed6cb27ea625e14cd725f637e2c21afd4258ad31b19f82b"
+      "sha256": "d62dc7a7f99984550801653f445644056e26f78e9f4735d43c4e2b1e797d4ed5"
+    },
+    {
+      "path": "src/pipeline/checked_restore/persisted/tests/ccd_cases.rs",
+      "sha256": "e80e8430e2a84df8fdbed585a6bf8e15bb638b98be294f705617e2b2bcfe29a2"
     },
     {
       "path": "src/pipeline/checked_restore/world.rs",
-      "sha256": "d9b51e9e845ee1a6f1868f5b8ecec744e0a315e1e64f6ec755fa7db2e83c5cbc"
+      "sha256": "ff49efeed45e996d887757628f5c2331d38a33c06a7e61083b49039a04c0e9fc"
     },
     {
       "path": "src/pipeline/checked_restore/world/admit.rs",
