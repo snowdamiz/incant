@@ -1,0 +1,91 @@
+{
+ "command": "cd samples/core && python3 -B -m art.world OUT (v13)",
+ "audio": {
+  "cue_hurt.wav": {
+   "channels": 1,
+   "frames": 17280,
+   "seconds": 0.36
+  },
+  "cue_lost.wav": {
+   "channels": 1,
+   "frames": 72000,
+   "seconds": 1.5
+  },
+  "cue_pickup.wav": {
+   "channels": 1,
+   "frames": 43200,
+   "seconds": 0.9
+  },
+  "cue_won.wav": {
+   "channels": 1,
+   "frames": 86400,
+   "seconds": 1.8
+  },
+  "mesa_loop.wav": {
+   "channels": 2,
+   "frames": 1097143,
+   "seconds": 22.8571
+  }
+ },
+ "bytes": 10614578,
+ "files": {
+  "canyon.bin": "c32b0431a835c4c998cd69ff850291e2ed888ca0fe84e0907d1afebeba90e08d",
+  "canyon.gltf": "a8622cbd4caea047abd781309fc3869f5207117815ad65631c5e52d317ce30f7",
+  "cliff_albedo.png": "d1fed013a536eb47c40252b5e5f8375f4209509ed51ed7741950eb365f917069",
+  "cliff_normal.png": "db93eb916ad971a8ee32ce3a5985d1c88115d113932ac7a358dc9702c7084939",
+  "core_albedo.png": "b1c535ceafd2c64e03e79c3e46eaa63cab18df359bbf77a70292af7d7e68946e",
+  "core_emissive.png": "42576b50d661af3f3940eeadc4217122470263695dcb0a7ce9509c515b9d97d1",
+  "cue_hurt.wav": "209bf03bf0d9eeedf13d67a9bf5e526b8b9d76b90350c116a07b304d6b2212d9",
+  "cue_lost.wav": "d5757fbfa8f6b4e3e427c0b2748c9343011088ea520715bc91a176ddfa3ac465",
+  "cue_pickup.wav": "a9cfe5207be237b6976cdafb2944b0f71e63c1a73c7f7608f629ee96bbbcd0c9",
+  "cue_won.wav": "8b17713a334cb6d830310985b31cbb3c6c7653922e0c03ce121552765a6541e0",
+  "far_albedo.png": "1f09709ceb8101b85a6ba8b39f4734688624c75ebf4415d69208ad5081b2c902",
+  "floor_albedo.png": "81445089016eba8e5d992f5d058890a75d06486f5468542df5eededd2e4c3c87",
+  "mesa_loop.wav": "4f80337e2eef1ec9b414ae8959435fd114a6d77bb85b10022aef7f3abb968816",
+  "mite.bin": "2809da2175266acf004be462557404623f727e84c4400fc91363d37c2d9220e7",
+  "mite.gltf": "62d807da1b4623e69670e467ef045386df1dc83c999aa1bdb45abf5814c868e2",
+  "mite_albedo.png": "d3e231c3435475dd201652dc7e50ab835b623ed50042c6d14eba088193c65fde",
+  "mite_emissive.png": "5298667c8f706a5a4418ae08bd1e93d943e5a382d36b40730991bf2d43befe76",
+  "pad_albedo.png": "d0cfa2eeaf175365e390491051d05c7203e0b6dc2afc8b7fd950f927a1a3f002",
+  "rock_albedo.png": "c6ea897e8c3811c4ce737d0dabd2d0b85aa4018a21e97aa8a8be414895ff9f6f",
+  "sample.bin": "5f17bd5753223c313f622778e8eb6da801e93fe90ec85128c845a17b92c599fc",
+  "sample.gltf": "6eda3386082556270d7dd567d02fda5f7e2808792705786c8729d892078179ef",
+  "sky.bin": "5908df68041666952ab3808fbcd5578b960595cc7a5258d0bd4b41c83ea6d27f",
+  "sky.gltf": "d752767b74d4bc39329dbd022c314bd3298c4529c3b5a325f8bcf29d03168e08",
+  "sky_dome.png": "dea2f93735ff70b2e6cf543f4bcdfdb9324e4cb72a31abe3cfdd5e0c047d69c0",
+  "sky_environment.png": "8bf279ee439137e9e1da9d1dc1f1868477b4f398e607a127524dc0d209571d82",
+  "surveyor.bin": "bfef4a6f7af144a221a86ae9977df320942ff1fcb252ee1f7d30ae9e28d1da5f",
+  "surveyor.gltf": "8633af82a9e2e247c8c1509ef30f1f41e6866687b492c8329361fdec8d084003",
+  "top_albedo.png": "0456e5dd8c177da4f1296428356cba8d94815e69568342086def5e88cf107d8a",
+  "top_normal.png": "5e9171d91392549a8e07b852273b0de5aab1a8c398ce1121712ff1e344ffd5ab",
+  "valley.png": "c866ba77b019320be6fea2c8f4d5d988664f9816c20b98a8c1ef007dfb57d93e"
+ },
+ "generator": "samples/core/art",
+ "meshes": {
+  "canyon": {
+   "primitives": 18,
+   "triangles": 58111,
+   "vertices": 88189
+  },
+  "mite": {
+   "primitives": 3,
+   "triangles": 548,
+   "vertices": 1256
+  },
+  "sample": {
+   "primitives": 2,
+   "triangles": 252,
+   "vertices": 228
+  },
+  "sky": {
+   "primitives": 1,
+   "triangles": 2304,
+   "vertices": 1225
+  },
+  "surveyor": {
+   "primitives": 8,
+   "triangles": 1592,
+   "vertices": 1206
+  }
+ }
+}

@@ -1,0 +1,722 @@
+{
+ "common": {
+  "binary_sha256": "d482a991eb4c098112d8f7c5e382d19fb98436341d14668383c0283f4b92e7bc",
+  "gameplay_sha256": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+  "entities": {
+   "controller": "01CSEN00000000000000000001",
+   "player": "01CSEN00000000000000000002",
+   "camera": "01CSEN00000000000000000003",
+   "exit": "01CSEN00000000000000000004",
+   "navigation": "01CSEN00000000000000000005",
+   "ground": "01CSEN00000000000000000006",
+   "walls": "01CSEN00000000000000000007",
+   "rocks": "01CSEN00000000000000000008",
+   "canyon": "01CSEN00000000000000000009",
+   "sky": "01CSEN00000000000000000010",
+   "environment": "01CSEN00000000000000000011",
+   "sun": "01CSEN00000000000000000012",
+   "lantern": "01CSEN00000000000000000013",
+   "beacon": "01CSEN00000000000000000014"
+  },
+  "enemies": [
+   "01CSEN00000000000000000020",
+   "01CSEN00000000000000000021",
+   "01CSEN00000000000000000022"
+  ],
+  "samples": [
+   "01CSEN00000000000000000030",
+   "01CSEN00000000000000000031",
+   "01CSEN00000000000000000032",
+   "01CSEN00000000000000000033"
+  ],
+  "script": "01CSSC00000000000000000001",
+  "scene": "01CSSN00000000000000000001",
+  "assets": {
+   "canyon": "01CSAS00000000000000000001",
+   "surveyor": "01CSAS00000000000000000002",
+   "mite": "01CSAS00000000000000000003",
+   "sample": "01CSAS00000000000000000004",
+   "sky": "01CSAS00000000000000000005",
+   "environment": "01CSAS00000000000000000006",
+   "inter": "01CSAS00000000000000000010",
+   "arabic": "01CSAS00000000000000000011",
+   "sc": "01CSAS00000000000000000012",
+   "music": "01CSAS00000000000000000020",
+   "cue_pickup": "01CSAS00000000000000000021",
+   "cue_hurt": "01CSAS00000000000000000022",
+   "cue_won": "01CSAS00000000000000000023",
+   "cue_lost": "01CSAS00000000000000000024"
+  },
+  "settings": {
+   "speed": 3.4,
+   "enemySpeed": 1.7,
+   "jumpSpeed": 6.0
+  },
+  "audio": {
+   "music_bus": "01CSEN00000000000000000040",
+   "effects_bus": "01CSEN00000000000000000041",
+   "music": "01CSEN00000000000000000042",
+   "pickup": [
+    "01CSEN00000000000000000043",
+    "01CSEN00000000000000000044",
+    "01CSEN00000000000000000045",
+    "01CSEN00000000000000000046"
+   ],
+   "hurt": [
+    "01CSEN00000000000000000047",
+    "01CSEN00000000000000000048",
+    "01CSEN00000000000000000049"
+   ],
+   "won": "01CSEN00000000000000000050",
+   "lost": "01CSEN00000000000000000051"
+  },
+  "widgets": {
+   "HUD": "01CSWD00000000000000000001",
+   "Top bar": "01CSWD00000000000000000002",
+   "Status": "01CSWD00000000000000000003",
+   "Health": "01CSWD00000000000000000004",
+   "Objective": "01CSWD00000000000000000005",
+   "Progress": "01CSWD00000000000000000006",
+   "Samples": "01CSWD00000000000000000007",
+   "Controls": "01CSWD00000000000000000008",
+   "Result": "01CSWD00000000000000000009",
+   "Inactive results": "01CSWD00000000000000000010",
+   "Won": "01CSWD00000000000000000011",
+   "Lost": "01CSWD00000000000000000012"
+  },
+  "fonts": {
+   "inter": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+   "arabic": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+   "sc": "7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5"
+  },
+  "imports": {
+   "canyon": {
+    "id": "01M4S2N3RGDTKB92YRD7J8QVDX",
+    "kind": "model",
+    "sha256": "1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec"
+   },
+   "surveyor": {
+    "id": "01M4S2N3SAENTVA57NMBC34G6Q",
+    "kind": "model",
+    "sha256": "018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13"
+   },
+   "mite": {
+    "id": "01M4S2N3T2KFKHWRMHE6T2EN6W",
+    "kind": "model",
+    "sha256": "da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad"
+   },
+   "sample": {
+    "id": "01M4S2N3TV330P8FR7J8HF1BW8",
+    "kind": "model",
+    "sha256": "b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262"
+   },
+   "sky": {
+    "id": "01M4S2N3WSFAPK062X4C2HPV20",
+    "kind": "model",
+    "sha256": "ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99"
+   },
+   "environment": {
+    "id": "01M4S2N3Y51D6P8DN17J4C40TE",
+    "kind": "texture",
+    "sha256": "5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8"
+   },
+   "inter": {
+    "id": "01M4S2N3Z46XAD8J4002JRPQ5C",
+    "kind": "font",
+    "sha256": "74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f"
+   },
+   "arabic": {
+    "id": "01M4S2N403Y479Q18AP8WKY7D8",
+    "kind": "font",
+    "sha256": "efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767"
+   },
+   "sc": {
+    "id": "01M4S2N410H6B7WQMTDSMD0FED",
+    "kind": "font",
+    "sha256": "04997af85ce1afe4180d11009cc2884dd84449b72338e7d095c96cf6462aeaee"
+   },
+   "music": {
+    "id": "01M4S2N455QAJE4J3CSYNZCBSX",
+    "kind": "audio",
+    "sha256": "4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f"
+   },
+   "cue_pickup": {
+    "id": "01M4S2N46575A9S2XHZ690AZJM",
+    "kind": "audio",
+    "sha256": "b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117"
+   },
+   "cue_hurt": {
+    "id": "01M4S2N4720CXT33P8DS41TZG7",
+    "kind": "audio",
+    "sha256": "3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58"
+   },
+   "cue_won": {
+    "id": "01M4S2N487VXYN38FRCH12VA8M",
+    "kind": "audio",
+    "sha256": "08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28"
+   },
+   "cue_lost": {
+    "id": "01M4S2N49BR9537P9DN6NE77HJ",
+    "kind": "audio",
+    "sha256": "4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e"
+   }
+  }
+ },
+ "variants": {
+  "f5-ar-playing": {
+   "locale": "ar",
+   "state": "playing",
+   "project_sha256": "04e8ca651d4ecb40fe0cecf7bc15da37a1deb277417272bd24189c7487a86c6e",
+   "revision": 32,
+   "rpc_calls": 46,
+   "transactions": [
+    {
+     "id": "01M4S2N4A2MNEPPY0621C3V8DH",
+     "description": "Assign stable Core Sample asset identities",
+     "commands": 28
+    },
+    {
+     "id": "01M4S2N4A7N6WVH6BNV0M8G7KJ",
+     "description": "Author Core Sample scene, script and input",
+     "commands": 7
+    },
+    {
+     "id": "01M4S2N4BG32W620TH7V5JQKX7",
+     "description": "Build the mesa survey level",
+     "commands": 21
+    },
+    {
+     "id": "01M4S2N4BX0KM08AS2EF645R5G",
+     "description": "Author music and event cues",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2N4CE01CG53VQ2EXMG7GE",
+     "description": "Author the localized HUD",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2N4D0HGKNZF4W6BXE1KQT",
+     "description": "Present HUD: playing in ar",
+     "commands": 13
+    }
+   ],
+   "undo_redo_reopen": true,
+   "validation": {
+    "diagnostics": [],
+    "project_id": "01M4S2N1Q43BGMFAC98WK1SY4B",
+    "schema_version": 1,
+    "valid": true
+   },
+   "glyph_coverage": {
+    "en": {
+     "inter": "/01234ACDRSWacdefhijlmnoprstuvwy·○●",
+     "arabic": "",
+     "sc": ""
+    },
+    "ar": {
+     "inter": "/01234ADSWacep·○●",
+     "arabic": "أإابةتجحدرزسصطعفقكلمنىيُّ",
+     "sc": ""
+    }
+   },
+   "localized_text": {
+    "en": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "Samples 0/4",
+     "samples.1": "Samples 1/4",
+     "samples.2": "Samples 2/4",
+     "samples.3": "Samples 3/4",
+     "samples.4": "Samples 4/4",
+     "hud.objective.collect": "Collect the core samples",
+     "hud.objective.exit": "Return to the lift",
+     "hud.controls": "WASD move · Space jump",
+     "hud.won": "Samples secured",
+     "hud.lost": "Surveyor down"
+    },
+    "ar": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "العينات 0/4",
+     "samples.1": "العينات 1/4",
+     "samples.2": "العينات 2/4",
+     "samples.3": "العينات 3/4",
+     "samples.4": "العينات 4/4",
+     "hud.objective.collect": "اجمع العينات اللبية",
+     "hud.objective.exit": "عُد إلى المصعد",
+     "hud.controls": "الحركة WASD · القفز Space",
+     "hud.won": "تم تأمين العينات",
+     "hud.lost": "تعطّل المسّاح"
+    }
+   }
+  },
+  "f5-en-XA-playing": {
+   "locale": "en-XA",
+   "state": "playing",
+   "project_sha256": "80e964fccf1b5960c8a079fae982b46b4a315c11910131a8ac897f693f53d81d",
+   "revision": 32,
+   "rpc_calls": 46,
+   "transactions": [
+    {
+     "id": "01M4S2MV4DQ4ZCEJTYF1PZZ4PX",
+     "description": "Assign stable Core Sample asset identities",
+     "commands": 28
+    },
+    {
+     "id": "01M4S2MV4TF72M3M32K7JA9DHY",
+     "description": "Author Core Sample scene, script and input",
+     "commands": 7
+    },
+    {
+     "id": "01M4S2MV6BMH714SX3GX0CKTB6",
+     "description": "Build the mesa survey level",
+     "commands": 21
+    },
+    {
+     "id": "01M4S2MV6QECTCGRW6QC560QDG",
+     "description": "Author music and event cues",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2MV78G19CK1TGZGR3960M",
+     "description": "Author the localized HUD",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2MV7R8HK307ACZHB9402Z",
+     "description": "Present HUD: playing in en-XA",
+     "commands": 13
+    }
+   ],
+   "undo_redo_reopen": true,
+   "validation": {
+    "diagnostics": [],
+    "project_id": "01M4S2MQRRPA039HY40DPRXYSC",
+    "schema_version": 1,
+    "valid": true
+   },
+   "glyph_coverage": {
+    "en": {
+     "inter": "/01234ACDRSWacdefhijlmnoprstuvwy·○●",
+     "arabic": "",
+     "sc": ""
+    },
+    "en-XA": {
+     "inter": "!/01234[]·ÁÇáçéíñóúýþĎďĥĵľŔŕŠšţŴŵƒɱṽ○●",
+     "arabic": "",
+     "sc": ""
+    }
+   },
+   "localized_text": {
+    "en": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "Samples 0/4",
+     "samples.1": "Samples 1/4",
+     "samples.2": "Samples 2/4",
+     "samples.3": "Samples 3/4",
+     "samples.4": "Samples 4/4",
+     "hud.objective.collect": "Collect the core samples",
+     "hud.objective.exit": "Return to the lift",
+     "hud.controls": "WASD move · Space jump",
+     "hud.won": "Samples secured",
+     "hud.lost": "Surveyor down"
+    },
+    "en-XA": {
+     "health.3": "[!! ● ● ● !!]",
+     "health.2": "[!! ● ● ○ !!]",
+     "health.1": "[!! ● ○ ○ !!]",
+     "health.0": "[!! ○ ○ ○ !!]",
+     "samples.0": "[!! Šááɱþľééš 0/4 !!]",
+     "samples.1": "[!! Šááɱþľééš 1/4 !!]",
+     "samples.2": "[!! Šááɱþľééš 2/4 !!]",
+     "samples.3": "[!! Šááɱþľééš 3/4 !!]",
+     "samples.4": "[!! Šááɱþľééš 4/4 !!]",
+     "hud.objective.collect": "[!! Çóóľľééçţ ţĥéé çóóŕéé šááɱþľééš !!]",
+     "hud.objective.exit": "[!! Ŕééţúúŕñ ţóó ţĥéé ľííƒţ !!]",
+     "hud.controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ !!]",
+     "hud.won": "[!! Šááɱþľééš šééçúúŕééď !!]",
+     "hud.lost": "[!! Šúúŕṽééýóóŕ ďóóŵñ !!]"
+    }
+   }
+  },
+  "f5-en-collected": {
+   "locale": "en",
+   "state": "collected",
+   "project_sha256": "b5a23c23ac29d294f5870baf85be85840f0caf72655cb3cbf7172a6e84ef3d49",
+   "revision": 32,
+   "rpc_calls": 46,
+   "transactions": [
+    {
+     "id": "01M4S2RB1F01SNJ5SFV6M4D9Z6",
+     "description": "Assign stable Core Sample asset identities",
+     "commands": 28
+    },
+    {
+     "id": "01M4S2RB1M38HRVGEX9QYQ4HYF",
+     "description": "Author Core Sample scene, script and input",
+     "commands": 7
+    },
+    {
+     "id": "01M4S2RB2QFFJW6MTF47ZPA3P8",
+     "description": "Build the mesa survey level",
+     "commands": 21
+    },
+    {
+     "id": "01M4S2RB3583B7WJ5WBE7W9JR3",
+     "description": "Author music and event cues",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2RB3PGXQ2Z319P68E20SR",
+     "description": "Author the localized HUD",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2RB48D6BRWYCAANRE2QPB",
+     "description": "Present HUD: collected in en",
+     "commands": 13
+    }
+   ],
+   "undo_redo_reopen": true,
+   "validation": {
+    "diagnostics": [],
+    "project_id": "01M4S2R97NQAEZS6YKY5MH3ES5",
+    "schema_version": 1,
+    "valid": true
+   },
+   "glyph_coverage": {
+    "en": {
+     "inter": "/01234ACDRSWacdefhijlmnoprstuvwy·○●",
+     "arabic": "",
+     "sc": ""
+    }
+   },
+   "localized_text": {
+    "en": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "Samples 0/4",
+     "samples.1": "Samples 1/4",
+     "samples.2": "Samples 2/4",
+     "samples.3": "Samples 3/4",
+     "samples.4": "Samples 4/4",
+     "hud.objective.collect": "Collect the core samples",
+     "hud.objective.exit": "Return to the lift",
+     "hud.controls": "WASD move · Space jump",
+     "hud.won": "Samples secured",
+     "hud.lost": "Surveyor down"
+    }
+   }
+  },
+  "f5-en-lost": {
+   "locale": "en",
+   "state": "lost",
+   "project_sha256": "86e18bb2e971bfbae4f0c8effa1c59621b53b7612dafc31acfaae867aa78c150",
+   "revision": 32,
+   "rpc_calls": 46,
+   "transactions": [
+    {
+     "id": "01M4S2R30BFR9Q5RV6G68KMF15",
+     "description": "Assign stable Core Sample asset identities",
+     "commands": 28
+    },
+    {
+     "id": "01M4S2R30GK8TZ2PD9HFPQ0D0Y",
+     "description": "Author Core Sample scene, script and input",
+     "commands": 7
+    },
+    {
+     "id": "01M4S2R31NJW2137CF6G6TWX32",
+     "description": "Build the mesa survey level",
+     "commands": 21
+    },
+    {
+     "id": "01M4S2R322M62B0P8E16YQSAWX",
+     "description": "Author music and event cues",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2R32KRBVT623H7CQHRJZZ",
+     "description": "Author the localized HUD",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2R33543S3HWDCZJ07AJHV",
+     "description": "Present HUD: lost in en",
+     "commands": 14
+    }
+   ],
+   "undo_redo_reopen": true,
+   "validation": {
+    "diagnostics": [],
+    "project_id": "01M4S2R15QTR8YT5170TAPTR1M",
+    "schema_version": 1,
+    "valid": true
+   },
+   "glyph_coverage": {
+    "en": {
+     "inter": "/01234ACDRSWacdefhijlmnoprstuvwy·○●",
+     "arabic": "",
+     "sc": ""
+    }
+   },
+   "localized_text": {
+    "en": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "Samples 0/4",
+     "samples.1": "Samples 1/4",
+     "samples.2": "Samples 2/4",
+     "samples.3": "Samples 3/4",
+     "samples.4": "Samples 4/4",
+     "hud.objective.collect": "Collect the core samples",
+     "hud.objective.exit": "Return to the lift",
+     "hud.controls": "WASD move · Space jump",
+     "hud.won": "Samples secured",
+     "hud.lost": "Surveyor down"
+    }
+   }
+  },
+  "f5-en-playing": {
+   "locale": "en",
+   "state": "playing",
+   "project_sha256": "443f32437090cb510278f11f4ae5da142d3028f074ad2ec91ce30b5c719fcb01",
+   "revision": 29,
+   "rpc_calls": 39,
+   "transactions": [
+    {
+     "id": "01M4S2MCHV8P5924E257M1EKA4",
+     "description": "Assign stable Core Sample asset identities",
+     "commands": 28
+    },
+    {
+     "id": "01M4S2MCJ42X8VJ3NDQY5RXH0T",
+     "description": "Author Core Sample scene, script and input",
+     "commands": 7
+    },
+    {
+     "id": "01M4S2MCM6VD5V78EEWXZKXF56",
+     "description": "Build the mesa survey level",
+     "commands": 21
+    },
+    {
+     "id": "01M4S2MCMW5D5NDTFG4MVQ74Y2",
+     "description": "Author music and event cues",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2MCP02CDG2F2J8XHSEA70",
+     "description": "Author the localized HUD",
+     "commands": 12
+    }
+   ],
+   "undo_redo_reopen": true,
+   "validation": {
+    "diagnostics": [],
+    "project_id": "01M4S2M8XK6DRA90HXGXY9SR1A",
+    "schema_version": 1,
+    "valid": true
+   },
+   "glyph_coverage": {
+    "en": {
+     "inter": "/01234ACDRSWacdefhijlmnoprstuvwy·○●",
+     "arabic": "",
+     "sc": ""
+    }
+   },
+   "localized_text": {
+    "en": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "Samples 0/4",
+     "samples.1": "Samples 1/4",
+     "samples.2": "Samples 2/4",
+     "samples.3": "Samples 3/4",
+     "samples.4": "Samples 4/4",
+     "hud.objective.collect": "Collect the core samples",
+     "hud.objective.exit": "Return to the lift",
+     "hud.controls": "WASD move · Space jump",
+     "hud.won": "Samples secured",
+     "hud.lost": "Surveyor down"
+    }
+   }
+  },
+  "f5-en-won": {
+   "locale": "en",
+   "state": "won",
+   "project_sha256": "d5ab21e0a936c776216d962ac04fe8e33ba89bd5d71a1ed9a2c510472108291c",
+   "revision": 32,
+   "rpc_calls": 46,
+   "transactions": [
+    {
+     "id": "01M4S2QT51ZYE9JQ748TVSBHMZ",
+     "description": "Assign stable Core Sample asset identities",
+     "commands": 28
+    },
+    {
+     "id": "01M4S2QT56SB4QZ8SF0KGT6X3C",
+     "description": "Author Core Sample scene, script and input",
+     "commands": 7
+    },
+    {
+     "id": "01M4S2QT7CWDGS76B7YNRG6M4S",
+     "description": "Build the mesa survey level",
+     "commands": 21
+    },
+    {
+     "id": "01M4S2QT7SJEP60HJVHXDE4ATR",
+     "description": "Author music and event cues",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2QT89VVMNB0XCF582BAKB",
+     "description": "Author the localized HUD",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2QT8VK4Q7AT1KDV07ZQY7",
+     "description": "Present HUD: won in en",
+     "commands": 14
+    }
+   ],
+   "undo_redo_reopen": true,
+   "validation": {
+    "diagnostics": [],
+    "project_id": "01M4S2QR83EJ0HZWPR05C1YK8A",
+    "schema_version": 1,
+    "valid": true
+   },
+   "glyph_coverage": {
+    "en": {
+     "inter": "/01234ACDRSWacdefhijlmnoprstuvwy·○●",
+     "arabic": "",
+     "sc": ""
+    }
+   },
+   "localized_text": {
+    "en": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "Samples 0/4",
+     "samples.1": "Samples 1/4",
+     "samples.2": "Samples 2/4",
+     "samples.3": "Samples 3/4",
+     "samples.4": "Samples 4/4",
+     "hud.objective.collect": "Collect the core samples",
+     "hud.objective.exit": "Return to the lift",
+     "hud.controls": "WASD move · Space jump",
+     "hud.won": "Samples secured",
+     "hud.lost": "Surveyor down"
+    }
+   }
+  },
+  "f5-zh-Hans-playing": {
+   "locale": "zh-Hans",
+   "state": "playing",
+   "project_sha256": "72fe5cdd02fd64a17c86a297d7598013f1dfcfbcf470d5b7c3f2b227cbc22ff8",
+   "revision": 32,
+   "rpc_calls": 46,
+   "transactions": [
+    {
+     "id": "01M4S2NETQNYCYSFPH15JMYSXF",
+     "description": "Assign stable Core Sample asset identities",
+     "commands": 28
+    },
+    {
+     "id": "01M4S2NETW5YN7R59AQF5ZPWAJ",
+     "description": "Author Core Sample scene, script and input",
+     "commands": 7
+    },
+    {
+     "id": "01M4S2NEW0CC5976S0H5RBKAB8",
+     "description": "Build the mesa survey level",
+     "commands": 21
+    },
+    {
+     "id": "01M4S2NEWDF0ZJW76993FHFZ1K",
+     "description": "Author music and event cues",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2NEWWG49YN8E6YPTZ01Z2",
+     "description": "Author the localized HUD",
+     "commands": 12
+    },
+    {
+     "id": "01M4S2NEXDCCRJ27XJ71B1VRZY",
+     "description": "Present HUD: playing in zh-Hans",
+     "commands": 13
+    }
+   ],
+   "undo_redo_reopen": true,
+   "validation": {
+    "diagnostics": [],
+    "project_id": "01M4S2NC5QHEW3NAJMBSHEY3ZN",
+    "schema_version": 1,
+    "valid": true
+   },
+   "glyph_coverage": {
+    "en": {
+     "inter": "/01234ACDRSWacdefhijlmnoprstuvwy·○●",
+     "arabic": "",
+     "sc": ""
+    },
+    "zh-Hans": {
+     "inter": "/01234ADSW·○●",
+     "arabic": "",
+     "sc": "人停全动勘升台器回安岩已收本机样格测移空芯跃跳返键降集"
+    }
+   },
+   "localized_text": {
+    "en": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "Samples 0/4",
+     "samples.1": "Samples 1/4",
+     "samples.2": "Samples 2/4",
+     "samples.3": "Samples 3/4",
+     "samples.4": "Samples 4/4",
+     "hud.objective.collect": "Collect the core samples",
+     "hud.objective.exit": "Return to the lift",
+     "hud.controls": "WASD move · Space jump",
+     "hud.won": "Samples secured",
+     "hud.lost": "Surveyor down"
+    },
+    "zh-Hans": {
+     "health.3": "● ● ●",
+     "health.2": "● ● ○",
+     "health.1": "● ○ ○",
+     "health.0": "○ ○ ○",
+     "samples.0": "样本 0/4",
+     "samples.1": "样本 1/4",
+     "samples.2": "样本 2/4",
+     "samples.3": "样本 3/4",
+     "samples.4": "样本 4/4",
+     "hud.objective.collect": "收集岩芯样本",
+     "hud.objective.exit": "返回升降台",
+     "hud.controls": "WASD 移动 · 空格键 跳跃",
+     "hud.won": "样本已安全回收",
+     "hud.lost": "勘测机器人停机"
+    }
+   }
+  }
+ }
+}

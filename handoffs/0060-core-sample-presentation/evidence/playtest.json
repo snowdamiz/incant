@@ -1,0 +1,157 @@
+{
+ "passed": true,
+ "checks": {
+  "win_collects_all": true,
+  "win_reaches_lift": true,
+  "lose_by_contact": true,
+  "locked_exit_refuses": true,
+  "every_chaser_routes": true,
+  "authoring_unchanged": true
+ },
+ "results": {
+  "win": {
+   "pickups": 4,
+   "pickup_order": [
+    "01CSEN00000000000000000030",
+    "01CSEN00000000000000000031",
+    "01CSEN00000000000000000032",
+    "01CSEN00000000000000000033"
+   ],
+   "damage": [
+    [
+     664,
+     "core.damage health=2"
+    ]
+   ],
+   "routes": [
+    "core.route 01CSEN00000000000000000020 corners=5",
+    "core.route 01CSEN00000000000000000021 corners=32",
+    "core.route 01CSEN00000000000000000022 corners=24"
+   ],
+   "won_tick": 2066,
+   "lost_tick": null,
+   "player_final": [
+    0.521,
+    2.21,
+    -16.444
+   ],
+   "enemies_final": {
+    "01CSEN00000000000000000020": [
+     -2.722,
+     0.61,
+     -6.749
+    ],
+    "01CSEN00000000000000000021": [
+     -2.17,
+     0.666,
+     -7.141
+    ],
+    "01CSEN00000000000000000022": [
+     -1.539,
+     0.634,
+     -7.038
+    ]
+   },
+   "ticks": 2156
+  },
+  "lose": {
+   "pickups": 0,
+   "pickup_order": [],
+   "damage": [
+    [
+     527,
+     "core.damage health=2"
+    ],
+    [
+     572,
+     "core.damage health=1"
+    ],
+    [
+     617,
+     "core.damage health=0"
+    ]
+   ],
+   "routes": [
+    "core.route 01CSEN00000000000000000020 corners=5",
+    "core.route 01CSEN00000000000000000021 corners=32",
+    "core.route 01CSEN00000000000000000022 corners=24"
+   ],
+   "won_tick": null,
+   "lost_tick": 617,
+   "player_final": [
+    0.004,
+    0.61,
+    10.944
+   ],
+   "enemies_final": {
+    "01CSEN00000000000000000020": [
+     -0.334,
+     0.61,
+     10.349
+    ],
+    "01CSEN00000000000000000021": [
+     0.285,
+     0.61,
+     3.11
+    ],
+    "01CSEN00000000000000000022": [
+     6.275,
+     0.61,
+     3.99
+    ]
+   },
+   "ticks": 1500
+  },
+  "locked": {
+   "pickups": 0,
+   "pickup_order": [],
+   "damage": [
+    [
+     183,
+     "core.damage health=2"
+    ],
+    [
+     563,
+     "core.damage health=1"
+    ],
+    [
+     608,
+     "core.damage health=0"
+    ]
+   ],
+   "routes": [
+    "core.route 01CSEN00000000000000000020 corners=5",
+    "core.route 01CSEN00000000000000000021 corners=32",
+    "core.route 01CSEN00000000000000000022 corners=24"
+   ],
+   "won_tick": null,
+   "lost_tick": 608,
+   "player_final": [
+    -0.923,
+    2.21,
+    -14.191
+   ],
+   "enemies_final": {
+    "01CSEN00000000000000000020": [
+     -9.017,
+     0.615,
+     -6.972
+    ],
+    "01CSEN00000000000000000021": [
+     -8.277,
+     0.678,
+     -7.189
+    ],
+    "01CSEN00000000000000000022": [
+     -0.988,
+     2.21,
+     -13.531
+    ]
+   },
+   "ticks": 796
+  }
+ },
+ "player_sha256": "565f1592aaeafcf05c32bf2d094334124de52c90bdd6fe3ca75eb56a6cc5fd28",
+ "project_sha256": "443f32437090cb510278f11f4ae5da142d3028f074ad2ec91ce30b5c719fcb01",
+ "route": "ordinary packaged player, CPU render-input with 640x480 UI, cooked bytecode"
+}

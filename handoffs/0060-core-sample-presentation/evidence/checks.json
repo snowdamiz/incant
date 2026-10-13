@@ -1,0 +1,171 @@
+{
+ "render_tests": {
+  "test-incant_render-model_gpu": {
+   "result": [
+    "test result: ok. 50 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 62.04s"
+   ],
+   "ran": [
+    "tests/model_gpu.rs"
+   ]
+  },
+  "test-incant_render_gpu_host-game": {
+   "result": [
+    "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.91s"
+   ],
+   "ran": [
+    "tests/game.rs"
+   ]
+  },
+  "test-incant_render_gpu_host-ui": {
+   "result": [
+    "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.80s"
+   ],
+   "ran": [
+    "tests/ui.rs"
+   ]
+  },
+  "test-incant_text-bidi_wrap": {
+   "result": [
+    "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s"
+   ],
+   "ran": [
+    "tests/bidi_wrap.rs"
+   ]
+  },
+  "test-incant_text-shaping": {
+   "result": [
+    "test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s"
+   ],
+   "ran": [
+    "tests/shaping.rs"
+   ]
+  }
+ },
+ "crates_unchanged_by_tests": true,
+ "localization_check": {
+  "l10n-ar": {
+   "complete": true,
+   "fallback_allowed": false,
+   "locale": "ar",
+   "missing": [],
+   "project_id": "01M4S2M8XK6DRA90HXGXY9SR1A"
+  },
+  "l10n-en": {
+   "complete": true,
+   "fallback_allowed": false,
+   "locale": "en",
+   "missing": [],
+   "project_id": "01M4S2M8XK6DRA90HXGXY9SR1A"
+  },
+  "l10n-zh-Hans": {
+   "complete": true,
+   "fallback_allowed": false,
+   "locale": "zh-Hans",
+   "missing": [],
+   "project_id": "01M4S2M8XK6DRA90HXGXY9SR1A"
+  }
+ },
+ "native_play_refusals": {
+  "native-play-ui": "Error: native play startup/runtime failure: native play: spatial content requires an explicit --camera and native render host",
+  "native-play-ui-camera": "Error: native play startup/runtime failure: scene host failed: this consumer has no screen-space UI support"
+ },
+ "audio_mixer_output": {
+  "pcm": "playtest-f5/win.pcm",
+  "rate": 16000,
+  "frames": 574933,
+  "seconds": 35.933,
+  "peak": 0.2511,
+  "rms_dbfs_per_second": [
+   -25.1,
+   -24.8,
+   -25.6,
+   -24.8,
+   -24.6,
+   -25.4,
+   -28.5,
+   -24.1,
+   -24.8,
+   -26.9,
+   -24.0,
+   -24.8,
+   -24.8,
+   -24.3,
+   -23.8,
+   -24.3,
+   -24.6,
+   -24.1,
+   -24.4,
+   -25.3,
+   -23.5,
+   -24.2,
+   -24.7,
+   -26.4,
+   -24.6,
+   -24.9,
+   -25.9,
+   -24.2,
+   -25.3,
+   -29.2,
+   -24.1,
+   -24.3,
+   -25.8,
+   -25.2,
+   -24.3
+  ],
+  "stereo_differs": true,
+  "loop": "art/v13/mesa_loop.wav",
+  "loop_rate": 48000,
+  "loop_seconds": 22.8571,
+  "correlation_with_loop_left": [
+   {
+    "at_seconds": 1.0,
+    "window_samples": 4000,
+    "correlation": 0.9984,
+    "lag_samples": 0
+   },
+   {
+    "at_seconds": 30.0,
+    "window_samples": 4000,
+    "correlation": 0.9995,
+    "lag_samples": 1
+   }
+  ]
+ },
+ "typescript": {
+  "command": "node node_modules/typescript/bin/tsc -p samples/core/tsconfig.json",
+  "exit": 0,
+  "output_bytes": 0
+ },
+ "python_syntax": {
+  "command": "ast.parse over every new Python file in samples/core and the 0060 tools",
+  "files": [
+   "handoffs/0060-core-sample-presentation/tools/collect_evidence.py",
+   "handoffs/0060-core-sample-presentation/tools/lookdev.py",
+   "handoffs/0060-core-sample-presentation/tools/nav_repro.py",
+   "handoffs/0060-core-sample-presentation/tools/navprobe.py",
+   "handoffs/0060-core-sample-presentation/tools/package.py",
+   "handoffs/0060-core-sample-presentation/tools/plan_route.py",
+   "handoffs/0060-core-sample-presentation/tools/replay_plan.py",
+   "samples/core/art/__init__.py",
+   "samples/core/art/actors.py",
+   "samples/core/art/fontcheck.py",
+   "samples/core/art/fonts/subset_sc.py",
+   "samples/core/art/gltf.py",
+   "samples/core/art/ids.py",
+   "samples/core/art/level.py",
+   "samples/core/art/mesh.py",
+   "samples/core/art/music.py",
+   "samples/core/art/noise.py",
+   "samples/core/art/pngio.py",
+   "samples/core/art/props.py",
+   "samples/core/art/raster.py",
+   "samples/core/art/sky.py",
+   "samples/core/art/terrain.py",
+   "samples/core/art/world.py",
+   "samples/core/hud.py",
+   "samples/core/playtest.py",
+   "samples/core/scene.py"
+  ],
+  "errors": []
+ }
+}
