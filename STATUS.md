@@ -45,7 +45,7 @@ Core authored bindings and the corrected locked-exit proof are merged in PR185
 ([current-main evidence](docs/spikes/core-main182.md)).
 
 Dynamic resolution and cooked clusters have accepted producer Metal evidence; their
-[current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks and awaits final packet review.
+[current-main197 integration](docs/spikes/clusters-drs-main197.md) passes 14 CPU/compile/tooling checks with independent final packet acceptance; the required fast check precedes publication.
 Current composed GPU execution remains pending. GPU timestamp execution remains pending. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
 independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
@@ -64,7 +64,7 @@ PR197 merges the independently reviewed snapshot, arena and graph validators wit
 The next inert format preserves node/edge order and validates both linked
 adjacency sides, reciprocal links, complete coverage and dense payload mappings.
 Forty CPU cases, Clippy, wasm32 and dependency checks pass, including actual
-2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass with independent final integration acceptance. Publication awaits the required fast check. Contact/payload/solver ownership
+2D/3D native swap-removal order observations. Independent producer review is accepted; the [combined main196 checks](docs/spikes/physics-inert-main196.md) pass with independent final integration acceptance. PR197 is merged after its exact-head fast check. Contact/payload/solver ownership
 and full native composition remain required; no live restore or physics-save
 admission is enabled. [Graph contract](docs/spikes/physics-inert-graphs.md).
 

@@ -2534,12 +2534,16 @@
     "records": 33,
     "payloads": 20
   },
-  "review_state": "Final integration review pending",
+  "review_state": "Accepted independent source and final execution packet review",
   "limits": [
     "Current union runs CPU tests and native/window/WebAssembly compilation only; 90 GPU tests remain ignored in each all-target variant.",
     "Test counts overlap across default/cooked/cluster-only feature configurations.",
     "Original cooked-cluster Metal numerical parity and default-feature DRS appearance/latency evidence remain producer-scoped, not new combined GPU acceptance.",
     "CI adds cooked-clusters to existing backend-asserted release checks, preserving defaults; actual Linux/Vulkan and Windows/DX12 success remains a frozen checkpoint requirement.",
     "DRS is opt-in nearest expansion; no temporal reconstruction, MetalFX, default enablement, exact GPU timing, phone/performance or phase gate claim."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/clusters-drs-main197/final-review.json",
+    "sha256": "f589c9ef6f7b83b6cdb58688340a0066cd51224624e319770d908cb51e76f181"
+  }
 }
