@@ -1,5 +1,15 @@
 # Implementation status
 
+## Fixed temporal coverage — CPU verified, GPU pending
+
+The private [fixed temporal coverage correction](docs/spikes/temporal-coverage.md)
+uses bounded neighborhood expected-depth admission, nearest valid motion and
+premultiplied clear coverage while retaining invalid-owner refusal, viewport
+bounds, clamp/reaction and post-history exclusions. Default/cooked CPU suites,
+shader source/ABI contracts, Clippy and browser compilation pass. Numerical GPU
+contracts are compiled only; Claude's rendered review and device gates remain
+open. Portable output upscaling and MetalFX are unchanged.
+
 [PLAN.md](PLAN.md) revision 8 is the source of truth. Phase 1 is in progress;
 the full engine and Driftwake release are not complete. Calendar targets and
 phase durations have been removed. Work proceeds continuously and in parallel

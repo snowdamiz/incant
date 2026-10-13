@@ -1,6 +1,10 @@
 //! Explicit opt-in, fixed-internal-resolution temporal accumulation. This is not
 //! temporal upscaling or MetalFX. Only opaque/MASK model radiance enters history.
 mod config;
+#[cfg(test)]
+mod coverage;
+#[cfg(test)]
+mod coverage_tests;
 pub(crate) mod jitter;
 #[cfg(test)]
 mod oracle;

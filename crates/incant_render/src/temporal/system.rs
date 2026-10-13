@@ -315,3 +315,7 @@ impl Renderer {
 #[cfg(test)]
 #[path = "device_tests.rs"]
 mod device_tests;
+
+#[cfg(test)]
+#[path = "coverage_device.rs"]
+mod coverage_device;

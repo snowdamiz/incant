@@ -206,10 +206,13 @@ fn scene_linear_convex_history_clamps_reacts_and_preserves_constant_fields_and_c
         ),
         current
     );
-    assert_eq!(blend([0., 0., 0., 0.], old, lo, hi, c), [0., 0., 0., 0.]);
+    assert_eq!(
+        blend([0., 0., 0., 0.], old, [0.; 4], hi, c),
+        [0.125, 0.125, 0.125, 0.5]
+    );
     assert_eq!(
         blend([0.2, 0.1, 0., 0.5], old, lo, hi, c),
-        [0.2, 0.1, 0., 0.5]
+        [0.225, 0.175, 0.125, 0.75]
     );
     let clipped = blend(current, [2., 2., 2., 1.], lo, hi, c);
     assert_eq!(clipped, [0.75, 0.75, 0.75, 1.]);

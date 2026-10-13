@@ -1,0 +1,742 @@
+{
+  "format": "incant-temporal-coverage-evidence",
+  "version": 1,
+  "base": "077f7c39c0f4122aae36ea3a88537be006722822",
+  "branch": "codex/temporal-coverage",
+  "source_freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/source-004/freeze.json",
+    "sha256": "4a957f9f71ecee51f1b5ecdeb70f531cbcc7063ea91e0b26f17dd66077d5efa2",
+    "files": [
+      {
+        "path": "crates/incant_render/src/temporal/coverage.rs",
+        "sha256": "0488008c1fa6c039f9eb312637307ffdbacc57ca8fea63ffde6bafe4822a4963",
+        "bytes": 8369
+      },
+      {
+        "path": "crates/incant_render/src/temporal/coverage_device.rs",
+        "sha256": "3d1d3e29b51a01f84569b5855a3b22a38b97bc89a232af551e4c028d37ae7db1",
+        "bytes": 13712
+      },
+      {
+        "path": "crates/incant_render/src/temporal/coverage_tests.rs",
+        "sha256": "18f7c98156d22ef84a07902e9ff2b0cc9fa03eb062b8a8d425119dd59e663d2e",
+        "bytes": 6087
+      },
+      {
+        "path": "crates/incant_render/src/temporal/device_tests.rs",
+        "sha256": "12ead9f939f230bc21fd9a10534f996b9930932198bb7dc162e6778e13ed26e0",
+        "bytes": 12229
+      },
+      {
+        "path": "crates/incant_render/src/temporal/mod.rs",
+        "sha256": "1cb40151a8da19ba7c9dd03068333319eb5c639e4479441ddd260ec0e0173311",
+        "bytes": 1138
+      },
+      {
+        "path": "crates/incant_render/src/temporal/oracle.rs",
+        "sha256": "818e83528162c0b2db1ffbdc046fb66bebe86a84d0d082912030eaa2b2b9216c",
+        "bytes": 2770
+      },
+      {
+        "path": "crates/incant_render/src/temporal/resolve.wgsl",
+        "sha256": "4e7f1ee503e05bc7f2c126ae83b059881fe90b99530507be5ea9f7f037b68bce",
+        "bytes": 4630
+      },
+      {
+        "path": "crates/incant_render/src/temporal/system.rs",
+        "sha256": "ef64ac5d7b6334832a8bb4e23e21734814508fb228903c33ba184247db215793",
+        "bytes": 11198
+      },
+      {
+        "path": "crates/incant_render/src/temporal/tests.rs",
+        "sha256": "5cc16417e84067ee7e88042433845187de6b363ce26130f4d0bc7c92b9a91292",
+        "bytes": 11104
+      },
+      {
+        "path": "crates/incant_shader_cook/src/temporal/mod.rs",
+        "sha256": "e3a3c5366db672938713216a3bb5b470ec9716acb83d951a9a54590f2f8e7411",
+        "bytes": 7510
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/fixtures/temporal-resolve-single-depth.wgsl",
+        "sha256": "e1af53565a299f6a03a13a3ee05a037b540e24cb2b0bed054ceeb8d2d484ebf1",
+        "bytes": 3480
+      },
+      {
+        "path": "crates/incant_shader_cook/tests/temporal.rs",
+        "sha256": "9131ef2b4940aa2072a92fbdde012927c03c915f53379f2c2a89ece316ea7338",
+        "bytes": 7361
+      }
+    ]
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-coverage-logs.json.gz",
+    "sha256": "6a2d60f6f35f5e56e2594006300d1868d5eb5c6514f6ec611a38b38c8ba9dd18",
+    "bytes": 493160,
+    "records": 98,
+    "payloads": 65
+  },
+  "binaries": [
+    {
+      "kind": "default",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-bf4961fb357f91a4",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/frozen-binaries/source004/default/render-tests",
+      "sha256": "d900fe08fb2023b42aca223868e6ac367cc5c85b7d8fdaeaa55e2e49c3d19537",
+      "bytes": 32021904,
+      "source_freeze": "4a957f9f71ecee51f1b5ecdeb70f531cbcc7063ea91e0b26f17dd66077d5efa2",
+      "gpu_executed": false,
+      "cpu_executed": true
+    },
+    {
+      "kind": "cooked",
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-288759d68012f619",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/frozen-binaries/source004/cooked/render-tests",
+      "sha256": "821d5075f9446595c7e33e9d3ff99ff44d66b9a92249aee7e3c169309e5469c0",
+      "bytes": 32876352,
+      "source_freeze": "4a957f9f71ecee51f1b5ecdeb70f531cbcc7063ea91e0b26f17dd66077d5efa2",
+      "gpu_executed": false,
+      "cpu_executed": true
+    }
+  ],
+  "commands": [
+    {
+      "name": "default-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.3765549659729004,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/default-cpu-001.log",
+      "sha256": "e3e0a4d10fbfe5d254b848691a9ecdcee00a8509cb4f8fdd29fde3e7542495a4"
+    },
+    {
+      "name": "cooked-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-temporal,native-metalfx"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 101,
+      "seconds": 1.0183079242706299,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooked-cpu-001.log",
+      "sha256": "a1e81247ea4d861167f9c05b7f7ec9335417e605aeccb537267ba91264054e03"
+    },
+    {
+      "name": "cooked-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-temporal,native-metalfx"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 9.646286249160767,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooked-cpu-002.log",
+      "sha256": "fa18230dd24188e60564296be8d19c369e7e233b50955a1d8baa3091b7e08152"
+    },
+    {
+      "name": "cooker-interface",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "--test",
+        "temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 2.373115062713623,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooker-interface-002.log",
+      "sha256": "ae106eb9bbfbe0377e18b43e34a36c8439c9bccb0141a50bbdec3a02866aeea6"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/native-metalfx",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 101,
+      "seconds": 6.504096984863281,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/clippy-002.log",
+      "sha256": "76289523a8c2c936cc8992f2a92c98e2b2b3b333f07d3d6566f3d1a28bd7becf"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/native-metalfx",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 1.6190550327301025,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/clippy-003.log",
+      "sha256": "0c3b5cb72252ffc3872e7f26ad442e549e663e256100dc7bfeb74da82ee10b5b"
+    },
+    {
+      "name": "wasm32",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 1.7169339656829834,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/wasm32-003.log",
+      "sha256": "58a77b89b3f1dafa141c2ebb57fe126fbde53214c226d564461e9cd80291e985"
+    },
+    {
+      "name": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 2,
+      "seconds": 0.0305631160736084,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/runtime-graph-003.log",
+      "sha256": "35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f"
+    },
+    {
+      "name": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_native",
+        "--features",
+        "incant_render/cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.4100480079650879,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/runtime-graph-004.log",
+      "sha256": "dee809680d1bc459a866790c5383b2e483e34b102ed97e607b129cf518d04fe1"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.028904199600219727,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/conventions-004.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 1.3130347728729248,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/fmt-004.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.019952058792114258,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/diff-004.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "default-binary",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--no-run",
+        "--message-format=json"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 7.956363916397095,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/default-binary-004.log",
+      "sha256": "10f0e3ead05aadf850204fbf87aa3b12a655690f3e5bb7f23675e818872e8e22"
+    },
+    {
+      "name": "cooked-binary",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--no-run",
+        "--features",
+        "cooked-temporal,native-metalfx",
+        "--message-format=json"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 8.750221729278564,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooked-binary-004.log",
+      "sha256": "ac7c1e79a235cdae36de2e6dece7d619ea6b974e941df347eb69c0af1fc72e2a"
+    },
+    {
+      "name": "default-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 8.553642988204956,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/default-cpu-005.log",
+      "sha256": "93c8795b43a6eea5f807295d585dee1cedd3b772bb81336138c59eecb7c4b672"
+    },
+    {
+      "name": "cooked-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-temporal,native-metalfx"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 9.739700078964233,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooked-cpu-005.log",
+      "sha256": "dae323bb56cee942aea791381d0c0df51e9b9efb70a1b05f5b15bbdda3f4feac"
+    },
+    {
+      "name": "cooker-interface",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "--test",
+        "temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 2.255560874938965,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooker-interface-005.log",
+      "sha256": "46b666d6239f63af70ffb95d255bcae83129a0d22304bc5b320648ff2d280d74"
+    },
+    {
+      "name": "clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/native-metalfx",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 2.598828077316284,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/clippy-005.log",
+      "sha256": "e33cf7d802598c3234dc813d5daeff8121b115577ff25cac2b58d3f9e70fc5c5"
+    },
+    {
+      "name": "wasm32",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 1.2791838645935059,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/wasm32-005.log",
+      "sha256": "25f97cdae1aba015cc2b57b5eb17caebde50f1297c529c0d5144923edcaf7a15"
+    },
+    {
+      "name": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_native",
+        "--features",
+        "incant_render/cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.3020138740539551,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/runtime-graph-005.log",
+      "sha256": "dee809680d1bc459a866790c5383b2e483e34b102ed97e607b129cf518d04fe1"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.02648615837097168,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/conventions-005.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 1.18705415725708,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/fmt-005.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.021551132202148438,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/diff-005.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "default-binary",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--no-run",
+        "--message-format=json"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.18864107131958008,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/default-binary-005.log",
+      "sha256": "453c6bc8ac9b5ca73ad507899c18c2d7364e2f3c0338a27a7cc4f59cdb408213"
+    },
+    {
+      "name": "cooked-binary",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--no-run",
+        "--features",
+        "cooked-temporal,native-metalfx",
+        "--message-format=json"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target"
+      },
+      "exit_code": 0,
+      "seconds": 0.24774503707885742,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/cooked-binary-005.log",
+      "sha256": "752078bdbceffb7d37d2828d57e9bff4e3ecd02212f4cdce998f22d85144bd21"
+    }
+  ],
+  "results": {
+    "focused_source001": {
+      "passed": 13,
+      "ignored_gpu": 2
+    },
+    "default_source004": {
+      "passed": 129,
+      "ignored_gpu": 41
+    },
+    "cooked_source004": {
+      "passed": 144,
+      "ignored_gpu": 42
+    },
+    "cooker_source004": {
+      "passed": 3
+    },
+    "final_source004": [
+      "strict all-target Clippy",
+      "wasm32 (five existing timing dead-code warnings)",
+      "explicit normal dependency graph",
+      "conventions",
+      "fmt",
+      "diff",
+      "default and cooked no-run binaries"
+    ]
+  },
+  "failures_retained": [
+    "tests-001: ambiguous test float annotation",
+    "cooked-cpu-001: correct old trusted hash refusal",
+    "clippy-002: test-only needless_range_loop",
+    "runtime-graph-003: missing required root argv",
+    "independent source003 review: residual RGB at zero alpha; corrected source004"
+  ],
+  "limits": [
+    "No GPU execution; no images, presentation surfaces or screenshots.",
+    "Ignored device contract is post-raster MASK occupancy, not end-to-end model/MASK raster proof.",
+    "No appearance, native backend execution or shipping/device performance claim.",
+    "Counts by feature/source selection overlap; not additive unique tests."
+  ],
+  "review": {
+    "source_cpu": "accepted",
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-coverage-001/reviews/source004-accepted.json",
+    "sha256": "678e67b083603de9ce5fef5103be4761933b07b1d84f64efe2bf6b71625818cc",
+    "historical_finding_sha256": "bcff277f10d6048fb934567fde2840667cca4508beb83a8b3b290541eb655644",
+    "parent_final_packet": "pending"
+  }
+}

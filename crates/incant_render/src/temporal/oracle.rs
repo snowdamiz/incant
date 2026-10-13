@@ -1,5 +1,11 @@
 //! Independent CPU reference used by the numeric shader tests (not runtime work).
 use super::TemporalConfig;
+pub(super) fn clean(color: [f32; 4]) -> [f32; 4] {
+    if !color.iter().all(|x| x.is_finite()) || color[3] <= 0. {
+        return [0.; 4];
+    }
+    std::array::from_fn(|i| color[i].clamp(0., if i == 3 { 1. } else { 65504. }))
+}
 pub(super) fn linear_depth(depth: f32, near: f32, far: f32, ortho: bool) -> Option<f32> {
     if !depth.is_finite() || !(0. ..=1.).contains(&depth) {
         return None;
@@ -36,9 +42,14 @@ pub(super) fn blend(
     hi: [f32; 4],
     c: TemporalConfig,
 ) -> [f32; 4] {
-    if !current.iter().chain(old.iter()).all(|v| v.is_finite()) || current[3] < 1. || old[3] < 1. {
-        return current;
+    if !current.iter().chain(old.iter()).all(|v| v.is_finite())
+        || !(0. ..=1.).contains(&current[3])
+        || !(0. ..=1.).contains(&old[3])
+    {
+        return clean(current);
     }
+    let current = clean(current);
+    let old = clean(old);
     let difference = (0..3)
         .map(|i| (old[i] - current[i]).abs())
         .fold(0., f32::max);

@@ -176,3 +176,16 @@ fn changed_math_interface_and_program_identity_are_not_trusted() {
         assert!(cook(kind, &s).is_err());
     }
 }
+
+#[test]
+fn coverage_resolve_rejects_previous_program_and_modified_coverage_math() {
+    let current = source(Kind::Resolve);
+    let previous = include_str!("fixtures/temporal-resolve-single-depth.wgsl");
+    assert_ne!(current, previous);
+    assert!(cook(Kind::Resolve, previous).is_err());
+    let changed = current.replace("color.a>1.0", "color.a!=1.0");
+    assert_ne!(current, changed);
+    assert!(cook(Kind::Resolve, &changed).is_err());
+    let bundle = cook(Kind::Resolve, &current).unwrap();
+    assert_eq!(bundle.artifacts.len(), 6);
+}

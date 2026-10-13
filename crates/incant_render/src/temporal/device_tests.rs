@@ -1,6 +1,6 @@
 //! Direct numeric execution of the actual resolve/copy shaders. No image files.
 use super::*;
-fn half(bits: u16) -> f32 {
+pub(super) fn half(bits: u16) -> f32 {
     let sign = if bits & 0x8000 != 0 { -1. } else { 1. };
     let exp = ((bits >> 10) & 31) as i32;
     let mant = f32::from(bits & 1023);
@@ -109,11 +109,11 @@ fn actual_temporal_resolve_disocclusion_reactivity_and_alpha_exclusion() {
         if mode == 8 || mode == 9 {
             // Zero-weight and positive-weight incompatible neighbors respectively.
             old_values[3 * 8 + 4] = [f32::NAN, 0., 0., 1.];
-            old_values[4 * 8 + 3] = [0.; 4];
-            old_values[4 * 8 + 4] = [0.; 4];
+            old_values[4 * 8 + 3] = [0., 0., 0., 2.];
+            old_values[4 * 8 + 4] = [0., 0., 0., 2.];
         }
         if mode == 10 {
-            old_values.fill([0.; 4]);
+            old_values.fill([0., 0., 0., 2.]);
         }
         let old = source(&old_values);
         let current = source(&current);
