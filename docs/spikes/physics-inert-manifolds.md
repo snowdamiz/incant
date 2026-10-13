@@ -138,7 +138,9 @@ Any admitted byte mutation must re-encode identically.
 
 ## Remaining complete-restore requirements
 
-Independent source/final evidence review is pending. This is not a complete
+Independent source and final producer evidence reviews accepted. The [current-main
+integration](physics-manifolds-main201.md) retains both receipts and its own scoped
+checks; integration publication remains pending. This is not a complete
 ContactPair or narrow-phase snapshot: pair events, pair colors/body masks,
 dispatcher/workspace and recycle state, previous cluster storage, soft contacts,
 intersection state and journals are absent. Complete body/collider properties,

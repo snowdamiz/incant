@@ -63,7 +63,8 @@ metadata and ordered plain/cluster point rows. Pending mutation journals return
 an explicit typed refusal. Actual planar/spatial native tests observe nonzero
 warm starts, removal/reuse and mixed-child cluster coordinate transforms.
 79 producer CPU tests, Clippy, wasm32 and dependency guards pass; independent
-source and final producer evidence reviews accepted. Current-main integration is pending. Solver/island reciprocal ownership, dispatcher/recycle payloads, full
+source and final producer evidence reviews accepted. The [main201 integration](docs/spikes/physics-manifolds-main201.md)
+passes all eight checks with 79 CPU cases; final integration review and publication are pending. Solver/island reciprocal ownership, dispatcher/recycle payloads, full
 world composition and live/save admission remain open.
 [Manifold contract](docs/spikes/physics-inert-manifolds.md).
 
