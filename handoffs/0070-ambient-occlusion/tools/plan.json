@@ -1,7 +1,7 @@
 {
  "format": "incant-0070-plan-v2",
  "packet": "0070-ambient-occlusion",
- "source_commit": "b633f92d9d20cd8ed4c328b0b670ab7935797801",
+ "source_commit": "d2d2294e6eb3ed9c0c467a436be0f0218006e09f",
  "default_features": "incant_render and incant_render_gpu_host default (physics-deterministic); no cooked-* family",
  "frame_rule": "One charged frame = one call that encodes a scene graph, display/output pass, text or UI pass, compute cluster grid, retained submit or composed game tick, including refused attempts. Readbacks/copies are not frames. Existing-test bounds are static counts from source review; helper cases count actual calls in-process and refuse beyond their declaration.",
  "budgets": {
@@ -49,7 +49,7 @@
  "suites": {
   "lib": {
    "root": "crates/incant_render/src/lib.rs",
-   "listed_tests": 127,
+   "listed_tests": 130,
    "ignored": [
     "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output",
     "bloom::tests::device::actual_pyramid_nonzero_halo_resize_and_zero_alpha_control",

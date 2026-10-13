@@ -224,7 +224,7 @@ def build():
     plan = {
         "format": "incant-0070-plan-v2",
         "packet": "0070-ambient-occlusion",
-        "source_commit": "b633f92d9d20cd8ed4c328b0b670ab7935797801",
+        "source_commit": "d2d2294e6eb3ed9c0c467a436be0f0218006e09f",
         "default_features": "incant_render and incant_render_gpu_host default (physics-deterministic); no cooked-* family",
         "frame_rule": ("One charged frame = one call that encodes a scene graph, display/output pass, "
                        "text or UI pass, compute cluster grid, retained submit or composed game tick, "

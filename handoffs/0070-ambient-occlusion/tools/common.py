@@ -22,7 +22,9 @@ TOOLS_REL = f"{PACKET_REL}/tools"
 HELPER = TOOLS / "effects"
 HELPER_LOCK_REL = f"{TOOLS_REL}/effects/Cargo.lock"
 PLAN = TOOLS / "plan.json"
-ENGINE_COMMIT = "b633f92d9d20cd8ed4c328b0b670ab7935797801"
+# Reviewed union b633f92d plus the output-space bloom correction; its engine
+# paths are byte-identical to root-reviewed producer 5d02ad6c.
+ENGINE_COMMIT = "d2d2294e6eb3ed9c0c467a436be0f0218006e09f"
 # Build inputs that must be byte-identical to the reviewed engine union.
 ENGINE_PATHS = ["crates", "Cargo.toml", "Cargo.lock", "rust-toolchain.toml", ".cargo",
                 "third_party", "tools/cargo"]
