@@ -1,5 +1,8 @@
 //! Opaque in-memory continuation of native physics and explicitly opted-in data.
 use super::*;
+#[cfg(any(feature = "ui", feature = "audio"))]
+mod hosted;
+mod prepare;
 use incant_input::ValidatedActions;
 use incant_runtime::{
     CheckpointAllocationBudget, CheckpointPayloadBudget, PlanarCheckpointWorkBudget,
@@ -13,25 +16,15 @@ use incant_runtime::{
 /// Reconstruction runs module initialization again. Globals, closures and logs
 /// are ephemeral. Validated action definitions are retained, but physical input
 /// and its clock restart neutral. External event/command queues must be discarded
-/// by the host. Hosted UI/audio state requires a separate composed capability and
-/// is refused here, including worlds with sticky prior-use obligations.
+/// by the host. Hosted UI/audio owners are captured through typed overloads and
+/// must be rebuilt against the prepared candidate before its VM is started.
 pub struct NativeSessionCheckpoint {
     world: WorldCheckpoint,
     code: CompiledScript,
     state: ScriptState,
     bindings: ValidatedActions,
-}
-
-fn headless(world: &NativeWorld) -> Result<()> {
-    if world.requires_ui_checkpoint() {
-        return Err(CheckpointError::Unsupported("hosted UI state is required"));
-    }
-    if world.requires_audio_checkpoint() {
-        return Err(CheckpointError::Unsupported(
-            "retained audio owner is required",
-        ));
-    }
-    Ok(())
+    ui: Option<Vec<u8>>,
+    audio: Option<Vec<u8>>,
 }
 
 impl NativeSession {
@@ -50,8 +43,26 @@ impl NativeSession {
         planar_work: &mut PlanarCheckpointWorkBudget,
         spatial_work: &mut SpatialCheckpointWorkBudget,
     ) -> Result<NativeSessionCheckpoint> {
+        self.capture_native(None, None, payload, planar_work, spatial_work)
+    }
+
+    fn capture_native(
+        &mut self,
+        ui: Option<&[u8]>,
+        audio: Option<&[u8]>,
+        payload: &mut CheckpointPayloadBudget,
+        planar_work: &mut PlanarCheckpointWorkBudget,
+        spatial_work: &mut SpatialCheckpointWorkBudget,
+    ) -> Result<NativeSessionCheckpoint> {
         let code = host(self)?._compiled.clone();
-        headless(&self.world)?;
+        if self.world.requires_ui_checkpoint() != ui.is_some() {
+            return Err(CheckpointError::Unsupported("hosted UI state is required"));
+        }
+        if self.world.requires_audio_checkpoint() != audio.is_some() {
+            return Err(CheckpointError::Unsupported(
+                "retained audio owner is required",
+            ));
+        }
         let state = script_state(self)?;
         let world = self.world.checkpoint(payload, planar_work, spatial_work)?;
         Ok(NativeSessionCheckpoint {
@@ -59,6 +70,8 @@ impl NativeSession {
             code,
             state,
             bindings: self.bindings.clone(),
+            ui: ui.map(<[u8]>::to_vec),
+            audio: audio.map(<[u8]>::to_vec),
         })
     }
 
@@ -76,35 +89,9 @@ impl NativeSession {
         spatial_work: &mut SpatialCheckpointWorkBudget,
         allocations: &mut CheckpointAllocationBudget,
     ) -> Result<()> {
-        let current = host(self)?;
-        if current.session_request.is_some() {
-            return Err(CheckpointError::Unsupported(
-                "pending session restart request",
-            ));
-        }
-        if identity(&current._compiled) != identity(&checkpoint.code) {
-            return Err(CheckpointError::ProgramMismatch);
-        }
-        let restart_requests = current.restart_requests;
-        headless(&self.world)?;
-        let world = checkpoint.world.reconstruct_for(
-            &self.world,
-            payload,
-            planar_work,
-            spatial_work,
-            allocations,
-        )?;
-        let mut candidate = checkpoint.start(world)?;
-        if restart_requests {
-            // The same host already opted into whole-session replacement.
-            match &mut candidate.host {
-                SessionVm::Bytecode(host) => host.enable_restart_requests()?,
-                #[cfg(feature = "wasmtime-host")]
-                SessionVm::DevelopmentWasm(_) => unreachable!("bytecode checkpoint"),
-                #[cfg(feature = "static-module")]
-                SessionVm::Static(_) => unreachable!("bytecode checkpoint"),
-            }
-        }
+        let candidate = checkpoint
+            .prepare_for(self, payload, planar_work, spatial_work, allocations)?
+            .start()?;
         *self = candidate;
         Ok(())
     }
@@ -121,21 +108,8 @@ impl NativeSessionCheckpoint {
         spatial_work: &mut SpatialCheckpointWorkBudget,
         allocations: &mut CheckpointAllocationBudget,
     ) -> Result<NativeSession> {
-        let world = self
-            .world
-            .reconstruct(payload, planar_work, spatial_work, allocations)?;
-        self.start(world)
-    }
-
-    fn start(&self, world: NativeWorld) -> Result<NativeSession> {
-        headless(&world)?;
-        PendingSessionCheckpoint::from_native(
-            world,
-            self.code.clone(),
-            self.state.copy()?,
-            self.bindings.clone(),
-        )
-        .start()
+        self.prepare(payload, planar_work, spatial_work, allocations)?
+            .start()
     }
 }
 
