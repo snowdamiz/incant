@@ -68,12 +68,12 @@ impl PhysicsWorld2D {
         let hits: Box<dyn Iterator<Item = (ColliderHandle, RayIntersection)> + '_> =
             if self.query_dirty {
                 Box::new(self.entries.values().filter_map(|entry| {
-                    let collider = &self.world.colliders[entry.collider];
-                    if !filter.test(&self.world.bodies, entry.collider, collider) {
+                    let collider = &self.world.read().colliders[entry.collider];
+                    if !filter.test(&self.world.read().bodies, entry.collider, collider) {
                         return None;
                     }
                     let pose = entry.body.map_or(collider.position(), |body| {
-                        self.world.bodies[body].position()
+                        self.world.read().bodies[body].position()
                     });
                     collider
                         .shape()
@@ -83,6 +83,7 @@ impl PhysicsWorld2D {
             } else {
                 Box::new(
                     self.world
+                        .read()
                         .intersect_ray(ray, query.max_distance as f32, true, filter)
                         .map(|(handle, _, hit)| (handle, hit)),
                 )

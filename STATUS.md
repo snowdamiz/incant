@@ -1,6 +1,8 @@
 # Implementation status
 
-Current main is PR243: the private primitive-world composition is merged, while public physics saves and outer runtime admission remain closed. Frozen checkpoint27 still selects main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Remaining checkpoint jobs continue on the original head; release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
+Current main is PR244: exclusive native in-memory checkpoint capture is merged, while public physics saves and the outer runtime checkpoint intake remain separate. Frozen checkpoint27 still selects main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Remaining checkpoint jobs continue on the original head; release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
+
+Default-off native capture and outer primitive in-memory checkpoint intake is privately composed on main244. Native and outer producer final reviews are accepted; all 3,647 outer implementation/build/tool inputs match its tested source005 tree. Current-main source/graph reuse is independently accepted; the native dependency merged as PR244 and outer publication awaits its required fast check. No persisted importer or public physics save is enabled. [Checkpoint scope](docs/spikes/physics-runtime-checkpoints.md).
 
 Standalone 3D physics now hides incomplete state and trigger observations after a late step error or caught unwind, and cannot be revived through structural calls. Invalid time steps remain retryable. Independent source and final producer reviews are accepted. Both producer modes, strict Clippy, native consumers and wasm compilation pass; the exact current-main239 composition additionally passes all eight default runtime cases and six checks. Final current-main review is accepted; PR240 merged after its required exact-head fast check. This does not implement rollback or physics saves. [Evidence](docs/spikes/physics-failure-isolation.md).
 
@@ -2700,6 +2702,6 @@ completed native owner and reconstructs a full private primitive candidate. Both
 deterministic and SIMD8 qualification pass 182 native and 228 snapshot tests each;
 independent complete-source review is accepted. The warning-only source010 delta
 has strict native/wasm compilation, with the source009 test generations retained
-separately. Final producer execution and current-main source composition reviews are accepted. Publication awaits the required fast check; outer runtime integration remains separate.
+separately. Final producer execution and current-main source composition reviews are accepted. PR244 merged after its required exact-head fast check; outer runtime integration remains separate.
 Public persisted physics saves remain refused. See
 [scope and evidence](docs/spikes/physics-native-capture-owner.md).
