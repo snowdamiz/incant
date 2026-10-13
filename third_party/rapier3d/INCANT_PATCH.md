@@ -33,3 +33,11 @@ preflight of the joined inert frame through an optional dependency on the
 std-only snapshot crate. It has no native graph/world constructor or installer.
 `INCANT_CHECKED_ADMISSION.json` binds this layer and its prior hashes; upstream
 solver routines are unchanged. The public runtime does not enable this feature.
+
+A later private layer, pinned separately by `INCANT_CHECKED_CONSTRUCTION.json`,
+adds crate-internal exact storage and regular body/collider field construction.
+The prior numerical-only inventory stays historical and unchanged. Private
+constructors precharge logical allocations and have no public restore entry;
+other owners, authenticated whole-world admission and runtime saves remain closed.
+The primitive allocation tests distinguish charged payload/control blocks from
+allocator overhead and retain stable Box/Arc process-OOM behavior explicitly.

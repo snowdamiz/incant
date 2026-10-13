@@ -1525,3 +1525,9 @@ impl From<ColliderBuilder> for Collider {
         val.build()
     }
 }
+
+// Incant private checked construction; no public raw setter.
+#[cfg(feature = "incant-checked-restore")]
+#[path = "collider_checkpoint.rs"]
+#[allow(dead_code)]
+mod checkpoint;
