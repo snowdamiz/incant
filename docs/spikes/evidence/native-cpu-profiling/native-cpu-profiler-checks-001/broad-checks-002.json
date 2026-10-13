@@ -1,0 +1,77 @@
+[
+  {
+    "name": "clippy",
+    "command": [
+      "tools/cargo",
+      "clippy",
+      "--locked",
+      "-p",
+      "incant_profile",
+      "-p",
+      "incant_runtime",
+      "-p",
+      "incant_script",
+      "-p",
+      "incant_game_runtime",
+      "-p",
+      "incant_game_player",
+      "--features",
+      "incant_game_player/profile-tracy",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/clippy-002.log",
+    "sha256": "5c34983526ddacd6f5a62c24c450fa4acc34b164d4667d5a14969b798b30f6ee"
+  },
+  {
+    "name": "default-player",
+    "command": [
+      "tools/cargo",
+      "test",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--lib"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/default-player-002.log",
+    "sha256": "8c8631686cdcc6fab7ce277670da86d71f71d19d2f4bd17db062f555e0d8d237"
+  },
+  {
+    "name": "wasm-default",
+    "command": [
+      "tools/cargo",
+      "check",
+      "--locked",
+      "-p",
+      "incant_profile",
+      "-p",
+      "incant_runtime",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/wasm-default-002.log",
+    "sha256": "eb42b679a0d8d8d9cf17f083aa010a4d1eb39bc931502e9d6f63812e84f5fe0f"
+  },
+  {
+    "name": "wasm-summary",
+    "command": [
+      "tools/cargo",
+      "check",
+      "--locked",
+      "-p",
+      "incant_profile",
+      "--features",
+      "summary",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "exit": 0,
+    "log": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-checks-001/wasm-summary-002.log",
+    "sha256": "005b71ab37d39502c516200a03fa01c4b4e3ef20aee20075b960b5eff5577a99"
+  }
+]

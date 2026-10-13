@@ -10,6 +10,7 @@ pub mod mobile;
 mod observe;
 mod package;
 mod pcm_output;
+mod profile;
 mod program;
 mod restart;
 mod session;
@@ -44,6 +45,22 @@ pub fn run(
     args: Vec<String>,
     mut emit: impl FnMut(&str),
 ) -> Result<(), Box<dyn std::error::Error>> {
+    run_owned(args, &mut emit, false)
+}
+/// Standalone process entry point. Explicit --profile-tracy starts a loopback-only
+/// transport whose lifetime ends with the process; embedded hosts must use run().
+pub fn run_cli(
+    args: Vec<String>,
+    mut emit: impl FnMut(&str),
+) -> Result<(), Box<dyn std::error::Error>> {
+    run_owned(args, &mut emit, true)
+}
+fn run_owned(
+    args: Vec<String>,
+    emit: &mut dyn FnMut(&str),
+    standalone: bool,
+) -> Result<(), Box<dyn std::error::Error>> {
+    let (args, profile) = profile::split(args, standalone)?;
     let (args, checkpoint) = checkpoint::Options::split(args)?;
     let args = package::expand(args)?;
     if args.as_slice() == ["--build-info"] {
@@ -152,18 +169,25 @@ pub fn run(
         if count > output.len() {
             return Err("output frame bound".into());
         }
-        game.tick_recorded(
+        let frame_profile = incant_profile::scope(incant_profile::Phase::Frame);
+        let tick_result = game.tick_recorded(
             restart.input.filter(replay.events_at(tick)?)?,
             replay.ui_at(tick)?,
             replay.viewport_at(tick)?,
             &mut output[..count],
-        )?;
+        );
+        drop(frame_profile);
+        incant_profile::frame_outcome(tick_result.is_ok());
+        tick_result?;
         if let Some(plan) = &mut observations {
             plan.observe_at(start_tick + tick, game.world()?, game.input()?)?;
         }
         pcm.append(&output[..count])?;
         restart.viewport(replay.viewport_at(tick)?);
-        restart.accept(&mut game, start_tick + tick, u128::from(pcm.frames()))?;
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::Restart);
+            restart.accept(&mut game, start_tick + tick, u128::from(pcm.frames()))?;
+        }
     }
     if restart.boundaries.is_empty()
         && (u128::from(pcm.frames()) != frames
@@ -205,6 +229,7 @@ pub fn run(
         passed = observed.passed;
         report["observations"] = serde_json::to_value(observed)?;
     }
+    profile::append(&mut report, &profile)?;
     let save = if checkpoint.save.is_some() {
         if !passed {
             emit(&report.to_string());

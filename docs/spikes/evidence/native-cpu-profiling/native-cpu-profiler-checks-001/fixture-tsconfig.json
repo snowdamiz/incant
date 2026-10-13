@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "noEmit": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": [
+      "ES2022"
+    ],
+    "types": [],
+    "paths": {
+      "@incant/runtime/native": [
+        "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/sdk/ts/src/native.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/tools/probes/native-cpu-profile/behavior.ts"
+  ]
+}
