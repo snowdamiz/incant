@@ -7,6 +7,7 @@ mod arena_codec;
 mod attachment;
 mod attachment_codec;
 mod body_state;
+mod broad_owner;
 mod coarena;
 mod coarena_codec;
 mod codec;
@@ -21,6 +22,7 @@ mod graph_codec;
 mod island_state;
 mod narrow_owner;
 mod pair_state;
+mod pending_bvh;
 mod records;
 mod rigid_owner;
 mod validate;
@@ -30,6 +32,7 @@ pub use arena_codec::{decode_arena, encode_arena};
 pub use attachment::*;
 pub use attachment_codec::{decode_attachments, encode_attachments};
 pub use body_state::*;
+pub use broad_owner::*;
 pub use coarena::*;
 pub use coarena_codec::{decode_coarena, encode_coarena};
 pub use codec::{decode, encode};
@@ -44,6 +47,7 @@ pub use graph_codec::{decode_graph, encode_graph};
 pub use island_state::*;
 pub use narrow_owner::*;
 pub use pair_state::*;
+pub use pending_bvh::*;
 pub use records::*;
 pub use rigid_owner::*;
 pub use validate::validate;
@@ -80,6 +84,8 @@ pub enum Error {
     Collider,
     UnsupportedCollider,
     Narrow,
+    Broad,
+    BroadTree,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Inert broad-phase owner — source and CPU evidence accepted
+
+Checked broad-phase records preserve exact pair/adjacency and update history,
+joined to existing collider/narrow owners. A distinct pending-tree witness admits
+only the demonstrated deferred ancestor flag/bound state; strict BVH validation
+is unchanged. Eight new actual 2D/3D cases include 96 trusted continuation steps,
+plus the prior 728. Independent source and root final evidence review accepted
+151 CPU tests and seven scoped checks. Missing deferred trees still refuse;
+`PhysicsUnsupported`, hostile live restore and full pipeline-phase admission stay
+closed. No vendor changes or performance gate. Publisher integration is pending.
+[Scope and evidence](docs/spikes/physics-broad-owner.md).
+
 ## Inert narrow-phase owner — source and CPU evidence accepted
 
 The checked physics boundary now preserves collider graph-index ownership, ordered
