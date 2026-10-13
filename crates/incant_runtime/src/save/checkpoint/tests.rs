@@ -525,3 +525,5 @@ fn rewind_keeps_save_obligation_without_inventing_solver_history() {
         observations(&source, &oracle);
     }
 }
+
+mod compound_tiles;

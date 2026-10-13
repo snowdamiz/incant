@@ -148,3 +148,83 @@ fn checkpoint_outer_joins_refuse_mismatched_identity_configuration_and_outputs()
     runtime.failed = true;
     assert_eq!(validate(&runtime), Err("failed runtime"));
 }
+
+fn compound() -> ColliderShape {
+    ColliderShape::Compound {
+        parts: [1, 2]
+            .map(|n| incant_types::ColliderPart {
+                id: format!("{n:026}"),
+                translation: [if n == 1 { -0.3 } else { 0.3 }, 0., 0.],
+                rotation: [0., 0., (0.2_f64).sin(), (0.2_f64).cos()],
+                shape: PrimitiveColliderShape::Box {
+                    half_extents: [0.2, 0.3, 0.4],
+                },
+            })
+            .into(),
+    }
+}
+#[test]
+fn compound_join_matches_ordered_normalized_native_parts_without_rebuilding() {
+    let mut runtime = body(compound());
+    for _ in 0..8 {
+        assert_eq!(validate(&runtime), Ok(()));
+        runtime.step(1. / 64.).unwrap();
+    }
+    let scene = runtime.scenes.get_mut(&id(1)).unwrap();
+    let ColliderShape::Compound { parts } = &mut scene
+        .entries
+        .get_mut(&id(10))
+        .unwrap()
+        .config
+        .collider
+        .shape
+    else {
+        panic!()
+    };
+    parts.swap(0, 1);
+    assert_eq!(validate(&runtime), Err("compound part order or limit"));
+    let scene = runtime.scenes.get_mut(&id(1)).unwrap();
+    let ColliderShape::Compound { parts } = &mut scene
+        .entries
+        .get_mut(&id(10))
+        .unwrap()
+        .config
+        .collider
+        .shape
+    else {
+        panic!()
+    };
+    parts.swap(0, 1);
+    parts[1].translation[0] += 0.1;
+    assert_eq!(validate(&runtime), Err("collider geometry"));
+}
+#[test]
+fn compound_join_refuses_primitive_dimension_and_parent_mismatches() {
+    let mut runtime = body(compound());
+    let scene = runtime.scenes.get_mut(&id(1)).unwrap();
+    let ColliderShape::Compound { parts } = &mut scene
+        .entries
+        .get_mut(&id(10))
+        .unwrap()
+        .config
+        .collider
+        .shape
+    else {
+        panic!()
+    };
+    parts[0].shape = PrimitiveColliderShape::Sphere { radius: 0.2 };
+    assert_eq!(validate(&runtime), Err("collider geometry"));
+    let mut runtime = body(compound());
+    let config = &mut runtime
+        .scenes
+        .get_mut(&id(1))
+        .unwrap()
+        .entries
+        .get_mut(&id(10))
+        .unwrap()
+        .config;
+    config.body = None;
+    config.state.velocity = [0.; 3];
+    config.state.angular_velocity = [0.; 3];
+    assert_eq!(validate(&runtime), Err("body declaration presence"));
+}

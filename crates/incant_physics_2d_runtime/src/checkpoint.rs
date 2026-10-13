@@ -35,18 +35,56 @@ pub struct PhysicsCheckpoint {
     overlaps: Vec<(StableId, StableId)>,
     events: Vec<TriggerEvent>,
 }
-fn copy_config(value: &PreparedBody) -> Result<PreparedBody, CheckpointError> {
-    let config::Geometry::Primitive(shape) = &value.geometry else {
-        return Err(CheckpointError::Owner(
-            "tile geometry checkpoint unsupported",
-        ));
+/// Borrowed geometry, including the retained rectangle order of automatic tiles.
+/// A tile collider's placeholder Collider2D shape is not its native geometry.
+#[derive(Clone, Copy, Debug)]
+pub enum CheckpointGeometry<'a> {
+    Primitive(&'a incant_types::ColliderShape2D),
+    Tiles(&'a [([f64; 2], [f64; 2])]),
+}
+pub struct CheckpointConfiguration<'a> {
+    pub id: StableId,
+    pub body: &'a Option<incant_types::RigidBody>,
+    pub collider: &'a incant_types::Collider2D,
+    pub state: &'a BodyState,
+    pub geometry: CheckpointGeometry<'a>,
+}
+fn copy_config(value: &PreparedBody, budget: &mut Budget) -> Result<PreparedBody, CheckpointError> {
+    let geometry = match &value.geometry {
+        config::Geometry::Primitive(shape) => config::Geometry::Primitive(shape.clone()),
+        config::Geometry::Tiles(parts) => {
+            if parts.is_empty() || parts.len() > MAX_SHAPES {
+                return Err(CheckpointError::Owner("tile part limit"));
+            }
+            let mut copied = budget.vector(parts.len())?;
+            copied.extend_from_slice(parts);
+            config::Geometry::Tiles(copied)
+        }
     };
     Ok(PreparedBody {
         body: value.body.clone(),
         collider: value.collider.clone(),
-        geometry: config::Geometry::Primitive(shape.clone()),
+        geometry,
         state: value.state.clone(),
     })
+}
+fn charge_geometry<'a>(
+    configs: impl Iterator<Item = &'a PreparedBody>,
+    work: &mut WorkBudget,
+) -> Result<(), CheckpointError> {
+    let mut total = 0usize;
+    for config in configs {
+        let count = config.shapes();
+        total = total
+            .checked_add(count)
+            .filter(|n| *n <= MAX_SHAPES)
+            .ok_or(CheckpointError::Owner("aggregate shape limit"))?;
+        if count == 0 {
+            return Err(CheckpointError::Owner("tile part limit"));
+        }
+    }
+    work.charge(total as u64 * 4).map_err(CaptureError::from)?;
+    Ok(())
 }
 fn charge_work(
     entries: usize,
@@ -126,7 +164,32 @@ impl PhysicsWorld2D {
         }))
     }
 
-    /// Capture only a healthy completed primitive world. One cumulative logical
+    /// Read every native declaration without allocation or mutable native access.
+    /// This exposes geometry for an enclosing owner join; it does not confer
+    /// completed-step authority or validate a checkpoint by itself.
+    pub fn checkpoint_geometry_configurations(
+        &self,
+    ) -> Result<impl ExactSizeIterator<Item = CheckpointConfiguration<'_>>, CheckpointError> {
+        if self.failed {
+            return Err(CheckpointError::Owner("failed runtime"));
+        }
+        Ok(self.entries.iter().map(|(&id, entry)| {
+            let value = &entry.config;
+            let geometry = match &value.geometry {
+                config::Geometry::Primitive(shape) => CheckpointGeometry::Primitive(shape),
+                config::Geometry::Tiles(parts) => CheckpointGeometry::Tiles(parts),
+            };
+            CheckpointConfiguration {
+                id,
+                body: &value.body,
+                collider: &value.collider,
+                state: &value.state,
+                geometry,
+            }
+        }))
+    }
+
+    /// Capture only a healthy completed supported world. One cumulative logical
     /// payload budget covers outer rows, native validation and encoded output;
     /// allocator bookkeeping/RSS is not represented by this budget.
     pub fn checkpoint(
@@ -143,6 +206,7 @@ impl PhysicsWorld2D {
             self.events.len(),
             work,
         )?;
+        charge_geometry(self.entries.values().map(|e| &e.config), work)?;
         charge_native_pairs(self, work)?;
         checkpoint_validation::validate(self).map_err(CheckpointError::Owner)?;
         let mut entries = budget.vector(self.entries.len())?;
@@ -151,7 +215,7 @@ impl PhysicsWorld2D {
                 id,
                 body: entry.body,
                 collider: entry.collider,
-                config: copy_config(&entry.config)?,
+                config: copy_config(&entry.config, budget)?,
             });
         }
         let mut overlaps = budget.vector(self.overlaps.len())?;
@@ -204,6 +268,7 @@ impl PhysicsCheckpoint {
             self.events.len(),
             work,
         )?;
+        charge_geometry(self.entries.iter().map(|e| &e.config), work)?;
         charge::<(StableId, Entry)>(self.entries.len(), budget)?;
         charge::<(ColliderHandle, StableId)>(self.entries.len(), budget)?;
         charge::<(StableId, StableId)>(self.overlaps.len(), budget)?;
@@ -229,7 +294,7 @@ impl PhysicsCheckpoint {
                 Entry {
                     body: row.body,
                     collider: row.collider,
-                    config: copy_config(&row.config)?,
+                    config: copy_config(&row.config, budget)?,
                 },
             );
             if candidate.ids.insert(row.collider, row.id).is_some() {
