@@ -46,26 +46,28 @@ fn compound_configuration_copy_charges_all_part_and_identity_payloads() {
 fn compound_native_checkpoint_retains_warm_contacts_sleep_wake_and_events() {
     // Both compound/primitive and compound/compound warm contacts are retained.
     let mut source = PhysicsRuntime::default();
-    source.sync(
-        PreparedPhysics::new(BTreeMap::from([
-            (
-                id(1),
-                BTreeMap::from([
-                    (id(10), spec(false, false, -0.5)),
-                    (id(11), compound_spec(true, false, 1.)),
-                    (id(12), compound_spec(false, true, 0.6)),
-                ]),
-            ),
-            (
-                id(2),
-                BTreeMap::from([
-                    (id(10), compound_spec(false, false, -0.5)),
-                    (id(11), compound_spec(true, false, 1.)),
-                ]),
-            ),
-        ]))
-        .unwrap(),
-    );
+    source
+        .sync(
+            PreparedPhysics::new(BTreeMap::from([
+                (
+                    id(1),
+                    BTreeMap::from([
+                        (id(10), spec(false, false, -0.5)),
+                        (id(11), compound_spec(true, false, 1.)),
+                        (id(12), compound_spec(false, true, 0.6)),
+                    ]),
+                ),
+                (
+                    id(2),
+                    BTreeMap::from([
+                        (id(10), compound_spec(false, false, -0.5)),
+                        (id(11), compound_spec(true, false, 1.)),
+                    ]),
+                ),
+            ]))
+            .unwrap(),
+        )
+        .unwrap();
     for _ in 0..512 {
         source.step(1. / 64.).unwrap();
     }
@@ -83,14 +85,16 @@ fn compound_native_checkpoint_retains_warm_contacts_sleep_wake_and_events() {
     for tick in 0..96 {
         for world in [&mut source, &mut restored] {
             if tick == 8 {
-                world.remove(&id(1), &id(12));
+                world.remove(&id(1), &id(12)).unwrap();
             }
             if tick == 16 {
-                world.install(
-                    id(1),
-                    id(13),
-                    PreparedBody::new(compound_spec(false, true, 0.6)).unwrap(),
-                );
+                world
+                    .install(
+                        id(1),
+                        id(13),
+                        PreparedBody::new(compound_spec(false, true, 0.6)).unwrap(),
+                    )
+                    .unwrap();
             }
             if tick == 40 {
                 let mut state = world.state(&id(2), &id(11)).unwrap().clone();

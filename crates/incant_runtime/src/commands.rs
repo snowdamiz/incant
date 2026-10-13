@@ -479,11 +479,37 @@ impl NativeWorld {
             }
         } else {
             let staged = self.stage(commands)?;
-            // The prepared final collection was checked during staging, while
-            // all native numeric undo was still owned by any script adapter.
-            self.physics_2d
-                .apply(staged.prepared_2d)
-                .expect("staged planar collection");
+            // Admit both native dimensions before touching either solver, ECS
+            // entities, stable-ID maps or published events. No native numeric
+            // borrow may occur between these detached plans and their permits.
+            let mut spatial_changes: Vec<_> = staged
+                .prepared
+                .into_iter()
+                .map(|(id, body)| (self.scene_id(), id, body))
+                .collect();
+            spatial_changes.extend(staged.removed.iter().map(|&id| (self.scene_id(), id, None)));
+            #[cfg(feature = "native-checkpoints")]
+            {
+                let spatial = self.physics.prepare_structure(spatial_changes)?;
+                let planar = self.physics_2d.prepare_structure(staged.prepared_2d)?;
+                let spatial = self.physics.admit_structure(
+                    &spatial,
+                    &mut incant_physics_runtime::CheckpointWorkBudget::new(64_000_000),
+                )?;
+                let planar = self.physics_2d.admit_structure(
+                    &planar,
+                    &mut incant_physics_2d_runtime::CheckpointWorkBudget::new(64_000_000),
+                )?;
+                self.physics.apply_structure(spatial)?;
+                self.physics_2d.apply_structure(planar)?;
+            }
+            #[cfg(not(feature = "native-checkpoints"))]
+            {
+                self.physics.validate_changes(&spatial_changes)?;
+                self.physics_2d.validate_changes(&staged.prepared_2d)?;
+                self.physics.apply_changes(spatial_changes)?;
+                self.physics_2d.apply(staged.prepared_2d)?;
+            }
             // Everything that can reject external data completed above. These
             // handles/IDs are exclusively owned by this world until commit ends.
             for id in staged.removed {
@@ -491,7 +517,6 @@ impl NativeWorld {
                 self.spatial_ids.remove(&id);
                 self.root_ids.remove(&id);
                 self.tilemap_collision_ids.remove(&id);
-                self.physics.remove(&self.scene_id(), &id);
                 let entity = self.entities.remove(&id).expect("staged entity");
                 self.world.despawn(entity);
             }
@@ -530,13 +555,6 @@ impl NativeWorld {
                 let mut target = self.world.entity_mut(self.entities[&id]);
                 if target.get::<Binding>().is_some_and(|b| b.body.is_some()) {
                     target.insert(Spin(spin.unwrap_or(AngularVelocity { angular: [0.; 3] })));
-                }
-            }
-            for (id, prepared) in staged.prepared {
-                if let Some(prepared) = prepared {
-                    self.physics.install(self.scene_id(), id, prepared);
-                } else {
-                    self.physics.remove(&self.scene_id(), &id);
                 }
             }
             let mut hierarchy = Hierarchy {
