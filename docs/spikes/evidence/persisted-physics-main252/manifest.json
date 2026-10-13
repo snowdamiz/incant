@@ -26,6 +26,11 @@
       "path": "docs/spikes/evidence/persisted-physics-main252/persisted-game-checkpoints-final-independent-20261013.json",
       "sha256": "c66f0f4dc8335d9a4b987a23b7b257486ae1118361e16b22dc406ce12f575ae4",
       "bytes": 5101
+    },
+    {
+      "path": "docs/spikes/evidence/persisted-physics-main252/final-review.json",
+      "sha256": "5fd66bc3e518c7de0f5254e476b6d5ad3a54e2fabf5fad050bb73bd7a87e8381",
+      "bytes": 1872
     }
   ],
   "producer_manifests": [
@@ -74,7 +79,7 @@
       "bytes": 14568589
     }
   ],
-  "review_status": "Current-main final independent review pending; all producer source/final packets accepted.",
+  "review_status": "All producer and current-main source/final evidence accepted; publication remains subject to the exact-head required fast check.",
   "verifier": {
     "path": "docs/spikes/evidence/persisted-physics-main252/verify.py",
     "sha256": "eb5d4abad00b9b5e1b875f0257159bb05fb2e8c6ed1d0035e227d03d8f5ba315",

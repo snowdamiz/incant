@@ -52,8 +52,8 @@ Wasmtime fixtures establish compilation only, not shipped guest persistence.
 This does not qualify reference phones, live device audio, GPU saves, arbitrary
 Wasm heaps, cross-backend portability or a phase gate. Logical budgets are not
 allocator/RSS ceilings. Save and PCM outputs are individually atomic, not a
-multi-file transaction. Current-main final review and the PR fast gate remain
-pending. Checkpoint30 independently stays frozen at selected main252 and must
+multi-file transaction. Current-main final independent review is accepted; publication requires the
+exact-head PR fast gate. Checkpoint30 independently stays frozen at selected main252 and must
 obtain all 23 required successes before any release promotion.
 
 [Manifest](evidence/persisted-physics-main252/manifest.json) and the read-only
