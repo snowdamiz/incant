@@ -1,0 +1,122 @@
+{
+  "packet": "0073-upscaling-review",
+  "stage": "upscaling-visual",
+  "status": "prepared; frozen by the commit root reviews before any grant. No build, GPU child or capture has run for this stage.",
+  "producer": "0452c5f5afc11c99b7c90d111428cc23611c9590",
+  "producer_manifest": {
+    "path": "docs/spikes/evidence/temporal-upscaling.json",
+    "sha256": "2d2f4ffa9c6c43a95ab733f8fa3fa92ac4f5a1743f0759597e31534e70f531ca",
+    "source_freeze_sha256": "b7ee5ca277f5ca3b1574dd6640638347ca068cb11ba207cb4c1642bcf9f67411",
+    "files": 39
+  },
+  "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
+  "grant": {
+    "path": "~/.codex/incant-evidence/0073-upscaling-visual/review-ready.json",
+    "fields": {
+      "packet": "0073-upscaling-review",
+      "stage": "upscaling-visual",
+      "source_commit": "40-hex commit whose build inputs equal the producer's (build.py checkout refuses otherwise)",
+      "visual_tree": "git rev-parse <commit>:handoffs/0073-upscaling-review/visual of the reviewed commit",
+      "target": "a dedicated ~/.codex/<name>-target directory chosen by root",
+      "prior_<name>_path / prior_<name>_sha256": "at least one prior release receipt, e.g. 0073-upscaling-numeric/gpu-released.json"
+    }
+  },
+  "budgets": {
+    "frames_max": 96,
+    "pngs_max": 16,
+    "png_size": [960, 540],
+    "case_timeout_s": 120,
+    "listing_timeout_s": 60,
+    "build_timeout_s": 2700,
+    "compile_jobs": 2
+  },
+  "builds": {
+    "review": ["test", "-p", "incant_render", "--test", "upscaling_review", "--no-run"],
+    "lint": ["clippy", "-p", "incant_render", "--test", "upscaling_review"],
+    "common_flags": ["--locked", "--offline", "--profile", "ci", "-j2", "--message-format=json-render-diagnostics"],
+    "forbidden_feature_prefix": "cooked-",
+    "note": "Default features only. Every cooked-* family refuses motion history (motion::admission), so a cooked feature in the build fails the stage before any GPU child."
+  },
+  "policy": {
+    "history_weight": 0.9,
+    "relative_depth": 0.05,
+    "absolute_depth": 0.02,
+    "reactive_threshold": 4.0,
+    "reactive_strength": 0.5,
+    "note": "Fixed review policy, identical to the 0072 fixed-resolution review; there is no quality preset."
+  },
+  "review": {
+    "binary": "upscaling_review",
+    "cwd": "crates/incant_render",
+    "output_env": "INCANT_0073_REVIEW_OUT",
+    "backend_env": {"INCANT_EXPECT_GPU_BACKEND": "Metal"},
+    "args": ["--ignored", "--exact", "--nocapture", "--test-threads=1"],
+    "max_runs_per_case": 1,
+    "order": ["probe", "stationary", "motion", "transitions"],
+    "cases": {
+      "probe": {
+        "test": "probe",
+        "frames": 0,
+        "scene_submissions": 0,
+        "ui_submissions": 0,
+        "pngs": [],
+        "purpose": "Adapter and backend; the owner refuses before the startup opt-in; opt-in succeeds and is idempotent; the review policy validates and five invalid policies are refused by validation and by the owner; logical owner footprint recorded as context only."
+      },
+      "stationary": {
+        "test": "stationary",
+        "frames": 36,
+        "scene_submissions": 26,
+        "ui_submissions": 10,
+        "output": [960, 540],
+        "internal": [480, 270],
+        "pngs": ["stationary-full.png", "stationary-drs50.png", "stationary-up50.png", "stationary-phases.png", "stationary-detail.png", "stationary-activity.png"],
+        "purpose": "Static look-dev stage. FULL output-size control and DRS 8/16 nearest control (each with the physical UI), then 24 UP 8/16 frames: three 8-phase jitter cycles, UI on the last 8. Thin detail (1.6, 0.8 and 0.4 px wires and a 0.56 px diagonal against the backdrop; posts receding to about 1.3 px), a trilinear-mipmapped chart at about one texel per output pixel, sphere and cube silhouettes, sun shadows, a BLEND card, nearest-sampled sprites and world text."
+      },
+      "motion": {
+        "test": "motion",
+        "frames": 24,
+        "scene_submissions": 24,
+        "ui_submissions": 0,
+        "output": [960, 540],
+        "internal": [480, 270],
+        "pngs": ["motion-full.png", "motion-up50.png", "motion-detail.png"],
+        "purpose": "The stage plus a cube: 8 static UP frames, then the cube moves 0.12 m (about 8 px) per frame out from behind the sphere across the chart (occlusion and disocclusion), and from frame 15 the camera also pans 0.05 m per frame. FULL and DRS controls render frames 14 and 20 exactly."
+      },
+      "transitions": {
+        "test": "transitions",
+        "frames": 29,
+        "scene_submissions": 29,
+        "ui_submissions": 0,
+        "output": [960, 540],
+        "viewport": {"rect": [37.5, 21.25, 885.0, 497.5], "corner_radii": [12.0, 12.0, 12.0, 12.0], "canvas_srgb": [64, 80, 96]},
+        "schedule": [[8, 10, false], [12, 3, false], [4, 3, false], [16, 3, false], [8, 3, false], [8, 5, true]],
+        "pngs": ["transitions-full.png", "transitions-up50.png", "transitions-strip.png", "transitions-cut.png"],
+        "purpose": "The stage in a fractional, offset, rounded viewport. FULL and DRS 8/16 controls, then UP: 10 frames at 8/16, internal-only changes to 12, 4, 16 and 8 sixteenths (3 frames each, one owner and history throughout), then an explicit cut and 5 frames at 8/16."
+      }
+    }
+  },
+  "totals": {
+    "frames": 89,
+    "pngs": 13,
+    "reserve_frames": 7,
+    "reserve_pngs": 3
+  },
+  "counting": "A frame is one queue submission that renders into a 960x540 review target: every RetainedScene::submit attempt, including refusals and failures, and every UiLayer::submit. Readback copies are part of their frame. The helper charges each frame before attempting it and panics past its case limit; gpu.py debits each case's full reserve under the packet and shared GPU locks, fsyncs it and only then launches. Debits are never refunded, and a failed case ends the stage.",
+  "contract_checks_only": "Pass/fail comes from submitted-owner state (phase, history, epoch, sequence, internal and output size), control identity, opaque UI interior identity, viewport chrome identity and non-blank frames. Image metrics are observations; appearance is judged only by inspecting the PNGs.",
+  "order": [
+    "lease.py acquire",
+    "build.py checkout",
+    "build.py toolchain",
+    "build.py review",
+    "gpu.py list",
+    "gpu.py review probe",
+    "gpu.py review stationary",
+    "gpu.py review motion",
+    "gpu.py review transitions",
+    "analyze.py check (CPU only) and personal inspection of every retained PNG",
+    "gpu.py release",
+    "build.py lint (optional, CPU only, still under the lease)",
+    "lease.py release",
+    "analyze.py publish"
+  ]
+}

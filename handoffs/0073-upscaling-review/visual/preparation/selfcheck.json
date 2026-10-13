@@ -1,0 +1,139 @@
+{
+ "python": "3.14.8",
+ "plan_sha256": "3b6ee7711cb41ec9944180bf7b1ec62b40199677e8f6e6793584dc15fe13511b",
+ "helper_sha256": "f8ec6311314d4c782e409935d2ec5491ab53fcc9d1b74bd19453dc9481b4a7ee",
+ "tools": {
+  "analyze.py": "6afa2325862da36b70cc23f20c69c83802b8836999698db75af9860ed1be9866",
+  "build.py": "004f6349b8067da15981d1127ff9e8b30a4e396d05e82ea0f240faf373f7c3d0",
+  "common.py": "9256090f378d6f4e0b61a26aa2ade0b6be442f52c91b58d50b2cdd5ab2cd3be0",
+  "gpu.py": "b581c19c57a42bca485fac7ed499d1827cc2357f5dc6c3fbc1d9fd7f8d021f79",
+  "lease.py": "e1fe8738730fd6d7eaf276387b29091655bc534fe830859630c21bf69802cc42",
+  "selfcheck.py": "5aabaa7a3b44daf8e9e5d5bf189399893a695ed59f08702e99a02da0d2c8525c",
+  "test_analyze.py": "cdcbd3e99790528a8dee15c7e2c2420e68b623419354f467fdd3310ebe70dc1c",
+  "test_lifecycle.py": "5005ac36b5e486cc83a81403d29c4e783ca56e5b1848ebd99d56aaa9314f9821"
+ },
+ "syntax": "all tools parse",
+ "plan": {
+  "case_frames_are_scene_plus_ui": true,
+  "frames_match_total": true,
+  "frames_within_96": true,
+  "reserve_frames_consistent": true,
+  "png_names_unique": true,
+  "png_names_case_prefixed": true,
+  "pngs_match_total_within_16": true,
+  "reserve_pngs_consistent": true,
+  "png_size_960x540": true,
+  "one_run_per_case": true,
+  "order_covers_cases_once": true,
+  "builds_locked_offline_ci_j2": true,
+  "builds_feature_free": true,
+  "review_build_names_binary": true,
+  "backend_env_metal": true
+ },
+ "helper": {
+  "tests_match_plan": true,
+  "limits_match_plan": true,
+  "png_names_per_case_match_plan": true,
+  "size_960x540": true,
+  "output_variable_matches_plan": true,
+  "policy_matches_plan": true,
+  "analyze_ui_button_matches": true,
+  "analyze_ui_label_matches": true,
+  "analyze_ui_interior_matches": true,
+  "analyze_viewport_matches": true,
+  "analyze_edge_threshold_matches": true,
+  "observed": {
+   "tests": [
+    "probe",
+    "stationary",
+    "motion",
+    "transitions"
+   ],
+   "limits": {
+    "probe": 0,
+    "stationary": 36,
+    "motion": 24,
+    "transitions": 29
+   },
+   "pngs": {
+    "probe": [],
+    "stationary": [
+     "stationary-full.png",
+     "stationary-drs50.png",
+     "stationary-up50.png",
+     "stationary-phases.png",
+     "stationary-detail.png",
+     "stationary-activity.png"
+    ],
+    "motion": [
+     "motion-full.png",
+     "motion-up50.png",
+     "motion-detail.png"
+    ],
+    "transitions": [
+     "transitions-full.png",
+     "transitions-up50.png",
+     "transitions-strip.png",
+     "transitions-cut.png"
+    ]
+   }
+  }
+ },
+ "refusals": {
+  "commands": {
+   "lease.py acquire": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "lease.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py checkout": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py toolchain": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py review": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "build.py lint": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py list": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review probe": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py review stationary": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "gpu.py release": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py check": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   },
+   "analyze.py publish": {
+    "exit": 1,
+    "refused_for_absent_grant": true
+   }
+  },
+  "all_refused_for_absent_grant": true,
+  "evidence_directory_still_absent": true,
+  "git_status_unchanged": true,
+  "global_gpu_lock_untouched": true
+ },
+ "all_pass": true
+}

@@ -1,0 +1,13 @@
+{
+ "cpu_only": true,
+ "passed": true,
+ "results": {
+  "hashes_match": true,
+  "fourteen_tiles_recut_and_match": true,
+  "ui_interior_identity": true,
+  "stats_reproduced": true,
+  "stats_nonzero": true,
+  "one_pixel_change_detected_in_slot_6_only": true
+ },
+ "python": "3.14.8"
+}
