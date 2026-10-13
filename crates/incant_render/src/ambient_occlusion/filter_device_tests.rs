@@ -442,6 +442,7 @@ fn copy(
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum RasterMode {
+    Production,
     Fractional,
     FractionalSentinel,
     FullTargetSentinel,
@@ -450,7 +451,7 @@ enum RasterMode {
 #[test]
 #[ignore = "requires delegated GPU: exactly two 19x15 submissions, six render passes, no images"]
 fn actual_plane_filter_horizontal_vertical_depth_and_r8_contract() {
-    run_filter_cases(&[RasterMode::Fractional], true);
+    run_filter_cases(&[RasterMode::Production], true);
 }
 
 /// Diagnostic only: retains the original uniform, shader and scalar bounds.
@@ -605,16 +606,18 @@ fn run_filter_cases(raster_modes: &[RasterMode], assert_expected: bool) {
                     depth_slice: None,
                     resolve_target: None,
                     ops: wgpu::Operations {
-                        load: wgpu::LoadOp::Clear(if mode == RasterMode::Fractional {
-                            wgpu::Color::WHITE
-                        } else {
-                            wgpu::Color {
-                                r: 17. / 255.,
-                                g: 0.,
-                                b: 0.,
-                                a: 1.,
-                            }
-                        }),
+                        load: wgpu::LoadOp::Clear(
+                            if matches!(mode, RasterMode::Production | RasterMode::Fractional) {
+                                wgpu::Color::WHITE
+                            } else {
+                                wgpu::Color {
+                                    r: 17. / 255.,
+                                    g: 0.,
+                                    b: 0.,
+                                    a: 1.,
+                                }
+                            },
+                        ),
                         store: wgpu::StoreOp::Store,
                     },
                 })];
@@ -628,8 +631,16 @@ fn run_filter_cases(raster_modes: &[RasterMode], assert_expected: bool) {
                 });
                 pass.set_pipeline(&filters[axis]);
                 pass.set_bind_group(0, &groups[axis], &[]);
-                if mode != RasterMode::FullTargetSentinel {
-                    pass.set_viewport(RECT[0], RECT[1], RECT[2], RECT[3], 0., 1.);
+                match mode {
+                    RasterMode::Production => {
+                        assert!(
+                            super::raster::PostprocessRaster::new(RECT, [W, H]).apply(&mut pass)
+                        );
+                    }
+                    RasterMode::Fractional | RasterMode::FractionalSentinel => {
+                        pass.set_viewport(RECT[0], RECT[1], RECT[2], RECT[3], 0., 1.);
+                    }
+                    RasterMode::FullTargetSentinel => {}
                 }
                 pass.draw(0..3, 0..1);
             }

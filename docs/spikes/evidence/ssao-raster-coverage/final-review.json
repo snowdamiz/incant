@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T18:21:07.567052+00:00",
+  "result": "accepted",
+  "findings": [],
+  "base": "05898d1d670e1004c63a3e37d74cee89502157a5",
+  "head": "38b60dc92fdf89b434aead8468393efd72f8d165",
+  "manifest_sha256": "81bb6f2b86573c60ad4cceaef36c0c493c37ee74c4097728bfdf7e0fcb6054b5",
+  "archive": {
+    "path": "docs/spikes/evidence/ssao-raster-coverage-logs.json.gz",
+    "sha256": "fcb48bf9a3d798127ca2231e16d3e3141f59d8141c2751ebef498889d37d74f1",
+    "records": 32,
+    "payloads": 23
+  },
+  "source_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/ssao-raster-coverage-source-independent-20261013.json",
+    "sha256": "0700bf13e8dead34af030f2b0aeb60daa987f6ef97baee0c4c95af054c2b0a9a"
+  },
+  "verified": {
+    "live_and_commit_source": 5,
+    "original_records": 32,
+    "payloads": 23,
+    "cpu_passed": 22,
+    "gpu_ignored": 3,
+    "producer_commands": 6,
+    "workflow_commands": 4,
+    "policy_cases": 12,
+    "unchanged_workflow": true,
+    "no_compiled_source_drift": true
+  },
+  "limits": [
+    "Actual Dx12 observations prove the old fractional raster leaves clear values and fulltarget removes the mismatches. They do not execute the new scissored production helper.",
+    "Strict revised production filter contract on actual Dx12 is pending; no local GPU, appearance, performance or release promotion claimed.",
+    "Shaders, scalar interval oracle, geometry viewport, default-off behavior and attachment budgets remain unchanged."
+  ],
+  "reviewer_execution": "Independent read, original/archive/commit/source equality and check-log audit only; no compiler or GPU run."
+}
