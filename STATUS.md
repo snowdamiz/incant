@@ -92,7 +92,7 @@ consumer and browser checks pass, followed by eight bounded Metal frames joining
 fixed history, bloom/refusal and Display timing. Original Claude0075 bloom-only
 appearance acceptance remains source-specific; no new appearance claim is made.
 Native cooked output refuses bloom explicitly. Independent final integration
-review is accepted; exact main221 source relevance is recorded before publication. [Scope and evidence](docs/spikes/bloom-main219.md).
+review and exact main221 source relevance are independently accepted; publication awaits the required fast check. [Scope and evidence](docs/spikes/bloom-main219.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 

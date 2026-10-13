@@ -64,3 +64,6 @@ and [read-only replay](evidence/bloom-main221/verify.py) retain that comparison
 without changing the original verifier or claiming a fresh build or GPU run.
 An initial Cargo-tree invocation omitted the rustc toolchain directory from PATH;
 its failure is retained. Corrected graph queries succeeded without source changes.
+
+Independent main221 relevance review is accepted. The original execution and
+appearance limits remain; publication awaits the required fast check.
