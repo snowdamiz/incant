@@ -28,8 +28,8 @@ Minimum SSAO coverage is fixed by the frozen fixture geometry, not by results:
 the 16 x 12 receiver at z = -4 covers the whole viewport interior in both
 projections (visible half-extents at z = -4: 3.82 x 2.19 perspective, 6.99 x
 4.00 orthographic); the reference defines every interior pixel of every
-declared scene (no background, silhouette or cut edge lies within its 0.004 px
-tolerance of a texel centre); and the white material's diffuse term (about 0.6
+declared scene (it finds no background, silhouette or cut-edge ambiguity at
+any interior texel centre); and the white material's diffuse term (about 0.67
 linear) is some 30 times the 0.02 inference floor. A faithful renderer leaves
 no pixel uninferable, so every interior pixel must be compared. Occlusion gates
 must also compare at least OCCLUSION_FLOOR pixels the reference marks occluded
