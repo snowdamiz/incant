@@ -1,5 +1,14 @@
 # Implementation status
 
+Native TypeScript haptics now has a bounded committed request queue and optional
+desktop gamepad consumer. CPU qualification passes 29 input, 172 script, 44 game
+and 53 window/input cases, plus the static-module refusal and focused SIMD8
+controls. Strict lint, SDK and dependency guards pass; three failed generations
+are retained. Final independent review is pending. No physical motor/window/GPU
+was exercised; Gilrs worker lifetime and asynchronous delivery limits are explicit.
+Wasm haptic ABI parity and mobile actuators remain open.
+[Scope and evidence](docs/spikes/native-haptics-qualification.md).
+
 The retained mobile Rust host is composed on actual main253 with its accepted
 producer implementation unchanged. Fresh current-source tests pass 31 mobile+FFI
 library cases and 34 native-checkpoint player cases in each numerical mode,
