@@ -1,0 +1,105 @@
+{
+  "format": "incant-independent-review",
+  "version": 1,
+  "reviewer": "astra /root/runtime_review",
+  "timestamp_utc": "2026-10-13T12:45:29.678012+00:00",
+  "decision": "accepted-scoped-source-and-CPU-evidence",
+  "findings": [],
+  "commit": "4c0190e2422e5bc85000dfec142668728239bb1d",
+  "branch_at_freeze": "codex/physics-world-boundary",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/docs/spikes/evidence/physics-world-boundary.json",
+    "sha256": "6c4d24dec347038ece915aac3c2f14ba5b932a9fb5f64d9d8fd5bb5cbda52bb4",
+    "bytes": 57358
+  },
+  "archive": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/docs/spikes/evidence/physics-world-boundary-logs.json.gz",
+    "sha256": "bbddd8784e5c8bff141f38751ebd995885b0cc429d53317c5c729d2873ec570c",
+    "bytes": 598157
+  },
+  "audit_script": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-world-boundary-final-audit-20261013.py",
+    "sha256": "1941496db47d830ffa24bb5a2a6bddec89dc716b88fbc2febd70bd2673eb966d",
+    "bytes": 4807
+  },
+  "audit_result": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/physics-world-boundary-final-audit-20261013.json",
+    "sha256": "d2086539f918ddca8110f013729d3e8e734f9cd14543645fcfca63e1b177eda9",
+    "bytes": 990
+  },
+  "source_reviews": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/reviews/physics-world-boundary-source003-root-20261013.json",
+      "sha256": "fdbcdc80613aac4220a3f2d8137d2554d4890a7b61c277eb02e7d76fac0d732e",
+      "bytes": 1070
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/physics-world-boundary-001/reviews/physics-fresh-workspace-source-root-20261013.json",
+      "sha256": "76225af882c5dac96f2b4a197803358d87a69f2cb0d60dc767f047dda34d402a",
+      "bytes": 736
+    }
+  ],
+  "reviewed_source": [
+    "All six world_boundary modules and changed attachment/rigid-owner accessors; composed validator identities and inherited CCD/pipeline/rigid joins.",
+    "All world_capture/world_cases/world_checks test support and native workspace adapter/export/feature seams in both dimensions.",
+    "Complete spike contract, final manifest, lossless collector verify-only path, command receipts/logs, source generations, binary identities and mutation controls."
+  ],
+  "verified": {
+    "accepted_integrity": true,
+    "commit": "4c0190e2422e5bc85000dfec142668728239bb1d",
+    "manifest_sha256": "6c4d24dec347038ece915aac3c2f14ba5b932a9fb5f64d9d8fd5bb5cbda52bb4",
+    "sources": 120,
+    "records": 608,
+    "payloads": 162,
+    "executable_binaries": 3,
+    "qualification_commands": 10,
+    "additional_success_receipts": 2,
+    "historical_failure_receipts": 5,
+    "summaries": {
+      "tests-default-001": {
+        "passed": 202,
+        "nonempty_groups": 23,
+        "paired_continuation_steps": 280
+      },
+      "tests-fast-001": {
+        "passed": 202,
+        "nonempty_groups": 23,
+        "paired_continuation_steps": 280
+      },
+      "focused-parallel-001": {
+        "passed": 10,
+        "nonempty_groups": 1,
+        "paired_continuation_steps": 280
+      }
+    },
+    "live_status_at_audit": [
+      " M Cargo.lock",
+      " M crates/incant_physics_snapshot/Cargo.toml",
+      " M third_party/rapier2d/Cargo.toml",
+      " M third_party/rapier3d/Cargo.toml"
+    ],
+    "native_or_gpu_execution_by_reviewer": false
+  },
+  "reasoning": [
+    "Canonical 22-section framing validates header/tag/length bounds before allocations; nested geometry lengths preflight, one caller Budget tracks cumulative requested Vec payload.",
+    "Decoder builds exact shared witnesses, duplicates pending queue only with later exact broad-owner equality, invokes HRTB callback only after all joins; equal records from a separate trusted owner fail cross-owner join.",
+    "Workspace adapter is default-off, non-consuming, refuses deferred/quarantined/poisoned observations, retains exact optional CCD verdict and shares configured parallel pool; it accepts no bytes and makes no authenticated-phase claim.",
+    "Actual two-dimensional and three-dimensional continuation includes warm contacts/sleep/wake, ordered sensor events/removal/generation reuse, retained CCD omission counterexample and actual deferred/quarantine refusal. Tests compare exact native owners, cache, observation, counters, ordered events and full inert frame.",
+    "Each full mode has 202 passing tests in 23 nonempty groups, with overlapping 10 parallel controls. Each mode/parallel control repeats 280 paired continuation steps; these are not independent feature totals. All ten planned qualification commands, focused success and final diff receipt are zero; all five historical failures retained."
+  ],
+  "qualifications": [
+    "Trusted native Clone plus reviewed fresh workspace proves scoped scratch replacement continuation only. Decoded inert bytes are never installed, so hostile live restore and public physics saves remain unsupported.",
+    "Shape/mass/AABB coherence, aggregate future solver arithmetic/work limits, owner/phase authentication, event/stable-ID ownership and a reviewed all-owner constructor remain open.",
+    "PhysicsUnsupported and Cargo.lock remain unchanged across the reviewed producer delta. No GPU, device, shipping, performance or full-save gate acceptance.",
+    "Initial clean HEAD and producer collect.py --verify-only were verified before author began separately root-authorized codex/physics-checked-native-boundary work. Final independent script binds Git commit and frozen copies; four new manifest/lock working changes are explicitly excluded, preserved and not reviewed.",
+    "The first independent audit stopped on the newly dirty checkout before evaluating evidence. It was corrected to immutable Git-object identity after author confirmed new work; no source rollback, rebuild or test rerun occurred."
+  ],
+  "reviewer_actions": {
+    "builds": 0,
+    "native_test_executions": 0,
+    "GPU_executions": 0,
+    "producer_edits": 0,
+    "shared_ref_mutations": 0,
+    "verification": "producer assertion-only verify executed successfully; independent assertion-only audit executed successfully"
+  }
+}
