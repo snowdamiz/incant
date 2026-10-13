@@ -1,0 +1,129 @@
+diff --git a/Cargo.lock b/Cargo.lock
+index 2bf37fb2..e2d0e303 100644
+--- a/Cargo.lock
++++ b/Cargo.lock
+@@ -4067,6 +4067,7 @@ dependencies = [
+  "incant_game_runtime",
+  "incant_input",
+  "incant_observe",
++ "incant_profile",
+  "incant_render",
+  "incant_render_game",
+  "incant_render_gpu_host",
+@@ -4093,6 +4094,7 @@ dependencies = [
+  "incant_assets_runtime",
+  "incant_audio_runtime",
+  "incant_input",
++ "incant_profile",
+  "incant_runtime",
+  "incant_script",
+  "incant_types",
+@@ -4315,6 +4317,17 @@ dependencies = [
+  "thiserror 2.0.21",
+ ]
+ 
++[[package]]
++name = "incant_profile"
++version = "0.0.1"
++dependencies = [
++ "cpu-time",
++ "serde",
++ "serde_json",
++ "tracy-client",
++ "tracy-client-sys",
++]
++
+ [[package]]
+ name = "incant_render"
+ version = "0.0.1"
+@@ -4452,6 +4465,7 @@ dependencies = [
+  "incant_nav",
+  "incant_physics_2d_runtime",
+  "incant_physics_runtime",
++ "incant_profile",
+  "incant_types",
+  "libm",
+  "serde",
+@@ -4468,6 +4482,7 @@ dependencies = [
+  "incant_audio_runtime",
+  "incant_input",
+  "incant_localization",
++ "incant_profile",
+  "incant_runtime",
+  "incant_types",
+  "incant_ui",
+@@ -9092,6 +9107,27 @@ dependencies = [
+  "tracing-log",
+ ]
+ 
++[[package]]
++name = "tracy-client"
++version = "0.18.5"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "6131992ff3e2cb96f407eb4eb005427ba15e2687260d99089b90e60e33169ce0"
++dependencies = [
++ "loom",
++ "once_cell",
++ "tracy-client-sys",
++]
++
++[[package]]
++name = "tracy-client-sys"
++version = "0.29.0"
++source = "registry+https://github.com/rust-lang/crates.io-index"
++checksum = "ab27f167b093214c68413a2e0bcd318f0591af475597405ff68138ba0a433379"
++dependencies = [
++ "cc",
++ "windows-targets 0.52.6",
++]
++
+ [[package]]
+ name = "tray-icon"
+ version = "0.25.1"
+diff --git a/Cargo.toml b/Cargo.toml
+index 5d51464a..6500ac88 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -11,6 +11,7 @@ rust-version = "1.99"
+ publish = false
+ 
+ [workspace.dependencies]
++incant_profile = { path = "crates/incant_profile", default-features = false }
+ incant_render_data = { path = "crates/incant_render_data" }
+ incant_render_authoring = { path = "crates/incant_render_authoring", default-features = false }
+ serde = { version = "1.0", features = ["derive"] }
+diff --git a/crates/incant_script/build.rs b/crates/incant_script/build.rs
+index 71999cdf..c3ce76e1 100644
+--- a/crates/incant_script/build.rs
++++ b/crates/incant_script/build.rs
+@@ -112,6 +112,7 @@ fn main() {
+     let mut runtime = Sha256::new();
+     for name in [
+         "incant_runtime",
++        "incant_profile",
+         "incant_physics_runtime",
+         "incant_physics_2d_runtime",
+         "incant_input",
+diff --git a/tools/probes/native-physics/Cargo.lock b/tools/probes/native-physics/Cargo.lock
+index 92b0f58c..68aed15f 100644
+--- a/tools/probes/native-physics/Cargo.lock
++++ b/tools/probes/native-physics/Cargo.lock
+@@ -1046,6 +1046,10 @@ dependencies = [
+  "thiserror",
+ ]
+ 
++[[package]]
++name = "incant_profile"
++version = "0.0.1"
++
+ [[package]]
+ name = "incant_runtime"
+ version = "0.0.1"
+@@ -1058,6 +1062,7 @@ dependencies = [
+  "incant_nav",
+  "incant_physics_2d_runtime",
+  "incant_physics_runtime",
++ "incant_profile",
+  "incant_types",
+  "libm",
+  "serde",
