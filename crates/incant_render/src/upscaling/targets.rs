@@ -4,6 +4,9 @@ pub(super) struct Output {
     pub color: [wgpu::TextureView; 2],
     pub depth: [wgpu::TextureView; 2],
     pub composite: wgpu::TextureView,
+    /// Unjittered opaque depth at output resolution for current-only sprites and
+    /// world text drawn over `composite`. Per frame; never history.
+    pub overlay_depth: wgpu::TextureView,
     pub record: Option<[wgpu::TextureView; 2]>,
 }
 pub(super) struct Overlay {
@@ -39,7 +42,7 @@ impl Output {
     pub fn bytes(&self) -> u64 {
         u64::from(self.size[0])
             * u64::from(self.size[1])
-            * if self.record.is_some() { 48 } else { 32 }
+            * if self.record.is_some() { 52 } else { 36 }
     }
     pub fn prepare(
         d: &wgpu::Device,
@@ -78,6 +81,12 @@ impl Output {
                 size,
                 crate::frame::HDR_FORMAT,
                 "Output HDR with current overlays",
+            ),
+            overlay_depth: make(
+                d,
+                size,
+                wgpu::TextureFormat::Depth32Float,
+                "Output-resolution current-only overlay depth",
             ),
         })
     }

@@ -65,10 +65,13 @@ impl FrameGraph {
             .as_ref()
             .ok_or(crate::metalfx::MetalFxError::Interop)?;
         let overlay_depth = frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth());
+        let output_depth = frame.motion.as_ref().is_some_and(|m| m.has_output_depth());
+        // pack, two clears, normalize, overlay clear and (moved from Display) composite.
         let count = usize::from(overlay_depth)
+            + usize::from(output_depth)
             + usize::from(frame.motion.is_some())
             + usize::from(frame.models.as_ref().is_some_and(|m| m.has_opaque()))
-            + 5
+            + 6
             + usize::from(frame.models.as_ref().is_some_and(|m| m.has_transparent()));
         let queries = pre
             .1
@@ -112,6 +115,14 @@ impl FrameGraph {
         {
             m.encode_transparent(&mut post.0, timestamp());
         }
+        up.composite(&mut post.0, timestamp());
+        if output_depth {
+            frame
+                .motion
+                .as_ref()
+                .unwrap()
+                .encode_output_depth(&mut post.0, timestamp());
+        }
         debug_assert_eq!(index, count);
         if let Some(s) = &frame.sprites {
             post.timed(crate::timing::GpuPass::Sprites, |e, q| s.encode(e, q));
@@ -121,12 +132,7 @@ impl FrameGraph {
         {
             post.timed(crate::timing::GpuPass::Text, |e, q| t.encode(e, q));
         }
-        post.timed(crate::timing::GpuPass::Display, |e, q| {
-            up.composite(e, q.and_then(|q| q.render_range(0, 2)));
-            frame
-                .output
-                .encode_part(e, q.and_then(|q| q.render_range(1, 2)));
-        });
+        post.timed(crate::timing::GpuPass::Display, |e, q| frame.output.encode(e, q));
         retain(&mut post.0);
         if let Some(c) = post.1.take() {
             c.finish(&mut post.0);

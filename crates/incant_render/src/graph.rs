@@ -229,6 +229,10 @@ struct ModelsPlan {
     temporal: bool,
     overlay_depth: bool,
     transparent: bool,
+    /// Portable upscaling: the composite precedes output-resolution sprites/text,
+    /// then the output-resolution opaque depth re-raster they test against.
+    composite: bool,
+    output_depth: bool,
     all: bool,
 }
 impl ModelsPlan {
@@ -239,11 +243,18 @@ impl ModelsPlan {
             temporal,
             overlay_depth: false,
             transparent: temporal && transparent,
+            composite: false,
+            output_depth: false,
             all: !temporal && models,
         }
     }
     fn with_overlay_depth(mut self, active: bool) -> Self {
         self.overlay_depth = self.temporal && self.motion && active;
+        self
+    }
+    fn with_upscaling(mut self, upscaling: bool, output_depth: bool) -> Self {
+        self.composite = self.temporal && upscaling;
+        self.output_depth = self.composite && self.motion && output_depth;
         self
     }
     fn count(&self) -> usize {
@@ -252,6 +263,8 @@ impl ModelsPlan {
             + 2 * usize::from(self.temporal)
             + usize::from(self.overlay_depth)
             + usize::from(self.transparent)
+            + usize::from(self.composite)
+            + usize::from(self.output_depth)
             + usize::from(self.all)
     }
 }
@@ -263,7 +276,11 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
         frame.models.as_ref().is_some_and(|m| m.has_opaque()),
         frame.models.as_ref().is_some_and(|m| m.has_transparent()),
     )
-    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()));
+    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()))
+    .with_upscaling(
+        frame.upscaling.is_some(),
+        frame.motion.as_ref().is_some_and(|m| m.has_output_depth()),
+    );
     if plan.count() == 0 {
         return;
     }
@@ -308,6 +325,22 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
                 .unwrap()
                 .encode_transparent(encoder, timestamp());
         }
+        if plan.composite {
+            // Internal BLEND overlay over the resolved output; sprites and world
+            // text are then drawn over this composite at output resolution.
+            frame
+                .upscaling
+                .as_ref()
+                .unwrap()
+                .composite(encoder, timestamp());
+        }
+        if plan.output_depth {
+            frame
+                .motion
+                .as_ref()
+                .unwrap()
+                .encode_output_depth(encoder, timestamp());
+        }
         if plan.all {
             frame.models.as_ref().unwrap().encode(encoder, timestamp());
         }
@@ -315,16 +348,8 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     });
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
-    encoder.timed(crate::timing::GpuPass::Display, |e, q| {
-        if let Some(upscaling) = &frame.upscaling {
-            upscaling.composite(e, q.and_then(|q| q.render_range(0, 2)));
-            frame
-                .output
-                .encode_part(e, q.and_then(|q| q.render_range(1, 2)));
-        } else {
-            frame.output.encode(e, q)
-        }
-    });
+    // With upscaling the composite was encoded at the end of the Models interval.
+    encoder.timed(crate::timing::GpuPass::Display, |e, q| frame.output.encode(e, q));
 }
 
 fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
@@ -421,6 +446,29 @@ pub(crate) fn into_single(c: Commands) -> Result<wgpu::CommandBuffer> {
     #[cfg(not(feature = "native-metalfx"))]
     {
         Ok(c)
+    }
+}
+
+#[cfg(test)]
+#[test]
+fn upscaling_counts_composite_then_output_depth_only_when_present() {
+    for motion in [false, true] {
+        for temporal in [false, true] {
+            for upscaling in [false, true] {
+                for depth in [false, true] {
+                    let base = ModelsPlan::new(motion, temporal, true, true, true);
+                    let before = base.count();
+                    let p = base.with_upscaling(upscaling, depth);
+                    assert_eq!(p.composite, temporal && upscaling);
+                    assert_eq!(p.output_depth, temporal && upscaling && motion && depth);
+                    assert_eq!(
+                        p.count(),
+                        before + usize::from(p.composite) + usize::from(p.output_depth)
+                    );
+                    assert!(!p.all || (!p.composite && !p.output_depth));
+                }
+            }
+        }
     }
 }
 

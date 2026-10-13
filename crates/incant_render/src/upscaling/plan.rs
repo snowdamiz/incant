@@ -1,10 +1,14 @@
 use super::UpscaleError;
-/// Includes old+candidate output color/depth pairs+composite, internal overlay,
-/// motion targets, maximum motion instance payloads and fixed packet metadata.
-/// Excludes ordinary renderer targets/assets, driver overhead and older queued work.
+/// Includes old+candidate output color/depth pairs+composite+output overlay depth,
+/// internal overlay, motion targets, maximum motion instance payloads and fixed
+/// packet metadata. Excludes ordinary renderer targets/assets, driver overhead
+/// and older queued work.
 pub const MAX_UPSCALE_TRANSITION_BYTES: u64 =
     128 * crate::motion::MAX_MOTION_PIXELS + 2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384;
-pub(super) const MAX_OUTPUT_BYTES: u64 = 32 * crate::motion::MAX_MOTION_PIXELS;
+/// Per output pixel: two RGBA16F colors and two R32F depths of history, the RGBA16F
+/// composite and the Depth32F output overlay depth (36 bytes).
+pub(super) const OUTPUT_PIXEL_BYTES: u64 = 36;
+pub(super) const MAX_OUTPUT_BYTES: u64 = OUTPUT_PIXEL_BYTES * crate::motion::MAX_MOTION_PIXELS;
 pub(super) const MAX_OVERLAY_BYTES: u64 = 8 * crate::motion::MAX_MOTION_PIXELS;
 #[derive(Clone, Copy, Debug)]
 pub(crate) struct Plan {
@@ -78,7 +82,7 @@ impl Plan {
         let total = old_output
             .checked_add(old_overlay)
             .and_then(|x| x.checked_add(old_motion))
-            .and_then(|x| x.checked_add(32 * output + 32 * source))
+            .and_then(|x| x.checked_add(OUTPUT_PIXEL_BYTES * output + 32 * source))
             .and_then(|x| x.checked_add(2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384))
             .ok_or(UpscaleError::Capacity)?;
         if total > MAX_UPSCALE_TRANSITION_BYTES {

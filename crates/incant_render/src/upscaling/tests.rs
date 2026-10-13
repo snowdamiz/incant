@@ -89,13 +89,38 @@ fn all_owned_old_and_candidate_resources_are_admitted_before_allocation() {
     )
     .unwrap();
     let p = Plan::new([2048, 2048], [0., 0., 2048., 2048.], &frame).unwrap();
-    p.preflight(
-        8192,
-        MAX_OUTPUT_BYTES,
-        MAX_OVERLAY_BYTES,
-        crate::motion::MAX_MOTION_TARGET_BYTES,
-    )
-    .unwrap();
+    // The output-resolution overlay depth (4 B/output pixel) is charged for old and
+    // candidate outputs under the unchanged ceiling: a full-scale 2048^2 candidate
+    // after a maximal old set now exceeds it by exactly 2 * 4 * 2^22 bytes, while a
+    // fresh one, a 1923^2 full-scale one and a 2048^2 output at 8/16 still fit.
+    assert_eq!(
+        p.preflight(
+            8192,
+            MAX_OUTPUT_BYTES,
+            MAX_OVERLAY_BYTES,
+            crate::motion::MAX_MOTION_TARGET_BYTES,
+        ),
+        Err(UpscaleError::Capacity)
+    );
+    p.preflight(8192, 0, 0, 0).unwrap();
+    for (size, half, fits) in [(1923, false, true), (1924, false, false), (2048, true, true)] {
+        let frame = crate::resolution::FramePlan::new(
+            [size, size],
+            [0., 0., size as f32, size as f32],
+            None,
+            crate::resolution::ResolutionScale::new(if half { 8 } else { 16 }).unwrap(),
+        )
+        .unwrap();
+        let q = Plan::new([size, size], [0., 0., size as f32, size as f32], &frame).unwrap();
+        let got = q.preflight(
+            8192,
+            MAX_OUTPUT_BYTES,
+            MAX_OVERLAY_BYTES,
+            crate::motion::MAX_MOTION_TARGET_BYTES,
+        );
+        assert_eq!(got.is_ok(), fits, "{size} half={half}");
+    }
+    assert_eq!(MAX_OUTPUT_BYTES, 36 * 4 * 1024 * 1024);
     assert_eq!(MAX_UPSCALE_TRANSITION_BYTES, 640 * 1024 * 1024 + 16384);
     for (o, a, m) in [
         (MAX_OUTPUT_BYTES + 1, 0, 0),

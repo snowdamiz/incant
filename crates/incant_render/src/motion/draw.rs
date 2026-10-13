@@ -16,6 +16,10 @@ pub(crate) struct MotionDraw {
     pub(super) frame: wgpu::BindGroup,
     pub(super) overlay_frame: Option<wgpu::BindGroup>,
     pub(super) overlay_depth: Option<wgpu::TextureView>,
+    /// Unjittered camera at the upscaling output aspect and viewport, present only
+    /// for portable output upscaling.
+    pub(super) output_frame: Option<(wgpu::BindGroup, [f32; 4])>,
+    pub(super) output_depth: Option<wgpu::TextureView>,
     pub(super) draws: Vec<Draw>,
 }
 impl MotionDraw {
@@ -39,14 +43,37 @@ impl MotionDraw {
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
         if let Some(depth) = &self.overlay_depth {
-            self.encode_pass(encoder, timestamps, Some(depth));
+            self.encode_pass(
+                encoder,
+                timestamps,
+                Some((depth, self.overlay_frame.as_ref().unwrap(), self.rect)),
+            );
+        }
+    }
+    /// Output-resolution current-only overlays (sprites, world text) test against
+    /// this exact re-raster of the opaque/MASK draws with the unjittered camera at
+    /// the output viewport. It never touches motion, history or the internal depth.
+    pub fn set_output_depth(&mut self, depth: wgpu::TextureView) {
+        assert!(self.output_frame.is_some());
+        self.output_depth = Some(depth);
+    }
+    pub fn has_output_depth(&self) -> bool {
+        self.output_depth.is_some()
+    }
+    pub fn encode_output_depth(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
+        if let (Some(depth), Some((frame, rect))) = (&self.output_depth, &self.output_frame) {
+            self.encode_pass(encoder, timestamps, Some((depth, frame, *rect)));
         }
     }
     fn encode_pass(
         &self,
         encoder: &mut wgpu::CommandEncoder,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
-        depth: Option<&wgpu::TextureView>,
+        depth: Option<(&wgpu::TextureView, &wgpu::BindGroup, [f32; 4])>,
     ) {
         let colors = [
             Some(wgpu::RenderPassColorAttachment {
@@ -83,7 +110,7 @@ impl MotionDraw {
                 &colors[..1]
             },
             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
-                view: depth.unwrap_or(&self.targets.depth[self.slot]),
+                view: depth.map_or(&self.targets.depth[self.slot], |d| d.0),
                 depth_ops: Some(wgpu::Operations {
                     load: wgpu::LoadOp::Clear(1.),
                     store: wgpu::StoreOp::Store,
@@ -94,17 +121,9 @@ impl MotionDraw {
             occlusion_query_set: None,
             multiview_mask: None,
         });
-        let [x, y, w, h] = self.rect;
+        let [x, y, w, h] = depth.map_or(self.rect, |d| d.2);
         pass.set_viewport(x, y, w, h, 0., 1.);
-        pass.set_bind_group(
-            0,
-            if depth.is_some() {
-                self.overlay_frame.as_ref().unwrap()
-            } else {
-                &self.frame
-            },
-            &[],
-        );
+        pass.set_bind_group(0, depth.map_or(&self.frame, |d| d.1), &[]);
         for draw in &self.draws {
             let batch = &draw.batch;
             let primitive = &batch.model.primitives[batch.primitive];

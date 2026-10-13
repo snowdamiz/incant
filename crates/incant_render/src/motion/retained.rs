@@ -540,6 +540,23 @@ impl MotionState {
         } else {
             None
         };
+        // Portable upscaling only: the same unjittered camera at the output aspect,
+        // drawn in the output viewport (sprites and world text use this matrix).
+        let output_frame = match upscale_rect.filter(|_| temporal) {
+            Some(rect) => Some((
+                group(Frame {
+                    current: current
+                        .camera
+                        .unjittered()
+                        .matrix(rect[2] / rect[3])?
+                        .to_cols_array_2d(),
+                    rect,
+                    ..uniform
+                }),
+                rect,
+            )),
+            None => None,
+        };
         let mut draws = Vec::with_capacity(current.batches.len());
         for ((batch, old), rows) in current.batches.iter().zip(&live.batches).zip(&self.rows) {
             let primitive = &batch.model.primitives[batch.primitive];
@@ -572,6 +589,8 @@ impl MotionState {
                 frame,
                 overlay_frame,
                 overlay_depth: None,
+                output_frame,
+                output_depth: None,
                 draws,
             }),
             Prepared {

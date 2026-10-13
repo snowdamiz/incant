@@ -383,37 +383,52 @@ impl Renderer {
         if let (Some(models), Some(overlay)) = (&mut models, overlay) {
             models.set_transparent_target(overlay.clone());
         }
-        let overlay_color = overlay.unwrap_or(&attachments.color);
+        // Portable upscaling draws current-only sprites and world text at output
+        // resolution straight over the composited output (never into history),
+        // against an unjittered output-resolution re-raster of the opaque depth.
+        // BLEND models stay on the internal overlay: their clustered lighting is
+        // prepared for the internal viewport only.
+        let screen = upscaling.and_then(|p| p.screen_overlay());
+        let (screen_color, screen_depth, screen_rect) = match screen {
+            Some((color, depth, rect)) => (color, depth, rect),
+            None => (overlay.unwrap_or(&attachments.color), &attachments.depth, scene_rect),
+        };
         let sprites = self.sprites.prepare(
             &self.device,
             scene,
             models::ModelTarget {
-                color: overlay_color.clone(),
-                depth: attachments.depth.clone(),
+                color: screen_color.clone(),
+                depth: screen_depth.clone(),
                 format: frame::HDR_FORMAT,
-                rect: scene_rect,
+                rect: screen_rect,
             },
         )?;
         let text = self.text.prepare(
             &self.device,
             scene,
             models::ModelTarget {
-                color: overlay_color.clone(),
-                depth: attachments.depth.clone(),
+                color: screen_color.clone(),
+                depth: screen_depth.clone(),
                 format: frame::HDR_FORMAT,
-                rect: scene_rect,
+                rect: screen_rect,
             },
         )?;
-        let overlays = models.as_ref().is_some_and(|m| m.has_transparent())
-            || sprites.as_ref().is_some_and(|s| s.has_passes())
+        let transparent = models.as_ref().is_some_and(|m| m.has_transparent());
+        let screen_overlays = sprites.as_ref().is_some_and(|s| s.has_passes())
             || text.as_ref().is_some_and(|t| t.has_passes());
         let accumulating = temporal.is_some_and(|p| p.active())
             || upscaling.is_some_and(|p| p.overlay().is_some());
-        if accumulating && overlays {
+        if accumulating && (transparent || (screen_overlays && screen.is_none())) {
             motion
                 .as_mut()
                 .expect("temporal motion draw")
                 .set_overlay_depth(attachments.depth.clone());
+        }
+        if let Some((_, depth, _)) = screen.filter(|_| screen_overlays) {
+            motion
+                .as_mut()
+                .expect("upscaling motion draw")
+                .set_output_depth(depth.clone());
         }
         let temporal = temporal.and_then(|pending| {
             self.temporal.as_ref().and_then(|system| {

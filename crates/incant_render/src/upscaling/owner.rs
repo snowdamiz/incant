@@ -196,6 +196,12 @@ impl Pending {
     pub fn composite(&self) -> Option<&wgpu::TextureView> {
         self.output.as_ref().map(|o| &o.composite)
     }
+    /// Output-resolution target of current-only sprites and world text: the
+    /// composited output, its unjittered opaque depth and the output viewport.
+    pub fn screen_overlay(&self) -> Option<(&wgpu::TextureView, &wgpu::TextureView, [f32; 4])> {
+        let output = self.output.as_ref()?;
+        Some((&output.composite, &output.overlay_depth, self.plan?.rect))
+    }
     #[cfg(feature = "native-metalfx")]
     pub(crate) fn native_input(
         &self,

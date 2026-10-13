@@ -2,6 +2,8 @@
 use super::{MotionError, plan};
 pub const MAX_OWNER_TARGET_BYTES: u64 = 4 * plan::MAX_MOTION_PIXELS;
 pub const MAX_OWNER_RECORD_BYTES: u64 = 16 * plan::MAX_MOTION_PIXELS;
+/// Output history color/depth pairs, composite and output-resolution overlay depth.
+const OUTPUT_STRIDE: u64 = 36;
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub(crate) struct Cache {
     pub size: [u32; 2],
@@ -60,9 +62,9 @@ pub(crate) fn admit_records(
         flagged_component(
             old_output,
             output,
-            32,
+            OUTPUT_STRIDE,
             false,
-            32 * plan::MAX_MOTION_PIXELS,
+            OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
             limit,
         )?,
         flagged_component(old_output, output, 16, true, MAX_OWNER_RECORD_BYTES, limit)?,
@@ -126,7 +128,13 @@ pub(crate) fn admit(
     }
     if let Some(output) = output {
         for bytes in [
-            component(old_output, output, 32, 32 * plan::MAX_MOTION_PIXELS, limit)?,
+            component(
+                old_output,
+                output,
+                OUTPUT_STRIDE,
+                OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
+                limit,
+            )?,
             component(old_overlay, source, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
         ] {
             total = total.checked_add(bytes).ok_or(MotionError::Capacity)?;
@@ -151,28 +159,28 @@ mod tests {
                 [2048, 2048],
                 [2048, 2048],
                 [2048, 2048],
-                486_555_648,
+                503_332_864,
             ),
             (
                 [1920, 1920],
                 [2048, 2048],
                 [2048, 2048],
                 [2048, 2048],
-                619_266_048,
+                636_043_264,
             ),
             (
                 [2560, 1440],
                 [1920, 1080],
                 [2560, 1440],
                 [1920, 1080],
-                618_074_112,
+                641_114_112,
             ),
             (
                 [1280, 800],
                 [1280, 720],
                 [2560, 1600],
                 [2560, 1440],
-                577_830_912,
+                608_960_512,
             ),
         ] {
             assert_eq!(
@@ -201,14 +209,22 @@ mod tests {
         );
         assert_eq!(
             admit_records([2048, 1920], None, [2048, 1920], None, None, 8192).unwrap(),
-            464_535_552
+            480_264_192
         );
         let size = [3, 5];
         let off = Some(Cache { size, owner: false });
         let on = Cache { size, owner: true };
         assert_eq!(
-            flagged_component(off, on, 32, false, 32 * plan::MAX_MOTION_PIXELS, 8192).unwrap(),
-            960
+            flagged_component(
+                off,
+                on,
+                OUTPUT_STRIDE,
+                false,
+                OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
+                8192
+            )
+            .unwrap(),
+            1080
         );
         assert_eq!(
             flagged_component(off, on, 16, true, MAX_OWNER_RECORD_BYTES, 8192).unwrap(),
@@ -223,7 +239,7 @@ mod tests {
         let reduced = [1920, 1920];
         assert_eq!(
             admit(full, Some(full), Some(full), Some(full), Some(full), 8192).unwrap(),
-            68 * 4194304 + 2 * plan::MAX_MOTION_INSTANCE_BYTES + 16384
+            72 * 4194304 + 2 * plan::MAX_MOTION_INSTANCE_BYTES + 16384
         );
         assert!(
             admit(
