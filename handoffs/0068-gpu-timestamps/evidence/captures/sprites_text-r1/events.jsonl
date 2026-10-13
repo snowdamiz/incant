@@ -1,0 +1,8 @@
+{"case":"sprites_text","event":"open","frame_limit":2,"submission_limit":1}
+{"event":"frame","index":1,"name":"off-1","timed":false}
+{"event":"frame-read","name":"off-1","rgba_sha256":"21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e","settle_polls":0,"stats":{"abandoned":0,"enabled":false,"pending":0,"ready":0,"retired":0,"skipped":0}}
+{"event":"frame","index":2,"name":"on-1","timed":true}
+{"event":"frame-read","name":"on-1","rgba_sha256":"21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e","settle_polls":0,"stats":{"abandoned":0,"enabled":true,"pending":0,"ready":1,"retired":0,"skipped":0}}
+{"event":"png","png":{"name":"sprites-text-off.png","rgba_sha256":"21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e","sha256":"bdadd584ff2e7bba1dda9c6e86a9b7c818bea2344d7600b94cb43a685fd410ff"}}
+{"event":"png","png":{"name":"sprites-text-on.png","rgba_sha256":"21a1c510773bb83fb52c319f17851b28ee1fda0f5062f2fb4f3c0ab23da2c26e","sha256":"bdadd584ff2e7bba1dda9c6e86a9b7c818bea2344d7600b94cb43a685fd410ff"}}
+{"event":"finish","pass":true}

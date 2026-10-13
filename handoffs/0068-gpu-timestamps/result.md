@@ -2,314 +2,396 @@
 
 ## Status
 
-**Prepared; execution pending root grant.**
+**Executed under root's grant. Rendering is unchanged. An implementation defect
+blocks timestamp acceptance and is routed to Astra for source review.**
 
-- **Grant absent.** I checked the grant path once at session start. The directory
-  `/Users/andreyyurlov/.codex/incant-evidence/0068/` did not exist, so
-  `review-ready.json` is absent.
-  - 0067 holds its own grant (`0067/review-ready.json`, granted 03:06:45Z), so 0067
-    owns the GPU and the shared target.
-  - I did not poll, wait or start another process to get around the queue.
-- **Nothing executed.** I did not compile, acquire a target, run GPU work or inspect
-  any new pixels. No cargo or rustc process ran, no GPU process started, and nothing
-  under `incant-evidence/0068` was created.
-- **Prepared for review:**
-  - packet-only helpers;
-  - a frozen, bounded case list (`plan.json`);
-  - a preparation self-check, which passes.
-- **Nothing claimed.** There is no GPU query result, regression-suite run, numeric
-  verdict or appearance verdict yet. Root resumes this session after reviewing the
-  helpers and creating the grant.
+I ran every bounded case in the frozen plan on one Apple M5 Pro (Metal). I then
+released the GPU and the Cargo target. No source was changed or recompiled after the
+defect was found.
+
+- **Numeric verdict, lifecycle and bookkeeping: pass.** Actual GPU submissions
+  confirm the following:
+  - out-of-order submission still yields encoding sequences 1 and 2;
+  - an unsubmitted command buffer is abandoned and releases its slot;
+  - full-pool backpressure skips instrumentation while rendering continues;
+  - deferred readback completes;
+  - slot reuse works, and the drain order is exact;
+  - every sample carries exactly the group labels its scene encodes, and absent
+    groups stay absent (5 scene/fixture shapes, 8 samples).
+- **Numeric verdict, timestamp values: fail (defect).** Every resolved timestamp is
+  **0**: frame start and end, and every present group, in all 8 samples.
+  - The brief's numeric test passes its own assertions (1/1, exit 0) because they
+    only require finite, non-negative durations and the right labels.
+  - An absolute GPU counter of 0 at every sample point is not quantization. No real
+    GPU timestamp was observed, yet the API published these as valid zero-length
+    measurements.
+  - I preserved the result, did not rerun the test, and report the exact reproducer
+    under "Defect for Astra". **Actual GPU timestamp values remain unestablished.**
+- **Regression suites: 90 of 90 pass.**
+  - The 89 existing ignored cases ran serially: 32 renderer library, 50 `model_gpu`,
+    5 `gpu_host` game and 2 `gpu_host` UI.
+  - The numeric test ran exactly once on its own, and the library suite skipped it.
+  - The listings match the reviewed base exactly (33 + 50 + 5 + 2), so there is no
+    integrated-source count change.
+- **Appearance verdict: unchanged.** Explicitly enabling GPU timing changes no
+  rendered pixel in the cases I tested:
+  - 12 new frames were rendered, and all 4 retained timing-off/on pairs are
+    byte-identical;
+  - every frame matches its control, including a frame rendered with
+    instrumentation skipped under backpressure and one rendered in a reused slot;
+  - I inspected every retained frame myself and found them complete, with no
+    artifacts.
+- **`owner_drop`:** passes as the approved no-panic/no-hang lifecycle smoke check
+  only. It does not establish callback-after-drop ordering.
+- **Not approved here:** reference-phone performance, any other GPU backend, the
+  complete profiler or any phase gate. The sample durations are all zero and are
+  not interpreted.
 
 ## Brief, grant and director feedback
 
-- **Brief.** SHA-256 `ae7189cc6b0b158245fddd178b3390c91febd38d53ae4bb079ce991f90d70c00`.
-  - Astra committed it in `9d4da6a9`, `dbf4c53f` and `d7309faa`. It is identical to the
-    packet text in the session prompt, and there is no uncommitted root revision.
-  - The only revision is the "Preparation stage while another packet owns the GPU"
-    section (`d7309faa`). I applied it: preparation only, and this result is marked
-    as above.
-  - There is no separate director-feedback section to acknowledge.
-- **Grant.** Absent, as described under Status.
+- **Brief.** SHA-256 `8e276281b2b52d0b33bcb3565ad3551855b5dbc6841010c075fe81758d8089a9`,
+  committed by Astra in `71e4d63e`. There is no uncommitted root revision. I
+  acknowledged and applied its priority update:
+  - execution is authorized after review, using only the committed helpers, the
+    frozen plan and the granted source;
+  - all original failures are preserved, and I stop for source review on a defect.
+    I compiled nothing new after the defect; the remaining frozen plan steps ran
+    with the binaries frozen before execution;
+  - `owner_drop` is approved as a smoke check only;
+  - no personal, persistent or auto-memory edits. **This session made none.** The
+    earlier preparation session, before this instruction existed, added two notes
+    to Claude auto-memory. I have not touched them since.
+- **Grant.** `/Users/andreyyurlov/.codex/incant-evidence/0068/review-ready.json`,
+  SHA-256 `b07d3062da34d6bf880dd2ca01d4e61dbdb191569977cce755976742266fe1af`,
+  granted 04:32:38Z.
+  - It names packet `0068-gpu-timestamps`, the expected target, `source_commit`
+    `71e4d63ed3515e82151aeb7237bef642c1b4bc02` and `approved_extra_cases: ["owner_drop"]`.
+  - All three pinned prior receipts verify:
+
+    | Pinned receipt | SHA-256 |
+    |---|---|
+    | 0067 `target-lease.json` | `bd68fcfe…` |
+    | `cluster-grid-readback-002/gpu-released.json` | `5e88575b…` |
+    | 0067 `gpu-released.json` | `07c185dd…` |
+
+  - `lease.py` checks live-process fields only in the first release body (0067). I
+    checked `cluster-grid-readback-002` by hand: `owned_processes: []` and
+    `ledger_pids_alive: []`. The 0067 lease shows `released_at` and no processes
+    on the target.
+  - The grant copy is in `evidence/gpu/grant-copy.json`. I did not modify the grant.
+- **Helper review.** `/Users/andreyyurlov/.codex/incant-reviews/0068-helper-source-final-20261013.json`
+  matches the grant's `f6ab1b16…`: "accepted bounded execution helpers" at
+  `f676b69e`. HEAD's tools and plan are byte-identical to `f676b69e`; only
+  `brief.md` differs.
 
 ## Model and thinking effort
 
 - **Model:** Claude Opus 5.5 (`claude-opus-5-5`).
 - **Thinking effort:** Max, the session's configured reasoning effort.
-- **ACP verification.** Line 3 of root's
-  `/Users/andreyyurlov/.codex/incant-evidence/claude-0068-preparation-acp.log` reads
+- **ACP verification.** Line 2 of root's
+  `/Users/andreyyurlov/.codex/incant-evidence/claude-0068-execution-acp.log` reads
   `Claude session verified: Opus 5.5; thinking: max`. I read only that line.
 - No subagent or auxiliary reviewer was used.
 
-## Source contract, verified read-only
+## Host, adapter and toolchain
 
-| Item | Result |
+| Item | Value |
 |---|---|
-| Implementation | `99778642585a7b545a9448b9fca4a365ba622985`, base main186 `1c5658cf…` |
-| Freeze file | `docs/spikes/evidence/gpu-timestamps/freeze.json`, SHA-256 `d41ba28b…a8f25` (matches the brief) |
-| Frozen inputs | All 10 files in this worktree match `freeze.json`. HEAD `d7309faa` has no diff from `99778642` under `crates`, `Cargo.*`, `third_party`, `tools` or `rust-toolchain.toml` |
-| Source review | `gpu-timestamps-source-20261013.json`, SHA-256 `2c0090c0…66f30a2`, `accepted_source`, no open findings |
-| Archive | `artifacts.json.gz`, SHA-256 `ba0f5491…6229e` |
-| Ignored GPU cases (source count) | 90 `#[ignore]` attributes: 33 `incant_render` library (including the new numeric test), 50 `model_gpu`, 5 `gpu_host` game, 2 `gpu_host` UI. Handoff 0066 executed 32/50/5/2 = 89 on the previous base |
+| OS | macOS 27.0.1 (26A434), Darwin 27.0.0 arm64, `Mac17,9` |
+| GPU / adapter | Apple M5 Pro, `IntegratedGpu`, backend `Metal` (wgpu 29.0.4) |
+| Adapter timestamp features | `TIMESTAMP_QUERY` yes, `TIMESTAMP_QUERY_INSIDE_ENCODERS` yes, `TIMESTAMP_QUERY_INSIDE_PASSES` **no** (stage-boundary sampling only) |
+| Device features | `Renderer::new`: no timestamp feature. `Renderer::new_with_gpu_timing`: both encoder-timestamp features |
+| Timestamp period | `queue.get_timestamp_period()` = **1.0**, wgpu-hal's fixed non-Intel Metal value, not calibrated. wgpu-core timestamp normalization is inactive for period 1.0 |
+| Rust | rustc 1.99.0 (b940084d7 2026-09-28), LLVM 23.1.1; cargo 1.99.0 (5f94df478 2026-08-27) |
+| Python | 3.14.8, `-I -B` |
+| Cargo target | `/Users/andreyyurlov/.codex/incant-core-presentation-target`, exclusive. Leased 04:33:54.51Z, released 04:42:20.68Z with no process on it. Left as warm cache |
 
-I read the timing module (`timing/{mod,pool,recorder,gpu_tests,tests}.rs`), the graph
-instrumentation (`graph.rs`) and the renderer entry points (`lib.rs`). The group
-encoding conditions I rely on are:
+## Source and frozen binaries
 
-| Group | Encoded when | Source |
-|---|---|---|
-| `InitializeScene`, `Display` | Every frame | `graph.rs` systems |
-| `Models`, `Shadows` | The scene has model batches | `prepare_models` returns `None` for empty batches |
-| `AssignLights` | Models are present, local (point/spot) lights > 0, and selection is `Clustered` (the default) | `lighting/mod.rs` `clustered.then(...)` |
-| `Sprites` | Sprites are present | `sprites.prepare` returns `None` without them |
-| `Text` | Text has glyph quads | `text.prepare` |
+- **Isolated child checkout.** A `git archive` export of `71e4d63e` into
+  `incant-evidence/0068/checkout`:
+  - 14,423 files, every one blob-verified, with the tree
+    `0950c0786767b090bfd141e24ce80b735691748b`;
+  - manifest SHA-256 `f9980c2f…a1a8f6cf`;
+  - every file was re-verified before each child.
+- **Freeze.** All 10 files in the reviewed freeze (`d41ba28b…`) are identical, and
+  `Cargo.lock` matches `c6831578…`.
+  - There is no build-input diff from implementation `99778642` across `crates`,
+    `Cargo.*`, `third_party`, `tools/cargo` and `rust-toolchain.toml`.
+  - Source-level `#[ignore]` count: 83 renderer plus 7 GPU host = 90.
+- **Builds.** All used `./tools/cargo … --locked --offline --profile ci -j2`, ran as
+  bounded process groups, and never ran a built binary.
 
-The helper derives expected labels from scene content (`SceneStats` plus the authored
-local lights), not from the timing code.
+  | Build | Cargo args | Time | Result |
+  |---|---|---|---|
+  | `tests-render` | `test -p incant_render --lib --test model_gpu --no-run` | 38.3 s | 346 artifacts, 321 fresh |
+  | `tests-host` | `test -p incant_render_gpu_host --test game --test ui --no-run` | 30.8 s | — |
+  | `review` | `test -p incant_render --test gpu_timestamp_review --no-run` | 1.6 s | Linked the **identical fresh** `incant_render` library artifact as `tests-render` (`libincant_render-acc3d1929421bfc9.rlib`) |
 
-### Pre-registered backend reading (pinned wgpu-hal 29.0.4, Metal)
+  - The review helper compiled on its first build with one warning: an unneeded
+    `mut` on `report` in `probe` (line 953). It has no behavioural effect.
+- **Frozen binaries.** Copies live in `incant-evidence/0068/bin`. Each was
+  hash-checked before and after every child, and none changed.
 
-I recorded this before any execution, so it cannot become a later excuse:
+  | Binary | SHA-256 | Features |
+  |---|---|---|
+  | `incant_render-lib-tests` | `db939b04bcacf6606c9a285c18d4cd7a4c4c068c6b81fe6e8e72ef04ce5e736f` | `default`, `physics-deterministic` |
+  | `model_gpu` | `49ebe070dc2d5125e54f777f8a84cfacec1dfd439f4201208d769b452b3c045e` | `default`, `physics-deterministic` |
+  | `gpu_host-game` | `036a1ea84bf3767901fb56899f475aa94a0c94d79d4b13f3bf8a78c695e796d8` | host's `physics-deterministic` library build |
+  | `gpu_host-ui` | `f5816d19348594b4da434ffcb432431f5be532049faec6fa9ce9e4fd9ed84387` | same |
+  | `gpu_timestamp_review` | `349c8109c94dfcc2a6d2341c3afdf790b88ccde8a07b46bd5cadbe85faed9b2c` | `default`, `physics-deterministic` |
 
-- **Feature flags.** On Metal, `TIMESTAMP_QUERY` and `TIMESTAMP_QUERY_INSIDE_ENCODERS`
-  are both reported when the device supports stage-boundary counter sampling
-  (`adapter.rs:1056`). Apple-silicon support is expected; the run will record the
-  actual flags.
-- **Deferred samples.** Without blit/draw/dispatch-boundary sampling, an
-  encoder-level `write_timestamp` is deferred to the next pass. It lands on that
-  pass's start-of-vertex (render) or start-of-encoder (compute) sample. Trailing
-  samples go to a dummy blit encoder before the resolve (`command.rs:755–806,
-  157–250, 518–530`). Consequences:
-  - a group's end can coincide with the next group's start;
-  - a group with no pass of its own can legitimately read zero ticks;
-  - groups are not hardware barriers and must not be summed.
-- **Period.** wgpu-hal uses a fixed period: `83.333` for Intel, otherwise `1.0`
-  (`adapter.rs:90`). This is not a calibrated measurement, and the run will record
-  `queue.get_timestamp_period()` as reported.
-- **What decides acceptance.** Only the documented contract counts: labels match the
-  encoded groups, absent groups are absent, spans are ordered, finite and
-  non-negative, plus sequence, stats, backpressure and slot reuse. Dependency-order
-  consistency, containment within the frame and zero-tick groups are recorded as
-  observations only.
-- **Reversed counters.** A reversed or wrapped counter would surface as a typed
-  error. It would be reported to Astra with the exact reproducer. I would not relax
-  the check or re-run to hide it.
+- **Tools.** Commit `71e4d63e`, plan SHA-256 `477082b0…`, helper SHA-256
+  `611cb108…` (the reviewed `f676b69e` content).
 
-## Proposed bounded case list (frozen in `plan.json`)
+## GPU interval, ledger and release
 
-Budget totals:
+- **Ledger.** 18 children (`gpu-ledger.jsonl`, SHA-256 `1ca53607…`), serial, each in
+  its own process group. Every group was empty afterwards, and no scratch files or
+  wait/parse errors were left behind:
+  - 3 builds;
+  - 5 listings, at most 0.3 s each;
+  - the numeric test (0.5 s);
+  - 5 review cases, at most 1.2 s each;
+  - 4 suites (1.6 s, 44.3 s, 0.6 s, 0.6 s).
+- **Budgets used:**
+  - appearance: **12 of 24** frames (all 640×360), with 7 PNGs retained;
+  - numeric: **11 of 48** submissions (numeric test 3, `lit` 5, `sprites_text` 1,
+    `viewport` 1, `owner_drop` 1);
+  - no reruns and no plan amendments.
+- **GPU latch.** `gpu-released.json` (SHA-256 `eba4f536…`) at 04:41:40.33Z, with
+  no owned processes and no live ledger PIDs.
+- **Lint.** The optional CPU-only lint ran afterwards, under the lease, and wrote to
+  `post-release-ledger.jsonl`.
+- **Lease release.** `target-lease.json` (SHA-256 `bb32a241…`) at 04:42:20.68Z.
+- **Post-release refusals.** After release, `gpu.py review lit`, `gpu.py numeric`
+  and `build.py tests` each refuse ("GPU and target already released by this
+  packet") and are logged in `refusals.jsonl`.
 
-- **Appearance frames:** 12 of 24 on first runs, and at most 24 even if every case
-  used its one permitted rerun. Every review frame counts, including controls and
-  frames whose PNG is not kept. Each frame is 640×360, within the 960×540 limit.
-- **Numeric submissions:** 11 of 48 on first runs, and at most 19 with reruns.
-  Timing-enabled review frames count here as well.
+## Numeric results
 
-| Item | What runs | Frames | Numeric submissions | Bound |
-|---|---|---|---|---|
-| `numeric` | The brief's test, `timing::gpu_tests::bounded_timestamp_queries_follow_real_submission_and_abandonment`, with `--ignored --exact --nocapture --test-threads=1`, exactly once | 0 | 3 (2 more encoded, never submitted) | 120 s |
-| `suite lib` | Library ignored cases, with `--skip` on the numeric test so it cannot run twice. The runner checks that `running N` equals the listing minus one and that the name is absent from output | existing | existing | 300 s |
-| `suite model_gpu`, `game`, `ui` | All ignored cases, serial, `--nocapture` | existing | existing | 300 s each |
-| `review probe` | Timing on and off: adapter/backend, adapter and device timestamp flags, period, initial stats and `take`. The default device must request no timestamp feature | 0 | 0 | 120 s |
-| `review lit` | Look-dev shadow scene (sun with shadows, environment fill, two clustered point lights), 640×360. See "The lit case" below | 8 | 5 | 120 s |
-| `review sprites_text` | Pixel-perfect camera (100 px/unit, 320×180 → 640×360), three nearest sprites (one flipped, overlapping), world text (`MIXED` Latin/Arabic/CJK/.notdef plus `Ag`). One frame off, one on, exact bytes | 2 | 1 | 120 s |
-| `review viewport` | The lit scene in viewport rect `[52.5, 30.25, 512, 288]`, radii 12, canvas `[64,80,96]`. One frame off, one on, exact bytes | 2 | 1 | 120 s |
-| `review owner_drop` | **Gated; needs Astra's review first.** Submit one measured 64×64 frame (the numeric-test fixture, not readable), drop the owning `Renderer`, wait on a retained device clone, then check that a fresh timing renderer starts empty | 0 | 1 | 120 s |
+### The brief's numeric test (exactly once)
 
-### The lit case
+- **Run.** The frozen `incant_render-lib-tests` ran the test with the brief's exact
+  libtest arguments, from `crates/incant_render` in the child checkout:
 
-- **Timing off.** Two frames on one device (determinism control) and one on a second
-  device (cross-device control).
-- **Timing on:**
-  1. three measured frames leave three unread results in the fixed slots;
-  2. frame 4 renders with instrumentation skipped;
-  3. draining yields sequences 1, 2, 3 and then none;
-  4. frame 5 reuses a slot (sequence 5).
-- **Checks.** All eight frames must be byte-identical to the first. Stats after each
-  step must equal pre-registered values, and every sample's labels must equal the
-  content-derived set.
+  ```
+  timing::gpu_tests::bounded_timestamp_queries_follow_real_submission_and_abandonment --ignored --exact --nocapture --test-threads=1
+  ```
 
-### Further rules
+  The binary was built by `tests-render`, which uses the brief's package selection
+  and profile.
+- **Result.** `test result: ok. 1 passed; 0 failed; … 102 filtered out; finished in
+  0.41s`.
+- **Adapter.** `AdapterInfo { name: "Apple M5 Pro", device_type: IntegratedGpu,
+  backend: Metal, … }`.
+- **Raw samples** (stderr, verbatim values):
 
-- **Kept frames.** Four matched pairs are retained, within the brief's 3–6:
-  - `lit-off-1` / `lit-on-1`;
-  - `lit-off-1` / `lit-on-4-skipped`;
-  - `sprites-text-off` / `-on`;
-  - `viewport-off` / `-on`.
-  Every rendered frame is hashed whole and compared byte for byte in-process. The
-  kept PNGs are also decoded and compared independently in Python.
-- **Reruns.** A review case may run a second time only in one of two cases:
-  - after an infrastructure failure, meaning a timeout or a crash before
-    `report.json` exists;
-  - after a committed `plan.json` amendment that names the case and the reason, for
-    example a helper assumption defect visible in the first run's raw data. This
-    follows 0067's lesson to keep a reserve.
+  ```
+  {"sequence":1,"timestamp_period_ns":1.0,"frame":{"start_ticks":0,"end_ticks":0,"nanoseconds":0.0},"passes":[{"start_ticks":0,"end_ticks":0,"nanoseconds":0.0},null,{"start_ticks":0,"end_ticks":0,"nanoseconds":0.0},{"start_ticks":0,"end_ticks":0,"nanoseconds":0.0},null,null,{"start_ticks":0,"end_ticks":0,"nanoseconds":0.0}]}
+  {"sequence":2, … identical zeros …}
+  ```
 
-  Every run stays in the ledger, a recorded failure is never hidden, and the 24/48
-  caps still bind. The numeric test and the suites never rerun.
-- **Builds.** Builds (CPU only, 2700 s bound each) use the plan's three cargo
-  invocations, all with `--locked --offline --profile ci -j2`:
-  - `tests-render`: `-p incant_render --lib --test model_gpu --no-run`. This keeps
-    the brief's package selection for the numeric test.
-  - `tests-host`: `-p incant_render_gpu_host --test game --test ui --no-run`.
-  - `review`: `-p incant_render --test gpu_timestamp_review --no-run`. This runs
-    only after the regression binaries are frozen. It must reuse the identical fresh
-    `incant_render` library artifact.
+- **Checks against the test fixture.** The independent analysis compared these
+  samples with the fixture's content-derived groups:
+  - present: `InitializeScene`, `Shadows`, `Models`, `Display`;
+  - absent: `AssignLights`, `Sprites`, `Text`.
 
-## Execution order once granted (all `python3 -I -B`, from the worktree root)
+  The labels match, the sequences are [1, 2], and conversion and ordering hold
+  trivially. **Every tick is 0.**
+
+### Review numeric checks (frozen helper, per-case `report.json`)
+
+| Case | Helper checks | Groups present (= expected from content) | Samples |
+|---|---|---|---|
+| `probe` | 8/8 pass | n/a | Default device has no timestamp feature; stats disabled; `take` is none. The timing device has both encoder flags; stats start empty; `take` is none |
+| `lit` | 14/14 pass | `InitializeScene`, `AssignLights`, `Shadows`, `Models`, `Display` | Seq 1, 2, 3, then none, then seq 5. All ticks 0 |
+| `sprites_text` | 7/7 pass | `InitializeScene`, `Sprites`, `Text`, `Display` | Seq 1, then none. All ticks 0 |
+| `viewport` | 7/7 pass | `InitializeScene`, `AssignLights`, `Shadows`, `Models`, `Display` | Seq 1, then none. All ticks 0 |
+| `owner_drop` | 4/4 pass | n/a | One pending before submit; retained-device wait `QueueEmpty` after owner drop; fresh owner empty |
+
+The `lit` stats sequence matches the pre-registered values exactly:
+
+| Point | pending / ready / skipped |
+|---|---|
+| After frames 1 to 4 | 0/1/0, 0/2/0, 0/3/0, then **0/3/1** (frame 4 skipped instrumentation) |
+| After the drain | 0/0/1 |
+| After frame 5 | 0/1/1 |
+| Final | 0/0/1 |
+
+Abandoned and retired stayed 0 throughout.
+
+**Independent re-checks** (`analyze.py`, CPU only) agree with the helper:
+
+- all 7 PNGs decode to the helper's RGBA hashes;
+- all 4 retained pairs differ in 0 pixels;
+- re-derived labels match in all 8 samples, and conversion matches the period;
+- there are no dependency-order violations, which is trivial with zero ticks;
+- `observation_zero_tick_groups` lists every present group in every sample.
+
+## Defect for Astra: every resolved GPU timestamp is zero
+
+**Reproducer**, on the hardware above:
 
 ```
-handoffs/0068-gpu-timestamps/tools/lease.py acquire
-handoffs/0068-gpu-timestamps/tools/build.py checkout      # git archive export of grant source_commit, blob-verified
-handoffs/0068-gpu-timestamps/tools/build.py toolchain
-handoffs/0068-gpu-timestamps/tools/build.py tests
-handoffs/0068-gpu-timestamps/tools/build.py review
-handoffs/0068-gpu-timestamps/tools/gpu.py list lib|model_gpu|game|ui|review
-handoffs/0068-gpu-timestamps/tools/gpu.py numeric
-handoffs/0068-gpu-timestamps/tools/gpu.py suite lib|model_gpu|game|ui
-handoffs/0068-gpu-timestamps/tools/gpu.py review probe|lit|sprites_text|viewport   # owner_drop only if approved
-handoffs/0068-gpu-timestamps/tools/analyze.py check       # CPU only; then personal inspection of every kept frame
-handoffs/0068-gpu-timestamps/tools/gpu.py release
-handoffs/0068-gpu-timestamps/tools/build.py lint          # optional: clippy -D warnings on the helper, CPU only, still leased
-handoffs/0068-gpu-timestamps/tools/lease.py release
-handoffs/0068-gpu-timestamps/tools/analyze.py publish
+./tools/cargo test --locked --profile ci -j2 -p incant_render --lib \
+  timing::gpu_tests::bounded_timestamp_queries_follow_real_submission_and_abandonment \
+  -- --ignored --exact --nocapture --test-threads=1
 ```
 
-The numeric test runs as the frozen library test binary. That binary is a byte copy
-of what `tests-render` built: the same package selection, profile and lock as the
-brief's command. It runs with the brief's exact libtest arguments, from
-`crates/incant_render` in the child checkout, which is the cwd cargo would use. No
-test reads `CARGO_*` at runtime; I checked with grep.
+The `GPU timestamp result:` lines show `start_ticks: 0, end_ticks: 0` for the frame
+and every group. The packet helper's `lit`, `sprites_text` and `viewport` cases show
+the same zeros across every group type it encodes:
 
-## Helpers (all new, packet-only, standard library or test-only Rust)
+- render passes: diagnostic initialization, shadow, model, sprite, text, display;
+- the cluster-assignment compute pass;
+- the trailing dummy-blit samples.
 
-| Path | Purpose |
+**What I read in the pinned sources (read-only; nothing tested with new code):**
+
+- **Encoder writes.** `wgpu-core 29.0.4 command/query.rs:403–418, 241–258`: an
+  encoder-level `write_timestamp` calls `reset_queries(index..index+1)` and then hal
+  `write_timestamp`.
+- **Deferral on this adapter.** Without blit/draw/dispatch-boundary sampling,
+  `wgpu-hal 29.0.4 metal/command.rs:755–806` defers each encoder timestamp. It is
+  then sampled in one of two ways:
+  - at the start of the next render pass (start of vertex) or compute pass (start of
+    encoder): `:961–978`, `:1679–1684`;
+  - otherwise, at end of encoder in a dummy blit encoder, which the next
+    `reset_queries`/`enter_blit` creates (`:157–250`).
+- **Resolve.** The resolve is `resolveCounters` into the resolve buffer, inside the
+  same command buffer (`:821–853`).
+- **Normalization.** It returns early for period 1.0
+  (`timestamp_normalization/mod.rs:107`), so it cannot be what zeroes the values.
+
+**Hypotheses for source review (untested; each needs new code):**
+
+1. The Metal counter samples are never written on this macOS 27 / M5 Pro
+   configuration.
+2. `resolveCounters` in the same command buffer runs before the samples are visible.
+3. The resolve is a no-op, leaving wgpu's zero-initialized resolve/readback buffers.
+
+Possible diagnostics, for Astra to decide:
+
+- resolve in a later command buffer, or on the CPU through the counter sample
+  buffer after completion;
+- compare pass-level `timestamp_writes`, which needs only `TIMESTAMP_QUERY`;
+- run wgpu's upstream timestamp test on this host.
+
+**Contract and test gaps** (a source decision; I made no change):
+
+- **Contract.** `recorder::decode` and `span` accept `0..0` everywhere, so an
+  all-zero payload is published as a valid 0 ns frame. That is indistinguishable
+  from the documented "legitimate quantization". A typed refusal for impossible
+  samples, or a backend refusal, may be needed. This is the opposite of relaxing
+  validity checks.
+- **Test.** `bounded_timestamp_queries_follow_real_submission_and_abandonment`
+  passes on all-zero values. It cannot detect unwritten queries, for example
+  because it never asserts that `frame.end_ticks > frame.start_ticks` or that ticks
+  are nonzero.
+
+**Budget note.** 12 appearance frames and 37 numeric submissions of this packet's
+budget were unused when I released the GPU. Any follow-up needs a new grant.
+
+## Appearance verdicts (personal inspection of complete, unmasked frames)
+
+| Frames (byte-identical within each set) | Content checked |
 |---|---|
-| `tools/common.py` | Constants and guards. `grant()` refuses before touching the filesystem while the grant is absent. `gate()` adds the release latch and the lease. `tools_identity()` refuses uncommitted tool or plan edits. `verify_checkout()` re-checks every checkout file against its git blob before each child. Also holds the constructed child environment |
-| `tools/lease.py` | Create-only target lease. Verifies every `prior_*_path`/`prior_*_sha256` pin in the grant and the prior release's empty live-process fields, and refuses if any cargo/rustc or target-run binary is active. Release leaves the target as a warm cache |
-| `tools/build.py` | `checkout`, `toolchain`, `tests`, `review`, as described above, plus an optional `lint`. Lint runs after the GPU latch, under the lease, and writes to a separate post-release ledger so the latched ledger hash stays valid. The tool parses Cargo JSON artifacts, records features and hashes, and freezes executables into `0068/bin`. It never runs them |
-| `tools/gpu.py` | Serial runner under an flock. Enforces budgets and run limits from `plan.json`, uses one process group per child with kill-and-reap on timeout, writes a ledger and refusal log, and writes the release latch |
-| `tools/analyze.py` | CPU-only checks independent of the helper: its own PNG decoder, pair diffs, content-derived labels, sequence/order/tick-to-ns checks, and parsing of the numeric test's samples. Its publish step makes create-only copies and keeps one unedited PNG per distinct byte content |
-| `tools/selfcheck.py` | Preparation check (below) |
-| `tools/review/gpu_timestamp_review.rs` | The Rust review helper. It is copied into the child checkout as `crates/incant_render/tests/gpu_timestamp_review.rs` only by `build.py review`. It reuses `tests/materials` and `tests/support` and the look-dev geometry copied from `tests/shadows/lookdev.rs`, where those builders are private. All output goes to a new directory named by `INCANT_0068_REVIEW_OUT`, using create-only files |
-| `plan.json` | Frozen cases, budgets, bounds and order |
+| `lit-off-1`, `lit-on-1`, `lit-on-4-skipped` (frame 4 rendered with instrumentation skipped under backpressure) | Shadow look-dev scene: cube, sphere, thin wall, sloped ramp with post, post row to the horizon. Consistent sun shadows with contact darkening. Warm (left) and cool (right) clustered point-light pools on the ground. Dark clear colour above the horizon. No missing geometry, seams, banding artifacts or black/NaN pixels |
+| `sprites-text-off`, `sprites-text-on` | Pixel-perfect 2× grid. `ffi` ligature, right-to-left joined Arabic سلام, CJK 中文 and the intended `.notdef` box for the uncovered Hebrew letter; crisp 48 px "Ag". Three nearest-sampled badges with transparent corners and dark rims. The flipped third badge shows its marker mirrored and draws over the second |
+| `viewport-off`, `viewport-on` | The lit scene inside the fractional offset rect `[52.5, 30.25, 512, 288]` with 12 px rounded corners over canvas `[64,80,96]`. Correct aspect, no boundary or corner artifacts |
 
-No existing helper constructs a timing-enabled renderer:
+Not visible in any frame, but confirmed by hash: the timing-on frames 2, 3 and 5, and
+the second-device control in `lit`. All are byte-identical to `lit-off-1`.
 
-- `examples/native_frames.rs`, `examples/frame_benchmark.rs` and
-  `gpu_host/examples/ui_review.rs` all call `Renderer::headless()`/`new`.
-- Pointing them at the timing constructor would change production example code.
+These are observations of the unchanged renderer and fixtures, not new findings:
 
-So the packet adds one narrow integration-test file, not a capture framework.
-
-**Receipt environment.**
-
-- **Constructed environment.** Children get a constructed environment: `HOME` passes
-  through with its value unrecorded, plus documented nonsecret overrides recorded
-  verbatim: `PATH`, `TMPDIR` (a fresh packet scratch directory), `RUST_BACKTRACE=1`,
-  and `CARGO_TARGET_DIR`, `CARGO_TERM_COLOR=never` and `RUSTUP_AUTO_INSTALL=0` for
-  builds.
-- **Review output variable.** Review children also get `INCANT_0068_REVIEW_OUT`.
-- **Never serialized:** the inherited environment, ACP or session transport values,
-  credentials and account metadata.
-- **No optional evidence.** Regression tests cannot see any `INCANT_*_EVIDENCE`
-  variable, so they write no optional evidence.
-- **Pattern.** This follows the 0066/0064 pattern, made stricter. It does not reuse
-  the 0065 logger.
-
-## Requests to root and Astra (before or with the grant)
-
-1. **Grant fields.** The tools require:
-   - `packet: "0068-gpu-timestamps"`;
-   - `target: "/Users/andreyyurlov/.codex/incant-core-presentation-target"`;
-   - a 40-hex `source_commit`;
-   - prior-receipt pins as `prior_<name>_path` plus `prior_<name>_sha256` pairs,
-     including one whose name contains `release` (0067's grant format).
-
-   Any `owned_processes`-style list in the pinned release must be empty.
-2. **Child checkout approval.** My proposal is a `git archive` export of
-   `source_commit` into `incant-evidence/0068/checkout`, verified file by file against
-   the git blobs. The tree has 14,410 regular files and no symlinks or submodules. No
-   build script uses git. The shared `.git` is not modified. If root wants a different
-   isolated checkout, please say so in the grant; adapting `build.py` would be a small
-   change committed before execution.
-3. **`owner_drop`, Astra review.** The brief requires review of any
-   callback-after-owner-drop helper. It is the `owner_drop` function in
-   `tools/review/gpu_timestamp_review.rs`. To approve it, list `"owner_drop"` in the
-   grant's `approved_extra_cases`; otherwise it is refused and reported as not run. It
-   observes only the absence of a panic or hang and a fresh owner starting empty. It
-   does not manufacture device loss or a mapping failure.
-4. **Integrated source.** If the grant names a source other than `99778642`,
-   `build.py checkout` records:
-   - the build-input diff;
-   - the comparison against the reviewed freeze;
-   - per-file ignore counts.
-
-   I would explain any count change from 90 before running suites.
-
-## Commands run this session and results
-
-| Command | Result |
-|---|---|
-| Read-only inspection: `git log/show/ls-tree/diff`, `grep`, `sed`, `shasum` on this worktree, the pinned wgpu 29.0.4 registry sources, and 0064/0066/0067 receipts and tools in other worktrees | No writes outside this worktree |
-| `ls /Users/andreyyurlov/.codex/incant-evidence/0068/`, once | `No such file or directory`: grant absent |
-| `rustfmt --edition 2024 --emit stdout < tools/review/gpu_timestamp_review.rs`, formatting only through stdin | Exit 0, so the file parses as Rust. I adopted rustfmt's layout, and a second pass is identical. No compilation |
-| `/opt/homebrew/bin/python3 -I -B handoffs/0068-gpu-timestamps/tools/selfcheck.py --write handoffs/0068-gpu-timestamps/preparation/selfcheck.json` | `all_pass: true` |
-
-What `selfcheck.json` confirms (Python 3.14.8):
-
-- all tools parse;
-- the plan totals add up and fit 24 frames, 48 submissions and 960×540;
-- PNG names are unique and the four kept pairs name real PNGs;
-- the numeric test is the library suite's only skip, and the reviewed base totals 90;
-- the helper's five tests, frame and submission limits, PNG names, size and output
-  variable match `plan.json`;
-- all 15 guarded commands exit 1 with "review-ready.json is absent";
-- `incant-evidence/0068` is still absent and `git status` is unchanged.
-
-## Changed paths
-
-- `handoffs/0068-gpu-timestamps/plan.json`
-- `handoffs/0068-gpu-timestamps/tools/{common,lease,build,gpu,analyze,selfcheck}.py`
-- `handoffs/0068-gpu-timestamps/tools/review/gpu_timestamp_review.rs`
-- `handoffs/0068-gpu-timestamps/preparation/selfcheck.json`
-- `handoffs/0068-gpu-timestamps/result.md`
-
-I made no change to crates, production code, tests in `crates/`, CI, `brief.md` or
-`main`. Nothing was pushed. There is no PR.
+- the ground reads bright and the sky is a flat clear colour, because the
+  environment lights the scene but is not drawn as a background;
+- with timing enabled, the appearance stays the same.
 
 ## Screenshots
 
-None. No frame was rendered, and no pixel was inspected.
+Unedited byte copies; each file stands for its byte-identical set:
+
+| File | SHA-256 | Stands for |
+|---|---|---|
+| `handoffs/0068-gpu-timestamps/screenshots/lit-r1-lit-off-1.png` | `4f019b64…` | `lit-off-1`, `lit-on-1`, `lit-on-4-skipped` |
+| `handoffs/0068-gpu-timestamps/screenshots/sprites_text-r1-sprites-text-off.png` | `bdadd584…` | `sprites-text-off`, `-on` |
+| `handoffs/0068-gpu-timestamps/screenshots/viewport-r1-viewport-off.png` | `d6215b53…` | `viewport-off`, `-on` |
+
+All 7 retained PNGs remain in `incant-evidence/0068/captures/<case>-r1/`.
+
+## Helper lint (optional, CPU only, after the GPU latch)
+
+`cargo clippy -p incant_render --test gpu_timestamp_review … -- -D warnings`
+**fails (exit 101) on 4 style findings in the packet helper:**
+
+- `unused_mut` at line 953;
+- `clippy::chunks_exact_to_as_chunks` at lines 429 (twice) and 450.
+
+None changes behaviour. I left them unfixed because the helper is the reviewed,
+executed source. They would need fixing before any integration.
+
+## Commands run (worktree root, `/opt/homebrew/bin/python3 -I -B`)
+
+```
+handoffs/0068-gpu-timestamps/tools/lease.py acquire
+handoffs/0068-gpu-timestamps/tools/build.py checkout
+handoffs/0068-gpu-timestamps/tools/build.py toolchain
+handoffs/0068-gpu-timestamps/tools/build.py tests          # background; both cargo builds exit 0
+handoffs/0068-gpu-timestamps/tools/build.py review
+handoffs/0068-gpu-timestamps/tools/gpu.py list lib|model_gpu|game|ui|review
+handoffs/0068-gpu-timestamps/tools/gpu.py numeric
+handoffs/0068-gpu-timestamps/tools/gpu.py review probe|lit|sprites_text|viewport|owner_drop
+handoffs/0068-gpu-timestamps/tools/gpu.py suite lib|model_gpu|game|ui
+handoffs/0068-gpu-timestamps/tools/analyze.py check
+handoffs/0068-gpu-timestamps/tools/gpu.py release
+handoffs/0068-gpu-timestamps/tools/build.py lint           # exit 101, see above
+handoffs/0068-gpu-timestamps/tools/lease.py release
+handoffs/0068-gpu-timestamps/tools/{gpu.py review lit, gpu.py numeric, build.py tests}   # refused after release
+handoffs/0068-gpu-timestamps/tools/analyze.py publish
+```
+
+Every child's exact argv, constructed environment overrides, hashes and outcome are
+in `evidence/gpu/ledger.jsonl` and `evidence/gpu/post-release-ledger.jsonl`.
+
+## Changed paths (this session)
+
+- `handoffs/0068-gpu-timestamps/result.md`, replaced with this execution report.
+  Astra's preparation follow-up is preserved verbatim below.
+- `handoffs/0068-gpu-timestamps/evidence/**`, 56 published receipts plus
+  `manifest.json`. Logs, JSON and JSONL were normalized only for trailing
+  whitespace and final blank lines; the manifest records the raw and committed
+  SHA-256 of each.
+- `handoffs/0068-gpu-timestamps/screenshots/*.png`, 3 files.
+
+No tool, plan, crate, test, CI or `main` change. Nothing was pushed. There is no PR.
+Writes outside the worktree went only to the granted
+`incant-evidence/0068` and the granted Cargo target.
 
 ## Limitations and unavailable checks
 
-- **Helper not compiled.** The Rust helper has not been compiled; compiling is
-  forbidden before the grant. rustfmt confirms only that it parses. It mirrors API
-  uses already present in the repository's tests. Any compile fix found by
-  `build.py review` would be recorded as a reviewed deviation before any GPU child
-  runs.
-- **Only refusal paths tested.** The tools' grant, lease, build, GPU and publish paths
-  are unexercised until the grant exists.
-- **Unsupported adapters.** The unsupported-capability refusal cannot be exercised
-  on an adapter expected to support timestamps. The CPU test
-  `absent_capability_fails_explicitly_without_changing_defaults` covers it. Execution
-  would record an actual refusal as a refusal, never as a pass.
-- **Mapping failure.** No real device mapping failure will be produced. CPU
-  failed-map tests are not evidence of it.
-- **Out of scope.** This packet cannot approve reference-phone performance, other
-  GPU backends (Vulkan, DX12, browser), the complete profiler or a phase gate. The
-  sample durations will not be read as performance.
+- **No timestamp values.** No real GPU timestamp value, and so no interval duration,
+  was observed. See the defect section. This packet does not establish that the
+  feature measures anything on Metal/Apple silicon.
+- **Weak numeric test.** The numeric test's pass is not timestamp evidence, because
+  its assertions accept all-zero values.
+- **`owner_drop` scope.** It is a no-panic/no-hang smoke check only. `queue.submit`
+  may deliver the callback before `drop(renderer)`, so callback-after-drop ordering
+  is not established, and nothing exposes callback completion.
+- **Untested failure paths.** I produced no real device mapping failure or device
+  loss. CPU failed-map tests are not evidence of either.
+- **Unsupported adapters.** The unsupported-capability refusal is not exercisable
+  on this adapter, which supports encoder timestamps. The CPU test covers it.
+- **Scope.** Only this Mac's Metal backend was tested. There is no Vulkan, DX12,
+  browser, phone or performance evidence, and none is claimed.
 
 ## Open questions
 
-1. Does root approve the `git archive` child checkout, or name another one?
-2. Will Astra review `owner_drop` and approve it via `approved_extra_cases`?
-3. Is running the frozen copy of the `tests-render` library test binary, with the
-   brief's exact libtest arguments, acceptable for the numeric command? The
-   alternative is the literal cargo command after the freeze, with
-   `Running`-path and before/after hash checks.
-
+1. Astra: which diagnostic seam should determine why resolved timestamps are zero,
+   and should `decode` refuse impossible all-zero samples? A follow-up GPU interval
+   needs a new grant.
 
 ## Astra correctness follow-up (2026-10-13, no grant or GPU)
 
