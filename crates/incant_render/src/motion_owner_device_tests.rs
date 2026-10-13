@@ -41,7 +41,7 @@ fn quad(root: &std::path::Path, mode: &str) -> Arc<RuntimeAsset> {
     let cooked = incant_assets::cook_gltf(root, std::path::Path::new("q.gltf"), &cache).unwrap();
     Arc::new(RuntimeAsset::load_model(mode, 1, &cache, &cooked.metadata.fingerprint).unwrap())
 }
-fn fixture() -> SceneInput {
+pub(super) fn fixture() -> SceneInput {
     let dir = tempfile::tempdir().unwrap();
     let opaque = quad(&dir.path().join("opaque"), "OPAQUE");
     let mask = quad(&dir.path().join("mask"), "MASK");

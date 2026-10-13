@@ -316,6 +316,10 @@ impl MotionState {
         self.targets.as_ref().map(|t| t.motion.clone())
     }
     #[cfg(test)]
+    pub(crate) fn owner_test_change_header(&self) -> Option<[u32; 4]> {
+        self.changes.as_ref().map(|state| state.test_header())
+    }
+    #[cfg(test)]
     pub(crate) fn owner_test_views(
         &self,
     ) -> Option<(wgpu::TextureView, wgpu::TextureView, wgpu::TextureView)> {

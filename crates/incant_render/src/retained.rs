@@ -706,3 +706,7 @@ mod metalfx_tests;
 #[cfg(test)]
 #[path = "motion_owner_device_tests.rs"]
 mod motion_owner_tests;
+
+#[cfg(test)]
+#[path = "upscaling_owner_retained_tests.rs"]
+mod upscaling_owner_tests;

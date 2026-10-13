@@ -57,6 +57,10 @@ impl State {
             bytemuck::cast_slice(self.upload.as_slice()),
         );
     }
+    #[cfg(test)]
+    pub(super) fn test_header(&self) -> [u32; 4] {
+        self.upload[..4].try_into().unwrap()
+    }
     pub fn accept(&mut self, lights: &[Light]) {
         self.lights.accept(lights);
     }
