@@ -28,3 +28,9 @@ actionlint and twelve policy cases before composition. Raw diagnostic observatio
 source review and local checks are retained in the [evidence record](evidence/ssao-raster-coverage.json).
 The repaired strict Dx12 test is still pending; observation success alone does
 not pass the failed release check or approve any phase or performance gate.
+
+The final independent audit rehashed all 32 raw/archive records and 23 lossless
+payloads, all five source/workflow identities and the completed check logs. Its
+[acceptance receipt](evidence/ssao-raster-coverage/final-review.json) retains the
+strict Dx12 execution limitation. This composition starts at actual main240;
+no additional Rust source join or duplicate compiler run was needed.
