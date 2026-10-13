@@ -1,10 +1,12 @@
 # Implementation status
 
-The hosted opaque session checkpoint producer is independently accepted with 200 script cases per numerical mode and strict headless/UI/audio feature checks. It preserves actual silent mixer chronology, binds captured UI/audio owners before VM initialization and leaves persisted physics admission closed. Current-main248 composition has fourteen passing read-only checks: all 3,663 inputs are bound, with only the six accepted repair paths different and three matching dependency graphs. Final composition review is independently accepted; publication awaits the exact-head fast check; producer execution is not relabeled. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
+The complete game checkpoint producer is independently accepted: both numerical modes passed 39 game cases with real offline PCM continuation; the earlier 33 ordinary cases remain source002. Current composition binds all 3,667 producer inputs plus two evidence collectors, qualifies the six reviewed main248 repairs and passes fourteen read-only checks. Independent final composition review is accepted, hosted PR249 is merged and the actual-main249 join changes no implementation/build/tool input. Game publication awaits its required fast check. The feature stays default-off and public persisted physics remains closed. [Scope](docs/spikes/native-game-main248.md).
+
+The hosted opaque session checkpoint producer is independently accepted with 200 script cases per numerical mode and strict headless/UI/audio feature checks. It preserves actual silent mixer chronology, binds captured UI/audio owners before VM initialization and leaves persisted physics admission closed. Current-main248 composition has fourteen passing read-only checks: all 3,663 inputs are bound, with only the six accepted repair paths different and three matching dependency graphs. Final composition review is independently accepted and PR249 merged after its exact-head fast check; producer execution is not relabeled. [Scope](docs/spikes/native-session-hosted-physics-checkpoints.md).
 
 Checkpoint28 finished unpromoted at reviewed main246 on PR232: 13 required checks succeeded, nine failed and one was skipped; all eight workflows are terminal. Native physics jobs failed at isolated lock resolution, and feature-off NativeOwner Clippy failures are diagnosed on all three desktop platforms. The reviewed combined repair passes seventeen lock/guard checks and four strict all-target Clippy configurations; PR248 merged after its exact-head required fast check. Checkpoint29 now freezes that main248 tree (`9493650a`, candidate `74e77456`) on the same PR232; all 23 requirements remain mandatory. Release is unchanged. [Lock evidence](docs/spikes/runtime-probe-locks-main247.md).
 
-Opaque headless TypeScript/native-physics session checkpoints have accepted producer tests: 195 script cases per numerical mode, 186 feature-off cases, strict Clippy and optional/lean/wasm compilation. The original manifest guard failure is retained; its three-manifest repair merged with PR246 and has separate focused script qualification. Current main246 composition matches all 3,656 accepted repaired implementation/build/tool inputs; ten read-only checks pass, selected normal graphs match and ordinary snapshot stays excluded. Final current-main review is accepted; PR247 merged after its exact-head required fast SUCCESS. Public physics byte saves and hosted UI/audio continuation remain refused. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
+Opaque headless TypeScript/native-physics session checkpoints have accepted producer tests: 195 script cases per numerical mode, 186 feature-off cases, strict Clippy and optional/lean/wasm compilation. The original manifest guard failure is retained; its three-manifest repair merged with PR246 and has separate focused script qualification. Current main246 composition matches all 3,656 accepted repaired implementation/build/tool inputs; ten read-only checks pass, selected normal graphs match and ordinary snapshot stays excluded. Final current-main review is accepted; PR247 merged after its exact-head required fast SUCCESS. Public physics byte saves remain refused; subsequent PR249 adds the separately reviewed hosted UI/audio continuation API. [Producer scope](docs/spikes/native-session-physics-checkpoints.md).
 
 Native capture, primitive 2D/3D solver checkpoints and opaque ECS/physics world checkpoints are available as opt-in in-memory APIs. Public persisted physics and full script/session checkpoint admission remain separate. Historical checkpoint27 selected main241; its macOS conformance hit the configured 40-minute limit and cannot count as success. The reviewed main repair gives that macOS job 90 minutes, keeping Linux at 40 and every proof unchanged. Checkpoint27 finished unpromoted with 22 required checks successful and that macOS job cancelled. Checkpoint28 now freezes reviewed main246 (`42e13e75`, candidate `be3422f8`) on the same PR232; all 23 required checks remain mandatory and release is unchanged. [Timeout evidence](docs/spikes/macos-conformance-timeout.md).
 
@@ -269,9 +271,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main248, 2026-10-13
+## Current overview — main249, 2026-10-13
 
-Development main248 includes the reviewed opt-in cooked renderer families and
+Development main249 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and joined inert physics owner boundaries. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -300,8 +302,8 @@ merged in PR248 and await actual successor validation. Release remains `2a9d72ea
 PR242 merged the private primitive-world composition; PR244/245 added native
 capture and outer in-memory checkpoints, PR246 added opaque ECS/world ownership,
 and PR247 added headless native session checkpoints. These remain opt-in and
-process-local. Public persisted physics bytes and hosted UI/audio continuation
-remain refused; each original execution generation retains its stated scope.
+process-local. Public persisted physics bytes remain refused; PR249 adds opt-in in-memory
+hosted UI/audio continuation; each original execution generation retains its stated scope.
 [Promotion evidence](docs/spikes/release-checkpoint-24.md).
 
 Checkpoint23 is terminal and unpromoted: 22 required contexts succeeded and its
