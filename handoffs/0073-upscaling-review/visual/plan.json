@@ -13,7 +13,7 @@
   "build_inputs": ["crates", "Cargo.toml", "Cargo.lock", "third_party", "tools/cargo", "rust-toolchain.toml"],
   "grants": {
     "build": {
-      "path": "~/.codex/incant-evidence/0073-upscaling-visual/build-ready.json",
+      "path": "~/.codex/incant-evidence/0073-upscaling-visual-002/build-ready.json",
       "fields": {
         "packet": "0073-upscaling-review",
         "stage": "upscaling-build",
@@ -26,7 +26,7 @@
       "allows": ["lease.py acquire/release", "build.py checkout/toolchain/review/lint"]
     },
     "gpu": {
-      "path": "~/.codex/incant-evidence/0073-upscaling-visual/review-ready.json",
+      "path": "~/.codex/incant-evidence/0073-upscaling-visual-002/review-ready.json",
       "fields": {
         "packet": "0073-upscaling-review",
         "stage": "upscaling-visual",

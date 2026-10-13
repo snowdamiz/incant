@@ -490,7 +490,7 @@ fn spread(a: &[u8], i: usize, b: &[u8], j: usize) -> u8 {
         .unwrap_or(0)
 }
 fn distinct(pixels: &[u8]) -> usize {
-    pixels.chunks_exact(4).collect::<HashSet<_>>().len()
+    pixels.as_chunks::<4>().0.iter().collect::<HashSet<_>>().len()
 }
 fn in_ui(x: usize, y: usize) -> bool {
     let (px, py) = (x as f32, y as f32);
@@ -1333,7 +1333,7 @@ fn node(input: &SceneInput, id: &str) -> usize {
 #[test]
 #[ignore = "handoff 0073 packet review; run only by the guarded packet runner"]
 fn probe() {
-    let mut report = Report::open("probe", 0);
+    let report = Report::open("probe", 0);
     let stage = Stage::new(false);
     let input = stage.input();
     let mut renderer = support::checked(Renderer::headless().expect("headless renderer"));
