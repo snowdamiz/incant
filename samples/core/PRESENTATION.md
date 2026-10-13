@@ -98,19 +98,27 @@ the handoff result for the reproduction.
 
 Plain type over the scene in the engine's fixed game-UI theme (light text, hard
 one-pixel shadow, no panels). Status top-left, progress top-right, the result
-title centred under the top bar. Fonts chain Inter, Noto Sans Arabic and a 38
+title centred under the top bar. Fonts chain Inter, Noto Sans Arabic and a 42
 glyph Noto Sans SC subset (`art/fonts`, OFL, with recipe and provenance).
+
+The controls legend ends with the restart key: "WASD move · Space jump · R play
+again". R (and gamepad Start) only restarts after a result, so the copy names
+what it does then rather than promising a mid-run restart. The legend stays
+keyboard-only, like move and jump. When status and progress do not fit on one
+row (English below about 490 pt, the pseudo-locale below about 700 pt), the top
+bar wraps progress onto a second row, still end-aligned, so no label wraps
+inside its column. Arabic and Chinese stay on one row down to 420 pt.
 
 | Index | ID | Role | Content |
 |---|---|---|---|
 | 1 | `01CSWD00000000000000000001` | root | viewport |
-| 2 | `01CSWD00000000000000000002` | container | top bar (row; `row_reverse` for RTL) |
+| 2 | `01CSWD00000000000000000002` | container | top bar (wrapping row; `row_reverse` for RTL) |
 | 3 | `01CSWD00000000000000000003` | container | status column |
 | 4 | `01CSWD00000000000000000004` | label | health pips, `hud.health {health}` |
 | 5 | `01CSWD00000000000000000005` | label | objective, `hud.objective.collect` / `.exit` |
 | 6 | `01CSWD00000000000000000006` | container | progress column |
 | 7 | `01CSWD00000000000000000007` | label | `hud.samples {collected} {total}` |
-| 8 | `01CSWD00000000000000000008` | label | `hud.controls` |
+| 8 | `01CSWD00000000000000000008` | label | `hud.controls` (move, jump, play again) |
 | 9 | `01CSWD00000000000000000009` | container | result slot |
 | 10 | `01CSWD00000000000000000010` | container | zero-size stash (clips its children) |
 | 11 | `01CSWD00000000000000000011` | label | `hud.won`, parked in 10 |
@@ -139,8 +147,8 @@ the existing controller roles, without changing widget style or authored sound:
   locale changes, and localizes both result titles.
 - Restart: R or gamepad Start while won/lost requests a complete fresh session.
   World, script, audio, UI and held input reset together; it is not a save load.
-  These actions are ignored while playing. The existing HUD copy is unchanged;
-  a visible restart hint remains a Claude presentation follow-up.
+  These actions are ignored while playing. The controls legend names R ("R play
+  again"); no state-dependent prompt is shown.
 
 `verify_bindings.py prepare BUILD OUT --binary ...` copies an authored build and
 connects its roles through one reversible public transaction. It checks the real
@@ -154,7 +162,15 @@ results must be retained before calling the new bindings verified.
 - The four `--state` choices remain authored presentation snapshots; gameplay
   starts from its normal fresh state. They do not pre-complete gameplay.
 - The game UI theme is fixed (no colour, panels or per-widget styles), so the
-  HUD relies on placement over the deep sky band for contrast.
+  HUD relies on placement over the deep sky band for contrast. On the live
+  routes (handoff 0065, estimated against each label's median background) the
+  one-row top bar measures 4.6:1 or better, but result titles over the horizon
+  haze measure 2.7-3.2:1 (four of six below 3:1), and a wrapped second row at
+  narrow widths 2.6-3.9:1. A theme text outline or scrim would fix both;
+  placement alone cannot.
+- The restart hint lives in the top-right legend, not under the result title:
+  the controller only reparents the two result labels, and a separate prompt
+  would need a controller binding.
 - The original 0060 offscreen helper source hash remains unresolved. New
   correctly bound source evidence does not retroactively change that claim.
 - Desktop (Apple M5 Pro, Metal, ci profile) evidence only; no phone, shipping

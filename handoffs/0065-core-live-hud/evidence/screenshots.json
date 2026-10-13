@@ -1,0 +1,292 @@
+[
+ {
+  "file": "screenshots/01-en-960x540-start.png",
+  "sha256": "dc5a26dfd3fb17915004f29a5b6e9a8e6fdba8583dc307748a34b30ee5f48a37",
+  "caption": "English fresh start, tick 2; bit-identical to the frames after Start (host 2158) and after R (host 902)",
+  "run": "review-en-start",
+  "capture": "start",
+  "host_step": 2,
+  "generation": 1,
+  "simulation_tick": 2,
+  "size": [
+   960,
+   540
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/review-en-start/01-start.rgba",
+  "rgba_sha256": "20ec7c5ce6b0dfb1fdf4fe2b203f2561e989aa2fb090090c3fa21432148b52d7",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/02-en-960x540-pickup-1.png",
+  "sha256": "6027399b3026e74710f4d44afce03dfd6448f98eed828ec5372ecf13e0dd55c4",
+  "caption": "first sample collected (tick 127), Samples 1/4",
+  "run": "frames-en-route-a",
+  "capture": "pickup-1",
+  "host_step": 128,
+  "generation": 1,
+  "simulation_tick": 128,
+  "size": [
+   960,
+   540
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-route-a/01-pickup-1.rgba",
+  "rgba_sha256": "55503e4a2aa674aa038dcff806b9125bee0a1913c48c42dca2af0673a4d58da7",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/03-en-960x540-damage.png",
+  "sha256": "1d5605b01151b0f7d4914559fa665db458602b24cad3c92b692e2fcb475ec0a7",
+  "caption": "first hit (tick 664), pips 2 of 3, Samples 2/4",
+  "run": "frames-en-route-a",
+  "capture": "damage-1",
+  "host_step": 665,
+  "generation": 1,
+  "simulation_tick": 665,
+  "size": [
+   960,
+   540
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-route-a/02-damage-1.rgba",
+  "rgba_sha256": "cb9b061b66f8e1444b0e58edc7ae3cb3ab871b411a44fef9794d8c2441e636c2",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/04-en-960x540-collected.png",
+  "sha256": "3950d6f0f3085f79f44f3631eac6d5b0a07728efd438c8db1e55c46db455f092",
+  "caption": "fourth sample (tick 1842), Return to the lift",
+  "run": "frames-en-route-a",
+  "capture": "collected",
+  "host_step": 1843,
+  "generation": 1,
+  "simulation_tick": 1843,
+  "size": [
+   960,
+   540
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-route-a/03-collected.rgba",
+  "rgba_sha256": "c878dd2775df2133f4d28255638842ee698498f05ad5cdb210f25d35ae95e39a",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/05-en-960x540-won.png",
+  "sha256": "6e1a6ecf9fb6c4ea8420bb5ba381dddf7f5f47dbf52b10d53fcf77b8a7ae1eff",
+  "caption": "win at the lift (tick 2066), Samples secured",
+  "run": "frames-en-route-a",
+  "capture": "won",
+  "host_step": 2067,
+  "generation": 1,
+  "simulation_tick": 2067,
+  "size": [
+   960,
+   540
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-route-a/04-won.rgba",
+  "rgba_sha256": "153a5534f0e4cc73a3d8aae22b478337edd2212c9cb9ef0d6d602703d8c96205",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/06-en-960x540-lost.png",
+  "sha256": "59d5ced56c6eea5f868daad84b5a93031611361d370070e7f30510535560368f",
+  "caption": "idle loss (tick 616), Surveyor down, empty pips",
+  "run": "frames-en-route-b",
+  "capture": "lost",
+  "host_step": 617,
+  "generation": 1,
+  "simulation_tick": 617,
+  "size": [
+   960,
+   540
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-route-b/01-lost.rgba",
+  "rgba_sha256": "62e384946ec6bb92b1852d7f7f0dcfa261dff6365aeff15a36c5c93142c9e611",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/07-en-960x540-locked-exit.png",
+  "sha256": "67197c8e7df8a9aac471c88f70b1b2ef4eeed33b3df644489e53a69256d17df9",
+  "caption": "alive on the lift with 3 of 4 samples after the 30-tick dwell, no win",
+  "run": "frames-en-locked",
+  "capture": "locked-exit",
+  "host_step": 1588,
+  "generation": 1,
+  "simulation_tick": 1588,
+  "size": [
+   960,
+   540
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-locked/01-locked-exit.rgba",
+  "rgba_sha256": "6767c6a024353e8b07a95b3763440d3f31c318e15f383f812528dd0fa828287a",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/08-en-640x480-start.png",
+  "sha256": "5c8e13a3ee93874f5fa56dfd8bea886ddc6862dfbd9089427a489910b35d70d1",
+  "caption": "English at the default 640x480 window size",
+  "run": "frames-en-default",
+  "capture": "start",
+  "host_step": 2,
+  "generation": 1,
+  "simulation_tick": 2,
+  "size": [
+   640,
+   480
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-default/01-start.rgba",
+  "rgba_sha256": "4e812a8abaa0acee5cc24a97a66bb94bd7fae2f8b69af4036a818f89f7b0ae65",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/09-ar-640x480-pickup-1.png",
+  "sha256": "dd6d8f957f9739d3771cf274bcd05b98ec19a4e3b3c930d48459ea3f1d5f1e6d",
+  "caption": "Arabic, mirrored HUD, first sample",
+  "run": "frames-ar-route-a",
+  "capture": "pickup-1",
+  "host_step": 128,
+  "generation": 1,
+  "simulation_tick": 128,
+  "size": [
+   640,
+   480
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-ar-route-a/01-pickup-1.rgba",
+  "rgba_sha256": "cc53959c2077fd06d457cde3d2145d14a4c03d3c7493f6f4791dae4e062b70d2",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/10-ar-640x480-won.png",
+  "sha256": "0577c2072060f55b1196dc6fd223a271e8eecc3a7111aab289fb601b1a411989",
+  "caption": "Arabic win title",
+  "run": "review-ar-won",
+  "capture": "won",
+  "host_step": 2067,
+  "generation": 1,
+  "simulation_tick": 2067,
+  "size": [
+   640,
+   480
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/review-ar-won/01-won.rgba",
+  "rgba_sha256": "a2a0e04d724112c11a0b4e302b590ba1cd51adea164a8c1153a1d6e273d72537",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/11-zh-Hans-640x480-pickup-1.png",
+  "sha256": "e72e8711503b3eb3e5e744776094e7c27f840b07fb525b3ef5584731e5e3c220",
+  "caption": "Simplified Chinese, first sample",
+  "run": "frames-zh-Hans-route-a",
+  "capture": "pickup-1",
+  "host_step": 128,
+  "generation": 1,
+  "simulation_tick": 128,
+  "size": [
+   640,
+   480
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-zh-Hans-route-a/01-pickup-1.rgba",
+  "rgba_sha256": "aa42ad441eed2d669f62e881b892b28225285ccd0149f7885a62d4df7f88fe07",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/12-zh-Hans-640x480-won.png",
+  "sha256": "08af4cd2c921b7161b7d7f93af6c4506b314d786cc1db957e2ac7bae88305da5",
+  "caption": "Simplified Chinese win title",
+  "run": "frames-zh-Hans-route-a",
+  "capture": "won",
+  "host_step": 2067,
+  "generation": 1,
+  "simulation_tick": 2067,
+  "size": [
+   640,
+   480
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-zh-Hans-route-a/02-won.rgba",
+  "rgba_sha256": "abff155445b4e6a89b95bbe8302b039ee9fa11cdc0c45e232e4d58e76259d345",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/13-en-XA-640x480-pickup-1.png",
+  "sha256": "41913148893ab236f168ee1b59e52ba69c8dc63c07c0739e3d391615ec3b2a53",
+  "caption": "pseudo-locale at 640 pt: progress wraps onto its own row",
+  "run": "review-en-XA-pickup",
+  "capture": "pickup-1",
+  "host_step": 128,
+  "generation": 1,
+  "simulation_tick": 128,
+  "size": [
+   640,
+   480
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/review-en-XA-pickup/01-pickup-1.rgba",
+  "rgba_sha256": "3ff1454ee37e5e5e738b41a124e1f5f8a65927e9f01c444e07f5de9cb8217df0",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/14-en-XA-640x480-won.png",
+  "sha256": "bb32aea517d3d5dfdd479524607ce0d2e76a10389407a0633e081bf695a1bf31",
+  "caption": "pseudo-locale win: the shorter exit objective fits one row again",
+  "run": "frames-en-XA-route-a",
+  "capture": "won",
+  "host_step": 2067,
+  "generation": 1,
+  "simulation_tick": 2067,
+  "size": [
+   640,
+   480
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-XA-route-a/01-won.rgba",
+  "rgba_sha256": "5a2c9676559edaaff7a592abe9849fc58ffa5d3c5fb3662604d2824cd9357986",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/15-en-420x320-start.png",
+  "sha256": "eb222db0daf91fb2a26793c0cd49f1b42041ab9e03550f27d35b1f5eb4de0482",
+  "caption": "English at 420 pt: progress on its own row",
+  "run": "frames-en-narrow",
+  "capture": "start",
+  "host_step": 2,
+  "generation": 1,
+  "simulation_tick": 2,
+  "size": [
+   420,
+   320
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/frames-en-narrow/01-start.rgba",
+  "rgba_sha256": "6697e1798b78808e51b021ae5f910e641f8bd459d57ddee5d8ee4f9ad6885886",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/16-en-420x320-lost.png",
+  "sha256": "3aff4be0ceb0aafe4317e822daa5510a484729bdb40f4886c1757d1cbbdf4a25",
+  "caption": "English at 420 pt, loss title",
+  "run": "review-en-narrow-lost",
+  "capture": "lost",
+  "host_step": 617,
+  "generation": 1,
+  "simulation_tick": 617,
+  "size": [
+   420,
+   320
+  ],
+  "rgba": "/Users/andreyyurlov/.codex/incant-evidence/0065/captures/review-en-narrow-lost/01-lost.rgba",
+  "rgba_sha256": "2bca0f2ee66cc58b5e2be2cf58f67e36223b07d5fd85db89eb112b80f47e5477",
+  "unedited": "PNG of the retained RGBA bytes (tools/png.py convert)"
+ },
+ {
+  "file": "screenshots/crop-en-960x540-progress-x4.png",
+  "sha256": "fd7cc969b29a8bd6148341463ae7de1b8a0cba52a1b36f0c88a3ecb60257e2ae",
+  "caption": "crop, 4x nearest-neighbour, of 01: x 700-948, y 12-68",
+  "review_aid": true
+ },
+ {
+  "file": "screenshots/crop-ar-640x480-progress-x4.png",
+  "sha256": "0245f483a345735cf588fc6b8a0469beef0bd31cde01ed5140170510e265e8fd",
+  "caption": "crop, 4x nearest-neighbour, of 10: x 16-248, y 12-66",
+  "review_aid": true
+ },
+ {
+  "file": "screenshots/crop-zh-Hans-640x480-progress-x4.png",
+  "sha256": "e8f17ef84c5ece152e1c09171d18bcd17923334e5751a5a1176569f1d393e426",
+  "caption": "crop, 4x nearest-neighbour, of 11: x 400-624, y 12-68",
+  "review_aid": true
+ }
+]

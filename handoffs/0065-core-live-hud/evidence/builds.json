@@ -1,0 +1,189 @@
+{
+ "command": "python3 -B samples/core/scene.py OUT --binary incant_headless --art ~/.codex/incant-evidence/0060/art/v13 --locale L --state playing",
+ "builds": {
+  "en": {
+   "output": "/Users/andreyyurlov/.codex/incant-evidence/0065/builds/en-playing",
+   "project_sha256": "5865f28f5226053ab53f5ec77e9da3bfb6301df5ad5a2e09d42109e2b81c80be",
+   "revision": 29,
+   "valid": true,
+   "diagnostics": 0,
+   "undo_redo_reopen": true,
+   "fonts": {
+    "inter": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+    "arabic": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "sc": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0"
+   },
+   "controls": "WASD move · Space jump · R play again",
+   "glyph_coverage": {
+    "inter": "/01234ACDRSWacdefghijlmnoprstuvwy·○●",
+    "arabic": "",
+    "sc": ""
+   },
+   "missing_glyphs": "",
+   "transactions": [
+    [
+     "Assign stable Core Sample asset identities",
+     28
+    ],
+    [
+     "Author Core Sample scene, script and input",
+     7
+    ],
+    [
+     "Build the mesa survey level",
+     21
+    ],
+    [
+     "Author music and event cues",
+     12
+    ],
+    [
+     "Author the localized HUD",
+     12
+    ]
+   ],
+   "art": "0060 v13 via --art, 30 files, manifest digests checked by scene.py"
+  },
+  "ar": {
+   "output": "/Users/andreyyurlov/.codex/incant-evidence/0065/builds/ar-playing",
+   "project_sha256": "ac8f2b3777cec1b7137de79933e3cceea26c966aaed3c88d977d99e812cda6d6",
+   "revision": 32,
+   "valid": true,
+   "diagnostics": 0,
+   "undo_redo_reopen": true,
+   "fonts": {
+    "inter": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+    "arabic": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "sc": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0"
+   },
+   "controls": "الحركة WASD · القفز Space · إعادة اللعب R",
+   "glyph_coverage": {
+    "inter": "/01234ADRSWacep·○●",
+    "arabic": "أإابةتجحدرزسصطعفقكلمنىيُّ",
+    "sc": ""
+   },
+   "missing_glyphs": "",
+   "transactions": [
+    [
+     "Assign stable Core Sample asset identities",
+     28
+    ],
+    [
+     "Author Core Sample scene, script and input",
+     7
+    ],
+    [
+     "Build the mesa survey level",
+     21
+    ],
+    [
+     "Author music and event cues",
+     12
+    ],
+    [
+     "Author the localized HUD",
+     12
+    ],
+    [
+     "Present HUD: playing in ar",
+     13
+    ]
+   ],
+   "art": "0060 v13 via --art, 30 files, manifest digests checked by scene.py"
+  },
+  "zh-Hans": {
+   "output": "/Users/andreyyurlov/.codex/incant-evidence/0065/builds/zh-Hans-playing",
+   "project_sha256": "afaf70750f681cd517f947d6c3834b034554f420295332a25c4f00e4695e9556",
+   "revision": 32,
+   "valid": true,
+   "diagnostics": 0,
+   "undo_redo_reopen": true,
+   "fonts": {
+    "inter": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+    "arabic": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "sc": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0"
+   },
+   "controls": "WASD 移动 · 空格键 跳跃 · R 再玩一次",
+   "glyph_coverage": {
+    "inter": "/01234ADRSW·○●",
+    "arabic": "",
+    "sc": "一人停全再动勘升台器回安岩已收本机样格次测玩移空芯跃跳返键降集"
+   },
+   "missing_glyphs": "",
+   "transactions": [
+    [
+     "Assign stable Core Sample asset identities",
+     28
+    ],
+    [
+     "Author Core Sample scene, script and input",
+     7
+    ],
+    [
+     "Build the mesa survey level",
+     21
+    ],
+    [
+     "Author music and event cues",
+     12
+    ],
+    [
+     "Author the localized HUD",
+     12
+    ],
+    [
+     "Present HUD: playing in zh-Hans",
+     13
+    ]
+   ],
+   "art": "0060 v13 via --art, 30 files, manifest digests checked by scene.py"
+  },
+  "en-XA": {
+   "output": "/Users/andreyyurlov/.codex/incant-evidence/0065/builds/en-XA-playing",
+   "project_sha256": "28039978807ed01ea5ba14e3a8ce2c0b795e942ea3ab847770b48d01169d579c",
+   "revision": 32,
+   "valid": true,
+   "diagnostics": 0,
+   "undo_redo_reopen": true,
+   "fonts": {
+    "inter": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+    "arabic": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+    "sc": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0"
+   },
+   "controls": "[!! ŴÁÁŠĎ ɱóóṽéé · Šþááçéé ĵúúɱþ · Ŕ þľááý ááğááííñ !!]",
+   "glyph_coverage": {
+    "inter": "!/01234[]·ÁÇáçéíñóúýþĎďğĥĵľŔŕŠšţŴŵƒɱṽ○●",
+    "arabic": "",
+    "sc": ""
+   },
+   "missing_glyphs": "",
+   "transactions": [
+    [
+     "Assign stable Core Sample asset identities",
+     28
+    ],
+    [
+     "Author Core Sample scene, script and input",
+     7
+    ],
+    [
+     "Build the mesa survey level",
+     21
+    ],
+    [
+     "Author music and event cues",
+     12
+    ],
+    [
+     "Author the localized HUD",
+     12
+    ],
+    [
+     "Present HUD: playing in en-XA",
+     13
+    ]
+   ],
+   "art": "0060 v13 via --art, 30 files, manifest digests checked by scene.py"
+  }
+ }
+}
