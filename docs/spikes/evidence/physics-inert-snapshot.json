@@ -610,13 +610,23 @@
       "bytes": 1365,
       "retained": "docs/spikes/evidence/physics-inert-snapshot/dff04998c3d127db97f995bd396dea74eff92fc76498b397703d0d7c6b8382b7.gz",
       "retained_sha256": "79c3a7ba90eaab5eaecc2297159142d3093d2a10063c7076e76abf418556f3f7"
+    },
+    {
+      "name": "independent-final-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/physics-inert-snapshot-final-20261013.json",
+      "sha256": "db7ca4c9ad7c9d05287541335fbc8416f0d4a65c382b4f883c722dd19859ba6e",
+      "bytes": 1311,
+      "retained": "docs/spikes/evidence/physics-inert-snapshot/db7ca4c9ad7c9d05287541335fbc8416f0d4a65c382b4f883c722dd19859ba6e.gz",
+      "retained_sha256": "16e60fc4ce00a4f8b825940bde215d6a58177fe613a610838dc403c9761df57a"
     }
   ],
   "independent_review": {
     "source": "accepted",
     "source_receipt_sha256": "dff04998c3d127db97f995bd396dea74eff92fc76498b397703d0d7c6b8382b7",
     "source_receipt_retained": "docs/spikes/evidence/physics-inert-snapshot/dff04998c3d127db97f995bd396dea74eff92fc76498b397703d0d7c6b8382b7.gz",
-    "final_evidence": "pending"
+    "final_evidence": "accepted",
+    "final_receipt_sha256": "db7ca4c9ad7c9d05287541335fbc8416f0d4a65c382b4f883c722dd19859ba6e",
+    "final_receipt_retained": "docs/spikes/evidence/physics-inert-snapshot/db7ca4c9ad7c9d05287541335fbc8416f0d4a65c382b4f883c722dd19859ba6e.gz"
   },
   "limitations": [
     "PhysicsUnsupported and world/session versions unchanged",

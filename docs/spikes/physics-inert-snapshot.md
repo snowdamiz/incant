@@ -104,7 +104,7 @@ formatting and generated conventions checks pass. All 963 pre-existing locked
 package identities remain unchanged. Dev-only trusted observation enables serde
 edges and adds pinned `serde_arrays 0.2.0`; the normal crate has no serde edge.
 Independent source review accepted the eleven frozen inputs with no blocking
-finding. Final evidence review remains pending. [Retained evidence](evidence/physics-inert-snapshot.json)
+finding. Independent final evidence review also accepted the retained packet. [Retained evidence](evidence/physics-inert-snapshot.json)
 binds that review, source copies, exact commands, raw logs and the lock identity audit.
 No new device, GPU, shipping package, performance or exact-save continuation gate
 is claimed. The next checked families remain arenas/generations, broad-phase
