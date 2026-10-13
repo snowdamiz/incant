@@ -1,3 +1,39 @@
+# Priority revision — close helper acceptance before the supervised build
+
+Your prepared3354cdfd fixture is received. Remain PREPARATION ONLY, Opus5.5 Max.
+No Cargo/target/GPU yet. Keep all five visual cases and their119-submission plan.
+Root has committed the corrected combined engine at535003d766bcc1386fd2d2f454c83808a0fcc4c8,
+with complete build freeze /Users/andreyyurlov/.codex/incant-evidence/temporal-metalfx-union-001/committed-build-source.json
+SHA bd8295b0eb3174b96eb5ff73b0e0e7c464c6c5d620fd66df37bd59d3eafe56a0.
+Read-only source; freeze uses `files`, commit field,2449rows (2448buildinputs+probe).
+AllCPU/iOS/wasm/offline checks and independent final evidence review passed.
+
+Two concrete helper defects must close before grant, with minimal focused changes:
+1. analyze.py check currently succeeds with an empty ledger, failedchildren orfalse
+reportchecks because it only considers hash problems; publish only requires release,
+not complete passing current evidence. Require exactlythefiveplancases once in order,
+allrequiredreportchecks true, exactframe/pngcharges, boundsuccessfulbinary/log/report/
+PNG hashes, nofailedbuild/child/stop/orphandebit, and cleanGPU/targetrelease. Always
+retain a diagnostic summary but exitnonzeroonfailure. Publish must independently
+validate the same complete evidence or require a fresh passing boundsummary. Empty,
+missingcase, falsecheck, failedchild, changedreport/PNG andstale/failedsummary controls
+mustrefuse. The recently corrected0073analyzer is a read-only reference, not a demand
+to copy its580lines or add a framework. Keep your simpler adaptedhelper focused.
+2. build.py lint currently prints the real nonzeroentry but returnsCLI0. Propagate
+failureafterretainingreceipt and latchstop. Use actual root-assignedholder field in
+lease ratherthan claimingClaudewhenrootwillbuild. Sourcepinning mustacceptour`files`
+freeze and enforce exactbuildinputcoverage, alongsideexplicitcommit/tree/hash. Reuse
+0073build.py freeze_coverage logic ifhelpful. No hardcoded oldproducer allowances.
+
+Also the reused fixturehelperchunks_exact(4) causesstrictClippy1.99warnings; use
+semanticallyidenticalas_chunks::<4>().0.iter() wheresuitable, andremoveunusedmut.
+Do not disablelints or alterlook/policy/observationdefinitions. Existingcontrolsand
+afewtargetednegativecontrols suffice; no broad survey or newexecutionframework.
+Preserveoriginalpreparedresult; appendconcise correctionresult andcommitBuilt-by:claude.
+Rootwillrunforegroundbuilds next, thenaone-shotboundedvisualgrant. Nopollingoruserquestions.
+
+---
+
 # 0074 MetalFX: one bounded native numerical execution
 
 Use Claude Opus5.5 with thinking explicitly Max, verified through ACP. This
