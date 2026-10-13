@@ -1,3 +1,75 @@
+# Priority revision: complete performance and runner corrections before any grant
+
+Root read the updated source/helpers. The prior five findings are closed by source inspection, but the new review at `~/.codex/incant-reviews/core0069-prep-second-20261013.json` requires correction. Read it now. The halo is25 texture reads PER minification tap, up to400 per fragment, not25perpixel: avoid this global label cost. Keep your visual direction but choose a bounded lower-cost approach, preferably cached/prepared glyph halo coverage outside the rendering hot path. Normal glyph coverage must retain its current contract; all source/layout/cooked implications need explicit tests and documentation. Do not silently swap algorithms or make mobile claims from CPU checks. You may change the necessary glyph-atlas/runtime preparation source for this scope; prepare the concrete approach and implement it, CPU source review only before grant. Also add the global native GPU lock, close release-versus-launch race, and make released ledger hashes stable. Preserve existing result as previous-preparation-result.md, write new prep-result.md; do not overwrite historical evidence. Existing UI GPU regressions can have a separate bounded <=128tinyframe debit (derive actual count from source), in addition to24new appearance frames. Still NO Cargo/shared target/GPU until fresh root grant; CPU parser/lifecycle synthetic controls permitted. Current target belongs to0068. Model Opus5.5 Max remains required.
+
+# Additional review received — 2026-10-13
+
+The full independent helper review is now in `root-helper-review.json` next to
+this brief (root-owned). Read and close all five findings before asking for an
+execution grant: interrupt cleanup, unstripped porcelain -z source identity,
+review frame provenance, build-to-capture frozen identity, atomic frame debit.
+This source review does not decide appearance. Scope remains preparation only.
+
+# Priority revision — 2026-10-13, follow-up preparation
+
+Read this before all earlier instructions. Your preparation result is received.
+Continue on the existing handoff checkout, Opus5.5 with explicitly verified Max.
+This invocation is still PREPARATION ONLY: no Cargo/build/target/GPU/captures.
+No grant exists. Do not wait or poll for it. No personal/auto/persistent memory.
+
+1. Choose the design yourself using the director's full creative authorization.
+Do not settle for moving a contrast failure from the result title to the stats.
+The source inspection demonstrates a missing legibility capability. You now own
+visual implementation within `crates/incant_render/src/ui/theme.rs`, UI geometry
+and the associated UI draw shader if necessary, plus existing visual tests.
+Prepare a coherent fixed-theme legibility treatment which works against both
+bright and dark game backgrounds, preserves useful text and fits narrow/RTL/CJK
+layouts. Avoid decorative glow. Astra will review bounds, clipping, resource and
+shader correctness before builds. A new authored style field or schema/runtime
+mutation path still needs Astra implementation; if that is necessary, specify
+its exact semantics. Do not change gameplay, camera, physics, audio or test oracles.
+
+2. Astra fixed the optional prompt fixture in commit f5eba1d7. All20 existing
+binding/playtest tests now pass with your proposed documents. Preserve that commit.
+`verify_bindings.py prepare/ship` is the intended public route for the authored
+prompt. The prepared geometry remains your draft and can be improved as needed.
+
+3. Read-only access is authorized to the hash-pinned font downloads and original
+art cache under `/Users/andreyyurlov/.codex/incant-evidence/0060`; preserve original
+assets/provenance. Choose appropriate Chinese wording, not a missing-glyph dodge.
+Later granted execution may regenerate the subset reproducibly and verify glyphs.
+
+4. Independent correctness review found two blockers in draft helpers: `lease.run`
+only reaps on timeout, while KeyboardInterrupt/SystemExit can leave the session
+child alive; all outcomes need finally-owned process-group kill and wait before
+unlock. Also `capture.reuse` trusts any same-freeze review receipt and suppresses
+names without proving matching variant/route/viewport/state frames actually ran.
+Prefer removing reuse complexity and rendering the full22-frame plan within24,
+or bind reuse to exact successful report/frame/plan/binary hashes. No fabricated
+review acceptance. A complete independent receipt will follow; source may be
+repaired now but no real commands may bypass the grant.
+
+5. Use a constructed minimal environment for compiler/child execution. Never log
+inherited environment or ACP/session values. Include bounded synthetic lifecycle
+controls for normal/nonzero/timeout/interruption and prove no surviving PID/group;
+these may use temporary files strictly inside this packet's tools/test-scratch
+and must clean them up. They must not build, use GPU, touch the target or grant.
+No live engine/test invocation until reviewed. Keep frame accounting conservative:
+all rendered attempts count, including failures and unretained frames.
+
+6. The source+binary review must confirm one actual accept per capture and no
+GPU device on layout-only routes. Fresh rendering is suitable for the current
+non-temporal Core sample, but do not claim equivalence to an accumulated temporal
+history. Snapshot/routing must consume actual public render/UI inputs. Keep any
+history-sensitive cases explicitly separate.
+
+Return updated source, helpers/case list and a short delta result with outstanding
+correctness review. Do not ask the director routine design/permission questions.
+The grant will use `packet` and `target` plus exact reviewed source/helper and
+predecessor-release identities; root writes it only after review.
+
+---
+
 ## Priority: prepare on the reviewed main196 integration
 
 The latest source now includes main196 (`3da8b0ebeab43f715b0531603e30a864e801be11`),
