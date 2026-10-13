@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Private bloom output-space correction — source and CPU accepted
+
+The output-anchored pyramid and exact first-pass DRS mapping have independent
+[source/CPU acceptance](docs/spikes/evidence/bloom-output-space/final-review.json).
+The fixed physical-light CPU oracle preserves energy, centroid and radius across
+100/75/50/25% scales; 93 library tests, Clippy, wasm32 and the cooked-output refusal
+pass. All 1,197 frozen inputs and retained test binaries match the reviewed packet.
+No GPU ran for this correction. Original 0070 GPU centroid failure and appearance
+rejection remain open until root composition and delegated corrected-source
+validation. This private effects branch is not a main or release integration.
+[Contract and limits](docs/spikes/bloom-output-space.md).
+
 ## Current overview — main196, 2026-10-13
 
 Development main196 includes the restart quota-test repair (PR188) and the reviewed,

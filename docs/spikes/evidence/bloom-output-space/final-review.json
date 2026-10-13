@@ -1,0 +1,12 @@
+{
+  "reviewer": "astra",
+  "at": "2026-10-13T09:47:57.276895+00:00",
+  "status": "accepted_source_cpu",
+  "commit": "5d02ad6c09787ffd009a7517d448fb27b1fe9f58",
+  "manifest_sha256": "96eb895e7138370d8ad0ceab7aad5a4b0395b0bba05e114ffdafd6755a533285",
+  "inputs": 1197,
+  "artifacts": 19,
+  "checks": 8,
+  "scope": "Source review of physicaloutput-anchored pyramid, unroundedinternalmapping,globalphysicaloutputsampling,bounded3x3area and32MiBpreallocation budget.1197inputtar/originalidentities19losslessrecords2copiedbinaryhashesverified.93CPU+typedcookedrefusal,Clippy/webchecks pass. Analyticmeasurements support geometrymath; originalGPUfailure retained. No renderedappearance/currentmain/deviceclaim.",
+  "findings": []
+}
