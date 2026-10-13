@@ -48,20 +48,40 @@ impl MotionDraw {
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
         depth: Option<&wgpu::TextureView>,
     ) {
-        let colors = [Some(wgpu::RenderPassColorAttachment {
-            view: &self.targets.motion,
-            resolve_target: None,
-            depth_slice: None,
-            ops: wgpu::Operations {
-                load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
-                store: wgpu::StoreOp::Store,
-            },
-        })];
+        let colors = [
+            Some(wgpu::RenderPassColorAttachment {
+                view: &self.targets.motion,
+                resolve_target: None,
+                depth_slice: None,
+                ops: wgpu::Operations {
+                    load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
+                    store: wgpu::StoreOp::Store,
+                },
+            }),
+            self.targets
+                .owner
+                .as_ref()
+                .map(|view| wgpu::RenderPassColorAttachment {
+                    view,
+                    resolve_target: None,
+                    depth_slice: None,
+                    ops: wgpu::Operations {
+                        load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
+                        store: wgpu::StoreOp::Store,
+                    },
+                }),
+        ];
         // A depth-only pass leaves both observable motion and previous/current
         // history depth untouched. Only the disposable scene depth is replaced.
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Opaque surface motion/depth"),
-            color_attachments: if depth.is_some() { &[] } else { &colors },
+            color_attachments: if depth.is_some() {
+                &[]
+            } else if self.targets.owner.is_some() {
+                &colors
+            } else {
+                &colors[..1]
+            },
             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
                 view: depth.unwrap_or(&self.targets.depth[self.slot]),
                 depth_ops: Some(wgpu::Operations {

@@ -16,6 +16,17 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Integer motion owner attachment — current-main integration
+
+The reviewed owner/change foundation gains an explicit R32Uint attachment with
+stable integer IDs and change bits at opaque/MASK fragments. The curated source
+uses the existing main renderer, excludes private upscale/MetalFX ancestry, and
+refuses fixed temporal history while attached. Default output and old shader
+sources remain unchanged. Source review is accepted; current CPU/recook checks
+are pending. Original producer numerical Metal evidence covers twelve renders
+plus twelve readback submissions only; no appearance or history-consumption
+claim. [Current integration](docs/spikes/temporal-owner-main228.md).
+
 ## Native physics numerical admission — main227 CPU qualification
 
 A default-off pinned-kernel preflight checks primitive mass/pose/extent and
