@@ -58,12 +58,12 @@ The accepted bounded configuration/CCD records and read-only vendor getter are
 composed with the current narrow-owner boundary. Actual rebuilt deterministic
 and fast8 suites each pass 164 tests; strict Clippy, wasm32 and the std-only normal
 graph pass. Eleven current checks are zero-exit, with exact source/pin identities.
-Independent current-main review is pending. Live save/restore admission remains
+Independent current-main review is accepted; publication awaits the required fast check. Live save/restore admission remains
 closed. [Scope and evidence](docs/spikes/physics-ccd-main220.md).
 
 ## Timestamp backend diagnostic — capability repair
 
-Checkpoint22 remains frozen while its jobs drain. A separate direct timestamp
+Checkpoint22 is terminal and unpromoted. A separate direct timestamp
 diagnostic failed on hosted Apple Paravirtual Metal after the production timing
 test had correctly completed its unsupported-capability path. The test-only repair
 keeps mandatory backend selection, runs supported timestamp modes, and executes
@@ -101,14 +101,13 @@ Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
 
-Checkpoint22 is frozen at exact main216 through PR213, candidate `a894b7ca`,
-with all 23 required contexts and eight workflows preserved. Checkpoint21 is
-terminal and unpromoted: 21 contexts succeeded; its pinned vendor-path and
-optional timestamp capability failures are retained and repaired in main214/215.
-The [timestamp correction](docs/spikes/timestamp-capability.md) requires exact
-typed refusal and an ordinary completed frame when the adapter lacks timing,
-while preserving positive lifecycle assertions where supported. Successor hosted
-execution remains pending. Later main changes will not move the frozen candidate.
+Checkpoint23 is frozen at exact main220 through PR213, candidate `3381ccef`,
+with all 23 required contexts and eight workflows preserved. Checkpoint22 is
+terminal and unpromoted: 22 contexts succeeded; its optional timestamp diagnostic
+failure is retained and repaired in main219. The corrected test keeps forced backend
+selection mandatory and runs only supported timing paths, retaining actual compute
+observations and explicit unsupported records. Hosted successor execution remains
+pending. Later main changes will not move the frozen candidate.
 
 Release now contains selected main205. [Checkpoint20](docs/spikes/release-checkpoint-20.md)
 promoted through PR174 after all 23 required contexts and eight exact-head workflows

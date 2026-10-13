@@ -349,5 +349,9 @@
     "Default-off borrowed vendor CCD getter has no solver algorithm change. Normal snapshot dependency graph remains std-only.",
     "No hostile decoder/live construction, full-owner restore, world save, device or performance admission."
   ],
-  "final_review": "pending"
+  "final_review": {
+    "decision": "accepted",
+    "path": "docs/spikes/evidence/physics-ccd-main220/final-root-review.json",
+    "sha256": "c95c5cbf2a771fa6e4429734a4ae6a84b3716415a0f68914b338470d17d81859"
+  }
 }

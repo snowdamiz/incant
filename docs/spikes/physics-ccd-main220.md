@@ -21,7 +21,7 @@ observer controls. Prior producer binaries were not used as a substitute.
 [Manifest](evidence/physics-ccd-main220.json) and
 [read-only verifier](evidence/physics-ccd-main220/verify.py) retain the complete
 current input freeze, raw logs, exact source joins and independent producer review.
-Final current-main review is pending. Producer 156-case full suites and later
+Independent final current-main review is accepted; publication awaits the required fast check. Producer 156-case full suites and later
 21-case focused suites remain historical and overlap; they are not additive
 coverage to the current 164 cases.
 
