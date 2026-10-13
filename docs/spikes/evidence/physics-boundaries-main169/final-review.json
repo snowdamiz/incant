@@ -1,0 +1,44 @@
+{
+  "reviewer": "astra root",
+  "decision": "accepted bounded main169 integration",
+  "tested_source": "bc85c676d4c5722f9751fdb5c03b698125f4926c",
+  "manifest_sha256": "9919a21474280c1f47d794ce02775edaa3ca09e696114d652cb82de33530938a",
+  "artifacts_verified": 39,
+  "producer_artifacts_verified": 46,
+  "freeze_inputs_verified": 1827,
+  "accepted_source_files": 9,
+  "command_outcomes": 15,
+  "test_counts": {
+    "deterministic-test": [
+      10,
+      0,
+      0
+    ],
+    "fast-test": [
+      10,
+      0,
+      0
+    ],
+    "fast-simd8-test": [
+      10,
+      0,
+      0
+    ]
+  },
+  "actual_feature_records_verified": [
+    "deterministic-test",
+    "fast-test",
+    "fast-simd8-test",
+    "wasm-deterministic",
+    "wasm-fast"
+  ],
+  "diagnostic_cases": 8,
+  "diagnostic_ticks": 960,
+  "diagnostic_exact_original": true,
+  "limitations": [
+    "Deterministic defaults unchanged; project/process feature selection remains separate local work.",
+    "No renderer, GPU, phone, performance or numerical backend adoption claim.",
+    "Trusted typed solver clone only; no decoder, persisted graph, NativeWorld restore or PhysicsUnsupported relaxation.",
+    "No unsafe code added; prior underlying dependency ownership obligations remain open."
+  ]
+}

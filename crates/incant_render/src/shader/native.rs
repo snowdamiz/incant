@@ -6,6 +6,8 @@ use std::borrow::Cow;
 pub(crate) enum Stage {
     Vertex,
     Fragment,
+    #[cfg(feature = "cooked-clusters")]
+    Compute,
 }
 #[derive(Clone, Copy)]
 pub(crate) struct Artifact {
@@ -73,7 +75,7 @@ impl Bundle {
         let fragment_desc = descriptor(fragment)?;
         // SAFETY: callers are private fixed-builtin selectors. Their pinned host
         // cook validates exact IR/host layouts and emits bounded accesses/loops.
-        // Output has no side metadata; geometry uses the exact hal29 bounded
+        // Output has no side metadata; geometry/sprites/UI/text use exact hal29 bounded
         // vertex pulling, supplied lengths and full sampler-index binding map.
         // Embedded bytes/entry names are never supplied by project artifacts.
         let (vertex_module, fragment_module) = unsafe {
@@ -108,6 +110,12 @@ pub(crate) fn descriptor(
         label: Some("Cooked builtin shader"),
         ..Default::default()
     };
+    #[cfg(feature = "cooked-clusters")]
+    if a.stage == Stage::Compute {
+        // hal29 calls this field num_workgroups but consumes it as the kernel's
+        // threads-per-workgroup, not the runtime dispatch grid dimensions.
+        desc.num_workgroups = (64, 1, 1);
+    }
     match a.backend {
         wgpu::Backend::Metal | wgpu::Backend::Dx12 => {
             let text = std::str::from_utf8(a.bytes).map_err(|_| "invalid shader text")?;

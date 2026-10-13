@@ -1,0 +1,19 @@
+{
+  "status": "accepted scoped source",
+  "runner": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/run-gpu.py",
+  "runner_sha256": "0f890ddbf0bbff09df07e49b362565a797d04dfabc2f01d7c34f4e74c24c166a",
+  "lifecycle_receipt": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/runner-lifecycle-checks.json",
+  "lifecycle_sha256": "6612edec5fe61e110cfa9913816ed94208543ec4997697c6f8cd300c4e31275b",
+  "review": [
+    "Read exact runner and corrected real-model retained test",
+    "Earlier wait interruption failed to reap and record; corrected finally paths kill/reap and retain terminal rows on normal, timeout, interruption",
+    "Release computes current PID/group state; paired baseline/cooked adapters must now match exactly",
+    "84 exact unique record names and identical raw count/mask hashes required",
+    "Explicit source/binary/grant/predecessor hashes gate execution"
+  ],
+  "limits": [
+    "No GPU or builds executed by reviewer",
+    "Producer CPU lifecycle records inspected, not rerun",
+    "No GPU numerical, appearance, performance or device acceptance"
+  ]
+}

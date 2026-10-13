@@ -1,0 +1,63 @@
+{
+  "at": "2026-10-13T05:17:39.112231+00:00",
+  "source": "d369a7d40651ecdc042396074e8c59e5d5b2895e",
+  "manifest_sha256": "bd0fb9190bc509dea76b497fc283e206bf69099582e1e1e103dfd7d20ea152ee",
+  "source_review": "Root read full contact_points.rs/contact_points_codec.rs/lib changes, hostile/trusted tests and pinned ContactData/SolverContact/PackedFeature definitions; no findings",
+  "sources_verified": 29,
+  "pinned_original_and_copies_verified": 15,
+  "raw_retained_records_verified": 105,
+  "commands": [
+    [
+      "clippy-003.json",
+      0
+    ],
+    [
+      "conventions-003.json",
+      0
+    ],
+    [
+      "diff-003.json",
+      0
+    ],
+    [
+      "fmt-003.json",
+      0
+    ],
+    [
+      "normal-graph-003.json",
+      0
+    ],
+    [
+      "runtime-graph-003.json",
+      0
+    ],
+    [
+      "tests-001.json",
+      101
+    ],
+    [
+      "tests-002.json",
+      101
+    ],
+    [
+      "tests-003.json",
+      0
+    ],
+    [
+      "wasm32-003.json",
+      0
+    ]
+  ],
+  "cpu": {
+    "passed": 65,
+    "failed": 0,
+    "ignored": 0,
+    "nonempty_groups": 11,
+    "all_groups": 13
+  },
+  "status": "accepted scoped producer source and final CPU evidence",
+  "limits": [
+    "No live physics restoration consumer",
+    "No complete native-world continuation or save gate"
+  ]
+}

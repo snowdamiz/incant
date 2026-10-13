@@ -1,0 +1,22 @@
+{
+  "head": "c08885b85a66e7c716e3a3557358d8b112557848",
+  "main": "d5702546b34fcc6452a9fe2b22a0e2b23802991a",
+  "renderer_and_shader_cook_equal": "6eeef1ff4bf70e73e397210b365cb6171206b576",
+  "source_commits": [
+    "23f92d71",
+    "ca7f4521",
+    "f8b95de5",
+    "972a36f1",
+    "bacdd6f2",
+    "91b70493",
+    "6bcb839a",
+    "e0fbd056"
+  ],
+  "claude_commits": [
+    "59ba048a",
+    "62c802d3",
+    "6eeef1ff"
+  ],
+  "only_conflict": "Additive STATUS entries; preserved current main status",
+  "integrated_execution": "pending; no new build or GPU execution"
+}

@@ -1,6 +1,15 @@
 //! Bounded, document-free planar physics. Each owner has one scene solver;
 //! stable IDs cross the boundary, never Rapier handles. Native deterministic
 //! builds use parallel Rapier; WebAssembly remains serial.
+// A solver variant is a build choice, never a runtime toggle. Rapier itself also
+// rejects this combination; keep the local diagnostic at our public boundary.
+#[cfg(all(feature = "deterministic", feature = "fast-simd8"))]
+compile_error!("deterministic and fast-simd8 physics variants are mutually exclusive");
+
+/// Build identity; Cargo feature admission is also checked by the exporter.
+pub const DETERMINISTIC: bool = cfg!(feature = "deterministic");
+pub const SIMD_LANES: u8 = if cfg!(feature = "fast-simd8") { 8 } else { 4 };
+
 mod config;
 mod query;
 pub use config::{PreparedBody, validate_collider, validate_state};

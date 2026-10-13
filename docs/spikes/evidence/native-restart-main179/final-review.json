@@ -1,0 +1,20 @@
+{
+  "reviewer": "astra/root",
+  "at": "2026-10-13T00:21:20.808212+00:00",
+  "decision": "accepted for scoped integration",
+  "manifest": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/docs/spikes/evidence/native-restart-main179.json",
+  "manifest_sha256": "93511d74606e1b03fe31a437463cd0d24944a30026482ebb8e10eee94f8fa971",
+  "review_head": "bdf24bd11eead2613a5da3436c22aa213288dc83",
+  "tested_head": "7f6e41c4a1a4d799dd115944f26cee51676fd36c",
+  "verification": [
+    "Read and reran assertion-only collector --verify-only: 1927 frozen inputs,34 producer comparison rows,355 CPU tests/30 groups,24 command records with documented initial missing-bundle compile refusal and successful retry.",
+    "Independently decoded and SHA256-verified all228 unique lossless payloads,327 artifact records and16 external artifacts against actual retained bytes.",
+    "Verified actual24 shipping executions,44 package files,public Undo/Redo/reopen,exact fresh-session state and PCM concatenation,held-input isolation,and2 typed headless refusals via reviewed collector.",
+    "Reviewed exact additive .gitattributes rule preserving raw log terminal blank lines; no runtime/compiler input changed."
+  ],
+  "limits": [
+    "CPU shipping package evidence only; no GPU/native window/device or phase approval.",
+    "Fresh restart reset is not physics save/restore.",
+    "Actual main179 ancestry join and required fast check remain publisher responsibilities."
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "source_commit": "e4be949750d850d20a0032920a55af3ddec25f9f",
+  "review_sha256": "37d693f4edb3e7dc1c9b8e0bb771ad95139627c320f3762fed7ca271a796d8d2",
+  "artifacts": [
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/metadata.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/metadata.json",
+      "sha256": "941e0f8a0aae517515011179e0d5a52285ef507a93b7b56d519084a15c478cd1",
+      "compressed_sha256": "f94e17c79a4f1ee5ea84a9b707e0bde49bd8593a6ba193920a51785640cc516a"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/metadata.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/metadata.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/original-graph-refusal.txt.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/original-graph-refusal.txt",
+      "sha256": "eb36c83329d8b024b63a4b7242b21fe2d58683b2e3972986fd77ae7f4e384698",
+      "compressed_sha256": "f23102f3b98bbd62f97fb105e61d8a68064fb16ca7f63b5dac5ec5ea30d5f73a"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/patch.diff.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/patch.diff",
+      "sha256": "8ecdc313707321ed8016792c8739d18dd85b624dac3eab2bc64e039fa201578b",
+      "compressed_sha256": "ebad4fff89076351421a7e7c71d330fae71dd7170a4b12cdc9764800ace55459"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/review.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/review.json",
+      "sha256": "5a81af7e6677a11b5d4ceed80fb3ee8a5306b40b569511a66b4132b62fbca075",
+      "compressed_sha256": "da96a991d2cce85551f1f87637f34ea951592ba830ce0981f615c006d0dbddc5"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/selected-graph-result.json.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/selected-graph-result.json",
+      "sha256": "29f2d90e761f74d2251e40e1d979331c946e9bae02100b8acb5992ba2670cdab",
+      "compressed_sha256": "4af8308627a5ca92a49cc14165e665013689d5dc68f0df6bbe30bfb21605ff83"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/selected-graph.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/selected-graph.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/selected-graph.txt.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/selected-graph.txt",
+      "sha256": "973ce570b551e913410e1d0fdd7b643d2de31402f397fcd57266296c1d4d635c",
+      "compressed_sha256": "efa96d306391a3d0a64c00e1302c8c4dcce63bf33fa86c79a811410cc4d0a34c"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/tests-final.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/tests-final.stderr",
+      "sha256": "0e6726d50e803379d5dba8bffa695156ec8dd968c17d4b7aceb115bede57015c",
+      "compressed_sha256": "048f76f21ecec833d8971f3b08d6d9fe3e87d59da3a5492d2f2dd96b2b654e49"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/tests-final.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/tests-final.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/tests.stderr.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/tests.stderr",
+      "sha256": "10ef889a932068f5dc4a2020135a2c2269861fd10dee84aa678db93b75828925",
+      "compressed_sha256": "dad30c206a099d3f0c2a241ffe5535ad9917ebba9e1086e8c721a90e59a96cae"
+    },
+    {
+      "path": "docs/spikes/evidence/authored-ios-main173-seams/tests.stdout.gz",
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/authored-ios-main173-seams/tests.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "compressed_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    }
+  ],
+  "limits": [
+    "Source/helper/scoped-graph checks only; no integrated archive, simulator, device or shipping proof.",
+    "Fixed deterministic iOS route; fast explicitly refused."
+  ]
+}

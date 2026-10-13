@@ -1,0 +1,35 @@
+{
+  "format": "incant-input",
+  "version": 1,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 300,
+  "frames": [
+    {
+      "tick": 1,
+      "events": [
+        {
+          "type": "gamepad_connected",
+          "id": 0
+        },
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "tick": 250,
+      "events": [
+        {
+          "type": "gamepad_axis",
+          "id": 0,
+          "axis": "left_x",
+          "value": 0
+        }
+      ]
+    }
+  ]
+}

@@ -9,6 +9,8 @@ use thiserror::Error;
 
 #[derive(Debug, Error)]
 pub enum SessionError {
+    #[error("this program has no session restart request capability")]
+    RestartUnsupported,
     #[error("this program has no native UI snapshot capability")]
     UiUnsupported,
     #[error(transparent)]
@@ -112,6 +114,20 @@ impl NativeSession {
         self.host.logs()
     }
 
+    /// Opt in only when the trusted owner implements whole-session replacement.
+    /// Wasm request parity is unsupported; normal hosts refuse by default.
+    pub fn enable_restart_requests(&mut self) -> Result<(), SessionError> {
+        self.ready()?;
+        self.host.enable_restart_requests()
+    }
+
+    /// Accepted script-phase metadata. A composed owner must defer visibility
+    /// until its audio and mandatory consumer have also accepted this tick.
+    pub fn take_session_request(&mut self) -> Result<Option<crate::SessionRequest>, SessionError> {
+        self.ready()?;
+        self.host.take_session_request()
+    }
+
     /// Validate once and reseed from held controls without inventing edges.
     /// An invalid rebind leaves the existing bindings and input frame unchanged.
     pub fn rebind(&mut self, actions: InputActions) -> Result<(), SessionError> {
@@ -133,13 +149,17 @@ impl NativeSession {
         events: &[InputEvent],
         ui: incant_input::UiSnapshot,
     ) -> Result<(), SessionError> {
+        let _profile = incant_profile::scope(incant_profile::Phase::NativeTick);
         self.ready()?;
         if !self.host.supports_ui() && !ui.is_empty() {
             return Err(SessionError::UiUnsupported);
         }
         let dt = 1. / f64::from(self.world.tick_rate());
-        self.input
-            .advance_validated_with_ui(events, dt, &self.bindings, ui)?;
+        {
+            let _profile = incant_profile::scope(incant_profile::Phase::Input);
+            self.input
+                .advance_validated_with_ui(events, dt, &self.bindings, ui)?;
+        }
         // Any failure after packet acceptance is terminal. There is deliberately
         // no second whole-world/VM rollback or partially resumable session.
         self.failed = true;

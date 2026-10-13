@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-12T21:04:53.571248+00:00",
+  "reviewer": "astra root",
+  "packet": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/docs/spikes/evidence/mobile-bytecode-compatibility/target-proof.json",
+  "packet_sha256": "dfafd71aaa34fca7165111726c71384c439f0e1ec8a6b1983004559cad9f9375",
+  "source_commit": "a54a9da5bc620e0dc9e489cc531ddf6c350109be",
+  "tested_union": "24363a100143b938599d8567753b36a8d2564b63",
+  "reviewed_commit": "e2a9bbd45efed5c6e929b9b33561f945e453f082",
+  "accepted_source_files": 11,
+  "frozen_git_inputs": 10754,
+  "retained_artifacts": 364,
+  "external_binaries": 9,
+  "actual_controls": 64,
+  "exact_cross_runtime_reports": 8,
+  "target_metadata_and_fresh_generated_arrays_verified": true,
+  "acceptance": "accepted reviewed trusted-source Mac ARM to iOS route and final retained execution evidence",
+  "limits": [
+    "iOS device archives linked only; no physical device execution",
+    "Android cross-target remains denied pending actual emulator proof",
+    "No authored-project mobile export, signing, runtime window/rendering or device-performance gate",
+    "Trusted embedded bytes only; metadata hashes do not authenticate project-provided executable caches",
+    "Proof uses ci profile, not shipping-profile device measurements"
+  ],
+  "findings": []
+}

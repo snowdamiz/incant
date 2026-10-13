@@ -1,0 +1,12 @@
+{
+  "Cargo.toml": "dd9a6d6ff626086e7e1bf2f6845dac09d94c60651d0f43efc1be0cc3b5d83b7c",
+  "Cargo.lock": "8d382c8e5b300588901e8775853ee5d7c87aa433c34cbda4dc40a8cc43d9cf96",
+  "crates/incant_script/Cargo.toml": "3daa6265ba7c2b5ac94ffb7ea8187dfa0254bc2a8d04800b4dd2f2a015e21bec",
+  "crates/incant_runtime/Cargo.toml": "f996d2eea3446f5d2a7e92292d622ba31cb300f2b74fddd27d614bc1e2b2bc99",
+  "crates/incant_game_player/Cargo.toml": "28056082e89b012c1c6c976bb349d8dace821bd26d535ec0b53cbb55b778d401",
+  "crates/incant_game_player/build.rs": "9c2503ff557cbc15a17a42e3a8ace8759709013fb6cbe3b7f22974eb8224b058",
+  "crates/incant_game_player/src/package.rs": "c7d70da9643fee2ee134519ab87f4dfd3792f5386b0b3bd4109bc95820a91366",
+  "crates/incant_game_player/src/checkpoint.rs": "b320651e522fcedb42cec72cb92e162f25733826421669f4f0d3335100554b71",
+  "crates/incant_game_player/src/main.rs": "71a39e60435979e4a83f1601fa050698a35853ad5b5bc825665e07094bbadc50",
+  "crates/incant_cook/src/project_build.rs": "d4c65b4fabf2ed89fb1df5c04d7e042f93fc35116035e92d2c7e56f87fd498e1"
+}

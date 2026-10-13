@@ -1,0 +1,51 @@
+{
+ "variant": "candidate",
+ "features": "incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites",
+ "head": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+ "frozen": {
+  "incant_render-lib-tests": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/candidate/incant_render-lib-tests",
+   "sha256": "0e74223a770bbb0e8b11ba326f69e2044addeb05801b480ade4b43552d024b1c",
+   "bytes": 31551488,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-e0cf6b1f14a94bcf",
+   "features": [
+    "cooked-geometry",
+    "cooked-output",
+    "cooked-sprites",
+    "default",
+    "physics-deterministic"
+   ],
+   "fresh": false
+  },
+  "model_gpu": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/candidate/model_gpu",
+   "sha256": "2954e09db2bcfab426e37cc63f358631948201cf15345cb63d5241e7a62f01bd",
+   "bytes": 16448408,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/model_gpu-4755a833d5345806",
+   "features": [
+    "cooked-geometry",
+    "cooked-output",
+    "cooked-sprites",
+    "default",
+    "physics-deterministic"
+   ],
+   "fresh": false
+  },
+  "native_frames": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0062/bin/candidate/native_frames",
+   "sha256": "a8321a5075a66dfd45fed83ec844be7ea283797d70013900de6023b2054fe6cc",
+   "bytes": 22799088,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/examples/native_frames",
+   "features": [
+    "cooked-geometry",
+    "cooked-output",
+    "cooked-sprites",
+    "default",
+    "physics-deterministic"
+   ],
+   "fresh": true
+  }
+ },
+ "recorded": "2026-10-12T23:33:30.664859+00:00"
+}
+exit 0

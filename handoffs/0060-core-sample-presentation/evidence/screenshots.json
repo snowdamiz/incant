@@ -1,0 +1,152 @@
+[
+ {
+  "screenshot": "screenshots/window-en-start.png",
+  "sha256": "67119b18503adbfde1cb6deb7bf52753127aaf33f002081badbb3be3ae6d1c3b",
+  "size_px": [
+   1280,
+   1024
+  ],
+  "source": "runs/w8-en/caps/w8-start.png",
+  "shows": "native window, 640x480 pt at 2x, start (f5)"
+ },
+ {
+  "screenshot": "screenshots/window-en-sample1-south.png",
+  "sha256": "9396a93fa84e8a246d591d932fca3bf66f1690862db4873817fe2255a09708d3",
+  "size_px": [
+   1280,
+   1024
+  ],
+  "source": "runs/w8-en/caps/w8-collect-s1.png",
+  "shows": "native window, sample 1 taken walking north along its x, the corridor the old hoodoo blocked (f5)"
+ },
+ {
+  "screenshot": "screenshots/window-en-420x320.png",
+  "sha256": "7d0d136b2990e2ecf647ab3be3bd5cd320e917d2eb70fdc13341e5612ceb180d",
+  "size_px": [
+   840,
+   704
+  ],
+  "source": "runs/w13-en/caps/w13-420x320.png",
+  "shows": "native window resized to 420x320 pt (f5)"
+ },
+ {
+  "screenshot": "screenshots/window-en-960x540.png",
+  "sha256": "b9579def4dbd6655cf283b4102d0074142e2eaa14bac418d9ef7142a719116d9",
+  "size_px": [
+   1920,
+   1144
+  ],
+  "source": "runs/w3-en/caps/w3-960x540.png",
+  "shows": "native window resized to 960x540 pt (f4: same scene, 13 pt hint and 32 pt gap)"
+ },
+ {
+  "screenshot": "screenshots/window-ar-start.png",
+  "sha256": "62cc8713029582235418786100d3e84973479cfbda3f33a2d876711dcdb033f3",
+  "size_px": [
+   1280,
+   1024
+  ],
+  "source": "runs/w9-ar/caps/w9-start.png",
+  "shows": "native window, Arabic (RTL) HUD (f5)"
+ },
+ {
+  "screenshot": "screenshots/window-zh-Hans-start.png",
+  "sha256": "0c1253c7c5ac76fac2589d2a6fa8cf4e7c805a673853b941d0d13f42eb89dc38",
+  "size_px": [
+   1280,
+   1024
+  ],
+  "source": "runs/w10-zh/caps/w10-start.png",
+  "shows": "native window, Simplified Chinese HUD (f5)"
+ },
+ {
+  "screenshot": "screenshots/window-en-XA-start.png",
+  "sha256": "2d89ff66ada2ade7a48f5de8135545c383b650e7fcae1ff8682fee6cdedef8db",
+  "size_px": [
+   1280,
+   1024
+  ],
+  "source": "runs/w11-pseudo/caps/w11-start.png",
+  "shows": "native window, pseudo-locale HUD (f5)"
+ },
+ {
+  "screenshot": "screenshots/window-lost.png",
+  "sha256": "8e8b921ba4736109a16e87ef28e87eea557635ddc1819f7db09131186c83305b",
+  "size_px": [
+   1280,
+   1024
+  ],
+  "source": "runs/w12-lost/caps/w12-lost.png",
+  "shows": "native window, lost state (f5)"
+ },
+ {
+  "screenshot": "screenshots/window-before-fix-sample1-west.png",
+  "sha256": "067afa008eaa33be9c8aeb374b33349c1195b7c9eb23dab3952b678a3ac62a8a",
+  "size_px": [
+   1280,
+   1024
+  ],
+  "source": "runs/w1-en/caps/w1-collect-s1.png",
+  "shows": "before the layout fix (f3): the wash hoodoo fills the frame at sample 1"
+ },
+ {
+  "screenshot": "screenshots/window-before-fix-420x320.png",
+  "sha256": "abaf30fa6c0ce1524e1da022d5b6c8905e85a795c182655198c0df4f31bda5de",
+  "size_px": [
+   840,
+   704
+  ],
+  "source": "runs/w3-en/caps/w3-420x320.png",
+  "shows": "before the HUD fit fix (f4): the controls hint wraps and orphans \"jump\" at 420x320"
+ },
+ {
+  "screenshot": "screenshots/offscreen-route-pocket-s2.png",
+  "sha256": "972e6e404160f32a40e6f1b31e3b175c7897c14ce96f72c8de76f68dd5fa0ab0",
+  "size_px": [
+   1280,
+   960
+  ],
+  "source": "renders/f5-en-playing-route-playing/route-pocket-s2.png",
+  "shows": "planned route tick 500: sample 2 in the pocket"
+ },
+ {
+  "screenshot": "screenshots/offscreen-route-shelf-s3.png",
+  "sha256": "bc090747573354833bfc4029ec68562aa81e8dcc2c26e8b47188160dca50c3a8",
+  "size_px": [
+   1280,
+   960
+  ],
+  "source": "renders/f5-en-playing-route-playing/route-shelf-s3.png",
+  "shows": "planned route tick 1250: sample 3 on the east shelf"
+ },
+ {
+  "screenshot": "screenshots/offscreen-route-plateau-s4.png",
+  "sha256": "6866cd1d6c797b15aa9da66f7a29255f7582c4f96f7edbd9ff8566e9e4242ade",
+  "size_px": [
+   1280,
+   960
+  ],
+  "source": "renders/f5-en-playing-route-playing/route-plateau-s4.png",
+  "shows": "planned route tick 1830: sample 4 on the plateau"
+ },
+ {
+  "screenshot": "screenshots/offscreen-collected.png",
+  "sha256": "abe59a923696a5db54343fa6a88f67598c06dde823d4f2a7ae5b31c46dbab19f",
+  "size_px": [
+   1280,
+   960
+  ],
+  "source": "renders/f5-en-collected-route-collected/route-all-collected.png",
+  "shows": "collected HUD state at tick 1905"
+ },
+ {
+  "screenshot": "screenshots/offscreen-won.png",
+  "sha256": "2a7c2ca2f80674dac207fbd6d7aa4dfd62e1c930c3a28ecbb831b6fa22eaf777",
+  "size_px": [
+   1280,
+   960
+  ],
+  "source": "renders/f5-en-won-route-won/route-won.png",
+  "shows": "won HUD state at the lift, tick 2110"
+ }
+]

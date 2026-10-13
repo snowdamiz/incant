@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "failed_head": "4c4a519a3d67f74a209cd73df7186b3b19f786d1",
+  "source_head": "ce6325ac",
+  "archive": {
+    "path": "docs/spikes/evidence/native-cpu-profiler-main194/tooling-repair.json.gz",
+    "sha256": "3a10a20e32f4b33a1b2b3832e886df4ac6bf009b9104bc895c492727eee8bbcc",
+    "bytes": 244004,
+    "records": 11,
+    "payloads": 11
+  },
+  "full_tools": {
+    "python": 366,
+    "python_skipped": 4,
+    "node": 22,
+    "exit": 0
+  },
+  "focused": {
+    "credential": 14,
+    "probe_lock": 9
+  },
+  "source_review": "Root read patch25515028 and approved exact-path raw-diff attribute, preserving genuine duplicate/missing patch failures; all tool checks complete before retry.",
+  "limits": "No runtime/source/shipping recook; original accepted evidence remains unchanged."
+}

@@ -25,9 +25,17 @@ STREAM, BUS = '00000000000000000000000004', '00000000000000000000000005'
 write, digest, require = (UI[k] for k in ('write', 'digest', 'require'))
 
 
-def source():
+def source(transport=False):
+    playback = f"""
+ if(t.clock.tick===5){{t.commands.stopAudio('{ENTITY}');t.commands.stopAudio('{STREAM}');}}
+ if(t.clock.tick===6){{t.commands.seekAudio('{ENTITY}',.01);t.commands.seekAudio('{STREAM}',.02);}}
+ if(t.clock.tick===9){{t.commands.restartAudio('{ENTITY}');t.commands.restartAudio('{STREAM}');}}
+ if(t.clock.tick===12)t.commands.seekAudio('{STREAM}',.01);
+ if([15,25,33].includes(t.clock.tick))t.commands.restartAudio('{ENTITY}');
+""" if transport else ''
     return f"""import type {{ NativeBehavior }} from '@incant/runtime/native';
 export default {{ persistence: {{version:1}}, update(t) {{
+ {playback}
  let state=Number(t.state.get()??0);
  state += t.timers.events.length + t.input.ui.events.filter(e=>e.kind==='value_changed').length;
  t.state.set(state);
@@ -51,6 +59,7 @@ def main():
     parser.add_argument('--binary', type=Path)
     parser.add_argument('--existing-package', type=Path, help='Reverify a frozen public proof package; no build or authoring')
     parser.add_argument('--author', action='store_true', help=argparse.SUPPRESS)
+    parser.add_argument('--transport', action='store_true', help='Exercise explicit stop/restart/seek and transport-bound checkpoints')
     args = parser.parse_args()
     output = args.output.resolve()
     sys.path.insert(0, str(ROOT / 'tools'))
@@ -116,7 +125,7 @@ def main():
     def audio_source(index):
         return {'clip': clips[index], 'bus': BUS, 'gain_db': -4, 'pan': 0 if index else .2,
                 'rate': .87 if index else 1.13, 'start_seconds': .00037,
-                'playing': True, 'looping': True, 'streaming': bool(index),
+                'playing': True, 'looping': not args.transport or bool(index), 'streaming': bool(index),
                 'spatial': {'min_distance': 1, 'max_distance': 30} if index else None}
 
     rpc = Rpc(binary, project, journal)
@@ -135,7 +144,7 @@ def main():
             {'op': 'create_entity', 'scene_id': authored['scene'], 'entity': {'id': STREAM, 'name': 'Stream',
              'parent': None, 'provenance': None, 'components': {'AudioSource': audio_source(1),
              'Transform': {'translation': [-1,0,0], 'rotation': [0,0,0,1], 'scale': [1,1,1]}}}},
-            {'op': 'write_script', 'script_id': SCRIPT, 'expected_source': previous, 'source': source()}]})
+            {'op': 'write_script', 'script_id': SCRIPT, 'expected_source': previous, 'source': source(args.transport)}]})
         accepted = rpc.call('project.read')
         rpc.call('history.undo')
         rpc.call('history.redo')
@@ -151,7 +160,8 @@ def main():
         rpc.close()
     authored.update(project_sha256=digest(project), source_sha256=digest(inputs / 'move.ts'),
                     revision=accepted['revision'], checkpoint_undo_redo=True, audio_clips=clips,
-                    audio_source_rates=[22050, 32000], audio_source_frames=2309)
+                    audio_source_rates=[22050, 32000], audio_source_frames=2309,
+                    explicit_transport=args.transport)
     write(output / 'authoring.json', authored)
     if args.author:
         print(json.dumps({'passed': True, 'authoring': str(output / 'authoring.json')}))
@@ -228,6 +238,7 @@ def verify(output, package, authored, exported, original_inputs, removed_maps, p
         'wrong-widget': 'Error: Checkpoint(Ui(Invalid("widget order or duplicate")))',
         'wrong-audio-catalog': 'Error: Audio(Invalid("audio package catalog"))',
         'wrong-audio-clock': 'Error: Checkpoint(Audio(Invalid("audio/world sample clock")))',
+        'wrong-audio-transport': 'Error: Checkpoint(Audio(Invalid("audio source state")))',
         'oversized': 'Error: "runtime input size limit"',
         'assertion': 'Error: "checkpoint withheld: native observation assertions failed"',
         'preedit': 'Error: Checkpoint(Ui(CompositionActive))',
@@ -272,6 +283,26 @@ def verify(output, package, authored, exported, original_inputs, removed_maps, p
         launch(name, 27, load=middle, save=save, recording=neutral_record, observe=plan(name, [13, 40]))
     require(baseline.read_bytes() == resumed.read_bytes() == repeated.read_bytes(), 'Final checkpoint continuation differs')
     require((output / 'baseline.pcm').read_bytes() == (output / 'middle.pcm').read_bytes() + (output / 'resumed.pcm').read_bytes(), 'PCM clock differs')
+    if authored.get('explicit_transport', False):
+        pcm = (output / 'baseline.pcm').read_bytes()
+        frames_per_tick = runs[0]['report']['frames'] // 40
+        # Both voices stop at tick5. Seeking at tick6 must not resume them;
+        # the old voice has a full tick to retire before this silent interval.
+        silent = pcm[5 * frames_per_tick * 8:8 * frames_per_tick * 8]
+        require(silent and not any(silent), 'Paused seek resumed playback')
+        restarted = pcm[9 * frames_per_tick * 8:11 * frames_per_tick * 8]
+        require(any(abs(v) > .001 for (v,) in struct.iter_unpack('<f', restarted)),
+                'Explicit restart did not produce PCM')
+        content = bytearray(middle.read_bytes())
+        start = 136 + sum(int.from_bytes(content[80+4*i:84+4*i], 'little') for i in range(5))
+        require(int.from_bytes(content[start+8:start+12], 'little') == 2, 'Transport checkpoint is not version2')
+        catalog_count = int.from_bytes(content[start+156:start+158], 'little')
+        epoch = start + 165 + catalog_count * 92 + 16
+        content[epoch] ^= 1
+        content[start+16:start+48] = hashlib.sha256(content[start:start+16] + content[start+48:]).digest()
+        content[104:136] = hashlib.sha256(content[:104] + content[136:]).digest()
+        wrong = output / 'wrong-audio-transport.save'; wrong.write_bytes(content)
+        launch('wrong-audio-transport', 1, load=wrong, success=False)
     corrupt = output / 'corrupt.save'
     content = bytearray(middle.read_bytes()); content[-1] ^= 1; corrupt.write_bytes(content)
     launch('corrupt', 1, load=corrupt, success=False)

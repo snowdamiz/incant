@@ -1,0 +1,23 @@
+{
+  "base": "1573bd0268b9eaa30b12deb73604a7b8145bc6db",
+  "only_changed_input": "crates/incant_cook/tests/scripts.rs",
+  "production_unchanged": true,
+  "cause": "Old cooker destination test still expected Android refusal after independently accepted exact ARM Android admission.",
+  "correction": "Exercise exact target/producer/ABI/build/bytecode/hardening identity for ARM Android; reject x86 and ARMv7 Android as unreviewed.",
+  "red": {
+    "cook_exit": 101,
+    "script_exit": 0
+  },
+  "green": {
+    "exit": 0,
+    "passed": 4,
+    "failed": 0,
+    "ignored": 0
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/authored-android-main179-correction/artifacts.json.gz",
+    "sha256": "a30af4b1b00976db98ca18d1f8b8b0a79dd267e9ec1782a0b63a74e6ff17623d",
+    "records": 12
+  },
+  "remaining": "Resume only cook and subsequent stages on new frozen source; prior script tests reused unchanged. No current-union Android archive or caller acceptance yet."
+}

@@ -1,0 +1,13 @@
+{
+ "packet": "0063-cooked-ui-text-shaders",
+ "released_at": "2026-10-13T00:59:12.808519+00:00",
+ "children": 38,
+ "frames_written": 21,
+ "first_start": "2026-10-13T00:54:09.009573+00:00",
+ "last_end": "2026-10-13T00:58:29.732205+00:00",
+ "ledger_sha256": "cd326607155522b653bd3b1370f4f1b7ac6f87fd0efd7b42fca26208e678d24f",
+ "grant_sha256_at_release": "a7477ce249d100e6520c60a71053e11455648c597510583ad9a50c43b69c7e8e",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "Release by 0063 for Astra; review-ready.json left untouched (only Astra writes it)."
+}

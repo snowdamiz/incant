@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-13T00:23:35.461045+00:00",
+  "decision": "accepted",
+  "reviewer": "astra/root",
+  "restart": {
+    "patch": "/Users/andreyyurlov/.codex/incant-integration-evidence/restart-closeout-metadata.patch",
+    "sha256": "ece552f61e9546f02efcc2aa893461af57752ac36f3039d6bb0d6a6dd664d67a",
+    "scope": "Exact retained unified diff whitespace exemption and collector accepts only original or exact extended metadata suffix. No source/evidence bytes altered. Prior dc78 integration audit remains valid."
+  },
+  "android": {
+    "patch_sha256": "faf3e732ffc299c8afec46f3054d9f48eba7a87515dad4b78ec61681eab2257a",
+    "scope": "Test-only reviewed ARM64 Android destination added to positive fresh-source identity checks. x86_64 and ARMv7 remain explicit refusals. Existing runtime admission already independently accepted; no production-code edit.",
+    "producer_results": {
+      "base": "1573bd0268b9eaa30b12deb73604a7b8145bc6db",
+      "source": "crates/incant_cook/tests/scripts.rs",
+      "source_sha256": "6c45d2731d99cd2afe3e6d5f7377c656e6250fadb35fff5bdfa610bc11376862",
+      "patch_sha256": "faf3e732ffc299c8afec46f3054d9f48eba7a87515dad4b78ec61681eab2257a",
+      "prior_failure": "authored-android-main179-002/cook-tests.stdout",
+      "production_changed": false,
+      "green": {
+        "stdout": "a3d2d8135e6e7c5131679a765c8a8fec0e2a7e7ec40b94518d18373a391f0bbf",
+        "stderr": "3f41e601b7decd7c73bd2d00fb13dd744a65e3654d9dee4bf0fe295cb313b390"
+      },
+      "green_exit": 0,
+      "tests": {
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      }
+    }
+  }
+}

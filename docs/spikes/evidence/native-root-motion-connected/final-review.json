@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-12T18:10:00.024152+00:00",
+  "head": "9943db0a21f377d0cfd9406ef2eedaa7f3e9125c",
+  "reviewer": "astra",
+  "result": "Accepted native connected source and retained CPU evidence; composed Wasm and public shipping proof still required before feature integration",
+  "retained_artifacts": 43,
+  "source_paths": 68,
+  "present_git_blobs_and_copies_verified": 67,
+  "tests": 600,
+  "test_groups": 82,
+  "zero_exit_commands": 7,
+  "source_review": "ba37ee7f2cc3a4658861b658cf90303325dd6ee7f2b59825370727ed435485a7",
+  "test_only_followup": "Unknown version11 to12; production unchanged from reviewed freeze001",
+  "qualified_allocations": {
+    "root_preparation_4096": 0,
+    "retained_character_refresh_and_sweep_1024": 0,
+    "staged_strip_ik_sampler_1024": 0,
+    "whole_world_1024": 38946,
+    "matched_world_without_root_1024": 38955,
+    "limits": "Existing global hierarchy preparation allocates; whole-world zero allocation and device/performance gates are not claimed."
+  },
+  "pending": [
+    "Wasm53-55 and actual dual-host/root package evidence pending",
+    "Ordinary source-deleted public root game export pending",
+    "Physics and static guest checkpoint continuation unsupported",
+    "Root CUBICSPLINE scale/matrix/general-affine paths remain explicit refusals",
+    "No GPU, rendered interpretation, reference device or complete Phase1 gate"
+  ]
+}

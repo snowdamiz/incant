@@ -10,7 +10,7 @@ mod termination;
 mod ui_input;
 use crate::{bounded, embedded, session, startup};
 use incant_audio_runtime::{AudioManagerSettings, DeviceBackend};
-use incant_game_runtime::HostedGameSession;
+use incant_game_runtime::{GameSeed, HostedGameSession};
 use incant_render_game::{NativeRenderHost, NativeRenderSettings, RenderInputConsumer, UiSettings};
 use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings};
 use incant_runtime::{CookedScene, StableId};
@@ -126,7 +126,7 @@ impl Options {
         })
     }
 }
-pub fn run(args: &[String]) -> session::Result<()> {
+pub fn run(args: &[String]) -> session::Result<serde_json::Value> {
     let options = Options::parse(args)?;
     let scene = CookedScene::from_bytes(&bounded(&options.scene, 128 * 1024 * 1024)?)?;
     let has_ui = scene.has_ui();
@@ -162,34 +162,35 @@ pub fn run(args: &[String]) -> session::Result<()> {
         .map(UiSettings::new);
     let mut gamepads = gamepad::Gamepads::new()?;
     let (mut surface, renderer, targets) = SurfaceState::new(Arc::clone(&window))?;
-    let mut game = Game::new(
-        scene,
-        script,
-        actions,
-        clips,
-        AudioManagerSettings::default(),
-        NativeRenderSettings {
-            ui: ui_settings,
-            text: options.render.text,
-            model_cache: options.render.model_cache,
-            texture_cache: options.render.texture_cache,
-            camera: options.render.camera,
-            consumer: GpuRenderSettings {
-                renderer: Arc::clone(&renderer),
-                targets,
-            },
+    let seed = GameSeed::new(scene, script, actions, clips)?;
+    let render_settings = |targets, ui| NativeRenderSettings {
+        ui,
+        text: options.render.text.clone(),
+        model_cache: options.render.model_cache.clone(),
+        texture_cache: options.render.texture_cache.clone(),
+        camera: options.render.camera,
+        consumer: GpuRenderSettings {
+            renderer: Arc::clone(&renderer),
+            targets,
         },
+    };
+    let mut game = Game::from_seed_suspended(
+        &seed,
+        AudioManagerSettings::default(),
+        render_settings(targets, ui_settings),
     )?;
-    // Startup may begin unfocused or occluded. Suspend while waiting for the
-    // first frame; a device callback may precede this asynchronous command.
     game.poll_device()?;
-    game.set_suspended(true)?;
+    let mut initial_frame = true;
+    let mut generation = 1u64;
+    let mut host_steps = 0u64;
+    let mut controls = crate::restart::InputFence::default();
     let mut suspended = true;
     let mut focused = window.is_focused();
     let mut platform_suspended = false;
     let mut input = input::PendingInput::new();
     input.reset_focus(focused);
     let mut ui_input = ui_input::UiInput::new();
+    ui_input.defer_surface();
     ui_input.synchronize(game.host()?.ui(), &mut input)?;
     if has_ui && let Some((serial, enabled)) = ui_input.text_session(game.host()?.ui(), false)? {
         window
@@ -302,7 +303,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                         }
                         // Resize and actual consumption share this callback and
                         // reservation, even when no simulation tick is due.
-                        let result = (|| -> session::Result<()> {
+                        let result = crate::profile::presentation(|| -> session::Result<()> {
                             ui_relayouts += fit_ui(
                                 &mut game,
                                 &surface,
@@ -312,7 +313,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             )?;
                             game.refresh_host()?;
                             Ok(())
-                        })();
+                        });
                         let consumed = surface.consumed();
                         surface.cancel();
                         result?;
@@ -348,7 +349,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             && presentable
                             && surface.reserve(&renderer)?
                         {
-                            let result = (|| -> session::Result<()> {
+                            let result = crate::profile::presentation(|| -> session::Result<()> {
                                 if has_ui {
                                     ui_relayouts += fit_ui(
                                         &mut game,
@@ -360,7 +361,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 }
                                 game.refresh_host()?;
                                 Ok(())
-                            })();
+                            });
                             let consumed = surface.consumed();
                             surface.cancel();
                             result?;
@@ -370,8 +371,29 @@ pub fn run(args: &[String]) -> session::Result<()> {
                             ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
                             presentation_refreshes += 1;
+                            initial_frame = false;
                         }
                     } else if now >= retry {
+                        if initial_frame {
+                            if !surface.reserve(&renderer)? {
+                                retry = now + Duration::from_millis(50);
+                                clock.reset(now);
+                                return Ok(());
+                            }
+                            let result = crate::profile::presentation(|| game.refresh_host());
+                            let consumed = surface.consumed();
+                            surface.cancel();
+                            result?;
+                            if !consumed {
+                                return Err(Error::Reservation.into());
+                            }
+                            ui_input.presented(game.host()?.ui(), &mut input)?;
+                            presentation_refreshes += 1;
+                            redraw_pending = false;
+                            initial_frame = false;
+                            clock.reset(now);
+                            return Ok(());
+                        }
                         let due = if suspended { 1 } else { clock.due(now) };
                         for _ in 0..due {
                             if !surface.reserve(&renderer)? {
@@ -403,32 +425,73 @@ pub fn run(args: &[String]) -> session::Result<()> {
                                 game.set_suspended(false)?;
                                 suspended = false;
                                 clock.reset(now);
-                                if has_ui {
-                                    ui_input.resume(&mut input, focused);
-                                }
+                                ui_input.resume(&mut input, focused);
                                 gamepads.synchronize(&mut input)?;
                             }
-                            let result = if has_ui {
-                                game.tick_with_ui(input.events(), ui_input.receipts())
-                            } else {
-                                game.tick(input.events())
-                            };
-                            let consumed = surface.consumed();
-                            surface.cancel(); // also releases reservation on retryable input failure
-                            result?;
-                            if !consumed {
-                                return Err(Error::Reservation.into());
-                            }
+                            let events = controls.filter(input.events())?;
+                            crate::profile::frame(|| -> session::Result<()> {
+                                let result = if has_ui {
+                                    game.tick_with_ui(events, ui_input.receipts())
+                                } else {
+                                    game.tick(events)
+                                };
+                                let consumed = surface.consumed();
+                                surface.cancel(); // also releases reservation on retryable input failure
+                                result?;
+                                if !consumed {
+                                    return Err(Error::Reservation.into());
+                                }
+                                Ok(())
+                            })?;
                             gamepads.commit();
                             input.clear();
                             ui_input.accepted();
                             ui_input.presented(game.host()?.ui(), &mut input)?;
                             redraw_pending = false;
-                            if options
-                                .stop_after
-                                .is_some_and(|n| game.world().is_ok_and(|w| w.tick() >= n))
-                            {
+                            host_steps = host_steps.checked_add(1).ok_or("host step exhausted")?;
+                            let restart = game.take_session_request()?.is_some();
+                            if restart {
+                                let _profile =
+                                    incant_profile::scope(incant_profile::Phase::Restart);
+                                let next = generation
+                                    .checked_add(1)
+                                    .ok_or("session generation exhausted")?;
+                                // Full ownership replacement, never component edits or a save load.
+                                game.stop();
+                                let retired = ui_input.replace_session()?;
+                                if has_ui && let Some((serial, enabled)) = retired {
+                                    window
+                                        .set_text_input_session(serial, enabled)
+                                        .map_err(Error::Ime)?;
+                                }
+                                controls.replace_session();
+                                input.reset_focus(focused);
+                                let size = window.inner_size();
+                                let ui = has_ui
+                                    .then(|| {
+                                        logical_viewport(
+                                            [size.width, size.height],
+                                            window.scale_factor(),
+                                        )
+                                    })
+                                    .transpose()?
+                                    .map(UiSettings::new);
+                                game = Game::from_seed_suspended(
+                                    &seed,
+                                    AudioManagerSettings::default(),
+                                    render_settings(surface.replacement_targets()?, ui),
+                                )?;
+                                generation = next;
+                                suspended = true;
+                                initial_frame = true;
+                                redraw_pending = true;
+                                ui_resize = false;
+                                clock.reset(now);
+                            }
+                            if options.stop_after.is_some_and(|n| host_steps >= n) {
                                 *exit = true;
+                            }
+                            if restart || *exit {
                                 break;
                             }
                         }
@@ -473,6 +536,10 @@ pub fn run(args: &[String]) -> session::Result<()> {
         probe.validate()?;
     }
     let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+    if generation > 1 {
+        report["session"] = serde_json::json!({"generation":generation,"host_tick":host_steps,
+            "simulation_tick":game.world()?.tick(),"accepted_frames":host_steps+presentation_refreshes});
+    }
     if let Some(ui) = game.host()?.ui_input() {
         let stats = game.host()?.consumer().ui_stats();
         let uploads = renderer.ui_uploads();
@@ -485,8 +552,7 @@ pub fn run(args: &[String]) -> session::Result<()> {
         });
     }
     drop(game); // stop device audio before returning/closing the native surface
-    println!("{report}");
-    Ok(())
+    Ok(report)
 }
 
 /// Layout uses the dimensions of the reserved frame. Window dimensions can

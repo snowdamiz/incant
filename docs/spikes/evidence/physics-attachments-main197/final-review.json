@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-13T04:58:10.847411+00:00",
+  "decision": "accepted scoped inert attachment integration",
+  "head": "487037a3",
+  "manifest_sha256": "24c1a1814b172ee50d2deeee3218199e257074512d77ea09567be9b3c0a87285",
+  "collector_read_and_verify_only_exit": 0,
+  "independent_rehash": {
+    "sources": 2853,
+    "archived_records": 19,
+    "unique_payloads": 10,
+    "commands": 8
+  },
+  "source_relevance": "24exact accepted producer cratefiles; only5attachment source changes frommain; lock/currentengineunchanged",
+  "limits": [
+    "52 cases include prior40 snapshot/arena/graph cases plus12 attachment cases; counts are not additive.",
+    "All24 crate source/test/manifest files equal the accepted producer; lock is unchanged from current main.",
+    "No live constructor, contact/solver ownership composition, physics-save admission, GPU, shipping, device or performance claim."
+  ]
+}

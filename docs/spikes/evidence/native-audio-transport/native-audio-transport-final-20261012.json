@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-12T19:17:25.169069+00:00",
+  "reviewer": "astra independent native_wasm_export",
+  "decision": "accepted for native TypeScript/offline audio transport slice",
+  "source_commit": "75503a642c082535376808f5184e87d018041561",
+  "evidence_manifest_sha256": "179cf9fa9844fd050393737107555180b971f04aa034d98a323790995f24f47d",
+  "shipping_result_sha256": "ed331b8acd4a10426ff7354f8fd6bbd61f482cbafa0ef9763a9ccbfd2a7984c9",
+  "verified": {
+    "engine_inputs": 1308,
+    "source_inputs": 26,
+    "retained_raw_gzip_artifacts": 68,
+    "source_reviews": 2,
+    "successful_commands": 15,
+    "tests": 530,
+    "groups": 75,
+    "failures_ignored": 0,
+    "package_files": 16,
+    "positive_processes": 4,
+    "process_ticks": [
+      40,
+      13,
+      27,
+      27
+    ],
+    "refusals": 10,
+    "exact_audio_transport_epochs": {
+      "middle": {
+        "2": 3,
+        "4": 4
+      },
+      "baseline": {
+        "2": 6,
+        "4": 4
+      }
+    },
+    "actual_player_bytes": 9384336,
+    "private_authoring_and_maps_absent": true
+  },
+  "observed": [
+    "Baseline PCM equals middle plus resumed byte-for-byte; repeated resume PCM identical",
+    "Baseline/resumed/repeated saves identical; checksum-valid audio epoch/catalog/clock mutations reject specifically",
+    "Actual static/stream rates22050/32000; paused seek silent for three full ticks and explicit restart emits nonzero finite PCM",
+    "Ordinary package entry, restricted environment without HOME, public authoring Undo/Redo/journal reopen retained"
+  ],
+  "findings": [],
+  "limits": [
+    "Read-only artifact/source audit; no rerun, GPU, native audio device or reference-phone acceptance",
+    "Native audio source had prior independent review; this adds final execution audit",
+    "Assertion refusal intentionally emits its failed observation report but no PCM/save; no-clobber preserves prior save while PCM may already exist, as documented; no multi-file transaction claim",
+    "Wasm59\u201361, arbitrary VM/physics/device checkpoints and complete Phase1 remain separate"
+  ]
+}

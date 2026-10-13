@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-12T23:19:07.091191+00:00",
+  "result": "accepted_source",
+  "source_freeze_sha256": "de66fcdc8a848b47270413e0ccd20b91c4176ebe5f811d7fd6bbb60e64e4f7e5",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "f2433709b8ed9a95cbacfd7bbabc340701aea8b2d4fa58f1908f95e041d70f7b"
+    },
+    {
+      "path": "crates/incant_game_player/src/lib.rs",
+      "sha256": "5cf9df067f0202d3807fd9a43266c89626ac3cbbc94103bfd7244f5ab1cbf049"
+    },
+    {
+      "path": "crates/incant_game_player/src/checkpoint.rs",
+      "sha256": "b5b4d891cf6593ec4922162b290aea71caa0ecfbfaab3f32dd0bd770172b2d2b"
+    },
+    {
+      "path": "crates/incant_game_player/src/pcm_output.rs",
+      "sha256": "e847911af4af865e73f233ebcdc2cded3074ab1d414cb340cf77a702bf7a3fcf"
+    },
+    {
+      "path": "crates/incant_game_player/src/pcm_output/tests.rs",
+      "sha256": "8e2732b48908de74c00311f65fc860b00f7f41ed2562522214220ce647a184d2"
+    },
+    {
+      "path": "crates/incant_game_player/src/pcm_output/tests/runner.rs",
+      "sha256": "0b93f9647b4d7fd70b22c1501b1c81947379eaf908a1e1328055cf90bb1d1744"
+    }
+  ],
+  "review": [
+    "Read complete production delta, output owner and actual runner/failure tests",
+    "Checked rate/tick admission bounds single-tick allocation; no total-length Vec remains",
+    "Checked incremental hash and 8KiB byte encoder preserve little-endian f32 bits",
+    "IO or bound failure permanently poisons staging; Drop removes unpublished temp file",
+    "sync_all and persist_noclobber preserve existing target",
+    "Requested checkpoint admission occurs before PCM publication; completed diagnostic observations still publish only without requested save",
+    "Restart cumulative frames and rational resumed phase preserved",
+    "frame_range has no other caller that relies on removed allocation cap",
+    "Pinned existing sha2 dependency only"
+  ],
+  "limits": [
+    "Fresh source-deleted full Core package proof pending",
+    "PCM and checkpoint are separate atomic publications, no multi-file transaction",
+    "Directory durability is not claimed",
+    "Focused tests reported by producer; final execution evidence reviewed separately"
+  ]
+}

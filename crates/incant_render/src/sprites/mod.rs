@@ -4,6 +4,7 @@ mod drawing;
 mod geometry;
 mod plans;
 pub(crate) use plans::{SpritePlan, TilemapPlan};
+mod shader;
 mod texture;
 use crate::{ResourceError, Result};
 pub(crate) use drawing::SpriteDraw;
@@ -23,6 +24,55 @@ struct Attributes {
     uv_bounds: [f32; 4],
     texel: [f32; 2],
     sampling: u32,
+}
+fn camera_entry() -> wgpu::BindGroupLayoutEntry {
+    wgpu::BindGroupLayoutEntry {
+        binding: 0,
+        visibility: wgpu::ShaderStages::VERTEX,
+        ty: wgpu::BindingType::Buffer {
+            ty: wgpu::BufferBindingType::Uniform,
+            has_dynamic_offset: false,
+            min_binding_size: None,
+        },
+        count: None,
+    }
+}
+fn texture_entries() -> [wgpu::BindGroupLayoutEntry; 2] {
+    [
+        wgpu::BindGroupLayoutEntry {
+            binding: 0,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Texture {
+                sample_type: wgpu::TextureSampleType::Float { filterable: true },
+                view_dimension: wgpu::TextureViewDimension::D2,
+                multisampled: false,
+            },
+            count: None,
+        },
+        wgpu::BindGroupLayoutEntry {
+            binding: 1,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+            count: None,
+        },
+    ]
+}
+const POSITION_ATTRIBUTES: [wgpu::VertexAttribute; 1] = wgpu::vertex_attr_array![0=>Float32x3];
+const SPRITE_ATTRIBUTES: [wgpu::VertexAttribute; 5] =
+    wgpu::vertex_attr_array![1=>Float32x2,2=>Float32x4,3=>Float32x4,4=>Float32x2,5=>Uint32];
+fn vertex_buffers() -> [wgpu::VertexBufferLayout<'static>; 2] {
+    [
+        wgpu::VertexBufferLayout {
+            array_stride: size_of::<[f32; 3]>() as u64,
+            step_mode: wgpu::VertexStepMode::Vertex,
+            attributes: &POSITION_ATTRIBUTES,
+        },
+        wgpu::VertexBufferLayout {
+            array_stride: size_of::<Attributes>() as u64,
+            step_mode: wgpu::VertexStepMode::Vertex,
+            attributes: &SPRITE_ATTRIBUTES,
+        },
+    ]
 }
 struct GpuTexture {
     _source: Arc<RuntimeAsset>,
@@ -157,72 +207,65 @@ pub(crate) struct SpriteSystem {
     cache: Mutex<HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuTexture>>>,
 }
 impl SpriteSystem {
-    pub fn new(device: &wgpu::Device) -> Self {
+    pub fn new(
+        device: &wgpu::Device,
+        backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let globals = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Sprite camera"),
-            entries: &[wgpu::BindGroupLayoutEntry {
-                binding: 0,
-                visibility: wgpu::ShaderStages::VERTEX,
-                ty: wgpu::BindingType::Buffer {
-                    ty: wgpu::BufferBindingType::Uniform,
-                    has_dynamic_offset: false,
-                    min_binding_size: None,
-                },
-                count: None,
-            }],
+            entries: &[camera_entry()],
         });
         let textures = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Sprite texture"),
-            entries: &[
-                wgpu::BindGroupLayoutEntry {
-                    binding: 0,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Texture {
-                        sample_type: wgpu::TextureSampleType::Float { filterable: true },
-                        view_dimension: wgpu::TextureViewDimension::D2,
-                        multisampled: false,
-                    },
-                    count: None,
-                },
-                wgpu::BindGroupLayoutEntry {
-                    binding: 1,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
-                    count: None,
-                },
-            ],
+            entries: &texture_entries(),
         });
         let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
             label: Some("Sprite pipeline"),
             bind_group_layouts: &[Some(&globals), Some(&textures)],
             immediate_size: 0,
         });
-        let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-            label: Some("Sprite coordinate and premultiplied alpha math"),
-            source: wgpu::ShaderSource::Wgsl(include_str!("sprite.wgsl").into()),
+        let shader = shader::stages(device, backend)?;
+        let pipeline = device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+            label: Some("Sorted sprites in shared HDR graph"),
+            layout: Some(&layout),
+            vertex: wgpu::VertexState {
+                module: &shader.vertex,
+                entry_point: Some(shader.vertex_entry),
+                compilation_options: Default::default(),
+                buffers: &vertex_buffers(),
+            },
+            fragment: Some(wgpu::FragmentState {
+                module: &shader.fragment,
+                entry_point: Some(shader.fragment_entry),
+                compilation_options: Default::default(),
+                targets: &[Some(wgpu::ColorTargetState {
+                    format: crate::frame::HDR_FORMAT,
+                    blend: Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),
+                    write_mask: wgpu::ColorWrites::ALL,
+                })],
+            }),
+            primitive: wgpu::PrimitiveState {
+                cull_mode: None,
+                ..Default::default()
+            },
+            depth_stencil: Some(wgpu::DepthStencilState {
+                format: wgpu::TextureFormat::Depth32Float,
+                depth_write_enabled: Some(false),
+                depth_compare: Some(wgpu::CompareFunction::LessEqual),
+                stencil: Default::default(),
+                bias: Default::default(),
+            }),
+            multisample: Default::default(),
+            multiview_mask: None,
+            cache,
         });
-        let pipeline=device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-            label:Some("Sorted sprites in shared HDR graph"),layout:Some(&layout),
-            vertex:wgpu::VertexState{module:&shader,entry_point:Some("vertex"),compilation_options:Default::default(),buffers:&[wgpu::VertexBufferLayout {
-                array_stride:size_of::<[f32;3]>() as u64,step_mode:wgpu::VertexStepMode::Vertex,
-                attributes:&wgpu::vertex_attr_array![0=>Float32x3],
-            }, wgpu::VertexBufferLayout {
-                array_stride:size_of::<Attributes>() as u64,step_mode:wgpu::VertexStepMode::Vertex,
-                attributes:&wgpu::vertex_attr_array![1=>Float32x2,2=>Float32x4,3=>Float32x4,4=>Float32x2,5=>Uint32],
-            }]},
-            fragment:Some(wgpu::FragmentState{module:&shader,entry_point:Some("fragment"),compilation_options:Default::default(),targets:&[Some(wgpu::ColorTargetState {
-                format:crate::frame::HDR_FORMAT,blend:Some(wgpu::BlendState::PREMULTIPLIED_ALPHA_BLENDING),write_mask:wgpu::ColorWrites::ALL,
-            })]}),
-            primitive:wgpu::PrimitiveState{cull_mode:None,..Default::default()},
-            depth_stencil:Some(wgpu::DepthStencilState{format:wgpu::TextureFormat::Depth32Float,depth_write_enabled:Some(false),depth_compare:Some(wgpu::CompareFunction::LessEqual),stencil:Default::default(),bias:Default::default()}),
-            multisample:Default::default(),multiview_mask:None,cache:None,
-        });
-        Self {
+        Ok(Self {
             globals,
             textures,
             pipeline,
             cache: Mutex::new(HashMap::new()),
-        }
+        })
     }
     pub fn upload(
         &self,

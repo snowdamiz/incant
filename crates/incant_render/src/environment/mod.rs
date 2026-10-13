@@ -35,34 +35,37 @@ pub(crate) struct EnvironmentSystem {
     default: OnceLock<Arc<GpuEnvironment>>,
     cache: Mutex<HashMap<incant_assets_runtime::AssetVersionId, Weak<GpuEnvironment>>>,
 }
-impl EnvironmentSystem {
-    pub fn new(device: &wgpu::Device, queue: &wgpu::Queue) -> Self {
-        let mut entries = Vec::new();
-        for binding in 0..3 {
-            entries.push(wgpu::BindGroupLayoutEntry {
-                binding,
-                visibility: wgpu::ShaderStages::FRAGMENT,
-                ty: wgpu::BindingType::Texture {
-                    sample_type: wgpu::TextureSampleType::Float { filterable: true },
-                    view_dimension: if binding == 2 {
-                        wgpu::TextureViewDimension::D2
-                    } else {
-                        wgpu::TextureViewDimension::Cube
-                    },
-                    multisampled: false,
-                },
-                count: None,
-            });
-        }
+pub(crate) fn layout_entries() -> Vec<wgpu::BindGroupLayoutEntry> {
+    let mut entries = Vec::new();
+    for binding in 0..3 {
         entries.push(wgpu::BindGroupLayoutEntry {
-            binding: 3,
+            binding,
             visibility: wgpu::ShaderStages::FRAGMENT,
-            ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+            ty: wgpu::BindingType::Texture {
+                sample_type: wgpu::TextureSampleType::Float { filterable: true },
+                view_dimension: if binding == 2 {
+                    wgpu::TextureViewDimension::D2
+                } else {
+                    wgpu::TextureViewDimension::Cube
+                },
+                multisampled: false,
+            },
             count: None,
         });
+    }
+    entries.push(wgpu::BindGroupLayoutEntry {
+        binding: 3,
+        visibility: wgpu::ShaderStages::FRAGMENT,
+        ty: wgpu::BindingType::Sampler(wgpu::SamplerBindingType::Filtering),
+        count: None,
+    });
+    entries
+}
+impl EnvironmentSystem {
+    pub fn new(device: &wgpu::Device, queue: &wgpu::Queue) -> Self {
         let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Environment lighting"),
-            entries: &entries,
+            entries: &layout_entries(),
         });
         // The integration is deterministic and independent of device/project.
         static LUT: OnceLock<Vec<glam::Vec2>> = OnceLock::new();

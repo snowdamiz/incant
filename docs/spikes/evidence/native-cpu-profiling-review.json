@@ -1,0 +1,25 @@
+{
+  "at": "2026-10-13T03:26:26.151705+00:00",
+  "status": "accepted scoped producer",
+  "manifest_sha256": "369b4486687f52cba1293bcf761354b2ed17fc5078c3dd603bb99db6e7ebb439",
+  "source_files_verified": 32,
+  "helper_files_verified": 3,
+  "engine_inputs_verified": 1426,
+  "raw_lossless_records": 353,
+  "package_files": 28,
+  "external_binaries": 3,
+  "prior_reviews": [
+    "engine002 d02 source accepted",
+    "export004 ecbee2e4 accepted",
+    "helper005 1734d58154a06f34861b28b2dbf861d94c37324f56e7a70170788c1f6d878bed accepted"
+  ],
+  "independent_root_execution_audit": "Read assertion-only helper and replayed export004:14commands,5fullruns,5refusals,28.8M PCM scalar byte equivalence,20zone types,4plots3447samples",
+  "limits": [
+    "CPU diagnostic functionality; no performance budget/gain or reference-phone claim",
+    "Default feature graph and default tests pass; shipped inactive baselines use the same summary/Tracy-capable binaries with runtime profiling absent",
+    "Process-scoped requested Rust bytes separate from QuickJS sampled VM heap; neither is RSS",
+    "Explicit localhost Tracy process transport; no GUI or GPU; no arbitrary external compiler/environment override acceptance",
+    "Historical pre-export failures retained; original proof is never overwritten"
+  ],
+  "findings": []
+}

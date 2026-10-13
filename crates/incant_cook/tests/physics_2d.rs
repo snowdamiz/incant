@@ -1,10 +1,14 @@
 #![cfg(feature = "scene")]
+#[path = "support/scene_format.rs"]
+mod format;
+use format::scene_format;
 use incant_cook::{cook_scene, stable_id};
 use incant_doc::{AngularVelocity2D, BodyMotion, Collider2D, RigidBody, Velocity};
 use incant_doc::{Entity, Project, Scene, Transform, new_id};
 use std::collections::BTreeMap;
 fn fixture() -> (Project, String, String) {
     let mut p = Project::empty("Planar cook");
+    p.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     p.settings.tick_rate = 64;
     let scene = new_id();
     let entity = new_id();
@@ -63,7 +67,7 @@ fn shared_authoring_cooks_v7_without_mutation_and_runtime_needs_no_project() {
     let bytes = cook_scene(&project, &scene).unwrap();
     assert_eq!(bytes, cook_scene(&project, &scene).unwrap());
     assert_eq!(serde_json::to_vec(&project).unwrap(), before);
-    assert_eq!(&bytes[8..12], &7u32.to_le_bytes());
+    assert_eq!(&bytes[8..12], &scene_format(7).to_le_bytes());
     drop(project);
     let mut world = incant_runtime::NativeWorld::from_bytes(&bytes).unwrap();
     world.step().unwrap();

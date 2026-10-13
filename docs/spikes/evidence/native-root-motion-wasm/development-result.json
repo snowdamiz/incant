@@ -1,0 +1,65 @@
+{
+  "kind": "development-jit-conformance",
+  "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1\n",
+  "shipping_roots_without_wasmtime_or_cranelift": [
+    "incant_runtime",
+    "incant_script",
+    "incant_game_runtime",
+    "incant_script_player",
+    "incant_game_player"
+  ],
+  "rust_sdk": {
+    "target": "wasm32-unknown-unknown",
+    "edition": "2024",
+    "panic": "abort",
+    "opt_level": 2,
+    "source_sha256": {
+      "sdk/abi/native-v1.json": "e5291d1110e5e6b5b734f4f6f817355046bb83e2f507d9e215636b520a30b2c7",
+      "tools/rust_guest.py": "a01641b59eb8d39e9cd4de58d1a59e3aec97b19179ba52793623a42a725dd5cc",
+      "crates/incant_wasm_abi/src/lib.rs": "daa1f753ee35bc11e985aab74aac6ccae38c543dce95e6dff31141b3f81ae80d",
+      "crates/incant_wasm_abi/src/localization.rs": "8192b4afdbec79000c2fa52fb54425a7e30cffd5a20e44a8d9ea10edaef2eb62",
+      "crates/incant_wasm_abi/src/navigation_paths.rs": "b4cad03e82af1644bf4b6ad536e9addf298e8da8268ffa5b4d5e98320d5a3c87",
+      "crates/incant_wasm_abi/src/physics.rs": "e37093d0c5b0532888f1f356d6f1cdfa1339e83a2fa7dfbc3fd48e874ba58064",
+      "crates/incant_wasm_abi/src/steering.rs": "06e6b3668577fbc26ceb39957e9f2ed448d7214e62737028c52c108646b27c41",
+      "sdk/rust/src/animation.rs": "289cae8d4665c2ab66ab0884622393fe594ce0d13116209acecd5e61e3ec5ad2",
+      "sdk/rust/src/animation_graph.rs": "b2a742fcd9730f744fd378dbd38b8e2bab46d546dfb3c49daa5411bf7ed8c7f0",
+      "sdk/rust/src/animation_graph_v2.rs": "866ed963160e6432c7985547bd87982f26950e4a395550123d7a681367aa6287",
+      "sdk/rust/src/animation_ik.rs": "cff5169c4ac16aa6c0e525fca7a09ae2679c2c37237fe871268d1c678581e45e",
+      "sdk/rust/src/animation_ik_v2.rs": "390abc914e4e47e9a647b65920754d19f4c31e364ae3071d64a18776f893c5b9",
+      "sdk/rust/src/animation_pose.rs": "6f8eb5478fa6a836b4d62ace10375e819c002201291b5e37212a6a7c9c7bf335",
+      "sdk/rust/src/animation_pose_v5.rs": "7653447a44545127c2ee8e04d8122e93d20d7f401e1e24d4b100022811627994",
+      "sdk/rust/src/flipbook.rs": "4432747e8707e044aa63f6d22d679d1b88aec720805219d8d1f891c0e9969e65",
+      "sdk/rust/src/input.rs": "b088d9f4fe099abcf0247167e026193531bac854551103fff41b628be8bdbb63",
+      "sdk/rust/src/lib.rs": "300220d493582529dbbe890f745e5d1d4ca757a0e6cfdd216c7184c34a18d260",
+      "sdk/rust/src/localization.rs": "ce245273fc4d5bfef18067ca32c839ef971a3cfa299d6d22674e26386ec7c6f9",
+      "sdk/rust/src/navigation.rs": "09fe00fa737c1aa4e066a25b63c9a0be2fc3c108188fc3b288faffa6c7698de4",
+      "sdk/rust/src/physics.rs": "9daecf44e1046dbfb34c7f124dc882c471afb0d0b980ebc9724ba2e1d1b79cbc",
+      "sdk/rust/src/raw.rs": "21770dbb369398bb28769e363514b3511c24c05135725795efcb20ef7d1b8262",
+      "sdk/rust/src/root_motion.rs": "efc059dac0da6d6f617e225b1ed2bac6bd49062839719daf6df320975ca355e7",
+      "sdk/rust/src/steering.rs": "6fa5caf31faa1291db6bb1048bdc689e01d681b36995ee4390c41bfc87bb3ef8",
+      "sdk/rust/src/tick/compound.rs": "674f853fa96e3d4fdfe91c01040c2a00d57f96f10486a5f119cb334d78f3ee61",
+      "sdk/rust/src/tick/ik.rs": "d3d3461e1d6d6f69e22eddad6cba86678e84f29ae114869426f056e92f0e1c29",
+      "sdk/rust/src/tick/root_motion.rs": "87d402516e73b43f6763ab639b38aa0743fc816576b207cc5159788a9e3abd76",
+      "sdk/rust/src/tick.rs": "05bf4dfea57df31a8771e7acaa7a5a23dfc3b4b6bc373ee5d1e73608dcaf2ca4"
+    },
+    "repository_sdk_sources_retained": true,
+    "build_scripts_or_proc_macros": false
+  },
+  "fixture_sha256": "8d7a82a9f6a6b7453549cad13d163cef3355d727359b9fb1705adf9ef2ef9204",
+  "fixture_deleted": true,
+  "wasm_sha256": "89f63d69d66329c1f67d6fcde0e4b5fc64606f96dc1519bc8ea9a07df6e88cfa",
+  "runner_sha256": "1fbe55754d5b7cadea4b7cf366944ee69bdee6d7502dbefb95d4cddf7de3c50e",
+  "processes": 3,
+  "stdout": [
+    "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+    "1 0.25\n2 0.125\n3 0.25\n4 0.125\n",
+    "1 0.25\n2 0.125\n3 0.25\n4 0.125\n"
+  ],
+  "limitations": [
+    "host build storage retained",
+    "development JIT, not shipping wasm2c",
+    "trusted fixture compile, no untrusted build service",
+    "typed transfer ABI copies columns",
+    "no device/performance gate"
+  ]
+}

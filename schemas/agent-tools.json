@@ -509,6 +509,24 @@
             },
             {
               "additionalProperties": false,
+              "description": "Select the separately compiled solver family for the next Play/export.\nExisting simulation processes keep their original immutable kernel.",
+              "properties": {
+                "mode": {
+                  "$ref": "#/$defs/PhysicsMode"
+                },
+                "op": {
+                  "const": "set_physics_mode",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "op",
+                "mode"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
               "description": "Replace the project token allowance. Only user-origin transactions may\nissue this command, including when the allowance would remain unchanged.",
               "properties": {
                 "op": {
@@ -1019,6 +1037,14 @@
             "agent",
             "script",
             "import"
+          ],
+          "type": "string"
+        },
+        "PhysicsMode": {
+          "description": "Authoring choice for a separately built simulation process. Fast mode does\nnot promise bit-identical results across hardware or solver variants.",
+          "enum": [
+            "fast",
+            "deterministic"
           ],
           "type": "string"
         },
@@ -2315,7 +2341,7 @@
               "type": "null"
             }
           ],
-          "description": "Data-only incant-input v1 recording, starting at tick zero. No code runs."
+          "description": "Data-only incant-input v1/v2 recording, starting at tick zero. No code runs."
         },
         "observe": {
           "anyOf": [
@@ -2348,6 +2374,19 @@
           "maximum": 600,
           "minimum": 1e-6,
           "type": "number"
+        },
+        "ui_viewport": {
+          "description": "Explicit UI viewport in logical pixels, each finite and within 1..=65536.\nRequires a camera; omission preserves the non-UI host.",
+          "items": {
+            "format": "float",
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": [
+            "array",
+            "null"
+          ]
         }
       },
       "required": [

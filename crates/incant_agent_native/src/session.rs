@@ -3,7 +3,7 @@
 use crate::{FallbackCompiler, StartOptions};
 use incant_audio_runtime::ClipBinding;
 use incant_game_runtime::{HostedOfflineGameSession, OfflineGameSession};
-use incant_input::{InputActions, InputEvent, InputFrame};
+use incant_input::{InputActions, InputEvent, InputFrame, RecordedUiEvent};
 use incant_render_game::{NativeRenderHost, NativeRenderSettings};
 use incant_runtime::{CookedScene, NativeWorld};
 use incant_script::{NativeLogs, SessionProgram};
@@ -68,6 +68,36 @@ impl Session {
     }
     pub fn tick(&mut self, input: &[InputEvent], output: &mut [f32]) -> Result<()> {
         self.game.tick(input, output)
+    }
+    pub fn validate_ui_recording(&self, uses_ui: bool) -> Result<()> {
+        match &self.game {
+            Game::Spatial(game) => {
+                incant_render_game::validate_ui_recording(game, uses_ui).map_err(native)
+            }
+            Game::Plain(_) if uses_ui => Err(native(incant_render_game::RecordedUiError::<
+                std::convert::Infallible,
+            >::Invalid(
+                "UI recording requires an explicitly configured CPU UI host",
+            ))),
+            Game::Plain(_) => Ok(()),
+        }
+    }
+    pub fn tick_recorded(
+        &mut self,
+        physical: &[InputEvent],
+        records: &[RecordedUiEvent],
+        viewport: Option<[f32; 2]>,
+        output: &mut [f32],
+    ) -> Result<()> {
+        if records.is_empty() && viewport.is_none() {
+            return self.tick(physical, output);
+        }
+        self.validate_ui_recording(true)?;
+        let Game::Spatial(game) = &mut self.game else {
+            unreachable!("UI admission checked");
+        };
+        incant_render_game::tick_recorded_ui(game, physical, records, viewport, output)
+            .map_err(native)
     }
     pub fn is_spatial(&self) -> bool {
         matches!(self.game, Game::Spatial(_))

@@ -1,0 +1,207 @@
+{
+  "format": "incant-cluster-grid-readback-evidence",
+  "version": 2,
+  "base": "946f42dccafae269214a4ba51d49f4f9dfa37e33",
+  "sources": [
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/mod.rs",
+      "sha256": "8c33a7800c3241fca4b8c34a9bf207e607aa1580af537f9a090f84b4b6773ba5"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/readback.rs",
+      "sha256": "a677d06ee3822268141c5e9b67d5dad6d0ea23f9af470bbfc64ee71cede04042"
+    },
+    {
+      "path": "crates/incant_render/tests/lighting_gpu/extended.rs",
+      "sha256": "80d33a7796d4b923d4dd8dd85165ef9f6409603bdf1b284e43643759d72b09a9"
+    }
+  ],
+  "source_freeze_sha256": "6298dea8f2a926140ea14ccb3fda45dd75ba8e5e3a50cf4af57fba44dd368d91",
+  "scope": "cfg(test) only; retained test now resolves real model geometry before submission",
+  "verification": {
+    "cpu_cases": 3,
+    "configurations": [
+      "default",
+      "cooked-clusters (+ implied cooked-output)"
+    ],
+    "commands": 7,
+    "all_exits": 0,
+    "gpu_executed": false,
+    "planned_gpu_records": 84,
+    "frozen_engine_inputs": 1119
+  },
+  "checks": [
+    {
+      "name": "baseline-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--message-format=json",
+        "lighting::gpu_tests"
+      ],
+      "exit": 0,
+      "seconds": 8.347883542002819,
+      "pid": 81651,
+      "stdout": "28a7025550c7ceecfc9512c417433fac501e4e66ac3da0deea582b14be911b55",
+      "stderr": "cb3350375ce8e65f993e6a497b26b0e279b9bc86efa38b8c52efa5a7121c6681",
+      "binary": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/baseline-binary",
+        "sha256": "ab7335d8ef6639ca81eac85b1cd4a74bb2a0b06a449ea6ec69a878f6c5d37ebc",
+        "features": [
+          "default",
+          "physics-deterministic"
+        ],
+        "original": "/tmp/incant-agent-font-target/ci/deps/incant_render-970ba566a3c049ad"
+      }
+    },
+    {
+      "name": "baseline-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 1.5778746249998221,
+      "pid": 81685,
+      "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "629db67bf11417d4890b1bce52fe0f5903f77fc2a37cdff1920f66123c3bd0ad"
+    },
+    {
+      "name": "cooked-cpu",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-clusters",
+        "--lib",
+        "--message-format=json",
+        "lighting::gpu_tests"
+      ],
+      "exit": 0,
+      "seconds": 7.230659625005501,
+      "pid": 81699,
+      "stdout": "99a94470f51e142d16f75bf15486dc1861be562c4743087a7e520c67015bf379",
+      "stderr": "18097cad4555139c8c1d201bfeaa42d682e5a782fba2f11d9a26cd2aa04c8877",
+      "binary": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/cluster-grid-readback-002/cooked-binary",
+        "sha256": "0ed2cd6a2d90519cbbeebe1233dad2a3e4d8499455d67bfe4d020c3a13726454",
+        "features": [
+          "cooked-clusters",
+          "cooked-output",
+          "default",
+          "physics-deterministic"
+        ],
+        "original": "/tmp/incant-agent-font-target/ci/deps/incant_render-68485dcc31e14a55"
+      }
+    },
+    {
+      "name": "cooked-clippy",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-clusters",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 1.3944976669954485,
+      "pid": 81738,
+      "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "c583df787ff6002b2e507a997ce129dccbef20cfb6e8c8221c62972b6520f4cf"
+    },
+    {
+      "name": "fmt",
+      "argv": [
+        "/opt/homebrew/opt/rustup/bin/rustfmt",
+        "--edition",
+        "2024",
+        "--check",
+        "crates/incant_render/tests/lighting_gpu/extended.rs"
+      ],
+      "exit": 0,
+      "seconds": 0.0360450000007404,
+      "pid": 81767,
+      "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.031540582996967714,
+      "pid": 81768,
+      "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.0161688750013127,
+      "pid": 81778,
+      "stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/cluster-grid-readback-002/artifacts.json.gz",
+    "sha256": "8243582bc733f8fc561902218ef9e7279f52212a2e9461df096b0c10ff6408a8",
+    "bytes": 153012,
+    "records": 19,
+    "payloads": 12
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/cluster-grid-readback-002/source-review.json",
+    "sha256": "c15b95d43f32c404a617c5075e146b61c7280b3cf56e4751a29961ec0f99541a"
+  },
+  "prior": {
+    "path": "docs/spikes/evidence/cluster-grid-readback-source001.json",
+    "sha256": "d43b53b584d43231bf9e2edf0c897195dea935ac872015ce92118db493e017bd",
+    "status": "Historical CPU-only evidence. Source001 omitted model geometry in retained test; superseded before any GPU execution. Immutable old binaries retained externally in cluster-grid-readback-001/frozen-binaries."
+  },
+  "limits": [
+    "No GPU execution, pixel capture, appearance or performance claim",
+    "Default/cooked actual84-record raw-grid parity and exact backend still pending",
+    "Shared compile target released after seven terminal commands; current binaries copied to immutable evidence paths"
+  ]
+}

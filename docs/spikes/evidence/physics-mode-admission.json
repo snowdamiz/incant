@@ -1,0 +1,996 @@
+{
+  "at": "2026-10-12T21:41:21.682138+00:00",
+  "base": "a468be2a6ce22c11a0e4fbdeddfd2c44b7b79245",
+  "plan_sha256": "c60adc7457e6f5929b3430876f6b8ea02acffce5bf55fbaae9090933fe4aab6c",
+  "source_sha256": {
+    "Cargo.toml": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4",
+    "crates/incant_agent/Cargo.toml": "48d9059020553633a521f6a680ddc89b9ed5b1fd2a48d9e9e94806843f27a21e",
+    "crates/incant_agent_native/Cargo.toml": "1c38376dab3087e36193e87c73d486aaaf69f5b811e24fd68ff66d01bdf04f49",
+    "crates/incant_assets/Cargo.toml": "18b2a98512b7c6912c721bd56c27913a39a7f697007076c0455aa62580cce4dc",
+    "crates/incant_audio/Cargo.toml": "0f0df7a7811dafb1ed9bcf1154204b1242b4b4dbcafb0d36d7db951614556e55",
+    "crates/incant_audio_runtime/Cargo.toml": "f4999fd7a80c3dc2790abe6ca64ff1975adbc576ccdbe2a75776db13307cc497",
+    "crates/incant_cmd/Cargo.toml": "92e4bbded4fdf960ab3f0e5c42741c476eede1cfa2bae2ff587726c4587dd569",
+    "crates/incant_cook/Cargo.toml": "2a807997197ca7c0f0f3dcdf5afd79e97783ae2f71e7366eef966ef063509b41",
+    "crates/incant_cook/tests/animation.rs": "50ba4311fa4f6af1b8d25c6046b2dc5f0d816a80d7970c0af3884b2d77425c13",
+    "crates/incant_cook/tests/animation/graph.rs": "19b73b00a83e0bc97a7fa355b12f80eca908e800ef76ffdc3586264d68c41c3b",
+    "crates/incant_cook/tests/animation/ik.rs": "ace35d1ad32773e1de4a9aa8e801b7aeccaf3938f696d5407b3f1b1fc53de143",
+    "crates/incant_cook/tests/animation/tree.rs": "2cecbdb4b4fbadd9f9b40dece24c595b82a20de9c249cb02c8d1f5569a39ab8e",
+    "crates/incant_cook/tests/physics_2d.rs": "202855893f7c5be235c29034de2be88248185a8e89e4d4f45d3bb8b3fe36f4be",
+    "crates/incant_cook/tests/root_motion.rs": "78cc91784e91944367e9e23769d769020602608bd5d7ed5010b332d5feaeac39",
+    "crates/incant_cook/tests/spatial.rs": "746c2f1d3dce0d70613bbc3ac99420d4c53bedea62fba65c956cac64130d69c7",
+    "crates/incant_cook/tests/support/scene_format.rs": "86cfd6f36f69ec7c8e2d06ba4b1932f4a2a7af217eb35605df6510bf1dbda721",
+    "crates/incant_cook/tests/text.rs": "c1812f7b7a5b3dda9b199573aa8b5052aa604d30b5d4038227e9cf0b7bace965",
+    "crates/incant_cook/tests/ui.rs": "4f8014a12c04b080f4e25447185dba2107f14f8ff24aff0f26e684a4b92f3e1d",
+    "crates/incant_core/Cargo.toml": "6bce86808181a9275903d7598e467eef6b801f553c78631f9b1840a708c4ab8f",
+    "crates/incant_game_player/Cargo.toml": "61a51d7d82fd50de1d486bb941aaa16bfadac9ae9f32e26a0191610f16ea2c0e",
+    "crates/incant_game_runtime/Cargo.toml": "d1d7b8bd1657784b1210303309d01a9d6c19535a98c6d3d721c96c2bda4655c0",
+    "crates/incant_headless/Cargo.toml": "03ceaafe2d83466d0a7847f22b3b2fcbd89f35a77f775c5381ace767306e6975",
+    "crates/incant_import/Cargo.toml": "059fa6dc5e58a5cc4b8753130161e1043ef3d3781ed291a3cd8fcf8338cd3bc5",
+    "crates/incant_observe/Cargo.toml": "0b5799363c3548c621ce8b292deaf99f2aef9d92c31bc5c7990d1d688092ea40",
+    "crates/incant_physics/Cargo.toml": "148cdfcb285a619aa251a54bf36deca1997e2642e82029aa663a792ecaa0145c",
+    "crates/incant_physics_2d_runtime/src/lib.rs": "15f0ea2409342d08282db9fed9e73b69065c76538f7821d88e6a1fee99b2a2ba",
+    "crates/incant_physics_runtime/src/lib.rs": "4b4bb0651f6cd9b954bb7810a19b5068d2bd29ae88def5418ec26fec1357e0f4",
+    "crates/incant_platform_smoke/Cargo.toml": "04cc1f0e042a0463583c4f0289f4ebeaba51d8d836836700447600117d58d0c1",
+    "crates/incant_play/Cargo.toml": "0a2eaa1f27d2216dc724e37ecd9227a4e5fe49fe61614a2e0e62644cf6d83cba",
+    "crates/incant_play_legacy/Cargo.toml": "dbf57e7f790c87d0a9a332d7a7884d449b619bebca2575f009356394ac3dc741",
+    "crates/incant_render/Cargo.toml": "b539789326a31793e2caa030a859edba448a17077b8aea4bbb25cd3ecd21ca04",
+    "crates/incant_render_authoring/Cargo.toml": "9629daf8044c5db0f88cbc95f7f8f40cc1399085a8c497457b0fb5cd5bc91ae7",
+    "crates/incant_render_game/Cargo.toml": "ce69758c5f658995351b71686d46c1d9a9c4aacedd02060b26458152bf5450ed",
+    "crates/incant_render_game/tests/hosted.rs": "1cd852a4b7fe65e9c12835fbc175cf2757c72a090502cf545fc1b451545c4723",
+    "crates/incant_render_gpu_host/Cargo.toml": "386f065fd226154c5144c95d1a5c1143d0e789763085aeec6ef4db90dcbf8e9a",
+    "crates/incant_render_native/Cargo.toml": "f08748483c6555dce55b94b39b0b533e2454a2e6f54351b8f6c7112ff70e1d9f",
+    "crates/incant_runtime/Cargo.toml": "91c9a7d6d46bc8f0afe4d0680c79f06c3fb35fb76696dc7da63c552f7182e0c0",
+    "crates/incant_runtime/src/binary.rs": "b17ab4ff1e5dc1674ad10838fc5512c451b970df092f3989c151a9e03573ac84",
+    "crates/incant_runtime/src/lib.rs": "9197da41a72efdbe1447352ee5165499af7a212d4adfa1ea404deab24d9bbfa2",
+    "crates/incant_runtime/src/physics_variant.rs": "fe83259727683e5a738d14afff5d7e4741b0a0acef952af8fe5ef6a183b594fe",
+    "crates/incant_runtime/src/root_motion/tests.rs": "d504bf9ff40290c51bcb274dd241ecedc4f12e9c78c3c2e067309829688b316a",
+    "crates/incant_runtime/src/scene.rs": "6a214ecc17922f6097c2ce3d693c0be7ada42b6f9f568fcac578da8f89727a62",
+    "crates/incant_runtime/tests/animation.rs": "574bb6c35d785ce227fbd4def8bdf4bc3534de3d312e8d4269914f6796964aba",
+    "crates/incant_runtime/tests/animation_graph.rs": "ae6eac104b966880faff90240fd269fd0047f72134d8f364987fcf6ef32b2a26",
+    "crates/incant_runtime/tests/animation_graph/fades.rs": "85deb9ebbb67ebe9e690a94ae52be4507248d4d775e29a13714d73dfe7dd1a46",
+    "crates/incant_runtime/tests/animation_tree_playback.rs": "53483c817a5b5f13898255aee98efb5771352bfc95a0d31aef61495756ce27f5",
+    "crates/incant_runtime/tests/audio.rs": "57388b5cbee099fe059b410d53c6a20a00a5508f4fad832f4dd1ad04260cf2f9",
+    "crates/incant_runtime/tests/flipbook.rs": "07d3dab5f83d9c95dce08b06dc9d1945121ac37ff323ae056a5c7dc367a1011a",
+    "crates/incant_runtime/tests/ik.rs": "6f77cb2cd1d98b6ecee40e1fdc31c321d36dda5729415776d2e0b0a5d8de4be4",
+    "crates/incant_runtime/tests/localization.rs": "9035ddd953becc9b29daff2fb1d7c7bc8e5a9b0569087fbe014b9a0d8524ee14",
+    "crates/incant_runtime/tests/navigation.rs": "94bf09fd10d5e4e1eacf229a5eb17e2d14c56ff9bc4d670c7cb37b1640ade234",
+    "crates/incant_runtime/tests/physics.rs": "4ac3fb29bd6b5577269c58b9c4968a40685c45cc3bba974b501a4b415affe692",
+    "crates/incant_runtime/tests/physics_2d.rs": "5fe2d4edde8b5d74bda34f964ee07c72673eefbd87ff54bc21391adcf4050f41",
+    "crates/incant_runtime/tests/physics_variant.rs": "e4b8578b8fe810a61ed944e41f137f7f389ec0170210eb4c24d48b3ee0a60204",
+    "crates/incant_runtime/tests/spatial.rs": "74113755f6d9ee63a6cbcfc39a68503866146ac56582577a2e5f162136d988b4",
+    "crates/incant_runtime/tests/sprites.rs": "3bf43ea1954240878b49141b7f8e475831079202f798ece3fbf1738614a8919f",
+    "crates/incant_runtime/tests/support/scene_format.rs": "86cfd6f36f69ec7c8e2d06ba4b1932f4a2a7af217eb35605df6510bf1dbda721",
+    "crates/incant_runtime/tests/text.rs": "72367a94ea2db24a523159b9630e3a3a9c629d128fcc947824397b472db82707",
+    "crates/incant_runtime/tests/tilemaps.rs": "1b026bda487b3d5477374b1c313c18e1758a505ec52054614625f08c33c1ef7c",
+    "crates/incant_runtime/tests/ui.rs": "0ef40bf2024bb49cd72f911179a807efdae3622eccac068ef16403d1e902ce05",
+    "crates/incant_script/Cargo.toml": "07859a4855a1752cc3277efd1a048d35c7716d2459293a6e113fb45808947c4f",
+    "crates/incant_script_player/Cargo.toml": "ba8acbcbc122d19bbe78eb48e93c5117d80955354b80f77f09cae8f7ab500e89",
+    "crates/incant_types/src/lib.rs": "ee8a2dda1758f6b710c578b23b22af71c286913f9fd6b2b3732cd262c13294e2",
+    "crates/incant_types/src/physics_mode.rs": "6942dd611bd5588c8509de3fc58e332cced0467b41f37219387ea6e273a3c367",
+    "crates/incant_ui/Cargo.toml": "6cd5a59e70d67221ae05bcce35a3f49ce4202b06912b836d6c4e5d6adfdce68c",
+    "crates/incant_wasm_dev/Cargo.toml": "a137d195039e5916ffaa84e5513dd62b3580bc79e84ec6d2362f7731a657c603",
+    "crates/incant_wasm_player/Cargo.toml": "12ea56f4f1f89277e25334290d9eeaa0e62df0d6d84a390b2856f576c8233fa5",
+    "crates/incant_wasm_runtime/Cargo.toml": "0a84dcaea2e06cfc9f1f54bd333eeb6acde797e5197e8a609f0ff28f589710ff",
+    "editor/app/Cargo.toml": "4731cbe089090f287ed0917514acd37f89d72a76181bf24fd8e50b988de2129d",
+    "tools/physics_features.py": "514b60331bf9610505eaf2ed4f603186cd918273898c334a2611c92d2fd31821",
+    "tools/tests/test_physics_features.py": "a17790e72c81f5b76d83d4a5a0c2a436cf17566a9506e30b393d489846586176"
+  },
+  "suites": [
+    {
+      "name": "physics-mode-admission-003",
+      "historical_failure": false,
+      "terminal": {
+        "exit_code": 0,
+        "changed": [],
+        "frozen_files": 1440
+      },
+      "outcomes": [
+        {
+          "name": "deterministic",
+          "exit_code": 0,
+          "seconds": 5.698879374998796
+        },
+        {
+          "name": "fast",
+          "exit_code": 0,
+          "seconds": 5.795966082998348
+        },
+        {
+          "name": "fast-simd8",
+          "exit_code": 0,
+          "seconds": 115.23067525000079
+        }
+      ],
+      "test_totals": {
+        "deterministic": {
+          "groups": 34,
+          "passed": 249,
+          "failed": 0,
+          "ignored": 0
+        },
+        "fast": {
+          "groups": 34,
+          "passed": 249,
+          "failed": 0,
+          "ignored": 0
+        },
+        "fast-simd8": {
+          "groups": 34,
+          "passed": 249,
+          "failed": 0,
+          "ignored": 0
+        }
+      }
+    },
+    {
+      "name": "physics-mode-ancestry-001",
+      "historical_failure": false,
+      "terminal": {
+        "exit_code": 0,
+        "changed": [],
+        "frozen_files": 1461
+      },
+      "outcomes": [
+        {
+          "name": "deterministic-runtime-clippy",
+          "exit_code": 0,
+          "seconds": 36.38148408300185
+        },
+        {
+          "name": "deterministic-ancestry",
+          "exit_code": 0,
+          "seconds": 190.957186292002
+        },
+        {
+          "name": "fast-runtime-clippy",
+          "exit_code": 0,
+          "seconds": 14.050982250002562
+        },
+        {
+          "name": "fast-ancestry",
+          "exit_code": 0,
+          "seconds": 51.756957208999665
+        },
+        {
+          "name": "fast-simd8-runtime-clippy",
+          "exit_code": 0,
+          "seconds": 8.936808708000171
+        },
+        {
+          "name": "fast-simd8-ancestry",
+          "exit_code": 0,
+          "seconds": 26.723222832999454
+        }
+      ],
+      "test_totals": {}
+    },
+    {
+      "name": "physics-mode-consumers-003",
+      "historical_failure": false,
+      "terminal": {
+        "exit_code": 0,
+        "changed": [],
+        "frozen_files": 1375
+      },
+      "outcomes": [
+        {
+          "name": "deterministic-consumers",
+          "exit_code": 0,
+          "seconds": 11.803486207998503
+        },
+        {
+          "name": "deterministic-variant-save",
+          "exit_code": 0,
+          "seconds": 0.592283750000206
+        },
+        {
+          "name": "deterministic-consumer-clippy",
+          "exit_code": 0,
+          "seconds": 1.7264824170015345
+        },
+        {
+          "name": "fast-consumers",
+          "exit_code": 0,
+          "seconds": 14.429302083000948
+        },
+        {
+          "name": "fast-variant-save",
+          "exit_code": 0,
+          "seconds": 1.4233595410005364
+        },
+        {
+          "name": "fast-consumer-clippy",
+          "exit_code": 0,
+          "seconds": 26.52181770899915
+        },
+        {
+          "name": "fast-simd8-consumers",
+          "exit_code": 0,
+          "seconds": 117.3154978340026
+        },
+        {
+          "name": "fast-simd8-variant-save",
+          "exit_code": 0,
+          "seconds": 1.7935702089998813
+        },
+        {
+          "name": "fast-simd8-consumer-clippy",
+          "exit_code": 0,
+          "seconds": 15.447896790999948
+        }
+      ],
+      "test_totals": {
+        "deterministic-consumers": {
+          "groups": 29,
+          "passed": 105,
+          "failed": 0,
+          "ignored": 0
+        },
+        "deterministic-variant-save": {
+          "groups": 1,
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        "fast-consumers": {
+          "groups": 29,
+          "passed": 105,
+          "failed": 0,
+          "ignored": 0
+        },
+        "fast-variant-save": {
+          "groups": 1,
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        "fast-simd8-consumers": {
+          "groups": 29,
+          "passed": 105,
+          "failed": 0,
+          "ignored": 0
+        },
+        "fast-simd8-variant-save": {
+          "groups": 1,
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        }
+      }
+    },
+    {
+      "name": "physics-mode-admission-001",
+      "historical_failure": true,
+      "terminal": {
+        "exit_code": 101,
+        "changed": [],
+        "frozen_files": 1439
+      },
+      "outcomes": [
+        {
+          "name": "deterministic",
+          "exit_code": 0,
+          "seconds": 145.5784452500011
+        },
+        {
+          "name": "fast",
+          "exit_code": 101,
+          "seconds": 99.26434012499885
+        }
+      ],
+      "test_totals": {}
+    },
+    {
+      "name": "physics-mode-admission-002",
+      "historical_failure": true,
+      "terminal": {
+        "exit_code": 101,
+        "changed": [],
+        "frozen_files": 1440
+      },
+      "outcomes": [
+        {
+          "name": "deterministic",
+          "exit_code": 0,
+          "seconds": 48.929462459000206
+        },
+        {
+          "name": "fast",
+          "exit_code": 101,
+          "seconds": 49.348750083001505
+        }
+      ],
+      "test_totals": {}
+    },
+    {
+      "name": "physics-mode-consumers-001",
+      "historical_failure": true,
+      "terminal": {
+        "exit_code": 101,
+        "changed": [],
+        "frozen_files": 1367
+      },
+      "outcomes": [
+        {
+          "name": "deterministic-consumers",
+          "exit_code": 0,
+          "seconds": 340.79543645800004
+        },
+        {
+          "name": "deterministic-variant-save",
+          "exit_code": 0,
+          "seconds": 1.8559277080021275
+        },
+        {
+          "name": "deterministic-consumer-clippy",
+          "exit_code": 101,
+          "seconds": 42.04327437500251
+        }
+      ],
+      "test_totals": {}
+    },
+    {
+      "name": "physics-mode-consumers-002",
+      "historical_failure": true,
+      "terminal": {
+        "exit_code": 101,
+        "changed": [],
+        "frozen_files": 1367
+      },
+      "outcomes": [
+        {
+          "name": "deterministic-consumers",
+          "exit_code": 0,
+          "seconds": 19.450893500001257
+        },
+        {
+          "name": "deterministic-variant-save",
+          "exit_code": 0,
+          "seconds": 0.505103457999212
+        },
+        {
+          "name": "deterministic-consumer-clippy",
+          "exit_code": 0,
+          "seconds": 6.701304915997753
+        },
+        {
+          "name": "fast-consumers",
+          "exit_code": 101,
+          "seconds": 186.24550137499682
+        }
+      ],
+      "test_totals": {}
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/actual-features.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/actual-features.json.gz",
+      "bytes": 3966,
+      "sha256": "dd6f66e4ab270ad1d5a589d7ebcd090d027fd7932e32ad322042bc4238f5cb49",
+      "compressed_sha256": "d6d4112a9e87ae144539c1e624f8a868b7224664bed6c650fb86bf1f87356af4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/commands.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/commands.json.gz",
+      "bytes": 2589,
+      "sha256": "986985d8ca94127b00288d8ac4c1bc3a398ff04ef27fff3cd3c672893fd05724",
+      "compressed_sha256": "172be5e95a545af3a8253242b1dc09a0e8343ce169694ae9eb5a2cf2ed1ec770"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/deterministic.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/deterministic.stderr.gz",
+      "bytes": 5021,
+      "sha256": "a7235b51ea92bac82775105bafe92f735559bc1c389cd50d556a6c81d2b08947",
+      "compressed_sha256": "eaf63320214a1f4da5934aa0694b8c0f3b0ab88c1cb81b196d3afd541c96c72a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/deterministic.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/deterministic.stdout.gz",
+      "bytes": 247922,
+      "sha256": "4ee145c59112040c89506f812deec7fe2e5d95276b09d6b52efce299289941b9",
+      "compressed_sha256": "dbcf03787026e7b5c943e3f90e5b1770624c988388259217fa5dc3ead3e9de36"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/fast-simd8.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/fast-simd8.stderr.gz",
+      "bytes": 5420,
+      "sha256": "5887314e9651c443f7f82e0e1c9ba8015675bba08d51c291190841a91a15c49a",
+      "compressed_sha256": "7f29cee11662aa77fbb0aa59724dc23e7eb3f523430e78312692a6a9404f340c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/fast-simd8.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/fast-simd8.stdout.gz",
+      "bytes": 247321,
+      "sha256": "d13050adadd656073689e53afde0a9d04c2c52dff521612de9e8951294bf785e",
+      "compressed_sha256": "d285549884f8391daa97de3aa5e9fe668b1919d38fe2b53f539acc13b8480940"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/fast.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/fast.stderr.gz",
+      "bytes": 5021,
+      "sha256": "0622bd46ed55161810b9083d5c39c4523289adb2f152ffb23edfb9d77a4324b6",
+      "compressed_sha256": "741457c900e12b2e78746b101a1b816fdf10031a77a928789c0437a04da75f2c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/fast.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/fast.stdout.gz",
+      "bytes": 246484,
+      "sha256": "b82510cc544900c57c94df0235512969eaed713cf9b0641dd8933cf56eb186a9",
+      "compressed_sha256": "8ed2085801c67ff6d26b0155274ea2ff10d966dc91caf1c105f59d1377c891c4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/freeze.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/freeze.json.gz",
+      "bytes": 167010,
+      "sha256": "6fd5bef560cc3df70c21a8d985560cbf064de109945d4ac3b88714bbe66cfbc0",
+      "compressed_sha256": "40fe702d2743e71b20106725f04143cf0003179847cb129ce020f424cb72c820"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/run.py",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/run.py.gz",
+      "bytes": 1622,
+      "sha256": "f084506a02dffa6219eeaaf1607de8613846cdeb4411534593d56adef75f908d",
+      "compressed_sha256": "97c49ed9fffeb19850b00e1161b278ce5fcb08f65807844cc99064aa1fbcad18"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-003/terminal.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-003/terminal.json.gz",
+      "bytes": 62,
+      "sha256": "5333d6358f530c33d06802a57f8960aa28ecff0ef3dbbca12b466eb583e9009a",
+      "compressed_sha256": "90fe5e4e9e850dd47d374fad58d1c2618a584459380ac60cff5ab89162c4627b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/commands.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/commands.json.gz",
+      "bytes": 14742,
+      "sha256": "626a8b6f74873b4d0f72ee974c43368ab247e3675797a7a5170f31e69f30fb3b",
+      "compressed_sha256": "0f45a3139a90217f69cba86d17c97b37b68f5dcae8e1fcf8066acec07ac4cd6b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/deterministic-ancestry.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/deterministic-ancestry.stderr.gz",
+      "bytes": 21045,
+      "sha256": "bd16792f1a2c8d457a6e56bea0d7c0f6d0e8023f557a525afacbf2516146c12e",
+      "compressed_sha256": "03689892a280e6ce90e0abeff36b3c1ebd95eccbcd67f9a7be09d5259e05cae0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/deterministic-ancestry.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/deterministic-ancestry.stdout.gz",
+      "bytes": 866311,
+      "sha256": "2630b2bcdd8efc26211ed5a1a6b1a49e4b48fa09212f1563c4deedc5964e46a9",
+      "compressed_sha256": "2d1e053e4bd91b76a427639f617cc1dc231c5eb606a7de572976272db4abdd1a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/deterministic-runtime-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/deterministic-runtime-clippy.stderr.gz",
+      "bytes": 5345,
+      "sha256": "79846d0aec95798bd67f3f22e4bb8fdebe7d40fece24fd746e25d30fad4df427",
+      "compressed_sha256": "fab024bd39a208f5a301e497531affe2d9a1fe4d4f2a14cdc93f7170b39cdcc0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/deterministic-runtime-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/deterministic-runtime-clippy.stdout.gz",
+      "bytes": 202077,
+      "sha256": "bc6b8047482dbff93e678da3888c3a084c9a62a38955ec24c7f1f39f52e640e5",
+      "compressed_sha256": "8d3950a54025e4e9035d27d2106e448621d62d4b875b2deabef489bff45def57"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-ancestry.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-ancestry.stderr.gz",
+      "bytes": 4506,
+      "sha256": "85d76d90e1e3f8e6b3d1e5954b5db645403fa7fe3176674f886d22360a5d8758",
+      "compressed_sha256": "1cd5acbf093307096541bf704ef72bfd9f9ded9e73eb2f28301aeaf07dcc5c02"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-ancestry.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-ancestry.stdout.gz",
+      "bytes": 863682,
+      "sha256": "cbfa6a64953f71e257cdcb493f16dfb0b271e3c3472d4230778ce46238b7bba4",
+      "compressed_sha256": "ac5e1f76f08e33a201bd33aeb5bb79341a03b7a838135bb3e5c420e15e20bf6e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-runtime-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-runtime-clippy.stderr.gz",
+      "bytes": 779,
+      "sha256": "2853493510cad2f72b3aa7e237e9a13be217504c8c38635692205080cda8bfc2",
+      "compressed_sha256": "fcefb339a08598fd55d16334b3f3e271cbf1cb41721ec9cd0f8ee396bedc21cc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-runtime-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-runtime-clippy.stdout.gz",
+      "bytes": 200510,
+      "sha256": "1e1f010fc9b27583d4143f85d2529e3ad9899ad855dbb13afe86e428823a58fe",
+      "compressed_sha256": "83cc5829f851c348a33f7d668c6e4c9c7a545aff63b1fe72a14f0f6edb005d0a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-simd8-ancestry.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-simd8-ancestry.stderr.gz",
+      "bytes": 3521,
+      "sha256": "9e875c6bb374bd570b894113dd50c72b88a2691b86a1d03f58786b49b4822bdd",
+      "compressed_sha256": "e391c50095362095ec7c3dccba591f972ec5e0b4f10931f330381e9ec4e8eb2e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-simd8-ancestry.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-simd8-ancestry.stdout.gz",
+      "bytes": 864896,
+      "sha256": "1301ab89d2fc2539fd0e0db8e6e8b557c1c0c21ee77e9ba2a3bae3f6d36dab53",
+      "compressed_sha256": "447f6e12fffae970d230826d4223345786d5fac4fdfe32fe36c01508cb604a20"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-simd8-runtime-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-simd8-runtime-clippy.stderr.gz",
+      "bytes": 576,
+      "sha256": "8d9a89bd48b239806f19f61c9a2488b2410e755a6066d4a7f7d4e8655039e7fd",
+      "compressed_sha256": "d9bf092885c7abce9d658a574c2d944d9125fbcdeb5a27a1117bfdea3c57a036"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/fast-simd8-runtime-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/fast-simd8-runtime-clippy.stdout.gz",
+      "bytes": 201299,
+      "sha256": "7866a0348502a38cd911007a8e8c85cc493fc9ae492e2d95fba19cc2d946fca3",
+      "compressed_sha256": "80f8a29e6d86cf8a7ef0574fc30a167e427fe059a25e4f11ee50511a39c6a74b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/freeze.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/freeze.json.gz",
+      "bytes": 169694,
+      "sha256": "fdec4214456dc8747d0da5d070a09479fbc3475f7aa04bf9931fa0519a7b3416",
+      "compressed_sha256": "714592ce5b46a63bd4fc4d54d4954538e9a3b15bed2d702cefab96c28075f98e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/run.py",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/run.py.gz",
+      "bytes": 2276,
+      "sha256": "47bbad3f59780c1f7a1326c4d332ab1e1ce3213b8ba21e73c548b67d01c910b6",
+      "compressed_sha256": "5c7883245e5eff8d9a80bb6efcaa10dcd19a6e8a28bd03c300c477ab2b08333e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-ancestry-001/terminal.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-ancestry-001/terminal.json.gz",
+      "bytes": 62,
+      "sha256": "3a70767d4670f5112638eb65d1f051ca00d7b6c6d86ef6b264f749ff2de51697",
+      "compressed_sha256": "8860d4810692440bd6a04393941c552f84f674f5e8cca373c6fdc93a03064c13"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/commands.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/commands.json.gz",
+      "bytes": 21835,
+      "sha256": "32acee0e4b52a7f0af0c6a2c0e0b320aaf9ec1c0c37b779597bd97d1ec56d2df",
+      "compressed_sha256": "c3481aa6b7f2dca1c65557b204515327693bf0a74d4816f4eb15eba4f4a3f2f6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/deterministic-consumer-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/deterministic-consumer-clippy.stderr.gz",
+      "bytes": 186,
+      "sha256": "91be104a74647483685e204913f82a5811e58a8ce2b21b618e1067c83943d1a2",
+      "compressed_sha256": "ff93fb48eef978b00337ed7139a10e8397a65cf23d54920b73f77bbd345a9f04"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/deterministic-consumer-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/deterministic-consumer-clippy.stdout.gz",
+      "bytes": 402475,
+      "sha256": "5a17a4c122cf0d8d8254b437ea007fe5eb309288c9a322c77f0af63dac25055d",
+      "compressed_sha256": "7ffa2057dba8dde958938f203b350b9c3a12700d19c4563ceed374e7fb1c2c95"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/deterministic-consumers.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/deterministic-consumers.stderr.gz",
+      "bytes": 4719,
+      "sha256": "968078b90970bd3b216092edf732172bcdc5d928febd62ca0103b31bdfc3ff0e",
+      "compressed_sha256": "c9c363a707d4014669be709a55bd05844d802de80af05171336f0b9732a552ca"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/deterministic-consumers.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/deterministic-consumers.stdout.gz",
+      "bytes": 424835,
+      "sha256": "1664fde95da35c874b0032c30d20d28bd13abed855de195a5dd2a778703cc708",
+      "compressed_sha256": "b667ba208835f9805d704ccf43f3344314c0002a2bbd26bc3693644339cced2e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/deterministic-variant-save.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/deterministic-variant-save.stderr.gz",
+      "bytes": 216,
+      "sha256": "ebecd7d62ce27b34e94883d6ba10b00be7a41a7b90e6e3f6e3aadec17fb70005",
+      "compressed_sha256": "78db8f81aad01e06dce237a3652193dff2a5ad8a2c6ce04fde5c6d679c1461be"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/deterministic-variant-save.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/deterministic-variant-save.stdout.gz",
+      "bytes": 191201,
+      "sha256": "adfd7f43986e1e57680576d1f0ed3bff94954860e844350b853a830225593978",
+      "compressed_sha256": "3f91001492ca240d30855013631dd9167c9b555fe580107e4200b746c23471e7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-consumer-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-consumer-clippy.stderr.gz",
+      "bytes": 2081,
+      "sha256": "480fc533203d84dbc6998d366f912e1e6a7ecd049262e0f834b6013383b86656",
+      "compressed_sha256": "924f0e05d1b1c493f36b33dbcecc04bce941419d830b740139d8ce0e9dce499f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-consumer-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-consumer-clippy.stdout.gz",
+      "bytes": 399854,
+      "sha256": "e252f41fd630ec3527c190866573a031da6ad46a2be71d6f5ccec61fb7d50e07",
+      "compressed_sha256": "e0d81fe9d483db8ae8f32a0eeeba22592ed0000f74b9d8c85d2ccf9eed0aa13a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-consumers.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-consumers.stderr.gz",
+      "bytes": 4719,
+      "sha256": "cd32d13817bc8fc3247af620914f6a3b6a7c5dcd2158514c76094e5853cd6085",
+      "compressed_sha256": "049394692513bc76e98132544feb412758bb6f8adc90d4a54dedbd4bc0202593"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-consumers.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-consumers.stdout.gz",
+      "bytes": 423323,
+      "sha256": "bf1c67db996f1f2399076642fd2a537cfbfe667d17dc8bc7a5aef55710cb16c8",
+      "compressed_sha256": "283a8bd8c9cb3855db50724355d3eb855747d184d321e951df3add78402481da"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-simd8-consumer-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-simd8-consumer-clippy.stderr.gz",
+      "bytes": 1799,
+      "sha256": "640ccaeeb10173cc16f72351e990221790fcf81ce148323883c2813a0180d5ca",
+      "compressed_sha256": "57a6e54ea734c2871b1f0401470884b62aff50627d7b68fe4aaa1004f7973a1e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-simd8-consumer-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-simd8-consumer-clippy.stdout.gz",
+      "bytes": 401475,
+      "sha256": "d403d9969b32409fa9fb454967e691d6dd7ebf745d200a6d646cc0a890b4faa1",
+      "compressed_sha256": "11f210122f2e5f11f49853e633072dd21a63a977e30a02f3ecfda90ac442ec6b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-simd8-consumers.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-simd8-consumers.stderr.gz",
+      "bytes": 6332,
+      "sha256": "3950e0776ec03ef23da2a0f0bd6038f80eac6cbea3bb3c146c8c6cf0ed114b7b",
+      "compressed_sha256": "f5ecaad7827e94cc9ab2678d07318d2775d397acb1b0c141e525a9fd618830f2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-simd8-consumers.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-simd8-consumers.stdout.gz",
+      "bytes": 424277,
+      "sha256": "f81b92c6aecbf79fa81e148a0e91c7ac1c2dad3e80bba94e103d2dee62df92b2",
+      "compressed_sha256": "849102a0404838764702f0bf2ed0810d6bc14dc6e13106a3d451369c28770be0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-simd8-variant-save.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-simd8-variant-save.stderr.gz",
+      "bytes": 337,
+      "sha256": "5be888fbae9905a73ec6680e563b8b8a333f2a616001a65e0b52612ba617d8c7",
+      "compressed_sha256": "18cc929be05139462a58be9f4572896927ae59d1c10cd4c9341a78e52cef08c6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-simd8-variant-save.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-simd8-variant-save.stdout.gz",
+      "bytes": 191015,
+      "sha256": "bd28870db5815dfcc609cae84819942bd52650e7699191cc9d083784c7415ad3",
+      "compressed_sha256": "267e6b8827b9c1ecf6db3e1549b3c8d4e003cb90de5f9438170c56d535785217"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-variant-save.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-variant-save.stderr.gz",
+      "bytes": 337,
+      "sha256": "412446aebb7094644b8d56eba06d52567a26258012588c71bad55d2cf6e31ab5",
+      "compressed_sha256": "c0b5640ba0b33432ef5f7f75631ac9bbaaeb1631e75951a09aef938d968c3f86"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/fast-variant-save.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/fast-variant-save.stdout.gz",
+      "bytes": 190919,
+      "sha256": "a846677b0dc0eaf22b92498d803d58cfe3c37bf6b8e446a7bd32ee52b2e4e24d",
+      "compressed_sha256": "f3267efc4b0dd050b520d67342bce33a3a343e4a93a26cca67abcbfb2f878c10"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/freeze.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/freeze.json.gz",
+      "bytes": 158028,
+      "sha256": "b95f984ba5d9204cc84765cea363204e7c76b4b24d8fbac2bbd4c90b8ec85858",
+      "compressed_sha256": "7a9c6d3e97b7e7389f2d1591c057c979439bf647d95f39acaeb2648ea90d2e35"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/run.py",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/run.py.gz",
+      "bytes": 2488,
+      "sha256": "ff8c7a4f5abf9bed669c38d7001f4f359653783eeee96541f86e82601dde4290",
+      "compressed_sha256": "92e8cdf842d9c96df25acacb92d8ad442ecf403b70e4eb6324c52ea429291ddd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-003/terminal.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-003/terminal.json.gz",
+      "bytes": 62,
+      "sha256": "1cc181f740454c25108193555cd6930bb47d1c9c67fa3b48622a98922993e92d",
+      "compressed_sha256": "74b264c669679d0cd06b0d9612d4b7d7686a16857f02bfe947562dbabc115e64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/commands.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/commands.json.gz",
+      "bytes": 1635,
+      "sha256": "cf1edecbe1e8e7c9a0383ebdcdfe4f548d25d3d26b5693f891e04bcc42a5fc63",
+      "compressed_sha256": "a76b03683bd8257d6577290cf73046d0ba4afd045b0ac9729e7aac7622f7f84c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/deterministic.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/deterministic.stderr.gz",
+      "bytes": 10188,
+      "sha256": "14d33f6e45ff7e98356c76bd54052404d7f62eed0c65bea217659da6b0896de3",
+      "compressed_sha256": "d2a08d62ea461f597a2db4f97e25caca03d1efcdbea9c9ad2982067a37f8016e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/deterministic.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/deterministic.stdout.gz",
+      "bytes": 248097,
+      "sha256": "e3b13adf41f97c4d4697cab83365eb1fb04cc9cfc83f9d99fd21a260b6387b7c",
+      "compressed_sha256": "d6702d9ae515844cddad920608f007e8df28057a30dbfb65bc8371cb88dbbcd8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/fast.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/fast.stderr.gz",
+      "bytes": 993,
+      "sha256": "6a57c0657bd0000385b63cb41744135a3b0479488007455478a7b6a32b902d38",
+      "compressed_sha256": "1d01f9a611ce7b233afcffdfbb4a191290a4b3607558d846be4be34c111dfedc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/fast.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/fast.stdout.gz",
+      "bytes": 224984,
+      "sha256": "bf183e725fbd3f7540ecb1043ce123b28704b7ed5d9fc00ae8577392b3be2d33",
+      "compressed_sha256": "b7c4a124a3afd81917641cbb4cb63f5ebd9b825e772aa7164d88b3df2303f45f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/freeze.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/freeze.json.gz",
+      "bytes": 166885,
+      "sha256": "65091b5ca02804b26997f870aee982da0d8255cc05ae58ea0343268865a61f90",
+      "compressed_sha256": "b5f482a945f1ceae773aedb1afd9626a6d34d0386933f03f373e8981a9b7ad4b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/run.py",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/run.py.gz",
+      "bytes": 1605,
+      "sha256": "b0f535a0c4223011675fbfb5616f84bd9b38ee6cdcacd7f953baa75f3c8510d3",
+      "compressed_sha256": "e80fb9b820349309f89a962e02b23bed8473016237c299d672e1db0d12a71b02"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-001/terminal.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-001/terminal.json.gz",
+      "bytes": 64,
+      "sha256": "39519f4bee18b550f22c7418b93d3e4671c54a05afa920b1cc4cb7e64c0faffa",
+      "compressed_sha256": "19dacc087056097ee3fb9c8d469023f0838784c3af3a53eca3d41178a2ccf995"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/commands.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/commands.json.gz",
+      "bytes": 1685,
+      "sha256": "5436651792b25a1239942efd3264fc9e4cd50a44ee31beca0f8734b76c6fac59",
+      "compressed_sha256": "38a00af5caf27ac8fa473d7bd5bb7c68f880de5ac6a9d9685ae9f297a78ffbe6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/deterministic.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/deterministic.stderr.gz",
+      "bytes": 5022,
+      "sha256": "66aa9ae4ce9e7bc4b674acc2a128b07c7e8eb64b99707a0c0fc126144347ad17",
+      "compressed_sha256": "44bd99b56d82c5ef42c5238d9cab6e4a6283d624457922c39e5d9f2d3702a850"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/deterministic.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/deterministic.stdout.gz",
+      "bytes": 247955,
+      "sha256": "dae7f24781479bf151db5d0cdfc0905bbccf446110eac133d913861817abbb3e",
+      "compressed_sha256": "e2925fe2c3a4528f53e2ffea280751eba90b571d0c77dda7e9fbabe88f6ce0fd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/fast.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/fast.stderr.gz",
+      "bytes": 5255,
+      "sha256": "231aa04e27b4c75aea9fd16c6497037869671144761631dd0cc17d91ba157cbe",
+      "compressed_sha256": "26f93a5cf6179ef1291d5ff78d237d17cf6fe671d41622e3cd01a9c4c1516bc4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/fast.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/fast.stdout.gz",
+      "bytes": 247520,
+      "sha256": "b8f67fc777389dbc226681c1f029fd47176af84216a9ce48c16816b1ff33b4fa",
+      "compressed_sha256": "30420739efc727a2dcee8c50a67a8bb617666a1860bd5769741c1ad6e0e829b7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/freeze.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/freeze.json.gz",
+      "bytes": 167010,
+      "sha256": "a8824db3af68287d20bb1188d6c441c008ddd1b22d693437441c75c97666e51d",
+      "compressed_sha256": "188b6f4f2af66f8384de344d9e9a5109e685314509c86c3ec2fdc0a6f0ce04a2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/run.py",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/run.py.gz",
+      "bytes": 1622,
+      "sha256": "cd5db509a7b77adc4f5d65e3a58edb41caf82e3d8ae6e245fb8b993156c15425",
+      "compressed_sha256": "5aa3b0a366218e99e75502ec1214e205d0b611e75a80b9e6de7fd845fcbf7002"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-admission-002/terminal.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-admission-002/terminal.json.gz",
+      "bytes": 64,
+      "sha256": "2ba5c476891f1eae54f0bcf6ec90508966444fd684cba5dd2c8b87000da65bd4",
+      "compressed_sha256": "4426a9195be4d7ddd8642cfe4db4361d66a7aebf99ccff0f307253b953b924e4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/commands.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/commands.json.gz",
+      "bytes": 6002,
+      "sha256": "55def8434ee2ec83bbe1dfeec019c411bd7eb15739b78211226e47a7e8567e0b",
+      "compressed_sha256": "48be1d08d9c03e670fb2dbabd9a4f17af4ec3214d22fe9bcaf560c934a67e769"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/deterministic-consumer-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/deterministic-consumer-clippy.stderr.gz",
+      "bytes": 6486,
+      "sha256": "fea430d7dd08d18eda18fb1496a5e137f71bc146490b453c81115f91e23c87b1",
+      "compressed_sha256": "0be19bf6a4ac0cf2b27bb68249d75af8041b131e36d0841e80ebb161adb8e526"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/deterministic-consumer-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/deterministic-consumer-clippy.stdout.gz",
+      "bytes": 364451,
+      "sha256": "adbd786bfe5956e6fec1441eabbbceae99e526fe6931010cd9882e1f33754b87",
+      "compressed_sha256": "2c14bc7306d64a67cc15249d500c43e31a9f6ea68c2fdd38dd16de7edddbc358"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/deterministic-consumers.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/deterministic-consumers.stderr.gz",
+      "bytes": 13737,
+      "sha256": "b041103138cb76e013e3da170c1350672cef0a54000224861c6b3f5c665b63bc",
+      "compressed_sha256": "d28c1b858ceb38af21d01e45eadff08c4819c349e18772f8133fe74e945eb39e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/deterministic-consumers.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/deterministic-consumers.stdout.gz",
+      "bytes": 425081,
+      "sha256": "962968aefede29f929ec9bac5946b2e62e4e5e9919bd87267d634ce97bf1c26f",
+      "compressed_sha256": "82f74ce628ff732bc0dea1f33947ff7ed60416807e0fc2c59da7cd42f0ca0cc6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/deterministic-variant-save.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/deterministic-variant-save.stderr.gz",
+      "bytes": 337,
+      "sha256": "a6cb637f7224bd4b7abc780bfdae77ebb52b3709aa8e22b71b8e37492a950052",
+      "compressed_sha256": "28f20e2a01dc344f260fe9d9733c0ff0cf0a1855cd666425af884e604e7f629a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/deterministic-variant-save.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/deterministic-variant-save.stdout.gz",
+      "bytes": 191202,
+      "sha256": "525963292ee5f44f032b7cc2cd8fb73d43e82eb2b280b7708e8f2deb8117bfbc",
+      "compressed_sha256": "5cc521c81f54419d99a6699a7c22aacce483633123a82590301e8dc36aaa2741"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/freeze.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/freeze.json.gz",
+      "bytes": 157176,
+      "sha256": "f0a0132ede313f6d993a48dcdd52293c1a4d4c2b980555cce21ddb5b9e924330",
+      "compressed_sha256": "9273c717052f40ea961129688cec7fa74e5aaf473550789aa8176f62f28cea39"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/run.py",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/run.py.gz",
+      "bytes": 2488,
+      "sha256": "ff8c7a4f5abf9bed669c38d7001f4f359653783eeee96541f86e82601dde4290",
+      "compressed_sha256": "92e8cdf842d9c96df25acacb92d8ad442ecf403b70e4eb6324c52ea429291ddd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-001/terminal.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-001/terminal.json.gz",
+      "bytes": 64,
+      "sha256": "db8ca114f38804fc2700043b05fbeebcbc77f615b4f07742995e25d729d573f3",
+      "compressed_sha256": "abaa84d1fdb6da74732b6e6f8329e15c32bbe2fdbc96514469b18f3ca99a6ce5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/commands.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/commands.json.gz",
+      "bytes": 8520,
+      "sha256": "ff3215e869137e2d08ea1b9ecf4f1e1a43eaeb1c1660e32e552c250da5416c5b",
+      "compressed_sha256": "b237ee830655eb9a63c884b97c208107b1a3adc6240715ff89dc0cefa1a6336c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/deterministic-consumer-clippy.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/deterministic-consumer-clippy.stderr.gz",
+      "bytes": 424,
+      "sha256": "3bfbead4e9ed1ef5f34f36ba115b5a71ffd212a63001eafb4384dff1c0bd5326",
+      "compressed_sha256": "5b8d8b95c797137319c2ec1890b191f119a8b3d4f360c7d1510f6ae8f772d1cd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/deterministic-consumer-clippy.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/deterministic-consumer-clippy.stdout.gz",
+      "bytes": 402524,
+      "sha256": "ee0dc22b97fa775f714a5e3a382e6a4b6f9e404c5bd1f4dc974651d8aac44ba6",
+      "compressed_sha256": "a00abf74e1bea7b394dc16272f885a1f4934a5bf77608ab2d1ee26a9e9e56c02"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/deterministic-consumers.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/deterministic-consumers.stderr.gz",
+      "bytes": 4706,
+      "sha256": "b5a473a6f83c3ef27a82b8161859455a4969c3e2456753d5700e433eb1956e3e",
+      "compressed_sha256": "98d934d6cc9b6fb86ed28d2c5a88278454edbbc721e2e92aad116067acb897d6"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/deterministic-consumers.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/deterministic-consumers.stdout.gz",
+      "bytes": 424835,
+      "sha256": "c1890d0b8809a8006256903f6eaa1cadbb9940a701ecb734c41634a1502a7ea9",
+      "compressed_sha256": "11c1e958ec8a9301f9968ac2d4b4fabfc03bd9b855e527e33d394a927ad854c4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/deterministic-variant-save.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/deterministic-variant-save.stderr.gz",
+      "bytes": 216,
+      "sha256": "3d0553cf9aadc459a6c1e71ab44d401b91afbe921cf8447a77d13ae48d5eb871",
+      "compressed_sha256": "9509b15a4ba6a3962ac9ef92cb4514f8a5d3dc83b6316e8f911c70ec78ba23bc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/deterministic-variant-save.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/deterministic-variant-save.stdout.gz",
+      "bytes": 191201,
+      "sha256": "d77eba76b931ec744c4bac7b000c82ee045665c4c46a7bed8917e3b7f7da33c5",
+      "compressed_sha256": "b016a80a231dab2fc0a6b74895f1d2698a6eb1c543fc90d0134a58e469262fb4"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/fast-consumers.stderr",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/fast-consumers.stderr.gz",
+      "bytes": 6779,
+      "sha256": "71d5adf49e2d064006475fe530fed9d372055ea1f08e5777f689994c2ee8c171",
+      "compressed_sha256": "e2e8f2f50649a0bb03a6e76b23f4fbe0591ea6c96a4ad63565ecd0dccd0a7586"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/fast-consumers.stdout",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/fast-consumers.stdout.gz",
+      "bytes": 426942,
+      "sha256": "7cf5c5f3a40d036f3a61193c1d23adc9a5269dfe7441ca54774a40301dee06b8",
+      "compressed_sha256": "4303f0bfec41e82acf17cc9b4387f3899641147e9c2a403b4830c04bf8637012"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/freeze.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/freeze.json.gz",
+      "bytes": 157176,
+      "sha256": "c1f63e13b5803a37cdf1bfc9cb892b83d95bb675bdb2dfa730ff3eedc2213ab9",
+      "compressed_sha256": "35c7da0b51178d1cc9f1867e07f020e77211284f7c216ffb238bd0beddcec0d9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/run.py",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/run.py.gz",
+      "bytes": 2488,
+      "sha256": "ff8c7a4f5abf9bed669c38d7001f4f359653783eeee96541f86e82601dde4290",
+      "compressed_sha256": "92e8cdf842d9c96df25acacb92d8ad442ecf403b70e4eb6324c52ea429291ddd"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-mode-consumers-002/terminal.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-consumers-002/terminal.json.gz",
+      "bytes": 64,
+      "sha256": "db8ca114f38804fc2700043b05fbeebcbc77f615b4f07742995e25d729d573f3",
+      "compressed_sha256": "abaa84d1fdb6da74732b6e6f8329e15c32bbe2fdbc96514469b18f3ca99a6ce5"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/physics-mode-forwarding-source-20261012.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-mode-forwarding-source-20261012.json",
+      "bytes": 5902,
+      "sha256": "0afad07aa5f642c160b993a28e32ecd6482dd00994da0279fbf502ded0e88516"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/physics-feature-guard-root-20261012.json",
+      "path": "docs/spikes/evidence/physics-mode-admission/physics-feature-guard-root-20261012.json",
+      "bytes": 1144,
+      "sha256": "c1d91650b9d96478a209179074ab11bb0b632a690eb52b4e052234f5bb5c7a8a"
+    }
+  ],
+  "scope": "Compiled native physics forwarding and exact cooked/save admission only",
+  "limitations": [
+    "Project settings, mode-aware export and separate Play processes remain follow-on work.",
+    "No runtime source changed between final suite freezes; late test-helper and cross-variant-save regression additions are verified by consumers003.",
+    "CI profile Mac tests and compile checks do not satisfy shipping performance or reference-device gates.",
+    "The 8-lane fast build is an opt-in candidate; no measured target adoption.",
+    "Worlds which used physics still refuse production saves; trusted state probe is separate."
+  ]
+}

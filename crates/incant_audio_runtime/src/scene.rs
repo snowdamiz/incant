@@ -77,6 +77,17 @@ where
             Mixer::new(settings, buses)
         })
     }
+    /// Construct the owned master already suspended, before startup voices are
+    /// attached. The caller resumes only after its presentation/input boundary.
+    pub fn new_suspended(
+        world: &NativeWorld,
+        clips: Vec<ClipBinding>,
+        settings: AudioManagerSettings<B>,
+    ) -> Result<Self> {
+        Self::create(world, clips, !cfg!(target_arch = "wasm32"), |buses| {
+            Mixer::new_suspended(settings, buses)
+        })
+    }
     fn create(
         world: &NativeWorld,
         clips: Vec<ClipBinding>,
@@ -318,7 +329,8 @@ where
 }
 
 fn restart(a: &NativeAudioSource, b: &NativeAudioSource) -> bool {
-    a.clip != b.clip
+    a.transport_epoch != b.transport_epoch
+        || a.clip != b.clip
         || a.bus != b.bus
         || a.start_seconds != b.start_seconds
         || a.looping != b.looping

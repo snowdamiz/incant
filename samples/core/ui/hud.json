@@ -1,0 +1,38 @@
+{
+  "format": "incant-core-sample-hud",
+  "version": 1,
+  "about": "Screen-space HUD for the Core Sample. Widget IDs are '01CSWD' + the zero-padded index. Text is a string-table key plus arguments; the builder resolves it through the engine's localize() for the presented locale. Win/loss labels start parked in a zero-size container (clipped, unfocusable) and are shown by reparenting them into 'Result'. When status and progress do not fit on one row, the top bar wraps progress onto a second row, still end-aligned, so no label wraps inside its column.",
+  "fonts": ["inter", "arabic", "sc"],
+  "states": {
+    "playing": {"health": 3, "collected": 0, "objective": "hud.objective.collect", "result": null},
+    "collected": {"health": 2, "collected": 4, "objective": "hud.objective.exit", "result": null},
+    "won": {"health": 2, "collected": 4, "objective": "hud.objective.exit", "result": "won"},
+    "lost": {"health": 0, "collected": 0, "objective": "hud.objective.collect", "result": "lost"}
+  },
+  "widgets": [
+    {"index": 1, "name": "HUD", "role": "root", "parent": null,
+     "style": {"direction": "column", "padding": [22, 16, 22, 16]}},
+    {"index": 2, "name": "Top bar", "role": "container", "parent": 1,
+     "style": {"direction": "row", "wrap": true, "justify": "space_between", "align": "start", "gap": [24, 6]}},
+    {"index": 3, "name": "Status", "role": "container", "parent": 2,
+     "style": {"direction": "column", "align": "start", "gap": [0, 2], "grow": 1}},
+    {"index": 4, "name": "Health", "role": "label", "parent": 3,
+     "binding": "health", "text": {"key": "hud.health", "arguments": {"health": "$health"}}, "font_size": 22, "line_height": 28},
+    {"index": 5, "name": "Objective", "role": "label", "parent": 3,
+     "binding": "objective", "text": {"key": "$objective"}, "font_size": 17, "line_height": 22},
+    {"index": 6, "name": "Progress", "role": "container", "parent": 2,
+     "style": {"direction": "column", "align": "end", "gap": [0, 2], "grow": 1}},
+    {"index": 7, "name": "Samples", "role": "label", "parent": 6,
+     "binding": "collected", "text": {"key": "hud.samples", "arguments": {"collected": "$collected", "total": "$total"}}, "font_size": 22, "line_height": 28},
+    {"index": 8, "name": "Controls", "role": "label", "parent": 6,
+     "binding": null, "text": {"key": "hud.controls"}, "font_size": 12, "line_height": 16},
+    {"index": 9, "name": "Result", "role": "container", "parent": 1,
+     "style": {"direction": "column", "align": "center", "justify": "start", "grow": 1, "padding": [0, 26, 0, 0]}},
+    {"index": 10, "name": "Inactive results", "role": "container", "parent": 1,
+     "style": {"size": [{"pixels": 0}, {"pixels": 0}], "shrink": 0}},
+    {"index": 11, "name": "Won", "role": "label", "parent": 10,
+     "binding": "won", "text": {"key": "hud.won"}, "font_size": 40, "line_height": 48},
+    {"index": 12, "name": "Lost", "role": "label", "parent": 10,
+     "binding": "lost", "text": {"key": "hud.lost"}, "font_size": 40, "line_height": 48}
+  ]
+}

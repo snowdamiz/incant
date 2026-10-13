@@ -1,0 +1,77 @@
+{
+  "status": "accepted-source-scope",
+  "findings": [],
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/cooked-sprites-source-002/freeze.json",
+  "freeze_sha256": "b1d62e4e466f490fb50710edf6a106d5b0c88075eb1a9ca6e52baf014e40010f",
+  "sources": [
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "23f1786ab418d3cf4072098868a5ff876e12b4b9451f94fd96408b9082de4e21"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "9b645b8e8754678ebf8de955118ddc293d5f7739b55454c089a4fae6053614ba"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "1d2df0753ec0b4cb86e87aa17d6b2ef410f8b0a04450bac19ccac6ce98db3903"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "8be33003a3a5e99b4e7d24333cda8a3944437d6c19e7b7dfffa3e19ebcfb9a08"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "sha256": "72979887f58f8cd1f8be4abdfe05e56c5c878b94ee5d9429263f255103fe0be2"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/mod.rs",
+      "sha256": "5d230429f683523d24f12ce679575457dc14d5e9e45628fb3bcc48d8a33837c8"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "sha256": "e199e147197d7f2e09e330c2b847639ef1cb4d72f66dc78feb43a7494c439477"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "sha256": "44da27205468a4d415b59ae42b3c9e934b324cbad4ec4aa833c03accf97036c5"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "sha256": "7fc851b8c2a955dca02fd1da849e210ca92084e741af409d74e38ecedc056c82"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/geometry.rs",
+      "sha256": "36cafe36a701e03e357afcf3a64bb78665bbabb893742d2c18d3f0d2ae2984b3"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/shader.rs",
+      "sha256": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0"
+    },
+    {
+      "path": "crates/incant_render/src/sprites/shader/cooked.rs",
+      "sha256": "44d17a8e89bacbebfe59a4848664efddbffbf9a2290cda4944ee3fe7804ed1e1"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "sha256": "2dd463bc901b31a3b76becf1124380fb24dd3f1481e9dbc254780263bae0368f"
+    }
+  ],
+  "reviewed": [
+    "All thirteen changed inputs including actual Sprite IO/resource validator, native emission maps, private bundle/host layout validation, renderer pipeline hook, default/Wasm fallback and mutation tests",
+    "Pinned wgpu-hal29 Metal vertex buffer mapping and lengths allocation, DX12 texture and sampler-index SRV placement",
+    "Unchanged sprite WGSL and geometry/premultiplied-alpha/cull/depth/blend settings"
+  ],
+  "wgsl_sha256": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+  "conclusions": [
+    "Fixed builtin only; no project shader load path",
+    "Vertex position stride12 slot15 and attributes stride52 slot14 use ByVertex and match host offsets/scalar types; strict uint/flat varying contract",
+    "Camera uniform slot0 with vertex lengths slot1; texture/sampler indices match shader-visible host layouts; explicit unsupported backend/feature errors",
+    "Default feature behavior and WGSL remain intact; opt-in native stages use bounded lowering and existing validated artifact path"
+  ],
+  "limits": [
+    "Read-only source review; no independent compiler/test execution",
+    "No GPU execution, appearance or device gate",
+    "Test001 GetDimensions assertion failure and002 image.Load correction noted as producer evidence, not a runtime backend result"
+  ]
+}

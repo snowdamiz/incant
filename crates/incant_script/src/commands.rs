@@ -11,6 +11,8 @@ use std::{cell::RefCell, rc::Rc};
 #[derive(Default)]
 struct State {
     active: bool,
+    restart_enabled: bool,
+    restarts: usize,
     locales: usize,
     failure: Option<ScriptError>,
     queue: FrameCommands,
@@ -20,9 +22,19 @@ struct State {
 pub(crate) struct TickCommands(Rc<RefCell<State>>);
 
 impl TickCommands {
+    pub fn new(restart_enabled: bool) -> Self {
+        Self(Rc::new(RefCell::new(State {
+            restart_enabled,
+            ..State::default()
+        })))
+    }
     pub fn expose<'js>(&self, ctx: &Ctx<'js>) -> rquickjs::Result<Object<'js>> {
         let object = Object::new_proto(ctx.clone(), None)?;
         for name in [
+            "requestRestart",
+            "setUiText",
+            "setUiDisabled",
+            "setText",
             "setLocale",
             "spawn",
             "despawn",
@@ -30,10 +42,14 @@ impl TickCommands {
             "setVelocity",
             "controlFlipbook",
             "controlAnimation",
+            "controlRootMotion",
             "setAnimationIk",
             "setAnimationParameter",
             "selectAnimationState",
             "setAudioPlaying",
+            "stopAudio",
+            "restartAudio",
+            "seekAudio",
             "setAudioGain",
             "setAudioBusGain",
         ] {
@@ -48,7 +64,7 @@ impl TickCommands {
                             Some("structural commands belong to their active tick only")
                         } else if state.failure.is_some() {
                             Some("structural command buffer already failed")
-                        } else if state.queue.len() == MAX_FRAME_COMMANDS
+                        } else if state.queue.len() + state.restarts == MAX_FRAME_COMMANDS
                             || (name == "setLocale" && state.locales == 64)
                         {
                             state.failure = Some(ScriptError::InputLimit);
@@ -63,6 +79,25 @@ impl TickCommands {
                     if let Some(message) = rejection {
                         return Err(Exception::throw_type(&ctx, message));
                     }
+                    if name == "requestRestart" {
+                        let mut state = state.borrow_mut();
+                        if !state.restart_enabled {
+                            state.failure = Some(ScriptError::SessionRequestsUnsupported);
+                            return Err(Exception::throw_type(
+                                &ctx,
+                                "host does not accept session restart requests",
+                            ));
+                        }
+                        if !args.0.is_empty() {
+                            state.failure = Some(ScriptError::CommandInput);
+                            return Err(Exception::throw_type(
+                                &ctx,
+                                "requestRestart takes no arguments",
+                            ));
+                        }
+                        state.restarts += 1;
+                        return Ok(());
+                    }
                     let command = match parse(&ctx, name, &args.0) {
                         Ok(command) => command,
                         Err(error) => {
@@ -76,6 +111,11 @@ impl TickCommands {
                     let rejected = {
                         let mut state = state.borrow_mut();
                         if !state.active || state.failure.is_some() {
+                            true
+                        } else if state.restarts != 0
+                            && state.queue.len() + state.restarts == MAX_FRAME_COMMANDS
+                        {
+                            state.failure = Some(ScriptError::InputLimit);
                             true
                         } else if let Err(error) = state.queue.push(command) {
                             state.failure = Some(ScriptError::Structural(error));
@@ -104,13 +144,15 @@ impl TickCommands {
     pub fn revoke(&self) {
         self.0.borrow_mut().active = false;
     }
-    pub fn take(&self) -> Result<FrameCommands, ScriptError> {
+    pub fn take(&self) -> Result<(FrameCommands, Option<crate::SessionRequest>), ScriptError> {
         self.revoke();
         let mut state = self.0.borrow_mut();
         if let Some(error) = state.failure.take() {
             return Err(error);
         }
-        Ok(std::mem::take(&mut state.queue))
+        let request = (state.restarts != 0).then_some(crate::SessionRequest::Restart);
+        state.restarts = 0;
+        Ok((std::mem::take(&mut state.queue), request))
     }
 }
 
@@ -128,7 +170,18 @@ fn parse<'js>(
     name: &str,
     args: &[Value<'js>],
 ) -> rquickjs::Result<StructuralCommand> {
-    if matches!(name, "setAudioPlaying" | "setAudioGain" | "setAudioBusGain") {
+    if matches!(name, "setUiText" | "setUiDisabled" | "setText") {
+        return crate::hud::parse(ctx, name, args);
+    }
+    if matches!(
+        name,
+        "setAudioPlaying"
+            | "setAudioGain"
+            | "setAudioBusGain"
+            | "stopAudio"
+            | "restartAudio"
+            | "seekAudio"
+    ) {
         return crate::audio_commands::parse(ctx, name, args);
     }
     if matches!(name, "setAnimationParameter" | "selectAnimationState") {
@@ -136,6 +189,9 @@ fn parse<'js>(
     }
     if name == "setAnimationIk" {
         return crate::animation_ik::parse(ctx, args);
+    }
+    if name == "controlRootMotion" {
+        return crate::root_motion::parse(ctx, args);
     }
     if name == "controlAnimation" {
         return crate::animation_commands::parse(ctx, args);

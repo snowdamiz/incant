@@ -1,0 +1,39 @@
+   Compiling incant_profile v0.0.1 (/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant/crates/incant_profile)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.49s
+     Running unittests src/lib.rs (/tmp/incant-cpu-profiler-target/debug/deps/incant_profile-20b616525bc1b5bd)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/disabled.rs (/tmp/incant-cpu-profiler-target/debug/deps/disabled-a39627eb55d62574)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/summary.rs (/tmp/incant-cpu-profiler-target/debug/deps/summary-8bce70dff9c98256)
+
+running 4 tests
+test heap_metrics_are_vm_samples_and_rust_requested_sizes_are_separate ... FAILED
+test nested_thread_zones_and_failure_cleanup_are_observable ... ok
+test numeric_source_bound_drops_excess_without_unbounded_registry_or_hot_allocations ... ok
+test stale_scope_and_old_worker_cannot_write_into_replacement_capture ... ok
+
+failures:
+
+---- heap_metrics_are_vm_samples_and_rust_requested_sizes_are_separate stdout ----
+
+thread 'heap_metrics_are_vm_samples_and_rust_requested_sizes_are_separate' (5401362) panicked at crates/incant_profile/tests/summary.rs:135:5:
+assertion `left == right` failed
+  left: 4572
+ right: 4096
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    heap_metrics_are_vm_samples_and_rust_requested_sizes_are_separate
+
+test result: FAILED. 3 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `-p incant_profile --test summary`

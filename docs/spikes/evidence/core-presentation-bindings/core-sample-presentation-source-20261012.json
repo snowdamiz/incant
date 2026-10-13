@@ -1,0 +1,24 @@
+{
+  "kind": "independent-source-review",
+  "reviewer": "astra/native_wasm_export",
+  "base": "2de9812a",
+  "current_head": "2de9812aa6b101ccce49a1ca55e0f80df7f43e9f",
+  "files": {
+    "samples/core/gameplay.ts": "6901e09d862745a9408bdcbf725ee6bc58da6315f05a52edbec991021210c00b",
+    "samples/core/verify_presentation.py": "fc374493d485f224c0112f218c6926b04f75fc867a2e16b42720cb69b5e6a179"
+  },
+  "accepted": true,
+  "findings": [],
+  "reviewed": [
+    "Optional distinct HUD/audio bindings fail closed for unknown keys and invalid stable identities. Existing gameplay state/control paths are retained.",
+    "Display cache is disposable and refreshes text/parent ownership on fresh VM or locale changes; gameplay progress stays in explicit persisted state. Parent reassignment is only on initialization/phase change, independent of locale.",
+    "Pickup/damage/terminal audio cues compare new copied Progress to prior Progress. Terminal music stop and win/loss restart occur only at the state edge; fresh VM with restored state does not replay past cues.",
+    "Helper observes actual pre-command HUD declarations, calls unmodified behavior, and queues an explicit locale change after tick50. Its checks correctly expect initial Pending at tick1, changed text at tick2, and French text at tick52.",
+    "Helper uses public import/command transactions with Undo/Redo/reopen, ordinary exporter and package player; deletes only its private authored inputs and maps; checks gameplay, localized HUD, terminal parent ownership, repeat logs and PCM."
+  ],
+  "qualifications": [
+    "Read-only source audit; no compilation or execution performed by reviewer. Active shipping003 remains pending and is not accepted by this receipt.",
+    "PCM repeat plus terminal silence checks deterministic output and music stop; the helper does not independently count every pickup/damage/win/loss transport epoch. Per-cue once semantics here were source-reviewed, not separately measured.",
+    "Physics session checkpoints remain unsupported; cache/reset reasoning does not claim a successful gameplay save/load proof. No rendered/visual or device acceptance."
+  ]
+}

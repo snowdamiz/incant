@@ -1,0 +1,97 @@
+{
+  "adapter": {
+    "backend": "Metal",
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro"
+  },
+  "captures": [
+    {
+      "accepted_frames": 1,
+      "capture": "t1",
+      "png": "t1.png",
+      "pointer": null,
+      "rgba_sha256": "cb78a174fc9a1ba8a27816a9b8bccdfebb3af3e406e0ef7bf57ff064b6fda1ba",
+      "scene_stats": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 3,
+        "model_entities": 3,
+        "model_triangles": 36,
+        "primitive_instances": 3,
+        "sprite_entities": 0,
+        "text_entities": 22,
+        "text_glyph_quads": 327,
+        "text_gpu_bytes": 255638,
+        "text_missing_glyphs": 0,
+        "tile_cells": 0,
+        "tilemap_entities": 0
+      },
+      "startup_uploads": {
+        "text_atlas_textures": 1,
+        "text_glyph_buffers": 1,
+        "ui_atlas_textures": 0,
+        "ui_quad_buffers": 0
+      },
+      "step": 0,
+      "tick": 1,
+      "ui": null,
+      "uploads_since_startup": {
+        "text_atlas_textures": 0,
+        "text_glyph_buffers": 0,
+        "ui_atlas_textures": 0,
+        "ui_frame_writes": 0,
+        "ui_quad_buffers": 0
+      }
+    },
+    {
+      "accepted_frames": 61,
+      "capture": "t61",
+      "png": "t61.png",
+      "pointer": null,
+      "rgba_sha256": "07e7a633eb2c0cfb8323391e210eed48d564d99cd23a23935cf7e51d3abd2f9f",
+      "scene_stats": {
+        "diagnostic_entities": 0,
+        "model_draw_calls": 3,
+        "model_entities": 3,
+        "model_triangles": 36,
+        "primitive_instances": 3,
+        "sprite_entities": 0,
+        "text_entities": 22,
+        "text_glyph_quads": 327,
+        "text_gpu_bytes": 255638,
+        "text_missing_glyphs": 0,
+        "tile_cells": 0,
+        "tilemap_entities": 0
+      },
+      "startup_uploads": {
+        "text_atlas_textures": 1,
+        "text_glyph_buffers": 1,
+        "ui_atlas_textures": 0,
+        "ui_quad_buffers": 0
+      },
+      "step": 60,
+      "tick": 61,
+      "ui": null,
+      "uploads_since_startup": {
+        "text_atlas_textures": 0,
+        "text_glyph_buffers": 0,
+        "ui_atlas_textures": 0,
+        "ui_frame_writes": 0,
+        "ui_quad_buffers": 0
+      }
+    }
+  ],
+  "failed": false,
+  "final_tick": 61,
+  "format": "incant-0063-ui-text-review",
+  "guest_logs": [],
+  "scope": "composed-game offscreen frames from one cooked scene and its caches; no window, OS input or presentation",
+  "size": [
+    960,
+    540
+  ],
+  "steps": 61,
+  "target_format": "Rgba8UnormSrgb",
+  "ui_viewport": null
+}

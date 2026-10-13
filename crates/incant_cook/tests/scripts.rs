@@ -66,3 +66,47 @@ fn cook_never_executes_project_code_or_interprets_names_as_rust() {
     );
     assert!(cook_script("a.js", "exports.default = {", None, artifact::TARGET).is_err());
 }
+
+#[test]
+fn reviewed_mobile_destination_is_explicit_and_bound_to_fresh_source() {
+    let native = cook_script("mobile.js", SOURCE, None, artifact::TARGET).unwrap();
+    let native: serde_json::Value = serde_json::from_str(&native.symbol_manifest).unwrap();
+    for target in [
+        "aarch64-apple-ios",
+        "aarch64-apple-ios-sim",
+        "aarch64-linux-android",
+    ] {
+        if artifact::TARGET == "aarch64-apple-darwin"
+            && artifact::BytecodeAbi::current().default_c_flags
+        {
+            let cooked = cook_script("mobile.js", SOURCE, None, target).unwrap();
+            let m: serde_json::Value = serde_json::from_str(&cooked.symbol_manifest).unwrap();
+            assert_eq!(m["target"], target);
+            assert_eq!(m["producer_target"], artifact::TARGET);
+            assert_eq!(m["bytecode_abi"], native["bytecode_abi"]);
+            assert_eq!(m["build_id"], native["build_id"]);
+            assert_eq!(m["bytecode_sha256"], native["bytecode_sha256"]);
+            assert_eq!(m["hardening_sha256"], native["hardening_sha256"]);
+            assert!(
+                cooked
+                    .rust_module
+                    .contains(&format!("target: {target:?}.into()"))
+            );
+        } else {
+            assert!(cook_script("mobile.js", SOURCE, None, target).is_err());
+        }
+    }
+    // Architecture resemblance and source inspection do not admit an untested runtime.
+    for target in [
+        "x86_64-linux-android",
+        "armv7-linux-androideabi",
+        "x86_64-apple-ios",
+        "aarch64-apple-tvos",
+        "aarch64-apple-ios-wrong",
+    ] {
+        assert!(matches!(
+            cook_script("mobile.js", SOURCE, None, target),
+            Err(ScriptCookError::CrossTarget { .. })
+        ));
+    }
+}

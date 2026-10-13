@@ -1,0 +1,19 @@
+{
+  "root": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+  "engine_freeze": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-source-004/freeze.json",
+  "engine_freeze_sha256": "1eb27298a911c757bfb4fdc79504e3aaba00a55fedf8125ba15c9a1fdd3ba034",
+  "sources": [
+    {
+      "path": "tools/probes/native-cpu-profile.py",
+      "sha256": "abd6ea761d8889c7d864c3784ae7a01531aea8abe5c8b4f670863237a704d9a7",
+      "bytes": 17064,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-001/tools/probes/native-cpu-profile.py"
+    },
+    {
+      "path": "tools/probes/native-cpu-profile/behavior.ts",
+      "sha256": "a4156aa4502058bde76f7a7e39afa795951a1ef2567b220057323f6a749adbea",
+      "bytes": 894,
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-helper-001/tools/probes/native-cpu-profile/behavior.ts"
+    }
+  ]
+}

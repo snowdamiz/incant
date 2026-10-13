@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-12T22:50:14.746685+00:00",
+  "accepted": true,
+  "manifest_sha256": "3a46a16b399854003c2cc967182a7c942ee36b8c08dbfa97ed44bdab2865f2c6",
+  "reviewed_head": "c1607ca849cc2f403c4f337296bc55b6057d321d",
+  "source_files": 7,
+  "retained_artifacts": 43,
+  "current_checks": 15,
+  "freeze_inputs": 1883,
+  "exact_producer_inputs": 1526,
+  "package_replays": 2,
+  "findings": [],
+  "limits": [
+    "Existing producer Rust/actual target compiler/fresh shipping evidence reused explicitly; no current Rust build or cold shipping export.",
+    "New immutable-package CPU replays preserve prior binary/source identity; no fresh current-main shipping binary claim.",
+    "Selected Linux/Windows normal graphs are read-only CPU dependency checks, not hosted compiler/device execution.",
+    "Movement fixture contains no active physics bodies; no solver parity/speedup, editor worker selection, physics-save, GPU or phase claim."
+  ]
+}

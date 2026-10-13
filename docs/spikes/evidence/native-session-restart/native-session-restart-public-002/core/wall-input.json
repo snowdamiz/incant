@@ -1,0 +1,49 @@
+{
+  "format": "incant-input",
+  "version": 1,
+  "tick_rate": 60,
+  "start_tick": 0,
+  "ticks": 210,
+  "frames": [
+    {
+      "tick": 1,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 60,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyS",
+          "down": true
+        }
+      ]
+    },
+    {
+      "tick": 120,
+      "events": [
+        {
+          "type": "key",
+          "code": "KeyS",
+          "down": false
+        },
+        {
+          "type": "key",
+          "code": "KeyD",
+          "down": true
+        }
+      ]
+    }
+  ]
+}

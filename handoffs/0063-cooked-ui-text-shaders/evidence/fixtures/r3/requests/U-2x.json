@@ -1,0 +1,1 @@
+{"camera": "00000000000000000000000000030c80", "format": "rgba8unorm-srgb", "size": [960, 540], "ui_viewport": [480, 270], "steps": [{"keys": [["Tab", true]]}, {"keys": [["Tab", false]], "capture": "focus"}]}

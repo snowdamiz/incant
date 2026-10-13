@@ -53,6 +53,12 @@ fn typed_controls_preserve_declarations_and_compose_in_order_with_numeric_comman
 #[test]
 fn invalid_controls_refuse_every_change_and_retain_the_submitted_queue() {
     for bad in [
+        control(2, AudioControl::Seek(f64::NAN)),
+        control(2, AudioControl::Seek(f64::INFINITY)),
+        control(2, AudioControl::Seek(-0.001)),
+        control(2, AudioControl::Seek(3600.000001)),
+        control(1, AudioControl::Stop),
+        control(3, AudioControl::Restart),
         control(2, AudioControl::SourceGain(f32::NAN)),
         control(1, AudioControl::BusGain(f32::INFINITY)),
         control(2, AudioControl::SourceGain(25.)),
@@ -80,6 +86,81 @@ fn invalid_controls_refuse_every_change_and_retain_the_submitted_queue() {
         assert_eq!(audio(&world), before);
         assert_eq!(world.snapshot(), snapshot);
     }
+}
+
+#[test]
+fn transport_requests_are_ordered_repeatable_and_survive_world_save() {
+    let mut world = NativeWorld::new(scene(false, true, true));
+    for (controls, epoch, seconds, playing) in [
+        (
+            vec![
+                AudioControl::Stop,
+                AudioControl::Restart,
+                AudioControl::Seek(0.5),
+            ],
+            3,
+            0.5,
+            true,
+        ),
+        (
+            vec![AudioControl::SetPlaying(false), AudioControl::Seek(0.5)],
+            4,
+            0.5,
+            false,
+        ),
+        (
+            vec![AudioControl::Restart, AudioControl::Stop],
+            6,
+            0.,
+            false,
+        ),
+        (
+            vec![AudioControl::Restart, AudioControl::Restart],
+            8,
+            0.,
+            true,
+        ),
+    ] {
+        world
+            .apply(&mut queue(
+                controls.into_iter().map(|c| control(2, c)).collect(),
+            ))
+            .unwrap();
+        let nodes = audio(&world);
+        let source = nodes[1].source.as_ref().unwrap();
+        assert_eq!(
+            (source.transport_epoch, source.start_seconds, source.playing),
+            (epoch, seconds, playing)
+        );
+        let bytes = world.save_bytes().unwrap();
+        let restored = NativeWorld::from_save_bytes(&bytes).unwrap();
+        assert_eq!(audio(&restored), nodes);
+        assert_eq!(restored.save_bytes().unwrap(), bytes);
+    }
+}
+
+#[test]
+fn exhausted_transport_epoch_refuses_without_committing_numeric_or_audio_prefix() {
+    let mut world = NativeWorld::new(scene(false, true, true));
+    let mut node = source(false, true, true);
+    node.source.as_mut().unwrap().transport_epoch = u64::MAX;
+    world
+        .apply(&mut queue(vec![StructuralCommand::SetAudio {
+            entity: id(2),
+            audio: Some(node),
+        }]))
+        .unwrap();
+    let before = world.save_bytes().unwrap();
+    let mut commands = queue(vec![
+        control(1, AudioControl::BusGain(-9.)),
+        control(2, AudioControl::Restart),
+    ]);
+    assert!(matches!(
+        world.apply(&mut commands),
+        Err(RuntimeError::GenerationOverflow)
+    ));
+    assert_eq!(commands.len(), 2);
+    assert_eq!(world.save_bytes().unwrap(), before);
 }
 #[test]
 fn controls_use_final_declarations_and_invalid_final_source_or_bus_is_atomic() {

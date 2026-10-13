@@ -3,6 +3,11 @@
 //! committed spatial extraction. Mixer/render hosts and authoring stay separate.
 mod animation;
 mod animation_binary;
+mod animation_step;
+mod root_motion;
+pub use root_motion::{
+    NativeRootMotion, RootMotionClockSnapshot, RootMotionControl, RootMotionSnapshot,
+};
 mod ik;
 mod ik_binary;
 pub use ik::{
@@ -100,6 +105,8 @@ pub use physics_2d::CookedPhysics2D;
 pub use physics_queries::{NativeQueries, QueryError};
 pub use save::{MAX_SAVE_BYTES, SaveError};
 pub use scene::{CookedEntity, CookedScene, SceneError, StableId};
+mod physics_variant;
+pub use physics_variant::{PHYSICS_VARIANT, PhysicsMode, PhysicsVariant, require_physics_mode};
 pub use world::{EntitySnapshot, NativeWorld, RuntimeError};
 pub use world_identity::WorldIdentity;
 
@@ -109,7 +116,9 @@ pub use spatial::{
 };
 pub use spatial_view::{SpatialNode, SpatialView};
 
+mod hud;
 mod text;
+pub use hud::{MAX_HUD_COMMAND_BYTES, MAX_HUD_COMMANDS, TextControl, UiControl};
 mod text_binary;
 pub use text::{
     CookedText, FontAssetRef, MAX_SCENE_TEXT_BYTES, MAX_TEXT_BYTES, MAX_TEXT_FONTS, MAX_TEXT_NODES,

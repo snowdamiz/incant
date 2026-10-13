@@ -24,3 +24,24 @@ third_party/cosmic-text/INCANT_PATCH.diff whitespace=-blank-at-eol
 
 # Preserve published Kira sources/licenses, including original CRLF whitespace.
 third_party/kira/** -text whitespace=-blank-at-eol,cr-at-eol
+
+# Preserve raw restart evidence logs, including intentional terminal blank lines.
+docs/spikes/evidence/native-session-restart/**/*.log -text whitespace=-blank-at-eof
+# Preserve the leading space on blank unified-diff context lines.
+docs/spikes/evidence/native-restart-main179/integration-manifest.patch -text whitespace=-blank-at-eol
+
+# Preserve the upstream Core font license, including its original trailing space.
+samples/core/art/fonts/OFL-NotoSansSC.txt whitespace=-blank-at-eol
+
+# Preserve exact reviewed profiler raw logs with terminal blank lines.
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/default-player-002.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/default.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/feature-unification-green.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/player.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/profile-behavior-002.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/profile-behavior-003.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/profile-initial.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/script.log -text whitespace=-blank-at-eof
+docs/spikes/evidence/native-cpu-profiling/native-cpu-profiler-checks-001/transport-unification.log -text whitespace=-blank-at-eof
+# Preserve the leading space on the retained source-relevance diff context lines.
+docs/spikes/evidence/native-cpu-profiler-main194/source-relevance.patch -text whitespace=-blank-at-eol

@@ -34,7 +34,7 @@ fn authored_nested_grid_cooks_in_postorder_and_survives_source_deletion() {
     p.validate().unwrap();
     let resources = load_project_animation_resources(&p, &sid, root.path()).unwrap();
     let bytes = cook_scene_with_resources(&p, &sid, &Default::default(), &resources).unwrap();
-    assert_eq!(&bytes[8..12], &15u32.to_le_bytes());
+    assert_eq!(&bytes[8..12], &scene_format(15).to_le_bytes());
     // Authored clip bounds are checked against the captured model, including
     // leaves that have zero weight at this parameter value.
     p.scenes

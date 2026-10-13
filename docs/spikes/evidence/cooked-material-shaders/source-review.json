@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "reviewer": "astra/runtime_review",
+  "at": "2026-10-13T00:54:48.332334+00:00",
+  "decision": "accepted_source_only",
+  "findings": [],
+  "freeze": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-source-001/freeze.json",
+    "sha256": "bbaefa71d809e522f5a788168e2b017e9e0bb7a07e6a4a1bf4812e52894c7c47"
+  },
+  "root": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant",
+  "base": "91b70493e29fda3164bae190ebb88ec918514542",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 251963,
+      "sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 3374,
+      "sha256": "c01e56676d729e7b6da4a0b80cee83056ab091ca695e3b3817e76f7419b742a4"
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "bytes": 2236,
+      "sha256": "1dd3fe0892d9200af96ce9eb74c1e7b53272aafe667f8b7d7a4661ac85fc0930"
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "bytes": 4826,
+      "sha256": "01b23d0be22e07c40a923c66a495aaa8c9e428d5ebb583f910bee2dbc9d8f51c"
+    },
+    {
+      "path": "crates/incant_render/src/environment/mod.rs",
+      "bytes": 8764,
+      "sha256": "a2a950cd1af81e84fa2c0c616c54a876b9c53d8dd3eedd9f2091a246f21dd2e6"
+    },
+    {
+      "path": "crates/incant_render/src/geometry_shader.rs",
+      "bytes": 2474,
+      "sha256": "ff658bf24da9b38158dd6153eb54432da4467ef09648aa6c1ae448c662645587"
+    },
+    {
+      "path": "crates/incant_render/src/geometry_shader/cooked.rs",
+      "bytes": 6242,
+      "sha256": "44480701a0f8bee4444a6da7ddf0160e372f781f1cc321a8779c61357075145b"
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "bytes": 17022,
+      "sha256": "d5dcdc731a6cc4568c616956539a81cd280c2267916a0fb662cd39fca0725179"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "bytes": 15312,
+      "sha256": "f6e72c247ec86aa0ba2a0124ff84b3a705d2d5cefba85f0d1181b6875f5f4baf"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/scene.rs",
+      "bytes": 11038,
+      "sha256": "93a9798faf1b44a67a5ed87bae826478f346d0eadeb48fbfc0f80c0c11da6a15"
+    },
+    {
+      "path": "crates/incant_render/src/lighting/shade.wgsl",
+      "bytes": 3898,
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad"
+    },
+    {
+      "path": "crates/incant_render/src/material_pipeline.rs",
+      "bytes": 3554,
+      "sha256": "61319e86dc2dc0ea871550d07e185dd338a45af99110679ba7ff40659469560c"
+    },
+    {
+      "path": "crates/incant_render/src/material_shader.rs",
+      "bytes": 4229,
+      "sha256": "b58f8d86d3acd0db8419ab43af28fd1b3067006e1e91a65d5f82a27ad7d43fa9"
+    },
+    {
+      "path": "crates/incant_render/src/materials.rs",
+      "bytes": 13616,
+      "sha256": "1988f3b40e2eedf91b14d0bd91f10b1f1b3952c915011710e4fef7382a66d551"
+    },
+    {
+      "path": "crates/incant_render/src/model_draw.rs",
+      "bytes": 6973,
+      "sha256": "bae8055bac5246e608357bf76d3c4a4ccc5d626ca6ac233063c100ea9242be86"
+    },
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "bytes": 4670,
+      "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b"
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "bytes": 2576,
+      "sha256": "add0ae37b94e3f279bea0f1384bae7ae925a928b15c84d0675f509aae4616237"
+    },
+    {
+      "path": "crates/incant_render/src/shader.rs",
+      "bytes": 345,
+      "sha256": "9aeadf08eae040fb3d955cbf7d93b1e059add0fee17ebcfbe5356de133587dd5"
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "bytes": 4815,
+      "sha256": "fdfa44e416827890eead023bd5960bea4a04c203b2a87b7ec0dd48648b5a296f"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/mod.rs",
+      "bytes": 8305,
+      "sha256": "67a6347b8cf69f55c6f3851821c85337e2744c9d3db0690758132ca22545c25c"
+    },
+    {
+      "path": "crates/incant_render/src/shadows/shade.wgsl",
+      "bytes": 1495,
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4"
+    },
+    {
+      "path": "crates/incant_shader_cook/Cargo.toml",
+      "bytes": 371,
+      "sha256": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+      "bytes": 8570,
+      "sha256": "ac8627d82d4ace892326a2925bf876fe090370458aedd53c75849aa5bde225e3"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+      "bytes": 13559,
+      "sha256": "945b61562075231d02b608be74a6d6093a13298b3462e2ead76744229510d351"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/material.rs",
+      "bytes": 9577,
+      "sha256": "c83cca8d69cfdef9c9f24e2d1461e81c2bfcb78f1616f8b095a144fb3dfbadd9"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/material_emit.rs",
+      "bytes": 8968,
+      "sha256": "976f76dfdc879dcf2d72af59673e7b5faeb0a28994dcdecdb6ec27403e7c4c72"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+      "bytes": 5150,
+      "sha256": "6f90466399667b70c9d93170fb6b2511e6efe712ae07dd4ec22d6af53d1624d9"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+      "bytes": 6237,
+      "sha256": "5061d2d170a76b384763474ffefcec65b934d2a28ad086e58981373992d4dcb2"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/text.rs",
+      "bytes": 5597,
+      "sha256": "fc609717cf6a86a72dd07d0bb79d82fde25df64216e0d769f0214152120e089e"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/geometry/ui.rs",
+      "bytes": 5479,
+      "sha256": "7a5c0786befbc4a78f3b3d70f56ed552898e9c723315925b52d1e37526bcc933"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/lib.rs",
+      "bytes": 3346,
+      "sha256": "6c60089be46ade672cdfa51510e683a0a15bff1c62c910a9395f9a192b737e57"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/geometry.rs",
+      "bytes": 10715,
+      "sha256": "a2362d0a3ee6fbef95c9d68e2b0b3d757c1dfe58fdfa18c1a376bd7c5342119d"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/material.rs",
+      "bytes": 4384,
+      "sha256": "a9e1b1a7d99e93cbba82e8f873890fb59336d4e1fdb17f835454896592b66eb7"
+    }
+  ],
+  "checks": [
+    "Rehashed all 33 frozen inputs before and after complete changed-source review.",
+    "Confirmed all three original WGSL sources byte-identical to base.",
+    "Reviewed exact two-stage IO, uniform offsets/widths, 23 typed resources and dynamic-storage-order admission.",
+    "Traced fixed four-group resource allocation through pinned wgpu-hal Metal and DX12 create_pipeline_layout. Metal fragment explicit lengths bind buffer7; auto-generated unused sizes slot8 is distinct. Vertex sizes1 and pull15/14 match visibility and host layout. DX12 CBV0..4/special5 and SRV0..14 including three sampler-index buffers match pinned allocation.",
+    "Checked emitted MSL dynamic storage sizes order and actual byte-length use; zero/misaligned/over-u32 lengths refuse and empty lights materialize the existing preview-light element.",
+    "Reviewed startup typed error propagation, inherited artifact identity/tamper admission, bounded access/loop policies, and default/wasm feature-off path.",
+    "Read mutation/regression test code and existing generated fragment artifacts as source diagnostics; did not run builds/tests/GPU."
+  ],
+  "pinned_source": [
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/device.rs",
+      "sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/dx12/device.rs",
+      "sha256": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/naga-29.0.4/src/back/msl/writer.rs",
+      "sha256": "e0477d761c4fb20445bc54457a278320e7a65dc51bf25209d24aa951639e8704"
+    }
+  ],
+  "examined_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Metal-Vertex.shader",
+      "sha256": "7cfdc07307366ce9cd20ebe01bc22deb54fa688992f1e018ff9b632d95900eab"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Metal-Fragment.shader",
+      "sha256": "98bfd23cb430029366407c0364b9a1abb0cc73f27a5c4fa41dfaa98b787dfba7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Dx12-Vertex.shader",
+      "sha256": "ce37b1e438bd5d9e9c21d2d69795e340e726f51e5007b3c60633ce132163a5b3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-material-checks-001/artifacts/Dx12-Fragment.shader",
+      "sha256": "ff908004333705e3436b30373ada08818e9e52049e316a9883cb110109a71a7d"
+    }
+  ],
+  "limits": [
+    "This is an independent nonvisual source review, not execution or pixel acceptance.",
+    "Producer CPU/compiler evidence remains a separate packet; no reviewer duplicate build was run.",
+    "Actual Metal/Vulkan/DX12 rendering parity, visual approval and device/performance gates remain pending their assigned owners."
+  ]
+}

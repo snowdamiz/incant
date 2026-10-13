@@ -109,6 +109,42 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['records']['AnimationRowV4'][:-4], self.data['records']['AnimationRowV2'])
         self.assertLess(40+100000*96+214336*24,self.data['constants']['MEMORY'])
 
+    def test_audio_preserves_all_prior_entries_and_bounds_complete_batches(self):
+        import hashlib
+        prior = {'functions': (59, 'ff94f98874d021ee6f475e464025e7e7d0365ef4d73ad043b91ffd075e72355b'), 'constants': (91, 'dbe7519e2f573722b4cc510f264bad5171d72a781af30184393ea81847db0449'), 'magic': (26, '623cd993b428e1129a8668527669aeb5de41727edf4770ec9b30532ba7e33269'), 'enums': (16, '79bb31b08db7c9114769a28cb51186284518aa40a961d970ddd22bdd16705682'), 'records': (59, 'da104457d876b74abce25b6ca1e6cf75c5b9514a77c7d963bc69ed2ea714baa9'), 'namespaces': (18, '4f02d3fe8c61a0510cde409b52c822b55daee6aeb960a475bdb28d68e69e3650')}
+        for name, (count, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:count] if isinstance(value, list) else dict(list(value.items())[:count])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['name'], f['opcode']) for f in self.data['functions'][59:62]], [('snapshot_len',59),('read_snapshot',60),('command',61)])
+        size = lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('AudioHeader','AudioRow','AudioCommandHeader','AudioCommand')], [40,200,16,32])
+        self.assertEqual([self.data['constants'][n] for n in ('AUDIO_MAX_NODES','AUDIO_MAX_BUSES','AUDIO_MAX_SOURCES','AUDIO_MAX_COMMANDS')], [161,32,128,1024])
+        self.assertLess(40+161*200, self.data['constants']['MEMORY'])
+
+    def test_hud_is_additive_and_keeps_every_existing_definition(self):
+        import hashlib
+        prior = {'functions': (56, '7bc086cca969c85182c9ac7cc76aeeb78f525101e1ee09a9fb4703255606497a'), 'constants': (83, 'dc0641095face8dcc5f4272324eb29baee6a59519e319a2436ae0acc61f1f7f9'), 'magic': (25, 'fdf193751733a8c34dd6d592bd1127680bf6d820d3dd037a88e7b01fb38f246e'), 'enums': (14, '61087efd5ded951d7c33c64e3f2aca42da14b2ed57bfbbbbcf5b423b6a356f6d'), 'records': (54, 'a98d1a75f7a4531cbe38cc9baf6c1a656b174d1113f39d853dc41356d9f26461'), 'namespaces': (17, '94e7812e8ff0469646a83623dd46e3a6626f2be6268b8774ee88d575139c4f0d')}
+        for name, (count, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:count] if isinstance(value,list) else dict(list(value.items())[:count])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['name'], f['opcode']) for f in self.data['functions'][56:59]], [('snapshot_len',56),('read_snapshot',57),('control',58)])
+        self.assertEqual(self.data['constants']['HUD_MAX_WIDGETS'], 1024)
+        self.assertEqual(self.data['constants']['HUD_MAX_EVENT_BYTES'], 65536)
+
+    def test_root_motion_is_additive_and_composes_bounded_complete_pose(self):
+        import hashlib
+        prior = {'functions': (53, 'd27012c3cbb5d955fc95e016a6b81aea45aa2c2723370cf3d26add863b642844'), 'constants': (80, '7bf1f9c9967a0a4b08d2f0c9f4cefa77f54598f08a6bd3a7231d739bb8d21eec'), 'magic': (24, '30df319d481b60150961bac7dc576a196ab8c0a9dd7309c26b99865b89a028ae'), 'enums': (12, 'b4b4ead339d515212605318268308bcf4628cc3b172efabf02997638b20d1629'), 'records': (51, '170b465881f84eee24becf739d8a69162f41bbc7bb46b276ae51dd6cb41e0715'), 'namespaces': (16, '7c6db52d1444153c7b74e3de9ee4d9b13297611693068ab46d6afb8a76f02292')}
+        for name, (length, digest) in prior.items():
+            value = self.data[name]
+            prefix = value[:length] if isinstance(value, list) else dict(list(value.items())[:length])
+            self.assertEqual(hashlib.sha256(json.dumps(prefix, sort_keys=True).encode()).hexdigest(), digest, name)
+        self.assertEqual([(f['name'], f['opcode']) for f in self.data['functions'][53:56]], [('snapshot_len',53),('read_snapshot',54),('control',55)])
+        size=lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('RootMotionHeader','RootMotionRow','RootMotionCommand')], [40,376,24])
+        self.assertLess(40+24+48+100000*96+214336*24+1024*40+4096*104+1024*376,self.data['constants']['MEMORY'])
+
     def test_compound_v5_preserves_all_ik_v1_and_older_contracts(self):
         import hashlib
         prior = {'functions': (47, '24a4f20a4824173fd34ccfe146ffdd4bc02d5a223254e9b8e9d2c22532ac59eb'), 'constants': (79, 'b3dd8bc360f94f28cf8f201757612eb4db3ab78e8802cda823fdcb086591b0b4'), 'magic': (21, '9fda2c34d213c5f6e47d7f19894f5c50c35980082dce3940211807837e41fcc5'), 'enums': (10, 'ee8f597e5d8ac45fbb2156428d197fb24e7c00d1df7891ad529a7a5062024ed2'), 'records': (47, '03e7330e3a13a870f3ef1ca2a0bf7dbd55a1625b2db309c6a9e54bb4f2827858'), 'namespaces': (13, '63726804aa625d91daaa4292808840540e23f7512c0886dc656e30dfc0eadf82')}

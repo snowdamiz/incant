@@ -1,0 +1,22 @@
+{
+ "board": "Z1",
+ "at": "2026-10-13T01:28:20.151023+00:00",
+ "removed": {
+  "Z1/Z1.incant.json": "dac370424de596da09bb8adac5d72f1eb7a3efeec051480f3c333089d308679a",
+  "Z1/Z1.incant.journal.jsonl": "7e479f18f95281bc27e815c0a8575337518bfd5b5b8f65aeda6dac4eb8d64167",
+  "Z1/art/checker.png": "62cafa2d9037abc132a42476da35f422f99ec5df470a83617bc5db15b372b40c",
+  "Z1/art/sphere-checker.gltf": "a0591fa653e0a6e037ad5bb0fe2ddb74687d9716ca0e972ec38fe40507e95f8b",
+  "Z1/art/sphere.bin": "ba2b8cbcaf6bccbc80fb358aa7c966b72665d33e0e136a580da9ffa7d8be949d"
+ },
+ "private_copy": "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/private-fixture/Z1",
+ "kept_unchanged": true,
+ "kept": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/cooked/Z1.scene": "c8a0fb83006e0fb872994b3f5f755154d88913147e347dba4b47b3d271323ed8",
+  "/Users/andreyyurlov/.codex/incant-evidence/0064/fixtures/r1/Z1/.incant/cache/models/a7e8da48eb5920c1f84def706ee29c5046d02f03aca07358bd46fa8e46a9daad.incmodel": "8fba42dcc2b162623577c4801c650caa1a4dc1efcbd54473774bf12f0de2225b"
+ },
+ "remaining_in_project": [
+  ".incant-source-transactions/lock",
+  ".incant/cache/models/a7e8da48eb5920c1f84def706ee29c5046d02f03aca07358bd46fa8e46a9daad.incmodel"
+ ],
+ "no_authoring_or_art_left": false
+}

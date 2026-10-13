@@ -1,0 +1,112 @@
+{
+  "at": "2026-10-12T22:32:01.433653+00:00",
+  "accepted": true,
+  "scope": "Android candidate Rust source and host-side admission tests only; no cross-target runtime admission or device claim",
+  "base": "dc5892eec305a04e1890c11efca093683058c002",
+  "inventory_sha256": "43eadecded3250cb4324b7774eb0cb4e9a026d1a3f4be8f4ea52ca6c86bbd310",
+  "sources": {
+    "crates/incant_cook/Cargo.toml": "407ed0c893a39940399c031183951581bba9f8492316459406bc10f68cf89b44",
+    "crates/incant_cook/src/build_script.rs": "025979e20450815c7d0ccbce6b95f76c62aa73973a4068e254c5cf1650ac72b6",
+    "crates/incant_game_player/Cargo.toml": "547093c4ea1719d68999be33366ecd0f544d03474ac58a5f428ac47362dc4c67",
+    "crates/incant_script/Cargo.toml": "0eeae340935ff4fdc44fdfabf0b13827bc6e33cad52ea906ba38d25440e048c8",
+    "crates/incant_script/build.rs": "f7f9b9e84fd70efa12cf5144bddf97c58fa3f5f97b9c901bd6f1a3914acae1dd",
+    "crates/incant_script/src/artifact/compatibility.rs": "b579e356f2902d31977d1afbf08195bbe03a8f141ef821061b7fe7605a98ef7d",
+    "crates/incant_script/src/artifact/mobile_tests.rs": "7e331cd70f16694d9ca438eddcad38341b12480b0f3fdcc201ead299cd224ebe",
+    "crates/incant_cook/tests/android_probe.rs": "43887b044550146c9e5032af36cf25e8bee2b5bf86c014836ef0851cbc73036f"
+  },
+  "commands": [
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--lib",
+        "artifact::"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 7.390179458001512,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/android-bytecode-candidate-001/native-00.log",
+      "sha256": "e8b535c7f6e9e70e1f21c678e55475f186429665ea8fd73858755eff6ec79151"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--features",
+        "probe-android-bytecode",
+        "--lib",
+        "artifact::"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 6.623991749998822,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/android-bytecode-candidate-001/native-01.log",
+      "sha256": "562862f1d42267bbb15c200b46e4639c3139b2b4dcc29bb5476ab86a563c610b"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript",
+        "--test",
+        "android_probe",
+        "--test",
+        "mobile_project"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 10.014064457998757,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/android-bytecode-candidate-001/native-02.log",
+      "sha256": "05e28b023abbbec34db3d0ee9984bd51c49a6e6b89d1ba4661ccb8505ac1aa91"
+    },
+    {
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_cook",
+        "--features",
+        "typescript,probe-android-bytecode",
+        "--test",
+        "android_probe",
+        "--test",
+        "mobile_project"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant",
+      "exit_code": 0,
+      "seconds": 8.751711999997497,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/android-bytecode-candidate-001/native-03.log",
+      "sha256": "644668d6664bcb0c52451f9438ac286ecda9c7500b90575d3d9db8c0102159f3"
+    }
+  ],
+  "reported_test_counts": [
+    6,
+    6,
+    5,
+    5
+  ],
+  "review": "Default-off compile-time candidate binds producer and consumer identity; exact reviewed ARM64 ABI only; standalone cook accepts exact trusted numeric source/name/no map; public authored mobile entry still admits only iOS. Harness requires separate review and emulator execution."
+}

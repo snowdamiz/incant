@@ -1,0 +1,3 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_render)
+   Compiling incant_render_gpu_host v0.0.1 (/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0064-cooked-material-shaders/crates/incant_render_gpu_host)
+    Finished `ci` profile [optimized] target(s) in 15.79s

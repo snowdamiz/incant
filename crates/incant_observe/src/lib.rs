@@ -264,10 +264,16 @@ impl Plan {
     /// neither documents nor VM state. Missing entities/components/actions fail
     /// their check explicitly instead of substituting a zero/default value.
     pub fn observe(&mut self, world: &NativeWorld, input: &InputFrame) -> Result<()> {
-        if self.checks.front().is_some_and(|c| c.tick < world.tick()) {
+        self.observe_at(world.tick(), world, input)
+    }
+    /// Trusted host chronology for complete session replacement. The existing
+    /// plan tick remains a monotonically increasing accepted host step; the
+    /// observed state and final report still belong to the actual native world.
+    pub fn observe_at(&mut self, tick: u64, world: &NativeWorld, input: &InputFrame) -> Result<()> {
+        if self.checks.front().is_some_and(|c| c.tick < tick) {
             return Err("missed requested native observation tick".into());
         }
-        while self.checks.front().is_some_and(|c| c.tick == world.tick()) {
+        while self.checks.front().is_some_and(|c| c.tick == tick) {
             let check = self.checks.pop_front().expect("checked front");
             let actual = check.expect.observe(world, input);
             let passed = check.expect.matches(&actual);

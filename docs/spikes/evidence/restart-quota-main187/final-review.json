@@ -1,0 +1,45 @@
+{
+  "decision": "accepted_for_scoped_integration",
+  "reviewer": "astra /root",
+  "head": "77ff4e22b6f014d3dc9017815568a0565e0c7964",
+  "manifest": {
+    "path": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/docs/spikes/evidence/restart-quota-main187.json",
+    "sha256": "739381e492fa391c396d8369c81622eccde3695c22ce7e4e61255a7e280804de"
+  },
+  "archive_records": 63,
+  "archive_payloads": 24,
+  "zero_exit_checks": 4,
+  "scope": "Independent source review and frozen-evidence audit; no independent test rerun or GPU execution.",
+  "source_review": "Read test delta; positive pure/mixed exact-capacity cases, exact InputLimit for caught overflow, rollback, FailedSession and coalescing retained; test-only5s follows adjacent command quota tests. Production deadline unchanged.",
+  "source": {
+    "path": "crates/incant_script/src/restart_request_tests.rs",
+    "sha256": "dbf3cb1a1b343f5b46a3a40cc61eabc33b0fca5958e5db45cf008727340efc8a"
+  },
+  "production_unchanged": [
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "sha256": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57"
+    },
+    {
+      "path": "crates/incant_script/src/budget.rs",
+      "sha256": "53619776fa5bfd2367b9aa2eac7fb9d028f17bb1bd9463a2e475cbe7ac4311e8"
+    },
+    {
+      "path": "crates/incant_script/src/commands.rs",
+      "sha256": "d58969ae3f24eef677394fd16810c907ac715a4f3f0b77f867a5b728ef44f425"
+    },
+    {
+      "path": "crates/incant_script/src/structural_tests.rs",
+      "sha256": "4674fea64ac14ced822aa210e08f80ad928b915d7ba3a070595fa0b0691ffff5"
+    }
+  ],
+  "focused_cases": 4,
+  "library_cases": 127,
+  "limits": [
+    "Only the quota test uses5s; production default50ms and deadline implementation unchanged.",
+    "Exact InputLimit assertion retained; now tests pure/mixed full quota success, caught overflow, full world rollback and FailedSession.",
+    "Original Linux error variant remains unknown; CPU deadline competition is a supported diagnosis, not directly logged fact.",
+    "No release approval: frozen checkpoint17 continues; future corrected full checkpoint must pass all23 requirements."
+  ],
+  "hosted_diagnosis": "Both original Linux and Windows actual error variants were omitted. Deliberate1ms control proves deadline competition possible, not exact hosted failure causality."
+}

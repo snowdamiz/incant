@@ -51,7 +51,7 @@ fn binary_native_motion_and_structural_rebuilds_submit_without_source_or_documen
     )
     .unwrap();
     directory.close().unwrap();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut gpu = renderer
         .prepare_retained(input.input(), input.camera_label())
         .unwrap();

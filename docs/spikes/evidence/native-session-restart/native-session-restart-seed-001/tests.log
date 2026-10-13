@@ -1,0 +1,35 @@
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_script)
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_audio_runtime)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant/crates/incant_game_runtime)
+error[E0369]: binary operation `==` cannot be applied to type `&NativeLogs`
+   --> crates/incant_game_runtime/tests/restart.rs:132:5
+    |
+132 |     assert_eq!(game.logs().unwrap(), &logs);
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     |
+    |     &NativeLogs
+    |     &&NativeLogs
+    |
+note: `NativeLogs` does not implement `PartialEq<&NativeLogs>`
+   --> crates/incant_runtime/src/logging.rs:30:1
+    |
+ 30 | pub struct NativeLogs {
+    | ^^^^^^^^^^^^^^^^^^^^^ `NativeLogs` is defined in another crate
+
+error[E0369]: binary operation `==` cannot be applied to type `&NativeLogs`
+   --> crates/incant_game_runtime/tests/restart.rs:135:5
+    |
+135 |     assert_eq!(fresh.logs().unwrap(), &logs);
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |     |
+    |     &NativeLogs
+    |     &&NativeLogs
+    |
+note: `NativeLogs` does not implement `PartialEq<&NativeLogs>`
+   --> crates/incant_runtime/src/logging.rs:30:1
+    |
+ 30 | pub struct NativeLogs {
+    | ^^^^^^^^^^^^^^^^^^^^^ `NativeLogs` is defined in another crate
+
+For more information about this error, try `rustc --explain E0369`.
+error: could not compile `incant_game_runtime` (test "restart") due to 2 previous errors

@@ -1,0 +1,74 @@
+diff --git a/crates/incant_headless/tests/native_play.rs b/crates/incant_headless/tests/native_play.rs
+index 8576f913..8fc4623d 100644
+--- a/crates/incant_headless/tests/native_play.rs
++++ b/crates/incant_headless/tests/native_play.rs
+@@ -35,6 +35,9 @@ fn setup(root: &Path) -> (String, String) {
+         .insert("Velocity".into(), json!({"linear":[2.,0.,0.]}));
+     bus.execute(
+         vec![
++            Command::SetPhysicsMode {
++                mode: incant_runtime::PHYSICS_VARIANT.mode(),
++            },
+             Command::CreateEntity {
+                 scene_id: sid.clone(),
+                 entity,
+@@ -241,6 +244,30 @@ fn edit(root: &Path, commands: Vec<Command>) {
+     fs::write(path, bus.project().canonical_text().unwrap()).unwrap();
+ }
+ 
++#[test]
++fn foreign_physics_mode_still_refuses_without_output_or_authoring_changes() {
++    let temp = tempfile::tempdir().unwrap();
++    let root = temp.path();
++    setup(root);
++    let mode = match incant_runtime::PHYSICS_VARIANT.mode() {
++        incant_doc::PhysicsMode::Deterministic => incant_doc::PhysicsMode::Fast,
++        incant_doc::PhysicsMode::Fast => incant_doc::PhysicsMode::Deterministic,
++    };
++    edit(root, vec![Command::SetPhysicsMode { mode }]);
++    let before = fs::read(root.join("game.incant.json")).unwrap();
++    let mut command = args();
++    command.extend(["--pcm-output", "refused.pcm"]);
++    let output = run(root, &command);
++    assert!(!output.status.success());
++    assert!(output.stdout.is_empty());
++    assert!(String::from_utf8_lossy(&output.stderr).contains(&format!(
++        "project physics mode {mode} requires a matching process; compiled kernel is {}",
++        incant_runtime::PHYSICS_VARIANT
++    )));
++    assert!(!root.join("refused.pcm").exists());
++    unchanged(root, &before);
++}
++
+ #[test]
+ fn native_camera_is_required_for_spatial_content_and_cpu_host_is_reported() {
+     let temp = tempfile::tempdir().unwrap();
+diff --git a/crates/incant_headless/tests/native_rpc.rs b/crates/incant_headless/tests/native_rpc.rs
+index 1bd33270..f9d6c419 100644
+--- a/crates/incant_headless/tests/native_rpc.rs
++++ b/crates/incant_headless/tests/native_rpc.rs
+@@ -25,6 +25,9 @@ fn fixture(root: &Path) -> (String, String) {
+         .insert("Velocity".into(), json!({"linear":[2.,0.,0.]}));
+     bus.execute(
+         vec![
++            Command::SetPhysicsMode {
++                mode: incant_runtime::PHYSICS_VARIANT.mode(),
++            },
+             Command::CreateEntity {
+                 scene_id: sid.clone(),
+                 entity,
+diff --git a/crates/incant_headless/tests/native_ui.rs b/crates/incant_headless/tests/native_ui.rs
+index 3f42931c..f2241826 100644
+--- a/crates/incant_headless/tests/native_ui.rs
++++ b/crates/incant_headless/tests/native_ui.rs
+@@ -41,7 +41,9 @@ fn fixture(root: &Path) -> String {
+         line_height: 24.,
+         wrap: TextWrap::WordOrGlyph,
+     };
+-    let mut commands = vec![];
++    let mut commands = vec![Command::SetPhysicsMode {
++        mode: incant_runtime::PHYSICS_VARIANT.mode(),
++    }];
+     for n in 1..=4 {
+         let mut e = Entity::new("Fixture");
+         e.id = id(n);

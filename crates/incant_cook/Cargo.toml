@@ -6,11 +6,33 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
-default = ["scene", "script"]
-scene = ["dep:incant_types", "dep:incant_assets_runtime", "dep:incant_nav", "dep:incant_doc", "dep:incant_runtime", "dep:ulid"]
+default = ["scene", "script", "physics-deterministic"]
+scene = ["dep:incant_types", "dep:incant_assets_runtime", "dep:incant_anim", "dep:incant_nav", "dep:incant_doc", "dep:incant_runtime", "dep:ulid"]
 script = ["dep:incant_script", "dep:sha2"]
+# Explicit candidate fixture route; never enables authored Android project export.
+probe-android-bytecode = ["script", "incant_script/probe-android-bytecode"]
 # Fixed host-side Node invocation; never a normal runtime dependency.
 typescript = ["scene", "script", "dep:tempfile", "dep:incant_source", "dep:incant_wasm_cook"]
+
+# Select one physics kernel for the entire process, including build/test hosts.
+physics-deterministic = [
+    "incant_assets/physics-deterministic",
+    "incant_audio_runtime/physics-deterministic",
+    "incant_cmd/physics-deterministic",
+    "incant_import/physics-deterministic",
+    "incant_runtime?/physics-deterministic",
+    "incant_script?/physics-deterministic",
+    "incant_ui/physics-deterministic",
+]
+physics-fast-simd8 = [
+    "incant_assets/physics-fast-simd8",
+    "incant_audio_runtime/physics-fast-simd8",
+    "incant_cmd/physics-fast-simd8",
+    "incant_import/physics-fast-simd8",
+    "incant_runtime?/physics-fast-simd8",
+    "incant_script?/physics-fast-simd8",
+    "incant_ui/physics-fast-simd8",
+]
 
 [[example]]
 name = "cook_scene"
@@ -20,6 +42,7 @@ required-features = ["scene"]
 incant_wasm_cook = { path = "../incant_wasm_cook", optional = true }
 incant_types = { workspace = true, optional = true }
 incant_assets_runtime = { workspace = true, features = ["visual"], optional = true }
+incant_anim = { workspace = true, optional = true }
 incant_nav = { workspace = true, optional = true }
 incant_doc = { workspace = true, optional = true }
 incant_runtime = { workspace = true, optional = true }
@@ -33,10 +56,12 @@ sha2 = { workspace = true, optional = true }
 tempfile = { version = "3", optional = true }
 
 [dev-dependencies]
+incant_audio_runtime = { workspace = true, features = ["scene"] }
+sha2.workspace = true
 incant_ui.workspace = true
 incant_cmd.workspace = true
-incant_import = { path = "../incant_import" }
+incant_import = { path = "../incant_import", default-features = false }
 incant_text.workspace = true
-incant_assets = { path = "../incant_assets" }
+incant_assets = { path = "../incant_assets", default-features = false }
 incant_assets_runtime = { workspace = true, features = ["visual"] }
 tempfile = "3"

@@ -18,6 +18,7 @@ mod compiled;
 mod compiler;
 mod diagnostics;
 mod flipbooks;
+mod hud;
 mod input;
 mod loan;
 mod localization_values;
@@ -28,6 +29,7 @@ mod program;
 mod queries;
 mod query_values;
 mod query_values_2d;
+mod root_motion;
 mod schedule;
 mod session;
 mod steering_values;
@@ -40,6 +42,8 @@ pub use bindings::{
 };
 pub use checkpoint::{CheckpointError, MAX_CHECKPOINT_BYTES, PendingSessionCheckpoint};
 pub use compiled::CompiledScript;
+#[cfg(feature = "compiler")]
+pub use compiler::ScriptBuild;
 use incant_runtime::NativeWorld;
 pub use logging::{LogLevel, NativeLog, NativeLogs};
 pub use program::SessionProgram;
@@ -51,8 +55,17 @@ use std::{
 };
 use thiserror::Error;
 
+/// Accepted metadata for the trusted composed owner. This does not mutate a
+/// world and contains no persisted command or guest-supplied startup payload.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SessionRequest {
+    Restart,
+}
+
 #[derive(Debug, Error)]
 pub enum ScriptError {
+    #[error("this host does not accept session restart requests")]
+    SessionRequestsUnsupported,
     #[error("script engine failed without a JavaScript diagnostic")]
     Execution,
     #[error("cooked script engine/build/target or artifact format is incompatible")]
@@ -132,6 +145,8 @@ pub struct ScriptHost {
     logs: NativeLogs,
     flipbooks: flipbooks::Scratch,
     animations: animations::Scratch,
+    restart_requests: bool,
+    session_request: Option<SessionRequest>,
     failed: bool,
 }
 
@@ -222,6 +237,8 @@ impl ScriptHost {
             logs: NativeLogs::default(),
             flipbooks: flipbooks::Scratch::default(),
             animations: animations::Scratch::default(),
+            restart_requests: false,
+            session_request: None,
             failed: false,
         })
     }
@@ -233,6 +250,25 @@ impl ScriptHost {
         } else {
             Ok(&self.logs)
         }
+    }
+
+    /// Trusted owner opt-in. The caller must consume requests after its complete
+    /// composed tick succeeds. Ordinary hosts refuse the primitive by default.
+    pub fn enable_restart_requests(&mut self) -> Result<(), ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        self.restart_requests = true;
+        Ok(())
+    }
+
+    /// Script-phase acceptance only. A composed host must wait for its audio
+    /// and mandatory consumer acceptance before exposing this request.
+    pub fn take_session_request(&mut self) -> Result<Option<SessionRequest>, ScriptError> {
+        if self.failed {
+            return Err(ScriptError::FailedSession);
+        }
+        Ok(self.session_request.take())
     }
 
     /// Run only the script phase. Native simulation stepping remains explicitly
@@ -251,6 +287,7 @@ impl ScriptHost {
         dt: f64,
         input: &incant_input::InputRuntime,
     ) -> Result<(), ScriptError> {
+        let _profile = incant_profile::scope(incant_profile::Phase::ScriptTick);
         if self.failed {
             return Err(ScriptError::FailedSession);
         }
@@ -345,7 +382,8 @@ impl ScriptHost {
                 .clone()
                 .restore(&ctx)
                 .map_err(diagnostics::allocation)?;
-            let commands = commands::TickCommands::default();
+            let commands = commands::TickCommands::new(self.restart_requests);
+            let hud = hud::expose(&ctx, world)?;
             let api = commands.expose(&ctx).map_err(|error| {
                 diagnostics::javascript(&ctx, error, "command bindings", &self.deadline)
             })?;
@@ -392,6 +430,10 @@ impl ScriptHost {
                     for (index, scope, instances, timer_api, state_api) in groups {
                         timers.activate(scope);
                         persistent.activate(scope);
+                        let source_profile = incant_profile::script_scope(match scope {
+                            schedule::Scope::Global => None,
+                            schedule::Scope::Source(id) => Some(id.0),
+                        });
                         let called = function.call::<_, Value>((
                             rquickjs::function::Flat((
                                 chunks.clone(),
@@ -411,7 +453,9 @@ impl ScriptHost {
                             index as u32,
                             instances,
                             state_api,
+                            hud.clone(),
                         ));
+                        drop(source_profile);
                         timers.revoke();
                         persistent.revoke();
                         match called {
@@ -461,26 +505,44 @@ impl ScriptHost {
                     self.synchronous.check(&ctx, false)?;
                     queries.check()?;
                     loan.validate_numeric()?;
-                    let commands = commands.take()?;
+                    let (commands, request) = commands.take()?;
                     schedule.apply(timers.take()?)?;
                     let logs = logs.take()?;
                     let changes = persistent.take()?;
-                    Ok((loan.finish(), commands, schedule, logs, changes))
+                    Ok((loan.finish(), commands, request, schedule, logs, changes))
                 })
                 .map_err(ScriptError::Structural)?
         });
         // No JS value or raw column pointer crosses this sync point. Apply is
         // native host work, after the script CPU/deferred-work checks; its time
         // is separate from the JS execution budget, not a claimed phone budget.
-        let result = result.and_then(|(undo, mut commands, schedule, logs, changes)| {
+        let result = result.and_then(|(undo, mut commands, request, schedule, logs, changes)| {
+            let _profile = incant_profile::scope(incant_profile::Phase::ScriptApply);
             undo.apply(world, &mut commands)?;
             self.logs.commit(schedule.tick, logs);
             self.schedule = schedule;
             self.persistent.borrow_mut().apply(changes);
+            self.session_request = self.session_request.or(request);
             Ok(())
         });
         if result.is_err() {
             self.failed = true;
+        }
+        // Query only after JS/context loans are closed. This opt-in diagnostic
+        // walks the VM heap and is outside the guest CPU budget, never an RSS claim.
+        if incant_profile::enabled() {
+            let heap = self._runtime.memory_usage();
+            if let (Ok(used_bytes), Ok(allocated_bytes), Ok(allocation_count)) = (
+                u64::try_from(heap.memory_used_size),
+                u64::try_from(heap.malloc_size),
+                u64::try_from(heap.malloc_count),
+            ) {
+                incant_profile::quickjs_heap(incant_profile::HeapSample {
+                    used_bytes,
+                    allocated_bytes,
+                    allocation_count,
+                });
+            }
         }
         result
     }
@@ -556,3 +618,9 @@ mod timer_tests;
 
 #[cfg(all(test, feature = "compiler"))]
 mod localization_tests;
+
+#[cfg(test)]
+mod hud_tests;
+
+#[cfg(all(test, feature = "compiler"))]
+mod restart_request_tests;

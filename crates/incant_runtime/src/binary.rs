@@ -1,4 +1,4 @@
-//! Versions 1–16 and18, little-endian checked data (not executable code). SHA-256 detects
+//! Layouts 1–19, little-endian checked data (not executable code). SHA-256 detects
 //! damage, not authorship. No casts, alignment assumptions or native-layout ABI.
 use crate::scene::MAX_ENTITIES;
 use crate::{CookedEntity, CookedScene, SceneError, StableId};
@@ -7,7 +7,10 @@ use sha2::{Digest, Sha256};
 use std::collections::BTreeMap;
 
 const MAGIC: &[u8; 8] = b"INCANTSC";
-const VERSION: u32 = 18;
+const VERSION: u32 = 19;
+// Low 16 bits identify the record layout; high 16 identify the physics kernel.
+// Legacy version words have zero high bits and retain deterministic semantics.
+const LAYOUT_MASK: u32 = 0xffff;
 const PREFIX: usize = 40;
 const HEADER: usize = 72;
 const MIN_RECORD: usize = 104;
@@ -24,8 +27,16 @@ impl CookedScene {
             .collect();
         let mut bytes = Vec::with_capacity(HEADER + self.entities.len() * MAX_RECORD);
         bytes.extend(MAGIC);
-        let version = if self.has_compound_animation_fades() {
-            VERSION
+        let version = if self
+            .audio
+            .iter()
+            .any(|node| node.source.as_ref().is_some_and(|s| s.transport_epoch != 0))
+        {
+            19
+        } else if self.has_compound_animation_fades() {
+            18
+        } else if self.has_root_motion() {
+            17
         } else if self.has_ik() {
             16
         } else if self.has_animation_trees() {
@@ -59,7 +70,8 @@ impl CookedScene {
         } else {
             1
         };
-        bytes.extend(version.to_le_bytes());
+        let format = version | (u32::from(self.physics_variant().tag()) << 16);
+        bytes.extend(format.to_le_bytes());
         bytes.extend(self.tick_rate.to_le_bytes());
         bytes.extend(self.id.0);
         bytes.extend((self.entities.len() as u32).to_le_bytes());
@@ -105,7 +117,7 @@ impl CookedScene {
         if version >= 3 {
             bytes.extend((self.audio.len() as u32).to_le_bytes());
             for node in &self.audio {
-                crate::audio_binary::write(&mut bytes, node);
+                crate::audio_binary::write(&mut bytes, node, version);
             }
         }
         if version >= 4 {
@@ -167,10 +179,8 @@ impl CookedScene {
         if version >= 16 {
             crate::ik_binary::write(&mut bytes, &self.spatial);
         }
-        // Reserved v17 root-motion catalogs and bindings. This producer does
-        // not yet construct them; its decoder refuses nonempty sections.
         if version >= 17 {
-            bytes.extend([0; 8]);
+            crate::root_motion::binary::write(&mut bytes, &self.spatial);
         }
         let length = (bytes.len() - HEADER) as u32;
         bytes[36..40].copy_from_slice(&length.to_le_bytes());
@@ -187,9 +197,10 @@ impl CookedScene {
         if &header.array::<8>()? != MAGIC {
             return Err(SceneError::Invalid("magic"));
         }
-        let version = header.u32()?;
-        if !(1..=VERSION).contains(&version) || version == 17 {
-            return Err(SceneError::Version(version));
+        let format = header.u32()?;
+        let version = format & LAYOUT_MASK;
+        if !(1..=VERSION).contains(&version) || format >> 16 > 2 {
+            return Err(SceneError::Version(format));
         }
         let tick_rate = header.u32()?;
         let id = StableId(header.array()?);
@@ -206,6 +217,9 @@ impl CookedScene {
             return Err(SceneError::Integrity);
         }
         let mut reader = Reader(&bytes[HEADER..]);
+        // Refuse a mismatched process before allocating records or solver state.
+        let variant = crate::PhysicsVariant::from_tag((format >> 16) as u8)?;
+        variant.admit()?;
         let mut entities = Vec::with_capacity(count);
         let mut parents = Vec::with_capacity(count);
         let mut previous = None;
@@ -272,7 +286,7 @@ impl CookedScene {
             }
             audio.reserve(count);
             for _ in 0..count {
-                let node = crate::audio_binary::read(&mut reader)?;
+                let node = crate::audio_binary::read(&mut reader, version)?;
                 if audio
                     .last()
                     .is_some_and(|prior: &crate::CookedAudio| prior.entity >= node.entity)
@@ -435,10 +449,8 @@ impl CookedScene {
         if version >= 16 {
             crate::ik_binary::read(&mut reader, &mut spatial, version >= 17)?;
         }
-        if version >= 17 && (reader.u32()? != 0 || reader.u32()? != 0) {
-            return Err(SceneError::Invalid(
-                "root-motion catalogs unsupported by this decoder",
-            ));
+        if version >= 17 {
+            crate::root_motion::binary::read(&mut reader, &mut spatial, version >= 18)?;
         }
         if !reader.0.is_empty() {
             return Err(SceneError::Invalid("trailing payload"));
@@ -464,6 +476,14 @@ impl CookedScene {
         } else {
             candidate
         };
+        if version == 19
+            && !candidate
+                .audio
+                .iter()
+                .any(|node| node.source.as_ref().is_some_and(|s| s.transport_epoch != 0))
+        {
+            return Err(SceneError::Invalid("version 19 requires audio transport"));
+        }
         if version == 18 && !candidate.has_compound_animation_fades() {
             return Err(SceneError::Invalid(
                 "version 18 requires compound animation fades",

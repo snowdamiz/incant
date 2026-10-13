@@ -15,6 +15,7 @@ import os
 from pathlib import Path
 import platform
 import re
+import shlex
 import shutil
 import signal
 import subprocess
@@ -35,6 +36,39 @@ def cargo_output(command, *, cwd, env):
 def codegen(command):
     """Read effective codegen values from Cargo's real rustc invocation."""
     return {key: value.strip('"\'') for key, value in re.findall(r'(?:^|\s)-C\s*([a-z-]+)=([^\s`]+)', command)}
+
+
+def player_units(stderr, target, split, features):
+    """Audit both runtime library and final executable in desktop probe builds."""
+    units = {}
+    for line in stderr.splitlines():
+        if 'Running `' not in line or not re.search(r'--crate-name incant_game_player\b', line):
+            continue
+        tokens = shlex.split(line.split('Running `', 1)[1].rstrip().removesuffix('`'))
+        if '--target' not in tokens:
+            continue
+        def one(flag):
+            values = [tokens[i + 1] for i, token in enumerate(tokens[:-1]) if token == flag]
+            require(len(values) == 1, f'Missing unique player {flag}')
+            return values[0]
+        require(one('--target') == target, 'Unexpected player target')
+        kind = one('--crate-type')
+        require(kind in ('lib', 'bin') and kind not in units, 'Missing/duplicate player crate kind')
+        actual_features = [tokens[i + 1][9:-1] for i, token in enumerate(tokens[:-1])
+                           if token == '--cfg' and re.fullmatch(r'feature="[^"]+"', tokens[i + 1])]
+        require(len(actual_features) == len(set(actual_features)) and set(actual_features) == set(features),
+                f'Unexpected player {kind} features: {actual_features}')
+        require('compiler' not in actual_features and '--test' not in tokens, 'Compiler/test player unit')
+        values = codegen(line)
+        expected = {'opt-level': '3', 'codegen-units': '1', 'panic': 'abort',
+                    'debuginfo': '2', 'split-debuginfo': split}
+        if kind == 'bin':
+            expected['lto'] = 'fat'
+        require(all(values.get(k) == v for k, v in expected.items())
+                and values.get('target-cpu') != 'native', f'Nonshipping player {kind}: {values}')
+        units[kind] = expected
+    require(set(units) == {'lib', 'bin'}, 'Missing player library or executable target compile')
+    return {'incant_game_player_library': units['lib'], 'incant_game_player': units['bin']}
 
 
 def verify_commands(stderr, target, split):

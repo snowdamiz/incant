@@ -18,8 +18,11 @@ mod material_pipeline;
 mod materials;
 mod models;
 mod output;
+mod pipeline_cache;
 mod pixel_grid;
+pub use pipeline_cache::{CacheRead, CacheWrite, PipelineCacheReport};
 mod preview_environment;
+pub mod resolution;
 mod resource_error;
 #[cfg(test)]
 mod retained_alloc;
@@ -41,6 +44,7 @@ use bytemuck::{Pod, Zeroable};
 use glam::{Mat4, Vec3};
 pub use incant_render_data::{SceneInput, ScenePreparer};
 pub use lighting::LocalLightSelection;
+pub use models::motion;
 pub use models::{RenderScene, RetainedScene, RetainedTarget};
 pub use resource_error::{PreparationError, ResourceError};
 pub use scene::{SceneError, SceneStats};
@@ -80,6 +84,8 @@ pub struct Renderer {
     pub queue: wgpu::Queue,
     pub adapter: wgpu::Adapter,
     pub adapter_name: String,
+    /// Startup-only persistence result; a supplied cache is not a measured hit.
+    pub pipeline_cache_report: PipelineCacheReport,
     diagnostic_pipeline: wgpu::RenderPipeline,
     models: Mutex<models::ModelCache>,
     materials: materials::MaterialSystem,
@@ -92,6 +98,7 @@ pub struct Renderer {
     frames: frame::FrameCache,
     output: output::OutputPass,
     graph: graph::FrameGraph,
+    motion: Option<motion::MotionSystem>,
 }
 impl Renderer {
     pub async fn new(
@@ -109,7 +116,8 @@ impl Renderer {
         let (device, queue) = adapter
             .request_device(&wgpu::DeviceDescriptor {
                 label: Some("Incant renderer"),
-                required_features: output::required_features(&adapter)?,
+                required_features: output::required_features(&adapter)?
+                    | pipeline_cache::required_features(&adapter),
                 ..Default::default()
             })
             .await?;
@@ -121,18 +129,34 @@ impl Renderer {
         // The renderer owns a finite pipeline catalog. Prepare it before any
         // caller can submit a frame; frame preparation only looks up handles.
         let validation = device.push_error_scope(wgpu::ErrorFilter::Validation);
+        let cache_session = pipeline_cache::Session::new(&device, &adapter);
+        let cache = cache_session.cache.as_ref();
         let environments = environment::EnvironmentSystem::new(&device, &queue);
-        let lighting = lighting::LightingSystem::new(&device);
-        let materials =
-            materials::MaterialSystem::new(&device, &queue, &environments.layout, &lighting.layout);
-        let shadows =
-            shadows::ShadowSystem::new(&device, &materials.layout, adapter.get_info().backend)?;
-        let diagnostic_pipeline =
-            Self::pipeline(&device, frame::HDR_FORMAT, adapter.get_info().backend)?;
-        let output = output::OutputPass::new(&device, adapter.get_info().backend)?;
-        let sprites = sprites::SpriteSystem::new(&device);
-        let text = text::TextSystem::new(&device);
-        let ui = ui::UiSystem::new(&device, &queue);
+        let lighting = lighting::LightingSystem::new(&device, adapter.get_info().backend, cache)?;
+        let materials = materials::MaterialSystem::new(
+            &device,
+            &queue,
+            &environments.layout,
+            &lighting.layout,
+            adapter.get_info().backend,
+            cache,
+        )?;
+        let shadows = shadows::ShadowSystem::new(
+            &device,
+            &materials.layout,
+            adapter.get_info().backend,
+            cache,
+        )?;
+        let diagnostic_pipeline = Self::pipeline(
+            &device,
+            frame::HDR_FORMAT,
+            adapter.get_info().backend,
+            cache,
+        )?;
+        let output = output::OutputPass::new(&device, adapter.get_info().backend, cache)?;
+        let sprites = sprites::SpriteSystem::new(&device, adapter.get_info().backend, cache)?;
+        let text = text::TextSystem::new(&device, adapter.get_info().backend, cache)?;
+        let ui = ui::UiSystem::new(&device, &queue, adapter.get_info().backend, cache)?;
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
@@ -148,6 +172,7 @@ impl Renderer {
             queue,
             adapter,
             adapter_name,
+            pipeline_cache_report: cache_session.finish(),
             diagnostic_pipeline,
             models: Mutex::new(HashMap::new()),
             materials,
@@ -157,6 +182,7 @@ impl Renderer {
             frames: Default::default(),
             output,
             graph: Default::default(),
+            motion: None,
         })
     }
     pub fn headless() -> Result<Self> {
@@ -177,6 +203,7 @@ impl Renderer {
         device: &wgpu::Device,
         format: wgpu::TextureFormat,
         backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
     ) -> Result<wgpu::RenderPipeline> {
         let shader = geometry_shader::stages(device, backend, geometry_shader::Kind::Diagnostic)?;
         let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
@@ -217,7 +244,7 @@ impl Renderer {
                     })],
                 }),
                 multiview_mask: None,
-                cache: None,
+                cache,
             }),
         )
     }
@@ -230,38 +257,49 @@ impl Renderer {
         height: u32,
         viewport: Option<Viewport>,
     ) -> Result<wgpu::CommandBuffer> {
+        self.draw_scene_scaled(
+            scene,
+            RetainedTarget {
+                view,
+                format,
+                width,
+                height,
+                viewport,
+            },
+            resolution::ResolutionScale::FULL,
+            None,
+        )
+    }
+    fn draw_scene_scaled(
+        &self,
+        scene: &RenderScene,
+        target: RetainedTarget<'_>,
+        scale: resolution::ResolutionScale,
+        motion: Option<motion::MotionDraw>,
+    ) -> Result<wgpu::CommandBuffer> {
+        let RetainedTarget {
+            view,
+            format,
+            width,
+            height,
+            viewport,
+        } = target;
         self.check_device()?;
         output::OutputPass::validate(format)?;
-        let rect = viewport
-            .map(|v| v.rect)
-            .unwrap_or([0., 0., width as f32, height as f32]);
-        if rect.iter().any(|v| !v.is_finite())
-            || rect[0] < 0.
-            || rect[1] < 0.
-            || rect[2] <= 0.
-            || rect[3] <= 0.
-            || rect[0] + rect[2] > width as f32
-            || rect[1] + rect[3] > height as f32
-        {
-            return Err("viewport outside render target".into());
-        }
+        frame::FrameCache::validate(&self.device, width, height)?;
         if viewport.is_some_and(|v| v.corner_radii.iter().any(|r| !r.is_finite() || *r < 0.)) {
             return Err("invalid viewport corner radius".into());
         }
-        frame::FrameCache::validate(&self.device, width, height)?;
-        let grid = scene
-            .camera
-            .pixel_resolution
-            .map(|resolution| pixel_grid::PixelGrid::fit(resolution, rect))
-            .transpose()?;
-        let (frame_size, scene_rect) = if let Some(grid) = &grid {
-            (
-                grid.resolution,
-                [0., 0., grid.resolution[0] as f32, grid.resolution[1] as f32],
-            )
-        } else {
-            ([width, height], rect)
-        };
+        let plan = resolution::FramePlan::new(
+            [width, height],
+            viewport
+                .map(|v| v.rect)
+                .unwrap_or([0., 0., width as f32, height as f32]),
+            scene.camera.pixel_resolution,
+            scale,
+        )?;
+        let frame_size = plan.size;
+        let scene_rect = plan.rect;
         let attachments = self
             .frames
             .get(&self.device, frame_size[0], frame_size[1])?;
@@ -302,13 +340,14 @@ impl Renderer {
             view,
             format,
             viewport,
-            grid.map(|g| g.output),
+            plan.output_mapping,
         )?;
         self.graph.encode(
             &self.device,
             graph::PreparedFrame {
                 diagnostics,
                 models,
+                motion,
                 sprites,
                 text,
                 output,

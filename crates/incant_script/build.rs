@@ -4,13 +4,59 @@ use std::{env, fs, path::Path};
 fn main() {
     let root = Path::new("../..");
     let mut identity = Sha256::new();
+    // The temporary probe admission is part of executable compatibility. Both
+    // the trusted host producer and target consumer must explicitly opt in.
+    identity.update(b"probe-android-bytecode");
+    identity.update([u8::from(
+        env::var_os("CARGO_FEATURE_PROBE_ANDROID_BYTECODE").is_some(),
+    )]);
     let lock = fs::read_to_string(root.join("Cargo.lock")).expect("pinned Cargo.lock");
-    for package in ["rquickjs", "rquickjs-core", "rquickjs-sys"] {
+    for (package, checksum) in [
+        (
+            "rquickjs",
+            "a0a22bf72f515cc4189dd7c63d016f6de92a11eee98ddf7dd64794198f6eb34e",
+        ),
+        (
+            "rquickjs-core",
+            "6657979a24d543e5fc66f32cef2f47ca82ce8eb55cec5f7d59a12b7b570bbf24",
+        ),
+        (
+            "rquickjs-sys",
+            "cee271d0eeba64f0915b846cb7ae02e16faf3dfdffdca91731101d9d30fe3423",
+        ),
+    ] {
+        let entry = lock
+            .split("[[package]]")
+            .find(|part| part.contains(&format!("name = \"{package}\"\n")))
+            .expect("pinned QuickJS package");
         assert!(
-            lock.contains(&format!("name = \"{package}\"\nversion = \"0.14.0\"")),
+            entry.contains("version = \"0.14.0\"")
+                && entry
+                    .contains("source = \"registry+https://github.com/rust-lang/crates.io-index\"")
+                && entry.contains(&format!("checksum = \"{checksum}\"")),
             "Re-audit the cooked script ABI before changing the pinned engine"
         );
     }
+    // cc accepts these environment overrides for the linked QuickJS build.
+    // Cross-target admission uses the audited default C configuration only;
+    // native cooks preserve their existing support for trusted custom flags.
+    let target = env::var("TARGET").unwrap();
+    let flags = [
+        "CFLAGS".to_owned(),
+        "HOST_CFLAGS".into(),
+        "TARGET_CFLAGS".into(),
+        format!("CFLAGS_{target}"),
+        format!("CFLAGS_{}", target.replace('-', "_")),
+    ];
+    let mut default_flags = true;
+    for key in flags {
+        println!("cargo:rerun-if-env-changed={key}");
+        default_flags &= env::var_os(key).is_none_or(|v| v.is_empty());
+    }
+    println!(
+        "cargo:rustc-env=INCANT_SCRIPT_DEFAULT_C_FLAGS={}",
+        u8::from(default_flags)
+    );
     // Conservative compatibility identity, not authentication. Changes to the
     // pinned graph, wrapper, hardening or loader require a fresh trusted cook.
     for path in [
@@ -23,6 +69,7 @@ fn main() {
         Path::new("src/bindings_embed.rs").into(),
         Path::new("src/lib.rs").into(),
         Path::new("src/input.rs").into(),
+        Path::new("src/hud.rs").into(),
         Path::new("src/flipbooks.rs").into(),
         Path::new("src/animations.rs").into(),
         Path::new("src/animation_ik.rs").into(),
@@ -46,6 +93,8 @@ fn main() {
         Path::new("src/checkpoint/codec.rs").into(),
         Path::new("src/persistence/value.rs").into(),
         Path::new("src/artifact.rs").into(),
+        Path::new("src/artifact/compatibility.rs").into(),
+        Path::new("build.rs").into(),
         Path::new("src/harden.js").into(),
     ] {
         println!("cargo:rerun-if-changed={}", path.display());
@@ -63,6 +112,9 @@ fn main() {
     let mut runtime = Sha256::new();
     for name in [
         "incant_runtime",
+        "incant_profile",
+        "incant_physics_runtime",
+        "incant_physics_2d_runtime",
         "incant_input",
         "incant_types",
         "incant_2d",
@@ -77,8 +129,13 @@ fn main() {
         hash_tree(&dir.join("src"), &mut runtime);
         hash_file(&dir.join("Cargo.toml"), &mut runtime);
     }
-    hash_tree(&root.join("third_party/kira/src"), &mut runtime);
-    hash_file(&root.join("third_party/kira/Cargo.toml"), &mut runtime);
+    // Path-patched runtime dependencies have no registry checksum in Cargo.lock.
+    // Include their actual sources so a later patch cannot reuse stale saves.
+    for name in ["kira", "parry2d", "parry3d"] {
+        let dir = root.join("third_party").join(name);
+        hash_tree(&dir.join("src"), &mut runtime);
+        hash_file(&dir.join("Cargo.toml"), &mut runtime);
+    }
     println!(
         "cargo:rustc-env=INCANT_CHECKPOINT_RUNTIME_ID={:x}",
         runtime.finalize()

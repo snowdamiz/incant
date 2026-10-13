@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-13T04:52:52.333654+00:00",
+  "decision": "accepted scoped current-main CPU/source integration",
+  "head": "6a41f28f0d03581ff13d51da5898df8f243a23a2",
+  "manifest_sha256": "5dda77d6a479ff3ebe0f102e4710205ebba7a5dadb17e266152e0c9ff66b9aeb",
+  "independent_audit": {
+    "collector_verify_only_exit": 0,
+    "frozen_inputs": 2865,
+    "producer_records": 316,
+    "archive_records": 33,
+    "seam_patch_read_sha256": "22a2410e9adfeb5fc103d3ae25fc21fa212b50735f0aac5709c572f8c4f8858f",
+    "all_referenced_retained_paths_tracked": true
+  },
+  "limits": [
+    "Current union runs CPU tests and native/window/WebAssembly compilation only; 90 GPU tests remain ignored in each all-target variant.",
+    "Test counts overlap across default/cooked/cluster-only feature configurations.",
+    "Original cooked-cluster Metal numerical parity and default-feature DRS appearance/latency evidence remain producer-scoped, not new combined GPU acceptance.",
+    "CI adds cooked-clusters to existing backend-asserted release checks, preserving defaults; actual Linux/Vulkan and Windows/DX12 success remains a frozen checkpoint requirement.",
+    "DRS is opt-in nearest expansion; no temporal reconstruction, MetalFX, default enablement, exact GPU timing, phone/performance or phase gate claim."
+  ]
+}

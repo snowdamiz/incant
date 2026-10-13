@@ -1,0 +1,31 @@
+{
+ "recipe": "samples/core/art/fonts/subset_sc.py",
+ "recipe_sha256": "04ad8578a6544a424fed7a35c33523ac6aa47807256b993458ea10f257637cee",
+ "upstream_sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+ "ofl_sha256": "1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9",
+ "fonttools_wheel_sha256": "a884aef09d45ba1206712c7dbda5829562d3fea7726935d3289d343232ecb0d3",
+ "inputs_copied_from": "/Users/andreyyurlov/.codex/incant-evidence/0060/downloads (read only, hashes equal provenance.json)",
+ "strings_sha256": "9024e49341edf27906f949d05bef1e965dda171e9ac8aee006587515320dcd80",
+ "runs": [
+  {
+   "output_sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0",
+   "bytes": 13232
+  },
+  {
+   "output_sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0",
+   "bytes": 13232
+  }
+ ],
+ "glyph_text": "—…、。一人停全再动勘升台器回安岩已收本机样格次测玩移空芯跃跳返键降集！（），：；？",
+ "characters": 42,
+ "added": "一 再 次 玩",
+ "committed_sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0",
+ "control": {
+  "strings": "HEAD samples/core/ui/strings.json",
+  "strings_sha256": "8bc4cb760ac832b9133d8699e47448e909f5e0b3827c5b5c711b9b06af500526",
+  "output_sha256": "7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5",
+  "head_font_sha256": "7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5",
+  "characters": 38,
+  "reproduces_head": true
+ }
+}

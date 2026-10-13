@@ -1,0 +1,18 @@
+{
+  "base": "5e3de230755ef10dab86e35faae12818066fd7b4",
+  "files": {
+    "crates/incant_game_runtime/src/core.rs": "7863226aae6952ba3a171d76ce642da5f2569443254d6ba18b71259029caa227",
+    "crates/incant_game_runtime/src/hosted.rs": "28c979c54d685ffa72498cf4ccdcc215e9c55ec253b8f32ffdca349249c5c6ab",
+    "crates/incant_game_runtime/src/lib.rs": "51b61c5646f2df492781fd2ebd7638ea6c6ea2238efb7cc3a7afb31ed6ff0127",
+    "crates/incant_game_runtime/src/offline.rs": "51989d88fe0dd7a1f104de1f7d948274e83d968963b0fec84d1bfc1be3f520c1",
+    "crates/incant_game_runtime/tests/hosting.rs": "9860d97c54e35cf80348448ee2738ee1be812c6972145f363cb7042d1cbc392b",
+    "crates/incant_script/src/commands.rs": "76c6e5bef2dd67face0d7a08a31a644642684643310ef6409f63fab1e48464f8",
+    "crates/incant_script/src/lib.rs": "9e0412af9de774afadedd4feb52d5f225020d3a53c0bdf39f46f151d0f376d57",
+    "crates/incant_script/src/program.rs": "d13e6709e8768053de1aa6831d10c8b16a2f0602b24bb19606b22530a58ff15e",
+    "crates/incant_script/src/session.rs": "101f6ec19a9221a5f658339278b2c127b624bfc47d34739ae03e2e873dedda7f",
+    "crates/incant_script/tests/project_bindings.rs": "89415d2e7223612293b8797e819290ca3f20196318876ed51f73c50cd72e42a8",
+    "sdk/ts/src/native.d.ts": "4a9e36893f882a48dc91e1675dbfa780386d44f43c819fdaa45adde16936161c",
+    "crates/incant_script/src/restart_request_tests.rs": "5fc3fbd18c23e9bc4fd24b7842afa09288ce238cc33688b2d0ebd94af229cb29"
+  },
+  "scope": "Initial transactional request boundary only; restart owner not implemented yet"
+}

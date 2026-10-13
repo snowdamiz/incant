@@ -490,3 +490,9 @@ fn consumers_see_the_candidate_ui_and_a_refusal_publishes_nothing() {
 
 #[path = "ui/checkpoints.rs"]
 mod checkpoints;
+
+#[path = "ui/hud.rs"]
+mod hud;
+
+#[path = "ui/recorded.rs"]
+mod recorded;

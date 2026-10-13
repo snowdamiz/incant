@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/private/tmp/incant-font-atlas-target/ci/incant_headless",
+    "init",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-hud-export-001/authoring/project.json",
+    "--entities",
+    "0"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "returncode": 0,
+  "stdout_sha256": "8366289370d3379853390915ad99a14690b148d462c4b1e1c46eee030bae85c0",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

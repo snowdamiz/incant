@@ -1,0 +1,12 @@
+{
+  "candidate": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+  "run": 38348941128,
+  "job": 115136684722,
+  "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint19/windows-desktop-115136684722.log",
+  "sha256": "d8477647a68528d1244910c60d4a8b1ac6ed7dcdab928771bdad7e4956b978e0",
+  "bytes": 748501,
+  "retained": "docs/spikes/evidence/physics-artifact-vendor-identity/windows-desktop.log.gz",
+  "retained_sha256": "cc4b589fa293d2eba00b028048924dfc3c9a604521bac9db64b3b26a1bbfe604",
+  "finding": "Same compiler package identity refusal as macOS, after successful fresh x86_64-pc-windows-msvc shipping compile; no package published.",
+  "source_delta_after_review": false
+}

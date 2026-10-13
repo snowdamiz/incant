@@ -1,6 +1,7 @@
 //! The text-native project format and validated CRDT projection. No filesystem or UI.
 mod agent_budget;
 mod animation_graph;
+mod animation_root_motion;
 mod audio;
 mod camera;
 #[cfg(feature = "crdt")]
@@ -20,7 +21,8 @@ pub use incant_2d::{
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
-pub use incant_types::UiNode;
+pub use incant_types::{AnimationRootMotion, RootMotionApplication};
+pub use incant_types::{PhysicsMode, UiNode};
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -58,6 +60,9 @@ pub struct Project {
 #[serde(deny_unknown_fields)]
 pub struct ProjectSettings {
     pub tick_rate: u32,
+    #[serde(default, skip_serializing_if = "PhysicsMode::is_deterministic")]
+    #[schemars(extend("default" = PhysicsMode::default()))]
+    pub physics_mode: PhysicsMode,
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     #[schemars(length(max = 64))]
     pub input_actions: InputActions,
@@ -179,6 +184,7 @@ impl Project {
             string_tables: BTreeMap::new(),
             settings: ProjectSettings {
                 tick_rate: 60,
+                physics_mode: PhysicsMode::default(),
                 input_actions: InputActions::new(),
                 localization: LocaleSettings::default(),
                 agent_budget: AgentBudgetSettings::default(),
@@ -401,6 +407,9 @@ impl Project {
                 if let Err(message) = animation_graph::validate(entity) {
                     issue(format!("{path}/components/AnimationGraph"), &message);
                 }
+                if let Err(message) = animation_root_motion::validate(entity, self) {
+                    issue(format!("{path}/components/AnimationRootMotion"), &message);
+                }
                 if entity.components.contains_key("AnimationIk")
                     && !entity.components.contains_key("Animation")
                 {
@@ -619,6 +628,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
             let animation: Animation = decode(value)?;
             animation.validate().map_err(str::to_owned)?;
         }
+        "AnimationRootMotion" => {
+            let binding: AnimationRootMotion = decode(value)?;
+            binding.validate().map_err(str::to_owned)?;
+        }
         "SpriteFlipbook" => {
             let flipbook: SpriteFlipbook = decode(value)?;
             flipbook.rate.validate().map_err(|e| e.to_string())?;
@@ -712,6 +725,10 @@ pub fn schema_registry() -> BTreeMap<String, Value> {
         ("Text".into(), json!(schemars::schema_for!(Text))),
         ("UiNode".into(), json!(schemars::schema_for!(UiNode))),
         ("Animation".into(), json!(schemars::schema_for!(Animation))),
+        (
+            "AnimationRootMotion".into(),
+            json!(schemars::schema_for!(AnimationRootMotion)),
+        ),
         (
             "AnimationIk".into(),
             json!(schemars::schema_for!(AnimationIk)),

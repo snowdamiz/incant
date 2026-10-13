@@ -1,7 +1,7 @@
 [workspace]
 resolver = "3"
 members = ["crates/*", "editor/app", "sdk/rust"]
-exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira"]
+exclude = ["third_party/rerecast", "third_party/cosmic-text", "third_party/tao", "third_party/kira", "third_party/parry2d", "third_party/parry3d"]
 default-members = ["crates/*"]
 
 [workspace.package]
@@ -11,8 +11,9 @@ rust-version = "1.99"
 publish = false
 
 [workspace.dependencies]
+incant_profile = { path = "crates/incant_profile", default-features = false }
 incant_render_data = { path = "crates/incant_render_data" }
-incant_render_authoring = { path = "crates/incant_render_authoring" }
+incant_render_authoring = { path = "crates/incant_render_authoring", default-features = false }
 serde = { version = "1.0", features = ["derive"] }
 # Preserve serialized f64 values exactly across project/save reloads.
 serde_json = { version = "1.0", features = ["float_roundtrip"] }
@@ -27,25 +28,26 @@ bevy_ecs = { version = "=0.19.1", default-features = false, features = ["std"] }
 rquickjs = "=0.14.0"
 cpu-time = "=1.0.0"
 incant_assets_runtime = { path = "crates/incant_assets_runtime" }
+incant_anim = { path = "crates/incant_anim" }
 incant_text = { path = "crates/incant_text" }
-incant_ui = { path = "crates/incant_ui" }
-incant_audio_runtime = { path = "crates/incant_audio_runtime" }
+incant_ui = { path = "crates/incant_ui", default-features = false }
+incant_audio_runtime = { path = "crates/incant_audio_runtime", default-features = false }
 incant_types = { path = "crates/incant_types" }
-incant_runtime = { path = "crates/incant_runtime" }
+incant_runtime = { path = "crates/incant_runtime", default-features = false }
 incant_doc = { path = "crates/incant_doc", default-features = false }
 incant_2d = { path = "crates/incant_2d" }
-incant_cmd = { path = "crates/incant_cmd" }
+incant_cmd = { path = "crates/incant_cmd", default-features = false }
 incant_source = { path = "crates/incant_source" }
-incant_core = { path = "crates/incant_core" }
-incant_physics = { path = "crates/incant_physics" }
-incant_physics_runtime = { path = "crates/incant_physics_runtime" }
-incant_physics_2d_runtime = { path = "crates/incant_physics_2d_runtime" }
+incant_core = { path = "crates/incant_core", default-features = false }
+incant_physics = { path = "crates/incant_physics", default-features = false }
+incant_physics_runtime = { path = "crates/incant_physics_runtime", default-features = false }
+incant_physics_2d_runtime = { path = "crates/incant_physics_2d_runtime", default-features = false }
 incant_input = { path = "crates/incant_input" }
 incant_localization = { path = "crates/incant_localization" }
 incant_nav = { path = "crates/incant_nav" }
-incant_play_legacy = { path = "crates/incant_play_legacy" }
+incant_play_legacy = { path = "crates/incant_play_legacy", default-features = false }
 incant_script = { path = "crates/incant_script", default-features = false }
-incant_agent = { path = "crates/incant_agent" }
+incant_agent = { path = "crates/incant_agent", default-features = false }
 
 [profile.dev]
 debug = 1
@@ -76,6 +78,8 @@ strip = "none"
 split-debuginfo = "off"
 
 [patch.crates-io]
+parry2d = { path = "third_party/parry2d" }
+parry3d = { path = "third_party/parry3d" }
 kira = { path = "third_party/kira" }
 rerecast = { path = "third_party/rerecast" }
 cosmic-text = { path = "third_party/cosmic-text" }

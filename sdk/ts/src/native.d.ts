@@ -44,6 +44,24 @@ export interface NativeChunk {
  * Functions belong to one tick only; retained functions never reactivate.
  * Vector/transform inputs are copied as fixed numeric fields, never JSON. */
 export interface NativeCommands {
+  /** Request whole-session replacement at the next accepted host boundary.
+   * Requires an explicitly restart-capable native host; unsupported hosts refuse
+   * and poison the active tick. No arguments, coalesced within the shared command
+   * quota. Publication waits for all source callbacks, world, audio and consumer
+   * acceptance. Does not reset this callback's state. Wasm parity is pending. */
+  requestRestart(): void;
+
+  /** Ordered existing-widget controls. Preserve role, fonts, layout and hierarchy.
+   * Literal content is UTF-8 <=16KiB; use localization.localize(...).text for
+   * localized values. At most 256 HUD controls and 1MiB text per whole tick,
+   * within the shared structural quota. Invalid caught calls reject the tick.
+   * A changed text-input declaration replaces its buffer; unchanged text keeps
+   * user edits. Reconciliation retires old focus receipts/composition. */
+  setUiText(id: NativeId, text: string): void;
+  /** Disabled descendants keep layout but lose focus/input eligibility. */
+  setUiDisabled(id: NativeId, disabled: boolean): void;
+  /** Existing world-space Text content, preserving fonts and text layout. */
+  setText(id: NativeId, text: string): void;
   /** Buffered runtime locale change; visible on the next accepted update. At
    * most 64 per tick within the shared structural quota. The entire numeric,
    * locale and structural batch rolls back on refusal. Catalog is immutable. */
@@ -51,8 +69,18 @@ export interface NativeCommands {
   /** Desired playing state for an existing source. False pauses its retained
    * cursor; true starts an unstarted source or resumes a paused one. Unchanged
    * true does not replay an ended voice. False then true needs separate sync
-   * points to create a new edge; this API does not expose stop/restart. */
+   * points to create a new edge; use restartAudio for an explicit replay. */
   setAudioPlaying(id: NativeId, playing: boolean): void;
+  /** Explicit ordered transport requests. Stop resets to the beginning without
+   * playback; restart resets and plays, including completed one-shot voices.
+   * Commands publish only after native transaction acceptance. Retired voices
+   * drain before replacements begin; no overlapping playback is introduced. */
+  stopAudio(id: NativeId): void;
+  restartAudio(id: NativeId): void;
+  /** Finite [0,3600] seconds, within the clip duration checked by the audio host.
+   * Preserves desired playing state. Seeking to the same position still resets
+   * the cursor; repeated setAudioPlaying(true) remains a no-op. */
+  seekAudio(id: NativeId, seconds: number): void;
   /** Source gain in finite [-80,24] dB, preserving clip, cursor and routing. */
   setAudioGain(id: NativeId, gainDb: number): void;
   /** Gain for an existing bus in finite [-80,24] dB; preserves bus topology.
@@ -76,6 +104,11 @@ export interface NativeCommands {
   controlAnimation(id: NativeId, control: 'playing' | 'looping', enabled: boolean): void;
   /** Finite [-16,16]; negative speed plays backward, zero holds the sample. */
   controlAnimation(id: NativeId, control: 'speed', speed: number): void;
+  /** Applying controls body movement, not root stripping. Reset clears only the
+   * four observed deltas; neither command seeks or applies stored motion.
+   * Shares the ordered atomic tick queue, including caught-error rollback. */
+  controlRootMotion(id: NativeId, control: 'applying', enabled: boolean): void;
+  controlRootMotion(id: NativeId, control: 'reset'): void;
   /** Set a declared graph parameter within its authored range. */
   setAnimationParameter(id: NativeId, parameter: NativeId, value: number): void;
   /** Ordered two-bone constraints solve after the full animation pose. Coordinates
@@ -237,7 +270,45 @@ export interface NativeAnimationIk {
   readonly poles: Float64Array;
   readonly weights: Float64Array;
 }
+/** Committed root rows, sorted by stable owner ID, at most 1024. Every array is
+ * VM-owned; mutating or retaining it cannot alter native state. Row identities
+ * bind the captured model fingerprint (32 bytes/row) and model-node index.
+ * Policies: 0 extract-only, 1 bodyless transform, 2 velocity kinematic 3D,
+ * 3 collision-limited character 3D. Flags: bit0 applying, bit1 outgoing present.
+ * Clock owner is state ULID for graphs, else clip index (-1 rest). Absent
+ * outgoing clock has null state, -1 clip, zero cycle/seconds. Graph phases use
+ * their authored cycle, not a representative clip's duration. Exact signed
+ * cycles and accepted tick are BigInts; never convert them to Number.
+ * Each delta has stride7 [tx,ty,tz,qx,qy,qz,qw]. Requested is model-space local
+ * locomotion before application; applied is actual displacement expressed in
+ * the pre-step entity frame (including physics collision limitation). Bodyless
+ * deltas remain in unscaled model units; the owner transform applies its
+ * admitted uniform scale. Physics policies require unit scale.
+ * Accumulations compose these accepted interval deltas in order. Disabling
+ * application preserves extraction/clocks and strips the root from the pose.
+ * Parameter/select/seek changes alone do not apply a displacement. */
+export interface NativeRootMotion {
+  readonly ids: readonly NativeId[];
+  readonly fingerprints: Uint8Array;
+  readonly roots: Uint16Array;
+  readonly policies: Uint8Array;
+  readonly flags: Uint8Array;
+  readonly ticks: BigUint64Array;
+  readonly states: readonly (NativeId | null)[];
+  readonly clips: Int32Array;
+  readonly cycles: BigInt64Array;
+  readonly seconds: Float64Array;
+  readonly outgoingStates: readonly (NativeId | null)[];
+  readonly outgoingClips: Int32Array;
+  readonly outgoingCycles: BigInt64Array;
+  readonly outgoingSeconds: Float64Array;
+  readonly requested: Float64Array;
+  readonly applied: Float64Array;
+  readonly accumulatedRequested: Float64Array;
+  readonly accumulatedApplied: Float64Array;
+}
 export interface NativeAnimations {
+  readonly rootMotion: NativeRootMotion;
   readonly ik: NativeAnimationIk;
   readonly graphs: NativeAnimationGraphs;
   /** Packed complete poses. Empty span means legacy clip/two-pose playback.
@@ -304,7 +375,18 @@ export interface NativePersistentState {
    * poisoning the current source update. */
   set(value: NativePersistentValue, entity?: NativeId): void;
 }
+/** Owned pre-command declarations sorted by stable entity ID, <=1024 widgets
+ * and <=1024 world-text rows, combined text <=1MiB. This is not editable input
+ * buffer state: use input.ui events for accepted edits/submission. Queued writes
+ * appear next tick. Immutable properties/array length; no borrowed native data.
+ * Native Rust uses the same typed ControlUi/ControlText queue; Wasm parity for
+ * these controls/snapshots remains unsupported. No runtime authoring mutation. */
+export interface NativeHud {
+  readonly widgets: readonly { readonly id: NativeId; readonly role: 'root' | 'container' | 'label' | 'button' | 'text_input'; readonly text: string | undefined; readonly disabled: boolean }[];
+  readonly texts: readonly { readonly id: NativeId; readonly text: string }[];
+}
 export interface NativeContext {
+  readonly hud: NativeHud;
   /** Authored attachments for this source, sorted by stable entity ID. The array
    * and initial props are deeply frozen. One callback per nonempty source runs
    * in source-ID order with the same world-wide bulk views/transaction. A queued

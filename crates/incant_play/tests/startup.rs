@@ -8,6 +8,7 @@ use std::cell::Cell;
 
 fn fixture() -> (Project, String, String) {
     let mut project = Project::empty("Native startup");
+    project.settings.physics_mode = incant_runtime::PHYSICS_VARIANT.mode();
     let mut scene = Scene::new("Main");
     let entity = Entity::new("Mover");
     let entity_id = entity.id.clone();
@@ -178,4 +179,116 @@ fn selected_wasm_requires_explicit_development_host_instead_of_fallback() {
     .err()
     .expect("host is disabled");
     assert!(error.to_string().contains("wasmtime-host"));
+}
+
+#[test]
+fn foreign_physics_mode_refuses_before_assets_or_fallback_are_touched() {
+    let (mut project, _, _) = fixture();
+    let requested = match incant_runtime::PHYSICS_VARIANT.mode() {
+        incant_doc::PhysicsMode::Fast => incant_doc::PhysicsMode::Deterministic,
+        incant_doc::PhysicsMode::Deterministic => incant_doc::PhysicsMode::Fast,
+    };
+    project.settings.physics_mode = requested;
+    let before = project.canonical_text().unwrap();
+    let root = tempfile::tempdir().unwrap();
+    let error = PreparedPlay::load(
+        &project,
+        root.path(),
+        &StartOptions::default(),
+        48000,
+        || panic!("must reject kernel mismatch before source compilation"),
+    )
+    .err()
+    .unwrap();
+    let incant_play::StartupError::Native(error) = error else {
+        panic!("typed kernel error required")
+    };
+    assert!(matches!(error.downcast_ref::<incant_runtime::SceneError>(),
+        Some(incant_runtime::SceneError::PhysicsMode { requested: mode, compiled })
+        if *mode == requested && *compiled == incant_runtime::PHYSICS_VARIANT));
+    assert_eq!(project.canonical_text().unwrap(), before);
+    assert_eq!(std::fs::read_dir(root.path()).unwrap().count(), 0);
+}
+
+#[test]
+fn invalid_ui_viewport_or_missing_camera_refuses_before_any_fallback() {
+    let temp = tempfile::tempdir().unwrap();
+    let (project, _, _) = fixture();
+    for viewport in [[0., 200.], [f32::NAN, 200.], [65537., 100.], [320., 200.]] {
+        let options = StartOptions {
+            ui_viewport: Some(viewport),
+            ..Default::default()
+        };
+        let error = PreparedPlay::load(&project, temp.path(), &options, 48000, || {
+            panic!("must reject before compiler")
+        })
+        .err()
+        .unwrap();
+        assert!(error.to_string().contains("UI viewport"));
+    }
+}
+#[test]
+fn prepared_ui_settings_survive_paused_play_transport_and_source_disposal() {
+    use incant_types::{UiKind, UiNode};
+    let temp = tempfile::tempdir().unwrap();
+    let (mut p, sid, eid) = fixture();
+    p.scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .get_mut(&eid)
+        .unwrap()
+        .components
+        .insert(
+            "Camera".into(),
+            json!({"fov_degrees":60,"near":0.1,"far":100}),
+        );
+    let mut e = Entity::new("UI root");
+    e.components.insert(
+        "UiNode".into(),
+        json!(UiNode::<String> {
+            kind: UiKind::Root,
+            style: Default::default(),
+            order: 0,
+            disabled: false
+        }),
+    );
+    p.scenes
+        .get_mut(&sid)
+        .unwrap()
+        .entities
+        .insert(e.id.clone(), e);
+    let before = p.clone();
+    let prepared = PreparedPlay::load(
+        &p,
+        temp.path(),
+        &StartOptions {
+            camera: Some(eid),
+            ui_viewport: Some([321., 201.]),
+            ..Default::default()
+        },
+        48000,
+        || CompiledScript::compile("exports.default={update(){}};"),
+    )
+    .unwrap();
+    assert_eq!(
+        prepared.render.as_ref().unwrap().ui.unwrap().viewport,
+        [321., 201.]
+    );
+    assert_eq!(p, before);
+    drop(p);
+    temp.close().unwrap();
+    let mut game = incant_play::PlaySession::<incant_audio_runtime::OfflineBackend>::new(
+        prepared,
+        incant_audio_runtime::AudioManagerSettings {
+            backend_settings: 48000,
+            ..Default::default()
+        },
+        (),
+    )
+    .unwrap();
+    assert_eq!(game.mode(), incant_play::PlayMode::Paused);
+    assert!(game.refresh().unwrap());
+    game.step(&[]).unwrap();
+    assert_eq!(game.world().unwrap().tick(), 1);
 }

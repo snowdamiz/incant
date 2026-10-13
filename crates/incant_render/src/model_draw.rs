@@ -19,6 +19,12 @@ impl Renderer {
             eye: [f32; 4],
             environment: [f32; 4],
         }
+        const _: () = {
+            assert!(size_of::<Frame>() == 96);
+            assert!(std::mem::offset_of!(Frame, matrix) == 0);
+            assert!(std::mem::offset_of!(Frame, eye) == 64);
+            assert!(std::mem::offset_of!(Frame, environment) == 80);
+        };
         let environment = scene
             .environment
             .as_ref()

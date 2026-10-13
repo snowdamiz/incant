@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-12T23:21:27.275818+00:00",
+  "result": "accepted_source",
+  "patch_sha256": "dbb3dca0e65866ebaaad26f2e7b90e60671853a3824b24320f4578b92908711a",
+  "review": [
+    "Three test fixture builders use existing public SetPhysicsMode transaction with exact compiled kernel",
+    "Existing intended assertions run in both kernels rather than prematurely denying fixture",
+    "Explicit opposite-mode control retains startup refusal, empty stdout, absent PCM, unchanged authoring",
+    "No production admission change"
+  ],
+  "limits": [
+    "Green broader tests pending; source review only"
+  ]
+}

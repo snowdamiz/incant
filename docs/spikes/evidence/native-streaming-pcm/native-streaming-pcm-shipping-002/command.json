@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "python3",
+    "-B",
+    "tools/probes/native-streaming-pcm.py",
+    "--fixture",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-fixture-001",
+    "--old-package",
+    "/Users/andreyyurlov/.codex/incant-evidence/0060/packages/f5-en-playing",
+    "--existing-proof",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-001/proof",
+    "--output",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-shipping-002/proof"
+  ],
+  "cwd": "/Users/andreyyurlov/.codex/worktrees/color-mip-roles/incant",
+  "exit_code": 0,
+  "seconds": 6.0004537920031
+}

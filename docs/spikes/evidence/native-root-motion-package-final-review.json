@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-12T19:02:19.156539+00:00",
+  "verdict": "accepted",
+  "commit": "f17e27ab9f80d2a2fe6921fa901ede319491653a",
+  "manifest_sha256": "9b08c700d24f814d709311eecdc78e95766e94eb28e73490c787dd7289a2be25",
+  "archive_entries": 147,
+  "engine_inputs": 1693,
+  "probe_inputs": 9,
+  "package_files": 14,
+  "command_stream_receipts": 31,
+  "fresh_processes": 3,
+  "complete_scalars_each": 22464,
+  "bounded_vectors_each": 256,
+  "exact_refusals": 11,
+  "review": [
+    "New public helper and native oracle preserve public author/import/atomic selection/Undo/Redo/reopen. Actual oracle uses native world and captured cooked assets; no guest bytes or ABI decoder; shared canonical solver is explicitly qualified.",
+    "Rehashed retained engine/probe/package/command/archive identities; re-evaluated every full scalar record against oracle and exact development parity, PCM hashes and native motion assertions. Verified precise refusals against raw command outputs and absent outputs.",
+    "Earlier source/actual-host acceptance cfc365da remains separate from this public package execution review."
+  ],
+  "limitations": [
+    "CPU local package proof only. No rendered/GPU/device/performance/phase gate. Guest and physics checkpoint limitations remain explicit."
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "at": "2026-10-13T05:59:30.766152+00:00",
+  "main": "0a040a40e9cc2ac357e50b413852861657a44468",
+  "summary": {
+    "passed": true,
+    "current_checks": 6,
+    "focused_tests": 22,
+    "python_tests": 369,
+    "python_platform_skips": 4,
+    "node_tests": 22,
+    "actual_compiler_modes": [
+      "deterministic",
+      "fast"
+    ],
+    "actual_solver_targets": 5,
+    "frozen_inputs": 2878,
+    "source_paths": [
+      "tools/physics_features.py",
+      "tools/tests/test_physics_features.py"
+    ],
+    "no_rust_dependency_or_workflow_changes": true,
+    "new_shipping_execution": false
+  },
+  "source_freeze": {
+    "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/freeze.json",
+    "sha256": "0591975d144521379d6ae54e272fcb8da68803defc6754520114bcebb162a4b0"
+  },
+  "sources": {
+    "tools/physics_features.py": "a667150fa4ddaf3e79f0b7c9f4cc8bddf377894d2ab606210b0f0fe1ce83b6c9",
+    "tools/tests/test_physics_features.py": "b585b923bc4ef47754adde34d731c3ea2edddb5d94593e9fdef6ed902e805b09"
+  },
+  "checks": [
+    {
+      "name": "compiler-deterministic",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--target",
+        "aarch64-apple-darwin",
+        "--message-format=json"
+      ],
+      "exit": 0,
+      "seconds": 11.742151541999192,
+      "target": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/compiler-deterministic.stdout",
+        "sha256": "724c36f6de3364fc8975b87ff53cdb0a3e348cd711388feddab01dc2e70d0e7c"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/compiler-deterministic.stderr",
+        "sha256": "a8ae27ebac8d0f10b8bf437118dd4f3249a5e507c2f5dd2b1cac2f8717fd071e"
+      }
+    },
+    {
+      "name": "compiler-fast",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "--target",
+        "aarch64-apple-darwin",
+        "--message-format=json",
+        "--no-default-features"
+      ],
+      "exit": 0,
+      "seconds": 5.5227601250007865,
+      "target": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/compiler-fast.stdout",
+        "sha256": "afba616db7a3f96b47e4b6c6457bf443882935dd1f1ce37e6d0261085c290092"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/compiler-fast.stderr",
+        "sha256": "b12262de9d374ddd6ba9590e0d40d0b1d3d3543408636a44a60b69f7829a2bbe"
+      }
+    },
+    {
+      "name": "tools",
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 27.637783582998964,
+      "target": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/tools.stdout",
+        "sha256": "ee3fa9db630781064c6981a8f40bba1f8f4e8bca6bb4d2f451c54f314cb80b03"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/tools.stderr",
+        "sha256": "fbb5035693bab1726c8d69e18f5ec10ecf926fbfbdf9ad1c03f42a8a30f9cb6b"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.247630208999908,
+      "target": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.031443541003682185,
+      "target": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main"
+      ],
+      "exit": 0,
+      "seconds": 0.027829042002849746,
+      "target": "/Users/andreyyurlov/.codex/incant-integration-targets/incant-dbf85c6c752803e4ffcf17b4ee9153f7e76e8c842fb98fb36cefafc89bf3e538",
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-artifact-vendor-identity-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "hosted_failure": {
+    "candidate": "2fab0688fce68f4933ba4f14a7af074a088bfeb6",
+    "run": 38348941130,
+    "job": 115136798310,
+    "step": "Export committed sources and execute the copied shipping game",
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint19/checks-115136798310.log",
+    "sha256": "cd9bc9d697c47bec892af0fe73103acbec417dff59c6b65f52288c66101dafd2",
+    "error": "parry2d/parry3d unexpected compiler package/version/library identity; missing target physics dependency",
+    "source_identities": {
+      "tools/physics_features.py": "514b60331bf9610505eaf2ed4f603186cd918273898c334a2611c92d2fd31821",
+      "tools/export_native.py": "b29b2c9befa358bbd1cf31d76a61ea945f30ec0b886a4a01a51c76897831ff01",
+      "Cargo.toml": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+      "third_party/parry2d/Cargo.toml": "4fa1f68134c43071c4369c72fe358d5f44d46376f16e8aaa2308f434a9a87fbf",
+      "third_party/parry3d/Cargo.toml": "b60e242a499632ce2a7f51d1d730402914cc6cee202d20822ddb6b33f9810f84"
+    },
+    "qualification": "Hosted exporter reached successful Cargo build and codegen checks, then refused physics artifact audit; no package was published."
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/physics-artifact-vendor-identity/artifacts.json.gz",
+    "sha256": "d5f1d92fccf7cec4d1c0888f921939988e0514d88b86e582b7a94c7e1553ba1c",
+    "records": 30,
+    "payloads": 25,
+    "bytes": 512215
+  },
+  "limits": [
+    "No Rust, solver math, feature requirement, workflow or timeout changes.",
+    "Actual compiler target checks use ci and the two native physics libraries, not a fresh shipping package.",
+    "The historical failed candidate is immutable; repaired ordinary shipping export and all required release checks remain pending."
+  ],
+  "review_state": "Independent source and final evidence accepted; exact-head fast check required",
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-artifact-vendor-identity/final-review.json",
+    "sha256": "d96e36da1e6c679ee776aee0edc15dbd449b8be1bd5f119bbfce2e064d6ce285"
+  },
+  "windows_same_cause": {
+    "path": "docs/spikes/evidence/physics-artifact-vendor-identity/windows-same-cause.json",
+    "sha256": "e56f3d8fc79142aba435485bcc06ed3bfa200a812835e3c974f1fe28043bb2dd"
+  }
+}

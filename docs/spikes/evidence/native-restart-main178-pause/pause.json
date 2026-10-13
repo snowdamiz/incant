@@ -1,0 +1,739 @@
+{
+  "at": "2026-10-12T23:41:17.864615+00:00",
+  "state": "completed local proof; paused before independent integration review/publication",
+  "tested_head": "7f6e41c4a1a4d799dd115944f26cee51676fd36c",
+  "actual_main": "02203670a7f18c68ff9e3bcf1913b0d574e82f6d",
+  "frozen_inputs": 1927,
+  "unchanged": true,
+  "producer": "be0ef2d7093071379dfc90a859ca54a38688f42d",
+  "source_comparison": "33/34 accepted producer inputs exact; player Cargo manifest preserves current physics defaults and forwarding plus restart compiler dev edge.",
+  "checks": [
+    {
+      "name": "window-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 32.66129208300117,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/window-tests.log",
+      "sha256": "66240a54cd8375e10415dce37f95bdeb4773d8ca229e74dae6e71e9f94351d23"
+    },
+    {
+      "name": "runtime-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime"
+      ],
+      "exit": 0,
+      "seconds": 54.955245584002114,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/runtime-tests.log",
+      "sha256": "8588b6c9b34d20c327a04a47f0e93ee82495830755b0d8d95037044cc9414c88"
+    },
+    {
+      "name": "mobile-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "mobile-ffi",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 24.21785020799871,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/mobile-tests.log",
+      "sha256": "20df22455300cb0bdc6ce584d49b83112f92ed6de5ee0c6095f29e80ba380b68"
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_audio_runtime",
+        "--all-targets",
+        "--features",
+        "incant_game_player/native-window,incant_game_player/mobile-ffi",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 13.908585833996767,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/clippy.log",
+      "sha256": "961500fb6102d170481f8c17103e4b3119363f3e81c2605fad3b8fcf83089a5e"
+    },
+    {
+      "name": "headless",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 47.78505674999906,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/headless.log",
+      "sha256": "807aad3dca3b2b6b35b9a17397fb8f8363c2ba3f7e4e7a8304ca155cd646ecf5"
+    },
+    {
+      "name": "static-check",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "static-module,render-input"
+      ],
+      "exit": 101,
+      "seconds": 19.713452875002986,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-check.log",
+      "sha256": "61322fbb0d56553c7e75241ce456a3fc142b8d9a097827879c9044bc5f8a039c"
+    },
+    {
+      "name": "static-fixture-cook",
+      "command": [
+        "./tools/cargo",
+        "build",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_wasm_cook"
+      ],
+      "exit": 0,
+      "seconds": 1.238351624997449,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture-cook.log",
+      "sha256": "fb49c8422d0984c50aed1565dd6287996abd36538b9b3403f7320e713700d19f"
+    },
+    {
+      "name": "static-wabt-version",
+      "command": [
+        "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-conformance-007/inputs/wabt/bin/wasm2c",
+        "--version"
+      ],
+      "exit": 0,
+      "seconds": 0.01362104200234171,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-wabt-version.log",
+      "sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed"
+    },
+    {
+      "name": "static-rust-guest",
+      "command": [
+        "python3",
+        "tools/rust_guest.py",
+        "crates/incant_wasm_dev/fixtures/bulk.rs",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bulk.wasm"
+      ],
+      "exit": 0,
+      "seconds": 1.2122009590020753,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-rust-guest.log",
+      "sha256": "612dcc7d49d4ac216c194333d979f50ae66820c44dc32e445f77ca9c3e421ce7"
+    },
+    {
+      "name": "static-fixture-prepare",
+      "command": [
+        "python3",
+        "tools/wasm2c.py",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bundle",
+        "--module",
+        "bulk=/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bulk.wasm",
+        "--wabt",
+        "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-compound-conformance-007/inputs/wabt",
+        "--cook",
+        "/Users/andreyyurlov/.codex/incant-planar-integration-target/ci/incant_wasm_cook"
+      ],
+      "exit": 0,
+      "seconds": 0.15249587500147754,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture-prepare.log",
+      "sha256": "2aae8621aaa71466a3be9558de5e2138dd864de539b58d5200c3b35c4a8d9244"
+    },
+    {
+      "name": "static-check-retry",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "static-module,render-input"
+      ],
+      "exit": 0,
+      "seconds": 3.3709017080036574,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-check-retry.log",
+      "sha256": "8c1ce4c151a8224ba36344d874a342107d6ff3a3c3486be93c64701fd011c1da"
+    },
+    {
+      "name": "compiler-free-check",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_script",
+        "--no-default-features"
+      ],
+      "exit": 0,
+      "seconds": 6.365731750003761,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/compiler-free-check.log",
+      "sha256": "50747bd23f1ec31c9f760bcc0f50f38bba70582cf28ebdcfe531724a3e05161b"
+    },
+    {
+      "name": "ts-samples-core",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "samples/core/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.22224454199749744,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-samples-core.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ts-samples-planar",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "samples/planar/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.20510662499873433,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-samples-planar.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ts-sdk-ts",
+      "command": [
+        "node",
+        "node_modules/typescript/bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.20066458299697842,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-sdk-ts.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "graphs",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_runtime",
+        "incant_game_player",
+        "incant_script",
+        "--features",
+        "incant_game_player/static-module,incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 0.3882014999981038,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/graphs.log",
+      "sha256": "a5ae06e078f8dca5b3b87ebe583bec9a85b2b118b41f608fee5bb26ee8380041"
+    },
+    {
+      "name": "features",
+      "command": [
+        "python3",
+        "tools/physics_features.py",
+        "manifest"
+      ],
+      "exit": 0,
+      "seconds": 0.03902666599606164,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/features.log",
+      "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.1666557919961633,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.028531832998851314,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.015955332994053606,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-prepare",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "prepare",
+        "core",
+        "/Users/andreyyurlov/.codex/incant-evidence/core-presentation-binding-002/authoring",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-development",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 7.2793878329976,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-prepare.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-ship",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "ship",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-development",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping"
+      ],
+      "exit": 0,
+      "seconds": 260.2001437079962,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-ship.log",
+      "sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868"
+    },
+    {
+      "name": "planar-prepare",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "prepare",
+        "planar",
+        "/Users/andreyyurlov/.codex/incant-evidence/planar-presentation-bindings-001/presentation-002/authoring",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-development",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/incant_headless"
+      ],
+      "exit": 0,
+      "seconds": 6.433590375003405,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-prepare.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "planar-ship",
+      "command": [
+        "python3",
+        "tools/probes/native-session-restart.py",
+        "ship",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-development",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping"
+      ],
+      "exit": 0,
+      "seconds": 254.7296975000063,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-ship.log",
+      "sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868"
+    }
+  ],
+  "tests": {
+    "window-tests": {
+      "passed": 59,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "runtime-tests": {
+      "passed": 284,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 28
+    },
+    "mobile-tests": {
+      "passed": 12,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    }
+  },
+  "proofs": {
+    "core": {
+      "result_sha256": "c452dfdfbf6ce41a9030325df08e538807c0a2f19094dc281011750895546998",
+      "player_sha256": "066bb3489090ce361d9edf5c9e21a79abbf30af368a501ea6e490d77baa7b0a3",
+      "commands": 12,
+      "cases": [
+        "win",
+        "lose",
+        "gamepad",
+        "jump",
+        "skip-pickup",
+        "wall",
+        "repeat-win",
+        "idle",
+        "win-restart-win",
+        "gamepad-restart-win",
+        "lose-restart-win",
+        "held-input-restart-idle"
+      ],
+      "exact_fresh_session_pcm": true,
+      "same_simulation_tick_distinct_host_checks": true,
+      "inventory_files": 89,
+      "inventory_sha256": "dc7baad2fca4f565ccf30cba1c05d88c45f430915d0da629cd5a4dc83ea051c1"
+    },
+    "planar": {
+      "result_sha256": "094fc5e6acf2e549d79be7a48ae0f0f721429de476cd7e150c4fe0c8defe21b9",
+      "player_sha256": "6d768989cdc019c3aa9349ccbbbb5312f23499962f2f2eac699e02e2e331ea37",
+      "commands": 12,
+      "cases": [
+        "win",
+        "gamepad",
+        "lose",
+        "wall",
+        "locked-exit",
+        "diagonal",
+        "repeat-win",
+        "idle",
+        "win-restart-win",
+        "gamepad-restart-win",
+        "lose-restart-win",
+        "held-input-restart-idle"
+      ],
+      "exact_fresh_session_pcm": true,
+      "same_simulation_tick_distinct_host_checks": true,
+      "inventory_files": 81,
+      "inventory_sha256": "7927658df05cc5d8bc804139737cbaa394c2fb328b913585806d9b4b7f4307d1"
+    }
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/window-tests.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/window-tests.log.gz",
+      "bytes": 16730,
+      "sha256": "66240a54cd8375e10415dce37f95bdeb4773d8ca229e74dae6e71e9f94351d23",
+      "gzip_sha256": "857a1cb7750818b367d6080adff71ed9559f47574dee99585eb109d5f407adc7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/runtime-tests.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/runtime-tests.log.gz",
+      "bytes": 35092,
+      "sha256": "8588b6c9b34d20c327a04a47f0e93ee82495830755b0d8d95037044cc9414c88",
+      "gzip_sha256": "d24b3a7a3dec129d04a1a241bc1fee487c9016db8d73d6ea91bee47716fb6fe0"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/mobile-tests.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/mobile-tests.log.gz",
+      "bytes": 3400,
+      "sha256": "20df22455300cb0bdc6ce584d49b83112f92ed6de5ee0c6095f29e80ba380b68",
+      "gzip_sha256": "a83237e2b203e7cf1c88c838b7e6f454923426d8b8099f55d9201f0c476b07d2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/clippy.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/clippy.log.gz",
+      "bytes": 11091,
+      "sha256": "961500fb6102d170481f8c17103e4b3119363f3e81c2605fad3b8fcf83089a5e",
+      "gzip_sha256": "fd8b469d758128266f8e9edd32f8fdcf25b866f22c2ff446a1aeaa360ff13948"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/headless.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/headless.log.gz",
+      "bytes": 4476,
+      "sha256": "807aad3dca3b2b6b35b9a17397fb8f8363c2ba3f7e4e7a8304ca155cd646ecf5",
+      "gzip_sha256": "4c278929cc1ec13ae007153bf21a0b4999318afcfd4f33e833e6e5a36fbe9e21"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-check.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/static-check.log.gz",
+      "bytes": 2856,
+      "sha256": "61322fbb0d56553c7e75241ce456a3fc142b8d9a097827879c9044bc5f8a039c",
+      "gzip_sha256": "7a3a3eb971aeb59ea766689b2943b563359c05ca5e5406ee0b1e927d56130255"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture-cook.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/static-fixture-cook.log.gz",
+      "bytes": 182,
+      "sha256": "fb49c8422d0984c50aed1565dd6287996abd36538b9b3403f7320e713700d19f",
+      "gzip_sha256": "a58b9e3c11fe014e6e4fcc459c6903210f34afa11c7bad0b66af11f415aec22b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-wabt-version.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/static-wabt-version.log.gz",
+      "bytes": 7,
+      "sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed",
+      "gzip_sha256": "73a3a902b72c61cbe1fab5f805889e053be32485dd9863fc178689bebca1129e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-rust-guest.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/static-rust-guest.log.gz",
+      "bytes": 3941,
+      "sha256": "612dcc7d49d4ac216c194333d979f50ae66820c44dc32e445f77ca9c3e421ce7",
+      "gzip_sha256": "a13de0c0c2e1018c2ba92423fb23a7814947866f3b712d898875c7c919d0a2c1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture-prepare.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/static-fixture-prepare.log.gz",
+      "bytes": 805,
+      "sha256": "2aae8621aaa71466a3be9558de5e2138dd864de539b58d5200c3b35c4a8d9244",
+      "gzip_sha256": "daf0ca6637c2f0a7e0cedacc7e588dc5d2a145f5dcccf463133d4b270677421d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-check-retry.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/static-check-retry.log.gz",
+      "bytes": 1682,
+      "sha256": "8c1ce4c151a8224ba36344d874a342107d6ff3a3c3486be93c64701fd011c1da",
+      "gzip_sha256": "7298be3669e9a47683e259e8b8338393c35d50b39d4026db26af60e6ed4ab423"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/compiler-free-check.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/compiler-free-check.log.gz",
+      "bytes": 781,
+      "sha256": "50747bd23f1ec31c9f760bcc0f50f38bba70582cf28ebdcfe531724a3e05161b",
+      "gzip_sha256": "7c14e20517b17aac1c6cd8b33f1a56e641a0e90b4cdf842645cef1486fef06de"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-samples-core.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/ts-samples-core.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-samples-planar.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/ts-samples-planar.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/ts-sdk-ts.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/ts-sdk-ts.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/graphs.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/graphs.log.gz",
+      "bytes": 170,
+      "sha256": "a5ae06e078f8dca5b3b87ebe583bec9a85b2b118b41f608fee5bb26ee8380041",
+      "gzip_sha256": "207635b45429c3fa76ac1cf03f11a79915f79f4a891e205aef67fb9beb997086"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/features.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/features.log.gz",
+      "bytes": 29,
+      "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888",
+      "gzip_sha256": "390c0b44d0bc2cf8838a1d9c5e4c8ad98bf35f90b21f104d1f91b4d119c57e0c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/fmt.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/fmt.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/conventions.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/conventions.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/diff.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/diff.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-prepare.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/core-prepare.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-ship.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/core-ship.log.gz",
+      "bytes": 132,
+      "sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868",
+      "gzip_sha256": "746a792fc85ce637fa56373b6103e38ebc4ac23d9d23e248ffad35bf699ea678"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-prepare.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/planar-prepare.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-ship.log",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/logs/planar-ship.log.gz",
+      "bytes": 132,
+      "sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868",
+      "gzip_sha256": "746a792fc85ce637fa56373b6103e38ebc4ac23d9d23e248ffad35bf699ea678"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/results.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/results.json.gz",
+      "bytes": 12507,
+      "sha256": "aea2939f3a5ac1fdd824b26edabb6a9ab9002cb14456d8c7626707da762cc79a",
+      "gzip_sha256": "745341d9f77fa69bc15c0b1d982e75a54d37f0ef528087bb5d34970150a163e3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/freeze.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/freeze.json.gz",
+      "bytes": 223550,
+      "sha256": "8eddc01dd561789db6d19f7ed741d80ea7176049a5c0a981c85b555fbb6467c6",
+      "gzip_sha256": "7c2091b24dd9bb19f7eff1895887e65d5cf13becd048f7a526e11f01f77a7352"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/terminal.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/terminal.json.gz",
+      "bytes": 133,
+      "sha256": "b2fcae7e61e2bf273acd7d267ab942e580c02af8f2ab02e0ddf96d892c55dd68",
+      "gzip_sha256": "b809767f13be5f2334f4998760990bb8582237b920925baa844d35d96f3c0eed"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/binary.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/binary.json.gz",
+      "bytes": 215,
+      "sha256": "6fcabff4d64e9d5b557b9dabf2b4edc5acef83b605ac466f24bfecb0047cb305",
+      "gzip_sha256": "d93dcbf406311afea184243b31ed3ed37c90c3692c321e5cfaf2b20a257c41fe"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/producer-source-comparison.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/producer-source-comparison.json.gz",
+      "bytes": 9667,
+      "sha256": "b94c8198be3093b0573a0eca53efaa14c0ac30a87861860e056bb0090107d20b",
+      "gzip_sha256": "7d4182f23b6284620ee85ccb63a06ebe37efe645b099629c1e10f87a7d547fd3"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/integration-manifest.patch",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/integration-manifest.patch.gz",
+      "bytes": 3360,
+      "sha256": "b0f4828f5d27cb0d1c1ba723139d2460f61068e7e5094ec401465c9354930865",
+      "gzip_sha256": "6a87d980913efe43961796f1e0e7f9172fd4518fb530a26f5bbaba194ddb3c30"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture-provenance.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/static-fixture-provenance.json.gz",
+      "bytes": 1955,
+      "sha256": "4b3fb4ea8822d1f89943df2df697544005d5100a87a58d565277d516c9ed65ab",
+      "gzip_sha256": "41236f0fa6fdad68227b316fa7172079e16585577ff9cec942b4620dcc974034"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-shipping/result.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/core/result.json.gz",
+      "bytes": 4582,
+      "sha256": "c452dfdfbf6ce41a9030325df08e538807c0a2f19094dc281011750895546998",
+      "gzip_sha256": "08b31c9a7f8e4269cdbbff0fb5bf13f3b40533782a494ec6e5f84d5632836fb1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/core-development/prepared.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/core/prepared.json.gz",
+      "bytes": 9062,
+      "sha256": "b219bfe9e68e2ba5610b123516e77fccb70fd5b1046a844a9b7b41f56db2ad5c",
+      "gzip_sha256": "b7a1bd553e6e07d2e73cb03920a2f9f4f95aa3d2ec01434806757cca3d0f4c9b"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-shipping/result.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/planar/result.json.gz",
+      "bytes": 3292,
+      "sha256": "094fc5e6acf2e549d79be7a48ae0f0f721429de476cd7e150c4fe0c8defe21b9",
+      "gzip_sha256": "91b7f8932748f3baaed69da40aacdd157d7c7133ae471215d7266a5075815bcb"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/planar-development/prepared.json",
+      "path": "docs/spikes/evidence/native-restart-main178-pause/planar/prepared.json.gz",
+      "bytes": 5394,
+      "sha256": "0d7aedcb430d24105e14f1ce0c3e692f87f804d20581f11faacf43a104b414e4",
+      "gzip_sha256": "465ac96ea1464d0f3eeb23dee57a6a7b72c5194618ad4882966c280c9cfb89bd"
+    }
+  ],
+  "initial_failure": "static-check101 omitted mandatory INCANT_WASM_BUNDLE. No source change: current raw guest and pinned WABT freshly prepared trusted compile-only bundle; static-check-retry0.",
+  "pause": "User requested pause while final Planar export was already active. Existing bounded chain drained; no new build, PR, checkpoint or promotion started.",
+  "resume": [
+    "Merge actual main179 ancestry after reviewing exact source differences; tested source currently7f6e41c4.",
+    "Prepare full integration packet and request independent final source/evidence review.",
+    "Only then publish scoped restart PR and merge on exact required fast success.",
+    "Next accepted Android2c17 is parked c92588d7 before validation; streaming PCM49e18 follows restart separately."
+  ],
+  "limits": [
+    "No actual native window/GPU/device test.",
+    "Whole-session fresh startup reset does not provide physics snapshot continuation.",
+    "Static/development Wasm and headless Play restart remain explicitly unsupported."
+  ]
+}

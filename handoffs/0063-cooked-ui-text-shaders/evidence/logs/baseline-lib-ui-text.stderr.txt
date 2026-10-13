@@ -1,0 +1,18 @@
+1:1 text: max |alpha error| 0.00135, skipped 0, ink 459.4
+scale 0.42 angle 0.4: max |alpha error| 0.00201, skipped 10, ink 207.4
+scale 1.7 angle -0.15: max |alpha error| 0.00324, skipped 0, ink 1787.4
+scale 0.24 angle 0: max |alpha error| 0.00227, skipped 13, ink 67.0
+UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+region: outside 0 by 0, widest 5 (51 channels > 2); vs exact worst 1, >1: 0
+UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+scale 1 Rgba8UnormSrgb: outside 0 by 0, widest 4 (44 channels > 2); vs exact worst 1, >1: 0, changed 4245
+scale 2 Rgba8UnormSrgb: outside 0 by 0, widest 21 (6535 channels > 2); vs exact worst 1, >1: 0, changed 17954
+scale 1.5 Rgba8UnormSrgb: outside 0 by 0, widest 29 (6114 channels > 2); vs exact worst 1, >1: 0, changed 10146
+scale 1 Rgba8Unorm: outside 0 by 0, widest 2 (0 channels > 2); vs exact worst 0, >1: 0, changed 4246
+UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+nested clips: outside 0 by 0, widest 4 (16 channels > 2); vs exact worst 1, >1: 0
+UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+UI draw selected adapter: AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }
+over world: outside 0 by 0, widest 3 (7 channels > 2); vs exact worst 1, >1: 0
+over world, text under selection: outside 279 by 47

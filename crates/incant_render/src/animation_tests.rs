@@ -1,6 +1,5 @@
 use super::*;
-#[path = "../../incant_assets/tests/skeletal/fixture.rs"]
-mod fixture;
+use crate::models::skeletal_fixture as fixture;
 use incant_render_data::{SceneInput, SceneNode};
 
 fn source(dir: &std::path::Path) -> Arc<RuntimeAsset> {
@@ -21,6 +20,7 @@ fn node(source: Arc<RuntimeAsset>, id: &str, seconds: f64) -> SceneNode {
             animation_blend: None,
             animation_pose: None,
             animation_ik: None,
+            animation_root: None,
             animation: Some(incant_types::AnimationSample {
                 clip: Some(0),
                 seconds,
@@ -271,7 +271,7 @@ fn retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame(
         .as_mut()
         .unwrap()
         .clip = Some(1);
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
     let output =
         crate::hdr_output::texture(&renderer, wgpu::TextureFormat::Rgba8UnormSrgb, 160, 96);
@@ -498,7 +498,7 @@ fn single_sided_reflected_skin_and_shadow_match_static_transform_oracle() {
         .unwrap()
         .clip = Some(2);
     dir.close().unwrap();
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
     let output =
         crate::hdr_output::texture(&renderer, wgpu::TextureFormat::Rgba8UnormSrgb, 160, 96);

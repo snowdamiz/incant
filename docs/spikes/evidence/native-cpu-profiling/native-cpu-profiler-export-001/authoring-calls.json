@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/private/tmp/incant-cpu-profiler-target/debug/incant_headless",
+    "rpc",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-001/authoring/project.json",
+    "--journal",
+    "/Users/andreyyurlov/.codex/incant-evidence/native-cpu-profiler-export-001/authoring/journal.jsonl"
+  ],
+  "pid": 51782,
+  "exit": 0,
+  "calls": []
+}

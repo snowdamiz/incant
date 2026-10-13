@@ -1,3 +1,5 @@
+#[path = "support/scene_format.rs"]
+mod scene_format;
 use incant_runtime::*;
 use incant_types::{Animation, Transform};
 use std::sync::Arc;
@@ -170,7 +172,10 @@ fn binary_v15_and_existing_save_envelope_resume_active_paused_completed_and_rest
     ] {
         let original = scene(looping, rest);
         let bytes = original.to_bytes();
-        assert_eq!(&bytes[8..12], &15u32.to_le_bytes());
+        assert_eq!(
+            &bytes[8..12],
+            &crate::scene_format::scene_format(15).to_le_bytes()
+        );
         assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
         let mut world = NativeWorld::from_bytes(&bytes).unwrap();
         for _ in 0..steps {
@@ -335,9 +340,12 @@ fn v15_requires_a_tree_and_does_not_relabel_legacy_graphs() {
     let assets = original.visual_assets().to_vec();
     let legacy = original.with_spatial(assets, nodes).unwrap();
     let mut bytes = legacy.to_bytes();
-    assert_eq!(&bytes[8..12], &14u32.to_le_bytes());
+    assert_eq!(
+        &bytes[8..12],
+        &crate::scene_format::scene_format(14).to_le_bytes()
+    );
     assert_eq!(CookedScene::from_bytes(&bytes).unwrap().to_bytes(), bytes);
-    bytes[8..12].copy_from_slice(&15u32.to_le_bytes());
+    bytes[8..12].copy_from_slice(&crate::scene_format::scene_format(15).to_le_bytes());
     checksum(&mut bytes);
     assert!(matches!(
         CookedScene::from_bytes(&bytes),

@@ -176,6 +176,25 @@ impl Player {
             )?,
         )))
     }
+    pub fn enable_restart_requests(&mut self) -> Result<()> {
+        match self {
+            Self::Plain(game) => game.enable_restart_requests()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.enable_restart_requests()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(_) => return Err("offscreen GPU restart is unsupported".into()),
+        }
+        Ok(())
+    }
+    pub fn take_session_request(&mut self) -> Result<Option<incant_script::SessionRequest>> {
+        Ok(match self {
+            Self::Plain(game) => game.take_session_request()?,
+            #[cfg(feature = "render-input")]
+            Self::Spatial(game) => game.take_session_request()?,
+            #[cfg(feature = "render-gpu")]
+            Self::Gpu(game) => game.inner.take_session_request()?,
+        })
+    }
     pub fn checkpoint_bytes(&self) -> Result<Vec<u8>> {
         Ok(match self {
             Self::Plain(game) => game.checkpoint_bytes()?,
@@ -260,7 +279,17 @@ impl Player {
                             .map(|b| (ulid::Ulid::from_bytes(w.id.0).to_string(), b.text()))
                     })
                     .collect();
-                report["ui"] = serde_json::json!({"widgets":ui.widgets().len(),"viewport":ui.layout().ok_or("UI layout invariant")?.viewport,"focus":ui.focus().map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),"values":values,"glyphs":paint.texts.iter().map(|t|t.glyphs.len()).sum::<usize>(),"atlas_sha256":incant_assets_runtime::sha256(paint.atlas.pixels())});
+                let sources: std::collections::BTreeMap<_, _> = paint
+                    .texts
+                    .iter()
+                    .map(|t| {
+                        (
+                            ulid::Ulid::from_bytes(t.id.0).to_string(),
+                            t.layout.source(),
+                        )
+                    })
+                    .collect();
+                report["ui"] = serde_json::json!({"widgets":ui.widgets().len(),"viewport":ui.layout().ok_or("UI layout invariant")?.viewport,"focus":ui.focus().map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),"values":values,"sources":sources,"glyphs":paint.texts.iter().map(|t|t.glyphs.len()).sum::<usize>(),"atlas_sha256":incant_assets_runtime::sha256(paint.atlas.pixels())});
             }
             return Ok(Some(report));
         }
@@ -289,7 +318,18 @@ pub(crate) fn input_report(
         .flat_map(|n| n.layout.glyphs())
         .map(|g| g.font)
         .collect();
+    let sources: std::collections::BTreeMap<_, _> = text
+        .into_iter()
+        .flat_map(|t| &t.nodes)
+        .map(|n| {
+            (
+                ulid::Ulid::from_bytes(n.id.0).to_string(),
+                n.layout.source(),
+            )
+        })
+        .collect();
     Ok(serde_json::json!({
+        "text_sources": sources,
         "text_count":text.map_or(0, |t|t.nodes.len()), "text_generation":input.text_generation(),
         "text_glyph_count":glyph_count,"text_font_count":text_fonts.len(),
         "text_missing_clusters":text.map_or(0,|t|t.nodes.iter().map(|n|n.layout.missing_clusters().len()).sum::<usize>()),

@@ -19,7 +19,7 @@ fn repack(f: &mut Fixture) -> [u32; 4] {
 #[test]
 #[ignore = "requires a native GPU; run by desktop workflows"]
 fn atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::support::checked(Renderer::headless().unwrap());
     let mut f = Fixture::new(
         &[
             255, 0, 0, 255, 0, 255, 0, 128, 0, 0, 255, 255, 255, 255, 0, 255,

@@ -1,0 +1,15 @@
+{
+  "at": "2026-10-12T21:37:21.125870+00:00",
+  "reviewer": "astra root",
+  "commit": "f28b5441e3656f1ae7ec26bae42a9691f6c8f587",
+  "source_sha256": {
+    "tools/export_native.py": "15f74de2f69a8b2d7a3b1e48e62a9dae9aa153784de0ff7b5c64096c377814b6",
+    "tools/tests/test_native_codegen.py": "29222a65d192069a44e18276c0d63c4ba027c4ed13fd180dd1411a765d56052a"
+  },
+  "decision": "accepted narrow shipping codegen audit repair",
+  "findings": [],
+  "verification": "Root reviewed full patch and ran six focused regressions successfully; actual shipping export retry remains separate proof. Library and binary each retain target-only shipping/compiler checks; final binary requires fat LTO.",
+  "limits": [
+    "Synthetic compiler logs are audit regression coverage, not successful export or cross-platform execution evidence."
+  ]
+}

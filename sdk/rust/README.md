@@ -301,3 +301,49 @@ These copied observations do not grant chain-topology authority or persist Wasm
 memory. Whole-module checkpoints remain explicitly unsupported. See
 [samples/animation_compound.rs](samples/animation_compound.rs) for complete
 captured reads and controls through the real native host.
+
+`Tick::root_motion` copies the complete `incant_root_motion_v1` frame: unchanged
+pose-v5 and ordered IK-v2 data followed by canonical root owner rows. Evaluate
+the native pose, strip the selected root translation/rotation to its fingerprint-
+bound cooked rest (preserving sampled scale), then apply the ordered IK rows.
+The rows also expose movement policy, applying flag, exact `u64` ticks and signed
+`i64` cycles with stable current/outgoing clock owners, plus requested/applied
+interval and accumulated rigid deltas. Application toggles never disable root
+stripping or replay past movement. `control_root_motion` participates in the same
+atomic command quota and sticky callback-error boundary as other native controls.
+
+Every older pose/IK snapshot import explicitly refuses a world with committed
+root stripping, including ExtractOnly and disabled application. Graph-only
+observations remain available. The new complete frame accepts ordinary worlds
+with an empty root table. Callers supply bounded scratch; no native pointer,
+model loader or per-tick source/document parser is introduced. Physics and static
+guest checkpoint limitations are unchanged. Actual dual-host and public root
+package evidence is recorded separately; API availability alone is not that proof.
+
+### Audio declarations and transport
+
+`Tick::audio(scratch)` copies the desired committed audio declarations at callback
+entry: scene/tick, stable entity/clip/bus identities, exact `u64` transport epochs,
+bus parents/gains, source options, spatial positions and listener rotation. This
+is not a mixer cursor or voice-status API. An ended one-shot can still declare
+`playing = true`; use `Restart` to request another playback. The bounded frame is
+at most 32,240 bytes (32 buses, 128 sources and one listener). Its checked views
+borrow caller-owned scratch and remain unchanged by commands queued afterward.
+
+`Tick::audio_commands(commands, scratch)` queues an ordered batch of
+`AudioCommand { entity, control }`. `AudioControl` provides `SetPlaying`, `Stop`,
+`Restart`, `Seek`, `SourceGain` and `BusGain`. Stop/restart/seek increment the
+checked native transport epoch; pause/resume preserves it. Gains validate the
+original `f64` range before native `f32` conversion. Seek admits finite seconds
+in `[0, 3600]`; synchronization with the captured clip additionally checks its
+actual duration. That later mixer failure is terminal, not an atomic callback
+rollback claim.
+
+The new `incant_audio_v1` operations 59–61 preserve every older import/layout.
+A batch has at most 1024 commands and needs 16 + 32 × count scratch bytes.
+Audio shares the existing command/call/transfer quotas. Invalid authorized host
+calls and caught SDK scratch/argument errors discard the whole callback's staged
+numeric, structural and log changes; short reads never copy a partial frame.
+Queued commands never call an audio backend directly. See the real Rust
+[transport sample](samples/audio_transport.rs) and
+[scope/evidence](../../docs/spikes/native-wasm-audio.md).

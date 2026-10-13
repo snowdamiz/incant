@@ -1,0 +1,19 @@
+{
+  "format": "incant-0067-appearance-plan",
+  "budget": 24,
+  "note": "Each entry is one fresh composed game rendering tick 1 offscreen. Every render counts, including any repeat. 12 renders are planned; 12 stay unallocated.",
+  "renders": [
+    {"name": "a1-offset-ui-disabled", "projection": "perspective", "ui": true, "size": [959, 539], "viewport": "offset", "scale16": null},
+    {"name": "a2-offset-ui-100", "projection": "perspective", "ui": true, "size": [959, 539], "viewport": "offset", "scale16": 16},
+    {"name": "a3-offset-ui-75", "projection": "perspective", "ui": true, "size": [959, 539], "viewport": "offset", "scale16": 12},
+    {"name": "a4-offset-ui-50", "projection": "perspective", "ui": true, "size": [959, 539], "viewport": "offset", "scale16": 8},
+    {"name": "b1-full-ui-100", "projection": "perspective", "ui": true, "size": [960, 540], "viewport": "none", "scale16": 16},
+    {"name": "b2-full-ui-75", "projection": "perspective", "ui": true, "size": [960, 540], "viewport": "none", "scale16": 12},
+    {"name": "b3-full-ui-50", "projection": "perspective", "ui": true, "size": [960, 540], "viewport": "none", "scale16": 8},
+    {"name": "c1-ortho-ui-100", "projection": "orthographic", "ui": true, "size": [959, 539], "viewport": "none", "scale16": 16},
+    {"name": "c2-ortho-ui-75", "projection": "orthographic", "ui": true, "size": [959, 539], "viewport": "none", "scale16": 12},
+    {"name": "c3-ortho-ui-50", "projection": "orthographic", "ui": true, "size": [959, 539], "viewport": "none", "scale16": 8},
+    {"name": "d1-pixel-offset-disabled", "projection": "pixel-perfect", "ui": false, "size": [959, 539], "viewport": "offset", "scale16": null},
+    {"name": "d2-pixel-offset-fixed-50", "projection": "pixel-perfect", "ui": false, "size": [959, 539], "viewport": "offset", "scale16": 8}
+  ]
+}

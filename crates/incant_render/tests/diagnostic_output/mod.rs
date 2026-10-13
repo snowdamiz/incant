@@ -95,7 +95,7 @@ fn record(case: &str, renderer: &Renderer, target: &wgpu::Texture, pixels: &[u8]
 #[test]
 #[ignore = "requires a native GPU; actual default/cooked comparison runs separately"]
 fn diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats() {
-    let renderer = Renderer::headless().unwrap();
+    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
     let (width, height) = (160, 96);
     for format in [
         wgpu::TextureFormat::Rgba8Unorm,

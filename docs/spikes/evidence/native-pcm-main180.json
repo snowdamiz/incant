@@ -1,0 +1,580 @@
+{
+  "at": "2026-10-13T00:33:49.033306+00:00",
+  "tested_head": "f47170c24a4b715c090071678edc6d420326fb68",
+  "base_main": "3b2ffd06a8cbe85748723a3cf8acae35b1a89b8a",
+  "review_head": "f47170c24a4b715c090071678edc6d420326fb68",
+  "source_freeze": {
+    "path": "docs/spikes/evidence/native-pcm-main180/freeze.json",
+    "sha256": "2a29cba201abbfcbd03feea45e386d1c684fb84126b43c0657b542749f34f43f",
+    "count": 1946
+  },
+  "producer_comparison": {
+    "producer": "49e18d9afca8cf46075793e4b664ff714270708b",
+    "base": "3b2ffd06a8cbe85748723a3cf8acae35b1a89b8a",
+    "current": "f47170c24a4b715c090071678edc6d420326fb68",
+    "rows": [
+      {
+        "path": "Cargo.lock",
+        "producer_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d",
+        "current_sha256": "c683157804a73bae6f7657f390e7d13e74283980b02d9b03e84b01bf1914131d",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/Cargo.toml",
+        "producer_sha256": "f2433709b8ed9a95cbacfd7bbabc340701aea8b2d4fa58f1908f95e041d70f7b",
+        "current_sha256": "1e48e313ba2081e7a62c7525255cfb3a059c79d445ca3da6df57de0aabb5aebf",
+        "exact": false
+      },
+      {
+        "path": "crates/incant_game_player/src/checkpoint.rs",
+        "producer_sha256": "b5b4d891cf6593ec4922162b290aea71caa0ecfbfaab3f32dd0bd770172b2d2b",
+        "current_sha256": "b5b4d891cf6593ec4922162b290aea71caa0ecfbfaab3f32dd0bd770172b2d2b",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/lib.rs",
+        "producer_sha256": "5cf9df067f0202d3807fd9a43266c89626ac3cbbc94103bfd7244f5ab1cbf049",
+        "current_sha256": "5cf9df067f0202d3807fd9a43266c89626ac3cbbc94103bfd7244f5ab1cbf049",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/pcm_output.rs",
+        "producer_sha256": "a9d2e02db59866238d53effb25a1722ad792251fda63f01c8d31fa692cbeac94",
+        "current_sha256": "a9d2e02db59866238d53effb25a1722ad792251fda63f01c8d31fa692cbeac94",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/pcm_output/tests.rs",
+        "producer_sha256": "8e2732b48908de74c00311f65fc860b00f7f41ed2562522214220ce647a184d2",
+        "current_sha256": "8e2732b48908de74c00311f65fc860b00f7f41ed2562522214220ce647a184d2",
+        "exact": true
+      },
+      {
+        "path": "crates/incant_game_player/src/pcm_output/tests/runner.rs",
+        "producer_sha256": "0b93f9647b4d7fd70b22c1501b1c81947379eaf908a1e1328055cf90bb1d1744",
+        "current_sha256": "0b93f9647b4d7fd70b22c1501b1c81947379eaf908a1e1328055cf90bb1d1744",
+        "exact": true
+      },
+      {
+        "path": "tools/probes/native-streaming-pcm.py",
+        "producer_sha256": "3acc9997b5e73910004f4e4bb993b2bf337c76099ae5556d710aab200278afb9",
+        "current_sha256": "3acc9997b5e73910004f4e4bb993b2bf337c76099ae5556d710aab200278afb9",
+        "exact": true
+      }
+    ],
+    "lock": "Only existing sha2 edge added to incant_game_player; no resolution movement."
+  },
+  "checks": [
+    {
+      "name": "player-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window,mobile-ffi",
+        "--lib"
+      ],
+      "exit": 0,
+      "seconds": 11.899631790998683,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/player-tests.stdout",
+        "sha256": "2112c61def35983bc6e6bd621338dcb8950cb60ffe305ac75b9063d83eb53081"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/player-tests.stderr",
+        "sha256": "ad1b0f6f0372f85c8b84d320b4872abff2949125bf0b868e094176ac0ee67d0a"
+      }
+    },
+    {
+      "name": "checkpoint-restart-tests",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_runtime",
+        "--features",
+        "ui",
+        "--test",
+        "checkpoints",
+        "--test",
+        "restart"
+      ],
+      "exit": 0,
+      "seconds": 16.829918750001525,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/checkpoint-restart-tests.stdout",
+        "sha256": "415defe514f1e1630ccf46209ffea570e8e7a8b4e4c6aa9a523012ca6fa2b73a"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/checkpoint-restart-tests.stderr",
+        "sha256": "d9e9a15ed85035d19d19ac8cc552aa58391c262d547c63823dc0d477d7503b7d"
+      }
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window,mobile-ffi",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 4.973283125000307,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/clippy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/clippy.stderr",
+        "sha256": "b3efe613973e79430e9b580b6cc526bf3dcfe3c1f8227abd617f673c4fb8f3e3"
+      }
+    },
+    {
+      "name": "static-check",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "static-module,render-input"
+      ],
+      "exit": 0,
+      "seconds": 2.178081000005477,
+      "extra_env": {
+        "INCANT_WASM_BUNDLE": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-restart-main178-001/static-fixture/bundle"
+      },
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/static-check.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/static-check.stderr",
+        "sha256": "c775367f2d11b29fe276a1e815890628292e64c85b70fce23bb83ba7ddc65c80"
+      }
+    },
+    {
+      "name": "mobile-check",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "mobile-ffi"
+      ],
+      "exit": 0,
+      "seconds": 2.376848625004641,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/mobile-check.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/mobile-check.stderr",
+        "sha256": "c9f095c810605cf3712ab5363c92b82ddc78220341bb0d74b76e06d2f5a4c89e"
+      }
+    },
+    {
+      "name": "graphs",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_game_runtime",
+        "incant_game_player",
+        "incant_script",
+        "--features",
+        "incant_game_player/render-input"
+      ],
+      "exit": 0,
+      "seconds": 0.33593283299705945,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/graphs.stdout",
+        "sha256": "a2442f552330cbb62813d53fa99bcfc0d862b4019bf847878503a506c976da85"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/graphs.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "physics-features",
+      "command": [
+        "python3",
+        "tools/physics_features.py",
+        "manifest"
+      ],
+      "exit": 0,
+      "seconds": 0.04332020899892086,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/physics-features.stdout",
+        "sha256": "0d556e78cedbd66c0bc03fb2348db5b76642a7f33dc023342d5a00e4be691888"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/physics-features.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.2002676659976714,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/fmt.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/fmt.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.03248308299953351,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.01715012500062585,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "shipping-proof",
+      "command": [
+        "python3",
+        "tools/probes/native-streaming-pcm.py",
+        "--fixture",
+        "/Users/andreyyurlov/.codex/incant-evidence/native-streaming-pcm-fixture-001",
+        "--old-package",
+        "/Users/andreyyurlov/.codex/incant-evidence/0060/packages/f5-en-playing",
+        "--output",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping"
+      ],
+      "exit": 0,
+      "seconds": 254.13498775000335,
+      "extra_env": {},
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping-proof.stdout",
+        "sha256": "477d5edc41eb09e083f985cedbfd3bda05b43e83bf8bcd3c8bcbd284d7b35868"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping-proof.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "counts": {
+    "player-tests": {
+      "passed": 69,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 1
+    },
+    "checkpoint-restart-tests": {
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "groups": 2
+    }
+  },
+  "package_proof": {
+    "passed": true,
+    "player_sha256": "6cf4c9d1e9eb35e5b1ab34101a5dd0d28c69760413bbff0b6277a2ab48f09e26",
+    "fixture": {
+      "project/.incant/cache/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "project/.incant/cache/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "project/.incant/cache/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "project/.incant/cache/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "project/.incant/cache/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "project/.incant/cache/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "project/.incant/cache/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "project/.incant/cache/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "project/.incant/cache/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "project/.incant/cache/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "project/.incant/cache/fonts/04997af85ce1afe4180d11009cc2884dd84449b72338e7d095c96cf6462aeaee.json": "b2d077e4f2a062d3bcc23123f589589c0ae102312c90d8dd112b33bdaae0947c",
+      "project/.incant/cache/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "project/.incant/cache/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "project/.incant/cache/fonts/7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5.ifont": "9de2171e0bbc868b9d74854bdcb76d233eb853932c275363ae9f2bbf32446dd8",
+      "project/.incant/cache/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "project/.incant/cache/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "project/.incant/cache/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "project/.incant/cache/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "project/.incant/cache/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "project/.incant/cache/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "project/.incant/cache/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "project/.incant/cache/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "project/.incant/cache/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "project/.incant-source-transactions/01M4S2MCRNMVJ74EK0DYFEYKJ2.old-receipt": "f4c2bbb0cdbeec8f36b64ee6697d088807cf5ac3826f65fe8ad8464cc8959ee9",
+      "project/.incant-source-transactions/01M4S2MCRNMVJ74EK0DYFEYKJ2.previous": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+      "project/.incant-source-transactions/01M4S2MCTWCMEQYBKFG34Q8GP2.old-receipt": "e4370badeb5302e0dfe06ec906994ede0b948962181aa364c0e00bbc626b17e4",
+      "project/.incant-source-transactions/lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "project/.incant-source-transactions/receipt": "666bd3d64c07ce1edfd93e575ead4b63f437731f84b1d5872eb93855415aca41",
+      "project/art/canyon.bin": "c32b0431a835c4c998cd69ff850291e2ed888ca0fe84e0907d1afebeba90e08d",
+      "project/art/canyon.gltf": "a8622cbd4caea047abd781309fc3869f5207117815ad65631c5e52d317ce30f7",
+      "project/art/cliff_albedo.png": "d1fed013a536eb47c40252b5e5f8375f4209509ed51ed7741950eb365f917069",
+      "project/art/cliff_normal.png": "db93eb916ad971a8ee32ce3a5985d1c88115d113932ac7a358dc9702c7084939",
+      "project/art/core_albedo.png": "b1c535ceafd2c64e03e79c3e46eaa63cab18df359bbf77a70292af7d7e68946e",
+      "project/art/core_emissive.png": "42576b50d661af3f3940eeadc4217122470263695dcb0a7ce9509c515b9d97d1",
+      "project/art/cue_hurt.wav": "209bf03bf0d9eeedf13d67a9bf5e526b8b9d76b90350c116a07b304d6b2212d9",
+      "project/art/cue_lost.wav": "d5757fbfa8f6b4e3e427c0b2748c9343011088ea520715bc91a176ddfa3ac465",
+      "project/art/cue_pickup.wav": "a9cfe5207be237b6976cdafb2944b0f71e63c1a73c7f7608f629ee96bbbcd0c9",
+      "project/art/cue_won.wav": "8b17713a334cb6d830310985b31cbb3c6c7653922e0c03ce121552765a6541e0",
+      "project/art/far_albedo.png": "1f09709ceb8101b85a6ba8b39f4734688624c75ebf4415d69208ad5081b2c902",
+      "project/art/floor_albedo.png": "81445089016eba8e5d992f5d058890a75d06486f5468542df5eededd2e4c3c87",
+      "project/art/manifest.json": "19d87aca92ee147526a7eb1cfdcc648e6bbe949a37a127a61f3687a695632956",
+      "project/art/mesa_loop.wav": "4f80337e2eef1ec9b414ae8959435fd114a6d77bb85b10022aef7f3abb968816",
+      "project/art/mite.bin": "2809da2175266acf004be462557404623f727e84c4400fc91363d37c2d9220e7",
+      "project/art/mite.gltf": "62d807da1b4623e69670e467ef045386df1dc83c999aa1bdb45abf5814c868e2",
+      "project/art/mite_albedo.png": "d3e231c3435475dd201652dc7e50ab835b623ed50042c6d14eba088193c65fde",
+      "project/art/mite_emissive.png": "5298667c8f706a5a4418ae08bd1e93d943e5a382d36b40730991bf2d43befe76",
+      "project/art/pad_albedo.png": "d0cfa2eeaf175365e390491051d05c7203e0b6dc2afc8b7fd950f927a1a3f002",
+      "project/art/rock_albedo.png": "c6ea897e8c3811c4ce737d0dabd2d0b85aa4018a21e97aa8a8be414895ff9f6f",
+      "project/art/sample.bin": "5f17bd5753223c313f622778e8eb6da801e93fe90ec85128c845a17b92c599fc",
+      "project/art/sample.gltf": "6eda3386082556270d7dd567d02fda5f7e2808792705786c8729d892078179ef",
+      "project/art/sky.bin": "5908df68041666952ab3808fbcd5578b960595cc7a5258d0bd4b41c83ea6d27f",
+      "project/art/sky.gltf": "d752767b74d4bc39329dbd022c314bd3298c4529c3b5a325f8bcf29d03168e08",
+      "project/art/sky_dome.png": "dea2f93735ff70b2e6cf543f4bcdfdb9324e4cb72a31abe3cfdd5e0c047d69c0",
+      "project/art/sky_environment.png": "8bf279ee439137e9e1da9d1dc1f1868477b4f398e607a127524dc0d209571d82",
+      "project/art/surveyor.bin": "bfef4a6f7af144a221a86ae9977df320942ff1fcb252ee1f7d30ae9e28d1da5f",
+      "project/art/surveyor.gltf": "8633af82a9e2e247c8c1509ef30f1f41e6866687b492c8329361fdec8d084003",
+      "project/art/top_albedo.png": "0456e5dd8c177da4f1296428356cba8d94815e69568342086def5e88cf107d8a",
+      "project/art/top_normal.png": "5e9171d91392549a8e07b852273b0de5aab1a8c398ce1121712ff1e344ffd5ab",
+      "project/art/valley.png": "c866ba77b019320be6fea2c8f4d5d988664f9816c20b98a8c1ef007dfb57d93e",
+      "project/core.journal.jsonl": "fcb4cac23ce60f414fd25b403fca698024c83b3586d102dd63cb14843c8b6aed",
+      "project/core.json": "443f32437090cb510278f11f4ae5da142d3028f074ad2ec91ce30b5c719fcb01",
+      "project/fonts/CoreSampleSC-Regular.ttf": "7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5",
+      "project/fonts/Inter-Regular.ttf": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384",
+      "project/fonts/NotoSansArabic.ttf": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56",
+      "project/gameplay.ts": "58d7007de2cb942de4bf4c254b4d514deb07df15a88cb1b057cac30fbca393a5",
+      "receipt.json": "557d20b897b02bb69db80f94d6637a639de4d6b5b2825228864f3a05ce64dbe1",
+      "win-input.json": "5c23f6f64bf59a8c40634f8e34f4469ab0a17f40750f02bcbee630f721729a63"
+    },
+    "old_package": {
+      "build.txt": "314de99032a540bd512f50f8073516d45a9545530a8bdcea3bfac74772f5cf25",
+      "cargo.jsonl": "a26f98f12efa277f9e475aa065742f73ef4e0c11ccc49009c9bbe14a4c7cebc5",
+      "package.json": "9bedb214da3948da45ad055d689ed9f112ef3f5085f925e9a296395b4a598dde",
+      "player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "player/data/clips.bin": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865",
+      "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "player/data/fonts/04997af85ce1afe4180d11009cc2884dd84449b72338e7d095c96cf6462aeaee.json": "b2d077e4f2a062d3bcc23123f589589c0ae102312c90d8dd112b33bdaae0947c",
+      "player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "player/data/fonts/7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5.ifont": "9de2171e0bbc868b9d74854bdcb76d233eb853932c275363ae9f2bbf32446dd8",
+      "player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "player/data/input-actions.json": "b2a3e223b6b6d92d11942368512ba5b3d13bdd28a529d07f22091c7892ec81eb",
+      "player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "player/data/package.json": "608d0a50692117996022946743f581aa7d0d287558318b62c1ee64b9eea5674a",
+      "player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "player/data/world.scene": "77616abae7566eb37aa8f8591204966b3489a82359a402b0000a63253bab2551",
+      "player/incant_game_player": "565f1592aaeafcf05c32bf2d094334124de52c90bdd6fe3ca75eb56a6cc5fd28",
+      "producer/behavior.rs": "93159cf6a89c22bf8a1224decbc0fe0529a258b3c55fa4c4d665698317abcce0",
+      "producer/input-actions.json": "b2a3e223b6b6d92d11942368512ba5b3d13bdd28a529d07f22091c7892ec81eb",
+      "producer/project-export.json": "14baa21b794c348ea6c348793adec494ab9460e25d15a1e985e1eee7919aa99f",
+      "producer/script-symbols.json": "abe9cd5489bb3e9fe34e8b13a79a170fcf67f99478b1b7cd50f30644454c80ff"
+    },
+    "package_files": {
+      "build.log": "47fdf8bbbd77cca44b758e6669280e229c0dbed0b8a6afa5f42a0b1e4a9e5767",
+      "export.json": "a9fb82e63db0ea7ad094af667159504f8e646ebbb965dd9f6c6472c99ed290a8",
+      "normal-dependencies.txt": "391ea1768960c40d0377c5590cce5489668cf31fddac44e0d3a95f2da0110634",
+      "player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139",
+      "player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46",
+      "player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718",
+      "player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637",
+      "player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778",
+      "player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea",
+      "player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2",
+      "player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96",
+      "player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56",
+      "player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642",
+      "player/data/clips.bin": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865",
+      "player/data/empty-input.json": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "player/data/fonts/04997af85ce1afe4180d11009cc2884dd84449b72338e7d095c96cf6462aeaee.json": "b2d077e4f2a062d3bcc23123f589589c0ae102312c90d8dd112b33bdaae0947c",
+      "player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc",
+      "player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0",
+      "player/data/fonts/7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5.ifont": "9de2171e0bbc868b9d74854bdcb76d233eb853932c275363ae9f2bbf32446dd8",
+      "player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a",
+      "player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a",
+      "player/data/input-actions.json": "b2a3e223b6b6d92d11942368512ba5b3d13bdd28a529d07f22091c7892ec81eb",
+      "player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7",
+      "player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99",
+      "player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778",
+      "player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf",
+      "player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621",
+      "player/data/package.json": "608d0a50692117996022946743f581aa7d0d287558318b62c1ee64b9eea5674a",
+      "player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333",
+      "player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840",
+      "player/data/world.scene": "77616abae7566eb37aa8f8591204966b3489a82359a402b0000a63253bab2551",
+      "player/incant_game_player": "6cf4c9d1e9eb35e5b1ab34101a5dd0d28c69760413bbff0b6277a2ab48f09e26",
+      "project-build.json": "df988d1c6b9e5061c8b55ff86f31e24b93d117f4f2b20d67f7e2f9ff2a9814c2",
+      "symbols/incant_game_player.dSYM/Contents/Info.plist": "ca042e291c1249ec4c27c7acf3f0c636e0e9ed3d195da1f8faa673135040fc47",
+      "symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-677db0277c2ed96a": "4e51ece7271692c01ec623b09ebf5017b972afb9bb97f369dd8458cc10ef6928",
+      "symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-677db0277c2ed96a.yml": "109bbaea965824e87a1798513d5a14bcad192191f642ebfdd200fad5e38168f3",
+      "symbols/script-symbols.json": "b8cf3792807f3c42e71a00275cfc5d2dbd816416d54cee54c8c589c60aa3092c"
+    },
+    "helper_sha256": "3acc9997b5e73910004f4e4bb993b2bf337c76099ae5556d710aab200278afb9",
+    "commands": 8,
+    "frames": 1724800,
+    "pcm_sha256": "7d5a10ee3eb4ae369ebf86b6aa6e60649a11cf6f805358ac665d5b713a7023bd",
+    "won_tick": 2066,
+    "exact_prior_prefix": true,
+    "diagnostic_pcm_preserved": true,
+    "limits": [
+      "CPU ordinary package only; no native/GPU/device/performance claim",
+      "PCM and checkpoint publication remain separate transactions"
+    ]
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/native-pcm-main180/artifacts.json.gz",
+    "sha256": "ff97cadb0f136032f66e932f2f94abd20a81b09e7a24df7bed8d0abfce64be53",
+    "records": 90,
+    "payloads": 67
+  },
+  "external_artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/existing.pcm",
+      "sha256": "9d7bd9b9d0e44bbc7ca96f62a6a1013289638a15470abd24bbb611ed7da66d29",
+      "bytes": 24
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/failed-observation.pcm",
+      "sha256": "7d5a10ee3eb4ae369ebf86b6aa6e60649a11cf6f805358ac665d5b713a7023bd",
+      "bytes": 13798400
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/full.pcm",
+      "sha256": "7d5a10ee3eb4ae369ebf86b6aa6e60649a11cf6f805358ac665d5b713a7023bd",
+      "bytes": 13798400
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/old-prefix.pcm",
+      "sha256": "caa4760217c2b7639eb1d4411b3fa4f0924c5969e9f45dc775addc11a68bb4ca",
+      "bytes": 6400000
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/package/player/incant_game_player",
+      "sha256": "6cf4c9d1e9eb35e5b1ab34101a5dd0d28c69760413bbff0b6277a2ab48f09e26",
+      "bytes": 9549776
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "sha256": "ca042e291c1249ec4c27c7acf3f0c636e0e9ed3d195da1f8faa673135040fc47",
+      "bytes": 664
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-677db0277c2ed96a",
+      "sha256": "4e51ece7271692c01ec623b09ebf5017b972afb9bb97f369dd8458cc10ef6928",
+      "bytes": 210514402
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-677db0277c2ed96a.yml",
+      "sha256": "109bbaea965824e87a1798513d5a14bcad192191f642ebfdd200fad5e38168f3",
+      "bytes": 3268224
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/package/symbols/script-symbols.json",
+      "sha256": "b8cf3792807f3c42e71a00275cfc5d2dbd816416d54cee54c8c589c60aa3092c",
+      "bytes": 1359
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/prefix.pcm",
+      "sha256": "caa4760217c2b7639eb1d4411b3fa4f0924c5969e9f45dc775addc11a68bb4ca",
+      "bytes": 6400000
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-integration-evidence/native-pcm-main180-001/shipping/repeat.pcm",
+      "sha256": "7d5a10ee3eb4ae369ebf86b6aa6e60649a11cf6f805358ac665d5b713a7023bd",
+      "bytes": 13798400
+    }
+  ],
+  "review_state": "Independent current-main final review pending",
+  "limits": [
+    "CPU shipping only; no GPU/window/device/performance claim",
+    "PCM and checkpoint publication are separate transactions",
+    "Reused byte-verified trusted raw Wasm fixture for compile boundary only"
+  ]
+}

@@ -1,0 +1,965 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 15a1f517..41efe1d9 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -24,6 +24,8 @@ jobs:
+       - id: scope
+         run: python3 tools/ci_scope.py select --full
+   checks:
++    env:
++      INCANT_EXPECT_GPU_BACKEND: Metal
+     needs: classify
+     # Failed/unavailable classification selects full checks, not a skipped job.
+     # Preserve cancellation of superseded runs.
+@@ -105,6 +107,9 @@ jobs:
+       - name: Verify geometry, editor recovery and simulated frame capture
+         if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
+         run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
++      - name: Verify opt-in cooked shaders on actual Metal
++        if: (needs.classify.result != 'success' || needs.classify.outputs.scope != 'docs')
++        run: cargo test -p incant_render -p incant_render_gpu_host --all-targets --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/persistent-pipeline-cache -- --ignored --skip vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
+       # Keep workspace feature unification from the release tests while building
+       # only these tools; execute the resulting binaries directly below.
+       - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --example collaboration_spike --example texture_probe --example save_world --example native_scene_audio --example no_renderer_fixtures --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
+diff --git a/.github/workflows/desktop.yml b/.github/workflows/desktop.yml
+index 8d3f16f6..6a9adf80 100644
+--- a/.github/workflows/desktop.yml
++++ b/.github/workflows/desktop.yml
+@@ -11,6 +11,8 @@ concurrency:
+   cancel-in-progress: true
+ jobs:
+   desktop:
++    env:
++      INCANT_EXPECT_GPU_BACKEND: ${{ matrix.platform == 'Windows' && 'Dx12' || 'Vulkan' }}
+     strategy:
+       fail-fast: false
+       matrix:
+@@ -62,6 +64,13 @@ jobs:
+       # package invocations otherwise rebuild the renderer dependencies.
+       - name: Verify geometry, editor recovery and simulated frame capture
+         run: cargo test --workspace --profile ci --locked --features incant_audio_runtime/scene --timings -- --ignored --test-threads=1 --nocapture
++      # Defaults above stay covered; this second run selects every reviewed
++      # cooked family. Every GPU fixture asserts the actual native backend.
++      - name: Verify opt-in cooked shaders on the required native backend
++        run: cargo test -p incant_render -p incant_render_gpu_host --all-targets --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/persistent-pipeline-cache -- --ignored --skip vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
++      - name: Verify Vulkan cache across fresh processes and corruption
++        if: runner.os == 'Linux'
++        run: cargo test -p incant_render --test persistent_cache --profile ci --locked -j2 --features incant_render/cooked-output,incant_render/cooked-geometry,incant_render/cooked-sprites,incant_render/cooked-ui,incant_render/cooked-text,incant_render/cooked-materials,incant_render/persistent-pipeline-cache -- --ignored --exact vulkan_catalog_cache_survives_fresh_processes_and_corruption --test-threads=1 --nocapture
+       # Keep workspace feature unification from the release tests while building
+       # only the editor, headless and cook tools used below.
+       - run: cargo build --workspace --bin incant_editor --bin incant_headless --example cook_scene --profile ci --features incant_editor/custom-protocol,incant_audio_runtime/scene --locked --timings
+diff --git a/crates/incant_render/src/animation_tests.rs b/crates/incant_render/src/animation_tests.rs
+index 1b8f2ebc..25a4ca3d 100644
+--- a/crates/incant_render/src/animation_tests.rs
++++ b/crates/incant_render/src/animation_tests.rs
+@@ -272,7 +272,7 @@ fn retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame(
+         .as_mut()
+         .unwrap()
+         .clip = Some(1);
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
+     let output =
+         crate::hdr_output::texture(&renderer, wgpu::TextureFormat::Rgba8UnormSrgb, 160, 96);
+@@ -499,7 +499,7 @@ fn single_sided_reflected_skin_and_shadow_match_static_transform_oracle() {
+         .unwrap()
+         .clip = Some(2);
+     dir.close().unwrap();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
+     let output =
+         crate::hdr_output::texture(&renderer, wgpu::TextureFormat::Rgba8UnormSrgb, 160, 96);
+diff --git a/crates/incant_render/src/flipbook_tests.rs b/crates/incant_render/src/flipbook_tests.rs
+index 96f36c1c..c9aa4e11 100644
+--- a/crates/incant_render/src/flipbook_tests.rs
++++ b/crates/incant_render/src/flipbook_tests.rs
+@@ -100,7 +100,7 @@ fn retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletio
+             Ok::<_, ()>(())
+         })
+         .unwrap();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut gpu = renderer
+         .prepare_retained(input.input(), input.camera_label())
+         .unwrap();
+diff --git a/crates/incant_render/src/retained_native_tests.rs b/crates/incant_render/src/retained_native_tests.rs
+index b5292f78..31619ea1 100644
+--- a/crates/incant_render/src/retained_native_tests.rs
++++ b/crates/incant_render/src/retained_native_tests.rs
+@@ -51,7 +51,7 @@ fn binary_native_motion_and_structural_rebuilds_submit_without_source_or_documen
+     )
+     .unwrap();
+     directory.close().unwrap();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut gpu = renderer
+         .prepare_retained(input.input(), input.camera_label())
+         .unwrap();
+diff --git a/crates/incant_render/src/retained_sprite_tests.rs b/crates/incant_render/src/retained_sprite_tests.rs
+index 7fd86888..803674f0 100644
+--- a/crates/incant_render/src/retained_sprite_tests.rs
++++ b/crates/incant_render/src/retained_sprite_tests.rs
+@@ -157,7 +157,7 @@ fn fixture_kind(tiles: bool) -> (NativeWorld, NativeRenderInput, StableId, Scene
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild() {
+     let (mut world, mut input, moving) = fixture();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut gpu = renderer
+         .prepare_retained(input.input(), input.camera_label())
+         .unwrap();
+diff --git a/crates/incant_render/src/retained_tests.rs b/crates/incant_render/src/retained_tests.rs
+index 989ff731..d5ee6b4a 100644
+--- a/crates/incant_render/src/retained_tests.rs
++++ b/crates/incant_render/src/retained_tests.rs
+@@ -83,7 +83,7 @@ fn fresh_pixels(renderer: &Renderer, input: &SceneInput) -> Vec<u8> {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut input = fixture();
+     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
+     let output = texture(&renderer, FORMAT, 160, 96);
+@@ -116,7 +116,7 @@ fn retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_so
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut input = fixture();
+     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
+     let output = texture(&renderer, FORMAT, 160, 96);
+@@ -153,13 +153,13 @@ fn rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry() {
+     );
+     retained.submit(&renderer, &input, target(&view)).unwrap();
+     assert_eq!(read(&renderer, &output), fresh_pixels(&renderer, &input));
+-    let other = Renderer::headless().unwrap();
++    let other = crate::test_support::checked(Renderer::headless().unwrap());
+     assert!(retained.submit(&other, &input, target(&view)).is_err());
+ }
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut input = fixture();
+     let mut retained = renderer.prepare_retained(&input, "camera").unwrap();
+     let storage = |s: &RetainedScene| {
+@@ -209,7 +209,7 @@ fn motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings() {
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings() {
+     let (_, input, _) = super::sprite_tests::fixture();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut retained = renderer
+         .prepare_retained(input.input(), input.camera_label())
+         .unwrap();
+@@ -235,7 +235,7 @@ fn retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings()
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells() {
+     let (_, input, _) = super::sprite_tests::tile_fixture();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut retained = renderer
+         .prepare_retained(input.input(), input.camera_label())
+         .unwrap();
+@@ -289,7 +289,7 @@ fn retained_flipbook_selection_stages_without_allocation() {
+     input
+         .try_sync(&world.spatial_view().unwrap(), |_, _, _| Ok::<_, ()>(()))
+         .unwrap();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut retained = renderer
+         .prepare_retained(input.input(), input.camera_label())
+         .unwrap();
+diff --git a/crates/incant_render/src/retained_tilemap_tests.rs b/crates/incant_render/src/retained_tilemap_tests.rs
+index 12dd5480..027f0374 100644
+--- a/crates/incant_render/src/retained_tilemap_tests.rs
++++ b/crates/incant_render/src/retained_tilemap_tests.rs
+@@ -148,7 +148,7 @@ fn source_free_v6_tile_bindings_share_atlas_and_retain_one_world_slot_per_map()
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection() {
+     let (mut world, mut input, _) = super::sprite_tests::tile_fixture();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut gpu = renderer
+         .prepare_retained(input.input(), input.camera_label())
+         .unwrap();
+diff --git a/crates/incant_render/src/text_draw_tests.rs b/crates/incant_render/src/text_draw_tests.rs
+index 87e935da..4a3da6a4 100644
+--- a/crates/incant_render/src/text_draw_tests.rs
++++ b/crates/incant_render/src/text_draw_tests.rs
+@@ -270,7 +270,7 @@ fn compare(gpu: &[[f32; 4]], expected: &[Option<f64>]) -> (f64, usize, f64) {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let size = [256, 64];
+     // Layout top-left at world (-1.2, 0.3): frame pixel (8, 2) + layout pixels.
+     let world = DMat4::from_translation(DVec3::new(-1.2, 0.3, 0.));
+@@ -366,7 +366,7 @@ fn drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs()
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn rotated_scaled_minified_and_magnified_text_matches_the_affine_reference() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let size = [192, 128];
+     for (scale, angle, at) in [
+         (0.42, 0.4, DVec3::new(-0.8, 0.45, 0.)),
+diff --git a/crates/incant_render/src/text_native_tests.rs b/crates/incant_render/src/text_native_tests.rs
+index b60c8b59..58155b10 100644
+--- a/crates/incant_render/src/text_native_tests.rs
++++ b/crates/incant_render/src/text_native_tests.rs
+@@ -114,7 +114,7 @@ fn fixture() -> (NativeWorld, NativeRenderInput, Vec<FontAssetRef>) {
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn source_free_native_text_moves_rebuilds_and_changes_through_the_retained_consumer() {
+     let (mut world, mut input, fonts) = fixture();
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let format = wgpu::TextureFormat::Rgba8UnormSrgb;
+     let output = texture(&renderer, format, 160, 96);
+     let view = output.create_view(&Default::default());
+diff --git a/crates/incant_render/src/text_retained_tests.rs b/crates/incant_render/src/text_retained_tests.rs
+index f91a0b92..9d3fa5b5 100644
+--- a/crates/incant_render/src/text_retained_tests.rs
++++ b/crates/incant_render/src/text_retained_tests.rs
+@@ -75,7 +75,7 @@ fn text_scene(retained: &RetainedScene) -> (&TextScene, &TextScene) {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let size = [192, 96];
+     let worlds = [
+         DMat4::from_translation(DVec3::new(-1.4, 0.6, 0.)),
+@@ -249,7 +249,7 @@ fn retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities()
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn foreign_or_reset_handles_refuse_preparation_before_any_text_upload() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let a = input(&[(1, "Hello", 20., DMat4::IDENTITY)]);
+     let b = input(&[(1, "Hello", 20., DMat4::IDENTITY)]);
+     let mut foreign = a.clone();
+@@ -274,7 +274,7 @@ fn foreign_or_reset_handles_refuse_preparation_before_any_text_upload() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let directory = tempfile::tempdir().unwrap();
+     let (project, assets, _) = crate::test_support::fixture(directory.path());
+     let size = [160, 120];
+diff --git a/crates/incant_render/src/ui_draw_tests.rs b/crates/incant_render/src/ui_draw_tests.rs
+index 4f715ff1..08d1c8b6 100644
+--- a/crates/incant_render/src/ui_draw_tests.rs
++++ b/crates/incant_render/src/ui_draw_tests.rs
+@@ -54,7 +54,7 @@ const PRODUCT: f64 = 128. / 255.;
+ // Existing checkpoint runs use --nocapture; retain the actual selected adapter
+ // rather than inferring a backend from installed driver packages.
+ fn renderer_with_adapter_receipt() -> Renderer {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     eprintln!(
+         "UI draw selected adapter: {:?}",
+         renderer.adapter.get_info()
+diff --git a/crates/incant_render/src/version_tests.rs b/crates/incant_render/src/version_tests.rs
+index c187d83b..ca06d265 100644
+--- a/crates/incant_render/src/version_tests.rs
++++ b/crates/incant_render/src/version_tests.rs
+@@ -87,7 +87,7 @@ fn same_recipe_different_payloads_never_alias_resolved_model_plans() {
+ fn live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry() {
+     let directory = tempfile::tempdir().unwrap();
+     let sources = versions(directory.path());
+-    let renderer = crate::Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(crate::Renderer::headless().unwrap());
+     let old = renderer.prepare(&input(&sources[..1])).unwrap();
+     let before = renderer.screenshot_scene_png(&old, 160, 90).unwrap();
+     let new = renderer.prepare(&input(&sources[1..])).unwrap();
+diff --git a/crates/incant_render/tests/cameras/mod.rs b/crates/incant_render/tests/cameras/mod.rs
+index c15101d8..ffbf88d7 100644
+--- a/crates/incant_render/tests/cameras/mod.rs
++++ b/crates/incant_render/tests/cameras/mod.rs
+@@ -72,7 +72,7 @@ fn red_pixels(png: &[u8]) -> usize {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(emissive([1., 0., 0.], 1., "OPAQUE"));
+     let preview = r.screenshot_scene_png(&f.scene(&r), 321, 241).unwrap();
+     let id = camera(
+@@ -182,7 +182,7 @@ fn authored_camera_changes_projection_clips_geometry_and_retains_its_selected_po
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn inherited_cameras_and_custom_light_clusters_match_the_all_light_reference() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f =
+         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.6}}));
+     f.environment(
+@@ -329,7 +329,7 @@ fn inherited_cameras_and_custom_light_clusters_match_the_all_light_reference() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn transparency_depth_order_follows_the_selected_camera() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(emissive([1., 0., 0.], 0.5, "BLEND"));
+     f.edit(|g| {
+         let mut red = emissive([1., 0., 0.], 0.5, "BLEND");
+@@ -387,7 +387,7 @@ fn red_rows(bytes: &[u8], width: usize) -> (usize, usize) {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(emissive([1., 0., 0.], 1., "OPAQUE"));
+     let parent_rotation = glam::DQuat::from_rotation_z(30f64.to_radians());
+     let child_rotation = glam::DQuat::from_euler(
+diff --git a/crates/incant_render/tests/cameras/orthographic.rs b/crates/incant_render/tests/cameras/orthographic.rs
+index 4d44355e..c36be93a 100644
+--- a/crates/incant_render/tests/cameras/orthographic.rs
++++ b/crates/incant_render/tests/cameras/orthographic.rs
+@@ -9,7 +9,7 @@ fn projection(size: f64, near: f64, far: f64) -> serde_json::Value {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn orthographic_size_clipping_and_retained_projection_match_authored_world_units() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(emissive([1., 0., 0.], 1., "OPAQUE"));
+     let id = camera(
+         &mut f,
+@@ -60,7 +60,7 @@ fn orthographic_size_clipping_and_retained_projection_match_authored_world_units
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f =
+         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":1,"roughnessFactor":0.25}}));
+     f.environment(
+@@ -102,7 +102,7 @@ fn orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f =
+         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.6}}));
+     f.environment(
+diff --git a/crates/incant_render/tests/cameras/pixel_perfect.rs b/crates/incant_render/tests/cameras/pixel_perfect.rs
+index d4cc26fa..0afc879a 100644
+--- a/crates/incant_render/tests/cameras/pixel_perfect.rs
++++ b/crates/incant_render/tests/cameras/pixel_perfect.rs
+@@ -37,7 +37,7 @@ fn fixture() -> (Fixture, String) {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (f, id) = fixture();
+     let scene = f.scene(&r).with_camera(&id).unwrap();
+     let base_png = r.screenshot_scene_png(&scene, 64, 48).unwrap();
+@@ -77,7 +77,7 @@ fn fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing(
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, id) = fixture();
+     let retained = f.scene(&r).with_camera(&id).unwrap();
+     let original = r.screenshot_scene_png(&retained, 192, 144).unwrap();
+@@ -136,7 +136,7 @@ fn subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_p
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, id) = fixture();
+     f.edit(|g| {
+         g["nodes"][0]["scale"] = json!([0.25, 0.25, 1.]);
+diff --git a/crates/incant_render/tests/color_roles/mod.rs b/crates/incant_render/tests/color_roles/mod.rs
+index c45b9886..4279b656 100644
+--- a/crates/incant_render/tests/color_roles/mod.rs
++++ b/crates/incant_render/tests/color_roles/mod.rs
+@@ -20,7 +20,7 @@ fn minify(fixture: &mut Fixture) {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn opaque_and_emissive_minification_ignore_alpha_without_recoloring_coverage_roles() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     for (emission, mode) in [
+         (false, "OPAQUE"),
+         (true, "OPAQUE"),
+@@ -101,7 +101,7 @@ fn opaque_and_emissive_minification_ignore_alpha_without_recoloring_coverage_rol
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn color_environment_minification_matches_alpha_one_and_retains_prior_versions() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(
+         json!({"pbrMetallicRoughness":{"baseColorFactor":[0.7,0.7,0.7,1],"metallicFactor":0,"roughnessFactor":1}}),
+     );
+diff --git a/crates/incant_render/tests/diagnostic_output/mod.rs b/crates/incant_render/tests/diagnostic_output/mod.rs
+index 2765db1d..20f862eb 100644
+--- a/crates/incant_render/tests/diagnostic_output/mod.rs
++++ b/crates/incant_render/tests/diagnostic_output/mod.rs
+@@ -95,7 +95,7 @@ fn record(case: &str, renderer: &Renderer, target: &wgpu::Texture, pixels: &[u8]
+ #[test]
+ #[ignore = "requires a native GPU; actual default/cooked comparison runs separately"]
+ fn diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let (width, height) = (160, 96);
+     for format in [
+         wgpu::TextureFormat::Rgba8Unorm,
+diff --git a/crates/incant_render/tests/environments/mod.rs b/crates/incant_render/tests/environments/mod.rs
+index 9a554519..d1142eaa 100644
+--- a/crates/incant_render/tests/environments/mod.rs
++++ b/crates/incant_render/tests/environments/mod.rs
+@@ -59,7 +59,7 @@ pub(super) fn sphere(fixture: &mut Fixture) {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn studio_environment_renders_metal_and_dielectric_across_roughness() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
+     sphere(&mut fixture);
+     let mut outputs = Vec::new();
+@@ -110,7 +110,7 @@ fn metal() -> Fixture {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn authored_environments_preserve_color_space_versions_and_source_free_loading() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = metal();
+     let id = fixture.environment(&[128, 64, 32, 255].repeat(2), 2, 1, TextureUsage::Color);
+     let original_document = fixture.project.clone();
+@@ -167,7 +167,7 @@ fn authored_environments_preserve_color_space_versions_and_source_free_loading()
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn environment_intensity_rotation_and_roughness_change_real_reflections() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = metal();
+     // Source +Z hemisphere is red, -Z blue; no downloaded artwork.
+     let pixels: Vec<u8> = (0..32)
+@@ -231,7 +231,7 @@ fn environment_intensity_rotation_and_roughness_change_real_reflections() {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn malformed_environment_cannot_replace_a_retained_scene() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = metal();
+     fixture.environment(&[80, 80, 80, 255].repeat(2), 2, 1, TextureUsage::Color);
+     let valid = fixture.scene(&renderer);
+diff --git a/crates/incant_render/tests/frame_graph/mod.rs b/crates/incant_render/tests/frame_graph/mod.rs
+index db5dc961..3040beba 100644
+--- a/crates/incant_render/tests/frame_graph/mod.rs
++++ b/crates/incant_render/tests/frame_graph/mod.rs
+@@ -9,7 +9,7 @@ use incant_render_authoring::RendererAuthoringExt as _;
+ #[test]
+ #[ignore = "requires a native GPU; run by all desktop workflows"]
+ fn queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing() {
+-    let renderer = crate::Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(crate::Renderer::headless().unwrap());
+     let directory = tempfile::tempdir().unwrap();
+     let (mut project, assets, _) = test_support::fixture(directory.path());
+     let mut camera = incant_doc::Entity::new("Retained logical camera");
+@@ -109,7 +109,7 @@ fn queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing
+ #[test]
+ #[ignore = "requires a native GPU; run by all desktop workflows"]
+ fn queued_graph_frames_outlive_scene_versions_and_failed_preparation() {
+-    let renderer = crate::Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(crate::Renderer::headless().unwrap());
+     let directory = tempfile::tempdir().unwrap();
+     let (mut project, mut assets, asset_id) = test_support::fixture(directory.path());
+     let mut jobs = Vec::new();
+diff --git a/crates/incant_render/tests/hdr_output/mod.rs b/crates/incant_render/tests/hdr_output/mod.rs
+index b4672c95..419d282b 100644
+--- a/crates/incant_render/tests/hdr_output/mod.rs
++++ b/crates/incant_render/tests/hdr_output/mod.rs
+@@ -162,7 +162,7 @@ fn record_numerical(case: &str, renderer: &Renderer, target: &wgpu::Texture, pix
+ #[test]
+ #[ignore = "requires a native GPU; run by all desktop workflows"]
+ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     // Expected sRGB code values independently evaluated from the documented derived curve.
+     let signals: [([f32; 3], [u8; 3]); 12] = [
+         ([0.; 3], [0; 3]),
+@@ -240,7 +240,7 @@ fn hdr_values_survive_until_tone_mapping_and_transfer_runs_once() {
+ #[test]
+ #[ignore = "requires a native GPU; run by all desktop workflows"]
+ fn output_composes_display_colors_and_reuses_bounded_resize_targets() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::test_support::checked(Renderer::headless().unwrap());
+     let first = renderer.frames.get(&renderer.device, 96, 64).unwrap();
+     assert!(Arc::ptr_eq(
+         &first,
+diff --git a/crates/incant_render/tests/lighting_gpu/mod.rs b/crates/incant_render/tests/lighting_gpu/mod.rs
+index 76349710..a13f9301 100644
+--- a/crates/incant_render/tests/lighting_gpu/mod.rs
++++ b/crates/incant_render/tests/lighting_gpu/mod.rs
+@@ -82,7 +82,7 @@ fn grid_readback(r: &Renderer, plan: LightPlan) -> (Vec<u32>, Vec<u32>) {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::test_support::checked(Renderer::headless().unwrap());
+     let mut plan = LightPlan::default();
+     plan.add(
+         &BTreeMap::from([(
+@@ -199,7 +199,7 @@ fn clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_da
+         .unwrap()
+         .entities
+         .insert(camera.id.clone(), camera);
+-    let r = Renderer::headless().unwrap();
++    let r = crate::test_support::checked(Renderer::headless().unwrap());
+     for (selected, orthographic) in [
+         (None, false),
+         (Some(camera_id.as_str()), false),
+@@ -284,7 +284,7 @@ fn clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_da
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn masks_represent_every_light_and_clear_tail_bits_across_word_count_changes() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::test_support::checked(Renderer::headless().unwrap());
+     // Downward transitions require the cache key and tail clearing to be right.
+     // Global spheres intersect every cluster, including the final local bit.
+     for count in [
+diff --git a/crates/incant_render/tests/lights/coverage.rs b/crates/incant_render/tests/lights/coverage.rs
+index 8d9919d1..bd726c71 100644
+--- a/crates/incant_render/tests/lights/coverage.rs
++++ b/crates/incant_render/tests/lights/coverage.rs
+@@ -28,7 +28,7 @@ fn oracle(f: &mut Fixture, r: &Renderer, name: &str) {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn distinct_colored_lights_preserve_energy_across_mask_words() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     for z in 0..3 {
+         for y in 0..4 {
+@@ -61,7 +61,7 @@ fn distinct_colored_lights_preserve_energy_across_mask_words() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn visible_depth_boundary_patches_match_all_light_oracle() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     let view = glam::Mat4::look_at_rh(glam::Vec3::new(6., 5., 9.), glam::Vec3::ZERO, glam::Vec3::Y)
+         .inverse();
+@@ -134,7 +134,7 @@ fn visible_depth_boundary_patches_match_all_light_oracle() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn local_range_edges_and_hdr_specular_materials_render_repeatably() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     let id = light(
+         &mut f,
+diff --git a/crates/incant_render/tests/lights/masks.rs b/crates/incant_render/tests/lights/masks.rs
+index ec392bfb..32d2553b 100644
+--- a/crates/incant_render/tests/lights/masks.rs
++++ b/crates/incant_render/tests/lights/masks.rs
+@@ -4,7 +4,7 @@ use super::*;
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn all_4096_local_bits_match_unculled_point_and_spot_lighting() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     light(
+         &mut f,
+@@ -50,7 +50,7 @@ fn all_4096_local_bits_match_unculled_point_and_spot_lighting() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     light(
+         &mut f,
+diff --git a/crates/incant_render/tests/lights/mod.rs b/crates/incant_render/tests/lights/mod.rs
+index ebd587c9..7456a69d 100644
+--- a/crates/incant_render/tests/lights/mod.rs
++++ b/crates/incant_render/tests/lights/mod.rs
+@@ -71,7 +71,7 @@ fn linear(v: u8) -> f64 {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn finite_range_light_eases_to_zero_without_a_linear_edge_crease() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     let id = light(
+         &mut f,
+@@ -102,7 +102,7 @@ fn finite_range_light_eases_to_zero_without_a_linear_edge_crease() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn directional_point_and_spot_lights_obey_authored_physical_parameters() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     let id = light(
+         &mut f,
+@@ -237,7 +237,7 @@ fn directional_point_and_spot_lights_obey_authored_physical_parameters() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn clustered_masks_match_total_light_energy_and_retain_old_scenes() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     let id = light(
+         &mut f,
+@@ -283,7 +283,7 @@ fn clustered_masks_match_total_light_energy_and_retain_old_scenes() {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = fixture();
+     // Localized colored lights straddle screen tile edges and depth slices.
+     // The all-light oracle below uses the exact same BRDF but explicitly
+diff --git a/crates/incant_render/tests/model_gpu.rs b/crates/incant_render/tests/model_gpu.rs
+index 30282ed6..50192d20 100644
+--- a/crates/incant_render/tests/model_gpu.rs
++++ b/crates/incant_render/tests/model_gpu.rs
+@@ -36,7 +36,7 @@ fn capture(fixture: &Fixture, renderer: &Renderer, name: &str) -> Vec<u8> {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn color_maps_use_srgb_and_texture_reimport_keeps_retained_materials() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
+     fixture.texture(&[128, 64, 32, 255], 1, 1, |g| {
+         g["materials"][0]["pbrMetallicRoughness"]["baseColorTexture"] = json!({"index":0});
+@@ -74,7 +74,7 @@ fn color_maps_use_srgb_and_texture_reimport_keeps_retained_materials() {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn alpha_modes_and_back_faces_follow_material_semantics() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(emissive([1., 0., 0.], 0., "OPAQUE"));
+     near(
+         center(&capture(&fixture, &renderer, "opaque-alpha-zero")),
+@@ -148,7 +148,7 @@ fn alpha_modes_and_back_faces_follow_material_semantics() {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(
+         json!({"pbrMetallicRoughness":{"baseColorFactor":[0.7,0.4,0.2,1],"metallicFactor":1,"roughnessFactor":1}}),
+     );
+@@ -194,7 +194,7 @@ fn material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength()
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn emissive_maps_and_samplers_retain_color_and_addressing() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(emissive([1.; 3], 1., "OPAQUE"));
+     fixture.texture(&[128, 64, 32, 255], 1, 1, |g| {
+         g["materials"][0]["emissiveTexture"] = json!({"index":0})
+@@ -278,7 +278,7 @@ fn emissive_maps_and_samplers_retain_color_and_addressing() {
+ fn imported_geometry_survives_sources_and_retained_versions_survive_reimport() {
+     let temp = tempfile::tempdir().unwrap();
+     let (mut project, mut assets, id) = support::fixture(temp.path());
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let original = renderer.prepare_scene(&project, &assets).unwrap();
+     assert_eq!(original.stats().model_draw_calls, 1);
+     assert_eq!(original.stats().primitive_instances, 2);
+@@ -318,7 +318,7 @@ fn imported_geometry_survives_sources_and_retained_versions_survive_reimport() {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture =
+         Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0,"roughnessFactor":0.3}}));
+     let normal = (glam::Vec3::new(1., 2., 3.).normalize()
+@@ -354,7 +354,7 @@ fn highlight_energy_survives_and_transparency_blends_before_tone_mapping() {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn dark_fill_lit_materials_remain_distinguishable() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(json!({"pbrMetallicRoughness":{"metallicFactor":0}}));
+     // This surface faces the camera but away from the key. Only the convolved
+     // environment contributes, including dielectric specular reflection.
+diff --git a/crates/incant_render/tests/pipeline_warmup/mod.rs b/crates/incant_render/tests/pipeline_warmup/mod.rs
+index a007f481..e279fcf2 100644
+--- a/crates/incant_render/tests/pipeline_warmup/mod.rs
++++ b/crates/incant_render/tests/pipeline_warmup/mod.rs
+@@ -8,7 +8,8 @@ use serde_json::json;
+ fn all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines() {
+     let instance = wgpu::Instance::default();
+     let start = std::time::Instant::now();
+-    let renderer = pollster::block_on(Renderer::new(&instance, None)).unwrap();
++    let renderer =
++        crate::support::checked(pollster::block_on(Renderer::new(&instance, None)).unwrap());
+     let initial = instance.generate_report().expect("native backend report");
+     assert!(initial.hub.render_pipelines.num_allocated >= 26);
+     assert!(initial.hub.compute_pipelines.num_allocated >= 1);
+diff --git a/crates/incant_render/tests/shadows/coverage.rs b/crates/incant_render/tests/shadows/coverage.rs
+index 71ff4a36..9e021b09 100644
+--- a/crates/incant_render/tests/shadows/coverage.rs
++++ b/crates/incant_render/tests/shadows/coverage.rs
+@@ -11,7 +11,7 @@ fn orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_
+     check_cascade_coverage(true);
+ }
+ fn check_cascade_coverage(orthographic: bool) {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, camera, _caster, light) = fixture();
+     f.project
+         .scenes
+diff --git a/crates/incant_render/tests/shadows/lookdev.rs b/crates/incant_render/tests/shadows/lookdev.rs
+index c122c414..266c2f6e 100644
+--- a/crates/incant_render/tests/shadows/lookdev.rs
++++ b/crates/incant_render/tests/shadows/lookdev.rs
+@@ -172,7 +172,7 @@ fn sun(elevation_degrees: f64, azimuth_degrees: f64) -> [f64; 4] {
+ #[test]
+ #[ignore = "requires a native GPU; look-dev captures for Claude review"]
+ fn directional_shadow_lookdev_contact_slopes_and_curves() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(json!({}));
+     write_scene(&mut f);
+     // Dim, slightly cool uniform fill so shadowed regions keep their shape.
+diff --git a/crates/incant_render/tests/shadows/mod.rs b/crates/incant_render/tests/shadows/mod.rs
+index a385e99e..85017c5e 100644
+--- a/crates/incant_render/tests/shadows/mod.rs
++++ b/crates/incant_render/tests/shadows/mod.rs
+@@ -140,7 +140,7 @@ fn pixel(png: &[u8], world: [f32; 2]) -> [u8; 4] {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, camera, caster, light) = fixture();
+     let prepared = f.scene(&r).with_camera(&camera).unwrap();
+     let shadow = capture(&f, &r, &camera, "shadow-enabled");
+@@ -259,7 +259,7 @@ fn directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn offscreen_casters_and_multiple_directional_shadow_slots_remain_visible() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, camera, caster, light) = fixture();
+     // Caster is outside the camera frustum, but its ray reaches receiver origin.
+     set(
+@@ -371,7 +371,7 @@ fn separate_receiver_asset(f: &mut Fixture) {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, camera, caster, _light) = fixture();
+     separate_receiver_asset(&mut f);
+     // Left half opaque, right half transparent; magnification is nearest.
+diff --git a/crates/incant_render/tests/shadows/normal_offset.rs b/crates/incant_render/tests/shadows/normal_offset.rs
+index a8bb71a7..3b95d326 100644
+--- a/crates/incant_render/tests/shadows/normal_offset.rs
++++ b/crates/incant_render/tests/shadows/normal_offset.rs
+@@ -16,7 +16,7 @@ fn decode(png: &[u8]) -> Vec<u8> {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn opposing_normal_maps_preserve_the_geometric_shadow_boundary() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, camera, caster, light) = fixture();
+     set(
+         &mut f,
+diff --git a/crates/incant_render/tests/shadows/queued.rs b/crates/incant_render/tests/shadows/queued.rs
+index ed45d4c8..54afd0c6 100644
+--- a/crates/incant_render/tests/shadows/queued.rs
++++ b/crates/incant_render/tests/shadows/queued.rs
+@@ -57,7 +57,7 @@ fn read(r: &Renderer, target: &wgpu::Texture) -> Vec<u8> {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let (mut f, camera, caster, light) = fixture();
+     let mut extra = Entity::new("Second queued sun");
+     extra.components.insert(
+diff --git a/crates/incant_render/tests/sprites/atlas.rs b/crates/incant_render/tests/sprites/atlas.rs
+index 2218b049..fe079cde 100644
+--- a/crates/incant_render/tests/sprites/atlas.rs
++++ b/crates/incant_render/tests/sprites/atlas.rs
+@@ -19,7 +19,7 @@ fn repack(f: &mut Fixture) -> [u32; 4] {
+ #[test]
+ #[ignore = "requires a native GPU; run by desktop workflows"]
+ fn atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(
+         &[
+             255, 0, 0, 255, 0, 255, 0, 128, 0, 0, 255, 255, 255, 255, 0, 255,
+diff --git a/crates/incant_render/tests/sprites/mod.rs b/crates/incant_render/tests/sprites/mod.rs
+index 896ee55c..7e213005 100644
+--- a/crates/incant_render/tests/sprites/mod.rs
++++ b/crates/incant_render/tests/sprites/mod.rs
+@@ -153,7 +153,7 @@ fn is_blue(p: [u8; 4]) -> bool {
+ #[test]
+ #[ignore = "requires a native GPU; desktop workflows execute this"]
+ fn sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(
+         &[
+             255, 0, 0, 255, 0, 255, 0, 255, 0, 0, 255, 255, 255, 255, 255, 255,
+@@ -242,7 +242,7 @@ fn sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels() {
+ #[test]
+ #[ignore = "requires a native GPU; desktop workflows execute this"]
+ fn sprite_layers_order_and_alpha_follow_painter_semantics() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(&[255; 4], 1, 1);
+     f.edit("tint", json!([1, 0, 0, 1]));
+     let mut top = f.project.scenes[&f.scene].entities[&f.sprite].clone();
+@@ -274,7 +274,7 @@ fn sprite_layers_order_and_alpha_follow_painter_semantics() {
+ #[test]
+ #[ignore = "requires a native GPU; desktop workflows execute this"]
+ fn nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut pixels = Vec::new();
+     for y in 0..3 {
+         for x in 0..3 {
+@@ -316,7 +316,7 @@ fn nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fr
+ #[test]
+ #[ignore = "requires a native GPU; desktop workflows execute this"]
+ fn inherited_sprite_transforms_and_queued_reimports_survive_scene_drop() {
+-    let r = Renderer::headless().unwrap();
++    let r = crate::support::checked(Renderer::headless().unwrap());
+     let mut f = Fixture::new(&[255, 0, 0, 255], 1, 1);
+     let baseline = f.pixels(&r);
+     let mut parent = Entity::new("Parent");
+diff --git a/crates/incant_render/tests/sprites/ties.rs b/crates/incant_render/tests/sprites/ties.rs
+index 873a0b7e..bf2c7635 100644
+--- a/crates/incant_render/tests/sprites/ties.rs
++++ b/crates/incant_render/tests/sprites/ties.rs
+@@ -39,7 +39,7 @@ fn grid(pixels: &[[u8; 4]], side: usize) -> Vec<[u8; 4]> {
+ #[test]
+ #[ignore = "requires a native GPU; desktop workflows execute this"]
+ fn nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     let mut fixture = Fixture::new(&sheet(64), 64, 64);
+     fixture.edit("region", json!([13, 17, 7, 7]));
+     fixture.edit("size", json!([7. / 8., 7. / 8.]));
+@@ -139,7 +139,7 @@ fn nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize()
+ #[test]
+ #[ignore = "requires a native GPU; desktop workflows execute this"]
+ fn magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     eprintln!(
+         "sprite offset sweep adapter: {:?}",
+         renderer.adapter.get_info()
+diff --git a/crates/incant_render/tests/sprites/wide.rs b/crates/incant_render/tests/sprites/wide.rs
+index 274cdfc7..09926d26 100644
+--- a/crates/incant_render/tests/sprites/wide.rs
++++ b/crates/incant_render/tests/sprites/wide.rs
+@@ -5,7 +5,7 @@ use super::*;
+ #[test]
+ #[ignore = "requires a native GPU; desktop workflows execute this"]
+ fn wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     eprintln!(
+         "wide sprite sweep adapter: {:?}",
+         renderer.adapter.get_info()
+diff --git a/crates/incant_render/tests/support/mod.rs b/crates/incant_render/tests/support/mod.rs
+index af672a8a..a6d96c8c 100644
+--- a/crates/incant_render/tests/support/mod.rs
++++ b/crates/incant_render/tests/support/mod.rs
+@@ -66,3 +66,43 @@ pub fn fixture(root: &Path) -> (Project, AssetStore, String) {
+     assets.sync(&project, &root.join(".incant/cache")).unwrap();
+     (project, assets, id)
+ }
++
++// Only GPU tests read this variable; production construction stays unchanged.
++pub fn checked(renderer: crate::Renderer) -> crate::Renderer {
++    match std::env::var("INCANT_EXPECT_GPU_BACKEND") {
++        Ok(expected) => {
++            let info = renderer.adapter.get_info();
++            require_backend(&expected, &format!("{:?}", info.backend)).unwrap();
++            eprintln!("Incant required GPU backend: {expected}; actual adapter: {info:?}");
++        }
++        Err(std::env::VarError::NotPresent) => {}
++        Err(error) => panic!("invalid expected backend: {error}"),
++    }
++    renderer
++}
++
++fn require_backend(expected: &str, actual: &str) -> Result<(), &'static str> {
++    if !matches!(expected, "Metal" | "Vulkan" | "Dx12") {
++        return Err("unknown required native GPU backend");
++    }
++    if actual != expected {
++        return Err("actual GPU backend does not match required backend");
++    }
++    Ok(())
++}
++
++#[test]
++fn required_backend_rejects_unknown_and_mismatched_adapters() {
++    for expected in ["Metal", "Vulkan", "Dx12"] {
++        assert_eq!(require_backend(expected, expected), Ok(()));
++        for actual in ["Metal", "Vulkan", "Dx12", "Gl", "BrowserWebGpu", "Noop"] {
++            assert_eq!(
++                require_backend(expected, actual).is_ok(),
++                expected == actual
++            );
++        }
++    }
++    for invalid in ["", "metal", "all", "Gl", "Vulkan,Dx12"] {
++        assert!(require_backend(invalid, invalid).is_err());
++    }
++}
+diff --git a/crates/incant_render/tests/tangents/mod.rs b/crates/incant_render/tests/tangents/mod.rs
+index 37ea2dfc..4ca2aeef 100644
+--- a/crates/incant_render/tests/tangents/mod.rs
++++ b/crates/incant_render/tests/tangents/mod.rs
+@@ -34,7 +34,7 @@ fn supply_tangent(fixture: &mut Fixture, tangent: [f32; 4]) {
+ #[test]
+ #[ignore = "requires a native GPU; run by the desktop workflow"]
+ fn generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection() {
+-    let renderer = Renderer::headless().unwrap();
++    let renderer = crate::support::checked(Renderer::headless().unwrap());
+     for (mirror_u, mirror_v, x, w) in [
+         (false, false, 1_f32, 1_f32),
+         (true, false, -1., -1.),
+diff --git a/crates/incant_render_gpu_host/tests/game.rs b/crates/incant_render_gpu_host/tests/game.rs
+index d7bcf3e4..342f3f4e 100644
+--- a/crates/incant_render_gpu_host/tests/game.rs
++++ b/crates/incant_render_gpu_host/tests/game.rs
+@@ -195,7 +195,7 @@ fn game_with(text: bool) -> (Game, Probe) {
+         scene
+     };
+     let scene = CookedScene::from_bytes(&scene.to_bytes()).unwrap();
+-    let renderer = Arc::new(Renderer::headless().unwrap());
++    let renderer = Arc::new(models::checked(Renderer::headless().unwrap()));
+     let texture = renderer.device.create_texture(&wgpu::TextureDescriptor {
+         label: Some("Native hosted game probe"),
+         size: wgpu::Extent3d {
+diff --git a/crates/incant_render_gpu_host/tests/ui.rs b/crates/incant_render_gpu_host/tests/ui.rs
+index 293f9d66..ed465c6d 100644
+--- a/crates/incant_render_gpu_host/tests/ui.rs
++++ b/crates/incant_render_gpu_host/tests/ui.rs
+@@ -330,7 +330,7 @@ fn game(with_ui: bool, size: [u32; 2]) -> (Game, Probe) {
+         )
+         .unwrap();
+     let scene = CookedScene::from_bytes(&scene.to_bytes()).unwrap();
+-    let renderer = Arc::new(Renderer::headless().unwrap());
++    let renderer = Arc::new(models::checked(Renderer::headless().unwrap()));
+     let shared = Arc::new(Mutex::new(texture(&renderer, size)));
+     let script = CompiledScript::compile(
+         "exports.default={update({input,log}){for(const e of input.ui.events)log(e.kind+('value' in e?':'+e.value:''));}};",

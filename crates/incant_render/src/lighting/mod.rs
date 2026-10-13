@@ -1,6 +1,8 @@
 //! Conservative clustered forward lighting with exact, bounded membership masks.
 //! Buffers are retained at one grid size/light count; encoded commands preserve
 //! replaced buffers across resize. No cluster truncates lights or falls back.
+#[cfg(all(feature = "cooked-clusters", not(target_arch = "wasm32")))]
+mod cooked;
 #[cfg(test)]
 #[path = "../../tests/lighting_gpu/mod.rs"]
 mod gpu_tests;
@@ -31,6 +33,14 @@ pub(crate) struct GridUniform {
     pub depth: [f32; 4],
     pub lights: [u32; 4],
 }
+const _: () = {
+    assert!(size_of::<GridUniform>() == 128);
+    assert!(std::mem::offset_of!(GridUniform, view) == 0);
+    assert!(std::mem::offset_of!(GridUniform, viewport) == 64);
+    assert!(std::mem::offset_of!(GridUniform, dimensions) == 80);
+    assert!(std::mem::offset_of!(GridUniform, depth) == 96);
+    assert!(std::mem::offset_of!(GridUniform, lights) == 112);
+};
 pub(crate) struct GpuLights {
     buffer: wgpu::Buffer,
     directional: u32,
@@ -94,7 +104,7 @@ pub(crate) struct LightingSystem {
     pipeline: wgpu::ComputePipeline,
     cache: Mutex<Option<Arc<GridBuffers>>>,
 }
-fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
+pub(crate) fn layout_entries(compute: bool) -> Vec<wgpu::BindGroupLayoutEntry> {
     let mut entries: Vec<_> = (0..4)
         .map(|binding| wgpu::BindGroupLayoutEntry {
             binding,
@@ -117,7 +127,19 @@ fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
             count: None,
         })
         .collect();
-    if !compute {
+    if compute {
+        #[cfg(all(feature = "cooked-clusters", not(target_arch = "wasm32")))]
+        entries.push(wgpu::BindGroupLayoutEntry {
+            binding: 4,
+            visibility: wgpu::ShaderStages::COMPUTE,
+            ty: wgpu::BindingType::Buffer {
+                ty: wgpu::BufferBindingType::Uniform,
+                has_dynamic_offset: false,
+                min_binding_size: wgpu::BufferSize::new(16),
+            },
+            count: None,
+        });
+    } else {
         entries.extend([
             wgpu::BindGroupLayoutEntry {
                 binding: 4,
@@ -146,20 +168,44 @@ fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
                 count: None,
             },
         ]);
+        #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+        entries.push(wgpu::BindGroupLayoutEntry {
+            binding: 7,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Buffer {
+                ty: wgpu::BufferBindingType::Uniform,
+                has_dynamic_offset: false,
+                min_binding_size: wgpu::BufferSize::new(16),
+            },
+            count: None,
+        });
     }
+    entries
+}
+fn layout(device: &wgpu::Device, compute: bool) -> wgpu::BindGroupLayout {
     device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
         label: Some("Clustered lighting"),
-        entries: &entries,
+        entries: &layout_entries(compute),
     })
 }
 impl LightingSystem {
-    pub fn new(device: &wgpu::Device) -> Self {
+    pub fn new(
+        device: &wgpu::Device,
+        _backend: wgpu::Backend,
+        cache: Option<&wgpu::PipelineCache>,
+    ) -> Result<Self> {
         let compute_layout = layout(device, true);
         let layout = layout(device, false);
-        let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-            label: Some("Light cluster assignment"),
-            source: wgpu::ShaderSource::Wgsl(include_str!("grid.wgsl").into()),
-        });
+        #[cfg(all(feature = "cooked-clusters", not(target_arch = "wasm32")))]
+        let (shader, entry) = cooked::shader(device, _backend)?;
+        #[cfg(not(all(feature = "cooked-clusters", not(target_arch = "wasm32"))))]
+        let (shader, entry) = (
+            device.create_shader_module(wgpu::ShaderModuleDescriptor {
+                label: Some("Light cluster assignment"),
+                source: wgpu::ShaderSource::Wgsl(include_str!("grid.wgsl").into()),
+            }),
+            "build",
+        );
         let pipeline_layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
             label: Some("Light cluster assignment"),
             bind_group_layouts: &[Some(&compute_layout)],
@@ -169,16 +215,16 @@ impl LightingSystem {
             label: Some("Light cluster assignment"),
             layout: Some(&pipeline_layout),
             module: &shader,
-            entry_point: Some("build"),
+            entry_point: Some(entry),
             compilation_options: Default::default(),
-            cache: None,
+            cache,
         });
-        Self {
+        Ok(Self {
             layout,
             compute_layout,
             pipeline,
             cache: Mutex::new(None),
-        }
+        })
     }
     fn buffers(
         &self,
@@ -270,6 +316,24 @@ impl LightingSystem {
             contents: bytemuck::bytes_of(&grid),
             usage: wgpu::BufferUsages::UNIFORM,
         });
+        #[cfg(all(feature = "cooked-clusters", not(target_arch = "wasm32")))]
+        let compute_sizes = if clustered {
+            let sizes = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+                label: Some("Cluster storage byte lengths"),
+                contents: bytemuck::cast_slice(
+                    &storage_lengths([
+                        lights.buffer.size(),
+                        buffers.counts.size(),
+                        buffers.masks.size(),
+                    ])
+                    .map_err(ResourceError::CookedCluster)?,
+                ),
+                usage: wgpu::BufferUsages::UNIFORM,
+            });
+            Some(sizes)
+        } else {
+            None
+        };
         let mut entries = [&uniform, &lights.buffer, &buffers.counts, &buffers.masks]
             .iter()
             .enumerate()
@@ -278,15 +342,31 @@ impl LightingSystem {
                 resource: buffer.as_entire_binding(),
             })
             .collect::<Vec<_>>();
-        let compute = clustered.then(|| ClusterPass {
-            pipeline: self.pipeline.clone(),
-            group: device.create_bind_group(&wgpu::BindGroupDescriptor {
+        let compute = if clustered {
+            #[cfg(all(feature = "cooked-clusters", not(target_arch = "wasm32")))]
+            entries.push(wgpu::BindGroupEntry {
+                binding: 4,
+                resource: compute_sizes
+                    .as_ref()
+                    .expect("clustered sizes")
+                    .as_entire_binding(),
+            });
+            let group = device.create_bind_group(&wgpu::BindGroupDescriptor {
                 label: Some("Cluster assignment frame"),
                 layout: &self.compute_layout,
                 entries: &entries,
-            }),
-            dimensions,
-        });
+            });
+            // Binding4 in the fragment group is the shadow texture, not sizes.
+            #[cfg(all(feature = "cooked-clusters", not(target_arch = "wasm32")))]
+            entries.pop();
+            Some(ClusterPass {
+                pipeline: self.pipeline.clone(),
+                group,
+                dimensions,
+            })
+        } else {
+            None
+        };
         entries.extend([
             wgpu::BindGroupEntry {
                 binding: 4,
@@ -301,6 +381,27 @@ impl LightingSystem {
                 resource: shadows.uniform.as_entire_binding(),
             },
         ]);
+        // Metal passthrough omits Naga's dynamic-storage reflection. Bind the
+        // three real byte lengths explicitly in the compiler's verified order;
+        // never disable bounds checks or read a synthetic unset lengths buffer.
+        #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+        let sizes = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
+            label: Some("Material storage byte lengths"),
+            contents: bytemuck::cast_slice(
+                &storage_lengths([
+                    lights.buffer.size(),
+                    buffers.counts.size(),
+                    buffers.masks.size(),
+                ])
+                .map_err(ResourceError::CookedMaterial)?,
+            ),
+            usage: wgpu::BufferUsages::UNIFORM,
+        });
+        #[cfg(all(feature = "cooked-materials", not(target_arch = "wasm32")))]
+        entries.push(wgpu::BindGroupEntry {
+            binding: 7,
+            resource: sizes.as_entire_binding(),
+        });
         Ok(PreparedLighting {
             compute,
             shading: device.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -309,6 +410,43 @@ impl LightingSystem {
                 entries: &entries,
             }),
         })
+    }
+}
+#[cfg(all(
+    any(feature = "cooked-materials", feature = "cooked-clusters"),
+    not(target_arch = "wasm32")
+))]
+fn storage_lengths(bytes: [u64; 3]) -> std::result::Result<[u32; 4], &'static str> {
+    let mut values = [0; 4];
+    for (i, (size, stride)) in bytes.into_iter().zip([64, 4, 4]).enumerate() {
+        if size == 0 || size % stride != 0 {
+            return Err("storage buffer alignment");
+        }
+        values[i] = u32::try_from(size).map_err(|_| "storage buffer length")?;
+    }
+    Ok(values)
+}
+#[cfg(all(
+    test,
+    any(feature = "cooked-materials", feature = "cooked-clusters"),
+    not(target_arch = "wasm32")
+))]
+#[test]
+fn material_lengths_use_allocation_bytes_and_refuse_truncation() {
+    assert_eq!(
+        storage_lengths([64 * 4112, 4 * 24, 4 * 24 * 128]).unwrap(),
+        [263168, 96, 12288, 0]
+    );
+    for sizes in [
+        [0, 4, 4],
+        [63, 4, 4],
+        [64, 5, 4],
+        [64, 4, 5],
+        [1u64 << 32, 4, 4],
+        [64, 1u64 << 32, 4],
+        [64, 4, 1u64 << 32],
+    ] {
+        assert!(storage_lengths(sizes).is_err());
     }
 }
 /// Immutable uniforms and retained storage bindings for one encoded frame.

@@ -1,0 +1,37 @@
+{
+  "purpose": "Core Sample HUD typography: Inter (Latin, digits, pseudo-locale accents, pips), Noto Sans Arabic (RTL), and a Noto Sans SC subset for zh-Hans. Fonts are data assets imported through incant import; none is a runtime or build dependency of the engine.",
+  "chain": [
+    "Inter-Regular.ttf",
+    "NotoSansArabic.ttf",
+    "CoreSampleSC-Regular.ttf"
+  ],
+  "fonts": {
+    "Inter-Regular.ttf": {
+      "source": "third_party/cosmic-text/fonts/Inter-Regular.ttf (vendored, unmodified)",
+      "license": "third_party/cosmic-text/fonts/Inter-LICENSE (SIL OFL 1.1)",
+      "sha256": "3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384"
+    },
+    "NotoSansArabic.ttf": {
+      "source": "third_party/cosmic-text/fonts/NotoSansArabic.ttf (vendored, unmodified)",
+      "license": "third_party/cosmic-text/fonts/NotoSans-LICENSE (SIL OFL 1.1)",
+      "sha256": "ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56"
+    },
+    "CoreSampleSC-Regular.ttf": {
+      "upstream": "https://raw.githubusercontent.com/google/fonts/a85815a42757630ce188fdad368c2dfc444d4773/ofl/notosanssc/NotoSansSC%5Bwght%5D.ttf",
+      "upstream_sha256": "a3041811a78c361b1de50f953c805e0244951c21c5bd412f7232ef0d899af0da",
+      "upstream_bytes": 17772300,
+      "license": "OFL-NotoSansSC.txt (SIL OFL 1.1; upstream OFL.txt sha256 1c05c68c34f9708415aada51f17e1b0092d2cea709bf4a94cd38114f9e73d7d9)",
+      "tool": "fonttools==4.60.1 (wheel fonttools-4.60.1-cp314-cp314-macosx_10_13_universal2.whl, sha256 a884aef09d45ba1206712c7dbda5829562d3fea7726935d3289d343232ecb0d3)",
+      "recipe": "subset_sc.py",
+      "recipe_sha256": "04ad8578a6544a424fed7a35c33523ac6aa47807256b993458ea10f257637cee",
+      "strings_sha256": "9024e49341edf27906f949d05bef1e965dda171e9ac8aee006587515320dcd80",
+      "instance": {
+        "wght": 400
+      },
+      "renamed_family": "Core Sample SC",
+      "sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0",
+      "bytes": 13232,
+      "deterministic_rerun_sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0"
+    }
+  }
+}

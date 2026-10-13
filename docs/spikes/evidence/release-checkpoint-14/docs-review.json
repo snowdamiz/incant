@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-12T20:57:34.426961+00:00",
+  "reviewer": "astra root",
+  "patch_sha256": "56c9001a838907bd9855817f0450a827ed659453b744bd4c694767c4ea5e9df1",
+  "manifest_sha256": "ec032fb8c6ebabf96e1f0156950d4022629bff82a0a92a0634fdaed8db6c5a70",
+  "artifacts": 24,
+  "hosted_raw_logs_verified": 3,
+  "release": "2444d81f2dbc72a0e487f361d4614d4476bdddb1",
+  "tested_tree": "c0137be6889607ea302d6cd3312a5a9f78f2c938",
+  "result": "accepted; exact promotion and logged adapters/timings are qualified; no phase or phone claims"
+}

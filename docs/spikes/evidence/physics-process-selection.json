@@ -1,0 +1,1203 @@
+{
+  "at": "2026-10-12T22:33:59.181188+00:00",
+  "base": "530f322f477ec643b3b6907d4799e94cd8fd7d0b",
+  "source_sha256": {
+    "tools/export_native.py": "3867e927602a88dc5315a868388e97eeb1e6acaa302c7d97552745b567b6ec10",
+    "tools/physics_export.py": "f7cd497ba58f0b5fba22fd1115829615238f27f51939ae7c17f9637c152c3000",
+    "tools/play_native.py": "f0cb9144690115105ddb1cf83835a5fe10ca3b063f285a8d04a740a306143012",
+    "tools/probes/physics-mode-export.py": "a5bb3c1654f60abf2906a469162d10346519930edc7527f18914b3aadb96b459",
+    "tools/probes/physics-mode-selection.py": "00f47ec3e4e16904bafc5697691bc0fb4c12023510bed1747319ca1043d46e3b",
+    "tools/tests/test_physics_export.py": "c9e375fe90060b83d377c2880f953d3af0a4efbc3e8b7a4a74b0eeb9c52bb962",
+    "tools/tests/test_physics_play.py": "424ea8558705df9a6968157ffc4f5180ef9dfaba058f5409876d2aaf646025c0"
+  },
+  "passed": true,
+  "frozen_inputs": 1526,
+  "verified_runs": [
+    {
+      "case": "play-0-deterministic",
+      "binary_sha256": "bfc30895d90cb04122904f347e891beb63258d2b94cfdcb8377ae6e1ee0cc04b",
+      "physics": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-variant-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      },
+      "frames": 9600,
+      "pcm_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+    },
+    {
+      "case": "play-1-fast",
+      "binary_sha256": "b93a674fd2fdcfa3b277c54b876f0fa3f355fcaa4e53a41587aac96edec2555a",
+      "physics": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-variant-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      },
+      "frames": 9600,
+      "pcm_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+    },
+    {
+      "case": "play-2-deterministic",
+      "binary_sha256": "bfc30895d90cb04122904f347e891beb63258d2b94cfdcb8377ae6e1ee0cc04b",
+      "physics": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "ci",
+        "target_output": "/Users/andreyyurlov/.codex/incant-physics-variant-target/aarch64-apple-darwin/ci",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      },
+      "frames": 9600,
+      "pcm_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+    },
+    {
+      "case": "shipping-deterministic",
+      "binary_sha256": "5b2600e1a309ed3be5134f6457803ac1ac7abeb4d359d65c94e217047f50c755",
+      "physics": {
+        "mode": "deterministic",
+        "target": "aarch64-apple-darwin",
+        "profile": "shipping",
+        "target_output": "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-project-build-szz3o2l7/target/aarch64-apple-darwin/shipping",
+        "features": {
+          "simba": [
+            "libm",
+            "libm_force",
+            "std",
+            "wide"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "enhanced-determinism",
+            "f32",
+            "hashbrown",
+            "indexmap",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "enhanced-determinism",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      },
+      "codegen": {
+        "incant_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        },
+        "incant_script": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        },
+        "incant_game_player_library": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        },
+        "incant_game_player": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed",
+          "lto": "fat"
+        }
+      },
+      "frames": 9600,
+      "pcm_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+    },
+    {
+      "case": "shipping-fast",
+      "binary_sha256": "1ec2332489e3a140e126661d91100e33ca2c398bd2c14cbb2955edf9141e75e8",
+      "physics": {
+        "mode": "fast",
+        "target": "aarch64-apple-darwin",
+        "profile": "shipping",
+        "target_output": "/private/var/folders/w6/vbftz74j4jzb2t9ry9r724g00000gn/T/incant-project-build-kd_wf9zj/target/aarch64-apple-darwin/shipping",
+        "features": {
+          "simba": [
+            "libm",
+            "std",
+            "wide"
+          ],
+          "parry2d": [
+            "alloc",
+            "dim2",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "slab",
+            "smallvec",
+            "spade",
+            "std"
+          ],
+          "parry3d": [
+            "alloc",
+            "dim3",
+            "downcast-rs",
+            "ena",
+            "f32",
+            "hashbrown",
+            "parallel",
+            "rayon",
+            "required-features",
+            "rstar",
+            "slab",
+            "smallvec",
+            "std"
+          ],
+          "rapier2d": [
+            "alloc",
+            "block-solver",
+            "default",
+            "dim2",
+            "f32",
+            "parallel",
+            "std"
+          ],
+          "rapier3d": [
+            "alloc",
+            "default",
+            "dim3",
+            "f32",
+            "parallel",
+            "std"
+          ]
+        },
+        "ignored_build_host": [
+          "parry2d",
+          "parry3d",
+          "rapier2d",
+          "rapier3d",
+          "simba"
+        ]
+      },
+      "codegen": {
+        "incant_runtime": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        },
+        "incant_script": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        },
+        "incant_game_player_library": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed"
+        },
+        "incant_game_player": {
+          "opt-level": "3",
+          "codegen-units": "1",
+          "panic": "abort",
+          "debuginfo": "2",
+          "split-debuginfo": "packed",
+          "lto": "fat"
+        }
+      },
+      "frames": 9600,
+      "pcm_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5"
+    }
+  ],
+  "developer_processes": 5,
+  "shipping_processes": 2,
+  "tools": {
+    "python_discovered": 278,
+    "python_skipped": 4,
+    "node_passed": 22,
+    "failed": 0,
+    "command": {
+      "argv": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit_code": 0,
+      "seconds": 25.702627624999877
+    }
+  },
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/observe.json",
+      "raw_sha256": "e779a6ea55169900888a0c874bed9d524054ed5ef599e83803933abc1b05cd67",
+      "raw_bytes": 434,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/observe.json.gz",
+      "sha256": "2295af1842a7a27501f0d7ed6cd1e9e508c7905bf14ca1d55db57993820ec712",
+      "bytes": 220
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/processes.json",
+      "raw_sha256": "19d719c3fb8c111ba83f0e5b3e9b08c06def5429b9518282808940c60d34110b",
+      "raw_bytes": 1154,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/processes.json.gz",
+      "sha256": "551a415dc92dcc3bf6447565d5f7ef46a9842aa0c1f680d640ae1bbd02c5619e",
+      "bytes": 441
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/project/.incant-source-transactions/lock",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/project/.incant-source-transactions/lock.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/project/.incant-source-transactions/receipt",
+      "raw_sha256": "f1e751bea6fb29656f99cca7614374d836fab6a458f1a128ad879a150cd37bfa",
+      "raw_bytes": 26,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/project/.incant-source-transactions/receipt.gz",
+      "sha256": "22f2c371980546ce6f108796beedfa164f2a31fbab86fd1f54ea71f5080934ea",
+      "bytes": 46
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/project/game.journal.jsonl",
+      "raw_sha256": "004abef4b171c7382bd262c476ed58d3c4fd0da012e88d6c273ced5570d8d3a6",
+      "raw_bytes": 20738,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/project/game.journal.jsonl.gz",
+      "sha256": "7bd52d6f87885b49dd373c7d19cc6d3e655e9566872b69337969ba7104d68a7d",
+      "bytes": 3642
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/project/game.json",
+      "raw_sha256": "a3350c45de881843bc0398c51b13befaec8d74b9965272ba6d814e90bbf418f2",
+      "raw_bytes": 1354,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/project/game.json.gz",
+      "sha256": "9c16bc321f6d008abe1d907f743aea9ec48351280f1b5c6b32242e6859da1cdd",
+      "bytes": 440
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/project/motion.ts",
+      "raw_sha256": "f37a57367572196018da7d24622edb8e493b22e3b71c7b27ec23f917ccbbdf47",
+      "raw_bytes": 265,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/project/motion.ts.gz",
+      "sha256": "03ad0179b9687e710b958c73e86d90f7edbb8b58a4a77faad31eeefd92d67300",
+      "bytes": 197
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-001/rpc.json",
+      "raw_sha256": "33da42ed6a0f74600a80a74ecf75e5e921f9d9fbd84f97be44ae02f08c64de82",
+      "raw_bytes": 17461,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-001/rpc.json.gz",
+      "sha256": "0f8b490b2b1b3077e49e97fb4de2ec1acff46acc84d053fa43d5608606d6eca8",
+      "bytes": 1136
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/observe.json",
+      "raw_sha256": "e779a6ea55169900888a0c874bed9d524054ed5ef599e83803933abc1b05cd67",
+      "raw_bytes": 434,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/observe.json.gz",
+      "sha256": "2295af1842a7a27501f0d7ed6cd1e9e508c7905bf14ca1d55db57993820ec712",
+      "bytes": 220
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-0-deterministic/cargo.jsonl",
+      "raw_sha256": "d19e059a7eff37b0f7e42ef5a1058a3360dbc9214a0534ec320ff2d50ea469bb",
+      "raw_bytes": 665262,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-0-deterministic/cargo.jsonl.gz",
+      "sha256": "15a19c7ddf6d6dd77071237115d7fa9e17c971291739f9f65ce8b1d437dd1545",
+      "bytes": 44928
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-0-deterministic/cargo.stderr",
+      "raw_sha256": "183b4427ce043a659fa6e0ba35e953f2159a13444b7467bbe015871fa83a981c",
+      "raw_bytes": 57,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-0-deterministic/cargo.stderr.gz",
+      "sha256": "91deae69b976a7c6d2ea7a6bc9292e43b93f1151a9245e31e84b31a1d1f43658",
+      "bytes": 77
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-0-deterministic/play.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-0-deterministic/play.stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-0-deterministic/play.stdout",
+      "raw_sha256": "44708337c342bb5ccafd64a93f314e6cd4ebef186fdd54a9ed89d1ce6a6b3b9e",
+      "raw_bytes": 1875,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-0-deterministic/play.stdout.gz",
+      "sha256": "9c78cbec11ae062d16fc92e49846789182f2e363f5d4ab34d98a7c71793fccf3",
+      "bytes": 647
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-0-deterministic/selection.json",
+      "raw_sha256": "57d3688a26f8f33c2cbd24fdf6ca9d8941e907a2844af0f765c10fd00d4cd81a",
+      "raw_bytes": 2613,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-0-deterministic/selection.json.gz",
+      "sha256": "80dbb4afb30443ae8fed9239d44adc2e0f6bd15743a7b7a7a4bec108afcb3a75",
+      "bytes": 799
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-1-fast/cargo.jsonl",
+      "raw_sha256": "5b6c0b73c058ecf38fe4addb7a2c9e702c9895afb41a8cd93e819205e5a0eaa8",
+      "raw_bytes": 664224,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-1-fast/cargo.jsonl.gz",
+      "sha256": "fb549c7a5648fcdd5b56477d4426686156c6cd26e1e91fdf7b5f0565791c3de3",
+      "bytes": 44862
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-1-fast/cargo.stderr",
+      "raw_sha256": "d8959c8c99980133fe2147fdbc4f610e1b5f705ff867193dfbd62b0073edee02",
+      "raw_bytes": 3737,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-1-fast/cargo.stderr.gz",
+      "sha256": "e56f31f5ed22e6e743ca7edb20fdbbbee8e3aa145a989ca754d941c52e72162c",
+      "bytes": 566
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-1-fast/play.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-1-fast/play.stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-1-fast/play.stdout",
+      "raw_sha256": "22adafddc59a9aca14029622ab389cc723222503802980b958cd8dd266dd4eb8",
+      "raw_bytes": 1875,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-1-fast/play.stdout.gz",
+      "sha256": "31d1be0594df62e2c1b88b8ea5ab7ecf15efa2b508fb2101c0dfd9947f0c2e17",
+      "bytes": 646
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-1-fast/selection.json",
+      "raw_sha256": "32beccf4cfc4801f648acfe15ec3cbda75de5113c3b382225644a6d48cf73f0b",
+      "raw_bytes": 2358,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-1-fast/selection.json.gz",
+      "sha256": "14879925864b926777dd753df8daedcaca196d76a1a83d460fcdf75881a56be8",
+      "bytes": 758
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-2-deterministic/cargo.jsonl",
+      "raw_sha256": "694115f161e2b14abda3e9d305fe3ece01396c4fc14d7f6dfd2a2d9229c85e0a",
+      "raw_bytes": 665262,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-2-deterministic/cargo.jsonl.gz",
+      "sha256": "c57c402c1618367a6b0446c67ad4ce7bfe3dc9ba6a86c758b9abc7196df248cd",
+      "bytes": 45017
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-2-deterministic/cargo.stderr",
+      "raw_sha256": "6b6e57f3a627c0f697f0bb2ea8a301cbdbcbc8515f1e68e95bbd62ebc39c06dc",
+      "raw_bytes": 57,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-2-deterministic/cargo.stderr.gz",
+      "sha256": "91f3356858684b7058e32ad18937da6bcaa745e377a6df441a098b4ea5d57763",
+      "bytes": 77
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-2-deterministic/play.stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-2-deterministic/play.stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-2-deterministic/play.stdout",
+      "raw_sha256": "44708337c342bb5ccafd64a93f314e6cd4ebef186fdd54a9ed89d1ce6a6b3b9e",
+      "raw_bytes": 1875,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-2-deterministic/play.stdout.gz",
+      "sha256": "9c78cbec11ae062d16fc92e49846789182f2e363f5d4ab34d98a7c71793fccf3",
+      "bytes": 647
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/play-2-deterministic/selection.json",
+      "raw_sha256": "2fe12867985c74eb43741bb7c6e2299b0bf55a482ecc73ff8f23dea950d20184",
+      "raw_bytes": 2613,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/play-2-deterministic/selection.json.gz",
+      "sha256": "7e656ab10ec91ce022f3ea59062adbd0e18488fe1678f13efa91295d7518de02",
+      "bytes": 799
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/processes.json",
+      "raw_sha256": "eb8bbee689136f2a46e21a31d76fbd7e159140d4e04d6bd9925cb6d40bfde517",
+      "raw_bytes": 6543,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/processes.json.gz",
+      "sha256": "7b2a0053062f425c456e7888343c1fcbe68bb1da97db0bc7a4a0a682e7747b61",
+      "bytes": 1100
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/project/.incant-source-transactions/lock",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/project/.incant-source-transactions/lock.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/project/.incant-source-transactions/receipt",
+      "raw_sha256": "0c40c20d3ab5ed5eab9aabbeb20c027abf730501da48d1d8769536653612757e",
+      "raw_bytes": 26,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/project/.incant-source-transactions/receipt.gz",
+      "sha256": "0f5440c9c7d8327706c3ff0a545eed171d43140afbf0e175188ad4844924ced9",
+      "bytes": 46
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/project/game.journal.jsonl",
+      "raw_sha256": "f1b03b50b610994a88b5b5a81f9c2c877ea1a5a9d3d203246fe66067f8e3c642",
+      "raw_bytes": 43882,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/project/game.journal.jsonl.gz",
+      "sha256": "452d32e97eef028817b8ed20df54c3f81c07e485aeb6b647102db8f2d43dd56c",
+      "bytes": 8454
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/project/game.json",
+      "raw_sha256": "d64333f51eab391fcffa651ed32d1551264c18b4de121bfafe607cf8dd7a4422",
+      "raw_bytes": 1354,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/project/game.json.gz",
+      "sha256": "fdd9cec8bdfcff4dc3f5d58234a942bcfd2b364a27e3287f2a8d5a74b3375bd0",
+      "bytes": 442
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/project/motion.ts",
+      "raw_sha256": "f37a57367572196018da7d24622edb8e493b22e3b71c7b27ec23f917ccbbdf47",
+      "raw_bytes": 265,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/project/motion.ts.gz",
+      "sha256": "03ad0179b9687e710b958c73e86d90f7edbb8b58a4a77faad31eeefd92d67300",
+      "bytes": 197
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/result.json",
+      "raw_sha256": "4044d61f7dfe481b9507537f3b15ebdedb80b0d9a367748bb202cf62bff1da6d",
+      "raw_bytes": 7039,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/result.json.gz",
+      "sha256": "e34f8506bd980878e773c26efe11ef68a20bd5082d7447c8a10683b3e52b075f",
+      "bytes": 906
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-play-002/rpc.json",
+      "raw_sha256": "e152c94b765b6295f9ef95f96bebdd424ba8c13cafde2924236f300b7a6be111",
+      "raw_bytes": 44269,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-play-002/rpc.json.gz",
+      "sha256": "95df1add95bc6b6180bf351dab303e36f761ef8921c3b54f89c109ec24e8008e",
+      "bytes": 1449
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/deterministic-selected-graph.txt",
+      "raw_sha256": "fd1938a1327dc57ebfa7e9cf21781b44f87e93adde089319382d0c2ef7211b46",
+      "raw_bytes": 29764,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/deterministic-selected-graph.txt.gz",
+      "sha256": "beabef1df76f85e54396bc5778592386419a1e921f8b845058f01283daab6fcd",
+      "bytes": 3923
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/exports/deterministic/authoring/.incant-source-transactions/lock",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/exports/deterministic/authoring/.incant-source-transactions/lock.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/exports/deterministic/authoring/.incant-source-transactions/receipt",
+      "raw_sha256": "0c40c20d3ab5ed5eab9aabbeb20c027abf730501da48d1d8769536653612757e",
+      "raw_bytes": 26,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/exports/deterministic/authoring/.incant-source-transactions/receipt.gz",
+      "sha256": "0f5440c9c7d8327706c3ff0a545eed171d43140afbf0e175188ad4844924ced9",
+      "bytes": 46
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/exports/deterministic/authoring/export.journal.jsonl",
+      "raw_sha256": "524a5f6acc3a15080d961a70107c9911d7d7341083215ca760279f059a119768",
+      "raw_bytes": 7897,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/exports/deterministic/authoring/export.journal.jsonl.gz",
+      "sha256": "5ed8350dfa09455f1f54f88e74489af2f0f1599fe082a6f04bca11f2167bb016",
+      "bytes": 2441
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/exports/deterministic/authoring/game.journal.jsonl",
+      "raw_sha256": "f1b03b50b610994a88b5b5a81f9c2c877ea1a5a9d3d203246fe66067f8e3c642",
+      "raw_bytes": 43882,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/exports/deterministic/authoring/game.journal.jsonl.gz",
+      "sha256": "452d32e97eef028817b8ed20df54c3f81c07e485aeb6b647102db8f2d43dd56c",
+      "bytes": 8454
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/exports/deterministic/authoring/game.json",
+      "raw_sha256": "d64333f51eab391fcffa651ed32d1551264c18b4de121bfafe607cf8dd7a4422",
+      "raw_bytes": 1354,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/exports/deterministic/authoring/game.json.gz",
+      "sha256": "fdd9cec8bdfcff4dc3f5d58234a942bcfd2b364a27e3287f2a8d5a74b3375bd0",
+      "bytes": 442
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/exports/deterministic/authoring/motion.ts",
+      "raw_sha256": "f37a57367572196018da7d24622edb8e493b22e3b71c7b27ec23f917ccbbdf47",
+      "raw_bytes": 265,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/exports/deterministic/authoring/motion.ts.gz",
+      "sha256": "03ad0179b9687e710b958c73e86d90f7edbb8b58a4a77faad31eeefd92d67300",
+      "bytes": 197
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/exports/deterministic/authoring-before.json",
+      "raw_sha256": "355fb7eac7b458ade417582aef38540bac7386227c1578df8cfe9345775c28ca",
+      "raw_bytes": 570,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/exports/deterministic/authoring-before.json.gz",
+      "sha256": "78ae7ab2b6684526a315fd79c1ff758b1f29f5cb4f50543493cfb7b6339e4991",
+      "bytes": 363
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/fast-selected-graph.txt",
+      "raw_sha256": "804f1072c4e09ec6df161000b30ecf98df1e7b30f74cd6c8cf30bcd0b9ca7ec4",
+      "raw_bytes": 28723,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/fast-selected-graph.txt.gz",
+      "sha256": "57f3eb96914dff17161764c5ed52c0512a48d70992a26161e10a8807f8846079",
+      "bytes": 3848
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/freeze.json",
+      "raw_sha256": "9ee3f7a6300cec5d836c84ad721474a0b87f96f89d90a31fba1a82b5f7e30942",
+      "raw_bytes": 176057,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/freeze.json.gz",
+      "sha256": "7d3af412a048a5f087b6c4b74724eac2962f0d5a92b650137b2f456626bf2694",
+      "bytes": 71317
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/run.py",
+      "raw_sha256": "dadda06f7c4763f2becf6ee316ac78026ca4a215b9c363e93c5842e9696e33cd",
+      "raw_bytes": 1036,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/run.py.gz",
+      "sha256": "247d09798a49c928c8f2d7a9b9348b469643ef1d3db6f3aab5b594ab971830c2",
+      "bytes": 566
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/stderr",
+      "raw_sha256": "1944ad84be233b667f39640261919a69d6a70667190924045a48b84413a0e2e0",
+      "raw_bytes": 1474,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/stderr.gz",
+      "sha256": "abde50f987f913117593f3374b1ef97ec6712af6db2f05e8c62d5f2419a3b045",
+      "bytes": 482
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/stdout",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/stdout.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-001/terminal.json",
+      "raw_sha256": "690a1492b49c6630f336c0373aadf470a2fa4ae501919d82440e5b958c154e7e",
+      "raw_bytes": 480,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-001/terminal.json.gz",
+      "sha256": "c81c9d3e5c47f1009aa4bda8ad683051f2898c4d30f2e50e99d8bd3a0aa835b5",
+      "bytes": 258
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/authoring-before.json",
+      "raw_sha256": "1a417def44854ecd7a44f5b9ff539c655c59499c0cca2c9c72991d2f0190527f",
+      "raw_bytes": 570,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/authoring-before.json.gz",
+      "sha256": "25a9874a733f1612b07444e53a57c0eb575fd21f0d2f33f8cec610a82f93e033",
+      "bytes": 363
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/observe.json",
+      "raw_sha256": "e779a6ea55169900888a0c874bed9d524054ed5ef599e83803933abc1b05cd67",
+      "raw_bytes": 434,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/observe.json.gz",
+      "sha256": "2295af1842a7a27501f0d7ed6cd1e9e508c7905bf14ca1d55db57993820ec712",
+      "bytes": 220
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/output.pcm",
+      "raw_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "raw_bytes": 76800,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/output.pcm.gz",
+      "sha256": "dc7c40bfdef4215c9a5550eb330ce7f086e2c83a62df705e7db929b015ac9668",
+      "bytes": 109
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/build.log",
+      "raw_sha256": "08d3c3e1667c964c162b375eafd3e5620b4ab5194a8f97ad4bc7762c69f7554c",
+      "raw_bytes": 1358766,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/build.log.gz",
+      "sha256": "f1bbfc1274cf8a4b414c91516a02dd19b0711ca0b1490e879eabb8966cd2901c",
+      "bytes": 127735
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/export.json",
+      "raw_sha256": "c018cc66887ba42f26da186f3aa7b65ca3c66727af524646435f50d300273f0a",
+      "raw_bytes": 8313,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/export.json.gz",
+      "sha256": "b2e8c44ba7507738a5073a62c510057567f84c2fcb26dca4c506a765fa896a3e",
+      "bytes": 2839
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/normal-dependencies.txt",
+      "raw_sha256": "fd1938a1327dc57ebfa7e9cf21781b44f87e93adde089319382d0c2ef7211b46",
+      "raw_bytes": 29764,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/normal-dependencies.txt.gz",
+      "sha256": "beabef1df76f85e54396bc5778592386419a1e921f8b845058f01283daab6fcd",
+      "bytes": 3923
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/player/data/clips.bin",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "raw_bytes": 12,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/player/data/clips.bin.gz",
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "bytes": 30
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/player/data/empty-input.json",
+      "raw_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "raw_bytes": 103,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/player/data/empty-input.json.gz",
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "bytes": 104
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/player/data/input-actions.json",
+      "raw_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "raw_bytes": 2,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/player/data/input-actions.json.gz",
+      "sha256": "c14bfcf1832a180081ce0abd2061eeb1dc780074f0c2cdfd923be805f2407368",
+      "bytes": 22
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/player/data/package.json",
+      "raw_sha256": "2d117729a2ea7e2088d529af7bee6b334ca160b57248e756c46fdf3a315971d0",
+      "raw_bytes": 449,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/player/data/package.json.gz",
+      "sha256": "9be35604de89e4ee1564b1182c526ade96b762ca6351038ae9d17f44e665ff70",
+      "bytes": 312
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/player/data/world.scene",
+      "raw_sha256": "ea7d82da1caa054fd53610b48b8c28b85eb836732a1006504bfea4a4b7ca1df8",
+      "raw_bytes": 176,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/player/data/world.scene.gz",
+      "sha256": "12d641329b9b9f34a1380571a64b503378ac23345cf691098fdc0d45ca34dcf6",
+      "bytes": 103
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/project-build.json",
+      "raw_sha256": "6df02e292542c591dbd0cbc2ae943106a801835e5855d17ec7c362d5aa56d83e",
+      "raw_bytes": 1563,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/package/project-build.json.gz",
+      "sha256": "b4bf0fa5aedc842bd16f7a84113dbd271cf1480e1abcda6ce485a37b4ebbd0ee",
+      "bytes": 776
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/process.json",
+      "raw_sha256": "692f06ba9b541ba32a2f885a82ae574eebf12e610e31e3697acb03a9ac0f2b7b",
+      "raw_bytes": 1389,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/process.json.gz",
+      "sha256": "ded146ff2edf595122ae0690970fcb829e1c63e0b3a36106e420ff7765164125",
+      "bytes": 560
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/result.json",
+      "raw_sha256": "4e2b6c7c36379c9a307eed56f144bbd441752286116461cda4ca3053ffba022d",
+      "raw_bytes": 11668,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/deterministic/result.json.gz",
+      "sha256": "e4de4cf1bf2889d530d3af66eaffd1a56cebd447c4e4b8ca1f728f8ce10fda81",
+      "bytes": 3417
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/authoring-before.json",
+      "raw_sha256": "6cae180386ea7c9666be8519b8787d7f4c88f84695400cd049ed76265b404c09",
+      "raw_bytes": 570,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/authoring-before.json.gz",
+      "sha256": "67dd0dfa08328899d266c46117346cbbda74bacdae4a9f1717f6f44af6340f26",
+      "bytes": 362
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/observe.json",
+      "raw_sha256": "e779a6ea55169900888a0c874bed9d524054ed5ef599e83803933abc1b05cd67",
+      "raw_bytes": 434,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/observe.json.gz",
+      "sha256": "2295af1842a7a27501f0d7ed6cd1e9e508c7905bf14ca1d55db57993820ec712",
+      "bytes": 220
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/output.pcm",
+      "raw_sha256": "e2cc2a1fa6131cf4d86faa3baf78851f35a36853e2467c257b3df9d89e85cce5",
+      "raw_bytes": 76800,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/output.pcm.gz",
+      "sha256": "dc7c40bfdef4215c9a5550eb330ce7f086e2c83a62df705e7db929b015ac9668",
+      "bytes": 109
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/build.log",
+      "raw_sha256": "1d5358e1f0749e560b4449e8b88ce51dbcd4740d2ff084b0ccbeb8f4d2761838",
+      "raw_bytes": 1355678,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/build.log.gz",
+      "sha256": "d9be0ce39ec54eff302d4c1b33b64d614c4961cb3f1636187289c083bb1a46fc",
+      "bytes": 127353
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/export.json",
+      "raw_sha256": "a6e5a7b0d37caf175196b888177a9a9387ceb75b205dbe0a88efe5867c68cc58",
+      "raw_bytes": 8096,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/export.json.gz",
+      "sha256": "f6b7f6f0ff15facbf2b2d0ac47e6c054542b51ab78f8063fc7e42f4bb38cade0",
+      "bytes": 2811
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/normal-dependencies.txt",
+      "raw_sha256": "804f1072c4e09ec6df161000b30ecf98df1e7b30f74cd6c8cf30bcd0b9ca7ec4",
+      "raw_bytes": 28723,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/normal-dependencies.txt.gz",
+      "sha256": "57f3eb96914dff17161764c5ed52c0512a48d70992a26161e10a8807f8846079",
+      "bytes": 3848
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/player/data/clips.bin",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "raw_bytes": 12,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/player/data/clips.bin.gz",
+      "sha256": "a568799ca294ca001efc2c864c9c7b660e1fb03c4811c7160b752a87361d378d",
+      "bytes": 30
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/player/data/empty-input.json",
+      "raw_sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5",
+      "raw_bytes": 103,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/player/data/empty-input.json.gz",
+      "sha256": "438100c9c52fd35517bc237cb9289ac1088282ab6f2b851a4878fd0ecc79abcc",
+      "bytes": 104
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/player/data/input-actions.json",
+      "raw_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "raw_bytes": 2,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/player/data/input-actions.json.gz",
+      "sha256": "c14bfcf1832a180081ce0abd2061eeb1dc780074f0c2cdfd923be805f2407368",
+      "bytes": 22
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/player/data/package.json",
+      "raw_sha256": "cd1a3dfb2741c62f346d11213832f51b131350f806a9237c50e4f78a6cb30bb9",
+      "raw_bytes": 449,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/player/data/package.json.gz",
+      "sha256": "b402a86409f5b274305cfc889377343078f9de182e928e6e060ad5ea57332746",
+      "bytes": 312
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/player/data/world.scene",
+      "raw_sha256": "358f7d7e5d4eb71ae9abe090917c24ecb9db090d302f279348f369d0a9279309",
+      "raw_bytes": 176,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/player/data/world.scene.gz",
+      "sha256": "2624eef280846d1389b7b0c97b394f1e9b6c5a74c8fc9eb89d4fba6523c22a72",
+      "bytes": 105
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/project-build.json",
+      "raw_sha256": "a559012ceaf7bf6d4afd30581e728ae9bfbc724da1014c739fe774c68d6a2a9a",
+      "raw_bytes": 1545,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/package/project-build.json.gz",
+      "sha256": "8d9379dd96e68929f547a21f97dc32bd264728499cbf519d8573cc8096a03aff",
+      "bytes": 765
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/process.json",
+      "raw_sha256": "f04fff47ff7e92d06d48b7495dc8aee520302f3251b24d522fca7d76c7535c37",
+      "raw_bytes": 1353,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/process.json.gz",
+      "sha256": "54604d6a377c42d33bd531e4b0f2da082b7ad5feb43e39b63f89d3588f8fb449",
+      "bytes": 556
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/result.json",
+      "raw_sha256": "bb21736edb716c74810f5a1b44f277a0643731f31de9388276611584602ffffa",
+      "raw_bytes": 11437,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/fast/result.json.gz",
+      "sha256": "c6b6265d8c952b09ef09c3eeb2133717f07b490bfcf2d8251447af037e9878fa",
+      "bytes": 3395
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/result.json",
+      "raw_sha256": "a168802f0643737798517635fa7047c32e71ecbc77cd727ffd4ea6b1ab17e45f",
+      "raw_bytes": 27133,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/exports/result.json.gz",
+      "sha256": "a30f48c2db3605f28e8a87a32d2314e8438d21084d6020e5574942c82ecd4de0",
+      "bytes": 4099
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/freeze.json",
+      "raw_sha256": "38e55099cdf724cc26651eb3bf7519ee88591511fd605ccfa5e69b3539b77db5",
+      "raw_bytes": 176057,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/freeze.json.gz",
+      "sha256": "86d65187409fabecddf37b384cd2e9f2a6f769229048e2711d2c96291efa8101",
+      "bytes": 71314
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/run.py",
+      "raw_sha256": "dadda06f7c4763f2becf6ee316ac78026ca4a215b9c363e93c5842e9696e33cd",
+      "raw_bytes": 1036,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/run.py.gz",
+      "sha256": "247d09798a49c928c8f2d7a9b9348b469643ef1d3db6f3aab5b594ab971830c2",
+      "bytes": 566
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/stderr",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/stderr.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/stdout",
+      "raw_sha256": "c6befc2decf66d9315f8935910cb33977c678586f5bce82c50503b7d264e8a1e",
+      "raw_bytes": 327,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/stdout.gz",
+      "sha256": "61fe5389989d5384219d7929ea9a74a562387f9aa54ea606b80c037395f63f9c",
+      "bytes": 152
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/terminal.json",
+      "raw_sha256": "698ca41767739c59eb7e98f3347f3cd25ccfebc9d9ab1474b359cdc828384ada",
+      "raw_bytes": 480,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-shipping-002/terminal.json.gz",
+      "sha256": "86c36a2caa40e74bd521064eeac32c643f167f08ef82e4b2da54d088ffe9384d",
+      "bytes": 257
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-tools-001/result.json",
+      "raw_sha256": "c54a9c2a50a565ad85903f050c432359e0c72b8514c9be12ec567e8bc431a303",
+      "raw_bytes": 110,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-tools-001/result.json.gz",
+      "sha256": "b37eeacaa03a7141a76b48ef02dd64debdbd79805022e2d3824ac2b0ae5ba8a2",
+      "bytes": 108
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-tools-001/stderr",
+      "raw_sha256": "e6f46b638c42cbe2e16ab4a8390df552a618326352ce5b30fb7b1652cbdb4a04",
+      "raw_bytes": 46421,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-tools-001/stderr.gz",
+      "sha256": "f98cd50def579f965ec3434763c65f3ed7bc0bbc2a131bf409aee69e5d18f080",
+      "bytes": 8213
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-tools-001/stdout",
+      "raw_sha256": "c2e21b54c0683162b56c9ae90a9d7b2bcb4a99fecd481bd0cac108ef1a5b4ead",
+      "raw_bytes": 5769,
+      "retained": "docs/spikes/evidence/physics-process-selection/physics-project-tools-001/stdout.gz",
+      "sha256": "ebf2900d17dd85737a6f0a27d016f9012068a6bdf3913f6f1aadd4c802f675fb",
+      "bytes": 1623
+    }
+  ],
+  "external_binaries_and_symbols": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/player/incant_game_player",
+      "raw_sha256": "5b2600e1a309ed3be5134f6457803ac1ac7abeb4d359d65c94e217047f50c755",
+      "raw_bytes": 9500160
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "raw_sha256": "a325edef7ee76bf99ea09648956f34dd7c7c86ae26102a78aca991d8b7f9fba1",
+      "raw_bytes": 664
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-14eb24f8b8fefb33",
+      "raw_sha256": "96be0ffd9a9ab0c4a17bee64c7fcc475f7df695977ef112fbc38f9ae003d2927",
+      "raw_bytes": 209002579
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/deterministic/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-14eb24f8b8fefb33.yml",
+      "raw_sha256": "1d715f2846ae84f8cba0ab6391dea0b937fafed684f57d4576ee426907d086a3",
+      "raw_bytes": 3257096
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/player/incant_game_player",
+      "raw_sha256": "1ec2332489e3a140e126661d91100e33ca2c398bd2c14cbb2955edf9141e75e8",
+      "raw_bytes": 9483648
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/symbols/incant_game_player.dSYM/Contents/Info.plist",
+      "raw_sha256": "43613b6ce8ce5676de7c2be3cce4243bb114aab953f9df8b94b9cba609444eac",
+      "raw_bytes": 664
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/symbols/incant_game_player.dSYM/Contents/Resources/DWARF/incant_game_player-561f23c92ac74a84",
+      "raw_sha256": "9f545ec3b15205b73b314f1e03fc9f20833dc016510f77c13cec1b72ba751d68",
+      "raw_bytes": 207623633
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/physics-project-shipping-002/exports/fast/package/symbols/incant_game_player.dSYM/Contents/Resources/Relocations/aarch64/incant_game_player-561f23c92ac74a84.yml",
+      "raw_sha256": "62e7c1ac428a48006f567792fa459c5954327ea6a6d164be2217d0d00df30048",
+      "raw_bytes": 3258551
+    }
+  ],
+  "historical_attempts": {
+    "physics-project-play-001": "Failed preflight: bare rustc unavailable; fixed pinned compiler discovery before successful002.",
+    "physics-project-shipping-001": "Failed before compile: workspace metadata included unrelated Wasmtime dependency; corrected to exact selected normal graph, all actual compilation/symbol audits preserved."
+  },
+  "limits": [
+    "Developer launcher is CPU native Play, not editor worker or shipped process.",
+    "Both ordinary copied shipping players executed on ARM macOS only. No window/GPU/device or performance claim.",
+    "Motion fixture has no active physics bodies; proves process/kernel selection and cooked admission, not solver numerical parity or speed.",
+    "PCM is repeatable silence, not audible device playback.",
+    "Physics-world saves remain explicitly refused; eight-lane target promotion not claimed.",
+    "Shipping actual Cargo JSON artifacts were audited before private storage removal; raw verbose target compiler commands independently bind the five solver features and four codegen units.",
+    "Development executable copies were ephemeral; actual compiler/launch records and binary hashes retained, shipping executables remain external local artifacts."
+  ]
+}

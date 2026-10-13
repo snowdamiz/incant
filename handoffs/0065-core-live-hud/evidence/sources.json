@@ -1,0 +1,196 @@
+{
+ "changed": {
+  "samples/core/ui/strings.json": {
+   "head_sha256": "8bc4cb760ac832b9133d8699e47448e909f5e0b3827c5b5c711b9b06af500526",
+   "sha256": "9024e49341edf27906f949d05bef1e965dda171e9ac8aee006587515320dcd80"
+  },
+  "samples/core/ui/hud.json": {
+   "head_sha256": "2ae3136757a767b3c21d8d8b8aabf5cf720ccf4e2eb32ab68c87a5036a954dae",
+   "sha256": "dd51ad74a30969efd6911f63701250611d28c46337d3fcdec6b3812a3ff8951c"
+  },
+  "samples/core/art/fonts/CoreSampleSC-Regular.ttf": {
+   "head_sha256": "7aeb899a891af8c8c5174934f72ad1d45fdf46258abc419aaeda1d026a24a0a5",
+   "sha256": "8d78a4c412fca7fd980e12c4ccf958bc13d21d8dd016752808b4b83116e62af0"
+  },
+  "samples/core/art/fonts/provenance.json": {
+   "head_sha256": "aa7f05977e67f22f1214d7b2ad57bd72ae924877f04b94008bcc718177d501eb",
+   "sha256": "b02a35532889c46ac9b3df8b421e5959954f7e99743b32c47a6180c6c6383fe0"
+  },
+  "samples/core/PRESENTATION.md": {
+   "head_sha256": "1d6eb2b91f6fa7cfce0437ec805b5d918f8dbc601b3b88285b38c3aafff85ec3",
+   "sha256": "a1232c17af9b0baf81830602b418ba1810cc87d96a6a35111bcead79fb698f42"
+  }
+ },
+ "unchanged_by_contract": {
+  "samples/core/gameplay.ts": {
+   "sha256": "ff6158f60fa87a7fa6d42f8fa7bcd6fb16c50e903fa07c28f31df103341ca211",
+   "equals_head": true
+  },
+  "samples/core/bindings.py": {
+   "sha256": "821aa9afdefe16aaaf0a3bba704ff540dad2ebdd43c274370d53505569c880ab",
+   "equals_head": true
+  },
+  "samples/core/binding_oracle.py": {
+   "sha256": "1eee33ae986c31ab9e19f6441315d2663f38f094715640974a51a4b664a2e58c",
+   "equals_head": true
+  },
+  "samples/core/verify_bindings.py": {
+   "sha256": "c73e838ef6bb951b840c5eb7dcfaafb05db7b9e6a0afa27c61b18a0ef064442d",
+   "equals_head": true
+  },
+  "samples/core/playtest.py": {
+   "sha256": "85eacb004af3f42fcd2a12274639b77f25b98d07a54cfdcb85996ca86c8ebd22",
+   "equals_head": true
+  },
+  "samples/core/verify.py": {
+   "sha256": "63830ec6225ddf9bc82dceed2c1791912fd30c6fd2db5426f07095ab329974ca",
+   "equals_head": true
+  },
+  "samples/core/verify_presentation.py": {
+   "sha256": "42ff52aae1c2ca0f923a4677f87f72e4bffe31193d19d6ba8249cadfbad477bc",
+   "equals_head": true
+  },
+  "samples/core/export_verify.py": {
+   "sha256": "8fd9915071b8cc3aeb40297acfb3ddb152d8d98a04ce61d659c244fbf28580fa",
+   "equals_head": true
+  },
+  "samples/core/scene.py": {
+   "sha256": "1bad3df4011575a71689d8af5e21082bb44d26babdd0dee876878348164d68a0",
+   "equals_head": true
+  },
+  "samples/core/hud.py": {
+   "sha256": "903278fcfc0f4d7ef474192187a6158ff0066183c10d44570f727f575eb9663e",
+   "equals_head": true
+  },
+  "samples/core/routes/win-input.json": {
+   "sha256": "5c23f6f64bf59a8c40634f8e34f4469ab0a17f40750f02bcbee630f721729a63",
+   "equals_head": true
+  },
+  "samples/core/routes/locked-input.json": {
+   "sha256": "b0bfc0ad8b76032941f9ae77b67060be8c5b8ba8fe4bb4f170681f55379ea30d",
+   "equals_head": true
+  },
+  "samples/core/test_bindings.py": {
+   "sha256": "2001022e7b3c65d14cb1fd8eaa6186c0be1e95aba03e7fe12af3b49d94e4b10c",
+   "equals_head": true
+  },
+  "samples/core/test_playtest.py": {
+   "sha256": "f0c54327512c6d331fe358798b84078ec63e71e5f2aa64a0875df2ba0f459b40",
+   "equals_head": true
+  },
+  "samples/core/tsconfig.json": {
+   "sha256": "869922e94ccde7a4c5d023dcc15dc661034031b34d42cbfaa41a4a354abc625b",
+   "equals_head": true
+  },
+  "samples/core/art/fonts/subset_sc.py": {
+   "sha256": "04ad8578a6544a424fed7a35c33523ac6aa47807256b993458ea10f257637cee",
+   "equals_head": true
+  },
+  "samples/core/art/fontcheck.py": {
+   "sha256": "04069f64b17fe6a75ac2cdcf5fa44f778ae53473ca105cdbce7ebb5e27737916",
+   "equals_head": true
+  },
+  "docs/spikes/core-authored-runtime-bindings.md": {
+   "sha256": "dbe4502bf953c9b8c9c46ad859349d1a64984a23516d6d3337ffeeb91ca31109",
+   "equals_head": true
+  },
+  "docs/spikes/core-locked-exit.md": {
+   "sha256": "552506cd352272cbc8cfc7902724fbe602f2f9d3d71e6b94bbb0ba412b90f7b7",
+   "equals_head": true
+  },
+  "STATUS.md": {
+   "sha256": "f947eb3ea9fc777492b1f821b59ba6d941086ca4cfc540396224a48181b8e133",
+   "equals_head": true
+  },
+  "crates/incant_game_player/src/restart/input.rs": {
+   "sha256": "77976afd18f9e294287f361dfcbea4ee5e1035d89eeba5bdde300b4cfb2f074a",
+   "equals_head": true
+  },
+  "samples/core/art/__init__.py": {
+   "sha256": "187a17f4f9352cb5761441b65b5f9d8d5a82f08b5b0168abc4d99537230b888a",
+   "equals_head": true
+  },
+  "samples/core/art/actors.py": {
+   "sha256": "54d46aefd9b526b6d7aff7813f082a5f733964cb1b35971a5b4ca215eca97611",
+   "equals_head": true
+  },
+  "samples/core/art/gltf.py": {
+   "sha256": "6adcad31460ecb68e91f76178ff659a8de1862d82794d56073a60a74822edf84",
+   "equals_head": true
+  },
+  "samples/core/art/ids.py": {
+   "sha256": "394237e6d2a462c883551ad5f1db5159af6fb20d0ca7ae4791680d9ee1b5d316",
+   "equals_head": true
+  },
+  "samples/core/art/level.py": {
+   "sha256": "779cccc629ea5da9738f9ddcae8d85332e2eb0d8aaa330db68b17c80eca2635f",
+   "equals_head": true
+  },
+  "samples/core/art/mesh.py": {
+   "sha256": "535f758886542166909b83fd9fd8df4fa946d9f0b169fbc70414b71789690709",
+   "equals_head": true
+  },
+  "samples/core/art/music.py": {
+   "sha256": "51a1844d26959bdb7591b993eff8fd19158fa38318180f40c134ee285d4a06e3",
+   "equals_head": true
+  },
+  "samples/core/art/noise.py": {
+   "sha256": "702eb6bab2b6025f350f981f79557b904cc5695727b9a3314cc497495fc20524",
+   "equals_head": true
+  },
+  "samples/core/art/pngio.py": {
+   "sha256": "9ffd0ec2dfb7bb49696c4930b347fa586997344898768f0f986bb61d2368147c",
+   "equals_head": true
+  },
+  "samples/core/art/props.py": {
+   "sha256": "777e5af8f70522155ea5336304514783547a657983f795d0d5a4f844a7f62709",
+   "equals_head": true
+  },
+  "samples/core/art/raster.py": {
+   "sha256": "a2604e6e6eff2d8da6c716e428d377df59ecc44974ddba34694c276bfcc948b4",
+   "equals_head": true
+  },
+  "samples/core/art/sky.py": {
+   "sha256": "74bb139d92da8844880e162761946c1b99c68ec989619b70c4489e20e4f9c8b9",
+   "equals_head": true
+  },
+  "samples/core/art/terrain.py": {
+   "sha256": "8cfb208de514f482ff47720c4d63ccb8d5ccc40fdd3e287c3787675600c75521",
+   "equals_head": true
+  },
+  "samples/core/art/world.py": {
+   "sha256": "b286bf0f5c245959c2361cb0ae346f64dcd95c45ba215bc145711268d760f213",
+   "equals_head": true
+  }
+ },
+ "crates_status": "clean",
+ "packet_tools": {
+  "handoffs/0065-core-live-hud/tools/build_variant.py": "eebc07e62f33534eb837ecda0e6e37b4ceea19352274aed94a51007ced0f7e3f",
+  "handoffs/0065-core-live-hud/tools/capture.py": "2b2891b48da7b3c9cf00d5d7a253eecd8a3e33bac9d11cda9b3f6afe3e53c507",
+  "handoffs/0065-core-live-hud/tools/collect.py": "dc7db286b8598bd2ec1934f9d9f2ea37b675e1d77d5e94cabea94f1219210a62",
+  "handoffs/0065-core-live-hud/tools/contrast.py": "8ef599c18a03f25f2c3e339ee7e95138b06ca9749c562ff1704634a1bce7af56",
+  "handoffs/0065-core-live-hud/tools/layout_check.py": "3675769c13f6e875aae9335209a3598056925e20bb9a0208591a1bde9fd3221f",
+  "handoffs/0065-core-live-hud/tools/lease.py": "ad8977a00715084d94ec190197d3efb5dc7a00a9bb6f98c8cdd04b8b0dc1d0ca",
+  "handoffs/0065-core-live-hud/tools/live_hud.rs": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+  "handoffs/0065-core-live-hud/tools/mutate_checks.py": "8be04cbcb973e581fc243273ae5f79506629c953c0aef2bdd2382b1e72e13da5",
+  "handoffs/0065-core-live-hud/tools/plans.json": "66de7315ef0458b35d15edc34a781d87368dd41050bc7ef70bdb6511ebd91656",
+  "handoffs/0065-core-live-hud/tools/png.py": "600a993da3976bde6e2b0aa4d11f6a3d4a50628368d1f19f95c9cd8555d77951",
+  "handoffs/0065-core-live-hud/tools/route_check.py": "37e38f2318911142ef49cc162a056e1d1cd7814150dc908386d4313ca90eadea",
+  "handoffs/0065-core-live-hud/tools/routes.py": "8669209a0e942bd2b976f5ec9bfe4abbdcc2a87a3e96f159aabb9ce111cca819"
+ },
+ "executed_packet_tools": {
+  "handoffs/0065-core-live-hud/tools/build_variant.py": "eebc07e62f33534eb837ecda0e6e37b4ceea19352274aed94a51007ced0f7e3f",
+  "handoffs/0065-core-live-hud/tools/capture.py": "2b2891b48da7b3c9cf00d5d7a253eecd8a3e33bac9d11cda9b3f6afe3e53c507",
+  "handoffs/0065-core-live-hud/tools/collect.py": "89be66f75cbf85bbea55f305dbbd0fc348f27f0e0674267b8a9c2f360205474b",
+  "handoffs/0065-core-live-hud/tools/contrast.py": "8ef599c18a03f25f2c3e339ee7e95138b06ca9749c562ff1704634a1bce7af56",
+  "handoffs/0065-core-live-hud/tools/layout_check.py": "3675769c13f6e875aae9335209a3598056925e20bb9a0208591a1bde9fd3221f",
+  "handoffs/0065-core-live-hud/tools/lease.py": "01f48438fddde75939743da740d99bd605ede40d8913aa29afbc029a7df5665f",
+  "handoffs/0065-core-live-hud/tools/live_hud.rs": "ed75e61459dfc1a1bbbe687d6066006a6ad7522a3f57f0edbd423eca4f2b9faf",
+  "handoffs/0065-core-live-hud/tools/mutate_checks.py": "8be04cbcb973e581fc243273ae5f79506629c953c0aef2bdd2382b1e72e13da5",
+  "handoffs/0065-core-live-hud/tools/plans.json": "66de7315ef0458b35d15edc34a781d87368dd41050bc7ef70bdb6511ebd91656",
+  "handoffs/0065-core-live-hud/tools/png.py": "600a993da3976bde6e2b0aa4d11f6a3d4a50628368d1f19f95c9cd8555d77951",
+  "handoffs/0065-core-live-hud/tools/route_check.py": "37e38f2318911142ef49cc162a056e1d1cd7814150dc908386d4313ca90eadea",
+  "handoffs/0065-core-live-hud/tools/routes.py": "8669209a0e942bd2b976f5ec9bfe4abbdcc2a87a3e96f159aabb9ce111cca819"
+ },
+ "post_execution_change": "Astra restricted environment recording and sanitized publication rows after GPU release; numerical/visual execution and its frozen adapter are unchanged."
+}

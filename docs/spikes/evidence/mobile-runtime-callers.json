@@ -1,0 +1,1677 @@
+{
+  "schema_version": 1,
+  "scope": "Actual macOS C/Swift ABI verification for the trusted default cooked native game fixture.",
+  "source_base": "08185b2705094e7308880e5fb132bb9c7860575e",
+  "sources": {
+    "tools/probes/mobile-runtime-library/README.md": "04ad28d30beb8537c8b4d09a01bc8562ef6a32b056ef46d46cbf9760bf27e98e",
+    "tools/probes/mobile-runtime-library/android.py": "0711f68313ed6ad618330fee3ed9759a9671006e90f8e34b4956f4b37295225c",
+    "tools/probes/mobile-runtime-library/caller.c": "e845661a38a2a7aae01e1cbcb383ded6d96711f0fa14b30a157f11402b6742da",
+    "tools/probes/mobile-runtime-library/caller.swift": "2fcf641ff056509d6ca8f52d8d6fbe289cf26781e29ac89c42639aa8a5f9e14a",
+    "tools/probes/mobile-runtime-library/fixture/Cargo.lock": "d14089719d65247a5356de15ff6df1aa3c14f7c7ba93c7796599e3b3bad75725",
+    "tools/probes/mobile-runtime-library/fixture/Cargo.toml": "904307ecbb2ac80a2abd3c8e223304c44c8181c67b69ef5741d21cb47df77d9e",
+    "tools/probes/mobile-runtime-library/fixture/src/main.rs": "a02f85f8734420924d99e26fa213b02ab60961af3e8cf71a43f2c91d15efdbe8",
+    "tools/probes/mobile-runtime-library/test_verify.py": "f401855a09054862141b144b8e4f33cf45f22e59c4f5be3b7042df6b08c87d59",
+    "tools/probes/mobile-runtime-library/verify.py": "7f870ab995e14de1336f277dbbd6eb4042d600ab41a0866b23fc75022ace7c84"
+  },
+  "proof_source_delta": {
+    "README.md": "Post-run documentation only; original retained at history/proof-readme.md.",
+    "test_verify.py": "Added missing/wrong-tick numerical log rejection test after run003; does not affect caller execution."
+  },
+  "actual_proof": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/result.json",
+    "sha256": "948c3ce2f915f7049c926111522c8011edb9014f956e3fad21f5b0ae0410d56b",
+    "commands": 39,
+    "controls": 32,
+    "exit_code": 0,
+    "handle": 57513,
+    "target": "aarch64-apple-darwin",
+    "profile": "ci",
+    "features": [
+      "mobile-ffi"
+    ],
+    "no_runtime_source_load": true
+  },
+  "harness_tests": {
+    "passed": 4,
+    "qualification": "Four rejection unit tests independently rerun by root; retained original unit.log has the initial three-test run."
+  },
+  "fixture_build": {
+    "final_handle": 68411,
+    "exit_code": 0,
+    "clippy_handle": 12644,
+    "clippy_exit_code": 0,
+    "profile": "release",
+    "target_dir": "/tmp/incant-font-atlas-target",
+    "binary": {
+      "path": "/tmp/incant-font-atlas-target/release/incant-mobile-runtime-fixture",
+      "sha256": "d23bd37a07a1e60d57ad577deb44e2e068d3ff2c5df26336f2adb5b001419774",
+      "bytes": 941088
+    },
+    "shared_dependency_versions_and_checksums": "All match source-base Cargo.lock; same checked rerecast path patch.",
+    "controlled_first_build_cancellation": "17161 exited143 before fixture execution to restore the standalone workspace rerecast patch."
+  },
+  "archive": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/libincant_game_player.a",
+    "sha256": "1125911b72fc063d759f8db98f66e705296a65b9ec235dfd99092e0cae15122a",
+    "bytes": 86391472
+  },
+  "header": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/incant_game.h",
+    "sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5"
+  },
+  "archive_receipt_sha256": "54699cfb8130201403af5d1756cb2b6471ca76bb4eb5bbb9357c1c5c24d4c2d5",
+  "callers": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/caller-c",
+      "sha256": "edbded65fbf4ca7b36d8a65cb45f9f0f67b19971619a2cfc0951ec6fa251ff41",
+      "bytes": 46052648
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/caller-swift",
+      "sha256": "4cb2a157b67090450b9fc7f84a72abe804adeb709e821973d31bdd8cfd4db4c0",
+      "bytes": 46077296
+    }
+  ],
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-accepted/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-accepted/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-accepted/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-accepted/result.json",
+      "raw_sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "raw_bytes": 890,
+      "sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "bytes": 890,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-accepted.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-accepted.request.json",
+      "raw_sha256": "e40741f911bbd0db2eec7cb17dd5955b3c6ee4799e839b6a5e59731a4a677cd8",
+      "raw_bytes": 358,
+      "sha256": "e40741f911bbd0db2eec7cb17dd5955b3c6ee4799e839b6a5e59731a4a677cd8",
+      "bytes": 358,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-corrupt/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-corrupt/result.json",
+      "raw_sha256": "0f81e02bb7f8febb54cad5abc5afc49622bb37e79f5ad4f51f986e69ea9b3959",
+      "raw_bytes": 230,
+      "sha256": "0f81e02bb7f8febb54cad5abc5afc49622bb37e79f5ad4f51f986e69ea9b3959",
+      "bytes": 230,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-corrupt-package/clips.bin",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-corrupt-package/clips.bin",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "raw_bytes": 12,
+      "sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "bytes": 12,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-corrupt-package/empty-input.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-corrupt-package/empty-input.json",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "raw_bytes": 151,
+      "sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "bytes": 151,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-corrupt-package/input-actions.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-corrupt-package/input-actions.json",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "raw_bytes": 136,
+      "sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "bytes": 136,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-corrupt-package/package.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-corrupt-package/package.json",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "raw_bytes": 404,
+      "sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "bytes": 404,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-corrupt-package/world.scene",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-corrupt-package/world.scene",
+      "raw_sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "raw_bytes": 7,
+      "sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "bytes": 7,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-empty.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-empty.request.json",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-failure/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-failure/result.json",
+      "raw_sha256": "91739f97444bab097ba30696da8d4708a26c738477ec9ab468c073cdc54792e7",
+      "raw_bytes": 244,
+      "sha256": "91739f97444bab097ba30696da8d4708a26c738477ec9ab468c073cdc54792e7",
+      "bytes": 244,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-guest-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-guest-failure.request.json",
+      "raw_sha256": "427a5b2684cf5af93b3560464e8d166336cac504450aafbe77062a71d80a8d94",
+      "raw_bytes": 476,
+      "sha256": "427a5b2684cf5af93b3560464e8d166336cac504450aafbe77062a71d80a8d94",
+      "bytes": 476,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-input-io-failure/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-input-io-failure/result.json",
+      "raw_sha256": "aaf7f7721e6e1750d678f3fd625f7acf582ab7346a25d06fbaaa19c4a90aba31",
+      "raw_bytes": 228,
+      "sha256": "aaf7f7721e6e1750d678f3fd625f7acf582ab7346a25d06fbaaa19c4a90aba31",
+      "bytes": 228,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-input-io-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-input-io-failure.request.json",
+      "raw_sha256": "666f6995000329070c2067833380ac2598b5bacb24c0b2bcb33ffcb8becce5b7",
+      "raw_bytes": 490,
+      "sha256": "666f6995000329070c2067833380ac2598b5bacb24c0b2bcb33ffcb8becce5b7",
+      "bytes": 490,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-invalid-relative.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-invalid-relative.request.json",
+      "raw_sha256": "471d30b5acb8e7419ff1b7ec5c51b308f334ca15150b935855cd646b34a0a946",
+      "raw_bytes": 275,
+      "sha256": "471d30b5acb8e7419ff1b7ec5c51b308f334ca15150b935855cd646b34a0a946",
+      "bytes": 275,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-invalid-ticks.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-invalid-ticks.request.json",
+      "raw_sha256": "0526337ef08e2d35406edfe40ad2965d6dc4d7b776863cdd392aba0df737b4cb",
+      "raw_bytes": 355,
+      "sha256": "0526337ef08e2d35406edfe40ad2965d6dc4d7b776863cdd392aba0df737b4cb",
+      "bytes": 355,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-invalid-unknown.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-invalid-unknown.request.json",
+      "raw_sha256": "01d5ff151e1851346a9b6ab77d31e7a621a0d112cd9ef014f08b5bbb943cd474",
+      "raw_bytes": 373,
+      "sha256": "01d5ff151e1851346a9b6ab77d31e7a621a0d112cd9ef014f08b5bbb943cd474",
+      "bytes": 373,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-invalid-version.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-invalid-version.request.json",
+      "raw_sha256": "44449c5691db489073efeb6d6fd7648726bb5f0105ad552a5c09477767e6ce2d",
+      "raw_bytes": 357,
+      "sha256": "44449c5691db489073efeb6d6fd7648726bb5f0105ad552a5c09477767e6ce2d",
+      "bytes": 357,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-invalid-viewport.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-invalid-viewport.request.json",
+      "raw_sha256": "debc2754f524cfadc31ca1fa3cb91dcdabc6dffa2600d5a955b41f444c6fa9d4",
+      "raw_bytes": 383,
+      "sha256": "debc2754f524cfadc31ca1fa3cb91dcdabc6dffa2600d5a955b41f444c6fa9d4",
+      "bytes": 383,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-no-clobber.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-no-clobber.request.json",
+      "raw_sha256": "e40741f911bbd0db2eec7cb17dd5955b3c6ee4799e839b6a5e59731a4a677cd8",
+      "raw_bytes": 358,
+      "sha256": "e40741f911bbd0db2eec7cb17dd5955b3c6ee4799e839b6a5e59731a4a677cd8",
+      "bytes": 358,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-observation-failure/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-observation-failure/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-observation-failure/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-observation-failure/result.json",
+      "raw_sha256": "58ff06af8712cf49d638d70877d8b66a3ab4038978e4111626ea0b69cef4a4e2",
+      "raw_bytes": 952,
+      "sha256": "58ff06af8712cf49d638d70877d8b66a3ab4038978e4111626ea0b69cef4a4e2",
+      "bytes": 952,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-observation-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-observation-failure.request.json",
+      "raw_sha256": "ae7775305253ed51e7ffcc67c9286a99b2ea663014867dfaf1cab81cf967056c",
+      "raw_bytes": 375,
+      "sha256": "ae7775305253ed51e7ffcc67c9286a99b2ea663014867dfaf1cab81cf967056c",
+      "bytes": 375,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-oversized.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-oversized.request.json.gz",
+      "raw_sha256": "76c002eec0c9da854ca2ee5dae9fb0069a622274b6638ab712fcb70384304899",
+      "raw_bytes": 65537,
+      "sha256": "1290af172a81dd1a0ef790f48acee1e58bf04ca0f751900f9bd96e374ecc9734",
+      "bytes": 98,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-package-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-package-failure.request.json",
+      "raw_sha256": "174245087b464835f0dc8251249021b3895a9557671a4b461d429d537cbbb948",
+      "raw_bytes": 359,
+      "sha256": "174245087b464835f0dc8251249021b3895a9557671a4b461d429d537cbbb948",
+      "bytes": 359,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-release/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-release/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-release/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-release/result.json",
+      "raw_sha256": "b72d39a2a451ea0ac22c2a80e3603eacd1e46300f7fed0ff84728718a0fa76c5",
+      "raw_bytes": 894,
+      "sha256": "b72d39a2a451ea0ac22c2a80e3603eacd1e46300f7fed0ff84728718a0fa76c5",
+      "bytes": 894,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-release.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-release.request.json",
+      "raw_sha256": "73c80fe8278abe2d6d74c199e7e5b292768c0714ec1e70c93690dc6ea10b84e9",
+      "raw_bytes": 484,
+      "sha256": "73c80fe8278abe2d6d74c199e7e5b292768c0714ec1e70c93690dc6ea10b84e9",
+      "bytes": 484,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-repeat/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-repeat/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-repeat/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-repeat/result.json",
+      "raw_sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "raw_bytes": 890,
+      "sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "bytes": 890,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/c-repeat.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/c-repeat.request.json",
+      "raw_sha256": "428da8ec88e0d43acbe71fd34c258d09b809b5a0658643d782bcd6318301549c",
+      "raw_bytes": 356,
+      "sha256": "428da8ec88e0d43acbe71fd34c258d09b809b5a0658643d782bcd6318301549c",
+      "bytes": 356,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-000.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-000.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-000.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-000.stdout.gz",
+      "raw_sha256": "33157d3ef636347750739f6664ddf2a25560399d1bf4bb41175c93fdd1f8f684",
+      "raw_bytes": 341,
+      "sha256": "b7c515410625c4c8638df884415cb8fe9b8513a7b89cf775f404664bb2bdd233",
+      "bytes": 248,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-001.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-001.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-001.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-001.stdout.gz",
+      "raw_sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1",
+      "raw_bytes": 99,
+      "sha256": "e06fe0914af1256b42a7c89a16b72b0edbe5ca59c1e8964381e795ab1d80a731",
+      "bytes": 99,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-002.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-002.stderr.gz",
+      "raw_sha256": "804ef82abc063e08de05fb3bb0997428768bccf396d42d0fb28ae1ec9e86bdd7",
+      "raw_bytes": 910,
+      "sha256": "a58f7edc464330b47280e9d5d6b1b0eb67e81c3fe1b23b2d7cf9ae10db3a85af",
+      "bytes": 243,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-002.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-002.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-003.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-003.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-003.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-003.stdout.gz",
+      "raw_sha256": "edb251855222752af31185bd5e18b9af9ad624549ea257114c1daa48fe24fb12",
+      "raw_bytes": 11614974,
+      "sha256": "c3b536713f5c29e0af1e8179ce4590ab352597829881fc512e465b12d53c7a90",
+      "bytes": 1134031,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-004.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-004.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-004.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-004.stdout.gz",
+      "raw_sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1",
+      "raw_bytes": 99,
+      "sha256": "e06fe0914af1256b42a7c89a16b72b0edbe5ca59c1e8964381e795ab1d80a731",
+      "bytes": 99,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-005.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-005.stderr.gz",
+      "raw_sha256": "804ef82abc063e08de05fb3bb0997428768bccf396d42d0fb28ae1ec9e86bdd7",
+      "raw_bytes": 910,
+      "sha256": "a58f7edc464330b47280e9d5d6b1b0eb67e81c3fe1b23b2d7cf9ae10db3a85af",
+      "bytes": 243,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-005.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-005.stdout.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-006.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-006.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-006.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-006.stdout.gz",
+      "raw_sha256": "4a9f4f42a223b90a7e0a92678d15a5f40514b7bcbff1be9adde6ddce98c0a9b5",
+      "raw_bytes": 11614974,
+      "sha256": "c9b6b7a9356f3ee65596c3b29ce08597515d75974c0541ff63f5d97b0d501caa",
+      "bytes": 1133928,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-007.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-007.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-007.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-007.stdout.gz",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "raw_bytes": 17,
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-008.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-008.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-008.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-008.stdout.gz",
+      "raw_sha256": "56e2f4b9067d0a2e78c0e90f7a003fdcf230022ed702a0edeafbde61d469d5b3",
+      "raw_bytes": 17,
+      "sha256": "3f820091045356618ce126cb61405874dc54e557df180cd6b41627248a160358",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-009.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-009.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-009.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-009.stdout.gz",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "raw_bytes": 17,
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-010.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-010.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-010.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-010.stdout.gz",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "raw_bytes": 17,
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-011.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-011.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-011.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-011.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-012.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-012.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-012.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-012.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-013.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-013.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-013.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-013.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-014.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-014.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-014.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-014.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-015.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-015.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-015.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-015.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-016.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-016.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-016.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-016.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-017.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-017.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-017.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-017.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-018.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-018.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-018.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-018.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-019.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-019.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-019.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-019.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-020.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-020.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-020.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-020.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-021.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-021.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-021.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-021.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-022.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-022.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-022.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-022.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-023.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-023.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-023.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-023.stdout.gz",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "raw_bytes": 17,
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-024.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-024.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-024.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-024.stdout.gz",
+      "raw_sha256": "56e2f4b9067d0a2e78c0e90f7a003fdcf230022ed702a0edeafbde61d469d5b3",
+      "raw_bytes": 17,
+      "sha256": "3f820091045356618ce126cb61405874dc54e557df180cd6b41627248a160358",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-025.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-025.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-025.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-025.stdout.gz",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "raw_bytes": 17,
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-026.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-026.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-026.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-026.stdout.gz",
+      "raw_sha256": "7bd0f259f147ca479c0500e5e513a987679125b8dd6be3d5fdb80a09780687ba",
+      "raw_bytes": 17,
+      "sha256": "7f626384e48c4ba396e349810f4cee64ad13f9d1df33d3f1cc98e6bd9cbe3614",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-027.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-027.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-027.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-027.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-028.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-028.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-028.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-028.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-029.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-029.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-029.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-029.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-030.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-030.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-030.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-030.stdout.gz",
+      "raw_sha256": "8c9ea83017e20b6439c73a3160495e44e01d40e4b4c74948d42d90c4107a7a4e",
+      "raw_bytes": 17,
+      "sha256": "adeacf280f0a2727727bf5762f0851976c56bbe9ce6b4d007832570cf9abdaea",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-031.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-031.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-031.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-031.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-032.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-032.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-032.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-032.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-033.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-033.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-033.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-033.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-034.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-034.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-034.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-034.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-035.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-035.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-035.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-035.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-036.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-036.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-036.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-036.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-037.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-037.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-037.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-037.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-038.stderr",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-038.stderr.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/command-038.stdout",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/command-038.stdout.gz",
+      "raw_sha256": "45042e00170475ef1dda3f633e74038e22bfb3c179cd7ea2a17d697b295cf6c2",
+      "raw_bytes": 17,
+      "sha256": "97e942aceaaff4c7dc677fc286f50b9767047f2a7a2fa0fe6b163103ae00471f",
+      "bytes": 37,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/failure.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/failure.json",
+      "raw_sha256": "c5968a7e94d4d5626463f43ccc453d64476d364c69dcf99c785aa0f33514d839",
+      "raw_bytes": 151,
+      "sha256": "c5968a7e94d4d5626463f43ccc453d64476d364c69dcf99c785aa0f33514d839",
+      "bytes": 151,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/observe-release.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/observe-release.json",
+      "raw_sha256": "c7b894450799670998dacf7f824aa20b16d4b29c0f11060f78204ecb229032cd",
+      "raw_bytes": 280,
+      "sha256": "c7b894450799670998dacf7f824aa20b16d4b29c0f11060f78204ecb229032cd",
+      "bytes": 280,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/observe-wrong.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/observe-wrong.json",
+      "raw_sha256": "e75e4767bfa8f95e0689e19d2f96b91e3ca8a0c970926f1e3f2264699103125d",
+      "raw_bytes": 281,
+      "sha256": "e75e4767bfa8f95e0689e19d2f96b91e3ca8a0c970926f1e3f2264699103125d",
+      "bytes": 281,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/observe.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/observe.json",
+      "raw_sha256": "42ff37b835c9d3f35082b7f9ec7e17f1736b91757700b74a693be97116e2018f",
+      "raw_bytes": 279,
+      "sha256": "42ff37b835c9d3f35082b7f9ec7e17f1736b91757700b74a693be97116e2018f",
+      "bytes": 279,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/package/clips.bin",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/package/clips.bin",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "raw_bytes": 12,
+      "sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "bytes": 12,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/package/empty-input.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/package/empty-input.json",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "raw_bytes": 151,
+      "sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "bytes": 151,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/package/input-actions.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/package/input-actions.json",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "raw_bytes": 136,
+      "sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "bytes": 136,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/package/package.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/package/package.json",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "raw_bytes": 404,
+      "sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "bytes": 404,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/package/world.scene",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/package/world.scene",
+      "raw_sha256": "dfb5c21d9b9857390a4c607df760d06c94951a108f59230c3893b800119385c8",
+      "raw_bytes": 200,
+      "sha256": "dfb5c21d9b9857390a4c607df760d06c94951a108f59230c3893b800119385c8",
+      "bytes": 200,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/fixture/release.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/fixture/release.json",
+      "raw_sha256": "448d09e5988acec3dd9fcb016820b41e737db0a5df736e800585c8d92f34dc0e",
+      "raw_bytes": 215,
+      "sha256": "448d09e5988acec3dd9fcb016820b41e737db0a5df736e800585c8d92f34dc0e",
+      "bytes": 215,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/result.json.gz",
+      "raw_sha256": "948c3ce2f915f7049c926111522c8011edb9014f956e3fad21f5b0ae0410d56b",
+      "raw_bytes": 64553,
+      "sha256": "8e03c6327e7869ee1af4e50809ab337b5addecd6fed023412aab31ac3ef6dd3c",
+      "bytes": 5982,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-accepted/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-accepted/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-accepted/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-accepted/result.json",
+      "raw_sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "raw_bytes": 890,
+      "sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "bytes": 890,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-accepted.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-accepted.request.json",
+      "raw_sha256": "1314fa552d7e03a371b365b80615a4077b0d94b24a2b44320112b51fec3cf064",
+      "raw_bytes": 362,
+      "sha256": "1314fa552d7e03a371b365b80615a4077b0d94b24a2b44320112b51fec3cf064",
+      "bytes": 362,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-corrupt/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-corrupt/result.json",
+      "raw_sha256": "0f81e02bb7f8febb54cad5abc5afc49622bb37e79f5ad4f51f986e69ea9b3959",
+      "raw_bytes": 230,
+      "sha256": "0f81e02bb7f8febb54cad5abc5afc49622bb37e79f5ad4f51f986e69ea9b3959",
+      "bytes": 230,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-corrupt-package/clips.bin",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-corrupt-package/clips.bin",
+      "raw_sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "raw_bytes": 12,
+      "sha256": "7f3da20de25394c69f30593f089276a283b28f2ce7439f9ed4054365d11d26ae",
+      "bytes": 12,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-corrupt-package/empty-input.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-corrupt-package/empty-input.json",
+      "raw_sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "raw_bytes": 151,
+      "sha256": "d767a52a17be2f33794c6bf0b6fd13fc6f0d63952e404e98e263a311ccfc8a89",
+      "bytes": 151,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-corrupt-package/input-actions.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-corrupt-package/input-actions.json",
+      "raw_sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "raw_bytes": 136,
+      "sha256": "e7cc15bec3e65e1f4039a9431bffa6c0b485ac3d0ce49dca2a1c55c222be6ea6",
+      "bytes": 136,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-corrupt-package/package.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-corrupt-package/package.json",
+      "raw_sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "raw_bytes": 404,
+      "sha256": "f832f6ec5f8f6da9329fbb5bd7e30a5fa46845aed21d945b708381a43a6d3282",
+      "bytes": 404,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-corrupt-package/world.scene",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-corrupt-package/world.scene",
+      "raw_sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "raw_bytes": 7,
+      "sha256": "11d510e067d2cdcd7559bd86d27a2f4c20babd43670346b97af99b522c1f0075",
+      "bytes": 7,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-empty.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-empty.request.json",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-failure/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-failure/result.json",
+      "raw_sha256": "91739f97444bab097ba30696da8d4708a26c738477ec9ab468c073cdc54792e7",
+      "raw_bytes": 244,
+      "sha256": "91739f97444bab097ba30696da8d4708a26c738477ec9ab468c073cdc54792e7",
+      "bytes": 244,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-guest-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-guest-failure.request.json",
+      "raw_sha256": "945865ae2e13e1f4f2a3c308c745d80d47febc582658d6609d126f173aaee231",
+      "raw_bytes": 480,
+      "sha256": "945865ae2e13e1f4f2a3c308c745d80d47febc582658d6609d126f173aaee231",
+      "bytes": 480,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-input-io-failure/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-input-io-failure/result.json",
+      "raw_sha256": "aaf7f7721e6e1750d678f3fd625f7acf582ab7346a25d06fbaaa19c4a90aba31",
+      "raw_bytes": 228,
+      "sha256": "aaf7f7721e6e1750d678f3fd625f7acf582ab7346a25d06fbaaa19c4a90aba31",
+      "bytes": 228,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-input-io-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-input-io-failure.request.json",
+      "raw_sha256": "d7d3f9151381e80ed72046adf7881ba6d1db4ff9dd03cbe8f440f617b5808fdc",
+      "raw_bytes": 494,
+      "sha256": "d7d3f9151381e80ed72046adf7881ba6d1db4ff9dd03cbe8f440f617b5808fdc",
+      "bytes": 494,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-invalid-relative.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-invalid-relative.request.json",
+      "raw_sha256": "2236af2af387d47059ffadbabf66c8f94f8a67b15ec09b37b8ac44661ebc8ff6",
+      "raw_bytes": 279,
+      "sha256": "2236af2af387d47059ffadbabf66c8f94f8a67b15ec09b37b8ac44661ebc8ff6",
+      "bytes": 279,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-invalid-ticks.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-invalid-ticks.request.json",
+      "raw_sha256": "d0c13d0385395a1159e2e97bc88a5dc06007c4489a350d6049648f4b0b3b5206",
+      "raw_bytes": 359,
+      "sha256": "d0c13d0385395a1159e2e97bc88a5dc06007c4489a350d6049648f4b0b3b5206",
+      "bytes": 359,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-invalid-unknown.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-invalid-unknown.request.json",
+      "raw_sha256": "a19ed56225c00a3c48ed1cc671d9d3cba9aec1ac017265e2a66a9eb345187490",
+      "raw_bytes": 377,
+      "sha256": "a19ed56225c00a3c48ed1cc671d9d3cba9aec1ac017265e2a66a9eb345187490",
+      "bytes": 377,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-invalid-version.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-invalid-version.request.json",
+      "raw_sha256": "1b6392f4cad40b71d79968df60cda031fda83898156d3c54bc982963a38354a2",
+      "raw_bytes": 361,
+      "sha256": "1b6392f4cad40b71d79968df60cda031fda83898156d3c54bc982963a38354a2",
+      "bytes": 361,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-invalid-viewport.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-invalid-viewport.request.json",
+      "raw_sha256": "5693aa50db0353dbaa22d4be94a54dbecd59a1f6bc9c0cc643681993e03dd362",
+      "raw_bytes": 387,
+      "sha256": "5693aa50db0353dbaa22d4be94a54dbecd59a1f6bc9c0cc643681993e03dd362",
+      "bytes": 387,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-no-clobber.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-no-clobber.request.json",
+      "raw_sha256": "1314fa552d7e03a371b365b80615a4077b0d94b24a2b44320112b51fec3cf064",
+      "raw_bytes": 362,
+      "sha256": "1314fa552d7e03a371b365b80615a4077b0d94b24a2b44320112b51fec3cf064",
+      "bytes": 362,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-observation-failure/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-observation-failure/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-observation-failure/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-observation-failure/result.json",
+      "raw_sha256": "58ff06af8712cf49d638d70877d8b66a3ab4038978e4111626ea0b69cef4a4e2",
+      "raw_bytes": 952,
+      "sha256": "58ff06af8712cf49d638d70877d8b66a3ab4038978e4111626ea0b69cef4a4e2",
+      "bytes": 952,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-observation-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-observation-failure.request.json",
+      "raw_sha256": "d22905c42f4be1b99abf638618dba11004c006243d5a8165380cc8f9d70f5072",
+      "raw_bytes": 379,
+      "sha256": "d22905c42f4be1b99abf638618dba11004c006243d5a8165380cc8f9d70f5072",
+      "bytes": 379,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-oversized.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-oversized.request.json.gz",
+      "raw_sha256": "76c002eec0c9da854ca2ee5dae9fb0069a622274b6638ab712fcb70384304899",
+      "raw_bytes": 65537,
+      "sha256": "1290af172a81dd1a0ef790f48acee1e58bf04ca0f751900f9bd96e374ecc9734",
+      "bytes": 98,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-package-failure.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-package-failure.request.json",
+      "raw_sha256": "76a4520aa0b6628fe54dac53c734086833fe8f5e5e4069ac0fd964cc7f1b7ffb",
+      "raw_bytes": 367,
+      "sha256": "76a4520aa0b6628fe54dac53c734086833fe8f5e5e4069ac0fd964cc7f1b7ffb",
+      "bytes": 367,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-release/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-release/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-release/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-release/result.json",
+      "raw_sha256": "b72d39a2a451ea0ac22c2a80e3603eacd1e46300f7fed0ff84728718a0fa76c5",
+      "raw_bytes": 894,
+      "sha256": "b72d39a2a451ea0ac22c2a80e3603eacd1e46300f7fed0ff84728718a0fa76c5",
+      "bytes": 894,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-release.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-release.request.json",
+      "raw_sha256": "41f257f8fa794a90fa6c0f9d893878f39c7e1927206b534c56d63b7c9679544c",
+      "raw_bytes": 488,
+      "sha256": "41f257f8fa794a90fa6c0f9d893878f39c7e1927206b534c56d63b7c9679544c",
+      "bytes": 488,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-repeat/audio.pcm",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-repeat/audio.pcm.gz",
+      "raw_sha256": "17744bb6a4ed1d9d51d85d7eb645cde30352530d494233c434027f9e3193bae4",
+      "raw_bytes": 19200,
+      "sha256": "c0389124b8cba4084a4c0385590bad81bfa9cb91dee130493fa212227ece5afe",
+      "bytes": 53,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-repeat/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-repeat/result.json",
+      "raw_sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "raw_bytes": 890,
+      "sha256": "4b09f19d39a7840111c3ae19e77c9db34044e3d6f295999d171ee506a0b29476",
+      "bytes": 890,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-003/swift-repeat.request.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/proof003/swift-repeat.request.json",
+      "raw_sha256": "d961e5da7353d3d335a5c3d2e93ce8e63e6ea07bf88f7cff51fba60d1297779d",
+      "raw_bytes": 360,
+      "sha256": "d961e5da7353d3d335a5c3d2e93ce8e63e6ea07bf88f7cff51fba60d1297779d",
+      "bytes": 360,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-build-001-cancelled.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/fixture-build-001-cancelled.log.gz",
+      "raw_sha256": "099b51279c1fde1b51fcbb4efbaac76a178654ecb66b053f38ffaa9c572d15ca",
+      "raw_bytes": 1861,
+      "sha256": "93a35d332798b3e5354786cea41f0889ae75e83c41b475842441c1a8586bc456",
+      "bytes": 600,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-build-002.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/fixture-build-002.log.gz",
+      "raw_sha256": "8b4bb27054662ffaf1cb4d40345b1c5307dca298c147298f03c9ad75985d0b32",
+      "raw_bytes": 4084,
+      "sha256": "d3b4e6c5b966a7dd0a7c601997b105bf87298a9a275152020fff95acf3fe5d9a",
+      "bytes": 1070,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-clippy-001.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/fixture-clippy-001.log.gz",
+      "raw_sha256": "a0cc9e0b5a30eed90a52a4a743bcdcbb111ccf3531c373869cb31b2b55269229",
+      "raw_bytes": 4789,
+      "sha256": "a726b1e3d0c30c88536ed81f6ba2b98ae915c0f31cd150caadd55f0748f049d2",
+      "bytes": 1271,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-freeze-002.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/fixture-freeze-002.json",
+      "raw_sha256": "338fc7c4a25e36924a230fdf4713dc43e30b67aff7ad4c629c4ef04a6991dcdd",
+      "raw_bytes": 388,
+      "sha256": "338fc7c4a25e36924a230fdf4713dc43e30b67aff7ad4c629c4ef04a6991dcdd",
+      "bytes": 388,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/source-freeze-003.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/source-freeze-003.json",
+      "raw_sha256": "6b75e5e3906ebee4043ee660ac6f44fe96fb6d36ab985a2c09774964c00d6cba",
+      "raw_bytes": 1110,
+      "sha256": "6b75e5e3906ebee4043ee660ac6f44fe96fb6d36ab985a2c09774964c00d6cba",
+      "bytes": 1110,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/source-freeze-004.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/source-freeze-004.json",
+      "raw_sha256": "5703b54e03ae1885f7c6b8242b04abfff52f4b88f4be305a14ca07b0bfb2940e",
+      "raw_bytes": 1110,
+      "sha256": "5703b54e03ae1885f7c6b8242b04abfff52f4b88f4be305a14ca07b0bfb2940e",
+      "bytes": 1110,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/review-packet.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/review-packet.json",
+      "raw_sha256": "8bf71dd7f5861d831826147b23958de7ffd89afa2d0e160e9358e687c0e68672",
+      "raw_bytes": 7146,
+      "sha256": "8bf71dd7f5861d831826147b23958de7ffd89afa2d0e160e9358e687c0e68672",
+      "bytes": 7146,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/review-packet-004.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/review-packet-004.json",
+      "raw_sha256": "62012d4338a9b812f633284d45e083d70d4aa5ddfb1941ae2827c938e3a787a6",
+      "raw_bytes": 7952,
+      "sha256": "62012d4338a9b812f633284d45e083d70d4aa5ddfb1941ae2827c938e3a787a6",
+      "bytes": 7952,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/verify-001.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/verify-001.log.gz",
+      "raw_sha256": "dd59b518f9e2418af251bbe9ce7b0143bac7edf73bb6b4239e5e54da6ca28b19",
+      "raw_bytes": 1420,
+      "sha256": "8f31834fcc0cf5b5c89bbba4a23dfb64c28b208dcbb76a2295f275f2ee6c03b1",
+      "bytes": 447,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/verify-002.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/verify-002.log.gz",
+      "raw_sha256": "bb67ea16ccae9b2d6a5d15cb98536dfd6a656d51c5df7014f49e86770580b8a5",
+      "raw_bytes": 88,
+      "sha256": "26fb20d392b9e514ee30bde68c7c3ba419c47b3fa2759fe715e3e67742bcbb35",
+      "bytes": 96,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/verify-003.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/verify-003.log.gz",
+      "raw_sha256": "e18da2d5928d3589631a4acaa6f8812a457a4b1ded3ffcc55999910617226918",
+      "raw_bytes": 88,
+      "sha256": "04e65d8334c5a314e856affc37703dc03e8c8124703ff349e74dc77dba053b3e",
+      "bytes": 96,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fmt.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/fmt.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/conventions.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/conventions.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/diff.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/diff.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/python.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/python.log.gz",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/unit.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/unit.log.gz",
+      "raw_sha256": "5279d1fc9a1ced44f9c96da1414ef59e4676f963fbad52e7a1a2903538819b0d",
+      "raw_bytes": 101,
+      "sha256": "592073660b7e85f0f5eaa82927d8aebf1906fbe48c7bdbaa3af9f6162bc0c04e",
+      "bytes": 54,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/fixture-metadata.json.gz",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/host/fixture-metadata.json.gz.gz",
+      "raw_sha256": "4efda2155cf36b2428c7ccfca2190d5a03e65a7b79cf4e24d1d6969b2595d259",
+      "raw_bytes": 97200,
+      "sha256": "d00ab87ec59a783a9813b8eca3362a3301b580db3c0a0bace205afa1b50432ff",
+      "bytes": 97141,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-callers-001/result.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/history/failed-oracle-001.json.gz",
+      "raw_sha256": "10369eaf6de04fc2290c9159075a3f30d59a1f05e096698b20fe19f1bb3f4b7e",
+      "raw_bytes": 21568,
+      "sha256": "b16857143ddba06468006826f84cd24a2cc33bb77282f0491a815ab65bd1373e",
+      "bytes": 3465,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-callers-001/source-freeze-003/tools/probes/mobile-runtime-library/README.md",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/history/proof-readme.md",
+      "raw_sha256": "b4bdc21101475d1434e3457cc3add1921a5a78fa23a0372ac3e988cf0cbcb806",
+      "raw_bytes": 3647,
+      "sha256": "b4bdc21101475d1434e3457cc3add1921a5a78fa23a0372ac3e988cf0cbcb806",
+      "bytes": 3647,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/receipt.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/archive-receipt.json",
+      "raw_sha256": "54699cfb8130201403af5d1756cb2b6471ca76bb4eb5bbb9357c1c5c24d4c2d5",
+      "raw_bytes": 6079,
+      "sha256": "54699cfb8130201403af5d1756cb2b6471ca76bb4eb5bbb9357c1c5c24d4c2d5",
+      "bytes": 6079,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-macos-library-001/incant_game.h",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/incant_game.h",
+      "raw_sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5",
+      "raw_bytes": 495,
+      "sha256": "101c0a974c7b629f66f7d9e9e2d9c038d71a45ccb2a8fdc91739c2ae7fe649c5",
+      "bytes": 495,
+      "encoding": "identity"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/freeze.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/archive-source-freeze.json.gz",
+      "raw_sha256": "9409a0346a710339648e548a6c354f6fce9e9bd3c63afaa5d81278f9ef70ddfb",
+      "raw_bytes": 144481,
+      "sha256": "c40db1ee0c1b73733a226c487d2b12ca140fa7679230636613627afa81b4d1bc",
+      "bytes": 58802,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-3.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/archive-build.log.gz",
+      "raw_sha256": "3d30abe059d6bc27b029015e8b816cec7cfe3a2303883f33be18f6d9fd4ff759",
+      "raw_bytes": 195,
+      "sha256": "4d47c6c506c34c7fa2783ceb7ca938cc65a316c312818293af0807ed6158ce94",
+      "bytes": 169,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/mobile-runtime-build-002/command-2.log",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/archive-runtime-graph.log.gz",
+      "raw_sha256": "846fef05f5fa37d05846b276942eee7310669af5904018e5870dcf7c385f7816",
+      "raw_bytes": 132,
+      "sha256": "b4e35141b06c6b2db8c0bd0b021815c6082a1fddc6de1916e2ad5117d224602d",
+      "bytes": 107,
+      "encoding": "gzip"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/mobile-runtime-callers-final-20261012.json",
+      "retained": "docs/spikes/evidence/mobile-runtime-callers/review.json",
+      "raw_sha256": "da34567910271f6fb6d33170409b3bbabbd93ae5357b924e5bafb5bb1653025a",
+      "raw_bytes": 1793,
+      "sha256": "da34567910271f6fb6d33170409b3bbabbd93ae5357b924e5bafb5bb1653025a",
+      "bytes": 1793,
+      "encoding": "identity"
+    }
+  ],
+  "review": {
+    "original": "/Users/andreyyurlov/.codex/incant-reviews/mobile-runtime-callers-final-20261012.json",
+    "retained": "docs/spikes/evidence/mobile-runtime-callers/review.json",
+    "raw_sha256": "da34567910271f6fb6d33170409b3bbabbd93ae5357b924e5bafb5bb1653025a",
+    "raw_bytes": 1793,
+    "sha256": "da34567910271f6fb6d33170409b3bbabbd93ae5357b924e5bafb5bb1653025a",
+    "bytes": 1793,
+    "encoding": "identity"
+  },
+  "pending": [
+    "Numeric mobile-compat guest receipt path implemented but not yet executed by these callers.",
+    "iOS simulator/device archive blocked by existing cook target guard; no cross-build acceptance here.",
+    "iOS disposable simulator C/Swift execution and device link are implemented but unexecuted.",
+    "Android NDK archive/C-link driver unexecuted; compatibility admission and candidate job wiring still pending.",
+    "No physical-phone, UI, GPU, audio-device, authored-mobile-export or frame-time/size gate claim."
+  ]
+}

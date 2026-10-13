@@ -1,0 +1,22 @@
+{
+ "cases": [
+  {
+   "name": "idle",
+   "viewport": [
+    640,
+    480
+   ],
+   "scale": 2.0,
+   "steps": [
+    {
+     "ticks": 400,
+     "capture": "mites-closing"
+    },
+    {
+     "ticks": 330,
+     "capture": "lost"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "argv": [
+      "cargo",
+      "check",
+      "--locked",
+      "-p",
+      "incant_game_player",
+      "--no-default-features",
+      "--features",
+      "static-module,render-input",
+      "-j2"
+    ],
+    "exit_code": 101,
+    "seconds": 23.116978415997437
+  }
+]
