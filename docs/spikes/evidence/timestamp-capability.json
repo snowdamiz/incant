@@ -1,0 +1,336 @@
+{
+  "format": "incant-timestamp-capability-evidence",
+  "version": 1,
+  "base_main": "7ff955537760af2aa76b1753b6a85b7e8d036ff0",
+  "source_path": "crates/incant_render/src/timing/gpu_tests.rs",
+  "source_sha256": "8ea61d6b885a80f767d6c0edb7072e342b68dde7684c60ae94d549b34d4b6f58",
+  "freeze": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/freeze.json",
+  "frozen_inputs": 3065,
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/00-workspace-products-clean.log",
+      "path": "docs/spikes/evidence/timestamp-capability/00-00-workspace-products-clean.log.gz",
+      "sha256": "7125b8c2d6a3f78d24bc71d72122c967e83391e9a341916ba16012723fd4b1f9",
+      "bytes": 1009,
+      "compressed_sha256": "d4255848fce412f6f59df405fb58cd92e1f702c9fd1fc458362eb47a320b1dca"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/01-renderer-cpu.log",
+      "path": "docs/spikes/evidence/timestamp-capability/01-01-renderer-cpu.log.gz",
+      "sha256": "5a3c4732be616782f6ecce21c045a10164582e297c2f2df428fd4bec58de13ee",
+      "bytes": 17115,
+      "compressed_sha256": "b48f9fd596988a6c5c1254833e67080cb9dc3aacc55999ae9a2d71866f4c2bac"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/02-renderer-clippy.log",
+      "path": "docs/spikes/evidence/timestamp-capability/02-02-renderer-clippy.log.gz",
+      "sha256": "f32800515d98e00c6c44630bc9e7fd2cf26d54dc125c17e68b4f5d23ca787bd5",
+      "bytes": 1484,
+      "compressed_sha256": "1ce593c3db35c9c97a6b5858a4aa39faad44406881296a8c6aa40234a8f5bb2d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/03-fmt.log",
+      "path": "docs/spikes/evidence/timestamp-capability/03-03-fmt.log.gz",
+      "sha256": "5bd2c4787084677798c6fd838467a305f2dfa8bae7469f20aeed41fb6c07e93b",
+      "bytes": 26,
+      "compressed_sha256": "b2ac08564f54e66ea44401e5556633094ddace19ee792a5aa8908b9218eb865a"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/04-conventions.log",
+      "path": "docs/spikes/evidence/timestamp-capability/04-04-conventions.log.gz",
+      "sha256": "f36ed5d00a16092e417fa76903899b827e814d4de66e9c21cc4220f3ca4727a3",
+      "bytes": 48,
+      "compressed_sha256": "3364d1632c84df7a894fef5f8056fe73514b016424db172a73b9033224610fd9"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/05-diff.log",
+      "path": "docs/spikes/evidence/timestamp-capability/05-05-diff.log.gz",
+      "sha256": "3d4d50cd32af92c6d4df37c1df74a96622fca8cfb5643a155c91f034a42f2068",
+      "bytes": 19,
+      "compressed_sha256": "34a1ff4fe10c8fe69d6a5169ca6c8d4340b5c8ed7d41fd92eed930e697db990e"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/after-freeze.json",
+      "path": "docs/spikes/evidence/timestamp-capability/06-after-freeze.json.gz",
+      "sha256": "a019c1ae5217a3e6a6fc85f70e5eb8f2e32c37dbcb679a4f2798b13052001aef",
+      "bytes": 35,
+      "compressed_sha256": "84c20194a5040dc79480fd5bebab2601d9c476e76fd7d91b18083ecce71a5625"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/binary.json",
+      "path": "docs/spikes/evidence/timestamp-capability/07-binary.json.gz",
+      "sha256": "5591e3f58bbe19d3642ad6dc3d208140bdfd6bfa5cb6fd26b450b9f2f7871029",
+      "bytes": 383,
+      "compressed_sha256": "ad61bf82f7e8fca54c42280f4122359396ae0987876e73f9db1d27f2016f8aec"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/checks.json",
+      "path": "docs/spikes/evidence/timestamp-capability/08-checks.json.gz",
+      "sha256": "06df520695cba1684e5274a19d6e8eb8f8cf0e7a3cc8734ba3b604e61ec9ff3b",
+      "bytes": 4500,
+      "compressed_sha256": "ad1df7bb83784a302c49a29745a94ee37d61de2d71f12106a6939feaa61f7176"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/freeze.json",
+      "path": "docs/spikes/evidence/timestamp-capability/09-freeze.json.gz",
+      "sha256": "89df6bd21510d722f35278f1c9334f7734f9b842d30999027f47f8c88888df94",
+      "bytes": 570488,
+      "compressed_sha256": "dc897266902490eaa42045addfe813154ced84f1b2545c9dcdee9ee3acc0b88d"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/gpu_tests.rs",
+      "path": "docs/spikes/evidence/timestamp-capability/10-gpu_tests.rs.gz",
+      "sha256": "8ea61d6b885a80f767d6c0edb7072e342b68dde7684c60ae94d549b34d4b6f58",
+      "bytes": 5328,
+      "compressed_sha256": "c9e1d703612ac55a56adb8e677c3e7d70ad1fb27f0cb1fcca9bb11f0bea48806"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/initial-checks.log",
+      "path": "docs/spikes/evidence/timestamp-capability/12-initial-checks.log.gz",
+      "sha256": "46f0cf7b3ef7899632a771bdee9a0b77d41ee65b0b895609f4c1cd189c167a18",
+      "bytes": 776556,
+      "compressed_sha256": "538a772ceff0752bb800a0af28737c09943414e7300e2f6941195d568c3fda59"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/run.py",
+      "path": "docs/spikes/evidence/timestamp-capability/13-run.py.gz",
+      "sha256": "8cbda0ac034ec2ae0f44999d3d91a08fdb6b9bffa4842e23b79adf878bd2307a",
+      "bytes": 2096,
+      "compressed_sha256": "95b12812431de16ac79126d6f06b7d3356d14ec0b8772c76e4f148f6c3725d5f"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/source-review.json",
+      "path": "docs/spikes/evidence/timestamp-capability/14-source-review.json.gz",
+      "sha256": "ff5d86e15453fff9550f50fa2b9d7dca081826edbee2ea5b0b2d6f10f6b6a8e9",
+      "bytes": 788,
+      "compressed_sha256": "4951e2153fac8b721b0012d864051d4762a2613f8a52bf22ee5581aaadc303c7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/source.patch",
+      "path": "docs/spikes/evidence/timestamp-capability/15-source.patch.gz",
+      "sha256": "a78d8e73e179dc80a662e5989aa3b1475f839ed5d4bd79ccc5c61f58ac649b90",
+      "bytes": 3336,
+      "compressed_sha256": "ad8347d8673716f9e571556f9e3f63064a74b58ee7d9d4aff6ca3d08d33ca8b8"
+    }
+  ],
+  "binary": {
+    "original": "/tmp/incant-dynamic-resolution-target/ci/deps/incant_render-25a5275fc192b898",
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/incant_render-test",
+    "sha256": "d1753ccb0623efbb7868b1a87b06191e01efa4a78f856c5422fde22e344f3ec6",
+    "bytes": 31595024,
+    "scope": "Compiled native libtest; 94 CPU pass, 36 GPU ignored; no GPU execution"
+  },
+  "checks": [
+    {
+      "name": "workspace-products-clean",
+      "command": [
+        "cargo",
+        "clean",
+        "-p",
+        "incant_2d",
+        "-p",
+        "incant_agent",
+        "-p",
+        "incant_cmd",
+        "-p",
+        "incant_doc",
+        "-p",
+        "incant_input",
+        "-p",
+        "incant_localization",
+        "-p",
+        "incant_nav",
+        "-p",
+        "incant_types",
+        "-p",
+        "incant_source",
+        "-p",
+        "incant_core",
+        "-p",
+        "incant_physics",
+        "-p",
+        "incant_physics_runtime",
+        "-p",
+        "incant_import",
+        "-p",
+        "incant_assets",
+        "-p",
+        "incant_assets_runtime",
+        "-p",
+        "incant_anim",
+        "-p",
+        "incant_text",
+        "-p",
+        "incant_wasm_cook",
+        "-p",
+        "incant_wasm_abi",
+        "-p",
+        "incant_observe",
+        "-p",
+        "incant_runtime",
+        "-p",
+        "incant_physics_2d_runtime",
+        "-p",
+        "incant_profile",
+        "-p",
+        "incant_agent_native",
+        "-p",
+        "incant_audio_runtime",
+        "-p",
+        "incant_game_runtime",
+        "-p",
+        "incant_script",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_wasm_dev",
+        "-p",
+        "incant_render_game",
+        "-p",
+        "incant_render_data",
+        "-p",
+        "incant_render_native",
+        "-p",
+        "incant_cook",
+        "-p",
+        "incant_wasm_runtime",
+        "-p",
+        "incant-module",
+        "-p",
+        "incant_play",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_authoring",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_audio",
+        "-p",
+        "incant_game_player",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_headless",
+        "-p",
+        "incant_play_legacy",
+        "-p",
+        "incant_physics_snapshot",
+        "-p",
+        "incant_platform_smoke",
+        "-p",
+        "incant_script_player",
+        "-p",
+        "incant_wasm_player",
+        "-p",
+        "incant_editor"
+      ],
+      "start": "2026-10-13T10:07:53.423606+00:00",
+      "end": "2026-10-13T10:07:56.933598+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/00-workspace-products-clean.log",
+      "sha256": "7125b8c2d6a3f78d24bc71d72122c967e83391e9a341916ba16012723fd4b1f9"
+    },
+    {
+      "name": "renderer-cpu",
+      "command": [
+        "cargo",
+        "test",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--profile",
+        "ci",
+        "--locked",
+        "-j2"
+      ],
+      "start": "2026-10-13T10:07:57.057162+00:00",
+      "end": "2026-10-13T10:08:35.679392+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/01-renderer-cpu.log",
+      "sha256": "5a3c4732be616782f6ecce21c045a10164582e297c2f2df428fd4bec58de13ee"
+    },
+    {
+      "name": "renderer-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "-p",
+        "incant_render",
+        "--all-targets",
+        "--profile",
+        "ci",
+        "--locked",
+        "-j2",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "start": "2026-10-13T10:08:35.806729+00:00",
+      "end": "2026-10-13T10:08:40.426142+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/02-renderer-clippy.log",
+      "sha256": "f32800515d98e00c6c44630bc9e7fd2cf26d54dc125c17e68b4f5d23ca787bd5"
+    },
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "start": "2026-10-13T10:08:40.546238+00:00",
+      "end": "2026-10-13T10:08:41.744489+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/03-fmt.log",
+      "sha256": "5bd2c4787084677798c6fd838467a305f2dfa8bae7469f20aeed41fb6c07e93b"
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "start": "2026-10-13T10:08:41.857413+00:00",
+      "end": "2026-10-13T10:08:41.889326+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/04-conventions.log",
+      "sha256": "f36ed5d00a16092e417fa76903899b827e814d4de66e9c21cc4220f3ca4727a3"
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "start": "2026-10-13T10:08:41.998075+00:00",
+      "end": "2026-10-13T10:08:42.047968+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/05-diff.log",
+      "sha256": "3d4d50cd32af92c6d4df37c1df74a96622fca8cfb5643a155c91f034a42f2068"
+    }
+  ],
+  "passed_cpu": 94,
+  "ignored_gpu": 36,
+  "initial_hosted_failure": {
+    "candidate": "51d8ab52a776e133c55acae180b4da464b4446db",
+    "job": 115226866064,
+    "adapter": "Apple Paravirtual device / Metal",
+    "error": "GpuTimingError::Unsupported unconditionally unwrapped by the ignored numeric test",
+    "raw": "/Users/andreyyurlov/.codex/incant-evidence/timestamp-capability-001/initial-checks.log",
+    "sha256": "46f0cf7b3ef7899632a771bdee9a0b77d41ee65b0b895609f4c1cd189c167a18"
+  },
+  "source_review": {
+    "path": "docs/spikes/evidence/timestamp-capability/source-review.json",
+    "sha256": "ff5d86e15453fff9550f50fa2b9d7dca081826edbee2ea5b0b2d6f10f6b6a8e9"
+  },
+  "limits": [
+    "No production, shader, feature, workflow or required-context change",
+    "Actual adapter capabilities and both runtime contract branches must execute on the successor hosted checkpoint",
+    "CPU/compile evidence only; no local GPU run or positive hosted timestamp measurement claimed"
+  ],
+  "review_status": "Source accepted; final evidence review pending"
+}

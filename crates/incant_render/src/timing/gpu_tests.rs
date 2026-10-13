@@ -4,12 +4,37 @@ use incant_render_authoring::RendererAuthoringExt as _;
 use std::time::{Duration, Instant};
 
 #[test]
-#[ignore = "requires native encoder timestamp support; run serially under GPU ownership"]
+#[ignore = "requires a native GPU; validates timestamp support or typed refusal serially"]
 fn bounded_timestamp_queries_follow_real_submission_and_abandonment() {
     let instance = wgpu::Instance::default();
-    let renderer =
-        pollster::block_on(crate::Renderer::new_with_gpu_timing(&instance, None)).unwrap();
-    eprintln!("Timestamp adapter: {:?}", renderer.adapter.get_info());
+    let ordinary = crate::test_support::checked(
+        pollster::block_on(crate::Renderer::new(&instance, None)).unwrap(),
+    );
+    let adapter_info = ordinary.adapter.get_info();
+    let features = ordinary.adapter.features();
+    let supported = features.contains(wgpu::Features::TIMESTAMP_QUERY);
+    eprintln!(
+        "Timestamp capability: adapter={adapter_info:?}; features={features:?}; supported={supported}"
+    );
+    let timed = pollster::block_on(crate::Renderer::new_with_gpu_timing(&instance, None));
+    let renderer = if supported {
+        let renderer = crate::test_support::checked(timed.unwrap());
+        assert_eq!(renderer.adapter.get_info(), adapter_info);
+        assert_eq!(renderer.adapter.features(), features);
+        drop(ordinary);
+        renderer
+    } else {
+        let error = match timed {
+            Ok(_) => panic!("timestamp construction succeeded without TIMESTAMP_QUERY"),
+            Err(error) => error,
+        };
+        assert_eq!(
+            error.downcast_ref::<GpuTimingError>(),
+            Some(&GpuTimingError::Unsupported),
+            "missing timestamp capability must produce the exact typed refusal"
+        );
+        ordinary
+    };
     let dir = tempfile::tempdir().unwrap();
     let (project, assets, _) = crate::test_support::fixture(dir.path());
     let scene = renderer.prepare_scene(&project, &assets).unwrap();
@@ -33,6 +58,29 @@ fn bounded_timestamp_queries_follow_real_submission_and_abandonment() {
             .draw_scene(&scene, &view, texture.format(), 64, 64, None)
             .unwrap()
     };
+    if !supported {
+        assert_eq!(
+            renderer.gpu_timing_stats().unwrap(),
+            GpuTimingStats::default()
+        );
+        let submission = renderer.queue.submit([encode()]);
+        renderer
+            .device
+            .poll(wgpu::PollType::Wait {
+                submission_index: Some(submission),
+                timeout: Some(Duration::from_secs(15)),
+            })
+            .unwrap();
+        assert!(renderer.take_gpu_timing().unwrap().is_none());
+        assert_eq!(
+            renderer.gpu_timing_stats().unwrap(),
+            GpuTimingStats::default()
+        );
+        eprintln!(
+            "Timestamp contract: typed Unsupported; ordinary frame completed; no timing measurement claimed"
+        );
+        return;
+    }
     let first = encode();
     let second = encode();
     let abandoned = encode();
