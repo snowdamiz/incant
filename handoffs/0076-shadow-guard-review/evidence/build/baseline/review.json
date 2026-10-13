@@ -1,0 +1,143 @@
+{
+ "role": "baseline",
+ "holder": "root supervised sequential shadow comparison CPU builds",
+ "build_grant_sha256": "83bb00aace62ffb65b85c39bceae0a1d0b9283a16075185c5c7de9c221c52661",
+ "source_commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+ "tools": {
+  "head": "6d447c80d8fa92c41153bd011641e727125e6552",
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "plan_sha256": "a8a0cd6411697f06dbc17e15dfb1013e03222860569e3cfb4c6d3612e4bfcc70",
+  "helper_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "source": {
+  "role": "baseline",
+  "commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+  "tree": "9363cf4ffb7c2abe2c47042dfb0e85e98a02da00",
+  "files": 19496,
+  "manifest_sha256": "0dcb42189f137065e06292298c89a7039e3ecfa8489f96ec1a08fd0f6f85da7b",
+  "helper_copy_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "source_record_sha256": "dce94236f76bb77162204df63aacd3a895b9db05b337c7f20face22c3b246eb7",
+ "helper_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2",
+ "helper_copy": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/crates/incant_render/tests/temporal_visual_review.rs",
+ "frozen": {
+  "temporal_visual_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/bin/baseline/temporal_visual_review",
+   "sha256": "bd81f74ed14995d247fe6ae9dc558f7a7cf62f8ac0e10c5d1b0587e2baa3ce96",
+   "bytes": 18234552,
+   "mode": "0o555",
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-734142753be117b5",
+   "fresh": false,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/crates/incant_render#0.0.1"
+  }
+ },
+ "incant_render_library": [
+  {
+   "target": "incant_render",
+   "kind": [
+    "lib"
+   ],
+   "test": false,
+   "fresh": false,
+   "executable": null,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/crates/incant_render#0.0.1",
+   "filenames": {
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "cc9ccd41a6001587d73a2fed8cf5cbeaceda34068fc232a8cd6caf62066bb9a8",
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "5fe9e9328b79d6833fa9cad70ef9150e16ac89e9ad5350d45d6f61bbcb2b30ff"
+   }
+  }
+ ],
+ "builds": [
+  {
+   "label": "baseline-review",
+   "kind": "build",
+   "holder": "root supervised sequential shadow comparison CPU builds",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/tools/cargo",
+    "test",
+    "-p",
+    "incant_render",
+    "--test",
+    "temporal_visual_review",
+    "--no-run",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline",
+   "env": {
+    "inherited_keys_values_not_recorded": [
+     "HOME"
+    ],
+    "overrides": {
+     "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+     "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/tmp/baseline-review",
+     "CARGO_TERM_COLOR": "never",
+     "RUSTUP_AUTO_INSTALL": "0"
+    }
+   },
+   "pid": 23521,
+   "started": "2026-10-13T14:44:53.396310+00:00",
+   "ended": "2026-10-13T14:45:22.501642+00:00",
+   "exit": 0,
+   "timed_out": false,
+   "wait_error": null,
+   "timeout_s": 2700,
+   "group_empty_after": true,
+   "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-review.stdout.jsonl",
+   "stdout_sha256": "0e4e867add591509357904377c34fbf32a3eaca1cd5dc6ad564e0ac95144e405",
+   "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-review.stderr.txt",
+   "stderr_sha256": "87fece1fa6d5178577335bda037cee9d558a9c1aedc5967135a20c062ca7d1d1",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": false,
+     "executable": null,
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "cc9ccd41a6001587d73a2fed8cf5cbeaceda34068fc232a8cd6caf62066bb9a8",
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "5fe9e9328b79d6833fa9cad70ef9150e16ac89e9ad5350d45d6f61bbcb2b30ff"
+     }
+    },
+    {
+     "target": "temporal_visual_review",
+     "kind": [
+      "test"
+     ],
+     "test": true,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-734142753be117b5",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/temporal_visual_review-734142753be117b5": "bd81f74ed14995d247fe6ae9dc558f7a7cf62f8ac0e10c5d1b0587e2baa3ce96"
+     }
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T14:45:22.538191+00:00"
+}

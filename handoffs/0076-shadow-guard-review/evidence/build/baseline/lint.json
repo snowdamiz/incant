@@ -1,0 +1,63 @@
+{
+ "role": "baseline",
+ "tools": {
+  "head": "6d447c80d8fa92c41153bd011641e727125e6552",
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "plan_sha256": "a8a0cd6411697f06dbc17e15dfb1013e03222860569e3cfb4c6d3612e4bfcc70",
+  "helper_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "source": {
+  "role": "baseline",
+  "commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+  "tree": "9363cf4ffb7c2abe2c47042dfb0e85e98a02da00",
+  "files": 19496,
+  "manifest_sha256": "0dcb42189f137065e06292298c89a7039e3ecfa8489f96ec1a08fd0f6f85da7b",
+  "helper_copy_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "label": "baseline-lint",
+ "kind": "build",
+ "holder": "root supervised sequential shadow comparison CPU builds",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "temporal_visual_review",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/baseline",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/tmp/baseline-lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "pid": 23843,
+ "started": "2026-10-13T14:45:23.732070+00:00",
+ "ended": "2026-10-13T14:45:27.387359+00:00",
+ "exit": 0,
+ "timed_out": false,
+ "wait_error": null,
+ "timeout_s": 2700,
+ "group_empty_after": true,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-lint.stdout.jsonl",
+ "stdout_sha256": "28cf96236b33c1bea947a47fde85ff16cc54d96dc79e3a83407d17e8a8469f56",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-baseline-lint.stderr.txt",
+ "stderr_sha256": "0b68ec7d3d3b688c3e84dd1a6e9966d4e7f6ac9b7f54a2d97dac79d02aa8621b",
+ "recorded": "2026-10-13T14:45:27.387898+00:00"
+}

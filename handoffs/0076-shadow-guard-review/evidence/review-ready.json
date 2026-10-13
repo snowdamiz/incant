@@ -1,0 +1,13 @@
+{
+  "packet": "0076-shadow-guard-review",
+  "stage": "shadow-guard-visual",
+  "holder": "Claude0076 Opus5.5 Max bounded shadow viewport comparison",
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "build_records": {
+    "baseline": "7d38ef4339443e4c2e5283e06b397b355efe33e9194346b19b864f52c7191fd4",
+    "candidate": "17e0dfc6e17cbf2fc9914b3fc44a15498249bb1b3435df45550c05a715aab6d3"
+  },
+  "prior_owner_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-owner-attachment-gpu-001/release.json",
+  "prior_owner_release_sha256": "44cadf67477c235eb9f176a6ad22c76beb857532e6dd53c421553001832c1786",
+  "issued_at": "2026-10-13T14:48:05.886312+00:00"
+}

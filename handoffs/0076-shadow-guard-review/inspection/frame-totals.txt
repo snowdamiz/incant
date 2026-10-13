@@ -1,0 +1,23 @@
+still_consecutive on-01->on-02: sum 353920 vs 353920 (diff 0), changed>2 20471 vs 20471, max 107 vs 107
+still_consecutive on-02->on-03: sum 136874 vs 136874 (diff 0), changed>2 16131 vs 16131, max 67 vs 67
+still_consecutive on-03->on-04: sum 96899 vs 96899 (diff 0), changed>2 10647 vs 10647, max 43 vs 43
+still_consecutive on-04->on-05: sum 89940 vs 89940 (diff 0), changed>2 11406 vs 11406, max 60 vs 60
+still_consecutive on-05->on-06: sum 129563 vs 129564 (diff -1), changed>2 15375 vs 15375, max 50 vs 50
+still_consecutive on-06->on-07: sum 84656 vs 84655 (diff 1), changed>2 10261 vs 10261, max 43 vs 43
+still_consecutive on-07->on-08: sum 97393 vs 97393 (diff 0), changed>2 11717 vs 11717, max 71 vs 71
+still_consecutive on-08->on-09: sum 82892 vs 82892 (diff 0), changed>2 10136 vs 10136, max 42 vs 42
+still_consecutive on-09->on-10: sum 117097 vs 117097 (diff 0), changed>2 13707 vs 13707, max 48 vs 48
+still_consecutive on-10->on-11: sum 80834 vs 80834 (diff 0), changed>2 9955 vs 9955, max 45 vs 45
+still_consecutive on-11->on-12: sum 95911 vs 95911 (diff 0), changed>2 12381 vs 12381, max 35 vs 35
+still_consecutive on-12->on-13: sum 82619 vs 82619 (diff 0), changed>2 10713 vs 10713, max 43 vs 43
+still_consecutive on-13->on-14: sum 115112 vs 115112 (diff 0), changed>2 14092 vs 14092, max 45 vs 45
+still_consecutive on-14->on-15: sum 78069 vs 78069 (diff 0), changed>2 9631 vs 9631, max 44 vs 44
+still_consecutive on-15->on-16: sum 97411 vs 97411 (diff 0), changed>2 12019 vs 12019, max 71 vs 71
+pan_consecutive on-17->on-18: sum 2773041 vs 2773041 (diff 0), changed>2 94890 vs 94890, max 164 vs 164
+pan_consecutive on-18->on-19: sum 2782849 vs 2782849 (diff 0), changed>2 95687 vs 95687, max 163 vs 163
+pan_consecutive on-19->on-20: sum 2804392 vs 2804392 (diff 0), changed>2 95955 vs 95955, max 163 vs 163
+pan_consecutive on-20->on-21: sum 2840221 vs 2840221 (diff 0), changed>2 96349 vs 96349, max 163 vs 163
+pan_consecutive on-21->on-22: sum 2857741 vs 2857741 (diff 0), changed>2 97468 vs 97468, max 163 vs 163
+pan_consecutive on-22->on-23: sum 2885177 vs 2885177 (diff 0), changed>2 98698 vs 98698, max 163 vs 163
+pan_consecutive on-23->on-24: sum 2920079 vs 2920079 (diff 0), changed>2 99298 vs 99298, max 163 vs 163
+frames differing: ['off-still', 'on-06', 'off-pan']

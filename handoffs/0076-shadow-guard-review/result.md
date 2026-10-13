@@ -1,199 +1,320 @@
-# 0076 result: shadow receiver guard visual comparison — prepared
+# 0076 result: frozen shadow receiver guard comparison
 
-**Status: PREPARED. Execution is pending root's grants.**
+**Status: EXECUTED. Integrity PASSED. The frozen comparison FAILED because it is
+not exact.**
 
-- **What exists:** the bounded baseline/candidate comparison is ready,
-  self-checked on the CPU and committed. It compares main224 (`0aa02559`) with
-  the candidate (`f636a2d5`) on 0072's exact viewport case.
-- **Not done:** no build, Cargo command, GPU process, render, screenshot, screen
-  control or target lease.
-- **No namespace created by me:** `~/.codex/incant-evidence/0076-shadow-guard-review-001`
-  did not exist when the self-check ran, and every guarded command refused
-  without its grant. Root has since created it to hold the two source freezes;
-  see the post-commit note at the end.
-- **No claims:** this is not a phase-gate, performance or device claim.
+- **The failure.** One of the 24 temporal-on frames, `on-06`, differs between the
+  baseline and candidate runs. My pre-registered rule voids exact attribution, and
+  I have not relaxed it.
+- **Everything else passed.** That is 24 of 25 checks: every shadow-agreement,
+  guard and defect check passes.
+- **My visual judgement.** On full-size inspection the candidate's temporal on
+  and off grille shadows agree, and I found no additional regression.
+
+- **Run.** It ran exactly as planned and committed. There were 4 GPU children:
+  `list` and `review viewport` for baseline (main224, `0aa02559`) and candidate
+  (`f636a2d5`). The GPU was then released.
+- **Counts.** 52 submissions against a ceiling of 60, 4 PNGs at 960×540, with no
+  retry, no extra case and no stop latch.
+- **What this is not.** It is not a phase-gate, performance, device or physical
+  shadow-fidelity claim.
 
 - **Model:** Claude Opus 5.5 (`claude-opus-5-5`).
 - **Thinking effort:** max, as reported by this session's environment.
-  - Root's ACP transport log for this session is
-    `~/.codex/incant-evidence/claude-0076-shadow-guard-prep-acp.log`.
-  - I did not open it.
-- **Packet:** `brief.md` sha256 `c83c30c8…7ebe0994`.
-  - Root committed it in `3f3630ba`, and it is unchanged and uncommitted by me.
-  - There was no priority revision or new director feedback beyond the brief;
-    I rechecked before committing.
+- **Packet.** `brief.md` with root's priority revision ("execute the frozen
+  shadow consistency comparison"), sha256 `9a25ced3…9d445b68`. It is uncommitted
+  and left so.
+- **Director decisions applied:**
+  - the one-line `halos: None` fix is accepted;
+  - this slice tests shadow-fit consistency only;
+  - alpha-tested shadow fidelity stays open;
+  - the visual judgement is mine;
+  - I sought no further approval, made no retry and ran no other run.
+- **Earlier reports kept.**
+  - [`preparation-result.md`](preparation-result.md) is the previous `result.md`,
+    renamed byte-for-byte.
+  - [`preparation.md`](preparation.md) is unchanged.
 
-The full account is in [`preparation.md`](preparation.md).
+## 1. Execution
 
-## What root needs to know first
+**Grant and frozen inputs.** I verified all of these read-only before the first
+child:
+- **Root's review:** `~/.codex/incant-reviews/shadow-guard-build-root-20261013.json`
+  (`d37ec6e2…`), decision "accepted-frozen-shadow-comparison-builds".
+- **The GPU grant:** `review-ready.json` (`18e483b3…`), with holder "Claude0076
+  Opus5.5 Max".
+- **Visual tree:** `8d9de3ed…`, unchanged and clean.
+- **Build records:** baseline `7d38ef43…` and candidate `17e0dfc6…`.
+- **Binaries.**
+  - Baseline `bd81f74e…` and candidate `e693f872…`. Both are mode 0555 with
+    features `default` and `physics-deterministic`.
+  - Strict Clippy exited 0 for both.
+  - They are byte-identical before and after every child, and again now.
+- **Source coverage:** exact for both sources, at 3,141 and 3,142 inputs.
+- **Checkouts:** blob-exact, at 19,496 and 19,500 files. The only extra file is
+  the committed fixture copy.
+- **Predecessor:** the 0073 release pin (`44cadf67…`) verifies and lists no live
+  process.
+- **Starting state:**
+  - no latch and no debit;
+  - the lease was released;
+  - `native-gpu.lock` was free;
+  - no GPU or Cargo process was running.
 
-1. **The fixture needs one line to compile against main224.**
-   - **Why.** main224 added the required `UiWidget::halos` field (`c6a7804a`), and
-     the 0072 fixture's one UI button lacks it.
-   - **The fix.** I inserted `halos: None,` at line 1207. It sits in
-     `ui_input`, which only the `excluded` case uses. A Button must carry `None`.
-   - **Scope.** The viewport case and everything it calls are byte-identical, and
-     the fixture is rustfmt-clean.
-   - **Not yet compiled.** It is unverified until root builds it. See open
-     question 1.
-2. **Only the temporal-off references should change.**
-   - Temporal-on cascades are bit-identical in both sources. Both use
-     `guard(plan.rect)`, at `retained.rs:434-435` and in the candidate's
-     `fit_for_viewport`.
-   - The comparison therefore requires all 24 on-frames to be byte-identical
-     across roles. Any blur or source-identity difference voids it, rather than
-     counting as a fix.
-3. **Expected look.**
-   - The candidate's temporal-off grille shadow should turn **solid**, matching
-     temporal-on. 0072's on image already shows the guarded fit.
-   - The baseline's faint hatch should go away.
-   - Both are aliases: cascade-1 bars are 0.36–0.39 texels wide, and the
-     vertical bars repeat every 1.45 texels, below Nyquist. The fix makes the
-     shadow consistent, not correct.
-
-## Changed paths (my commits, `Built-by: claude`)
-
-**`1d60f936`** imports 0072's committed `visual/` files verbatim; blob ids are
-equal at `48a688c5`, tree `b11a7d3a`.
-
-**This commit** adapts them narrowly. The final `visual/` tree is
-`8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d`.
-- **`handoffs/0076-shadow-guard-review/visual/plan.json`:**
-  - two sources;
-  - 0072's viewport case spec, verbatim;
-  - budgets of 52 planned against a ceiling of 60, and 4 PNGs;
-  - the comparison, calibration and pairs.
-- **`…/visual/review/temporal_visual_review.rs`:** the one line above.
-- **`…/visual/tools/`:**
-  - `common.py`, `build.py`, `gpu.py`, `analyze.py` and `lease.py`, adapted for
-    two roles with no numeric controls;
-  - `shadowfit.py`, renamed from `sharpness.py`, holding the new comparison;
-  - `regions.py` and `pairs.py`, which are new;
-  - `selfcheck.py`, `test_analyze.py`, `test_lifecycle.py` and `test_source.py`,
-    adapted;
-  - `test_library_linkage.py`, removed.
-- **`…/visual/preparation/`:** the receipts `selfcheck.json`, `lifecycle.json`,
-  `source.json`, `analyze.json` and `regions.json`.
-- **`handoffs/0076-shadow-guard-review/preparation.md`** and this file.
-
-**Unchanged:** production code, `brief.md`, all 0072 files and evidence, and
-every `~/.codex` file.
-
-## Commands run and results
-
-All CPU only, run from the worktree root with `/opt/homebrew/bin/python3`
-3.14.8 `-I -B`.
-
-| Command | Result |
-|---|---|
-| `visual/tools/test_lifecycle.py --receipt visual/preparation/lifecycle.json` | exit 0, 14 tests pass |
-| `visual/tools/test_source.py --receipt visual/preparation/source.json` | exit 0, 7 tests pass |
-| `visual/tools/test_analyze.py --receipt visual/preparation/analyze.json` | exit 0, 22 tests pass (16 integrity, 6 comparison) |
-| `visual/tools/regions.py > visual/preparation/regions.json` | exit 0; reproduces 0072's `cascade_texels.txt` card-shadow lines exactly |
-| `visual/tools/selfcheck.py --write visual/preparation/selfcheck.json` | exit 0, `all_pass: true` |
-| `rustfmt --edition 2024 --check < visual/review/temporal_visual_review.rs` (toolchain 1.99.0) | exit 0 |
-| `git diff --cached --check` | clean |
-
-**What the self-check covers:**
-- **Refusals.** It ran all 19 guarded commands with the grants absent: lease,
-  build, gpu and analyze steps for both roles.
-  - Each refused for the absent grant.
-  - No evidence directory was created.
-  - `git status` was unchanged.
-  - The global `native-gpu.lock` was untouched.
-- **Fixture counts.** It reads the counts from the fixture: 26 world
-  submissions, 0 UI submissions and 2 PNGs per role.
-- **Fixture delta.** It proves the fixture is 0072's plus exactly one line.
-- **Source delta.** It verifies the delta against Git: the candidate's parent is
-  main224; there are 7 Rust build-input files and no shader or cooker files; 4
-  production files reach the review binary.
-- **Calibration.** It recomputes the threshold calibration from retained 0072
-  evidence.
-
-**Thresholds.** They come from one rule: the geometric mean of the worst
-consistent-fit control and the best mismatch control.
-- In the grille-shadow region: mean gap ≤ 0.020, blur residual ≤ 0.026 and
-  low-pass max ≤ 0.086.
-- At the still pose: interior max ≤ 66.
-- Consistent controls stay at or below 0.0022, 0.0042 and 0.023. The diagnosed
-  defect measures 0.197, 0.171 and 0.321, and stays there through a
-  fixed-coverage-like blur.
-
-**Not run, and not available in this stage:** any compile, Clippy, GPU test,
-render or capture. Those wait for root's grants (`preparation.md` §4–§5).
-
-## Screenshots
-
-None. This stage forbids rendering and screenshots.
-- **Prior evidence I looked at.** To place the grille-shadow region and to check
-  the planned pair layout, I viewed retained 0072 PNGs and CPU crops of them.
-- **Where those crops are.** They are scratch viewing aids in
-  `/tmp/incant0076-prep-view`. They are not committed and are not screenshots.
-- **After execution.** The run will publish 4 PNGs as
-  `handoffs/0076-shadow-guard-review/screenshots/<role>-viewport-{on,off}-f24.png`.
-
-## Rationale
-
-The design answers the brief's acceptance criteria directly:
-- **On/off agreement must be measured blind to blur.** The mean gap and blur
-  residual are unaffected by a blur, as the synthetic controls show, so the
-  softer main224 resolve cannot pass or fail the check by itself.
-- **"No outside or border change" and "preserved MASK geometry" are exact
-  guards.** The surround must be byte-identical and all canvas. The 3 px band
-  must not exceed the inner maximum. The grille-bar mask must be identical.
-- **The baseline must reproduce the defect.** Otherwise the candidate's
-  agreement demonstrates nothing.
-- **The inherited temporal-quality rules are kept apart.** They are reported for
-  both roles and never decide the verdict.
-
-## Limitations
-
-- **Not compiled here.** Temporal-on identity is derived from source, not
-  measured.
-- **No room for a repeat.** The 60 cap cannot fund one.
-- **Narrow coverage.** Only the viewport case and its pan f24 PNG pair are run.
-  The full-frame temporal-off change in cascade 3 (+0.105%) and UI, sprite and
-  text exclusion are not imaged.
-- **Thresholds are calibrated proposals.** They come from full-frame and C-reg
-  controls, not plan gates.
-- **Desktop Metal only.**
-- **No per-frame shadow readback hook is needed, and none is requested.**
-
-## Open questions for root
-
-1. Do you accept the one-line `halos: None` fixture deviation? The file cannot
-   compile on main224 without it.
-2. Should this slice accept consistency of the grille shadow as its goal, with
-   alpha-tested shadow fidelity tracked separately?
-3. Should a later stationary run image the full-frame temporal-off cascade-3
-   change?
-4. If the temporal-on frames are not byte-identical, will you authorize a
-   same-source determinism repeat beyond this cap, or decide another way?
-
-## Post-commit note: root's source freezes
-
-**What appeared.** After my self-check receipt (`selfcheck.json`, written 09:54:17
-local time), root created
-`~/.codex/incant-evidence/0076-shadow-guard-review-001` at 09:56:16. It holds only:
-- `baseline-source-freeze.json` (sha256 `ab1d341ecd098348b1446f4c6e971001ce5bfb7e7e6bfef7fd76340fe90ee673`);
-- `candidate-source-freeze.json` (sha256 `6b80b9e8ca7689773d10ebe5f809dff8673372c25e8eecdd5b86abf1d9791d52`).
-
-There is no grant file, and none of my tools ran then.
-
-**My read-only preflight.** It was a scratch script, against the Git objects. It
-applied `build.py`'s exact-coverage rule:
-
-| Freeze | Commit (`source_commit`) | Rows | Build inputs | Missing | Mismatched | `.cargo/config.toml` |
+| # | Child | PID | UTC | Exit | Debit (frames / UI / PNG) | Receipt |
 |---|---|---|---|---|---|---|
-| Baseline | `0aa02559` | 3,141 | 3,141 | 0 | 0 | listed |
-| Candidate | `f636a2d5` | 3,142 | 3,142 | 0 | 0 | listed |
+| 1 | `gpu.py list baseline` | 26437 | 14:49:35.58–35.89 | 0 | — | exactly the fixture's 8 cases |
+| 2 | `gpu.py review baseline viewport` | 26513 | 14:49:44.53–46.91 | 0 | 26 / 0 / 2 | 4 of 4 contract checks true; `1 passed; 0 failed; … 8 filtered out` |
+| 3 | `gpu.py list candidate` | 26614 | 14:49:59.94–50:00.19 | 0 | — | exactly the 8 cases |
+| 4 | `gpu.py review candidate viewport` | 26727 | 14:50:06.84–09.31 | 0 | 26 / 0 / 2 | 4 of 4 true; `1 passed; 0 failed; … 8 filtered out` |
+| 5 | `gpu.py release` | — | 14:50:16.11 | 0 | debited 52 / 0 / 4 in total | no stop, no owned or live process, no orphan debit |
 
-- Both freezes are exact.
-- They differ in exactly the 7 Rust delta paths.
+**Ledger and latch:**
+- **Ledger:** `58b77135…`. It holds 10 rows: root's 6 build rows and my 4 GPU
+  children.
+- **Debits:** `9e210890…`.
+- **Release latch:** `68e22d6d…`.
+- **Stderr:** each child printed only the adapter line. That line reads Apple M5
+  Pro, Metal, integrated GPU; the host is a Mac17,9 on macOS 27.0.1 with rustc
+  1.99.0.
 
-**Refusals.** Because the namespace now exists, a fresh `selfcheck.py` skips its
-refusal step by design, as it did at 10:41. I will not probe the guarded tools
-against a namespace root is filling: if a grant landed mid-probe, `lease.py
-acquire` would take a real lease. The committed receipt, made before the
-namespace existed, remains the refusal evidence. Its tool, plan and fixture
-hashes equal the committed files'; the 10:41 run confirmed this.
+## 2. Verdicts
+
+| Layer | Result | Record |
+|---|---|---|
+| Integrity (`analyze.py check`) | **PASS**, no problems | `analysis/summary-2026-10-13T145022.235852+0000.json`, sha256 `1783b574…` |
+| Comparison (`analyze.py compare`) | **FAIL**, `exact: false`. Exactness 10 of 11; guards 8 of 8; agreement 4 of 4; defect 2 of 2 | `analysis/compare-2026-10-13T145029.149628+0000.json`, sha256 `44bfb050…`, published |
+| Failed check, verbatim | `exactness: temporal_on_frames_identical`: 24 frames, differing `["on-06"]` | §3 |
+| My visual inspection | Temporal on/off agreement of the grille shadow in the candidate; the expected hatch-to-solid change in the off reference; **no additional regression** | §6 |
+
+## 3. The exactness failure: one temporal-on frame, `on-06`
+
+**What matches and what differs:**
+- **Matches.** On-frames 01–05 and 07–24 are byte-identical across the two runs.
+  So is the kept `viewport-on-f24.png` (`6b3194c9…` in both), with a maximum step
+  of 0.
+- **Differs.** Only `on-06` (jitter phase 5) has a different RGBA hash. The fixture
+  keeps no image of it.
+
+**How large the difference is.** The report's consecutive-frame tallies depend on
+each run's own edge mask, because each run takes its mask from its own temporal-off
+reference, and those differ by design. Summing their interior and edge parts
+removes that dependence (`inspection/frame-totals.txt`):
+- **Pairs not touching on-06.** All 21 such pairs (still and pan) have identical
+  totals: the sum of max-channel deltas, the changed count and the maximum.
+- **on-05→06:** the summed delta differs by exactly **−1 step**.
+- **on-06→07:** it differs by exactly **+1 step**.
+- **Other totals.** In both of those pairs the changed counts and maxima are equal.
+
+**What that means:**
+- **Size.** This is consistent with a one-step difference in as few as one pixel,
+  with no trace in any later frame. Equal sums can still hide cancelling
+  differences, so the totals bound the difference from below only.
+- **Not the candidate's change.**
+  - The candidate's shadow-fit inputs for temporal-on frames are bit-identical to
+    the baseline's in every phase.
+  - On-14 and on-22 share on-06's jitter phase, and on-14 shares its pose; both
+    match exactly.
+  - So the source change cannot produce a single-frame difference. This points to
+    run-to-run variation in the temporal or GPU path.
+- **Not proven.** Proving that needs a same-binary determinism repeat, which is
+  not authorized. I am not requesting one here; it is listed in §11.
+
+**Consequence.** Under the frozen rule, the comparison does **not** isolate the fix
+exactly. The measurements in §4–§5 are real, but they are reported with that
+qualification. **I am not calling this a certified exact fix.**
+
+## 4. Shadow-fit consistency: measured on the final pan pose (f24)
+
+The region is the grille-shadow region derived from 0072's diagnosis: 5,700
+pixels, bounding box [440, 271, 699, 310).
+
+| Measure (linear light) | Baseline on vs off | Candidate on vs off | Limit (calibrated before the run) |
+|---|---|---|---|
+| Mean gap (how much shadow) | **0.1972** | **0.00159** | ≤ 0.020 |
+| Blur residual | **0.16885** | **0.00406** | ≤ 0.026 |
+| Low-pass max (σ 2 px) | **0.32067** | **0.02018** | ≤ 0.086 |
+| Still pose: interior max delta (report) | **96** | **19** | ≤ 66 |
+| Region max step (observation) | 95 | 25 | — |
+| Pan off-edge pixels > 16 steps inside the region (observation) | 216 | 0 | — |
+
+How to read this:
+- **The baseline reproduces the diagnosed mismatch.** Its values sit at the
+  calibration's mismatch controls (0.197, 0.164–0.171, 0.320–0.321 and 96).
+- **The candidate sits with the consistent controls.**
+- **What the candidate changed.** Its temporal-on mean, 0.41347, is identical to
+  the baseline's. Only the temporal-off mean moved, from 0.51503 to 0.41413. So
+  the improvement comes entirely from the reference's shadow fit, not from any
+  blur.
+
+## 5. Guards: all pass
+
+- **Outside the viewport.**
+  - The maximum delta is 0 within each run.
+  - All 75,015 surround pixels are byte-identical across runs in both PNGs, and
+    all equal the canvas (20, 21, 25).
+- **Border.**
+  - The candidate's 3 px band maximum is not above the inner maximum: 1 against 19
+    at the still pose, and 1 against 58 at the pan pose.
+  - The off-reference change from baseline to candidate has a band maximum of 0
+    against an inner maximum of 95.
+- **MASK geometry.**
+  - The grille-bar masks in the two off references are identical: 5,047 = 5,047
+    pixels, with 0 differing.
+  - The bar colours are identical too.
+  - The temporal-on frames are byte-identical.
+
+## 6. My visual assessment
+
+**What I looked at:**
+- all 4 PNGs at full size;
+- every planned pair: the grille shadow, card, border crossings and difference maps;
+- true-scale stacks at 4–10×. These are listed in `inspection/commands.txt` and
+  kept as scratch viewing aids.
+
+**What I found:**
+- **On/off agreement, achieved.**
+  - In the candidate, temporal-on and temporal-off show the **same solid grille
+    shadow**: the same outline, extent and darkness.
+  - The only differences are temporal smoothing of the shadow's slightly notched
+    edges, which the off reference shows crisper.
+  - **Profile.** Through the core (y 286–296, 8 px bands, x 440–704), every
+    band of candidate-off is within 0.006 of temporal-on (0.153–0.158 against
+    0.156–0.158).
+  - **Difference maps.** The candidate's on/off map shows only geometric-edge
+    anti-aliasing and faint banding rings. The bright grille parallelogram is
+    gone, while the baseline's map still shows it.
+- **The expected hatch-to-solid change, judged honestly.**
+  - **Before.** The baseline's off reference showed a faint hatch with a dark top
+    line, core 0.35–0.47.
+  - **After.** The candidate's off reference shows a solid shadow, core
+    0.153–0.158. It is identical in kind to what temporal-on already showed in
+    both sources.
+  - **Both are aliases.** The cascade-1 shadow map cannot resolve the one-texel
+    bars: about 0.36–0.39 texel wide, with vertical bars repeating every 1.45
+    texels. The 42.3%-solid grille's true average occlusion is neither the
+    near-transparent hatch nor this near-full darkness.
+  - **What the guard does.** It makes the alias consistent across temporal modes;
+    it does not make it correct. **Alpha-tested shadow fidelity stays open.**
+- **No additional regression.** Every off before/after change outside the grille
+  shadow is a shadow edge re-quantized by the slightly larger cascade texels
+  (`inspection/clusters-off-before-after.txt`):
+  - the ramp's shadow triangle and the post's shadow line (up to 34 steps, a few
+    hundred pixels);
+  - a fence-post shadow line and the wall's ground shadow beside the white cube
+    (up to 23);
+  - the far posts' thin receding shadow lines, whose dash phase moved (up to 42,
+    15 pixels).
+
+  Shape, darkness and extent are preserved, and there is no new artifact. Lit
+  ground, objects, grille bars, borders and the canvas are unchanged.
+- **One inherited outlier explained.**
+  - **What it is.** The candidate's pan-pose interior maximum, 58, is at
+    (482, 262) on a grille bar. Temporal-on resolves a sub-pixel green fragment
+    there, where the point-sampled reference shows background through a hole.
+  - **Not new.** The pixel is identical in both runs' on and off frames
+    (`inspection/pixels-card-bar-58.txt`), so the baseline has it too; there it
+    is outranked by its 95-step grille mismatch.
+  - **What it measures.** It is temporal reconstruction of MASK geometry, not
+    shadow fit.
+
+## 7. Inherited temporal-quality results (0072's viewport rules; observations only)
+
+| Rule (limit) | Baseline | Candidate |
+|---|---|---|
+| Still activity ≥ 33 steps (≤ 318) | 41 | 41 |
+| Saturated activity (0) | **1** | **1** |
+| Frames 9–16 edge mean (≤ 5) | 2.704 | 2.685 |
+| Frames 9–16 edge max (≤ 50) | **71** | **71** |
+| Frames 9–16 interior changed (≤ 100) | 66 | 39 |
+| Same-phase f8/f16 interior (0) | **32** | **21** |
+| Pan f24 off-edge 9–16 (0) | **6** | **1** |
+| Pan f24 off-edge > 16 (0) | **216** | 0 |
+
+**Why the two runs differ on some rules:**
+- Temporal-on frames 8–16 are byte-identical across runs, and the activity bins
+  match exactly.
+- The edge mean, interior-changed and same-phase counts differ only because each
+  run's edge mask comes from its own off reference.
+
+**The inherited resolve failures**, unchanged by this slice, in both runs:
+- one saturated pixel;
+- an edge max of 71;
+- a same-phase interior count above 0.
+
+**The pan off-edge rule:**
+- **Baseline:** fails at > 16 steps, from the grille mismatch.
+- **Candidate:** that failure is gone (0 at > 16 steps). One pixel remains at
+  exactly 9 steps outside the region, which is inherited resolve behaviour.
+
+## 8. Evidence package (in this worktree)
+
+- **`screenshots/`:** the 4 PNGs, 960×540, copied by `analyze.py publish` and
+  hash-checked against the ledger.
+  - `baseline-viewport-on-f24.png`: `6b3194c903258a11…`. It is identical to the
+    candidate's on PNG.
+  - `baseline-viewport-off-f24.png`: `2b762c2041e901a3…`. It is byte-identical
+    to 0072's temporal-off PNG from source `a143b5c0`, confirming that
+    non-temporal rendering is unchanged between those sources.
+  - `candidate-viewport-on-f24.png`: `6b3194c903258a11…`.
+  - `candidate-viewport-off-f24.png`: `da58165787a86396…`.
+- **`evidence/`:** 40 receipts and `manifest.json` (`7caedc6d…`).
+  - **Contents:** the grants; the ledger, debits, latch and lease; the integrity
+    summary and the **failing comparison record**; per-role build records; all
+    child logs; and each role's `report.json` and `events.jsonl`.
+  - **`retention.json`:** two libtest stdout logs that end with a blank line are
+    kept byte-exact as deterministic gzip (`.stdout.txt.gz`). They decompress to
+    the sha256 values the manifest and ledger record.
+- **`inspection/`:** `inspect.py`, which reuses the frozen tools unchanged; its
+  text outputs; and `commands.txt` with every command and exit code.
+- **Outside the worktree:**
+  - the evidence namespace `~/.codex/incant-evidence/0076-shadow-guard-review-001`,
+    containing my GPU ledger rows, the latch, `captures/`, `logs/` and
+    `analysis/`, including `pairs-2026-10-13T145325.268186+0000/` with the 10
+    viewing aids;
+  - scratch crops in `/tmp/incant0076-run/crops`. These are not screenshots and
+    are not committed.
+
+## 9. Commands
+
+These are the commands in §1, then:
+
+| Command | Exit | Result |
+|---|---|---|
+| `analyze.py check` | 0 | pass |
+| `analyze.py compare` | 1 | fail, kept |
+| `analyze.py pairs` | 0 | 10 viewing aids |
+| `analyze.py publish` | 0 | 40 files and 4 PNGs |
+
+The retention step and the inspection commands are in `inspection/commands.txt`;
+all exited 0.
+
+**Not done:**
+- no build, Cargo command or source edit;
+- no change to the frozen visual tree or binaries;
+- no retry or extra case, and nothing launched after release;
+- no screen capture;
+- no push, PR, merge or account action.
+
+## 10. Limitations
+
+- **The comparison is not exact.** `on-06` differs, and the cause is inferred,
+  not proven (§3).
+- **Desktop only.** This is one local desktop run on an Apple M5 Pro (Metal). It
+  is not a phone, device, shipping-profile or performance measurement.
+- **One case, one kept pose.**
+  - Only the viewport case ran.
+  - The still pose is judged from report numbers only.
+  - The candidate's full-frame temporal-off change in cascade 3 (+0.105%) and the
+    UI, sprite and text exclusion paths were not imaged.
+- **Thresholds are calibrated proposals, not plan gates.**
+- **Neither shadow look is physically correct.** Alpha-tested shadow fidelity is
+  open.
+
+## 11. Open for root
+
+These are not approval requests.
+1. **Determinism.** Whether the temporal path is reproducible across processes
+   needs a same-binary repeat. I have not run one, and none is preauthorized.
+2. **Alpha-tested shadow fidelity** remains open, as the director decided.
+3. **The full-frame temporal-off change in cascade 3** has not been imaged.

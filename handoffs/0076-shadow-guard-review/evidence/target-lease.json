@@ -1,0 +1,72 @@
+{
+ "packet": "0076-shadow-guard-review",
+ "stage": "shadow-guard-build",
+ "holder": "root supervised sequential shadow comparison CPU builds",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "root via build-ready.json",
+ "grant_sha256": "83bb00aace62ffb65b85c39bceae0a1d0b9283a16075185c5c7de9c221c52661",
+ "grant": {
+  "packet": "0076-shadow-guard-review",
+  "stage": "shadow-guard-build",
+  "holder": "root supervised sequential shadow comparison CPU builds",
+  "sources": {
+   "baseline": {
+    "source_commit": "0aa025591ab5c82e00d6d2b70002024ed3462e2a",
+    "source_freeze": {
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/baseline-source-freeze.json",
+     "sha256": "ab1d341ecd098348b1446f4c6e971001ce5bfb7e7e6bfef7fd76340fe90ee673"
+    }
+   },
+   "candidate": {
+    "source_commit": "f636a2d5e595cffae702d078bcee61f34ab35394",
+    "source_freeze": {
+     "path": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/candidate-source-freeze.json",
+     "sha256": "6b80b9e8ca7689773d10ebe5f809dff8673372c25e8eecdd5b86abf1d9791d52"
+    }
+   }
+  },
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_build_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/target-lease.json",
+  "prior_build_release_sha256": "0e4fe21a6748b6e595a79a496067a9a259bdfcbd93506e0a2ebc296b5235f275"
+ },
+ "prior_receipts": {
+  "pins": {
+   "build_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-fixed-warmup-001/target-lease.json",
+    "expected": "0e4fe21a6748b6e595a79a496067a9a259bdfcbd93506e0a2ebc296b5235f275",
+    "sha256": "0e4fe21a6748b6e595a79a496067a9a259bdfcbd93506e0a2ebc296b5235f275"
+   }
+  },
+  "release_pins": [
+   "build_release"
+  ],
+  "release_alive_fields": {
+   "build_release": {
+    "processes_on_target_at_release": []
+   }
+  }
+ },
+ "tools": {
+  "head": "6d447c80d8fa92c41153bd011641e727125e6552",
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "plan_sha256": "a8a0cd6411697f06dbc17e15dfb1013e03222860569e3cfb4c6d3612e4bfcc70",
+  "helper_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "brief_sha256": "c83c30c845162687e7f039c64a9d80a61ed5cc44631108e5f03a1d227ebe0994",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/shadow-receiver-guard/incant/.worktrees/0076-shadow-guard-review",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout",
+ "acquired_at": "2026-10-13T14:44:44.143042+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2, in the foreground",
+  "builds from each role's git-archive child checkout of its granted commit only",
+  "every build input must equal root's committed source freeze for that role",
+  "one bounded process group at a time under the packet flock",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001"
+ ],
+ "released_at": "2026-10-13T14:46:46.536826+00:00",
+ "released_by": "root supervised sequential shadow comparison CPU builds",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0076 cargo/rustc process or frozen binary remains on the target. Contents left as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/bin"
+}

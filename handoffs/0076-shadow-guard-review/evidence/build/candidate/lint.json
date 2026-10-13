@@ -1,0 +1,63 @@
+{
+ "role": "candidate",
+ "tools": {
+  "head": "6d447c80d8fa92c41153bd011641e727125e6552",
+  "visual_tree": "8d9de3edbbe6f2c2f66ccff7e3ef97493e4dd65d",
+  "plan_sha256": "a8a0cd6411697f06dbc17e15dfb1013e03222860569e3cfb4c6d3612e4bfcc70",
+  "helper_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "source": {
+  "role": "candidate",
+  "commit": "f636a2d5e595cffae702d078bcee61f34ab35394",
+  "tree": "c4fe457af5acf6b4d2be6e148379b51c23985c17",
+  "files": 19500,
+  "manifest_sha256": "5710306c53a7864cf3a4131b30b46d024c9ec4d59cb73ebbb9f8f5e43e69546e",
+  "helper_copy_sha256": "5955efa7b3190c55b7629269a8736cc02ca2d678957b853b78471141e69f67e2"
+ },
+ "label": "candidate-lint",
+ "kind": "build",
+ "holder": "root supervised sequential shadow comparison CPU builds",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/candidate/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "temporal_visual_review",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/checkout/candidate",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/tmp/candidate-lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "pid": 24974,
+ "started": "2026-10-13T14:46:40.649894+00:00",
+ "ended": "2026-10-13T14:46:46.502740+00:00",
+ "exit": 0,
+ "timed_out": false,
+ "wait_error": null,
+ "timeout_s": 2700,
+ "group_empty_after": true,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-candidate-lint.stdout.jsonl",
+ "stdout_sha256": "83227ec5d713a8c045c7f112c31f632ba67e3f864a903c37d6a722150499aa5e",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0076-shadow-guard-review-001/logs/build-candidate-lint.stderr.txt",
+ "stderr_sha256": "d4944864c897c342b41b45fa29e57f3b11e2f3d061b2b38d4a6131ed684991c8",
+ "recorded": "2026-10-13T14:46:46.503268+00:00"
+}
