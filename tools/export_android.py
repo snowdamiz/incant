@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fresh authored TypeScript project -> ARM Android CPU runtime archive + data.
+"""Fresh authored project -> ARM Android CPU runtime archive + data.
 
 This is an archive exporter, not an app/signing/window host. Emulator execution
 and physical-device execution are distinct; this command records compilation only.
@@ -14,6 +14,7 @@ import tempfile
 import time
 
 import android_archive
+import android_wasm
 import physics_export
 from export_ios import CommandAudit
 import native_process
@@ -23,7 +24,7 @@ from native_package import data_package, publish, read, require, select_camera, 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def build(project, staging, storage, target, scene, camera, ndk_root):
+def build(project, staging, storage, target, scene, camera, ndk_root, wabt=None):
     audit = CommandAudit(staging / 'audit')
     execute = audit.execute
     rustc = Path(execute(['rustup', 'which', 'rustc']).stdout.strip())
@@ -40,7 +41,12 @@ def build(project, staging, storage, target, scene, camera, ndk_root):
     cargo = ROOT / 'tools/cargo'
     project_bytes = read(project, 64 * 1024**2)
     mode = physics_export.project_mode(project_bytes)
-    selected_features = physics_export.cargo_features(mode, android_archive.CAPABILITIES)
+    module = android_wasm.prepare(project, scene, staging, storage, cargo, env, execute, wabt, ndk)
+    capabilities = android_archive.CAPABILITIES + (['static-module'] if module else [])
+    selected_features = physics_export.cargo_features(mode, capabilities)
+    if module is not None:
+        selected_env.update({key: value for key, value in env.items()
+                             if key.startswith(('INCANT_NATIVE_WASM_', 'INCANT_WASM_', 'CC_'))})
     features = ','.join(selected_features)
     project_hash = sha256(project_bytes)
     selected_graph = execute([cargo, 'tree', '--locked', '--no-default-features', '-p', android_archive.NAME,
@@ -69,7 +75,7 @@ def build(project, staging, storage, target, scene, camera, ndk_root):
     write_json(staging / 'build-command.json', command_receipt)
     log = (staging / 'build.log').read_text()
     require(result.returncode == 0, 'Authored Android build failed; no archive was published:\n' + log[-8000:])
-    flags = android_archive.verify_codegen(log)
+    flags = android_archive.verify_codegen(log, module is not None)
     messages = [json.loads(line) for line in (staging / 'cargo.jsonl').read_text().splitlines() if line.startswith('{')]
     physics = validate_artifacts(messages, mode, target_dir=storage / 'target',
                                                     target=target, profile='shipping')
@@ -84,7 +90,10 @@ def build(project, staging, storage, target, scene, camera, ndk_root):
     require(len(outputs) == 1, 'Missing unique authored project producer')
     producer = outputs[0]
     receipt = json.loads(read(producer / 'project-export.json', 4 * 1024**2))
-    android_archive.producer_receipt(receipt, project_hash, mode)
+    expected_program = module['program'] if module else None
+    android_archive.producer_receipt(receipt, project_hash, mode, expected_program)
+    compiled_module = None if module is None else android_wasm.audit_build(
+        (staging / 'cargo.jsonl').read_text(), log, target, module, ROOT)
     require(sha256(read(project, 64 * 1024**2)) == project_hash, 'Project changed during archive build')
     camera = select_camera(receipt, camera, False)
     symbols = android_archive.package_archive(archives[0], staging, ndk, execute)
@@ -106,26 +115,29 @@ def build(project, staging, storage, target, scene, camera, ndk_root):
                  'tool_sha256': ndk_hashes},
             'codegen': flags, 'physics_mode': mode, 'physics_variant': mode,
             'physics': physics,
+            'program': expected_program,
+            'static_module': None if module is None else {'translation': module['translation'], 'compiled': compiled_module},
             'normal_dependencies': graph, 'project_sha256': project_hash, 'scene_id': receipt['scene_id'],
             'script': receipt['script'], 'camera': camera, 'data': data, 'symbols': symbols,
             'archive': {'path': 'runtime/libincant_game_player.a', 'sha256': symbols['runtime_sha256'],
                         'bytes': (runtime / 'libincant_game_player.a').stat().st_size},
             'header': {'path': 'runtime/incant_game.h', 'sha256': sha256(read(header, 65536))},
             'startup_source_parsing': False, 'signed': False, 'execution': 'not executed; archive compilation only',
-            'limits': ['TypeScript only; static Wasm mobile export unsupported',
+            'limits': ['One scene program; mixed Wasm and per-entity TypeScript unsupported',
+                       'Static module checkpoints remain unsupported',
                        'CPU package API; no mobile window, touch or device audio host',
                        'final application requires gc-sections and separate executable/symbol audit',
                        'API24 compiler selection is not a minimum-OS execution claim',
                        'no device, performance, signing, store or phase gate']}
 
 
-def export(project, output, target, ndk, scene=None, camera=None, evidence=None):
+def export(project, output, target, ndk, scene=None, camera=None, evidence=None, wabt=None):
     require(target == android_archive.TARGET, 'Unsupported Android destination; only reviewed ARM64 is admitted')
     project = project.resolve(strict=True)
     output = output.absolute()
     require(not output.exists() and not output.is_symlink(), 'Output already exists; choose a new directory')
     require(output.parent.is_dir(), 'Output parent does not exist')
-    android_archive.preflight_project(project, scene)
+    android_archive.preflight_project(project, scene, wabt)
     if evidence is not None:
         evidence = evidence.absolute()
         require(not evidence.exists() and not evidence.is_symlink() and evidence.parent.is_dir(),
@@ -138,7 +150,7 @@ def export(project, output, target, ndk, scene=None, camera=None, evidence=None)
         try:
             with tempfile.TemporaryDirectory(prefix='incant-android-build-') as scratch:
                 storage = Path(scratch).resolve()
-                report = build(project, staging, storage, target, scene, camera, ndk)
+                report = build(project, staging, storage, target, scene, camera, ndk, wabt)
             require(not storage.exists(), 'Private archive build storage was not removed')
             report['private_build_storage_removed'] = True
             write_json(staging / 'export.json', report)
@@ -164,8 +176,9 @@ def main():
     parser.add_argument('--scene')
     parser.add_argument('--camera')
     parser.add_argument('--evidence', type=Path, help='new directory for raw build logs, including failed builds')
+    parser.add_argument('--wabt', type=Path, help='trusted WABT 1.0.42 bin directory for a captured Wasm scene')
     args = parser.parse_args()
-    result = export(args.project, args.output, args.target, args.ndk, args.scene, args.camera, args.evidence)
+    result = export(args.project, args.output, args.target, args.ndk, args.scene, args.camera, args.evidence, args.wabt)
     print(json.dumps({'target': result['target'], 'archive': result['archive'], 'execution': result['execution']}))
 
 
