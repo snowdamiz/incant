@@ -45,6 +45,9 @@ pub struct ValidatedAttachments<'a> {
     colliders: &'a ValidatedArena,
 }
 impl<'a> ValidatedAttachments<'a> {
+    pub(crate) fn body_arena(&self) -> &'a ValidatedArena {
+        self.bodies
+    }
     pub(crate) fn collider_arena(&self) -> &'a ValidatedArena {
         self.colliders
     }

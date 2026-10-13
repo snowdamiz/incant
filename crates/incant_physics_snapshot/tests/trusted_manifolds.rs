@@ -33,6 +33,14 @@ mod broad_cases;
 mod narrow_checks;
 #[path = "support/ordered_capture.rs"]
 mod ordered_capture;
+#[macro_use]
+#[path = "support/world_capture.rs"]
+mod world_capture;
+#[macro_use]
+#[path = "support/world_cases.rs"]
+mod world_cases;
+#[path = "support/world_checks.rs"]
+mod world_checks;
 fn budget() -> Budget {
     Budget::new(MAX_ALLOCATION).unwrap()
 }
@@ -577,6 +585,8 @@ macro_rules! cases {
             continuation_cases!($rapier, $vector, $cuboid);
             narrow_cases!($rapier, $vector, $cuboid);
             broad_cases!($rapier, $vector, $cuboid);
+            world_capture!($rapier, $bits, $posebits);
+            world_cases!($rapier, $vector, $cuboid);
             fn fixture(compound: bool) -> (PhysicsWorld, RigidBodyHandle, ColliderHandle) {
                 let mut w = PhysicsWorld::default();
                 w.integration_parameters.dt = 1. / 60.;
