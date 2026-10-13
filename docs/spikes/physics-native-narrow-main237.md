@@ -32,7 +32,7 @@ graphs match the accepted producer; ten executed binaries are copied outside the
 build target.
 
 Two separate native workspaces retain 1,452 copy records. Deterministic uses
-checked-in fixtures. Fast8 explicitly binds sixteen accepted bytesets: eight
+checked-in fixtures. Fast8 explicitly binds sixteen accepted fixtures: eight
 prior island captures and eight event captures first produced by the accepted
 producer. The original pre-substitution inventory and exact before/after hashes
 remain retained. No new current-main capture is claimed, and deterministic
@@ -42,7 +42,9 @@ The [current manifest](evidence/physics-native-narrow-main237.json) binds 1,625
 lossless records and 528 distinct payloads, plus the unchanged original
 6,858-record producer archive and retained failures. The assertion-only collector
 rechecks all source, copy, fixture, graph, log and binary identities and is retained
-inside the archive. Final current-main review is pending.
+inside the archive. Independent final current-main review accepted the packet
+without findings; the [receipt](evidence/physics-native-narrow-main237/final-root.json)
+binds the tested manifest and unchanged archive.
 
 Only the primitive narrow phase is newly reconstructed; other owners are trusted
 native clones. Complete native world installation, compound/soft/custom-dispatcher

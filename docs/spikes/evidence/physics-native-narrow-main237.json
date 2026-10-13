@@ -12261,5 +12261,11 @@
     "Deterministic uses checked-in fixtures. Fast8 reuses sixteen accepted captures: eight event and eight island fixtures, all explicit hash bindings. Event captures were fresh in the producer; no new current-main capture claim. Only narrow-phase state is newly reconstructed.",
     "No decoded complete-world install, runtime physics saves, phone or performance claim.",
     "Composed source actually rebuilt in two parallel numerical modes; focused and broad tests overlap."
-  ]
+  ],
+  "final_review": {
+    "path": "docs/spikes/evidence/physics-native-narrow-main237/final-root.json",
+    "sha256": "94e15ea996e056bce9c4b9d2353347e5339307daf169954c89908422cfc6caed",
+    "accepted": true,
+    "tested_manifest_sha256": "91645bb7cd486ece27db6ec299b7b66b51a4a7beb61fb484eb0519a0537599e0"
+  }
 }
