@@ -1,0 +1,105 @@
+{
+ "head": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+ "source_commit": "23f92d716bde0afc137b160c5497a502848d63b8",
+ "files_changed_since_source_commit": [
+  "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Dx12-Fragment.shader.gz",
+  "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Dx12-Vertex.shader.gz",
+  "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Metal-Fragment.shader.gz",
+  "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Metal-Vertex.shader.gz",
+  "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Vulkan-Fragment.shader.gz",
+  "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/Vulkan-Vertex.shader.gz",
+  "docs/spikes/evidence/cooked-sprite-shaders/cooked-sprites-checks-001/artifacts/manifest.rs.gz",
+  "handoffs/0062-cooked-sprite-shaders/brief.md"
+ ],
+ "only_evidence_and_brief_changed": true,
+ "crates_diff_empty": true,
+ "status_porcelain": "?? handoffs/0062-cooked-sprite-shaders/tools/\n",
+ "sources": [
+  {
+   "path": "crates/incant_render/Cargo.toml",
+   "manifest": "23f1786ab418d3cf4072098868a5ff876e12b4b9451f94fd96408b9082de4e21",
+   "worktree": "23f1786ab418d3cf4072098868a5ff876e12b4b9451f94fd96408b9082de4e21",
+   "at_source_commit": "23f1786ab418d3cf4072098868a5ff876e12b4b9451f94fd96408b9082de4e21"
+  },
+  {
+   "path": "crates/incant_render/build.rs",
+   "manifest": "9b645b8e8754678ebf8de955118ddc293d5f7739b55454c089a4fae6053614ba",
+   "worktree": "9b645b8e8754678ebf8de955118ddc293d5f7739b55454c089a4fae6053614ba",
+   "at_source_commit": "9b645b8e8754678ebf8de955118ddc293d5f7739b55454c089a4fae6053614ba"
+  },
+  {
+   "path": "crates/incant_render/src/lib.rs",
+   "manifest": "1d2df0753ec0b4cb86e87aa17d6b2ef410f8b0a04450bac19ccac6ce98db3903",
+   "worktree": "1d2df0753ec0b4cb86e87aa17d6b2ef410f8b0a04450bac19ccac6ce98db3903",
+   "at_source_commit": "1d2df0753ec0b4cb86e87aa17d6b2ef410f8b0a04450bac19ccac6ce98db3903"
+  },
+  {
+   "path": "crates/incant_render/src/resource_error.rs",
+   "manifest": "8be33003a3a5e99b4e7d24333cda8a3944437d6c19e7b7dfffa3e19ebcfb9a08",
+   "worktree": "8be33003a3a5e99b4e7d24333cda8a3944437d6c19e7b7dfffa3e19ebcfb9a08",
+   "at_source_commit": "8be33003a3a5e99b4e7d24333cda8a3944437d6c19e7b7dfffa3e19ebcfb9a08"
+  },
+  {
+   "path": "crates/incant_render/src/shader/native.rs",
+   "manifest": "72979887f58f8cd1f8be4abdfe05e56c5c878b94ee5d9429263f255103fe0be2",
+   "worktree": "72979887f58f8cd1f8be4abdfe05e56c5c878b94ee5d9429263f255103fe0be2",
+   "at_source_commit": "72979887f58f8cd1f8be4abdfe05e56c5c878b94ee5d9429263f255103fe0be2"
+  },
+  {
+   "path": "crates/incant_render/src/sprites/mod.rs",
+   "manifest": "5d230429f683523d24f12ce679575457dc14d5e9e45628fb3bcc48d8a33837c8",
+   "worktree": "5d230429f683523d24f12ce679575457dc14d5e9e45628fb3bcc48d8a33837c8",
+   "at_source_commit": "5d230429f683523d24f12ce679575457dc14d5e9e45628fb3bcc48d8a33837c8"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/contract.rs",
+   "manifest": "e199e147197d7f2e09e330c2b847639ef1cb4d72f66dc78feb43a7494c439477",
+   "worktree": "e199e147197d7f2e09e330c2b847639ef1cb4d72f66dc78feb43a7494c439477",
+   "at_source_commit": "e199e147197d7f2e09e330c2b847639ef1cb4d72f66dc78feb43a7494c439477"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/emit.rs",
+   "manifest": "44da27205468a4d415b59ae42b3c9e934b324cbad4ec4aa833c03accf97036c5",
+   "worktree": "44da27205468a4d415b59ae42b3c9e934b324cbad4ec4aa833c03accf97036c5",
+   "at_source_commit": "44da27205468a4d415b59ae42b3c9e934b324cbad4ec4aa833c03accf97036c5"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/mod.rs",
+   "manifest": "7fc851b8c2a955dca02fd1da849e210ca92084e741af409d74e38ecedc056c82",
+   "worktree": "7fc851b8c2a955dca02fd1da849e210ca92084e741af409d74e38ecedc056c82",
+   "at_source_commit": "7fc851b8c2a955dca02fd1da849e210ca92084e741af409d74e38ecedc056c82"
+  },
+  {
+   "path": "crates/incant_shader_cook/tests/geometry.rs",
+   "manifest": "36cafe36a701e03e357afcf3a64bb78665bbabb893742d2c18d3f0d2ae2984b3",
+   "worktree": "36cafe36a701e03e357afcf3a64bb78665bbabb893742d2c18d3f0d2ae2984b3",
+   "at_source_commit": "36cafe36a701e03e357afcf3a64bb78665bbabb893742d2c18d3f0d2ae2984b3"
+  },
+  {
+   "path": "crates/incant_render/src/sprites/shader.rs",
+   "manifest": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0",
+   "worktree": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0",
+   "at_source_commit": "845a52a5c0d935e246cd711d42bc9c5f6233d2038458febaf8aedb1915f0a0b0"
+  },
+  {
+   "path": "crates/incant_render/src/sprites/shader/cooked.rs",
+   "manifest": "44d17a8e89bacbebfe59a4848664efddbffbf9a2290cda4944ee3fe7804ed1e1",
+   "worktree": "44d17a8e89bacbebfe59a4848664efddbffbf9a2290cda4944ee3fe7804ed1e1",
+   "at_source_commit": "44d17a8e89bacbebfe59a4848664efddbffbf9a2290cda4944ee3fe7804ed1e1"
+  },
+  {
+   "path": "crates/incant_shader_cook/src/geometry/sprite.rs",
+   "manifest": "2dd463bc901b31a3b76becf1124380fb24dd3f1481e9dbc254780263bae0368f",
+   "worktree": "2dd463bc901b31a3b76becf1124380fb24dd3f1481e9dbc254780263bae0368f",
+   "at_source_commit": "2dd463bc901b31a3b76becf1124380fb24dd3f1481e9dbc254780263bae0368f"
+  }
+ ],
+ "sources_match": true,
+ "sprite_wgsl_sha256": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+ "sprite_wgsl_matches_manifest": true,
+ "sprite_wgsl_unchanged_from_parent": true,
+ "cargo_lock_sha256": "7eec85df8c7e53e760cb088e23f94e99502dc72792e8ac1c935cf432825ae383",
+ "cargo_version": "cargo 1.99.0 (5f94df478 2026-08-27)",
+ "rustc_version": "rustc 1.99.0 (b940084d7 2026-09-28)\nbinary: rustc\ncommit-hash: b940084d7eb6a299eb4bfeb8e34901bc051e7ac4\ncommit-date: 2026-09-28\nhost: aarch64-apple-darwin\nrelease: 1.99.0\nLLVM version: 23.1.1",
+ "recorded": "2026-10-12T23:32:16.353484+00:00"
+}

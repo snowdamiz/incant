@@ -1,0 +1,21 @@
+{
+ "packet": "0062-cooked-sprite-shaders",
+ "holder": "claude (Opus 5.5, Max thinking) for handoff 0062",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "Astra via brief.md (0061 released it)",
+ "brief_sha256": "25a0219e72c7f5e9403bf1543b5fe126cf9460a66c8fc197890e205cfe679dcb",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/native-audio-host/incant/.worktrees/0062-cooked-sprite-shaders",
+ "worktree_head": "ca7f4521b141d112530a2f2811cc995d52d6cd67",
+ "acquired_at": "2026-10-12T23:31:19.673159+00:00",
+ "rules": [
+  "./tools/cargo only",
+  "--locked",
+  "--profile ci",
+  "at most -j2",
+  "binaries/evidence only under /Users/andreyyurlov/.codex/incant-evidence/0062",
+  "no other agent's target or root's physics-variant target"
+ ],
+ "gpu": "not granted; wait for /Users/andreyyurlov/.codex/incant-evidence/0062/gpu-review-ready naming 0062 (written only by Astra)",
+ "released_at": "2026-10-13T00:28:56.291937+00:00",
+ "release_note": "No 0062 cargo/rustc process remains on the target. Contents left in place as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0062/bin."
+}

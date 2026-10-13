@@ -1,0 +1,121 @@
+{
+  "adapter": "Apple M5 Pro",
+  "captures": [
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000034",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000037",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b8000000000000000000003a",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b8000000000000000000003d",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000040",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000043",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000045",
+          "frame": 0,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000048",
+          "frame": 0,
+          "playing": true
+        }
+      ],
+      "png": "tick-00000.png",
+      "tick": 0,
+      "topology_generation": 0
+    },
+    {
+      "binding_generation": 0,
+      "flipbooks": [
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000034",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000037",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928c25b8000000000000000000003a",
+          "frame": 4,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b8000000000000000000003d",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000040",
+          "frame": 2,
+          "playing": true
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000043",
+          "frame": 0,
+          "playing": false
+        },
+        {
+          "completed": false,
+          "entity": "01928c25b80000000000000000000045",
+          "frame": 4,
+          "playing": true
+        },
+        {
+          "completed": true,
+          "entity": "01928c25b80000000000000000000048",
+          "frame": 4,
+          "playing": false
+        }
+      ],
+      "png": "tick-00048.png",
+      "tick": 48,
+      "topology_generation": 0
+    }
+  ],
+  "height": 540,
+  "scope": "retained native scene frames; no scripts, audio or presentation",
+  "tick_rate": 60,
+  "width": 960
+}

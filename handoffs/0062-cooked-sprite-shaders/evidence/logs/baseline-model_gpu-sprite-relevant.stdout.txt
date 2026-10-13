@@ -1,0 +1,23 @@
+
+running 19 tests
+test cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose ... ok
+test cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference ... ok
+test cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects ... ok
+test cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back ... ok
+test cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units ... ok
+test cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing ... ok
+test cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions ... ok
+test cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel ... ok
+test cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose ... ok
+test cameras::transparency_depth_order_follows_the_selected_camera ... ok
+test pipeline_warmup::all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines ... ok
+test sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement ... ok
+test sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop ... ok
+test sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe ... ok
+test sprites::sprite_layers_order_and_alpha_follow_painter_semantics ... ok
+test sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels ... ok
+test sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties ... ok
+test sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize ... ok
+test sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 18.29s

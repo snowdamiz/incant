@@ -1,0 +1,45 @@
+{
+ "board": "W",
+ "at": "2026-10-13T00:21:39.373022+00:00",
+ "removed": {
+  "W/W.incant.json": "654aa0e52978b90ed5f9ba0859611091519a7a81f164173399a73e890166d217",
+  "W/W.incant.journal.jsonl": "d92659994f5f372d724d99cfbf0aedaf070386b9a5a27b9bef85da18379c7691",
+  "W/art/alpha.png": "c84d4fe5cc544fbaf82daf91bfb734a0cb996915d93853fc4629ad6b05d4508e",
+  "W/art/arrow.png": "45d78b8ca6205babeb927f2670093dceaf826127d7f29ce6bc38349ca267a7c1",
+  "W/art/checker.png": "c8fb2dcb71fd835e3d18d6fa0f58fa532340c90cbfefd8d140786027c8987a74",
+  "W/art/f0.png": "4c38475a95e62bd61c1e4fce7d8cbd2712fa585854151181f02d6d7d24be804e",
+  "W/art/f1.png": "bbe138eaf6de2f4e6d34a3b8509ae9a8aaac83ea76aea3657528535089433d06",
+  "W/art/f2.png": "115afac28c0b8322fd00f9667d6378474a9094f4cc2325b2c3f5fbc93976b2de",
+  "W/art/f3.png": "c2876bda6f8a2b2723cd092260377aacf9faad49b40752a9cd1a30de3d612b6c",
+  "W/art/f4.png": "a8cffd73b33562435b527dd4feb0af84ef400ac5a5fee97f4f4c816cc8fd4364",
+  "W/art/nine.png": "3a5a3836e1c67bf138944301b1acb4e3c72a53fd44f33748b7c3344fa26a1fbf",
+  "W/art/occluder.bin": "81db260ef7944c9a80c2ea25b588fc4aedf78556914da6c58091b42e38c18abd",
+  "W/art/occluder.gltf": "8190e0654732a19c80c7d94db05f9d3aac67594e32e5925376a9c91e20eebebb",
+  "W/art/ring.png": "d9ccb1299fa680de6e6a663307a30738797c3990c25e708b09cae4e011c3a94b",
+  "W/art/sheet.png": "e034cd0f452a94550885f8ff9f7082c3dcbeac750470656c975830cd1c510d31",
+  "W/art/sprites.atlas.json": "3e86d3dea05cbf90d989b53e017d8329281ad34215bb0234e49cdc5f543dcfbc",
+  "W/art/strip-h.png": "38fdd61e06e6cdfd2b4ea2ede2b6b116c253ae3c80f3ce8fe4207f6c51cfb222",
+  "W/art/strip-v.png": "cf2b733a0cf5deadb87ac46b0f5f08d0714e38a9308d9f04b82f2be770367cd1",
+  "W/art/t0.png": "4af617fb27d15b7271fc185884d4c6c9f0255e380950769bd6b57d2d5cbe09c8",
+  "W/art/t1.png": "e86a924dc7e926017b7327ce417a5d0acb2525459cf701cd1c32b986bce1471b",
+  "W/art/t2.png": "948bce42ae756373395bbd4d89593cc962e8e14b7281ebd22b2ef95e2112e054",
+  "W/art/t3.png": "6d9b51bf53fd68796108c25c0e32a66e98a358850593f78adaa72419e1c63dbc"
+ },
+ "private_copy": "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/private-fixture/W",
+ "kept_unchanged": true,
+ "kept": {
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/cooked/W.scene": "47ba75a736683b582a8b93e475a7a8caf538f10327f9a78903279e4d74b98776",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/W/.incant/cache/textures/2d8ec845d021d5cced65d6c46f382bbc2ddf709134d14cbdfb9728dc66024f22.ktx2": "2d8ec845d021d5cced65d6c46f382bbc2ddf709134d14cbdfb9728dc66024f22",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/W/.incant/cache/textures/6894c606e5de7963ca858142d4c926fc10ceb2a8ef2a6a4da3d29b3b16a45a41.json": "3e9c376107a4c21b4b3067190f56ef4cb7bed5faa4b5195f94b107de929450ba",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/W/.incant/cache/textures/997b332a68d4e53d5c52d2a09d524b9e220d5388cf89387141e24d749333ece6.json": "eea37eb14f17a452675f09ad695184e91749768cf83e51bedabd204b66a9cbc4",
+  "/Users/andreyyurlov/.codex/incant-evidence/0062/fixtures/r2/W/.incant/cache/textures/a54dfbfdf94afedcfba4165f6b760b8be8898f168f894741d85607f7417e9e05.ktx2": "a54dfbfdf94afedcfba4165f6b760b8be8898f168f894741d85607f7417e9e05"
+ },
+ "remaining_in_project": [
+  ".incant-source-transactions/lock",
+  ".incant/cache/textures/2d8ec845d021d5cced65d6c46f382bbc2ddf709134d14cbdfb9728dc66024f22.ktx2",
+  ".incant/cache/textures/6894c606e5de7963ca858142d4c926fc10ceb2a8ef2a6a4da3d29b3b16a45a41.json",
+  ".incant/cache/textures/997b332a68d4e53d5c52d2a09d524b9e220d5388cf89387141e24d749333ece6.json",
+  ".incant/cache/textures/a54dfbfdf94afedcfba4165f6b760b8be8898f168f894741d85607f7417e9e05.ktx2"
+ ],
+ "no_authoring_or_art_left": false
+}

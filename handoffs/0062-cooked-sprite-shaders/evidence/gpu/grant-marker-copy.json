@@ -1,0 +1,7 @@
+{
+  "packet": "0062-cooked-sprite-shaders",
+  "granted_at": "2026-10-13T00:13:59.399252+00:00",
+  "previous_owner_release_sha256": "5552fb37d3140c365e4ce9e5c3d949591707c2a1f53de8b8fcba8070cd30c569",
+  "scope": "Offscreen sprite GPU and appearance checks under existing packet constraints; no desktop/nativewindow capture",
+  "cpu_resume": "Prior pause-worktree.json preserves tools and compiled variants. Inspect/reuse before rebuilding."
+}

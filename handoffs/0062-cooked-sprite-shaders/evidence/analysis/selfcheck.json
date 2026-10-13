@@ -1,0 +1,212 @@
+{
+ "mutation": {
+  "pixels": 518400,
+  "differing": 1,
+  "worst_channel_delta": 1,
+  "rgba_hash_changed": true
+ },
+ "mutation_detected": true,
+ "roundtrip_all_equal": true,
+ "only_ihdr_idat_iend": true,
+ "captures_checked": 22,
+ "roundtrip": [
+  {
+   "png": "captures/baseline/A-ortho/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/A-persp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/A-pp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/B-ortho/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/B-ortho/tick-00048.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/B-pp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/B-pp/tick-00048.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/W-ortho/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/baseline/W-pp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/A-ortho/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/A-persp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/A-pp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/A-pp-source-free/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/B-ortho/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/B-ortho/tick-00048.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/B-pp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/B-pp/tick-00048.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/B-pp-source-free/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/B-pp-source-free/tick-00048.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/W-ortho/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/W-pp/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  },
+  {
+   "png": "captures/candidate/W-pp-source-free/tick-00000.png",
+   "chunks": [
+    "IHDR",
+    "IDAT",
+    "IEND"
+   ],
+   "roundtrip_equal": true
+  }
+ ]
+}

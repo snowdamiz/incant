@@ -1,0 +1,3568 @@
+{
+ "key": "B",
+ "items": [
+  {
+   "name": "camera-pp",
+   "kind": "camera",
+   "slot": 1,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 10.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "projection": {
+    "kind": "pixel_perfect",
+    "pixels_per_unit": 16.0,
+    "reference_resolution": [
+     320,
+     180
+    ]
+   }
+  },
+  {
+   "name": "camera-ortho",
+   "kind": "camera",
+   "slot": 2,
+   "at": [
+    -65.6,
+    35.2
+   ],
+   "z": 10.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 5.11
+   }
+  },
+  {
+   "name": "T1-map",
+   "kind": "map",
+   "slot": 3,
+   "at": [
+    -150.0,
+    20.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "size": [
+    8,
+    4
+   ],
+   "cell": [
+    8.0,
+    8.0
+   ],
+   "layers": [
+    {
+     "name": "back",
+     "rows": [
+      "t0 t1 t0 t1 t0 t1 t0 t1",
+      "t1 t0 t1 t0 t1 t0 t1 t0",
+      "t0 t1 t0 t1 t0 t1 t0 t1",
+      "t1 t0 t1 t0 t1 t0 t1 t0"
+     ],
+     "layer": -1,
+     "order": 0
+    },
+    {
+     "name": "front",
+     "rows": [
+      "t2 t2 . . t3 . . t2",
+      ". t3 . t2 t2 . t3 .",
+      ". . t3 . . t2 . .",
+      "t3 . . . t2 t3 . t3"
+     ],
+     "layer": 2,
+     "order": 0
+    }
+   ]
+  },
+  {
+   "name": "T1c-back-0-0",
+   "kind": "sprite",
+   "slot": 4,
+   "at": [
+    -146.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-1-0",
+   "kind": "sprite",
+   "slot": 5,
+   "at": [
+    -138.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-2-0",
+   "kind": "sprite",
+   "slot": 6,
+   "at": [
+    -130.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-3-0",
+   "kind": "sprite",
+   "slot": 7,
+   "at": [
+    -122.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-4-0",
+   "kind": "sprite",
+   "slot": 8,
+   "at": [
+    -114.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-5-0",
+   "kind": "sprite",
+   "slot": 9,
+   "at": [
+    -106.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-6-0",
+   "kind": "sprite",
+   "slot": 10,
+   "at": [
+    -98.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-7-0",
+   "kind": "sprite",
+   "slot": 11,
+   "at": [
+    -90.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-0-1",
+   "kind": "sprite",
+   "slot": 12,
+   "at": [
+    -146.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-1-1",
+   "kind": "sprite",
+   "slot": 13,
+   "at": [
+    -138.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-2-1",
+   "kind": "sprite",
+   "slot": 14,
+   "at": [
+    -130.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-3-1",
+   "kind": "sprite",
+   "slot": 15,
+   "at": [
+    -122.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-4-1",
+   "kind": "sprite",
+   "slot": 16,
+   "at": [
+    -114.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-5-1",
+   "kind": "sprite",
+   "slot": 17,
+   "at": [
+    -106.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-6-1",
+   "kind": "sprite",
+   "slot": 18,
+   "at": [
+    -98.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-7-1",
+   "kind": "sprite",
+   "slot": 19,
+   "at": [
+    -90.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-0-2",
+   "kind": "sprite",
+   "slot": 20,
+   "at": [
+    -146.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-1-2",
+   "kind": "sprite",
+   "slot": 21,
+   "at": [
+    -138.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-2-2",
+   "kind": "sprite",
+   "slot": 22,
+   "at": [
+    -130.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-3-2",
+   "kind": "sprite",
+   "slot": 23,
+   "at": [
+    -122.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-4-2",
+   "kind": "sprite",
+   "slot": 24,
+   "at": [
+    -114.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-5-2",
+   "kind": "sprite",
+   "slot": 25,
+   "at": [
+    -106.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-6-2",
+   "kind": "sprite",
+   "slot": 26,
+   "at": [
+    -98.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-7-2",
+   "kind": "sprite",
+   "slot": 27,
+   "at": [
+    -90.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-0-3",
+   "kind": "sprite",
+   "slot": 28,
+   "at": [
+    -146.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-1-3",
+   "kind": "sprite",
+   "slot": 29,
+   "at": [
+    -138.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-2-3",
+   "kind": "sprite",
+   "slot": 30,
+   "at": [
+    -130.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-3-3",
+   "kind": "sprite",
+   "slot": 31,
+   "at": [
+    -122.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-4-3",
+   "kind": "sprite",
+   "slot": 32,
+   "at": [
+    -114.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-5-3",
+   "kind": "sprite",
+   "slot": 33,
+   "at": [
+    -106.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-6-3",
+   "kind": "sprite",
+   "slot": 34,
+   "at": [
+    -98.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-back-7-3",
+   "kind": "sprite",
+   "slot": 35,
+   "at": [
+    -90.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-0-0",
+   "kind": "sprite",
+   "slot": 36,
+   "at": [
+    -146.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-4-0",
+   "kind": "sprite",
+   "slot": 37,
+   "at": [
+    -114.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-5-0",
+   "kind": "sprite",
+   "slot": 38,
+   "at": [
+    -106.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-7-0",
+   "kind": "sprite",
+   "slot": 39,
+   "at": [
+    -90.0,
+    -26.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-2-1",
+   "kind": "sprite",
+   "slot": 40,
+   "at": [
+    -130.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-5-1",
+   "kind": "sprite",
+   "slot": 41,
+   "at": [
+    -106.0,
+    -18.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-1-2",
+   "kind": "sprite",
+   "slot": 42,
+   "at": [
+    -138.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-3-2",
+   "kind": "sprite",
+   "slot": 43,
+   "at": [
+    -122.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-4-2",
+   "kind": "sprite",
+   "slot": 44,
+   "at": [
+    -114.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-6-2",
+   "kind": "sprite",
+   "slot": 45,
+   "at": [
+    -98.0,
+    -10.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-0-3",
+   "kind": "sprite",
+   "slot": 46,
+   "at": [
+    -146.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-1-3",
+   "kind": "sprite",
+   "slot": 47,
+   "at": [
+    -138.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-4-3",
+   "kind": "sprite",
+   "slot": 48,
+   "at": [
+    -114.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T1c-front-7-3",
+   "kind": "sprite",
+   "slot": 49,
+   "at": [
+    -90.0,
+    -2.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 2,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "T2-parent",
+   "kind": "group",
+   "slot": 50,
+   "at": [
+    -20.0,
+    88.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.7071067811865475,
+    0.7071067811865476
+   ],
+   "scale": [
+    -1.0,
+    1.0
+   ],
+   "parent": null
+  },
+  {
+   "name": "T2-map",
+   "kind": "map",
+   "slot": 51,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": "T2-parent",
+   "size": [
+    8,
+    4
+   ],
+   "cell": [
+    12.0,
+    12.0
+   ],
+   "layers": [
+    {
+     "name": "back",
+     "rows": [
+      "t0 t1 t0 t1 t0 t1 t0 t1",
+      "t1 t0 t1 t0 t1 t0 t1 t0",
+      "t0 t1 t0 t1 t0 t1 t0 t1",
+      "t1 t0 t1 t0 t1 t0 t1 t0"
+     ],
+     "layer": -1,
+     "order": 0
+    },
+    {
+     "name": "front",
+     "rows": [
+      "t2 t2 . . t3 . . t2",
+      ". t3 . t2 t2 . t3 .",
+      ". . t3 . . t2 . .",
+      "t3 . . . t2 t3 . t3"
+     ],
+     "layer": 2,
+     "order": 0
+    }
+   ]
+  },
+  {
+   "name": "F1-loop-nearest-5fps",
+   "kind": "anim",
+   "slot": 52,
+   "at": [
+    20.0,
+    60.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "rate": [
+    5,
+    1
+   ],
+   "looping": true,
+   "playing": true
+  },
+  {
+   "name": "F1c-first",
+   "kind": "sprite",
+   "slot": 53,
+   "at": [
+    20.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F1c-final",
+   "kind": "sprite",
+   "slot": 54,
+   "at": [
+    20.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f4"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F2-loop-linear-6fps",
+   "kind": "anim",
+   "slot": 55,
+   "at": [
+    52.0,
+    60.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "rate": [
+    6,
+    1
+   ],
+   "looping": true,
+   "playing": true
+  },
+  {
+   "name": "F2c-first",
+   "kind": "sprite",
+   "slot": 56,
+   "at": [
+    52.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F2c-final",
+   "kind": "sprite",
+   "slot": 57,
+   "at": [
+    52.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f4"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F3-once-flip-x-10fps",
+   "kind": "anim",
+   "slot": 58,
+   "at": [
+    84.0,
+    60.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "rate": [
+    10,
+    1
+   ],
+   "looping": false,
+   "playing": true
+  },
+  {
+   "name": "F3c-first",
+   "kind": "sprite",
+   "slot": 59,
+   "at": [
+    84.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F3c-final",
+   "kind": "sprite",
+   "slot": 60,
+   "at": [
+    84.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f4"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F4-reversed-5fps",
+   "kind": "anim",
+   "slot": 61,
+   "at": [
+    116.0,
+    60.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f4"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "f4",
+    "f3",
+    "f2",
+    "f1",
+    "f0"
+   ],
+   "rate": [
+    5,
+    1
+   ],
+   "looping": true,
+   "playing": true
+  },
+  {
+   "name": "F4c-first",
+   "kind": "sprite",
+   "slot": 62,
+   "at": [
+    116.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f4"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F4c-final",
+   "kind": "sprite",
+   "slot": 63,
+   "at": [
+    116.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F5-sheet-regions-2.5fps",
+   "kind": "anim",
+   "slot": 64,
+   "at": [
+    148.0,
+    60.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "red"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "red",
+    "middle",
+    "blue"
+   ],
+   "rate": [
+    5,
+    2
+   ],
+   "looping": true,
+   "playing": true
+  },
+  {
+   "name": "F5c-first",
+   "kind": "sprite",
+   "slot": 65,
+   "at": [
+    148.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "red"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F5c-final",
+   "kind": "sprite",
+   "slot": 66,
+   "at": [
+    148.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "blue"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F6-paused",
+   "kind": "anim",
+   "slot": 67,
+   "at": [
+    20.0,
+    -40.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "rate": [
+    5,
+    1
+   ],
+   "looping": true,
+   "playing": false
+  },
+  {
+   "name": "F6c-held",
+   "kind": "sprite",
+   "slot": 68,
+   "at": [
+    52.0,
+    -40.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F7-rot90-5fps",
+   "kind": "anim",
+   "slot": 69,
+   "at": [
+    84.0,
+    -40.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.7071067811865475,
+    0.7071067811865476
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "rate": [
+    5,
+    1
+   ],
+   "looping": true,
+   "playing": true
+  },
+  {
+   "name": "F7c-first",
+   "kind": "sprite",
+   "slot": 70,
+   "at": [
+    116.0,
+    -40.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.7071067811865475,
+    0.7071067811865476
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F7c-final",
+   "kind": "sprite",
+   "slot": 71,
+   "at": [
+    148.0,
+    -40.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.7071067811865475,
+    0.7071067811865476
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f4"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "F8-once-linear-rot30-10fps",
+   "kind": "anim",
+   "slot": 72,
+   "at": [
+    20.0,
+    -75.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.25881904510252074,
+    0.9659258262890683
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f0"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   },
+   "frames": [
+    "f0",
+    "f1",
+    "f2",
+    "f3",
+    "f4"
+   ],
+   "rate": [
+    10,
+    1
+   ],
+   "looping": false,
+   "playing": true
+  },
+  {
+   "name": "F8c-final",
+   "kind": "sprite",
+   "slot": 73,
+   "at": [
+    52.0,
+    -75.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.25881904510252074,
+    0.9659258262890683
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "f4"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  }
+ ],
+ "ids": {
+  "camera-pp": "01JA62BE000000000000000001",
+  "camera-ortho": "01JA62BE000000000000000002",
+  "T1-map": "01JA62BE000000000000000003",
+  "T1c-back-0-0": "01JA62BE000000000000000004",
+  "T1c-back-1-0": "01JA62BE000000000000000005",
+  "T1c-back-2-0": "01JA62BE000000000000000006",
+  "T1c-back-3-0": "01JA62BE000000000000000007",
+  "T1c-back-4-0": "01JA62BE000000000000000008",
+  "T1c-back-5-0": "01JA62BE000000000000000009",
+  "T1c-back-6-0": "01JA62BE00000000000000000A",
+  "T1c-back-7-0": "01JA62BE00000000000000000B",
+  "T1c-back-0-1": "01JA62BE00000000000000000C",
+  "T1c-back-1-1": "01JA62BE00000000000000000D",
+  "T1c-back-2-1": "01JA62BE00000000000000000E",
+  "T1c-back-3-1": "01JA62BE00000000000000000F",
+  "T1c-back-4-1": "01JA62BE00000000000000000G",
+  "T1c-back-5-1": "01JA62BE00000000000000000H",
+  "T1c-back-6-1": "01JA62BE00000000000000000J",
+  "T1c-back-7-1": "01JA62BE00000000000000000K",
+  "T1c-back-0-2": "01JA62BE00000000000000000M",
+  "T1c-back-1-2": "01JA62BE00000000000000000N",
+  "T1c-back-2-2": "01JA62BE00000000000000000P",
+  "T1c-back-3-2": "01JA62BE00000000000000000Q",
+  "T1c-back-4-2": "01JA62BE00000000000000000R",
+  "T1c-back-5-2": "01JA62BE00000000000000000S",
+  "T1c-back-6-2": "01JA62BE00000000000000000T",
+  "T1c-back-7-2": "01JA62BE00000000000000000V",
+  "T1c-back-0-3": "01JA62BE00000000000000000W",
+  "T1c-back-1-3": "01JA62BE00000000000000000X",
+  "T1c-back-2-3": "01JA62BE00000000000000000Y",
+  "T1c-back-3-3": "01JA62BE00000000000000000Z",
+  "T1c-back-4-3": "01JA62BE000000000000000010",
+  "T1c-back-5-3": "01JA62BE000000000000000011",
+  "T1c-back-6-3": "01JA62BE000000000000000012",
+  "T1c-back-7-3": "01JA62BE000000000000000013",
+  "T1c-front-0-0": "01JA62BE000000000000000014",
+  "T1c-front-4-0": "01JA62BE000000000000000015",
+  "T1c-front-5-0": "01JA62BE000000000000000016",
+  "T1c-front-7-0": "01JA62BE000000000000000017",
+  "T1c-front-2-1": "01JA62BE000000000000000018",
+  "T1c-front-5-1": "01JA62BE000000000000000019",
+  "T1c-front-1-2": "01JA62BE00000000000000001A",
+  "T1c-front-3-2": "01JA62BE00000000000000001B",
+  "T1c-front-4-2": "01JA62BE00000000000000001C",
+  "T1c-front-6-2": "01JA62BE00000000000000001D",
+  "T1c-front-0-3": "01JA62BE00000000000000001E",
+  "T1c-front-1-3": "01JA62BE00000000000000001F",
+  "T1c-front-4-3": "01JA62BE00000000000000001G",
+  "T1c-front-7-3": "01JA62BE00000000000000001H",
+  "T2-parent": "01JA62BE00000000000000001J",
+  "T2-map": "01JA62BE00000000000000001K",
+  "F1-loop-nearest-5fps": "01JA62BE00000000000000001M",
+  "F1c-first": "01JA62BE00000000000000001N",
+  "F1c-final": "01JA62BE00000000000000001P",
+  "F2-loop-linear-6fps": "01JA62BE00000000000000001Q",
+  "F2c-first": "01JA62BE00000000000000001R",
+  "F2c-final": "01JA62BE00000000000000001S",
+  "F3-once-flip-x-10fps": "01JA62BE00000000000000001T",
+  "F3c-first": "01JA62BE00000000000000001V",
+  "F3c-final": "01JA62BE00000000000000001W",
+  "F4-reversed-5fps": "01JA62BE00000000000000001X",
+  "F4c-first": "01JA62BE00000000000000001Y",
+  "F4c-final": "01JA62BE00000000000000001Z",
+  "F5-sheet-regions-2.5fps": "01JA62BE000000000000000020",
+  "F5c-first": "01JA62BE000000000000000021",
+  "F5c-final": "01JA62BE000000000000000022",
+  "F6-paused": "01JA62BE000000000000000023",
+  "F6c-held": "01JA62BE000000000000000024",
+  "F7-rot90-5fps": "01JA62BE000000000000000025",
+  "F7c-first": "01JA62BE000000000000000026",
+  "F7c-final": "01JA62BE000000000000000027",
+  "F8-once-linear-rot30-10fps": "01JA62BE000000000000000028",
+  "F8c-final": "01JA62BE000000000000000029"
+ },
+ "hex": {
+  "camera-pp": "01928c25b80000000000000000000001",
+  "camera-ortho": "01928c25b80000000000000000000002",
+  "T1-map": "01928c25b80000000000000000000003",
+  "T1c-back-0-0": "01928c25b80000000000000000000004",
+  "T1c-back-1-0": "01928c25b80000000000000000000005",
+  "T1c-back-2-0": "01928c25b80000000000000000000006",
+  "T1c-back-3-0": "01928c25b80000000000000000000007",
+  "T1c-back-4-0": "01928c25b80000000000000000000008",
+  "T1c-back-5-0": "01928c25b80000000000000000000009",
+  "T1c-back-6-0": "01928c25b8000000000000000000000a",
+  "T1c-back-7-0": "01928c25b8000000000000000000000b",
+  "T1c-back-0-1": "01928c25b8000000000000000000000c",
+  "T1c-back-1-1": "01928c25b8000000000000000000000d",
+  "T1c-back-2-1": "01928c25b8000000000000000000000e",
+  "T1c-back-3-1": "01928c25b8000000000000000000000f",
+  "T1c-back-4-1": "01928c25b80000000000000000000010",
+  "T1c-back-5-1": "01928c25b80000000000000000000011",
+  "T1c-back-6-1": "01928c25b80000000000000000000012",
+  "T1c-back-7-1": "01928c25b80000000000000000000013",
+  "T1c-back-0-2": "01928c25b80000000000000000000014",
+  "T1c-back-1-2": "01928c25b80000000000000000000015",
+  "T1c-back-2-2": "01928c25b80000000000000000000016",
+  "T1c-back-3-2": "01928c25b80000000000000000000017",
+  "T1c-back-4-2": "01928c25b80000000000000000000018",
+  "T1c-back-5-2": "01928c25b80000000000000000000019",
+  "T1c-back-6-2": "01928c25b8000000000000000000001a",
+  "T1c-back-7-2": "01928c25b8000000000000000000001b",
+  "T1c-back-0-3": "01928c25b8000000000000000000001c",
+  "T1c-back-1-3": "01928c25b8000000000000000000001d",
+  "T1c-back-2-3": "01928c25b8000000000000000000001e",
+  "T1c-back-3-3": "01928c25b8000000000000000000001f",
+  "T1c-back-4-3": "01928c25b80000000000000000000020",
+  "T1c-back-5-3": "01928c25b80000000000000000000021",
+  "T1c-back-6-3": "01928c25b80000000000000000000022",
+  "T1c-back-7-3": "01928c25b80000000000000000000023",
+  "T1c-front-0-0": "01928c25b80000000000000000000024",
+  "T1c-front-4-0": "01928c25b80000000000000000000025",
+  "T1c-front-5-0": "01928c25b80000000000000000000026",
+  "T1c-front-7-0": "01928c25b80000000000000000000027",
+  "T1c-front-2-1": "01928c25b80000000000000000000028",
+  "T1c-front-5-1": "01928c25b80000000000000000000029",
+  "T1c-front-1-2": "01928c25b8000000000000000000002a",
+  "T1c-front-3-2": "01928c25b8000000000000000000002b",
+  "T1c-front-4-2": "01928c25b8000000000000000000002c",
+  "T1c-front-6-2": "01928c25b8000000000000000000002d",
+  "T1c-front-0-3": "01928c25b8000000000000000000002e",
+  "T1c-front-1-3": "01928c25b8000000000000000000002f",
+  "T1c-front-4-3": "01928c25b80000000000000000000030",
+  "T1c-front-7-3": "01928c25b80000000000000000000031",
+  "T2-parent": "01928c25b80000000000000000000032",
+  "T2-map": "01928c25b80000000000000000000033",
+  "F1-loop-nearest-5fps": "01928c25b80000000000000000000034",
+  "F1c-first": "01928c25b80000000000000000000035",
+  "F1c-final": "01928c25b80000000000000000000036",
+  "F2-loop-linear-6fps": "01928c25b80000000000000000000037",
+  "F2c-first": "01928c25b80000000000000000000038",
+  "F2c-final": "01928c25b80000000000000000000039",
+  "F3-once-flip-x-10fps": "01928c25b8000000000000000000003a",
+  "F3c-first": "01928c25b8000000000000000000003b",
+  "F3c-final": "01928c25b8000000000000000000003c",
+  "F4-reversed-5fps": "01928c25b8000000000000000000003d",
+  "F4c-first": "01928c25b8000000000000000000003e",
+  "F4c-final": "01928c25b8000000000000000000003f",
+  "F5-sheet-regions-2.5fps": "01928c25b80000000000000000000040",
+  "F5c-first": "01928c25b80000000000000000000041",
+  "F5c-final": "01928c25b80000000000000000000042",
+  "F6-paused": "01928c25b80000000000000000000043",
+  "F6c-held": "01928c25b80000000000000000000044",
+  "F7-rot90-5fps": "01928c25b80000000000000000000045",
+  "F7c-first": "01928c25b80000000000000000000046",
+  "F7c-final": "01928c25b80000000000000000000047",
+  "F8-once-linear-rot30-10fps": "01928c25b80000000000000000000048",
+  "F8c-final": "01928c25b80000000000000000000049"
+ },
+ "units": "lp = 1/16 m; pixel-perfect camera 320x180 lp at 3x",
+ "final_tick": 48
+}

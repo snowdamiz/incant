@@ -1,0 +1,705 @@
+{
+ "key": "W",
+ "items": [
+  {
+   "name": "camera-pp",
+   "kind": "camera",
+   "slot": 1,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 10.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "projection": {
+    "kind": "pixel_perfect",
+    "pixels_per_unit": 16.0,
+    "reference_resolution": [
+     320,
+     180
+    ]
+   }
+  },
+  {
+   "name": "camera-ortho",
+   "kind": "camera",
+   "slot": 2,
+   "at": [
+    0.2192,
+    -0.3504
+   ],
+   "z": 10.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 7.77
+   }
+  },
+  {
+   "name": "W1-h-trailing-right",
+   "kind": "sprite",
+   "slot": 3,
+   "at": [
+    -6152.0,
+    60.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     0,
+     0,
+     4096,
+     1
+    ]
+   ],
+   "size": [
+    12288.0,
+    6.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W1c-h-tail-control",
+   "kind": "sprite",
+   "slot": 4,
+   "at": [
+    -32.0,
+    50.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     4080,
+     0,
+     16,
+     1
+    ]
+   ],
+   "size": [
+    48.0,
+    6.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W2-h-flipped-trailing-left",
+   "kind": "sprite",
+   "slot": 5,
+   "at": [
+    6152.0,
+    -60.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     0,
+     0,
+     4096,
+     1
+    ]
+   ],
+   "size": [
+    12288.0,
+    6.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W2c-h-flipped-tail-control",
+   "kind": "sprite",
+   "slot": 6,
+   "at": [
+    32.0,
+    -50.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     4080,
+     0,
+     16,
+     1
+    ]
+   ],
+   "size": [
+    48.0,
+    6.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W3-v-trailing-bottom",
+   "kind": "sprite",
+   "slot": 7,
+   "at": [
+    60.0,
+    6152.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-v",
+   "region": [
+    "pixels",
+    [
+     0,
+     0,
+     1,
+     4096
+    ]
+   ],
+   "size": [
+    6.0,
+    12288.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W3c-v-tail-control",
+   "kind": "sprite",
+   "slot": 8,
+   "at": [
+    50.0,
+    32.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-v",
+   "region": [
+    "pixels",
+    [
+     0,
+     4080,
+     1,
+     16
+    ]
+   ],
+   "size": [
+    6.0,
+    48.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W4-v-flipped-trailing-top",
+   "kind": "sprite",
+   "slot": 9,
+   "at": [
+    -60.0,
+    -6152.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-v",
+   "region": [
+    "pixels",
+    [
+     0,
+     0,
+     1,
+     4096
+    ]
+   ],
+   "size": [
+    6.0,
+    12288.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    true
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W4c-v-flipped-tail-control",
+   "kind": "sprite",
+   "slot": 10,
+   "at": [
+    -50.0,
+    -32.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-v",
+   "region": [
+    "pixels",
+    [
+     0,
+     4080,
+     1,
+     16
+    ]
+   ],
+   "size": [
+    6.0,
+    48.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    true
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W5-h-linear-trailing-right",
+   "kind": "sprite",
+   "slot": 11,
+   "at": [
+    -6152.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     0,
+     0,
+     4096,
+     1
+    ]
+   ],
+   "size": [
+    12288.0,
+    6.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W5c-h-linear-tail-control",
+   "kind": "sprite",
+   "slot": 12,
+   "at": [
+    -32.0,
+    20.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     4080,
+     0,
+     16,
+     1
+    ]
+   ],
+   "size": [
+    48.0,
+    6.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W6-h-trailing-tie",
+   "kind": "sprite",
+   "slot": 13,
+   "at": [
+    -6033.833333333333,
+    -20.166666666666668
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     0,
+     0,
+     4096,
+     1
+    ]
+   ],
+   "size": [
+    12288.0,
+    6.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "W6c-h-tail-tie-control",
+   "kind": "sprite",
+   "slot": 14,
+   "at": [
+    86.16666666666667,
+    -30.166666666666668
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "strip-h",
+   "region": [
+    "pixels",
+    [
+     4080,
+     0,
+     16,
+     1
+    ]
+   ],
+   "size": [
+    48.0,
+    6.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  }
+ ],
+ "ids": {
+  "camera-pp": "01JA62WE000000000000000001",
+  "camera-ortho": "01JA62WE000000000000000002",
+  "W1-h-trailing-right": "01JA62WE000000000000000003",
+  "W1c-h-tail-control": "01JA62WE000000000000000004",
+  "W2-h-flipped-trailing-left": "01JA62WE000000000000000005",
+  "W2c-h-flipped-tail-control": "01JA62WE000000000000000006",
+  "W3-v-trailing-bottom": "01JA62WE000000000000000007",
+  "W3c-v-tail-control": "01JA62WE000000000000000008",
+  "W4-v-flipped-trailing-top": "01JA62WE000000000000000009",
+  "W4c-v-flipped-tail-control": "01JA62WE00000000000000000A",
+  "W5-h-linear-trailing-right": "01JA62WE00000000000000000B",
+  "W5c-h-linear-tail-control": "01JA62WE00000000000000000C",
+  "W6-h-trailing-tie": "01JA62WE00000000000000000D",
+  "W6c-h-tail-tie-control": "01JA62WE00000000000000000E"
+ },
+ "hex": {
+  "camera-pp": "01928c2e380000000000000000000001",
+  "camera-ortho": "01928c2e380000000000000000000002",
+  "W1-h-trailing-right": "01928c2e380000000000000000000003",
+  "W1c-h-tail-control": "01928c2e380000000000000000000004",
+  "W2-h-flipped-trailing-left": "01928c2e380000000000000000000005",
+  "W2c-h-flipped-tail-control": "01928c2e380000000000000000000006",
+  "W3-v-trailing-bottom": "01928c2e380000000000000000000007",
+  "W3c-v-tail-control": "01928c2e380000000000000000000008",
+  "W4-v-flipped-trailing-top": "01928c2e380000000000000000000009",
+  "W4c-v-flipped-tail-control": "01928c2e38000000000000000000000a",
+  "W5-h-linear-trailing-right": "01928c2e38000000000000000000000b",
+  "W5c-h-linear-tail-control": "01928c2e38000000000000000000000c",
+  "W6-h-trailing-tie": "01928c2e38000000000000000000000d",
+  "W6c-h-tail-tie-control": "01928c2e38000000000000000000000e"
+ },
+ "units": "lp = 1/16 m; pixel-perfect camera 320x180 lp at 3x",
+ "final_tick": 48
+}

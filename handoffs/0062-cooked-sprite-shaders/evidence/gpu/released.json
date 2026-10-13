@@ -1,0 +1,13 @@
+{
+ "packet": "0062-cooked-sprite-shaders",
+ "released_at": "2026-10-13T00:22:30.810553+00:00",
+ "children": 29,
+ "captures": 22,
+ "first_start": "2026-10-13T00:17:19.063615+00:00",
+ "last_end": "2026-10-13T00:21:40.441908+00:00",
+ "ledger_sha256": "e72193177e1a81b610606e4c8d26f199674ce217b28683f89b96cec20b3a62a2",
+ "marker_sha256_at_release": "9c61859de3683c4f408f8049a929d4513708b6ab84e43b2cbb43e48465406a36",
+ "owned_processes": [],
+ "ledger_pids_alive": [],
+ "note": "Release by 0062 for Astra; gpu-review-ready left untouched (only Astra writes it)."
+}

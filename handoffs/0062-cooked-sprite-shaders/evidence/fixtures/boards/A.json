@@ -1,0 +1,2512 @@
+{
+ "key": "A",
+ "items": [
+  {
+   "name": "camera-pp",
+   "kind": "camera",
+   "slot": 1,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 10.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "projection": {
+    "kind": "pixel_perfect",
+    "pixels_per_unit": 16.0,
+    "reference_resolution": [
+     320,
+     180
+    ]
+   }
+  },
+  {
+   "name": "camera-ortho",
+   "kind": "camera",
+   "slot": 2,
+   "at": [
+    -69.0192,
+    30.7408
+   ],
+   "z": 10.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "projection": {
+    "kind": "orthographic",
+    "vertical_size": 6.17
+   }
+  },
+  {
+   "name": "camera-persp",
+   "kind": "camera",
+   "slot": 3,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 12.0,
+   "rotation": [
+    0.0,
+    0.043619387365336,
+    0.0,
+    0.9990482215818578
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "projection": {
+    "kind": "perspective"
+   }
+  },
+  {
+   "name": "A1-nearest-1x",
+   "kind": "sprite",
+   "slot": 4,
+   "at": [
+    -148.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    8.0,
+    8.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A2-nearest-2x",
+   "kind": "sprite",
+   "slot": 5,
+   "at": [
+    -128.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A3-nearest-2.5x",
+   "kind": "sprite",
+   "slot": 6,
+   "at": [
+    -102.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    20.0,
+    20.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A4-linear-4x",
+   "kind": "sprite",
+   "slot": 7,
+   "at": [
+    -68.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    32.0,
+    32.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A5-linear-0.5x",
+   "kind": "sprite",
+   "slot": 8,
+   "at": [
+    -44.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    4.0,
+    4.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A6-nearest-2x-tie",
+   "kind": "sprite",
+   "slot": 9,
+   "at": [
+    -27.833333333333332,
+    69.83333333333333
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A7-nearest-2x-tie-flipped",
+   "kind": "sprite",
+   "slot": 10,
+   "at": [
+    -7.833333333333333,
+    69.83333333333333
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    true
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A8-nearest-3x-rot90",
+   "kind": "sprite",
+   "slot": 11,
+   "at": [
+    16.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.7071067811865475,
+    0.7071067811865476
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A9-nearest-3x-rot30",
+   "kind": "sprite",
+   "slot": 12,
+   "at": [
+    48.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.25881904510252074,
+    0.9659258262890683
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A10-linear-3x-rot30",
+   "kind": "sprite",
+   "slot": 13,
+   "at": [
+    84.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.25881904510252074,
+    0.9659258262890683
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A11-nearest-3x-yaw60",
+   "kind": "sprite",
+   "slot": 14,
+   "at": [
+    112.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.49999999999999994,
+    0.0,
+    0.8660254037844387
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "A12-linear-3x-yaw60",
+   "kind": "sprite",
+   "slot": 15,
+   "at": [
+    136.0,
+    70.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.49999999999999994,
+    0.0,
+    0.8660254037844387
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B1-ring-nearest-3x",
+   "kind": "sprite",
+   "slot": 16,
+   "at": [
+    -140.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "ring"
+   ],
+   "size": [
+    30.0,
+    30.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B2-ring-linear-3x",
+   "kind": "sprite",
+   "slot": 17,
+   "at": [
+    -104.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "ring"
+   ],
+   "size": [
+    30.0,
+    30.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B3-sheet-middle-linear-2x",
+   "kind": "sprite",
+   "slot": 18,
+   "at": [
+    -68.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "middle"
+   ],
+   "size": [
+    32.0,
+    32.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B4-sheet-middle-nearest-2x",
+   "kind": "sprite",
+   "slot": 19,
+   "at": [
+    -30.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "middle"
+   ],
+   "size": [
+    32.0,
+    32.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B5-sheet-red-edge-linear",
+   "kind": "sprite",
+   "slot": 20,
+   "at": [
+    -2.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "red"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B6-backdrop",
+   "kind": "sprite",
+   "slot": 21,
+   "at": [
+    36.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    32.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B6-alpha-linear-2x",
+   "kind": "sprite",
+   "slot": 22,
+   "at": [
+    36.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "alpha"
+   ],
+   "size": [
+    32.0,
+    16.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B7-backdrop",
+   "kind": "sprite",
+   "slot": 23,
+   "at": [
+    76.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    32.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B7-alpha-nearest-2x",
+   "kind": "sprite",
+   "slot": 24,
+   "at": [
+    76.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "alpha"
+   ],
+   "size": [
+    32.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B8-tint-color",
+   "kind": "sprite",
+   "slot": 25,
+   "at": [
+    106.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    0.6,
+    0.3,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B9-backdrop-ring",
+   "kind": "sprite",
+   "slot": 26,
+   "at": [
+    136.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "ring"
+   ],
+   "size": [
+    30.0,
+    30.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": -1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "B9-tint-alpha-half",
+   "kind": "sprite",
+   "slot": 27,
+   "at": [
+    136.0,
+    30.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    0.5
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C1-arrow",
+   "kind": "sprite",
+   "slot": 28,
+   "at": [
+    -144.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C2-arrow-flip-x",
+   "kind": "sprite",
+   "slot": 29,
+   "at": [
+    -116.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C3-arrow-flip-y",
+   "kind": "sprite",
+   "slot": 30,
+   "at": [
+    -88.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    true
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C4-arrow-flip-xy",
+   "kind": "sprite",
+   "slot": 31,
+   "at": [
+    -60.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    true
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C5-mirror-parent",
+   "kind": "group",
+   "slot": 32,
+   "at": [
+    -32.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    -1.0,
+    1.0
+   ],
+   "parent": null
+  },
+  {
+   "name": "C5-arrow-mirrored",
+   "kind": "sprite",
+   "slot": 33,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": "C5-mirror-parent",
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C6-mirror-parent",
+   "kind": "group",
+   "slot": 34,
+   "at": [
+    -4.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    -1.0,
+    1.0
+   ],
+   "parent": null
+  },
+  {
+   "name": "C6-arrow-mirrored-flip-x",
+   "kind": "sprite",
+   "slot": 35,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": "C6-mirror-parent",
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    true,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C7-arrow-rot90",
+   "kind": "sprite",
+   "slot": 36,
+   "at": [
+    24.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.7071067811865475,
+    0.7071067811865476
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C8-arrow-rot180",
+   "kind": "sprite",
+   "slot": 37,
+   "at": [
+    52.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C9-arrow-rot30-nearest",
+   "kind": "sprite",
+   "slot": 38,
+   "at": [
+    82.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.25881904510252074,
+    0.9659258262890683
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C10-arrow-rot45-linear",
+   "kind": "sprite",
+   "slot": 39,
+   "at": [
+    114.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.3826834323650898,
+    0.9238795325112867
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "C11-shear-parent",
+   "kind": "group",
+   "slot": 40,
+   "at": [
+    142.0,
+    -8.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.25,
+    0.75
+   ],
+   "parent": null
+  },
+  {
+   "name": "C11-arrow-sheared",
+   "kind": "sprite",
+   "slot": 41,
+   "at": [
+    0.0,
+    0.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.17364817766693033,
+    0.984807753012208
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": "C11-shear-parent",
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "D1-nine-nearest",
+   "kind": "sprite",
+   "slot": 42,
+   "at": [
+    -136.0,
+    -50.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "nine"
+   ],
+   "size": [
+    40.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "nine_slice",
+    "border": [
+     3,
+     3,
+     3,
+     3
+    ],
+    "pixels_per_unit": 16.0
+   }
+  },
+  {
+   "name": "D2-nine-linear",
+   "kind": "sprite",
+   "slot": 43,
+   "at": [
+    -90.0,
+    -50.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "nine"
+   ],
+   "size": [
+    40.0,
+    16.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "nine_slice",
+    "border": [
+     3,
+     3,
+     3,
+     3
+    ],
+    "pixels_per_unit": 16.0
+   }
+  },
+  {
+   "name": "D3-nine-compressed",
+   "kind": "sprite",
+   "slot": 44,
+   "at": [
+    -62.0,
+    -50.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "nine"
+   ],
+   "size": [
+    4.0,
+    12.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "nine_slice",
+    "border": [
+     3,
+     3,
+     3,
+     3
+    ],
+    "pixels_per_unit": 16.0
+   }
+  },
+  {
+   "name": "E1-order-blue-l0-o0",
+   "kind": "sprite",
+   "slot": 45,
+   "at": [
+    -34.0,
+    -56.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "blue"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E1-order-red-l1",
+   "kind": "sprite",
+   "slot": 46,
+   "at": [
+    -46.0,
+    -44.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "sheet",
+   "region": [
+    "pixels",
+    "red"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 1,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E1-order-green-l0-o5",
+   "kind": "sprite",
+   "slot": 47,
+   "at": [
+    -40.0,
+    -50.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t0"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 5,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E2-tie-first",
+   "kind": "sprite",
+   "slot": 48,
+   "at": [
+    -14.0,
+    -46.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t1"
+   ],
+   "size": [
+    12.0,
+    12.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E2-tie-second",
+   "kind": "sprite",
+   "slot": 49,
+   "at": [
+    -8.0,
+    -52.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t3"
+   ],
+   "size": [
+    12.0,
+    12.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E3-occluder",
+   "kind": "mesh",
+   "slot": 50,
+   "at": [
+    52.0,
+    -50.0
+   ],
+   "z": 0.5,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null
+  },
+  {
+   "name": "E3-behind",
+   "kind": "sprite",
+   "slot": 51,
+   "at": [
+    32.0,
+    -50.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E3-front",
+   "kind": "sprite",
+   "slot": 52,
+   "at": [
+    66.0,
+    -50.0
+   ],
+   "z": 1.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "arrow"
+   ],
+   "size": [
+    24.0,
+    24.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E3-piercing-yaw70",
+   "kind": "sprite",
+   "slot": 53,
+   "at": [
+    52.0,
+    -50.0
+   ],
+   "z": 0.5,
+   "rotation": [
+    0.0,
+    0.573576436351046,
+    0.0,
+    0.8191520442889918
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "ring"
+   ],
+   "size": [
+    30.0,
+    30.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E3-translucent-front",
+   "kind": "sprite",
+   "slot": 54,
+   "at": [
+    38.0,
+    -38.0
+   ],
+   "z": 1.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "checker"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "nearest",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    0.5
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  },
+  {
+   "name": "E4-linear-behind-mesh",
+   "kind": "sprite",
+   "slot": 55,
+   "at": [
+    84.0,
+    -42.0
+   ],
+   "z": 0.0,
+   "rotation": [
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "scale": [
+    1.0,
+    1.0
+   ],
+   "parent": null,
+   "texture": "atlas",
+   "region": [
+    "frame",
+    "t2"
+   ],
+   "size": [
+    16.0,
+    16.0
+   ],
+   "sampling": "linear",
+   "flip": [
+    false,
+    false
+   ],
+   "tint": [
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "layer": 0,
+   "order": 0,
+   "mode": {
+    "kind": "simple"
+   }
+  }
+ ],
+ "ids": {
+  "camera-pp": "01JA62AE000000000000000001",
+  "camera-ortho": "01JA62AE000000000000000002",
+  "camera-persp": "01JA62AE000000000000000003",
+  "A1-nearest-1x": "01JA62AE000000000000000004",
+  "A2-nearest-2x": "01JA62AE000000000000000005",
+  "A3-nearest-2.5x": "01JA62AE000000000000000006",
+  "A4-linear-4x": "01JA62AE000000000000000007",
+  "A5-linear-0.5x": "01JA62AE000000000000000008",
+  "A6-nearest-2x-tie": "01JA62AE000000000000000009",
+  "A7-nearest-2x-tie-flipped": "01JA62AE00000000000000000A",
+  "A8-nearest-3x-rot90": "01JA62AE00000000000000000B",
+  "A9-nearest-3x-rot30": "01JA62AE00000000000000000C",
+  "A10-linear-3x-rot30": "01JA62AE00000000000000000D",
+  "A11-nearest-3x-yaw60": "01JA62AE00000000000000000E",
+  "A12-linear-3x-yaw60": "01JA62AE00000000000000000F",
+  "B1-ring-nearest-3x": "01JA62AE00000000000000000G",
+  "B2-ring-linear-3x": "01JA62AE00000000000000000H",
+  "B3-sheet-middle-linear-2x": "01JA62AE00000000000000000J",
+  "B4-sheet-middle-nearest-2x": "01JA62AE00000000000000000K",
+  "B5-sheet-red-edge-linear": "01JA62AE00000000000000000M",
+  "B6-backdrop": "01JA62AE00000000000000000N",
+  "B6-alpha-linear-2x": "01JA62AE00000000000000000P",
+  "B7-backdrop": "01JA62AE00000000000000000Q",
+  "B7-alpha-nearest-2x": "01JA62AE00000000000000000R",
+  "B8-tint-color": "01JA62AE00000000000000000S",
+  "B9-backdrop-ring": "01JA62AE00000000000000000T",
+  "B9-tint-alpha-half": "01JA62AE00000000000000000V",
+  "C1-arrow": "01JA62AE00000000000000000W",
+  "C2-arrow-flip-x": "01JA62AE00000000000000000X",
+  "C3-arrow-flip-y": "01JA62AE00000000000000000Y",
+  "C4-arrow-flip-xy": "01JA62AE00000000000000000Z",
+  "C5-mirror-parent": "01JA62AE000000000000000010",
+  "C5-arrow-mirrored": "01JA62AE000000000000000011",
+  "C6-mirror-parent": "01JA62AE000000000000000012",
+  "C6-arrow-mirrored-flip-x": "01JA62AE000000000000000013",
+  "C7-arrow-rot90": "01JA62AE000000000000000014",
+  "C8-arrow-rot180": "01JA62AE000000000000000015",
+  "C9-arrow-rot30-nearest": "01JA62AE000000000000000016",
+  "C10-arrow-rot45-linear": "01JA62AE000000000000000017",
+  "C11-shear-parent": "01JA62AE000000000000000018",
+  "C11-arrow-sheared": "01JA62AE000000000000000019",
+  "D1-nine-nearest": "01JA62AE00000000000000001A",
+  "D2-nine-linear": "01JA62AE00000000000000001B",
+  "D3-nine-compressed": "01JA62AE00000000000000001C",
+  "E1-order-blue-l0-o0": "01JA62AE00000000000000001D",
+  "E1-order-red-l1": "01JA62AE00000000000000001E",
+  "E1-order-green-l0-o5": "01JA62AE00000000000000001F",
+  "E2-tie-first": "01JA62AE00000000000000001G",
+  "E2-tie-second": "01JA62AE00000000000000001H",
+  "E3-occluder": "01JA62AE00000000000000001J",
+  "E3-behind": "01JA62AE00000000000000001K",
+  "E3-front": "01JA62AE00000000000000001M",
+  "E3-piercing-yaw70": "01JA62AE00000000000000001N",
+  "E3-translucent-front": "01JA62AE00000000000000001P",
+  "E4-linear-behind-mesh": "01JA62AE00000000000000001Q"
+ },
+ "hex": {
+  "camera-pp": "01928c25380000000000000000000001",
+  "camera-ortho": "01928c25380000000000000000000002",
+  "camera-persp": "01928c25380000000000000000000003",
+  "A1-nearest-1x": "01928c25380000000000000000000004",
+  "A2-nearest-2x": "01928c25380000000000000000000005",
+  "A3-nearest-2.5x": "01928c25380000000000000000000006",
+  "A4-linear-4x": "01928c25380000000000000000000007",
+  "A5-linear-0.5x": "01928c25380000000000000000000008",
+  "A6-nearest-2x-tie": "01928c25380000000000000000000009",
+  "A7-nearest-2x-tie-flipped": "01928c2538000000000000000000000a",
+  "A8-nearest-3x-rot90": "01928c2538000000000000000000000b",
+  "A9-nearest-3x-rot30": "01928c2538000000000000000000000c",
+  "A10-linear-3x-rot30": "01928c2538000000000000000000000d",
+  "A11-nearest-3x-yaw60": "01928c2538000000000000000000000e",
+  "A12-linear-3x-yaw60": "01928c2538000000000000000000000f",
+  "B1-ring-nearest-3x": "01928c25380000000000000000000010",
+  "B2-ring-linear-3x": "01928c25380000000000000000000011",
+  "B3-sheet-middle-linear-2x": "01928c25380000000000000000000012",
+  "B4-sheet-middle-nearest-2x": "01928c25380000000000000000000013",
+  "B5-sheet-red-edge-linear": "01928c25380000000000000000000014",
+  "B6-backdrop": "01928c25380000000000000000000015",
+  "B6-alpha-linear-2x": "01928c25380000000000000000000016",
+  "B7-backdrop": "01928c25380000000000000000000017",
+  "B7-alpha-nearest-2x": "01928c25380000000000000000000018",
+  "B8-tint-color": "01928c25380000000000000000000019",
+  "B9-backdrop-ring": "01928c2538000000000000000000001a",
+  "B9-tint-alpha-half": "01928c2538000000000000000000001b",
+  "C1-arrow": "01928c2538000000000000000000001c",
+  "C2-arrow-flip-x": "01928c2538000000000000000000001d",
+  "C3-arrow-flip-y": "01928c2538000000000000000000001e",
+  "C4-arrow-flip-xy": "01928c2538000000000000000000001f",
+  "C5-mirror-parent": "01928c25380000000000000000000020",
+  "C5-arrow-mirrored": "01928c25380000000000000000000021",
+  "C6-mirror-parent": "01928c25380000000000000000000022",
+  "C6-arrow-mirrored-flip-x": "01928c25380000000000000000000023",
+  "C7-arrow-rot90": "01928c25380000000000000000000024",
+  "C8-arrow-rot180": "01928c25380000000000000000000025",
+  "C9-arrow-rot30-nearest": "01928c25380000000000000000000026",
+  "C10-arrow-rot45-linear": "01928c25380000000000000000000027",
+  "C11-shear-parent": "01928c25380000000000000000000028",
+  "C11-arrow-sheared": "01928c25380000000000000000000029",
+  "D1-nine-nearest": "01928c2538000000000000000000002a",
+  "D2-nine-linear": "01928c2538000000000000000000002b",
+  "D3-nine-compressed": "01928c2538000000000000000000002c",
+  "E1-order-blue-l0-o0": "01928c2538000000000000000000002d",
+  "E1-order-red-l1": "01928c2538000000000000000000002e",
+  "E1-order-green-l0-o5": "01928c2538000000000000000000002f",
+  "E2-tie-first": "01928c25380000000000000000000030",
+  "E2-tie-second": "01928c25380000000000000000000031",
+  "E3-occluder": "01928c25380000000000000000000032",
+  "E3-behind": "01928c25380000000000000000000033",
+  "E3-front": "01928c25380000000000000000000034",
+  "E3-piercing-yaw70": "01928c25380000000000000000000035",
+  "E3-translucent-front": "01928c25380000000000000000000036",
+  "E4-linear-behind-mesh": "01928c25380000000000000000000037"
+ },
+ "units": "lp = 1/16 m; pixel-perfect camera 320x180 lp at 3x",
+ "final_tick": 48
+}
