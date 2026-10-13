@@ -26,7 +26,8 @@ successful command receipts, 2,030 input hashes, eight source identities, exact
 report comparisons and lossless process/PCM records. Copied authoring media and
 caches remain externally hash-bound at their private proof paths. The prior
 [producer review](evidence/core-result-hud-main192/producer-review.json) is retained
-verbatim. Final current-main independent review is pending.
+verbatim. [Final current-main independent review](evidence/core-result-hud-main192/final-review.json)
+is accepted. Publication still requires the exact-head fast check.
 
 No GPU, window, phone, performance or phase gate is implied. Whole-session restart
 of this physics game is not physics checkpoint save/restore. The optional fixture

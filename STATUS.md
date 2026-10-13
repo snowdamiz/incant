@@ -49,8 +49,8 @@ phone, performance, complete-renderer or phase gates. Older milestone narratives
 below are historical integration snapshots, not the current queue.
 
 Safe Core live-HUD changes are merged in PR192. The optional result-label and won-objective
-correction has passed current-main192 public native checks and is awaiting independent
-integration review. Original source-free shipping remains producer-scoped; no new
+correction has passed current-main192 public native checks and independent
+integration review; publication awaits its exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
 ## Cooked renderer integration — CPU checks complete
