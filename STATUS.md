@@ -64,7 +64,7 @@ complete producer execution packet has independent final acceptance. The compose
 main181 runtime now passes nine checks, two fresh simulator archives, twelve actual
 C/Swift positives and thirty-two precise refusals. Both current device target
 compilations pass; original unsigned device links remain producer-scoped. Final
-integration review and publication remain pending.
+integration review is accepted; publication requires the exact-head fast check.
 [Current integration evidence](docs/spikes/authored-ios-physics-main181.md).
 No phone, performance, rendered-output, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-ios-physics-modes.md).
@@ -929,8 +929,8 @@ whole-session restart is merged in main180 and bounded PCM in main181. Both auth
 Android variants pass preserved pre-PCM archive/emulator proofs; the final composed
 deterministic archive and both-mode mobile/target checks pass, with independent
 integration review and the exact-head fast check passed; Android is merged in main182.
-The composed iOS fixed-mode simulator proof is complete and awaits final integration
-review. Core authored HUD/audio/restart bindings are independently accepted locally
+The composed iOS fixed-mode simulator proof and final integration review are
+complete; its required fast check remains ahead. Core authored HUD/audio/restart bindings are independently accepted locally
 and queued; their new live presentation acceptance remains separate. Phase 1 and the finished game
 remain incomplete.
 

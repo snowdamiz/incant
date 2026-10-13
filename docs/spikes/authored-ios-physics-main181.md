@@ -8,7 +8,7 @@ accepted producer `818ff1b2`; the original producer execution is retained separa
 Current tested source is `6b1724690f80b5fdd979dfc166b9dda0194958cc`, containing main181
 PCM and restart plus the reviewed Android admission. Actual main182 ancestry was
 joined at `d50e01458ff63175e2940b09cf9504964dd445b2`; that join changes documentation
-only. Final integration review and the required fast check remain pending.
+only. Final integration review is accepted; publication requires the exact-head fast check.
 
 ## Current execution
 
@@ -49,3 +49,8 @@ Actual CPU execution was on the local ARM iOS 27.0 simulator. Minimum-OS executi
 physical-phone performance, rendering, mobile presentation/audio hosts, signing
 and phase approval remain open. Static Wasm iOS export is a separate follow-on;
 Android static modules remain refused.
+
+The [independent final review](evidence/authored-ios-physics-main181/final-review.json),
+SHA-256 `e493835e469eb6b36a89247dbb0db1d4b3e977adf539b42ce04869fdbd9be5f8`,
+accepts manifest `170dfb13f2797bc23642f263e313704859b9e0d3e7bdf77187451523d8ba8150`.
+The manifest's pending-review field records its preserved capture-time state.
