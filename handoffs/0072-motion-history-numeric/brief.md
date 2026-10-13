@@ -1,3 +1,36 @@
+# Priority revision: execute corrected fixed-temporal review now
+
+Root finished and verified the build at source 535003d7, exact 2448 build inputs,
+fixture compilation and strict Clippy both successful, every build child reaped.
+CPU target was released. The reviewed visual tree is 53fd64b6ec2ddaef1cd1802e04411d7672d06c5e;
+root's 6986cb04 change only propagates a failed lint exit (synthetic 101 verified).
+The fixture remains byte-comparable apart from the original unused-mut removal.
+
+Use Claude Opus 5.5 through ACP, explicitly verified Max. You now own the sole GPU
+interval; 0069 released at 08:42:26Z, with eight children reaped. Read the grant:
+/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-corrected-001/review-ready.json
+SHA256 4fa5101f64cadaf4e16b402afc3165e9af4080c5c7a214993e57a112f6e2c7c0.
+Build record eebd5b3be9e1233bc6ba9273323e67408e8cb9f051b33e45267f3e30151d99a9; root review cc962b22a9c5c46908235bb7256614dd0cb8c94a27e7a5f52943a1ae6eb53832.
+No builds or target use. Use the already frozen binaries, including the library
+binary named in the authority; do not build libtests.
+
+Run in foreground, serially and once: gpu.py list lib; gpu.py numeric; gpu.py list
+review; then gpu.py review for probe, stationary, motion, excluded, transitions,
+skinned and timing in that order. Scripts are under this packet's visual/tools;
+use python3 -I -B. Stop on any failure and always gpu.py release. No retry or
+policy/source changes. Total93 submissions (14 numeric+79 review),14 PNGs;
+hard ceilings128/16,960x540. The previous failed run remains untouched.
+
+After release run analyze.py check, inspect every image personally against the
+original rejection, and publish only if the integrity/contracts analysis passes.
+Write corrected-visual-result.md with separate numerical and appearance verdicts,
+exact source, files, frame counts, release and limitations. Commit only new packet
+results/evidence with Built-by: claude; no pushes/PRs. No memory writes, desktop
+capture, window or device audio. If fixed-mode quality still fails, give a concrete
+repair brief without changing this frozen run. No phone/performance/phase claim.
+
+---
+
 # Priority revision — corrected temporal follow-up, preparation only
 
 The previous visual rejection is retained and has driven an actual engine fix.
