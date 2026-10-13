@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main192, 2026-10-13
+## Current overview — main193, 2026-10-13
 
-Development main192 includes the restart quota-test repair (PR188) and the reviewed,
+Development main193 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -32,10 +32,11 @@ quota repair preserves production's 50 ms budget, and the reviewed player probe
 correction is merged in PR191. Checkpoint18 is frozen at the exact main191 tree;
 all 23 requirements must pass before release promotion.
 No release or phase approval follows from a main merge.
-Checkpoint18 Linux and Windows desktop jobs both fail compiling the editor test
+Checkpoint18 Linux, Windows and macOS checks fail compiling the editor test
 that reuses a renderer helper without its root type alias. The [test-only repair](docs/spikes/editor-renderer-import.md)
-passes local compile/CPU/Clippy checks and final review; production and backend
-assertions are unchanged. Other candidate jobs continue without an advance.
+is merged in PR193 after local compile/CPU/Clippy, independent review and fast checks;
+production and backend assertions are unchanged. Other candidate jobs continue
+without an advance.
 
 Android static-Wasm integration is merged in PR190 after independent source-relevance
 review and the fast check. Current CPU/public preflights and both-mode target compile/

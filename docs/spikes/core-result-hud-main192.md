@@ -33,3 +33,9 @@ No GPU, window, phone, performance or phase gate is implied. Whole-session resta
 of this physics game is not physics checkpoint save/restore. The optional fixture
 reuses approved controls solely to test binding behavior; its appearance is not
 approved by these CPU results.
+
+Actual main193 adds only the separately accepted editor integration-test import
+and backend assertion in the compiled-input scope. The [qualification](evidence/core-result-hud-main192/main193-qualification.json)
+binds both exact Git blobs and replays the original collector with that single
+explicit exception; the original proof receipts are unchanged. No additional
+runtime test or build is claimed for this disjoint test-only ancestry merge.
