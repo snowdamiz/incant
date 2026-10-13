@@ -1,0 +1,2 @@
+   Compiling incant_render v0.0.1 (/Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/crates/incant_render)
+    Finished `ci` profile [optimized] target(s) in 1.37s

@@ -1,0 +1,16 @@
+{
+  "packet": "0068-gpu-timestamps-r2",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "source_commit": "f33495b2211ac37f172cd83e2552b2041df2357f",
+  "prior_latest_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal/gpu-released.json",
+  "prior_latest_release_sha256": "97ff128385d2644e753cd822da3eb03e66722795f1d00a7c857eb0901fab7694",
+  "prior_target_lease_path": "/Users/andreyyurlov/.codex/incant-evidence/0068/target-lease.json",
+  "prior_target_lease_sha256": "bb32a2419e3b892894e2bec7686ab542cabe5e714cdc97122b62286788397453",
+  "approved_extra_cases": [
+    "owner_drop"
+  ],
+  "appearance_frames_max": 24,
+  "numeric_submissions_max": 48,
+  "source_review_path": "/Users/andreyyurlov/.codex/incant-reviews/gpu-timestamps-r2-prep-final-20261013.json",
+  "source_review_sha256": "fe2bef3f4381f2c9e6564529988c9f6dbc9efa7283b85edf916240a567d76346"
+}

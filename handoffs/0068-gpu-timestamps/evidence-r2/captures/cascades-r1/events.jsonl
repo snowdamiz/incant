@@ -1,0 +1,11 @@
+{"case":"cascades","event":"open","frame_limit":3,"submission_limit":4}
+{"event":"frame","index":1,"name":"off-shadowed","timed":false}
+{"event":"frame-read","name":"off-shadowed","rgba_sha256":"a925856cd67f9722436dca8213e7679511f0fd88e02a71b184c74d3b4fb9b6aa","settle_polls":0,"stats":{"abandoned":0,"enabled":false,"pending":0,"ready":0,"retired":0,"skipped":0}}
+{"event":"frame","index":2,"name":"on-shadowed","timed":true}
+{"event":"frame-read","name":"on-shadowed","rgba_sha256":"a925856cd67f9722436dca8213e7679511f0fd88e02a71b184c74d3b4fb9b6aa","settle_polls":2,"stats":{"abandoned":0,"enabled":true,"pending":0,"ready":1,"retired":0,"skipped":0}}
+{"event":"frame","index":3,"name":"on-unshadowed","timed":true}
+{"event":"frame-read","name":"on-unshadowed","rgba_sha256":"238998165166a06376fe755f3bf68f19452de30a430abc86c21b250cdc2c6103","settle_polls":2,"stats":{"abandoned":0,"enabled":true,"pending":0,"ready":1,"retired":0,"skipped":0}}
+{"event":"png","png":{"name":"cascades-off.png","rgba_sha256":"a925856cd67f9722436dca8213e7679511f0fd88e02a71b184c74d3b4fb9b6aa","sha256":"7049cf0a3a272d273ca8f1bdf14c9d72bb52d9df3117636ef9b7ae36eff2d989"}}
+{"event":"png","png":{"name":"cascades-on.png","rgba_sha256":"a925856cd67f9722436dca8213e7679511f0fd88e02a71b184c74d3b4fb9b6aa","sha256":"7049cf0a3a272d273ca8f1bdf14c9d72bb52d9df3117636ef9b7ae36eff2d989"}}
+{"event":"png","png":{"name":"cascades-on-unshadowed.png","rgba_sha256":"238998165166a06376fe755f3bf68f19452de30a430abc86c21b250cdc2c6103","sha256":"2dd1d970bdf9e4ca678180530fb076a0a36e9491847d2c28c2acb82cc9392b13"}}
+{"event":"finish","pass":true}

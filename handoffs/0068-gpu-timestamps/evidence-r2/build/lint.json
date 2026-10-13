@@ -1,0 +1,61 @@
+{
+ "tools": {
+  "head": "e89385307a4680cafc9dcfa32864141c7f3b7882",
+  "plan_sha256": "8183d41e6cb5b21f8cff6d875393eea14a6a104f14b878e79e872646be3859be",
+  "helper_sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca"
+ },
+ "source": {
+  "commit": "f33495b2211ac37f172cd83e2552b2041df2357f",
+  "tree": "bb4d232286376c85b7f34595b402df2694fdf309",
+  "files": 17860,
+  "manifest_sha256": "346ec0b7b1adb29189ccba7eb79ab255c5b80ba24fe831638d0cc57489048b33",
+  "helper_copy_sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca"
+ },
+ "label": "lint",
+ "kind": "build",
+ "argv": [
+  "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/tools/cargo",
+  "clippy",
+  "-p",
+  "incant_render",
+  "--test",
+  "gpu_timestamp_review",
+  "--locked",
+  "--offline",
+  "--profile",
+  "ci",
+  "-j2",
+  "--message-format=json-render-diagnostics",
+  "--",
+  "-D",
+  "warnings"
+ ],
+ "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout",
+ "env": {
+  "inherited_keys_values_not_recorded": [
+   "HOME"
+  ],
+  "overrides": {
+   "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+   "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+   "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/tmp/lint",
+   "CARGO_TERM_COLOR": "never",
+   "RUSTUP_AUTO_INSTALL": "0"
+  }
+ },
+ "pid": 47204,
+ "started": "2026-10-13T06:14:46.311074+00:00",
+ "ended": "2026-10-13T06:14:51.928340+00:00",
+ "exit": 0,
+ "timed_out": false,
+ "wait_error": null,
+ "timeout_s": 2700,
+ "group_empty_after": true,
+ "frames_reserved": 0,
+ "submissions_reserved": 0,
+ "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/logs/build-lint.stdout.jsonl",
+ "stdout_sha256": "f6abc14a0f983ee89bf836641f809215124dd1a76c8a5d05d1423402bae12b78",
+ "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/logs/build-lint.stderr.txt",
+ "stderr_sha256": "1699bb648b6308b09fb335558b687d285a6aac5d6afa672e2b3e27780c672e97",
+ "recorded": "2026-10-13T06:14:51.928762+00:00"
+}

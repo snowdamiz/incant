@@ -1,0 +1,81 @@
+{
+ "packet": "0068-gpu-timestamps-r2",
+ "holder": "claude (Opus 5.5, Max thinking) for handoff 0068 r2",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "Astra via review-ready.json",
+ "grant_sha256": "50caea4b417232665a1fc75926ad7e4d9d897cf2f08e5544d7abcd8d3d28ee29",
+ "grant": {
+  "packet": "0068-gpu-timestamps-r2",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "source_commit": "f33495b2211ac37f172cd83e2552b2041df2357f",
+  "prior_latest_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal/gpu-released.json",
+  "prior_latest_release_sha256": "97ff128385d2644e753cd822da3eb03e66722795f1d00a7c857eb0901fab7694",
+  "prior_target_lease_path": "/Users/andreyyurlov/.codex/incant-evidence/0068/target-lease.json",
+  "prior_target_lease_sha256": "bb32a2419e3b892894e2bec7686ab542cabe5e714cdc97122b62286788397453",
+  "approved_extra_cases": [
+   "owner_drop"
+  ],
+  "appearance_frames_max": 24,
+  "numeric_submissions_max": 48,
+  "source_review_path": "/Users/andreyyurlov/.codex/incant-reviews/gpu-timestamps-r2-prep-final-20261013.json",
+  "source_review_sha256": "fe2bef3f4381f2c9e6564529988c9f6dbc9efa7283b85edf916240a567d76346"
+ },
+ "prior_receipts": {
+  "pins": {
+   "latest_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal/gpu-released.json",
+    "expected": "97ff128385d2644e753cd822da3eb03e66722795f1d00a7c857eb0901fab7694",
+    "sha256": "97ff128385d2644e753cd822da3eb03e66722795f1d00a7c857eb0901fab7694"
+   },
+   "target_lease": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0068/target-lease.json",
+    "expected": "bb32a2419e3b892894e2bec7686ab542cabe5e714cdc97122b62286788397453",
+    "sha256": "bb32a2419e3b892894e2bec7686ab542cabe5e714cdc97122b62286788397453"
+   }
+  },
+  "release_pin": "latest_release",
+  "release_body": {
+   "packet": "0072-motion-history-numeric",
+   "at": "2026-10-13T05:52:05.299645+00:00",
+   "children": 0,
+   "owned_processes": [],
+   "ledger_pids_alive": [],
+   "ledger_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "target": "none; precompiled frozen binaries only",
+   "system": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "machine": "arm64",
+    "mac_ver": "27.0.1"
+   }
+  },
+  "release_alive_fields": {
+   "owned_processes": [],
+   "ledger_pids_alive": []
+  }
+ },
+ "tools": {
+  "head": "e89385307a4680cafc9dcfa32864141c7f3b7882",
+  "plan_sha256": "8183d41e6cb5b21f8cff6d875393eea14a6a104f14b878e79e872646be3859be",
+  "helper_sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca"
+ },
+ "brief_sha256": "0fb286c62335f965f1ed1ef91c182f08a9fdab02317ad284867dc58b52348940",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/physics-character/incant/.worktrees/0068-gpu-timestamps",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout",
+ "acquired_at": "2026-10-13T06:08:49.882729+00:00",
+ "processes_on_target_at_acquire": [],
+ "global_lock_free_at_acquire": true,
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2",
+  "builds from the git-archive child checkout of the granted commit only",
+  "one bounded process group at a time under the global native-gpu.lock and the packet flock",
+  "serial offscreen GPU children; no window, desktop/browser capture, audio or accounts",
+  "<= 24 new appearance frames (<= 960x540), <= 48 new numeric submissions, debited before launch",
+  "existing suites <= 300 s, added numeric/capture processes <= 120 s",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0068-r2",
+  "never root's /Users/andreyyurlov/.codex/incant-gpu-timestamps-target or another agent's target"
+ ],
+ "released_at": "2026-10-13T06:15:09.636998+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0068-r2 cargo/rustc process or frozen binary remains on the target. Contents left in place as warm cache; nothing deleted. Frozen binaries live under /Users/andreyyurlov/.codex/incant-evidence/0068-r2/bin"
+}

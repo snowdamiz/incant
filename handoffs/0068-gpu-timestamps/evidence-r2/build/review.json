@@ -1,0 +1,143 @@
+{
+ "tools": {
+  "head": "e89385307a4680cafc9dcfa32864141c7f3b7882",
+  "plan_sha256": "8183d41e6cb5b21f8cff6d875393eea14a6a104f14b878e79e872646be3859be",
+  "helper_sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca"
+ },
+ "source": {
+  "commit": "f33495b2211ac37f172cd83e2552b2041df2357f",
+  "tree": "bb4d232286376c85b7f34595b402df2694fdf309",
+  "files": 17860,
+  "manifest_sha256": "346ec0b7b1adb29189ccba7eb79ab255c5b80ba24fe831638d0cc57489048b33",
+  "helper_copy_sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca"
+ },
+ "helper_sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca",
+ "helper_copy": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/crates/incant_render/tests/gpu_timestamp_review.rs",
+ "frozen": {
+  "gpu_timestamp_review": {
+   "path": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/bin/review/gpu_timestamp_review",
+   "sha256": "7cc9405ee3eb7a82f472344b4c55616f0b905e053ebdc9e4e5c32b60bf0e6ced",
+   "bytes": 17870088,
+   "built_from": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/gpu_timestamp_review-ed879bf19d401594",
+   "fresh": false,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/crates/incant_render#0.0.1"
+  }
+ },
+ "library_same_as_tests_render": true,
+ "incant_render_library": [
+  {
+   "target": "incant_render",
+   "kind": [
+    "lib"
+   ],
+   "test": false,
+   "fresh": true,
+   "executable": null,
+   "features": [
+    "default",
+    "physics-deterministic"
+   ],
+   "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/crates/incant_render#0.0.1",
+   "filenames": {
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "a680a39a7f012fd731c74f7a26a14a7b14113f02754ac12a619cb7124de8d858",
+    "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "41b9b5503b617e9f9cc69fd2a67d56f0ba03212b32ebda4c935359d96fa8c3c8"
+   }
+  }
+ ],
+ "builds": [
+  {
+   "label": "review",
+   "kind": "build",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/tools/cargo",
+    "test",
+    "-p",
+    "incant_render",
+    "--test",
+    "gpu_timestamp_review",
+    "--no-run",
+    "--locked",
+    "--offline",
+    "--profile",
+    "ci",
+    "-j2",
+    "--message-format=json-render-diagnostics"
+   ],
+   "cwd": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout",
+   "env": {
+    "inherited_keys_values_not_recorded": [
+     "HOME"
+    ],
+    "overrides": {
+     "PATH": "/opt/homebrew/opt/rustup/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+     "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+     "TMPDIR": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/tmp/review",
+     "CARGO_TERM_COLOR": "never",
+     "RUSTUP_AUTO_INSTALL": "0"
+    }
+   },
+   "pid": 45064,
+   "started": "2026-10-13T06:11:17.669739+00:00",
+   "ended": "2026-10-13T06:11:19.134227+00:00",
+   "exit": 0,
+   "timed_out": false,
+   "wait_error": null,
+   "timeout_s": 2700,
+   "group_empty_after": true,
+   "frames_reserved": 0,
+   "submissions_reserved": 0,
+   "stdout": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/logs/build-review.stdout.jsonl",
+   "stdout_sha256": "035f5197cfcc9febc37f87f5143b73273b15f68ec36ca022a50cb738cd26090c",
+   "stderr": "/Users/andreyyurlov/.codex/incant-evidence/0068-r2/logs/build-review.stderr.txt",
+   "stderr_sha256": "c7d0ece611d7e1ec1b35e6ce9dae752041afad3dfa733365cfa8a4d18dc3e755",
+   "artifacts": [
+    {
+     "target": "incant_render",
+     "kind": [
+      "lib"
+     ],
+     "test": false,
+     "fresh": true,
+     "executable": null,
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rlib": "a680a39a7f012fd731c74f7a26a14a7b14113f02754ac12a619cb7124de8d858",
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/libincant_render-acc3d1929421bfc9.rmeta": "41b9b5503b617e9f9cc69fd2a67d56f0ba03212b32ebda4c935359d96fa8c3c8"
+     }
+    },
+    {
+     "target": "gpu_timestamp_review",
+     "kind": [
+      "test"
+     ],
+     "test": true,
+     "fresh": false,
+     "executable": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/gpu_timestamp_review-ed879bf19d401594",
+     "features": [
+      "default",
+      "physics-deterministic"
+     ],
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/crates/incant_render#0.0.1",
+     "filenames": {
+      "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/gpu_timestamp_review-ed879bf19d401594": "7cc9405ee3eb7a82f472344b4c55616f0b905e053ebdc9e4e5c32b60bf0e6ced"
+     }
+    }
+   ],
+   "incant_render_build_scripts": [
+    {
+     "package_id": "path+file:///Users/andreyyurlov/.codex/incant-evidence/0068-r2/checkout/crates/incant_render#0.0.1",
+     "out_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/build/incant_render-be2e656a0969e5af/out"
+    }
+   ]
+  }
+ ],
+ "recorded": "2026-10-13T06:11:19.167194+00:00"
+}

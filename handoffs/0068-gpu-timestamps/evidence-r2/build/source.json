@@ -1,0 +1,79 @@
+{
+ "grant_sha256": "50caea4b417232665a1fc75926ad7e4d9d897cf2f08e5544d7abcd8d3d28ee29",
+ "tools": {
+  "head": "e89385307a4680cafc9dcfa32864141c7f3b7882",
+  "plan_sha256": "8183d41e6cb5b21f8cff6d875393eea14a6a104f14b878e79e872646be3859be",
+  "helper_sha256": "563a3fc58bbc9c71e5455c54808a79fcdf975d5a5c376ac2b33de94bf59968ca"
+ },
+ "source_commit": "f33495b2211ac37f172cd83e2552b2041df2357f",
+ "tree": "bb4d232286376c85b7f34595b402df2694fdf309",
+ "files": 17860,
+ "checkout_manifest_sha256": "346ec0b7b1adb29189ccba7eb79ab255c5b80ba24fe831638d0cc57489048b33",
+ "freeze": {
+  "path": "docs/spikes/evidence/gpu-timestamps-main200/freeze.json",
+  "sha256": "12f944544ba416fa546487a9bbf57bd26c27168f16ecc74d0a9cb56430b67e45",
+  "head": "ed341fa5a1fab0c8d2dc3e157efffceb370f0125",
+  "inputs": 2879,
+  "verified": 2879,
+  "differing": []
+ },
+ "tested_head": "ed341fa5a1fab0c8d2dc3e157efffceb370f0125",
+ "tested_head_is_ancestor_or_same": true,
+ "build_input_diff_from_tested_head": "",
+ "cargo_lock_sha256": "176512af279587109f7ae30b51433a79cec6c771bb5adb8c226af1717c02dedf",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "ignore_attributes": {
+  "incant_render (lib + model_gpu)": {
+   "total": 86,
+   "files": {
+    "crates/incant_render/src/animation_tests.rs": 2,
+    "crates/incant_render/src/flipbook_tests.rs": 1,
+    "crates/incant_render/src/retained_native_tests.rs": 1,
+    "crates/incant_render/src/retained_sprite_tests.rs": 1,
+    "crates/incant_render/src/retained_tests.rs": 6,
+    "crates/incant_render/src/retained_tilemap_tests.rs": 1,
+    "crates/incant_render/src/text_draw_tests.rs": 2,
+    "crates/incant_render/src/text_native_tests.rs": 1,
+    "crates/incant_render/src/text_retained_tests.rs": 3,
+    "crates/incant_render/src/timing/gpu_tests.rs": 1,
+    "crates/incant_render/src/ui_draw_tests.rs": 5,
+    "crates/incant_render/src/version_tests.rs": 1,
+    "crates/incant_render/tests/cameras/mod.rs": 4,
+    "crates/incant_render/tests/cameras/orthographic.rs": 3,
+    "crates/incant_render/tests/cameras/pixel_perfect.rs": 3,
+    "crates/incant_render/tests/color_roles/mod.rs": 2,
+    "crates/incant_render/tests/diagnostic_output/mod.rs": 1,
+    "crates/incant_render/tests/environments/mod.rs": 4,
+    "crates/incant_render/tests/frame_graph/mod.rs": 2,
+    "crates/incant_render/tests/hdr_output/mod.rs": 2,
+    "crates/incant_render/tests/lighting_gpu/extended.rs": 1,
+    "crates/incant_render/tests/lighting_gpu/mod.rs": 3,
+    "crates/incant_render/tests/lights/coverage.rs": 3,
+    "crates/incant_render/tests/lights/masks.rs": 2,
+    "crates/incant_render/tests/lights/mod.rs": 4,
+    "crates/incant_render/tests/model_gpu.rs": 7,
+    "crates/incant_render/tests/persistent_cache.rs": 1,
+    "crates/incant_render/tests/pipeline_warmup/mod.rs": 1,
+    "crates/incant_render/tests/shadows/coverage.rs": 2,
+    "crates/incant_render/tests/shadows/lookdev.rs": 1,
+    "crates/incant_render/tests/shadows/mod.rs": 3,
+    "crates/incant_render/tests/shadows/normal_offset.rs": 1,
+    "crates/incant_render/tests/shadows/queued.rs": 1,
+    "crates/incant_render/tests/sprites/atlas.rs": 1,
+    "crates/incant_render/tests/sprites/mod.rs": 4,
+    "crates/incant_render/tests/sprites/ties.rs": 2,
+    "crates/incant_render/tests/sprites/wide.rs": 1,
+    "crates/incant_render/tests/tangents/mod.rs": 1,
+    "crates/incant_render/tests/timestamp_backend_probe.rs": 1
+   }
+  },
+  "incant_render_gpu_host": {
+   "total": 7,
+   "files": {
+    "crates/incant_render_gpu_host/tests/game.rs": 5,
+    "crates/incant_render_gpu_host/tests/ui.rs": 2
+   }
+  }
+ },
+ "recorded": "2026-10-13T06:08:58.758357+00:00"
+}

@@ -1,0 +1,5 @@
+TIMESTAMP_PROBE_ADAPTER AdapterInfo { name: "Apple M5 Pro", vendor: 0, device: 0, device_type: IntegratedGpu, device_pci_bus_id: "", driver: "", driver_info: "", backend: Metal, subgroup_min_size: 4, subgroup_max_size: 64, transient_saves_memory: true }; period=1
+TIMESTAMP_PROBE {"descriptor":false,"later_resolve":false,"positive_interval":false,"resolve_changed":true,"ticks":[0,0],"values":[1956956480,2237716543],"work_rounds":64,"work_words":32768}
+TIMESTAMP_PROBE {"descriptor":false,"later_resolve":true,"positive_interval":false,"resolve_changed":true,"ticks":[0,0],"values":[1956956480,2237716543],"work_rounds":64,"work_words":32768}
+TIMESTAMP_PROBE {"descriptor":true,"later_resolve":false,"positive_interval":false,"resolve_changed":true,"ticks":[0,0],"values":[1956956480,2237716543],"work_rounds":64,"work_words":32768}
+TIMESTAMP_PROBE {"descriptor":true,"later_resolve":true,"positive_interval":true,"resolve_changed":true,"ticks":[56097961066916,56097961107375],"values":[1956956480,2237716543],"work_rounds":64,"work_words":32768}
