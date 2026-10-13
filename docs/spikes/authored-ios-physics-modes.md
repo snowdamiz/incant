@@ -99,3 +99,7 @@ There is no physical-phone, performance, rendered-output, mobile window/audio
 host, signing, store or phase-gate claim. Static Wasm mobile export remains
 unsupported. Current-main integration and final independent execution review
 are separate from this producer proof.
+
+## Retained final producer review
+
+The independent final audit is [retained verbatim](evidence/authored-ios-physics/final-review.json), SHA-256 `3610ba63a599b8ed994b8c96267e27cc2472a665f48d8ce2e5afaa652d93a21e`. It accepts the original main178-based producer archives and callers. The later Android, session-restart and streaming-PCM composition requires separately identified current-main checks; this receipt does not relabel those original binaries.

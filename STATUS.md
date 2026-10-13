@@ -26,8 +26,7 @@ remain intact. 75 CPU tests and scoped Clippy/static-module/graph checks pass.
 A fresh source/map/build-deleted Core package completes 2,156 ticks at 48 kHz
 (1,724,800 frames), repeats exactly and matches the prior player for its first
 1,000 ticks. Eight actual process controls cover the old refusal, diagnostic PCM,
-and precise publication errors. Independent source and final execution reviews are accepted; publisher
-integration is pending. No whole-engine memory, native-window,
+and precise publication errors. Independent source and final execution reviews are accepted; PR181 is merged after the exact-head fast check. No whole-engine memory, native-window,
 GPU or device/performance gate is claimed.
 [Contract and evidence](docs/spikes/native-streaming-pcm.md).
 
@@ -37,7 +36,7 @@ The ordinary player stages bounded per-tick PCM and hashes incrementally. Curren
 validation passes 75 CPU tests and all eleven checks. A fresh source/map/build-deleted
 Core export passes eight actual process controls over the complete 2,156-tick route,
 with exact repeat PCM and preserved old prefix/no-clobber/diagnostic behavior.
-Final integration review is accepted; publication awaits the exact-head fast check. Native-window, device,
+Final integration review and the exact-head fast check passed; PR181 is merged. Native-window, device,
 performance and appearance gates remain separate. [Evidence](docs/spikes/native-pcm-main180.md).
 
 ## Whole native session restart — CPU shipping proof accepted
