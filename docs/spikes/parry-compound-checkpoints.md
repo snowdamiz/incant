@@ -62,3 +62,39 @@ Current evidence is retained under
 unused-result test compilation failures are preserved. Source and focused native
 results will be frozen before broader qualification. No GPU or device work is
 part of this slice.
+
+
+## Source and CPU qualification
+
+Production is immutable `4a668973077024fa29628a4ebfc519b017697157` over
+schema `377b94c44e43517139fc1616f6e19d0822defabe`. Root independently accepted the
+helper source in `parry-compound-source-root-20261013.json`, SHA-256
+`7835ca0d553088dc3c53b160d27b5867dee5d11949254be61b7d8253a3b82073`.
+The source freeze binds 33 owned files and 58 total inputs.
+
+Full Parry native unit suites passed 107 planar and 94 spatial tests in each
+mode (201 per mode, zero failed/ignored). The 10 new focused tests per dimension
+are included in these totals, not additional coverage. Each dimension/mode runs
+180 paired composite contact queries through churn and persisted contact data,
+24 exact BVH query comparisons and 12 bit-exact mass replay cases. All mass and
+plan observations allocate zero bytes. There are 58 actual workspace allocation
+measurements per mode; all stay within the charged byte/call plan. Compound
+construction charges match the actual measured allocations for its fixture.
+
+All 15 broader commands pass: both full native suites, strict library Clippy in
+both modes, both selected normal dependency graphs, both wasm compile checks,
+both ordinary feature-off builds, normal runtime dependency isolation, 31 guard
+tests, owned-file rustfmt, generated conventions and whitespace checks. The
+Clippy claim is for native libraries; unrelated upstream integration/example
+harnesses are not part of that lint claim. Root's separate schema tests are not
+counted as this producer's native execution.
+
+The final packet is `docs/spikes/evidence/parry-compound-checkpoints/manifest.json`.
+Run `python3 tools/probes/parry-compound-checkpoints/collect.py --verify-only` for
+portable replay; add `--originals --local-binaries` on the producer machine to
+rehash original records and immediately copied executables. The retained
+`assertions.py` separately re-evaluates counts, source identities, selected modes,
+actual allocation rows and successful receipts without native execution.
+Historical offline-index and test-only unused-result failures remain retained;
+no failed run is used as passing coverage. All owned process handles are reaped
+and the CPU target is released. Final independent packet review remains pending.
