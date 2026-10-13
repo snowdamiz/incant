@@ -311,3 +311,41 @@ checks and diff review. Do not add a new generic execution framework. Commit onl
 your scoped source/test/result changes with Built-by: claude and summarize exact
 changes, evidence and remaining checks. Root will supervise a fresh CPU build
 once this source is reviewed. Finish with no background work or subprocesses.
+
+
+## Root priority execution — 2026-10-13, latest instruction
+
+The analyzer repairs are independently accepted (`effects-0070-analyzer-repair-20261013.json`,
+SHAfc33bbd271949e7d78963867b958ea82a999f832548bc823f6a71bb4f354b8bb).
+The supervised fresh CPU build and helper Clippy passed; all three owned children
+are reaped and build lease released. Root independently hashed five frozen
+binaries, nineteen helper files and matched renderer/host features. This session
+may now execute the bounded plan using ONLY the frozen binaries and runner.
+No Cargo/target permission. ModelOpus5.5 and thinkingMax remain required.
+
+Grant: `/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/gpu-grant.json`.
+Evidence directory is that same parent; build record SHA
+96e878bff1780f346e04d3fd9b8b084eeb279bb0b9590e9930cea23d6c22f123.
+SourceHEAD stays729e206af5f1f10c380794b5f66bf0beb33081ab during execution.
+This root-owned brief is intentionally uncommitted in the child so its source
+HEAD and compiled input identity remain exact. Do not commit or change any source,
+helper or plan until after GPU release. Previous0074 released07:24, no GPUowner.
+
+Use runner.py with --grant above: list all four suites; run all four suites once;
+run the five numeric cases; run analyze.py on the evidence directory; if the
+numeric analysis passes, run the appearance plan once. Existing regression
+budget8192 (8092planned), new128 including20new suiteframes+73numeric+16appearance,
+combined8320;16children including4listings,32PNG/16pairs,maximum960x540,45minutes.
+These are the previously reviewed plan limits, not a new benchmark. Run serially
+in foreground, supervise/wait every child, never finish with background work.
+The two reserve retry slots are NOT approval to rerun: any failure ends device
+work pending root diagnosis. Preserve every output/refusal/latch; never weaken a
+comparison or increase a bound to make a run pass.
+
+Always release through runner.py release, even after failure, and verify no owned
+process survives. After rendering, personally inspect every retained paired PNG
+and give a candid appearance judgment with concrete issues. Functional success
+is not visual success. Root handles nonvisual defects. Return exact source/binary/
+backend/counts, raw failures, explicit pending gates and a concise result. Do not
+write personal memory or push. Commit only scoped report/evidence after release,
+with Built-by: claude; root will review before publisher intake.
