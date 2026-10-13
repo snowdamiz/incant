@@ -34,7 +34,7 @@
     "all_exits": 0,
     "gpu_executed": false,
     "planned_gpu_records": 84,
-    "source_review": "pending"
+    "source_review": "accepted"
   },
   "artifacts": [
     {
@@ -195,5 +195,9 @@
   "limits": [
     "Ignored GPU test was compiled, never run. Actual baseline/cooked raw-grid parity and device/backend evidence pending.",
     "No pixels, appearance or performance claims; historical0066 evidence is not execution of this extension."
-  ]
+  ],
+  "source_review": {
+    "path": "docs/spikes/evidence/cluster-grid-readback-source-review.json",
+    "sha256": "5f63e5df1d65f62b644518d2d88b922256f7eca179a0c7bc2e30ebe5b88adfcf"
+  }
 }

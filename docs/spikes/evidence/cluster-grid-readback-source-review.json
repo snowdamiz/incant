@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-13T03:34:14.653739+00:00",
+  "status": "source accepted; actual GPU comparison pending",
+  "head": "1fde5a079ba304f0f8d5c19b3c423a54960fe58d",
+  "manifest_sha256": "3072244a40469e42644c6d13bcfc56c5388fb8357ff45e4974a1b970f4debe93",
+  "sources_verified": 3,
+  "raw_lossless_records": 20,
+  "review": "Read all3files and mechanical old-helperdiff. Safe cached Arc clone observes actual submitted buffers without allocating replacement cache. Validates exact lengths/popcounts/tail membership, numeric deterministic variedcamera/viewport fixtures, retained move/reuse/clear/resize and directionalzero; bounded polling. Production unchanged.",
+  "findings": [],
+  "limits": [
+    "Ignored GPU test was compiled, never run. Actual baseline/cooked raw-grid parity and device/backend evidence pending.",
+    "No pixels, appearance or performance claims; historical0066 evidence is not execution of this extension."
+  ]
+}
