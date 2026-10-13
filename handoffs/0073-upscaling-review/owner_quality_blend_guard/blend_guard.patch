@@ -1,0 +1,890 @@
+diff --git a/crates/incant_render/src/graph.rs b/crates/incant_render/src/graph.rs
+index e1b54a3d7994..d29e356e43cf 100644
+--- a/crates/incant_render/src/graph.rs
++++ b/crates/incant_render/src/graph.rs
+@@ -219,6 +219,11 @@
+             pass.encode(e, q)
+         });
+     }
++    // Output-viewport clusters of upscaled BLEND models; untimed, after the
++    // internal clusters, before every Models pass that shades with them.
++    if let Some(pass) = frame.models.as_ref().and_then(|m| m.output_cluster_pass()) {
++        pass.encode(&mut encoder.0, None);
++    }
+ }
+ // One logical Models interval includes motion, both resolve passes and every
+ // model subpass actually encoded. Interior passes omit descriptors entirely.
+@@ -318,28 +323,37 @@
+                 .unwrap()
+                 .encode_overlay_depth(encoder, timestamp());
+         }
+-        if plan.transparent {
++        // Without upscaling BLEND models draw here, into the internal target.
++        if plan.transparent && !plan.composite {
+             frame
+                 .models
+                 .as_ref()
+                 .unwrap()
+                 .encode_transparent(encoder, timestamp());
+         }
++        if plan.output_depth {
++            frame
++                .motion
++                .as_ref()
++                .unwrap()
++                .encode_output_depth(encoder, timestamp());
++        }
++        // With upscaling: output-resolution BLEND into the cleared output-resolution
++        // overlay, then the sanitizing composite over the resolved output. Sprites
++        // and world text draw over the composite in their own intervals.
++        if plan.transparent && plan.composite {
++            frame
++                .models
++                .as_ref()
++                .unwrap()
++                .encode_transparent(encoder, timestamp());
++        }
+         if plan.composite {
+-            // Internal BLEND overlay over the resolved output; sprites and world
+-            // text are then drawn over this composite at output resolution.
+             frame
+                 .upscaling
+                 .as_ref()
+                 .unwrap()
+                 .composite(encoder, timestamp());
+-        }
+-        if plan.output_depth {
+-            frame
+-                .motion
+-                .as_ref()
+-                .unwrap()
+-                .encode_output_depth(encoder, timestamp());
+         }
+         if plan.all {
+             frame.models.as_ref().unwrap().encode(encoder, timestamp());
+diff --git a/crates/incant_render/src/graph/native.rs b/crates/incant_render/src/graph/native.rs
+index ba725dd508cc..705a08d4db21 100644
+--- a/crates/incant_render/src/graph/native.rs
++++ b/crates/incant_render/src/graph/native.rs
+@@ -52,6 +52,10 @@
+             .and_then(|m| m.lighting.compute.as_ref())
+         {
+             pre.timed(crate::timing::GpuPass::AssignLights, |e, q| p.encode(e, q));
++        }
++        // Output-viewport clusters of output-resolution BLEND models (untimed).
++        if let Some(p) = frame.models.as_ref().and_then(|m| m.output_cluster_pass()) {
++            p.encode(&mut pre.0, None);
+         }
+         if let Some(m) = &frame.models
+             && m.shadows.has_passes()
+@@ -110,12 +114,6 @@
+                 .unwrap()
+                 .encode_overlay_depth(&mut post.0, timestamp());
+         }
+-        if let Some(m) = &frame.models
+-            && m.has_transparent()
+-        {
+-            m.encode_transparent(&mut post.0, timestamp());
+-        }
+-        up.composite(&mut post.0, timestamp());
+         if output_depth {
+             frame
+                 .motion
+@@ -123,6 +121,14 @@
+                 .unwrap()
+                 .encode_output_depth(&mut post.0, timestamp());
+         }
++        // Output-resolution BLEND into the output overlay, then the sanitizing
++        // composite, before sprites and text.
++        if let Some(m) = &frame.models
++            && m.has_transparent()
++        {
++            m.encode_transparent(&mut post.0, timestamp());
++        }
++        up.composite(&mut post.0, timestamp());
+         debug_assert_eq!(index, count);
+         if let Some(s) = &frame.sprites {
+             post.timed(crate::timing::GpuPass::Sprites, |e, q| s.encode(e, q));
+diff --git a/crates/incant_render/src/lib.rs b/crates/incant_render/src/lib.rs
+index 8d7e1bad6071..5b9b392bb853 100644
+--- a/crates/incant_render/src/lib.rs
++++ b/crates/incant_render/src/lib.rs
+@@ -380,15 +380,34 @@
+             },
+         )?;
+         let overlay = upscaling.and_then(|p| p.overlay());
+-        if let (Some(models), Some(overlay)) = (&mut models, overlay) {
+-            models.set_transparent_target(overlay.clone());
+-        }
+-        // Portable upscaling draws current-only sprites and world text at output
+-        // resolution straight over the composited output (never into history),
+-        // against an unjittered output-resolution re-raster of the opaque depth.
+-        // BLEND models stay on the internal overlay: their clustered lighting is
+-        // prepared for the internal viewport only.
++        // Portable upscaling draws current-only BLEND models at output resolution
++        // into the cleared output-resolution overlay, which the composite sanitizes
++        // over the resolved output; sprites and world text then draw over the
++        // composite. All test an unjittered output-resolution re-raster of the
++        // opaque depth, never enter history, and keep BLEND, sprite, text order.
++        // BLEND shading uses clusters built for the output viewport, owned by the
++        // upscaling transaction. Without a plan every overlay keeps its target.
+         let screen = upscaling.and_then(|p| p.screen_overlay());
++        if let Some(models) = &mut models {
++            if let (Some(pending), Some(overlay), Some((_, depth, rect))) = (upscaling, overlay, screen) {
++                let grid = self.prepare_transparent_output(
++                    scene,
++                    models,
++                    models::ModelTarget {
++                        color: overlay.clone(),
++                        depth: depth.clone(),
++                        format: frame::HDR_FORMAT,
++                        rect,
++                    },
++                    pending.retained_grid(),
++                )?;
++                if let Some(grid) = grid {
++                    pending.offer_grid(grid);
++                }
++            } else if let Some(overlay) = overlay {
++                models.set_transparent_target(overlay.clone());
++            }
++        }
+         let (screen_color, screen_depth, screen_rect) = match screen {
+             Some((color, depth, rect)) => (color, depth, rect),
+             None => (
+@@ -422,13 +441,13 @@
+             || text.as_ref().is_some_and(|t| t.has_passes());
+         let accumulating = temporal.is_some_and(|p| p.active())
+             || upscaling.is_some_and(|p| p.overlay().is_some());
+-        if accumulating && (transparent || (screen_overlays && screen.is_none())) {
++        if accumulating && screen.is_none() && (transparent || screen_overlays) {
+             motion
+                 .as_mut()
+                 .expect("temporal motion draw")
+                 .set_overlay_depth(attachments.depth.clone());
+         }
+-        if let Some((_, depth, _)) = screen.filter(|_| screen_overlays) {
++        if let Some((_, depth, _)) = screen.filter(|_| transparent || screen_overlays) {
+             motion
+                 .as_mut()
+                 .expect("upscaling motion draw")
+diff --git a/crates/incant_render/src/lighting/mod.rs b/crates/incant_render/src/lighting/mod.rs
+index 08d37df320d2..920083fab800 100644
+--- a/crates/incant_render/src/lighting/mod.rs
++++ b/crates/incant_render/src/lighting/mod.rs
+@@ -98,6 +98,12 @@
+     words: u32,
+     pub masks: wgpu::Buffer,
+ }
++impl GridBuffers {
++    /// Logical bytes of both storage buffers.
++    pub fn bytes(&self) -> u64 {
++        self.counts.size() + self.masks.size()
++    }
++}
+ pub(crate) struct LightingSystem {
+     pub layout: wgpu::BindGroupLayout,
+     compute_layout: wgpu::BindGroupLayout,
+@@ -265,11 +271,15 @@
+     pub fn accept_temporal(&mut self, pipeline: wgpu::ComputePipeline) {
+         self.temporal_pipeline = Some(pipeline);
+     }
++    /// `retained` is Some only for the output-viewport grid, which is never
++    /// cached here: its single owner is the upscaling state that accepted it, so
++    /// it is released with that owner and charged by its admission.
+     fn buffers(
+         &self,
+         device: &wgpu::Device,
+         dimensions: [u32; 2],
+         words: u32,
++        retained: Option<Option<&Arc<GridBuffers>>>,
+     ) -> Result<Arc<GridBuffers>> {
+         if !(1..=MAX_MASK_WORDS).contains(&words) {
+             return Err(ResourceError::LightGridSize.into());
+@@ -285,16 +295,25 @@
+         {
+             return Err(ResourceError::LightGridSize.into());
+         }
+-        let mut cached = self
+-            .cache
+-            .lock()
+-            .map_err(|_| ResourceError::CacheLock("light grid"))?;
+-        if let Some(buffers) = cached
+-            .as_ref()
+-            .filter(|b| b.dimensions == dimensions && b.words == words)
+-        {
+-            return Ok(Arc::clone(buffers));
+-        }
++        let fits = |b: &&Arc<GridBuffers>| b.dimensions == dimensions && b.words == words;
++        let mut cached = match retained {
++            Some(old) => {
++                if let Some(buffers) = old.filter(fits) {
++                    return Ok(Arc::clone(buffers));
++                }
++                None
++            }
++            None => {
++                let cached = self
++                    .cache
++                    .lock()
++                    .map_err(|_| ResourceError::CacheLock("light grid"))?;
++                if let Some(buffers) = cached.as_ref().filter(fits) {
++                    return Ok(Arc::clone(buffers));
++                }
++                Some(cached)
++            }
++        };
+         let make = |label, size| {
+             device.create_buffer(&wgpu::BufferDescriptor {
+                 label: Some(label),
+@@ -309,7 +328,9 @@
+             counts: make("Cluster light counts", u64::from(count) * 4),
+             masks: make("Cluster light membership masks", bytes),
+         });
+-        *cached = Some(Arc::clone(&buffers));
++        if let Some(cached) = cached.as_mut() {
++            **cached = Some(Arc::clone(&buffers));
++        }
+         Ok(buffers)
+     }
+     pub fn prepare(
+@@ -321,6 +342,38 @@
+         camera: crate::camera::CameraView,
+         shadows: &crate::shadows::PreparedShadows,
+     ) -> Result<PreparedLighting> {
++        self.prepare_in(device, lights, viewport, selection, camera, shadows, None)
++            .map(|(prepared, _)| prepared)
++    }
++    /// The same clusters for the upscaling output viewport and its unjittered
++    /// camera. Shading reads `pixel - viewport.xy` in output pixels, so output
++    /// fragments never index internal-grid tiles. The grid is reused from
++    /// `retained` when compatible, otherwise newly allocated, and returned for the
++    /// caller's transactional owner; the renderer keeps no reference to it.
++    #[allow(clippy::too_many_arguments)]
++    pub fn prepare_output(
++        &self,
++        device: &wgpu::Device,
++        lights: &GpuLights,
++        viewport: [f32; 4],
++        selection: LocalLightSelection,
++        camera: crate::camera::CameraView,
++        shadows: &crate::shadows::PreparedShadows,
++        retained: Option<&Arc<GridBuffers>>,
++    ) -> Result<(PreparedLighting, Arc<GridBuffers>)> {
++        self.prepare_in(device, lights, viewport, selection, camera, shadows, Some(retained))
++    }
++    #[allow(clippy::too_many_arguments)]
++    fn prepare_in(
++        &self,
++        device: &wgpu::Device,
++        lights: &GpuLights,
++        viewport: [f32; 4],
++        selection: LocalLightSelection,
++        camera: crate::camera::CameraView,
++        shadows: &crate::shadows::PreparedShadows,
++        retained: Option<Option<&Arc<GridBuffers>>>,
++    ) -> Result<(PreparedLighting, Arc<GridBuffers>)> {
+         let dimensions = [
+             (viewport[2] / 64.).ceil() as u32,
+             (viewport[3] / 64.).ceil() as u32,
+@@ -332,6 +385,7 @@
+             device,
+             if clustered { dimensions } else { [1, 1] },
+             if clustered { words } else { 1 },
++            retained,
+         )?;
+         let grid = GridUniform {
+             view: camera.view.to_cols_array_2d(),
+@@ -448,14 +502,16 @@
+             binding: 7,
+             resource: sizes.as_entire_binding(),
+         });
+-        Ok(PreparedLighting {
++        let prepared = PreparedLighting {
+             compute,
+             shading: device.create_bind_group(&wgpu::BindGroupDescriptor {
+                 label: Some("Cluster shading frame"),
+                 layout: &self.layout,
+                 entries: &entries,
+             }),
+-        })
++        };
++        drop(entries);
++        Ok((prepared, buffers))
+     }
+ }
+ #[cfg(all(
+@@ -495,6 +551,22 @@
+         assert!(storage_lengths(sizes).is_err());
+     }
+ }
++/// Worst-case logical bytes of an output-viewport grid (counts and masks at the
++/// maximum mask words) for admission before allocation; None if it cannot exist.
++pub(crate) fn output_grid_allowance(viewport: [f32; 4]) -> Option<u64> {
++    if !viewport.iter().all(|v| v.is_finite()) || viewport[2] <= 0. || viewport[3] <= 0. {
++        return None;
++    }
++    let tiles = |v: f32| -> Option<u64> {
++        let t = (v / 64.).ceil();
++        (1.0..=u32::MAX as f32).contains(&t).then_some(t as u64)
++    };
++    let clusters = tiles(viewport[2])?
++        .checked_mul(tiles(viewport[3])?)?
++        .checked_mul(u64::from(DEPTH_SLICES))?;
++    (clusters <= u64::from(MAX_CLUSTERS))
++        .then(|| clusters * 4 * (1 + u64::from(MAX_MASK_WORDS)))
++}
+ /// Immutable uniforms and retained storage bindings for one encoded frame.
+ pub(crate) struct PreparedLighting {
+     pub shading: wgpu::BindGroup,
+diff --git a/crates/incant_render/src/model_draw.rs b/crates/incant_render/src/model_draw.rs
+index d878ea5739f0..d13eb092834e 100644
+--- a/crates/incant_render/src/model_draw.rs
++++ b/crates/incant_render/src/model_draw.rs
+@@ -3,7 +3,86 @@
+ use crate::{Renderer, Result, materials::PipelineKey};
+ use std::sync::Arc;
+ use wgpu::util::DeviceExt;
++#[repr(C)]
++#[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
++struct Frame {
++    matrix: [[f32; 4]; 4],
++    eye: [f32; 4],
++    environment: [f32; 4],
++}
++const _: () = {
++    assert!(size_of::<Frame>() == 96);
++    assert!(std::mem::offset_of!(Frame, matrix) == 0);
++    assert!(std::mem::offset_of!(Frame, eye) == 64);
++    assert!(std::mem::offset_of!(Frame, environment) == 80);
++};
+ impl Renderer {
++    fn model_camera_group(&self, frame: Frame) -> wgpu::BindGroup {
++        let camera = self
++            .device
++            .create_buffer_init(&wgpu::util::BufferInitDescriptor {
++                label: Some("Material preview frame"),
++                contents: bytemuck::bytes_of(&frame),
++                usage: wgpu::BufferUsages::UNIFORM,
++            });
++        self.device.create_bind_group(&wgpu::BindGroupDescriptor {
++            label: Some("Material preview frame"),
++            layout: &self.materials.globals,
++            entries: &[wgpu::BindGroupEntry {
++                binding: 0,
++                resource: camera.as_entire_binding(),
++            }],
++        })
++    }
++    /// Portable upscaling: current-only BLEND draws move to `target` (the cleared
++    /// output-resolution overlay, the unjittered output-resolution opaque depth and
++    /// the output viewport), with the unjittered camera at the output aspect and
++    /// clusters built for the output viewport. The composite then applies its
++    /// finite/premultiplied sanitation to this overlay. Opaque draws keep their
++    /// internal target. Returns the output grid for the upscaling transaction.
++    pub(crate) fn prepare_transparent_output(
++        &self,
++        scene: &RenderScene,
++        draw: &mut ModelDraw,
++        target: ModelTarget,
++        retained: Option<&Arc<crate::lighting::GridBuffers>>,
++    ) -> Result<Option<Arc<crate::lighting::GridBuffers>>> {
++        if !draw.has_transparent() {
++            return Ok(None);
++        }
++        let environment = scene
++            .environment
++            .as_ref()
++            .expect("model scene has environment");
++        let camera = scene.camera.unjittered();
++        let frame = Frame {
++            matrix: camera
++                .matrix(target.rect[2] / target.rect[3])?
++                .to_cols_array_2d(),
++            eye: camera.shading_eye(),
++            environment: [
++                environment.intensity,
++                environment.rotation.cos(),
++                environment.rotation.sin(),
++                crate::environment::MAX_SPECULAR_LOD,
++            ],
++        };
++        let (lighting, grid) = self.lighting.prepare_output(
++            &self.device,
++            &scene.lights,
++            target.rect,
++            scene.light_selection,
++            camera,
++            &draw.shadows.maps,
++            retained,
++        )?;
++        draw.transparent_output = Some(TransparentOutput {
++            camera: self.model_camera_group(frame),
++            lighting,
++            target,
++        });
++        Ok(Some(grid))
++    }
+     pub(crate) fn prepare_models(
+         &self,
+         scene: &RenderScene,
+@@ -12,19 +91,6 @@
+         if scene.batches.is_empty() {
+             return Ok(None);
+         }
+-        #[repr(C)]
+-        #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
+-        struct Frame {
+-            matrix: [[f32; 4]; 4],
+-            eye: [f32; 4],
+-            environment: [f32; 4],
+-        }
+-        const _: () = {
+-            assert!(size_of::<Frame>() == 96);
+-            assert!(std::mem::offset_of!(Frame, matrix) == 0);
+-            assert!(std::mem::offset_of!(Frame, eye) == 64);
+-            assert!(std::mem::offset_of!(Frame, environment) == 80);
+-        };
+         let environment = scene
+             .environment
+             .as_ref()
+@@ -42,23 +108,7 @@
+                 crate::environment::MAX_SPECULAR_LOD,
+             ],
+         };
+-        let camera_group = |frame: Frame| {
+-            let camera = self
+-                .device
+-                .create_buffer_init(&wgpu::util::BufferInitDescriptor {
+-                    label: Some("Material preview frame"),
+-                    contents: bytemuck::bytes_of(&frame),
+-                    usage: wgpu::BufferUsages::UNIFORM,
+-                });
+-            self.device.create_bind_group(&wgpu::BindGroupDescriptor {
+-                label: Some("Material preview frame"),
+-                layout: &self.materials.globals,
+-                entries: &[wgpu::BindGroupEntry {
+-                    binding: 0,
+-                    resource: camera.as_entire_binding(),
+-                }],
+-            })
+-        };
++        let camera_group = |frame: Frame| self.model_camera_group(frame);
+         let bind_group = camera_group(frame);
+         let transparent_camera = if scene.camera.jitter != [0.; 2] {
+             Some(camera_group(Frame {
+@@ -119,6 +169,7 @@
+         opaque.extend(transparent);
+         Ok(Some(ModelDraw {
+             transparent_target: None,
++            transparent_output: None,
+             target,
+             camera: bind_group,
+             transparent_camera,
+@@ -139,6 +190,7 @@
+ pub(crate) struct ModelDraw {
+     target: ModelTarget,
+     transparent_target: Option<wgpu::TextureView>,
++    transparent_output: Option<TransparentOutput>,
+     camera: wgpu::BindGroup,
+     transparent_camera: Option<wgpu::BindGroup>,
+     environment: wgpu::BindGroup,
+@@ -157,8 +209,10 @@
+             encoder,
+             0..self.draws.len(),
+             timestamps,
++            &self.target,
+             &self.target.color,
+             &self.camera,
++            &self.lighting.shading,
+         );
+     }
+     pub fn encode_opaque(
+@@ -170,8 +224,10 @@
+             encoder,
+             0..self.opaque_count,
+             timestamps,
++            &self.target,
+             &self.target.color,
+             &self.camera,
++            &self.lighting.shading,
+         );
+     }
+     pub fn encode_transparent(
+@@ -179,15 +235,35 @@
+         encoder: &mut wgpu::CommandEncoder,
+         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+     ) {
++        if let Some(output) = &self.transparent_output {
++            self.encode_range(
++                encoder,
++                self.opaque_count..self.draws.len(),
++                timestamps,
++                &output.target,
++                &output.target.color,
++                &output.camera,
++                &output.lighting.shading,
++            );
++            return;
++        }
+         self.encode_range(
+             encoder,
+             self.opaque_count..self.draws.len(),
+             timestamps,
++            &self.target,
+             self.transparent_target
+                 .as_ref()
+                 .unwrap_or(&self.target.color),
+             self.transparent_camera.as_ref().unwrap_or(&self.camera),
++            &self.lighting.shading,
+         );
++    }
++    /// Output-viewport clusters of the BLEND route, encoded with the internal ones.
++    pub fn output_cluster_pass(&self) -> Option<&crate::lighting::ClusterPass> {
++        self.transparent_output
++            .as_ref()
++            .and_then(|o| o.lighting.compute.as_ref())
+     }
+     pub fn set_transparent_target(&mut self, target: wgpu::TextureView) {
+         self.transparent_target = Some(target);
+@@ -198,13 +274,16 @@
+     pub fn has_transparent(&self) -> bool {
+         self.opaque_count < self.draws.len()
+     }
++    #[allow(clippy::too_many_arguments)]
+     fn encode_range(
+         &self,
+         encoder: &mut wgpu::CommandEncoder,
+         range: std::ops::Range<usize>,
+         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
++        target: &ModelTarget,
+         color: &wgpu::TextureView,
+         camera: &wgpu::BindGroup,
++        shading: &wgpu::BindGroup,
+     ) {
+         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+             label: Some("Imported model geometry"),
+@@ -218,7 +297,7 @@
+                 },
+             })],
+             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
+-                view: &self.target.depth,
++                view: &target.depth,
+                 depth_ops: Some(wgpu::Operations {
+                     load: wgpu::LoadOp::Load,
+                     store: wgpu::StoreOp::Store,
+@@ -231,8 +310,8 @@
+         });
+         pass.set_bind_group(0, camera, &[]);
+         pass.set_bind_group(2, &self.environment, &[]);
+-        pass.set_bind_group(3, &self.lighting.shading, &[]);
+-        let [x, y, w, h] = self.target.rect;
++        pass.set_bind_group(3, shading, &[]);
++        let [x, y, w, h] = target.rect;
+         pass.set_viewport(x, y, w, h, 0., 1.);
+         for draw in &self.draws[range] {
+             let batch = &draw.batch;
+@@ -254,6 +333,11 @@
+         }
+     }
+ }
++struct TransparentOutput {
++    target: ModelTarget,
++    camera: wgpu::BindGroup,
++    lighting: crate::lighting::PreparedLighting,
++}
+ pub(crate) struct ModelTarget {
+     pub color: wgpu::TextureView,
+     pub depth: wgpu::TextureView,
+diff --git a/crates/incant_render/src/motion/attachment.rs b/crates/incant_render/src/motion/attachment.rs
+index 035c5e22b79e..d9db6665cc2a 100644
+--- a/crates/incant_render/src/motion/attachment.rs
++++ b/crates/incant_render/src/motion/attachment.rs
+@@ -68,9 +68,10 @@
+             limit,
+         )?,
+         flagged_component(old_output, output, 16, true, MAX_OWNER_RECORD_BYTES, limit)?,
++        // The current-only overlay has the output extent (output-resolution BLEND).
+         component(
+             old_overlay,
+-            source.size,
++            output.size,
+             8,
+             8 * plan::MAX_MOTION_PIXELS,
+             limit,
+@@ -135,7 +136,7 @@
+                 OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
+                 limit,
+             )?,
+-            component(old_overlay, source, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
++            component(old_overlay, output, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
+         ] {
+             total = total.checked_add(bytes).ok_or(MotionError::Capacity)?;
+         }
+@@ -166,7 +167,7 @@
+                 [2048, 2048],
+                 [2048, 2048],
+                 [2048, 2048],
+-                636_043_264,
++                606_552_064,
+             ),
+             (
+                 [2560, 1440],
+@@ -180,7 +181,7 @@
+                 [1280, 720],
+                 [2560, 1600],
+                 [2560, 1440],
+-                608_960_512,
++                655_654_912,
+             ),
+         ] {
+             assert_eq!(
+@@ -189,7 +190,7 @@
+                     old(prior_source),
+                     output,
+                     old(prior_output),
+-                    Some(prior_source),
++                    Some(prior_output),
+                     8192
+                 )
+                 .unwrap(),
+diff --git a/crates/incant_render/src/upscaling/owner.rs b/crates/incant_render/src/upscaling/owner.rs
+index 0d465c6e7a26..18484b3ab10d 100644
+--- a/crates/incant_render/src/upscaling/owner.rs
++++ b/crates/incant_render/src/upscaling/owner.rs
+@@ -35,6 +35,9 @@
+     /// unit evidence; the accepted internal source width it was gathered at.
+     mass: f32,
+     source_width: f32,
++    /// Output-viewport light grid of accepted output-resolution BLEND frames. Its
++    /// only owner: released with this state, charged by every upscaling preflight.
++    grid: Option<Arc<crate::lighting::GridBuffers>>,
+ }
+ pub(crate) struct Pending {
+     pub(super) config: UpscaleConfig,
+@@ -46,6 +49,9 @@
+     /// This frame's history evidence for the resolve uniform (reactive.y).
+     pub(super) history_mass: f32,
+     source_width: f32,
++    retained_grid: Option<Arc<crate::lighting::GridBuffers>>,
++    /// Candidate output grid, offered once while encoding; accepted with the frame.
++    grid: std::sync::OnceLock<Arc<crate::lighting::GridBuffers>>,
+ }
+ /// Expected admitted-history evidence entering a frame, in frames of unit
+ /// evidence: 0 after a cut, the accepted evidence otherwise, counted at the old
+@@ -78,7 +84,11 @@
+             last: None,
+             mass: 0.,
+             source_width: 0.,
++            grid: None,
+         })
++    }
++    fn grid_bytes(&self) -> u64 {
++        self.grid.as_ref().map_or(0, |g| g.bytes())
+     }
+     pub fn frame(&self) -> Option<UpscaleFrame> {
+         self.last.clone()
+@@ -89,12 +99,15 @@
+         plan: Plan,
+         old_motion: u64,
+     ) -> Result<(), UpscaleError> {
+-        plan.preflight(
++        let total = plan.preflight(
+             device.limits().max_texture_dimension_2d,
+             self.output.as_ref().map_or(0, |o| o.bytes()),
+             self.overlay.as_ref().map_or(0, |o| o.bytes()),
+             old_motion,
+-        )
++        )?;
++        plan.with_output_grid(total, self.grid_bytes())
++            .map(|_| ())
++            .ok_or(UpscaleError::Capacity)
+     }
+     pub fn preflight_owner(
+         &self,
+@@ -102,7 +115,7 @@
+         plan: Plan,
+         old_motion: Option<crate::motion::attachment::Cache>,
+     ) -> Result<(), crate::motion::MotionError> {
+-        crate::motion::attachment::admit_records(
++        let total = crate::motion::attachment::admit_records(
+             plan.source,
+             old_motion,
+             plan.output,
+@@ -114,8 +127,10 @@
+                 }),
+             self.overlay.as_ref().map(|o| o.size),
+             device.limits().max_texture_dimension_2d,
+-        )
+-        .map(|_| ())
++        )?;
++        plan.with_output_grid(total, self.grid_bytes())
++            .map(|_| ())
++            .ok_or(crate::motion::MotionError::Capacity)
+     }
+     pub fn prepare(
+         &self,
+@@ -173,9 +188,12 @@
+             plan,
+             frame,
+             output: plan.map(|p| Output::prepare(d, p.output, self.output.as_ref(), owner)),
+-            overlay: plan.map(|p| Overlay::prepare(d, p.source, self.overlay.as_ref())),
++            // Output extent: current-only BLEND models render here at output resolution.
++            overlay: plan.map(|p| Overlay::prepare(d, p.output, self.overlay.as_ref())),
+             history_mass,
+             source_width,
++            retained_grid: self.grid.clone(),
++            grid: std::sync::OnceLock::new(),
+         })
+     }
+     pub fn accept(&mut self, p: Pending) {
+@@ -187,6 +205,10 @@
+         self.output = p.output;
+         self.overlay = p.overlay;
+         self.last = Some(p.frame);
++        // A frame without BLEND draws keeps the retained grid (still charged).
++        if let Some(grid) = p.grid.into_inner() {
++            self.grid = Some(grid);
++        }
+     }
+ }
+ impl Pending {
+@@ -195,6 +217,13 @@
+     }
+     pub fn composite(&self) -> Option<&wgpu::TextureView> {
+         self.output.as_ref().map(|o| &o.composite)
++    }
++    pub fn retained_grid(&self) -> Option<&Arc<crate::lighting::GridBuffers>> {
++        self.retained_grid.as_ref()
++    }
++    /// Records this frame's output grid; only the first offer is kept.
++    pub fn offer_grid(&self, grid: Arc<crate::lighting::GridBuffers>) {
++        let _ = self.grid.set(grid);
+     }
+     /// Output-resolution target of current-only sprites and world text: the
+     /// composited output, its unjittered opaque depth and the output viewport.
+diff --git a/crates/incant_render/src/upscaling/plan.rs b/crates/incant_render/src/upscaling/plan.rs
+index c6fd899ee726..f202ef11628d 100644
+--- a/crates/incant_render/src/upscaling/plan.rs
++++ b/crates/incant_render/src/upscaling/plan.rs
+@@ -1,8 +1,9 @@
+ use super::UpscaleError;
+ /// Includes old+candidate output color/depth pairs+composite+output overlay depth,
+-/// internal overlay, motion targets, maximum motion instance payloads and fixed
+-/// packet metadata. Excludes ordinary renderer targets/assets, driver overhead
+-/// and older queued work.
++/// the output-extent current-only overlay, motion targets, maximum motion instance
++/// payloads, fixed packet metadata and (State::preflight) the output-viewport light
++/// grid. Excludes ordinary renderer targets/assets, driver overhead and older
++/// queued work.
+ pub const MAX_UPSCALE_TRANSITION_BYTES: u64 =
+     128 * crate::motion::MAX_MOTION_PIXELS + 2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384;
+ /// Per output pixel: two RGBA16F colors and two R32F depths of history, the RGBA16F
+@@ -60,7 +61,7 @@
+         old_output: u64,
+         old_overlay: u64,
+         old_motion: u64,
+-    ) -> Result<(), UpscaleError> {
++    ) -> Result<u64, UpscaleError> {
+         let pixels = |s: [u32; 2]| -> Result<u64, UpscaleError> {
+             let n = u64::from(s[0]) * u64::from(s[1]);
+             if s.contains(&0)
+@@ -82,12 +83,21 @@
+         let total = old_output
+             .checked_add(old_overlay)
+             .and_then(|x| x.checked_add(old_motion))
+-            .and_then(|x| x.checked_add(OUTPUT_PIXEL_BYTES * output + 32 * source))
++            .and_then(|x| x.checked_add((OUTPUT_PIXEL_BYTES + 8) * output + 24 * source))
+             .and_then(|x| x.checked_add(2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384))
+             .ok_or(UpscaleError::Capacity)?;
+         if total > MAX_UPSCALE_TRANSITION_BYTES {
+             return Err(UpscaleError::Capacity);
+         }
+-        Ok(())
++        Ok(total)
++    }
++    /// Adds the output-viewport light grid of output-resolution BLEND models: the
++    /// retained grid plus a worst-case candidate (maximum mask words), charged even
++    /// when this frame turns out to reuse the retained one.
++    pub fn with_output_grid(self, total: u64, old_grid: u64) -> Option<u64> {
++        total
++            .checked_add(old_grid)?
++            .checked_add(crate::lighting::output_grid_allowance(self.rect)?)
++            .filter(|t| *t <= MAX_UPSCALE_TRANSITION_BYTES)
+     }
+ }
+diff --git a/crates/incant_render/src/upscaling/system.rs b/crates/incant_render/src/upscaling/system.rs
+index 78bf118b2827..cc36c0d63fe9 100644
+--- a/crates/incant_render/src/upscaling/system.rs
++++ b/crates/incant_render/src/upscaling/system.rs
+@@ -255,6 +255,17 @@
+             contents: bytemuck::bytes_of(&f),
+             usage: wgpu::BufferUsages::UNIFORM,
+         });
++        // The overlay now has the output extent: with source == output the unchanged
++        // composite.wgsl reads it 1:1 (base = p - 0.5, f = 0) and keeps clean() on the
++        // overlay and on the result.
++        let composite_uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
++            label: Some("Output-resolution overlay composite frame"),
++            contents: bytemuck::bytes_of(&Frame {
++                source: plan.rect,
++                ..f
++            }),
++            usage: wgpu::BufferUsages::UNIFORM,
++        });
+         let slot = p.slot();
+         let mut textures = [
+             current,
+@@ -282,7 +293,7 @@
+             composite: group(
+                 d,
+                 &self.composite_layout,
+-                &uniform,
++                &composite_uniform,
+                 &[&output.color[slot], &overlay.view],
+                 None,
+             ),
+diff --git a/crates/incant_render/src/upscaling/tests.rs b/crates/incant_render/src/upscaling/tests.rs
+index 886d14aa6c28..75fe74e3059a 100644
+--- a/crates/incant_render/src/upscaling/tests.rs
++++ b/crates/incant_render/src/upscaling/tests.rs
+@@ -226,3 +226,39 @@
+         }
+     }
+ }
++#[test]
++fn output_blend_grid_is_charged_as_old_plus_worst_case_candidate_under_the_ceiling() {
++    use plan::*;
++    // 128 mask words (4096 local lights) + one count word per cluster, 24 slices.
++    let per_cluster = 4 * (1 + 128);
++    let frame = crate::resolution::FramePlan::new(
++        [2048, 2048],
++        [0., 0., 2048., 2048.],
++        None,
++        crate::resolution::ResolutionScale::new(8).unwrap(),
++    )
++    .unwrap();
++    let p = Plan::new([2048, 2048], [0., 0., 2048., 2048.], &frame).unwrap();
++    let grid = crate::lighting::output_grid_allowance(p.rect).unwrap();
++    assert_eq!(grid, 32 * 32 * 24 * per_cluster);
++    let total = p.preflight(8192, 0, 0, 0).unwrap();
++    assert_eq!(p.with_output_grid(total, 0), Some(total + grid));
++    assert_eq!(p.with_output_grid(total, 7), Some(total + grid + 7));
++    assert_eq!(p.with_output_grid(total, u64::MAX), None);
++    let edge = MAX_UPSCALE_TRANSITION_BYTES - grid;
++    assert_eq!(p.with_output_grid(edge, 0), Some(MAX_UPSCALE_TRANSITION_BYTES));
++    assert_eq!(p.with_output_grid(edge + 1, 0), None);
++    // Fractional offset viewport: tiles of its own extent, never the attachment.
++    assert_eq!(
++        crate::lighting::output_grid_allowance([37.5, 21.25, 885., 497.5]),
++        Some(14 * 8 * 24 * per_cluster)
++    );
++    for bad in [
++        [0., 0., 0., 1.],
++        [0., 0., f32::NAN, 1.],
++        [0., 0., f32::INFINITY, 1.],
++        [0., 0., 8192. * 64., 64.],
++    ] {
++        assert!(crate::lighting::output_grid_allowance(bad).is_none(), "{bad:?}");
++    }
++}

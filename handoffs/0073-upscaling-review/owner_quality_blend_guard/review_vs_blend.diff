@@ -1,0 +1,558 @@
+--- a/owner_quality_blend/src/crates/incant_render/src/graph.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/graph.rs
+@@ -330,15 +330,6 @@
+                 .as_ref()
+                 .unwrap()
+                 .encode_transparent(encoder, timestamp());
+-        }
+-        if plan.composite {
+-            // Internal BLEND overlay over the resolved output; sprites and world
+-            // text are then drawn over this composite at output resolution.
+-            frame
+-                .upscaling
+-                .as_ref()
+-                .unwrap()
+-                .composite(encoder, timestamp());
+         }
+         if plan.output_depth {
+             frame
+@@ -347,8 +338,9 @@
+                 .unwrap()
+                 .encode_output_depth(encoder, timestamp());
+         }
+-        // With upscaling: output-resolution BLEND over the composite, before the
+-        // Sprites and Text intervals draw over it.
++        // With upscaling: output-resolution BLEND into the cleared output-resolution
++        // overlay, then the sanitizing composite over the resolved output. Sprites
++        // and world text draw over the composite in their own intervals.
+         if plan.transparent && plan.composite {
+             frame
+                 .models
+@@ -356,6 +348,13 @@
+                 .unwrap()
+                 .encode_transparent(encoder, timestamp());
+         }
++        if plan.composite {
++            frame
++                .upscaling
++                .as_ref()
++                .unwrap()
++                .composite(encoder, timestamp());
++        }
+         if plan.all {
+             frame.models.as_ref().unwrap().encode(encoder, timestamp());
+         }
+--- a/owner_quality_blend/src/crates/incant_render/src/graph/native.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/graph/native.rs
+@@ -114,7 +114,6 @@
+                 .unwrap()
+                 .encode_overlay_depth(&mut post.0, timestamp());
+         }
+-        up.composite(&mut post.0, timestamp());
+         if output_depth {
+             frame
+                 .motion
+@@ -122,12 +121,14 @@
+                 .unwrap()
+                 .encode_output_depth(&mut post.0, timestamp());
+         }
+-        // Output-resolution BLEND over the composite, before sprites and text.
++        // Output-resolution BLEND into the output overlay, then the sanitizing
++        // composite, before sprites and text.
+         if let Some(m) = &frame.models
+             && m.has_transparent()
+         {
+             m.encode_transparent(&mut post.0, timestamp());
+         }
++        up.composite(&mut post.0, timestamp());
+         debug_assert_eq!(index, count);
+         if let Some(s) = &frame.sprites {
+             post.timed(crate::timing::GpuPass::Sprites, |e, q| s.encode(e, q));
+--- a/owner_quality_blend/src/crates/incant_render/src/lib.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/lib.rs
+@@ -380,24 +380,30 @@
+             },
+         )?;
+         let overlay = upscaling.and_then(|p| p.overlay());
+-        // Portable upscaling draws current-only BLEND models, sprites and world text
+-        // at output resolution straight over the composited output (never into
+-        // history), in that order, against an unjittered output-resolution
+-        // re-raster of the opaque depth. BLEND shading uses clusters built for the
+-        // output viewport. Without a plan every overlay keeps its ce617 target.
++        // Portable upscaling draws current-only BLEND models at output resolution
++        // into the cleared output-resolution overlay, which the composite sanitizes
++        // over the resolved output; sprites and world text then draw over the
++        // composite. All test an unjittered output-resolution re-raster of the
++        // opaque depth, never enter history, and keep BLEND, sprite, text order.
++        // BLEND shading uses clusters built for the output viewport, owned by the
++        // upscaling transaction. Without a plan every overlay keeps its target.
+         let screen = upscaling.and_then(|p| p.screen_overlay());
+         if let Some(models) = &mut models {
+-            if let Some((color, depth, rect)) = screen {
+-                self.prepare_transparent_output(
++            if let (Some(pending), Some(overlay), Some((_, depth, rect))) = (upscaling, overlay, screen) {
++                let grid = self.prepare_transparent_output(
+                     scene,
+                     models,
+                     models::ModelTarget {
+-                        color: color.clone(),
++                        color: overlay.clone(),
+                         depth: depth.clone(),
+                         format: frame::HDR_FORMAT,
+                         rect,
+                     },
++                    pending.retained_grid(),
+                 )?;
++                if let Some(grid) = grid {
++                    pending.offer_grid(grid);
++                }
+             } else if let Some(overlay) = overlay {
+                 models.set_transparent_target(overlay.clone());
+             }
+--- a/owner_quality_blend/src/crates/incant_render/src/lighting/mod.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/lighting/mod.rs
+@@ -98,16 +98,18 @@
+     words: u32,
+     pub masks: wgpu::Buffer,
+ }
++impl GridBuffers {
++    /// Logical bytes of both storage buffers.
++    pub fn bytes(&self) -> u64 {
++        self.counts.size() + self.masks.size()
++    }
++}
+ pub(crate) struct LightingSystem {
+     pub layout: wgpu::BindGroupLayout,
+     compute_layout: wgpu::BindGroupLayout,
+     pipeline: wgpu::ComputePipeline,
+     temporal_pipeline: Option<wgpu::ComputePipeline>,
+     cache: Mutex<Option<Arc<GridBuffers>>>,
+-    /// Portable upscaling only: clusters of the output viewport for current-only
+-    /// BLEND models drawn at output resolution. A separate single-entry cache, so
+-    /// the internal and output grids never evict each other.
+-    output_cache: Mutex<Option<Arc<GridBuffers>>>,
+ }
+ pub(crate) fn layout_entries(compute: bool) -> Vec<wgpu::BindGroupLayoutEntry> {
+     let mut entries: Vec<_> = (0..4)
+@@ -230,7 +232,6 @@
+             pipeline,
+             temporal_pipeline: None,
+             cache: Mutex::new(None),
+-            output_cache: Mutex::new(None),
+         })
+     }
+     pub fn temporal_pipeline(
+@@ -270,22 +271,15 @@
+     pub fn accept_temporal(&mut self, pipeline: wgpu::ComputePipeline) {
+         self.temporal_pipeline = Some(pipeline);
+     }
+-    /// Logical bytes of the retained output-viewport grid (0 when none).
+-    pub fn output_grid_bytes(&self) -> Result<u64> {
+-        let cached = self
+-            .output_cache
+-            .lock()
+-            .map_err(|_| ResourceError::CacheLock("output light grid"))?;
+-        Ok(cached
+-            .as_ref()
+-            .map_or(0, |b| b.counts.size() + b.masks.size()))
+-    }
++    /// `retained` is Some only for the output-viewport grid, which is never
++    /// cached here: its single owner is the upscaling state that accepted it, so
++    /// it is released with that owner and charged by its admission.
+     fn buffers(
+         &self,
+         device: &wgpu::Device,
+         dimensions: [u32; 2],
+         words: u32,
+-        output: bool,
++        retained: Option<Option<&Arc<GridBuffers>>>,
+     ) -> Result<Arc<GridBuffers>> {
+         if !(1..=MAX_MASK_WORDS).contains(&words) {
+             return Err(ResourceError::LightGridSize.into());
+@@ -301,19 +295,25 @@
+         {
+             return Err(ResourceError::LightGridSize.into());
+         }
+-        let mut cached = if output {
+-            &self.output_cache
+-        } else {
+-            &self.cache
+-        }
+-        .lock()
+-        .map_err(|_| ResourceError::CacheLock("light grid"))?;
+-        if let Some(buffers) = cached
+-            .as_ref()
+-            .filter(|b| b.dimensions == dimensions && b.words == words)
+-        {
+-            return Ok(Arc::clone(buffers));
+-        }
++        let fits = |b: &&Arc<GridBuffers>| b.dimensions == dimensions && b.words == words;
++        let mut cached = match retained {
++            Some(old) => {
++                if let Some(buffers) = old.filter(fits) {
++                    return Ok(Arc::clone(buffers));
++                }
++                None
++            }
++            None => {
++                let cached = self
++                    .cache
++                    .lock()
++                    .map_err(|_| ResourceError::CacheLock("light grid"))?;
++                if let Some(buffers) = cached.as_ref().filter(fits) {
++                    return Ok(Arc::clone(buffers));
++                }
++                Some(cached)
++            }
++        };
+         let make = |label, size| {
+             device.create_buffer(&wgpu::BufferDescriptor {
+                 label: Some(label),
+@@ -328,7 +328,9 @@
+             counts: make("Cluster light counts", u64::from(count) * 4),
+             masks: make("Cluster light membership masks", bytes),
+         });
+-        *cached = Some(Arc::clone(&buffers));
++        if let Some(cached) = cached.as_mut() {
++            **cached = Some(Arc::clone(&buffers));
++        }
+         Ok(buffers)
+     }
+     pub fn prepare(
+@@ -340,11 +342,15 @@
+         camera: crate::camera::CameraView,
+         shadows: &crate::shadows::PreparedShadows,
+     ) -> Result<PreparedLighting> {
+-        self.prepare_in(device, lights, viewport, selection, camera, shadows, false)
++        self.prepare_in(device, lights, viewport, selection, camera, shadows, None)
++            .map(|(prepared, _)| prepared)
+     }
+     /// The same clusters for the upscaling output viewport and its unjittered
+-    /// camera, in the separate output cache. Shading reads `pixel - viewport.xy`
+-    /// in output pixels, so output fragments never index internal-grid tiles.
++    /// camera. Shading reads `pixel - viewport.xy` in output pixels, so output
++    /// fragments never index internal-grid tiles. The grid is reused from
++    /// `retained` when compatible, otherwise newly allocated, and returned for the
++    /// caller's transactional owner; the renderer keeps no reference to it.
++    #[allow(clippy::too_many_arguments)]
+     pub fn prepare_output(
+         &self,
+         device: &wgpu::Device,
+@@ -353,8 +359,9 @@
+         selection: LocalLightSelection,
+         camera: crate::camera::CameraView,
+         shadows: &crate::shadows::PreparedShadows,
+-    ) -> Result<PreparedLighting> {
+-        self.prepare_in(device, lights, viewport, selection, camera, shadows, true)
++        retained: Option<&Arc<GridBuffers>>,
++    ) -> Result<(PreparedLighting, Arc<GridBuffers>)> {
++        self.prepare_in(device, lights, viewport, selection, camera, shadows, Some(retained))
+     }
+     #[allow(clippy::too_many_arguments)]
+     fn prepare_in(
+@@ -365,8 +372,8 @@
+         selection: LocalLightSelection,
+         camera: crate::camera::CameraView,
+         shadows: &crate::shadows::PreparedShadows,
+-        output: bool,
+-    ) -> Result<PreparedLighting> {
++        retained: Option<Option<&Arc<GridBuffers>>>,
++    ) -> Result<(PreparedLighting, Arc<GridBuffers>)> {
+         let dimensions = [
+             (viewport[2] / 64.).ceil() as u32,
+             (viewport[3] / 64.).ceil() as u32,
+@@ -378,7 +385,7 @@
+             device,
+             if clustered { dimensions } else { [1, 1] },
+             if clustered { words } else { 1 },
+-            output,
++            retained,
+         )?;
+         let grid = GridUniform {
+             view: camera.view.to_cols_array_2d(),
+@@ -495,14 +502,16 @@
+             binding: 7,
+             resource: sizes.as_entire_binding(),
+         });
+-        Ok(PreparedLighting {
++        let prepared = PreparedLighting {
+             compute,
+             shading: device.create_bind_group(&wgpu::BindGroupDescriptor {
+                 label: Some("Cluster shading frame"),
+                 layout: &self.layout,
+                 entries: &entries,
+             }),
+-        })
++        };
++        drop(entries);
++        Ok((prepared, buffers))
+     }
+ }
+ #[cfg(all(
+--- a/owner_quality_blend/src/crates/incant_render/src/model_draw.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/model_draw.rs
+@@ -34,18 +34,21 @@
+             }],
+         })
+     }
+-    /// Portable upscaling: current-only BLEND draws move to `target` (the output
+-    /// composite, the unjittered output-resolution opaque depth and the output
+-    /// viewport), with the unjittered camera at the output aspect and clusters
+-    /// built for the output viewport. Opaque draws keep their internal target.
++    /// Portable upscaling: current-only BLEND draws move to `target` (the cleared
++    /// output-resolution overlay, the unjittered output-resolution opaque depth and
++    /// the output viewport), with the unjittered camera at the output aspect and
++    /// clusters built for the output viewport. The composite then applies its
++    /// finite/premultiplied sanitation to this overlay. Opaque draws keep their
++    /// internal target. Returns the output grid for the upscaling transaction.
+     pub(crate) fn prepare_transparent_output(
+         &self,
+         scene: &RenderScene,
+         draw: &mut ModelDraw,
+         target: ModelTarget,
+-    ) -> Result<()> {
++        retained: Option<&Arc<crate::lighting::GridBuffers>>,
++    ) -> Result<Option<Arc<crate::lighting::GridBuffers>>> {
+         if !draw.has_transparent() {
+-            return Ok(());
++            return Ok(None);
+         }
+         let environment = scene
+             .environment
+@@ -64,20 +67,21 @@
+                 crate::environment::MAX_SPECULAR_LOD,
+             ],
+         };
+-        let lighting = self.lighting.prepare_output(
++        let (lighting, grid) = self.lighting.prepare_output(
+             &self.device,
+             &scene.lights,
+             target.rect,
+             scene.light_selection,
+             camera,
+             &draw.shadows.maps,
++            retained,
+         )?;
+         draw.transparent_output = Some(TransparentOutput {
+             camera: self.model_camera_group(frame),
+             lighting,
+             target,
+         });
+-        Ok(())
++        Ok(Some(grid))
+     }
+     pub(crate) fn prepare_models(
+         &self,
+--- a/owner_quality_blend/src/crates/incant_render/src/upscaling/owner.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/upscaling/owner.rs
+@@ -35,6 +35,9 @@
+     /// unit evidence; the accepted internal source width it was gathered at.
+     mass: f32,
+     source_width: f32,
++    /// Output-viewport light grid of accepted output-resolution BLEND frames. Its
++    /// only owner: released with this state, charged by every upscaling preflight.
++    grid: Option<Arc<crate::lighting::GridBuffers>>,
+ }
+ pub(crate) struct Pending {
+     pub(super) config: UpscaleConfig,
+@@ -46,6 +49,9 @@
+     /// This frame's history evidence for the resolve uniform (reactive.y).
+     pub(super) history_mass: f32,
+     source_width: f32,
++    retained_grid: Option<Arc<crate::lighting::GridBuffers>>,
++    /// Candidate output grid, offered once while encoding; accepted with the frame.
++    grid: std::sync::OnceLock<Arc<crate::lighting::GridBuffers>>,
+ }
+ /// Expected admitted-history evidence entering a frame, in frames of unit
+ /// evidence: 0 after a cut, the accepted evidence otherwise, counted at the old
+@@ -78,8 +84,12 @@
+             last: None,
+             mass: 0.,
+             source_width: 0.,
++            grid: None,
+         })
+     }
++    fn grid_bytes(&self) -> u64 {
++        self.grid.as_ref().map_or(0, |g| g.bytes())
++    }
+     pub fn frame(&self) -> Option<UpscaleFrame> {
+         self.last.clone()
+     }
+@@ -88,7 +98,6 @@
+         device: &wgpu::Device,
+         plan: Plan,
+         old_motion: u64,
+-        old_grid: u64,
+     ) -> Result<(), UpscaleError> {
+         let total = plan.preflight(
+             device.limits().max_texture_dimension_2d,
+@@ -96,7 +105,7 @@
+             self.overlay.as_ref().map_or(0, |o| o.bytes()),
+             old_motion,
+         )?;
+-        plan.with_output_grid(total, old_grid)
++        plan.with_output_grid(total, self.grid_bytes())
+             .map(|_| ())
+             .ok_or(UpscaleError::Capacity)
+     }
+@@ -105,7 +114,6 @@
+         device: &wgpu::Device,
+         plan: Plan,
+         old_motion: Option<crate::motion::attachment::Cache>,
+-        old_grid: u64,
+     ) -> Result<(), crate::motion::MotionError> {
+         let total = crate::motion::attachment::admit_records(
+             plan.source,
+@@ -120,7 +128,7 @@
+             self.overlay.as_ref().map(|o| o.size),
+             device.limits().max_texture_dimension_2d,
+         )?;
+-        plan.with_output_grid(total, old_grid)
++        plan.with_output_grid(total, self.grid_bytes())
+             .map(|_| ())
+             .ok_or(crate::motion::MotionError::Capacity)
+     }
+@@ -180,9 +188,12 @@
+             plan,
+             frame,
+             output: plan.map(|p| Output::prepare(d, p.output, self.output.as_ref(), owner)),
+-            overlay: plan.map(|p| Overlay::prepare(d, p.source, self.overlay.as_ref())),
++            // Output extent: current-only BLEND models render here at output resolution.
++            overlay: plan.map(|p| Overlay::prepare(d, p.output, self.overlay.as_ref())),
+             history_mass,
+             source_width,
++            retained_grid: self.grid.clone(),
++            grid: std::sync::OnceLock::new(),
+         })
+     }
+     pub fn accept(&mut self, p: Pending) {
+@@ -194,6 +205,10 @@
+         self.output = p.output;
+         self.overlay = p.overlay;
+         self.last = Some(p.frame);
++        // A frame without BLEND draws keeps the retained grid (still charged).
++        if let Some(grid) = p.grid.into_inner() {
++            self.grid = Some(grid);
++        }
+     }
+ }
+ impl Pending {
+@@ -203,6 +218,13 @@
+     pub fn composite(&self) -> Option<&wgpu::TextureView> {
+         self.output.as_ref().map(|o| &o.composite)
+     }
++    pub fn retained_grid(&self) -> Option<&Arc<crate::lighting::GridBuffers>> {
++        self.retained_grid.as_ref()
++    }
++    /// Records this frame's output grid; only the first offer is kept.
++    pub fn offer_grid(&self, grid: Arc<crate::lighting::GridBuffers>) {
++        let _ = self.grid.set(grid);
++    }
+     /// Output-resolution target of current-only sprites and world text: the
+     /// composited output, its unjittered opaque depth and the output viewport.
+     pub fn screen_overlay(&self) -> Option<(&wgpu::TextureView, &wgpu::TextureView, [f32; 4])> {
+--- a/owner_quality_blend/src/crates/incant_render/src/upscaling/plan.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/upscaling/plan.rs
+@@ -1,8 +1,9 @@
+ use super::UpscaleError;
+ /// Includes old+candidate output color/depth pairs+composite+output overlay depth,
+-/// internal overlay, motion targets, maximum motion instance payloads and fixed
+-/// packet metadata. Excludes ordinary renderer targets/assets, driver overhead
+-/// and older queued work.
++/// the output-extent current-only overlay, motion targets, maximum motion instance
++/// payloads, fixed packet metadata and (State::preflight) the output-viewport light
++/// grid. Excludes ordinary renderer targets/assets, driver overhead and older
++/// queued work.
+ pub const MAX_UPSCALE_TRANSITION_BYTES: u64 =
+     128 * crate::motion::MAX_MOTION_PIXELS + 2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384;
+ /// Per output pixel: two RGBA16F colors and two R32F depths of history, the RGBA16F
+@@ -82,7 +83,7 @@
+         let total = old_output
+             .checked_add(old_overlay)
+             .and_then(|x| x.checked_add(old_motion))
+-            .and_then(|x| x.checked_add(OUTPUT_PIXEL_BYTES * output + 32 * source))
++            .and_then(|x| x.checked_add((OUTPUT_PIXEL_BYTES + 8) * output + 24 * source))
+             .and_then(|x| x.checked_add(2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384))
+             .ok_or(UpscaleError::Capacity)?;
+         if total > MAX_UPSCALE_TRANSITION_BYTES {
+--- dropped from guard (back to f075): crates/incant_render/src/retained.rs
+# retained.rs: owner_quality_blend passed renderer.lighting.output_grid_bytes(); the guard reverts it to exact f075 (State charges its own grid).
+--- a/owner_quality_blend/(unchanged f075)/crates/incant_render/src/motion/attachment.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/motion/attachment.rs
+@@ -68,9 +68,10 @@
+             limit,
+         )?,
+         flagged_component(old_output, output, 16, true, MAX_OWNER_RECORD_BYTES, limit)?,
++        // The current-only overlay has the output extent (output-resolution BLEND).
+         component(
+             old_overlay,
+-            source.size,
++            output.size,
+             8,
+             8 * plan::MAX_MOTION_PIXELS,
+             limit,
+@@ -135,7 +136,7 @@
+                 OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
+                 limit,
+             )?,
+-            component(old_overlay, source, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
++            component(old_overlay, output, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
+         ] {
+             total = total.checked_add(bytes).ok_or(MotionError::Capacity)?;
+         }
+@@ -166,7 +167,7 @@
+                 [2048, 2048],
+                 [2048, 2048],
+                 [2048, 2048],
+-                636_043_264,
++                606_552_064,
+             ),
+             (
+                 [2560, 1440],
+@@ -180,7 +181,7 @@
+                 [1280, 720],
+                 [2560, 1600],
+                 [2560, 1440],
+-                608_960_512,
++                655_654_912,
+             ),
+         ] {
+             assert_eq!(
+@@ -189,7 +190,7 @@
+                     old(prior_source),
+                     output,
+                     old(prior_output),
+-                    Some(prior_source),
++                    Some(prior_output),
+                     8192
+                 )
+                 .unwrap(),
+--- a/owner_quality_blend/(unchanged f075)/crates/incant_render/src/upscaling/system.rs
++++ b/owner_quality_blend_guard/src/crates/incant_render/src/upscaling/system.rs
+@@ -255,6 +255,17 @@
+             contents: bytemuck::bytes_of(&f),
+             usage: wgpu::BufferUsages::UNIFORM,
+         });
++        // The overlay now has the output extent: with source == output the unchanged
++        // composite.wgsl reads it 1:1 (base = p - 0.5, f = 0) and keeps clean() on the
++        // overlay and on the result.
++        let composite_uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
++            label: Some("Output-resolution overlay composite frame"),
++            contents: bytemuck::bytes_of(&Frame {
++                source: plan.rect,
++                ..f
++            }),
++            usage: wgpu::BufferUsages::UNIFORM,
++        });
+         let slot = p.slot();
+         let mut textures = [
+             current,
+@@ -282,7 +293,7 @@
+             composite: group(
+                 d,
+                 &self.composite_layout,
+-                &uniform,
++                &composite_uniform,
+                 &[&output.color[slot], &overlay.view],
+                 None,
+             ),

@@ -1,0 +1,84 @@
+{
+ "accounting": {
+  "2048_half_after_maximal_old_with_retained_and_candidate_grid": 654524416
+ },
+ "all_checks_pass": true,
+ "checks": [
+  {
+   "check": "accepted BLEND frame: state is the only logical owner",
+   "detail": 1,
+   "ok": true
+  },
+  {
+   "check": "compatible next frame reuses the same grid (no allocation)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "reuse keeps one owner",
+   "detail": 1,
+   "ok": true
+  },
+  {
+   "check": "abandoned resize: candidate unowned, retained grid unchanged",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "frame without BLEND keeps (and still charges) the retained grid",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "disable releases logical ownership; the queued reference is the driver's, not admission's",
+   "detail": {
+    "remaining_refs": 1
+   },
+   "ok": true
+  },
+  {
+   "check": "after GPU completion no reference remains",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "2048^2 at 8/16 after maximal old set, retained + candidate grid fits",
+   "detail": 16580608,
+   "ok": true
+  },
+  {
+   "check": "1923^2 full scale fits without grids but not with the candidate grid",
+   "detail": 199068,
+   "ok": true
+  },
+  {
+   "check": "disabled upscaling holds no output grid to charge (state dropped)",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "ceiling unchanged",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "adversarial output-resolution BLEND texels always leave the composite canonical",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "source == output composite reads the overlay 1:1 up to f32 rounding of (p-o)/w*w",
+   "detail": 3.0517578125e-05,
+   "ok": true
+  }
+ ],
+ "lifecycle": {
+  "grids_created": 2,
+  "resize_candidate_bytes": 12681216
+ },
+ "model": "0073 owner_quality_blend_guard CPU controls (transcription, not execution)",
+ "sanitation": {
+  "note": "post-condition of the unchanged clean() calls; no claim about observed NaN inputs",
+  "worst_neighbour_weight": 3.0517578125e-05
+ }
+}
