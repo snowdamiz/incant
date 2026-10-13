@@ -103,7 +103,7 @@ impl View {
             ),
             // Looks down at the sphere/crate contact creases on the floor.
             Self::CloseUp => {
-                let (eye, at) = ([1.0, -0.55, 2.6], [1.25, -1.0, 0.4]);
+                let (eye, at): ([f64; 3], [f64; 3]) = ([1.0, -0.55, 2.6], [1.25, -1.0, 0.4]);
                 let d = [at[0] - eye[0], at[1] - eye[1], at[2] - eye[2]];
                 let length = (d[0] * d[0] + d[1] * d[1] + d[2] * d[2]).sqrt();
                 let yaw = (-d[0]).atan2(-d[2]);
