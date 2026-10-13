@@ -12,7 +12,14 @@ pub(super) type Dispatcher = Arc<dyn PersistentQueryDispatcher<ContactManifoldDa
 enum Phase {
     Dirty,
     Completed,
+    ImportedValidated,
     Poisoned,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum FrameOrigin {
+    NativeCompleted,
+    ImportedValidated,
+    ImportedCompleted,
 }
 /// Owns native state and its completed-step authority. No `From<PhysicsWorld>`,
 /// raw replacement, mutable Deref or caller-supplied authenticity flag exists.
@@ -23,6 +30,7 @@ pub struct CheckpointOwner {
     pub(super) mutation_revision: u64,
     identity: Result<Identity, CaptureError>,
     phase: Phase,
+    origin: FrameOrigin,
 }
 /// Exclusive short-lived proof issued only by the owner after its actual step.
 /// Empty counters, imported bytes and phase tags cannot construct this value.
@@ -48,16 +56,22 @@ impl CheckpointOwner {
             mutation_revision: 0,
             identity: compiled_identity(),
             phase: Phase::Dirty,
+            origin: FrameOrigin::NativeCompleted,
         }
     }
-    pub(super) fn restored(world: PhysicsWorld, identity: Identity) -> Self {
+    pub(crate) fn restored(world: PhysicsWorld, identity: Identity, origin: FrameOrigin) -> Self {
         let dispatcher = world.narrow_phase.checkpoint_dispatcher();
         Self {
             world,
             dispatcher,
             mutation_revision: 0,
             identity: Ok(identity),
-            phase: Phase::Completed,
+            phase: if origin == FrameOrigin::ImportedValidated {
+                Phase::ImportedValidated
+            } else {
+                Phase::Completed
+            },
+            origin,
         }
     }
     /// Capture after authenticating this owner's actual completed positive step.
@@ -67,9 +81,12 @@ impl CheckpointOwner {
         budget: &mut incant_physics_snapshot::Budget,
         work: &mut WorkBudget,
     ) -> Result<super::NativeFrame, CaptureError> {
-        let token = self.completed_step(work)?;
-        let w = &mut token.owner.world;
-        let identity = token.identity;
+        self.healthy()?;
+        if !matches!(self.phase, Phase::Completed | Phase::ImportedValidated) {
+            return Err(CaptureError::NotCompleted);
+        }
+        let identity = self.validate_boundary(work)?;
+        let w = &mut self.world;
         let inner = super::aggregate::encode(w, identity, budget, work)?;
         let bytes =
             super::super::world::capture_envelope(&inner, w.impulse_joints.assembly_epoch, budget)?;
@@ -78,6 +95,7 @@ impl CheckpointOwner {
             identity,
             bytes,
             context,
+            origin: self.origin,
         })
     }
     /// Actual library identity, never taken from a caller's record.
@@ -108,6 +126,9 @@ impl CheckpointOwner {
     }
     fn advance(&mut self, advance: impl FnOnce(&mut PhysicsWorld)) -> Result<(), CaptureError> {
         self.healthy()?;
+        if self.origin != FrameOrigin::NativeCompleted {
+            super::super::persisted::pre_step(&self.world).map_err(CaptureError::ImportedDomain)?;
+        }
         self.mutation_revision = self
             .mutation_revision
             .checked_add(1)
@@ -120,6 +141,9 @@ impl CheckpointOwner {
         } else {
             Phase::Dirty
         };
+        if self.phase == Phase::Completed && self.origin != FrameOrigin::NativeCompleted {
+            self.origin = FrameOrigin::ImportedCompleted;
+        }
         Ok(())
     }
     fn healthy(&self) -> Result<(), CaptureError> {
@@ -136,10 +160,17 @@ impl CheckpointOwner {
         work: &mut WorkBudget,
     ) -> Result<CompletedStep<'_>, CaptureError> {
         self.healthy()?;
-        let identity = self.identity?;
         if self.phase != Phase::Completed {
             return Err(CaptureError::NotCompleted);
         }
+        let identity = self.validate_boundary(work)?;
+        Ok(CompletedStep {
+            owner: self,
+            identity,
+        })
+    }
+    fn validate_boundary(&mut self, work: &mut WorkBudget) -> Result<Identity, CaptureError> {
+        let identity = self.identity?;
         if !Arc::ptr_eq(
             &self.dispatcher,
             &self.world.narrow_phase.checkpoint_dispatcher(),
@@ -186,10 +217,7 @@ impl CheckpointOwner {
         {
             return Err(CaptureError::PendingMutation);
         }
-        Ok(CompletedStep {
-            owner: self,
-            identity,
-        })
+        Ok(identity)
     }
 }
 impl CompletedStep<'_> {
