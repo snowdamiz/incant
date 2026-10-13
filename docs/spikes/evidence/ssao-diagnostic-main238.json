@@ -1,0 +1,177 @@
+{
+  "schema": "incant-ssao-diagnostic-main238-v1",
+  "at": "2026-10-13T17:53:27.198046+00:00",
+  "base": "053ce7bef9c6db99e1d8147b081171bbba542031",
+  "source": "525a46e767f2ea3bd343985b119b3e64a9b84f92",
+  "producer": "eb0447e50e8fb55a018ba4e8084a826faa44be8f",
+  "checks": [
+    {
+      "label": "fixture",
+      "argv": [
+        "cargo",
+        "test",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--profile",
+        "ci",
+        "--locked",
+        "-j2",
+        "ambient_occlusion::filter_device_tests::"
+      ],
+      "started": "2026-10-13T17:50:17.598999+00:00",
+      "ended": "2026-10-13T17:51:05.827736+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-diagnostic-main238-001/fixture.log",
+      "sha256": "1cb409d319b2ba58532e75cee17f82ee0d38ca111bfcec14902a38b1ac9bd647"
+    },
+    {
+      "label": "graph",
+      "argv": [
+        "cargo",
+        "tree",
+        "-p",
+        "incant_render",
+        "--locked",
+        "-e",
+        "normal",
+        "-f",
+        "{p}|{f}"
+      ],
+      "started": "2026-10-13T17:51:05.828225+00:00",
+      "ended": "2026-10-13T17:51:06.016578+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-diagnostic-main238-001/graph.log",
+      "sha256": "07016fca82d9053feef4693c2e5e09361a2cda15afe86b987747dff296b52f1a"
+    },
+    {
+      "label": "format",
+      "argv": [
+        "cargo",
+        "fmt",
+        "-p",
+        "incant_render",
+        "--",
+        "--check"
+      ],
+      "started": "2026-10-13T17:51:06.017077+00:00",
+      "ended": "2026-10-13T17:51:06.309917+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-diagnostic-main238-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "started": "2026-10-13T17:51:06.310318+00:00",
+      "ended": "2026-10-13T17:51:06.351118+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-diagnostic-main238-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "diff",
+      "argv": [
+        "git",
+        "diff",
+        "--check",
+        "origin/main...HEAD"
+      ],
+      "started": "2026-10-13T17:51:06.351432+00:00",
+      "ended": "2026-10-13T17:51:06.361601+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-diagnostic-main238-001/diff.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "test-graph",
+      "argv": [
+        "cargo",
+        "tree",
+        "-p",
+        "incant_render",
+        "--locked",
+        "-e",
+        "normal,build,dev",
+        "-f",
+        "{p}|{f}"
+      ],
+      "ended": "2026-10-13T17:53:26.799824+00:00",
+      "exit": 0,
+      "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/ssao-diagnostic-main238-001/test-graph.log",
+      "sha256": "8c9fdbf006271dabf20bf7ee9ca1e99c4cf22de6cd1c3f197ce695695af04210"
+    }
+  ],
+  "inputs": 3280,
+  "exact_source_files": [
+    "crates/incant_render/src/ambient_occlusion/filter_device_tests.rs",
+    ".github/workflows/renderer-diagnostic.yml"
+  ],
+  "incoming_paths": [
+    "STATUS.md",
+    "crates/incant_physics_snapshot/src/world_boundary/mod.rs",
+    "crates/incant_physics_snapshot/tests/trusted_manifolds.rs",
+    "docs/spikes/evidence/physics-native-narrow-construction-logs.json.gz",
+    "docs/spikes/evidence/physics-native-narrow-construction.json",
+    "docs/spikes/evidence/physics-native-narrow-main237.json",
+    "docs/spikes/evidence/physics-native-narrow-main237/final-root.json",
+    "docs/spikes/evidence/physics-native-narrow-main237/producer-final-root.json",
+    "docs/spikes/evidence/physics-native-narrow-main237/records.json.gz",
+    "docs/spikes/evidence/physics-native-narrow-main237/source-root.json",
+    "docs/spikes/evidence/physics-native-narrow-source-review.json",
+    "docs/spikes/physics-native-narrow-construction.md",
+    "docs/spikes/physics-native-narrow-main237.md",
+    "third_party/rapier2d/INCANT_CHECKED_NARROW.json",
+    "third_party/rapier2d/INCANT_PATCH.md",
+    "third_party/rapier2d/src/dynamics/solver/solver_contact_graph.rs",
+    "third_party/rapier2d/src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+    "third_party/rapier2d/src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+    "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/manifold.rs",
+    "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/mod.rs",
+    "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/pair.rs",
+    "third_party/rapier2d/src/geometry/narrow_phase/checkpoint/tests.rs",
+    "third_party/rapier2d/src/geometry/narrow_phase/mod.rs",
+    "third_party/rapier2d/src/pipeline/checked_restore/allocation_test_meter.rs",
+    "third_party/rapier2d/src/pipeline/checked_restore/mod.rs",
+    "third_party/rapier2d/src/pipeline/checked_restore/narrow.rs",
+    "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixture.rs",
+    "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/0.bin",
+    "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/16.bin",
+    "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/32.bin",
+    "third_party/rapier2d/src/pipeline/checked_restore/narrow_fixtures/48.bin",
+    "third_party/rapier3d/INCANT_CHECKED_NARROW.json",
+    "third_party/rapier3d/INCANT_PATCH.md",
+    "third_party/rapier3d/src/dynamics/solver/solver_contact_graph.rs",
+    "third_party/rapier3d/src/dynamics/solver/solver_contact_graph_checkpoint.rs",
+    "third_party/rapier3d/src/geometry/broad_phase_bvh/checkpoint/map_tests.rs",
+    "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/manifold.rs",
+    "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/mod.rs",
+    "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/pair.rs",
+    "third_party/rapier3d/src/geometry/narrow_phase/checkpoint/tests.rs",
+    "third_party/rapier3d/src/geometry/narrow_phase/mod.rs",
+    "third_party/rapier3d/src/pipeline/checked_restore/allocation_test_meter.rs",
+    "third_party/rapier3d/src/pipeline/checked_restore/mod.rs",
+    "third_party/rapier3d/src/pipeline/checked_restore/narrow.rs",
+    "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixture.rs",
+    "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/0.bin",
+    "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/16.bin",
+    "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/32.bin",
+    "third_party/rapier3d/src/pipeline/checked_restore/narrow_fixtures/48.bin"
+  ],
+  "archive": {
+    "path": "docs/spikes/evidence/ssao-diagnostic-main238/records.json.gz",
+    "sha256": "ff5ee06a290bdd36eda1b8444f48904a120d66e0ffee92199a83bb680452f9b7",
+    "records": 12,
+    "payloads": 10
+  },
+  "limits": [
+    "Test-only observation and workflow; no local GPU run or production fix.",
+    "Fresh composed CPU case passes; original strict GPU test and diagnostic both remain ignored locally.",
+    "Main238 narrow-owner changes are excluded from selected renderer graph through default-off checked-restore; current fixture rebuilt successfully.",
+    "Existing broad ignored-test release invocations also discover the six-submission diagnostic, in addition to the unchanged strict contract."
+  ]
+}
