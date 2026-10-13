@@ -16,6 +16,8 @@ pub(crate) struct System {
     pub prepass: HashMap<PipelineKey, wgpu::RenderPipeline>,
     pub shading: HashMap<PipelineKey, wgpu::RenderPipeline>,
     pub targets: Cache,
+    #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+    pub(super) capture: std::sync::Arc<super::readback::Capture>,
 }
 pub(crate) fn material_source(prepass: bool) -> Result<String> {
     let base = include_str!("../model_material.wgsl");
@@ -167,6 +169,8 @@ impl System {
             prepass,
             shading,
             targets: Cache::default(),
+            #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+            capture: Default::default(),
         })
     }
 }

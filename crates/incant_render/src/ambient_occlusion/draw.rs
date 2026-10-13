@@ -10,6 +10,10 @@ pub(crate) struct Prepared {
     filter_groups: [wgpu::BindGroup; 2],
     filter_pipelines: [wgpu::RenderPipeline; 2],
     pub camera: wgpu::BindGroup,
+    #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+    capture: Arc<super::readback::Capture>,
+    #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+    device: wgpu::Device,
 }
 impl System {
     pub fn prepare(
@@ -90,6 +94,10 @@ impl System {
             filter_groups,
             filter_pipelines: self.filters.clone(),
             camera,
+            #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+            capture: Arc::clone(&self.capture),
+            #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+            device: device.clone(),
         })
     }
 }
@@ -101,6 +109,14 @@ impl Prepared {
         rect: [f32; 4],
         draws: &[Draw],
     ) {
+        #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+        let capture = self.capture.begin(
+            &self.device,
+            [
+                self.targets.accessibility.texture().width(),
+                self.targets.accessibility.texture().height(),
+            ],
+        );
         {
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some("SSAO opaque and MASK prepass"),
@@ -134,7 +150,7 @@ impl Prepared {
         }
         // Every pass ends before its output becomes the next pass's input.
         // The vertical pass restores T0, the unchanged forward-material source.
-        for (target, pipeline, group, label) in [
+        for (stage, (target, pipeline, group, label)) in [
             (
                 &self.targets.accessibility,
                 &self.pipeline,
@@ -153,7 +169,12 @@ impl Prepared {
                 &self.filter_groups[1],
                 "SSAO vertical filter",
             ),
-        ] {
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            #[cfg(not(all(feature = "ssao-stage-readback", not(target_arch = "wasm32"))))]
+            let _ = stage;
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some(label),
                 color_attachments: &[Some(wgpu::RenderPassColorAttachment {
@@ -172,6 +193,11 @@ impl Prepared {
             let [x, y, w, h] = rect;
             pass.set_viewport(x, y, w, h, 0., 1.);
             pass.draw(0..3, 0..1);
+            drop(pass);
+            #[cfg(all(feature = "ssao-stage-readback", not(target_arch = "wasm32")))]
+            if let Some(capture) = &capture {
+                capture.copy(encoder, target.texture(), stage);
+            }
         }
     }
 }

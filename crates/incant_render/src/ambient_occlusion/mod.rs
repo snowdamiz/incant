@@ -6,6 +6,10 @@ mod draw;
 mod filter_device_tests;
 mod math;
 mod pipelines;
+#[cfg(feature = "ssao-stage-readback")]
+mod readback;
+#[cfg(feature = "ssao-stage-readback")]
+pub use readback::{AmbientOcclusionCaptureError, AmbientOcclusionStages};
 #[cfg(test)]
 mod quality_geometry;
 #[cfg(test)]

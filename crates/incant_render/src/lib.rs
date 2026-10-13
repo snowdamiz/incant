@@ -3,6 +3,8 @@
 //! Authored clustered lights; the full production render graph remains open.
 mod ambient_occlusion;
 pub use ambient_occlusion::{AmbientOcclusion, AmbientOcclusionError};
+#[cfg(feature = "ssao-stage-readback")]
+pub use ambient_occlusion::{AmbientOcclusionCaptureError, AmbientOcclusionStages};
 mod bloom;
 mod camera;
 pub use bloom::{Bloom, BloomError};

@@ -59,4 +59,30 @@ establish the bounded raster observer,
 and let Claude assess the rendered result. The perspective stripe failure and
 all original quality requirements must stay explicit through that review.
 
+## Optional stage observer
+
+The nondefault `ssao-stage-readback` feature adds native diagnostic capture of
+the raw, horizontal and vertical R8 planes, with no shader change. A single
+armed request is consumed by the next encoded SSAO execution. Copies run after
+their corresponding passes and retain their buffer independently of textures.
+A marker initialized on the CPU is cleared only after the final encoded copy;
+mapping an unsubmitted/discarded command therefore refuses instead of presenting
+zero-filled memory as GPU evidence. Taking a ready capture consumes it even on
+failure. Replacing/disabling SSAO abandons the previous system's request.
+
+Readback uses padded rows, checked pixel/buffer limits, fallible host allocation,
+and bounded mapping waits. CPU controls verify one-shot state, completion-marker
+refusal and all three planes' padding removal. On WebAssembly both public calls
+return `NativeOnly`; no capture storage or copies are compiled there. Default
+and shipping feature sets do not enable the observer. Its temporary CPU/GPU
+buffers are additional diagnostic overhead, not part of the 56 MiB idle cache.
+
+Independent review accepts the observer and final native-only guards. Current
+feature qualification passes 111 default-feature CPU cases, 116 cooked-material
+library cases and native strict Clippy, plus ordinary browser compilation without
+warnings. An additional broad browser Clippy run encountered 11 existing
+`arc_with_non_send_sync` findings in unchanged lighting/model/sprite/text/UI
+code; that failed run is retained, and no browser strict-Clippy pass is claimed.
+Actual staged GPU capture and its submission-marker behavior await execution.
+
 Built-by: astra
