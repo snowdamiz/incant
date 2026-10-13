@@ -8,6 +8,7 @@ RGBA), verifies every file against its recorded hash, and derives:
   AO-on frame, the AO-off frame and the specular-only (diffuse factor 0) frame:
   on = D*AO + S, off = D + S, S from the black frame, with +/-0.75 sRGB code,
   R8 accessibility and f16 radiance quantization folded into the interval.
+  Scene-radiance bounds first invert sRGB and the documented gray tone curve.
   Inference is rejected (never compared) when the diffuse signal is too small,
   a channel bound is not finite, a channel interval is inverted, or the RGB
   intervals do not intersect. The result must meet the independent reference
@@ -37,10 +38,15 @@ must also compare at least OCCLUSION_FLOOR pixels the reference marks occluded
 receiver occludes a band along its whole projected length), and absence
 controls must have none.
 
-Every SSAO reference gate reuses off/specular bases: the specular basis is
-always a separately rendered black scene and the geometry gates share one white
-off frame. Those bases are only valid when they are uniform (the white-furnace
-precondition), so uniformity of both bases is an enforced precondition.
+Every SSAO reference gate uses an explicit zero directional light (an empty
+light list would enable the preview key). The black specular basis is matched
+PER PIXEL: all reference surfaces share the same +Z facing shading normal,
+roughness and dielectric F0, with identical camera rays and constant environment.
+Perspective view direction varies across the image, so black need not be uniform.
+The pure white furnace must contain the known environment radiance at every pixel;
+the per-pixel black term must leave a positive diffuse signal. Missing illumination
+metadata, unsupported shading normals, saturated or colored shoulder data fail.
+No original failed evidence is upgraded by these corrected fixture preconditions.
 
 Numerical invariants only. The appearance PNGs are not judged here; Claude's
 appearance review is a separate, later judgment.
@@ -72,7 +78,7 @@ AO_SLACK = 0.5 / 255 + 0.002  # R8 accessibility + f16 radiance, generous
 LOW_SIGNAL = 0.02             # linear diffuse signal below which AO cannot be inferred
 MIN_COVERAGE_FRACTION = 1.0   # of the viewport interior; justified in the module docstring
 OCCLUSION_FLOOR = 1000        # reference-occluded pixels an occlusion gate must compare
-REJECTIONS = ("low_signal", "nonfinite", "inverted", "empty")
+REJECTIONS = ("low_signal", "nonfinite", "inverted", "empty", "radiometry")
 
 
 def srgb_to_linear(s):
@@ -90,6 +96,34 @@ LINEAR = [srgb_to_linear(b / 255) for b in range(256)]
 
 def code_interval(byte):
     return (srgb_to_linear((byte - QUANTIZATION_CODES) / 255), srgb_to_linear((byte + QUANTIZATION_CODES) / 255))
+
+
+def inverse_gray_tone(value):
+    """Exact inverse on the neutral axis; the desaturation mix cancels there.
+
+    The scalar inverse is invalid for general colored shoulder values. Byte 255
+    has an interval reaching 1 and is unbounded, so it is explicitly refused.
+    """
+    if not math.isfinite(value) or not 0 <= value < 1:
+        raise ValueError("nonfinite, negative or saturated display radiance")
+    return value if value < 0.8 else 0.6 + 0.04 / (1 - value)
+
+
+def scene_intervals(pixel):
+    """Propagate the unchanged ±0.75-code bounds through the monotone curve.
+
+    Identity-region RGB remains independently bounded. Above the shoulder only
+    the fixture's equal-RGB scalar domain is admitted; pretending independent
+    colored channels can be inverted would ignore peak/desaturation coupling.
+    """
+    if len(pixel) != 4 or pixel[3] != 255 or any(type(c) is not int or not 0 <= c <= 255 for c in pixel):
+        raise ValueError("expected opaque RGBA8 output")
+    bounds = [code_interval(c) for c in pixel[:3]]
+    if max(hi for _, hi in bounds) >= 0.8:
+        if len(set(pixel[:3])) != 1:
+            raise ValueError("colored tone-map shoulder is outside the scalar fixture domain")
+        return [(inverse_gray_tone(lo), inverse_gray_tone(hi)) for lo, hi in bounds]
+    return bounds
 
 
 def tone(r):
@@ -160,11 +194,15 @@ def infer_k(on, off, spec, strength):
     """
     if not (math.isfinite(strength) and strength > 0):
         return None, "nonfinite"
+    try:
+        on_bounds, off_bounds, spec_bounds = map(scene_intervals, (on, off, spec))
+    except ValueError:
+        return None, "radiometry"
     lo_k, hi_k = -math.inf, math.inf
     for c in range(3):
-        on_lo, on_hi = code_interval(on[c])
-        off_lo, off_hi = code_interval(off[c])
-        s_lo, s_hi = code_interval(spec[c])
+        on_lo, on_hi = on_bounds[c]
+        off_lo, off_hi = off_bounds[c]
+        s_lo, s_hi = spec_bounds[c]
         d_lo, d_hi = off_lo - s_hi, off_hi - s_lo
         if not d_lo > LOW_SIGNAL:
             return None, "low_signal"
@@ -390,14 +428,40 @@ IDENTITY_GATES = [
 ]
 
 
+def basis_contract(frames, scene):
+    """Check this fixture's actual admitted radiometric/shading domain.
+
+    Shared bases are valid across these front-facing parallel planes because
+    view direction along a perspective ray is independent of depth. Orthographic
+    rays are parallel. The constant environment removes position dependence.
+    This does not generalize to arbitrary normals, materials or direct lights.
+    """
+    projection = "orthographic" if scene.camera.orthographic else "perspective"
+    metadata = all(f.size == SIZE and f.meta.get("scene", {}).get("key_light") == 0
+                   and f.meta["scene"].get("environment") == {"linear_byte": 179, "intensity": 1.0}
+                   and f.meta["scene"].get("projection") == projection
+                   and f.meta.get("viewport", {}).get("rect") == list(RECT) for f in frames)
+    normals = all(r.normal == (0.0, 0.0, 1.0) for r in scene.rects)
+    white_ok = spec_ok = True
+    try:
+        for x, y in INTERIOR:
+            white, black = (scene_intervals(f.px(x, y)) for f in frames[1:])
+            white_ok &= all(lo <= 179 / 255 <= hi for lo, hi in white)
+            spec_ok &= all(0 <= s[0] <= s[1] < w[0] - LOW_SIGNAL for w, s in zip(white, black))
+    except ValueError:
+        white_ok = spec_ok = False
+    return {"explicit_ibl_only_matched_metadata": metadata, "matched_facing_shading_normals": normals,
+            "white_furnace_per_pixel": white_ok, "positive_per_pixel_diffuse": spec_ok}
+
+
 def reference_gate(case, on, off, spec, scene_name, orthographic, strength, occludes):
     def gate(ev):
         frames = [ev.frame(case, label) for label in (on, off, spec)]
-        bases = {f"{off}_uniform": furnace(frames[1]), f"{spec}_uniform": furnace(frames[2])}
-        result = ssao_agreement(*frames, ref.numeric_scene(scene_name, orthographic), strength=strength,
-                                expects_occlusion=occludes,
-                                preconditions={name: value["uniform"] for name, value in bases.items()})
-        result["bases"] = bases
+        scene = ref.numeric_scene(scene_name, orthographic)
+        result = ssao_agreement(*frames, scene, strength=strength, expects_occlusion=occludes,
+                                preconditions=basis_contract(frames, scene))
+        result["bases"] = {"white_observation": furnace(frames[1]), "specular_observation": furnace(frames[2]),
+                           "specular_matching": "per pixel; global uniformity is not required"}
         return result
     return gate
 
@@ -415,17 +479,26 @@ def mixed_pane_gate(ev):
     mixed_off, mixed_ao = ev.frame(MATERIALS, "m_off_mixed"), ev.frame(MATERIALS, "m_ao_mixed")
     pane = {(x, y) for x, y in INTERIOR if mixed_off.px(x, y) != core_off.px(x, y)}
     outside_equal = all(mixed_ao.px(x, y) == core_ao.px(x, y) for x, y in INTERIOR if (x, y) not in pane)
-    ratios = []
+    ratios, intervals = [], []
     for x, y in sorted(pane):
-        core_delta = LINEAR[core_off.px(x, y)[1]] - LINEAR[core_ao.px(x, y)[1]]
-        mixed_delta = LINEAR[mixed_off.px(x, y)[1]] - LINEAR[mixed_ao.px(x, y)[1]]
-        if core_delta > 0.03:
-            ratios.append(mixed_delta / core_delta)
+        pixels = [f.px(x, y) for f in (core_off, core_ao, mixed_off, mixed_ao)]
+        bounds = [scene_intervals(p)[1] for p in pixels]
+        co, ca, mo, ma = bounds
+        dc = (co[0] - ca[1], co[1] - ca[0])
+        dm = (mo[0] - ma[1], mo[1] - ma[0])
+        if dc[0] > 0.03:
+            # These fixtures are gray and fully covered by the opaque receiver.
+            # In scene radiance Δmixed=(1-alpha)*Δcore, regardless of pane light.
+            values = [inverse_gray_tone(LINEAR[p[1]]) for p in pixels]
+            ratios.append((values[2] - values[3]) / (values[0] - values[1]))
+            intervals.append((dm[0] / dc[1], dm[1] / dc[0]))
     ratios.sort()
     median = ratios[len(ratios) // 2] if ratios else None
+    matching = sum(lo <= 0.5 <= hi for lo, hi in intervals)
     return {"pane_pixels": len(pane), "occluded_under_pane": len(ratios), "median_ratio": median,
+            "scene_radiance_ratio_intervals_containing_half": matching,
             "outside_pane_identical_to_core": outside_equal,
-            "pass": outside_equal and median is not None and 0.4 <= median <= 0.6}
+            "pass": outside_equal and median is not None and 0.4 <= median <= 0.6 and matching == len(intervals)}
 
 
 def expansion_gate(n):
@@ -521,7 +594,7 @@ def analyse(evidence):
                                                             if p.is_dir() and p.name.startswith("retry-"))
     missing_cases = sorted(case for case, state in ev.status.items() if state["status"] != "loaded")
     failed = sorted(name for name, gate in gates.items() if gate["pass"] is not True)
-    return {"format": "incant-0070-analysis-v2", "evidence": str(evidence), "declared_cases": declared_cases(),
+    return {"format": "incant-0070-analysis-v3", "evidence": str(evidence), "declared_cases": declared_cases(),
             "cases": ev.status, "declared_gates": sorted(GATES), "gates": gates, "observations": observations,
             "missing_or_invalid_cases": missing_cases, "failed_gates": failed,
             "appearance": {"judged_here": False,
@@ -642,7 +715,14 @@ def synthetic_evidence():
     predicted_off = round(linear_to_srgb(tone([1.0] * 3)[0]) * 255)
     bloom = {"c_off": c_off, "c_bloom": c_bloom, "t_off": t_off, "t_bloom": _halo(t_off, centres[2], 6, 12, 6),
              "f_off": _gray(predicted_off), **{f"f_bloom_l{n}": _gray(predicted_on) for n in (1, 4, 6)}}
-    return {CORE: core, MATERIALS: materials, GEOMETRY: geometry, LIFECYCLE: lifecycle, BLOOM: bloom}
+    cases = {CORE: core, MATERIALS: materials, GEOMETRY: geometry, LIFECYCLE: lifecycle, BLOOM: bloom}
+    for case, frames in cases.items():
+        for label, frame in list(frames.items()):
+            frames[label] = Frame(frame.size, frame.data, {
+                "scene": {"key_light": 0.0, "environment": {"linear_byte": 179, "intensity": 1.0},
+                          "projection": "orthographic" if label.startswith("o_") else "perspective"},
+                "viewport": {"rect": list(RECT)}})
+    return cases
 
 
 def write_case(directory, frames):
@@ -651,7 +731,7 @@ def write_case(directory, frames):
     for label, frame in frames.items():
         (directory / f"{label}.rgba").write_bytes(frame.data)
         entries.append({"label": label, "file": f"{label}.rgba", "size": list(frame.size),
-                        "rgba_sha256": hashlib.sha256(frame.data).hexdigest(), "meta": {}})
+                        "rgba_sha256": hashlib.sha256(frame.data).hexdigest(), "meta": frame.meta})
     (directory / "index.json").write_text(json.dumps({"frames": entries, "summary": {}}))
 
 

@@ -447,6 +447,13 @@ fn meta(scene: &str, projection: &str, parts: Value, environment: f64) -> Value 
     json!({"name": scene, "projection": projection, "parts": parts,
         "environment": {"linear_byte": ENVIRONMENT_BYTE, "intensity": environment}})
 }
+// No authored light means the renderer deliberately supplies its preview key.
+// The numeric IBL fixtures need an explicit zero light, not an empty light set.
+fn ibl_meta(scene: &str, projection: &str, parts: Value, environment: f64) -> Value {
+    let mut value = meta(scene, projection, parts, environment);
+    value["key_light"] = json!(0.);
+    value
+}
 fn part(id: &str, material: &str, at: Place) -> Value {
     json!({"id": id, "material": material, "center": at.0, "scale": at.1})
 }
@@ -524,7 +531,7 @@ fn core_body(
         None,
     )?;
     let scene = |orthographic: bool, parts: &[(&str, &Arc<RuntimeAsset>, &str, Place)]| {
-        let mut nodes = vec![camera(orthographic)];
+        let mut nodes = vec![camera(orthographic), key_light(0.)];
         let mut described = Vec::new();
         for (id, source, material, at) in parts {
             nodes.push(mesh(id, source, place(*at)));
@@ -561,42 +568,42 @@ fn core_body(
             &format!("{tag}_off_white"),
             &white_slab,
             s,
-            meta("white_slab", proj, wp.clone(), 1.),
+            ibl_meta("white_slab", proj, wp.clone(), 1.),
         )?;
         let ao_white = run.draw(
             ao,
             &format!("{tag}_ao_white"),
             &white_slab,
             s,
-            meta("white_slab", proj, wp.clone(), 1.),
+            ibl_meta("white_slab", proj, wp.clone(), 1.),
         )?;
         let off_black = run.draw(
             off,
             &format!("{tag}_off_black"),
             &black_slab,
             s,
-            meta("black_slab", proj, bp.clone(), 1.),
+            ibl_meta("black_slab", proj, bp.clone(), 1.),
         )?;
         let ao_black = run.draw(
             ao,
             &format!("{tag}_ao_black"),
             &black_slab,
             s,
-            meta("black_slab", proj, bp, 1.),
+            ibl_meta("black_slab", proj, bp, 1.),
         )?;
         let off_flat = run.draw(
             off,
             &format!("{tag}_off_flat"),
             &flat,
             s,
-            meta("flat", proj, fp.clone(), 1.),
+            ibl_meta("flat", proj, fp.clone(), 1.),
         )?;
         let ao_flat = run.draw(
             ao,
             &format!("{tag}_ao_flat"),
             &flat,
             s,
-            meta("flat", proj, fp, 1.),
+            ibl_meta("flat", proj, fp, 1.),
         )?;
         check_occludes(
             run,
@@ -638,14 +645,14 @@ fn core_body(
         "p_off_reversed",
         &reversed,
         s,
-        meta("reversed_normal", proj, rp.clone(), 1.),
+        ibl_meta("reversed_normal", proj, rp.clone(), 1.),
     )?;
     let ao_rev = run.draw(
         ao,
         "p_ao_reversed",
         &reversed,
         s,
-        meta("reversed_normal", proj, rp, 1.),
+        ibl_meta("reversed_normal", proj, rp, 1.),
     )?;
     check_pair(
         run,
@@ -665,9 +672,15 @@ fn core_body(
         "p_off_far",
         &far,
         s,
-        meta("far_slab", proj, farp.clone(), 1.),
+        ibl_meta("far_slab", proj, farp.clone(), 1.),
     )?;
-    let ao_far = run.draw(ao, "p_ao_far", &far, s, meta("far_slab", proj, farp, 1.))?;
+    let ao_far = run.draw(
+        ao,
+        "p_ao_far",
+        &far,
+        s,
+        ibl_meta("far_slab", proj, farp, 1.),
+    )?;
     check_pair(
         run,
         "far control: a slab beyond the radius does not occlude",
@@ -686,7 +699,7 @@ fn core_body(
         "p_ao_radius_0_5",
         &white_slab,
         s,
-        meta("white_slab", proj, wp.clone(), 1.),
+        ibl_meta("white_slab", proj, wp.clone(), 1.),
     )?;
     check_pair(
         run,
@@ -699,7 +712,7 @@ fn core_body(
         "p_ao_strength_0_5",
         &white_slab,
         s,
-        meta("white_slab", proj, wp, 1.),
+        ibl_meta("white_slab", proj, wp, 1.),
     )?;
     let between = half
         .bytes
@@ -725,9 +738,15 @@ fn core_body(
         "p_off_edge",
         &edge,
         s,
-        meta("edge_slab", proj, ep.clone(), 1.),
+        ibl_meta("edge_slab", proj, ep.clone(), 1.),
     )?;
-    let ao_edge = run.draw(ao, "p_ao_edge", &edge, s, meta("edge_slab", proj, ep, 1.))?;
+    let ao_edge = run.draw(
+        ao,
+        "p_ao_edge",
+        &edge,
+        s,
+        ibl_meta("edge_slab", proj, ep, 1.),
+    )?;
     check_occludes(
         run,
         "slab crossing the frustum edge still occludes on-screen receivers",
@@ -765,9 +784,7 @@ fn materials_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
     let s = shot();
     let build = |light: bool, intensity: f64, parts: &[(&str, &Arc<RuntimeAsset>, &str, Place)]| {
         let mut nodes = vec![camera(false)];
-        if light {
-            nodes.push(key_light(2.));
-        }
+        nodes.push(key_light(if light { 2. } else { 0. }));
         let mut described = Vec::new();
         for (id, source, material, at) in parts {
             nodes.push(mesh(id, source, place(*at)));
@@ -834,7 +851,7 @@ fn materials_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
             ("pane", &pane_q, "blend_gray_0.2_alpha_0.5", PANE),
         ],
     );
-    let m = meta("mixed_opaque_then_blend", "perspective", described, 1.);
+    let m = ibl_meta("mixed_opaque_then_blend", "perspective", described, 1.);
     let a = run.draw(off, "m_off_mixed", &mixed, s, m.clone())?;
     let b = run.draw(ao, "m_ao_mixed", &mixed, s, m)?;
     check_occludes(
@@ -936,6 +953,8 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
             nodes.push(mesh(id, source, world));
             described.push(json!({"id": id, "material": material, "geometry": geometry}));
         }
+        // Preserve the existing camera/mesh order used by retained mutations.
+        nodes.push(key_light(0.));
         (input(nodes, &env, 1.), json!(described))
     };
     let at = |p: Place| json!({"center": p.0, "scale": p.1});
@@ -943,7 +962,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
     let slab_with = |source, material| ("slab", source, material, place(SLAB), at(SLAB));
 
     let (base, d) = build(vec![receiver(), slab_with(&white_q, "white")]);
-    let m = meta("white_slab", "perspective", d, 1.);
+    let m = ibl_meta("white_slab", "perspective", d, 1.);
     let off_white = run.draw(off, "g_off_white", &base, s, m.clone())?;
     let ao_white = run.draw(ao, "g_ao_white", &base, s, m)?;
     let (black_scene, d) = build(vec![
@@ -955,7 +974,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         "g_off_black",
         &black_scene,
         s,
-        meta("black_slab", "perspective", d, 1.),
+        ibl_meta("black_slab", "perspective", d, 1.),
     )?;
     check_occludes(run, "base occlusion reproduced", &ao_white, &off_white, 200);
 
@@ -968,7 +987,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         "g_ao_mask_equal",
         &equal,
         s,
-        meta("mask_equal", "perspective", d, 1.),
+        ibl_meta("mask_equal", "perspective", d, 1.),
     )?;
     check_pair(
         run,
@@ -980,7 +999,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         receiver(),
         slab_with(&below_q, "mask_alpha_0.49_cutoff_0.5"),
     ]);
-    let m = meta("mask_below", "perspective", d, 1.);
+    let m = ibl_meta("mask_below", "perspective", d, 1.);
     let off_below = run.draw(off, "g_off_mask_below", &below, s, m.clone())?;
     let ao_below = run.draw(ao, "g_ao_mask_below", &below, s, m)?;
     check_pair(
@@ -998,7 +1017,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         "g_ao_mask_cutout",
         &cutout,
         s,
-        meta("mask_cutout", "perspective", d, 1.),
+        ibl_meta("mask_cutout", "perspective", d, 1.),
     )?;
     // Exact cut-edge accessibility is checked offline against the reference.
     let (cut_dark, cut_bright) = darker_brighter(&ao_cutout, &off_white);
@@ -1024,7 +1043,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         "g_ao_backface",
         &back,
         s,
-        meta("double_sided_back_receiver", "perspective", d, 1.),
+        ibl_meta("double_sided_back_receiver", "perspective", d, 1.),
     )?;
     check_occludes(
         run,
@@ -1049,7 +1068,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         "g_ao_mirrored",
         &mirrored,
         s,
-        meta("mirrored_receiver", "perspective", d, 1.),
+        ibl_meta("mirrored_receiver", "perspective", d, 1.),
     )?;
     check_occludes(
         run,
@@ -1068,7 +1087,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         tilted_world,
         tilted_geometry,
     )]);
-    let m = meta("tilted_nonuniform_mirrored_flat", "perspective", d, 1.);
+    let m = ibl_meta("tilted_nonuniform_mirrored_flat", "perspective", d, 1.);
     let off_plane = run.draw(off, "g_off_tilted", &plane, s, m.clone())?;
     let ao_plane = run.draw(ao, "g_ao_tilted", &plane, s, m)?;
     check_pair(
@@ -1089,7 +1108,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
             json!({"skinned": "z -1 at t=0, z -3 at t=1"}),
         ),
     ]);
-    let skin_meta = meta("skinned_slab", "perspective", d, 1.);
+    let skin_meta = ibl_meta("skinned_slab", "perspective", d, 1.);
     let sample = |seconds: f64| {
         Some(AnimationSample {
             clip: Some(0),
@@ -1127,7 +1146,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         "g_ao_skin_oracle_near",
         &near_oracle,
         s,
-        meta("baked_slab_near", "perspective", d, 1.),
+        ibl_meta("baked_slab_near", "perspective", d, 1.),
     )?;
     let (far_oracle, d) = build(vec![receiver(), baked(&far_q, -1.)]);
     let oracle_far = run.draw(
@@ -1135,7 +1154,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
         "g_ao_skin_oracle_far",
         &far_oracle,
         s,
-        meta("baked_slab_far", "perspective", d, 1.),
+        ibl_meta("baked_slab_far", "perspective", d, 1.),
     )?;
     check_pair(
         run,
@@ -1153,7 +1172,7 @@ fn geometry_body(run: &mut Run, off: &Device, ao: &Device) -> Result<()> {
     // Retained instance motion: far transform first, then the base transform.
     let (mut moving, _) = build(vec![receiver(), slab_with(&white_q, "white")]);
     let motion_meta = |at: Place| {
-        meta(
+        ibl_meta(
             "instance_motion",
             "perspective",
             json!([
@@ -1262,6 +1281,7 @@ fn lifecycle_body(
         let scene = input(
             vec![
                 camera(false),
+                key_light(0.),
                 mesh("receiver", &white_q, place(RECEIVER)),
                 mesh("slab", &white_q, place(SLAB)),
                 mesh("emitter", &emitter_q, place(emitter_at)),
@@ -1269,7 +1289,7 @@ fn lifecycle_body(
             &env,
             1.,
         );
-        let m = meta(
+        let m = ibl_meta(
             "lifecycle",
             "perspective",
             json!([
@@ -1366,13 +1386,14 @@ fn lifecycle_body(
     let scene = input(
         vec![
             camera(false),
+            key_light(0.),
             mesh("receiver", &white_q, place(RECEIVER)),
             mesh("slab", &white_q, place(SLAB)),
         ],
         &env,
         1.,
     );
-    let m = meta(
+    let m = ibl_meta(
         "white_slab",
         "perspective",
         json!([
