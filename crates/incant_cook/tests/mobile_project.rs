@@ -266,7 +266,7 @@ fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_i
     captured
         .store(&incant_wasm_cook::project_cache(root.path(), true).unwrap())
         .unwrap();
-    let mut project = Project::empty("Captured-only iOS module");
+    let mut project = Project::empty("Captured-only mobile module");
     let mut scene = Scene::new("Main");
     let id = new_id();
     scene.program = Some(incant_doc::SceneProgram::Wasm { module: id.clone() });
@@ -293,7 +293,11 @@ fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_i
         ("aarch64-apple-ios-sim", true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
         ("aarch64-apple-ios-sim", true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
         ("aarch64-apple-ios-sim", true, true, false, "mobile static bundle captured identity mismatch"),
-        ("aarch64-linux-android", true, true, false, "authored mobile static Wasm requires an explicit iOS destination"),
+        ("aarch64-linux-android", false, false, false, "authored Wasm export requires the static-module player feature"),
+        ("aarch64-linux-android", true, false, false, "authored mobile Wasm export requires a trusted static bundle"),
+        ("aarch64-linux-android", true, true, true, "authored Wasm export requires matching trusted captured build inputs; use tools/export_native.py"),
+        ("aarch64-linux-android", true, true, false, "mobile static bundle captured identity mismatch"),
+        ("x86_64-linux-android", true, true, false, "authored mobile project requires the reviewed macOS arm64 mobile bytecode route"),
     ].into_iter().enumerate() {
         let out = root.path().join(format!("refused-{index}"));
         std::fs::create_dir(&out).unwrap();

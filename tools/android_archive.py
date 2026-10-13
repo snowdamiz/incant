@@ -11,6 +11,8 @@ import shlex
 import shutil
 
 import ios_archive
+import ios_wasm
+import native_wasm
 import physics_export
 from native_package import read, require, sha256
 
@@ -64,7 +66,7 @@ def tool_hashes(ndk):
     return result
 
 
-def preflight_project(project, scene):
+def preflight_project(project, scene, wabt=None):
     payload = read(project, 64 * 1024**2)
     mode = physics_export.project_mode(payload)
     document = json.loads(payload)
@@ -74,15 +76,16 @@ def preflight_project(project, scene):
         require(len(scenes) == 1, 'Choose --scene when the project does not contain exactly one scene')
         scene = next(iter(scenes))
     require(scene in scenes and isinstance(scenes[scene], dict), 'Selected project scene is missing')
-    require(scenes[scene].get('program') is None,
-            'Authored Android archive currently requires TypeScript; static Wasm mobile export is unsupported')
+    if native_wasm.selection(project, scene) is not None:
+        require(wabt is not None, 'Wasm export requires --wabt pointing to trusted WABT 1.0.42 tools')
     return mode
 
 
 def environment(source, rustc, project, scene, ndk):
     for name, value in source.items():
         compiler = name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTC_WRAPPER',
-                           'RUSTC_WORKSPACE_WRAPPER', 'CC', 'CXX', 'AR', 'CLANG_PATH')
+                           'RUSTC_WORKSPACE_WRAPPER', 'CC', 'CXX', 'AR', 'CLANG_PATH',
+                           'HOST_CC', 'TARGET_CC', 'HOST_CXX', 'TARGET_CXX', 'HOST_AR', 'TARGET_AR')
         compiler |= name.startswith(('CARGO_PROFILE_', 'CFLAGS', 'HOST_CFLAGS', 'TARGET_CFLAGS',
                                      'BINDGEN_EXTRA_CLANG_ARGS', 'CC_', 'CXX_', 'AR_'))
         compiler |= name.endswith('_RUSTFLAGS') or (name.startswith('CARGO_TARGET_') and name.endswith('_LINKER'))
@@ -117,8 +120,8 @@ def normal_dependencies(graph):
     return names
 
 
-def verify_codegen(stderr):
-    result = ios_archive.verify_codegen(stderr, TARGET)
+def verify_codegen(stderr, static_module=False):
+    result = ios_archive.verify_codegen(stderr, TARGET, static_module)
     for line in stderr.splitlines():
         if 'Running `' in line and f'--target {TARGET}' in line:
             require('feature="probe-android-bytecode"' not in line,
@@ -126,13 +129,16 @@ def verify_codegen(stderr):
     return result
 
 
-def producer_receipt(receipt, project_hash, mode):
+def producer_receipt(receipt, project_hash, mode, module=None):
     require(receipt.get('format') == 'incant-native-project-build' and receipt.get('version') == 1,
             'Unsupported authored project producer receipt')
     require(receipt['target'] == TARGET and receipt['producer_target'] == PRODUCER
             and receipt['producer_kind'] == 'android-archive' and receipt['project_sha256'] == project_hash
-            and receipt['startup_source_parsing'] is False and receipt['program'] is None,
+            and receipt['startup_source_parsing'] is False,
             'Authored Android producer identity mismatch')
+    ios_wasm.program(receipt['program'], module)
+    if module is not None:
+        require(receipt['compiler'] is None, 'Static module producer cannot include TypeScript bindings')
     physics_export.verify_producer(receipt, mode)
     script = receipt['script']
     require(script['format'] == 3 and script['target'] == TARGET and script['producer_target'] == PRODUCER

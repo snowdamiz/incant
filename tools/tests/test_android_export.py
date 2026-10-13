@@ -27,14 +27,15 @@ class AndroidExport(unittest.TestCase):
                 archive.admit(host, archive.TARGET)
         archive.admit(archive.PRODUCER, archive.TARGET)
 
-    def test_wasm_and_invalid_mode_refuse_before_compilation_and_no_clobber(self):
+    def test_missing_wasm_tools_and_invalid_mode_refuse_before_compilation_and_no_clobber(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory).resolve()
             project, output = root / 'project', root / 'output'
             cases = [({'physics_mode': 'fast-simd8'}, {}, 'Unsupported project physics'),
-                     ({}, {'program': {'kind': 'wasm', 'module': 'id'}}, 'static Wasm')]
+                     ({}, {'entities': {}, 'program': {'kind': 'wasm', 'module': 'id'}}, 'Wasm export requires --wabt')]
             for settings, scene, error in cases:
-                project.write_text(json.dumps({'settings': settings, 'scenes': {'scene': scene}}))
+                project.write_text(json.dumps({'settings': settings, 'scenes': {'scene': scene},
+                                               'assets': {'id': {'kind': 'wasm', 'sha256': 'a' * 64}}}))
                 with patch.object(exporter, 'build') as build, self.assertRaisesRegex(ValueError, error):
                     exporter.export(project, output, archive.TARGET, root / 'ndk')
                 build.assert_not_called()
@@ -80,6 +81,7 @@ class AndroidExport(unittest.TestCase):
 
     def test_target_toolchain_environment_is_explicit_and_rejects_overrides(self):
         for key in ('CFLAGS', 'TARGET_CFLAGS', 'BINDGEN_EXTRA_CLANG_ARGS', 'CC', 'CC_aarch64_linux_android',
+                    'HOST_CC', 'TARGET_CC', 'HOST_AR', 'TARGET_AR', 'CC_ENABLE_DEBUG_OUTPUT',
                     'RUSTFLAGS', 'CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER', 'CARGO_PROFILE_SHIPPING_PANIC'):
             with self.subTest(key=key), self.assertRaisesRegex(ValueError, 'Unset'):
                 archive.environment({key: 'unreviewed'}, Path('/trusted/rustc'), Path('/project'), None, ndk_paths())

@@ -7,8 +7,13 @@ use std::{collections::BTreeSet, fs, io::Read, path::Path};
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 pub(super) fn destination(target: &str) -> Result<()> {
-    if !matches!(target, "aarch64-apple-ios" | "aarch64-apple-ios-sim") {
-        return Err("authored mobile static Wasm requires an explicit iOS destination".into());
+    if !matches!(
+        target,
+        "aarch64-apple-ios" | "aarch64-apple-ios-sim" | "aarch64-linux-android"
+    ) {
+        return Err(
+            "authored mobile static Wasm requires an explicit reviewed arm64 destination".into(),
+        );
     }
     Ok(())
 }
@@ -90,18 +95,21 @@ mod tests {
     use super::*;
 
     #[test]
-    fn other_mobile_bytecode_routes_cannot_admit_static_wasm() {
+    fn only_reviewed_mobile_destinations_admit_captured_static_wasm() {
         destination("aarch64-apple-ios").unwrap();
         destination("aarch64-apple-ios-sim").unwrap();
+        destination("aarch64-linux-android").unwrap();
         for target in [
-            "aarch64-linux-android",
+            "x86_64-linux-android",
+            "armv7-linux-androideabi",
+            "aarch64-linux-android24",
             "aarch64-apple-darwin",
             "x86_64-apple-ios",
             "wasm32-unknown-unknown",
         ] {
             assert_eq!(
                 destination(target).unwrap_err().to_string(),
-                "authored mobile static Wasm requires an explicit iOS destination"
+                "authored mobile static Wasm requires an explicit reviewed arm64 destination"
             );
         }
     }
