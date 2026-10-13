@@ -1,0 +1,39 @@
+{
+  "format": "incant-rapier-checked-native-admission",
+  "version": 1,
+  "feature": "incant-checked-restore",
+  "baseline": "4c0190e2422e5bc85000dfec142668728239bb1d",
+  "scope": "default-off numerical preflight only; no live constructor, phase authentication or save admission",
+  "files": [
+    {
+      "path": "Cargo.toml",
+      "previous_sha256": "c6e08c4b3c2942e2ccc74faf30e79b824c3b5a4e25bae70b7964283f44c83970",
+      "sha256": "fb70f652cfb3269ae497d31081ebfb90d5d5ae811af03db960a970f87bd896fb"
+    },
+    {
+      "path": "src/pipeline/mod.rs",
+      "previous_sha256": "a89b0fedf80778489347aaf4a256458507328263dbc97fd136e80001ba8746a0",
+      "sha256": "79266ab550d16699a502411efbc756acf8e18fa52d930e36918523c0415f3d7f"
+    },
+    {
+      "path": "src/pipeline/checked_restore/convert.rs",
+      "previous_sha256": null,
+      "sha256": "6c5052129cf468e7ef686dcc2f2de76a1d9d7cef59c11b479a3b117f9a3e479a"
+    },
+    {
+      "path": "src/pipeline/checked_restore/derived.rs",
+      "previous_sha256": null,
+      "sha256": "5d58ac1133af2b02120843c3aa3eb41ae49d2292a9cd611b13083da5360510ac"
+    },
+    {
+      "path": "src/pipeline/checked_restore/mod.rs",
+      "previous_sha256": null,
+      "sha256": "3f2637d424a0708278df157f4bfc1e57403418d032ba6695ec56beeea08fee45"
+    },
+    {
+      "path": "src/pipeline/checked_restore/work.rs",
+      "previous_sha256": null,
+      "sha256": "506f328aed4db260689f1565fe85839e6f81178a6fd40636064624bc45df2aee"
+    }
+  ]
+}

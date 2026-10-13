@@ -16,6 +16,18 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
+## Native physics numerical admission — source accepted, CPU qualified
+
+A default-off pinned-kernel preflight checks primitive mass/pose/extent and
+historical fixed-target CCD AABB coherence without constructing live owners.
+It preserves float bits, applies native force arithmetic, and charges a checked
+cumulative logical work model. Both 214-case deterministic/fast8 suites and
+scoped strict Clippy, wasm, dependency and formatting checks pass. Independent
+source review is accepted; final packet review is pending. Whole-solver derived
+arithmetic, exact private construction, capture authentication and stable IDs/
+events remain required; `PhysicsUnsupported` is unchanged.
+[Scope and evidence](docs/spikes/physics-native-admission.md).
+
 ## Joined physics owner boundary — source and CPU qualification accepted
 
 The [joined inert frame](docs/spikes/physics-world-boundary.md) composes 22
