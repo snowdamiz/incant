@@ -4,6 +4,7 @@ pub(super) struct Output {
     pub color: [wgpu::TextureView; 2],
     pub depth: [wgpu::TextureView; 2],
     pub composite: wgpu::TextureView,
+    pub record: Option<[wgpu::TextureView; 2]>,
 }
 pub(super) struct Overlay {
     pub size: [u32; 2],
@@ -36,14 +37,31 @@ fn make(
 }
 impl Output {
     pub fn bytes(&self) -> u64 {
-        u64::from(self.size[0]) * u64::from(self.size[1]) * 32
+        u64::from(self.size[0])
+            * u64::from(self.size[1])
+            * if self.record.is_some() { 48 } else { 32 }
     }
-    pub fn prepare(d: &wgpu::Device, size: [u32; 2], old: Option<&Arc<Self>>) -> Arc<Self> {
-        if let Some(old) = old.filter(|x| x.size == size) {
+    pub fn prepare(
+        d: &wgpu::Device,
+        size: [u32; 2],
+        old: Option<&Arc<Self>>,
+        owner: bool,
+    ) -> Arc<Self> {
+        if let Some(old) = old.filter(|x| x.size == size && x.record.is_some() == owner) {
             return Arc::clone(old);
         }
         Arc::new(Self {
             size,
+            record: owner.then(|| {
+                std::array::from_fn(|_| {
+                    make(
+                        d,
+                        size,
+                        wgpu::TextureFormat::Rg32Uint,
+                        "Output owner provenance",
+                    )
+                })
+            }),
             color: std::array::from_fn(|_| {
                 make(d, size, crate::frame::HDR_FORMAT, "Output temporal HDR")
             }),

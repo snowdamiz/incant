@@ -65,6 +65,20 @@ mod upscale {
         artifacts: &ARTIFACTS,
     };
 }
+mod upscale_owner {
+    use super::*;
+    include!(concat!(
+        env!("OUT_DIR"),
+        "/temporal-upscale-owner/manifest.rs"
+    ));
+    pub(super) const BUNDLE: Bundle = Bundle {
+        contract: MANIFEST_CONTRACT,
+        expected: "incant-temporal-upscale-owner-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,5float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded",
+        source: SOURCE_HASH,
+        producer: PRODUCER_HASH,
+        artifacts: &ARTIFACTS,
+    };
+}
 mod composite {
     use super::*;
     include!(concat!(env!("OUT_DIR"), "/temporal-composite/manifest.rs"));
@@ -129,6 +143,7 @@ fn bundle(kind: Kind) -> &'static Bundle {
         Kind::Resolve => &resolve::BUNDLE,
         Kind::Copy => &copy::BUNDLE,
         Kind::Upscale => &upscale::BUNDLE,
+        Kind::UpscaleOwner => &upscale_owner::BUNDLE,
         Kind::Composite => &composite::BUNDLE,
     }
 }
@@ -155,6 +170,7 @@ mod tests {
             Kind::Resolve,
             Kind::Copy,
             Kind::Upscale,
+            Kind::UpscaleOwner,
             Kind::Composite,
         ] {
             host::validate(kind).unwrap();

@@ -1,7 +1,11 @@
 use super::*;
 #[test]
 fn actual_upscale_shaders_validate() {
-    for body in [include_str!("resolve.wgsl"), include_str!("composite.wgsl")] {
+    for body in [
+        include_str!("resolve.wgsl"),
+        include_str!("resolve_owner.wgsl"),
+        include_str!("composite.wgsl"),
+    ] {
         let source = format!("{}\n{body}", include_str!("common.wgsl"));
         let module = naga::front::wgsl::parse_str(&source).unwrap();
         naga::valid::Validator::new(

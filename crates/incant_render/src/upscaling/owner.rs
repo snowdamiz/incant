@@ -24,6 +24,7 @@ pub(crate) struct Input {
     pub jitter: [f32; 2],
     pub previous_jitter: [f32; 2],
     pub surfaces: Option<(wgpu::TextureView, wgpu::TextureView)>,
+    pub owner: Option<(wgpu::TextureView, wgpu::Buffer)>,
 }
 pub(crate) struct State {
     config: UpscaleConfig,
@@ -69,13 +70,18 @@ impl State {
         &self,
         device: &wgpu::Device,
         plan: Plan,
-        old_motion: Option<[u32; 2]>,
+        old_motion: Option<crate::motion::attachment::Cache>,
     ) -> Result<(), crate::motion::MotionError> {
-        crate::motion::attachment::admit(
+        crate::motion::attachment::admit_records(
             plan.source,
             old_motion,
-            Some(plan.output),
-            self.output.as_ref().map(|o| o.size),
+            plan.output,
+            self.output
+                .as_ref()
+                .map(|o| crate::motion::attachment::Cache {
+                    size: o.size,
+                    owner: o.record.is_some(),
+                }),
             self.overlay.as_ref().map(|o| o.size),
             device.limits().max_texture_dimension_2d,
         )
@@ -108,6 +114,15 @@ impl State {
         {
             return Err(UpscaleError::History);
         }
+        let owner = input.owner.is_some();
+        if input.frame.has_previous()
+            && self
+                .output
+                .as_ref()
+                .is_some_and(|o| o.record.is_some() != owner)
+        {
+            return Err(UpscaleError::History);
+        }
         let slot = self.last.as_ref().map_or(0, |f| 1 - f.slot);
         let frame = UpscaleFrame {
             motion: input.frame.clone(),
@@ -119,7 +134,7 @@ impl State {
             input,
             plan,
             frame,
-            output: plan.map(|p| Output::prepare(d, p.output, self.output.as_ref())),
+            output: plan.map(|p| Output::prepare(d, p.output, self.output.as_ref(), owner)),
             overlay: plan.map(|p| Overlay::prepare(d, p.source, self.overlay.as_ref())),
         })
     }

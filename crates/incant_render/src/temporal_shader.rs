@@ -10,6 +10,7 @@ pub(crate) enum Kind {
     Resolve,
     Copy,
     Upscale,
+    UpscaleOwner,
     Composite,
     #[cfg(feature = "native-metalfx")]
     MetalFxPack,
@@ -26,6 +27,12 @@ pub(crate) fn source(kind: Kind) -> std::borrow::Cow<'static, str> {
         Kind::Motion | Kind::Depth => include_str!("motion/shader.wgsl").into(),
         Kind::Resolve => include_str!("temporal/resolve.wgsl").into(),
         Kind::Copy => include_str!("temporal/copy.wgsl").into(),
+        Kind::UpscaleOwner => format!(
+            "{}\n{}",
+            include_str!("upscaling/common.wgsl"),
+            include_str!("upscaling/resolve_owner.wgsl")
+        )
+        .into(),
         Kind::Upscale => format!(
             "{}\n{}",
             include_str!("upscaling/common.wgsl"),
@@ -74,7 +81,7 @@ pub(crate) fn stages(device: &wgpu::Device, _backend: wgpu::Backend, kind: Kind)
                 Kind::MetalFxPack => "pack",
                 #[cfg(feature = "native-metalfx")]
                 Kind::MetalFxNormalize => "normalize",
-                Kind::Resolve | Kind::Upscale => "resolve",
+                Kind::Resolve | Kind::Upscale | Kind::UpscaleOwner => "resolve",
                 Kind::Copy => "copy",
                 Kind::Composite => "composite",
             },

@@ -13,6 +13,7 @@ pub enum Kind {
     Resolve,
     Copy,
     Upscale,
+    UpscaleOwner,
     Composite,
     MetalFxPack,
     MetalFxNormalize,
@@ -26,7 +27,7 @@ impl Kind {
             Self::MetalFxNormalize => "normalize",
             Self::Resolve => "resolve",
             Self::Copy => "copy",
-            Self::Upscale => "resolve",
+            Self::Upscale | Self::UpscaleOwner => "resolve",
             Self::Composite => "composite",
         }
     }
@@ -52,6 +53,9 @@ impl Kind {
             }
             Self::Copy => {
                 "incant-temporal-copy-v2;naga=29.0.4;wgpu=29.0.4;frame64-f@1,textures1@0,mrt1;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
+            }
+            Self::UpscaleOwner => {
+                "incant-temporal-upscale-owner-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,changes12528-f,5float-depth+2uint-textures,mrt=rgba16f-r32f-rg32u;msl=2.4,frame0,changes1;hlsl=6.0,b0-b1,special-b2;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
             }
             Self::Upscale => {
                 "incant-temporal-upscale-v1;naga=29.0.4;wgpu=29.0.4;frame96-f,textures5,mrt2;msl=2.4;hlsl=6.0,special-b1;spv=1.0,no-y-flip;bounds=restrict;loops=bounded"
@@ -89,6 +93,10 @@ impl Kind {
                 9, 110, 232, 158, 203, 92, 145, 18, 222, 234, 85, 147, 90, 194, 218, 11, 236, 79,
                 215, 243, 186, 96, 58, 160, 76, 135, 91, 164, 141, 235, 36, 139,
             ],
+            Self::UpscaleOwner => [
+                107, 177, 37, 197, 206, 163, 149, 137, 130, 19, 15, 187, 179, 178, 2, 71, 150, 124,
+                159, 247, 180, 214, 33, 88, 158, 126, 216, 178, 81, 48, 102, 127,
+            ], // Claude 0073 corrected owner resolve
             Self::Upscale => [
                 74, 5, 87, 196, 159, 13, 190, 192, 49, 59, 251, 215, 27, 237, 98, 104, 127, 114,
                 46, 184, 161, 62, 100, 20, 139, 172, 72, 246, 136, 17, 230, 242,

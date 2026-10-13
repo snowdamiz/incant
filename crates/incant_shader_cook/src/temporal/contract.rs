@@ -159,6 +159,34 @@ fn uniform(
     }
     Ok(())
 }
+fn owner_changes(m: &naga::Module, t: naga::Handle<naga::Type>) -> Result<()> {
+    let TypeInner::Struct { members, span } = &m.types[t].inner else {
+        return Err(CookError::Contract("owner changes type"));
+    };
+    require(*span == 12_528 && members.len() == 2, "owner changes span")?;
+    require(
+        members[0].offset == 0
+            && members[0].name.as_deref() == Some("header")
+            && numeric(m, members[0].ty, 4, ScalarKind::Uint),
+        "owner changes header",
+    )?;
+    require(
+        members[1].offset == 16 && members[1].name.as_deref() == Some("words"),
+        "owner changes words",
+    )?;
+    let TypeInner::Array {
+        base,
+        size: naga::ArraySize::Constant(n),
+        stride,
+    } = m.types[members[1].ty].inner
+    else {
+        return Err(CookError::Contract("owner changes array"));
+    };
+    require(
+        n.get() == 782 && stride == 16 && numeric(m, base, 4, ScalarKind::Uint),
+        "owner changes array shape",
+    )
+}
 pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
     let motion = matches!(kind, Kind::Motion | Kind::Depth | Kind::MotionOwner);
     let owner = kind == Kind::MotionOwner;
@@ -238,6 +266,12 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
             vec![]
         } else if owner {
             vec![Io::Float(0, 4, false), Io::Uint(1, 1, false)]
+        } else if kind == Kind::UpscaleOwner {
+            vec![
+                Io::Float(0, 4, false),
+                Io::Float(1, 1, false),
+                Io::Uint(2, 2, false),
+            ]
         } else if matches!(kind, Kind::Upscale | Kind::MetalFxNormalize) {
             vec![Io::Float(0, 4, false), Io::Float(1, 1, false)]
         } else if kind == Kind::MetalFxPack {
@@ -271,6 +305,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
         Kind::Resolve => 5,
         Kind::Copy => 2,
         Kind::Upscale => 6,
+        Kind::UpscaleOwner => 9,
         Kind::Composite => 3,
         Kind::MetalFxPack | Kind::MetalFxNormalize => 4,
     };
@@ -298,6 +333,7 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                     }
                     Kind::Resolve | Kind::Copy => &["rect", "depth", "options", "reactive"],
                     Kind::Upscale
+                    | Kind::UpscaleOwner
                     | Kind::Composite
                     | Kind::MetalFxPack
                     | Kind::MetalFxNormalize => {
@@ -306,6 +342,12 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                 }
             };
             uniform(m, g.ty, names, frame && motion, material)?;
+        } else if kind == Kind::UpscaleOwner && b.group == 0 && b.binding == 8 {
+            require(
+                g.space == AddressSpace::Uniform,
+                "owner changes uniform space",
+            )?;
+            owner_changes(m, g.ty)?;
         } else if motion && b.group == 1 && b.binding == 2 {
             require(
                 g.space == AddressSpace::Handle
@@ -328,7 +370,11 @@ pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleI
                 ImageClass::Depth { multi: false }
             } else {
                 ImageClass::Sampled {
-                    kind: ScalarKind::Float,
+                    kind: if kind == Kind::UpscaleOwner && matches!(b.binding, 6 | 7) {
+                        ScalarKind::Uint
+                    } else {
+                        ScalarKind::Float
+                    },
                     multi: false,
                 }
             };
@@ -475,5 +521,43 @@ mod owner_tests {
             super::super::Kind::Motion.source_hash(),
             super::super::Kind::Depth.source_hash()
         );
+    }
+}
+
+#[cfg(test)]
+mod history_owner_tests {
+    use super::*;
+    fn accepts(source: &str) -> bool {
+        let Ok(module) = naga::front::wgsl::parse_str(source) else {
+            return false;
+        };
+        naga::valid::Validator::new(
+            naga::valid::ValidationFlags::all(),
+            naga::valid::Capabilities::empty(),
+        )
+        .validate(&module)
+        .is_ok_and(|info| validate(Kind::UpscaleOwner, &module, &info).is_ok())
+    }
+    #[test]
+    fn owner_history_interface_refuses_retyped_records_and_uniform_drift() {
+        let source = format!(
+            "{}\n{}",
+            include_str!("../../../incant_render/src/upscaling/common.wgsl"),
+            include_str!("../../../incant_render/src/upscaling/resolve_owner.wgsl")
+        );
+        assert!(accepts(&source));
+        for changed in [
+            source.replace("texture_2d<u32>", "texture_2d<f32>"),
+            source.replace("@location(2) record:vec2u", "@location(3) record:vec2u"),
+            source.replace("array<vec4u,782>", "array<vec4u,783>"),
+            source.replace("header:vec4u, words:", "header:vec4u, extra:vec4u, words:"),
+            source.replace("@binding(8)", "@binding(9)"),
+            format!("{source}\n@group(0) @binding(9) var extra:texture_2d<u32>;"),
+        ] {
+            assert_ne!(changed, source, "negative control must change source");
+            assert!(!accepts(&changed));
+        }
+        assert!(super::super::cook(Kind::UpscaleOwner, &format!("{source}\n")).is_err());
+        assert!(super::super::cook(Kind::Upscale, &source).is_err());
     }
 }

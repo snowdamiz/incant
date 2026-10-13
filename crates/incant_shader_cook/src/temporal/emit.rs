@@ -96,7 +96,15 @@ pub(super) fn emit(
                     .ok_or(CookError::Contract("temporal emitted binding"))?;
                 let mut target = msl::BindTarget::default();
                 if g.space == naga::AddressSpace::Uniform {
-                    target.buffer = Some(if motion && b.group == 1 { 1 } else { 0 });
+                    target.buffer = Some(
+                        if (motion && b.group == 1)
+                            || (kind == Kind::UpscaleOwner && b.binding == 8)
+                        {
+                            1
+                        } else {
+                            0
+                        },
+                    );
                 } else if motion && b.binding == 2 {
                     target.sampler = Some(msl::BindSamplerTarget::Resource(0));
                 } else {
@@ -190,7 +198,11 @@ pub(super) fn emit(
             let mut options = hlsl::Options {
                 shader_model: hlsl::ShaderModel::V6_0,
                 fake_missing_bindings: false,
-                special_constants_binding: Some(bind(if motion { 2 } else { 1 })),
+                special_constants_binding: Some(bind(if motion || kind == Kind::UpscaleOwner {
+                    2
+                } else {
+                    1
+                })),
                 restrict_indexing: true,
                 force_loop_bounding: true,
                 ..Default::default()
@@ -200,7 +212,9 @@ pub(super) fn emit(
                     .binding
                     .ok_or(CookError::Contract("temporal emitted binding"))?;
                 let target = if g.space == naga::AddressSpace::Uniform {
-                    bind(u32::from(motion && b.group == 1))
+                    bind(u32::from(
+                        (motion && b.group == 1) || (kind == Kind::UpscaleOwner && b.binding == 8),
+                    ))
                 } else if motion && b.binding == 2 {
                     hlsl::BindTarget {
                         space: 255,

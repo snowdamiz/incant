@@ -18,6 +18,14 @@ fn main() {
             (Kind::Resolve, vec!["src/temporal/resolve.wgsl"], "resolve"),
             (Kind::Copy, vec!["src/temporal/copy.wgsl"], "copy"),
             (
+                Kind::UpscaleOwner,
+                vec![
+                    "src/upscaling/common.wgsl",
+                    "src/upscaling/resolve_owner.wgsl",
+                ],
+                "upscale-owner",
+            ),
+            (
                 Kind::Upscale,
                 vec!["src/upscaling/common.wgsl", "src/upscaling/resolve.wgsl"],
                 "upscale",

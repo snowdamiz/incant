@@ -156,6 +156,9 @@ impl State {
             candidate: Bits::new(highest),
         }
     }
+    pub fn candidate(&self) -> (u32, u32, &[u32]) {
+        (self.highest, self.candidate.classes, &self.candidate.words)
+    }
     pub fn begin(&mut self) {
         self.candidate.clear();
     }

@@ -157,8 +157,8 @@ impl RetainedScene {
         self.metalfx.as_ref().and_then(|o| o.selection())
     }
     /// Explicit owner attachment reset. Toggling creates a fresh motion owner
-    /// and drops fixed/portable/native color histories together. No color consumer
-    /// reads the attachment yet. Enable portable upscaling afterward if needed.
+    /// and drops fixed/portable/native color histories together. Enable portable
+    /// upscaling afterward to consume its integer owner provenance.
     pub fn set_motion_owner_attachment(
         &mut self,
         renderer: &Renderer,
@@ -177,11 +177,7 @@ impl RetainedScene {
         if old.owner_attachment == enabled {
             return Ok(());
         }
-        self.enable_motion_history(renderer)?;
-        self.motion
-            .as_mut()
-            .expect("enabled history")
-            .owner_attachment = enabled;
+        self.reset_motion_history(renderer, enabled)?;
         Ok(())
     }
     pub fn motion_owner_attachment_enabled(&self) -> bool {
@@ -189,6 +185,9 @@ impl RetainedScene {
     }
     /// Pipelines must already be enabled on this renderer. Publication is atomic.
     pub fn enable_motion_history(&mut self, renderer: &Renderer) -> Result<()> {
+        self.reset_motion_history(renderer, false)
+    }
+    fn reset_motion_history(&mut self, renderer: &Renderer, attachment: bool) -> Result<()> {
         if !Arc::ptr_eq(&self.owner, &renderer.identity) {
             return Err(crate::motion::MotionError::Owner.into());
         }
@@ -197,6 +196,8 @@ impl RetainedScene {
             &self.live,
             &self.staging,
             self.motion.as_ref(),
+            attachment,
+            self.packed_lights.capacity(),
         )?;
         self.motion = Some(candidate);
         self.temporal = None;
@@ -260,11 +261,15 @@ impl RetainedScene {
         if renderer.upscaling.is_none() {
             return Err(crate::upscaling::UpscaleError::Disabled.into());
         }
-        self.enable_motion_history(renderer)?;
-        self.motion
-            .as_mut()
-            .expect("enabled history")
-            .owner_attachment = attachment;
+        if attachment
+            && renderer
+                .upscaling
+                .as_ref()
+                .is_none_or(|s| s.owner.is_none())
+        {
+            return Err(crate::motion::MotionError::OwnerDisabled.into());
+        }
+        self.reset_motion_history(renderer, attachment)?;
         self.upscaling = Some(state);
         Ok(())
     }
@@ -514,7 +519,7 @@ impl RetainedScene {
                 .as_ref()
                 .ok_or(crate::upscaling::UpscaleError::History)?;
             if motion.owner_attachment {
-                state.preflight_owner(&renderer.device, p, motion.target_size())?;
+                state.preflight_owner(&renderer.device, p, motion.target_cache())?;
             } else {
                 state.preflight(&renderer.device, p, motion.target_bytes())?;
             }
@@ -544,6 +549,7 @@ impl RetainedScene {
                         output: [target.width, target.height],
                         plan: &plan,
                         temporal: self.temporal.is_some() || self.upscaling.is_some(),
+                        lights: &self.packed_lights,
                         upscale_rect: self.upscaling.as_ref().map(|_| output_rect),
                     },
                 )
@@ -634,7 +640,7 @@ impl RetainedScene {
         let submission = renderer.queue.submit([commands]);
         std::mem::swap(&mut self.live, &mut self.staging);
         if let (Some(motion), Some(pending)) = (&mut self.motion, motion_pending) {
-            motion.accept(pending, input);
+            motion.accept(pending, input, &self.packed_lights);
         }
         if let (Some(temporal), Some(pending)) = (&mut self.temporal, temporal_pending) {
             temporal.accept(pending);

@@ -39,6 +39,9 @@ impl Renderer {
         {
             return Err(MotionError::Format.into());
         }
+        if self.upscaling.is_some() {
+            crate::upscaling::system::check_owner_format(&self.adapter)?;
+        }
         let validation = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
         let candidate = (|| -> Result<_> {
             let shader = crate::temporal_shader::stages(
@@ -97,15 +100,30 @@ impl Renderer {
                     })
             }))
         })();
+        let upscale = self
+            .upscaling
+            .as_ref()
+            .map(|_| {
+                crate::upscaling::system::OwnerSystem::new(
+                    &self.device,
+                    self.adapter.get_info().backend,
+                )
+            })
+            .transpose();
         if let Some(error) = validation.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(crate::ResourceError::Preparation(error).into());
         }
+        let candidate = candidate?;
+        let upscale = upscale?;
+        if let Some(system) = self.upscaling.as_mut() {
+            system.owner = upscale;
+        }
         self.motion
             .as_mut()
             .ok_or(MotionError::Disabled)?
-            .owner_pipelines = Some(candidate?);
+            .owner_pipelines = Some(candidate);
         Ok(())
     }
 }

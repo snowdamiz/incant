@@ -10,6 +10,11 @@ fn source(kind: Kind) -> String {
         }
         Kind::Resolve => include_str!("../../incant_render/src/temporal/resolve.wgsl").into(),
         Kind::Copy => include_str!("../../incant_render/src/temporal/copy.wgsl").into(),
+        Kind::UpscaleOwner => [
+            include_str!("../../incant_render/src/upscaling/common.wgsl"),
+            include_str!("../../incant_render/src/upscaling/resolve_owner.wgsl"),
+        ]
+        .join("\n"),
         Kind::Upscale => [
             include_str!("../../incant_render/src/upscaling/common.wgsl"),
             include_str!("../../incant_render/src/upscaling/resolve.wgsl"),
@@ -43,6 +48,7 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
         Kind::Resolve,
         Kind::Copy,
         Kind::Upscale,
+        Kind::UpscaleOwner,
         Kind::Composite,
     ] {
         let b = cook(kind, &source(kind)).unwrap();
@@ -59,12 +65,14 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
                     },
                 )
                 .unwrap();
-                naga::valid::Validator::new(
+                if let Err(error) = naga::valid::Validator::new(
                     naga::valid::ValidationFlags::all(),
                     naga::valid::Capabilities::all(),
                 )
                 .validate(&m)
-                .unwrap();
+                {
+                    panic!("{kind:?} SPIR-V roundtrip: {error:?}");
+                }
                 assert_eq!(m.entry_points.len(), 1);
                 continue;
             }
@@ -125,6 +133,22 @@ fn fixed_programs_preserve_interfaces_robust_accesses_and_native_binding_maps() 
                 (Kind::MetalFxNormalize, Backend::Dx12, Stage::Fragment) => {
                     &["SV_Target0", "SV_Target1", "register(t2)"]
                 }
+                (Kind::UpscaleOwner, Backend::Metal, Stage::Fragment) => &[
+                    "[[buffer(0)]]",
+                    "[[buffer(1)]]",
+                    "[[texture(5)]]",
+                    "[[texture(6)]]",
+                    "[[color(2)]]",
+                    "uint2",
+                ],
+                (Kind::UpscaleOwner, Backend::Dx12, Stage::Fragment) => &[
+                    "register(b0)",
+                    "register(b1)",
+                    "register(t5)",
+                    "register(t6)",
+                    "SV_Target2",
+                    "uint2",
+                ],
                 (Kind::Upscale, Backend::Metal, Stage::Fragment) => &[
                     "[[color(0)]]",
                     "[[color(1)]]",
@@ -189,6 +213,7 @@ fn changed_math_interface_and_program_identity_are_not_trusted() {
         Kind::Resolve,
         Kind::Copy,
         Kind::Upscale,
+        Kind::UpscaleOwner,
         Kind::Composite,
         Kind::MetalFxPack,
         Kind::MetalFxNormalize,

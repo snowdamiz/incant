@@ -1,0 +1,1716 @@
+{
+  "scope": "CPU/compiler qualification only. Default-off private owner-history experiment; private upscaling/MetalFX ancestry and appearance/device/performance gates remain unapproved.",
+  "source_freeze_sha256": "94bdcd863b42e54bdabdd449f3656171386be8aa3c2f99680f1575039539e9ff",
+  "sources": [
+    {
+      "path": "crates/incant_render/build.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/build.rs",
+      "sha256": "eb66289179459b381d8f1e112127ada41f98469b9c68b68813ebe7f6d6ad6472"
+    },
+    {
+      "path": "crates/incant_render/src/motion/attachment.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/motion/attachment.rs",
+      "sha256": "949c7f1b3a2263633a6524d398b138b070898ad91411d47d6aeede84528506ed"
+    },
+    {
+      "path": "crates/incant_render/src/motion/changes.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/motion/changes.rs",
+      "sha256": "94cbb67c6557da8d4d25cb7162b97c037881e8a373604c26fa073c818a6dcb93"
+    },
+    {
+      "path": "crates/incant_render/src/motion/mod.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/motion/mod.rs",
+      "sha256": "b9b2a2e0682763509d92a74c08ca953f68adf6eaa07311e16a15159d703c7f86"
+    },
+    {
+      "path": "crates/incant_render/src/motion/owner_system.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/motion/owner_system.rs",
+      "sha256": "334385be08ddd098c0a5b3a6c51a9a177c5d577d3fa0f7694064b750fdd955af"
+    },
+    {
+      "path": "crates/incant_render/src/motion/provenance.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/motion/provenance.rs",
+      "sha256": "eabb3236395706d52289aef094e53c54f93230121ffed225d223ee5b6b86f681"
+    },
+    {
+      "path": "crates/incant_render/src/motion/retained.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/motion/retained.rs",
+      "sha256": "c9fc4dc7ac4af178ffeb396d7385435533d2c81fb3cfb3ea6811dd784c78fff1"
+    },
+    {
+      "path": "crates/incant_render/src/retained.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/retained.rs",
+      "sha256": "e4cda8e2ecc8f9b8514c863d52c97936aa1446669225090de09c4de8e8bb9fe7"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/temporal_shader.rs",
+      "sha256": "e7f730cd9980e752491ddc61c1554e4800d5e50f850dd3cc446e111b5a903ae0"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/temporal_shader/cooked.rs",
+      "sha256": "8f5617e22add52dc12c3964d1d6cd1269985dcff9c1d4696c3e581e206f29a67"
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "sha256": "81536a000ae50de240f833d8c5a218ad31c1d617d6cc0d94038ea398b6a2b231"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/device_tests.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/device_tests.rs",
+      "sha256": "d1dc6b85ee8678738924a7925aecbc7fb3e50c94f06484f582d970ea0385f046"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/owner.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/owner.rs",
+      "sha256": "4c68e6f2f766829904b1d22aac7bab91ccef2c2e96fa272e60d21c78ad2aeb97"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/owner_device_tests.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/owner_device_tests.rs",
+      "sha256": "07b168aa4f9c5db51537beb0f16fbbb80b5cf0e6fae11f29148b40f03068d36e"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/resolve_owner.wgsl",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/resolve_owner.wgsl",
+      "sha256": "df600750ab5cad117ae0cfa1e76fa635e07c96be4a76d8aa9e8470d9954c64ae"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/system.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/system.rs",
+      "sha256": "20b7bcd844fce15b3328da673cdc133405c2aeac1953d8681c5c5fe872e23b3e"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/targets.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/targets.rs",
+      "sha256": "d7b6129b9e81cc8f06b4da069fccced8d551bd49098202019d38a915984d730b"
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/tests.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_render/src/upscaling/tests.rs",
+      "sha256": "e710d6ef580c302184436c09f146e9818cb4a1c1c1f0c6915419b46df885ff60"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/contract.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_shader_cook/src/temporal/contract.rs",
+      "sha256": "24fa46bc7e33fd54572f83ab8ecfbb0ee5fcaca54501afb382de9b879ae57e9f"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/emit.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_shader_cook/src/temporal/emit.rs",
+      "sha256": "daec7c35cbbb2e06ebd8f55201b9d72c8e0d3219c6a506d5ee1dcd28bc34fe27"
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/mod.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_shader_cook/src/temporal/mod.rs",
+      "sha256": "0413188e8a821b96e98a8043fdd61c0d2a077ad03b7873cc29811dab0ed2654e"
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/temporal.rs",
+      "copy": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/source-final/crates/incant_shader_cook/tests/temporal.rs",
+      "sha256": "036c816e14822a228b184fa3d77d5665b527e06b07b4e8f9c1d31ee4c6c49aa1"
+    }
+  ],
+  "compiled_head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+  "frozen_inputs": 2736,
+  "counts": {
+    "cooker": {
+      "passed": 33,
+      "failed": 0,
+      "ignored": 0
+    },
+    "default-cpu": {
+      "passed": 152,
+      "failed": 0,
+      "ignored": 42
+    },
+    "cooked-native-cpu": {
+      "passed": 167,
+      "failed": 0,
+      "ignored": 43
+    }
+  },
+  "checks": [
+    {
+      "label": "qualification-cooker-001",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909030.056779,
+      "finished": 1791909037.692232,
+      "pid": 25299,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-cooker-001.log",
+      "log_sha256": "0e17a0c7597239c4edcb8360035d46fda3d9e67851fe361323088bab83143822"
+    },
+    {
+      "label": "qualification-default-cpu-001",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909073.5041192,
+      "finished": 1791909085.142443,
+      "pid": 25633,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-default-cpu-001.log",
+      "log_sha256": "c12e7b3a280d3c5bbd0af5a1ab7e0701833ee7c97ae9f8f633ae93f3cb3607c0"
+    },
+    {
+      "label": "qualification-cooked-native-cpu-001",
+      "argv": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--features",
+        "cooked-temporal,native-metalfx"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909085.348067,
+      "finished": 1791909097.108778,
+      "pid": 25965,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-cooked-native-cpu-001.log",
+      "log_sha256": "aed068c4e5a91d0763be343cad6d4a3f8ce452f77159d64ec97936fa1da907b0"
+    },
+    {
+      "label": "qualification-default-clippy-001",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_shader_cook",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909097.307111,
+      "finished": 1791909099.878187,
+      "pid": 26014,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-default-clippy-001.log",
+      "log_sha256": "0d465c0a1231fb748f2bb94ad9507765919048491470b441c4a23819cbe808c3"
+    },
+    {
+      "label": "qualification-cooked-native-clippy-001",
+      "argv": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render_game",
+        "--all-targets",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/native-metalfx",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909100.081755,
+      "finished": 1791909109.167032,
+      "pid": 26047,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-cooked-native-clippy-001.log",
+      "log_sha256": "8b7d99239c15ef2dfc85686904925fb5a6161cf4cc7d3411325b90fd381538fd"
+    },
+    {
+      "label": "qualification-wasm-001",
+      "argv": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--lib",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909109.365806,
+      "finished": 1791909110.618017,
+      "pid": 26178,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-wasm-001.log",
+      "log_sha256": "8dcb5519e8cfe6d3a88ef8eafd877ed6e0e2c45dce89b55262c9af85f03fb7fb"
+    },
+    {
+      "label": "qualification-runtime-graph-001",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "--features",
+        "incant_render/cooked-temporal,incant_render/native-metalfx"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909110.83682,
+      "finished": 1791909111.325752,
+      "pid": 26191,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-runtime-graph-001.log",
+      "log_sha256": "132bc908d8f3167e5c0eed00ef9c4b5d500bf774fcfd526ad48f52afbe83157e"
+    },
+    {
+      "label": "qualification-fmt-001",
+      "argv": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909111.521059,
+      "finished": 1791909112.865644,
+      "pid": 26199,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-fmt-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "qualification-conventions-001",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909113.084411,
+      "finished": 1791909113.1850681,
+      "pid": 26208,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-conventions-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "qualification-diff-001",
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/native-agent-play/incant",
+      "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+      "head": "2bccac7779c65cc8236ccdd878d42bf649c5bda8",
+      "started": 1791909113.393685,
+      "finished": 1791909113.486183,
+      "pid": 26212,
+      "exit": 0,
+      "reaped": true,
+      "source_input_count": 2736,
+      "input_manifest_sha256": "e397c54c90521208ef20b7f64350a56da1b7d5bf80be3cd169f6b779ef8e997d",
+      "changed_inputs": [],
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-diff-001.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "binaries": [
+    {
+      "variant": "default",
+      "origin": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-bf4961fb357f91a4",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/frozen-binaries/default",
+      "sha256": "ca9ae76e301913293c38e6d2b6d1529a523e1ca3342e44cf807d6a7c843792b4",
+      "bytes": 32280400,
+      "executable": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-default-cpu-001.log"
+    },
+    {
+      "variant": "cooked-native",
+      "origin": "/Users/andreyyurlov/.codex/incant-core-presentation-target/ci/deps/incant_render-288759d68012f619",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/frozen-binaries/cooked-native",
+      "sha256": "fd965d4bef936bec79c8acac1ef2926df1b09e3749db67d7fc01ab85cbb40828",
+      "bytes": 33346448,
+      "executable": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/qualification-cooked-native-cpu-001.log"
+    }
+  ],
+  "artifact_identity": {
+    "old_records": 134,
+    "old_shader_payloads_exact": 114,
+    "changed_producer_stamps": 9,
+    "records": [
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-cluster-shaders/Dx12-Compute.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-cluster-shaders/Dx12-Compute.shader",
+        "sha256": "71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250",
+        "prior_sha256": "71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-cluster-shaders/Metal-Compute.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-cluster-shaders/Metal-Compute.shader",
+        "sha256": "e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402",
+        "prior_sha256": "e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-cluster-shaders/Vulkan-Compute.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-cluster-shaders/Vulkan-Compute.shader",
+        "sha256": "345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9",
+        "prior_sha256": "345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-cluster-shaders/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-cluster-shaders/manifest.rs",
+        "sha256": "40ce0db8bda6d1ed371ebe262691fc3118fa802909b7c851f6c313f03687e48a",
+        "prior_sha256": "40ce0db8bda6d1ed371ebe262691fc3118fa802909b7c851f6c313f03687e48a",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-composite/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-composite/Dx12-Fragment.shader",
+        "sha256": "a2675e6b8a7dbcde89ca5faf036e49150225d01cf1394b4520258c7d1963873d",
+        "prior_sha256": "a2675e6b8a7dbcde89ca5faf036e49150225d01cf1394b4520258c7d1963873d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-composite/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-composite/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-composite/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-composite/Metal-Fragment.shader",
+        "sha256": "393ff4c824ce78e05b10642c74030bcc30e0905101ff4b57a86bf208108fbe17",
+        "prior_sha256": "393ff4c824ce78e05b10642c74030bcc30e0905101ff4b57a86bf208108fbe17",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-composite/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-composite/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-composite/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-composite/Vulkan-Fragment.shader",
+        "sha256": "a9be7c1bfd10962aa6d2c4b98e06b3c6343964c7227dfad2ed7ca6b8a52a09d2",
+        "prior_sha256": "a9be7c1bfd10962aa6d2c4b98e06b3c6343964c7227dfad2ed7ca6b8a52a09d2",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-composite/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-composite/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-composite/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-composite/manifest.rs",
+        "sha256": "a7eef6e8e007ee106ca607cbaf9f4b3866c34093274819a473b72cb4b5b6ca2c",
+        "prior_sha256": "73ff7edfdff7e903783cc8b04f9066292e608d8bccd37a51cdc8daf99916a218",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-copy/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-copy/Dx12-Fragment.shader",
+        "sha256": "5ee5c4eb31c13aba287473b222acdb78fd9d69fce62dde7a7e586c73f62c32bd",
+        "prior_sha256": "5ee5c4eb31c13aba287473b222acdb78fd9d69fce62dde7a7e586c73f62c32bd",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-copy/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-copy/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-copy/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-copy/Metal-Fragment.shader",
+        "sha256": "32f848a5693d443c3a6d5cce33c07b0ff7281daf772ffd5dd4c7b49579c19f44",
+        "prior_sha256": "32f848a5693d443c3a6d5cce33c07b0ff7281daf772ffd5dd4c7b49579c19f44",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-copy/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-copy/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-copy/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-copy/Vulkan-Fragment.shader",
+        "sha256": "e138082b5b17ae23cacc0b8eb568f372d4cae13ef37156136b193f28ca291f6d",
+        "prior_sha256": "e138082b5b17ae23cacc0b8eb568f372d4cae13ef37156136b193f28ca291f6d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-copy/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-copy/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-copy/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-copy/manifest.rs",
+        "sha256": "d965fd79c98526b7062f3b37f6faa4c61f8bc5194fad4353f682d2672ca56365",
+        "prior_sha256": "ec67b8c4d4cb5b6c6b5d064ce037cf3e83e69bb3303e7f81ff5d274e4987bf44",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-depth/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-depth/Dx12-Fragment.shader",
+        "sha256": "9dbafe1b8c2b064105f38022242c94aaea0ff2ac25e7c5c95fc5e7a5ad37465d",
+        "prior_sha256": "9dbafe1b8c2b064105f38022242c94aaea0ff2ac25e7c5c95fc5e7a5ad37465d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-depth/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-depth/Dx12-Vertex.shader",
+        "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "prior_sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-depth/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-depth/Metal-Fragment.shader",
+        "sha256": "690ccd400af8ddbcad386d75d6946c798e02fceccd4e613ed7428f592b5e81a1",
+        "prior_sha256": "690ccd400af8ddbcad386d75d6946c798e02fceccd4e613ed7428f592b5e81a1",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-depth/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-depth/Metal-Vertex.shader",
+        "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "prior_sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-depth/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-depth/Vulkan-Fragment.shader",
+        "sha256": "f89df296e25829e86f6d841690ed30ed4eb3258a93a38ecd4d08bcb03c1e33cb",
+        "prior_sha256": "f89df296e25829e86f6d841690ed30ed4eb3258a93a38ecd4d08bcb03c1e33cb",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-depth/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-depth/Vulkan-Vertex.shader",
+        "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "prior_sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-depth/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-depth/manifest.rs",
+        "sha256": "1710f2d4e394641e416046652a76ea7f8c9a719b5bd0927b9598dba0f2342e71",
+        "prior_sha256": "3d6f35ab39d173bd2171fde2def0f9b95bf22f9286213db66de4f8f08297b7f4",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-normalize/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-normalize/Dx12-Fragment.shader",
+        "sha256": "8814f7c5b43d37e9b8be1ac61ae5a303e8e45c0cd87cd0381e45c7c55b3b7ec4",
+        "prior_sha256": "8814f7c5b43d37e9b8be1ac61ae5a303e8e45c0cd87cd0381e45c7c55b3b7ec4",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-normalize/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-normalize/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-normalize/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-normalize/Metal-Fragment.shader",
+        "sha256": "2a8206aa959b0d59964e4eb266873433d14cae24e9b86076a9e5ef62612a300a",
+        "prior_sha256": "2a8206aa959b0d59964e4eb266873433d14cae24e9b86076a9e5ef62612a300a",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-normalize/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-normalize/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-normalize/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-normalize/Vulkan-Fragment.shader",
+        "sha256": "47e1cdc0396c7fb90d406c43834282e767fed0caa6384ee56a087a90abeeba2d",
+        "prior_sha256": "47e1cdc0396c7fb90d406c43834282e767fed0caa6384ee56a087a90abeeba2d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-normalize/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-normalize/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-normalize/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-normalize/manifest.rs",
+        "sha256": "a50126c299ccdcb28991e232f0a4a5c2f360a23768d8f311e703375dfd1aaabf",
+        "prior_sha256": "a1224419dfcc88a7ea330ed52b9abf36078f5be8cea3f5e0b9656ac4088b0868",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-pack/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-pack/Dx12-Fragment.shader",
+        "sha256": "a7b68586ae6adaceca82839e234a94432189d5f470f3415b2bede09cadb8dd81",
+        "prior_sha256": "a7b68586ae6adaceca82839e234a94432189d5f470f3415b2bede09cadb8dd81",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-pack/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-pack/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-pack/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-pack/Metal-Fragment.shader",
+        "sha256": "2aa93dbea5262f760256f4b568a8fe63daacdcdac46849b71ede36d2bc49f5d3",
+        "prior_sha256": "2aa93dbea5262f760256f4b568a8fe63daacdcdac46849b71ede36d2bc49f5d3",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-pack/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-pack/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-pack/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-pack/Vulkan-Fragment.shader",
+        "sha256": "61812ce271f51334038120927457245bbd61741d65d46ca4d8d57f5697f7b5fe",
+        "prior_sha256": "61812ce271f51334038120927457245bbd61741d65d46ca4d8d57f5697f7b5fe",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-pack/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-pack/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-metalfx-pack/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-metalfx-pack/manifest.rs",
+        "sha256": "8141a2e3bce0147b647014945aa4033e56ade7d6a621b8c682cd033d7aa82daf",
+        "prior_sha256": "ceda92d09416b86ecc42c598cad0747e3d9546287163c975edd8b392fda3dad0",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion/Dx12-Fragment.shader",
+        "sha256": "463b318167cf096655f0a83d87006ca1ab3f712b2815563d3b1c6120ca6cc051",
+        "prior_sha256": "463b318167cf096655f0a83d87006ca1ab3f712b2815563d3b1c6120ca6cc051",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion/Dx12-Vertex.shader",
+        "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "prior_sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion/Metal-Fragment.shader",
+        "sha256": "caa0875f398511c5e3e4cf48d41939c3e45fc73b3ec68f676b1244a6d7def750",
+        "prior_sha256": "caa0875f398511c5e3e4cf48d41939c3e45fc73b3ec68f676b1244a6d7def750",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion/Metal-Vertex.shader",
+        "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "prior_sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion/Vulkan-Fragment.shader",
+        "sha256": "c1d9a7afad75309bbd274dc78348dd1ab24862c893c67ee9beaa1056aad1e162",
+        "prior_sha256": "c1d9a7afad75309bbd274dc78348dd1ab24862c893c67ee9beaa1056aad1e162",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion/Vulkan-Vertex.shader",
+        "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "prior_sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion/manifest.rs",
+        "sha256": "834144a9db3f9e9fd60aef9a98380e2f6cb301137b14d8d51d5e2a3e0e106a3a",
+        "prior_sha256": "f41f4d50046c392fffbf386f3ea08e0d1d865c74963826994c4651f966c35760",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion-owner/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion-owner/Dx12-Fragment.shader",
+        "sha256": "db8ab607e1aea4fc3af0f5612eaef289079d7c4b78d1e26725998369006fa3dc",
+        "prior_sha256": "db8ab607e1aea4fc3af0f5612eaef289079d7c4b78d1e26725998369006fa3dc",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion-owner/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion-owner/Dx12-Vertex.shader",
+        "sha256": "e9cacde802a2f399555deeec4e3a575de840913da717d0007268ed7a16360225",
+        "prior_sha256": "e9cacde802a2f399555deeec4e3a575de840913da717d0007268ed7a16360225",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion-owner/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion-owner/Metal-Fragment.shader",
+        "sha256": "bb4f5690341b3be21adaeae7a8bae6e82702ecb6b7ecae4900a245bd2e0aad50",
+        "prior_sha256": "bb4f5690341b3be21adaeae7a8bae6e82702ecb6b7ecae4900a245bd2e0aad50",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion-owner/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion-owner/Metal-Vertex.shader",
+        "sha256": "5780c65f054a8845a3db01c783621661a0dde78908995d5325b37bbf73baa563",
+        "prior_sha256": "5780c65f054a8845a3db01c783621661a0dde78908995d5325b37bbf73baa563",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion-owner/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion-owner/Vulkan-Fragment.shader",
+        "sha256": "6e507a1ab5df7464da4bf0723a8570c8844af2b67815c622e1f611e455295bfe",
+        "prior_sha256": "6e507a1ab5df7464da4bf0723a8570c8844af2b67815c622e1f611e455295bfe",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion-owner/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion-owner/Vulkan-Vertex.shader",
+        "sha256": "97414a3a7d633a6be5022a5dd07d1d19aef2476e2c2e0513b801e5e395d67c2b",
+        "prior_sha256": "97414a3a7d633a6be5022a5dd07d1d19aef2476e2c2e0513b801e5e395d67c2b",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-motion-owner/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-motion-owner/manifest.rs",
+        "sha256": "5d73c3f84b29c97909f842240093f92158c4de6251de636a9f9389cd7042a841",
+        "prior_sha256": "a754d7a7b688c39f1ae5d6a8cc9bb2cbdfd1d3eb6d15d3006bc5bb8ba001bc48",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-resolve/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-resolve/Dx12-Fragment.shader",
+        "sha256": "93bae39c89bd6a7c4f42ee7454badf64d3bbb753112ff1579575244d81cd097d",
+        "prior_sha256": "93bae39c89bd6a7c4f42ee7454badf64d3bbb753112ff1579575244d81cd097d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-resolve/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-resolve/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-resolve/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-resolve/Metal-Fragment.shader",
+        "sha256": "dda502fb6a98b413e762c447fd58cc2a32f0d3bffbc73a1b3335374774db92ca",
+        "prior_sha256": "dda502fb6a98b413e762c447fd58cc2a32f0d3bffbc73a1b3335374774db92ca",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-resolve/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-resolve/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-resolve/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-resolve/Vulkan-Fragment.shader",
+        "sha256": "5cdebc919504e25e74908adb7674f4f6b5c7c3e46837876d5fcf7f9706460d9f",
+        "prior_sha256": "5cdebc919504e25e74908adb7674f4f6b5c7c3e46837876d5fcf7f9706460d9f",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-resolve/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-resolve/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-resolve/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-resolve/manifest.rs",
+        "sha256": "df1ac958efb18e98be726126abd38a77daa003b726e4f41acbc45f286c5dd8bb",
+        "prior_sha256": "d2e4f9964c1eb960279d72c6c4f85afa9137e4f21c2a3bf3e3aa31428989dd2e",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-upscale/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale/Dx12-Fragment.shader",
+        "sha256": "fc66f047f6d6dd097e62344598aec3f712076a76974dcd710a7def67a2370506",
+        "prior_sha256": "fc66f047f6d6dd097e62344598aec3f712076a76974dcd710a7def67a2370506",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-upscale/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-upscale/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale/Metal-Fragment.shader",
+        "sha256": "0b62aa91b4a842e39297672dc051360ec97ead021da1cfb6c00e9e9dd3fd7896",
+        "prior_sha256": "0b62aa91b4a842e39297672dc051360ec97ead021da1cfb6c00e9e9dd3fd7896",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-upscale/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-upscale/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale/Vulkan-Fragment.shader",
+        "sha256": "3a325731187259d9c2a31174f5d82db1d73f7d87f81ea1116faa2a509a786d43",
+        "prior_sha256": "3a325731187259d9c2a31174f5d82db1d73f7d87f81ea1116faa2a509a786d43",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-upscale/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/c5b53b60c6be7fe4/temporal-upscale/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale/manifest.rs",
+        "sha256": "b2962cbe03545506de003fa16fa14e461ee80336fe40facd72c858e188ef1a37",
+        "prior_sha256": "3765df7ee627940e0cf34691ba3e57983445bab9a72a012f8e60bbe0e3765c5f",
+        "exact": false,
+        "only_producer_stamp_changed": true,
+        "refreshed_by_qualification": true
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-cluster-shaders/Dx12-Compute.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-cluster-shaders/Dx12-Compute.shader",
+        "sha256": "71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250",
+        "prior_sha256": "71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-cluster-shaders/Metal-Compute.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-cluster-shaders/Metal-Compute.shader",
+        "sha256": "e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402",
+        "prior_sha256": "e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-cluster-shaders/Vulkan-Compute.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-cluster-shaders/Vulkan-Compute.shader",
+        "sha256": "345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9",
+        "prior_sha256": "345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-cluster-shaders/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-cluster-shaders/manifest.rs",
+        "sha256": "40ce0db8bda6d1ed371ebe262691fc3118fa802909b7c851f6c313f03687e48a",
+        "prior_sha256": "40ce0db8bda6d1ed371ebe262691fc3118fa802909b7c851f6c313f03687e48a",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-composite/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-composite/Dx12-Fragment.shader",
+        "sha256": "a2675e6b8a7dbcde89ca5faf036e49150225d01cf1394b4520258c7d1963873d",
+        "prior_sha256": "a2675e6b8a7dbcde89ca5faf036e49150225d01cf1394b4520258c7d1963873d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-composite/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-composite/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-composite/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-composite/Metal-Fragment.shader",
+        "sha256": "393ff4c824ce78e05b10642c74030bcc30e0905101ff4b57a86bf208108fbe17",
+        "prior_sha256": "393ff4c824ce78e05b10642c74030bcc30e0905101ff4b57a86bf208108fbe17",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-composite/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-composite/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-composite/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-composite/Vulkan-Fragment.shader",
+        "sha256": "a9be7c1bfd10962aa6d2c4b98e06b3c6343964c7227dfad2ed7ca6b8a52a09d2",
+        "prior_sha256": "a9be7c1bfd10962aa6d2c4b98e06b3c6343964c7227dfad2ed7ca6b8a52a09d2",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-composite/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-composite/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-composite/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-composite/manifest.rs",
+        "sha256": "73ff7edfdff7e903783cc8b04f9066292e608d8bccd37a51cdc8daf99916a218",
+        "prior_sha256": "73ff7edfdff7e903783cc8b04f9066292e608d8bccd37a51cdc8daf99916a218",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-copy/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-copy/Dx12-Fragment.shader",
+        "sha256": "5ee5c4eb31c13aba287473b222acdb78fd9d69fce62dde7a7e586c73f62c32bd",
+        "prior_sha256": "5ee5c4eb31c13aba287473b222acdb78fd9d69fce62dde7a7e586c73f62c32bd",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-copy/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-copy/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-copy/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-copy/Metal-Fragment.shader",
+        "sha256": "32f848a5693d443c3a6d5cce33c07b0ff7281daf772ffd5dd4c7b49579c19f44",
+        "prior_sha256": "32f848a5693d443c3a6d5cce33c07b0ff7281daf772ffd5dd4c7b49579c19f44",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-copy/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-copy/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-copy/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-copy/Vulkan-Fragment.shader",
+        "sha256": "e138082b5b17ae23cacc0b8eb568f372d4cae13ef37156136b193f28ca291f6d",
+        "prior_sha256": "e138082b5b17ae23cacc0b8eb568f372d4cae13ef37156136b193f28ca291f6d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-copy/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-copy/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-copy/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-copy/manifest.rs",
+        "sha256": "ec67b8c4d4cb5b6c6b5d064ce037cf3e83e69bb3303e7f81ff5d274e4987bf44",
+        "prior_sha256": "ec67b8c4d4cb5b6c6b5d064ce037cf3e83e69bb3303e7f81ff5d274e4987bf44",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-depth/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-depth/Dx12-Fragment.shader",
+        "sha256": "9dbafe1b8c2b064105f38022242c94aaea0ff2ac25e7c5c95fc5e7a5ad37465d",
+        "prior_sha256": "9dbafe1b8c2b064105f38022242c94aaea0ff2ac25e7c5c95fc5e7a5ad37465d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-depth/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-depth/Dx12-Vertex.shader",
+        "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "prior_sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-depth/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-depth/Metal-Fragment.shader",
+        "sha256": "690ccd400af8ddbcad386d75d6946c798e02fceccd4e613ed7428f592b5e81a1",
+        "prior_sha256": "690ccd400af8ddbcad386d75d6946c798e02fceccd4e613ed7428f592b5e81a1",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-depth/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-depth/Metal-Vertex.shader",
+        "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "prior_sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-depth/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-depth/Vulkan-Fragment.shader",
+        "sha256": "f89df296e25829e86f6d841690ed30ed4eb3258a93a38ecd4d08bcb03c1e33cb",
+        "prior_sha256": "f89df296e25829e86f6d841690ed30ed4eb3258a93a38ecd4d08bcb03c1e33cb",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-depth/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-depth/Vulkan-Vertex.shader",
+        "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "prior_sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-depth/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-depth/manifest.rs",
+        "sha256": "3d6f35ab39d173bd2171fde2def0f9b95bf22f9286213db66de4f8f08297b7f4",
+        "prior_sha256": "3d6f35ab39d173bd2171fde2def0f9b95bf22f9286213db66de4f8f08297b7f4",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-normalize/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-normalize/Dx12-Fragment.shader",
+        "sha256": "8814f7c5b43d37e9b8be1ac61ae5a303e8e45c0cd87cd0381e45c7c55b3b7ec4",
+        "prior_sha256": "8814f7c5b43d37e9b8be1ac61ae5a303e8e45c0cd87cd0381e45c7c55b3b7ec4",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-normalize/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-normalize/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-normalize/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-normalize/Metal-Fragment.shader",
+        "sha256": "2a8206aa959b0d59964e4eb266873433d14cae24e9b86076a9e5ef62612a300a",
+        "prior_sha256": "2a8206aa959b0d59964e4eb266873433d14cae24e9b86076a9e5ef62612a300a",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-normalize/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-normalize/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-normalize/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-normalize/Vulkan-Fragment.shader",
+        "sha256": "47e1cdc0396c7fb90d406c43834282e767fed0caa6384ee56a087a90abeeba2d",
+        "prior_sha256": "47e1cdc0396c7fb90d406c43834282e767fed0caa6384ee56a087a90abeeba2d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-normalize/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-normalize/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-normalize/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-normalize/manifest.rs",
+        "sha256": "a1224419dfcc88a7ea330ed52b9abf36078f5be8cea3f5e0b9656ac4088b0868",
+        "prior_sha256": "a1224419dfcc88a7ea330ed52b9abf36078f5be8cea3f5e0b9656ac4088b0868",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-pack/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-pack/Dx12-Fragment.shader",
+        "sha256": "a7b68586ae6adaceca82839e234a94432189d5f470f3415b2bede09cadb8dd81",
+        "prior_sha256": "a7b68586ae6adaceca82839e234a94432189d5f470f3415b2bede09cadb8dd81",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-pack/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-pack/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-pack/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-pack/Metal-Fragment.shader",
+        "sha256": "2aa93dbea5262f760256f4b568a8fe63daacdcdac46849b71ede36d2bc49f5d3",
+        "prior_sha256": "2aa93dbea5262f760256f4b568a8fe63daacdcdac46849b71ede36d2bc49f5d3",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-pack/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-pack/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-pack/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-pack/Vulkan-Fragment.shader",
+        "sha256": "61812ce271f51334038120927457245bbd61741d65d46ca4d8d57f5697f7b5fe",
+        "prior_sha256": "61812ce271f51334038120927457245bbd61741d65d46ca4d8d57f5697f7b5fe",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-pack/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-pack/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-metalfx-pack/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-metalfx-pack/manifest.rs",
+        "sha256": "ceda92d09416b86ecc42c598cad0747e3d9546287163c975edd8b392fda3dad0",
+        "prior_sha256": "ceda92d09416b86ecc42c598cad0747e3d9546287163c975edd8b392fda3dad0",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion/Dx12-Fragment.shader",
+        "sha256": "463b318167cf096655f0a83d87006ca1ab3f712b2815563d3b1c6120ca6cc051",
+        "prior_sha256": "463b318167cf096655f0a83d87006ca1ab3f712b2815563d3b1c6120ca6cc051",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion/Dx12-Vertex.shader",
+        "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "prior_sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion/Metal-Fragment.shader",
+        "sha256": "caa0875f398511c5e3e4cf48d41939c3e45fc73b3ec68f676b1244a6d7def750",
+        "prior_sha256": "caa0875f398511c5e3e4cf48d41939c3e45fc73b3ec68f676b1244a6d7def750",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion/Metal-Vertex.shader",
+        "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "prior_sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion/Vulkan-Fragment.shader",
+        "sha256": "c1d9a7afad75309bbd274dc78348dd1ab24862c893c67ee9beaa1056aad1e162",
+        "prior_sha256": "c1d9a7afad75309bbd274dc78348dd1ab24862c893c67ee9beaa1056aad1e162",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion/Vulkan-Vertex.shader",
+        "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "prior_sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion/manifest.rs",
+        "sha256": "f41f4d50046c392fffbf386f3ea08e0d1d865c74963826994c4651f966c35760",
+        "prior_sha256": "f41f4d50046c392fffbf386f3ea08e0d1d865c74963826994c4651f966c35760",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion-owner/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion-owner/Dx12-Fragment.shader",
+        "sha256": "db8ab607e1aea4fc3af0f5612eaef289079d7c4b78d1e26725998369006fa3dc",
+        "prior_sha256": "db8ab607e1aea4fc3af0f5612eaef289079d7c4b78d1e26725998369006fa3dc",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion-owner/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion-owner/Dx12-Vertex.shader",
+        "sha256": "e9cacde802a2f399555deeec4e3a575de840913da717d0007268ed7a16360225",
+        "prior_sha256": "e9cacde802a2f399555deeec4e3a575de840913da717d0007268ed7a16360225",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion-owner/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion-owner/Metal-Fragment.shader",
+        "sha256": "bb4f5690341b3be21adaeae7a8bae6e82702ecb6b7ecae4900a245bd2e0aad50",
+        "prior_sha256": "bb4f5690341b3be21adaeae7a8bae6e82702ecb6b7ecae4900a245bd2e0aad50",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion-owner/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion-owner/Metal-Vertex.shader",
+        "sha256": "5780c65f054a8845a3db01c783621661a0dde78908995d5325b37bbf73baa563",
+        "prior_sha256": "5780c65f054a8845a3db01c783621661a0dde78908995d5325b37bbf73baa563",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion-owner/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion-owner/Vulkan-Fragment.shader",
+        "sha256": "6e507a1ab5df7464da4bf0723a8570c8844af2b67815c622e1f611e455295bfe",
+        "prior_sha256": "6e507a1ab5df7464da4bf0723a8570c8844af2b67815c622e1f611e455295bfe",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion-owner/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion-owner/Vulkan-Vertex.shader",
+        "sha256": "97414a3a7d633a6be5022a5dd07d1d19aef2476e2c2e0513b801e5e395d67c2b",
+        "prior_sha256": "97414a3a7d633a6be5022a5dd07d1d19aef2476e2c2e0513b801e5e395d67c2b",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-motion-owner/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-motion-owner/manifest.rs",
+        "sha256": "a754d7a7b688c39f1ae5d6a8cc9bb2cbdfd1d3eb6d15d3006bc5bb8ba001bc48",
+        "prior_sha256": "a754d7a7b688c39f1ae5d6a8cc9bb2cbdfd1d3eb6d15d3006bc5bb8ba001bc48",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-resolve/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-resolve/Dx12-Fragment.shader",
+        "sha256": "93bae39c89bd6a7c4f42ee7454badf64d3bbb753112ff1579575244d81cd097d",
+        "prior_sha256": "93bae39c89bd6a7c4f42ee7454badf64d3bbb753112ff1579575244d81cd097d",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-resolve/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-resolve/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-resolve/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-resolve/Metal-Fragment.shader",
+        "sha256": "dda502fb6a98b413e762c447fd58cc2a32f0d3bffbc73a1b3335374774db92ca",
+        "prior_sha256": "dda502fb6a98b413e762c447fd58cc2a32f0d3bffbc73a1b3335374774db92ca",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-resolve/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-resolve/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-resolve/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-resolve/Vulkan-Fragment.shader",
+        "sha256": "5cdebc919504e25e74908adb7674f4f6b5c7c3e46837876d5fcf7f9706460d9f",
+        "prior_sha256": "5cdebc919504e25e74908adb7674f4f6b5c7c3e46837876d5fcf7f9706460d9f",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-resolve/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-resolve/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-resolve/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-resolve/manifest.rs",
+        "sha256": "d2e4f9964c1eb960279d72c6c4f85afa9137e4f21c2a3bf3e3aa31428989dd2e",
+        "prior_sha256": "d2e4f9964c1eb960279d72c6c4f85afa9137e4f21c2a3bf3e3aa31428989dd2e",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-upscale/Dx12-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-upscale/Dx12-Fragment.shader",
+        "sha256": "fc66f047f6d6dd097e62344598aec3f712076a76974dcd710a7def67a2370506",
+        "prior_sha256": "fc66f047f6d6dd097e62344598aec3f712076a76974dcd710a7def67a2370506",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-upscale/Dx12-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-upscale/Dx12-Vertex.shader",
+        "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "prior_sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-upscale/Metal-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-upscale/Metal-Fragment.shader",
+        "sha256": "0b62aa91b4a842e39297672dc051360ec97ead021da1cfb6c00e9e9dd3fd7896",
+        "prior_sha256": "0b62aa91b4a842e39297672dc051360ec97ead021da1cfb6c00e9e9dd3fd7896",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-upscale/Metal-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-upscale/Metal-Vertex.shader",
+        "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "prior_sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-upscale/Vulkan-Fragment.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-upscale/Vulkan-Fragment.shader",
+        "sha256": "3a325731187259d9c2a31174f5d82db1d73f7d87f81ea1116faa2a509a786d43",
+        "prior_sha256": "3a325731187259d9c2a31174f5d82db1d73f7d87f81ea1116faa2a509a786d43",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-upscale/Vulkan-Vertex.shader",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-upscale/Vulkan-Vertex.shader",
+        "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "prior_sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      },
+      {
+        "prior": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/baseline-artifacts/d43cc538cc663457/temporal-upscale/manifest.rs",
+        "current": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-d43cc538cc663457/out/temporal-upscale/manifest.rs",
+        "sha256": "3765df7ee627940e0cf34691ba3e57983445bab9a72a012f8e60bbe0e3765c5f",
+        "prior_sha256": "3765df7ee627940e0cf34691ba3e57983445bab9a72a012f8e60bbe0e3765c5f",
+        "exact": true,
+        "only_producer_stamp_changed": false,
+        "refreshed_by_qualification": false
+      }
+    ],
+    "new_owner_artifacts": [
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c9ca91ea4834bb6c/out/temporal-upscale-owner/Metal-Fragment.shader",
+        "sha256": "e47d45ca4cab2a1c8549adb5656db3d933b14205ea648ae30938d7dad4963813"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c9ca91ea4834bb6c/out/temporal-upscale-owner/manifest.rs",
+        "sha256": "380adca44eda064a5e61a717e08bb6f6e73d60172ddcafe842953f832f8c3f3f"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c9ca91ea4834bb6c/out/temporal-upscale-owner/Metal-Vertex.shader",
+        "sha256": "682a3f23c8c6c59c4bc714f907e91af22a5a15eaeccef3df00ed99b67891c300"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c9ca91ea4834bb6c/out/temporal-upscale-owner/Vulkan-Fragment.shader",
+        "sha256": "62d522b250546664a3cc87e2d5dc205b31b26be2733618924070bb4b47b0f4cd"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c9ca91ea4834bb6c/out/temporal-upscale-owner/Vulkan-Vertex.shader",
+        "sha256": "bfff4a701626e114b9976df5a6d3d2ec5bdb5f98fea3252d5531d3acb0dbdae8"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c9ca91ea4834bb6c/out/temporal-upscale-owner/Dx12-Fragment.shader",
+        "sha256": "e14177151423d54f5f279423c0bfc948e987a8e50fe039124eb951caeeb6c8f1"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c9ca91ea4834bb6c/out/temporal-upscale-owner/Dx12-Vertex.shader",
+        "sha256": "84aecff2fd6ed79a073d0e513c200e705a9bd25c2d86f3aa7d40302344562f55"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale-owner/Metal-Fragment.shader",
+        "sha256": "e47d45ca4cab2a1c8549adb5656db3d933b14205ea648ae30938d7dad4963813"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale-owner/manifest.rs",
+        "sha256": "380adca44eda064a5e61a717e08bb6f6e73d60172ddcafe842953f832f8c3f3f"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale-owner/Metal-Vertex.shader",
+        "sha256": "682a3f23c8c6c59c4bc714f907e91af22a5a15eaeccef3df00ed99b67891c300"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale-owner/Vulkan-Fragment.shader",
+        "sha256": "62d522b250546664a3cc87e2d5dc205b31b26be2733618924070bb4b47b0f4cd"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale-owner/Vulkan-Vertex.shader",
+        "sha256": "bfff4a701626e114b9976df5a6d3d2ec5bdb5f98fea3252d5531d3acb0dbdae8"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale-owner/Dx12-Fragment.shader",
+        "sha256": "e14177151423d54f5f279423c0bfc948e987a8e50fe039124eb951caeeb6c8f1"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-owner-consumer-001/current-artifacts/incant_render-c5b53b60c6be7fe4/out/temporal-upscale-owner/Dx12-Vertex.shader",
+        "sha256": "84aecff2fd6ed79a073d0e513c200e705a9bd25c2d86f3aa7d40302344562f55"
+      }
+    ],
+    "fresh_old_shader_payloads_exact": 57,
+    "unchanged_prior_records_not_rebuilt": 67
+  },
+  "retained_failures": {
+    "initial-cooker-001": "aed4987f4adf1e8b259160f229880d18f755ce59e895ee4cb678258c95842f70",
+    "diagnose-cooker-001": "5c90bb9c2c97bc207855774e039c63c7c9c69ec598ab3d0e1daeabaa9caf8124",
+    "initial-clippy-001": "bba584c0de40d27cd5d1da6e7059f1ae1605db3f9441f2c8227737bc47fe64c6"
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/temporal-owner-consumer-cpu-records.json.gz",
+    "sha256": "78e8eed3336d59b0cfb8bd09400c471d2dfe50adb8f5653560019bf2ef63645f",
+    "raw_sha256": "e95cc64adb11ccf2ef07f523bc079ef857b77ece13c9a58e8bf169db15de2007",
+    "records": 358,
+    "payloads": 128
+  },
+  "verifier_sha256": "0a292ca227a29778471ad2cc1d730789765a16effbcd1cc91f195f076b58c00d",
+  "actual_gpu": "pending separate bounded execution"
+}

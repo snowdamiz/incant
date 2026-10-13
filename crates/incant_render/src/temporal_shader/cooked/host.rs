@@ -84,6 +84,7 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
         let (actual, size, count) = match kind {
             Kind::Resolve => (crate::temporal::system::layout_entries(false), 64, 4),
             Kind::Copy => (crate::temporal::system::layout_entries(true), 64, 1),
+            Kind::UpscaleOwner => (crate::upscaling::system::owner_layout_entries(), 96, 7),
             Kind::Upscale => (crate::upscaling::system::layout_entries(5), 96, 5),
             Kind::Composite => (crate::upscaling::system::layout_entries(2), 96, 2),
             #[cfg(feature = "native-metalfx")]
@@ -102,7 +103,23 @@ pub(super) fn validate(kind: Kind) -> Result<(), &'static str> {
             ]
         } else {
             let mut e = vec![uniform(size, wgpu::ShaderStages::FRAGMENT)];
-            e.extend((1..=count).map(|i| texture(i, i == 3)));
+            e.extend((1..=count).map(|i| {
+                let mut entry = texture(i, i == 3);
+                if kind == Kind::UpscaleOwner && matches!(i, 6 | 7) {
+                    entry.ty = wgpu::BindingType::Texture {
+                        sample_type: wgpu::TextureSampleType::Uint,
+                        view_dimension: wgpu::TextureViewDimension::D2,
+                        multisampled: false,
+                    };
+                }
+                entry
+            }));
+            if kind == Kind::UpscaleOwner {
+                e.push(wgpu::BindGroupLayoutEntry {
+                    binding: 8,
+                    ..uniform(12_528, wgpu::ShaderStages::FRAGMENT)
+                });
+            }
             e
         };
         if actual != expected {

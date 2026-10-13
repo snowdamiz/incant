@@ -3,6 +3,7 @@
 pub(crate) mod attachment;
 #[cfg(test)]
 mod camera_history_tests;
+mod changes;
 mod draw;
 mod owner;
 mod owner_system;
