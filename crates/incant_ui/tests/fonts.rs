@@ -4,6 +4,12 @@ use std::sync::Arc;
 const LATIN: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSans-Regular.ttf");
 const HEBREW: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSansHebrew.ttf");
 const CJK: &[u8] = include_bytes!("../../incant_text/tests/fonts/IncantCJKFixture.ttf");
+/// The label halo rule the native host passes (incant_render_data::UI_LABEL_HALO).
+const HALO: HaloRule = HaloRule {
+    em: 1. / 16.,
+    min: 1.,
+    max: 2.5,
+};
 fn id(n: u128) -> StableId {
     StableId(n.to_be_bytes())
 }
@@ -145,7 +151,7 @@ fn retained_paint_refuses_exhaustion_and_never_rebinds_old_atlas_handles() {
         max_glyphs: 128,
     };
     let pending = ui.prepare(&[], [250., 250.], &mut fonts).unwrap();
-    let old = UiPaint::prepare(&ui, &pending, &mut fonts, config, None).unwrap();
+    let old = UiPaint::prepare(&ui, &pending, &mut fonts, config, HALO, None).unwrap();
     let handle = old.texts[0].glyphs[0].clone();
     assert!(old.atlas.get(&handle).is_some());
     assert!(old.atlas.pixels().iter().any(|p| *p != 0));
@@ -153,7 +159,7 @@ fn retained_paint_refuses_exhaustion_and_never_rebinds_old_atlas_handles() {
     let next = ui.prepare_refresh([250., 250.], &mut fonts).unwrap();
     assert!(Arc::ptr_eq(
         &old,
-        &UiPaint::prepare(&ui, &next, &mut fonts, config, Some(&old)).unwrap()
+        &UiPaint::prepare(&ui, &next, &mut fonts, config, HALO, Some(&old)).unwrap()
     ));
     for bad in [
         AtlasConfig {
@@ -166,12 +172,12 @@ fn retained_paint_refuses_exhaustion_and_never_rebinds_old_atlas_handles() {
             ..config
         },
     ] {
-        assert!(UiPaint::prepare(&ui, &next, &mut fonts, bad, Some(&old)).is_err());
+        assert!(UiPaint::prepare(&ui, &next, &mut fonts, bad, HALO, Some(&old)).is_err());
         assert!(old.atlas.get(&handle).is_some());
         assert!(Arc::ptr_eq(&old.layout, ui.layout().unwrap()));
     }
     let resized = ui.prepare_refresh([80., 250.], &mut fonts).unwrap();
-    let new = UiPaint::prepare(&ui, &resized, &mut fonts, config, Some(&old)).unwrap();
+    let new = UiPaint::prepare(&ui, &resized, &mut fonts, config, HALO, Some(&old)).unwrap();
     assert!(new.atlas.get(&handle).is_none());
     assert!(old.atlas.get(&handle).is_some());
     ui.commit(resized).unwrap();
@@ -218,9 +224,67 @@ fn combined_glyph_limit_refuses_before_candidate_atlas_rasterization() {
                 height: 1,
                 max_glyphs: 1
             },
+            HALO,
             None
         ),
         Err(UiError::Limit("UI glyph placements"))
     ));
     assert!(ui.layout().is_none());
+}
+
+#[test]
+fn only_labels_get_prepared_halos_and_the_rule_is_part_of_the_paint() {
+    let mut widgets = widgets();
+    let text = widgets[1].node.kind.text().unwrap().clone();
+    widgets.push(Widget {
+        incarnation: 1,
+        id: id(3),
+        parent: Some(id(1)),
+        node: Arc::new(UiNode {
+            kind: UiKind::Label { text },
+            style: UiStyle::default(),
+            order: 1,
+            disabled: false,
+        }),
+    });
+    let mut fonts = UiFonts::new(
+        vec![source(10, LATIN), source(11, HEBREW), source(12, CJK)],
+        &widgets,
+    )
+    .unwrap();
+    let mut ui = UiRuntime::new(widgets).unwrap();
+    let config = AtlasConfig {
+        width: 512,
+        height: 512,
+        max_glyphs: 256,
+    };
+    let pending = ui.prepare(&[], [250., 250.], &mut fonts).unwrap();
+    let paint = UiPaint::prepare(&ui, &pending, &mut fonts, config, HALO, None).unwrap();
+    // Canonical order: the text field (order 0), then the label (order 1).
+    let (field, label) = (&paint.texts[0], &paint.texts[1]);
+    assert!(field.halos.is_none());
+    let halos = label.halos.as_ref().unwrap();
+    assert_eq!(halos.len(), label.glyphs.len());
+    let radius = HALO.radius(20.).unwrap();
+    for (glyph, halo) in label.glyphs.iter().zip(halos.iter()) {
+        let (glyph, halo) = (
+            paint.atlas.get(glyph).unwrap(),
+            paint.atlas.get(halo).unwrap(),
+        );
+        assert_eq!(glyph.key.halo_radius_bits, 0);
+        assert_eq!(halo.key.halo_radius_bits, radius.to_bits());
+        assert_eq!(halo.rect.is_some(), glyph.rect.is_some());
+    }
+    // The field's glyph entries are the label's: halos never replace coverage.
+    for (a, b) in field.glyphs.iter().zip(label.glyphs.iter()) {
+        assert_eq!(paint.atlas.get(a), paint.atlas.get(b));
+    }
+    // A different rule is a different paint; an invalid one is refused.
+    ui.commit(pending).unwrap();
+    let next = ui.prepare_refresh([250., 250.], &mut fonts).unwrap();
+    let wider = HaloRule { min: 2., ..HALO };
+    let rebuilt = UiPaint::prepare(&ui, &next, &mut fonts, config, wider, Some(&paint)).unwrap();
+    assert!(!Arc::ptr_eq(&paint, &rebuilt));
+    let excessive = HaloRule { max: 9., ..HALO };
+    assert!(UiPaint::prepare(&ui, &next, &mut fonts, config, excessive, Some(&paint)).is_err());
 }

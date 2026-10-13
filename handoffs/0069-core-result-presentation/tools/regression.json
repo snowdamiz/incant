@@ -1,0 +1,115 @@
+{
+ "about": "0069 UI GPU regression cases, DRAFT for root review; nothing has run. Seven existing historical tests (every #[ignore = \"requires a native GPU ...\"] UI test of the two sources at historical_base, main196) plus one newly added coverage case, label_halo_separates_text_from_bright_and_dark_backdrops, which this packet adds for the prepared halo and which is not a historical test. Each case runs once through regression.py. Frame counts were derived by reading the pinned source: one frame per rendered target or presented host step, counting every world draw and UI submission of a target separately and assuming every Game construction presents one frame, so they over-count rather than under-count. regression.py refuses if either source differs from its SHA-256 here. The frames are tiny (at most 320 physical pixels on a side) and all of them, the new coverage included, are debited from the separate 128-frame regression ceiling, never from the 24 appearance frames.",
+ "ceiling": 128,
+ "historical_base": "3da8b0ebeab43f715b0531603e30a864e801be11",
+ "sources": {
+  "crates/incant_render/src/ui_draw_tests.rs": "fee1ebcf26633a9e8905f7efd42fc844a40f0686f137865506ac11f2613b6169",
+  "crates/incant_render_gpu_host/tests/ui.rs": "7ebe885a261c7d6e366e1c3095be25494622ff108f67770d82934074e3e6dd54"
+ },
+ "binaries": {
+  "render-lib": {
+   "package": "incant_render",
+   "cargo": [
+    "-p",
+    "incant_render",
+    "--lib"
+   ],
+   "artifact": {
+    "name": "incant_render",
+    "kind": "lib"
+   }
+  },
+  "gpu-host-ui": {
+   "package": "incant_render_gpu_host",
+   "cargo": [
+    "-p",
+    "incant_render_gpu_host",
+    "--test",
+    "ui"
+   ],
+   "artifact": {
+    "name": "ui",
+    "kind": "test"
+   }
+  }
+ },
+ "cases": [
+  {
+   "id": "render-scales",
+   "binary": "render-lib",
+   "source": "crates/incant_render/src/ui_draw_tests.rs",
+   "test": "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+   "frames": 4,
+   "derivation": "one run() per (scale, format): 1x, 2x, 1.5x sRGB and 1x UNORM, at most 320x180",
+   "coverage": "existing"
+  },
+  {
+   "id": "render-nested",
+   "binary": "render-lib",
+   "source": "crates/incant_render/src/ui_draw_tests.rs",
+   "test": "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+   "frames": 2,
+   "derivation": "two run() calls (open, nested), 120x90",
+   "coverage": "existing"
+  },
+  {
+   "id": "render-halo-backdrops",
+   "binary": "render-lib",
+   "source": "crates/incant_render/src/ui_draw_tests.rs",
+   "test": "ui::draw_tests::label_halo_separates_text_from_bright_and_dark_backdrops",
+   "frames": 2,
+   "derivation": "one run_over() per backdrop (white, black), 220x50",
+   "coverage": "new"
+  },
+  {
+   "id": "render-over-world",
+   "binary": "render-lib",
+   "source": "crates/incant_render/src/ui_draw_tests.rs",
+   "test": "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels",
+   "frames": 3,
+   "derivation": "frame(None) draws the world once; frame(Some) draws the world and submits the UI: three submissions to two 160x90 targets",
+   "coverage": "existing"
+  },
+  {
+   "id": "render-retained",
+   "binary": "render-lib",
+   "source": "crates/incant_render/src/ui_draw_tests.rs",
+   "test": "ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages",
+   "frames": 6,
+   "derivation": "six run() calls (first, again, focus, kept, fresh at 160x90, fresh at 320x180); the two refused stages draw nothing",
+   "coverage": "existing"
+  },
+  {
+   "id": "render-region",
+   "binary": "render-lib",
+   "source": "crates/incant_render/src/ui_draw_tests.rs",
+   "test": "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+   "frames": 1,
+   "derivation": "one run() into a 200x140 target",
+   "coverage": "existing"
+  },
+  {
+   "id": "host-composed",
+   "binary": "gpu-host-ui",
+   "source": "crates/incant_render_gpu_host/tests/ui.rs",
+   "test": "composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources",
+   "frames": 17,
+   "derivation": "two Game constructions (counted as one frame each), four loop steps ticking both games (8), then Tab down/up, Enter down/up, focus, commit and preedit ticks (7), at 320x192",
+   "coverage": "existing"
+  },
+  {
+   "id": "host-relayout",
+   "binary": "gpu-host-ui",
+   "source": "crates/incant_render_gpu_host/tests/ui.rs",
+   "test": "refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game",
+   "frames": 4,
+   "derivation": "one Game construction (counted as one frame), a Tab tick, and two refresh_host presentations (320x192, then 240x320); resize_ui admits without presenting and the malformed resize is refused",
+   "coverage": "existing"
+  }
+ ],
+ "totals": {
+  "existing": 37,
+  "new": 2
+ },
+ "total_frames": 39
+}

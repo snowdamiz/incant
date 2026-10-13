@@ -2,12 +2,22 @@
 //! The native UI owner supplies accepted layout, shaped glyphs, retained atlas
 //! handles and widget state; the renderer owns appearance and pixel mapping
 //! (incant_render `ui` module). No layout, shaping, focus or input logic here.
-use incant_text::{GlyphAtlas, GlyphHandle, ShapedText, editing::Selection};
+use incant_text::{GlyphAtlas, GlyphHandle, HaloRule, ShapedText, editing::Selection};
 use incant_types::StableId;
 use std::{ops::Range, sync::Arc};
 
 /// Logical rectangle as `[left, top, right, bottom]`.
 pub type UiRect = [f32; 4];
+
+/// The halo rule for label glyphs: 1/16 of the glyph's font size, between 1 and
+/// 2.5 logical pixels. The UI owner prepares every label's halo coverage with
+/// it; the renderer's theme holds the same rule, refuses any other radius,
+/// supplies the colour and draws the halos under the glyphs.
+pub const UI_LABEL_HALO: HaloRule = HaloRule {
+    em: 1. / 16.,
+    min: 1.,
+    max: 2.5,
+};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum UiRole {
@@ -48,6 +58,11 @@ pub struct UiWidget {
     pub layout: Arc<ShapedText>,
     /// One handle per shaped glyph, bound to `UiInput::atlas`.
     pub glyphs: Arc<[GlyphHandle]>,
+    /// Labels only: one prepared halo handle per shaped glyph, bound to
+    /// `UiInput::atlas`, at the radius `UI_LABEL_HALO` gives that glyph. The
+    /// renderer refuses a label without them, a halo of another glyph or
+    /// radius, and any other role with them.
+    pub halos: Option<Arc<[GlyphHandle]>>,
     /// Present for TextInput widgets only.
     pub edit: Option<UiEdit>,
 }

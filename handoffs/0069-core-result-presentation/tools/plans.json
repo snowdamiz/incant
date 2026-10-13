@@ -1,0 +1,366 @@
+{
+  "about": "0069 fixed case list, DRAFT for root review; nothing has run. Routes are binding_oracle recordings, unchanged from 0065 and Astra's accepted shipping proofs. layout-* runs render nothing: the adapter creates no GPU device, and only the public layout/text snapshot and the numerical route record are kept. review-* renders 4 frames to settle spacing and copy; final-* then renders all 18 of its frames from the final source. Nothing is reused, so 22 frames are rendered in every case, under the 24-frame ceiling. Every GPU frame counts whether kept, compared or discarded; the runner debits a run's planned frames before it starts and never refunds a failed run. Each frame is one accept on a fresh single-use consumer of that host step's public render and UI input. Fresh rendering suits this sample, which has no temporal rendering state; no frame claims equivalence to an accumulated history. Frames at most 960x540, one process group at a time, 120 s per adapter child. Every adapter child, layout-only or not, first takes the global native GPU lock, then the packet lock, refusing at once if either is busy. These frames are the 'appearance' category; UI GPU regression tests (seven existing plus one newly added halo case) are planned separately in regression.json against their own 128-frame ceiling.",
+  "frame_ceiling": 24,
+  "frame_category": "appearance",
+  "planned_frames": {
+    "review": 4,
+    "final": 18,
+    "total": 22,
+    "reused": 0
+  },
+  "steps": {
+    "won": 2067,
+    "lost": 617,
+    "start_pressed": 2156,
+    "after_start": 2158,
+    "lost_generation_2": 2773,
+    "r_pressed": 900,
+    "after_r": 902,
+    "won_generation_2": 2967,
+    "note": "Titles and prompt are reparented by the command queued on the result tick and are visible from the next host step, as in 0065 (won 2066 -> 2067, lost 616 -> 617). Generation 2 of each restart route starts at a fresh tick 0 after the restart host step."
+  },
+  "layout": {
+    "variants": [
+      "en",
+      "ar",
+      "zh-Hans",
+      "en-XA"
+    ],
+    "viewports": [
+      [
+        960,
+        540
+      ],
+      [
+        640,
+        480
+      ],
+      [
+        420,
+        320
+      ]
+    ],
+    "route": "gamepad-restart-lose",
+    "ticks": 3056,
+    "captures": [
+      {
+        "host_step": 2,
+        "name": "start",
+        "frame": false
+      },
+      {
+        "host_step": 2067,
+        "name": "won",
+        "frame": false
+      },
+      {
+        "host_step": 2156,
+        "name": "start-pressed",
+        "frame": false
+      },
+      {
+        "host_step": 2158,
+        "name": "after-start",
+        "frame": false
+      },
+      {
+        "host_step": 2773,
+        "name": "lost-generation-2",
+        "frame": false
+      }
+    ],
+    "checks": "12 runs, 0 frames: banner centred and above the top bar only in a result, prompt parked while playing and after restart, no label wraps except the documented pseudo-locale title at 420 pt, top bar one row wherever the estimate says it fits, every box inside the viewport, no overlaps, no missing glyphs, after-start snapshot equal to start"
+  },
+  "runs": {
+    "review-en-960x540": {
+      "phase": "review",
+      "variant": "en",
+      "route": "gamepad-restart-lose",
+      "viewport": [
+        960,
+        540
+      ],
+      "scale": 1.0,
+      "ticks": 2773,
+      "max_frames": 2,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": false
+        },
+        {
+          "host_step": 2067,
+          "name": "won",
+          "frame": true
+        },
+        {
+          "host_step": 2158,
+          "name": "after-start",
+          "frame": false
+        },
+        {
+          "host_step": 2773,
+          "name": "lost-generation-2",
+          "frame": true
+        }
+      ]
+    },
+    "review-en-640x480": {
+      "phase": "review",
+      "variant": "en",
+      "route": "lose-restart-win",
+      "viewport": [
+        640,
+        480
+      ],
+      "scale": 1.0,
+      "ticks": 617,
+      "max_frames": 1,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": false
+        },
+        {
+          "host_step": 617,
+          "name": "lost",
+          "frame": true
+        }
+      ]
+    },
+    "review-en-420x320": {
+      "phase": "review",
+      "variant": "en",
+      "route": "gamepad-restart-lose",
+      "viewport": [
+        420,
+        320
+      ],
+      "scale": 1.0,
+      "ticks": 2067,
+      "max_frames": 1,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": false
+        },
+        {
+          "host_step": 2067,
+          "name": "won",
+          "frame": true
+        }
+      ]
+    },
+    "final-en-960x540": {
+      "phase": "final",
+      "variant": "en",
+      "route": "gamepad-restart-lose",
+      "viewport": [
+        960,
+        540
+      ],
+      "scale": 1.0,
+      "ticks": 2773,
+      "max_frames": 4,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": true
+        },
+        {
+          "host_step": 2067,
+          "name": "won",
+          "frame": true
+        },
+        {
+          "host_step": 2156,
+          "name": "start-pressed",
+          "frame": false
+        },
+        {
+          "host_step": 2158,
+          "name": "after-start",
+          "frame": true
+        },
+        {
+          "host_step": 2773,
+          "name": "lost-generation-2",
+          "frame": true
+        }
+      ]
+    },
+    "final-en-640x480": {
+      "phase": "final",
+      "variant": "en",
+      "route": "lose-restart-win",
+      "viewport": [
+        640,
+        480
+      ],
+      "scale": 1.0,
+      "ticks": 2967,
+      "max_frames": 4,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": true
+        },
+        {
+          "host_step": 617,
+          "name": "lost",
+          "frame": true
+        },
+        {
+          "host_step": 900,
+          "name": "r-pressed",
+          "frame": false
+        },
+        {
+          "host_step": 902,
+          "name": "after-r",
+          "frame": true
+        },
+        {
+          "host_step": 2967,
+          "name": "won-generation-2",
+          "frame": true
+        }
+      ]
+    },
+    "final-en-420x320": {
+      "phase": "final",
+      "variant": "en",
+      "route": "gamepad-restart-lose",
+      "viewport": [
+        420,
+        320
+      ],
+      "scale": 1.0,
+      "ticks": 2773,
+      "max_frames": 3,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": true
+        },
+        {
+          "host_step": 2067,
+          "name": "won",
+          "frame": true
+        },
+        {
+          "host_step": 2158,
+          "name": "after-start",
+          "frame": false
+        },
+        {
+          "host_step": 2773,
+          "name": "lost-generation-2",
+          "frame": true
+        }
+      ]
+    },
+    "final-ar-640x480": {
+      "phase": "final",
+      "variant": "ar",
+      "route": "gamepad-restart-lose",
+      "viewport": [
+        640,
+        480
+      ],
+      "scale": 1.0,
+      "ticks": 2067,
+      "max_frames": 2,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": true
+        },
+        {
+          "host_step": 2067,
+          "name": "won",
+          "frame": true
+        }
+      ]
+    },
+    "final-zh-Hans-640x480": {
+      "phase": "final",
+      "variant": "zh-Hans",
+      "route": "lose-restart-win",
+      "viewport": [
+        640,
+        480
+      ],
+      "scale": 1.0,
+      "ticks": 617,
+      "max_frames": 2,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": true
+        },
+        {
+          "host_step": 617,
+          "name": "lost",
+          "frame": true
+        }
+      ]
+    },
+    "final-en-XA-640x480": {
+      "phase": "final",
+      "variant": "en-XA",
+      "route": "gamepad-restart-lose",
+      "viewport": [
+        640,
+        480
+      ],
+      "scale": 1.0,
+      "ticks": 2067,
+      "max_frames": 2,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": true
+        },
+        {
+          "host_step": 2067,
+          "name": "won",
+          "frame": true
+        }
+      ]
+    },
+    "final-en-XA-420x320": {
+      "phase": "final",
+      "variant": "en-XA",
+      "route": "lose-short",
+      "viewport": [
+        420,
+        320
+      ],
+      "scale": 1.0,
+      "ticks": 617,
+      "max_frames": 1,
+      "captures": [
+        {
+          "host_step": 2,
+          "name": "start",
+          "frame": false
+        },
+        {
+          "host_step": 617,
+          "name": "lost",
+          "frame": true
+        }
+      ]
+    }
+  }
+}

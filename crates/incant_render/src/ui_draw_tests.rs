@@ -1,7 +1,8 @@
 //! Actual GPU UI draws compared with an independent CPU composition written
 //! from the documented contract: physical mapping, snapping, clips, rounded
-//! coverage, bilinear glyph taps and premultiplied over. Ignored without a
-//! granted native GPU; numeric agreement, not appearance approval.
+//! coverage, bilinear glyph taps, label halos (prepared entries drawn as
+//! glyphs, clipped past the text clip) and premultiplied over. Ignored without a granted native GPU; numeric
+//! agreement, not appearance approval.
 //!
 //! The reference gives every channel the stored codes the contract admits.
 //! Geometry, clips, layering, colours and rounded coverage are exact; only the
@@ -40,7 +41,7 @@ use crate::{
     hdr_output::{read, save, texture},
 };
 use incant_render_data::{UiEdit, UiRect, UiRole, UiWidget};
-use incant_text::{Wrap, editing::Selection};
+use incant_text::{AtlasEntry, Wrap, editing::Selection};
 use std::sync::Weak;
 
 const SRGB: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8UnormSrgb;
@@ -160,6 +161,54 @@ fn background(size: [u32; 2]) -> Vec<u8> {
         .collect()
 }
 
+/// The label halo a reference draws: the contract, or a wrong one that the
+/// mutation checks must reject.
+#[derive(Clone, Copy, Debug, PartialEq)]
+enum Halo {
+    Contract,
+    Absent,
+    /// The glyph's own coverage in the halo colour, not its prepared halo.
+    Undilated,
+    /// Drawn after the label's glyphs instead of before them.
+    Over,
+    /// Cut at the text clip instead of the grown halo clip.
+    ContentClip,
+}
+
+/// One bilinear tap of an R8 atlas at texel position `(u, v)`, as the lowest
+/// and highest coverage the backend may return: exact on a texel centre or
+/// between equal texels, else within TAP (twice TAP when a position is not a
+/// multiple of 1/256 texel). The candidate models give one value.
+fn tap(atlas: &GlyphAtlas, model: Model, u: f64, v: f64) -> [f64; 2] {
+    if model == Model::Llvmpipe {
+        return [llvmpipe::tap(atlas, u, v); 2];
+    }
+    let [aw, _] = atlas.size();
+    let texel = |x: i64, y: i64| f64::from(atlas.pixels()[(y * i64::from(aw) + x) as usize]) / 255.;
+    let (x, y) = (u - 0.5, v - 0.5);
+    let (i, j) = (x.floor(), y.floor());
+    let (fx, fy) = (x - i, y - j);
+    let (i, j) = (i as i64, j as i64);
+    let corners = [
+        texel(i, j),
+        texel(i + 1, j),
+        texel(i, j + 1),
+        texel(i + 1, j + 1),
+    ];
+    let exact = (corners[0] * (1. - fx) + corners[1] * fx) * (1. - fy)
+        + (corners[2] * (1. - fx) + corners[3] * fx) * fy;
+    let flat = corners.iter().all(|c| *c == corners[0]);
+    let weights = [u, v].map(|p| (p - 0.5).fract());
+    let e = if model != Model::Portable || flat || weights == [0.; 2] {
+        0.
+    } else if weights.iter().all(|w| (w * 256.).fract() == 0.) {
+        TAP
+    } else {
+        2. * TAP
+    };
+    [(exact - e).max(0.), (exact + e).min(1.)]
+}
+
 /// Reference compositor in the target's blending space (linear light for sRGB
 /// targets, encoded values for UNORM targets) over stored 8-bit codes: every
 /// blend reads the stored destination and stores a code again, as the target
@@ -169,6 +218,7 @@ struct Canvas {
     size: [u32; 2],
     srgb: bool,
     model: Model,
+    halo: Halo,
     /// Physical region origin and per-axis scale.
     region: [f64; 4],
     scale: [f64; 2],
@@ -187,6 +237,7 @@ impl Canvas {
             size,
             srgb,
             model,
+            halo: Halo::Contract,
             region,
             scale: [
                 region[2] / f64::from(viewport[0]),
@@ -331,100 +382,115 @@ impl Canvas {
     }
     /// Glyph coverage: snapped pen, padded rectangle at `scale` pixels per
     /// texel, one bilinear tap clamped to the padded texels (scale >= 0.8).
-    /// Labels first draw the same coverage as a shadow at the theme offset.
+    /// A label first draws its halos (muted with disabled text).
     fn glyphs(&mut self, atlas: &GlyphAtlas, widget: &UiWidget, color: [u8; 4]) {
-        if widget.role == UiRole::Label {
-            self.glyph_pass(
-                atlas,
-                widget,
-                theme::LABEL_SHADOW,
-                theme::LABEL_SHADOW_OFFSET,
-            );
+        let label = widget.role == UiRole::Label;
+        let halo = if widget.disabled {
+            theme::alpha(
+                theme::LABEL_HALO,
+                f32::from(theme::TEXT_DISABLED_ALPHA) / 255.,
+            )
+        } else {
+            theme::LABEL_HALO
+        };
+        if label && !matches!(self.halo, Halo::Absent | Halo::Over) {
+            self.halo_pass(atlas, widget, halo);
         }
-        self.glyph_pass(atlas, widget, color, [0.; 2]);
+        for (glyph, handle) in widget.layout.glyphs().iter().zip(widget.glyphs.iter()) {
+            let entry = *atlas.get(handle).unwrap();
+            self.entry(atlas, pen(widget, glyph), &entry, widget.clip, color);
+        }
+        if label && self.halo == Halo::Over {
+            self.halo_pass(atlas, widget, halo);
+        }
     }
-    fn glyph_pass(
+    /// One atlas entry at a snapped logical pen, cut by the snapped `clip`.
+    fn entry(
         &mut self,
         atlas: &GlyphAtlas,
-        widget: &UiWidget,
+        pen: [f32; 2],
+        entry: &AtlasEntry,
+        clip: UiRect,
         color: [u8; 4],
-        offset: [f32; 2],
     ) {
         assert!(self.scale.iter().all(|s| *s >= 0.8), "single-tap reference");
-        let [aw, _] = atlas.size();
-        let texel =
-            |x: i64, y: i64| f64::from(atlas.pixels()[(y * i64::from(aw) + x) as usize]) / 255.;
-        let bilinear = |u: f64, v: f64| {
-            let (x, y) = (u - 0.5, v - 0.5);
-            let (i, j) = (x.floor(), y.floor());
-            let (fx, fy) = (x - i, y - j);
-            let (i, j) = (i as i64, j as i64);
-            let corners = [
-                texel(i, j),
-                texel(i + 1, j),
-                texel(i, j + 1),
-                texel(i + 1, j + 1),
-            ];
-            let value = (corners[0] * (1. - fx) + corners[1] * fx) * (1. - fy)
-                + (corners[2] * (1. - fx) + corners[3] * fx) * fy;
-            (value, corners.iter().all(|c| *c == corners[0]))
-        };
-        // Exact on a texel centre or between equal texels, else within TAP
-        // (twice TAP when a position is not a multiple of 1/256 texel).
+        let Some(rect) = entry.rect else { return };
         let model = self.model;
-        let coverage = |u: f64, v: f64| {
-            if model == Model::Llvmpipe {
-                return [llvmpipe::tap(atlas, u, v); 2];
-            }
-            let (exact, flat) = bilinear(u, v);
-            let weights = [u, v].map(|p| (p - 0.5).fract());
-            let e = if model != Model::Portable || flat || weights == [0.; 2] {
-                0.
-            } else if weights.iter().all(|w| (w * 256.).fract() == 0.) {
-                TAP
-            } else {
-                2. * TAP
-            };
-            [(exact - e).max(0.), (exact + e).min(1.)]
-        };
-        let c = self.clip(widget.clip);
-        for (glyph, handle) in widget.layout.glyphs().iter().zip(widget.glyphs.iter()) {
-            let entry = atlas.get(handle).unwrap();
-            let Some(rect) = entry.rect else { continue };
-            let [x, y, w, h] = rect.map(f64::from);
-            let [ox, oy] = entry.origin.map(f64::from);
-            let pen = [
-                snap(self.physical(
-                    f64::from(widget.origin[0] + glyph.position[0] + offset[0]),
-                    0,
-                )),
-                snap(self.physical(
-                    f64::from(widget.origin[1] + glyph.position[1] + offset[1]),
-                    1,
-                )),
-            ];
-            let p0 = [
-                pen[0] + (ox - 1.) * self.scale[0],
-                pen[1] + (oy - 1.) * self.scale[1],
-            ];
-            let p1 = [
-                pen[0] + (ox + w + 1.) * self.scale[0],
-                pen[1] + (oy + h + 1.) * self.scale[1],
-            ];
-            let area = [
-                p0[0].max(c[0]),
-                p0[1].max(c[1]),
-                p1[0].min(c[2]),
-                p1[1].min(c[3]),
-            ];
-            let points: Vec<_> = self.pixels_in(area).collect();
-            for (px, py, cx, cy) in points {
-                let u = (x - 1. + (cx - p0[0]) / self.scale[0]).clamp(x - 0.5, x + w + 0.5);
-                let v = (y - 1. + (cy - p0[1]) / self.scale[1]).clamp(y - 0.5, y + h + 0.5);
-                self.over(px, py, color, coverage(u, v));
-            }
+        let c = self.clip(clip);
+        let [x, y, w, h] = rect.map(f64::from);
+        let [ox, oy] = entry.origin.map(f64::from);
+        let pen = [
+            snap(self.physical(f64::from(pen[0]), 0)),
+            snap(self.physical(f64::from(pen[1]), 1)),
+        ];
+        let p0 = [
+            pen[0] + (ox - 1.) * self.scale[0],
+            pen[1] + (oy - 1.) * self.scale[1],
+        ];
+        let p1 = [
+            pen[0] + (ox + w + 1.) * self.scale[0],
+            pen[1] + (oy + h + 1.) * self.scale[1],
+        ];
+        let area = [
+            p0[0].max(c[0]),
+            p0[1].max(c[1]),
+            p1[0].min(c[2]),
+            p1[1].min(c[3]),
+        ];
+        let points: Vec<_> = self.pixels_in(area).collect();
+        for (px, py, cx, cy) in points {
+            let u = (x - 1. + (cx - p0[0]) / self.scale[0]).clamp(x - 0.5, x + w + 0.5);
+            let v = (y - 1. + (cy - p0[1]) / self.scale[1]).clamp(y - 0.5, y + h + 0.5);
+            self.over(px, py, color, tap(atlas, model, u, v));
         }
     }
+    /// A label's prepared halos (`UiWidget::halos`), drawn exactly as glyphs:
+    /// each glyph's halo entry at that glyph's pen, clipped to the text clip
+    /// grown by the halo margin plus one within the visible box, and nothing
+    /// where the text clip is empty. The margin comes from the documented
+    /// rule, m = ceil(clamp(size / 16, 1, 2.5)); each entry must be m texels
+    /// larger than its glyph on every side.
+    fn halo_pass(&mut self, atlas: &GlyphAtlas, widget: &UiWidget, color: [u8; 4]) {
+        let text = widget.clip;
+        if text[2] <= text[0] || text[3] <= text[1] {
+            return;
+        }
+        let halos = widget.halos.as_ref().expect("a label's halos");
+        let placements = widget.layout.glyphs().iter().zip(widget.glyphs.iter());
+        for ((glyph, handle), halo) in placements.zip(halos.iter()) {
+            let (own, entry) = (*atlas.get(handle).unwrap(), *atlas.get(halo).unwrap());
+            let margin = (glyph.font_size / 16.).clamp(1., 2.5).ceil();
+            let m = margin as i32;
+            assert_eq!(entry.origin, [own.origin[0] - m, own.origin[1] - m]);
+            if let (Some(g), Some(h)) = (own.rect, entry.rect) {
+                assert_eq!([h[2], h[3]], [g[2] + 2 * m as u32, g[3] + 2 * m as u32]);
+            }
+            let (grow, visible) = (margin + 1., widget.visible);
+            let clip = if self.halo == Halo::ContentClip {
+                text
+            } else {
+                [
+                    (text[0] - grow).max(visible[0]),
+                    (text[1] - grow).max(visible[1]),
+                    (text[2] + grow).min(visible[2]),
+                    (text[3] + grow).min(visible[3]),
+                ]
+            };
+            let drawn = if self.halo == Halo::Undilated {
+                own
+            } else {
+                entry
+            };
+            self.entry(atlas, pen(widget, glyph), &drawn, clip, color);
+        }
+    }
+}
+/// A glyph's logical pen: content origin plus its shaped position.
+fn pen(widget: &UiWidget, glyph: &incant_text::Glyph) -> [f32; 2] {
+    [
+        widget.origin[0] + glyph.position[0],
+        widget.origin[1] + glyph.position[1],
+    ]
 }
 fn self_space(srgb: bool, byte: f64) -> f64 {
     if srgb { decode(byte) } else { byte / 255. }
@@ -460,8 +526,27 @@ fn run(
     size: [u32; 2],
     region: Option<[f32; 4]>,
 ) -> Run {
+    run_over(
+        renderer,
+        layer,
+        input,
+        format,
+        size,
+        region,
+        background(size),
+    )
+}
+/// `run` over a caller's opaque backdrop instead of the deterministic one.
+fn run_over(
+    renderer: &Renderer,
+    layer: &mut UiLayer,
+    input: &Arc<UiInput>,
+    format: wgpu::TextureFormat,
+    size: [u32; 2],
+    region: Option<[f32; 4]>,
+    background: Vec<u8>,
+) -> Run {
     let target = texture(renderer, format, size[0], size[1]);
-    let background = background(size);
     renderer.queue.write_texture(
         target.as_image_copy(),
         &background,
@@ -552,8 +637,9 @@ fn ink(pixels: &[u8], background: &[u8]) -> usize {
         .count()
 }
 
-/// One labelled button, one mixed-script label and one focused field with a
-/// selection, at fractional logical positions.
+/// One labelled button, one mixed-script label (padded by its halo's reach, so
+/// its halo clip is its border box) and one focused field with a selection, at
+/// fractional logical positions.
 fn panel() -> Arc<UiInput> {
     let mut f = Fixture::new();
     let button = f.widget(
@@ -568,7 +654,7 @@ fn panel() -> Arc<UiInput> {
         2,
         UiRole::Label,
         [8., 46., 152., 70.],
-        0.,
+        2.,
         "ffi سلام 中文",
         15.,
     );
@@ -748,6 +834,7 @@ fn nested() -> Nested {
     let token = "سلامعليكم";
     let mut label = f.widget(1, UiRole::Label, [40., 10., 80., 40.], 0., token, 20.);
     let (layout, glyphs) = f.shape(token, 20., 40., Wrap::Word);
+    label.halos = Some(f.halos(&layout));
     label.layout = layout;
     label.glyphs = glyphs;
     assert!(label.layout.glyphs().iter().any(|g| g.position[0] < -10.));
@@ -848,6 +935,92 @@ fn nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow() {
                     "{px},{py}"
                 );
             }
+        }
+    }
+}
+
+/// A mixed-script label at 1x whose text clip hugs its ink, inside 4 px of
+/// padding: none of its text is cut, and its halos show only through the
+/// documented growth past that clip.
+fn hugged() -> (Arc<UiInput>, [u32; 2]) {
+    let mut f = Fixture::new();
+    let bounds = [6., 6., 214., 44.];
+    let mut label = f.widget(1, UiRole::Label, bounds, 4., "Samples 4/4 中文 سلام", 17.);
+    let mut ink = [f32::MAX, f32::MAX, f32::MIN, f32::MIN];
+    for (glyph, handle) in label.layout.glyphs().iter().zip(label.glyphs.iter()) {
+        let entry = f.atlas.get(handle).unwrap();
+        let Some([_, _, w, h]) = entry.rect else {
+            continue;
+        };
+        // At 1x the pen snaps to a whole pixel and texels land on pixels.
+        let [x, y] = pen(&label, glyph).map(|v| (v + 0.5).floor());
+        let [left, top] = [x + entry.origin[0] as f32, y + entry.origin[1] as f32];
+        ink = [
+            ink[0].min(left),
+            ink[1].min(top),
+            ink[2].max(left + w as f32),
+            ink[3].max(top + h as f32),
+        ];
+    }
+    let c = label.clip;
+    assert!(
+        ink[0] >= c[0] && ink[1] >= c[1] && ink[2] <= c[2] && ink[3] <= c[3],
+        "{ink:?} {c:?}"
+    );
+    label.clip = ink;
+    (f.finish([220., 50.], vec![label]), [220, 50])
+}
+
+/// The hugged label over pure white and over black. Each draw stays within
+/// the reference, including the halo past the text clip, and over white the
+/// halo really separates the text: the text colour measures at least 4.5:1
+/// against the darkest pixel drawn.
+#[test]
+#[ignore = "requires a native GPU; run by desktop workflows"]
+fn label_halo_separates_text_from_bright_and_dark_backdrops() {
+    let renderer = renderer_with_adapter_receipt();
+    let (input, size) = hugged();
+    let label = &input.widgets[0];
+    let luminance = |p: &[u8]| {
+        let c = |v: u8| decode(f64::from(v));
+        0.2126 * c(p[0]) + 0.7152 * c(p[1]) + 0.0722 * c(p[2])
+    };
+    let text = luminance(&theme::TEXT[..]);
+    for (name, value) in [("white", 255u8), ("black", 0u8)] {
+        let backdrop: Vec<u8> = (0..size[0] * size[1])
+            .flat_map(|_| [value, value, value, 255])
+            .collect();
+        let mut layer = renderer.ui_layer();
+        let run = run_over(
+            &renderer,
+            &mut layer,
+            &input,
+            SRGB,
+            size,
+            None,
+            backdrop.clone(),
+        );
+        save(&format!("ui-halo-{name}"), &run.pixels, size[0], size[1]);
+        let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
+        let mut portable =
+            Canvas::new(&backdrop, size, true, full, input.viewport, Model::Portable);
+        portable.glyphs(&input.atlas, label, theme::TEXT);
+        let admission = admitted(&run.pixels, &portable);
+        let darkest = run
+            .pixels
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .map(|p| luminance(&p[..]))
+            .fold(f64::MAX, f64::min);
+        let ratio = (text + 0.05) / (darkest + 0.05);
+        eprintln!(
+            "halo over {name}: outside {} by {}, widest {}; text {ratio:.2}:1 against the darkest pixel",
+            admission.outside, admission.excess, admission.widest
+        );
+        assert_eq!(admission.outside, 0, "{name}: {admission:?}");
+        if value == 255 {
+            assert!(ratio >= 4.5, "{ratio}");
         }
     }
 }
@@ -1047,10 +1220,12 @@ fn editor_viewport_region_offsets_scales_and_bounds_the_ui() {
 
 /// CPU only: the admitted codes accept exact arithmetic and an emulated
 /// conformant backend, yet still reject wrong geometry, clipping, opacity,
-/// blending space and layering by wide margins. Prints the emulated backend's
-/// statistics as the GPU test does: at 1x UNORM, its distance from exact
-/// (worst 2, five channels over 1, 4,248 changed pixels) is what checkpoint
-/// 12's llvmpipe and WARP draws printed.
+/// blending space, layering and label halos by wide margins. Prints the
+/// emulated backend's statistics as the GPU test does. For the earlier
+/// one-pixel label shadow, its 1x UNORM distance from exact (worst 2, five
+/// channels over 1, 4,248 changed pixels) matched what checkpoint 12's llvmpipe
+/// and WARP draws printed; the prepared-halo panel has not been measured on
+/// them yet.
 #[test]
 fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
     let input = panel();
@@ -1120,6 +1295,21 @@ fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
             wrong.outside > 100 && wrong.excess > 5.,
             "{case}: {wrong:?}"
         );
+        // A label drawn without its halo, with its undilated coverage as the
+        // halo, or with the halo over its text.
+        for halo in [Halo::Absent, Halo::Undilated, Halo::Over] {
+            let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
+            let mut canvas =
+                Canvas::new(&background, size, srgb, full, input.viewport, Model::Exact);
+            canvas.halo = halo;
+            reference_order(&input, &mut canvas, false, theme::TEXT);
+            let wrong = admitted(&canvas.image(), &portable);
+            eprintln!("{case}: label halo {halo:?} rejected by {wrong:?}");
+            assert!(
+                wrong.outside > 20 && wrong.excess > 8.,
+                "{case}: {halo:?} {wrong:?}"
+            );
+        }
     }
     // A label drawn to its own content box instead of the ancestor clip.
     let n = nested();
@@ -1143,4 +1333,28 @@ fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
     );
     eprintln!("nested: label without its ancestor clip rejected by {wrong:?}");
     assert!(wrong.outside > 50 && wrong.excess > 30., "{wrong:?}");
+    // The hugged label: the halo past its text clip is part of the contract,
+    // so a halo cut at the text clip is rejected, as are the other mistakes.
+    let (input, size) = hugged();
+    let backdrop = self::background(size);
+    let compose = |halo, model| {
+        let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
+        let mut canvas = Canvas::new(&backdrop, size, true, full, input.viewport, model);
+        canvas.halo = halo;
+        canvas.glyphs(&input.atlas, &input.widgets[0], theme::TEXT);
+        canvas
+    };
+    let portable = compose(Halo::Contract, Model::Portable);
+    for model in [Model::Exact, Model::Llvmpipe] {
+        let image = compose(Halo::Contract, model).image();
+        assert_eq!(admitted(&image, &portable).outside, 0, "hugged {model:?}");
+    }
+    for halo in [Halo::Absent, Halo::Undilated, Halo::Over, Halo::ContentClip] {
+        let wrong = admitted(&compose(halo, Model::Exact).image(), &portable);
+        eprintln!("hugged label: halo {halo:?} rejected by {wrong:?}");
+        assert!(
+            wrong.outside > 20 && wrong.excess > 8.,
+            "{halo:?} {wrong:?}"
+        );
+    }
 }

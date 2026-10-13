@@ -3,9 +3,9 @@
 One centred status line carries live progress and the outcome; a second label
 is reserved for a restart prompt and stays blank until a real restart exists.
 gameplay.ts writes both through its `hud` binding on every progress, phase or
-locale change. Engine labels draw light text with a hard one-pixel shadow and
-no surface, so the status sits over dark ground: the moss band, or the
-letterbox bar when the window is taller than 16:9.
+locale change. Engine labels draw light text with a thin dark halo and no
+surface; the status sits over dark ground: the moss band, or the letterbox bar
+when the window is taller than 16:9.
 """
 import sys
 from pathlib import Path
