@@ -143,8 +143,15 @@ impl OutputDraw {
         encoder: &mut wgpu::CommandEncoder,
         queries: Option<&crate::timing::PassQueries>,
     ) {
+        self.encode_part(encoder, queries.map(|q| q.render()));
+    }
+    pub fn encode_part(
+        &self,
+        encoder: &mut wgpu::CommandEncoder,
+        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+    ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-            timestamp_writes: queries.map(|q| q.render()),
+            timestamp_writes: timestamps,
             label: Some("Tone map scene and compose display backdrop"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
                 view: &self.target,

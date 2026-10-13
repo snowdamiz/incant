@@ -54,6 +54,7 @@ pub(crate) struct MotionView<'a> {
     pub output: [u32; 2],
     pub plan: &'a crate::resolution::FramePlan,
     pub temporal: bool,
+    pub upscale_rect: Option<[f32; 4]>,
 }
 pub(crate) struct TemporalInput {
     pub frame: MotionFrame,
@@ -75,6 +76,22 @@ impl Prepared {
                 previous_depth: targets.depth[1 - self.slot].clone(),
                 slot: self.slot,
             }),
+        }
+    }
+    pub fn upscale_input(&self, rect: [f32; 4]) -> crate::upscaling::Input {
+        let jitter = self.history.frame.jitter_phase().map_or([0.; 2], |phase| {
+            let j = crate::temporal::jitter::SAMPLES[phase as usize];
+            [j[0] / rect[2], j[1] / rect[3]]
+        });
+        crate::upscaling::Input {
+            frame: self.history.frame.clone(),
+            rect,
+            jitter,
+            previous_jitter: self.history.previous_jitter_uv,
+            surfaces: self
+                .targets
+                .as_ref()
+                .map(|t| (t.motion.clone(), t.depth[self.slot].clone())),
         }
     }
     pub fn jitter_phase(&self) -> Option<u32> {
@@ -253,9 +270,15 @@ impl MotionState {
             output,
             plan,
             temporal,
+            upscale_rect,
         } = view;
         topology(live, current)?;
         let extent = Extent::new(output, plan.size, plan.rect, current.camera);
+        let extent = if let Some(rect) = upscale_rect {
+            extent.upscaled(rect)
+        } else {
+            extent
+        };
         let history = if temporal {
             self.history
                 .prepare_temporal(extent, current.camera, plan.rect)?

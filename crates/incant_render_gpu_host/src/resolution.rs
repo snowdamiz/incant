@@ -50,6 +50,9 @@ impl<P: TargetProvider> TargetProvider for ResolutionTargets<P> {
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         Some(self.config)
     }
+    fn upscale_config(&self) -> Option<incant_render::upscaling::UpscaleConfig> {
+        self.inner.upscale_config()
+    }
     fn temporal_config(&self) -> Option<incant_render::temporal::TemporalConfig> {
         self.inner.temporal_config()
     }

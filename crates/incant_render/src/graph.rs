@@ -27,6 +27,7 @@ pub(crate) struct PreparedFrame {
     pub models: Option<ModelDraw>,
     pub motion: Option<crate::motion::MotionDraw>,
     pub temporal: Option<crate::temporal::TemporalDraw>,
+    pub upscaling: Option<crate::upscaling::Draw>,
     pub sprites: Option<crate::sprites::SpriteDraw>,
     pub text: Option<crate::text::TextDraw>,
     pub output: OutputDraw,
@@ -250,7 +251,7 @@ impl ModelsPlan {
 fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     let plan = ModelsPlan::new(
         frame.motion.is_some(),
-        frame.temporal.is_some(),
+        frame.temporal.is_some() || frame.upscaling.is_some(),
         frame.models.is_some(),
         frame.models.as_ref().is_some_and(|m| m.has_opaque()),
         frame.models.as_ref().is_some_and(|m| m.has_transparent()),
@@ -275,7 +276,10 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
                 .unwrap()
                 .encode_opaque(encoder, timestamp());
         }
-        if plan.temporal {
+        if let Some(upscaling) = &frame.upscaling {
+            upscaling.resolve(encoder, timestamp());
+            upscaling.clear_overlay(encoder, timestamp());
+        } else if plan.temporal {
             frame
                 .temporal
                 .as_ref()
@@ -297,7 +301,14 @@ fn models(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
 }
 fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
     encoder.timed(crate::timing::GpuPass::Display, |e, q| {
-        frame.output.encode(e, q)
+        if let Some(upscaling) = &frame.upscaling {
+            upscaling.composite(e, q.and_then(|q| q.render_range(0, 2)));
+            frame
+                .output
+                .encode_part(e, q.and_then(|q| q.render_range(1, 2)));
+        } else {
+            frame.output.encode(e, q)
+        }
     });
 }
 

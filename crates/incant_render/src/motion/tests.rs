@@ -290,3 +290,83 @@ fn temporal_phase_matrix_and_depth_epoch_commit_together_across_failure_cut_and_
     assert!(!fresh.frame.has_previous());
     assert_eq!(fresh.frame.jitter_phase(), Some(0));
 }
+
+#[test]
+fn upscaling_keeps_exact_prior_matrix_and_jitter_through_internal_only_scale_changes() {
+    let mut history = History::default();
+    let output = [73, 43];
+    let rect = [3.25, 5.5, 65., 33.];
+    for ortho in [false, true] {
+        let mut camera = CameraView::preview();
+        if ortho {
+            camera.orthographic_half_height = Some(4.);
+        }
+        history.invalidate();
+        let mut previous: Option<(Mat4, [f32; 4], usize)> = None;
+        for (step, n) in [16, 8, 4, 12, 16].into_iter().enumerate() {
+            let scale = crate::resolution::ResolutionScale::new(n).unwrap();
+            let plan = crate::resolution::FramePlan::new(output, rect, None, scale).unwrap();
+            let extent = Extent::new(output, plan.size, plan.rect, camera).upscaled(rect);
+            let pending = history
+                .prepare_temporal(extent.clone(), camera, plan.rect)
+                .unwrap();
+            assert_eq!(pending.frame.has_previous(), step > 0);
+            assert_eq!(pending.frame.jitter_phase(), Some(step as u32));
+            if let Some((old_matrix, old_rect, old_phase)) = previous {
+                assert_eq!(pending.previous, old_matrix);
+                let j = crate::temporal::jitter::SAMPLES[old_phase];
+                assert_eq!(
+                    pending.previous_jitter_uv,
+                    [j[0] / old_rect[2], j[1] / old_rect[3]]
+                );
+                // A stationary world point has zero UNJITTERED output motion,
+                // despite different actual source extents and jitter phases.
+                let p = Vec4::new(0., 0., 0., 1.);
+                let a = pending.matrix * p;
+                let b = pending.previous * p;
+                let m = reproject(a, b).unwrap();
+                let cur = crate::temporal::jitter::SAMPLES[step];
+                let delta = glam::Vec2::from([m[0], m[1]])
+                    + glam::Vec2::new(cur[0] / plan.rect[2], cur[1] / plan.rect[3])
+                    - glam::Vec2::from(pending.previous_jitter_uv);
+                assert!(delta.length() < 1e-6);
+            }
+            let exact = pending.matrix;
+            drop(pending); // Abandonment consumes neither phase nor geometry.
+            let retry = history.prepare_temporal(extent, camera, plan.rect).unwrap();
+            assert_eq!(retry.matrix, exact);
+            previous = Some((retry.matrix, plan.rect, step));
+            history.accept(retry);
+        }
+        let source = crate::resolution::FramePlan::new(
+            output,
+            rect,
+            None,
+            crate::resolution::ResolutionScale::FULL,
+        )
+        .unwrap();
+        for next in [
+            Extent::new([74, 43], source.size, source.rect, camera).upscaled(rect),
+            Extent::new(output, source.size, source.rect, camera).upscaled([3.5, 5.5, 65., 33.]),
+            Extent::new(
+                output,
+                source.size,
+                source.rect,
+                CameraView {
+                    near: camera.near * 2.,
+                    ..camera
+                },
+            )
+            .upscaled(rect),
+            Extent::new(output, source.size, source.rect, camera),
+        ] {
+            assert!(
+                !history
+                    .prepare_temporal(next, camera, source.rect)
+                    .unwrap()
+                    .frame
+                    .has_previous()
+            );
+        }
+    }
+}

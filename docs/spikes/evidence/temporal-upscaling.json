@@ -1,0 +1,508 @@
+{
+  "status": "CPU complete; independent source/final audit and Claude GPU/appearance pending",
+  "source_freeze": {
+    "base": "e73afe43ffaf78e73b725876411128d092791f5a",
+    "checkout": "/Users/andreyyurlov/.codex/worktrees/cooked-visual-assets/incant",
+    "branch": "codex/temporal-upscaling",
+    "sources": [
+      {
+        "path": "crates/incant_render/src/graph.rs",
+        "sha256": "be280bcbf532e1c362898e9d6fdf0d0fcb58174e45bf612611a564f60a90d9a8"
+      },
+      {
+        "path": "crates/incant_render/src/lib.rs",
+        "sha256": "2b9ed5ea7b4c4895c70c1103615849e46c86ecebb41401af4acd7949a7bef0c6"
+      },
+      {
+        "path": "crates/incant_render/src/model_draw.rs",
+        "sha256": "29fdd861d78abe4f2b3d20d8befab43fd69681f6cfd92aa476b2463bcfdef1ac"
+      },
+      {
+        "path": "crates/incant_render/src/motion/owner.rs",
+        "sha256": "e7af17af98a729c04d696979444f85c5c48344701f7650a00d55d6c40c7d79d8"
+      },
+      {
+        "path": "crates/incant_render/src/motion/retained.rs",
+        "sha256": "bdb81ee94c38cd29e6e672a30bec57b6425901f30a835406fbbf31470c4b08c8"
+      },
+      {
+        "path": "crates/incant_render/src/motion/tests.rs",
+        "sha256": "4cb20dc30e1134e964fa4d706093b88aab6f272b3e2cb1d54adb677c40c4e8b8"
+      },
+      {
+        "path": "crates/incant_render/src/output.rs",
+        "sha256": "4004e06e997a8b778d38927c0d00502c5f98e531c1af64896b4b85ce96841e37"
+      },
+      {
+        "path": "crates/incant_render/src/retained.rs",
+        "sha256": "40d5468d18a6f686735d1465b1982d017593ac7996140fee70da36df2288b642"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/common.wgsl",
+        "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/composite.wgsl",
+        "sha256": "4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/device_tests.rs",
+        "sha256": "8409dad4dcde6efd31754396031f085f5335b1b2b457b68a9e1bd531da8db3c9"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/mod.rs",
+        "sha256": "976f5156ba3bfc861bbc09f100e42c93b82dbe7b92b9593c7eae9556bfa21998"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/oracle.rs",
+        "sha256": "6cc5fd162bde3a269d667761a377874f312090c2254b86ad9f877b64c08c0a98"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/owner.rs",
+        "sha256": "17ebb78dd4ce3c12901b62201f17b2c0f841a76e396b2251430162176eba5917"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/plan.rs",
+        "sha256": "a5fe81bce82b19aefbc7507c034ba38a22a29ec776dcb7a9faf2f8457074bbaa"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+        "sha256": "a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/system.rs",
+        "sha256": "78d7e5bbf0a392c89b3380fda475e41a9ec01e7bee60f4343c2607602254ab76"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/targets.rs",
+        "sha256": "36f7c6f2574ac442cd5bb10adb95f2cf1529617c10d308becd3ae059022c6d26"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling/tests.rs",
+        "sha256": "75a660ab377f0f0bdfe80cf0ba06adb1b6e600b885fd94520142662d873a4a6b"
+      },
+      {
+        "path": "crates/incant_render/src/upscaling_retained_tests.rs",
+        "sha256": "a34c0e4b2d023ea937a30174b9b4f453ff660acffefeccf447a0e45ac5489386"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/lib.rs",
+        "sha256": "e1b937e082fe7b6811910c87863fef4a9028d0e7c302845f9327a8125c7b7ae7"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/motion.rs",
+        "sha256": "1b6cc089ff8676ec00ebae83876f53ccedd0df0e466963df6d8d317e1eb697a1"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/src/resolution.rs",
+        "sha256": "4862b7c3457d55a9fe319fe0c347ca081a2afbf62c3b31bdc852ee72d3fb4c76"
+      },
+      {
+        "path": "docs/spikes/temporal-upscaling.md",
+        "sha256": "556d5d672132d2a2ebca62d074865b0d2cf076b3d24eb75b7900de68cdac7ed8"
+      }
+    ],
+    "unchanged_baselines": [
+      {
+        "path": "Cargo.toml",
+        "sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857"
+      },
+      {
+        "path": "Cargo.lock",
+        "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e"
+      },
+      {
+        "path": "crates/incant_render/Cargo.toml",
+        "sha256": "7d3628b6a59dba4f3613b0aa8af6bbe274c692aa721bac4f7c77cc37bf202c7b"
+      },
+      {
+        "path": "crates/incant_render_gpu_host/Cargo.toml",
+        "sha256": "386f065fd226154c5144c95d1a5c1143d0e789763085aeec6ef4db90dcbf8e9a"
+      },
+      {
+        "path": "crates/incant_render/src/frame.rs",
+        "sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e"
+      },
+      {
+        "path": "crates/incant_render/src/camera.rs",
+        "sha256": "4741b522cc6c78ede58f63d7ed04e40c098dc21c394ae720f9fea677c78b0663"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/resolve.wgsl",
+        "sha256": "ae65b1f2647dcce5a73fadca4b7d68c6815978af3fbb841510ab3aa555f1cfec"
+      },
+      {
+        "path": "crates/incant_render/src/temporal/copy.wgsl",
+        "sha256": "50f2bbba9102f7f89de524356b7e6e4b9b1e4c90ecace7a5b1c16ee599ee4bdf"
+      },
+      {
+        "path": "crates/incant_render/src/model_material.wgsl",
+        "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b"
+      },
+      {
+        "path": "crates/incant_render/src/output.wgsl",
+        "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a"
+      },
+      {
+        "path": "crates/incant_render/src/tone_map.wgsl",
+        "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307"
+      },
+      {
+        "path": "crates/incant_render/src/lighting/grid.wgsl",
+        "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439"
+      },
+      {
+        "path": "crates/incant_render/src/resolution/plan.rs",
+        "sha256": "88b15839889c79bcb52a28b7cec6330d503df5e7c9a7ca7a03b3312ee71c0f6f"
+      },
+      {
+        "path": "crates/incant_render/src/timing/recorder.rs",
+        "sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a"
+      },
+      {
+        "path": "crates/incant_render/src/timing/pool.rs",
+        "sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549"
+      }
+    ],
+    "gpu_execution": false,
+    "limits": [
+      "No visual, backend execution, mobile budget, MetalFX or phase gate claim."
+    ]
+  },
+  "source_freeze_sha256": "b7ee5ca277f5ca3b1574dd6640638347ca068cb11ba207cb4c1642bcf9f67411",
+  "checks": [
+    {
+      "label": "cpu-all",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 2.7069520950317383,
+      "pid": 42740,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/cpu-all.log",
+      "sha256": "6beb58ade283b0f767373b1ffabf1d7a9c2681049f8eb0a0bcc339bdcea8a8d2"
+    },
+    {
+      "label": "clippy-all",
+      "argv": [
+        "tools/cargo",
+        "clippy",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.330747127532959,
+      "pid": 42795,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/clippy-all.log",
+      "sha256": "df3f3462b8264f172e776d6b0027857bcc878d5b1689780974a0685c7d318163"
+    },
+    {
+      "label": "cooked-refusal",
+      "argv": [
+        "tools/cargo",
+        "test",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-output,cooked-geometry,cooked-sprites,cooked-ui,cooked-text,cooked-materials,cooked-clusters",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 8.740445852279663,
+      "pid": 42805,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/cooked-refusal.log",
+      "sha256": "9022ab27feef984f3555ca385f95bf3ab75e9eee93c929fcdb464ccdb4b29f09"
+    },
+    {
+      "label": "wasm-check",
+      "argv": [
+        "tools/cargo",
+        "check",
+        "--locked",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--lib"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.9824168682098389,
+      "pid": 42888,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/wasm-check.log",
+      "sha256": "4446bff5f806e9c466372216c32b4b7b2f2b2fb869c9ce46c8b2f11f61c148b5"
+    },
+    {
+      "label": "runtime-graph",
+      "argv": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.3880040645599365,
+      "pid": 42901,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/runtime-graph.log",
+      "sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c"
+    },
+    {
+      "label": "format",
+      "argv": [
+        "tools/cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 1.2688679695129395,
+      "pid": 42907,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/format.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "conventions",
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.046237945556640625,
+      "pid": 42933,
+      "reaped": true,
+      "log": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/conventions.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "counts": {
+    "cpu-all": {
+      "passed": 117,
+      "failed": 0,
+      "ignored": 98,
+      "groups": 9
+    },
+    "cooked-refusal": {
+      "passed": 122,
+      "failed": 0,
+      "ignored": 40,
+      "groups": 1
+    }
+  },
+  "overlap": "cooked lib and focused cases overlap ordinary CPU counts; ignored GPU cases were not run",
+  "artifacts": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/clippy-all.log",
+      "raw_sha256": "df3f3462b8264f172e776d6b0027857bcc878d5b1689780974a0685c7d318163",
+      "raw_bytes": 57,
+      "retained": "docs/spikes/evidence/temporal-upscaling/df3f3462b8264f172e776d6b0027857bcc878d5b1689780974a0685c7d318163.gz",
+      "retained_sha256": "e755b8c055f00802b26abd271eb24aef56bb443fb1d45fa5ae6f79a9093b85f1"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/conventions.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/temporal-upscaling/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/cooked-refusal.log",
+      "raw_sha256": "9022ab27feef984f3555ca385f95bf3ab75e9eee93c929fcdb464ccdb4b29f09",
+      "raw_bytes": 19423,
+      "retained": "docs/spikes/evidence/temporal-upscaling/9022ab27feef984f3555ca385f95bf3ab75e9eee93c929fcdb464ccdb4b29f09.gz",
+      "retained_sha256": "7a03a998fc597b1000bc2a12fe3ceed1c5b9f11a12fc74bdf12495eb41844580"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/cpu-all.log",
+      "raw_sha256": "6beb58ade283b0f767373b1ffabf1d7a9c2681049f8eb0a0bcc339bdcea8a8d2",
+      "raw_bytes": 29209,
+      "retained": "docs/spikes/evidence/temporal-upscaling/6beb58ade283b0f767373b1ffabf1d7a9c2681049f8eb0a0bcc339bdcea8a8d2.gz",
+      "retained_sha256": "b40863d5e0c241ba48193fd2db3d6813d1c994b7a6cf1815a28f66bbf45a8ad7"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/format.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0,
+      "retained": "docs/spikes/evidence/temporal-upscaling/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/runtime-graph.log",
+      "raw_sha256": "ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c",
+      "raw_bytes": 76,
+      "retained": "docs/spikes/evidence/temporal-upscaling/ee908c708715917b5f33863cfa9ff249311ea508407af2fd9ac86f714679c03c.gz",
+      "retained_sha256": "5cc48cf24e534b5aef2d26bb0f40dceb92413d38847d6760fb850bdf4244bafc"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/wasm-check.log",
+      "raw_sha256": "4446bff5f806e9c466372216c32b4b7b2f2b2fb869c9ce46c8b2f11f61c148b5",
+      "raw_bytes": 1972,
+      "retained": "docs/spikes/evidence/temporal-upscaling/4446bff5f806e9c466372216c32b4b7b2f2b2fb869c9ce46c8b2f11f61c148b5.gz",
+      "retained_sha256": "32883f9d2c8d7caf163ebde612ace716b6cfad0415f498be733ab247b001a024"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/checks.json",
+      "raw_sha256": "78df31aad78aff9ed7a891f2ab4170092b3144d39a3c06dc165c04368cbb8b57",
+      "raw_bytes": 3541,
+      "retained": "docs/spikes/evidence/temporal-upscaling/78df31aad78aff9ed7a891f2ab4170092b3144d39a3c06dc165c04368cbb8b57.gz",
+      "retained_sha256": "1845030849a96fcf1aa6cc457e17f991d4583d93fdd2facd71a83eb5c13c0ac8"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/run.py",
+      "raw_sha256": "e8539fe9cf1ed4fa9059dcbc7bec80c57b957101e8f5f25f3918fefb44d2750e",
+      "raw_bytes": 1656,
+      "retained": "docs/spikes/evidence/temporal-upscaling/e8539fe9cf1ed4fa9059dcbc7bec80c57b957101e8f5f25f3918fefb44d2750e.gz",
+      "retained_sha256": "a0479377f22dc10d111fb62b256ad4fab4776c517b16bcef875128cd1829b180"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/retain.py",
+      "raw_sha256": "9f3e12a4f2d1abafa6dd38886501f71cf6d4faafa3b16040c0799de480a66474",
+      "raw_bytes": 3268,
+      "retained": "docs/spikes/evidence/temporal-upscaling/9f3e12a4f2d1abafa6dd38886501f71cf6d4faafa3b16040c0799de480a66474.gz",
+      "retained_sha256": "e4e56108b0ed4d348795f70622bfa15fba7402792ffc01850c1ae1228eabd4e2"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-source-001/freeze.json",
+      "raw_sha256": "b7ee5ca277f5ca3b1574dd6640638347ca068cb11ba207cb4c1642bcf9f67411",
+      "raw_bytes": 6337,
+      "retained": "docs/spikes/evidence/temporal-upscaling/b7ee5ca277f5ca3b1574dd6640638347ca068cb11ba207cb4c1642bcf9f67411.gz",
+      "retained_sha256": "86c45e47d51e4805e54be50f05e2fe135bc35c55b311792d3aef8378ce475787"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-source-001/tracked.patch",
+      "raw_sha256": "6836553e3651af33abf5b6652b5642305e69925b0be70d632c0cb88222c95a6f",
+      "raw_bytes": 31012,
+      "retained": "docs/spikes/evidence/temporal-upscaling/6836553e3651af33abf5b6652b5642305e69925b0be70d632c0cb88222c95a6f.gz",
+      "retained_sha256": "45feec924f797f3809718beb358907f749b2167535bf7575e6e43bdc1ef8ad18"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-focused-001.log",
+      "raw_sha256": "24c23469d893fbc7066144e62318febd311c0e33840b7c7a11e51e92e87c8b9a",
+      "raw_bytes": 1703,
+      "retained": "docs/spikes/evidence/temporal-upscaling/24c23469d893fbc7066144e62318febd311c0e33840b7c7a11e51e92e87c8b9a.gz",
+      "retained_sha256": "ee6210c616981b3a65028d54efae82a38583a2c7411dbc86509216fd7320aa83"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-focused-002.log",
+      "raw_sha256": "50fac398fc902a46d7b49aaa5b2b6a45491fc7eecbfddff486cd37c100975f0f",
+      "raw_bytes": 843,
+      "retained": "docs/spikes/evidence/temporal-upscaling/50fac398fc902a46d7b49aaa5b2b6a45491fc7eecbfddff486cd37c100975f0f.gz",
+      "retained_sha256": "01c55571eac53d4f9c77b0275601487c82d17f9a7286f2921598f9afdb1e524c"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-focused-003.log",
+      "raw_sha256": "c190afc5c5f37b063f8f4a27a127c4e5ecad5574f088ab6056c4aa635b102ed7",
+      "raw_bytes": 2614,
+      "retained": "docs/spikes/evidence/temporal-upscaling/c190afc5c5f37b063f8f4a27a127c4e5ecad5574f088ab6056c4aa635b102ed7.gz",
+      "retained_sha256": "42ac7eecb868481009271f3920e1eaac5d74b9026f8b16752355a2c8cc087b54"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-focused-004.log",
+      "raw_sha256": "337dedbdfdebad7371163cb0afb255f4df7b8bca4f24c9c656428bc8427a0f43",
+      "raw_bytes": 2983,
+      "retained": "docs/spikes/evidence/temporal-upscaling/337dedbdfdebad7371163cb0afb255f4df7b8bca4f24c9c656428bc8427a0f43.gz",
+      "retained_sha256": "4dc50902564ea3e123dd1b38cd338971f49b1f4b33fa8b456843b109f02b6d66"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-clippy-001.log",
+      "raw_sha256": "b819a922d200c6426f57cc96d9919c7d7b6ec58ec80e18b8eaeb301e4b068903",
+      "raw_bytes": 319,
+      "retained": "docs/spikes/evidence/temporal-upscaling/b819a922d200c6426f57cc96d9919c7d7b6ec58ec80e18b8eaeb301e4b068903.gz",
+      "retained_sha256": "b40253700165b2f59cc1c3188f60c7d8bf1f6b28d94b6f866ddd8607c608a752"
+    }
+  ],
+  "binaries": [
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-90f6082e9b891519",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/incant_render-90f6082e9b891519",
+      "sha256": "afa3d035e4cbf24f3166ee9c2feacbc09603c8f03f21b856e894526d50bb4298",
+      "bytes": 31757360
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/model_gpu-ea4ec409a7f81803",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/model_gpu-ea4ec409a7f81803",
+      "sha256": "e675f88d95f584c123cebec1208bbb8cbc12d967680382430cdb216d07a2f431",
+      "bytes": 16550840
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/persistent_cache-56a84c8f1d426b30",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/persistent_cache-56a84c8f1d426b30",
+      "sha256": "8bea9987ad5177367977f1cb48cc1915c810b206ac89548ea6454fbdc36f72a6",
+      "bytes": 1027024
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/timestamp_backend_probe-f2bd3f8092008568",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/timestamp_backend_probe-f2bd3f8092008568",
+      "sha256": "e956b1ea6263a3afbc9892900fc8f5c197fbe850e17c3625fc4e56ad45859554",
+      "bytes": 6589624
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render_gpu_host-0795fd9ccf521965",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/incant_render_gpu_host-0795fd9ccf521965",
+      "sha256": "c46fa6f9ecd96e41feb501b4ea5da60df30b4d1e65195ab5b82a3209f34f4a8b",
+      "bytes": 1075272
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/game-35bb67096a4febdf",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/game-35bb67096a4febdf",
+      "sha256": "11e2faf90193ebc11ddf28e3c3b2c4eeb8b5522fe16d5421a6a16908adc329c9",
+      "bytes": 31865672
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/ui-a00b00c0f89810d0",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/ui-a00b00c0f89810d0",
+      "sha256": "246ddd967a91c5c2359b29c46d17c255738b02bfd53dfb5343ce25d31a8580df",
+      "bytes": 31389328
+    },
+    {
+      "build_path": "/tmp/incant-cpu-profiler-target/ci/deps/incant_render-e9c89acbc979e89c",
+      "copied_path": "/Users/andreyyurlov/.codex/incant-evidence/temporal-upscale-checks-001/binaries/incant_render-e9c89acbc979e89c",
+      "sha256": "399c11702cad6f50427b987d1d46a2a30fa06d6c98d4e9423e8bb11995e0195b",
+      "bytes": 32166464
+    }
+  ],
+  "gpu_execution": false,
+  "history": "focused001 rejected the WGSL reserved identifier coherent; focused002 rejected a test-only missing type annotation; focused003/004 and final chain pass. All failures retained without suppression.",
+  "limits": [
+    "default off; no sharpening or visual quality preset",
+    "native cooked families explicitly refused",
+    "GPU numerical/appearance and MetalFX remain pending",
+    "no reference-phone or performance gate",
+    "640MiB+16KiB logical cap excludes existing renderer frames/assets, driver/allocator overhead and older queued work",
+    "overlay current-only, no temporal transparency claim"
+  ]
+}

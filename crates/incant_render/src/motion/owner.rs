@@ -12,12 +12,14 @@ pub(super) struct Extent {
     rect: [u32; 4],
     projection: [u32; 5],
     pixel: Option<[u32; 2]>,
+    output_rect: Option<[u32; 4]>,
 }
 impl Extent {
     pub fn new(output: [u32; 2], internal: [u32; 2], rect: [f32; 4], camera: CameraView) -> Self {
         Self {
             output,
             internal,
+            output_rect: None,
             rect: rect.map(f32::to_bits),
             pixel: camera.pixel_resolution,
             projection: [
@@ -27,6 +29,20 @@ impl Extent {
                 camera.orthographic_half_height.map_or(0, f32::to_bits),
                 u32::from(camera.orthographic_half_height.is_some()),
             ],
+        }
+    }
+    pub fn upscaled(mut self, rect: [f32; 4]) -> Self {
+        self.output_rect = Some(rect.map(f32::to_bits));
+        self
+    }
+    fn compatible(&self, other: &Self) -> bool {
+        if self.output_rect.is_some() && other.output_rect.is_some() {
+            self.output == other.output
+                && self.output_rect == other.output_rect
+                && self.projection == other.projection
+                && self.pixel == other.pixel
+        } else {
+            self == other
         }
     }
 }
@@ -80,6 +96,7 @@ pub(super) struct Pending {
     pub frame: MotionFrame,
     pub matrix: Mat4,
     pub previous: Mat4,
+    pub previous_jitter_uv: [f32; 2],
     extent: Extent,
 }
 impl Default for History {
@@ -106,7 +123,7 @@ impl History {
             || self
                 .last
                 .as_ref()
-                .is_none_or(|a| a.extent != extent || a.frame.bypassed);
+                .is_none_or(|a| !a.extent.compatible(&extent) || a.frame.bypassed);
         let bypassed = extent.pixel.is_some();
         let sequence = self
             .last
@@ -132,6 +149,7 @@ impl History {
                 phase: None,
             },
             matrix,
+            previous_jitter_uv: [0.; 2],
             previous: if valid_previous {
                 self.last.as_ref().unwrap().matrix
             } else {
@@ -152,6 +170,14 @@ impl History {
                 .matrix(rect[2] / rect[3])
                 .map_err(|_| MotionError::Projection)?,
         )?;
+        if pending.frame.has_previous()
+            && let Some(old) = &self.last
+            && let Some(phase) = old.frame.phase
+        {
+            let rect = old.extent.rect.map(f32::from_bits);
+            let jitter = crate::temporal::jitter::SAMPLES[phase as usize];
+            pending.previous_jitter_uv = [jitter[0] / rect[2], jitter[1] / rect[3]];
+        }
         if !pending.frame.bypassed {
             let phase = if pending.frame.has_previous() {
                 (self

@@ -22,6 +22,7 @@ pub struct MotionTargets<P> {
     inner: P,
     epoch: Arc<AtomicU64>,
     temporal: Option<incant_render::temporal::TemporalConfig>,
+    upscale: bool,
 }
 impl<P: TargetProvider> GpuRenderSettings<P> {
     /// Renderer::enable_motion_vectors must have prepared the fixed pipelines.
@@ -35,6 +36,7 @@ impl<P: TargetProvider> GpuRenderSettings<P> {
                     inner: self.targets,
                     epoch: Arc::clone(&epoch),
                     temporal: None,
+                    upscale: false,
                 },
             },
             MotionReset(epoch),
@@ -57,6 +59,21 @@ impl<P: TargetProvider> GpuRenderSettings<P> {
         Ok((settings, reset))
     }
 }
+impl<P: TargetProvider> GpuRenderSettings<P> {
+    /// Explicit output-resolution reconstruction. Requires startup pipelines;
+    /// default rendering and physical UI size remain unchanged.
+    pub fn with_temporal_upscaling(
+        self,
+        config: incant_render::upscaling::UpscaleConfig,
+    ) -> Result<
+        (GpuRenderSettings<MotionTargets<P>>, MotionReset),
+        incant_render::temporal::TemporalError,
+    > {
+        let (mut settings, reset) = self.with_temporal_history(config)?;
+        settings.targets.upscale = true;
+        Ok((settings, reset))
+    }
+}
 impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
     type Error = P::Error;
     type Frame = P::Frame;
@@ -67,7 +84,10 @@ impl<P: TargetProvider> TargetProvider for MotionTargets<P> {
         self.inner.resolution_config()
     }
     fn temporal_config(&self) -> Option<incant_render::temporal::TemporalConfig> {
-        self.temporal
+        if self.upscale { None } else { self.temporal }
+    }
+    fn upscale_config(&self) -> Option<incant_render::upscaling::UpscaleConfig> {
+        if self.upscale { self.temporal } else { None }
     }
     fn motion_epoch(&self) -> Option<u64> {
         Some(self.epoch.load(Ordering::Acquire))

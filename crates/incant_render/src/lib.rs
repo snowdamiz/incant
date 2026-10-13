@@ -38,6 +38,7 @@ mod test_support;
 mod text;
 pub mod timing;
 mod ui;
+pub mod upscaling;
 #[cfg(test)]
 mod version_tests;
 #[cfg(any(target_arch = "wasm32", test))]
@@ -102,6 +103,7 @@ pub struct Renderer {
     graph: graph::FrameGraph,
     motion: Option<motion::MotionSystem>,
     temporal: Option<temporal::TemporalSystem>,
+    upscaling: Option<upscaling::System>,
 }
 impl Renderer {
     pub async fn new(
@@ -209,6 +211,7 @@ impl Renderer {
             graph,
             motion: None,
             temporal: None,
+            upscaling: None,
         })
     }
     pub fn headless() -> Result<Self> {
@@ -307,6 +310,7 @@ impl Renderer {
             resolution::ResolutionScale::FULL,
             None,
             None,
+            None,
         )
     }
     fn draw_scene_scaled(
@@ -316,6 +320,7 @@ impl Renderer {
         scale: resolution::ResolutionScale,
         motion: Option<motion::MotionDraw>,
         temporal: Option<&temporal::Pending>,
+        upscaling: Option<&upscaling::Pending>,
     ) -> Result<wgpu::CommandBuffer> {
         let RetainedTarget {
             view,
@@ -345,7 +350,7 @@ impl Renderer {
             .get(&self.device, frame_size[0], frame_size[1])?;
         let diagnostics =
             diagnostic_draw::DiagnosticDraw::prepare(self, scene, attachments.clone(), scene_rect)?;
-        let models = self.prepare_models(
+        let mut models = self.prepare_models(
             scene,
             models::ModelTarget {
                 color: attachments.color.clone(),
@@ -354,11 +359,16 @@ impl Renderer {
                 rect: scene_rect,
             },
         )?;
+        let overlay = upscaling.and_then(|p| p.overlay());
+        if let (Some(models), Some(overlay)) = (&mut models, overlay) {
+            models.set_transparent_target(overlay.clone());
+        }
+        let overlay_color = overlay.unwrap_or(&attachments.color);
         let sprites = self.sprites.prepare(
             &self.device,
             scene,
             models::ModelTarget {
-                color: attachments.color.clone(),
+                color: overlay_color.clone(),
                 depth: attachments.depth.clone(),
                 format: frame::HDR_FORMAT,
                 rect: scene_rect,
@@ -368,7 +378,7 @@ impl Renderer {
             &self.device,
             scene,
             models::ModelTarget {
-                color: attachments.color.clone(),
+                color: overlay_color.clone(),
                 depth: attachments.depth.clone(),
                 format: frame::HDR_FORMAT,
                 rect: scene_rect,
@@ -379,13 +389,25 @@ impl Renderer {
                 system.prepare(&self.device, pending, &attachments.color, scene.camera)
             })
         });
+        let upscale_draw = upscaling.and_then(|p| {
+            self.upscaling.as_ref().and_then(|system| {
+                system.prepare(&self.device, p, &attachments.color, scene.camera)
+            })
+        });
+        let output_source = upscaling
+            .and_then(|p| p.composite())
+            .unwrap_or(&attachments.color);
         let output = self.output.prepare(
             &self.device,
-            &attachments.color,
+            output_source,
             view,
             format,
             viewport,
-            plan.output_mapping,
+            if upscale_draw.is_some() {
+                None
+            } else {
+                plan.output_mapping
+            },
         )?;
         self.graph.encode(
             &self.device,
@@ -394,6 +416,7 @@ impl Renderer {
                 models,
                 motion,
                 temporal,
+                upscaling: upscale_draw,
                 sprites,
                 text,
                 output,

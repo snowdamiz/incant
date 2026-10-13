@@ -103,6 +103,7 @@ impl Renderer {
         let opaque_count = opaque.len();
         opaque.extend(transparent);
         Ok(Some(ModelDraw {
+            transparent_target: None,
             target,
             camera: bind_group,
             environment: environment.resource.group.clone(),
@@ -121,6 +122,7 @@ struct Draw {
 }
 pub(crate) struct ModelDraw {
     target: ModelTarget,
+    transparent_target: Option<wgpu::TextureView>,
     camera: wgpu::BindGroup,
     environment: wgpu::BindGroup,
     pub lighting: crate::lighting::PreparedLighting,
@@ -134,21 +136,36 @@ impl ModelDraw {
         encoder: &mut wgpu::CommandEncoder,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
-        self.encode_range(encoder, 0..self.draws.len(), timestamps);
+        self.encode_range(encoder, 0..self.draws.len(), timestamps, &self.target.color);
     }
     pub fn encode_opaque(
         &self,
         encoder: &mut wgpu::CommandEncoder,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
-        self.encode_range(encoder, 0..self.opaque_count, timestamps);
+        self.encode_range(
+            encoder,
+            0..self.opaque_count,
+            timestamps,
+            &self.target.color,
+        );
     }
     pub fn encode_transparent(
         &self,
         encoder: &mut wgpu::CommandEncoder,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
-        self.encode_range(encoder, self.opaque_count..self.draws.len(), timestamps);
+        self.encode_range(
+            encoder,
+            self.opaque_count..self.draws.len(),
+            timestamps,
+            self.transparent_target
+                .as_ref()
+                .unwrap_or(&self.target.color),
+        );
+    }
+    pub fn set_transparent_target(&mut self, target: wgpu::TextureView) {
+        self.transparent_target = Some(target);
     }
     pub fn has_opaque(&self) -> bool {
         self.opaque_count > 0
@@ -161,11 +178,12 @@ impl ModelDraw {
         encoder: &mut wgpu::CommandEncoder,
         range: std::ops::Range<usize>,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+        color: &wgpu::TextureView,
     ) {
         let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Imported model geometry"),
             color_attachments: &[Some(wgpu::RenderPassColorAttachment {
-                view: &self.target.color,
+                view: color,
                 resolve_target: None,
                 depth_slice: None,
                 ops: wgpu::Operations {

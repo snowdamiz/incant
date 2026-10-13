@@ -40,6 +40,10 @@ pub trait TargetProvider {
     fn motion_epoch(&self) -> Option<u64> {
         None
     }
+    /// Output-resolution temporal mode, mutually exclusive with fixed accumulation.
+    fn upscale_config(&self) -> Option<incant_render::upscaling::UpscaleConfig> {
+        None
+    }
     /// Trusted presentation opt-in, captured once per consumer lifetime.
     fn temporal_config(&self) -> Option<incant_render::temporal::TemporalConfig> {
         None
@@ -70,6 +74,7 @@ struct Live<P> {
     resolution_config: Option<ResolutionConfig>,
     motion_epoch: Option<u64>,
     temporal_config: Option<incant_render::temporal::TemporalConfig>,
+    upscale_config: Option<incant_render::upscaling::UpscaleConfig>,
 }
 /// Owns the actual GPU bindings plus its target provider. NativeRenderHost owns
 /// the sole CPU adapter and calls this consumer inside every mandatory sync.
@@ -101,6 +106,9 @@ impl<P: TargetProvider> GpuRenderConsumer<P> {
         self.live
             .as_ref()
             .and_then(|live| live.scene.motion_frame())
+    }
+    pub fn upscale_frame(&self) -> Option<incant_render::upscaling::UpscaleFrame> {
+        self.live.as_ref().and_then(|l| l.scene.upscale_frame())
     }
     pub fn temporal_frame(&self) -> Option<incant_render::temporal::TemporalFrame> {
         self.live
@@ -139,7 +147,17 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
         scene.set_dynamic_resolution(config)?;
         let motion_epoch = settings.targets.motion_epoch();
         let temporal_config = settings.targets.temporal_config();
-        if let Some(config) = temporal_config {
+        let upscale_config = settings.targets.upscale_config();
+        if upscale_config.is_some() && (temporal_config.is_some() || motion_epoch.is_none()) {
+            return Err(GpuHostError::Render(Box::new(
+                incant_render::upscaling::UpscaleError::History,
+            )));
+        }
+        if let Some(config) = upscale_config {
+            scene
+                .enable_temporal_upscaling(&settings.renderer, config)
+                .map_err(GpuHostError::Render)?;
+        } else if let Some(config) = temporal_config {
             if motion_epoch.is_none() {
                 return Err(GpuHostError::Render(Box::new(
                     incant_render::temporal::TemporalError::History,
@@ -172,6 +190,7 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
                 resolution_config: config,
                 motion_epoch,
                 temporal_config,
+                upscale_config,
             }),
             frames: 0,
         })
@@ -243,7 +262,11 @@ impl<P: TargetProvider> RenderInputConsumer for GpuRenderConsumer<P> {
             // Replacement has fresh timing ownership. Outstanding old callbacks
             // are retained in the bounded slot and discarded by the new owner.
             scene.set_dynamic_resolution(live.resolution_config)?;
-            if let Some(config) = live.temporal_config {
+            if let Some(config) = live.upscale_config {
+                scene
+                    .enable_temporal_upscaling(&self.renderer, config)
+                    .map_err(GpuHostError::Render)?;
+            } else if let Some(config) = live.temporal_config {
                 scene
                     .enable_temporal_history(&self.renderer, config)
                     .map_err(GpuHostError::Render)?;

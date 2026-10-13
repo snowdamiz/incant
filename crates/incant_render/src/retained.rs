@@ -33,6 +33,7 @@ pub struct RetainedScene {
     owner: Arc<()>,
     motion: Option<super::motion::MotionState>,
     temporal: Option<crate::temporal::TemporalState>,
+    upscaling: Option<crate::upscaling::State>,
     resolution: Option<crate::resolution::ResolutionOwner>,
     bindings: Vec<NodeBinding>,
     environment: Option<(AssetVersionId, f64, f64)>,
@@ -94,6 +95,7 @@ impl Renderer {
             owner: Arc::clone(&self.identity),
             motion: None,
             temporal: None,
+            upscaling: None,
             resolution: None,
             bindings: input
                 .nodes
@@ -141,11 +143,13 @@ impl RetainedScene {
         )?;
         self.motion = Some(candidate);
         self.temporal = None;
+        self.upscaling = None;
         Ok(())
     }
     pub fn disable_motion_history(&mut self) {
         self.motion = None;
         self.temporal = None;
+        self.upscaling = None;
     }
     pub fn invalidate_motion_history(&mut self) {
         if let Some(motion) = &mut self.motion {
@@ -170,6 +174,24 @@ impl RetainedScene {
         self.enable_motion_history(renderer)?;
         self.temporal = Some(temporal);
         Ok(())
+    }
+    /// Output-resolution history; internal-only DRS changes preserve its owner.
+    /// This replaces any fixed accumulation owner only after complete admission.
+    pub fn enable_temporal_upscaling(
+        &mut self,
+        renderer: &Renderer,
+        config: crate::upscaling::UpscaleConfig,
+    ) -> Result<()> {
+        let state = crate::upscaling::State::new(config)?;
+        if renderer.upscaling.is_none() {
+            return Err(crate::upscaling::UpscaleError::Disabled.into());
+        }
+        self.enable_motion_history(renderer)?;
+        self.upscaling = Some(state);
+        Ok(())
+    }
+    pub fn upscale_frame(&self) -> Option<crate::upscaling::UpscaleFrame> {
+        self.upscaling.as_ref().and_then(|s| s.frame())
     }
     pub fn temporal_frame(&self) -> Option<crate::temporal::TemporalFrame> {
         self.temporal.as_ref().and_then(|t| t.frame())
@@ -387,6 +409,33 @@ impl RetainedScene {
             self.staging.camera.pixel_resolution,
             scale,
         )?;
+        let output_size = [target.width, target.height];
+        let output_rect = target.viewport.map(|v| v.rect).unwrap_or([
+            0.,
+            0.,
+            target.width as f32,
+            target.height as f32,
+        ]);
+        let upscale_plan =
+            if self.upscaling.is_some() && self.staging.camera.pixel_resolution.is_none() {
+                Some(crate::upscaling::Plan::new(
+                    output_size,
+                    output_rect,
+                    &plan,
+                )?)
+            } else {
+                None
+            };
+        if let (Some(state), Some(p)) = (&self.upscaling, upscale_plan) {
+            state.preflight(
+                &renderer.device,
+                p,
+                self.motion
+                    .as_ref()
+                    .ok_or(crate::upscaling::UpscaleError::History)?
+                    .target_bytes(),
+            )?;
+        }
         if let Some(temporal) = &self.temporal
             && self.staging.camera.pixel_resolution.is_none()
         {
@@ -411,7 +460,8 @@ impl RetainedScene {
                     crate::motion::MotionView {
                         output: [target.width, target.height],
                         plan: &plan,
-                        temporal: self.temporal.is_some(),
+                        temporal: self.temporal.is_some() || self.upscaling.is_some(),
+                        upscale_rect: self.upscaling.as_ref().map(|_| output_rect),
                     },
                 )
             })
@@ -430,6 +480,21 @@ impl RetainedScene {
                 temporal.prepare(&renderer.device, pending.temporal_input(plan.rect))
             })
             .transpose()?;
+        let upscale_pending = self
+            .upscaling
+            .as_ref()
+            .map(|state| {
+                let motion = motion_pending
+                    .as_ref()
+                    .ok_or(crate::upscaling::UpscaleError::History)?;
+                state.prepare(
+                    &renderer.device,
+                    motion.upscale_input(plan.rect),
+                    upscale_plan,
+                    output_size,
+                )
+            })
+            .transpose()?;
         if let Some(phase) = motion_pending.as_ref().and_then(|p| p.jitter_phase()) {
             self.staging.camera.jitter = crate::temporal::jitter::ndc(phase, plan.rect);
             self.staging.camera.jitter_guard = crate::temporal::jitter::guard(plan.rect);
@@ -440,6 +505,7 @@ impl RetainedScene {
             scale,
             motion_draw,
             temporal_pending.as_ref(),
+            upscale_pending.as_ref(),
         )?;
         for batch in &self.staging.batches {
             if !batch.updates.is_empty() {
@@ -470,6 +536,9 @@ impl RetainedScene {
         }
         if let (Some(temporal), Some(pending)) = (&mut self.temporal, temporal_pending) {
             temporal.accept(pending);
+        }
+        if let (Some(owner), Some(pending)) = (&mut self.upscaling, upscale_pending) {
+            owner.accept(pending);
         }
         if let (Some(owner), Some(frame)) = (&mut self.resolution, resolution) {
             owner.accept(frame);
@@ -513,3 +582,7 @@ mod motion_tests;
 #[cfg(test)]
 #[path = "temporal_retained_tests.rs"]
 mod temporal_tests;
+
+#[cfg(test)]
+#[path = "upscaling_retained_tests.rs"]
+mod upscaling_tests;

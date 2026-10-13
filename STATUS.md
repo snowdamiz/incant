@@ -56,6 +56,17 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
+## Output-resolution temporal upscaling — producer review pending
+
+A default-off portable path now reconstructs opaque/MASK history at physical output
+size, retains exact motion through internal-only DRS changes, and composites a
+separate current-only overlay before the unchanged display/UI path. The frozen
+producer passes 117 ordinary CPU tests and 122 overlapping cooked-feature tests,
+Clippy, browser/graph/format checks. [Contract](docs/spikes/temporal-upscaling.md)
+and [exact packet](docs/spikes/evidence/temporal-upscaling.json) preserve historical
+failures. Independent source review, GPU numerical/appearance, cooked artifacts,
+MetalFX and device budgets remain pending; no default enablement or gate claim.
+
 ## Retained temporal color — CPU producer accepted, GPU review pending
 
 The default-off fixed-internal-resolution opaque/MASK temporal resolve is implemented
