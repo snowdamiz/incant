@@ -72,7 +72,8 @@ current-composition binaries then completed eight bounded Metal frames, checking
 fixed history, overlay depth and timestamp submission together. No new pixel review
 is claimed. Producer acceptance remains opt-in fixed mode only, with softness and
 MASK detail approximately 18% of reference. Final integration evidence review is
-pending; defaults and phase/device gates remain unchanged.
+independently accepted; the scoped PR awaits its required fast check. Defaults
+and phase/device gates remain unchanged.
 
 ## Static Wasm C builds — bounded local scheduling verified
 

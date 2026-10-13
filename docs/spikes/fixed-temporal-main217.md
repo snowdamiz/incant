@@ -102,7 +102,7 @@ acceptance remains source/binary-specific and retains its softness limitation.
 [Manifest](evidence/fixed-temporal-main217.json) and
 [read-only verifier](evidence/fixed-temporal-main217/verify.py) retain all current
 raw checks, explicitly recooked artifacts, producer evidence and source identities.
-Final independent integration evidence review is pending.
+Final independent integration evidence review is [accepted](evidence/fixed-temporal-main217/final-review.json). Publication remains subject to the exact-head required fast check.
 
 The actual main219 ancestry join changes only twelve inert physics-snapshot source
 paths (absent from the selected renderer graph) and one separate timestamp

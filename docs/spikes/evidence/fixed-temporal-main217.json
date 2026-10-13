@@ -203,6 +203,10 @@
     "temporal-coverage-source-cpu-final-20261013": {
       "path": "docs/spikes/evidence/fixed-temporal-main217/temporal-coverage-source-cpu-final-20261013.json",
       "sha256": "678e67b083603de9ce5fef5103be4761933b07b1d84f64efe2bf6b71625818cc"
+    },
+    "current-main219-final": {
+      "path": "docs/spikes/evidence/fixed-temporal-main217/final-review.json",
+      "sha256": "216bae9385a16b090ee4e6accae567aabf782a14e7d13c28c7aa6fb6bfd06495"
     }
   },
   "freeze": {
@@ -2121,7 +2125,7 @@
     "gpu": "Two exact copied current-composition binaries, one bounded joined test each, eight65x33 submitted/completed Metal frames. Positive Models/InitializeScene/Display intervals, contained envelope, history phase and DRS reset. No current appearance/readback/pixel/performance claim.",
     "producer": "Prior fixed-only Claude review9927598c,150numeric+79scene submissions/32contracts; softness and MASK detail approximately18% OF reference remain. Original producer evidence remains tied to its source/binaries.",
     "preliminary": "First read-only exact test-list request omitted models:: prefix and matched zero. Corrected listing required exactly one test before each actual GPU launch; no empty execution counted.",
-    "final_review": "pending"
+    "final_review": "Independent root source and complete current-main219 execution/archive audit accepted at 931998df; publication requires exact-head fast SUCCESS."
   },
   "main219_qualification": {
     "path": "docs/spikes/evidence/fixed-temporal-main217/main219-qualification.json",
