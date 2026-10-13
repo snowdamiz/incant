@@ -12,3 +12,5 @@ Rapier modules and observer alias are guarded by features absent from both
 actual renderer builds. Renderer source, manifests and lock remain unchanged;
 this source-relevance qualification is independently accepted (`ec653030`).
 Publication follows the required fast check. See [manifest](evidence/shadow-main230.json) and [original report](../../handoffs/0076-shadow-guard-review/result.md). No phone, performance or phase gate is approved.
+
+The later main233 join adds the independently reviewed one-case HierarchyMenu test deadline and its documentation only. The read-only qualification replays the accepted main231 and original assertions, verifies unchanged renderer, physics, tools, manifests and lock, and makes no new build or GPU claim.

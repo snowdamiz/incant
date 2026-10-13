@@ -1239,5 +1239,33 @@
       "sha256": "ec653030e6585b1cade5d71a6734c1c7a16dae483187189184c398c93c8ca147",
       "decision": "accepted"
     }
+  },
+  "main233_ui_only_join": {
+    "qualification": {
+      "main": "ca21c8221e87c60c9adafa59dcda4841d2e09b95",
+      "prior_main": "b4b0d5e919de8432a6c643d4486e0230ebddbc58",
+      "incoming_paths": [
+        "STATUS.md",
+        "docs/spikes/evidence/hierarchy-menu-timeout.json",
+        "docs/spikes/evidence/hierarchy-menu-timeout/final-root.json",
+        "docs/spikes/evidence/hierarchy-menu-timeout/records.json.gz",
+        "docs/spikes/hierarchy-menu-timeout.md",
+        "editor/ui/src/components/HierarchyMenu.test.tsx"
+      ],
+      "test": {
+        "path": "editor/ui/src/components/HierarchyMenu.test.tsx",
+        "old_sha256": "2f94ea3cc9550baff5cd580ac4d2a18f4da2760e28771dd33fa0fff5e49a4ecf",
+        "new_sha256": "7f0d38de9b894c54d435aafed96c0d6da794c8a3ecdc577e23ac62ac8fa29393"
+      },
+      "prior_qualification_sha256": "563ac28758606533ddfb8765eb37fb03e13648b76c010e1cfbe4351fd5b11567",
+      "renderer_physics_tools_manifest_lock_unchanged": true,
+      "new_build_or_gpu_claim": false
+    },
+    "archive": {
+      "path": "docs/spikes/evidence/shadow-main230/main233-qualification.json.gz",
+      "sha256": "3c5f9518a64815e246ed26f8d9fa57e5005e4ddf16cac335da217dead9ed12a3",
+      "records": 3
+    },
+    "status": "read-only qualification complete; root review pending"
   }
 }
