@@ -25,7 +25,8 @@ pub fn decode_geometry(
     if &read.take::<8>()? != MAGIC {
         return Err(Error::Header);
     }
-    if u16::from_le_bytes(read.take()?) != 1 {
+    let version = u16::from_le_bytes(read.take()?);
+    if version != 1 && version != 2 {
         return Err(Error::Version);
     }
     let dimension = match read.take::<1>()?[0] {
@@ -50,11 +51,12 @@ pub fn decode_geometry(
         _ => return Err(Error::Geometry),
     };
     let count = read.word()? as usize;
-    if read.word()? != 0 {
+    let extension = read.word()? as usize;
+    if (version == 1 && extension != 0) || (version == 2 && extension == 0) {
         return Err(Error::Header);
     }
     part_count(kind, dimension, count)?;
-    if bytes.len() != length(count)? {
+    if bytes.len() != length(count)?.checked_add(extension).ok_or(Error::Limit)? {
         return Err(Error::Length);
     }
     budget.charge(count.checked_mul(size_of::<Part>()).ok_or(Error::Limit)?)?;
@@ -81,23 +83,41 @@ pub fn decode_geometry(
             rotation: [read.word()?, read.word()?, read.word()?, read.word()?],
         });
     }
-    validate_geometry(GeometryRecord {
+    let geometry = validate_geometry(GeometryRecord {
         identity,
         kind,
         parts,
-    })
+    })?;
+    if version == 1 {
+        Ok(geometry)
+    } else {
+        crate::compound_codec::decode(&bytes[read.position..], geometry, budget)
+    }
 }
 
 pub fn encode_geometry(value: &ValidatedGeometry, budget: &mut Budget) -> Result<Vec<u8>> {
     let record = value.record();
-    let len = length(record.parts.len())?;
+    let compound = value
+        .compound()
+        .map(|c| crate::compound_codec::encode(c, budget))
+        .transpose()?;
+    let extension = compound.as_ref().map_or(0, Vec::len);
+    let len = length(record.parts.len())?
+        .checked_add(extension)
+        .filter(|n| *n <= MAX_BYTES)
+        .ok_or(Error::Limit)?;
     budget.charge(len)?;
     let mut bytes = vector(len)?;
     bytes.extend_from_slice(MAGIC);
-    bytes.extend_from_slice(&1u16.to_le_bytes());
+    let version: u16 = if compound.is_some() { 2 } else { 1 };
+    bytes.extend_from_slice(&version.to_le_bytes());
     bytes.extend_from_slice(&[record.identity.dimension as u8, 1]);
     bytes.extend_from_slice(&record.identity.build);
-    for n in [record.kind as u32, record.parts.len() as u32, 0] {
+    for n in [
+        record.kind as u32,
+        record.parts.len() as u32,
+        extension as u32,
+    ] {
         bytes.extend_from_slice(&n.to_le_bytes());
     }
     for part in &record.parts {
@@ -117,6 +137,9 @@ pub fn encode_geometry(value: &ValidatedGeometry, budget: &mut Budget) -> Result
         {
             bytes.extend_from_slice(&n.to_le_bytes());
         }
+    }
+    if let Some(compound) = compound {
+        bytes.extend_from_slice(&compound);
     }
     Ok(bytes)
 }
