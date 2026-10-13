@@ -79,7 +79,10 @@ impl TextSystem {
         let Some(text) = scene.text.as_ref().filter(|t| t.geometry.quads.is_some()) else {
             return Ok(None);
         };
-        let matrix = scene.camera.matrix(target.rect[2] / target.rect[3])?;
+        let matrix = scene
+            .camera
+            .unjittered()
+            .matrix(target.rect[2] / target.rect[3])?;
         let uniform = device.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: Some("Text frame camera and color"),
             contents: bytemuck::bytes_of(&FrameUniform {

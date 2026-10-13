@@ -35,9 +35,18 @@ Accepted collider records and exact owner joins are composed on main216 with
 unchanged physics source, vendor inputs, lock and selected dependency graph.
 The two retained executable suites pass 34 cases again; the complete 135-case
 producer suite and strict Clippy/wasm checks remain exact-source evidence.
-Current-main integration review is accepted; the required fast check precedes
-publication. Live physics saves remain refused.
+Current-main integration review and the required fast check passed; PR217 is
+merged. Live physics saves remain refused.
 [Scope and relevance](docs/spikes/physics-collider-main216.md).
+
+## Fixed-resolution temporal accumulation — private source composition
+
+The [curated main217 source](docs/spikes/fixed-temporal-main217.md) selects the
+accepted opt-in fixed TAA path and its exact WGSL, with a narrowed four-program
+native cooker. Upscaling, MetalFX, bloom and SSAO stay outside this composition.
+Current source review, CPU checks and explicit recook are pending; no new GPU or
+appearance evidence is claimed. Producer fixed-mode acceptance retains softness
+and low MASK-detail retention; default rendering remains unchanged.
 
 ## Static Wasm C builds — bounded local scheduling verified
 
@@ -49,9 +58,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main216, 2026-10-13
+## Current overview — main217, 2026-10-13
 
-Development main216 includes the reviewed opt-in cooked renderer families and
+Development main217 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -70,7 +79,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–216 changes remain outside that tested baseline. No device, performance or
+Later main206–217 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
@@ -105,7 +114,8 @@ fixed native collider configuration, including mass modes, group-test modes and
 historical enabled tri-state. The joined rigid owner derives force thresholds from
 checked colliders and requires exact body/geometry witnesses. Independent source
 and final evidence reviews accept the scoped result: 135 CPU tests (none ignored),
-Clippy, wasm32, normal graph and repository checks pass. Integration is pending.
+Clippy, wasm32, normal graph and repository checks pass. PR217 is merged after
+current-main relevance review and the required fast check.
 Physics world save admission stays closed; manager, derived arithmetic and
 phase/constructor validation remain open. No live restore or device claim.
 
