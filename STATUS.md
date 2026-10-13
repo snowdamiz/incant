@@ -56,6 +56,18 @@ correction is merged in PR194 after public native checks, independent integratio
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
 
+## Cooked motion and temporal programs — source accepted, GPU pending
+
+The opt-in complete `cooked-temporal` feature now supplies trusted build-time
+MSL/SPIR-V/HLSL for motion, fixed temporal resolve/copy, output reconstruction/
+composite and conservative cluster compute, with GPU-host/player forwarding.
+Default/browser WGSL bytes and partial-cooked refusal remain unchanged. Cooker,
+complete/default CPU, Clippy/browser/dependency checks and all 11 Metal compiler/
+SPIR-V validator stages pass. Independent source review is accepted; final packet
+review, the separately owned temporal edge/overlay correction and explicit recook,
+and actual backend/appearance execution remain pending; no GPU or device gate is inferred.
+[Contract and retained evidence](docs/spikes/cooked-temporal-programs.md).
+
 ## Output-resolution temporal upscaling — CPU producer accepted, GPU pending
 
 A default-off portable path now reconstructs opaque/MASK history at physical output
@@ -65,7 +77,7 @@ producer passes 117 ordinary CPU tests and 122 overlapping cooked-feature tests,
 Clippy, browser/graph/format checks. [Contract](docs/spikes/temporal-upscaling.md)
 and [exact packet](docs/spikes/evidence/temporal-upscaling.json) preserve historical
 failures. [Independent source/CPU review](docs/spikes/temporal-upscaling-verification.md)
-accepted immutable `0452c5f5`; GPU numerical/appearance, cooked artifacts, MetalFX
+accepted immutable `0452c5f5`; GPU numerical/appearance, MetalFX
 and device budgets remain pending; no default enablement or gate claim.
 
 ## Retained temporal color — CPU producer accepted, GPU review pending
@@ -76,8 +88,8 @@ complete Models timestamp coverage. Independent source and CPU review passed;
 [verification and exact evidence](docs/spikes/temporal-color-verification.md) retain
 110 ordinary CPU tests and 115 overlapping cooked-feature tests. Two parent-motion
 GPU numeric tests passed separately; temporal accumulation, appearance, temporal
-upscaling, MetalFX and device budgets remain pending. Native cooked combinations
-explicitly refuse this new path until their artifact contract is implemented.
+upscaling, MetalFX and device budgets remain pending. Partial native cooked combinations continue to refuse this path; the complete
+`cooked-temporal` producer above now supplies its artifacts, with GPU acceptance pending.
 
 ## Exact physics saves — inert graph adjacency validation underway
 

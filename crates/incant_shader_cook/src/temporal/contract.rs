@@ -1,0 +1,313 @@
+use super::Kind;
+use crate::{CookError, Result};
+use naga::{
+    AddressSpace, Binding, BuiltIn, ImageClass, ImageDimension, ScalarKind, ShaderStage, TypeInner,
+};
+fn require(ok: bool, reason: &'static str) -> Result<()> {
+    if ok {
+        Ok(())
+    } else {
+        Err(CookError::Contract(reason))
+    }
+}
+fn numeric(m: &naga::Module, t: naga::Handle<naga::Type>, lanes: u8, kind: ScalarKind) -> bool {
+    let scalar = naga::Scalar { kind, width: 4 };
+    match m.types[t].inner {
+        TypeInner::Scalar(s) => lanes == 1 && s == scalar,
+        TypeInner::Vector { size, scalar: s } => size as u8 == lanes && s == scalar,
+        _ => false,
+    }
+}
+#[derive(Debug, PartialEq)]
+enum Io {
+    Position,
+    Index,
+    Float(u32, u8, bool),
+}
+fn io(
+    m: &naga::Module,
+    t: naga::Handle<naga::Type>,
+    b: Option<&Binding>,
+    out: &mut Vec<Io>,
+) -> Result<()> {
+    match b {
+        Some(Binding::BuiltIn(BuiltIn::Position { invariant: false }))
+            if numeric(m, t, 4, ScalarKind::Float) =>
+        {
+            out.push(Io::Position)
+        }
+        Some(Binding::BuiltIn(BuiltIn::VertexIndex)) if numeric(m, t, 1, ScalarKind::Uint) => {
+            out.push(Io::Index)
+        }
+        Some(Binding::Location {
+            location,
+            blend_src: None,
+            per_primitive: false,
+            interpolation,
+            sampling,
+        }) if interpolation.is_none_or(|i| {
+            matches!(
+                i,
+                naga::Interpolation::Perspective | naga::Interpolation::Flat
+            )
+        }) && sampling
+            .is_none_or(|s| s == naga::Sampling::Center || s == naga::Sampling::First) =>
+        {
+            let n = (1..=4)
+                .find(|n| numeric(m, t, *n, ScalarKind::Float))
+                .ok_or(CookError::Contract("temporal IO type"))?;
+            let flat = *interpolation == Some(naga::Interpolation::Flat);
+            require(
+                sampling.is_none_or(|s| {
+                    s == if flat {
+                        naga::Sampling::First
+                    } else {
+                        naga::Sampling::Center
+                    }
+                }),
+                "temporal IO sampling",
+            )?;
+            out.push(Io::Float(*location, n, flat));
+        }
+        None => {
+            if let TypeInner::Struct { members, .. } = &m.types[t].inner {
+                for x in members {
+                    io(m, x.ty, x.binding.as_ref(), out)?;
+                }
+            } else {
+                return Err(CookError::Contract("temporal unbound IO"));
+            }
+        }
+        _ => return Err(CookError::Contract("temporal IO binding")),
+    }
+    Ok(())
+}
+fn uniform(
+    m: &naga::Module,
+    t: naga::Handle<naga::Type>,
+    names: &[&str],
+    motion: bool,
+    material: bool,
+) -> Result<()> {
+    let TypeInner::Struct { members, span } = &m.types[t].inner else {
+        return Err(CookError::Contract("temporal uniform type"));
+    };
+    require(
+        members.len() == names.len() && *span == if motion { 144 } else { names.len() as u32 * 16 },
+        "temporal uniform span",
+    )?;
+    for (i, (member, name)) in members.iter().zip(names).enumerate() {
+        let matrix = motion && i < 2;
+        require(
+            member.name.as_deref() == Some(*name)
+                && member.offset == if motion { i as u32 * 64 } else { i as u32 * 16 },
+            "temporal uniform member",
+        )?;
+        require(
+            if matrix {
+                matches!(
+                    m.types[member.ty].inner,
+                    TypeInner::Matrix {
+                        columns: naga::VectorSize::Quad,
+                        rows: naga::VectorSize::Quad,
+                        scalar: naga::Scalar {
+                            kind: ScalarKind::Float,
+                            width: 4
+                        }
+                    }
+                )
+            } else {
+                numeric(
+                    m,
+                    member.ty,
+                    4,
+                    if material && i == 3 {
+                        ScalarKind::Uint
+                    } else {
+                        ScalarKind::Float
+                    },
+                )
+            },
+            "temporal uniform member type",
+        )?;
+    }
+    Ok(())
+}
+pub(super) fn validate(kind: Kind, m: &naga::Module, info: &naga::valid::ModuleInfo) -> Result<()> {
+    require(
+        m.overrides.is_empty() && m.entry_points.len() == 2,
+        "temporal entry/override count",
+    )?;
+    let motion = kind == Kind::Motion;
+    let vary = || {
+        vec![
+            Io::Position,
+            Io::Float(0, 4, false),
+            Io::Float(1, 2, false),
+            Io::Float(2, 1, true),
+        ]
+    };
+    let mut seen = [false; 2];
+    for (n, e) in m.entry_points.iter().enumerate() {
+        let vertex = match (e.stage, e.name.as_str()) {
+            (ShaderStage::Vertex, "vertex") => true,
+            (ShaderStage::Fragment, name) if name == kind.entry() => false,
+            _ => return Err(CookError::Contract("temporal entry identity")),
+        };
+        let slot = usize::from(!vertex);
+        require(!seen[slot], "temporal duplicate stage")?;
+        seen[slot] = true;
+        let mut inputs = Vec::new();
+        for a in &e.function.arguments {
+            io(m, a.ty, a.binding.as_ref(), &mut inputs)?;
+        }
+        let expected = if vertex && motion {
+            (0..12)
+                .map(|i| {
+                    Io::Float(
+                        i,
+                        match i {
+                            0 | 2 => 3,
+                            1 => 2,
+                            _ => 4,
+                        },
+                        false,
+                    )
+                })
+                .collect()
+        } else if vertex {
+            vec![Io::Index]
+        } else if motion {
+            vary()
+        } else {
+            vec![Io::Position]
+        };
+        require(inputs == expected, "temporal inputs")?;
+        let result = e
+            .function
+            .result
+            .as_ref()
+            .ok_or(CookError::Contract("temporal missing output"))?;
+        let mut outputs = Vec::new();
+        io(m, result.ty, result.binding.as_ref(), &mut outputs)?;
+        let expected = if vertex && motion {
+            vary()
+        } else if vertex {
+            vec![Io::Position]
+        } else if kind == Kind::Upscale {
+            vec![Io::Float(0, 4, false), Io::Float(1, 1, false)]
+        } else {
+            vec![Io::Float(0, 4, false)]
+        };
+        require(outputs == expected, "temporal outputs/MRT")?;
+        for (h, g) in m.global_variables.iter() {
+            let expected = !vertex
+                || (motion
+                    && g.binding
+                        == Some(naga::ResourceBinding {
+                            group: 0,
+                            binding: 0,
+                        }));
+            require(
+                info.get_entry_point(n)[h].is_empty() != expected,
+                "temporal stage visibility",
+            )?;
+        }
+    }
+    let count = match kind {
+        Kind::Motion => 4,
+        Kind::Resolve => 5,
+        Kind::Copy => 1,
+        Kind::Upscale => 6,
+        Kind::Composite => 3,
+    };
+    require(m.global_variables.len() == count, "temporal resource count")?;
+    let mut bindings = std::collections::BTreeSet::new();
+    for (_, g) in m.global_variables.iter() {
+        require(g.init.is_none(), "temporal initialized global")?;
+        let b = g
+            .binding
+            .ok_or(CookError::Contract("temporal unbound global"))?;
+        require(
+            bindings.insert((b.group, b.binding)),
+            "temporal duplicate binding",
+        )?;
+        let frame = b.group == 0 && b.binding == 0 && kind != Kind::Copy;
+        let material = motion && b.group == 1 && b.binding == 0;
+        if frame || material {
+            require(g.space == AddressSpace::Uniform, "temporal uniform space")?;
+            let names: &[&str] = if material {
+                &["base", "emissive_roughness", "factors", "flags"]
+            } else {
+                match kind {
+                    Kind::Motion => &["current", "previous", "rect"],
+                    Kind::Resolve => &["rect", "depth", "options", "reactive"],
+                    Kind::Upscale | Kind::Composite => {
+                        &["source", "output", "depth", "options", "reactive", "jitter"]
+                    }
+                    Kind::Copy => unreachable!(),
+                }
+            };
+            uniform(m, g.ty, names, frame && motion, material)?;
+        } else if motion && b.group == 1 && b.binding == 2 {
+            require(
+                g.space == AddressSpace::Handle
+                    && matches!(
+                        m.types[g.ty].inner,
+                        TypeInner::Sampler { comparison: false }
+                    ),
+                "temporal sampler",
+            )?;
+        } else {
+            require(
+                if motion {
+                    b.group == 1 && b.binding == 1
+                } else {
+                    b.group == 0 && b.binding < count as u32
+                },
+                "temporal texture binding",
+            )?;
+            let class = if b.binding == 3 && !motion {
+                ImageClass::Depth { multi: false }
+            } else {
+                ImageClass::Sampled {
+                    kind: ScalarKind::Float,
+                    multi: false,
+                }
+            };
+            require(
+                g.space == AddressSpace::Handle
+                    && matches!(m.types[g.ty].inner,TypeInner::Image{dim:ImageDimension::D2,arrayed:false,class:c} if c==class),
+                "temporal texture type",
+            )?;
+        }
+    }
+    Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn structurally_valid_ir_changes_are_refused_independently_of_source_hash() {
+        let source = include_str!("../../../incant_render/src/motion/shader.wgsl");
+        for changed in [
+            source.replace("@location(2) @interpolate(flat)", "@location(2)"),
+            source.replace("@binding(2)", "@binding(3)"),
+            source.replace(
+                "current:mat4x4f, previous:mat4x4f, rect:vec4f",
+                "previous:mat4x4f, current:mat4x4f, rect:vec4f",
+            ),
+            source.replace("@location(11)", "@location(12)"),
+        ] {
+            let m = naga::front::wgsl::parse_str(&changed).unwrap();
+            let info = naga::valid::Validator::new(
+                naga::valid::ValidationFlags::all(),
+                naga::valid::Capabilities::empty(),
+            )
+            .validate(&m)
+            .unwrap();
+            assert!(validate(Kind::Motion, &m, &info).is_err());
+        }
+    }
+}

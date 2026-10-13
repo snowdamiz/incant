@@ -184,7 +184,11 @@ fn portable_motion_shader_validates_and_uses_canonical_mask_contract() {
 }
 #[test]
 fn native_cooked_features_do_not_silently_create_uncooked_motion() {
-    let cooked = cfg!(all(not(target_arch = "wasm32"), feature = "cooked-output"));
+    let cooked = cfg!(all(
+        not(target_arch = "wasm32"),
+        feature = "cooked-output",
+        not(feature = "cooked-temporal")
+    ));
     assert_eq!(
         super::admission(),
         if cooked {

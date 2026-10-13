@@ -1,0 +1,2972 @@
+{
+  "format": "incant-cooked-temporal-programs-evidence",
+  "version": 1,
+  "base": "a337c86d8d74e819b3e879d4a7db830b74de8862",
+  "scope": "fixed motion, temporal accumulation and output reconstruction native shader compilation; CPU/offline only",
+  "source_freeze": "3b408b86a821cd4f94e5d73a330057a7b35a06e86ff0f0758be823520d8669f7",
+  "sources": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e",
+      "bytes": 252964
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "sha256": "55648785d974fc320205cc39c0cd79c7c08bb6d57c0f037d76333f2151877fde",
+      "bytes": 4308
+    },
+    {
+      "path": "crates/incant_render/Cargo.toml",
+      "sha256": "e29e609c9217a36fbc042650812969072e51d672b4cf672954f8fa7540b04909",
+      "bytes": 2682
+    },
+    {
+      "path": "crates/incant_render/build.rs",
+      "sha256": "75aa873b20c9c74f7dae822bbea8b9055e9da8e4ef367785360a02012a1c3f63",
+      "bytes": 7682
+    },
+    {
+      "path": "crates/incant_render/src/fixture.wgsl",
+      "sha256": "4a2fd220107d0f0de77ec5df70786318e33d37f2730c8a5d346963ee79719387",
+      "bytes": 527
+    },
+    {
+      "path": "crates/incant_render/src/geometry_shader/cooked.rs",
+      "sha256": "44480701a0f8bee4444a6da7ddf0160e372f781f1cc321a8779c61357075145b",
+      "bytes": 6242
+    },
+    {
+      "path": "crates/incant_render/src/lib.rs",
+      "sha256": "4f59b32c04bc37fc33268a3792830db1ac54480320c5d35ed5fe9e05b854a894",
+      "bytes": 20754
+    },
+    {
+      "path": "crates/incant_render/src/lighting/cooked.rs",
+      "sha256": "210004a5441bf8ee8b60ec6337d23cbf9fcead7d9341d2ee69073c6ebfa45d71",
+      "bytes": 7212
+    },
+    {
+      "path": "crates/incant_render/src/lighting/grid.wgsl",
+      "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+      "bytes": 2843
+    },
+    {
+      "path": "crates/incant_render/src/lighting/mod.rs",
+      "sha256": "c32584e4c45c020d8f4eadf123342ccada602b3eaf89469c553e7e2dfb526d49",
+      "bytes": 20104
+    },
+    {
+      "path": "crates/incant_render/src/lighting/shade.wgsl",
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad",
+      "bytes": 3898
+    },
+    {
+      "path": "crates/incant_render/src/lighting/temporal_source.rs",
+      "sha256": "5245bd6a5f72ca39bbbad5fb5101358114cbd9f402344199114a7af598a1eb73",
+      "bytes": 800
+    },
+    {
+      "path": "crates/incant_render/src/model_material.wgsl",
+      "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+      "bytes": 4670
+    },
+    {
+      "path": "crates/incant_render/src/motion/mod.rs",
+      "sha256": "18a14933505ee35bf72c021bb00f4168cdaa07a63a6b775361477c24cbc2f533",
+      "bytes": 1793
+    },
+    {
+      "path": "crates/incant_render/src/motion/shader.wgsl",
+      "sha256": "7f8aed4a2cb30401eaae3d3d0e54d72d37cb4e3875b555f33434d5e8123663b9",
+      "bytes": 2027
+    },
+    {
+      "path": "crates/incant_render/src/motion/system.rs",
+      "sha256": "0a342ea3455360c369865806cd2fa701ae9bda6793d0c855f45c3e986b3f6f7b",
+      "bytes": 6356
+    },
+    {
+      "path": "crates/incant_render/src/motion/tests.rs",
+      "sha256": "bca21bf0bb39ecdd75fab8e0b2a807dd584880c93170b95340fa4d2149557ec9",
+      "bytes": 13612
+    },
+    {
+      "path": "crates/incant_render/src/output.wgsl",
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+      "bytes": 2351
+    },
+    {
+      "path": "crates/incant_render/src/resource_error.rs",
+      "sha256": "0232bb0a38185330e43ad262046477696f5e02122ce6a18b088e88dbab7cc040",
+      "bytes": 2756
+    },
+    {
+      "path": "crates/incant_render/src/shader/native.rs",
+      "sha256": "17a8f454d1c58292331d668905ec84a40ca83a2809dd01f30b2dfeb7292897ec",
+      "bytes": 5148
+    },
+    {
+      "path": "crates/incant_render/src/shadows/caster.wgsl",
+      "sha256": "56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f",
+      "bytes": 846
+    },
+    {
+      "path": "crates/incant_render/src/shadows/shade.wgsl",
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4",
+      "bytes": 1495
+    },
+    {
+      "path": "crates/incant_render/src/sprites/sprite.wgsl",
+      "sha256": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+      "bytes": 2405
+    },
+    {
+      "path": "crates/incant_render/src/temporal/copy.wgsl",
+      "sha256": "50f2bbba9102f7f89de524356b7e6e4b9b1e4c90ecace7a5b1c16ee599ee4bdf",
+      "bytes": 325
+    },
+    {
+      "path": "crates/incant_render/src/temporal/mod.rs",
+      "sha256": "a75c85dd72b7387ab14026172b4e0567f06055abe768a0a492beeed300816d40",
+      "bytes": 1078
+    },
+    {
+      "path": "crates/incant_render/src/temporal/resolve.wgsl",
+      "sha256": "ae65b1f2647dcce5a73fadca4b7d68c6815978af3fbb841510ab3aa555f1cfec",
+      "bytes": 3130
+    },
+    {
+      "path": "crates/incant_render/src/temporal/system.rs",
+      "sha256": "e675e34d8d36c8c6a4efca3b8b91bc02f1d9cee31b89635e35a51929a74effa6",
+      "bytes": 10322
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader.rs",
+      "sha256": "533a88faf7af05145e5da46f08d7414e5f5a3b4073e79cf66a3caf63740c4ba1",
+      "bytes": 2004
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked.rs",
+      "sha256": "e59d1eec66f609de9a35e9b1301d46f3544d6efdf734d648e1528f320c6c6fea",
+      "bytes": 4960
+    },
+    {
+      "path": "crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "sha256": "df0606b4018c47bb06de0826542fef2f009d1d2e107d47de153a87b949f63edd",
+      "bytes": 3745
+    },
+    {
+      "path": "crates/incant_render/src/text/text.wgsl",
+      "sha256": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+      "bytes": 2392
+    },
+    {
+      "path": "crates/incant_render/src/tone_map.wgsl",
+      "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307",
+      "bytes": 4748
+    },
+    {
+      "path": "crates/incant_render/src/ui/ui.wgsl",
+      "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+      "bytes": 5172
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/common.wgsl",
+      "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+      "bytes": 1622
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/composite.wgsl",
+      "sha256": "4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845",
+      "bytes": 820
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/mod.rs",
+      "sha256": "9ddf6ae3c34f4c18a983919fda629738ea9296a18973949ab618500798541673",
+      "bytes": 1044
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/resolve.wgsl",
+      "sha256": "a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34",
+      "bytes": 3589
+    },
+    {
+      "path": "crates/incant_render/src/upscaling/system.rs",
+      "sha256": "2f3aeadb9f93a0dfbd372a5c3faba4445fc5900066e5139d6045e0ce3dcfe796",
+      "bytes": 10715
+    },
+    {
+      "path": "crates/incant_render_gpu_host/Cargo.toml",
+      "sha256": "6bb55f6f390f3b9c40088619cf2a82d107ac446c5914603e17a7093e3c8d0fb7",
+      "bytes": 2066
+    },
+    {
+      "path": "crates/incant_shader_cook/Cargo.toml",
+      "sha256": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+      "bytes": 371
+    },
+    {
+      "path": "crates/incant_shader_cook/src/lib.rs",
+      "sha256": "7564bd268f9ee9cbf1d7a3834b19c58c89270415906ce25bca716fa7c8a4acc3",
+      "bytes": 3381
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/contract.rs",
+      "sha256": "aa11644b2a0f091e3095d4a8e41adea78df89c48a7e9d9d23fd4ef7bb5c3e8b1",
+      "bytes": 10874
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/emit.rs",
+      "sha256": "4f91a35a4ca197e4e780e069416db8ecdc4b53ff9d7843ad64154c64cf7da5ad",
+      "bytes": 8518
+    },
+    {
+      "path": "crates/incant_shader_cook/src/temporal/mod.rs",
+      "sha256": "42cc25f403379a829d4f1519f917f201b032462ddb76fb23cafb4df2f3fc0b50",
+      "bytes": 6115
+    },
+    {
+      "path": "crates/incant_shader_cook/tests/temporal.rs",
+      "sha256": "585f235687e16cf4647aa82647a5a23fa0717cef81f890ef7a4fb4f84e31e2fe",
+      "bytes": 4904
+    }
+  ],
+  "helper": {
+    "path": "tools/probes/cooked-temporal-compile.py",
+    "sha256": "1d7ca346927472e2832ef72436f7d3e25ebfd5639334816298ff0b0d27123818"
+  },
+  "pinned_and_tools": [
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/device.rs",
+      "copy": "pinned/metal/device.rs",
+      "sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/adapter.rs",
+      "copy": "pinned/metal/adapter.rs",
+      "sha256": "6da21d590125e601015862dd2a66e4dae2fdd5e35d80624dd2c6cca52099d9bf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/metal/mod.rs",
+      "copy": "pinned/metal/mod.rs",
+      "sha256": "daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada"
+    },
+    {
+      "path": "/Users/andreyyurlov/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/wgpu-hal-29.0.4/src/dx12/device.rs",
+      "copy": "pinned/dx12/device.rs",
+      "sha256": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc"
+    },
+    {
+      "tool": "metal",
+      "path": "/private/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.AFtdRN/Metal.xctoolchain/usr/bin/metal",
+      "sha256": "ac3dcce4f331e301def076a2280c973c978f72e6622f8576eb3f7c34d1486dd6",
+      "bytes": 238464
+    },
+    {
+      "tool": "metallib",
+      "path": "/private/var/run/com.apple.security.cryptexd/mnt/com.apple.MobileAsset.MetalToolchain-v27.1.266.1.AFtdRN/Metal.xctoolchain/usr/bin/air-lld",
+      "sha256": "08555936a88a025585ae6415ebe8b27e6092670868d92f9677cdcfa9730c340d",
+      "bytes": 238480
+    },
+    {
+      "tool": "spirv-val",
+      "path": "/opt/homebrew/Cellar/spirv-tools/1.4.363.0/bin/spirv-val",
+      "sha256": "eddf6e3fb5db58e1d52bdf956967fb4532325a800b644cf90a597ad924886e8e",
+      "bytes": 144072
+    }
+  ],
+  "commands": [
+    {
+      "receipt": "clippy-001.json",
+      "command": [
+        "./tools/cargo",
+        "clippy",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--features",
+        "incant_game_player/cooked-temporal",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/clippy-001-artifacts"
+      },
+      "started": 1791875283.99085,
+      "ended": 1791875300.857693,
+      "exit_code": 0,
+      "log": "clippy-001.log",
+      "sha256": "6062b86bc6f6e3d5ce64534b73feae12f84deea5e721103f15307a160ebc20fc"
+    },
+    {
+      "receipt": "complete-cpu-001.json",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "cooked-temporal",
+        "--lib"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/complete-cpu-001-artifacts"
+      },
+      "started": 1791875180.507006,
+      "ended": 1791875233.957719,
+      "exit_code": 0,
+      "log": "complete-cpu-001.log",
+      "sha256": "0a5a52aedfdb20570d49e604f34054234e812c5427ab51327688417ebcc1ceef"
+    },
+    {
+      "receipt": "conventions-001.json",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/conventions-001-artifacts"
+      },
+      "started": 1791875498.8037,
+      "ended": 1791875498.830375,
+      "exit_code": 0,
+      "log": "conventions-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "cook-001.json",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook",
+        "--test",
+        "temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts"
+      },
+      "started": 1791875011.0927339,
+      "ended": 1791875013.622619,
+      "exit_code": 101,
+      "log": "cook-001.log",
+      "sha256": "00b04eb06ba0b1f62ae4dbdf1e77d98b52d78a61a3afa480a70cd7275440bca9"
+    },
+    {
+      "receipt": "cook-002.json",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_shader_cook"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts"
+      },
+      "started": 1791875053.009996,
+      "ended": 1791875056.883273,
+      "exit_code": 0,
+      "log": "cook-002.log",
+      "sha256": "8173339505c6a73284d91b0fbf0e3839caae7362d0b7d06c429bc6121d5fc74a"
+    },
+    {
+      "receipt": "default-cpu-001.json",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--lib"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/default-cpu-001-artifacts"
+      },
+      "started": 1791875395.397822,
+      "ended": 1791875405.9984372,
+      "exit_code": 0,
+      "log": "default-cpu-001.log",
+      "sha256": "f8d4075d7aa86e3e52fb37cd66accb9d7c2b7dbf7db57fafb1b5f01b158e926a"
+    },
+    {
+      "receipt": "diff-001.json",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/diff-001-artifacts"
+      },
+      "started": 1791875500.068016,
+      "ended": 1791875500.1118011,
+      "exit_code": 0,
+      "log": "diff-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "fmt-001.json",
+      "command": [
+        "./tools/cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/fmt-001-artifacts"
+      },
+      "started": 1791875498.852757,
+      "ended": 1791875500.045284,
+      "exit_code": 0,
+      "log": "fmt-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "integration-cpu-001.json",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "-p",
+        "incant_render_gpu_host",
+        "--features",
+        "cooked-temporal",
+        "--test",
+        "*"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/integration-cpu-001-artifacts"
+      },
+      "started": 1791875650.797846,
+      "ended": 1791875656.607618,
+      "exit_code": 0,
+      "log": "integration-cpu-001.log",
+      "sha256": "96f8d81e87814fa9864783a67400cab22c49dca7e4766abbcc8cd569e69b1575"
+    },
+    {
+      "receipt": "normal-graph-001.json",
+      "command": [
+        "./tools/cargo",
+        "tree",
+        "--locked",
+        "--offline",
+        "-p",
+        "incant_game_player",
+        "--no-default-features",
+        "--features",
+        "physics-deterministic,cooked-temporal",
+        "--target",
+        "aarch64-apple-darwin",
+        "-e",
+        "normal",
+        "--prefix",
+        "none",
+        "--format",
+        "{p}|{f}"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/normal-graph-001-artifacts"
+      },
+      "started": 1791875424.084091,
+      "ended": 1791875424.247793,
+      "exit_code": 0,
+      "log": "normal-graph-001.log",
+      "sha256": "69ec886c89c629382ced21f3d42d7f89954ef433f92f8202d664675cdd56a9c9"
+    },
+    {
+      "receipt": "offline-001.json",
+      "command": [
+        "python3",
+        "tools/probes/cooked-temporal-compile.py",
+        "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/build/incant_render-49422a9393a34f9f/out",
+        "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001-artifacts"
+      },
+      "started": 1791875246.862218,
+      "ended": 1791875249.0978932,
+      "exit_code": 0,
+      "log": "offline-001.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "receipt": "partial-admission-001.json",
+      "command": [
+        "./tools/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-materials,cooked-sprites,cooked-ui,cooked-text,cooked-clusters",
+        "--lib",
+        "native_cooked_features_do_not_silently_create_uncooked_motion"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/partial-admission-001-artifacts"
+      },
+      "started": 1791875406.0274959,
+      "ended": 1791875423.118279,
+      "exit_code": 0,
+      "log": "partial-admission-001.log",
+      "sha256": "e4372413ec63b42b34f9a86d0f8d9c0dbad54da590f934f65bf2086315ad9347"
+    },
+    {
+      "receipt": "render-check-001.json",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--features",
+        "cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/render-check-001-artifacts"
+      },
+      "started": 1791875121.604338,
+      "ended": 1791875129.810451,
+      "exit_code": 0,
+      "log": "render-check-001.log",
+      "sha256": "e84df3df3b5416aaf5e924cacb7c552138f2a122eda70546e25d0bf685f631e1"
+    },
+    {
+      "receipt": "runtime-graph-001.json",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/runtime-graph-001-artifacts"
+      },
+      "started": 1791875424.271342,
+      "ended": 1791875424.300717,
+      "exit_code": 2,
+      "log": "runtime-graph-001.log",
+      "sha256": "35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f"
+    },
+    {
+      "receipt": "runtime-graph-002.json",
+      "command": [
+        "python3",
+        "tools/check_runtime_dependencies.py",
+        "incant_render",
+        "incant_render_gpu_host",
+        "incant_game_player",
+        "--features",
+        "incant_game_player/cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/runtime-graph-002-artifacts"
+      },
+      "started": 1791875498.386997,
+      "ended": 1791875498.779976,
+      "exit_code": 0,
+      "log": "runtime-graph-002.log",
+      "sha256": "e12c24423b6b983a8a343aa60792b3a6c41abef21c39a8323658cfb086097eef"
+    },
+    {
+      "receipt": "web-001.json",
+      "command": [
+        "./tools/cargo",
+        "check",
+        "--locked",
+        "--offline",
+        "--profile",
+        "ci",
+        "-j2",
+        "-p",
+        "incant_render",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--features",
+        "cooked-temporal"
+      ],
+      "cwd": "/Users/andreyyurlov/.codex/worktrees/local-service-stack/incant",
+      "env": {
+        "PATH": "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/opt/homebrew/bin:/Applications/ChatGPT.app/Contents/Resources/codex-cli/codex-path:/Users/andreyyurlov/.codex/tmp/arg0/codex-arg0tfmJvB:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/andreyyurlov/.local/bin:/Users/andreyyurlov/.bun/bin:/Users/andreyyurlov/.local/state/fnm_multishells/2196_1791813625001/bin:/opt/homebrew/sbin:/Users/andreyyurlov/.docker/bin:/Users/andreyyurlov/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS:/Users/andreyyurlov/.docker/bin",
+        "CARGO_TARGET_DIR": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target",
+        "INCANT_TEMPORAL_COOK_EVIDENCE": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/web-001-artifacts"
+      },
+      "started": 1791875423.1538339,
+      "ended": 1791875424.060061,
+      "exit_code": 0,
+      "log": "web-001.log",
+      "sha256": "309687bfa3948f108c3c37a8165f0cd1ddbe3adebf40bbfb89fad16d05e511c5"
+    }
+  ],
+  "audit": {
+    "source_files": 45,
+    "wgsl_unchanged": 17,
+    "commands": 16,
+    "offline_commands": 36,
+    "embedded_shaders": 33,
+    "tests": {
+      "complete-cpu-001.json": {
+        "passed": 128,
+        "failed": 0,
+        "ignored": 40,
+        "groups": 2
+      },
+      "cook-001.json": {
+        "passed": 1,
+        "failed": 1,
+        "ignored": 0,
+        "groups": 1
+      },
+      "cook-002.json": {
+        "passed": 28,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 9
+      },
+      "default-cpu-001.json": {
+        "passed": 114,
+        "failed": 0,
+        "ignored": 40,
+        "groups": 2
+      },
+      "integration-cpu-001.json": {
+        "passed": 3,
+        "failed": 0,
+        "ignored": 58,
+        "groups": 5
+      },
+      "partial-admission-001.json": {
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "groups": 1
+      }
+    },
+    "lock_unchanged": true,
+    "normal_cooker_edge": false
+  },
+  "records": [
+    {
+      "name": "audit.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/audit.py",
+      "bytes": 2973,
+      "sha256": "a02fcfa032e6418826ef3d63efea75878820edcc4d4634231296e15051727cd7",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/a02fcfa032e6418826ef3d63efea75878820edcc4d4634231296e15051727cd7.gz",
+      "retained_sha256": "f2c43ced4c699256c8414ceee878b1b204d659fcce81534ff61cf71babcd9390"
+    },
+    {
+      "name": "checks.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/checks.py",
+      "bytes": 1290,
+      "sha256": "ab24a8f24ca0f738128ae13e3737ed32c0f1326c38a3f076349d594550b96cab",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/ab24a8f24ca0f738128ae13e3737ed32c0f1326c38a3f076349d594550b96cab.gz",
+      "retained_sha256": "d0419e1814329cb7acf310f2ae4c7d0f309b1ff5a1b3290235c4f2ae9320a842"
+    },
+    {
+      "name": "clippy-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/clippy-001.json",
+      "bytes": 1997,
+      "sha256": "a862851cf9c752b3021370190ceed932f0ab6091d49550f1530695faef342b1b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/a862851cf9c752b3021370190ceed932f0ab6091d49550f1530695faef342b1b.gz",
+      "retained_sha256": "7d824e1a848fbac1f6b17c07d2149c09bb703e1031d6f2d8dbe0c338a2e241dd"
+    },
+    {
+      "name": "clippy-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/clippy-001.log",
+      "bytes": 3678,
+      "sha256": "6062b86bc6f6e3d5ce64534b73feae12f84deea5e721103f15307a160ebc20fc",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/6062b86bc6f6e3d5ce64534b73feae12f84deea5e721103f15307a160ebc20fc.gz",
+      "retained_sha256": "ef4d0b37e62454be74e6c94962cd01324d129459683cc75e7814124002866c93"
+    },
+    {
+      "name": "complete-cpu-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/complete-cpu-001.json",
+      "bytes": 1873,
+      "sha256": "c60ce046b4ac9690e49bf47f5de7eefd30e0d1ecb0ab10d3674d804da21e9887",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c60ce046b4ac9690e49bf47f5de7eefd30e0d1ecb0ab10d3674d804da21e9887.gz",
+      "retained_sha256": "ca41e98ca221de1056183f6f4ac733da14ed772b977f03452566e097a74194b4"
+    },
+    {
+      "name": "complete-cpu-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/complete-cpu-001.log",
+      "bytes": 22659,
+      "sha256": "0a5a52aedfdb20570d49e604f34054234e812c5427ab51327688417ebcc1ceef",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/0a5a52aedfdb20570d49e604f34054234e812c5427ab51327688417ebcc1ceef.gz",
+      "retained_sha256": "3a724749df14341f0b72d44f62e56426168339613f58316b8c638f5f6c790486"
+    },
+    {
+      "name": "contracts.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/contracts.json",
+      "bytes": 937,
+      "sha256": "e6854a972f763764fc776e79eeeeb1067405c5ced6f17f63bd9755a96b60a062",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e6854a972f763764fc776e79eeeeb1067405c5ced6f17f63bd9755a96b60a062.gz",
+      "retained_sha256": "70c0999ba255c87c5a28e36fa58504a233b8ed1b0ac90f1a48e7dcf6dd5240a9"
+    },
+    {
+      "name": "conventions-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/conventions-001.json",
+      "bytes": 1707,
+      "sha256": "976072d932ddedba6f8057f981d6cc6a8c0a3ed72984538cfe6e84ca746d2bd9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/976072d932ddedba6f8057f981d6cc6a8c0a3ed72984538cfe6e84ca746d2bd9.gz",
+      "retained_sha256": "bcaf60cd004bf5735e6e3887a77ac5829332c3ce4d2b32dbd99a20b3f2ac311c"
+    },
+    {
+      "name": "conventions-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/conventions-001.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "cook-001-artifacts/Motion/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts/Motion/Dx12-Fragment.shader",
+      "bytes": 3237,
+      "sha256": "371457811dbbced2dc683f3da27ae5a1678960fba06dd7b0d843802b37fd73ca",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/371457811dbbced2dc683f3da27ae5a1678960fba06dd7b0d843802b37fd73ca.gz",
+      "retained_sha256": "c39b5abc90fe9cf1309d384a7e3cb335f7cfbc0b6efbe552863180470fd68475"
+    },
+    {
+      "name": "cook-001-artifacts/Motion/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts/Motion/Dx12-Vertex.shader",
+      "bytes": 1390,
+      "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2.gz",
+      "retained_sha256": "5a82e77dffcee4aeb8d7cfae3521c2fa5499cddd8bd4a9b82076864a6ea9c022"
+    },
+    {
+      "name": "cook-001-artifacts/Motion/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts/Motion/Metal-Fragment.shader",
+      "bytes": 3306,
+      "sha256": "926e37a6a9226dbf7ef6c6c60b2c68eefbb32da653616860429c0b2ce1e67d54",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/926e37a6a9226dbf7ef6c6c60b2c68eefbb32da653616860429c0b2ce1e67d54.gz",
+      "retained_sha256": "7acf4e762c454b17b33313de74037ea1674e3e9b33622ef298d476851e48dd81"
+    },
+    {
+      "name": "cook-001-artifacts/Motion/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts/Motion/Metal-Vertex.shader",
+      "bytes": 7573,
+      "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962.gz",
+      "retained_sha256": "46ec861883f72e9ec61e85ab9c70d4553e785b724a27b4eed3a1a3be77d2a464"
+    },
+    {
+      "name": "cook-001-artifacts/Motion/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts/Motion/Vulkan-Fragment.shader",
+      "bytes": 4556,
+      "sha256": "410721777c7844c477f067b63200f572d47b3e862e82d316848760032dca92c2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/410721777c7844c477f067b63200f572d47b3e862e82d316848760032dca92c2.gz",
+      "retained_sha256": "c034f58d1ff696236869cc2742d1b360b652e6fa1739bbf6347f4efea47499ff"
+    },
+    {
+      "name": "cook-001-artifacts/Motion/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts/Motion/Vulkan-Vertex.shader",
+      "bytes": 2304,
+      "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837.gz",
+      "retained_sha256": "7fd0f9cbd8577a542cbf8c12e5873543043a28a6cbbc30746a7db3702fbb47bd"
+    },
+    {
+      "name": "cook-001-artifacts/Motion/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001-artifacts/Motion/manifest.rs",
+      "bytes": 2339,
+      "sha256": "35c90d7a97d827eabdb6297879b8d5fad3652d34d509a7be21e39937baf34c17",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/35c90d7a97d827eabdb6297879b8d5fad3652d34d509a7be21e39937baf34c17.gz",
+      "retained_sha256": "19962d69ac13ba758d33ba1137819f01567403e5f3b783faec08caf05dda0ecd"
+    },
+    {
+      "name": "cook-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001.json",
+      "bytes": 1801,
+      "sha256": "29985b9fcc7087bd15b7242d6fec64b7b3ea84f9e2aa7ec2f5b8c7c234f2e08f",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/29985b9fcc7087bd15b7242d6fec64b7b3ea84f9e2aa7ec2f5b8c7c234f2e08f.gz",
+      "retained_sha256": "24dc4e109c345a89ef96d9d304f43916770a3e39f5cbb54df8db2ee8bd81c907"
+    },
+    {
+      "name": "cook-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-001.log",
+      "bytes": 10188,
+      "sha256": "00b04eb06ba0b1f62ae4dbdf1e77d98b52d78a61a3afa480a70cd7275440bca9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/00b04eb06ba0b1f62ae4dbdf1e77d98b52d78a61a3afa480a70cd7275440bca9.gz",
+      "retained_sha256": "f42c84afd72d6049339b3b4d0795b25fa16df09d8120f0c2fdc8e6f464599a35"
+    },
+    {
+      "name": "cook-002-artifacts/Composite/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Composite/Dx12-Fragment.shader",
+      "bytes": 4587,
+      "sha256": "f44c776e1c056f48a0994f72d6bf1ba07bbd345139689f6d268c655decbedf00",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/f44c776e1c056f48a0994f72d6bf1ba07bbd345139689f6d268c655decbedf00.gz",
+      "retained_sha256": "7c61050dd8bc5279ecb63a32c9a31d4e15f726194c53f12effd0abc4f51ef4e3"
+    },
+    {
+      "name": "cook-002-artifacts/Composite/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Composite/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406.gz",
+      "retained_sha256": "1f52206c43fb9a166db87201932b50d3779f714172b6f2e1acf187418c3c07ef"
+    },
+    {
+      "name": "cook-002-artifacts/Composite/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Composite/Metal-Fragment.shader",
+      "bytes": 5608,
+      "sha256": "b4ab4d879e66b03141a1fabfa3e5497883d4f66066a54726c0e908f1e23d7464",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/b4ab4d879e66b03141a1fabfa3e5497883d4f66066a54726c0e908f1e23d7464.gz",
+      "retained_sha256": "0de7a597291e601c1589bd016fc6478b1abdc9ef4b2ab5600f3a33ea07bd27bc"
+    },
+    {
+      "name": "cook-002-artifacts/Composite/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Composite/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "cook-002-artifacts/Composite/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Composite/Vulkan-Fragment.shader",
+      "bytes": 6412,
+      "sha256": "dc58fac2b98a39198b0e88b45ee256d50a3818646afd4dab18c18dc8b073759d",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/dc58fac2b98a39198b0e88b45ee256d50a3818646afd4dab18c18dc8b073759d.gz",
+      "retained_sha256": "03e0372d08196ee83e9ffa50f7e88a77efda3db158ba627451a7bd33ad90e242"
+    },
+    {
+      "name": "cook-002-artifacts/Composite/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Composite/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418.gz",
+      "retained_sha256": "7c06c3160d35518390ddd74db46106090b39443b7fc7e938d34b54af7dd7760e"
+    },
+    {
+      "name": "cook-002-artifacts/Composite/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Composite/manifest.rs",
+      "bytes": 2234,
+      "sha256": "bbf217d18e8c0def92e915d44f9cff33acfe3c22d7037ff6bb2cc563d2b93d20",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/bbf217d18e8c0def92e915d44f9cff33acfe3c22d7037ff6bb2cc563d2b93d20.gz",
+      "retained_sha256": "47d2c402ed88c86c892d559f8211f4b8072935dd482f3552b402fca7df1e8bdf"
+    },
+    {
+      "name": "cook-002-artifacts/Copy/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Copy/Dx12-Fragment.shader",
+      "bytes": 531,
+      "sha256": "288c2fe006f5c86731eea518c59cabb5ee69096f6c83852b7f64dd36355108b0",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/288c2fe006f5c86731eea518c59cabb5ee69096f6c83852b7f64dd36355108b0.gz",
+      "retained_sha256": "cb4d8441dbf7b2d6627401528959b122e1b6e21cf2c0ff38f3b1dc5381f1d0c8"
+    },
+    {
+      "name": "cook-002-artifacts/Copy/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Copy/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "e1bc2806541e8e02673147607a4953ced19744298989e60d2e9d14c1dd456a97",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e1bc2806541e8e02673147607a4953ced19744298989e60d2e9d14c1dd456a97.gz",
+      "retained_sha256": "2eac1cbbd15ae6e8001f69be1ecb5d8e6d43551a774e2a4e02993c04dc56e155"
+    },
+    {
+      "name": "cook-002-artifacts/Copy/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Copy/Metal-Fragment.shader",
+      "bytes": 735,
+      "sha256": "c4efc2d6eea021dff435e07deb16fd64b87846e02772982d4d5ce2131cd48d40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c4efc2d6eea021dff435e07deb16fd64b87846e02772982d4d5ce2131cd48d40.gz",
+      "retained_sha256": "9d295f84be2aa27b202a58f659253ed81f189168275c6cacecac36d29b3a2a82"
+    },
+    {
+      "name": "cook-002-artifacts/Copy/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Copy/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "cook-002-artifacts/Copy/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Copy/Vulkan-Fragment.shader",
+      "bytes": 860,
+      "sha256": "106f707cecd17be6110f536335b8f3605f66e807c17a9ba98627f472a24d88b6",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/106f707cecd17be6110f536335b8f3605f66e807c17a9ba98627f472a24d88b6.gz",
+      "retained_sha256": "1911e9dd88e927256c4e75454a9b415412f3d2e6d87b5b1ed72a3bc852806129"
+    },
+    {
+      "name": "cook-002-artifacts/Copy/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Copy/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "2f61bbc4865e9e91521a53930b698af92ae91dc772812153c73085d9976dcdbc",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/2f61bbc4865e9e91521a53930b698af92ae91dc772812153c73085d9976dcdbc.gz",
+      "retained_sha256": "fc69c7fd4cb522ebbf8dfad599cbc21d7386ff86867cc07b521c38416ff6d599"
+    },
+    {
+      "name": "cook-002-artifacts/Copy/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Copy/manifest.rs",
+      "bytes": 2225,
+      "sha256": "4c152f738969da8b57efe64e362de717e3b9cae3153203dd9b7f66c29ca0d789",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/4c152f738969da8b57efe64e362de717e3b9cae3153203dd9b7f66c29ca0d789.gz",
+      "retained_sha256": "2f2dd347e81655fcc5dcb3615fe7b608e8d5736fc417f254de370fe581a0a6cd"
+    },
+    {
+      "name": "cook-002-artifacts/Motion/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Motion/Dx12-Fragment.shader",
+      "bytes": 3237,
+      "sha256": "371457811dbbced2dc683f3da27ae5a1678960fba06dd7b0d843802b37fd73ca",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/371457811dbbced2dc683f3da27ae5a1678960fba06dd7b0d843802b37fd73ca.gz",
+      "retained_sha256": "c39b5abc90fe9cf1309d384a7e3cb335f7cfbc0b6efbe552863180470fd68475"
+    },
+    {
+      "name": "cook-002-artifacts/Motion/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Motion/Dx12-Vertex.shader",
+      "bytes": 1390,
+      "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2.gz",
+      "retained_sha256": "5a82e77dffcee4aeb8d7cfae3521c2fa5499cddd8bd4a9b82076864a6ea9c022"
+    },
+    {
+      "name": "cook-002-artifacts/Motion/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Motion/Metal-Fragment.shader",
+      "bytes": 3306,
+      "sha256": "926e37a6a9226dbf7ef6c6c60b2c68eefbb32da653616860429c0b2ce1e67d54",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/926e37a6a9226dbf7ef6c6c60b2c68eefbb32da653616860429c0b2ce1e67d54.gz",
+      "retained_sha256": "7acf4e762c454b17b33313de74037ea1674e3e9b33622ef298d476851e48dd81"
+    },
+    {
+      "name": "cook-002-artifacts/Motion/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Motion/Metal-Vertex.shader",
+      "bytes": 7573,
+      "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962.gz",
+      "retained_sha256": "46ec861883f72e9ec61e85ab9c70d4553e785b724a27b4eed3a1a3be77d2a464"
+    },
+    {
+      "name": "cook-002-artifacts/Motion/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Motion/Vulkan-Fragment.shader",
+      "bytes": 4556,
+      "sha256": "410721777c7844c477f067b63200f572d47b3e862e82d316848760032dca92c2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/410721777c7844c477f067b63200f572d47b3e862e82d316848760032dca92c2.gz",
+      "retained_sha256": "c034f58d1ff696236869cc2742d1b360b652e6fa1739bbf6347f4efea47499ff"
+    },
+    {
+      "name": "cook-002-artifacts/Motion/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Motion/Vulkan-Vertex.shader",
+      "bytes": 2304,
+      "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837.gz",
+      "retained_sha256": "7fd0f9cbd8577a542cbf8c12e5873543043a28a6cbbc30746a7db3702fbb47bd"
+    },
+    {
+      "name": "cook-002-artifacts/Motion/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Motion/manifest.rs",
+      "bytes": 2339,
+      "sha256": "35c90d7a97d827eabdb6297879b8d5fad3652d34d509a7be21e39937baf34c17",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/35c90d7a97d827eabdb6297879b8d5fad3652d34d509a7be21e39937baf34c17.gz",
+      "retained_sha256": "19962d69ac13ba758d33ba1137819f01567403e5f3b783faec08caf05dda0ecd"
+    },
+    {
+      "name": "cook-002-artifacts/Resolve/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Resolve/Dx12-Fragment.shader",
+      "bytes": 9051,
+      "sha256": "064f244c5a0054a19cfb913aa04bef6fa2959b4dab6c005736d60a3f0c6b6894",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/064f244c5a0054a19cfb913aa04bef6fa2959b4dab6c005736d60a3f0c6b6894.gz",
+      "retained_sha256": "806c199bfea323b9b9970e9e144c9a2de59aed51d712d28260115a3336cb5054"
+    },
+    {
+      "name": "cook-002-artifacts/Resolve/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Resolve/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406.gz",
+      "retained_sha256": "1f52206c43fb9a166db87201932b50d3779f714172b6f2e1acf187418c3c07ef"
+    },
+    {
+      "name": "cook-002-artifacts/Resolve/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Resolve/Metal-Fragment.shader",
+      "bytes": 10922,
+      "sha256": "b0da475e90e7e2776425476fba9e658e4df23e2753f83ed32121c43491ffccf8",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/b0da475e90e7e2776425476fba9e658e4df23e2753f83ed32121c43491ffccf8.gz",
+      "retained_sha256": "be4a60ba1024ea8b45f3b8465583961495dd18a47301cbac6484c9cd6749713b"
+    },
+    {
+      "name": "cook-002-artifacts/Resolve/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Resolve/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "cook-002-artifacts/Resolve/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Resolve/Vulkan-Fragment.shader",
+      "bytes": 11308,
+      "sha256": "c4397b027282dadfccdf8a68ef031a41461091610b28f679e0246f1bad03446a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c4397b027282dadfccdf8a68ef031a41461091610b28f679e0246f1bad03446a.gz",
+      "retained_sha256": "fb252569c3eba485e1494d9956809baed804c678d695068b045db3b4f88b61f6"
+    },
+    {
+      "name": "cook-002-artifacts/Resolve/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Resolve/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418.gz",
+      "retained_sha256": "7c06c3160d35518390ddd74db46106090b39443b7fc7e938d34b54af7dd7760e"
+    },
+    {
+      "name": "cook-002-artifacts/Resolve/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Resolve/manifest.rs",
+      "bytes": 2220,
+      "sha256": "486c0f0db0b93cbc1dd140e170ab58dbdc324fbfa0d16f9fee0f71f79e7491e2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/486c0f0db0b93cbc1dd140e170ab58dbdc324fbfa0d16f9fee0f71f79e7491e2.gz",
+      "retained_sha256": "9c6413d08095133f26f32a2c7ee34a22223ab939ec30345c180b8813861fa082"
+    },
+    {
+      "name": "cook-002-artifacts/Upscale/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Upscale/Dx12-Fragment.shader",
+      "bytes": 19620,
+      "sha256": "b9e80e49fb8dd36bb443d528a003c6ecb64cc70e09b5158bf558284a21f74b0a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/b9e80e49fb8dd36bb443d528a003c6ecb64cc70e09b5158bf558284a21f74b0a.gz",
+      "retained_sha256": "457abc31beb144c1876783c0c51daea5b42f6fff7b6c9e7caf4fc55609456814"
+    },
+    {
+      "name": "cook-002-artifacts/Upscale/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Upscale/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406.gz",
+      "retained_sha256": "1f52206c43fb9a166db87201932b50d3779f714172b6f2e1acf187418c3c07ef"
+    },
+    {
+      "name": "cook-002-artifacts/Upscale/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Upscale/Metal-Fragment.shader",
+      "bytes": 22613,
+      "sha256": "656c6669c2dcf482c5c8139b3efdfdb3f7068ef8d86a578a8dc798fb45c66aee",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/656c6669c2dcf482c5c8139b3efdfdb3f7068ef8d86a578a8dc798fb45c66aee.gz",
+      "retained_sha256": "72302184f22d7eabc567abe9397d8f75d84ff8fe80f31094485f457e9ee540b3"
+    },
+    {
+      "name": "cook-002-artifacts/Upscale/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Upscale/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "cook-002-artifacts/Upscale/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Upscale/Vulkan-Fragment.shader",
+      "bytes": 20304,
+      "sha256": "983fdd3d3bd11cb5141947d28485013b4816a86cd5749136fcae156c1a31175b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/983fdd3d3bd11cb5141947d28485013b4816a86cd5749136fcae156c1a31175b.gz",
+      "retained_sha256": "d5cb0c3b62fee92c1d5ce26566005f2c701576212fe0bf7793872ddca479aec2"
+    },
+    {
+      "name": "cook-002-artifacts/Upscale/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Upscale/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418.gz",
+      "retained_sha256": "7c06c3160d35518390ddd74db46106090b39443b7fc7e938d34b54af7dd7760e"
+    },
+    {
+      "name": "cook-002-artifacts/Upscale/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002-artifacts/Upscale/manifest.rs",
+      "bytes": 2219,
+      "sha256": "7f6d1dfa4fdccbc78cc337cc8434d8a46686eb70571b5e55235bd0925f6693e7",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7f6d1dfa4fdccbc78cc337cc8434d8a46686eb70571b5e55235bd0925f6693e7.gz",
+      "retained_sha256": "8a86a65b238519a54016220a243bd54eced5e6296c8b33a6b6e8c18cd0dd04ca"
+    },
+    {
+      "name": "cook-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002.json",
+      "bytes": 1768,
+      "sha256": "a7201c17d70e33ad0ddd3b4ac442fc94834bf3b8dc66c23fb6f884c3e23c738a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/a7201c17d70e33ad0ddd3b4ac442fc94834bf3b8dc66c23fb6f884c3e23c738a.gz",
+      "retained_sha256": "54cb26edc4a5e5f2f82250b5c6c349098c78cea9a572b6da14b8fd5a29094eb9"
+    },
+    {
+      "name": "cook-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/cook-002.log",
+      "bytes": 4491,
+      "sha256": "8173339505c6a73284d91b0fbf0e3839caae7362d0b7d06c429bc6121d5fc74a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/8173339505c6a73284d91b0fbf0e3839caae7362d0b7d06c429bc6121d5fc74a.gz",
+      "retained_sha256": "4078f293a1ed9ea6eb703cd3ac350fe94e5fcbc8f3f01778fd9bec0aa1611fa7"
+    },
+    {
+      "name": "default-cpu-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/default-cpu-001.json",
+      "bytes": 1831,
+      "sha256": "d41f08bf3d577b40bb0c62aa52d7e1dbbed36da84b1bc6b5e9a158c964dc69f6",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/d41f08bf3d577b40bb0c62aa52d7e1dbbed36da84b1bc6b5e9a158c964dc69f6.gz",
+      "retained_sha256": "bded4b9cb6a98945a607f5ff4edff943491c0cb635664623b8686f47773b757f"
+    },
+    {
+      "name": "default-cpu-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/default-cpu-001.log",
+      "bytes": 19045,
+      "sha256": "f8d4075d7aa86e3e52fb37cd66accb9d7c2b7dbf7db57fafb1b5f01b158e926a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/f8d4075d7aa86e3e52fb37cd66accb9d7c2b7dbf7db57fafb1b5f01b158e926a.gz",
+      "retained_sha256": "fef5f37d5e348bddedef3dbca8328c4adef3bb7a8bace4ff2c597d8304835b96"
+    },
+    {
+      "name": "diff-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/diff-001.json",
+      "bytes": 1667,
+      "sha256": "852e8e55cad18e6fdb80c7a08dc69265907064fe63be2b39c8d82c3f86e89841",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/852e8e55cad18e6fdb80c7a08dc69265907064fe63be2b39c8d82c3f86e89841.gz",
+      "retained_sha256": "42632360e61821068f12021d570a5546a0999b7726eb2e413f618b066a79895c"
+    },
+    {
+      "name": "diff-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/diff-001.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "feature-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/feature-audit.json",
+      "bytes": 538,
+      "sha256": "6054b23a767b34d05b5ed02dd0a844deee796bc4b9d467eac12ad1bee88464a9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/6054b23a767b34d05b5ed02dd0a844deee796bc4b9d467eac12ad1bee88464a9.gz",
+      "retained_sha256": "9344b07bf90f2222f5380154b028983edc660758381225a95b976a55595ec030"
+    },
+    {
+      "name": "fmt-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/fmt-001.json",
+      "bytes": 1686,
+      "sha256": "6385fda77156e67b0b109bcb9b7d18dcc2b4f2526acb3ceabd7aeef0e7d0a483",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/6385fda77156e67b0b109bcb9b7d18dcc2b4f2526acb3ceabd7aeef0e7d0a483.gz",
+      "retained_sha256": "2027df4678e312889b2f9b8a8b326c2e12479811e4ae453e8bfc47a1041e649a"
+    },
+    {
+      "name": "fmt-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/fmt-001.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "frozen-binaries.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/frozen-binaries.json",
+      "bytes": 1701,
+      "sha256": "99c4406745b773c2bb59ff17ed08ca4283ef903990d3e918d9dc1b46a5d72a40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/99c4406745b773c2bb59ff17ed08ca4283ef903990d3e918d9dc1b46a5d72a40.gz",
+      "retained_sha256": "f97f81f6e5283a4e60a863875b221560c27f0c66d5af369428a073ca22da193c"
+    },
+    {
+      "name": "helper-001/cooked-temporal-compile.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/helper-001/cooked-temporal-compile.py",
+      "bytes": 3709,
+      "sha256": "1d7ca346927472e2832ef72436f7d3e25ebfd5639334816298ff0b0d27123818",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1d7ca346927472e2832ef72436f7d3e25ebfd5639334816298ff0b0d27123818.gz",
+      "retained_sha256": "1382ec8245d8c3043e633701e7773a92b0c06af62f9435211493a1f1725c1ef0"
+    },
+    {
+      "name": "helper-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/helper-001/freeze.json",
+      "bytes": 136,
+      "sha256": "c373cd15e81549664c2425fcb94726a277eeccc0c0c854c422640d0d3defa3f4",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c373cd15e81549664c2425fcb94726a277eeccc0c0c854c422640d0d3defa3f4.gz",
+      "retained_sha256": "0f069f61357ff243237acba12b6c6958814b7a3e01cbc5335b556c02c19c7dc5"
+    },
+    {
+      "name": "integration-cpu-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/integration-cpu-001.json",
+      "bytes": 1889,
+      "sha256": "0ecbc2a667dde5954795d4807e11acdb00d796773549dd568c8eabb39ea29d15",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/0ecbc2a667dde5954795d4807e11acdb00d796773549dd568c8eabb39ea29d15.gz",
+      "retained_sha256": "47d6b1d382ada619c7734f22f383cc050afc43e310271b98ab739ea9a8d5f89a"
+    },
+    {
+      "name": "integration-cpu-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/integration-cpu-001.log",
+      "bytes": 10359,
+      "sha256": "96f8d81e87814fa9864783a67400cab22c49dca7e4766abbcc8cd569e69b1575",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/96f8d81e87814fa9864783a67400cab22c49dca7e4766abbcc8cd569e69b1575.gz",
+      "retained_sha256": "f970e730b72950f723ca09bb6ca39bc90c3f2e343d91e7a46026b71f6e11ae0a"
+    },
+    {
+      "name": "normal-graph-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/normal-graph-001.json",
+      "bytes": 1965,
+      "sha256": "e3f72d1c198cacb453cce32385fcaba7ef7ef712dc0a450cf5037976af0d04d9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3f72d1c198cacb453cce32385fcaba7ef7ef712dc0a450cf5037976af0d04d9.gz",
+      "retained_sha256": "fe4eb27dc10972b058409c54d986702f5c5341c6974354b21e90e54993dee0e6"
+    },
+    {
+      "name": "normal-graph-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/normal-graph-001.log",
+      "bytes": 40782,
+      "sha256": "69ec886c89c629382ced21f3d42d7f89954ef433f92f8202d664675cdd56a9c9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/69ec886c89c629382ced21f3d42d7f89954ef433f92f8202d664675cdd56a9c9.gz",
+      "retained_sha256": "83eb914ede407c189adb2e935e729ebf89dceefb6324ebe210fea0ab249ae399"
+    },
+    {
+      "name": "offline-001/cluster-shaders-Compute-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/cluster-shaders-Compute-metal.stderr",
+      "bytes": 717,
+      "sha256": "800da1a8dd7398323cc05a49e618fa1dab8cae119d8e5541a06d536253ca2161",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/800da1a8dd7398323cc05a49e618fa1dab8cae119d8e5541a06d536253ca2161.gz",
+      "retained_sha256": "156d68c9945b688b0cc10d07c47bab482631a58c0a7d2be8992b2028fa01ba26"
+    },
+    {
+      "name": "offline-001/cluster-shaders-Compute-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/cluster-shaders-Compute-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/cluster-shaders-Compute-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/cluster-shaders-Compute-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/cluster-shaders-Compute-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/cluster-shaders-Compute-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/cluster-shaders-Compute-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/cluster-shaders-Compute-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/cluster-shaders-Compute-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/cluster-shaders-Compute-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Fragment-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Fragment-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Fragment-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Fragment-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Fragment-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Fragment-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Fragment-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Fragment-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Fragment-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Fragment-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Fragment-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Fragment-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Vertex-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Vertex-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Vertex-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Vertex-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Vertex-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Vertex-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Vertex-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Vertex-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Vertex-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Vertex-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/composite-Vertex-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/composite-Vertex-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Fragment-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Fragment-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Fragment-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Fragment-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Fragment-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Fragment-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Fragment-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Fragment-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Fragment-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Fragment-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Fragment-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Fragment-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Vertex-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Vertex-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Vertex-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Vertex-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Vertex-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Vertex-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Vertex-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Vertex-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Vertex-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Vertex-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/copy-Vertex-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/copy-Vertex-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/metal-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/metal-version.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/metal-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/metal-version.stdout",
+      "bytes": 264,
+      "sha256": "090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/090d1019e5f4e70222ac8af2fd8f27bc68ecaa87abf10a2a6656b3b2f54bd4e2.gz",
+      "retained_sha256": "f70fe9a1a7d570575b9749b2ee06140852ca24fa7f22c9190c59adbeabca6183"
+    },
+    {
+      "name": "offline-001/motion-Fragment-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Fragment-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Fragment-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Fragment-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Fragment-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Fragment-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Fragment-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Fragment-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Fragment-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Fragment-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Fragment-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Fragment-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Vertex-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Vertex-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Vertex-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Vertex-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Vertex-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Vertex-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Vertex-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Vertex-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Vertex-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Vertex-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/motion-Vertex-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/motion-Vertex-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Fragment-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Fragment-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Fragment-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Fragment-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Fragment-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Fragment-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Fragment-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Fragment-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Fragment-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Fragment-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Fragment-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Fragment-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Vertex-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Vertex-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Vertex-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Vertex-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Vertex-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Vertex-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Vertex-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Vertex-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Vertex-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Vertex-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/resolve-Vertex-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/resolve-Vertex-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/result.json",
+      "bytes": 45109,
+      "sha256": "509e9fc69048c431ac4cef47a0218c6472c41a7db216c67b31ca5675affa0307",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/509e9fc69048c431ac4cef47a0218c6472c41a7db216c67b31ca5675affa0307.gz",
+      "retained_sha256": "1f0f5f31276226e8020ab6882f80ecbba1bb2bb9b8f77d825f93381a4416b2c5"
+    },
+    {
+      "name": "offline-001/sdk-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/sdk-version.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/sdk-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/sdk-version.stdout",
+      "bytes": 5,
+      "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a.gz",
+      "retained_sha256": "bdbd47d7ddd5ab0b5f97b87ef5b284f6f809fbb20765d3ee22bdb59034e1f57f"
+    },
+    {
+      "name": "offline-001/spirv-version.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/spirv-version.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/spirv-version.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/spirv-version.stdout",
+      "bytes": 465,
+      "sha256": "3f0ae05093de44cefafa15a117371fcc7ad25aabca0dfbc222a6a29f1c55f26a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/3f0ae05093de44cefafa15a117371fcc7ad25aabca0dfbc222a6a29f1c55f26a.gz",
+      "retained_sha256": "56f4d8d9c317f70887be72dc0209b0d6bc73e1115d262f10f00de76d8c91d9ef"
+    },
+    {
+      "name": "offline-001/temporal-cluster-shaders/Compute.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-cluster-shaders/Compute.air",
+      "bytes": 9248,
+      "sha256": "c399837d2471653f2a42ad53ff162765327e718b0d31f82172e57a839998dc1b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c399837d2471653f2a42ad53ff162765327e718b0d31f82172e57a839998dc1b.gz",
+      "retained_sha256": "29dbab6e7c0520a52d81b8f84ea510cb185cdf78d9219046f2f3887d1628ad2f"
+    },
+    {
+      "name": "offline-001/temporal-cluster-shaders/Compute.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-cluster-shaders/Compute.metallib",
+      "bytes": 8651,
+      "sha256": "a336d853ecc8c22bd9cff3a0bd9a76d2208780147aa960a19218409615a3ab66",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/a336d853ecc8c22bd9cff3a0bd9a76d2208780147aa960a19218409615a3ab66.gz",
+      "retained_sha256": "3df89e17b471f6b9c10e9840f9387879fcd0308ab49f661d42113fcc258d3194"
+    },
+    {
+      "name": "offline-001/temporal-cluster-shaders/Dx12-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-cluster-shaders/Dx12-Compute.shader",
+      "bytes": 7058,
+      "sha256": "71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/71d5f45542065554bc0b225fd6b20df34ad991557b22a7067e355442b77d2250.gz",
+      "retained_sha256": "04f160649e128a0da7ee895699daf9d80c1a8dd4404b09fefa74a88696039164"
+    },
+    {
+      "name": "offline-001/temporal-cluster-shaders/Metal-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-cluster-shaders/Metal-Compute.shader",
+      "bytes": 7923,
+      "sha256": "e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3f269aeb1a609d497fdba38c5ebd5de2f0fd05189cac713c7a1564c1ebb5402.gz",
+      "retained_sha256": "a239d0ea7c142fda81fbc5e638a5f0b76abb6e9aad7b34c48362c20eb948184e"
+    },
+    {
+      "name": "offline-001/temporal-cluster-shaders/Vulkan-Compute.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-cluster-shaders/Vulkan-Compute.shader",
+      "bytes": 9864,
+      "sha256": "345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/345a6943ddf0d0e2f86b23e8651493e72c5693a71ed4ed1085f912cc51d786d9.gz",
+      "retained_sha256": "5cce0446033c913c3fc14a31ee3e4368733989519912eeb557086eff85dc74ce"
+    },
+    {
+      "name": "offline-001/temporal-cluster-shaders/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-cluster-shaders/manifest.rs",
+      "bytes": 1509,
+      "sha256": "40ce0db8bda6d1ed371ebe262691fc3118fa802909b7c851f6c313f03687e48a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/40ce0db8bda6d1ed371ebe262691fc3118fa802909b7c851f6c313f03687e48a.gz",
+      "retained_sha256": "e10a42a10a5792154050c1ed40af58216013f026658ca6706e67ddf13aa12712"
+    },
+    {
+      "name": "offline-001/temporal-composite/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Dx12-Fragment.shader",
+      "bytes": 4587,
+      "sha256": "f44c776e1c056f48a0994f72d6bf1ba07bbd345139689f6d268c655decbedf00",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/f44c776e1c056f48a0994f72d6bf1ba07bbd345139689f6d268c655decbedf00.gz",
+      "retained_sha256": "7c61050dd8bc5279ecb63a32c9a31d4e15f726194c53f12effd0abc4f51ef4e3"
+    },
+    {
+      "name": "offline-001/temporal-composite/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406.gz",
+      "retained_sha256": "1f52206c43fb9a166db87201932b50d3779f714172b6f2e1acf187418c3c07ef"
+    },
+    {
+      "name": "offline-001/temporal-composite/Fragment.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Fragment.air",
+      "bytes": 9424,
+      "sha256": "41d149149881481335170c2abccbc3accf6d0dee6494177834a7fcd0134ab34b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/41d149149881481335170c2abccbc3accf6d0dee6494177834a7fcd0134ab34b.gz",
+      "retained_sha256": "71449f9bb9b5f2c3a9a6aa1e186f3e7e1f34ecb41851a3540f67ada143863761"
+    },
+    {
+      "name": "offline-001/temporal-composite/Fragment.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Fragment.metallib",
+      "bytes": 6719,
+      "sha256": "22f9f1e85d43b6e8c8eb6e2f607e3f9c55faf82a71e525a9c5e6dd9bbc388127",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/22f9f1e85d43b6e8c8eb6e2f607e3f9c55faf82a71e525a9c5e6dd9bbc388127.gz",
+      "retained_sha256": "091c0390fb4b564619344973c27b881230e6fed73f44ea7cd06d9f58083d2212"
+    },
+    {
+      "name": "offline-001/temporal-composite/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Metal-Fragment.shader",
+      "bytes": 5608,
+      "sha256": "b4ab4d879e66b03141a1fabfa3e5497883d4f66066a54726c0e908f1e23d7464",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/b4ab4d879e66b03141a1fabfa3e5497883d4f66066a54726c0e908f1e23d7464.gz",
+      "retained_sha256": "0de7a597291e601c1589bd016fc6478b1abdc9ef4b2ab5600f3a33ea07bd27bc"
+    },
+    {
+      "name": "offline-001/temporal-composite/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "offline-001/temporal-composite/Vertex.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Vertex.air",
+      "bytes": 3456,
+      "sha256": "bcaeefdeba0bec51244ca770f742c23424de626350c58a616a6d4c4d61da223b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/bcaeefdeba0bec51244ca770f742c23424de626350c58a616a6d4c4d61da223b.gz",
+      "retained_sha256": "17dfff67055a5db4a7ba3d24a517128821eb30c4d7e14b9e51998d69bf30f4e0"
+    },
+    {
+      "name": "offline-001/temporal-composite/Vertex.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Vertex.metallib",
+      "bytes": 3389,
+      "sha256": "27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f.gz",
+      "retained_sha256": "dd6d8e69f2edc7a5a63b92bb1d2320f491459cb5ad3c524eeeb36284d5f530ea"
+    },
+    {
+      "name": "offline-001/temporal-composite/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Vulkan-Fragment.shader",
+      "bytes": 6412,
+      "sha256": "dc58fac2b98a39198b0e88b45ee256d50a3818646afd4dab18c18dc8b073759d",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/dc58fac2b98a39198b0e88b45ee256d50a3818646afd4dab18c18dc8b073759d.gz",
+      "retained_sha256": "03e0372d08196ee83e9ffa50f7e88a77efda3db158ba627451a7bd33ad90e242"
+    },
+    {
+      "name": "offline-001/temporal-composite/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418.gz",
+      "retained_sha256": "7c06c3160d35518390ddd74db46106090b39443b7fc7e938d34b54af7dd7760e"
+    },
+    {
+      "name": "offline-001/temporal-composite/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-composite/manifest.rs",
+      "bytes": 2234,
+      "sha256": "bbf217d18e8c0def92e915d44f9cff33acfe3c22d7037ff6bb2cc563d2b93d20",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/bbf217d18e8c0def92e915d44f9cff33acfe3c22d7037ff6bb2cc563d2b93d20.gz",
+      "retained_sha256": "47d2c402ed88c86c892d559f8211f4b8072935dd482f3552b402fca7df1e8bdf"
+    },
+    {
+      "name": "offline-001/temporal-copy/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Dx12-Fragment.shader",
+      "bytes": 531,
+      "sha256": "288c2fe006f5c86731eea518c59cabb5ee69096f6c83852b7f64dd36355108b0",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/288c2fe006f5c86731eea518c59cabb5ee69096f6c83852b7f64dd36355108b0.gz",
+      "retained_sha256": "cb4d8441dbf7b2d6627401528959b122e1b6e21cf2c0ff38f3b1dc5381f1d0c8"
+    },
+    {
+      "name": "offline-001/temporal-copy/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "e1bc2806541e8e02673147607a4953ced19744298989e60d2e9d14c1dd456a97",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e1bc2806541e8e02673147607a4953ced19744298989e60d2e9d14c1dd456a97.gz",
+      "retained_sha256": "2eac1cbbd15ae6e8001f69be1ecb5d8e6d43551a774e2a4e02993c04dc56e155"
+    },
+    {
+      "name": "offline-001/temporal-copy/Fragment.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Fragment.air",
+      "bytes": 4912,
+      "sha256": "07a424156b89bfa1bc809af120310ba7f9b344a194b46e30a323d175c136a2c8",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/07a424156b89bfa1bc809af120310ba7f9b344a194b46e30a323d175c136a2c8.gz",
+      "retained_sha256": "b68cd08c52bdd463c369b77f8cdb6862236c10b6b5c5626f6d6d313a5c6da841"
+    },
+    {
+      "name": "offline-001/temporal-copy/Fragment.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Fragment.metallib",
+      "bytes": 4378,
+      "sha256": "a30db2a97ee75671f6c9140506401312b735e6a01a7aeb111ccfa861c9893eb3",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/a30db2a97ee75671f6c9140506401312b735e6a01a7aeb111ccfa861c9893eb3.gz",
+      "retained_sha256": "b676842356c328c0b5783a1e13e96bda7b2bd5632cc1ca68cb056a7c72256fa9"
+    },
+    {
+      "name": "offline-001/temporal-copy/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Metal-Fragment.shader",
+      "bytes": 735,
+      "sha256": "c4efc2d6eea021dff435e07deb16fd64b87846e02772982d4d5ce2131cd48d40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c4efc2d6eea021dff435e07deb16fd64b87846e02772982d4d5ce2131cd48d40.gz",
+      "retained_sha256": "9d295f84be2aa27b202a58f659253ed81f189168275c6cacecac36d29b3a2a82"
+    },
+    {
+      "name": "offline-001/temporal-copy/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "offline-001/temporal-copy/Vertex.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Vertex.air",
+      "bytes": 3440,
+      "sha256": "6a2de4548d2b7438660ad1583eabe2b2bcaa2a9b5d9e170d2f8701cd8db7bcde",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/6a2de4548d2b7438660ad1583eabe2b2bcaa2a9b5d9e170d2f8701cd8db7bcde.gz",
+      "retained_sha256": "c9c9a38e5ed0702c352596b6341e417fc4762d10288d6416956a27f0b19decdd"
+    },
+    {
+      "name": "offline-001/temporal-copy/Vertex.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Vertex.metallib",
+      "bytes": 3389,
+      "sha256": "27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f.gz",
+      "retained_sha256": "dd6d8e69f2edc7a5a63b92bb1d2320f491459cb5ad3c524eeeb36284d5f530ea"
+    },
+    {
+      "name": "offline-001/temporal-copy/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Vulkan-Fragment.shader",
+      "bytes": 860,
+      "sha256": "106f707cecd17be6110f536335b8f3605f66e807c17a9ba98627f472a24d88b6",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/106f707cecd17be6110f536335b8f3605f66e807c17a9ba98627f472a24d88b6.gz",
+      "retained_sha256": "1911e9dd88e927256c4e75454a9b415412f3d2e6d87b5b1ed72a3bc852806129"
+    },
+    {
+      "name": "offline-001/temporal-copy/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "2f61bbc4865e9e91521a53930b698af92ae91dc772812153c73085d9976dcdbc",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/2f61bbc4865e9e91521a53930b698af92ae91dc772812153c73085d9976dcdbc.gz",
+      "retained_sha256": "fc69c7fd4cb522ebbf8dfad599cbc21d7386ff86867cc07b521c38416ff6d599"
+    },
+    {
+      "name": "offline-001/temporal-copy/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-copy/manifest.rs",
+      "bytes": 2225,
+      "sha256": "4c152f738969da8b57efe64e362de717e3b9cae3153203dd9b7f66c29ca0d789",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/4c152f738969da8b57efe64e362de717e3b9cae3153203dd9b7f66c29ca0d789.gz",
+      "retained_sha256": "2f2dd347e81655fcc5dcb3615fe7b608e8d5736fc417f254de370fe581a0a6cd"
+    },
+    {
+      "name": "offline-001/temporal-motion/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Dx12-Fragment.shader",
+      "bytes": 3237,
+      "sha256": "371457811dbbced2dc683f3da27ae5a1678960fba06dd7b0d843802b37fd73ca",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/371457811dbbced2dc683f3da27ae5a1678960fba06dd7b0d843802b37fd73ca.gz",
+      "retained_sha256": "c39b5abc90fe9cf1309d384a7e3cb335f7cfbc0b6efbe552863180470fd68475"
+    },
+    {
+      "name": "offline-001/temporal-motion/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Dx12-Vertex.shader",
+      "bytes": 1390,
+      "sha256": "5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/5796ffe09d7709a18860371b2a46756a58f0f57acaf2f9e9955b095729ae63a2.gz",
+      "retained_sha256": "5a82e77dffcee4aeb8d7cfae3521c2fa5499cddd8bd4a9b82076864a6ea9c022"
+    },
+    {
+      "name": "offline-001/temporal-motion/Fragment.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Fragment.air",
+      "bytes": 5728,
+      "sha256": "ce0adcc59d8be98e0b6c04296c7d76cf3949c8e047aedfec61f3b82b78ef99bf",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/ce0adcc59d8be98e0b6c04296c7d76cf3949c8e047aedfec61f3b82b78ef99bf.gz",
+      "retained_sha256": "3125cf912f47c3d192e8c70cd8ecbbbf251f2b234ab28c5005c6b8517dc5777f"
+    },
+    {
+      "name": "offline-001/temporal-motion/Fragment.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Fragment.metallib",
+      "bytes": 5663,
+      "sha256": "89aefcfdfab1ae5592df244091ee3f27ae9d127c1c868ec27324796d0d1d8d5a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/89aefcfdfab1ae5592df244091ee3f27ae9d127c1c868ec27324796d0d1d8d5a.gz",
+      "retained_sha256": "5c8c083e401bcac9ba9052e007ce08b399c4ed63025b0c8726c3395fbf7e2e4e"
+    },
+    {
+      "name": "offline-001/temporal-motion/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Metal-Fragment.shader",
+      "bytes": 3306,
+      "sha256": "926e37a6a9226dbf7ef6c6c60b2c68eefbb32da653616860429c0b2ce1e67d54",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/926e37a6a9226dbf7ef6c6c60b2c68eefbb32da653616860429c0b2ce1e67d54.gz",
+      "retained_sha256": "7acf4e762c454b17b33313de74037ea1674e3e9b33622ef298d476851e48dd81"
+    },
+    {
+      "name": "offline-001/temporal-motion/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Metal-Vertex.shader",
+      "bytes": 7573,
+      "sha256": "82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/82bd7bcea6de19c1084379a9f25dffa0c7ba14a37e4c11e7706be41f0eebc962.gz",
+      "retained_sha256": "46ec861883f72e9ec61e85ab9c70d4553e785b724a27b4eed3a1a3be77d2a464"
+    },
+    {
+      "name": "offline-001/temporal-motion/Vertex.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Vertex.air",
+      "bytes": 14384,
+      "sha256": "007e9960ca2d864b881c14ec88485c813003035c96a4612a5fecab3bdfd97870",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/007e9960ca2d864b881c14ec88485c813003035c96a4612a5fecab3bdfd97870.gz",
+      "retained_sha256": "2402cf9bda747fffe0a3cdb0446c0310efaee35d334369be4759323f3fecc2f4"
+    },
+    {
+      "name": "offline-001/temporal-motion/Vertex.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Vertex.metallib",
+      "bytes": 12605,
+      "sha256": "d2054d86571e56497a46219e04114e5334af35ae37ad6ba8b391f510cc2cdd36",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/d2054d86571e56497a46219e04114e5334af35ae37ad6ba8b391f510cc2cdd36.gz",
+      "retained_sha256": "ac3060ef26a208ca19da5a6195d9d0fc93b70086d003f78a1e6213eddf7f5854"
+    },
+    {
+      "name": "offline-001/temporal-motion/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Vulkan-Fragment.shader",
+      "bytes": 4556,
+      "sha256": "410721777c7844c477f067b63200f572d47b3e862e82d316848760032dca92c2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/410721777c7844c477f067b63200f572d47b3e862e82d316848760032dca92c2.gz",
+      "retained_sha256": "c034f58d1ff696236869cc2742d1b360b652e6fa1739bbf6347f4efea47499ff"
+    },
+    {
+      "name": "offline-001/temporal-motion/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/Vulkan-Vertex.shader",
+      "bytes": 2304,
+      "sha256": "f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/f6be7989b5a27a8ab65af4a46fe3fed81f3784e2e0418783adeaa80476aba837.gz",
+      "retained_sha256": "7fd0f9cbd8577a542cbf8c12e5873543043a28a6cbbc30746a7db3702fbb47bd"
+    },
+    {
+      "name": "offline-001/temporal-motion/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-motion/manifest.rs",
+      "bytes": 2339,
+      "sha256": "35c90d7a97d827eabdb6297879b8d5fad3652d34d509a7be21e39937baf34c17",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/35c90d7a97d827eabdb6297879b8d5fad3652d34d509a7be21e39937baf34c17.gz",
+      "retained_sha256": "19962d69ac13ba758d33ba1137819f01567403e5f3b783faec08caf05dda0ecd"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Dx12-Fragment.shader",
+      "bytes": 9051,
+      "sha256": "064f244c5a0054a19cfb913aa04bef6fa2959b4dab6c005736d60a3f0c6b6894",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/064f244c5a0054a19cfb913aa04bef6fa2959b4dab6c005736d60a3f0c6b6894.gz",
+      "retained_sha256": "806c199bfea323b9b9970e9e144c9a2de59aed51d712d28260115a3336cb5054"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406.gz",
+      "retained_sha256": "1f52206c43fb9a166db87201932b50d3779f714172b6f2e1acf187418c3c07ef"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Fragment.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Fragment.air",
+      "bytes": 11600,
+      "sha256": "1c508c1ce2ffc4f8574874b5a74d910a60bbd7831feada20fd7edba44528d203",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1c508c1ce2ffc4f8574874b5a74d910a60bbd7831feada20fd7edba44528d203.gz",
+      "retained_sha256": "05fe47718e8b81b2cbe4577e459dd9bf7fdbf0cff56d4465e48d42df8181e700"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Fragment.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Fragment.metallib",
+      "bytes": 10061,
+      "sha256": "d863311102fe7ebd83353f6e97b566a5d407fa2df7c66840e929fa8b7878ff12",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/d863311102fe7ebd83353f6e97b566a5d407fa2df7c66840e929fa8b7878ff12.gz",
+      "retained_sha256": "30eec57ee41dc2ff257709fdceacd9ddadfd3b8676d146211c4fd90ef7fe81ce"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Metal-Fragment.shader",
+      "bytes": 10922,
+      "sha256": "b0da475e90e7e2776425476fba9e658e4df23e2753f83ed32121c43491ffccf8",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/b0da475e90e7e2776425476fba9e658e4df23e2753f83ed32121c43491ffccf8.gz",
+      "retained_sha256": "be4a60ba1024ea8b45f3b8465583961495dd18a47301cbac6484c9cd6749713b"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Vertex.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Vertex.air",
+      "bytes": 3440,
+      "sha256": "c4030fac47f51a07307b77ecfbb75f0eb364482dfa8dce7979408477533e4c73",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c4030fac47f51a07307b77ecfbb75f0eb364482dfa8dce7979408477533e4c73.gz",
+      "retained_sha256": "13464564617464c62685deefeae53c8de8994122bd3d4abb22f68469abc1f6a7"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Vertex.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Vertex.metallib",
+      "bytes": 3389,
+      "sha256": "27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f.gz",
+      "retained_sha256": "dd6d8e69f2edc7a5a63b92bb1d2320f491459cb5ad3c524eeeb36284d5f530ea"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Vulkan-Fragment.shader",
+      "bytes": 11308,
+      "sha256": "c4397b027282dadfccdf8a68ef031a41461091610b28f679e0246f1bad03446a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c4397b027282dadfccdf8a68ef031a41461091610b28f679e0246f1bad03446a.gz",
+      "retained_sha256": "fb252569c3eba485e1494d9956809baed804c678d695068b045db3b4f88b61f6"
+    },
+    {
+      "name": "offline-001/temporal-resolve/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418.gz",
+      "retained_sha256": "7c06c3160d35518390ddd74db46106090b39443b7fc7e938d34b54af7dd7760e"
+    },
+    {
+      "name": "offline-001/temporal-resolve/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-resolve/manifest.rs",
+      "bytes": 2220,
+      "sha256": "486c0f0db0b93cbc1dd140e170ab58dbdc324fbfa0d16f9fee0f71f79e7491e2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/486c0f0db0b93cbc1dd140e170ab58dbdc324fbfa0d16f9fee0f71f79e7491e2.gz",
+      "retained_sha256": "9c6413d08095133f26f32a2c7ee34a22223ab939ec30345c180b8813861fa082"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Dx12-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Dx12-Fragment.shader",
+      "bytes": 19620,
+      "sha256": "b9e80e49fb8dd36bb443d528a003c6ecb64cc70e09b5158bf558284a21f74b0a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/b9e80e49fb8dd36bb443d528a003c6ecb64cc70e09b5158bf558284a21f74b0a.gz",
+      "retained_sha256": "457abc31beb144c1876783c0c51daea5b42f6fff7b6c9e7caf4fc55609456814"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Dx12-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Dx12-Vertex.shader",
+      "bytes": 387,
+      "sha256": "583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/583b7e725eac5c4629cf429088ae04f7aa4aa0b29e7d5e583a95931bf0803406.gz",
+      "retained_sha256": "1f52206c43fb9a166db87201932b50d3779f714172b6f2e1acf187418c3c07ef"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Fragment.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Fragment.air",
+      "bytes": 15824,
+      "sha256": "8dad9b797bf0a73131ac02c68e39a6e651dbfd8ed33d739603d3a2aa1f2ec3ed",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/8dad9b797bf0a73131ac02c68e39a6e651dbfd8ed33d739603d3a2aa1f2ec3ed.gz",
+      "retained_sha256": "3be441e879ca9c2df2f5fd5d90816867efe5316266a65b0ef38cb05e968a27fc"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Fragment.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Fragment.metallib",
+      "bytes": 12845,
+      "sha256": "90b9683f721b3bf5cbb5917e7971b7039b98d43974bb308e01c2a871cd49bae3",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/90b9683f721b3bf5cbb5917e7971b7039b98d43974bb308e01c2a871cd49bae3.gz",
+      "retained_sha256": "3cccf48d93f09f94d412eb4471cce9961073348642b86d63b1bf7c2e389ed090"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Metal-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Metal-Fragment.shader",
+      "bytes": 22613,
+      "sha256": "656c6669c2dcf482c5c8139b3efdfdb3f7068ef8d86a578a8dc798fb45c66aee",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/656c6669c2dcf482c5c8139b3efdfdb3f7068ef8d86a578a8dc798fb45c66aee.gz",
+      "retained_sha256": "72302184f22d7eabc567abe9397d8f75d84ff8fe80f31094485f457e9ee540b3"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Metal-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Metal-Vertex.shader",
+      "bytes": 429,
+      "sha256": "1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b23d254b80d443dad62ddd53aa061f8de91da741511a39f71e9fa0d7e957e40.gz",
+      "retained_sha256": "10b51efbf19685d287aed5edd492946de816dda04d7207cbcfabbb11d1e64e9a"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Vertex.air",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Vertex.air",
+      "bytes": 3440,
+      "sha256": "57647936eced8b366b689887dc9c96455c7f2d2f488b057a842e4170065e67fd",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/57647936eced8b366b689887dc9c96455c7f2d2f488b057a842e4170065e67fd.gz",
+      "retained_sha256": "0a181004b5197b9d5a93f587a976c39c44c8119a96a2ef16ba48c7067fc2c6d2"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Vertex.metallib",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Vertex.metallib",
+      "bytes": 3389,
+      "sha256": "27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/27f6fbfc3fc879519b2237557bb148e252e82641b42869e61216ef67ded6465f.gz",
+      "retained_sha256": "dd6d8e69f2edc7a5a63b92bb1d2320f491459cb5ad3c524eeeb36284d5f530ea"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Vulkan-Fragment.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Vulkan-Fragment.shader",
+      "bytes": 20304,
+      "sha256": "983fdd3d3bd11cb5141947d28485013b4816a86cd5749136fcae156c1a31175b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/983fdd3d3bd11cb5141947d28485013b4816a86cd5749136fcae156c1a31175b.gz",
+      "retained_sha256": "d5cb0c3b62fee92c1d5ce26566005f2c701576212fe0bf7793872ddca479aec2"
+    },
+    {
+      "name": "offline-001/temporal-upscale/Vulkan-Vertex.shader",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/Vulkan-Vertex.shader",
+      "bytes": 688,
+      "sha256": "7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7d095c4682631247bf861de0165111422ab36df3672b5a554a551035c398b418.gz",
+      "retained_sha256": "7c06c3160d35518390ddd74db46106090b39443b7fc7e938d34b54af7dd7760e"
+    },
+    {
+      "name": "offline-001/temporal-upscale/manifest.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/temporal-upscale/manifest.rs",
+      "bytes": 2219,
+      "sha256": "7f6d1dfa4fdccbc78cc337cc8434d8a46686eb70571b5e55235bd0925f6693e7",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7f6d1dfa4fdccbc78cc337cc8434d8a46686eb70571b5e55235bd0925f6693e7.gz",
+      "retained_sha256": "8a86a65b238519a54016220a243bd54eced5e6296c8b33a6b6e8c18cd0dd04ca"
+    },
+    {
+      "name": "offline-001/upscale-Fragment-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Fragment-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Fragment-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Fragment-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Fragment-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Fragment-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Fragment-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Fragment-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Fragment-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Fragment-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Fragment-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Fragment-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Vertex-metal.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Vertex-metal.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Vertex-metal.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Vertex-metal.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Vertex-metallib.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Vertex-metallib.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Vertex-metallib.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Vertex-metallib.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Vertex-spirv.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Vertex-spirv.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001/upscale-Vertex-spirv.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001/upscale-Vertex-spirv.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "offline-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001.json",
+      "bytes": 1886,
+      "sha256": "fee83a85739bd14223ef2beb41d54030e4af93dc3f9dffb8b54a625a943253eb",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/fee83a85739bd14223ef2beb41d54030e4af93dc3f9dffb8b54a625a943253eb.gz",
+      "retained_sha256": "47128ed965b6da0290f51865ac7213021dee7893ce58682e90b2306280a9cbca"
+    },
+    {
+      "name": "offline-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/offline-001.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.gz",
+      "retained_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "name": "original-wgsl.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/original-wgsl.json",
+      "bytes": 1982,
+      "sha256": "354bd7111e0662a669f97c3497613622fbe16ad4aa7d0e2995ee805b9bc9c355",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/354bd7111e0662a669f97c3497613622fbe16ad4aa7d0e2995ee805b9bc9c355.gz",
+      "retained_sha256": "0ee9d251601bd695f1646c947b4934bce7209a0de9879cd8df5e5732f73c4e04"
+    },
+    {
+      "name": "partial-admission-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/partial-admission-001.json",
+      "bytes": 1967,
+      "sha256": "2f6f73094b0821cbc5d01d0eb66d0227c840c985616987db59a36b301f6b6a89",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/2f6f73094b0821cbc5d01d0eb66d0227c840c985616987db59a36b301f6b6a89.gz",
+      "retained_sha256": "3e457cfe2f971fccef5573b9fe1f35d8b3725f006033c25f33d1012fac663b94"
+    },
+    {
+      "name": "partial-admission-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/partial-admission-001.log",
+      "bytes": 896,
+      "sha256": "e4372413ec63b42b34f9a86d0f8d9c0dbad54da590f934f65bf2086315ad9347",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e4372413ec63b42b34f9a86d0f8d9c0dbad54da590f934f65bf2086315ad9347.gz",
+      "retained_sha256": "ba60886536dcf474e69f7fd01d305f6e7a5c17e8bf7073379b01b99cbc115ff1"
+    },
+    {
+      "name": "pinned/dx12/device.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/pinned/dx12/device.rs",
+      "bytes": 109386,
+      "sha256": "77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/77db671eb1302646d1ff9f257413858bc23038578ecc36e0fe3c3a26b0e696dc.gz",
+      "retained_sha256": "e4eb1e3f7d5b22a7df9e0833fdf1452e99cf743b8ef1d58145ddd205edda9fe7"
+    },
+    {
+      "name": "pinned/metal/adapter.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/pinned/metal/adapter.rs",
+      "bytes": 71112,
+      "sha256": "6da21d590125e601015862dd2a66e4dae2fdd5e35d80624dd2c6cca52099d9bf",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/6da21d590125e601015862dd2a66e4dae2fdd5e35d80624dd2c6cca52099d9bf.gz",
+      "retained_sha256": "5e2cb0b8fb42c63906b04195515995d967e057f8ed2cb44abbfed3ddc8f1cc38"
+    },
+    {
+      "name": "pinned/metal/device.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/pinned/metal/device.rs",
+      "bytes": 89259,
+      "sha256": "c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c34d2bd9fe2a547f5cb28106c07ed22c99aa5891c0ad6a75f08ec6d70a1f6864.gz",
+      "retained_sha256": "ebd447b1938bde64cf1d9205f73f4a63cbdae7a3222902a2f9db0730081e68c3"
+    },
+    {
+      "name": "pinned/metal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/pinned/metal/mod.rs",
+      "bytes": 36654,
+      "sha256": "daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/daed7a2d7c1cd7b9431b3009b5b7feb2ca8e45648ffd7eb0185c46cfcbeb2ada.gz",
+      "retained_sha256": "9345a160d8b46024cb31aa7167a5417544b41f0d6157346008c2ae5ea8fde762"
+    },
+    {
+      "name": "pinned-and-tools.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/pinned-and-tools.json",
+      "bytes": 1786,
+      "sha256": "49b0baee6ff03d75e3bd5afdca43200b3c1a07ec1f3abe68c1d06903c545dc92",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/49b0baee6ff03d75e3bd5afdca43200b3c1a07ec1f3abe68c1d06903c545dc92.gz",
+      "retained_sha256": "8aaa2152268ec2cea80b220ac3c91924f5a924bec28dcf515aed1ff499c07241"
+    },
+    {
+      "name": "render-check-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/render-check-001.json",
+      "bytes": 1821,
+      "sha256": "b61f71eb20f2dd2af8024a355ca28aa74b659f7c9243b506f5609a4da59d2883",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/b61f71eb20f2dd2af8024a355ca28aa74b659f7c9243b506f5609a4da59d2883.gz",
+      "retained_sha256": "0e84d633058cc7d5e0ce6c53e852ba07132e0ca3b0dd4dbeba90b931f6b43eb3"
+    },
+    {
+      "name": "render-check-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/render-check-001.log",
+      "bytes": 2267,
+      "sha256": "e84df3df3b5416aaf5e924cacb7c552138f2a122eda70546e25d0bf685f631e1",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e84df3df3b5416aaf5e924cacb7c552138f2a122eda70546e25d0bf685f631e1.gz",
+      "retained_sha256": "569f7a4c8d81f187bae3b121762153c5841d9c37a964a1a6e9f97f400fe25f85"
+    },
+    {
+      "name": "retain.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/retain.py",
+      "bytes": 2536,
+      "sha256": "72a75665d91ad5aa2b4cf49b5beaf1fdbdfc326162ff083f0121a2b05166de61",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/72a75665d91ad5aa2b4cf49b5beaf1fdbdfc326162ff083f0121a2b05166de61.gz",
+      "retained_sha256": "557d2a1897f8031da2b748b49ecb59378b9809a7a4e413ad0f59eb11ccc92909"
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/run.py",
+      "bytes": 1043,
+      "sha256": "e673a1aac443045b09b1de90e44f3d57a45fc3da0f0f468874122536fb85d690",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e673a1aac443045b09b1de90e44f3d57a45fc3da0f0f468874122536fb85d690.gz",
+      "retained_sha256": "0cbaf0941de09cab6c5a29337651ee72a77ef701678a97c08df2b5e89bea65b8"
+    },
+    {
+      "name": "runtime-graph-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/runtime-graph-001.json",
+      "bytes": 1704,
+      "sha256": "15e4a46009da52e164225cc89cb39f7b61fd8822e6cf86833a157af4dc70d5f9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/15e4a46009da52e164225cc89cb39f7b61fd8822e6cf86833a157af4dc70d5f9.gz",
+      "retained_sha256": "16deb58d98e65610480d9dacc57fc33362a4693a12fa1420483d6543318958df"
+    },
+    {
+      "name": "runtime-graph-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/runtime-graph-001.log",
+      "bytes": 201,
+      "sha256": "35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/35292a5f5492e2ab73a3e68192c2936675664dc340eb5f1e74a33f853e13946f.gz",
+      "retained_sha256": "8c5f61b9c0a5b8b4e8f75f97405a25aeb1e8d175ea069d15bf4bbd8a9d87223d"
+    },
+    {
+      "name": "runtime-graph-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/runtime-graph-002.json",
+      "bytes": 1841,
+      "sha256": "8cdfb79966f331e4313fbb2d6768eaa0e2e69511332fa707cc6c078974c59281",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/8cdfb79966f331e4313fbb2d6768eaa0e2e69511332fa707cc6c078974c59281.gz",
+      "retained_sha256": "a11b59d05fd10d671460ef9e6e1d0b3deb058735b7a8fb178556f8684bab3e92"
+    },
+    {
+      "name": "runtime-graph-002.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/runtime-graph-002.log",
+      "bytes": 143,
+      "sha256": "e12c24423b6b983a8a343aa60792b3a6c41abef21c39a8323658cfb086097eef",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e12c24423b6b983a8a343aa60792b3a6c41abef21c39a8323658cfb086097eef.gz",
+      "retained_sha256": "a0a285ecff3ea198a91a4e913ebc53af44a59f84047b316b98d46d81aa759d53"
+    },
+    {
+      "name": "source-001/files/Cargo.lock",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/Cargo.lock",
+      "bytes": 252964,
+      "sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e.gz",
+      "retained_sha256": "553321a89254a8df6ca9679a40c40ea4c358820a2b9071e45e5ea83990bdeca3"
+    },
+    {
+      "name": "source-001/files/crates/incant_game_player/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_game_player/Cargo.toml",
+      "bytes": 4308,
+      "sha256": "55648785d974fc320205cc39c0cd79c7c08bb6d57c0f037d76333f2151877fde",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/55648785d974fc320205cc39c0cd79c7c08bb6d57c0f037d76333f2151877fde.gz",
+      "retained_sha256": "652cabb23b6450920bafcb6471e139f36bf08c2c509036a9b09cb10a518bfd67"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/Cargo.toml",
+      "bytes": 2682,
+      "sha256": "e29e609c9217a36fbc042650812969072e51d672b4cf672954f8fa7540b04909",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e29e609c9217a36fbc042650812969072e51d672b4cf672954f8fa7540b04909.gz",
+      "retained_sha256": "fd5dd034b2f92761869b45658b49ae9011feeb7bb55d42146ddd485dd766e67d"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/build.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/build.rs",
+      "bytes": 7682,
+      "sha256": "75aa873b20c9c74f7dae822bbea8b9055e9da8e4ef367785360a02012a1c3f63",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/75aa873b20c9c74f7dae822bbea8b9055e9da8e4ef367785360a02012a1c3f63.gz",
+      "retained_sha256": "ebb588965882edee61ee6c0489906d3f006735036ed285f0fb5969b6b2b1c4fd"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/fixture.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/fixture.wgsl",
+      "bytes": 527,
+      "sha256": "4a2fd220107d0f0de77ec5df70786318e33d37f2730c8a5d346963ee79719387",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/4a2fd220107d0f0de77ec5df70786318e33d37f2730c8a5d346963ee79719387.gz",
+      "retained_sha256": "5eedf7cada0d7963b9dc835a6b77d0d6575400a10dfff5c395dc46e91e1c068b"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/geometry_shader/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/geometry_shader/cooked.rs",
+      "bytes": 6242,
+      "sha256": "44480701a0f8bee4444a6da7ddf0160e372f781f1cc321a8779c61357075145b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/44480701a0f8bee4444a6da7ddf0160e372f781f1cc321a8779c61357075145b.gz",
+      "retained_sha256": "61b685ca25002577ccfa4c69b17507fd18b0379360d82a05f4233b7d7a205224"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/lib.rs",
+      "bytes": 20754,
+      "sha256": "4f59b32c04bc37fc33268a3792830db1ac54480320c5d35ed5fe9e05b854a894",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/4f59b32c04bc37fc33268a3792830db1ac54480320c5d35ed5fe9e05b854a894.gz",
+      "retained_sha256": "e5f3d8907c6af8c73871ff1a63455477700abb9e49762a2cf1facc3bbc20e357"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/lighting/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/lighting/cooked.rs",
+      "bytes": 7212,
+      "sha256": "210004a5441bf8ee8b60ec6337d23cbf9fcead7d9341d2ee69073c6ebfa45d71",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/210004a5441bf8ee8b60ec6337d23cbf9fcead7d9341d2ee69073c6ebfa45d71.gz",
+      "retained_sha256": "cc58ca2cdf78236adb8906bcd5966660fdeeeddbd1cdf821ef368efbcc3a5b50"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/lighting/grid.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/lighting/grid.wgsl",
+      "bytes": 2843,
+      "sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439.gz",
+      "retained_sha256": "bba88708afc78d1444c2522df5acdda533b2da64b06a463d9329735d00ead0b3"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/lighting/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/lighting/mod.rs",
+      "bytes": 20104,
+      "sha256": "c32584e4c45c020d8f4eadf123342ccada602b3eaf89469c553e7e2dfb526d49",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c32584e4c45c020d8f4eadf123342ccada602b3eaf89469c553e7e2dfb526d49.gz",
+      "retained_sha256": "bc96f090a33eddabc82c0edd18cd00efa6970b646fe86d5662f85e4390c59f22"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/lighting/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/lighting/shade.wgsl",
+      "bytes": 3898,
+      "sha256": "52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/52757ae31c0e68c6480bec626ee81386b792fe06c803b0853f9c0a546667e2ad.gz",
+      "retained_sha256": "02f9d36a760daa68c8c1ff9b34e538152ee5ba2743a5a0bd11839bcc03e03d48"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/lighting/temporal_source.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/lighting/temporal_source.rs",
+      "bytes": 800,
+      "sha256": "5245bd6a5f72ca39bbbad5fb5101358114cbd9f402344199114a7af598a1eb73",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/5245bd6a5f72ca39bbbad5fb5101358114cbd9f402344199114a7af598a1eb73.gz",
+      "retained_sha256": "721b9536a749cde33a729804d2162062478404b50cf9c97823cc63e218a15d62"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/model_material.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/model_material.wgsl",
+      "bytes": 4670,
+      "sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b.gz",
+      "retained_sha256": "4ce152ac28fc1791e163c4256b8f4b8daf03baedf8a3c87e8b6e0ace73ef5036"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/motion/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/motion/mod.rs",
+      "bytes": 1793,
+      "sha256": "18a14933505ee35bf72c021bb00f4168cdaa07a63a6b775361477c24cbc2f533",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/18a14933505ee35bf72c021bb00f4168cdaa07a63a6b775361477c24cbc2f533.gz",
+      "retained_sha256": "be1261c29ee8dd9cedf9f30941f30962a30a53d9f5380b689f8434eabebb6bc8"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/motion/shader.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/motion/shader.wgsl",
+      "bytes": 2027,
+      "sha256": "7f8aed4a2cb30401eaae3d3d0e54d72d37cb4e3875b555f33434d5e8123663b9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7f8aed4a2cb30401eaae3d3d0e54d72d37cb4e3875b555f33434d5e8123663b9.gz",
+      "retained_sha256": "d3126af068668260bcc91997f77fbd533ffbecdad7e6e55e90b2aa4a1437f266"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/motion/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/motion/system.rs",
+      "bytes": 6356,
+      "sha256": "0a342ea3455360c369865806cd2fa701ae9bda6793d0c855f45c3e986b3f6f7b",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/0a342ea3455360c369865806cd2fa701ae9bda6793d0c855f45c3e986b3f6f7b.gz",
+      "retained_sha256": "540b70ff563db5a6b848730175f7ec8525d6587073e0935f6c313e182e29350e"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/motion/tests.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/motion/tests.rs",
+      "bytes": 13612,
+      "sha256": "bca21bf0bb39ecdd75fab8e0b2a807dd584880c93170b95340fa4d2149557ec9",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/bca21bf0bb39ecdd75fab8e0b2a807dd584880c93170b95340fa4d2149557ec9.gz",
+      "retained_sha256": "3ae9ab7cb29fde0876e4186f8301e1dd43fd0ecfe113883c5ef23a7f52af1c0b"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/output.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/output.wgsl",
+      "bytes": 2351,
+      "sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a.gz",
+      "retained_sha256": "fce19ce36bfea4e2e2536825afede2a42716804441220f00e034a52876129923"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/resource_error.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/resource_error.rs",
+      "bytes": 2756,
+      "sha256": "0232bb0a38185330e43ad262046477696f5e02122ce6a18b088e88dbab7cc040",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/0232bb0a38185330e43ad262046477696f5e02122ce6a18b088e88dbab7cc040.gz",
+      "retained_sha256": "22fd90a5089cdc2c40e266b92a956096a2a96a8b36474631ae7f7bf609a6236e"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/shader/native.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/shader/native.rs",
+      "bytes": 5148,
+      "sha256": "17a8f454d1c58292331d668905ec84a40ca83a2809dd01f30b2dfeb7292897ec",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/17a8f454d1c58292331d668905ec84a40ca83a2809dd01f30b2dfeb7292897ec.gz",
+      "retained_sha256": "662722e54ff9ece40a733ac34a8ce65eaa1114febd107bd7b5162abeeb717803"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/shadows/caster.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/shadows/caster.wgsl",
+      "bytes": 846,
+      "sha256": "56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/56d35a05cc78da000b7198eaa53d66e2febd929c36a6b3f3e8a53198f124de7f.gz",
+      "retained_sha256": "9e9ee7ac102e7f964bf1fc6f29dcbd7136264e94d82e377a70c1fa7c10bdcb22"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/shadows/shade.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/shadows/shade.wgsl",
+      "bytes": 1495,
+      "sha256": "3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/3f5d22bcef70b70fb7fe089c9940d5a29e6296984f65a718fe96c7f8d22dd8d4.gz",
+      "retained_sha256": "a6071cff09dfec6168b529aea614013e84bdc29fae783834174f65bb37f9fe5a"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/sprites/sprite.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/sprites/sprite.wgsl",
+      "bytes": 2405,
+      "sha256": "1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/1b8b9125541761ed6b54cbac79dd8abf312a1c0f1183a18ad8c94b4e818f774c.gz",
+      "retained_sha256": "03659217544439f4cb28a7f1de76c36fbc4b17c43221872869575445fdba5f6d"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/temporal/copy.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/temporal/copy.wgsl",
+      "bytes": 325,
+      "sha256": "50f2bbba9102f7f89de524356b7e6e4b9b1e4c90ecace7a5b1c16ee599ee4bdf",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/50f2bbba9102f7f89de524356b7e6e4b9b1e4c90ecace7a5b1c16ee599ee4bdf.gz",
+      "retained_sha256": "4eb5e8d89205e67a5259334b9d381ad38812807b8349509f0d54cf3ec26a8243"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/temporal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/temporal/mod.rs",
+      "bytes": 1078,
+      "sha256": "a75c85dd72b7387ab14026172b4e0567f06055abe768a0a492beeed300816d40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/a75c85dd72b7387ab14026172b4e0567f06055abe768a0a492beeed300816d40.gz",
+      "retained_sha256": "226fa77c284f8c268e23abde333c828dd5751bfd271e36f18f1afbf65fcacc1a"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/temporal/resolve.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/temporal/resolve.wgsl",
+      "bytes": 3130,
+      "sha256": "ae65b1f2647dcce5a73fadca4b7d68c6815978af3fbb841510ab3aa555f1cfec",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/ae65b1f2647dcce5a73fadca4b7d68c6815978af3fbb841510ab3aa555f1cfec.gz",
+      "retained_sha256": "5256d74ce8e6621a6fe3ace5b988844da1a4487106cbdf840032cf97a66269d7"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/temporal/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/temporal/system.rs",
+      "bytes": 10322,
+      "sha256": "e675e34d8d36c8c6a4efca3b8b91bc02f1d9cee31b89635e35a51929a74effa6",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e675e34d8d36c8c6a4efca3b8b91bc02f1d9cee31b89635e35a51929a74effa6.gz",
+      "retained_sha256": "1ae630fb3ea03fdd2550efe6c3ee0101852269d333493e6dc7c65ad9b0ce6e0e"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/temporal_shader/cooked/host.rs",
+      "bytes": 3745,
+      "sha256": "df0606b4018c47bb06de0826542fef2f009d1d2e107d47de153a87b949f63edd",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/df0606b4018c47bb06de0826542fef2f009d1d2e107d47de153a87b949f63edd.gz",
+      "retained_sha256": "265803f62620587c9e36c99e3bea92bbe40327317922fd2a4c0d586789cb88e5"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/temporal_shader/cooked.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/temporal_shader/cooked.rs",
+      "bytes": 4960,
+      "sha256": "e59d1eec66f609de9a35e9b1301d46f3544d6efdf734d648e1528f320c6c6fea",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e59d1eec66f609de9a35e9b1301d46f3544d6efdf734d648e1528f320c6c6fea.gz",
+      "retained_sha256": "b16091ae48de8efd2528876b460c45308ea1149f1d02719c0c3a8ae42b975ed7"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/temporal_shader.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/temporal_shader.rs",
+      "bytes": 2004,
+      "sha256": "533a88faf7af05145e5da46f08d7414e5f5a3b4073e79cf66a3caf63740c4ba1",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/533a88faf7af05145e5da46f08d7414e5f5a3b4073e79cf66a3caf63740c4ba1.gz",
+      "retained_sha256": "1be10c40d07e00bde3e4e06760b365a8adfeb2f6f64a8b5057edfd2e67e03602"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/text/text.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/text/text.wgsl",
+      "bytes": 2392,
+      "sha256": "e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e6925b0518fb941794c1f929a3a4f0cd752b7a00608448c6b7b292b63f3dae00.gz",
+      "retained_sha256": "87e1397e7c6c26b08d292bdf3b2fb344bd6072ddcdc616670824bceebf602e1b"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/tone_map.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/tone_map.wgsl",
+      "bytes": 4748,
+      "sha256": "c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/c5479279c8ebe1334cb672e0f3d5638604ba0c0b7c415d13d30e08aa62b79307.gz",
+      "retained_sha256": "ba7d860c48cff2046bc8008c37ed91bb7354da6d8f591a2ab21257f4d8b340aa"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/ui/ui.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/ui/ui.wgsl",
+      "bytes": 5172,
+      "sha256": "f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/f67e4982b038833e87ed84861d5be3018f5f0d6587ff8da6faf8bfd840c33c39.gz",
+      "retained_sha256": "1a98a71b018cd3a2f0ef05117aa314bac5a016594f79655ec2624e44e9545eb7"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/upscaling/common.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/upscaling/common.wgsl",
+      "bytes": 1622,
+      "sha256": "7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7a1041707465239b046b31ae9d86e87f4372635056622eeacb8a3142e105344a.gz",
+      "retained_sha256": "c2c8c09f70fbbfd6fb93a36db080f7017e90768e7615a2a2287c02cff4e16ff2"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/upscaling/composite.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/upscaling/composite.wgsl",
+      "bytes": 820,
+      "sha256": "4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/4be7f263090c163350cd5e54541330a6aedd2e32c5619532c5ca9d2fe6f43845.gz",
+      "retained_sha256": "e0832ad21b1e083244be5c1f784e9252f10b58247d0beace1d842d3cbe9f62d7"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/upscaling/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/upscaling/mod.rs",
+      "bytes": 1044,
+      "sha256": "9ddf6ae3c34f4c18a983919fda629738ea9296a18973949ab618500798541673",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/9ddf6ae3c34f4c18a983919fda629738ea9296a18973949ab618500798541673.gz",
+      "retained_sha256": "bb5f8b97ab268e7113dfc0461bf2fecdad73c36785ec19b3f76ecc1fcb02caca"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/upscaling/resolve.wgsl",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/upscaling/resolve.wgsl",
+      "bytes": 3589,
+      "sha256": "a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/a8e646701cb7e5d24476a2ecc49a76b2f7d77b3646ddfe469093586316337d34.gz",
+      "retained_sha256": "a17fe12e45fa34ac8b764a44843dd39bced413af92a9c8156254a1fa9c4cb55a"
+    },
+    {
+      "name": "source-001/files/crates/incant_render/src/upscaling/system.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render/src/upscaling/system.rs",
+      "bytes": 10715,
+      "sha256": "2f3aeadb9f93a0dfbd372a5c3faba4445fc5900066e5139d6045e0ce3dcfe796",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/2f3aeadb9f93a0dfbd372a5c3faba4445fc5900066e5139d6045e0ce3dcfe796.gz",
+      "retained_sha256": "34bf233bd5b15cb4588809a758a5df957295ab1f9edea3d7bfd6d4174f133267"
+    },
+    {
+      "name": "source-001/files/crates/incant_render_gpu_host/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_render_gpu_host/Cargo.toml",
+      "bytes": 2066,
+      "sha256": "6bb55f6f390f3b9c40088619cf2a82d107ac446c5914603e17a7093e3c8d0fb7",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/6bb55f6f390f3b9c40088619cf2a82d107ac446c5914603e17a7093e3c8d0fb7.gz",
+      "retained_sha256": "c84fee40ea92e0dc0fa13364fcbcf78362f6f9483eb260e02f008f71832c0f2b"
+    },
+    {
+      "name": "source-001/files/crates/incant_shader_cook/Cargo.toml",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_shader_cook/Cargo.toml",
+      "bytes": 371,
+      "sha256": "e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e12b8b89f3b2d344cfa0dc7def97c2262d23d76b0ffd4688aa75f5d5ed656270.gz",
+      "retained_sha256": "52803d24b60f802ddbd4638c56c1630ed4c0ea192a30e3117315bd4affeeb893"
+    },
+    {
+      "name": "source-001/files/crates/incant_shader_cook/src/lib.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_shader_cook/src/lib.rs",
+      "bytes": 3381,
+      "sha256": "7564bd268f9ee9cbf1d7a3834b19c58c89270415906ce25bca716fa7c8a4acc3",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/7564bd268f9ee9cbf1d7a3834b19c58c89270415906ce25bca716fa7c8a4acc3.gz",
+      "retained_sha256": "2315d190315a01a74285d5dfec563c78d98be5d15ce7fa23375a9483d1ff1f8b"
+    },
+    {
+      "name": "source-001/files/crates/incant_shader_cook/src/temporal/contract.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_shader_cook/src/temporal/contract.rs",
+      "bytes": 10874,
+      "sha256": "aa11644b2a0f091e3095d4a8e41adea78df89c48a7e9d9d23fd4ef7bb5c3e8b1",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/aa11644b2a0f091e3095d4a8e41adea78df89c48a7e9d9d23fd4ef7bb5c3e8b1.gz",
+      "retained_sha256": "6237c8a47ac12f57719b524de6a7b6e3012acc50dcbd920ad61bc60dca3553fb"
+    },
+    {
+      "name": "source-001/files/crates/incant_shader_cook/src/temporal/emit.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_shader_cook/src/temporal/emit.rs",
+      "bytes": 8518,
+      "sha256": "4f91a35a4ca197e4e780e069416db8ecdc4b53ff9d7843ad64154c64cf7da5ad",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/4f91a35a4ca197e4e780e069416db8ecdc4b53ff9d7843ad64154c64cf7da5ad.gz",
+      "retained_sha256": "f1b7efdf2cdd82272130235dce78ff858b1ff7d3daae2e854bb8ea828c8c0f29"
+    },
+    {
+      "name": "source-001/files/crates/incant_shader_cook/src/temporal/mod.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_shader_cook/src/temporal/mod.rs",
+      "bytes": 6115,
+      "sha256": "42cc25f403379a829d4f1519f917f201b032462ddb76fb23cafb4df2f3fc0b50",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/42cc25f403379a829d4f1519f917f201b032462ddb76fb23cafb4df2f3fc0b50.gz",
+      "retained_sha256": "01b395f4b687a1142f3f1e75ad89ac6fcb14b41299a7ea8ea4e749325400aff2"
+    },
+    {
+      "name": "source-001/files/crates/incant_shader_cook/tests/temporal.rs",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/files/crates/incant_shader_cook/tests/temporal.rs",
+      "bytes": 4904,
+      "sha256": "585f235687e16cf4647aa82647a5a23fa0717cef81f890ef7a4fb4f84e31e2fe",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/585f235687e16cf4647aa82647a5a23fa0717cef81f890ef7a4fb4f84e31e2fe.gz",
+      "retained_sha256": "105446842ddb2a1fc51b0080ca9e8acc671dde6aaefc393ffab655b1ea2fec99"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/freeze.json",
+      "bytes": 8085,
+      "sha256": "3b408b86a821cd4f94e5d73a330057a7b35a06e86ff0f0758be823520d8669f7",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/3b408b86a821cd4f94e5d73a330057a7b35a06e86ff0f0758be823520d8669f7.gz",
+      "retained_sha256": "264d6dfcb7acb6c3ec95ff1dbc99dfc09128fd27e5db7a1b7f887daacdbd8c20"
+    },
+    {
+      "name": "source-001/tracked.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-001/tracked.patch",
+      "bytes": 34074,
+      "sha256": "8b5a6fa4d51c9152f8443f8bb3c6fe7d872eabf7b9018656df70351a75e85f01",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/8b5a6fa4d51c9152f8443f8bb3c6fe7d872eabf7b9018656df70351a75e85f01.gz",
+      "retained_sha256": "35cb0849ee49141bd7eba14d1f35446e96f70fe441c48024eac4514035842919"
+    },
+    {
+      "name": "source-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/source-review.json",
+      "bytes": 16066,
+      "sha256": "71d9f270a75590d0946abfb8f3183cd3f7a4cfd0a3afc40e2e767c18363ca7b2",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/71d9f270a75590d0946abfb8f3183cd3f7a4cfd0a3afc40e2e767c18363ca7b2.gz",
+      "retained_sha256": "91f669196433d9aacb40932d118d00ec214b1ff950455dddcb4416ec74594b50"
+    },
+    {
+      "name": "terminal-audit.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/terminal-audit.json",
+      "bytes": 876,
+      "sha256": "dc2c47efe1bd20eb4f6e3651b6f66e633392456603c6afbb9c8baee6a5fc68f8",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/dc2c47efe1bd20eb4f6e3651b6f66e633392456603c6afbb9c8baee6a5fc68f8.gz",
+      "retained_sha256": "042e98ea1bcf4116ca199e2f32dfe0984d070d560bffd5fd8ff8a8d645a81be3"
+    },
+    {
+      "name": "tool-availability.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/tool-availability.json",
+      "bytes": 178,
+      "sha256": "ff387476d59bc57cb263df4a7b8eaabd51c2ce2d7fce269eb21a8e8f3cd21d40",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/ff387476d59bc57cb263df4a7b8eaabd51c2ce2d7fce269eb21a8e8f3cd21d40.gz",
+      "retained_sha256": "ba4b8323768ccb0f81c97cd0b03e65f3f6f2f844e9ae6b091ac9abaff1992522"
+    },
+    {
+      "name": "web-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/web-001.json",
+      "bytes": 1850,
+      "sha256": "e394c7a7f0df0d658a59b4934be08fd23905e11b1f4280e493ba793150c4e38a",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/e394c7a7f0df0d658a59b4934be08fd23905e11b1f4280e493ba793150c4e38a.gz",
+      "retained_sha256": "e930b3c4e17e2c64de78eee97168e3747ad284786324437e12e97bf5321390b8"
+    },
+    {
+      "name": "web-001.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/web-001.log",
+      "bytes": 1831,
+      "sha256": "309687bfa3948f108c3c37a8165f0cd1ddbe3adebf40bbfb89fad16d05e511c5",
+      "retained": "docs/spikes/evidence/cooked-temporal-programs/309687bfa3948f108c3c37a8165f0cd1ddbe3adebf40bbfb89fad16d05e511c5.gz",
+      "retained_sha256": "95f79ed6fcf8c7139b9b6dad4ef9a0c7ddf3d9ae4a73668de2639b631dabcb4d"
+    }
+  ],
+  "record_count": 273,
+  "payload_count": 150,
+  "frozen_test_binaries": [
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-853b0ccb1fded071",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/frozen-binaries/complete-cpu-001-incant_render-853b0ccb1fded071",
+      "bytes": 32289296,
+      "sha256": "6281e7af2bc89b2c62d54e10f0f2512d05d05e13796d610f9742f352d702d13d",
+      "command_receipt": "complete-cpu-001.json"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render_gpu_host-4c504a36cd8a5e82",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/frozen-binaries/complete-cpu-001-incant_render_gpu_host-4c504a36cd8a5e82",
+      "bytes": 1075272,
+      "sha256": "93a785137da5a35c951e5338fc6983946259e5313653b3294bf17c5625b7af6c",
+      "command_receipt": "complete-cpu-001.json"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render-90f6082e9b891519",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/frozen-binaries/default-cpu-001-incant_render-90f6082e9b891519",
+      "bytes": 31776688,
+      "sha256": "40d47762f5b6ab764032d8543c3e2b21fbd6211983562a0403ed3ed34c525bff",
+      "command_receipt": "default-cpu-001.json"
+    },
+    {
+      "original": "/Users/andreyyurlov/.codex/incant-gpu-timestamps-target/ci/deps/incant_render_gpu_host-0795fd9ccf521965",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/cooked-temporal-001/frozen-binaries/default-cpu-001-incant_render_gpu_host-0795fd9ccf521965",
+      "bytes": 1075272,
+      "sha256": "c46fa6f9ecd96e41feb501b4ea5da60df30b4d1e65195ab5b82a3209f34f4a8b",
+      "command_receipt": "default-cpu-001.json"
+    }
+  ],
+  "independent_source_review": {
+    "sha256": "71d9f270a75590d0946abfb8f3183cd3f7a4cfd0a3afc40e2e767c18363ca7b2",
+    "record": "source-review.json",
+    "status": "accepted"
+  },
+  "independent_final_review": "pending",
+  "limits": [
+    "No GPU, pixel, appearance or device/performance execution.",
+    "HLSL translated only; DXC unavailable. MSL undergoes runtime driver compilation.",
+    "Current artifact math remains a337c86d. Subsequent portable temporal edge/overlay correction requires explicit union, new source identities and recook.",
+    "Default and web source bytes preserved; other renderer effects/MetalFX and CI GPU commands are unchanged."
+  ]
+}

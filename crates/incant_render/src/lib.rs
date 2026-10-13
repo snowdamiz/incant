@@ -32,6 +32,7 @@ mod shadows;
 mod sprites;
 mod studio;
 pub mod temporal;
+mod temporal_shader;
 #[cfg(test)]
 #[path = "../tests/support/mod.rs"]
 mod test_support;

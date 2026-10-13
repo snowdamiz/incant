@@ -5,7 +5,7 @@
 mod oracle;
 mod owner;
 mod plan;
-mod system;
+pub(crate) mod system;
 mod targets;
 #[cfg(test)]
 mod tests;

@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+cooked-temporal = ["render-gpu", "incant_render/cooked-temporal", "incant_render_gpu_host/cooked-temporal"]
 profile = ["incant_profile/summary", "incant_game_runtime/profile", "incant_script/profile", "incant_runtime/profile"]
 profile-tracy = ["profile", "incant_profile/tracy"]
 default = ["physics-deterministic"]

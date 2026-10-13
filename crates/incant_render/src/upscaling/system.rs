@@ -18,7 +18,7 @@ pub(crate) struct System {
     resolve: wgpu::RenderPipeline,
     composite: wgpu::RenderPipeline,
 }
-fn layout(d: &wgpu::Device, count: u32) -> wgpu::BindGroupLayout {
+pub(crate) fn layout_entries(count: u32) -> Vec<wgpu::BindGroupLayoutEntry> {
     let mut entries = vec![wgpu::BindGroupLayoutEntry {
         binding: 0,
         visibility: wgpu::ShaderStages::FRAGMENT,
@@ -43,22 +43,22 @@ fn layout(d: &wgpu::Device, count: u32) -> wgpu::BindGroupLayout {
         },
         count: None,
     }));
+    entries
+}
+fn layout(d: &wgpu::Device, count: u32) -> wgpu::BindGroupLayout {
     d.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
         label: Some("Temporal upscaling inputs"),
-        entries: &entries,
+        entries: &layout_entries(count),
     })
 }
 fn pipeline(
     d: &wgpu::Device,
     l: &wgpu::BindGroupLayout,
-    body: &str,
-    entry: &str,
+    backend: wgpu::Backend,
+    kind: crate::temporal_shader::Kind,
     depth: bool,
-) -> wgpu::RenderPipeline {
-    let module = d.create_shader_module(wgpu::ShaderModuleDescriptor {
-        label: Some("Output temporal reconstruction"),
-        source: wgpu::ShaderSource::Wgsl(format!("{}\n{body}", include_str!("common.wgsl")).into()),
-    });
+) -> Result<wgpu::RenderPipeline> {
+    let shader = crate::temporal_shader::stages(d, backend, kind)?;
     let layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Output temporal reconstruction"),
         bind_group_layouts: &[Some(l)],
@@ -75,12 +75,12 @@ fn pipeline(
     if depth {
         targets.push(color(wgpu::TextureFormat::R32Float));
     }
-    d.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+    Ok(d.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
         label: Some("Output temporal reconstruction"),
         layout: Some(&layout),
         vertex: wgpu::VertexState {
-            module: &module,
-            entry_point: Some("vertex"),
+            module: &shader.vertex,
+            entry_point: Some(shader.vertex_entry),
             compilation_options: Default::default(),
             buffers: &[],
         },
@@ -88,14 +88,14 @@ fn pipeline(
         depth_stencil: None,
         multisample: Default::default(),
         fragment: Some(wgpu::FragmentState {
-            module: &module,
-            entry_point: Some(entry),
+            module: &shader.fragment,
+            entry_point: Some(shader.fragment_entry),
             compilation_options: Default::default(),
             targets: &targets,
         }),
         multiview_mask: None,
         cache: None,
-    })
+    }))
 }
 fn group(
     d: &wgpu::Device,
@@ -123,27 +123,27 @@ fn group(
     })
 }
 impl System {
-    fn new(d: &wgpu::Device) -> Self {
+    fn new(d: &wgpu::Device, backend: wgpu::Backend) -> Result<Self> {
         let resolve_layout = layout(d, 5);
         let composite_layout = layout(d, 2);
-        Self {
+        Ok(Self {
             resolve: pipeline(
                 d,
                 &resolve_layout,
-                include_str!("resolve.wgsl"),
-                "resolve",
+                backend,
+                crate::temporal_shader::Kind::Upscale,
                 true,
-            ),
+            )?,
             composite: pipeline(
                 d,
                 &composite_layout,
-                include_str!("composite.wgsl"),
-                "composite",
+                backend,
+                crate::temporal_shader::Kind::Composite,
                 false,
-            ),
+            )?,
             resolve_layout,
             composite_layout,
-        }
+        })
     }
     pub fn prepare(
         &self,
@@ -300,13 +300,13 @@ impl Renderer {
             return Err(UpscaleError::Format.into());
         }
         let scope = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let candidate = System::new(&self.device);
+        let candidate = System::new(&self.device, self.adapter.get_info().backend);
         if let Some(error) = scope.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(crate::ResourceError::Preparation(error).into());
         }
-        self.upscaling = Some(candidate);
+        self.upscaling = Some(candidate?);
         Ok(())
     }
 }

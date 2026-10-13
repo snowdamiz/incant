@@ -32,78 +32,93 @@ fn texture(binding: u32, depth: bool) -> wgpu::BindGroupLayoutEntry {
         count: None,
     }
 }
+pub(crate) fn layout_entries(copy: bool) -> Vec<wgpu::BindGroupLayoutEntry> {
+    if copy {
+        return vec![texture(0, false)];
+    }
+    vec![
+        wgpu::BindGroupLayoutEntry {
+            binding: 0,
+            visibility: wgpu::ShaderStages::FRAGMENT,
+            ty: wgpu::BindingType::Buffer {
+                ty: wgpu::BufferBindingType::Uniform,
+                has_dynamic_offset: false,
+                min_binding_size: wgpu::BufferSize::new(64),
+            },
+            count: None,
+        },
+        texture(1, false),
+        texture(2, false),
+        texture(3, true),
+        texture(4, false),
+    ]
+}
 fn pipeline(
     device: &wgpu::Device,
     layout: &wgpu::BindGroupLayout,
-    source: &'static str,
-    entry: &str,
-) -> wgpu::RenderPipeline {
-    let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
-        label: Some("Opaque temporal HDR"),
-        source: wgpu::ShaderSource::Wgsl(source.into()),
-    });
+    backend: wgpu::Backend,
+    kind: crate::temporal_shader::Kind,
+) -> Result<wgpu::RenderPipeline> {
+    let shader = crate::temporal_shader::stages(device, backend, kind)?;
     let layout = device.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
         label: Some("Opaque temporal HDR"),
         bind_group_layouts: &[Some(layout)],
         immediate_size: 0,
     });
-    device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
-        label: Some("Opaque temporal HDR"),
-        layout: Some(&layout),
-        vertex: wgpu::VertexState {
-            module: &shader,
-            entry_point: Some("vertex"),
-            compilation_options: Default::default(),
-            buffers: &[],
-        },
-        primitive: Default::default(),
-        depth_stencil: None,
-        multisample: Default::default(),
-        fragment: Some(wgpu::FragmentState {
-            module: &shader,
-            entry_point: Some(entry),
-            compilation_options: Default::default(),
-            targets: &[Some(wgpu::ColorTargetState {
-                format: crate::frame::HDR_FORMAT,
-                blend: None,
-                write_mask: wgpu::ColorWrites::ALL,
-            })],
+    Ok(
+        device.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+            label: Some("Opaque temporal HDR"),
+            layout: Some(&layout),
+            vertex: wgpu::VertexState {
+                module: &shader.vertex,
+                entry_point: Some(shader.vertex_entry),
+                compilation_options: Default::default(),
+                buffers: &[],
+            },
+            primitive: Default::default(),
+            depth_stencil: None,
+            multisample: Default::default(),
+            fragment: Some(wgpu::FragmentState {
+                module: &shader.fragment,
+                entry_point: Some(shader.fragment_entry),
+                compilation_options: Default::default(),
+                targets: &[Some(wgpu::ColorTargetState {
+                    format: crate::frame::HDR_FORMAT,
+                    blend: None,
+                    write_mask: wgpu::ColorWrites::ALL,
+                })],
+            }),
+            multiview_mask: None,
+            cache: None,
         }),
-        multiview_mask: None,
-        cache: None,
-    })
+    )
 }
 impl TemporalSystem {
-    fn new(device: &wgpu::Device) -> Self {
+    fn new(device: &wgpu::Device, backend: wgpu::Backend) -> Result<Self> {
         let layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Temporal resolve"),
-            entries: &[
-                wgpu::BindGroupLayoutEntry {
-                    binding: 0,
-                    visibility: wgpu::ShaderStages::FRAGMENT,
-                    ty: wgpu::BindingType::Buffer {
-                        ty: wgpu::BufferBindingType::Uniform,
-                        has_dynamic_offset: false,
-                        min_binding_size: wgpu::BufferSize::new(64),
-                    },
-                    count: None,
-                },
-                texture(1, false),
-                texture(2, false),
-                texture(3, true),
-                texture(4, false),
-            ],
+            entries: &layout_entries(false),
         });
         let copy_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("Temporal copy"),
-            entries: &[texture(0, false)],
+            entries: &layout_entries(true),
         });
-        Self {
-            resolve: pipeline(device, &layout, include_str!("resolve.wgsl"), "resolve"),
-            copy: pipeline(device, &copy_layout, include_str!("copy.wgsl"), "copy"),
+        Ok(Self {
+            resolve: pipeline(
+                device,
+                &layout,
+                backend,
+                crate::temporal_shader::Kind::Resolve,
+            )?,
+            copy: pipeline(
+                device,
+                &copy_layout,
+                backend,
+                crate::temporal_shader::Kind::Copy,
+            )?,
             layout,
             copy_layout,
-        }
+        })
     }
     pub fn prepare(
         &self,
@@ -257,16 +272,18 @@ impl Renderer {
         {
             return Err(TemporalError::Format.into());
         }
-        let grid_source = crate::lighting::temporal_grid_source()?;
         let scope = self.device.push_error_scope(wgpu::ErrorFilter::Validation);
-        let candidate = TemporalSystem::new(&self.device);
-        let grid = self.lighting.temporal_pipeline(&self.device, grid_source);
+        let candidate = TemporalSystem::new(&self.device, self.adapter.get_info().backend);
+        let grid = self
+            .lighting
+            .temporal_pipeline(&self.device, self.adapter.get_info().backend);
         if let Some(error) = scope.pop().await {
             #[cfg(target_arch = "wasm32")]
             let error = error.into();
             return Err(crate::ResourceError::Preparation(error).into());
         }
-        self.lighting.accept_temporal(grid);
+        let candidate = candidate?;
+        self.lighting.accept_temporal(grid?);
         self.temporal = Some(candidate);
         Ok(())
     }

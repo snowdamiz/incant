@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+# Complete fixed native motion/temporal/upscale route; no mixed builtin fallback.
+cooked-temporal = ["cooked-materials", "cooked-sprites", "cooked-ui", "cooked-text", "cooked-clusters"]
 default = ["physics-deterministic"]
 
 # CPU-verified integration; actual backend/appearance acceptance is still pending.
