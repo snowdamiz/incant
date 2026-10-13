@@ -1,0 +1,77 @@
+{
+ "grant_sha256": "992ddf0b84545384008269951655b86e0dcb25e933e7acef9c9b0d7c709acf69",
+ "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
+ "pngs": [
+  {
+   "name": "stationary-activity.png",
+   "sha256": "e6a27c2e762be0ede173f7cd2105fed1ec61cbe232346a1b1ac93891e575fad0",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/stationary/stationary-activity.png"
+  },
+  {
+   "name": "stationary-off.png",
+   "sha256": "2485512777e509896851e616d78d01f6742da7bbabd19a97915682650e738d2c",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/stationary/stationary-off.png"
+  },
+  {
+   "name": "stationary-on-f16.png",
+   "sha256": "ec7627a3779259fb7df3675eeb13ad52bb423ac9312d2febba27d6d0869e954d",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/stationary/stationary-on-f16.png"
+  },
+  {
+   "name": "motion-object-off-f8.png",
+   "sha256": "212ac1a0e0af830729f9113bc797d063b0b5a2fbfd6194d29ae8a4d9281f9757",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/motion/motion-object-off-f8.png"
+  },
+  {
+   "name": "motion-object-on-f8.png",
+   "sha256": "f476496003bdc03110ea11fcd66cc9223beeee31431f8be58fd99bdb18696cdc",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/motion/motion-object-on-f8.png"
+  },
+  {
+   "name": "motion-pan-off-f6.png",
+   "sha256": "30aa3e196bca8145b45d28d7da2e85ad52e3926c23bb5ca884a29cae1d00154b",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/motion/motion-pan-off-f6.png"
+  },
+  {
+   "name": "motion-pan-on-f6.png",
+   "sha256": "e7e19762b2f968e1a3701b3bc5b0c75eebabed13653661d945d96bb6b355e441",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/motion/motion-pan-on-f6.png"
+  },
+  {
+   "name": "excluded-activity.png",
+   "sha256": "4b3736b0d811aab9165cee77afd2ac6919d1fa644b1a22ddc89a9442aa209a8b",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/excluded/excluded-activity.png"
+  },
+  {
+   "name": "excluded-off.png",
+   "sha256": "d1592ae5ed1f392e8b3972d61b4660ac74a4a0545b221a8c59115875aa203527",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/excluded/excluded-off.png"
+  },
+  {
+   "name": "excluded-on-f8.png",
+   "sha256": "210e52012d57dd8fc9c6a314588e598843e79fb7433f624b52b1522557743291",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/excluded/excluded-on-f8.png"
+  },
+  {
+   "name": "transition-cut-f7.png",
+   "sha256": "0324c688cdd69932f209bb609282ff1ca5f033e95be1ad8c2031822bf999617f",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/transitions/transition-cut-f7.png"
+  },
+  {
+   "name": "transition-drs-f9.png",
+   "sha256": "bbb5fafcc641424e3dd3d9f31452f38f31a199b9ca528437743f08e69c32dcaf",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/transitions/transition-drs-f9.png"
+  },
+  {
+   "name": "skinned-off-f6.png",
+   "sha256": "9dc53d04deebc66b38a873ec680f39e89ce31afcbe59cefaafa0d498ec0b0985",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/skinned/skinned-off-f6.png"
+  },
+  {
+   "name": "skinned-on-f6.png",
+   "sha256": "6c526c6f4d02e4ed97734674b05b4f61f7239c2e61ba7c5ce668c36e707be896",
+   "source": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/captures/skinned/skinned-on-f6.png"
+  }
+ ],
+ "recorded": "2026-10-13T07:14:11.583095+00:00"
+}

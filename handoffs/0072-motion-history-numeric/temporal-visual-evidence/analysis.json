@@ -1,0 +1,1267 @@
+{
+ "recorded": "2026-10-13T07:10:01.191215+00:00",
+ "grant_sha256": "992ddf0b84545384008269951655b86e0dcb25e933e7acef9c9b0d7c709acf69",
+ "ledger_sha256": "c66b02e6805b90e53266524b426f28d60c6efe6e543bea268ea34b5dcbead819",
+ "budget": {
+  "frames": 70,
+  "ui_submissions": 9,
+  "pngs": 14
+ },
+ "debits": 7,
+ "stopped": null,
+ "gpu_released": true,
+ "problems": [],
+ "suites": {
+  "lib": {
+   "failed": [],
+   "libtest": {
+    "running": [
+     38
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 38,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 103
+     }
+    ],
+    "failures": []
+   }
+  },
+  "model_gpu": {
+   "failed": [],
+   "libtest": {
+    "running": [
+     50
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 50,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 1
+     }
+    ],
+    "failures": []
+   }
+  },
+  "timestamp_backend_probe": {
+   "failed": [],
+   "libtest": {
+    "running": [
+     1
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 0
+     }
+    ],
+    "failures": []
+   }
+  },
+  "game": {
+   "failed": [],
+   "libtest": {
+    "running": [
+     5
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 1
+     }
+    ],
+    "failures": []
+   }
+  },
+  "ui": {
+   "failed": [],
+   "libtest": {
+    "running": [
+     2
+    ],
+    "results": [
+     {
+      "status": "ok",
+      "passed": 2,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered_out": 1
+     }
+    ],
+    "failures": []
+   }
+  }
+ },
+ "cases": {
+  "probe": {
+   "failed": [],
+   "outcome": "pass",
+   "checks": {
+    "invalid_configs_rejected": true,
+    "review_config_validates": true,
+    "second_enable_is_idempotent": true,
+    "temporal_pipelines_enabled": true
+   },
+   "frames_rendered": 0,
+   "ui_submissions": 0,
+   "pngs": {},
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "observations": null
+  },
+  "stationary": {
+   "failed": [],
+   "outcome": "pass",
+   "checks": {
+    "frames_match_plan": true,
+    "one_uninterrupted_run_over_two_cycles": true,
+    "reference_has_no_temporal_state": true
+   },
+   "frames_rendered": 17,
+   "ui_submissions": 0,
+   "pngs": {
+    "stationary-activity.png": "e6a27c2e762be0ede173f7cd2105fed1ec61cbe232346a1b1ac93891e575fad0",
+    "stationary-off.png": "2485512777e509896851e616d78d01f6742da7bbabd19a97915682650e738d2c",
+    "stationary-on-f16.png": "ec7627a3779259fb7df3675eeb13ad52bb423ac9312d2febba27d6d0869e954d"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "observations": {
+    "activity_map": "stationary-activity.png: frames 9-16, max consecutive change x4",
+    "consecutive": [
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 12202,
+        "max_delta": 169,
+        "mean_delta": 24.932706033151746,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6833,
+        "max_delta": 123,
+        "mean_delta": 0.18787455611033874,
+        "pixels": 484073
+       }
+      },
+      "from": "on-01",
+      "to": "on-02"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 13034,
+        "max_delta": 169,
+        "mean_delta": 23.457540711393364,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6597,
+        "max_delta": 123,
+        "mean_delta": 0.24608891634113036,
+        "pixels": 484073
+       }
+      },
+      "from": "on-02",
+      "to": "on-03"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 13497,
+        "max_delta": 169,
+        "mean_delta": 22.61423951991144,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 5749,
+        "max_delta": 123,
+        "mean_delta": 0.18140239178801545,
+        "pixels": 484073
+       }
+      },
+      "from": "on-03",
+      "to": "on-04"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 7389,
+        "max_delta": 169,
+        "mean_delta": 13.270399394062983,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 2807,
+        "max_delta": 103,
+        "mean_delta": 0.10494284952889336,
+        "pixels": 484073
+       }
+      },
+      "from": "on-04",
+      "to": "on-05"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 13955,
+        "max_delta": 169,
+        "mean_delta": 23.708363678736855,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6772,
+        "max_delta": 123,
+        "mean_delta": 0.19467311748434638,
+        "pixels": 484073
+       }
+      },
+      "from": "on-05",
+      "to": "on-06"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14421,
+        "max_delta": 169,
+        "mean_delta": 23.20042532117575,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6772,
+        "max_delta": 123,
+        "mean_delta": 0.2236708099811392,
+        "pixels": 484073
+       }
+      },
+      "from": "on-06",
+      "to": "on-07"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14340,
+        "max_delta": 169,
+        "mean_delta": 22.796428467387187,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 5709,
+        "max_delta": 123,
+        "mean_delta": 0.18747172430604475,
+        "pixels": 484073
+       }
+      },
+      "from": "on-07",
+      "to": "on-08"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 7534,
+        "max_delta": 169,
+        "mean_delta": 13.674891484837008,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 2706,
+        "max_delta": 103,
+        "mean_delta": 0.10755815755061736,
+        "pixels": 484073
+       }
+      },
+      "from": "on-08",
+      "to": "on-09"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14606,
+        "max_delta": 169,
+        "mean_delta": 24.15148425437702,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6634,
+        "max_delta": 123,
+        "mean_delta": 0.18880210216227716,
+        "pixels": 484073
+       }
+      },
+      "from": "on-09",
+      "to": "on-10"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14312,
+        "max_delta": 169,
+        "mean_delta": 23.060156727940104,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6963,
+        "max_delta": 123,
+        "mean_delta": 0.22721572985892624,
+        "pixels": 484073
+       }
+      },
+      "from": "on-10",
+      "to": "on-11"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 13952,
+        "max_delta": 169,
+        "mean_delta": 22.359367261922102,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 5712,
+        "max_delta": 123,
+        "mean_delta": 0.18251172860291734,
+        "pixels": 484073
+       }
+      },
+      "from": "on-11",
+      "to": "on-12"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 7389,
+        "max_delta": 169,
+        "mean_delta": 13.260844233402278,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 2729,
+        "max_delta": 103,
+        "mean_delta": 0.10677315198327525,
+        "pixels": 484073
+       }
+      },
+      "from": "on-12",
+      "to": "on-13"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14301,
+        "max_delta": 169,
+        "mean_delta": 23.62463949660617,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6685,
+        "max_delta": 123,
+        "mean_delta": 0.18871327258492004,
+        "pixels": 484073
+       }
+      },
+      "from": "on-13",
+      "to": "on-14"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14514,
+        "max_delta": 169,
+        "mean_delta": 23.066012177003525,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 7021,
+        "max_delta": 123,
+        "mean_delta": 0.22554862593038652,
+        "pixels": 484073
+       }
+      },
+      "from": "on-14",
+      "to": "on-15"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14466,
+        "max_delta": 169,
+        "mean_delta": 22.731756343403152,
+        "pixels": 34327
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 5791,
+        "max_delta": 123,
+        "mean_delta": 0.18437921553154174,
+        "pixels": 484073
+       }
+      },
+      "from": "on-15",
+      "to": "on-16"
+     }
+    ],
+    "f01_vs_off": {
+     "edge": {
+      "changed_over_threshold": 6192,
+      "max_delta": 169,
+      "mean_delta": 13.873015410609725,
+      "pixels": 34327
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 1863,
+      "max_delta": 123,
+      "mean_delta": 0.09816907780438075,
+      "pixels": 484073
+     }
+    },
+    "f16_vs_off": {
+     "edge": {
+      "changed_over_threshold": 8994,
+      "max_delta": 168,
+      "mean_delta": 9.15145512278964,
+      "pixels": 34327
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 4040,
+      "max_delta": 123,
+      "mean_delta": 0.21315380118287944,
+      "pixels": 484073
+     }
+    },
+    "same_phase_f08_vs_f16": {
+     "edge": {
+      "changed_over_threshold": 614,
+      "max_delta": 6,
+      "mean_delta": 0.2728755789902992,
+      "pixels": 34327
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 1,
+      "max_delta": 3,
+      "mean_delta": 0.04983339289735226,
+      "pixels": 484073
+     }
+    }
+   }
+  },
+  "motion": {
+   "failed": [],
+   "outcome": "pass",
+   "checks": {
+    "frames_match_plan": true,
+    "object_run_uninterrupted": true,
+    "pan_run_uninterrupted": true,
+    "references_have_no_temporal_state": true
+   },
+   "frames_rendered": 16,
+   "ui_submissions": 0,
+   "pngs": {
+    "motion-object-off-f8.png": "212ac1a0e0af830729f9113bc797d063b0b5a2fbfd6194d29ae8a4d9281f9757",
+    "motion-object-on-f8.png": "f476496003bdc03110ea11fcd66cc9223beeee31431f8be58fd99bdb18696cdc",
+    "motion-pan-off-f6.png": "30aa3e196bca8145b45d28d7da2e85ad52e3926c23bb5ca884a29cae1d00154b",
+    "motion-pan-on-f6.png": "e7e19762b2f968e1a3701b3bc5b0c75eebabed13653661d945d96bb6b355e441"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "observations": {
+    "object_consecutive": [
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 12098,
+        "max_delta": 169,
+        "mean_delta": 26.366327529439683,
+        "pixels": 33713
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 10455,
+        "max_delta": 131,
+        "mean_delta": 0.7362153307185875,
+        "pixels": 484687
+       }
+      },
+      "from": "object-on-1",
+      "to": "object-on-2"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 12516,
+        "max_delta": 169,
+        "mean_delta": 24.382760359505234,
+        "pixels": 33713
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 11363,
+        "max_delta": 130,
+        "mean_delta": 0.9262266163524089,
+        "pixels": 484687
+       }
+      },
+      "from": "object-on-2",
+      "to": "object-on-3"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 12840,
+        "max_delta": 169,
+        "mean_delta": 23.251712989054667,
+        "pixels": 33713
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 10539,
+        "max_delta": 127,
+        "mean_delta": 0.900700864681743,
+        "pixels": 484687
+       }
+      },
+      "from": "object-on-3",
+      "to": "object-on-4"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 7938,
+        "max_delta": 169,
+        "mean_delta": 15.363746922552131,
+        "pixels": 33713
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6556,
+        "max_delta": 126,
+        "mean_delta": 0.7177580582932903,
+        "pixels": 484687
+       }
+      },
+      "from": "object-on-4",
+      "to": "object-on-5"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 13787,
+        "max_delta": 169,
+        "mean_delta": 25.497760507815975,
+        "pixels": 33713
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 10585,
+        "max_delta": 126,
+        "mean_delta": 0.7283937881560677,
+        "pixels": 484687
+       }
+      },
+      "from": "object-on-5",
+      "to": "object-on-6"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 13880,
+        "max_delta": 169,
+        "mean_delta": 24.0296918102809,
+        "pixels": 33713
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 10525,
+        "max_delta": 123,
+        "mean_delta": 0.6927893671585993,
+        "pixels": 484687
+       }
+      },
+      "from": "object-on-6",
+      "to": "object-on-7"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14291,
+        "max_delta": 169,
+        "mean_delta": 24.09752914306054,
+        "pixels": 33713
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 8391,
+        "max_delta": 123,
+        "mean_delta": 0.5441821216578947,
+        "pixels": 484687
+       }
+      },
+      "from": "object-on-7",
+      "to": "object-on-8"
+     }
+    ],
+    "object_f8_vs_off": {
+     "edge": {
+      "changed_over_threshold": 8622,
+      "max_delta": 168,
+      "mean_delta": 9.107021030463025,
+      "pixels": 33713
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 4079,
+      "max_delta": 123,
+      "mean_delta": 0.1979710617367497,
+      "pixels": 484687
+     }
+    },
+    "pan_consecutive": [
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 15106,
+        "max_delta": 165,
+        "mean_delta": 26.677471210615536,
+        "pixels": 34214
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 78235,
+        "max_delta": 168,
+        "mean_delta": 5.8600021479348845,
+        "pixels": 484186
+       }
+      },
+      "from": "pan-on-1",
+      "to": "pan-on-2"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 16033,
+        "max_delta": 165,
+        "mean_delta": 31.087128076226108,
+        "pixels": 34214
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 79514,
+        "max_delta": 168,
+        "mean_delta": 5.827134613557599,
+        "pixels": 484186
+       }
+      },
+      "from": "pan-on-2",
+      "to": "pan-on-3"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 16183,
+        "max_delta": 165,
+        "mean_delta": 27.157157888583622,
+        "pixels": 34214
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 82699,
+        "max_delta": 168,
+        "mean_delta": 5.967111812402671,
+        "pixels": 484186
+       }
+      },
+      "from": "pan-on-3",
+      "to": "pan-on-4"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 17901,
+        "max_delta": 165,
+        "mean_delta": 32.316566317881566,
+        "pixels": 34214
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 78410,
+        "max_delta": 168,
+        "mean_delta": 5.530221856889708,
+        "pixels": 484186
+       }
+      },
+      "from": "pan-on-4",
+      "to": "pan-on-5"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 23900,
+        "max_delta": 168,
+        "mean_delta": 49.737095925644475,
+        "pixels": 34214
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 76708,
+        "max_delta": 168,
+        "mean_delta": 4.618322297629423,
+        "pixels": 484186
+       }
+      },
+      "from": "pan-on-5",
+      "to": "pan-on-6"
+     }
+    ],
+    "pan_f6_vs_off": {
+     "edge": {
+      "changed_over_threshold": 9751,
+      "max_delta": 168,
+      "mean_delta": 13.854328637399895,
+      "pixels": 34214
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 4452,
+      "max_delta": 110,
+      "mean_delta": 0.23667350976690776,
+      "pixels": 484186
+     }
+    }
+   }
+  },
+  "excluded": {
+   "failed": [],
+   "outcome": "pass",
+   "checks": {
+    "accumulation_run_uninterrupted": true,
+    "frames_match_plan": true,
+    "reference_has_no_temporal_state": true,
+    "scene_has_blend_sprites_and_text": true,
+    "ui_stable_across_jitter_phases_and_off": true
+   },
+   "frames_rendered": 9,
+   "ui_submissions": 9,
+   "pngs": {
+    "excluded-activity.png": "4b3736b0d811aab9165cee77afd2ac6919d1fa644b1a22ddc89a9442aa209a8b",
+    "excluded-off.png": "d1592ae5ed1f392e8b3972d61b4660ac74a4a0545b221a8c59115875aa203527",
+    "excluded-on-f8.png": "210e52012d57dd8fc9c6a314588e598843e79fb7433f624b52b1522557743291"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "observations": {
+    "activity_map": "excluded-activity.png: frames 2-8, max consecutive change x4",
+    "consecutive": [
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 7319,
+        "max_delta": 243,
+        "mean_delta": 10.606805351006383,
+        "pixels": 32592
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 511,
+        "max_delta": 20,
+        "mean_delta": 0.011173138359187169,
+        "pixels": 485808
+       }
+      },
+      "from": "on-1",
+      "to": "on-2"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 9666,
+        "max_delta": 243,
+        "mean_delta": 9.948607020127639,
+        "pixels": 32592
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 702,
+        "max_delta": 20,
+        "mean_delta": 0.011838010078055529,
+        "pixels": 485808
+       }
+      },
+      "from": "on-2",
+      "to": "on-3"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 11180,
+        "max_delta": 243,
+        "mean_delta": 10.582719685812469,
+        "pixels": 32592
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 873,
+        "max_delta": 20,
+        "mean_delta": 0.013075124328953002,
+        "pixels": 485808
+       }
+      },
+      "from": "on-3",
+      "to": "on-4"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 7594,
+        "max_delta": 243,
+        "mean_delta": 5.630706921944036,
+        "pixels": 32592
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 478,
+        "max_delta": 20,
+        "mean_delta": 0.0072374271317063536,
+        "pixels": 485808
+       }
+      },
+      "from": "on-4",
+      "to": "on-5"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 11479,
+        "max_delta": 243,
+        "mean_delta": 10.718458517427589,
+        "pixels": 32592
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 1005,
+        "max_delta": 20,
+        "mean_delta": 0.012422603168329875,
+        "pixels": 485808
+       }
+      },
+      "from": "on-5",
+      "to": "on-6"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 11774,
+        "max_delta": 243,
+        "mean_delta": 10.78727908689249,
+        "pixels": 32592
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 622,
+        "max_delta": 20,
+        "mean_delta": 0.01079232947995916,
+        "pixels": 485808
+       }
+      },
+      "from": "on-6",
+      "to": "on-7"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 11787,
+        "max_delta": 243,
+        "mean_delta": 10.563850024545902,
+        "pixels": 32592
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 887,
+        "max_delta": 20,
+        "mean_delta": 0.010907601356914666,
+        "pixels": 485808
+       }
+      },
+      "from": "on-7",
+      "to": "on-8"
+     }
+    ],
+    "f8_vs_off": {
+     "edge": {
+      "changed_over_threshold": 8543,
+      "max_delta": 243,
+      "mean_delta": 5.390617329405989,
+      "pixels": 32592
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 625,
+      "max_delta": 20,
+      "mean_delta": 0.010135691466587623,
+      "pixels": 485808
+     }
+    },
+    "ui_pixels_identical_to_off": [
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   }
+  },
+  "transitions": {
+   "failed": [],
+   "outcome": "pass",
+   "checks": {
+    "cut_advances_epoch": true,
+    "cut_restarts_history_at_phase_zero": true,
+    "frames_match_plan": true,
+    "half_scale_restarts_history": true,
+    "one_owner_through_cut_and_scale_changes": true,
+    "output_scale_restarts_history": true,
+    "reference_has_no_temporal_state": true,
+    "view_a_run_uninterrupted": true
+   },
+   "frames_rendered": 13,
+   "ui_submissions": 0,
+   "pngs": {
+    "transition-cut-f7.png": "0324c688cdd69932f209bb609282ff1ca5f033e95be1ad8c2031822bf999617f",
+    "transition-drs-f9.png": "bbb5fafcc641424e3dd3d9f31452f38f31a199b9ca528437743f08e69c32dcaf"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "observations": {
+    "b8_vs_off_b": {
+     "edge": {
+      "changed_over_threshold": 7873,
+      "max_delta": 171,
+      "mean_delta": 12.225863077823288,
+      "pixels": 29053
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 2674,
+      "max_delta": 109,
+      "mean_delta": 0.13861738193960524,
+      "pixels": 489347
+     }
+    },
+    "cut_f7_vs_off_b": {
+     "edge": {
+      "changed_over_threshold": 6047,
+      "max_delta": 171,
+      "mean_delta": 11.568822496816164,
+      "pixels": 29053
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 2358,
+      "max_delta": 24,
+      "mean_delta": 0.1148101449482678,
+      "pixels": 489347
+     }
+    },
+    "drs_consecutive": [
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 14587,
+        "max_delta": 171,
+        "mean_delta": 33.03276770040959,
+        "pixels": 29053
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 10933,
+        "max_delta": 109,
+        "mean_delta": 0.3170408728366578,
+        "pixels": 489347
+       }
+      },
+      "from": "drs-9",
+      "to": "drs-10"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 16521,
+        "max_delta": 165,
+        "mean_delta": 32.74484562695763,
+        "pixels": 29053
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 13847,
+        "max_delta": 109,
+        "mean_delta": 0.4186885788612171,
+        "pixels": 489347
+       }
+      },
+      "from": "drs-10",
+      "to": "drs-11"
+     }
+    ],
+    "epochs": {
+     "cut": 2,
+     "drs": 3,
+     "restored": 4,
+     "view_a": 1
+    },
+    "restored_f12_vs_off_b": {
+     "edge": {
+      "changed_over_threshold": 6047,
+      "max_delta": 171,
+      "mean_delta": 11.568822496816164,
+      "pixels": 29053
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 2358,
+      "max_delta": 24,
+      "mean_delta": 0.1148101449482678,
+      "pixels": 489347
+     }
+    }
+   }
+  },
+  "skinned": {
+   "failed": [],
+   "outcome": "pass",
+   "checks": {
+    "frames_match_plan": true,
+    "reference_has_no_temporal_state": true,
+    "skinned_run_uninterrupted": true
+   },
+   "frames_rendered": 7,
+   "ui_submissions": 0,
+   "pngs": {
+    "skinned-off-f6.png": "9dc53d04deebc66b38a873ec680f39e89ce31afcbe59cefaafa0d498ec0b0985",
+    "skinned-on-f6.png": "6c526c6f4d02e4ed97734674b05b4f61f7239c2e61ba7c5ce668c36e707be896"
+   },
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "observations": {
+    "consecutive": [
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 6397,
+        "max_delta": 36,
+        "mean_delta": 6.333846548627149,
+        "pixels": 27279
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6505,
+        "max_delta": 36,
+        "mean_delta": 0.3433471588468015,
+        "pixels": 491121
+       }
+      },
+      "from": "on-1",
+      "to": "on-2"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 9078,
+        "max_delta": 36,
+        "mean_delta": 4.8377506506836765,
+        "pixels": 27279
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 7159,
+        "max_delta": 36,
+        "mean_delta": 0.3618375105116662,
+        "pixels": 491121
+       }
+      },
+      "from": "on-2",
+      "to": "on-3"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 12908,
+        "max_delta": 39,
+        "mean_delta": 6.729425565453279,
+        "pixels": 27279
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 6724,
+        "max_delta": 36,
+        "mean_delta": 0.37110406600410084,
+        "pixels": 491121
+       }
+      },
+      "from": "on-3",
+      "to": "on-4"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 7656,
+        "max_delta": 36,
+        "mean_delta": 3.381758862128377,
+        "pixels": 27279
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 7333,
+        "max_delta": 36,
+        "mean_delta": 0.44362794504816533,
+        "pixels": 491121
+       }
+      },
+      "from": "on-4",
+      "to": "on-5"
+     },
+     {
+      "delta": {
+       "edge": {
+        "changed_over_threshold": 13600,
+        "max_delta": 37,
+        "mean_delta": 6.952894167674768,
+        "pixels": 27279
+       },
+       "identical": false,
+       "interior": {
+        "changed_over_threshold": 7154,
+        "max_delta": 36,
+        "mean_delta": 0.46432345593041224,
+        "pixels": 491121
+       }
+      },
+      "from": "on-5",
+      "to": "on-6"
+     }
+    ],
+    "f1_vs_f6_identical": false,
+    "f6_vs_off": {
+     "edge": {
+      "changed_over_threshold": 12614,
+      "max_delta": 39,
+      "mean_delta": 7.797389933648594,
+      "pixels": 27279
+     },
+     "identical": false,
+     "interior": {
+      "changed_over_threshold": 24,
+      "max_delta": 23,
+      "mean_delta": 0.0011239592686934584,
+      "pixels": 491121
+     }
+    }
+   }
+  },
+  "timing": {
+   "failed": [],
+   "outcome": "pass",
+   "checks": {
+    "every_frame_produced_one_sample": true,
+    "frames_match_plan": true,
+    "models_span_grows_with_motion_and_resolve_passes": true,
+    "samples_well_formed_with_models_group": true,
+    "temporal_run_uninterrupted": true
+   },
+   "frames_rendered": 8,
+   "ui_submissions": 0,
+   "pngs": {},
+   "adapter": {
+    "backend": "Metal",
+    "device": 0,
+    "device_type": "IntegratedGpu",
+    "driver": "",
+    "driver_info": "",
+    "name": "Apple M5 Pro",
+    "vendor": 0
+   },
+   "observations": {
+    "groups_within_frame": false,
+    "models_median_ratio_on_over_off": 1.8880523816913841,
+    "note": "Medians of four interleaved samples per side; inference about pass coverage, not a performance measurement."
+   }
+  }
+ },
+ "pngs_total": 14
+}

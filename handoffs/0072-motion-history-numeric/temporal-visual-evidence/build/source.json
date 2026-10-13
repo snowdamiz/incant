@@ -1,0 +1,306 @@
+{
+ "grant_sha256": "992ddf0b84545384008269951655b86e0dcb25e933e7acef9c9b0d7c709acf69",
+ "tools": {
+  "head": "80136721ef541630c7dd6ad98010000a8735ac99",
+  "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
+  "plan_sha256": "6af62fba2ef8758b9c2893c7ae33905cfbf85d249c769c491acf2519f6afaa2f",
+  "helper_sha256": "ec804d60435732ba5d33241e8df6b7c7b40045f56e7d62e07b701a0a0b2d4fb2"
+ },
+ "source_commit": "9009f088ac230e31185e8ce64183ca93878e9444",
+ "tree": "7ac64714e35ebd277e149af27286f666ac89bbfe",
+ "files": 17759,
+ "checkout_manifest_sha256": "bb9bf732a078b33737c5dc0feda6b0e5e54e66e5e523e781e5834386501cc141",
+ "reviewed_source": "e73afe43ffaf78e73b725876411128d092791f5a",
+ "build_inputs_identical": true,
+ "freeze_sha256": "06a242fd0d56fa2afc05c9931567795a12919e6b82f0dd90ee8dcd94adeeb39f",
+ "freeze_comparison": [
+  {
+   "path": "crates/incant_render/src/camera.rs",
+   "reviewed_sha256": "4741b522cc6c78ede58f63d7ed04e40c098dc21c394ae720f9fea677c78b0663",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/diagnostic_draw.rs",
+   "reviewed_sha256": "fff98360a4350b20be1e7acb2f022f06f0e325c363e9c521a5e92d9851555510",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/graph.rs",
+   "reviewed_sha256": "8e146961f1a831a60951c946388bc3c7da2115147b74cbad81fb66fdd61da7e8",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/lib.rs",
+   "reviewed_sha256": "ba12e30be88a8ae50b9778da3302a39d901a8c00627ac9f5d639dbc495c5057a",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/lighting/mod.rs",
+   "reviewed_sha256": "4c2bf7a70fd8f5b7458259f49cb3ddf98fdec41810d3de80621e6678d6dfb085",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/model_draw.rs",
+   "reviewed_sha256": "2abca493a7168b0d6f66a206b37465a2cb6dec024e9663e8ffdb5f72b82053c6",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/motion/draw.rs",
+   "reviewed_sha256": "84da68b2a99373675c1a61e5ed979815948574e0faccaba978faa12487bd6813",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/motion/mod.rs",
+   "reviewed_sha256": "c385d813e9ba424b14d937ea160e4bf3c8e41447207e1b09f3f3f57294624594",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/motion/owner.rs",
+   "reviewed_sha256": "50165e7b82be80d03329e43da5edbe7a5636c27634bfbd497fbed5322c6ba4ac",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/motion/retained.rs",
+   "reviewed_sha256": "f65eddc8a669633296e20526cf597a841e02804ad2faeb103934f4d72853fe8e",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/motion/tests.rs",
+   "reviewed_sha256": "fd8d9e83847f1431579f1392612a95ace8d27cbe8beb2d424625482a2252973d",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/output.rs",
+   "reviewed_sha256": "792b2ce89d6cf7844dffd8e3fbd2e6ddefc06e3f8e8ff4953686ee066fd0341a",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/retained.rs",
+   "reviewed_sha256": "1b70203e9d417dc74d5bfb7906f293525863fa352c9b0c99cf7cfe7cfb154119",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/shadow_draw.rs",
+   "reviewed_sha256": "b2a80a608a038923646fe9ce5f1507312877e72d7c268d312a869d5e1e2f1a94",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/shadows/cascade.rs",
+   "reviewed_sha256": "caaa647943712832340f079649a9389c9e1ac24555ee3765e5d0879323ec8919",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/sprites/drawing.rs",
+   "reviewed_sha256": "33e9f6c91018f5dcfd966a306bb741f95187c1dc0bb1157084551cd972dad7c4",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/config.rs",
+   "reviewed_sha256": "4fb93739b80c5e1e923cb8d087919cca924151bb8b687ffbc53bb23254f777ee",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/copy.wgsl",
+   "reviewed_sha256": "50f2bbba9102f7f89de524356b7e6e4b9b1e4c90ecace7a5b1c16ee599ee4bdf",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/device_tests.rs",
+   "reviewed_sha256": "82e8e8b79385b4eb6275be2167ac6b12c3aa03c66ab108ee800778a9e272d6e0",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/jitter.rs",
+   "reviewed_sha256": "41d80973344b080d3608d1306dba7d7a08a3b2746fb737d22e30e5f9b496a4dd",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/mod.rs",
+   "reviewed_sha256": "3474632dac13cfb365d37098d290c76fc3cca5caea761f6334413067b83938e8",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/oracle.rs",
+   "reviewed_sha256": "fb539efa64b72857194914b7c98ff72a0f4c08f7c5094c3e19f00e5472ad26d0",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/owner.rs",
+   "reviewed_sha256": "b6fd11e4bc89380cefef9e8f5cc6f32ec954d6aa8472eb927f66f5949c4add9e",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/resolve.wgsl",
+   "reviewed_sha256": "ae65b1f2647dcce5a73fadca4b7d68c6815978af3fbb841510ab3aa555f1cfec",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/system.rs",
+   "reviewed_sha256": "ea8ea87c18de7d177cd90b65e5921a4811f4ec574726489ea22e054502bb863a",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/targets.rs",
+   "reviewed_sha256": "72736408b81cb92d38d1c0cb7e3ec0e76a8bd1c96859855f18b4f4521e739d53",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal/tests.rs",
+   "reviewed_sha256": "4536dd11d8ac94900c2238bad0868e6a8fb16640ff8ef8812e56077bac4d7070",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/temporal_retained_tests.rs",
+   "reviewed_sha256": "7cc3ed381aaa0ae8dd6139618354d010b447d6b3b1008fafaf526bac6d5e5449",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/text/drawing.rs",
+   "reviewed_sha256": "dea8093b52cb3e4fa5698315559774c1098a501635720956b7dd9df26596537b",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/text_draw_tests.rs",
+   "reviewed_sha256": "1a03ebd70a61af45e5baea63186c4923732f9849b2965713b54c95a9b47b8111",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/gpu_tests.rs",
+   "reviewed_sha256": "6d76aba4f5e04ceab73a55dfed0242165c3edaf9cc46b73dc8f4376efbeab7f3",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/mod.rs",
+   "reviewed_sha256": "eceadbf21fb200917eb26783ba0c74e944d7428c9fc1e4f4136fed9febb5a32e",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/pool.rs",
+   "reviewed_sha256": "90888663b6070e6f0181315674fb6bcf4d74a624d40a010da2889fc1e7be5549",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/recorder.rs",
+   "reviewed_sha256": "a86f809f7999edd11d3455889038b99a64f0cb76bd1139925bb3b72de3ec0e1a",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/timing/tests.rs",
+   "reviewed_sha256": "91c736ee99b87c68b3d0ce96d9d9445994bb215d2c8637ac3a9ec7ab53193998",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/tests/hdr_output/mod.rs",
+   "reviewed_sha256": "a940816bc28b4f7e3866518e17442221b123dc28e8828dcd38909e5c7fe24f14",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/tests/lighting_gpu/readback.rs",
+   "reviewed_sha256": "1a834ae4e71b4e799f63d8ad784a9a08f53113922e22f5a7c6a85e07ca1ead1c",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/tests/timestamp_backend_probe.rs",
+   "reviewed_sha256": "971225d1f13bb7f3901be021800aca4ad1a03f79ba1296942b0b5000e7543665",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render_gpu_host/src/lib.rs",
+   "reviewed_sha256": "c3d4955ba976a3415fb88eefb48cc898c435215a95932b04ed02a99996f38862",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render_gpu_host/src/motion.rs",
+   "reviewed_sha256": "e5e08cdc67979ba00ca0b9cfae21ce82ce3462042799524b35591d4eafb50584",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render_gpu_host/src/resolution.rs",
+   "reviewed_sha256": "ac7a3af6f6295f161045feb5413d0a36da733d050b0e8086c01d814e3781666e",
+   "same": true
+  },
+  {
+   "path": "docs/spikes/temporal-color-accumulation.md",
+   "reviewed_sha256": "14bdcaefedef9dba157071d3bed88d1e576d6c3bcf54db3d629099ebe1a31993",
+   "same": true
+  },
+  {
+   "path": "Cargo.toml",
+   "reviewed_sha256": "cfed0cb20b760c0028e327913de49f59a5e71f5ac1becfaa5da241efeaf98857",
+   "same": true
+  },
+  {
+   "path": "Cargo.lock",
+   "reviewed_sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/Cargo.toml",
+   "reviewed_sha256": "7d3628b6a59dba4f3613b0aa8af6bbe274c692aa721bac4f7c77cc37bf202c7b",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render_gpu_host/Cargo.toml",
+   "reviewed_sha256": "386f065fd226154c5144c95d1a5c1143d0e789763085aeec6ef4db90dcbf8e9a",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/model_material.wgsl",
+   "reviewed_sha256": "45018e9c6029af03553aa933438277589835edac1fb75fddcba2833568c51c2b",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/output.wgsl",
+   "reviewed_sha256": "6ceefe2e706624f4fff93fab83fffc8e2938af514e3b2ce4e92a1389f11f6a8a",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/lighting/grid.wgsl",
+   "reviewed_sha256": "461606edf6d9cb4c89581ef30ccf3ae5570a1e1bc0142ffe4953e91dfc2c0439",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/motion/shader.wgsl",
+   "reviewed_sha256": "7f8aed4a2cb30401eaae3d3d0e54d72d37cb4e3875b555f33434d5e8123663b9",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/frame.rs",
+   "reviewed_sha256": "1db2c09f12ea6e60ca3d0e8aaba17314e6d0d9e4f76e11cc3e0a7bd524323e7e",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/material_pipeline.rs",
+   "reviewed_sha256": "edc49c5e19f24230bb20aef6518de545d45b42d58855cce21d5a8a288ce11f12",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/resolution/plan.rs",
+   "reviewed_sha256": "88b15839889c79bcb52a28b7cec6330d503df5e7c9a7ca7a03b3312ee71c0f6f",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/resolution/owner.rs",
+   "reviewed_sha256": "a7c7d5d52554626aaa91ce6205f19811ed83b2223af2e48d13311930fdc2bb82",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/resolution/controller.rs",
+   "reviewed_sha256": "2dfb73c3b74de5026ebff6a9736dabe37f6219f1d0e9793b139e1a43e647d5e9",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render_gpu_host/src/resolution_mailbox.rs",
+   "reviewed_sha256": "8c70921bc14c1791c7ceeb7b93c53cfffccb4afa2e3a8427ca6fe4036f1227e1",
+   "same": true
+  },
+  {
+   "path": "crates/incant_render/src/scene.rs",
+   "reviewed_sha256": "bb7c13689a7145763feac1dd3623874a1b47557848421b9d33d312b11e126fff",
+   "same": true
+  }
+ ],
+ "cargo_lock_sha256": "ef1e27905fe6dec295bd7bb1b821abbcc6742392c90b6cc1c225cbc5de6d3e4e",
+ "rust_toolchain": "[toolchain]\nchannel = \"1.99.0\"\ncomponents = [\"rustfmt\", \"clippy\", \"llvm-tools\"]\nprofile = \"minimal\"\n",
+ "recorded": "2026-10-13T06:50:11.366397+00:00"
+}

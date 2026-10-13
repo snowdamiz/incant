@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-13T07:05:09.092167+00:00",
+  "authorization": "Execute 0072 StageB once after root-supervised CPU recovery completed; Claude Opus5.5 Max owns execution and appearance judgments",
+  "base_grant_sha256": "992ddf0b84545384008269951655b86e0dcb25e933e7acef9c9b0d7c709acf69",
+  "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
+  "source_commit": "9009f088ac230e31185e8ce64183ca93878e9444",
+  "tests_record_sha256": "ec2b803884c3d0d4c210531fc309b948439d00595f5dfbaae5a1070e91ef1be1",
+  "review_record_sha256": "a22f48ea0a3c1c6b82d569d87882729986d986c1da43b7d47b33f839f836f030",
+  "build_recovery_receipt_sha256": "728d2bc92101c17f241c635a94051d9ff795cee2c904adf935e44e766787d565",
+  "review_binary_sha256": "48557af4894734528ec39d929646af548de46fe55089fa6308944d1dcaf5ba10",
+  "limits": {
+    "existing_suites_once": [
+      "lib",
+      "model_gpu",
+      "timestamp_backend_probe",
+      "game",
+      "ui"
+    ],
+    "existing_cases": 96,
+    "new_submissions_max": 96,
+    "new_planned": 79,
+    "pngs_max": 16,
+    "pngs_planned": 14,
+    "maximum_extent": [
+      960,
+      540
+    ]
+  },
+  "stop": "On any failure retain everything, release owned resources, report; no retry/source change unless root authorizes",
+  "previous_release_sha256": "fe268a84193da4765bf47e0545d654668e8a2441c7ea153cc64699a6df6d6678",
+  "root_review": "Fixture/helper correctness reviewed; no rendered-pixel acceptance by root."
+}

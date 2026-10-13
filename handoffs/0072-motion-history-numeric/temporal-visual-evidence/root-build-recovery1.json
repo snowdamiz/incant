@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-13T07:02:04.208633+00:00",
+  "status": "incomplete; original child terminal status unknown",
+  "reason": "ACP session returned while background build pending; no build process or terminal ledger remained",
+  "cpu_only": true,
+  "no_gpu_execution": true,
+  "original_logs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/logs/build-tests-render.stderr.txt",
+      "sha256": "83858b1be3704bf739d08d76b0c396a3bfbb32931466da684a05d3b6b478f1af",
+      "bytes": 1879
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/logs/build-tests-render.stdout.jsonl",
+      "sha256": "987dc9e531bbbf31cf802af735b5aa3c5a6aee55d7e9a6b57f74ad3fa359c525",
+      "bytes": 259768
+    }
+  ],
+  "recovery": "Root owns one supervised retry using unchanged helpers/source/target, separate logs-recovery1 and tmp-recovery1; original logs retained."
+}

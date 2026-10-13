@@ -1,0 +1,56 @@
+{
+ "packet": "0072-motion-history-numeric",
+ "stage": "temporal-visual",
+ "holder": "claude (Opus 5.5, Max thinking) for handoff 0072 stage B",
+ "target_dir": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+ "assigned_by": "root via review-ready.json",
+ "grant_sha256": "992ddf0b84545384008269951655b86e0dcb25e933e7acef9c9b0d7c709acf69",
+ "grant": {
+  "packet": "0072-motion-history-numeric",
+  "stage": "temporal-visual",
+  "authorization": "CPU build only per brief revision6; no GPU execution",
+  "source_commit": "9009f088ac230e31185e8ce64183ca93878e9444",
+  "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
+  "target": "/Users/andreyyurlov/.codex/incant-core-presentation-target",
+  "prior_upscale_release_path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/gpu-released.json",
+  "prior_upscale_release_sha256": "fe268a84193da4765bf47e0545d654668e8a2441c7ea153cc64699a6df6d6678"
+ },
+ "prior_receipts": {
+  "pins": {
+   "upscale_release": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/0073-upscaling-numeric/gpu-released.json",
+    "expected": "fe268a84193da4765bf47e0545d654668e8a2441c7ea153cc64699a6df6d6678",
+    "sha256": "fe268a84193da4765bf47e0545d654668e8a2441c7ea153cc64699a6df6d6678"
+   }
+  },
+  "release_alive_fields": {
+   "upscale_release": {
+    "owned_processes": [],
+    "ledger_pids_alive": []
+   }
+  }
+ },
+ "tools": {
+  "head": "80136721ef541630c7dd6ad98010000a8735ac99",
+  "visual_tree": "ac8a48de3a4df9314bee210c6e3c050172ec4862",
+  "plan_sha256": "6af62fba2ef8758b9c2893c7ae33905cfbf85d249c769c491acf2519f6afaa2f",
+  "helper_sha256": "ec804d60435732ba5d33241e8df6b7c7b40045f56e7d62e07b701a0a0b2d4fb2"
+ },
+ "brief_sha256": "e7c23cfac5dd5d14790a5d594ba3ab677ddee501a1a75afde9c8209addc35c92",
+ "worktree": "/Users/andreyyurlov/.codex/worktrees/native-agent-bridge/incant/.worktrees/0072-motion-history-numeric",
+ "child_checkout": "/Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual/checkout",
+ "acquired_at": "2026-10-13T06:50:01.325179+00:00",
+ "processes_on_target_at_acquire": [],
+ "rules": [
+  "./tools/cargo only, --locked --offline --profile ci -j2",
+  "builds from the git-archive child checkout of the granted commit only",
+  "one bounded process group at a time under the packet flock",
+  "GPU children only under the global native-gpu.lock, budget debited first",
+  "serial offscreen GPU children; no window, desktop capture, audio or accounts",
+  "<= 96 new submissions (<= 960x540), <= 16 PNGs; regression once, no retry",
+  "binaries and evidence only under /Users/andreyyurlov/.codex/incant-evidence/0072-temporal-visual"
+ ],
+ "released_at": "2026-10-13T07:10:43.703928+00:00",
+ "processes_on_target_at_release": [],
+ "release_note": "No 0072 stage B cargo/rustc process or frozen binary remains on the target. Contents left as warm cache; nothing deleted."
+}
