@@ -98,8 +98,8 @@ map-deleted ARM API37 emulator processes match all 17,856 observed fields and
 atomic selection/mode Undo/Redo/journal reopen and four Wasmtime processes also
 pass. Owned software AVDs were removed; the retained port-reuse failure was
 resolved by rerunning only missing callers, without rebuilding archives.
-Source/probe reviews pass; independent final execution review and current-main
-integration are pending. API24 compilation is not minimum-OS execution proof.
+Source/probe and final producer execution reviews are accepted; current-main
+integration checks are pending. API24 compilation is not minimum-OS execution proof.
 No physical-phone, performance, GPU, live audio, signing or phase gate is claimed.
 [Scope and retained evidence](docs/spikes/authored-android-wasm.md).
 
