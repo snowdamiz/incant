@@ -6,4 +6,8 @@ Thirteen current checks pass: 171 default and 203 overlapping cooked/observer CP
 
 The original source and Claude evidence remain lossless: 13 source-qualification records, 134 handoff files and 85 retained/original visual records. Root review `028e8d4b` accepted that scoped Metal result. The original strict comparison remains failed; same-binary one-frame variation has unknown cause/rate. Thin MASK fidelity, temporal quality and the unisolated one-code lit ramp pixel remain explicit limits. Sixteen temporal-on frames matched in the later full-frame follow-up.
 
-Current integration final review is pending. See [manifest](evidence/shadow-main230.json) and [original report](../../handoffs/0076-shadow-guard-review/result.md). No phone, performance or phase gate is approved.
+Current integration final review is accepted (`c21d16ea`). Main231 constructor
+ancestry is joined with explicit old/new frozen hashes. The imported private
+Rapier modules and observer alias are guarded by features absent from both
+actual renderer builds. Renderer source, manifests and lock remain unchanged;
+this is a source-relevance qualification, with review pending. See [manifest](evidence/shadow-main230.json) and [original report](../../handoffs/0076-shadow-guard-review/result.md). No phone, performance or phase gate is approved.

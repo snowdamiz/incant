@@ -1224,5 +1224,16 @@
   },
   "scope": "current CPU/compile qualification only; original Metal GPU/Claude scope preserved, original strict comparison failure retained; no current GPU, phone or performance claim",
   "verifier_sha256": "6ee7ab4149cb616dadf0a81d9f545e95c235367e8637e452d05cd6349af2ad66",
-  "final_review": "pending"
+  "final_review": {
+    "path": "docs/spikes/evidence/shadow-main230/final-root.json",
+    "sha256": "c21d16ea1fa1e6df423afa77d256fd03276b1e0063664fb696d7691e7aec9ff5",
+    "decision": "accepted"
+  },
+  "main231_qualification": {
+    "path": "docs/spikes/evidence/shadow-main230/main231-qualification.json.gz",
+    "sha256": "7e1ea99455a7bdacc41bffbda8f561ac0ad18c7df8e8a8bf9fa8d959585bfb2c",
+    "raw_sha256": "e1ffe9552fe1664bcfdea6f02a4d6bc737be7fedd4f1d1873f9a1f6c11845b94",
+    "scope": "reviewed constructor feature-gated source; manifests and renderer unchanged; no new build claim",
+    "review": "pending"
+  }
 }
