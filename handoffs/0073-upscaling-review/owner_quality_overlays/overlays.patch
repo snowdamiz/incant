@@ -1,0 +1,609 @@
+diff --git a/crates/incant_render/src/graph.rs b/crates/incant_render/src/graph.rs
+index 903cf5ad6798..a324e92c4a8c 100644
+--- a/crates/incant_render/src/graph.rs
++++ b/crates/incant_render/src/graph.rs
+@@ -229,6 +229,10 @@
+     temporal: bool,
+     overlay_depth: bool,
+     transparent: bool,
++    /// Portable upscaling: the composite precedes output-resolution sprites/text,
++    /// then the output-resolution opaque depth re-raster they test against.
++    composite: bool,
++    output_depth: bool,
+     all: bool,
+ }
+ impl ModelsPlan {
+@@ -239,11 +243,18 @@
+             temporal,
+             overlay_depth: false,
+             transparent: temporal && transparent,
++            composite: false,
++            output_depth: false,
+             all: !temporal && models,
+         }
+     }
+     fn with_overlay_depth(mut self, active: bool) -> Self {
+         self.overlay_depth = self.temporal && self.motion && active;
++        self
++    }
++    fn with_upscaling(mut self, upscaling: bool, output_depth: bool) -> Self {
++        self.composite = self.temporal && upscaling;
++        self.output_depth = self.composite && self.motion && output_depth;
+         self
+     }
+     fn count(&self) -> usize {
+@@ -252,6 +263,8 @@
+             + 2 * usize::from(self.temporal)
+             + usize::from(self.overlay_depth)
+             + usize::from(self.transparent)
++            + usize::from(self.composite)
++            + usize::from(self.output_depth)
+             + usize::from(self.all)
+     }
+ }
+@@ -263,7 +276,11 @@
+         frame.models.as_ref().is_some_and(|m| m.has_opaque()),
+         frame.models.as_ref().is_some_and(|m| m.has_transparent()),
+     )
+-    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()));
++    .with_overlay_depth(frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth()))
++    .with_upscaling(
++        frame.upscaling.is_some(),
++        frame.motion.as_ref().is_some_and(|m| m.has_output_depth()),
++    );
+     if plan.count() == 0 {
+         return;
+     }
+@@ -308,6 +325,22 @@
+                 .unwrap()
+                 .encode_transparent(encoder, timestamp());
+         }
++        if plan.composite {
++            // Internal BLEND overlay over the resolved output; sprites and world
++            // text are then drawn over this composite at output resolution.
++            frame
++                .upscaling
++                .as_ref()
++                .unwrap()
++                .composite(encoder, timestamp());
++        }
++        if plan.output_depth {
++            frame
++                .motion
++                .as_ref()
++                .unwrap()
++                .encode_output_depth(encoder, timestamp());
++        }
+         if plan.all {
+             frame.models.as_ref().unwrap().encode(encoder, timestamp());
+         }
+@@ -315,16 +348,8 @@
+     });
+ }
+ fn display(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+-    encoder.timed(crate::timing::GpuPass::Display, |e, q| {
+-        if let Some(upscaling) = &frame.upscaling {
+-            upscaling.composite(e, q.and_then(|q| q.render_range(0, 2)));
+-            frame
+-                .output
+-                .encode_part(e, q.and_then(|q| q.render_range(1, 2)));
+-        } else {
+-            frame.output.encode(e, q)
+-        }
+-    });
++    // With upscaling the composite was encoded at the end of the Models interval.
++    encoder.timed(crate::timing::GpuPass::Display, |e, q| frame.output.encode(e, q));
+ }
+ 
+ fn shadows(frame: FrameInput<'_>, mut encoder: EncoderInput<'_>) {
+@@ -426,6 +451,29 @@
+ 
+ #[cfg(test)]
+ #[test]
++fn upscaling_counts_composite_then_output_depth_only_when_present() {
++    for motion in [false, true] {
++        for temporal in [false, true] {
++            for upscaling in [false, true] {
++                for depth in [false, true] {
++                    let base = ModelsPlan::new(motion, temporal, true, true, true);
++                    let before = base.count();
++                    let p = base.with_upscaling(upscaling, depth);
++                    assert_eq!(p.composite, temporal && upscaling);
++                    assert_eq!(p.output_depth, temporal && upscaling && motion && depth);
++                    assert_eq!(
++                        p.count(),
++                        before + usize::from(p.composite) + usize::from(p.output_depth)
++                    );
++                    assert!(!p.all || (!p.composite && !p.output_depth));
++                }
++            }
++        }
++    }
++}
++
++#[cfg(test)]
++#[test]
+ fn overlay_depth_is_counted_only_when_history_and_actual_overlays_exist() {
+     for motion in [false, true] {
+         for temporal in [false, true] {
+diff --git a/crates/incant_render/src/graph/native.rs b/crates/incant_render/src/graph/native.rs
+index 7476fda7812f..471c0ec9c4e3 100644
+--- a/crates/incant_render/src/graph/native.rs
++++ b/crates/incant_render/src/graph/native.rs
+@@ -65,10 +65,13 @@
+             .as_ref()
+             .ok_or(crate::metalfx::MetalFxError::Interop)?;
+         let overlay_depth = frame.motion.as_ref().is_some_and(|m| m.has_overlay_depth());
++        let output_depth = frame.motion.as_ref().is_some_and(|m| m.has_output_depth());
++        // pack, two clears, normalize, overlay clear and (moved from Display) composite.
+         let count = usize::from(overlay_depth)
++            + usize::from(output_depth)
+             + usize::from(frame.motion.is_some())
+             + usize::from(frame.models.as_ref().is_some_and(|m| m.has_opaque()))
+-            + 5
++            + 6
+             + usize::from(frame.models.as_ref().is_some_and(|m| m.has_transparent()));
+         let queries = pre
+             .1
+@@ -112,6 +115,14 @@
+         {
+             m.encode_transparent(&mut post.0, timestamp());
+         }
++        up.composite(&mut post.0, timestamp());
++        if output_depth {
++            frame
++                .motion
++                .as_ref()
++                .unwrap()
++                .encode_output_depth(&mut post.0, timestamp());
++        }
+         debug_assert_eq!(index, count);
+         if let Some(s) = &frame.sprites {
+             post.timed(crate::timing::GpuPass::Sprites, |e, q| s.encode(e, q));
+@@ -121,12 +132,7 @@
+         {
+             post.timed(crate::timing::GpuPass::Text, |e, q| t.encode(e, q));
+         }
+-        post.timed(crate::timing::GpuPass::Display, |e, q| {
+-            up.composite(e, q.and_then(|q| q.render_range(0, 2)));
+-            frame
+-                .output
+-                .encode_part(e, q.and_then(|q| q.render_range(1, 2)));
+-        });
++        post.timed(crate::timing::GpuPass::Display, |e, q| frame.output.encode(e, q));
+         retain(&mut post.0);
+         if let Some(c) = post.1.take() {
+             c.finish(&mut post.0);
+diff --git a/crates/incant_render/src/lib.rs b/crates/incant_render/src/lib.rs
+index 7ab8fae90dc3..26bb55ba5bbf 100644
+--- a/crates/incant_render/src/lib.rs
++++ b/crates/incant_render/src/lib.rs
+@@ -383,37 +383,52 @@
+         if let (Some(models), Some(overlay)) = (&mut models, overlay) {
+             models.set_transparent_target(overlay.clone());
+         }
+-        let overlay_color = overlay.unwrap_or(&attachments.color);
++        // Portable upscaling draws current-only sprites and world text at output
++        // resolution straight over the composited output (never into history),
++        // against an unjittered output-resolution re-raster of the opaque depth.
++        // BLEND models stay on the internal overlay: their clustered lighting is
++        // prepared for the internal viewport only.
++        let screen = upscaling.and_then(|p| p.screen_overlay());
++        let (screen_color, screen_depth, screen_rect) = match screen {
++            Some((color, depth, rect)) => (color, depth, rect),
++            None => (overlay.unwrap_or(&attachments.color), &attachments.depth, scene_rect),
++        };
+         let sprites = self.sprites.prepare(
+             &self.device,
+             scene,
+             models::ModelTarget {
+-                color: overlay_color.clone(),
+-                depth: attachments.depth.clone(),
++                color: screen_color.clone(),
++                depth: screen_depth.clone(),
+                 format: frame::HDR_FORMAT,
+-                rect: scene_rect,
++                rect: screen_rect,
+             },
+         )?;
+         let text = self.text.prepare(
+             &self.device,
+             scene,
+             models::ModelTarget {
+-                color: overlay_color.clone(),
+-                depth: attachments.depth.clone(),
++                color: screen_color.clone(),
++                depth: screen_depth.clone(),
+                 format: frame::HDR_FORMAT,
+-                rect: scene_rect,
+-            },
+-        )?;
+-        let overlays = models.as_ref().is_some_and(|m| m.has_transparent())
+-            || sprites.as_ref().is_some_and(|s| s.has_passes())
++                rect: screen_rect,
++            },
++        )?;
++        let transparent = models.as_ref().is_some_and(|m| m.has_transparent());
++        let screen_overlays = sprites.as_ref().is_some_and(|s| s.has_passes())
+             || text.as_ref().is_some_and(|t| t.has_passes());
+         let accumulating = temporal.is_some_and(|p| p.active())
+             || upscaling.is_some_and(|p| p.overlay().is_some());
+-        if accumulating && overlays {
++        if accumulating && (transparent || (screen_overlays && screen.is_none())) {
+             motion
+                 .as_mut()
+                 .expect("temporal motion draw")
+                 .set_overlay_depth(attachments.depth.clone());
++        }
++        if let Some((_, depth, _)) = screen.filter(|_| screen_overlays) {
++            motion
++                .as_mut()
++                .expect("upscaling motion draw")
++                .set_output_depth(depth.clone());
+         }
+         let temporal = temporal.and_then(|pending| {
+             self.temporal.as_ref().and_then(|system| {
+diff --git a/crates/incant_render/src/motion/attachment.rs b/crates/incant_render/src/motion/attachment.rs
+index 489af14ffd23..035c5e22b79e 100644
+--- a/crates/incant_render/src/motion/attachment.rs
++++ b/crates/incant_render/src/motion/attachment.rs
+@@ -2,6 +2,8 @@
+ use super::{MotionError, plan};
+ pub const MAX_OWNER_TARGET_BYTES: u64 = 4 * plan::MAX_MOTION_PIXELS;
+ pub const MAX_OWNER_RECORD_BYTES: u64 = 16 * plan::MAX_MOTION_PIXELS;
++/// Output history color/depth pairs, composite and output-resolution overlay depth.
++const OUTPUT_STRIDE: u64 = 36;
+ #[derive(Clone, Copy, PartialEq, Eq)]
+ pub(crate) struct Cache {
+     pub size: [u32; 2],
+@@ -60,9 +62,9 @@
+         flagged_component(
+             old_output,
+             output,
+-            32,
++            OUTPUT_STRIDE,
+             false,
+-            32 * plan::MAX_MOTION_PIXELS,
++            OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
+             limit,
+         )?,
+         flagged_component(old_output, output, 16, true, MAX_OWNER_RECORD_BYTES, limit)?,
+@@ -126,7 +128,13 @@
+     }
+     if let Some(output) = output {
+         for bytes in [
+-            component(old_output, output, 32, 32 * plan::MAX_MOTION_PIXELS, limit)?,
++            component(
++                old_output,
++                output,
++                OUTPUT_STRIDE,
++                OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
++                limit,
++            )?,
+             component(old_overlay, source, 8, 8 * plan::MAX_MOTION_PIXELS, limit)?,
+         ] {
+             total = total.checked_add(bytes).ok_or(MotionError::Capacity)?;
+@@ -151,28 +159,28 @@
+                 [2048, 2048],
+                 [2048, 2048],
+                 [2048, 2048],
+-                486_555_648,
++                503_332_864,
+             ),
+             (
+                 [1920, 1920],
+                 [2048, 2048],
+                 [2048, 2048],
+                 [2048, 2048],
+-                619_266_048,
++                636_043_264,
+             ),
+             (
+                 [2560, 1440],
+                 [1920, 1080],
+                 [2560, 1440],
+                 [1920, 1080],
+-                618_074_112,
++                641_114_112,
+             ),
+             (
+                 [1280, 800],
+                 [1280, 720],
+                 [2560, 1600],
+                 [2560, 1440],
+-                577_830_912,
++                608_960_512,
+             ),
+         ] {
+             assert_eq!(
+@@ -201,14 +209,22 @@
+         );
+         assert_eq!(
+             admit_records([2048, 1920], None, [2048, 1920], None, None, 8192).unwrap(),
+-            464_535_552
++            480_264_192
+         );
+         let size = [3, 5];
+         let off = Some(Cache { size, owner: false });
+         let on = Cache { size, owner: true };
+         assert_eq!(
+-            flagged_component(off, on, 32, false, 32 * plan::MAX_MOTION_PIXELS, 8192).unwrap(),
+-            960
++            flagged_component(
++                off,
++                on,
++                OUTPUT_STRIDE,
++                false,
++                OUTPUT_STRIDE * plan::MAX_MOTION_PIXELS,
++                8192
++            )
++            .unwrap(),
++            1080
+         );
+         assert_eq!(
+             flagged_component(off, on, 16, true, MAX_OWNER_RECORD_BYTES, 8192).unwrap(),
+@@ -223,7 +239,7 @@
+         let reduced = [1920, 1920];
+         assert_eq!(
+             admit(full, Some(full), Some(full), Some(full), Some(full), 8192).unwrap(),
+-            68 * 4194304 + 2 * plan::MAX_MOTION_INSTANCE_BYTES + 16384
++            72 * 4194304 + 2 * plan::MAX_MOTION_INSTANCE_BYTES + 16384
+         );
+         assert!(
+             admit(
+diff --git a/crates/incant_render/src/motion/draw.rs b/crates/incant_render/src/motion/draw.rs
+index eb58a5677e7a..9b43c3a6d83d 100644
+--- a/crates/incant_render/src/motion/draw.rs
++++ b/crates/incant_render/src/motion/draw.rs
+@@ -16,6 +16,10 @@
+     pub(super) frame: wgpu::BindGroup,
+     pub(super) overlay_frame: Option<wgpu::BindGroup>,
+     pub(super) overlay_depth: Option<wgpu::TextureView>,
++    /// Unjittered camera at the upscaling output aspect and viewport, present only
++    /// for portable output upscaling.
++    pub(super) output_frame: Option<(wgpu::BindGroup, [f32; 4])>,
++    pub(super) output_depth: Option<wgpu::TextureView>,
+     pub(super) draws: Vec<Draw>,
+ }
+ impl MotionDraw {
+@@ -39,14 +43,37 @@
+         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+     ) {
+         if let Some(depth) = &self.overlay_depth {
+-            self.encode_pass(encoder, timestamps, Some(depth));
++            self.encode_pass(
++                encoder,
++                timestamps,
++                Some((depth, self.overlay_frame.as_ref().unwrap(), self.rect)),
++            );
++        }
++    }
++    /// Output-resolution current-only overlays (sprites, world text) test against
++    /// this exact re-raster of the opaque/MASK draws with the unjittered camera at
++    /// the output viewport. It never touches motion, history or the internal depth.
++    pub fn set_output_depth(&mut self, depth: wgpu::TextureView) {
++        assert!(self.output_frame.is_some());
++        self.output_depth = Some(depth);
++    }
++    pub fn has_output_depth(&self) -> bool {
++        self.output_depth.is_some()
++    }
++    pub fn encode_output_depth(
++        &self,
++        encoder: &mut wgpu::CommandEncoder,
++        timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
++    ) {
++        if let (Some(depth), Some((frame, rect))) = (&self.output_depth, &self.output_frame) {
++            self.encode_pass(encoder, timestamps, Some((depth, frame, *rect)));
+         }
+     }
+     fn encode_pass(
+         &self,
+         encoder: &mut wgpu::CommandEncoder,
+         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
+-        depth: Option<&wgpu::TextureView>,
++        depth: Option<(&wgpu::TextureView, &wgpu::BindGroup, [f32; 4])>,
+     ) {
+         let colors = [
+             Some(wgpu::RenderPassColorAttachment {
+@@ -83,7 +110,7 @@
+                 &colors[..1]
+             },
+             depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
+-                view: depth.unwrap_or(&self.targets.depth[self.slot]),
++                view: depth.map_or(&self.targets.depth[self.slot], |d| d.0),
+                 depth_ops: Some(wgpu::Operations {
+                     load: wgpu::LoadOp::Clear(1.),
+                     store: wgpu::StoreOp::Store,
+@@ -94,17 +121,9 @@
+             occlusion_query_set: None,
+             multiview_mask: None,
+         });
+-        let [x, y, w, h] = self.rect;
++        let [x, y, w, h] = depth.map_or(self.rect, |d| d.2);
+         pass.set_viewport(x, y, w, h, 0., 1.);
+-        pass.set_bind_group(
+-            0,
+-            if depth.is_some() {
+-                self.overlay_frame.as_ref().unwrap()
+-            } else {
+-                &self.frame
+-            },
+-            &[],
+-        );
++        pass.set_bind_group(0, depth.map_or(&self.frame, |d| d.1), &[]);
+         for draw in &self.draws {
+             let batch = &draw.batch;
+             let primitive = &batch.model.primitives[batch.primitive];
+diff --git a/crates/incant_render/src/motion/retained.rs b/crates/incant_render/src/motion/retained.rs
+index 7e96f5f076e4..16c3b41fb461 100644
+--- a/crates/incant_render/src/motion/retained.rs
++++ b/crates/incant_render/src/motion/retained.rs
+@@ -540,6 +540,23 @@
+         } else {
+             None
+         };
++        // Portable upscaling only: the same unjittered camera at the output aspect,
++        // drawn in the output viewport (sprites and world text use this matrix).
++        let output_frame = match upscale_rect.filter(|_| temporal) {
++            Some(rect) => Some((
++                group(Frame {
++                    current: current
++                        .camera
++                        .unjittered()
++                        .matrix(rect[2] / rect[3])?
++                        .to_cols_array_2d(),
++                    rect,
++                    ..uniform
++                }),
++                rect,
++            )),
++            None => None,
++        };
+         let mut draws = Vec::with_capacity(current.batches.len());
+         for ((batch, old), rows) in current.batches.iter().zip(&live.batches).zip(&self.rows) {
+             let primitive = &batch.model.primitives[batch.primitive];
+@@ -572,6 +589,8 @@
+                 frame,
+                 overlay_frame,
+                 overlay_depth: None,
++                output_frame,
++                output_depth: None,
+                 draws,
+             }),
+             Prepared {
+diff --git a/crates/incant_render/src/upscaling/owner.rs b/crates/incant_render/src/upscaling/owner.rs
+index 452b73e07bfd..0d465c6e7a26 100644
+--- a/crates/incant_render/src/upscaling/owner.rs
++++ b/crates/incant_render/src/upscaling/owner.rs
+@@ -196,6 +196,12 @@
+     pub fn composite(&self) -> Option<&wgpu::TextureView> {
+         self.output.as_ref().map(|o| &o.composite)
+     }
++    /// Output-resolution target of current-only sprites and world text: the
++    /// composited output, its unjittered opaque depth and the output viewport.
++    pub fn screen_overlay(&self) -> Option<(&wgpu::TextureView, &wgpu::TextureView, [f32; 4])> {
++        let output = self.output.as_ref()?;
++        Some((&output.composite, &output.overlay_depth, self.plan?.rect))
++    }
+     #[cfg(feature = "native-metalfx")]
+     pub(crate) fn native_input(
+         &self,
+diff --git a/crates/incant_render/src/upscaling/plan.rs b/crates/incant_render/src/upscaling/plan.rs
+index c3b68a0cb715..c6fd899ee726 100644
+--- a/crates/incant_render/src/upscaling/plan.rs
++++ b/crates/incant_render/src/upscaling/plan.rs
+@@ -1,10 +1,14 @@
+ use super::UpscaleError;
+-/// Includes old+candidate output color/depth pairs+composite, internal overlay,
+-/// motion targets, maximum motion instance payloads and fixed packet metadata.
+-/// Excludes ordinary renderer targets/assets, driver overhead and older queued work.
++/// Includes old+candidate output color/depth pairs+composite+output overlay depth,
++/// internal overlay, motion targets, maximum motion instance payloads and fixed
++/// packet metadata. Excludes ordinary renderer targets/assets, driver overhead
++/// and older queued work.
+ pub const MAX_UPSCALE_TRANSITION_BYTES: u64 =
+     128 * crate::motion::MAX_MOTION_PIXELS + 2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384;
+-pub(super) const MAX_OUTPUT_BYTES: u64 = 32 * crate::motion::MAX_MOTION_PIXELS;
++/// Per output pixel: two RGBA16F colors and two R32F depths of history, the RGBA16F
++/// composite and the Depth32F output overlay depth (36 bytes).
++pub(super) const OUTPUT_PIXEL_BYTES: u64 = 36;
++pub(super) const MAX_OUTPUT_BYTES: u64 = OUTPUT_PIXEL_BYTES * crate::motion::MAX_MOTION_PIXELS;
+ pub(super) const MAX_OVERLAY_BYTES: u64 = 8 * crate::motion::MAX_MOTION_PIXELS;
+ #[derive(Clone, Copy, Debug)]
+ pub(crate) struct Plan {
+@@ -78,7 +82,7 @@
+         let total = old_output
+             .checked_add(old_overlay)
+             .and_then(|x| x.checked_add(old_motion))
+-            .and_then(|x| x.checked_add(32 * output + 32 * source))
++            .and_then(|x| x.checked_add(OUTPUT_PIXEL_BYTES * output + 32 * source))
+             .and_then(|x| x.checked_add(2 * crate::motion::MAX_MOTION_INSTANCE_BYTES + 16384))
+             .ok_or(UpscaleError::Capacity)?;
+         if total > MAX_UPSCALE_TRANSITION_BYTES {
+diff --git a/crates/incant_render/src/upscaling/targets.rs b/crates/incant_render/src/upscaling/targets.rs
+index ecbe2653431f..372596a85a61 100644
+--- a/crates/incant_render/src/upscaling/targets.rs
++++ b/crates/incant_render/src/upscaling/targets.rs
+@@ -4,6 +4,9 @@
+     pub color: [wgpu::TextureView; 2],
+     pub depth: [wgpu::TextureView; 2],
+     pub composite: wgpu::TextureView,
++    /// Unjittered opaque depth at output resolution for current-only sprites and
++    /// world text drawn over `composite`. Per frame; never history.
++    pub overlay_depth: wgpu::TextureView,
+     pub record: Option<[wgpu::TextureView; 2]>,
+ }
+ pub(super) struct Overlay {
+@@ -39,7 +42,7 @@
+     pub fn bytes(&self) -> u64 {
+         u64::from(self.size[0])
+             * u64::from(self.size[1])
+-            * if self.record.is_some() { 48 } else { 32 }
++            * if self.record.is_some() { 52 } else { 36 }
+     }
+     pub fn prepare(
+         d: &wgpu::Device,
+@@ -79,6 +82,12 @@
+                 crate::frame::HDR_FORMAT,
+                 "Output HDR with current overlays",
+             ),
++            overlay_depth: make(
++                d,
++                size,
++                wgpu::TextureFormat::Depth32Float,
++                "Output-resolution current-only overlay depth",
++            ),
+         })
+     }
+ }
+diff --git a/crates/incant_render/src/upscaling/tests.rs b/crates/incant_render/src/upscaling/tests.rs
+index 1bd83a447eb4..92b54e3148db 100644
+--- a/crates/incant_render/src/upscaling/tests.rs
++++ b/crates/incant_render/src/upscaling/tests.rs
+@@ -89,13 +89,38 @@
+     )
+     .unwrap();
+     let p = Plan::new([2048, 2048], [0., 0., 2048., 2048.], &frame).unwrap();
+-    p.preflight(
+-        8192,
+-        MAX_OUTPUT_BYTES,
+-        MAX_OVERLAY_BYTES,
+-        crate::motion::MAX_MOTION_TARGET_BYTES,
+-    )
+-    .unwrap();
++    // The output-resolution overlay depth (4 B/output pixel) is charged for old and
++    // candidate outputs under the unchanged ceiling: a full-scale 2048^2 candidate
++    // after a maximal old set now exceeds it by exactly 2 * 4 * 2^22 bytes, while a
++    // fresh one, a 1923^2 full-scale one and a 2048^2 output at 8/16 still fit.
++    assert_eq!(
++        p.preflight(
++            8192,
++            MAX_OUTPUT_BYTES,
++            MAX_OVERLAY_BYTES,
++            crate::motion::MAX_MOTION_TARGET_BYTES,
++        ),
++        Err(UpscaleError::Capacity)
++    );
++    p.preflight(8192, 0, 0, 0).unwrap();
++    for (size, half, fits) in [(1923, false, true), (1924, false, false), (2048, true, true)] {
++        let frame = crate::resolution::FramePlan::new(
++            [size, size],
++            [0., 0., size as f32, size as f32],
++            None,
++            crate::resolution::ResolutionScale::new(if half { 8 } else { 16 }).unwrap(),
++        )
++        .unwrap();
++        let q = Plan::new([size, size], [0., 0., size as f32, size as f32], &frame).unwrap();
++        let got = q.preflight(
++            8192,
++            MAX_OUTPUT_BYTES,
++            MAX_OVERLAY_BYTES,
++            crate::motion::MAX_MOTION_TARGET_BYTES,
++        );
++        assert_eq!(got.is_ok(), fits, "{size} half={half}");
++    }
++    assert_eq!(MAX_OUTPUT_BYTES, 36 * 4 * 1024 * 1024);
+     assert_eq!(MAX_UPSCALE_TRANSITION_BYTES, 640 * 1024 * 1024 + 16384);
+     for (o, a, m) in [
+         (MAX_OUTPUT_BYTES + 1, 0, 0),

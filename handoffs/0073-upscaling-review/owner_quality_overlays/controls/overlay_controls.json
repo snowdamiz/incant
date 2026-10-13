@@ -1,0 +1,496 @@
+{
+ "admission": {
+  "output_bytes_per_pixel": {
+   "ce617_owner": 48,
+   "ce617_portable": 32,
+   "owner": 52,
+   "portable": 36
+  },
+  "records (1280, 800)<-(1280, 720) out (2560, 1600)<-(2560, 1440)": 608960512,
+  "records (1920, 1920)<-(2048, 2048) out (2048, 2048)<-(2048, 2048)": 636043264,
+  "records (2048, 2048)<-(2048, 2048) out (2048, 2048)<-(2048, 2048)": 503332864,
+  "records (2560, 1440)<-(1920, 1080) out (2560, 1440)<-(1920, 1080)": 641114112
+ },
+ "all_checks_pass": true,
+ "checks": [
+  {
+   "check": "fixture_viewport at 5/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 2.842170943040401e-14,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport at 7/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 1.1368683772161603e-13,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport at 8/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 0.0,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport at 9/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 1.1368683772161603e-13,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport at 11/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 5.684341886080802e-14,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport at 12/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 5.684341886080802e-14,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport at 13/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 5.684341886080802e-14,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport at 15/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 2.842170943040401e-14,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 5/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 7.105427357601002e-15,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 7/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 7.105427357601002e-15,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 8/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 0.0,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 9/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 7.105427357601002e-15,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 11/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 7.105427357601002e-15,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 12/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 7.105427357601002e-15,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 13/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 7.105427357601002e-15,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect at 15/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 7.105427357601002e-15,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 5/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 2.842170943040401e-14,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 7/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 1.1368683772161603e-13,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 8/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 0.0,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 9/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 5.684341886080802e-14,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 11/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 5.684341886080802e-14,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 12/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 1.4210854715202004e-14,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 13/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 2.842170943040401e-14,
+   "ok": true
+  },
+  {
+   "check": "full_960x540 at 15/16: output-viewport projection equals the internal unjittered projection scaled",
+   "detail": 5.684341886080802e-14,
+   "ok": true
+  },
+  {
+   "check": "internal jitter would move an output-resolution overlay by a visible fraction of a pixel",
+   "detail": -0.75,
+   "ok": true
+  },
+  {
+   "check": "internal jitter would move an output-resolution overlay by a visible fraction of a pixel",
+   "detail": 0.75,
+   "ok": true
+  },
+  {
+   "check": "moved composite: sprites/text over (BLEND over resolved) equals the old single-overlay order",
+   "detail": 3.3306690738754696e-16,
+   "ok": true
+  },
+  {
+   "check": "output depth LessEqual: in_front",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "output depth LessEqual: behind",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "output depth LessEqual: coplanar_equal",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "bypass and inactive upscaling keep the ce617 sprite/text targets",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "output depth pass exists only with a portable plan and sprites/text",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "admit_records (2048, 2048): exact patched total",
+   "detail": 503332864,
+   "ok": true
+  },
+  {
+   "check": "admit_records (2048, 2048): ce617 stride 32 reproduces the ce617 test value",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "admit_records (1920, 1920): exact patched total",
+   "detail": 636043264,
+   "ok": true
+  },
+  {
+   "check": "admit_records (1920, 1920): ce617 stride 32 reproduces the ce617 test value",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "admit_records (2560, 1440): exact patched total",
+   "detail": 641114112,
+   "ok": true
+  },
+  {
+   "check": "admit_records (2560, 1440): ce617 stride 32 reproduces the ce617 test value",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "admit_records (1280, 800): exact patched total",
+   "detail": 608960512,
+   "ok": true
+  },
+  {
+   "check": "admit_records (1280, 800): ce617 stride 32 reproduces the ce617 test value",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "fresh 2048x1920 records admission",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "2048x1920 after 2048^2 still refused",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full-scale 2048^2 after a maximal old set is refused",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full-scale 2048^2 after a maximal old set exceeds the ceiling by 2*4*2^22 B",
+   "detail": 33554432,
+   "ok": true
+  },
+  {
+   "check": "1923^2 full scale after a maximal old set fits; 1924^2 is refused",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "2048^2 output at 8/16 after a maximal old set fits",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "overflow-safe refusal [4294967295, 4294967295]",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "overflow-safe refusal [0, 1]",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "overflow-safe refusal [8193, 1]",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "overflow-safe refusal [65536, 65536]",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "ceiling unchanged",
+   "detail": null,
+   "ok": true
+  }
+ ],
+ "model": "0073 owner_quality_overlays CPU controls (no renderer, Cargo or GPU)",
+ "order": {
+  "max_order_difference": 3.3306690738754696e-16
+ },
+ "routing": [
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": false,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": false,
+   "upscaling": "none"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": true,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": false,
+   "upscaling": "none"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": false,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": true,
+   "upscaling": "none"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": true,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": true,
+   "upscaling": "none"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": false,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": false,
+   "upscaling": "bypassed_pixel_camera"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": true,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": false,
+   "upscaling": "bypassed_pixel_camera"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": false,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": true,
+   "upscaling": "bypassed_pixel_camera"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": true,
+   "sprites_text_target": "unchanged ce617 target (internal colour/overlay, scene depth, scene rect)",
+   "transparent": true,
+   "upscaling": "bypassed_pixel_camera"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": false,
+   "sprites_or_text": false,
+   "sprites_text_target": "output composite + output depth + output rect",
+   "transparent": false,
+   "upscaling": "portable_plan"
+  },
+  {
+   "internal_overlay_depth_pass": false,
+   "output_depth_pass": true,
+   "sprites_or_text": true,
+   "sprites_text_target": "output composite + output depth + output rect",
+   "transparent": false,
+   "upscaling": "portable_plan"
+  },
+  {
+   "internal_overlay_depth_pass": true,
+   "output_depth_pass": false,
+   "sprites_or_text": false,
+   "sprites_text_target": "output composite + output depth + output rect",
+   "transparent": true,
+   "upscaling": "portable_plan"
+  },
+  {
+   "internal_overlay_depth_pass": true,
+   "output_depth_pass": true,
+   "sprites_or_text": true,
+   "sprites_text_target": "output composite + output depth + output rect",
+   "transparent": true,
+   "upscaling": "portable_plan"
+  }
+ ],
+ "viewport": {
+  "fixture_viewport@11/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 5.684341886080802e-14
+  },
+  "fixture_viewport@12/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 5.684341886080802e-14
+  },
+  "fixture_viewport@13/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 5.684341886080802e-14
+  },
+  "fixture_viewport@15/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 2.842170943040401e-14
+  },
+  "fixture_viewport@5/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 2.842170943040401e-14
+  },
+  "fixture_viewport@7/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 1.1368683772161603e-13
+  },
+  "fixture_viewport@8/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 0.0
+  },
+  "fixture_viewport@9/16": {
+   "aspect_in": 1.7788944244384766,
+   "aspect_out": 1.7788944244384766,
+   "max_output_pixel_or_kilo_depth_disagreement": 1.1368683772161603e-13
+  },
+  "full_960x540@11/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 5.684341886080802e-14
+  },
+  "full_960x540@12/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 1.4210854715202004e-14
+  },
+  "full_960x540@13/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 2.842170943040401e-14
+  },
+  "full_960x540@15/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 5.684341886080802e-14
+  },
+  "full_960x540@5/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 2.842170943040401e-14
+  },
+  "full_960x540@7/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 1.1368683772161603e-13
+  },
+  "full_960x540@8/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 0.0
+  },
+  "full_960x540@9/16": {
+   "aspect_in": 1.7777777910232544,
+   "aspect_out": 1.7777777910232544,
+   "max_output_pixel_or_kilo_depth_disagreement": 5.684341886080802e-14
+  },
+  "kernel_rect@11/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 7.105427357601002e-15
+  },
+  "kernel_rect@12/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 7.105427357601002e-15
+  },
+  "kernel_rect@13/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 7.105427357601002e-15
+  },
+  "kernel_rect@15/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 7.105427357601002e-15
+  },
+  "kernel_rect@5/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 7.105427357601002e-15
+  },
+  "kernel_rect@7/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 7.105427357601002e-15
+  },
+  "kernel_rect@8/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 0.0
+  },
+  "kernel_rect@9/16": {
+   "aspect_in": 1.9696969985961914,
+   "aspect_out": 1.9696969985961914,
+   "max_output_pixel_or_kilo_depth_disagreement": 7.105427357601002e-15
+  }
+ }
+}

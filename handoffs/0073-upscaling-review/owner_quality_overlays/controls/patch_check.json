@@ -1,0 +1,115 @@
+{
+ "files": [
+  {
+   "added": 59,
+   "base_blob": "903cf5ad6798e0e03e330ff27ebfc1262f9c411c",
+   "base_sha256": "c1e9fb546cb16b30b14bcda5804b18e406a0794d45039fc6f4358595e070945f",
+   "changed": true,
+   "path": "crates/incant_render/src/graph.rs",
+   "proposed_blob": "a324e92c4a8c913101869d36c6a6aa4732d51315",
+   "proposed_sha256": "8e9342ddd3da757afa7c8cb1ddd7e36081761a28c5ade55b35dcca9a011800f5",
+   "removed": 11
+  },
+  {
+   "added": 13,
+   "base_blob": "7476fda7812f9d45fb482dca206ab7d5e1a90754",
+   "base_sha256": "599cd44f1e4feb8418ce1e487c50a2eed0ac222be6af2d7ed5122f1a76b31c09",
+   "changed": true,
+   "path": "crates/incant_render/src/graph/native.rs",
+   "proposed_blob": "471c0ec9c4e374d44f4a196c9706635e1e9c8f5b",
+   "proposed_sha256": "97b5c3cffdf640935ce3bce3c62b668d2f6a59f8a36db5a3bfb2a7ed8464ec1a",
+   "removed": 7
+  },
+  {
+   "added": 27,
+   "base_blob": "7ab8fae90dc329abd232281c300daf12fe7be330",
+   "base_sha256": "a6e15e55f3a0d425dddc445c98d5bbcd9bb791670903a298683014acc60fdaf3",
+   "changed": true,
+   "path": "crates/incant_render/src/lib.rs",
+   "proposed_blob": "26bb55ba5bbf09b5ca94d6328903302d0713f062",
+   "proposed_sha256": "83eff3bf449f52b88a667eb456e9f0d9dd9d38d48a540fb97ebcbc33446f931d",
+   "removed": 12
+  },
+  {
+   "added": 27,
+   "base_blob": "489af14ffd23f09e4c091c8dfc51f3babb39bc0c",
+   "base_sha256": "949c7f1b3a2263633a6524d398b138b070898ad91411d47d6aeede84528506ed",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/attachment.rs",
+   "proposed_blob": "035c5e22b79e3e924e3c8859a0586c8bad50f018",
+   "proposed_sha256": "bf6e3893e52edfad57cd9f2f06e25c80fe7282805c972c3ea982aeba711a9540",
+   "removed": 11
+  },
+  {
+   "added": 32,
+   "base_blob": "eb58a5677e7aa8d4ac52edce670e25b12109e030",
+   "base_sha256": "be21e724375898916e1615c6e96631a9b46c34b4de35a18eb1bc0be854127f59",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/draw.rs",
+   "proposed_blob": "9b43c3a6d83d5031afddeb1e881d3d7bfd538a2a",
+   "proposed_sha256": "7920e73fb8d5c9934e68d1664f50acb999663dd790d43853b463d6c4e525d507",
+   "removed": 13
+  },
+  {
+   "added": 19,
+   "base_blob": "7e96f5f076e4257494829b657f24ea704569fef1",
+   "base_sha256": "5ebc0ee9fc3c5c37ae2fd6defa94b3956d857b26c7448ccda2f34962e3419b8d",
+   "changed": true,
+   "path": "crates/incant_render/src/motion/retained.rs",
+   "proposed_blob": "16c3b41fb461314be19b780780ef7dc3a66fa4c3",
+   "proposed_sha256": "400eb57b3d067eaa3cdf3d2e0c216a4868d09947d61c49dca62e909f0a394d00",
+   "removed": 0
+  },
+  {
+   "added": 6,
+   "base_blob": "452b73e07bfd525cdc4b471284f16c25e788e7a0",
+   "base_sha256": "dea16cd9362d9ed8839c4f86813554f89296204ac9a996fad05f7c1788d80b80",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/owner.rs",
+   "proposed_blob": "0d465c6e7a260dc4e2d34d49369b1ee6aa8fa003",
+   "proposed_sha256": "e50b6c72866579428c041e6600a986f986c4c391b91b780f1c4af8db4dcb4fc8",
+   "removed": 0
+  },
+  {
+   "added": 9,
+   "base_blob": "c3b68a0cb715a530e65a4663a66a58171666b110",
+   "base_sha256": "a5fe81bce82b19aefbc7507c034ba38a22a29ec776dcb7a9faf2f8457074bbaa",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/plan.rs",
+   "proposed_blob": "c6fd899ee7263abb949c41a8115fea892c529428",
+   "proposed_sha256": "b718183cf0829003c3650fd6a186328985fb2cc80b4a4a0625d2b47909efe092",
+   "removed": 5
+  },
+  {
+   "added": 10,
+   "base_blob": "ecbe2653431f676567645e06b866466619410a0d",
+   "base_sha256": "d7b6129b9e81cc8f06b4da069fccced8d551bd49098202019d38a915984d730b",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/targets.rs",
+   "proposed_blob": "372596a85a61c2edcc2b39674b26ce7e0148ad54",
+   "proposed_sha256": "19bd758883610efcec537bb1ce41db05f5e08efe39fcc5358841c8d16a02f094",
+   "removed": 1
+  },
+  {
+   "added": 32,
+   "base_blob": "1bd83a447eb4cee73a8a769524bd820bfaf092ae",
+   "base_sha256": "c0c29e73c5ef10f08994a7c601c9a8a24a46a0142e6db35cbae687a718de52d8",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/tests.rs",
+   "proposed_blob": "92b54e3148db0d3889a3eeea2c1459903c85a450",
+   "proposed_sha256": "2c50fad78ede2aede47c9d834bf7836c1429d2c8d1f49dbfc0a664e40ed85c13",
+   "removed": 7
+  }
+ ],
+ "git_apply_cached_check_against_ce617": true,
+ "git_apply_stderr": "",
+ "patch": {
+  "bytes": 24796,
+  "files": 10,
+  "path": "overlays.patch",
+  "sha256": "bd89d69d085f53e68ce7dd67940e59a48e2d80eb2d91c930fe5b3302d379113d"
+ },
+ "production": "ce6171957eda212d6796335623d8040a0f06b500",
+ "python_reapply_reproduces_proposed_files": true,
+ "scope": "patch construction and applicability only; no build, test or GPU"
+}
