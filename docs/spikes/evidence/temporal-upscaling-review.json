@@ -1,0 +1,36 @@
+{
+  "at": "2026-10-13T06:10:44.113555+00:00",
+  "reviewer": "astra-root",
+  "producer": "0452c5f5afc11c99b7c90d111428cc23611c9590",
+  "manifest_sha256": "2d2f4ffa9c6c43a95ab733f8fa3fa92ac4f5a1743f0759597e31534e70f531ca",
+  "source_freeze_sha256": "b7ee5ca277f5ca3b1574dd6640638347ca068cb11ba207cb4c1642bcf9f67411",
+  "source_review": "Accepted complete reconstruction/overlay shaders, plan/targets/state/system, retained staging+submission integration, motion DRS owner/jitter changes, model overlay target, graph endpoint ranges, output mapping, native wrapper/refusal paths, CPU and compiled GPU tests. No findings in explicit default-off CPU-reviewed scope.",
+  "evidence_review": {
+    "archived_raw_files": 17,
+    "copied_binaries": 8,
+    "sources": 24,
+    "baselines": 15,
+    "checks": 7,
+    "counts": {
+      "cpu-all": {
+        "passed": 117,
+        "failed": 0,
+        "ignored": 98,
+        "groups": 9
+      },
+      "cooked-refusal": {
+        "passed": 122,
+        "failed": 0,
+        "ignored": 40,
+        "groups": 1
+      }
+    },
+    "hashes_sizes_command_streams_verified": true
+  },
+  "limits": [
+    "No GPU, appearance, phone, performance or complete upscaling gate passed.",
+    "Cooked native mode explicitly refuses; MetalFX remains separate.",
+    "640MiB+16KiB is scoped logical old+candidate ceiling, not a mobile budget or RSS bound.",
+    "Actual copy execute permissions must be checked before routed numerical launch."
+  ]
+}
