@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "scope": "Exact accepted inert narrow-phase owner on main217; live physics save remains refused",
+  "producer": "e921a308ca73e0331540dac4c0f90bce372b200b",
+  "main": "1da6cab9778913999a745803445f209d4da0f90d",
+  "integration_source": "688b2aefe17dfe314a8324371e6175a802b90403",
+  "producer_manifest": {
+    "path": "docs/spikes/evidence/physics-narrow-owner.json",
+    "sha256": "e79ebdfa376e713c5fb5c7b5382cac6ee82926c44f61794bacbdee552820ca7c"
+  },
+  "producer_reviews": [
+    {
+      "path": "docs/spikes/evidence/physics-narrow-owner-source-review.json",
+      "sha256": "f4be0d8225329fcf752919e7773429e372aa50d804130aa7ca533a239c12289d"
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-owner-final-review.json",
+      "sha256": "0ece011a0f1f8665ad9204cfb17a8ec9d8ce2d4a17b7deb6040f43cd43442c52"
+    }
+  ],
+  "source_files": 1954,
+  "unrelated_implementation_files": 17,
+  "checks": 6,
+  "replayed_cases": 36,
+  "retained_full_producer_cases": 143,
+  "trusted_continued_steps": 728,
+  "records": [
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/00-checks.json.gz",
+      "sha256": "de2be712a432fa6ee1e6be18dd90b6d4639b250d4e4fe3cea666a5f3f01f8cc3",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/checks.json",
+      "raw_sha256": "f38ebf72e607de5b98c6783b5b8b8907945ede9c421ebf9cccbfbafcaebe0af5",
+      "raw_bytes": 3165
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/01-conventions.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/conventions.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/02-diff.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/diff.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/03-fmt.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/fmt.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_bytes": 0
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/04-replay-trusted_manifolds-81c01168a9839318.log.gz",
+      "sha256": "55e13e3fc873128734986d370fb12df131b2fb0022e4f45abd92a6904bf35aca",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/replay-trusted_manifolds-81c01168a9839318.log",
+      "raw_sha256": "52afaac85491f6a08e2b789d52cf2db85fd05becca1182e88d60e07629b912c8",
+      "raw_bytes": 5459
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/05-run.py.gz",
+      "sha256": "ed1f5bb1a184c278e820234e3211186ec75f4cb4ce366deaf99828280987e778",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/run.py",
+      "raw_sha256": "fdb58f311a2df5223da98c236024276f78ce810bd4a29f31b747721700038dcc",
+      "raw_bytes": 3380
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/06-runtime-graph.log.gz",
+      "sha256": "de6182d76bee95574657111a5ef8202969cb97ab13af0c9e3efb8156c02a15d0",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/runtime-graph.log",
+      "raw_sha256": "5ef41ccdc08f92a9a1cc30fa588d7c6c800813dbea42b4b2961cbec2929633a6",
+      "raw_bytes": 62
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/07-selected-graph.log.gz",
+      "sha256": "52992332b3969647a73db16c1e8bcd9c38b21eba68c4cfe297427b20454d1205",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/selected-graph.log",
+      "raw_sha256": "f1d2ec6952f13bc6df6461192c4013293b97eed8d410fbefe74fcc8a84dbe276",
+      "raw_bytes": 7680
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/08-source-identity.json.gz",
+      "sha256": "18a2f249f5a1a2542c572fbfa87c23d17acded5c3e1e12665739845130ce0b73",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/source-identity.json",
+      "raw_sha256": "addc48c5c2498aae934db70168c1f697c14c5c790df66bc8ab66909fa046bf0c",
+      "raw_bytes": 373567
+    },
+    {
+      "path": "docs/spikes/evidence/physics-narrow-main217/09-unrelated-main-delta.json.gz",
+      "sha256": "1262fc3092381d2a4b04a1d89f6dbf540c10b394b83af532ad5cd244621c4754",
+      "raw_path": "/Users/andreyyurlov/.codex/incant-integration-evidence/physics-narrow-main217/unrelated-main-delta.json",
+      "raw_sha256": "00d73f3638fc293b5afa0e3014ad94b72bf73394176d14e0cae010f7f8a7fbaf",
+      "raw_bytes": 4086
+    }
+  ],
+  "review": "Independent current-main final review pending",
+  "limits": [
+    "No current compile: retained producer executable replays after exact source/manifest/lock checks.",
+    "Actual current selected normal/build/dev graph contains only exact selected local sources; all workspace manifests equal producer.",
+    "Full 143 cases, strict Clippy and wasm compilation remain producer evidence.",
+    "Trusted native continuation does not admit hostile inert bytes into a live solver.",
+    "No GPU, shipping, device, performance or phase claim."
+  ]
+}

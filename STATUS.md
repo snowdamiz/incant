@@ -45,9 +45,12 @@ The checked physics boundary now preserves collider graph-index ownership, order
 intersection payloads and independent emitted-event history. Eight new native
 2D/3D controls pass, including 128 trusted continuation steps with retired-pair
 reuse, sensor transfers, event-mask toggles and generation reuse. Independent source and final evidence review accepted 143 CPU tests and seven
-scoped checks; publisher integration is pending. `PhysicsUnsupported` and hostile live
-restore admission remain closed; no vendor/world-format changes.
-[Scope and limits](docs/spikes/physics-narrow-owner.md).
+scoped checks. The exact-source main217 qualification passes six current checks
+and a 36-case copied-binary rerun with 728 trusted continuation steps; independent
+current-main review remains pending. `PhysicsUnsupported` and hostile live restore
+admission remain closed; no vendor/world-format changes.
+[Scope and limits](docs/spikes/physics-narrow-owner.md);
+[current-main qualification](docs/spikes/physics-narrow-main217.md).
 
 ## Static Wasm C builds — bounded local scheduling verified
 
