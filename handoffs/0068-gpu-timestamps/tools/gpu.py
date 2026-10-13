@@ -115,17 +115,27 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, frames=0, subm
             child = subprocess.Popen(argv, cwd=c.CHECKOUT / cwd, env=c.child_env(overrides),
                                      stdout=out, stderr=err, start_new_session=True)
             timed_out = False
+            original_error = None
             try:
-                code = child.wait(timeout=timeout)
+                child.wait(timeout=timeout)
             except subprocess.TimeoutExpired:
                 timed_out = True
-                os.killpg(child.pid, signal.SIGKILL)
-                code = child.wait()
+            except BaseException:
+                # Do not propagate until the child is reaped and its attempt is
+                # durably charged to the ledger, including reserved GPU budgets.
+                original_error = sys.exc_info()
             finally:
+                # A second Ctrl-C must not interrupt kill/reap. SIGKILL of this
+                # runner is inherently outside Python's cleanup guarantee.
+                previous_sigint = signal.signal(signal.SIGINT, signal.SIG_IGN)
                 try:
-                    os.killpg(child.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
+                    try:
+                        os.killpg(child.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass  # also covers exit racing the timeout
+                    code = child.wait()
+                finally:
+                    signal.signal(signal.SIGINT, previous_sigint)
         ended = c.now()
         try:
             os.killpg(child.pid, 0)
@@ -139,6 +149,7 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, frames=0, subm
                  "binary_sha256_before": expected, "binary_sha256_after": binary_after,
                  "grant_sha256": grant_sha, "tools": tools, "source": source, "pid": child.pid,
                  "started": started, "ended": ended, "exit": code, "timed_out": timed_out,
+                 "wait_error": type(original_error[1]).__name__ if original_error else None,
                  "timeout_s": timeout, "group_empty_after": group_empty,
                  "frames_reserved": frames, "submissions_reserved": submissions,
                  "scratch_leftovers": sorted(os.listdir(c.SCRATCH / label)),
@@ -148,10 +159,23 @@ def run_child(label, kind, item, binary_name, args, cwd, timeout, frames=0, subm
         if after is not None:
             try:
                 entry.update(after(stdout))
-            except Exception as error:  # a parsing failure must not lose the ledger record
+            except BaseException as error:  # parsing/interrupt must not lose the attempt
                 entry["after_error"] = repr(error)
-        with open(c.LEDGER, "a") as log:
-            log.write(json.dumps(entry) + "\n")
+                if not isinstance(error, Exception) and original_error is None:
+                    original_error = sys.exc_info()
+        try:
+            with open(c.LEDGER, "a") as log:
+                log.write(json.dumps(entry) + "\n")
+                log.flush()
+                os.fsync(log.fileno())
+        except BaseException as ledger_error:
+            if original_error:
+                raise original_error[1].with_traceback(original_error[2]) from ledger_error
+            raise
+        if original_error:
+            raise original_error[1].with_traceback(original_error[2])
+        if not group_empty:
+            raise SystemExit("owned GPU process group remains after cleanup; see ledger")
     print(json.dumps({k: entry[k] for k in ("label", "pid", "exit", "timed_out", "started",
                                             "ended", "libtest")}, indent=1))
     if binary_after != expected:

@@ -1197,6 +1197,8 @@ fn viewport() {
 /// Requires Astra's review before execution (brief: callback-after-owner-drop).
 /// Observes only that the retained device completes the submission without a
 /// panic or hang after the owner is gone; the orphaned result is unobservable.
+/// This does not prove callback-after-drop ordering: queue.submit may deliver
+/// the callback before drop(renderer). No callback completion flag is exposed.
 #[test]
 #[ignore = "handoff 0068 packet review; run only by the guarded packet runner"]
 fn owner_drop() {

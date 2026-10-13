@@ -309,3 +309,31 @@ None. No frame was rendered, and no pixel was inspected.
    brief's exact libtest arguments, acceptable for the numeric command? The
    alternative is the literal cargo command after the freeze, with
    `Running`-path and before/after hash checks.
+
+
+## Astra correctness follow-up (2026-10-13, no grant or GPU)
+
+The independent read-only helper review found that interruption of either child
+wait killed the group but skipped reaping and terminal-ledger construction.
+`build.py::run_group` and `gpu.py::run_child` now defer any original wait exception
+until a `finally` kill/reap and a flushed, fsynced terminal ledger row. Timeout/exit
+races are accepted as already-dead groups. An interrupted GPU attempt retains its
+full reserved frame/submission budget and counts as an attempt; the original
+exception is re-raised. A nonempty group refuses success. This is catchable Python
+exception cleanup, not a guarantee against an uncatchable SIGKILL of the runner.
+
+Seven CPU-only actual process controls pass (both runners' success, timeout,
+SIGINT; plus interrupted GPU postprocessing). They execute `/usr/bin/true` or
+`/bin/sleep`, inspect terminal rows and independently verify PID/process-group
+absence. The GPU-runner controls also prove that charged attempts block a next
+child exceeding the budget. Grant/source lookups alone are temporary test stubs;
+no renderer, Cargo compiler, target lease or GPU work runs. Exact source hashes
+and rows are in `preparation/lifecycle-checks.json`, with the unittest log beside
+it. All test processes were reaped. This follow-up was implemented by Astra.
+
+`owner_drop` is suitable only as the documented bounded owner destruction and
+retained-device completion smoke. The earlier phrase "before its mapping callback"
+is not a proven temporal ordering: `queue.submit` may deliver callbacks before
+`drop(renderer)`. The Rust comment now states this explicitly. A fresh timing
+owner must start empty; no callback-after-drop, device loss or map-failure proof
+is inferred. Actual execution and Claude appearance remain pending root grant.

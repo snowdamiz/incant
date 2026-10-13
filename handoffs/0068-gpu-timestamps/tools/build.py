@@ -52,17 +52,27 @@ def run_group(label, argv, cwd, overrides, timeout, stdout_name, stderr_name):
             child = subprocess.Popen(argv, cwd=cwd, env=c.child_env(overrides), stdout=out,
                                      stderr=err, start_new_session=True)
             timed_out = False
+            original_error = None
             try:
-                code = child.wait(timeout=timeout)
+                child.wait(timeout=timeout)
             except subprocess.TimeoutExpired:
                 timed_out = True
-                os.killpg(child.pid, signal.SIGKILL)
-                code = child.wait()
+            except BaseException:
+                # Do not propagate until the child is reaped and its attempt is
+                # durably charged to the ledger, including reserved GPU budgets.
+                original_error = sys.exc_info()
             finally:
+                # A second Ctrl-C must not interrupt kill/reap. SIGKILL of this
+                # runner is inherently outside Python's cleanup guarantee.
+                previous_sigint = signal.signal(signal.SIGINT, signal.SIG_IGN)
                 try:
-                    os.killpg(child.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
+                    try:
+                        os.killpg(child.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass  # also covers exit racing the timeout
+                    code = child.wait()
+                finally:
+                    signal.signal(signal.SIGINT, previous_sigint)
         try:
             os.killpg(child.pid, 0)
             group_empty = False
@@ -70,13 +80,25 @@ def run_group(label, argv, cwd, overrides, timeout, stdout_name, stderr_name):
             group_empty = True
         entry = {"label": label, "kind": "build", "argv": [str(a) for a in argv], "cwd": str(cwd),
                  "env": c.env_receipt(overrides), "pid": child.pid, "started": started,
-                 "ended": c.now(), "exit": code, "timed_out": timed_out, "timeout_s": timeout,
+                 "ended": c.now(), "exit": code, "timed_out": timed_out,
+                 "wait_error": type(original_error[1]).__name__ if original_error else None, "timeout_s": timeout,
                  "group_empty_after": group_empty, "frames_reserved": 0,
                  "submissions_reserved": 0, "stdout": str(out_path),
                  "stdout_sha256": c.sha(out_path), "stderr": str(err_path),
                  "stderr_sha256": c.sha(err_path)}
-        with open(c.POST_RELEASE_LEDGER if c.LATCH.exists() else c.LEDGER, "a") as ledger:
-            ledger.write(json.dumps(entry) + "\n")
+        try:
+            with open(c.POST_RELEASE_LEDGER if c.LATCH.exists() else c.LEDGER, "a") as ledger:
+                ledger.write(json.dumps(entry) + "\n")
+                ledger.flush()
+                os.fsync(ledger.fileno())
+        except BaseException as ledger_error:
+            if original_error:
+                raise original_error[1].with_traceback(original_error[2]) from ledger_error
+            raise
+        if original_error:
+            raise original_error[1].with_traceback(original_error[2])
+        if not group_empty:
+            raise SystemExit("owned build process group remains after cleanup; see ledger")
     return entry
 
 
