@@ -122,7 +122,8 @@ Independent source review, both 176-case CPU modes, 20 parallel controls and all
 ten producer qualification commands pass. The actual broad/narrow/CCD composition
 passes 192 default and 192 fast8 CPU cases plus explicitly pinned two-worker
 controls; fifteen commands pass. Final current composition review is accepted;
-the actual main223 ancestry join preserves all tested executable inputs.
+the actual main223 ancestry join preserves all tested executable inputs. PR224
+merged after the required fast check.
 [Current composition](docs/spikes/physics-pipeline-main222.md).
 Whole-owner provenance, derived geometry/work
 checks, live construction and exact physics save admission remain open.
@@ -137,9 +138,9 @@ unification also affects other cc build consumers in the selected host graph.
 Windows candidate execution and timing remain pending; no Windows speedup or
 performance gate is claimed. [Scope and evidence](docs/spikes/wasm-c-parallel.md).
 
-## Current overview — main223, 2026-10-13
+## Current overview — main224, 2026-10-13
 
-Development main223 includes the reviewed opt-in cooked renderer families and
+Development main224 includes the reviewed opt-in cooked renderer families and
 Vulkan cache lifecycle, dynamic resolution, numerical retained motion, CPU/GPU
 profiling scopes and inert physics island validation. Each lane retains its own
 execution and acceptance limits below; the complete engine and game remain open.
@@ -147,7 +148,10 @@ execution and acceptance limits below; the complete engine and game remain open.
 Checkpoint23 is frozen at exact main220 through PR213, candidate `3381ccef`,
 with all 23 required contexts and eight workflows preserved. Its macOS journal
 authorization replay test failed; the exact original log is retained and diagnosis
-is underway while the remaining workflows finish. Checkpoint22 is
+uses a controlled inherited-lock reproduction and a test-only isolation repair
+under review while the remaining workflows finish. The hosted error was not
+printed, so the exact hosted cause remains inferred.
+[Repair evidence](docs/spikes/journal-replay-test-isolation.md). Checkpoint22 is
 terminal and unpromoted: 22 contexts succeeded; its optional timestamp diagnostic
 failure is retained and repaired in main219. The corrected test keeps forced backend
 selection mandatory and runs only supported timing paths, retaining actual compute
@@ -159,7 +163,7 @@ promoted through PR174 after all 23 required contexts and eight exact-head workf
 succeeded and independent review verified the exact tested tree. Release `065aac69`
 exactly matches selected main205 `7bfeecfd`. Hosted default/cooked Metal, Vulkan and
 Dx12 suites passed, including the repaired four-process Vulkan cache lifecycle.
-Later main206–223 changes remain outside that tested baseline. No device, performance or
+Later main206–224 changes remain outside that tested baseline. No device, performance or
 phase gate follows from this promotion.
 
 Failed checkpoints15–19 remain historical and unpromoted. In particular, checkpoint17
