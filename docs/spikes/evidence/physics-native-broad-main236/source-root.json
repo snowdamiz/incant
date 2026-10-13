@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-13T17:13:59.468192+00:00",
+  "reviewer": "astra root",
+  "decision": "accepted current-main broad manager composition for scoped qualification",
+  "head": "7dbb34c43b3f727d3c47bb4fc88616de4fb0bc18",
+  "main": "68a2a68612ddf5909beb1be7dfa94d11f27f733a",
+  "producer": "2967a484c09dfb3c1ece0b11caceca11a2dfcc31",
+  "freeze_sha256": "198a9f527ce5c37d1a2ccf3c11d56b736959779113fd709c74c31743f613ec65",
+  "seam_sha256": "069bc38c37b5d9494620d2da716b342b17fbce74bb445167a703387d5286e0ca",
+  "source_files": 73,
+  "closure_files": 2031,
+  "basis": [
+    "Independently rehashed all current selected closure files and producer Git blobs.72 of73 affected source/pin/tool files match the accepted producer exactly.",
+    "Read sole seam: snapshot Error ordering equals actual main236; no encoded error discriminants changed.",
+    "Producer final review85736d retained. Default-off native broad reconstruction remains private behind typed frame and construction permit."
+  ],
+  "limits": [
+    "Current-main qualification and final archive pending; native deterministic and fast workspaces must retain explicit fixture mapping.",
+    "No complete world install, live save, phone performance or phase acceptance."
+  ]
+}
