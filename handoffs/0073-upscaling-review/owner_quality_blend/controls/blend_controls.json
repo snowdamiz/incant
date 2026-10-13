@@ -1,0 +1,455 @@
+{
+ "admission": {
+  "1923x1923": 11901024,
+  "2048x2048": 12681216,
+  "fixture_viewport": 1387008,
+  "largest_full_scale_square_after_maximal_old_with_grid": 1880,
+  "per_cluster_bytes": 516
+ },
+ "all_checks_pass": true,
+ "blending": {
+  "max_difference": 2.220446049250313e-16,
+  "note": "scalar blend algebra only, not raster equivalence"
+ },
+ "checks": [
+  {
+   "check": "fixture_viewport 8/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport 8/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9381122895565484,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport 12/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport 12/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9457945412588525,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport 5/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport 5/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9676067705669043,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport 13/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "fixture_viewport 13/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9379326808307472,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect 8/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect 12/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect 5/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "kernel_rect 13/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full 8/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full 8/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9772839506172839,
+   "ok": true
+  },
+  {
+   "check": "full 12/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full 12/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9551620370370371,
+   "ok": true
+  },
+  {
+   "check": "full 5/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full 5/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9232831790123457,
+   "ok": true
+  },
+  {
+   "check": "full 13/16: every output tile is addressed and in range",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "full 13/16: output pixels on the internal grid would hit wrong tiles",
+   "detail": 0.9137866512345679,
+   "ok": true
+  },
+  {
+   "check": "scalar algebra: BLEND then sprites then text over the composite equals the f075 order",
+   "detail": 2.220446049250313e-16,
+   "ok": true
+  },
+  {
+   "check": "no plan keeps every f075 target",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "an output grid exists only for portable plans with BLEND draws",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "2048^2 output grid allowance",
+   "detail": 12681216,
+   "ok": true
+  },
+  {
+   "check": "fixture viewport grid allowance",
+   "detail": 1387008,
+   "ok": true
+  },
+  {
+   "check": "f075 boundary 1923^2 fit with 199068 B headroom; the grid allowance now refuses it",
+   "detail": {
+    "grid": 11901024,
+    "headroom": 199068
+   },
+   "ok": true
+  },
+  {
+   "check": "a full-scale square still fits after a maximal old set",
+   "detail": 1880,
+   "ok": true
+  },
+  {
+   "check": "refused grid [0, 0, 0, 1]",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "refused grid [0, 0, nan, 1]",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "refused grid [0, 0, inf, 1]",
+   "detail": null,
+   "ok": true
+  },
+  {
+   "check": "refused grid [0, 0, 524288, 64]",
+   "detail": null,
+   "ok": true
+  }
+ ],
+ "clusters": {
+  "fixture_viewport@12/16": {
+   "covered_output_tiles": 112,
+   "internal_tiles": [
+    11,
+    6
+   ],
+   "misuse_wrong_tile_fraction": 0.9457945412588525,
+   "output_tiles": [
+    14,
+    8
+   ]
+  },
+  "fixture_viewport@13/16": {
+   "covered_output_tiles": 112,
+   "internal_tiles": [
+    12,
+    7
+   ],
+   "misuse_wrong_tile_fraction": 0.9379326808307472,
+   "output_tiles": [
+    14,
+    8
+   ]
+  },
+  "fixture_viewport@5/16": {
+   "covered_output_tiles": 112,
+   "internal_tiles": [
+    5,
+    3
+   ],
+   "misuse_wrong_tile_fraction": 0.9676067705669043,
+   "output_tiles": [
+    14,
+    8
+   ]
+  },
+  "fixture_viewport@8/16": {
+   "covered_output_tiles": 112,
+   "internal_tiles": [
+    7,
+    4
+   ],
+   "misuse_wrong_tile_fraction": 0.9381122895565484,
+   "output_tiles": [
+    14,
+    8
+   ]
+  },
+  "full@12/16": {
+   "covered_output_tiles": 135,
+   "internal_tiles": [
+    12,
+    7
+   ],
+   "misuse_wrong_tile_fraction": 0.9551620370370371,
+   "output_tiles": [
+    15,
+    9
+   ]
+  },
+  "full@13/16": {
+   "covered_output_tiles": 135,
+   "internal_tiles": [
+    13,
+    7
+   ],
+   "misuse_wrong_tile_fraction": 0.9137866512345679,
+   "output_tiles": [
+    15,
+    9
+   ]
+  },
+  "full@5/16": {
+   "covered_output_tiles": 135,
+   "internal_tiles": [
+    5,
+    3
+   ],
+   "misuse_wrong_tile_fraction": 0.9232831790123457,
+   "output_tiles": [
+    15,
+    9
+   ]
+  },
+  "full@8/16": {
+   "covered_output_tiles": 135,
+   "internal_tiles": [
+    8,
+    5
+   ],
+   "misuse_wrong_tile_fraction": 0.9772839506172839,
+   "output_tiles": [
+    15,
+    9
+   ]
+  },
+  "kernel_rect@12/16": {
+   "covered_output_tiles": 2,
+   "internal_tiles": [
+    1,
+    1
+   ],
+   "misuse_wrong_tile_fraction": 0.0,
+   "output_tiles": [
+    2,
+    1
+   ]
+  },
+  "kernel_rect@13/16": {
+   "covered_output_tiles": 2,
+   "internal_tiles": [
+    1,
+    1
+   ],
+   "misuse_wrong_tile_fraction": 0.0,
+   "output_tiles": [
+    2,
+    1
+   ]
+  },
+  "kernel_rect@5/16": {
+   "covered_output_tiles": 2,
+   "internal_tiles": [
+    1,
+    1
+   ],
+   "misuse_wrong_tile_fraction": 0.0,
+   "output_tiles": [
+    2,
+    1
+   ]
+  },
+  "kernel_rect@8/16": {
+   "covered_output_tiles": 2,
+   "internal_tiles": [
+    1,
+    1
+   ],
+   "misuse_wrong_tile_fraction": 0.0,
+   "output_tiles": [
+    2,
+    1
+   ]
+  }
+ },
+ "model": "0073 owner_quality_blend CPU controls",
+ "routing": [
+  {
+   "blend": false,
+   "blend_target": null,
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "none",
+   "sprites_or_text": false
+  },
+  {
+   "blend": false,
+   "blend_target": null,
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "none",
+   "sprites_or_text": true
+  },
+  {
+   "blend": true,
+   "blend_target": "f075 target (internal overlay or scene colour)",
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "none",
+   "sprites_or_text": false
+  },
+  {
+   "blend": true,
+   "blend_target": "f075 target (internal overlay or scene colour)",
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "none",
+   "sprites_or_text": true
+  },
+  {
+   "blend": false,
+   "blend_target": null,
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "pixel_camera_bypass",
+   "sprites_or_text": false
+  },
+  {
+   "blend": false,
+   "blend_target": null,
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "pixel_camera_bypass",
+   "sprites_or_text": true
+  },
+  {
+   "blend": true,
+   "blend_target": "f075 target (internal overlay or scene colour)",
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "pixel_camera_bypass",
+   "sprites_or_text": false
+  },
+  {
+   "blend": true,
+   "blend_target": "f075 target (internal overlay or scene colour)",
+   "internal_overlay_depth_pass": "f075 rule (accumulating and any overlay)",
+   "models_order": "f075",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "pixel_camera_bypass",
+   "sprites_or_text": true
+  },
+  {
+   "blend": false,
+   "blend_target": null,
+   "internal_overlay_depth_pass": false,
+   "models_order": "resolve, overlay clear, composite, output depth, BLEND",
+   "output_cluster_pass": false,
+   "output_depth_pass": false,
+   "output_grid_prepared": false,
+   "plan": "portable_plan",
+   "sprites_or_text": false
+  },
+  {
+   "blend": false,
+   "blend_target": null,
+   "internal_overlay_depth_pass": false,
+   "models_order": "resolve, overlay clear, composite, output depth, BLEND",
+   "output_cluster_pass": false,
+   "output_depth_pass": true,
+   "output_grid_prepared": false,
+   "plan": "portable_plan",
+   "sprites_or_text": true
+  },
+  {
+   "blend": true,
+   "blend_target": "output composite, output depth, output rect, output grid",
+   "internal_overlay_depth_pass": false,
+   "models_order": "resolve, overlay clear, composite, output depth, BLEND",
+   "output_cluster_pass": true,
+   "output_depth_pass": true,
+   "output_grid_prepared": true,
+   "plan": "portable_plan",
+   "sprites_or_text": false
+  },
+  {
+   "blend": true,
+   "blend_target": "output composite, output depth, output rect, output grid",
+   "internal_overlay_depth_pass": false,
+   "models_order": "resolve, overlay clear, composite, output depth, BLEND",
+   "output_cluster_pass": true,
+   "output_depth_pass": true,
+   "output_grid_prepared": true,
+   "plan": "portable_plan",
+   "sprites_or_text": true
+  }
+ ]
+}

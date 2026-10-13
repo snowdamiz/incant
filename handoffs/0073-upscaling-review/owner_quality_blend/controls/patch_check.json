@@ -1,0 +1,105 @@
+{
+ "files": [
+  {
+   "added": 16,
+   "base_blob": "e1b54a3d79946085889acdf5e35e01799a1fc09e",
+   "base_sha256": "ab786e6fa52a6421952d680f30911b711f25f056033ccacd59cb70ad96dcb7b1",
+   "changed": true,
+   "path": "crates/incant_render/src/graph.rs",
+   "proposed_blob": "8387c93188d023d17c905e36d0216308d0772aaa",
+   "proposed_sha256": "fad04f0f9ac4c42b51f3f6a0dc6eb23c9c59e5be949fba6285aa9ebfe717bdb6",
+   "removed": 1
+  },
+  {
+   "added": 10,
+   "base_blob": "ba725dd508cc94b882fb3a224d1a5eaf333b0d2f",
+   "base_sha256": "13ec1d61e53e3d6dbba4e1fc9549024882e65e5b0632efddc1ea80b160dc4f26",
+   "changed": true,
+   "path": "crates/incant_render/src/graph/native.rs",
+   "proposed_blob": "3680c20ec899e58061524713c2fffdba9f03d9b5",
+   "proposed_sha256": "d4ee17460d8d91cc62bbef51f157ebb38b71f8ecbaef70df8e404895bc52c445",
+   "removed": 5
+  },
+  {
+   "added": 23,
+   "base_blob": "8d7e1bad607178d9e9159b4a6a06fa11b6e4a94d",
+   "base_sha256": "738b2624923f467ab0af99849312bc887514b43a07d139627783596779d4eddd",
+   "changed": true,
+   "path": "crates/incant_render/src/lib.rs",
+   "proposed_blob": "086dede3f4ee6eb7a36c36aabb367636434b0a01",
+   "proposed_sha256": "d7df7bfcd630fb7ba4d5f52f24fa3530a260139406f3fc5fc42ca2f37fb96ee0",
+   "removed": 10
+  },
+  {
+   "added": 67,
+   "base_blob": "08d37df320d22d8a80a918dae88570fe86d95e69",
+   "base_sha256": "c32584e4c45c020d8f4eadf123342ccada602b3eaf89469c553e7e2dfb526d49",
+   "changed": true,
+   "path": "crates/incant_render/src/lighting/mod.rs",
+   "proposed_blob": "486a0227cc9a9c1df3f9ff09ba5fa34fdc2caaa0",
+   "proposed_sha256": "51ce482d943bb7ef69e7e42c6191da3b55cee2abc391662665074dd1eb3b24d5",
+   "removed": 4
+  },
+  {
+   "added": 113,
+   "base_blob": "d878ea5739f01fa9081edf09f339ef4952b926f1",
+   "base_sha256": "cd364ddc995bdb3d09259248849f88d2330080cb709aad360f7b0d534e0a547b",
+   "changed": true,
+   "path": "crates/incant_render/src/model_draw.rs",
+   "proposed_blob": "d5a1f9d59bbfd53c170b466103d3b01a6ce1d459",
+   "proposed_sha256": "81050d540252c1a6e092e4fbba07e949660e110d5d8032838aba5b7eedce0859",
+   "removed": 33
+  },
+  {
+   "added": 3,
+   "base_blob": "76c6e26c4eb4d88ffb6e4e841c40c5261b800f6d",
+   "base_sha256": "7b3ddefbef62fb24e93122ce9f8cd52c1b9b7f61d2a48f1a4c5a4a8f8cdffa39",
+   "changed": true,
+   "path": "crates/incant_render/src/retained.rs",
+   "proposed_blob": "4874f943ad780b8c97cd652377ab1a0739ba19c4",
+   "proposed_sha256": "8a80f11205067d7c27a0f8d7a336724b2d2bd310217da98dda639094155be857",
+   "removed": 2
+  },
+  {
+   "added": 12,
+   "base_blob": "0d465c6e7a260dc4e2d34d49369b1ee6aa8fa003",
+   "base_sha256": "e50b6c72866579428c041e6600a986f986c4c391b91b780f1c4af8db4dcb4fc8",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/owner.rs",
+   "proposed_blob": "7ab447f6a6d31048e2de726cd383e0bee8550f86",
+   "proposed_sha256": "d76150032d102aa18402956a26533d292b923d83569a20ace8a5a2748809e10e",
+   "removed": 5
+  },
+  {
+   "added": 11,
+   "base_blob": "c6fd899ee7263abb949c41a8115fea892c529428",
+   "base_sha256": "b718183cf0829003c3650fd6a186328985fb2cc80b4a4a0625d2b47909efe092",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/plan.rs",
+   "proposed_blob": "48c6dc0dea093de84778244ac8327bd3836ab3ea",
+   "proposed_sha256": "9143953303b30e529ff0546a02355810d4214a3027be81eee4205f3c56eb37a3",
+   "removed": 2
+  },
+  {
+   "added": 36,
+   "base_blob": "886d14aa6c2816e0991a8bc9343e77875e1ca9d0",
+   "base_sha256": "19f4dc4d4a6d851aea5ff5ffffa9d15ff847980989b1cb44cbceccb0aa5ee051",
+   "changed": true,
+   "path": "crates/incant_render/src/upscaling/tests.rs",
+   "proposed_blob": "75fe74e3059aed4bbf70e57837791062d90e1172",
+   "proposed_sha256": "0a7df9883df6778c261e08d7973b5625ed9c4cdf044212e983317f9141c1eec9",
+   "removed": 0
+  }
+ ],
+ "git_apply_cached_check_against_f075": true,
+ "git_apply_stderr": "",
+ "patch": {
+  "bytes": 25962,
+  "files": 9,
+  "path": "blend.patch",
+  "sha256": "93fd2b23762f484e495a024f2d27548de2dd7aa324d98edbc932d87b33b9f69c"
+ },
+ "production": "f075b3900d086acbfc0b93ee036bb5fbea90cd02",
+ "python_reapply_reproduces_proposed_files": true,
+ "scope": "patch construction and applicability only; no build, test or GPU"
+}
