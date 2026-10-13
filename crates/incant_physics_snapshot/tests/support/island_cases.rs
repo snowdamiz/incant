@@ -6,6 +6,7 @@ macro_rules! island_cases {
             a: &ValidatedAttachments<'_>,
             m: &ValidatedManifolds<'_>,
             shapes: &[ValidatedGeometry],
+            collider_arena: &ValidatedArena,
         ) -> RigidOwnerRecord {
             let b = ordered_capture::capture(&w.bodies);
             let (_, handles) = layout(&b["bodies"], identity());
@@ -220,6 +221,7 @@ macro_rules! island_cases {
             let bytes = encode_rigid_owner(&joined, &mut budget()).unwrap();
             let decoded_owner = decode_rigid_owner(&bytes, owner_context, &mut budget()).unwrap();
             assert_eq!(decoded_owner.record(), &owner);
+            check_narrow(w, &joined, collider_arena);
             check_owner_corruption(owner, owner_context, &bytes);
             let owner = decoded_owner.record().clone();
             let bytes = encode_islands(&v, &mut budget()).unwrap();
