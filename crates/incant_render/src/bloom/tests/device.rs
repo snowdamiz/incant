@@ -145,3 +145,83 @@ fn canonical_graph_zero_gain_and_pixel_camera_bypass_and_invalid_replace() {
     assert_eq!(read(&r, &target), read(&r, &baseline));
     assert!(r.bloom.as_ref().unwrap().cache.lock().unwrap().is_none());
 }
+
+#[test]
+#[ignore = "requires coordinated numerical GPU review; three output frames"]
+fn bloom_output_keeps_emitter_position_at_reduced_internal_resolution() {
+    let mut r = Renderer::headless().unwrap();
+    if cfg!(all(feature = "cooked-output", not(target_arch = "wasm32"))) {
+        return;
+    }
+    pollster::block_on(r.enable_bloom(config())).unwrap();
+    let validation = r.device.push_error_scope(wgpu::ErrorFilter::Validation);
+    let output_size = [67, 53];
+    let viewport = crate::Viewport {
+        rect: [5.5, 4.25, 57., 43.],
+        corner_radii: [2.; 4],
+        canvas_srgb: [2, 3, 4],
+    };
+    for numerator in [16, 12, 8] {
+        let scale = crate::resolution::ResolutionScale::new(numerator).unwrap();
+        let plan =
+            crate::resolution::FramePlan::new(output_size, viewport.rect, None, scale).unwrap();
+        let source = texture(&r, HDR_FORMAT, plan.size[0], plan.size[1]);
+        let bloom_size = plan.size.map(|v| v.div_ceil(2));
+        let bloom = texture(&r, HDR_FORMAT, bloom_size[0], bloom_size[1]);
+        // Isolate output-coordinate correctness from extraction/filtering: one
+        // known HDR texel is placed in a prepared bloom field over empty scene.
+        let hot = [bloom_size[0] / 3, bloom_size[1] * 2 / 3];
+        let mut data = vec![0u8; (bloom_size[0] * bloom_size[1] * 8) as usize];
+        let offset = ((hot[1] * bloom_size[0] + hot[0]) * 8) as usize;
+        data[offset..offset + 2].copy_from_slice(&half::f16::from_f32(4.).to_le_bytes());
+        r.queue.write_texture(
+            bloom.as_image_copy(),
+            &data,
+            wgpu::TexelCopyBufferLayout {
+                offset: 0,
+                bytes_per_row: Some(bloom_size[0] * 8),
+                rows_per_image: Some(bloom_size[1]),
+            },
+            bloom.size(),
+        );
+        let target = texture(&r, wgpu::TextureFormat::Rgba8UnormSrgb, 67, 53);
+        let mut encoder = r.device.create_command_encoder(&Default::default());
+        r.bloom
+            .as_ref()
+            .unwrap()
+            .output
+            .prepare_optional_bloom(
+                &r.device,
+                &source.create_view(&Default::default()),
+                &target.create_view(&Default::default()),
+                target.format(),
+                Some(viewport),
+                plan.output_mapping,
+                Some((&bloom.create_view(&Default::default()), 0.2)),
+            )
+            .unwrap()
+            .encode(&mut encoder);
+        r.queue.submit([encoder.finish()]);
+        let actual = read(&r, &target);
+        let (index, pixel) = actual
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .enumerate()
+            .max_by_key(|(_, pixel)| pixel[0])
+            .unwrap();
+        assert!(pixel[0] > 80, "the isolated emitter must produce light");
+        let observed = [(index % 67) as f32 + 0.5, (index / 67) as f32 + 0.5];
+        for axis in 0..2 {
+            // Texel center -> normalized bloom -> internal scene -> physical.
+            let expected = (hot[axis] as f32 + 0.5) / bloom_size[axis] as f32
+                * plan.size[axis] as f32
+                / scale.fraction();
+            assert!(
+                (observed[axis] - expected).abs() <= 1.,
+                "scale {numerator}, axis {axis}: observed {observed:?}, expected {expected}"
+            );
+        }
+    }
+    assert!(pollster::block_on(validation.pop()).is_none());
+}
