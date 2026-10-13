@@ -53,7 +53,7 @@ Focused implementation evidence is retained under
 `~/.codex/incant-evidence/physics-native-capture-001`. Earlier lock-selection,
 block-solver, recursive-format traversal and compile failures remain historical;
 they are not relabeled as passing results. Scoped CPU qualification and independent
-source review pass; final execution review remains pending. No GPU or
+source review pass; final producer execution review is accepted. No GPU or
 device/performance work is part of this slice.
 
 Focused source008 qualification passed 21 capture tests plus one independent
@@ -89,7 +89,7 @@ and updates the two vendor pins. Native and wasm strict nonparallel library
 Clippy and scoped formatting pass. These compiler checks do not relabel the
 source009 test executions or binaries. Independent source009 review is accepted
 under receipt `f43b5b74444ac96c269a6c973497f26129befb91a28f553ca867ba2479831737`;
-the complete final execution packet still needs independent acceptance.
+the complete final execution packet is independently accepted under root receipt `151ea667740166375b6894af2170d81aebd6715476edf90a2005f60af44125ae`.
 
 The lossless packet is
 [`evidence/physics-native-capture.json`](evidence/physics-native-capture.json).
@@ -102,3 +102,10 @@ python3 ~/.codex/incant-evidence/physics-native-capture-001/collect.py --verify-
 
 The separate outer runtime's stable-ID/event integration results are not counted
 as evidence for this native producer. Persisted physics saves remain refused.
+
+Current-main243 intake preserves the original manifest/archive. Its source-only
+composition and final review copies are retained in
+[`evidence/physics-native-capture-main243/source-composition.json`](evidence/physics-native-capture-main243/source-composition.json).
+The sole relevant source difference is the existing snapshot Error declaration
+order. This changes the conservative compiled identity; integrated compilation
+and execution have not yet been claimed.
