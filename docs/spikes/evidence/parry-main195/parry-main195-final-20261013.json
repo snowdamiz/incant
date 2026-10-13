@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-13T04:24:36.201476+00:00",
+  "reviewer": "astra/root",
+  "result": "accepted scoped integration",
+  "head": "f630f8ef19afca35b37184b72df5848077d5a295",
+  "manifest_sha256": "42c943bec0898d0a4ebdc987168a2cbf666c70d332481a87026b4e47fdcf3732",
+  "verification": {
+    "collector_verify_only_exit": 0,
+    "handle76821_terminal_exit": 0,
+    "reaped": true,
+    "independently_rehashed_archive_records": 51,
+    "archive_payloads": 29,
+    "frozen_current_inputs": 2829,
+    "producer_inputs": 848,
+    "exact_producer_inputs": 844,
+    "checks_exit0": 19,
+    "each_mode_cpu_passed": 18,
+    "each_mode_nonempty_groups": 6,
+    "probe_graph_checks": 4,
+    "actual_runtime_identity_mutate_restore_controls": 2
+  },
+  "reviewed_seams": [
+    "Root Cargo manifests/lock and isolated native-physics lock retain pinned local Parry0.31.1 semantics plus profiler main195 graph",
+    "Single incant_profile source-hash row added to compatibility build source list; actual profiler/Parry baseline-change-restore controls verify invalidation and restoration",
+    "Only three previously reviewed tooling/metadata inputs differ across initial/continued source; unchanged passing Rust checks retain their source scope"
+  ],
+  "limits": [
+    "Producer Miri experiments remain failed/qualified, not a clean Miri or complete soundness proof.",
+    "No new shipping package, GPU, reference-phone performance or physics-save admission."
+  ]
+}

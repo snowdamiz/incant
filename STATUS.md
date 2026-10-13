@@ -16,9 +16,9 @@ phase gate. Section 12 decisions are settled. Current computer use and screen
 capture are authorized; Claude Opus 5.5 with explicitly verified Max effort owns
 visual work, and Astra owns correctness and integration.
 
-## Current overview — main194, 2026-10-13
+## Current overview — main195, 2026-10-13
 
-Development main194 includes the restart quota-test repair (PR188) and the reviewed,
+Development main195 includes the restart quota-test repair (PR188) and the reviewed,
 opt-in cooked sprite/UI/text/material paths with private Vulkan pipeline persistence
 (PR189). Default renderer checks remain; the next frozen checkpoint also exercises
 cooked features and asserts the actual native backend. Producer Metal appearance
@@ -47,7 +47,7 @@ Core authored bindings and the corrected locked-exit proof are merged in PR185
 Dynamic resolution and GPU timestamps have locally reviewed CPU/compile evidence;
 their queued GPU/appearance checks remain open. CPU profiling has accepted producer
 package evidence and passing [current-main194 CPU/source-relevance checks](docs/spikes/native-cpu-profiler-main194.md);
-independent integration review is accepted and publication awaits the fast check. These independent lanes do not satisfy
+independent integration review and the exact-head fast check passed, and PR195 is merged. These independent lanes do not satisfy
 phone, performance, complete-renderer or phase gates. Older milestone narratives
 below are historical integration snapshots, not the current queue.
 
@@ -55,6 +55,17 @@ Safe Core live-HUD changes are merged in PR192. The optional result-label and wo
 correction is merged in PR194 after public native checks, independent integration
 review and the exact-head fast check. Original source-free shipping remains producer-scoped; no new
 appearance or device acceptance is inferred. See [Core result evidence](docs/spikes/core-result-hud-main192.md).
+
+## Parallel physics tree ownership — scoped correction verified
+
+Vendored Parry 0.31.1 fixes overlapping mutable borrows in parallel BVH updates
+and refitting, with duplicate rejection before mutation and explicit source
+provenance. Both physics modes, browser compilation, script compilation and
+Clippy pass; independent source review is accepted. Additional Miri experiments
+remain unsuccessful due to Crossbeam diagnostics and are recorded separately.
+This does not enable persisted physics saves, complete a dependency soundness
+audit, or establish a performance gain.
+[Producer scope](docs/spikes/parry-parallel-ownership.md). The current-main195 union passes 18 CPU cases in each physics mode, all-target Clippy, browser/script checks and four isolated patched dependency graphs. Actual source-change/restore controls verify runtime identity invalidation for both Parry and the optional profiler. [Integration evidence](docs/spikes/parry-main195.md) has independent final acceptance; publication follows the required fast check. No physics-save admission is enabled.
 
 ## Cooked renderer integration — CPU checks complete
 
