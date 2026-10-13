@@ -1082,6 +1082,10 @@ PCM comparisons remain producer-scoped. Final integration review is accepted; th
 Historical offscreen helper provenance remains qualified; live appearance/device
 acceptance is separate. [Evidence](docs/spikes/core-main182.md).
 
+## Checkpoint17 terminal and shipping probe repair
+
+Checkpoint17 finished with 20 required successes and three failures and was not promoted. Linux/Windows quota controls have the reviewed main188 repair. A separate macOS player library/executable audit correction now passes the exact retained compile-log replay and six regression controls; final review and the next full frozen checkpoint remain required. See [probe evidence](docs/spikes/shipping-player-probe-kinds.md).
+
 ## Historical integration snapshots
 
 The paragraphs in this section preserve the state at earlier integrations. Their

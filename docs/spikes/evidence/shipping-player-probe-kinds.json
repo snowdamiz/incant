@@ -1,0 +1,269 @@
+{
+  "scope": "Desktop shipping probe helper correction only; no engine or runtime change",
+  "base_main": "0b18a0d7cd53c871aa0a6af395edd3108b56fa5f",
+  "source": {
+    "tools/probes/native-game.py": "8d437fd1317de8fc5e8fd6591a8bcca3da59264841e8dabcf3c55a646608c4ca",
+    "tools/probes/native-window.py": "68d0759220f8b4bef515c34fa76f7ef21eaf2362e49c9f8a223708fe7e1558bd",
+    "tools/shipping.py": "38346ddb4c4a94683d94509be3809eb39b279fe232bb129b55a4beb637c2a6e7",
+    "tools/tests/test_player_probe_codegen.py": "1822ca46fffecfa48fb1613c7e709235e4f368733a902ef3519972010e9e1c36"
+  },
+  "checks": [
+    {
+      "name": "focused",
+      "command": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tools/tests",
+        "-p",
+        "test_player_probe_codegen.py",
+        "-v"
+      ],
+      "exit": 0,
+      "seconds": 0.05890899999940302,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/focused.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/focused.stderr",
+        "sha256": "caf9949c9b8dc0b2dbd82b16e032f5af6a58876b89d371107ecb5d34a0e342e0"
+      }
+    },
+    {
+      "name": "actual-log",
+      "command": [
+        "python3",
+        "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/actual-green.py"
+      ],
+      "exit": 0,
+      "seconds": 0.04224912499921629,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/actual-log.stdout",
+        "sha256": "09bf21518f6ab13c21a97aa0d83b8c4d21c7bf3283ae91383a6f0fbb901dab88"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/actual-log.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "tools",
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 28.091893167002127,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/tools.stdout",
+        "sha256": "f10b3a3c63a1caa92b2893fe98411cf179ea85c4f98663b9c6cb611d2fc6ef2b"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/tools.stderr",
+        "sha256": "bc99c185687f0f97c4c9bec669050de5871f61d787a74a9297ddf704bd6f1353"
+      }
+    },
+    {
+      "name": "conventions",
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.037480083003174514,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/conventions.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/conventions.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "name": "diff",
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.02371066700288793,
+      "stdout": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/diff.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/Users/andreyyurlov/.codex/incant-integration-evidence/shipping-player-probe-kinds-main190/diff.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "red": {
+    "exit": 1,
+    "source": "/Users/andreyyurlov/.codex/worktrees/native-fbx-import/incant/tools/probes/native-game.py",
+    "source_sha256": "60054a02738652c5956a4c38db985579352f68438a3dd34fae141bf31303655a",
+    "log": "/Users/andreyyurlov/.codex/incant-integration-evidence/checkpoint17/macos-shipping-artifact/build-2.stderr.log",
+    "log_sha256": "29e12d5e4ab6fc4676aee03bdb7ac073890cb68d46ed20a8ff8c6c384397eb4c",
+    "frozen_checkpoint": "7a4ad870e8ba2df917974e21a458f2e64605f67d"
+  },
+  "actual_green": {
+    "incant_input": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_script": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_physics_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "rapier3d": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_assets_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_audio_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_game_runtime": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort"
+    },
+    "incant_game_player_library": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "debuginfo": "2",
+      "split-debuginfo": "packed"
+    },
+    "incant_game_player": {
+      "opt-level": "3",
+      "codegen-units": "1",
+      "panic": "abort",
+      "debuginfo": "2",
+      "split-debuginfo": "packed",
+      "lto": "fat"
+    }
+  },
+  "count_audit": {
+    "corrected_game_library_and_binary": [
+      {
+        "path": "tools/probes/native-game.py",
+        "sha256": "8d437fd1317de8fc5e8fd6591a8bcca3da59264841e8dabcf3c55a646608c4ca"
+      },
+      {
+        "path": "tools/probes/native-window.py",
+        "sha256": "68d0759220f8b4bef515c34fa76f7ef21eaf2362e49c9f8a223708fe7e1558bd"
+      }
+    ],
+    "already_separate_player_kind": [
+      {
+        "path": "tools/export_native.py",
+        "sha256": "3867e927602a88dc5315a868388e97eeb1e6acaa302c7d97552745b567b6ec10"
+      },
+      {
+        "path": "tools/shipping_session.py",
+        "sha256": "1ad924608092b51ec9c1b03caf67f660db5c1caeaaf2d339ceb55d23edbcdd30"
+      }
+    ],
+    "staticlib_only_explicit_build_and_validation": [
+      {
+        "path": "tools/ios_archive.py",
+        "sha256": "a2ef9fb097239c34781d0dd9cbddea826f8d7acc70a0834e65726852ab71dcd7"
+      },
+      {
+        "path": "tools/android_archive.py",
+        "sha256": "95f8033f3f935a57f07f8521249e71548f4fd8af57468576ad1c6d14de0d552a"
+      },
+      {
+        "path": "tools/probes/android-bytecode/build.py",
+        "sha256": "56572b2b31fd8d14053eb2f7cddf58c76033dc4fdf293eb729b9b2c79ff702ec"
+      }
+    ],
+    "bin_only_script_player_package": [
+      {
+        "path": "tools/probes/cooked-script.py",
+        "sha256": "b20e542f4d9cb8c377f02c0ecacc16096ab401155ff6ea5c2ce33d0569c7ecf2"
+      },
+      {
+        "path": "crates/incant_script_player/Cargo.toml",
+        "sha256": "ba8acbcbc122d19bbe78eb48e93c5117d80955354b80f77f09cae8f7ab500e89"
+      }
+    ],
+    "wasm_player_two_units_plus_unique_bin": [
+      {
+        "path": "tools/probes/static-game.py",
+        "sha256": "1bbe2fbf3ae70ae012b225084e1863b98087f98cf688943086fd9a55f56dc29d"
+      }
+    ],
+    "package_graph_identity_not_rustc_unit": [
+      {
+        "path": "tools/native_flipbook_sdk.py",
+        "sha256": "01a180975e75bc90dbb2ac575f18ff046f6bc4cbf885fabf24923d522d5d9231"
+      },
+      {
+        "path": "tools/probes/shipping-wasm2c.py",
+        "sha256": "8599375d2064bc6658584bb67a92c0bc4133f1b93f5d13d541c31faa98a60ac9"
+      }
+    ],
+    "other_single_library_or_example_unit": [
+      {
+        "path": "tools/probes/native-scene-audio.py",
+        "sha256": "8bc2c68bfccb0e23a6e970b9d8963b5b5bc8ff993f9a8f9ab508b72db7af836b"
+      },
+      {
+        "path": "tools/probes/cooked-audio.py",
+        "sha256": "96685d0fa702bb350345009fd0c1e8c43bdd567510d5a17a359a58760ef96f5a"
+      },
+      {
+        "path": "tools/probes/native-physics-2d.py",
+        "sha256": "57092406e9be9451ee703a628e1fab7c1acc8903997e12ba8cb75fa0a220dff1"
+      },
+      {
+        "path": "tools/probes/project-script-embedding.py",
+        "sha256": "2fec316a9ba6c07bd2f28e5412e7fc2a935a33aac60821b3de5c11c784cb0bd5"
+      },
+      {
+        "path": "tools/shipping.py",
+        "sha256": "38346ddb4c4a94683d94509be3809eb39b279fe232bb129b55a4beb637c2a6e7"
+      }
+    ]
+  },
+  "archive": {
+    "path": "docs/spikes/evidence/shipping-player-probe-kinds/artifacts.json.gz",
+    "sha256": "df2644b713543858993b7a887d5c7f876a05065bd68f6d16a1a8400d7df2cff5",
+    "records": 31,
+    "payloads": 23
+  },
+  "limits": [
+    "Actual retained hosted compile log is re-audited; no new shipping build or player process claimed",
+    "Checkpoint17 remains terminal20SUCCESS/3FAILURE and unpromoted",
+    "Next frozen checkpoint must run all23 required contexts successfully"
+  ],
+  "review_state": "Final source/evidence review pending"
+}
