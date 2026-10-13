@@ -19,6 +19,14 @@
 //!   and the stored code within 0.67 code of exact, rounding included
 //!   (llvmpipe documents ±0.35 for decode and ±0.17 before rounding for
 //!   encode). UNORM targets read back exactly.
+//! * `LINEAR_ENCODE`, a half step of a 12-bit UNORM linear value immediately
+//!   before sRGB encoding. The retained 0069 Apple M5 Pro readbacks match
+//!   this conversion model (including all 33,000 black-backdrop channels);
+//!   this is observed precision, not a universal Metal specification. Near
+//!   zero its contribution reaches 0.4023 stored codes before rounding, so
+//!   the existing code-space ENCODE bound alone does not cover it. The
+//!   destination decode error remains covered by DECODE. Neither this term
+//!   nor the measured candidate changes UNORM targets or glyph coverage.
 //! * `CONVERT`/`PRODUCT`, a UNORM target blended at its own 8-bit precision,
 //!   which Vulkan ("no lower than that used to represent destination
 //!   components") and D3D11.3 §17.5 ("equal or more ... precision ... than the
@@ -49,6 +57,7 @@ const UNORM: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8Unorm;
 const TAP: f64 = 1. / 255.;
 const DECODE: f64 = 0.5;
 const ENCODE: f64 = 0.67;
+const LINEAR_ENCODE: f64 = 0.5 / 4095.;
 const CONVERT: f64 = 0.6;
 const PRODUCT: f64 = 128. / 255.;
 
@@ -70,6 +79,10 @@ enum Model {
     Portable,
     /// One candidate image: exact filtering and conversion, nearest storage.
     Exact,
+    /// Measured Apple M5 Pro candidate: exact glyph filtering, nearest
+    /// 12-bit linear destination/encode conversion, nearest stored sRGB.
+    /// Fits retained 0069 readbacks; not a universal backend guarantee.
+    ObservedM5,
     /// One candidate image emulated from the source of Mesa 25.2.8 llvmpipe,
     /// the Linux CI adapter: `lp_bld_sample_aos.c` (8-bit fixed-point
     /// bilinear), `lp_bld_arit.c` (SSSE3/AVX2 rounded lerp, `mul_norm`),
@@ -141,6 +154,10 @@ fn encode(v: f64) -> f64 {
     } else {
         1.055 * v.powf(1. / 2.4) - 0.055
     }
+}
+/// An independently evaluated candidate, not an admission tolerance.
+fn measured_linear(value: f64) -> f64 {
+    (value.clamp(0., 1.) * 4095.).round() / 4095.
 }
 fn snap(v: f64) -> f64 {
     (v + 0.5).floor()
@@ -281,6 +298,13 @@ impl Canvas {
                 pixel[c] = [stored; 2];
                 continue;
             }
+            if model == Model::ObservedM5 && srgb {
+                let a = alpha[0];
+                let blended = src * a + measured_linear(decode(low)) * (1. - a);
+                let stored = encode(measured_linear(blended)).round();
+                pixel[c] = [stored; 2];
+                continue;
+            }
             let (read, write) = match model {
                 Model::Portable => (DECODE, ENCODE),
                 _ => (0., 0.5),
@@ -297,6 +321,11 @@ impl Canvas {
                 .into_iter()
                 .flat_map(|a| destination.map(|d| src * a + d * (1. - a)));
             let (min, max) = blended.fold((f64::MAX, f64::MIN), |(l, h), v| (l.min(v), h.max(v)));
+            let (min, max) = if model == Model::Portable && srgb {
+                ((min - LINEAR_ENCODE).max(0.), (max + LINEAR_ENCODE).min(1.))
+            } else {
+                (min, max)
+            };
             let stored = |v: f64| if srgb { encode(v) } else { v * 255. };
             let float = [
                 (stored(min) - write).ceil().max(0.),
@@ -1243,6 +1272,12 @@ fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
         let portable = panel_canvas(&input, &background, size, srgb, Model::Portable);
         let exact = candidate(&input, Model::Exact, theme::TEXT);
         assert_eq!(admitted(&exact, &portable).outside, 0, "{case} exact");
+        let measured = candidate(&input, Model::ObservedM5, theme::TEXT);
+        assert_eq!(
+            admitted(&measured, &portable).outside,
+            0,
+            "{case} measured M5"
+        );
         let emulated = candidate(&input, Model::Llvmpipe, theme::TEXT);
         let (worst, over) = difference(&emulated, &exact);
         let admission = admitted(&emulated, &portable);
@@ -1315,7 +1350,7 @@ fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
     let n = nested();
     let background = background(Nested::SIZE);
     let portable = n.canvas(&background, &n.clipped, Model::Portable);
-    for model in [Model::Exact, Model::Llvmpipe] {
+    for model in [Model::Exact, Model::Llvmpipe, Model::ObservedM5] {
         let image = n.canvas(&background, &n.clipped, model).image();
         let (worst, over) = difference(
             &image,
@@ -1345,7 +1380,7 @@ fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
         canvas
     };
     let portable = compose(Halo::Contract, Model::Portable);
-    for model in [Model::Exact, Model::Llvmpipe] {
+    for model in [Model::Exact, Model::Llvmpipe, Model::ObservedM5] {
         let image = compose(Halo::Contract, model).image();
         assert_eq!(admitted(&image, &portable).outside, 0, "hugged {model:?}");
     }
@@ -1356,5 +1391,74 @@ fn reference_admits_backend_precision_but_not_wrong_geometry_clip_or_opacity() {
             wrong.outside > 20 && wrong.excess > 8.,
             "{halo:?} {wrong:?}"
         );
+    }
+}
+
+#[test]
+fn measured_linear_conversion_preserves_the_isolated_dark_channel() {
+    // Retained 0069 2x pixel (64,110): one halo fragment over this background.
+    // Either destination or encode quantization alone produces blue 11;
+    // their combination produces the observed 10. No geometry error is used.
+    let background = [192, 38, 10, 255];
+    let coverage = 0.162_009_803_921_568_63;
+    let compose = |model, range| {
+        let mut canvas = Canvas::new(&background, [1, 1], true, [0., 0., 1., 1.], [1., 1.], model);
+        canvas.over(0, 0, theme::LABEL_HALO, range);
+        canvas
+    };
+    let exact = compose(Model::Exact, [coverage; 2]);
+    let measured = compose(Model::ObservedM5, [coverage; 2]);
+    let portable = compose(Model::Portable, [coverage - TAP, coverage + TAP]);
+    assert_eq!(exact.image(), [177, 35, 11, 255]);
+    assert_eq!(measured.image(), [177, 35, 10, 255]);
+    assert_eq!(portable.pixels[0][2], [10., 12.]);
+    assert_eq!(admitted(&measured.image(), &portable).outside, 0);
+    // Zero-alpha fragments still discard, including any encode conversion.
+    let mut empty = Canvas::new(
+        &background,
+        [1, 1],
+        true,
+        [0., 0., 1., 1.],
+        [1., 1.],
+        Model::Portable,
+    );
+    empty.over(0, 0, theme::LABEL_HALO, [0.; 2]);
+    assert_eq!(empty.image(), background);
+}
+
+#[test]
+fn reference_admits_measured_linear_conversion_over_black_and_white() {
+    let (input, size) = hugged();
+    for value in [0, 255] {
+        let background: Vec<u8> = (0..size[0] * size[1])
+            .flat_map(|_| [value, value, value, 255])
+            .collect();
+        let compose = |model, halo, text| {
+            let full = [0., 0., f64::from(size[0]), f64::from(size[1])];
+            let mut canvas = Canvas::new(&background, size, true, full, input.viewport, model);
+            canvas.halo = halo;
+            canvas.glyphs(&input.atlas, &input.widgets[0], text);
+            canvas
+        };
+        let portable = compose(Model::Portable, Halo::Contract, theme::TEXT);
+        for model in [Model::Exact, Model::Llvmpipe, Model::ObservedM5] {
+            let candidate = compose(model, Halo::Contract, theme::TEXT).image();
+            assert_eq!(
+                admitted(&candidate, &portable).outside,
+                0,
+                "background {value}, {model:?}"
+            );
+        }
+        for (halo, text) in [
+            (Halo::Absent, theme::TEXT),
+            (Halo::Contract, theme::alpha(theme::TEXT, 0.9)),
+        ] {
+            let candidate = compose(Model::ObservedM5, halo, text).image();
+            let wrong = admitted(&candidate, &portable);
+            assert!(
+                wrong.outside > 100 && wrong.excess > 5.,
+                "background {value}, {halo:?}: {wrong:?}"
+            );
+        }
     }
 }

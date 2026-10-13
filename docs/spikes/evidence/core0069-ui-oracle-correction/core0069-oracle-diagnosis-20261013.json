@@ -1,0 +1,171 @@
+{
+  "status": "diagnosis complete; test-only correction proposed",
+  "manifest": "/Users/andreyyurlov/.codex/incant-evidence/0069-cpu-diagnosis-001/manifest.json",
+  "manifest_sha256": "4e602ca8a8b329c8723240693eafd3c68d083e8712647aaaac9566e3b0e4c984",
+  "artifact_count": 42,
+  "input_count": 15,
+  "source_files_exact_to_frozen_15a59060": 5,
+  "observations": {
+    "scope": "CPU-only analysis of retained numeric readbacks; no image display, GPU, Cargo or source changes",
+    "frozen_cpu_oracle_replay_exact": true,
+    "fragment_count": 7280,
+    "candidate_pre_encode_linear_half_step": 0.0001221001221001221,
+    "maximum_srgb_code_displacement_from_step": 0.40227106227106224,
+    "existing_encode_code_error": 0.67,
+    "round_plus_max_linear_step_code_error": 0.9022710622710622,
+    "halo": {
+      "black": {
+        "original_oracle_failures": 105,
+        "corrected_oracle_failures": 0,
+        "corrected_max_interval_width": 4,
+        "q12_observational_equivalence": {
+          "outside": 0,
+          "max_code_difference": 0
+        },
+        "png_sha256": "b9580c6fb9685c0b410c85ef9b43b23b0a7e9fef595a4cf1a2fb8ee21ea437c4",
+        "single_halo_pixels": 751,
+        "single_halo_rgb_channels": 2253,
+        "bits_8_to_24_fit_errors": {
+          "8": 2171,
+          "9": 1868,
+          "10": 1386,
+          "11": 845,
+          "12": 0,
+          "13": 436,
+          "14": 417,
+          "15": 503,
+          "16": 414,
+          "17": 463,
+          "18": 463,
+          "19": 457,
+          "20": 457,
+          "21": 460,
+          "22": 460,
+          "23": 458,
+          "24": 458
+        },
+        "semantic_negative_controls": {
+          "missing_halo": {
+            "rejected_channels": 3115,
+            "maximum_excess": 16
+          },
+          "text_at_90_percent_alpha": {
+            "rejected_channels": 3061,
+            "maximum_excess": 11
+          }
+        }
+      },
+      "white": {
+        "original_oracle_failures": 0,
+        "corrected_oracle_failures": 0,
+        "corrected_max_interval_width": 3,
+        "q12_observational_equivalence": {
+          "outside": 2,
+          "max_code_difference": 1
+        },
+        "png_sha256": "d71548357c2a896357bdc180a5e4a0aee182237c074a1a805b59c7c819d127ab",
+        "semantic_negative_controls": {
+          "missing_halo": {
+            "rejected_channels": 5016,
+            "maximum_excess": 244
+          },
+          "text_at_90_percent_alpha": {
+            "rejected_channels": 3061,
+            "maximum_excess": 11
+          }
+        }
+      }
+    },
+    "panel_2x": {
+      "pixel": [
+        64,
+        110
+      ],
+      "actual": [
+        177,
+        35,
+        10
+      ],
+      "background": [
+        192,
+        38,
+        10
+      ],
+      "fragment": {
+        "x": 64,
+        "y": 110,
+        "color": [
+          10,
+          12,
+          16,
+          255
+        ],
+        "coverage": [
+          0.15808823529411764,
+          0.16593137254901963
+        ]
+      },
+      "existing_interval": [
+        [
+          176,
+          178
+        ],
+        [
+          34,
+          36
+        ],
+        [
+          11,
+          12
+        ]
+      ],
+      "proposed_interval": [
+        [
+          176,
+          178
+        ],
+        [
+          34,
+          36
+        ],
+        [
+          10,
+          12
+        ]
+      ],
+      "model_controls": {
+        "decode_q12_False_encode_q12_False": [
+          177,
+          35,
+          11
+        ],
+        "decode_q12_False_encode_q12_True": [
+          177,
+          35,
+          11
+        ],
+        "decode_q12_True_encode_q12_False": [
+          177,
+          35,
+          11
+        ],
+        "decode_q12_True_encode_q12_True": [
+          177,
+          35,
+          10
+        ]
+      },
+      "zero_build_or_gpu": true
+    },
+    "interpretation": "Observed Apple M5 Pro retained output is consistent with 12-bit linear conversion; this is not a published universal Metal precision guarantee. No renderer mathematics defect found. Candidate interval models one measured conversion step, preserving coverage/geometry/clip rules."
+  },
+  "owned_processes_reaped": true,
+  "production_finding": null,
+  "oracle_finding": "Portable sRGB reference omitted measured pre-encode linear conversion precision",
+  "proposed_source_scope": "crates/incant_render/src/ui_draw_tests.rs only, with explicit measured candidate and existing negative controls retained",
+  "not_accepted": [
+    "new GPU regression",
+    "appearance",
+    "universal Metal conversion precision"
+  ]
+}

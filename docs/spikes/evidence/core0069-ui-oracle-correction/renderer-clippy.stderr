@@ -1,0 +1,14 @@
+    Checking parry3d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/third_party/parry3d)
+    Checking parry2d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/third_party/parry2d)
+    Checking rapier2d v0.36.0
+    Checking rapier3d v0.36.0
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_physics_2d_runtime)
+    Checking incant_render v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render)
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_physics_runtime)
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_runtime)
+    Checking incant_physics v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_physics)
+    Checking incant_core v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_core)
+    Checking incant_render_authoring v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render_authoring)
+    Checking incant_cook v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_cook)
+    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/agent-budget-settings/incant/.worktrees/0069-core-result-presentation/crates/incant_render_native)
+    Finished `ci` profile [optimized] target(s) in 4.83s
