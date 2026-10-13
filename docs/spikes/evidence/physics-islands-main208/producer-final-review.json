@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-13T06:50:41.718174+00:00",
+  "status": "accepted scoped source and final producer evidence",
+  "head": "b09beb365c3e6b3a5f49ebcabf938fe3e2883d13",
+  "manifest_sha256": "203ab05d20b88847d54e470650ad5720c435f93683af1038fe15505b58984b64",
+  "source_freeze": "e315598c6a403419f67e48ec22f5c8e3b46ccc63e6b673d790af4d9445632fd9",
+  "records": 120,
+  "sources": 53,
+  "pinned_sources": 24,
+  "tests": {
+    "passed": 115,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 19,
+    "nonempty_groups": 17
+  },
+  "independent_review": [
+    "Read all island record/codec/validator source and narrow existing witness changes",
+    "Read hostile tests and native capture/cases plus integration into trusted manifold observers",
+    "Verified pinned native Fixed active membership, solver-cluster touching predicate, sleep-scan wrapping and unretained state limitation",
+    "Checked reciprocal generations/indices, complete live/free partitions, span arithmetic, pending/sleep admission, contact reverse bijection, decode preallocation caps and shared scratch budget",
+    "Independently decompressed every retained record and compared originals; verified all source/pinned bytes and final command/log hashes",
+    "No new normal dependency, unsafe, live constructor, restore consumer or save admission"
+  ],
+  "limits": [
+    "Inert completed-step rigid island component only; unsupported joints/soft/bootstrap and pending removals refuse",
+    "No collider payload/whole-owner identity/solver bucket or cache reconstruction proof",
+    "sleep_scan and cooldown overflow remain explicit continued-execution questions; model test is not native restore evidence",
+    "No phone/performance/phase/release gate"
+  ]
+}
