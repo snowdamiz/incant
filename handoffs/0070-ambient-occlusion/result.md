@@ -1,293 +1,225 @@
-# 0070 result — combined SSAO + bloom: analyzer acceptance repair
+# 0070 result — combined SSAO + bloom: bounded GPU execution
 
 ## Status
 
-**The analyzer repair and the helper compile fix are ready for root's source
-review.** Root's supervised CPU build of the helper comes next.
+**The numeric analysis failed (15 of 27 gates), so device work ended there.**
 
-This session was preparation only. I ran no Cargo or rustc, took no target or
-GPU lease, and rendered or captured nothing. **I make no efficacy, appearance
-or visual-success claim.** No screenshots exist.
+- All 94 regression tests and all five numeric cases passed their own
+  in-run checks.
+- The appearance plan did not run, so no PNG exists and **no appearance
+  judgment is possible**.
+- The GPU lease is released through `runner.py release` (07:59:59Z). No owned
+  or frozen-binary process survives.
+- No retry was run, and nothing is latched.
 
-- **Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort
-  **max**, as configured and verified by root before this prompt. I cannot
-  inspect the effort setting from inside the session.
-- **Earlier results:** the revision 2 result is in history at `1cb718f2`, and
-  v1 is still in `preparation-result-v1.md`.
-- **Blockers:** none for source review.
+**Model and effort:** Claude Opus 5.5 (`claude-opus-5-5`), thinking effort
+**max**, as configured and verified by root before this prompt.
 
-## Root's revisions, acknowledged
+**My diagnosis, CPU-only, from retained frames:**
 
-**Revision 3 decisions.** I made no runner change for these.
+- **The SSAO and mixed-pane gates fail mainly because of my analyzer.** It
+  never inverts the engine's tone curve, and the white-furnace fixture sits on
+  that curve's shoulder.
+- **The perspective furnace precondition is too strict.** The specular term
+  depends on view direction.
+- **A real open question remains.** Even with the tone curve inverted, the
+  measured AO darkening is about 0.6× the reference blocked-ray count at every
+  occluded pixel, so it cannot simply pass.
 
-- The precise-retry latch stays strict.
-- Reconcile takes only the packet lock.
-- CPU builds take only the packet lock.
-- The 45-minute ceiling stays wall-clock.
-- The four listings count within the 16 children.
+Root owns these nonvisual findings. I changed no source, helper or plan.
 
-**Supervised build outcome.** In root's evidence the engine test binaries
-compiled, and the helper failed with exactly three `E0689` errors at
-`composed.rs:108-110`: ambiguous `{float}` for `sqrt`, `atan2` and `asin`.
-
-- I listed `~/.codex/incant-evidence/0070-effects-build` and read only
-  `logs/build-helper.stderr` and the compiler messages in
-  `logs/build-helper.stdout`.
-- I did not modify that evidence.
-
-**Root's runner commits are preserved untouched.**
-
-- `6b06c1c8` gives each build child its own scratch `TMPDIR`.
-- `bfecb8d6` resolves pruned-lock dependency edges by package identity.
-- `runner.py` still matches the hash in the review receipt (`a5adf3df…`).
-
-**Other constraints honoured:**
-
-- `lifecycle.py` is unchanged.
-- The generated helper `tools/effects/Cargo.lock` (sha256 `9dcff7a5…`) stays
-  untracked and uncommitted; the root `Cargo.lock` is untouched.
-
-**Review receipt.** I read
-`~/.codex/incant-reviews/effects-0070-fixtures-source-20261013.json`; its
-sha256 matches `64774dd5…`. Both of its findings are fixed below. Of the
-twelve files it hashes, only `analyze.py` and `composed.rs` changed.
-
-## Changes
-
-### 1. Compile fix (`tools/effects/src/composed.rs:106`)
-
-`let (eye, at): ([f64; 3], [f64; 3]) = ([1.0, -0.55, 2.6], [1.25, -1.0, 0.4]);`
-
-Only the type annotation was added; the camera values are unchanged.
-`rustfmt` accepts it. It removes all three reported errors. rustc reports every
-type error in a crate before borrow checking, so typeck should now be clean.
-Later phases (borrow checking, lints, Clippy `-D warnings`) only run in root's
-supervised build.
-
-### 2. Analyzer finding 1: inference, coverage, occlusion and furnace (`tools/analyze.py`)
-
-**`infer_k` now rejects instead of comparing.** It returns
-`(interval, None)` or `(None, reason)`. The reasons are:
-
-| Reason | Meaning |
-|---|---|
-| `low_signal` | The diffuse signal is at most 0.02 linear |
-| `nonfinite` | A non-finite bound, or a strength that is not finite and positive |
-| `inverted` | A channel's low end is above its high end |
-| `empty` | The RGB channel intervals do not intersect |
-
-**SSAO agreement passes only when all of the following hold:**
-
-- every precondition is met;
-- the reference defines, and the readbacks compare, **every viewport-interior
-  pixel**;
-- no `nonfinite`, `inverted` or `empty` rejection occurred;
-- there is no disagreement and nothing is out of range;
-- the gate's declared occlusion is real. Occlusion gates must compare at least
-  1,000 reference-occluded pixels, and all of them. Absence controls
-  (`g_ao_skin_t0`, `g_ao_motion_far`) must have none.
-
-The old counts are kept: `pixels`, `agree`, `disagree`, `uninferable`,
-`out_of_range`, `reference_ambiguous`, `occluded_reference` and
-`first_disagreements`. These are added: `compared`, the `rejected` counts by
-reason, `occluded_compared`, `coverage_required`, `first_rejections`,
-`problems` and `preconditions`.
-
-**Minimum coverage is 100% of the interior** (277 × 157 = 43,489 pixels). It
-is fixed from the frozen geometry before any readback exists:
-
-- **The receiver fills the viewport.** It is 16 × 12 at z = −4, and at that
-  depth the visible half-extents are 3.82 × 2.19 in perspective and
-  6.99 × 4.00 in orthographic.
-- **The reference defines every interior pixel** of every declared scene. It
-  finds no background, silhouette or cut-edge ambiguity at any interior texel
-  centre. I computed this from the reference alone.
-- **The diffuse signal is far above the floor.** The white material's diffuse
-  term is about 0.67 linear, roughly 30× the 0.02 inference floor.
-
-A faithful render therefore leaves no pixel uninferable.
-
-**The occlusion floor of 1,000 pixels** only guards against a vacuous
-reference. The reference itself, again from geometry alone, marks this many
-pixels occluded:
-
-| Scene | Occluded pixels |
-|---|---|
-| `white_slab`, perspective | 8,558 |
-| `white_slab`, orthographic | 7,075 |
-| `edge_slab` | 11,025 |
-| `mask_cutout` | 10,853 |
-| far controls | 0 |
-
-**Furnace precondition.** Every SSAO reference gate reuses bases. The specular
-basis is always a separately rendered black scene, the edge gate borrows
-`p_off_black`, and all nine geometry gates share `g_off_white` and
-`g_off_black`. So uniformity of both bases is now an enforced precondition of
-each gate, not just an observation, and each gate's result reports the
-uniformity of its bases.
-
-### 3. Analyzer finding 2: fail closed
-
-**Declared cases are required.** The five declared cases come from
-`plan.json` (`case-ssao_core`, `case-ssao_materials`, `case-ssao_geometry`,
-`case-lifecycle_drs`, `case-bloom_numeric`), and all 27 named gates always
-appear in the report.
-
-**Missing or bad evidence fails the dependent gates** with the reason
-retained, as a `missing` or `error` field and in the report's
-`cases[...].status`. This covers:
-
-- a missing case directory or `index.json`;
-- an invalid index or a hash or length mismatch, which marks the case
-  `invalid` instead of crashing;
-- a missing frame.
-
-The other gates still run, and their results are kept.
-
-**The overall verdict** passes only when every declared case is loaded and
-every declared gate passes. The report lists `missing_or_invalid_cases` and
-`failed_gates`.
-
-**The CLI always writes `analysis.json`** (create-new, never replaced) and
-prints a summary. Its exit status is:
-
-| Exit | Meaning |
-|---|---|
-| 0 | The analysis passed |
-| 1 | It failed; the report survives |
-| 2 | Usage error, or the report already exists |
-
-**Numerical invariants stay separate from appearance.** The report states
-`appearance.judged_here = false`. The PNGs await my later appearance review,
-and their in-run invariants remain the helper's own verdict. Retry output
-directories are listed as not analysed.
-
-**Moved code is unchanged.** All 14 numerical helpers and the four constants
-are byte-identical to v1: the sRGB and tone curves, the interior, nearest
-expansion, projection, halo, centroid and identity helpers. The bloom, DRS,
-mixed-pane and identity gate bodies moved into named functions with the same
-arithmetic and thresholds.
-
-## Evidence (CPU only)
-
-Commands ran from the worktree root. `python3` means
-`/opt/homebrew/bin/python3 -I -B`, and `tools/` means
-`handoffs/0070-ambient-occlusion/tools/`.
-
-All of these ran at `c04c51a4`. The next commit, `6e5f2465`, changes only two
-docstring lines in `analyze.py`, and I re-ran the analyzer selftest there
-(exit 0).
-
-| Command | Result |
-|---|---|
-| `python3 tools/analyze.py --selftest` | Exit 0 in about 33 s. Details below |
-| `python3 tools/selftest.py` | **26 of 26 runner controls pass**, exit 0, with root's runner commits in place |
-| `python3 tools/mutations.py` | 4 of 4 re-introduced runner defects caught, exit 0 |
-| `python3 tools/ssao_reference.py --selftest` | Unchanged: flat [0, 0], near slab [5, 5], reversed normal [0, 0] in both projections |
-| `python3 tools/listing.py` | 94 ignored GPU tests |
-| `python3 tools/make_plan.py --check` | `plan.json matches the source-derived plan` |
-| `rustfmt --edition 2024 --check tools/effects/src/lib.rs tools/effects/src/main.rs` | Exit 0, via `/opt/homebrew/opt/rustup/bin/rustfmt`; no Cargo |
-| AST parse of the ten helper scripts | All parse |
-
-**What `analyze.py --selftest` shows:**
-
-- **Positive controls:**
-  - Synthetic white-slab readbacks agree on all 43,489 interior pixels: 8,558
-    occluded pixels compared in perspective, 7,075 in orthographic.
-  - A +2-ray perturbation is caught, with 457 disagreements per projection.
-  - Complete synthetic evidence for all five cases passes all 27 gates, and
-    `main` exits 0. That evidence includes:
-    - DRS references with a non-uniform pattern, so the expansion rule is
-      really exercised;
-    - halo rings for the bloom centroid and coverage gates;
-    - a 0.5-α pane;
-    - tone-curve field values.
-- **Negative controls, each failing for the stated reason:**
-  - empty inference (off equals spec): 0 compared, 43,489 `low_signal`;
-  - conflicting RGB: `empty` rejections;
-  - `nonfinite` (NaN and zero strength);
-  - `inverted` (off bytes 69..92 over a black pixel);
-  - below the specular floor: out of range, never agreement;
-  - inadequate coverage: a 600-pixel low-signal block with zero disagreements
-    still fails on coverage;
-  - a vacuous occlusion gate and an absence-control mismatch;
-  - a failed furnace precondition (one off pixel −1 code);
-  - a missing frame: only the edge gate fails, with "p_ao_edge absent";
-  - missing cases: every dependent gate fails, the bloom gates still pass,
-    and all 27 gates are reported;
-  - a tampered file: the case is `invalid`;
-  - the CLI on failing evidence exits 1 with `analysis.json` kept
-    (`pass: false`), and a second run exits 2 with the report byte-identical.
-
-**Before and after on the same inputs.** These were throwaway runs of the
-committed v1 analyzer (the HEAD version at the time), in a scratch directory
-I then deleted:
-
-| Input | v1 analyzer | Repaired analyzer |
-|---|---|---|
-| Every pixel uninferable | `pass: true` with `agree: 0` and `uninferable: 43489` | Fails: "coverage 0 of 43489", "0 of 8558 reference-occluded pixels compared" |
-| Four of five cases missing | `pass: true` on 3 gates; CLI exit 0, writing `pass: true` | Fails; CLI exit 1 with the report kept |
-
-**Hygiene:**
-
-- No processes survive (checked with `ps`).
-- All scratch directories were removed.
-- Every write stayed inside the worktree.
-- `git status` shows only root's untracked generated helper `Cargo.lock`.
-
-## Identities
+## Exact identities
 
 | Item | Value |
 |---|---|
-| HEAD / tree | `6e5f2465d11d0b3b95b2aa0bd5e41e1019f5a0fa` / `162d932c2d1614f7ec3525dc4fe1542ba5c5aee4` (this result commit adds only `result.md`; re-read HEAD before granting) |
-| Engine inputs | Byte-identical to `b633f92d` |
-| Helper digest | `66d18150f62e98ad3a89bf6319663b314324f2d043385ade2867541740174709` (19 files; excludes the generated lock) |
-| `tools/plan.json` | `27ea7b4425100c8ec6786c02cc8da21b41c670ec2ff3824ed6c497d9ccf859cf` (unchanged) |
-| `tools/analyze.py` | `16ec434de72b27163958445b4a694d819b92ffffd7f420714811864c6ec67445` |
-| `tools/effects/src/composed.rs` | `fccb7f0935650039d206db36cd69e6edea415b4591c868c6b76537594d24f139` |
-| `tools/runner.py` (root) | `a5adf3df71793090c03fa94e929e42eaea286ec5890119e189c19413d77c0189` (unchanged since review) |
-| `tools/lifecycle.py` | `574db13f25dc27939b99becb7fdb5272b6b5734bcda694487d1e42b127e764a0` (unchanged) |
+| Source | HEAD `729e206af5f1f10c380794b5f66bf0beb33081ab`; root's `brief.md` uncommitted; generated helper `Cargo.lock` untracked |
+| Grant | `~/.codex/incant-evidence/0070-effects-build-002/gpu-grant.json`, sha256 `b498dd0e…` |
+| Build record | `build/build.json`, sha256 `96e878bf…` |
+| Plan / helper digest | `27ea7b44…` / `66d18150…` |
+| Toolchain | rustc 1.99.0; the renderer and host feature sets are identical in the regression and helper builds |
+| Backend | **Metal** on an Apple M5 Pro, integrated GPU; adapter driver strings empty. No other backend ran |
+| Frozen binaries (sha256 prefix) | `lib` `732ac9ed…`, `model_gpu` `64edd8ae…`, `gpu_host-game` `f64e5c95…`, `gpu_host-ui` `b6a33514…`, `effects_gpu` `eba0cd86…` |
+| Runner invocation | `env -i PATH=/usr/bin:/bin LC_ALL=C /opt/homebrew/bin/python3 -I -B runner.py …`. Children get the runner's explicit environment: PATH, private TMPDIR, `RUST_BACKTRACE`, `LC_ALL` and `INCANT_EXPECT_GPU_BACKEND=Metal` |
+| Release | `released.json` sha256 `aa8fd844…`; ledger sha256 `5bf553db…` |
 
-## Limitations and remaining checks
+## What ran
 
-- **The helper has still never compiled.** The fix removes the only three
-  errors rustc reported. Borrow checking, lints and Clippy `-D warnings` first
-  run in root's supervised CPU build.
-- **The analyzer controls are synthetic.** They prove the acceptance logic,
-  not any GPU result.
-- **Two deliberate fail-closed choices** await their first real evidence:
-  - **Full coverage:** if a faithful render leaves any interior pixel
-    uninferable, the SSAO gates fail. That would mean the fixture assumptions
-    are wrong, and the counts are retained for review.
-  - **Strict furnace uniformity:** if the off or spec bases are not exactly
-    uniform, for example because of view-dependent specular or dithering,
-    every SSAO reference gate fails at the precondition. The distinct values
-    are reported.
-- **Retry outputs are not analysed.** The analyzer reads the original case
-  labels; after a root-authorized retry, which outputs count needs root's
-  decision.
-- **Still pending:** the GPU run, my appearance judgment, and everything v1
-  and v2 list as pending:
-  - cooked SSAO and bloom;
-  - native default exposure;
-  - profiling subpass entries;
-  - TAA and upscaling;
-  - device budgets;
-  - complete Phase 1 rendering.
-- **Remaining checks for root:**
-  1. source review of `c04c51a4` and `6e5f2465`;
-  2. a fresh supervised CPU build (helper compile and Clippy);
-  3. review of the exact binaries;
-  4. then the GPU grant and instruction.
+Thirteen serial foreground children, all with exit 0, their groups verified
+absent, and `success: true`. The full record, with PIDs and kernel start
+times, log hashes and argv, is in `evidence/execution-002.json`.
 
-## Changed paths and commits
+| Children | Result |
+|---|---|
+| `list` ×4 | lib 37, model_gpu 50, gpu_host-game 5, gpu_host-ui 2 = **94**; each exactly matches the source-derived plan |
+| `suite lib` | `ok. 37 passed; 0 failed` in 3.06 s, including the four new SSAO and bloom device tests; emitter-position ran once |
+| `suite model_gpu` | `ok. 50 passed; 0 failed` in 48.12 s, including `sprites::wide…` |
+| `suite gpu_host-game` / `gpu_host-ui` | `ok. 5 passed` in 0.59 s / `ok. 2 passed` in 0.54 s |
+| `case ssao_core` | 20 of 20 frames; 18 checks ok |
+| `case ssao_materials` | 10 of 10 frames; 8 checks ok |
+| `case ssao_geometry` | 17 of 17 frames; 13 checks ok |
+| `case lifecycle_drs` | 18 of 18 frames; 17 checks ok |
+| `case bloom_numeric` | 8 of 8 frames; 12 checks ok |
 
-- **`c04c51a4`:** `handoffs/0070-ambient-occlusion/tools/analyze.py`
-  (rewritten acceptance logic and controls) and
-  `handoffs/0070-ambient-occlusion/tools/effects/src/composed.rs` (one type
-  annotation).
-- **`6e5f2465`:** `tools/analyze.py`, a more precise coverage-basis
-  docstring, nothing else.
-- **This result commit:** `handoffs/0070-ambient-occlusion/result.md`.
+Every case also checked for wgpu validation errors (none) and for pipelines
+created after setup (none).
 
-All three commits carry `Built-by: claude`. Nothing was pushed or merged.
+**Budgets used:**
+
+| Budget | Used | Limit |
+|---|---|---|
+| Children | 13 | 16 |
+| Existing frames (static counts) | 8,092 | 8,192 |
+| New frames (20 suite + 73 cases, measured) | 93 | 128 |
+| PNGs | 0 | 32 |
+| Retries | 0 | — |
+| Wall clock, first child to release | about 3 minutes | 45 minutes |
+
+**Not run:** `appearance`, which is gated on a passing analysis.
+
+## Numeric analysis (`analysis.json` sha256 `3aacf18f…`, exit 1, report retained)
+
+**Passing gates (12):**
+
+- the four core identity gates (flat, reversed normal, far, radius 0.5);
+- the three determinism gates;
+- DRS SSAO nearest expansion at 12/16 and 8/16;
+- bloom coverage, threshold and constant field (predicted 248 and 243 bytes).
+
+**Failing gates (15), raw:**
+
+- **All 13 SSAO reference gates.**
+  - Every gate disagrees at exactly the pixels the reference marks occluded:
+    perspective 8,558, orthographic 7,075, edge 11,025, MASK cutout 10,853,
+    and 8,459 of 8,558 at strength 0.5. All unoccluded pixels agree, and no
+    inference was rejected.
+  - The perspective gates also fail the furnace precondition: the off frames
+    take 3 distinct values (247–249) and the specular frames 56.
+  - The orthographic bases are uniform, yet that gate still fails.
+  - The two absence controls (`g_ao_skin_t0`, `g_ao_motion_far`) agree
+    everywhere, failing only on the perspective precondition.
+- **`mixed_blend_pane_scales_receiver_change`:** median ratio 2.92, expected
+  0.4–0.6; 425 occluded pixels under the pane.
+- **`drs_bloom_halo_centroid_on_physical_emitter`:** the expected centre is
+  (186.55, 83.06).
+
+  | Scale | Whole-viewport centroid | Distance | Tolerance |
+  |---|---|---|---|
+  | 16/16 | (186.16, 83.21) | 0.42 px | 1.5 px |
+  | 12/16 | (190.54, 86.47) | 5.25 px | 2.0 px |
+  | 8/16 | (181.23, 83.21) | 5.32 px | 3.0 px |
+
+## Diagnosis (CPU-only, after release; changes no gate)
+
+### 1. The analyzer omits the tone curve (my defect)
+
+The engine's `tone_map.wgsl` is the identity below a peak of 0.8 and
+`1 − 0.04/(v − 0.6)` above it. This matches the analyzer's `tone()`, which the
+constant-field gate confirms at 1.0 and 1.25.
+
+**The furnace sits on the shoulder.** The white off frame reads 247, which is
+pre-tone 1.17 (diffuse about 1.13, specular 0.042). It is not the "below the
+shoulder" level the fixture assumed, so AO darkening is compressed in the
+bytes. `infer_k` and the mixed-pane ratio work on tone-mapped bytes, which
+invalidates all 13 SSAO gates and the pane gate as written.
+
+**Inverting the tone curve in a scratch computation** moves agreement to:
+
+| Gate | Agreeing pixels |
+|---|---|
+| Orthographic | 40,993 of 43,489 |
+| Perspective | 39,760 of 43,489 |
+| Strength 0.5 | 42,050 of 43,489 |
+| Edge | 37,969 of 43,489 |
+| MASK cutout | 38,242 of 43,489 |
+
+### 2. The furnace precondition is too strict in perspective (my defect)
+
+The material uses `reflectance = f0·dfg.x + dfg.y`, a BRDF lookup on N·V, so
+the specular term varies with each pixel's view ray. Per pixel it is still
+identical for every +Z surface, so per-pixel bases remain valid; whole-frame
+uniformity holds only in orthographic.
+
+### 3. Open: measured AO is about 0.6× the reference
+
+This is unresolved, and root's question.
+
+**What was measured** (orthographic, tone inverted):
+
+- The measured blocked-ray count is about 0.6× the reference count at every
+  occluded pixel. Reference k 1→0, 2→1, 3→2, 4→2, 5→3, 6→3, 7→4 (median
+  measured k).
+- There is no false occlusion anywhere.
+- No single radius (1.0–2.0) or slab-gap scale (1.0–1.5) in the reference
+  reproduces it.
+
+**What matches at code level:**
+
+- `ao.wgsl`: 16×4 rays, the same bias and radius tests, and AO =
+  `clamp(1 − strength·k/16)`;
+- the direction kernel;
+- raw prepass normals;
+- forward use: AO multiplies only `(1−reflectance)(1−metallic)·base·irradiance`;
+- the fixture camera and geometry.
+
+**Settling it needs** direct observation of the R8 accessibility attachment,
+for example a test-only readback. That attachment is not publicly
+observable, as v1 noted. Until then the efficacy of real occlusion is **not
+accepted**.
+
+### 4. Open: mixed pane
+
+The pre-tone ratio is a median of 0.313 (p10 0.279, p90 0.56) where 0.5 is
+expected. This is unresolved and may be linked to item 3.
+
+### 5. DRS bloom centroid: likely the metric
+
+At every scale, the emitter footprint centre and the halo centroid within
+24 px sit within 0.5 px of the physical emitter. The whole-viewport shift comes
+from tails beyond 48 px; the centroid within 48 px is within 1.7 px. This looks
+like the gate's whole-viewport metric picking up far-field tails at coarse
+internal levels and viewport clipping, not a position bug. The engine's own
+reduced-resolution emitter test passed. Root decides.
+
+### 6. Furnace energy (for root)
+
+The white diffuse output is about 1.13 pre-tone, roughly 1.6–1.7× the 0.702
+environment, while the specular term is consistent with 0.702. That may be a
+diffuse-irradiance normalization question; it is nonvisual.
+
+## Appearance
+
+**No appearance plan ran, so there are no PNGs, no matched pairs, and no
+appearance judgment.**
+
+For root's context only, I encoded the retained numeric pair `p_off_white` /
+`p_ao_white` to temporary PNGs in scratch, viewed them, and deleted them.
+
+- The AO band lies where the geometry predicts: left of the slab edge, a wider
+  wedge toward the top, and thin bands along the slab's top and bottom edges.
+- It is faint: at most 14 codes of darkening.
+- An 8× difference shows visible stepping between discrete ray counts.
+
+This is not an appearance review, and functional checks are not visual
+success.
+
+## Pending gates
+
+- **SSAO efficacy:** analyzer correction plus a decision on item 3.
+- **Mixed-pane gate.**
+- **DRS bloom centroid gate.**
+- **The whole appearance review**, with its 16 renders and 11 pairs.
+- **Explicitly out of this run:** cooked SSAO and bloom, native default
+  exposure, profiling subpass entries, TAA and upscaling, device budgets,
+  phone performance and complete Phase 1 rendering.
+
+The two retry slots are unused and are not approval to rerun.
+
+## Changed paths
+
+- `handoffs/0070-ambient-occlusion/result.md`
+- `handoffs/0070-ambient-occlusion/evidence/execution-002.json` (identities,
+  per-child facts, gate lists and the diagnostic numbers)
+
+Both are committed after release with `Built-by: claude`. No source, helper,
+plan or evidence-directory file was changed; the evidence directory remains
+root's. Nothing was pushed.

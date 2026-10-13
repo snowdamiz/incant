@@ -1,0 +1,799 @@
+{
+ "format": "incant-0070-execution-summary-v1",
+ "source_head": "729e206af5f1f10c380794b5f66bf0beb33081ab",
+ "evidence_dir": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002",
+ "grant": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/gpu-grant.json",
+  "sha256": "b498dd0ef163fb5fc8dc93d83d44fb13b702551287cb83d158a8e1bfe25153dd"
+ },
+ "build_record": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/build/build.json",
+  "sha256": "96e878bff1780f346e04d3fd9b8b084eeb279bb0b9590e9930cea23d6c22f123"
+ },
+ "helper_digest": "66d18150f62e98ad3a89bf6319663b314324f2d043385ade2867541740174709",
+ "plan_sha256": "27ea7b4425100c8ec6786c02cc8da21b41c670ec2ff3824ed6c497d9ccf859cf",
+ "toolchain": "rustc 1.99.0 (b940084d7 2026-09-28)",
+ "feature_identity_equal": {
+  "incant_render": true,
+  "incant_render_gpu_host": true
+ },
+ "frozen_binaries": {
+  "effects_gpu": {
+   "sha256": "eba0cd86376a62ca41f22c09a2bf24c917f644ea550b280a899437f0da5c5211",
+   "bytes": 31834640
+  },
+  "gpu_host-game": {
+   "sha256": "f64e5c95f8c5571a654eeac5de84615303ad2acebd763bc31d02671d3bf50816",
+   "bytes": 31692456
+  },
+  "gpu_host-ui": {
+   "sha256": "b6a3351461efdd2ad6ec2c894aec341cf0a2b4da410d4f637d7fc3aa2040bf17",
+   "bytes": 31215808
+  },
+  "lib": {
+   "sha256": "732ac9ed9f5180999d9de005e7ed528a2e1e790718d2d2eadbe37044920dca01",
+   "bytes": 31614976
+  },
+  "model_gpu": {
+   "sha256": "64edd8aea35337e20966e1a0d46ce68a5576eb0ef4804a8a19e7d4ee803670e7",
+   "bytes": 16452232
+  }
+ },
+ "backend": {
+  "backend": "Metal",
+  "device": 0,
+  "device_type": "IntegratedGpu",
+  "driver": "",
+  "driver_info": "",
+  "name": "Apple M5 Pro",
+  "vendor": 0
+ },
+ "runner_environment": "env -i PATH=/usr/bin:/bin LC_ALL=C /opt/homebrew/bin/python3 -I -B runner.py ... (children get the runner's explicit env)",
+ "children": [
+  {
+   "label": "list-lib",
+   "kind": "listing",
+   "pid": 90481,
+   "kernel_start": [
+    1791878227,
+    442713
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 0.23,
+   "existing_frames": 0,
+   "new_frames": 0,
+   "success": true,
+   "stdout_sha256": "5cf0f5e289c69e2c13a0f1d60e1a1f5c2182b035de9b8960aa68ee3bc89df608",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "732ac9ed9f5180999d9de005e7ed528a2e1e790718d2d2eadbe37044920dca01",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/lib",
+    "--list",
+    "--ignored"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "list-model_gpu",
+   "kind": "listing",
+   "pid": 90531,
+   "kernel_start": [
+    1791878235,
+    731041
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 0.21,
+   "existing_frames": 0,
+   "new_frames": 0,
+   "success": true,
+   "stdout_sha256": "c5dc612c5f1a90427cab9daf43818104f39bfa0340ef4ac739336ccc71e80efe",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "64edd8aea35337e20966e1a0d46ce68a5576eb0ef4804a8a19e7d4ee803670e7",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/model_gpu",
+    "--list",
+    "--ignored"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "list-gpu_host-game",
+   "kind": "listing",
+   "pid": 90537,
+   "kernel_start": [
+    1791878236,
+    115298
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 0.29,
+   "existing_frames": 0,
+   "new_frames": 0,
+   "success": true,
+   "stdout_sha256": "1b12b10ab355b35289ceabfd8518efa58815799f48dc18456afd837db9203da7",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "f64e5c95f8c5571a654eeac5de84615303ad2acebd763bc31d02671d3bf50816",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/gpu_host-game",
+    "--list",
+    "--ignored"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "list-gpu_host-ui",
+   "kind": "listing",
+   "pid": 90545,
+   "kernel_start": [
+    1791878236,
+    583060
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 0.31,
+   "existing_frames": 0,
+   "new_frames": 0,
+   "success": true,
+   "stdout_sha256": "079644c27688f0f5206a1ff4bdd7f910824e9e813621a73a2b3bd4368aa00afc",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "b6a3351461efdd2ad6ec2c894aec341cf0a2b4da410d4f637d7fc3aa2040bf17",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/gpu_host-ui",
+    "--list",
+    "--ignored"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "suite-lib",
+   "kind": "suite",
+   "pid": 90559,
+   "kernel_start": [
+    1791878242,
+    788655
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 3.09,
+   "existing_frames": 425,
+   "new_frames": 20,
+   "success": true,
+   "stdout_sha256": "807bd5d0ca8ad1054adc161caaba9388474f5bc60ed24951be2a4d94ae917230",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "732ac9ed9f5180999d9de005e7ed528a2e1e790718d2d2eadbe37044920dca01",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/lib",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "ambient_occlusion::device_tests::explicit_opt_in_zero_strength_resize_queued_frames_and_failure_preserve_default_output",
+    "bloom::tests::device::actual_pyramid_nonzero_halo_resize_and_zero_alpha_control",
+    "bloom::tests::device::bloom_output_keeps_emitter_position_at_reduced_internal_resolution",
+    "bloom::tests::device::canonical_graph_zero_gain_and_pixel_camera_bypass_and_invalid_replace",
+    "diagnostic_output::diagnostic_vertices_draw_reflected_geometry_and_preserve_display_formats",
+    "graph::tests::queued_graph_frames_outlive_scene_versions_and_failed_preparation",
+    "graph::tests::queued_pixel_frames_retain_logical_targets_and_physical_chrome_after_resizing",
+    "hdr_output::hdr_values_survive_until_tone_mapping_and_transfer_runs_once",
+    "hdr_output::output_composes_display_colors_and_reuses_bounded_resize_targets",
+    "lighting::gpu_tests::clustered_viewport_offsets_and_queued_resize_commands_keep_their_own_light_data",
+    "lighting::gpu_tests::every_depth_slice_selects_its_light_and_reused_clusters_clear_old_membership",
+    "lighting::gpu_tests::extended::extended_cluster_readback_cameras_viewports_and_retained_motion",
+    "lighting::gpu_tests::masks_represent_every_light_and_clear_tail_bits_across_word_count_changes",
+    "models::animation::tests::retained_skin_matches_independent_static_oracle_and_preserves_rejected_frame",
+    "models::animation::tests::single_sided_reflected_skin_and_shadow_match_static_transform_oracle",
+    "models::retained::flipbook_tests::retained_flipbooks_match_static_frames_without_rebuilding_after_cache_deletion",
+    "models::retained::native_tests::binary_native_motion_and_structural_rebuilds_submit_without_source_or_document",
+    "models::retained::sprite_tests::source_free_native_atlas_sprites_match_fresh_frames_across_motion_reflection_and_rebuild",
+    "models::retained::tests::motion_staging_reuses_reserved_slots_and_rejects_unsupported_bindings",
+    "models::retained::tests::rejected_retained_frame_preserves_accepted_gpu_state_and_can_retry",
+    "models::retained::tests::retained_flipbook_selection_stages_without_allocation",
+    "models::retained::tests::retained_motion_matches_fresh_geometry_lights_camera_and_reflections_after_source_deletion",
+    "models::retained::tests::retained_sprite_cpu_staging_allocates_nothing_and_rejects_changed_bindings",
+    "models::retained::tests::retained_tile_cpu_staging_allocates_nothing_without_visiting_binding_cells",
+    "models::retained::text_native_tests::source_free_native_text_moves_rebuilds_and_changes_through_the_retained_consumer",
+    "models::retained::text_tests::foreign_or_reset_handles_refuse_preparation_before_any_text_upload",
+    "models::retained::text_tests::opaque_geometry_occludes_text_behind_it_and_text_in_front_draws_over_it",
+    "models::retained::text_tests::retained_motion_rebuild_and_changed_text_reuse_or_replace_exact_identities",
+    "models::retained::tilemap_tests::cooked_source_free_tile_frames_match_raw_cell_sprite_oracle_and_survive_rejection",
+    "text::draw_tests::drawn_text_matches_layout_baselines_bearings_bidi_order_and_missing_glyphs",
+    "text::draw_tests::rotated_scaled_minified_and_magnified_text_matches_the_affine_reference",
+    "ui::draw_tests::editor_viewport_region_offsets_scales_and_bounds_the_ui",
+    "ui::draw_tests::logical_layout_maps_to_physical_pixels_at_integer_and_fractional_scales",
+    "ui::draw_tests::nested_clips_cut_actual_glyph_bounds_including_negative_x_rtl_overflow",
+    "ui::draw_tests::retained_atlas_and_quads_follow_input_identity_and_survive_refused_stages",
+    "ui::draw_tests::ui_composites_over_the_finished_world_frame_and_leaves_uncovered_pixels",
+    "version_tests::live_gpu_versions_with_equal_recipe_keys_preserve_old_and_new_geometry"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "suite-model_gpu",
+   "kind": "suite",
+   "pid": 90604,
+   "kernel_start": [
+    1791878251,
+    726198
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 48.15,
+   "existing_frames": 7595,
+   "new_frames": 0,
+   "success": true,
+   "stdout_sha256": "a35fb83c91559fcff9ea359664f9a50c7e79707f56b9bbc96e9e36ab532c4009",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "64edd8aea35337e20966e1a0d46ce68a5576eb0ef4804a8a19e7d4ee803670e7",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/model_gpu",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "alpha_modes_and_back_faces_follow_material_semantics",
+    "cameras::authored_camera_changes_projection_clips_geometry_and_retains_its_selected_pose",
+    "cameras::inherited_cameras_and_custom_light_clusters_match_the_all_light_reference",
+    "cameras::orthographic::orthographic_light_clusters_match_all_lights_at_multiple_sizes_poses_and_aspects",
+    "cameras::orthographic::orthographic_parallel_view_rays_preserve_specular_lighting_when_camera_moves_back",
+    "cameras::orthographic::orthographic_size_clipping_and_retained_projection_match_authored_world_units",
+    "cameras::pixel_perfect::fixed_logical_pixels_replicate_exactly_with_integer_scaling_and_letterboxing",
+    "cameras::pixel_perfect::followed_grid_geometry_is_stable_at_half_pixel_ties_and_odd_resolutions",
+    "cameras::pixel_perfect::subpixel_camera_motion_is_stable_and_crossing_the_grid_moves_by_one_logical_pixel",
+    "cameras::rotated_camera_under_uneven_parent_scale_matches_an_orthonormal_flat_pose",
+    "cameras::transparency_depth_order_follows_the_selected_camera",
+    "color_maps_use_srgb_and_texture_reimport_keeps_retained_materials",
+    "color_roles::color_environment_minification_matches_alpha_one_and_retains_prior_versions",
+    "color_roles::opaque_and_emissive_minification_ignore_alpha_without_recoloring_coverage_roles",
+    "dark_fill_lit_materials_remain_distinguishable",
+    "emissive_maps_and_samplers_retain_color_and_addressing",
+    "environments::authored_environments_preserve_color_space_versions_and_source_free_loading",
+    "environments::environment_intensity_rotation_and_roughness_change_real_reflections",
+    "environments::malformed_environment_cannot_replace_a_retained_scene",
+    "environments::studio_environment_renders_metal_and_dielectric_across_roughness",
+    "highlight_energy_survives_and_transparency_blends_before_tone_mapping",
+    "imported_geometry_survives_sources_and_retained_versions_survive_reimport",
+    "lights::clustered_masks_match_total_light_energy_and_retain_old_scenes",
+    "lights::coverage::distinct_colored_lights_preserve_energy_across_mask_words",
+    "lights::coverage::local_range_edges_and_hdr_specular_materials_render_repeatably",
+    "lights::coverage::visible_depth_boundary_patches_match_all_light_oracle",
+    "lights::directional_point_and_spot_lights_obey_authored_physical_parameters",
+    "lights::finite_range_light_eases_to_zero_without_a_linear_edge_crease",
+    "lights::masks::all_4096_local_bits_match_unculled_point_and_spot_lighting",
+    "lights::masks::last_mask_bit_alone_lights_visible_geometry_after_a_directional_prefix",
+    "lights::spatial_clusters_match_brute_force_lighting_across_tile_edges_and_resize",
+    "material_maps_preserve_numeric_channels_normal_scale_and_occlusion_strength",
+    "pipeline_warmup::all_current_variants_exist_before_first_draw_and_reimport_creates_no_pipelines",
+    "shadows::alpha_masked_and_reflected_casters_preserve_holes_and_blend_casters_fail_explicitly",
+    "shadows::coverage::cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::coverage::orthographic_cascade_transitions_preserve_occlusion_and_fade_at_the_declared_distance",
+    "shadows::directional_shadow_occlusion_respects_flags_range_and_retained_scene_versions",
+    "shadows::lookdev::directional_shadow_lookdev_contact_slopes_and_curves",
+    "shadows::normal_offset::opposing_normal_maps_preserve_the_geometric_shadow_boundary",
+    "shadows::offscreen_casters_and_multiple_directional_shadow_slots_remain_visible",
+    "shadows::queued::queued_shadow_maps_retain_camera_light_data_and_resized_atlas_versions",
+    "sprites::atlas::atlas_frame_ids_survive_repacking_source_removal_and_failed_replacement",
+    "sprites::inherited_sprite_transforms_and_queued_reimports_survive_scene_drop",
+    "sprites::nine_slice_preserves_pixel_borders_and_linear_sampling_has_no_hidden_color_fringe",
+    "sprites::sprite_layers_order_and_alpha_follow_painter_semantics",
+    "sprites::sprite_subregions_flips_and_retained_reimports_preserve_exact_pixels",
+    "sprites::ties::magnified_nearest_texels_keep_uniform_widths_past_pixel_center_ties",
+    "sprites::ties::nearest_texel_ties_preserve_each_texel_through_orientation_and_sheet_resize",
+    "sprites::wide::wide_magnified_nearest_regions_preserve_their_leading_and_trailing_texels",
+    "tangents::generated_normal_map_basis_matches_explicit_frames_under_uv_and_instance_reflection"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "suite-gpu_host-game",
+   "kind": "suite",
+   "pid": 90757,
+   "kernel_start": [
+    1791878305,
+    715705
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 0.62,
+   "existing_frames": 40,
+   "new_frames": 0,
+   "success": true,
+   "stdout_sha256": "bf488f27a2375c606b1bb34ad22b9f59ed17cd87ade3f3ff52e730db8869d8d7",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "f64e5c95f8c5571a654eeac5de84615303ad2acebd763bc31d02671d3bf50816",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/gpu_host-game",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "hosted_text_child_draws_with_models_script_and_audio_without_motion_uploads",
+    "observed_device_loss_stops_the_host_before_another_target_is_acquired",
+    "paused_committed_refresh_submits_without_advancing_game_or_audio",
+    "script_physics_audio_and_submitted_frames_share_the_source_free_native_tick",
+    "target_errors_and_presentation_unwind_terminalize_game_and_silence_offline_pcm"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "suite-gpu_host-ui",
+   "kind": "suite",
+   "pid": 90770,
+   "kernel_start": [
+    1791878306,
+    514633
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 0.57,
+   "existing_frames": 32,
+   "new_frames": 0,
+   "success": true,
+   "stdout_sha256": "febc57addcee4bb7abf8c11c11abbeda6ed5201d11f7c0c4a22c1d40658eabe8",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "b6a3351461efdd2ad6ec2c894aec341cf0a2b4da410d4f637d7fc3aa2040bf17",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/gpu_host-ui",
+    "--ignored",
+    "--exact",
+    "--test-threads=1",
+    "composed_ui_draws_over_the_moving_world_and_reuses_unchanged_resources",
+    "refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-ssao_core",
+   "kind": "numeric",
+   "pid": 90802,
+   "kernel_start": [
+    1791878314,
+    579812
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 6.44,
+   "existing_frames": 0,
+   "new_frames": 20,
+   "success": true,
+   "stdout_sha256": "903aeb405723c9c0eb129d9db519d5e88dcc301e0b5d9074a3e9bf90d2f1b1f5",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "eba0cd86376a62ca41f22c09a2bf24c917f644ea550b280a899437f0da5c5211",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/effects_gpu",
+    "case",
+    "ssao_core",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/outputs/case-ssao_core"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-ssao_materials",
+   "kind": "numeric",
+   "pid": 90888,
+   "kernel_start": [
+    1791878327,
+    565930
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 3.14,
+   "existing_frames": 0,
+   "new_frames": 10,
+   "success": true,
+   "stdout_sha256": "b4b788d3f276be7547c6a1ba376fb082f727079463c5efbc41db073d383c44c7",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "eba0cd86376a62ca41f22c09a2bf24c917f644ea550b280a899437f0da5c5211",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/effects_gpu",
+    "case",
+    "ssao_materials",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/outputs/case-ssao_materials"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-ssao_geometry",
+   "kind": "numeric",
+   "pid": 90941,
+   "kernel_start": [
+    1791878336,
+    987656
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 3.74,
+   "existing_frames": 0,
+   "new_frames": 17,
+   "success": true,
+   "stdout_sha256": "f5d233e0f71872428d2003f670d941060cc8de4f405300497b3831206ffa443a",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "eba0cd86376a62ca41f22c09a2bf24c917f644ea550b280a899437f0da5c5211",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/effects_gpu",
+    "case",
+    "ssao_geometry",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/outputs/case-ssao_geometry"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-lifecycle_drs",
+   "kind": "numeric",
+   "pid": 90967,
+   "kernel_start": [
+    1791878347,
+    330481
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 1.97,
+   "existing_frames": 0,
+   "new_frames": 18,
+   "success": true,
+   "stdout_sha256": "5b63271335f1f83e474bf1ae14c8e15e67d7c323b40136c910d5da1307fc6cf6",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "eba0cd86376a62ca41f22c09a2bf24c917f644ea550b280a899437f0da5c5211",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/effects_gpu",
+    "case",
+    "lifecycle_drs",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/outputs/case-lifecycle_drs"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  },
+  {
+   "label": "case-bloom_numeric",
+   "kind": "numeric",
+   "pid": 90983,
+   "kernel_start": [
+    1791878356,
+    364600
+   ],
+   "exit": 0,
+   "signal": null,
+   "timed_out": false,
+   "group_absent": true,
+   "seconds": 2.54,
+   "existing_frames": 0,
+   "new_frames": 8,
+   "success": true,
+   "stdout_sha256": "065c3e37b2ea710b400976b0295dfda725dafbcea41d78a6aef6e69e678a6277",
+   "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "binary_sha256": "eba0cd86376a62ca41f22c09a2bf24c917f644ea550b280a899437f0da5c5211",
+   "argv": [
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/bin/effects_gpu",
+    "case",
+    "bloom_numeric",
+    "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/outputs/case-bloom_numeric"
+   ],
+   "env_keys": [
+    "INCANT_EXPECT_GPU_BACKEND",
+    "LC_ALL",
+    "PATH",
+    "RUST_BACKTRACE",
+    "TMPDIR"
+   ]
+  }
+ ],
+ "suite_results": {
+  "lib": [
+   "test result: ok. 37 passed; 0 failed; 0 ignored; 0 measured; 90 filtered out; finished in 3.06s"
+  ],
+  "model_gpu": [
+   "test result: ok. 50 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 48.12s"
+  ],
+  "gpu_host-game": [
+   "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.59s"
+  ],
+  "gpu_host-ui": [
+   "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.54s"
+  ]
+ },
+ "numeric_cases": {
+  "ssao_core": {
+   "frames": 20,
+   "declared": 20,
+   "checks": 18,
+   "failures": [],
+   "index_sha256": "e9db08f4a8d374e6ddc57a705b9b496f6a17729ff1589bf3dc89f9f89d46efee"
+  },
+  "ssao_materials": {
+   "frames": 10,
+   "declared": 10,
+   "checks": 8,
+   "failures": [],
+   "index_sha256": "da8f66f667f122c0b0ea12ee0b1b629d8ea28c650a1260d39098d60af0ff017b"
+  },
+  "ssao_geometry": {
+   "frames": 17,
+   "declared": 17,
+   "checks": 13,
+   "failures": [],
+   "index_sha256": "1bd616be31f99ce96b6939b19407d8ab4cef119e9307f51b0c21574be6514b09"
+  },
+  "lifecycle_drs": {
+   "frames": 18,
+   "declared": 18,
+   "checks": 17,
+   "failures": [],
+   "index_sha256": "0d0818607007ce498f10b491008bfd87cdf6f661717e661bc28a24976947f4ba"
+  },
+  "bloom_numeric": {
+   "frames": 8,
+   "declared": 8,
+   "checks": 12,
+   "failures": [],
+   "index_sha256": "a14f8dc2bcb15d60a66f6944cf4dacdfbaedba9c337e5c07a1f0ef12981263b9"
+  }
+ },
+ "analysis": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/analysis.json",
+  "sha256": "3aacf18ffe969f9ce3985699f7470d02745731cb2570b9aeae00ac7f8313e9bb",
+  "pass": false,
+  "failed_gates": [
+   "drs_bloom_halo_centroid_on_physical_emitter",
+   "mixed_blend_pane_scales_receiver_change",
+   "ssao_core_edge_reference",
+   "ssao_core_o_reference",
+   "ssao_core_p_reference",
+   "ssao_core_strength_0_5_reference",
+   "ssao_geometry_g_ao_backface_reference",
+   "ssao_geometry_g_ao_mask_cutout_reference",
+   "ssao_geometry_g_ao_mask_equal_reference",
+   "ssao_geometry_g_ao_mirrored_reference",
+   "ssao_geometry_g_ao_motion_far_reference",
+   "ssao_geometry_g_ao_motion_near_reference",
+   "ssao_geometry_g_ao_skin_t0_reference",
+   "ssao_geometry_g_ao_skin_t1_reference",
+   "ssao_geometry_g_ao_white_reference"
+  ],
+  "passed_gates": [
+   "bloom_constant_field_levels",
+   "bloom_coverage",
+   "bloom_threshold",
+   "determinism_g_ao_white_equals_p_ao_white",
+   "determinism_g_off_white_equals_p_off_white",
+   "determinism_retained_drs_disabled_equals_ordinary",
+   "drs_ssao_nearest_expansion_12",
+   "drs_ssao_nearest_expansion_8",
+   "ssao_core_p_ao_far_identity",
+   "ssao_core_p_ao_flat_identity",
+   "ssao_core_p_ao_radius_0_5_identity",
+   "ssao_core_p_ao_reversed_identity"
+  ]
+ },
+ "appearance": {
+  "run": false,
+  "reason": "the plan runs appearance only after a passing numeric analysis; no PNG exists"
+ },
+ "release": {
+  "path": "/Users/andreyyurlov/.codex/incant-evidence/0070-effects-build-002/released.json",
+  "sha256": "aa8fd844bfc8722c8548767d88f211d412a1784318d486ca9ccd861b7e044cb9",
+  "released_at": "2026-10-13T07:59:59.832343+00:00",
+  "owned_processes_alive": [],
+  "frozen_processes": [],
+  "latched_failures": {},
+  "ledger_sha256": "5bf553db9e365cab7d24e0362f89c2f7835ab8d45ae12bd61bb02ba9a881fc18"
+ },
+ "diagnosis_cpu_only": {
+  "furnace": {
+   "orthographic_off_byte": 247,
+   "orthographic_spec_byte": 58,
+   "pre_tone_off": 1.172,
+   "pre_tone_spec": 0.042,
+   "perspective_off_distinct": [
+    247,
+    248,
+    249
+   ],
+   "perspective_spec_distinct_values": 56
+  },
+  "tone_inverted_ssao_agreement": {
+   "orthographic_white_slab": [
+    40993,
+    43489
+   ],
+   "perspective_white_slab": [
+    39760,
+    43489
+   ],
+   "perspective_strength_0_5": [
+    42050,
+    43489
+   ],
+   "perspective_edge_slab": [
+    37969,
+    43489
+   ],
+   "geometry_mask_cutout": [
+    38242,
+    43489
+   ]
+  },
+  "orthographic_reference_k_to_measured_k": {
+   "1": 0,
+   "2": 1,
+   "3": 2,
+   "4": 2,
+   "5": 3,
+   "6": 3,
+   "7": 4
+  },
+  "perspective_max_darkening_codes": 14,
+  "reference_radius_fit_orthographic": {
+   "2.0": 40993,
+   "1.5": 41264,
+   "1.25": 41867,
+   "1.0": 40993
+  },
+  "reference_gap_fit_orthographic": {
+   "1.0": 40993,
+   "1.15": 40255,
+   "1.3": 39550,
+   "1.5": 39809
+  },
+  "mixed_pane_pre_tone_ratio": {
+   "median": 0.313,
+   "p10": 0.279,
+   "p90": 0.56,
+   "pixels": 2623
+  },
+  "drs_bloom": {
+   "expected": [
+    186.55,
+    83.06
+   ],
+   "emitter_footprint_centre": {
+    "16": [
+     186.5,
+     83.0
+    ],
+    "12": [
+     186.5,
+     83.5
+    ],
+    "8": [
+     187.0,
+     83.0
+    ]
+   },
+   "halo_centroid_within_24px": {
+    "16": [
+     186.76,
+     83.05
+    ],
+    "12": [
+     186.76,
+     83.46
+    ],
+    "8": [
+     186.9,
+     82.87
+    ]
+   },
+   "halo_centroid_within_48px": {
+    "16": [
+     186.76,
+     82.16
+    ],
+    "12": [
+     186.57,
+     84.69
+    ],
+    "8": [
+     186.78,
+     81.74
+    ]
+   },
+   "halo_centroid_whole_viewport": {
+    "16": [
+     186.16,
+     83.21
+    ],
+    "12": [
+     190.54,
+     86.47
+    ],
+    "8": [
+     181.23,
+     83.21
+    ]
+   }
+  }
+ }
+}
