@@ -6,6 +6,8 @@ struct Parameters {
     viewport:vec4f, values:vec4f, directions:array<vec4f,16>, rotations:array<vec4f,16>
 }
 const BAYER=array<u32,16>(0u,8u,2u,10u,12u,4u,14u,6u,3u,11u,1u,9u,15u,7u,13u,5u);
+// Second Sobol' coordinate: distribute each texel's rays across radial strata.
+const SOBOL=array<u32,16>(0u,8u,12u,4u,10u,2u,6u,14u,15u,7u,3u,11u,5u,13u,9u,1u);
 @group(0) @binding(0) var<uniform> ao:Parameters;
 @group(0) @binding(1) var depths:texture_depth_2d;
 @group(0) @binding(2) var normals:texture_2d<f32>;
@@ -32,14 +34,17 @@ fn position(pixel:vec2f,depth:f32)->vec3f {
     let axis=select(vec3f(0,0,1),vec3f(0,1,0),abs(n.z)>0.9);
     let tangent=normalize(cross(axis,n));let bitangent=cross(n,tangent);
     // Full internal-target coordinates keep the pattern independent of viewport
-    // origin and deterministic across frames. Transpose the step phase.
+    // origin and deterministic across frames. Pair rotation with its bit reversal
+    // and digitally shift each ray's phase to cover all 64 radial strata.
     let phase=vec2u(xy)%vec2u(4u);
-    let rotation=ao.rotations[BAYER[phase.y*4u+phase.x]].xy;
+    let stratum=BAYER[phase.y*4u+phase.x];
+    let rotation=ao.rotations[stratum].xy;
     let rotated_tangent=tangent*rotation.x+bitangent*rotation.y;
     let rotated_bitangent=bitangent*rotation.x-tangent*rotation.y;
-    let jitter=f32(33u+2u*BAYER[phase.x*4u+phase.y])/64.;
+    let base=reverseBits(stratum)>>28u;
     var blocked=0.;
     for(var ray=0u;ray<16u;ray++) {
+        let jitter=(f32(base^SOBOL[ray])+0.5)/16.;
         let k=ao.directions[ray].xyz;
         let direction=rotated_tangent*k.x+rotated_bitangent*k.y+n*k.z;
         for(var step=1u;step<=4u;step++) {
